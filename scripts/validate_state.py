@@ -15,7 +15,7 @@ except ImportError:  # pragma: no cover - exercised only without the dependency
 
 
 SAVE_VERSION = 3
-SAFETY_STATES = {"running", "paused", "stopped"}
+SAFETY_STATES = {"running", "paused"}
 MODES = {"reliable", "immersive"}
 POWER_STRUCTURES = {"player_high", "npc_high", "equal", "switchable"}
 BOUNDARY_STATUSES = {"active", "revoked"}
