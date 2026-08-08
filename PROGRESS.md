@@ -1,0 +1,84 @@
+# 精简任务进度
+
+## 2026-07-27 开工回执
+
+- 目标：保留开局、角色、追算、存档和脚本行为，压缩入口规则与重复说明。
+- 顺序：先冻结露骨写法，再做职责去重，最后跑脚本、反向校验和测试。
+- 最大风险：误删边界/同意字段会破坏 v3 存档契约；露骨写法段必须逐字不变。
+
+## 基线
+
+- HEAD：`b6248c8`；开工时工作区干净。
+- `SKILL.md`：218 行、13,325 字节；测试：75 项，全部通过。
+- 冻结段 SHA-256（218 行版本的行号口径，仅存档留痕）：`374C32ABFF348400C8651D450586D98AE325E3DAE3A6414A9EEA484973D24C6B`。该口径依赖当时的行号，精简后已无法复现，不要再用它比对。
+- 冻结段哈希可复现口径（此后一律用此口径）：取 `SKILL.md` 中从 `### 性行为场景写法` 起、到 `开局以外的每个有效指令固定输出` 之前的整段文本，UTF-8 编码后取 SHA-256。当前值 `80AF72827A88DDDA0FD7F1E2A173D371BF7F870A113F05E84E5BD7395C3A33CF`，长度 606 字符。新增内容应插在该段之前或整个「输出规范」之外，以保持此值不变。
+- 脚本基线：`--help`、`--list-genres`、`--seed 1 --no-history` 均成功；编译和 `git diff --check` 成功。
+
+## 已完成（第一轮：精简）
+
+- `SKILL.md` 已删除重复的完整 YAML 示例，改为指向 v3 存档规范的最小状态地图。
+- `SKILL.md` 已从 218 行压至 165 行；冻结段当前哈希仍与基线一致。
+- `references/开局流程.md`、`角色设计.md`、`素材库.md` 已把边界/许可说明收敛为职责指针；已删除 SKILL.md 不变量 #3 #4 并同步清理引用文件。
+- 已完成反向失败验证、全量测试、固定种子复核和冻结段哈希复核；已提交 Git（`863fced`）。
+
+## 已完成（第二轮：2026-07-31 一致性修复）
+
+- `SKILL.md`：新增不变量 #5（`safety_state` 为 running 才写亲密内容）；玩家叙事主权 #6 纳入 paused 阻断条件；命令表补「查看状态」；输出规范去掉与命令表重复的三行行为规则；修正完整校准触发引用（第 8 步 → 第 10 步）；统一「按载入存档处理」措辞；冻结段上方加冻结标记注释（冻结段正文未改动）。
+- `references/世界运转.md`：「处理顺序」声明为 `SKILL.md` 每回合事务第 4 步（追算）的子流程。
+- `tests/test_doc_consistency.py`：新增文档与校验常量一致性测试。
+- `tests/test_validate_state.py`：清理 `valid_save()` 夹具中已删除的 `boundaries_verified` / `consent_verified` 字段。
+- `BLOCKED.md` 归档为 `CHANGELOG.md`，原内容并入变更记录。
+- 全量测试通过，已本地提交 Git。
+
+## 已完成（第三轮：2026-08-08 语态调度与内心可见）
+
+- `SKILL.md`：冻结段**之前**新增「语态调度」「失控语言退化」「内心可见（可选，玩家开启）」三节；「NPC 决策」列表后补信息集约束段（未改 1-7 条编号）；命令表新增语态切换与偷窥视角开关三行。
+- `references/角色设计.md`：9f 增列双语态要求，新增「表里双语态」生成小节。
+- `references/状态总结.md`：新增「叙事表现类可选扩展字段」小节，登记 `active_voice_mode`（NPC，缺失按 surface）与 `meta.voyeur_pov`（缺失按 off）；存档模板加注释。
+- 设计取舍：语态只约束角色**台词**用词，叙述层与生理细节仍按冻结段全额露骨执行，避免反差设定削弱露骨承诺；语态切换不扩大场景许可，许可仍只按不变量与场景同意判定。
+- 验证：冻结段改动前后 SHA-256 一致（`80AF7282…C3A33CF`，606 字符）；`python -m pytest tests/ -q` 94 项通过、31 项子测试通过；注入两个新扩展字段的样例存档经 `Validator` 校验零错误；`scripts/` 与 `tests/` 未改动；无临时文件残留。
+
+## 已完成（第四轮：2026-08-08 一致性与校验加固）
+
+- `tests/test_doc_consistency.py`：新增冻结段 SHA-256 与长度门禁；新增开局历史 30/16/5 数值、系统自拟末位、帮助命令和写实美学枚举的一致性测试。
+- `SKILL.md`：删除重复的 1-14 步清单，由 `references/开局流程.md` 独占步骤名称、规则与产出；新增「帮助 / 命令 / 能做什么」元指令及输出约定；从 220 行压至 207 行。
+- `scripts/validate_state.py`：要求 `world.constants` 非空；同意记录参与者必须全部位于 `current_node.participants`；新增两条反向失败测试。
+- `scripts/roll_opening.py` 与 `references/角色设计.md`：美学基调为「青年漫写实」或「写实文学」时，主 NPC 与配角的表层风味、口癖统一写 `—`；非写实美学保持抽样，并有正反测试覆盖。
+- 本地目录原 Git 元数据不可用，已重新初始化仓库并建立导入基线提交；PROGRESS 中旧提交号只保留为归档记录，不代表当前仓库可达对象。
+- 「语态漂移的示例锚点」按用户决定保持不动，未增加示例文本。
+
+## 已完成（第五轮：2026-08-09 规则收敛与回合语义）
+
+- `SKILL.md`：description 删去内容承诺句，只保留触发语义；命令表新增「回合」列，全部命令的回合语义显式化（继续/快进/语态切换推进，其余元指令不推进，载入存档与解除暂停不推进）；新增「冻结世界 / 恢复世界推演」命令接通 `meta.simulation` 开关；补「已有进行中状态时输入“开局”先确认是否放弃当前局」规则；「每回合事务」#1 解析改为按命令表判定、#6 校验改按「玩家叙事主权」第 5-6 条判定、#9 轻量校准复用第 6 步同一清单；「输出规范」删除与命令表重复的查看状态/帮助两条；「状态模型」NPC/指令/事件字段归属补 `references/世界运转.md`；「按需加载」补事件字段查询场景；「玩家叙事主权」#2 补玩家让渡决定权时按「继续」节拍推进、不替玩家作关键选择。
+- 外部并行改动（非本方案范围，已验证自洽）：`references/角色设计.md` 重构为「可选修饰层」分组体系（表层风味/外观/口癖分类化并集）；`scripts/roll_opening.py` 新增 `section_any`/`parse_nested_axes`/`parse_grouped_items` 适配分组表解析。
+- `tests/test_doc_consistency.py`：新增命令表回合列语义、冻结世界命令、开局确认规则与三文件字段归属断言。
+- 验证：冻结段 SHA-256 保持 `80AF7282…C3A33CF`（606 字符）；`python -m pytest tests/ -q` 103 项通过、33 项子测试通过；脚本冒烟（`--help`、`--list-genres`、`--seed 1 --no-history`）成功；`git diff --check` 通过。
+
+## 已完成（第六轮：2026-08-09 素材库重构收尾）
+
+- `references/素材库.md`：为脚本实时解析补「维护契约」注释；把现实档冲突处理与兼容档位过滤职责继续收敛给 `references/开局流程.md`；张力引擎补入「名分与承认」「环境与准入」两个分组；身份侧拆分 `创作与演艺` 与 `成人行业与私密服务` 两个过宽族，降低抽样聚团。
+- `references/角色设计.md`：同步成人相关身份族的新命名与边界说明，明确「侍奉与身契」「成人行业与感官服务」「私密撮合与契约中介」的区分口径。
+- `tests/test_roll_opening.py`：更新引擎总项数基线为 125，基础身份族数基线为 18，三档身份池尺寸基线为 `现实=18 / 半架空=21 / 强架空=23`；新增新分组与旧族名退场断言。
+- `tests/test_doc_consistency.py`：把 `创作与演艺`、`成人行业与私密服务` 纳入遗留词门禁；新增角色设计对当前身份族命名的同步断言。
+- 验证目标：在不改 `scripts/roll_opening.py` 的前提下，让文档分组重构与实时解析、测试基线恢复一致。
+
+## 已完成（第七轮：2026-08-09 状态总结收敛）
+
+- `references/状态总结.md`：删除 v2 迁移与旧版兼容说明，统一为仅接受 v3；新增字段枚举速查表、带时区时间约束、`resolved_summary` 推荐结构和 checkpoint 语义；保存检查收敛为“`validate_state.py` 负责机器约束，文档只保留人工语义检查”。
+- `scripts/validate_state.py`：`world.setting_shell` 强制为包含 `type/place/rule/pressure` 的四字段映射，移除一句话字符串兼容分支。
+- `SKILL.md`、`references/世界运转.md`：同步载入语义与历史压缩职责指向。
+- `tests/test_validate_state.py`、`tests/test_doc_consistency.py`：更新有效存档夹具，新增 legacy `setting_shell` 反向失败和 v3-only / mapping 文档门禁。
+- 验证：`python -m pytest tests/ -q` 通过（108 项、33 个子测试）；脚本编译、`git diff --check` 和独立 validator 行为检查通过。
+
+## 已完成（第八轮：2026-08-09 一致性修复收尾）
+
+- `scripts/validate_state.py`：按 `role_level` 放宽 supporting 配角的表现字段要求；supporting 可省略 `core_personality`、`pressure_strategy`、`voice_filter`、`withdrawal_signal`、`emotion`，但字段存在时必须为字符串；main 与 important_supporting 仍要求这些字段为非空字符串。pending 事件强制携带非空 `semantic_key`，resolved/cancelled 保持可省略。
+- `references/角色设计.md`、`references/状态总结.md`：同步 supporting 分层持久化规则；角色设计增加脚本实时解析维护契约。
+- `SKILL.md`：明确纯撤销与替换式 retcon 的回合语义。
+- `references/素材库.md`：修复凝视与展演条目的引号；`.gitignore` 增加 `.pytest_cache/`。
+- `tests/`：新增 supporting 最小存档、层级字段、解析池非空、retcon 文档和 pending/resolved `semantic_key` 覆盖。
+- 验证：局部测试通过（63 项、17 个子测试），脚本编译与开局冒烟通过；待全量验证后提交。
+
+## 待完成
+
+无。冻结段现在由 `tests/test_doc_consistency.py::DocConsistencyTests::test_frozen_section_unchanged` 自动守卫；有意改动前仍须按「基线」口径核对并同步更新哈希、长度和变更记录。命令表回合列语义由 `test_command_turn_semantics_documented` 守卫。

@@ -29,9 +29,14 @@ def valid_save() -> dict:
             "previous_clock": "2026-07-14T19:55:00+08:00",
             "delta_t": 300,
             "delta_human": "5 minutes",
-            "constants": [],
+            "constants": ["access to the original records requires board authorization"],
             "tension_engines": ["resource lock"],
-            "setting_shell": "office",
+            "setting_shell": {
+                "type": "institutional drama",
+                "place": "office",
+                "rule": "access to records requires authorization",
+                "pressure": "the meeting deadline is close",
+            },
             "pressure_seeds": {
                 "immediate": "meeting deadline",
                 "near_event_id": "evt-001",
@@ -116,6 +121,7 @@ def valid_save() -> dict:
                 "source": "turn-3",
                 "created_turn": 3,
                 "kind": "near",
+                "semantic_key": "meeting reply due",
                 "trigger": "the meeting ends",
                 "due_at": None,
                 "status": "pending",
@@ -123,6 +129,7 @@ def valid_save() -> dict:
                 "hook": False,
             }
         ],
+        "directives": [],
         "checkpoint": {
             "last_full_turn": 5,
             "changed": [],
@@ -130,9 +137,8 @@ def valid_save() -> dict:
             "force_full": False,
             "invariants": {
                 "age_verified": True,
-                "boundaries_verified": True,
-                "consent_verified": True,
                 "player_control_preserved": True,
+                "directive_priority_preserved": True,
             },
         },
         "resolved_summary": [],
@@ -183,6 +189,91 @@ class ValidateStateTests(unittest.TestCase):
 
         self.assert_invalid(mutate, "pending event")
 
+    def test_pending_event_needs_semantic_key(self) -> None:
+        self.assert_invalid(
+            lambda data: data["events"][0].pop("semantic_key"),
+            "pending events require a non-empty semantic_key",
+        )
+
+    def test_resolved_event_may_omit_semantic_key(self) -> None:
+        data = copy.deepcopy(valid_save())
+        data["events"][0].update(status="resolved")
+        data["events"][0].pop("semantic_key")
+        self.assertEqual([], VALIDATOR.validate_data(data))
+
+    @staticmethod
+    def add_directive(data: dict, **updates) -> None:
+        directive = {
+            "id": "directive-001",
+            "raw": "Make the impossible result happen",
+            "kind": "outcome",
+            "required_outcome": "the requested result becomes true",
+            "protected_details": ["the result itself cannot be replaced"],
+            "adaptation_scope": ["world", "scene"],
+            "deadline": "current_turn",
+            "status": "fulfilled",
+            "created_turn": 5,
+            "event_id": None,
+            "resolution": "the world supplied a causal bridge and the result occurred",
+            "block_code": None,
+        }
+        directive.update(updates)
+        data["directives"] = [directive]
+
+    def test_fulfilled_directive_passes(self) -> None:
+        data = copy.deepcopy(valid_save())
+        self.add_directive(data)
+        self.assertEqual([], VALIDATOR.validate_data(data))
+
+    def test_pending_directive_requires_linked_pending_event(self) -> None:
+        data = copy.deepcopy(valid_save())
+        data["events"][0]["source"] = "directive-001"
+        self.add_directive(
+            data, status="pending", deadline="earliest_possible",
+            event_id="evt-001", resolution="",
+        )
+        self.assertEqual([], VALIDATOR.validate_data(data))
+
+    def test_current_turn_directive_cannot_remain_pending(self) -> None:
+        def mutate(data):
+            data["events"][0]["source"] = "directive-001"
+            self.add_directive(data, status="pending", event_id="evt-001", resolution="")
+
+        self.assert_invalid(mutate, "pending directives must use earliest_possible")
+
+    def test_pending_directive_event_source_must_match(self) -> None:
+        def mutate(data):
+            self.add_directive(
+                data, status="pending", deadline="earliest_possible",
+                event_id="evt-001", resolution="",
+            )
+
+        self.assert_invalid(mutate, "event source must equal directive ID")
+
+    def test_blocked_directive_only_accepts_hard_invariant_code(self) -> None:
+        def mutate(data):
+            self.add_directive(
+                data, status="blocked", resolution="the setting disallowed it",
+                block_code="world_rule_conflict",
+            )
+
+        self.assert_invalid(mutate, "directives[0].block_code")
+
+    def test_directive_priority_checkpoint_must_be_true(self) -> None:
+        def mutate(data):
+            self.add_directive(data)
+            data["checkpoint"]["invariants"]["directive_priority_preserved"] = False
+
+        self.assert_invalid(mutate, "directive_priority_preserved")
+
+    def test_optional_directive_priority_checkpoint_must_be_boolean(self) -> None:
+        self.assert_invalid(
+            lambda data: data["checkpoint"]["invariants"].update(
+                directive_priority_preserved="yes"
+            ),
+            "must be a boolean when present",
+        )
+
     def test_event_cannot_use_boundary_status(self) -> None:
         self.assert_invalid(lambda data: data["events"][0].update(status="active"), "events[0].status")
 
@@ -194,6 +285,21 @@ class ValidateStateTests(unittest.TestCase):
             data["consent"]["grants"][0]["participants"][1] = "npc-missing"
 
         self.assert_invalid(mutate, "unknown character ID")
+
+    def test_consent_participants_must_be_in_current_scene(self) -> None:
+        def mutate(data):
+            second = copy.deepcopy(data["npcs"][0])
+            second.update(id="npc-002", name="NPC2")
+            data["npcs"].append(second)
+            data["consent"]["grants"][0]["participants"][1] = "npc-002"
+
+        self.assert_invalid(mutate, "outside scene")
+
+    def test_world_constants_must_not_be_empty(self) -> None:
+        self.assert_invalid(
+            lambda data: data["world"].update(constants=[]),
+            "world.constants",
+        )
 
     def test_duplicate_ids_fail(self) -> None:
         self.assert_invalid(lambda data: data["events"][0].update(id="npc-001"), "duplicates")
@@ -238,6 +344,92 @@ class ValidateStateTests(unittest.TestCase):
         data["npcs"].append(second)
         self.assertEqual([], VALIDATOR.validate_data(data))
 
+    def test_minimal_supporting_npc_passes(self) -> None:
+        data = copy.deepcopy(valid_save())
+        data["npcs"].append({
+            "id": "npc-002",
+            "name": "Witness",
+            "age": 41,
+            "role_level": "supporting",
+            "identity": "witness",
+            "location": "office",
+            "goal": "leave safely",
+            "boundary": "no violence",
+            "resources": [],
+            "knowledge": [],
+            "recent_memories": [],
+            "signature": "keeps the receipts",
+            "autonomy": {"last_turn": None, "recent_turns": [], "cooldown_until": 0},
+        })
+        data["current_node"]["participants"].append("npc-002")
+        self.assertEqual([], VALIDATOR.validate_data(data))
+
+    def test_important_supporting_needs_expressive_fields(self) -> None:
+        data = copy.deepcopy(valid_save())
+        supporting = {
+            "id": "npc-002",
+            "name": "Witness",
+            "age": 41,
+            "role_level": "important_supporting",
+            "identity": "witness",
+            "location": "office",
+            "goal": "leave safely",
+            "boundary": "no violence",
+            "resources": [],
+            "knowledge": [],
+            "recent_memories": [],
+            "signature": "keeps the receipts",
+            "autonomy": {"last_turn": None, "recent_turns": [], "cooldown_until": 0},
+        }
+        data["npcs"].append(supporting)
+        data["current_node"]["participants"].append("npc-002")
+        errors = VALIDATOR.validate_data(data)
+        self.assertTrue(any("npcs[1].voice_filter" in error for error in errors), errors)
+
+    def test_supporting_expressive_field_must_be_string_when_present(self) -> None:
+        data = copy.deepcopy(valid_save())
+        supporting = {
+            "id": "npc-002",
+            "name": "Witness",
+            "age": 41,
+            "role_level": "supporting",
+            "identity": "witness",
+            "location": "office",
+            "goal": "leave safely",
+            "boundary": "no violence",
+            "emotion": ["nervous"],
+            "resources": [],
+            "knowledge": [],
+            "recent_memories": [],
+            "signature": "keeps the receipts",
+            "autonomy": {"last_turn": None, "recent_turns": [], "cooldown_until": 0},
+        }
+        data["npcs"].append(supporting)
+        data["current_node"]["participants"].append("npc-002")
+        errors = VALIDATOR.validate_data(data)
+        self.assertTrue(any("must be a string when present" in error for error in errors), errors)
+
+    def test_supporting_still_needs_autonomy(self) -> None:
+        data = copy.deepcopy(valid_save())
+        supporting = {
+            "id": "npc-002",
+            "name": "Witness",
+            "age": 41,
+            "role_level": "supporting",
+            "identity": "witness",
+            "location": "office",
+            "goal": "leave safely",
+            "boundary": "no violence",
+            "resources": [],
+            "knowledge": [],
+            "recent_memories": [],
+            "signature": "keeps the receipts",
+        }
+        data["npcs"].append(supporting)
+        data["current_node"]["participants"].append("npc-002")
+        errors = VALIDATOR.validate_data(data)
+        self.assertTrue(any("npcs[1].autonomy" in error for error in errors), errors)
+
     def test_current_node_needs_situation(self) -> None:
         self.assert_invalid(lambda data: data["current_node"].pop("situation"), "current_node.situation")
 
@@ -269,6 +461,12 @@ class ValidateStateTests(unittest.TestCase):
         for expected, mutate in cases.items():
             with self.subTest(expected=expected):
                 self.assert_invalid(mutate, expected)
+
+    def test_setting_shell_string_is_rejected(self) -> None:
+        self.assert_invalid(
+            lambda data: data["world"].update(setting_shell="office"),
+            "world.setting_shell",
+        )
 
 
 if __name__ == "__main__":

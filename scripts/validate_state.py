@@ -24,6 +24,13 @@ CONSENT_STATUSES = {"unknown", "granted", "withdrawn", "not_applicable"}
 EVENT_STATUSES = {"pending", "resolved", "cancelled"}
 EVENT_KINDS = {"immediate", "near", "far", "timed", "probabilistic"}
 ROLE_LEVELS = {"main", "important_supporting", "supporting"}
+DIRECTIVE_KINDS = {"action", "outcome", "canon", "retcon", "style"}
+DIRECTIVE_STATUSES = {"pending", "fulfilled", "blocked"}
+DIRECTIVE_DEADLINES = {"current_turn", "earliest_possible"}
+DIRECTIVE_SCOPES = {"world", "player", "npc", "relationship", "event", "scene"}
+DIRECTIVE_BLOCK_CODES = {
+    "adult_requirement", "safety_paused",
+}
 
 
 def is_int(value: Any) -> bool:
@@ -50,6 +57,7 @@ class Validator:
         self.ids: dict[str, str] = {}
         self.character_ids: set[str] = set()
         self._current_turn: int | None = None
+        self._scene_participants: set[str] = set()
 
     def error(self, path: str, message: str) -> None:
         self.errors.append(f"{path}: {message}")
@@ -108,6 +116,11 @@ class Validator:
         meta_data = data.get("meta")
         if isinstance(meta_data, dict) and is_int(meta_data.get("turn")) and meta_data.get("turn") >= 0:
             self._current_turn = meta_data["turn"]
+        node_data = data.get("current_node")
+        if isinstance(node_data, dict) and isinstance(node_data.get("participants"), list):
+            self._scene_participants = {
+                item for item in node_data["participants"] if is_nonempty_string(item)
+            }
 
         self.validate_meta(data.get("meta"))
         self.validate_world(data.get("world"), data.get("events"))
@@ -117,7 +130,9 @@ class Validator:
         self.validate_consent(data.get("consent"))
         self.validate_relationships(data.get("relationships"))
         self.validate_events(data.get("events"), data.get("meta"))
-        self.validate_checkpoint(data.get("checkpoint"), data.get("meta"))
+        if "directives" in data:
+            self.validate_directives(data.get("directives"), data.get("events"))
+        self.validate_checkpoint(data.get("checkpoint"), data.get("meta"), data.get("directives"))
         self.sequence(data.get("resolved_summary"), "resolved_summary")
         self.validate_current_node(data.get("current_node"))
         return self.errors
@@ -151,18 +166,15 @@ class Validator:
             "setting_shell", "pressure_seeds",
         }
         self.required(data, required, "world")
-        self.sequence(data.get("constants"), "world.constants")
+        constants = self.sequence(data.get("constants"), "world.constants")
+        if constants is not None and not constants:
+            self.error("world.constants", "must contain at least one world constant")
         engines = self.sequence(data.get("tension_engines"), "world.tension_engines")
         if engines is not None and not engines:
             self.error("world.tension_engines", "must contain at least one engine")
-        shell = data.get("setting_shell")
-        if isinstance(shell, str):
-            if not shell.strip():
-                self.error("world.setting_shell", "must be a non-empty string or mapping")
-        else:
-            shell_data = self.mapping(shell, "world.setting_shell")
-            if shell_data is not None:
-                self.required_text(shell_data, ("type", "place", "rule", "pressure"), "world.setting_shell")
+        shell_data = self.mapping(data.get("setting_shell"), "world.setting_shell")
+        if shell_data is not None:
+            self.required_text(shell_data, ("type", "place", "rule", "pressure"), "world.setting_shell")
         clock = data.get("clock")
         previous_clock = data.get("previous_clock")
         if not isinstance(clock, str) or not clock.strip():
@@ -227,11 +239,12 @@ class Validator:
             return
         if not items:
             self.error("npcs", "must contain at least one NPC")
-        required = {
-            "id", "name", "age", "role_level", "identity", "location", "core_personality",
-            "pressure_strategy", "voice_filter", "goal", "boundary",
-            "withdrawal_signal", "emotion", "resources", "knowledge",
-            "recent_memories", "signature", "autonomy",
+        base_required = {
+            "id", "name", "age", "role_level", "identity", "location", "goal", "boundary",
+            "resources", "knowledge", "recent_memories", "signature", "autonomy",
+        }
+        expressive_fields = {
+            "core_personality", "pressure_strategy", "voice_filter", "withdrawal_signal", "emotion",
         }
         main_required = {
             "identity_profile", "situation", "decision_card", "sexuality_profile",
@@ -243,14 +256,20 @@ class Validator:
             npc = self.mapping(item, path)
             if npc is None:
                 continue
+            role_level = npc.get("role_level")
+            required = base_required | expressive_fields if role_level in {"main", "important_supporting"} else base_required
             self.required(npc, required, path)
             self.required_text(
                 npc,
-                ("name", "identity", "location", "core_personality", "pressure_strategy",
-                 "voice_filter", "goal", "boundary", "withdrawal_signal", "emotion", "signature"),
+                ("name", "identity", "location", "goal", "boundary", "signature"),
                 path,
             )
-            role_level = npc.get("role_level")
+            if role_level in {"main", "important_supporting"}:
+                self.required_text(npc, tuple(expressive_fields), path)
+            else:
+                for field in expressive_fields:
+                    if field in npc and not isinstance(npc[field], str):
+                        self.error(f"{path}.{field}", "must be a string when present for a supporting NPC")
             if role_level not in ROLE_LEVELS:
                 self.error(f"{path}.role_level", f"must be one of {sorted(ROLE_LEVELS)}")
             if role_level == "main":
@@ -360,6 +379,14 @@ class Validator:
                 for participant in valid_participants:
                     if participant not in self.character_ids:
                         self.error(f"{path}.participants", f"references unknown character ID {participant!r}")
+                if self._scene_participants:
+                    outside = [participant for participant in valid_participants
+                               if participant not in self._scene_participants]
+                    if outside:
+                        self.error(
+                            f"{path}.participants",
+                            f"must all appear in current_node.participants; outside scene: {outside!r}",
+                        )
             scope = self.sequence(grant.get("scope"), f"{path}.scope")
             if scope is not None and not any(is_nonempty_string(item) for item in scope):
                 self.error(f"{path}.scope", "must describe at least one explicit permission")
@@ -429,6 +456,8 @@ class Validator:
                 self.error(f"{path}.kind", f"must be one of {sorted(EVENT_KINDS)}")
             if event.get("status") not in EVENT_STATUSES:
                 self.error(f"{path}.status", f"must be one of {sorted(EVENT_STATUSES)}")
+            if event.get("status") == "pending" and not is_nonempty_string(semantic_key):
+                self.error(f"{path}.semantic_key", "pending events require a non-empty semantic_key")
             if event.get("status") == "pending":
                 if not is_nonempty_string(event.get("trigger")) and event.get("due_at") in (None, ""):
                     self.error(path, "pending event needs a non-empty trigger or due_at")
@@ -445,7 +474,85 @@ class Validator:
             if event.get("hook") and event.get("kind") != "far":
                 self.error(f"{path}.hook", "hook events must have kind far")
 
-    def validate_checkpoint(self, value: Any, meta_value: Any) -> None:
+    def validate_directives(self, value: Any, events_value: Any) -> None:
+        items = self.sequence(value, "directives")
+        if items is None:
+            return
+        events = {
+            item.get("id"): item for item in events_value or []
+            if isinstance(item, dict) and is_nonempty_string(item.get("id"))
+        } if isinstance(events_value, list) else {}
+        required = {
+            "id", "raw", "kind", "required_outcome", "protected_details",
+            "adaptation_scope", "deadline", "status", "created_turn", "event_id",
+            "resolution", "block_code",
+        }
+        for index, item in enumerate(items):
+            path = f"directives[{index}]"
+            directive = self.mapping(item, path)
+            if directive is None:
+                continue
+            self.required(directive, required, path)
+            self.add_id(directive.get("id"), f"{path}.id")
+            self.required_text(directive, ("raw", "required_outcome"), path)
+            kind = directive.get("kind")
+            if kind not in DIRECTIVE_KINDS:
+                self.error(f"{path}.kind", f"must be one of {sorted(DIRECTIVE_KINDS)}")
+            status = directive.get("status")
+            if status not in DIRECTIVE_STATUSES:
+                self.error(f"{path}.status", f"must be one of {sorted(DIRECTIVE_STATUSES)}")
+            deadline = directive.get("deadline")
+            if deadline not in DIRECTIVE_DEADLINES:
+                self.error(f"{path}.deadline", f"must be one of {sorted(DIRECTIVE_DEADLINES)}")
+
+            protected = self.sequence(directive.get("protected_details"), f"{path}.protected_details")
+            if protected is not None and any(not is_nonempty_string(detail) for detail in protected):
+                self.error(f"{path}.protected_details", "must contain only non-empty strings")
+            scopes = self.sequence(directive.get("adaptation_scope"), f"{path}.adaptation_scope")
+            if scopes is not None:
+                invalid_scopes = [scope for scope in scopes if scope not in DIRECTIVE_SCOPES]
+                if invalid_scopes:
+                    self.error(f"{path}.adaptation_scope",
+                               f"contains invalid values {invalid_scopes!r}")
+                if len(scopes) != len(set(scopes)):
+                    self.error(f"{path}.adaptation_scope", "must not contain duplicates")
+
+            created_turn = directive.get("created_turn")
+            if not is_int(created_turn) or created_turn < 0:
+                self.error(f"{path}.created_turn", "must be a non-negative integer")
+            elif self._current_turn is not None and created_turn > self._current_turn:
+                self.error(f"{path}.created_turn", "cannot be greater than meta.turn")
+
+            event_id = directive.get("event_id")
+            if event_id not in (None, "") and not is_nonempty_string(event_id):
+                self.error(f"{path}.event_id", "must be null or a non-empty event ID")
+            resolution = directive.get("resolution")
+            block_code = directive.get("block_code")
+            if status == "pending":
+                if deadline != "earliest_possible":
+                    self.error(f"{path}.deadline", "pending directives must use earliest_possible")
+                event = events.get(event_id)
+                if event is None:
+                    self.error(f"{path}.event_id", "pending directive must reference an existing event ID")
+                else:
+                    if event.get("status") != "pending":
+                        self.error(f"{path}.event_id", "must reference a pending event")
+                    if event.get("source") != directive.get("id"):
+                        self.error(f"{path}.event_id", "referenced event source must equal directive ID")
+                if resolution not in (None, ""):
+                    self.error(f"{path}.resolution", "must be empty while pending")
+            elif status in {"fulfilled", "blocked"} and not is_nonempty_string(resolution):
+                self.error(f"{path}.resolution", f"is required when status is {status}")
+
+            if status == "blocked":
+                if block_code not in DIRECTIVE_BLOCK_CODES:
+                    self.error(f"{path}.block_code",
+                               f"must be one of {sorted(DIRECTIVE_BLOCK_CODES)} when blocked")
+            elif block_code not in (None, ""):
+                self.error(f"{path}.block_code", "must be null unless status is blocked")
+
+    def validate_checkpoint(self, value: Any, meta_value: Any,
+                            directives_value: Any = None) -> None:
         data = self.mapping(value, "checkpoint")
         if data is None:
             return
@@ -479,11 +586,20 @@ class Validator:
             self.error("checkpoint.force_full", "must be a boolean")
         invariants = self.mapping(data.get("invariants"), "checkpoint.invariants")
         if invariants is not None:
-            names = {"age_verified", "boundaries_verified", "consent_verified", "player_control_preserved"}
+            names = {"age_verified", "player_control_preserved"}
             self.required(invariants, names, "checkpoint.invariants")
             for name in names:
                 if name in invariants and not isinstance(invariants[name], bool):
                     self.error(f"checkpoint.invariants.{name}", "must be a boolean")
+            if ("directive_priority_preserved" in invariants
+                    and not isinstance(invariants["directive_priority_preserved"], bool)):
+                self.error("checkpoint.invariants.directive_priority_preserved",
+                           "must be a boolean when present")
+            if isinstance(directives_value, list) and directives_value:
+                priority = invariants.get("directive_priority_preserved")
+                if priority is not True:
+                    self.error("checkpoint.invariants.directive_priority_preserved",
+                               "must be true when directives are present")
 
     def validate_current_node(self, value: Any) -> None:
         data = self.mapping(value, "current_node")

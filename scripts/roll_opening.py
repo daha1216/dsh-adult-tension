@@ -36,6 +36,7 @@ SUPPLEMENT_TITLES = {DANG_HALF + "增补": DANG_HALF, DANG_FULL + "增补": DANG
 TONE_AXES = ["时代与技术", "地域气质", "社会形态", "叙事基调", "美学基调"]
 WORLD_RULE_AXES = ["核心规则来源", "掌握范围", "生效代价", "变化阶段"]
 DECISION_AXES = ["核心价值", "压力策略", "关系姿态"]
+REALISTIC_AESTHETICS = {"青年漫写实", "写实文学"}
 HISTORY_LIMIT = 30
 HISTORY_RECENT_LIMIT = 5
 HISTORY_CANDIDATE_LIMIT = 16
@@ -138,6 +139,20 @@ def before_subsections(lines: list[str], level: int = 3) -> list[str]:
     return lines
 
 
+def section_any(lines: list[str], title_prefix: str) -> list[str]:
+    """Return the first heading section at any markdown level."""
+    heads = headings(lines)
+    for index, (start, level, title) in enumerate(heads):
+        if title.startswith(title_prefix):
+            end = len(lines)
+            for next_start, next_level, _ in heads[index + 1:]:
+                if next_level <= level:
+                    end = next_start
+                    break
+            return lines[start + 1:end]
+    return []
+
+
 def strip_paren(text: str) -> str:
     return re.sub(r"（[^）]*）\s*$", "", text.strip()).strip()
 
@@ -153,6 +168,40 @@ def parse_axes(lines: list[str]) -> dict[str, list[str]]:
         if len(options) >= 2:
             axes[m.group(1).strip()] = options
     return axes
+
+
+def parse_nested_axes(lines: list[str]) -> dict[str, list[str]]:
+    """Collect indented grouped bullets under top-level axis bullets."""
+    axes: dict[str, list[str]] = {}
+    current: str | None = None
+    for line in lines:
+        raw = line.rstrip()
+        top = re.match(r"^-\s*([^：]+)$", raw)
+        if top:
+            current = top.group(1).strip()
+            axes.setdefault(current, [])
+            continue
+        grouped = re.match(r"^\s+-\s*([^：]+)：(.+)$", raw)
+        if current and grouped:
+            axes[current].extend(
+                strip_paren(item) for item in grouped.group(2).split("、")
+                if strip_paren(item)
+            )
+    return {axis: options for axis, options in axes.items() if options}
+
+
+def parse_grouped_items(lines: list[str], max_item_len: int | None = None) -> list[str]:
+    """Collect option lists from grouped bullets such as `- 组名：项、项`."""
+    items: list[str] = []
+    for line in lines:
+        match = re.match(r"^\s*-\s*[^：]+：(.+)$", line.strip())
+        if not match:
+            continue
+        for item in match.group(1).rstrip("。 ").split("、"):
+            item = strip_paren(item)
+            if item and (max_item_len is None or len(item) <= max_item_len):
+                items.append(item)
+    return items
 
 
 def parse_table(lines: list[str]) -> list[tuple[str, str]]:
@@ -263,10 +312,10 @@ def load_materials(refs: Path) -> dict:
     m["contrast"] = parse_dun_list(section(lib, "反差轴"), 8, max_item_len=14)
     m["relation_stages"] = parse_dun_list(section(lib, "关系阶段"), 8, max_item_len=14)
 
-    m["flavors"] = [f for f in parse_dun_list(section(chars, "表层风味"), 5, max_item_len=8)
+    m["flavors"] = [f for f in parse_grouped_items(section_any(chars, "表层风味"), max_item_len=8)
                     if f != "系统自拟"]
-    m["appearance"] = parse_axes(section(chars, "外观与气质轴"))
-    m["speech"] = parse_dun_list(section(chars, "口癖与语感"), 8, max_item_len=8)
+    m["appearance"] = parse_nested_axes(section_any(chars, "外观与气质轴"))
+    m["speech"] = parse_grouped_items(section_any(chars, "口癖与语感"), max_item_len=8)
     m["decision_axes"] = parse_axes(section(chars, "人物决策轴"))
     m["twists"] = {title: parse_dun_list(body, 3)
                    for title, body in subsections(section(world, "中期剧情转折"))}
@@ -545,13 +594,19 @@ def roll_all(materials: dict, rng: random.Random, locks: dict[str, str],
     record["dang"] = dang
 
     out.append("世界基调:")
+    aesthetic = locks.get("aesthetic")
     for axis in TONE_AXES:
         lock_key = AXIS_LOCK_KEYS.get(axis)
         if lock_key and lock_key in locks:
-            out.append(f"  {axis}: {locks[lock_key]}（预锁）")
+            value = locks[lock_key]
+            out.append(f"  {axis}: {value}（预锁）")
         else:
             options = r.tone_pool(dang, axis)
-            out.append(f"  {axis}: {r.pick(options)}")
+            value = r.pick(options)
+            out.append(f"  {axis}: {value}")
+        if axis == "美学基调":
+            aesthetic = value
+    skip_stylistic_flavor = aesthetic in REALISTIC_AESTHETICS
 
     out.append("世界核心规则:")
     for axis in WORLD_RULE_AXES:
@@ -703,8 +758,12 @@ def roll_all(materials: dict, rng: random.Random, locks: dict[str, str],
             emit(f"{label}反差轴", locks["contrast"], locked=True)
         else:
             emit(f"{label}反差轴", next(contrast_iter, CUSTOM))
-        emit(f"{label}表层风味", next(flavor_iter, CUSTOM))
-        emit(f"{label}口癖", next(speech_iter, "—"))
+        if skip_stylistic_flavor:
+            emit(f"{label}表层风味", "—")
+            emit(f"{label}口癖", "—")
+        else:
+            emit(f"{label}表层风味", next(flavor_iter, CUSTOM))
+            emit(f"{label}口癖", next(speech_iter, "—"))
         emit(f"{label}画像倾向", r.roll_weighted())
         emit(f"{label}外观", r.roll_appearance(2))
         emit(f"{label}初始关系建议", f"{r.rng.randint(-5, 5):+d}（9e 需写出原因，可小幅调整）")
@@ -712,8 +771,10 @@ def roll_all(materials: dict, rng: random.Random, locks: dict[str, str],
     emit("配角数", str(cast), locked="cast" in locks)
     for i in range(1, cast + 1):
         func = r.pick(materials["supporting_functions"])
-        out.append(f"配角{i}: 功能={func}, 表层风味={next(flavor_iter, '—')}, "
-                   f"口癖={next(speech_iter, '—')}, 画像倾向={r.roll_weighted()}, "
+        flavor = "—" if skip_stylistic_flavor else next(flavor_iter, "—")
+        speech = "—" if skip_stylistic_flavor else next(speech_iter, "—")
+        out.append(f"配角{i}: 功能={func}, 表层风味={flavor}, "
+                   f"口癖={speech}, 画像倾向={r.roll_weighted()}, "
                    f"核心价值={next(decision_iters['核心价值'], '—')}, "
                    f"压力策略={next(decision_iters['压力策略'], '—')}, "
                    f"外观={r.roll_appearance(1)}")
