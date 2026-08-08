@@ -70,6 +70,30 @@ class ParseTests(unittest.TestCase):
         lines = run_roll(1, locks={"aesthetic": "写实文学"}, allow_custom=False)
         self.assertIn("  美学基调: 写实文学（预锁）", lines)
 
+    def test_realistic_aesthetics_skip_flavor_and_speech(self) -> None:
+        for aesthetic in ROLLER.REALISTIC_AESTHETICS:
+            with self.subTest(aesthetic=aesthetic):
+                lines = run_roll(
+                    1,
+                    locks={"aesthetic": aesthetic, "cast": "2"},
+                    allow_custom=False,
+                )
+                self.assertEqual(field(lines, "主NPC表层风味"), "—")
+                self.assertEqual(field(lines, "主NPC口癖"), "—")
+                for line in lines:
+                    if line.startswith("配角") and "功能=" in line:
+                        self.assertIn("表层风味=—", line)
+                        self.assertIn("口癖=—", line)
+
+    def test_nonrealistic_aesthetic_keeps_flavor_and_speech(self) -> None:
+        lines = run_roll(
+            1,
+            locks={"aesthetic": "怪谈绘卷"},
+            allow_custom=False,
+        )
+        self.assertNotEqual(field(lines, "主NPC表层风味"), "—")
+        self.assertNotEqual(field(lines, "主NPC口癖"), "—")
+
     def test_real_exclusions_are_explicit(self) -> None:
         exclusions = MATERIALS["real_exclusions"]
         self.assertTrue({"时代与技术", "地域气质"}.issubset(exclusions))
@@ -89,7 +113,7 @@ class ParseTests(unittest.TestCase):
             self.assertGreater(len(full), len(real), axis)
 
     def test_scene_actions(self) -> None:
-        self.assertEqual(len(MATERIALS["scene_actions"]), 12)
+        self.assertEqual(len(MATERIALS["scene_actions"]), 16)
         self.assertIn("调查查证", {family for family, _seeds in MATERIALS["scene_actions"]})
         self.assertTrue(all(family and len(seeds.split("、")) >= 3
                             for family, seeds in MATERIALS["scene_actions"]))
@@ -122,10 +146,12 @@ class ParseTests(unittest.TestCase):
         self.assertNotIn("咬合", names)
         for family, items in MATERIALS["engine_base"]:
             self.assertGreaterEqual(len(items), 5, family)
-        self.assertEqual(sum(len(items) for _, items in MATERIALS["engine_base"]), 117)
+        self.assertEqual(sum(len(items) for _, items in MATERIALS["engine_base"]), 112)
         families = dict(MATERIALS["engine_base"])
         self.assertIn("一方必须借助另一方才能稳定能力", families["能力与限制"])
+        self.assertIn("名分一旦确立，就无法继续对第三方含混带过", families["身份与义务"])
         self.assertIn("骄傲阻止了主动求助，但不求助的代价在持续累积", families["声誉与关系"])
+        self.assertIn("能否进入或停留，本身就是双方当前最大的限制", families["能力与限制"])
         self.assertEqual(set(MATERIALS["engine_supp"]), {"半架空", "强架空"})
         for dang, count in (("半架空", 6), ("强架空", 7)):
             supplement = MATERIALS["engine_supp"][dang]
@@ -143,7 +169,7 @@ class ParseTests(unittest.TestCase):
 
     def test_shells(self) -> None:
         names = [name for name, _examples in MATERIALS["shell_base"]]
-        self.assertEqual(len(names), 27)
+        self.assertEqual(len(names), 32)
         self.assertIn("密闭旅宿", names)
         self.assertIn("私密交易场", names)
         self.assertTrue({"桃色契约", "情色交易", "异世界迁移"}.isdisjoint(names))
@@ -155,17 +181,23 @@ class ParseTests(unittest.TestCase):
 
     def test_identities(self) -> None:
         families = [f for f, _ in MATERIALS["identity_base"]]
-        self.assertEqual(len(families), 15)
+        self.assertEqual(len(families), 22)
         self.assertIn("市井与手艺", families)
         self.assertIn("侍奉与身契", families)
-        self.assertIn("成人行业与私密服务", families)
-        self.assertTrue({"春情侍奉", "情色行当", "肉体契约"}.isdisjoint(families))
-        self.assertEqual(len(MATERIALS["identity_supp"]["半架空"]), 3)
-        self.assertEqual(len(MATERIALS["identity_supp"]["强架空"]), 5)
+        self.assertIn("创作与传统演艺", families)
+        self.assertIn("二次元与同人", families)
+        self.assertIn("电竞与直播", families)
+        self.assertIn("成人行业与感官服务", families)
+        self.assertIn("私密撮合与契约中介", families)
+        self.assertTrue({
+            "春情侍奉", "情色行当", "肉体契约", "创作与演艺", "成人行业与私密服务",
+        }.isdisjoint(families))
+        self.assertEqual(len(MATERIALS["identity_supp"]["半架空"]), 4)
+        self.assertEqual(len(MATERIALS["identity_supp"]["强架空"]), 6)
 
     def test_situations(self) -> None:
         types = [t for t, _ in MATERIALS["situation_base"]]
-        self.assertEqual(len(types), 21)
+        self.assertEqual(len(types), 26)
         self.assertIn("告白悬置", types)
         self.assertIn("受限共处", types)
         self.assertIn("曝光与把柄", types)
@@ -176,9 +208,9 @@ class ParseTests(unittest.TestCase):
     def test_world_specific_pools_extend_only_the_selected_dang(self) -> None:
         roller = ROLLER.Roller(MATERIALS, random.Random(1), allow_custom=False)
         expected_sizes = {
-            "现实": (27, 15, 21),
-            "半架空": (31, 18, 28),
-            "强架空": (34, 20, 33),
+            "现实": (32, 22, 26),
+            "半架空": (36, 26, 33),
+            "强架空": (39, 28, 38),
         }
         for dang, expected in expected_sizes.items():
             actual = (len(roller.shell_pool(dang)), len(roller.identity_pool(dang)),
@@ -210,9 +242,9 @@ class ParseTests(unittest.TestCase):
         )
 
     def test_contrast_and_relation_stages(self) -> None:
-        self.assertEqual(len(MATERIALS["contrast"]), 16)
+        self.assertEqual(len(MATERIALS["contrast"]), 22)
         self.assertIn("禁欲系×欲望深", MATERIALS["contrast"])
-        self.assertEqual(len(MATERIALS["relation_stages"]), 16)
+        self.assertEqual(len(MATERIALS["relation_stages"]), 24)
         self.assertIn("单向暗恋（方向另抽）", MATERIALS["relation_stages"])
 
     def test_speech_pool(self) -> None:
