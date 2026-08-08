@@ -1,5 +1,13 @@
 # 变更记录
 
+## 2026-08-09 一致性修复收尾
+
+- `scripts/validate_state.py`：supporting 配角可省略五项表现字段；字段存在时仍校验字符串类型；main 与 important_supporting 保持严格要求。pending 事件现在必须有非空 `semantic_key`，resolved/cancelled 事件保持兼容。
+- `references/角色设计.md`、`references/状态总结.md`：同步分层持久化规则；角色设计增加实时解析维护契约。
+- `SKILL.md`：明确纯撤销与替换式 retcon 的回合语义。
+- `references/素材库.md`、`.gitignore`：修复引号并忽略 pytest 缓存目录。
+- `tests/`：补充 supporting 最小字段、错误类型、解析池非空、retcon 文档和事件语义键测试。
+
 ## 2026-08-09 状态总结收敛
 
 - `references/状态总结.md`：删除 v2 迁移说明，统一为仅接受 v3；新增字段枚举速查表、时间关系、`resolved_summary` 与 checkpoint 语义说明；保存检查收敛为人工语义约束并明确以 `validate_state.py` 为机器校验唯一来源。

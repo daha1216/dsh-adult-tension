@@ -239,11 +239,12 @@ class Validator:
             return
         if not items:
             self.error("npcs", "must contain at least one NPC")
-        required = {
-            "id", "name", "age", "role_level", "identity", "location", "core_personality",
-            "pressure_strategy", "voice_filter", "goal", "boundary",
-            "withdrawal_signal", "emotion", "resources", "knowledge",
-            "recent_memories", "signature", "autonomy",
+        base_required = {
+            "id", "name", "age", "role_level", "identity", "location", "goal", "boundary",
+            "resources", "knowledge", "recent_memories", "signature", "autonomy",
+        }
+        expressive_fields = {
+            "core_personality", "pressure_strategy", "voice_filter", "withdrawal_signal", "emotion",
         }
         main_required = {
             "identity_profile", "situation", "decision_card", "sexuality_profile",
@@ -255,14 +256,20 @@ class Validator:
             npc = self.mapping(item, path)
             if npc is None:
                 continue
+            role_level = npc.get("role_level")
+            required = base_required | expressive_fields if role_level in {"main", "important_supporting"} else base_required
             self.required(npc, required, path)
             self.required_text(
                 npc,
-                ("name", "identity", "location", "core_personality", "pressure_strategy",
-                 "voice_filter", "goal", "boundary", "withdrawal_signal", "emotion", "signature"),
+                ("name", "identity", "location", "goal", "boundary", "signature"),
                 path,
             )
-            role_level = npc.get("role_level")
+            if role_level in {"main", "important_supporting"}:
+                self.required_text(npc, tuple(expressive_fields), path)
+            else:
+                for field in expressive_fields:
+                    if field in npc and not isinstance(npc[field], str):
+                        self.error(f"{path}.{field}", "must be a string when present for a supporting NPC")
             if role_level not in ROLE_LEVELS:
                 self.error(f"{path}.role_level", f"must be one of {sorted(ROLE_LEVELS)}")
             if role_level == "main":
@@ -449,6 +456,8 @@ class Validator:
                 self.error(f"{path}.kind", f"must be one of {sorted(EVENT_KINDS)}")
             if event.get("status") not in EVENT_STATUSES:
                 self.error(f"{path}.status", f"must be one of {sorted(EVENT_STATUSES)}")
+            if event.get("status") == "pending" and not is_nonempty_string(semantic_key):
+                self.error(f"{path}.semantic_key", "pending events require a non-empty semantic_key")
             if event.get("status") == "pending":
                 if not is_nonempty_string(event.get("trigger")) and event.get("due_at") in (None, ""):
                     self.error(path, "pending event needs a non-empty trigger or due_at")

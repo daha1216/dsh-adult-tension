@@ -159,6 +159,9 @@ class DocConsistencyTests(unittest.TestCase):
         for field in ("type", "place", "rule", "pressure"):
             self.assertIn(f"    {field}:", state)
 
+    def test_pending_events_require_semantic_key_documented(self) -> None:
+        self.assertIn("`pending` 事件必须携带非空 `semantic_key`", TEXTS["STATE"])
+
     def test_world_processing_order_is_subflow(self) -> None:
         self.assertIn("追算）的内部子流程", TEXTS["WORLD"])
 
@@ -183,6 +186,10 @@ class DocConsistencyTests(unittest.TestCase):
         self.assertIn("事件字段查询", TEXTS["SKILL"])
         self.assertIn("`references/世界运转.md` 为准", TEXTS["SKILL"])
 
+    def test_retcon_turn_semantics_documented(self) -> None:
+        self.assertIn("不附带新内容时按元指令处理", TEXTS["SKILL"])
+        self.assertIn("Y 作为有效叙事指令推进一个回合", TEXTS["SKILL"])
+
     def test_character_doc_uses_current_identity_family_names(self) -> None:
         character_text = TEXTS["CHARACTER"]
         materials = ROLLER.load_materials(ROOT / "references")
@@ -194,6 +201,17 @@ class DocConsistencyTests(unittest.TestCase):
         ):
             self.assertIn(family, character_text)
             self.assertIn(family, identity_families)
+
+    def test_character_doc_has_parser_maintenance_contract(self) -> None:
+        character_text = TEXTS["CHARACTER"]
+        self.assertIn("维护契约", character_text)
+        self.assertIn("scripts/roll_opening.py", character_text)
+
+    def test_character_parser_pools_are_nonempty(self) -> None:
+        materials = ROLLER.load_materials(ROOT / "references")
+        for key in ("flavors", "appearance", "speech", "decision_axes", "profile_weights", "supporting_functions"):
+            with self.subTest(key=key):
+                self.assertTrue(materials[key], f"解析池为空: {key}")
 
 
 if __name__ == "__main__":

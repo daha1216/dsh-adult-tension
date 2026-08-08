@@ -70,6 +70,15 @@
 - `tests/test_validate_state.py`、`tests/test_doc_consistency.py`：更新有效存档夹具，新增 legacy `setting_shell` 反向失败和 v3-only / mapping 文档门禁。
 - 验证：`python -m pytest tests/ -q` 通过（108 项、33 个子测试）；脚本编译、`git diff --check` 和独立 validator 行为检查通过。
 
+## 已完成（第八轮：2026-08-09 一致性修复收尾）
+
+- `scripts/validate_state.py`：按 `role_level` 放宽 supporting 配角的表现字段要求；supporting 可省略 `core_personality`、`pressure_strategy`、`voice_filter`、`withdrawal_signal`、`emotion`，但字段存在时必须为字符串；main 与 important_supporting 仍要求这些字段为非空字符串。pending 事件强制携带非空 `semantic_key`，resolved/cancelled 保持可省略。
+- `references/角色设计.md`、`references/状态总结.md`：同步 supporting 分层持久化规则；角色设计增加脚本实时解析维护契约。
+- `SKILL.md`：明确纯撤销与替换式 retcon 的回合语义。
+- `references/素材库.md`：修复凝视与展演条目的引号；`.gitignore` 增加 `.pytest_cache/`。
+- `tests/`：新增 supporting 最小存档、层级字段、解析池非空、retcon 文档和 pending/resolved `semantic_key` 覆盖。
+- 验证：局部测试通过（63 项、17 个子测试），脚本编译与开局冒烟通过；待全量验证后提交。
+
 ## 待完成
 
 无。冻结段现在由 `tests/test_doc_consistency.py::DocConsistencyTests::test_frozen_section_unchanged` 自动守卫；有意改动前仍须按「基线」口径核对并同步更新哈希、长度和变更记录。命令表回合列语义由 `test_command_turn_semantics_documented` 守卫。

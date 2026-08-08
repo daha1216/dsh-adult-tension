@@ -121,6 +121,7 @@ def valid_save() -> dict:
                 "source": "turn-3",
                 "created_turn": 3,
                 "kind": "near",
+                "semantic_key": "meeting reply due",
                 "trigger": "the meeting ends",
                 "due_at": None,
                 "status": "pending",
@@ -187,6 +188,18 @@ class ValidateStateTests(unittest.TestCase):
             data["events"][0]["due_at"] = None
 
         self.assert_invalid(mutate, "pending event")
+
+    def test_pending_event_needs_semantic_key(self) -> None:
+        self.assert_invalid(
+            lambda data: data["events"][0].pop("semantic_key"),
+            "pending events require a non-empty semantic_key",
+        )
+
+    def test_resolved_event_may_omit_semantic_key(self) -> None:
+        data = copy.deepcopy(valid_save())
+        data["events"][0].update(status="resolved")
+        data["events"][0].pop("semantic_key")
+        self.assertEqual([], VALIDATOR.validate_data(data))
 
     @staticmethod
     def add_directive(data: dict, **updates) -> None:
@@ -330,6 +343,92 @@ class ValidateStateTests(unittest.TestCase):
         second.update(id="npc-002", name="NPC2")
         data["npcs"].append(second)
         self.assertEqual([], VALIDATOR.validate_data(data))
+
+    def test_minimal_supporting_npc_passes(self) -> None:
+        data = copy.deepcopy(valid_save())
+        data["npcs"].append({
+            "id": "npc-002",
+            "name": "Witness",
+            "age": 41,
+            "role_level": "supporting",
+            "identity": "witness",
+            "location": "office",
+            "goal": "leave safely",
+            "boundary": "no violence",
+            "resources": [],
+            "knowledge": [],
+            "recent_memories": [],
+            "signature": "keeps the receipts",
+            "autonomy": {"last_turn": None, "recent_turns": [], "cooldown_until": 0},
+        })
+        data["current_node"]["participants"].append("npc-002")
+        self.assertEqual([], VALIDATOR.validate_data(data))
+
+    def test_important_supporting_needs_expressive_fields(self) -> None:
+        data = copy.deepcopy(valid_save())
+        supporting = {
+            "id": "npc-002",
+            "name": "Witness",
+            "age": 41,
+            "role_level": "important_supporting",
+            "identity": "witness",
+            "location": "office",
+            "goal": "leave safely",
+            "boundary": "no violence",
+            "resources": [],
+            "knowledge": [],
+            "recent_memories": [],
+            "signature": "keeps the receipts",
+            "autonomy": {"last_turn": None, "recent_turns": [], "cooldown_until": 0},
+        }
+        data["npcs"].append(supporting)
+        data["current_node"]["participants"].append("npc-002")
+        errors = VALIDATOR.validate_data(data)
+        self.assertTrue(any("npcs[1].voice_filter" in error for error in errors), errors)
+
+    def test_supporting_expressive_field_must_be_string_when_present(self) -> None:
+        data = copy.deepcopy(valid_save())
+        supporting = {
+            "id": "npc-002",
+            "name": "Witness",
+            "age": 41,
+            "role_level": "supporting",
+            "identity": "witness",
+            "location": "office",
+            "goal": "leave safely",
+            "boundary": "no violence",
+            "emotion": ["nervous"],
+            "resources": [],
+            "knowledge": [],
+            "recent_memories": [],
+            "signature": "keeps the receipts",
+            "autonomy": {"last_turn": None, "recent_turns": [], "cooldown_until": 0},
+        }
+        data["npcs"].append(supporting)
+        data["current_node"]["participants"].append("npc-002")
+        errors = VALIDATOR.validate_data(data)
+        self.assertTrue(any("must be a string when present" in error for error in errors), errors)
+
+    def test_supporting_still_needs_autonomy(self) -> None:
+        data = copy.deepcopy(valid_save())
+        supporting = {
+            "id": "npc-002",
+            "name": "Witness",
+            "age": 41,
+            "role_level": "supporting",
+            "identity": "witness",
+            "location": "office",
+            "goal": "leave safely",
+            "boundary": "no violence",
+            "resources": [],
+            "knowledge": [],
+            "recent_memories": [],
+            "signature": "keeps the receipts",
+        }
+        data["npcs"].append(supporting)
+        data["current_node"]["participants"].append("npc-002")
+        errors = VALIDATOR.validate_data(data)
+        self.assertTrue(any("npcs[1].autonomy" in error for error in errors), errors)
 
     def test_current_node_needs_situation(self) -> None:
         self.assert_invalid(lambda data: data["current_node"].pop("situation"), "current_node.situation")
