@@ -1,4 +1,9 @@
-# adult-tension-narrative
+# 🎭 adult-tension-narrative
+
+[![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
+[![Tests](https://github.com/daha1216/dsh-skill-adult-tension-narrative/actions/workflows/tests.yml/badge.svg)](https://github.com/daha1216/dsh-skill-adult-tension-narrative/actions/workflows/tests.yml)
+
+> **本仓库由 [erotic-game-engine--](https://github.com/daha1216/erotic-game-engine--) 拆分而来**，只包含 `adult-tension-narrative` 这一个成年人互动故事技能。仓库根目录就是技能本体。
 
 这是一个成年人互动故事技能。它会准备世界、角色和开场，让 NPC 按自己的性格和处境行动。故事中的时间会继续向前，重要事件也会留下记录。
 
@@ -12,7 +17,13 @@
 
 ## 怎么安装
 
-把整个 `adult-tension-narrative` 文件夹复制到 AI 工具的技能目录中。不要只复制 `SKILL.md`，其他文件也是技能的一部分。
+仓库根目录就是技能本体。让 AI 直接安装本仓库：
+
+```text
+帮我安装这个 skill：https://github.com/daha1216/dsh-skill-adult-tension-narrative
+```
+
+也可以手动安装：把仓库根目录的一整套文件（`SKILL.md`、`references/`、`scripts/`、`tests/`、`agents/`）完整复制到 AI 工具的技能目录中。不要只复制 `SKILL.md`，其他文件也是技能的一部分。
 
 复制完成后，让 AI 加载 `adult-tension-narrative` 技能即可开始。
 
@@ -73,4 +84,4 @@ python -m pip install "PyYAML>=6,<7"
 | `scripts/` | 随机开局和存档检查工具 |
 | `tests/` | 自动测试 |
 
-修改素材表或存档格式时，需要同步检查脚本和测试。仓库根目录的 [CONTRIBUTING.md](../CONTRIBUTING.md) 写有完整维护步骤。
+修改素材表或存档格式时，需要同步检查脚本和测试。仓库根目录的 [CONTRIBUTING.md](./CONTRIBUTING.md) 写有完整维护步骤。
