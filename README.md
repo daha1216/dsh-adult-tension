@@ -3,6 +3,8 @@
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
 [![Tests](https://github.com/daha1216/dsh-skill-adult-tension-narrative/actions/workflows/tests.yml/badge.svg)](https://github.com/daha1216/dsh-skill-adult-tension-narrative/actions/workflows/tests.yml)
 
+> **插件形态：AI Skill**：核心入口是 `SKILL.md`。安装时请将仓库根目录完整复制到 AI 工具的技能目录，不要只复制单个文件。
+
 **自带破甲 · 成人属性 (18+)** — DeepSeek Harness / AI Agent 成年人互动叙事技能。
 
 > ⚠️ **成年人内容（18+ Only）**：仅限虚构成年人，所有参与角色必须明确年满 18 岁。人物边界、当前同意和安全状态始终优先于剧情推进。
@@ -14,6 +16,7 @@ NPC 会像活人一样生活在这个故事里。他们记得你说过的话和�
 ![游玩输入示例](./docs/screenshots/play-input.png)
 
 ![游玩输出示例](./docs/screenshots/play-output.png)
+
 ## ✨ 为什么它强
 
 多数互动模板给你一个开头就撒手不管，玩几轮就散架：角色变脸、时间错乱、前面的事没人记得。这个 Skill 是反着来的——
