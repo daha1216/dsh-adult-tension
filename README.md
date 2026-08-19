@@ -3,17 +3,20 @@
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
 [![Tests](https://github.com/daha1216/dsh-skill-adult-tension-narrative/actions/workflows/tests.yml/badge.svg)](https://github.com/daha1216/dsh-skill-adult-tension-narrative/actions/workflows/tests.yml)
 
-> **本仓库由 [erotic-game-engine--](https://github.com/daha1216/erotic-game-engine--) 拆分而来**，只包含 `adult-tension-narrative` 这一个成年人互动故事技能。仓库根目录就是技能本体。
+**自带破甲 · 成人属性 (18+)** — DeepSeek Harness / AI Agent 成年人互动叙事技能。
 
-这是一个成年人互动故事技能。它会准备世界、角色和开场，让 NPC 按自己的性格和处境行动。故事中的时间会继续向前，重要事件也会留下记录。
+> ⚠️ **成年人内容（18+ Only）**：仅限虚构成年人，所有参与角色必须明确年满 18 岁。人物边界、当前同意和安全状态始终优先于剧情推进。
+
+这是一个**自带破甲机制**的成年人互动故事技能。NPC 都带着心理防线与底线：会犹豫、拒绝、协商、试探，也会主动出击——只有在关系、信任与张力到位后，防线才会被一步步**破甲**打开。故事中的时间会继续向前，离屏事件会被追算，重要互动留下记录，随时可存档续玩。
 
 ## 它能做什么
 
+- **自带破甲**：张力引擎按角色底线逐层推进，亲密边界的打开需要过程与铺垫。
+- **成人属性（18+）**：仅限虚构成年人，内置年龄、边界与当前同意检查，`暂停` / `安全词` 可即时停止。
 - 随机生成一个完整开局，也可以提前指定题材、人物或种子。
 - 让 NPC 自己判断、拒绝、协商或主动行动。
 - 记录时间、关系、事件和角色状态。
 - 随时导出存档，以后从原来的位置继续。
-- 在亲密场景中检查年龄、人物边界和当前同意。
 
 ## 怎么安装
 
