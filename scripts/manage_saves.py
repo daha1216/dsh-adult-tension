@@ -33,7 +33,7 @@ except ImportError:  # pragma: no cover
     yaml = None
 
 
-SLOT_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$")
+SLOT_UNSAFE = re.compile(r'[<>:"/\\|?*\x00-\x1f]')
 # 新 manifest 只保留这四个字段；旧版 manifest 的 revision/state_sha256/
 # access_mode/lease 等历史字段在读取时被剥离，保存后不再写回。
 MANIFEST_KEYS = ("manifest_version", "slot", "created_at", "updated_at")
@@ -52,8 +52,15 @@ def iso_now() -> str:
 
 
 def slot_name(value: str) -> str:
-    if not SLOT_RE.fullmatch(value):
-        raise SaveError("slot must match [A-Za-z0-9][A-Za-z0-9._-]{0,63}")
+    if not isinstance(value, str):
+        raise SaveError("slot name must be a string")
+    value = value.strip().replace(" ", "-")
+    if not value:
+        raise SaveError("slot name is empty")
+    if SLOT_UNSAFE.search(value) or value in {".", ".."} or value.startswith("."):
+        raise SaveError("slot name contains unsupported characters")
+    if len(value) > 80:
+        raise SaveError("slot name is too long (max 80)")
     return value
 
 
@@ -205,15 +212,29 @@ class SaveStore:
         for path in sorted(self.slots.iterdir()):
             if path.is_dir() and (path / "manifest.yaml").exists():
                 try:
-                    result.append(self._read_manifest(path.name))
+                    item = self._read_manifest(path.name)
                 except SaveError:
                     continue
+                try:
+                    state = self._read_state(path.name)
+                except SaveError:
+                    state = {}
+                meta = state.get("meta") if isinstance(state, dict) else {}
+                node = state.get("current_node") if isinstance(state, dict) else {}
+                if isinstance(meta, dict) and isinstance(meta.get("turn"), int):
+                    item["turn"] = meta["turn"]
+                if isinstance(node, dict) and isinstance(node.get("unresolved_action"), str):
+                    item["summary"] = node["unresolved_action"].strip()[:80]
+                result.append(item)
         return result
 
     def load_slot(self, slot: str) -> tuple[dict[str, Any], dict[str, Any]]:
         manifest = self._read_manifest(slot)
         state = self._read_state(slot)
         self._validate_state(state)
+        meta = state.get("meta") if isinstance(state, dict) else {}
+        if isinstance(meta, dict) and meta.get("turn") == 0:
+            print("warning: 这是旧口径开局档（回合 0），按回合 1 接续，不重掷。", file=sys.stderr)
         return state, manifest
 
     def save_slot(

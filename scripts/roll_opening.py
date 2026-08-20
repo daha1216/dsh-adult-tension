@@ -35,14 +35,31 @@ MATERIAL_DOC = REFERENCES / "素材库.md"
 WORLD_DOC = REFERENCES / "世界运转.md"
 HISTORY_FILE = "adult_tension_narrative_roll_history.jsonl"
 HISTORY_RETRY_LIMIT = 32
-PROTOCOL_VERSION = "opening-roll/v2"
+PROTOCOL_VERSION = "opening-roll/v3"
 # This is the compatibility contract: changing order requires a protocol bump.
 DRAW_PLAN = (
     "美学基调", "核心规则", "权力结构", "张力引擎", "时代", "地点",
     "社会规则", "压力来源", "场景动作", "身份族", "处境", "核心价值",
     "压力策略", "关系姿态", "反差轴", "表层风味", "口癖", "外观·主NPC",
     "外观·配角", "生成倾向", "配角功能", "亲密画像核心子集",
+    "场景动作·对照", "玩家称谓", "玩家年龄段", "玩家社会位置",
 )
+LEVERAGE_ENGINES = {"债务压力", "秘密暴露倒计时", "第三方施压"}
+SITUATION_LEVERAGE = {"债务压身", "秘密将破", "时限临门"}
+IDENTITY_WEIGHTS = {
+    "侍奉与身契": 7,
+    "成人行业与感官服务": 7,
+    "私密撮合与契约中介": 6,
+    "权力与治理": 5,
+    "商业与产业": 5,
+    "学术与专业": 8,
+    "秩序与执法": 6,
+    "艺术与传播": 12,
+    "医疗与照护": 12,
+    "地下与灰色地带": 7,
+    "家族与继承": 12,
+    "服务与手艺": 13,
+}
 GOLDEN_MAPPING = {"protocol_version": PROTOCOL_VERSION, "seed": 7}
 
 GATE_AESTHETICS = {"青年漫写实", "写实文学"}
@@ -50,7 +67,10 @@ CUSTOM_KEYS = {
     "核心规则", "张力引擎", "时代", "地点", "社会规则", "压力来源",
     "场景动作", "身份族", "处境", "核心价值", "压力策略", "关系姿态",
 }
-LOCKABLE_KEYS = set(CUSTOM_KEYS) | {"美学基调", "权力结构", "反差轴", "配角功能"}
+LOCKABLE_KEYS = set(CUSTOM_KEYS) | {
+    "美学基调", "权力结构", "反差轴", "配角功能",
+    "玩家称谓", "玩家年龄段", "玩家社会位置",
+}
 # 多值字段：lock/custom 值允许顿号或逗号分隔多项，每项必须来自对应解析池；
 # 少于规定数量时自动从池中补抽，保证最终数量与互不相同（如张力引擎恒为两项）。
 MULTI_LOCK_KEYS = {"张力引擎"}
@@ -259,10 +279,20 @@ def load_pools() -> dict[str, Any]:
     pools["时代与地点"] = era_place
     pools["社会规则"] = _union_pool(section("## 社会规则", material_text), name="社会规则")
     pools["压力来源"] = _union_pool(section("## 压力来源", material_text), name="压力来源")
-    pools["场景动作"] = _union_pool(section("## 场景动作", material_text), name="场景动作")
+    scene_groups = _grouped(section("## 场景动作", material_text))
+    if not scene_groups.get("交易摊牌") or not scene_groups.get("非交易靠近"):
+        raise AnchorError("「场景动作」缺少「交易摊牌」或「非交易靠近」分组")
+    pools["场景动作·交易"] = list(dict.fromkeys(scene_groups["交易摊牌"]))
+    pools["场景动作·靠近"] = list(dict.fromkeys(scene_groups["非交易靠近"]))
+    pools["场景动作"] = list(dict.fromkeys(pools["场景动作·交易"] + pools["场景动作·靠近"]))
     pools["身份侧"] = _union_pool(section("## 身份侧", material_text), name="身份侧")
     pools["处境侧"] = _union_pool(section("## 处境侧", material_text), name="处境侧")
     pools["反差轴"] = _union_pool(section("## 反差轴", material_text), name="反差轴")
+    player_axes = _grouped(section("## 玩家化身轴", material_text))
+    for axis in ("称谓", "年龄段", "社会位置"):
+        if not player_axes.get(axis):
+            raise AnchorError(f"「玩家化身轴」缺少「{axis}」分组")
+    pools["玩家化身轴"] = {key: list(dict.fromkeys(items)) for key, items in player_axes.items()}
 
     pools["转折池"] = _twist_pool(section("## 中期剧情转折", world_text))
     if not set(pools["权力结构"]).issubset(POWER_STRUCTURES):
@@ -300,6 +330,11 @@ def _draw_distinct(rng: random.Random, entries: list[dict[str, str]],
         picks.append(pick)
         pool = [entry for entry in pool if entry != pick]
     return picks
+
+
+def _weighted_choice(rng: random.Random, items: list[str], weights: dict[str, int]) -> str:
+    values = [max(1, int(weights.get(item, 8))) for item in items]
+    return rng.choices(items, weights=values, k=1)[0]
 
 
 def _combine_multi(key: str, raw: str, pool: list[str], count: int,
@@ -358,6 +393,9 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         "关系姿态": pools["决策轴"]["关系姿态"],
         "反差轴": pools["反差轴"],
         "配角功能": pools["配角功能"],
+        "玩家称谓": pools["玩家化身轴"]["称谓"],
+        "玩家年龄段": pools["玩家化身轴"]["年龄段"],
+        "玩家社会位置": pools["玩家化身轴"]["社会位置"],
     }
     if mode in {"table", "force_table"}:
         for key, value in locks.items():
@@ -404,8 +442,14 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     draw("地点", pools["时代与地点"]["地点"])
     draw("社会规则", pools["社会规则"])
     draw("压力来源", pools["压力来源"])
-    draw("场景动作", pools["场景动作"])
-    draw("身份族", pools["身份侧"])
+    if "场景动作" in locks or (mode == "all_custom" and "场景动作" in CUSTOM_KEYS):
+        draw("场景动作", pools["场景动作"])
+    else:
+        roll["场景动作"] = rng.choice(pools["场景动作·靠近"])
+    if "身份族" in locks or (mode == "all_custom" and "身份族" in CUSTOM_KEYS):
+        draw("身份族", pools["身份侧"])
+    else:
+        roll["身份族"] = _weighted_choice(rng, pools["身份侧"], IDENTITY_WEIGHTS)
     draw("处境", pools["处境侧"])
     draw("核心价值", pools["决策轴"]["核心价值"])
     draw("压力策略", pools["决策轴"]["压力策略"])
@@ -414,6 +458,27 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
 
     if roll["权力结构"] not in POWER_STRUCTURES:
         raise AnchorError(f"权力结构值不在枚举中：{roll['权力结构']!r}")
+    if "张力引擎" not in locks and not (
+            mode == "all_custom" and roll.get("张力引擎") == "custom_required"):
+        engines = [part.strip() for part in MULTI_SEPARATOR.split(str(roll.get("张力引擎", ""))) if part.strip()]
+        if len(engines) >= 2 and set(engines) <= LEVERAGE_ENGINES:
+            remaining = [item for item in pools["张力引擎"] if item not in engines and item not in LEVERAGE_ENGINES]
+            if not remaining:
+                remaining = [item for item in pools["张力引擎"] if item not in engines]
+            if remaining:
+                engines[1] = rng.choice(remaining)
+                roll["张力引擎"] = "、".join(engines)
+    if "处境" not in locks and not (
+            mode == "all_custom" and roll.get("处境") == "custom_required"):
+        if roll.get("权力结构") == "player_high" and roll.get("处境") in SITUATION_LEVERAGE:
+            remaining = [item for item in pools["处境侧"] if item not in SITUATION_LEVERAGE]
+            if remaining:
+                roll["处境"] = rng.choice(remaining)
+    trade_pool = [item for item in pools["场景动作·交易"] if item != roll.get("场景动作")]
+    if trade_pool:
+        roll["场景动作·对照"] = rng.choice(trade_pool)
+    else:
+        roll["场景动作·对照"] = rng.choice(pools["场景动作·交易"]) if pools["场景动作·交易"] else "—"
     gate = roll["美学基调"] in GATE_AESTHETICS
     if gate:
         roll["表层风味"] = "—"
@@ -445,6 +510,10 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         "regulation.self_control": rng.choice(SELF_CONTROL),
         "interest_origin.type": rng.choice(INTEREST_ORIGIN),
     }
+    draw("玩家称谓", pools["玩家化身轴"]["称谓"])
+    draw("玩家年龄段", pools["玩家化身轴"]["年龄段"])
+    draw("玩家社会位置", pools["玩家化身轴"]["社会位置"])
+    roll["开局约束"] = "权力结构不自动等于把柄；处境不得推导同意；未决动作须落在非交易靠近"
     return roll
 
 
@@ -461,6 +530,10 @@ def draw_twists(pools: dict[str, Any], seed: int) -> list[tuple[str, str]]:
 def _roll_signature(roll: dict[str, Any]) -> str:
     payload = {key: roll.get(key) for key in DRAW_PLAN}
     return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def _roll_triple(roll: dict[str, Any]) -> str:
+    return f"{roll.get('时代')}|{roll.get('地点')}|{roll.get('张力引擎')}"
 
 
 def history_path() -> Path:
@@ -485,6 +558,24 @@ def recent_signatures(limit: int = 20) -> set[str]:
     return {record["signature"] for record in records}
 
 
+def recent_triples(limit: int = 20) -> set[str]:
+    path = history_path()
+    if not path.exists():
+        return set()
+    triples: set[str] = set()
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines()[-limit:]:
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(record, dict) and record.get("triple"):
+                triples.add(record["triple"])
+    except OSError as exc:
+        print(f"warning: could not read roll history: {exc}", file=sys.stderr)
+    return triples
+
+
 def append_history(roll: dict[str, Any]) -> None:
     try:
         record = {
@@ -492,6 +583,7 @@ def append_history(roll: dict[str, Any]) -> None:
             "seed": roll["seed"],
             "mode": roll["mode"],
             "signature": _roll_signature(roll),
+            "triple": _roll_triple(roll),
             "at": dt.datetime.now().isoformat(timespec="seconds"),
         }
         with history_path().open("a", encoding="utf-8") as handle:
@@ -604,20 +696,23 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         recent = set() if args.no_history else recent_signatures()
+        recent_t = set() if args.no_history else recent_triples()
         roll = build_roll(pools, seed, mode, locks, custom)
         signature = _roll_signature(roll)
+        triple = _roll_triple(roll)
         if args.seed is None:
             attempts = 0
             entropy = random.SystemRandom()
-            while signature in recent and attempts < HISTORY_RETRY_LIMIT:
+            while (signature in recent or triple in recent_t) and attempts < HISTORY_RETRY_LIMIT:
                 seed = entropy.randrange(0, 2 ** 31)
                 roll = build_roll(pools, seed, mode, locks, custom)
                 signature = _roll_signature(roll)
+                triple = _roll_triple(roll)
                 attempts += 1
-            if signature in recent:
+            if signature in recent or triple in recent_t:
                 print("warning: 无法在历史去重上限内生成新结构骰", file=sys.stderr)
-        elif signature in recent:
-            print("warning: 本次结构骰与近期历史签名重复（显式 seed 保持确定性）", file=sys.stderr)
+        elif signature in recent or triple in recent_t:
+            print("warning: 本次结构骰与近期历史签名或三元组重复（显式 seed 保持确定性）", file=sys.stderr)
     except AnchorError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2

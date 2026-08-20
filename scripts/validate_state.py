@@ -677,6 +677,9 @@ class Validator:
                         self.error("relationships", f"opening profile requires main-main relationship coverage for {left}/{right}")
         if data.get("resolved_summary"):
             self.error("resolved_summary", "opening profile requires no resolved summaries")
+        directives = data.get("directives")
+        if isinstance(directives, list) and directives:
+            self.error("directives", "new openings must not write directives")
 
 
 def validate_data(data: Any, profile: str = "save") -> list[str]:

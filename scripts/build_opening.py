@@ -34,7 +34,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUT_DIR = ROOT / "saves"
-PROTOCOL_VERSION = "opening-roll/v2"
+PROTOCOL_VERSION = "opening-roll/v3"
 MULTI_SEPARATOR = re.compile(r"[、，,]")
 
 
@@ -154,6 +154,7 @@ def build_skeleton(roll: dict[str, Any]) -> dict[str, Any]:
             "resources": [],
             "knowledge": [],
             "reputation": "",
+            "appellation": roll.get("玩家称谓") or "",
         },
         "player_naming_audit": {
             "chosen": "",

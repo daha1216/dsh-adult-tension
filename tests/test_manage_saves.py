@@ -87,6 +87,14 @@ class ManageSavesTests(unittest.TestCase):
         slots = {item["slot"] for item in self.store.list_slots()}
         self.assertEqual({"main", "branch-b"}, slots)
 
+    def test_chinese_slot_name_and_list_summary(self) -> None:
+        manifest = self.store.init_slot("实验槽", self.source)
+        self.assertEqual("实验槽", manifest["slot"])
+        listed = {item["slot"]: item for item in self.store.list_slots()}
+        self.assertIn("实验槽", listed)
+        self.assertEqual(5, listed["实验槽"].get("turn"))
+        self.assertTrue(listed["实验槽"].get("summary"))
+
 
 if __name__ == "__main__":
     unittest.main()

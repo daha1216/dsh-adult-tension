@@ -39,6 +39,7 @@ def fill_complete(skeleton: dict, roll: dict) -> dict:
         name=player_name, age=29, identity="独立声誉风险顾问",
         location=location, baseline="话少，习惯先把对方的筹码盘清楚。",
         resources=["两家媒体的延迟发稿权"], knowledge=["对手手里有账目副本"], reputation="不站队但能改舆论走向",
+        appellation=roll.get("玩家称谓") or "直呼其名",
     )
     data["player_naming_audit"]["chosen"] = player_name
     npc = data["npcs"][0]

@@ -140,6 +140,18 @@ class ValidateStateTests(unittest.TestCase):
         data["checkpoint"].update(force_full=True, force_reason="schema migration")
         self.assertEqual([], VALIDATOR.validate_data(data))
 
+    def _opening_ready(self, data: dict) -> dict:
+        data["meta"]["turn"] = 1
+        data.pop("directives", None)
+        for event in data["events"]:
+            event["created_turn"] = 1
+        data["relationships"][0]["last_updated_turn"] = 1
+        data["checkpoint"].update(last_full_turn=1, next_full_turn=6)
+        data["npcs"][0]["autonomy"] = {"last_turn": None, "recent_turns": [], "cooldown_until": 0}
+        data["consent"]["grants"][0].update(granted_turn=1, last_checked_turn=1)
+        data["events"].append({"id": "evt-immediate", "source": "system:opening", "created_turn": 1, "kind": "immediate", "semantic_key": "opening beat", "trigger": "scene begins", "due_at": None, "status": "pending", "consequence": "pressure starts", "hook": False, "probability": None})
+        return data
+
     def test_legacy_directive_fields_are_ignored(self) -> None:
         # 指令契约已从状态模型移除；历史存档中残留的 directives 字段与
         # directive_priority_preserved 不参与校验，旧档仍可通过。
@@ -152,6 +164,16 @@ class ValidateStateTests(unittest.TestCase):
         }]
         data["checkpoint"]["invariants"]["directive_priority_preserved"] = True
         self.assertEqual([], VALIDATOR.validate_data(data))
+
+    def test_opening_rejects_new_directives(self) -> None:
+        data = self._opening_ready(valid_save())
+        data["directives"] = [{
+            "id": "directive-001", "raw": "do this", "kind": "action",
+            "required_outcome": "done", "protected_details": [], "adaptation_scope": ["scene"],
+            "deadline": "current_turn", "status": "fulfilled", "created_turn": 1,
+            "event_id": None, "resolution": "done", "block_code": None,
+        }]
+        self.assertTrue(any("must not write directives" in error for error in VALIDATOR.validate_data(data, "opening")))
 
     def test_event_sources_pending_due_and_probability(self) -> None:
         self.assert_invalid(lambda data: data["events"][0].update(source="turn-3"), "legal 'type:id'")

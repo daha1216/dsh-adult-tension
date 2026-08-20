@@ -220,6 +220,44 @@ class RollOpeningTests(unittest.TestCase):
             code = MOD.main(["--seed", "-1"])
         self.assertEqual(code, 2)
 
+    def test_scene_action_buckets_exist(self) -> None:
+        self.assertTrue(self.pools["场景动作·靠近"])
+        self.assertTrue(self.pools["场景动作·交易"])
+        self.assertTrue(self.pools["玩家化身轴"]["称谓"])
+
+    def test_scene_action_defaults_to_approach_bucket(self) -> None:
+        for seed in range(24):
+            roll = MOD.build_roll(self.pools, seed)
+            self.assertIn(roll["场景动作"], self.pools["场景动作·靠近"], roll["场景动作"])
+
+    def test_lock_can_use_trade_scene_action(self) -> None:
+        item = self.pools["场景动作·交易"][0]
+        roll = MOD.build_roll(self.pools, 1, locks={"场景动作": item})
+        self.assertEqual(item, roll["场景动作"])
+
+    def test_table_mode_does_not_stack_leverage_engines(self) -> None:
+        for seed in range(40):
+            roll = MOD.build_roll(self.pools, seed)
+            engines = {part.strip() for part in roll["张力引擎"].split("、") if part.strip()}
+            self.assertFalse(engines <= MOD.LEVERAGE_ENGINES and len(engines) == 2, roll["张力引擎"])
+
+    def test_lock_may_stack_leverage_engines(self) -> None:
+        roll = MOD.build_roll(self.pools, 1, locks={"张力引擎": "债务压力、第三方施压"})
+        self.assertEqual("债务压力、第三方施压", roll["张力引擎"])
+
+    def test_player_high_avoids_leverage_situation(self) -> None:
+        for seed in range(24):
+            roll = MOD.build_roll(self.pools, seed, locks={"权力结构": "player_high"})
+            self.assertNotIn(roll["处境"], MOD.SITUATION_LEVERAGE, roll["处境"])
+
+    def test_player_avatar_axes_present(self) -> None:
+        roll = MOD.build_roll(self.pools, 3)
+        self.assertIn(roll["玩家称谓"], self.pools["玩家化身轴"]["称谓"])
+        self.assertIn(roll["玩家年龄段"], self.pools["玩家化身轴"]["年龄段"])
+        self.assertIn(roll["玩家社会位置"], self.pools["玩家化身轴"]["社会位置"])
+        self.assertIn("未决动作须落在非交易靠近", roll["开局约束"])
+        self.assertEqual(roll["protocol_version"], "opening-roll/v3")
+
 
 if __name__ == "__main__":
     unittest.main()
