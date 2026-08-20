@@ -109,6 +109,45 @@ class RollOpeningTests(unittest.TestCase):
         with self.assertRaises(MOD.AnchorError):
             MOD.build_roll(self.pools, 1, locks={"时代": "表外时代"})
 
+    def test_lock_single_tension_engine_completes_to_two_distinct(self) -> None:
+        roll = MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯"})
+        engines = [part.strip() for part in roll["张力引擎"].split("、")]
+        self.assertEqual(2, len(engines))
+        self.assertIn("情感拉扯", engines)
+        self.assertEqual(len(set(engines)), 2)
+        for engine in engines:
+            self.assertIn(engine, self.pools["张力引擎"], engine)
+
+    def test_lock_double_tension_engine_preserved(self) -> None:
+        roll = MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、时限逼近"})
+        self.assertEqual("情感拉扯、时限逼近", roll["张力引擎"])
+        roll = MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯,组织更迭"})
+        self.assertEqual("情感拉扯、组织更迭", roll["张力引擎"])
+
+    def test_lock_duplicate_tension_engine_rejected(self) -> None:
+        with self.assertRaises(MOD.AnchorError):
+            MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、情感拉扯"})
+
+    def test_lock_tension_engine_out_of_pool_rejected(self) -> None:
+        with self.assertRaises(MOD.AnchorError):
+            MOD.build_roll(self.pools, 7, locks={"张力引擎": "表外引擎"})
+        with self.assertRaises(MOD.AnchorError):
+            MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、表外引擎"})
+
+    def test_lock_tension_engine_too_many_values_rejected(self) -> None:
+        with self.assertRaises(MOD.AnchorError):
+            MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、时限逼近、名声保卫"})
+
+    def test_all_custom_tension_engine_custom_completes_to_two(self) -> None:
+        roll = MOD.build_roll(self.pools, 7, mode="all_custom", custom={"张力引擎": "自定义引擎"})
+        engines = [part.strip() for part in roll["张力引擎"].split("、")]
+        self.assertEqual(2, len(engines))
+        self.assertIn("自定义引擎", engines)
+        self.assertEqual(len(set(engines)), 2)
+        roll = MOD.build_roll(self.pools, 7, mode="all_custom",
+                              custom={"张力引擎": "自定义引擎A、自定义引擎B"})
+        self.assertEqual("自定义引擎A、自定义引擎B", roll["张力引擎"])
+
     def test_realism_aesthetic_skips_flavor_and_quirk(self) -> None:
         roll = MOD.build_roll(self.pools, 1, locks={"美学基调": "写实文学"})
         self.assertEqual(roll["表层风味"], "—")

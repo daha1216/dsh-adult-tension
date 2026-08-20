@@ -51,6 +51,10 @@ CUSTOM_KEYS = {
     "场景动作", "身份族", "处境", "核心价值", "压力策略", "关系姿态",
 }
 LOCKABLE_KEYS = set(CUSTOM_KEYS) | {"美学基调", "权力结构", "反差轴", "配角功能"}
+# 多值字段：lock/custom 值允许顿号或逗号分隔多项，每项必须来自对应解析池；
+# 少于规定数量时自动从池中补抽，保证最终数量与互不相同（如张力引擎恒为两项）。
+MULTI_LOCK_KEYS = {"张力引擎"}
+MULTI_SEPARATOR = re.compile(r"[、，,]")
 MODE_LABELS = {"table": "表内", "all_custom": "表外全随机", "force_table": "强制表内"}
 POWER_STRUCTURES = {"player_high", "npc_high", "equal", "switchable"}
 TWIST_CATEGORIES = ("信息类", "人事类", "资源类", "制度类", "时限类", "关系类", "意外类")
@@ -298,6 +302,28 @@ def _draw_distinct(rng: random.Random, entries: list[dict[str, str]],
     return picks
 
 
+def _combine_multi(key: str, raw: str, pool: list[str], count: int,
+                   rng: random.Random) -> str:
+    """把多值字段（如张力引擎）的 lock/custom 值规范化为恰好 count 项。
+
+    - 值按顿号/逗号拆分；
+    - 超过 count 项或含重复项报错；
+    - 少于 count 项时，从池中排除已锁定项后补抽到 count，保证互不相同。
+    """
+    items = [part.strip() for part in MULTI_SEPARATOR.split(raw) if part.strip()]
+    if not items:
+        raise AnchorError(f"{key} 的值不能为空：{raw!r}")
+    if len(items) > count:
+        raise AnchorError(f"{key} 最多 {count} 项，收到 {len(items)} 项")
+    if len(set(items)) != len(items):
+        raise AnchorError(f"{key} 的取值不能重复：{raw!r}")
+    if len(items) == count:
+        return "、".join(items)
+    remaining = [item for item in pool if item not in items]
+    picks = items + rng.sample(remaining, count - len(items))
+    return "、".join(picks)
+
+
 def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
                locks: dict[str, str] | None = None,
                custom: dict[str, str] | None = None) -> dict[str, Any]:
@@ -335,7 +361,14 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     }
     if mode in {"table", "force_table"}:
         for key, value in locks.items():
-            if value not in valid_lock_values[key]:
+            if key in MULTI_LOCK_KEYS:
+                parts = [part.strip() for part in MULTI_SEPARATOR.split(value) if part.strip()]
+                if not parts:
+                    raise AnchorError(f"lock 字段 {key} 的值不能为空：{value!r}")
+                for part in parts:
+                    if part not in valid_lock_values[key]:
+                        raise AnchorError(f"lock 值不在解析后的 {key} 表内：{part!r}")
+            elif value not in valid_lock_values[key]:
                 raise AnchorError(f"lock 值不在解析后的 {key} 表内：{value!r}")
     rng = random.Random(seed)
     roll: dict[str, Any] = {"protocol_version": PROTOCOL_VERSION, "seed": seed, "mode": mode}
@@ -351,10 +384,14 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
 
     def draw_many(key: str, pool: list[str], count: int) -> None:
         if key in locks:
-            roll[key] = locks[key]
+            roll[key] = _combine_multi(key, locks[key], pool, count, rng)
             return
         if mode == "all_custom" and key in CUSTOM_KEYS:
-            roll[key] = custom.get(key, "custom_required")
+            raw = custom.get(key, "custom_required")
+            if raw == "custom_required":
+                roll[key] = raw
+            else:
+                roll[key] = _combine_multi(key, raw, pool, count, rng)
             return
         picks = rng.sample(pool, min(count, len(pool)))
         roll[key] = "、".join(picks)

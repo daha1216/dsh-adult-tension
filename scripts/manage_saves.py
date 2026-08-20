@@ -1,11 +1,23 @@
 #!/usr/bin/env python3
-"""Manage isolated, versioned, and branchable v3 narrative save slots."""
+"""Manage named v3 narrative save slots with atomic writes.
+
+简化后的存档后端：玩家只面对「保存 <名称> / 载入 <名称> / 列出存档」三个
+命令。本脚本提供命名槽位的初始化、列出、载入与原子保存；槽位目录内的
+`.write.lock` 只用于保护存储提交（进程锁），不涉及回合号、事件 ID、
+边界、同意或叙事主权。
+
+冲突防护：载入时记录 manifest 的 `updated_at`，保存时携带
+`--expected-updated-at`；槽位已被其他窗口写过后保存被拒绝，由上层用
+自然语言给出「读取最新版本 / 另存为分支 / 取消」的提示。
+
+已删除的历史能力（共享访问模式、租约、revision/hash CAS、分支）不再
+提供；旧版 manifest 的多余字段会被忽略，不影响读取。
+"""
 
 from __future__ import annotations
 
 import argparse
 import datetime as dt
-import hashlib
 import importlib.util
 import json
 import os
@@ -22,7 +34,9 @@ except ImportError:  # pragma: no cover
 
 
 SLOT_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$")
-DEFAULT_LEASE_SECONDS = 120
+# 新 manifest 只保留这四个字段；旧版 manifest 的 revision/state_sha256/
+# access_mode/lease 等历史字段在读取时被剥离，保存后不再写回。
+MANIFEST_KEYS = ("manifest_version", "slot", "created_at", "updated_at")
 
 
 class SaveError(RuntimeError):
@@ -34,17 +48,7 @@ def utc_now() -> dt.datetime:
 
 
 def iso_now() -> str:
-    return utc_now().isoformat(timespec="seconds")
-
-
-def parse_time(value: Any) -> dt.datetime | None:
-    if not isinstance(value, str) or not value.strip():
-        return None
-    try:
-        parsed = dt.datetime.fromisoformat(value)
-    except ValueError:
-        return None
-    return parsed if parsed.tzinfo else None
+    return utc_now().isoformat(timespec="microseconds")
 
 
 def slot_name(value: str) -> str:
@@ -129,7 +133,6 @@ class SaveStore:
     def __init__(self, root: Path) -> None:
         self.root = root
         self.slots = root / "slots"
-        self.index_path = root / "index.yaml"
 
     def slot_dir(self, slot: str) -> Path:
         return self.slots / slot_name(slot)
@@ -150,7 +153,7 @@ class SaveStore:
         manifest = load_yaml(path)
         if not isinstance(manifest, dict):
             raise SaveError(f"manifest is not a mapping: {path}")
-        return manifest
+        return {key: manifest.get(key) for key in MANIFEST_KEYS}
 
     def _read_state(self, slot: str) -> dict[str, Any]:
         path = self.state_path(slot)
@@ -173,71 +176,16 @@ class SaveStore:
             raise SaveError("state validation failed: " + "; ".join(errors))
 
     @staticmethod
-    def state_hash(state: dict[str, Any]) -> str:
-        payload = yaml_text(state).encode("utf-8")
-        return hashlib.sha256(payload).hexdigest()
-
-    @staticmethod
-    def _new_manifest(
-        slot: str,
-        state: dict[str, Any],
-        *,
-        access_mode: str,
-        session_id: str | None,
-        parent: dict[str, Any] | None = None,
-    ) -> dict[str, Any]:
-        if access_mode not in {"isolated", "shared"}:
-            raise SaveError("access_mode must be isolated or shared")
-        state_hash = SaveStore.state_hash(state)
-        manifest: dict[str, Any] = {
+    def _new_manifest(slot: str) -> dict[str, Any]:
+        now = iso_now()
+        return {
             "manifest_version": 1,
-            "archive_id": f"adult-tension-{slot}",
             "slot": slot,
-            "branch_id": slot,
-            "revision": 0,
-            "state_sha256": state_hash,
-            "parent_revision": None,
-            "parent_archive": None,
-            "access_mode": access_mode,
-            "created_at": iso_now(),
-            "updated_at": iso_now(),
-            "writer_session_id": session_id,
-            "lease": {"owner": None, "expires_at": None},
+            "created_at": now,
+            "updated_at": now,
         }
-        if parent:
-            manifest["parent_archive"] = parent["archive_id"]
-            manifest["parent_revision"] = parent["revision"]
-        return manifest
 
-    def _write_index(self) -> None:
-        with FileLock(self.root / ".index.lock"):
-            entries: list[dict[str, Any]] = []
-            if self.slots.exists():
-                for path in sorted(self.slots.iterdir()):
-                    if not path.is_dir() or not (path / "manifest.yaml").exists():
-                        continue
-                    try:
-                        manifest = self._read_manifest(path.name)
-                    except SaveError:
-                        continue
-                    entries.append({
-                        "slot": path.name,
-                        "archive_id": manifest.get("archive_id"),
-                        "branch_id": manifest.get("branch_id"),
-                        "revision": manifest.get("revision"),
-                        "access_mode": manifest.get("access_mode"),
-                        "updated_at": manifest.get("updated_at"),
-                    })
-            write_atomic(self.index_path, yaml_text({"index_version": 1, "slots": entries}))
-
-    def init_slot(
-        self,
-        slot: str,
-        source: Path,
-        *,
-        access_mode: str = "isolated",
-        session_id: str | None = None,
-    ) -> dict[str, Any]:
+    def init_slot(self, slot: str, source: Path) -> dict[str, Any]:
         slot = slot_name(slot)
         if self.slot_dir(slot).exists():
             raise SaveError(f"slot already exists: {slot}")
@@ -245,12 +193,10 @@ class SaveStore:
         if not isinstance(state, dict):
             raise SaveError("source state must be a mapping")
         self._validate_state(state)
-        manifest = self._new_manifest(slot, state, access_mode=access_mode, session_id=session_id)
         self.state_path(slot).parent.mkdir(parents=True, exist_ok=False)
         write_atomic(self.state_path(slot), yaml_text(state))
-        write_atomic(self.manifest_path(slot), yaml_text(manifest))
-        self._write_index()
-        return manifest
+        write_atomic(self.manifest_path(slot), yaml_text(self._new_manifest(slot)))
+        return self._read_manifest(slot)
 
     def list_slots(self) -> list[dict[str, Any]]:
         result: list[dict[str, Any]] = []
@@ -258,43 +204,24 @@ class SaveStore:
             return result
         for path in sorted(self.slots.iterdir()):
             if path.is_dir() and (path / "manifest.yaml").exists():
-                result.append(self._read_manifest(path.name))
+                try:
+                    result.append(self._read_manifest(path.name))
+                except SaveError:
+                    continue
         return result
 
     def load_slot(self, slot: str) -> tuple[dict[str, Any], dict[str, Any]]:
         manifest = self._read_manifest(slot)
         state = self._read_state(slot)
-        actual_hash = self.state_hash(state)
-        if actual_hash != manifest.get("state_sha256"):
-            raise SaveError(f"state hash mismatch for slot {slot}; refuse to load")
         self._validate_state(state)
         return state, manifest
-
-    @staticmethod
-    def _lease_active(manifest: dict[str, Any], now: dt.datetime | None = None) -> bool:
-        lease = manifest.get("lease")
-        if not isinstance(lease, dict) or not lease.get("owner"):
-            return False
-        expiry = parse_time(lease.get("expires_at"))
-        return expiry is not None and expiry > (now or utc_now())
-
-    def _check_writer(self, manifest: dict[str, Any], session_id: str | None) -> None:
-        if manifest.get("access_mode") != "shared":
-            return
-        if not session_id:
-            raise SaveError("shared slot writes require --session-id")
-        lease = manifest.get("lease")
-        if not self._lease_active(manifest) or not isinstance(lease, dict) or lease.get("owner") != session_id:
-            raise SaveError("shared slot is not leased to this session; acquire it first")
 
     def save_slot(
         self,
         slot: str,
         state_source: Path,
         *,
-        expected_revision: int,
-        expected_hash: str | None = None,
-        session_id: str | None = None,
+        expected_updated_at: str | None = None,
     ) -> dict[str, Any]:
         candidate = load_yaml(state_source)
         if not isinstance(candidate, dict):
@@ -302,89 +229,16 @@ class SaveStore:
         self._validate_state(candidate)
         with FileLock(self.lock_path(slot)):
             manifest = self._read_manifest(slot)
-            current_revision = manifest.get("revision")
-            current_hash = manifest.get("state_sha256")
-            if current_revision != expected_revision:
-                raise SaveError(f"write conflict: expected revision {expected_revision}, current revision {current_revision}")
-            if expected_hash is not None and current_hash != expected_hash:
-                raise SaveError("write conflict: expected state hash does not match current state")
-            self._check_writer(manifest, session_id)
-            new_hash = self.state_hash(candidate)
-            next_revision = expected_revision + 1
+            if expected_updated_at is not None and manifest.get("updated_at") != expected_updated_at:
+                raise SaveError(
+                    "write conflict: slot was modified after load; reload the latest version "
+                    "or save under a new name"
+                )
             updated = dict(manifest)
-            updated.update({
-                "revision": next_revision,
-                "state_sha256": new_hash,
-                "parent_revision": expected_revision,
-                "updated_at": iso_now(),
-                "writer_session_id": session_id,
-            })
+            updated["updated_at"] = iso_now()
             write_atomic(self.state_path(slot), yaml_text(candidate))
             write_atomic(self.manifest_path(slot), yaml_text(updated))
-            self._write_index()
             return updated
-
-    def set_access_mode(self, slot: str, access_mode: str) -> dict[str, Any]:
-        if access_mode not in {"isolated", "shared"}:
-            raise SaveError("access_mode must be isolated or shared")
-        with FileLock(self.lock_path(slot)):
-            manifest = self._read_manifest(slot)
-            if self._lease_active(manifest):
-                raise SaveError("cannot change access mode while a shared lease is active")
-            manifest["access_mode"] = access_mode
-            manifest["updated_at"] = iso_now()
-            if access_mode == "isolated":
-                manifest["lease"] = {"owner": None, "expires_at": None}
-            write_atomic(self.manifest_path(slot), yaml_text(manifest))
-            self._write_index()
-            return manifest
-
-    def acquire(self, slot: str, session_id: str, lease_seconds: int = DEFAULT_LEASE_SECONDS) -> dict[str, Any]:
-        if not session_id.strip():
-            raise SaveError("session_id must not be empty")
-        if lease_seconds <= 0:
-            raise SaveError("lease_seconds must be positive")
-        with FileLock(self.lock_path(slot)):
-            manifest = self._read_manifest(slot)
-            if manifest.get("access_mode") != "shared":
-                raise SaveError("only shared slots use leases")
-            lease = manifest.setdefault("lease", {"owner": None, "expires_at": None})
-            if self._lease_active(manifest) and lease.get("owner") != session_id:
-                raise SaveError(f"shared slot is leased to session {lease.get('owner')}")
-            lease["owner"] = session_id
-            lease["expires_at"] = (utc_now() + dt.timedelta(seconds=lease_seconds)).isoformat(timespec="seconds")
-            manifest["updated_at"] = iso_now()
-            manifest["writer_session_id"] = session_id
-            write_atomic(self.manifest_path(slot), yaml_text(manifest))
-            self._write_index()
-            return manifest
-
-    def release(self, slot: str, session_id: str) -> dict[str, Any]:
-        with FileLock(self.lock_path(slot)):
-            manifest = self._read_manifest(slot)
-            lease = manifest.get("lease")
-            if not isinstance(lease, dict) or lease.get("owner") != session_id:
-                raise SaveError("session does not own the shared slot lease")
-            lease["owner"] = None
-            lease["expires_at"] = None
-            manifest["updated_at"] = iso_now()
-            write_atomic(self.manifest_path(slot), yaml_text(manifest))
-            self._write_index()
-            return manifest
-
-    def branch(self, source_slot: str, new_slot: str, *, access_mode: str = "isolated", session_id: str | None = None) -> dict[str, Any]:
-        new_slot = slot_name(new_slot)
-        if self.slot_dir(new_slot).exists():
-            raise SaveError(f"slot already exists: {new_slot}")
-        with FileLock(self.lock_path(source_slot)):
-            state, parent = self.load_slot(source_slot)
-            self._validate_state(state)
-            manifest = self._new_manifest(new_slot, state, access_mode=access_mode, session_id=session_id, parent=parent)
-            self.state_path(new_slot).parent.mkdir(parents=True, exist_ok=False)
-            write_atomic(self.state_path(new_slot), yaml_text(state))
-            write_atomic(self.manifest_path(new_slot), yaml_text(manifest))
-            self._write_index()
-            return manifest
 
 
 def print_json(value: Any) -> None:
@@ -399,39 +253,17 @@ def build_parser() -> argparse.ArgumentParser:
     init = sub.add_parser("init", help="create a slot from a v3 state")
     init.add_argument("slot")
     init.add_argument("source", type=Path)
-    init.add_argument("--access-mode", choices=["isolated", "shared"], default="isolated")
-    init.add_argument("--session-id")
 
     sub.add_parser("list", help="list slots")
 
     load = sub.add_parser("load", help="validate and print a slot manifest")
     load.add_argument("slot")
 
-    save = sub.add_parser("save", help="CAS-save a candidate v3 state")
+    save = sub.add_parser("save", help="atomically save a candidate v3 state")
     save.add_argument("slot")
     save.add_argument("state_source", type=Path)
-    save.add_argument("--expected-revision", type=int, required=True)
-    save.add_argument("--expected-hash")
-    save.add_argument("--session-id")
-
-    branch = sub.add_parser("branch", help="create a slot from the current source slot")
-    branch.add_argument("source_slot")
-    branch.add_argument("new_slot")
-    branch.add_argument("--access-mode", choices=["isolated", "shared"], default="isolated")
-    branch.add_argument("--session-id")
-
-    mode = sub.add_parser("mode", help="set isolated or shared access mode")
-    mode.add_argument("slot")
-    mode.add_argument("access_mode", choices=["isolated", "shared"])
-
-    acquire = sub.add_parser("acquire", help="acquire or renew a shared-slot lease")
-    acquire.add_argument("slot")
-    acquire.add_argument("session_id")
-    acquire.add_argument("--lease-seconds", type=int, default=DEFAULT_LEASE_SECONDS)
-
-    release = sub.add_parser("release", help="release a shared-slot lease")
-    release.add_argument("slot")
-    release.add_argument("session_id")
+    save.add_argument("--expected-updated-at", default=None,
+                      help="manifest.updated_at observed at load; mismatch refuses the write")
     return parser
 
 
@@ -443,22 +275,15 @@ def main(argv: list[str] | None = None) -> int:
     store = SaveStore(args.root)
     try:
         if args.command == "init":
-            print_json(store.init_slot(args.slot, args.source, access_mode=args.access_mode, session_id=args.session_id))
+            print_json(store.init_slot(args.slot, args.source))
         elif args.command == "list":
             print_json(store.list_slots())
         elif args.command == "load":
             _, manifest = store.load_slot(args.slot)
             print_json(manifest)
         elif args.command == "save":
-            print_json(store.save_slot(args.slot, args.state_source, expected_revision=args.expected_revision, expected_hash=args.expected_hash, session_id=args.session_id))
-        elif args.command == "branch":
-            print_json(store.branch(args.source_slot, args.new_slot, access_mode=args.access_mode, session_id=args.session_id))
-        elif args.command == "mode":
-            print_json(store.set_access_mode(args.slot, args.access_mode))
-        elif args.command == "acquire":
-            print_json(store.acquire(args.slot, args.session_id, args.lease_seconds))
-        elif args.command == "release":
-            print_json(store.release(args.slot, args.session_id))
+            print_json(store.save_slot(args.slot, args.state_source,
+                                        expected_updated_at=args.expected_updated_at))
         return 0
     except SaveError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)

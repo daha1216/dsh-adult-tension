@@ -1,0 +1,170 @@
+save_version: 3
+meta:
+  turn: 1
+  mode: reliable
+  tier: 1
+  simulation: true
+  safety_state: running
+  power_structure: switchable
+world:
+  clock: '2026-08-21T03:44:13+08:00'
+  previous_clock: '2026-08-21T03:44:13+08:00'
+  delta_t: 0
+  delta_human: ''
+  constants:
+  - 这座城里声誉即资本，白纸条款是给翻检那天准备的。
+  tension_engines:
+  - 情感拉扯
+  - 时限逼近
+  setting_shell:
+    type: 当代都市
+    place: 列车车厢
+    rule: 契约至上
+    pressure: 名声受损
+  pressure_seeds:
+    immediate: 名声受损
+    near_event_id: evt-002
+    far_event_id: evt-003
+boundaries: []
+consent:
+  scene_id: scene-001
+  location: 宁江大厦·三十一层会客室·夜
+  participants:
+  - player-001
+  - npc-001
+  grants: []
+player:
+  id: player-001
+  name: 顾北
+  age: 29
+  identity: 独立声誉风险顾问
+  location: 宁江大厦·三十一层会客室·夜
+  baseline: 话少，习惯先把对方的筹码盘清楚。
+  resources:
+  - 两家媒体的延迟发稿权
+  knowledge:
+  - 对手手里有账目副本
+  reputation: 不站队但能改舆论走向
+player_naming_audit:
+  chosen: 顾北
+  source: 角色设计.md
+  approved_turn: 1
+npcs:
+- id: npc-001
+  name: 沈若
+  age: 31
+  role_level: main
+  identity: 并购部董事总经理
+  location: 宁江大厦·三十一层会客室·夜
+  core_personality: 外冷内热，怕欠人情，把请求做成交易
+  pressure_strategy: 正面解决
+  voice_filter: 表层敬语过剩，里层直白；失控时句子先碎
+  goal: 在死线前压住流言且不欠下人情
+  boundary: 不用身体换声誉
+  withdrawal_signal: 把口罩戴严、改口此事到此
+  emotion: 表面端着，指节发白
+  resources:
+  - 反证U盘
+  knowledge:
+  - 衡浦在散风
+  recent_memories:
+  - 电梯里她确认过口罩与领口
+  signature: 几乎不摘口罩
+  autonomy:
+    last_turn: null
+    recent_turns: []
+    cooldown_until: 0
+  identity_profile:
+    role: 并购部董事总经理
+  situation:
+    type: 审查将至
+  decision_card:
+    goal: 压住流言
+  sexuality_profile:
+    baseline: private
+  sexuality_development:
+    trend: stable
+  naming_audit:
+    chosen: 沈若
+    source: 角色设计.md
+    approved_turn: 1
+relationships:
+- source: player-001
+  target: npc-001
+  type: profession
+  channel: direct
+  trust: 0
+  last_updated_turn: 1
+  opening:
+    status: true
+    covered_turn: 1
+events:
+- id: evt-001
+  semantic_key: opening-immediate-evt-001
+  source: system:opening
+  created_turn: 1
+  kind: immediate
+  trigger: immediate trigger description
+  due_at: null
+  status: pending
+  consequence: immediate consequence
+  hook: false
+  probability: null
+- id: evt-002
+  semantic_key: opening-near-evt-002
+  source: system:opening
+  created_turn: 1
+  kind: near
+  trigger: near trigger description
+  due_at: null
+  status: pending
+  consequence: near consequence
+  hook: false
+  probability: null
+- id: evt-003
+  semantic_key: opening-far-evt-003
+  source: system:opening
+  created_turn: 1
+  kind: far
+  trigger: far trigger description
+  due_at: null
+  status: pending
+  consequence: far consequence
+  hook: true
+  probability: null
+checkpoint:
+  last_full_turn: 1
+  changed: []
+  next_full_turn: 6
+  force_full: false
+  force_reason: null
+  invariants:
+    age_verified: true
+    player_control_preserved: true
+resolved_summary: []
+current_node:
+  scene_id: scene-001
+  location: 宁江大厦·三十一层会客室·夜
+  participants:
+  - player-001
+  - npc-001
+  situation:
+    trigger: 会面开始
+    pressure: 名声受损
+    immediate_objective: 谈成交易
+    deadline: null
+    unresolved_choice: 是否接下这单
+    knowledge_gap:
+      player_knows: []
+      npc_knows: []
+      both_mistake: []
+    exits:
+      available: true
+      cost: null
+      blocked_by: null
+    consequence:
+      immediate: ''
+      near_term: ''
+  last_committed_result: 门已关上
+  unresolved_action: 沈若正在斟酌如何开口
+  natural_next_pressure: 死线在逼近

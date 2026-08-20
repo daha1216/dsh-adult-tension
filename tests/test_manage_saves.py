@@ -29,25 +29,25 @@ class ManageSavesTests(unittest.TestCase):
         self.temp.cleanup()
 
     def test_init_and_load_preserve_v3_state(self) -> None:
-        manifest = self.store.init_slot("main", self.source, session_id="session-a")
+        manifest = self.store.init_slot("main", self.source)
         state, loaded = self.store.load_slot("main")
         self.assertEqual(3, state["save_version"])
-        self.assertEqual(0, manifest["revision"])
-        self.assertEqual(manifest["state_sha256"], loaded["state_sha256"])
+        self.assertEqual("main", loaded["slot"])
+        self.assertEqual(manifest["updated_at"], loaded["updated_at"])
         self.assertEqual(["main"], [item["slot"] for item in self.store.list_slots()])
 
-    def test_cas_rejects_stale_writer(self) -> None:
-        self.store.init_slot("main", self.source)
+    def test_save_rejects_stale_updated_at(self) -> None:
+        manifest = self.store.init_slot("main", self.source)
         candidate = copy.deepcopy(valid_save())
         candidate["meta"]["turn"] = 6
         candidate_source = Path(self.temp.name) / "candidate.yaml"
         candidate_source.write_text(MANAGE.yaml_text(candidate), encoding="utf-8")
-        self.store.save_slot("main", candidate_source, expected_revision=0)
+        self.store.save_slot("main", candidate_source, expected_updated_at=manifest["updated_at"])
         with self.assertRaisesRegex(MANAGE.SaveError, "write conflict"):
-            self.store.save_slot("main", candidate_source, expected_revision=0)
+            self.store.save_slot("main", candidate_source, expected_updated_at=manifest["updated_at"])
 
     def test_two_concurrent_writers_only_one_commits(self) -> None:
-        self.store.init_slot("main", self.source)
+        manifest = self.store.init_slot("main", self.source)
         candidate = copy.deepcopy(valid_save())
         candidate["meta"]["turn"] = 6
         candidate_source = Path(self.temp.name) / "candidate.yaml"
@@ -58,7 +58,7 @@ class ManageSavesTests(unittest.TestCase):
         def write_once() -> None:
             barrier.wait()
             try:
-                self.store.save_slot("main", candidate_source, expected_revision=0)
+                self.store.save_slot("main", candidate_source, expected_updated_at=manifest["updated_at"])
                 results.append("ok")
             except MANAGE.SaveError:
                 results.append("conflict")
@@ -69,42 +69,23 @@ class ManageSavesTests(unittest.TestCase):
         for thread in threads:
             thread.join()
         self.assertEqual(["conflict", "ok"], sorted(results))
-        _, manifest = self.store.load_slot("main")
-        self.assertEqual(1, manifest["revision"])
+        _, loaded = self.store.load_slot("main")
+        self.assertNotEqual(manifest["updated_at"], loaded["updated_at"])
 
-    def test_branch_starts_from_exact_parent_revision(self) -> None:
-        parent = self.store.init_slot("main", self.source)
-        branch = self.store.branch("main", "alternate")
-        self.assertEqual(parent["archive_id"], branch["parent_archive"])
-        self.assertEqual(parent["revision"], branch["parent_revision"])
-        state, loaded = self.store.load_slot("alternate")
-        self.assertEqual(valid_save(), state)
-        self.assertEqual(branch["state_sha256"], loaded["state_sha256"])
-
-    def test_access_mode_can_be_changed_without_active_lease(self) -> None:
+    def test_duplicate_init_is_rejected(self) -> None:
         self.store.init_slot("main", self.source)
-        manifest = self.store.set_access_mode("main", "shared")
-        self.assertEqual("shared", manifest["access_mode"])
-        self.store.acquire("main", "session-a")
-        with self.assertRaisesRegex(MANAGE.SaveError, "active"):
-            self.store.set_access_mode("main", "isolated")
-        self.store.release("main", "session-a")
-        manifest = self.store.set_access_mode("main", "isolated")
-        self.assertEqual("isolated", manifest["access_mode"])
+        with self.assertRaisesRegex(MANAGE.SaveError, "already exists"):
+            self.store.init_slot("main", self.source)
 
-    def test_shared_slot_requires_and_honors_lease(self) -> None:
-        self.store.init_slot("shared", self.source, access_mode="shared")
-        candidate = copy.deepcopy(valid_save())
-        candidate["meta"]["turn"] = 6
-        candidate_source = Path(self.temp.name) / "candidate.yaml"
-        candidate_source.write_text(MANAGE.yaml_text(candidate), encoding="utf-8")
-        with self.assertRaisesRegex(MANAGE.SaveError, "leased"):
-            self.store.save_slot("shared", candidate_source, expected_revision=0, session_id="session-a")
-        self.store.acquire("shared", "session-a")
-        self.store.save_slot("shared", candidate_source, expected_revision=0, session_id="session-a")
-        with self.assertRaisesRegex(MANAGE.SaveError, "leased"):
-            self.store.save_slot("shared", candidate_source, expected_revision=1, session_id="session-b")
-        self.store.release("shared", "session-a")
+    def test_list_returns_all_manifests(self) -> None:
+        self.store.init_slot("main", self.source)
+        second = Path(self.temp.name) / "second.yaml"
+        state = copy.deepcopy(valid_save())
+        state["meta"]["turn"] = 7
+        second.write_text(MANAGE.yaml_text(state), encoding="utf-8")
+        self.store.init_slot("branch-b", second)
+        slots = {item["slot"] for item in self.store.list_slots()}
+        self.assertEqual({"main", "branch-b"}, slots)
 
 
 if __name__ == "__main__":

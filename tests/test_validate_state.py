@@ -42,8 +42,7 @@ def valid_save() -> dict:
             {"id": "evt-near", "source": "turn:3", "created_turn": 3, "kind": "near", "semantic_key": "meeting reply", "trigger": "meeting ends", "due_at": None, "status": "pending", "consequence": "reply due", "hook": False, "probability": None},
             {"id": "evt-far", "source": "world:initial", "created_turn": 0, "kind": "far", "semantic_key": "board review", "trigger": "board convenes", "due_at": "2026-07-15T20:00:00+08:00", "status": "pending", "consequence": "review", "hook": True, "probability": None},
         ],
-        "directives": [],
-        "checkpoint": {"last_full_turn": 5, "changed": [], "next_full_turn": 10, "force_full": False, "force_reason": None, "invariants": {"age_verified": True, "player_control_preserved": True, "directive_priority_preserved": True}},
+        "checkpoint": {"last_full_turn": 5, "changed": [], "next_full_turn": 10, "force_full": False, "force_reason": None, "invariants": {"age_verified": True, "player_control_preserved": True}},
         "resolved_summary": [],
         "current_node": {
             "scene_id": "scene-001", "location": "office", "participants": ["player-001", "npc-001"],
@@ -96,14 +95,14 @@ class ValidateStateTests(unittest.TestCase):
 
     def test_opening_requires_player_and_main_relationship_coverage(self) -> None:
         data = copy.deepcopy(valid_save())
-        data["meta"]["turn"] = 0
+        data["meta"]["turn"] = 1
         for event in data["events"]:
-            event["created_turn"] = 0
-        data["relationships"][0]["last_updated_turn"] = 0
-        data["checkpoint"].update(last_full_turn=0, next_full_turn=5)
+            event["created_turn"] = 1
+        data["relationships"][0]["last_updated_turn"] = 1
+        data["checkpoint"].update(last_full_turn=1, next_full_turn=6)
         data["npcs"][0]["autonomy"] = {"last_turn": None, "recent_turns": [], "cooldown_until": 0}
-        data["consent"]["grants"][0].update(granted_turn=0, last_checked_turn=0)
-        data["events"].append({"id": "evt-immediate", "source": "system:opening", "created_turn": 0, "kind": "immediate", "semantic_key": "opening beat", "trigger": "scene begins", "due_at": None, "status": "pending", "consequence": "pressure starts", "hook": False, "probability": None})
+        data["consent"]["grants"][0].update(granted_turn=1, last_checked_turn=1)
+        data["events"].append({"id": "evt-immediate", "source": "system:opening", "created_turn": 1, "kind": "immediate", "semantic_key": "opening beat", "trigger": "scene begins", "due_at": None, "status": "pending", "consequence": "pressure starts", "hook": False, "probability": None})
         second = copy.deepcopy(data["npcs"][0])
         second.update(id="npc-002", name="NPC2")
         data["npcs"].append(second)
@@ -141,6 +140,19 @@ class ValidateStateTests(unittest.TestCase):
         data["checkpoint"].update(force_full=True, force_reason="schema migration")
         self.assertEqual([], VALIDATOR.validate_data(data))
 
+    def test_legacy_directive_fields_are_ignored(self) -> None:
+        # 指令契约已从状态模型移除；历史存档中残留的 directives 字段与
+        # directive_priority_preserved 不参与校验，旧档仍可通过。
+        data = valid_save()
+        data["directives"] = [{
+            "id": "directive-001", "raw": "do this", "kind": "action",
+            "required_outcome": "done", "protected_details": [], "adaptation_scope": ["scene"],
+            "deadline": "current_turn", "status": "fulfilled", "created_turn": 5,
+            "event_id": None, "resolution": "done", "block_code": None, "block_context": None,
+        }]
+        data["checkpoint"]["invariants"]["directive_priority_preserved"] = True
+        self.assertEqual([], VALIDATOR.validate_data(data))
+
     def test_event_sources_pending_due_and_probability(self) -> None:
         self.assert_invalid(lambda data: data["events"][0].update(source="turn-3"), "legal 'type:id'")
         self.assert_invalid(lambda data: data["events"][0].update(due_at="2026-07-14T19:00:00+08:00"), "must be later")
@@ -149,35 +161,20 @@ class ValidateStateTests(unittest.TestCase):
         data["events"].append({"id": "evt-prob", "source": "system:probability", "created_turn": 5, "kind": "probabilistic", "semantic_key": "chance outcome", "trigger": "roll", "due_at": None, "status": "pending", "consequence": "outcome varies", "hook": False, "probability": 0.25})
         self.assertEqual([], VALIDATOR.validate_data(data))
 
-    def test_pending_directive_binds_to_pending_event(self) -> None:
-        data = valid_save()
-        data["events"][0]["source"] = "directive:directive-001"
-        data["directives"] = [{"id": "directive-001", "raw": "do this", "kind": "action", "required_outcome": "done", "protected_details": [], "adaptation_scope": ["scene"], "deadline": "earliest_possible", "status": "pending", "created_turn": 5, "event_id": "evt-near", "resolution": None, "block_code": None, "block_context": None}]
-        self.assertEqual([], VALIDATOR.validate_data(data))
-        data["events"][0]["status"] = "resolved"
-        self.assertTrue(any("must reference a pending event" in error for error in VALIDATOR.validate_data(data)))
-
-    def test_blocked_directive_requires_structured_context(self) -> None:
-        data = valid_save()
-        data["directives"] = [{"id": "directive-001", "raw": "do this", "kind": "action", "required_outcome": "done", "protected_details": [], "adaptation_scope": ["scene"], "deadline": "current_turn", "status": "blocked", "created_turn": 5, "event_id": None, "resolution": "blocked", "block_code": "boundary_conflict", "block_context": {"reason": "boundary", "evidence": "boundary-001"}}]
-        self.assertEqual([], VALIDATOR.validate_data(data))
-        data["directives"][0]["block_context"] = None
-        self.assertTrue(any("block_context" in error for error in VALIDATOR.validate_data(data)))
-
     def test_resolved_summary_has_required_structure(self) -> None:
         self.assert_invalid(lambda data: data.update(resolved_summary=[{"event_id": "evt-near"}]), "resolved_summary[0].outcome")
 
-    def test_opening_profile_requires_initial_events_and_allows_missing_directives(self) -> None:
+    def test_opening_profile_requires_initial_events(self) -> None:
         data = valid_save()
-        data["meta"]["turn"] = 0
-        data.pop("directives")
+        data["meta"]["turn"] = 1
+        data.pop("directives", None)
         for event in data["events"]:
-            event["created_turn"] = 0
-        data["relationships"][0]["last_updated_turn"] = 0
-        data["checkpoint"].update(last_full_turn=0, next_full_turn=5)
+            event["created_turn"] = 1
+        data["relationships"][0]["last_updated_turn"] = 1
+        data["checkpoint"].update(last_full_turn=1, next_full_turn=6)
         data["npcs"][0]["autonomy"] = {"last_turn": None, "recent_turns": [], "cooldown_until": 0}
-        data["consent"]["grants"][0].update(granted_turn=0, last_checked_turn=0)
-        data["events"].append({"id": "evt-immediate", "source": "system:opening", "created_turn": 0, "kind": "immediate", "semantic_key": "opening beat", "trigger": "scene begins", "due_at": None, "status": "pending", "consequence": "pressure starts", "hook": False, "probability": None})
+        data["consent"]["grants"][0].update(granted_turn=1, last_checked_turn=1)
+        data["events"].append({"id": "evt-immediate", "source": "system:opening", "created_turn": 1, "kind": "immediate", "semantic_key": "opening beat", "trigger": "scene begins", "due_at": None, "status": "pending", "consequence": "pressure starts", "hook": False, "probability": None})
         self.assertEqual([], VALIDATOR.validate_data(data, "opening"))
         data["world"]["tension_engines"] = ["only one"]
         self.assertTrue(any("two distinct engines" in error for error in VALIDATOR.validate_data(data, "opening")))

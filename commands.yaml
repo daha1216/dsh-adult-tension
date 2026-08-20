@@ -1,0 +1,104 @@
+# 命令配置文件
+# 定义命令分类、别名和触发词
+
+command_categories:
+  meta:
+    name: 元指令
+    commands:
+      - triggers: [存档, 保存, save, s]
+        canonical: 存档
+        description: 输出完整 v3 YAML 存档
+      - triggers: [载入, 读档, load, l]
+        canonical: 载入存档
+        description: 读取并验证玩家提供的存档
+      - triggers: [查看状态, 状态, status]
+        canonical: 查看状态
+        description: 简短显示当前地点、参与者、暂停状态
+      - triggers: [状态+, status+]
+        canonical: 状态+
+        description: 显示状态 + 许可、待办、事件前 3 项
+      - triggers: [调试, debug]
+        canonical: 调试
+        description: 完整状态含关系数值、冷却、事件队列
+      - triggers: [帮助, 命令, 能做什么, help, h, "?"]
+        canonical: 帮助
+        description: 列出可用命令和行动句规则
+  
+  gameplay:
+    name: 游戏指令
+    commands:
+      - triggers: [继续, next, c, "..."]
+        canonical: 继续
+        description: 推进环境或 NPC 一个动作节拍
+      - triggers: [快进到, timeskip]
+        canonical: 快进到
+        description: 更新时间并追算
+      - triggers: [撤销, undo]
+        canonical: 撤销刚才的
+        description: 撤销最近事件
+  
+  boundary:
+    name: 边界管理
+    commands:
+      - triggers: [本局不碰, 硬边界, boundary]
+        canonical: 本局不碰
+        description: 新增 active 玩家硬边界
+      - triggers: [解除不碰, revoke]
+        canonical: 解除不碰
+        description: 将对应边界改为 revoked
+      - triggers: [暂停, 安全词, pause]
+        canonical: 暂停
+        description: 设为 paused，停止亲密升级
+      - triggers: [解除暂停, 恢复场景, resume]
+        canonical: 解除暂停
+        description: 设为 running，恢复场景
+  
+  advanced:
+    name: 高级功能
+    commands:
+      - triggers: [说骚话, 别装了, 做自己, inner]
+        canonical: 说骚话
+        description: 目标角色切入里层语态
+      - triggers: [贴视角, 偷窥视角, pov on]
+        canonical: 贴视角
+        description: 开启内心可见模式
+      - triggers: [退出偷窥, 收回视角, pov off]
+        canonical: 退出偷窥
+        description: 关闭内心可见模式
+      - triggers: [冻结世界, sim off]
+        canonical: 冻结世界
+        description: 将 meta.simulation 设为 false
+      - triggers: [恢复世界, 恢复世界推演, sim on]
+        canonical: 恢复世界推演
+        description: 将 meta.simulation 设为 true
+      - triggers: [叙事助手 on, assistant on]
+        canonical: 叙事助手 on
+        description: 开启每回合后的叙事建议
+      - triggers: [叙事助手 off, assistant off]
+        canonical: 叙事助手 off
+        description: 关闭叙事建议
+  
+  saves:
+    name: 存档管理
+    commands:
+      - triggers: [保存到, 另存为]
+        canonical: 保存到
+        description: 保存为命名存档（可含名称）
+      - triggers: [载入到, 读取]
+        canonical: 载入到
+        description: 载入指定命名存档并绑定为写入目标
+      - triggers: [列出存档, 存档列表]
+        canonical: 列出存档
+        description: 显示所有命名存档
+      - triggers: [快速保存, qs]
+        canonical: 快速保存
+        description: 快速保存到当前存档
+
+# 简写别名映射
+aliases:
+  s: 存档
+  l: 载入
+  c: 继续
+  h: 帮助
+  "?": 帮助
+  qs: 快速保存
