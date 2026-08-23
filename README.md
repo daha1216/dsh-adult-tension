@@ -1,7 +1,7 @@
-# 🎭 adult-tension-narrative
+# 🎭 adult-tension
 
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
-[![Tests](https://github.com/daha1216/dsh-skill-adult-tension-narrative/actions/workflows/tests.yml/badge.svg)](https://github.com/daha1216/dsh-skill-adult-tension-narrative/actions/workflows/tests.yml)
+[![Tests](https://github.com/daha1216/dsh-adult-tension/actions/workflows/tests.yml/badge.svg)](https://github.com/daha1216/dsh-adult-tension/actions/workflows/tests.yml)
 
 > **插件形态：AI Skill**：核心入口是 `SKILL.md`。安装时请将仓库根目录完整复制到 AI 工具的技能目录，不要只复制单个文件。
 
@@ -27,12 +27,12 @@
 让 AI 直接安装本仓库：
 
 ```text
-帮我安装这个 skill：https://github.com/daha1216/dsh-skill-adult-tension-narrative
+帮我安装这个 skill：https://github.com/daha1216/dsh-adult-tension
 ```
 
 也可以手动安装：把仓库根目录的一整套文件（`SKILL.md`、`references/`、`scripts/`、`tests/`、`agents/`）完整复制到 AI 工具的技能目录中。不要只复制 `SKILL.md`，其他文件也是技能的一部分。
 
-复制完成后，让 AI 加载 `adult-tension-narrative` 技能即可开始。
+复制完成后，让 AI 加载 `adult-tension` 技能即可开始。
 
 ## 🎬 实际游玩效果
 

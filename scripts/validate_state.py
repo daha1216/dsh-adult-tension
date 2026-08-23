@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate a version 3 adult-tension-narrative YAML state file."""
+"""Validate a version 3 adult-tension YAML state file."""
 
 from __future__ import annotations
 
