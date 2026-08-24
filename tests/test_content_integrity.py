@@ -1,0 +1,69 @@
+"""内容完整性：数据文件指纹锁 + 内容体检进回归。
+
+指纹锁覆盖 scripts/data/ 下全部内容数据文件。任何改动都会让指纹测试失败——
+这是故意的：改动应当是清醒决定。确认改动是故意为之后，用失败信息里打印的
+新指纹替换 EXPECTED 即可。
+"""
+
+from __future__ import annotations
+
+import hashlib
+import importlib.util
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).parents[1]
+DATA = ROOT / "scripts" / "data"
+
+DATA_FILES = (
+    "pools.yaml",
+    "character_meta.yaml",
+    "twists.yaml",
+    "templates.yaml",
+    "names.yaml",
+    "identities.yaml",
+    "locations.yaml",
+    "character_pools.yaml",
+)
+
+EXPECTED = "ee048dd36e719a74c49ea610967724623db740cf93a9d06746a8fc5cdc335abf"
+
+
+def _load(name: str, relative: str):
+    path = ROOT / relative
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+CHECK = _load("check_content", "scripts/check_content.py")
+
+
+def fingerprint() -> str:
+    digest = hashlib.sha256()
+    for name in DATA_FILES:
+        digest.update(name.encode("utf-8"))
+        digest.update((DATA / name).read_bytes())
+    return digest.hexdigest()
+
+
+class ContentIntegrityTests(unittest.TestCase):
+    def test_data_files_exist(self) -> None:
+        for name in DATA_FILES:
+            self.assertTrue((DATA / name).exists(), name)
+
+    def test_content_fingerprint(self) -> None:
+        actual = fingerprint()
+        self.assertEqual(
+            EXPECTED, actual,
+            f"内容数据已变化。若此次改动是故意的，把 EXPECTED 更新为：{actual!r}")
+
+    def test_check_content_passes(self) -> None:
+        report = CHECK.check()
+        self.assertEqual([], report.errors, "；".join(report.errors))
+
+
+if __name__ == "__main__":
+    unittest.main()

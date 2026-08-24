@@ -95,6 +95,28 @@ class ManageSavesTests(unittest.TestCase):
         self.assertEqual(5, listed["实验槽"].get("turn"))
         self.assertTrue(listed["实验槽"].get("summary"))
 
+    def test_save_without_expected_updated_at_is_refused(self) -> None:
+        # 覆盖保存必须携带载入时观察到的 updated_at；缺省直接拒绝，不再静默放行。
+        self.store.init_slot("main", self.source)
+        candidate = Path(self.temp.name) / "candidate.yaml"
+        candidate.write_text(MANAGE.yaml_text(valid_save()), encoding="utf-8")
+        with self.assertRaisesRegex(MANAGE.SaveError, "expected-updated-at"):
+            self.store.save_slot("main", candidate)
+
+    def test_save_to_unknown_slot_leaves_no_garbage_dir(self) -> None:
+        candidate = Path(self.temp.name) / "candidate.yaml"
+        candidate.write_text(MANAGE.yaml_text(valid_save()), encoding="utf-8")
+        with self.assertRaises(MANAGE.SaveError):
+            self.store.save_slot("不存在槽", candidate)
+        self.assertFalse((self.root / "slots" / "不存在槽").exists())
+
+    def test_lock_file_stays_empty_after_saves(self) -> None:
+        manifest = self.store.init_slot("main", self.source)
+        candidate = Path(self.temp.name) / "candidate.yaml"
+        candidate.write_text(MANAGE.yaml_text(valid_save()), encoding="utf-8")
+        self.store.save_slot("main", candidate, expected_updated_at=manifest["updated_at"])
+        self.assertEqual(0, self.store.lock_path("main").stat().st_size)
+
 
 if __name__ == "__main__":
     unittest.main()

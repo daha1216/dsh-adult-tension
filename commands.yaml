@@ -1,5 +1,36 @@
-# 命令配置文件
-# 定义命令分类、别名和触发词。解析以本文件为准。
+# 命令配置文件：命令分类、别名、触发词、行为与后台操作。解析以本文件为唯一来源。
+# SKILL.md 只保留核心命令速记；模型在每局开始（开局或载入后第一回合）读本文件一次。
+
+# 匹配优先级：先认带宾语的保存/载入，再认无参；其余按最长触发词。
+parse_rules:
+  longest_trigger: true
+  argument_forms:
+    - when: 「保存」或「另存为」后跟非空名称
+      canonical: 保存到
+    - when: 「载入」或「读取」后跟非空名称
+      canonical: 载入到
+    - when: 「保存」无名称
+      canonical: 存档
+    - when: 「载入」无名称
+      canonical: 载入存档
+    - when: 「撤销刚才的 X」且同句附带替换内容 Y
+      canonical: 撤销刚才的（带替换）
+      advance_turn: true
+      note: 按 retcon 记录撤销，Y 作为有效叙事指令推进一个回合（SKILL.md 改写档）
+    - when: 「撤销刚才的 X」无替换内容
+      canonical: 撤销刚才的
+      advance_turn: false
+      note: 仅撤销最近事件，不推进回合
+    - when: 输入包含顶层 save_version 字段
+      canonical: 载入存档
+      note: 始终按载入存档处理，先验证再接续
+    - when: 单独输入「恢复」语义不明
+      canonical: 确认三选一
+      note: 先确认是「载入存档」「解除暂停」还是「恢复世界推演」，确认前不推进回合
+  missing_object:
+    # 需要宾语的触发词裸输入时不执行、不推进，向玩家追问所需参数。
+    applies_to: [另存为, 读取, 本局不碰, 解除不碰, 预锁, 种子, 快进到]
+    action: ask_for_missing_object
 
 command_categories:
   core:
@@ -7,101 +38,144 @@ command_categories:
     commands:
       - triggers: [开局, 开始, 随机开局]
         canonical: 开局
-        description: 执行完整开局；可附自然语言约束
-      - triggers: [继续, next, c, "..."]
+        advance_turn: false
+        behavior: 无进行中状态时执行 build_opening.py --complete（肯定约束才映射 --lock，否定句没有 lock 键）；已有进行中状态先用一句话确认是否放弃当前局，确认前不重掷、不清状态
+      - triggers: [继续, next, c, "...", "……"]
         canonical: 继续
-        description: 推进一个动作节拍；空输入与此相同
+        advance_turn: true
+        behavior: 小幅推进环境或 NPC 一个动作节拍；对方已离场时改为最小离屏追算，停在玩家可接手处；必须让时钟变化
       - triggers: [快进到, timeskip]
         canonical: 快进到
-        description: 更新时间并追算
-      - triggers: [撤销, undo]
+        advance_turn: true
+        behavior: 更新时间并按 Tier 追算；跨天或明确快进 patch 另加 force_full: true
+      - triggers: [撤销刚才的, 撤销, undo]
         canonical: 撤销刚才的
-        description: 撤销最近事件
-      - triggers: [存档, 保存, save, s, 快速保存, qs]
+        advance_turn: false
+        behavior: 仅撤销最近事件，不推进；持续影响是否撤销由玩家说明
+      - triggers: [存档, save, s, 快速保存, qs]
         canonical: 存档
-        description: 写入当前槽，只用一句话确认，不输出 YAML
+        advance_turn: false
+        behavior: 写入当前槽；成功后只回「已保存到「名称」·第 N 回合」，不输出 YAML
+        cli: save <当前槽> saves/current_state.yaml --expected-updated-at <载入时记录>
       - triggers: [保存到, 另存为]
         canonical: 保存到
-        description: 保存为命名存档（可含中文名）
+        advance_turn: false
+        behavior: 保存为命名存档 X（允许中文名，空格改 -）；已存在且载入后未被他处修改才可覆盖；成功后只回「已另存为「X」·第 N 回合」
+        cli: 新建=init X <导出文件>；覆盖=save X <导出文件> --expected-updated-at <载入时记录>（缺省该 flag 会被拒绝）
       - triggers: [载入, 读档, load, l]
         canonical: 载入存档
-        description: 读取并验证存档
+        advance_turn: false
+        behavior: 读取玩家提供的 save_version: 3 YAML，先验证再接续，不得重新执行开局；从 current_node.unresolved_action 前一刻接续，可附一次【此刻】
+        cli: 校验通过后写入 saves/current_state.yaml，并记录其 updated_at
       - triggers: [载入到, 读取]
         canonical: 载入到
-        description: 载入指定命名存档并绑定为写入目标
+        advance_turn: false
+        behavior: 载入命名存档 X 并绑定为当前写入目标；从 current_node.unresolved_action 前一刻接续，可附一次【此刻】
+        cli: load X，并记录 manifest.updated_at
       - triggers: [列出存档, 存档列表]
         canonical: 列出存档
-        description: 显示名称、回合、一句话处境
-      - triggers: [查看状态, 状态, status]
-        canonical: 查看状态
-        description: 简短显示当前地点、参与者、暂停状态
+        advance_turn: false
+        behavior: 显示名称、回合、一句话处境
+        cli: list
+      - triggers: [状态, 查看状态, status]
+        canonical: 状态
+        advance_turn: false
+        behavior: 六行人话——地点、在场、暂停、当前压力、许可、可接续动作
+        cli: python scripts/live_slice.py saves/current_state.yaml --human
       - triggers: [帮助, 命令, 能做什么, help, h, "?"]
         canonical: 帮助
-        description: 列出核心命令和行动句规则
+        advance_turn: false
+        behavior: 列出核心命令、当前可接续动作，以及行动句三档（含亲密默认尝试档）
       - triggers: [本局不碰, 硬边界, boundary]
         canonical: 本局不碰
-        description: 新增 active 玩家硬边界
+        advance_turn: false
+        behavior: 新增一条 active 玩家硬边界（commit_turn patch：{"advance_turn": false, "boundaries_add": ["X"]}）
       - triggers: [解除不碰, revoke]
         canonical: 解除不碰
-        description: 将对应边界改为 revoked
+        advance_turn: false
+        behavior: 将对应边界改为已解除；不自动改写既有历史（patch：{"advance_turn": false, "boundaries_revoke": ["X"]}）
       - triggers: [暂停, 安全词, pause]
         canonical: 暂停
-        description: 设为 paused，停止亲密升级
+        advance_turn: false
+        behavior: 将 safety_state 设为 paused，停止亲密升级，不登记代价（patch：{"advance_turn": false, "safety_state": "paused"}）
       - triggers: [解除暂停, 恢复场景, resume]
         canonical: 解除暂停
-        description: 设为 running，恢复场景
+        advance_turn: false
+        behavior: 仅在玩家明确要求后将 safety_state 设为 running；不解释为载入存档（patch：{"advance_turn": false, "safety_state": "running"}）
 
   advanced:
     name: 高级功能
     commands:
       - triggers: [强制表内]
         canonical: 强制表内
-        description: 结构骰只取表内
+        advance_turn: false
+        behavior: 开局结构骰只取表内池（build_opening --complete --force-table）
       - triggers: [表外全随机]
         canonical: 表外全随机
-        description: 核心轴可自拟
+        advance_turn: false
+        behavior: 核心轴可自拟（--all-custom 配 --custom KEY=VALUE）
       - triggers: [预锁]
         canonical: 预锁
-        description: 锁定结构骰字段
+        advance_turn: false
+        behavior: 锁定结构骰字段（--lock KEY=VALUE，可重复；张力引擎支持 A 或 A、B）
       - triggers: [种子, seed]
         canonical: 种子
-        description: 指定开局 seed
+        advance_turn: false
+        behavior: 指定开局 seed（--seed N，非负整数）
       - triggers: [状态+, status+]
         canonical: 状态+
-        description: 显示状态 + 许可、待办、事件前 3 项
+        advance_turn: false
+        behavior: 更细的自然语言状态，仍不暴露字段名
       - triggers: [调试, debug]
         canonical: 调试
-        description: 完整状态含关系、冷却、事件队列
-      - triggers: [导出存档, 总结]
+        advance_turn: false
+        behavior: 完整自然语言状态，可含关系、冷却、事件队列，仍不暴露字段名
+      - triggers: [导出存档]
         canonical: 导出存档
-        description: 输出完整 v3 YAML
+        advance_turn: false
+        behavior: 先完成保存检查，成功后按 references/状态总结.md 输出完整 v3 YAML；失败时只报告错误，不输出伪存档
       - triggers: [说骚话, 别装了, 做自己, inner]
         canonical: 说骚话
-        description: 目标角色切入里层语态（不推进回合）
+        advance_turn: false
+        behavior: 目标角色切入里层语态，不推进回合（patch npc_updates.<id>.active_voice_mode: inner）
       - triggers: [贴视角, 偷窥视角, pov on]
         canonical: 贴视角
-        description: 开启内心可见模式
+        advance_turn: false
+        behavior: 开启内心可见模式（patch {"advance_turn": false, "voyeur_pov": "on"}）
       - triggers: [退出偷窥, 收回视角, pov off]
         canonical: 退出偷窥
-        description: 关闭内心可见模式
+        advance_turn: false
+        behavior: 关闭内心可见模式（patch {"advance_turn": false, "voyeur_pov": "off"}）
       - triggers: [冻结世界, sim off]
         canonical: 冻结世界
-        description: 将 meta.simulation 设为 false
+        advance_turn: false
+        behavior: 关闭世界推演（patch {"advance_turn": false, "simulation": false}）
       - triggers: [恢复世界, 恢复世界推演, sim on]
         canonical: 恢复世界推演
-        description: 将 meta.simulation 设为 true
+        advance_turn: false
+        behavior: 开启世界推演（patch {"advance_turn": false, "simulation": true}）
       - triggers: [叙事助手 on, assistant on]
         canonical: 叙事助手 on
-        description: 开启每回合后一行建议
+        advance_turn: false
+        behavior: 开启每回合后一行建议（默认关；本会话有效，不进存档；开局【此刻】已承担主要引导）
       - triggers: [叙事助手 off, assistant off]
         canonical: 叙事助手 off
-        description: 关闭叙事建议
+        advance_turn: false
+        behavior: 关闭叙事建议
 
-# 简写别名映射
-aliases:
-  s: 存档
-  l: 载入
-  c: 继续
-  h: 帮助
-  "?": 帮助
-  qs: 存档
+# 存档槽与「当前槽」绑定规则
+slot_binding: |
+  存档落在 saves/slots/<名称>/（state.yaml + manifest.yaml），由 scripts/manage_saves.py 原子写入。
+  槽名允许中文，空格改成 -。
+  「当前槽」是会话上下文里记录的槽名：无名称存档默认写 main；「载入 X」后当前槽切换为 X。
+  载入时记录 manifest.updated_at；覆盖保存必须携带该值（--expected-updated-at），不匹配即拒绝，
+  不自动合并两个窗口的状态。保存冲突时用自然语言给出 A 读最新 / B 另存 / C 取消，
+  单窗口不要主动拿「其他窗口」吓人。
+  跨会话续玩必须先明确「载入 X」重建这组绑定（槽名＋载入时的 updated_at），否则无法覆盖保存。
+
+notes: |
+  若已有进行中状态，输入「开局」先用一句话确认是否放弃当前局；确认前不重掷、不清状态。
+  单独输入「恢复」且语义不清时，不推进回合；先三选一确认：载入存档、解除暂停、还是恢复世界推演。
+  需要宾语的命令（另存为/读取/本局不碰/解除不碰/预锁/种子/快进到）裸输入时不执行、不推进，
+  直接追问所缺参数。
+  空输入、单独的「……」与「继续」同一语义。简写：s=存档，l=载入，c=继续，h=帮助，qs=快速保存。

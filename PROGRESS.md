@@ -5,21 +5,14 @@
 `SKILL.md` 的「性行为场景写法（硬约束）」一节声明引言与 1-4 条写法标准、词汇表逐字冻结，改动前必须核对本文件的基线哈希。
 
 - 文件：`SKILL.md`
-- 冻结范围：自「当场景中已发生」起，至「不得用一句话跳过整段性行为。」止（含两者之间的空行；即该节引言段落与第 1-4 条全文，不含 `###` 标题与 HTML 注释行）。
-- 基线哈希（SHA-256）：`1a4491449446b88cd1971234d17787e72e29f4f11e1252378a10cf8713ba526e`
+- 冻结范围：自「当场景中已发生」起，至「不得用一句话跳过整段性行为。」止（含两者之间的空行；即该节引言段落与第 1-6 条全文，不含 `###` 标题与 HTML 注释行）。
+- 基线哈希（SHA-256）：`3d00945b22ac887034980b337903a8cd748754f33e0c751156a440524bf7641b`
 - 建立日期：2026-08-14
 
-校验命令（在 Skill 根目录运行）：
+校验命令（在 Skill 根目录运行；用 `python -c` 直传参数，避开 Windows PowerShell 5.1 管道 ASCII 编码损坏中文的问题，pwsh 7 同样可用）：
 
 ```powershell
-$code = @'
-import hashlib
-text = open("SKILL.md", encoding="utf-8").read()
-start = text.index("当场景中已发生")
-end = text.index("不得用一句话跳过整段性行为。") + len("不得用一句话跳过整段性行为。")
-print(hashlib.sha256(text[start:end].encode("utf-8")).hexdigest())
-'@
-$code | python -
+python -c "import hashlib; text=open('SKILL.md',encoding='utf-8').read(); s=text.index('当场景中已发生'); e=text.index('不得用一句话跳过整段性行为。')+len('不得用一句话跳过整段性行为。'); print(hashlib.sha256(text[s:e].encode('utf-8')).hexdigest())"
 ```
 
 规则：校验哈希与基线不一致时，冻结段已被改动。要么恢复原文，要么经明确记录后更新本基线哈希。
@@ -28,9 +21,18 @@ $code | python -
 
 | 日期 | 变更 |
 |---|---|
-| 2026-08-14 | 补齐缺失文件：`references/开局流程.md`、`references/素材库.md`、`scripts/roll_opening.py`、`PROGRESS.md`。统一旧存档策略为「不自动迁移、报错停载」（`SKILL.md` 失败处理与状态模型）。`directives[].block_code` 新增 `boundary_conflict`，同步 `SKILL.md`、`references/状态总结.md`、`scripts/validate_state.py` 与测试。新增可选扩展字段 `function`（NPC）与 `appellation`（player）并写入落点说明。`references/世界运转.md` 增补转折池解析契约。新增 `tests/test_roll_opening.py`（18 项）。 |
-| 2026-08-17 | 统一 `save` / `opening` 校验 profile，绑定 `scene_id`、地点与参与者，补齐 `far_event_id`、事件 `source`/`due_at`、顶层关系唯一来源、`force_full` 生命周期、NPC `autonomy`、指令事件引用、命名审计、supporting 升级、开局步骤 6-9 及首次完整校准。`validate_state.py` 新增严格时间、场景许可、关系覆盖、事件、指令、checkpoint 与 opening C1-C14 可判定结构校验；`roll_opening.py` 新增 `opening-roll/v2`、严格素材维护检查、lock/custom 规则与默认历史去重。测试扩展至 45 项；`SKILL.md` 冻结段保持原哈希。 |
-| 2026-08-20 | 新增多会话存档隔离与并发保护：`scripts/manage_saves.py` 提供存档槽位、manifest 元数据、revision/hash CAS、原子写入、共享槽租约与分支能力；`SKILL.md` 新增「存档隔离与并发」与存档槽/分支/共享命令；`references/状态总结.md` 更新存档布局与载入流程。新增 `tests/test_manage_saves.py`（6 项，并发写入一次成功一次冲突）；测试总数 51；`SKILL.md` 冻结段保持原哈希。 |
-| 2026-08-21 | 按体验审阅全部修复：①`roll_opening.py` 张力引擎 lock 支持单值自动补抽/双值锁定，杜绝单引擎违反「两项互不相同」，重复/超量/表外值拒绝；②`validate_state.py` 的 `directive_priority_preserved` 改为仅存在指令时必填，与 `references/状态总结.md` 一致；③根目录残留开局样例 `opening_*.yaml`（turn 6 存档）归入 `saves/legacy/`；④新增 `scripts/build_opening.py` 开局编排器（结构骰→v3 骨架→`--check` 待填清单→`opening_request`），`references/开局流程.md` 新增「开局编排」；⑤`SKILL.md`/`saves/README.md` 补充会话绑定与自然语言存档命令映射、租约续期规则；⑥「玩家叙事主权」第 2 条澄清行动句解释（依赖外部条件/对方响应的动作先发生、由世界判定，除非锁定措辞）；⑦「完整开局」规定一次回复完成、不输出中间态；⑧明确 `attraction.orientation` 为唯一表末自拟位；⑨新增 `tests/test_build_opening.py`（骨架/填充/CLI/槽位端到端/fixtures 回归）与张力引擎 lock、checkpoint 条件用例，测试 66 项全绿；`SKILL.md` 冻结段保持原哈希。 |
-| 2026-08-21 | 按体验审阅优化方案二次修复：①删除指令契约系统——`SKILL.md`「玩家叙事主权」改为结果档/尝试档/改写档三档规则，「每回合事务」12 步重构为解析/候选/校验/提交/输出 5 步并合并轻量与完整校准为「提交前校验 + 每 5 回合/force 深度校准」；`validate_state.py` 移除 `validate_directives` 与 `directive_priority_preserved`，`directive` 事件源与 `directives` 字段仅作兼容保留；②统一回合计数——开局提交点即回合 1（`build_opening.py` 骨架、`validate_state.py` opening profile、C15、模板、fixture `saves/_opening_zhao.yaml` 全部迁移，删除「内部回合 0」概念）；③存档简化为三命令（存档/载入/列出存档 + `保存 X`/`载入 X`/qs）——`manage_saves.py` 删除共享模式、租约、revision/hash CAS 与分支，改为 `updated_at` 冲突检测；`SKILL.md` 删除「存档隔离与并发」整节；`commands.yaml`/`saves/README.md`/`references/状态总结.md`/`P0优化说明.md`/`quickstart.md`/`优化实施总结.md` 同步；④新增 `requirements.txt`（PyYAML，Python 3.10+）；⑤`SKILL.md` 新增「文档结构」分层（执行主控与领域规则、玩家可见与后台机制分离）、「语态调度」明确台词语态/叙述层/身体反应三层分离、退化规则简化、年龄检查改为开局与新角色加入时执行；⑥测试 63 项全绿（去掉 3 项指令契约用例、新增旧档兼容与冲突检测用例），既有 4 槽位存档全部通过 `save` 校验；`SKILL.md` 冻结段保持原哈希 `1a449144…`。 |
-| 2026-08-21 | 按玩家实测方案修复（性行为写法冻结段不动）：结构骰升 `opening-roll/v3`，防塌缩（杠杆引擎不叠、player_high 不配把柄处境、场景动作默认非交易靠近、身份族加权、玩家化身轴）；开局三行进度 +【此刻】HUD；存档人话确认、中文槽名、`导出存档` 才打 YAML；新局禁止 `directives`；亲密动作默认尝试档且锁不住同意；时钟必须走、离场最小追算、相邻私密空间许可可继承；开关类命令不推进回合；作废 P0/响应时间/叙事助手/实施总结纸面文档。 |
+| 2026-08-14 | 补齐缺失文件；确立旧存档「不自动迁移、报错停载」策略 |
+| 2026-08-17 | 统一 save/opening 校验 profile；validate_state 扩展严格校验（时间/许可/关系/事件/checkpoint） |
+| 2026-08-20 | manage_saves 存档槽、manifest 与并发保护 |
+| 2026-08-21 | 删除指令契约系统，改为行动句三档；存档简化三命令；语态三层分离 |
+| 2026-08-21 | 结构骰 v3 防塌缩；开局一次完成；作废四份纸面设计文档 |
+| 2026-08-22 | build_opening --complete 全自动开局；新增 live_slice / commit_turn |
+| 2026-08-22 | 文档全审收口：事件生命周期原地保留、许可继承与归档、深度校准实判、naming_audit 如实化（108 项测试） |
+| 2026-08-22 | 文档精简：删孤儿 quickstart.md 与跨文档重复；SKILL 命令区/输出规范/patch 键瘦身；PROGRESS 历史摘要化。冻结段未动，哈希不变 |
+| 2026-08-23 | 素材库结构重排（纯 md）：正文版维护契约＋12 池总表＋「被点名词条」挂牌＋三压力表分工牌＋三板块分区＋单池组名统一；词条零增删——seed 42/1/7 输出与改前逐字一致，108 测试通过。词条清理（压力来源−6／社会规则−2）已试做并回退：test_commit_turn 夹具以固定 seed 7 实时抽签、隐含依赖非时限组合，删词改变抽取致其失败；恢复原词条，契约中已加「动词条先跑全套测试」提示 |
+| 2026-08-23 | 素材库内容扩充：称谓＋5（师傅/同学/房客/客人/老乡）、美学基调＋4、张力引擎＋4（信任透支/两副面孔/攻守易位/遗产之争）、压力来源＋3（家人病倒/官司上门/证件卡壳）、地点＋5 并同步 locations.yaml（共 23 键）；美学基调与时代与地点节各补一行现场提醒；契约总表地点计数更新。test_commit_turn 夹具改为显式预锁（压力来源=舆论发酵、处境=资源断供），解除固定种子依赖。新词锁定抽查与全链路冒烟通过，108 测试全绿 |
+| 2026-08-23 | 素材库词条精简收尾：社会规则删「契约至上」「双重标准公开化」并将「邻里闲话止于门内」改为「闲话止于门内」；压力来源移出三个氛围词；张力引擎以「信任透支」接替「选择成本递增」；六个下架词入文末备选素材区。锁定收窄抽查全过，逐词差集与方案一致（203→197），108 测试全绿 |
+| 2026-08-23 | 角色设计结构重排（纯 md）：四部分分章（通用生成规则/命名/角色规格/角色类型与层级）＋维护契约前置＋成年与许可总则收拢文件头＋修饰层四小节合一＋标准/简起名合并为共用流程＋配角升级规则归位层级节＋决策卡运行时句归位决策卡节＋亲密画像与双语态拆节＋9g 清单显式编号（9g-1..9g-6）。三锚点节（人物生成原则权重块/人物决策轴三轴/配角功能句）逐字未动——seed 1/42/7 输出与改前逐字节一致，108 测试通过 |
+| 2026-08-23 | 角色设计文字润色＋示例补充（纯 md，零词条零字段改动）：长段拆分结论先行（生成原则/决策轴尾注/起名总则三段化/身份档三段化/双语态首段三句）、起名查重表述直白化、supporting 字段清单收敛到「配角」单处并点名五表现字段出处、升级规则补「已升级 vs 未升级」取舍边界；新增 7 组「对/错」对照示例（起名/处境退出通道/吸引前提/画像变化证据/双语态书写格式/决策卡 autonomy 副本/配角升级）。三锚点逐字未动——seed 1/42/7 与改前逐字节一致，108 测试全绿 |
+| 2026-08-24 | 数据与文档分家（重构）：素材库 12 表/决策轴/转折池/开局文案模板全部迁入 scripts/data 四个新 yaml（pools/character_meta/twists/templates），roll_opening 不再解析任何 markdown，各文档「维护契约」锚点全部取消；杠杆引擎/死线名单/写实门控/身份权重等按名引用开关入 pools.yaml meta；素材库.md 与开局流程.backup.md 删除，语义并入开局流程.md §4；新增 scripts/check_content.py 内容体检（177 项）与 tests/test_content_integrity.py 内容指纹锁；commands.yaml 升级为唯一命令总表（行为＋cli＋槽位绑定），SKILL.md 瘦身约三分之一；新增 references/加内容.md 扩充指南；_common.py 收编共享工具（build_opening/manage_saves 接线）。同种子抽签与完整开局输出与重构前逐字节一致，111 测试全绿；冻结段未动、哈希不变 |
+| 2026-08-25 | 性行为场景写法重构：四条扩为六条——粗暴质感改为具体质感（质感跟随亲密画像，具体度强制保留）、词表三层分层并禁止同拍复读、过程扩为含收束拍的五拍节奏曲线、新增逐拍推进与回应持续可见两条、触发条件改原则加举例、细节清单扩到全身反应、语态调度补台词密度；冻结段哈希已按流程更新 |

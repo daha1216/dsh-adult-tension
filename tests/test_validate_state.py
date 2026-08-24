@@ -67,8 +67,25 @@ class ValidateStateTests(unittest.TestCase):
         self.assert_invalid(lambda data: data["world"].update(clock="2026-07-14T19:00:00+08:00"), "cannot be earlier")
 
     def test_pressure_seeds_require_near_and_far_references(self) -> None:
-        self.assert_invalid(lambda data: data["world"]["pressure_seeds"].update(near_event_id=""), "near_event_id")
-        self.assert_invalid(lambda data: data["world"]["pressure_seeds"].update(far_event_id="evt-near"), "must reference a far event")
+        # save profile 允许种子为空（事件被解决后由 commit_turn 重指或置空），
+        # opening profile 仍要求非空；非空引用必须是现存 pending 且 kind 匹配。
+        data = valid_save()
+        data["world"]["pressure_seeds"].update(near_event_id=None, far_event_id=None)
+        self.assertEqual([], VALIDATOR.validate_data(data, "save"))
+        self.assert_invalid(lambda d: d["world"]["pressure_seeds"].update(near_event_id=""),
+                            "must be a non-empty event ID", profile="opening")
+        self.assert_invalid(lambda d: d["world"]["pressure_seeds"].update(far_event_id="evt-near"),
+                            "must reference a far event")
+        # 指向已解决事件的种子是陈旧种子：save profile 拒绝。
+        def stale(d):
+            d["events"][1]["status"] = "resolved"
+            d["resolved_summary"].append({"event_id": "evt-far", "resolved_turn": 5, "outcome": "done"})
+        self.assert_invalid(stale, "must reference a pending event")
+
+    def test_tension_engines_reject_custom_placeholder(self) -> None:
+        self.assert_invalid(
+            lambda data: data["world"].update(tension_engines=["custom_required", "情感拉扯"]),
+            "custom_required")
 
     def test_scene_consent_binding_is_strict(self) -> None:
         self.assert_invalid(lambda data: data["consent"].update(location="lobby"), "consent.location")
@@ -174,6 +191,11 @@ class ValidateStateTests(unittest.TestCase):
             "event_id": None, "resolution": "done", "block_code": None,
         }]
         self.assertTrue(any("must not write directives" in error for error in VALIDATOR.validate_data(data, "opening")))
+
+    def test_opening_requires_c15_checkpoint(self) -> None:
+        data = self._opening_ready(valid_save())
+        data["checkpoint"].update(last_full_turn=5, next_full_turn=10)
+        self.assertTrue(any("last_full_turn 1" in error for error in VALIDATOR.validate_data(data, "opening")))
 
     def test_event_sources_pending_due_and_probability(self) -> None:
         self.assert_invalid(lambda data: data["events"][0].update(source="turn-3"), "legal 'type:id'")

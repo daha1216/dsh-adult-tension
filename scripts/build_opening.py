@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 """build_opening.py — 开局编排器：结构骰 → v3 骨架 → opening 校验。
 
-把「完整开局」中可程序化推导的部分脚本化，模型只需填充内容字段、
-跑 --check 直到通过，再进入正文。本脚本不写 roll 历史签名（避免污染
-近期去重辅助），也不替模型生成叙事内容。
+默认开局走 --complete：结构骰 + 1-14 填料 + opening 校验一次做完，
+stdout 给出 opening_brief，模型只写四块玩家可见正文。--complete 成功后会
+把本局签名追加进临时历史（与 roll_opening 同一份），重复三元组只发
+warning 不阻断；本脚本也不替模型生成叙事正文。
 
 用法：
-  python scripts/build_opening.py                             # 系统熵 roll，生成骨架
-  python scripts/build_opening.py --seed 42                   # 确定性 roll
-  python scripts/build_opening.py --lock 时代=当代都市        # 透传预锁（可重复）
-  python scripts/build_opening.py --all-custom --custom 时代=X # 表外自定义
-  python scripts/build_opening.py --roll-file roll.json       # 复用已有 roll JSON
-  python scripts/build_opening.py --out saves/_opening_42.yaml
-  python scripts/build_opening.py --request opens/req.yaml    # 顺带输出 opening_request
-  python scripts/build_opening.py --check FILE                # 校验文件并列出待填/待修项
+  python scripts/build_opening.py --complete                  # 一次生成可开场状态
+  python scripts/build_opening.py --complete --seed 42
+  python scripts/build_opening.py --complete --lock 时代=当代都市
+  python scripts/build_opening.py --complete --slot 本局
+  python scripts/build_opening.py                             # 仅骨架（维护/测试）
+  python scripts/build_opening.py --roll-file roll.json --out saves/_opening_42.yaml
+  python scripts/build_opening.py --request opens/req.yaml
+  python scripts/build_opening.py --check FILE                # 校验已有文件
 
---check 输出即填充清单：exit 0 表示通过 opening profile 校验，
-exit 1 表示仍有未填/非法字段（不进入正文）。
+--complete 失败视为脚本 bug，不得改由模型手填 YAML。
 """
 
 from __future__ import annotations
@@ -38,21 +38,37 @@ PROTOCOL_VERSION = "opening-roll/v3"
 MULTI_SEPARATOR = re.compile(r"[、，,]")
 
 
-def _load_module(script: Path, module_name: str) -> Any:
-    spec = importlib.util.spec_from_file_location(module_name, script)
+def _load_common() -> Any:
+    spec = importlib.util.spec_from_file_location(
+        "adult_tension_common", Path(__file__).with_name("_common.py"))
     if spec is None or spec.loader is None:
-        raise RuntimeError(f"cannot load {script}")
+        raise RuntimeError("cannot load _common.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
 
+_COMMON = _load_common()
+
+
 def load_roll_opening() -> Any:
-    return _load_module(Path(__file__).with_name("roll_opening.py"), "adult_tension_roll_opening")
+    return _COMMON.load_sibling("roll_opening")
 
 
 def load_validator() -> Any:
-    return _load_module(Path(__file__).with_name("validate_state.py"), "adult_tension_validate_state")
+    return _COMMON.load_sibling("validate_state")
+
+
+def load_fill_opening() -> Any:
+    return _COMMON.load_sibling("fill_opening")
+
+
+def load_live_slice() -> Any:
+    return _COMMON.load_sibling("live_slice")
+
+
+def load_saves() -> Any:
+    return _COMMON.load_sibling("manage_saves")
 
 
 def parse_pairs(entries: list[str], label: str) -> dict[str, str]:
@@ -242,28 +258,122 @@ def build_skeleton(roll: dict[str, Any]) -> dict[str, Any]:
 
 
 def write_atomic(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    fd, temp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
-    temp_path = Path(temp_name)
-    try:
-        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as handle:
-            handle.write(text)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temp_path, path)
-    finally:
-        try:
-            temp_path.unlink()
-        except FileNotFoundError:
-            pass
+    _COMMON.write_atomic(path, text)
 
 
 def load_yaml_module() -> Any:
     try:
-        import yaml
-    except ImportError as exc:  # pragma: no cover
-        raise SystemExit("ERROR: PyYAML is required; run: python -m pip install PyYAML") from exc
-    return yaml
+        return _COMMON.load_yaml_module()
+    except _COMMON.CommonError as exc:  # pragma: no cover
+        raise SystemExit(f"ERROR: {exc}") from exc
+
+
+def dump_yaml(data: dict[str, Any]) -> str:
+    return _COMMON.yaml_text(data)
+
+
+def resolve_roll(args: argparse.Namespace) -> dict[str, Any]:
+    if args.roll_file is not None:
+        return roll_from_file(args.roll_file)
+    locks = parse_pairs(args.lock, "lock")
+    custom = parse_pairs(args.custom, "custom")
+    return build_roll(args.seed, locks, custom, args.all_custom, args.force_table)
+
+
+def complete_opening(args: argparse.Namespace) -> int:
+    print("正在抽这一局的世界…")
+    roll_mod = load_roll_opening()
+    try:
+        roll = resolve_roll(args)
+    except SystemExit as exc:
+        if isinstance(exc.code, str):
+            print(exc.code, file=sys.stderr)
+            return 1
+        if exc.code not in (None, 0):
+            return int(exc.code) if isinstance(exc.code, int) else 1
+        raise
+    except (roll_mod.AnchorError, argparse.ArgumentTypeError, ValueError, TypeError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+    seed = roll["seed"]
+    print("正在写人物…")
+    fill_mod = load_fill_opening()
+    try:
+        filled = fill_mod.fill_opening(build_skeleton(roll), roll)
+    except fill_mod.FillError as exc:
+        print(f"ERROR: opening fill failed: {exc}", file=sys.stderr)
+        return 1
+    print("正在核对能否开场…")
+    validator = load_validator()
+    errors = validator.validate_data(filled, "opening")
+    if errors:
+        print("ERROR: --complete 未通过 opening 校验（填料 bug，不要改由模型手填）：", file=sys.stderr)
+        for error in errors:
+            print(f"- {error}", file=sys.stderr)
+        return 1
+
+    text = dump_yaml(filled)
+    # 近期结构去重（SKILL.md：连续局重复三元组只 warning 不阻断）。
+    try:
+        signature = roll_mod._roll_signature(roll)
+        triple = roll_mod._roll_triple(roll)
+        if signature in roll_mod.recent_signatures() or triple in roll_mod.recent_triples():
+            print("warning: 本局「时代×地点×张力引擎」或完整结构与近期开局重复（不阻断）",
+                  file=sys.stderr)
+        roll_mod.append_history(roll)
+    except Exception as exc:  # noqa: BLE001 - 历史是辅助机制，失败不影响开局
+        print(f"warning: roll 历史记录不可用：{exc}", file=sys.stderr)
+    out = args.out or (DEFAULT_OUT_DIR / f"_opening_{seed}.yaml")
+    if out.exists() and not args.force:
+        print(f"ERROR: 输出已存在，不覆盖（换 seed、指定 --out 或加 --force）：{out}", file=sys.stderr)
+        return 1
+    write_atomic(out, text)
+    if args.no_working:
+        working = None
+    elif args.working is not None:
+        working = args.working
+    elif args.out is None:
+        working = DEFAULT_OUT_DIR / "current_state.yaml"
+    else:
+        working = None
+    if working is not None:
+        write_atomic(working, text)
+
+    slot_info = None
+    if args.slot:
+        saves = load_saves()
+        store = saves.SaveStore(DEFAULT_OUT_DIR)
+        try:
+            slot_info = store.init_slot(args.slot, out)
+        except saves.SaveError as exc:
+            print(f"WARNING: 槽位未写入（状态文件已生成）：{exc}", file=sys.stderr)
+
+    if args.request is not None:
+        request_locks = parse_pairs(args.lock, "lock") if args.lock else {}
+        request_custom = parse_pairs(args.custom, "custom") if args.custom else {}
+        request = {
+            "seed": seed,
+            "protocol_version": PROTOCOL_VERSION,
+            "mode": roll.get("mode", "table"),
+            "locks": request_locks,
+            "custom": request_custom,
+            "history_used": False,
+            "state": str(out),
+            "validation": {"passed": True, "checked_at": utc_clock()},
+        }
+        write_atomic(args.request, dump_yaml(request))
+
+    live = load_live_slice()
+    suggestions = fill_mod.opening_suggestions(filled, roll)
+    brief = live.opening_brief(filled, suggestions)
+    brief["state_path"] = str(working or out)
+    brief["archive_path"] = str(out)
+    if slot_info:
+        brief["slot"] = slot_info.get("slot")
+    print("---opening_brief---")
+    print(dump_yaml(brief), end="")
+    print("---end---")
+    return 0
 
 
 def check_file(path: Path) -> int:
@@ -284,10 +394,20 @@ def check_file(path: Path) -> int:
     return 1
 
 
+def _nonneg_int(text: str) -> int:
+    try:
+        value = int(text)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(f"must be an integer, got {text!r}") from exc
+    if value < 0:
+        raise argparse.ArgumentTypeError("must be a non-negative integer")
+    return value
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--seed", type=int, default=None, help="非负整数 seed")
+    parser.add_argument("--seed", type=_nonneg_int, default=None, help="非负整数 seed")
     parser.add_argument("--lock", action="append", default=[], metavar="KEY=VALUE",
                         help="预锁字段，可重复（如 --lock 时代=当代都市；张力引擎支持 A 或 A、B）")
     parser.add_argument("--custom", action="append", default=[], metavar="KEY=VALUE",
@@ -301,6 +421,13 @@ def build_parser() -> argparse.ArgumentParser:
                         help="顺带输出 opening_request YAML（seed/协议/模式/锁/校验状态）")
     parser.add_argument("--check", type=Path, default=None, metavar="FILE",
                         help="校验已生成骨架/填充文件并列出待填项")
+    parser.add_argument("--complete", action="store_true",
+                        help="一次生成可通过 opening 校验的完整开局，并打印 opening_brief")
+    parser.add_argument("--working", type=Path, default=None,
+                        help="额外写入的当前活档（默认 saves/current_state.yaml）")
+    parser.add_argument("--no-working", action="store_true", help="不写 current_state.yaml")
+    parser.add_argument("--slot", default=None, help="可选：初始化命名存档槽")
+    parser.add_argument("--force", action="store_true", help="允许覆盖 --out 已存在文件")
     return parser
 
 
@@ -309,14 +436,30 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.check is not None:
         return check_file(args.check)
+    if args.complete:
+        return complete_opening(args)
 
-    if args.roll_file is not None:
-        roll = roll_from_file(args.roll_file)
-    else:
-        locks = parse_pairs(args.lock, "lock")
-        custom = parse_pairs(args.custom, "custom")
-        roll = build_roll(args.seed, locks, custom, args.all_custom, args.force_table)
-    seed = roll["seed"]
+    try:
+        roll = resolve_roll(args)
+    except SystemExit as exc:
+        if isinstance(exc.code, str):
+            print(exc.code, file=sys.stderr)
+            return 1
+        if exc.code not in (None, 0):
+            return int(exc.code) if isinstance(exc.code, int) else 1
+        raise
+    except (argparse.ArgumentTypeError, ValueError, TypeError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+    roll_mod = load_roll_opening()
+    try:
+        seed = int(roll["seed"])
+    except (KeyError, TypeError, ValueError) as exc:
+        print(f"ERROR: roll JSON 的 seed 缺失或非法：{exc}", file=sys.stderr)
+        return 1
+    if seed < 0:
+        print("ERROR: --seed 必须是非负整数", file=sys.stderr)
+        return 1
 
     skeleton = build_skeleton(roll)
     yaml = load_yaml_module()
@@ -329,9 +472,10 @@ def main(argv: list[str] | None = None) -> int:
     write_atomic(out, text)
     print(f"骨架已写入：{out}")
     print(f"seed: {seed}  模式: {roll.get('mode', 'table')}")
-    print("下一步：按 references/开局流程.md 填充内容字段，然后反复运行")
+    print("仅限维护/测试路径（生产开局必须走 --complete，见 SKILL.md）：")
+    print("按 references/开局流程.md 填充内容字段，然后运行")
     print(f"  python scripts/build_opening.py --check {out}")
-    print("直到 exit 0 再进入正文。")
+    print("全部待填项消除后，本骨架才可用于维护自检。")
 
     if args.request is not None:
         request_locks = parse_pairs(args.lock, "lock") if args.lock else {}

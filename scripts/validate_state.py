@@ -193,6 +193,8 @@ class Validator:
         if engines is not None:
             if not engines:
                 self.error("world.tension_engines", "must contain at least one engine")
+            if any(item == "custom_required" for item in engines if isinstance(item, str)):
+                self.error("world.tension_engines", "contains unresolved custom placeholder 'custom_required'")
             if self.profile == "opening" and len({item for item in engines if is_nonempty_string(item)}) < 2:
                 self.error("world.tension_engines", "opening profile requires at least two distinct engines")
         shell = self.mapping(data.get("setting_shell"), "world.setting_shell")
@@ -226,8 +228,11 @@ class Validator:
             return
         for field, kind in (("near_event_id", "near"), ("far_event_id", "far")):
             event_id = pressure.get(field)
-            if not is_nonempty_string(event_id):
-                self.error(f"world.pressure_seeds.{field}", "must be a non-empty event ID")
+            if event_id in (None, ""):
+                # save profile 允许种子为空（同类 pending 事件被解决/取消后由
+                # commit_turn 重指或置空）；opening profile 必须有种子。
+                if self.profile == "opening":
+                    self.error(f"world.pressure_seeds.{field}", "must be a non-empty event ID")
                 continue
             event = events.get(event_id)
             if event is None:
@@ -236,6 +241,8 @@ class Validator:
                 self.error(f"world.pressure_seeds.{field}", f"must reference a {kind} event")
             elif kind == "far" and event.get("hook") is not True:
                 self.error(f"world.pressure_seeds.{field}", "must reference a hook event")
+            elif event.get("status") not in (None, "pending"):
+                self.error(f"world.pressure_seeds.{field}", "must reference a pending event")
 
     def validate_player(self, value: Any) -> None:
         data = self.mapping(value, "player")
@@ -473,7 +480,7 @@ class Validator:
                 self.error(f"{path}.withdrawn_turn", "is required for withdrawn consent")
             intimate = any(
                 isinstance(scope, dict) and scope.get("type") == "physical"
-                and "intimate" in str(scope.get("permission", "")).lower()
+                and any(token in str(scope.get("permission", "")) for token in ("intimate", "亲密", "性爱", "做爱"))
                 for scope in (scopes or [])
             )
             if intimate:
@@ -601,7 +608,7 @@ class Validator:
             self.error("checkpoint.force_full", "must be a boolean")
         if force_full and not is_nonempty_string(data.get("force_reason")):
             self.error("checkpoint.force_reason", "is required when force_full is true")
-        if not force_full and data.get("force_reason") not in (None, ""):
+        if not force_full and data.get("force_reason") is not None:
             self.error("checkpoint.force_reason", "must be null unless force_full is true")
         invariants = self.mapping(data.get("invariants"), "checkpoint.invariants")
         if invariants is not None:
@@ -677,6 +684,11 @@ class Validator:
                         self.error("relationships", f"opening profile requires main-main relationship coverage for {left}/{right}")
         if data.get("resolved_summary"):
             self.error("resolved_summary", "opening profile requires no resolved summaries")
+        checkpoint = data.get("checkpoint") if isinstance(data.get("checkpoint"), dict) else {}
+        if checkpoint.get("last_full_turn") != 1:
+            self.error("checkpoint.last_full_turn", "opening profile requires last_full_turn 1")
+        if checkpoint.get("force_full") is not False:
+            self.error("checkpoint.force_full", "opening profile requires force_full false after first calibration")
         directives = data.get("directives")
         if isinstance(directives, list) and directives:
             self.error("directives", "new openings must not write directives")
@@ -719,4 +731,9 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, OSError):  # pragma: no cover
+        pass
     raise SystemExit(main())

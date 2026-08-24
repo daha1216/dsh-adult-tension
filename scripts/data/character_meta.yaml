@@ -1,0 +1,109 @@
+# 人物生成元数据（数据本体）。由 scripts/roll_opening.py 与 fill_opening.py 读取。
+# 契约：决策轴三轴每轴至少两项；人物生成倾向权重总和必须为 100；
+# 年龄段区间 = [最小, 最大]（含两端）；社会位置关系 = 顶层关系边起点（type/channel/trust）。
+决策轴:
+  核心价值:
+  - 自由
+  - 责任
+  - 归属
+  - 真相
+  - 秩序
+  - 成就
+  - 公平
+  - 安稳
+  - 照顾他人
+  - 自我证明
+  压力策略:
+  - 正面解决
+  - 谈判交换
+  - 隐瞒拖延
+  - 寻求帮助
+  - 独自承担
+  - 转移风险
+  - 收集证据
+  - 先退后进
+  - 用行动代替解释
+  - 维持表面稳定
+  关系姿态:
+  - 谨慎试探
+  - 直接合作
+  - 保持距离
+  - 过度负责
+  - 习惯掌控
+  - 害怕亏欠
+  - 先信后验
+  - 先验后信
+  - 用玩笑降温
+  - 用规则保护双方
+人物生成倾向:
+  ordinary_natural: 35
+  reserved_sensitive: 15
+  inexperienced: 12
+  experienced_restrained: 10
+  open_active: 8
+  playful: 8
+  conflicted: 7
+  low_desire: 5
+配角功能:
+- 盟友
+- 阻力
+- 见证者
+- 信息源
+- 竞争者
+- 后果承接者
+- 引路人
+- 误导者
+- 催化剂
+- 庇护者
+- 传话人
+- 监视者
+- 系统自拟
+年龄段区间:
+  二十出头:
+  - 21
+  - 24
+  二十七八:
+  - 26
+  - 29
+  三十出头:
+  - 30
+  - 33
+  三十五上下:
+  - 33
+  - 37
+  四十出头:
+  - 40
+  - 44
+社会位置关系:
+  同侪:
+    type: peer
+    channel: direct
+    trust: 1
+  旧识:
+    type: history
+    channel: private
+    trust: 2
+  外来者:
+    type: acquaintance
+    channel: incidental
+    trust: 0
+  平级合作:
+    type: profession
+    channel: direct
+    trust: 1
+  被求助者:
+    type: profession
+    channel: direct
+    trust: 0
+  服务提供者:
+    type: service
+    channel: professional
+    trust: 0
+  远房亲戚:
+    type: family
+    channel: private
+    trust: 1
+  临时共处:
+    type: encounter
+    channel: incidental
+    trust: 0

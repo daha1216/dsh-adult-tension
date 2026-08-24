@@ -179,6 +179,58 @@ class BuildOpeningTests(unittest.TestCase):
             errors = VALIDATOR.validate_text(path.read_text(encoding="utf-8"), "opening")
             self.assertEqual([], errors, str(path))
 
+    def test_complete_fill_passes_opening_validation(self) -> None:
+        fill = _load("fill_opening", Path(__file__).parents[1] / "scripts" / "fill_opening.py")
+        filled = fill.fill_opening(self.skeleton, self.roll)
+        self.assertEqual([], VALIDATOR.validate_data(filled, "opening"))
+        self.assertEqual(self.roll["玩家称谓"], filled["player"]["appellation"])
+        self.assertEqual(1, filled["meta"]["turn"])
+        self.assertFalse(filled["checkpoint"]["force_full"])
+        self.assertEqual(1, len(filled["npcs"]))
+        self.assertIsNone(filled.get("directives"))
+
+    def test_complete_fill_is_deterministic(self) -> None:
+        fill = _load("fill_opening", Path(__file__).parents[1] / "scripts" / "fill_opening.py")
+        a = fill.fill_opening(self.skeleton, self.roll)
+        b = fill.fill_opening(BUILD.build_skeleton(self.roll), self.roll)
+        self.assertEqual(a["player"]["name"], b["player"]["name"])
+        self.assertEqual(a["npcs"][0]["name"], b["npcs"][0]["name"])
+        self.assertEqual(a["current_node"]["location"], b["current_node"]["location"])
+
+    def test_complete_cli_writes_valid_state_and_brief(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "opening.yaml"
+            working = Path(tmp) / "current.yaml"
+            code = BUILD.main([
+                "--complete", "--seed", "7", "--out", str(out),
+                "--working", str(working),
+            ])
+            self.assertEqual(0, code)
+            self.assertTrue(out.exists())
+            self.assertTrue(working.exists())
+            self.assertEqual([], VALIDATOR.validate_text(out.read_text(encoding="utf-8"), "opening"))
+
+    def test_ten_seeds_keep_triple_diversity(self) -> None:
+        fill = _load("fill_opening", Path(__file__).parents[1] / "scripts" / "fill_opening.py")
+        triples = []
+        for seed in range(1, 11):
+            roll = BUILD.build_roll(seed, {}, {}, False, False)
+            filled = fill.fill_opening(BUILD.build_skeleton(roll), roll)
+            self.assertEqual([], VALIDATOR.validate_data(filled, "opening"), seed)
+            shell = filled["world"]["setting_shell"]
+            engines = tuple(filled["world"]["tension_engines"])
+            triples.append((shell["type"], shell["place"], engines))
+            self.assertEqual(roll["玩家称谓"], filled["player"]["appellation"])
+        self.assertGreaterEqual(len(set(triples)), 8)
+
+
+def _load(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -216,9 +216,30 @@ class RollOpeningTests(unittest.TestCase):
         self.assertIn(len(data["twists"]), (2, 3))
 
     def test_negative_seed_rejected(self) -> None:
+        # 负 seed 现在统一在 argparse 类型层拒绝（与 build_opening 入口一致）。
         with contextlib.redirect_stderr(io.StringIO()):
-            code = MOD.main(["--seed", "-1"])
-        self.assertEqual(code, 2)
+            with self.assertRaises(SystemExit) as ctx:
+                MOD.main(["--seed", "-1"])
+        self.assertEqual(ctx.exception.code, 2)
+
+    def test_lock_single_leverage_engine_never_stacks_two(self) -> None:
+        # 单锁一项杠杆引擎时，补抽不得再叠出第二项杠杆引擎。
+        leverage = sorted(MOD.LEVERAGE_ENGINES)[0]
+        for seed in range(60):
+            roll = MOD.build_roll(self.pools, seed, locks={"张力引擎": leverage})
+            engines = [part.strip() for part in MOD.MULTI_SEPARATOR.split(roll["张力引擎"])]
+            self.assertIn(leverage, engines)
+            self.assertEqual(len(engines), 2)
+            if engines[0] == leverage:
+                self.assertNotIn(engines[1], MOD.LEVERAGE_ENGINES)
+            else:
+                self.assertNotIn(engines[0], MOD.LEVERAGE_ENGINES)
+
+    def test_lock_two_leverage_engines_may_stack_explicitly(self) -> None:
+        a, b = sorted(MOD.LEVERAGE_ENGINES)[:2]
+        roll = MOD.build_roll(self.pools, 3, locks={"张力引擎": f"{a}、{b}"})
+        engines = {part.strip() for part in MOD.MULTI_SEPARATOR.split(roll["张力引擎"])}
+        self.assertEqual({a, b}, engines)
 
     def test_scene_action_buckets_exist(self) -> None:
         self.assertTrue(self.pools["场景动作·靠近"])

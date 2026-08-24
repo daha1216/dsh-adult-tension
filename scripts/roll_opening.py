@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """roll_opening.py — 沉浸叙事引擎的开局结构骰与中期转折抽取。
 
-本脚本实时解析 references/角色设计.md、references/素材库.md 与
-references/世界运转.md 中的锚点小节；锚点改名、清空或格式破坏会使脚本报错，
-这正是维护契约要求的自检能力（见各文档内的维护契约注释）。
+数据本体全部在 scripts/data/ 下的 yaml：pools.yaml（开局素材池＋meta 行为开关）、
+character_meta.yaml（决策轴/生成权重/配角功能）、twists.yaml（转折池）、
+character_pools.yaml（角色三池）。references/ 下的文档只承载语义说明，
+本脚本不再解析任何 markdown。数据缺漏即 AnchorError 响亮失败。
 
 用法：
   python scripts/roll_opening.py                     # 完整结构骰（系统熵 seed）
@@ -28,11 +29,14 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
-REFERENCES = ROOT / "references"
-CHAR_DOC = REFERENCES / "角色设计.md"
-MATERIAL_DOC = REFERENCES / "素材库.md"
-WORLD_DOC = REFERENCES / "世界运转.md"
+DATA_DIR = ROOT / "scripts" / "data"
+POOLS_FILE = DATA_DIR / "pools.yaml"
+CHAR_META_FILE = DATA_DIR / "character_meta.yaml"
+TWISTS_FILE = DATA_DIR / "twists.yaml"
+CHAR_POOLS_FILE = DATA_DIR / "character_pools.yaml"
 HISTORY_FILE = "adult_tension_narrative_roll_history.jsonl"
 HISTORY_RETRY_LIMIT = 32
 PROTOCOL_VERSION = "opening-roll/v3"
@@ -44,25 +48,6 @@ DRAW_PLAN = (
     "外观·配角", "生成倾向", "配角功能", "亲密画像核心子集",
     "场景动作·对照", "玩家称谓", "玩家年龄段", "玩家社会位置",
 )
-LEVERAGE_ENGINES = {"债务压力", "秘密暴露倒计时", "第三方施压"}
-SITUATION_LEVERAGE = {"债务压身", "秘密将破", "时限临门"}
-IDENTITY_WEIGHTS = {
-    "侍奉与身契": 7,
-    "成人行业与感官服务": 7,
-    "私密撮合与契约中介": 6,
-    "权力与治理": 5,
-    "商业与产业": 5,
-    "学术与专业": 8,
-    "秩序与执法": 6,
-    "艺术与传播": 12,
-    "医疗与照护": 12,
-    "地下与灰色地带": 7,
-    "家族与继承": 12,
-    "服务与手艺": 13,
-}
-GOLDEN_MAPPING = {"protocol_version": PROTOCOL_VERSION, "seed": 7}
-
-GATE_AESTHETICS = {"青年漫写实", "写实文学"}
 CUSTOM_KEYS = {
     "核心规则", "张力引擎", "时代", "地点", "社会规则", "压力来源",
     "场景动作", "身份族", "处境", "核心价值", "压力策略", "关系姿态",
@@ -79,17 +64,6 @@ MODE_LABELS = {"table": "表内", "all_custom": "表外全随机", "force_table"
 POWER_STRUCTURES = {"player_high", "npc_high", "equal", "switchable"}
 TWIST_CATEGORIES = ("信息类", "人事类", "资源类", "制度类", "时限类", "关系类", "意外类")
 
-DEFAULT_WEIGHTS = {
-    "ordinary_natural": 35,
-    "reserved_sensitive": 15,
-    "inexperienced": 12,
-    "experienced_restrained": 10,
-    "open_active": 8,
-    "playful": 8,
-    "conflicted": 7,
-    "low_desire": 5,
-}
-
 INTENSITY = ["low", "medium", "high"]
 AWARENESS = ["unaware", "uncertain", "clear"]
 INITIATIVE = ["follow", "responsive", "lead", "switch"]
@@ -101,202 +75,193 @@ INTEREST_ORIGIN = ["stable", "contextual", "unexplored", "defensive", "target_sp
 
 
 class AnchorError(Exception):
-    """锚点缺失、清空或格式违反维护契约。"""
+    """数据文件缺失、键缺失或内容违反契约。"""
 
 
 def split_items(text: str) -> list[str]:
     return [part.strip() for part in re.split(r"[、，,]", text) if part.strip()]
 
 
-def read_doc(path: Path) -> str:
-    return path.read_text(encoding="utf-8")
+def _read_yaml(path: Path, label: str) -> dict[str, Any]:
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        raise AnchorError(f"无法读取{label}（{path}）：{exc}") from exc
+    if not isinstance(data, dict) or not data:
+        raise AnchorError(f"{label}为空或顶层不是映射：{path}")
+    return data
 
 
-def _heading_level(line: str) -> int:
-    match = re.match(r"^(#+)\s", line)
-    return len(match.group(1)) if match else 0
+def _flat(value: Any, name: str) -> list[str]:
+    """校验字符串列表：去重保序、过滤空项；为空即报错。"""
+    if not isinstance(value, list):
+        raise AnchorError(f"{name} 必须是字符串列表")
+    pool: list[str] = []
+    for raw in value:
+        item = str(raw).strip()
+        if item and item not in pool:
+            pool.append(item)
+    if not pool:
+        raise AnchorError(f"{name} 池为空")
+    return pool
 
 
-def section(title: str, text: str) -> list[str]:
-    """返回标题之后、下一个同级或更高级标题之前的行。"""
-    lines = text.splitlines()
-    title_level = _heading_level(title)
-    start = None
-    for index, line in enumerate(lines):
-        if line.strip() == title:
-            start = index
-            break
-    if start is None:
-        raise AnchorError(f"缺失锚点小节：{title}")
-    body: list[str] = []
-    for line in lines[start + 1:]:
-        level = _heading_level(line)
-        if level and level <= title_level:
-            break
-        body.append(line)
-    return body
-
-
-def _grouped(lines: list[str]) -> dict[str, list[str]]:
-    """解析 `- 组名：项、项` 分组行。"""
+def _flat_groups(value: Any, name: str, required: tuple[str, ...]) -> dict[str, list[str]]:
+    """校验分组表：必需的组名都在且每组非空。"""
+    if not isinstance(value, dict):
+        raise AnchorError(f"{name} 必须是 组名→列表 映射")
     groups: dict[str, list[str]] = {}
-    for line in lines:
-        match = re.match(r"^\s*-\s*([^：:]+)[：:]\s*(.+)$", line)
-        if not match:
-            continue
-        name = match.group(1).strip()
-        groups.setdefault(name, []).extend(split_items(match.group(2)))
+    for group in required:
+        groups[group] = _flat(value.get(group), f"{name}·{group}")
     return groups
 
 
-def _union_pool(lines: list[str], *, name: str, max_len: int | None = None) -> list[str]:
+def _parse_meta(raw: dict[str, Any]) -> dict[str, Any]:
+    meta = raw.get("meta")
+    if not isinstance(meta, dict):
+        raise AnchorError("pools.yaml 缺少 meta 节")
+    for key in ("leverage_engines", "situation_leverage", "gate_aesthetics"):
+        meta[key] = _flat(meta.get(key), f"meta.{key}")
+    weights = meta.get("identity_weights")
+    if not isinstance(weights, dict) or not weights:
+        raise AnchorError("meta.identity_weights 必须是 身份族→权重 映射")
+    for family, weight in weights.items():
+        if not isinstance(weight, int) or isinstance(weight, bool) or weight <= 0:
+            raise AnchorError(f"meta.identity_weights.{family} 必须是正整数")
+    return meta
+
+
+# 模块级行为开关：数据本体在 pools.yaml 的 meta 节，导入时读入。
+_MODULE_META = _parse_meta(_read_yaml(POOLS_FILE, "开局素材池"))
+LEVERAGE_ENGINES = frozenset(_MODULE_META["leverage_engines"])
+SITUATION_LEVERAGE = frozenset(_MODULE_META["situation_leverage"])
+GATE_AESTHETICS = frozenset(_MODULE_META["gate_aesthetics"])
+IDENTITY_WEIGHTS = dict(_MODULE_META["identity_weights"])
+
+
+def _load_character_pools() -> dict[str, Any]:
+    """加载角色三池 yaml（表层风味/口癖/外观轴），缺失或为空即报错。"""
+    data = _read_yaml(CHAR_POOLS_FILE, "角色三池")
+    for key in ("表层风味", "口癖", "外观轴"):
+        value = data.get(key)
+        if not isinstance(value, dict) or not value:
+            raise AnchorError(f"character_pools.yaml 缺失或为空：{key}")
+    return data
+
+
+def _flatten_grouped(groups: Any, *, name: str, max_len: int | None = None) -> list[str]:
+    """把 {组名: [条目]} 展平为去重池；max_len 过滤超长条目。"""
+    if not isinstance(groups, dict):
+        raise AnchorError(f"{name} 必须是 组名→列表 映射")
     pool: list[str] = []
-    for items in _grouped(lines).values():
-        for item in items:
-            if max_len is not None and len(item) > max_len:
+    for items in groups.values():
+        if not isinstance(items, list):
+            raise AnchorError(f"{name} 的每个组必须是列表")
+        for raw in items:
+            item = str(raw).strip()
+            if not item or (max_len is not None and len(item) > max_len):
                 continue
             if item not in pool:
                 pool.append(item)
     if not pool:
-        raise AnchorError(f"{name} 池为空（检查锚点与 `- 组名：项、项` 格式）")
+        raise AnchorError(f"{name} 池为空（检查 character_pools.yaml）")
     return pool
 
 
-def _appearance_pool(lines: list[str]) -> dict[str, dict[str, list[str]]]:
-    axes: dict[str, dict[str, list[str]]] = {}
-    current: str | None = None
-    for line in lines:
-        stripped = line.strip()
-        top = re.match(r"^- ([^：:]+)$", stripped)
-        group = re.match(r"^\s{2,}- ([^：:]+)[：:]\s*(.+)$", line)
-        if top:
-            current = top.group(1).strip()
-            axes[current] = {}
-        elif group and current:
-            axes[current].setdefault(group.group(1).strip(), []).extend(
-                split_items(group.group(2)))
-        elif re.match(r"^-", stripped):
-            raise AnchorError(f"外观与气质轴子轴格式违反维护契约：{stripped!r}")
-    if not axes:
-        raise AnchorError("外观与气质轴池为空（检查子轴与两空格缩进分组行）")
+def _appearance_from_yaml(axes: Any) -> dict[str, dict[str, list[str]]]:
+    """校验外观轴两层结构 {轴名: {组名: [条目]}}，键名被写实门控按名引用。"""
+    if not isinstance(axes, dict) or not axes:
+        raise AnchorError("外观与气质轴池为空（检查 character_pools.yaml）")
+    validated: dict[str, dict[str, list[str]]] = {}
+    for axis, groups in axes.items():
+        if not isinstance(groups, dict) or not groups:
+            raise AnchorError(f"外观轴 {axis} 缺少分组条目")
+        cleaned: dict[str, list[str]] = {}
+        for group, items in groups.items():
+            if not isinstance(items, list):
+                raise AnchorError(f"外观轴 {axis}/{group} 必须是列表")
+            entries = [str(item).strip() for item in items if str(item).strip()]
+            if entries:
+                cleaned[str(group)] = entries
+        if not cleaned:
+            raise AnchorError(f"外观轴 {axis} 缺少分组条目")
+        validated[str(axis)] = cleaned
+    return validated
+
+
+def _decision_axes(value: Any) -> dict[str, list[str]]:
+    if not isinstance(value, dict):
+        raise AnchorError("决策轴必须是 轴名→列表 映射")
+    axes: dict[str, list[str]] = {}
+    for name in ("核心价值", "压力策略", "关系姿态"):
+        items = _flat(value.get(name), f"决策轴·{name}")
+        if len(items) < 2:
+            raise AnchorError(f"决策轴·{name} 至少需要两项")
+        axes[name] = items
     return axes
 
 
-def _decision_axes(lines: list[str]) -> dict[str, list[str]]:
-    groups = _grouped(lines)
-    for name in ("核心价值", "压力策略", "关系姿态"):
-        if name not in groups or len(groups[name]) < 2:
-            raise AnchorError(f"人物决策轴缺少合格轴 {name}（需 `- 轴名：项、项` 且至少两项）")
-    return groups
+def _profile_weights(value: Any) -> dict[str, int]:
+    if not isinstance(value, dict) or not value:
+        raise AnchorError("人物生成倾向必须是 倾向→权重 映射")
+    weights: dict[str, int] = {}
+    for key, weight in value.items():
+        if not isinstance(weight, int) or isinstance(weight, bool) or weight <= 0:
+            raise AnchorError(f"人物生成倾向.{key} 必须是正整数")
+        weights[str(key)] = weight
+    if sum(weights.values()) != 100:
+        raise AnchorError(f"人物生成倾向权重总和必须为 100，实际为 {sum(weights.values())}")
+    return weights
 
 
-def _weights(lines: list[str]) -> dict[str, int]:
-    parsed: dict[str, int] = {}
-    inside = False
-    saw_content = False
-    for line in lines:
-        stripped = line.strip()
-        if not inside:
-            if stripped in {"```yaml", "```yml"}:
-                inside = True
-            continue
-        if stripped == "```":
-            break
-        if stripped and not stripped.startswith("#"):
-            if re.match(r"^[A-Za-z_]+:\s*$", stripped):
-                continue
-            saw_content = True
-            match = re.match(r"^\s{2}([A-Za-z_]+):\s*(\d+)\s*$", line)
-            if not match:
-                raise AnchorError(f"人物生成倾向权重格式损坏：{line.strip()!r}")
-            parsed[match.group(1)] = int(match.group(2))
-    if not saw_content:
-        raise AnchorError("人物生成倾向权重代码块为空")
-    missing = set(DEFAULT_WEIGHTS) - set(parsed)
-    extra = set(parsed) - set(DEFAULT_WEIGHTS)
-    if missing or extra or any(value <= 0 for value in parsed.values()):
-        raise AnchorError(f"人物生成倾向权重键缺失或数值非法：missing={sorted(missing)}, extra={sorted(extra)}")
-    if sum(parsed.values()) != 100:
-        raise AnchorError(f"人物生成倾向权重总和必须为 100，实际为 {sum(parsed.values())}")
-    return parsed
-
-
-def _supporting_functions(lines: list[str]) -> list[str]:
-    for line in lines:
-        if line.strip().startswith("配角功能独立生成") and line.strip().endswith("。"):
-            match = re.search(r"生成[：:]\s*(.*?)。", line)
-            if match:
-                return split_items(match.group(1))
-    raise AnchorError("「配角功能独立生成：…。」句式缺失或已改动")
-
-
-def _twist_pool(lines: list[str]) -> dict[str, list[str]]:
-    pools: dict[str, list[str]] = {}
-    current: str | None = None
-    for line in lines:
-        heading = re.match(r"^###\s+(.+)$", line)
-        if heading:
-            current = heading.group(1).strip()
-            pools[current] = []
-            continue
-        if current is None:
-            continue
-        stripped = line.strip()
-        if not stripped or stripped.startswith("#"):
-            continue
-        if stripped == "硬规则：" or re.match(r"^\d+\.\s", stripped):
-            break
-        pools[current].extend(split_items(line))
-    if tuple(pools) != TWIST_CATEGORIES:
-        raise AnchorError(f"中期剧情转折池必须严格包含七类：{TWIST_CATEGORIES}")
-    if any(not items for items in pools.values()):
-        raise AnchorError("中期剧情转折池存在空类（检查七个「### X类」小节）")
+def _twist_pool(value: Any) -> dict[str, list[str]]:
+    if not isinstance(value, dict) or tuple(value.keys()) != TWIST_CATEGORIES:
+        raise AnchorError(f"转折池必须严格包含七类且顺序不变：{TWIST_CATEGORIES}")
+    pools = {category: _flat(value.get(category), f"转折池·{category}") for category in TWIST_CATEGORIES}
     return pools
 
 
 def load_pools() -> dict[str, Any]:
-    char_text = read_doc(CHAR_DOC)
-    material_text = read_doc(MATERIAL_DOC)
-    world_text = read_doc(WORLD_DOC)
+    raw = _read_yaml(POOLS_FILE, "开局素材池")
+    meta = _parse_meta(raw)
+    char_meta = _read_yaml(CHAR_META_FILE, "人物生成元数据")
+    twists = _read_yaml(TWISTS_FILE, "转折池")
+    char_pools = _load_character_pools()
 
     pools: dict[str, Any] = {}
-    pools["表层风味"] = _union_pool(section("### 表层风味", char_text), name="表层风味", max_len=8)
-    pools["口癖"] = _union_pool(section("### 口癖与语感", char_text), name="口癖", max_len=8)
-    pools["外观轴"] = _appearance_pool(section("### 外观与气质轴", char_text))
-    pools["决策轴"] = _decision_axes(section("## 人物决策轴", char_text))
-    pools["人物生成倾向"] = _weights(section("## 人物生成原则", char_text))
-    pools["配角功能"] = _supporting_functions(section("## 配角", char_text))
-    if not pools["配角功能"]:
-        raise AnchorError("配角功能池为空")
+    pools["表层风味"] = _flatten_grouped(char_pools["表层风味"], name="表层风味", max_len=8)
+    pools["口癖"] = _flatten_grouped(char_pools["口癖"], name="口癖", max_len=8)
+    pools["外观轴"] = _appearance_from_yaml(char_pools["外观轴"])
+    pools["决策轴"] = _decision_axes(char_meta.get("决策轴"))
+    pools["人物生成倾向"] = _profile_weights(char_meta.get("人物生成倾向"))
+    pools["配角功能"] = _flat(char_meta.get("配角功能"), "配角功能")
 
-    pools["核心规则"] = _union_pool(section("## 核心规则", material_text), name="核心规则")
-    pools["美学基调"] = _union_pool(section("## 美学基调", material_text), name="美学基调")
-    pools["权力结构"] = _union_pool(section("## 权力结构", material_text), name="权力结构")
-    pools["张力引擎"] = _union_pool(section("## 张力引擎", material_text), name="张力引擎")
-    era_place = _grouped(section("## 时代与地点", material_text))
-    if not era_place.get("时代") or not era_place.get("地点"):
-        raise AnchorError("「时代与地点」缺少「时代」或「地点」分组")
-    pools["时代与地点"] = era_place
-    pools["社会规则"] = _union_pool(section("## 社会规则", material_text), name="社会规则")
-    pools["压力来源"] = _union_pool(section("## 压力来源", material_text), name="压力来源")
-    scene_groups = _grouped(section("## 场景动作", material_text))
-    if not scene_groups.get("交易摊牌") or not scene_groups.get("非交易靠近"):
-        raise AnchorError("「场景动作」缺少「交易摊牌」或「非交易靠近」分组")
-    pools["场景动作·交易"] = list(dict.fromkeys(scene_groups["交易摊牌"]))
-    pools["场景动作·靠近"] = list(dict.fromkeys(scene_groups["非交易靠近"]))
+    for key in ("核心规则", "美学基调", "权力结构", "张力引擎", "社会规则",
+                "压力来源", "身份侧", "处境侧", "反差轴"):
+        pools[key] = _flat(raw.get(key), key)
+    pools["时代与地点"] = _flat_groups(raw.get("时代与地点"), "时代与地点", ("时代", "地点"))
+    scene = _flat_groups(raw.get("场景动作"), "场景动作", ("交易摊牌", "非交易靠近"))
+    pools["场景动作·交易"] = scene["交易摊牌"]
+    pools["场景动作·靠近"] = scene["非交易靠近"]
     pools["场景动作"] = list(dict.fromkeys(pools["场景动作·交易"] + pools["场景动作·靠近"]))
-    pools["身份侧"] = _union_pool(section("## 身份侧", material_text), name="身份侧")
-    pools["处境侧"] = _union_pool(section("## 处境侧", material_text), name="处境侧")
-    pools["反差轴"] = _union_pool(section("## 反差轴", material_text), name="反差轴")
-    player_axes = _grouped(section("## 玩家化身轴", material_text))
-    for axis in ("称谓", "年龄段", "社会位置"):
-        if not player_axes.get(axis):
-            raise AnchorError(f"「玩家化身轴」缺少「{axis}」分组")
-    pools["玩家化身轴"] = {key: list(dict.fromkeys(items)) for key, items in player_axes.items()}
+    pools["玩家化身轴"] = _flat_groups(raw.get("玩家化身轴"), "玩家化身轴", ("称谓", "年龄段", "社会位置"))
+    pools["转折池"] = _twist_pool(twists)
 
-    pools["转折池"] = _twist_pool(section("## 中期剧情转折", world_text))
     if not set(pools["权力结构"]).issubset(POWER_STRUCTURES):
         raise AnchorError("权力结构条目与 validate_state 枚举不一致")
+    for name in meta["leverage_engines"]:
+        if name not in pools["张力引擎"]:
+            raise AnchorError(f"meta.leverage_engines 引用了不存在的张力引擎：{name!r}")
+    for name in meta["situation_leverage"]:
+        if name not in pools["处境侧"]:
+            raise AnchorError(f"meta.situation_leverage 引用了不存在的处境：{name!r}")
+    for name in meta["gate_aesthetics"]:
+        if name not in pools["美学基调"]:
+            raise AnchorError(f"meta.gate_aesthetics 引用了不存在的美学基调：{name!r}")
+    for family in meta["identity_weights"]:
+        if family not in pools["身份侧"]:
+            raise AnchorError(f"meta.identity_weights 引用了不存在的身份族：{family!r}")
+    pools["meta"] = meta
     return pools
 
 
@@ -338,12 +303,13 @@ def _weighted_choice(rng: random.Random, items: list[str], weights: dict[str, in
 
 
 def _combine_multi(key: str, raw: str, pool: list[str], count: int,
-                   rng: random.Random) -> str:
+                   rng: random.Random, avoid: set[str] | None = None) -> str:
     """把多值字段（如张力引擎）的 lock/custom 值规范化为恰好 count 项。
 
     - 值按顿号/逗号拆分；
     - 超过 count 项或含重复项报错；
-    - 少于 count 项时，从池中排除已锁定项后补抽到 count，保证互不相同。
+    - 少于 count 项时，从池中排除已锁定项（以及 avoid 集合，除非玩家显式
+      锁定了多项）后补抽到 count，保证互不相同且不塌缩成被禁组合。
     """
     items = [part.strip() for part in MULTI_SEPARATOR.split(raw) if part.strip()]
     if not items:
@@ -355,6 +321,12 @@ def _combine_multi(key: str, raw: str, pool: list[str], count: int,
     if len(items) == count:
         return "、".join(items)
     remaining = [item for item in pool if item not in items]
+    # 玩家只显式锁定一项且落在 avoid 组（杠杆引擎）时，补抽不得再落入同组；
+    # 玩家显式锁满两项则视为有意叠加，不受此限。
+    if avoid and len(items) < count and not any(item in avoid for item in items[1:]):
+        filtered = [item for item in remaining if item not in avoid]
+        if filtered:
+            remaining = filtered
     picks = items + rng.sample(remaining, count - len(items))
     return "、".join(picks)
 
@@ -422,7 +394,11 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
 
     def draw_many(key: str, pool: list[str], count: int) -> None:
         if key in locks:
-            roll[key] = _combine_multi(key, locks[key], pool, count, rng)
+            locked_parts = [part.strip() for part in MULTI_SEPARATOR.split(locks[key]) if part.strip()]
+            # 单锁一项杠杆引擎时，补抽不得再叠出第二项杠杆引擎（双杠杆防塌缩）。
+            avoid = LEVERAGE_ENGINES if (key == "张力引擎" and len(locked_parts) == 1
+                                         and locked_parts[0] in LEVERAGE_ENGINES) else None
+            roll[key] = _combine_multi(key, locks[key], pool, count, rng, avoid=avoid)
             return
         if mode == "all_custom" and key in CUSTOM_KEYS:
             raw = custom.get(key, "custom_required")
@@ -612,9 +588,19 @@ def print_roll(roll: dict[str, Any]) -> None:
         print("强制表内：具体身份须由身份族条目推导，不得自拟。")
 
 
+def _nonneg_int(text: str) -> int:
+    try:
+        value = int(text)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(f"must be an integer, got {text!r}") from exc
+    if value < 0:
+        raise argparse.ArgumentTypeError("must be a non-negative integer")
+    return value
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--seed", type=int, default=None,
+    parser.add_argument("--seed", type=_nonneg_int, default=None,
                         help="非负整数 seed；缺省用系统熵，实际 seed 显示在输出首行")
     parser.add_argument("--no-history", action="store_true",
                         help="不写近期抽取历史（维护自检时使用）")
@@ -631,9 +617,6 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--format", choices=["text", "json"], default="text")
     args = parser.parse_args(argv)
 
-    if args.seed is not None and args.seed < 0:
-        print("ERROR: --seed must be a non-negative integer", file=sys.stderr)
-        return 2
     def parse_pairs(entries: list[str], label: str) -> dict[str, str]:
         pairs: dict[str, str] = {}
         for entry in entries:

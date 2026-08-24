@@ -51,6 +51,19 @@ def iso_now() -> str:
     return utc_now().isoformat(timespec="microseconds")
 
 
+def _load_common() -> Any:
+    spec = importlib.util.spec_from_file_location(
+        "adult_tension_common", Path(__file__).with_name("_common.py"))
+    if spec is None or spec.loader is None:
+        raise SaveError("cannot load _common.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_COMMON = _load_common()
+
+
 def slot_name(value: str) -> str:
     if not isinstance(value, str):
         raise SaveError("slot name must be a string")
@@ -67,7 +80,7 @@ def slot_name(value: str) -> str:
 def yaml_text(data: Any) -> str:
     if yaml is None:
         raise SaveError("PyYAML is required; run: python -m pip install PyYAML")
-    return yaml.safe_dump(data, allow_unicode=True, sort_keys=False, default_flow_style=False)
+    return _COMMON.yaml_text(data)
 
 
 def load_yaml(path: Path) -> Any:
@@ -80,20 +93,7 @@ def load_yaml(path: Path) -> Any:
 
 
 def write_atomic(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    fd, temp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
-    temp_path = Path(temp_name)
-    try:
-        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as handle:
-            handle.write(text)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temp_path, path)
-    finally:
-        try:
-            temp_path.unlink()
-        except FileNotFoundError:
-            pass
+    _COMMON.write_atomic(path, text)
 
 
 class FileLock:
@@ -104,20 +104,23 @@ class FileLock:
         self.handle: Any = None
 
     def __enter__(self) -> "FileLock":
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.handle = self.path.open("a+b")
-        self.handle.seek(0)
-        self.handle.write(b"0")
-        self.handle.flush()
-        self.handle.seek(0)
-        if os.name == "nt":
-            import msvcrt
+        try:
+            # w+b：文件内容无意义，截断到 0 字节即可（不再随每次加锁追加增长）。
+            self.handle = self.path.open("w+b")
+            self.handle.seek(0)
+            if os.name == "nt":
+                import msvcrt
 
-            msvcrt.locking(self.handle.fileno(), msvcrt.LK_LOCK, 1)
-        else:  # pragma: no cover - exercised on POSIX CI
-            import fcntl
+                msvcrt.locking(self.handle.fileno(), msvcrt.LK_LOCK, 1)
+            else:  # pragma: no cover - exercised on POSIX CI
+                import fcntl
 
-            fcntl.flock(self.handle.fileno(), fcntl.LOCK_EX)
+                fcntl.flock(self.handle.fileno(), fcntl.LOCK_EX)
+        except OSError as exc:
+            if self.handle is not None:
+                self.handle.close()
+                self.handle = None
+            raise SaveError(f"cannot acquire write lock {self.path}: {exc}") from exc
         return self
 
     def __exit__(self, exc_type: Any, exc: Any, traceback: Any) -> None:
@@ -194,13 +197,14 @@ class SaveStore:
 
     def init_slot(self, slot: str, source: Path) -> dict[str, Any]:
         slot = slot_name(slot)
-        if self.slot_dir(slot).exists():
-            raise SaveError(f"slot already exists: {slot}")
+        try:
+            self.state_path(slot).parent.mkdir(parents=True, exist_ok=False)
+        except FileExistsError as exc:
+            raise SaveError(f"slot already exists: {slot}") from exc
         state = load_yaml(source)
         if not isinstance(state, dict):
             raise SaveError("source state must be a mapping")
         self._validate_state(state)
-        self.state_path(slot).parent.mkdir(parents=True, exist_ok=False)
         write_atomic(self.state_path(slot), yaml_text(state))
         write_atomic(self.manifest_path(slot), yaml_text(self._new_manifest(slot)))
         return self._read_manifest(slot)
@@ -248,17 +252,28 @@ class SaveStore:
         if not isinstance(candidate, dict):
             raise SaveError("candidate state must be a mapping")
         self._validate_state(candidate)
+        # 槽不存在时先拒绝，避免为拼错的槽名留下只含 .write.lock 的垃圾目录。
+        if not self.manifest_path(slot).exists():
+            raise SaveError(f"slot does not exist or has no manifest: {slot} (init it first)")
         with FileLock(self.lock_path(slot)):
             manifest = self._read_manifest(slot)
-            if expected_updated_at is not None and manifest.get("updated_at") != expected_updated_at:
+            if expected_updated_at is None:
+                raise SaveError(
+                    "覆盖保存必须携带 --expected-updated-at（载入时记录的 manifest.updated_at）；"
+                    "先用 load 查看最新值"
+                )
+            if manifest.get("updated_at") != expected_updated_at:
                 raise SaveError(
                     "write conflict: slot was modified after load; reload the latest version "
                     "or save under a new name"
                 )
             updated = dict(manifest)
             updated["updated_at"] = iso_now()
-            write_atomic(self.state_path(slot), yaml_text(candidate))
+            # 先写 manifest 再写 state：两连写之间崩溃时会留下「manifest 新 / state 旧」
+            # 的保守失配（下一次携带旧 expected 的保存会被冲突检测拦下），而不是
+            # 「state 新 / manifest 旧」导致的静默覆盖。
             write_atomic(self.manifest_path(slot), yaml_text(updated))
+            write_atomic(self.state_path(slot), yaml_text(candidate))
             return updated
 
 
@@ -312,4 +327,9 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, OSError):  # pragma: no cover
+        pass
     raise SystemExit(main())
