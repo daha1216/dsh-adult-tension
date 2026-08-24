@@ -34,11 +34,16 @@
 
 复制完成后，让 AI 加载 `adult-tension` 技能即可开始。
 
-## 🎬 实际游玩效果
+## 🏷️ 版本发布（Releases）
 
-![游玩输入示例](./docs/screenshots/play-input.png)
+稳定版本在 [GitHub Releases](https://github.com/daha1216/dsh-adult-tension/releases) 发布，适合需要固定版本快照的场景：
 
-![游玩输出示例](./docs/screenshots/play-output.png)
+| 版本 | 发布日期 | 说明 |
+| --- | --- | --- |
+| [v0.2.0](https://github.com/daha1216/dsh-adult-tension/releases/tag/v0.2.0) | 2026-08-25 | 重构版：数据与文档分家，v3 运行时架构全面落地 |
+| [v0.1.0](https://github.com/daha1216/dsh-adult-tension/releases/tag/v0.1.0) | 2026-08-20 | 首个公开发布版本 |
+
+日常游玩建议直接按上文方式安装仓库 `main` 分支，获取最新的修复与素材更新。
 
 ## ✨ 核心能力
 
