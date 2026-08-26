@@ -60,6 +60,17 @@ def load_yaml_file(path: Path) -> Any:
         raise CommonError(f"cannot read YAML {path}: {exc}") from exc
 
 
+def load_data_yaml(name: str) -> Any:
+    """读取 scripts/data/<name>——全部脚本的数据本体唯一加载入口。
+
+    空文件或顶层非映射按 CommonError 报错；调用方负责翻译成自己的错误类型。
+    """
+    data = load_yaml_file(DATA_DIR / name)
+    if not isinstance(data, dict) or not data:
+        raise CommonError(f"data file is empty or not a mapping: {name}")
+    return data
+
+
 def yaml_text(data: Any) -> str:
     if yaml is None:
         raise CommonError("PyYAML is required; run: python -m pip install PyYAML")

@@ -36,6 +36,12 @@ def _load(path: Path) -> dict[str, Any]:
     return data
 
 
+# 活切片上限：防长线膨胀（pending 按到期/创建排序取前 N，knowledge 保留最新 M 条；
+# relationships 全量保留——量小且是关系传播的正式来源）。
+PENDING_EVENTS_LIMIT = 10
+KNOWLEDGE_LIMIT = 8
+
+
 def _trim_npc(npc: dict[str, Any]) -> dict[str, Any]:
     situation = npc.get("situation") if isinstance(npc.get("situation"), dict) else {}
     sex = npc.get("sexuality_profile") if isinstance(npc.get("sexuality_profile"), dict) else {}
@@ -56,7 +62,7 @@ def _trim_npc(npc: dict[str, Any]) -> dict[str, Any]:
         "withdrawal_signal": npc.get("withdrawal_signal"),
         "emotion": npc.get("emotion"),
         "resources": npc.get("resources") or [],
-        "knowledge": npc.get("knowledge") or [],
+        "knowledge": (npc.get("knowledge") or [])[-KNOWLEDGE_LIMIT:],
         "recent_memories": (npc.get("recent_memories") or [])[-2:],
         "signature": npc.get("signature"),
         "autonomy": npc.get("autonomy"),
@@ -69,15 +75,21 @@ def _trim_npc(npc: dict[str, Any]) -> dict[str, Any]:
 
 
 def _pending_events(events: Any) -> list[dict[str, Any]]:
-    result = []
+    rows: list[tuple[tuple, dict[str, Any]]] = []
     if not isinstance(events, list):
-        return result
+        return []
     for event in events:
         if not isinstance(event, dict):
             continue
         if event.get("status") != "pending":
             continue
-        result.append({
+        due = event.get("due_at")
+        try:
+            created = int(event.get("created_turn") or 0)
+        except (TypeError, ValueError):
+            created = 0
+        order = (due is None, str(due or ""), created, str(event.get("id") or ""))
+        rows.append((order, {
             "id": event.get("id"),
             "kind": event.get("kind"),
             "trigger": event.get("trigger"),
@@ -87,8 +99,13 @@ def _pending_events(events: Any) -> list[dict[str, Any]]:
             "semantic_key": event.get("semantic_key"),
             "source": event.get("source"),
             "probability": event.get("probability"),
-        })
-    return result
+        }))
+    rows.sort(key=lambda row: row[0])
+    kept = [row[1] for row in rows[:PENDING_EVENTS_LIMIT]]
+    omitted = len(rows) - len(kept)
+    if omitted > 0:
+        kept.append({"summary": f"另有 {omitted} 条未列出"})
+    return kept
 
 
 def extract_live_slice(state: dict[str, Any]) -> dict[str, Any]:
@@ -151,7 +168,7 @@ def extract_live_slice(state: dict[str, Any]) -> dict[str, Any]:
             "location": player.get("location"),
             "baseline": player.get("baseline"),
             "resources": player.get("resources") or [],
-            "knowledge": player.get("knowledge") or [],
+            "knowledge": (player.get("knowledge") or [])[-KNOWLEDGE_LIMIT:],
             "reputation": player.get("reputation"),
             "appellation": player.get("appellation"),
         },

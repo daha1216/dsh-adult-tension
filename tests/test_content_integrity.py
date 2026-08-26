@@ -26,7 +26,7 @@ DATA_FILES = (
     "character_pools.yaml",
 )
 
-EXPECTED = "ee048dd36e719a74c49ea610967724623db740cf93a9d06746a8fc5cdc335abf"
+EXPECTED = "7943bc1c752bf2421457db94f2e85b3949379ebe956539929ee715b97d6e5535"
 
 
 def _load(name: str, relative: str):
@@ -53,6 +53,23 @@ class ContentIntegrityTests(unittest.TestCase):
     def test_data_files_exist(self) -> None:
         for name in DATA_FILES:
             self.assertTrue((DATA / name).exists(), name)
+
+    def test_voice_filter_carries_bilingual_markers(self) -> None:
+        # 双语态契约：生成器产物必须带「表层语态：」「里层语态：」，否则
+        # live_slice 会把里层台词当表层输出（check_content 第 13 项的单元面）。
+        fill = _load("fill_opening_for_check", "scripts/fill_opening.py")
+        templates = CHECK._load("templates.yaml")
+        for flavor, quirk in (("—", "—"), ("冷淡疏离", "话留半句")):
+            text = fill.voice_filter({"表层风味": flavor, "口癖": quirk, "反差轴": ""},
+                                     "测试身份", templates)
+            self.assertIn("表层语态：", text)
+            self.assertIn("里层语态：", text)
+
+    def test_content_check_includes_voice_format_gate(self) -> None:
+        report = CHECK.check()
+        voice_errors = [e for e in report.errors if "语态" in e]
+        self.assertEqual([], voice_errors, f"双语态检查不应报错：{voice_errors}")
+        self.assertGreaterEqual(report.checks, 340)
 
     def test_content_fingerprint(self) -> None:
         actual = fingerprint()

@@ -5,6 +5,7 @@ import importlib.util
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 SCRIPT = Path(__file__).parents[1] / "scripts" / "build_opening.py"
@@ -222,6 +223,62 @@ class BuildOpeningTests(unittest.TestCase):
             triples.append((shell["type"], shell["place"], engines))
             self.assertEqual(roll["玩家称谓"], filled["player"]["appellation"])
         self.assertGreaterEqual(len(set(triples)), 8)
+
+    def test_era_lock_uses_dedicated_name_pool(self) -> None:
+        names_table = BUILD.load_yaml_module().safe_load(
+            (Path(__file__).parents[1] / "scripts" / "data" / "names.yaml").read_text(encoding="utf-8"))
+        meiji = names_table["eras"]["明治东京"]
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "opening.yaml"
+            working = Path(tmp) / "current.yaml"
+            code = BUILD.main([
+                "--complete", "--seed", "5", "--lock", "时代=明治东京",
+                "--out", str(out), "--working", str(working),
+            ])
+            self.assertEqual(0, code)
+            data = BUILD.load_yaml_module().safe_load(out.read_text(encoding="utf-8"))
+        for role_obj in (data["player"], data["npcs"][0]):
+            name = role_obj["name"]
+            hit = [s for s in meiji["surnames"]
+                   if name.startswith(s) and name[len(s):] in meiji["given"]]
+            self.assertTrue(hit, f"{name} 不在明治池内")
+        self.assertEqual(
+            "pass", data["npcs"][0]["naming_audit"]["checks"]["culture_match"])
+
+    def test_default_pool_kept_for_era_without_dedicated_pool(self) -> None:
+        # 现在全部时代都有专属名池；回退路径改为注入「无专属池」的 names 表来端到端验证。
+        names_table = BUILD.load_yaml_module().safe_load(
+            (Path(__file__).parents[1] / "scripts" / "data" / "names.yaml").read_text(encoding="utf-8"))
+        default_names = {key: value for key, value in names_table.items() if key != "eras"}
+        original_loader = BUILD.load_fill_opening
+
+        def loader_without_era_pools():
+            fill_mod = original_loader()
+            original_tables = fill_mod.load_tables
+
+            def tables_without_era_pools():
+                tables = original_tables()
+                tables["names"] = dict(default_names)
+                return tables
+
+            fill_mod.load_tables = tables_without_era_pools
+            return fill_mod
+
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "opening.yaml"
+            working = Path(tmp) / "current.yaml"
+            with mock.patch.object(BUILD, "load_fill_opening", loader_without_era_pools):
+                code = BUILD.main([
+                    "--complete", "--seed", "5", "--lock", "时代=当代都市",
+                    "--out", str(out), "--working", str(working),
+                ])
+            self.assertEqual(0, code)
+            data = BUILD.load_yaml_module().safe_load(out.read_text(encoding="utf-8"))
+        for role_obj in (data["player"], data["npcs"][0]):
+            name = role_obj["name"]
+            hit = [s for s in default_names["surnames"]
+                   if name.startswith(s) and name[len(s):] in default_names["given"]]
+            self.assertTrue(hit, f"{name} 不在默认池内")
 
 
 def _load(name: str, path: Path):

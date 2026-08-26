@@ -14,19 +14,28 @@ from __future__ import annotations
 
 import copy
 import datetime as dt
+import importlib.util
 import random
 import re
 from pathlib import Path
 from typing import Any
 
-try:
-    import yaml
-except ImportError:  # pragma: no cover
-    yaml = None
-
-DATA_DIR = Path(__file__).resolve().parent / "data"
 PROTOCOL = "opening-fill/v1"
 MULTI_SEPARATOR = re.compile(r"[、，,]")
+
+
+def _load_common() -> Any:
+    """按路径加载同目录 _common.py（不依赖 sys.path，见该模块 docstring）。"""
+    spec = importlib.util.spec_from_file_location(
+        "adult_tension_common", Path(__file__).with_name("_common.py"))
+    if spec is None or spec.loader is None:
+        raise RuntimeError("cannot load _common.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_COMMON = _load_common()
 
 
 class FillError(RuntimeError):
@@ -34,16 +43,11 @@ class FillError(RuntimeError):
 
 
 def _load_yaml(name: str) -> Any:
-    if yaml is None:
-        raise FillError("PyYAML is required; run: python -m pip install PyYAML")
-    path = DATA_DIR / name
+    # 数据本体统一走 _common 的加载入口；缺依赖或文件问题统一为 CommonError。
     try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
-        raise FillError(f"cannot read {path}: {exc}") from exc
-    if not data:
-        raise FillError(f"{path} is empty")
-    return data
+        return _COMMON.load_data_yaml(name)
+    except _COMMON.CommonError as exc:
+        raise FillError(str(exc)) from exc
 
 
 def rng_for(seed: int, label: str) -> random.Random:
@@ -105,6 +109,18 @@ def load_tables() -> dict[str, Any]:
     }
 
 
+def name_pool_for_era(names: dict, era: str) -> tuple[list, list]:
+    """时代命中专属名池则用该池，否则回退顶层默认池。"""
+    era_pools = names.get("eras") or {}
+    pool = era_pools.get(str(era)) if isinstance(era_pools, dict) else None
+    if isinstance(pool, dict):
+        surnames = pool.get("surnames") or []
+        givens = pool.get("given") or []
+        if surnames and givens:
+            return list(surnames), list(givens)
+    return list(names.get("surnames") or []), list(names.get("given") or [])
+
+
 def make_name(rng: random.Random, surnames: list[str], givens: list[str], used: set[str]) -> str:
     for _ in range(80):
         surname = pick(rng, surnames)
@@ -119,7 +135,8 @@ def make_name(rng: random.Random, surnames: list[str], givens: list[str], used: 
 
 
 def naming_audit(role_ref: str, chosen: str, candidates: list[str],
-                 era: str, place: str, social: str) -> dict[str, Any]:
+                 era: str, place: str, social: str,
+                 era_pool_hit: bool = False) -> dict[str, Any]:
     rows = []
     for name in candidates:
         if name == chosen:
@@ -128,9 +145,13 @@ def naming_audit(role_ref: str, chosen: str, candidates: list[str],
             # 如实标注：脚本路径只按池序取首候选，未选中项统一记「未选用」。
             rows.append({"name": name, "reject_reason": "未选用：按抽取顺序落在首选之后"})
     contemporary_markers = ("当代", "现代", "都市", "九十年代", "近未来", "架空")
-    culture_match = (
-        "pass" if any(marker in str(era) for marker in contemporary_markers) else "warn"
-    )
+    if era_pool_hit:
+        # 时代命中专属名池：姓名与时代同源，直接记 pass。
+        culture_match = "pass"
+    else:
+        culture_match = (
+            "pass" if any(marker in str(era) for marker in contemporary_markers) else "warn"
+        )
     return {
         "role_ref": role_ref,
         "mode": "standard",
@@ -338,8 +359,10 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
 
     rng_names = rng_for(seed, "names")
     rng_body = rng_for(seed, "body")
-    surnames = list(tables["names"]["surnames"])
-    givens = list(tables["names"]["given"])
+    names_table = tables["names"]
+    surnames, givens = name_pool_for_era(names_table, era)
+    era_pool = (names_table.get("eras") or {}).get(str(era)) or {}
+    era_pool_hit = bool(era_pool.get("surnames") and era_pool.get("given"))
     used: set[str] = set()
     player_candidates = [make_name(rng_names, surnames, givens, used) for _ in range(4)]
     npc_candidates = [make_name(rng_names, surnames, givens, used) for _ in range(4)]
@@ -555,6 +578,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     }
     npc["naming_audit"] = naming_audit(
         "main_npc", npc_name, npc_candidates, era, place, family,
+        era_pool_hit=era_pool_hit,
     )
 
     # 配角未进场：丢掉骨架里可能出现的第二名。

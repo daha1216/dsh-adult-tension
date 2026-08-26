@@ -15,49 +15,47 @@ import sys
 from pathlib import Path
 from typing import Any
 
-try:
-    import yaml
-except ImportError:  # pragma: no cover
-    yaml = None
-
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_STATE = ROOT / "saves" / "current_state.yaml"
 PUBLIC_HINTS = ("走廊", "门厅", "大堂", "街道", "步道", "车站", "大厅", "连接处")
 PRIVATE_HINTS = ("卧室", "浴室", "卫生间", "套房", "包厢", "起居室", "内间", "里间")
 
 
-class CommitError(RuntimeError):
-    pass
-
-
-def _load_module(script: Path, name: str) -> Any:
-    spec = importlib.util.spec_from_file_location(name, script)
+def _load_common() -> Any:
+    """按路径加载同目录 _common.py（不依赖 sys.path，见该模块 docstring）。"""
+    spec = importlib.util.spec_from_file_location(
+        "adult_tension_common", Path(__file__).with_name("_common.py"))
     if spec is None or spec.loader is None:
-        raise CommitError(f"cannot load {script}")
+        raise RuntimeError("cannot load _common.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
 
+_COMMON = _load_common()
+
+
+class CommitError(RuntimeError):
+    pass
+
+
 def load_validator() -> Any:
-    return _load_module(Path(__file__).with_name("validate_state.py"), "adult_tension_validate_state")
+    return _COMMON.load_sibling("validate_state")
 
 
 def load_live_slice() -> Any:
-    return _load_module(Path(__file__).with_name("live_slice.py"), "adult_tension_live_slice")
+    return _COMMON.load_sibling("live_slice")
 
 
 def load_saves() -> Any:
-    return _load_module(Path(__file__).with_name("manage_saves.py"), "adult_tension_manage_saves")
+    return _COMMON.load_sibling("manage_saves")
 
 
 def load_yaml(path: Path) -> dict[str, Any]:
-    if yaml is None:
-        raise CommitError("PyYAML is required; run: python -m pip install PyYAML")
     try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
-        raise CommitError(f"cannot read {path}: {exc}") from exc
+        data = _COMMON.load_yaml_file(path)
+    except _COMMON.CommonError as exc:
+        raise CommitError(str(exc)) from exc
     if not isinstance(data, dict):
         raise CommitError(f"state is not a mapping: {path}")
     return data
@@ -176,6 +174,9 @@ def apply_scene(state: dict[str, Any], location: str | None, participants: list[
     for grant in consent.get("grants") or []:
         if isinstance(grant, dict):
             archive.append(grant)
+    # 归档只留最近 N 条，防长线膨胀；只丢 archive，不动当前 grants。
+    if len(archive) > GRANTS_ARCHIVE_LIMIT:
+        del archive[:-GRANTS_ARCHIVE_LIMIT]
     consent["grants"] = new_grants
     player = state.get("player")
     if isinstance(player, dict):
@@ -275,6 +276,9 @@ def apply_relationship(state: dict[str, Any], delta: dict[str, Any] | list[Any] 
 
 
 EVENT_IMMUTABLE_FIELDS = ("id", "semantic_key", "kind", "source", "created_turn")
+
+# 换场归档（consent.grants_archive）最多保留的条数；更早的在换场归档时丢弃。
+GRANTS_ARCHIVE_LIMIT = 20
 
 
 def _event_index(state: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -378,7 +382,8 @@ def apply_events(state: dict[str, Any], resolve_ids: list[str], additions: list[
             if turn not in checked:
                 checked.append(turn)
             event["checked_turns"] = checked
-        touched.discard(target_id)
+        # 注意：这里不再把 target_id 移出 touched——同一事件在同补丁内被解决/取消
+        # 又被更新时，仍按解决/取消语义重指或置空压力种子（events_update 不吞重指）。
 
     all_event_ids = [event.get("id") for event in events if isinstance(event, dict)]
     summary_ids = [item.get("event_id") for item in resolved if isinstance(item, dict)]
@@ -476,9 +481,16 @@ def apply_boundaries(state: dict[str, Any], additions: list[Any], revoke_topics:
                      turn: int) -> None:
     items = list(state.get("boundaries") or [])
     existing_ids = [b.get("id") for b in items if isinstance(b, dict)]
-    revoke = set(revoke_topics or [])
+    revoke = list(dict.fromkeys(revoke_topics or []))
+    # 与 grants_withdraw 同一严格度：话题对不上任何边界记录（无论 active/revoked）
+    # 就报错退出，不静默无操作。
+    known_topics = {b.get("topic") for b in items if isinstance(b, dict)}
+    unknown = [topic for topic in revoke if topic not in known_topics]
+    if unknown:
+        raise CommitError(f"boundaries_revoke references unknown boundary topics: {unknown}")
+    revoke_set = set(revoke)
     for boundary in items:
-        if isinstance(boundary, dict) and boundary.get("topic") in revoke and boundary.get("status") == "active":
+        if isinstance(boundary, dict) and boundary.get("topic") in revoke_set and boundary.get("status") == "active":
             boundary["status"] = "revoked"
             boundary["revoked_turn"] = turn
     for raw in additions or []:
@@ -713,7 +725,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.format == "json":
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
-        print(yaml.safe_dump(payload, allow_unicode=True, sort_keys=False, default_flow_style=False))
+        print(_COMMON.yaml_text(payload))
     return 0
 
 

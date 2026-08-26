@@ -11,6 +11,7 @@ ERROR 会让开局直接报错或校验失败；WARNING 是有兜底、戏味打
 
 from __future__ import annotations
 
+import importlib.util
 import sys
 from pathlib import Path
 from typing import Any
@@ -219,6 +220,35 @@ def check() -> Report:
     report.ok(bool(char_pools.get("外观轴")), "character_pools.yaml 缺少外观轴")
     report.ok(bool(names.get("surnames")) and bool(names.get("given")),
               "names.yaml 缺少姓氏或名字池")
+
+    # 12. 时代分名池：era 键必须在时代池里，且每组 surnames/given 非空
+    era_pool_table = names.get("eras") or {}
+    era_names = set(pools.get("时代与地点", {}).get("时代") or [])
+    for era_name, pool in era_pool_table.items():
+        report.ok(str(era_name) in era_names,
+                  f"names.yaml eras「{era_name}」不在时代池里（永远抽不到）")
+        report.ok(isinstance(pool, dict) and bool(pool.get("surnames")) and bool(pool.get("given")),
+                  f"names.yaml eras「{era_name}」的 surnames/given 必须非空")
+
+    # 13. 双语态格式契约：主 NPC 语态字段必须同时带「表层语态：」「里层语态：」两个标记。
+    # live_slice 按「里层」首次出现处切分（角色设计.md「书写格式」），缺任一标记，
+    # 里层台词会被整段当表层输出。这里直接验证生成器 fill_opening.voice_filter 的产物。
+    try:
+        spec = importlib.util.spec_from_file_location(
+            "adult_tension_check_fill", ROOT / "scripts" / "fill_opening.py")
+        if spec is None or spec.loader is None:
+            raise RuntimeError("cannot load fill_opening.py")
+        fill_mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(fill_mod)
+        for flavor, quirk in (("—", "—"), ("冷淡疏离", "话留半句")):
+            text = fill_mod.voice_filter(
+                {"表层风味": flavor, "口癖": quirk, "反差轴": ""}, "测试身份", templates)
+            report.ok("表层语态：" in text and "里层语态：" in text,
+                      "fill_opening.voice_filter 产物缺少「表层语态：/里层语态：」标记"
+                      "（live_slice 会把里层台词当表层输出）")
+    except Exception as exc:  # noqa: BLE001 - 加载失败本身就是体检要抓的问题
+        report.checks += 1
+        report.error(f"双语态标记检查无法执行：{exc}")
 
     return report
 

@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import importlib.util
 import json
 import random
 import re
@@ -28,8 +29,6 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import Any
-
-import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "scripts" / "data"
@@ -82,10 +81,24 @@ def split_items(text: str) -> list[str]:
     return [part.strip() for part in re.split(r"[、，,]", text) if part.strip()]
 
 
+def _load_common() -> Any:
+    """按路径加载同目录 _common.py（不依赖 sys.path，见该模块 docstring）。"""
+    spec = importlib.util.spec_from_file_location(
+        "adult_tension_common", Path(__file__).with_name("_common.py"))
+    if spec is None or spec.loader is None:
+        raise RuntimeError("cannot load _common.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_COMMON = _load_common()
+
+
 def _read_yaml(path: Path, label: str) -> dict[str, Any]:
     try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        data = _COMMON.load_yaml_file(path)
+    except _COMMON.CommonError as exc:
         raise AnchorError(f"无法读取{label}（{path}）：{exc}") from exc
     if not isinstance(data, dict) or not data:
         raise AnchorError(f"{label}为空或顶层不是映射：{path}")
@@ -131,12 +144,55 @@ def _parse_meta(raw: dict[str, Any]) -> dict[str, Any]:
     return meta
 
 
-# 模块级行为开关：数据本体在 pools.yaml 的 meta 节，导入时读入。
-_MODULE_META = _parse_meta(_read_yaml(POOLS_FILE, "开局素材池"))
-LEVERAGE_ENGINES = frozenset(_MODULE_META["leverage_engines"])
-SITUATION_LEVERAGE = frozenset(_MODULE_META["situation_leverage"])
-GATE_AESTHETICS = frozenset(_MODULE_META["gate_aesthetics"])
-IDENTITY_WEIGHTS = dict(_MODULE_META["identity_weights"])
+# 行为开关（pools.yaml 的 meta 节）与原始素材池改为首次使用时加载：
+# 模块导入不再读任何数据文件；进程内每个文件只解析一次。
+_RAW_POOLS_CACHE: dict[str, Any] | None = None
+_META_CACHE: dict[str, Any] | None = None
+
+
+def _raw_pools_once() -> dict[str, Any]:
+    global _RAW_POOLS_CACHE
+    if _RAW_POOLS_CACHE is None:
+        _RAW_POOLS_CACHE = _read_yaml(POOLS_FILE, "开局素材池")
+    return _RAW_POOLS_CACHE
+
+
+def _module_meta() -> dict[str, Any]:
+    global _META_CACHE
+    if _META_CACHE is None:
+        _META_CACHE = _parse_meta(_raw_pools_once())
+    return _META_CACHE
+
+
+def leverage_engines() -> frozenset[str]:
+    return frozenset(_module_meta()["leverage_engines"])
+
+
+def situation_leverage() -> frozenset[str]:
+    return frozenset(_module_meta()["situation_leverage"])
+
+
+def gate_aesthetics() -> frozenset[str]:
+    return frozenset(_module_meta()["gate_aesthetics"])
+
+
+def identity_weights() -> dict[str, int]:
+    return dict(_module_meta()["identity_weights"])
+
+
+def __getattr__(name: str) -> Any:
+    # 兼容旧的全大写常量属性访问（外部消费者/测试按属性读取时兜底；
+    # 模块内部一律用上面的取值函数）。
+    lazy = {
+        "LEVERAGE_ENGINES": leverage_engines,
+        "SITUATION_LEVERAGE": situation_leverage,
+        "GATE_AESTHETICS": gate_aesthetics,
+        "IDENTITY_WEIGHTS": identity_weights,
+        "_MODULE_META": _module_meta,
+    }
+    if name in lazy:
+        return lazy[name]()
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
 def _load_character_pools() -> dict[str, Any]:
@@ -222,7 +278,7 @@ def _twist_pool(value: Any) -> dict[str, list[str]]:
 
 
 def load_pools() -> dict[str, Any]:
-    raw = _read_yaml(POOLS_FILE, "开局素材池")
+    raw = _raw_pools_once()
     meta = _parse_meta(raw)
     char_meta = _read_yaml(CHAR_META_FILE, "人物生成元数据")
     twists = _read_yaml(TWISTS_FILE, "转折池")
@@ -396,8 +452,9 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         if key in locks:
             locked_parts = [part.strip() for part in MULTI_SEPARATOR.split(locks[key]) if part.strip()]
             # 单锁一项杠杆引擎时，补抽不得再叠出第二项杠杆引擎（双杠杆防塌缩）。
-            avoid = LEVERAGE_ENGINES if (key == "张力引擎" and len(locked_parts) == 1
-                                         and locked_parts[0] in LEVERAGE_ENGINES) else None
+            leverage_switch = leverage_engines()
+            avoid = leverage_switch if (key == "张力引擎" and len(locked_parts) == 1
+                                        and locked_parts[0] in leverage_switch) else None
             roll[key] = _combine_multi(key, locks[key], pool, count, rng, avoid=avoid)
             return
         if mode == "all_custom" and key in CUSTOM_KEYS:
@@ -425,7 +482,7 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     if "身份族" in locks or (mode == "all_custom" and "身份族" in CUSTOM_KEYS):
         draw("身份族", pools["身份侧"])
     else:
-        roll["身份族"] = _weighted_choice(rng, pools["身份侧"], IDENTITY_WEIGHTS)
+        roll["身份族"] = _weighted_choice(rng, pools["身份侧"], identity_weights())
     draw("处境", pools["处境侧"])
     draw("核心价值", pools["决策轴"]["核心价值"])
     draw("压力策略", pools["决策轴"]["压力策略"])
@@ -437,8 +494,9 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     if "张力引擎" not in locks and not (
             mode == "all_custom" and roll.get("张力引擎") == "custom_required"):
         engines = [part.strip() for part in MULTI_SEPARATOR.split(str(roll.get("张力引擎", ""))) if part.strip()]
-        if len(engines) >= 2 and set(engines) <= LEVERAGE_ENGINES:
-            remaining = [item for item in pools["张力引擎"] if item not in engines and item not in LEVERAGE_ENGINES]
+        leverage_switch = leverage_engines()
+        if len(engines) >= 2 and set(engines) <= leverage_switch:
+            remaining = [item for item in pools["张力引擎"] if item not in engines and item not in leverage_switch]
             if not remaining:
                 remaining = [item for item in pools["张力引擎"] if item not in engines]
             if remaining:
@@ -446,8 +504,9 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
                 roll["张力引擎"] = "、".join(engines)
     if "处境" not in locks and not (
             mode == "all_custom" and roll.get("处境") == "custom_required"):
-        if roll.get("权力结构") == "player_high" and roll.get("处境") in SITUATION_LEVERAGE:
-            remaining = [item for item in pools["处境侧"] if item not in SITUATION_LEVERAGE]
+        situation_leverage_set = situation_leverage()
+        if roll.get("权力结构") == "player_high" and roll.get("处境") in situation_leverage_set:
+            remaining = [item for item in pools["处境侧"] if item not in situation_leverage_set]
             if remaining:
                 roll["处境"] = rng.choice(remaining)
     trade_pool = [item for item in pools["场景动作·交易"] if item != roll.get("场景动作")]
@@ -455,7 +514,7 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         roll["场景动作·对照"] = rng.choice(trade_pool)
     else:
         roll["场景动作·对照"] = rng.choice(pools["场景动作·交易"]) if pools["场景动作·交易"] else "—"
-    gate = roll["美学基调"] in GATE_AESTHETICS
+    gate = roll["美学基调"] in gate_aesthetics()
     if gate:
         roll["表层风味"] = "—"
         roll["口癖"] = "—"

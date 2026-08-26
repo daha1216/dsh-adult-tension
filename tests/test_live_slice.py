@@ -82,6 +82,33 @@ class LiveSliceTests(unittest.TestCase):
         self.assertIn("情感", text)
         self.assertNotIn("身体许可（", text)
 
+    def test_pending_events_capped_with_overflow_note(self) -> None:
+        state = BUILD.load_yaml_module().safe_load(BUILD.dump_yaml(self.state))
+        base = dict(state["events"][0])
+        for index in range(12):
+            pad = dict(base)
+            pad["id"] = f"evt-pad-{index:02d}"
+            pad["semantic_key"] = f"pad-{index}"
+            pad["status"] = "pending"
+            pad["due_at"] = None
+            state["events"].append(pad)
+        slice_ = SLICE.extract_live_slice(state)
+        pending = slice_["pending_events"]
+        total = sum(1 for e in state["events"] if isinstance(e, dict) and e.get("status") == "pending")
+        self.assertEqual(10, len(pending) - 1)
+        self.assertEqual(11, len(pending))
+        self.assertIn(f"另有 {total - 10} 条未列出", str(pending[-1]))
+
+    def test_knowledge_keeps_latest_entries_only(self) -> None:
+        state = BUILD.load_yaml_module().safe_load(BUILD.dump_yaml(self.state))
+        state["npcs"][0]["knowledge"] = [f"线索{index:02d}" for index in range(12)]
+        state["player"]["knowledge"] = [f"玩家线索{index:02d}" for index in range(12)]
+        slice_ = SLICE.extract_live_slice(state)
+        self.assertEqual([f"线索{index:02d}" for index in range(4, 12)],
+                         slice_["npcs"][0]["knowledge"])
+        self.assertEqual(8, len(slice_["player"]["knowledge"]))
+        self.assertNotIn("玩家线索00", str(slice_["player"]))
+
     def test_cli_human(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "state.yaml"

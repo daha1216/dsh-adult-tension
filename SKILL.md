@@ -67,7 +67,7 @@ description: 创建、运行和续玩仅限虚构成年人的沉浸式互动叙�
 
 ## 命令
 
-解析与行为以 `commands.yaml` 为唯一来源，每局开始（开局或载入后第一回合）先读一次。简写：`s`=存档，`l`=载入，`c`=继续，`h`=帮助。空输入、单独的「……」与「继续」同一语义。
+解析与行为以 `commands.yaml` 为唯一来源，每局开始（开局或载入后第一回合）先读一次。简写：`s`=存档，`qs`=存档（快速保存），`l`=载入，`c`=继续，`h`=帮助。空输入、单独的「……」与「继续」同一语义。
 
 核心命令速记（每回合都要认得；「保存 X」「载入 X」带名称时走命名槽，优先于无参）：
 
@@ -78,7 +78,7 @@ description: 创建、运行和续玩仅限虚构成年人的沉浸式互动叙�
 | 快进到... | 更新时间并按 Tier 追算；跨天另加 `force_full: true` | 推进 |
 | 存档 / s / qs | 写入当前槽，成功后一句话确认（名称与回合），不输出 YAML | 不推进 |
 | 保存 X / 载入 X | 命名槽存/读（允许中文名）；载入后绑定为当前写入目标 | 不推进 |
-| 列出存档 | 显示名称、回合、一句话处境 | 不推进 |
+| 列出存档 | 显示名称、回合、当前未决动作（截断显示） | 不推进 |
 | 状态 / status | 六行人话——地点、在场、暂停、压力、许可、可接续动作 | 不推进 |
 | 帮助 / h / ? | 核心命令、当前可接续动作、行动句三档（含亲密默认尝试档） | 不推进 |
 | 本局不碰 X / 解除不碰 X | 玩家硬边界新增 / 解除（不自动改写既有历史） | 不推进 |
@@ -174,7 +174,7 @@ python scripts/build_opening.py --complete [--seed N] [--lock KEY=VALUE]... [--s
 - 局势：`natural_next_pressure`、`situation_update`、`last_committed_result`、`unresolved_action`
 - 人物：`player_updates`；`npc_updates.<id>`（`emotion`/`location`/`memory`/`knowledge_add`/`active_voice_mode`/`autonomy_now`）
 - 关系：`relationship_delta`——单边 dict 或多边列表，子键 `source`/`target`/`trust`/`type`/`channel`；场上不止一名 NPC 必须写明端点；|trust|≤5 为增量夹取，>5 视为直接设定，均夹到 [-5,5]
-- 事件：`events_add`、`events_resolve`、`events_cancel`（未知 ID 会报错）、`events_update`（改 trigger/due_at/consequence/probability/hook，或 `checked_turn_add: true` 记概率未命中；id/semantic_key/kind 不可改）、`resolve_outcome`
+- 事件：`events_add`、`events_resolve`、`events_cancel`（未知 ID 会报错）、`events_update`（改 trigger/due_at/consequence/probability/hook，或 `checked_turn_add: true` 记概率未命中；id/semantic_key/kind/source/created_turn 不可改）、`resolve_outcome`
 - 许可边界：`grants_add`、`grants_withdraw`、`boundaries_add`、`boundaries_revoke`
 - 角色：`npcs_add`（整卡进入，须过校验含成年年龄）
 - 元开关：`retcon_add`、`safety_state`、`simulation`、`voyeur_pov`（`on`|`off`）、`advance_turn`、`force_full`。元指令示例：`{"advance_turn": false, "safety_state": "paused"}`

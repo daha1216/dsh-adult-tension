@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import importlib.util
 import json
 import tempfile
@@ -110,6 +111,70 @@ class CommitTurnLifecycleTests(unittest.TestCase):
                 "delta_minutes": 1,
                 "events_update": [{"id": "evt-001", "kind": "far"}],
             })
+
+    def test_cancel_and_update_same_event_still_repoints_seeds(self) -> None:
+        # 同一 patch 内对同一种子事件既取消又更新：取消语义必须生效，
+        # 压力种子要重指或置空，不能被 events_update 吞掉重指处理。
+        updated = COMMIT.commit(self.state, {
+            "delta_minutes": 4,
+            "events_cancel": [self.near_id],
+            "events_update": [{"id": self.near_id, "checked_turn_add": True}],
+        })
+        statuses = {e["id"]: e["status"] for e in updated["events"]}
+        self.assertEqual("cancelled", statuses[self.near_id])
+        seeds = updated["world"]["pressure_seeds"]
+        self.assertNotEqual(self.near_id, seeds["near_event_id"])
+        self.assertEqual([], VALIDATOR.validate_data(updated, "save"))
+
+    # ---- 边界撤销 ----
+
+    def test_boundaries_revoke_unknown_topic_is_an_error(self) -> None:
+        # 与 grants_withdraw 同一严格度：话题对不上任何边界记录就报错，不静默无操作。
+        with self.assertRaisesRegex(COMMIT.CommitError, "unknown boundary topics"):
+            COMMIT.commit(self.state, {
+                "delta_minutes": 2,
+                "boundaries_revoke": ["不存在的话题"],
+            })
+
+    def test_boundaries_revoke_known_topic_succeeds_and_revokes(self) -> None:
+        added = COMMIT.commit(self.state, {
+            "delta_minutes": 2,
+            "boundaries_add": ["不碰工作话题"],
+        })
+        updated = COMMIT.commit(added, {
+            "delta_minutes": 2,
+            "boundaries_revoke": ["不碰工作话题"],
+        })
+        statuses = {b["topic"]: b["status"] for b in updated["boundaries"]}
+        self.assertEqual("revoked", statuses["不碰工作话题"])
+
+    # ---- 许可归档上限 ----
+
+    def test_grants_archive_keeps_only_recent_entries(self) -> None:
+        stuffed = copy.deepcopy(self.state)
+        archive = stuffed["consent"].setdefault("grants_archive", [])
+        for index in range(25):
+            archive.append({"id": f"consent-old-{index:02d}", "status": "withdrawn"})
+        granted = COMMIT.commit(stuffed, {
+            "delta_minutes": 3,
+            "last_committed_result": "她允许你握一下她的手腕。",
+            "unresolved_action": "手还没松开。",
+            "grants_add": [{"scope": [{"type": "physical", "permission": "握着手腕"}]}],
+        })
+        origin = granted["current_node"]["location"]
+        root = origin.split("·")[0]
+        moved = COMMIT.commit(granted, {
+            "delta_minutes": 2,
+            "location": f"{root}·卧室·夜",
+            "last_committed_result": "你们进了里间。",
+            "unresolved_action": "门在身后合上。",
+        })
+        archived = moved["consent"]["grants_archive"]
+        self.assertEqual(20, len(archived))
+        ids = {g.get("id") for g in archived}
+        self.assertNotIn("consent-old-00", ids)
+        self.assertIn("consent-old-24", ids)
+        self.assertEqual([], VALIDATOR.validate_data(moved, "save"))
 
     def test_grants_withdraw_then_move_does_not_resurrect_consent(self) -> None:
         granted = COMMIT.commit(self.state, {
