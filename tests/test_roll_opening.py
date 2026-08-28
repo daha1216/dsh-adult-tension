@@ -271,6 +271,107 @@ class RollOpeningTests(unittest.TestCase):
             roll = MOD.build_roll(self.pools, seed, locks={"权力结构": "player_high"})
             self.assertNotIn(roll["处境"], MOD.SITUATION_LEVERAGE, roll["处境"])
 
+    # ── 时代×地点和解（meta.location_eras）──
+
+    def test_location_eras_reconciliation_no_lock(self) -> None:
+        # 无锁 40 seed 性质：命中 location_eras 的地点，时代必落在配套名单内。
+        era_map = (self.pools.get("meta") or {}).get("location_eras") or {}
+        self.assertTrue(era_map, "真实池应带 meta.location_eras")
+        for seed in range(1, 41):
+            roll = MOD.build_roll(self.pools, seed)
+            if roll["地点"] in era_map:
+                self.assertIn(roll["时代"], era_map[roll["地点"]],
+                              f"seed={seed}: {roll['时代']}×{roll['地点']}")
+
+    def test_location_eras_locked_place_redraws_era(self) -> None:
+        # 锁地点：时代让路（硬锁地点是稀缺签），seed 1-20 恒在配套名单内。
+        compat = ["剑与魔法大陆", "异世界王都", "魔法公会边境"]
+        for seed in range(1, 21):
+            roll = MOD.build_roll(self.pools, seed, locks={"地点": "魔法工坊地下室"})
+            self.assertEqual("魔法工坊地下室", roll["地点"])
+            self.assertIn(roll["时代"], compat, roll["时代"])
+
+    def test_location_eras_locked_era_avoids_hardlock_places(self) -> None:
+        # 锁时代（名单外时代）：地点重抽时绝不落在 12 个硬锁地点上。
+        era_map = (self.pools.get("meta") or {}).get("location_eras") or {}
+        for seed in range(1, 21):
+            roll = MOD.build_roll(self.pools, seed, locks={"时代": "当代都市"})
+            self.assertEqual("当代都市", roll["时代"])
+            self.assertNotIn(roll["地点"], era_map, roll["地点"])
+
+    def test_location_eras_double_lock_conflict_preserved_with_warning(self) -> None:
+        # 双锁冲突组合：按玩家意愿原样保留，仅 stderr 一行 WARNING。
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            roll = MOD.build_roll(self.pools, 7, locks={"时代": "当代都市",
+                                                        "地点": "魔法工坊地下室"})
+        self.assertEqual("当代都市", roll["时代"])
+        self.assertEqual("魔法工坊地下室", roll["地点"])
+        self.assertIn("按玩家意愿保留", stderr.getvalue())
+
+    def test_location_eras_all_custom_never_yields(self) -> None:
+        # all_custom 自拟值不让路；custom_required 占位符同样不被和解触碰。
+        roll = MOD.build_roll(self.pools, 7, mode="all_custom",
+                              custom={"时代": "当代都市", "地点": "魔法工坊地下室"})
+        self.assertEqual("当代都市", roll["时代"])
+        self.assertEqual("魔法工坊地下室", roll["地点"])
+        roll = MOD.build_roll(self.pools, 7, mode="all_custom")
+        self.assertEqual("custom_required", roll["时代"])
+        self.assertEqual("custom_required", roll["地点"])
+
+    def _synthetic_raw_pools(self, location_eras=None, include_key=True):
+        meta = {
+            "leverage_engines": ["引擎A"],
+            "situation_leverage": ["处境A"],
+            "gate_aesthetics": ["美学A"],
+            "identity_weights": {"族A": 8},
+        }
+        if include_key:
+            meta["location_eras"] = location_eras
+        return {
+            "核心规则": ["规则A"],
+            "美学基调": ["美学A"],
+            "权力结构": ["equal"],
+            "张力引擎": ["引擎A"],
+            "社会规则": ["社会A"],
+            "压力来源": ["压力A"],
+            "身份侧": ["族A"],
+            "处境侧": ["处境A"],
+            "反差轴": ["反差A"],
+            "时代与地点": {"时代": ["时代A"], "地点": ["地点A"]},
+            "场景动作": {"交易摊牌": ["交易A"], "非交易靠近": ["靠近A"]},
+            "玩家化身轴": {"称谓": ["先生"], "年龄段": ["二十出头"], "社会位置": ["同侪"]},
+            "meta": meta,
+        }
+
+    def test_location_eras_shape_validation(self) -> None:
+        # 形状错（传列表/值非列表/空列表）各自响亮失败；缺失该键不报错、不注入。
+        with self.assertRaises(MOD.AnchorError):
+            MOD._parse_meta(self._synthetic_raw_pools(["不是映射"]))
+        with self.assertRaises(MOD.AnchorError):
+            MOD._parse_meta(self._synthetic_raw_pools({"地点A": "不是列表"}))
+        with self.assertRaises(MOD.AnchorError):
+            MOD._parse_meta(self._synthetic_raw_pools({"地点A": []}))
+        parsed = MOD._parse_meta(self._synthetic_raw_pools(include_key=False))
+        self.assertNotIn("location_eras", parsed)
+        parsed = MOD._parse_meta(self._synthetic_raw_pools({"地点A": ["时代A"]}))
+        self.assertEqual({"地点A": ["时代A"]}, parsed["location_eras"])
+
+    def test_location_eras_reference_validation(self) -> None:
+        # 引用错（键不在地点池/值不在时代池）各自 AnchorError；合法引用可过。
+        with mock.patch.object(MOD, "_raw_pools_once",
+                               return_value=self._synthetic_raw_pools({"不存在地点": ["时代A"]})):
+            with self.assertRaises(MOD.AnchorError):
+                MOD.load_pools()
+        with mock.patch.object(MOD, "_raw_pools_once",
+                               return_value=self._synthetic_raw_pools({"地点A": ["不存在时代"]})):
+            with self.assertRaises(MOD.AnchorError):
+                MOD.load_pools()
+        with mock.patch.object(MOD, "_raw_pools_once",
+                               return_value=self._synthetic_raw_pools({"地点A": ["时代A"]})):
+            pools = MOD.load_pools()
+        self.assertEqual({"地点A": ["时代A"]}, pools["meta"]["location_eras"])
+
     def test_player_avatar_axes_present(self) -> None:
         roll = MOD.build_roll(self.pools, 3)
         self.assertIn(roll["玩家称谓"], self.pools["玩家化身轴"]["称谓"])

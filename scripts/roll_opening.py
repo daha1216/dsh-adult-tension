@@ -141,6 +141,16 @@ def _parse_meta(raw: dict[str, Any]) -> dict[str, Any]:
     for family, weight in weights.items():
         if not isinstance(weight, int) or isinstance(weight, bool) or weight <= 0:
             raise AnchorError(f"meta.identity_weights.{family} 必须是正整数")
+    # location_eras 是可选键（地点→配套时代列表）：测试合成 fixture 可能没有这个键，
+    # 缺失时直接跳过、不注入；存在则必须是 地点→非空时代列表 映射（形状与 _flat 契约）。
+    era_map = meta.get("location_eras")
+    if era_map is not None:
+        if not isinstance(era_map, dict) or not era_map:
+            raise AnchorError("meta.location_eras 必须是 地点→非空时代列表 映射")
+        meta["location_eras"] = {
+            place: _flat(eras, f"meta.location_eras.{place}")
+            for place, eras in era_map.items()
+        }
     return meta
 
 
@@ -317,6 +327,12 @@ def load_pools() -> dict[str, Any]:
     for family in meta["identity_weights"]:
         if family not in pools["身份侧"]:
             raise AnchorError(f"meta.identity_weights 引用了不存在的身份族：{family!r}")
+    for place, eras in (meta.get("location_eras") or {}).items():
+        if place not in pools["时代与地点"]["地点"]:
+            raise AnchorError(f"meta.location_eras 引用了不存在的地点：{place!r}")
+        for era in eras:
+            if era not in pools["时代与地点"]["时代"]:
+                raise AnchorError(f"meta.location_eras.{place} 引用了不存在的时代：{era!r}")
     pools["meta"] = meta
     return pools
 
@@ -473,6 +489,28 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     draw_many("张力引擎", pools["张力引擎"], 2)
     draw("时代", pools["时代与地点"]["时代"])
     draw("地点", pools["时代与地点"]["地点"])
+    # 时代×地点和解（meta.location_eras，pools.yaml 契约第 4 条）：
+    # 表抽值才让路；玩家给定值（--lock / all_custom 自拟 / custom_required 占位）一律不动。
+    player_era = "时代" in locks or (mode == "all_custom" and "时代" in CUSTOM_KEYS)
+    player_place = "地点" in locks or (mode == "all_custom" and "地点" in CUSTOM_KEYS)
+    era_map = (pools.get("meta") or {}).get("location_eras") or {}
+    compat = era_map.get(roll["地点"])
+    if compat and roll["时代"] not in compat:
+        if player_era and player_place:
+            print(f"WARNING: 玩家给定组合「{roll['时代']}×{roll['地点']}」跨越 location_eras，按玩家意愿保留。",
+                  file=sys.stderr)
+        elif player_era:
+            # 时代是玩家给定：重抽地点，只从「不在 location_eras 的地点 ∪ 兼容该时代的地点」里挑
+            candidates = [p for p in pools["时代与地点"]["地点"]
+                          if p not in era_map or roll["时代"] in era_map[p]]
+            if candidates:
+                roll["地点"] = rng.choice(candidates)
+            else:
+                print(f"WARNING: 时代「{roll['时代']}」无可换地点，保留「{roll['地点']}」。",
+                      file=sys.stderr)
+        else:
+            # 时代是表抽值：时代让路（硬锁地点是稀缺签），从配套名单重抽
+            roll["时代"] = rng.choice(compat)
     draw("社会规则", pools["社会规则"])
     draw("压力来源", pools["压力来源"])
     if "场景动作" in locks or (mode == "all_custom" and "场景动作" in CUSTOM_KEYS):

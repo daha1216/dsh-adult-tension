@@ -153,6 +153,16 @@ def check() -> Report:
               "templates.yaml 缺少动作句式兜底（action_fallback_near/trade）")
     report.ok(bool(templates.get("suggestion_default")) and bool(templates.get("suggestion_extras")),
               "templates.yaml 缺少建议动作模板（suggestion_default/suggestion_extras）")
+    # suggestion_player_first 按键名精确匹配场景动作（fill_opening.suggested_actions 的
+    # first_map.get(action)）：死键=改名/删条目后留下的旧键，静默失去命中；镜像方向是
+    # 池内动作缺玩家优先建议，缺失走 suggestion_default。两向都是 WARNING（有兜底，戏味打折）。
+    player_first = templates.get("suggestion_player_first") or {}
+    for action in sorted(_keys(player_first) - (scene_near | scene_trade)):
+        report.warn(f"suggestion_player_first 的「{action}」不在场景动作两桶里（死键，永远命中不到）")
+    report.checks += 1
+    for action in sorted(scene_near - _keys(player_first)):
+        report.warn(f"非交易靠近「{action}」没有玩家优先建议（走 suggestion_default 兜底）")
+    report.checks += 1
 
     # 7. 压力策略 / 反差轴 ↔ 文案
     axes = character_meta.get("决策轴") or {}
@@ -195,6 +205,32 @@ def check() -> Report:
     report.checks += 1
     for name in sorted(families - _keys(weights)):
         report.warn(f"身份族「{name}」没配抽取权重（按 8 计）")
+    report.checks += 1
+
+    # 8b. location_eras 和解名单引用合法（形状=地点→非空时代列表；与 roll_opening 的
+    # 运行时校验同规约，把事故前移到体检层。只能抓错拼，抓不到漏登——漏登靠测试兜底）。
+    era_map = meta.get("location_eras")
+    eras_pool = set(pools.get("时代与地点", {}).get("时代") or [])
+    report.ok(era_map is None or isinstance(era_map, dict),
+              "meta.location_eras 必须是 地点→非空时代列表 映射")
+    if isinstance(era_map, dict):
+        for place, era_list in sorted(era_map.items()):
+            report.ok(place in places,
+                      f"meta.location_eras 引用了不存在的地点：{place}")
+            report.ok(isinstance(era_list, list) and bool(era_list)
+                      and all(str(era) in eras_pool for era in era_list),
+                      f"meta.location_eras.{place} 必须是全部存在于时代池的非空列表")
+
+    # 8c. 三表两两互斥：张力引擎/压力来源/处境侧不得逐字重名（改名后防再生）。
+    # 撞名冗余会进已提交状态（引擎→world.tension_engines、压力→pressure_seeds.immediate
+    # ＋player.knowledge、far 事件 semantic_key 内嵌引擎名），near+far 描述同一件事且
+    # 语义键不同、无法去重；分层用近义词区分（引擎=动态推到极点/压力=外力逼近/处境=当下状态）。
+    pressures = set(pools.get("压力来源") or [])
+    for label, left, right in (("张力引擎×压力来源", engines, pressures),
+                               ("张力引擎×处境侧", engines, situations),
+                               ("压力来源×处境侧", pressures, situations)):
+        for word in sorted(left & right):
+            report.error(f"三表互斥违反：{label} 逐字重名「{word}」（分层请用近义词区分）")
     report.checks += 1
 
     # 9. 人物生成元数据

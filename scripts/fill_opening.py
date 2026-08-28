@@ -393,7 +393,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     timed_situations = set(pools_meta.get("timed_situations")
                            or ["时限临门", "债务压身", "秘密将破", "审查将至"])
     timed_pressures = set(pools_meta.get("timed_pressures")
-                          or ["时限逼近", "债务到期", "秘密即将暴露"])
+                          or ["死线只剩几小时", "债务到期", "秘密即将暴露"])
     timed = situation_kind in timed_situations or pressure in timed_pressures
     deadline = clock + dt.timedelta(hours=8) if timed else None
     far_due = clock + dt.timedelta(days=7)

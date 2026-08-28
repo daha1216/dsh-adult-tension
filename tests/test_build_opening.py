@@ -70,7 +70,7 @@ def fill_complete(skeleton: dict, roll: dict) -> dict:
         natural_next_pressure="死线在逼近",
     )
     data["current_node"]["situation"].update(
-        trigger="会面开始", pressure=roll.get("压力来源", "时限逼近"),
+        trigger="会面开始", pressure=roll.get("压力来源", "死线只剩几小时"),
         immediate_objective="谈成交易", deadline=None, unresolved_choice="是否接下这单",
     )
     data["consent"]["location"] = location
