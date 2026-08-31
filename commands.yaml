@@ -47,7 +47,7 @@ command_categories:
       - triggers: [快进到, timeskip]
         canonical: 快进到
         advance_turn: true
-        behavior: 更新时间并按 Tier 追算；跨天或明确快进 patch 另加 force_full: true
+        behavior: '更新时间并按 Tier 追算；跨天或明确快进 patch 另加 force_full: true'
       - triggers: [撤销刚才的, 撤销, undo]
         canonical: 撤销刚才的
         advance_turn: false
@@ -65,7 +65,7 @@ command_categories:
       - triggers: [载入, 读档, load, l]
         canonical: 载入存档
         advance_turn: false
-        behavior: 读取玩家提供的 save_version: 3 YAML，先验证再接续，不得重新执行开局；从 current_node.unresolved_action 前一刻接续，可附一次【此刻】
+        behavior: '读取玩家提供的 save_version: 3 YAML，先验证再接续，不得重新执行开局；从 current_node.unresolved_action 前一刻接续，可附一次【此刻】'
         cli: 校验通过后写入 saves/current_state.yaml，并记录其 updated_at
       - triggers: [载入到, 读取]
         canonical: 载入到
@@ -89,19 +89,19 @@ command_categories:
       - triggers: [本局不碰, 硬边界, boundary]
         canonical: 本局不碰
         advance_turn: false
-        behavior: 新增一条 active 玩家硬边界（commit_turn patch：{"advance_turn": false, "boundaries_add": ["X"]}）
+        behavior: '新增一条 active 玩家硬边界（commit_turn patch：{"advance_turn": false, "boundaries_add": ["X"]}）'
       - triggers: [解除不碰, revoke]
         canonical: 解除不碰
         advance_turn: false
-        behavior: 将对应边界改为已解除；不自动改写既有历史（patch：{"advance_turn": false, "boundaries_revoke": ["X"]}）
+        behavior: '将对应边界改为已解除；不自动改写既有历史（patch：{"advance_turn": false, "boundaries_revoke": ["X"]}）'
       - triggers: [暂停, 安全词, pause]
         canonical: 暂停
         advance_turn: false
-        behavior: 将 safety_state 设为 paused，停止亲密升级，不登记代价（patch：{"advance_turn": false, "safety_state": "paused"}）
+        behavior: '将 safety_state 设为 paused，停止亲密升级，不登记代价（patch：{"advance_turn": false, "safety_state": "paused"}）'
       - triggers: [解除暂停, 恢复场景, resume]
         canonical: 解除暂停
         advance_turn: false
-        behavior: 仅在玩家明确要求后将 safety_state 设为 running；不解释为载入存档（patch：{"advance_turn": false, "safety_state": "running"}）
+        behavior: '仅在玩家明确要求后将 safety_state 设为 running；不解释为载入存档（patch：{"advance_turn": false, "safety_state": "running"}）'
 
   advanced:
     name: 高级功能
@@ -137,23 +137,23 @@ command_categories:
       - triggers: [说骚话, 别装了, 做自己, inner]
         canonical: 说骚话
         advance_turn: false
-        behavior: 目标角色切入里层语态，不推进回合（patch npc_updates.<id>.active_voice_mode: inner）
+        behavior: '目标角色切入里层语态，不推进回合（patch npc_updates.<id>.active_voice_mode: inner）'
       - triggers: [贴视角, 偷窥视角, pov on]
         canonical: 贴视角
         advance_turn: false
-        behavior: 开启内心可见模式（patch {"advance_turn": false, "voyeur_pov": "on"}）
+        behavior: '开启内心可见模式（patch {"advance_turn": false, "voyeur_pov": "on"}）'
       - triggers: [退出偷窥, 收回视角, pov off]
         canonical: 退出偷窥
         advance_turn: false
-        behavior: 关闭内心可见模式（patch {"advance_turn": false, "voyeur_pov": "off"}）
+        behavior: '关闭内心可见模式（patch {"advance_turn": false, "voyeur_pov": "off"}）'
       - triggers: [冻结世界, sim off]
         canonical: 冻结世界
         advance_turn: false
-        behavior: 关闭世界推演（patch {"advance_turn": false, "simulation": false}）
+        behavior: '关闭世界推演（patch {"advance_turn": false, "simulation": false}）'
       - triggers: [恢复世界, 恢复世界推演, sim on]
         canonical: 恢复世界推演
         advance_turn: false
-        behavior: 开启世界推演（patch {"advance_turn": false, "simulation": true}）
+        behavior: '开启世界推演（patch {"advance_turn": false, "simulation": true}）'
       - triggers: [叙事助手 on, assistant on]
         canonical: 叙事助手 on
         advance_turn: false
@@ -170,7 +170,7 @@ slot_binding: |
   「当前槽」是会话上下文里记录的槽名：无名称存档默认写 main；「载入 X」后当前槽切换为 X。
   载入时记录 manifest.updated_at；覆盖保存必须携带该值（--expected-updated-at），不匹配即拒绝，
   不自动合并两个窗口的状态。保存冲突时用自然语言给出 A 读最新 / B 另存 / C 取消，
-  单窗口不要主动拿「其他窗口」吓人。
+  单窗口正常游玩时无需主动提示多窗口冲突逻辑。
   跨会话续玩必须先明确「载入 X」重建这组绑定（槽名＋载入时的 updated_at），否则无法覆盖保存。
 
 notes: |

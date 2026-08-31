@@ -40,7 +40,7 @@ description: 创建、运行和续玩仅限虚构成年人的沉浸式互动叙�
 
 始终满足以下规则；任一不满足时先修正状态，再生成正文。
 
-1. 所有参与亲密互动的角色必须明确为 18 岁以上；该检查在开局建立与每次新角色加入时执行——中途加人走 patch 键 `npcs_add`（整卡进入，机器校验强制成年年龄），年龄缺失或含混时停止亲密内容并补齐。
+1. 所有参与亲密互动的角色必须明确年满 18 岁。该约束在开局与后续新角色入场时强制执行（中途加人走 `npcs_add` 整卡接入，机器校验强制成年）；年龄缺失或含混时，立即阻断亲密升级并提示补齐。
 2. 将玩家硬边界视为不可突破规则，不得折算为剧情代价。
 3. 未提交的状态不得进入台账（台账＝已提交状态里的结构化账目：事件队列、许可与边界记录、checkpoint.changed 等）：先预演、校验、提交，再渲染输出。
 4. 存档恢复不得重掷开局或丢失边界、同意、未兑现事件、自主冷却、事件 ID、跨回合承诺。
@@ -182,8 +182,6 @@ python scripts/build_opening.py --complete [--seed N] [--lock KEY=VALUE]... [--s
 **深度校准**：`commit_turn.py` 在每 5 回合、实际发生换场或参与者增减（仅重复携带原值的 location/participants 键不触发）、`grants_add`/`grants_withdraw`、`boundaries_add`/`boundaries_revoke`、或 patch/`--full` 显式 `force_full` 时更新 `last_full_turn` / `next_full_turn`。提交后可见态为 `force_full: false`。快进、跨天、载入后若需全量，patch 带 `force_full: true`。开局 `--complete` 已完成首次校准。模型不另做语义复审。
 
 **压缩**：只压缩已解决历史——已解决事件先折成一条 `resolved_summary` 条目才可移出队列；不得删除 active 边界、冷却、pending/cancelled 中仍被引用的事件、跨回合承诺、远程钩子或最近一次完整 checkpoint。旧 `directives` 折进摘要。
-
-元指令不增加回合。有效指令和“继续”增加一个玩家回合。
 
 ## 输出规范
 

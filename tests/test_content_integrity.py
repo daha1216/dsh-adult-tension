@@ -26,7 +26,7 @@ DATA_FILES = (
     "character_pools.yaml",
 )
 
-EXPECTED = "7a6fd2a8d9eb88c55c5700832e9aa6095d0ea8b071536f485932b5e3ed063e0a"
+EXPECTED = "3fc4702bd88d2cca81af66366e01e34e973ae78b04bb261681aa30f86b74a06b"
 
 
 def _load(name: str, relative: str):
@@ -80,6 +80,17 @@ class ContentIntegrityTests(unittest.TestCase):
     def test_check_content_passes(self) -> None:
         report = CHECK.check()
         self.assertEqual([], report.errors, "；".join(report.errors))
+
+    def test_commands_yaml_syntax_and_structure(self) -> None:
+        cmd_path = ROOT / "commands.yaml"
+        self.assertTrue(cmd_path.exists(), "commands.yaml must exist at root")
+        yaml_mod = CHECK.yaml
+        data = yaml_mod.safe_load(cmd_path.read_text(encoding="utf-8"))
+        self.assertIsInstance(data, dict)
+        self.assertIn("command_categories", data)
+        self.assertIn("parse_rules", data)
+        self.assertIn("core", data["command_categories"])
+        self.assertIn("advanced", data["command_categories"])
 
 
 if __name__ == "__main__":

@@ -67,6 +67,16 @@ def _keys(items: Any) -> set[str]:
 
 def check() -> Report:
     report = Report()
+    commands_path = ROOT / "commands.yaml"
+    report.ok(commands_path.exists(), "根目录缺少 commands.yaml")
+    if commands_path.exists():
+        try:
+            commands_data = yaml.safe_load(commands_path.read_text(encoding="utf-8")) if yaml else None
+            report.ok(isinstance(commands_data, dict) and bool(commands_data.get("command_categories")),
+                      "commands.yaml 为空或缺少 command_categories 结构")
+        except Exception as exc:
+            report.error(f"commands.yaml YAML 语法解析失败：{exc}")
+
     pools = _load("pools.yaml")
     character_meta = _load("character_meta.yaml")
     twists = _load("twists.yaml")
