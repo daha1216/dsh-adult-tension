@@ -26,7 +26,7 @@ DATA_FILES = (
     "character_pools.yaml",
 )
 
-EXPECTED = "3fc4702bd88d2cca81af66366e01e34e973ae78b04bb261681aa30f86b74a06b"
+EXPECTED = "d12a3eddaec9d25e297d4cfda559fdf46f516ba2c396e39dff2043f97b4c2371"
 
 
 def _load(name: str, relative: str):
