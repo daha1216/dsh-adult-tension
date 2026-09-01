@@ -237,10 +237,11 @@ class BuildOpeningTests(unittest.TestCase):
             ])
             self.assertEqual(0, code)
             data = BUILD.load_yaml_module().safe_load(out.read_text(encoding="utf-8"))
-        for role_obj in (data["player"], data["npcs"][0]):
+        for role_obj, gkey in ((data["player"], "given_male"), (data["npcs"][0], "given_female")):
             name = role_obj["name"]
+            valid_givens = meiji.get(gkey) or meiji.get("given") or []
             hit = [s for s in meiji["surnames"]
-                   if name.startswith(s) and name[len(s):] in meiji["given"]]
+                   if name.startswith(s) and name[len(s):] in valid_givens]
             self.assertTrue(hit, f"{name} 不在明治池内")
         self.assertEqual(
             "pass", data["npcs"][0]["naming_audit"]["checks"]["culture_match"])
@@ -274,10 +275,11 @@ class BuildOpeningTests(unittest.TestCase):
                 ])
             self.assertEqual(0, code)
             data = BUILD.load_yaml_module().safe_load(out.read_text(encoding="utf-8"))
-        for role_obj in (data["player"], data["npcs"][0]):
+        for role_obj, gkey in ((data["player"], "given_male"), (data["npcs"][0], "given_female")):
             name = role_obj["name"]
+            valid_givens = default_names.get(gkey) or default_names.get("given") or []
             hit = [s for s in default_names["surnames"]
-                   if name.startswith(s) and name[len(s):] in default_names["given"]]
+                   if name.startswith(s) and name[len(s):] in valid_givens]
             self.assertTrue(hit, f"{name} 不在默认池内")
 
 

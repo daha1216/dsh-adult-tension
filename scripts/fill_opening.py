@@ -109,16 +109,18 @@ def load_tables() -> dict[str, Any]:
     }
 
 
-def name_pool_for_era(names: dict, era: str) -> tuple[list, list]:
-    """时代命中专属名池则用该池，否则回退顶层默认池。"""
+def name_pool_for_era(names: dict, era: str, gender: str = "male") -> tuple[list, list]:
+    """时代命中专属名池则用该池，支持按 gender ('male'/'female') 精准分流，否则回退顶层。"""
     era_pools = names.get("eras") or {}
     pool = era_pools.get(str(era)) if isinstance(era_pools, dict) else None
+    given_key = f"given_{gender}" if gender in ("male", "female") else "given"
     if isinstance(pool, dict):
         surnames = pool.get("surnames") or []
-        givens = pool.get("given") or []
+        givens = pool.get(given_key) or pool.get("given") or []
         if surnames and givens:
             return list(surnames), list(givens)
-    return list(names.get("surnames") or []), list(names.get("given") or [])
+    top_givens = names.get(given_key) or names.get("given") or []
+    return list(names.get("surnames") or []), list(top_givens)
 
 
 def make_name(rng: random.Random, surnames: list[str], givens: list[str], used: set[str]) -> str:
@@ -360,12 +362,13 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     rng_names = rng_for(seed, "names")
     rng_body = rng_for(seed, "body")
     names_table = tables["names"]
-    surnames, givens = name_pool_for_era(names_table, era)
+    surnames_m, givens_m = name_pool_for_era(names_table, era, gender="male")
+    surnames_f, givens_f = name_pool_for_era(names_table, era, gender="female")
     era_pool = (names_table.get("eras") or {}).get(str(era)) or {}
-    era_pool_hit = bool(era_pool.get("surnames") and era_pool.get("given"))
+    era_pool_hit = bool(era_pool.get("surnames") and (era_pool.get("given_male") or era_pool.get("given")))
     used: set[str] = set()
-    player_candidates = [make_name(rng_names, surnames, givens, used) for _ in range(4)]
-    npc_candidates = [make_name(rng_names, surnames, givens, used) for _ in range(4)]
+    player_candidates = [make_name(rng_names, surnames_m, givens_m, used) for _ in range(4)]
+    npc_candidates = [make_name(rng_names, surnames_f, givens_f, used) for _ in range(4)]
     player_name = player_candidates[0]
     npc_name = npc_candidates[0]
 
@@ -442,6 +445,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     player_id_text = player_identity_text(position_row, identity["role"])
     data["player"].update({
         "name": player_name,
+        "gender": "male",
         "age": player_age,
         "identity": player_id_text,
         "location": location,
@@ -479,6 +483,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     npc = data["npcs"][0]
     npc.update({
         "name": npc_name,
+        "gender": "female",
         "age": npc_age,
         "role_level": "main",
         "identity": identity["role"],

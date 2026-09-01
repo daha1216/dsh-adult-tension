@@ -264,17 +264,17 @@ def check() -> Report:
             for item in items or []:
                 report.ok(len(str(item)) <= 8, f"{key}「{item}」超过 8 字会被加载器筛掉")
     report.ok(bool(char_pools.get("外观轴")), "character_pools.yaml 缺少外观轴")
-    report.ok(bool(names.get("surnames")) and bool(names.get("given")),
-              "names.yaml 缺少姓氏或名字池")
+    report.ok(bool(names.get("surnames")) and bool(names.get("given_male")) and bool(names.get("given_female")),
+              "names.yaml 缺少姓氏、男名池（given_male）或女名池（given_female）")
 
-    # 12. 时代分名池：era 键必须在时代池里，且每组 surnames/given 非空
+    # 12. 时代分名池：era 键必须在时代池里，且每组 surnames/given_male/given_female 非空
     era_pool_table = names.get("eras") or {}
     era_names = set(pools.get("时代与地点", {}).get("时代") or [])
     for era_name, pool in era_pool_table.items():
         report.ok(str(era_name) in era_names,
                   f"names.yaml eras「{era_name}」不在时代池里（永远抽不到）")
-        report.ok(isinstance(pool, dict) and bool(pool.get("surnames")) and bool(pool.get("given")),
-                  f"names.yaml eras「{era_name}」的 surnames/given 必须非空")
+        report.ok(isinstance(pool, dict) and bool(pool.get("surnames")) and bool(pool.get("given_male")) and bool(pool.get("given_female")),
+                  f"names.yaml eras「{era_name}」的 surnames/given_male/given_female 必须非空")
 
     # 13. 双语态格式契约：主 NPC 语态字段必须同时带「表层语态：」「里层语态：」两个标记。
     # live_slice 按「里层」首次出现处切分（角色设计.md「书写格式」），缺任一标记，
