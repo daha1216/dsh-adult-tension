@@ -24,12 +24,12 @@ description: 创建、运行和续玩仅限虚构成年人的沉浸式互动叙�
 - `scripts/check_content.py` — 内容数据体检（维护时用）
 - `scripts/data/*.yaml` — 全部素材词条、权重与文案模板的数据本体
 
-玩家可见的只有正文、状态查询的自然语言说明、开局的【此刻】块，以及明确要求「导出存档」时的完整 YAML。本文件其余内容均为后台执行规范，不向玩家展示。
+玩家可见的只有正文、状态查询的自然语言说明，以及明确要求「导出存档」时的完整 YAML。本文件其余内容均为后台执行规范，不向玩家展示。
 
 ## 按需加载
 
 - 每局开始（开局或载入后第一回合）：读一次 `commands.yaml`（命令解析与行为的唯一来源）。
-- 默认开局：不读 references。只跑 `python scripts/build_opening.py --complete`，用 stdout 的 `opening_brief` 写四块正文。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目直接读 `scripts/data/` 下的 yaml。
+- 默认开局：不读 references。只跑 `python scripts/build_opening.py --complete`，用 stdout 的 `opening_brief` 写三段开局正文（【世界观背景】、【故事背景】、【正文】）。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目直接读 `scripts/data/` 下的 yaml。
 - 默认回合：不读 references、不重读整份 YAML。只用上一拍活切片，组 patch 后跑 `python scripts/commit_turn.py`，再写正文。
 - 新角色进场或角色升级：读 `references/角色设计.md`；需要条目清单时读 `scripts/data/` 下对应 yaml。
 - 快进、离屏活动或 Tier 追算：读 `references/世界运转.md`；第一次跨天且 `meta.simulation` 为 true 时运行 `python scripts/roll_opening.py --twist`，结果经 `commit_turn.py` 的 `events_add` 落地。
@@ -113,25 +113,29 @@ python scripts/build_opening.py --complete [--seed N] [--lock KEY=VALUE]... [--s
 
 禁止：读 `references/开局流程.md`、`角色设计.md`、`状态总结.md`；禁止手写或改写 v3 YAML；禁止单独先跑 `roll_opening.py` 再填空骨架；禁止反复 `--check`。脚本失败是填料 bug，把错误留给维护，不得改由模型填档。配角未进场时脚本不会生成完整配角卡。`unresolved_action` 已由脚本落在非交易靠近，除非玩家预锁了交易摊牌。
 
-脚本 stdout 含三行进度和 `---opening_brief---` 块。模型不要重复三行进度，只用 brief 写玩家可见的四块；不要把 YAML、字段名、骰子或校验过程写给玩家。最终只输出：
+脚本 stdout 含三行进度和 `---opening_brief---` 块。模型不要重复三行进度，只用 brief 写玩家可见的三块（世界观背景、深度故事背景、沉浸正文）；不要把 YAML、字段名、骰子或校验过程写给玩家。最终只输出：
 
 ```text
-【世界观背景】
-<时代、地点、社会规则和本局世界常量>
+### 🌐 【世界观背景】
+> **时空**：<时代> · <地点>
+> **法则**：<社会规则与世界常量>
+> **基调**：<美学基调描述>
 
-【故事背景】
-<人物关系、张力来源、当前处境和即将到来的压力>
+---
 
-【正文】
-<从未决动作前一刻开始叙述>
+### 📜 【故事背景】
+<深度展开四维戏剧张力，用富有小说质感的高密度文字交代：
+1. 阶位身份与昼夜反差：白日里的公开身份、尊卑上下级或长幼阶位，与关上门后的权力倒错；
+2. 绝境风暴与外部死线：外部正在迫近的倒计时危机（如暴雪封门、破晓审计、要塞沦陷、舆论发酵），为何今夜两人被孤立反锁在这一间狭小密室内；
+3. 隐秘过往与软肋解药：对方绝不愿示人的暗疾、把柄、秘密或心防脆弱点，以及你为何恰好握着唯一的解药/筹码；
+4. 今夜悬局潜台词：关上门后的无声博弈，表面是在谈公事/避险，实则是谁先向谁低头索求的禁忌赌局。>
 
-【此刻】
-你是……（姓名、别人怎么叫你、你凭什么在这个房间）
-对面是……（姓名、公开身份、她眼下卡在哪）
-未决：……（一句话，停在你能接的动作）
-今晚还没发生的：任何亲密都需要当场的态度，处境本身不等于同意
-可做：<三个具体、可见的下一拍，其中至少一个非交易靠近>
+---
 
+### 🎬 【正文】
+<从未决动作前一刻开始展开电影级长镜头沉浸叙述：门合上的声音、封闭室内的声响与光影、呼吸、体温、衣料摩擦与肢体微反应，在最关键、最紧绷的未决动作处自然悬停，把主动权完全留给玩家自由输入。>
+
+---
 回合：1
 ```
 
@@ -158,7 +162,7 @@ python scripts/build_opening.py --complete [--seed N] [--lock KEY=VALUE]... [--s
 1. **解析**：按 `commands.yaml` 区分有效指令、元指令、空指令（=继续）、载入存档和解除暂停。带名称的「保存 X」「载入 X」优先于无参保存/载入。
 2. **预演**：根据活切片决定本拍结果，组成 `commit_turn` patch。普通行动 `delta_minutes` 为 1–15；「继续」必须让时钟变化。第一次跨天且 simulation 为 true 时先跑 `python scripts/roll_opening.py --twist`，经 `events_add` 落地；快进/跨天另加 `force_full: true`。
 3. **提交**：`python scripts/commit_turn.py --state saves/current_state.yaml --patch '<json>'`。提交器自带提交前校验；校验失败则按报错修 patch 后重提，禁止重写整份 YAML。成功后脚本打印新活切片。
-4. **输出**：用新活切片按「输出规范」写正文，结尾单独写回合数。载入后第一回合与开局一样可附【此刻】；之后不要自动附。
+4. **输出**：用新活切片按「输出规范」写正文，结尾单独写回合数。载入后第一回合直接输出接续正文。
 
 禁止普通回合：读取整份 `state.yaml`；读取领域文档；用 `write` 覆盖存档；为深度校准重审角色卡。
 
@@ -190,7 +194,7 @@ python scripts/build_opening.py --complete [--seed N] [--lock KEY=VALUE]... [--s
 - `存档` / `qs` / 无名称的「保存」：成功后只回「已保存到「名称」·第 N 回合」。
 - `保存 X`：成功后只回「已另存为「X」·第 N 回合」。
 - `导出存档`：先完成保存检查，成功后按 `references/状态总结.md` 输出完整 v3 YAML；失败时只报告错误，不输出伪存档。
-- `载入` / `载入 X`：从 `current_node.unresolved_action` 前一刻接续；可附一次【此刻】。
+- `载入` / `载入 X`：从 `current_node.unresolved_action` 前一刻接续正文。
 - 其余命令的玩家可见回执以 `commands.yaml` 各命令的 `behavior` 为准，一律不暴露字段名。
 
 ### 语态调度

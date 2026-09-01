@@ -65,12 +65,12 @@ command_categories:
       - triggers: [载入, 读档, load, l]
         canonical: 载入存档
         advance_turn: false
-        behavior: '读取玩家提供的 save_version: 3 YAML，先验证再接续，不得重新执行开局；从 current_node.unresolved_action 前一刻接续，可附一次【此刻】'
+        behavior: '读取玩家提供的 save_version: 3 YAML，先验证再接续，不得重新执行开局；从 current_node.unresolved_action 前一刻直接接续正文'
         cli: 校验通过后写入 saves/current_state.yaml，并记录其 updated_at
       - triggers: [载入到, 读取]
         canonical: 载入到
         advance_turn: false
-        behavior: 载入命名存档 X 并绑定为当前写入目标；从 current_node.unresolved_action 前一刻接续，可附一次【此刻】
+        behavior: 载入命名存档 X 并绑定为当前写入目标；从 current_node.unresolved_action 前一刻直接接续正文
         cli: load X，并记录 manifest.updated_at
       - triggers: [列出存档, 存档列表]
         canonical: 列出存档
@@ -157,7 +157,7 @@ command_categories:
       - triggers: [叙事助手 on, assistant on]
         canonical: 叙事助手 on
         advance_turn: false
-        behavior: 开启每回合后一行建议（默认关；本会话有效，不进存档；开局【此刻】已承担主要引导）
+        behavior: 开启每回合后一行建议（默认关；本会话有效，不进存档）
       - triggers: [叙事助手 off, assistant off]
         canonical: 叙事助手 off
         advance_turn: false
