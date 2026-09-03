@@ -1,0 +1,5 @@
+# 统一文本文件按 LF 检出。
+# Windows 常见的 core.autocrlf=true 会把工作区文本改写成 CRLF，
+# 导致 tests/test_content_integrity.py 对 scripts/data/*.yaml 的
+# 字节级 SHA-256 指纹校验失败；eol=lf 保证各平台工作区与 blob 逐字节一致。
+* text=auto eol=lf
