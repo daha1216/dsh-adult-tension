@@ -2,7 +2,7 @@
 """build_opening.py — 开局编排器：结构骰 → v3 骨架 → opening 校验。
 
 默认开局走 --complete：结构骰 + 1-14 填料 + opening 校验一次做完，
-stdout 给出 opening_brief，模型只写四块玩家可见正文。--complete 成功后会
+stdout 给出 opening_brief，模型只写三块玩家可见正文。--complete 成功后会
 把本局签名追加进临时历史（与 roll_opening 同一份），重复三元组只发
 warning 不阻断；本脚本也不替模型生成叙事正文。
 
@@ -364,8 +364,7 @@ def complete_opening(args: argparse.Namespace) -> int:
         write_atomic(args.request, dump_yaml(request))
 
     live = load_live_slice()
-    suggestions = fill_mod.opening_suggestions(filled, roll)
-    brief = live.opening_brief(filled, suggestions)
+    brief = live.opening_brief(filled)
     brief["state_path"] = str(working or out)
     brief["archive_path"] = str(out)
     if slot_info:

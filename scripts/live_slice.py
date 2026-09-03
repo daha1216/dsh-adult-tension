@@ -17,12 +17,6 @@ try:
 except ImportError:  # pragma: no cover
     yaml = None
 
-# --brief 的建议生成依赖 fill_opening（纯辅助，缺失时静默降级为无建议）。
-try:  # pragma: no cover - 直跑脚本时可导入；作为模块导入时可能不可用
-    from fill_opening import opening_suggestions  # type: ignore
-except Exception:  # noqa: BLE001 - 任何导入失败都按「无建议」处理
-    opening_suggestions = None
-
 
 def _load(path: Path) -> dict[str, Any]:
     if yaml is None:
@@ -193,7 +187,7 @@ def _surface_voice(voice_filter: Any) -> str:
     return text[:index].strip("。； ")
 
 
-def opening_brief(state: dict[str, Any], suggestions: list[str] | None = None) -> dict[str, Any]:
+def opening_brief(state: dict[str, Any]) -> dict[str, Any]:
     slice_ = extract_live_slice(state)
     player = slice_["player"]
     npc = (slice_["npcs"] or [{}])[0]
@@ -225,8 +219,7 @@ def opening_brief(state: dict[str, Any], suggestions: list[str] | None = None) -
         "unresolved": slice_.get("unresolved_action"),
         "last_beat": slice_.get("last_committed_result"),
         "next_pressure": slice_.get("natural_next_pressure"),
-        "suggested": suggestions or [],
-        "safety": "任何亲密都需要当场的态度，处境本身不等于同意",
+        # 三段式模板（SKILL.md「完整开局」）不消费建议/安全提醒，孤儿键已删。
         "turn": 1,
     }
 
@@ -304,12 +297,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     payload: Any
     if args.brief:
-        suggestions = None
-        if opening_suggestions is not None:
-            suggestions = opening_suggestions(state)
-        else:
-            print("warning: fill_opening 不可导入，opening_brief 无建议项", file=sys.stderr)
-        payload = opening_brief(state, suggestions)
+        payload = opening_brief(state)
     else:
         payload = extract_live_slice(state)
     print(dump(payload, args.format), end="" if str(args.format) == "yaml" else "\n")

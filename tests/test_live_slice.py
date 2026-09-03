@@ -43,13 +43,14 @@ class LiveSliceTests(unittest.TestCase):
         self.assertIn("sexuality_baseline", npc)
 
     def test_opening_brief_has_player_facing_keys(self) -> None:
-        suggestions = FILL.opening_suggestions(self.state)
-        brief = SLICE.opening_brief(self.state, suggestions)
+        brief = SLICE.opening_brief(self.state)
         self.assertTrue(brief["player"]["name"])
         self.assertTrue(brief["npc"]["name"])
         self.assertTrue(brief["unresolved"])
-        self.assertEqual(3, len(brief["suggested"]))
-        self.assertIn("当场的态度", brief["safety"])
+        self.assertEqual(1, brief["turn"])
+        # 三段式模板没有建议/安全槽位：孤儿键已删，防止回流。
+        self.assertNotIn("suggested", brief)
+        self.assertNotIn("safety", brief)
 
     def test_human_status_has_no_field_names(self) -> None:
         text = SLICE.human_status(self.state)
