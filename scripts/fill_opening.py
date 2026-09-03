@@ -136,16 +136,28 @@ def make_name(rng: random.Random, surnames: list[str], givens: list[str], used: 
     raise FillError("name pool exhausted")
 
 
+def surname_of(name: str, pool: list[str]) -> str:
+    """名字对名池姓氏做最长前缀匹配（复姓优先），取不到回空串。"""
+    for surname in sorted(pool, key=len, reverse=True):
+        if str(name).startswith(surname):
+            return surname
+    return ""
+
+
 def naming_audit(role_ref: str, chosen: str, candidates: list[str],
                  era: str, place: str, social: str,
                  era_pool_hit: bool = False) -> dict[str, Any]:
     rows = []
-    for name in candidates:
+    chosen_at = candidates.index(chosen) if chosen in candidates else -1
+    for index, name in enumerate(candidates):
         if name == chosen:
             rows.append({"name": name, "reject_reason": None})
+        elif index < chosen_at:
+            # 如实标注：选名规则（主 NPC 避玩家同姓）让位的前排候选。
+            rows.append({"name": name, "reject_reason": "未选用：选名规则让位（如与玩家同姓）"})
         else:
-            # 如实标注：脚本路径只按池序取首候选，未选中项统一记「未选用」。
-            rows.append({"name": name, "reject_reason": "未选用：按抽取顺序落在首选之后"})
+            # 如实标注：按抽取顺序落在选定名之后。
+            rows.append({"name": name, "reject_reason": "未选用：按抽取顺序落在选定名之后"})
     contemporary_markers = ("当代", "现代", "都市", "九十年代", "近未来", "架空")
     if era_pool_hit:
         # 时代命中专属名池：姓名与时代同源，直接记 pass。
@@ -370,7 +382,14 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     player_candidates = [make_name(rng_names, surnames_m, givens_m, used) for _ in range(4)]
     npc_candidates = [make_name(rng_names, surnames_f, givens_f, used) for _ in range(4)]
     player_name = player_candidates[0]
-    npc_name = npc_candidates[0]
+    # 主 NPC 优先避开与玩家同姓：时代名池常仅 8 姓，同姓开局（如「夏侯景舟 × 夏侯知微」）
+    # 容易被读成亲属；在候选内取首位异姓者，全部同姓时保留首选，抽取顺序与确定性不变。
+    player_surname = surname_of(player_name, surnames_m)
+    npc_name = next(
+        (candidate for candidate in npc_candidates
+         if surname_of(candidate, surnames_f) != player_surname),
+        npc_candidates[0],
+    )
 
     npc_pool = tables["identities"]["npc"].get(family)
     if not npc_pool:
