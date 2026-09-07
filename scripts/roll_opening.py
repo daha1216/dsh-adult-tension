@@ -23,6 +23,8 @@ import argparse
 import datetime as dt
 import importlib.util
 import json
+import hashlib
+import os
 import random
 import re
 import sys
@@ -36,8 +38,12 @@ POOLS_FILE = DATA_DIR / "pools.yaml"
 CHAR_META_FILE = DATA_DIR / "character_meta.yaml"
 TWISTS_FILE = DATA_DIR / "twists.yaml"
 CHAR_POOLS_FILE = DATA_DIR / "character_pools.yaml"
+ACTION_CATEGORIES_FILE = DATA_DIR / "action_categories.yaml"
+ACTION_METADATA_FILE = DATA_DIR / "action_metadata.yaml"
+TWIST_PROFILES_FILE = DATA_DIR / "twist_profiles.yaml"
 HISTORY_FILE = "adult_tension_narrative_roll_history.jsonl"
 HISTORY_RETRY_LIMIT = 32
+HISTORY_LIMIT = 200
 PROTOCOL_VERSION = "opening-roll/v3"
 # This is the compatibility contract: changing order requires a protocol bump.
 DRAW_PLAN = (
@@ -293,6 +299,9 @@ def load_pools() -> dict[str, Any]:
     char_meta = _read_yaml(CHAR_META_FILE, "人物生成元数据")
     twists = _read_yaml(TWISTS_FILE, "转折池")
     char_pools = _load_character_pools()
+    action_categories = _read_yaml(ACTION_CATEGORIES_FILE, "场景动作分类")
+    action_metadata = _read_yaml(ACTION_METADATA_FILE, "场景动作元数据")
+    twist_profiles = _read_yaml(TWIST_PROFILES_FILE, "转折画像")
 
     pools: dict[str, Any] = {}
     pools["表层风味"] = _flatten_grouped(char_pools["表层风味"], name="表层风味", max_len=8)
@@ -310,8 +319,18 @@ def load_pools() -> dict[str, Any]:
     pools["场景动作·交易"] = scene["交易摊牌"]
     pools["场景动作·靠近"] = scene["非交易靠近"]
     pools["场景动作"] = list(dict.fromkeys(pools["场景动作·交易"] + pools["场景动作·靠近"]))
+    pools["场景动作分类"] = {str(name): _flat(items, f"场景动作分类·{name}") for name, items in action_categories.items()}
+    pools["场景动作元数据"] = action_metadata
+    classified = {item for items in pools["场景动作分类"].values() for item in items}
+    # 正式素材由 check_content.py 强制校验；外部合成池可能尚未携带分类表，
+    # 此时保留旧的 roll_opening 兼容行为，不让维护测试因新增素材契约失效。
+    if classified == set(pools["场景动作·靠近"]):
+        pools["场景动作分类"] = {name: items for name, items in pools["场景动作分类"].items() if items}
+    else:
+        pools["场景动作分类"] = {"日常接触": list(pools["场景动作·靠近"])}
     pools["玩家化身轴"] = _flat_groups(raw.get("玩家化身轴"), "玩家化身轴", ("称谓", "年龄段", "社会位置"))
     pools["转折池"] = _twist_pool(twists)
+    pools["转折画像"] = twist_profiles
 
     if not set(pools["权力结构"]).issubset(POWER_STRUCTURES):
         raise AnchorError("权力结构条目与 validate_state 枚举不一致")
@@ -369,9 +388,23 @@ def _draw_distinct(rng: random.Random, entries: list[dict[str, str]],
     return picks
 
 
-def _weighted_choice(rng: random.Random, items: list[str], weights: dict[str, int]) -> str:
-    values = [max(1, int(weights.get(item, 8))) for item in items]
+def _weighted_choice(rng: random.Random, items: list[str], weights: dict[str, int],
+                     recent: set[str] | None = None) -> str:
+    """按族权重抽取，并对近期出现值施加冷却惩罚。"""
+    recent = recent or set()
+    values = []
+    for item in items:
+        base = max(1, int(weights.get(item, 8)))
+        values.append(max(1, base // 4) if item in recent else base)
     return rng.choices(items, weights=values, k=1)[0]
+
+
+def _choice_with_cooldown(rng: random.Random, items: list[str],
+                          recent: set[str] | None = None) -> str:
+    """优先避开近期值；池被近期值覆盖时仍保证可以抽取。"""
+    recent = recent or set()
+    fresh = [item for item in items if item not in recent]
+    return rng.choice(fresh or items)
 
 
 def _combine_multi(key: str, raw: str, pool: list[str], count: int,
@@ -405,10 +438,12 @@ def _combine_multi(key: str, raw: str, pool: list[str], count: int,
 
 def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
                locks: dict[str, str] | None = None,
-               custom: dict[str, str] | None = None) -> dict[str, Any]:
+               custom: dict[str, str] | None = None,
+               recent: dict[str, set[str]] | None = None) -> dict[str, Any]:
     """按 protocol_version/DRAW_PLAN 固定消费顺序生成结构骰。"""
     locks = dict(locks or {})
     custom = dict(custom or {})
+    recent = recent or {}
     if mode not in MODE_LABELS:
         raise AnchorError(f"未知模式：{mode}")
     unknown = set(locks) - LOCKABLE_KEYS
@@ -462,7 +497,7 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         if mode == "all_custom" and key in CUSTOM_KEYS:
             roll[key] = custom.get(key, "custom_required")
             return
-        roll[key] = rng.choice(pool)
+        roll[key] = _choice_with_cooldown(rng, pool, recent.get(key))
 
     def draw_many(key: str, pool: list[str], count: int) -> None:
         if key in locks:
@@ -516,11 +551,16 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     if "场景动作" in locks or (mode == "all_custom" and "场景动作" in CUSTOM_KEYS):
         draw("场景动作", pools["场景动作"])
     else:
-        roll["场景动作"] = rng.choice(pools["场景动作·靠近"])
+        categories = [(name, items) for name, items in pools.get("场景动作分类", {}).items() if items]
+        category = _choice_with_cooldown(rng, [name for name, _ in categories], recent.get("场景动作类别"))
+        category_items = dict(categories)[category]
+        roll["场景动作"] = _choice_with_cooldown(rng, category_items, recent.get("场景动作"))
+        roll["场景动作类别"] = category
+        roll["场景动作元数据"] = dict(pools["场景动作元数据"].get(category) or {})
     if "身份族" in locks or (mode == "all_custom" and "身份族" in CUSTOM_KEYS):
         draw("身份族", pools["身份侧"])
     else:
-        roll["身份族"] = _weighted_choice(rng, pools["身份侧"], identity_weights())
+        roll["身份族"] = _weighted_choice(rng, pools["身份侧"], identity_weights(), recent.get("身份族"))
     draw("处境", pools["处境侧"])
     draw("核心价值", pools["决策轴"]["核心价值"])
     draw("压力策略", pools["决策轴"]["压力策略"])
@@ -546,7 +586,7 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         if roll.get("权力结构") == "player_high" and roll.get("处境") in situation_leverage_set:
             remaining = [item for item in pools["处境侧"] if item not in situation_leverage_set]
             if remaining:
-                roll["处境"] = rng.choice(remaining)
+                roll["处境"] = _choice_with_cooldown(rng, remaining, recent.get("处境"))
     trade_pool = [item for item in pools["场景动作·交易"] if item != roll.get("场景动作")]
     if trade_pool:
         roll["场景动作·对照"] = rng.choice(trade_pool)
@@ -600,6 +640,11 @@ def draw_twists(pools: dict[str, Any], seed: int) -> list[tuple[str, str]]:
     return rng.sample(entries, count)
 
 
+def twist_profile(pools: dict[str, Any], category: str) -> dict[str, Any]:
+    profile = (pools.get("转折画像") or {}).get(category) or {}
+    return dict(profile) if isinstance(profile, dict) else {}
+
+
 def _roll_signature(roll: dict[str, Any]) -> str:
     payload = {key: roll.get(key) for key in DRAW_PLAN}
     return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
@@ -610,7 +655,11 @@ def _roll_triple(roll: dict[str, Any]) -> str:
 
 
 def history_path() -> Path:
-    return Path(tempfile.gettempdir()) / HISTORY_FILE
+    override = os.environ.get("ADULT_TENSION_HISTORY_PATH")
+    if override:
+        return Path(override)
+    identity = hashlib.sha256(str(ROOT).encode("utf-8")).hexdigest()[:12]
+    return Path(tempfile.gettempdir()) / f"adult-tension-{identity}-{HISTORY_FILE}"
 
 
 def recent_signatures(limit: int = 20) -> set[str]:
@@ -649,6 +698,37 @@ def recent_triples(limit: int = 20) -> set[str]:
     return triples
 
 
+
+
+def recent_rolls(limit: int = 40) -> list[dict[str, Any]]:
+    path = history_path()
+    if not path.exists():
+        return []
+    records: list[dict[str, Any]] = []
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines()[-limit:]:
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(record, dict):
+                records.append(record)
+    except OSError as exc:
+        print(f"warning: could not read roll history: {exc}", file=sys.stderr)
+    return records
+
+
+def recent_cooldowns(limit: int = 12) -> dict[str, set[str]]:
+    fields = ("地点", "身份族", "处境", "场景动作")
+    result = {field: set() for field in fields}
+    for record in recent_rolls(limit):
+        for field in fields:
+            value = record.get(field)
+            if isinstance(value, str) and value:
+                result[field].add(value)
+    return result
+
+
 def append_history(roll: dict[str, Any]) -> None:
     try:
         record = {
@@ -657,11 +737,21 @@ def append_history(roll: dict[str, Any]) -> None:
             "mode": roll["mode"],
             "signature": _roll_signature(roll),
             "triple": _roll_triple(roll),
+            "地点": roll.get("地点"),
+            "身份族": roll.get("身份族"),
+            "处境": roll.get("处境"),
+            "场景动作": roll.get("场景动作"),
+            "场景动作类别": roll.get("场景动作类别"),
             "at": dt.datetime.now().isoformat(timespec="seconds"),
         }
-        with history_path().open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps(record, ensure_ascii=False) + "\n")
-    except OSError as exc:  # 历史只用于近期去重辅助，写失败不阻断开局
+        path = history_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        lock_path = path.with_name(f".{path.name}.write.lock")
+        with _COMMON.FileLock(lock_path):
+            existing = path.read_text(encoding="utf-8").splitlines() if path.exists() else []
+            existing.append(json.dumps(record, ensure_ascii=False))
+            _COMMON.write_atomic(path, "\n".join(existing[-HISTORY_LIMIT:]) + "\n")
+    except (_COMMON.CommonError, OSError) as exc:  # 历史只用于近期去重辅助，写失败不阻断开局
         print(f"warning: could not record roll history: {exc}", file=sys.stderr)
 
 
@@ -764,7 +854,11 @@ def main(argv: list[str] | None = None) -> int:
                 "protocol_version": PROTOCOL_VERSION,
                 "seed": seed,
                 "mode": mode,
-                "twists": [f"{category}｜{item}" for category, item in picks],
+                "twists": [
+                    {"category": category, "item": item,
+                     "profile": twist_profile(pools, category)}
+                    for category, item in picks
+                ],
             }
             print(json.dumps(payload, ensure_ascii=False, indent=2))
         else:
@@ -777,7 +871,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         recent = set() if args.no_history else recent_signatures()
         recent_t = set() if args.no_history else recent_triples()
-        roll = build_roll(pools, seed, mode, locks, custom)
+        cooldowns = {} if args.no_history else recent_cooldowns()
+        roll = build_roll(pools, seed, mode, locks, custom, cooldowns)
         signature = _roll_signature(roll)
         triple = _roll_triple(roll)
         if args.seed is None:
@@ -785,7 +880,7 @@ def main(argv: list[str] | None = None) -> int:
             entropy = random.SystemRandom()
             while (signature in recent or triple in recent_t) and attempts < HISTORY_RETRY_LIMIT:
                 seed = entropy.randrange(0, 2 ** 31)
-                roll = build_roll(pools, seed, mode, locks, custom)
+                roll = build_roll(pools, seed, mode, locks, custom, cooldowns)
                 signature = _roll_signature(roll)
                 triple = _roll_triple(roll)
                 attempts += 1

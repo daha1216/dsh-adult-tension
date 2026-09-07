@@ -34,6 +34,49 @@ class CommonError(RuntimeError):
     """共享工具失败（缺 PyYAML、脚本加载失败、读写失败）。"""
 
 
+class FileLock:
+    """Cross-platform advisory lock backed by a one-byte lock file."""
+
+    def __init__(self, path: Path) -> None:
+        self.path = path
+        self.handle: Any = None
+
+    def __enter__(self) -> "FileLock":
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            self.handle = self.path.open("w+b")
+            self.handle.seek(0)
+            if os.name == "nt":
+                import msvcrt
+
+                msvcrt.locking(self.handle.fileno(), msvcrt.LK_LOCK, 1)
+            else:  # pragma: no cover - exercised on POSIX CI
+                import fcntl
+
+                fcntl.flock(self.handle.fileno(), fcntl.LOCK_EX)
+        except OSError as exc:
+            if self.handle is not None:
+                self.handle.close()
+                self.handle = None
+            raise CommonError(f"cannot acquire write lock {self.path}: {exc}") from exc
+        return self
+
+    def __exit__(self, exc_type: Any, exc: Any, traceback: Any) -> None:
+        if self.handle is None:
+            return
+        self.handle.seek(0)
+        if os.name == "nt":
+            import msvcrt
+
+            msvcrt.locking(self.handle.fileno(), msvcrt.LK_UNLCK, 1)
+        else:  # pragma: no cover - exercised on POSIX CI
+            import fcntl
+
+            fcntl.flock(self.handle.fileno(), fcntl.LOCK_UN)
+        self.handle.close()
+        self.handle = None
+
+
 def load_sibling(name: str) -> Any:
     """按文件名加载同目录脚本，如 load_sibling("roll_opening")。"""
     script = Path(__file__).with_name(f"{name}.py")
@@ -93,3 +136,8 @@ def write_atomic(path: Path, text: str) -> None:
             temp_path.unlink()
         except FileNotFoundError:
             pass
+
+
+def lock_path(path: Path) -> Path:
+    """Return the sibling lock path used for read-modify-write operations."""
+    return path.with_name(f".{path.name}.write.lock")

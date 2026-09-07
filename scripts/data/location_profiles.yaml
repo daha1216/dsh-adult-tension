@@ -1,0 +1,1884 @@
+ # 地点族运行画像。每个地点必须具备 privacy / visibility / exits / witnesses / affordances / pressure_modifiers。
+ # 由 fill_opening.py 写入 current_node.scene_profile，供场景与普通回合判断使用。
+高级公寓:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+老旧小区:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+写字楼:
+  privacy: medium
+  visibility: high
+  exits:
+  - 主入口
+  - 服务通道
+  witnesses:
+  - 工作人员
+  - 临近客人
+  affordances:
+  - 谈判
+  - 调查
+  - 借口离场
+  pressure_modifiers:
+  - 声誉风险
+  - 第三方介入
+酒店套房:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+私家宅邸:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+夜场会所:
+  privacy: medium
+  visibility: high
+  exits:
+  - 主入口
+  - 服务通道
+  witnesses:
+  - 工作人员
+  - 临近客人
+  affordances:
+  - 谈判
+  - 调查
+  - 借口离场
+  pressure_modifiers:
+  - 声誉风险
+  - 第三方介入
+疗养院:
+  privacy: low_medium
+  visibility: high
+  exits:
+  - 走廊
+  - 值班点
+  witnesses:
+  - 值班人员
+  - 来访者
+  affordances:
+  - 求助
+  - 交接信息
+  - 转移地点
+  pressure_modifiers:
+  - 程序约束
+  - 健康风险
+图书馆:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+列车车厢:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+海岛度假村:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+剧院后台:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+工作室:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+社区诊所:
+  privacy: low_medium
+  visibility: high
+  exits:
+  - 走廊
+  - 值班点
+  witnesses:
+  - 值班人员
+  - 来访者
+  affordances:
+  - 求助
+  - 交接信息
+  - 转移地点
+  pressure_modifiers:
+  - 程序约束
+  - 健康风险
+家中厨房:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+海边步道:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+旧书店:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+夜班值班室:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+朋友客厅:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+夜航渡轮:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+通宵大排档:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+livehouse:
+  privacy: medium
+  visibility: high
+  exits:
+  - 主入口
+  - 服务通道
+  witnesses:
+  - 工作人员
+  - 临近客人
+  affordances:
+  - 谈判
+  - 调查
+  - 借口离场
+  pressure_modifiers:
+  - 声誉风险
+  - 第三方介入
+医院住院部走廊:
+  privacy: low_medium
+  visibility: high
+  exits:
+  - 走廊
+  - 值班点
+  witnesses:
+  - 值班人员
+  - 来访者
+  affordances:
+  - 求助
+  - 交接信息
+  - 转移地点
+  pressure_modifiers:
+  - 程序约束
+  - 健康风险
+山间温泉旅馆:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+老字号客栈:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+江心画舫:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+城隍庙后院:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+医馆后堂:
+  privacy: low_medium
+  visibility: high
+  exits:
+  - 走廊
+  - 值班点
+  witnesses:
+  - 值班人员
+  - 来访者
+  affordances:
+  - 求助
+  - 交接信息
+  - 转移地点
+  pressure_modifiers:
+  - 程序约束
+  - 健康风险
+领主石堡:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+雾都洋馆:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+雾码头仓库:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+私立诊察室:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+帽店试帽间:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+民国公馆:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+银座料亭:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+神乐坂置屋:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+洋馆偏屋:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+洋装裁缝铺:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+昭和喫茶店:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+爵士喫茶:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+钱汤:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+团地走廊:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+车站前旅馆:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+灯塔值守屋:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+太空站舱段:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+废土驿站:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+电竞俱乐部:
+  privacy: medium
+  visibility: high
+  exits:
+  - 主入口
+  - 服务通道
+  witnesses:
+  - 工作人员
+  - 临近客人
+  affordances:
+  - 谈判
+  - 调查
+  - 借口离场
+  pressure_modifiers:
+  - 声誉风险
+  - 第三方介入
+马戏团宿营地:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+宗族祠堂:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+私人游艇:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+宠物医院:
+  privacy: low_medium
+  visibility: high
+  exits:
+  - 走廊
+  - 值班点
+  witnesses:
+  - 值班人员
+  - 来访者
+  affordances:
+  - 求助
+  - 交接信息
+  - 转移地点
+  pressure_modifiers:
+  - 程序约束
+  - 健康风险
+桌游店:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+殡仪馆:
+  privacy: low_medium
+  visibility: high
+  exits:
+  - 走廊
+  - 值班点
+  witnesses:
+  - 值班人员
+  - 来访者
+  affordances:
+  - 求助
+  - 交接信息
+  - 转移地点
+  pressure_modifiers:
+  - 程序约束
+  - 健康风险
+末班地铁:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+山顶观星台:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+24小时自习室:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+当铺:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+全息酒吧:
+  privacy: medium
+  visibility: high
+  exits:
+  - 主入口
+  - 服务通道
+  witnesses:
+  - 工作人员
+  - 临近客人
+  affordances:
+  - 谈判
+  - 调查
+  - 借口离场
+  pressure_modifiers:
+  - 声誉风险
+  - 第三方介入
+藏经阁:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+悬空神殿:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+镖局:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+舞厅:
+  privacy: medium
+  visibility: high
+  exits:
+  - 主入口
+  - 服务通道
+  witnesses:
+  - 工作人员
+  - 临近客人
+  affordances:
+  - 谈判
+  - 调查
+  - 借口离场
+  pressure_modifiers:
+  - 声誉风险
+  - 第三方介入
+清晨菜市场:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+黄昏天台:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+打烊面包店:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+美术馆:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+婚礼宴会厅:
+  privacy: medium
+  visibility: high
+  exits:
+  - 主入口
+  - 服务通道
+  witnesses:
+  - 工作人员
+  - 临近客人
+  affordances:
+  - 谈判
+  - 调查
+  - 借口离场
+  pressure_modifiers:
+  - 声誉风险
+  - 第三方介入
+健身房:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+寺庙后院:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+深夜便利店:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+露营营地:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+室内夜泳馆:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+洗浴中心:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+打烊后的买手店:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+立体停车库:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+旗袍定制店:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+老茶馆:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+园林:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+画廊:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+拍卖行:
+  privacy: medium
+  visibility: high
+  exits:
+  - 主入口
+  - 服务通道
+  witnesses:
+  - 工作人员
+  - 临近客人
+  affordances:
+  - 谈判
+  - 调查
+  - 借口离场
+  pressure_modifiers:
+  - 声誉风险
+  - 第三方介入
+戏楼:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+古籍书店:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+香道馆:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+高速公路服务区:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+24小时自助洗衣房:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+幸存者地下避难所:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+感染检疫隔离点:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+废弃搜刮药房:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+避难所防爆闸门前:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+同人展备用更衣室:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+女仆咖啡厅后厨:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+声优录音棚:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+电竞基地训练室:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+Cosplay暗房:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+魔法工坊地下室:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+迷宫中层安全屋:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+学园祭打烊后的活动室:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+海边浴衣祭神社后阶梯:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+大学钢琴练习室:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+龙门客栈地窖:
+  privacy: medium_high
+  visibility: medium
+  exits:
+  - 门口
+  - 备用通道
+  witnesses:
+  - 邻居或工作人员
+  affordances:
+  - 谈话
+  - 查找物件
+  - 暂时避开
+  pressure_modifiers:
+  - 空间距离
+  - 退出成本
+破败义庄:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+倒悬石梁地宫:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+流动马戏团大篷车:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+红丝绒马戏大帐篷:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+猛兽铁笼暗室车厢:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+胡姬八角琉璃酒肆:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+无相鬼市千佛暗窟:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+流沙回廊炼金暗房:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+平康坊顶层花魁琴房:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+长安地底暗渠方士石坛:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+大雁塔顶避风藏经阁:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+理发店暗门后地下酒吧:
+  privacy: medium
+  visibility: high
+  exits:
+  - 主入口
+  - 服务通道
+  witnesses:
+  - 工作人员
+  - 临近客人
+  affordances:
+  - 谈判
+  - 调查
+  - 借口离场
+  pressure_modifiers:
+  - 声誉风险
+  - 第三方介入
+密歇根湖畔私酒卸货码头:
+  privacy: low
+  visibility: high
+  exits:
+  - 公共出口
+  - 交通节点
+  witnesses:
+  - 路人
+  - 巡逻人员
+  affordances:
+  - 离开
+  - 跟踪
+  - 等待第三方
+  pressure_modifiers:
+  - 暴露风险
+  - 时间压力
+黑帮教父防弹老爷车:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+鸭川河畔町屋雨廊:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+祗园艺伎置屋纸拉门后:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+壬生屯所阴暗道场:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+豪门庄园顶楼琴房:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 主要出口
+  witnesses:
+  - 场所人员
+  affordances:
+  - 观察
+  - 交谈
+  - 离开
+  pressure_modifiers:
+  - 环境规则
+  - 时间压力
+直播平台危机会议室:
+  privacy: low
+  visibility: very_high
+  exits:
+  - 玻璃门
+  - 员工通道
+  witnesses:
+  - 公关团队
+  - 监控与录音设备
+  affordances:
+  - 公开表态
+  - 核对原始记录
+  - 临时改口
+  pressure_modifiers:
+  - 舆论扩散
+  - 记录不可撤回
+录音棚控制室:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 隔音门
+  - 后台走廊
+  witnesses:
+  - 音频工程师
+  - 未关闭的录音设备
+  affordances:
+  - 播放原始录音
+  - 删除或保留片段
+  - 私下重录
+  pressure_modifiers:
+  - 声音留痕
+  - 版本争议
+契约登记所:
+  privacy: low
+  visibility: high
+  exits:
+  - 正门
+  - 见证人侧门
+  witnesses:
+  - 登记官
+  - 契约见证人
+  affordances:
+  - 查验条款
+  - 申请延期
+  - 公开签署
+  pressure_modifiers:
+  - 法律约束
+  - 违约成本
+真名保管库:
+  privacy: very_high
+  visibility: low
+  exits:
+  - 铜门
+  - 记忆回廊
+  witnesses:
+  - 保管员
+  - 契约魔法
+  affordances:
+  - 查找真名
+  - 交换线索
+  - 封存证据
+  pressure_modifiers:
+  - 身份暴露
+  - 记忆代价
+非人族夜市:
+  privacy: medium
+  visibility: variable
+  exits:
+  - 暗巷
+  - 摊位后门
+  witnesses:
+  - 各族商贩
+  - 巡查者
+  affordances:
+  - 交换物品
+  - 打听族群消息
+  - 暂时隐藏身份
+  pressure_modifiers:
+  - 族群偏见
+  - 误认风险
+结界检查站:
+  privacy: low
+  visibility: very_high
+  exits:
+  - 城门
+  - 侧方检修道
+  witnesses:
+  - 检查官
+  - 排队旅客
+  affordances:
+  - 核验身份
+  - 申请通行
+  - 公开选择立场
+  pressure_modifiers:
+  - 证件风险
+  - 公开审查
+深夜机场候机区:
+  privacy: low
+  visibility: high
+  exits:
+  - 登机口
+  - 安检回廊
+  witnesses:
+  - 乘务人员
+  - 其他旅客
+  affordances:
+  - 等待
+  - 临时改签
+  - 体面告别
+  pressure_modifiers:
+  - 倒计时
+  - 离场不可逆
+停电民宿客厅:
+  privacy: medium_high
+  visibility: low
+  exits:
+  - 民宿门
+  - 后院
+  witnesses:
+  - 房东或邻居
+  affordances:
+  - 共处
+  - 整理行李
+  - 暂时断开外界
+  pressure_modifiers:
+  - 资源有限
+  - 返程不确定
+偏远小镇唯一便利店:
+  privacy: low
+  visibility: medium
+  exits:
+  - 玻璃门
+  - 后仓
+  witnesses:
+  - 店主
+  - 小镇熟客
+  affordances:
+  - 补给
+  - 打听路线
+  - 借用电话
+  pressure_modifiers:
+  - 陌生人注视
+  - 交通中断
+最后一班渡轮:
+  privacy: medium
+  visibility: medium
+  exits:
+  - 船舱门
+  - 甲板
+  witnesses:
+  - 船员
+  - 少量乘客
+  affordances:
+  - 交换票据
+  - 眺望离岸方向
+  - 选择留下或下船
+  pressure_modifiers:
+  - 航程倒计时
+  - 回头成本
+回程前的空车站:
+  privacy: medium
+  visibility: high
+  exits:
+  - 站台
+  - 出站口
+  witnesses:
+  - 清洁人员
+  - 监控系统
+  affordances:
+  - 归还物品
+  - 确认去留
+  - 留下最后讯息
+  pressure_modifiers:
+  - 末班车取消
+  - 关系定性

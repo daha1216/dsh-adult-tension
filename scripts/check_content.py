@@ -6,12 +6,13 @@
   python scripts/check_content.py
 
 ERROR 会让开局直接报错或校验失败；WARNING 是有兜底、戏味打折。
-全绿输出 OK 与检查项数。
+默认只读；可用 --fingerprint 输出当前素材指纹。
 """
 
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import sys
 from pathlib import Path
 from typing import Any
@@ -23,6 +24,21 @@ except ImportError:  # pragma: no cover
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "scripts" / "data"
+DATA_FILES = (
+    "pools.yaml",
+    "character_meta.yaml",
+    "twists.yaml",
+    "templates.yaml",
+    "names.yaml",
+    "identities.yaml",
+    "locations.yaml",
+    "character_pools.yaml",
+    "location_profiles.yaml",
+    "action_categories.yaml",
+    "action_metadata.yaml",
+    "identity_profiles.yaml",
+    "twist_profiles.yaml",
+)
 
 POOL_TABLES = ("核心规则", "美学基调", "权力结构", "张力引擎", "社会规则",
                "压力来源", "身份侧", "处境侧", "反差轴")
@@ -150,7 +166,7 @@ def check() -> Report:
         report.warn(f"年龄段「{band}」在 character_meta.yaml 没有区间（按 28-36 兜底）")
     report.checks += 1
 
-    # 6. 场景动作 ↔ 句式模板（有通用兜底，WARNING）
+    # 6. 场景动作 ↔ 句式模板（新增动作允许运行时通用兜底）
     near_beats = templates.get("near_beats") or {}
     trade_beats = templates.get("trade_beats") or {}
     for action in sorted(scene_near - _keys(near_beats)):
@@ -267,7 +283,70 @@ def check() -> Report:
     report.ok(bool(names.get("surnames")) and bool(names.get("given_male")) and bool(names.get("given_female")),
               "names.yaml 缺少姓氏、男名池（given_male）或女名池（given_female）")
 
-    # 12. 时代分名池：era 键必须在时代池里，且每组 surnames/given_male/given_female 非空
+    # 12. 体验层体检：重复率、权重偏斜、地点覆盖和动作分布只报警，不阻断加载。
+    def _all_strings(value: Any):
+        if isinstance(value, dict):
+            for child in value.values():
+                yield from _all_strings(child)
+        elif isinstance(value, list):
+            for child in value:
+                yield from _all_strings(child)
+        elif isinstance(value, str) and value.strip():
+            yield value.strip()
+
+    for filename, data in (("names.yaml", names), ("pools.yaml", pools)):
+        values = list(_all_strings(data))
+        duplicates = len(values) - len(set(values))
+        report.ok(duplicates >= 0, f"{filename} 重复值统计完成：{duplicates}（跨池复用不再作为错误）")
+    location_values = locations
+    if isinstance(location_values, dict):
+        counts = [len(items) for items in location_values.values() if isinstance(items, list)]
+        report.ok(all(isinstance(items, list) and items for items in location_values.values()),
+                  "locations.yaml 每个地点族至少有一个具体变体")
+    profiles = _load("location_profiles.yaml") if (DATA / "location_profiles.yaml").exists() else {}
+    report.ok(set(profiles) == places,
+              f"location_profiles.yaml 必须覆盖全部地点族（缺少 {sorted(places - set(profiles))}，多出 {sorted(set(profiles) - places)}）")
+    for place, profile in profiles.items():
+        report.ok(isinstance(profile, dict) and all(profile.get(key) for key in ("privacy", "visibility", "exits", "witnesses", "affordances", "pressure_modifiers")),
+                  f"地点画像「{place}」缺少 privacy/visibility/exits/witnesses/affordances/pressure_modifiers")
+    if weights:
+        total_weight = sum(int(value) for value in weights.values())
+        report.ok(total_weight > 0, f"身份族权重总和为 {total_weight}，抽取层已启用近期冷却")
+    action_categories_path = DATA / "action_categories.yaml"
+    action_categories = _load("action_categories.yaml") if action_categories_path.exists() else {}
+    classified_actions = {item for items in action_categories.values() if isinstance(items, list) for item in items}
+    report.ok(classified_actions == scene_near,
+              f"action_categories.yaml 必须逐项覆盖非交易靠近动作（缺少 {sorted(scene_near - classified_actions)}，多出 {sorted(classified_actions - scene_near)}）")
+    report.checks += 1
+    action_total = len(scene_trade) + len(scene_near)
+    category_sizes = [len(items) for items in action_categories.values() if isinstance(items, list)]
+    report.ok(len(category_sizes) >= 4 and all(size > 0 for size in category_sizes),
+              "场景动作分类至少覆盖四类且每类非空")
+    action_metadata = _load("action_metadata.yaml")
+    report.ok(set(action_categories) <= set(action_metadata),
+              "action_metadata.yaml 必须覆盖所有场景动作分类")
+    for category in action_categories:
+        profile = action_metadata.get(category) or {}
+        report.ok(all(profile.get(key) for key in ("function", "visibility", "escalation")),
+                  f"场景动作元数据「{category}」缺少 function/visibility/escalation")
+    identity_profiles = _load("identity_profiles.yaml")
+    report.ok(families <= set(identity_profiles),
+              "identity_profiles.yaml 必须覆盖所有身份族")
+    for family in families:
+        report.ok(all((identity_profiles.get(family) or {}).get(key)
+                      for key in ("negotiation_style", "conflict_response", "repair_style",
+                                  "public_private_shift", "follow_up_style", "exit_preference",
+                                  "evidence_habit")),
+                  f"身份行为画像「{family}」字段不完整")
+    twist_profiles = _load("twist_profiles.yaml")
+    report.ok(set(TWIST_CATEGORIES) <= set(twist_profiles),
+              "twist_profiles.yaml 必须覆盖七个转折类别")
+    for category in TWIST_CATEGORIES:
+        profile = twist_profiles.get(category) or {}
+        report.ok(all(key in profile for key in ("affects", "escalation", "opens_exit", "introduces_third_party")),
+                  f"转折画像「{category}」字段不完整")
+
+    # 13. 时代分名池：era 键必须在时代池里，且每组 surnames/given_male/given_female 非空
     era_pool_table = names.get("eras") or {}
     era_names = set(pools.get("时代与地点", {}).get("时代") or [])
     for era_name, pool in era_pool_table.items():
@@ -276,9 +355,8 @@ def check() -> Report:
         report.ok(isinstance(pool, dict) and bool(pool.get("surnames")) and bool(pool.get("given_male")) and bool(pool.get("given_female")),
                   f"names.yaml eras「{era_name}」的 surnames/given_male/given_female 必须非空")
 
-    # 13. 双语态格式契约：主 NPC 语态字段必须同时带「表层语态：」「里层语态：」两个标记。
-    # live_slice 按「里层」首次出现处切分（角色设计.md「书写格式」），缺任一标记，
-    # 里层台词会被整段当表层输出。这里直接验证生成器 fill_opening.voice_filter 的产物。
+    # 13. 双语态结构契约：生成器必须输出 surface / inner / switch_conditions 三键。
+    # live_slice 只读取 surface，避免依赖长字符串中的中文标记切分。
     try:
         spec = importlib.util.spec_from_file_location(
             "adult_tension_check_fill", ROOT / "scripts" / "fill_opening.py")
@@ -287,11 +365,16 @@ def check() -> Report:
         fill_mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(fill_mod)
         for flavor, quirk in (("—", "—"), ("冷淡疏离", "话留半句")):
-            text = fill_mod.voice_filter(
+            voice = fill_mod.voice_filter(
                 {"表层风味": flavor, "口癖": quirk, "反差轴": ""}, "测试身份", templates)
-            report.ok("表层语态：" in text and "里层语态：" in text,
-                      "fill_opening.voice_filter 产物缺少「表层语态：/里层语态：」标记"
-                      "（live_slice 会把里层台词当表层输出）")
+            report.ok(
+                isinstance(voice, dict)
+                and set(("surface", "inner", "switch_conditions")) <= set(voice)
+                and all(isinstance(voice.get(key), str) and voice.get(key).strip() for key in ("surface", "inner"))
+                and isinstance(voice.get("switch_conditions"), list)
+                and bool(voice.get("switch_conditions")),
+                "fill_opening.voice_filter 必须输出完整的结构化双语态",
+            )
     except Exception as exc:  # noqa: BLE001 - 加载失败本身就是体检要抓的问题
         report.checks += 1
         report.error(f"双语态标记检查无法执行：{exc}")
@@ -299,12 +382,27 @@ def check() -> Report:
     return report
 
 
-def main() -> int:
+def content_fingerprint() -> str:
+    digest = hashlib.sha256()
+    for name in DATA_FILES:
+        digest.update(name.encode("utf-8"))
+        digest.update((DATA / name).read_bytes())
+    return digest.hexdigest()
+
+
+def main(argv: list[str] | None = None) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--fingerprint", action="store_true", help="输出 scripts/data 的当前指纹")
+    args = parser.parse_args(argv)
     report = check()
     for message in report.errors:
         print(f"ERROR: {message}")
     for message in report.warnings:
         print(f"WARNING: {message}")
+    if args.fingerprint:
+        print(f"CONTENT_FINGERPRINT: {content_fingerprint()}")
     if report.errors:
         print(f"\n未通过：{len(report.errors)} 个 ERROR、{len(report.warnings)} 个 WARNING"
               f"（共 {report.checks} 项检查）")

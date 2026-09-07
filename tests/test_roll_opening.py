@@ -4,6 +4,8 @@ import contextlib
 import importlib.util
 import io
 import json
+import os
+import tempfile
 import unittest
 from unittest import mock
 from pathlib import Path
@@ -70,6 +72,24 @@ class RollOpeningTests(unittest.TestCase):
 
     def test_different_seeds_differ(self) -> None:
         self.assertNotEqual(MOD.build_roll(self.pools, 3), MOD.build_roll(self.pools, 99))
+
+    def test_recent_cooldown_avoids_primary_repeatable_choices(self) -> None:
+        recent = {
+            "地点": set(self.pools["时代与地点"]["地点"]),
+            "身份族": set(self.pools["身份侧"]),
+            "处境": set(self.pools["处境侧"]),
+            "场景动作": set(self.pools["场景动作·靠近"]),
+        }
+        roll = MOD.build_roll(self.pools, 7, recent=recent)
+        self.assertIn(roll["地点"], self.pools["时代与地点"]["地点"])
+        self.assertIn(roll["身份族"], self.pools["身份侧"])
+        self.assertIn(roll["处境"], self.pools["处境侧"])
+        self.assertIn(roll["场景动作"], self.pools["场景动作·靠近"])
+
+    def test_recent_cooldown_does_not_override_explicit_lock(self) -> None:
+        place = self.pools["时代与地点"]["地点"][0]
+        roll = MOD.build_roll(self.pools, 7, locks={"地点": place}, recent={"地点": {place}})
+        self.assertEqual(place, roll["地点"])
 
     def test_protocol_version_and_draw_plan_are_explicit(self) -> None:
         roll = MOD.build_roll(self.pools, 1)
@@ -176,9 +196,23 @@ class RollOpeningTests(unittest.TestCase):
         self.assertEqual(data["mode"], "table")
         self.assertTrue(data["核心规则"])
 
+    def test_history_path_override_is_supported(self) -> None:
+        original = os.environ.get("ADULT_TENSION_HISTORY_PATH")
+        with tempfile.TemporaryDirectory() as temp:
+            override = Path(temp) / "history.jsonl"
+            try:
+                os.environ["ADULT_TENSION_HISTORY_PATH"] = str(override)
+                self.assertEqual(override, MOD.history_path())
+            finally:
+                if original is None:
+                    os.environ.pop("ADULT_TENSION_HISTORY_PATH", None)
+                else:
+                    os.environ["ADULT_TENSION_HISTORY_PATH"] = original
+
     def test_default_seed_retries_when_history_signature_repeats(self) -> None:
         first = MOD.build_roll(self.pools, 10)
         with mock.patch.object(MOD, "recent_signatures", return_value={MOD._roll_signature(first)}), \
+             mock.patch.object(MOD, "recent_cooldowns", return_value={}), \
              mock.patch.object(MOD, "append_history") as append, \
              mock.patch.object(MOD.random, "SystemRandom", return_value=mock.Mock(randrange=mock.Mock(side_effect=[10, 11]))):
             buffer = io.StringIO()
@@ -193,6 +227,7 @@ class RollOpeningTests(unittest.TestCase):
         roll = MOD.build_roll(self.pools, 10)
         stderr = io.StringIO()
         with mock.patch.object(MOD, "recent_signatures", return_value={MOD._roll_signature(roll)}), \
+             mock.patch.object(MOD, "recent_cooldowns", return_value={}), \
              mock.patch.object(MOD, "append_history"):
             with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(stderr):
                 code = MOD.main(["--seed", "10", "--format", "json"])

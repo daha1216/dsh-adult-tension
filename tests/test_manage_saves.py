@@ -77,6 +77,21 @@ class ManageSavesTests(unittest.TestCase):
         with self.assertRaisesRegex(MANAGE.SaveError, "already exists"):
             self.store.init_slot("main", self.source)
 
+    def test_invalid_init_does_not_leave_partial_slot(self) -> None:
+        invalid = Path(self.temp.name) / "invalid.yaml"
+        invalid.write_text("not: a valid save\n", encoding="utf-8")
+        with self.assertRaises(MANAGE.SaveError):
+            self.store.init_slot("retryable", invalid)
+        self.assertFalse((self.root / "slots" / "retryable").exists())
+        self.store.init_slot("retryable", self.source)
+
+    def test_state_checksum_mismatch_is_rejected(self) -> None:
+        self.store.init_slot("main", self.source)
+        state_path = self.store.state_path("main")
+        state_path.write_text(state_path.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(MANAGE.SaveError, "checksum mismatch"):
+            self.store.load_slot("main")
+
     def test_list_returns_all_manifests(self) -> None:
         self.store.init_slot("main", self.source)
         second = Path(self.temp.name) / "second.yaml"

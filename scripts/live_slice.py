@@ -62,6 +62,7 @@ def _trim_npc(npc: dict[str, Any]) -> dict[str, Any]:
         "autonomy": npc.get("autonomy"),
         "active_voice_mode": npc.get("active_voice_mode") or "surface",
         "identity_role": identity.get("role") or npc.get("identity"),
+        "identity_behavior": identity.get("behavior") or {},
         "situation_type": situation.get("type"),
         "situation_pressure": situation.get("pressure"),
         "sexuality_baseline": sex.get("baseline"),
@@ -93,6 +94,7 @@ def _pending_events(events: Any) -> list[dict[str, Any]]:
             "semantic_key": event.get("semantic_key"),
             "source": event.get("source"),
             "probability": event.get("probability"),
+            "last_roll": event.get("last_roll"),
         }))
     rows.sort(key=lambda row: row[0])
     kept = [row[1] for row in rows[:PENDING_EVENTS_LIMIT]]
@@ -103,12 +105,11 @@ def _pending_events(events: Any) -> list[dict[str, Any]]:
 
 
 def extract_live_slice(state: dict[str, Any]) -> dict[str, Any]:
-    """运行时活切片：丢掉起名候选、决策卡副本、亲密基线快照。"""
+    """运行时活切片：按运行状态速览白名单保留普通回合所需字段。"""
     meta = state.get("meta") if isinstance(state.get("meta"), dict) else {}
     world = state.get("world") if isinstance(state.get("world"), dict) else {}
     player = state.get("player") if isinstance(state.get("player"), dict) else {}
     node = state.get("current_node") if isinstance(state.get("current_node"), dict) else {}
-    consent = state.get("consent") if isinstance(state.get("consent"), dict) else {}
     checkpoint = state.get("checkpoint") if isinstance(state.get("checkpoint"), dict) else {}
     participants = set(node.get("participants") or [])
     npcs = []
@@ -121,14 +122,6 @@ def extract_live_slice(state: dict[str, Any]) -> dict[str, Any]:
     for boundary in state.get("boundaries") or []:
         if isinstance(boundary, dict) and boundary.get("status") == "active":
             boundaries.append({"id": boundary.get("id"), "topic": boundary.get("topic")})
-    grants = []
-    for grant in consent.get("grants") or []:
-        if isinstance(grant, dict) and grant.get("status") == "granted":
-            grants.append({
-                "id": grant.get("id"),
-                "scope": grant.get("scope"),
-                "inherited_from": grant.get("inherited_from"),
-            })
     return {
         "turn": meta.get("turn"),
         "mode": meta.get("mode"),
@@ -145,14 +138,17 @@ def extract_live_slice(state: dict[str, Any]) -> dict[str, Any]:
         "constants": list(world.get("constants") or []),
         "pressure_immediate": (world.get("pressure_seeds") or {}).get("immediate")
         if isinstance(world.get("pressure_seeds"), dict) else None,
+        "twist_state": world.get("twist_state"),
         "location": node.get("location"),
         "participants": node.get("participants"),
         "unresolved_action": node.get("unresolved_action"),
         "last_committed_result": node.get("last_committed_result"),
         "natural_next_pressure": node.get("natural_next_pressure"),
         "scene_id": node.get("scene_id"),
+        "scene_profile": node.get("scene_profile"),
+        "action_category": node.get("action_category"),
+        "action_metadata": node.get("action_metadata") or {},
         "node_situation": node.get("situation"),
-        "grants": grants,
         "boundaries": boundaries,
         "player": {
             "id": player.get("id"),
@@ -179,12 +175,15 @@ def extract_live_slice(state: dict[str, Any]) -> dict[str, Any]:
 
 
 def _surface_voice(voice_filter: Any) -> str:
-    """取表层语态段：以「里层」首次出现处截断（兼容「里层语态：」「里层：」）。"""
+    """取开局简介使用的表层语态；兼容旧版字符串格式。"""
+    if isinstance(voice_filter, dict):
+        return str(voice_filter.get("surface") or "").strip()
     text = str(voice_filter or "")
     index = text.find("里层")
     if index <= 0:
         return text.strip("。； ")
-    return text[:index].strip("。； ")
+    text = text[:index].strip("。； ")
+    return text.removeprefix("表层语态：").strip()
 
 
 def opening_brief(state: dict[str, Any]) -> dict[str, Any]:
@@ -224,6 +223,21 @@ def opening_brief(state: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def opening_brief_compact(state: dict[str, Any]) -> dict[str, Any]:
+    """玩家侧最小开局信息；完整 brief 仍供模型后台使用。"""
+    brief = opening_brief(state)
+    npc = brief["npc"]
+    return {
+        "scene": f"{brief['world']['era']}·{brief['location']}",
+        "pressure": brief["world"]["pressure"],
+        "player": brief["player"]["why_here"],
+        "npc": f"{npc['name']}（{npc['identity']}）",
+        "situation": npc["stuck_on"],
+        "action": brief["unresolved"],
+        "turn": brief["turn"],
+    }
+
+
 def _presence_names(slice_: dict[str, Any]) -> list[str]:
     """「在场」只列当前场景参与者：player + 参与者集合里的 NPC，不混入离场 main NPC。"""
     player = slice_.get("player") or {}
@@ -241,33 +255,16 @@ def _presence_names(slice_: dict[str, Any]) -> list[str]:
     return names or [str(player.get("name") or "你")]
 
 
-def _grants_line(grants: Any) -> str:
-    """许可行区分身体许可与其他类型，避免给玩家错误的安全信号。"""
-    if not grants:
-        return "无"
-    scope_types = set()
-    for grant in grants or []:
-        for scope in (grant or {}).get("scope") or []:
-            if isinstance(scope, dict) and scope.get("type"):
-                scope_types.add(str(scope["type"]))
-    if "physical" in scope_types:
-        return "有当场已明确的身体许可（范围不自动扩大）"
-    labels = {"emotional": "情感", "information": "信息", "scene": "场景"}
-    kinds = "、".join(labels.get(t, t) for t in sorted(scope_types)) or "其他"
-    return f"有当场明确的{kinds}类许可（不含身体）"
-
-
 def human_status(state: dict[str, Any]) -> str:
     slice_ = extract_live_slice(state)
     names = _presence_names(slice_)
     paused = "是" if slice_.get("safety_state") == "paused" else "否"
-    grants = _grants_line(slice_.get("grants"))
     return "\n".join([
         f"地点：{slice_.get('location') or '未知'}",
         f"在场：{'、'.join(names)}",
         f"暂停：{paused}",
         f"当前压力：{slice_.get('pressure_immediate') or slice_.get('natural_next_pressure') or '无'}",
-        f"许可：{grants}",
+        "同意：由模型根据当前互动、NPC反应和撤回信号判断",
         f"可接：{slice_.get('unresolved_action') or '停在你能接手处'}",
     ])
 
@@ -285,6 +282,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("state", type=Path)
     parser.add_argument("--human", action="store_true", help="状态命令用人话，不暴露字段名")
     parser.add_argument("--brief", action="store_true", help="开局 brief")
+    parser.add_argument("--compact", action="store_true", help="最小开局 brief")
     parser.add_argument("--format", choices=("yaml", "json"), default="yaml")
     return parser
 
@@ -296,7 +294,9 @@ def main(argv: list[str] | None = None) -> int:
         print(human_status(state))
         return 0
     payload: Any
-    if args.brief:
+    if args.compact:
+        payload = opening_brief_compact(state)
+    elif args.brief:
         payload = opening_brief(state)
     else:
         payload = extract_live_slice(state)

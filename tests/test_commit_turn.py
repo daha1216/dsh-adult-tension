@@ -148,99 +148,19 @@ class CommitTurnLifecycleTests(unittest.TestCase):
         statuses = {b["topic"]: b["status"] for b in updated["boundaries"]}
         self.assertEqual("revoked", statuses["不碰工作话题"])
 
-    # ---- 许可归档上限 ----
-
-    def test_grants_archive_keeps_only_recent_entries(self) -> None:
-        stuffed = copy.deepcopy(self.state)
-        archive = stuffed["consent"].setdefault("grants_archive", [])
-        for index in range(25):
-            archive.append({"id": f"consent-old-{index:02d}", "status": "withdrawn"})
-        granted = COMMIT.commit(stuffed, {
-            "delta_minutes": 3,
-            "last_committed_result": "她允许你握一下她的手腕。",
-            "unresolved_action": "手还没松开。",
-            "grants_add": [{"scope": [{"type": "physical", "permission": "握着手腕"}]}],
-        })
-        origin = granted["current_node"]["location"]
-        root = origin.split("·")[0]
-        moved = COMMIT.commit(granted, {
-            "delta_minutes": 2,
-            "location": f"{root}·卧室·夜",
-            "last_committed_result": "你们进了里间。",
-            "unresolved_action": "门在身后合上。",
-        })
-        archived = moved["consent"]["grants_archive"]
-        self.assertEqual(20, len(archived))
-        ids = {g.get("id") for g in archived}
-        self.assertNotIn("consent-old-00", ids)
-        self.assertIn("consent-old-24", ids)
-        self.assertEqual([], VALIDATOR.validate_data(moved, "save"))
-
-    def test_grants_withdraw_then_move_does_not_resurrect_consent(self) -> None:
-        granted = COMMIT.commit(self.state, {
-            "delta_minutes": 3,
-            "last_committed_result": "她允许你握一下她的手腕。",
-            "unresolved_action": "手还没松开。",
-            "grants_add": [{"scope": [{"type": "physical", "permission": "握着手腕"}]}],
-        })
-        grant_id = granted["consent"]["grants"][0]["id"]
-        origin = granted["current_node"]["location"]
-        root = origin.split("·")[0]
-        moved = COMMIT.commit(granted, {
-            "delta_minutes": 2,
-            "location": f"{root}·卧室·夜",
-            "grants_withdraw": [grant_id],
-            "last_committed_result": "她抽回手，你们进了卧室。",
-            "unresolved_action": "门在身后合上。",
-        })
-        self.assertEqual([], moved["consent"]["grants"])
-        archived = moved["consent"].get("grants_archive") or []
-        withdrawn = [g for g in archived if g.get("id") == grant_id]
-        self.assertEqual(1, len(withdrawn))
-        self.assertEqual("withdrawn", withdrawn[0]["status"])
-        self.assertIsNotNone(withdrawn[0].get("withdrawn_turn"))
-        self.assertEqual([], VALIDATOR.validate_data(moved, "save"))
-
-    def test_leaving_private_space_does_not_inherit_physical_grant(self) -> None:
-        # 用无私密词根名的确定性场景验证方向性：客厅（旧）→ 阳台（新）不继承。
-        for npc in self.state["npcs"]:
-            npc["location"] = "临江公寓·客厅·夜"
-        self.state["player"]["location"] = "临江公寓·客厅·夜"
-        self.state["current_node"]["location"] = "临江公寓·客厅·夜"
-        self.state["consent"]["location"] = "临江公寓·客厅·夜"
-        granted = COMMIT.commit(self.state, {
-            "delta_minutes": 3,
-            "last_committed_result": "她允许你握一下她的手腕。",
-            "unresolved_action": "手还没松开。",
-            "grants_add": [{"scope": [{"type": "physical", "permission": "握着手腕"}]}],
-        })
-        moved = COMMIT.commit(granted, {
-            "delta_minutes": 2,
-            "location": "临江公寓·阳台·夜",
-            "last_committed_result": "你们走到阳台上吹风。",
-            "unresolved_action": "风把她的发丝吹到唇边。",
-        })
-        self.assertEqual([], moved["consent"]["grants"])
-        archived = moved["consent"].get("grants_archive") or []
-        self.assertEqual(1, len(archived))
-        self.assertEqual([], VALIDATOR.validate_data(moved, "save"))
-        # 方向性纯函数断言：继承只看新地点（旧地点私密不再兜底）。
-        self.assertFalse(COMMIT.adjacent_private("临江公寓·卧室·夜", "临江公寓·阳台·夜"))
-        self.assertFalse(COMMIT.adjacent_private("临江公寓·套房·夜", "临江公寓·大堂·夜"))
-        self.assertTrue(COMMIT.adjacent_private("临江公寓·阳台·夜", "临江公寓·卧室·夜"))
-        self.assertTrue(COMMIT.adjacent_private("临江公寓·客厅·夜", "临江公寓·内间·夜"))
-
     def test_relationship_delta_semantics(self) -> None:
         updated = COMMIT.commit(self.state, {
             "delta_minutes": 3,
             "relationship_delta": {"trust": 7},
         })
         edge = updated["relationships"][0]
-        # 绝对值大于 5 视为直接设定并夹到 [-5,5]。
+        # trust 始终是增量，并夹到 [-5,5]。
         self.assertEqual(5, edge["trust"])
         self.assertEqual(2, edge["last_updated_turn"])
         clamped = COMMIT.commit(updated, {"delta_minutes": 2, "relationship_delta": {"trust": 50}})
         self.assertEqual(5, clamped["relationships"][0]["trust"])
+        set_value = COMMIT.commit(clamped, {"delta_minutes": 2, "relationship_delta": {"trust_set": -4}})
+        self.assertEqual(-4, set_value["relationships"][0]["trust"])
         multi = COMMIT.commit(clamped, {
             "delta_minutes": 2,
             "relationship_delta": [
@@ -249,6 +169,100 @@ class CommitTurnLifecycleTests(unittest.TestCase):
             ],
         })
         self.assertEqual(3, multi["relationships"][0]["trust"])
+
+    def test_probabilistic_roll_is_deterministic_and_audited(self) -> None:
+        state = copy.deepcopy(self.state)
+        state["events"].append({
+            "id": "evt-prob-hit",
+            "semantic_key": "probability hit",
+            "source": "turn:1",
+            "created_turn": 1,
+            "kind": "probabilistic",
+            "trigger": "本回合检查",
+            "due_at": None,
+            "status": "pending",
+            "consequence": "概率事件命中",
+            "hook": False,
+            "probability": 1.0,
+        })
+        updated = COMMIT.commit(state, {
+            "delta_minutes": 2,
+            "events_update": [{"id": "evt-prob-hit", "roll": True, "roll_outcome": "命中已落地"}],
+        })
+        event = next(item for item in updated["events"] if item["id"] == "evt-prob-hit")
+        self.assertEqual("resolved", event["status"])
+        self.assertEqual("hit", event["last_roll"]["outcome"])
+        self.assertEqual(2, event["last_roll"]["turn"])
+        self.assertEqual("命中已落地", next(item for item in updated["resolved_summary"] if item["event_id"] == "evt-prob-hit")["outcome"])
+        self.assertEqual([], VALIDATOR.validate_data(updated, "save"))
+
+    def test_probabilistic_miss_records_checked_turn(self) -> None:
+        state = copy.deepcopy(self.state)
+        event_id = "evt-prob-miss"
+        roll_value = COMMIT.deterministic_event_roll(event_id, 2)
+        probability = roll_value / 2 if roll_value else 0.5
+        state["events"].append({
+            "id": event_id,
+            "semantic_key": "probability miss",
+            "source": "turn:1",
+            "created_turn": 1,
+            "kind": "probabilistic",
+            "trigger": "本回合检查",
+            "due_at": None,
+            "status": "pending",
+            "consequence": "概率事件未命中",
+            "hook": False,
+            "probability": probability,
+        })
+        updated = COMMIT.commit(state, {
+            "delta_minutes": 2,
+            "events_update": [{"id": event_id, "roll": True}],
+        })
+        event = next(item for item in updated["events"] if item["id"] == event_id)
+        self.assertEqual("pending", event["status"])
+        self.assertEqual("miss", event["last_roll"]["outcome"])
+        self.assertEqual([2], event["checked_turns"])
+        self.assertEqual([], VALIDATOR.validate_data(updated, "save"))
+
+    def test_simulation_gate_blocks_offline_effects(self) -> None:
+        state = copy.deepcopy(self.state)
+        state["meta"]["simulation"] = False
+        with self.assertRaisesRegex(COMMIT.CommitError, "simulation=false"):
+            COMMIT.commit(state, {
+                "delta_minutes": 2,
+                "npc_updates": {"npc-001": {"autonomy_now": True}},
+            })
+
+    def test_twist_generation_is_recorded_and_first_cross_day_is_one_time(self) -> None:
+        from datetime import timedelta
+
+        state = copy.deepcopy(self.state)
+        clock = COMMIT.parse_clock(state["world"]["clock"]) + timedelta(days=1)
+        first = COMMIT.commit(state, {
+            "clock": COMMIT.iso(clock),
+            "twist_generate": {"reason": "first_cross_day"},
+        })
+        self.assertEqual(1, first["world"]["twist_state"]["generated_count"])
+        with self.assertRaisesRegex(COMMIT.CommitError, "already been generated"):
+            COMMIT.commit(first, {
+                "delta_minutes": 2,
+                "twist_generate": {"reason": "first_cross_day"},
+            })
+        reroll = COMMIT.commit(first, {
+            "delta_minutes": 2,
+            "twist_generate": {"reason": "player_requested"},
+        })
+        self.assertEqual(2, reroll["world"]["twist_state"]["generated_count"])
+
+    def test_time_span_escalates_and_large_jump_refreshes_checkpoint(self) -> None:
+        mode, reasons = COMMIT.classify_turn(self.state, {"delta_minutes": 20})
+        self.assertEqual("deep", mode)
+        self.assertIn("short fast-forward", reasons)
+        mode, reasons = COMMIT.classify_turn(self.state, {"delta_minutes": 60})
+        self.assertEqual("deep", mode)
+        self.assertIn("large time jump", reasons)
+        updated = COMMIT.commit(self.state, {"delta_minutes": 60})
+        self.assertEqual(2, updated["checkpoint"]["last_full_turn"])
 
     def test_same_value_location_key_does_not_reset_full_calibration(self) -> None:
         location = self.state["current_node"]["location"]
@@ -316,71 +330,29 @@ class CommitTurnLifecycleTests(unittest.TestCase):
         self.assertEqual(self.state["world"]["clock"], updated["world"]["clock"])
         self.assertEqual([], VALIDATOR.validate_data(updated, "save"))
 
-    def test_scene_change_resets_public_grants(self) -> None:
-        granted = COMMIT.commit(self.state, {
-            "delta_minutes": 3,
-            "last_committed_result": "她允许你握一下她的手腕。",
-            "unresolved_action": "手还没松开。",
-            "grants_add": [{
-                "scope": [{"type": "physical", "permission": "握着手腕"}],
-            }],
+    def test_turn_classifier_marks_ordinary_patch_fast(self) -> None:
+        mode, reasons = COMMIT.classify_turn(self.state, {
+            "delta_minutes": 4,
+            "last_committed_result": "她抬眼看你。",
+            "unresolved_action": "她在等你的下一句。",
         })
-        self.assertEqual(1, len(granted["consent"]["grants"]))
-        moved = COMMIT.commit(granted, {
-            "delta_minutes": 2,
+        self.assertEqual("fast", mode)
+        self.assertIn("ordinary local turn", reasons)
+
+    def test_turn_classifier_escalates_scene_and_event_changes(self) -> None:
+        mode, reasons = COMMIT.classify_turn(self.state, {
+            "delta_minutes": 5,
             "location": "走廊·电梯前·夜",
-            "last_committed_result": "你们走进走廊。",
-            "unresolved_action": "电梯门还没开。",
+            "events_add": [{"id": "event-009"}],
         })
-        self.assertNotEqual(granted["consent"]["scene_id"], moved["consent"]["scene_id"])
-        self.assertEqual([], moved["consent"]["grants"])
-        self.assertEqual([], VALIDATOR.validate_data(moved, "save"))
+        self.assertEqual("deep", mode)
+        self.assertIn("scene location changed", reasons)
+        self.assertIn("structural state changed", reasons)
 
-    def test_adjacent_private_inherits_physical_grant(self) -> None:
-        origin = self.state["current_node"]["location"]
-        root = origin.split("·")[0]
-        granted = COMMIT.commit(self.state, {
-            "delta_minutes": 3,
-            "last_committed_result": "她允许你握一下她的手腕。",
-            "unresolved_action": "手还没松开。",
-            "grants_add": [{
-                "scope": [{"type": "physical", "permission": "握着手腕"}],
-            }],
-        })
-        moved = COMMIT.commit(granted, {
-            "delta_minutes": 2,
-            "location": f"{root}·卧室·夜",
-            "last_committed_result": "你们走进里间。",
-            "unresolved_action": "门在身后合上。",
-        })
-        self.assertNotEqual(granted["consent"]["scene_id"], moved["consent"]["scene_id"])
-        self.assertEqual(1, len(moved["consent"]["grants"]))
-        self.assertEqual("握着手腕", moved["consent"]["grants"][0]["scope"][0]["permission"])
-        self.assertEqual(granted["consent"]["grants"][0]["id"], moved["consent"]["grants"][0]["inherited_from"])
-        self.assertEqual([], VALIDATOR.validate_data(moved, "save"))
-
-    def test_voyeur_pov_and_grant_withdraw_trigger_full(self) -> None:
-        paused = COMMIT.commit(self.state, {
-            "advance_turn": False,
-            "voyeur_pov": "on",
-        })
-        self.assertEqual("on", paused["meta"]["voyeur_pov"])
-        self.assertEqual(1, paused["meta"]["turn"])
-        granted = COMMIT.commit(paused, {
-            "delta_minutes": 2,
-            "grants_add": [{"scope": [{"type": "physical", "permission": "握着手腕"}]}],
-            "last_committed_result": "她点了头。",
-            "unresolved_action": "手还没松开。",
-        })
-        withdrawn = COMMIT.commit(granted, {
-            "delta_minutes": 1,
-            "grants_withdraw": [granted["consent"]["grants"][0]["id"]],
-            "last_committed_result": "她抽回手。",
-            "unresolved_action": "两个人都没再伸手。",
-        })
-        self.assertEqual(withdrawn["meta"]["turn"], withdrawn["checkpoint"]["last_full_turn"])
-        self.assertEqual(withdrawn["meta"]["turn"] + 5, withdrawn["checkpoint"]["next_full_turn"])
-        self.assertEqual([], VALIDATOR.validate_data(withdrawn, "save"))
+    def test_turn_classifier_marks_meta_without_narrative(self) -> None:
+        mode, reasons = COMMIT.classify_turn(self.state, {"advance_turn": False, "safety_state": "paused"})
+        self.assertEqual("meta", mode)
+        self.assertIn("advance_turn=false", reasons)
 
     def test_cli_roundtrip(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

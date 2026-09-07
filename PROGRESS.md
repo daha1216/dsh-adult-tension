@@ -1,22 +1,8 @@
 # 进度与基线
 
-## 冻结段基线
+## 文档基线
 
-`SKILL.md` 的「性行为场景写法（硬约束）」一节声明引言与 1-6 条写法标准、词汇表逐字冻结，改动前必须核对本文件的基线哈希。
-
-- 文件：`SKILL.md`
-- 冻结范围：自「当场景中已发生」起，至「不得用一句话跳过整段性行为。」止（含两者之间的空行；即该节引言段落与第 1-6 条全文，不含 `###` 标题与 HTML 注释行）。
-- 基线哈希（SHA-256）：`3d00945b22ac887034980b337903a8cd748754f33e0c751156a440524bf7641b`
-- 建立日期：2026-08-14
-
-校验命令（在 Skill 根目录运行；用 `python -c` 直传参数，避开 Windows PowerShell 5.1 管道 ASCII 编码损坏中文的问题，pwsh 7 同样可用）：
-
-```powershell
-python -c "import hashlib; text=open('SKILL.md',encoding='utf-8').read(); s=text.index('当场景中已发生'); e=text.index('不得用一句话跳过整段性行为。')+len('不得用一句话跳过整段性行为。'); print(hashlib.sha256(text[s:e].encode('utf-8')).hexdigest())"
-```
-
-规则：校验哈希与基线不一致时，冻结段已被改动。要么恢复原文，要么经明确记录后更新本基线哈希。
-
+原先对 `SKILL.md` 四个章节设置的逐字冻结已取消。后续修改以运行时行为、文档一致性和文学质量检查为准，不再维护章节哈希。
 ## 变更记录
 
 | 日期 | 变更 |
@@ -45,3 +31,6 @@ python -c "import hashlib; text=open('SKILL.md',encoding='utf-8').read(); s=text
 | 2026-08-28 | 奇幻迷宫/学园夏夜/学生会长/化身轴二次元深度扩充：①美学基调＋2（奇幻迷宫慢生活/学园夏夜恋爱）、时代＋2（地下城中层营地/海边大学城夏夜）同步 names.yaml eras 专属分名池；②地点＋4（迷宫安全屋/学园祭活动室/神社后阶梯/钢琴练习室）同步 locations.yaml；③张力引擎＋5（魔力补给契约/同居三章越界/败犬青梅复仇战/绝对禁止恋爱条约/双重马甲互掉现场）、处境＋2（风纪会长掉马夜/迷宫停滞第一夜，含五键模板）；④反差轴＋4（无口心热/大小姐笨拙/假小子娇羞/武者破戒）同步 templates contrast_line；⑤动作＋7（咬发绳扎马尾/揪后衣角/捏尖耳尖/发烫脸埋掌心/亮契约印记/拍旧日记/撕合租禁令）同步 templates；⑥NPC身份＋1（大学学生会会长带隐藏底牌）；⑦玩家化身轴：称谓＋5（店长/御主/制作人/会长/团长）、社会位置＋4（合租青梅竹马/战队分析师/公会使魔/社团脚本师）同步 identities.yaml 与 character_meta 关系起点。check_content 394 项全绿，指纹更新为 193b7f42…，121 测试全绿 |
 | 2026-08-28 | 素材池优化四任务落地：A 时代-地点和解——pools meta 新增 location_eras（12 硬锁地点→配套时代，太空站舱段为第 12 键），roll_opening _parse_meta 加可选键形状校验、load_pools 加锚点引用校验、build_roll 双抽后加和解（表抽值时代让路；--lock/all_custom/占位符玩家给定值一律不动，双锁冲突仅 stderr 警告；引擎名、僵尸音译池等可桥接地点有意不入表），test_roll_opening 新增 6 项性质测试（无锁 40 seed/锁地点/锁时代/双锁保留/all_custom 不让路/形状引用 AnchorError）；B 跨表逐字重名 7 组改名——引擎侧瞒报咬伤→咬痕瞒到了极点、撤离名额二选一→名额只能给一个人、私藏抗生素→私藏救命药的把柄，压力侧时限逼近→死线只剩几小时（同步 meta.timed_pressures 与 fill_opening 兜底串）、资源断供→供给线被掐断，处境侧关系僵局→冷战第三天、身体透支→身体见底（后两者同步 situation_beats 键；test_build_opening 兜底死引用顺手同步；timed_situations 三词指处境侧不动）；C meta 入册 7 词条（leverage_engines+双重马甲互掉现场；timed_pressures+换脸视频外流/私密照外流/末位淘汰约谈；timed_situations+两面将穿帮/遗嘱将宣读/魔力暴走临界——注意 leverage 名单只驱动禁叠，不影响 player_high）；D 表述小修——删同分一副耳机（三处：pools/near_beats/suggestion_player_first）、伸手轻捏她的尖耳尖→伸手捏了捏她的精灵耳（同三处）、头注释补第 5 条人称政策；体检新增三守卫：三表两两互斥 ERROR、location_eras 引用合法 ERROR、suggestion_player_first 覆盖双向 WARNING；文档同步开局流程.md §3.4 和解条款＋杠杆名单现状＋§4.1 meta 括号、加内容.md 地点行/开场动作行/表后互斥硬规则/WARNING 兜底清单。check_content 434 项全绿，指纹更新为 7a6fd2a8…，128 测试全绿。seed 漂移：约 11% 开局因和解多消费一次 rng.choice 而后移（理论概率 12/98×时代不兼容率；修复本意，同 seed 确定性仍在）。冻结段未动，哈希 3d00945b… 不变 |
 | 2026-09-04 | 审计后修复＋断档补记：①补记 2026-09-01 四提交（c0d2197 素材库优化去重与角色原型精修；935e3f6 西式角色名全面汉化＝tag v1.2.0；d46e188 玩家默认男性＋男女分名池防女名上男主；cb7aa2e 开局升级三段式纯沉浸结构；期间体检 434→530、指纹 7a6fd2a8→3fc4702b→d12a3edd→e4b05a0e，当时未记账）；②README 对齐实测并补 Releases 表 v1.2.0 行（时代 28/地点 117/张力引擎 72/NPC 17 族 89 卡/玩家化身 31/处境 79/表层风味 120/口癖 48/非交易靠近 60/中期转折 70/称谓 26/eras 名池 28/体检 534→530）；③三段式改版残留清理：开局流程.md 与 build_opening.py 文档串「四块」改「三块」，opening_brief 删 suggested/safety 孤儿键及 live_slice/build_opening 接线与测试断言（fill_opening.opening_suggestions/suggested_actions 转休眠，模板建议数据与体检项保留）；④fill_opening 新增 surname_of 最长前缀匹配：主 NPC 选名优先避开与玩家同姓（候选内首位异姓，全同姓保留首选，RNG 流不变），naming_audit 前排让位候选如实记因；⑤新增 .gitattributes（* text=auto eol=lf）统一 LF 检出并刷新工作区，修复 Windows autocrlf 致 test_content_fingerprint 必红。验证：129 测试全绿、体检 530 项 0 错、seed 42 全链路冒烟通过；指纹 e4b05a0e… 未变、冻结段哈希 3d00945b… 不变 |
+| 2026-09-06 | 文档架构收口：整理语态调度、内心可见和性行为场景写法；清理旧版固定开局口径与废弃场景许可表述；补齐地点画像、动作元数据、身份行为画像和转折画像的文档入口；README 素材统计更新并新增文档一致性检查。 |
+
+| 2026-09-07 | 角色设计优化：统一当前互动判断术语；新增字段唯一来源、场景/长期信息分层与亲密画像读取优先级；9a-9g 改为生成/校验分离；双语态改为结构化 `voice_filter`（保留旧字符串读取兼容）；配角升级改为分阶段。 |

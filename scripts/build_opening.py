@@ -2,7 +2,7 @@
 """build_opening.py — 开局编排器：结构骰 → v3 骨架 → opening 校验。
 
 默认开局走 --complete：结构骰 + 1-14 填料 + opening 校验一次做完，
-stdout 给出 opening_brief，模型只写三块玩家可见正文。--complete 成功后会
+stdout 给出 opening_brief，模型据此写玩家可见开局正文：先建立世界初步印象，再落到人物处境和可接续现场，不强制标题或固定段落。--complete 成功后会
 把本局签名追加进临时历史（与 roll_opening 同一份），重复三元组只发
 warning 不阻断；本脚本也不替模型生成叙事正文。
 
@@ -154,12 +154,6 @@ def build_skeleton(roll: dict[str, Any]) -> dict[str, Any]:
             },
         },
         "boundaries": [],
-        "consent": {
-            "scene_id": "scene-001",
-            "location": "",
-            "participants": ["player-001", "npc-001"],
-            "grants": [],
-        },
         "player": {
             "id": "player-001",
             "name": "",
@@ -187,7 +181,7 @@ def build_skeleton(roll: dict[str, Any]) -> dict[str, Any]:
                 "location": "",
                 "core_personality": "",
                 "pressure_strategy": roll.get("压力策略", ""),
-                "voice_filter": "",
+                "voice_filter": {"surface": "", "inner": "", "switch_conditions": []},
                 "goal": "",
                 "boundary": "",
                 "withdrawal_signal": "",
@@ -307,17 +301,23 @@ def complete_opening(args: argparse.Namespace) -> int:
     validator = load_validator()
     errors = validator.validate_data(filled, "opening")
     if errors:
-        print("ERROR: --complete 未通过 opening 校验（填料 bug，不要改由模型手填）：", file=sys.stderr)
+        print("ERROR: --complete 未通过 opening 校验（请维护者处理，不要改由模型手填）：", file=sys.stderr)
         for error in errors:
             print(f"- {error}", file=sys.stderr)
         return 1
 
     text = dump_yaml(filled)
+    history_used = False
+    history_duplicate = False
     # 近期结构去重（SKILL.md：连续局重复三元组只 warning 不阻断）。
     try:
         signature = roll_mod._roll_signature(roll)
         triple = roll_mod._roll_triple(roll)
-        if signature in roll_mod.recent_signatures() or triple in roll_mod.recent_triples():
+        recent_signature_match = signature in roll_mod.recent_signatures()
+        recent_triple_match = triple in roll_mod.recent_triples()
+        history_used = True
+        history_duplicate = recent_signature_match or recent_triple_match
+        if history_duplicate:
             print("warning: 本局「时代×地点×张力引擎」或完整结构与近期开局重复（不阻断）",
                   file=sys.stderr)
         roll_mod.append_history(roll)
@@ -357,7 +357,8 @@ def complete_opening(args: argparse.Namespace) -> int:
             "mode": roll.get("mode", "table"),
             "locks": request_locks,
             "custom": request_custom,
-            "history_used": False,
+            "history_used": history_used,
+            "history_duplicate": history_duplicate,
             "state": str(out),
             "validation": {"passed": True, "checked_at": utc_clock()},
         }
@@ -365,8 +366,6 @@ def complete_opening(args: argparse.Namespace) -> int:
 
     live = load_live_slice()
     brief = live.opening_brief(filled)
-    brief["state_path"] = str(working or out)
-    brief["archive_path"] = str(out)
     if slot_info:
         brief["slot"] = slot_info.get("slot")
     print("---opening_brief---")

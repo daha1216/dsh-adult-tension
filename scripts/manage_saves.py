@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import importlib.util
 import json
 import os
@@ -34,9 +35,9 @@ except ImportError:  # pragma: no cover
 
 
 SLOT_UNSAFE = re.compile(r'[<>:"/\\|?*\x00-\x1f]')
-# 新 manifest 只保留这四个字段；旧版 manifest 的 revision/state_sha256/
+# 新 manifest 只保留这五个字段；旧版 manifest 的 revision/
 # access_mode/lease 等历史字段在读取时被剥离，保存后不再写回。
-MANIFEST_KEYS = ("manifest_version", "slot", "created_at", "updated_at")
+MANIFEST_KEYS = ("manifest_version", "slot", "created_at", "updated_at", "state_sha256")
 
 
 class SaveError(RuntimeError):
@@ -96,49 +97,6 @@ def write_atomic(path: Path, text: str) -> None:
     _COMMON.write_atomic(path, text)
 
 
-class FileLock:
-    """Cross-platform advisory lock on one byte in a slot lock file."""
-
-    def __init__(self, path: Path) -> None:
-        self.path = path
-        self.handle: Any = None
-
-    def __enter__(self) -> "FileLock":
-        try:
-            # w+b：文件内容无意义，截断到 0 字节即可（不再随每次加锁追加增长）。
-            self.handle = self.path.open("w+b")
-            self.handle.seek(0)
-            if os.name == "nt":
-                import msvcrt
-
-                msvcrt.locking(self.handle.fileno(), msvcrt.LK_LOCK, 1)
-            else:  # pragma: no cover - exercised on POSIX CI
-                import fcntl
-
-                fcntl.flock(self.handle.fileno(), fcntl.LOCK_EX)
-        except OSError as exc:
-            if self.handle is not None:
-                self.handle.close()
-                self.handle = None
-            raise SaveError(f"cannot acquire write lock {self.path}: {exc}") from exc
-        return self
-
-    def __exit__(self, exc_type: Any, exc: Any, traceback: Any) -> None:
-        if self.handle is None:
-            return
-        self.handle.seek(0)
-        if os.name == "nt":
-            import msvcrt
-
-            msvcrt.locking(self.handle.fileno(), msvcrt.LK_UNLCK, 1)
-        else:  # pragma: no cover - exercised on POSIX CI
-            import fcntl
-
-            fcntl.flock(self.handle.fileno(), fcntl.LOCK_UN)
-        self.handle.close()
-        self.handle = None
-
-
 class SaveStore:
     def __init__(self, root: Path) -> None:
         self.root = root
@@ -163,7 +121,24 @@ class SaveStore:
         manifest = load_yaml(path)
         if not isinstance(manifest, dict):
             raise SaveError(f"manifest is not a mapping: {path}")
-        return {key: manifest.get(key) for key in MANIFEST_KEYS}
+        result = {key: manifest.get(key) for key in MANIFEST_KEYS}
+        if result["manifest_version"] not in (1, 2):
+            raise SaveError(f"unsupported manifest version: {result['manifest_version']}")
+        if result["slot"] not in (None, slot):
+            raise SaveError(f"manifest slot does not match directory: {slot}")
+        for key in ("created_at", "updated_at"):
+            value = result[key]
+            if not isinstance(value, str) or not value.strip():
+                raise SaveError(f"manifest field {key} is missing or invalid: {path}")
+            try:
+                dt.datetime.fromisoformat(value)
+            except ValueError as exc:
+                raise SaveError(f"manifest field {key} is not ISO datetime: {value}") from exc
+        if result["manifest_version"] >= 2:
+            digest = result["state_sha256"]
+            if not isinstance(digest, str) or len(digest) != 64:
+                raise SaveError(f"manifest state_sha256 is missing or invalid: {path}")
+        return result
 
     def _read_state(self, slot: str) -> dict[str, Any]:
         path = self.state_path(slot)
@@ -186,27 +161,39 @@ class SaveStore:
             raise SaveError("state validation failed: " + "; ".join(errors))
 
     @staticmethod
-    def _new_manifest(slot: str) -> dict[str, Any]:
+    def _state_sha256(text: str) -> str:
+        return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+    @classmethod
+    def _new_manifest(cls, slot: str, state_text: str) -> dict[str, Any]:
         now = iso_now()
         return {
-            "manifest_version": 1,
+            "manifest_version": 2,
             "slot": slot,
             "created_at": now,
             "updated_at": now,
+            "state_sha256": cls._state_sha256(state_text),
         }
 
     def init_slot(self, slot: str, source: Path) -> dict[str, Any]:
         slot = slot_name(slot)
-        try:
-            self.state_path(slot).parent.mkdir(parents=True, exist_ok=False)
-        except FileExistsError as exc:
-            raise SaveError(f"slot already exists: {slot}") from exc
         state = load_yaml(source)
         if not isinstance(state, dict):
             raise SaveError("source state must be a mapping")
         self._validate_state(state)
-        write_atomic(self.state_path(slot), yaml_text(state))
-        write_atomic(self.manifest_path(slot), yaml_text(self._new_manifest(slot)))
+        state_text = yaml_text(state)
+        try:
+            self.state_path(slot).parent.mkdir(parents=True, exist_ok=False)
+        except FileExistsError as exc:
+            raise SaveError(f"slot already exists: {slot}") from exc
+        try:
+            write_atomic(self.state_path(slot), state_text)
+            write_atomic(self.manifest_path(slot), yaml_text(self._new_manifest(slot, state_text)))
+        except Exception:
+            import shutil
+
+            shutil.rmtree(self.slot_dir(slot), ignore_errors=True)
+            raise
         return self._read_manifest(slot)
 
     def list_slots(self) -> list[dict[str, Any]]:
@@ -235,6 +222,10 @@ class SaveStore:
     def load_slot(self, slot: str) -> tuple[dict[str, Any], dict[str, Any]]:
         manifest = self._read_manifest(slot)
         state = self._read_state(slot)
+        if manifest["manifest_version"] >= 2:
+            state_text = self.state_path(slot).read_text(encoding="utf-8")
+            if self._state_sha256(state_text) != manifest["state_sha256"]:
+                raise SaveError(f"manifest/state checksum mismatch: {slot}")
         self._validate_state(state)
         meta = state.get("meta") if isinstance(state, dict) else {}
         if isinstance(meta, dict) and meta.get("turn") == 0:
@@ -255,7 +246,12 @@ class SaveStore:
         # 槽不存在时先拒绝，避免为拼错的槽名留下只含 .write.lock 的垃圾目录。
         if not self.manifest_path(slot).exists():
             raise SaveError(f"slot does not exist or has no manifest: {slot} (init it first)")
-        with FileLock(self.lock_path(slot)):
+        try:
+            lock = _COMMON.FileLock(self.lock_path(slot))
+            lock.__enter__()
+        except _COMMON.CommonError as exc:
+            raise SaveError(str(exc)) from exc
+        try:
             manifest = self._read_manifest(slot)
             if expected_updated_at is None:
                 raise SaveError(
@@ -269,12 +265,14 @@ class SaveStore:
                 )
             updated = dict(manifest)
             updated["updated_at"] = iso_now()
-            # 先写 manifest 再写 state：两连写之间崩溃时会留下「manifest 新 / state 旧」
-            # 的保守失配（下一次携带旧 expected 的保存会被冲突检测拦下），而不是
-            # 「state 新 / manifest 旧」导致的静默覆盖。
+            state_text = yaml_text(candidate)
+            updated["manifest_version"] = 2
+            updated["state_sha256"] = self._state_sha256(state_text)
+            write_atomic(self.state_path(slot), state_text)
             write_atomic(self.manifest_path(slot), yaml_text(updated))
-            write_atomic(self.state_path(slot), yaml_text(candidate))
             return updated
+        finally:
+            lock.__exit__(None, None, None)
 
 
 def print_json(value: Any) -> None:

@@ -1,8 +1,8 @@
 """内容完整性：数据文件指纹锁 + 内容体检进回归。
 
-指纹锁覆盖 scripts/data/ 下全部内容数据文件。任何改动都会让指纹测试失败——
-这是故意的：改动应当是清醒决定。确认改动是故意为之后，用失败信息里打印的
-新指纹替换 EXPECTED 即可。
+指纹锁覆盖 scripts/data/ 下全部内容数据文件。任何改动都会让指纹测试失败，
+这是故意的：改动应当先经过内容体检、抽样审查和开局探针，再更新 EXPECTED。
+当前指纹可用 `python scripts/check_content.py --fingerprint` 查看。
 """
 
 from __future__ import annotations
@@ -24,9 +24,14 @@ DATA_FILES = (
     "identities.yaml",
     "locations.yaml",
     "character_pools.yaml",
+    "location_profiles.yaml",
+    "action_categories.yaml",
+    "action_metadata.yaml",
+    "identity_profiles.yaml",
+    "twist_profiles.yaml",
 )
 
-EXPECTED = "e4b05a0e429a8afef13259dec61a5cea65f2e37343eac105502bc8df9c8bde37"
+EXPECTED = "f8a718a1b710f8467a4bb7c66891fbd08a484ccc8035c491456a9950c629ca7f"
 
 
 def _load(name: str, relative: str):
@@ -54,16 +59,17 @@ class ContentIntegrityTests(unittest.TestCase):
         for name in DATA_FILES:
             self.assertTrue((DATA / name).exists(), name)
 
-    def test_voice_filter_carries_bilingual_markers(self) -> None:
-        # 双语态契约：生成器产物必须带「表层语态：」「里层语态：」，否则
-        # live_slice 会把里层台词当表层输出（check_content 第 13 项的单元面）。
+    def test_voice_filter_is_structured(self) -> None:
         fill = _load("fill_opening_for_check", "scripts/fill_opening.py")
         templates = CHECK._load("templates.yaml")
         for flavor, quirk in (("—", "—"), ("冷淡疏离", "话留半句")):
-            text = fill.voice_filter({"表层风味": flavor, "口癖": quirk, "反差轴": ""},
-                                     "测试身份", templates)
-            self.assertIn("表层语态：", text)
-            self.assertIn("里层语态：", text)
+            voice = fill.voice_filter({"表层风味": flavor, "口癖": quirk, "反差轴": ""},
+                                      "测试身份", templates)
+            self.assertEqual({"surface", "inner", "switch_conditions"}, set(voice))
+            self.assertTrue(voice["surface"])
+            self.assertTrue(voice["inner"])
+            self.assertTrue(voice["switch_conditions"])
+
 
     def test_content_check_includes_voice_format_gate(self) -> None:
         report = CHECK.check()

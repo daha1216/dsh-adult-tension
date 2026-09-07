@@ -42,6 +42,22 @@ class LiveSliceTests(unittest.TestCase):
         self.assertIn("autonomy", npc)
         self.assertIn("sexuality_baseline", npc)
 
+    def test_surface_voice_reads_structured_filter(self) -> None:
+        state = BUILD.load_yaml_module().safe_load(BUILD.dump_yaml(self.state))
+        state["npcs"][0]["voice_filter"] = {
+            "surface": "说话很轻，句子短",
+            "inner": "直白",
+            "switch_conditions": ["玩家明确要求切换"],
+        }
+        brief = SLICE.opening_brief(state)
+        self.assertEqual("说话很轻，句子短", brief["npc"]["surface_voice"])
+
+    def test_surface_voice_reads_legacy_filter(self) -> None:
+        state = BUILD.load_yaml_module().safe_load(BUILD.dump_yaml(self.state))
+        state["npcs"][0]["voice_filter"] = "表层语态：句子短。里层语态：直白。"
+        brief = SLICE.opening_brief(state)
+        self.assertEqual("句子短", brief["npc"]["surface_voice"])
+
     def test_opening_brief_has_player_facing_keys(self) -> None:
         brief = SLICE.opening_brief(self.state)
         self.assertTrue(brief["player"]["name"])
@@ -62,26 +78,12 @@ class LiveSliceTests(unittest.TestCase):
         state = BUILD.load_yaml_module().safe_load(BUILD.dump_yaml(self.state))
         state["npcs"][0]["location"] = "门外走廊（正离场）"
         state["current_node"]["participants"] = ["player-001"]
-        state["consent"]["participants"] = ["player-001"]
         text = SLICE.human_status(state)
         player_name = str(state["player"]["name"])
         npc_name = str(state["npcs"][0]["name"])
         presence_line = next(line for line in text.splitlines() if line.startswith("在场："))
         self.assertIn(player_name, presence_line)
         self.assertNotIn(npc_name, presence_line)
-
-    def test_grants_line_distinguishes_non_physical_scope(self) -> None:
-        state = BUILD.load_yaml_module().safe_load(BUILD.dump_yaml(self.state))
-        state["consent"]["grants"] = [{
-            "id": "consent-009", "scene_id": state["consent"]["scene_id"],
-            "participants": list(state["current_node"]["participants"]),
-            "scope": [{"type": "emotional", "permission": "可以继续聊私事"}],
-            "status": "granted", "granted_turn": 1, "withdrawn_turn": None,
-            "last_checked_turn": 1,
-        }]
-        text = SLICE.human_status(state)
-        self.assertIn("情感", text)
-        self.assertNotIn("身体许可（", text)
 
     def test_pending_events_capped_with_overflow_note(self) -> None:
         state = BUILD.load_yaml_module().safe_load(BUILD.dump_yaml(self.state))

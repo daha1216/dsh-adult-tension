@@ -26,13 +26,6 @@ world:
     near_event_id: evt-002
     far_event_id: evt-003
 boundaries: []
-consent:
-  scene_id: scene-001
-  location: 宁江大厦·三十一层会客室·夜
-  participants:
-  - player-001
-  - npc-001
-  grants: []
 player:
   id: player-001
   name: 顾北
@@ -58,7 +51,11 @@ npcs:
   location: 宁江大厦·三十一层会客室·夜
   core_personality: 外冷内热，怕欠人情，把请求做成交易
   pressure_strategy: 正面解决
-  voice_filter: 表层敬语过剩，里层直白；失控时句子先碎
+  voice_filter:
+    surface: 表层敬语过剩
+    inner: 里层直白
+    switch_conditions:
+    - 玩家明确要求切换
   goal: 在死线前压住流言且不欠下人情
   boundary: 不用身体换声誉
   withdrawal_signal: 把口罩戴严、改口此事到此

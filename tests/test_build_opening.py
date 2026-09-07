@@ -47,7 +47,7 @@ def fill_complete(skeleton: dict, roll: dict) -> dict:
     npc.update(
         name=npc_name, age=31, identity="并购部董事总经理",
         location=location, core_personality="外冷内热，怕欠人情，把请求做成交易",
-        voice_filter="表层敬语过剩，里层直白；失控时句子先碎",
+        voice_filter={"surface": "表层敬语过剩", "inner": "里层直白", "switch_conditions": ["玩家明确要求切换"]},
         goal="在死线前压住流言且不欠下人情", boundary="不用身体换声誉",
         withdrawal_signal="把口罩戴严、改口此事到此",
         emotion="表面端着，指节发白", resources=["反证U盘"], knowledge=["衡浦在散风"],
@@ -73,7 +73,6 @@ def fill_complete(skeleton: dict, roll: dict) -> dict:
         trigger="会面开始", pressure=roll.get("压力来源", "死线只剩几小时"),
         immediate_objective="谈成交易", deadline=None, unresolved_choice="是否接下这单",
     )
-    data["consent"]["location"] = location
     return data
 
 
@@ -116,6 +115,17 @@ class BuildOpeningTests(unittest.TestCase):
         for expected in ("world.constants", "player.name", "current_node.unresolved_action",
                          "events[0].semantic_key"):
             self.assertIn(expected, joined)
+
+    def test_filled_opening_contains_location_profile(self) -> None:
+        spec = importlib.util.spec_from_file_location("fill_opening_profile", Path(__file__).parents[1] / "scripts" / "fill_opening.py")
+        assert spec and spec.loader
+        fill = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(fill)
+        data = fill.fill_opening(BUILD.build_skeleton(self.roll), self.roll)
+        self.assertIn("scene_profile", data["current_node"])
+        profile = data["current_node"]["scene_profile"]
+        for key in ("privacy", "visibility", "exits", "witnesses", "affordances", "pressure_modifiers"):
+            self.assertTrue(profile.get(key), key)
 
     def test_filled_opening_passes_opening_validation(self) -> None:
         filled = fill_complete(self.skeleton, self.roll)
@@ -210,6 +220,23 @@ class BuildOpeningTests(unittest.TestCase):
             self.assertTrue(out.exists())
             self.assertTrue(working.exists())
             self.assertEqual([], VALIDATOR.validate_text(out.read_text(encoding="utf-8"), "opening"))
+
+    def test_complete_request_records_history_check(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out = root / "opening.yaml"
+            working = root / "current.yaml"
+            request = root / "opening_request.yaml"
+            history = root / "history.jsonl"
+            with mock.patch.dict("os.environ", {"ADULT_TENSION_HISTORY_PATH": str(history)}):
+                code = BUILD.main([
+                    "--complete", "--seed", "8", "--out", str(out),
+                    "--working", str(working), "--request", str(request),
+                ])
+            self.assertEqual(0, code)
+            request_data = BUILD.load_yaml_module().safe_load(request.read_text(encoding="utf-8"))
+            self.assertTrue(request_data["history_used"])
+            self.assertFalse(request_data["history_duplicate"])
 
     def test_ten_seeds_keep_triple_diversity(self) -> None:
         fill = _load("fill_opening", Path(__file__).parents[1] / "scripts" / "fill_opening.py")

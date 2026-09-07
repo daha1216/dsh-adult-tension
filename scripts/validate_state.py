@@ -21,8 +21,6 @@ SAFETY_STATES = {"running", "paused"}
 MODES = {"reliable", "immersive"}
 POWER_STRUCTURES = {"player_high", "npc_high", "equal", "switchable"}
 BOUNDARY_STATUSES = {"active", "revoked"}
-CONSENT_STATUSES = {"unknown", "granted", "withdrawn", "not_applicable"}
-CONSENT_SCOPE_TYPES = {"scene", "physical", "emotional", "information"}
 EVENT_STATUSES = {"pending", "resolved", "cancelled"}
 EVENT_KINDS = {"immediate", "near", "far", "timed", "probabilistic"}
 # "directive" 源类型仅为兼容历史存档保留（曾用于指令契约的兑现事件）；
@@ -94,6 +92,20 @@ class Validator:
             if not is_nonempty_string(data.get(key)):
                 self.error(f"{path}.{key}", "must be a non-empty string")
 
+    def validate_voice_filter(self, value: Any, path: str, *, required: bool) -> None:
+        if isinstance(value, str):
+            if required and not is_nonempty_string(value):
+                self.error(path, "must be a structured mapping or a non-empty legacy string")
+            return
+        data = self.mapping(value, path)
+        if data is None:
+            if not required and value is None:
+                return
+            return
+        self.required(data, {"surface", "inner", "switch_conditions"}, path)
+        self.required_text(data, ("surface", "inner"), path)
+        self.sequence(data.get("switch_conditions"), f"{path}.switch_conditions")
+
     def add_id(self, value: Any, path: str, *, character: bool = False) -> None:
         if not is_nonempty_string(value):
             self.error(path, "must be a non-empty string")
@@ -127,7 +139,7 @@ class Validator:
         if data is None:
             return self.errors
         self.required(data, {
-            "save_version", "meta", "world", "boundaries", "consent", "player",
+            "save_version", "meta", "world", "boundaries", "player",
             "player_naming_audit", "npcs", "relationships", "events",
             "checkpoint", "resolved_summary", "current_node",
         }, "")
@@ -154,7 +166,6 @@ class Validator:
         self.validate_current_node(node)
         self.validate_world(data.get("world"), data.get("events"))
         self.validate_boundaries(data.get("boundaries"))
-        self.validate_consent(data.get("consent"))
         self.validate_relationships(data.get("relationships"))
         self.validate_events(data.get("events"), data.get("world"))
         self.validate_checkpoint(data.get("checkpoint"))
@@ -180,6 +191,8 @@ class Validator:
             self.error("meta.safety_state", f"must be one of {sorted(SAFETY_STATES)}")
         if data.get("power_structure") not in POWER_STRUCTURES:
             self.error("meta.power_structure", f"must be one of {sorted(POWER_STRUCTURES)}")
+        if "event_seed" in data and not is_int(data.get("event_seed")):
+            self.error("meta.event_seed", "must be an integer when present")
 
     def validate_world(self, value: Any, events_value: Any) -> None:
         data = self.mapping(value, "world")
@@ -200,6 +213,16 @@ class Validator:
         shell = self.mapping(data.get("setting_shell"), "world.setting_shell")
         if shell is not None:
             self.required_text(shell, ("type", "place", "rule", "pressure"), "world.setting_shell")
+        twist_state = self.mapping(data.get("twist_state"), "world.twist_state") if "twist_state" in data else None
+        if twist_state is not None:
+            self.required(twist_state, {"generated_count", "last_generated_turn", "last_reason"}, "world.twist_state")
+            count = twist_state.get("generated_count")
+            if not is_int(count) or count < 0:
+                self.error("world.twist_state.generated_count", "must be a non-negative integer")
+            self.validate_turn(twist_state.get("last_generated_turn"), "world.twist_state.last_generated_turn", nullable=True)
+            reason = twist_state.get("last_reason")
+            if reason not in {"first_cross_day", "player_requested"}:
+                self.error("world.twist_state.last_reason", "must be first_cross_day or player_requested")
         clock = parse_iso_datetime(data.get("clock"))
         previous = parse_iso_datetime(data.get("previous_clock"))
         if clock is None:
@@ -308,11 +331,14 @@ class Validator:
             for field in ("resources", "knowledge", "recent_memories"):
                 self.sequence(npc.get(field), f"{path}.{field}")
             if role in {"main", "important_supporting"}:
-                self.required_text(npc, tuple(expressive), path)
+                self.required_text(npc, ("core_personality", "pressure_strategy", "withdrawal_signal", "emotion"), path)
+                self.validate_voice_filter(npc.get("voice_filter"), f"{path}.voice_filter", required=True)
             else:
                 for field in expressive:
-                    if field in npc and not isinstance(npc[field], str):
+                    if field in npc and field != "voice_filter" and not isinstance(npc[field], str):
                         self.error(f"{path}.{field}", "must be a string when present for a supporting NPC")
+                if "voice_filter" in npc:
+                    self.validate_voice_filter(npc.get("voice_filter"), f"{path}.voice_filter", required=False)
             if role == "main":
                 main_count += 1
                 self.required(npc, main_nested, path)
@@ -422,77 +448,6 @@ class Validator:
             if boundary.get("status") == "revoked" and boundary.get("revoked_turn") is None:
                 self.error(f"{path}.revoked_turn", "is required for a revoked boundary")
 
-    def validate_consent(self, value: Any) -> None:
-        data = self.mapping(value, "consent")
-        if data is None:
-            return
-        self.required(data, {"scene_id", "location", "participants", "grants"}, "consent")
-        self.required_text(data, ("scene_id", "location"), "consent")
-        if self.scene_id is not None and data.get("scene_id") != self.scene_id:
-            self.error("consent.scene_id", "must match current_node.scene_id")
-        if self.scene_location is not None and data.get("location") != self.scene_location:
-            self.error("consent.location", "must match current_node.location")
-        participants = self.sequence(data.get("participants"), "consent.participants")
-        if participants is not None and set(participants) != self.scene_participants:
-            self.error("consent.participants", "must exactly match current_node.participants")
-        grants = self.sequence(data.get("grants"), "consent.grants")
-        if grants is None:
-            return
-        for index, value in enumerate(grants):
-            path = f"consent.grants[{index}]"
-            grant = self.mapping(value, path)
-            if grant is None:
-                continue
-            self.required(grant, {"id", "scene_id", "participants", "scope", "status", "granted_turn", "withdrawn_turn", "last_checked_turn"}, path)
-            self.add_id(grant.get("id"), f"{path}.id")
-            if grant.get("scene_id") != data.get("scene_id"):
-                self.error(f"{path}.scene_id", "must match consent.scene_id")
-            grant_participants = self.sequence(grant.get("participants"), f"{path}.participants")
-            if grant_participants is not None:
-                if len(grant_participants) < 2 or len(grant_participants) != len(set(grant_participants)):
-                    self.error(f"{path}.participants", "must contain at least two distinct character IDs")
-                if any(participant not in self.character_ids for participant in grant_participants):
-                    self.error(f"{path}.participants", "references an unknown character ID")
-                if not set(grant_participants).issubset(self.scene_participants):
-                    self.error(f"{path}.participants", "must all appear in current_node.participants")
-            scopes = self.sequence(grant.get("scope"), f"{path}.scope")
-            if scopes is not None:
-                if not scopes:
-                    self.error(f"{path}.scope", "must contain at least one scope entry")
-                for scope_index, scope_value in enumerate(scopes):
-                    scope_path = f"{path}.scope[{scope_index}]"
-                    scope = self.mapping(scope_value, scope_path)
-                    if scope is not None:
-                        self.required(scope, {"type", "permission"}, scope_path)
-                        if scope.get("type") not in CONSENT_SCOPE_TYPES:
-                            self.error(f"{scope_path}.type", f"must be one of {sorted(CONSENT_SCOPE_TYPES)}")
-                        if not is_nonempty_string(scope.get("permission")):
-                            self.error(f"{scope_path}.permission", "must be a non-empty string")
-            status = grant.get("status")
-            if status not in CONSENT_STATUSES:
-                self.error(f"{path}.status", f"must be one of {sorted(CONSENT_STATUSES)}")
-            self.validate_turn(grant.get("granted_turn"), f"{path}.granted_turn", nullable=True)
-            self.validate_turn(grant.get("withdrawn_turn"), f"{path}.withdrawn_turn", nullable=True)
-            self.validate_turn(grant.get("last_checked_turn"), f"{path}.last_checked_turn")
-            if status == "granted" and not is_int(grant.get("granted_turn")):
-                self.error(f"{path}.granted_turn", "is required for granted consent")
-            if status == "withdrawn" and not is_int(grant.get("withdrawn_turn")):
-                self.error(f"{path}.withdrawn_turn", "is required for withdrawn consent")
-            intimate = any(
-                isinstance(scope, dict) and scope.get("type") == "physical"
-                and any(token in str(scope.get("permission", "")) for token in ("intimate", "亲密", "性爱", "做爱"))
-                for scope in (scopes or [])
-            )
-            if intimate:
-                npc_roles = {npc.get("id"): npc.get("role_level") for npc in getattr(self, "npcs", []) if isinstance(npc, dict)}
-                for participant in grant_participants or []:
-                    if npc_roles.get(participant) == "supporting":
-                        self.error(f"{path}.participants", "intimate scope participants must not be supporting NPCs")
-            if status != "withdrawn" and grant.get("withdrawn_turn") is not None:
-                self.error(f"{path}.withdrawn_turn", "must be null unless status is withdrawn")
-            if is_int(grant.get("granted_turn")) and is_int(grant.get("withdrawn_turn")) and grant["withdrawn_turn"] < grant["granted_turn"]:
-                self.error(f"{path}.withdrawn_turn", "cannot be earlier than granted_turn")
-
     def validate_relationships(self, value: Any) -> None:
         items = self.sequence(value, "relationships")
         if items is None:
@@ -512,7 +467,7 @@ class Validator:
             if source == target and source in self.character_ids:
                 self.error(path, "source and target must be different characters")
             self.required_text(relation, ("type", "channel"), path)
-            edge = (str(source), str(target), str(relation.get("type")), str(relation.get("channel")))
+            edge = (*sorted((str(source), str(target))), str(relation.get("type")), str(relation.get("channel")))
             if edge in seen:
                 self.error(path, "duplicates an existing relationship edge")
             seen.add(edge)
@@ -582,6 +537,22 @@ class Validator:
                     self.error(f"{path}.probability", "probabilistic events require a number in (0, 1]")
             elif probability is not None:
                 self.error(f"{path}.probability", "must be null unless kind is probabilistic")
+            last_roll = self.mapping(event.get("last_roll"), f"{path}.last_roll") if "last_roll" in event else None
+            if last_roll is not None:
+                if kind != "probabilistic":
+                    self.error(f"{path}.last_roll", "is only valid for probabilistic events")
+                self.required(last_roll, {"turn", "value", "outcome"}, f"{path}.last_roll")
+                self.validate_turn(last_roll.get("turn"), f"{path}.last_roll.turn")
+                value = last_roll.get("value")
+                if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value < 1:
+                    self.error(f"{path}.last_roll.value", "must be a number in [0, 1)")
+                outcome = last_roll.get("outcome")
+                if outcome not in {"hit", "miss"}:
+                    self.error(f"{path}.last_roll.outcome", "must be hit or miss")
+                elif outcome == "hit" and status != "resolved":
+                    self.error(path, "a hit roll requires resolved status")
+                elif outcome == "miss" and last_roll.get("turn") not in (event.get("checked_turns") or []):
+                    self.error(path, "a miss roll requires its turn in checked_turns")
 
     def validate_checkpoint(self, value: Any) -> None:
         data = self.mapping(value, "checkpoint")
@@ -645,7 +616,7 @@ class Validator:
         if not isinstance(events, list):
             return
         required_top = {
-            "save_version", "meta", "world", "boundaries", "consent", "player",
+            "save_version", "meta", "world", "boundaries", "player",
             "player_naming_audit", "npcs", "relationships", "events", "checkpoint",
             "resolved_summary", "current_node",
         }

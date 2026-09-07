@@ -47,7 +47,7 @@ command_categories:
       - triggers: [快进到, timeskip]
         canonical: 快进到
         advance_turn: true
-        behavior: '更新时间并按 Tier 追算；跨天或明确快进 patch 另加 force_full: true'
+        behavior: '更新时间并按 Tier 追算；长时间快进或跨天由提交器自动升级完整追算；仅需强制覆盖自动判定时才显式传 force_full: true'
       - triggers: [撤销刚才的, 撤销, undo]
         canonical: 撤销刚才的
         advance_turn: false
@@ -80,7 +80,7 @@ command_categories:
       - triggers: [状态, 查看状态, status]
         canonical: 状态
         advance_turn: false
-        behavior: 六行人话——地点、在场、暂停、当前压力、许可、可接续动作
+        behavior: 六行人话——地点、在场、暂停、当前压力、同意判断、可接续动作
         cli: python scripts/live_slice.py saves/current_state.yaml --human
       - triggers: [帮助, 命令, 能做什么, help, h, "?"]
         canonical: 帮助

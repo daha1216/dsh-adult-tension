@@ -103,6 +103,9 @@ def load_tables() -> dict[str, Any]:
         "names": _load_yaml("names.yaml"),
         "identities": _load_yaml("identities.yaml"),
         "locations": _load_yaml("locations.yaml"),
+        "location_profiles": _load_yaml("location_profiles.yaml"),
+        "identity_profiles": _load_yaml("identity_profiles.yaml"),
+        "action_metadata": _load_yaml("action_metadata.yaml"),
         "pools": _load_yaml("pools.yaml"),
         "character_meta": _load_yaml("character_meta.yaml"),
         "templates": _load_yaml("templates.yaml"),
@@ -232,19 +235,21 @@ def situation_bundle(kind: str, npc: str, pressure: str,
     return {key: value.format(npc=npc, pressure=pressure) for key, value in beat.items()}
 
 
-def voice_filter(roll: dict[str, Any], identity: str, templates: dict[str, Any]) -> str:
+def voice_filter(roll: dict[str, Any], identity: str, templates: dict[str, Any]) -> dict[str, Any]:
     flavor = roll.get("表层风味") or "—"
     quirk = roll.get("口癖") or "—"
     contrast = roll.get("反差轴") or ""
     flavor_bit = "按公开身份说话" if flavor in {"—", "", None} else f"带一点{flavor}"
     quirk_bit = "句子短、留白多" if quirk in {"—", "", None} else f"口吻上{quirk}"
     inner = (templates.get("contrast_line") or {}).get(str(contrast), "卸下外壳后直白，不绕。")
-    return (
-        f"表层语态：作为{identity}，{flavor_bit}，{quirk_bit}；"
-        f"回避时改口程序和场面，压力下句短，不吐粗词。"
-        f"里层语态：{inner}直白、索求不含糊；失控时用词先直，再碎到名字和气音。"
-        f"切换触发：独处、酒意、疼痛或快感累积，或被明确要求别再装。"
-    )
+    return {
+        "surface": f"作为{identity}，{flavor_bit}，{quirk_bit}；回避时改口程序和场面，压力下句短。",
+        "inner": f"{inner}直白、索求不含糊；高压时保留人物自己的句式和称呼。",
+        "switch_conditions": [
+            "玩家明确要求切换",
+            "触发因素、角色自身倾向和当前关系条件同时成立",
+        ],
+    }
 
 
 def sexuality_block(rng: random.Random, subset: dict[str, Any],
@@ -267,7 +272,7 @@ def sexuality_block(rng: random.Random, subset: dict[str, Any],
     baseline = (
         f"欲望强度{intensity}、自我觉察{awareness}。"
         f"习惯{initiative}，节奏{pace}，风格{style}；表达{directness}，自控{control}。"
-        f"来源是{origin}，不因压力或职级自动扩大许可。"
+        f"来源是{origin}，不因压力或职级自动扩大当前互动范围。"
     )
     core = {
         "baseline": baseline,
@@ -359,6 +364,11 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     age_band = roll["玩家年龄段"]
     position = roll["玩家社会位置"]
     action = roll["场景动作"]
+    entry_modes = (
+        "npc_waits", "npc_already_acting", "npc_prepares_exit",
+        "npc_brings_pressure", "npc_makes_first_choice",
+    )
+    entry_mode = entry_modes[seed % len(entry_modes)]
     engines = split_multi(str(roll.get("张力引擎") or ""))
     if not engines or any(item == "custom_required" for item in engines):
         raise FillError(
@@ -396,6 +406,11 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         raise FillError(f"no identities for family {family!r}")
     npc_item = npc_pool[seed % len(npc_pool)]
     identity = expand_npc_identity(npc_item, family)
+    identity["behavior"] = copy.deepcopy(
+        (tables.get("identity_profiles") or {}).get(family) or {}
+    )
+    if not identity["behavior"]:
+        raise FillError(f"identity_profiles.yaml 缺少身份族 {family!r} 的行为画像")
     position_row = tables["identities"]["player"].get(position)
     if not position_row:
         raise FillError(f"no player identity for position {position!r}")
@@ -408,6 +423,9 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         )
     detail = loc_pool[seed % len(loc_pool)]
     location = f"{place}·{detail}"
+    location_profile = copy.deepcopy((tables["location_profiles"] or {}).get(place) or {})
+    if not location_profile:
+        raise FillError(f"location_profiles.yaml 缺少地点 {place!r} 的画像条目")
 
     clock = clock_for_seed(seed)
     # 带死线的处境与压力来源（决定 near 事件是否带 due_at）；名单在 pools.yaml meta。
@@ -428,7 +446,14 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     beats = situation_bundle(situation_kind, npc_name, pressure, templates.get("situation_beats") or {})
     trade = action in trade_actions(tables["pools"])
     unresolved = action_sentence(action, npc_name, trade, templates)
-    last_result = f"门在身后合上。{location}里暂时只剩你们两个。"
+    entry_text = {
+        "npc_waits": f"门在身后合上。{location}里暂时只剩你们两个，{npc_name}没有先开口。",
+        "npc_already_acting": f"你进门时，{npc_name}已经把一件事做到一半，{location}里没有给你准备好的解释。",
+        "npc_prepares_exit": f"{npc_name}把离开的东西放在手边，像是只打算给今晚留下最后几分钟。",
+        "npc_brings_pressure": f"{npc_name}不是一个人来的，门外的脚步声让{location}里的沉默有了期限。",
+        "npc_makes_first_choice": f"你还没问，{npc_name}已经替今晚做了一个决定，并把结果放到你面前。",
+    }[entry_mode]
+    last_result = entry_text
     next_pressure = beats["near"]
 
     power_zh = {
@@ -676,17 +701,20 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     }
     data["current_node"].update({
         "scene_id": "scene-001",
+        "entry_mode": entry_mode,
         "location": location,
         "participants": ["player-001", "npc-001"],
         "situation": node_situation,
         "last_committed_result": last_result,
         "unresolved_action": unresolved,
         "natural_next_pressure": next_pressure,
+        "scene_profile": location_profile,
+        "action_category": roll.get("场景动作类别"),
+        "action_metadata": copy.deepcopy(
+            roll.get("场景动作元数据")
+            or (tables.get("action_metadata") or {}).get(roll.get("场景动作类别"), {})
+        ),
     })
-    data["consent"]["scene_id"] = "scene-001"
-    data["consent"]["location"] = location
-    data["consent"]["participants"] = ["player-001", "npc-001"]
-    data["consent"]["grants"] = []
     data["boundaries"] = []
     data["resolved_summary"] = []
     data["checkpoint"] = {

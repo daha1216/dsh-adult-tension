@@ -1,0 +1,51 @@
+ # 中期转折类别画像。七类必须全部覆盖；由 roll_opening.py 随 --twist 输出。
+ # 画像只说明可能影响的状态面，不直接改写存档。
+信息类:
+  affects:
+  - knowledge_gap
+  - npc_goal
+  escalation: variable
+  opens_exit: true
+  introduces_third_party: false
+人事类:
+  affects:
+  - participants
+  - social_risk
+  escalation: medium
+  opens_exit: false
+  introduces_third_party: true
+资源类:
+  affects:
+  - resources
+  - leverage
+  escalation: variable
+  opens_exit: true
+  introduces_third_party: false
+制度类:
+  affects:
+  - procedure
+  - public_risk
+  escalation: high
+  opens_exit: true
+  introduces_third_party: true
+时限类:
+  affects:
+  - clock
+  - events
+  escalation: high
+  opens_exit: false
+  introduces_third_party: false
+关系类:
+  affects:
+  - trust
+  - distance
+  escalation: variable
+  opens_exit: true
+  introduces_third_party: false
+意外类:
+  affects:
+  - location
+  - events
+  escalation: variable
+  opens_exit: true
+  introduces_third_party: true

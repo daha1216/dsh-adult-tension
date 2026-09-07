@@ -24,10 +24,6 @@ def valid_save() -> dict:
             "pressure_seeds": {"immediate": "deadline", "near_event_id": "evt-near", "far_event_id": "evt-far"},
         },
         "boundaries": [{"id": "boundary-001", "topic": "no coercion", "status": "active", "created_turn": 0, "revoked_turn": None}],
-        "consent": {
-            "scene_id": "scene-001", "location": "office", "participants": ["player-001", "npc-001"],
-            "grants": [{"id": "consent-001", "scene_id": "scene-001", "participants": ["player-001", "npc-001"], "scope": [{"type": "scene", "permission": "remain together"}], "status": "granted", "granted_turn": 4, "withdrawn_turn": None, "last_checked_turn": 5}],
-        },
         "player": {"id": "player-001", "name": "Player", "age": 30, "identity": "investigator", "location": "office", "baseline": "healthy", "resources": [], "knowledge": [], "reputation": "unknown"},
         "player_naming_audit": {"chosen": "Player", "source": "player provided", "approved_turn": 0},
         "npcs": [{
@@ -87,21 +83,15 @@ class ValidateStateTests(unittest.TestCase):
             lambda data: data["world"].update(tension_engines=["custom_required", "情感拉扯"]),
             "custom_required")
 
-    def test_scene_consent_binding_is_strict(self) -> None:
-        self.assert_invalid(lambda data: data["consent"].update(location="lobby"), "consent.location")
-        self.assert_invalid(lambda data: data["consent"].update(participants=["player-001"]), "consent.participants")
-        self.assert_invalid(lambda data: data["consent"]["grants"][0].update(withdrawn_turn=5), "withdrawn_turn")
-
-    def test_consent_scope_and_withdrawal_rules(self) -> None:
-        self.assert_invalid(lambda data: data["consent"]["grants"][0]["scope"][0].update(type="freeform"), "scope[0].type")
-        data = valid_save()
-        data["consent"]["grants"][0].update(status="withdrawn", withdrawn_turn=5)
-        self.assertEqual([], VALIDATOR.validate_data(data))
-
     def test_relationship_edges_are_unique_and_opening_is_structured(self) -> None:
         def duplicate(data):
             data["relationships"].append(copy.deepcopy(data["relationships"][0]))
         self.assert_invalid(duplicate, "duplicates an existing relationship edge")
+        def reverse_duplicate(data):
+            reverse = copy.deepcopy(data["relationships"][0])
+            reverse["source"], reverse["target"] = reverse["target"], reverse["source"]
+            data["relationships"].append(reverse)
+        self.assert_invalid(reverse_duplicate, "duplicates an existing relationship edge")
         self.assert_invalid(lambda data: data["relationships"][0]["opening"].update(status="yes"), "opening.status")
 
     def test_main_npc_and_naming_audits_are_strict(self) -> None:
@@ -118,14 +108,11 @@ class ValidateStateTests(unittest.TestCase):
         data["relationships"][0]["last_updated_turn"] = 1
         data["checkpoint"].update(last_full_turn=1, next_full_turn=6)
         data["npcs"][0]["autonomy"] = {"last_turn": None, "recent_turns": [], "cooldown_until": 0}
-        data["consent"]["grants"][0].update(granted_turn=1, last_checked_turn=1)
         data["events"].append({"id": "evt-immediate", "source": "system:opening", "created_turn": 1, "kind": "immediate", "semantic_key": "opening beat", "trigger": "scene begins", "due_at": None, "status": "pending", "consequence": "pressure starts", "hook": False, "probability": None})
         second = copy.deepcopy(data["npcs"][0])
         second.update(id="npc-002", name="NPC2")
         data["npcs"].append(second)
         data["current_node"]["participants"].append("npc-002")
-        data["consent"]["participants"].append("npc-002")
-        data["consent"]["grants"][0]["participants"].append("npc-002")
         self.assertTrue(any("player relationship coverage" in error for error in VALIDATOR.validate_data(data, "opening")))
 
     def test_opening_requires_structural_top_level_fields(self) -> None:
@@ -141,9 +128,6 @@ class ValidateStateTests(unittest.TestCase):
                 npc.pop(key, None)
             data["npcs"].append(npc)
             data["current_node"]["participants"].append("npc-002")
-            data["consent"]["participants"].append("npc-002")
-            data["consent"]["grants"][0]["participants"].append("npc-002")
-            data["consent"]["grants"][0]["scope"].append({"type": "physical", "permission": "intimate participation"})
         self.assert_invalid(add_supporting, "intimate participation")
 
     def test_autonomy_consistency(self) -> None:
@@ -165,7 +149,6 @@ class ValidateStateTests(unittest.TestCase):
         data["relationships"][0]["last_updated_turn"] = 1
         data["checkpoint"].update(last_full_turn=1, next_full_turn=6)
         data["npcs"][0]["autonomy"] = {"last_turn": None, "recent_turns": [], "cooldown_until": 0}
-        data["consent"]["grants"][0].update(granted_turn=1, last_checked_turn=1)
         data["events"].append({"id": "evt-immediate", "source": "system:opening", "created_turn": 1, "kind": "immediate", "semantic_key": "opening beat", "trigger": "scene begins", "due_at": None, "status": "pending", "consequence": "pressure starts", "hook": False, "probability": None})
         return data
 
@@ -205,6 +188,23 @@ class ValidateStateTests(unittest.TestCase):
         data["events"].append({"id": "evt-prob", "source": "system:probability", "created_turn": 5, "kind": "probabilistic", "semantic_key": "chance outcome", "trigger": "roll", "due_at": None, "status": "pending", "consequence": "outcome varies", "hook": False, "probability": 0.25})
         self.assertEqual([], VALIDATOR.validate_data(data))
 
+    def test_event_roll_and_twist_state_are_optional_but_strict(self) -> None:
+        data = valid_save()
+        data["meta"]["event_seed"] = 42
+        data["world"]["twist_state"] = {
+            "generated_count": 1,
+            "last_generated_turn": 5,
+            "last_reason": "first_cross_day",
+        }
+        data["world"]["pressure_seeds"]["near_event_id"] = None
+        data["events"][0]["kind"] = "probabilistic"
+        data["events"][0]["probability"] = 0.5
+        data["events"][0]["status"] = "resolved"
+        data["events"][0]["last_roll"] = {"turn": 5, "value": 0.25, "outcome": "hit"}
+        self.assertEqual([], VALIDATOR.validate_data(data))
+        self.assert_invalid(lambda d: d["meta"].update(event_seed="42"), "meta.event_seed")
+        self.assert_invalid(lambda d: d["events"][0].update(last_roll={"turn": 5, "value": 0.25, "outcome": "hit"}), "hit roll requires resolved status")
+
     def test_resolved_summary_has_required_structure(self) -> None:
         self.assert_invalid(lambda data: data.update(resolved_summary=[{"event_id": "evt-near"}]), "resolved_summary[0].outcome")
 
@@ -217,7 +217,6 @@ class ValidateStateTests(unittest.TestCase):
         data["relationships"][0]["last_updated_turn"] = 1
         data["checkpoint"].update(last_full_turn=1, next_full_turn=6)
         data["npcs"][0]["autonomy"] = {"last_turn": None, "recent_turns": [], "cooldown_until": 0}
-        data["consent"]["grants"][0].update(granted_turn=1, last_checked_turn=1)
         data["events"].append({"id": "evt-immediate", "source": "system:opening", "created_turn": 1, "kind": "immediate", "semantic_key": "opening beat", "trigger": "scene begins", "due_at": None, "status": "pending", "consequence": "pressure starts", "hook": False, "probability": None})
         self.assertEqual([], VALIDATOR.validate_data(data, "opening"))
         data["world"]["tension_engines"] = ["only one"]

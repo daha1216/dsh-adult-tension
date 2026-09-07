@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import copy
 import datetime as dt
+import hashlib
 import importlib.util
 import json
 import sys
@@ -19,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_STATE = ROOT / "saves" / "current_state.yaml"
 PUBLIC_HINTS = ("走廊", "门厅", "大堂", "街道", "步道", "车站", "大厅", "连接处")
 PRIVATE_HINTS = ("卧室", "浴室", "卫生间", "套房", "包厢", "起居室", "内间", "里间")
+ORDINARY_TURN_MAX_SECONDS = 15 * 60
+SHORT_FAST_FORWARD_MAX_SECONDS = 60 * 60
 
 
 def _load_common() -> Any:
@@ -77,6 +80,87 @@ def iso(value: dt.datetime) -> str:
     return value.replace(microsecond=0).isoformat()
 
 
+def requested_clock(state: dict[str, Any], patch: dict[str, Any], advance: bool) -> tuple[dt.datetime, dt.datetime]:
+    world = state.get("world") if isinstance(state.get("world"), dict) else {}
+    old_clock = parse_clock(world.get("clock"))
+    if patch.get("clock"):
+        return old_clock, parse_clock(patch["clock"])
+    if patch.get("delta_seconds") is not None and patch.get("delta_minutes") is not None:
+        raise CommitError("delta_seconds and delta_minutes cannot be used together")
+    if patch.get("delta_seconds") is not None:
+        delta = patch["delta_seconds"]
+        if isinstance(delta, bool) or not isinstance(delta, int) or delta < 0:
+            raise CommitError("delta_seconds must be a non-negative integer")
+        return old_clock, old_clock + dt.timedelta(seconds=delta)
+    if patch.get("delta_minutes") is not None:
+        delta = patch["delta_minutes"]
+        if isinstance(delta, bool) or not isinstance(delta, int) or delta < 0:
+            raise CommitError("delta_minutes must be a non-negative integer")
+        return old_clock, old_clock + dt.timedelta(minutes=delta)
+    return old_clock, old_clock + dt.timedelta(minutes=5 if advance else 0)
+
+
+def elapsed_seconds(state: dict[str, Any], patch: dict[str, Any]) -> int:
+    old_clock, new_clock = requested_clock(state, patch, patch.get("advance_turn", True) is not False)
+    return int((new_clock - old_clock).total_seconds())
+
+
+def deterministic_event_roll(event_id: str, turn: int, seed: Any = 0) -> float:
+    token = f"{seed}:{event_id}:{turn}".encode("utf-8")
+    value = int.from_bytes(hashlib.sha256(token).digest()[:8], "big")
+    return value / float(2**64)
+
+
+def enforce_simulation_gate(state: dict[str, Any], patch: dict[str, Any]) -> None:
+    meta = state.get("meta") if isinstance(state.get("meta"), dict) else {}
+    simulation = patch.get("simulation") if isinstance(patch.get("simulation"), bool) else meta.get("simulation")
+    if simulation is not False:
+        return
+    violations: list[str] = []
+    for npc_id, update in (patch.get("npc_updates") or {}).items():
+        if isinstance(update, dict) and update.get("autonomy_now"):
+            violations.append(f"npc_updates.{npc_id}.autonomy_now")
+    for event in patch.get("events_add") or []:
+        if not isinstance(event, dict):
+            continue
+        source = str(event.get("source") or "")
+        if event.get("offline") is True or source.startswith("world:"):
+            violations.append("events_add.offline")
+    relation_delta = patch.get("relationship_delta")
+    entries = relation_delta if isinstance(relation_delta, list) else [relation_delta]
+    for entry in entries:
+        if isinstance(entry, dict) and (entry.get("offline") is True or entry.get("propagation") is True):
+            violations.append("relationship_delta.offline")
+    if patch.get("twist_generate") is not None:
+        violations.append("twist_generate")
+    if violations:
+        raise CommitError("simulation=false blocks offline/world effects: " + ", ".join(violations))
+
+
+def apply_twist_generation(state: dict[str, Any], request: Any, turn: int, crossed_day: bool) -> None:
+    if request is None:
+        return
+    if not isinstance(request, dict):
+        raise CommitError("twist_generate must be a mapping")
+    reason = request.get("reason")
+    if reason not in {"first_cross_day", "player_requested"}:
+        raise CommitError("twist_generate.reason must be first_cross_day or player_requested")
+    world = state.setdefault("world", {})
+    current = world.get("twist_state") if isinstance(world.get("twist_state"), dict) else {}
+    count = current.get("generated_count", 0)
+    if isinstance(count, bool) or not isinstance(count, int) or count < 0:
+        raise CommitError("world.twist_state.generated_count must be a non-negative integer")
+    if reason == "first_cross_day" and count > 0:
+        raise CommitError("first_cross_day twist has already been generated")
+    if reason == "first_cross_day" and not crossed_day:
+        raise CommitError("first_cross_day twist requires a calendar day change")
+    world["twist_state"] = {
+        "generated_count": count + 1,
+        "last_generated_turn": turn,
+        "last_reason": reason,
+    }
+
+
 def next_id(prefix: str, existing: list[str], reserved: list[str] | None = None) -> str:
     numbers = []
     token = prefix + "-"
@@ -118,7 +202,7 @@ def npc_by_id(state: dict[str, Any], npc_id: str) -> dict[str, Any] | None:
 def apply_scene(state: dict[str, Any], location: str | None, participants: list[str] | None,
                 turn: int) -> list[dict[str, str]]:
     node = state["current_node"]
-    consent = state["consent"]
+    # Consent is inferred by the model from the live narrative; no grant ledger is stored.
     old_location = node.get("location")
     old_participants = list(node.get("participants") or [])
     new_location = location or old_location
@@ -128,56 +212,9 @@ def apply_scene(state: dict[str, Any], location: str | None, participants: list[
         return changed
     old_scene = node.get("scene_id") or "scene-001"
     new_scene = next_id("scene", [old_scene])
-    inherit = False
-    safety = (state.get("meta") or {}).get("safety_state")
-    if (
-        new_participants == old_participants
-        and safety != "paused"
-        and adjacent_private(str(old_location), str(new_location))
-    ):
-        inherit = True
-    new_grants = []
-    if inherit:
-        for grant in consent.get("grants") or []:
-            if not isinstance(grant, dict) or grant.get("status") != "granted":
-                continue
-            scopes = [
-                scope for scope in (grant.get("scope") or [])
-                if isinstance(scope, dict) and scope.get("type") == "physical"
-            ]
-            if not scopes:
-                continue
-            new_grants.append({
-                "id": next_id("consent", [item.get("id") for item in new_grants if isinstance(item, dict)] + [
-                    g.get("id") for g in (consent.get("grants") or []) if isinstance(g, dict)
-                ]),
-                "scene_id": new_scene,
-                "participants": list(new_participants),
-                "scope": copy.deepcopy(scopes),
-                "status": "granted",
-                "granted_turn": turn,
-                "withdrawn_turn": None,
-                "last_checked_turn": turn,
-                "inherited_from": grant.get("id"),
-            })
     node["scene_id"] = new_scene
     node["location"] = new_location
     node["participants"] = new_participants
-    consent["scene_id"] = new_scene
-    consent["location"] = new_location
-    consent["participants"] = new_participants
-    # 旧场景的授予/撤回记录归档保存，不再随换场丢失（状态总结.md「另行归档」）。
-    archive = consent.get("grants_archive")
-    if not isinstance(archive, list):
-        archive = []
-        consent["grants_archive"] = archive
-    for grant in consent.get("grants") or []:
-        if isinstance(grant, dict):
-            archive.append(grant)
-    # 归档只留最近 N 条，防长线膨胀；只丢 archive，不动当前 grants。
-    if len(archive) > GRANTS_ARCHIVE_LIMIT:
-        del archive[:-GRANTS_ARCHIVE_LIMIT]
-    consent["grants"] = new_grants
     player = state.get("player")
     if isinstance(player, dict):
         player["location"] = new_location
@@ -246,11 +283,20 @@ def _apply_relationship_edge(state: dict[str, Any], delta: dict[str, Any], turn:
             continue
         if {relation.get("source"), relation.get("target")} != {source, target}:
             continue
-        if delta.get("trust") is not None:
+        if delta.get("trust_set") is not None:
+            value = delta["trust_set"]
+            if isinstance(value, bool) or not isinstance(value, int):
+                raise CommitError("relationship_delta trust_set must be an integer")
+            new_trust = max(-5, min(5, value))
+            if new_trust != relation.get("trust"):
+                relation["trust"] = new_trust
+                changed = True
+        elif delta.get("trust") is not None:
             current = relation.get("trust") if isinstance(relation.get("trust"), int) else 0
-            # 正负整数视为增量并夹到 [-5,5]；绝对值大于 5 视为直接设定（同样夹到 [-5,5]）。
-            change = int(delta["trust"])
-            new_trust = max(-5, min(5, current + change)) if abs(change) <= 5 else max(-5, min(5, change))
+            change = delta["trust"]
+            if isinstance(change, bool) or not isinstance(change, int):
+                raise CommitError("relationship_delta trust must be an integer delta")
+            new_trust = max(-5, min(5, current + change))
             if new_trust != current:
                 relation["trust"] = new_trust
                 changed = True
@@ -276,10 +322,6 @@ def apply_relationship(state: dict[str, Any], delta: dict[str, Any] | list[Any] 
 
 
 EVENT_IMMUTABLE_FIELDS = ("id", "semantic_key", "kind", "source", "created_turn")
-
-# 换场归档（consent.grants_archive）最多保留的条数；更早的在换场归档时丢弃。
-GRANTS_ARCHIVE_LIMIT = 20
-
 
 def _event_index(state: dict[str, Any]) -> dict[str, dict[str, Any]]:
     index: dict[str, dict[str, Any]] = {}
@@ -377,6 +419,38 @@ def apply_events(state: dict[str, Any], resolve_ids: list[str], additions: list[
             if not isinstance(raw["hook"], bool):
                 raise CommitError("events_update hook must be a boolean")
             event["hook"] = raw["hook"]
+        if raw.get("roll"):
+            if raw.get("checked_turn_add"):
+                raise CommitError("events_update roll cannot be combined with checked_turn_add")
+            if event.get("kind") != "probabilistic":
+                raise CommitError("event roll requires a probabilistic event")
+            if event.get("status") != "pending":
+                raise CommitError("only pending events can be rolled")
+            checked = list(event.get("checked_turns") or [])
+            if turn in checked:
+                raise CommitError(f"event {target_id} was already checked on turn {turn}")
+            probability = event.get("probability")
+            if isinstance(probability, bool) or not isinstance(probability, (int, float)) or not 0 < probability <= 1:
+                raise CommitError("probabilistic event probability must be in (0, 1]")
+            meta = state.get("meta") if isinstance(state.get("meta"), dict) else {}
+            roll_value = deterministic_event_roll(target_id, turn, meta.get("event_seed", 0))
+            hit = roll_value < float(probability)
+            event["last_roll"] = {
+                "turn": turn,
+                "value": roll_value,
+                "outcome": "hit" if hit else "miss",
+            }
+            if hit:
+                event["status"] = "resolved"
+                resolved.append({
+                    "event_id": target_id,
+                    "resolved_turn": turn,
+                    "outcome": raw.get("roll_outcome") or event.get("consequence") or "概率事件已命中",
+                })
+                touched.add(target_id)
+            else:
+                checked.append(turn)
+                event["checked_turns"] = checked
         if raw.get("checked_turn_add"):
             checked = list(event.get("checked_turns") or [])
             if turn not in checked:
@@ -436,53 +510,12 @@ def expire_due_events(state: dict[str, Any], now: dt.datetime, turn: int) -> Non
         apply_events(state, [str(i) for i in due_ids if i], [], turn, "时限已到，尚未在场上兑现")
 
 
-def apply_grants(state: dict[str, Any], additions: list[dict[str, Any]],
-                 withdraw_ids: list[str], turn: int) -> None:
-    if not additions and not withdraw_ids:
-        return
-    consent = state["consent"]
-    grants = list(consent.get("grants") or [])
-    withdraw = list(dict.fromkeys(withdraw_ids or []))
-    known_ids = {g.get("id") for g in grants if isinstance(g, dict)}
-    unknown = [gid for gid in withdraw if gid not in known_ids]
-    if unknown:
-        raise CommitError(f"grants_withdraw references unknown grant ids: {unknown}")
-    updated = []
-    for grant in grants:
-        if not isinstance(grant, dict):
-            continue
-        if grant.get("id") in set(withdraw):
-            grant = dict(grant)
-            grant["status"] = "withdrawn"
-            grant["withdrawn_turn"] = turn
-            grant["last_checked_turn"] = turn
-            # 换场景规则：当前 grants 只保留当前 scene。撤回后仍属当前 scene，可留着。
-        updated.append(grant)
-    existing = [g.get("id") for g in updated if isinstance(g, dict)]
-    for raw in additions or []:
-        if not isinstance(raw, dict):
-            continue
-        grant = dict(raw)
-        grant.setdefault("id", next_id("consent", [str(i) for i in existing if i]))
-        grant.setdefault("scene_id", consent.get("scene_id"))
-        grant.setdefault("participants", list(consent.get("participants") or []))
-        grant.setdefault("status", "granted")
-        grant.setdefault("granted_turn", turn)
-        grant.setdefault("withdrawn_turn", None)
-        grant.setdefault("last_checked_turn", turn)
-        if not grant.get("scope"):
-            raise CommitError("grant requires scope")
-        updated.append(grant)
-        existing.append(grant["id"])
-    consent["grants"] = updated
-
-
 def apply_boundaries(state: dict[str, Any], additions: list[Any], revoke_topics: list[str],
                      turn: int) -> None:
     items = list(state.get("boundaries") or [])
     existing_ids = [b.get("id") for b in items if isinstance(b, dict)]
     revoke = list(dict.fromkeys(revoke_topics or []))
-    # 与 grants_withdraw 同一严格度：话题对不上任何边界记录（无论 active/revoked）
+    # 话题对不上任何边界记录（无论 active/revoked）
     # 就报错退出，不静默无操作。
     known_topics = {b.get("topic") for b in items if isinstance(b, dict)}
     unknown = [topic for topic in revoke if topic not in known_topics]
@@ -550,7 +583,64 @@ def maybe_full(state: dict[str, Any], turn: int, force: bool,
             checkpoint["invariants"] = {"age_verified": True, "player_control_preserved": True}
 
 
+def classify_turn(state: dict[str, Any], patch: dict[str, Any]) -> tuple[str, list[str]]:
+    """Resolve the model's turn judgment, applying only hard escalations."""
+    if patch.get("advance_turn", True) is False:
+        return "meta", ["advance_turn=false"]
+
+    requested = patch.get("turn_mode", "fast")
+    if requested not in {"fast", "deep"}:
+        raise CommitError("turn_mode must be fast or deep")
+    reasons: list[str] = [f"model requested {requested}"]
+    meta = state.get("meta") if isinstance(state.get("meta"), dict) else {}
+    world = state.get("world") if isinstance(state.get("world"), dict) else {}
+    node = state.get("current_node") if isinstance(state.get("current_node"), dict) else {}
+    checkpoint = state.get("checkpoint") if isinstance(state.get("checkpoint"), dict) else {}
+    if patch.get("force_full") or patch.get("full"):
+        reasons.append("explicit force_full")
+    if patch.get("location") is not None and patch.get("location") != node.get("location"):
+        reasons.append("scene location changed")
+    if patch.get("participants") is not None:
+        if list(patch.get("participants") or []) != list(node.get("participants") or []):
+            reasons.append("scene participants changed")
+    if any(patch.get(key) for key in (
+        "boundaries_add", "boundaries_revoke",
+        "events_add", "events_resolve", "events_cancel", "events_update", "npcs_add",
+        "twist_generate",
+    )):
+        reasons.append("structural state changed")
+    if any(isinstance(update, dict) and update.get("autonomy_now")
+           for update in (patch.get("npc_updates") or {}).values()):
+        reasons.append("NPC autonomous action")
+    if patch.get("retcon_add") or patch.get("safety_state") in {"paused", "running"}:
+        reasons.append("safety or continuity control changed")
+    span = elapsed_seconds(state, patch)
+    if span > ORDINARY_TURN_MAX_SECONDS:
+        if span >= SHORT_FAST_FORWARD_MAX_SECONDS:
+            reasons.append("large time jump")
+        else:
+            reasons.append("short fast-forward")
+    if span < 0:
+        reasons.append("clock moved backwards")
+    try:
+        old_clock, new_clock = requested_clock(state, patch, patch.get("advance_turn", True) is not False)
+        if old_clock.date() != new_clock.date():
+            reasons.append("calendar day changed")
+    except (CommitError, TypeError, ValueError, OverflowError):
+        reasons.append("clock requires full validation")
+    current_turn = int(meta.get("turn") or 0) + 1
+    next_full = checkpoint.get("next_full_turn")
+    if isinstance(next_full, int) and current_turn >= next_full:
+        reasons.append("scheduled deep calibration")
+    if len(reasons) > 1:
+        reasons.append("script hard escalation")
+        return "deep", reasons
+    reasons.append("ordinary local turn")
+    return requested, reasons
+
+
 def apply_patch(state: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
+    enforce_simulation_gate(state, patch)
     data = copy.deepcopy(state)
     meta = data.setdefault("meta", {})
     world = data.setdefault("world", {})
@@ -567,20 +657,10 @@ def apply_patch(state: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
     if patch.get("voyeur_pov") in {"on", "off"}:
         meta["voyeur_pov"] = patch["voyeur_pov"]
 
-    old_clock = parse_clock(world.get("clock"))
-    delta_minutes = patch.get("delta_minutes")
-    delta_seconds = patch.get("delta_seconds")
-    if patch.get("clock"):
-        new_clock = parse_clock(patch["clock"])
-    elif delta_seconds is not None:
-        new_clock = old_clock + dt.timedelta(seconds=int(delta_seconds))
-    elif delta_minutes is not None:
-        new_clock = old_clock + dt.timedelta(minutes=int(delta_minutes))
-    elif advance:
-        new_clock = old_clock + dt.timedelta(minutes=5)
-    else:
-        new_clock = old_clock
-    if advance and new_clock <= old_clock:
+    old_clock, new_clock = requested_clock(data, patch, advance)
+    if new_clock < old_clock:
+        raise CommitError("clock cannot move backwards")
+    if advance and new_clock == old_clock:
         raise CommitError("advancing turns must move the clock")
     if new_clock != old_clock:
         world["previous_clock"] = iso(old_clock)
@@ -593,9 +673,6 @@ def apply_patch(state: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
         world["delta_human"] = world.get("delta_human") or ""
 
     changes = []
-    # 许可的撤回/授予先于换场处理：继承复制读取的是撤回后的最新同意状态，
-    # 避免「同补丁内撤回＋换场」把刚收回的许可复活（SKILL.md 许可继承前提「无人撤回」）。
-    apply_grants(data, list(patch.get("grants_add") or []), list(patch.get("grants_withdraw") or []), turn)
     if patch.get("location") is not None or patch.get("participants") is not None:
         changes.extend(apply_scene(data, patch.get("location"), patch.get("participants"), turn))
     scene_changed_actual = any(
@@ -629,6 +706,9 @@ def apply_patch(state: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
     apply_npc_updates(data, patch.get("npc_updates") or {}, turn)
     apply_npcs_add(data, list(patch.get("npcs_add") or []))
     apply_relationship(data, patch.get("relationship_delta"), turn)
+    apply_twist_generation(data, patch.get("twist_generate"), turn, old_clock.date() != new_clock.date())
+    if patch.get("twist_generate") is not None:
+        changes.append({"turn": turn, "field": "world.twist_state", "reason": "twist generation recorded"})
     if patch.get("retcon_add"):
         entry = patch["retcon_add"]
         note = entry.get("note") if isinstance(entry, dict) else str(entry)
@@ -656,12 +736,12 @@ def apply_patch(state: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
         data.setdefault("checkpoint", {})["changed"] = [
             {"turn": turn, "field": "world.clock", "reason": "turn advance"}
         ]
+    elapsed = int((new_clock - old_clock).total_seconds())
     maybe_full(
         data, turn,
-        force=bool(patch.get("force_full")),
+        force=bool(patch.get("force_full")) or elapsed >= 3600 or old_clock.date() != new_clock.date(),
         scene_changed=scene_changed_actual or bool(
-            patch.get("grants_add") or patch.get("grants_withdraw")
-            or patch.get("boundaries_add") or patch.get("boundaries_revoke")
+            patch.get("boundaries_add") or patch.get("boundaries_revoke")
         ),
     )
     return data
@@ -710,18 +790,29 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    out = args.out or args.state
+    try:
+        lock = _COMMON.FileLock(_COMMON.lock_path(args.state))
+        lock.__enter__()
+    except _COMMON.CommonError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
     try:
         state = load_yaml(args.state)
         patch = load_patch(args)
+        turn_mode, turn_reasons = classify_turn(state, patch)
         updated = commit(state, patch)
+        saves = load_saves()
+        saves.write_atomic(out, saves.yaml_text(updated))
     except (CommitError, json.JSONDecodeError, OSError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
-    saves = load_saves()
-    out = args.out or args.state
-    saves.write_atomic(out, saves.yaml_text(updated))
+    finally:
+        lock.__exit__(None, None, None)
     slice_mod = load_live_slice()
     payload = slice_mod.extract_live_slice(updated)
+    payload["turn_mode"] = turn_mode
+    payload["turn_reasons"] = turn_reasons
     if args.format == "json":
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
