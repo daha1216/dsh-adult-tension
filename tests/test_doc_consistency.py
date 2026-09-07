@@ -83,8 +83,8 @@ class DocumentationConsistencyTests(unittest.TestCase):
         self.assertNotIn("### 失控语言退化", text)
         self.assertIn("### 内心可见（可选，玩家开启）", text)
         self.assertIn("### 性行为场景写法（硬约束）", text)
-        self.assertIn("词分三层使用", text)
-        self.assertIn("每段性行为按五拍写清", text)
+        self.assertNotIn("词分三层使用", text)
+        self.assertNotIn("每段性行为按五拍写清", text)
 
     def test_skill_runtime_contract_has_single_authority_and_current_terms(self) -> None:
         text = read("SKILL.md")
