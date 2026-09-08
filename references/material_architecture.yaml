@@ -1,0 +1,85 @@
+# Maintenance index only; selectors reference existing data without copying it.
+version: 1
+layers:
+  world:
+    title: 世界框架
+    modes: [daily, pressure]
+    sources:
+      - {file: pools.yaml, path: [时代与地点, 时代]}
+      - {file: pools.yaml, path: [核心规则]}
+      - {file: pools.yaml, path: [社会规则]}
+      - {file: pools.yaml, path: [美学基调]}
+      - {file: pools.yaml, path: [权力结构]}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', rule]}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', customs]}
+  space:
+    title: 场景空间
+    modes: [daily, pressure]
+    sources:
+      - {file: pools.yaml, path: [时代与地点, 地点]}
+      - {file: locations.yaml, path: []}
+      - {file: location_profiles.yaml, path: []}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', places]}
+  character:
+    title: 人物
+    modes: [daily, pressure]
+    sources:
+      - {file: identities.yaml, path: [npc]}
+      - {file: identities.yaml, path: [player]}
+      - {file: identity_profiles.yaml, path: []}
+      - {file: names.yaml, path: []}
+      - {file: character_meta.yaml, path: [决策轴]}
+      - {file: character_meta.yaml, path: [年龄段区间]}
+      - {file: character_pools.yaml, path: [外观轴]}
+      - {file: character_pools.yaml, path: [表层风味]}
+      - {file: character_pools.yaml, path: [口癖]}
+      - {file: pools.yaml, path: [玩家化身轴]}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', pairs]}
+  relationship:
+    title: 关系
+    modes: [daily, pressure]
+    sources:
+      - {file: character_meta.yaml, path: [社会位置关系]}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', pairs, '*', relationship_reason]}
+  activity:
+    title: 活动与互动
+    modes: [daily, pressure]
+    sources:
+      - {file: action_categories.yaml, path: [调查与核验]}
+      - {file: action_categories.yaml, path: [信息交换]}
+      - {file: action_categories.yaml, path: [照护与修复]}
+      - {file: action_categories.yaml, path: [空间与退出]}
+      - {file: action_categories.yaml, path: [第三方与打断]}
+      - {file: action_categories.yaml, path: [日常接触]}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', activities]}
+  opening:
+    title: 开局情境
+    modes: [daily, pressure]
+    sources:
+      - {file: pools.yaml, path: [meta, daily_opening], modes: [daily]}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', activities, '*', beats], modes: [daily]}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', pressures], modes: [pressure]}
+      - {file: pools.yaml, path: [压力来源], modes: [pressure]}
+      - {file: pools.yaml, path: [处境侧], modes: [pressure]}
+  development:
+    title: 后续变化
+    modes: [daily, pressure]
+    sources:
+      - {file: world_frameworks.yaml, path: [frameworks, '*', activities, '*', beats, near], modes: [daily]}
+      - {file: twists.yaml, path: [], modes: [pressure]}
+      - {file: twist_profiles.yaml, path: [], modes: [pressure]}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', pressures, '*', far_trigger], modes: [pressure]}
+      - {file: world_frameworks.yaml, path: [frameworks, '*', pressures, '*', far_consequence], modes: [pressure]}
+  expression:
+    title: 表达
+    modes: [daily, pressure]
+    sources:
+      - {file: world_frameworks.yaml, path: [frameworks, '*', activities, '*', action]}
+      - {file: templates.yaml, path: [withdrawal]}
+      - {file: templates.yaml, path: [pressure_response], modes: [pressure]}
+compatibility:
+  - {file: pools.yaml, path: [meta, location_eras]}
+  - {file: pools.yaml, path: [meta, aesthetic_eras]}
+  - {file: pools.yaml, path: [meta, material_compatibility]}
+  - {file: pools.yaml, path: [meta, daily_opening]}
+

@@ -17,6 +17,8 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 - `references/状态总结.md` — v3 存档结构、保存检查、载入流程（存档 schema 唯一来源）
 - `references/运行状态速览.md` — 普通回合活切片读取白名单与深度升级条件
 - `references/加内容.md` — 扩充素材与文案的对照指南（维护时用）
+- `references/素材架构.md` — 素材分层、跨层兼容与维护验收总导航
+- `references/material_architecture.yaml` — 现有数据文件到八层架构的机器可读索引（维护时按需读取）
 - `commands.yaml` — 命令分类、触发词、行为与后台操作（解析唯一来源；本文件只留核心速记）
 - `scripts/validate_state.py` — 机器校验唯一判定源
 - `scripts/build_opening.py --complete --opening-mode pressure|daily` — 按所选模式生成可开场状态与 opening_brief
