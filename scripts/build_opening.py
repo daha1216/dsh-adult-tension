@@ -124,7 +124,7 @@ def build_skeleton(roll: dict[str, Any]) -> dict[str, Any]:
     engines = split_multi(roll.get("张力引擎", ""))
     if not engines:
         engines = ["", ""]
-    return {
+    data = {
         "save_version": 3,
         "meta": {
             "turn": 1,
@@ -249,6 +249,11 @@ def build_skeleton(roll: dict[str, Any]) -> dict[str, Any]:
             "natural_next_pressure": "",
         },
     }
+    if roll.get("世界观桥接"):
+        data["world"]["constants"].append(
+            "当前时代与美学存在跨域混搭，开场需要交代其文化或技术来源。"
+        )
+    return data
 
 
 def write_atomic(path: Path, text: str) -> None:

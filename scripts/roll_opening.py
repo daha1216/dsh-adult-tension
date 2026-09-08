@@ -546,6 +546,26 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         else:
             # 时代是表抽值：时代让路（硬锁地点是稀缺签），从配套名单重抽
             roll["时代"] = rng.choice(compat)
+    # 美学基调与世界标签和解：默认抽取时避免明显跨文化/跨技术冲突；
+    # 玩家锁定或表外自拟时保留组合，并交给 opening brief 做桥接解释。
+    aesthetic_eras = (pools.get("meta") or {}).get("aesthetic_eras") or {}
+    aesthetic = roll.get("美学基调")
+    allowed_eras = aesthetic_eras.get(aesthetic)
+    aesthetic_locked = "美学基调" in locks or (
+        mode == "all_custom" and "美学基调" in CUSTOM_KEYS
+    )
+    if allowed_eras and roll.get("时代") not in allowed_eras:
+        if aesthetic_locked:
+            print(f"WARNING: 玩家给定组合「{roll['美学基调']}×{roll['时代']}」需要世界观桥接，按玩家意愿保留。",
+                  file=sys.stderr)
+            roll["世界观桥接"] = True
+        else:
+            candidates = [name for name in pools["美学基调"]
+                          if name not in aesthetic_eras or roll["时代"] in aesthetic_eras[name]]
+            if candidates:
+                roll["美学基调"] = rng.choice(candidates)
+            else:
+                roll["世界观桥接"] = True
     draw("社会规则", pools["社会规则"])
     draw("压力来源", pools["压力来源"])
     if "场景动作" in locks or (mode == "all_custom" and "场景动作" in CUSTOM_KEYS):
