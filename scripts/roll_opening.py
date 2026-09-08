@@ -442,7 +442,7 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
                recent: dict[str, set[str]] | None = None,
                opening_mode: str = "pressure") -> dict[str, Any]:
     """按 protocol_version/DRAW_PLAN 固定消费顺序生成结构骰。"""
-    if opening_mode not in {"pressure", "daily"}:
+    if opening_mode not in ("pressure", "daily"):
         raise AnchorError(f"未知开局类型：{opening_mode}")
     locks = dict(locks or {})
     custom = dict(custom or {})
@@ -862,6 +862,7 @@ def append_history(roll: dict[str, Any]) -> None:
             "protocol_version": PROTOCOL_VERSION,
             "seed": roll["seed"],
             "mode": roll["mode"],
+            "opening_mode": roll.get("opening_mode", "pressure"),
             "signature": _roll_signature(roll),
             "triple": _roll_triple(roll),
             "地点": roll.get("地点"),

@@ -148,7 +148,7 @@ class Validator:
 
         meta = data.get("meta")
         opening_mode = meta.get("opening_mode", "pressure") if isinstance(meta, dict) else "pressure"
-        if opening_mode not in {"pressure", "daily"}:
+        if opening_mode not in ("pressure", "daily"):
             self.error("meta.opening_mode", "must be pressure or daily")
         self.daily = opening_mode == "daily"
         if isinstance(meta, dict) and is_int(meta.get("turn")) and meta["turn"] >= 0:
@@ -269,6 +269,9 @@ class Validator:
                 # commit_turn 重指或置空）；opening profile 必须有种子。
                 if self.profile == "opening" and not self.daily:
                     self.error(f"world.pressure_seeds.{field}", "must be a non-empty event ID")
+                continue
+            if not is_nonempty_string(event_id):
+                self.error(f"world.pressure_seeds.{field}", "must be a string event ID or null")
                 continue
             event = events.get(event_id)
             if event is None:

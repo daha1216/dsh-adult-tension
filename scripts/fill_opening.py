@@ -342,7 +342,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     data = copy.deepcopy(skeleton)
     tables = tables or load_tables()
     opening_mode = roll.get("opening_mode", "pressure")
-    if opening_mode not in {"pressure", "daily"}:
+    if opening_mode not in ("pressure", "daily"):
         raise FillError("未知 opening_mode")
     daily = opening_mode == "daily"
     data["meta"]["opening_mode"] = opening_mode

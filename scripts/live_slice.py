@@ -125,6 +125,7 @@ def extract_live_slice(state: dict[str, Any]) -> dict[str, Any]:
     return {
         "turn": meta.get("turn"),
         "mode": meta.get("mode"),
+        "opening_mode": meta.get("opening_mode", "pressure"),
         "safety_state": meta.get("safety_state"),
         "power_structure": meta.get("power_structure"),
         "simulation": meta.get("simulation"),

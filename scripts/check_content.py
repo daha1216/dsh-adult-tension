@@ -81,6 +81,42 @@ def _keys(items: Any) -> set[str]:
     return {str(k) for k in items} if isinstance(items, (dict, list)) else set()
 
 
+def check_daily_opening(pools: dict[str, Any], report: Report) -> None:
+    rules = (pools.get("meta") or {}).get("daily_opening")
+    if not isinstance(rules, dict):
+        report.error("meta.daily_opening 必须是映射")
+        return
+    sources = {"核心规则": pools.get("核心规则", []), "社会规则": pools.get("社会规则", []),
+               "张力引擎": pools.get("张力引擎", []), "处境": pools.get("处境侧", []),
+               "场景动作": (pools.get("场景动作") or {}).get("非交易靠近", [])}
+    for field, source in sources.items():
+        entries = rules.get(field)
+        expected = dict if field == "处境" else list
+        if not isinstance(entries, expected) or not entries:
+            report.error(f"daily_opening.{field} 必须是非空{expected.__name__}")
+            continue
+        for name in entries:
+            report.ok(isinstance(name, str) and name in source,
+                      f"daily_opening.{field} 引用了不存在的旧素材：{name}")
+        if isinstance(entries, list):
+            report.ok(len(entries) == len(set(str(x) for x in entries)), f"daily_opening.{field} 有重复值")
+    situations = rules.get("处境")
+    if isinstance(situations, dict):
+        for name, beats in situations.items():
+            if not isinstance(beats, dict):
+                report.error(f"daily_opening.处境.{name} 必须是映射")
+                continue
+            for field in SITUATION_BEAT_KEYS:
+                value = beats.get(field)
+                if not isinstance(value, str) or not value.strip():
+                    report.error(f"daily_opening.处境.{name}.{field} 缺少文案")
+                    continue
+                try:
+                    value.format(npc="NPC", pressure="")
+                except (KeyError, ValueError, IndexError, AttributeError):
+                    report.error(f"daily_opening.处境.{name}.{field} 占位符非法")
+
+
 def check() -> Report:
     report = Report()
     commands_path = ROOT / "commands.yaml"
@@ -210,6 +246,8 @@ def check() -> Report:
         report.warn(f"反差轴「{item}」在 templates.yaml 没有专属台词（用通用句）")
     report.checks += 1
     report.ok(bool(templates.get("orientations")), "templates.yaml 缺少吸引取向清单（orientations）")
+
+    check_daily_opening(pools, report)
 
     # 8. meta 行为开关引用合法
     engines = set(pools.get("张力引擎") or [])

@@ -94,6 +94,8 @@
 开局
 ```
 
+未指定类型时先选择“压力开局”或“日常开局”；直接说出类型则立即生成，只有明确委托“随便”才默认日常。日常模式复用旧素材的低压解释，不预设外部压力、危机倒计时或事件链；压力模式保持原有流程。载入与续玩不重新选择。
+
 开局会一次性生成完整的世界、人物与处境，停在你能接手的第一个动作前；之后直接描述角色的行动或台词即可，系统会根据当前状态推进剧情：
 
 ```text
@@ -142,9 +144,10 @@ python -m pip install -r requirements.txt
 python -m pip install -r requirements-dev.txt
 
 # 全自动开局：一次生成可开场的 v3 状态与开局简报（「开局」命令的后端）
-python scripts/build_opening.py --complete --seed 42
+python scripts/build_opening.py --complete --opening-mode daily --seed 42
+# 压力开局将 daily 替换为 pressure；省略模式只返回选择提示，不写状态。
 
-# 生成 2～3 个中期转折方向（跨天推演也用它）
+# 生成 2～3 个中期转折方向（压力模式首次跨天或玩家明确要求时）
 python scripts/roll_opening.py --twist --seed 42
 
 # 人话状态视图（「状态」命令的后端）

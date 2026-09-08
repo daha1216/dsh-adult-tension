@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """build_opening.py — 开局编排器：结构骰 → v3 骨架 → opening 校验。
 
-默认开局走 --complete：结构骰 + 1-14 填料 + opening 校验一次做完，
+默认开局走 --complete：选定 opening-mode 后，结构骰 + 按模式填料 + opening 校验一次做完，
 stdout 给出 opening_brief，模型据此写玩家可见开局正文：先建立世界初步印象，再落到人物处境和可接续现场，不强制标题或固定段落。--complete 成功后会
 把本局签名追加进临时历史（与 roll_opening 同一份），重复三元组只发
 warning 不阻断；本脚本也不替模型生成叙事正文。
 
 用法：
-  python scripts/build_opening.py --complete                  # 一次生成可开场状态
-  python scripts/build_opening.py --complete --seed 42
-  python scripts/build_opening.py --complete --lock 时代=当代都市
-  python scripts/build_opening.py --complete --slot 本局
+  python scripts/build_opening.py --complete                  # 未选择模式，仅提示选择
+  python scripts/build_opening.py --complete --opening-mode daily --seed 42
+  python scripts/build_opening.py --complete --opening-mode pressure --lock 时代=当代都市
+  python scripts/build_opening.py --complete --opening-mode daily --slot 本局
   python scripts/build_opening.py                             # 仅骨架（维护/测试）
   python scripts/build_opening.py --roll-file roll.json --out saves/_opening_42.yaml
   python scripts/build_opening.py --request opens/req.yaml
@@ -105,6 +105,8 @@ def roll_from_file(path: Path) -> dict[str, Any]:
         raise SystemExit(f"ERROR: roll JSON 缺少或版本不符（需要 {PROTOCOL_VERSION}）：{path}")
     if not isinstance(data.get("seed"), int) or data["seed"] < 0:
         raise SystemExit(f"ERROR: roll JSON 的 seed 必须是非负整数：{path}")
+    if data.get("opening_mode", "pressure") not in ("pressure", "daily"):
+        raise SystemExit("ERROR: roll JSON opening_mode 必须是 pressure 或 daily")
     return data
 
 
@@ -369,6 +371,7 @@ def complete_opening(args: argparse.Namespace) -> int:
             "seed": seed,
             "protocol_version": PROTOCOL_VERSION,
             "mode": roll.get("mode", "table"),
+            "opening_mode": roll.get("opening_mode", "pressure"),
             "locks": request_locks,
             "custom": request_custom,
             "history_used": history_used,
@@ -504,6 +507,7 @@ def main(argv: list[str] | None = None) -> int:
             "mode": roll.get("mode", "table"),
             "locks": request_locks,
             "custom": request_custom,
+            "opening_mode": roll.get("opening_mode", "pressure"),
             "history_used": False,
             "skeleton": str(out),
             "validation": {"passed": False, "checked_at": utc_clock()},

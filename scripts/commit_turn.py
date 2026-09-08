@@ -150,6 +150,8 @@ def apply_twist_generation(state: dict[str, Any], request: Any, turn: int, cross
     count = current.get("generated_count", 0)
     if isinstance(count, bool) or not isinstance(count, int) or count < 0:
         raise CommitError("world.twist_state.generated_count must be a non-negative integer")
+    if reason == "first_cross_day" and state.get("meta", {}).get("opening_mode") == "daily":
+        raise CommitError("daily mode does not generate automatic first_cross_day twists")
     if reason == "first_cross_day" and count > 0:
         raise CommitError("first_cross_day twist has already been generated")
     if reason == "first_cross_day" and not crossed_day:
@@ -684,7 +686,7 @@ def apply_patch(state: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
         changes.append({"turn": turn, "field": "current_node.last_committed_result", "reason": "turn commit"})
     if patch.get("unresolved_action"):
         node["unresolved_action"] = patch["unresolved_action"]
-    if patch.get("natural_next_pressure"):
+    if "natural_next_pressure" in patch:
         node["natural_next_pressure"] = patch["natural_next_pressure"]
     sit = node.get("situation") if isinstance(node.get("situation"), dict) else {}
     if patch.get("situation_update") and isinstance(patch["situation_update"], dict):

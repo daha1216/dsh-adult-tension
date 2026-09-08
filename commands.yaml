@@ -36,10 +36,10 @@ command_categories:
   core:
     name: 核心命令
     commands:
-      - triggers: [开局, 开始, 随机开局]
+      - triggers: [开局, 开始, 随机开局, 压力开局, 日常开局]
         canonical: 开局
         advance_turn: false
-        behavior: 无进行中状态时先询问“压力开局”或“日常开局”；明确后执行 build_opening.py --complete --opening-mode pressure|daily。用户已明确类型时不再询问；只有种子或锁定素材仍需选择类型；已有进行中状态且玩家未明确要求放弃或重新开始时才确认，确认前不重掷、不清状态
+        behavior: 新开局未指定类型时先询问“压力开局”或“日常开局”；仅在等待该选择时把 1/2 解释为压力/日常。明确委托“随便”才默认日常；选择不推进回合、不抽素材、不写状态。载入或续玩不触发此选择。明确后执行 build_opening.py --complete --opening-mode pressure|daily。用户已明确类型时不再询问；只有种子或锁定素材仍需选择类型；已有进行中状态且玩家未明确要求放弃或重新开始时才确认，确认前不重掷、不清状态
       - triggers: [继续, next, c, "...", "……"]
         canonical: 继续
         advance_turn: true

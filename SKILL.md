@@ -36,10 +36,10 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 ## 按需加载
 
 - 每局开始（开局或载入后第一回合）：读一次 `commands.yaml`（命令解析与行为的唯一来源）。
-- 新开局：先询问“压力开局”或“日常开局”；明确后运行 `python scripts/build_opening.py --complete --opening-mode pressure|daily`。日常开局复用旧世界观、人物、动作和处境素材，但不默认引入外部压力或危机链。正文先给世界初步印象，再写人物处境和可接续现场；不强制标题、段落顺序或固定措辞。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目直接读 `scripts/data/` 下的 yaml。
+- 新开局：未指定类型时先询问“压力开局”或“日常开局”；明确选择后不重复询问，只有明确委托“随便”时才默认日常；载入与续玩不询问。选择本身不推进回合、不生成状态；明确后运行 `python scripts/build_opening.py --complete --opening-mode pressure|daily`。日常开局复用旧世界观、人物、动作和处境素材，但不默认引入外部压力或危机链。正文先给世界初步印象，再写人物处境和可接续现场；不强制标题、段落顺序或固定措辞。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目直接读 `scripts/data/` 下的 yaml。
 - 默认回合：不读完整 references、不重读整份 YAML。只用上一拍活切片，按「每回合事务」判断 `fast|deep`，组最小 patch 后跑 `python scripts/commit_turn.py`；脚本会对结构变化和校准条件执行硬升级，再写正文。
 - 新角色进场或角色升级：读 `references/角色设计.md`；需要条目清单时读 `scripts/data/` 下对应 yaml。
-- 快进、离屏活动或 Tier 追算：读 `references/世界运转.md`；第一次跨天且 `meta.simulation` 为 true 时运行 `python scripts/roll_opening.py --twist`，结果经 `events_add` 与 `twist_generate: {reason: first_cross_day}` 一次提交。
+- 快进、离屏活动或 Tier 追算：读 `references/世界运转.md`；压力开局第一次跨天且 `meta.simulation` 为 true 时运行 `python scripts/roll_opening.py --twist`，结果经 `events_add` 与 `twist_generate: {reason: first_cross_day}` 一次提交。
 - 导出存档或载入失败排错：读 `references/状态总结.md`。`状态` 用 `python scripts/live_slice.py saves/current_state.yaml --human`。
 - 扩充素材或文案（维护时）：读 `references/加内容.md`。
 
@@ -105,12 +105,13 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 
 ## 完整开局
 
-完整开局不可简化为少量种子：1-14 步必须发生，但由脚本一次做完，不由模型逐步手填。结构骰的防塌缩、模式与参数规矩见 `references/开局流程.md`。
+完整开局由脚本一次生成世界、人物、现场和关系，不由模型逐步手填。1-14 是维护索引，其中压力种子和开场三勾仅适用于压力模式；日常模式保留可接手的当前活动。结构骰的防塌缩、模式与参数规矩见 `references/开局流程.md`。
 
 能执行脚本时，开局只允许 `build_opening.py --complete`（`--seed` / `--lock` / `--slot` / `--force-table` / `--all-custom` / `--custom` 从该入口透传）。能对应表内字段的肯定约束才映射为 `--lock`；否定句没有 lock 键。
 
 ```text
-python scripts/build_opening.py --complete [--seed N] [--lock KEY=VALUE]... [--slot 名称]
+python scripts/build_opening.py --complete --opening-mode daily [--seed N] [--lock KEY=VALUE]... [--slot 名称]
+# 压力开局将 daily 替换为 pressure；未选择时只返回选择提示。
 ```
 
 禁止：读 `references/开局流程.md`、`角色设计.md`、`状态总结.md`；禁止手写或改写 v3 YAML；禁止单独先跑 `roll_opening.py` 再填空骨架；禁止反复 `--check`。参数错误修正输入，素材填料或 opening 校验错误留给维护，写入或槽位错误保留文件并报告，不得改由模型填档。配角未进场时脚本不会生成完整配角卡。`unresolved_action` 已由脚本落在非交易靠近，除非玩家预锁了交易摊牌。
@@ -121,7 +122,7 @@ python scripts/build_opening.py --complete [--seed N] [--lock KEY=VALUE]... [--s
 
 玩家读完开局后，应能理解：自己身处什么样的世界，那里有什么重要规则，当前人物为何在这里，眼下发生了什么，以及自己可以从哪个动作接手。保留所选题材、文风、视角和节奏；普通题材的世界观先导通常简短，复杂题材可适当展开，但不要为了交代设定牺牲可玩性。
 
-正文从当前现场、动作或对话开始，覆盖人物与当前关系/处境、正在发生的动作、压力和未决点；不再重复世界观和人物段落。正文结尾停在玩家能够接手的位置，并保持玩家行动主权。
+正文从当前现场、动作或对话开始，覆盖人物与当前关系/处境、正在发生的动作和未决点；仅在已有压力时写出压力；不再重复世界观和人物段落。正文结尾停在玩家能够接手的位置，并保持玩家行动主权。
 
 开局提交点即回合 1。`unresolved_action` 必须落在非交易靠近（递外套、让座、承认紧张、邀请留下、问一句不该问的等），除非玩家预锁了交易摊牌。`meta.turn` 是唯一回合号。
 
@@ -147,8 +148,8 @@ python scripts/build_opening.py --complete [--seed N] [--lock KEY=VALUE]... [--s
 2. **读取**：只读取上一拍活切片；需要深度规则时才加载对应参考文档，不重读整份状态。
 3. **判断**：模型根据当前叙事语义选择 `turn_mode: fast|deep`，用户不选择回合类型。
 4. **组 patch**：只提交本拍变化。普通行动 `delta_minutes` 为 1–15；16–59 分钟按短快进处理，60 分钟以上或跨天按完整追算处理。「继续」必须让时钟变化。
-5. **提交**：`python scripts/commit_turn.py --state saves/current_state.yaml --patch '<json>'`。提交器负责确定性校验和硬升级：换场、参与者变化、事件/边界结构变化、NPC 自主动作、跨天、定期校准等情况即使模型报 `fast` 也升级为 `deep`。第一次跨天且 `simulation` 为 true 时，按 `references/世界运转.md` 运行转折流程。
-6. **输出**：使用脚本返回的最终 `turn_mode` 和新活切片写正文。`fast` 只写当前动作和必要反应，`deep` 才展开长期压力、离屏事件和完整校准；`meta` 不生成叙事正文。
+5. **提交**：`python scripts/commit_turn.py --state saves/current_state.yaml --patch '<json>'`。提交器负责确定性校验和硬升级：换场、参与者变化、事件/边界结构变化、NPC 自主动作、跨天、定期校准等情况即使模型报 `fast` 也升级为 `deep`。压力开局第一次跨天且 `simulation` 为 true 时，按 `references/世界运转.md` 运行转折流程。
+6. **输出**：使用脚本返回的最终 `turn_mode` 和新活切片写正文。`fast` 只写当前动作和必要反应，`deep` 才追算已有的长期压力、离屏事件和完整校准；日常模式不因跨天或深度校准而凭空补入危机；`meta` 不生成叙事正文。
 
 禁止普通回合：读取整份 `state.yaml`；读取领域文档；用 `write` 覆盖存档；为深度校准重审角色卡。
 
