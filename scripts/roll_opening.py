@@ -567,13 +567,31 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
             else:
                 roll["世界观桥接"] = True
     draw("社会规则", pools["社会规则"])
-    draw("压力来源", pools["压力来源"])
+    # Constrained materials are filtered by the selected world shell. Locked
+    # values remain untouched and are marked for a bridge explanation.
+    material_rules = (pools.get("meta") or {}).get("material_compatibility") or {}
+    def compatible_values(field: str, values: list[str]) -> list[str]:
+        rules = material_rules.get(field) or {}
+        result = []
+        for value in values:
+            rule = rules.get(value) or {}
+            if rule.get("eras") and roll["时代"] not in rule["eras"]:
+                continue
+            if rule.get("places") and roll["地点"] not in rule["places"]:
+                continue
+            result.append(value)
+        return result or values
+    if "压力来源" not in locks and not (mode == "all_custom" and "压力来源" in CUSTOM_KEYS):
+        roll["压力来源"] = _choice_with_cooldown(
+            rng, compatible_values("压力来源", pools["压力来源"]), recent.get("压力来源"))
+    else:
+        draw("压力来源", pools["压力来源"])
     if "场景动作" in locks or (mode == "all_custom" and "场景动作" in CUSTOM_KEYS):
         draw("场景动作", pools["场景动作"])
     else:
         categories = [(name, items) for name, items in pools.get("场景动作分类", {}).items() if items]
         category = _choice_with_cooldown(rng, [name for name, _ in categories], recent.get("场景动作类别"))
-        category_items = dict(categories)[category]
+        category_items = compatible_values("场景动作", dict(categories)[category])
         roll["场景动作"] = _choice_with_cooldown(rng, category_items, recent.get("场景动作"))
         roll["场景动作类别"] = category
         roll["场景动作元数据"] = dict(pools["场景动作元数据"].get(category) or {})
