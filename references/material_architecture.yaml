@@ -51,6 +51,7 @@ layers:
       - {file: action_categories.yaml, path: [空间与退出]}
       - {file: action_categories.yaml, path: [第三方与打断]}
       - {file: action_categories.yaml, path: [日常接触]}
+      - {file: action_metadata.yaml, path: []}
       - {file: world_frameworks.yaml, path: [frameworks, '*', activities]}
   opening:
     title: 开局情境
@@ -83,3 +84,27 @@ compatibility:
   - {file: pools.yaml, path: [meta, material_compatibility]}
   - {file: pools.yaml, path: [meta, daily_opening]}
 
+# Inventory fallback only. No modes or runtime eligibility are implied.
+classification_defaults:
+  action_categories.yaml: activity
+  action_metadata.yaml: activity
+  character_meta.yaml: character
+  character_pools.yaml: character
+  identities.yaml: character
+  identity_profiles.yaml: character
+  location_profiles.yaml: space
+  locations.yaml: space
+  names.yaml: character
+  pools.yaml: world
+  templates.yaml: expression
+  twist_profiles.yaml: development
+  twists.yaml: development
+  world_frameworks.yaml: world
+classification_overrides:
+  - {file: pools.yaml, path: [张力引擎], layer: opening}
+  - {file: pools.yaml, path: [场景动作], layer: activity}
+  - {file: pools.yaml, path: [身份侧], layer: character}
+  - {file: pools.yaml, path: [反差轴], layer: character}
+  - {file: pools.yaml, path: [meta], layer: maintenance}
+  - {file: world_frameworks.yaml, path: [version], layer: maintenance}
+  - {file: world_frameworks.yaml, path: [legacy_weight], layer: maintenance}

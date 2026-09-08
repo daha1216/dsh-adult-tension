@@ -26,5 +26,10 @@ jobs:
         run: python -m compileall -q scripts tests
       - name: Validate content tables
         run: python scripts/check_content.py
+      - name: Audit material inventory and pairings
+        run: |
+          python scripts/material_inventory.py --summary
+          python scripts/check_material_compatibility.py --summary
+          python scripts/sample_materials.py --summary
       - name: Check diff whitespace
         run: git diff --check
