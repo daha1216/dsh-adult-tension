@@ -617,6 +617,29 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         if candidates:
             roll["处境"] = _choice_with_cooldown(rng, candidates, recent.get("处境"))
 
+    # Emit a compact, inspectable compatibility contract for downstream writers.
+    # Locked/custom values are retained, but explicitly require a bridge note.
+    compatibility_reasons = []
+    for field in ("压力来源", "场景动作", "身份族", "玩家社会位置"):
+        rule = (material_rules.get(field) or {}).get(str(roll.get(field))) or {}
+        if rule.get("eras") and roll["时代"] not in rule["eras"]:
+            compatibility_reasons.append(f"{field}与时代不匹配")
+        if rule.get("places") and roll["地点"] not in rule["places"]:
+            compatibility_reasons.append(f"{field}与地点不匹配")
+    if engine_themes and not (_themes(str(roll.get("压力来源", ""))) & engine_themes):
+        compatibility_reasons.append("压力来源未承接张力引擎主题")
+    if engine_themes and not (_themes(str(roll.get("处境", ""))) & engine_themes):
+        compatibility_reasons.append("处境未承接张力引擎主题")
+    if roll.get("世界观桥接"):
+        compatibility_reasons.append("美学与时代需要跨域来源说明")
+    roll["兼容性"] = {
+        "status": "bridge_required" if compatibility_reasons else "pass",
+        "reasons": compatibility_reasons,
+        "primary_theme": next(iter(engine_themes), ""),
+        "secondary_theme": next(iter(engine_themes - {next(iter(engine_themes), "")}), "") if engine_themes else "",
+        "bridge_points": compatibility_reasons if roll.get("世界观桥接") else [],
+    }
+
     if roll["权力结构"] not in POWER_STRUCTURES:
         raise AnchorError(f"权力结构值不在枚举中：{roll['权力结构']!r}")
     if "张力引擎" not in locks and not (

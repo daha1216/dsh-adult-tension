@@ -31,7 +31,7 @@ DATA_FILES = (
     "twist_profiles.yaml",
 )
 
-EXPECTED = "287ea92b758165a6305a7455a83aa1c804ae3db0a165bcb7be8b985ee563b638"
+EXPECTED = "b4814edeea92088d71f981cec526d12ab461e1fe64b59f6deb71d6299feff882"
 
 
 def _load(name: str, relative: str):
