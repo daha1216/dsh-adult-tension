@@ -32,7 +32,7 @@ DATA_FILES = (
     "world_frameworks.yaml",
 )
 
-EXPECTED = "abed5118b16228d548aa1c497a618795cef5a6d6d22570cb99d5ccb22de4dfb0"
+EXPECTED = "b403793152c036853bc9bf30e9af9e473199ec280b887d291aeedb8390dc6509"
 
 
 def _load(name: str, relative: str):

@@ -2,6 +2,7294 @@
 version: 1
 legacy_weight: 10
 frameworks:
+  仙门藏书与驿镖:
+    eras:
+    - 东方玄幻大陆
+    aesthetics:
+    - 水墨写意
+    - 工笔华服
+    rule: 修行之外，藏书、路图和镖运维持各地往来，凡人的手艺同样进入行会记录。
+    social_rule: 借阅与护送按委托说明办理，师门身份不替代具体许可。
+    places:
+      藏经阁:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校对山川旧志
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      悬空神殿:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理巡礼路签
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      镖局:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 核对普通货物路单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 藏书校勘人
+        function: 校对山川旧志
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明查验日期的山路图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 驿路护送文书
+        baseline: 你因注明查验日期的山路图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明查验日期的山路图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 藏书校勘人与驿路护送文书曾共同参与当地的校对山川旧志，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 驿路护送文书
+        function: 整理巡礼路签
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明查验日期的山路图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 藏书校勘人
+        baseline: 你因注明查验日期的山路图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明查验日期的山路图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 驿路护送文书与藏书校勘人曾共同参与当地的整理巡礼路签，双方同意保持联系。
+    activities:
+      校对山川旧志:
+        places:
+        - 藏经阁
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}将可公开借阅的地志摊开，请你辨一处山名。'
+        beats:
+          trigger: '{npc}将可公开借阅的地志摊开，请你辨一处山名。'
+          objective: 校对山川旧志
+          choice: 先参与校对山川旧志，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理巡礼路签:
+        places:
+        - 悬空神殿
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在开放平台上请你比较两版路线说明。'
+        beats:
+          trigger: '{npc}在开放平台上请你比较两版路线说明。'
+          objective: 整理巡礼路签
+          choice: 先参与整理巡礼路签，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      核对普通货物路单:
+        places:
+        - 镖局
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}将不涉密的货单分开，请你检查终点名称。'
+        beats:
+          trigger: '{npc}将不涉密的货单分开，请你检查终点名称。'
+          objective: 核对普通货物路单
+          choice: 先参与核对普通货物路单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 藏书人用可取下的纸签记录疑问，不直接涂改原卷。
+    pressures:
+      护送终点名称重名:
+        source: 两处驿站使用相同简称
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两处驿站使用相同简称。'
+          objective: 向委托人确认终点再出发
+          choice: 核对地形图，或等待委托人回信
+          immediate: 两处驿站使用相同简称，目前需要先说明各自能承担的工作。
+          near: 之后的路单需要写明完整驿名；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核护送终点名称重名的处理结果。
+        far_consequence: 之后的路单需要写明完整驿名，后续安排需重新通知参与者。
+      旧志抄本互相矛盾:
+        source: 两份山川志记录了不同的渡口
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两份山川志记录了不同的渡口。'
+          objective: 注明来源并核实可用路线
+          choice: 询问最近过路者，或暂列未确认
+          immediate: 两份山川志记录了不同的渡口，目前需要先说明各自能承担的工作。
+          near: 新版地志需保存异文说明；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核旧志抄本互相矛盾的处理结果。
+        far_consequence: 新版地志需保存异文说明，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 东方玄幻大陆
+      aesthetics:
+      - 水墨写意
+      - 工笔华服
+      places:
+      - 藏经阁
+      - 悬空神殿
+      - 镖局
+  海岸渡船与观测旅行:
+    eras:
+    - 远途休假季
+    aesthetics:
+    - 暖色生活流
+    - 写实文学
+    rule: 旅人沿海岸与观测点停留，船期是计划依据，不必成为每次相遇的危机。
+    social_rule: 乘船与观测遵从实际开放安排，同行人各自决定是否继续行程。
+    places:
+      夜航渡轮:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 记录港湾夜景
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      灯塔值守屋:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理公开灯塔照片
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      私人游艇:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 绘制获准参观路线
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      山顶观星台:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 标记夜空方位
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 海岸路线记录人
+        function: 记录港湾夜景
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 公开开放时段与观测笔记
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 自然景观摄影师
+        baseline: 你因公开开放时段与观测笔记与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 公开开放时段与观测笔记
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 海岸路线记录人与自然景观摄影师曾共同参与当地的记录港湾夜景，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 自然景观摄影师
+        function: 整理公开灯塔照片
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 公开开放时段与观测笔记
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 海岸路线记录人
+        baseline: 你因公开开放时段与观测笔记与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 公开开放时段与观测笔记
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 自然景观摄影师与海岸路线记录人曾共同参与当地的整理公开灯塔照片，双方同意保持联系。
+    activities:
+      记录港湾夜景:
+        places:
+        - 夜航渡轮
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在开放甲板上请你比较近岸与远岸的灯光。'
+        beats:
+          trigger: '{npc}在开放甲板上请你比较近岸与远岸的灯光。'
+          objective: 记录港湾夜景
+          choice: 先参与记录港湾夜景，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理公开灯塔照片:
+        places:
+        - 灯塔值守屋
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在预约参观区递来旧照片，请你找相同的海岸线。'
+        beats:
+          trigger: '{npc}在预约参观区递来旧照片，请你找相同的海岸线。'
+          objective: 整理公开灯塔照片
+          choice: 先参与整理公开灯塔照片，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      绘制获准参观路线:
+        places:
+        - 私人游艇
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在船主同意的停泊参观时段请你圈出公共通道。'
+        beats:
+          trigger: '{npc}在船主同意的停泊参观时段请你圈出公共通道。'
+          objective: 绘制获准参观路线
+          choice: 先参与绘制获准参观路线，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      标记夜空方位:
+        places:
+        - 山顶观星台
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在公开观测区请你对照星图找一处明显星群。'
+        beats:
+          trigger: '{npc}在公开观测区请你对照星图找一处明显星群。'
+          objective: 标记夜空方位
+          choice: 先参与标记夜空方位，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 观测点的留言簿鼓励记录当时的云量，不要求每页都有清晰照片。
+    pressures:
+      观测预约因天气调整:
+        source: 场地管理者调整了观测开放时间
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：场地管理者调整了观测开放时间。'
+          objective: 确认能否改期及各自的行程
+          choice: 另选室内展览，或分别继续旅程
+          immediate: 场地管理者调整了观测开放时间，目前需要先说明各自能承担的工作。
+          near: 预约与住宿可能需要重新安排；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核观测预约因天气调整的处理结果。
+        far_consequence: 预约与住宿可能需要重新安排，后续安排需重新通知参与者。
+      渡船码头临时改用:
+        source: 公告提示返程船改从另一处码头出发
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：公告提示返程船改从另一处码头出发。'
+          objective: 核实官方公告再规划交通
+          choice: 查询接驳方式，或选择后续班次
+          immediate: 公告提示返程船改从另一处码头出发，目前需要先说明各自能承担的工作。
+          near: 同行计划按确认后的船期重排；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核渡船码头临时改用的处理结果。
+        far_consequence: 同行计划按确认后的船期重排，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 远途休假季
+      aesthetics:
+      - 暖色生活流
+      - 写实文学
+      places:
+      - 夜航渡轮
+      - 灯塔值守屋
+      - 私人游艇
+      - 山顶观星台
+  地方行业与公共记忆:
+    eras:
+    - 当代都市
+    aesthetics:
+    - 行当正剧
+    - 市井烟火
+    rule: 城市手艺与公共服务通过记录、展览和相互学习留下日常经验。
+    social_rule: 只记录获得许可的工作过程，不以参观名义干扰医疗或私人事务。
+    places:
+      医院住院部走廊:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校对公共服务导览
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      宠物医院:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 设计领养日说明
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      殡仪馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理公共建筑沿革
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      当铺:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 记录旧物修复故事
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      电竞俱乐部:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 编排公开训练访谈
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      livehouse:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 布置街区声音展
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 地方行业记录员
+        function: 校对公共服务导览
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 受访者确认的非私密工作记录
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 公共展览策划人
+        baseline: 你因受访者确认的非私密工作记录与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 受访者确认的非私密工作记录
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 地方行业记录员与公共展览策划人曾共同参与当地的校对公共服务导览，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 公共展览策划人
+        function: 设计领养日说明
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 受访者确认的非私密工作记录
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 地方行业记录员
+        baseline: 你因受访者确认的非私密工作记录与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 受访者确认的非私密工作记录
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 公共展览策划人与地方行业记录员曾共同参与当地的设计领养日说明，双方同意保持联系。
+    activities:
+      校对公共服务导览:
+        places:
+        - 医院住院部走廊
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在不阻挡通行的位置展示获准张贴的指引，请你检查箭头。'
+        beats:
+          trigger: '{npc}在不阻挡通行的位置展示获准张贴的指引，请你检查箭头。'
+          objective: 校对公共服务导览
+          choice: 先参与校对公共服务导览，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      设计领养日说明:
+        places:
+        - 宠物医院
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在非诊疗接待区拿出院方确认的材料，请你整理报名步骤。'
+        beats:
+          trigger: '{npc}在非诊疗接待区拿出院方确认的材料，请你整理报名步骤。'
+          objective: 设计领养日说明
+          choice: 先参与设计领养日说明，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理公共建筑沿革:
+        places:
+        - 殡仪馆
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在预约开放的行政接待区请你核对建筑展览说明。'
+        beats:
+          trigger: '{npc}在预约开放的行政接待区请你核对建筑展览说明。'
+          objective: 整理公共建筑沿革
+          choice: 先参与整理公共建筑沿革，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      记录旧物修复故事:
+        places:
+        - 当铺
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在物主许可下展示修复照片，请你核对工序文字。'
+        beats:
+          trigger: '{npc}在物主许可下展示修复照片，请你核对工序文字。'
+          objective: 记录旧物修复故事
+          choice: 先参与记录旧物修复故事，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      编排公开训练访谈:
+        places:
+        - 电竞俱乐部
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}递来选手确认的采访稿，请你找一段适合放在开头的内容。'
+        beats:
+          trigger: '{npc}递来选手确认的采访稿，请你找一段适合放在开头的内容。'
+          objective: 编排公开训练访谈
+          choice: 先参与编排公开训练访谈，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      布置街区声音展:
+        places:
+        - livehouse
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在排练结束的公开区域请你为授权音频选标题。'
+        beats:
+          trigger: '{npc}在排练结束的公开区域请你为授权音频选标题。'
+          objective: 布置街区声音展
+          choice: 先参与布置街区声音展，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 采访结束后受访者可以留下一句不用于展览的修改意见。
+    pressures:
+      受访者撤回一段材料:
+        source: 受访者不愿公开先前确认的一个片段
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：受访者不愿公开先前确认的一个片段。'
+          objective: 撤下相关内容并确认新的公开范围
+          choice: 删除片段，或更换其他已授权材料
+          immediate: 受访者不愿公开先前确认的一个片段，目前需要先说明各自能承担的工作。
+          near: 展览目录需要重新排版；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核受访者撤回一段材料的处理结果。
+        far_consequence: 展览目录需要重新排版，后续安排需重新通知参与者。
+      展品交接记录不符:
+        source: 借来的展品数量与清单不同
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：借来的展品数量与清单不同。'
+          objective: 核对交接并联系出借人
+          choice: 比对照片，或先暂停布展
+          immediate: 借来的展品数量与清单不同，目前需要先说明各自能承担的工作。
+          near: 下一次借展需确认分项签收；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核展品交接记录不符的处理结果。
+        far_consequence: 下一次借展需确认分项签收，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 当代都市
+      aesthetics:
+      - 行当正剧
+      - 市井烟火
+      places:
+      - 医院住院部走廊
+      - 宠物医院
+      - 殡仪馆
+      - 当铺
+      - 电竞俱乐部
+      - livehouse
+  城市休闲与共享会客:
+    eras:
+    - 当代都市
+    aesthetics:
+    - 写实文学
+    - 暖色生活流
+    rule: 城市居民在预约空间里安排运动、看景与小型聚会，休闲不必服务于紧迫目标。
+    social_rule: 活动参与和费用分开确认，临时邀约不等于同意额外安排。
+    places:
+      高级公寓:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试排共享书会
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      酒店套房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 筹备旅行照片交换
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      私家宅邸:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 设计庭院观影单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      海边步道:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 记录海岸步行图
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      健身房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 制定公开体验时段
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      室内夜泳馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理泳池预约说明
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      打烊后的买手店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 布置旧物交换桌
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      黄昏天台:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 绘制城市天际线
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      婚礼宴会厅:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试排公共纪念展
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 社区休闲活动协调员
+        function: 试排共享书会
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 参与者同意公开的活动时间表
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 地方生活摄影师
+        baseline: 你因参与者同意公开的活动时间表与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 参与者同意公开的活动时间表
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 社区休闲活动协调员与地方生活摄影师曾共同参与当地的试排共享书会，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 地方生活摄影师
+        function: 筹备旅行照片交换
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 参与者同意公开的活动时间表
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 社区休闲活动协调员
+        baseline: 你因参与者同意公开的活动时间表与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 参与者同意公开的活动时间表
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 地方生活摄影师与社区休闲活动协调员曾共同参与当地的筹备旅行照片交换，双方同意保持联系。
+    activities:
+      试排共享书会:
+        places:
+        - 高级公寓
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在屋主邀请的公共会客区请你选择书桌布局。'
+        beats:
+          trigger: '{npc}在屋主邀请的公共会客区请你选择书桌布局。'
+          objective: 试排共享书会
+          choice: 先参与试排共享书会，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      筹备旅行照片交换:
+        places:
+        - 酒店套房
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在预约的会客区摊开照片，问你先讲哪段旅程。'
+        beats:
+          trigger: '{npc}在预约的会客区摊开照片，问你先讲哪段旅程。'
+          objective: 筹备旅行照片交换
+          choice: 先参与筹备旅行照片交换，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      设计庭院观影单:
+        places:
+        - 私家宅邸
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在主人开放的庭院里请你挑一部授权影片。'
+        beats:
+          trigger: '{npc}在主人开放的庭院里请你挑一部授权影片。'
+          objective: 设计庭院观影单
+          choice: 先参与设计庭院观影单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      记录海岸步行图:
+        places:
+        - 海边步道
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}拿出手绘路线，请你补一处可歇脚的位置。'
+        beats:
+          trigger: '{npc}拿出手绘路线，请你补一处可歇脚的位置。'
+          objective: 记录海岸步行图
+          choice: 先参与记录海岸步行图，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      制定公开体验时段:
+        places:
+        - 健身房
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在前台展示教练确认的安排，请你核对报名时间。'
+        beats:
+          trigger: '{npc}在前台展示教练确认的安排，请你核对报名时间。'
+          objective: 制定公开体验时段
+          choice: 先参与制定公开体验时段，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理泳池预约说明:
+        places:
+        - 室内夜泳馆
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在接待区取出泳道表，请你检查空闲时段。'
+        beats:
+          trigger: '{npc}在接待区取出泳道表，请你检查空闲时段。'
+          objective: 整理泳池预约说明
+          choice: 先参与整理泳池预约说明，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      布置旧物交换桌:
+        places:
+        - 打烊后的买手店
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}经店主许可摆出待交换的小物，请你写用途标签。'
+        beats:
+          trigger: '{npc}经店主许可摆出待交换的小物，请你写用途标签。'
+          objective: 布置旧物交换桌
+          choice: 先参与布置旧物交换桌，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      绘制城市天际线:
+        places:
+        - 黄昏天台
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在开放护栏内铺好纸，请你选一处屋顶轮廓。'
+        beats:
+          trigger: '{npc}在开放护栏内铺好纸，请你选一处屋顶轮廓。'
+          objective: 绘制城市天际线
+          choice: 先参与绘制城市天际线，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      试排公共纪念展:
+        places:
+        - 婚礼宴会厅
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在非婚宴租用时段摆好家庭授权的照片，请你比较顺序。'
+        beats:
+          trigger: '{npc}在非婚宴租用时段摆好家庭授权的照片，请你比较顺序。'
+          objective: 试排公共纪念展
+          choice: 先参与试排公共纪念展，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 活动结束可以直接离开，也可以在留言纸上写下下一次想做的事。
+    pressures:
+      共享会客区临时维修:
+        source: 预约空间需要临时关闭检修
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：预约空间需要临时关闭检修。'
+          objective: 另选参与者都愿意去的地点
+          choice: 询问替代场地，或延期取消
+          immediate: 预约空间需要临时关闭检修，目前需要先说明各自能承担的工作。
+          near: 费用与预约应按新安排重新确认；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核共享会客区临时维修的处理结果。
+        far_consequence: 费用与预约应按新安排重新确认，后续安排需重新通知参与者。
+      活动照片公开范围不明:
+        source: 整理好的相册包含未同意公开的照片
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：整理好的相册包含未同意公开的照片。'
+          objective: 先确认本人意愿再决定使用
+          choice: 删除该照片，或仅保留不识别个人的场景照
+          immediate: 整理好的相册包含未同意公开的照片，目前需要先说明各自能承担的工作。
+          near: 之后的活动需分别确认拍摄与公开意愿；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核活动照片公开范围不明的处理结果。
+        far_consequence: 之后的活动需分别确认拍摄与公开意愿，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 当代都市
+      aesthetics:
+      - 写实文学
+      - 暖色生活流
+      places:
+      - 高级公寓
+      - 酒店套房
+      - 私家宅邸
+      - 海边步道
+      - 健身房
+      - 室内夜泳馆
+      - 打烊后的买手店
+      - 黄昏天台
+      - 婚礼宴会厅
+  成年创作者与校园艺术季:
+    eras:
+    - 当代都市
+    aesthetics:
+    - 学园夏夜恋爱
+    - 恋爱轻喜
+    rule: 面向成年在校生、校友与社会创作者的艺术季把校园公共空间开放给共同创作。
+    social_rule: 所有参与角色明确成年，场地与作品公开范围需分别取得授权。
+    places:
+      学园祭打烊后的活动室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 设计校友展览
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      大学钢琴练习室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 编排公开试奏
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      24小时自习室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理展览注释
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      剧院后台:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校对节目交接单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      画廊:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 排布成年创作者作品
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      豪门庄园顶楼琴房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 筹备预约室内音乐会
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 成年校友活动组织者
+        function: 设计校友展览
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 已获作者确认的作品展清单
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 大学艺术课程助教
+        baseline: 你因已获作者确认的作品展清单与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 已获作者确认的作品展清单
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 成年校友活动组织者与大学艺术课程助教曾共同参与当地的设计校友展览，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 大学艺术课程助教
+        function: 编排公开试奏
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 已获作者确认的作品展清单
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 成年校友活动组织者
+        baseline: 你因已获作者确认的作品展清单与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 已获作者确认的作品展清单
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 大学艺术课程助教与成年校友活动组织者曾共同参与当地的编排公开试奏，双方同意保持联系。
+    activities:
+      设计校友展览:
+        places:
+        - 学园祭打烊后的活动室
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在获准延长开放的布置区摆出展签，请你检查排列。'
+        beats:
+          trigger: '{npc}在获准延长开放的布置区摆出展签，请你检查排列。'
+          objective: 设计校友展览
+          choice: 先参与设计校友展览，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      编排公开试奏:
+        places:
+        - 大学钢琴练习室
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}递来已获准演出的曲谱，请你选一段试奏顺序。'
+        beats:
+          trigger: '{npc}递来已获准演出的曲谱，请你选一段试奏顺序。'
+          objective: 编排公开试奏
+          choice: 先参与编排公开试奏，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理展览注释:
+        places:
+        - 24小时自习室
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}把参考书页签分开，请你核对出处。'
+        beats:
+          trigger: '{npc}把参考书页签分开，请你核对出处。'
+          objective: 整理展览注释
+          choice: 先参与整理展览注释，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      校对节目交接单:
+        places:
+        - 剧院后台
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在排练结束后请你核对道具去向。'
+        beats:
+          trigger: '{npc}在排练结束后请你核对道具去向。'
+          objective: 校对节目交接单
+          choice: 先参与校对节目交接单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      排布成年创作者作品:
+        places:
+        - 画廊
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}把作者确认的作品缩图排好，请你比较观看顺序。'
+        beats:
+          trigger: '{npc}把作者确认的作品缩图排好，请你比较观看顺序。'
+          objective: 排布成年创作者作品
+          choice: 先参与排布成年创作者作品，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      筹备预约室内音乐会:
+        places:
+        - 豪门庄园顶楼琴房
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在业主准许的排练时段请你检查听众席布局。'
+        beats:
+          trigger: '{npc}在业主准许的排练时段请你检查听众席布局。'
+          objective: 筹备预约室内音乐会
+          choice: 先参与筹备预约室内音乐会，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 留言簿允许只画图，不要求观众点评或留下姓名。
+    pressures:
+      演出授权范围变化:
+        source: 一位作者不同意原定的网络直播
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：一位作者不同意原定的网络直播。'
+          objective: 调整节目公开范围并通知协作者
+          choice: 取消该段直播，或另选已获授权的作品
+          immediate: 一位作者不同意原定的网络直播，目前需要先说明各自能承担的工作。
+          near: 新节目单需注明直播与现场的不同范围；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核演出授权范围变化的处理结果。
+        far_consequence: 新节目单需注明直播与现场的不同范围，后续安排需重新通知参与者。
+      艺术季借场撞期:
+        source: 校友展与另一场活动同时预约了空间
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：校友展与另一场活动同时预约了空间。'
+          objective: 协调展期和作品存放
+          choice: 询问替代场所，或分期开放
+          immediate: 校友展与另一场活动同时预约了空间，目前需要先说明各自能承担的工作。
+          near: 展览日程需重新告知作者；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核艺术季借场撞期的处理结果。
+        far_consequence: 展览日程需重新告知作者，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 当代都市
+      aesthetics:
+      - 学园夏夜恋爱
+      - 恋爱轻喜
+      places:
+      - 学园祭打烊后的活动室
+      - 大学钢琴练习室
+      - 24小时自习室
+      - 剧院后台
+      - 画廊
+      - 豪门庄园顶楼琴房
+  远途休假与小镇停留:
+    eras:
+    - 远途休假季
+    aesthetics:
+    - 暖色生活流
+    - 写实文学
+    - 恋爱轻喜
+    rule: 旅人以短暂停留认识小镇，同行计划可以改变，普通风景也值得花时间。
+    social_rule: 共同费用与行程先说明，任何人都能选择独自活动。
+    places:
+      深夜机场候机区:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 交换沿途手账
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      停电民宿客厅:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 画一幅窗外轮廓
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      偏远小镇唯一便利店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 挑选地方明信片
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      最后一班渡轮:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 共记海面灯火
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      回程前的空车站:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理回程照片
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      海岛度假村:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 设计海岸散步图
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      露营营地:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 编写营地早餐单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      高速公路服务区:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 更新沿途停靠表
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 旅行手账作者
+        function: 交换沿途手账
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 获准拍摄的公共景点清单
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 地方路线摄影师
+        baseline: 你因获准拍摄的公共景点清单与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 获准拍摄的公共景点清单
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 旅行手账作者与地方路线摄影师曾共同参与当地的交换沿途手账，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 地方路线摄影师
+        function: 画一幅窗外轮廓
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 获准拍摄的公共景点清单
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 旅行手账作者
+        baseline: 你因获准拍摄的公共景点清单与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 获准拍摄的公共景点清单
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 地方路线摄影师与旅行手账作者曾共同参与当地的画一幅窗外轮廓，双方同意保持联系。
+    activities:
+      交换沿途手账:
+        places:
+        - 深夜机场候机区
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}翻到一页尚未贴照片的记录，请你讲一个停留点。'
+        beats:
+          trigger: '{npc}翻到一页尚未贴照片的记录，请你讲一个停留点。'
+          objective: 交换沿途手账
+          choice: 先参与交换沿途手账，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      画一幅窗外轮廓:
+        places:
+        - 停电民宿客厅
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}借着公共应急灯铺开纸，请你选一处可见的屋檐。'
+        beats:
+          trigger: '{npc}借着公共应急灯铺开纸，请你选一处可见的屋檐。'
+          objective: 画一幅窗外轮廓
+          choice: 先参与画一幅窗外轮廓，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      挑选地方明信片:
+        places:
+        - 偏远小镇唯一便利店
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}把几张明信片排开，问你哪一张像今天看到的街景。'
+        beats:
+          trigger: '{npc}把几张明信片排开，问你哪一张像今天看到的街景。'
+          objective: 挑选地方明信片
+          choice: 先参与挑选地方明信片，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      共记海面灯火:
+        places:
+        - 最后一班渡轮
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}指着公共甲板外的灯，请你分辨固定灯塔与船灯。'
+        beats:
+          trigger: '{npc}指着公共甲板外的灯，请你分辨固定灯塔与船灯。'
+          objective: 共记海面灯火
+          choice: 先参与共记海面灯火，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理回程照片:
+        places:
+        - 回程前的空车站
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}打开自己的相册，请你挑一张适合留在手账里。'
+        beats:
+          trigger: '{npc}打开自己的相册，请你挑一张适合留在手账里。'
+          objective: 整理回程照片
+          choice: 先参与整理回程照片，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      设计海岸散步图:
+        places:
+        - 海岛度假村
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}递来纸质地图，问你愿不愿意标一处树荫。'
+        beats:
+          trigger: '{npc}递来纸质地图，问你愿不愿意标一处树荫。'
+          objective: 设计海岸散步图
+          choice: 先参与设计海岸散步图，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      编写营地早餐单:
+        places:
+        - 露营营地
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}把现有食材写在纸上，请你选一种简单搭配。'
+        beats:
+          trigger: '{npc}把现有食材写在纸上，请你选一种简单搭配。'
+          objective: 编写营地早餐单
+          choice: 先参与编写营地早餐单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      更新沿途停靠表:
+        places:
+        - 高速公路服务区
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在休息区拿出路线，请你圈出想多停的一站。'
+        beats:
+          trigger: '{npc}在休息区拿出路线，请你圈出想多停的一站。'
+          objective: 更新沿途停靠表
+          choice: 先参与更新沿途停靠表，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 小镇商店在地图角落盖当天的小印章，但旅人不必为了集齐而赶路。
+    pressures:
+      返程班次取消:
+        source: 预定返程班次被取消
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：预定返程班次被取消。'
+          objective: 确认替代交通与各自可接受的停留时间
+          choice: 查询其他班次，或分别安排回程
+          immediate: 预定返程班次被取消，目前需要先说明各自能承担的工作。
+          near: 住宿和同行计划需按新时间重新确认；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核返程班次取消的处理结果。
+        far_consequence: 住宿和同行计划需按新时间重新确认，后续安排需重新通知参与者。
+      住宿账单项目不明:
+        source: 退房账单多了一项未说明的费用
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：退房账单多了一项未说明的费用。'
+          objective: 核对约定并向店家询问
+          choice: 出示原订房记录，或要求分项说明
+          immediate: 退房账单多了一项未说明的费用，目前需要先说明各自能承担的工作。
+          near: 最终结算会影响双方的共同费用记录；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核住宿账单项目不明的处理结果。
+        far_consequence: 最终结算会影响双方的共同费用记录，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 远途休假季
+      aesthetics:
+      - 暖色生活流
+      - 写实文学
+      - 恋爱轻喜
+      places:
+      - 深夜机场候机区
+      - 停电民宿客厅
+      - 偏远小镇唯一便利店
+      - 最后一班渡轮
+      - 回程前的空车站
+      - 海岛度假村
+      - 露营营地
+      - 高速公路服务区
+  契约城与非人街坊:
+    eras:
+    - 契约共存时代
+    aesthetics:
+    - 都市轻悬疑
+    rule: 不同族群共同生活，契约为公共服务约定边界，不能代替人的意愿。
+    social_rule: 真名仅用于本人授权的事务，契约不能制造感情或强迫私人关系。
+    places:
+      契约登记所:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校译公共服务条款
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      真名保管库:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 设计来访说明
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      非人族夜市:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理跨族菜单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      结界检查站:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 绘制公共通行指南
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 契约文书译员
+        function: 校译公共服务条款
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 允许公开查阅的条款样本
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 社区服务协调员
+        baseline: 你因允许公开查阅的条款样本与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 允许公开查阅的条款样本
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 契约文书译员与社区服务协调员曾共同参与当地的校译公共服务条款，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 社区服务协调员
+        function: 设计来访说明
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 允许公开查阅的条款样本
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 契约文书译员
+        baseline: 你因允许公开查阅的条款样本与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 允许公开查阅的条款样本
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 社区服务协调员与契约文书译员曾共同参与当地的设计来访说明，双方同意保持联系。
+    activities:
+      校译公共服务条款:
+        places:
+        - 契约登记所
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}把两种语言的样本并排，请你找一处不易理解的用词。'
+        beats:
+          trigger: '{npc}把两种语言的样本并排，请你找一处不易理解的用词。'
+          objective: 校译公共服务条款
+          choice: 先参与校译公共服务条款，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      设计来访说明:
+        places:
+        - 真名保管库
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在公共接待区展示空白样表，请你核对办理步骤。'
+        beats:
+          trigger: '{npc}在公共接待区展示空白样表，请你核对办理步骤。'
+          objective: 设计来访说明
+          choice: 先参与设计来访说明，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理跨族菜单:
+        places:
+        - 非人族夜市
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}指着摊主确认的原料说明，请你选择更明白的表述。'
+        beats:
+          trigger: '{npc}指着摊主确认的原料说明，请你选择更明白的表述。'
+          objective: 整理跨族菜单
+          choice: 先参与整理跨族菜单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      绘制公共通行指南:
+        places:
+        - 结界检查站
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}递来不含个人资料的路图，请你标出可询问的窗口。'
+        beats:
+          trigger: '{npc}递来不含个人资料的路图，请你标出可询问的窗口。'
+          objective: 绘制公共通行指南
+          choice: 先参与绘制公共通行指南，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 登记处提供空白练习表，让来访者先试填再决定是否正式申请。
+    pressures:
+      条款翻译产生歧义:
+        source: 两种语言对服务期限的理解不同
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两种语言对服务期限的理解不同。'
+          objective: 请双方确认原意并修订条款
+          choice: 咨询独立译员，或暂停争议部分
+          immediate: 两种语言对服务期限的理解不同，目前需要先说明各自能承担的工作。
+          near: 之后的文本需保存双语确认记录；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核条款翻译产生歧义的处理结果。
+        far_consequence: 之后的文本需保存双语确认记录，后续安排需重新通知参与者。
+      公共登记出现重复:
+        source: 同一项申请出现了两份不同版本
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：同一项申请出现了两份不同版本。'
+          objective: 核实本人选择并取消无效版本
+          choice: 邀请申请人核对，或先冻结重复办理
+          immediate: 同一项申请出现了两份不同版本，目前需要先说明各自能承担的工作。
+          near: 服务机构需要更新版本管理办法；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核公共登记出现重复的处理结果。
+        far_consequence: 服务机构需要更新版本管理办法，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 契约共存时代
+      aesthetics:
+      - 都市妖异奇谭
+      - 都市轻悬疑
+      places:
+      - 契约登记所
+      - 真名保管库
+      - 非人族夜市
+      - 结界检查站
+  传媒编辑室与公开记录:
+    eras:
+    - 传媒舆论危机期
+    aesthetics:
+    - 都市轻悬疑
+    - 暗潮涌动
+    - 行当正剧
+    rule: 新闻、直播与公共声明相互影响，完整记录比短片段更难被看见。
+    social_rule: 事实、推测与评论分开标记，发布须遵守当事人授权范围。
+    places:
+      直播平台危机会议室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 设计公开事实问答
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      录音棚控制室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 编排采访章节
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      美术馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校订展览导览词
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 事实核查编辑
+        function: 设计公开事实问答
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 保留来源标记的公开资料清单
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 公共节目策划人
+        baseline: 你因保留来源标记的公开资料清单与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 保留来源标记的公开资料清单
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 事实核查编辑与公共节目策划人曾共同参与当地的设计公开事实问答，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 公共节目策划人
+        function: 编排采访章节
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 保留来源标记的公开资料清单
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 事实核查编辑
+        baseline: 你因保留来源标记的公开资料清单与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 保留来源标记的公开资料清单
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 公共节目策划人与事实核查编辑曾共同参与当地的编排采访章节，双方同意保持联系。
+    activities:
+      设计公开事实问答:
+        places:
+        - 直播平台危机会议室
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在非应急的工作时段递来提纲，请你找一句容易误解的话。'
+        beats:
+          trigger: '{npc}在非应急的工作时段递来提纲，请你找一句容易误解的话。'
+          objective: 设计公开事实问答
+          choice: 先参与设计公开事实问答，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      编排采访章节:
+        places:
+        - 录音棚控制室
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}打开受访者确认的片段目录，请你比较章节顺序。'
+        beats:
+          trigger: '{npc}打开受访者确认的片段目录，请你比较章节顺序。'
+          objective: 编排采访章节
+          choice: 先参与编排采访章节，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      校订展览导览词:
+        places:
+        - 美术馆
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}指着展签初稿，请你核对一处作品年份。'
+        beats:
+          trigger: '{npc}指着展签初稿，请你核对一处作品年份。'
+          objective: 校订展览导览词
+          choice: 先参与校订展览导览词，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 讨论桌保留一个待核实栏，空白不被当作必须立即补齐的错误。
+    pressures:
+      片段传播遗漏前提:
+        source: 公开节目被截取成与原意不同的短片
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：公开节目被截取成与原意不同的短片。'
+          objective: 保存完整材料并确认澄清边界
+          choice: 发布完整上下文，或先联系受访者
+          immediate: 公开节目被截取成与原意不同的短片，目前需要先说明各自能承担的工作。
+          near: 后续节目需要更清楚地标注原始来源；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核片段传播遗漏前提的处理结果。
+        far_consequence: 后续节目需要更清楚地标注原始来源，后续安排需重新通知参与者。
+      公开记录版本冲突:
+        source: 两份正式记录对同一时间写法不同
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两份正式记录对同一时间写法不同。'
+          objective: 向来源方核实并标出待确认部分
+          choice: 查询原始登记，或暂缓引用
+          immediate: 两份正式记录对同一时间写法不同，目前需要先说明各自能承担的工作。
+          near: 更正后需要通知已引用的协作者；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核公开记录版本冲突的处理结果。
+        far_consequence: 更正后需要通知已引用的协作者，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 传媒舆论危机期
+      aesthetics:
+      - 都市轻悬疑
+      - 暗潮涌动
+      - 行当正剧
+      places:
+      - 直播平台危机会议室
+      - 录音棚控制室
+      - 美术馆
+  旧町神怪与灯会:
+    eras:
+    - 神怪共存旧町
+    aesthetics:
+    - 都市妖异奇谭
+    - 怪谈夜话
+    - 和风物哀
+    rule: 神怪与居民共同经营旧町，节庆将不同作息的人带到同一条街上。
+    social_rule: 族群习惯需由本人解释，名号不能替代个人意愿。
+    places:
+      海边浴衣祭神社后阶梯:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试挂灯会纸签
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      山间温泉旅馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 编写街区晨游图
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      寺庙后院:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理旧町传说
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 灯会道具匠
+        function: 试挂灯会纸签
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 居民同意收录的节庆小册
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 街区节庆记录人
+        baseline: 你因居民同意收录的节庆小册与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 居民同意收录的节庆小册
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 灯会道具匠与街区节庆记录人曾共同参与当地的试挂灯会纸签，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 街区节庆记录人
+        function: 编写街区晨游图
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 居民同意收录的节庆小册
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 灯会道具匠
+        baseline: 你因居民同意收录的节庆小册与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 居民同意收录的节庆小册
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 街区节庆记录人与灯会道具匠曾共同参与当地的编写街区晨游图，双方同意保持联系。
+    activities:
+      试挂灯会纸签:
+        places:
+        - 海边浴衣祭神社后阶梯
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在开放路段递给你一张纸签，问你想画哪种海浪。'
+        beats:
+          trigger: '{npc}在开放路段递给你一张纸签，问你想画哪种海浪。'
+          objective: 试挂灯会纸签
+          choice: 先参与试挂灯会纸签，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      编写街区晨游图:
+        places:
+        - 山间温泉旅馆
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在公共休息区展开地图，请你补一条安静路线。'
+        beats:
+          trigger: '{npc}在公共休息区展开地图，请你补一条安静路线。'
+          objective: 编写街区晨游图
+          choice: 先参与编写街区晨游图，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理旧町传说:
+        places:
+        - 寺庙后院
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}将不同讲述者的版本分开，请你比较同一段结尾。'
+        beats:
+          trigger: '{npc}将不同讲述者的版本分开，请你比较同一段结尾。'
+          objective: 整理旧町传说
+          choice: 先参与整理旧町传说，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 纸灯可以只画图不写愿望，未点亮的也会被认真挂好。
+    pressures:
+      灯会路线需要改动:
+        source: 一段旧街封修占用了灯会通道
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：一段旧街封修占用了灯会通道。'
+          objective: 协调绕行路线并保留居民出入口
+          choice: 先走一遍替代路，或缩减灯组
+          immediate: 一段旧街封修占用了灯会通道，目前需要先说明各自能承担的工作。
+          near: 下一轮灯会需要更新导览图；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核灯会路线需要改动的处理结果。
+        far_consequence: 下一轮灯会需要更新导览图，后续安排需重新通知参与者。
+      传说署名有争议:
+        source: 两位讲述者都认为刊物混淆了自己的版本
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两位讲述者都认为刊物混淆了自己的版本。'
+          objective: 分别核对版本与署名
+          choice: 回访本人，或将两种说法并列
+          immediate: 两位讲述者都认为刊物混淆了自己的版本，目前需要先说明各自能承担的工作。
+          near: 新版小册将说明不同讲述来源；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核传说署名有争议的处理结果。
+        far_consequence: 新版小册将说明不同讲述来源，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 神怪共存旧町
+      aesthetics:
+      - 都市妖异奇谭
+      - 怪谈夜话
+      - 和风物哀
+      places:
+      - 海边浴衣祭神社后阶梯
+      - 山间温泉旅馆
+      - 寺庙后院
+  同人街区与录音协作:
+    eras:
+    - 秋叶原架空街区
+    aesthetics:
+    - 亚文化地下物语
+    - 日系轻喜GAL风
+    rule: 创作者、配音者与店铺围绕公开活动协作，作品归属和休息时间同样重要。
+    social_rule: 只制作获得授权的非露骨作品，参与者姓名与录音公开范围由本人确认。
+    places:
+      声优录音棚:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试录地方故事
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      女仆咖啡厅后厨:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校对活动菜单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      同人展备用更衣室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 制作展会路线牌
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      电竞基地训练室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理公开赛剪辑目录
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      Cosplay暗房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 检查道具产品照
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      录音棚控制室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试听环境音节目
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 独立刊物编辑
+        function: 试录地方故事
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 已获得作者授权的样稿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 音频节目制作人
+        baseline: 你因已获得作者授权的样稿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 已获得作者授权的样稿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 独立刊物编辑与音频节目制作人曾共同参与当地的试录地方故事，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 音频节目制作人
+        function: 校对活动菜单
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 已获得作者授权的样稿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 独立刊物编辑
+        baseline: 你因已获得作者授权的样稿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 已获得作者授权的样稿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 音频节目制作人与独立刊物编辑曾共同参与当地的校对活动菜单，双方同意保持联系。
+    activities:
+      试录地方故事:
+        places:
+        - 声优录音棚
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}把获准使用的短篇放在话筒旁，请你挑一种叙述节奏。'
+        beats:
+          trigger: '{npc}把获准使用的短篇放在话筒旁，请你挑一种叙述节奏。'
+          objective: 试录地方故事
+          choice: 先参与试录地方故事，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      校对活动菜单:
+        places:
+        - 女仆咖啡厅后厨
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在备餐结束的桌边展示活动稿，请你检查菜名。'
+        beats:
+          trigger: '{npc}在备餐结束的桌边展示活动稿，请你检查菜名。'
+          objective: 校对活动菜单
+          choice: 先参与校对活动菜单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      制作展会路线牌:
+        places:
+        - 同人展备用更衣室
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在活动开放前空置的布置区，请你核对箭头方向。'
+        beats:
+          trigger: '{npc}在活动开放前空置的布置区，请你核对箭头方向。'
+          objective: 制作展会路线牌
+          choice: 先参与制作展会路线牌，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理公开赛剪辑目录:
+        places:
+        - 电竞基地训练室
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}打开选手授权的比赛片段，请你标一段精彩配合。'
+        beats:
+          trigger: '{npc}打开选手授权的比赛片段，请你标一段精彩配合。'
+          objective: 整理公开赛剪辑目录
+          choice: 先参与整理公开赛剪辑目录，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      检查道具产品照:
+        places:
+        - Cosplay暗房
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在不涉及人物拍摄的工作台上，请你比较两张道具照片。'
+        beats:
+          trigger: '{npc}在不涉及人物拍摄的工作台上，请你比较两张道具照片。'
+          objective: 检查道具产品照
+          choice: 先参与检查道具产品照，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      试听环境音节目:
+        places:
+        - 录音棚控制室
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}播放街区采集的授权环境音，请你选一处转场。'
+        beats:
+          trigger: '{npc}播放街区采集的授权环境音，请你选一处转场。'
+          objective: 试听环境音节目
+          choice: 先参与试听环境音节目，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 每场活动结束都会给幕后协作者留一页可自行填写的记录。
+    pressures:
+      样刊署名缺漏:
+        source: 印前样刊遗漏了一位协作者
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：印前样刊遗漏了一位协作者。'
+          objective: 确认署名并修正待印文件
+          choice: 联系本人核对，或暂缓送印
+          immediate: 印前样刊遗漏了一位协作者，目前需要先说明各自能承担的工作。
+          near: 下一期将明确协作者确认环节；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核样刊署名缺漏的处理结果。
+        far_consequence: 下一期将明确协作者确认环节，后续安排需重新通知参与者。
+      场地预约突然改变:
+        source: 原定公开节目场地取消了预约
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：原定公开节目场地取消了预约。'
+          objective: 商量替代场地或延期通知
+          choice: 联系其他空间，或公布改期
+          immediate: 原定公开节目场地取消了预约，目前需要先说明各自能承担的工作。
+          near: 后续节目需重新确认参与者时间；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核场地预约突然改变的处理结果。
+        far_consequence: 后续节目需重新确认参与者时间，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 秋叶原架空街区
+      aesthetics:
+      - 亚文化地下物语
+      - 日系轻喜GAL风
+      places:
+      - 声优录音棚
+      - 女仆咖啡厅后厨
+      - 同人展备用更衣室
+      - 电竞基地训练室
+      - Cosplay暗房
+      - 录音棚控制室
+  寒冬避难所公共生活:
+    eras:
+    - 避难所管制期
+    aesthetics:
+    - 寒冬避难所
+    - 废土粗粝
+    rule: 封闭聚落用轮班供暖和公共空间维持生活，居民仍能保有个人兴趣与休息。
+    social_rule: 公共安排需说明理由并接受复核，临时值班不授予支配他人的权力。
+    places:
+      避难所防爆闸门前:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 更新出入等候说明
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      幸存者地下避难所:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 筹划公共读书夜
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      工作室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 缝制共用收纳袋
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 公共空间协调员
+        function: 更新出入等候说明
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 公开可查的供暖与借用表
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 旧物修补匠
+        baseline: 你因公开可查的供暖与借用表与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 公开可查的供暖与借用表
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 公共空间协调员与旧物修补匠曾共同参与当地的更新出入等候说明，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 旧物修补匠
+        function: 筹划公共读书夜
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 公开可查的供暖与借用表
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 公共空间协调员
+        baseline: 你因公开可查的供暖与借用表与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 公开可查的供暖与借用表
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 旧物修补匠与公共空间协调员曾共同参与当地的筹划公共读书夜，双方同意保持联系。
+    activities:
+      更新出入等候说明:
+        places:
+        - 避难所防爆闸门前
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在内部等候区展示新版时段表，请你看哪里含糊。'
+        beats:
+          trigger: '{npc}在内部等候区展示新版时段表，请你看哪里含糊。'
+          objective: 更新出入等候说明
+          choice: 先参与更新出入等候说明，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      筹划公共读书夜:
+        places:
+        - 幸存者地下避难所
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}摆出可借阅的旧书，请你选一个主题。'
+        beats:
+          trigger: '{npc}摆出可借阅的旧书，请你选一个主题。'
+          objective: 筹划公共读书夜
+          choice: 先参与筹划公共读书夜，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      缝制共用收纳袋:
+        places:
+        - 工作室
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}递来分好尺寸的旧布，请你选一种缝法。'
+        beats:
+          trigger: '{npc}递来分好尺寸的旧布，请你选一种缝法。'
+          objective: 缝制共用收纳袋
+          choice: 先参与缝制共用收纳袋，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 读书夜允许自带手工活，不要求每个人发言。
+    pressures:
+      公共房间预约重复:
+        source: 两组居民同时预约了唯一的暖房
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两组居民同时预约了唯一的暖房。'
+          objective: 讨论分时使用或替代场所
+          choice: 核对原预约，或协商轮换
+          immediate: 两组居民同时预约了唯一的暖房，目前需要先说明各自能承担的工作。
+          near: 之后的预约将公开时段与容量；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核公共房间预约重复的处理结果。
+        far_consequence: 之后的预约将公开时段与容量，后续安排需重新通知参与者。
+      维修轮班需要替换:
+        source: 原定维修人员无法按期到场
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：原定维修人员无法按期到场。'
+          objective: 找到有资质的替班而不强迫无经验者接手
+          choice: 联系备班，或调整非必要活动
+          immediate: 原定维修人员无法按期到场，目前需要先说明各自能承担的工作。
+          near: 维修排程会影响下一周公共开放时间；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核维修轮班需要替换的处理结果。
+        far_consequence: 维修排程会影响下一周公共开放时间，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 避难所管制期
+      aesthetics:
+      - 寒冬避难所
+      - 废土粗粝
+      places:
+      - 避难所防爆闸门前
+      - 幸存者地下避难所
+      - 工作室
+  检疫站旁的生活区:
+    eras:
+    - 感染爆发初期
+    aesthetics:
+    - 感染隔离区
+    - 末日求生纪实
+    rule: 检疫站旁保留独立生活区域，居民以真实通告而非传闻安排往来。
+    social_rule: 检测与诊疗由专业人员负责，私人关系不能更改检疫记录。
+    places:
+      感染检疫隔离点:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 核对非诊疗区指示牌
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      家中厨房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理隔窗菜谱交换
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      夜班值班室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 编写服务问答
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 生活区物资联络员
+        function: 核对非诊疗区指示牌
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 经负责人确认的公共服务时段表
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 公共通知校对人
+        baseline: 你因经负责人确认的公共服务时段表与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 经负责人确认的公共服务时段表
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 生活区物资联络员与公共通知校对人曾共同参与当地的核对非诊疗区指示牌，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 公共通知校对人
+        function: 整理隔窗菜谱交换
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 经负责人确认的公共服务时段表
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 生活区物资联络员
+        baseline: 你因经负责人确认的公共服务时段表与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 经负责人确认的公共服务时段表
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 公共通知校对人与生活区物资联络员曾共同参与当地的整理隔窗菜谱交换，双方同意保持联系。
+    activities:
+      核对非诊疗区指示牌:
+        places:
+        - 感染检疫隔离点
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在生活区入口递来标识样稿，请你检查路线是否清楚。'
+        beats:
+          trigger: '{npc}在生活区入口递来标识样稿，请你检查路线是否清楚。'
+          objective: 核对非诊疗区指示牌
+          choice: 先参与核对非诊疗区指示牌，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理隔窗菜谱交换:
+        places:
+        - 家中厨房
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}隔着约好的交接窗递来纸条，请你补一种家常做法。'
+        beats:
+          trigger: '{npc}隔着约好的交接窗递来纸条，请你补一种家常做法。'
+          objective: 整理隔窗菜谱交换
+          choice: 先参与整理隔窗菜谱交换，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      编写服务问答:
+        places:
+        - 夜班值班室
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}取出已确认的公开通告，请你把常见问题分组。'
+        beats:
+          trigger: '{npc}取出已确认的公开通告，请你把常见问题分组。'
+          objective: 编写服务问答
+          choice: 先参与编写服务问答，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 公告栏同时留有手写版，让无法使用手机的人也能读到更新。
+    pressures:
+      旧版通告仍在流传:
+        source: 社区群转发了已被替换的服务通知
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：社区群转发了已被替换的服务通知。'
+          objective: 标明更新时间并通知受影响的人
+          choice: 请管理员置顶更正版，或逐户说明变化
+          immediate: 社区群转发了已被替换的服务通知，目前需要先说明各自能承担的工作。
+          near: 之后的公告需要统一版本标记；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核旧版通告仍在流传的处理结果。
+        far_consequence: 之后的公告需要统一版本标记，后续安排需重新通知参与者。
+      生活物资交接延迟:
+        source: 生活区日用品交接没有按约到达
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：生活区日用品交接没有按约到达。'
+          objective: 确认交接状态并安排公开替代方案
+          choice: 联系供应方，或公布延迟领取安排
+          immediate: 生活区日用品交接没有按约到达，目前需要先说明各自能承担的工作。
+          near: 下一轮配送需要重新约定时间；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核生活物资交接延迟的处理结果。
+        far_consequence: 下一轮配送需要重新约定时间，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 感染爆发初期
+      aesthetics:
+      - 感染隔离区
+      - 末日求生纪实
+      places:
+      - 感染检疫隔离点
+      - 家中厨房
+      - 夜班值班室
+  废土驿站与修补集市:
+    eras:
+    - 废土末世
+    aesthetics:
+    - 废土粗粝
+    - 末日求生纪实
+    rule: 驿站提供修补、补给和消息交换，废墟以外仍有值得维护的生活习惯。
+    social_rule: 共同物资要登记来源，交换可以拒绝，不以未知风险强迫同行。
+    places:
+      废土驿站:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 修补旧收音机
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      废弃搜刮药房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理建筑外部路标
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      幸存者地下避难所:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 制作集市物品标签
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 驿站工具维修人
+        function: 修补旧收音机
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 记录了查验日期的水源册
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 水源路线记录员
+        baseline: 你因记录了查验日期的水源册与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 记录了查验日期的水源册
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 驿站工具维修人与水源路线记录员曾共同参与当地的修补旧收音机，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 水源路线记录员
+        function: 整理建筑外部路标
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 记录了查验日期的水源册
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 驿站工具维修人
+        baseline: 你因记录了查验日期的水源册与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 记录了查验日期的水源册
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 水源路线记录员与驿站工具维修人曾共同参与当地的整理建筑外部路标，双方同意保持联系。
+    activities:
+      修补旧收音机:
+        places:
+        - 废土驿站
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}拆开已断电的旧机壳，请你核对仍完整的零件。'
+        beats:
+          trigger: '{npc}拆开已断电的旧机壳，请你核对仍完整的零件。'
+          objective: 修补旧收音机
+          choice: 先参与修补旧收音机，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理建筑外部路标:
+        places:
+        - 废弃搜刮药房
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}停在已确认通行的屋外，请你比较现存路标。'
+        beats:
+          trigger: '{npc}停在已确认通行的屋外，请你比较现存路标。'
+          objective: 整理建筑外部路标
+          choice: 先参与整理建筑外部路标，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      制作集市物品标签:
+        places:
+        - 幸存者地下避难所
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}将待交换物品摆上公共桌，请你写清可用与损坏处。'
+        beats:
+          trigger: '{npc}将待交换物品摆上公共桌，请你写清可用与损坏处。'
+          objective: 制作集市物品标签
+          choice: 先参与制作集市物品标签，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 交换摊把修过的地方做成明显记号，让接手的人看得见。
+    pressures:
+      补给路线改道:
+        source: 常用路线因坍塌不再通行
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：常用路线因坍塌不再通行。'
+          objective: 确认替代路线再安排补给
+          choice: 询问近期过路者，或延期出发
+          immediate: 常用路线因坍塌不再通行，目前需要先说明各自能承担的工作。
+          near: 新版路图需要注明坍塌位置；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核补给路线改道的处理结果。
+        far_consequence: 新版路图需要注明坍塌位置，后续安排需重新通知参与者。
+      公共工具缺件:
+        source: 共用工具箱缺少约定归还的零件
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：共用工具箱缺少约定归还的零件。'
+          objective: 查清借用记录并协调修补
+          choice: 联系借用者，或寻找可用替件
+          immediate: 共用工具箱缺少约定归还的零件，目前需要先说明各自能承担的工作。
+          near: 之后的借用登记将增加归还检查；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核公共工具缺件的处理结果。
+        far_consequence: 之后的借用登记将增加归还检查，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 废土末世
+      aesthetics:
+      - 废土粗粝
+      - 末日求生纪实
+      places:
+      - 废土驿站
+      - 废弃搜刮药房
+      - 幸存者地下避难所
+  星海边境生活站:
+    eras:
+    - 星际殖民地
+    aesthetics:
+    - 星海冷光
+    - 行当正剧
+    rule: 殖民站以轮班、检修与物资交换维持生活，普通休闲也要适应轨道周期。
+    social_rule: 检修区域以实际许可为准，岗位资历不能越过舱段操作权限。
+    places:
+      太空站舱段:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 绘制舷窗观星表
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      工作室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 制作舱内植物名牌
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      图书馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理母星影像目录
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 舱段检修员
+        function: 绘制舷窗观星表
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明校验时间的舱段日志
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 站内物资记录人
+        baseline: 你因注明校验时间的舱段日志与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明校验时间的舱段日志
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 舱段检修员与站内物资记录人曾共同参与当地的绘制舷窗观星表，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 站内物资记录人
+        function: 制作舱内植物名牌
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明校验时间的舱段日志
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 舱段检修员
+        baseline: 你因注明校验时间的舱段日志与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明校验时间的舱段日志
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 站内物资记录人与舱段检修员曾共同参与当地的制作舱内植物名牌，双方同意保持联系。
+    activities:
+      绘制舷窗观星表:
+        places:
+        - 太空站舱段
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}指着公共观景窗，请你记录一处逐渐移过的星群。'
+        beats:
+          trigger: '{npc}指着公共观景窗，请你记录一处逐渐移过的星群。'
+          objective: 绘制舷窗观星表
+          choice: 先参与绘制舷窗观星表，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      制作舱内植物名牌:
+        places:
+        - 工作室
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}摆出水培区批准使用的材料，请你挑一种标牌形状。'
+        beats:
+          trigger: '{npc}摆出水培区批准使用的材料，请你挑一种标牌形状。'
+          objective: 制作舱内植物名牌
+          choice: 先参与制作舱内植物名牌，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理母星影像目录:
+        places:
+        - 图书馆
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在公共阅览终端打开授权影像，请你补一个地名。'
+        beats:
+          trigger: '{npc}在公共阅览终端打开授权影像，请你补一个地名。'
+          objective: 整理母星影像目录
+          choice: 先参与整理母星影像目录，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 居民会在公共星图边上贴出自己的家乡方向，但不必署名。
+    pressures:
+      货运清单与实物不符:
+        source: 补给舱到货与清单上的数量不同
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：补给舱到货与清单上的数量不同。'
+          objective: 核对交接而不挪用公共储备
+          choice: 联系货运方，或先登记缺项
+          immediate: 补给舱到货与清单上的数量不同，目前需要先说明各自能承担的工作。
+          near: 下一次补给需要补足缺项并更正清单；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核货运清单与实物不符的处理结果。
+        far_consequence: 下一次补给需要补足缺项并更正清单，后续安排需重新通知参与者。
+      检修时段调整:
+        source: 观景舱检修与公开观测活动撞期
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：观景舱检修与公开观测活动撞期。'
+          objective: 改用其他可开放的观测位置
+          choice: 转到备用舷窗，或延期活动
+          immediate: 观景舱检修与公开观测活动撞期，目前需要先说明各自能承担的工作。
+          near: 之后的观测表将注明检修窗口；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核检修时段调整的处理结果。
+        far_consequence: 之后的观测表将注明检修窗口，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 星际殖民地
+      aesthetics:
+      - 星海冷光
+      - 行当正剧
+      places:
+      - 太空站舱段
+      - 工作室
+      - 图书馆
+  赛博街区与公共终端:
+    eras:
+    - 近未来都市
+    aesthetics:
+    - 赛博霓虹
+    - 赛博都市夜行
+    - 雨夜霓虹
+    rule: 公共终端协调城市服务，居民保留线下申诉和匿名参与社区活动的渠道。
+    social_rule: 算法记录可被核对，定位与个人资料不能因熟识而任意调取。
+    places:
+      全息酒吧:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试放街区投影
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      立体停车库:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校对无障碍导览
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      末班地铁:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理换乘提示
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      写字楼:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 测试共享预约屏
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 公共终端维护员
+        function: 试放街区投影
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 去除个人身份的服务统计
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 社区数据整理人
+        baseline: 你因去除个人身份的服务统计与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 去除个人身份的服务统计
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 公共终端维护员与社区数据整理人曾共同参与当地的试放街区投影，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 社区数据整理人
+        function: 校对无障碍导览
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 去除个人身份的服务统计
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 公共终端维护员
+        baseline: 你因去除个人身份的服务统计与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 去除个人身份的服务统计
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 社区数据整理人与公共终端维护员曾共同参与当地的校对无障碍导览，双方同意保持联系。
+    activities:
+      试放街区投影:
+        places:
+        - 全息酒吧
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在活动测试时段打开公共投影，请你比较两版街景。'
+        beats:
+          trigger: '{npc}在活动测试时段打开公共投影，请你比较两版街景。'
+          objective: 试放街区投影
+          choice: 先参与试放街区投影，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      校对无障碍导览:
+        places:
+        - 立体停车库
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}站在行人区，请你核对屏幕箭头与实际出口。'
+        beats:
+          trigger: '{npc}站在行人区，请你核对屏幕箭头与实际出口。'
+          objective: 校对无障碍导览
+          choice: 先参与校对无障碍导览，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理换乘提示:
+        places:
+        - 末班地铁
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}指着公共线路图，请你看哪种提示更容易理解。'
+        beats:
+          trigger: '{npc}指着公共线路图，请你看哪种提示更容易理解。'
+          objective: 整理换乘提示
+          choice: 先参与整理换乘提示，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      测试共享预约屏:
+        places:
+        - 写字楼
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}打开测试页面，请你试排一场公开讨论。'
+        beats:
+          trigger: '{npc}打开测试页面，请你试排一场公开讨论。'
+          objective: 测试共享预约屏
+          choice: 先参与测试共享预约屏，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 街区公告旁始终保留一块能手写留言的小板。
+    pressures:
+      服务记录误关联:
+        source: 公共终端将两人的申请合并
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：公共终端将两人的申请合并。'
+          objective: 核对原始申请并提出更正
+          choice: 申请人工复核，或暂缓相关服务
+          immediate: 公共终端将两人的申请合并，目前需要先说明各自能承担的工作。
+          near: 修复结果需通知受影响的申请人；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核服务记录误关联的处理结果。
+        far_consequence: 修复结果需通知受影响的申请人，后续安排需重新通知参与者。
+      社区终端维护撞期:
+        source: 公共终端升级与社区活动同时进行
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：公共终端升级与社区活动同时进行。'
+          objective: 保留线下登记渠道并重排测试
+          choice: 使用纸面报名，或延后升级
+          immediate: 公共终端升级与社区活动同时进行，目前需要先说明各自能承担的工作。
+          near: 之后的维护窗口需提前公示；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核社区终端维护撞期的处理结果。
+        far_consequence: 之后的维护窗口需提前公示，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 近未来都市
+      aesthetics:
+      - 赛博霓虹
+      - 赛博都市夜行
+      - 雨夜霓虹
+      places:
+      - 全息酒吧
+      - 立体停车库
+      - 末班地铁
+      - 写字楼
+  地下城安全层营地:
+    eras:
+    - 地下城中层营地
+    aesthetics:
+    - 奇幻迷宫慢生活
+    - 异世界冒险纪实
+    rule: 安全层为探索者提供修补、休息与地图交换，离开营地才进入未知区域。
+    social_rule: 未经验证的路线要标注存疑，任何人都可拒绝临时加入探索。
+    places:
+      迷宫中层安全屋:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 拼接探索草图
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      老字号客栈:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 交换营地菜谱
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      图书馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理怪物观察笔记
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 营地地图绘制员
+        function: 拼接探索草图
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 分开标注实测与传闻的路图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 补给站维修人
+        baseline: 你因分开标注实测与传闻的路图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 分开标注实测与传闻的路图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 营地地图绘制员与补给站维修人曾共同参与当地的拼接探索草图，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 补给站维修人
+        function: 交换营地菜谱
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 分开标注实测与传闻的路图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 营地地图绘制员
+        baseline: 你因分开标注实测与传闻的路图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 分开标注实测与传闻的路图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 补给站维修人与营地地图绘制员曾共同参与当地的交换营地菜谱，双方同意保持联系。
+    activities:
+      拼接探索草图:
+        places:
+        - 迷宫中层安全屋
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}将归队者自愿提供的草图分开，请你找重合部分。'
+        beats:
+          trigger: '{npc}将归队者自愿提供的草图分开，请你找重合部分。'
+          objective: 拼接探索草图
+          choice: 先参与拼接探索草图，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      交换营地菜谱:
+        places:
+        - 老字号客栈
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在营地旅店的餐桌上，请你给一种干粮想新吃法。'
+        beats:
+          trigger: '{npc}在营地旅店的餐桌上，请你给一种干粮想新吃法。'
+          objective: 交换营地菜谱
+          choice: 先参与交换营地菜谱，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理怪物观察笔记:
+        places:
+        - 图书馆
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在安全层阅览室翻开观察册，请你区分目击和猜测。'
+        beats:
+          trigger: '{npc}在安全层阅览室翻开观察册，请你区分目击和猜测。'
+          objective: 整理怪物观察笔记
+          choice: 先参与整理怪物观察笔记，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 每张新图留有一个空框，供后来者补上尚未验证的路段。
+    pressures:
+      路线标记互相矛盾:
+        source: 两队提交的同一路口记录不同
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两队提交的同一路口记录不同。'
+          objective: 确认适用时段再发布地图
+          choice: 请队员复述时间，或将该段暂列未知
+          immediate: 两队提交的同一路口记录不同，目前需要先说明各自能承担的工作。
+          near: 之后的地图将加入更新时间；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核路线标记互相矛盾的处理结果。
+        far_consequence: 之后的地图将加入更新时间，后续安排需重新通知参与者。
+      公共修补台损坏:
+        source: 营地共用的修补台无法继续使用
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：营地共用的修补台无法继续使用。'
+          objective: 安排替代工作台和修理顺序
+          choice: 借用备用桌，或暂停非必要修补
+          immediate: 营地共用的修补台无法继续使用，目前需要先说明各自能承担的工作。
+          near: 新的维修安排需要通知下一批队伍；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核公共修补台损坏的处理结果。
+        far_consequence: 新的维修安排需要通知下一批队伍，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 地下城中层营地
+      aesthetics:
+      - 奇幻迷宫慢生活
+      - 异世界冒险纪实
+      places:
+      - 迷宫中层安全屋
+      - 老字号客栈
+      - 图书馆
+  王都工坊与委托街:
+    eras:
+    - 异世界王都
+    aesthetics:
+    - 异世界冒险纪实
+    - 奇幻迷宫慢生活
+    rule: 王都的冒险、工坊与普通职业同属行会网络，委托既有报酬也有明确边界。
+    social_rule: 等级不能代替授权，未经同意不把旁人写入委托。
+    places:
+      领主石堡:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理公开展品
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      魔法工坊地下室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试验照明法器
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      迷宫中层安全屋:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 编写补给指引
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 行会委托文书
+        function: 整理公开展品
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明验收方式的委托样本
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 魔法器具修理师
+        baseline: 你因注明验收方式的委托样本与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明验收方式的委托样本
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 行会委托文书与魔法器具修理师曾共同参与当地的整理公开展品，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 魔法器具修理师
+        function: 试验照明法器
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明验收方式的委托样本
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 行会委托文书
+        baseline: 你因注明验收方式的委托样本与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明验收方式的委托样本
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 魔法器具修理师与行会委托文书曾共同参与当地的试验照明法器，双方同意保持联系。
+    activities:
+      整理公开展品:
+        places:
+        - 领主石堡
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在开放展厅里，请你为一件日常法器拟说明。'
+        beats:
+          trigger: '{npc}在开放展厅里，请你为一件日常法器拟说明。'
+          objective: 整理公开展品
+          choice: 先参与整理公开展品，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      试验照明法器:
+        places:
+        - 魔法工坊地下室
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}将两盏检修过的小灯摆好，请你比较光色。'
+        beats:
+          trigger: '{npc}将两盏检修过的小灯摆好，请你比较光色。'
+          objective: 试验照明法器
+          choice: 先参与试验照明法器，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      编写补给指引:
+        places:
+        - 迷宫中层安全屋
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在安全区桌边展开路签，请你检查补给点标注。'
+        beats:
+          trigger: '{npc}在安全区桌边展开路签，请你检查补给点标注。'
+          objective: 编写补给指引
+          choice: 先参与编写补给指引，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 完成委托的人可以在留言板写一条给后来者的经验。
+    pressures:
+      委托验收条件改变:
+        source: 交付前委托人提出了原单没有的要求
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：交付前委托人提出了原单没有的要求。'
+          objective: 区分原有义务和新增工作
+          choice: 按原单验收，或另谈补充委托
+          immediate: 交付前委托人提出了原单没有的要求，目前需要先说明各自能承担的工作。
+          near: 行会需要保留此次条件变更记录；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核委托验收条件改变的处理结果。
+        far_consequence: 行会需要保留此次条件变更记录，后续安排需重新通知参与者。
+      工坊共享设备撞期:
+        source: 两组工匠预约了同一台检验设备
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两组工匠预约了同一台检验设备。'
+          objective: 协调检验顺序和替代工具
+          choice: 交换时段，或申请其他工坊协助
+          immediate: 两组工匠预约了同一台检验设备，目前需要先说明各自能承担的工作。
+          near: 排程将决定下一批委托的交付日期；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核工坊共享设备撞期的处理结果。
+        far_consequence: 排程将决定下一批委托的交付日期，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 异世界王都
+      aesthetics:
+      - 异世界冒险纪实
+      - 奇幻迷宫慢生活
+      places:
+      - 领主石堡
+      - 魔法工坊地下室
+      - 迷宫中层安全屋
+  幕末町屋与道场:
+    eras:
+    - 文久幕末京都风云
+    aesthetics:
+    - 幕末残雨物哀
+    - 和风物哀
+    rule: 町屋与道场处在新旧秩序交接中，日常手艺和公开身份不断被重新解释。
+    social_rule: 携带书信不等于替寄信人表态，借用场所须征求管理者同意。
+    places:
+      鸭川河畔町屋雨廊:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 辨认旧屋木纹
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      壬生屯所阴暗道场:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理练习用具
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      神乐坂置屋:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校对艺事邀帖
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 町屋修缮匠
+        function: 辨认旧屋木纹
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明修缮部位的旧屋图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 道场文书
+        baseline: 你因注明修缮部位的旧屋图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明修缮部位的旧屋图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 町屋修缮匠与道场文书曾共同参与当地的辨认旧屋木纹，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 道场文书
+        function: 整理练习用具
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明修缮部位的旧屋图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 町屋修缮匠
+        baseline: 你因注明修缮部位的旧屋图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明修缮部位的旧屋图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 道场文书与町屋修缮匠曾共同参与当地的整理练习用具，双方同意保持联系。
+    activities:
+      辨认旧屋木纹:
+        places:
+        - 鸭川河畔町屋雨廊
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}沿着修补处放下木样，请你看新旧木色的差别。'
+        beats:
+          trigger: '{npc}沿着修补处放下木样，请你看新旧木色的差别。'
+          objective: 辨认旧屋木纹
+          choice: 先参与辨认旧屋木纹，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理练习用具:
+        places:
+        - 壬生屯所阴暗道场
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在管理者许可的空场里，请你一起核对器具数量。'
+        beats:
+          trigger: '{npc}在管理者许可的空场里，请你一起核对器具数量。'
+          objective: 整理练习用具
+          choice: 先参与整理练习用具，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      校对艺事邀帖:
+        places:
+        - 神乐坂置屋
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在公开接待处展开邀帖，请你核对客人确认的称呼。'
+        beats:
+          trigger: '{npc}在公开接待处展开邀帖，请你核对客人确认的称呼。'
+          objective: 校对艺事邀帖
+          choice: 先参与校对艺事邀帖，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 借场结束后，来客会把自己的木牌从门旁取回。
+    pressures:
+      修缮委托签名不明:
+        source: 一份修缮委托的签名无法确认属于谁
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：一份修缮委托的签名无法确认属于谁。'
+          objective: 核实授权再决定是否开工
+          choice: 请屋主当面确认，或暂缓施工
+          immediate: 一份修缮委托的签名无法确认属于谁，目前需要先说明各自能承担的工作。
+          near: 委托方式会重新写入工匠约定；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核修缮委托签名不明的处理结果。
+        far_consequence: 委托方式会重新写入工匠约定，后续安排需重新通知参与者。
+      道场借用时段重叠:
+        source: 两组练习者获准在同一时段借场
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两组练习者获准在同一时段借场。'
+          objective: 协商分时安排并确认负责人
+          choice: 让两方说明需求，或另约一日
+          immediate: 两组练习者获准在同一时段借场，目前需要先说明各自能承担的工作。
+          near: 新的借场簿将公开可用时段；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核道场借用时段重叠的处理结果。
+        far_consequence: 新的借场簿将公开可用时段，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 文久幕末京都风云
+      aesthetics:
+      - 幕末残雨物哀
+      - 和风物哀
+      places:
+      - 鸭川河畔町屋雨廊
+      - 壬生屯所阴暗道场
+      - 神乐坂置屋
+  禁酒期爵士与报纸:
+    eras:
+    - 一九二八芝加哥禁酒期
+    aesthetics:
+    - 禁酒令爵士黑帮
+    - 芝加哥暗夜交锋
+    - 黑色电影
+    rule: 爵士演出、码头工人和地方报纸共享街区，人们在监管与谋生之间寻找空间。
+    social_rule: 采访和演出都需要本人同意，传闻不能直接充当指控。
+    places:
+      理发店暗门后地下酒吧:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 核对旧演出曲目
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      密歇根湖畔私酒卸货码头:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 记录码头口述史
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      黑帮教父防弹老爷车:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 采访旧车修复者
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 地方记者
+        function: 核对旧演出曲目
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 经演奏者确认的节目与访谈稿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 爵士乐谱整理人
+        baseline: 你因经演奏者确认的节目与访谈稿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 经演奏者确认的节目与访谈稿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 地方记者与爵士乐谱整理人曾共同参与当地的核对旧演出曲目，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 爵士乐谱整理人
+        function: 记录码头口述史
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 经演奏者确认的节目与访谈稿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 地方记者
+        baseline: 你因经演奏者确认的节目与访谈稿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 经演奏者确认的节目与访谈稿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 爵士乐谱整理人与地方记者曾共同参与当地的记录码头口述史，双方同意保持联系。
+    activities:
+      核对旧演出曲目:
+        places:
+        - 理发店暗门后地下酒吧
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在尚未营业的舞台边，请你认一段手写旋律。'
+        beats:
+          trigger: '{npc}在尚未营业的舞台边，请你认一段手写旋律。'
+          objective: 核对旧演出曲目
+          choice: 先参与核对旧演出曲目，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      记录码头口述史:
+        places:
+        - 密歇根湖畔私酒卸货码头
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在公共等候处展开采访提纲，请你补一个工作细节。'
+        beats:
+          trigger: '{npc}在公共等候处展开采访提纲，请你补一个工作细节。'
+          objective: 记录码头口述史
+          choice: 先参与记录码头口述史，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      采访旧车修复者:
+        places:
+        - 黑帮教父防弹老爷车
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在公开展示区的停车位旁，请你比较车体修复前的照片。'
+        beats:
+          trigger: '{npc}在公开展示区的停车位旁，请你比较车体修复前的照片。'
+          objective: 采访旧车修复者
+          choice: 先参与采访旧车修复者，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 乐手会在节目单边上记一首观众点过却尚未演的曲子。
+    pressures:
+      演出报道被断章引用:
+        source: 公开报道删去了音乐人原话的前提
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：公开报道删去了音乐人原话的前提。'
+          objective: 保存原稿并商量澄清方式
+          choice: 请报社更正，或由本人发布完整说明
+          immediate: 公开报道删去了音乐人原话的前提，目前需要先说明各自能承担的工作。
+          near: 之后的采访需确认引语审核方式；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核演出报道被断章引用的处理结果。
+        far_consequence: 之后的采访需确认引语审核方式，后续安排需重新通知参与者。
+      街区演出场地停用:
+        source: 演出场所的许可出现争议
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：演出场所的许可出现争议。'
+          objective: 找到合法替代场地并告知观众
+          choice: 联系社区礼堂，或延期退款
+          immediate: 演出场所的许可出现争议，目前需要先说明各自能承担的工作。
+          near: 巡演安排将根据新场地重排；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核街区演出场地停用的处理结果。
+        far_consequence: 巡演安排将根据新场地重排，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 一九二八芝加哥禁酒期
+      aesthetics:
+      - 禁酒令爵士黑帮
+      - 芝加哥暗夜交锋
+      - 黑色电影
+      places:
+      - 理发店暗门后地下酒吧
+      - 密歇根湖畔私酒卸货码头
+      - 黑帮教父防弹老爷车
+  长安夜市与坊志:
+    eras:
+    - 盛唐长安百鬼夜行
+    aesthetics:
+    - 盛唐诡谲奇谭
+    - 长安夜行风物
+    - 工笔华服
+    rule: 人、精怪与方士共同生活在坊市中，宵夜、营生和登记各循不同节奏。
+    social_rule: 只有当事人能确认自己的名籍，代写者不能代替签认。
+    places:
+      长安地底暗渠方士石坛:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 描录水路灯号
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      大雁塔顶避风藏经阁:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 共校坊市旧志
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      城隍庙后院:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 制作灯市路签
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 坊市文书
+        function: 描录水路灯号
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明坊门开放时段的灯市图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 夜市灯彩匠
+        baseline: 你因注明坊门开放时段的灯市图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明坊门开放时段的灯市图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 坊市文书与夜市灯彩匠曾共同参与当地的描录水路灯号，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 夜市灯彩匠
+        function: 共校坊市旧志
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明坊门开放时段的灯市图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 坊市文书
+        baseline: 你因注明坊门开放时段的灯市图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明坊门开放时段的灯市图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 夜市灯彩匠与坊市文书曾共同参与当地的共校坊市旧志，双方同意保持联系。
+    activities:
+      描录水路灯号:
+        places:
+        - 长安地底暗渠方士石坛
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}停在有照明的维护台边，请你核对旧灯号图。'
+        beats:
+          trigger: '{npc}停在有照明的维护台边，请你核对旧灯号图。'
+          objective: 描录水路灯号
+          choice: 先参与描录水路灯号，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      共校坊市旧志:
+        places:
+        - 大雁塔顶避风藏经阁
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}翻开获准借阅的抄本，请你辨一处街名。'
+        beats:
+          trigger: '{npc}翻开获准借阅的抄本，请你辨一处街名。'
+          objective: 共校坊市旧志
+          choice: 先参与共校坊市旧志，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      制作灯市路签:
+        places:
+        - 城隍庙后院
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}将纸签按坊区排好，请你为一条小巷画图案。'
+        beats:
+          trigger: '{npc}将纸签按坊区排好，请你为一条小巷画图案。'
+          objective: 制作灯市路签
+          choice: 先参与制作灯市路签，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 灯匠会给路签留一小块空白，让来客画自己的回程标记。
+    pressures:
+      夜市名籍误登:
+        source: 两位摊主的名籍记录被写在一起
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两位摊主的名籍记录被写在一起。'
+          objective: 请本人确认并更正记录
+          choice: 核对旧簿，或约两人到场说明
+          immediate: 两位摊主的名籍记录被写在一起，目前需要先说明各自能承担的工作。
+          near: 改好的名籍将影响摊位通知；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核夜市名籍误登的处理结果。
+        far_consequence: 改好的名籍将影响摊位通知，后续安排需重新通知参与者。
+      灯市水路检修:
+        source: 维护人员发现灯市所用的水路需要检修
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：维护人员发现灯市所用的水路需要检修。'
+          objective: 改排游览线路并保留回程通道
+          choice: 转用陆路，或缩小开放区域
+          immediate: 维护人员发现灯市所用的水路需要检修，目前需要先说明各自能承担的工作。
+          near: 下一次灯会需要重新勘定路线；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核灯市水路检修的处理结果。
+        far_consequence: 下一次灯会需要重新勘定路线，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 盛唐长安百鬼夜行
+      aesthetics:
+      - 盛唐诡谲奇谭
+      - 长安夜行风物
+      - 工笔华服
+      places:
+      - 长安地底暗渠方士石坛
+      - 大雁塔顶避风藏经阁
+      - 城隍庙后院
+  蜃景商路与鬼市:
+    eras:
+    - 西域大漠蜃景鬼市
+    aesthetics:
+    - 西域丝路奇谭
+    - 敦煌异色幻梦
+    rule: 鬼市沿蜃景迁移，商队靠共同确认的标记寻找仍在原处的摊位。
+    social_rule: 货契需注明可验证的实物，不接受替他人许诺的代价。
+    places:
+      胡姬八角琉璃酒肆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 共译旅人菜单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      无相鬼市千佛暗窟:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 描录商路符号
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      流沙回廊炼金暗房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 核对颜料样本
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 商路译员
+        function: 共译旅人菜单
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 两种文字对照的摊位名册
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 摊位地图绘制人
+        baseline: 你因两种文字对照的摊位名册与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 两种文字对照的摊位名册
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 商路译员与摊位地图绘制人曾共同参与当地的共译旅人菜单，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 摊位地图绘制人
+        function: 描录商路符号
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 两种文字对照的摊位名册
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 商路译员
+        baseline: 你因两种文字对照的摊位名册与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 两种文字对照的摊位名册
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 摊位地图绘制人与商路译员曾共同参与当地的描录商路符号，双方同意保持联系。
+    activities:
+      共译旅人菜单:
+        places:
+        - 胡姬八角琉璃酒肆
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}递来不同文字的菜名，请你选一种向导能读懂的写法。'
+        beats:
+          trigger: '{npc}递来不同文字的菜名，请你选一种向导能读懂的写法。'
+          objective: 共译旅人菜单
+          choice: 先参与共译旅人菜单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      描录商路符号:
+        places:
+        - 无相鬼市千佛暗窟
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在有人值守的入口展开旧图，请你比较摊主留下的路标。'
+        beats:
+          trigger: '{npc}在有人值守的入口展开旧图，请你比较摊主留下的路标。'
+          objective: 描录商路符号
+          choice: 先参与描录商路符号，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      核对颜料样本:
+        places:
+        - 流沙回廊炼金暗房
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在获准进入的样品桌旁，请你比对标签与色卡。'
+        beats:
+          trigger: '{npc}在获准进入的样品桌旁，请你比对标签与色卡。'
+          objective: 核对颜料样本
+          choice: 先参与核对颜料样本，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 摊主把已经验证的路标画成实线，尚未走过的路画成点线。
+    pressures:
+      蜃景路标偏移:
+        source: 今夜可见的路标与地图记录不一致
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：今夜可见的路标与地图记录不一致。'
+          objective: 确认回程路线后再决定是否交易
+          choice: 请归来的商队带路，或在固定驿点等待
+          immediate: 今夜可见的路标与地图记录不一致，目前需要先说明各自能承担的工作。
+          near: 地图将注明这一轮蜃景的有效时段；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核蜃景路标偏移的处理结果。
+        far_consequence: 地图将注明这一轮蜃景的有效时段，后续安排需重新通知参与者。
+      货契计量分歧:
+        source: 两地使用的量器让同一批货物数量不同
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两地使用的量器让同一批货物数量不同。'
+          objective: 换算计量单位并重议交付
+          choice: 请第三方见证称量，或暂缓交接
+          immediate: 两地使用的量器让同一批货物数量不同，目前需要先说明各自能承担的工作。
+          near: 新货契需附双方认可的计量方式；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核货契计量分歧的处理结果。
+        far_consequence: 新货契需附双方认可的计量方式，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 西域大漠蜃景鬼市
+      aesthetics:
+      - 西域丝路奇谭
+      - 敦煌异色幻梦
+      places:
+      - 胡姬八角琉璃酒肆
+      - 无相鬼市千佛暗窟
+      - 流沙回廊炼金暗房
+  流动马戏与机械舞台:
+    eras:
+    - 维多利亚暗黑马戏团
+    aesthetics:
+    - 维多利亚哥特怪诞
+    - 流动马戏黑夜奇谭
+    - 蒸汽与黄铜
+    rule: 巡演团把机械布景、训练和旅途生活装进车队，每站都要重新搭台。
+    social_rule: 未经排练确认的装置不用于演出，观众热情不能替代安全检查。
+    places:
+      流动马戏团大篷车:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 设计巡演剪影
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      红丝绒马戏大帐篷:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试排机械幕布
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      马戏团宿营地:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 装订巡演日志
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 舞台机械师
+        function: 设计巡演剪影
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明检修日期的布景图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 巡演节目编排员
+        baseline: 你因注明检修日期的布景图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明检修日期的布景图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 舞台机械师与巡演节目编排员曾共同参与当地的设计巡演剪影，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 巡演节目编排员
+        function: 试排机械幕布
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 注明检修日期的布景图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 舞台机械师
+        baseline: 你因注明检修日期的布景图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 注明检修日期的布景图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 巡演节目编排员与舞台机械师曾共同参与当地的试排机械幕布，双方同意保持联系。
+    activities:
+      设计巡演剪影:
+        places:
+        - 流动马戏团大篷车
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}打开可折叠的布景模型，请你试一束灯光。'
+        beats:
+          trigger: '{npc}打开可折叠的布景模型，请你试一束灯光。'
+          objective: 设计巡演剪影
+          choice: 先参与设计巡演剪影，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      试排机械幕布:
+        places:
+        - 红丝绒马戏大帐篷
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在停止售票的排练时段，请你记录幕布速度。'
+        beats:
+          trigger: '{npc}在停止售票的排练时段，请你记录幕布速度。'
+          objective: 试排机械幕布
+          choice: 先参与试排机械幕布，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      装订巡演日志:
+        places:
+        - 马戏团宿营地
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}取出上一站的节目单，问你哪段值得留下。'
+        beats:
+          trigger: '{npc}取出上一站的节目单，问你哪段值得留下。'
+          objective: 装订巡演日志
+          choice: 先参与装订巡演日志，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 每次撤营会在旧海报背面画下下一站的路标。
+    pressures:
+      机械布景拒绝通过检查:
+        source: 检修发现一个布景连接件需要替换
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：检修发现一个布景连接件需要替换。'
+          objective: 调整节目而不勉强使用装置
+          choice: 换成静态布景，或取消该段演出
+          immediate: 检修发现一个布景连接件需要替换，目前需要先说明各自能承担的工作。
+          near: 车队需要重新安排维修材料；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核机械布景拒绝通过检查的处理结果。
+        far_consequence: 车队需要重新安排维修材料，后续安排需重新通知参与者。
+      演出许可时段缩短:
+        source: 当地允许的演出时段比约定短
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：当地允许的演出时段比约定短。'
+          objective: 与表演者商量删减和改期
+          choice: 压缩换场，或安排另一日补演
+          immediate: 当地允许的演出时段比约定短，目前需要先说明各自能承担的工作。
+          near: 新的节目表须通知已购票观众；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核演出许可时段缩短的处理结果。
+        far_consequence: 新的节目表须通知已购票观众，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 维多利亚暗黑马戏团
+      aesthetics:
+      - 维多利亚哥特怪诞
+      - 流动马戏黑夜奇谭
+      - 蒸汽与黄铜
+      places:
+      - 流动马戏团大篷车
+      - 红丝绒马戏大帐篷
+      - 马戏团宿营地
+  湘西山路与乡志:
+    eras:
+    - 晚清民初湘西密林
+    aesthetics:
+    - 中式民俗志怪
+    - 古墓探险硬派风
+    rule: 山路、村寨和地方传说交织，乡志同时保留目击与口述的差别。
+    social_rule: 记录习俗前先征求当地人的意愿，不把传闻当作定论。
+    places:
+      破败义庄:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 记录旧屋营造法
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      寺庙后院:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理乡俗口述
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      医馆后堂:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 编写采药路名
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 地方乡志编纂人
+        function: 记录旧屋营造法
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 分开记录口述与实见的行路簿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 山路向导
+        baseline: 你因分开记录口述与实见的行路簿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 分开记录口述与实见的行路簿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 地方乡志编纂人与山路向导曾共同参与当地的记录旧屋营造法，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 山路向导
+        function: 整理乡俗口述
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 分开记录口述与实见的行路簿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 地方乡志编纂人
+        baseline: 你因分开记录口述与实见的行路簿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 分开记录口述与实见的行路簿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 山路向导与地方乡志编纂人曾共同参与当地的整理乡俗口述，双方同意保持联系。
+    activities:
+      记录旧屋营造法:
+        places:
+        - 破败义庄
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在白天查验过的门廊下，指给你看不同的榫接。'
+        beats:
+          trigger: '{npc}在白天查验过的门廊下，指给你看不同的榫接。'
+          objective: 记录旧屋营造法
+          choice: 先参与记录旧屋营造法，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理乡俗口述:
+        places:
+        - 寺庙后院
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}把获准记录的故事按说话人分类，请你读一段。'
+        beats:
+          trigger: '{npc}把获准记录的故事按说话人分类，请你读一段。'
+          objective: 整理乡俗口述
+          choice: 先参与整理乡俗口述，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      编写采药路名:
+        places:
+        - 医馆后堂
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在不涉及诊疗的桌边展开地名表，请你核对山路别称。'
+        beats:
+          trigger: '{npc}在不涉及诊疗的桌边展开地名表，请你核对山路别称。'
+          objective: 编写采药路名
+          choice: 先参与编写采药路名，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 讲述人可以在故事旁留下自己的别称，也可以要求不署名。
+    pressures:
+      渡桥修缮改变归途:
+        source: 常走的渡桥暂时关闭
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：常走的渡桥暂时关闭。'
+          objective: 找出可确认通行的替代路线
+          choice: 请教本地船家，或留宿等修复
+          immediate: 常走的渡桥暂时关闭，目前需要先说明各自能承担的工作。
+          near: 乡志需更新季节通行说明；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核渡桥修缮改变归途的处理结果。
+        far_consequence: 乡志需更新季节通行说明，后续安排需重新通知参与者。
+      乡俗记录出现异议:
+        source: 受访者认为整理稿误解了一项习俗
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：受访者认为整理稿误解了一项习俗。'
+          objective: 重新确认表述与公开范围
+          choice: 回访说明，或撤下该段记录
+          immediate: 受访者认为整理稿误解了一项习俗，目前需要先说明各自能承担的工作。
+          near: 最终稿应保留受访者认可的版本；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核乡俗记录出现异议的处理结果。
+        far_consequence: 最终稿应保留受访者认可的版本，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 晚清民初湘西密林
+      aesthetics:
+      - 中式民俗志怪
+      - 古墓探险硬派风
+      places:
+      - 破败义庄
+      - 寺庙后院
+      - 医馆后堂
+  风沙驿站与旧图:
+    eras:
+    - 民国初年大漠荒城
+    aesthetics:
+    - 西域丝路奇谭
+    - 古墓探险硬派风
+    rule: 驿站依靠水源、商队与地形记录维系，遗迹探索必须顾及返程。
+    social_rule: 未经许可不带走遗物，路线更新须注明亲见与传闻。
+    places:
+      龙门客栈地窖:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 核对物资箱标
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      破败义庄:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 描绘旧建筑梁架
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      倒悬石梁地宫:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 观察入口壁刻
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 驿路绘图员
+        function: 核对物资箱标
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 附有水源日期的路线图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 旧建筑测绘师
+        baseline: 你因附有水源日期的路线图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 附有水源日期的路线图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 驿路绘图员与旧建筑测绘师曾共同参与当地的核对物资箱标，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 旧建筑测绘师
+        function: 描绘旧建筑梁架
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 附有水源日期的路线图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 驿路绘图员
+        baseline: 你因附有水源日期的路线图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 附有水源日期的路线图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 旧建筑测绘师与驿路绘图员曾共同参与当地的描绘旧建筑梁架，双方同意保持联系。
+    activities:
+      核对物资箱标:
+        places:
+        - 龙门客栈地窖
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在掌柜许可下摆开箱单，请你辨认褪色标记。'
+        beats:
+          trigger: '{npc}在掌柜许可下摆开箱单，请你辨认褪色标记。'
+          objective: 核对物资箱标
+          choice: 先参与核对物资箱标，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      描绘旧建筑梁架:
+        places:
+        - 破败义庄
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}站在确认稳固的门廊，请你记录可见的梁架。'
+        beats:
+          trigger: '{npc}站在确认稳固的门廊，请你记录可见的梁架。'
+          objective: 描绘旧建筑梁架
+          choice: 先参与描绘旧建筑梁架，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      观察入口壁刻:
+        places:
+        - 倒悬石梁地宫
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}停在划定的安全观察点，请你比较已有拓本。'
+        beats:
+          trigger: '{npc}停在划定的安全观察点，请你比较已有拓本。'
+          objective: 观察入口壁刻
+          choice: 先参与观察入口壁刻，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 向导在地图旁保留空白，让后来者补记实际水情。
+    pressures:
+      返程水点迁移:
+        source: 路线图中的取水点已经改道
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：路线图中的取水点已经改道。'
+          objective: 确认可靠补给点再决定行程
+          choice: 询问刚返回的向导，或延期出发
+          immediate: 路线图中的取水点已经改道，目前需要先说明各自能承担的工作。
+          near: 新版路线图需要注明验证日期；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核返程水点迁移的处理结果。
+        far_consequence: 新版路线图需要注明验证日期，后续安排需重新通知参与者。
+      遗迹归属争议:
+        source: 两支队伍持有不同的勘查许可
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两支队伍持有不同的勘查许可。'
+          objective: 核实许可边界并暂停争议区域工作
+          choice: 联系签发方，或转查无争议地点
+          immediate: 两支队伍持有不同的勘查许可，目前需要先说明各自能承担的工作。
+          near: 结果将影响后续勘查安排；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核遗迹归属争议的处理结果。
+        far_consequence: 结果将影响后续勘查安排，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 民国初年大漠荒城
+      aesthetics:
+      - 西域丝路奇谭
+      - 古墓探险硬派风
+      places:
+      - 龙门客栈地窖
+      - 破败义庄
+      - 倒悬石梁地宫
+  雾都钟表与港务街:
+    eras:
+    - 维多利亚雾都
+    aesthetics:
+    - 哥特幽暗
+    - 蒸汽与黄铜
+    - 维多利亚哥特怪诞
+    rule: 雾中的街区依靠钟表、港务信号和公共告示协调运转。
+    social_rule: 进出仓库须核对许可，私人介绍不能替代货物凭证。
+    places:
+      雾码头仓库:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校对港口钟声
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      帽店试帽间:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 布置街区工艺展
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      雾都洋馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 核对旧钟铭牌
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      私立诊察室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 调整候诊室挂钟
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 钟表维修师
+        function: 校对港口钟声
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 一套校时记录与船期表
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 港务档案整理员
+        baseline: 你因一套校时记录与船期表与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 一套校时记录与船期表
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 钟表维修师与港务档案整理员曾共同参与当地的校对港口钟声，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 港务档案整理员
+        function: 布置街区工艺展
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 一套校时记录与船期表
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 钟表维修师
+        baseline: 你因一套校时记录与船期表与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 一套校时记录与船期表
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 港务档案整理员与钟表维修师曾共同参与当地的布置街区工艺展，双方同意保持联系。
+    activities:
+      校对港口钟声:
+        places:
+        - 雾码头仓库
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}拿着校时表，请你记录远处钟声的间隔。'
+        beats:
+          trigger: '{npc}拿着校时表，请你记录远处钟声的间隔。'
+          objective: 校对港口钟声
+          choice: 先参与校对港口钟声，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      布置街区工艺展:
+        places:
+        - 帽店试帽间
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在营业前摆好工艺说明，请你看是否遮挡通道。'
+        beats:
+          trigger: '{npc}在营业前摆好工艺说明，请你看是否遮挡通道。'
+          objective: 布置街区工艺展
+          choice: 先参与布置街区工艺展，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      核对旧钟铭牌:
+        places:
+        - 雾都洋馆
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}掀开获准检查的钟罩，请你读一行工匠署名。'
+        beats:
+          trigger: '{npc}掀开获准检查的钟罩，请你读一行工匠署名。'
+          objective: 核对旧钟铭牌
+          choice: 先参与核对旧钟铭牌，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      调整候诊室挂钟:
+        places:
+        - 私立诊察室
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在非诊疗时段取下挂钟，请你核对校准时间。'
+        beats:
+          trigger: '{npc}在非诊疗时段取下挂钟，请你核对校准时间。'
+          objective: 调整候诊室挂钟
+          choice: 先参与调整候诊室挂钟，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 钟表铺会把每天校时的误差写在门旁黑板上。
+    pressures:
+      船期钟点不一致:
+        source: 仓库与港务所记录了不同的船期时间
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：仓库与港务所记录了不同的船期时间。'
+          objective: 确认正式船期并通知货主
+          choice: 核对原始电报，或向港务所复询
+          immediate: 仓库与港务所记录了不同的船期时间，目前需要先说明各自能承担的工作。
+          near: 更正会影响下一轮装卸排班；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核船期钟点不一致的处理结果。
+        far_consequence: 更正会影响下一轮装卸排班，后续安排需重新通知参与者。
+      工艺展署名争议:
+        source: 一件旧钟出现两份不同的制作者记录
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：一件旧钟出现两份不同的制作者记录。'
+          objective: 厘清记录来源并修改展签
+          choice: 查阅维修账，或先标注存疑
+          immediate: 一件旧钟出现两份不同的制作者记录，目前需要先说明各自能承担的工作。
+          near: 展览将保留争议的来源说明；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核工艺展署名争议的处理结果。
+        far_consequence: 展览将保留争议的来源说明，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 维多利亚雾都
+      aesthetics:
+      - 哥特幽暗
+      - 蒸汽与黄铜
+      - 维多利亚哥特怪诞
+      places:
+      - 雾码头仓库
+      - 帽店试帽间
+      - 雾都洋馆
+      - 私立诊察室
+  明治洋裁与译书町:
+    eras:
+    - 明治东京
+    aesthetics:
+    - 和风物哀
+    - 旧年代质感
+    rule: 新式店铺与旧街坊并存，译书、洋裁和手工招牌改变日常。
+    social_rule: 译稿的改动与店铺定制需求都须由委托人确认。
+    places:
+      洋装裁缝铺:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 编排布料样册
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      银座料亭:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校译季节菜单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      洋馆偏屋:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理双语书架
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      香道馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 记录香材别称
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 译书校对员
+        function: 编排布料样册
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 中外文字并列的样册
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 洋裁样册整理人
+        baseline: 你因中外文字并列的样册与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 中外文字并列的样册
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 译书校对员与洋裁样册整理人曾共同参与当地的编排布料样册，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 洋裁样册整理人
+        function: 校译季节菜单
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 中外文字并列的样册
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 译书校对员
+        baseline: 你因中外文字并列的样册与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 中外文字并列的样册
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 洋裁样册整理人与译书校对员曾共同参与当地的校译季节菜单，双方同意保持联系。
+    activities:
+      编排布料样册:
+        places:
+        - 洋装裁缝铺
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}将小块布料放在说明旁，请你比较文字与颜色。'
+        beats:
+          trigger: '{npc}将小块布料放在说明旁，请你比较文字与颜色。'
+          objective: 编排布料样册
+          choice: 先参与编排布料样册，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      校译季节菜单:
+        places:
+        - 银座料亭
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}取出店主写的菜名，请你选一种易懂的译法。'
+        beats:
+          trigger: '{npc}取出店主写的菜名，请你选一种易懂的译法。'
+          objective: 校译季节菜单
+          choice: 先参与校译季节菜单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理双语书架:
+        places:
+        - 洋馆偏屋
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}指着两版同名书，请你比较译序。'
+        beats:
+          trigger: '{npc}指着两版同名书，请你比较译序。'
+          objective: 整理双语书架
+          choice: 先参与整理双语书架，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      记录香材别称:
+        places:
+        - 香道馆
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}把店中沿用的名称列在纸上，请你核对出处。'
+        beats:
+          trigger: '{npc}把店中沿用的名称列在纸上，请你核对出处。'
+          objective: 记录香材别称
+          choice: 先参与记录香材别称，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 新词会先写在可更换的小标签上，让常客也能提出改法。
+    pressures:
+      译名引起误订:
+        source: 同一材料的两种译名造成订单重复
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：同一材料的两种译名造成订单重复。'
+          objective: 核实材料并征求退换意见
+          choice: 对照样品，或请供货人解释
+          immediate: 同一材料的两种译名造成订单重复，目前需要先说明各自能承担的工作。
+          near: 店家将统一订单中的名称；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核译名引起误订的处理结果。
+        far_consequence: 店家将统一订单中的名称，后续安排需重新通知参与者。
+      借展归期改变:
+        source: 借来的样册需要提前归还
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：借来的样册需要提前归还。'
+          objective: 确定能完成的记录与归还方式
+          choice: 征求复制许可，或缩短展期
+          immediate: 借来的样册需要提前归还，目前需要先说明各自能承担的工作。
+          near: 未完成的部分改为之后预约查看；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核借展归期改变的处理结果。
+        far_consequence: 未完成的部分改为之后预约查看，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 明治东京
+      aesthetics:
+      - 和风物哀
+      - 旧年代质感
+      places:
+      - 洋装裁缝铺
+      - 银座料亭
+      - 洋馆偏屋
+      - 香道馆
+  民国报馆与手艺街:
+    eras:
+    - 旧式民国都市
+    aesthetics:
+    - 旧年代质感
+    - 黑色电影
+    - 行当正剧
+    rule: 报馆、作坊和街坊以纸面广告与当面交接维持城市生活。
+    social_rule: 采访必须区分受访者原话与编辑意见。
+    places:
+      民国公馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理老建筑专页
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      旗袍定制店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 制作手艺访谈
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      拍卖行:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校对展品说明
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      舞厅:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 排版演出节目单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 地方报纸编辑
+        function: 整理老建筑专页
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 带有改稿标记的清样
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 印刷坊校对员
+        baseline: 你因带有改稿标记的清样与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 带有改稿标记的清样
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 地方报纸编辑与印刷坊校对员曾共同参与当地的整理老建筑专页，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 印刷坊校对员
+        function: 制作手艺访谈
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 带有改稿标记的清样
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 地方报纸编辑
+        baseline: 你因带有改稿标记的清样与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 带有改稿标记的清样
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 印刷坊校对员与地方报纸编辑曾共同参与当地的制作手艺访谈，双方同意保持联系。
+    activities:
+      整理老建筑专页:
+        places:
+        - 民国公馆
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}摊开建筑照片，问你该从哪段住户记忆开始。'
+        beats:
+          trigger: '{npc}摊开建筑照片，问你该从哪段住户记忆开始。'
+          objective: 整理老建筑专页
+          choice: 先参与整理老建筑专页，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      制作手艺访谈:
+        places:
+        - 旗袍定制店
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}将采访提纲递来，请你补一条关于工序的问题。'
+        beats:
+          trigger: '{npc}将采访提纲递来，请你补一条关于工序的问题。'
+          objective: 制作手艺访谈
+          choice: 先参与制作手艺访谈，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      校对展品说明:
+        places:
+        - 拍卖行
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}比对两份描述，请你圈出不能证实的来历。'
+        beats:
+          trigger: '{npc}比对两份描述，请你圈出不能证实的来历。'
+          objective: 校对展品说明
+          choice: 先参与校对展品说明，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      排版演出节目单:
+        places:
+        - 舞厅
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}摆出演出者确认的名单，请你核对顺序。'
+        beats:
+          trigger: '{npc}摆出演出者确认的名单，请你核对顺序。'
+          objective: 排版演出节目单
+          choice: 先参与排版演出节目单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 校样确认后，各人用不同形状的记号表示自己看过的段落。
+    pressures:
+      报道引语失真:
+        source: 印出的引语与采访原稿不同
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：印出的引语与采访原稿不同。'
+          objective: 查清改稿过程并安排更正
+          choice: 比对清样，或先联系受访者
+          immediate: 印出的引语与采访原稿不同，目前需要先说明各自能承担的工作。
+          near: 报馆需要公开更正并保存原稿；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核报道引语失真的处理结果。
+        far_consequence: 报馆需要公开更正并保存原稿，后续安排需重新通知参与者。
+      印厂设备停修:
+        source: 预定印刷机因检修无法按期交件
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：预定印刷机因检修无法按期交件。'
+          objective: 协调版数与交付顺序
+          choice: 缩减非必要版面，或找邻近印厂
+          immediate: 预定印刷机因检修无法按期交件，目前需要先说明各自能承担的工作。
+          near: 之后的印量需要重新排程；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核印厂设备停修的处理结果。
+        far_consequence: 之后的印量需要重新排程，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 旧式民国都市
+      aesthetics:
+      - 旧年代质感
+      - 黑色电影
+      - 行当正剧
+      places:
+      - 民国公馆
+      - 旗袍定制店
+      - 拍卖行
+      - 舞厅
+  王朝百业与书院:
+    eras:
+    - 架空王朝
+    aesthetics:
+    - 工笔华服
+    - 水墨写意
+    rule: 城内百业由行会与书院共同维系，手艺、学问和人情各有来路。
+    social_rule: 行会许可只管营生，不决定私人交往。
+    places:
+      古籍书店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 辨认残卷版式
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      戏楼:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 核对旧戏本
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      宗族祠堂:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理地方碑录
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      园林:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 设计读书小径
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      老茶馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 共读地方掌故
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      江心画舫:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 布置水上书会
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 古籍修补师
+        function: 辨认残卷版式
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 可核对卷次的借阅簿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 书院藏书整理人
+        baseline: 你因可核对卷次的借阅簿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 可核对卷次的借阅簿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 古籍修补师与书院藏书整理人曾共同参与当地的辨认残卷版式，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 书院藏书整理人
+        function: 核对旧戏本
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 可核对卷次的借阅簿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 古籍修补师
+        baseline: 你因可核对卷次的借阅簿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 可核对卷次的借阅簿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 书院藏书整理人与古籍修补师曾共同参与当地的核对旧戏本，双方同意保持联系。
+    activities:
+      辨认残卷版式:
+        places:
+        - 古籍书店
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}铺开两页残卷，请你比较版心的刻字。'
+        beats:
+          trigger: '{npc}铺开两页残卷，请你比较版心的刻字。'
+          objective: 辨认残卷版式
+          choice: 先参与辨认残卷版式，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      核对旧戏本:
+        places:
+        - 戏楼
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}将抄本与舞台走位图并排，请你找一处改动。'
+        beats:
+          trigger: '{npc}将抄本与舞台走位图并排，请你找一处改动。'
+          objective: 核对旧戏本
+          choice: 先参与核对旧戏本，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理地方碑录:
+        places:
+        - 宗族祠堂
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}递来已经晾干的拓片，请你核对地名。'
+        beats:
+          trigger: '{npc}递来已经晾干的拓片，请你核对地名。'
+          objective: 整理地方碑录
+          choice: 先参与整理地方碑录，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      设计读书小径:
+        places:
+        - 园林
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}指着几处亭子，请你替读书会选停留点。'
+        beats:
+          trigger: '{npc}指着几处亭子，请你替读书会选停留点。'
+          objective: 设计读书小径
+          choice: 先参与设计读书小径，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      共读地方掌故:
+        places:
+        - 老茶馆
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}翻到一段街坊旧闻，问你听过哪个版本。'
+        beats:
+          trigger: '{npc}翻到一段街坊旧闻，问你听过哪个版本。'
+          objective: 共读地方掌故
+          choice: 先参与共读地方掌故，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      布置水上书会:
+        places:
+        - 江心画舫
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}展开拟用书目，请你挑一段适合共读的文章。'
+        beats:
+          trigger: '{npc}展开拟用书目，请你挑一段适合共读的文章。'
+          objective: 布置水上书会
+          choice: 先参与布置水上书会，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 书会来客可以只听不读，离席前将借用书签放回竹筒。
+    pressures:
+      藏书借还争议:
+        source: 借阅簿上的卷次与归还残卷不符
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：借阅簿上的卷次与归还残卷不符。'
+          objective: 确定差错发生在哪次交接
+          choice: 联系借阅人，或比对旧目录
+          immediate: 借阅簿上的卷次与归还残卷不符，目前需要先说明各自能承担的工作。
+          near: 书院将调整珍本借阅规则；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核藏书借还争议的处理结果。
+        far_consequence: 书院将调整珍本借阅规则，后续安排需重新通知参与者。
+      行会展位变更:
+        source: 公共展览临时缩减了可用展位
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：公共展览临时缩减了可用展位。'
+          objective: 安排不损伤书画的替代展位
+          choice: 商量分期展出，或借用茶馆
+          immediate: 公共展览临时缩减了可用展位，目前需要先说明各自能承担的工作。
+          near: 新的安排会改变参展人的时间表；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核行会展位变更的处理结果。
+        far_consequence: 新的安排会改变参展人的时间表，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 架空王朝
+      aesthetics:
+      - 工笔华服
+      - 水墨写意
+      places:
+      - 古籍书店
+      - 戏楼
+      - 宗族祠堂
+      - 园林
+      - 老茶馆
+      - 江心画舫
+  后方邮路与灯火:
+    eras:
+    - 战时后方
+    aesthetics:
+    - 行当正剧
+    - 克制冷峻
+    - 寒冬避难所
+    rule: 远离前线的城镇依靠邮路、修缮和轮班维持日常，消息抵达总有迟滞。
+    social_rule: 代收信件必须登记，紧缺公共物资不能只凭私人承诺分配。
+    places:
+      夜班值班室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 给信件补齐路签
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      疗养院:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理读报时段
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      老字号客栈:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 绘制暂住导览
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 邮务整理员
+        function: 给信件补齐路签
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 可核对日期的邮袋交接簿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 公共修缮队记录员
+        baseline: 你因可核对日期的邮袋交接簿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 可核对日期的邮袋交接簿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 邮务整理员与公共修缮队记录员曾共同参与当地的给信件补齐路签，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 公共修缮队记录员
+        function: 整理读报时段
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 可核对日期的邮袋交接簿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 邮务整理员
+        baseline: 你因可核对日期的邮袋交接簿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 可核对日期的邮袋交接簿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 公共修缮队记录员与邮务整理员曾共同参与当地的整理读报时段，双方同意保持联系。
+    activities:
+      给信件补齐路签:
+        places:
+        - 夜班值班室
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}将退回的信封按地址分开，请你辨认模糊的路名。'
+        beats:
+          trigger: '{npc}将退回的信封按地址分开，请你辨认模糊的路名。'
+          objective: 给信件补齐路签
+          choice: 先参与给信件补齐路签，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理读报时段:
+        places:
+        - 疗养院
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}把报纸放在公共阅览桌，请你选一段适合朗读的消息。'
+        beats:
+          trigger: '{npc}把报纸放在公共阅览桌，请你选一段适合朗读的消息。'
+          objective: 整理读报时段
+          choice: 先参与整理读报时段，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      绘制暂住导览:
+        places:
+        - 老字号客栈
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}取出城镇简图，请你标清取水和寄信的位置。'
+        beats:
+          trigger: '{npc}取出城镇简图，请你标清取水和寄信的位置。'
+          objective: 绘制暂住导览
+          choice: 先参与绘制暂住导览，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 收到远信的人可以自愿将信封邮戳借给邮站补画路线。
+    pressures:
+      邮袋交接缺页:
+        source: 一段交接记录缺失导致多封信无法确认去向
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：一段交接记录缺失导致多封信无法确认去向。'
+          objective: 重建交接经过并通知收件人
+          choice: 询问交接人员，或核对驿站日期章
+          immediate: 一段交接记录缺失导致多封信无法确认去向，目前需要先说明各自能承担的工作。
+          near: 查明的流程将用于修订下一轮邮路；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核邮袋交接缺页的处理结果。
+        far_consequence: 查明的流程将用于修订下一轮邮路，后续安排需重新通知参与者。
+      维修材料不足:
+        source: 公共屋顶修缮与邮站修缮需要同一批木料
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：公共屋顶修缮与邮站修缮需要同一批木料。'
+          objective: 比较受影响范围并安排分批修缮
+          choice: 公开计算用量，或寻找可替代旧料
+          immediate: 公共屋顶修缮与邮站修缮需要同一批木料，目前需要先说明各自能承担的工作。
+          near: 分配决定会影响下一轮公共排班；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核维修材料不足的处理结果。
+        far_consequence: 分配决定会影响下一轮公共排班，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 战时后方
+      aesthetics:
+      - 行当正剧
+      - 克制冷峻
+      - 寒冬避难所
+      places:
+      - 夜班值班室
+      - 疗养院
+      - 老字号客栈
+  昭和街角喫茶巡礼:
+    eras:
+    - 昭和末期
+    aesthetics:
+    - 和风物哀
+    - 旧年代质感
+    - 温柔颓丧
+    rule: 喫茶店、团地与末班车织成生活路线，老熟客的习惯常比招牌更持久。
+    social_rule: 店内预约和寄存物件按手写簿登记，熟客也需要征求店主同意。
+    places:
+      昭和喫茶店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试配季节甜点
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      爵士喫茶:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 挑选晚间唱片
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      团地走廊:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 布置住户作品展
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      钱汤:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 设计更衣区告示
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      车站前旅馆:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 补画街区导览
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 喫茶店经营者
+        function: 试配季节甜点
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 一册记录街区小店的手写簿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 地方杂志摄影师
+        baseline: 你因一册记录街区小店的手写簿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 一册记录街区小店的手写簿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 喫茶店经营者与地方杂志摄影师曾共同参与当地的试配季节甜点，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 地方杂志摄影师
+        function: 挑选晚间唱片
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 一册记录街区小店的手写簿
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 喫茶店经营者
+        baseline: 你因一册记录街区小店的手写簿与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 一册记录街区小店的手写簿
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 地方杂志摄影师与喫茶店经营者曾共同参与当地的挑选晚间唱片，双方同意保持联系。
+    activities:
+      试配季节甜点:
+        places:
+        - 昭和喫茶店
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}摆出两种试作甜点，请你替菜单写一句感想。'
+        beats:
+          trigger: '{npc}摆出两种试作甜点，请你替菜单写一句感想。'
+          objective: 试配季节甜点
+          choice: 先参与试配季节甜点，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      挑选晚间唱片:
+        places:
+        - 爵士喫茶
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}拿出两张唱片，问你想先听哪一面。'
+        beats:
+          trigger: '{npc}拿出两张唱片，问你想先听哪一面。'
+          objective: 挑选晚间唱片
+          choice: 先参与挑选晚间唱片，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      布置住户作品展:
+        places:
+        - 团地走廊
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}将住户交来的照片靠墙排好，请你看看高度。'
+        beats:
+          trigger: '{npc}将住户交来的照片靠墙排好，请你看看高度。'
+          objective: 布置住户作品展
+          choice: 先参与布置住户作品展，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      设计更衣区告示:
+        places:
+        - 钱汤
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}在营业前展开告示样稿，请你确认字是否清楚。'
+        beats:
+          trigger: '{npc}在营业前展开告示样稿，请你确认字是否清楚。'
+          objective: 设计更衣区告示
+          choice: 先参与设计更衣区告示，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      补画街区导览:
+        places:
+        - 车站前旅馆
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}圈出旅客常问的路线，请你补一家早餐店。'
+        beats:
+          trigger: '{npc}圈出旅客常问的路线，请你补一家早餐店。'
+          objective: 补画街区导览
+          choice: 先参与补画街区导览，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 熟客的杯子仍放在架上，但新客也能选自己喜欢的杯型。
+    pressures:
+      唱片寄存人失联:
+        source: 一位老熟客寄存的唱片在店铺转让前无人认领
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：一位老熟客寄存的唱片在店铺转让前无人认领。'
+          objective: 找到合法接收人或约定代管办法
+          choice: 翻查寄存簿，或托社区联系本人
+          immediate: 一位老熟客寄存的唱片在店铺转让前无人认领，目前需要先说明各自能承担的工作。
+          near: 转让协议需要注明寄存物的去向；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核唱片寄存人失联的处理结果。
+        far_consequence: 转让协议需要注明寄存物的去向，后续安排需重新通知参与者。
+      团地展览搬迁:
+        source: 公共走廊检修与住户展览撞期
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：公共走廊检修与住户展览撞期。'
+          objective: 为作品寻找合适的临时展位
+          choice: 征求店铺借墙，或将展期后移
+          immediate: 公共走廊检修与住户展览撞期，目前需要先说明各自能承担的工作。
+          near: 新展位会改变社区活动路线；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核团地展览搬迁的处理结果。
+        far_consequence: 新展位会改变社区活动路线，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 昭和末期
+      aesthetics:
+      - 和风物哀
+      - 旧年代质感
+      - 温柔颓丧
+      places:
+      - 昭和喫茶店
+      - 爵士喫茶
+      - 团地走廊
+      - 钱汤
+      - 车站前旅馆
+  千禧网络街坊:
+    eras:
+    - 千禧年前后
+    aesthetics:
+    - 旧年代质感
+    - 恋爱轻喜
+    - 亚文化地下物语
+    rule: 拨号网络、纸质地址簿和线下聚会并存，网上认识的人逐渐走进街区。
+    social_rule: 网名是否对应真实姓名由本人决定，公开作品须注明作者。
+    places:
+      工作室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 校对个人主页
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      桌游店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试跑聚会小游戏
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      列车车厢:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 交换沿途明信片
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      旧书店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 装订街坊小刊
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 社区网站维护员
+        function: 校对个人主页
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 收集了作者授权的软盘与样刊
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 独立刊物编辑
+        baseline: 你因收集了作者授权的软盘与样刊与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 收集了作者授权的软盘与样刊
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 社区网站维护员与独立刊物编辑曾共同参与当地的校对个人主页，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 独立刊物编辑
+        function: 试跑聚会小游戏
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 收集了作者授权的软盘与样刊
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 社区网站维护员
+        baseline: 你因收集了作者授权的软盘与样刊与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 收集了作者授权的软盘与样刊
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 独立刊物编辑与社区网站维护员曾共同参与当地的试跑聚会小游戏，双方同意保持联系。
+    activities:
+      校对个人主页:
+        places:
+        - 工作室
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}打开尚未发布的页面，请你看一眼手绘导航。'
+        beats:
+          trigger: '{npc}打开尚未发布的页面，请你看一眼手绘导航。'
+          objective: 校对个人主页
+          choice: 先参与校对个人主页，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      试跑聚会小游戏:
+        places:
+        - 桌游店
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}摆好纸卡，问你愿不愿意做第一位试玩者。'
+        beats:
+          trigger: '{npc}摆好纸卡，问你愿不愿意做第一位试玩者。'
+          objective: 试跑聚会小游戏
+          choice: 先参与试跑聚会小游戏，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      交换沿途明信片:
+        places:
+        - 列车车厢
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}指着窗外站牌，请你替这一站选一句注释。'
+        beats:
+          trigger: '{npc}指着窗外站牌，请你替这一站选一句注释。'
+          objective: 交换沿途明信片
+          choice: 先参与交换沿途明信片，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      装订街坊小刊:
+        places:
+        - 旧书店
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}按页码摊开样张，请你检查是否倒页。'
+        beats:
+          trigger: '{npc}按页码摊开样张，请你检查是否倒页。'
+          objective: 装订街坊小刊
+          choice: 先参与装订街坊小刊，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 线下聚会先让来客自己写下希望被称呼的名字。
+    pressures:
+      网站署名遗漏:
+        source: 转载页面漏掉了原作者名字
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：转载页面漏掉了原作者名字。'
+          objective: 补全署名并核实转载授权
+          choice: 联系作者确认，或先撤下该页
+          immediate: 转载页面漏掉了原作者名字，目前需要先说明各自能承担的工作。
+          near: 刊物需修订之后的转载流程；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核网站署名遗漏的处理结果。
+        far_consequence: 刊物需修订之后的转载流程，后续安排需重新通知参与者。
+      聚会地址版本冲突:
+        source: 纸质通知与网页写了不同的聚会地点
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：纸质通知与网页写了不同的聚会地点。'
+          objective: 让已出发的人收到一致的地址
+          choice: 逐一电话通知，或安排两处接应
+          immediate: 纸质通知与网页写了不同的聚会地点，目前需要先说明各自能承担的工作。
+          near: 下一次聚会将统一通知方式；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核聚会地址版本冲突的处理结果。
+        far_consequence: 下一次聚会将统一通知方式，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 千禧年前后
+      aesthetics:
+      - 旧年代质感
+      - 恋爱轻喜
+      - 亚文化地下物语
+      places:
+      - 工作室
+      - 桌游店
+      - 列车车厢
+      - 旧书店
+  磁带与夜市街区:
+    eras:
+    - 九十年代
+    aesthetics:
+    - 旧年代质感
+    - 暖色生活流
+    - 温柔颓丧
+    rule: 街区消息由布告栏、电话和熟人传递，磁带与手写地址记录着日常。
+    social_rule: 公共活动以张贴的名单和当面约定为准。
+    places:
+      旧书店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 给旧磁带编目录
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      通宵大排档:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 筹划街坊点歌夜
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      家中厨房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 录制家常菜口述
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      工作室:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 拼贴夜市海报
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 音像店整理员
+        function: 给旧磁带编目录
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 一盒待编目的试听磁带
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 街道文化站录音员
+        baseline: 你因一盒待编目的试听磁带与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 一盒待编目的试听磁带
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 音像店整理员与街道文化站录音员曾共同参与当地的给旧磁带编目录，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 街道文化站录音员
+        function: 筹划街坊点歌夜
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 一盒待编目的试听磁带
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 音像店整理员
+        baseline: 你因一盒待编目的试听磁带与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 一盒待编目的试听磁带
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 街道文化站录音员与音像店整理员曾共同参与当地的筹划街坊点歌夜，双方同意保持联系。
+    activities:
+      给旧磁带编目录:
+        places:
+        - 旧书店
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}转动磁带盒核对手写曲目，请你认一段前奏。'
+        beats:
+          trigger: '{npc}转动磁带盒核对手写曲目，请你认一段前奏。'
+          objective: 给旧磁带编目录
+          choice: 先参与给旧磁带编目录，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      筹划街坊点歌夜:
+        places:
+        - 通宵大排档
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}展开手写歌单，问你哪首适合压轴。'
+        beats:
+          trigger: '{npc}展开手写歌单，问你哪首适合压轴。'
+          objective: 筹划街坊点歌夜
+          choice: 先参与筹划街坊点歌夜，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      录制家常菜口述:
+        places:
+        - 家中厨房
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}按下便携录音机，请你讲一道家里常做的菜。'
+        beats:
+          trigger: '{npc}按下便携录音机，请你讲一道家里常做的菜。'
+          objective: 录制家常菜口述
+          choice: 先参与录制家常菜口述，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      拼贴夜市海报:
+        places:
+        - 工作室
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}摆开剪报和胶水，请你替活动标题选位置。'
+        beats:
+          trigger: '{npc}摆开剪报和胶水，请你替活动标题选位置。'
+          objective: 拼贴夜市海报
+          choice: 先参与拼贴夜市海报，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 借出的磁带盒里会夹一张约好归还时间的纸签。
+    pressures:
+      演出带误贴标签:
+        source: 文化站收到两盒同名但内容不同的演出带
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：文化站收到两盒同名但内容不同的演出带。'
+          objective: 找到正确母带并确认演出顺序
+          choice: 试听片头，或联系原录音者
+          immediate: 文化站收到两盒同名但内容不同的演出带，目前需要先说明各自能承担的工作。
+          near: 更正后的目录会交回文化站；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核演出带误贴标签的处理结果。
+        far_consequence: 更正后的目录会交回文化站，后续安排需重新通知参与者。
+      夜市摊位调整:
+        source: 新的夜市通道规划占用了原定的小舞台
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：新的夜市通道规划占用了原定的小舞台。'
+          objective: 商量不阻挡通行的新舞台位置
+          choice: 实地量一量，或改成分散点歌
+          immediate: 新的夜市通道规划占用了原定的小舞台，目前需要先说明各自能承担的工作。
+          near: 街坊的反馈将决定下一轮场地安排；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核夜市摊位调整的处理结果。
+        far_consequence: 街坊的反馈将决定下一轮场地安排，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 九十年代
+      aesthetics:
+      - 旧年代质感
+      - 暖色生活流
+      - 温柔颓丧
+      places:
+      - 旧书店
+      - 通宵大排档
+      - 家中厨房
+      - 工作室
+  街角共同生活圈:
+    eras:
+    - 当代都市
+    aesthetics:
+    - 青年漫写实
+    - 写实文学
+    - 都市轻悬疑
+    - 暖色生活流
+    - 市井烟火
+    - 恋爱轻喜
+    rule: 社区里的店铺、公共设施与住户相互依赖，小事也能形成长期往来。
+    social_rule: 公共空间按预约使用，邻里帮助不等于无限义务。
+    places:
+      老旧小区:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 交换街区故事
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      家中厨房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 试做邻里菜单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      清晨菜市场:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 记录时令食材
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      朋友客厅:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 整理社区相册
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      深夜便利店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 补画夜行地图
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      24小时自助洗衣房:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 共拟借阅角
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      社区诊所:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 布置候诊阅读角
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+      打烊面包店:
+        details:
+        - 留有工作照明的公共会面处·夜
+        - 摆着本次活动用品的桌边·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 通向该场所公共区域的出口
+          witnesses:
+          - 知晓本次活动的工作人员
+          affordances:
+          - 筹备邻里试吃
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 当前到访人数
+          - 事先约定的开放时段
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 社区活动策划人
+        function: 交换街区故事
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 居民自愿提供的街区地图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 街区口述史记录员
+        baseline: 你因居民自愿提供的街区地图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 居民自愿提供的街区地图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 社区活动策划人与街区口述史记录员曾共同参与当地的交换街区故事，双方同意保持联系。
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 街区口述史记录员
+        function: 试做邻里菜单
+        authority: 安排自己负责的工作，不代表其他人承诺
+        resource: 居民自愿提供的街区地图
+        limitation: 不能替其他参与者决定是否加入
+        obligation: 说明共同事务的步骤、费用与使用条件
+        exposure: 工作疏漏需要向受影响的人解释并补救
+        hidden: —
+      player:
+        identity: 社区活动策划人
+        baseline: 你因居民自愿提供的街区地图与对方有过合作，这次按约来参与当地事务。
+        resources:
+        - 居民自愿提供的街区地图
+        reputation: 愿意沟通，也会说明自己的能力边界
+      relationship_reason: 街区口述史记录员与社区活动策划人曾共同参与当地的试做邻里菜单，双方同意保持联系。
+    activities:
+      交换街区故事:
+        places:
+        - 老旧小区
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}把居民手绘的老地图铺开，请你标出一家还记得的店。'
+        beats:
+          trigger: '{npc}把居民手绘的老地图铺开，请你标出一家还记得的店。'
+          objective: 交换街区故事
+          choice: 先参与交换街区故事，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      试做邻里菜单:
+        places:
+        - 家中厨房
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}把两份食谱并排放好，问你想先试哪一种调味。'
+        beats:
+          trigger: '{npc}把两份食谱并排放好，问你想先试哪一种调味。'
+          objective: 试做邻里菜单
+          choice: 先参与试做邻里菜单，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      记录时令食材:
+        places:
+        - 清晨菜市场
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}递来一张空白采购单，请你一起问问今天新到的菜。'
+        beats:
+          trigger: '{npc}递来一张空白采购单，请你一起问问今天新到的菜。'
+          objective: 记录时令食材
+          choice: 先参与记录时令食材，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      整理社区相册:
+        places:
+        - 朋友客厅
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}翻到一张没有日期的合照，请你辨认窗外的街景。'
+        beats:
+          trigger: '{npc}翻到一张没有日期的合照，请你辨认窗外的街景。'
+          objective: 整理社区相册
+          choice: 先参与整理社区相册，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      补画夜行地图:
+        places:
+        - 深夜便利店
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}在地图上圈出仍亮灯的店铺，问你还知道哪一处。'
+        beats:
+          trigger: '{npc}在地图上圈出仍亮灯的店铺，问你还知道哪一处。'
+          objective: 补画夜行地图
+          choice: 先参与补画夜行地图，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      共拟借阅角:
+        places:
+        - 24小时自助洗衣房
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}拿着待交换的书，问你借阅架放在哪里不挡路。'
+        beats:
+          trigger: '{npc}拿着待交换的书，问你借阅架放在哪里不挡路。'
+          objective: 共拟借阅角
+          choice: 先参与共拟借阅角，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      布置候诊阅读角:
+        places:
+        - 社区诊所
+        pairs:
+        - 0
+        category: 信息交换
+        action: '{npc}把捐赠图书放在推车上，请你一起按读者需求分层。'
+        beats:
+          trigger: '{npc}把捐赠图书放在推车上，请你一起按读者需求分层。'
+          objective: 布置候诊阅读角
+          choice: 先参与布置候诊阅读角，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+      筹备邻里试吃:
+        places:
+        - 打烊面包店
+        pairs:
+        - 1
+        category: 信息交换
+        action: '{npc}把剩余试制面包分成小块，邀请你给口味写标签。'
+        beats:
+          trigger: '{npc}把剩余试制面包分成小块，邀请你给口味写标签。'
+          objective: 筹备邻里试吃
+          choice: 先参与筹备邻里试吃，或请对方示范后再决定
+          immediate: 现场没有强制期限，双方可按兴趣继续。
+          near: 完成后可以带走自己的记录，也可以另约时间；不因此生成危机。
+    customs:
+    - 邻里交换物件时会附一张写着用法的小纸条。
+    pressures:
+      公共庭院预约撞期:
+        source: 两组居民拿到了同一时段的庭院预约
+        engines:
+        - 旧事追索
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：两组居民拿到了同一时段的庭院预约。'
+          objective: 核对预约并协商分时使用
+          choice: 先联系另一组住户，或提议另选日期
+          immediate: 两组居民拿到了同一时段的庭院预约，目前需要先说明各自能承担的工作。
+          near: 预约办法需要在下一次居民会上重新说明；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核公共庭院预约撞期的处理结果。
+        far_consequence: 预约办法需要在下一次居民会上重新说明，后续安排需重新通知参与者。
+      老店招牌归属争议:
+        source: 旧店主与新承租人都希望保留同一块招牌
+        engines:
+        - 名声保卫
+        - 组织更迭
+        beats:
+          trigger: '{npc}收到消息：旧店主与新承租人都希望保留同一块招牌。'
+          objective: 厘清招牌的归属和展示方式
+          choice: 查找交接记录，或邀请双方谈共展方案
+          immediate: 旧店主与新承租人都希望保留同一块招牌，目前需要先说明各自能承担的工作。
+          near: 最终约定会影响街区展览的布置；也可退出本次协助并把已知情况交给负责人。
+        far_trigger: 相关负责人开始复核老店招牌归属争议的处理结果。
+        far_consequence: 最终约定会影响街区展览的布置，后续安排需重新通知参与者。
+    legacy_sources:
+      eras:
+      - 当代都市
+      aesthetics:
+      - 青年漫写实
+      - 写实文学
+      - 都市轻悬疑
+      - 暖色生活流
+      - 市井烟火
+      - 恋爱轻喜
+      places:
+      - 老旧小区
+      - 家中厨房
+      - 清晨菜市场
+      - 朋友客厅
+      - 深夜便利店
+      - 24小时自助洗衣房
+      - 社区诊所
+      - 打烊面包店
   仙门山下百业镇:
     eras:
     - 东方玄幻大陆

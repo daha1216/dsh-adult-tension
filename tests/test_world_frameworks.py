@@ -13,7 +13,7 @@ V=load('framework_validate','scripts/validate_state.py')
 class WorldFrameworkTests(unittest.TestCase):
  def test_all_frameworks_support_daily_and_pressure(self):
   pools=R.load_pools(); tables=F.load_tables()
-  self.assertEqual(10,len(pools['世界框架']))
+  self.assertGreaterEqual(len(pools['世界框架']), 43)
   for name in pools['世界框架']:
    for mode in ('daily','pressure'):
     roll=B.build_roll(17,{}, {},False,False,mode,name)
