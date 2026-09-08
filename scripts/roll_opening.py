@@ -607,6 +607,16 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     draw("关系姿态", pools["决策轴"]["关系姿态"])
     draw("反差轴", pools["反差轴"])
 
+    # Align situation with at least one engine theme unless explicitly locked.
+    theme_words = {"deadline": "死线 到期 倒计时 前夜 最后 临界 逼近", "secrecy": "秘密 瞒报 泄密 暴露 身份 监视 审查", "resource": "资源 配给 燃油 药物 名额 断供", "relationship": "旧情 婚姻 婚礼 青梅 监护 信任", "authority": "契约 规则 继承 权力 名分 组织", "illness": "伤病 伤口 发炎 戒断 疗程 感染"}
+    def _themes(value: str) -> set[str]:
+        return {name for name, words in theme_words.items() if any(word in value for word in words.split())}
+    engine_themes = set().union(*(_themes(x) for x in split_items(str(roll.get("张力引擎", "")))))
+    if engine_themes and "处境" not in locks and not (_themes(str(roll.get("处境", ""))) & engine_themes):
+        candidates = [x for x in pools["处境侧"] if _themes(x) & engine_themes]
+        if candidates:
+            roll["处境"] = _choice_with_cooldown(rng, candidates, recent.get("处境"))
+
     if roll["权力结构"] not in POWER_STRUCTURES:
         raise AnchorError(f"权力结构值不在枚举中：{roll['权力结构']!r}")
     if "张力引擎" not in locks and not (
@@ -640,7 +650,11 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         draw("表层风味", pools["表层风味"])
         draw("口癖", pools["口癖"])
 
-    appearance = _appearance_items(pools, gate)
+    appearance = _appearance_items(pools, gate)    # Filter high-risk fantasy-only appearance signals outside fantasy worlds.
+    if not any(token in str(roll.get("时代", "")) for token in ("幻想", "玄幻", "异世界", "地下城", "神怪", "废土")):
+        filtered = [entry for entry in appearance if entry.get("item") not in {"异色瞳", "蓝紫", "渐变", "鸳鸯双色"}]
+        if len(filtered) >= 3:
+            appearance = filtered
     main_picks = _draw_distinct(rng, appearance, 2)
     rest = [entry for entry in appearance if entry not in main_picks]
     support_picks = _draw_distinct(rng, rest, 1)
