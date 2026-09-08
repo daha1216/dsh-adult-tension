@@ -134,6 +134,7 @@ def extract_live_slice(state: dict[str, Any]) -> dict[str, Any]:
         "delta_t": world.get("delta_t"),
         "delta_human": world.get("delta_human"),
         "setting_shell": world.get("setting_shell"),
+        "world_framework": world.get("framework"),
         "tension_engines": world.get("tension_engines"),
         # 世界常量不可压缩，切片不截断（状态总结.md 把常量列入禁删清单）。
         "constants": list(world.get("constants") or []),
@@ -196,6 +197,7 @@ def opening_brief(state: dict[str, Any]) -> dict[str, Any]:
         "opening_mode": state.get("meta", {}).get("opening_mode", "pressure"),
         "seed_clock": slice_.get("clock"),
         "world": {
+            "framework": slice_.get("world_framework"),
             "era": shell.get("type"),
             "place": shell.get("place"),
             "rule": shell.get("rule"),

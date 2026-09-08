@@ -203,6 +203,10 @@ class Validator:
         if data is None:
             return
         self.required(data, {"clock", "previous_clock", "delta_t", "constants", "tension_engines", "setting_shell", "pressure_seeds"}, "world")
+        if "framework" in data:
+            framework = self.mapping(data["framework"], "world.framework")
+            if framework is not None:
+                self.required_text(framework, ("name", "rule", "custom", "activity", "relationship_reason"), "world.framework")
         constants = self.sequence(data.get("constants"), "world.constants")
         if constants is not None and not constants:
             self.error("world.constants", "must contain at least one world constant")

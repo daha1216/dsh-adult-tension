@@ -68,7 +68,7 @@
 
 ## 📦 内置素材：从设定到角色的一整套世界库
 
-随机开局从内置素材池组合生成，而不是只依赖临场补全。素材数据本体全部在 [`scripts/data/`](./scripts/data/) 的 YAML 表里，由开局脚本直接加载：
+随机开局从内置素材池组合生成，而不是只依赖临场补全。除旧素材池外，项目新增了 10 套闭合世界框架包，每套包含规则、地点、人物搭配、日常活动、地方细节和压力情境。素材数据本体全部在 [`scripts/data/`](./scripts/data/) 的 YAML 表里，由开局脚本直接加载：
 
 | 内容 | 数量 | 示例 |
 | --- | --- | --- |
@@ -161,7 +161,7 @@ python scripts/manage_saves.py list
 python scripts/manage_saves.py load main
 ```
 
-`build_opening.py` 支持 `--lock 字段=值` 锁定特定设定（可重复）、`--force-table` 仅用自带素材、`--all-custom` 配合 `--custom KEY=VALUE` 自拟核心设定。存档由 `manage_saves.py` 原子写入：每个存档目录包含 `state.yaml`（v3 叙事状态）与 `manifest.yaml`（创建/更新时间），覆盖保存需携带载入时记录的 `--expected-updated-at`，不一致即拒绝且不自动合并——按提示读取最新版本、另存为其他名称或取消。
+`build_opening.py` 支持 `--framework auto|legacy|框架名称` 选择世界框架，支持 `--lock 字段=值` 锁定特定设定（可重复）、`--force-table` 仅用自带素材、`--all-custom` 配合 `--custom KEY=VALUE` 自拟核心设定。存档由 `manage_saves.py` 原子写入：每个存档目录包含 `state.yaml`（v3 叙事状态）与 `manifest.yaml`（创建/更新时间），覆盖保存需携带载入时记录的 `--expected-updated-at`，不一致即拒绝且不自动合并——按提示读取最新版本、另存为其他名称或取消。
 
 维护者向的工具：`commit_turn.py` 是回合提交器（时钟、场景、事件与提交前校验一次落地）；`check_content.py` 对全部素材数据做内容体检（包含地点画像、动作分类与元数据、身份行为画像、转折画像和重复口径检查）。文档一致性检查随测试运行。扩充素材的方法见 [`references/加内容.md`](./references/加内容.md)。
 
@@ -173,7 +173,7 @@ python scripts/manage_saves.py load main
 | `commands.yaml` | 命令总表：触发词、行为与后台 CLI 的唯一来源 |
 | `references/` | 开局流程、角色设计、世界运转、存档格式与扩充指南 |
 | `scripts/` | 开局生成、回合提交、活切片、存档管理与内容体检工具 |
-| `scripts/data/` | 全部素材数据本体（YAML 表） |
+| `scripts/data/` | 全部素材数据本体（YAML 表），其中 `world_frameworks.yaml` 是闭合世界框架包 |
 | `saves/` | 运行时存档目录（命名槽在 `saves/slots/`） |
 | `tests/` | 自动化测试与文档一致性检查 |
 | `agents/` | AI 工具配置（如 `openai.yaml`） |

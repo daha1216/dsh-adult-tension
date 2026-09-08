@@ -41,6 +41,7 @@ CHAR_POOLS_FILE = DATA_DIR / "character_pools.yaml"
 ACTION_CATEGORIES_FILE = DATA_DIR / "action_categories.yaml"
 ACTION_METADATA_FILE = DATA_DIR / "action_metadata.yaml"
 TWIST_PROFILES_FILE = DATA_DIR / "twist_profiles.yaml"
+FRAMEWORKS_FILE = DATA_DIR / "world_frameworks.yaml"
 HISTORY_FILE = "adult_tension_narrative_roll_history.jsonl"
 HISTORY_RETRY_LIMIT = 32
 HISTORY_LIMIT = 200
@@ -59,7 +60,7 @@ CUSTOM_KEYS = {
 }
 LOCKABLE_KEYS = set(CUSTOM_KEYS) | {
     "美学基调", "权力结构", "反差轴", "配角功能",
-    "玩家称谓", "玩家年龄段", "玩家社会位置",
+    "玩家称谓", "玩家年龄段", "玩家社会位置", "世界框架",
 }
 # 多值字段：lock/custom 值允许顿号或逗号分隔多项，每项必须来自对应解析池；
 # 少于规定数量时自动从池中补抽，保证最终数量与互不相同（如张力引擎恒为两项）。
@@ -302,6 +303,7 @@ def load_pools() -> dict[str, Any]:
     action_categories = _read_yaml(ACTION_CATEGORIES_FILE, "场景动作分类")
     action_metadata = _read_yaml(ACTION_METADATA_FILE, "场景动作元数据")
     twist_profiles = _read_yaml(TWIST_PROFILES_FILE, "转折画像")
+    frameworks = _read_yaml(FRAMEWORKS_FILE, "世界框架")
 
     pools: dict[str, Any] = {}
     pools["表层风味"] = _flatten_grouped(char_pools["表层风味"], name="表层风味", max_len=8)
@@ -310,6 +312,10 @@ def load_pools() -> dict[str, Any]:
     pools["决策轴"] = _decision_axes(char_meta.get("决策轴"))
     pools["人物生成倾向"] = _profile_weights(char_meta.get("人物生成倾向"))
     pools["配角功能"] = _flat(char_meta.get("配角功能"), "配角功能")
+    pools["世界框架"] = frameworks.get("frameworks") or {}
+    pools["世界框架旧池权重"] = frameworks.get("legacy_weight", 10)
+    if not pools["世界框架"]:
+        raise AnchorError("世界框架素材包为空")
 
     for key in ("核心规则", "美学基调", "权力结构", "张力引擎", "社会规则",
                 "压力来源", "身份侧", "处境侧", "反差轴"):
@@ -440,8 +446,14 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
                locks: dict[str, str] | None = None,
                custom: dict[str, str] | None = None,
                recent: dict[str, set[str]] | None = None,
-               opening_mode: str = "pressure") -> dict[str, Any]:
-    """按 protocol_version/DRAW_PLAN 固定消费顺序生成结构骰。"""
+               opening_mode: str = "pressure", framework: str | None = None) -> dict[str, Any]:
+    """框架使用独立随机流，旧 DRAW_PLAN 的消费顺序保持不变。"""
+    if framework not in (None, "legacy") or "世界框架" in (locks or {}):
+        module = _COMMON.load_sibling("world_frameworks")
+        try:
+            return module.build(build_roll, pools, seed, mode, locks, custom, recent, opening_mode, framework)
+        except module.FrameworkError as exc:
+            raise AnchorError(str(exc)) from exc
     if opening_mode not in ("pressure", "daily"):
         raise AnchorError(f"未知开局类型：{opening_mode}")
     locks = dict(locks or {})
@@ -774,6 +786,9 @@ def twist_profile(pools: dict[str, Any], category: str) -> dict[str, Any]:
 def _roll_signature(roll: dict[str, Any]) -> str:
     payload = {key: roll.get(key) for key in DRAW_PLAN}
     payload["opening_mode"] = roll.get("opening_mode", "pressure")
+    if "世界框架" in roll:
+        payload["世界框架"] = roll["世界框架"]
+        payload["框架选择"] = roll["框架选择"]
     return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
@@ -863,6 +878,7 @@ def append_history(roll: dict[str, Any]) -> None:
             "seed": roll["seed"],
             "mode": roll["mode"],
             "opening_mode": roll.get("opening_mode", "pressure"),
+            "framework": roll.get("世界框架"),
             "signature": _roll_signature(roll),
             "triple": _roll_triple(roll),
             "地点": roll.get("地点"),
@@ -929,6 +945,7 @@ def main(argv: list[str] | None = None) -> int:
                         help="预锁字段，可重复（如 --lock 时代=当代都市）")
     parser.add_argument("--custom", action="append", default=[], metavar="KEY=VALUE",
                         help="表外自定义值，仅与 --all-custom 一起使用")
+    parser.add_argument("--framework", default="legacy", help="legacy、auto 或世界框架名称")
     parser.add_argument("--opening-mode", choices=["pressure", "daily"], default="pressure")
     parser.add_argument("--format", choices=["text", "json"], default="text")
     args = parser.parse_args(argv)
@@ -1001,7 +1018,7 @@ def main(argv: list[str] | None = None) -> int:
         recent = set() if args.no_history else recent_signatures()
         recent_t = set() if args.no_history else recent_triples()
         cooldowns = {} if args.no_history else recent_cooldowns()
-        roll = build_roll(pools, seed, mode, locks, custom, cooldowns, args.opening_mode)
+        roll = build_roll(pools, seed, mode, locks, custom, cooldowns, args.opening_mode, args.framework)
         signature = _roll_signature(roll)
         triple = _roll_triple(roll)
         if args.seed is None:
@@ -1009,7 +1026,7 @@ def main(argv: list[str] | None = None) -> int:
             entropy = random.SystemRandom()
             while (signature in recent or triple in recent_t) and attempts < HISTORY_RETRY_LIMIT:
                 seed = entropy.randrange(0, 2 ** 31)
-                roll = build_roll(pools, seed, mode, locks, custom, cooldowns, args.opening_mode)
+                roll = build_roll(pools, seed, mode, locks, custom, cooldowns, args.opening_mode, args.framework)
                 signature = _roll_signature(roll)
                 triple = _roll_triple(roll)
                 attempts += 1

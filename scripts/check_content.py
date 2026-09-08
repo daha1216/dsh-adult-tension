@@ -38,6 +38,7 @@ DATA_FILES = (
     "action_metadata.yaml",
     "identity_profiles.yaml",
     "twist_profiles.yaml",
+    "world_frameworks.yaml",
 )
 
 POOL_TABLES = ("核心规则", "美学基调", "权力结构", "张力引擎", "社会规则",
@@ -368,6 +369,10 @@ def check() -> Report:
         report.ok(all(profile.get(key) for key in ("function", "visibility", "escalation")),
                   f"场景动作元数据「{category}」缺少 function/visibility/escalation")
     identity_profiles = _load("identity_profiles.yaml")
+    framework_spec = importlib.util.spec_from_file_location("check_frameworks", ROOT / "scripts" / "check_frameworks.py")
+    framework_check = importlib.util.module_from_spec(framework_spec)
+    framework_spec.loader.exec_module(framework_check)
+    framework_check.check_frameworks(_load("world_frameworks.yaml"), pools, action_categories, identity_profiles, report)
     report.ok(families <= set(identity_profiles),
               "identity_profiles.yaml 必须覆盖所有身份族")
     for family in families:

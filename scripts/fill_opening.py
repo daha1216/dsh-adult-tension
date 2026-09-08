@@ -101,6 +101,7 @@ def trade_actions(pools: dict[str, Any]) -> set[str]:
 def load_tables() -> dict[str, Any]:
     return {
         "names": _load_yaml("names.yaml"),
+        "frameworks": _load_yaml("world_frameworks.yaml"),
         "identities": _load_yaml("identities.yaml"),
         "locations": _load_yaml("locations.yaml"),
         "location_profiles": _load_yaml("location_profiles.yaml"),
@@ -341,6 +342,11 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     """在骨架上填实 1-14 内容字段，返回新 dict。"""
     data = copy.deepcopy(skeleton)
     tables = tables or load_tables()
+    frameworks = _COMMON.load_sibling("world_frameworks")
+    try:
+        tables = frameworks.prepare_tables(tables, roll)
+    except frameworks.FrameworkError as exc:
+        raise FillError(str(exc)) from exc
     opening_mode = roll.get("opening_mode", "pressure")
     if opening_mode not in ("pressure", "daily"):
         raise FillError("未知 opening_mode")
@@ -754,7 +760,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         "invariants": {"age_verified": True, "player_control_preserved": True},
     }
     data.pop("directives", None)
-    return data
+    return frameworks.decorate(data, roll, tables)
 
 
 def opening_suggestions(state: dict[str, Any], roll: dict[str, Any] | None = None,
@@ -762,5 +768,7 @@ def opening_suggestions(state: dict[str, Any], roll: dict[str, Any] | None = Non
     npc = (state.get("npcs") or [{}])[0]
     player = state.get("player") or {}
     action = (roll or {}).get("场景动作") or ""
+    if (roll or {}).get("世界框架"):
+        tables = _COMMON.load_sibling("world_frameworks").prepare_tables(tables or load_tables(), roll)
     return suggested_actions(
         str(action), str(npc.get("name") or "她"), str(player.get("name") or "你"), tables)

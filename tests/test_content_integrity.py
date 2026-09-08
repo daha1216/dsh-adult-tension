@@ -29,9 +29,10 @@ DATA_FILES = (
     "action_metadata.yaml",
     "identity_profiles.yaml",
     "twist_profiles.yaml",
+    "world_frameworks.yaml",
 )
 
-EXPECTED = "a27afad300bf54e9a5ac3210d94f80050ed30d2fa70a7c90c6795488f7c13d69"
+EXPECTED = "abed5118b16228d548aa1c497a618795cef5a6d6d22570cb99d5ccb22de4dfb0"
 
 
 def _load(name: str, relative: str):

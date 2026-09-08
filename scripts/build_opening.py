@@ -86,14 +86,15 @@ def parse_pairs(entries: list[str], label: str) -> dict[str, str]:
 
 
 def build_roll(seed: int | None, locks: dict[str, str], custom: dict[str, str],
-               all_custom: bool, force_table: bool, opening_mode: str = "pressure") -> dict[str, Any]:
+               all_custom: bool, force_table: bool, opening_mode: str = "pressure",
+               framework: str | None = None) -> dict[str, Any]:
     roll_mod = load_roll_opening()
     pools = roll_mod.load_pools()
     if all_custom and force_table:
         raise SystemExit("ERROR: --all-custom 与 --force-table 互斥")
     mode = "all_custom" if all_custom else ("force_table" if force_table else "table")
     actual_seed = seed if seed is not None else roll_mod.random.SystemRandom().randrange(0, 2 ** 31)
-    return roll_mod.build_roll(pools, actual_seed, mode, locks, custom, opening_mode=opening_mode)
+    return roll_mod.build_roll(pools, actual_seed, mode, locks, custom, opening_mode=opening_mode, framework=framework)
 
 
 def roll_from_file(path: Path) -> dict[str, Any]:
@@ -281,13 +282,17 @@ def resolve_roll(args: argparse.Namespace) -> dict[str, Any]:
     if args.roll_file is not None:
         roll = roll_from_file(args.roll_file)
         stored_mode = roll.get("opening_mode", "pressure")
+        requested_framework = getattr(args, "framework", None)
+        if requested_framework not in (None, "auto", roll.get("世界框架", "legacy")):
+            raise SystemExit("ERROR: --framework 与已有 roll 不一致")
         if args.opening_mode is not None and args.opening_mode != stored_mode:
             raise SystemExit("ERROR: --opening-mode 与已有 roll 不一致；请重新生成，不改写已有开局")
         return roll
     locks = parse_pairs(args.lock, "lock")
     custom = parse_pairs(args.custom, "custom")
     return build_roll(args.seed, locks, custom, args.all_custom, args.force_table,
-                      getattr(args, "opening_mode", None) or "pressure")
+                      getattr(args, "opening_mode", None) or "pressure",
+                      framework=getattr(args, "framework", None) or ("auto" if args.complete else "legacy"))
 
 
 def complete_opening(args: argparse.Namespace) -> int:
@@ -372,6 +377,7 @@ def complete_opening(args: argparse.Namespace) -> int:
             "protocol_version": PROTOCOL_VERSION,
             "mode": roll.get("mode", "table"),
             "opening_mode": roll.get("opening_mode", "pressure"),
+            "framework": roll.get("世界框架"),
             "locks": request_locks,
             "custom": request_custom,
             "history_used": history_used,
@@ -436,6 +442,8 @@ def build_parser() -> argparse.ArgumentParser:
                         help="顺带输出 opening_request YAML（seed/协议/模式/锁/校验状态）")
     parser.add_argument("--check", type=Path, default=None, metavar="FILE",
                         help="校验已生成骨架/填充文件并列出待填项")
+    parser.add_argument("--framework", default=None,
+                        help="auto 混合新框架与旧池；legacy 仅旧池；也可指定世界框架名称")
     parser.add_argument("--opening-mode", choices=["pressure", "daily"], default=None,
                         help="新开局类型；生产开局未选择时只返回选择提示")
     parser.add_argument("--complete", action="store_true",

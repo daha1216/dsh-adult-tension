@@ -1,0 +1,1845 @@
+# 世界框架独立素材包
+version: 1
+legacy_weight: 10
+frameworks:
+  仙门山下百业镇:
+    eras:
+    - 东方玄幻大陆
+    aesthetics:
+    - 水墨写意
+    - 市井烟火
+    rule: 修行资源进入民间百业，法器维修、灵兽寄养和传音服务都有明确行规。
+    social_rule: 手艺按工序计价，凡人与修士都能登记工单。
+    places:
+      法器修理铺:
+        details:
+        - 摆着拆件木盘的试音台·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 试用传音匣
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      灵兽寄养院:
+        details:
+        - 供客人观察的寄养廊·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给灵兽配晚食
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      山门集市:
+        details:
+        - 飘着蒸饼香的修补摊·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 拼一盏市集灵灯
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 法器修理师
+        function: 验修法器与教人保养
+        authority: 负责自己经手的工作安排
+        resource: 一套可借用的校音工具
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 旧器收藏者
+        baseline: 你因三件带维修记录的旧器与当地从事验修法器与教人保养的人有来往。
+        resources:
+        - 三件带维修记录的旧器
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 旧器收藏者与法器修理师因验修法器与教人保养而相识。
+    - family: 动物与驯养
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 灵兽寄养师
+        function: 安排寄养与辨认兽粮
+        authority: 负责自己经手的工作安排
+        resource: 寄养院的分栏钥匙
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 药圃照料人
+        baseline: 你因药圃新收的安神草与当地从事安排寄养与辨认兽粮的人有来往。
+        resources:
+        - 药圃新收的安神草
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 药圃照料人与灵兽寄养师因安排寄养与辨认兽粮而相识。
+    activities:
+      试用传音匣:
+        places:
+        - 法器修理铺
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}拨动修好的传音匣，把另一端放到你面前，等你选一句试音的话。'
+        beats:
+          trigger: '{npc}拨动修好的传音匣，把另一端放到你面前，等你选一句试音的话。'
+          objective: 试一试旧器的新声音
+          choice: 说一句短话试音，或先看看修补处
+          immediate: 试一试旧器的新声音可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      给灵兽配晚食:
+        places:
+        - 灵兽寄养院
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}把三种兽粮分开放好，问你愿不愿意一起辨认它们的气味。'
+        beats:
+          trigger: '{npc}把三种兽粮分开放好，问你愿不愿意一起辨认它们的气味。'
+          objective: 配好晚食并认识寄养的小兽
+          choice: 挑一种闻闻，或请对方演示
+          immediate: 配好晚食并认识寄养的小兽可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      拼一盏市集灵灯:
+        places:
+        - 山门集市
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把灵灯的纸骨展开，在摊边留出一张凳子，问你想画什么。'
+        beats:
+          trigger: '{npc}把灵灯的纸骨展开，在摊边留出一张凳子，问你想画什么。'
+          objective: 做一盏可以带走的小灯
+          choice: 落笔画一角，或聊聊镇上的灯会
+          immediate: 做一盏可以带走的小灯可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 铜铃、药香和被反复擦亮的旧法器构成镇上的日常声音。
+    - 修好旧器的人会在底部留一枚可擦掉的工记。
+    - 邻里互赠灵米蒸饼，收到后不必回等价礼。
+    pressures:
+      灵材交货争议:
+        source: 共同订购的灵材被另一家作坊领走
+        engines:
+        - 资源锁定
+        - 组织更迭
+        beats:
+          trigger: '{npc}带来消息：共同订购的灵材被另一家作坊领走。'
+          objective: 核对订单与领料凭据
+          choice: 找作坊核对，或先联络共同订货的人
+          immediate: 先弄清共同订购的灵材被另一家作坊领走涉及的事实，双方仍可拒绝承担额外责任。
+          near: 核对订单与领料凭据的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论灵材交货争议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      山门工摊议价:
+        source: 山门拟调整百业镇的工摊租额
+        engines:
+        - 组织更迭
+        - 名声保卫
+        beats:
+          trigger: '{npc}带来消息：山门拟调整百业镇的工摊租额。'
+          objective: 把各家作坊的实际负担写进议价记录
+          choice: 展示账本，或先听其他工匠的方案
+          immediate: 先弄清山门拟调整百业镇的工摊租额涉及的事实，双方仍可拒绝承担额外责任。
+          near: 把各家作坊的实际负担写进议价记录的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论山门工摊议价的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+  退休勇者之城:
+    eras:
+    - 剑与魔法大陆
+    aesthetics:
+    - 奇幻迷宫慢生活
+    - 市井烟火
+    rule: 大战结束后，昔日勇者和魔族共同经营城市，旧功勋不自动换来新特权。
+    social_rule: 城务按居民身份表决，旧军阶不用于日常差遣。
+    places:
+      冒险者旧会馆:
+        details:
+        - 旧地图铺开的圆桌·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给旧地图补地名
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      退役勇者酒馆:
+        details:
+        - 挂着退役徽章的长吧台·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 试做远征锅的新口味
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      城墙花园:
+        details:
+        - 种着可食花草的城墙角·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给城墙花圃挂牌
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 战利品修复师
+        function: 修复有纪念价值的旧物
+        authority: 负责自己经手的工作安排
+        resource: 一间向邻里开放的修复台
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 退役探路人
+        baseline: 你因多年保存的旅行手札与当地从事修复有纪念价值的旧物的人有来往。
+        resources:
+        - 多年保存的旅行手札
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 退役探路人与战利品修复师因修复有纪念价值的旧物而相识。
+    - family: 语言与传译
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 魔族社区译员
+        function: 翻译旧称呼与社区通知
+        authority: 负责自己经手的工作安排
+        resource: 双语地名索引
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 口述史整理者
+        baseline: 你因受访者授权的访谈提纲与当地从事翻译旧称呼与社区通知的人有来往。
+        resources:
+        - 受访者授权的访谈提纲
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 口述史整理者与魔族社区译员因翻译旧称呼与社区通知而相识。
+    activities:
+      给旧地图补地名:
+        places:
+        - 冒险者旧会馆
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}展开战后重印的地图，请你认一认某条已经改名的小巷。'
+        beats:
+          trigger: '{npc}展开战后重印的地图，请你认一认某条已经改名的小巷。'
+          objective: 把旧地图变成可用的散步路线
+          choice: 写下认识的地名，或请对方讲讲那条路
+          immediate: 把旧地图变成可用的散步路线可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      试做远征锅的新口味:
+        places:
+        - 退役勇者酒馆
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}把远征时用的锅端上灶，递来两只空碗，问你先尝哪一种。'
+        beats:
+          trigger: '{npc}把远征时用的锅端上灶，递来两只空碗，问你先尝哪一种。'
+          objective: 试出适合平日售卖的一道菜
+          choice: 尝一小口，或提议加一种本地食材
+          immediate: 试出适合平日售卖的一道菜可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      给城墙花圃挂牌:
+        places:
+        - 城墙花园
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}拿来一束空白木牌，邀你给刚种下的香草写名字。'
+        beats:
+          trigger: '{npc}拿来一束空白木牌，邀你给刚种下的香草写名字。'
+          objective: 让邻居认得新栽的植物
+          choice: 写上名字，或问问哪一种适合泡茶
+          immediate: 让邻居认得新栽的植物可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 城里最受欢迎的店铺，往往挂着褪色的战旗和普通人的菜单。
+    - 许多人把战功徽章改成围裙扣，不再按军阶相称。
+    - 每月的旧物日允许只讲故事、不出售物件。
+    pressures:
+      旧功勋账册争议:
+        source: 会馆收到一份与旧功勋名册不符的证词
+        engines:
+        - 旧事追索
+        - 名声保卫
+        beats:
+          trigger: '{npc}带来消息：会馆收到一份与旧功勋名册不符的证词。'
+          objective: 核对证词并保护未被证实的当事人
+          choice: 约见证人，或先查公开记录
+          immediate: 先弄清会馆收到一份与旧功勋名册不符的证词涉及的事实，双方仍可拒绝承担额外责任。
+          near: 核对证词并保护未被证实的当事人的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论旧功勋账册争议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      会馆用途表决:
+        source: 旧会馆拟改作收费会场
+        engines:
+        - 组织更迭
+        - 资源锁定
+        beats:
+          trigger: '{npc}带来消息：旧会馆拟改作收费会场。'
+          objective: 提出居民仍能使用会馆的安排
+          choice: 召集住户，或比较两份改建方案
+          immediate: 先弄清旧会馆拟改作收费会场涉及的事实，双方仍可拒绝承担额外责任。
+          near: 提出居民仍能使用会馆的安排的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论会馆用途表决的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+  灵气复苏十年后:
+    eras:
+    - 架空都市
+    aesthetics:
+    - 都市妖异奇谭
+    - 暖色生活流
+    rule: 超自然能力已经成为公共服务，能力登记与普通生活彼此牵制。
+    social_rule: 能力服务按本人确认的项目收费，邻里可以选择普通技术替代。
+    places:
+      能力检修站:
+        details:
+        - 贴满返修便签的测试桌·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 调试会认人的台灯
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      社区灵气站:
+        details:
+        - 可以借用工具的公共柜台·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 交换一周的生活小窍门
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      夜间培训室:
+        details:
+        - 摆着演示小灯的成人夜校教室·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 体验灵气小夜灯课程
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 学术与专业
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 能力调试师
+        function: 校准家用灵能设备
+        authority: 负责自己经手的工作安排
+        resource: 便携校准仪与测试记录
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 家用设备设计者
+        baseline: 你因可拆装的低功耗样机与当地从事校准家用灵能设备的人有来往。
+        resources:
+        - 可拆装的低功耗样机
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 家用设备设计者与能力调试师因校准家用灵能设备而相识。
+    - family: 医疗与照护
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 社区灵气协调员
+        function: 安排无障碍能力服务
+        authority: 负责自己经手的工作安排
+        resource: 社区服务排班表
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 社区夜校讲师
+        baseline: 你因生活技能课程材料与当地从事安排无障碍能力服务的人有来往。
+        resources:
+        - 生活技能课程材料
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 社区夜校讲师与社区灵气协调员因安排无障碍能力服务而相识。
+    activities:
+      调试会认人的台灯:
+        places:
+        - 能力检修站
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把一盏只认自己声音的台灯推过来，邀你试试给它换个称呼。'
+        beats:
+          trigger: '{npc}把一盏只认自己声音的台灯推过来，邀你试试给它换个称呼。'
+          objective: 让台灯学会不同人的开关指令
+          choice: 试着叫它，或先读读调试记录
+          immediate: 让台灯学会不同人的开关指令可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      交换一周的生活小窍门:
+        places:
+        - 社区灵气站
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}把社区留言卡铺在桌上，问你想补哪一种生活小技巧。'
+        beats:
+          trigger: '{npc}把社区留言卡铺在桌上，问你想补哪一种生活小技巧。'
+          objective: 整理居民愿意分享的生活经验
+          choice: 写一张卡，或问问某条技巧怎么做
+          immediate: 整理居民愿意分享的生活经验可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      体验灵气小夜灯课程:
+        places:
+        - 夜间培训室
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}点亮一只透明小灯，把尚未着色的灯罩留给你。'
+        beats:
+          trigger: '{npc}点亮一只透明小灯，把尚未着色的灯罩留给你。'
+          objective: 做一盏能在家使用的小夜灯
+          choice: 选灯罩颜色，或先体验普通电池版本
+          immediate: 做一盏能在家使用的小夜灯可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 便利店货架旁就有能力安全须知，没人再为它专门停下脚步。
+    - 商店同时标注普通版和能力版的服务价格。
+    - 邻里夸人的话常是这回真省事，而不是能力多强。
+    pressures:
+      设备事故责任核对:
+        source: 一批公用设备故障被归责于同一家调试站
+        engines:
+        - 名声保卫
+        - 旧事追索
+        beats:
+          trigger: '{npc}带来消息：一批公用设备故障被归责于同一家调试站。'
+          objective: 查清测试记录与使用环节
+          choice: 查看留样，或联系报修居民
+          immediate: 先弄清一批公用设备故障被归责于同一家调试站涉及的事实，双方仍可拒绝承担额外责任。
+          near: 查清测试记录与使用环节的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论设备事故责任核对的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      登记范围讨论:
+        source: 社区拟扩大能力登记的信息范围
+        engines:
+        - 身份风险
+        - 组织更迭
+        beats:
+          trigger: '{npc}带来消息：社区拟扩大能力登记的信息范围。'
+          objective: 提出满足服务需求又不暴露隐私的方案
+          choice: 列出必要字段，或征询居民意见
+          immediate: 先弄清社区拟扩大能力登记的信息范围涉及的事实，双方仍可拒绝承担额外责任。
+          near: 提出满足服务需求又不暴露隐私的方案的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论登记范围讨论的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+  沿轨迁徙的移动城市:
+    eras:
+    - 近未来都市
+    aesthetics:
+    - 行当正剧
+    - 暖色生活流
+    rule: 整座城市按季节沿轨道迁移，停靠时间和车厢分区决定居民的生活节奏。
+    social_rule: 停靠时刻公开，居民可预约换车厢或在固定站下车。
+    places:
+      城市环轨站:
+        details:
+        - 可看见路标的候车窗·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 挑选下一站的交换物
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      车厢集市:
+        details:
+        - 摆着各站小吃的折叠柜台·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给车厢小店换菜单
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      迁徙调度室:
+        details:
+        - 向居民开放的路线展示桌·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 画下窗外的新地标
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 商业与产业
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 车厢杂货店主
+        function: 整理各站物产与预订单
+        authority: 负责自己经手的工作安排
+        resource: 带产地标签的样品柜
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 沿线物产采购员
+        baseline: 你因停靠站的供货联系册与当地从事整理各站物产与预订单的人有来往。
+        resources:
+        - 停靠站的供货联系册
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 沿线物产采购员与车厢杂货店主因整理各站物产与预订单而相识。
+    - family: 学术与专业
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 轨道领航员
+        function: 校对城市列车的站点与地标
+        authority: 负责自己经手的工作安排
+        resource: 可查看的路线图板
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 城市线路绘图员
+        baseline: 你因沿线更新的地貌草图与当地从事校对城市列车的站点与地标的人有来往。
+        resources:
+        - 沿线更新的地貌草图
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 城市线路绘图员与轨道领航员因校对城市列车的站点与地标而相识。
+    activities:
+      挑选下一站的交换物:
+        places:
+        - 城市环轨站
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}取出三件上一站收来的小物，把空白交换签递到你手边。'
+        beats:
+          trigger: '{npc}取出三件上一站收来的小物，把空白交换签递到你手边。'
+          objective: 准备愿意带到下一站交换的物件
+          choice: 挑一件聊聊来历，或写自己的交换签
+          immediate: 准备愿意带到下一站交换的物件可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      给车厢小店换菜单:
+        places:
+        - 车厢集市
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}把不同停靠站的食谱排开，问你哪一道适合做成车上晚餐。'
+        beats:
+          trigger: '{npc}把不同停靠站的食谱排开，问你哪一道适合做成车上晚餐。'
+          objective: 试出下次停靠前的小店菜单
+          choice: 选一道试味，或讲讲你吃过的版本
+          immediate: 试出下次停靠前的小店菜单可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      画下窗外的新地标:
+        places:
+        - 迁徙调度室
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}在路线图上圈出刚经过的山脊，请你一起给它画个记号。'
+        beats:
+          trigger: '{npc}在路线图上圈出刚经过的山脊，请你一起给它画个记号。'
+          objective: 记录旅途中值得再看的地方
+          choice: 补画一个轮廓，或聊聊下一站想去哪里
+          immediate: 记录旅途中值得再看的地方可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 窗外的地平线每天都在换，车厢里的邻居却比固定城市更熟。
+    - 邻居用车厢号交换便条，搬家后仍可转投。
+    - 每次停靠的小吃摊会留下当地的一张配方卡。
+    pressures:
+      停靠配额协商:
+        source: 下一站临时缩减城市列车的补给泊位
+        engines:
+        - 资源锁定
+        - 组织更迭
+        beats:
+          trigger: '{npc}带来消息：下一站临时缩减城市列车的补给泊位。'
+          objective: 协调公平的补给与下车安排
+          choice: 比较错峰方案，或联系站方复核
+          immediate: 先弄清下一站临时缩减城市列车的补给泊位涉及的事实，双方仍可拒绝承担额外责任。
+          near: 协调公平的补给与下车安排的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论停靠配额协商的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      迁徙路线改议:
+        source: 运营方提出跳过居民约定返访的站点
+        engines:
+        - 组织更迭
+        - 信任透支
+        beats:
+          trigger: '{npc}带来消息：运营方提出跳过居民约定返访的站点。'
+          objective: 说明改线影响并争取替代交通
+          choice: 征集返访需求，或讨论可行的接驳方式
+          immediate: 先弄清运营方提出跳过居民约定返访的站点涉及的事实，双方仍可拒绝承担额外责任。
+          near: 说明改线影响并争取替代交通的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论迁徙路线改议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+  潮汐群岛:
+    eras:
+    - 剑与魔法大陆
+    aesthetics:
+    - 暖色生活流
+    - 异世界冒险纪实
+    rule: 岛屿道路随潮汐出现，居民用潮表安排拜访、交易与节庆。
+    social_rule: 潮路和渡船时刻同时公开，错过步道仍可乘船往返。
+    places:
+      退潮石路:
+        details:
+        - 可以坐下观察潮池的石阶·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 辨认潮池的小邻居
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      潮汐灯塔:
+        details:
+        - 灯塔底层的公共潮表桌·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 为散步路线记潮时
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      浮桥集市:
+        details:
+        - 贝壳工摊旁的长木凳·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 做一枚潮铃挂饰
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 学术与专业
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 潮表记录员
+        function: 测记各岛潮路与潮池
+        authority: 负责自己经手的工作安排
+        resource: 供公众查阅的潮汐册
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 群岛地图绘制者
+        baseline: 你因画到一半的步道图与当地从事测记各岛潮路与潮池的人有来往。
+        resources:
+        - 画到一半的步道图
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 群岛地图绘制者与潮表记录员因测记各岛潮路与潮池而相识。
+    - family: 服务与手艺
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 岛上贝壳作坊主
+        function: 修补随身器物与制作岛饰
+        authority: 负责自己经手的工作安排
+        resource: 能借给访客的手作工具
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 沿岛物产交换者
+        baseline: 你因各岛愿意交换的物产清单与当地从事修补随身器物与制作岛饰的人有来往。
+        resources:
+        - 各岛愿意交换的物产清单
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 沿岛物产交换者与岛上贝壳作坊主因修补随身器物与制作岛饰而相识。
+    activities:
+      辨认潮池的小邻居:
+        places:
+        - 退潮石路
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把观察镜递到你手边，指了指潮池里正缓缓移动的小影子。'
+        beats:
+          trigger: '{npc}把观察镜递到你手边，指了指潮池里正缓缓移动的小影子。'
+          objective: 认识退潮后留下的海边生物
+          choice: 接过镜子看看，或问问哪些不宜触碰
+          immediate: 认识退潮后留下的海边生物可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      为散步路线记潮时:
+        places:
+        - 潮汐灯塔
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}在潮表上圈出适合散步的一段时间，邀你挑一座想去的岛。'
+        beats:
+          trigger: '{npc}在潮表上圈出适合散步的一段时间，邀你挑一座想去的岛。'
+          objective: 规划一次从容的岛间散步
+          choice: 选一座岛，或比较渡船和步道路线
+          immediate: 规划一次从容的岛间散步可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      做一枚潮铃挂饰:
+        places:
+        - 浮桥集市
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把贝片按声音排开，请你选两片听起来合拍的。'
+        beats:
+          trigger: '{npc}把贝片按声音排开，请你选两片听起来合拍的。'
+          objective: 做一枚轻响的挂饰
+          choice: 敲听贝片，或问问当地送潮铃的习惯
+          immediate: 做一枚轻响的挂饰可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 每座岛都有自己的潮铃，铃声先于潮水把人召到岸边。
+    - 潮铃既报潮时也报客来，声音不同。
+    - 拜访邻岛常带耐放的海盐饼，不要求主人留宿。
+    pressures:
+      公共潮路归属争议:
+        source: 一段常用潮路被新码头圈作私人通道
+        engines:
+        - 资源锁定
+        - 组织更迭
+        beats:
+          trigger: '{npc}带来消息：一段常用潮路被新码头圈作私人通道。'
+          objective: 核对公共通行记录并争取替代路径
+          choice: 走访常用居民，或查看码头图纸
+          immediate: 先弄清一段常用潮路被新码头圈作私人通道涉及的事实，双方仍可拒绝承担额外责任。
+          near: 核对公共通行记录并争取替代路径的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论公共潮路归属争议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      旧潮表争议:
+        source: 新潮道与沿用多年的潮表出现偏差
+        engines:
+        - 旧事追索
+        - 名声保卫
+        beats:
+          trigger: '{npc}带来消息：新潮道与沿用多年的潮表出现偏差。'
+          objective: 复测数据并公开可信的新潮时
+          choice: 参加复测，或整理居民的观察记录
+          immediate: 先弄清新潮道与沿用多年的潮表出现偏差涉及的事实，双方仍可拒绝承担额外责任。
+          near: 复测数据并公开可信的新潮时的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论旧潮表争议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+  云上驿路:
+    eras:
+    - 东方玄幻大陆
+    aesthetics:
+    - 水墨写意
+    - 市井烟火
+    rule: 浮空岛由驿站相连，天气、燃料和高度共同决定旅人的路线。
+    social_rule: 飞舟按风层与时刻表通行，旅客可在驿站改签或寄存行李。
+    places:
+      云上驿站:
+        details:
+        - 挂着风向绸带的登记台·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给信封补一枚岛印
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      浮舟货舱:
+        details:
+        - 供旅客寄存包裹的棚架旁·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给旧风帆缝一块新布
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      风帆观景台:
+        details:
+        - 可以听风笛的开放长廊·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 听懂廊下的风笛
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 云驿掌柜
+        function: 接待旅客与转投信物
+        authority: 负责自己经手的工作安排
+        resource: 按航线分类的寄存柜
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 跨岛书信整理者
+        baseline: 你因各岛寄来的公开风物册与当地从事接待旅客与转投信物的人有来往。
+        resources:
+        - 各岛寄来的公开风物册
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 跨岛书信整理者与云驿掌柜因接待旅客与转投信物而相识。
+    - family: 服务与手艺
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 浮舟修帆师
+        function: 修补风帆并讲解航路
+        authority: 负责自己经手的工作安排
+        resource: 有工记的补帆工具
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 风向记录员
+        baseline: 你因逐日写下的风层记录与当地从事修补风帆并讲解航路的人有来往。
+        resources:
+        - 逐日写下的风层记录
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 风向记录员与浮舟修帆师因修补风帆并讲解航路而相识。
+    activities:
+      给信封补一枚岛印:
+        places:
+        - 云上驿站
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把不同浮岛的印章摆开，问你想让这封信从哪一站寄出。'
+        beats:
+          trigger: '{npc}把不同浮岛的印章摆开，问你想让这封信从哪一站寄出。'
+          objective: 给普通问候选一条有意思的寄送路线
+          choice: 选一枚岛印，或聊聊收信人喜欢的风物
+          immediate: 给普通问候选一条有意思的寄送路线可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      给旧风帆缝一块新布:
+        places:
+        - 浮舟货舱
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}摊开一面退下来的小帆，递来颜色各异的补片供你挑选。'
+        beats:
+          trigger: '{npc}摊开一面退下来的小帆，递来颜色各异的补片供你挑选。'
+          objective: 把旧帆改成驿站遮阳布
+          choice: 挑一块补片，或请教如何顺着帆纹缝
+          immediate: 把旧帆改成驿站遮阳布可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      听懂廊下的风笛:
+        places:
+        - 风帆观景台
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}指着廊外几支声调不同的风笛，邀你猜哪一支在报顺风。'
+        beats:
+          trigger: '{npc}指着廊外几支声调不同的风笛，邀你猜哪一支在报顺风。'
+          objective: 学会辨认驿站的日常风声
+          choice: 猜一个声调，或请对方示范记录方法
+          immediate: 学会辨认驿站的日常风声可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 驿站墙上钉满来自不同高度的车票、羽毛和失物招领。
+    - 信封上的岛印记录沿途站点，不记录寄信人的私事。
+    - 旅客常用耐风纸交换简短的见闻。
+    pressures:
+      航线开放权争议:
+        source: 商会拟将共用驿路改为专营货线
+        engines:
+        - 组织更迭
+        - 资源锁定
+        beats:
+          trigger: '{npc}带来消息：商会拟将共用驿路改为专营货线。'
+          objective: 保留居民往来与普通信件通路
+          choice: 整理客运记录，或商议共用时段
+          immediate: 先弄清商会拟将共用驿路改为专营货线涉及的事实，双方仍可拒绝承担额外责任。
+          near: 保留居民往来与普通信件通路的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论航线开放权争议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      货运顺序争执:
+        source: 两批重要货物申请同一班飞舟
+        engines:
+        - 资源锁定
+        - 信任透支
+        beats:
+          trigger: '{npc}带来消息：两批重要货物申请同一班飞舟。'
+          objective: 核实需求并找到可接受的分运安排
+          choice: 比较改签方案，或请双方说明需求
+          immediate: 先弄清两批重要货物申请同一班飞舟涉及的事实，双方仍可拒绝承担额外责任。
+          near: 核实需求并找到可接受的分运安排的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论货运顺序争执的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+  深海共同体:
+    eras:
+    - 近未来都市
+    aesthetics:
+    - 星海冷光
+    - 暖色生活流
+    rule: 海底聚落依靠养殖、修缮和共享氧气系统维持日常，陆地物品仍很珍贵。
+    social_rule: 氧气和返航服务有公共保障，聚落协商养殖区与修缮排班。
+    places:
+      透明步道:
+        details:
+        - 面对发光水母的长窗·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给海流画一张明信片
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      水培舱:
+        details:
+        - 可供来访者认苗的观察台·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 挑一株适合晚餐的海藻
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      海底维修坞:
+        details:
+        - 停着小型潜航器的检修平台·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 让旧手摇钟重新走起来
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 海园养殖师
+        function: 照料可食海藻与公共海园
+        authority: 负责自己经手的工作安排
+        resource: 海园观察窗与取样器
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 海藻料理研究者
+        baseline: 你因试做过的海藻食谱与当地从事照料可食海藻与公共海园的人有来往。
+        resources:
+        - 试做过的海藻食谱
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 海藻料理研究者与海园养殖师因照料可食海藻与公共海园而相识。
+    - family: 学术与专业
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 潜航维修师
+        function: 检修小型潜航器与展示海况
+        authority: 负责自己经手的工作安排
+        resource: 开放的检修工位
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 陆地旧物修复者
+        baseline: 你因从陆地带来的手摇器物与当地从事检修小型潜航器与展示海况的人有来往。
+        resources:
+        - 从陆地带来的手摇器物
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 陆地旧物修复者与潜航维修师因检修小型潜航器与展示海况而相识。
+    activities:
+      给海流画一张明信片:
+        places:
+        - 透明步道
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把窗外的海流影像暂停在屏上，问你愿不愿意画下其中一笔。'
+        beats:
+          trigger: '{npc}把窗外的海流影像暂停在屏上，问你愿不愿意画下其中一笔。'
+          objective: 记录今晚不同的海流颜色
+          choice: 拿起笔，或请对方讲讲常见的海流
+          immediate: 记录今晚不同的海流颜色可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      挑一株适合晚餐的海藻:
+        places:
+        - 水培舱
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}把几株可食海藻的样本放进浅盘，等你选一种认识。'
+        beats:
+          trigger: '{npc}把几株可食海藻的样本放进浅盘，等你选一种认识。'
+          objective: 认识海园出产与烹调方式
+          choice: 看一看叶片，或交流一种做法
+          immediate: 认识海园出产与烹调方式可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      让旧手摇钟重新走起来:
+        places:
+        - 海底维修坞
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把一座陆地带来的手摇钟放上修复垫，邀你听听它的旧声响。'
+        beats:
+          trigger: '{npc}把一座陆地带来的手摇钟放上修复垫，邀你听听它的旧声响。'
+          objective: 一起修复能放进公共厅的旧物
+          choice: 试转摇柄，或先看看零件图
+          immediate: 一起修复能放进公共厅的旧物可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 聚落外的暗蓝海流每天变化，居民用灯色而不是钟声确认时间。
+    - 公共厅用不同灯色提示换班，私人住宅可自行调光。
+    - 来自陆地的纸书常放在有防潮罩的交换架上。
+    pressures:
+      维修排班争议:
+        source: 扩建项目挤占了原定公共设施检修时段
+        engines:
+        - 资源锁定
+        - 组织更迭
+        beats:
+          trigger: '{npc}带来消息：扩建项目挤占了原定公共设施检修时段。'
+          objective: 恢复必要维护并协调扩建顺序
+          choice: 检查维护记录，或提出分段施工
+          immediate: 先弄清扩建项目挤占了原定公共设施检修时段涉及的事实，双方仍可拒绝承担额外责任。
+          near: 恢复必要维护并协调扩建顺序的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论维修排班争议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      养殖区租约讨论:
+        source: 新的租约拟限制居民使用共养海园
+        engines:
+        - 组织更迭
+        - 名声保卫
+        beats:
+          trigger: '{npc}带来消息：新的租约拟限制居民使用共养海园。'
+          objective: 把公共养殖权益写入新约
+          choice: 记录日常使用情况，或参加居民会
+          immediate: 先弄清新的租约拟限制居民使用共养海园涉及的事实，双方仍可拒绝承担额外责任。
+          near: 把公共养殖权益写入新约的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论养殖区租约讨论的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+  人造四季轨道城:
+    eras:
+    - 星际殖民地
+    aesthetics:
+    - 星海冷光
+    - 暖色生活流
+    rule: 不同城区维持不同季节，居民通过轨道往来交换物产和生活习惯。
+    social_rule: 季节区通过气候闸相连，交通与生态维护按公开排班运行。
+    places:
+      春区花市:
+        details:
+        - 摆着早春花苗的挑选台·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给冬区朋友挑一束春花
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      冬区温室:
+        details:
+        - 凝着细小水珠的玻璃廊·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 交换两个季节的种子
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      四季换乘站:
+        details:
+        - 可以同时望见两个季节的候车窗·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 选一条跨季散步线
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 冬区温室园艺师
+        function: 照料跨季植物并整理养护建议
+        authority: 负责自己经手的工作安排
+        resource: 可以预约使用的温室花台
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 跨季花材搭配者
+        baseline: 你因不同城区交换来的花材与当地从事照料跨季植物并整理养护建议的人有来往。
+        resources:
+        - 不同城区交换来的花材
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 跨季花材搭配者与冬区温室园艺师因照料跨季植物并整理养护建议而相识。
+    - family: 学术与专业
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 城区气候维护员
+        function: 解释人工季候并记录舒适度
+        authority: 负责自己经手的工作安排
+        resource: 公开的气候展示板
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 季节路线导览员
+        baseline: 你因居民推荐的跨季散步路线与当地从事解释人工季候并记录舒适度的人有来往。
+        resources:
+        - 居民推荐的跨季散步路线
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 季节路线导览员与城区气候维护员因解释人工季候并记录舒适度而相识。
+    activities:
+      给冬区朋友挑一束春花:
+        places:
+        - 春区花市
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把几枝能适应温差的花摆到你面前，问你想配什么颜色。'
+        beats:
+          trigger: '{npc}把几枝能适应温差的花摆到你面前，问你想配什么颜色。'
+          objective: 挑一份能带过气候闸的礼物
+          choice: 选一种颜色，或问问收花后的养护方法
+          immediate: 挑一份能带过气候闸的礼物可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      交换两个季节的种子:
+        places:
+        - 冬区温室
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}展开来自夏区和秋区的种子袋，邀你挑一袋在温室试种。'
+        beats:
+          trigger: '{npc}展开来自夏区和秋区的种子袋，邀你挑一袋在温室试种。'
+          objective: 认识不同季节的植物习性
+          choice: 挑一袋，或一起写试种标签
+          immediate: 认识不同季节的植物习性可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      选一条跨季散步线:
+        places:
+        - 四季换乘站
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把换乘图转向你，指了指能从落雪走到花开的那一段。'
+        beats:
+          trigger: '{npc}把换乘图转向你，指了指能从落雪走到花开的那一段。'
+          objective: 安排一次不赶时间的跨季散步
+          choice: 选出发区，或聊聊最想看的季节
+          immediate: 安排一次不赶时间的跨季散步可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 同一座城里同时有刚融的雪、盛开的花和晒干的秋叶。
+    - 过气候闸时可借外衣，归还点遍布各城区。
+    - 居民的生日花未必属于当月，而是来自自己喜爱的城区。
+    pressures:
+      城区气候改制听证:
+        source: 能源计划拟永久改变一个城区的季候
+        engines:
+        - 组织更迭
+        - 资源锁定
+        beats:
+          trigger: '{npc}带来消息：能源计划拟永久改变一个城区的季候。'
+          objective: 比较居民需求与可行能源方案
+          choice: 收集居民意见，或查看气候维护数据
+          immediate: 先弄清能源计划拟永久改变一个城区的季候涉及的事实，双方仍可拒绝承担额外责任。
+          near: 比较居民需求与可行能源方案的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论城区气候改制听证的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      温室共享名额争议:
+        source: 跨季试种名额被少数商户连续包揽
+        engines:
+        - 资源锁定
+        - 名声保卫
+        beats:
+          trigger: '{npc}带来消息：跨季试种名额被少数商户连续包揽。'
+          objective: 提出公开可核查的名额安排
+          choice: 核对申请记录，或邀请商户说明方案
+          immediate: 先弄清跨季试种名额被少数商户连续包揽涉及的事实，双方仍可拒绝承担额外责任。
+          near: 提出公开可核查的名额安排的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论温室共享名额争议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+  记忆寄存之城:
+    eras:
+    - 架空都市
+    aesthetics:
+    - 都市轻悬疑
+    - 暖色生活流
+    rule: 居民可以自愿寄存和取回记忆片段，但任何分享都必须经过当事人确认。
+    social_rule: 记忆可自愿寄存或取回，分享范围由当事人确认并可撤回。
+    places:
+      记忆寄存馆:
+        details:
+        - 供本人查看的独立预览席·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给一段旅行记忆选封面
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      回忆修复室:
+        details:
+        - 散放着风景卡片的修复桌·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 拼回一段雨声
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      无名故事茶馆:
+        details:
+        - 只播放公开故事的茶桌旁·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 交换一条没有姓名的故事
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 学术与专业
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 旅行记忆修复师
+        function: 修复获授权的旅行片段
+        authority: 负责自己经手的工作安排
+        resource: 只读的片段预览台
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 纪念册编排者
+        baseline: 你因本人保留的旅行照片与当地从事修复获授权的旅行片段的人有来往。
+        resources:
+        - 本人保留的旅行照片
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 纪念册编排者与旅行记忆修复师因修复获授权的旅行片段而相识。
+    - family: 语言与传译
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 公共故事记录员
+        function: 记录自愿公开的地方见闻
+        authority: 负责自己经手的工作安排
+        resource: 可逐项确认的公开授权单
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 地方口述史采集者
+        baseline: 你因已获许可的采访笔记与当地从事记录自愿公开的地方见闻的人有来往。
+        resources:
+        - 已获许可的采访笔记
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 地方口述史采集者与公共故事记录员因记录自愿公开的地方见闻而相识。
+    activities:
+      给一段旅行记忆选封面:
+        places:
+        - 记忆寄存馆
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}打开你获准查看的风景预览，问你哪张画面适合做封面。'
+        beats:
+          trigger: '{npc}打开你获准查看的风景预览，问你哪张画面适合做封面。'
+          objective: 做一份可自己收藏的旅行纪念
+          choice: 选一张风景，或先调整可见范围
+          immediate: 做一份可自己收藏的旅行纪念可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      拼回一段雨声:
+        places:
+        - 回忆修复室
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}播放一小段本人授权的旅行录音，请你分辨里面是檐雨还是河声。'
+        beats:
+          trigger: '{npc}播放一小段本人授权的旅行录音，请你分辨里面是檐雨还是河声。'
+          objective: 修复记忆片段中缺失的环境声
+          choice: 听一听，或先查看来源说明
+          immediate: 修复记忆片段中缺失的环境声可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      交换一条没有姓名的故事:
+        places:
+        - 无名故事茶馆
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}读完一张公开故事卡，把一张空卡推到你手边。'
+        beats:
+          trigger: '{npc}读完一张公开故事卡，把一张空卡推到你手边。'
+          objective: 分享一段愿意公开的地方见闻
+          choice: 写一段自己的见闻，或继续听一张卡
+          immediate: 分享一段愿意公开的地方见闻可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 城市用没有姓名的玻璃柜保存公共记忆，来访者只能阅读被授权的部分。
+    - 纪念物的封面标注可分享范围，而不是秘密等级。
+    - 茶馆的故事卡可以收回，空白卡也可以带走。
+    pressures:
+      公共记忆授权争议:
+        source: 展馆拟扩大一段旧记忆的展示范围
+        engines:
+        - 身份风险
+        - 旧事追索
+        beats:
+          trigger: '{npc}带来消息：展馆拟扩大一段旧记忆的展示范围。'
+          objective: 核对原授权并尊重当事人现有选择
+          choice: 查看授权记录，或先联系当事人
+          immediate: 先弄清展馆拟扩大一段旧记忆的展示范围涉及的事实，双方仍可拒绝承担额外责任。
+          near: 核对原授权并尊重当事人现有选择的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论公共记忆授权争议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      片段来源核查:
+        source: 一份公开记忆的署名与原始记录不一致
+        engines:
+        - 旧事追索
+        - 名声保卫
+        beats:
+          trigger: '{npc}带来消息：一份公开记忆的署名与原始记录不一致。'
+          objective: 确认来源而不扩大未授权传播
+          choice: 比对只读记录，或暂停公开展播
+          immediate: 先弄清一份公开记忆的署名与原始记录不一致涉及的事实，双方仍可拒绝承担额外责任。
+          near: 确认来源而不扩大未授权传播的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论片段来源核查的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+  废墟复兴小镇:
+    eras:
+    - 废土末世
+    aesthetics:
+    - 市井烟火
+    - 暖色生活流
+    rule: 灾难已经过去，居民以修复、交换和共同维护代替旧时代的紧急管制。
+    social_rule: 紧急管制已经结束，公共重建由居民协商，旧物可以自愿捐出或带回。
+    places:
+      旧影院工地:
+        details:
+        - 已经修好的旧影院门厅·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 试亮旧影院的招牌
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      复兴集市:
+        details:
+        - 挂着手写价签的交换长桌·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 为旧物写一张来历卡
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+      蓄水塔平台:
+        details:
+        - 能望见新街区的开放平台·夜
+        - 供来访者歇脚的长凳旁·夜
+        profile:
+          privacy: medium
+          visibility: high
+          exits:
+          - 公共出口
+          - 通往相邻公共区域的通道
+          witnesses:
+          - 当地居民
+          - 轮值工作人员
+          affordances:
+          - 给重建街区画一张新图
+          - 交流近况
+          - 自由离开
+          pressure_modifiers:
+          - 来访人数
+          - 公共排班
+    pairs:
+    - family: 服务与手艺
+      position: 同侪
+      appellations:
+      - 直呼其名
+      npc:
+        role: 公共建筑修复师
+        function: 修复可重新使用的公共空间
+        authority: 负责自己经手的工作安排
+        resource: 标注过损坏处的测绘图
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 老放映设备爱好者
+        baseline: 你因保存下来的放映器材零件与当地从事修复可重新使用的公共空间的人有来往。
+        resources:
+        - 保存下来的放映器材零件
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 老放映设备爱好者与公共建筑修复师因修复可重新使用的公共空间而相识。
+    - family: 艺术与传播
+      position: 旧识
+      appellations:
+      - 直呼其名
+      npc:
+        role: 社区档案整理员
+        function: 整理居民自愿提供的重建记录
+        authority: 负责自己经手的工作安排
+        resource: 带来源标签的档案柜
+        limitation: 无权代替其他居民作决定
+        obligation: 交代经手物件的来源和使用条件
+        exposure: 弄错记录会影响熟客信任，需要说明并纠正
+        hidden: —
+      player:
+        identity: 旧物交换摊主
+        baseline: 你因准备在集市交换的旧物与当地从事整理居民自愿提供的重建记录的人有来往。
+        resources:
+        - 准备在集市交换的旧物
+        reputation: 愿意把自己的经验讲清楚
+      relationship_reason: 旧物交换摊主与社区档案整理员因整理居民自愿提供的重建记录而相识。
+    activities:
+      试亮旧影院的招牌:
+        places:
+        - 旧影院工地
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把修好的灯片排成一行，邀你挑一片装进影院旧招牌。'
+        beats:
+          trigger: '{npc}把修好的灯片排成一行，邀你挑一片装进影院旧招牌。'
+          objective: 让旧影院多亮起一个字
+          choice: 选一片灯，或聊聊想在这里看什么电影
+          immediate: 让旧影院多亮起一个字可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      为旧物写一张来历卡:
+        places:
+        - 复兴集市
+        pairs:
+        - 0
+        - 1
+        category: 照护与修复
+        action: '{npc}拿出几张空白卡，请你给愿意交换的旧物写一句来历。'
+        beats:
+          trigger: '{npc}拿出几张空白卡，请你给愿意交换的旧物写一句来历。'
+          objective: 让交换者知道物件的故事
+          choice: 写一句，或先听听邻摊的旧物经历
+          immediate: 让交换者知道物件的故事可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+      给重建街区画一张新图:
+        places:
+        - 蓄水塔平台
+        pairs:
+        - 0
+        - 1
+        category: 信息交换
+        action: '{npc}把新修的街道图铺在平台上，问你哪里还值得添个标记。'
+        beats:
+          trigger: '{npc}把新修的街道图铺在平台上，问你哪里还值得添个标记。'
+          objective: 记录已经恢复的公共生活
+          choice: 标一家新店，或补一处散步地点
+          immediate: 记录已经恢复的公共生活可以按彼此的兴趣慢慢进行。
+          near: 这次见面可以在此结束，也可以约下次继续。
+    customs:
+    - 每一面新砌的墙都嵌着一件旧物，镇民把重建当作共同记忆。
+    - 修复好的公共建筑会留一小块旧墙供人辨认。
+    - 集市有不标价的借用区，物件按约归还即可。
+    pressures:
+      旧街保留方案讨论:
+        source: 重建方案拟拆除居民仍在使用的旧街
+        engines:
+        - 组织更迭
+        - 旧事追索
+        beats:
+          trigger: '{npc}带来消息：重建方案拟拆除居民仍在使用的旧街。'
+          objective: 比较修复成本与居民使用需求
+          choice: 整理使用记录，或提出分区保留方案
+          immediate: 先弄清重建方案拟拆除居民仍在使用的旧街涉及的事实，双方仍可拒绝承担额外责任。
+          near: 比较修复成本与居民使用需求的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论旧街保留方案讨论的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+      公共材料分配争议:
+        source: 两项公共工程申请同一批回收材料
+        engines:
+        - 资源锁定
+        - 信任透支
+        beats:
+          trigger: '{npc}带来消息：两项公共工程申请同一批回收材料。'
+          objective: 排出透明且可调整的施工顺序
+          choice: 核算各自用量，或邀请居民共同协商
+          immediate: 先弄清两项公共工程申请同一批回收材料涉及的事实，双方仍可拒绝承担额外责任。
+          near: 排出透明且可调整的施工顺序的方案需要交给相关的人讨论。
+        far_trigger: 之后的居民或行业会议将讨论公共材料分配争议的长期安排。
+        far_consequence: 公开讨论的结果会改变相关的工作安排与合作关系。
+
