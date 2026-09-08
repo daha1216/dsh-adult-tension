@@ -595,10 +595,12 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
         roll["场景动作"] = _choice_with_cooldown(rng, category_items, recent.get("场景动作"))
         roll["场景动作类别"] = category
         roll["场景动作元数据"] = dict(pools["场景动作元数据"].get(category) or {})
+    identity_pool = compatible_values("身份族", pools["身份侧"])
     if "身份族" in locks or (mode == "all_custom" and "身份族" in CUSTOM_KEYS):
         draw("身份族", pools["身份侧"])
     else:
-        roll["身份族"] = _weighted_choice(rng, pools["身份侧"], identity_weights(), recent.get("身份族"))
+        weights = {key: value for key, value in identity_weights().items() if key in identity_pool}
+        roll["身份族"] = _weighted_choice(rng, identity_pool, weights or identity_weights(), recent.get("身份族"))
     draw("处境", pools["处境侧"])
     draw("核心价值", pools["决策轴"]["核心价值"])
     draw("压力策略", pools["决策轴"]["压力策略"])
@@ -663,7 +665,11 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     }
     draw("玩家称谓", pools["玩家化身轴"]["称谓"])
     draw("玩家年龄段", pools["玩家化身轴"]["年龄段"])
-    draw("玩家社会位置", pools["玩家化身轴"]["社会位置"])
+    position_pool = compatible_values("玩家社会位置", pools["玩家化身轴"]["社会位置"])
+    if "玩家社会位置" in locks or (mode == "all_custom" and "玩家社会位置" in CUSTOM_KEYS):
+        draw("玩家社会位置", pools["玩家化身轴"]["社会位置"])
+    else:
+        roll["玩家社会位置"] = _choice_with_cooldown(rng, position_pool, recent.get("玩家社会位置"))
     roll["开局约束"] = "权力结构不自动等于把柄；处境不得推导同意；未决动作须落在非交易靠近"
     return roll
 
