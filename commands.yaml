@@ -39,7 +39,7 @@ command_categories:
       - triggers: [开局, 开始, 随机开局]
         canonical: 开局
         advance_turn: false
-        behavior: 无进行中状态时执行 build_opening.py --complete（肯定约束才映射 --lock，否定句没有 lock 键）；已有进行中状态且玩家未明确要求放弃或重新开始时才确认，确认前不重掷、不清状态
+        behavior: 无进行中状态时先询问“压力开局”或“日常开局”；明确后执行 build_opening.py --complete --opening-mode pressure|daily。用户已明确类型时不再询问；只有种子或锁定素材仍需选择类型；已有进行中状态且玩家未明确要求放弃或重新开始时才确认，确认前不重掷、不清状态
       - triggers: [继续, next, c, "...", "……"]
         canonical: 继续
         advance_turn: true

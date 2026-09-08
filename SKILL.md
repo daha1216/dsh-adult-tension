@@ -19,7 +19,7 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 - `references/加内容.md` — 扩充素材与文案的对照指南（维护时用）
 - `commands.yaml` — 命令分类、触发词、行为与后台操作（解析唯一来源；本文件只留核心速记）
 - `scripts/validate_state.py` — 机器校验唯一判定源
-- `scripts/build_opening.py --complete` — 一次生成可开场的 v3 状态与 opening_brief
+- `scripts/build_opening.py --complete --opening-mode pressure|daily` — 按所选模式生成可开场状态与 opening_brief
 - `scripts/commit_turn.py` — 回合提交（时钟、场景、事件、校验、活切片）
 - `scripts/live_slice.py` — 运行时活切片 / 人话状态
 - `scripts/check_content.py` — 内容数据体检（维护时用）
@@ -36,7 +36,7 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 ## 按需加载
 
 - 每局开始（开局或载入后第一回合）：读一次 `commands.yaml`（命令解析与行为的唯一来源）。
-- 默认开局：不读 references。只跑 `python scripts/build_opening.py --complete`，用 stdout 的 `opening_brief` 写玩家可见开局正文。正文先给世界初步印象，再写人物处境和可接续现场；不强制标题、段落顺序或固定措辞。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目直接读 `scripts/data/` 下的 yaml。
+- 新开局：先询问“压力开局”或“日常开局”；明确后运行 `python scripts/build_opening.py --complete --opening-mode pressure|daily`。日常开局复用旧世界观、人物、动作和处境素材，但不默认引入外部压力或危机链。正文先给世界初步印象，再写人物处境和可接续现场；不强制标题、段落顺序或固定措辞。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目直接读 `scripts/data/` 下的 yaml。
 - 默认回合：不读完整 references、不重读整份 YAML。只用上一拍活切片，按「每回合事务」判断 `fast|deep`，组最小 patch 后跑 `python scripts/commit_turn.py`；脚本会对结构变化和校准条件执行硬升级，再写正文。
 - 新角色进场或角色升级：读 `references/角色设计.md`；需要条目清单时读 `scripts/data/` 下对应 yaml。
 - 快进、离屏活动或 Tier 追算：读 `references/世界运转.md`；第一次跨天且 `meta.simulation` 为 true 时运行 `python scripts/roll_opening.py --twist`，结果经 `events_add` 与 `twist_generate: {reason: first_cross_day}` 一次提交。

@@ -213,7 +213,7 @@ class BuildOpeningTests(unittest.TestCase):
             out = Path(tmp) / "opening.yaml"
             working = Path(tmp) / "current.yaml"
             code = BUILD.main([
-                "--complete", "--seed", "7", "--out", str(out),
+                "--complete", "--opening-mode", "pressure", "--seed", "7", "--out", str(out),
                 "--working", str(working),
             ])
             self.assertEqual(0, code)
@@ -230,7 +230,7 @@ class BuildOpeningTests(unittest.TestCase):
             history = root / "history.jsonl"
             with mock.patch.dict("os.environ", {"ADULT_TENSION_HISTORY_PATH": str(history)}):
                 code = BUILD.main([
-                    "--complete", "--seed", "8", "--out", str(out),
+                    "--complete", "--opening-mode", "pressure", "--seed", "8", "--out", str(out),
                     "--working", str(working), "--request", str(request),
                 ])
             self.assertEqual(0, code)
@@ -259,7 +259,7 @@ class BuildOpeningTests(unittest.TestCase):
             out = Path(tmp) / "opening.yaml"
             working = Path(tmp) / "current.yaml"
             code = BUILD.main([
-                "--complete", "--seed", "5", "--lock", "时代=明治东京",
+                "--complete", "--opening-mode", "pressure", "--seed", "5", "--lock", "时代=明治东京",
                 "--out", str(out), "--working", str(working),
             ])
             self.assertEqual(0, code)
@@ -297,7 +297,7 @@ class BuildOpeningTests(unittest.TestCase):
             working = Path(tmp) / "current.yaml"
             with mock.patch.object(BUILD, "load_fill_opening", loader_without_era_pools):
                 code = BUILD.main([
-                    "--complete", "--seed", "5", "--lock", "时代=当代都市",
+                    "--complete", "--opening-mode", "pressure", "--seed", "5", "--lock", "时代=当代都市",
                     "--out", str(out), "--working", str(working),
                 ])
             self.assertEqual(0, code)

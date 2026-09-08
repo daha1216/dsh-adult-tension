@@ -86,14 +86,14 @@ def parse_pairs(entries: list[str], label: str) -> dict[str, str]:
 
 
 def build_roll(seed: int | None, locks: dict[str, str], custom: dict[str, str],
-               all_custom: bool, force_table: bool) -> dict[str, Any]:
+               all_custom: bool, force_table: bool, opening_mode: str = "pressure") -> dict[str, Any]:
     roll_mod = load_roll_opening()
     pools = roll_mod.load_pools()
     if all_custom and force_table:
         raise SystemExit("ERROR: --all-custom 与 --force-table 互斥")
     mode = "all_custom" if all_custom else ("force_table" if force_table else "table")
     actual_seed = seed if seed is not None else roll_mod.random.SystemRandom().randrange(0, 2 ** 31)
-    return roll_mod.build_roll(pools, actual_seed, mode, locks, custom)
+    return roll_mod.build_roll(pools, actual_seed, mode, locks, custom, opening_mode=opening_mode)
 
 
 def roll_from_file(path: Path) -> dict[str, Any]:
@@ -122,12 +122,13 @@ def build_skeleton(roll: dict[str, Any]) -> dict[str, Any]:
     所有 created/approved/last_updated/covered 回合字段统一从 1 起算。"""
     clock = utc_clock()
     engines = split_multi(roll.get("张力引擎", ""))
-    if not engines:
+    if not engines and roll.get("opening_mode", "pressure") == "pressure":
         engines = ["", ""]
     data = {
         "save_version": 3,
         "meta": {
             "turn": 1,
+            "opening_mode": roll.get("opening_mode", "pressure"),
             "mode": "reliable",
             "tier": 1,
             "simulation": True,
@@ -249,6 +250,9 @@ def build_skeleton(roll: dict[str, Any]) -> dict[str, Any]:
             "natural_next_pressure": "",
         },
     }
+    if roll.get("opening_mode") == "daily":
+        data["events"] = []
+        data["world"]["pressure_seeds"] = {"immediate": "", "near_event_id": None, "far_event_id": None}
     if roll.get("世界观桥接"):
         data["world"]["constants"].append(
             "当前时代与美学存在跨域混搭，开场需要交代其文化或技术来源。"
@@ -273,10 +277,15 @@ def dump_yaml(data: dict[str, Any]) -> str:
 
 def resolve_roll(args: argparse.Namespace) -> dict[str, Any]:
     if args.roll_file is not None:
-        return roll_from_file(args.roll_file)
+        roll = roll_from_file(args.roll_file)
+        stored_mode = roll.get("opening_mode", "pressure")
+        if args.opening_mode is not None and args.opening_mode != stored_mode:
+            raise SystemExit("ERROR: --opening-mode 与已有 roll 不一致；请重新生成，不改写已有开局")
+        return roll
     locks = parse_pairs(args.lock, "lock")
     custom = parse_pairs(args.custom, "custom")
-    return build_roll(args.seed, locks, custom, args.all_custom, args.force_table)
+    return build_roll(args.seed, locks, custom, args.all_custom, args.force_table,
+                      getattr(args, "opening_mode", None) or "pressure")
 
 
 def complete_opening(args: argparse.Namespace) -> int:
@@ -424,6 +433,8 @@ def build_parser() -> argparse.ArgumentParser:
                         help="顺带输出 opening_request YAML（seed/协议/模式/锁/校验状态）")
     parser.add_argument("--check", type=Path, default=None, metavar="FILE",
                         help="校验已生成骨架/填充文件并列出待填项")
+    parser.add_argument("--opening-mode", choices=["pressure", "daily"], default=None,
+                        help="新开局类型；生产开局未选择时只返回选择提示")
     parser.add_argument("--complete", action="store_true",
                         help="一次生成可通过 opening 校验的完整开局，并打印 opening_brief")
     parser.add_argument("--working", type=Path, default=None,
@@ -440,6 +451,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.check is not None:
         return check_file(args.check)
     if args.complete:
+        if args.opening_mode is None and args.roll_file is None:
+            print("请选择开局类型：1. 压力开局  2. 日常开局（复用旧素材，不自动制造危机）")
+            print("--opening-mode pressure | daily；明确说随便时使用 daily")
+            return 0
         return complete_opening(args)
 
     try:

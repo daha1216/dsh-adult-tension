@@ -439,8 +439,11 @@ def _combine_multi(key: str, raw: str, pool: list[str], count: int,
 def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
                locks: dict[str, str] | None = None,
                custom: dict[str, str] | None = None,
-               recent: dict[str, set[str]] | None = None) -> dict[str, Any]:
+               recent: dict[str, set[str]] | None = None,
+               opening_mode: str = "pressure") -> dict[str, Any]:
     """按 protocol_version/DRAW_PLAN 固定消费顺序生成结构骰。"""
+    if opening_mode not in {"pressure", "daily"}:
+        raise AnchorError(f"未知开局类型：{opening_mode}")
     locks = dict(locks or {})
     custom = dict(custom or {})
     recent = recent or {}
@@ -521,7 +524,10 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     draw("美学基调", pools["美学基调"])
     draw("核心规则", pools["核心规则"])
     draw("权力结构", pools["权力结构"])
-    draw_many("张力引擎", pools["张力引擎"], 2)
+    if opening_mode == "pressure":
+        draw_many("张力引擎", pools["张力引擎"], 2)
+    else:
+        roll["张力引擎"] = locks.get("张力引擎", custom.get("张力引擎", ""))
     draw("时代", pools["时代与地点"]["时代"])
     draw("地点", pools["时代与地点"]["地点"])
     # 时代×地点和解（meta.location_eras，pools.yaml 契约第 4 条）：
@@ -581,7 +587,11 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
                 continue
             result.append(value)
         return result or values
-    if "压力来源" not in locks and not (mode == "all_custom" and "压力来源" in CUSTOM_KEYS):
+    if opening_mode == "daily":
+        if locks.get("压力来源") or custom.get("压力来源"):
+            raise AnchorError("日常开局不接受外部压力；请改选压力开局")
+        roll["压力来源"] = ""
+    elif "压力来源" not in locks and not (mode == "all_custom" and "压力来源" in CUSTOM_KEYS):
         roll["压力来源"] = _choice_with_cooldown(
             rng, compatible_values("压力来源", pools["压力来源"]), recent.get("压力来源"))
     else:
@@ -708,7 +718,42 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     else:
         roll["玩家社会位置"] = _choice_with_cooldown(rng, position_pool, recent.get("玩家社会位置"))
     roll["开局约束"] = "权力结构不自动等于把柄；处境不得推导同意；未决动作须落在非交易靠近"
+    roll["opening_mode"] = opening_mode
+    if opening_mode == "daily":
+        apply_daily_roll(roll, pools, locks, custom, rng, recent)
     return roll
+
+
+def apply_daily_roll(roll, pools, locks, custom, rng, recent):
+    """Reuse curated existing materials, without importing their crisis templates."""
+    rules = (pools.get("meta") or {}).get("daily_opening") or {}
+    if not rules:
+        raise AnchorError("缺少 meta.daily_opening")
+    for field in ("核心规则", "社会规则", "处境", "场景动作"):
+        candidates = list(rules[field])
+        material_rules = ((pools.get("meta") or {}).get("material_compatibility") or {}).get(field, {})
+        candidates = [x for x in candidates
+                      if (not material_rules.get(x, {}).get("eras") or roll["时代"] in material_rules[x]["eras"])
+                      and (not material_rules.get(x, {}).get("places") or roll["地点"] in material_rules[x]["places"])]
+        supplied = locks.get(field, custom.get(field))
+        if supplied is not None and supplied not in candidates:
+            raise AnchorError(f"日常开局的{field}尚无低压解释：{supplied}；请换素材或选压力开局")
+        if not candidates:
+            raise AnchorError(f"日常开局的{field}没有兼容候选")
+        roll[field] = supplied or _choice_with_cooldown(rng, candidates, recent.get(field))
+    engines = split_items(roll["张力引擎"])
+    if len(engines) > 1 or any(x not in rules["张力引擎"] for x in engines):
+        raise AnchorError("日常开局仅接受一个低压张力方向；危机引擎请选压力开局")
+    roll["张力引擎"] = "、".join(engines)
+    category = next(k for k, values in pools["场景动作分类"].items() if roll["场景动作"] in values)
+    roll["场景动作类别"] = category
+    roll["场景动作元数据"] = dict(pools["场景动作元数据"].get(category) or {})
+    roll.pop("场景动作·对照", None)
+    # The pressure-theme heuristic cannot judge an intentionally low-pressure scene.
+    reasons = [x for x in roll["兼容性"]["reasons"] if not x.startswith(("压力来源", "场景动作", "处境"))]
+    roll["兼容性"].update(status="bridge_required" if reasons else "pass", reasons=reasons,
+                       primary_theme="relationship" if engines else "", secondary_theme="",
+                       bridge_points=list(reasons))
 
 
 def draw_twists(pools: dict[str, Any], seed: int) -> list[tuple[str, str]]:
@@ -728,11 +773,12 @@ def twist_profile(pools: dict[str, Any], category: str) -> dict[str, Any]:
 
 def _roll_signature(roll: dict[str, Any]) -> str:
     payload = {key: roll.get(key) for key in DRAW_PLAN}
+    payload["opening_mode"] = roll.get("opening_mode", "pressure")
     return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
 def _roll_triple(roll: dict[str, Any]) -> str:
-    return f"{roll.get('时代')}|{roll.get('地点')}|{roll.get('张力引擎')}"
+    return f"{roll.get('opening_mode', 'pressure')}|{roll.get('时代')}|{roll.get('地点')}|{roll.get('张力引擎')}"
 
 
 def history_path() -> Path:
@@ -882,6 +928,7 @@ def main(argv: list[str] | None = None) -> int:
                         help="预锁字段，可重复（如 --lock 时代=当代都市）")
     parser.add_argument("--custom", action="append", default=[], metavar="KEY=VALUE",
                         help="表外自定义值，仅与 --all-custom 一起使用")
+    parser.add_argument("--opening-mode", choices=["pressure", "daily"], default="pressure")
     parser.add_argument("--format", choices=["text", "json"], default="text")
     args = parser.parse_args(argv)
 
@@ -953,7 +1000,7 @@ def main(argv: list[str] | None = None) -> int:
         recent = set() if args.no_history else recent_signatures()
         recent_t = set() if args.no_history else recent_triples()
         cooldowns = {} if args.no_history else recent_cooldowns()
-        roll = build_roll(pools, seed, mode, locks, custom, cooldowns)
+        roll = build_roll(pools, seed, mode, locks, custom, cooldowns, args.opening_mode)
         signature = _roll_signature(roll)
         triple = _roll_triple(roll)
         if args.seed is None:
@@ -961,7 +1008,7 @@ def main(argv: list[str] | None = None) -> int:
             entropy = random.SystemRandom()
             while (signature in recent or triple in recent_t) and attempts < HISTORY_RETRY_LIMIT:
                 seed = entropy.randrange(0, 2 ** 31)
-                roll = build_roll(pools, seed, mode, locks, custom, cooldowns)
+                roll = build_roll(pools, seed, mode, locks, custom, cooldowns, args.opening_mode)
                 signature = _roll_signature(roll)
                 triple = _roll_triple(roll)
                 attempts += 1

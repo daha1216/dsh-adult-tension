@@ -192,6 +192,7 @@ def opening_brief(state: dict[str, Any]) -> dict[str, Any]:
     npc = (slice_["npcs"] or [{}])[0]
     shell = slice_.get("setting_shell") or {}
     return {
+        "opening_mode": state.get("meta", {}).get("opening_mode", "pressure"),
         "seed_clock": slice_.get("clock"),
         "world": {
             "era": shell.get("type"),

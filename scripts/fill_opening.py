@@ -341,12 +341,21 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     """在骨架上填实 1-14 内容字段，返回新 dict。"""
     data = copy.deepcopy(skeleton)
     tables = tables or load_tables()
+    opening_mode = roll.get("opening_mode", "pressure")
+    if opening_mode not in {"pressure", "daily"}:
+        raise FillError("未知 opening_mode")
+    daily = opening_mode == "daily"
+    data["meta"]["opening_mode"] = opening_mode
     seed = roll.get("seed")
     if not isinstance(seed, int) or seed < 0:
         raise FillError("roll.seed must be a non-negative integer")
     for key in ("时代", "地点", "社会规则", "压力来源", "身份族", "处境",
                 "核心规则", "权力结构", "场景动作", "核心价值", "压力策略",
                 "关系姿态", "玩家称谓", "玩家年龄段", "玩家社会位置"):
+        if key == "压力来源" and daily:
+            if roll.get(key) != "":
+                raise FillError("日常开局的压力来源必须为空字符串")
+            continue
         require_roll_value(roll, key)
 
     era = roll["时代"]
@@ -370,12 +379,16 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     )
     entry_mode = entry_modes[seed % len(entry_modes)]
     engines = split_multi(str(roll.get("张力引擎") or ""))
-    if not engines or any(item == "custom_required" for item in engines):
+    if daily:
+        allowed = (tables["pools"].get("meta") or {}).get("daily_opening", {}).get("张力引擎", [])
+        if len(engines) > 1 or any(item not in allowed for item in engines):
+            raise FillError("日常开局仅支持零或一个低压张力方向")
+    elif not engines or any(item == "custom_required" for item in engines):
         raise FillError(
             "张力引擎缺失或仍为 custom_required：--all-custom 模式必须以 "
             "--lock 张力引擎=A、B 提供两项引擎，禁止占位符进入已提交状态"
         )
-    if len(engines) < 2:
+    if not daily and len(engines) < 2:
         raise FillError(f"张力引擎需要恰好两项，收到 {len(engines)} 项：{engines}")
 
     templates = tables["templates"]
@@ -434,7 +447,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
                            or ["时限临门", "债务压身", "秘密将破", "审查将至"])
     timed_pressures = set(pools_meta.get("timed_pressures")
                           or ["死线只剩几小时", "债务到期", "秘密即将暴露"])
-    timed = situation_kind in timed_situations or pressure in timed_pressures
+    timed = not daily and (situation_kind in timed_situations or pressure in timed_pressures)
     deadline = clock + dt.timedelta(hours=8) if timed else None
     far_due = clock + dt.timedelta(days=7)
 
@@ -443,7 +456,15 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     if npc_age == player_age:
         npc_age = min(48, npc_age + 1)
 
-    beats = situation_bundle(situation_kind, npc_name, pressure, templates.get("situation_beats") or {})
+    beat_table = templates.get("situation_beats") or {}
+    if daily:
+        rules = pools_meta.get("daily_opening") or {}
+        for field, value in (("处境", situation_kind), ("场景动作", action),
+                             ("核心规则", core_rule), ("社会规则", rule)):
+            if value not in rules.get(field, {}):
+                raise FillError(f"日常开局的{field}缺少低压解释：{value}")
+        beat_table = rules["处境"]
+    beats = situation_bundle(situation_kind, npc_name, pressure, beat_table)
     trade = action in trade_actions(tables["pools"])
     unresolved = action_sentence(action, npc_name, trade, templates)
     entry_text = {
@@ -453,8 +474,11 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         "npc_brings_pressure": f"{npc_name}不是一个人来的，门外的脚步声让{location}里的沉默有了期限。",
         "npc_makes_first_choice": f"你还没问，{npc_name}已经替今晚做了一个决定，并把结果放到你面前。",
     }[entry_mode]
+    if daily:
+        entry_mode = "npc_already_acting"
+        entry_text = beats["trigger"]
     last_result = entry_text
-    next_pressure = beats["near"]
+    next_pressure = "" if daily else beats["near"]
 
     power_zh = {
         "player_high": "你在明面上更有位置",
@@ -464,7 +488,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     }.get(str(roll["权力结构"]), "明面上的位置已经摆明")
     constants = [
         f"这座{place}里，{rule}。",
-        f"{core_rule}不只是口号：今晚谁先破例，谁先付出能被看见的代价。",
+        f"当地生活遵循{core_rule}。" if daily else f"{core_rule}不只是口号：今晚谁先破例，谁先付出能被看见的代价。",
         f"{power_zh}，这不推导把柄，也不等于今晚可以越界。",
     ]
     aesthetic = roll.get("美学基调")
@@ -497,7 +521,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         "resources": list(position_row["resources"]),
         "knowledge": [
             f"{npc_name}的公开身份是{identity['role']}。",
-            f"今晚的压力来自{pressure}，场面停在{place}。",
+            beats["trigger"] if daily else f"今晚的压力来自{pressure}，场面停在{place}。",
         ],
         "reputation": position_row["reputation"],
         "appellation": appellation,
@@ -518,7 +542,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     )
     pressure_map = templates.get("pressure_response") or {}
     responses = pressure_map.get(strategy) or pressure_map["正面解决"]
-    goal = f"在{pressure}压过来之前守住{value_axis}，同时不把今夜写成自己认输"
+    goal = beats["objective"] if daily else f"在{pressure}压过来之前守住{value_axis}，同时不把今夜写成自己认输"
     boundary = "不用身体换出路；不把未同意写成已经发生的交易"
     sex, sex_snap = sexuality_block(
         rng_body, roll.get("亲密画像核心子集") or {}, npc_name, player_name, position, templates,
@@ -539,7 +563,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         "boundary": boundary,
         "withdrawal_signal": (templates.get("withdrawal") or {}).get(
             strategy, "改口此事到此，开始收拾东西。"),
-        "emotion": f"表面还端着，{pressure}已经压到眼底。",
+        "emotion": "按自己的步调做事，也留意你的回应。" if daily else f"表面还端着，{pressure}已经压到眼底。",
         "resources": [identity["key_resource"], identity["authority_source"]],
         "knowledge": [
             beats["trigger"],
@@ -547,9 +571,9 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         ],
         "recent_memories": [
             f"进门前她在外面把{look.split('、')[0] if look else '自己'}重新整理过一次。",
-            f"她决定先用{strategy}撑住场面。",
+            beats["objective"] if daily else f"她决定先用{strategy}撑住场面。",
         ],
-        "signature": f"{look}。压力下会先动手指，再动表情。",
+        "signature": look if daily else f"{look}。压力下会先动手指，再动表情。",
         "autonomy": {"last_turn": None, "recent_turns": [], "cooldown_until": 0},
     })
     npc["identity_profile"] = identity
@@ -563,7 +587,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         "knowledge_gap": {
             "player_knows": [
                 f"{npc_name}公开身份是{identity['role']}",
-                f"今晚的压力与{pressure}有关",
+                beats["trigger"] if daily else f"今晚的压力与{pressure}有关",
             ],
             "npc_knows": [
                 identity["limitation"],
@@ -575,7 +599,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         },
         "exits": {
             "available": True,
-            "cost": "任何一方都可以先离开；离开等于把未决交给外面的时点。",
+            "cost": "双方可以暂停交流或各自离开。" if daily else "任何一方都可以先离开；离开等于把未决交给外面的时点。",
             "blocked_by": None,
         },
         "consequence": {
@@ -592,13 +616,13 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         },
         "goals": {
             "primary": goal,
-            "secondary": f"把{situation_kind}从人身条款里隔开",
+            "secondary": "了解彼此的近况与兴趣。" if daily else f"把{situation_kind}从人身条款里隔开",
             "hidden": f"想被认真对待，而不是被写成今晚的素材",
         },
         "knowledge": {
             "known": list(npc["knowledge"]),
             "unknown": [f"{player_name}手里到底有没有她不知道的那一层"],
-            "mistaken_beliefs": ["只要把请求做成交易，就不会变成人情"],
+            "mistaken_beliefs": [] if daily else ["只要把请求做成交易，就不会变成人情"],
         },
         "pressure_response": {
             "low": responses[0],
@@ -644,50 +668,54 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         "opening": {"status": True, "covered_turn": 1},
     }]
 
-    due_near = iso(deadline) if deadline else None
-    data["events"] = [
-        {
-            "id": "evt-001",
-            "semantic_key": f"opening-immediate-{situation_kind}",
-            "source": "system:opening",
-            "created_turn": 1,
-            "kind": "immediate",
-            "trigger": beats["trigger"],
-            "due_at": None,
-            "status": "pending",
-            "consequence": beats["immediate"],
-            "hook": False,
-            "probability": None,
-        },
-        {
-            "id": "evt-002",
-            "semantic_key": f"opening-near-{pressure}",
-            "source": "system:opening",
-            "created_turn": 1,
-            "kind": "near",
-            "trigger": beats["near"],
-            "due_at": due_near,
-            "status": "pending",
-            "consequence": beats["near"],
-            "hook": False,
-            "probability": None,
-        },
-        {
-            "id": "evt-003",
-            "semantic_key": f"opening-far-{engines[-1]}",
-            "source": "system:opening",
-            "created_turn": 1,
-            "kind": "far",
-            "trigger": f"{engines[-1]}还没有进这个房间，但已经在路上。",
-            "due_at": iso(far_due),
-            "status": "pending",
-            "consequence": "那一层压力会改写你们今晚没谈完的部分。",
-            "hook": True,
-            "probability": None,
-        },
-    ]
-    data["world"]["pressure_seeds"]["near_event_id"] = "evt-002"
-    data["world"]["pressure_seeds"]["far_event_id"] = "evt-003"
+    if daily:
+        data["events"] = []
+        data["world"]["pressure_seeds"] = {"immediate": "", "near_event_id": None, "far_event_id": None}
+    else:
+        due_near = iso(deadline) if deadline else None
+        data["events"] = [
+            {
+                "id": "evt-001",
+                "semantic_key": f"opening-immediate-{situation_kind}",
+                "source": "system:opening",
+                "created_turn": 1,
+                "kind": "immediate",
+                "trigger": beats["trigger"],
+                "due_at": None,
+                "status": "pending",
+                "consequence": beats["immediate"],
+                "hook": False,
+                "probability": None,
+            },
+            {
+                "id": "evt-002",
+                "semantic_key": f"opening-near-{pressure}",
+                "source": "system:opening",
+                "created_turn": 1,
+                "kind": "near",
+                "trigger": beats["near"],
+                "due_at": due_near,
+                "status": "pending",
+                "consequence": beats["near"],
+                "hook": False,
+                "probability": None,
+            },
+            {
+                "id": "evt-003",
+                "semantic_key": f"opening-far-{engines[-1]}",
+                "source": "system:opening",
+                "created_turn": 1,
+                "kind": "far",
+                "trigger": f"{engines[-1]}还没有进这个房间，但已经在路上。",
+                "due_at": iso(far_due),
+                "status": "pending",
+                "consequence": "那一层压力会改写你们今晚没谈完的部分。",
+                "hook": True,
+                "probability": None,
+            },
+        ]
+        data["world"]["pressure_seeds"]["near_event_id"] = "evt-002"
+        data["world"]["pressure_seeds"]["far_event_id"] = "evt-003"
 
     node_situation = {
         "trigger": beats["trigger"],

@@ -147,6 +147,10 @@ class Validator:
             self.error("save_version", f"must equal {SAVE_VERSION}")
 
         meta = data.get("meta")
+        opening_mode = meta.get("opening_mode", "pressure") if isinstance(meta, dict) else "pressure"
+        if opening_mode not in {"pressure", "daily"}:
+            self.error("meta.opening_mode", "must be pressure or daily")
+        self.daily = opening_mode == "daily"
         if isinstance(meta, dict) and is_int(meta.get("turn")) and meta["turn"] >= 0:
             self.current_turn = meta["turn"]
         node = data.get("current_node")
@@ -204,15 +208,23 @@ class Validator:
             self.error("world.constants", "must contain at least one world constant")
         engines = self.sequence(data.get("tension_engines"), "world.tension_engines")
         if engines is not None:
-            if not engines:
-                self.error("world.tension_engines", "must contain at least one engine")
+            if not engines and not self.daily:
+                self.error("world.tension_engines", "pressure opening requires at least one engine")
+            if self.daily and any(not is_nonempty_string(item) for item in engines):
+                self.error("world.tension_engines", "entries must be non-empty strings")
+            if self.daily and self.profile == "opening" and len(engines) > 1:
+                self.error("world.tension_engines", "daily opening allows at most one engine")
             if any(item == "custom_required" for item in engines if isinstance(item, str)):
                 self.error("world.tension_engines", "contains unresolved custom placeholder 'custom_required'")
-            if self.profile == "opening" and len({item for item in engines if is_nonempty_string(item)}) < 2:
-                self.error("world.tension_engines", "opening profile requires at least two distinct engines")
+            if self.profile == "opening" and not self.daily and len({item for item in engines if is_nonempty_string(item)}) < 2:
+                self.error("world.tension_engines", "pressure opening requires at least two distinct engines")
         shell = self.mapping(data.get("setting_shell"), "world.setting_shell")
         if shell is not None:
-            self.required_text(shell, ("type", "place", "rule", "pressure"), "world.setting_shell")
+            self.required_text(shell, ("type", "place", "rule"), "world.setting_shell")
+            if not self.daily and not is_nonempty_string(shell.get("pressure")):
+                self.error("world.setting_shell.pressure", "must be a non-empty string")
+            if not isinstance(shell.get("pressure"), str):
+                self.error("world.setting_shell.pressure", "must be a string; empty means none")
         twist_state = self.mapping(data.get("twist_state"), "world.twist_state") if "twist_state" in data else None
         if twist_state is not None:
             self.required(twist_state, {"generated_count", "last_generated_turn", "last_reason"}, "world.twist_state")
@@ -244,17 +256,18 @@ class Validator:
         if pressure is None:
             return
         self.required(pressure, {"immediate", "near_event_id", "far_event_id"}, "world.pressure_seeds")
-        if not is_nonempty_string(pressure.get("immediate")):
+        if not self.daily and not is_nonempty_string(pressure.get("immediate")):
             self.error("world.pressure_seeds.immediate", "must be a non-empty string")
+        if not isinstance(pressure.get("immediate"), str):
+            self.error("world.pressure_seeds.immediate", "must be a string; empty means none")
         events = {event.get("id"): event for event in events_value or [] if isinstance(event, dict) and is_nonempty_string(event.get("id"))} if isinstance(events_value, list) else {}
-        if self.profile == "opening" and not events:
-            return
+        # Nonempty references must be checked even when the event queue is empty.
         for field, kind in (("near_event_id", "near"), ("far_event_id", "far")):
             event_id = pressure.get(field)
             if event_id in (None, ""):
                 # save profile 允许种子为空（同类 pending 事件被解决/取消后由
                 # commit_turn 重指或置空）；opening profile 必须有种子。
-                if self.profile == "opening":
+                if self.profile == "opening" and not self.daily:
                     self.error(f"world.pressure_seeds.{field}", "must be a non-empty event ID")
                 continue
             event = events.get(event_id)
@@ -392,7 +405,11 @@ class Validator:
         if data is None:
             return
         self.required(data, {"scene_id", "location", "participants", "situation", "last_committed_result", "unresolved_action", "natural_next_pressure"}, "current_node")
-        self.required_text(data, ("scene_id", "location", "last_committed_result", "unresolved_action", "natural_next_pressure"), "current_node")
+        self.required_text(data, ("scene_id", "location", "last_committed_result", "unresolved_action"), "current_node")
+        if not self.daily and not is_nonempty_string(data.get("natural_next_pressure")):
+            self.error("current_node.natural_next_pressure", "must be a non-empty string")
+        if not isinstance(data.get("natural_next_pressure"), str):
+            self.error("current_node.natural_next_pressure", "must be a string; empty means none")
         participants = self.sequence(data.get("participants"), "current_node.participants")
         if participants is not None:
             if not participants:
@@ -406,7 +423,12 @@ class Validator:
         if situation is not None:
             self.required(situation, {"trigger", "pressure", "immediate_objective", "deadline", "unresolved_choice", "knowledge_gap", "exits", "consequence"}, "current_node.situation")
             for field in ("trigger", "pressure", "immediate_objective", "unresolved_choice"):
-                if not is_nonempty_string(situation.get(field)):
+                if field == "pressure":
+                    if not self.daily and not is_nonempty_string(situation.get(field)):
+                        self.error(f"current_node.situation.{field}", "must be a non-empty string")
+                    if not isinstance(situation.get(field), str):
+                        self.error(f"current_node.situation.{field}", "must be a string; empty means none")
+                elif not is_nonempty_string(situation.get(field)):
                     self.error(f"current_node.situation.{field}", "must be a non-empty string")
             if situation.get("deadline") not in (None, "") and parse_iso_datetime(situation.get("deadline")) is None:
                 self.error("current_node.situation.deadline", "must be an ISO 8601 string with timezone when present")
@@ -626,10 +648,12 @@ class Validator:
         kinds = {event.get("kind") for event in events if isinstance(event, dict)}
         for kind in ("immediate", "near", "far"):
             if kind not in kinds:
-                self.error("events", f"opening profile requires an {kind} event")
+                if data.get("meta", {}).get("opening_mode", "pressure") == "pressure":
+                    self.error("events", f"pressure opening requires an {kind} event")
         far_hooks = [event for event in events if isinstance(event, dict) and event.get("kind") == "far" and event.get("hook") is True]
         if not far_hooks:
-            self.error("events", "opening profile requires a far hook event")
+            if data.get("meta", {}).get("opening_mode", "pressure") == "pressure":
+                self.error("events", "pressure opening requires a far hook event")
         relationships = data.get("relationships")
         if not isinstance(relationships, list) or not relationships:
             self.error("relationships", "opening profile requires relationship coverage")
