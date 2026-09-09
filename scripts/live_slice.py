@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import sys
 from pathlib import Path
@@ -18,12 +19,26 @@ except ImportError:  # pragma: no cover
     yaml = None
 
 
+def _load_common() -> Any:
+    spec = importlib.util.spec_from_file_location(
+        "adult_tension_common", Path(__file__).with_name("_common.py"))
+    if spec is None or spec.loader is None:
+        raise RuntimeError("cannot load _common.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_COMMON = _load_common()
+ROOT = Path(__file__).resolve().parents[1]
+
+
 def _load(path: Path) -> dict[str, Any]:
     if yaml is None:
         raise SystemExit("ERROR: PyYAML is required; run: python -m pip install PyYAML")
     try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        data = _COMMON.load_yaml_file(path)
+    except _COMMON.CommonError as exc:
         raise SystemExit(f"ERROR: cannot read {path}: {exc}")
     if not isinstance(data, dict):
         raise SystemExit(f"ERROR: state is not a mapping: {path}")
@@ -34,6 +49,33 @@ def _load(path: Path) -> dict[str, Any]:
 # relationships 全量保留——量小且是关系传播的正式来源）。
 PENDING_EVENTS_LIMIT = 10
 KNOWLEDGE_LIMIT = 8
+
+
+def event_receipts(state: dict[str, Any], event_ids: list[str] | None = None) -> list[dict[str, Any]]:
+    """Fetch requested events, including terminal outcomes, without a full state dump."""
+    events = {event.get("id"): event for event in state.get("events") or [] if isinstance(event, dict)}
+    summaries = {item.get("event_id"): item for item in state.get("resolved_summary") or []
+                 if isinstance(item, dict)}
+    if event_ids is None:
+        turn = (state.get("meta") or {}).get("turn")
+        event_ids = [eid for eid, item in summaries.items() if item.get("resolved_turn") == turn
+                     and events.get(eid, {}).get("status") in {"resolved", "cancelled"}]
+    receipts = []
+    for event_id in dict.fromkeys(event_ids):
+        event = events.get(event_id)
+        if event is None:
+            raise ValueError(f"unknown event ID: {event_id}")
+        summary = summaries.get(event_id, {})
+        receipt = {key: event.get(key) for key in (
+            "id", "status", "kind", "semantic_key", "source", "created_turn", "trigger", "due_at",
+            "consequence", "hook", "probability", "last_roll")}
+        receipt["outcome"] = summary.get("outcome")
+        receipt["resolved_turn"] = summary.get("resolved_turn")
+        if not receipt["outcome"] and event.get("status") in {"resolved", "cancelled"}:
+            receipt["outcome"] = ("Event cancelled" if event["status"] == "cancelled"
+                                  else event.get("consequence") or "Event resolved")
+        receipts.append(receipt)
+    return receipts
 
 
 def _trim_npc(npc: dict[str, Any]) -> dict[str, Any]:
@@ -167,6 +209,7 @@ def extract_live_slice(state: dict[str, Any]) -> dict[str, Any]:
         "npcs": npcs,
         "relationships": state.get("relationships") or [],
         "pending_events": _pending_events(state.get("events")),
+        "event_changes": event_receipts(state),
         "checkpoint": {
             "last_full_turn": checkpoint.get("last_full_turn"),
             "next_full_turn": checkpoint.get("next_full_turn"),
@@ -207,22 +250,25 @@ def opening_brief(state: dict[str, Any]) -> dict[str, Any]:
         },
         "player": {
             "name": player.get("name"),
+            "age": player.get("age"),
             "appellation": player.get("appellation") or player.get("name"),
             "identity": player.get("identity"),
             "why_here": player.get("baseline"),
         },
         "npc": {
             "name": npc.get("name"),
+            "age": npc.get("age"),
             "identity": npc.get("identity"),
             "stuck_on": (slice_.get("node_situation") or {}).get("unresolved_choice")
             or npc.get("situation_pressure"),
             "surface_voice": _surface_voice(npc.get("voice_filter")),
         },
         "location": slice_.get("location"),
+        "scene_profile": slice_.get("scene_profile"),
+        "situation": slice_.get("node_situation"),
         "unresolved": slice_.get("unresolved_action"),
         "last_beat": slice_.get("last_committed_result"),
         "next_pressure": slice_.get("natural_next_pressure"),
-        # 三段式模板（SKILL.md「完整开局」）不消费建议/安全提醒，孤儿键已删。
         "turn": 1,
     }
 
@@ -283,7 +329,11 @@ def dump(data: Any, fmt: str) -> str:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("state", type=Path)
+    parser.add_argument("state", type=Path, nargs="?")
+    parser.add_argument("--state", dest="state_option", type=Path)
+    parser.add_argument("--session", default=None)
+    parser.add_argument("--event", action="append", nargs="+", default=[], metavar="ID",
+                        help="Return only the requested events; repeat or provide multiple IDs")
     parser.add_argument("--human", action="store_true", help="状态命令用人话，不暴露字段名")
     parser.add_argument("--brief", action="store_true", help="开局 brief")
     parser.add_argument("--compact", action="store_true", help="最小开局 brief")
@@ -293,17 +343,42 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    state = _load(args.state)
+    try:
+        if sum(value is not None for value in (args.state, args.state_option, args.session)) != 1:
+            raise _COMMON.CommonError("provide exactly one state path, --state or --session")
+        if args.event and (args.human or args.brief or args.compact):
+            raise _COMMON.CommonError("--event cannot be combined with --human, --brief or --compact")
+        path = (_COMMON.session_state_path(ROOT / "saves", args.session) if args.session is not None
+                else (args.state_option or args.state).resolve())
+        if not path.is_file():
+            raise _COMMON.CommonError(f"state does not exist: {path}")
+        with _COMMON.FileLock(_COMMON.lock_path(path)):
+            snapshot = path.read_bytes()
+            state = _COMMON.load_yaml_bytes(snapshot, path)
+            if not isinstance(state, dict):
+                raise _COMMON.CommonError(f"state is not a mapping: {path}")
+            binding = _COMMON.state_binding(path, snapshot, ROOT / "saves")
+    except (OSError, _COMMON.CommonError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
     if args.human:
         print(human_status(state))
         return 0
     payload: Any
-    if args.compact:
+    if args.event:
+        try:
+            payload = {"events": event_receipts(state, [eid for group in args.event for eid in group])}
+        except ValueError as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            return 1
+    elif args.compact:
         payload = opening_brief_compact(state)
     elif args.brief:
         payload = opening_brief(state)
     else:
         payload = extract_live_slice(state)
+    if not args.compact:
+        payload.update(binding)
     print(dump(payload, args.format), end="" if str(args.format) == "yaml" else "\n")
     return 0
 

@@ -39,7 +39,7 @@ command_categories:
       - triggers: [开局, 开始, 随机开局, 压力开局, 日常开局]
         canonical: 开局
         advance_turn: false
-        behavior: 新开局未指定类型时先询问“压力开局”或“日常开局”；仅在等待该选择时把 1/2 解释为压力/日常。明确委托“随便”才默认日常；选择不推进回合、不抽素材、不写状态。载入或续玩不触发此选择。明确后执行 build_opening.py --complete --opening-mode pressure|daily。用户已明确类型时不再询问；只有种子或锁定素材仍需选择类型；已有进行中状态且玩家未明确要求放弃或重新开始时才确认，确认前不重掷、不清状态
+        behavior: 新开局未指定类型时先询问“压力开局”或“日常开局”；仅在等待该选择时把 1/2 解释为压力/日常。明确委托“随便”才默认日常；选择不推进回合、不抽素材、不写状态。载入或续玩不触发此选择。明确后执行 build_opening.py --complete --opening-mode pressure|daily，记录返回的 session/state_path/state_token；仅新局依次输出世界观、人物、正文三个标题，前两项各 1-2 句。用户已明确类型时不再询问；已有进行中状态且未明确要求重新开始时才确认，确认前不重掷、不清状态
       - triggers: [继续, next, c, "...", "……"]
         canonical: 继续
         advance_turn: true
@@ -56,22 +56,22 @@ command_categories:
         canonical: 存档
         advance_turn: false
         behavior: 写入当前槽；成功后只回「已保存到「名称」·第 N 回合」，不输出 YAML
-        cli: save <当前槽> saves/current_state.yaml --expected-updated-at <载入时记录>
+        cli: python scripts/manage_saves.py save <当前槽> <state_path> --expected-updated-at <最近载入或保存返回的updated_at>
       - triggers: [保存到, 另存为]
         canonical: 保存到
         advance_turn: false
         behavior: 保存为命名存档 X（允许中文名，空格改 -）；已存在且载入后未被他处修改才可覆盖；成功后只回「已另存为「X」·第 N 回合」
-        cli: 新建=init X <导出文件>；覆盖=save X <导出文件> --expected-updated-at <载入时记录>（缺省该 flag 会被拒绝）
+        cli: 新建=python scripts/manage_saves.py init X <state_path>；覆盖=python scripts/manage_saves.py save X <state_path> --expected-updated-at <已观察的updated_at>（缺省该 flag 会被拒绝）
       - triggers: [载入, 读档, load, l]
         canonical: 载入存档
         advance_turn: false
         behavior: '读取玩家提供的 save_version: 3 YAML，先验证再接续，不得重新执行开局；从 current_node.unresolved_action 前一刻直接接续正文'
-        cli: 校验通过后写入 saves/current_state.yaml，并记录其 updated_at
+        cli: 宿主校验通过后将原状态机械写入新建的 saves/sessions/<uuid>/state.yaml，再用 python scripts/live_slice.py --session <session> 获取 state_path/state_token；裸 v3 YAML 没有 manifest.updated_at，不得伪造命名槽绑定
       - triggers: [载入到, 读取]
         canonical: 载入到
         advance_turn: false
         behavior: 载入命名存档 X 并绑定为当前写入目标；从 current_node.unresolved_action 前一刻直接接续正文
-        cli: load X，并记录 manifest.updated_at
+        cli: python scripts/manage_saves.py load X 仅返回校验后的 manifest；宿主调用 SaveStore.load_slot(X) 取得同锁状态快照和 manifest，机械写入独立会话工作档，再用 live_slice.py --session <session> 取得绑定
       - triggers: [列出存档, 存档列表]
         canonical: 列出存档
         advance_turn: false
@@ -81,7 +81,7 @@ command_categories:
         canonical: 状态
         advance_turn: false
         behavior: 六行人话——地点、在场、暂停、当前压力、同意判断、可接续动作
-        cli: python scripts/live_slice.py saves/current_state.yaml --human
+        cli: python scripts/live_slice.py --session <session> --human（自定义路径用 --state <state_path>）
       - triggers: [帮助, 命令, 能做什么, help, h, "?"]
         canonical: 帮助
         advance_turn: false
@@ -109,11 +109,11 @@ command_categories:
       - triggers: [强制表内]
         canonical: 强制表内
         advance_turn: false
-        behavior: 开局结构骰只取表内池（build_opening --complete --force-table）
+        behavior: 开局结构骰只取表内池（build_opening --complete --force-table）；不绕过 auto 审查门禁，独立旧池须显式 --framework legacy
       - triggers: [表外全随机]
         canonical: 表外全随机
         advance_turn: false
-        behavior: 核心轴可自拟（--all-custom 配 --custom KEY=VALUE）
+        behavior: 自由表外世界显式使用 build_opening --complete --framework legacy --all-custom，配齐 --custom KEY=VALUE；auto 仍限已审框架，自拟核心规则或时代等不兼容时拒绝，无静默回退；不绕过日常模式限制或状态校验
       - triggers: [预锁]
         canonical: 预锁
         advance_turn: false
@@ -163,15 +163,33 @@ command_categories:
         advance_turn: false
         behavior: 关闭叙事建议
 
+# 工作会话与命名槽是两组不同的绑定，不进入 v3 状态字段。
+runtime_binding: |
+  新局默认独占 saves/sessions/<uuid>/state.yaml，可用 --session ID 指定稳定会话。
+  后台 opening_brief/活切片返回 session、绝对 state_path、原始文件字节 SHA256 state_token。
+  自定义工作文件的 session 可为 null，此时只按 state_path 绑定，不猜测全局工作档。
+  提交必须显式使用 --session <session> --expected-state-token <state_token>，或兼容 --state <state_path>。
+  --state 旧调用可不带 token；携带时同样在文件锁内验证。失败不输出成功回执，过期 token 拒绝写入。
+  过期后重新读取切片并重新判断 patch，不能仅替换 token 重放；成功后记录新 token。
+  auto 只使用来源哈希匹配且审查有效的框架，无合格框架时报错，无隐式 legacy 回退。
+  开局只有校验通过且要求的状态写入都成功才追加历史；输出已存在或状态写入失败不污染历史。
+  提交后的 event_changes 含新 resolved/cancelled 终态及 outcome；取消说明用 cancel_outcome。
+  终态事件保留在 events 中，resolved_summary 是结果摘要，不做物理归档。
+  python scripts/live_slice.py --session <session> --event <ID> 可重复 --event 或一次列出多个 ID，定向取回结果。
+  普通 pending_events 上限仍为 10 条，另带省略提示；定向查询不要求输出整份状态。
+
 # 存档槽与「当前槽」绑定规则
 slot_binding: |
   存档落在 saves/slots/<名称>/（state.yaml + manifest.yaml），由 scripts/manage_saves.py 原子写入。
   槽名允许中文，空格改成 -。
-  「当前槽」是会话上下文里记录的槽名：无名称存档默认写 main；「载入 X」后当前槽切换为 X。
+  「当前槽」是会话上下文里记录的槽名；未绑定时先确定名称，不猜写已有 main；「载入 X」后当前槽切换为 X。
   载入时记录 manifest.updated_at；覆盖保存必须携带该值（--expected-updated-at），不匹配即拒绝，
   不自动合并两个窗口的状态。保存冲突时用自然语言给出 A 读最新 / B 另存 / C 取消，
   单窗口正常游玩时无需主动提示多窗口冲突逻辑。
   跨会话续玩必须先明确「载入 X」重建这组绑定（槽名＋载入时的 updated_at），否则无法覆盖保存。
+  状态解析和 state_sha256 校验来自同一字节快照，并处于同一个槽锁内。
+  保存 state/manifest 任一步失败会恢复原有效文件对；初始化失败不留下可用槽。
+  load CLI 不会创建会话工作档；宿主只可复制 SaveStore.load_slot 返回的已校验状态，不能在锁外重读槽文件代替该快照。
 
 notes: |
   若已有进行中状态，只有在玩家未明确要求放弃或重新开始时，输入「开局」才先确认是否放弃当前局；确认前不重掷、不清状态。

@@ -47,8 +47,8 @@ def check_frameworks(registry, pools, categories, identity_profiles, report):
         return
     if type(registry.get("version")) is not int or registry["version"] != 1:
         error("version", "仅支持版本 1")
-    if type(registry.get("legacy_weight")) is not int or registry["legacy_weight"] < 1:
-        error("legacy_weight", "须为正整数")
+    if registry.get("legacy_weight") != 0:
+        error("legacy_weight", "默认池不得混入旧池；固定为 0，legacy 保留显式入口")
     frameworks = mapping(registry.get("frameworks"), "frameworks")
     for name, package in frameworks.items():
         text(name, "name")
@@ -62,6 +62,12 @@ def check_frameworks(registry, pools, categories, identity_profiles, report):
                 error(str(name), f"美学 {aesthetic} 不兼容所选时代")
         for key in ("rule", "social_rule"):
             text(package.get(key), f"{name}.{key}")
+        strings(package.get("themes"), f"{name}.themes")
+        text(package.get("technology_boundary"), f"{name}.technology_boundary")
+        if package.get("bridge_status") not in ("not_required", "bridge_required"):
+            error(str(name), "缺少明确桥接状态")
+        if package.get("bridge_status") == "bridge_required":
+            text(package.get("bridge_explanation"), f"{name}.bridge_explanation")
         strings(package.get("customs"), f"{name}.customs")
         places = mapping(package.get("places"), f"{name}.places")
         for place, row in places.items():
@@ -125,3 +131,21 @@ def check_frameworks(registry, pools, categories, identity_profiles, report):
             beats(pressure.get("beats"), path + ".beats")
             for key in ("far_trigger", "far_consequence"):
                 text(pressure.get(key), path + "." + key)
+            strings(pressure.get("exits"), path + ".exits")
+            bindings = pressure.get("bindings")
+            if not isinstance(bindings, list) or not bindings:
+                error(path, "压力必须显式绑定活动、地点和人物")
+                continue
+            seen = set()
+            for binding in bindings:
+                if not isinstance(binding, dict) or set(binding) != {"activity", "place", "pair"}:
+                    error(path, "压力绑定字段必须为 activity/place/pair")
+                    continue
+                activity = package.get("activities", {}).get(binding["activity"], {})
+                if (binding["place"] not in activity.get("places", [])
+                        or type(binding["pair"]) is not int or binding["pair"] not in activity.get("pairs", [])):
+                    error(path, "压力引用不存在的活动配套")
+                signature = (binding["activity"], binding["place"], binding["pair"])
+                if signature in seen:
+                    error(path, "压力绑定重复")
+                seen.add(signature)

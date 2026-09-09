@@ -1,0 +1,380 @@
+id: "mat-a8de42dfb83753db94e47e7b0d0e8175"
+name: "街角共同生活圈"
+material:
+  eras:
+    - "当代都市"
+  aesthetics:
+    - "青年漫写实"
+    - "写实文学"
+    - "都市轻悬疑"
+    - "暖色生活流"
+    - "市井烟火"
+    - "恋爱轻喜"
+  rule: "社区里的店铺、公共设施与住户相互依赖，小事也能形成长期往来。"
+  social_rule: "公共空间按预约使用，邻里帮助不等于无限义务。"
+  places:
+    老旧小区:
+      details:
+        - "楼下树荫里摊着居民手绘图·午后"
+        - "旧店招牌从院门外露出一角·午后"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "院门通往街道"
+        witnesses:
+          - "乘凉邻居"
+        affordances:
+          - "交换街区故事"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "院内活动人数"
+          - "住户午休"
+    家中厨房:
+      details:
+        - "餐桌分开放着两种调味小碟·傍晚"
+        - "家用灶台旁留出洗菜位置·傍晚"
+      profile:
+        privacy: "high"
+        visibility: "low"
+        exits:
+          - "厨房门至客厅与入户门"
+        witnesses:
+          - "受邀共餐的成年邻居"
+        affordances:
+          - "试做邻里菜单"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "食材用量"
+          - "主人愿意借出的灶台时段"
+    清晨菜市场:
+      details:
+        - "水珠还挂在时蔬叶面·清晨"
+        - "摊主在秤旁换上当天价签·清晨"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "市场主通道与街口"
+        witnesses:
+          - "菜摊摊主"
+          - "采购居民"
+        affordances:
+          - "记录时令食材"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "到货时间"
+          - "采购预算"
+    朋友客厅:
+      details:
+        - "旧相册与空封套并放在矮桌上·午后"
+        - "沙发旁能看见客厅门·午后"
+      profile:
+        privacy: "high"
+        visibility: "low"
+        exits:
+          - "客厅入户门"
+        witnesses:
+          - "主人邀请的朋友"
+        affordances:
+          - "整理社区相册"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "照片主人许可"
+          - "主人待客时间"
+    深夜便利店:
+      details:
+        - "靠窗座位能看到下一个路口·深夜"
+        - "收银台旁贴着本店休息区规则·深夜"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "便利店临街门"
+        witnesses:
+          - "夜班店员"
+          - "短暂停留的顾客"
+        affordances:
+          - "补画夜行地图"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "休息区可用时段"
+          - "沿途营业变化"
+    24小时自助洗衣房:
+      details:
+        - "机器门前留着取衣空带·夜"
+        - "远离水池的干燥墙角试放空书架·夜"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "自助店门"
+        witnesses:
+          - "取衣顾客"
+          - "按需到店的经营者"
+        affordances:
+          - "共拟借阅角"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "机器门开启范围"
+          - "水汽"
+    社区诊所:
+      details:
+        - "诊室门外的图书推车停在指定线内·日间"
+        - "低层书架与候诊椅相对·日间"
+      profile:
+        privacy: "medium"
+        visibility: "high"
+        exits:
+          - "候诊区外门厅"
+        witnesses:
+          - "诊所工作人员"
+          - "成年候诊者"
+        affordances:
+          - "布置候诊阅读角"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "诊疗通道宽度"
+          - "清洁时段"
+    打烊面包店:
+      details:
+        - "关炉后柜台只留当日试制面包·打烊前"
+        - "配料标签与小碟放在店主面前·打烊前"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "临街店门"
+        witnesses:
+          - "面包店店主"
+          - "受邀试吃街坊"
+        affordances:
+          - "筹备邻里试吃"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "店主收店时间"
+          - "已确认配料"
+  pairs:
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "社区活动策划人"
+        function: "协调自愿邻里活动并安排场地试用"
+        authority: "使用已获经营者许可的桌位与活动时段"
+        resource: "居民自愿提供的地图、可借推车和店铺联系人"
+        limitation: "不拥有公共场地，也不能要求熟人长期值守"
+        obligation: "说明每次帮忙的结束时间，活动不挤占原用途"
+        exposure: "超时或占道会失去下次借场机会"
+        hidden: "—"
+      player:
+        identity: "街区口述史记录员"
+        baseline: "你曾帮策划人听懂老住户不愿被拍照的理由；这次约好先闲聊，是否录下另问。"
+        resources:
+          - "自己的口述访谈经验"
+          - "已获许可的街景照片"
+        reputation: "你会问人想不想留下故事，不替他承诺公开"
+      relationship_reason: "你曾帮策划人听懂老住户不愿被拍照的理由；这次约好先闲聊，是否录下另问。"
+    -
+      family: "艺术与传播"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "街区口述史记录员"
+        function: "访谈街坊并保存获准的相册副本"
+        authority: "决定本人采访稿的编排，原件与授权归提供者"
+        resource: "录音设备、照片封套与已确认的口述提纲"
+        limitation: "不因听过家事就有公开权，厨艺只够试做家常小份"
+        obligation: "把闲谈与授权采访分开，归还不愿留下的照片"
+        exposure: "错用一张私照会使街坊不再愿意开门"
+        hidden: "—"
+      player:
+        identity: "社区活动策划人"
+        baseline: "你请口述史记录员来做一顿他家常吃的菜，这次彼此都不设采访任务。"
+        resources:
+          - "一次活动的食材预算"
+          - "联系本次自愿参与者的时间"
+        reputation: "你能张罗一顿饭，也尊重别人不再参加"
+      relationship_reason: "你请口述史记录员来做一顿他家常吃的菜，这次彼此都不设采访任务。"
+  activities:
+    交换街区故事:
+      places:
+        - "老旧小区"
+      pairs:
+        - 0
+      category: "日常接触"
+      action: "{npc}指着居民手绘图上一家老店，先讲起自己常点的早餐，问你还记得什么。"
+      beats:
+        trigger: "{npc}指着居民手绘图上一家老店，先讲起自己常点的早餐，问你还记得什么。"
+        objective: "从日常记忆认识邻居"
+        choice: "讲一家店，或只听对方说；不聊往事可一起坐会儿"
+        immediate: "话题沿两人的兴趣延伸，不要求拼成唯一街史。"
+        near: "是否把故事留作口述材料另行询问，今天的闲聊不生成采访任务。"
+    试做邻里菜单:
+      places:
+        - "家中厨房"
+      pairs:
+        - 1
+      category: "照护与修复"
+      action: "{npc}把两种调味小碟分开，先问大家避开什么食材，再邀你试做半份。"
+      beats:
+        trigger: "{npc}把两种调味小碟分开，先问大家避开什么食材，再邀你试做半份。"
+        objective: "找到大家吃得惯且做得起的一餐"
+        choice: "动手做半份，或洗菜、尝味；不想吃可只喝水聊天"
+        immediate: "两份口味分锅完成，不能吃某种食材的人无需迁就整桌。"
+        near: "按实际吃下的份量分装剩菜，下次做饭重新问人手，不默认常来者轮值。"
+    记录时令食材:
+      places:
+        - "清晨菜市场"
+      pairs:
+        - 0
+      category: "调查与核验"
+      action: "{npc}在菜摊前拿出采购单，请你一起比较当季两种菜的价格和新鲜程度。"
+      beats:
+        trigger: "{npc}在菜摊前拿出采购单，请你一起比较当季两种菜的价格和新鲜程度。"
+        objective: "选出预算内当天能用的食材"
+        choice: "询价比较，或只买自己的份；不满意可换摊不买"
+        immediate: "采购量按愿意共餐的人数收缩，缺货菜换成同用途时蔬。"
+        near: "回家按实物调整菜单，记录只服务这次采购，不用攒成公开行情报告。"
+    整理社区相册:
+      places:
+        - "朋友客厅"
+      pairs:
+        - 1
+      category: "信息交换"
+      action: "{npc}把两张老街合照并排，请你说哪张更像你记得的那个夏天。"
+      beats:
+        trigger: "{npc}把两张老街合照并排，请你说哪张更像你记得的那个夏天。"
+        objective: "理解照片背后的不同记忆"
+        choice: "讲照片缘由，或只帮排顺序；不愿公开的照片收回封套"
+        immediate: "相册可以留两种日期说法，私密页单独放回原主手中。"
+        near: "只把获准的照片做副本，原相册不因参与社区活动变成公共财产。"
+    补画夜行地图:
+      places:
+        - "深夜便利店"
+      pairs:
+        - 0
+      category: "空间与退出"
+      action: "{npc}在便利店门口指出两条回家路，邀你只走到下一个亮灯路口。"
+      beats:
+        trigger: "{npc}在便利店门口指出两条回家路，邀你只走到下一个亮灯路口。"
+        objective: "找出有休息与折返点的夜行短线"
+        choice: "同行一段，或在店内等候；也可各自回家不绕路"
+        immediate: "短线的暗处与可停留店面得到实地确认，不把亮灯等同于欢迎久坐。"
+        near: "地图只标核实的营业时段，陪走止于约定路口，不默认为夜间接送服务。"
+    共拟借阅角:
+      places:
+        - "24小时自助洗衣房"
+      pairs:
+        - 1
+      category: "空间与退出"
+      action: "{npc}征得经营者同意，把空书架挪到折衣台旁，邀你试走一趟取衣路线。"
+      beats:
+        trigger: "{npc}征得经营者同意，把空书架挪到折衣台旁，邀你试走一趟取衣路线。"
+        objective: "让借阅不侵占洗衣必需空间"
+        choice: "试放两本书，或检查取衣通道；不借书可以照常洗衣"
+        immediate: "挡住机器门的摆法被撤回，书架远离水汽和折衣面。"
+        near: "试用一周后由经营者与使用者决定是否保留，没人须为借书角通宵值守。"
+    布置候诊阅读角:
+      places:
+        - "社区诊所"
+      pairs:
+        - 0
+      category: "照护与修复"
+      action: "{npc}在诊所工作人员指定的位置停好图书推车，请你试试坐着能否取到薄书。"
+      beats:
+        trigger: "{npc}在诊所工作人员指定的位置停好图书推车，请你试试坐着能否取到薄书。"
+        objective: "让等待中的人更容易拿取读物"
+        choice: "调整一层书，或只坐着试取；不愿读可留空座休息"
+        immediate: "常用薄书放到较低层，推车退出诊疗通道，不接触病历。"
+        near: "读物按清洁要求轮换，志愿者只认领一次补书，不代替诊疗或安抚所有候诊者。"
+    筹备邻里试吃:
+      places:
+        - "打烊面包店"
+      pairs:
+        - 1
+      category: "日常接触"
+      action: "{npc}征得店主同意摆出两种当日试制面包，问你愿意尝哪一小块。"
+      beats:
+        trigger: "{npc}征得店主同意摆出两种当日试制面包，问你愿意尝哪一小块。"
+        objective: "比较大家真正喜欢的口味"
+        choice: "尝一块，或只闻香气聊配料；不吃也可陪坐"
+        immediate: "喜好不一致可各留一票，不劝所有人选同一款。"
+        near: "店主决定是否继续试制，来客吃完即可走，不以免费试吃换宣传。"
+  customs:
+    - "邻里交换物件时会附一张写着用法的小纸条。"
+  pressures:
+    公共庭院预约撞期:
+      source: "两组居民拿到了同一时段的庭院预约"
+      engines:
+        - "资源锁定"
+        - "信任透支"
+      beats:
+        trigger: "{npc}收到消息：两组居民拿到了同一时段的庭院预约。"
+        objective: "核对预约并协商分时使用"
+        choice: "先联系另一组住户，或提议另选日期"
+        immediate: "两组先各留出入通道，不把桌椅搬满来抢占空间。"
+        near: "策划人与另一组当面协商短时共用或分时，小聚会可留在原桌而不扩大。"
+      far_trigger: "下一次庭院预约开放时"
+      far_consequence: "重复确认被消除后恢复预约；若仍共用同一手工表，则仅接单组预约避免重复承诺。"
+      exits:
+        - "撤回本组这次庭院时段，改日再约"
+        - "只参加自己已答应的短段，余下协商交召集人"
+      bindings:
+        -
+          activity: "交换街区故事"
+          place: "老旧小区"
+          pair: 0
+    老店招牌归属争议:
+      source: "旧店主与新承租人都希望保留同一块招牌"
+      engines:
+        - "旧事追索"
+        - "名声保卫"
+      beats:
+        trigger: "{npc}收到消息：旧店主与新承租人都希望保留同一块招牌。"
+        objective: "厘清招牌的归属和展示方式"
+        choice: "查找交接记录，或邀请双方谈共展方案"
+        immediate: "招牌暂不搬动，相册交流也不被当作产权证据。"
+        near: "记录员只整理双方愿提供的出处，真品归属由当事人依交接约定处理，展览可先用注明来源的照片。"
+      far_trigger: "下一次街区展览确认借展清单时"
+      far_consequence: "双方若达成借展可轮换展示；未达成则不展实物，各自叙述仍可并列。"
+      exits:
+        - "取回自己的照片，退出调解"
+        - "仅介绍双方互相联系，不替任一方认领招牌"
+      bindings:
+        -
+          activity: "整理社区相册"
+          place: "朋友客厅"
+          pair: 1
+        -
+          activity: "交换街区故事"
+          place: "老旧小区"
+          pair: 0
+  legacy_sources:
+    eras:
+      - "当代都市"
+    aesthetics:
+      - "青年漫写实"
+      - "写实文学"
+      - "都市轻悬疑"
+      - "暖色生活流"
+      - "市井烟火"
+      - "恋爱轻喜"
+    places:
+      - "老旧小区"
+      - "家中厨房"
+      - "清晨菜市场"
+      - "朋友客厅"
+      - "深夜便利店"
+      - "24小时自助洗衣房"
+      - "社区诊所"
+      - "打烊面包店"
+  themes:
+    - "邻里互助的工时边界"
+    - "旧街记忆与当下生活"
+    - "不同作息共享一片街区"
+  technology_boundary: "当代社区使用手机、纸图、家用厨具与普通公共设施；数字预约会失误，地图不保证实时营业，活动人员没有医疗、产权裁决或无限调度权限。"
+  bridge_status: "not_required"

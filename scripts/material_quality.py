@@ -184,8 +184,7 @@ def quality(data_dir=DATA):
             "semantic_grade": "REVIEW_REQUIRED", "places": len(frame.get("places", {})),
             "pairs": len(pairs), "activities": len(activities), "categories": dict(categories),
             "generic_followups": common,
-            "pressure_combinations": sum(len(a.get("places", [])) * len(a.get("pairs", []))
-                                         * len(pressures) for a in activities.values()),
+            "pressure_combinations": sum(len(p.get("bindings", [])) for p in pressures.values()),
             "reason": "Structural triage only; A requires recorded semantic review",
             "action_function_distribution": dict(functions), "function_evidence": function_sources,
             "unmapped_functions": unmapped, "appellation_distribution": dict(appellations),

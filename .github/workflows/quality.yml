@@ -3,6 +3,12 @@ name: quality
 on:
   push:
   pull_request:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: Require semantic and real-model acceptance evidence
+        type: boolean
+        default: false
 
 jobs:
   test:
@@ -12,6 +18,8 @@ jobs:
         python-version: ["3.10", "3.13"]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -20,16 +28,9 @@ jobs:
           cache-dependency-path: requirements-dev.txt
       - name: Install dependencies
         run: python -m pip install -r requirements-dev.txt
-      - name: Run tests
-        run: python -m pytest -q
-      - name: Compile Python files
-        run: python -m compileall -q scripts tests
-      - name: Validate content tables
-        run: python scripts/check_content.py
-      - name: Audit material inventory and pairings
-        run: |
-          python scripts/material_inventory.py --summary
-          python scripts/check_material_compatibility.py --summary
-          python scripts/sample_materials.py --summary
-      - name: Check diff whitespace
-        run: git diff --check
+      - name: Full quality checks
+        if: ${{ !startsWith(github.ref, 'refs/tags/') && !inputs.release }}
+        run: python scripts/qa.py --full
+      - name: Release acceptance gate
+        if: ${{ startsWith(github.ref, 'refs/tags/') || inputs.release }}
+        run: python scripts/qa.py --full --release

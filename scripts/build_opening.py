@@ -22,6 +22,7 @@ warning 不阻断；本脚本也不替模型生成叙事正文。
 from __future__ import annotations
 
 import argparse
+from contextlib import ExitStack
 import datetime as dt
 import importlib.util
 import json
@@ -29,6 +30,7 @@ import os
 import re
 import sys
 import tempfile
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -94,7 +96,11 @@ def build_roll(seed: int | None, locks: dict[str, str], custom: dict[str, str],
         raise SystemExit("ERROR: --all-custom 与 --force-table 互斥")
     mode = "all_custom" if all_custom else ("force_table" if force_table else "table")
     actual_seed = seed if seed is not None else roll_mod.random.SystemRandom().randrange(0, 2 ** 31)
-    return roll_mod.build_roll(pools, actual_seed, mode, locks, custom, opening_mode=opening_mode, framework=framework)
+    try:
+        return roll_mod.build_roll(pools, actual_seed, mode, locks, custom, opening_mode=opening_mode, framework=framework)
+    except roll_mod.AnchorError as exc:
+        # Sibling modules are loaded by path; exception classes differ between loads.
+        raise ValueError(str(exc)) from exc
 
 
 def roll_from_file(path: Path) -> dict[str, Any]:
@@ -328,6 +334,33 @@ def complete_opening(args: argparse.Namespace) -> int:
         return 1
 
     text = dump_yaml(filled)
+    try:
+        session = getattr(args, "session", None)
+        session_path = _COMMON.session_state_path(DEFAULT_OUT_DIR, session if session is not None else str(uuid.uuid4()))
+        if session is not None and args.no_working:
+            raise _COMMON.CommonError("--session cannot be combined with --no-working")
+        if session is not None and args.working is not None and args.working.resolve() != session_path:
+            raise _COMMON.CommonError("--working must match the --session state path")
+        out = args.out or (DEFAULT_OUT_DIR / f"_opening_{seed}.yaml" if args.no_working else session_path)
+        working = None if args.no_working else args.working
+        if working is None and not args.no_working and (args.out is None or session is not None):
+            working = session_path
+        paths = sorted({path.resolve() for path in (out, working) if path is not None})
+        with ExitStack() as locks:
+            for path in paths:
+                locks.enter_context(_COMMON.FileLock(_COMMON.lock_path(path)))
+            if out.exists() and not args.force:
+                raise _COMMON.CommonError(f"output already exists (use --out or --force): {out}")
+            if working == session_path and working != out and working.exists() and not args.force:
+                raise _COMMON.CommonError(f"session already exists (use --force): {session}")
+            write_atomic(out, text)
+            if working is not None and working.resolve() != out.resolve():
+                write_atomic(working, text)
+            binding = _COMMON.state_binding(working or out, text.encode("utf-8"), DEFAULT_OUT_DIR)
+    except (OSError, _COMMON.CommonError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+
     history_used = False
     history_duplicate = False
     # 近期结构去重（SKILL.md：连续局重复三元组只 warning 不阻断）。
@@ -344,22 +377,6 @@ def complete_opening(args: argparse.Namespace) -> int:
         roll_mod.append_history(roll)
     except Exception as exc:  # noqa: BLE001 - 历史是辅助机制，失败不影响开局
         print(f"warning: roll 历史记录不可用：{exc}", file=sys.stderr)
-    out = args.out or (DEFAULT_OUT_DIR / f"_opening_{seed}.yaml")
-    if out.exists() and not args.force:
-        print(f"ERROR: 输出已存在，不覆盖（换 seed、指定 --out 或加 --force）：{out}", file=sys.stderr)
-        return 1
-    write_atomic(out, text)
-    if args.no_working:
-        working = None
-    elif args.working is not None:
-        working = args.working
-    elif args.out is None:
-        working = DEFAULT_OUT_DIR / "current_state.yaml"
-    else:
-        working = None
-    if working is not None:
-        write_atomic(working, text)
-
     slot_info = None
     if args.slot:
         saves = load_saves()
@@ -383,12 +400,14 @@ def complete_opening(args: argparse.Namespace) -> int:
             "history_used": history_used,
             "history_duplicate": history_duplicate,
             "state": str(out),
+            **binding,
             "validation": {"passed": True, "checked_at": utc_clock()},
         }
         write_atomic(args.request, dump_yaml(request))
 
     live = load_live_slice()
     brief = live.opening_brief(filled)
+    brief.update(binding)
     if slot_info:
         brief["slot"] = slot_info.get("slot")
     print("---opening_brief---")
@@ -398,11 +417,10 @@ def complete_opening(args: argparse.Namespace) -> int:
 
 
 def check_file(path: Path) -> int:
-    yaml = load_yaml_module()
     validator = load_validator()
     try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        data = _COMMON.load_yaml_file(path)
+    except _COMMON.CommonError as exc:
         print(f"ERROR: cannot read YAML {path}: {exc}", file=sys.stderr)
         return 2
     errors = validator.validate_data(data, "opening")
@@ -449,8 +467,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--complete", action="store_true",
                         help="一次生成可通过 opening 校验的完整开局，并打印 opening_brief")
     parser.add_argument("--working", type=Path, default=None,
-                        help="额外写入的当前活档（默认 saves/current_state.yaml）")
-    parser.add_argument("--no-working", action="store_true", help="不写 current_state.yaml")
+                        help="Explicit working path; defaults to a unique saves/sessions/<uuid>/state.yaml")
+    parser.add_argument("--session", default=None, help="Stable session ID for the working state")
+    parser.add_argument("--no-working", action="store_true", help="Write only the output artifact")
     parser.add_argument("--slot", default=None, help="可选：初始化命名存档槽")
     parser.add_argument("--force", action="store_true", help="允许覆盖 --out 已存在文件")
     return parser

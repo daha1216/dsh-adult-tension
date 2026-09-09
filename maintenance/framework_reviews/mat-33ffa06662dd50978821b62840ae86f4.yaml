@@ -1,0 +1,39 @@
+id: "mat-33ffa06662dd50978821b62840ae86f4"
+name: "地下管廊与城市修理局"
+source_hash: "6118dfd5cae379a6c31313ba5e0096b12ac73639513357ef4c9f0be4fcb3bc4a"
+semantic_status: "REVIEWED"
+reason: "调度核对范围、断电旧灯护边和私人设施记忆互不替代；地面模型不等于实际阀门，维修压力只绑有报修权限的搭配，住户无需下井。"
+checks:
+  era_and_theme: true
+  space: true
+  people: true
+  daily: true
+  pressure_bindings: true
+  distinct_functions: true
+quality:
+  grade: "B"
+  reason: "Static source review only; narrative acceptance is tracked independently in maintenance/playtests."
+activity_functions:
+  比对支线模型与报修点: "以报修时序核对支线影响范围"
+  给旧灯外壳补一块护边: "实装护边并选择保留磨痕"
+  交换一处街角设施的记忆: "从日常设施回忆认识邻居"
+chemistry:
+  pairs:
+    -
+      pair: 0
+      needs: "调度员要可核查的影响范围，联络员想让居民已经讲过的困难被当回事"
+      misreading: "补问门牌被当成踢回投诉，强调住户感受被当成要求插队"
+      asymmetric_cost: "调度员承担排错队的多点延误；联络员承担住户重复讲述后的不信任"
+      ritual: "先复述已有事实，再问本次缺的唯一一项"
+      conflict_loop: "越着急越混合报修，调度越拆分，联络员越觉得居民被割裂"
+      repair: "用一张模型同时呈现两条时间线，只补缺的信息而不重做全部问询"
+      irreversible_threshold: "未经许可公开住户地址与私生活作为排队理由，删表也不能收回已扩散信息"
+    -
+      pair: 1
+      needs: "修复工希望说明可修范围，住户希望熟悉的旧灯还能用"
+      misreading: "保留未验收标识被当成不负责任，夸修好被当成要求跳过专业检验"
+      asymmetric_cost: "修复工承担错误承诺的责任；住户失去旧灯原貌或多付检验工夫"
+      ritual: "动手前问最想保留哪一处磨痕"
+      conflict_loop: "住户越想快点点灯，修复工越强调限制，住户越听成不肯修"
+      repair: "先完成只针对外壳的小步骤，再让主人单独决定是否送检"
+      irreversible_threshold: "未经同意把纪念灯原壳换成新品，功能等价不能追回旧物本身"

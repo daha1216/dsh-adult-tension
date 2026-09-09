@@ -1,0 +1,253 @@
+id: "mat-232c29d387b257da9f10218587eba099"
+name: "民国报馆与手艺街"
+material:
+  eras:
+    - "旧式民国都市"
+  aesthetics:
+    - "旧年代质感"
+    - "黑色电影"
+    - "行当正剧"
+  rule: "报馆、作坊和街坊以纸面广告与当面交接维持城市生活。"
+  social_rule: "采访必须区分受访者原话与编辑意见。"
+  places:
+    民国公馆:
+      details:
+        - "胶片建筑照片靠在壁炉边·午后"
+        - "住户在有窗的会客室口述旧事·午后"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "会客室通往前厅与临街大门"
+        witnesses:
+          - "应邀讲述的住户"
+          - "带路的管家"
+        affordances:
+          - "整理老建筑专页"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "住户愿意开放的房间"
+          - "日光可供拍摄的时间"
+    旗袍定制店:
+      details:
+        - "裁台旁垂着未裁布匹·午后"
+        - "废布滚边样与手摇缝纫机分置桌边·午后"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "临街店门"
+        witnesses:
+          - "店内裁缝"
+          - "等候取衣的客人"
+        affordances:
+          - "制作手艺访谈"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "交衣工期"
+          - "裁台可用宽度"
+    拍卖行:
+      details:
+        - "预展柜外摆着放大底款的胶片照片·日间"
+        - "木槌台后压着纸质说明清样·日间"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "预展厅大门"
+        witnesses:
+          - "预展接待员"
+          - "受邀鉴定人"
+        affordances:
+          - "校对展品说明"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "预展结束时辰"
+          - "物主允许查看的部位"
+    舞厅:
+      details:
+        - "木地板边贴着候场纸签·傍晚"
+        - "乐队空椅旁留着搬运乐器的通道·傍晚"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "侧廊通向门厅"
+        witnesses:
+          - "乐队领班"
+          - "舞厅场务"
+        affordances:
+          - "排版演出节目单"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "排练间隙"
+          - "台口宽度"
+  pairs:
+    -
+      family: "艺术与传播"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "地方报纸编辑"
+        function: "采访街坊并编排地方专页"
+        authority: "决定自己负责专页的用稿与更正建议"
+        resource: "带改稿笔迹的清样和约访名单"
+        limitation: "不能裁定藏品真伪，也不能命令印厂加班"
+        obligation: "分开原话与编辑判断，刊前回询关键引语"
+        exposure: "写错引语会失去下一次采访机会"
+        hidden: "—"
+      player:
+        identity: "印刷坊校对员"
+        baseline: "你替编辑发现过一次住户姓名误植；编辑因此邀你在付印前核对这次专页。"
+        resources:
+          - "铅字校样经验"
+          - "印坊可用的排字时段"
+        reputation: "你校字细，但对建筑来历不冒充专家"
+      relationship_reason: "你替编辑发现过一次住户姓名误植；编辑因此邀你在付印前核对这次专页。"
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "印刷坊校对员"
+        function: "核验字样并将演出单排成可印版"
+        authority: "调整自己经手的字模与样张，不决定演出人选"
+        resource: "校样尺、纸剪节目条和废布试样"
+        limitation: "工期由印坊排定，采访结论须编辑与受访人确认"
+        obligation: "把看不清和做不出的部分在付印前指出"
+        exposure: "漏掉倒字须返工，赶工会挤占自己的排字收入"
+        hidden: "—"
+      player:
+        identity: "地方报纸编辑"
+        baseline: "你曾依照校对员的建议延后付印，省下一次整版重排；这次一起进店验证工序措辞。"
+        resources:
+          - "约访渠道"
+          - "自己负责的版面额度"
+        reputation: "你愿意改稿，但不会替店家担保"
+      relationship_reason: "你曾依照校对员的建议延后付印，省下一次整版重排；这次一起进店验证工序措辞。"
+  activities:
+    整理老建筑专页:
+      places:
+        - "民国公馆"
+      pairs:
+        - 0
+      category: "信息交换"
+      action: "{npc}把住户口述和建筑照片分放两边，请你选专页先讲人还是先讲房。"
+      beats:
+        trigger: "{npc}把住户口述和建筑照片分放两边，请你选专页先讲人还是先讲房。"
+        objective: "确定一页报道的叙述中心"
+        choice: "比对两种开头，或不参加采写，只帮读一遍是否顺口"
+        immediate: "选住户视角便腾出版面容纳原话；选建筑视角则删去尚未核实的家族轶闻。"
+        near: "编辑带回一版待住户确认的清样，校对员只负责已认领的段落。"
+    制作手艺访谈:
+      places:
+        - "旗袍定制店"
+      pairs:
+        - 1
+      category: "照护与修复"
+      action: "{npc}征得裁缝同意，把两块废布和一段访谈原话摆好，请你试折一次滚边。"
+      beats:
+        trigger: "{npc}征得裁缝同意，把两块废布和一段访谈原话摆好，请你试折一次滚边。"
+        objective: "用试作检验采访是否遗漏关键工序"
+        choice: "折一段废布，或只观察裁缝示范；不愿碰工具可负责递样"
+        immediate: "手上多出一块可比较的滚边样，采访中含糊的快慢有了实际工序依据。"
+        near: "试样留店作讲解用，成衣仍由裁缝完成；访谈不公开客人的尺寸和订单。"
+    校对展品说明:
+      places:
+        - "拍卖行"
+      pairs:
+        - 0
+      category: "调查与核验"
+      action: "{npc}把拍卖行描述与器物底款照片并排，请你挑一句能够证实的话。"
+      beats:
+        trigger: "{npc}把拍卖行描述与器物底款照片并排，请你挑一句能够证实的话。"
+        objective: "剥离未经核实的藏品来历"
+        choice: "核对底款，或只圈出存疑段落交给鉴定人；也可不署校对名"
+        immediate: "可证实的描述保留，传闻另列；校对不被当作真伪担保。"
+        near: "报纸采用有限描述，拍卖行若补出来源再更新，未核实物件不替其背书。"
+    排版演出节目单:
+      places:
+        - "舞厅"
+      pairs:
+        - 1
+      category: "空间与退出"
+      action: "{npc}带着纸剪节目条到舞厅空台边，请你走一次换场路线再排顺序。"
+      beats:
+        trigger: "{npc}带着纸剪节目条到舞厅空台边，请你走一次换场路线再排顺序。"
+        objective: "排出能让乐手换场的节目单"
+        choice: "走一遍通道，或坐着看排练；不参与可把空白节目条交回"
+        immediate: "顺序随乐器搬运和休息长度调整，拥堵的换场被拆开。"
+        near: "舞厅按试走结果安排候场，印坊只在演出者确认后排铅字。"
+  customs:
+    - "校样确认后，各人用不同形状的记号表示自己看过的段落。"
+  pressures:
+    报道引语失真:
+      source: "印出的引语与采访原稿不同"
+      engines:
+        - "旧事追索"
+        - "名声保卫"
+      beats:
+        trigger: "{npc}收到消息：印出的引语与采访原稿不同。"
+        objective: "查清改稿过程并安排更正"
+        choice: "比对清样，或先联系受访者"
+        immediate: "受访住户暂不接受下一轮采访，争议句停止续印；已核实的其他栏仍能付印。"
+        near: "双方先向被误引者说明原句与误句的差别，再在下一版同等显眼处更正。"
+      far_trigger: "更正版发行后住户决定是否继续受访时"
+      far_consequence: "明确改动责任可恢复有限合作；拒不更正则专页失去该住户的后续口述来源。"
+      exits:
+        - "仅交出自己经手的清样，退出后续采写"
+        - "停止争议栏续印，由编辑独自联系受访者"
+      bindings:
+        -
+          activity: "整理老建筑专页"
+          place: "民国公馆"
+          pair: 0
+        -
+          activity: "制作手艺访谈"
+          place: "旗袍定制店"
+          pair: 1
+    印厂设备停修:
+      source: "预定印刷机因检修无法按期交件"
+      engines:
+        - "资源锁定"
+        - "信任透支"
+      beats:
+        trigger: "{npc}收到消息：预定印刷机因检修无法按期交件。"
+        objective: "协调版数与交付顺序"
+        choice: "缩减非必要版面，或找邻近印厂"
+        immediate: "节目单只能占到半版铅字，原来答应的印量无法一次交齐。"
+        near: "先送一小批舞厅用单，余量延后或转厂，额外费用须由委托方确认。"
+      far_trigger: "舞厅结算并预订下一场印量时"
+      far_consequence: "如实分批可保留订单但收入延后；擅自承诺全量会失去优先排印资格。"
+      exits:
+        - "撤回本次加印订单，只交已完成样张"
+        - "把定稿交给邻厂后结束个人协调"
+      bindings:
+        -
+          activity: "排版演出节目单"
+          place: "舞厅"
+          pair: 1
+        -
+          activity: "整理老建筑专页"
+          place: "民国公馆"
+          pair: 0
+  legacy_sources:
+    eras:
+      - "旧式民国都市"
+    aesthetics:
+      - "旧年代质感"
+      - "黑色电影"
+      - "行当正剧"
+    places:
+      - "民国公馆"
+      - "旗袍定制店"
+      - "拍卖行"
+      - "舞厅"
+  themes:
+    - "报纸信用与手艺人的原话"
+    - "旧宅记忆的多重见证"
+    - "小印坊的工期与生计"
+  technology_boundary: "以民国都市的铅字清样、胶片照片、纸质契据和有线电话协作为限；无数字检索、即时群发或超自然鉴定。"
+  bridge_status: "not_required"

@@ -2,11 +2,21 @@
 from __future__ import annotations
 
 import copy
+import hashlib
+import json
 import random
 
 
 class FrameworkError(ValueError):
     pass
+
+
+def source_hash(package):
+    return hashlib.sha256(json.dumps(package, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+
+
+def pressure_allows(pressure, activity, place, pair):
+    return {"activity": activity, "place": place, "pair": pair} in pressure.get("bindings", [])
 
 
 def candidates(package, locks, custom, opening_mode):
@@ -36,6 +46,8 @@ def candidates(package, locks, custom, opening_mode):
                     results.append((activity_name, place, index, None))
                 else:
                     for pressure_name, pressure in package["pressures"].items():
+                        if not pressure_allows(pressure, activity_name, place, index):
+                            continue
                         if given.get("压力来源", pressure["source"]) != pressure["source"] or given.get("处境", pressure_name) != pressure_name:
                             continue
                         engines = str(given.get("张力引擎", "")).replace(",", "、").replace("，", "、").split("、")
@@ -61,14 +73,15 @@ def build(roll_module, pools, seed, mode, locks, custom, recent, opening_mode, r
     if requested != "auto" and requested not in registry:
         raise FrameworkError(f"未知世界框架：{requested}")
     eligible = {name: candidates(package, locks, custom, opening_mode)
-                for name, package in registry.items() if requested == "auto" or name == requested}
+                for name, package in registry.items()
+                if (requested == "auto" and pools.get("世界框架审查", {}).get(name) == source_hash(package))
+                or name == requested}
     eligible = {name: rows for name, rows in eligible.items() if rows}
     rng = random.Random(f"{seed}:world-framework/v1")
     if requested == "auto":
-        choices = [None] * pools.get("世界框架旧池权重", 10) + list(eligible)
-        requested = rng.choice(choices)
-        if requested is None:
-            return roll_module(pools, seed, mode, locks, custom, recent, opening_mode)
+        if not eligible:
+            raise FrameworkError("没有符合锁定条件且已审核的框架；可调整条件或显式使用 --framework legacy，不会自动回退旧池")
+        requested = rng.choice(list(eligible))
     if requested not in eligible:
         raise FrameworkError("该世界框架与所选素材不兼容；请调整锁定值或使用 --framework legacy，不会静默替换用户选择")
     package = registry[requested]
@@ -95,10 +108,15 @@ def build(roll_module, pools, seed, mode, locks, custom, recent, opening_mode, r
         scoped["压力来源"] = [pressure["source"]]
         scoped["张力引擎"] = list(pressure["engines"])
     meta = scoped["meta"]
-    # The package is a closed compatibility set; it is not the global material pool.
-    meta["location_eras"] = {place: list(package["eras"])}
-    meta["aesthetic_eras"] = {x: list(package["eras"]) for x in package["aesthetics"]}
-    meta["material_compatibility"] = {}
+    # Concrete package roles/actions override only their coarse pool-family entry.
+    # Global location, aesthetic and appearance restrictions remain in force.
+    constraints = meta.setdefault("material_compatibility", {})
+    selected_values = {"身份族": pair["family"], "玩家社会位置": pair["position"], "场景动作": activity_name}
+    if pressure:
+        selected_values["压力来源"] = pressure["source"]
+    for field, value in selected_values.items():
+        constraints.setdefault(field, {})[value] = {"eras": list(package["eras"]), "places": [place],
+                                                   "themes": list(package.get("themes", []))}
     meta["daily_opening"] = {"核心规则": [package["rule"]], "社会规则": [package["social_rule"]],
                              "张力引擎": list(pools["meta"]["daily_opening"]["张力引擎"]),
                              "场景动作": [activity_name], "处境": {activity_name: activity["beats"]}}
@@ -115,8 +133,24 @@ def build(roll_module, pools, seed, mode, locks, custom, recent, opening_mode, r
     roll["世界框架"] = requested
     roll["框架选择"] = {"version": 1, "activity": activity_name, "pair": pair_index,
                          "pressure": pressure_name, "custom": rng.randrange(len(package["customs"]))}
-    roll["兼容性"] = {"status": "pass", "reasons": [], "primary_theme": "community",
-                      "secondary_theme": "", "bridge_points": []}
+    compatibility = roll.get("兼容性") or {}
+    reviewed = pools.get("世界框架审查", {}).get(requested) == source_hash(package)
+    reasons = list(compatibility.get("reasons") or [])
+    if reviewed:
+        # A reviewed, explicit pressure binding supersedes lexical theme guesses.
+        reasons = [r for r in reasons if r not in ("压力来源未承接张力引擎主题", "处境未承接张力引擎主题")]
+    else:
+        reasons.append("框架当前内容尚未完成语义审查")
+    if not package.get("themes") or not package.get("technology_boundary"):
+        reasons.append("框架缺少主题或技术边界")
+    bridge = package.get("bridge_explanation")
+    if package.get("bridge_status") != "not_required" and not (reviewed and isinstance(bridge, str) and bridge.strip()):
+        reasons.append("框架桥接尚未确认")
+    themes = package.get("themes") or []
+    roll["兼容性"] = {"status": "bridge_required" if reasons else "pass", "reasons": reasons,
+                      "primary_theme": themes[0] if themes else "",
+                      "secondary_theme": themes[1] if len(themes) > 1 else "",
+                      "bridge_points": reasons, "evidence": "reviewed_binding" if reviewed else "unreviewed"}
     return roll
 
 
@@ -178,9 +212,19 @@ def decorate(state, roll, tables):
                 "activity": record["activity"], "relationship_reason": pair["relationship_reason"]}
     state["world"]["framework"] = snapshot
     state["world"]["constants"].extend([snapshot["rule"], snapshot["custom"]])
+    if package.get("technology_boundary"):
+        state["world"]["constants"].append(package["technology_boundary"])
+    if package.get("bridge_explanation"):
+        state["world"]["constants"].append(package["bridge_explanation"])
     state["npcs"][0]["recent_memories"].append(snapshot["relationship_reason"])
     if record["pressure"]:
         pressure = package["pressures"][record["pressure"]]
+        exits = pressure.get("exits") or []
+        if exits:
+            state["current_node"]["scene_profile"]["exits"].extend(exits)
+            exit_state = {"available": True, "cost": "可以退出当前参与；已发生的事实保留，未决事项不由玩家自动承诺。", "blocked_by": None}
+            state["current_node"]["situation"]["exits"].update(exit_state)
+            state["npcs"][0]["situation"]["exits"].update(exit_state)
         for event in state["events"]:
             if event["kind"] == "far":
                 event.update(trigger=pressure["far_trigger"], consequence=pressure["far_consequence"])

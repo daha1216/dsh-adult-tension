@@ -314,6 +314,7 @@ def load_pools() -> dict[str, Any]:
     pools["配角功能"] = _flat(char_meta.get("配角功能"), "配角功能")
     pools["世界框架"] = frameworks.get("frameworks") or {}
     pools["世界框架旧池权重"] = frameworks.get("legacy_weight", 10)
+    pools["世界框架审查"] = frameworks.get("reviewed_frameworks") or {}
     if not pools["世界框架"]:
         raise AnchorError("世界框架素材包为空")
 
@@ -657,8 +658,8 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     roll["兼容性"] = {
         "status": "bridge_required" if compatibility_reasons else "pass",
         "reasons": compatibility_reasons,
-        "primary_theme": next(iter(engine_themes), ""),
-        "secondary_theme": next(iter(engine_themes - {next(iter(engine_themes), "")}), "") if engine_themes else "",
+        "primary_theme": sorted(engine_themes)[0] if engine_themes else "",
+        "secondary_theme": sorted(engine_themes)[1] if len(engine_themes) > 1 else "",
         "bridge_points": compatibility_reasons if roll.get("世界观桥接") else [],
     }
 
@@ -945,7 +946,7 @@ def main(argv: list[str] | None = None) -> int:
                         help="预锁字段，可重复（如 --lock 时代=当代都市）")
     parser.add_argument("--custom", action="append", default=[], metavar="KEY=VALUE",
                         help="表外自定义值，仅与 --all-custom 一起使用")
-    parser.add_argument("--framework", default="legacy", help="legacy、auto 或世界框架名称")
+    parser.add_argument("--framework", default="auto", help="auto 只抽已审核框架；旧池须显式选择 legacy")
     parser.add_argument("--opening-mode", choices=["pressure", "daily"], default="pressure")
     parser.add_argument("--format", choices=["text", "json"], default="text")
     args = parser.parse_args(argv)

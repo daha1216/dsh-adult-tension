@@ -1,0 +1,220 @@
+id: "mat-eb4dfde0e57f537db14d8c03c31bf028"
+name: "地下城安全层营地"
+material:
+  eras:
+    - "地下城中层营地"
+  aesthetics:
+    - "奇幻迷宫慢生活"
+    - "异世界冒险纪实"
+  rule: "安全层为探索者提供修补、休息与地图交换，离开营地才进入未知区域。"
+  social_rule: "未经验证的路线要标注存疑，任何人都可拒绝临时加入探索。"
+  places:
+    迷宫中层安全屋:
+      details:
+        - "路图压在有绳槽的长桌上，入口亮着守层灯"
+        - "修补台靠内墙，木楔与备料放在台下"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "沿守层灯返回营地大厅，不把未探通道当出口"
+        witnesses:
+          - "安全层轮值守卫"
+        affordances:
+          - "拼接探索草图"
+          - "修补背架绑带"
+          - "用空背架试载"
+        pressure_modifiers:
+          - "路图测绘时点"
+          - "修补台与干燥绑带数量"
+    老字号客栈:
+      details:
+        - "客栈灶边有给归队者烘干的外衣"
+        - "长桌放着切碎干粮的小碗，炊事区与客席分开"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "穿过客堂回到守灯营街"
+        witnesses:
+          - "当班厨役"
+        affordances:
+          - "交换营地菜谱"
+          - "分食一小碗试煮干粮"
+        pressure_modifiers:
+          - "当天可用食材"
+          - "厨役是否愿意借灶"
+    图书馆:
+      details:
+        - "观察册的书页夹着不同队伍的日期签"
+        - "晶石灯下可比较爪痕绘图，不陈列活体"
+      profile:
+        privacy: "medium"
+        visibility: "low"
+        exits:
+          - "经阅览室前门回安全层走廊"
+        witnesses:
+          - "营地图书保管人"
+        affordances:
+          - "整理怪物观察笔记"
+          - "比较两次目击条件"
+        pressure_modifiers:
+          - "同类目击数量"
+          - "记述者疲劳与视线条件"
+  pairs:
+    -
+      family: "学术与专业"
+      position: "同侪"
+      appellations:
+        - "先生"
+      npc:
+        role: "营地地图绘制员"
+        function: "把实测距离与传闻分层制图"
+        authority: "可撤下自己发布的未证实路段"
+        resource: "带测时注记的草图和比例尺"
+        limitation: "没有亲走的路只能标未知，不能给安全保证"
+        obligation: "交图时指出返程分岔和有效时段"
+        exposure: "误导队伍会失去后续实测来源"
+      player:
+        identity: "补给站维修人"
+        baseline: "你知道地图上多走的一段意味着多背多少干粮，也会留出时间吃顿热饭。"
+        resources:
+          - "修补工具和备带"
+          - "自己愿意分享的一份干粮"
+        reputation: "返工认账，不催客人带伤件出门"
+      relationship_reason: "地图员曾按维修人的负重建议改过返程标注；两人因此在安全层对照新草图。"
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "师傅"
+      npc:
+        role: "补给站维修人"
+        function: "修背架、绑带与公共工作台"
+        authority: "能停用损坏台面并分配当班维修顺序"
+        resource: "备用木楔、针线与空背架"
+        limitation: "不能用厨房桌做承重试验，也不能保证未修旧件的寿命"
+        obligation: "交还背架前试载并说明仍需替换的部位"
+        exposure: "赶工失误会使下次队伍拒收修件"
+      player:
+        identity: "营地地图绘制员"
+        baseline: "你用地图帮助队伍回来，愿意承认自己也有测不准的岔口。"
+        resources:
+          - "分时绘制的路线草图"
+          - "用于估距的绳尺"
+        reputation: "空白处宁可留着"
+      relationship_reason: "维修人上一趟靠地图员的折返标记找回丢落工具，愿教对方修背架而不要求一起冒险。"
+  activities:
+    拼接探索草图:
+      places:
+        - "迷宫中层安全屋"
+      pairs:
+        - 0
+      category: "调查与核验"
+      action: "{npc}把两队草图按出发时刻摆开，请你找能对上的转角。"
+      beats:
+        trigger: "{npc}把两队草图按出发时刻摆开，请你找能对上的转角。"
+        objective: "判断能否合图，保留不能确定的分岔"
+        choice: "可比对一段；可只补亲历处，或拒绝推断未知区域"
+        immediate: "吻合段接上比例尺，不吻合处保持双版本"
+        near: "下一队可选择已实测的短线，参与者不因此被编入探索队"
+    交换营地菜谱:
+      places:
+        - "老字号客栈"
+      pairs:
+        - 1
+      category: "日常接触"
+      action: "{npc}端来用自己干粮试煮的小碗，问你想尝哪种香料。"
+      beats:
+        trigger: "{npc}端来用自己干粮试煮的小碗，问你想尝哪种香料。"
+        objective: "把归队后的饭吃得舒适些"
+        choice: "可一起尝、只闻香；不合口味就吃原来的干粮"
+        immediate: "试吃决定今晚这一碗的配料，不形成公共配给标准"
+        near: "喜欢的话下次各带一点配料相聚，谁都不欠一次回请"
+    整理怪物观察笔记:
+      places:
+        - "图书馆"
+      pairs:
+        - 0
+      category: "信息交换"
+      action: "{npc}指出两段不同光照下的目击，让你说说哪句还是猜测。"
+      beats:
+        trigger: "{npc}指出两段不同光照下的目击，让你说说哪句还是猜测。"
+        objective: "学习描述观察条件而非背诵怪物结论"
+        choice: "可复述一段、画出盲区，或只借自己感兴趣的册子阅读"
+        immediate: "双方分清看见的动作与推测的习性，未见之处不补造"
+        near: "以后目击会多留一条光照与距离信息，今夜无须出营验证"
+    修补背架绑带:
+      places:
+        - "迷宫中层安全屋"
+      pairs:
+        - 1
+      category: "照护与修复"
+      action: "{npc}在修补台放下卸空的背架，问你愿不愿试缝一条松带。"
+      beats:
+        trigger: "{npc}在修补台放下卸空的背架，问你愿不愿试缝一条松带。"
+        objective: "恢复一处可承力的连接"
+        choice: "可动手缝带再试载；可只挑备带，或交维修人按普通委托处理"
+        immediate: "缝好的连接经空架加轻载检验，未通过就不交付使用"
+        near: "下一次装包可反馈是否磨肩，再决定调整而非直接换整架"
+  customs:
+    - "每张新图留有一个空框，供后来者补上尚未验证的路段。"
+  pressures:
+    路线标记互相矛盾:
+      source: "两队同一路口草图的左右标记相反，且绘制时间不同。"
+      engines:
+        - "旧事追索"
+        - "信任透支"
+      beats:
+        trigger: "{npc}发现两队同一路口草图的左右标记相反，且绘制时间不同。"
+        objective: "辨明观察朝向，不能确认就保留未知"
+        choice: "分别请队员说明来向；或停止合图，只采用已核实的折返线"
+        immediate: "新地图不覆盖争议分岔，今天不增加探索义务"
+        near: "地图员要分别回访，不要求维修人替陌生路线背书"
+      far_trigger: "下一次归队者仍按旧图误认同一岔口"
+      far_consequence: "实测来源开始拒绝共享；保留差异并补齐朝向则能恢复互信"
+      bindings:
+        -
+          activity: "拼接探索草图"
+          place: "迷宫中层安全屋"
+          pair: 0
+      exits:
+        - "停止使用争议路段并只留在安全层"
+        - "把原图还给提交者，退出本次合图"
+    公共修补台损坏:
+      source: "试放空背架时发现台腿松动，无法继续承重。"
+      engines:
+        - "资源锁定"
+        - "债务压力"
+      beats:
+        trigger: "{npc}发现试放空背架时发现台腿松动，无法继续承重。"
+        objective: "先恢复可用工作面，再决定承担多少修件"
+        choice: "用木楔修台并重新试载；或暂停承重修补，先做可手持的小缝补"
+        immediate: "背架留在地面，不搬上厨房餐桌，台面停用会延后已收工钱的修件"
+        near: "维修人联系委托者改期或退回未动工件，参与者只承担约定部分"
+      far_trigger: "下一批委托到期而台架仍未恢复"
+      far_consequence: "延期退款压缩维修人的备料钱，主动缩单可保住剩余修件质量"
+      bindings:
+        -
+          activity: "修补背架绑带"
+          place: "迷宫中层安全屋"
+          pair: 1
+      exits:
+        - "退回尚未动工的背架并退款"
+        - "把台架维修交当班木工，自己离开休息"
+  legacy_sources:
+    eras:
+      - "地下城中层营地"
+    aesthetics:
+      - "奇幻迷宫慢生活"
+      - "异世界冒险纪实"
+    places:
+      - "迷宫中层安全屋"
+      - "老字号客栈"
+      - "图书馆"
+  themes:
+    - "探索与休息的分界"
+    - "可返程的地图才有价值"
+    - "营地有限工具的相互照应"
+  technology_boundary: "迷宫与魔法存在，但本营地靠手绘地图、照明晶石和手工具运转；观察笔记不是全知图鉴，安全屋只覆盖驻守层，离营探索必须另行准备。"
+  bridge_status: "not_required"

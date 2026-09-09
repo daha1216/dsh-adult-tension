@@ -21,12 +21,104 @@ assert SPEC and SPEC.loader
 SPEC.loader.exec_module(INVENTORY)
 DATA = INVENTORY.DATA
 REGISTRY = ROOT / "references/material_registry.yaml"
-STATUSES = {"KEEP_FRAMEWORK", "KEEP_SHARED", "KEEP_LEGACY", "BRIDGE_REQUIRED",
-            "DUPLICATE", "DEPRECATED", "FROZEN_RESTRICTED", "NOT_REVIEWED"}
-LAYERS = {"world", "space", "character", "relationship", "activity", "opening",
-          "development", "expression", "maintenance"}
+CONTRACT = INVENTORY.read_yaml(ROOT / "maintenance/data_manifest.yaml")
+STATUSES = set(CONTRACT["review_statuses"])
+LAYERS = set(CONTRACT["layers"]) | {"maintenance"}
 REVIEW_FIELDS = ("status", "modes", "compatibility", "owners", "canonical_id", "cleanup",
                  "review", "quality", "chemistry", "activity_functions", "restrictions")
+ROW_DEFAULTS = {
+    "status": "NOT_REVIEWED", "modes": [], "owners": [], "canonical_id": None,
+    "compatibility": {"eras": [], "places": [], "themes": [], "technology_boundary": "未审查"},
+    "cleanup": {"stage": "keep"}, "review": None,
+    "restrictions": {"frozen": False, "restricted": None, "reason": "未审查"},
+}
+HISTORY_DEFAULTS = {**ROW_DEFAULTS, "quality": None, "chemistry": None, "activity_functions": None}
+
+
+def _expand_defaults(value, defaults):
+    result = copy.deepcopy(value)
+    for key, default in defaults.items():
+        if key not in result:
+            result[key] = copy.deepcopy(default)
+        elif isinstance(default, dict) and isinstance(result[key], dict):
+            result[key] = _expand_defaults(result[key], default)
+    return result
+
+
+def _compact_defaults(value, defaults):
+    result = copy.deepcopy(value)
+    for key, default in defaults.items():
+        if key not in result:
+            continue
+        if _same_value(result[key], default):
+            del result[key]
+        elif isinstance(default, dict) and isinstance(result[key], dict):
+            result[key] = _compact_defaults(result[key], default)
+    return result
+
+
+def _same_value(left, right):
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, dict):
+        return left.keys() == right.keys() and all(_same_value(left[k], right[k]) for k in left)
+    if isinstance(left, list):
+        return len(left) == len(right) and all(_same_value(a, b) for a, b in zip(left, right))
+    return left == right
+
+
+def _expand_registry(registry):
+    if not isinstance(registry, dict) or not isinstance(registry.get("entries", {}), dict):
+        raise ValueError("Registry and entries must be mappings")
+    result = copy.deepcopy(registry)
+    for key, row in result.get("entries", {}).items():
+        if not isinstance(row, dict):
+            raise ValueError(f"Invalid registry row: {key}")
+        row = _expand_defaults(row, ROW_DEFAULTS)
+        row.setdefault("id", key)
+        if isinstance(row.get("source"), dict) and "kind" in row["source"]:
+            row.setdefault("kind", row["source"]["kind"])
+        if "history" in row:
+            if not isinstance(row["history"], list) or any(not isinstance(h, dict) for h in row["history"]):
+                raise ValueError(f"Invalid history: {key}")
+            row["history"] = [_expand_defaults(h, HISTORY_DEFAULTS)
+                              if h.get("event") in ("source_changed", "review_decision") else h
+                              for h in row["history"]]
+        result["entries"][key] = row
+    return result
+
+
+def load_registry(path=REGISTRY):
+    """Read v1 or compact v2 with conservative row/history defaults expanded."""
+    registry = INVENTORY.read_yaml(Path(path))
+    if not isinstance(registry, dict) or registry.get("version") not in (1, 2):
+        raise ValueError("INVALID_VERSION")
+    return _expand_registry(registry)
+
+
+def _bound_units(registry, current):
+    # Aliases are explicit generated-source-ID -> existing stable-ID bindings.
+    aliases = registry.get("source_aliases", {})
+    entries = registry.get("entries", {})
+    if not isinstance(aliases, dict):
+        raise ValueError("INVALID_SOURCE_ALIASES: expected a mapping")
+    for source_id, stable_id in aliases.items():
+        if (not isinstance(source_id, str) or not isinstance(stable_id, str) or
+                stable_id not in entries or source_id == stable_id or
+                source_id in entries or stable_id in aliases):
+            raise ValueError(f"INVALID_SOURCE_ALIAS: {source_id}")
+    live = {}
+    for unit in current:
+        key = aliases.get(unit["id"], unit["id"])
+        if key in live:
+            raise ValueError(f"AMBIGUOUS_SOURCE_BINDING: {key}")
+        live[key] = {**copy.deepcopy(unit), "id": key}
+    return live
+
+
+def _snapshot(row, event):
+    return {"event": event, "source_hash": row.get("source_hash"),
+            **{field: copy.deepcopy(row.get(field)) for field in REVIEW_FIELDS}}
 
 
 def digest(value):
@@ -93,40 +185,46 @@ def units(data_dir=DATA):
 
 
 def sync(existing, current):
+    """Expand defaults and refresh sources, preserving IDs through explicit aliases."""
+    existing = _expand_registry(existing)
+    if existing.get("version", 2) not in (1, 2):
+        raise ValueError("INVALID_VERSION")
     old = existing.get("entries", {})
     entries = {}
-    for unit in current:
-        key = unit["id"]
+    for key, unit in _bound_units(existing, current).items():
         prior = copy.deepcopy(old.get(key, {}))
-        row = {**unit, "status": "NOT_REVIEWED", "modes": [],
-               "compatibility": {"eras": [], "places": [], "themes": [], "technology_boundary": "未审查"},
-               "owners": [], "canonical_id": None, "cleanup": {"stage": "keep"}, "review": None,
-               "restrictions": {"frozen": False, "restricted": None, "reason": "未审查"}, **prior}
+        row = {**copy.deepcopy(ROW_DEFAULTS), **prior}
         row.update(unit)
-        if prior and prior.get("source_hash") != unit["source_hash"]:
-            if prior.get("restrictions", {}).get("frozen"):
+        if prior and (prior.get("source_hash") != unit["source_hash"] or prior.get("source") != unit["source"]):
+            if (prior.get("restrictions") or {}).get("frozen"):
                 raise ValueError(f"FROZEN_CONTENT_CHANGED: {key}")
-            row["history"] = prior.get("history", []) + [{
-                "event": "source_changed", "source_hash": prior.get("source_hash"),
-                **{field: prior.get(field) for field in REVIEW_FIELDS}}]
-            row.update(status="NOT_REVIEWED", review=None, modes=[], owners=[], canonical_id=None,
-                       cleanup={"stage": "keep"},
-                       compatibility={"eras": [], "places": [], "themes": [], "technology_boundary": "未审查"})
+            snapshot = _snapshot(prior, "source_changed")
+            snapshot["source"] = copy.deepcopy(prior.get("source"))
+            row["history"] = prior.get("history", []) + [snapshot]
+            row.update(copy.deepcopy(ROW_DEFAULTS))
+            # Content edits cannot silently lift an existing restriction.
+            if (prior.get("restrictions") or {}).get("restricted"):
+                row["restrictions"] = copy.deepcopy(prior["restrictions"])
             for field in ("quality", "chemistry", "activity_functions"):
                 row.pop(field, None)
         entries[key] = row
     for key, prior in old.items():
         if key not in entries:
             entries[key] = copy.deepcopy(prior)
-    return {**existing, "version": 1, "release": existing.get("release", "governance-1"),
+    return {**existing, "version": 2, "release": existing.get("release", "governance-1"),
             "release_history": existing.get("release_history", [existing.get("release", "governance-1")]),
             "purpose": "maintenance-only; never loaded by runtime", "entries": entries}
 
 
 def audit(registry, current, require_reviewed=False):
     errors, warnings = [], []
+    try:
+        registry = _expand_registry(registry)
+        live = _bound_units(registry, current)
+    except ValueError as exc:
+        return {"summary": {"errors": 1, "warnings": 0}, "errors": [str(exc)], "warnings": []}
     entries = registry.get("entries", {})
-    if registry.get("version") != 1:
+    if registry.get("version") not in (1, 2):
         errors.append("INVALID_VERSION")
     releases = registry.get("release_history", [registry.get("release")])
     if (not isinstance(releases, list) or not releases or
@@ -134,7 +232,6 @@ def audit(registry, current, require_reviewed=False):
             len(set(releases)) != len(releases) or releases[-1] != registry.get("release")):
         errors.append("INVALID_RELEASE_HISTORY")
         releases = []
-    live = {row["id"]: row for row in current}
     for key, unit in live.items():
         row = entries.get(key)
         if not row:
@@ -149,12 +246,13 @@ def audit(registry, current, require_reviewed=False):
         if reviewed and (not isinstance(review, dict) or not all(review.get(k) for k in ("scope", "reason", "release"))):
             errors.append(f"MISSING_REVIEW_EVIDENCE: {key}")
         modes = row.get("modes")
-        if not isinstance(modes, list) or any(mode not in ("daily", "pressure") for mode in modes):
+        if not isinstance(modes, list) or any(mode not in CONTRACT["modes"] for mode in modes):
             errors.append(f"INVALID_MODES: {key}")
         restrictions = row.get("restrictions", {})
         if (not isinstance(restrictions, dict) or type(restrictions.get("frozen")) is not bool or
-                restrictions.get("restricted") not in (True, False, None)):
+                (restrictions.get("restricted") is not None and type(restrictions.get("restricted")) is not bool)):
             errors.append(f"INVALID_RESTRICTIONS: {key}")
+            restrictions = {}
         if row.get("status") == "FROZEN_RESTRICTED" and not (restrictions.get("frozen") or restrictions.get("restricted")):
             errors.append(f"MISSING_RESTRICTION: {key}")
         if row.get("status") in ("KEEP_FRAMEWORK", "KEEP_SHARED", "KEEP_LEGACY"):
@@ -167,33 +265,40 @@ def audit(registry, current, require_reviewed=False):
             errors.append(f"INVALID_CANONICAL: {key}")
         if row.get("status") == "DUPLICATE" and not canonical:
             errors.append(f"INVALID_CANONICAL: {key}")
-        seen, cursor = {key}, canonical
-        while cursor in entries:
+        cleanup = row.get("cleanup") or {}
+        if not isinstance(cleanup, dict):
+            errors.append(f"INVALID_LIVE_CLEANUP: {key}")
+            cleanup = {}
+        if cleanup.get("stage") not in ("keep", "candidate"):
+            errors.append(f"INVALID_LIVE_CLEANUP: {key}")
+        required = ("reason",) if cleanup.get("policy") == "verified_direct" else ("marked_release", "reason")
+        if row.get("status") == "DEPRECATED" and not all(cleanup.get(k) for k in required):
+            errors.append(f"MISSING_DEPRECATION: {key}")
+    for key, row in entries.items():
+        seen, cursor = {key}, row.get("canonical_id")
+        while isinstance(cursor, str) and cursor in entries:
             if cursor in seen:
                 errors.append(f"CANONICAL_CYCLE: {key}")
                 break
             seen.add(cursor)
             cursor = entries[cursor].get("canonical_id")
-        cleanup = row.get("cleanup") or {}
-        if cleanup.get("stage") not in ("keep", "candidate"):
-            errors.append(f"INVALID_LIVE_CLEANUP: {key}")
-        if row.get("status") == "DEPRECATED" and not all(cleanup.get(k) for k in ("marked_release", "reason")):
-            errors.append(f"MISSING_DEPRECATION: {key}")
-    for key, row in entries.items():
         if key in live:
             continue
+        restrictions = row.get("restrictions")
+        if not isinstance(restrictions, dict):
+            errors.append(f"INVALID_RESTRICTIONS: {key}")
+        elif restrictions.get("frozen"):
+            errors.append(f"FROZEN_REMOVAL: {key}")
         cleanup = row.get("cleanup") or {}
-        if cleanup.get("stage") != "removed":
+        if not isinstance(cleanup, dict) or cleanup.get("stage") != "removed":
             errors.append(f"UNEXPLAINED_REMOVAL: {key}")
             continue
         marked = cleanup.get("marked_release")
-        if not releases or marked not in releases[:-1]:
+        if cleanup.get("policy") != "verified_direct" and (not releases or marked not in releases[:-1]):
             errors.append(f"PREMATURE_REMOVAL: {key}")
         if row.get("status") not in ("DEPRECATED", "DUPLICATE") or not cleanup.get("regression_evidence"):
             errors.append(f"UNVERIFIED_REMOVAL: {key}")
-        if (row.get("restrictions") or {}).get("frozen"):
-            errors.append(f"FROZEN_REMOVAL: {key}")
-    pending = sum(entries.get(key, {}).get("status") == "NOT_REVIEWED" for key in live)
+    pending = sum(entries.get(key, {}).get("status") not in STATUSES - {"NOT_REVIEWED"} for key in live)
     if pending:
         warnings.append(f"{pending} units remain NOT_REVIEWED")
     if require_reviewed and pending:
@@ -209,12 +314,32 @@ def audit(registry, current, require_reviewed=False):
                          "core_pool_units": len(core_rows),
                          "core_pool_dispositions": dict(Counter(row.get("status") for row in core_rows)),
                          "framework_quality": dict(Counter((row.get("quality") or {}).get("grade", "NOT_REVIEWED")
-                                                           for row in entries.values() if row.get("kind") == "framework"))},
+                                                           for key, row in entries.items() if key in live and row.get("kind") == "framework"))},
             "errors": errors, "warnings": warnings}
 
 
 def write_registry(registry, path=REGISTRY):
-    """Replace a validated catalog atomically; never truncate the last good copy."""
+    """Atomically write compact v2 without changing IDs, evidence or the input.
+
+    Defaults are fixed by this module, never inferred semantic approvals. Call
+    audit first when writing externally supplied decisions or changed sources.
+    """
+    registry = _expand_registry(registry)
+    if registry.get("version") not in (1, 2):
+        raise ValueError("INVALID_VERSION")
+    registry["version"] = 2
+    for key, row in registry.get("entries", {}).items():
+        compact = _compact_defaults(row, ROW_DEFAULTS)
+        if compact.get("id") == key:
+            compact.pop("id")
+        if isinstance(compact.get("source"), dict) and compact.get("kind") == compact["source"].get("kind"):
+            compact.pop("kind", None)
+        if "history" in compact:
+            compact["history"] = [_compact_defaults(h, HISTORY_DEFAULTS)
+                                  if h.get("event") in ("source_changed", "review_decision") else h
+                                  for h in compact["history"]]
+        registry["entries"][key] = compact
+    path = Path(path)
     fd, temporary = tempfile.mkstemp(prefix=path.name + ".", suffix=".tmp", dir=path.parent)
     try:
         with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as stream:
@@ -235,7 +360,7 @@ def main():
     parser.add_argument("--decisions", type=Path, help="Apply explicit reviewed decisions with matching source hashes")
     args = parser.parse_args()
     current = units()
-    registry = INVENTORY.read_yaml(REGISTRY) if REGISTRY.exists() else {}
+    registry = load_registry() if REGISTRY.exists() else {}
     if args.sync:
         registry = sync(registry, current)
     if args.release and args.release != registry.get("release"):
@@ -253,11 +378,15 @@ def main():
 
 
 def apply_decisions(registry, decisions, current):
-    """Reject stale reviews before mutating the registry on disk."""
-    result = copy.deepcopy(registry)
+    """Apply explicit reviews in memory; reject stale sources and frozen edits.
+
+    After a source rename/move, decisions must also supply the exact current
+    source mapping, so an old decision cannot be replayed against equal content.
+    """
+    result = _expand_registry(registry)
     if not isinstance(decisions, list):
         raise ValueError("Decisions must be a list")
-    live = {unit["id"]: unit for unit in current}
+    live = _bound_units(result, current)
     seen = set()
     for decision in decisions:
         if not isinstance(decision, dict) or not all(k in decision for k in ("id", "source_hash", "status")):
@@ -268,20 +397,30 @@ def apply_decisions(registry, decisions, current):
         seen.add(key)
         row = result["entries"].get(key)
         if (not row or row["source_hash"] != decision["source_hash"] or
-                (key in live and live[key]["source_hash"] != decision["source_hash"])):
+                (key in live and (live[key]["source_hash"] != decision["source_hash"] or
+                                 live[key]["source"] != row.get("source")))):
             raise ValueError(f"Stale or unknown decision: {key}")
-        allowed = {"id", "source_hash", *REVIEW_FIELDS}
+        moved = any(h.get("event") == "source_changed" and "source" in h and
+                    h["source"] != row.get("source") for h in row.get("history", []))
+        if (moved or "source" in decision) and decision.get("source") != row.get("source"):
+            raise ValueError(f"Stale or missing decision source binding: {key}")
+        allowed = {"id", "source_hash", "source", *REVIEW_FIELDS}
         if set(decision) - allowed:
             raise ValueError(f"Unknown decision fields: {set(decision)-allowed}")
-        if all(row.get(field) == value for field, value in decision.items()):
+        decision = copy.deepcopy(decision)
+        for field, value in decision.items():
+            if isinstance(value, dict) and isinstance(ROW_DEFAULTS.get(field), dict):
+                decision[field] = _expand_defaults(value, ROW_DEFAULTS[field])
+        if all(_same_value(row.get(field), value) for field, value in decision.items()):
             continue
-        row.setdefault("history", []).append({"event": "review_decision", "source_hash": row["source_hash"],
-                                             **{field: copy.deepcopy(row.get(field)) for field in REVIEW_FIELDS}})
+        if (row.get("restrictions") or {}).get("frozen"):
+            raise ValueError(f"FROZEN_DECISION: {key}")
+        row.setdefault("history", []).append(_snapshot(row, "review_decision"))
         row.update(copy.deepcopy(decision))
     report = audit(result, current)
     if report["errors"]:
         raise ValueError("; ".join(report["errors"]))
-    return result
+    return _expand_registry(result)
 
 
 if __name__ == "__main__":

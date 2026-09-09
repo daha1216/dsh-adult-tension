@@ -88,8 +88,8 @@ def load_yaml(path: Path) -> Any:
     if yaml is None:
         raise SaveError("PyYAML is required; run: python -m pip install PyYAML")
     try:
-        return yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        return _COMMON.load_yaml_file(path)
+    except _COMMON.CommonError as exc:
         raise SaveError(f"cannot read YAML {path}: {exc}") from exc
 
 
@@ -114,11 +114,14 @@ class SaveStore:
     def lock_path(self, slot: str) -> Path:
         return self.slot_dir(slot) / ".write.lock"
 
-    def _read_manifest(self, slot: str) -> dict[str, Any]:
+    def _read_manifest(self, slot: str, snapshot: bytes | None = None) -> dict[str, Any]:
         path = self.manifest_path(slot)
         if not path.exists():
             raise SaveError(f"slot does not exist or has no manifest: {slot}")
-        manifest = load_yaml(path)
+        try:
+            manifest = load_yaml(path) if snapshot is None else _COMMON.load_yaml_bytes(snapshot, path)
+        except _COMMON.CommonError as exc:
+            raise SaveError(str(exc)) from exc
         if not isinstance(manifest, dict):
             raise SaveError(f"manifest is not a mapping: {path}")
         result = {key: manifest.get(key) for key in MANIFEST_KEYS}
@@ -161,8 +164,8 @@ class SaveStore:
             raise SaveError("state validation failed: " + "; ".join(errors))
 
     @staticmethod
-    def _state_sha256(text: str) -> str:
-        return hashlib.sha256(text.encode("utf-8")).hexdigest()
+    def _state_sha256(text: str | bytes) -> str:
+        return hashlib.sha256(text.encode("utf-8") if isinstance(text, str) else text).hexdigest()
 
     @classmethod
     def _new_manifest(cls, slot: str, state_text: str) -> dict[str, Any]:
@@ -187,14 +190,20 @@ class SaveStore:
         except FileExistsError as exc:
             raise SaveError(f"slot already exists: {slot}") from exc
         try:
-            write_atomic(self.state_path(slot), state_text)
-            write_atomic(self.manifest_path(slot), yaml_text(self._new_manifest(slot, state_text)))
-        except Exception:
-            import shutil
-
-            shutil.rmtree(self.slot_dir(slot), ignore_errors=True)
-            raise
-        return self._read_manifest(slot)
+            with _COMMON.FileLock(self.lock_path(slot)):
+                try:
+                    manifest = self._new_manifest(slot, state_text)
+                    write_atomic(self.state_path(slot), state_text)
+                    write_atomic(self.manifest_path(slot), yaml_text(manifest))
+                except Exception:
+                    self.manifest_path(slot).unlink(missing_ok=True)
+                    self.state_path(slot).unlink(missing_ok=True)
+                    raise
+        except Exception as exc:
+            self.lock_path(slot).unlink(missing_ok=True)
+            self.slot_dir(slot).rmdir()
+            raise SaveError(f"cannot initialize slot {slot}: {exc}") from exc
+        return manifest
 
     def list_slots(self) -> list[dict[str, Any]]:
         result: list[dict[str, Any]] = []
@@ -203,13 +212,9 @@ class SaveStore:
         for path in sorted(self.slots.iterdir()):
             if path.is_dir() and (path / "manifest.yaml").exists():
                 try:
-                    item = self._read_manifest(path.name)
+                    state, item = self.load_slot(path.name)
                 except SaveError:
                     continue
-                try:
-                    state = self._read_state(path.name)
-                except SaveError:
-                    state = {}
                 meta = state.get("meta") if isinstance(state, dict) else {}
                 node = state.get("current_node") if isinstance(state, dict) else {}
                 if isinstance(meta, dict) and isinstance(meta.get("turn"), int):
@@ -219,14 +224,32 @@ class SaveStore:
                 result.append(item)
         return result
 
-    def load_slot(self, slot: str) -> tuple[dict[str, Any], dict[str, Any]]:
-        manifest = self._read_manifest(slot)
-        state = self._read_state(slot)
+    def _read_pair(self, slot: str) -> tuple[dict[str, Any], dict[str, Any], bytes, bytes]:
+        """Caller holds the slot lock; parse and checksum the exact same bytes."""
+        try:
+            manifest_bytes = self.manifest_path(slot).read_bytes()
+            state_bytes = self.state_path(slot).read_bytes()
+            manifest = self._read_manifest(slot, manifest_bytes)
+            state = _COMMON.load_yaml_bytes(state_bytes, self.state_path(slot))
+        except (OSError, _COMMON.CommonError) as exc:
+            raise SaveError(f"cannot read slot {slot}: {exc}") from exc
         if manifest["manifest_version"] >= 2:
-            state_text = self.state_path(slot).read_text(encoding="utf-8")
-            if self._state_sha256(state_text) != manifest["state_sha256"]:
+            if self._state_sha256(state_bytes) != manifest["state_sha256"]:
                 raise SaveError(f"manifest/state checksum mismatch: {slot}")
+        if not isinstance(state, dict):
+            raise SaveError(f"state is not a mapping: {self.state_path(slot)}")
         self._validate_state(state)
+        return state, manifest, state_bytes, manifest_bytes
+
+    def load_slot(self, slot: str) -> tuple[dict[str, Any], dict[str, Any]]:
+        slot = slot_name(slot)
+        if not self.manifest_path(slot).exists():
+            raise SaveError(f"slot does not exist or has no manifest: {slot}")
+        try:
+            with _COMMON.FileLock(self.lock_path(slot)):
+                state, manifest, _, _ = self._read_pair(slot)
+        except _COMMON.CommonError as exc:
+            raise SaveError(str(exc)) from exc
         meta = state.get("meta") if isinstance(state, dict) else {}
         if isinstance(meta, dict) and meta.get("turn") == 0:
             print("warning: 这是旧口径开局档（回合 0），按回合 1 接续，不重掷。", file=sys.stderr)
@@ -239,6 +262,7 @@ class SaveStore:
         *,
         expected_updated_at: str | None = None,
     ) -> dict[str, Any]:
+        slot = slot_name(slot)
         candidate = load_yaml(state_source)
         if not isinstance(candidate, dict):
             raise SaveError("candidate state must be a mapping")
@@ -252,7 +276,7 @@ class SaveStore:
         except _COMMON.CommonError as exc:
             raise SaveError(str(exc)) from exc
         try:
-            manifest = self._read_manifest(slot)
+            _, manifest, prior_state, prior_manifest = self._read_pair(slot)
             if expected_updated_at is None:
                 raise SaveError(
                     "覆盖保存必须携带 --expected-updated-at（载入时记录的 manifest.updated_at）；"
@@ -268,8 +292,16 @@ class SaveStore:
             state_text = yaml_text(candidate)
             updated["manifest_version"] = 2
             updated["state_sha256"] = self._state_sha256(state_text)
-            write_atomic(self.state_path(slot), state_text)
-            write_atomic(self.manifest_path(slot), yaml_text(updated))
+            try:
+                write_atomic(self.state_path(slot), state_text)
+                write_atomic(self.manifest_path(slot), yaml_text(updated))
+            except Exception as exc:
+                try:
+                    _COMMON.write_atomic_bytes(self.state_path(slot), prior_state)
+                    _COMMON.write_atomic_bytes(self.manifest_path(slot), prior_manifest)
+                except OSError as rollback_exc:
+                    raise SaveError(f"slot write and rollback failed: {rollback_exc}") from exc
+                raise SaveError(f"slot write failed; prior pair restored: {exc}") from exc
             return updated
         finally:
             lock.__exit__(None, None, None)

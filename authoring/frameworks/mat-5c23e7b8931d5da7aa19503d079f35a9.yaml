@@ -1,0 +1,280 @@
+id: "mat-5c23e7b8931d5da7aa19503d079f35a9"
+name: "昭和街角喫茶巡礼"
+material:
+  eras:
+    - "昭和末期"
+  aesthetics:
+    - "和风物哀"
+    - "旧年代质感"
+    - "温柔颓丧"
+  rule: "喫茶店、团地与末班车织成生活路线，老熟客的习惯常比招牌更持久。"
+  social_rule: "店内预约和寄存物件按手写簿登记，熟客也需要征求店主同意。"
+  places:
+    昭和喫茶店:
+      details:
+        - "玻璃柜里放着小份布丁·午后"
+        - "熟客杯架旁留着新客可选的杯子·午后"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "面街木框玻璃门"
+        witnesses:
+          - "店内帮工"
+          - "吧台熟客"
+        affordances:
+          - "试配季节甜点"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "备料余量"
+          - "午后客流"
+    爵士喫茶:
+      details:
+        - "唱片封套立在唱机柜旁·夜"
+        - "背对音箱的角座还空着·夜"
+      profile:
+        privacy: "low"
+        visibility: "medium"
+        exits:
+          - "吧台旁通往街面的店门"
+        witnesses:
+          - "店主"
+          - "安静听曲的客人"
+        affordances:
+          - "挑选晚间唱片"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "整面唱片时长"
+          - "店内约定音量"
+    团地走廊:
+      details:
+        - "住户门边试摆着裱框照片·午后"
+        - "扶手前划出不可堆物的空带·午后"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "楼梯口通向团地庭院"
+        witnesses:
+          - "进出住户"
+          - "楼栋管理人"
+        affordances:
+          - "布置住户作品展"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "检修围挡"
+          - "门扇开启幅度"
+    钱汤:
+      details:
+        - "营业前的门厅柜台摊着手绘告示·日间"
+        - "入口能看见通往不同更衣区的指向牌·日间"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "门厅外街道"
+        witnesses:
+          - "钱汤店主"
+        affordances:
+          - "设计更衣区告示"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "开门前的试挂时间"
+          - "从柜台看字的距离"
+    车站前旅馆:
+      details:
+        - "旅馆前厅贴着末班列车时刻表·傍晚"
+        - "柜台简图旁压着几张早餐店名片·傍晚"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "前厅门通向站前街"
+        witnesses:
+          - "旅馆前台"
+          - "查时刻表的旅客"
+        affordances:
+          - "补画街区导览"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "末班车时刻"
+          - "各店营业时间"
+  pairs:
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "喫茶店经营者"
+        function: "试配甜点并安排自家店内接待"
+        authority: "决定自家菜单小批试卖与借墙时段"
+        resource: "备料份额、熟客杯架与手写寄存簿"
+        limitation: "不能代邻店许诺展位，也无法随意处置寄存唱片"
+        obligation: "说明食材并将寄存物与店产分开"
+        exposure: "备料失算会吃掉当天毛利，误处置旧物会失去熟客"
+        hidden: "—"
+      player:
+        identity: "地方杂志摄影师"
+        baseline: "你曾给喫茶店拍过一张店主愿意挂出的门面照；这次店主请你试新甜点，照片由你决定是否拍。"
+        resources:
+          - "胶片相机与剩余底片"
+          - "已核对的街区店址"
+        reputation: "你在拍人前问一句，也会收起相机单纯吃饭"
+      relationship_reason: "你曾给喫茶店拍过一张店主愿意挂出的门面照；这次店主请你试新甜点，照片由你决定是否拍。"
+    -
+      family: "艺术与传播"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "地方杂志摄影师"
+        function: "以胶片记录街区并协助布展"
+        authority: "安排自己的拍摄与样片出借，不决定邻店经营"
+        resource: "少量胶卷、联系印样和已授权的住户照片"
+        limitation: "底片不能即时回看，营业中的钱汤更衣区不拍摄"
+        obligation: "返还原照片并依本人意愿撤下展品"
+        exposure: "一次未经同意的刊图会失去街坊拍摄信任"
+        hidden: "—"
+      player:
+        identity: "喫茶店经营者"
+        baseline: "你在店里替摄影师留过一面试展墙；这次下班后他带你听唱片，不把相聚当采访。"
+        resources:
+          - "可供试展的一面店墙"
+          - "熟悉小店营业时间的手写簿"
+        reputation: "你记得熟客喜好，但愿给新人的口味留位置"
+      relationship_reason: "你在店里替摄影师留过一面试展墙；这次下班后他带你听唱片，不把相聚当采访。"
+  activities:
+    试配季节甜点:
+      places:
+        - "昭和喫茶店"
+      pairs:
+        - 0
+      category: "照护与修复"
+      action: "{npc}把一份甜点分成两种甜度的小样，先问你愿不愿尝、有没有避开的食材。"
+      beats:
+        trigger: "{npc}把一份甜点分成两种甜度的小样，先问你愿不愿尝、有没有避开的食材。"
+        objective: "试出适合日常供应的小份配方"
+        choice: "尝一小口，或只帮摆盘；不吃甜可喝无糖茶"
+        immediate: "留下被选的甜度和份量，不合口味的小样不再劝食。"
+        near: "店主先小批量试卖，摄影师可拍成品，但不以熟客反馈担保销量。"
+    挑选晚间唱片:
+      places:
+        - "爵士喫茶"
+      pairs:
+        - 1
+      category: "日常接触"
+      action: "{npc}拿出两张获店主许可播放的唱片，问你愿听完整一面还是只听一曲。"
+      beats:
+        trigger: "{npc}拿出两张获店主许可播放的唱片，问你愿听完整一面还是只听一曲。"
+        objective: "共享一段不用于采访的音乐时间"
+        choice: "选一曲，或安静听对方选；也可坐到不正对音箱的位置"
+        immediate: "曲目与座位随两人的偏好调整，听感无需写成评论。"
+        near: "唱片归回原套，两人记住彼此喜欢的声音，不产生供稿任务。"
+    布置住户作品展:
+      places:
+        - "团地走廊"
+      pairs:
+        - 0
+      category: "空间与退出"
+      action: "{npc}把住户授权展出的照片靠墙试摆，邀你从走廊一端走过看看。"
+      beats:
+        trigger: "{npc}把住户授权展出的照片靠墙试摆，邀你从走廊一端走过看看。"
+        objective: "让照片可看且不挡住日常出入"
+        choice: "试摆一组，或站在住户门前检查开门幅度；不参加可让摄影师独自试摆"
+        immediate: "展位退到不影响房门和扶手的一侧，放不下的照片先留在相册。"
+        near: "住户可要求撤下自家照片，展览改为轮换，不拿长期占走廊换完整展出。"
+    设计更衣区告示:
+      places:
+        - "钱汤"
+      pairs:
+        - 1
+      category: "调查与核验"
+      action: "{npc}在钱汤尚未营业的门厅举起告示，请你从柜台外看字号和方向。"
+      beats:
+        trigger: "{npc}在钱汤尚未营业的门厅举起告示，请你从柜台外看字号和方向。"
+        objective: "确认更衣区指引能从公共入口读懂"
+        choice: "站远核对字样，或请店主念一遍；不进更衣区也能完成"
+        immediate: "箭头与字样在入口得到核验，样稿不用拍摄在场客人。"
+        near: "店主按验证后的字号换牌，摄影师只交版式，不取得营业时拍摄许可。"
+    补画街区导览:
+      places:
+        - "车站前旅馆"
+      pairs:
+        - 0
+      category: "空间与退出"
+      action: "{npc}对照旅馆门厅的列车时刻表，问你要走早餐短线还是多逛一家店。"
+      beats:
+        trigger: "{npc}对照旅馆门厅的列车时刻表，问你要走早餐短线还是多逛一家店。"
+        objective: "选出能按时回站的街区路线"
+        choice: "走近站短线，或留在门厅听店家推荐；不同行可以各自回店"
+        immediate: "路线带着折返点和预计步行时间，关门小店不被当成必访站。"
+        near: "来客可用简图独自行走，两人只约下一次碰面的店，不默认全程陪同。"
+  customs:
+    - "熟客的杯子仍放在架上，但新客也能选自己喜欢的杯型。"
+  pressures:
+    唱片寄存人失联:
+      source: "一位老熟客寄存的唱片在店铺转让前无人认领"
+      engines:
+        - "旧事追索"
+        - "组织更迭"
+      beats:
+        trigger: "{npc}收到消息：一位老熟客寄存的唱片在店铺转让前无人认领。"
+        objective: "找到合法接收人或约定代管办法"
+        choice: "翻查寄存簿，或托社区联系本人"
+        immediate: "寄存唱片从待售店产中移出，暂不作为今晚播放用片。"
+        near: "按寄存人留下的联系方式询问并由转让双方确认代管人，找不到人也不出售。"
+      far_trigger: "新店主接手清点寄存物时"
+      far_consequence: "明确代管则旧客仍有领取入口；未分清的寄存物须继续封存，占用新店储位。"
+      exits:
+        - "只提供曾听过的曲目线索便结束寻人"
+        - "将唱片交原店主封存，不承担长期代管"
+      bindings:
+        -
+          activity: "挑选晚间唱片"
+          place: "爵士喫茶"
+          pair: 1
+    团地展览搬迁:
+      source: "公共走廊检修与住户展览撞期"
+      engines:
+        - "资源锁定"
+        - "组织更迭"
+      beats:
+        trigger: "{npc}收到消息：公共走廊检修与住户展览撞期。"
+        objective: "为作品寻找合适的临时展位"
+        choice: "征求店铺借墙，或将展期后移"
+        immediate: "走廊展品先下架，住户日常出入恢复，不能把作品暂堆在楼梯口。"
+        near: "已许可照片分到喫茶店借墙或装册，未找到展位者按原样归还。"
+      far_trigger: "检修结束再次征集展位时"
+      far_consequence: "轮换展能保留参与者，却不一定恢复原来全走廊的规模。"
+      exits:
+        - "领回自己借出的照片并退出本轮"
+        - "只帮助把作品装册交还，不继续找墙"
+      bindings:
+        -
+          activity: "布置住户作品展"
+          place: "团地走廊"
+          pair: 0
+        -
+          activity: "试配季节甜点"
+          place: "昭和喫茶店"
+          pair: 0
+  legacy_sources:
+    eras:
+      - "昭和末期"
+    aesthetics:
+      - "和风物哀"
+      - "旧年代质感"
+      - "温柔颓丧"
+    places:
+      - "昭和喫茶店"
+      - "爵士喫茶"
+      - "团地走廊"
+      - "钱汤"
+      - "车站前旅馆"
+  themes:
+    - "熟客习惯与新客口味"
+    - "胶片里的街区变迁"
+    - "店铺转让中的私人寄存"
+  technology_boundary: "昭和末期以唱片、胶片相机、手写簿、固定电话和印刷时刻表为媒介；无智能手机导航、数码即时回看或网络寻人。"
+  bridge_status: "not_required"

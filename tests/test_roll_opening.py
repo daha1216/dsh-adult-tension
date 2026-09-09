@@ -217,7 +217,7 @@ class RollOpeningTests(unittest.TestCase):
              mock.patch.object(MOD.random, "SystemRandom", return_value=mock.Mock(randrange=mock.Mock(side_effect=[10, 11]))):
             buffer = io.StringIO()
             with contextlib.redirect_stdout(buffer):
-                code = MOD.main(["--format", "json"])
+                code = MOD.main(["--format", "json", "--framework", "legacy"])
         self.assertEqual(code, 0)
         data = json.loads(buffer.getvalue())
         self.assertEqual(data["seed"], 11)
@@ -230,7 +230,7 @@ class RollOpeningTests(unittest.TestCase):
              mock.patch.object(MOD, "recent_cooldowns", return_value={}), \
              mock.patch.object(MOD, "append_history"):
             with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(stderr):
-                code = MOD.main(["--seed", "10", "--format", "json"])
+                code = MOD.main(["--seed", "10", "--format", "json", "--framework", "legacy"])
         self.assertEqual(code, 0)
         self.assertIn("显式 seed 保持确定性", stderr.getvalue())
 

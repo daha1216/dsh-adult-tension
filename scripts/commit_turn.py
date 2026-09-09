@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import ExitStack
 import copy
 import datetime as dt
 import hashlib
@@ -17,7 +18,6 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_STATE = ROOT / "saves" / "current_state.yaml"
 PUBLIC_HINTS = ("走廊", "门厅", "大堂", "街道", "步道", "车站", "大厅", "连接处")
 PRIVATE_HINTS = ("卧室", "浴室", "卫生间", "套房", "包厢", "起居室", "内间", "里间")
 ORDINARY_TURN_MAX_SECONDS = 15 * 60
@@ -362,7 +362,7 @@ def repoint_pressure_seeds(state: dict[str, Any], affected_ids: set[str]) -> Non
 
 def apply_events(state: dict[str, Any], resolve_ids: list[str], additions: list[dict[str, Any]],
                  turn: int, outcome_default: str, updates: list[Any] | None = None,
-                 cancel_ids: list[str] | None = None) -> None:
+                 cancel_ids: list[str] | None = None, cancel_outcome: str = "") -> None:
     events = state.get("events") or []
     resolved = list(state.get("resolved_summary") or [])
     index = _event_index(state)
@@ -399,6 +399,8 @@ def apply_events(state: dict[str, Any], resolve_ids: list[str], additions: list[
         if status == "resolved":
             raise CommitError(f"event {cid} is already resolved and cannot be cancelled")
         event["status"] = "cancelled"
+        resolved.append({"event_id": cid, "resolved_turn": turn,
+                         "outcome": cancel_outcome or "Event cancelled"})
         touched.add(cid)
 
     for raw in updates or []:
@@ -671,6 +673,7 @@ def apply_patch(state: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
         minutes = world["delta_t"] // 60
         world["delta_human"] = f"{minutes} 分钟" if minutes else f"{world['delta_t']} 秒"
     elif not advance:
+        world["previous_clock"] = iso(old_clock)
         world["delta_t"] = 0
         world["delta_human"] = world.get("delta_human") or ""
 
@@ -728,6 +731,7 @@ def apply_patch(state: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
         str(patch.get("resolve_outcome") or ""),
         updates=list(patch.get("events_update") or []),
         cancel_ids=list(patch.get("events_cancel") or []),
+        cancel_outcome=str(patch.get("cancel_outcome") or ""),
     )
     expire_due_events(data, parse_clock(data["world"]["clock"]), turn)
     apply_boundaries(data, list(patch.get("boundaries_add") or []), list(patch.get("boundaries_revoke") or []), turn)
@@ -780,7 +784,11 @@ def load_patch(args: argparse.Namespace) -> dict[str, Any]:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--state", type=Path, default=DEFAULT_STATE)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--state", type=Path, default=None)
+    source.add_argument("--session", default=None, help="Session ID under saves/sessions")
+    parser.add_argument("--expected-state-token", default=None,
+                        help="SHA256 of observed state bytes; required with --session")
     parser.add_argument("--patch", default=None, help="patch JSON string")
     parser.add_argument("--patch-file", type=Path, default=None)
     parser.add_argument("--delta-minutes", type=int, default=None)
@@ -792,27 +800,43 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    out = args.out or args.state
     try:
-        lock = _COMMON.FileLock(_COMMON.lock_path(args.state))
-        lock.__enter__()
-    except _COMMON.CommonError as exc:
-        print(f"ERROR: {exc}", file=sys.stderr)
-        return 1
-    try:
-        state = load_yaml(args.state)
         patch = load_patch(args)
-        turn_mode, turn_reasons = classify_turn(state, patch)
-        updated = commit(state, patch)
-        saves = load_saves()
-        saves.write_atomic(out, saves.yaml_text(updated))
-    except (CommitError, json.JSONDecodeError, OSError) as exc:
+        if args.session is not None and not args.expected_state_token:
+            raise CommitError("--session requires --expected-state-token")
+        state_path = (_COMMON.session_state_path(ROOT / "saves", args.session)
+                      if args.session is not None else args.state.resolve())
+        out = (args.out or state_path).resolve()
+        if not state_path.is_file():
+            raise CommitError(f"state does not exist: {state_path}")
+        with ExitStack() as locks:
+            for path in sorted({state_path, out}):
+                locks.enter_context(_COMMON.FileLock(_COMMON.lock_path(path)))
+            snapshot = state_path.read_bytes()
+            if (args.expected_state_token is not None
+                    and hashlib.sha256(snapshot).hexdigest() != args.expected_state_token):
+                raise CommitError("stale state token: reload the latest state before committing")
+            state = _COMMON.load_yaml_bytes(snapshot, state_path)
+            if not isinstance(state, dict):
+                raise CommitError(f"state is not a mapping: {state_path}")
+            turn_mode, turn_reasons = classify_turn(state, patch)
+            updated = commit(state, patch)
+            saves = load_saves()
+            text = saves.yaml_text(updated)
+            saves.write_atomic(out, text)
+            binding = _COMMON.state_binding(out, text.encode("utf-8"), ROOT / "saves")
+    except (CommitError, _COMMON.CommonError, json.JSONDecodeError, OSError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
-    finally:
-        lock.__exit__(None, None, None)
     slice_mod = load_live_slice()
     payload = slice_mod.extract_live_slice(updated)
+    payload.update(binding)
+    prior_statuses = {event.get("id"): event.get("status") for event in state.get("events") or []
+                      if isinstance(event, dict)}
+    terminal_ids = [event["id"] for event in updated.get("events") or []
+                    if isinstance(event, dict) and event.get("status") in {"resolved", "cancelled"}
+                    and prior_statuses.get(event.get("id")) != event.get("status")]
+    payload["event_changes"] = slice_mod.event_receipts(updated, terminal_ids)
     payload["turn_mode"] = turn_mode
     payload["turn_reasons"] = turn_reasons
     if args.format == "json":

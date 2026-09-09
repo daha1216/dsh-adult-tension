@@ -1,0 +1,22 @@
+version: 1
+modes: [daily, pressure]
+layers: [world, space, character, relationship, activity, opening, development, expression]
+review_statuses: [KEEP_FRAMEWORK, KEEP_SHARED, KEEP_LEGACY, BRIDGE_REQUIRED, DUPLICATE, DEPRECATED, FROZEN_RESTRICTED, NOT_REVIEWED]
+files:
+  pools.yaml: {layer: world, depends_on: []}
+  character_meta.yaml: {layer: character, depends_on: [pools.yaml]}
+  twists.yaml: {layer: development, depends_on: [pools.yaml]}
+  templates.yaml: {layer: expression, depends_on: [pools.yaml, action_categories.yaml]}
+  names.yaml: {layer: character, depends_on: [pools.yaml]}
+  identities.yaml: {layer: character, depends_on: [pools.yaml]}
+  locations.yaml: {layer: space, depends_on: [pools.yaml]}
+  character_pools.yaml: {layer: character, depends_on: [pools.yaml]}
+  location_profiles.yaml: {layer: space, depends_on: [locations.yaml, action_categories.yaml]}
+  action_categories.yaml: {layer: activity, depends_on: [pools.yaml]}
+  action_metadata.yaml: {layer: activity, depends_on: [action_categories.yaml]}
+  identity_profiles.yaml: {layer: character, depends_on: [identities.yaml, character_meta.yaml]}
+  twist_profiles.yaml: {layer: development, depends_on: [twists.yaml]}
+  world_frameworks.yaml:
+    layer: world
+    generated_from: authoring/framework_index.yaml
+    depends_on: [pools.yaml, identities.yaml, location_profiles.yaml, action_categories.yaml, action_metadata.yaml, character_pools.yaml, names.yaml, identity_profiles.yaml, templates.yaml, twist_profiles.yaml]

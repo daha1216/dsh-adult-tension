@@ -10,10 +10,10 @@ import roll_opening as roll
 import validate_state as validate
 
 
-def sample(seeds=(11, 29)):
+def sample(seeds=(11, 29), frameworks=None):
     pools, tables = roll.load_pools(), fill.load_tables()
     results, errors = [], []
-    for framework in [*pools["世界框架"], "legacy", "auto"]:
+    for framework in frameworks if frameworks is not None else [*pools["世界框架"], "legacy", "auto"]:
         for mode in ("daily", "pressure"):
             for seed in seeds:
                 case = {"framework": framework, "mode": mode, "seed": seed}
@@ -40,8 +40,9 @@ def sample(seeds=(11, 29)):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--summary", action="store_true")
+    parser.add_argument("--framework", action="append", help="Probe only this framework; repeat to select multiple")
     args = parser.parse_args()
-    result = sample()
+    result = sample(frameworks=args.framework)
     if args.summary:
         result.pop("results")
     print(json.dumps(result, ensure_ascii=False, indent=2))

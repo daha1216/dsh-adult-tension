@@ -1,0 +1,249 @@
+id: "mat-cdd67109e5e555db92c6d982ca09f3ed"
+name: "千禧网络街坊"
+material:
+  eras:
+    - "千禧年前后"
+  aesthetics:
+    - "旧年代质感"
+    - "恋爱轻喜"
+    - "亚文化地下物语"
+  rule: "拨号网络、纸质地址簿和线下聚会并存，网上认识的人逐渐走进街区。"
+  social_rule: "网名是否对应真实姓名由本人决定，公开作品须注明作者。"
+  places:
+    工作室:
+      details:
+        - "显像管屏幕旁压着软盘标签·夜"
+        - "拨号线暂时拔下的桌面电脑·夜"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "工作室门外公共楼道"
+        witnesses:
+          - "同班维护员"
+        affordances:
+          - "校对个人主页"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "电话线占用"
+          - "软盘可读情况"
+    桌游店:
+      details:
+        - "棋具货架旁拼着一桌纸卡·傍晚"
+        - "柜台写着按时收店的小黑板·傍晚"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "临街店门"
+        witnesses:
+          - "店主"
+          - "等待下一局的成年玩家"
+        affordances:
+          - "试跑聚会小游戏"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "空桌数量"
+          - "每局时长"
+    列车车厢:
+      details:
+        - "折叠小桌压着无地址明信片·日间"
+        - "窗外站牌一闪而过·日间"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "可先结束谈话回座"
+          - "仅在列车停靠开放的站台下车"
+        witnesses:
+          - "邻座旅客"
+          - "乘务员"
+        affordances:
+          - "交换沿途明信片"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "停站时间"
+          - "车厢广播"
+    旧书店:
+      details:
+        - "旧书架边的长桌铺着纸刊样张·午后"
+        - "装订夹收在借用木盒里·午后"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "书店前门"
+        witnesses:
+          - "店主"
+          - "翻阅样刊的读者"
+        affordances:
+          - "装订街坊小刊"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "纸张余量"
+          - "借桌结束时间"
+  pairs:
+    -
+      family: "学术与专业"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "社区网站维护员"
+        function: "维护静态主页与作者上传文件"
+        authority: "可修改本站文件并撤下自己维护的页面"
+        resource: "本地网页备份、拨号账号和上传目录"
+        limitation: "不能删除别人保存的副本，也不能由网名推断实名"
+        obligation: "发布前核对作者许可与链接，保留本地可回退版"
+        exposure: "错传实名或漏署名会让作者不再投稿"
+        hidden: "—"
+      player:
+        identity: "独立刊物编辑"
+        baseline: "你为网站提供过纸刊的作者署名回执，维护员因此请你一起核对离线副本。"
+        resources:
+          - "纸刊校样"
+          - "作者愿意公开的署名回执"
+        reputation: "你能认出错署的作者，不替人决定用真名"
+      relationship_reason: "你为网站提供过纸刊的作者署名回执，维护员因此请你一起核对离线副本。"
+    -
+      family: "艺术与传播"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "独立刊物编辑"
+        function: "编辑小刊并召集线下试读与纸卡试局"
+        authority: "决定自己小刊的选稿和已预约桌位的活动顺序"
+        resource: "样刊、纸卡原型与印刷店报价"
+        limitation: "不能承诺所有网友到场，纸质通知发出后难以即时收回"
+        obligation: "明确投稿用途，参与游戏不等于加入编刊"
+        exposure: "装订积压占自己的纸钱，失约会损失借桌关系"
+        hidden: "—"
+      player:
+        identity: "社区网站维护员"
+        baseline: "你们先在论坛聊过纸卡设计，编辑借到桌位后邀请你首次在线下试玩，双方仍可只用网名。"
+        resources:
+          - "可离线演示的网页备份"
+          - "自己的电话联系时间"
+        reputation: "网上往来已久，线下合作仍待这一局相处"
+      relationship_reason: "你们先在论坛聊过纸卡设计，编辑借到桌位后邀请你首次在线下试玩，双方仍可只用网名。"
+  activities:
+    校对个人主页:
+      places:
+        - "工作室"
+      pairs:
+        - 0
+      category: "调查与核验"
+      action: "{npc}在断线的电脑上打开个人主页副本，请你逐个试点手绘导航。"
+      beats:
+        trigger: "{npc}在断线的电脑上打开个人主页副本，请你逐个试点手绘导航。"
+        objective: "找到不能离线打开的链接与错误署名"
+        choice: "试点一栏，或只对照纸稿读文字；不愿操作可请维护员演示"
+        immediate: "坏链接与图片缺失被区分，修正先留在本地副本。"
+        near: "下次拨号只上传确认过的文件，作者仍可要求保留网名，不把本地校对自动变成发布。"
+    试跑聚会小游戏:
+      places:
+        - "桌游店"
+      pairs:
+        - 1
+      category: "日常接触"
+      action: "{npc}在小店拼出纸卡试局，问你想当玩家还是看一轮再加入。"
+      beats:
+        trigger: "{npc}在小店拼出纸卡试局，问你想当玩家还是看一轮再加入。"
+        objective: "用一轮短局找出大家喜欢的节奏"
+        choice: "玩一轮，或做旁观者提醒回合；不爱竞赛可试合作规则"
+        immediate: "一局的等待长度和争议规则被实际体验，不以输赢判断谁更适合聚会。"
+        near: "选定短局或合作版供下次自愿参加，退出者仍可留店聊天。"
+    交换沿途明信片:
+      places:
+        - "列车车厢"
+      pairs:
+        - 0
+      category: "信息交换"
+      action: "{npc}把一张没写地址的明信片推来，讲起窗外这一站，问你记住了哪一幕。"
+      beats:
+        trigger: "{npc}把一张没写地址的明信片推来，讲起窗外这一站，问你记住了哪一幕。"
+        objective: "交换一段不必上网的沿途见闻"
+        choice: "交换一张卡，或口头讲故事；不留地址也可收好自己的卡"
+        immediate: "卡片是否互赠由各自决定，故事不会自动登上社区网站。"
+        near: "到站后各走各的行程，只有双方都同意才邮寄后续明信片。"
+    装订街坊小刊:
+      places:
+        - "旧书店"
+      pairs:
+        - 1
+      category: "照护与修复"
+      action: "{npc}把已核对页码的样张和钝头装订夹摆好，请你试合一册看能否摊开。"
+      beats:
+        trigger: "{npc}把已核对页码的样张和钝头装订夹摆好，请你试合一册看能否摊开。"
+        objective: "做出可修换内页的小刊样本"
+        choice: "折一叠样张，或只帮压平书脊；不动手可挑纸色"
+        immediate: "形成一册能翻阅的样本，过厚处改为分册，不再只停留在页码核对。"
+        near: "样本留书店试读，其余按实际借阅反馈少量装订，不一次耗光纸张。"
+  customs:
+    - "线下聚会先让来客自己写下希望被称呼的名字。"
+  pressures:
+    网站署名遗漏:
+      source: "转载页面漏掉了原作者名字"
+      engines:
+        - "名声保卫"
+        - "信任透支"
+      beats:
+        trigger: "{npc}收到消息：转载页面漏掉了原作者名字。"
+        objective: "补全署名并核实转载授权"
+        choice: "联系作者确认，或先撤下该页"
+        immediate: "转载页先撤下，其他主页照常访问，缺署名不能靠随意补一个真名解决。"
+        near: "作者确认网名、用途与是否重发；纸刊未印部分同步更正，已送出的仅通知持有人。"
+      far_trigger: "作者收到下一次转载邀请时"
+      far_consequence: "说明清楚可换回单次许可；若作者拒绝，网站保留撤页，不再引用该作。"
+      exits:
+        - "把自己保存的授权回执交作者后退出"
+        - "撤下本人供稿，不参与网站其余维护"
+      bindings:
+        -
+          activity: "校对个人主页"
+          place: "工作室"
+          pair: 0
+        -
+          activity: "装订街坊小刊"
+          place: "旧书店"
+          pair: 1
+    聚会地址版本冲突:
+      source: "纸质通知与网页写了不同的聚会地点"
+      engines:
+        - "消息误发"
+        - "信任透支"
+      beats:
+        trigger: "{npc}收到消息：纸质通知与网页写了不同的聚会地点。"
+        objective: "让已出发的人收到一致的地址"
+        choice: "逐一电话通知，或安排两处接应"
+        immediate: "已经在路上的来客不能靠改网页及时得知，试局先缩成可随时加入的短局。"
+        near: "用固定电话联系能接通的人，其余由自愿且有时间的人在两处店门接应。"
+      far_trigger: "下一次纸质邀请寄出前"
+      far_consequence: "通知加入最后确认电话与截止改址时间，不能以提高网页更新频率代替线下联络。"
+      exits:
+        - "只守自己已在的一处到约定时刻，然后离开"
+        - "不做接应，向主办者交回能联系的名单"
+      bindings:
+        -
+          activity: "试跑聚会小游戏"
+          place: "桌游店"
+          pair: 1
+  legacy_sources:
+    eras:
+      - "千禧年前后"
+    aesthetics:
+      - "旧年代质感"
+      - "恋爱轻喜"
+      - "亚文化地下物语"
+    places:
+      - "工作室"
+      - "桌游店"
+      - "列车车厢"
+      - "旧书店"
+  themes:
+    - "网名到面对面称呼的距离"
+    - "拨号时代的分享与署名"
+    - "纸刊和网页的不同节奏"
+  technology_boundary: "千禧年前后的桌面浏览器、拨号连接、软盘、固定电话和纸质地址簿并存；聚会在售卖纸牌与棋具的小店进行，不预设当代桌游连锁、智能手机或实时在线定位。"
+  bridge_status: "not_required"

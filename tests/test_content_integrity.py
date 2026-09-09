@@ -15,24 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).parents[1]
 DATA = ROOT / "scripts" / "data"
 
-DATA_FILES = (
-    "pools.yaml",
-    "character_meta.yaml",
-    "twists.yaml",
-    "templates.yaml",
-    "names.yaml",
-    "identities.yaml",
-    "locations.yaml",
-    "character_pools.yaml",
-    "location_profiles.yaml",
-    "action_categories.yaml",
-    "action_metadata.yaml",
-    "identity_profiles.yaml",
-    "twist_profiles.yaml",
-    "world_frameworks.yaml",
-)
-
-EXPECTED = "89bb576486787647992080baec60a20a41d5e7775fe4a71dc5877772068352b0"
+EXPECTED = (ROOT / "maintenance/content_fingerprint.txt").read_text(encoding="ascii").strip()
 
 
 def _load(name: str, relative: str):
@@ -45,6 +28,7 @@ def _load(name: str, relative: str):
 
 
 CHECK = _load("check_content", "scripts/check_content.py")
+DATA_FILES = CHECK.DATA_FILES
 
 
 def fingerprint() -> str:
@@ -82,7 +66,7 @@ class ContentIntegrityTests(unittest.TestCase):
         actual = fingerprint()
         self.assertEqual(
             EXPECTED, actual,
-            f"内容数据已变化。若此次改动是故意的，把 EXPECTED 更新为：{actual!r}")
+            "内容数据已变化。运行 python scripts/qa.py --full --update-fingerprint，检查通过后再更新指纹。")
 
     def test_check_content_passes(self) -> None:
         report = CHECK.check()

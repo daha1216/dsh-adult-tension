@@ -1,0 +1,33 @@
+version: 1
+source_commit: 8910ec95a332a6d95cf614fa31a15805fae60158
+frozen_section:
+  file: SKILL.md
+  heading: '### 性行为场景写法（硬约束）'
+  sha256: 61d15c840589f082a70b7fcb0bd01d33a83638a0675dc7240f9869b8285d0931
+framework_selection:
+  original_count: 53
+  retained_count: 40
+  removed:
+    - 沿轨迁徙的移动城市
+    - 潮汐群岛
+    - 云上驿路
+    - 深海共同体
+    - 人造四季轨道城
+    - 记忆寄存之城
+    - 街区预算与公共议事所
+    - 山口联运与迁徙旅舍
+    - 梯田种子与季节合作社
+    - 遗产修复与家族档案
+    - 数字分身与资料信托
+    - 极地观测与候鸟航线
+    - 潮钟议会与错时商埠
+cleanup_policy: verified_direct
+playtest:
+  host: DeepSeek Harness
+  modes: [daily, pressure]
+  seed: 11
+  continuation_turns: 3
+  minimum_model_responses: 320
+  scope: non_explicit_narrative
+  minimum_score: 8
+  dimensions: [world_specificity, character_credibility, meaningful_choices, consequence_continuity, natural_expression]

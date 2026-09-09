@@ -1,0 +1,206 @@
+id: "mat-bea6535a01305dd6b8e8903f6d521c08"
+name: "星海边境生活站"
+material:
+  eras:
+    - "星际殖民地"
+  aesthetics:
+    - "星海冷光"
+    - "行当正剧"
+  rule: "殖民站以轮班、检修与物资交换维持生活，普通休闲也要适应轨道周期。"
+  social_rule: "检修区域以实际许可为准，岗位资历不能越过舱段操作权限。"
+  places:
+    太空站舱段:
+      details:
+        - "舷窗遮光板在轮班间隙缓慢开启"
+        - "扶手旁设有固定脚带与低亮度星图"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "沿公共连廊返回生活舱，不穿越气闸"
+        witnesses:
+          - "当班舱务员"
+        affordances:
+          - "绘制舷窗观星表"
+          - "用脚带稳定观察位置"
+        pressure_modifiers:
+          - "轨道朝向"
+          - "遮光板开放时间"
+    工作室:
+      details:
+        - "水培架旁设有隔离的干作业台"
+        - "绑带与耐湿标牌按获准材料分格收纳"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "收起工具后经内门回生活连廊"
+        witnesses:
+          - "水培值班员"
+        affordances:
+          - "修补植物托架与名牌"
+          - "试放空盆检查托架"
+        pressure_modifiers:
+          - "可用紧固件"
+          - "水培区洁净要求"
+    图书馆:
+      details:
+        - "局域终端缓存着延迟到站的母星影像"
+        - "阅览席的耳机与公共播放扬声器分开控制"
+      profile:
+        privacy: "medium"
+        visibility: "low"
+        exits:
+          - "退出个人阅览后走向公共连廊"
+        witnesses:
+          - "资料馆轮值居民"
+        affordances:
+          - "母星影像共看"
+          - "各自选择不公开的片段"
+        pressure_modifiers:
+          - "影像缓存完整度"
+          - "共同空闲时段"
+  pairs:
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "师傅"
+      npc:
+        role: "舱段检修员"
+        function: "检查舷窗机构与小型托架，解释设备状态"
+        authority: "可停用自己检修的部件并安排复检"
+        resource: "适配托架的紧固件和舷窗维护时段"
+        limitation: "不能改动轨道、生命维持参数或调走公共储备"
+        obligation: "维修后实际试载，交还开放区域"
+        exposure: "返工占用自己的轮休并影响同班接手"
+      player:
+        identity: "站内物资记录人"
+        baseline: "你知道哪些材料可领，正在给自己的水培植物换托架；不把别人的轮休视为免费维修班。"
+        resources:
+          - "自己的空花盆"
+          - "可核对的非急用耗材库存"
+        reputation: "数量拿不准就先数实物"
+      relationship_reason: "两人上次为观景舱换遮光板时分别负责领件与装配，此后约在共同轮休日看星。"
+    -
+      family: "商业与产业"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "站内物资记录人"
+        function: "核对耗材库存并替居民办理领用"
+        authority: "可冻结疑似重复的非急用领料单"
+        resource: "到货箱号、领用余量与退件包装"
+        limitation: "不能批准额外补给或占用紧急生存物资"
+        obligation: "分开保存公用耗材与居民自购物品"
+        exposure: "账物不符会占住下一班的领料额度"
+      player:
+        identity: "舱段检修员"
+        baseline: "你熟悉舱段设施，愿在轮休教对方辨认真实视野而不替对方安排休假。"
+        resources:
+          - "小型工具包"
+          - "自己负责舱段的检修权限"
+        reputation: "会留下可接手的设备，不拿临时凑合当修好"
+      relationship_reason: "检修员曾帮记录人保住一盆倒伏的幼苗；记录人愿一起找能重复使用的托架材料。"
+  activities:
+    绘制舷窗观星表:
+      places:
+        - "太空站舱段"
+      pairs:
+        - 0
+      category: "信息交换"
+      action: "{npc}把轨道预测图转向你，邀你找出舷窗里正在移动的亮点。"
+      beats:
+        trigger: "{npc}把轨道预测图转向你，邀你找出舷窗里正在移动的亮点。"
+        objective: "学会把站体运动与星体位置区分开"
+        choice: "一起比对两次视野；不想记图可只看一轮，也可今晚先回舱休息"
+        immediate: "预测与实见的差异决定下一次该等哪个观测角度"
+        near: "双方可以约到各自有空的轨道窗口；不参加不会损失舷窗使用资格"
+    修补植物托架与名牌:
+      places:
+        - "工作室"
+      pairs:
+        - 1
+      category: "照护与修复"
+      action: "{npc}拿来自己的空花盆，请你帮忙检查旧托架哪里松动。"
+      beats:
+        trigger: "{npc}拿来自己的空花盆，请你帮忙检查旧托架哪里松动。"
+        objective: "用可领用余件恢复托架承重，让名牌不再掉进水槽"
+        choice: "参与试载；也可只挑耐湿名牌，或把维修交回值班员后离开"
+        immediate: "修好就托起空盆试稳；缺件则留在干台，不把不稳托架放回水培架"
+        near: "下一次浇护时可验证是否仍晃动，并决定是否继续种这株植物"
+    母星影像共看:
+      places:
+        - "图书馆"
+      pairs:
+        - 0
+      category: "日常接触"
+      action: "{npc}停在一段母星街景前，问你是否愿意一起听两分钟雨声。"
+      beats:
+        trigger: "{npc}停在一段母星街景前，问你是否愿意一起听两分钟雨声。"
+        objective: "交换与家乡有关的感受，不替影像编公共结论"
+        choice: "可讲自己的记忆，也可只听雨声；不想谈家乡就换看站内摄影或独自阅览"
+        immediate: "选择分享会发现同一街景对两人的意义不同；沉默也能一起看完"
+        near: "喜欢的片段可留在个人收藏，下次相遇是否再看由两人决定"
+  customs:
+    - "居民会在公共星图边上贴出自己的家乡方向，但不必署名。"
+  pressures:
+    货运清单与实物不符:
+      source: "领用托架紧固件时发现到货箱的实装数量少于清单。"
+      engines:
+        - "资源锁定"
+        - "时限逼近"
+      beats:
+        trigger: "{npc}发现领用托架紧固件时发现到货箱的实装数量少于清单。"
+        objective: "在下一批领用前确定现有件够修哪些托架"
+        choice: "清点未拆箱并联系货运；或只修一架，把其余委托退回排期"
+        immediate: "可用件集中到已拆开的托架，未动工的花盆仍留在稳定旧位"
+        near: "本班领用额度暂按实物计算，货运回复前不能承诺整排更换"
+      far_trigger: "下一趟货船关舱前仍未确认缺项"
+      far_consequence: "错过补寄就要用一轮回收件并延后扩种，及时确认则恢复原维护量"
+      bindings:
+        -
+          activity: "修补植物托架与名牌"
+          place: "工作室"
+          pair: 1
+      exits:
+        - "退还未用件，将自己的植物留在旧托架并退出修补"
+        - "由库管接手差额核对，参与者正常下班"
+    检修时段调整:
+      source: "观景舱遮光板例行检修与约好的观星窗口重叠。"
+      engines:
+        - "资源锁定"
+        - "时限逼近"
+      beats:
+        trigger: "{npc}发现观景舱遮光板例行检修与约好的观星窗口重叠。"
+        objective: "在不占检修位置的前提下保留一次观测机会"
+        choice: "改到同一公共连廊已开放的侧舷窗，只看较小星区；或另约轨道周期"
+        immediate: "侧窗看不到原定星群，观测目标变为测一次经过时间"
+        near: "延期的人保留轮休，不需要补做一次活动证明"
+      far_trigger: "下一轮轮班表排定而双方仍无共同窗口"
+      far_consequence: "两人可能各自观测后再交换心得，也可暂时放下共同计划"
+      bindings:
+        -
+          activity: "绘制舷窗观星表"
+          place: "太空站舱段"
+          pair: 0
+      exits:
+        - "结束本次约见回生活舱"
+        - "改为图书馆个人阅览，不承担维修协助"
+  legacy_sources:
+    eras:
+      - "星际殖民地"
+    aesthetics:
+      - "星海冷光"
+      - "行当正剧"
+    places:
+      - "太空站舱段"
+      - "工作室"
+      - "图书馆"
+  themes:
+    - "轮班生活中的共同闲暇"
+    - "封闭生态里的修补与节用"
+    - "离乡影像与个人记忆的差别"
+  technology_boundary: "轨道计算、局域阅览终端和水培循环已经普及；舷窗视野受姿态与遮光板限制，物资仍须货运抵达，维修员无权远程制造缺件或调整全站轨道。"
+  bridge_status: "not_required"

@@ -14,7 +14,7 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 - `references/开局流程.md` — 开局 1-14 流程、结构骰协议、素材出处与语义、单次开局校验
 - `references/角色设计.md` — 人物生成、起名、角色卡、亲密画像与语态
 - `references/世界运转.md` — 时间、Tier 追算、事件、关系传播、压缩
-- `references/状态总结.md` — v3 存档结构、保存检查、载入流程（存档 schema 唯一来源）
+- `references/状态总结.md` — v3 存档结构、保存检查、载入流程（存档 schema 唯一来源，保留原入口）
 - `references/运行状态速览.md` — 普通回合活切片读取白名单与深度升级条件
 - `references/加内容.md` — 扩充素材与文案的对照指南（维护时用）
 - `references/素材架构.md` — 素材分层、跨层兼容与维护验收总导航
@@ -24,9 +24,10 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 - `scripts/build_opening.py --complete --opening-mode pressure|daily` — 按所选模式生成可开场状态与 opening_brief
 - `scripts/commit_turn.py` — 回合提交（时钟、场景、事件、校验、活切片）
 - `scripts/live_slice.py` — 运行时活切片 / 人话状态
-- `scripts/check_content.py` — 内容数据体检（维护时用）
+- `scripts/qa.py` — 维护验证入口；职责与分级见 `references/加内容.md`
+- `maintenance/data_manifest.yaml` — 数据文件职责与依赖；审查结论分别在 `maintenance/core_review_decisions.yaml`、`maintenance/framework_reviews/`
 - `scripts/data/*.yaml` — 全部素材词条、权重与文案模板的数据本体
-- `scripts/data/world_frameworks.yaml` — 闭合世界框架包；需要框架开局或维护框架素材时按需读取
+- `authoring/frameworks/` — 单框架编辑源；经 `scripts/build_frameworks.py --write` 聚合到 `scripts/data/world_frameworks.yaml`，不得直接编辑生成文件
 
 玩家可见的只有正文、状态查询的自然语言说明，以及明确要求「导出存档」时的完整 YAML。本文件其余内容均为后台执行规范，不向玩家展示。
 
@@ -39,11 +40,11 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 ## 按需加载
 
 - 每局开始（开局或载入后第一回合）：读一次 `commands.yaml`（命令解析与行为的唯一来源）。
-- 新开局：未指定类型时先询问“压力开局”或“日常开局”；明确选择后不重复询问，只有明确委托“随便”时才默认日常；载入与续玩不询问。选择本身不推进回合、不生成状态；明确后运行 `python scripts/build_opening.py --complete --opening-mode pressure|daily`。日常开局复用旧世界观、人物、动作和处境素材，但不默认引入外部压力或危机链。正文先给世界初步印象，再写人物处境和可接续现场；不强制标题、段落顺序或固定措辞。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目直接读 `scripts/data/` 下的 yaml。
-- 默认回合：不读完整 references、不重读整份 YAML。只用上一拍活切片，按「每回合事务」判断 `fast|deep`，组最小 patch 后跑 `python scripts/commit_turn.py`；脚本会对结构变化和校准条件执行硬升级，再写正文。
+- 新开局：未指定类型时先询问“压力开局”或“日常开局”；明确选择后不重复询问，只有明确委托“随便”时才默认日常；载入与续玩不询问。选择本身不推进回合、不生成状态；明确后运行 `python scripts/build_opening.py --complete --opening-mode pressure|daily`。日常开局不默认引入外部压力或危机链。仅新局依次使用 `世界观`、`人物`、`正文` 三个标题，前两项各 1-2 句。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目按需读运行数据。
+- 默认回合：不读完整 references、不重读整份 YAML。只用上一拍活切片及其 `session/state_path/state_token`，按「每回合事务」判断 `fast|deep`，组最小 patch 后显式指定会话和 token 提交；脚本会对结构变化和校准条件执行硬升级，再写正文。
 - 新角色进场或角色升级：读 `references/角色设计.md`；需要条目清单时读 `scripts/data/` 下对应 yaml。
 - 快进、离屏活动或 Tier 追算：读 `references/世界运转.md`；压力开局第一次跨天且 `meta.simulation` 为 true 时运行 `python scripts/roll_opening.py --twist`，结果经 `events_add` 与 `twist_generate: {reason: first_cross_day}` 一次提交。
-- 导出存档或载入失败排错：读 `references/状态总结.md`。`状态` 用 `python scripts/live_slice.py saves/current_state.yaml --human`。
+- 导出存档或载入失败排错：读 `references/状态总结.md`。`状态` 用 `python scripts/live_slice.py --session <session> --human`；指定旧文件时用 `--state <state_path>`。
 - 扩充素材或文案（维护时）：读 `references/加内容.md`。
 
 ## 不变量
@@ -98,7 +99,7 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 
 运行时只把已提交状态的活切片放进上下文。普通回合按 `references/运行状态速览.md` 读取，不重读整份 YAML；必要的地点画像、动作元数据、身份行为画像和 checkpoint 由活切片按需携带。提交只走 `commit_turn.py` 或 `manage_saves.py`，禁止直接覆盖整份 `state.yaml`。开局用完的候选审计、重复决策卡副本和无运行价值的快照不得进入活切片；旧档里的 `directives` 只读、不追加，压缩时按 `references/状态总结.md` 折进历史摘要。
 
-`saves/current_state.yaml` 是本会话工作活档（开局 `--complete` 与 `commit_turn.py` 的默认 `--state`）。命名槽在 `saves/slots/<名称>/`。`legacy/` 只读。
+新局默认工作活档是唯一的 `saves/sessions/<uuid>/state.yaml`；可用 `--session <ID>` 明确指定稳定会话。后台 brief/切片返回 `session`、绝对 `state_path`、按文件原始字节计算的 SHA256 `state_token`，绑定只留在会话上下文，不加入 v3 YAML。没有共享工作档默认值；`commit_turn.py` 必须显式带 `--session` 或 `--state`，前者必须附 `--expected-state-token`。旧文件仍可显式用 `--state saves/current_state.yaml` 接续；自定义路径的 `session` 可为 null，此时按返回的 `state_path` 绑定。命名槽在 `saves/slots/<名称>/`，与工作会话分开；`legacy/` 只读。
 
 `current_node.location` 与当前 `scene_id` 必须同次提交。地点、场景或参与者变化时新建 `scene_id`。`scene_id` 只表示场景身份，不绑定场景级账目；换场不继承旧场景的互动判断。模型根据当前互动、NPC明确反应和撤回信号判断是否继续，玩家硬边界、暂停状态、NPC长期底线和年龄校验仍是硬约束。
 
@@ -113,17 +114,23 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 能执行脚本时，开局只允许 `build_opening.py --complete`（`--seed` / `--lock` / `--slot` / `--force-table` / `--all-custom` / `--custom` 从该入口透传）。能对应表内字段的肯定约束才映射为 `--lock`；否定句没有 lock 键。
 
 ```text
-python scripts/build_opening.py --complete --opening-mode daily [--seed N] [--lock KEY=VALUE]... [--slot 名称]
+python scripts/build_opening.py --complete --opening-mode daily [--session ID] [--seed N] [--lock KEY=VALUE]... [--slot 名称]
 # 压力开局将 daily 替换为 pressure；未选择时只返回选择提示。
 ```
 
 禁止：读 `references/开局流程.md`、`角色设计.md`、`状态总结.md`；禁止手写或改写 v3 YAML；禁止单独先跑 `roll_opening.py` 再填空骨架；禁止反复 `--check`。参数错误修正输入，素材填料或 opening 校验错误留给维护，写入或槽位错误保留文件并报告，不得改由模型填档。配角未进场时脚本不会生成完整配角卡。`unresolved_action` 已由脚本落在非交易靠近，除非玩家预锁了交易摊牌。
 
-脚本 stdout 含三行进度和 `---opening_brief---` 块。模型不要重复三行进度，只用 brief 写玩家可见的开局正文；不要把 YAML、字段名、骰子或校验过程写给玩家。
+脚本 stdout 含三行进度和 `---opening_brief---` 块。成功后先记录 `session/state_path/state_token`，再用 brief 写正文；不要把这些后台字段、进度、骰子或校验过程写给玩家。只有校验通过且所有要求的状态写入成功，才追加开局历史；输出已存在或状态写入失败不污染历史。
 
-新开局必须使用以下三段标题格式：`世界观`、`人物`、`正文`。其中框架开局的“世界观”应优先交代框架独特规则和一个地方细节；世界观用一两句交代玩家此刻合理能知道的时代、地点、重要秩序、资源或危险；人物用一两句分别介绍玩家和主要 NPC 的姓名、明确成年年龄、身份及当前处境，不泄露玩家未知的隐藏动机。两段介绍保持简短，不写百科说明，也不重复正文已经呈现的内容。
+人物介绍的年龄直接取 `opening_brief.player.age` 与 `opening_brief.npc.age`，不凭身份猜测或补默认年龄。现场条件读 brief 的 `scene_profile` 与 `situation`。框架技术边界 `technology_boundary` 及有值的 `bridge_explanation` 已写入现有 `world.constants`，完整 brief 与续玩活切片均保留这些约束，不新增 v3 字段；不要用省略这些信息的 compact brief 代替完整开局源。
 
-玩家读完开局后，应能理解：自己身处什么样的世界，那里有什么重要规则，当前人物为何在这里，眼下发生了什么，以及自己可以从哪个动作接手。保留所选题材、文风、视角和节奏；普通题材的世界观先导通常简短，复杂题材可适当展开，但不要为了交代设定牺牲可玩性。
+默认 `auto` 只选来源哈希匹配、语义审查有效的框架；没有合格框架时明确报错，无隐式 `legacy` 回退。独立旧池必须显式使用 `--framework legacy`。点名框架可用于定向检查，不代表已取得默认抽取或发布资格。
+
+`--all-custom` 不解除框架约束；自拟核心规则、时代等与所有已审框架都不兼容时，`auto` 会拒绝，不静默回退。玩家明确要求自由表外世界时，使用 `--framework legacy --all-custom` 并补齐所需 `--custom KEY=VALUE`，仍遵守日常模式限制与状态校验。
+
+仅新局必须依次使用 `世界观`、`人物`、`正文` 三个标题，前两项各 1-2 句。世界观优先交代框架独特规则和一个地方细节，只写玩家此刻合理知道的时代、地点、重要秩序、资源或危险；人物简要介绍玩家和主要 NPC 的姓名、明确成年年龄、身份及当前处境，不泄露隐藏动机。命名服从时代、文化和生活背景，不局限现代姓名。载入与续玩不重复三个标题。
+
+玩家读完开局后，应能理解世界的重要规则、人物为何在此和下一步可接手的动作。复杂题材的更多设定留到正文中的具体行动和后续回合，不延长前两项介绍，也不牺牲可玩性。
 
 正文从当前现场、动作或对话开始，覆盖人物与当前关系/处境、正在发生的动作和未决点；仅在已有压力时写出压力；不再重复世界观和人物段落。正文结尾停在玩家能够接手的位置，并保持玩家行动主权。
 
@@ -151,8 +158,8 @@ python scripts/build_opening.py --complete --opening-mode daily [--seed N] [--lo
 2. **读取**：只读取上一拍活切片；需要深度规则时才加载对应参考文档，不重读整份状态。
 3. **判断**：模型根据当前叙事语义选择 `turn_mode: fast|deep`，用户不选择回合类型。
 4. **组 patch**：只提交本拍变化。普通行动 `delta_minutes` 为 1–15；16–59 分钟按短快进处理，60 分钟以上或跨天按完整追算处理。「继续」必须让时钟变化。
-5. **提交**：`python scripts/commit_turn.py --state saves/current_state.yaml --patch '<json>'`。提交器负责确定性校验和硬升级：换场、参与者变化、事件/边界结构变化、NPC 自主动作、跨天、定期校准等情况即使模型报 `fast` 也升级为 `deep`。压力开局第一次跨天且 `simulation` 为 true 时，按 `references/世界运转.md` 运行转折流程。
-6. **输出**：使用脚本返回的最终 `turn_mode` 和新活切片写正文。`fast` 只写当前动作和必要反应，`deep` 才追算已有的长期压力、离屏事件和完整校准；日常模式不因跨天或深度校准而凭空补入危机；`meta` 不生成叙事正文。
+5. **提交**：`python scripts/commit_turn.py --session <session> --expected-state-token <state_token> --patch '<json>'`；自定义或旧路径用 `--state <state_path>`。token 在文件锁内对原始字节校验，过期即拒绝，须重读切片后重新判断 patch，不能直接换 token 重放。提交器负责校验与硬升级：换场、参与者变化、事件/边界变化、NPC 自主动作、跨天、定期校准等即使请求 `fast` 也升级为 `deep`。压力模式首次跨天且 `simulation` 为 true 时，按 `references/世界运转.md` 运行转折流程。
+6. **输出**：成功后更新绑定 token，使用最终 `turn_mode`、新活切片及 `event_changes` 的终态与 `outcome` 写正文，包括本拍到期、解决和取消的结果；失败不输出成功回执。`fast` 只写当前动作和必要反应，`deep` 才追算已有的长期压力、离屏事件和完整校准；日常模式不凭空补入危机；`meta` 不生成叙事正文。
 
 禁止普通回合：读取整份 `state.yaml`；读取领域文档；用 `write` 覆盖存档；为深度校准重审角色卡。
 
@@ -168,7 +175,7 @@ python scripts/build_opening.py --complete --opening-mode daily [--seed N] [--lo
 - 局势：`natural_next_pressure`、`situation_update`、`last_committed_result`、`unresolved_action`
 - 人物：`player_updates`；`npc_updates.<id>`（`emotion`/`location`/`memory`/`knowledge_add`/`active_voice_mode`/`autonomy_now`）
 - 关系：`relationship_delta`——单边 dict 或多边列表，子键 `source`/`target`/`trust`/`trust_set`/`type`/`channel`；场上不止一名 NPC 必须写明端点；`trust` 始终是增量，`trust_set` 才是直接设定，均夹到 [-5,5]
-- 事件：`events_add`、`events_resolve`、`events_cancel`（未知 ID 会报错）、`events_update`（改 trigger/due_at/consequence/probability/hook，或 `checked_turn_add: true` 记手动未命中；`roll: true` 请求脚本执行概率抽取；id/semantic_key/kind/source/created_turn 不可改）、`resolve_outcome`
+- 事件：`events_add`、`events_resolve`、`events_cancel`（未知 ID 会报错）、`events_update`（改 trigger/due_at/consequence/probability/hook，或 `checked_turn_add: true` 记手动未命中；`roll: true` 请求脚本执行概率抽取；id/semantic_key/kind/source/created_turn 不可改）、`resolve_outcome`、`cancel_outcome`
 - 边界：`boundaries_add`、`boundaries_revoke`
 - 角色：`npcs_add`（整卡进入，须过校验含成年年龄）
 - 元开关：`retcon_add`、`safety_state`、`simulation`、`voyeur_pov`（`on`|`off`）、`advance_turn`、`force_full`、`twist_generate`。元指令示例：`{"advance_turn": false, "safety_state": "paused"}`
@@ -177,7 +184,7 @@ python scripts/build_opening.py --complete --opening-mode daily [--seed N] [--lo
 
 **回合速度分层**：模型只提交最小 patch，并自行判断当前叙事是否需要 `fast` 或 `deep`。同场景、同参与者、无事件/边界/角色结构变化、无 NPC 自主动作且时间跨度较小时，优先 `fast`；换场、参与者变化、事件或边界变化、NPC 自主动作、跨天、长时间快进或周期校准时，优先 `deep`。脚本返回的最终模式和强制升级原因优先于模型请求；模型可以响应玩家要求写长，但不能用 `fast` 绕过脚本强制升级。
 
-**压缩**：只压缩已解决历史——已解决事件先折成一条 `resolved_summary` 条目才可移出队列；不得删除 active 边界、冷却、pending/cancelled 中仍被引用的事件、跨回合承诺、远程钩子或最近一次完整 checkpoint。旧 `directives` 折进摘要。
+**压缩**：只压缩展示和不再影响决策的旧记忆。`resolved` / `cancelled` 终态事件始终保留在存档 `events` 中，`resolved_summary` 记录结果但不授权物理归档或删除。普通切片保留 pending 上限，刚变化的终态以回执呈现；需查某事件时用 `python scripts/live_slice.py --session <session> --event <ID>`，无需整档读取。不得删除 active 边界、冷却、跨回合承诺、远程钩子或最近一次完整 checkpoint。
 
 ## 输出规范
 
@@ -251,6 +258,6 @@ python scripts/build_opening.py --complete --opening-mode daily [--seed N] [--lo
 - 字段缺失：暂停推进，补字段后继续。
 - 边界含混：选择不升级亲密内容，不自行猜测许可。
 - 指令未兑现或冲突：按「玩家叙事主权」配套规则修复因果桥、兑现或建立事件队列承诺；不得以其他剧情冲突拒绝执行。不得把未同意写成已发生的对方性动作。
-- 状态冲突：以最近一次已提交记录为准，并在后台修复引用。
+- 状态冲突：保留未提交 patch，重新读取所绑定会话的活切片与 token，再判断是否重做或另存；不得猜测全局工作档、自动合并或强行覆盖。
 - 事件重复：按稳定事件 ID 与 `semantic_key` 去重；保留原 `source`、`due_at`，不得换 ID 重建。
 - 存档版本旧或缺失：按 `references/状态总结.md`「载入流程」停止载入并逐项报告错误，不自动迁移、不猜测字段。`turn: 0` 的旧档可载入，按回合 1 接续并告知玩家。

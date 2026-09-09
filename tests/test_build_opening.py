@@ -214,7 +214,7 @@ class BuildOpeningTests(unittest.TestCase):
             working = Path(tmp) / "current.yaml"
             code = BUILD.main([
                 "--complete", "--opening-mode", "pressure", "--seed", "7", "--out", str(out),
-                "--working", str(working),
+                "--working", str(working), "--framework", "legacy",
             ])
             self.assertEqual(0, code)
             self.assertTrue(out.exists())
@@ -231,7 +231,7 @@ class BuildOpeningTests(unittest.TestCase):
             with mock.patch.dict("os.environ", {"ADULT_TENSION_HISTORY_PATH": str(history)}):
                 code = BUILD.main([
                     "--complete", "--opening-mode", "pressure", "--seed", "8", "--out", str(out),
-                    "--working", str(working), "--request", str(request),
+                    "--working", str(working), "--request", str(request), "--framework", "legacy",
                 ])
             self.assertEqual(0, code)
             request_data = BUILD.load_yaml_module().safe_load(request.read_text(encoding="utf-8"))
@@ -260,7 +260,7 @@ class BuildOpeningTests(unittest.TestCase):
             working = Path(tmp) / "current.yaml"
             code = BUILD.main([
                 "--complete", "--opening-mode", "pressure", "--seed", "5", "--lock", "时代=明治东京",
-                "--out", str(out), "--working", str(working),
+                "--out", str(out), "--working", str(working), "--framework", "legacy",
             ])
             self.assertEqual(0, code)
             data = BUILD.load_yaml_module().safe_load(out.read_text(encoding="utf-8"))
@@ -298,7 +298,7 @@ class BuildOpeningTests(unittest.TestCase):
             with mock.patch.object(BUILD, "load_fill_opening", loader_without_era_pools):
                 code = BUILD.main([
                     "--complete", "--opening-mode", "pressure", "--seed", "5", "--lock", "时代=当代都市",
-                    "--out", str(out), "--working", str(working),
+                    "--out", str(out), "--working", str(working), "--framework", "legacy",
                 ])
             self.assertEqual(0, code)
             data = BUILD.load_yaml_module().safe_load(out.read_text(encoding="utf-8"))

@@ -1,0 +1,106 @@
+framework_id: "mat-5c23e7b8931d5da7aa19503d079f35a9"
+name: "昭和街角喫茶巡礼"
+mode: "pressure"
+source_hash: "48987facd082a63068a56e55b4f60ecc261c83a4f845e3a589435ff2b0e4628c"
+transcript_sha256: "f0a4a26857f7597ab0158e01c5b248638933f77f45a72d8713c49c0f05a6e529"
+reviewer: "codex-independent-semantic-review"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+lowest_scoring_turn: 1
+scores:
+  world_specificity: 2
+  character_credibility: 1
+  meaningful_choices: 0
+  consequence_continuity: 2
+  natural_expression: 1
+evidence:
+  world_specificity: "不混回待售堆"
+  character_credibility: "找到能合法领取的人"
+  meaningful_choices: "你只把那包片子又往簿子这边拢了拢"
+  consequence_continuity: "她没有替你选曲"
+  natural_expression: "长期看着，我没让你接"
+blocking_findings:
+  - "回合1代玩家移动唱片并确认处置，meaningful_choices为0。"
+  - "末回把今天告别写成明天，且收束仍主要复述未发生的事。"
+  - "回合1：代玩家选择并移动唱片包，meaningful_choices为0。"
+  - "回合3：把今天告别写成明天，时间连续性错误；本回合6分。"
+total: 6
+total_score: 6
+passed: false
+verdict: "FAIL"
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "爵士喫茶"
+      character_credibility: "转让前还没人认领"
+      meaningful_choices: "完整一面，还是只听一曲"
+      consequence_continuity: "从待售堆里挪开"
+      natural_expression: "夜风带着路面的凉"
+    reason: "手写寄存与唱片转让压力具体，NPC先隔离未认领物再邀请听歌。"
+    blocking_findings:
+      []
+    total: 10
+    passed: true
+  -
+    turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 0
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "不混回待售堆"
+      character_credibility: "找到能合法领取的人"
+      meaningful_choices: "你只把那包片子又往簿子这边拢了拢"
+      consequence_continuity: "她没有替你选曲"
+      natural_expression: "长期看着，我没让你接"
+    reason: "直接替玩家移动寄存片；动机近于代管手续复述而缺少摄影师个人反应。"
+    blocking_findings:
+      - "代玩家选择并移动唱片包，meaningful_choices为0。"
+    total: 6
+    passed: false
+  -
+    turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 1
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "封套立着"
+      character_credibility: "这两条我守"
+      meaningful_choices: "等你把那一点说完"
+      consequence_continuity: "也不再当作已经谈妥"
+      natural_expression: "谁代管、谁去问，我没派给你"
+    reason: "等玩家解释异议、不安排后续，撤回未谈妥状态合理；对白仍以守则为主。"
+    blocking_findings:
+      []
+    total: 8
+    passed: true
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 1
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: "收回封套"
+      character_credibility: "这两条她自己守着"
+      meaningful_choices: "让出通往街面的店门"
+      consequence_continuity: "你说明天到此为止"
+      natural_expression: "曲子没听。寄存的还在原处。你走就走。"
+    reason: "误把用户今天结束写成明天，同时把告别变成库存清单；退出仍被接受。"
+    blocking_findings:
+      - "把今天告别写成明天，时间连续性错误；本回合6分。"
+    total: 6
+    passed: false

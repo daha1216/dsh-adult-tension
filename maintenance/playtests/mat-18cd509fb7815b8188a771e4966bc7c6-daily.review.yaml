@@ -1,0 +1,107 @@
+framework_id: "mat-18cd509fb7815b8188a771e4966bc7c6"
+name: "王朝百业与书院"
+mode: "daily"
+source_hash: "0c69ba2a2f987e8e4dfde4a8753fc102987b646dbc96277d4cf03efb602210f5"
+transcript_sha256: "be62eea6fefe3d8ea192866dc91e36fbe4b8ce87b8e138a9053b1053e45aa9f8"
+reviewer: "codex-independent-semantic-review"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+lowest_scoring_turn: 1
+scores:
+  world_specificity: 2
+  character_credibility: 1
+  meaningful_choices: 0
+  consequence_continuity: 1
+  natural_expression: 1
+evidence:
+  world_specificity: "常借戏本"
+  character_credibility: "人从入口就能折返"
+  meaningful_choices: "你便只做眼下能做的一件：试了试凳面潮不潮"
+  consequence_continuity: "等你把这一处的判断说完"
+  natural_expression: "他点一下头"
+blocking_findings:
+  - "回合1替玩家决定并实施检查动作，meaningful_choices为0。"
+  - "凳面试查没有结果进入后续，四回合的读书路线协作没有形成有效推进。"
+  - "回合1：代玩家实施未选定的具体动作，meaningful_choices为0；检查未产生可用发现。"
+  - "回合2：本回合7分，协商未明确分歧，人物表达仍薄。"
+  - "回合3：前回试查的发现未交代；本回合6分。"
+total: 5
+total_score: 5
+passed: false
+verdict: "FAIL"
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "借阅簿"
+      character_credibility: "像核对页次那样清楚"
+      meaningful_choices: "这一段是否已够"
+      consequence_continuity: "给折返园门留出空处"
+      natural_expression: "等你开口"
+    reason: "园林护书条件明确，保留选择，NPC暂时只有职务口吻。"
+    blocking_findings:
+      []
+    total: 8
+    passed: true
+  -
+    turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 0
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: "常借戏本"
+      character_credibility: "人从入口就能折返"
+      meaningful_choices: "你便只做眼下能做的一件：试了试凳面潮不潮"
+      consequence_continuity: "等你把这一处的判断说完"
+      natural_expression: "他点一下头"
+    reason: "直接替玩家选择检查凳面与阴凉，又没有给出检查结果。"
+    blocking_findings:
+      - "代玩家实施未选定的具体动作，meaningful_choices为0；检查未产生可用发现。"
+    total: 5
+    passed: false
+  -
+    turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 1
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "石凳阴凉"
+      character_credibility: "不把下次书会的分组派给你"
+      meaningful_choices: "那就不算定"
+      consequence_continuity: "缝里潮意未干"
+      natural_expression: "要走，也不用跟我交代"
+    reason: "维持未定状态；未问异议内容就收回，连续的免责台词挤占人物反应。"
+    blocking_findings:
+      - "本回合7分，协商未明确分歧，人物表达仍薄。"
+    total: 7
+    passed: false
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 1
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: "借阅簿"
+      character_credibility: "我把簿收回去"
+      meaningful_choices: "没有再问一句够不够"
+      consequence_continuity: "长短两路也不算敲定"
+      natural_expression: "缝里潮意未干"
+    reason: "未强留，但之前凳面检查没有结果进入收尾，仍复述不算敲定。"
+    blocking_findings:
+      - "前回试查的发现未交代；本回合6分。"
+    total: 6
+    passed: false

@@ -1,8 +1,23 @@
 # 进度与基线
 
+本轮工程验证、真实模型失败及未完成项见 [实施报告](maintenance/implementation_report.md)。此处不重复维护随评分变化的响应数。
+
 ## 文档基线
 
-原先对 `SKILL.md` 四个章节设置的逐字冻结已取消。后续修改以运行时行为、文档一致性和文学质量检查为准，不再维护章节哈希。
+当前冻结范围与哈希以 `maintenance/baseline.yaml` 为唯一基线：SKILL 指定的整节必须逐字节不变，不能通过改基线或重排换行绕过。其余运行与维护文档按接口同步，不扩大修改边界。
+
+当前框架编辑源为 `authoring/frameworks/`，保留 40 个框架。日常流程为编辑 authoring → `build_frameworks.py --write` → `sync_governance.py --write` → `qa.py`；默认 auto 只使用来源哈希匹配且审查有效的框架，无隐式 legacy 回退。工作状态按唯一 session 绑定，不再依赖共享默认文件。
+
+**历史数字不可当作当前验收**：以下旧测试、体检、抽样与哈希记录仅对应当时版本，已过时，未在本轮复测。结构通过不等于语义通过，不等于 320 条实玩响应已完成；当前完成情况必须由实际 QA 输出、`maintenance/playtests/` 证据和独立评分确认。`run_playtest.py` 需显式调用并消耗模型额度，默认 QA 不会自动执行。
+
+## 本轮清理依据
+
+| 对象 | 处置与证据 |
+|---|---|
+| `references/governance_decisions.yaml` | 已删除：10 份历史 review 的来源失效或框架被用户排除；原文可查 git 和 registry history。当前审查用 `maintenance/framework_reviews/*.yaml` |
+| 用户精确排除的框架、已确认不可达模板 | 精确选择由 `maintenance/baseline.yaml` 与 `scripts/sync_governance.py` 限定；清理记录保留原 source_hash、reason、verified_direct 及实际 regression_evidence，不扩大到共享池或旧存档 |
+
+这份记录不宣称未跑的检查已经通过；结构、人工审查与真实模型实玩分别验收。
 ## 变更记录
 
 | 日期 | 变更 |

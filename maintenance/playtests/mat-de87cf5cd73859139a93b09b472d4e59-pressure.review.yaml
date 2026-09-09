@@ -1,0 +1,102 @@
+framework_id: "mat-de87cf5cd73859139a93b09b472d4e59"
+name: "赛博街区与公共终端"
+mode: "pressure"
+transcript_sha256: "1ca3fb5bfab5696075878964bd342de40b3a2ca5b9b7239a4cb460566713733d"
+reviewer: "Codex independent transcript review"
+protocol: "non-explicit-runtime-brief-v2"
+source_hash: "a60d23a41bdb465153454ecf9da185ff4c660d8326081285f91e65c85a19f6c3"
+scope: "non_explicit_narrative"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+representative_turn: 1
+scores:
+  world_specificity: 0
+  character_credibility: 1
+  meaningful_choices: 1
+  consequence_continuity: 1
+  natural_expression: 1
+evidence:
+  world_specificity: "应泽辰用测试账号把那格争议预约停在暂不发门禁码"
+  character_credibility: "局部配置，能回退"
+  meaningful_choices: "应泽辰没接灰边测试屏"
+  consequence_continuity: "公共屏上的个人字段收进不展示"
+  natural_expression: "回访不经过你"
+total: 4
+passed: false
+summary: "压力模式出现测试账号操作正式预约的0分阻断；后续把责任归楼宇没有补齐真实授权，未通过。"
+blocking_findings:
+  - "turn 1: 测试账号被写成可控制正式预约门禁和个人字段，world_specificity=0；不能用局部配置可回退替代实际权限。"
+  - "最低回合五维合计 4/10，低于8分门槛。"
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "测试与正式预约用不同颜色边框"
+      character_credibility: "我要他们各自确认"
+      meaningful_choices: "你也可以退账号，从门厅走"
+      consequence_continuity: "两条本人到场确认的正式申请叠成一格，门禁码未发"
+      natural_expression: "争议先不发码，前台可以分别接待"
+    reason: "开局把误合并、隐私与接待分工对应起来；规则集中进一句对白，自然度扣1。"
+    blocking_findings: []
+    total: 9
+    passed: true
+  -
+    turn: 1
+    scores:
+      world_specificity: 0
+      character_credibility: 1
+      meaningful_choices: 1
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: "应泽辰用测试账号把那格争议预约停在暂不发门禁码"
+      character_credibility: "局部配置，能回退"
+      meaningful_choices: "应泽辰没接灰边测试屏"
+      consequence_continuity: "公共屏上的个人字段收进不展示"
+      natural_expression: "回访不经过你"
+    reason: "隔离测试账号直接作用于正式争议预约与公共字段，违反测试和生产权限边界；还替玩家完成未指定的敏感操作，结果没有可信授权链。"
+    blocking_findings:
+      - "测试账号被写成可控制正式预约门禁和个人字段，world_specificity=0；不能用局部配置可回退替代实际权限。"
+    total: 4
+    passed: false
+  -
+    turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 2
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: "灰边测试框还亮着"
+      character_credibility: "楼宇已经在做，不是你的活"
+      meaningful_choices: "模拟约讨论你可以不做"
+      consequence_continuity: "确认公共屏个人字段仍未展示"
+      natural_expression: "协商只动路径，不把义务挪到你身上"
+    reason: "保留不继续模拟的权利，但把上一回合由玩家测试账号造成的正式操作改称楼宇已经在做，未解释授权或接手过程。"
+    blocking_findings: []
+    total: 7
+    passed: false
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 2
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: "争议那格仍暂不发门禁码，个人字段不展示"
+      character_credibility: "这些已经落在楼宇这边，不跟你走"
+      meaningful_choices: "模拟申请你没交，也不用再交"
+      consequence_continuity: "灰边测试框还亮着登出"
+      natural_expression: "不把你算进后续"
+    reason: "退出明确且模拟未提交，但正式状态的越权来源未修复，机构接手仍只靠口头改称。"
+    blocking_findings: []
+    total: 7
+    passed: false

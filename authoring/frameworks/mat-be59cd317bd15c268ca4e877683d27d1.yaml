@@ -1,0 +1,206 @@
+id: "mat-be59cd317bd15c268ca4e877683d27d1"
+name: "王都工坊与委托街"
+material:
+  eras:
+    - "异世界王都"
+  aesthetics:
+    - "异世界冒险纪实"
+    - "奇幻迷宫慢生活"
+  rule: "王都的冒险、工坊与普通职业同属行会网络，委托既有报酬也有明确边界。"
+  social_rule: "等级不能代替授权，未经同意不把旁人写入委托。"
+  places:
+    领主石堡:
+      details:
+        - "石堡外院展厅摆着借来的日用法器"
+        - "贵族席位在绳栏后，平民来客沿敞廊排队"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "从外院敞廊经访客门离堡"
+        witnesses:
+          - "展厅司事"
+        affordances:
+          - "摆设日用法器展台"
+          - "比较站姿与坐姿的展示高度"
+        pressure_modifiers:
+          - "展品借用条件"
+          - "来客通道宽度"
+    魔法工坊地下室:
+      details:
+        - "石阶下的试灯墙分暖白两块底色"
+        - "晶芯匣与断能钳放在工匠一侧"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "沿照明石阶回工坊店面"
+        witnesses:
+          - "负责检验的工匠"
+        affordances:
+          - "试验照明法器"
+          - "更换获准试用的晶芯"
+        pressure_modifiers:
+          - "晶芯剩余量"
+          - "检验架预约时段"
+    迷宫中层安全屋:
+      details:
+        - "王都行会徽记挂在守备商路终点的安全屋门边"
+        - "配给架按徒步天数分包，门内设有回王都的路签"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "走向驻点客堂；返城须等已确认的护送时段"
+        witnesses:
+          - "驻点补给员"
+        affordances:
+          - "试配一日返程包"
+          - "衡量食水与法器负重"
+        pressure_modifiers:
+          - "护送出发时刻"
+          - "队员实际背负能力"
+  pairs:
+    -
+      family: "商业与产业"
+      position: "同侪"
+      appellations:
+        - "先生"
+      npc:
+        role: "行会委托书吏"
+        function: "把工期、交付件和验收条件写成双方能履行的单据"
+        authority: "可受理变更和暂缓争议结算，不能替委托人加价"
+        resource: "原单副本、交付排期和驻点补给价目"
+        limitation: "不懂晶芯内部结构，也无权授予冒险等级"
+        obligation: "让新增需求单独确认，不把演示算进免费交付"
+        exposure: "错写条款会造成工匠白做工或委托人多付钱"
+      player:
+        identity: "魔法器具修理师"
+        baseline: "你修的是居民每日要用的灯，愿听书吏转述的实际抱怨。"
+        resources:
+          - "检修工具"
+          - "两枚自备测试晶芯"
+        reputation: "敢把法器的短处当面说明"
+      relationship_reason: "书吏曾替修理师分清石堡展示与交付的不同工时，两人于是共同布置普通人也能试看的展台。"
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "师傅"
+      npc:
+        role: "魔法器具修理师"
+        function: "检修晶芯接点并测试照明时间"
+        authority: "可拒绝交付不稳定法器，能安排本人的试灯顺序"
+        resource: "试灯墙、可替换晶芯与断能钳"
+        limitation: "不能改变行会报酬或承诺晶芯永不耗尽"
+        obligation: "标出连续照明上限，交还可维护的器具"
+        exposure: "错误续航会让驻点夜行者提前耗尽照明"
+      player:
+        identity: "行会委托书吏"
+        baseline: "你能解释一份单据意味着多少工时，愿意亲自背一次样包验证纸上假设。"
+        resources:
+          - "委托原单副本"
+          - "驻点补给分量表"
+        reputation: "不把一句顺便写成无限义务"
+      relationship_reason: "修理师请书吏来试灯，因为上次写在委托中的亮度词句与实际观感不一致。"
+  activities:
+    摆设日用法器展台:
+      places:
+        - "领主石堡"
+      pairs:
+        - 0
+      category: "空间与退出"
+      action: "{npc}推来空展架，请你选能让坐着的人也看清灯芯的位置。"
+      beats:
+        trigger: "{npc}推来空展架，请你选能让坐着的人也看清灯芯的位置。"
+        objective: "把日用法器展台布成可观看也可绕开的通道"
+        choice: "可一起摆架试走；可只指出一处遮挡，或在敞廊等候不入展厅"
+        immediate: "展架位置改变后，来客无需挤过贵族席前才能观看"
+        near: "展厅司事确认后沿用动线，参与者不承担整场接待"
+    试验照明法器:
+      places:
+        - "魔法工坊地下室"
+      pairs:
+        - 1
+      category: "调查与核验"
+      action: "{npc}接上已检修的小灯，请你比较两块试灯墙上的可辨细节。"
+      beats:
+        trigger: "{npc}接上已检修的小灯，请你比较两块试灯墙上的可辨细节。"
+        objective: "确定读字亮度与一枚晶芯的实际续航"
+        choice: "可读一页小字并计时；可只选光色，或不参与测试等工匠给结论"
+        immediate: "选亮光会更快耗芯，柔光留住续航但小字难辨"
+        near: "委托人据实选择取舍，未选方案保留为下一次调试而非判输赢"
+    试配一日返程包:
+      places:
+        - "迷宫中层安全屋"
+      pairs:
+        - 0
+      category: "照护与修复"
+      action: "{npc}把守备商路一日所需的食水和备用灯芯摆到空背包旁。"
+      beats:
+        trigger: "{npc}把守备商路一日所需的食水和备用灯芯摆到空背包旁。"
+        objective: "配出队员背得动的返程包"
+        choice: "可试背后调整；可只带自己的饮水，或留驻点休息不返城"
+        immediate: "多带备用芯会挤占食水空间，重物改位会减轻一侧肩压"
+        near: "上路由护送安排另行确认，今天试包不等于报名出发"
+  customs:
+    - "完成委托的人可以在留言板写一条给后来者的经验。"
+  pressures:
+    委托验收条件改变:
+      source: "石堡司事要求已约定的静态展台增加整夜动态演示。"
+      engines:
+        - "债务压力"
+        - "第三方施压"
+      beats:
+        trigger: "{npc}发现石堡司事要求已约定的静态展台增加整夜动态演示。"
+        objective: "区分已经付费的布展与新增耗芯、值守工时"
+        choice: "交付原展台；或由司事确认额外报酬后另排演示"
+        immediate: "不加演仍可完成原展台，新增部分暂不启用法器"
+        near: "书吏协调已付工钱，修理师无需以私人休息填补值守"
+      far_trigger: "结算日司事仍以未加演为由扣住原单尾款"
+      far_consequence: "工坊缺钱购芯并会缩减石堡后续接单；按原单结算则可继续普通委托"
+      bindings:
+        -
+          activity: "摆设日用法器展台"
+          place: "领主石堡"
+          pair: 0
+      exits:
+        - "完成原单后收回未借出的演示器具离堡"
+        - "将争议尾款交行会调解，暂停后续新单"
+    工坊共享设备撞期:
+      source: "另一组工匠也持有同一时段的试灯架预约。"
+      engines:
+        - "资源锁定"
+        - "时限逼近"
+      beats:
+        trigger: "{npc}发现另一组工匠也持有同一时段的试灯架预约。"
+        objective: "保留完整测试时长，不用缩短测程假报续航"
+        choice: "与另一组互换时段；或今天只做外观检视，把续航送邻坊测试"
+        immediate: "本轮只留下真正完成的测试项，未测续航不能写成通过"
+        near: "换时段会推迟交灯，邻坊测试则多付一笔工费"
+      far_trigger: "下一轮驻点补给车离城前仍无续航结果"
+      far_consequence: "这批灯留工坊，驻点改领已验旧灯，工坊承担额外周转而非逼人用未验品"
+      bindings:
+        -
+          activity: "试验照明法器"
+          place: "魔法工坊地下室"
+          pair: 1
+      exits:
+        - "退还当次测试预约并另约"
+        - "终止本轮新灯交付，按原委托约定处理退件"
+  legacy_sources:
+    eras:
+      - "异世界王都"
+    aesthetics:
+      - "异世界冒险纪实"
+      - "奇幻迷宫慢生活"
+    places:
+      - "领主石堡"
+      - "魔法工坊地下室"
+      - "迷宫中层安全屋"
+  themes:
+    - "法器手艺与委托边界"
+    - "贵族展示和普通使用的差异"
+    - "王都工坊对迷宫补给的责任"
+  technology_boundary: "照明法器依赖可更换晶芯和工匠检验，无法凭意愿无限供能；委托使用纸单和行会传递。迷宫中层安全屋是王都行会驻点，往返需沿已守备商路行走一日，不与石堡或地下室无时差切场。"
+  bridge_status: "not_required"

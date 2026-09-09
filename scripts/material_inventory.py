@@ -80,6 +80,12 @@ def build_inventory(data_dir=DATA, index_path=INDEX):
                 "layers": [], "declared_modes": [], "compatibility_metadata": False,
             }
     errors = []
+    if Path(data_dir).resolve() == DATA.resolve():
+        import sys
+        if str(ROOT / "scripts") not in sys.path:
+            sys.path.insert(0, str(ROOT / "scripts"))
+        from data_contract import validate_files
+        errors.extend(validate_files(data_dir))
     groups = list(index["layers"].items()) + [("compatibility", {"sources": index.get("compatibility", [])})]
     for layer, group in groups:
         for source in group["sources"]:

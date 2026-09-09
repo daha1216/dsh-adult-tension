@@ -15,8 +15,10 @@
 
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import os
+import re
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -44,7 +46,7 @@ class FileLock:
     def __enter__(self) -> "FileLock":
         self.path.parent.mkdir(parents=True, exist_ok=True)
         try:
-            self.handle = self.path.open("w+b")
+            self.handle = self.path.open("a+b")
             self.handle.seek(0)
             if os.name == "nt":
                 import msvcrt
@@ -94,13 +96,42 @@ def load_yaml_module() -> Any:
     return yaml
 
 
-def load_yaml_file(path: Path) -> Any:
+def load_yaml_bytes(snapshot: bytes, source: Any = "<bytes>") -> Any:
+    """Parse one byte snapshot, rejecting duplicate keys at every depth."""
     if yaml is None:
         raise CommonError("PyYAML is required; run: python -m pip install PyYAML")
+
+    class StrictLoader(yaml.SafeLoader):
+        def construct_mapping(self, node: Any, deep: bool = False) -> Any:
+            if not isinstance(node, yaml.MappingNode):
+                return super().construct_mapping(node, deep=deep)
+            self.flatten_mapping(node)
+            seen = set()
+            for key_node, _ in node.value:
+                key = self.construct_object(key_node, deep=deep)
+                try:
+                    duplicate = key in seen
+                    seen.add(key)
+                except TypeError as exc:
+                    raise yaml.constructor.ConstructorError(
+                        None, None, "unhashable mapping key", key_node.start_mark) from exc
+                if duplicate:
+                    raise yaml.constructor.ConstructorError(
+                        None, None, f"duplicate key: {key!r}", key_node.start_mark)
+            return super().construct_mapping(node, deep=deep)
+
     try:
-        return yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        return yaml.load(snapshot.decode("utf-8"), Loader=StrictLoader)
+    except (UnicodeError, yaml.YAMLError) as exc:
+        raise CommonError(f"cannot read YAML {source}: {exc}") from exc
+
+
+def load_yaml_file(path: Path) -> Any:
+    try:
+        snapshot = path.read_bytes()
+    except OSError as exc:
         raise CommonError(f"cannot read YAML {path}: {exc}") from exc
+    return load_yaml_bytes(snapshot, path)
 
 
 def load_data_yaml(name: str) -> Any:
@@ -122,12 +153,17 @@ def yaml_text(data: Any) -> str:
 
 def write_atomic(path: Path, text: str) -> None:
     """同目录临时文件 + fsync + os.replace 的原子写入。"""
+    write_atomic_bytes(path, text.encode("utf-8"))
+
+
+def write_atomic_bytes(path: Path, snapshot: bytes) -> None:
+    """Write exact bytes, including when restoring a prior state/manifest pair."""
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
     temp_path = Path(temp_name)
     try:
-        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as handle:
-            handle.write(text)
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(snapshot)
             handle.flush()
             os.fsync(handle.fileno())
         os.replace(temp_path, path)
@@ -141,3 +177,25 @@ def write_atomic(path: Path, text: str) -> None:
 def lock_path(path: Path) -> Path:
     """Return the sibling lock path used for read-modify-write operations."""
     return path.with_name(f".{path.name}.write.lock")
+
+
+def session_state_path(root: Path, session: str) -> Path:
+    """Resolve a portable, explicit session ID without permitting path traversal."""
+    if (not isinstance(session, str)
+            or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,79}", session)
+            or session.upper() in {"CON", "PRN", "AUX", "NUL"}
+            or re.fullmatch(r"(?:COM|LPT)[1-9]", session.upper())):
+        raise CommonError("invalid session ID: use 1-80 letters, digits, underscores or hyphens")
+    sessions = (root / "sessions").resolve()
+    path = (sessions / session / "state.yaml").resolve()
+    if path.parent.parent != sessions:
+        raise CommonError("session path escapes sessions directory")
+    return path
+
+
+def state_binding(path: Path, snapshot: bytes, root: Path | None = None) -> dict[str, Any]:
+    path = path.resolve()
+    sessions = ((root or ROOT / "saves") / "sessions").resolve()
+    session = path.parent.name if path.name == "state.yaml" and path.parent.parent == sessions else None
+    return {"session": session, "state_path": str(path),
+            "state_token": hashlib.sha256(snapshot).hexdigest()}

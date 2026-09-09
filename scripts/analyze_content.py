@@ -16,8 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "scripts" / "data"
 
 def load_yaml(path: Path) -> Any:
-    import yaml
-    return yaml.safe_load(path.read_text(encoding="utf-8"))
+    from material_inventory import read_yaml
+    return read_yaml(path)
 
 def load_roll():
     spec = importlib.util.spec_from_file_location("roll_opening_analysis", ROOT / "scripts" / "roll_opening.py")
@@ -41,6 +41,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--samples", type=int, default=1000)
     parser.add_argument("--format", choices=("text", "json"), default="text")
+    parser.add_argument("--framework", default="auto", help="Default reviewed pool; use legacy for the independent old-pool distribution")
+    parser.add_argument("--opening-mode", choices=("daily", "pressure"), default="pressure")
     args = parser.parse_args(argv)
     if args.samples < 0:
         parser.error("--samples must be non-negative")
@@ -57,9 +59,9 @@ def main(argv: list[str] | None = None) -> int:
     report["weights"] = {name: {"weight": weight, "share": round(weight / total, 4) if total else 0} for name, weight in sorted(weights.items(), key=lambda item: -item[1])}
     report["location_coverage"] = {"families": len(pools["时代与地点"]["地点"]), "variants": len(getattr(roll, "_raw_pools_once")().get("时代与地点", {}).get("地点", []))}
     if args.samples:
-        counters = {key: collections.Counter() for key in ("地点", "身份族", "处境", "场景动作")}
+        counters = {key: collections.Counter() for key in ("世界框架", "地点", "身份族", "处境", "场景动作")}
         for seed in range(args.samples):
-            item = roll.build_roll(pools, seed, recent={})
+            item = roll.build_roll(pools, seed, recent={}, framework=args.framework, opening_mode=args.opening_mode)
             for key, counter in counters.items():
                 counter[item.get(key)] += 1
         report["simulation"] = {key: {value: count for value, count in counter.most_common()} for key, counter in counters.items()}
@@ -68,6 +70,7 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(report, ensure_ascii=False, indent=2))
         return 0
     print("素材库分析报告")
+    print(f"抽样范围：framework={args.framework}, opening_mode={args.opening_mode}, samples={args.samples}")
     for name, info in report["files"].items():
         print(f"- {name}: {info['total_strings']} 条字符串，{info['unique_strings']} 个唯一值，{info['duplicate_value_count']} 个重复值")
     print("身份族权重：")

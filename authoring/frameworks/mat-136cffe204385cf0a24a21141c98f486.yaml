@@ -1,0 +1,225 @@
+"id": "mat-136cffe204385cf0a24a21141c98f486"
+"name": "海岸渡船与观测旅行"
+"material":
+  "eras":
+    - "远途休假季"
+  "aesthetics":
+    - "暖色生活流"
+    - "写实文学"
+  "rule": "旅人沿海岸与观测点停留，船期是计划依据，不必成为每次相遇的危机。"
+  "social_rule": "乘船与观测遵从实际开放安排，同行人各自决定是否继续行程。"
+  "places":
+    "夜航渡轮":
+      "details":
+        - "甲板挡风玻璃映着岸灯与航迹·夜"
+      "profile":
+        "privacy": "low"
+        "visibility": "high"
+        "exits":
+          - "可回客舱停止交谈；离船仅在靠港后走客梯"
+        "witnesses":
+          - "值班水手与旅客"
+        "affordances":
+          - "记录港湾夜景"
+        "pressure_modifiers":
+          - "甲板风力和靠港时间"
+    "灯塔值守屋":
+      "details":
+        - "预约参观桌上放着褪色灯塔照片·午"
+      "profile":
+        "privacy": "medium"
+        "visibility": "medium"
+        "exits":
+          - "沿参观走廊回到塔外步道，不进值守设备间"
+        "witnesses":
+          - "灯塔讲解员"
+        "affordances":
+          - "整理公开灯塔照片"
+        "pressure_modifiers":
+          - "预约结束时间与照片保存状况"
+    "私人游艇":
+      "details":
+        - "停泊游艇的侧甲板留着一条未铺垫的通道·午"
+      "profile":
+        "privacy": "medium"
+        "visibility": "medium"
+        "exits":
+          - "经船主开放的舷梯回码头"
+        "witnesses":
+          - "船主或受托看船人"
+        "affordances":
+          - "试走停泊参观路线"
+        "pressure_modifiers":
+          - "潮位与舷梯坡度"
+    "山顶观星台":
+      "details":
+        - "红光灯旁的望远镜遮罩挂着露珠·夜"
+      "profile":
+        "privacy": "low"
+        "visibility": "medium"
+        "exits":
+          - "沿标识山径回接驳停车点"
+        "witnesses":
+          - "观测志愿者"
+        "affordances":
+          - "标记夜空方位"
+        "pressure_modifiers":
+          - "云量、暗适应与末班接驳时间"
+  "pairs":
+    -
+      "family": "服务与手艺"
+      "position": "同侪"
+      "appellations":
+        - "直呼其名"
+      "npc":
+        "role": "海岸徒步领队"
+        "function": "带预约小队辨认近岸路径与接驳点"
+        "authority": "能缩短自己带队的步行段，不能调整船期"
+        "resource": "实走坡度表、潮汐公告与接驳联系人"
+        "limitation": "不会驾驶客船，也不能保证观星成功"
+        "obligation": "在分路前说明最后接驳点"
+        "exposure": "走得过快会让队员错过休息"
+        "hidden": "—"
+      "player":
+        "identity": "自然景观摄影师"
+        "baseline": "你拍的转弯地标替他补齐一条难认的路，他邀请你慢走重拍"
+        "resources":
+          - "长焦镜头、旧照片拷贝与星图"
+        "reputation": "构图耐心但会明确返程时间"
+      "relationship_reason": "你拍的转弯地标替他补齐一条难认的路，他邀请你慢走重拍"
+    -
+      "family": "艺术与传播"
+      "position": "同侪"
+      "appellations":
+        - "直呼其名"
+      "npc":
+        "role": "自然景观摄影师"
+        "function": "比较海岸旧照并指导基础观测构图"
+        "authority": "可决定自己作品的使用与设备出借"
+        "resource": "长焦镜头、旧照片拷贝与星图"
+        "limitation": "不是灯塔值守员，镜头不能穿透厚云"
+        "obligation": "还设备并如实注明拍摄条件"
+        "exposure": "过度修图会让旅伴误判实景"
+        "hidden": "—"
+      "player":
+        "identity": "海岸徒步领队"
+        "baseline": "你提供的徒步距离让她带对镜头，她答应教你认星而不赶打卡"
+        "resources":
+          - "实走坡度表、潮汐公告与接驳联系人"
+        "reputation": "熟悉接驳但不替旅伴包办去留"
+      "relationship_reason": "你提供的徒步距离让她带对镜头，她答应教你认星而不赶打卡"
+  "activities":
+    "记录港湾夜景":
+      "places":
+        - "夜航渡轮"
+      "pairs":
+        - 0
+      "category": "日常接触"
+      "action": "{npc}把靠窗的空位让给你，问要不要一起等岸灯转过船尾。"
+      "beats":
+        "trigger": "{npc}把靠窗的空位让给你，问要不要一起等岸灯转过船尾。"
+        "objective": "共享一段慢看的时间而不凑拍摄清单"
+        "choice": "一起看灯；独自回舱休息；或各选一个方向安静拍摄"
+        "immediate": "停留者找到喜欢的一段灯影，离开者不欠补拍或解释"
+        "near": "到港后可交换一张自选照片，也可各走行程"
+    "整理公开灯塔照片":
+      "places":
+        - "灯塔值守屋"
+      "pairs":
+        - 1
+      "category": "调查与核验"
+      "action": "{npc}把两张旧岸线照贴近窗口，请你比较防波堤是否已延长。"
+      "beats":
+        "trigger": "{npc}把两张旧岸线照贴近窗口，请你比较防波堤是否已延长。"
+        "objective": "辨认地貌变化与拍摄角度造成的差异"
+        "choice": "比对岸线；只参观不整理；或请讲解员指出已知改建处"
+        "immediate": "一张照片改为角度差异，另一张暂标改建待证"
+        "near": "旅行时不会按旧照片寻找已迁走的观景台"
+    "试走停泊参观路线":
+      "places":
+        - "私人游艇"
+      "pairs":
+        - 0
+      "category": "空间与退出"
+      "action": "{npc}在船主开放的侧甲板停步，请你选靠舷短线还是先回码头。"
+      "beats":
+        "trigger": "{npc}在船主开放的侧甲板停步，请你选靠舷短线还是先回码头。"
+        "objective": "按实际舷梯和通道宽度决定参观范围"
+        "choice": "走短线；不上船留码头；或站入口听船主介绍"
+        "immediate": "窄处不再安排双向同行，所有人知道返岸舷梯在哪"
+        "near": "以后的水边邀约能按各自舒适程度分组"
+    "标记夜空方位":
+      "places":
+        - "山顶观星台"
+      "pairs":
+        - 1
+      "category": "信息交换"
+      "action": "{npc}遮好白光屏幕，用手指示星图与天际线，请你找一组亮星。"
+      "beats":
+        "trigger": "{npc}遮好白光屏幕，用手指示星图与天际线，请你找一组亮星。"
+        "objective": "学会用一个可靠参照独立定向"
+        "choice": "试找亮星；不观测改下山；或在云多时只练星图方位"
+        "immediate": "玩家能复述一组方位；看不见的星群不记作观测成功"
+        "near": "下次可自己架稳观测方向，不必依赖摄影师代找"
+  "customs":
+    - "观测点的留言簿鼓励记录当时的云量，不要求每页都有清晰照片。"
+  "pressures":
+    "观测预约因天气调整":
+      "source": "场地管理者调整了观测开放时间"
+      "engines":
+        - "时限逼近"
+        - "资源锁定"
+      "beats":
+        "trigger": "{npc}收到消息：场地管理者调整了观测开放时间。"
+        "objective": "确认能否改期及各自的行程"
+        "choice": "另选室内展览，或分别继续旅程"
+        "immediate": "本时段望远镜位关闭，但山下展厅与返程接驳仍开放。"
+        "near": "摄影师愿等次日云隙，领队需决定是否增加一晚住宿，各自单独确认。"
+      "far_trigger": "改期超过一人的返程日期"
+      "far_consequence": "观测改为独自完成，未参加者不承担额外住宿费，照片日后可另寄。"
+      "exits":
+        - "取消观测预约并沿山径回接驳点"
+        - "只看室内展览，不延长住宿"
+      "bindings":
+        -
+          "activity": "标记夜空方位"
+          "place": "山顶观星台"
+          "pair": 1
+    "渡船码头临时改用":
+      "source": "船方通知本次航行改靠另一处码头，到港后的接驳随之改变"
+      "engines":
+        - "时限逼近"
+        - "资源锁定"
+      "beats":
+        "trigger": "{npc}听到船上广播，请你一起向值班船员确认新的靠港点。"
+        "objective": "确认本船靠港点与到港后的交通，不在航行中离船"
+        "choice": "查询新靠港点接驳；或靠港后各订后续班次，结束同行"
+        "immediate": "船员确认本船改靠另一港，不能在航行中离船；先核对到港接驳。"
+        "near": "长线接驳多花路费，同行者可各订后续车次，不互相留票。"
+      "far_trigger": "新靠港地最后接驳车与后续预订冲突"
+      "far_consequence": "须改签后续行程或自费留宿，原先约好的共同拍摄可能取消。"
+      "exits":
+        - "靠港后各自转乘，不再同行"
+        - "回客舱休息，将接驳查询交给船方服务台"
+      "bindings":
+        -
+          "activity": "记录港湾夜景"
+          "place": "夜航渡轮"
+          "pair": 0
+  "legacy_sources":
+    "eras":
+      - "远途休假季"
+    "aesthetics":
+      - "暖色生活流"
+      - "写实文学"
+    "places":
+      - "夜航渡轮"
+      - "灯塔值守屋"
+      - "私人游艇"
+      - "山顶观星台"
+  "themes":
+    - "旅途节奏与观测耐心"
+    - "天气限制下仍成立的共同休假"
+    - "同行不等于同一张回程票"
+  "technology_boundary": "当代民用渡轮、相机、手机船期查询和公共望远镜可用；云层不能被摄影器材消除，私人游艇只在船主同意的停泊参观时段进入，人物没有航行指挥权。"
+  "bridge_status": "not_required"

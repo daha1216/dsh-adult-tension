@@ -41,7 +41,8 @@ def audit(data_dir=DATA, index_path=INDEX):
                         errors.append(f"{frame}/{activity}: invalid pair {pair}")
                         continue
                     edges.append({"framework": frame, "place": place, "activity": activity, "pair": pair,
-                                  "daily": True, "pressure_options": list(row["pressures"]),
+                                  "daily": True, "pressure_options": [name for name, pressure in row["pressures"].items()
+                                      if {"activity": activity, "place": place, "pair": pair} in pressure.get("bindings", [])],
                                   "evidence": "declared references; not semantic certification"})
         for axis, values in row.get("legacy_sources", {}).items():
             actual = row.get(axis, {})

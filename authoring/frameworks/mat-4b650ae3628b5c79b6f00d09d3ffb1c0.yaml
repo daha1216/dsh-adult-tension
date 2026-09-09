@@ -1,0 +1,281 @@
+"id": "mat-4b650ae3628b5c79b6f00d09d3ffb1c0"
+"name": "地方行业与公共记忆"
+"material":
+  "eras":
+    - "当代都市"
+  "aesthetics":
+    - "行当正剧"
+    - "市井烟火"
+  "rule": "城市手艺与公共服务通过记录、展览和相互学习留下日常经验。"
+  "social_rule": "只记录获得许可的工作过程，不以参观名义干扰医疗或私人事务。"
+  "places":
+    "医院住院部走廊":
+      "details":
+        - "导诊箭头旁留出轮椅转弯的走廊·昼"
+      "profile":
+        "privacy": "low"
+        "visibility": "high"
+        "exits":
+          - "沿导诊通道回住院部门厅"
+        "witnesses":
+          - "导诊志愿者"
+        "affordances":
+          - "试走公共服务导览"
+        "pressure_modifiers":
+          - "探视人流与病区安静要求"
+    "宠物医院":
+      "details":
+        - "候诊区外的领养介绍桌摆着空运输箱·午"
+      "profile":
+        "privacy": "medium"
+        "visibility": "high"
+        "exits":
+          - "经接待厅正门离开，不穿诊室"
+        "witnesses":
+          - "院方领养联络人"
+        "affordances":
+          - "试讲领养日说明"
+        "pressure_modifiers":
+          - "领养活动时段与等候座位"
+    "殡仪馆":
+      "details":
+        - "行政接待室里陈列早年建筑平面图·昼"
+      "profile":
+        "privacy": "medium"
+        "visibility": "medium"
+        "exits":
+          - "行政门厅通向馆外步道，避开告别厅"
+        "witnesses":
+          - "行政接待员"
+        "affordances":
+          - "整理公共建筑沿革"
+        "pressure_modifiers":
+          - "预约时段与告别活动动线"
+    "当铺":
+      "details":
+        - "玻璃柜外的旧物展示桌垫着软毡·午"
+      "profile":
+        "privacy": "medium"
+        "visibility": "high"
+        "exits":
+          - "从营业门回街道"
+        "witnesses":
+          - "当铺柜员与物主"
+        "affordances":
+          - "给旧物试配保护衬垫"
+        "pressure_modifiers":
+          - "物主许可范围与柜台交接顺序"
+    "电竞俱乐部":
+      "details":
+        - "开放训练日的访谈角传来键盘声·午"
+      "profile":
+        "privacy": "medium"
+        "visibility": "medium"
+        "exits":
+          - "沿访客通道到前台"
+        "witnesses":
+          - "成年选手与队务"
+        "affordances":
+          - "编排公开训练访谈"
+        "pressure_modifiers":
+          - "训练间歇和可谈战术范围"
+    "livehouse":
+      "details":
+        - "空舞台前的试听位连着两只小音箱·下午"
+      "profile":
+        "privacy": "low"
+        "visibility": "high"
+        "exits":
+          - "经观众侧门到街道"
+        "witnesses":
+          - "驻场调音师"
+        "affordances":
+          - "试调街区声音展"
+        "pressure_modifiers":
+          - "音量限制与下一场排练时间"
+  "pairs":
+    -
+      "family": "艺术与传播"
+      "position": "同侪"
+      "appellations":
+        - "直呼其名"
+      "npc":
+        "role": "地方口述史采访员"
+        "function": "把职业经验转为可核实的口述材料"
+        "authority": "可删改自己的采访稿，不能代表机构解释专业决定"
+        "resource": "受访者联络、采访录音与历史照片"
+        "limitation": "不是临床人员，也不能估价典当物"
+        "obligation": "让受访者确认哪些话可引用"
+        "exposure": "断章取义会失去下一次采访机会"
+        "hidden": "—"
+      "player":
+        "identity": "公共展览策划人"
+        "baseline": "你曾把他的长访谈做成能听懂的短展线，他请你一起试走服务入口"
+        "resources":
+          - "可移动展架、试听设备和借展排期"
+        "reputation": "擅长安排观众视线，不冒充行业专家"
+      "relationship_reason": "你曾把他的长访谈做成能听懂的短展线，他请你一起试走服务入口"
+    -
+      "family": "艺术与传播"
+      "position": "同侪"
+      "appellations":
+        - "直呼其名"
+      "npc":
+        "role": "公共展览策划人"
+        "function": "安排展品观看路径与试听体验"
+        "authority": "能调整自己展览的陈列，不能改变场所服务流程"
+        "resource": "可移动展架、试听设备和借展排期"
+        "limitation": "没有物品所有权，不能开诊疗或训练指令"
+        "obligation": "按物主条件交还展品并恢复场地"
+        "exposure": "陈列损伤由自己处理赔偿"
+        "hidden": "—"
+      "player":
+        "identity": "地方口述史采访员"
+        "baseline": "你保留的工序访谈解释了旧物为何不该抛光，她邀你共同布展"
+        "resources":
+          - "受访者联络、采访录音与历史照片"
+        "reputation": "追问细节但尊重不公开的经历"
+      "relationship_reason": "你保留的工序访谈解释了旧物为何不该抛光，她邀你共同布展"
+  "activities":
+    "试走公共服务导览":
+      "places":
+        - "医院住院部走廊"
+      "pairs":
+        - 0
+      "category": "空间与退出"
+      "action": "{npc}请你站在首次来访者的位置，按现有箭头走到导诊台。"
+      "beats":
+        "trigger": "{npc}请你站在首次来访者的位置，按现有箭头走到导诊台。"
+        "objective": "找出轮椅和步行访客都会走错的一处分岔"
+        "choice": "走一段；谢绝测试到门厅等；或仅从原地检查视线"
+        "immediate": "遮挡箭头被移开，路线建议交给导诊员确认后才张贴"
+        "near": "下一位来访者少绕一段病区走廊"
+    "试讲领养日说明":
+      "places":
+        - "宠物医院"
+      "pairs":
+        - 1
+      "category": "信息交换"
+      "action": "{npc}请院方联络人在场，邀你用新来访者的口吻问一遍报名条件。"
+      "beats":
+        "trigger": "{npc}请院方联络人在场，邀你用新来访者的口吻问一遍报名条件。"
+        "objective": "让说明能回答报名而非替人承诺领养"
+        "choice": "扮演提问者；不参加试听；或请联络人直接示范"
+        "immediate": "缺的预约步骤补进讲解，健康问题转院方回答"
+        "near": "下次活动可把重复问答留给简介，院方集中处理个别咨询"
+    "整理公共建筑沿革":
+      "places":
+        - "殡仪馆"
+      "pairs":
+        - 0
+      "category": "调查与核验"
+      "action": "{npc}把行政区旧平面图与改建照片并排，请你核对一处门廊年代。"
+      "beats":
+        "trigger": "{npc}把行政区旧平面图与改建照片并排，请你核对一处门廊年代。"
+        "objective": "区分建筑史与未经许可的个人悼念故事"
+        "choice": "核对图注；拒绝参与仅预约改日参观；或只保留已知年份"
+        "immediate": "确定的改建年代进入沿革，无法证实的传闻不挂展板"
+        "near": "建筑介绍可独立成篇，不依赖逝者家庭隐私"
+    "给旧物试配保护衬垫":
+      "places":
+        - "当铺"
+      "pairs":
+        - 1
+      "category": "照护与修复"
+      "action": "{npc}经物主允许将展示盒放到软毡上，请你裁一块可取出的衬垫。"
+      "beats":
+        "trigger": "{npc}经物主允许将展示盒放到软毡上，请你裁一块可取出的衬垫。"
+        "objective": "让旧物站稳而不磨掉使用痕迹"
+        "choice": "裁垫试放；不动旧物只看；或请柜员换尺寸合适的盒子"
+        "immediate": "晃动减轻，衬垫随时可取，旧物表面不做处理"
+        "near": "借展运输少一次碰撞，物主可决定是否留用"
+    "编排公开训练访谈":
+      "places":
+        - "电竞俱乐部"
+      "pairs":
+        - 0
+      "category": "信息交换"
+      "action": "{npc}请你把成年选手讲配合的一段放在失误复盘前后各听一次。"
+      "beats":
+        "trigger": "{npc}请你把成年选手讲配合的一段放在失误复盘前后各听一次。"
+        "objective": "让观众理解团队决策而非只看输赢"
+        "choice": "比较顺序；不剪辑改听完整访谈；或请选手口述连接句"
+        "immediate": "一段带责备感的连接被换成选手自己的解释"
+        "near": "下一轮访谈可更准确地追问协作过程"
+    "试调街区声音展":
+      "places":
+        - "livehouse"
+      "pairs":
+        - 1
+      "category": "日常接触"
+      "action": "{npc}请调音师守着音量，你们坐到两个试听位各选一段街声。"
+      "beats":
+        "trigger": "{npc}请调音师守着音量，你们坐到两个试听位各选一段街声。"
+        "objective": "找到愿意停留听完的声音次序"
+        "choice": "一起试听；提前离场；或只选无解说的一轨"
+        "immediate": "两人的偏好分歧留下两个可选试听入口"
+        "near": "展览保留不同听法，不必投票定出唯一正确街区声音"
+  "customs":
+    - "采访结束后受访者可以留下一句不用于展览的修改意见。"
+  "pressures":
+    "受访者撤回一段材料":
+      "source": "受访者不愿公开先前确认的一个片段"
+      "engines":
+        - "信任透支"
+        - "名声保卫"
+      "beats":
+        "trigger": "{npc}收到消息：受访者不愿公开先前确认的一个片段。"
+        "objective": "撤下相关内容并确认新的公开范围"
+        "choice": "删除片段，或更换其他已授权材料"
+        "immediate": "待用的采访片段移出剪辑队列，受访者不需再解释撤回原因。"
+        "near": "剩余内容重排后时长变短，可缩短展线而不填入猜测。"
+      "far_trigger": "展览开幕后受访者仍在他处看见被撤回片段"
+      "far_consequence": "策展方需联系分发渠道撤下，受访者可能拒绝后续采访。"
+      "exits":
+        - "取消这段访谈展项，播放其他已确认内容"
+        - "交回全部借用原件，退出本次采访合作"
+      "bindings":
+        -
+          "activity": "编排公开训练访谈"
+          "place": "电竞俱乐部"
+          "pair": 0
+    "展品交接记录不符":
+      "source": "借来的展品数量与清单不同"
+      "engines":
+        - "资源锁定"
+        - "信任透支"
+      "beats":
+        "trigger": "{npc}收到消息：借来的展品数量与清单不同。"
+        "objective": "核对交接并联系出借人"
+        "choice": "比对照片，或先暂停布展"
+        "immediate": "数量不符的展示盒留在柜台，不先运走再补签。"
+        "near": "物主点清前只布置已确认物件，空位可保留。"
+      "far_trigger": "撤展交还时仍无法解释缺件去向"
+      "far_consequence": "借展押金与赔偿进入物主和策展人的交涉，未来外借范围缩小。"
+      "exits":
+        - "取消未点清这一盒的借展"
+        - "双方当面退回已收到物件，改用物主许可照片"
+      "bindings":
+        -
+          "activity": "给旧物试配保护衬垫"
+          "place": "当铺"
+          "pair": 1
+  "legacy_sources":
+    "eras":
+      - "当代都市"
+    "aesthetics":
+      - "行当正剧"
+      - "市井烟火"
+    "places":
+      - "医院住院部走廊"
+      - "宠物医院"
+      - "殡仪馆"
+      - "当铺"
+      - "电竞俱乐部"
+      - "livehouse"
+  "themes":
+    - "职业经验不等于可展示的故事"
+    - "旧物的使用价值与纪念价值"
+    - "公共服务里的陌生人视角"
+  "technology_boundary": "当代医院、影像设备、扩声和网络联络正常存在；记录者不是医护或兽医，不能凭访谈执行诊疗、鉴定或替出借人处分旧物。"
+  "bridge_status": "not_required"

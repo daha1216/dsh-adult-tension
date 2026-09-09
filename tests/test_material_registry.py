@@ -117,7 +117,7 @@ class MaterialRegistryTests(unittest.TestCase):
         units = MODULE.units()
         self.assertGreater(len(units), 2000)
         registry = MODULE.sync({}, units)
-        self.assertEqual(1, registry["version"])
+        self.assertEqual(2, registry["version"])
         self.assertTrue(all("status" in row and "source_hash" in row for row in registry["entries"].values()))
 
     def test_sync_preserves_conservative_default_and_framework_reviews(self) -> None:

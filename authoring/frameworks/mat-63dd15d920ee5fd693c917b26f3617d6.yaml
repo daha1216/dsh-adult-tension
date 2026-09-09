@@ -1,0 +1,218 @@
+id: "mat-63dd15d920ee5fd693c917b26f3617d6"
+name: "后方邮路与灯火"
+material:
+  eras:
+    - "战时后方"
+  aesthetics:
+    - "行当正剧"
+    - "克制冷峻"
+    - "寒冬避难所"
+  rule: "远离前线的城镇依靠邮路、修缮和轮班维持日常，消息抵达总有迟滞。"
+  social_rule: "代收信件必须登记，紧缺公共物资不能只凭私人承诺分配。"
+  places:
+    夜班值班室:
+      details:
+        - "邮袋挂在离地木架上·夜"
+        - "日期章与路签压在油灯旁·夜"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "邮站前厅通向街口"
+        witnesses:
+          - "交袋邮差"
+          - "当班邮务员"
+        affordances:
+          - "给信件补齐路签"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "邮车发袋时间"
+          - "灯油余量"
+    疗养院:
+      details:
+        - "阅览桌与安静休息椅隔着一道屏风·午后"
+        - "旧报纸整齐放在可取的矮架上·午后"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "阅览室外回廊"
+        witnesses:
+          - "值班照护人员"
+          - "愿意听报的成年住院者"
+        affordances:
+          - "整理读报时段"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "听众体力"
+          - "休息时段"
+    老字号客栈:
+      details:
+        - "前厅木柱贴着手画水井方向·清晨"
+        - "门外可见修缮围挡和绕行巷口·清晨"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "客栈大门"
+          - "前厅回廊"
+        witnesses:
+          - "客栈伙计"
+          - "取水住客"
+        affordances:
+          - "绘制暂住导览"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "取水开放时辰"
+          - "围挡位置"
+  pairs:
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "邮务整理员"
+        function: "分拣邮袋、核对地址和交接日期"
+        authority: "决定本站待发与待核对信件的分袋"
+        resource: "日期章、邮路旧门牌表与交接簿"
+        limitation: "不能拆私人信件，也不能保证前方邮程"
+        obligation: "疑信保留原封并说明迟递缘由"
+        exposure: "误投会失去收件人信任，需追回误袋"
+        hidden: "—"
+      player:
+        identity: "公共修缮队记录员"
+        baseline: "你曾用修缮图解释一条已封巷的退信原因；邮务员请你再核对暂住户能用的路。"
+        resources:
+          - "公共修缮围挡图"
+          - "走过旧街的门牌笔记"
+        reputation: "你知道哪条路在修，不假装知道收件人私事"
+      relationship_reason: "你曾用修缮图解释一条已封巷的退信原因；邮务员请你再核对暂住户能用的路。"
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "公共修缮队记录员"
+        function: "记录修缮用料并轮值公共读报"
+        authority: "向修缮队报告用料差异，安排自己认领的读报时段"
+        resource: "木料尺寸册、围挡图和当日借来的报纸"
+        limitation: "不能独自调拨公料，不承担医疗诊治"
+        obligation: "把暂住者需求带回工队，读报须让出休息时间"
+        exposure: "误报尺寸会浪费木料，读报过长会影响休息"
+        hidden: "—"
+      player:
+        identity: "邮务整理员"
+        baseline: "你们在疗养院漏雨时合作递送过修缮信；如今约在不当班时给住院者读地方消息。"
+        resources:
+          - "本站的可用投递路线"
+          - "愿意额外带到疗养院的报纸"
+        reputation: "你递信及时，也能说清自己何时要回邮站"
+      relationship_reason: "你们在疗养院漏雨时合作递送过修缮信；如今约在不当班时给住院者读地方消息。"
+  activities:
+    给信件补齐路签:
+      places:
+        - "夜班值班室"
+      pairs:
+        - 0
+      category: "调查与核验"
+      action: "{npc}把退信按街名分开，拿出邮戳和路签请你认一处旧门牌。"
+      beats:
+        trigger: "{npc}把退信按街名分开，拿出邮戳和路签请你认一处旧门牌。"
+        objective: "区分可补路签与须退回确认的信"
+        choice: "核对一条地址，或只按邮戳分袋；无法辨认就留待原寄件人确认"
+        immediate: "能确认的信进入下一趟邮袋，仍模糊的单独保留，信封不被拆开。"
+        near: "收件人可按约到邮站领取；猜不准的信不因赶路被投给同名住户。"
+    整理读报时段:
+      places:
+        - "疗养院"
+      pairs:
+        - 1
+      category: "照护与修复"
+      action: "{npc}把报纸放在疗养院阅览桌，先问要听一段地方消息还是安静坐会儿。"
+      beats:
+        trigger: "{npc}把报纸放在疗养院阅览桌，先问要听一段地方消息还是安静坐会儿。"
+        objective: "安排不挤占休息的陪伴"
+        choice: "读一小段，或替听众移近座椅；不想听便保留安静桌"
+        immediate: "有人听一段后休息，有人继续翻报，音量和座位随实际需要调整。"
+        near: "只约愿意参加者的下次读报，不把住院者列成必须出席的名单。"
+    绘制暂住导览:
+      places:
+        - "老字号客栈"
+      pairs:
+        - 0
+      category: "空间与退出"
+      action: "{npc}在客栈门口展开简图，邀你走到最近取水点再回来核对。"
+      beats:
+        trigger: "{npc}在客栈门口展开简图，邀你走到最近取水点再回来核对。"
+        objective: "让新来住客能找到水源、邮站和回客栈的路"
+        choice: "走一个短段，或在前厅询问伙计；不愿出门就保留待查标记"
+        immediate: "一条绕开修缮围挡的短路被确认，旅客可按体力选择是否同行。"
+        near: "店家用这条路线接待住客，封路时只重查受影响的一段，不要求参与者常驻带路。"
+  customs:
+    - "收到远信的人可以自愿将信封邮戳借给邮站补画路线。"
+  pressures:
+    邮袋交接缺页:
+      source: "一段交接记录缺失导致多封信无法确认去向"
+      engines:
+        - "旧事追索"
+        - "信任透支"
+      beats:
+        trigger: "{npc}收到消息：一段交接记录缺失导致多封信无法确认去向。"
+        objective: "重建交接经过并通知收件人"
+        choice: "询问交接人员，或核对驿站日期章"
+        immediate: "相关邮袋暂不再转寄，等信的人先得到可到站查询的时间。"
+        near: "沿日期章找回上一交接点，只给收件人说明各自信件去向，不公开全袋名单。"
+      far_trigger: "下一趟邮车完成相同线路时"
+      far_consequence: "补回交接点可恢复发袋；仍缺一段的袋件改由两站当面验袋，速度变慢但去向可查。"
+      exits:
+        - "交出自己见过的邮戳信息即离开"
+        - "把查询交回邮站当班人，拒绝继续跨站追查"
+      bindings:
+        -
+          activity: "给信件补齐路签"
+          place: "夜班值班室"
+          pair: 0
+    维修材料不足:
+      source: "公共屋顶修缮与邮站修缮需要同一批木料"
+      engines:
+        - "资源锁定"
+        - "伤病互护"
+      beats:
+        trigger: "{npc}收到消息：公共屋顶修缮与邮站修缮需要同一批木料。"
+        objective: "比较受影响范围并安排分批修缮"
+        choice: "先量两处实际缺口，或请工队判断哪些旧料能复用"
+        immediate: "邮站与疗养院都先遮护漏点，同一批木料尚不切割，避免争抢后两边都不够。"
+        near: "记录员量过尺寸后提出分段补屋面，邮务员只说明邮件受潮范围，调料由工队负责。"
+      far_trigger: "雨季第一轮修缮验收时"
+      far_consequence: "优先补妥的屋面恢复日常，另一处仍需临时遮护与后续料额，不能把本次让料当永久放弃。"
+      exits:
+        - "提交尺寸和受影响人数后交给工队"
+        - "不参与调料，改在干燥阅览区继续已认领的读报"
+      bindings:
+        -
+          activity: "整理读报时段"
+          place: "疗养院"
+          pair: 1
+        -
+          activity: "绘制暂住导览"
+          place: "老字号客栈"
+          pair: 0
+  legacy_sources:
+    eras:
+      - "战时后方"
+    aesthetics:
+      - "行当正剧"
+      - "克制冷峻"
+      - "寒冬避难所"
+    places:
+      - "夜班值班室"
+      - "疗养院"
+      - "老字号客栈"
+  themes:
+    - "战时迟到的家信"
+    - "公共屋檐下的有限照应"
+    - "邮路和修缮的相互依存"
+  technology_boundary: "后方使用纸质邮袋、日期章、纸地图、油灯及有限有线联络；信件须经实体转运，不使用实时定位、数字广播或即时物资调度。"
+  bridge_status: "not_required"

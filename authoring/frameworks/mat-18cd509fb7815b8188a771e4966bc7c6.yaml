@@ -1,0 +1,317 @@
+id: "mat-18cd509fb7815b8188a771e4966bc7c6"
+name: "王朝百业与书院"
+material:
+  eras:
+    - "架空王朝"
+  aesthetics:
+    - "工笔华服"
+    - "水墨写意"
+  rule: "城内百业由行会与书院共同维系，手艺、学问和人情各有来路。"
+  social_rule: "行会许可只管营生，不决定私人交往。"
+  places:
+    古籍书店:
+      details:
+        - "版心残页摊在软毡上·日间"
+        - "窗边纸样匣远离茶炉·日间"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "书铺临街门"
+        witnesses:
+          - "书铺掌柜"
+        affordances:
+          - "辨认残卷版式"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "纸张湿度"
+          - "可借版本"
+    戏楼:
+      details:
+        - "木台边留着演员退场口·午后"
+        - "油灯未点时排演的空台·午后"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "台侧通道至前院"
+        witnesses:
+          - "排练的成年伶人"
+        affordances:
+          - "核对旧戏本"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "戏班排练时辰"
+          - "台口尺寸"
+    宗族祠堂:
+      details:
+        - "廊下软毡承着干拓片·日间"
+        - "碑旁立着不可倚靠的木栏·日间"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "祠堂前院大门"
+        witnesses:
+          - "守祠人"
+        affordances:
+          - "整理地方碑录"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "祭祀占用时辰"
+          - "拓片干湿"
+    园林:
+      details:
+        - "入口亭与深处凉亭遥相可见·午后"
+        - "短径边有能坐下歇脚的石凳·午后"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "入口短径折返园门"
+        witnesses:
+          - "园丁"
+          - "散步来客"
+        affordances:
+          - "设计读书小径"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "日晒"
+          - "石径雨后湿滑"
+    老茶馆:
+      details:
+        - "茶炉边传来评话声·傍晚"
+        - "窗边小桌压着一册掌故·傍晚"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "茶馆前门"
+        witnesses:
+          - "茶博士"
+          - "邻桌茶客"
+        affordances:
+          - "共读地方掌故"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "评话声量"
+          - "座位空缺"
+    江心画舫:
+      details:
+        - "停泊画舫舱壁摆着矮案·日间"
+        - "舷梯旁留着整条空道·日间"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "停泊时经舷梯上岸"
+          - "航行时可结束谈话坐回舱内，在下一约定码头下船"
+        witnesses:
+          - "船家"
+          - "同场读者"
+        affordances:
+          - "布置水上书会"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "水位风向"
+          - "船家确认的载客数与靠岸时辰"
+  pairs:
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "古籍修补师"
+        function: "判断纸性并修补残卷与拓片"
+        authority: "决定自己经手残页的支撑和补纸工序"
+        resource: "补纸、软毡和数种版心样页"
+        limitation: "无法凭残字确定整卷真伪，也无权擅拆借书"
+        obligation: "保留原有字迹，不为完整外观补造正文"
+        exposure: "补错纸性会留下不可逆折痕，需赔付自己的工料"
+        hidden: "—"
+      player:
+        identity: "书院藏书整理人"
+        baseline: "你曾替修补师借到一册同版书，使其免于错补；这次由你管卷次，他管纸性。"
+        resources:
+          - "书院旧目录"
+          - "向藏书人借取同版残本的介绍"
+        reputation: "你爱求全，但会把缺卷明写出来"
+      relationship_reason: "你曾替修补师借到一册同版书，使其免于错补；这次由你管卷次，他管纸性。"
+    -
+      family: "学术与专业"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "书院藏书整理人"
+        function: "管理书院借阅并组织读书与戏本共读"
+        authority: "安排书院自有书册借期与书会书目"
+        resource: "借阅簿、戏本异文抄件与共读书目"
+        limitation: "不能约束戏班演法，也不能替船家决定航行"
+        obligation: "还书时核对页次，不把异文删成唯一版本"
+        exposure: "卷次失查会使后续读者借不到所需书册"
+        hidden: "—"
+      player:
+        identity: "古籍修补师"
+        baseline: "你替藏书整理人救过一册常借戏本；他邀你先看本次共读是否会损伤纸页。"
+        resources:
+          - "补纸与衬纸"
+          - "判断旧纸承受翻动程度的手艺"
+        reputation: "你先问纸能否承受，再谈修得好不好看"
+      relationship_reason: "你替藏书整理人救过一册常借戏本；他邀你先看本次共读是否会损伤纸页。"
+  activities:
+    辨认残卷版式:
+      places:
+        - "古籍书店"
+      pairs:
+        - 0
+      category: "调查与核验"
+      action: "{npc}铺开两页残卷，请你将版心、行数和缺口逐一比对。"
+      beats:
+        trigger: "{npc}铺开两页残卷，请你将版心、行数和缺口逐一比对。"
+        objective: "判断两页能否属于同一卷"
+        choice: "比对版心，或只替残页压边；不作判断也可看修补示范"
+        immediate: "两页的相合处与矛盾处分开，不能只凭纸色拼成完整来历。"
+        near: "存疑页暂不合订，藏书人可以再借同版残本比照。"
+    核对旧戏本:
+      places:
+        - "戏楼"
+      pairs:
+        - 1
+      category: "信息交换"
+      action: "{npc}在戏楼空台上照抄本念一段，请你试走纸上写的退场方向。"
+      beats:
+        trigger: "{npc}在戏楼空台上照抄本念一段，请你试走纸上写的退场方向。"
+        objective: "分辨唱词异文与走位需要"
+        choice: "念一角对白，或只看演员示范；也可坐到台下听"
+        immediate: "一次走台显出原抄本的退场冲突，台词可保留两种演法。"
+        near: "书院保存原抄本，戏班自选排演版本，不把舞台改动冒充古本原文。"
+    整理地方碑录:
+      places:
+        - "宗族祠堂"
+      pairs:
+        - 0
+      category: "照护与修复"
+      action: "{npc}把已晾干的拓片移到软毡上，邀你用衬纸隔开两张卷边。"
+      beats:
+        trigger: "{npc}把已晾干的拓片移到软毡上，邀你用衬纸隔开两张卷边。"
+        objective: "让地方碑录可以翻阅而不继续磨损"
+        choice: "托住衬纸，或只辨认地名交由修补师整理；可拒绝处理脆片"
+        immediate: "卷边获得支撑，磨损处不再相互摩擦，缺字仍留空。"
+        near: "祠堂留下可翻阅副本，原拓片收在干燥匣中，不为补全地名描造缺字。"
+    设计读书小径:
+      places:
+        - "园林"
+      pairs:
+        - 1
+      category: "空间与退出"
+      action: "{npc}带你沿园林短径走到第一处亭子，问这一段是否已够。"
+      beats:
+        trigger: "{npc}带你沿园林短径走到第一处亭子，问这一段是否已够。"
+        objective: "选出可随时折返的共读路线"
+        choice: "试走一亭，或留在入口等候；也可选全程坐读"
+        immediate: "停点按阴凉、座位和脚程调整，长短两路从入口就能分开。"
+        near: "下次书会分别安排亭中坐读与步行组，不要求众人走同一圈。"
+    共读地方掌故:
+      places:
+        - "老茶馆"
+      pairs:
+        - 0
+      category: "日常接触"
+      action: "{npc}翻到茶馆旧闻，先说自己听来的版本，再问你要不要添一句。"
+      beats:
+        trigger: "{npc}翻到茶馆旧闻，先说自己听来的版本，再问你要不要添一句。"
+        objective: "借掌故认识彼此的乡音与趣味"
+        choice: "讲一个版本，或只饮茶听完；不谈旧事可聊茶味"
+        immediate: "两个版本可以并存，谈话不急着裁定谁家记忆正确。"
+        near: "各人结清自己的茶钱，愿意才约下一次，不形成供稿义务。"
+    布置水上书会:
+      places:
+        - "江心画舫"
+      pairs:
+        - 1
+      category: "空间与退出"
+      action: "{npc}在靠岸画舫上移开一张矮案，请你试坐并看看上岸通道。"
+      beats:
+        trigger: "{npc}在靠岸画舫上移开一张矮案，请你试坐并看看上岸通道。"
+        objective: "布置不挡舷梯的书会"
+        choice: "试摆书案，或选择只在岸边听读；不同意开船便参加停泊场"
+        immediate: "书案沿舱壁摆放，船家确认载客数与靠岸时辰后才决定是否离岸。"
+        near: "书会分停泊与短航两场，短航者在约定码头下船，书页不用冒险临水铺开。"
+  customs:
+    - "书会来客可以只听不读，离席前将借用书签放回竹筒。"
+  pressures:
+    藏书借还争议:
+      source: "借阅簿上的卷次与归还残卷不符"
+      engines:
+        - "旧事追索"
+        - "信任透支"
+      beats:
+        trigger: "{npc}收到消息：借阅簿上的卷次与归还残卷不符。"
+        objective: "确定差错发生在哪次交接"
+        choice: "联系借阅人，或比对旧目录"
+        immediate: "这册书暂停再借，但借阅人不被直接认定为调包。"
+        near: "按页边号逐次核对交接，能配回的先归匣，缺失部分留待借书人说明。"
+      far_trigger: "下一次珍本借阅申请到来时"
+      far_consequence: "找到错装点便恢复有限外借；查不清则该卷只供店内阅，不扩大成全院禁借。"
+      exits:
+        - "交还经手残卷与纸签后退出核查"
+        - "仅提供旧目录，由藏书人联系借阅者"
+      bindings:
+        -
+          activity: "辨认残卷版式"
+          place: "古籍书店"
+          pair: 0
+        -
+          activity: "核对旧戏本"
+          place: "戏楼"
+          pair: 1
+    行会展位变更:
+      source: "公共展览临时缩减了可用展位"
+      engines:
+        - "资源锁定"
+        - "组织更迭"
+      beats:
+        trigger: "{npc}收到消息：公共展览临时缩减了可用展位。"
+        objective: "安排不损伤书画的替代展位"
+        choice: "商量分期展出，或借用茶馆"
+        immediate: "原定书画不能都平铺展出，先收起未固定的卷轴。"
+        near: "用茶馆坐读副本和园林分期看书分流，原件只进有干燥支撑的展位。"
+      far_trigger: "新一季行会展位分配时"
+      far_consequence: "轮展减轻拥挤却增加往返工夫；长期借不到稳妥展位的原件改为预约阅览。"
+      exits:
+        - "撤回自己的借展原件，留下抄本即可离场"
+        - "选择下一期展出，不承担本期搬运"
+      bindings:
+        -
+          activity: "设计读书小径"
+          place: "园林"
+          pair: 1
+        -
+          activity: "共读地方掌故"
+          place: "老茶馆"
+          pair: 0
+        -
+          activity: "布置水上书会"
+          place: "江心画舫"
+          pair: 1
+  legacy_sources:
+    eras:
+      - "架空王朝"
+    aesthetics:
+      - "工笔华服"
+      - "水墨写意"
+    places:
+      - "古籍书店"
+      - "戏楼"
+      - "宗族祠堂"
+      - "园林"
+      - "老茶馆"
+      - "江心画舫"
+  themes:
+    - "珍本保存与活态传习"
+    - "宗族记忆中的异文"
+    - "书会对不同读者的开放"
+  technology_boundary: "架空王朝使用雕版、手抄、拓印与舟运；修补靠纸纤维和手艺，不设法术复原、摄影或电气照明。"
+  bridge_status: "not_required"

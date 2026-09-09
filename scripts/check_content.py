@@ -24,22 +24,10 @@ except ImportError:  # pragma: no cover
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "scripts" / "data"
-DATA_FILES = (
-    "pools.yaml",
-    "character_meta.yaml",
-    "twists.yaml",
-    "templates.yaml",
-    "names.yaml",
-    "identities.yaml",
-    "locations.yaml",
-    "character_pools.yaml",
-    "location_profiles.yaml",
-    "action_categories.yaml",
-    "action_metadata.yaml",
-    "identity_profiles.yaml",
-    "twist_profiles.yaml",
-    "world_frameworks.yaml",
-)
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+from data_contract import DATA_FILES, validate_files
+from material_inventory import read_yaml
 
 POOL_TABLES = ("核心规则", "美学基调", "权力结构", "张力引擎", "社会规则",
                "压力来源", "身份侧", "处境侧", "反差轴")
@@ -70,8 +58,8 @@ def _load(name: str) -> Any:
         raise SystemExit("ERROR: PyYAML is required; run: python -m pip install PyYAML")
     path = DATA / name
     try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        data = read_yaml(path)
+    except (OSError, UnicodeError, yaml.YAMLError, ValueError) as exc:
         raise SystemExit(f"ERROR: cannot read {path}: {exc}") from exc
     if not isinstance(data, dict) or not data:
         raise SystemExit(f"ERROR: {path} 为空或顶层不是映射")
@@ -120,11 +108,12 @@ def check_daily_opening(pools: dict[str, Any], report: Report) -> None:
 
 def check() -> Report:
     report = Report()
+    report.errors.extend(validate_files(DATA))
     commands_path = ROOT / "commands.yaml"
     report.ok(commands_path.exists(), "根目录缺少 commands.yaml")
     if commands_path.exists():
         try:
-            commands_data = yaml.safe_load(commands_path.read_text(encoding="utf-8")) if yaml else None
+            commands_data = read_yaml(commands_path) if yaml else None
             report.ok(isinstance(commands_data, dict) and bool(commands_data.get("command_categories")),
                       "commands.yaml 为空或缺少 command_categories 结构")
         except Exception as exc:

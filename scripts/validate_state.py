@@ -704,8 +704,12 @@ def validate_text(text: str, profile: str = "save") -> list[str]:
     if yaml is None:
         return ["PyYAML is required; run: python -m pip install PyYAML"]
     try:
-        data = yaml.safe_load(text)
-    except yaml.YAMLError as exc:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("validation_common", Path(__file__).with_name("_common.py"))
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        data = module.load_yaml_bytes(text.encode("utf-8"))
+    except (yaml.YAMLError, ValueError, RuntimeError) as exc:
         return [f"invalid YAML: {exc}"]
     return validate_data(data, profile)
 

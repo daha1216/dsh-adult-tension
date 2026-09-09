@@ -2,9 +2,10 @@
 from __future__ import annotations
 
 import json
+import argparse
 from pathlib import Path
 
-import yaml
+from material_inventory import read_yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -29,12 +30,18 @@ def coverage(pools, registry):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--summary", action="store_true")
+    args = parser.parse_args()
     data = ROOT / "scripts" / "data"
-    pools = yaml.safe_load((data / "pools.yaml").read_text(encoding="utf-8"))
-    frames = yaml.safe_load((data / "world_frameworks.yaml").read_text(encoding="utf-8"))
-    print(json.dumps(coverage(pools, frames), ensure_ascii=False, indent=2))
+    pools = read_yaml(data / "pools.yaml")
+    frames = read_yaml(data / "world_frameworks.yaml")
+    result = coverage(pools, frames)
+    if args.summary:
+        for row in result["axes"].values():
+            row.pop("frameworks_by_material")
+    print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
     main()
-

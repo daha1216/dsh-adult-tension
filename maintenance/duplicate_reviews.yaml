@@ -1,0 +1,13 @@
+version: 1
+reviews:
+  - file: templates.yaml
+    path: /orientations
+    kind: near
+    values: [对男性有稳定吸引，情境会放大, 对女性有稳定吸引，情境会放大]
+    disposition: KEEP_DISTINCT
+    reason: 两条描述的吸引对象不同，属于真实语义差异，不能因句式相似合并；不扩写内容。
+  - files: [action_categories.yaml, pools.yaml]
+    kind: cross_file
+    path_prefixes: [/照护与修复/, /身体靠近/, /场景动作/非交易靠近/]
+    disposition: KEEP_INDEX_REFERENCE
+    reason: action_categories 是 pools 动作的分类索引。相同显示名称用于查找同一动作，不是两份独立文案；删除任一侧会破坏旧入口或分类。

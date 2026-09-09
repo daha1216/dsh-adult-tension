@@ -170,7 +170,7 @@ class MaterialQualityTests(unittest.TestCase):
         f, = report["frameworks"]
         self.assertEqual("REVIEW_REQUIRED", f["semantic_grade"])
         self.assertEqual("B", f["structural_grade"])
-        self.assertEqual(3, f["pressure_combinations"])
+        self.assertEqual(0, f["pressure_combinations"], "Unbound pressures must not imply Cartesian compatibility")
         self.assertEqual(0, f["generic_followups"])
 
     def test_missing_metadata_is_explicit_incomplete_evidence(self):

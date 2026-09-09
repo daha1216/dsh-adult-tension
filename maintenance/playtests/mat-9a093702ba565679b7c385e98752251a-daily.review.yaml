@@ -1,0 +1,105 @@
+framework_id: "mat-9a093702ba565679b7c385e98752251a"
+name: "仙门山下百业镇"
+mode: "daily"
+source_hash: "5f143db3efbf92b0faf1fd6fe97ef5bad733a3672be2be85602371395e6553ae"
+transcript_sha256: "86ce7fb0d1f1c2ad9b09c3cdf0e7a657481f4628feef99e3be454511b4c4f676"
+reviewer: "codex-independent-semantic-review"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+lowest_scoring_turn: 1
+scores:
+  world_specificity: 2
+  character_credibility: 2
+  meaningful_choices: 0
+  consequence_continuity: 2
+  natural_expression: 1
+evidence:
+  world_specificity: "耗完回摊补芯"
+  character_credibility: "栏里还要看食欲"
+  meaningful_choices: "你只按住那只角"
+  consequence_continuity: "没选街"
+  natural_expression: "画不画、走不走，都还是你的"
+blocking_findings:
+  - "回合1替玩家选定并执行按住纸骨的动作，meaningful_choices为0，因此即使其余维度合格也不能通过。"
+  - "回合1：未经玩家具体选择便替其按住灯纸角，meaningful_choices为0。"
+  - "回合2：本回合7分；只有请求明确与不加事，人物交班以外的反应薄。"
+total: 7
+total_score: 7
+passed: false
+verdict: "FAIL"
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "低耗灵芯"
+      character_credibility: "我夜里还要交班"
+      meaningful_choices: "选现成纸样也行"
+      consequence_continuity: "芯归摊主装"
+      natural_expression: "药香混着热饼气"
+    reason: "低耗灯芯、摊主装配与寄养交班形成仙门民生日常，做灯和吃饼是不同活动。"
+    blocking_findings:
+      []
+    total: 10
+    passed: true
+  -
+    turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 0
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "耗完回摊补芯"
+      character_credibility: "栏里还要看食欲"
+      meaningful_choices: "你只按住那只角"
+      consequence_continuity: "没选街"
+      natural_expression: "画不画、走不走，都还是你的"
+    reason: "需求与交班具体，却已替玩家按纸角再声称选择仍自由，行动边界破坏。"
+    blocking_findings:
+      - "未经玩家具体选择便替其按住灯纸角，meaningful_choices为0。"
+    total: 7
+    passed: false
+  -
+    turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 1
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "灯纸骨"
+      character_credibility: "我交班的时辰到了会走"
+      meaningful_choices: "哪一条不合适，你说"
+      consequence_continuity: "芯也在摊主那儿"
+      natural_expression: "只改刚才那几句，不加别的"
+    reason: "愿等异议并保留未画灯的状态；角色愿望退回多项不安排，谈法偏元说明。"
+    blocking_findings:
+      - "本回合7分；只有请求明确与不加事，人物交班以外的反应薄。"
+    total: 7
+    passed: false
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "低耗灵芯"
+      character_credibility: "我去交班"
+      meaningful_choices: "没有伸手拦"
+      consequence_continuity: "今夜这盏灯没拼成"
+      natural_expression: "她转身走向山下街口"
+    reason: "真实说明灯未成且把组件还摊主，NPC按自身交班时间离开，不把退出写成任务失败。"
+    blocking_findings:
+      []
+    total: 9
+    passed: true

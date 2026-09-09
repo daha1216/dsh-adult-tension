@@ -1,0 +1,250 @@
+id: "mat-d136423bf1195d8fb009a708bcb0219f"
+name: "磁带与夜市街区"
+material:
+  eras:
+    - "九十年代"
+  aesthetics:
+    - "旧年代质感"
+    - "暖色生活流"
+    - "温柔颓丧"
+  rule: "街区消息由布告栏、电话和熟人传递，磁带与手写地址记录着日常。"
+  social_rule: "公共活动以张贴的名单和当面约定为准。"
+  places:
+    旧书店:
+      details:
+        - "旧书架下码着编号磁带盒·午后"
+        - "试听机旁备着空盒与铅笔·午后"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "旧书店门外街道"
+        witnesses:
+          - "兼售旧带的店主"
+        affordances:
+          - "给旧磁带编目录"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "走带状态"
+          - "店内允许试听的音量"
+    通宵大排档:
+      details:
+        - "油烟棚下留着不放音箱的过道·夜"
+        - "朝内摆的喇叭正对空桌·夜"
+      profile:
+        privacy: "low"
+        visibility: "high"
+        exits:
+          - "敞开的街边通道"
+        witnesses:
+          - "摊主"
+          - "用餐街坊"
+        affordances:
+          - "筹划街坊点歌夜"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "住户休息时间"
+          - "过道宽度"
+    家中厨房:
+      details:
+        - "家用炉灶边搁着洗好的菜·傍晚"
+        - "暂停的便携录音机远离水盆·傍晚"
+      profile:
+        privacy: "high"
+        visibility: "low"
+        exits:
+          - "厨房门通向客厅与入户门"
+        witnesses:
+          - "经主人邀请的共同做饭者"
+        affordances:
+          - "录制家常菜口述"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "主人可用灶台"
+          - "当日食材"
+    工作室:
+      details:
+        - "剪报、胶水和废纸铺满拼贴桌·夜"
+        - "远端墙上临时挂着海报样稿·夜"
+      profile:
+        privacy: "medium"
+        visibility: "medium"
+        exits:
+          - "工作室门通向楼道"
+        witnesses:
+          - "文化站同事"
+        affordances:
+          - "拼贴夜市海报"
+          - "结束活动并离开"
+        pressure_modifiers:
+          - "翻印前取稿时间"
+          - "剩余纸张"
+  pairs:
+    -
+      family: "服务与手艺"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "音像店整理员"
+        function: "整理寄售磁带并判断可试听状态"
+        authority: "安排自己经手的试听与归盒，不决定录音传播许可"
+        resource: "试听机、空磁带盒和可借的旧曲目录"
+        limitation: "无法凭歌声确认所有录音者，坏带须停机处理"
+        obligation: "原带原盒对应，私人录音未许不得外借"
+        exposure: "卡坏寄售带要赔偿，混盒会失去藏带人的委托"
+        hidden: "—"
+      player:
+        identity: "街道文化站录音员"
+        baseline: "你用文化站节目顺序帮整理员辨出过一盒无名演出带；这次约好只试片头，不整夜翻录。"
+        resources:
+          - "便携录音机与试机带"
+          - "文化站旧节目顺序"
+        reputation: "你辨得出录音段落，不拿私人谈话充素材"
+      relationship_reason: "你用文化站节目顺序帮整理员辨出过一盒无名演出带；这次约好只试片头，不整夜翻录。"
+    -
+      family: "艺术与传播"
+      position: "同侪"
+      appellations:
+        - "直呼其名"
+      npc:
+        role: "街道文化站录音员"
+        function: "录制街坊声音并布置小型点歌活动"
+        authority: "控制文化站借出的音响与自己录制段落的剪选"
+        resource: "便携录音机、借用音箱与节目时段"
+        limitation: "不能占用住户休息时间，也无权把寄售带当复制母带"
+        obligation: "播前确认录音用途，收场归还设备"
+        exposure: "超时扩音会让下一场借地受阻"
+        hidden: "—"
+      player:
+        identity: "音像店整理员"
+        baseline: "你给录音员挑过不伤带的播放次序；对方请你这次一起听外桌的音量。"
+        resources:
+          - "熟悉旧曲的试听经验"
+          - "已经允许公开播放的曲带"
+        reputation: "你爱冷门曲，但能为现场节奏缩短曲单"
+      relationship_reason: "你给录音员挑过不伤带的播放次序；对方请你这次一起听外桌的音量。"
+  activities:
+    给旧磁带编目录:
+      places:
+        - "旧书店"
+      pairs:
+        - 0
+      category: "调查与核验"
+      action: "{npc}先用试听带试机，再插入待编目磁带，邀你辨认前奏和录制间隙。"
+      beats:
+        trigger: "{npc}先用试听带试机，再插入待编目磁带，邀你辨认前奏和录制间隙。"
+        objective: "分清同名带的内容与可播放状态"
+        choice: "听片头，或只核对盒签；担心损带可停机留待检修"
+        immediate: "可播放与卡带风险分别归盒，曲目不明保留问号，不倒推录制人。"
+        near: "借带者知道哪些只供保管，待查带不混进点歌夜播放队列。"
+    筹划街坊点歌夜:
+      places:
+        - "通宵大排档"
+      pairs:
+        - 1
+      category: "空间与退出"
+      action: "{npc}在大排档把音箱转离住户窗，邀你到外桌听一首再定点歌顺序。"
+      beats:
+        trigger: "{npc}在大排档把音箱转离住户窗，邀你到外桌听一首再定点歌顺序。"
+        objective: "让点歌能与吃饭和街坊休息共存"
+        choice: "到外桌试听，或只看歌单；不听歌可选较安静座位"
+        immediate: "靠窗音量降低，长歌放到较早时段，通道旁不再堆音箱。"
+        near: "点歌夜按商量的结束时刻收声，偏爱聊天的人仍能在无扩音桌吃饭。"
+    录制家常菜口述:
+      places:
+        - "家中厨房"
+      pairs:
+        - 0
+      category: "照护与修复"
+      action: "{npc}先把录音机停在桌角，洗好一盆菜，问你想一起做还是只听家里的做法。"
+      beats:
+        trigger: "{npc}先把录音机停在桌角，洗好一盆菜，问你想一起做还是只听家里的做法。"
+        objective: "把口述中的一把与适量试成一顿可吃的饭"
+        choice: "试炒小份，或帮洗菜；不录音也能一起吃"
+        immediate: "尝味后调整水量与火候，录音只有在双方点头后才开启。"
+        near: "吃完分好剩菜，各自保留家里的口味；录下的版本须做饭者同意才外借。"
+    拼贴夜市海报:
+      places:
+        - "工作室"
+      pairs:
+        - 1
+      category: "信息交换"
+      action: "{npc}摆开剪报和胶水，邀请你把夜市标题剪成两个不同构图试贴。"
+      beats:
+        trigger: "{npc}摆开剪报和胶水，邀请你把夜市标题剪成两个不同构图试贴。"
+        objective: "找到远看能辨认、近看有趣的海报"
+        choice: "试拼一版，或用手指选位置；不留作品可只帮看远处效果"
+        immediate: "两个样稿的主次被比较，采用的一版保留作者约定的署名。"
+        near: "文化站只翻印选定样稿，余下剪贴归作者，不把素材自动收为公物。"
+  customs:
+    - "借出的磁带盒里会夹一张约好归还时间的纸签。"
+  pressures:
+    演出带误贴标签:
+      source: "文化站收到两盒同名但内容不同的演出带"
+      engines:
+        - "旧事追索"
+        - "名声保卫"
+      beats:
+        trigger: "{npc}收到消息：文化站收到两盒同名但内容不同的演出带。"
+        objective: "找到正确母带并确认演出顺序"
+        choice: "试听片头，或联系原录音者"
+        immediate: "两盒同名带都不进正式播放队列，先用已确认曲目补一段空档。"
+        near: "录音员与整理员分别核对片头和节目间歇，只给确认过的母带换签。"
+      far_trigger: "文化站下次借出同场演出带时"
+      far_consequence: "原带与副带分盒借还；仍无法判定的只留存，不以大家记得为由重新署名。"
+      exits:
+        - "停止试听，原样归还文化站"
+        - "只给出认识的前奏线索，不继续找原录音者"
+      bindings:
+        -
+          activity: "给旧磁带编目录"
+          place: "旧书店"
+          pair: 0
+        -
+          activity: "筹划街坊点歌夜"
+          place: "通宵大排档"
+          pair: 1
+    夜市摊位调整:
+      source: "新的夜市通道规划占用了原定的小舞台"
+      engines:
+        - "资源锁定"
+        - "第三方施压"
+      beats:
+        trigger: "{npc}收到消息：新的夜市通道规划占用了原定的小舞台。"
+        objective: "商量不阻挡通行的新舞台位置"
+        choice: "实地量一量，或改成分散点歌"
+        immediate: "原舞台停止摆箱，顾客先能穿过过道，歌手不必站在摊位出餐口等。"
+        near: "量过通道后改用内向小音箱或无扩音点歌，仍不合适便只保留吃饭聚会。"
+      far_trigger: "夜市下一轮划位时"
+      far_consequence: "可移动的小场地方案有机会保留；坚持固定大台则可能失去这个点位。"
+      exits:
+        - "撤下本次音响，转成普通聚餐"
+        - "只归还借来的设备，不负责后续争取摊位"
+      bindings:
+        -
+          activity: "筹划街坊点歌夜"
+          place: "通宵大排档"
+          pair: 1
+        -
+          activity: "拼贴夜市海报"
+          place: "工作室"
+          pair: 1
+  legacy_sources:
+    eras:
+      - "九十年代"
+    aesthetics:
+      - "旧年代质感"
+      - "暖色生活流"
+      - "温柔颓丧"
+    places:
+      - "旧书店"
+      - "通宵大排档"
+      - "家中厨房"
+      - "工作室"
+  themes:
+    - "磁带声音与私人记忆"
+    - "夜市公共娱乐的尺度"
+    - "家常菜的口述传承"
+  technology_boundary: "九十年代使用磁带机、便携录音机、手剪海报、胶水和固定电话；试听需实际走带，没有数字音轨检索、网络直播或手机群聊。"
+  bridge_status: "not_required"
