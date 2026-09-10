@@ -66,7 +66,8 @@ def core_review_errors(root=ROOT):
         target = (root / source).resolve()
         if root.resolve() not in target.parents or not target.is_file():
             errors.append(f"CORE_REVIEW_DEPENDENCY_MISSING_OR_OUTSIDE: {source}")
-        elif hashlib.sha256(target.read_bytes()).hexdigest() != expected:
+        elif hashlib.sha256(target.read_bytes().replace(b"\r\n", b"\n")).hexdigest() != expected:
+            # 按 LF 规范化后比对：检出换行风格不同不应误判审查失效
             errors.append(f"CORE_REVIEW_DEPENDENCY_STALE: {source}")
     return errors
 

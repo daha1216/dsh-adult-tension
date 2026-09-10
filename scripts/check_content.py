@@ -418,7 +418,8 @@ def content_fingerprint() -> str:
     digest = hashlib.sha256()
     for name in DATA_FILES:
         digest.update(name.encode("utf-8"))
-        digest.update((DATA / name).read_bytes())
+        # 按 LF 规范化后入指纹：检出换行风格不同不应改变内容指纹
+        digest.update((DATA / name).read_bytes().replace(b"\r\n", b"\n"))
     return digest.hexdigest()
 
 

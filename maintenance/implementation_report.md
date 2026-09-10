@@ -13,7 +13,7 @@
 | 5 降低人物视角复用 | 28/40 框架 material.pairs 强化（资源/限制/见面理由差异化，两组资源零交集） |
 | 6 变更后定位重审+重跑+回归 | 三轮实玩证据链+登记簿/指纹/全量测试终局全绿；失败证据全部归档，门槛未动 |
 
-登记簿终态（`python scripts/material_registry.py --summary`）：units 2,374 / entries 2,390；KEEP_LEGACY 1,312、KEEP_SHARED 974、FROZEN_RESTRICTED 46、DEPRECATED 18、KEEP_FRAMEWORK 40；**errors 0 / warnings 0 / BRIDGE_REQUIRED 0 / NOT_REVIEWED 0**。内容指纹更新为 `5301735b7b3799e1c3700e9e5f25ee7434b1e2dc485f0a64634e61f45b5c7aab`（全量检查通过后经 `qa.py --full --update-fingerprint` 走正规流程）。pytest 291 passed（含指纹锁）。
+登记簿终态（`python scripts/material_registry.py --summary`）：units 2,374 / entries 2,390；KEEP_LEGACY 1,312、KEEP_SHARED 974、FROZEN_RESTRICTED 46、DEPRECATED 18、KEEP_FRAMEWORK 40；**errors 0 / warnings 0 / BRIDGE_REQUIRED 0 / NOT_REVIEWED 0**。内容指纹记为 `e8d68934…`（第二轮曾写 `5301735b…`：那是 Windows 工作区把 `scripts/data/pools.yaml` 以 CRLF 检出时算出的值，干净的 LF 检出会得到 `e8d68934…`，两台机器不一致导致远端 CI 红，详见 §9）。pytest 291 passed（含指纹锁）。
 
 ## 1. 实玩验收（三轮证据链）
 
@@ -130,3 +130,5 @@ G01–G13 十三批次全闭合，模式统一：id/source_hash/source 与 regis
 - 全量门禁：`python scripts/qa.py --full --release` 退出码 0（registry、核心桥接、非核心审查、重复候选、实玩证据全过；`pytest` 291 passed；`sample_materials` 168 样本 0 失败；`compileall`、`git diff --check` 干净）。
 - 归因（`maintenance/attribution_report.md`）：A 基线 36/80（Codex v2 口径）→ A' 同批转写换评分者 79/80（口径段 +43）→ B' 协议 v3 同素材 44/80（协议段 −35）→ C 修复后素材 79/80（素材段 +35）。因此第二轮报告的「36→79」主要是评分口径变化，素材修复的真实作用是「把更严探针下的 44 拉回 79」；本轮 v4 的 80/80 是在比第二轮更严的探针下取得的。
 - 遗留（下轮，均属素材侧，会改 `committed_opening` → `prompt_sha256`，必须与下批转写同轮）：`maintenance/noncore_reviews/pools.yaml` 8 条决策与登记簿不一致（不可整体重放）、`legacy_weight` 死值、3 个时代名池缺失、templates 近重复 7 对、动力舱维修工玩家侧时代映射（G10）。
+
+**CI 本地失真修复（本机绿、远端红）**：`v1.3.0` 首次重推后远端 `quality` 两个 job（3.10/3.13）在 10 秒内失败，报 `CORE_REVIEW_DEPENDENCY_STALE: scripts/data/pools.yaml`。根因：`scripts/data/pools.yaml` 是唯一一个工作区为 CRLF、而 git blob 为 LF 的文件（工作区 61,569 字节 / blob 59,260 字节），于是 `check_content.content_fingerprint()`（逐文件 `read_bytes()`）与 `data_contract.core_review_errors()`（`sha256(read_bytes())`）在本机算出的都是 CRLF 值——`maintenance/content_fingerprint.txt` 记 `5301735b…`、`maintenance/core_review_dependencies.yaml` 记 `09dd9de8…`，两处都只在 Windows 工作区成立，干净 LF 检出必然报 STALE。修复：① 把工作区文件规范化为 LF（字节与 blob 一致，`git status` 干净）；② 两份记录改为 LF 规范值（指纹 `e8d68934…`、依赖哈希 `7228d018…`）；③ 两处哈希改为先 `replace(b"\r\n", b"\n")` 再算，避免任何工作区换行风格造成误判。验证：干净 clone（模拟远端 Linux 检出）里跑同一条 `python scripts/qa.py --full --release` 全绿。受影响的只是哈希记录口径，素材内容、review 结论与 80 份转写（`source_hash`/`prompt_sha256` 均为结构化 digest）都不受影响。
