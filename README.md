@@ -28,10 +28,11 @@
 
 ## 🏷️ 版本发布（Releases）
 
-已发布版本见 [GitHub Releases](https://github.com/daha1216/dsh-adult-tension/releases)，适合需要固定版本快照的场景。下表统一使用 UTC 发布时间；截至 2026-09-10 复核，latest 为 v1.2.1，历史发布不代表当前治理改动已通过验收。
+已发布版本见 [GitHub Releases](https://github.com/daha1216/dsh-adult-tension/releases)，适合需要固定版本快照的场景。下表统一使用 UTC 发布时间；截至 2026-09-10 复核，latest 为 v1.3.0。该快照包含当前 main 的 40 框架与会话隔离改动，**不宣称** `qa.py --full --release` 精品验收已通过。
 
 | 版本 | 发布时间（UTC） | 说明 |
 | --- | --- | --- |
+| [v1.3.0](https://github.com/daha1216/dsh-adult-tension/releases/tag/v1.3.0) | 2026-09-10 00:20:00 | 四十框架与素材治理快照（工程检查通过，精品验收未过） |
 | [v1.2.1](https://github.com/daha1216/dsh-adult-tension/releases/tag/v1.2.1) | 2026-09-03 21:20:35 | 审计修复版 |
 | [v1.2.0](https://github.com/daha1216/dsh-adult-tension/releases/tag/v1.2.0) | 2026-09-01 00:11:59 | 素材库优化去重与角色原型精修；西式角色名全面汉化 |
 | [v0.3.0](https://github.com/daha1216/dsh-adult-tension/releases/tag/v0.3.0) | 2026-08-28 18:32:36 | 题材大扩容：二次元题材包、时代-地点和解、跨表重名清零 |
@@ -193,7 +194,7 @@ python scripts/qa.py --changed
 
 **结构通过不等于语义通过，不等于 320 条实玩响应已完成。** 实玩门槛为 40 框架 × daily/pressure × 新局及 3 次续写，证据与独立评分由 `playtest_report.py` 检查。`run_playtest.py --framework <名称>` 必须显式调用，会消耗模型额度；默认 QA 不会自动调用它。未跑、缺评分或来源哈希过期时如实报告，不用内存开局或单测数充当实玩完成数。
 
-本轮实现、实际回复数、失败案例和遗留见 [实施报告](maintenance/implementation_report.md)。当前存在实玩失败及未闭合核心素材，**真实验收未通过**，治理改动暂不合并正式主线。响应数量不是评分通过数量，工程检查、非露骨叙事探针与完整宿主端到端验收分开报告。`qa.py --full --release` 还会拦截核心 `BRIDGE_REQUIRED`；有处置记录不等于问题已经解决。
+本轮实现、实际回复数、失败案例和遗留见 [实施报告](maintenance/implementation_report.md)。当前存在实玩失败及未闭合核心素材，**真实验收未通过**。v1.3.0 是当前 main 的可安装快照，不是精品验收通过版。响应数量不是评分通过数量，工程检查、非露骨叙事探针与完整宿主端到端验收分开报告。`qa.py --full --release` 还会拦截核心 `BRIDGE_REQUIRED`；有处置记录不等于问题已经解决。
 
 ## 📁 文件放在哪里
 
