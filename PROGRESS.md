@@ -52,3 +52,4 @@
 
 | 2026-09-07 | 成人场景写法增补词汇开放条款：SKILL.md「性行为场景写法（硬约束）」引言改为适用行为清单＋所有参与者明确成年门槛，新增词汇开放段（示例非固定词表、三类语义参考、词语不自动触发行为、语态档与运行优先级衔接）；六条不变量未动。同步修复：上游 dd67b80 改 8 个数据文件未更新指纹锁，test_content_integrity EXPECTED 更新为 8c602ee4…（体检 705 项 0 错先行验证）；全量测试通过 |
 | 2026-09-10 | 发布 v1.3.0 快照：40 世界框架、独立 session 工作档、素材治理与统一 QA。工程检查已通过；`qa.py --full --release` 仍因 `CORE_BRIDGE_GATE: 569` 及实玩 36/80 未过而拒绝。不宣称精品验收通过。 |
+| 2026-09-10 | 第二轮素材治理与实玩验收（六点指令）：44 失败案三因分类（model_deviation 28/summary_loss 14/source_gap 2）→协议 v3（FOLLOWUPS 重写+八条规则）+4 框架定点修+模板修；桥接 569→0（G01-G13 全闭合，FROZEN 46 未动）；非核心 1,573→0 全审落库、244 重复候选清零、成年锚定源修；28 框架 pairs 资源差异化；宿主闭环 9 步验收通过；三轮实玩重跑（垫片截断污染批与 provider MODEL_DISABLED 故障两起取证归档）终验 79/80（318/320 回合，续写均值 9.66）；登记簿 errors 0/warnings 0；指纹更新 5301735b…（走 `--update-fingerprint` 正规流程）；release 门禁仅剩 mat-3f430a8a-pressure 1 例拦截。详见 maintenance/implementation_report.md |

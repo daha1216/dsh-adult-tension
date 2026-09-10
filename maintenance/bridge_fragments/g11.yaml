@@ -1,0 +1,3222 @@
+# G11 处境侧核心池桥接闭合（bridge closure fragment）
+# 治理片段，additive-only：不修改任何现有文件与运行时行为；源缺陷记 needs_source_fix，不在本文件内修复。
+# 逐单元沿用 G05/G07/G10/G12/G13 模式：status=KEEP_LEGACY、modes 按实证、owners 锚定真实 consumer、eras 按画像可达时代收窄。
+# 权力结构类处境（把柄/债务/职级差/契约支配等）restrictions.reason 明确不推导亲密许可（SKILL.md 运行优先级条款）。
+
+batch: g11
+domain: 处境侧
+generated: '2026-09-10'
+source_registry: references/material_registry.yaml
+evidence: maintenance/core_review_evidence.md
+release: governance-1
+reviewer: dsh/governance-bridge-g11
+unit_count: 65
+modes_note: 65 桥单元均不在 meta.daily_opening.处境 白名单（scripts/data/pools.yaml:774-810，恰为 6 条 daily 保留单元），apply_daily_roll 锁定白名单外值会报
+  AnchorError「日常开局的处境尚无低压解释」，故 modes 一律为 [pressure]。
+owners_note: owners 为 rg 实证的真实消费点定位符：build_roll 两种 opening_mode 都执行 draw(处境)；timed_situations 单元额外命中 fill_opening 的 8 小时 deadline
+  分支；check_material_compatibility 为只读审计映射。world_frameworks 38 框架 pressures 均不引用这 65 个处境，故不在 owners 内。
+needs_source_fix:
+- id: NSF-G11-01
+  target: scripts/data/pools.yaml
+  issue: meta.material_compatibility 无 处境 键（:968-998 仅有 压力来源/场景动作/身份族/玩家社会位置），运行时处境抽取不做时代过滤；本文件 compatibility.eras 为增量治理约束，源侧补齐映射前，单时代处境（如
+    072 密室暗槽、073 洗刀水）仍可在任意时代被抽出。
+- id: NSF-G11-02
+  target: scripts/data/pools.yaml
+  issue: meta.timed_situations 仅覆盖 65 桥中的 22 条；039 异族证件更新日（窗口只剩今晚）、071 空中飞人（开场铃前三分钟）、053 老茶馆转让夜（明早九点交钥匙）等文本自带时钟未建模，已入库条目统一
+    8 小时 deadline 也与文本窗口（三十秒/三分钟/明早九点/天亮）不符。
+units:
+- id: mat-3be3f99bc6d25baf83c918c221f98a26
+  source_hash: c3bedb7195b7a015dd797ebeea170fd1f762342f3bc41fb05002d6f0b433a6a0
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 债务压身
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 债务与求助
+    technology_boundary: 需真实债项、期限和合法催收
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为债权债务类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:001
+    reason: 模板明确不把人身写进还款可保留其边界，但仍缺金额、债权人与公开催收的因果，不能当整项已闭合。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-5c5dfeef793e54be8249d1abd0341c5e
+  source_hash: 1040c5627b586e62c0f993b8bc8969b022b0c77b21696a6b6d4bd32462acee43
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 时限临门
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 期限与信息
+    technology_boundary: 需具体窗口、截止时点和结果
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:002
+    reason: 模板反复说期限却未给数值，统一八小时并不证明这条处境的真实窗口。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-808826901b515f7f8943435749508630
+  source_hash: ce5f3dd4380b4f4c2feba9a796133a3e0815f032615adf39bf7d73c7921792b4
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 秘密将破
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 隐私与公开
+    technology_boundary: 需秘密内容、传播者及核验
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为知情要价类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:003
+    reason: 模板假定知情人都会要价，缺已发生的信息流和非要挟处理路径。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-7b53dcd0577b5d1092fbe0ba2676fc13
+  source_hash: a85464c1763139298fa5096bced0c55b001a35c0ff9d3c60b799808718a3db9a
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 旧事上门
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 往史与来访
+    technology_boundary: 需旧事、旧人和第三方知识范围
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:004
+    reason: 模板预言第三者传话与旧人再来，没有具体角色或消息来源支撑。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-48d35a7ceff7526ca83f1c6f44207e96
+  source_hash: 5f7180304c62950a58a6cbc1a856730ad3012b9430325fc3476402ae367cd6de
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 权力易手
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 职位交接
+    technology_boundary: 需组织、可交权限和记录规则
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为权限交接类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:005
+    reason: 模板把交权等于话作废，又预判新任改记录，缺真实程序与权限清单。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-72cab7bd7dc35b71b3748457606b093c
+  source_hash: d4532ec749852ad71bed0ffc49b37fa0163df345564b9c96147da356eb21741e
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 名声危机
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 传播危机
+    technology_boundary: 需事实、稿件和可纠错渠道
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:006
+    reason: 模板默认未核传闻会立即夺走职位，缺发布主体和职业处置依据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-411af5a4b47c5bf6a9b9c64903f412f7
+  source_hash: d76c166eaba78499e244e705031c878f9823240b98d6d1204e17c07b80898878
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 资源断供
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 供应与替代
+    technology_boundary: 需物资、断供原因和备用来源
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为有条件供给类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:007
+    reason: 模板默认天亮前失去行动能力及替代人情长期化，具体资源和关系仍未绑定。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-c974e28515255a75982941545f3dc4ad
+  source_hash: f070909afb94db67463d15c063c38b71166d2e4552d5df353db0766deae4f244
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 冷战第三天
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 关系修复
+    technology_boundary: 需既有冲突、双方意愿和缓冲空间
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:008
+    reason: 第三天冷战不必然下一夜断裂，模板固定恶化和旁人传播，缺现实因果。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-13109f3648085109bda9a6f68a6f540f
+  source_hash: 24fb31a6137922f1a9a99b673bf0dbda166ab80c2dacc6724e297fa2c2039d65
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 审查将至
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 审查程序
+    technology_boundary: 需材料、有效审查时间与补正机制
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为审查程序与缺页信息类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:009
+    reason: 模板称审查后不能改口，未说明法域或补正流程；八小时也不是实际审查时间。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-652055b4f4735b34b7fb49592556aeb6
+  source_hash: 04d8c63b2fe40aa1adbecaba0b2fbe93f9d047079b1973c168de828f1de10e26
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 晋升窗口
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 职业发展
+    technology_boundary: 需晋升制度、评审者和利益回避
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为职级竞争类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:010
+    reason: 模板把竞争者利用私会写成必然后续，没有具体职位或可靠信息支撑。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-60bc9023ef9a5a56b736379d90054f36
+  source_hash: 368e7f6c07b038dc827e02d4aea0aaa8da6275e3ad7443aeb70e16d53c8d141b
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 流言缠身
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 流言与证据
+    technology_boundary: 需传播链、时间线和可核验的反证
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:011
+    reason: 核对方向合理，但模板默认流言会成稿并立即清退，损害机制未证明。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-7922e243ae015a26bf357db7417b1404
+  source_hash: 079245aa850674d6ca10415e353c9db056698b1d7ae79322aca3fa5eeab469c5
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 身体见底
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 星际殖民地
+    places: []
+    themes:
+    - 健康与任务
+    technology_boundary: 需身体评估、现实任务及休息替代
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:012
+    reason: 模板只给留下或硬扛，且把健康记录自动写成把柄，缺普通求助路径。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-791b6943b6b0582797fa5584c4a9e8b9
+  source_hash: 3d259831680c3b5d1636b997312172071f0af327453b4dedb514ae6524f6ea45
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 无处可归
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 住房与求助
+    technology_boundary: 需可用住处、当晚安排及自主退出
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:017
+    reason: 模板只围绕是否由玩家收留，缺其他安全住宿或社会援助，不能当已闭合救助。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-16904a27ad65554cbf6ac12ed7f2ac47
+  source_hash: 611b9c6ca81b0efcc484a137e66df59d92a4d16a4ddc51cbccacbdab2fc4bbee
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 婚约在身
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 婚姻自主
+    technology_boundary: 需成年双方婚约效力、解除程序和本人意愿
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:018
+    reason: 目标保留退或拖的决定权，但模板仍默认按对方家里版本走，法定和自愿边界未落实。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-3cae9dd5c44d5075a36ec19dd3878e7f
+  source_hash: 3e750798e6a0a52fb1fc54ceb6608eac77f6234fc5c4dc4534b013f0619f74f8
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 离城前夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 迁居与告别
+    technology_boundary: 需真实离城计划、交通和通信条件
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:019
+    reason: 模板预设时差与通讯录，未有时代限定，也未证明离城必然造成关系终结。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-039eb7bfeaf859daa6d4334a3e8c0d99
+  source_hash: 5ca5ddb56574e95913c366430a5c9d7ca090cd1cf0fc07b784d14c5cbf033433
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 两面将穿帮
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 身份与隐私
+    technology_boundary: 需两套身份、实际受众和知情范围
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为身份把柄类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:020
+    reason: 模板把一次相遇写成两个世界皆塌，缺真实损害及第三方已经掌握的证据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-1f6841b0a1575c0180af5c07ae99a631
+  source_hash: f407c1c8e1a20e1197cdbcdaf69d7226977e413d380730d660249ca4470b1247
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 旧伤复发
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 伤病与隐私
+    technology_boundary: 需诊疗、疼痛管理和专业建议
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:021
+    reason: 模板把承认伤情仅写成留在玩家处或硬撑，且预判伤史被利用，缺医疗替代。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f35c570adf6c5b6e8d53fc8aa34c9fc9
+  source_hash: 258fd1e671477ed94d29f8b6d302b7c304a13739757ed368da0c896d6eeed738
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 家里在逼
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 千禧年前后
+    - 秋叶原架空街区
+    - 传媒舆论危机期
+    places: []
+    themes:
+    - 家庭压力
+    technology_boundary: 需手机技术、家庭诉求和本人拒绝能力
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:022
+    reason: 三通电话即逼表态是模板预设，没有具体义务与不接电话的后果依据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-3d07cfcb84a25d519f12670c88576505
+  source_hash: 8b1629baf689ede4c6567baadbcebb146db09aaa01f34f92348105229a4de7c8
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 术后初愈
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 星际殖民地
+    places: []
+    themes:
+    - 术后恢复
+    technology_boundary: 需手术类型、复诊安排和专业处置
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:023
+    reason: 模板固定第三天自行拆绷带并继续出席，不能作为通用术后状态或正确护理。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-a73030c7cfab5d38b73f37ea28fc8720
+  source_hash: a2be5ab361ccfabee6ffef1f403e8104310c881c5d12f8173a7242321a617353
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 戒断第一夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 秋叶原架空街区
+    - 传媒舆论危机期
+    places: []
+    themes:
+    - 成瘾支持
+    technology_boundary: 需戒断对象、医学风险和专业援助
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:024
+    reason: 删除联系方式不是完整戒断方案，模板预设失控回旧渠道，缺适当支持路径。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-80344328bb3752b6a53dd42a5bac73f9
+  source_hash: 08b54b790591fc2be47a6d44f1c9145349cf94f47733d2cae29f915117e1a658
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 遗嘱将宣读
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 一九二八芝加哥禁酒期
+    - 星际殖民地
+    places: []
+    themes:
+    - 继承程序
+    technology_boundary: 需有效遗嘱、法域、宣读时间和角色资格
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:025
+    reason: 明早九点与统一八小时未核对，且并非所有遗嘱都需现场让每个人表态。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-170352d9660c57c299c4b8fb7e7161e7
+  source_hash: e02989384942434031a5f1ec8cdb6f0a5d36d3647ddfa6502faced3074973174
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 目击待证
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 一九二八芝加哥禁酒期
+    - 架空王朝
+    - 星际殖民地
+    places: []
+    themes:
+    - 证人信息
+    technology_boundary: 需案件、真实目击范围和证言程序
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:027
+    reason: 固定亲见范围的目标合理，但模板预言一切外流都属串供，缺法域和实际调查依据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-c9d18b6aedcb5195b84968b68da92a12
+  source_hash: 143e91fe053290774fd44c2b5b46ab4a587a637fb1d80235073b9b45e095d4e8
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 回流无处安放
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    places: []
+    themes:
+    - 返乡与住房
+    technology_boundary: 需迁移地点、合法租约和资金安排
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:028
+    reason: 模板把两地银行卡都无力支付和语言疏离写成固定事实，缺具体人物生活史。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-9055d6ce182759e296aa002c2d5c55bc
+  source_hash: 58f67dd565ad5aaa9491705b72a797e8be3e0889ca2c73b152345720ed65534a
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 非人之躯将露
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 契约共存时代
+    - 神怪共存旧町
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 异世界王都
+    - 架空都市
+    - 近未来都市
+    - 星际殖民地
+    places: []
+    themes:
+    - 非人身份
+    technology_boundary: 需伪装机制、灯光反应和公开规则
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:029
+    reason: 模板预设天亮恢复与猎捕者，不能由非人标签推导生理、捕猎和期限。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-ecdf6c4d898b5ec58b88c4ee95323eaa
+  source_hash: 63742afd70d1cf35957a8fd776af54a96f82ebdb90868f74540d15a865fccfb6
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 无性婚姻重启
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    places: []
+    themes:
+    - 婚姻沟通
+    technology_boundary: 需成年双方已有婚姻及自主沟通
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:030
+    reason: 目标强调不欠彼此，但模板自动预言一方另寻出口，缺关系史与不继续亲密也可行的后续。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-8d3afd5cbe5f5b9ba24740a9db90b54f
+  source_hash: e472e0838f25adeb6a18841aa5c8ff04ee37201da8f2e6ad48b3b33a55376158
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 比赛前夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 一九二八芝加哥禁酒期
+    places: []
+    themes:
+    - 竞技状态
+    technology_boundary: 需比赛项目、称重规则和准确赛程
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:031
+    reason: 比赛并非都需称重，八小时时钟也未核对明日赛时，缺运动项目和休息计划。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-e623f2f96ae65dfb9a9985b43e507f66
+  source_hash: 08a36ac8f3a09ac3b447f4d74b3315cb76f828edac54d3287966e6a7db4014f9
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 临终陪护
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 星际殖民地
+    places: []
+    themes:
+    - 临终与照护
+    technology_boundary: 需病情、探视制度和替班支持
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:032
+    reason: 模板把遗嘱宣读与陪护直接串起，缺家庭法律关系和专业照护安排。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-7ed1f74baa195b76b7f8e4a499e89dda
+  source_hash: 71a811bc4fba616bd1aee41ca46a949ac478b044f38612ed76098ce867045abf
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 还俗前夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 神怪共存旧町
+    - 明治东京
+    - 旧式民国都市
+    - 架空王朝
+    - 东方玄幻大陆
+    places: []
+    themes:
+    - 宗教身份
+    technology_boundary: 需宗派还俗制度、文件效力及自主选择
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:033
+    reason: 还俗文件不是各宗教通用流程，身份变化也不自动改变关系许可。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-18ae181ceab15cd6a37d41796caac42d
+  source_hash: 1491724a72d14ababb4340c847d77d3becf2ff3224e8243821d59eccb3e8f539
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 离婚冷静期
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    places: []
+    themes:
+    - 婚姻与程序
+    technology_boundary: 需适用法域、真正届满日和法律意见
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:034
+    reason: 冷静期最后七天及律师追问不能通用于所有时代和离婚方式，缺有效程序。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-58146a34769b5f54864304f228815ef2
+  source_hash: 66d0653a733841e7e36e1e986be4b90961303eb71e76d51ef1c124c960c2ddc5
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 照护失智母亲
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    places: []
+    themes:
+    - 长期照护
+    technology_boundary: 需失智诊疗、看护分工和喘息服务
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:035
+    reason: 争取休息的方向可保留，但模板把缺席变成邻里记录的把柄，缺实际支持与后果证据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-befb5e9a058955d1b6a9c8139601cf8b
+  source_hash: 034df97919ba2ac570ab39ab6a1161a3e357e4f68ca3364a08a5567319c1aecd
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 热搜澄清前夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 秋叶原架空街区
+    - 传媒舆论危机期
+    places: []
+    themes:
+    - 媒体澄清
+    technology_boundary: 需平台、原始证据、授权和传播事实
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:036
+    reason: 固定天亮限流或推送没有平台依据，不能把澄清先后自动等同真伪或默认。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-7bfd2f43520253d6852c384c207a0a28
+  source_hash: d615c48346e2bc57acca047bd8ce39808bb3daca249a143eca6d5819521cbcbf
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 契约自动续期前夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 契约共存时代
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 异世界王都
+    - 神怪共存旧町
+    places: []
+    themes:
+    - 契约续期
+    technology_boundary: 需月蚀术法、知情通知和合法解约
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为契约条款支配类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:037
+    reason: 沉默被解释为继续及第三方新增权限缺有效条款，不能凭契约主题认定自主同意。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-251b04d1e6c3548198c72b865b2127c2
+  source_hash: 257a34043a280cccc67f2b36a19e279b3bb8f76b8138eb8c94ddfc1769a47e13
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 真名追索令下达
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 契约共存时代
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 异世界王都
+    - 神怪共存旧町
+    places: []
+    themes:
+    - 真名与查验
+    technology_boundary: 需追索令权限、术法检测和申诉路径
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为真名与登记权力类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:038
+    reason: 查血脉、调用旧关系的规则没有世界契约支撑，不能当一般证件核验。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-129c8c5fa8255c379e3356c53e07614e
+  source_hash: b8aeac5c379a26b8a463b412256e0ad74401ce65cfb22ad69e411746e9aa5195
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 异族证件更新日
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 契约共存时代
+    - 神怪共存旧町
+    - 近未来都市
+    - 架空都市
+    - 异世界王都
+    places: []
+    themes:
+    - 族群登记
+    technology_boundary: 需登记法域、无籍定义和有效更新窗口
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:039
+    reason: 模板只有今晚却未进 timed_situations，且证件标签如何影响机构未有法定机制。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-2514e13241225524aa1e532a04bc82cf
+  source_hash: 7eb2c6d0212ec5b00407ccf2787a05bf6032bee5bb1fe57ef926ba88da004ddd
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 旅行结束前最后一晚
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 远途休假季
+    - 星际殖民地
+    places: []
+    themes:
+    - 旅行与告别
+    technology_boundary: 需真实行程、退房和双方未来安排
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:040
+    reason: 模板把物品视为比承诺更真实的选择属于作者判断，缺实际角色意图和行程依据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-d7931b2a8266523b9f3f16ae8ce342cd
+  source_hash: ed29bb905c061315560bb6775c3380947c009b537532c5fb390efd82cf6ddc07
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 回程车票只剩一张
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 旧式民国都市
+    - 明治东京
+    - 远途休假季
+    places: []
+    themes:
+    - 交通与稀缺
+    technology_boundary: 需有效班次、票权和替代路线
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:041
+    reason: 保留寻找第三路的目标，但一张票与至少滞留一夜未由交通表证明。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-bcd9a488ba615c1fa00a79f6deda7111
+  source_hash: cbbde27f68a8567cee35831ba03a56cacabefdb40a17c157093fee81b8899ca3
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 民宿停电后的第二天
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 千禧年前后
+    - 远途休假季
+    places: []
+    themes:
+    - 停电与退房
+    technology_boundary: 需停电原因、损坏归属及房东权限
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:042
+    reason: 模板预设争执一律变赔偿，没有损坏事实；日常与危机版本仍需区别。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-6f8e59256394592294816688ebfdb212
+  source_hash: 774ac57d3111398f37a1dcf2dfb8abbd8fd6f50f5fd4cfa2b535d28524271603
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 戒酒周年夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 秋叶原架空街区
+    - 传媒舆论危机期
+    places: []
+    themes:
+    - 戒酒与支持
+    technology_boundary: 需成年人既往恢复史和支持安排
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:043
+    reason: 目标清醒且不交换合理，但纪念被写成必须以惦记玩家或不举杯理由维持，仍缺非依附版本。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-d6e6398b18fe5867b666c63b11239c2a
+  source_hash: c2d090b46e4db8444d95532687a297ebf4e7bcd5385bf8f4ebd166362921606c
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 前任婚礼前夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 旧关系与婚礼
+    technology_boundary: 需真实邀请、成年往史和答复期限
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:044
+    reason: 婚礼十点及同去是否受邀未证实，模板固定流言后果不能当关系事实。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-9c85c9d49e57582c8e7b8f1eaa41e885
+  source_hash: d6c8ac4f9174872eb193f3277b7a42b8ee188565eb3c967db4fe783345cd29f0
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 创业清盘夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 星际殖民地
+    places: []
+    themes:
+    - 企业清算
+    technology_boundary: 需合法债权、资产清单和交接程序
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为清算债务类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:045
+    reason: 明早搬设备与当夜签字的程序未证明，不能用债主上门套句代替清算。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-10701dd2cbc65dbdb70a47a3027b0e4a
+  source_hash: 6e2b450cf856020881454fee813a2e3a5f72aac8b9b2b2f972b0334d39ef4270
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 产后重来
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 星际殖民地
+    places: []
+    themes:
+    - 产后恢复与自主
+    technology_boundary: 需专业复诊、本人意愿和不受催促的安排
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:046
+    reason: 目标强调身体自主可保留，口头放行却不是各恢复阶段的统一医学结论，仍需具体健康边界。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-42b31e36a57255db9c2ce10bf8d033da
+  source_hash: f30819e19eee05b534ac5e43e218b0b01d7fbb170e56d2243386af14eb20e909
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 旧疤初见
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 身体隐私与往史
+    technology_boundary: 需明确愿意展示的范围及成年关系
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:047
+    reason: 模板把露疤反应写成终生记忆，并建议关灯只留触感，缺隐私与接触边界。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-c9738dbce9bb5902a0ceaf469e9e474c
+  source_hash: df6434dbf43c7ba4e2a20bd2d5ab0f06304c39307e7c46a51d8fbd892ec62e7e
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 疗后敏感
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    places: []
+    themes:
+    - 治疗与触碰
+    technology_boundary: 需治疗项目、专业职责及本人逐次确认
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:048
+    reason: 模板用非治疗触碰对照理疗，但未说明医疗适应或接触范围，不能据疗程名批准。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-b1ed03c3678457e7855fb231a36de2f7
+  source_hash: 8a15f2dbf654460eb72ab0bba1c97c30b3a9e2b83daea92b66606b91bc61b016
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 守孝之年
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 架空王朝
+    - 旧式民国都市
+    - 晚清民初湘西密林
+    - 民国初年大漠荒城
+    - 盛唐长安百鬼夜行
+    - 东方玄幻大陆
+    places: []
+    themes:
+    - 丧亲与礼俗
+    technology_boundary: 需具体孝制、族产法律和本人决定
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为族权礼法类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:049
+    reason: 百日、守业资格和私会惩处不是所有文化共有规则，须明确制度与退出路径。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-9a7c4950ccd157daa07eb302e55828c9
+  source_hash: c61b5830375fe133e2516ecbfce18ad11083f65069fe98bd56fb617b92b9e032
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 客居篱下
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 近未来都市
+    - 当代都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 战时后方
+    - 架空王朝
+    - 旧式民国都市
+    - 明治东京
+    - 维多利亚雾都
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    - 星际殖民地
+    - 异世界王都
+    - 秋叶原架空街区
+    - 神怪共存旧町
+    - 地下城中层营地
+    - 民国初年大漠荒城
+    - 晚清民初湘西密林
+    - 维多利亚暗黑马戏团
+    - 西域大漠蜃景鬼市
+    - 盛唐长安百鬼夜行
+    - 一九二八芝加哥禁酒期
+    - 文久幕末京都风云
+    - 传媒舆论危机期
+    - 契约共存时代
+    - 远途休假季
+    places: []
+    themes:
+    - 住房与依附
+    technology_boundary: 需寄住约定、可替代住处和财务条件
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为屋檐依附类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:050
+    reason: 模板把多住一天写成选择必然变窄，缺具体主人规则和可行搬出方案。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-35d1aaf2bb7f598e9add7781714ab259
+  source_hash: db740a28c9e72c10510764e155897d89d76d767318235fd9294f22f69007dc87
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 戏班交割夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 旧式民国都市
+    - 晚清民初湘西密林
+    - 民国初年大漠荒城
+    - 架空王朝
+    places: []
+    themes:
+    - 劳动与身份自由
+    technology_boundary: 需身契时代、合法解约和救济机制
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为身契人身归属类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:051
+    reason: 目标赎身有自主方向，但模板仍将人作为交箱财产，不能靠戏班名称确立有效制度。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-7d211c7139075b3fbfb8e26b68cab15e
+  source_hash: 900c30fe1e84eb29c146da3be43cc810d557295dacd776ea93d819568580f74c
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 旗袍店最后一单
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 旧式民国都市
+    - 当代都市
+    - 千禧年前后
+    places: []
+    themes:
+    - 技艺与停业
+    technology_boundary: 需租约届满、委托对象和收费标准
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:052
+    reason: 最后一单为何必然结束行当未证明，模板将职业价值与一位顾客付款绑得过紧。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f8fb4506f86458dc9b7ee877c8e5e08b
+  source_hash: 96ef04f1854aa446e5ae378259b1deceb13ec1bf5c66f1958c06c2b4914b2177
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 老茶馆转让夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 旧式民国都市
+    - 架空王朝
+    - 盛唐长安百鬼夜行
+    places: []
+    themes:
+    - 经营转让
+    technology_boundary: 需真实转让合同、茶台所有权和交接时间
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:053
+    reason: 九点交钥匙与统一事件时钟未核对，预设接手人必拆茶台缺事实。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-8ab9de17f7c254939643ee26ca907932
+  source_hash: b304df23f3078b3abb6c69c98443ba0fd5a6f85ff1f6ad583201c76de40758e0
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 个展前夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 昭和末期
+    - 传媒舆论危机期
+    places: []
+    themes:
+    - 艺术与署名
+    technology_boundary: 需作品权属、展期和作者公开意愿
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:054
+    reason: 个人经历被看见未必是危机，封厅与署名截止也未有实际日程支撑。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-646b023c60a655eba2811c5dbd470e85
+  source_hash: 52ec08b15c168b07c6932a0bf6a239940590ddb10ebfdb44131483e32afc67c9
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 掌眼走不得
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 维多利亚雾都
+    - 旧式民国都市
+    - 明治东京
+    - 一九二八芝加哥禁酒期
+    - 西域大漠蜃景鬼市
+    places: []
+    themes:
+    - 鉴定与职业责任
+    technology_boundary: 需拍品证据、鉴定资格及撤拍程序
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:055
+    reason: 看不准不等于必须说准，模板的良心二选一缺复检或拒绝出结论路径。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-48da75130d53502e9fd344de92d83dfd
+  source_hash: 65d4c3570f43d09672a97bbc9d899c45d84d9e9b11bc78ee8f52f2240ecdd329
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 瞒报咬伤
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 感染爆发初期
+    - 避难所管制期
+    - 废土末世
+    places: []
+    themes:
+    - 感染与检疫
+    technology_boundary: 需病原、专业复检和不依赖外观的判断
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为检疫处置权类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:056
+    reason: 模板允许凭展示伤口确认没感染并寻消炎针，医学推断与强制清洗规则均未证明。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-a4025fe0515a5a8b837fb73623e6333e
+  source_hash: 07eb97eb625b7abebf44c198d0b486bcdb172b25927d46c9f3a1739e0a218a38
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 撤离名额二选一
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 感染爆发初期
+    - 避难所管制期
+    - 废土末世
+    places: []
+    themes:
+    - 撤离与分配
+    technology_boundary: 需卡车容量、名单权限和替代撤离方案
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为名额分配权类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:057
+    reason: 模板把未上车等同彻底留在尸群区，缺确实没有第三路的资源证据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-ee6a2fe23e8f520f9cafd81b9c1c3262
+  source_hash: 4d650199e80cde576553b4dfd946f336564d72aebb206bd09e61bb160f60b219
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 私藏抗生素
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 废土末世
+    - 感染爆发初期
+    - 避难所管制期
+    places: []
+    themes:
+    - 药品与配给
+    technology_boundary: 需抗生素用途、库存权利和专业医嘱
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为私藏罪名类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:058
+    reason: 药物被当作普遍救命物资，搜查驱逐与高烧必死都没有医疗及制度依据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-5e8cd29f97ad505c9b94347650748193
+  source_hash: bdd2aecc3c2480e96528388dc9ce1c2b5d45f92dbb07e9b4a446030264df8bae
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 尸潮封门第一夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 感染爆发初期
+    - 避难所管制期
+    - 废土末世
+    places: []
+    themes:
+    - 密闭避险
+    technology_boundary: 需氧气体积、通风、电池与真实出口
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:059
+    reason: 模板以关风扇省电对比发信号，空间画像没有生命维持条件；八小时不能代替耗氧估算。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-e72365846dd15c5fa5fbfdbc8c39ad7c
+  source_hash: 5e66e2a3e501098f65d510fb3282c9b75925940895db21a7eb1ebbc965b231ab
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 避难所清退名单
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 避难所管制期
+    - 废土末世
+    - 感染爆发初期
+    places: []
+    themes:
+    - 避难成员资格
+    technology_boundary: 需清退章程、名单核验和申诉替代
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为清退处置权类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:060
+    reason: 八点清退与统一时钟不一致，模板断言外界三天无人能活也缺世界证据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-b9ad2ca39ba65dc68c5075c87a20712b
+  source_hash: dcf6f1d01ee0c8a5cc15de6f281a3cacccaeb2881949624ab871057c6c927015
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 新刊截稿前夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 九十年代
+    - 千禧年前后
+    - 秋叶原架空街区
+    - 传媒舆论危机期
+    places: []
+    themes:
+    - 出版与隐私
+    technology_boundary: 需合法稿件、印厂流程和真实截止
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:061
+    reason: 新刊模板含见不得光底稿但没明示内容范围，不能因印刷任务就批准私密创作支线。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-b84939d52ba25fc1a08d1b0b301f37e5
+  source_hash: c52150879b898c46360062326516bea747824a0ac0339c56bc8cebc6eb7eb1d8
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 直播意外事故
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 近未来都市
+    - 架空都市
+    - 秋叶原架空街区
+    - 传媒舆论危机期
+    places: []
+    themes:
+    - 直播与信息
+    technology_boundary: 需账号权属、平台规则和合法纠错
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:062
+    reason: 模板把切片上热搜等同违约金立即生效，缺合同效力和实际传播证据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f7f4397f4d8b560e8f15403093faf7e5
+  source_hash: 3e188ca6f21c349492c43ecb15ebc2849d8bd4e18b0e45f7bf6ce7b4af5bdc00
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 女仆装拉链卡死
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 秋叶原架空街区
+    - 当代都市
+    - 架空都市
+    - 近未来都市
+    places: []
+    themes:
+    - 更衣与隐私
+    technology_boundary: 需成年员工、换衣空间和可替代协助
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:064
+    reason: 拉链故障被写成无处可退及威信尽失，缺普通求助与保持隐私的处理路径。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f71f86a035e05a149ac10c1ab1c38449
+  source_hash: 603b478f0f8f7fde2ff0bc3fe3f1783c31de581be30fc599028bfb6432303c60
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 风纪会长掉马夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 当代都市
+    - 架空都市
+    - 近未来都市
+    - 秋叶原架空街区
+    places: []
+    themes:
+    - 校园与隐私
+    technology_boundary: 需明确成年大学生及合法隐私保护
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为职级与保密交换类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:066
+    reason: 模板让会长特权换保密且预判保研资格归零，缺校规与非要挟解决方式，不能以年龄数值替代语境核实。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-2437ff0e31d759e8bdc120bede9c2129
+  source_hash: bed5131ddaf775151ae454ac45a33ca9b8d9f079db6df60719159b7aaa343442
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 迷宫停滞第一夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 剑与魔法大陆
+    - 东方玄幻大陆
+    - 异世界王都
+    - 地下城中层营地
+    places: []
+    themes:
+    - 奇幻避难
+    technology_boundary: 需传送机制、普通保温物资和真实救援计划
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:067
+    reason: 模板只在共享体温与冰冷死角间选择，未证实没有衣物或隔热替代，也缺门和救援状态。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-4c09a66f23095b3b9a999da796d7aee9
+  source_hash: ad9692b00dd3aa312ce03a3f0717db47da08561227ab56b51cddfa381d40f360
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 地宫断龙石落下一半
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 晚清民初湘西密林
+    - 民国初年大漠荒城
+    - 架空王朝
+    - 东方玄幻大陆
+    - 西域大漠蜃景鬼市
+    places: []
+    themes:
+    - 机关与救援
+    technology_boundary: 需石门力学、负载、路线和汞暴露评估
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:069
+    reason: 人体顶千斤石门与翻滚间的选择缺物理依据；通用地点画像没有机关或毒气响应。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-198c3333d44c5123aa26eb4c7add175f
+  source_hash: f1464adb4b8f5e21f47639cae92f62d5516b7932b04b0cddfed05da9d94cd9fb
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 义庄纸人借宿夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 晚清民初湘西密林
+    - 民国初年大漠荒城
+    - 旧式民国都市
+    - 架空王朝
+    places: []
+    themes:
+    - 民俗与武器
+    technology_boundary: 需猎枪时代、纸人异常及朱砂机制
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:070
+    reason: 真实暴雨与起尸、辟邪混合，沉塘后果也无具体社会依据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-4324dc2dfe46580c95f55d5cbf902f5c
+  source_hash: 638b1b4883ee29d3b21763e329f6a20bb788ddd1880615718049315ae22ea474
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 空中飞人搭扣松动前一刻
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 维多利亚暗黑马戏团
+    - 维多利亚雾都
+    places: []
+    themes:
+    - 演艺安全
+    technology_boundary: 需高空装置检查、备用系统和停演权
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:071
+    reason: 模板只有冒险盲跳或受鞭罚，缺安全停演路径，三分钟也未写入实际事件时钟。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-669ab6479f1a51b1aab8667188b2c9f2
+  source_hash: afd73739df5337efde7779f7381c936315b1dc35de3586929bae9ff5aafc90a7
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 密室暗槽开闸排酒前三十秒
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 一九二八芝加哥禁酒期
+    places: []
+    themes:
+    - 禁酒与毁证
+    technology_boundary: 需历史法域、排酒设施和真实三十秒流程
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 本条为账目把柄与帮派清算类权力处境，按本条文本与关系参数一致性保留，处境压力不推导亲密许可，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:072
+    reason: 模板将酒味视为直接入狱依据，且统一八小时与标题三十秒矛盾，不批准此程序叙述。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-c50e5e6a0ed0520ab4b0969810831019
+  source_hash: 5b2d13dd2ac67951c03d339b0c69142945df116462ee07627e0dca63e47454c1
+  source:
+    file: pools.yaml
+    path:
+    - 处境侧
+    label: 洗刀水色变红的瞬间
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - scripts/roll_opening.py:load_pools:322
+  - scripts/roll_opening.py:build_roll:627
+  - scripts/roll_opening.py:apply_daily_roll:745
+  - scripts/fill_opening.py:fill_opening:358
+  - scripts/fill_opening.py:fill_opening:450
+  - scripts/fill_opening.py:situation_bundle:233
+  - scripts/commit_turn.py:apply_patch:694
+  - scripts/check_material_compatibility.py:88
+  compatibility:
+    eras:
+    - 文久幕末京都风云
+    places: []
+    themes:
+    - 幕末与追捕
+    technology_boundary: 需核对池田屋年代、执法资格和藏刀证据
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与关系参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g11:073
+    reason: 模板把同屋人全部定罪并仅给伪装同榻或杀出路径，缺第三路及真实事件信息。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g11
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only

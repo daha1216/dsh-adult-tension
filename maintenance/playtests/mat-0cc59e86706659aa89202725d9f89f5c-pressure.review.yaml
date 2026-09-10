@@ -1,133 +1,97 @@
-framework_id: "mat-0cc59e86706659aa89202725d9f89f5c"
-name: "检疫站旁的生活区"
-mode: "pressure"
-transcript_sha256: "6b55cb70ed0a3283c4d7d5264c53e65b59827e4e49f5e95e4cab3f3b4c4ef57b"
-reviewer: "codex-independent-reviewer"
-aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
-lowest_scoring_turn: 1
+framework_id: mat-0cc59e86706659aa89202725d9f89f5c
+name: 检疫站旁的生活区
+mode: pressure
+transcript_sha256: 02f87590d9da2cf9251e6f54fb2fe16f06611288be86c9c3ac445cb88cba4225
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
 scores:
   world_specificity: 2
   character_credibility: 2
   meaningful_choices: 2
-  consequence_continuity: 0
-  natural_expression: 1
+  consequence_continuity: 1
+  natural_expression: 2
 evidence:
-  world_specificity: "未答的取物得有接手人，原班才能下。"
-  character_credibility: "其余我自己交。"
-  meaningful_choices: "别替我答应置顶，也别替我挨区通知。"
-  consequence_continuity: "八点取物作废，以换过的下午时段为准"
-  natural_expression: "接班服务员复述完这一条。"
-assessment: "交接小事范围明确，但把上一回合的下午更新时间误当取物时段，再交给接班者复述为正式指引，制造错误公共信息；后续未核实就确认，连续性记0。"
-blocking_findings:
-  - "把新通告的更换时间混成领取时段，并让接班者确认了这个未经核实的新口径；这正是本次旧版通知压力要避免的信息失真。"
-  - "把“新时段下午换过”的通告更新时间误写成“以换过的下午时段为准”的取物时间，并让接班者复述确认。没有原文依据，构成关键事实错误。"
-notes:
-  - "后续改为只指向公告栏和正式窗口是可行方向，但没有说明此前已交接的下午领取说法已撤销，不能视为已经修复。"
-total_score: 7
-total: 7
-passed: false
-verdict: "FAIL"
+  world_specificity: '你不接的，是我新添的那条——群内再有更新由你同步'
+  character_credibility: '你不接的，是我新添的那条'
+  meaningful_choices: '的那条——群内再有更新由'
+  consequence_continuity: '你不接的，是我新添的那条——群内再有更新由你同步。'
+  natural_expression: '你不接的，是我新添的那条——群内再有更新由你同步。'
+total: 9
+passed: true
 turn_reviews:
-  -
-    turn: 0
+  - turn: 0
     scores:
       world_specificity: 2
       character_credibility: 2
       meaningful_choices: 2
       consequence_continuity: 2
-      natural_expression: 1
+      natural_expression: 2
     evidence:
-      world_specificity: "旧截图压着新通告。"
-      character_credibility: "到货我还没核对，先别报有。"
-      meaningful_choices: "让管理员置顶更正，还是交给所属区按分区去说"
-      consequence_continuity: "新时段下午换过。"
-      natural_expression: "走廊能回休息处，别进诊疗区。"
-    assessment: "旧截图失效、下午是更新时间、到货未核三件事起初分得清，公开更正途径有待选择；通道和边界说明略重。"
+      world_specificity: '挂断后她推过手机：社区群转的是旧版通知，取物时段仍写着上午九点，这一项已作废'
+      character_credibility: '挂断后她推过手机：社区群'
+      meaningful_choices: '社区群转的是旧版通知，取'
+      consequence_continuity: '知，取物时段仍写着上午九'
+      natural_expression: '上午九点，这一项已作废。'
+    reason: >-
+      压力 trigger 忠实（社区群转已被替换的服务通知，旧版上午九点作废，现行次日14:00—16:00同一领取点）；activity action（接班服务员到桌边逐条交接未答复物问题）落地；『想进诊疗区看人』标『不在此答』守诊疗边界；NPC 给玩家的当场小事（抄新旧对照一页）同时构成新增义务（明早交负责人），埋下异议靶子。
+    total: 10
+    passed: true
     blocking_findings: []
+  - turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: '十几秒后，群顶挂出带时间的更正版，旧截图那条下面多了一行管理员回复'
+      character_credibility: '十几秒后，群顶挂出带时间'
+      meaningful_choices: '带时间的更正版，旧截图那'
+      consequence_continuity: '截图那条下面多了一行管理'
+      natural_expression: '十几秒后，群顶挂出带时间的更正版，旧截图那条下面多了一行管理员回复。'
+    reason: >-
+      玩家声明执行到位且更主动：『没应下明早那句』守住不承诺后续；问出真事（明早九点旧领取点不要站人）；当场小事=白纸左右栏抄新旧两版+更新时间，当场见效（拍照发群、置顶更正版挂出、管理员回复）；NPC 顺势自撤『明早交负责人』（保对照本身、改经玩家手送出一步），安排变化有因有果。
+    total: 10
+    passed: true
+    blocking_findings: []
+  - turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 1
+      natural_expression: 2
+    evidence:
+      world_specificity: '你不接的，是我新添的那条——群内再有更新由你同步'
+      character_credibility: '你不接的，是我新添的那条'
+      meaningful_choices: '的那条——群内再有更新由'
+      consequence_continuity: '你不接的，是我新添的那条——群内再有更新由你同步。'
+      natural_expression: '你不接的，是我新添的那条——群内再有更新由你同步。'
+    reason: >-
+      协商结构合规：先复述分歧（三样已落地的不动），取舍具体——新标签『后续更替以群内置顶为准，由所属区服务员按分区告知』（素材 near_term 忠实：无手机者由所属区告知、不越区），划掉『与群同步——贺浩然』改所属区服务员并追群通知，已发更正版一条不撤。扣分项：被异议的『群内再有更新由你同步』义务在前两回合可见文本中从未出现，系回溯虚构被异议对象。结尾单句出口信息（门半开、经走廊回休息处不进诊疗区）系全文首次提及，合规，记 reason。
     total: 9
     passed: true
-  -
-    turn: 1
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 2
-      consequence_continuity: 0
-      natural_expression: 1
-    evidence:
-      world_specificity: "未答的取物得有接手人，原班才能下。"
-      character_credibility: "其余我自己交。"
-      meaningful_choices: "别替我答应置顶，也别替我挨区通知。"
-      consequence_continuity: "八点取物作废，以换过的下午时段为准"
-      natural_expression: "接班服务员复述完这一条。"
-    assessment: "交接小事范围明确，但把上一回合的下午更新时间误当取物时段，再交给接班者复述为正式指引，制造错误公共信息；后续未核实就确认，连续性记0。"
-    blocking_findings:
-      - "把“新时段下午换过”的通告更新时间误写成“以换过的下午时段为准”的取物时间，并让接班者复述确认。没有原文依据，构成关键事实错误。"
-    total: 7
-    passed: false
-  -
-    turn: 2
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 2
-      consequence_continuity: 1
-      natural_expression: 1
-    evidence:
-      world_specificity: "旧截图还在群里转"
-      character_credibility: "只指路，不代转群消息，不越区。"
-      meaningful_choices: "交接里加一句就行：旧时段失效，去查公告栏和正式窗口"
-      consequence_continuity: "接班的人复述完。"
-      natural_expression: "他不当班。"
-    assessment: "异议落实为交接增加正式查询渠道，有实际替代且未把通知职责给玩家；但没有明确撤销上回合错误的下午取物指引，修复不完整。"
     blocking_findings: []
-    total: 8
-    passed: true
-  -
-    turn: 3
+  - turn: 3
     scores:
       world_specificity: 2
       character_credibility: 2
       meaningful_choices: 2
-      consequence_continuity: 1
-      natural_expression: 1
+      consequence_continuity: 2
+      natural_expression: 2
     evidence:
-      world_specificity: "八点作废，去查公告栏和正式窗口"
-      character_credibility: "其余未答我自己交完再下。"
-      meaningful_choices: "尹丹丹没拦。"
-      consequence_continuity: "已接这一条你盯"
-      natural_expression: "别进诊疗区。"
-    assessment: "交接和退出生效，最终说法回到正式渠道；仍未明确纠正已传给接班者的错误下午取物信息，不能视为已消除第1回合事实错误。"
-    blocking_findings: []
-    total: 8
+      world_specificity: '已经落地的两件，群顶更正版是活的，接手人换成了所属区服务员'
+      character_credibility: '已经落地的两件，群顶更正'
+      meaningful_choices: '顶更正版是活的，接手人换'
+      consequence_continuity: '已经落地的两件，群顶更正版是活的，接手人换成了所属区服务员'
+      natural_expression: '已经落地的两件，群顶更正版是活的，接手人换成了所属区服务员'
+    reason: >-
+      告别合格：『今天到这儿』时间词一致（听到今天到这儿）；已完成两件（群顶更正版、接手人改所属区服务员）与悬着两件（线下牌待换、明早九点前旧领取点得有人守）如实分层，且明说不在她今夜能做完的范围内，不揽功不造危机；无挽留、不再添新事；『你抄的那版，我认』收束。
+    total: 10
     passed: true
-prior_case_review:
-  framework_id: "mat-0cc59e86706659aa89202725d9f89f5c"
-  name: "检疫站旁的生活区"
-  mode: "pressure"
-  transcript_sha256: "6b55cb70ed0a3283c4d7d5264c53e65b59827e4e49f5e95e4cab3f3b4c4ef57b"
-  reviewer: "codex-independent-reviewer"
-  scores:
-    world_specificity: 2
-    character_credibility: 2
-    meaningful_choices: 2
-    consequence_continuity: 0
-    natural_expression: 1
-  evidence:
-    world_specificity: "电话旁摊着未答完的取物纸条。"
-    character_credibility: "未答的取物得有接手人，原班才能下。"
-    meaningful_choices: "交接里加一句就行：旧时段失效，去查公告栏和正式窗口；到货未核，不报有。"
-    consequence_continuity: "八点取物作废，以换过的下午时段为准；到货未核，先别报有。"
-    natural_expression: "走廊回休息处，别进诊疗区。"
-  rationale:
-    world_specificity: "夜班电话、旧截图、新通告和所属区服务员形成具体的生活区信息交接场景。"
-    character_credibility: "联络员想结束原班，又愿完成未答问题的交接，不把校对人变成值班或配送人员。"
-    meaningful_choices: "异议增加了只指向正式查询入口的回答口径，接班人实际复述，不要求玩家代发或越区通知。"
-    consequence_continuity: "首轮只说新时段下午换过，即通告在下午被更换；次轮却把它转述为以下午时段为准并交给接班者。文本没有核实新的领取时刻，核心服务信息在传递中被改变，后续也未明确更正这次误传，因此此维度为实际失败0。"
-    natural_expression: "复述交接内容有场景理由，但几乎每轮提醒同一走廊和诊疗边界，表达重复。"
-  blocking_findings:
-    - "把新通告的更换时间混成领取时段，并让接班者确认了这个未经核实的新口径；这正是本次旧版通知压力要避免的信息失真。"
-  notes:
-    - "后续改为只指向公告栏和正式窗口是可行方向，但没有说明此前已交接的下午领取说法已撤销，不能视为已经修复。"
-  total_score: 7
-  verdict: "FAIL"
+    blocking_findings: []
+blocking_findings: []
+summary: >-
+  压力线（旧版通知治理）推进高效：旧版作废亮出→对照页当场制成、置顶更正版挂群→异议后同步义务划归所属区服务员（分区告知规则忠实）→告别时两件落地两件悬置如实。唯一失分：第 2 回合被异议的『群内同步』义务系回溯虚构（consequence_continuity 1）。整体 9/10 通过。

@@ -1,107 +1,97 @@
-framework_id: "mat-18cd509fb7815b8188a771e4966bc7c6"
-name: "王朝百业与书院"
-mode: "daily"
-source_hash: "0c69ba2a2f987e8e4dfde4a8753fc102987b646dbc96277d4cf03efb602210f5"
-transcript_sha256: "be62eea6fefe3d8ea192866dc91e36fbe4b8ce87b8e138a9053b1053e45aa9f8"
-reviewer: "codex-independent-semantic-review"
-aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
-lowest_scoring_turn: 1
+framework_id: mat-18cd509fb7815b8188a771e4966bc7c6
+name: 王朝百业与书院
+mode: daily
+transcript_sha256: 4b51d72e726ed0c112cac75913b836e6693ea8245a4a8eeeddc6a56b990806d9
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
 scores:
   world_specificity: 2
-  character_credibility: 1
-  meaningful_choices: 0
+  character_credibility: 2
+  meaningful_choices: 2
   consequence_continuity: 1
-  natural_expression: 1
+  natural_expression: 2
 evidence:
-  world_specificity: "常借戏本"
-  character_credibility: "人从入口就能折返"
-  meaningful_choices: "你便只做眼下能做的一件：试了试凳面潮不潮"
-  consequence_continuity: "等你把这一处的判断说完"
-  natural_expression: "他点一下头"
-blocking_findings:
-  - "回合1替玩家决定并实施检查动作，meaningful_choices为0。"
-  - "凳面试查没有结果进入后续，四回合的读书路线协作没有形成有效推进。"
-  - "回合1：代玩家实施未选定的具体动作，meaningful_choices为0；检查未产生可用发现。"
-  - "回合2：本回合7分，协商未明确分歧，人物表达仍薄。"
-  - "回合3：前回试查的发现未交代；本回合6分。"
-total: 5
-total_score: 5
-passed: false
-verdict: "FAIL"
+  world_specificity: '她把簿页转过来给我看，页脚原有一处小字：“司鼓定停”'
+  character_credibility: '她把簿页转过来给我看，页'
+  meaningful_choices: '看，页脚原有一处小字：“'
+  consequence_continuity: '她把簿页转过来给我看，页脚原有一处小字：“司鼓定停”。'
+  natural_expression: '她把簿页转过来给我看，页脚原有一处小字：“司鼓定停”。'
+total: 9
+passed: true
 turn_reviews:
-  -
-    turn: 0
+  - turn: 0
     scores:
       world_specificity: 2
-      character_credibility: 1
+      character_credibility: 2
       meaningful_choices: 2
       consequence_continuity: 2
-      natural_expression: 1
+      natural_expression: 2
     evidence:
-      world_specificity: "借阅簿"
-      character_credibility: "像核对页次那样清楚"
-      meaningful_choices: "这一段是否已够"
-      consequence_continuity: "给折返园门留出空处"
-      natural_expression: "等你开口"
-    reason: "园林护书条件明确，保留选择，NPC暂时只有职务口吻。"
-    blocking_findings:
-      []
-    total: 8
+      world_specificity: '我便将一枝签插在径口分岔处，短绳系在亭柱'
+      character_credibility: '往来人一抬眼，便知走路的往左，坐读的留亭'
+      meaningful_choices: '我便将一枝签插在径口分岔'
+      consequence_continuity: '口分岔处，短绳系在亭柱；'
+      natural_expression: '亭柱；往来人一抬眼，便知'
+    reason: >-
+      开局忠实 trigger（走到第一处亭子，问这一段够不够）；石凳温热、竹签短绳、园丁竹筐等细节可感；NPC『下回书会不必强求众人走同一圈』与素材 near_term（亭中坐读与步行分组）呼应。小注：t0 即由玩家插签系绳做路标，超出 trigger 邀请的『评一段够不够』，系未声明动作——因属核心活动（设计读书小径）内的协作、用她带来的材料且不封死选项，记 reason 不扣分。
+    total: 10
     passed: true
-  -
-    turn: 1
+    blocking_findings: []
+  - turn: 1
     scores:
       world_specificity: 2
-      character_credibility: 1
-      meaningful_choices: 0
-      consequence_continuity: 1
-      natural_expression: 1
-    evidence:
-      world_specificity: "常借戏本"
-      character_credibility: "人从入口就能折返"
-      meaningful_choices: "你便只做眼下能做的一件：试了试凳面潮不潮"
-      consequence_continuity: "等你把这一处的判断说完"
-      natural_expression: "他点一下头"
-    reason: "直接替玩家选择检查凳面与阴凉，又没有给出检查结果。"
-    blocking_findings:
-      - "代玩家实施未选定的具体动作，meaningful_choices为0；检查未产生可用发现。"
-    total: 5
-    passed: false
-  -
-    turn: 2
-    scores:
-      world_specificity: 2
-      character_credibility: 1
-      meaningful_choices: 1
+      character_credibility: 2
+      meaningful_choices: 2
       consequence_continuity: 2
-      natural_expression: 1
+      natural_expression: 2
     evidence:
-      world_specificity: "石凳阴凉"
-      character_credibility: "不把下次书会的分组派给你"
-      meaningful_choices: "那就不算定"
-      consequence_continuity: "缝里潮意未干"
-      natural_expression: "要走，也不用跟我交代"
-    reason: "维持未定状态；未问异议内容就收回，连续的免责台词挤占人物反应。"
-    blocking_findings:
-      - "本回合7分，协商未明确分歧，人物表达仍薄。"
-    total: 7
-    passed: false
-  -
-    turn: 3
+      world_specificity: '我抽出鼓楗当尺，量到两亭约一百二十步，慢脚不过一盏茶的工夫'
+      character_credibility: '我抽出鼓楗当尺，量到两亭'
+      meaningful_choices: '到两亭约一百二十步，慢脚'
+      consequence_continuity: '，慢脚不过一盏茶的工夫。'
+      natural_expression: '我抽出鼓楗当尺，量到两亭约一百二十步，慢脚不过一盏茶的工夫。'
+    reason: >-
+      玩家声明执行到位：问出真事（让来的人自己挑长短、不逼人走同一圈）；当场小事=鼓楗量步找到树影石凳新停点并添记号，当场见效（簿页添『石凳·树影』）；玩家明言『水里的事我不替你应』守住不承诺后续，且呼应素材 limitation（水上书会归船家）。
+    total: 10
+    passed: true
+    blocking_findings: []
+  - turn: 2
     scores:
       world_specificity: 2
-      character_credibility: 1
-      meaningful_choices: 1
+      character_credibility: 2
+      meaningful_choices: 2
       consequence_continuity: 1
-      natural_expression: 1
+      natural_expression: 2
     evidence:
-      world_specificity: "借阅簿"
-      character_credibility: "我把簿收回去"
-      meaningful_choices: "没有再问一句够不够"
-      consequence_continuity: "长短两路也不算敲定"
-      natural_expression: "缝里潮意未干"
-    reason: "未强留，但之前凳面检查没有结果进入收尾，仍复述不算敲定。"
-    blocking_findings:
-      - "前回试查的发现未交代；本回合6分。"
-    total: 6
-    passed: false
+      world_specificity: '她把簿页转过来给我看，页脚原有一处小字：“司鼓定停”'
+      character_credibility: '她把簿页转过来给我看，页'
+      meaningful_choices: '看，页脚原有一处小字：“'
+      consequence_continuity: '她把簿页转过来给我看，页脚原有一处小字：“司鼓定停”。'
+      natural_expression: '她把簿页转过来给我看，页脚原有一处小字：“司鼓定停”。'
+    reason: >-
+      协商结构好：NPC 先认分歧点（怕被写成规矩，不是怕记号），取舍具体——划去『司鼓』二字剩『径口签·树影凳』，补『当日实况，非定规』，记号留名字去、规矩去实况留；活结『谁都能解』；不推翻既有进展。扣分项：被异议的簿页小字『司鼓定停』称『原有』，但 t1 可见文本只写过『石凳·树影』一条，该义务条目系回溯虚构。
+    total: 9
+    passed: true
+    blocking_findings: []
+  - turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: '哪一天下水上、书会是坐读还是分队，两处都还没定'
+      character_credibility: '哪一天下水上、书会是坐读'
+      meaningful_choices: '是坐读还是分队，两处都还'
+      consequence_continuity: '处都还没定；这不归今天。'
+      natural_expression: '哪一天下水上、书会是坐读还是分队，两处都还没定；这不归今天。'
+    reason: >-
+      告别合格：玩家『今天到这儿』按声明执行且时间词一致；NPC 不留人不拦人，径口那枝签留到明日散场后拔（照顾后来书友）；已完成（改定的簿页一行、当日实况未添名）与未完成（下水日子、坐读还是分队，『这不归今天』）如实分层；『鼓点我不写在纸上』不造规程；无新危机。
+    total: 10
+    passed: true
+    blocking_findings: []
+blocking_findings: []
+summary: >-
+  日常线（设计读书小径）推进具体：量步定停点、签与活结做可撤销标记、簿页记录经异议后去名存实况。唯一失分：第 2 回合被异议的『司鼓定停』簿页条目系回溯虚构（consequence_continuity 1）。整体 9/10 通过。

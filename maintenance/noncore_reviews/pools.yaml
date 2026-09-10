@@ -1,0 +1,1906 @@
+- id: mat-7160d6ac9a7e5059bfa79c597a18213d
+  source_hash: 982b5f1b9a24ecaaf0473698c738cfccb63b6c9337f3b736817be3eb76ab3cf9
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: &id001
+  - consumer:roll_opening.load_pools#权力结构
+  - consumer:roll_opening.build_roll#权力结构
+  - consumer:fill_opening.fill_opening#权力结构
+  - consumer:validate_state.validate#meta.power_structure
+  compatibility:
+    themes:
+    - 权力关系
+    technology_boundary: 通用关系结构契约值，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 结构枚举值，无内容限制
+  review:
+    scope: noncore:pools:1
+    reason: P2 legacy 池：权力结构「player_high」∈ roll_opening.POWER_STRUCTURES 白名单（L70，与
+      validate_state.py L22 同集合），开局抽取（build_roll L539 抽取、L666-667 复检）后经 fill_opening
+      L494 句式化写入 meta.power_structure，4 值与代码常量完全一致，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-92ebb18ac45d5ce4a96525f966ce76f8
+  source_hash: a95123b7c9c0bc270ea2e76401868ff9eac3f2aa27e102b784542b5135e3159f
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id001
+  compatibility:
+    themes:
+    - 权力关系
+    technology_boundary: 通用关系结构契约值，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 结构枚举值，无内容限制
+  review:
+    scope: noncore:pools:2
+    reason: P2 legacy 池：权力结构「npc_high」∈ roll_opening.POWER_STRUCTURES 白名单（L70，与 validate_state.py
+      L22 同集合），开局抽取（build_roll L539 抽取、L666-667 复检）后经 fill_opening L494 句式化写入 meta.power_structure，4
+      值与代码常量完全一致，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-f2c45a06f42a586e8c5b7d143b326fd5
+  source_hash: 874ed18a6ac1766fdede364b9ce26ef8426d6ed4d9ca7f6b0ac3fba910e59d02
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id001
+  compatibility:
+    themes:
+    - 权力关系
+    technology_boundary: 通用关系结构契约值，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 结构枚举值，无内容限制
+  review:
+    scope: noncore:pools:3
+    reason: P2 legacy 池：权力结构「equal」∈ roll_opening.POWER_STRUCTURES 白名单（L70，与 validate_state.py
+      L22 同集合），开局抽取（build_roll L539 抽取、L666-667 复检）后经 fill_opening L494 句式化写入 meta.power_structure，4
+      值与代码常量完全一致，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-695b581f2aa9538a8a62ef3ce80abd7b
+  source_hash: 8d35a563f64ea9c5ff50458da3cbf8aaf89b2c41bfb28f33f6fdf9ff277ecf0a
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id001
+  compatibility:
+    themes:
+    - 权力关系
+    technology_boundary: 通用关系结构契约值，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 结构枚举值，无内容限制
+  review:
+    scope: noncore:pools:4
+    reason: P2 legacy 池：权力结构「switchable」∈ roll_opening.POWER_STRUCTURES 白名单（L70，与
+      validate_state.py L22 同集合），开局抽取（build_roll L539 抽取、L666-667 复检）后经 fill_opening
+      L494 句式化写入 meta.power_structure，4 值与代码常量完全一致，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-e27fc579bee15bf2af73e777fefcb14e
+  source_hash: dcc89d264c303b03c7e460555cd29c69996d4e5e6b8ac015f317ae739382328b
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: &id002
+  - consumer:roll_opening.load_pools#反差轴
+  - consumer:roll_opening.build_roll#反差轴
+  - consumer:fill_opening.fill_opening#反差轴
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:5
+    reason: P2 legacy 池：反差轴「世故笨拙」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-696d4aeba9fe5138960d7885549869d9
+  source_hash: 79eef415bf6e1a3c36cb00d9dc34e07f136a18402cbf5bad04f26d69bb9d9f4e
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:6
+    reason: P2 legacy 池：反差轴「严苛沦陷」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-1656e7cfc5875414a546022100ad6f2e
+  source_hash: 7448043027088c09600896290b06930c778fe4686c8cd8ad1ac5e6fbc97962f8
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:7
+    reason: P2 legacy 池：反差轴「主导渴从」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-3a6a13992d7c55719f810c67a7a0ccaf
+  source_hash: 887778fb6f65a8ed005aa294951bf46361bc67b09646f01017bfaf9f4f451524
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:8
+    reason: P2 legacy 池：反差轴「假小子娇羞」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-16cf27f807215d6abfb6ae3c3f8dc867
+  source_hash: 5248f2df4783557a82b8672333e2f289bcc631a7c7268bcf49c86d29941b22d0
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:9
+    reason: P2 legacy 池：反差轴「健谈守口」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-bcf1117302275242911832cce4fc22d2
+  source_hash: 0f2237990bd147afd490f210c9f23aca8dc0b270e913036c541a1bf605aa32bd
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:10
+    reason: P2 legacy 池：反差轴「傲沉易推」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-127f5bfca85d5ae98e190203876e2187
+  source_hash: 7d9b3b4d12864532dc5dec36741c9a75bf554e2626e6f0b1dd6c575f16736823
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:11
+    reason: P2 legacy 池：反差轴「克制失控」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-232ccff3011357f49a0e7764892cca2b
+  source_hash: 69baf72f91bfbaf50a003541f657ae1e5e54742fd22eedc4c3509128307dbfa0
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:12
+    reason: P2 legacy 池：反差轴「刻薄依恋」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-d2b518192c115219ad1c72a605a078e5
+  source_hash: 6d7b1e68146e78da7403aeba79846f8126701696d700b661feb0073689b84fb3
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:13
+    reason: P2 legacy 池：反差轴「外冷内热」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-0a52ee5e336f5da197bdaa05e860e853
+  source_hash: 51f1308b8caf9ebf7ca018c17f4a820fca198404dbfa6b8f4ebc94cba3b0c8e8
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:14
+    reason: P2 legacy 池：反差轴「大小姐笨拙」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-442c083ad8fa5627a32d832ed888c9c5
+  source_hash: 1729ac53232d4b7a780f72b2fab848c6e4e0c3dd69307084a6a8ee87f495ab07
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:15
+    reason: P2 legacy 池：反差轴「女骑羞赧」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-d0ab08eae7255619b4a682c16209dea8
+  source_hash: e456fc029a6f45b4de3d1170df7662482be90b2e30f2af2fe00e54f7c7daf7c7
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:16
+    reason: P2 legacy 池：反差轴「妖艳羞怯」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-9aff5645f23853c98c46e3509a3deae7
+  source_hash: f598cf8dba43cd05191b7299799ffcaf223c298b2dbfc238ecd2e19d6172245c
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:17
+    reason: P2 legacy 池：反差轴「市侩重义」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-afbcb11d1343506aaa75bc12c638f398
+  source_hash: 3a23ffb30286cc33fe83bc8e1d1ef7f0a05eb02923dd574d2b93cfd152e0bb8e
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:18
+    reason: P2 legacy 池：反差轴「强势示弱」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-2682fa162e605e6a94f00ff59437a6c4
+  source_hash: 480e72553d75f4d399f697e9db2243c800e1a68faeea10684136b30461201387
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:19
+    reason: P2 legacy 池：反差轴「御姐撒娇」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-dcffa43f77f456738b5dfe8873b23477
+  source_hash: 9f40a027613c55b910ac607d56eed7519aaa94f39e90812b2aa41eb35c82d36e
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:20
+    reason: P2 legacy 池：反差轴「无口心热」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-6038c56e4b975d45b82ad0e812fce6f7
+  source_hash: 5736edaf272eeb01f2f4e384016e3847c8c31ea44771de30a07b8b0f9e3c64ca
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:21
+    reason: P2 legacy 池：反差轴「武者破戒」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-49e7df7a26ab518eaa7fce34538610b8
+  source_hash: 81e3d586a1ab606d74bf005d7f2aabca39f4c663c7fe9aa5fbfc66f4f05584bc
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:22
+    reason: P2 legacy 池：反差轴「毒舌心软」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-0c3556e943a852ee8012e6861fdbb990
+  source_hash: ab8e6958084d056bef0ae33476c142c92b4a1105031b55f96fa35f1a63d03b3e
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:23
+    reason: P2 legacy 池：反差轴「泼辣胆小」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-8aea8f5bb16b59ceb48ac36518166f3b
+  source_hash: 7b90ca3d239086dd80382f5997efe85c764c46859f77aaf7f2760e76ece35d31
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:24
+    reason: P2 legacy 池：反差轴「疏离黏人」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-f5b15a6aa5c2506c8c8e2d6c2c996452
+  source_hash: 9f93196f5a4128fcccfa5c8ecf5c1713a9b28a0300c433689891b972277f14e0
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:25
+    reason: P2 legacy 池：反差轴「禁欲破戒」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-953a234cdab0576ba00234490b40f632
+  source_hash: 520b76e6e7abc2d22c69525a1b63d4f41b88d35017ad6d7c626d010f56f79519
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:26
+    reason: P2 legacy 池：反差轴「端庄放浪」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-8b1e2cfd3eef5322824fa9ac18fdf0be
+  source_hash: d3b78e6d597a1bfd1f75411435e7deda5a94510a0b0a04ff2436df1d96e29c82
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:27
+    reason: P2 legacy 池：反差轴「粗人细活」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-59b3ea4339d850b3a6676b11cc4868af
+  source_hash: 1b3131a65f484b41fa21642b11a26cf546238113a22021a39a7563cf572f3a17
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:28
+    reason: P2 legacy 池：反差轴「精明糊涂」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-2c9a28aaf8295cc1b18a5cdd577b7d37
+  source_hash: 52b245e13521c4a4511d3b71cda51aca655a69aab54052862f399541ccfb88d0
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:29
+    reason: P2 legacy 池：反差轴「老练纯情」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-a6b93636f8205adf97ea8658eb2c8772
+  source_hash: d820058c1a136e7099f7c5613fcda2e5b04cb30ff438265c789744f16335b055
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id002
+  compatibility:
+    themes:
+    - 性格反差
+    - 角色风味
+    technology_boundary: 跨时代通用角色风味轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年角色性格反差意象
+  review:
+    scope: noncore:pools:30
+    reason: P2 legacy 池：反差轴「高岭破防」开局抽取（build_roll L631）并作 templates.yaml contrast_line
+      同名模板键（fill_opening L242/377，缺省回退「外冷内热」），成年角色性格反差意象、无身份错配，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-20c9c909d43b55c9a81b60bfb3e3afef
+  source_hash: e272cc034983bd4783ea3864476080a7cc414a68378255a643c4ae4b34e0c57a
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: &id003
+  - consumer:roll_opening.load_pools#玩家化身轴.年龄段
+  - consumer:roll_opening.build_roll#玩家化身轴.年龄段
+  - consumer:fill_opening.fill_opening#玩家化身轴.年龄段
+  compatibility:
+    themes:
+    - 成年玩家化身
+    technology_boundary: 通用玩家化身轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 全部条目为成年年龄段（≥二十出头）
+  review:
+    scope: noncore:pools:31
+    reason: P2 legacy 池：玩家年龄段「三十五上下」与 character_meta.年龄段区间 同名键一一对应（fill_opening.age_from_band
+      L460 映射），冷却抽取（build_roll L726-732），全部条目为成年段（二十出头~四十出头），成年限定核定通过，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-4fd97b61971950d4affb6ebd20a1101c
+  source_hash: fbb91a64dfacb8f16beaad4c35f8d7397073028f329f9e089b1c9568f246b877
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id003
+  compatibility:
+    themes:
+    - 成年玩家化身
+    technology_boundary: 通用玩家化身轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 全部条目为成年年龄段（≥二十出头）
+  review:
+    scope: noncore:pools:32
+    reason: P2 legacy 池：玩家年龄段「三十出头」与 character_meta.年龄段区间 同名键一一对应（fill_opening.age_from_band
+      L460 映射），冷却抽取（build_roll L726-732），全部条目为成年段（二十出头~四十出头），成年限定核定通过，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-2bcb35ec942c558abf36f7ddb2c19d68
+  source_hash: 229428ee1ed2f27bf3ba2d87b42a8ca3ec59da08e608dbefe081252dbe90e02f
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id003
+  compatibility:
+    themes:
+    - 成年玩家化身
+    technology_boundary: 通用玩家化身轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 全部条目为成年年龄段（≥二十出头）
+  review:
+    scope: noncore:pools:33
+    reason: P2 legacy 池：玩家年龄段「二十七八」与 character_meta.年龄段区间 同名键一一对应（fill_opening.age_from_band
+      L460 映射），冷却抽取（build_roll L726-732），全部条目为成年段（二十出头~四十出头），成年限定核定通过，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-36a2bffd212d57189d6a7bdf3eeee27f
+  source_hash: 51cf65a027ca345e93c63ab9a195649d0b5f3a89ca6bb6d6f97beb2e438ba8f7
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id003
+  compatibility:
+    themes:
+    - 成年玩家化身
+    technology_boundary: 通用玩家化身轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 全部条目为成年年龄段（≥二十出头）
+  review:
+    scope: noncore:pools:34
+    reason: P2 legacy 池：玩家年龄段「二十出头」与 character_meta.年龄段区间 同名键一一对应（fill_opening.age_from_band
+      L460 映射），冷却抽取（build_roll L726-732），全部条目为成年段（二十出头~四十出头），成年限定核定通过，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-cad1ddb5f95b54319643052fb60ff016
+  source_hash: 8a2e4e66df2c81e73f77b48e36ac0590e72f01b70199d7c7be0713abd2808daa
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id003
+  compatibility:
+    themes:
+    - 成年玩家化身
+    technology_boundary: 通用玩家化身轴，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 全部条目为成年年龄段（≥二十出头）
+  review:
+    scope: noncore:pools:35
+    reason: P2 legacy 池：玩家年龄段「四十出头」与 character_meta.年龄段区间 同名键一一对应（fill_opening.age_from_band
+      L460 映射），冷却抽取（build_roll L726-732），全部条目为成年段（二十出头~四十出头），成年限定核定通过，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-763e0c77c9f658b7ae8f756caea724cf
+  source_hash: c60ae755fc49e76332c8d4efb5e631f90397616e0777fc991af7912967676b39
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#meta.daily_opening
+  - consumer:roll_opening.apply_daily_roll#meta.daily_opening
+  - consumer:fill_opening.fill_opening#meta.daily_opening
+  - consumer:world_frameworks.build#meta.daily_opening
+  - consumer:world_frameworks.prepare_tables#meta.daily_opening
+  - consumer:check_content.check_daily_opening#meta.daily_opening
+  compatibility:
+    themes:
+    - 日常开局契约
+    technology_boundary: 通用日常开局模板，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 通用开局契约，无受限内容
+  review:
+    scope: noncore:pools:36
+    reason: P2 legacy 契约：daily_opening 驱动 apply_daily_roll 日常开局（缺键 AnchorError，roll_opening
+      L742-744），fill_opening L389 以其张力引擎做白名单，框架模式 build/prepare_tables 以框架 rule/social_rule
+      覆写核心与社会规则；核心规则 4/社会规则 4/张力引擎 3 引用均存在，处境 beats 占位符合规（check_content L73-107 校验通过），维持
+      legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-c207b07932d652deb385c991327a9292
+  source_hash: 517b5e6c9c6c06701dd294f752d024dfab883eaeb215caee795e4a786e977b8a
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#meta.leverage_engines
+  - consumer:roll_opening.leverage_engines
+  - consumer:check_content.run#meta.leverage_engines
+  compatibility:
+    themes:
+    - 压力引擎开关
+    technology_boundary: 通用开局契约名单，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 契约名单，无受限内容
+  review:
+    scope: noncore:pools:37
+    reason: P2 legacy 契约：leverage_engines 4 项全部 ∈ 张力引擎池（load L344-346 + check_content
+      L244-245 校验），leverage_engines() 导出（L184-185）供压力抽取开关（L522/671），维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-cf6988cf9b045e738527ed75f0859362
+  source_hash: 23911bc5c05ad1e7fa35385ac474213be38623ddac54efe272a8c9ba2d59265b
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#meta.situation_leverage
+  - consumer:roll_opening.situation_leverage
+  - consumer:check_content.run#meta.situation_leverage
+  compatibility:
+    themes:
+    - 强杠杆处境
+    technology_boundary: 通用开局契约名单，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 契约名单，无受限内容
+  review:
+    scope: noncore:pools:38
+    reason: P2 legacy 契约：situation_leverage 3 项全部 ∈ 处境侧池（load L347-349 校验）；player_high
+      命中强杠杆处境时重抽非强杠杆项（L681-685）避免权力叠加，机制自洽，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-cdd7c2a5d66e51dda82a2531de987755
+  source_hash: 1d42a9fdd074085514a80c06bc14d87ff07fec931780d1646bb3ec90e73e7216
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#meta.gate_aesthetics
+  - consumer:roll_opening.gate_aesthetics
+  - consumer:check_content.run#meta.gate_aesthetics
+  compatibility:
+    themes:
+    - 写实门控
+    technology_boundary: 通用开局契约名单，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 契约名单，无受限内容
+  review:
+    scope: noncore:pools:39
+    reason: P2 legacy 契约：gate_aesthetics 19 项全部 ∈ 美学基调池（load L350-352 校验），命中时表层风味/口癖抽「—」（L691-697）落实写实门控，名单均为写实向美学，维持
+      legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-84a36e2c46a35581aaa97810c9a125dd
+  source_hash: bcee137c719c0e8a71b0f8d2450682c5b79d7587bdbbd1107962c515c1c2d448
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#meta.timed_situations
+  - consumer:fill_opening.fill_opening#meta.timed_situations
+  - consumer:check_content.run#meta.timed_situations
+  compatibility:
+    themes:
+    - 时限处境标记
+    technology_boundary: 通用开局契约名单，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 契约名单，无受限内容
+  review:
+    scope: noncore:pools:40
+    reason: P2 legacy 契约：timed_situations 35 项全部 ∈ 处境侧池，fill_opening L452-456 依其判定
+      timed 开局标记；条目跨时代混编（当代/废土/古风等）与处境侧池同名一致，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-2077cd01859653aeb23c4745020dcca7
+  source_hash: c644bd042be4f916ef4b578df3620017e75ddd17be3b2efc5ab0d40f4d69a4a2
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#meta.timed_pressures
+  - consumer:fill_opening.fill_opening#meta.timed_pressures
+  - consumer:check_content.run#meta.timed_pressures
+  compatibility:
+    themes:
+    - 时限压力标记
+    technology_boundary: 通用开局契约名单，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 契约名单，无受限内容
+  review:
+    scope: noncore:pools:41
+    reason: P2 legacy 契约：timed_pressures 31 项全部 ∈ 压力来源池（共 74 项），fill_opening L452-456
+      依其判定 timed 开局标记；跨时代条目与压力来源池同名一致，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-ab0245956bc056d89679a59658de45d1
+  source_hash: 2f53f6ca5316065a732f9e7e0ce89caf409cedf5b47f50674c1b7d3540ae03a3
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#meta.location_eras
+  - consumer:roll_opening.build_roll#meta.location_eras
+  - consumer:check_material_compatibility.audit#meta.location_eras
+  - consumer:check_content.run#meta.location_eras
+  compatibility:
+    themes:
+    - 地点时代和解
+    technology_boundary: 通用开局契约名单，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 契约名单，无受限内容
+  review:
+    scope: noncore:pools:42
+    reason: P2 legacy 契约：location_eras 31 地点全部 ∈ 地点池、时代全部合法（load L356-361 与 check_material_compatibility
+      L20-27 双校验，实筛 31/31 通过）；随机时代×地点跨界时重抽地点（L546-560，玩家给定组合仅 WARNING 保留），维持 legacy
+      原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-f58f1bc1a4f6532487dea3b7e877b50d
+  source_hash: d7f209ca127e44ce303b9cb46db104b444bc822d22898f1ca5e2503ae9440dda
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#meta.aesthetic_eras
+  - consumer:check_frameworks.audit#meta.aesthetic_eras
+  - consumer:check_material_compatibility.audit#meta.aesthetic_eras
+  compatibility:
+    themes:
+    - 美学时代和解
+    technology_boundary: 通用开局契约名单，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 契约名单，无受限内容
+  review:
+    scope: noncore:pools:43
+    reason: P2 legacy 契约：aesthetic_eras 26 美学全部 ∈ 美学基调池、时代全部合法（实筛 26/26 通过）；美学×时代冲突时按名单过滤重抽美学（roll_opening
+      L570-583），check_frameworks L58-62 同名单校验框架美学，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-d31d0ab0e1875388a94890516879b310
+  source_hash: 16a3c37688d4739a7a5dd09f4bf5b70c1cc85b0978b80d05780171ccc4fa3113
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#meta.material_compatibility
+  - consumer:roll_opening.compatibility_reasons#meta.material_compatibility
+  - consumer:world_frameworks.build#meta.material_compatibility
+  compatibility:
+    themes:
+    - 素材兼容规则
+    technology_boundary: 兼容规则只约束时代/地点维度，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 兼容规则值，无受限内容；两处遗留错位见 review 登记不改源
+  review:
+    scope: noncore:pools:44
+    reason: P2 legacy 契约：material_compatibility 四段（压力来源 7/场景动作 5/身份族 4/玩家社会位置 8）引用键与
+      eras/places 值全部合法（实筛 100% 命中对应池：压力来源 74/非交易靠近桶/身份侧 17/社会位置；places 22 项全在地点池）；已记
+      issue：发电机燃油告罄 eras 含星际殖民地、巡沙狼骑号角逼近 eras 含民国初年大漠荒城两处遗留错位（本批只登记不改源）；框架模式经 world_frameworks.build
+      L110-119 setdefault 注入选中框架约束，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-bf1b11b7a8195b1e8508474af8127c1d
+  source_hash: a7017f7f5561c9f93885dcc4d491cb03a41e159e3a26e624330d7c8998759d80
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#meta.identity_weights
+  - consumer:roll_opening.identity_weights
+  - consumer:check_content.run#meta.identity_weights
+  compatibility:
+    themes:
+    - 身份族权重
+    technology_boundary: 通用开局契约名单，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 契约权重值，无受限内容
+  review:
+    scope: noncore:pools:45
+    reason: P2 legacy 契约：identity_weights 覆盖全部 17 身份族（正整数 5-13，load L145-150 校验），build_roll
+      L625-626 身份族加权抽取（命中池过滤后回退全权重），维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-ad8aa646c5215c638caf0e6c0b2444a1
+  source_hash: e99fefbbb7db73e76e36843996cad107b649b90a978a6f4ec2059901621339a4
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: &id004
+  - consumer:roll_opening.load_pools#场景动作分类
+  - consumer:roll_opening.build_roll#场景动作分类
+  - consumer:world_frameworks.build#场景动作分类
+  - consumer:check_frameworks.audit#activities.category
+  compatibility:
+    themes:
+    - 信息核验
+    - 协作边界
+    technology_boundary: 跨时代混编条目（当代/古风/奇幻物件同桶），具体可用性由开局时代与地点画像约束
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年人际动作选项，无受限内容
+  review:
+    scope: noncore:pools:46
+    reason: P1 框架链：类目「调查与核验」被 35 个框架 activities.category 按名引用（框架模式 world_frameworks.build
+      L105 重建场景动作分类，check_frameworks L116-117 校验）；legacy 模式分类表与 非交易靠近 桶键完全一致（降级守卫
+      L331-337 不触发），组内条目为成年人际协作核验动作，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-7b4abceaa1495274bd3da570e5efdc78
+  source_hash: 0f606d8dbb1389e9c8d081c7fde50a4b445e7b8fcee112ee51789ecf59284fc0
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id004
+  compatibility:
+    themes:
+    - 信息交换
+    - 关系试探
+    technology_boundary: 跨时代混编条目（当代/古风/奇幻物件同桶），具体可用性由开局时代与地点画像约束
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年人际动作选项，无受限内容
+  review:
+    scope: noncore:pools:47
+    reason: P1 框架链：类目「信息交换」被 23 个框架 activities.category 按名引用（框架模式 world_frameworks.build
+      L105 重建场景动作分类，check_frameworks L116-117 校验）；legacy 模式分类表与 非交易靠近 桶键完全一致（降级守卫
+      L331-337 不触发），组内条目为成年人际信息互通动作，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-0009a1247d0f5d6c989b09e670d002a1
+  source_hash: 959a673be8d419de1a6e515635ea8548874226d56f6cc353388f84cdacd43ace
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id004
+  compatibility:
+    themes:
+    - 照护修复
+    - 亲密边界
+    technology_boundary: 跨时代混编条目（当代/古风/奇幻物件同桶），具体可用性由开局时代与地点画像约束
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年人际动作选项，无受限内容
+  review:
+    scope: noncore:pools:48
+    reason: P1 框架链：类目「照护与修复」被 32 个框架 activities.category 按名引用（框架模式 world_frameworks.build
+      L105 重建场景动作分类，check_frameworks L116-117 校验）；legacy 模式分类表与 非交易靠近 桶键完全一致（降级守卫
+      L331-337 不触发），组内条目为成年人际照护修复动作；桶内跨时代条目混编（精灵耳/金樽等与当代条目同桶）已记 issue 不改源，维持 shared
+      原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-681bc8ba72c75a8f908ce405132d8efc
+  source_hash: 0d72b1f813a92b3cbb78074bf89a4ed753b60bc93e10a1639ca4f98e61d54e91
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id004
+  compatibility:
+    themes:
+    - 空间边界
+    - 退出选项
+    technology_boundary: 跨时代混编条目（当代/古风/奇幻物件同桶），具体可用性由开局时代与地点画像约束
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年人际动作选项，无受限内容
+  review:
+    scope: noncore:pools:49
+    reason: P1 框架链：类目「空间与退出」被 23 个框架 activities.category 按名引用（框架模式 world_frameworks.build
+      L105 重建场景动作分类，check_frameworks L116-117 校验）；legacy 模式分类表与 非交易靠近 桶键完全一致（降级守卫
+      L331-337 不触发），组内条目为成年人际边界与退出安排动作，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-1eb1b2f8afe555dab10265d6badf480d
+  source_hash: 6b7049989a8487b19b638083d73a02fa03a5dc58328a9c4ea27cb0d684fd8b0e
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id004
+  compatibility:
+    themes:
+    - 第三方介入
+    - 节奏打断
+    technology_boundary: 跨时代混编条目（当代/古风/奇幻物件同桶），具体可用性由开局时代与地点画像约束
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年人际动作选项，无受限内容
+  review:
+    scope: noncore:pools:50
+    reason: P1 框架链：类目「第三方与打断」被 3 个框架 activities.category 按名引用（框架模式 world_frameworks.build
+      L105 重建场景动作分类，check_frameworks L116-117 校验）；legacy 模式分类表与 非交易靠近 桶键完全一致（降级守卫
+      L331-337 不触发），组内条目为成年人际第三方介入动作，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-e00fb881a85c5e5dacd68b998dc1c9e3
+  source_hash: bc6b330bb7323d631bd3737f87fd30262a3f2ee8cccd19bb667344cb73376700
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id004
+  compatibility:
+    themes:
+    - 日常亲近
+    - 接触试探
+    technology_boundary: 跨时代混编条目（当代/古风/奇幻物件同桶），具体可用性由开局时代与地点画像约束
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 成年人际动作选项，无受限内容
+  review:
+    scope: noncore:pools:51
+    reason: P1 框架链：类目「日常接触」被 25 个框架 activities.category 按名引用（框架模式 world_frameworks.build
+      L105 重建场景动作分类，check_frameworks L116-117 校验）；legacy 模式分类表与 非交易靠近 桶键完全一致（降级守卫
+      L331-337 不触发），组内条目为成年人际日常亲近试探动作；桶内跨时代条目混编（秘银肩甲/朱砂点眉等与当代条目同桶）已记 issue 不改源，维持
+      shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-079668c1d10c515aaf899a72e418d277
+  source_hash: 66900dde4d79224036df4e775173a8fc58173f6a27caea977cdab01391350800
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#场景动作分类
+  - consumer:roll_opening.build_roll#场景动作分类
+  compatibility:
+    themes:
+    - 身体亲密
+    - 成年限定
+    technology_boundary: 跨时代混编条目（当代/古风/奇幻物件同桶），具体可用性由开局时代与地点画像约束
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 亲密接触类小动作池，仅成年角色场景使用
+  review:
+    scope: noncore:pools:52
+    reason: P2 legacy 池：身体靠近桶未被任何框架引用（0 框架，仅 legacy 抽取链消费）；10 条均为成年角色亲密小动作、无未成年意象，配套元数据
+      escalation=high，按受限池登记；桶内跨时代条目混编（精灵耳/翡翠玉镯/鸽子蛋钻石项链等）已记 issue 不改源，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-63665857302c5075aa14f7f2338cc66c
+  source_hash: 63b359fe589b8b99a226c1d0722defcd6ecf585a2bb72fb3ba228cfac22e6802
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: &id005
+  - consumer:roll_opening.load_pools#场景动作元数据
+  - consumer:roll_opening.build_roll#场景动作元数据
+  - consumer:fill_opening.load_tables#action_metadata
+  - consumer:fill_opening.fill_opening#action_metadata
+  - consumer:check_content.run#action_metadata
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 信息核验
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:53
+    reason: P1 框架链：调查与核验/function=investigation 随类目被 35 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-ea5aa2f523635b2f829d3022d15322df
+  source_hash: 60d4c90eee5e731df8d3ef2891de541d2e755ff8ee9db358e26bdec49f6e0db9
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 信息核验
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:54
+    reason: P1 框架链：调查与核验/visibility=medium 随类目被 35 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-4a7601ec0a07568e9fdc6827377b99ec
+  source_hash: 364bb7082249ee9fbc5247ee49735c4246f271b82c2745a35107ddda0d7cabcc
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 信息核验
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:55
+    reason: P1 框架链：调查与核验/escalation=low 随类目被 35 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-f8a1104f54f052569a6c4a384bb2a1cb
+  source_hash: e22576b1e30baf8d7c20af81e42f8dc8a9490242843232aa86dea175d17ade1f
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 信息交换
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:56
+    reason: P1 框架链：信息交换/function=information 随类目被 23 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-88c3774f19d358d69ee38da32bb9dd44
+  source_hash: 2338e6d5c249540db08b98736acf02e877a8cd60522eac58c3204fc942ec73db
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 信息交换
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:57
+    reason: P1 框架链：信息交换/visibility=variable 随类目被 23 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-d6ff344e918456189d6df3274a861012
+  source_hash: 364bb7082249ee9fbc5247ee49735c4246f271b82c2745a35107ddda0d7cabcc
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 信息交换
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:58
+    reason: P1 框架链：信息交换/escalation=low 随类目被 23 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-7bce7bd8bd825b33b1e8df7f48d87e72
+  source_hash: 9b71a3fd1523474eada939c8274fbc98db10b1e27b65d8980baa3b9653676248
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 照护修复
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:59
+    reason: P1 框架链：照护与修复/function=care 随类目被 32 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-60d0e7f675f55be3994cbb2e89ff95a2
+  source_hash: 595ddc98f2ba3606c80d736ef3dc3d74cde97a5ca84591f2364b38551c95a46e
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 照护修复
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:60
+    reason: P1 框架链：照护与修复/visibility=public_or_private 随类目被 32 框架 activities.category
+      消费（load_pools L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753
+      深拷贝进开局产物、check_content L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-c362e4fe847a5f759f321278f0ae8557
+  source_hash: 364bb7082249ee9fbc5247ee49735c4246f271b82c2745a35107ddda0d7cabcc
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 照护修复
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:61
+    reason: P1 框架链：照护与修复/escalation=low 随类目被 32 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-868d80f5a71a58e69b9ca730cc54505b
+  source_hash: 397f64ac37faa7f4b859d78960f521d29cf97559d4b9e4eeb8116726c5d790ff
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 空间边界
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:62
+    reason: P1 框架链：空间与退出/function=exit 随类目被 23 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-f76c83c0afc05fca89e0b3d6f42dea7d
+  source_hash: 2338e6d5c249540db08b98736acf02e877a8cd60522eac58c3204fc942ec73db
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 空间边界
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:63
+    reason: P1 框架链：空间与退出/visibility=variable 随类目被 23 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-8ff6e388518e5a9182fe902ca2619840
+  source_hash: e7c8927f60e9640ba3afd7bd7f2fdf09d6a761fb9639bf5b676e1abf27002ae1
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 空间边界
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:64
+    reason: P1 框架链：空间与退出/escalation=deescalate 随类目被 23 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-f10bbfe66b855083896e2dd338aff8bc
+  source_hash: 57dc8f6ef570f1ba1d0a2beab113a53c7802742fa12c98d09bd0faa77b4f8409
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 第三方介入
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:65
+    reason: P1 框架链：第三方与打断/function=third_party 随类目被 3 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-0b3ab110d37a5595a988bd11eb8b56a3
+  source_hash: b57c4299afe3cda154124bdb96ceaf618a9d8d9cd8d2c8f6580ff26faa5fe5ca
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 第三方介入
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:66
+    reason: P1 框架链：第三方与打断/visibility=high 随类目被 3 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-7359a8a2ec8b5c1886ca1331bdfbac89
+  source_hash: 2338e6d5c249540db08b98736acf02e877a8cd60522eac58c3204fc942ec73db
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 第三方介入
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:67
+    reason: P1 框架链：第三方与打断/escalation=variable 随类目被 3 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-45e67de683745efcb3a9f1c8e7989872
+  source_hash: 326bbb3c55327dd3ff361bf0a5d631afa131673c4d6887ae04d6d97859e2ec17
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 日常亲近
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:68
+    reason: P1 框架链：日常接触/function=rapport 随类目被 25 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-643a9b0cb6f55a1bbb2b9ea2fa008ad2
+  source_hash: 2338e6d5c249540db08b98736acf02e877a8cd60522eac58c3204fc942ec73db
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 日常亲近
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:69
+    reason: P1 框架链：日常接触/visibility=variable 随类目被 25 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-56a45e147bae52e081ce0e060c960aa3
+  source_hash: 364bb7082249ee9fbc5247ee49735c4246f271b82c2745a35107ddda0d7cabcc
+  status: KEEP_SHARED
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 日常亲近
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值，无内容限制
+  review:
+    scope: noncore:pools:70
+    reason: P1 框架链：日常接触/escalation=low 随类目被 25 框架 activities.category 消费（load_pools
+      L330 装载、build_roll L615-620 写入场景动作元数据、fill_opening L109/751-753 深拷贝进开局产物、check_content
+      L358-359 三键必填校验），枚举值合法，维持 shared 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-2f2a75a604d15832b0cb447035e73697
+  source_hash: 2c5ee4e87be8ee83b066e38e4e6fdfb7493203caf90270b0a508c3b4ec8394b2
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 身体亲密
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值无内容限制；所属类目身体靠近已按受限登记
+  review:
+    scope: noncore:pools:71
+    reason: P2 legacy 池：身体靠近/function=proximity 仅 legacy 抽取链消费（框架不引用该类目）；三键枚举满足 check_content
+      必填校验，escalation=high 与所属受限池登记一致，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-0501dc0f848f5d8abbca66a67c9adda7
+  source_hash: 2338e6d5c249540db08b98736acf02e877a8cd60522eac58c3204fc942ec73db
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 身体亲密
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值无内容限制；所属类目身体靠近已按受限登记
+  review:
+    scope: noncore:pools:72
+    reason: P2 legacy 池：身体靠近/visibility=variable 仅 legacy 抽取链消费（框架不引用该类目）；三键枚举满足 check_content
+      必填校验，escalation=high 与所属受限池登记一致，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-7ec240d8fc415f03b6a577079d24f207
+  source_hash: b57c4299afe3cda154124bdb96ceaf618a9d8d9cd8d2c8f6580ff26faa5fe5ca
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners: *id005
+  compatibility:
+    themes:
+    - 场景动作元数据
+    - 身体亲密
+    technology_boundary: 运行元数据（function/visibility/escalation 枚举），不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 元数据枚举值无内容限制；所属类目身体靠近已按受限登记
+  review:
+    scope: noncore:pools:73
+    reason: P2 legacy 池：身体靠近/escalation=high 仅 legacy 抽取链消费（框架不引用该类目）；三键枚举满足 check_content
+      必填校验，escalation=high 与所属受限池登记一致，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-45320bc0f8ce500f853ca9760dadc863
+  source_hash: 5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#legacy_weight
+  - consumer:check_frameworks.audit#legacy_weight
+  - consumer:build_frameworks.build#legacy_weight
+  compatibility:
+    themes:
+    - 开局框架治理
+    technology_boundary: 治理契约键，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 治理契约值，无受限内容
+  review:
+    scope: noncore:pools:74
+    reason: P2 legacy 契约：legacy_weight=0 由 load_pools 读取（L316，缺省回退 10）入 pools[世界框架旧池权重]，lint
+      强制 =0（check_frameworks L50-51 默认池不得混入旧池；build_frameworks L56 恒写 0）；已记 issue：该值加载后全仓无下游读取（rg
+      仅 roll_opening.py:316 一处赋值），属事实性死值，按读取事实保留，维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-e095a3ccb34452789794b79d3540afc9
+  source_hash: 80bb21f5efe6187052f29719c05b39477171161044de80b157e856e758901d90
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.load_pools#reviewed_frameworks
+  - consumer:world_frameworks.build#reviewed_frameworks
+  compatibility:
+    themes:
+    - 已审框架名册
+    technology_boundary: 治理契约键，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 治理契约名册，无受限内容
+  review:
+    scope: noncore:pools:75
+    reason: P2 legacy 契约：reviewed_frameworks 为 40 框架名→SHA-256 快照名册（与 frameworks 名册
+      40 键一致），load_pools L317 装载为 世界框架审查，auto 模式仅哈希匹配的已审框架入选（world_frameworks.build
+      L77），reviewed 判定写入兼容性 evidence（L137），维持 legacy 原文。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+- id: mat-6dfcf198381e5e48aedbd013359f2f60
+  source_hash: 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b
+  status: DEPRECATED
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:check_frameworks.audit#version
+  - consumer:build_frameworks.build#version
+  compatibility:
+    themes:
+    - 开局框架治理
+    technology_boundary: 治理契约键，不绑定技术水平
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 等待 release 删除的登记单元
+  review:
+    scope: noncore:pools:76
+    reason: P3 不可达：roll_opening.load_pools 只读 frameworks/legacy_weight/reviewed_frameworks
+      三键，version 不在其列，仅 check_frameworks lint（L48-49 要求 int 1）与 build_frameworks 生成器触碰；按任务口径判
+      DEPRECATED 登记，删除需同步改 check_frameworks.py/build_frameworks.py，本批不删源。
+    release: governance-1
+    reviewer: dsh/noncore-review-pools
+    evidence: maintenance/noncore_partition.md
+    disposition: unit_scope_only
+  cleanup:
+    marked_release: governance-1
+    reason: version 键仅 lint 读取（check_frameworks.py:48-49 要求 int 1），load_pools 不读；删除需同步改
+      check_frameworks.py 与 build_frameworks.py，本批只登记不删源

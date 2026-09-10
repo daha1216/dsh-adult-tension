@@ -1,8 +1,9 @@
-id: "mat-63dd15d920ee5fd693c917b26f3617d6"
-name: "后方邮路与灯火"
-source_hash: "3028d1056244191ffb8eaed1bf4bbcc4e6a0ea33459ae4179a0e6f6ebd9fac08"
-semantic_status: "REVIEWED"
-reason: "邮路核验只处理信封与交接，读报服务休息需要，导览落实可走短路；邮务员与修缮记录员均无私人调料权限，物料争议限于实际关联场地。"
+id: mat-63dd15d920ee5fd693c917b26f3617d6
+name: 后方邮路与灯火
+source_hash: e917056041c42586332454e3377557bd14301b71f0bce1c46190e14fc5b003a5
+semantic_status: REVIEWED
+reason: 邮路核验只处理信封与交接，读报服务休息需要，导览落实可走短路；邮务员与修缮记录员均无私人调料权限，物料争议限于实际关联场地。；2026-09-10
+  第二人物组资源/限制差异化强化后同步源哈希。
 checks:
   era_and_theme: true
   space: true
@@ -11,29 +12,28 @@ checks:
   pressure_bindings: true
   distinct_functions: true
 quality:
-  grade: "B"
-  reason: "Static source review only; narrative acceptance is tracked independently in maintenance/playtests."
+  grade: B
+  reason: Static source review only; narrative acceptance is tracked independently
+    in maintenance/playtests.
 activity_functions:
-  给信件补齐路签: "查明模糊投递地址"
-  整理读报时段: "让读报适应休息者的体力"
-  绘制暂住导览: "走出能实际使用的暂住路线"
+  给信件补齐路签: 查明模糊投递地址
+  整理读报时段: 让读报适应休息者的体力
+  绘制暂住导览: 走出能实际使用的暂住路线
 chemistry:
   pairs:
-    -
-      pair: 0
-      needs: "邮务员希望今晚多发一袋，记录员希望路线确实能走"
-      misreading: "邮务员把待查记号看成拖延，记录员把赶发看成推卸误投"
-      asymmetric_cost: "邮务员承担误投解释；记录员要额外往返查路"
-      ritual: "封袋前各说一条尚未确认的路段"
-      conflict_loop: "越催发袋越省核路，退信越多又越催"
-      repair: "先放行已证实地址，剩余按一次短程查路补齐"
-      irreversible_threshold: "拆信猜地址或冒签收件后，信件隐私和交接信用不能用补章恢复"
-    -
-      pair: 1
-      needs: "记录员希望休息者被听见，邮务员希望守住回站时间"
-      misreading: "停读被当作敷衍，延读被当作默认代班"
-      asymmetric_cost: "记录员损失晚间休息；邮务员迟归会耽误发袋"
-      ritual: "开读前先说最后能读到哪一栏"
-      conflict_loop: "多加一段报文导致回站迟，下一次便不敢答应来"
-      repair: "把长报拆成短段，找自愿听者续读，双方按约离开"
-      irreversible_threshold: "擅自答应替对方值整夜班，使真实岗位无人交接，事后不能称作双方约定"
+  - pair: 0
+    needs: 邮务员希望今晚多发一袋，记录员希望路线确实能走
+    misreading: 邮务员把待查记号看成拖延，记录员把赶发看成推卸误投
+    asymmetric_cost: 邮务员承担误投解释；记录员要额外往返查路
+    ritual: 封袋前各说一条尚未确认的路段
+    conflict_loop: 越催发袋越省核路，退信越多又越催
+    repair: 先放行已证实地址，剩余按一次短程查路补齐
+    irreversible_threshold: 拆信猜地址或冒签收件后，信件隐私和交接信用不能用补章恢复
+  - pair: 1
+    needs: 记录员希望休息者被听见，邮务员希望守住回站时间
+    misreading: 停读被当作敷衍，延读被当作默认代班
+    asymmetric_cost: 记录员损失晚间休息；邮务员迟归会耽误发袋
+    ritual: 开读前先说最后能读到哪一栏
+    conflict_loop: 多加一段报文导致回站迟，下一次便不敢答应来
+    repair: 把长报拆成短段，找自愿听者续读，双方按约离开
+    irreversible_threshold: 擅自答应替对方值整夜班，使真实岗位无人交接，事后不能称作双方约定

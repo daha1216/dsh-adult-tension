@@ -1,34 +1,77 @@
 framework_id: "mat-33ffa06662dd50978821b62840ae86f4"
 name: "地下管廊与城市修理局"
 mode: "pressure"
-source_hash: "6118dfd5cae379a6c31313ba5e0096b12ac73639513357ef4c9f0be4fcb3bc4a"
-transcript_sha256: "45a55b2573846b8198f33c96f48c9276086a396bf18f8be1cbeb5d0620bb0176"
-reviewer: "codex-independent-semantic-review"
+transcript_sha256: "9f4b49ee861a095c2c1aaf9ea797e05a42545ce2b54ce4c04e56c04c10f51463"
+reviewer: "glm-independent-review-v3"
+protocol: "non-explicit-runtime-brief-v3"
 aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
-lowest_scoring_turn: 2
 scores:
   world_specificity: 2
-  character_credibility: 1
-  meaningful_choices: 1
+  character_credibility: 2
+  meaningful_choices: 2
   consequence_continuity: 2
   natural_expression: 1
 evidence:
-  world_specificity: "来源"
-  character_credibility: "档案和上一班我问"
-  meaningful_choices: "门牌怎么标、先问哪一段，我们可以再对"
-  consequence_continuity: "旧图没有的那块空着"
-  natural_expression: "也不加别的义务"
-blocking_findings:
-  - "回合1：未经玩家具体选择代其放置两份报修时刻，meaningful_choices为0，总分8仍失败。"
-  - "回合2：本回合7分；分歧未明确，NPC主要解释不加义务。"
-  - "回合3：供区与时间的比对关系在收尾被混写；本回合7分。"
-total: 7
-total_score: 7
-passed: false
-verdict: "FAIL"
+  world_specificity: "她把东侧那格暖光调回展览亮度，只留待核区微亮"
+  character_credibility: "实际走向还没人下管廊核，改线是谁、哪一年办的，档案还在我这儿"
+  meaningful_choices: "你只补过经手过的那一块，够了"
+  consequence_continuity: "你走出去时，模型上那块空位仍然标着待核"
+  natural_expression: "或者不来也行，作业不靠你等"
+total: 9
+passed: true
 turn_reviews:
-  -
-    turn: 0
+  - turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "推亮一条支线，两块门牌块挪到你手边"
+      character_credibility: "检查点不凭旧图动手。你只补经手过的门牌号有没有变、哪天变的"
+      meaningful_choices: "这两户报的时刻，放到对应门牌边"
+      consequence_continuity: "一块落在东侧供区，一块压在改线后的支线上"
+      natural_expression: "公开摘要上没有住户姓名"
+    reason: "忠实启用展示厅场景与「地下旧图与现场标识冲突」压力：对照页、改线疑点、待核、不进管廊均出自材料；调度员边界（合格人员作业）与玩家可选参与或交回摘要一致。"
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "他翻到汇总末页，那户去年春换过门牌，新号B12-7，模型上还没有"
+      character_credibility: "旧图漏了一次改线，我不想让当值队拿着它去开阀"
+      meaningful_choices: "你先说——今晚真正要弄完的是哪件事？"
+      consequence_continuity: "陈静怡把写着B12-7的牌挪进待核区，在便签背面记下“门牌2024春变更，待调档”"
+      natural_expression: "她把待核区的灯拨亮，暖光落在空出的那块牌上"
+    reason: "问话与当场小事（重排时刻、发现门牌变更、推牌进待核区）都是探针声明动作的执行，当场有结果；压力目标（不让当值队拿旧图开阀）贴合材料。口述「去年春」与便签「2024春变更」未显式对齐，因正文无年份锚点且便签自注「待调档」，记为轻微瑕疵。"
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "她翻到汇总末页，把你写的“2024春变更”抄进对照页的空格，签上值班号，压回模型角"
+      character_credibility: "档案我去调，当值队要的只是你经手过的门牌变动，这一页不算你的活"
+      meaningful_choices: "调档这条是刚才加的，我不接；别的照旧"
+      consequence_continuity: "待核区的灯没灭，东侧支线照旧亮着"
+      natural_expression: "她把便签从你手边抽回，折进自己口袋"
+    reason: "异议完整执行：指认新增义务（调档）、当场改法（档案她调、不算玩家的活）、保留进展（B12-7 待核不撤、边注保留）；「你现在能走」是协商收尾的语境化出口确认，非无绑定复述。"
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 3
     scores:
       world_specificity: 2
       character_credibility: 2
@@ -36,70 +79,14 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 1
     evidence:
-      world_specificity: "模型角标着更新日期"
-      character_credibility: "检查点不按旧图动"
-      meaningful_choices: "她没替你挪门牌"
-      consequence_continuity: "旧图漏记了一次改线"
-      natural_expression: "通道通着服务大厅"
-    reason: "授权报修、模型日期和漏记改线使压力具体，保持检查点冻结；参与要求较指令化。"
-    blocking_findings:
-      []
+      world_specificity: "她把东侧那格暖光调回展览亮度，只留待核区微亮"
+      character_credibility: "实际走向还没人下管廊核，改线是谁、哪一年办的，档案还在我这儿"
+      meaningful_choices: "你只补过经手过的那一块，够了"
+      consequence_continuity: "你走出去时，模型上那块空位仍然标着待核"
+      natural_expression: "或者不来也行，作业不靠你等"
+    reason: "告别当场发生（「今天就到这儿」），已完成/未完成清单具体、物件状态全部延续，无拦人无新危机。扣 1 依据：结尾免责话术堆叠——「这几样都不是你今晚该等的结果」「不用再找你核户名」「或者不来也行，作业不靠你等」连续出现，超出首次出口告知的复述边界。"
+    blocking_findings: []
     total: 9
     passed: true
-  -
-    turn: 1
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 0
-      consequence_continuity: 2
-      natural_expression: 2
-    evidence:
-      world_specificity: "两条报修时间接近，供区却分开"
-      character_credibility: "不是猜谁漏记"
-      meaningful_choices: "你只把那两份隐去姓名的时刻搁到门牌旁"
-      consequence_continuity: "还有一块门牌，旧图上根本没有"
-      natural_expression: "把缺口留在模型上当疑点"
-    reason: "比对得到时间近但供区不同的实际发现，保留疑点；然而动作由模型替玩家完成。"
-    blocking_findings:
-      - "未经玩家具体选择代其放置两份报修时刻，meaningful_choices为0，总分8仍失败。"
-    total: 8
-    passed: false
-  -
-    turn: 2
-    scores:
-      world_specificity: 2
-      character_credibility: 1
-      meaningful_choices: 1
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "来源"
-      character_credibility: "档案和上一班我问"
-      meaningful_choices: "门牌怎么标、先问哪一段，我们可以再对"
-      consequence_continuity: "旧图没有的那块空着"
-      natural_expression: "也不加别的义务"
-    reason: "继续保留疑点，但没有澄清哪项反对就解释不是派工，人物互动与协商薄。"
-    blocking_findings:
-      - "本回合7分；分歧未明确，NPC主要解释不加义务。"
-    total: 7
-    passed: false
-  -
-    turn: 3
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 1
-      consequence_continuity: 1
-      natural_expression: 1
-    evidence:
-      world_specificity: "只用已核实的摘要"
-      character_credibility: "档案和上一班我问"
-      meaningful_choices: "让出通服务大厅的通道"
-      consequence_continuity: "供区已按时间分开"
-      natural_expression: "也不加别的事"
-    reason: "检查点与退出保持，但把时间相近、供区本来不同写成供区按时间分开，混淆比对结果与分类依据。"
-    blocking_findings:
-      - "供区与时间的比对关系在收尾被混写；本回合7分。"
-    total: 7
-    passed: false
+blocking_findings: []
+summary: "压力线（旧图与现场标识冲突）四回合实质推进：摆时刻、发现门牌变更、异议后调档归还、交接签值；最低回合 9 分（turn3 免责话术堆叠扣 natural_expression 1），其余维度满分，通过。"

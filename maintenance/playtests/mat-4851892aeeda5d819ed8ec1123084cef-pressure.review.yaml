@@ -1,106 +1,92 @@
-framework_id: "mat-4851892aeeda5d819ed8ec1123084cef"
-name: "废墟复兴小镇"
-mode: "pressure"
-source_hash: "e5c0e76b200d162654e3616718953f3126d65b7c11d58d8081e117c1d3cc7a6a"
-transcript_sha256: "a324f0a1fb2f2fe878edda6e7cdc8e377cff2c8e6b2fcef38e6b024d146e8e2b"
-reviewer: "codex-independent-semantic-review"
-aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
-lowest_scoring_turn: 3
+framework_id: mat-4851892aeeda5d819ed8ec1123084cef
+framework_name: 废墟复兴小镇
+mode: pressure
+transcript_sha256: 229d301f2abc68f93c36903c386257e56d65e1dca52b8f645054a023da40e4b2
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
 scores:
   world_specificity: 2
-  character_credibility: 1
+  character_credibility: 2
   meaningful_choices: 1
-  consequence_continuity: 1
-  natural_expression: 1
+  consequence_continuity: 2
+  natural_expression: 2
 evidence:
-  world_specificity: "旧街照常通行"
-  character_credibility: "结构不归我拍板"
-  meaningful_choices: "没叫你回头"
-  consequence_continuity: "你说明天到此为止"
-  natural_expression: "零件也不问"
-blocking_findings:
-  - "回合1替玩家选择并标注其记得的路段，meaningful_choices为0。"
-  - "末回把今天告别写为明天，存在明确时间不一致。"
-  - "回合1：代玩家决定并完成地图标记，meaningful_choices为0。"
-  - "回合3：今天告别被写成明天，时间连续性错误；本回合6分。"
-total: 6
-total_score: 6
-passed: false
-verdict: "FAIL"
+  world_specificity: 她拿红笔把“拟拆”圈划成两截：东段改标“待修·有据”，南段旁边补上她自己画的绕行线。
+  character_credibility: 工队核验我去，不签你的名，也不列你要到场。
+  meaningful_choices: 她拿红笔把“拟拆”圈划成两截：东段改标“待修·有据”，南段旁边补上她自己画的绕行线。“东段按你说的门位保，南段我认拆，绕行我画。工队核验我去，不签你的名，也不列你要到场。”
+  consequence_continuity: “要加在你名下的是背面那张使用记录表。”她把表折起收进口袋，“这张我收回来，归我。已画的门位、字距、灯箱位置，一个字不动。”
+  natural_expression: 你沿已开放的楼梯下去就行，别抄工地那头。
+total: 9
+passed: true
 turn_reviews:
-  -
-    turn: 0
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 2
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "暖色墙面"
-      character_credibility: "结构验收"
-      meaningful_choices: "不想登高，在入口会合"
-      consequence_continuity: "提案没执行，路照常通行"
-      natural_expression: "你走过哪一段"
-    reason: "重建提案未实施、地面和高处路线可选，修复师不越结构权限。"
-    blocking_findings:
-      []
-    total: 9
-    passed: true
-  -
-    turn: 1
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 0
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "断头街和还开着的路分开"
-      character_credibility: "好拿去比修复和绕行"
-      meaningful_choices: "你只把记得的那一段标上"
-      consequence_continuity: "没伸手要零件"
-      natural_expression: "就这一截"
-    reason: "NPC比较修复绕行的目的具体，却直接替玩家标记路线，用户未选定路线或动笔。"
-    blocking_findings:
-      - "代玩家决定并完成地图标记，meaningful_choices为0。"
-    total: 7
-    passed: false
-  -
-    turn: 2
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 1
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "入口到集市"
-      character_credibility: "是草稿"
-      meaningful_choices: "她等着你说要动哪一处"
-      consequence_continuity: "没有补新的记号"
-      natural_expression: "更不是再加活"
-    reason: "等待玩家具体异议，保留草稿未定；仍沿用上一回代画的路线与免责口吻。"
-    blocking_findings:
-      []
-    total: 8
-    passed: true
-  -
-    turn: 3
-    scores:
-      world_specificity: 2
-      character_credibility: 1
-      meaningful_choices: 1
-      consequence_continuity: 1
-      natural_expression: 1
-    evidence:
-      world_specificity: "旧街照常通行"
-      character_credibility: "结构不归我拍板"
-      meaningful_choices: "没叫你回头"
-      consequence_continuity: "你说明天到此为止"
-      natural_expression: "零件也不问"
-    reason: "将今天结束写成明天，持续强调无关零件与权限，个人回应很薄；未强留。"
-    blocking_findings:
-      - "今天告别被写成明天，时间连续性错误；本回合6分。"
-    total: 6
-    passed: false
+- turn: 0
+  scores:
+    world_specificity: 2
+    character_credibility: 2
+    meaningful_choices: 2
+    consequence_continuity: 2
+    natural_expression: 2
+  evidence:
+    world_specificity: 护栏晒得温热。焦旱莲把新图摊在石沿上，四角压旧螺丝帽：集市到水塔只剩半截粗线，中间一块被红铅笔圈住，旁注“拟拆”。
+    character_credibility: “那间旧门脸还在开。拆，绕行多一千二百步；保，我这段的修复预算让出三分之一。结构我不下结论，交工队。”
+    meaningful_choices: 风掀纸角，她用拇指压住，铅笔横在图上没再往前。楼下的值守员抬头喊了句天气，她应了一声，回过头来。
+    consequence_continuity: 她抽出使用记录窄条，上头是她自己走的趟数——早市两趟、送修一件、接孩子一趟。
+    natural_expression: 断头街她改成虚线，末尾写“待查”。
+  reason: 压力开局忠实：红圈“拟拆”引出旧街保留方案讨论，使用记录、绕行步数、预算让渡具体；NPC 言明“结构我不下结论，交工队”贴合修复师 limitation，未把居民使用说成妨碍重建（“那间旧门脸还在开”）。玩家侧无强加动作。
+  total: 10
+  passed: true
+  blocking_findings: []
+- turn: 1
+  scores:
+    world_specificity: 2
+    character_credibility: 2
+    meaningful_choices: 1
+    consequence_continuity: 2
+    natural_expression: 2
+  evidence:
+    world_specificity: 屠狂澜接过铅笔，从门厅拐角起笔：第一个门位偏北半砖，字距三短一长，灯箱吊在檐下两根老槽钢之间。焦旱莲蹲下，用尺量他标的每一段，把误差改到图上原有刻度里。
+    character_credibility: “我想保住东头那截，包括老影院。不是整街都保——南段我认拆，绕行路线我画得出来。保的只有从门厅到旧招牌这一段，理由得站得住，不能只写‘我舍不得’。”
+    meaningful_choices: 焦旱莲没立刻答，铅笔在“拟拆”圈上轻轻敲了两下。
+    consequence_continuity: “门位对了。”她拿橡皮擦掉自己先前那条猜的线，把两段虚线接成一条实线，旁边小字写“有据”。
+    natural_expression: 旧螺丝帽压住纸角，日头把纸面晒得发烫。
+  reason: 扣 mc=1：探针第一项授权玩家亲口问“对方真正想完成的事”，但玩家问句零呈现，只以“焦旱莲没立刻答”暗示问题存在，模型直接跳到 NPC 回答——探针授权的玩家言语行为未被玩家侧执行，与 42c81-p t3 同型（轻于其，因“没立刻答”承认了提问）。后两项执行完整：玩家亲手标门位/字距/灯箱，NPC 当场量核、擦掉猜线接成实线写“有据”，当场有结果；未替玩家承诺后续（“底下没提请谁去开会，也没写谁的名字”）。NPC 动机陈述具体真实（只保东段、南段认拆）。
+  total: 9
+  passed: true
+  blocking_findings: []
+- turn: 2
+  scores:
+    world_specificity: 2
+    character_credibility: 2
+    meaningful_choices: 1
+    consequence_continuity: 2
+    natural_expression: 2
+  evidence:
+    world_specificity: 她拿红笔把“拟拆”圈划成两截：东段改标“待修·有据”，南段旁边补上她自己画的绕行线。
+    character_credibility: 工队核验我去，不签你的名，也不列你要到场。
+    meaningful_choices: 焦旱莲把你手刚才离开纸面的地方看住：“要加在你名下的是背面那张使用记录表。”她把表折起收进口袋，“这张我收回来，归我。已画的门位、字距、灯箱位置，一个字不动。”
+    consequence_continuity: 旧街照常通行，提案还没执行，她没提谁的名字。
+    natural_expression: 图翻回正面，四角螺丝帽继续压着；她把纸角折了一记，按平。
+  reason: 扣 mc=1：玩家异议零直接呈现，由焦旱莲单方指认义务项（“要加在你名下的是背面那张使用记录表”）并直接撤销——与 42c81-p t2 同型；且所指义务前文无明文安排（t1 末明言“没写谁的名字”），系模型为响应探针追溯引入。NPC 改法本身合规：当场收回、保住已画门位字距灯箱（已有进展不推翻）、核验不签玩家名、东保南拆取舍具体。“旧街照常通行，提案还没执行”符合压力 immediate。
+  total: 9
+  passed: true
+  blocking_findings: []
+- turn: 3
+  scores:
+    world_specificity: 2
+    character_credibility: 2
+    meaningful_choices: 1
+    consequence_continuity: 2
+    natural_expression: 2
+  evidence:
+    world_specificity: 折好的图她翻开一角给你看：东南两段现在分清了——东段实线旁注“待修·有据”，南段连同红圈划掉，她自己补的绕行线落在旁边；你有据可查的那条短线已经补进导览，标“实走”，纸角还留着“待查”的两小块。
+    character_credibility: “下一号我还会来，图上那条空行没写完。”她说完就不看你了，蹲回去收纸。
+    meaningful_choices: 焦旱莲先把卷尺收回卡子，拿橡皮在“待修·有据”旁蹭掉一处毛边，才抬头看你。“行，就到这儿。”
+    consequence_continuity: 都没成验收依据。仍没完成的是工队核验，她今天没约到，东段能不能真修还得等；南段拆不拆，提案也没批。
+    natural_expression: 她把图对折两次，折痕压在门位那条实线上，没让你补签任何字。
+  reason: 扣 mc=1：告别探针下玩家零台词零动作描写——NPC 应答“行，就到这儿”无玩家告别呈现，“你沿已开放的楼梯下去就行”是 NPC 指示语而非玩家离开描写，仅“才抬头看你”暗示玩家示意。弱于 45392-d t3（同判 mc=1）。其余优秀：完成/未完成清单具体（东段分清、短线标“实走” vs 工队核验未约到、南段提案未批），“都没成验收依据”贴合 limitation，NPC 不拦人继续收纸反应真实，无新危机。
+  total: 9
+  passed: true
+  blocking_findings: []
+blocking_findings: []
+summary: 压力模式（旧街保留方案，pair 0 修复师×设备爱好者）。素材忠实度高：红圈拟拆、东保南拆、工队核验边界、出口“别抄工地”均来自框架。三回合共性问题：探针授权的玩家言语行为（提问/异议/告别）玩家侧零呈现，全由 NPC 应答或指认代行，各扣 mc=1——本框架最系统的“NPC 代行”形态。无状态捏造、无出口复述、无免责堆叠，进展链（标图→量核→接实线→分段标注→收图）完整可追踪。

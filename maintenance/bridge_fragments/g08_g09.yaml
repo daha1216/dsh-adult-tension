@@ -1,0 +1,2196 @@
+# G08 交易摊牌 + G09 非交易靠近 bridge fragments (66 BRIDGE_REQUIRED units)
+# Generated from references/material_registry.yaml verbatim id/source_hash/source; see maintenance/core_review_evidence.md G08/G09.
+- id: mat-72b73e5f62aa54e193920f880bae7380
+  source_hash: ad7ea61dea5bdd792a967614b4b53114ca7b38b7ce8775a5e961d4047d5daaf3
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 开出一句价码
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 报价与交换
+    technology_boundary: 限口头报价与拒绝空间，报价不构成债务或履约义务。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:002
+    reason: 模板「等你决定这是不是今晚的话题」保留拒绝权（templates.yaml trade_beats），对照消费仅 pressure（roll_opening.py:686-690、:764），按口头要约语义保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-ef56df1cedc25af4a7978850b96f17c6
+  source_hash: 1b9a5bfb4f3c146a479be804b8e8d530b2ff22b6dc518e61bd12711f0b16dc9b
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 要求一个答复
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 答复与期限
+    technology_boundary: 限当晚可给出或拒绝的口头答复，NPC 自堵后路不约束玩家退场。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:003
+    reason: 模板是 NPC 自己挡住自己的后路而非封锁玩家，答复权仍在玩家（templates.yaml trade_beats），文本与交易摊牌桶一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-c7d66ba5c954513aa67065f3683edf45
+  source_hash: 20e014dc3d08f2a6654a616f165c13caef2535ccca25dcb44ca915ae1372301b
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 提出交易
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 交易协商
+    technology_boundary: 限双方均可拒绝的交易提议，报价不等于交易成立。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:005
+    reason: 提议加报价未看眼睛，无强制成交语义，脚本也不落任何交易状态（fill_opening.py:299-300 仅渲染句子）。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-b476e38308f25e2abc4e0ef21cb58b6a
+  source_hash: 384a44c5ab7d6539cc0cc9c241b12d670019c9c97363263ac158e921e0a0a6d1
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 给出最后期限
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 截止与选择
+    technology_boundary: 限虚构时限的口头施压，到期不自动执行任何惩罚。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:007
+    reason: 期限说清后把选择权推回玩家（模板原文），机制上无超时后果追踪，按压力语义保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-ff1ab6f87b755a7aa4f7669361ea36e7
+  source_hash: 5ffdaf91d799745754a385e9f8f22cdbb195475d87f607d4e566b02f0f47c92e
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 递出一支笔
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 签署与债项
+    technology_boundary: 限书写工具的物理递送，签字与否由玩家决定。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:009
+    reason: 笔与纸只是道具，「签了今晚就两清」是 NPC 话术而非状态变更（templates.yaml trade_beats）。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f93c14525aec5d5c9b2024824f1a58ae
+  source_hash: 97e266018fa01d6d50127605fed309919ea55310499eaa8680287f36d803b3a7
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 提出一场对赌
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 对赌与责任
+    technology_boundary: 限赌局提议本身，赌注与结算条款须另行商定成立。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:011
+    reason: 「赌注等你来开」即条款未定，无预置赌注或强制结算，与对赌提议语义一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-ea5c52e0323b50b6bab954c7e4b5c6da
+  source_hash: 7bdf05379768dab4836eb409938af2cf890695d88fc96307a4be812b1fd7277c
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 摆出两个选项
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 选择设计
+    technology_boundary: 限二选一的呈现方式，保留提出第三项或全不选的余地。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:012
+    reason: 模板宣称今晚只能选一条，但 fill_opening.py:299-300 仅渲染句子不设强制分支，按话术压力保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-c04414e48eae59ddb0bfba5469369bd0
+  source_hash: 80bae4fd030fd389f93b01f05243271f798155d08c15315877c55545821361ab
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 推过半板抗生素
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 药品与交换
+    technology_boundary: 限药品道具的物理呈现，「能救命」是 NPC 断言而非医疗事实，服用与疗效不入状态。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:013
+    reason: 模板把消炎药断言为救命药缺医疗依据（已记 needs_source_fix），片段以技术边界把它限定为话术。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-924f204b82c558e5b7bd6fad67512349
+  source_hash: 3767f7e08f145f7f5f95cc805af487430babf6ff9a61287761b1f303116f5fb5
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 当面卸下弹匣
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 武器与谈判
+    technology_boundary: 限卸下弹匣的可见动作，不证明枪支整体安全或持有权限成立。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:014
+    reason: 卸匣≠销毁，「谈崩之前不动火」是口头承诺（模板原文），武器仅作道具呈现。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-c9ff34289d445b35b1227356825add69
+  source_hash: 1961e307d3bb088fd9b5ab6875c2fa19b79af91feafe0231c981fd2e718b08ed
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 递出一张乘车通行证
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 撤离资源
+    technology_boundary: 限撤离名额纸条的物理递送，名额真伪与兑现须另行核验。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:015
+    reason: 「等你决定谁上去」保留决定权（模板原文），纸条仅为凭证道具。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-eba70616046f5efab9e62ff151e6c680
+  source_hash: 1039090e7d9518edb2bc921ff3f91925a763ae737b263b63a11a2075af44cb68
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 撕开衣领露出伤口
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 伤口与判断
+    technology_boundary: 限衣领区域的皮肤与伤口展示，伤情判断是 NPC 引导性断言而非诊断事实。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:016
+    reason: 「让你亲眼确认这不是咬伤」为未证断言（已记 needs_source_fix），展示限于衣领非亲密暴露，按医疗悬念保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-cc9040538b145156b7490083103f967b
+  source_hash: f571d0d864e0eecb779ab229c3fab2632832fd09ec6fc79536c3b4cb236ebefa
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 亮出后台未退登账号
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 账号与信息权限
+    technology_boundary: 限当代智能终端与账号后台存在，「未退登」不共享后台权限给玩家。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:018
+    reason: 需现代手机与账号系统（无 eras 机器名单故由边界承载），展示不等于授权访问（模板：屏幕上是未发的草稿箱）。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-7bc7f2d09c8359c1a657c88007da3099
+  source_hash: b1946f8fb34988c0c4ad039daaf857465f12b33254a6a7852e6c5e5f84eb6c80
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 亮出惩罚契约卡
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 契约处罚
+    technology_boundary: 限盖章卡片的物理呈现，惩罚条款未见证成立且不可执行，不构成身体或调教授权。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:019
+    reason: 「愿赌就要服输」是口头宣称，卡面条款无见证与结算机制（templates.yaml trade_beats）。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-9c9a9830a6df50b8a36817767b8a9ab7
+  source_hash: 8b09522d76253e680a175c423c4f0a30805d50a81f15316b6c506c5ad4b41833
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 拍出写有黑历史的旧日记
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 往史与承诺
+    technology_boundary: 限双方当时均已成年的既往凭证，当前成年不追溯往事发生时的成年性。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:021
+    reason: 「十年前按手印的日记」未证明往事时双方已成年（原 review 缺口），以边界钉死成年回溯后保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-19dc5a8dadd050a48b593dfaadb1f912
+  source_hash: 23f2479ec7d6e705c3bcd8903891205813bc94163d2a069ab62034e6dca64366
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 交易摊牌
+    label: 当面撕掉一张合租禁令
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#场景动作·对照
+  - consumer:fill_opening.trade_actions
+  - consumer:fill_opening.action_sentence
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 同居与边界变更
+    technology_boundary: 限撕纸动作本身，单方撕毁不撤销双方已立的边界约定。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G08:022
+    reason: 撕白板纸条是象征动作（模板原文），不改变任何已立边界状态，按对照压力语义保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-3e7f5cad5dcc5ba68018511a19f0ca75
+  source_hash: 7163115e80d5088a1ee8c477cb1221959a0e8a103fdd1b06b8560249520fe769
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 让对方决定是否打开录音
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 录音授权
+    technology_boundary: 须先取得录音同意，未同意不得开启设备。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:005
+    reason: 模板先问「是否需要留下记录」，同意前置与「调查与核验」分类一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-179a90c512d851f9a465b347a941d014
+  source_hash: 30dc4100f906b044595e95588df70b98814e6f18b57988f01193ae06593dd5fd
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 主动把门打开
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 出口与自主
+    technology_boundary: 限打开通道的去约束动作，不改变其他出口状态。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:009
+    reason: 开门让通道是反升级方向，与「空间与退出」exit/deescalate 元数据一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-be6060c658cb519c8acb17d2fd53f7a9
+  source_hash: e1d995c2620d4fdafe12e209a54282fcbc8822495bda87357518eeb8cfe7e0a7
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 坐到离出口更近的位置
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 空间选择
+    technology_boundary: 限就座位置选择，不阻挡他人路线。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:010
+    reason: 模板明言「没有挡住任何人的去路」，与 exit/deescalate 元数据一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-49781fb2f3765bd99650397298100268
+  source_hash: 3c543d9dad900cf760b79696e29b54b6d61811b3ff1bca40054c1196577ad02c
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 改到公共区域继续谈
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 空间与隐私
+    technology_boundary: 限场所转移提议，转移须双方同意。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:011
+    reason: 「询问是否愿意换个地方」为征询式提议，同意前置。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-76c00c2cad9a5555b462a77f49a6d8dc
+  source_hash: 455b58c897a76e30c346b30fca23540b53ba66fa9043f975c1ce36a8e28bd16b
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 把关键物品留在原地后离开
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 物品保管
+    technology_boundary: 限物品留置与离场，留置不等于所有权放弃。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:013
+    reason: 模板说明留置位置后离开，建议句「不替离开的人追加承诺」不代行承诺。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-db25d5bea1045475bc2eb88e1ddff334
+  source_hash: dd3662209111e705041d852c7a69c3febf2bba209e1b305d933dbbe15aa15df2
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 门外有人敲门
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 第三方到访
+    technology_boundary: 限中性打断事件，不预设来人身份或威胁。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:019
+    reason: 敲门声本身无威胁预设，escalation=variable 元数据与模板一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f9c8d3a658fe59afa6dbb9cad9ec70a9
+  source_hash: a3ae574ec428f82fc2946042fa2356539210c11209624f2713230ce1e3b0cc69
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 店员认出主 NPC
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places:
+    - 旧书店
+    - 夜场会所
+    - 通宵大排档
+    - 昭和喫茶店
+    - 爵士喫茶
+    - 深夜便利店
+    - 打烊面包店
+    - 拍卖行
+    themes:
+    - 公共识别
+    technology_boundary: 限店员对常客的识别打招呼，认识不绑定身份事实或忠诚。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:020
+    reason: 模板仅「认出并打招呼」的旁听者在场；places 逐字保留 material_compatibility 名单（pools.yaml:980）。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-1a70805d7fab5fddab1c770d224ddff0
+  source_hash: c75fbc56058d05d2d0d483be63d25a369ae396e943537908b39af4c95d423c93
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 司机提醒即将到站
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places:
+    - 列车车厢
+    - 末班地铁
+    - 高速公路服务区
+    - 夜航渡轮
+    - 最后一班渡轮
+    - 黑帮教父防弹老爷车
+    themes:
+    - 交通到站
+    technology_boundary: 限乘务角色的到站提醒，不改变行程或同行安排。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:021
+    reason: 建议句明言「不自动改变同行安排」；places 逐字保留 material_compatibility 名单（pools.yaml:979，名单含私车条目已记 needs_source_fix）。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-343bacfc4a775dd4b609df4a7873fd50
+  source_hash: bd7c0ea739c1465711aedb38460e8f0bbfdbd7cfa8ad3400a50fb9b01da31e76
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 值班人员要求确认身份
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 身份核验
+    technology_boundary: 限场所规章内的身份核验，被核验方可先问用途。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:022
+    reason: 模板 NPC 先询问登记用途，核验对等、无强制披露。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-152fe20e18fd5260b864251b555a604d
+  source_hash: 82d613fe897954270016e7a86da5d32837bcfc0dc93813aa80b69a3651b073ab
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 另一名 NPC 带着文件进场
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 文件与第三方
+    technology_boundary: 限第三方进场并说明来意，文件效力不预设。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:023
+    reason: 「先说明自己要找 NPC 核对什么」为透明进场（模板原文）。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-bcf7c43508185e9ba3da557c3914014d
+  source_hash: 6e4c2d3b01bfb1a0a76b695164273a7cc16f338a7f4ca325ae70b096f5e7e5b7
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 监控提示异常
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 监控与核验
+    technology_boundary: 限监控系统存在的技术前提，提示可靠性待核验、不作指控依据。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:024
+    reason: 建议句「核实提示是否可靠」「不根据一条异常猜测责任人」与中性打断语义一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-3e265b9eab16516097067632e13913a8
+  source_hash: a212500b4bc3ce2a3028c16f6bd845561021fe6869ed58610b9c64aa492b0109
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 让可信任的人见证条件
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 见证与协商
+    technology_boundary: 限双方认可的见证人，单方指定的见证无效。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:025
+    reason: 模板「询问能否请双方认可的人到场」，见证须双边同意。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-560c2445ca625704a01cf9cae0cf9340
+  source_hash: 12e0a791cf0949f7ea44a730a4697583df80dfa8c45b57bd004338105298cf6d
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 把争议交给正式流程处理
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 争议解决
+    technology_boundary: 限提交给既存受理渠道，不创设管辖或法律结果。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:026
+    reason: 「准备交给能够受理的渠道」指既存渠道（模板原文），争议内容不因提交而定论。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-eeda8d7c8f69511aab71fea89a32e2c4
+  source_hash: 66b11dfdc27789a43267cf9de7108368d9354d1e1a0f0c7fe030124cc6b320ab
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 家人突然来电
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 通讯与私人时间
+    technology_boundary: 限个人通讯设备存在，来电者身份与关系不因来电进入场景互动。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:027
+    reason: 模板 NPC「示意需要先接一下」为通讯礼仪；来电者是背景第三方，不进入互动，无未成年互动指向。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-9650b697dca45cceb5981aa9775621c1
+  source_hash: aaafe4edd8b3cf3baa91e4c2bcc586b09d0f96539f187182403fbba4aec186ff
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 同事带着文件找上门
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 工作与来访
+    technology_boundary: 限职场关系的上门核对，工作内容不预设立场。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:028
+    reason: 模板「在门口说明需要核对的一页」为透明核对，建议句含回避选项。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-43718a5ca1af56a4bb7a982e8554befe
+  source_hash: cfade05ffc12b3ab08955afc35ea7e1713f9fd1fc6311b460b709e194b7e5cbf
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 店内广播叫到 NPC 的名字
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 广播与公开身份
+    technology_boundary: 限店内广播系统存在，通知内容不预设。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:029
+    reason: 「等候下一句通知」为中性等待，与第三方打断分类一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-d2d1e89283c759749a7168c8ae13d224
+  source_hash: 43176aed2eb8c2932075a6cc2d272befca45b57d14046b44d3993b2f116171f0
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 门禁记录出现异常
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 门禁与记录
+    technology_boundary: 限电子门禁系统存在，异常记录不作有罪推定。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:030
+    reason: 建议句「核对时间和记录，不根据一条异常猜测责任人」明示反推定。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-a6984fcd8f7156758763b5a300672ab2
+  source_hash: 72ac1ff4beeb21c1d222bd497e1984af791f403feff5731bd7f500fd1620020a
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 第三方拿走关键物品
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 物品与第三方
+    technology_boundary: 限第三方的拿取动作，去向与交接依据须当场问清。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:031
+    reason: 模板 NPC「出声询问对方要把它带到哪里」，建议句同步质疑交接依据。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-838dbab8574d552fae885efdf31afd1f
+  source_hash: f3cf3821559fd4923c207647212535a4646da4318f07c28cad806145aba6a961
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 约在午夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 约见与时间
+    technology_boundary: 限时间约定的提议，深夜时段不暗示任何默认许可。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:033
+    reason: 模板「确认你是不是真的会留下来」为可拒绝提议，留否由玩家定。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-51f3c82813455651a4c094ebb3065f41
+  source_hash: a4bf5567d83f1092fb652a5b82d885a5e33f4fbe9e4fcd113ae02516aa09b323
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 请求庇护
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 求助与退路
+    technology_boundary: 限庇护请求与关门动作，锁门须她本人执行且玩家可随时要求重开。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:034
+    reason: 模板关门加建议「让她把门锁上」是收窄退路方向，与「空间与退出」exit/deescalate 元数据矛盾（已记 needs_source_fix），restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-805543f1e7da5678a81f5566ac75e986
+  source_hash: 10fa3a87a46aa7c4c5d50c5c2a11a48b217d49f20e34a60790f3a4f8389bb1c2
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 试探底线
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 沟通与边界
+    technology_boundary: 限一句口头试探，被拒后不得重复或合理化强制披露。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:035
+    reason: 「声音轻，眼睛没躲开」仍是一句问话，建议句明示可把话题转开。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-702279c50692561e9ffeb5add190d13e
+  source_hash: 2890843b68857e60afdf9bd2ed0d2372f2631f4024bae2815dc53df6faebe137
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 把灯调暗
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 灯光与空间
+    technology_boundary: 限照明档位调整，可随时调回且不关联就寝或亲密预设。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:041
+    reason: 模板「没有解释」，建议句并列「把它调回去」；与 exit/deescalate 元数据的错位已记 needs_source_fix。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-396e8df1a24058028e8a168168924788
+  source_hash: 898c79d2d495b0870696745e3df72bc0ef4afa1abef609f8b2455b27391f835f
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 先开口叫名字
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 称呼与身份
+    technology_boundary: 限真名呼喊，须名字已知且不在禁名约束内。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:042
+    reason: 在 daily 白名单（pools.yaml:772）且 pressure 主抽取可用（roll_opening.py:612-620），双模式保留；叫名不携带称谓权限。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-2d45a3c3961c5bcaab0b18e422daf789
+  source_hash: a4858c2b6f7883024b21273bdeab45e0f7ba6b1b256da5d6f4c5cdb7dd9c815c
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 留一盏灯
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 照明与等候
+    technology_boundary: 限照明留给对方，不预设同住或就寝安排。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:045
+    reason: 模板 NPC「自己坐在灯照不到的地方」，不进入对方空间，与照护分类一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-045912c0c413571784fba564dc92b1ee
+  source_hash: df5abb4317d68558fc82b21efa5e0e77f8efc9a8c6d201b7a6203f5f93b01052
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 教一个动作
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - daily
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 教学与动作
+    technology_boundary: 限动作示范与等待，「手把手再教一次」须对方先选择。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:047
+    reason: 在 daily 白名单（pools.yaml:772）双模式保留；模板「停下来等你试」为同意前置。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-367d44c7b51c5d7894ecd52f98472236
+  source_hash: 8f9f1b7b8b8256f0909253750462afddddb0ff7b730b44f074629d303f9ffd4f
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 陪你等末班车
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 公共交通与陪伴
+    technology_boundary: 限公共场所的陪伴等候，不预设过夜或同行返回。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:049
+    reason: 模板「没提自己也回不去」即不索取回报，建议句可问她末班车之后去哪。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-e6e7e45475ff5ff3b8a80725e1a9a6b2
+  source_hash: 41be7d09a877a7741cd0c117800c91acd8097d94dff00b5fa326d4d9d124ff41
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 替你挡下一通电话
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 通讯与自主
+    technology_boundary: 限经事前许可的代扣手机，机主可随时取回自行接听。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:050
+    reason: 模板先问「能不能先不接」，建议句并列「把手机拿回来说自己来接」。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f6c83dd3fc7659219a9b471d6c9da74e
+  source_hash: c67f1b77722be8253c1efdbb9f3d882ecadb096ef08ad700917e40c1443eb0d0
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 教她一个身段
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 表演教学
+    technology_boundary: 限动作示范教学，抬腕、虚扶腰背等触碰须逐次同意。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:053
+    reason: 模板「抬起你的手腕」与建议句「虚扶她的腰背」超出「信息交换」分类的身体语义，且标题与模板施受方向不一致（已记 needs_source_fix），restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-3f1280fc3ff5575dae6312667802e79b
+  source_hash: 7b411c488df48a33782a2f7bcaa79253d1c328703d8817c4a426259c0c45b5a7
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 替她系松开的盘扣
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 衣物与接触
+    technology_boundary: 限系扣动作须她先开口，指尖停在扣眼等她说好。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:055
+    reason: 分类「身体靠近」自标 escalation=high，建议句「等她说好」为同意前置，身体接触 restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-85e2cf78900b5cc3898c749b5e3c8bcf
+  source_hash: 2c4e59faeec7cca35bfe7d5de36be3d1f233daa9a88d820eb74e6785d9a2ac79
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 反手反锁包厢门
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 封闭与退出
+    technology_boundary: 限反锁动作须在场者知情，玩家可要求立即开锁。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:056
+    reason: 模板「把门锁拧死」封断退路，与「空间与退出」exit/deescalate 元数据直接矛盾（已记 needs_source_fix），restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-0339b20773c15f769e2c2bd0f6b83b9c
+  source_hash: 77db9a7c1c0ccd1a727ca73a944f673243df48e50d8b35db3274c3bab6032924
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 对弈时让半子
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 棋类与公平
+    technology_boundary: 限棋局内的礼让，让子不外溢为让利或服从。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:058
+    reason: 模板「等你自己认」保留对局平等，与日常接触分类一致。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-0d77bf4a90a95bf7af064b8a5355c85e
+  source_hash: 3bd603c2d4e504ee9b39b47110f540964683c48b949b728ff98b2576b09d4498
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 递过半瓶干净水
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 饮水与资源
+    technology_boundary: 限清洁饮用水的分享，接受与否自愿。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:059
+    reason: 「瓶盖已经拧松」是可用性提示非劝饮（模板原文），照护语义。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-52a122412f1e5ad2969262a64ee58673
+  source_hash: ed5d09bfaff314fb01bcf499bd495fbbca8bb5440ca25e9b747690e6148e8b8a
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 用酒精棉按住渗血
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 伤口照护
+    technology_boundary: 限体表伤口的一次性急救处理，不替代专业救治。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:060
+    reason: 建议句并列「伸手接下棉球自己来」，处理权可移交。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-93e125ba52765b31bb506da3ab1449a9
+  source_hash: 19df2b906086994dc081dc86ea0ff5a2b349c6043c67ec5346b12fcd82750487
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 替她扶正防毒面罩
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 防护装备
+    technology_boundary: 限防护装备的调整，气密确认不预设毒气伤害已发生。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:061
+    reason: 标题「替她」与模板「替你」施受方向不一致（已记 needs_source_fix），动作本身为装备照护，无接触扩展。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-1100aa2e4c4e57c6bf036c9bc7cdda1f
+  source_hash: 158ad3bd34f5f6982e649283e1c45f11d47d77bbee5163952443ed52c5fbdf36
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 侧身挡住通风口的风
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 通风与避寒
+    technology_boundary: 限以身挡风的照护姿势，不遮挡通道或视线。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:062
+    reason: 模板「后背抵在通风窗缝前」为无接触挡风，建议句「拉紧防雨布一起挡」可选。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-db4304a0740b5f9da75769f22ace6acc
+  source_hash: 1a454a47e05f715521a3b6184fbf67b78049a93250d93c25a52a0dbc55766fea
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 替她拉上背后拉链
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 衣物协助
+    technology_boundary: 限拉链动作须她背身等待并点头确认后方可动手。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:063
+    reason: 模板「拉链卡在正中间等你动手」与建议句「等她点头」为同意前置，背后着装接触 restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-def32fd601795d0c9595fe98122cf8f7
+  source_hash: 0baaa1ab008170cf4cde1d6f445e1d46c7b3839957450e13f8fc9806fba250e0
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 替她扶正猫耳发箍
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 造型与接触
+    technology_boundary: 限发箍扶正动作，揉发顶等扩展触碰不在本条授权内。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:065
+    reason: 建议句「顺势揉一下她的发顶」把授权扩出动作范围（已记 needs_source_fix），restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-3760f0a288d852e1840a04f73cbfce1c
+  source_hash: e4bc5219aed76326cb274a9cbc6b3e0b5bfb9707869908ebd564b871550ae05e
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 递过宽大队服
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 服饰照应
+    technology_boundary: 限衣物递送的保暖用途，替她披衣、拉链须另行同意。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:066
+    reason: 模板 NPC 递衣与建议句「替她披上队服」施受方向不一致（已记 needs_source_fix），着装接触 restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-21499401f1675879b096589b58b385c2
+  source_hash: 23c7144ba7432cab44580b08095ada9c2d7e4f3e52a76f905befb23fb9378b36
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 用嘴咬住发绳扎单马尾
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 个人整理
+    technology_boundary: 限用嘴持发绳的姿势动作，拢后颈发丝须她眼神或言语示意。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:067
+    reason: 分类「身体靠近」自标 escalation=high，模板「眼神示意你等一下」，后颈接触 restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-ca6c4c5cc5765137a4ab956a6ebac6d8
+  source_hash: bffba212eb589b407ede012064bf3044134a8512c71f47eec22199c1358a7ac0
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 下意识揪住你的后衣角
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 依恋与退出
+    technology_boundary: 限衣物牵拉的表达动作，玩家停步或转身即止，不得以此限制离开。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:068
+    reason: 模板「死死攥住不肯松开」具限制移动方向语义，解除权须在玩家（建议句为覆手背而非拉开），restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-840e34b73301568d86779ab7245d8596
+  source_hash: a6c1ea643e8c40bf8f0b626a906d88d5190547f97074ecdce89bf312d4ae19d2
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 把发烫的脸埋进你的掌心
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 身体安抚
+    technology_boundary: 限脸颊贴掌的主动靠近，抚眼角、扶下巴须逐次同意。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:070
+    reason: 分类「身体靠近」自标 escalation=high，模板「今天就这一次」自带单次界限，扩展触碰 restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-4da138ea2d3357fd81d25ca7e4f034a3
+  source_hash: ce4c1f7cc852507589703a0b0d360e41464d9fb20bcbfa79f9da45e21df47d16
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 分半张烤得焦黄的干烙馍
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 食物与供给
+    technology_boundary: 限食物分享，饮食自愿且不预设口味或过敏。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:071
+    reason: 模板「把热乎的那半递到你手里」为让好份；建议句代词转「他」与主 NPC 默认女性代词不一致（已记 needs_source_fix）。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-52aef14a2b3c55028a4e407fcf33ea23
+  source_hash: 6e0da0f14dee54b623f30c136f505c79b3701cbc04dcd7b21ca10956bcfe8f9a
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 替他拂去罗盘上的青铜尘土
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 民俗器具与协助
+    technology_boundary: 限器物除尘的轻触，不移动对方持具的手。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:072
+    reason: 模板「任由你的衣袖轻轻扫过罗盘天池，没有挪开手」为经默许的器物照护。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-60019b1f991b57ad87408d76e45c0824
+  source_hash: 632b4763429657b22c14aab4fd8a6560eec49b35fd622372e4708cf103512753
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 把防身桃木小符塞进他袖口
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 护符与信俗
+    technology_boundary: 限符纸的物理递入，护身效果未经证实不作事实陈述。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:073
+    reason: 模板「按在他腕脉上的手指」「感受着符纸的温热」含未证效果暗示与腕部接触（已记 needs_source_fix），restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-73357e823c0f50f79255d59159465fd2
+  source_hash: 4530f5b6ed331e9986b5d816ddf2a927cc636513b67bdbf7c2eec6c436e6a207
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 用指尖替她抹匀眼角油彩
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 舞台化妆
+    technology_boundary: 限面部油彩的修饰触碰，闭眼期间的触碰须事先取得许可。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:074
+    reason: 模板「仰着脸闭上双眼，任由你的指尖…抹过眼眶」缺触碰许可交代（已记 needs_source_fix），面部接触 restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-6ce37afbec7b5bc2ba44b5abb0fc1235
+  source_hash: b871b2a46029c3c88a1d410a22c2ea5bca239abfb69ecb9ff332676419e933ac
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 替她扣紧手腕上的皮质护腕
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 装备检查
+    technology_boundary: 限护腕搭扣的装备协助，握腕取暖等扩展接触不在本条授权内。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:075
+    reason: 建议句「握住她的手腕给她一点温度」越出装备检查范围（已记 needs_source_fix），restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-0dbfd62201305858bbb4a473f6db4511
+  source_hash: 71c6ad7d740b56881d9c7b3d018cf0349be25084114505293e73604f92f56f59
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 递过斟满葡萄美酒的金樽
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 饮酒与地域
+    technology_boundary: 限合法成年饮酒且可明确拒绝，敬酒不构成同饮义务。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:076
+    reason: 标签「递过」与模板「伸手接过金樽」方向不一致（已记 needs_source_fix）；就着酒樽同饮为建议选项非义务，与已闭合酒类行同样仅以边界约束。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-dd6971064c1851c499afa05b2dba4a95
+  source_hash: 15772838a4d8de73cef91e7828be888d1f0e187d27530f6258dce2d3c976d870
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 替她挽紧被狂风吹散的红纱面罗
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 服饰与风沙
+    technology_boundary: 限面纱固定的协助，指尖相碰是瞬时意外接触、不延伸为抚摸。
+  restrictions:
+    frozen: false
+    restricted: false
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:077
+    reason: 模板「指尖在面纱边缘与你的手指轻轻相碰」为协助中的意外接触，建议句为别紧金扣。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-5649e23c3dc750d2ba8ec18b96c52dc0
+  source_hash: 15b2bd72439082c39ed7b1fa6a968aaa709b91ecd7bbafd90d86a025c6f533d5
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 以指尖朱砂点向她眉心镇妖
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 术法与意识
+    technology_boundary: 限点朱砂的仪式动作，镇妖效果是叙事表现、不作事实断言。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:078
+    reason: 模板「眼底的暗金妖气慢慢敛去」「虚脱般抵上你的胸膛」含效果断言与身体倚靠（已记 needs_source_fix），眉心接触 restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-9e00ce0191ef5ac78ebed05deaf0ee74
+  source_hash: 91ced9be0dd995c9e73e7f18854042d478422a5ab58ca940b58e3eb8a8087066
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 将一支点燃的雪茄递到她唇边
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 烟草与社交
+    technology_boundary: 限合法成年吸烟且可拒绝，就着手指轻吸须她主动完成。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:079
+    reason: 模板「就着你的手指轻吸了一口雪茄」为唇部与手指的亲密接触语义，成人烟草前提下 restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-e8d3824fa46e53b9a8d8e65ec1ad70a6
+  source_hash: ddbfecf19508381ce8ba1af39916384cfa688a12f2518579ece365cc1731cb33
+  source:
+    file: pools.yaml
+    path:
+    - 场景动作
+    - 非交易靠近
+    label: 递上一块干净白布替她拭刀
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#非交易靠近
+  - consumer:fill_opening.action_sentence
+  - consumer:fill_opening.fill_opening/unresolved_action
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 武器与证据
+    technology_boundary: 限拭刀的器物照护，握住发颤手指须另行同意。
+  restrictions:
+    frozen: false
+    restricted: true
+    reason: 按本条文本与分类一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g08|g09:G09:080
+    reason: 模板「刀背上的雨水与残血」加建议句「握住她冰凉发颤的手指」的组合具胁迫误读风险（已记 needs_source_fix），restricted 保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g08-g09
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only

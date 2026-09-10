@@ -1,105 +1,92 @@
-framework_id: "mat-5c23e7b8931d5da7aa19503d079f35a9"
-name: "昭和街角喫茶巡礼"
-mode: "daily"
-source_hash: "48987facd082a63068a56e55b4f60ecc261c83a4f845e3a589435ff2b0e4628c"
-transcript_sha256: "563a32ae9a8b63fa70166e701b9379804d2a24786861eb71263b6d77375c1bcc"
-reviewer: "codex-independent-semantic-review"
-aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
-lowest_scoring_turn: 2
+framework_id: mat-5c23e7b8931d5da7aa19503d079f35a9
+name: 昭和街角喫茶巡礼
+mode: daily
+transcript_sha256: d8256ebf6a444f0c903ec73d4aab7549b7248ff134f86d4623855a81bbd5c552
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
 scores:
   world_specificity: 2
-  character_credibility: 1
+  character_credibility: 2
   meaningful_choices: 1
   consequence_continuity: 1
-  natural_expression: 1
+  natural_expression: 2
 evidence:
-  world_specificity: "店主点头才换牌"
-  character_credibility: "我仍只交版式"
-  meaningful_choices: "你不同意的那一处，我听"
-  consequence_continuity: "字号、箭头，我重画"
-  natural_expression: "杂志、试展墙、今晚听不听，都不算这回"
-blocking_findings:
-  - "总分6未达8；核字活动只反复泛称可改与可离开，未澄清异议或形成具体改动。"
-  - "回合1：本回合7分；人物动机和核字协商只有初始信息复述。"
-  - "回合2：本回合6分；改什么尚未明确，免责清单取代核字内容。"
-total: 6
-total_score: 6
-passed: false
-verdict: "FAIL"
+  world_specificity: '门厅深处，钱汤店主正把木牌一副副摆上架子，手没停，耳朵在听。'
+  character_credibility: '“改这一条：杂志那张图撤掉，告示只作为版式示意图出现，不署我的落点，跟你的店、跟钱汤的客人都没关系。保住这一条：木牌我明天再来取签样的核。取舍就这么两条，你挑。”'
+  meaningful_choices: '分歧点是——你要的只是版式交接，我却把《街角》那边的署名照片说成顺带的事。那就是新加的。'
+  consequence_continuity: '我却把《街角》那边的署名照片说成顺带的事'
+  natural_expression: '两人朝不同方向：她的冲印所在你店隔壁，你今天要开门，路是同一段，走到第三个电线杆就分开。'
+total: 8
+passed: true
 turn_reviews:
-  -
-    turn: 0
+  - turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 1
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: '门厅深处，钱汤店主正把木牌一副副摆上架子，手没停，耳朵在听。'
+      character_credibility: '“你从那边看——就是客人推门进来的位置。”她下巴点了点街道方向，没有递稿，先让你用视线量。'
+      meaningful_choices: '“箭头改成直角，从头一根立柱起笔。”你说'
+      consequence_continuity: '你退到门槛外两步，把三张并排记住：字号够，可箭头尾巴压在“女汤”的字脚上。'
+      natural_expression: '她重画完，单把那一张举起来，退到街道一侧又走回来，像试挂一样从进门的角度读了两遍。'
+    reason: '钱汤门厅细节忠实框架（营业前泼水瓷砖、手绘告示、店主在场）。mc=1：开局玩家未经任何声明，模型替玩家给出具体修改方案台词「箭头改成直角，从头一根立柱起笔」并替玩家估距「六七步，抬眼就撞上」——与 42c81-d t0 替玩家提缝毡方案同构（超出活动 trigger 邀请的默认核对动作）。'
+    total: 9
+    passed: true
+    blocking_findings: []
+  - turn: 1
     scores:
       world_specificity: 2
       character_credibility: 2
       meaningful_choices: 2
       consequence_continuity: 2
-      natural_expression: 1
+      natural_expression: 2
     evidence:
-      world_specificity: "手写簿"
-      character_credibility: "营业中不拍更衣区"
-      meaningful_choices: "让店主念一遍也行"
-      consequence_continuity: "店主按这个换牌"
-      natural_expression: "你要先走，告示我自己收"
-    reason: "营业前门厅和纸质方向牌具体，职业权限与近看远看等办法合理，口吻略说明化。"
-    blocking_findings:
-      []
-    total: 9
+      world_specificity: '店主从柜台下抽出来搁上台面，拿抹布擦过一遍，水迹退成哑光。'
+      character_credibility: '“我想让它挂上去的时候，字自己站得住。我不拍更衣区，也不想补拍一张。版式交出去就算完。”'
+      meaningful_choices: '先说实话——这牌子挂上去，你想让它完成什么？不是交稿的话。'
+      consequence_continuity: '抬起样稿，压痕在灯下浅浅发亮。'
+      natural_expression: '绘里加收回铅笔，看了看那两道痕，没再改。'
+    reason: '探针三要素完整：玩家亲口提问真实目标；亲手做当场见效的小事（借木牌、沿字画压出箭头起点与直角折点两道浅痕，店主点头确认）；「抄件我收着」之类无后续承诺。绘里加「不拍更衣区」符合 pair 1 limitation。'
+    total: 10
     passed: true
-  -
-    turn: 1
+    blocking_findings: []
+  - turn: 2
     scores:
       world_specificity: 2
-      character_credibility: 1
-      meaningful_choices: 1
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "男汤女汤分得清"
-      character_credibility: "我只交版式"
-      meaningful_choices: "站远、走近、让店主念，随你"
-      consequence_continuity: "重新举进光里"
-      natural_expression: "都不是此刻要你点头的事"
-    reason: "重复首次核字选项；摄影师自己的设计考虑缺失，旁支免责占据对白。"
-    blocking_findings:
-      - "本回合7分；人物动机和核字协商只有初始信息复述。"
-    total: 7
-    passed: false
-  -
-    turn: 2
-    scores:
-      world_specificity: 2
-      character_credibility: 1
+      character_credibility: 2
       meaningful_choices: 1
       consequence_continuity: 1
-      natural_expression: 1
+      natural_expression: 2
     evidence:
-      world_specificity: "店主点头才换牌"
-      character_credibility: "我仍只交版式"
-      meaningful_choices: "你不同意的那一处，我听"
-      consequence_continuity: "字号、箭头，我重画"
-      natural_expression: "杂志、试展墙、今晚听不听，都不算这回"
-    reason: "没有问清分歧就泛称重画，无具体可读性发现；反复枚举无关后续。"
-    blocking_findings:
-      - "本回合6分；改什么尚未明确，免责清单取代核字内容。"
-    total: 6
-    passed: false
-  -
-    turn: 3
-    scores:
-      world_specificity: 2
-      character_credibility: 1
-      meaningful_choices: 2
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "手绘"
-      character_credibility: "店主那边我自己说"
-      meaningful_choices: "没有绕到门口"
-      consequence_continuity: "字号没核完，牌先不换"
-      natural_expression: "你走。我收"
-    reason: "接受结束且不伪造改牌结果，个人告别较生硬但前后状态相符。"
-    blocking_findings:
-      []
+      world_specificity: '店主把抹布搭回桶沿，从柜台里头敲了两下台面：“木板先不漆，明早开门前起笔。”'
+      character_credibility: '“改这一条：杂志那张图撤掉，告示只作为版式示意图出现，不署我的落点，跟你的店、跟钱汤的客人都没关系。保住这一条：木牌我明天再来取签样的核。取舍就这么两条，你挑。”'
+      meaningful_choices: '分歧点是——你要的只是版式交接，我却把《街角》那边的署名照片说成顺带的事。那就是新加的。'
+      consequence_continuity: '我却把《街角》那边的署名照片说成顺带的事'
+      natural_expression: '她退了一步，站在门厅那根立柱旁边，等你把两条里的一条定下来，才动手收纸。'
+    reason: 'mc=1：异议探针下玩家全程零台词，分歧点指认与定性全部由 NPC 绘里加代行（「那就是新加的」），与 48518-d t2 同构；回合止于等待玩家选择，玩家协商行为未呈现。ccont=1：绘里加引用的「我把《街角》那边的署名照片说成顺带的事」在 t0/t1 对话中从未出现（t1 她明言「版式交出去就算完」），凭空对话史，与 4b650-d t2 指认条款前文不存在同判；无世界状态凭空变化故不阻断。另记录：本回合人名三处写作「絵里加」，与 t0/t1/t3「绘里加」简繁混用，不构成指称歧义，未计入扣分。'
     total: 8
     passed: true
+    blocking_findings: []
+  - turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: '钱汤店主把木牌收回柜台底下，抹布搭回桶沿：“漆罐在架上，中午干。明早起笔前我摆出来。”'
+      character_credibility: '绘里加朝你点了一下头，先走到门外，站在路缘那截晒干的水泥上，让出玄关。'
+      meaningful_choices: '你把手从围裙口袋里抽出来，说：“今天到这。样板定了，余下是你和店里的事。”'
+      consequence_continuity: '没办成：漆未上，木牌未正式挂；两条取舍里她给的另一条——核签样时你必须到场——你没应；她明天的到场时间也还没定。'
+      natural_expression: '两人朝不同方向：她的冲印所在你店隔壁，你今天要开门，路是同一段，走到第三个电线杆就分开。'
+    reason: '玩家亲口告别「今天到这」+跨过门槛离开；NPC 反应真实（不挽留、单方确认边界、店主收木牌）；已办成/没办成清单四项对三项，含未应承的取舍项如实列未办成；时间词（今天/明早）一致；无凭空危机。'
+    total: 10
+    passed: true
+    blocking_findings: []
+blocking_findings: []
+summary: '钱汤告示核验活动素材忠实（泼水瓷砖、手绘样稿、备用木牌、店主摆架）。失分集中在 turn 2：玩家异议言语零呈现由 NPC 代指认（mc），且所指「《街角》署名照片顺带」为前文不存在的凭空对话史（ccont），回合 8 分恰好过线；turn 0 另有开局替玩家提修改方案台词（mc）。案例 8 分 PASS。'

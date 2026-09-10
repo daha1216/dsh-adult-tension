@@ -1,0 +1,105 @@
+framework_id: "mat-ddf812ba8b975540a8f108d4b4fcb65e"
+name: "灵气复苏十年后"
+mode: "daily"
+source_hash: "bfee1e4f8397da71b820df70d9505e7f94d6985932066b68c2c18e6a4faeea12"
+transcript_sha256: "be9c51d39df02ceaa585a806ae8cfe0cfeece21582c9ba802147fd738084efc9"
+reviewer: "codex-independent-semantic-review"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+lowest_scoring_turn: 2
+scores:
+  world_specificity: 2
+  character_credibility: 2
+  meaningful_choices: 0
+  consequence_continuity: 2
+  natural_expression: 1
+evidence:
+  world_specificity: "校准留给灵气座"
+  character_credibility: "不稳我停"
+  meaningful_choices: "祁雁北按住还没贴实的校准仪，把它挪回托盘"
+  consequence_continuity: "测试载荷仍未接"
+  natural_expression: "不记新项，也不加义务"
+blocking_findings:
+  - "回合1-2代玩家进行设备操作并编造其技术异议，meaningful_choices为0。"
+  - "回合1：代玩家选择并旋转电池版底座，meaningful_choices为0，即使总分达到8也不能通过。"
+  - "回合2：代玩家操作校准仪并指定技术异议，meaningful_choices为0。"
+total: 7
+total_score: 7
+passed: false
+verdict: "FAIL"
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "断能灯座与电池盒"
+      character_credibility: "今晚只校准识别与供能"
+      meaningful_choices: "动手或只看都行"
+      consequence_continuity: "机械开关位"
+      natural_expression: "走廊在门外"
+    reason: "能力供能与普通电池可替代，演示不冒充验收；首次边界说明较密。"
+    blocking_findings:
+      []
+    total: 9
+    passed: true
+  -
+    turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 0
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "识别和供能各走一遍"
+      character_credibility: "不稳我就停"
+      meaningful_choices: "祁雁北只把电池版底座转正"
+      consequence_continuity: "测试载荷还没接"
+      natural_expression: "开关朝她"
+    reason: "机械朝向与未接载荷状态清楚、对话具体，但擅自操作玩家设备。"
+    blocking_findings:
+      - "代玩家选择并旋转电池版底座，meaningful_choices为0，即使总分达到8也不能通过。"
+    total: 8
+    passed: false
+  -
+    turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 0
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "校准留给灵气座"
+      character_credibility: "不稳我停"
+      meaningful_choices: "祁雁北按住还没贴实的校准仪，把它挪回托盘"
+      consequence_continuity: "测试载荷仍未接"
+      natural_expression: "不记新项，也不加义务"
+    reason: "擅自移动仪器并编出只验断开的技术异议，后续分开校准虽合理也建立在代玩家决策上。"
+    blocking_findings:
+      - "代玩家操作校准仪并指定技术异议，meaningful_choices为0。"
+    total: 7
+    passed: false
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "本机没留声样"
+      character_credibility: "工具我还"
+      meaningful_choices: "让出通往门的空隙"
+      consequence_continuity: "灯没做成，也没计费"
+      natural_expression: "走廊在门外"
+    reason: "未接灵气、未留声样、不验收和未计费均有依据，NPC自己还工具；边界式语言仍偏多。"
+    blocking_findings:
+      []
+    total: 9
+    passed: true

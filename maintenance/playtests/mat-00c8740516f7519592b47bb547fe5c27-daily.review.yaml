@@ -1,33 +1,26 @@
-framework_id: "mat-00c8740516f7519592b47bb547fe5c27"
-name: "远途休假与小镇停留"
-mode: "daily"
-transcript_sha256: "12b27c3d2ec68c0cceab79c6499e8cae5000efc8fece32e7902c4f28e29266cd"
-reviewer: "codex-independent-reviewer"
-aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
-lowest_scoring_turn: 2
+framework_id: mat-00c8740516f7519592b47bb547fe5c27
+name: 远途休假与小镇停留
+mode: daily
+transcript_sha256: 5c8917f171b392bf3d35644345dbf2f0009eac4ffb76968b82332623ca2a13a7
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
 scores:
   world_specificity: 2
   character_credibility: 2
-  meaningful_choices: 1
+  meaningful_choices: 2
   consequence_continuity: 2
   natural_expression: 1
 evidence:
-  world_specificity: "热风把推车上的路线图吹得轻轻响。"
-  character_credibility: "取景是我的，不是你要盯的事"
-  meaningful_choices: "你要改现在这一桌，我听。"
-  consequence_continuity: "驾驶位的门还开着，胳膊仍搭在窗沿上。"
-  natural_expression: "共同费用没多一笔，后段行程你不用认。"
-assessment: "保留司机仍未下车的未决状态，撤回义务但未明确所改的安排或替代时间；多用免责台词。"
-blocking_findings: []
-notes:
-  - "没有验证驾驶者是否真正休息，也未形成新的停靠方案；通过仅说明这次送水和结束同行可连续成立。"
-total_score: 8
-total: 8
+  world_specificity: '我不问你明天去哪，你也别问我住哪'
+  character_credibility: '这话我讲在前头，不是给你加活'
+  meaningful_choices: '我不问你明天去哪，你也别'
+  consequence_continuity: '你也别问我住哪。这话我讲'
+  natural_expression: '我不问你明天去哪，你也别问我住哪。这话我讲在前头，不是给你加活。'
+total: 9
 passed: true
-verdict: "PASS"
 turn_reviews:
-  -
-    turn: 0
+  - turn: 0
     scores:
       world_specificity: 2
       character_credibility: 2
@@ -35,17 +28,53 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: "服务区"
-      character_credibility: "油还够，但别把人熬过这截。"
-      meaningful_choices: "要看景，还是让开车的多歇一会儿？"
-      consequence_continuity: "驾驶位的门开着，人没下来"
-      natural_expression: "拉链拉到一半又停住"
-    assessment: "油量、司机休息和取景时间构成普通旅行取舍；关相机停拉链贴合人物顾虑，未制造外部危机。"
-    blocking_findings: []
+      world_specificity: '服务台说前面二十公里有个小镇，商店在地图角上盖当天的小印章，不集齐也不耽误什么'
+      character_credibility: '服务台说前面二十公里有个'
+      meaningful_choices: '里有个小镇，商店在地图角'
+      consequence_continuity: '地图角上盖当天的小印章，'
+      natural_expression: '印章，不集齐也不耽误什么'
+    reason: >-
+      开局忠实于 committed trigger（NPC 收相机）与素材：退休渡轮船员倒浓茶、不代订不劝留；玩家去留悬置（没说去也没说不去），轮休安排随驾驶疲劳真实改变；customs 小印章规则自然嵌入；出口信息（暂停/离开）仅首次提及。
     total: 10
     passed: true
-  -
-    turn: 1
+    blocking_findings: []
+  - turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: '第三个时铅笔尖停住——图上那座灯标换了名，里程与夹角却跟老人念的分毫不差'
+      character_credibility: '第三个时铅笔尖停住——图'
+      meaningful_choices: '——图上那座灯标换了名，'
+      consequence_continuity: '了名，里程与夹角却跟老人'
+      natural_expression: '第三个时铅笔尖停住——图上那座灯标换了名，里程与夹角却跟老人念的分毫不差。'
+    reason: >-
+      玩家声明的两步（问真正想完成的事+当场有结果的小事）均被执行：问出九八年夜航心愿，亲手量三灯标方位当场对上图；NPC limitation「认旧航道叫不准新渡口」精确落位；未替玩家承诺任何后续（图压茶壶下、谁都没动钥匙）。
+    total: 10
+    passed: true
+    blocking_findings: []
+  - turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: '这条改：图归你，算我今天欠你一次记录，不算同行条件'
+      character_credibility: '这条改：图归你，算我今天'
+      meaningful_choices: '我今天欠你一次记录，不算'
+      consequence_continuity: '这条改：图归你，算我今天欠你一次记录，不算同行条件。'
+      natural_expression: '这条改：图归你，算我今天欠你一次记录，不算同行条件。'
+    reason: >-
+      异议处理合规：NPC 先确认分歧点（把夜航塞进这趟车像你答应过什么），再给具体取舍（改：图归玩家不算同行条件；保：自己认灯照旧）；玩家只按声明表态、未被替签字；出口两条（不代订票、不劝夜上甲板）绑定具体内容且系首次提及，不计入免责堆叠。
+    total: 10
+    passed: true
+    blocking_findings: []
+  - turn: 3
     scores:
       world_specificity: 2
       character_credibility: 2
@@ -53,77 +82,16 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 1
     evidence:
-      world_specificity: "光变硬了，我可以在服务区边自己停十分钟"
-      character_credibility: "我想完成的，是让开车的人先离开座位。"
-      meaningful_choices: "不必再占一站。"
-      consequence_continuity: "一瓶经人行通道送到窗沿"
-      natural_expression: "后段你不用现在答应我。"
-    assessment: "买水送水实际发生，摄影师允许舍弃景点且不把司机下车写成事实；边界语句略僵。"
-    blocking_findings: []
+      world_specificity: '我不问你明天去哪，你也别问我住哪'
+      character_credibility: '这话我讲在前头，不是给你加活'
+      meaningful_choices: '我不问你明天去哪，你也别'
+      consequence_continuity: '你也别问我住哪。这话我讲'
+      natural_expression: '我不问你明天去哪，你也别问我住哪。这话我讲在前头，不是给你加活。'
+    reason: >-
+      告别干净：NPC 不拦人、收靠垫、总结两件已成（灯标对上新图、分歧切干净）一件未成（新渡口名认不准今天补不上），均为真实前文对应；无新危机。扣分项：『这话我讲在前头，不是给你加活』与上回合『真话讲在前头……不是给你加活』句式重复，属逐回合复述免责话术；结尾孤立复述出口信息『从人行通道回停车位，不步行上高速。』进一步拉低自然度。
     total: 9
     passed: true
-  -
-    turn: 2
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 1
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "热风把推车上的路线图吹得轻轻响。"
-      character_credibility: "取景是我的，不是你要盯的事"
-      meaningful_choices: "你要改现在这一桌，我听。"
-      consequence_continuity: "驾驶位的门还开着，胳膊仍搭在窗沿上。"
-      natural_expression: "共同费用没多一笔，后段行程你不用认。"
-    assessment: "保留司机仍未下车的未决状态，撤回义务但未明确所改的安排或替代时间；多用免责台词。"
     blocking_findings: []
-    total: 8
-    passed: true
-  -
-    turn: 3
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 2
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "让出人行通道"
-      character_credibility: "取景是我的，后段各自安排，我不跟车。"
-      meaningful_choices: "她在桌边坐下，面向自己的包"
-      consequence_continuity: "胳膊仍搭在窗沿上，人没下来。"
-      natural_expression: "错过的点不当人情。这一桌结束了。"
-    assessment: "NPC不跟车并坐下，告别生效；没有把送水等同司机已休息，末句抽象归纳较重。"
-    blocking_findings: []
-    total: 9
-    passed: true
-prior_case_review:
-  framework_id: "mat-00c8740516f7519592b47bb547fe5c27"
-  name: "远途休假与小镇停留"
-  mode: "daily"
-  transcript_sha256: "12b27c3d2ec68c0cceab79c6499e8cae5000efc8fece32e7902c4f28e29266cd"
-  reviewer: "codex-independent-reviewer"
-  scores:
-    world_specificity: 2
-    character_credibility: 2
-    meaningful_choices: 1
-    consequence_continuity: 2
-    natural_expression: 1
-  evidence:
-    world_specificity: "人行通道通向停车位，不通向高速"
-    character_credibility: "光变硬了，我可以在服务区边自己停十分钟，不必再占一站。"
-    meaningful_choices: "那刚才那句作废。"
-    consequence_continuity: "她把冰水盖拧紧"
-    natural_expression: "取景是我的，后段各自安排，我不跟车。"
-  rationale:
-    world_specificity: "服务区休息桌、驾驶位、正午硬光和停车通道共同限定公路旅行场景。"
-    character_credibility: "摄影师愿牺牲下一处取景以让驾驶者休息，也提出在服务区自选机位，目标并非纯顺从。"
-    meaningful_choices: "提出异议后没有说清作废的是哪项安排，轮休与停靠取舍没有继续细化。"
-    consequence_continuity: "送水后瓶子仍在，驾驶者尚未下车这一未完成状态保留；结尾明确摄影师不继续同行，没有虚构已完成休息。"
-    natural_expression: "热风、备用电池和驾驶者同一姿势反复出现，末轮不记人情与不加账偏说明化。"
-  blocking_findings: []
-  notes:
-    - "没有验证驾驶者是否真正休息，也未形成新的停靠方案；通过仅说明这次送水和结束同行可连续成立。"
-  total_score: 8
-  verdict: "PASS"
+blocking_findings: []
+summary: >-
+  四回合核心活动（商量下一站与轮休）持续可观察推进：轮休建议→夜航心愿与三灯标当场对图→异议后图归玩家不算同行条件→告别时已完成/未完成清点如实。唯一失分形态为第 3 回合复述上回合免责句式并以孤立规则句收尾（natural_expression 1），整体 9/10 通过。

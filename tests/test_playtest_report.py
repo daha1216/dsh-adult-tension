@@ -44,7 +44,7 @@ class PlaytestReportTests(unittest.TestCase):
 
     def record(self):
         record = {"framework_id": self.key, "name": "Fixture", "mode": "daily", "seed": 11,
-                  "source_hash": report.digest(self.material), "scope": "non_explicit_narrative", "protocol": "non-explicit-runtime-brief-v2",
+                  "source_hash": report.digest(self.material), "scope": "non_explicit_narrative", "protocol": runner.PROTOCOL,
                   "host": "DeepSeek Harness", "host_version": "test", "generator": "fixture-generator",
                   "turns": [{"turn": i, "request": runner.request_for_turn(i), "response": "actual fixture reply", "recorded_at": "test", "returncode": 0, "prompt_sha256": "a" * 64} for i in range(4)]}
         for i, turn in enumerate(record["turns"]):

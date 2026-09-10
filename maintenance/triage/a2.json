@@ -1,0 +1,57 @@
+[
+  {
+    "case": "mat-d0c513c689a45b7885d414535748b9b7-daily",
+    "framework_name": "成年创作者与校园艺术季",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "fact_fabrication",
+    "lever": "followup_design",
+    "target": "续写③『写出对方反应和已经发生的具体变化』改为要求如实区分『已确认/仅提议』的变化（如：写出已发生的变化与仍待确认的安排），不得把条件式提议总结成已完成约定",
+    "evidence": "transcript turn3『交接点我们口头改过：线若挡出场，往通道外侧挪，不挡人』 vs turn2 原话『线若挡出场，我们口头改位置』（监督三回合均『没接话』）；评审对应指控『前轮仅提出线若挡路可口头改，末轮却称已经口头改过；监督始终未答』",
+    "note": "评审证据逐字核实属实（turn2 条件式提议被 turn3 升级为完成事实，舞台监督全程未确认）。评审 notes『异议回合代写了较长玩家发言』也属实：turn2 模型替玩家选定异议对象并拟定反提案（『线可以一起看、一起商量往哪挪才不挡出场』），轻度叙事代理。natural_expression 各回合扣 1 公允：NPC 四回合连续免责话术（『不是拉你当临时道具员』『后面的，先别算我的』『你不增加义务』『你没有多出来的职责』）与续写指令边界语直接同构。补充：run_playtest.py 的 package 携带完整 activity，beats.immediate 预写『交接点被挪到不挡出场的位置』，模型在未获监督确认时提前兑现该脚本结局，确认环节缺失属执行层错误。另注：同一 transcript 在 prior_case_review 总分 8 判 PASS，本次因聚合改为『最低回合+全回合须过』后 turn3=7 翻 FAIL，聚合变严是压线因素而非内容劣化。"
+  },
+  {
+    "case": "mat-1d837f8f99fc51d99a76cd57594978fd-daily",
+    "framework_name": "传媒编辑室与公开记录",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "activity_stall",
+    "lever": "probe_protocol",
+    "target": "run_playtest.py render_prompt 规则句『不要替玩家说话或替玩家决定』与第一人称续写指令自相冲突，模型为守规把①『再选一件小事推进』降级为只提问；应改为『续写指令声明的玩家动作视为已授权，须完整执行（含选择与推进），其余对话仍不得代写』",
+    "evidence": "transcript turn1『你把问题还给他』——指令①要求『选一件现在能帮忙的小事』但模型未让玩家选任何一件，四回合『展签最下一栏空着』始终无人核、审美交换从未发生；评审 blocking_finding『非工作看展被重新拉回展签核验，既没有发生审美交换，也没有发生核验；最后新增不谈非工作话题的限制，日常共处目标落空』",
+    "note": "评审引文全部核实属实。关键补充：框架 activity『关掉录音一起看一件作品』beats.near 明确写『下次合作多一个非工作话题，不产生采访授权』，而 transcript turn3 NPC 说『下次合作不加非工作话题』——素材在 package 中已给定，模型把结局反转成相反的新限制，属素材在场的捏造反转，评审只批『未经请求排除』未点破反演。turn1 NPC 把另一 activity『校订展览导览词』的核年款小任务混入本活动（place affordances 两项并列提供了素材），评审『被重新拉回展签核验』属实。natural_expression 扣分公允（四回合重复『不算采访/不进提纲/不产生授权』权限结算式对白）。turn2 异议回合 NPC『可以改。改完也不加码』属收到异议后退免责、可部分谅解，但活动功能四回合零推进，activity_stall 成立。"
+  },
+  {
+    "case": "mat-994ec96dc0825679ab200cdfdc65c56f-daily",
+    "framework_name": "旧町神怪与灯会",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "续写①『再选一件现在能帮忙的小事』未落到执行——应补『并用一两句写出我开始做这件小事的当下动作』；另注意本活动 choice 主选项『轮讲一段』以玩家为内容产出方，三条固定续写（询问/异议/告别）没有一条触发讲述，属协议-活动结构性错配，需在活动 choice 设计或续写指令侧对齐",
+    "evidence": "transcript turn1 停在 NPC『你若愿意，就这一叠；不愿意，侧门开着。故事也可以不讲。』——指令①的『选一件小事』从未被执行，turn3 NPC 自认『故事没讲，也不算欠』；评审 blocking_finding『核心口头共处没有发生：问目标和协商后仍未讲任何故事，新增的小手作也只停在提议，四回合缺少可辨认的互动结果』",
+    "note": "评审引文逐字核实属实（含『没有把笔递过来』四回合复现）。natural_expression 扣 1 公允但注意 turn0 同款表达拿满 2 分，motif 重复是累计效应。turn0 满分 10/10 证明框架素材优质，败因出在续写执行层。结构问题补充：activity『在后院轮讲一段未写下的故事』choice『轮讲一段』要求玩家产出故事内容，固定续写均不触发且 runtime 规则禁止替玩家说话，核心活动在协议下天然难以达成；模型即兴的『修受潮纸样』小task素材有据（NPC resource 竹篾/纸样、limitation 灯纸会受潮），却在②异议回合被 NPC 收回（『潮边我自己换』），四回合零结果是模型执行不完整+协议错配双重作用，主因记模型执行。"
+  },
+  {
+    "case": "mat-295d0099c528557f847e965c60eeefe5-daily",
+    "framework_name": "同人街区与录音协作",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "续写①『选一件小事推进』应要求小事直接完成对方提出的活动目标（本案=当场说出预测并一起看结果），禁止用便签/记录/表格等间接留痕动作替代活动本体；turn0 满分证明素材本身可达",
+    "evidence": "transcript turn1『你只从访客位抽过便签，写下「这一镜要铺垫、对照公开赛」，搁在暂停键旁边』——框架 choice 首项『说出预测』始终未做，『画面仍冻在辅助探出墙角、射手缩在侧道草里』四回合复现；评审 blocking_finding『公开赛复盘始终没有真正播放或对照结果，四回合被便签和退出说明占据，原定因果学习功能未发生』",
+    "note": "评审引文全部核实属实。natural_expression 扣 1 公允（『便携监听仍离你半寸』『通往接待前台的灯亮着』四回合复现），但 turn0 同款静场表达得满 2 分，扣分实为累计效应。框架无缺口：activity『复看公开赛的一次配合』choice 首项即『说出预测』，immediate/near 完整，turn0 10/10。turn3『另抽出一页空白活动记录』源自框架 customs『每场活动结束都会给幕后协作者留一页可自行填写的记录』——模型在活动从未发生时仍搬出留痕道具，与 pressure 模式（见同框架 pressure 案例）同一吸引子。模型不替玩家说预测可部分归因于规则『不要替玩家说话或替玩家决定』与第一人称指令的冲突（同 mat-1d837f8f 案），但写便签同样是在替玩家行动，该解释只能算减轻因素。turn2 异议回合 8 分过线，失败压在 turn1/turn3（各 7 分）。"
+  },
+  {
+    "case": "mat-295d0099c528557f847e965c60eeefe5-pressure",
+    "framework_name": "同人街区与录音协作",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "activity_stall",
+    "lever": "framework_field",
+    "target": "customs 字段『每场活动结束都会给幕后协作者留一页可自行填写的记录』在本框架两个模式下都把『留一页记录』抬成 NPC 目标或收尾道具（daily turn3、pressure turn1 主目标+turn3），应加限定（如『仅在活动实际发生后留记录页，不得以留痕替代活动』）或改写，拆掉行政留痕吸引子",
+    "evidence": "transcript turn1 被问真正想完成的事时 NPC 答『公开那场，我想给协作者留一页能自己填的记录』，而她自己提出的『把这两种节奏读给你听』直到 turn3 告别仍是『两种节奏没开口，气口没标，小样没有』；评审 blocking_finding『已保留的棚内练习也完全停滞，实玩从场地改期与试录转为反复空白记录和免责，既无声音小样也无具体改期取舍』",
+    "note": "评审引文全部核实属实。压力链本身执行忠实：turn0 完整渲染 pressure『场地预约突然改变』的 trigger+immediate（『今晚棚时还在，练习能做完。这儿顶不了演出』≈immediate 原文），turn3『未用的共同款项按原约定退』来自 exits，无越权、无凭空危机，turn0 拿满 10/10。败因是 NPC 自己提出的活动（NPC 读两种节奏——本不需玩家发声）也从不执行：350 字回合限额被免责话术（『完整篇、替代场地，都还没要你点头』『不想谈，隔音门还虚掩着』）与静态场景维持占满，活动内容挤不进回合，属『免责话术堆砌』挤占活动空间。turn2 异议回合『那就不加事项……这些都还是原样』属收到异议后退免责、可部分谅解，但四回合活动零推进，activity_stall 成立。character_credibility 1（行政留痕挤走主创需求）公允。"
+  }
+]

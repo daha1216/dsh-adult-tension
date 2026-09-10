@@ -643,7 +643,7 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     # Emit a compact, inspectable compatibility contract for downstream writers.
     # Locked/custom values are retained, but explicitly require a bridge note.
     compatibility_reasons = []
-    for field in ("压力来源", "场景动作", "身份族", "玩家社会位置"):
+    for field in ("压力来源", "场景动作", "身份族", "玩家社会位置", "处境", "张力引擎", "核心规则"):
         rule = (material_rules.get(field) or {}).get(str(roll.get(field))) or {}
         if rule.get("eras") and roll["时代"] not in rule["eras"]:
             compatibility_reasons.append(f"{field}与时代不匹配")

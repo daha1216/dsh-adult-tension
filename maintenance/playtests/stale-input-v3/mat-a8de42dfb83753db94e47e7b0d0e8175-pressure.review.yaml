@@ -1,0 +1,107 @@
+framework_id: "mat-a8de42dfb83753db94e47e7b0d0e8175"
+name: "街角共同生活圈"
+mode: "pressure"
+source_hash: "0f8cfbaeb69ae297598cd2f846d62d7741eb735e9fae29a83433e141699973d9"
+transcript_sha256: "6ea0ac5307fc315e374658d21a5ca90b02f97937e09aac35218155a7d6e926da"
+reviewer: "codex-independent-semantic-review"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+lowest_scoring_turn: 2
+scores:
+  world_specificity: 2
+  character_credibility: 1
+  meaningful_choices: 0
+  consequence_continuity: 1
+  natural_expression: 1
+evidence:
+  world_specificity: "交接记录"
+  character_credibility: "我没权挪牌子"
+  meaningful_choices: "可以改写法、改放哪儿"
+  consequence_continuity: "那我不收进口袋"
+  natural_expression: "还坐着，我们就改这一条"
+blocking_findings:
+  - "回合1-2代玩家决定动作与具体异议，meaningful_choices为0。"
+  - "协商集中于纸条放哪而非招牌当事人的需求，压力后果被无关收放动作替代。"
+  - "回合1：代玩家选择并实施按图、侧身查看动作，meaningful_choices为0。"
+  - "回合2：代玩家写出具体异议，meaningful_choices为0；由此推动的纸条转移未经玩家选择。"
+  - "回合3：本回合7分，人物告别仍主要是证据与交接清单。"
+total: 5
+total_score: 5
+passed: false
+verdict: "FAIL"
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "居民手绘图"
+      character_credibility: "我没权搬它"
+      meaningful_choices: "今天只闲聊，录不录另问"
+      consequence_continuity: "旧店主和新承租人都要留同一块牌子"
+      natural_expression: "院门就在那儿"
+    reason: "招牌权属冲突和公开院落明确，旧店饮食记忆使人物不只报规则，退出仍略直白。"
+    blocking_findings:
+      []
+    total: 9
+    passed: true
+  -
+    turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 0
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "招牌今日不搬"
+      character_credibility: "我能动的只有图和这点阴凉"
+      meaningful_choices: "只把掀起的图角重新压好"
+      consequence_continuity: "还钉在原位的招牌"
+      natural_expression: "谁联系谁，现在都别替他们答应"
+    reason: "NPC资源边界合理，但直接替玩家按图与查看招牌，越过具体动作选择。"
+    blocking_findings:
+      - "代玩家选择并实施按图、侧身查看动作，meaningful_choices为0。"
+    total: 7
+    passed: false
+  -
+    turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 0
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: "交接记录"
+      character_credibility: "我没权挪牌子"
+      meaningful_choices: "可以改写法、改放哪儿"
+      consequence_continuity: "那我不收进口袋"
+      natural_expression: "还坐着，我们就改这一条"
+    reason: "自行编出玩家反对纸条写法与放置，随后以不放口袋回应未给出的分歧；日常记忆退为纸条规程。"
+    blocking_findings:
+      - "代玩家写出具体异议，meaningful_choices为0；由此推动的纸条转移未经玩家选择。"
+    total: 5
+    passed: false
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 1
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "谈共展"
+      character_credibility: "我自己问"
+      meaningful_choices: "没有伸手拦"
+      consequence_continuity: "没塞口袋，也没递过来"
+      natural_expression: "相册不算证据"
+    reason: "退出兑现且维持牌子未搬，继续自己联系两方；收尾几乎只重报权限，没有个人反应。"
+    blocking_findings:
+      - "本回合7分，人物告别仍主要是证据与交接清单。"
+    total: 7
+    passed: false

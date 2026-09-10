@@ -449,12 +449,16 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     clock = clock_for_seed(seed)
     # 带死线的处境与压力来源（决定 near 事件是否带 due_at）；名单在 pools.yaml meta。
     pools_meta = tables["pools"].get("meta") or {}
-    timed_situations = set(pools_meta.get("timed_situations")
-                           or ["时限临门", "债务压身", "秘密将破", "审查将至"])
+    ts_raw = pools_meta.get("timed_situations") or {
+        "时限临门": 8, "债务压身": 8, "秘密将破": 8, "审查将至": 8}
+    if isinstance(ts_raw, dict):
+        timed_hours = ts_raw.get(situation_kind)
+    else:
+        timed_hours = 8 if situation_kind in ts_raw else None
     timed_pressures = set(pools_meta.get("timed_pressures")
                           or ["死线只剩几小时", "债务到期", "秘密即将暴露"])
-    timed = not daily and (situation_kind in timed_situations or pressure in timed_pressures)
-    deadline = clock + dt.timedelta(hours=8) if timed else None
+    timed = not daily and (timed_hours is not None or pressure in timed_pressures)
+    deadline = clock + dt.timedelta(hours=timed_hours or 8) if timed else None
     far_due = clock + dt.timedelta(days=7)
 
     player_age = age_from_band(rng_body, age_band, character_meta.get("年龄段区间"))
@@ -493,8 +497,8 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
         "switchable": "明面上的位置今晚还可能倒转",
     }.get(str(roll["权力结构"]), "明面上的位置已经摆明")
     constants = [
-        f"这座{place}里，{rule}。",
-        f"当地生活遵循{core_rule}。" if daily else f"{core_rule}不只是口号：今晚谁先破例，谁先付出能被看见的代价。",
+        f"这座{place}里，{rule.rstrip('。')}。",
+        f"当地生活遵循{core_rule.rstrip('。')}。" if daily else f"{core_rule.rstrip('。')}不只是口号：今晚谁先破例，谁先付出能被看见的代价。",
         f"{power_zh}，这不推导把柄，也不等于今晚可以越界。",
     ]
     aesthetic = roll.get("美学基调")
@@ -517,13 +521,17 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     data["world"]["pressure_seeds"]["immediate"] = pressure
 
     player_id_text = player_identity_text(position_row, identity["role"])
+    appellation_text = (
+        "别人大多直接叫你的名字。" if appellation == "直呼其名"
+        else f"别人称你{appellation}。"
+    )
     data["player"].update({
         "name": player_name,
         "gender": "male",
         "age": player_age,
         "identity": player_id_text,
         "location": location,
-        "baseline": f"{player_age}岁，别人称你{appellation}。{position_row['baseline']}",
+        "baseline": f"{player_age}岁，{appellation_text}{position_row['baseline']}",
         "resources": list(position_row["resources"]),
         "knowledge": [
             f"{npc_name}的公开身份是{identity['role']}。",
@@ -597,7 +605,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
             ],
             "npc_knows": [
                 identity["limitation"],
-                "她还没决定对你说哪一层",
+                "她还没决定告诉你到哪一步",
             ],
             "both_mistake": [
                 "双方都可能把今夜高估成已经有默契",
@@ -712,7 +720,7 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
                 "source": "system:opening",
                 "created_turn": 1,
                 "kind": "far",
-                "trigger": f"{engines[-1]}还没有进这个房间，但已经在路上。",
+                "trigger": "更远的那一层压力还没有进这个房间，但已经在路上。",
                 "due_at": iso(far_due),
                 "status": "pending",
                 "consequence": "那一层压力会改写你们今晚没谈完的部分。",

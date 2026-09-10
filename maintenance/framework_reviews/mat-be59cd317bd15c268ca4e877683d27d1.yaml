@@ -1,8 +1,10 @@
-id: "mat-be59cd317bd15c268ca4e877683d27d1"
-name: "王都工坊与委托街"
-source_hash: "7e9dcb1b826e4fc015535dde3ee7e27f7e3179c7c9dd5fb8e2b6f67b712d1b6e"
-semantic_status: "REVIEWED"
-reason: "石堡布展、工坊性能检验、驻点返程配包对应空间安排、实验和照料；补足王都与迷宫驻点的一日守备商路关系。单一奇幻时代内部交通有明确耗时，无跨时代桥接需求；变更验收和设备撞期各限一组实际配套。"
+id: mat-be59cd317bd15c268ca4e877683d27d1
+name: 王都工坊与委托街
+source_hash: 2e8e046f20e76d9146040799f84cff7348797e49a3e6ded732f507febdaee523
+semantic_status: REVIEWED
+reason: 石堡布展、工坊性能检验、驻点返程配包对应空间安排、实验和照料；补足王都与迷宫驻点的一日守备商路关系。单一奇幻时代内部交通有明确耗时，无跨时代桥接需求；变更验收和设备撞期各限一组实际配套。2026-09-10
+  定点修复：pairs[1] 修理师 obligation 改为用校准沙漏计时实测连续照明上限并当场标出，resources 补校准沙漏。；2026-09-10
+  第二人物组资源/限制差异化强化后同步源哈希。
 checks:
   era_and_theme: true
   space: true
@@ -11,29 +13,28 @@ checks:
   pressure_bindings: true
   distinct_functions: true
 quality:
-  grade: "B"
-  reason: "Static source review only; narrative acceptance is tracked independently in maintenance/playtests."
+  grade: B
+  reason: Static source review only; narrative acceptance is tracked independently
+    in maintenance/playtests.
 activity_functions:
-  摆设日用法器展台: "实体展示与空间安排"
-  试验照明法器: "性能实验与可见取舍"
-  试配一日返程包: "旅途准备与负担照料"
+  摆设日用法器展台: 实体展示与空间安排
+  试验照明法器: 性能实验与可见取舍
+  试配一日返程包: 旅途准备与负担照料
 chemistry:
   pairs:
-    -
-      pair: 0
-      needs: "书吏需要条款能被普通人理解；修理师需要手艺得到实际工钱"
-      misreading: "将要求说清上限听成压低法器价值"
-      asymmetric_cost: "书吏承担交涉关系，修理师承担实物与耗材"
-      ritual: "展台先请对方坐下看一遍"
-      conflict_loop: "说明写得越漂亮越模糊，工匠补得越细越像拒绝服务"
-      repair: "当场用一盏灯演示一条可交付标准"
-      irreversible_threshold: "擅自把修理师列为整夜免费值守，会结束共同承接石堡委托"
-    -
-      pair: 1
-      needs: "修理师需要实测被接受；书吏需要客户能在两种方案间作决定"
-      misreading: "把选择柔光听成否定调试技术"
-      asymmetric_cost: "修理师损耗晶芯，书吏多跑一趟解释工期"
-      ritual: "试灯后各读一行最小字"
-      conflict_loop: "工匠追求更亮，书吏追问续航，测试不断重来"
-      repair: "固定一页文字和一段测时，不继续追加指标"
-      irreversible_threshold: "删去已知续航短板再销售，会终止相互署名背书"
+  - pair: 0
+    needs: 书吏需要条款能被普通人理解；修理师需要手艺得到实际工钱
+    misreading: 将要求说清上限听成压低法器价值
+    asymmetric_cost: 书吏承担交涉关系，修理师承担实物与耗材
+    ritual: 展台先请对方坐下看一遍
+    conflict_loop: 说明写得越漂亮越模糊，工匠补得越细越像拒绝服务
+    repair: 当场用一盏灯演示一条可交付标准
+    irreversible_threshold: 擅自把修理师列为整夜免费值守，会结束共同承接石堡委托
+  - pair: 1
+    needs: 修理师需要实测被接受；书吏需要客户能在两种方案间作决定
+    misreading: 把选择柔光听成否定调试技术
+    asymmetric_cost: 修理师损耗晶芯，书吏多跑一趟解释工期
+    ritual: 试灯后各读一行最小字
+    conflict_loop: 工匠追求更亮，书吏追问续航，测试不断重来
+    repair: 固定一页文字和一段测时，不继续追加指标
+    irreversible_threshold: 删去已知续航短板再销售，会终止相互署名背书

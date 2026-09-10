@@ -1,0 +1,14 @@
+# Playtest isolation overlay for headless narrative probes.
+#
+# The user-level skill root (~/.dsh/skills) contains the adult-tension skill
+# itself. Without this overlay, `dsh --profile headless` loads that skill and
+# its 开局 command semantics hijack the probe prompt ("按以下材料开始新局。"),
+# producing off-world openings from the skill's own opening flow instead of
+# the supplied material (2026-09 contaminated-session-v1 batch: 80/80 off-world).
+#
+# Applied by scripts/run_playtest.py via `--dsh-extra --patch <this file>`:
+# drops project, user, and bundled skill roots so the probe runs skill-free.
+- id: skill-filesystem
+  config:
+    includeDefaultRoots: false
+    customSkillDirs: []

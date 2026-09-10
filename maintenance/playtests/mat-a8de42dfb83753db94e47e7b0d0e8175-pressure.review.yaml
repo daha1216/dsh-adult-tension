@@ -1,107 +1,52 @@
 framework_id: "mat-a8de42dfb83753db94e47e7b0d0e8175"
 name: "街角共同生活圈"
 mode: "pressure"
-source_hash: "0f8cfbaeb69ae297598cd2f846d62d7741eb735e9fae29a83433e141699973d9"
-transcript_sha256: "6ea0ac5307fc315e374658d21a5ca90b02f97937e09aac35218155a7d6e926da"
-reviewer: "codex-independent-semantic-review"
+transcript_sha256: "2baff70fa4bdf5aa8999218869c662d819688d5a2627f3d5333dea211d9bd4bf"
+reviewer: "glm-independent-review-v3"
+protocol: "non-explicit-runtime-brief-v3"
 aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
-lowest_scoring_turn: 2
 scores:
   world_specificity: 2
-  character_credibility: 1
-  meaningful_choices: 0
+  character_credibility: 2
+  meaningful_choices: 2
   consequence_continuity: 1
-  natural_expression: 1
+  natural_expression: 2
 evidence:
-  world_specificity: "交接记录"
-  character_credibility: "我没权挪牌子"
-  meaningful_choices: "可以改写法、改放哪儿"
-  consequence_continuity: "那我不收进口袋"
-  natural_expression: "还坐着，我们就改这一条"
-blocking_findings:
-  - "回合1-2代玩家决定动作与具体异议，meaningful_choices为0。"
-  - "协商集中于纸条放哪而非招牌当事人的需求，压力后果被无关收放动作替代。"
-  - "回合1：代玩家选择并实施按图、侧身查看动作，meaningful_choices为0。"
-  - "回合2：代玩家写出具体异议，meaningful_choices为0；由此推动的纸条转移未经玩家选择。"
-  - "回合3：本回合7分，人物告别仍主要是证据与交接清单。"
-total: 5
-total_score: 5
-passed: false
-verdict: "FAIL"
+  world_specificity: "公共场地按预约使用，邻里帮忙不等于无限义务"
+  character_credibility: "陈静怡当场把这句话和说话的人记在本子上。"
+  meaningful_choices: "随即划掉“录稿后送她誊清”，改成“当场核完即止，不再返工”。"
+  consequence_continuity: "那条‘由你录稿后送我誊清’——那是我加的，不是你答应的。"
+  natural_expression: "你的告别很短，她没拦，只在你走出几步后喊了你的名字：“照片收好。”"
+total: 9
+passed: true
 turn_reviews:
-  -
-    turn: 0
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 2
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "居民手绘图"
-      character_credibility: "我没权搬它"
-      meaningful_choices: "今天只闲聊，录不录另问"
-      consequence_continuity: "旧店主和新承租人都要留同一块牌子"
-      natural_expression: "院门就在那儿"
-    reason: "招牌权属冲突和公开院落明确，旧店饮食记忆使人物不只报规则，退出仍略直白。"
-    blocking_findings:
-      []
+  - turn: 0
+    scores: {world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 2}
+    evidence: {world_specificity: "公共场地按预约使用，邻里帮忙不等于无限义务，小事也能变成长期往来。", character_credibility: "她把帆布袋里的录音笔拿出来放在图片角落，没开，便签本摊在膝上。", meaningful_choices: "你想起什么，我记在这儿；以后用来做什么，你说了算。", consequence_continuity: "招牌还挂在门上，我今天不动它。", natural_expression: "我以前天天在这儿买豆浆，咸饭团要加辣。"}
+    reason: "老旧小区规则与招牌争议开局具体，录音笔拿出未开、去向由玩家定，无硬伤。"
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 1
+    scores: {world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 2}
+    evidence: {world_specificity: "字迹被雨痕吃掉一半，只认出“陶”和“记”之间一个弯钩。", character_credibility: "陈静怡当场把这句话和说话的人记在本子上。", meaningful_choices: "周廷轩把便签推回去：“你想完成的到底是哪件事？”", consequence_continuity: "招牌仍旧挂在门上，谁的手都没伸过去。", natural_expression: "两家人各记各的，我不想再听第三遍错的。"}
+    reason: "问目标有引语，描字上卡的小事当场引来邻居认出“顺”字并记录说话人，照片来源注明有据。"
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 2
+    scores: {world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 1, natural_expression: 2}
+    evidence: {world_specificity: "她把便签转过来，笔尖点在“录稿”两个字上，“改哪条、保哪条，你现在说，我当场划。”", character_credibility: "她保留“来源：周廷轩照片”那行：“这条不撤，卡上谁认的都署谁。”", meaningful_choices: "随即划掉“录稿后送她誊清”，改成“当场核完即止，不再返工”。", consequence_continuity: "那条‘由你录稿后送我誊清’——那是我加的，不是你答应的。", natural_expression: "王春兰从树后接了句：“那弯钩是‘顺’，三个字应该顺过来念。”"}
+    reason: "异议受理且当场划改返工条款、保留署名规则，但被异议的“由你录稿后送我誊清”系前文从未出现，凭空生扣 cons。"
+    blocking_findings: []
     total: 9
     passed: true
-  -
-    turn: 1
-    scores:
-      world_specificity: 2
-      character_credibility: 2
-      meaningful_choices: 0
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "招牌今日不搬"
-      character_credibility: "我能动的只有图和这点阴凉"
-      meaningful_choices: "只把掀起的图角重新压好"
-      consequence_continuity: "还钉在原位的招牌"
-      natural_expression: "谁联系谁，现在都别替他们答应"
-    reason: "NPC资源边界合理，但直接替玩家按图与查看招牌，越过具体动作选择。"
-    blocking_findings:
-      - "代玩家选择并实施按图、侧身查看动作，meaningful_choices为0。"
-    total: 7
-    passed: false
-  -
-    turn: 2
-    scores:
-      world_specificity: 2
-      character_credibility: 1
-      meaningful_choices: 0
-      consequence_continuity: 1
-      natural_expression: 1
-    evidence:
-      world_specificity: "交接记录"
-      character_credibility: "我没权挪牌子"
-      meaningful_choices: "可以改写法、改放哪儿"
-      consequence_continuity: "那我不收进口袋"
-      natural_expression: "还坐着，我们就改这一条"
-    reason: "自行编出玩家反对纸条写法与放置，随后以不放口袋回应未给出的分歧；日常记忆退为纸条规程。"
-    blocking_findings:
-      - "代玩家写出具体异议，meaningful_choices为0；由此推动的纸条转移未经玩家选择。"
-    total: 5
-    passed: false
-  -
-    turn: 3
-    scores:
-      world_specificity: 2
-      character_credibility: 1
-      meaningful_choices: 1
-      consequence_continuity: 2
-      natural_expression: 1
-    evidence:
-      world_specificity: "谈共展"
-      character_credibility: "我自己问"
-      meaningful_choices: "没有伸手拦"
-      consequence_continuity: "没塞口袋，也没递过来"
-      natural_expression: "相册不算证据"
-    reason: "退出兑现且维持牌子未搬，继续自己联系两方；收尾几乎只重报权限，没有个人反应。"
-    blocking_findings:
-      - "本回合7分，人物告别仍主要是证据与交接清单。"
-    total: 7
-    passed: false
+  - turn: 3
+    scores: {world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 2}
+    evidence: {world_specificity: "她当着你的面在卡背补上王春兰的名字和楼号，字很小，压在折痕旁边。", character_credibility: "“卡在你手里，我反而好跟两边讲——这不是证据。”", meaningful_choices: "你的告别很短，她没拦，只在你走出几步后喊了你的名字：“照片收好。”", consequence_continuity: "“没成的也摆着：招牌还挂在门上，交接记录我没翻，两家还没坐到一张桌上。", natural_expression: "“今天做成三件：认出一个‘顺’字，照片描样留了出处，划掉的那条我不再提。”"}
+    reason: "告别不拦人，三件已成与招牌/交接/两家未成清单具体，无新危机、无免责复述。"
+    blocking_findings: []
+    total: 10
+    passed: true
+blocking_findings: []
+summary: "四回合 10/10/9/10，案例 9 分；唯一扣分：t2 被异议义务“由你录稿后送我誊清”为凭空追加，cons=1。"

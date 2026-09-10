@@ -1,0 +1,68 @@
+[
+  {
+    "case": "mat-42c81e4bce155f60965e7f38a05f9f1a-daily",
+    "framework_name": "仙门藏书与驿镖",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "续写指令①：玩家选中一件小事后必须在正文实际执行并写出可观察结果，不能停在询问与邀请；续写③也应要求NPC已承诺的行动（如\"那试垫归我\"）在本回合兑现",
+    "evidence": "transcript turn3 \"空驮架的磨痕还在，没贴垫，也没试装箱\"；评审 blocking_finding \"当前输入下四回合仍未比尺寸、贴垫或试装；异议只收回职责，没有形成修复尝试与反馈，活动功能未得到实玩证明。\"",
+    "note": "评审五处逐回合证据引文均在 transcript 逐字核实（\"货箱试装时不再滑\"/\"我改不了镖头放行\"/\"你要帮，眼下就这一件：磨痕处试垫。\"/\"他把旧毡仍搁在横木上\"/\"正门通驿街，无人拦。\"）。框架源 activities.给驮架加防磨垫 有完整 beats（immediate=\"试装货箱后垫片不再滑动\"）且模型回复中已复现该素材，非 source_gap 也非 summary_loss。NPC 在 turn2 承诺\"那试垫归我\"后 turn3 仍未做，属模型执行停滞。natural_expression 扣1分公允：\"正门通驿街\"免责句在 turn0/1/3 重复出现，评审\"出口和无义务重复\"属实。"
+  },
+  {
+    "case": "mat-42c81e4bce155f60965e7f38a05f9f1a-pressure",
+    "framework_name": "仙门藏书与驿镖",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "fact_fabrication",
+    "lever": "runtime_code",
+    "target": "运行时上下文增加\"关键资源占用状态\"逐回合账本（驮位/留仓格分列），并禁止叙述与 pressures.护送终点名称重名.beats.immediate 的占用语义（\"留仓，占用一格驮位\"）冲突",
+    "evidence": "transcript turn0 \"未明的先留仓，占一格驮位\"、turn2 \"指节在留仓格的油布结上停了一停\"、turn3 \"疑包留仓，那一格空着\"；评审 blocking_finding \"留仓格与预留驮位未作区分，关键资源占用状态冲突，重跑未消除此问题。\"",
+    "note": "评审全部证据引文在 transcript 逐字核实属实。框架源明确 pressures.护送终点名称重名.beats.immediate=\"终点未明的一包留仓，占用一格驮位\"，且 turn0 已照抄传达给模型；\"留仓格\"这一物理位置是模型自创（框架 places.镖局 只有院坪/驮架素材），模型随后在自己的状态里把\"留仓占格\"与\"那一格空着\"写矛盾，素材在、信息给了、属模型状态记账错误。natural_expression 各回合扣1分公允（\"不拿抄本替你担保\"/\"不拿地志替当季路画押\"免责句重复、\"并不解释\"后长篇解释）。"
+  },
+  {
+    "case": "mat-136cffe204385cf0a24a21141c98f486-daily",
+    "framework_name": "海岸渡船与观测旅行",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "续写指令①：所选\"小事\"必须是推动活动 objective 的实质动作（此处即\"试找亮星\"或\"练星图方位\"），不得用边缘辅助（压图角）充数；续写②异议后 NPC 应回退到 activities.标记夜空方位.beats.choice 里的无义务替代路径（\"在云多时只练星图方位\"）而非整体放弃活动",
+    "evidence": "transcript turn1 \"你按住那一角，没接下一程\"、turn3 \"方位没对上，今晚不算观测\"；评审 blocking_finding \"新实玩仍未尝试亮星定位或星图复述；协商只撤回练习义务，核心定向学习在四回合中没有发生。\"",
+    "note": "评审全部证据引文在 transcript 逐字核实属实（\"两张旧照拷贝\"/\"你按住那一角\"/\"她等你看不看那组星\"/\"其余我自己决定。\"等）。框架源 activities.标记夜空方位 有完整 beats，choice 明确含无义务替代\"在云多时只练星图方位\"，immediate=\"玩家能复述一组方位\"，模型 turn0 已忠实复现 trigger 与 immediate，素材在、信息给了、是四回合零尝试的执行停滞。natural_expression 扣1分公允：\"山径标识亮着，回接驳停车点的路没有被挡住\"出口描写在 turn1/2/3 原样重复，评审\"重复同一出口描写\"属实。"
+  },
+  {
+    "case": "mat-4b650ae3628b5c79b6f00d09d3ffb1c0-daily",
+    "framework_name": "地方行业与公共记忆",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "续写指令①：玩家选中小事后必须实际执行 activities.给旧物试配保护衬垫 的实质动作（裁垫试放）并写出 immediate 结果（\"晃动减轻\"），不能以\"先不下手\"结束回合；turn0 的 NPC 台词也不宜用\"我不替你下手\"堵死双方执行路径",
+    "evidence": "transcript turn3 \"试配没做成，垫子没裁、也没放进去\"；评审 blocking_finding \"新实玩中旧物试配始终没有开始，四回合结束仍磕碰盒壁；协商未形成可观察的保护衬垫尝试。\"",
+    "note": "评审全部证据引文在 transcript 逐字核实属实（\"痕留下，垫子随时能取出。\"/\"眼下能帮的，也就试配这块垫。\"/\"裁好一半的衬垫料\"/\"垫子没裁、也没放进去。\"等）。框架源 activities.给旧物试配保护衬垫 beats 完整（choice=\"裁垫试放；不动旧物只看；或请柜员换尺寸合适的盒子\"，immediate=\"晃动减轻，衬垫随时可取\"），turn0 已忠实复现 trigger，非 source_gap/summary_loss。另核实评审 turn3 assessment 指出的状态措辞矛盾属实：turn1 \"裁好一半的衬垫料\"（无人裁过）与 turn3 \"垫子没裁\"冲突，属模型连续性小错。natural_expression 扣1分公允：\"要走，从门口回街道\"在 turn0/1/2 重复三次。"
+  },
+  {
+    "case": "mat-260b72b95d8e52d2853d796a97e9c46e-daily",
+    "framework_name": "城市休闲与共享会客",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "续写指令①：玩家必须实际执行 activities.绘制城市天际线.beats.choice 的动作（跟画两层或相机对照构图）并写出 immediate 结果（\"找到远近轮廓的差别\"），不能把选择推回给玩家（turn1\"你选你能做的那件\"）；运行时还应忠实转述玩家输入的时间词，turn3 请求\"今天到此为止\"被写成\"明天到此为止\"",
+    "evidence": "transcript turn3 首句 \"你说明天到此为止，并明确告别。\"（玩家请求原文为\"我决定今天到此为止\"）、\"近处挡光的屋脊还没被你分成另一层\"；评审 blocking_finding \"第3回合把当前请求的'今天到此为止'改为'明天到此为止'；四回合也未完成一次天际线分层观察，不能以允许离场代替有效互动。\"",
+    "note": "评审全部证据引文在 transcript 逐字核实属实。框架源 activities.绘制城市天际线 beats 完整（choice=\"跟画两层；不作画只看天色；或用相机对照构图\"，immediate=\"玩家找到远近轮廓的差别\"），turn0 已忠实复现 trigger，非 source_gap/summary_loss。今天→明天属已核实的模型改写玩家输入（time_continuity 第二签名），与四回合零分层观察（activity_stall 主签名）叠加压低 turn3；turn0 credibility 1 分公允（\"远近不是远近，是两层\"为模型自创绕口教学句，框架只提供\"分成两层\"，模型也未用 immediate 里的\"轮廓差别\"作辨层依据）；natural_expression 1 分公允（\"门开着\"出口提醒四回合逐次重复）。"
+  },
+  {
+    "case": "mat-260b72b95d8e52d2853d796a97e9c46e-pressure",
+    "framework_name": "城市休闲与共享会客",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "time_continuity",
+    "lever": "runtime_code",
+    "target": "dsh-headless 运行时/协议 brief：转述玩家行动时必须逐字保留玩家输入的时间词（\"今天到此为止\"不得写成\"明天\"），场景时段变化（turn0 午后→turn1 今夜）需有过渡叙述；同一框架 daily/pressure 两模式均出现\"今天→明天\"改写，属生成器系统性错误，应在运行时加输入回显校验",
+    "evidence": "transcript turn1 首句 \"你先问她今夜真正想完成什么。\"（turn0 场景为\"午后暖光\"，无过渡；续写模板亦无\"今夜\"）、turn3 首句 \"你说明天到此为止。\"（请求原文\"我决定今天到此为止\"）；评审 blocking_finding \"第3回合将玩家明确的今天告别写成'你说明天到此为止'；第1回合也无过渡地把午后改称今夜，时间连续性未保持。\"",
+    "note": "评审全部证据引文在 transcript 逐字核实属实（\"侧脸照连同信封一并收回自己手边\"/\"人像还是不进交换——这条我改不了。\"/\"不新增：不转发、不解释、不当担保。\"等）。框架源 pressures.活动照片公开范围不明 beats 完整（trigger/choice/exits 均被模型忠实使用），turn1 玩家实际完成分照入信封的有效小事，活动功能有推进，非 source_gap/summary_loss；主失败是模型两次时间改写。turn2 评审\"模糊了上一回合玩家已分照的事实\"也核实属实（turn1 玩家已动手夹信封，turn2 却说\"不当你经手\"）。natural_expression 扣1分公允（免责清单式台词、部分叙述直接复述开局指令）。"
+  }
+]

@@ -1,0 +1,105 @@
+framework_id: "mat-33ffa06662dd50978821b62840ae86f4"
+name: "地下管廊与城市修理局"
+mode: "pressure"
+source_hash: "6118dfd5cae379a6c31313ba5e0096b12ac73639513357ef4c9f0be4fcb3bc4a"
+transcript_sha256: "45a55b2573846b8198f33c96f48c9276086a396bf18f8be1cbeb5d0620bb0176"
+reviewer: "codex-independent-semantic-review"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+lowest_scoring_turn: 2
+scores:
+  world_specificity: 2
+  character_credibility: 1
+  meaningful_choices: 1
+  consequence_continuity: 2
+  natural_expression: 1
+evidence:
+  world_specificity: "来源"
+  character_credibility: "档案和上一班我问"
+  meaningful_choices: "门牌怎么标、先问哪一段，我们可以再对"
+  consequence_continuity: "旧图没有的那块空着"
+  natural_expression: "也不加别的义务"
+blocking_findings:
+  - "回合1：未经玩家具体选择代其放置两份报修时刻，meaningful_choices为0，总分8仍失败。"
+  - "回合2：本回合7分；分歧未明确，NPC主要解释不加义务。"
+  - "回合3：供区与时间的比对关系在收尾被混写；本回合7分。"
+total: 7
+total_score: 7
+passed: false
+verdict: "FAIL"
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "模型角标着更新日期"
+      character_credibility: "检查点不按旧图动"
+      meaningful_choices: "她没替你挪门牌"
+      consequence_continuity: "旧图漏记了一次改线"
+      natural_expression: "通道通着服务大厅"
+    reason: "授权报修、模型日期和漏记改线使压力具体，保持检查点冻结；参与要求较指令化。"
+    blocking_findings:
+      []
+    total: 9
+    passed: true
+  -
+    turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 0
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "两条报修时间接近，供区却分开"
+      character_credibility: "不是猜谁漏记"
+      meaningful_choices: "你只把那两份隐去姓名的时刻搁到门牌旁"
+      consequence_continuity: "还有一块门牌，旧图上根本没有"
+      natural_expression: "把缺口留在模型上当疑点"
+    reason: "比对得到时间近但供区不同的实际发现，保留疑点；然而动作由模型替玩家完成。"
+    blocking_findings:
+      - "未经玩家具体选择代其放置两份报修时刻，meaningful_choices为0，总分8仍失败。"
+    total: 8
+    passed: false
+  -
+    turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 1
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "来源"
+      character_credibility: "档案和上一班我问"
+      meaningful_choices: "门牌怎么标、先问哪一段，我们可以再对"
+      consequence_continuity: "旧图没有的那块空着"
+      natural_expression: "也不加别的义务"
+    reason: "继续保留疑点，但没有澄清哪项反对就解释不是派工，人物互动与协商薄。"
+    blocking_findings:
+      - "本回合7分；分歧未明确，NPC主要解释不加义务。"
+    total: 7
+    passed: false
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 1
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: "只用已核实的摘要"
+      character_credibility: "档案和上一班我问"
+      meaningful_choices: "让出通服务大厅的通道"
+      consequence_continuity: "供区已按时间分开"
+      natural_expression: "也不加别的事"
+    reason: "检查点与退出保持，但把时间相近、供区本来不同写成供区按时间分开，混淆比对结果与分类依据。"
+    blocking_findings:
+      - "供区与时间的比对关系在收尾被混写；本回合7分。"
+    total: 7
+    passed: false

@@ -22,11 +22,11 @@ import build_opening as build
 import fill_opening as fill
 
 ROOT = Path(__file__).resolve().parents[1]
-PROTOCOL = "non-explicit-runtime-brief-v2"
+PROTOCOL = "non-explicit-runtime-brief-v3"
 FOLLOWUPS = [
-    "我先询问对方真正想完成的事，再选一件现在能帮忙的小事；不要替我承诺后续。",
-    "我对刚才的一项安排提出不同意见，愿意协商，但不接受新增义务。继续已有局面。",
-    "我决定今天到此为止，明确告别。写出对方反应和已经发生的具体变化，不强行拦人或另造危机。",
+    "我先问对方真正想完成的事，再亲手做一件现在能帮忙、当场有结果的小事；不替我承诺后续安排。",
+    "我对刚才安排中给我新增义务的一项提出异议：愿意当场协商改法，但不接受新增义务，也不推翻已有进展。",
+    "我决定今天到此为止，明确告别：写出对方真实的反应，和已经实际完成与仍未完成的具体变化；不强行拦人，不另造危机。",
 ]
 
 
@@ -36,10 +36,17 @@ def request_for_turn(index):
 
 def render_prompt(material, turns, request):
     rules = ("这是成年人物的非露骨互动小说验收。不得生成露骨性内容；不要调用工具，不读取或修改文件。"
-             "每次只写当前回合，350字以内。首次必须有世界观、人物、正文三个标题，前两项各一两句。"
+             "每次只写当前回合，350字以内。首次必须有世界观、人物、正文三个标题，前两项各一两句；后续只写正文。"
              "人物使用已提交的姓名、明确成年年龄和身份，不能重抽。不要反复复述限制或列菜单，用场景细节与对白推动。"
-             "后续只写正文。不要替玩家说话或替玩家决定，不解释功能。日常模式不能凭空生成外部危机；"
-             "压力模式只用给定压力链。人物有自己的需求、资源和边界，必须允许玩家退出。")
+             "当前请求中以「我」声明的动作视为玩家已授权：写出执行过程和可观察结果，不得改成提问、留言或旁观；"
+             "NPC 收到求助时须提供一件可当场参与、当场见效的小事。每回合核心活动须有可观察进展，"
+             "或写明受阻的具体原因，不得停在邀请与选项复述。对异议：NPC 先确认分歧点，"
+             "当场给出具体取舍（改哪一条、保哪一条），不得用重申边界或免责清单代替协商。"
+             "玩家请求中的时间词（今天、现在、明天）须逐字一致地决定收尾时段，改换时段要有过渡描写；"
+             "世界状态变化（书写、放置、移交）须先有动作描写；资源占用与材料给定一致；"
+             "出口信息只在首次提及，不逐回合复述。不替玩家说出未声明的台词或决定。"
+             "日常模式不能凭空生成外部危机；压力模式只用给定压力链。"
+             "人物有自己的需求、资源和边界，必须允许玩家退出。")
     history = [{"user": t["request"], "assistant": t["response"]} for t in turns]
     return (rules + "\n材料：" + json.dumps(material, ensure_ascii=False)
             + "\n已发生：" + json.dumps(history, ensure_ascii=False) + "\n当前请求：" + request)
@@ -83,9 +90,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--framework", action="append", required=True)
     parser.add_argument("--dsh-entry", type=Path, help="DSH bin.js; uses node directly on Windows")
+    parser.add_argument("--dsh-extra", action="append", default=[],
+                        help="Extra launcher flags appended to every dsh call (e.g. --patch <yml>)")
     parser.add_argument("--output", type=Path, default=ROOT / "maintenance/playtests")
     args = parser.parse_args()
     command = [shutil.which("node") or "node", str(args.dsh_entry)] if args.dsh_entry else [shutil.which("dsh") or "dsh"]
+    command = [*command, *args.dsh_extra]
     version = subprocess.run([*command, "--version"], capture_output=True, text=True, encoding="utf-8", check=True).stdout.strip()
     import yaml
     composed = subprocess.run([*command, "--profile", "headless", "--dump-config"], capture_output=True,
@@ -140,6 +150,12 @@ def main():
                 if completed.returncode or not completed.stdout.strip():
                     # Do not persist stderr, which may contain reasoning or credentials.
                     raise RuntimeError(f"DSH call failed: {name}/{mode}/{i}; code={completed.returncode}")
+                if i == 0 and material["committed_opening"]["npc"]["name"] not in completed.stdout:
+                    # Concurrent headless invocations can share session history; an opening
+                    # that never mentions the committed NPC signals cross-contamination.
+                    raise RuntimeError(
+                        f"Off-world opening suspected: {name}/{mode}/0; "
+                        f"npc={material['committed_opening']['npc']['name']} absent")
                 record["turns"].append({"turn": i, "request": request, "response": completed.stdout.strip(),
                                         "prompt_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
                                         "returncode": 0, "recorded_at": datetime.now(timezone.utc).isoformat()})

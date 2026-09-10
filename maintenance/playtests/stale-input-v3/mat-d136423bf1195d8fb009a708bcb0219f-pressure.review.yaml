@@ -1,0 +1,106 @@
+framework_id: "mat-d136423bf1195d8fb009a708bcb0219f"
+name: "磁带与夜市街区"
+mode: "pressure"
+source_hash: "5eb0e1b707a158e5f3cf810dce448d55a27f1445c62397fb9c60170b12e0337b"
+transcript_sha256: "87acbb16d64fe88db5f274a7709b1ddbf2a67f71d0192639bcf30547b311a2a4"
+reviewer: "codex-independent-semantic-review"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+lowest_scoring_turn: 2
+scores:
+  world_specificity: 2
+  character_credibility: 1
+  meaningful_choices: 0
+  consequence_continuity: 1
+  natural_expression: 1
+evidence:
+  world_specificity: "翻印只选一版"
+  character_credibility: "别让人以为今晚已经定了"
+  meaningful_choices: "你当场驳回她刚才那条看稿办法"
+  consequence_continuity: "就在这盏灯下比远近"
+  natural_expression: "也不改成分散点歌"
+blocking_findings:
+  - "回合2替玩家指定反对对象并升级为当场驳回，meaningful_choices为0。"
+  - "给定通道压力没有转为一次实际协商或观察，后果仅停留在未定稿与不派人。"
+  - "回合2：代玩家确定具体异议，meaningful_choices为0；改变看稿方法缺乏可验证理由。"
+  - "回合3：本回合7分；收尾仍是未做事项清单。"
+total: 5
+total_score: 5
+passed: false
+verdict: "FAIL"
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "新通道规划占了原先那个小舞台"
+      character_credibility: "箱子先别往过道摆"
+      meaningful_choices: "不贴也行"
+      consequence_continuity: "未干的海报样稿"
+      natural_expression: "她没替你答应量通道"
+    reason: "舞台与通道冲突具体，箱子避道是近处影响，替代远看成立；末句直接解释约束。"
+    blocking_findings:
+      []
+    total: 9
+    passed: true
+  -
+    turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "翻印前"
+      character_credibility: "我还没派人去量"
+      meaningful_choices: "站到楼道口看一眼"
+      consequence_continuity: "墙上两张样稿未干"
+      natural_expression: "看完可以走"
+    reason: "明确标题目标且不让玩家承担场地后续，没有代动手；免责稍多。"
+    blocking_findings:
+      []
+    total: 9
+    passed: true
+  -
+    turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 0
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: "翻印只选一版"
+      character_credibility: "别让人以为今晚已经定了"
+      meaningful_choices: "你当场驳回她刚才那条看稿办法"
+      consequence_continuity: "就在这盏灯下比远近"
+      natural_expression: "也不改成分散点歌"
+    reason: "替玩家指定反对看稿办法，又以未经建立的旁人误解取消远看，用灯下比较替代远距验证缺少说明。"
+    blocking_findings:
+      - "代玩家确定具体异议，meaningful_choices为0；改变看稿方法缺乏可验证理由。"
+    total: 5
+    passed: false
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 1
+      meaningful_choices: 1
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "箱子不往过道摆"
+      character_credibility: "不拿你的话去约任何人"
+      meaningful_choices: "没起身拦门"
+      consequence_continuity: "翻印哪一版今晚没定"
+      natural_expression: "也不改成分散点歌"
+    reason: "退出与未定版相符，未扩大压力；NPC只重复不派工，不回应个人感受。"
+    blocking_findings:
+      - "本回合7分；收尾仍是未做事项清单。"
+    total: 7
+    passed: false

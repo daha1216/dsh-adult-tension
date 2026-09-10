@@ -1,0 +1,123 @@
+[
+  {
+    "case": "mat-3f430a8a5ab95accb2a0db0ae2ceb369-pressure",
+    "framework": "寒冬避难所公共生活",
+    "primary": "model_deviation",
+    "secondary": "summary_loss",
+    "signature": "activity_stall",
+    "lever": "probe_protocol",
+    "target": "run_playtest.render_prompt 规则文本：修订既有安排须先明确撤销哪一条",
+    "evidence": "「你缝完再走」与「你随时收针」同回合并存",
+    "note": "NPC同回合给出两条矛盾离开条款且4轮内袋未缝成，材料包完备属模型执行偏差。异议探针诱发免责堆叠（不绑你/不拦/不记名下），规则应要求先撤销旧条款再立新条款。"
+  },
+  {
+    "case": "mat-0cc59e86706659aa89202725d9f89f5c-daily",
+    "framework": "检疫站旁的生活区",
+    "primary": "model_deviation",
+    "secondary": "source_gap",
+    "signature": "activity_stall",
+    "lever": "probe_protocol",
+    "target": "render_prompt 规则：活动已开场时每回合须推进具体活动节拍",
+    "evidence": "青椒还是整的，锅沿仍凉",
+    "note": "beats.choice有「只交换一个家常搭配」可用小事，模型4轮不执行、锅始终凉。建议规则强制每回合推进节拍，并在activity beats补中段（NPC单方动作）素材。"
+  },
+  {
+    "case": "mat-0cc59e86706659aa89202725d9f89f5c-pressure",
+    "framework": "检疫站旁的生活区",
+    "primary": "source_gap",
+    "secondary": "model_deviation",
+    "signature": "fact_fabrication",
+    "lever": "framework_field",
+    "target": "frameworks/mat-0cc59e86706659aa89202725d9f89f5c.yaml pressures[旧版通告仍在流传].beats.immediate/near",
+    "evidence": "「以换过的下午时段为准」无原文依据",
+    "note": "压力链只说旧取物时间失效，从未给更正后新时段值，模型只能编造并被复述成正式口径。beats应写明新通告的具体内容。"
+  },
+  {
+    "case": "mat-bea6535a01305dd6b8e8903f6d521c08-daily",
+    "framework": "星海边境生活站",
+    "primary": "summary_loss",
+    "secondary": "model_deviation",
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "run_playtest.FOLLOWUPS[1]（异议探针指明对象或允许NPC先确认）",
+    "evidence": "「那一项，我改。」未落到具体条款",
+    "note": "探针②不指明被异议安排→NPC只能含混修订并给从未提出的义务免责。另t1「替玩家选定翻架」扣分系探针①自带选小事指令（反证：探针原文「再选一件现在能帮忙的小事」）。"
+  },
+  {
+    "case": "mat-de87cf5cd73859139a93b09b472d4e59-daily",
+    "framework": "赛博街区与公共终端",
+    "primary": "summary_loss",
+    "secondary": "model_deviation",
+    "signature": "fact_fabrication",
+    "lever": "runtime_code",
+    "target": "fill_opening knowledge_gap.npc_knows 模板句「她还没决定对你说哪一层」",
+    "evidence": "楼层我还没决定说哪一层",
+    "note": "材料包模板把知识层次占位语写成可字面化的「哪一层」，框架yaml无楼层。改为「哪一步/到什么程度」或剔除；模型字面化并贯穿4回合是次因。"
+  },
+  {
+    "case": "mat-de87cf5cd73859139a93b09b472d4e59-pressure",
+    "framework": "赛博街区与公共终端",
+    "primary": "source_gap",
+    "secondary": "model_deviation",
+    "signature": "permission_overreach",
+    "lever": "framework_field",
+    "target": "frameworks/mat-de87cf5cd73859139a93b09b472d4e59.yaml pressures[服务记录误关联].beats.immediate 写明执行主体",
+    "evidence": "用测试账号把那格争议预约停在暂不发门禁码",
+    "note": "immediate要求停发门禁码/隐藏字段却无授权主体，且玩家资源含「局部配置回退权限」诱导越权。写明由前台/楼宇系统执行。"
+  },
+  {
+    "case": "mat-be59cd317bd15c268ca4e877683d27d1-daily",
+    "framework": "王都工坊与委托街",
+    "primary": "model_deviation",
+    "secondary": "source_gap",
+    "signature": "fact_fabrication",
+    "lever": "framework_field",
+    "target": "frameworks/mat-be59cd317bd15bd6b8e8903f6d521c08.yaml pairs[1].npc.obligation「标出连续照明上限」",
+    "evidence": "上限我按自己的眼标",
+    "note": "beats.choice明列「可读一页小字并计时」，NPC仍拒绝计时用目测标续航上限（blocking指控属实，「没计时」原文在）。obligation应写明上限须计时实测，resources补计时手段。"
+  },
+  {
+    "case": "mat-be59cd317bd15c268ca4e877683d27d1-pressure",
+    "framework": "王都工坊与委托街",
+    "primary": "summary_loss",
+    "secondary": "model_deviation",
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "run_playtest.FOLLOWUPS[1]（异议探针指明对象或允许NPC先确认）",
+    "evidence": "「那条收回。不当你答应过」未指明条款",
+    "note": "压力链材料完备、NPC全程诚实不虚报，t2仅因协商未指明条款7/10。对照组：雾都案NPC先问「你说要改哪一句」仍7/10——无论代猜还是先问都被扣，属探针结构性缺陷。"
+  },
+  {
+    "case": "mat-d8ec69422b1354538ef3c705f4beb804-daily",
+    "framework": "幕末町屋与道场",
+    "primary": "summary_loss",
+    "secondary": "model_deviation",
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "run_playtest.FOLLOWUPS[1]（异议探针指明对象或允许NPC先确认）",
+    "evidence": "改的是刚才那一处",
+    "note": "探针②无对象→「刚才那一处」含混修订+复述权限；beats有换绳试绕/拉拽/挑刀节拍可用，NPC一方4轮零推进（t3「绕没改成，我自己收回」）。expression=1有免责复述依据。"
+  },
+  {
+    "case": "mat-8ad2df5335435696a3508c6f7223a3d0-daily",
+    "framework": "长安夜市与坊志",
+    "primary": "summary_loss",
+    "secondary": "model_deviation",
+    "signature": "activity_stall",
+    "lever": "followup_design",
+    "target": "run_playtest.FOLLOWUPS[0]/[1]（小事具体化权+异议指明对象）",
+    "evidence": "只按住眼前这一处桥名",
+    "note": "t1因「代选玩家按页」扣分恰是7/10败因，但该动作系探针①「再选一件…小事」指令（反证原文）；t2「可以改」又因无对象空泛。choice有比较一页/插图可用而4轮零中间结论是次因。"
+  },
+  {
+    "case": "mat-63910e70d6515d33b712a1b3251b5d60-daily",
+    "framework": "雾都钟表与港务街",
+    "primary": "model_deviation",
+    "secondary": null,
+    "signature": "activity_stall",
+    "lever": "probe_protocol",
+    "target": "render_prompt 规则：调查/修复类活动每回合须报告一次实际观察或读数",
+    "evidence": "连着走，我装回墙；轴还涩，我停用这只",
+    "note": "同一条件分支句复述至第4回合，连/涩判定从未落地，材料有怀表对照与复查节拍。另t0「称档案员为师傅」扣分不成立——package规定appellations=[\"师傅\"]。"
+  }
+]

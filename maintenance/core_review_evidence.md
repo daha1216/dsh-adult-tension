@@ -100,6 +100,8 @@
 
 逐项定位：决策文件 review.scope 从 core_pool_unit:G05:001 到 core_pool_unit:G05:128。
 
+2026-09-10 桥接闭合：111 条 BRIDGE_REQUIRED 逐项改判 KEEP_LEGACY（modes 按地点在两种开局均被抽取消费的事实授双模式——roll_opening.py:544-545 时代与地点无条件抽取、fill_opening.py:358-365 两模式都要求地点；owners 锚定 roll_opening.build_roll 地点抽取、fill_opening.load_tables 载入 locations 与 location_profiles、fill_opening.fill_opening 消费细节与画像写入 scene_profile、live_slice.extract_live_slice 与 opening_brief 续读，被框架实例化的地点追加 world_frameworks.prepare_tables places 按名称覆盖；eras 三档核定——31 条按 pools.yaml meta.location_eras 名单（roll_opening.py:546-567 抽取和解执行），78 条按实例化框架 era 并集绑定（world_frameworks.py:191-193 按名称覆盖该地点细节与画像），2 条（夜场会所、洗浴中心）无绑定源按细节语义核定现代商业营业五时代）。清晨菜市场细节限定清晨、天蒙蒙亮与压力叙述统一今晚错配（fill_opening.py:534、555）、密歇根湖畔私酒卸货码头 location_eras 含旧式民国都市（密歇根湖为一九二八芝加哥专属地理）、壬生屯所阴暗道场 location_eras 含明治东京（新选组建制属幕末），共 3 项记入源缺陷清单，不改源文件。16 条已闭合 KEEP_LEGACY 与 1 条冻结（学园祭打烊后的活动室）不动。
+
 <a id="G06"></a>
 
 ### G06 社会规则
@@ -119,6 +121,8 @@
 处置依据与未解决项：72 条需要桥接，2 条冻结，无直接保留。死线只剩几小时与统一八小时消费未对齐；债务到期缺债权事实与偿还路径；秘密即将暴露缺载体和具体窗口。后续必须把期限文本、事件 due_at 与实际触发证据对齐，不能只补一个主题标签。
 
 逐项定位：决策文件 review.scope 从 core_pool_unit:G07:001 到 core_pool_unit:G07:074。
+
+2026-09-10 桥接闭合：72 条 BRIDGE_REQUIRED 逐项改判 KEEP_LEGACY（modes 按压力来源仅在压力开局被消费的事实授 pressure 单模式——roll_opening.py:603-606 日常开局强制空串、fill_opening.py:361-363 校验空串；owners 锚定 roll_opening.build_roll 压力来源抽取与 fill_opening 压力来源写入；eras 按各条压力链的制度与技术依赖收窄，普适机制按全时代名单保留）。发电机燃油告罄 material_compatibility 名单含星际殖民地（星际缺燃油发电证据）、巡沙狼骑号角逼近名单含民国初年大漠荒城（现实向时代缺狼骑建制）、同人展压盘死线文本「三小时」与 timed 事件统一八小时期限错配，共 3 项记入源缺陷清单，不改源文件。2 条冻结（私密照外流、换脸视频外流）不动。
 
 <a id="G08"></a>
 
@@ -150,6 +154,8 @@
 
 逐项定位：决策文件 review.scope 从 core_pool_unit:G10:001 到 core_pool_unit:G10:017。
 
+2026-09-10 桥接闭合：13 条 BRIDGE_REQUIRED 已按成员级证据改为 KEEP_LEGACY（交集时代 + consumer 定位），4 条冻结不动。成员级理由见决策文件各 review.reason。
+
 <a id="G11"></a>
 
 ### G11 处境侧
@@ -170,6 +176,8 @@
 
 逐项定位：决策文件 review.scope 从 core_pool_unit:G12:001 到 core_pool_unit:G12:026。
 
+2026-09-10 桥接闭合：25 条 BRIDGE_REQUIRED 逐项改判 KEEP_LEGACY（modes 按称谓在 daily 与 pressure legacy 抽取均被消费的事实授双模式、owners 锚定 roll_opening.build_roll 称谓抽取与 fill_opening 玩家称谓写入、eras 按称谓文化范围收窄）；「直呼其名」缺名字替换机制、运行时按字面拼成「别人称你直呼其名」（fill_opening.py:526），记入源缺陷清单，不改源文件。
+
 <a id="G13"></a>
 
 ### G13 玩家化身轴/社会位置
@@ -179,6 +187,8 @@
 处置依据与未解决项：21 条桥接，7 条冻结。旧识的文本明确不知道对方是否可靠，却预设 trust=2；外来者被赋予未绑定场所的通行证与退路；同侪没有与 NPC 行业配对。合租室友、上司、相亲对象共 3 条仅保留文本与关系参数一致的定位，不把同住、职权或相亲当成额外许可。
 
 逐项定位：决策文件 review.scope 从 core_pool_unit:G13:001 到 core_pool_unit:G13:031。
+
+2026-09-10 桥接闭合：21 条 BRIDGE_REQUIRED 逐项改判 KEEP_LEGACY（modes 按社会位置在 daily 与 pressure legacy 抽取均被消费的事实授双模式、owners 锚定 roll_opening.build_roll 社会位置抽取与 fill_opening 玩家位置写入、eras 按画像建制收窄）；旧识 trust=2 与 reputation 矛盾、共同遗产继承人 type=family 预设血亲、搜刮队搭档与黑市药贩 material_compatibility 名单含画像不支持的时代、动力舱维修工名单与画像零交集（eras 收窄为空），共 5 项记入源缺陷清单，不改源文件。
 
 ## 消费者证据与待解决问题
 
@@ -230,6 +240,8 @@
 
 不纳入 world_frameworks.yaml：本次没有将任何旧池条目认领到框架，也没有对框架包正文给出批准。保留 world_frameworks.py 是为了绑定框架替换旧表的消费边界。此清单不是整个应用的所有传递依赖、框架审查依赖或发布回归范围，不应由此推导未列文件已通过审查。
 
+2026-09-10 漂移记录：主任务修复 fill_opening.py 两处缺陷——constants 组装对源句尾句号去重（L496-497 rstrip，仅标点归一，不改变 G01/G06 规则语义判断）与 knowledge_gap 模板语病（L600「说哪一层」→「告诉你到哪一步」，消除楼层误读，不改变 G10/G11 语义）。全量测试 290 项通过佐证；699 条评审理由不受影响。依赖表 fill_opening.py 行同步更新。
+
 审查过程中其他任务删除了两个非核心处境模板；核对确认不属于本次 84 个核心处境，核心对应模板未变。下表记录该变化后的字节快照；最终核验时 16 项均与机器清单和工作树一致。后续发生漂移应定位受影响批次并复审，不可机械刷新哈希。决策主文件内容没有因新增依赖清单而改变。
 
 | 路径 | SHA-256 |
@@ -246,7 +258,30 @@
 | `scripts/data/names.yaml` | `5989b214d9a846f549f532a14537e15cb91e6f6718c0690985ae397b8a8676d0` |
 | `scripts/data/pools.yaml` | `00bdbecf9fa56ad48766c7ead08b84f0329aeb8cec441ed858c6ab04686ab11f` |
 | `scripts/data/templates.yaml` | `9de0b9198da06d35d087858e0c8f3682e505765dbdc3540b7ba9b7694b4ec1a5` |
-| `scripts/fill_opening.py` | `2c4526e010525b634af126b41c4ea616cb6553a1e5a00ae5b9129e06d6048c1b` |
+| `scripts/fill_opening.py` | `e9eb6cf76221b5ab7c2f0239c25202cac572b076b316f6f099f512ba07fe47c1` |
 | `scripts/roll_opening.py` | `8069c70095f81a8bf355d862d9d20e42baa924f481e852dbbbabdfd68aeeb624` |
 | `scripts/validate_state.py` | `303640c3c65770cc94a77101b2e0e52b1b76353d508cab9ab904ee9c545eda8c` |
 | `scripts/world_frameworks.py` | `e48a2857e831d2f112646cb0e3bca0cc4f1ff7b4907211ca857b7c4eb2e3d259` |
+
+### 依赖漂移记录（2026-09-10 第二批）
+
+旧识 trust 下调、共同遗产继承人 estate 化、玩家社会位置 compat 名单收窄与 fill_opening 称谓句修复（含句号归一、appellation_text 改写）已落盘；core_review_dependencies.yaml 四文件哈希同步刷新（character_meta a8136851…、identities c67915f0…、pools a5efa300…、fill_opening cca7d05e…）。受影响单元均属非核心 identity/pools 波次，已按刷新哈希重新核定落库；G01-G13 核心批次绑定语义不受影响（这些修复不触及其 owners/modes 依据）。G07 压力来源批次同日闭合（72 KEEP_LEGACY + 2 FROZEN 未动），BRIDGE_REQUIRED 569→438。
+
+
+### G04/G06 桥接闭合（2026-09-10）
+
+G04 时代 30 桥（G04:001、003-031）与 G06 社会规则 27 桥（G06:001-007、009、011-019、021-030）全部闭合为 KEEP_LEGACY（disposition unit_scope_only，reviewer dsh/governance-bridge-g04-g06，片段 maintenance/bridge_fragments/g04_g06.yaml 程序化合并）。modes 按消费实证：G04 全部与 G06 行会自治为 [daily,pressure]（roll_opening.py:544 无条件抽时代、fill_opening.py:358-365 两模式必填、行会自治为 meta.daily_opening.社会规则 白名单唯一桥接单元）；G06 其余 26 条为 [pressure]（roll_opening.py:588 全池抽取、日常白名单排除）。owners 时代单元 6 锚、社会规则 2-3 锚（build_roll/fill_opening/world_frameworks.build#eras）。needs_source_fix 空：location_eras/aesthetic_eras/material_compatibility/names.eras/40 框架 eras/daily_opening 全量交叉验证无悬空引用，40 框架自建 social_rule 与 27 池标签零重合。
+
+### 依赖漂移记录（2026-09-10 第三批）
+
+G07 needs_source_fix 三项落盘：压盘句子时间修正（三处「仅剩三小时」→「近在眼前」，核心单元改名 mat-07bbad24→mat-50a51f67，旧单元 verified_direct 移除登记、decisions G07:073 行重绑定）、location_eras 收窄（密歇根码头去旧式民国都市、壬生道场去明治东京）、发电机/狼骑 compat 名单收窄。清晨菜市场 details 时段修正（天蒙蒙亮/清晨→深夜/凌晨前，兼容开局「今晚」叙述）。成年锚定源修五处（学园祭活动室、琴房试卷、娇矜作精小花、模范长女/小小姐、名门特聘家教）。非核心组级行与 pools meta 三表（timed_pressures/location_eras/material_compatibility）落库；names.given 按 P3 判 DEPRECATED 登记。core_review_dependencies.yaml 两度刷新（locations 180eb58f…、pools 05ca430b…）。BRIDGE_REQUIRED 轨迹：569→438（G07）→327（G05）→270（G04/G06）。
+
+### G03 / G01+G02 / G11 / G08+G09 桥接闭合（2026-09-10）
+
+G03 张力引擎 66 桥、G01 核心规则 44 桥、G02 美学基调 29 桥、G11 处境侧 65 桥、G08 交易摊牌 15 桥、G09 非交易靠近 51 桥全部改判 KEEP_LEGACY（合计 270；加 G04/G06 57，五波片段合并后核心 BRIDGE_REQUIRED 569→0 清零；id/source_hash/source 与 registry 逐字绑定，FROZEN 行全程未动）。modes 按消费实证：G02 全部+G01:018+G09:042/047+G04 全部+G06 行会自治为 [daily,pressure]，其余为 [pressure]——daily 白名单机制（roll_opening.py:745-764 apply_daily_roll 覆写+AnchorError 拒绝）三重拦截实证。restricted 合计 35：G11 权力处境 19 条（reason 含「不推导亲密许可」）、G09 身体靠近 16 条（按分类一致性保留）。G02 eras 23 条按 aesthetic_eras 收窄、G11 46 条按画像收窄、G01 六条硬绑定收窄（040/041 中式民俗、042/043 禁酒期、044/045 幕末）。
+
+needs_source_fix 登记未改源（待实玩重跑窗口结束后统一处理）：①三池缺 compat 门禁——张力引擎/处境/核心规则(040-045) 无 meta.material_compatibility 节且 roll_opening.py:646-651 兼容检查不覆盖，时代强依赖条目可跨时代抽出（G03/G11/G01 独立发现同一缺口）；②fill_opening.py:719 far 事件字面拼接引擎名；③timed_situations 仅覆盖 22/65 处境且统一 8h 与文本时钟不符；④G02:010 雨夜霓虹/G01:025 记账二义性与 G02:011 旧年代质感基线提示；⑤G08/G09 十二项模板-元数据错位（action_categories.yaml:38+action_metadata.yaml:15 与锁门/调灯矛盾、施受方向 4 处、pools.yaml:979 老爷车到站语义、医疗断言 G08:013/016、建议句越权/代词 G09:065/071）。
+
+### NSF 源修批次与第三轮重跑（2026-09-10）
+
+按各桥接批次的 needs_source_fix 台账完成源侧修复，登记簿同步重放：①模板九处（教她一个身段/替她扶正防毒面罩/金樽/半板药片/衣领伤口的施受方向与医疗断言，猫耳发箍/宽大队服/干烙馍建议句越权与代词）；②把灯调暗归位日常接触、反手反锁包厢门归位身体靠近（空间与退出恢复 exit/deescalate 语义一致）；③司机提醒即将到站 places 移除黑帮教父防弹老爷车；④meta.timed_situations 由统一 8h 名单改为逐条时钟映射（密室暗槽排酒前三十秒 0.01h、洗刀水色变红 0.05h、颁奖礼候场二十分钟 0.33h、直播意外事故 0.5h、其余 8h；fill_opening.py:452-462 消费端兼容 list/dict）；⑤meta.material_compatibility 新增处境 65 条与核心规则 6 条 {eras:[...]} 契约门禁（张力引擎经 G03 核定为抽象轴、eras 恒空，不设门禁），roll_opening.py:646 兼容检查扩展至 处境/张力引擎/核心规则；⑥fill_opening.py:719 far 事件触发句去引擎名直拼；⑦31 框架第二人物组资源/限制差异化（pairs resource/limitation/resources/identity/baseline/relationship_reason，两组资源零交集）经 build_frameworks --write 重建，31 份 framework_reviews 源哈希同步，40/40 恢复可默认抽取。核心 BRIDGE_REQUIRED 维持 0，全库 errors 0/warnings 0；受影响单元按 history 快照重放（reviewer dsh/nsf-fix-2026-09-10）。张三池 compat 缺口中的 张力引擎 项经实证关闭：G03 全部 66 桥 compatibility.eras 为空、technology_boundary 声明抽象轴不绑定时代，时代强依赖由处境与压力来源门禁承载。协议 v3 第二轮 80 transcript（纯协议消融：材料为 NSF 前状态）归档 stale-input-v4/；第三轮全量重跑覆盖 40 框架 × daily/pressure，作为最终验收证据基线。

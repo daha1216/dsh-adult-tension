@@ -1,32 +1,26 @@
 framework_id: "mat-e9178ea6150b59fb9e7d7f3288c4196d"
 name: "河岸康复与互助居所"
 mode: "pressure"
-source_hash: "5fdc6abf6d7e96cdba4c350e7d25fe2e090609ebe90f45b4750009fca7ab81b0"
-transcript_sha256: "24572d73af733027806c746ab129ebc6c20ed0db03657cbb544713ce4a0c8feb"
-reviewer: "codex-independent-semantic-review"
+transcript_sha256: "4f7804526bd0eeb3c31c4d4f1efefe54d363ffda3efaa73c1492d9f093acbf6e"
+reviewer: "glm-independent-review-v3"
+protocol: "non-explicit-runtime-brief-v3"
 aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
-lowest_scoring_turn: 1
 scores:
   world_specificity: 2
   character_credibility: 2
   meaningful_choices: 2
-  consequence_continuity: 1
+  consequence_continuity: 2
   natural_expression: 1
 evidence:
-  world_specificity: "跟正在用的餐具分开"
-  character_credibility: "试取高度不是这会儿必须完成的"
-  meaningful_choices: "没有起身把路封上"
-  consequence_continuity: "你问她今晚真正要做完的是哪一件"
-  natural_expression: "后面谁接班、全厨房怎么收，都不算在你今晚"
-blocking_findings:
-  []
-total: 8
-total_score: 8
+  world_specificity: "誊到正式页上，签了自己的名，把笔递过去。"
+  character_credibility: "你念一遍，念得跟你意思一样我就誊。"
+  meaningful_choices: "今天这一次我认，已经挪好的位置我保留。往下要不要接手，得等我答应。"
+  consequence_continuity: "保留的是通道口净宽和常见盒回台面；改的是协助期限，只到今天交接结束。"
+  natural_expression: "# 正文"
+total: 9
 passed: true
-verdict: "PASS"
 turn_reviews:
-  -
-    turn: 0
+  - turn: 0
     scores:
       world_specificity: 2
       character_credibility: 2
@@ -34,37 +28,33 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: "轮椅回转空地"
-      character_credibility: "场地组会接手"
-      meaningful_choices: "只指出不顺手的地方也行"
-      consequence_continuity: "空收纳盒和正在用的餐具分开放"
-      natural_expression: "她蹲在原处，等你开口"
-    reason: "轮椅回转和坐式备餐有真实空间问题，先停活动、试取或只指出障碍均有效，不强迫接班。"
-    blocking_findings:
-      []
+      world_specificity: "腾出的宽度刚好够轮椅回转"
+      character_credibility: "你按平常动作拿一下，够不顺手就说，不用真搬。"
+      meaningful_choices: "推广不推广，等别的使用者自己说。"
+      consequence_continuity: "那就把下层留给低频的锅具，常用盒回到台面。"
+      natural_expression: "她直起身，把两只空收纳盒分开摆"
+    reason: "坐式备餐台、轮椅回转净宽、分层收纳的无障碍布置具体可查；轮值员请玩家以平常动作试取而非代劳、并主动声明「不算你常驻照护」，边界清晰；试层、报「下层要弯腰」皆是玩家自己的动作与判断。"
     total: 10
     passed: true
-  -
-    turn: 1
+    blocking_findings: []
+  - turn: 1
     scores:
       world_specificity: 2
       character_credibility: 2
       meaningful_choices: 2
-      consequence_continuity: 1
-      natural_expression: 1
+      consequence_continuity: 2
+      natural_expression: 2
     evidence:
-      world_specificity: "跟正在用的餐具分开"
-      character_credibility: "试取高度不是这会儿必须完成的"
-      meaningful_choices: "没有起身把路封上"
-      consequence_continuity: "你问她今晚真正要做完的是哪一件"
-      natural_expression: "后面谁接班、全厨房怎么收，都不算在你今晚"
-    reason: "NPC明确先恢复通行并联系场地组，邀请只接一只盒后等待；日间被误称今晚，后半段免责较长，分别扣连续性与表达。"
-    blocking_findings:
-      []
-    total: 8
+      world_specificity: "他退回门口，从餐厅那头看进来，坐式台和回转空地都在视线里。"
+      character_credibility: "通道通，这区我自己先试几天。够了。"
+      meaningful_choices: "我只做今天这一次。推广不推广，你问使用者自己定。"
+      consequence_continuity: "在交接笔记上写下“通道口净宽、轮椅可掉头”一行"
+      natural_expression: "陈静怡绕台面走了一圈，用轮椅位比了一下宽度，把清单收进抽屉。"
+    reason: "直接问出今天要完成到哪一步，答得具体（通道通+自己先试）；当场抽盒上台、推回书架、留直线并从餐厅端目验，结果即时可核；双方互不承诺后续，与「不算常驻」一以贯之。"
+    total: 10
     passed: true
-  -
-    turn: 2
+    blocking_findings: []
+  - turn: 2
     scores:
       world_specificity: 2
       character_credibility: 2
@@ -72,32 +62,31 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 1
     evidence:
-      world_specificity: "坐式备餐台侧"
-      character_credibility: "架子我去联系场地组移"
-      meaningful_choices: "你不必动手，也不必留下来盯着"
-      consequence_continuity: "自己把那只空盒从回转空地边完全收到"
-      natural_expression: "这些都不算在你身上"
-    reason: "自己移盒形成实际变化，架子仍待场地组处理，没有宣称已消除全部障碍，允许指出或不谈；免责仍偏多。"
-    blocking_findings:
-      []
+      world_specificity: "誊到正式页上，签了自己的名，把笔递过去。"
+      character_credibility: "你念一遍，念得跟你意思一样我就誊。"
+      meaningful_choices: "今天这一次我认，已经挪好的位置我保留。往下要不要接手，得等我答应。"
+      consequence_continuity: "保留的是通道口净宽和常见盒回台面；改的是协助期限，只到今天交接结束。"
+      natural_expression: "# 正文"
+    reason: "异议被正面接住：改期限（临时协助、不构成固定轮值、后续另行单独确认）、保留净宽与摆位两条进展，读回确认再誊正、签名交还玩家终审；被异议的「接着排班」只是对前文口吻的解读且当场书面解除，无矛盾无补种；扣 1 分依据：续写以「# 正文」结构标题开头，格式残留泄漏。"
     total: 9
     passed: true
-  -
-    turn: 3
+    blocking_findings: []
+  - turn: 3
     scores:
       world_specificity: 2
-      character_credibility: 1
+      character_credibility: 2
       meaningful_choices: 2
       consequence_continuity: 2
-      natural_expression: 1
+      natural_expression: 2
     evidence:
-      world_specificity: "挡路的活动继续停着"
-      character_credibility: "轻便架子我联系场地组来移"
-      meaningful_choices: "没有起身挡住"
-      consequence_continuity: "空盒已经收到坐式备餐台侧"
-      natural_expression: "也不算你当班"
-    reason: "如实区分已移空盒与待移架子，不把离开当接班或监护，个人收尾较薄且继续复述边界。"
-    blocking_findings:
-      []
-    total: 8
+      world_specificity: "她把这几行圈起来，写了个“待场地组”。"
+      character_credibility: "路上慢点。"
+      meaningful_choices: "别的班怎么摆，我不替他们答应。"
+      consequence_continuity: "已经落定的：书架归位、常用盒回台面、下层只留低频锅具、净宽恢复，清单上两个人签了名。"
+      natural_expression: "没站起来送，只在他走到门口时抬了下头"
+    reason: "「今天到这儿」与请求一致，并再补「后续由场地组对接」彻底卸掉玩家义务；落定五项与悬置三项（场地组长期通道、活动板去处、其他使用者意愿）对账清楚；不送不拦，无新造危机。"
+    total: 10
     passed: true
+    blocking_findings: []
+blocking_findings: []
+summary: "最低回合 2 得 9 分通过：无障碍摆位—试取反馈—当场改期誊正—对账收束完整，义务边界经书面解除、玩家终审保留；唯一扣分是回合 2 以「# 正文」标题开头的格式残留（ne 1）。"

@@ -1,0 +1,2514 @@
+# G03 张力引擎桥接闭合片段：66 条 BRIDGE_REQUIRED 逐项改判 KEEP_LEGACY。
+# 依据 maintenance/core_review_evidence.md#G03 与 references/material_registry.yaml 逐字绑定。
+# modes 按实证授 pressure 单模式：daily 三重拒绝非白名单引擎（roll_opening.py:757-759、
+# fill_opening.py:388-391、world_frameworks.py:121），pressure 无条件双抽（roll_opening.py:540-541）。
+# 池 72 项中 3 条 daily 白名单 KEEP_LEGACY 与 3 条 FROZEN_RESTRICTED 不在本片段内，均不动。
+# 与压力来源/处境侧零逐字重名（check_content.py:278-284 三表互斥契约；本次 python 全量核对通过）。
+- id: mat-094deb8bdb2450dc883d37210e9eef64
+  source_hash: 73474a30ae4fb54ff50824db97fad8d7f802bca59e820aa0fbcedd7cc0d61791
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 时限逼近
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 截止与选择
+    technology_boundary: 抽象截止轴，不预设时代技术；期限数值不由引擎名携带，由开局 far 事件统一期限承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:001
+    reason: 截止轴核定：引擎只定时限方向，具体期限与逾期后果由组合参数与开局事件提供，双引擎组合无键义冲突。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-32fdb9ca573c5448a495dca045e561ba
+  source_hash: 92ccfe6249ab28d48462802dd1aa9960577956103e34f33e9dada1ef61017155
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 资源锁定
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 资源与控制
+    technology_boundary: 抽象稀缺轴，资源对象与取得路径由时代、地点与处境组合给定，引擎不绑定特定物资。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:002
+    reason: 稀缺轴核定：锁定对象留空由组合填充，交换关系不因引擎自动成立，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-bcb28fd780ea5de190495911353a2cbd
+  source_hash: a93ee9b55706763bf9cffd5e825112b7a6bf6af782e11a712de0fa0b208b6e64
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 身份风险
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 身份与暴露
+    technology_boundary: 抽象暴露轴，不预设职业、族群或法律身份，核验方式由身份族与时代组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:003
+    reason: 暴露轴核定：风险对象不指定为职业或族群，公开与防护路径由组合参数承载，轴义无指向排他。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-d77cbfef244b59ae888db180c6d2c43d
+  source_hash: 2b37e9072591f0ad026c0bf77a5bdc019de1825c3f1528050e44cd1d4cc1ab2a
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 旧事追索
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 历史与证据
+    technology_boundary: 抽象历史轴，旧事内容与证据形态由时代组合给定，引擎不携带具体史料。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:004
+    reason: 历史轴核定：追索主体与因果由处境侧承接，引擎只保留旧账方向，与任意轴组合不冲突。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-d7cf7a4642785b2e98ac562d653a39d7
+  source_hash: 31ce105487c6ed8b9bb0cf633b4fdc6fa95ed1ae0da40eee44bea4f6f949acec
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 债务压力
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 债务与选择
+    technology_boundary: 抽象债务轴，债项数额与还款窗口由组合参数给定；属 meta.leverage_engines 杠杆名单，单锁时防双杠杆补抽。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:005
+    reason: 债务轴核定：杠杆名单只约束抽样组合（防双杠杆），债项事实仍由组合提供，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-17b355820eb75f84b517b2fe5460ee5f
+  source_hash: e9a22188c95461160213bb7301b6d8f9f61fb464acbae8399f75fe2e2597c510
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 嫉妒与独占
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 占有与自主
+    technology_boundary: 抽象情感轴，不构成控制权限，拒绝与退出边界由玩家硬边界与关系参数承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:006
+    reason: 占有轴核定：独占欲仅作张力方向，不授权控制或越过撤回信号，成人向边界成立。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-7ddd13307ff55d248603caae3dc920ff
+  source_hash: 2644486a578486fe4617a15f419b18944b05d85ca25f67e6b02af0d40ef40de0
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 名声保卫
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 声誉与公开
+    technology_boundary: 抽象声誉轴，传播渠道与事实核验方式由时代与身份组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:007
+    reason: 声誉轴核定：保卫方向不含压制知情者的授权，争议事实由组合提供。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-e88463e52fe75007b46e2a2219e03edf
+  source_hash: ea37e1be8d41991d3ea549c7c15eeb541200f5a53877b45b04d6a32164af6749
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 第三方施压
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 第三方与权力
+    technology_boundary: 抽象外压轴，施压者身份与权限由组合给定；属杠杆名单，防双杠杆。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:008
+    reason: 外压轴核定：施压者可由任意组合承载，杠杆标记只影响抽样，两人可拒绝的路径保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-fdff24d1251b54c2b588d2be75f93532
+  source_hash: 71328a52565e87e732598c80479d68726ce4d8c099a7cdb6327306481aa5e0cc
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 秘密暴露倒计时
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 隐私与期限
+    technology_boundary: 抽象隐私期限轴，倒计时数值不由引擎名携带，泄露渠道由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:009
+    reason: 隐私期限轴核定：期限方向与信息载体分离，不预设具体时长，与截止类轴组合不冲突。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-ac35315737695027932f7359b507395a
+  source_hash: 68c18ac5024fb7f7a6de27b8542d703f132b0d4225664c45634886cd2447d221
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 组织更迭
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 组织变动
+    technology_boundary: 抽象权力变动轴，组织类型与交接程序由时代与身份族组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:011
+    reason: 权力变动轴核定：更迭对象留空由组合填充，不预设建制类型，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-cf44d7c9a5525a2f9649fb81f5ef37ef
+  source_hash: 8a7ef1dc4081b22aad0928eb097520ffc2ba4db87e21b5ebeae53614471f288e
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 共处密闭
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 封闭空间
+    technology_boundary: 抽象空间轴，封闭条件与真实出口由地点画像承载，引擎不证明场所封闭。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:014
+    reason: 空间轴核定：密闭由地点组合兑现而非引擎保证，安全离开条件保留可谈。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-8a084927d72c5530808241f6e1f42e91
+  source_hash: 1b500edb28d62d264c2bfd6585eef2ea3d05c3d1acc03cd7a536d1e6c3cf471d
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 身份错位
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 身份认知
+    technology_boundary: 抽象认知轴，误认来源与揭示方式由处境组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:015
+    reason: 认知轴核定：错位不指定伪装或误认类型，揭示时机由叙事推进，组合无冲突。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-af33e60f7b0a55a8863e9fb25becde49
+  source_hash: 96b6b06f87d4f6a2731af1f894799e8aead240ef381b39ad3f6ddb470bec1c09
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 表面体面破裂
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 公共形象
+    technology_boundary: 抽象形象轴，体面所系的身份与得知范围由身份族与地点组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:016
+    reason: 形象轴核定：破裂对象与修复路径留空，不预设丑闻内容，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f8746c2063775afeb4babf99b45b58d8
+  source_hash: aae8478cf36ebe9b5df71f60e7d9251a33e05c6ed13ae100803e592be07babcd
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 共同秘密
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 共同信息
+    technology_boundary: 抽象信息轴，知情范围与保密约定由关系参数承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:017
+    reason: 共同信息轴核定：共同知情不推导共犯或亲密关系，事实表由组合提供。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-08926345eb2355adbd116dd3a2aaefa0
+  source_hash: 5993051946d9907f101d64d0c68ae1967b411b20ed26c8ec314c290e25cc2af5
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 信任透支
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 信任与修复
+    technology_boundary: 抽象关系轴，需既有关系与可指认失信事件，由关系参数与处境组合承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:018
+    reason: 信任轴核定：透支预设已有关系事实，指向修复而非替代关系建立过程。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-101a3ef3a4d153b898ef0eb7c81f0106
+  source_hash: e7b284104eba6bc1af3d66ffee1fd4c776c8f707796ba146dcf2a49b0b890199
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 两副面孔
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 多重身份
+    technology_boundary: 抽象多重身份轴，两种身份与互斥约束由身份族组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:019
+    reason: 多重身份轴核定：面孔受众与公开边界留空，文体或伪装均不排斥，组合自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-0bde7ad059c65d8aa20ba83faeb2dbc7
+  source_hash: 1aa4fdfbe3216dfac626856b5f147ed239ab10e94cedeb98307cc8f22c483670
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 攻守易位
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 互动权力
+    technology_boundary: 抽象互动权力轴，交换前后权限由权力结构与关系姿态组合承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:020
+    reason: 互动权力轴核定：易位方向由人物选择兑现，不代替目标设定，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-be141b54203d55c88db83b929556996d
+  source_hash: 339866eb5fbfaf0428036087fd3ceee2276ba6b1b95c12508f4a55340d8484d1
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 遗产之争
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 继承争议
+    technology_boundary: 抽象继承轴，遗嘱、法域与利害关系由时代与身份族组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:021
+    reason: 继承轴核定：份额与法域不自动成立，争议主体由组合限定为成年当事人。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-23a060355df45490b476c2a3ce0602bf
+  source_hash: 73532cf897ec667b16ed6ac2fd12844e59c7496463c32c21de91e85a96f5363a
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 伤病互护
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 互助与伤病
+    technology_boundary: 抽象照护轴，伤情与医疗能力由时代组合给定，照护不依赖亲密交换。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:022
+    reason: 照护轴核定：互护方向不预设接触许可，救助出口由组合提供，成人向成立。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-1b00353e95d95ff181cbd2f6794a83c5
+  source_hash: bb20139e5ada142b0271f185fa386174f2cb849cc8340852babceb4b09580c9d
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 成瘾戒断
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 成瘾与支持
+    technology_boundary: 抽象支持轴，成瘾对象与医学风险由组合给定，专业支持路径保留。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:023
+    reason: 支持轴核定：戒断风险分级不由主题词统一处理，成年人自主与求助路径保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-40568065db28520c92100eed53c1ef90
+  source_hash: ec883193354cc692e0b7bf24f39a84303779c912282e517aa5b3a5b14bf6cbd3
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 体温依赖
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 身体依赖
+    technology_boundary: 抽象身体依赖轴，生理或魔法机制由世界常量给定，保留自主替代路径。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:024
+    reason: 身体依赖轴核定：失温或术法机制留空由组合解释，依赖不等于接触许可。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-edb718d59b735791810bc891f99e9fd5
+  source_hash: 5f8655d9e20b1bbab892d979fc32a84fff273400e37981dd42da1ce9b1b558d3
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 风雪封路
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 天气与交通
+    technology_boundary: 抽象天气轴，道路与救援条件由地点画像承载，不绑定具体地理。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:025
+    reason: 天气轴核定：封路由地点组合兑现，替代交通由组合提供，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-10299a5593d454e88176657056e328dc
+  source_hash: 22b539727595373ecb00f0084dce40e3da695d133c272817aae063ebf3a9b44b
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 警报拉响的断电避险
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 应急避险
+    technology_boundary: 应急轴，警报来源与供电条件由时代组合给定，不预设灾种。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:026
+    reason: 应急轴核定：警报与断电的先后因果由组合叙事承载，避险出口保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-7080210345be5ad7a0f01415257d9a87
+  source_hash: 323a9d0d88784ff65aa74908248246e399980ce076abe5a0edc274000a8e1d2e
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 消息误发
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 通讯误发
+    technology_boundary: 需电气或数字通讯时代；前电气世界不能承载，撤回能力由技术基线决定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:027
+    reason: 通讯轴核定：误发预设可误发的消息载体，技术前提由时代组合兑现，当前无引擎级时代门禁属源缺陷。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-78977d3e48b152fca101016e21c2f1dc
+  source_hash: bce9fac109a6140bff30d22af6e8f51204233bad7e5c3befc39935e0ffc4f6a1
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 定位共享
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 位置与隐私
+    technology_boundary: 需现代定位与网络技术，授权与停止共享能力由技术基线承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:028
+    reason: 位置隐私轴核定：共享预设设备与授权链，本人可停路径保留，技术前提由时代兑现。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-095e6ae7c24e543ebceb4fe21d576571
+  source_hash: 867308a4f2ce3aad66a351ce29d2d705cd2699cabc57804841df7aed144ca06c
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 记忆缺口
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 记忆与证据
+    technology_boundary: 抽象记忆轴，缺口成因由世界常量给定，不授权操纵记忆。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:029
+    reason: 记忆轴核定：成因留空不补写事实，验证方式由组合提供，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-939d37fc7b74504fab2df127f027901a
+  source_hash: a3bd83ca9b06d2109b3cbb143e8717f9e027a122d657bc3720784deb4c5f02ec
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 梦话泄密
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 睡眠与信息
+    technology_boundary: 抽象睡眠信息轴，可核实内容由组合给定，梦话不作可靠证词。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:030
+    reason: 睡眠信息轴核定：泄密方向不预设内容真实性，当事人隐私边界保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f59f79812b9558efa82718e59e2d3bf1
+  source_hash: ee65d9a437d99f852c57d53fc08c17a300ed88f6b90df18120e43973f46272c5
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 契约精怪
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 契约与异类
+    technology_boundary: 需术法或异类存在的世界基线，主体资格与解约条款由框架或世界常量给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:031
+    reason: 异类契约轴核定：精怪存在由世界设定承载，契约可解路径保留，不认领真名规则。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-efcd72debff451668ce3a933169d832b
+  source_hash: 0ec4eb3e79ddf3428b9aa66e7f4f0826a075f58412cea423be10e092197c0f6d
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 天亮失效
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 期限与失效
+    technology_boundary: 抽象失效期限轴，失效对象与日出时钟由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:032
+    reason: 失效期限轴核定：失效物留空，期限锚定天亮而非数值，与截止轴可组合无冲突。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-474a45b9a683564fa3f033e7c79d4946
+  source_hash: 76cf9e08fc89223d3c0c3b77652b8d62631396133d5e4703f6f62c9dc6ae2927
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 赌约生效
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 赌约与责任
+    technology_boundary: 抽象约定轴，赌注与条款由当事人约定承载，愿赌不服输可撤回。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:033
+    reason: 约定轴核定：生效条件不自动成立，非人身赌注与拒绝路径保留，不扩大为不可撤回许可。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-5e9b51e8af5e57839c49557715396972
+  source_hash: ad4a225b5d62e44c722898c8ce162ac1110080f2bb305b6f9daced86fecc81b9
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 旧案重开
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 司法与旧证
+    technology_boundary: 需对应法域与受理机关，重开权限和新证据由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:034
+    reason: 司法轴核定：重开由法域承载而非私下翻账，证据变化由组合提供。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-b50fd2763b5e5a4493835d0278c3aa92
+  source_hash: 5ab8d7905d78589b460f1b0004f367b8c8e05dc485640246869dec416a5202ff
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 共同监护
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 照护与监护
+    technology_boundary: 抽象共同责任轴，被监护对象与法定权限由组合给定，对象不进入亲密线。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:035
+    reason: 共同责任轴核定：监护针对第三方事实，共同责任不推导恋爱配对或亲密许可，无未成年指向。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-a29c9cb793345ab08a8720d47ea4a910
+  source_hash: c604fce4f24c42d2beb8136380adca60741fc8aa6f3f45abd4a60316da6b09bd
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 迁居倒计时
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 迁居与期限
+    technology_boundary: 抽象迁居期限轴，去向与停留条件由时代与地点组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:036
+    reason: 迁居期限轴核定：截止对象是迁居事件，数值由组合承载，与截止轴组合不冲突。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-9f0b5354a3075c318584435b6d9ac2c4
+  source_hash: 7a16be0f2e6559a857ed8879e4e268f71b7d584203bbd8decc57bd000450195b
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 疗程依赖
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 治疗与依赖
+    technology_boundary: 抽象治疗轴，疗程目标与专业责任由组合给定，不指向对单一个人的人身依附。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:037
+    reason: 治疗轴核定：依赖对象是疗程而非特定人，退出与替代支持保留，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-71c37ad23143536785745ca395b10bc8
+  source_hash: 1be24ee466a78d5be01f21f110ca3c806568942a0d12d66e90fae5a5bef77723
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 匿名委托
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 委托与身份
+    technology_boundary: 抽象委托轴，任务内容与联络方式由时代组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:038
+    reason: 委托轴核定：委托合法性由组合承载，匿名不等于无边界任务，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-477ffa4a2a3154ab93fc51deeff6a9d0
+  source_hash: ffa25f7a5d168a09d8b823bef3e9542b6ceffd46fdbb32c3c1495296e3bbc2e9
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 旧礼束身
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 礼俗与自主
+    technology_boundary: 抽象礼俗轴，礼的来源与适用范围由时代与身份组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:039
+    reason: 礼俗轴核定：束身由具体礼目承载，古风标签不自动限制人物行动，退出方式保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-fbc88e008ac55000939614d996366ee4
+  source_hash: dcd38a98f70cb0bfc043eb68663eb3925de50aa759f449b306b0a86a9a894dc9
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 名分悬置
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 关系与名分
+    technology_boundary: 抽象名分轴，双方既有事实与承认机制由关系参数承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:040
+    reason: 名分轴核定：悬置不代替关系建立过程，当事人愿望与社会承认由组合提供。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-0c2121c74575509abeedaa6de1188de0
+  source_hash: 720ab030a51c30d1079ff81c72f6f39b3d35d3cadef03f4a561cbb30487f1642
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 感染倒计时
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 感染与时间
+    technology_boundary: 抽象病程期限轴，病原与检测依据由世界常量给定，不把标题当医学事实。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:041
+    reason: 病程轴核定：倒计时方向由病程事件兑现，检测与病状由组合提供，与截止轴可组合。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-da45cfadf0af5f8b960fc56349a9e163
+  source_hash: ca3986fc853111eae8448c6ae9f25a4d377f596ac783d287d4ee4b9f593e319b
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 咬痕瞒到了极点
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 伤口与隐瞒
+    technology_boundary: 抽象隐瞒轴，伤因与症状由组合给定，极点阈值由叙事推进。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:042
+    reason: 隐瞒轴核定：咬痕不必然等于感染，瞒的崩解点由组合承载，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-9e8fa027403456f689545db7f49c24b1
+  source_hash: 130137f8645bb0d20d3f5e834e8b7042073488e2a478b0ecd81d4864f22c3bd9
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 名额只能给一个人
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 资源与抉择
+    technology_boundary: 抽象稀缺抉择轴，名额供给与分配程序由组合给定，第三条路保留。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:043
+    reason: 稀缺抉择轴核定：二选一由真实稀缺承载，不自动排除求助或另议，组合无冲突。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-fb3affc97cb657789ccc199bfa24a0b8
+  source_hash: f97b7958ff9b7a746663ff1201813b32a873ceef56be60fe7aedf44c2e8a0c10
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 尸潮封门
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 感染威胁与空间
+    technology_boundary: 需丧尸或类丧尸末世世界基线；门体与撤离路线由地点画像承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:044
+    reason: 生存围困轴核定：尸潮机制由世界设定承载，围困由地点组合兑现而非引擎保证。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-09c5a5678f7c5865b6092abc1627860f
+  source_hash: 5b7b20f026ef4b0bf98335d99ce1da1ed19c8f62a1c02876097f85bf6df03628
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 配给断供
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 配给与生计
+    technology_boundary: 需配给制或票券制度的世界基线，物资与库存由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:045
+    reason: 配给轴核定：断供影响面由制度承载，替代来源保留，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-12e32cbf4cab55869da228e0d77c63a1
+  source_hash: 31e649312f9df7e74b16ac2e16619ecf25f3c676b07bd82a187fa115004541c5
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 皮套掉落危机
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 虚拟身份
+    technology_boundary: 需虚拟形象直播技术（动捕、账号体系），身份公开规则由技术基线承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:047
+    reason: 虚拟身份轴核定：掉马预设线上人格环境，账号权属与公开边界由组合给定。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-dac80387cc915621a394c10dc6ce37f3
+  source_hash: 320bb70885689ea86f88216939678f326885d132e4e34f4dc8b111e4da916c4c
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 同人展截稿死线
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 出版与期限
+    technology_boundary: 需现代同人展与自费印刷流程，截稿数值不由引擎名携带。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:048
+    reason: 创作期限轴核定：死线对象是稿件交付，期限数值与逾期后果由组合与开局事件承载。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-0148b55415815e1c9f896967394626a2
+  source_hash: 4d7d1ca775a9faa4fcaa4b133daa3a8e6721945bd16339c2ccc118e40c47efb0
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 契约魔力枯竭
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 魔力与契约
+    technology_boundary: 需魔力体系世界基线，消耗与补充机制由框架或世界常量给定，保留非接触替代。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:049
+    reason: 术法契约轴核定：枯竭量值由世界设定承载，补给不绑定身体接触，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-783432e0082e5e16b87ce3b4d96ce680
+  source_hash: b667e02d63ec25f1f07b72345258803a77b135e5abecf307bfa6661bd93c2c38
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 伪装情侣营业
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 演出与关系
+    technology_boundary: 抽象假面关系轴，双方自愿协议与对外信息边界由关系参数承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:050
+    reason: 假面关系轴核定：伪装以双方协议成立，期限与退出保留，不制造真实感情授权。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-bff861ef51115e089e96ed0de7d26e0e
+  source_hash: d936af91fadf716dec6ac86401f5c8e1b5dd4d2e713b7a7cd5386f8825b913a6
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 绝对不能先告白
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 恋爱与约定
+    technology_boundary: 抽象恋爱约定轴，约定由来与违约后果由当事人约定承载，限成年人之间。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:051
+    reason: 恋爱约定轴核定：告白禁令是当事人规则，不覆盖玩家明确指令与撤回，成人向成立。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-213bfbb400935a6fa0eeecb59520f872
+  source_hash: 688fb9e065a7ce4cad6ed01aeca568d3a8b7555eceea08ba9da6fdc74c6511a5
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 魔力补给契约
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 术法与供给
+    technology_boundary: 需魔力体系世界基线，补给渠道与代价由框架给定，保留非亲密补给路径。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:052
+    reason: 术法供给轴核定：补给不由身体接触强制成立，渠道由组合提供，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f65e6eebaf105b4195f304c2a34a4fa3
+  source_hash: bdc98c217bed7d3f723b787d592b2d66000cb2e99d949fb9e4bd53fc9efd372e
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 同居三章越界
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 同居与边界
+    technology_boundary: 抽象同居边界轴，守则文本与修改程序由当事人约定承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:053
+    reason: 同居边界轴核定：三章内容留空，越界不预设隐私或日程许可，撤回路径保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-104bdce6374e5e37ac232206864d0856
+  source_hash: cdb7639930f7fe28a9cbbe5872c9f07bfa1ac32f31a0396f6d04ad479b414773
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 败犬青梅复仇战
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 旧关系与竞争
+    technology_boundary: 抽象旧识竞争轴，当下均为成年人，青梅仅指旧识往史，复仇动机独立成立。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:054
+    reason: 旧识竞争轴核定：往史限成年当下，复仇不以角色被贬低为前提，竞争对象由组合给定，无未成年指向。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-eb1ac6c2251659d791869a451386b38b
+  source_hash: 9f33c7e8f1610d7230fc0f077a505f938629c425a7cfedcab876d26ab315c407
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 绝对禁止恋爱条约
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 组织与恋爱禁令
+    technology_boundary: 抽象组织禁令轴，适用成年职场、公司或公会语境，禁令效力与退出由组织设定承载。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:055
+    reason: 组织禁令轴核定：禁令主体是成年组织成员，与个人选择的张力由叙事承载，不用于学校语境。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-da4fa83d090952e7900f352a2000c121
+  source_hash: c459389d78888c67f2bc66f59af6fbe99a52a4d2fc6530a5e137aa9d98b60aa9
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 双重马甲互掉现场
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 身份揭示
+    technology_boundary: 需双身份与信息相遇的现场条件，信息流由组合给定；属杠杆名单，防双杠杆。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:056
+    reason: 身份互揭轴核定：互掉顺序与代价由组合承载，杠杆标记只约束抽样，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-521d0eda20a657dab034b2315e5581fb
+  source_hash: 547272b68a3c10673c7999b2ed0150183f8cb762bf44f205e57d2a05621e48c2
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 长明灯灭与起尸倒计时
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 墓葬异常与时限
+    technology_boundary: 需镇墓术法与起尸机制的世界基线，灯火燃料与截止由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:058
+    reason: 墓葬期限轴核定：灯灭与起尸的因果由世界设定承载，倒计时对象是尸体异动而非泛化时限。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-8d01fdfd7f7a5541a680188a83f6f21c
+  source_hash: 2a99d961d5c2ed99bc132c95b22ba9df532dd3ff66720bf57b8079f1a850f8e0
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 生门死门风水罗盘抉择
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 民俗探险
+    technology_boundary: 需风水机关术的世界或民俗基线，罗盘原理与出口由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:059
+    reason: 民俗机关轴核定：生死门可靠性不由标签保证，地图与可核验出口由组合提供。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-c5de59c8132550a1a6d31c4635fbb22b
+  source_hash: 979a16885e68b609d2c9dd611c96de49a4c630bff8e5ba56c5ab595ec8905e05
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 同行队伍里的身份疑云
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 队伍与信息
+    technology_boundary: 抽象队伍信任轴，成员与怀疑依据由身份族组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:060
+    reason: 队伍信任轴核定：疑云不机械安排背叛，证据与误认由组合提供，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-a59a972fdd0c5206a4da26eea19f1c61
+  source_hash: adcb09db2311b151703a369202b7e74d02e5ef8a7753e10b14b5fed6d4e7997b
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 血脉压制的镇物争夺
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 血脉与物件
+    technology_boundary: 需血脉术法世界基线，镇物作用与争夺主体由框架或世界常量给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:061
+    reason: 血脉物件轴核定：压制范围由世界设定承载，可抵抗机制保留，组合无冲突。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-1828fb9b60ab56d4b849d2cf4a546c91
+  source_hash: 4e2f8cd838e0a732cefbf3eb30ab946d70340e7874787036773235e6bc8bb8ce
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 梦魇驯兽锁链断裂危机
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 驯养与异常危机
+    technology_boundary: 需异常生物驯养的世界基线，生物能力与现场处置由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:062
+    reason: 驯养危机轴核定：断链后果由现场承载，撤离与处置路径保留，轴义自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-f0ce3cb2ff9b5f15ad75a64a8ca4208c
+  source_hash: 05f1b8c1d01b1e2bb97b3ac7a1aa77e25176e1d8a7d960bb1ab5ff30c55ee74b
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 贵族仇敌前台就座复仇
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 演艺与复仇
+    technology_boundary: 需公开演艺场合与贵族座序的社会结构，仇怨证据由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:063
+    reason: 演艺复仇轴核定：就座只给空间位置，处理方式不由引擎强制，非强制行动保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-463ad0d2bcae558d92f4ee7d6e0fe34d
+  source_hash: 2ba4c75459300fdf24984b52cf2fffbf1b633ada7f1cd1dcdaeb1a379545db14
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 蜃景坍塌与沙海掩埋倒计时
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 沙漠灾害
+    technology_boundary: 需异常沙漠地理（蜃景）世界基线，出口与倒计时由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:064
+    reason: 沙漠灾害轴核定：异常与物理灾害分别由世界设定与地理承载，求生路径由组合提供。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-ecd0c2884d3d5cf0a6b0762801f3b277
+  source_hash: 4782c5b0d809ae2579731f0489887dca56addf859e03f7cdc927647730bde9fb
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 真名契约与记忆典当交割
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 真名与记忆交易
+    technology_boundary: 需真名术法体系世界基线，条款可理解、代价与返还制度由框架给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:065
+    reason: 真名交易轴核定：典当由成年当事人自主成立，撤销与返还路径保留，不通用化鬼市规则。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-408c9f0f8812562eaa81f940eaf37e43
+  source_hash: 028c5d34ce132a615844ac70f6d033144626440a31e139137831cd02bd9cddda
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 天枢锁妖大阵灵气逆流
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 城市术法
+    technology_boundary: 需都市修真设定（城市级阵法与灵气体系），波及范围由框架给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:066
+    reason: 城市术法轴核定：大阵是特定世界设施，维护人与波及范围由框架承载，不由笼统城市标签承接。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-5fdcd567e02f5a9b8a4d3e4e1d7bb354
+  source_hash: 064e1e743843d9b98c5158523c6b8c92f7732b5f9457c7f0d83a3101371c59f2
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 妖丹寄生与人妖双魂争夺
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 身份与双重意识
+    technology_boundary: 需妖类与寄生体系世界基线，意识主体与退出可能由框架给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:067
+    reason: 双魂自主轴核定：主体界限由世界设定承载，不套用普通人格冲突，退出可能保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-97217c5229e156f7b3aa92aa8e1b680f
+  source_hash: 6e94688b21a5278e926ca48c9bb68a3ae7bd67edbe02bacbc702ac7155b83594
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 联邦探员突击封门搜查
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 禁酒执法
+    technology_boundary: 需联邦制与禁酒法域（如 1920 年代美国），搜查权限与场所证据由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:068
+    reason: 执法突袭轴核定：联邦建制由时代承载，当前无引擎级时代门禁属源缺陷，轴义本身自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-2d3e0925357756cca86e5fd3442ee2b1
+  source_hash: d1f25fc40143448b49042cc25d4eb1b61def69a57013c07bfd3db90ddc23f9b6
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 黑帮教父暗账审计之夜
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 组织账务
+    technology_boundary: 需现代帮派组织基线，账本与审计者由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:069
+    reason: 组织账务轴核定：审计是组织内事件，与当前人物的关联由组合承载，调查边界保留。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-e00a94ba99c05149ad7bc6aee9798971
+  source_hash: d5bea2990c014103b7a5de63d0611e349e7d8ac4f0d795c6638b5b114991ca3f
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 池田屋突袭前夜密函截获
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 幕末政治事件
+    technology_boundary: 需幕末京都（1864 池田屋事件）历史坐标，密函与派系由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:070
+    reason: 历史事件轴核定：具体日期与派系不由笼统时代标签承接，无引擎级时代门禁属源缺陷，轴义本身自洽。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
+- id: mat-6d49397ce5aa551ca9c36bb73a25155b
+  source_hash: 0d11c8d992d6cdbd9f75bcbd63d54f95f7d9d7fd4708011b519286a7acba3c5c
+  source:
+    file: pools.yaml
+    path:
+    - 张力引擎
+    label: 刺客身份被同枕之人识破
+    kind: pool
+  status: KEEP_LEGACY
+  modes:
+  - pressure
+  owners:
+  - consumer:roll_opening.build_roll#张力引擎
+  - consumer:roll_opening.apply_daily_roll#张力引擎
+  - consumer:build_opening.build_skeleton.tension_engines
+  - consumer:fill_opening.fill_opening#张力引擎
+  - consumer:validate_state.validate_world.tension_engines
+  - consumer:live_slice.extract_live_slice.tension_engines
+  - consumer:live_slice.opening_brief.tension_engines
+  - consumer:world_frameworks.candidates#张力引擎
+  - consumer:world_frameworks.build#张力引擎
+  compatibility:
+    eras: []
+    places: []
+    themes:
+    - 身份与亲密隐私
+    technology_boundary: 抽象亲密身份轴，同枕关系由成年自愿事实承载，识破信息来源由组合给定。
+  restrictions:
+    frozen: false
+    restricted: null
+    reason: 按本条文本与组合参数一致性保留，不扩散为组合授权。
+  review:
+    scope: governance:bridge:g03:071
+    reason: 亲密身份轴核定：同枕不预设授权，揭示与安全退出由叙事承载，限成年人之间。
+    release: governance-1
+    reviewer: dsh/governance-bridge-g03
+    evidence: maintenance/core_review_evidence.md
+    disposition: unit_scope_only
