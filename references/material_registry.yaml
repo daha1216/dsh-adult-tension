@@ -39346,7 +39346,7 @@ entries:
     owners:
     - consumer:roll_opening.load_pools#meta.leverage_engines
     - consumer:roll_opening.leverage_engines
-    - consumer:check_content.run#meta.leverage_engines
+    - consumer:check_content.check#meta.leverage_engines
     compatibility:
       themes:
       - 压力引擎开关
@@ -39381,7 +39381,7 @@ entries:
     owners:
     - consumer:roll_opening.load_pools#meta.situation_leverage
     - consumer:roll_opening.situation_leverage
-    - consumer:check_content.run#meta.situation_leverage
+    - consumer:check_content.check#meta.situation_leverage
     compatibility:
       themes:
       - 强杠杆处境
@@ -39416,7 +39416,7 @@ entries:
     owners:
     - consumer:roll_opening.load_pools#meta.gate_aesthetics
     - consumer:roll_opening.gate_aesthetics
-    - consumer:check_content.run#meta.gate_aesthetics
+    - consumer:check_content.check#meta.gate_aesthetics
     compatibility:
       themes:
       - 写实门控
@@ -39451,7 +39451,7 @@ entries:
     owners:
     - consumer:roll_opening.load_pools#meta.timed_situations
     - consumer:fill_opening.fill_opening#meta.timed_situations
-    - consumer:check_content.run#meta.timed_situations
+    - consumer:check_content.check#meta.timed_situations
     compatibility:
       themes:
       - 时限处境标记
@@ -39491,7 +39491,7 @@ entries:
       owners:
       - consumer:roll_opening.load_pools#meta.timed_situations
       - consumer:fill_opening.fill_opening#meta.timed_situations
-      - consumer:check_content.run#meta.timed_situations
+      - consumer:check_content.check#meta.timed_situations
       review:
         scope: noncore:pools:40
         reason: P2 legacy 契约：timed_situations 35 项全部 ∈ 处境侧池，fill_opening L452-456 依其判定 timed 开局标记；条目跨时代混编（当代/废土/古风等）与处境侧池同名一致，维持
@@ -39554,7 +39554,7 @@ entries:
       owners:
       - consumer:roll_opening.load_pools#meta.timed_pressures
       - consumer:fill_opening.fill_opening#meta.timed_pressures
-      - consumer:check_content.run#meta.timed_pressures
+      - consumer:check_content.check#meta.timed_pressures
       review:
         scope: noncore:pools:41
         reason: P2 legacy 契约：timed_pressures 31 项全部 ∈ 压力来源池（共 74 项），fill_opening L452-456 依其判定 timed 开局标记；跨时代条目与压力来源池同名一致，维持
@@ -39619,7 +39619,7 @@ entries:
       - consumer:roll_opening.load_pools#meta.location_eras
       - consumer:roll_opening.build_roll#meta.location_eras
       - consumer:check_material_compatibility.audit#meta.location_eras
-      - consumer:check_content.run#meta.location_eras
+      - consumer:check_content.check#meta.location_eras
       review:
         scope: noncore:pools:42
         reason: P2 legacy 契约：location_eras 31 地点全部 ∈ 地点池、时代全部合法（load L356-361 与 check_material_compatibility L20-27
@@ -39646,7 +39646,7 @@ entries:
     - pressure
     owners:
     - consumer:roll_opening.build_roll#meta.aesthetic_eras
-    - consumer:check_frameworks.audit#meta.aesthetic_eras
+    - consumer:check_frameworks.check_frameworks#meta.aesthetic_eras
     - consumer:check_material_compatibility.audit#meta.aesthetic_eras
     compatibility:
       themes:
@@ -39726,7 +39726,7 @@ entries:
         technology_boundary: 兼容规则只约束时代/地点维度，不绑定技术水平
       owners:
       - consumer:roll_opening.build_roll#meta.material_compatibility
-      - consumer:roll_opening.compatibility_reasons#meta.material_compatibility
+      - consumer:roll_opening.apply_daily_roll#meta.material_compatibility
       - consumer:world_frameworks.build#meta.material_compatibility
       review:
         scope: noncore:pools:44
@@ -39760,7 +39760,7 @@ entries:
         technology_boundary: 兼容规则只约束时代/地点维度，不绑定技术水平
       owners:
       - consumer:roll_opening.build_roll#meta.material_compatibility
-      - consumer:roll_opening.compatibility_reasons#meta.material_compatibility
+      - consumer:roll_opening.apply_daily_roll#meta.material_compatibility
       - consumer:world_frameworks.build#meta.material_compatibility
       review:
         scope: noncore:pools:44
@@ -39851,7 +39851,7 @@ entries:
     owners:
     - consumer:roll_opening.load_pools#meta.identity_weights
     - consumer:roll_opening.identity_weights
-    - consumer:check_content.run#meta.identity_weights
+    - consumer:check_content.check#meta.identity_weights
     compatibility:
       themes:
       - 身份族权重
@@ -39887,7 +39887,7 @@ entries:
     - consumer:roll_opening.load_pools#场景动作分类
     - consumer:roll_opening.build_roll#场景动作分类
     - consumer:world_frameworks.build#场景动作分类
-    - consumer:check_frameworks.audit#activities.category
+    - consumer:check_frameworks.check_frameworks#activities.category
     compatibility:
       themes:
       - 信息核验
@@ -39923,7 +39923,7 @@ entries:
     - consumer:roll_opening.load_pools#场景动作分类
     - consumer:roll_opening.build_roll#场景动作分类
     - consumer:world_frameworks.build#场景动作分类
-    - consumer:check_frameworks.audit#activities.category
+    - consumer:check_frameworks.check_frameworks#activities.category
     compatibility:
       themes:
       - 信息交换
@@ -39959,7 +39959,7 @@ entries:
     - consumer:roll_opening.load_pools#场景动作分类
     - consumer:roll_opening.build_roll#场景动作分类
     - consumer:world_frameworks.build#场景动作分类
-    - consumer:check_frameworks.audit#activities.category
+    - consumer:check_frameworks.check_frameworks#activities.category
     compatibility:
       themes:
       - 照护修复
@@ -39996,7 +39996,7 @@ entries:
     - consumer:roll_opening.load_pools#场景动作分类
     - consumer:roll_opening.build_roll#场景动作分类
     - consumer:world_frameworks.build#场景动作分类
-    - consumer:check_frameworks.audit#activities.category
+    - consumer:check_frameworks.check_frameworks#activities.category
     compatibility:
       themes:
       - 空间边界
@@ -40039,7 +40039,7 @@ entries:
       - consumer:roll_opening.load_pools#场景动作分类
       - consumer:roll_opening.build_roll#场景动作分类
       - consumer:world_frameworks.build#场景动作分类
-      - consumer:check_frameworks.audit#activities.category
+      - consumer:check_frameworks.check_frameworks#activities.category
       review:
         scope: noncore:pools:49
         reason: P1 框架链：类目「空间与退出」被 23 个框架 activities.category 按名引用（框架模式 world_frameworks.build L105 重建场景动作分类，check_frameworks
@@ -40067,7 +40067,7 @@ entries:
     - consumer:roll_opening.load_pools#场景动作分类
     - consumer:roll_opening.build_roll#场景动作分类
     - consumer:world_frameworks.build#场景动作分类
-    - consumer:check_frameworks.audit#activities.category
+    - consumer:check_frameworks.check_frameworks#activities.category
     compatibility:
       themes:
       - 第三方介入
@@ -40103,7 +40103,7 @@ entries:
     - consumer:roll_opening.load_pools#场景动作分类
     - consumer:roll_opening.build_roll#场景动作分类
     - consumer:world_frameworks.build#场景动作分类
-    - consumer:check_frameworks.audit#activities.category
+    - consumer:check_frameworks.check_frameworks#activities.category
     compatibility:
       themes:
       - 日常亲近
@@ -40146,7 +40146,7 @@ entries:
       - consumer:roll_opening.load_pools#场景动作分类
       - consumer:roll_opening.build_roll#场景动作分类
       - consumer:world_frameworks.build#场景动作分类
-      - consumer:check_frameworks.audit#activities.category
+      - consumer:check_frameworks.check_frameworks#activities.category
       review:
         scope: noncore:pools:51
         reason: P1 框架链：类目「日常接触」被 25 个框架 activities.category 按名引用（框架模式 world_frameworks.build L105 重建场景动作分类，check_frameworks
@@ -40245,7 +40245,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40283,7 +40283,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40321,7 +40321,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40359,7 +40359,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40397,7 +40397,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40435,7 +40435,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40473,7 +40473,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40511,7 +40511,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40549,7 +40549,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40587,7 +40587,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40625,7 +40625,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40663,7 +40663,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40701,7 +40701,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40739,7 +40739,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40777,7 +40777,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40815,7 +40815,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40853,7 +40853,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40891,7 +40891,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40929,7 +40929,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -40967,7 +40967,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -41005,7 +41005,7 @@ entries:
     - consumer:roll_opening.build_roll#场景动作元数据
     - consumer:fill_opening.load_tables#action_metadata
     - consumer:fill_opening.fill_opening#action_metadata
-    - consumer:check_content.run#action_metadata
+    - consumer:check_content.check#action_metadata
     compatibility:
       themes:
       - 场景动作元数据
@@ -122590,8 +122590,8 @@ entries:
     - daily
     - pressure
     owners:
-    - consumer:check_frameworks.audit#version
-    - consumer:build_frameworks.build#version
+    - consumer:check_frameworks.check_frameworks#version
+    - consumer:build_frameworks.aggregate#version
     compatibility:
       themes:
       - 开局框架治理
@@ -122628,8 +122628,8 @@ entries:
     - pressure
     owners:
     - consumer:roll_opening.load_pools#legacy_weight
-    - consumer:check_frameworks.audit#legacy_weight
-    - consumer:build_frameworks.build#legacy_weight
+    - consumer:check_frameworks.check_frameworks#legacy_weight
+    - consumer:build_frameworks.aggregate#legacy_weight
     compatibility:
       themes:
       - 开局框架治理

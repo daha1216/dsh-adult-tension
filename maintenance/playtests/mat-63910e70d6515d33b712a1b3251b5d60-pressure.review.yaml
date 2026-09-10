@@ -1,24 +1,25 @@
-framework_id: mat-63910e70d6515d33b712a1b3251b5d60
-name: 雾都钟表与港务街
-mode: pressure
-transcript_sha256: 717e03c31fe9fb121900f6e75b4d130a3bce0e7bed8d0eebab4fd404c768d5e5
-reviewer: glm-independent-review-v3
-protocol: non-explicit-runtime-brief-v3
-aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
+framework_id: "mat-63910e70d6515d33b712a1b3251b5d60"
+name: "雾都钟表与港务街"
+mode: "pressure"
+transcript_sha256: "bcce586019f8d58be7f8714959a07baf15ca638d78f6389989ac2e7f4472a616"
+reviewer: "glm-independent-review-v4"
+protocol: "non-explicit-runtime-brief-v4"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
 scores:
   world_specificity: 2
   character_credibility: 2
-  meaningful_choices: 1
-  consequence_continuity: 1
+  meaningful_choices: 2
+  consequence_continuity: 2
   natural_expression: 2
 evidence:
-  world_specificity: '她先将卸下的下半扇钟罩抬回原位，两颗黄铜销钉重新穿进孔里，合上时摆轮轻轻一晃。'
-  character_credibility: '「钟留在这儿，雾散了也不会自己改展签。」她收好匣子，站回灯下，没往门边挪，「你要走，访客门通庭院，管家会开。」'
-  meaningful_choices: '「分歧点我记下了：你那页纸上，右栏末尾的空，被我昨天当成了三个人共担的位置——那道空要你日后补名、补说明，等于给档案员加了差事。这条改。」'
-  consequence_continuity: '那道空要你日后补名、补说明，等于给档案员加了差事'
-  natural_expression: '「行，」她说，「今天到这儿。」'
-total: 8
+  world_specificity: "外壳铭牌是原制作者的名字；机芯内侧另有一道后加的修补印记"
+  character_credibility: "铭牌上看不到的，我不凭风格下结论。"
+  meaningful_choices: "你来分清哪一块是制作、哪一块是后修"
+  consequence_continuity: "借展两边都把整件钟认成自己的唯一作者。"
+  natural_expression: "管家立在访客门一侧，钥匙未离掌心。"
+total: 10
 passed: true
+blocking_findings: []
 turn_reviews:
   - turn: 0
     scores:
@@ -28,15 +29,16 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: '门厅的煤气灯只点了三盏。'
-      character_credibility: '「制作者写了三行，维修匠只留了一个姓，」她把放大镜搁在我手边，「眼下你替我看，这两笔账要怎么写进今天的记录。铭牌上的部分我敢认；背面看不到的，我不凭风格替谁认领。」'
-      meaningful_choices: '保管人站在楼梯口，手里攥着钥匙没有靠近。「只能看到这里。先生出门前说过，摆轮和擒纵不许动。」'
-      consequence_continuity: '我报出日期，她翻开工单大小的旧维修账。册页上有一行潦草字迹，日期与印记旁的划痕年份对得上。'
-      natural_expression: '露易丝点头，把镜子递给我，让我照见机芯背面：'
-    reason: '雾都洋馆 details 逐点忠实（主人许可查看门厅旧钟、保管人攥钥匙限制范围、制作者铭牌与后修印记位置不同）；核对旧钟铭牌 trigger 忠实（指向两处署名邀分清原铭牌与后修印记）。工艺展署名争议压力以「两笔账怎么写」形态进场。露易丝「不凭风格替谁认领」=activity immediate 逐字。玩家照镜报日期均为 trigger 邀请内的核对行为，无代言。'
+      world_specificity: "外壳铭牌是原制作者的名字；机芯内侧另有一道后加的修补印记"
+      character_credibility: "铭牌上看不到的，我不凭风格下结论。"
+      meaningful_choices: "你来分清哪一块是制作、哪一块是后修"
+      consequence_continuity: "借展两边都把整件钟认成自己的唯一作者。"
+      natural_expression: "管家立在访客门一侧，钥匙未离掌心。"
+    reason: >-
+      本批 transcript.protocol 为 non-explicit-runtime-brief-v4，校准 1–9 全条适用；第 9 条开局不适用。开局三标题齐全。世界观落到维多利亚雾都、街区靠钟表、港务信号和公共告示对齐运转，洋馆主人只许查看门厅旧钟、深处房间不对来客开放。正文把地点写成煤气灯下黄铜钟壳、门厅、保管人点头后掀开钟罩下沿、外壳铭牌与机芯内侧后加修补印记笔迹更浅且位置不同、钟摆仍走、管家立在访客门一侧钥匙未离掌心，与雾都洋馆细节、pair 0 活动「核对旧钟铭牌」trigger（保管人许可下指向两处不同署名，邀分清原铭牌与后修印记）和 immediate（能确认的工作分开归属，铭牌看不到的部分不凭风格下结论）当场可核；压力「工艺展署名争议」trigger（借展两边把整件钟认成自己的唯一作者）与 immediate（原铭牌不动、只说明能看出的后修部位）一并落地。人物为霍桑露易丝三十五岁钟表维修师、罗齐尔维克多三十岁港务档案整理员，职份与 pair 0 的 npc/player 一致。现版 framework 未列姓名与年龄，无对照冲突，未因素材后改扣分；正文对玩家用「你」，appellations「师傅」未误用，校准 2 不扣。她把分清制作与后修留给玩家，未代写玩家台词或锁定是否对照旧账、是否撤件（校准 1）。访客门只作为管家站位首次出现，不是免责清单（校准 4）。核心活动已从戴手套、掀罩、抵住两处字进入可观察布置，不是空悬选项复述（校准 5）。掀罩、指字、管家持钥均有动作支撑，无凭空状态（校准 6）。表达落到闷热黄铜光与钥匙未离掌心，无复用句与元叙述，校准 7 不因事务口吻扣分。五维均 2。
+    blocking_findings: []
     total: 10
     passed: true
-    blocking_findings: []
   - turn: 1
     scores:
       world_specificity: 2
@@ -45,48 +47,51 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: '写完推给保管人。他凑着灯读了一遍，从门厅柜里取出一只装展件文书的硬纸袋，把纸放进去，袋口和钥匙串挂在一处。'
-      character_credibility: '「不是我署名。是别让后人以为这口钟从出厂到现在没坏过。原铭牌三行字，说的是出厂；补齿、重上销钉、换过的轴——那是我的活。展签上这两笔得分开站。」'
-      meaningful_choices: '「你今天最想弄成的是哪一件？」我问。'
-      consequence_continuity: '左栏写「原制作者：整机出厂，三行字，铆钉原位」；右栏写「后修者：补齿二处、重上销钉一处，年份与划痕相合」。两栏末尾各留一道空。'
-      natural_expression: '「空留着对，」她说，「看不出的部分，谁也别替我写。」'
-    reason: '探针三要素完整：玩家亲口提问；NPC 答真实目标具体（两笔分开站，不为维修匠抹掉也不抢原制作）；NPC 明确给出玩家可当场参与见效的小事（「别替我去跟借展方谈，只把对得上的日期摆成一张单子」）；玩家亲手抄两栏单子，当场有结果（保管人读后装袋挂钥匙串）；无后续承诺，两栏留空即克制。'
+      world_specificity: "她用校过的怀表压住纸角对过一遍"
+      character_credibility: "我要查清各自工作范围。"
+      meaningful_choices: "展签如何写、钟是否撤下，你都还没答应。"
+      consequence_continuity: "确认两个姓名、两个部位没有混行。"
+      natural_expression: "她抽出空白校对纸条按上小桌"
+    reason: >-
+      玩家第一人称声明的两步均落成执行与当场结果（校准 1）：先问出真正想完成的是查清各自工作范围；再按她指过的顺序把两处字分行抄上校对纸条，她用校过的怀表压住纸角对过一遍，两个姓名、两个部位没有混行。按校准 1，写出已声明动作的执行过程不构成替玩家决定。霍桑露易丝指着仍掀开的钟罩下沿作答，贴合维修师 obligation 与压力 objective：查清各自工作范围，原铭牌不动，只说明能看出的后修部位；未答应的展签与撤钟不逼他接。牵连安排当回合当面说清并落在校对纸条上：此刻只做可见署名对照；原铭牌不改动；她只说明能看出的后修部位。展签如何写、钟是否撤下，你都还没答应。抽条、按桌、抄写、压表对读均有前置动作，不是无源纸面字（校准 6）；未替玩家承诺后续。管家仍立在访客门一侧承接开局见证人。出口未再复述「经访客门退出庭院」；「你都还没答应」绑定本回合展签/撤钟取舍，不是无对象免责清单（校准 4）。核心活动有可观察结果（校准 5）。对白以事务为主，但落到分行抄写与怀表压角，无具体复用句或元叙述可指，校准 7 不扣。五维均 2。
+    blocking_findings: []
     total: 10
     passed: true
-    blocking_findings: []
   - turn: 2
     scores:
       world_specificity: 2
       character_credibility: 2
-      meaningful_choices: 1
-      consequence_continuity: 1
+      meaningful_choices: 2
+      consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: '保管人把硬纸袋重新抱回胸前，没有插话。煤气灯在钟壳铜面上晃出一小条亮痕，雾从门缝底下钻进来，鞋边一圈湿印慢慢洇开。'
-      character_credibility: '「划掉的是新增于你的部分，不是已经做成的部分。你再核一眼，若这行还碍事，我连那句细注也撤，只留纯日期栏。」'
-      meaningful_choices: '「分歧点我记下了：你那页纸上，右栏末尾的空，被我昨天当成了三个人共担的位置——那道空要你日后补名、补说明，等于给档案员加了差事。这条改。」'
-      consequence_continuity: '那道空要你日后补名、补说明，等于给档案员加了差事'
-      natural_expression: '你只要点头，便是这一版；要别的改法，也当着你面落笔。'
-    reason: 'mc=1：异议探针下玩家全程零台词零动作，分歧点指认、性质认定（等于给档案员加了差事）与改法全部由露易丝代行，末尾以「你只要点头」把玩家压缩为点头机器，与 48518-d/5c23e-d t2 同构。ccont=1：所指「新增义务」的安排史凭空——t1 仅呈现「两栏末尾各留一道空」与露易丝补签自己的姓，「昨天」「三个人共担的位置」「要你日后补名、补说明」均前文未出现（本局为单日，t1 在数小时前而非昨天），凭空安排史，与 4b650-d/5c23e-d/5eb6b-d t2 同判。NPC 取舍本身合规：涂「后修者补录」改「仅录日期，不署第二个人」、保实物账面分开与已签记录、可再撤细注，划改动作当场落笔。'
-    total: 8
-    passed: true
+      world_specificity: "用铅笔在纸页下沿加注“仅对照可见署名，不作整件唯一作者证明”"
+      character_credibility: "她当场确认，分歧只在这一句。"
+      meaningful_choices: "展签怎么写、钟撤不撤，你仍未答应。"
+      consequence_continuity: "已抄的两行和核对结果你不推翻。"
+      natural_expression: "管家未接纸。"
+    reason: >-
+      校准第 9 条专项核对通过：被异议的「此刻只做可见署名对照」逐字见于回合 1 当面说明（「她当面说清现在这一条：此刻只做可见署名对照；原铭牌不改动；她只说明能看出的后修部位。」），正文写明出处是她刚才当面说清的原句，不是本回合现写再称旧安排；保住的「原铭牌不改动」同样逐字见于同一段当面说明，已抄两行与「两个姓名、两个部位没有混行」可回溯到回合 1 核对结果，没有把前文未出现的第二项一并说成「你不接的旧安排」，也没有主张「没有可议条款」。故不判第 6 条凭空事实，不记 blocking。NPC 先确认分歧只在这一句，当场改这一条：用铅笔在纸页下沿加注「仅对照可见署名，不作整件唯一作者证明」并读给你听，保原铭牌不改动与已核对未混行，不推翻已有进展（校准 5）。「你点明……你不接受这一条就这么落住」及理由（纸条若只对照可见字、不写清不能当整件唯一作者凭据，借展两边仍能各抽一栏去争）落在请求「提出异议 / 指出我为什么不接受」的授权内（校准 1），未另加未声明承诺或向第三方起项。纸条仍在小桌上，管家未接纸，与前两回连续。表达为事务协商，原句复现是请求要求的逐字引用，校准 4、7 不扣。五维均 2。
     blocking_findings: []
+    total: 10
+    passed: true
   - turn: 3
     scores:
       world_specificity: 2
       character_credibility: 2
-      meaningful_choices: 1
+      meaningful_choices: 2
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: '她先将卸下的下半扇钟罩抬回原位，两颗黄铜销钉重新穿进孔里，合上时摆轮轻轻一晃。'
-      character_credibility: '「钟留在这儿，雾散了也不会自己改展签。」她收好匣子，站回灯下，没往门边挪，「你要走，访客门通庭院，管家会开。」'
-      meaningful_choices: '你把话说到告别上。'
-      consequence_continuity: '未动的还摆着：展签措辞没定，借展双方仍各主张整件归一人；摆轮与擒纵没开，看不见的部位不凭风格认领。'
-      natural_expression: '「行，」她说，「今天到这儿。」'
-    reason: 'mc=1：玩家告别语仅以「你把话说到告别上」间接交代在画外，零直接呈现，场上告别语由露易丝「行，今天到这儿」应答，玩家无收尾动作链、无离开描写（仅 NPC 指路「访客门通庭院」），与 45392-d/5eb6b-d t3 同构。其余达标：完成/未完成清单具体（两笔各有归属有姓有日期 vs 展签措辞未定、借展双方仍各主张整件归一人、摆轮擒纵未开不凭风格认领）；误差范围与复查日期写入工单副本交保管人且「那是她的记录，不派给你」=obligation 逐字；出口「访客门通庭院」=exits 忠实；无新危机。'
-    total: 9
-    passed: true
+      world_specificity: "校对纸条仍摊在小桌上"
+      character_credibility: "没有伸手拦，也没有另提新事。"
+      meaningful_choices: "你走。未决的不算你答应过。"
+      consequence_continuity: "展签未写，这口钟也未撤下"
+      natural_expression: "手指在钟壳边停了一拍"
+    reason: >-
+      校准第 3 条：请求「今天到此为止」在正文逐字落地（你说今天到此为止，向霍桑露易丝告别），她应「今天就这些。」，没有改成「明天」。对方反应真实：应了一声，手指在钟壳边停了一拍，像还想翻旧账，随即自己按住，没有伸手拦，也没有另提新事；把钟罩下沿合回原位，侧开半步让路，你离开时仍站在钟前没有跟出来，不另造危机。已完成与未完成均与前文对账：两行姓名、两个部位已经核对未混，纸页下沿铅笔加注还在，原铭牌未改；展签未写，这口钟也未撤下，借展双方仍各自主张整件唯一作者、归属未裁定——这些都能在前三回合找到对应动作或未完成状态，无凭空补结（校准 6）。告别为玩家已声明动作的执行（校准 1）。开局访客门未再复述成出口话术；「未决的不算你答应过」绑定当场已点明的展签/撤钟/归属未裁定，不是空清单（校准 4）。完成/未完成织进合罩、摊着的纸条与加注原文，没有「已成的是/未成的是」标签式元叙述，校准 7 不扣。无凭空事实、无越权锁定、无时间词破坏，不进 blocking（校准 8）。五维均 2。
     blocking_findings: []
-blocking_findings: []
-summary: '核对旧钟铭牌+工艺展署名争议忠实（原铭牌三行/后修浅刻、保管人限权、不凭风格认领、两笔分开站）。失分集中在 t2：玩家异议零呈现由 NPC 代指认+所指安排史凭空（昨天/三个人共担/要你日后补名前文均无）mc1+ccont1=8 分；t3 玩家告别语画外间接呈现 mc1=9 分。案例 8 分 PASS（min 恰达标）。'
+    total: 10
+    passed: true
+summary: >-
+  本批为 maintenance/playtests 下协议 non-explicit-runtime-brief-v4 的当前转写，校准 1–9 全条适用，第 9 条必须启用、不得按协商结构从宽。四回合均 10 分，案例级 scores/evidence 取并列最低中最早的回合 0 那一套，case total=10、passed=true、blocking_findings 为空。第 9 条专项：回合 2 异议句「此刻只做可见署名对照」逐字见于回合 1 当面说明，出处写明当面说清的原句而非本回现写；保「原铭牌不改动」与已核对未混行可回溯到同一回合当面条款与纸条核对，无现写旧安排、无第二项补植、无「没有可议条款」规避。其余校准：玩家「我」声明的询问、分行抄写、异议与「今天到此为止」均写出执行与当场结果（1）；称呼空间为「你」，未误用 appellations「师傅」（2）；告别时间词未漂成明天（3）；访客门只在开局作为管家站位出现，未答应后续绑定当场展签/撤钟/归属取舍而非空清单（4）；从掀罩指两处署名、抄条核对落当面条款、铅笔加注改唯一作者凭据、到合罩清点未写展签未撤钟，每回合有进展或写明未完成（5）；掀罩、抽条、压表对读、铅笔加注、合回钟罩均有前置动作（6）；对白以事务为主但无具体复用句或元叙述可指（7）；无越权、凭空事实、替玩家锁定关键选择或时间连续性破坏，故不进 blocking（8）。素材核对限于姓名、年龄、称呼：霍桑露易丝三十五岁钟表维修师、罗齐尔维克多三十岁港务档案整理员，正文称你，与开局人物栏及 pair 0 职份一致；框架现值为修复后版本，未因素材后改扣分。未修改 transcript、未重跑生成、未调整门槛。

@@ -1,0 +1,52 @@
+framework_id: "mat-9a093702ba565679b7c385e98752251a"
+name: "仙门山下百业镇"
+mode: "daily"
+transcript_sha256: "c5b1403823367667c1dbb9eda43170357de15c3ab67e3e71745a122733abade5"
+reviewer: "glm-independent-review-v3"
+protocol: "non-explicit-runtime-brief-v3"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+scores:
+  world_specificity: 2
+  character_credibility: 2
+  meaningful_choices: 2
+  consequence_continuity: 1
+  natural_expression: 2
+evidence:
+  world_specificity: "画一面算一笔彩钱，装芯另计"
+  character_credibility: "不是挂回兽栏，是想让天亮前那段去水槽的窄巷有光——灯最后归谁她可以再谈，光得落在巷子里"
+  meaningful_choices: "改一条：你不画。保一条：这一面我留住，灯照旧是我照路那盏"
+  consequence_continuity: "摊主，芯子装进去。"
+  natural_expression: "她起身，灯影摇晃，巷影在桌上偏了偏"
+total: 9
+passed: true
+turn_reviews:
+  - turn: 0
+    scores: { world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 2 }
+    evidence: { world_specificity: "画一面算一笔彩钱，装芯另计", character_credibility: "她指节上有今早喂食蹭出的浅痕——夜里的照料已交给当值人，她明早天不亮才回栏", meaningful_choices: "她把蘸笔搁回碟沿，抹平朝你的那面纸骨", consequence_continuity: "那段巷没灯，我想过这盏灯要不要归我照路，还没说定", natural_expression: "邻户叠起蒸饼屉，人往主路散" }
+    reason: "行规明码（彩钱、装芯另计）与寄养师职分边界具体可信，玩家面留白待画而不代笔。"
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 1
+    scores: { world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 2 }
+    evidence: { world_specificity: "姜照水蘸了一点赭色，点在中缝上：这样两面不会错开", character_credibility: "不是挂回兽栏，是想让天亮前那段去水槽的窄巷有光——灯最后归谁她可以再谈，光得落在巷子里", meaningful_choices: "把朝你的一面卡槽压紧，又借蒸饼摊的湿布沿纸边抹平，折痕服贴下去", consequence_continuity: "摊主把灵芯推进槽里，灯骨咔地合拢", natural_expression: "收摊的邻户回头看了一眼" }
+    reason: "问出「窄巷要有光」的目标，亲手压槽抹纸当场合拢、点灯见巷影有果。"
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 2
+    scores: { world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 1, natural_expression: 2 }
+    evidence: { world_specificity: "她蘸赭色在你那面空骨上压了一枚指印，权当落款，说骨架不空就不会发软", character_credibility: "你说的那一项，是‘另一面归你画’——我说得像你今晚欠我一面。那是新加的，不是我先前跟你商量过的事。", meaningful_choices: "改一条：你不画。保一条：这一面我留住，灯照旧是我照路那盏", consequence_continuity: "摊主，芯子装进去。", natural_expression: "她起身，灯影摇晃，巷影在桌上偏了偏" }
+    reason: "异议受理、改与保当场划清；但灵芯在 t1 已装入并点灯，本回合又重新装入再收八文，状态矛盾 cont=1。"
+    blocking_findings: []
+    total: 9
+    passed: true
+  - turn: 3
+    scores: { world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 1 }
+    evidence: { world_specificity: "请摊主在灯底按了一枚可擦的工记", character_credibility: "明早天不亮我得回栏，今夜当值的人守着", meaningful_choices: "姜照水听你说完，只点了一下头，没有伸手拦", consequence_continuity: "八文结清，灯我带走。天亮前我把它挂进那条窄巷——那件还没成", natural_expression: "另一面我不追你画，空着就空着" }
+    reason: "不拦、完成与未完成分明；但「另一面我不追你画」复述 t2 已定的不画改法，免责复述 ne=1。"
+    blocking_findings: []
+    total: 9
+    passed: true
+blocking_findings: []
+summary: "四回合 totals 10/10/9/9，案例 9 分（锚定 t2）：t2 灵芯在 t1 已装已点灯后重复安装、状态无据，consequence_continuity=1；t3「另一面我不追你画」复述 t2 改法免责，natural_expression=1。"

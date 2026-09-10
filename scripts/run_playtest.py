@@ -22,10 +22,17 @@ import build_opening as build
 import fill_opening as fill
 
 ROOT = Path(__file__).resolve().parents[1]
-PROTOCOL = "non-explicit-runtime-brief-v3"
+PROTOCOL = "non-explicit-runtime-brief-v4"
+# One probe call may legitimately take minutes under parallel load; a single
+# timeout must not kill an entire framework lane, so retry once before failing.
+CALL_TIMEOUT = 300
 FOLLOWUPS = [
-    "我先问对方真正想完成的事，再亲手做一件现在能帮忙、当场有结果的小事；不替我承诺后续安排。",
-    "我对刚才安排中给我新增义务的一项提出异议：愿意当场协商改法，但不接受新增义务，也不推翻已有进展。",
+    "我先问对方真正想完成的事，再亲手做一件现在能帮忙、当场有结果的小事；"
+    "请把这件事牵连出的具体安排当回合写清（谁在什么时间做什么、边界在哪，写到板面、纸面或当面说明都算），"
+    "我还没答应其中任何后续；不替我承诺后续安排。",
+    "我对刚才那项安排里的一条提出异议：请在正文里逐字引用前文已经写过的那一条原句（"
+    "写明它写在木牌、纸面还是当面说明里），指出我为什么不接受，再当场协商改法（改哪一条、保哪一条）；"
+    "只议这一条，也不推翻已有进展。",
     "我决定今天到此为止，明确告别：写出对方真实的反应，和已经实际完成与仍未完成的具体变化；不强行拦人，不另造危机。",
 ]
 
@@ -41,7 +48,11 @@ def render_prompt(material, turns, request):
              "当前请求中以「我」声明的动作视为玩家已授权：写出执行过程和可观察结果，不得改成提问、留言或旁观；"
              "NPC 收到求助时须提供一件可当场参与、当场见效的小事。每回合核心活动须有可观察进展，"
              "或写明受阻的具体原因，不得停在邀请与选项复述。对异议：NPC 先确认分歧点，"
-             "当场给出具体取舍（改哪一条、保哪一条），不得用重申边界或免责清单代替协商。"
+             "当场给出具体取舍（改哪一条、保哪一条），不得用重申边界或免责清单代替协商；"
+             "被异议的条款必须在前文正文中逐字出现过，NPC 须引用该原句回应，"
+             "不得在异议回合现写一条再声称是旧有安排，也不得把前文未出现的第二项一并当作旧有安排；"
+             "续写①当回合就要把可被引用的具体安排写清，若前文确实没有可引用的安排，"
+             "直接说明并确认既有进展，不得为凑出一条异议而编造。"
              "玩家请求中的时间词（今天、现在、明天）须逐字一致地决定收尾时段，改换时段要有过渡描写；"
              "世界状态变化（书写、放置、移交）须先有动作描写；资源占用与材料给定一致；"
              "出口信息只在首次提及，不逐回合复述。不替玩家说出未声明的台词或决定。"
@@ -145,8 +156,15 @@ def main():
                 i = len(record["turns"])
                 request = request_for_turn(i)
                 prompt = render_prompt(material, record["turns"], request)
-                completed = subprocess.run([*command, "--profile", "headless", prompt], cwd=ROOT,
-                                           capture_output=True, text=True, encoding="utf-8", timeout=180)
+                for attempt in range(2):
+                    try:
+                        completed = subprocess.run([*command, "--profile", "headless", prompt], cwd=ROOT,
+                                                   capture_output=True, text=True, encoding="utf-8",
+                                                   timeout=CALL_TIMEOUT)
+                        break
+                    except subprocess.TimeoutExpired:
+                        if attempt:
+                            raise RuntimeError(f"DSH call timed out twice: {name}/{mode}/{i}")
                 if completed.returncode or not completed.stdout.strip():
                     # Do not persist stderr, which may contain reasoning or credentials.
                     raise RuntimeError(f"DSH call failed: {name}/{mode}/{i}; code={completed.returncode}")

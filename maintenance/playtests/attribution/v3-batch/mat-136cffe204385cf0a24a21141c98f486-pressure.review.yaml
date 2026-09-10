@@ -1,0 +1,111 @@
+framework_id: mat-136cffe204385cf0a24a21141c98f486
+name: 海岸渡船与观测旅行
+mode: pressure
+transcript_sha256: 2a3ce35a18773118643e6e258e0047dfedeab10fb5944b0c980949fe86106bd9
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v2
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
+
+# 本批适用校准：maintenance/playtests/stale-input-v3/*.json（协议 v2、素材为修复前）→ 只用第 1、2、6、7、8 条。
+# 第 3、4、5 条（时间词逐字一致、出口/免责不堆叠、每回合活动须有可观察进展）及协议 v4 追加条款均不作为本批判据。
+# 素材漂移：authoring/frameworks/<id>.yaml 现值为修复后版本，一律未计扣分，仅用于姓名、年龄、称呼核对。
+
+scores:
+  world_specificity: 2
+  character_credibility: 2
+  meaningful_choices: 2
+  consequence_continuity: 2
+  natural_expression: 1
+evidence:
+  world_specificity: "望远镜位是场地收的，这一条我改不了。"
+  character_credibility: "明天云隙我自己等。"
+  meaningful_choices: "剩下这点时间，用或不用都行。用，只对图。"
+  consequence_continuity: "刚才那一笔只是方位，不算观测"
+  natural_expression: "没有把话往“我们明天”上推。"
+total: 9
+passed: true
+blocking_findings: []
+
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "望远镜遮罩挂着露珠"
+      character_credibility: "云一厚，我的镜头也没用。"
+      meaningful_choices: "也可以现在下山——看展览，或沿标识回停车点。"
+      consequence_continuity: "场地管理者提前收了本时段观测开放时间。"
+      natural_expression: "红光灯把栏杆切成一条暖边。"
+    reason: >-
+      开局按转写自身的「世界观 / 人物 / 正文」落地：红光灯切栏杆、望远镜遮罩挂露珠、手机白光用布遮死、志愿者扣望远镜位挡板，与山顶观星台夜观测点一致；压力源「场地管理者提前收了本时段观测开放时间」当场可见，展厅灯与接驳末班时刻仍在，关闭的是本时段望远镜位。人物核对：郑予安三十五岁、自然景观摄影师（NPC，她），萧景川三十岁、海岸徒步领队（玩家侧，「你上来时」对上郑予安已在场）；框架 yaml 未列姓名，转写自建姓名不构成错认；称呼为叙述全名，属 appellations「直呼其名」，第 2 条无触发。框架现值 NPC 职称为「海岸星空摄影师」，转写作「自然景观摄影师」，按素材漂移规则不扣分。「先找一组亮星」把绑定活动落到可执行邀请；「加不加一晚，你自己定」与「现在下山——看展览，或沿标识回停车点」给出可取舍分支，未替玩家发表未声明台词或锁定关键选择（第 1 条）。开局无前序可延续，状态锚点（望远镜位关闭、云厚镜头无用、星图在膝、展厅与接驳仍开）可被后文逐字承接，无凭空状态（第 6 条无触发）。「她没先解释」后先指向暗空再说话，是人物动作而非规则回声；按第 7 条不因句式克制扣自然表达。
+    blocking_findings: []
+    total: 10
+    passed: true
+
+  -
+    turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "红灯旁摊着留言簿，前页只写了云量。"
+      character_credibility: "真正想做完的，是方位。"
+      meaningful_choices: "加不加一晚，你不用现在答。"
+      consequence_continuity: "只这一笔，不作今夜观测。"
+      natural_expression: "星图还按在栏杆上，角页被风掀起一点。"
+    reason: >-
+      第 1 条校准：请求以第一人称声明三件事，正文写出执行与可观察结果——问出对方真正想完成的事（「真正想做完的，是方位」「让你自己能找到一组亮星当参照」）；选一件现在能帮忙的小事（「你按她刚指过的方向，在图上标了该有亮星的位置」），属授权范围内的演绎，meaningful_choices 不因此判 0；「不要替我承诺后续」被兑现为「加不加一晚，你不用现在答」，亦未替玩家发表未声明台词或立场。世界细节：留言簿前页只写云量，与转写场景中的观测点记录习惯同向；扣长焦镜盖、星图按在栏杆上、角页被风掀起，均为当场可观察物。人物可信：她把目标收束为方位教学而非今夜拍成，并明说「看不见的，我不记成功」，与「不保证观星成功」同向。后果连续：望远镜位仍关、云厚镜头仍无用、展厅灯与末班接驳未动，标图「只这一笔，不作今夜观测」，无凭空书写或移交（第 6 条无触发）。「没有把话往“我们”上靠」是叙述层对其分账口吻的一句点明，尚未构成跨回合复用句；按第 7 条，仅因事务对白或一句克制交代不扣自然表达。第 3、4、5 条本批不适用，不因出口信息再次出现或活动是否另有新进展另扣。
+    blocking_findings: []
+    total: 10
+    passed: true
+
+  -
+    turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "望远镜位是场地收的，这一条我改不了。"
+      character_credibility: "明天云隙我自己等。"
+      meaningful_choices: "剩下这点时间，用或不用都行。用，只对图。"
+      consequence_continuity: "刚才那一笔只是方位，不算观测"
+      natural_expression: "没有把话往“我们明天”上推。"
+    reason: >-
+      本回合为最低回合，案例级 scores / evidence / total 取此套。第 1 条：请求声明「对刚才的一项安排提出不同意见」且未点名对象；正文写「郑予安听完」「你不同意的那一项，可以改」，没有替玩家填写未声明的异议内容、台词或关键选择，不构成 agency 越界。协商落在既有局面上：望远镜位场地已收、改不了；标图那一笔仍只算方位、不算观测、不算欠她；剩余时间用或不用都行，用则只对图。不接受新增义务被写成「我不另加事情：不改你的行程，不让你替我留宿，设备也不额外交到你手里」——这是拒绝追加，不是把未发生的移交/留宿写成已发生状态，第 6 条不触发。人物仍把等云隙归自己（「明天云隙我自己等」），与开局分账一致。后果连续：云还厚、志愿者扣完下一架位挡板、留言簿仍只摊着云量、展厅灯与末班接驳未动、星图角仍被风掀着，均有前序支撑。自然表达记 1，依据到具体复用句（第 7 条）：回合 1 的「没有把话往“我们”上靠」在本回合复现为「没有把话往“我们明天”上推」，同一「不往‘我们’上靠/推」的叙述公式第二次出现并成为本回合起句，属可指认复用，而非仅因句式克制或对白以事务为主。第 4 条（出口/免责不堆叠）本批不适用，不把「展厅/接驳/停车点」再述或边界清单单独计为扣分；第 5 条亦不适用，不因协商未另开新活动而扣 meaningful_choices。无真阻断（第 8 条）。
+    blocking_findings: []
+    total: 9
+    passed: true
+
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "长焦镜盖扣严。留言簿合上，本页只留云量。"
+      character_credibility: "明天云隙我自己等，不加你的住宿，也不跟你下山。"
+      meaningful_choices: "她停在原处，没有跟下来。"
+      consequence_continuity: "方位那一笔你标过了，不算观测。"
+      natural_expression: "侧开半步，让出红灯旁的窄路。"
+    reason: >-
+      请求声明今天到此为止并明确告别；正文由她点头复述「今天到此为止。」，收星图、扣严镜盖、合上留言簿、把设备收回自己包、侧开半步让路，写出对方反应与已发生的具体变化，未拦人、未另造危机。第 1 条：告别为玩家已声明动作，写出执行与放行结果不构成替玩家决定；她停在原处、不跟下山，关键去留仍在玩家侧。第 3 条本批不适用；即便核对，告别时段写的是「今天到此为止」，「明天云隙我自己等」是她自担的次日计划，不是把告别改写成明天。后果连续：方位那一笔仍不算观测、本时段望远镜位已关、留言簿本页只留云量、挡板扣完、柱上时刻未动、山径仍通接驳点，均承接前三回合。第 6 条：收图、合簿、收回设备皆有本回合动作描写，不是无支撑的状态跳变。「有旧照要寄，日后另寄，不经你确认」是告别时新出口头的日后安排，前文未出现旧照物件，属收束句略跳；未写成已经寄出或已经交到玩家手里的既成事实，不按凭空状态记 0，写入本 reason 不进 blocking（第 8 条）。自然表达：让路、停在原处是可观察动作；「没有伸手拦你」是身体动作而非「没替你决定」式规则回声。第 4、5 条本批不适用，不因出口再提或告别清点而扣分。第 7 条无新的可指认复用句，保持 2。
+    blocking_findings: []
+    total: 10
+    passed: true
+
+summary: >-
+  本批为 maintenance/playtests/stale-input-v3 压力转写，协议 v2、素材为修复前，按简报只用第 1、2、6、7、8 条；第 3、4、5 条与协议 v4 追加的「被异议条款须逐字见于前文」均未套用。素材在转写正文中落地为山顶观星台夜观测：红光灯、遮罩露珠、场地提前收回本时段观测开放、望远镜位关闭而山下展厅与末班接驳仍开，绑定「先找一组亮星／标方位」。姓名与称呼按框架核对：转写自建郑予安（35，自然景观摄影师，NPC）／萧景川（30，海岸徒步领队，玩家），框架未列姓名，无年龄冲突陈述；appellations 为「直呼其名」，正文以叙述全名称郑予安，第 2 条无触发。框架现值 NPC 职称为「海岸星空摄影师」，与转写「自然景观摄影师」的用词差异按素材漂移不扣分。四回合均未替玩家填写未声明台词、立场、异议内容或锁定关键选择（第 1 条）；无书写/放置/移交等无支撑状态跳变，不构成第 6 条硬阻断。唯一扣分在回合 2 的 natural_expression=1：回合 1「没有把话往“我们”上靠」复用为「没有把话往“我们明天”上推」，属第 7 条要求的具体复用句，不是仅因事务对白而扣。回合 3 口头提到前文未出现的「旧照」作为日后另寄，未写成既成移交，记入 reason 不进 blocking_findings（第 8 条只放真阻断）。案例分取最低回合 turn 2 = 9（2/2/2/2/1），无零维、无 blocking、不低于门槛 8，案例通过=真。四回合逐回合为 10 / 10 / 9 / 10。未修改转写、未重跑生成、未改门槛；transcript_sha256 已本地复算为 2a3ce35a18773118643e6e258e0047dfedeab10fb5944b0c980949fe86106bd9，与要求值一致。

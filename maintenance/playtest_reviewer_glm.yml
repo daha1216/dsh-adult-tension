@@ -1,0 +1,10 @@
+# Reviewer model overlay for independent playtest review runs.
+#
+# Pins the headless profile's agent-default-model to the cross-model reviewer
+# (智谱 glm-5.3, provider `glm`) so scoring never runs on the generator model.
+# Applied by scripts/review_playtest.py via `--dsh-extra --patch <this file>`,
+# together with maintenance/playtest_headless_patch.yml (skill root isolation).
+- id: agent-default-model
+  config:
+    provider: glm
+    model: glm-5.3

@@ -1,0 +1,98 @@
+framework_id: "mat-de87cf5cd73859139a93b09b472d4e59"
+name: "赛博街区与公共终端"
+mode: "daily"
+transcript_sha256: "f3b46a91cd26f545d17342d136a73455acdafe59fe4d2439a8f9d7235d045c8d"
+reviewer: "glm-independent-review-v3"
+protocol: "non-explicit-runtime-brief-v3"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+scores:
+  world_specificity: 0
+  character_credibility: 2
+  meaningful_choices: 1
+  consequence_continuity: 1
+  natural_expression: 2
+evidence:
+  world_specificity: "先划掉附件封面上“后续列席”那一行"
+  character_credibility: "她照抄进笔记本，把“联系人”一栏留空，写“不列”。"
+  meaningful_choices: "两处她当场给你看，改一留一。"
+  consequence_continuity: "她把印刷件推给你核。"
+  natural_expression: "前台把访客联递过来，你没接。"
+total: 6
+passed: false
+blocking_findings:
+  - "turn 2：凭空事实（校准 6）——异议回合把附件封面「后续列席」当已有安排划掉，再让玩家在印刷件「来源可核」格按指纹；前文无该条款、无印刷件、无联系人栏。turn 1 请求写明「不替我承诺后续安排」，正文只有便签时间戳与「她也没问」。属现场书写后声称旧有安排。"
+turn_reviews:
+  -
+    turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "测试单的工单号后面跟着四位正式编号"
+      character_credibility: "她保存截图，不发正式系统。"
+      meaningful_choices: "这次你改期到16:00，原15:20的位置确实松开了。"
+      consequence_continuity: "你点取消，名额两秒后回到可用列表。"
+      natural_expression: "闻白榆把测试端推到你面前，指着那块蓝边框界面"
+    reason: "开局三标题齐全。蓝/橙边框、周五15:20会议室B、待确认无对外通知、取消后名额两秒回列表、改期16:00原位松开、工单号后四位正式编号、维护窗口封存，均为当场可核。闻白榆用秒表、挡住正式端口、只存截图不发正式系统；玩家对应应泽辰、端侧回退对编号。预约—取消—改期—对缓存有进展。无凭空状态、无出口堆叠。"
+    blocking_findings: []
+    total: 10
+    passed: true
+  -
+    turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "正式库维护窗口 22:00—23:30，测试库 22:11—23:41"
+      character_credibility: "错位源于维护窗口不同步，不涉及名额逻辑"
+      meaningful_choices: "你把便签贴进她的笔记本内页。"
+      consequence_continuity: "她指尖点着那四个被封存的正式编号"
+      natural_expression: "前台接待员抬头看了一眼，又低下去。"
+    reason: "声明的两件事都有执行与当场结果：问出下周说明会要分开个案与统计、不写反馈者；导出回退日志并手写正式库22:00—23:30与测试库22:11—23:41，便签贴进笔记本。她追问实走发现还是推测，补写不涉及名额逻辑，收束为够进实走附件、不用等升级单；并写明未替玩家承诺到场。封存编号与回退日志从开局延续。写出声明动作不构成 agency 越界（校准 1）。"
+    blocking_findings: []
+    total: 10
+    passed: true
+  -
+    turn: 2
+    scores:
+      world_specificity: 0
+      character_credibility: 2
+      meaningful_choices: 1
+      consequence_continuity: 1
+      natural_expression: 2
+    evidence:
+      world_specificity: "先划掉附件封面上“后续列席”那一行"
+      character_credibility: "她照抄进笔记本，把“联系人”一栏留空，写“不列”。"
+      meaningful_choices: "两处她当场给你看，改一留一。"
+      consequence_continuity: "她把印刷件推给你核。"
+      natural_expression: "前台把访客联递过来，你没接。"
+    reason: "按校准 6 硬阻断：「后续列席」前文不存在。turn 1 请求写明不替我承诺后续安排，正文只有便签时间戳、错位说明与「够进实走附件」，并写「她也没问」；turn 0–1 无封面字段、无列席、无印刷件、无联系人栏。本回合把该行当旧安排划掉，再拿印刷件按指纹，属现场书写后声称旧有安排，world_specificity 记 0。协商本身可取（改一留一、联系人留空）。异议对象虚构，meaningful_choices 记 1；纸面状态从虚构起点改写，consequence_continuity 记 1。开场问句是确认分歧，不另记替玩家锁定关键选择。本批 stale-input-v4 用第 1–8 条；v4 追加条款不单独套用，0 分与阻断以第 6 条为据。"
+    blocking_findings:
+      - "凭空事实：被异议条款「后续列席」被写成附件封面已有一行并当场划掉，前文无逐字支撑，亦无印刷件或付印动作（校准 6）。"
+    total: 6
+    passed: false
+  -
+    turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "你退出测试账号，橙色边框退回灰色，屏幕回到无会话的滚动公告。"
+      character_credibility: "两个库的维护窗口还是错着的，得走工单，不是今晚能改的。"
+      meaningful_choices: "她朝一层门厅侧门走，没回头看你有没有跟。"
+      consequence_continuity: "纸页间那两行手写时间线和你的便签还夹在内页。"
+      natural_expression: "不是留给你的问题"
+    reason: "时间词「今天到这儿」与请求一致。已完成（十一分钟错位、划掉列席、指纹格）与未完成（两库窗口仍错、得走工单、正式系统无记录）均具体；退出测试账号边框熄灭；她朝一层门厅侧门走，不拦人、不另造危机。natural_expression −1：收束「不给你看内容——那是她记下这份离线件的去处，不是留给你的问题」，后半句为合规说明而非可观察事实（校准 7）。turn 2 虚构列席被复述，阻断仍记 turn 2。出口首次提及且绑定离开（校准 4）。"
+    blocking_findings: []
+    total: 9
+    passed: true
+summary: "本批 stale-input-v4（协议 v3、素材修复前），第 1–8 条全用；v4 追加「被异议条款须前文逐字找到」不单独套用。素材落地：写字楼公共终端、测试/正式不同色边框、模拟预约取消改期、维护窗口与缓存、楼宇接待员。声明动作均有执行与结果，无越权、无时间词破坏。turn 2 硬阻断：封面「后续列席」被当旧安排划掉，前文无该行（turn 1 反写「她也没问」），印刷件与联系人栏亦无前置动作，按校准 6 判 world_specificity 0。案例分取最低回合 turn 2=6（0/2/1/1/2），有 0 维、低于门槛 8、blocking 非空，通过=假。非阻断：turn 2 异议对象虚构（choices 1）且纸面从虚构起改（continuity 1）；turn 3「不是留给你的问题」为合规说明（expression 1）。框架现值仅核姓名年龄称呼：应泽辰 33 岁维护员、闻白榆 38 岁整理人，直呼其名，无错认（校准 2）；素材后改未扣分。"

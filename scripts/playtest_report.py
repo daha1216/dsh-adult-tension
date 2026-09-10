@@ -50,7 +50,7 @@ def audit(root=ROOT):
                 if (record.get("framework_id") != row["id"] or record.get("name") != row["name"] or record.get("mode") != mode
                         or record.get("seed") != config["seed"] or record.get("source_hash") != digest(material)
                         or record.get("scope") != "non_explicit_narrative"
-                        or record.get("protocol") != "non-explicit-runtime-brief-v3"
+                        or record.get("protocol") != "non-explicit-runtime-brief-v4"
                         or record.get("host") != config["host"]
                         or not record.get("host_version") or not record.get("generator")):
                     raise ValueError("identity, seed, scope or source mismatch")

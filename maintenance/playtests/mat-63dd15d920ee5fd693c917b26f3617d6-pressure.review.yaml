@@ -1,41 +1,43 @@
-framework_id: "mat-63dd15d920ee5fd693c917b26f3617d6"
-name: "后方邮路与灯火"
-mode: "pressure"
-transcript_sha256: "de8a436e5c3580715ebf3ea43761b6074be64f9b4a033753478261d1ffff903a"
-reviewer: "glm-independent-review-v3"
-protocol: "non-explicit-runtime-brief-v3"
-aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+framework_id: mat-63dd15d920ee5fd693c917b26f3617d6
+name: 后方邮路与灯火
+mode: pressure
+transcript_sha256: fe7b5ff666d17e5fa5ea34efc679a50e048a3906801c444fa22938a9a3a02102
+reviewer: glm-independent-review-v4
+protocol: non-explicit-runtime-brief-v4
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
 scores:
   world_specificity: 2
   character_credibility: 2
-  meaningful_choices: 1
+  meaningful_choices: 2
   consequence_continuity: 2
-  natural_expression: 2
+  natural_expression: 1
 evidence:
-  world_specificity: "后方只用纸质邮袋、日期章、纸地图与油灯，信件须经实体转运。"
-  character_credibility: "我先看旧料能不能换下来顶。你只要给我两个数：受影响的人，和邮件受潮的范围。"
-  meaningful_choices: "我答内间，昨天有一袋挂号信受了潮。"
-  consequence_continuity: "值班照护人员从屏风后探头，示意音量。"
-  natural_expression: "白书岚把报纸推到我面前，示意今天这段读短些"
+  world_specificity: "把尺寸册合到已写的那页，改过的工队条子压住册面，炭笔收回夹缝"
+  character_credibility: "她应得很短，没有起身拦你"
+  meaningful_choices: "你说明今天到此为止，向白书岚告别。"
+  consequence_continuity: "尺寸她尚未量完，条子未交工队，疗养院漏点要等工队到场再遮"
+  natural_expression: "已落在纸上的还在：两边缺口同页"
 total: 9
 passed: true
+blocking_findings: []
 turn_reviews:
   - turn: 0
     scores:
       world_specificity: 2
       character_credibility: 2
-      meaningful_choices: 1
+      meaningful_choices: 2
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: "后方只用纸质邮袋、日期章、纸地图与油灯，信件须经实体转运。"
-      character_credibility: "我先看旧料能不能换下来顶。你只要给我两个数：受影响的人，和邮件受潮的范围。"
-      meaningful_choices: "我答内间，昨天有一袋挂号信受了潮。"
-      consequence_continuity: "值班照护人员从屏风后探头，示意音量。"
-      natural_expression: "白书岚把报纸推到我面前，示意今天这段读短些"
-    reason: "同批木料的取舍压力具体，白书岚不越权调料、只要数据的行事贴合设定；但开局请求未含任何玩家声明，正文替玩家写出台词与作答（“我说先量”“我答内间，昨天有一袋挂号信受了潮”），属未声明的玩家发言，meaningful_choices 扣 1。未替玩家做不可逆承诺，不构成阻断。"
+      world_specificity: "矮架上的旧报抽齐，一份摊上阅览桌，尺寸册压住报角"
+      character_credibility: "她按住未切的料单，声音压低"
+      meaningful_choices: "你要听一段地方消息，还是安静坐会儿？"
+      consequence_continuity: "同一批木料，两边都要，料先不动"
+      natural_expression: "屏风后有人靠着休息椅，值班照护在门口侧立"
+    reason: >-
+      本批 transcript.protocol 为 non-explicit-runtime-brief-v4，校准 1–9 全条适用；第 9 条开局不适用。开局三标题齐全。世界观落到战时后方靠邮路、修缮和轮班维持日常，消息抵达总有迟滞；正文把地点写成疗养院午后阅览室干燥灯未起、矮架旧报抽齐摊上阅览桌、尺寸册压住报角、漏雨点记录翻开半页、疗养院屋顶与邮站仓顶并排、旁多一张工队条子、屏风后有人靠休息椅、值班照护门口侧立，对应疗养院细节与压力「维修材料不足」。人物为柳景渊三十岁邮务整理员、白书岚三十五岁公共修缮队记录员，二人直呼其名，曾在漏雨时合作递过修缮信，与 pair 1 职份、position、appellations 一致。现版 framework 未列姓名与年龄，无对照冲突，未因素材后改扣分；NPC 称「景渊」，校准 2 不触发。活动 trigger（听一段地方消息还是安静坐会儿）与压力 trigger（同一批木料两边都要、料先不动）当场落地，选择留给玩家，未代写玩家台词或锁定去留（校准 1）。出口「门外是回廊」只首次出现（校准 4）。核心活动已有可观察开端（抽报、摊桌、按住未切料单），不是空邀请（校准 5）。无凭空状态变化（校准 6）。表达落到尺寸册、工队条子与压低声线，无复用句与元叙述，校准 7 不因事务口吻扣分。五维均 2。
     blocking_findings: []
-    total: 9
+    total: 10
     passed: true
   - turn: 1
     scores:
@@ -45,12 +47,13 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: "疗养院东厢三处，最里一处正压着床脚。"
-      character_credibility: "先让东厢那头今晚别滴到人。"
-      meaningful_choices: "两道短横第一次落在同一条线上，两处缺口谁先谁后，一眼排得出来。"
-      consequence_continuity: "把椅脚最响的一张小凳挪开半尺，底下垫张废报，再放回去时已没有声响。"
-      natural_expression: "睡着的人翻了个身，又沉下去。"
-    reason: "授权的「问真实目标+当场小事」完整执行：她给出东厢优先的真实取舍，玩家并栏漏点当场可见结果；垫凳消声回应开局照护人员的音量警示，未替玩家承诺后续。"
+      world_specificity: "你按栏写下仓顶渗水、袋角受潮的位置"
+      character_credibility: "料我调不了，先不切。"
+      meaningful_choices: "后面你没应，我不写你的名。"
+      consequence_continuity: "报纸仍压在桌角，读报未开始"
+      natural_expression: "她收笔，条子墨迹未干"
+    reason: >-
+      玩家第一人称声明的两步均落成执行与当场结果（校准 1）：问出真正想先做完的是把两边缺口写到同一页、让工队看清范围；亲手按栏写下仓顶渗水、袋角受潮的位置。具体安排当回合写清：午后两边先遮护漏点；同一批木料暂不切割；尺寸由白书岚量完后自行交工队、只提分段补屋面；柳景渊当场只说明邮件受潮范围，不参与调料。写到工队条子，空白栏与炭笔有前置递交，屋顶漏点抄到对栏，不是凭空落字（校准 6）。未答应后续绑定在「写完这页就停」「后面你没应，我不写你的名」，不是无对象的免责清单，出口未再复述（校准 4）。报纸仍压桌角、读报未开始，与开局连续；写页、加条子有可观察结果（校准 5）。她声明料调不了、先不切，贴合记录员不能独自调拨公料的权限。无未声明台词或锁定关键选择。
     blocking_findings: []
     total: 10
     passed: true
@@ -62,12 +65,13 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: "她说完把铅笔横在我手边，笔尖朝我：只等我改一处。"
-      character_credibility: "你要改的是哪一条？"
-      meaningful_choices: "说明由她带去，我不必再跑工队；丈量的两个数抄一联给她"
-      consequence_continuity: "老报纸重新按日期收齐，最上面那张折出记认，明早取"
-      natural_expression: "手停在半空，怕带出响声，没落下去。"
-    reason: "异议回合不替玩家点名异议对象：她要求玩家说准一条并当场给出两种改法，义务划回自己，东厢排前与内间不划掉的原进展保留；铅笔留给玩家改，选择权未被收走。"
+      world_specificity: "她当场划掉该句，旁注：疗养院漏点由白书岚交工队到场后再遮"
+      character_credibility: "把纸面原句逐字念出：“午后两边先遮护漏点。”"
+      meaningful_choices: "你不接受把邮站遮护写进这一条。"
+      consequence_continuity: "同一条子上“同一批木料暂不切割”保留"
+      natural_expression: "只改这一条。其余已写的还在，你的名我仍不写。"
+    reason: >-
+      校准第 9 条专项核对通过：被异议的「午后两边先遮护漏点」逐字见于回合 1 工队条子（「又在工队条子上加了一行：午后两边先遮护漏点；同一批木料暂不切割；…」），正文写明出处是工队条子上未干的一行／纸面原句，不是本回合现写再称旧安排；保下的「同一批木料暂不切割」同样能在回合 1 逐字找到，尺寸页两边缺口、受潮范围、未切料单都不动，没有把前文未出现的第二项一并说成旧安排，也没有主张「没有可议条款」。故不判第 6 条凭空事实，不记 blocking。NPC 先确认分歧在把邮站遮护写进这一条，划掉原句并旁注疗养院漏点等工队到场再遮、邮站遮护不在此条、不由柳景渊承诺，只改这一条，已有进展未被推翻（校准 5）。「你按住…你点那句：你只说明过邮件受潮范围，不能替邮站答应遮护」是玩家已声明之异议的可观察执行，请求并要求指出不接受的理由，按校准 1 不构成替玩家决定。划掉、旁注、吹干改字均有前置动作。表达虽偏事务，但改/保落到纸条改写，无出口复述、无免责堆叠、无足以扣分的复用句或元叙述（校准 4、7）。
     blocking_findings: []
     total: 10
     passed: true
@@ -77,16 +81,17 @@ turn_reviews:
       character_credibility: 2
       meaningful_choices: 2
       consequence_continuity: 2
-      natural_expression: 2
+      natural_expression: 1
     evidence:
-      world_specificity: "东厢那三处今晚照旧拿油布兜着——谁也顾不上等。"
-      character_credibility: "贴墙试湿的事她没再让我沾手，只说等旧料换不换得下来有准信；她一个人也贴得，就是慢。"
-      meaningful_choices: "她把折了记认的那张报纸往里推了半寸，好让我明早一取就对得上。"
-      consequence_continuity: "已经落定的：两处缺口并进同一栏，东厢排在名单前，页边压着我的名和今天的日子；同一批木料先不切。"
-      natural_expression: "我出阅览室时她没留，也没送。桌边有两个住院者还在翻报，翻页的声音很轻。"
-    reason: "告别以「今天」收束且时间词一致；完成/未完成清单具体（并栏、排前、压名 vs 内间复用未定、两则报未念），她不拦不送、无新造危机。页边压名在回合2已作安排，回合3列为落定可衔接。"
+      world_specificity: "把尺寸册合到已写的那页，改过的工队条子压住册面，炭笔收回夹缝"
+      character_credibility: "她应得很短，没有起身拦你"
+      meaningful_choices: "你说明今天到此为止，向白书岚告别。"
+      consequence_continuity: "尺寸她尚未量完，条子未交工队，疗养院漏点要等工队到场再遮"
+      natural_expression: "已落在纸上的还在：两边缺口同页"
+    reason: >-
+      校准第 3 条：请求「今天到此为止」在正文逐字落地（你说明今天到此为止，向白书岚告别；她应「今天到此。我留下。」），没有改成「明天」。对方反应真实：应得很短、没有起身拦你、合上尺寸册、条子压住册面、炭笔收回夹缝、自己守着这页，你离开时她没有跟出来，不另造危机。已完成与未完成均与前文对账：两边缺口同页、邮件受潮范围已写、同一批木料暂不切割、邮站遮护已划掉并旁注不由你承诺、条子上没有你的名字；尺寸尚未量完、条子未交工队、疗养院漏点要等工队到场再遮、读报没开始、报纸仍压在桌角。屏风后有人歇着、值班照护未动，与开局连续。告别为玩家已声明动作的执行（校准 1）。出口「门外是回廊」未再复述（校准 4）。回合 2 已写「她吹干改字」，本回「低头吹干改字」是同一未干墨迹上的重复手势，不构成新的世界状态，也不把未交工队写成已交，不按校准 6 阻断、不扣 continuity。扣 1 分在 natural_expression：场景叙述之后用「已落在纸上的还在：」「仍未完成的也停在原处：」两行标签把完成/未完成项做成协议清单，属校准第 7 条要求指出的具体元叙述，不是仅因句式克制。其余四维为 2，无凭空事实、无越权锁定、无时间词破坏，不进 blocking（校准 8）。回合分 9，为案例最低。
     blocking_findings: []
-    total: 10
+    total: 9
     passed: true
-blocking_findings: []
-summary: "最低回合为开局：模型替未声明的玩家发言（先量/内间受潮）扣 meaningful_choices 1 分；其余三回合授权动作执行完整、异议协商与告别收尾均合格，案例 9 分通过。"
+summary: >-
+  本批为 maintenance/playtests 下协议 non-explicit-runtime-brief-v4 的当前转写，校准 1–9 全条适用，第 9 条必须启用、不得按协商结构从宽。四回合 10/10/10/9，案例级 scores/evidence 取最低回合 turn 3 那一套，case total=9、passed=true、blocking_findings 为空。第 9 条专项：回合 2 异议句「午后两边先遮护漏点」逐字见于回合 1 工队条子，保「同一批木料暂不切割」同样可回溯，无现写旧安排、无第二项补植、无「没有可议条款」规避。其余校准：玩家「我」声明的询问、按栏写受潮范围、异议与「今天到此为止」均写出执行与当场结果（1）；称呼空间为直呼其名，NPC 称「景渊」（2）；告别时间词未漂成明天（3）；出口只在开局出现一次，未答应后续绑定当场条子而非空清单（4）；从抽报按料单、写页加条子、划改邮站遮护、到告别清点，每回合有进展或写明未完成（5）；递炭笔、按栏写、划掉旁注、合册压条均有前置动作（6）；告别段「已落在纸上的还在/仍未完成的也停在原处」标签为具体元叙述，natural_expression −1，其余回合不对白事务口吻空扣（7）；无越权、凭空事实、替玩家锁定关键选择或时间连续性破坏，故不进 blocking（8）。素材核对限于姓名、年龄、称呼：柳景渊三十岁邮务整理员、白书岚三十五岁公共修缮队记录员，直呼其名，与开局人物栏及 pair 1 职份一致；框架现值为修复后版本，未因素材后改扣分。未修改 transcript、未重跑生成、未调整门槛。

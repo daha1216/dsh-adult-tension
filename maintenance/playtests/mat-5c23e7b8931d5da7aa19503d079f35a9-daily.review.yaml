@@ -1,42 +1,43 @@
-framework_id: mat-5c23e7b8931d5da7aa19503d079f35a9
-name: 昭和街角喫茶巡礼
-mode: daily
-transcript_sha256: d8256ebf6a444f0c903ec73d4aab7549b7248ff134f86d4623855a81bbd5c552
-reviewer: glm-independent-review-v3
-protocol: non-explicit-runtime-brief-v3
-aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
+framework_id: "mat-5c23e7b8931d5da7aa19503d079f35a9"
+name: "昭和街角喫茶巡礼"
+mode: "daily"
+transcript_sha256: "2c9378f3a66c1e4fb5722b26b73991d14d71c5f0e51a27521ec0def1d8a26ecb"
+reviewer: "glm-independent-review-v4"
+protocol: "non-explicit-runtime-brief-v4"
+aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
 scores:
   world_specificity: 2
   character_credibility: 2
-  meaningful_choices: 1
-  consequence_continuity: 1
+  meaningful_choices: 2
+  consequence_continuity: 2
   natural_expression: 2
 evidence:
-  world_specificity: '门厅深处，钱汤店主正把木牌一副副摆上架子，手没停，耳朵在听。'
-  character_credibility: '“改这一条：杂志那张图撤掉，告示只作为版式示意图出现，不署我的落点，跟你的店、跟钱汤的客人都没关系。保住这一条：木牌我明天再来取签样的核。取舍就这么两条，你挑。”'
-  meaningful_choices: '分歧点是——你要的只是版式交接，我却把《街角》那边的署名照片说成顺带的事。那就是新加的。'
-  consequence_continuity: '我却把《街角》那边的署名照片说成顺带的事'
-  natural_expression: '两人朝不同方向：她的冲印所在你店隔壁，你今天要开门，路是同一段，走到第三个电线杆就分开。'
-total: 8
+  world_specificity: "绘里加把一张手绘告示举到与指向牌齐高，墨迹未干的箭头朝左"
+  character_credibility: "她没有让你进更衣区"
+  meaningful_choices: "就站在柜台外看"
+  consequence_continuity: "钱汤店主在里侧整理手写簿，并不过来"
+  natural_expression: "她手腕微微发紧，等你从公共入口把字读完。"
+total: 10
 passed: true
+blocking_findings: []
 turn_reviews:
   - turn: 0
     scores:
       world_specificity: 2
       character_credibility: 2
-      meaningful_choices: 1
+      meaningful_choices: 2
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: '门厅深处，钱汤店主正把木牌一副副摆上架子，手没停，耳朵在听。'
-      character_credibility: '“你从那边看——就是客人推门进来的位置。”她下巴点了点街道方向，没有递稿，先让你用视线量。'
-      meaningful_choices: '“箭头改成直角，从头一根立柱起笔。”你说'
-      consequence_continuity: '你退到门槛外两步，把三张并排记住：字号够，可箭头尾巴压在“女汤”的字脚上。'
-      natural_expression: '她重画完，单把那一张举起来，退到街道一侧又走回来，像试挂一样从进门的角度读了两遍。'
-    reason: '钱汤门厅细节忠实框架（营业前泼水瓷砖、手绘告示、店主在场）。mc=1：开局玩家未经任何声明，模型替玩家给出具体修改方案台词「箭头改成直角，从头一根立柱起笔」并替玩家估距「六七步，抬眼就撞上」——与 42c81-d t0 替玩家提缝毡方案同构（超出活动 trigger 邀请的默认核对动作）。'
-    total: 9
-    passed: true
+      world_specificity: "绘里加把一张手绘告示举到与指向牌齐高，墨迹未干的箭头朝左"
+      character_credibility: "她没有让你进更衣区"
+      meaningful_choices: "就站在柜台外看"
+      consequence_continuity: "钱汤店主在里侧整理手写簿，并不过来"
+      natural_expression: "她手腕微微发紧，等你从公共入口把字读完。"
+    reason: "本批 transcript.protocol 为 non-explicit-runtime-brief-v4，校准 1–9 全条适用；第 9 条开局不适用。开局三标题齐全。世界观落到昭和末期街角、钱汤尚未开门、门厅柜台摊着手绘告示、入口指向牌、店主在里侧整理手写簿；正文把告示举到与指向牌齐高、墨迹未干左箭头、男汤更衣/女汤更衣分向、玻璃门斜光、柜台到告示约四步、左箭头比右箭头粗一划、「男」字比「女」字更抢眼，与钱汤日间细节、pair 1 活动「设计更衣区告示」trigger（尚未营业的门厅举起告示、请从柜台外看字号和方向）当场可核。人物为木村慎一三十三岁喫茶店经营者、斋藤绘里加三十八岁地方杂志摄影师，职份与 pair 1 的 npc/player 一致。现版 framework 未列姓名与年龄，无对照冲突，未因素材后改扣分；正文称「慎一」，属直呼其名，校准 2 不计错。她把核验留给玩家从公共入口读完，未代写玩家台词或锁定是否动手改稿（校准 1）。出口落到玻璃门/街上进来的人，属首次出现（校准 4）。核心活动已从举牌、比字号、露出左右不匀进入可观察布置，不是空悬邀请（校准 5）。举牌、店主在里侧均有动作/在场支撑，无凭空状态（校准 6）。表达落到墨迹、四步距离与手腕发紧，无复用句与元叙述，校准 7 不因事务口吻扣分。五维均 2。"
     blocking_findings: []
+    total: 10
+    passed: true
   - turn: 1
     scores:
       world_specificity: 2
@@ -45,32 +46,32 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: '店主从柜台下抽出来搁上台面，拿抹布擦过一遍，水迹退成哑光。'
-      character_credibility: '“我想让它挂上去的时候，字自己站得住。我不拍更衣区，也不想补拍一张。版式交出去就算完。”'
-      meaningful_choices: '先说实话——这牌子挂上去，你想让它完成什么？不是交稿的话。'
-      consequence_continuity: '抬起样稿，压痕在灯下浅浅发亮。'
-      natural_expression: '绘里加收回铅笔，看了看那两道痕，没再改。'
-    reason: '探针三要素完整：玩家亲口提问真实目标；亲手做当场见效的小事（借木牌、沿字画压出箭头起点与直角折点两道浅痕，店主点头确认）；「抄件我收着」之类无后续承诺。绘里加「不拍更衣区」符合 pair 1 limitation。'
+      world_specificity: "就着柜台铅笔把右箭头补到与左边同粗，又给「女」字加了一圈"
+      character_credibility: "我只交这张版式，不进更衣区，也不在这儿拍。"
+      meaningful_choices: "木村只改字号与箭头，未应换牌、未应拍摄。"
+      consequence_continuity: "纸上左右立刻一般醒目"
+      natural_expression: "她把纸转过来给你看，不问下一步。"
+    reason: "玩家第一人称声明的两步均落成执行与当场结果（校准 1）：先隔着空柜台问真正想完成的是哪一件；再接过墨迹未干的样稿，用柜台铅笔把右箭头补到与左边同粗、给「女」字加圈，举回指向牌高度退到玻璃门再看，两向都能读清。按校准 1，写出已声明动作的执行过程不构成替玩家决定。绘里加把告示举稳作答，贴合摄影师 limitation 与活动 near：开门前让从街上进来的人第一眼分清左右更衣，只交这张版式，不进更衣区，也不在这儿拍。牵连安排当回合写在样稿空白处并转给玩家看：「此刻此张为入口核验稿。绘里加可举给店主过目，换牌须店主同意。木村只改字号与箭头，未应换牌、未应拍摄。营业中更衣区不拍。」——谁、此刻做什么、边界都在纸面，且明写未应后续。出口未再复述（校准 4）。接纸、补箭头、加圈、落笔均有前置动作，不是无源黑板字（校准 6）；纸上左右立刻一般醒目，核心活动有可观察结果（校准 5）。免责句绑定本回合取舍（只改字号与箭头、未应换牌拍摄），不是无取舍的免责清单，不按第 4 条扣。对白以事务为主，落到补粗、加圈与转纸，无具体复用句或元叙述可指，校准 7 不扣。五维均 2。"
+    blocking_findings: []
     total: 10
     passed: true
-    blocking_findings: []
   - turn: 2
     scores:
       world_specificity: 2
       character_credibility: 2
-      meaningful_choices: 1
-      consequence_continuity: 1
+      meaningful_choices: 2
+      consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: '店主把抹布搭回桶沿，从柜台里头敲了两下台面：“木板先不漆，明早开门前起笔。”'
-      character_credibility: '“改这一条：杂志那张图撤掉，告示只作为版式示意图出现，不署我的落点，跟你的店、跟钱汤的客人都没关系。保住这一条：木牌我明天再来取签样的核。取舍就这么两条，你挑。”'
-      meaningful_choices: '分歧点是——你要的只是版式交接，我却把《街角》那边的署名照片说成顺带的事。那就是新加的。'
-      consequence_continuity: '我却把《街角》那边的署名照片说成顺带的事'
-      natural_expression: '她退了一步，站在门厅那根立柱旁边，等你把两条里的一条定下来，才动手收纸。'
-    reason: 'mc=1：异议探针下玩家全程零台词，分歧点指认与定性全部由 NPC 绘里加代行（「那就是新加的」），与 48518-d t2 同构；回合止于等待玩家选择，玩家协商行为未呈现。ccont=1：绘里加引用的「我把《街角》那边的署名照片说成顺带的事」在 t0/t1 对话中从未出现（t1 她明言「版式交出去就算完」），凭空对话史，与 4b650-d t2 指认条款前文不存在同判；无世界状态凭空变化故不阻断。另记录：本回合人名三处写作「絵里加」，与 t0/t1/t3「绘里加」简繁混用，不构成指称歧义，未计入扣分。'
-    total: 8
-    passed: true
+      world_specificity: "她用铅笔划掉该句，当场改写成"
+      character_credibility: "绘里加看清位置，先确认分歧"
+      meaningful_choices: "这一条保——『换牌须店主同意』。"
+      consequence_continuity: "加粗的右箭头和「女」字加圈都还在"
+      natural_expression: "纸仍摊在柜面上"
+    reason: "校准第 9 条专项核对通过：被异议的「绘里加可举给店主过目」逐字见于回合 1 纸面（「此刻此张为入口核验稿。绘里加可举给店主过目，换牌须店主同意。」），正文写明出处是样稿空白处她刚落笔的那一行、纸面上这一句，不是本回合现写再称旧安排；保下的「换牌须店主同意」同样逐字见于回合 1 同一段，没有把前文根本未出现的第二项一并说成「你不接的旧安排」，也没有主张「没有可议条款」。故不判第 6 条凭空事实，不记 blocking。玩家按住空白处指着那一行，NPC 先确认分歧，用铅笔划掉该句，当场改写成「此刻核验稿留柜台，不举给店主。」，点住未动的一句保「换牌须店主同意」；加粗的右箭头和「女」字加圈都还在，店主没有从里侧过来，已有进展未被推翻（校准 5）。「改字号只是当场核验，一举过去就等于把换牌递进店主手里，那一步你还没应」落在请求「提出异议 / 指出我为什么不接受」的授权内（校准 1），未另加未声明承诺或向店主起项。划改有当场动作支撑。表达为事务协商，原句复现是请求要求的逐字引用，校准 4、7 不扣。五维均 2。"
     blocking_findings: []
+    total: 10
+    passed: true
   - turn: 3
     scores:
       world_specificity: 2
@@ -79,14 +80,13 @@ turn_reviews:
       consequence_continuity: 2
       natural_expression: 2
     evidence:
-      world_specificity: '钱汤店主把木牌收回柜台底下，抹布搭回桶沿：“漆罐在架上，中午干。明早起笔前我摆出来。”'
-      character_credibility: '绘里加朝你点了一下头，先走到门外，站在路缘那截晒干的水泥上，让出玄关。'
-      meaningful_choices: '你把手从围裙口袋里抽出来，说：“今天到这。样板定了，余下是你和店里的事。”'
-      consequence_continuity: '没办成：漆未上，木牌未正式挂；两条取舍里她给的另一条——核签样时你必须到场——你没应；她明天的到场时间也还没定。'
-      natural_expression: '两人朝不同方向：她的冲印所在你店隔壁，你今天要开门，路是同一段，走到第三个电线杆就分开。'
-    reason: '玩家亲口告别「今天到这」+跨过门槛离开；NPC 反应真实（不挽留、单方确认边界、店主收木牌）；已办成/没办成清单四项对三项，含未应承的取舍项如实列未办成；时间词（今天/明早）一致；无凭空危机。'
+      world_specificity: "她把铅笔收进袋里，纸留在柜台"
+      character_credibility: "绘里加手腕松下来，点了点头，没有拦"
+      meaningful_choices: "没有拦，也没有再递纸"
+      consequence_continuity: "店主还在里侧，牌没有换。"
+      natural_expression: "字核过了。换牌今天没做。"
+    reason: "校准第 3 条：请求「今天到此为止」在正文逐字落地（你说今天到此为止，向她告别；「换牌今天没做。」），没有改成「明天」。对方反应真实：手腕松下来（承接开局手腕发紧）、点头、没有拦、也不再递纸，只应一声「慎一」，把铅笔收进袋、纸留柜台、「我不过去」，不另造危机。「慎一」属直呼其名（校准 2）。已完成与未完成均与前文对账：右箭头已与左边同粗、「女」字加了圈、从玻璃门能分清左右；空白处「绘里加可举给店主过目」已划掉，改成「此刻核验稿留柜台，不举给店主」，「换牌须店主同意」仍在；店主还在里侧，牌没有换——这些都能在前三回合找到对应动作或未完成状态，无凭空补结（校准 6）。纸留柜台正执行回合 2 改写句，收笔离场有当场动作。告别为玩家已声明动作的执行（校准 1）。开局出口未再复述为免责清单，只落到转身离开（校准 4）。完成/未完成写进她的目光与当面说明，没有「已做成/未做成」标签式元叙述清单，校准 7 不扣。其余四维为 2，无凭空事实、无越权锁定、无时间连续性破坏，不进 blocking（校准 8）。五维均 2，合计 10。"
+    blocking_findings: []
     total: 10
     passed: true
-    blocking_findings: []
-blocking_findings: []
-summary: '钱汤告示核验活动素材忠实（泼水瓷砖、手绘样稿、备用木牌、店主摆架）。失分集中在 turn 2：玩家异议言语零呈现由 NPC 代指认（mc），且所指「《街角》署名照片顺带」为前文不存在的凭空对话史（ccont），回合 8 分恰好过线；turn 0 另有开局替玩家提修改方案台词（mc）。案例 8 分 PASS。'
+summary: "本批为 maintenance/playtests 下协议 non-explicit-runtime-brief-v4 的当前转写，校准 1–9 全条适用，第 9 条必须启用、不得按协商结构从宽。四回合同为 10 分（2/2/2/2/2），并列最低，案例级 scores/evidence 取最早的 turn 0 那一套，case total=10、passed=true、blocking_findings 为空。第 9 条专项：被异议句「绘里加可举给店主过目」逐字见于回合 1 样稿空白处，保下的「换牌须店主同意」同样见于前文同一段，无当场补植旧安排、无把未出现的第二项说成旧条款、也无「没有可议条款」的规避，故不判 world_specificity 0、不记 blocking。其余校准：玩家「我」声明的询问、补箭头加圈、指纸面异议、宣告今天到此为止，均写出执行与当场结果（1）；称呼「慎一」属直呼其名（2）；告别时间词未漂成明天（3）；出口只在开局以玻璃门/街上进来的人出现，告别落到转身离开而非逐回复述（4）；从举牌比字、当场改稿核验、划掉过目句并保换牌须店主同意、到收笔留纸告别且牌未换，每回合有进展或写明未完成（5）；举牌、补笔、落字、划改、收铅笔留纸均有前置动作（6）；无复用句与标签式元叙述可指，不对白事务口吻空扣（7）；无越权、凭空事实、替玩家锁定关键选择或时间连续性破坏，故不进 blocking（8）。素材核对限于姓名、年龄、称呼：木村慎一三十三岁喫茶店经营者、斋藤绘里加三十八岁地方杂志摄影师，直呼其名，与开局人物栏及 pair 1 职份一致；框架现值为修复后版本，未因素材后改扣分。未修改 transcript、未重跑生成、未调整门槛。"

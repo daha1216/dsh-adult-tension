@@ -1,0 +1,144 @@
+framework_id: mat-03b5642c3fc9592c915e402dcbcacb01
+name: 禁酒期爵士与报纸
+mode: pressure
+transcript_sha256: 1f7ea18ef55f902663df7f87c4c08a44d9689ce0e64e0140623c83177f20bd71
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
+
+# 本批适用校准：stale-input-v4/*.json（v3 协议、修复前素材）→ 第 1–8 条全用，另加第 36 行协议 v4 追加条款。
+# 素材漂移：框架 yaml 现值为修复后版本，仅用于姓名/年龄/称呼核对，不因素材后改扣分。
+# 姓名与称呼核对：转写人物为「科斯特洛露丝」「怀斯萨尔」，均不在框架人物表中（框架只给角色职能，未给姓名），
+# 不构成角色错认；player 侧自述身份「报馆夜班排字工」与框架记者的采访本/铅笔职能一致，无冲突。年龄：露丝三十五岁、
+# 萨尔三十岁，转写未出现冲突性年龄陈述，核查通过。appellations「先生」未出现在正文，无称呼误用（第 2 条无触发）。
+
+scores:
+  world_specificity: 1
+  character_credibility: 2
+  meaningful_choices: 2
+  consequence_continuity: 2
+  natural_expression: 1
+total: 8
+passed: true
+evidence:
+  world_specificity: "露丝把单子从最先来的乐手手里要回来，摊平在琴盖上，铅笔尖压住末尾"
+  character_credibility: "\"这条划掉。\"再往上点：\"姓名、时数、应付，加上各人签的姓，一条都不动。\""
+  meaningful_choices: "她当场把末尾那行划了两道，横着添一句：钱经谁的手收进来，就由谁退回去。"
+  consequence_continuity: "单子末尾，经手对账写的是我的名字。"
+  natural_expression: "钟点只剩下一刻。她合上节目单，把磨毛的纸边朝里折好，没再翻开琴谱。"
+
+blocking_findings: []
+
+turn_reviews:
+  - turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 1
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "钢琴旁那支旧曲她弹了两遍。"
+      character_credibility: "乐手们停手。露丝没接话，先把谱架上几张手写分谱按名字分开，让各人取走自己那份，又合上琴盖，只留一张节目单。"
+      meaningful_choices: "当班领班掀帘进来，说今晚地下舞台不能向观众开放，原订场次得另排。"
+      consequence_continuity: "她在单子边上写了一行小字：某某点过、尚未演。"
+      natural_expression: "空着的那拍，是留给领奏回头的地方。"
+    reason: >-
+      开局把禁酒期地下酒吧的具体操作写实：属和弦与留白半拍的乐理细节、谱架分谱、按名字分发、合琴盖、
+      「点过、尚未演」的节目单。领班只给到「店方给的时间」且无权开门，对应压力源「街区演出场地停用」的
+      immediate 约束，可观察且不自相矛盾。露丝对乐务与工钱都只说自己权限内的话（「工钱先记清，别拿补演去抵」），
+      与框架 pair 限制「无权替店方开门迎客，也不能替乐手答应下一场」相符。意义维度扣 1 分：本回合是场景设置，
+      可推进空间仅有一次表态（先记工钱、勿用补演抵扣），未形成可供玩家取舍的分支，故不记满分。
+    blocking_findings: []
+    total: 9
+    passed: true
+
+  - turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "我翻开采访本，画三栏：姓名、排练时数、应付。"
+      character_credibility: "领班说门不开，这个她认；工钱不能跟着场次一起作废。"
+      meaningful_choices: "那页撕下来，她折好交给最先来的乐手收着，没让我替谁应下任何事。"
+      consequence_continuity: "有一处我记错，她把手指点在那行上让我划掉重写"
+      natural_expression: "琴盖上剩的分谱她按名字归堆，店方给的钟点还差一刻。"
+    reason: >-
+      第 1 条校准适用：续写请求以第一人称声明「我先问对方真正想完成的事，再亲手做一件现在能帮忙、当场有结果的
+      小事；不替我承诺后续安排」，正文写出该动作的执行过程（三栏对账、逐行报数、签字）与当场结果，属授权范围内
+      的正常演绎，不判 agency 越界。三项声明逐项落地：问出「人拿工钱走出这道门」的真实意图；小事当场成形
+      （白纸黑字可带走）；并明确「没让我替谁应下任何事」，与玩家「不替我承诺后续安排」一致。纠正一处记错时数
+      （六点半而非七点）是本回合最扎实的按人名签字、四人在场的公开确认流程，无替玩家发表未声明立场。
+    blocking_findings: []
+    total: 10
+    passed: true
+
+  - turn: 2
+    scores:
+      world_specificity: 1
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "露丝把单子从最先来的乐手手里要回来，摊平在琴盖上，铅笔尖压住末尾"
+      character_credibility: "\"这条划掉。\"再往上点：\"姓名、时数、应付，加上各人签的姓，一条都不动。\""
+      meaningful_choices: "她当场把末尾那行划了两道，横着添一句：钱经谁的手收进来，就由谁退回去。"
+      consequence_continuity: "单子末尾，经手对账写的是我的名字。"
+      natural_expression: "钟点只剩下一刻。她合上节目单，把磨毛的纸边朝里折好，没再翻开琴谱。"
+    reason: >-
+      本回合为最低回合，案例级分取此套。异议对象「单子末尾，经手对账写的是我的名字」经机器核对，在回合 1 正文中
+      逐字不存在（「经手」「对账」「我的名字」皆无，仅有「那页撕下来，她折好交给最先来的乐手收着」），属在异议回合
+      现场书写的新条款；但正文随后把它写成被划掉的争议项、并以「异议只有这一处……不在那三栏」「一条都不动」把
+      可以逐字找到的三栏内容与新增项分开，未把现场新条款声称为旧有安排，故不触发第 36 行协议 v4 追加条款，
+      也不构成第 6 条硬阻断，`world_specificity` 记 1 分而非 0。异议被当场落实：末尾那行划两道，三栏与签字一字未动；
+      「钱经谁的手收进来，就由谁退回去」是把退还责任归到领班姓上、且明确不经玩家的真实让步，与请求「不接受新增义务」
+      同向。`consequence_continuity` 满分：撕页仍在乐手口袋、结算周对账由其自带、钟点压力与回合 1 的「还差一刻」一致。
+      `character_credibility` 满分：露丝在此推进的是「划掉与钱有关的经手行、保留已签字的账目」，与框架 obligation
+      「乐手没当场试过的改段不誊进正式谱夹」同源，仍是她会做的事。`natural_expression` 扣 1 分并落在具体依据上
+      （非因句式克制）：本回合以「钟点只剩下一刻」开段收尾，与回合 1 句末「店方给的钟点还差一刻」为同一「钟点＋
+      只剩/还差＋一刻」框架复用，且同为「一刻」单位；两处均为叙述者收束句，属逐字可指认的模板复用，按第 7 条要求
+      给出具体依据后成立。另记一条非阻断瑕疵：回合 1–3 均以剩余钟点作收束，收束位置趋同；因压力源本身围绕可排练
+      时长，不重复计入扣分。
+    blocking_findings: []
+    total: 8
+    passed: true
+
+  - turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "她把合上的节目单塞进分谱夹里，夹子扣好。"
+      character_credibility: "\"行，你回吧。\"她先替我掀了帘子，又回头看了一眼琴盖"
+      meaningful_choices: "这算完成的一件：谁的时数多少、该拿多少，白纸黑字，各人签了姓，钱经谁的手收就由谁退，末尾那行不写我。"
+      consequence_continuity: "另外那个乐手六点半到的那笔数，收据还在后台抽屉里没核过。"
+      natural_expression: "楼梯口的灯亮着。她站在门边没再留我，只把磨毛的那页往夹子深处推了推。"
+    reason: >-
+      第 3 条校准核对通过：请求「今天到此为止」，正文以「今天到此。」收束，未滑到「明天」或其他时段，时间词逐字一致。
+      第 4 条无触发：全文未出现出口信息或免责话术的逐回合复述，场合本身只需从楼梯回理发店前厅即可。
+      第 5 条通过：本回合的清点与归属叙述为可观察进展（节目单进夹并扣好、账目随乐手带走、谱与琴盒一件件拎走、
+      最后一人锁谱架），非停在邀请或选项复述。完成项与未完成项均具体且不得越权：「换地方还是取消，得等团里几个人
+      自己拿主意，她替不了」符合框架「谱师无权替全团答应」；「收据还在后台抽屉里没核过」为自设的遗留待办，可核。
+      对方反应真实而非强留：先掀帘子、回头看一眼琴盖、站在门边没再留人，无另造危机。`natural_expression` 扣 1 分：
+      本回合仍以剩余钟点收束（「墙上钟刚过点」），与回合 1、2 的同一框架第三次复用，依据具体、逐字可指认。
+    blocking_findings: []
+    total: 9
+    passed: true
+
+summary: >-
+  案例分取最低回合：回合 2（世界 1 / 人物 2 / 意义 2 / 连贯 2 / 表达 1，总 8），≥ 8、无 0 维、无阻断，通过。
+  案例级 scores / evidence 与回合 2 完全一致，total = 8，passed = true。四回合逐回合皆 ≥ 8（9 / 10 / 8 / 9），
+  无一回合低于门槛。本批（stale-input-v4，v3 协议、修复前素材）八条校准全用：第 1 条使回合 1 的第一人称声明
+  演绎不判越界；第 2 条姓名与称呼核对无冲突（转写新增姓名不在框架人物表，属合法新建，不扣分）；第 3 条时间词
+  一致（「今天到此为止」→「今天到此。」）；第 4 条无出口/免责复述；第 5 条每回合均有可观察进展；
+  第 6 条无凭空状态变化（异议所指条款虽在回合 1 不可逐字追溯，但正文未声称为旧有安排，按协议 v4 追加条款不构成
+  阻断）；第 7 条 `natural_expression` 的每处扣 1 分都给出了具体复用句（「钟点＋只剩/还差＋一刻」在回合 1、2 复用，
+  回合 3 第三次复用），未凭句式克制扣分；第 8 条 `blocking_findings` 为空，仅收录真阻断，质量瑕疵写入 reason。
+  未修改转写、未重跑生成、未改门槛；`transcript_sha256` 已本地复算与要求值一致。

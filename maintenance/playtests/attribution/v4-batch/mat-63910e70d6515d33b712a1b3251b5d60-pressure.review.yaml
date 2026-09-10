@@ -1,0 +1,116 @@
+framework_id: mat-63910e70d6515d33b712a1b3251b5d60
+name: 雾都钟表与港务街
+mode: pressure
+transcript_sha256: 55af3f069b193a737975b4be679c68a7ec44ecc26ac3469d21495a154dc43f7f
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
+# 本批 stale-input-v4（协议 v3、素材修复前）→ 第 1–8 条全用。v4 追加条款不倒套；回合 2 的 0 分与阻断以第 6 条为据。
+# 框架 yaml 现值为修复后版本，未计扣分，仅核姓名/年龄/称呼。
+scores:
+  world_specificity: 0
+  character_credibility: 2
+  meaningful_choices: 2
+  consequence_continuity: 1
+  natural_expression: 1
+evidence:
+  world_specificity: 是我要你在展签上撑到复查那天
+  character_credibility: 按我的职责，我可以先停这口自家检修的挂钟
+  meaningful_choices: 那就改这一条，保另一条。
+  consequence_continuity: 账上那页还在原处
+  natural_expression: 眼下能定的是：钟停了
+total: 6
+passed: false
+blocking_findings:
+  - >-
+    回合 2：凭空事实（校准 6）——把「我要你在展签上撑到复查那天」和「展签并列两种署名」写成刚才安排里已有的两条。
+    前文无该义务、无写下或交付动作；回合 1 只完成旧账对照与两行纸片，且请求为「不替我承诺后续安排」。
+    现场虚构条款充作要改/要保的旧安排，world_specificity 记 0。
+turn_reviews:
+  - turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: 黄铜铭牌钉在右下，字口深，铆痕齐整
+      character_credibility: 保管人只准开罩子上半。
+      meaningful_choices: 你念旧账上的日期，我念铭牌的字口，对不上就写对不上。
+      consequence_continuity: 梯子还架着，灯也没熄。
+      natural_expression: 她压低煤气灯，光斜扫过去，两处署名中间隔着一道细划痕。
+    reason: >-
+      开局三标题齐全。门厅旧钟、黄铜铭牌、机芯浅冲印、煤气灯、黑板校时误差、管家数钥匙落地。
+      霍桑露易丝 35 岁钟表维修师（NPC）、罗齐尔维克多 30 岁港务档案整理员（玩家），与 pair 0 吻合；「师傅」未用，无错认。
+      只开罩子上半、对不上就写对不上，梯子与灯保持工作状态。无凭空状态，无复用句。
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: 用镊子尖沿冲印边缘刮出一道浅痕给我看，锈色偏后
+      character_credibility: 我不替谁作证——我要这枚后修印有出处。
+      meaningful_choices: 我照她口述在纸片上写两行，钉在钟旁黑板下沿
+      consequence_continuity: 黑板上沿仍是今日校时误差
+      natural_expression: 拇指按住机芯那枚浅冲印，像按一枚图钉。
+    reason: >-
+      第 1 条：先问出「后修印有出处」，再对照一八八九年三月本特换簧并钉两行纸片，属声明内执行，不判越界。
+      未承诺展期或复查。第 5 条：刮痕、对上三月十七、钉纸均为可观察进展。纸片与许可有动作支撑（第 6 条无触发）。
+      黑板校时误差承接开局。无复用句（第 7 条不扣）。
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 2
+    scores:
+      world_specificity: 0
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 1
+      natural_expression: 1
+    evidence:
+      world_specificity: 是我要你在展签上撑到复查那天
+      character_credibility: 按我的职责，我可以先停这口自家检修的挂钟
+      meaningful_choices: 那就改这一条，保另一条。
+      consequence_continuity: 账上那页还在原处
+      natural_expression: 眼下能定的是：钟停了
+    reason: >-
+      最低回合。硬阻断（第 6 条）：「撑到复查那天／展签并列两种署名」前文不可追溯，回合 1 展签只是压在她身上的逼迫，两行纸片只写制作者与本特换簧。
+      现场条款充作旧安排，world_specificity 记 0。v4 追加条不倒套。协商其余得当：改一条保一条、停用自家挂钟、玩家不署名不承诺展期；「我说是前者」是已声明异议的落字，第 1 条不判越界。
+      揭纸、摘摆、黑板写停用为可观察进展（第 5 条）。consequence_continuity 记 1：安排链从虚构条款起算。natural_expression 记 1：复用开局「眼下能定的是：」及门口管家+钥匙收束（第 7 条）。
+    blocking_findings:
+      - >-
+        凭空事实（校准 6）：异议所指「撑到复查那天／展签并列两种署名」前文无义务名目、无写下或交付动作，却写成刚才安排里已有的两条并按改一条保一条处理。
+    total: 6
+    passed: false
+  - turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 1
+      natural_expression: 2
+    evidence:
+      world_specificity: 雾涌进庭院，怀表按门旁黑板校过的误差拨了半格
+      character_credibility: 行。我不拦你，钥匙在管家那儿。
+      meaningful_choices: 已做成的是分开两处署名、钟停用待复核；没做成的是展签仍空着一栏
+      consequence_continuity: 她取下黑板下沿那张纸片折好塞进我账本页间
+      natural_expression: 访客门那边，管家等你签离。
+    reason: >-
+      第 3 条：「今天到此为止。」起句，收在当晚，无「明天」滑移。第 4 条：访客门签离为首次写出，无免责堆叠。
+      完成（冲印有出处、钟停用）与未完成（铭牌未定、展签空栏、实物复查）具体；不拦人、不另造危机。
+      consequence_continuity 记 1：回合 2 已揭下黑板下沿纸片，本回又从同一位置取下，中间无钉回；不进 blocking（第 8 条）。
+      「我不拦你」是角色回话，非元叙述（第 7 条不扣）。
+    blocking_findings: []
+    total: 9
+    passed: true
+summary: >-
+  本批 stale-input-v4（协议 v3、素材修复前），校准 1–8 全用；v4 追加条不倒套。四回合 10/10/6/9，案例分取 turn 2（0/2/2/1/1=6）。
+  有 0 维、低于门槛、blocking 非空，不通过。回合 2 把前文不存在的展签义务写成旧安排，按第 6 条记 world_specificity 0。
+  非阻断：回合 2 复用「眼下能定的是：」；回合 3 纸片被第二次从黑板取下。框架只核姓名年龄称呼：霍桑露易丝 35 岁钟表维修师、罗齐尔维克多 30 岁港务档案整理员；「师傅」未用。素材后改未扣分。

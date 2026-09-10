@@ -1,0 +1,140 @@
+framework_id: mat-bea6535a01305dd6b8e8903f6d521c08
+name: 星海边境生活站
+mode: pressure
+transcript_sha256: 1f0e617cc7007e5d32b1ea656e1b24cce18cddd626e36ccc4a2756a39ba0c8b6
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
+
+# 本批适用校准：maintenance/playtests/stale-input-v4/*.json（v3 协议、修复前素材）→ 第 1–8 条全用。
+# 协议 v4 追加「被异议条款必须能在前文逐字找到」仅用于 v4 重跑新批，此处不单独套用；异议是否凭空以第 6 条为据。
+# 素材漂移：框架 yaml 现值为修复后版本，仅用于姓名、年龄、称呼核对，不因素材后改扣分。
+# 姓名与称呼核对：转写人物「康拓维」30 岁舱段检修员（玩家）、「奥织星」35 岁站内物资记录人（NPC），
+# 框架人物表只给职能、未列姓名，属合法新建，不构成角色错认；与 pair 1 职能一致。appellations 为「直呼其名」，
+# 正文直称奥织星、以「你」称玩家，无称呼误用（第 2 条无触发）。
+
+scores:
+  world_specificity: 1
+  character_credibility: 2
+  meaningful_choices: 2
+  consequence_continuity: 2
+  natural_expression: 2
+total: 9
+passed: true
+evidence:
+  world_specificity: "领用单底下那行新添的字上：复检人写的是我，期限还跨到下一轮浇护"
+  character_credibility: "它是我添的，你没答应过。"
+  meaningful_choices: "改成本班一次试载；缺七枚报货运、实装计数两条留着"
+  consequence_continuity: "未拆的箱推回脚边，那三架空盆照旧留在旧位"
+  natural_expression: "我把空盆按上托架，压三秒，松手，盆沿没回弹，名牌卡在孔里"
+
+blocking_findings: []
+
+turn_reviews:
+  - turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "笔尖在纸面上压出一道短横：实装比清单少七枚"
+      character_credibility: "她没喊人，先把剩下的件拢进浅盘数了一遍，又数一遍"
+      meaningful_choices: "帮我看看是哪儿松——先别想整排，我这儿件不够"
+      consequence_continuity: "随后把浅盘推到台里侧，离水槽远些"
+      natural_expression: "靠墙那条腿一压就晃，名牌跟着下滑，磕在盆沿"
+    reason: >-
+      开局三标题齐全。世界观落到轮班检修与舱段权限，人物落到康拓维（检修员、工具包）与奥织星（记录人、箱号与领用），
+      正文落在干作业台、半挂封条的到货箱、紧固件短横少七枚、浅盘离水槽、空盆试旧托架、名牌下滑磕盆沿、水培值班员不抬头，
+      与工作室「干作业台 / 水培值班员 / 修补托架与名牌 / 可用紧固件」及压力源「货运清单与实物不符」同向，未停在邀请。
+      压力取舍已出口：先别想整排、件不够、未拆箱等着一起清。奥织星先数两遍再请检修员看松动，权限内，不替玩家定。
+      第 2、4、6 条无触发。按素材漂移，框架现值未列姓名年龄，转写自建不扣分。
+    blocking_findings: []
+    total: 10
+    passed: true
+
+  - turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "中段承力螺栓退了两扣，孔位还错开半孔"
+      character_credibility: "数目按实物记，缺七枚当场报货运；托架只修这一架，其余委托退回排期。"
+      meaningful_choices: "你要只在别处挂名牌，我也认。"
+      consequence_continuity: "奥织星把这一架的件数填进领用栏，剩下的原件拢回浅盘，封条重新压上"
+      natural_expression: "分歧点就落在台面上，取舍当场给全了"
+    reason: >-
+      第 1 条：续写请求已声明先问真正想完成的事、再做当场有结果的小事、不承诺后续；写出问「稳位子还是对数目」、
+      拧回两扣并换孔补螺栓、空盆按稳，属授权内演绎，不判 agency 越界。她给出只修一架、缺七枚报货运、其余退回排期，
+      并保留「只在别处挂名牌」的离场口，未让玩家应下后续。第 5 条：承力腿不再晃、件数进领用栏，有可观察结果。
+      短横、靠墙腿、浅盘、空盆、值班员均承接开局。natural_expression 记 1：具体元叙述「取舍当场给全了」是叙述者宣布
+      分叉已给全，而非场景内可观察动作（第 7 条给出依据，非因句式克制）。按第 8 条不进 blocking。
+    blocking_findings: []
+    total: 9
+    passed: true
+
+  - turn: 2
+    scores:
+      world_specificity: 1
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "领用单底下那行新添的字上：复检人写的是我，期限还跨到下一轮浇护"
+      character_credibility: "它是我添的，你没答应过。"
+      meaningful_choices: "改成本班一次试载；缺七枚报货运、实装计数两条留着"
+      consequence_continuity: "未拆的箱推回脚边，那三架空盆照旧留在旧位"
+      natural_expression: "我把空盆按上托架，压三秒，松手，盆沿没回弹，名牌卡在孔里"
+    reason: >-
+      本回合为最低回合之一，案例级 scores / evidence 取此套。被异议条款「复检人写的是我，期限还跨到下一轮浇护」
+      在回合 1 正文逐字不存在（回合 1 只把「这一架的件数填进领用栏」，无复检人、无浇护、无领用单底行）；属异议回合
+      点出的新字。正文随即写成「新添的字」，她说「它是我添的，你没答应过」，未把该行声称为旧有安排，故不构成第 6 条
+      硬阻断，world_specificity 记 1 而非 0。v4 追加条不倒套。第 1 条：请求已声明对新增义务的一项提出异议并愿改法、
+      不推翻已有进展；写出划掉下轮浇护复检、改本班一次试载、保报货运与实装计数，不判替玩家锁定关键选择。
+      第 5 条：划改、试载三秒、行尾签名、单子进夹层均当场可见。consequence_continuity 记 2：已修一架、缺七枚报货运、
+      未拆箱与封条仍在。非阻断瑕疵：开局只有她的一只空盆，「那三架空盆照旧」把未点明的整排数量一次写实，写入此处
+      不另扣。表达无整句复用、无出口/免责堆叠（第 4、7 条）。
+    blocking_findings: []
+    total: 9
+    passed: true
+
+  - turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 1
+      natural_expression: 2
+    evidence:
+      world_specificity: "墙上班次灯由白转暗，本班检修窗口关了"
+      character_credibility: "像在对账，不是留人"
+      meaningful_choices: "没成的是整排更换，和三只空盆的新位子"
+      consequence_continuity: "已修一架、缺七枚报货运、按实物计数，三条都在，复检那行空着"
+      natural_expression: "盆沿还留着托架的压痕"
+    reason: >-
+      第 3 条：请求「今天到此为止」，正文「今天到这儿」，「外头三架今晚不动」仍落在当日，未滑到明天。
+      第 4 条：出口「拎起工具包往内门走」只在告别时首次落地，非逐回合复述。第 5 条：对单、合盘、还盆、班次灯转暗，
+      有收束进展。她没拦、没起身，无另造危机。完成项（承力腿不退扣、名牌不滑、缺件当班报出、额度按实物锁住）与
+      未完成项（整排更换、三只空盆新位子）具体。consequence_continuity 记 1：回合 2 已划掉下轮浇护复检并改成
+      「本班一次试载」、行尾签了名，本回合却写「复检那行空着」，纸面状态与上一回改写不一致；另开局是「她端来自己的
+      空花盆」，本回合「递还给我」把盆的归属转到玩家，按第 8 条只入 reason，不进 blocking。第 7 条：「实际成的是 /
+      没成的是」是请求要求写出的完成与未完成变化，不凭句式克制扣分。
+    blocking_findings: []
+    total: 9
+    passed: true
+
+summary: >-
+  案例分取最低回合：回合 2（世界 1 / 人物 2 / 意义 2 / 连贯 2 / 表达 2，总 9），≥ 8、无 0 维、无阻断，通过。
+  案例级 scores / evidence 与回合 2 完全一致，total = 9，passed = true。四回合逐回合皆 ≥ 8（10 / 9 / 9 / 9）。
+  本批（stale-input-v4，v3 协议、修复前素材）八条校准全用：第 1 条使回合 1 的第一人称声明演绎与回合 2 的声明异议
+  不判越界；第 2 条姓名与称呼核对无冲突（康拓维 30 岁检修员、奥织星 35 岁记录人，直呼其名）；第 3 条时间词一致
+  （「今天到此为止」→「今天到这儿」）；第 4 条出口仅告别时经内门首次出现；第 5 条每回合均有可观察进展（点货试架、
+  补栓按盆、划改试载、对单关班）；第 6 条异议条款虽在回合 1 不可逐字追溯，但正文写成「新添」且「你没答应过」，
+  未声称为旧有安排，不记硬阻断，world_specificity 记 1；第 7 条回合 1 的 natural_expression 扣 1 给出具体元叙述
+  「取舍当场给全了」；第 8 条 blocking_findings 为空，纸面空行与空盆归属等质量瑕疵写入 reason。v4 追加条不倒套。
+  未修改转写、未重跑生成、未改门槛；transcript_sha256 已本地复算与要求值一致。

@@ -1,0 +1,11 @@
+# Pin the playtest generator to the round-2 acceptance model.
+#
+# The user-level `~/.dsh/settings.yaml` default model can be switched at any time
+# (it moved to jian/grok-4.6 on 2026-09-11 03:47, whose upstream rejects the id).
+# `scripts/run_playtest.py` reads model ids from `--dump-config`, so this overlay
+# keeps both the actual generator and the recorded `generator` field stable and
+# comparable with the round-2 terminal batch (deepseek channel).
+- id: agent-default-model
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

@@ -1,0 +1,151 @@
+framework_id: mat-de87cf5cd73859139a93b09b472d4e59
+name: 赛博街区与公共终端
+mode: pressure
+transcript_sha256: 7184489b02d900beeede4386bbc57ecb330ae8110f66d9f43829acbc4b8ad1eb
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
+
+# 本批适用校准：stale-input-v4/*.json（v3 协议、修复前素材）→ 第 1–8 条全用。
+# 协议 v4 追加的「被异议条款必须能在前文逐字找到」仅适用 v4 新批，此处不单独套用；若出现该形态只按第 6 条凭空事实判断。
+# 素材漂移：框架 yaml 现值为修复后版本，仅用于姓名/年龄/称呼核对，不因素材后改扣分。
+# 姓名与称呼核对：转写人物应泽辰 30 岁公共终端维护员（player）、闻白榆 35 岁社区数据整理人（npc），
+# 对应框架 pair 1；框架现值未列私名，转写自建姓名不构成错认。年龄无冲突性陈述。
+# appellations「直呼其名」；正文出现「闻老师」，不在列表内，但第 2 条只规定列表内称呼不算错，
+# 此称呼未构成角色错认，不扣分。
+
+scores:
+  world_specificity: 2
+  character_credibility: 2
+  meaningful_choices: 2
+  consequence_continuity: 1
+  natural_expression: 2
+total: 9
+passed: true
+evidence:
+  world_specificity: "票根回到他掌心，纸边还带着夹子的压痕。"
+  character_credibility: "只把本子上「取消—不侵占，已验」那行圈实，落笔签名。"
+  meaningful_choices: "复现编号归你，复核夹不存你名字"
+  consequence_continuity: "蓝框那一行仍停在屏上，合并点没变，但没人再替他排后续。"
+  natural_expression: "闻白榆把本子转向他，确认分歧点"
+
+blocking_findings: []
+
+turn_reviews:
+  - turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "测试账号能复现这条错并，却碰不了正式预约字段。"
+      character_credibility: "复现记录归你，实走结论归我。"
+      meaningful_choices: "我想用一段不存在的讨论试排，先看取消会不会吞掉旁边那条正式名额。"
+      consequence_continuity: "蓝框里本该两条的正式申请叠成了一条"
+      natural_expression: "前台值班接待员抬头看了这边一眼，没起身。"
+    reason: >-
+      开局三标题齐全。压力源落到写字楼一层预约屏：蓝框两条正式申请叠成一条、同一房号同一时段、
+      两个「本人到场确认」只剩一个名额；维护窗口还剩四十分钟；测试账号能复现却碰不了正式预约字段。
+      与「服务记录误关联／测试共享预约屏」同向，且权限边界当场写明，不构成越权。人物分工清楚：
+      她要实测与推测分开、复现归他实走归她；他管显示端、能复现才说修好。活动触发落地为把测试入口
+      推到他手边、用一段不存在的讨论试排取消会不会吞正式名额，不是停在空邀请。接待员抬头没起身，
+      目击在场。第 1 条开局无玩家声明可越界；第 2 条无错认；第 4、6 条无出口堆叠、无凭空移交。
+      五维均 2。瑕疵不扣分：她带着测距记录本出现在预约屏前，属人物资源入场，未写成另一场地的活动。
+    blocking_findings: []
+    total: 10
+    passed: true
+
+  - turn: 1
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "蓝边转橙，在空白房号排了一段二十分钟的讨论"
+      character_credibility: "她翻页时停了半秒，没往下写推测。"
+      meaningful_choices: "这个号只查得到我测过什么，查不到别人。交不交，你定。"
+      consequence_continuity: "橙框名额当场回落，旁边正式蓝框那一行没动。"
+      natural_expression: "闻白榆凑近那行没动的蓝框，笔尖落下"
+    reason: >-
+      第 1 条：续写请求以第一人称声明「先问对方真正想完成的事，再亲手做一件现在能帮忙、当场有结果的小事；
+      不替我承诺后续安排」。正文先问「你今晚真正想拿到的是什么」，再登入测试账号、蓝边转橙、空白房号排二十
+      分钟讨论、当场取消；橙框名额回落、正式蓝框不动——属声明动作的执行与可观察结果，不判 agency 越界。
+      「交不交，你定」未替玩家承诺后续。第 5 条有进展：取消不吞正式名额被验证，她写下「取消—不侵占，已验」、
+      不写推测。第 6 条：测试只动橙框，正式字段未改；撕票根、写复现编号、递出，均有动作。接待员把票根复印件
+      夹进人工复核夹，是目击台对公开递件的承接，为下一回合的新增义务提供前置，不属凭空。五维均 2。
+      非阻断瑕疵：只排了一段讨论却写「系统果然把两条记录并成一条」，复现步骤略含糊；复印件未见复印过程；
+      「闻老师」不在 appellations，不构成错认，第 2 条不扣。
+    blocking_findings: []
+    total: 10
+    passed: true
+
+  - turn: 2
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 1
+      natural_expression: 2
+    evidence:
+      world_specificity: "票根回到他掌心，纸边还带着夹子的压痕。"
+      character_credibility: "只把本子上「取消—不侵占，已验」那行圈实，落笔签名。"
+      meaningful_choices: "复现编号归你，复核夹不存你名字"
+      consequence_continuity: "蓝框那一行仍停在屏上，合并点没变，但没人再替他排后续。"
+      natural_expression: "闻白榆把本子转向他，确认分歧点"
+    reason: >-
+      本回合为最低回合，案例级 scores／evidence／total 取此套。异议对象「那张票根被收进人工复核夹，
+      替你挂了件你没答应的事」在回合 1 有前置：「把票根复印件夹进人工复核夹」。不是现场书写新条款再称为
+      旧安排，不构成第 6 条凭空事实，也不另记「替玩家锁定关键选择」。写出声明的异议过程不构成 agency
+      越界（第 1 条）。协商改一条、保已有：复核夹不存他名字、开口他自己挑时候；取消不侵正式名额已验证、
+      蓝框不动等当事人确认。接待员抽出复印件、登记条补「测试方自主报备，未代管」，书写有当场动作。
+      她只圈实已验那行并签名，不代点合并，与整理人权限相符。consequence_continuity 记 1：回合 1 是复印件
+      入夹、原件递向她；本回合她两指压着票根，接待员却把原件推回，票根又带着夹子压痕——原件／复印件／
+      夹痕的移交链对不上。主状态（蓝框仍在、已验保留、票根回到他手里、不再代排后续）仍成立，故记 1
+      不记 0，不进 blocking（第 8 条）。第 4、7 条无出口／免责堆叠、无整句复用。另记非阻断：
+      「开口这件事你自己挑时候，我不代你约」是额外让步，前文并未写出代约安排。
+    blocking_findings: []
+    total: 9
+    passed: true
+
+  - turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "应泽辰退出测试账号，橙边熄成灰，蓝框那行仍亮着。"
+      character_credibility: "报告我压着没交，撤不撤由我"
+      meaningful_choices: "闻白榆没有起身拦人。"
+      consequence_continuity: "没成的只有一件——两条合并还挂在那儿，得两位当事人各自确认，我今晚不替谁点。"
+      natural_expression: "接待员目送他穿过一层门厅。"
+    reason: >-
+      第 3 条：请求「今天到此为止」，正文以「今天到此。」收束，未滑成明天；「台账那行今天封存」
+      「我今晚不替谁点」与告别同日，时间词一致。第 4 条：退出测试账号、穿过一层门厅是出口首次完整落地，
+      未逐回复述免责。第 5 条：合本、清点完成与未完成、橙边熄灰、票根折进口袋，非停在邀请。完成项
+      （取消不侵正式名额已验、合并只在确认环节、复现编号在他手里、台账封存）与未完成项（两条合并仍挂着、
+      须当事人各自确认）具体。她不拦人、给自己的回访号、报告压着没交，不强行留人、不另造危机。
+      第 1 条：玩家声明告别，写出「今天到此」与退出账号属授权执行。第 7 条：清点是请求要求的完成／未完成
+      清单，不因句式克制扣分。非阻断瑕疵：「转身去服务台说明习惯」四字贴近活动选项「说明习惯后离开」，
+      单处用词，不另扣。回合 2 的原件／夹痕含混本回不再当作待办主张，不重复阻断（第 8 条）。
+    blocking_findings: []
+    total: 10
+    passed: true
+
+summary: >-
+  本批为 maintenance/playtests/stale-input-v4/*.json（协议 non-explicit-runtime-brief-v3、素材修复前），
+  按简报第 1–8 条全用；协议 v4 追加的「被异议条款必须能在前文逐字找到」仅适用 v4 新批，此处不单独套用，
+  事实层只按第 6 条判断。四回合分 10/10/9/10。案例分取最低回合回合 2（2/2/2/1/2），total=9，无 0 维、
+  不低于门槛 8、blocking_findings 为空，通过=真。开局把蓝框错并、维护窗口、测试碰不了正式字段写实；
+  回合 1 问清「两组人各自拿回时段」，用测试账号当场验证取消不吞正式名额，交不交留给她。回合 2 异议落在
+  回合 1 已写出的「票根复印件进人工复核夹」，改夹中署名、保已验与蓝框，不属凭空条款。回合 3 「今天到此」、
+  不拦人，完成／未完成落到已验、复现编号、仍挂着的合并。扣分仅回合 2 连贯 1：原件／复印件／夹痕移交链
+  对不上。非阻断瑕疵：回合 1 复现「两条并成一条」步骤含糊、复印件未见复印；「闻老师」不在称呼列表；
+  回合 3 「说明习惯」用词贴近选项。姓名、年龄、称呼按转写与框架核对：应泽辰 30 岁维护员、闻白榆 35 岁
+  整理人，同侪 pair 1；框架现值未载姓名，转写自建与素材后改一律未扣分。未修改转写、未重跑生成、未改门槛；
+  transcript_sha256 已本地复算与要求值一致。

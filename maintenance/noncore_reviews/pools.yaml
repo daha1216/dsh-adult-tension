@@ -883,7 +883,7 @@
   owners:
   - consumer:roll_opening.load_pools#meta.leverage_engines
   - consumer:roll_opening.leverage_engines
-  - consumer:check_content.run#meta.leverage_engines
+  - consumer:check_content.check#meta.leverage_engines
   compatibility:
     themes:
     - 压力引擎开关
@@ -909,7 +909,7 @@
   owners:
   - consumer:roll_opening.load_pools#meta.situation_leverage
   - consumer:roll_opening.situation_leverage
-  - consumer:check_content.run#meta.situation_leverage
+  - consumer:check_content.check#meta.situation_leverage
   compatibility:
     themes:
     - 强杠杆处境
@@ -935,7 +935,7 @@
   owners:
   - consumer:roll_opening.load_pools#meta.gate_aesthetics
   - consumer:roll_opening.gate_aesthetics
-  - consumer:check_content.run#meta.gate_aesthetics
+  - consumer:check_content.check#meta.gate_aesthetics
   compatibility:
     themes:
     - 写实门控
@@ -961,7 +961,7 @@
   owners:
   - consumer:roll_opening.load_pools#meta.timed_situations
   - consumer:fill_opening.fill_opening#meta.timed_situations
-  - consumer:check_content.run#meta.timed_situations
+  - consumer:check_content.check#meta.timed_situations
   compatibility:
     themes:
     - 时限处境标记
@@ -987,7 +987,7 @@
   owners:
   - consumer:roll_opening.load_pools#meta.timed_pressures
   - consumer:fill_opening.fill_opening#meta.timed_pressures
-  - consumer:check_content.run#meta.timed_pressures
+  - consumer:check_content.check#meta.timed_pressures
   compatibility:
     themes:
     - 时限压力标记
@@ -1014,7 +1014,7 @@
   - consumer:roll_opening.load_pools#meta.location_eras
   - consumer:roll_opening.build_roll#meta.location_eras
   - consumer:check_material_compatibility.audit#meta.location_eras
-  - consumer:check_content.run#meta.location_eras
+  - consumer:check_content.check#meta.location_eras
   compatibility:
     themes:
     - 地点时代和解
@@ -1040,7 +1040,7 @@
   - pressure
   owners:
   - consumer:roll_opening.build_roll#meta.aesthetic_eras
-  - consumer:check_frameworks.audit#meta.aesthetic_eras
+  - consumer:check_frameworks.check_frameworks#meta.aesthetic_eras
   - consumer:check_material_compatibility.audit#meta.aesthetic_eras
   compatibility:
     themes:
@@ -1066,7 +1066,7 @@
   - pressure
   owners:
   - consumer:roll_opening.build_roll#meta.material_compatibility
-  - consumer:roll_opening.compatibility_reasons#meta.material_compatibility
+  - consumer:roll_opening.apply_daily_roll#meta.material_compatibility
   - consumer:world_frameworks.build#meta.material_compatibility
   compatibility:
     themes:
@@ -1095,7 +1095,7 @@
   owners:
   - consumer:roll_opening.load_pools#meta.identity_weights
   - consumer:roll_opening.identity_weights
-  - consumer:check_content.run#meta.identity_weights
+  - consumer:check_content.check#meta.identity_weights
   compatibility:
     themes:
     - 身份族权重
@@ -1122,7 +1122,7 @@
   - consumer:roll_opening.load_pools#场景动作分类
   - consumer:roll_opening.build_roll#场景动作分类
   - consumer:world_frameworks.build#场景动作分类
-  - consumer:check_frameworks.audit#activities.category
+  - consumer:check_frameworks.check_frameworks#activities.category
   compatibility:
     themes:
     - 信息核验
@@ -1305,7 +1305,7 @@
   - consumer:roll_opening.build_roll#场景动作元数据
   - consumer:fill_opening.load_tables#action_metadata
   - consumer:fill_opening.fill_opening#action_metadata
-  - consumer:check_content.run#action_metadata
+  - consumer:check_content.check#action_metadata
   compatibility:
     themes:
     - 场景动作元数据
@@ -1829,8 +1829,8 @@
   - pressure
   owners:
   - consumer:roll_opening.load_pools#legacy_weight
-  - consumer:check_frameworks.audit#legacy_weight
-  - consumer:build_frameworks.build#legacy_weight
+  - consumer:check_frameworks.check_frameworks#legacy_weight
+  - consumer:build_frameworks.aggregate#legacy_weight
   compatibility:
     themes:
     - 开局框架治理
@@ -1881,8 +1881,8 @@
   - daily
   - pressure
   owners:
-  - consumer:check_frameworks.audit#version
-  - consumer:build_frameworks.build#version
+  - consumer:check_frameworks.check_frameworks#version
+  - consumer:build_frameworks.aggregate#version
   compatibility:
     themes:
     - 开局框架治理

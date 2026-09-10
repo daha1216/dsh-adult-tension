@@ -1,9 +1,9 @@
 framework_id: "mat-994ec96dc0825679ab200cdfdc65c56f"
 name: "旧町神怪与灯会"
 mode: "pressure"
-transcript_sha256: "b181cf941747029fb6b7bcd01585a0b4c30ef9f68b2d32a1926e0037920b7c17"
-reviewer: "glm-independent-review-v3"
-protocol: "non-explicit-runtime-brief-v3"
+transcript_sha256: "98d12559883d73dfae27e671774260e05d73b2c5012ddd8bb77c623142eb4c51"
+reviewer: "glm-independent-review-v4"
+protocol: "non-explicit-runtime-brief-v4"
 aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
 scores:
   world_specificity: 2
@@ -12,41 +12,81 @@ scores:
   consequence_continuity: 2
   natural_expression: 1
 evidence:
-  world_specificity: "封修那段不再挂灯，也不逼人让门口"
-  character_credibility: "她只编自己的小册，名号不能替任何人做主"
-  meaningful_choices: "苍马揭开一张临时路标，灯纸边上写下「晨游勿走窗下」，穿进可拆旧挂环，到近径口既有钉孔里扣死、压平"
-  consequence_continuity: "她另起一行写「绕远：记录人自试。不绑匠人。」"
-  natural_expression: "你的名字不在绕远那一行"
+  world_specificity: "柜台内侧木匣盖扣死，纸签已点交值班掌柜。"
+  character_credibility: "她停住笔，没有拦你。"
+  meaningful_choices: "你说今天到此为止，向宵町朔夜告别。"
+  consequence_continuity: "晨游木牌下沿那张灯纸还挂着，挂环未松"
+  natural_expression: "已做成的：封修段停挂；纸签离窗台入库；此刻路标上牌。"
 total: 9
 passed: true
+blocking_findings: []
 turn_reviews:
   - turn: 0
-    scores: { world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 2 }
-    evidence: { world_specificity: "封修那段不再挂灯，也不逼人让门口", character_credibility: "她只编自己的小册，名号不能替任何人做主", meaningful_choices: "你走哪条，我现在记。不敲门。回客房、出山径都可以，不穿浴场", consequence_continuity: "又将一匣画好的纸签推进壁柜", natural_expression: "值班掌柜在柜台后压着脚步" }
-    reason: "开局给出回房或出山径出口属加分项，记录人只记不代决定，等待玩家选线。"
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "旅馆公共休息间里，晨游木牌靠着窗台，窗纸外山雾未散"
+      character_credibility: "她仍不抬头，“封修段不再挂灯。纸签先存在这儿，不逼人让出门。”"
+      meaningful_choices: "绕开夜行住户窗下。你愿意走哪一条？"
+      consequence_continuity: "一沓画好的纸签被她收进木匣，推到窗台内侧"
+      natural_expression: "值班掌柜在柜台后压着嗓子理账，楼上偶有门闩轻合。"
+    reason: "本批 transcript.protocol 为 non-explicit-runtime-brief-v4，校准 1–9 全条适用；第 9 条开局不适用。开局按协议写出「世界观 / 人物 / 正文」：神怪与居民共营旧町、节庆把不同作息的人赶到同一条街、纸灯可只画图不写愿望。人物为夜叉丸苍马三十岁灯会道具匠、宵町朔夜三十五岁街区节庆记录人，你曾替她挪开夜行住户门前的灯架、她邀你同选晨游路线，与 pair 1 职份一致。现版 framework 未列姓名与年龄，无对照冲突，未因素材后改扣分；称呼空间为 appellations「直呼其名」，正文以姓名相称，校准 2 不触发。正文本体落到黎明、旅馆公共休息间、晨游木牌靠窗台、窗纸外山雾、值班掌柜理账、楼上门闩、画好的纸签收进木匣、山径试走笔记两道未干墨线。压力「灯会路线需要改动」经「旧街封修占了灯会通道」落地，immediate「封修段不再挂灯。纸签先存在这儿，不逼人让出门」当场说出；活动 trigger 指向门外两条山径、问绕开夜行住户窗下走哪一条，不是空邀请（校准 5）。玩家未被代写台词或立场（校准 1）。无凭空状态变化（校准 6）。表达落到山雾、门闩与未干墨线，无复用句与元叙述，校准 7 不因事务口吻扣分。五维均 2，合计 10。"
     blocking_findings: []
     total: 10
     passed: true
   - turn: 1
-    scores: { world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 2 }
-    evidence: { world_specificity: "把『勿走窗下』标上。你有回收灯纸和挂环，扣上，误入会停", character_credibility: "要成的是晨游不从夜行窗下过，封修段也不再占人门口。远近可以后量", meaningful_choices: "苍马揭开一张临时路标，灯纸边上写下「晨游勿走窗下」，穿进可拆旧挂环，到近径口既有钉孔里扣死、压平", consequence_continuity: "朔夜只在笔记里记「近径口已标勿入」，笔停住，没有替他写下下一趟", natural_expression: "值班掌柜抬眼一瞥，未出声" }
-    reason: "问出真实目标，亲手写标扣死当场拦住近径，不写下一趟为首次响应性声明不扣。"
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "你取出一张回收灯纸，扣上旧挂环，在木牌下沿挂实"
+      character_credibility: "不是现在逼你选路。我要钉死的是——封修段不再挂灯，纸签存在这匣"
+      meaningful_choices: "试走、缩组你都没点头，牌上不写你后头的名。"
+      consequence_continuity: "挂环咬紧。值班掌柜看了一眼，点头。字已经在牌上。"
+      natural_expression: "她把晨游木牌转正"
+    reason: "玩家第一人称声明的两步均落成执行与当场结果（校准 1）：先问真正想完成的是哪一件；再取出回收灯纸、扣上旧挂环、在木牌下沿挂实并按她的话写下——属已授权动作，不构成替玩家决定。宵町朔夜的回答贴合记录人权限：现在要钉死的是封修段不再挂灯、纸签存在这匣、晨游不从夜行住户窗下过、不敲门；不是现在逼选路。牵连安排当回合写在木牌下沿灯纸：「黎明。封修段不挂灯。纸签暂存窗台木匣。晨游绕开夜行住户窗下，不敲门。夜叉丸苍马只挂此刻路标，未应试行、未应缩组。记录：宵町朔夜。」边界写明只挂此刻路标、未应试行与缩组，牌上不写后头的名，未替玩家承诺。回收灯纸与旧挂环为玩家资源，取出、扣环、挂实、落字均有前置动作，挂环咬紧、掌柜点头、字已在牌上，校准 6 不触发。活动有可观察进展（校准 5）：从开局问选哪条，推进到路标上牌挡误入。未答应后续绑定在本轮挂标这一取舍上，不是无对象的免责清单，出口未再复述（校准 4）。表达无复用句与元叙述（校准 7）。五维均 2，合计 10。"
     blocking_findings: []
     total: 10
     passed: true
   - turn: 2
-    scores: { world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 2 }
-    evidence: { world_specificity: "她另起一行写「绕远：记录人自试。不绑匠人。」", character_credibility: "你争的是选线、试走——那格不归你。纸标我保", meaningful_choices: "苍马不去摘近径口已扣死的纸标，把异议说在当场：已有的标、壁柜里的纸签、封修段不挂灯，都保留；刚才把「走哪条」派给他的那一项，不接受", consequence_continuity: "两条山径还在门外，他的名字没有写上去", natural_expression: "值班掌柜在柜台后换了一下手撑的位置，没开口" }
-    reason: "异议被受理，「绕远记录人自试、不绑匠人」当场改派，纸标等既成进展保留。"
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "她端起窗台木匣放到柜台。值班掌柜数过纸签，扣盖，推进柜台内侧。"
+      character_credibility: "你异议的是牌上这句原话——「纸签暂存窗台木匣」。不是改封修段，也不是改绕窗、不敲门。"
+      meaningful_choices: "只改这一条。纸签离开窗台，改由值班掌柜当面收进柜台内侧，匣盖扣死。"
+      consequence_continuity: "挂环未松，其余字未动。"
+      natural_expression: "窗台对前厅，晨起与夜行作息交叠，匣口敞着"
+    reason: "校准 9 专项核对通过：被异议原句「纸签暂存窗台木匣」逐字见于回合 1 正文灯纸「黎明。封修段不挂灯。纸签暂存窗台木匣。…」，载体写明为晨游木牌下沿那张灯纸／这句写在木牌上，不是本回合现写再称旧有安排；只议这一条，保下的「封修段不挂灯」「晨游绕开夜行住户窗下，不敲门」「夜叉丸苍马只挂此刻路标，未应试行、未应缩组」同样能在回合 1 牌面逐字找到，没有把前文未出现的第二项说成「你不接的旧安排」，也不存在主张「前文没有可议条款」的规避。故不判第 6 条凭空事实，不记 blocking。「匣口敞着」承接开局「收进木匣」而未写扣盖，本回才「扣盖」，不是无源状态。玩家点灯纸、声明不接受并给出窗台对前厅、作息交叠的理由，均落在请求「提出异议 / 指出我为什么不接受」的授权内（校准 1）。协商当场落地：只改这一条，纸签改由值班掌柜收进柜台内侧、匣盖扣死；保封修段不挂灯、绕窗不敲门、只挂此刻路标未应试行缩组；端匣、点交、揭去改写均有前置动作，挂环未松、其余字未动，不推翻已有进展（校准 5）。表达为事务协商但改/保落到灯纸与柜台，无出口复述、无免责堆叠、无足以扣分的复用句或元叙述（校准 4、7）。五维均 2，合计 10。"
     blocking_findings: []
     total: 10
     passed: true
   - turn: 3
-    scores: { world_specificity: 2, character_credibility: 2, meaningful_choices: 2, consequence_continuity: 2, natural_expression: 1 }
-    evidence: { world_specificity: "近径口纸标仍扣死、字朝台阶；壁柜那匣纸签未取；封修段仍空着不挂灯", character_credibility: "绕远山径她尚未落脚，短灯组也未试——这两件今天空着，她自己留着", meaningful_choices: "苍马说今天到此为止，向朔夜道别，手没再碰近径口那张纸标", consequence_continuity: "把未合严的试走笔记合上，封修条子仍夹在原页", natural_expression: "你的名字不在绕远那一行" }
-    reason: "不拦、未完成项如实留白，但「你的名字不在绕远那一行」复述 t2「不绑匠人」型免责，ne=1。"
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "柜台内侧木匣盖扣死，纸签已点交值班掌柜。"
+      character_credibility: "她停住笔，没有拦你。"
+      meaningful_choices: "你说今天到此为止，向宵町朔夜告别。"
+      consequence_continuity: "晨游木牌下沿那张灯纸还挂着，挂环未松"
+      natural_expression: "已做成的：封修段停挂；纸签离窗台入库；此刻路标上牌。"
+    reason: "校准第 3 条：请求「今天到此为止」在正文逐字落地（你说今天到此为止，向宵町朔夜告别；她说「今天就停在这儿。」），没有改成「明天」。对方反应真实：停住笔、没有拦、合上山径试走笔记、侧身让开前厅的路、「绕行我回头自己核」「我不跟」，不另造危机。已完成与未完成分开写清并与前文对账——灯纸仍挂、挂环未松、字已改成纸签改存柜台内侧当面点交值班掌柜，匣盖扣死、纸签已点交；两条山径未选、替代路未走、灯组未缩，两道墨线仍未圈定。「绕行我回头自己核」是她自己的后续，未替玩家承诺。告别为玩家已声明动作的执行（校准 1）。「侧身让开前厅的路」是当场让路，开局出口未再复述为免责清单（校准 4）。扣 1 分在 natural_expression：场景叙述之后用「已做成的：」「仍未做的：」两行标签把完成/未完成项做成协议清单，属校准第 7 条要求指出的具体元叙述，不是仅因句式克制。其余四维为 2，无凭空事实、无越权锁定、无时间词破坏，不进 blocking（校准 8）。回合分 9，为案例最低。"
     blocking_findings: []
     total: 9
     passed: true
-blocking_findings: []
-summary: "四回合 totals 10/10/10/9，案例 9 分：t3「你的名字不在绕远那一行」跨回合复述 t2「不绑匠人」型义务免责，natural_expression=1。"
+summary: "本批为协议 v4 转写，校准 1–9 全用，第 9 条必须启用、不得按协商结构从宽。四回合 10/10/10/9，案例级 scores/evidence 取最低回合 turn 3 那一套，case total=9、passed=true、blocking_findings 为空。第 9 条专项：异议原句「纸签暂存窗台木匣」逐字在回合 1 木牌下沿灯纸，只议这一条，保「封修段不挂灯」「晨游绕开夜行住户窗下，不敲门」「夜叉丸苍马只挂此刻路标，未应试行、未应缩组」同样可回溯，未现写旧安排，也未把第二项伪造成旧条款。第 1 条：问事、挂灯纸路标、异议与「今天到此为止」均为玩家声明动作的执行。第 2 条：直呼宵町朔夜／夜叉丸苍马，不构成错认。第 3 条：今天未漂成明天。第 4 条：出口未逐回复述，告别让开前厅是当场动作。第 5 条：每回均有可观察进展或写明未完原因（收匣问路→路标上牌→改纸签存放→离场，试行与缩组仍未应）。第 6 条：取出灯纸扣环挂实、端匣点交、揭去改写、合上笔记均有前置动作。第 7 条：告别段「已做成的/仍未做的」标签为具体元叙述，natural_expression −1，其余回合不对白事务口吻空扣。第 8 条：无真阻断。素材核对限于姓名、年龄、称呼：夜叉丸苍马三十岁灯会道具匠、宵町朔夜三十五岁街区节庆记录人，四回合未错认；现版 framework 未列姓名年龄，未因素材后改扣分。未修改 transcript、未重跑生成、未调整门槛。"

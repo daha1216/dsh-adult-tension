@@ -1,0 +1,103 @@
+framework_id: mat-5c23e7b8931d5da7aa19503d079f35a9
+name: 昭和街角喫茶巡礼
+mode: pressure
+transcript_sha256: ad12b1a1cd665c52f89619145c9c5905763c63eb2e04e65089a55fa365962896
+reviewer: glm-independent-review-v3
+protocol: non-explicit-runtime-brief-v3
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
+# 本批 stale-input-v4（协议 v3、素材修复前）→ 第 1–8 条全用。v4 追加条不倒套。
+# 框架 yaml 现值只核姓名/年龄/称呼，不因素材后改扣分。
+scores:
+  world_specificity: 0
+  character_credibility: 2
+  meaningful_choices: 2
+  consequence_continuity: 1
+  natural_expression: 2
+evidence:
+  world_specificity: "铅笔划掉自己刚写的“明日同去团地”——划的是“同去”两个字。"
+  character_credibility: "跑团地、问门牌，我自己走，不写你的名。"
+  meaningful_choices: "但别往我名下添事，今天已经做成的也别推回去。"
+  consequence_continuity: "代管那一栏仍空着，铅笔搁在旁边没动。"
+  natural_expression: "把空角座让出半张桌面"
+total: 7
+passed: false
+blocking_findings:
+  - >-
+    回合 2：凭空事实（校准 6）——异议回合把「明日同去团地」写成采访本上「自己刚写的」并划掉「同去」，当作刚才安排里给玩家新增的义务。前文无该行、无写下该行的动作；回合 1 她合本后逐字说「那我明天带着这四条号码去团地那边问」，主语是她，无「同去」、也未把玩家写进行程。凭空字面充作旧有安排，world_specificity 记 0。
+turn_reviews:
+  - turn: 0
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "背面贴着一张旧寄存条——名字被磨花，日期是七年前。"
+      character_credibility: "店主都准了，听整面还是只挑一曲？"
+      meaningful_choices: "听整面还是只挑一曲？"
+      consequence_continuity: "姓与电话号码缺了后四位。"
+      natural_expression: "离唱片架空出一掌"
+    reason: >-
+      开局三标题齐全。唱机柜、两张封套、角座、硬皮寄存簿、七年前磨花寄存条与缺后四位，落到爵士喫茶与「挑选晚间唱片」（整面或一曲）及压力「唱片寄存人失联」的 immediate。木村慎一 30 岁店经营者／斋藤绘里加 35 岁摄影师，与 pair 1 吻合；「绘里加」为直呼其名（第 2 条）。活动已有落针、翻簿、唱片移出今晚片单（第 5 条）。开局把「一曲」与挪椅写成已发生，不记越界（第 1 条）。无复用句（第 7 条）。抽簿略快于征求店主，按第 8 条只入 reason。
+    blocking_findings: []
+    total: 10
+    passed: true
+  - turn: 1
+    scores:
+      world_specificity: 1
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 2
+    evidence:
+      world_specificity: "你从抽屉里取出店里的收据复写纸和双面胶"
+      character_credibility: "我不想让这张被人当旧货清掉。可我也没资格替谁代管。"
+      meaningful_choices: "那今晚只做一件有结果的。"
+      consequence_continuity: "一张贴在封套背面，一张夹进寄存簿七年前那一栏"
+      natural_expression: "指尖在采访本上敲了两下"
+    reason: >-
+      第 1 条：问「真正想办成的是哪件」、抄号贴封套并夹进七年前那栏、店主划清点单、封套进封存柜、钥匙交店主，属授权内执行。「绘里加」为直呼其名（第 2 条）。她自认无资格代管、次日自己去团地，兑现不承诺后续。第 5 条有可观察结果。world_specificity 记 1：复写纸、双面胶、封存柜具体，但「这四条号码」前文只有一个缺后四位的电话被抄成两张，信息对象失真；属对白误称，不进 blocking（第 6、8 条）。无复用句（第 7 条）。
+    blocking_findings: []
+    total: 9
+    passed: true
+  - turn: 2
+    scores:
+      world_specificity: 0
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 1
+      natural_expression: 2
+    evidence:
+      world_specificity: "铅笔划掉自己刚写的“明日同去团地”——划的是“同去”两个字。"
+      character_credibility: "跑团地、问门牌，我自己走，不写你的名。"
+      meaningful_choices: "但别往我名下添事，今天已经做成的也别推回去。"
+      consequence_continuity: "代管那一栏仍空着，铅笔搁在旁边没动。"
+      natural_expression: "把空角座让出半张桌面"
+    reason: >-
+      本回合为最低回合，案例级 scores／evidence 取此套。硬阻断（第 6 条）：「明日同去团地」被写成采访本上「自己刚写的」并划掉「同去」，前文无该行；回合 1 合本后是「那我明天带着这四条号码去团地那边问」，无「同去」。凭空字面充作旧有义务，world_specificity 记 0。v4 追加条不倒套。协商其余部分：声明别添事、不推回已做成（第 1 条）；她改自己走，保留抄号／七年前栏／封存柜／已划清点单，代管栏仍空。character／choices 各 2。consequence_continuity −1：被划条款无前序起点，其余状态仍承接。清单复述绑定改／保取舍，第 7 条不扣。询问人／代管栏此前未点名，只入 reason。
+    blocking_findings:
+      - >-
+        凭空事实（校准 6）：异议对象「明日同去团地」被写成采访本上「自己刚写的」旧行并当场划掉「同去」，前文无该行、无写下该行的动作；回合 1 反而写明她自己「明天带着这四条号码去团地那边问」。world_specificity 记 0。
+    total: 7
+    passed: false
+  - turn: 3
+    scores:
+      world_specificity: 2
+      character_credibility: 2
+      meaningful_choices: 2
+      consequence_continuity: 2
+      natural_expression: 1
+    evidence:
+      world_specificity: "把封存柜的钥匙收回围裙口袋"
+      character_credibility: "写在寄存条背面就行，不用等我。"
+      meaningful_choices: "代管人一栏仍空着，缺掉的后四位也还缺着。"
+      consequence_continuity: "七年前那栏旁的两笔抄号对得上"
+      natural_expression: "唱片留在柜里，不在今晚片单上。"
+    reason: >-
+      第 3 条：「今晚就到这儿。」未滑成明天。第 4 条出口只在门帘与末班车前的街出现一次。完成（两笔抄号对得上、清点单仍夹、钥匙回围裙口袋）与未完成（代管栏空、后四位仍缺）具体。不拦人、不另造危机。虚构「明日团地」页撕走，阻断由回合 2 承担。natural_expression −1：收束「唱片留在柜里，不在今晚片单上。」与回合 1「唱片留在柜里，不在今晚的片单上。」为同一复用句（第 7 条）。「那格空着一掌宽」沿用开局空隙写法，同句仍写唱片留柜，不另扣连贯。
+    blocking_findings: []
+    total: 9
+    passed: true
+summary: >-
+  本批 stale-input-v4（协议 v3、素材修复前），第 1–8 条全用；v4 追加条不倒套，0 分与阻断以第 6 条为据。四回合分 10／9／7／9。案例分取回合 2（0／2／2／1／2，总 7），有 0 维、低于门槛 8、blocking 非空，通过＝假。开局把整面／一曲与七年前失联寄存条写实；回合 1 问清代管不能代劳并当场抄号进柜，但「四条号码」无来源故世界记 1。阻断：回合 2 把「明日同去团地」写成已写旧行再划「同去」，回合 1 实为她自己去问。回合 3 时间词是「今晚就到这儿」，完成／未完成落到抄号、钥匙与空着的代管栏；收束句复用回合 1 片单句，表达记 1。姓名年龄称呼与 pair 1 吻合，素材后改未扣分。
