@@ -94,7 +94,7 @@ G01–G13 十三批次全闭合，模式统一：id/source_hash/source 与 regis
 2. **release 门禁**：`qa.py --full --release` 按设计继续拦截。第三轮重跑期间旧终验已归档、顶层证据为空，门禁必然报 `PLAYTEST_MISSING`，属中间态而非回归（见 §8）。
 3. 评审口径差异说明：四段评分中 mc 扣分密度存在段间差异（22 vs 2/5/2），横比时以 0 分阻断与案例级结论为准。
 4. 登记-only 项（§3）与动力舱维修工玩家侧时代映射（G10 遗留）留待下批源修。
-5. **远端 CI 已经配置**（`.github/workflows/quality.yml:16-18` 为 Python 3.10/3.13 矩阵；`:34-36` 对 tag push 执行 `--release`），但本轮全部验证在本地 Python 3.12 完成，没有远端执行记录。原文「仍未配置」有误，已更正。相关风险：`v1.3.0` 的 tag 已推到 origin，一旦触发 release job 必红（当前 `qa.py --full --release` 按设计拦截实玩 79/80）。
+5. **远端 CI 已经配置**（`.github/workflows/quality.yml:16-18` 为 Python 3.10/3.13 矩阵；`:34-36` 对 tag push 执行 `--release`），但本轮全部验证在本地 Python 3.12 完成，没有远端执行记录。原文「仍未配置」有误，已更正。当时 `v1.3.0` 的 tag 已推到 origin，release job 必红（`qa.py --full --release` 按设计拦截实玩 79/80）；**第三轮已解决**：tag 撤销后重打，实玩 80/80 + 哈希口径修复后 tag push 的 Release acceptance gate 在 3.10/3.13 两个 job 上通过，详见 §9。
 
 ## 8. 第三轮（协议 v4 与全量重跑）
 
