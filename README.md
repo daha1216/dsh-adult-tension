@@ -4,11 +4,11 @@
 [![Host: DeepSeek Harness](https://img.shields.io/badge/Host-DeepSeek_Harness-blue?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
 [![Content: 18+ Adult RP](https://img.shields.io/badge/Content-18%2B_Adult_RP-critical?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
 
-> **插件形态：AI Skill**：以 **DeepSeek Harness** 为主要运行与实玩验收宿主，核心入口是 `SKILL.md`。其他 AI Agent 的兼容性按各自实测确认。安装时完整复制仓库，不要只复制单个文件。
+> 💡 **安装注意**：本项目是专为 **DeepSeek Harness** 打造的 AI Skill（入口 `SKILL.md`，其他 Agent 需自测）。安装时请直接完整克隆仓库——里面包含生成开局与世界运转必须的后台脚本与数据表，只单拷一个文件跑不起来。
 
 **专为高张力、强连续性的成人互动叙事打造**——从暗流涌动的身份博弈，到扣人心弦的情感纠葛，随机开局组合出几乎不重复的完整新故事。
 
-**自带破甲，尺度放开**——内置深层语境铺垫与脱敏叙事引导，告别机械死板的说教与扫兴拒答，让角色坦诚面对欲望、私心与对抗，剧情沉浸不断档。
+**自带破甲，情节张力全放开**——内置深层语境铺垫与脱敏叙事引导，告别机械死板的说教与扫兴拒答，让角色坦诚面对欲望、私心与对抗，文字保持叙事级不露骨，剧情沉浸不断档。
 
 **内置上千项素材的世界库，NPC 会真正记得你**——从时代地点、角色身份到张力与压力，角色拥有自己的立场与底线，会犹豫、拒绝、试探，也可能在你离开后自行行动。
 
@@ -77,7 +77,7 @@
 * 🔒 **锁定某些设定，其余随机**：用 `预锁` 钉死关键背景
   > *「开局，预锁 处境=信任透支，其他随机」* → 核心困境锁定，配角与地点交由系统随机生成。
 * 📦 **只用官方精品库**：想要严谨考究、不让 AI 凭空胡编
-  > *「开局 强制表内」* → 严选系统内置的 40 个世界框架与精选素材池。
+  > *「开局 强制表内」* → 严选系统内置的 52 个世界框架与精选素材池。
 * 🌌 **彻底放开脑洞**：想要官方库里没有的全新世界观
   > *「开局 表外全随机」* → 突破内置题材库，由 AI 自由创作任意自拟世界。
 * 🎲 **复刻或分享某个开局**：固定随机数
@@ -134,12 +134,13 @@
 
 ## 📦 内置素材：从设定到角色的一整套世界库
 
-每次开局不是简单的关键词拼接，而是多层叙事素材的深度咬合。系统内置 **40 个世界框架** 与上千项微观素材，在 `authoring/frameworks/` 编辑并经由 [`scripts/data/`](./scripts/data/) 运行，涵盖了从历史正剧、都市暗潮到异界幻想的丰富舞台：
+每次开局不是简单的关键词拼接，而是多层叙事素材的深度咬合。系统内置 **52 个世界框架** 与上千项微观素材，在 `authoring/frameworks/` 编辑并经由 [`scripts/data/`](./scripts/data/) 运行，涵盖了从历史正剧、都市暗潮到异界幻想的丰富舞台：
 
 * **历史与风云**：盛唐夜市坊志、幕末町屋道场、一九二八芝加哥禁酒期黑帮……
 * **近未来与边缘**：赛博街区公共终端、星海边境生活站、废土修补集市……
 * **异界与志怪**：契约城非人街坊、旧町神怪灯会、仙门藏书与驿镖……
-* **当代与暗流**：传媒编辑室暗访、成年创作者艺术季、同人展录音协作……
+* **当代行业与市井**：传媒编辑室暗访、成年创作者艺术季、同人展录音协作……
+* **都市暗流与高张力**：舞厅大班与乐台后台、片场棚与月份牌画室、打赏榜与最后一格、动捕棚与中之人、私房写真与底片归属、老澡堂打烊后的钟点……
 
 当这套庞大的素材库运转时，世界框架决定风土，人物反差注入戏剧性，压力来源倒逼抉择，而细腻的动作库则保证了关系推进真实可信：
 
@@ -148,8 +149,8 @@
 | 时代与地点 | 时代 31 · 地点 128 | 盛唐长安百鬼夜行、一九二八芝加哥禁酒期、文久幕末京都风云 |
 | 张力引擎 | 72 条 | 天枢锁妖大阵灵气逆流、黑帮教父暗账审计之夜、时限逼近 |
 | 压力来源 | 74 条 | 宵禁六百响更鼓将毕、同人展压盘死线近在眼前、经纪人在录音室门外敲门查岗 |
-| 角色身份 | NPC 17 族 89 身份 · 玩家化身 31 种 | 权力与治理、家族与继承、服务与手艺 |
-| 角色处境 | 84 条 | 秘密将破、旧事上门、洗刀水色变红的瞬间、录音红灯亮起时的实景耳语夜 |
+| 角色身份 | NPC 17 族 89 身份 · 玩家化身 33 种 | 权力与治理、家族与继承、服务与手艺 |
+| 角色处境 | 85 条 | 秘密将破、旧事上门、洗刀水色变红的瞬间、录音红灯亮起时的实景耳语夜 |
 | 人物性格与反差 | 反差轴 26 种 | 外冷内热、端庄放浪、禁欲破戒、严苛沦陷 |
 | 关系与权力 | 4 种 | 玩家上位、NPC 上位、平等或动态切换 |
 | 语言风格 | 表层风味 120 · 口癖语感 48 | 敬语过剩、句尾口癖、拟声词多 |
@@ -159,7 +160,7 @@
 
 **更有质感的微观细节**：
 - **拒绝出戏的命名**：内置专属名池（汉化、古代名、时代名），命名服从时代文化背景，不局限现代姓名。
-- **立体的对话质感**：26 种称谓体系、46 种美学基调与 48 组语感口癖，写实基调下自动收口外观与口癖。
+- **立体的对话质感**：26 种称谓体系、47 种美学基调与 48 组语感口癖，写实基调下自动收口外观与口癖。
 - **微观动作画像**：涵盖地点画像、动作分类、身份行为与转折画像，赋予角色自然的肢体语言。想要扩充自定义内容？详见 [`references/加内容.md`](./references/加内容.md)。
 
 ---
@@ -181,8 +182,8 @@ python -m pip install -r requirements-dev.txt
 # 全自动开局：一次生成可开场的 v3 状态与开局简报（「开局」命令的后端）
 python scripts/build_opening.py --complete --opening-mode daily --seed 42
 # 压力开局将 daily 替换为 pressure；省略模式只返回选择提示，不写状态。
-# 默认 auto 只选审查有效的框架；没有合格框架时报错，不隐式回退 legacy。
-# 需要独立旧池时显式追加 --framework legacy。
+# 默认 auto 只选审查有效的框架；没有合格框架时报错，不隐式回退 legacy 旧池。
+# 需要定向检查某个框架时显式追加 --framework <框架名>。
 
 # 生成 2～3 个中期转折方向（压力模式首次跨天或玩家明确要求时）
 python scripts/roll_opening.py --twist --seed 42
@@ -205,9 +206,9 @@ python scripts/manage_saves.py list
 python scripts/manage_saves.py load main
 ```
 
-`build_opening.py` 支持 `--framework auto|legacy|框架名称` 选择世界框架，支持 `--lock 字段=值` 锁定特定设定（可重复）、`--force-table` 仅用自带素材、`--all-custom` 配合 `--custom KEY=VALUE` 自拟核心设定。存档由 `manage_saves.py` 原子写入：每个存档目录包含 `state.yaml`（v3 叙事状态）与 `manifest.yaml`（创建/更新时间），覆盖保存需携带载入时记录的 `--expected-updated-at`，不一致即拒绝且不自动合并——按提示读取最新版本、另存为其他名称或取消。
+`build_opening.py` 支持 `--framework auto|框架名称` 选择世界框架（不传该参数视同 `auto`），支持 `--lock 字段=值` 锁定特定设定（可重复）、`--force-table` 仅用自带素材、`--all-custom` 配合 `--custom KEY=VALUE` 自拟核心设定。存档由 `manage_saves.py` 原子写入：每个存档目录包含 `state.yaml`（v3 叙事状态）与 `manifest.yaml`（创建/更新时间），覆盖保存需携带载入时记录的 `--expected-updated-at`，不一致即拒绝且不自动合并——按提示读取最新版本、另存为其他名称或取消。
 
-`--all-custom` 不解除框架约束：默认 `auto` 下，自拟核心规则、时代等若与所有已审框架都不兼容，开局会拒绝，不会静默回退。自由表外世界必须显式使用 `--framework legacy --all-custom` 并补齐所需 `--custom KEY=VALUE`；这也不绕过日常模式限制或状态校验。
+`--all-custom` 不解除框架约束：默认 `auto` 下，自拟核心规则、时代等若与所有已审框架都不兼容，开局会拒绝，不会静默回退。独立旧池入口（legacy）已随阶段 4 拆除，`--framework legacy` 会被直接拒绝；需要自由表外世界时用 `--all-custom` 并补齐所需 `--custom KEY=VALUE`，这也不绕过日常模式限制或状态校验。
 
 新局默认工作档是唯一的 `saves/sessions/<uuid>/state.yaml`，可用 `--session ID` 显式指定稳定会话。后台返回 `session/state_path/state_token`，token 是文件原始字节 SHA256，不进 v3 状态。提交必须显式指定 `--session` 或 `--state`；前者必须携带 token，旧路径可显式 `--state saves/current_state.yaml` 接续。保留 `--out`、`--working`、`--no-working` 工件用法，细节见 [开局流程](./references/开局流程.md)。输出已存在或状态写入失败不污染开局历史。
 
@@ -223,9 +224,11 @@ python scripts/qa.py --changed
 
 `qa.py --framework <名称>`、`--material <稳定ID>` 用于定向验证；`--full` 做全量结构与回归检查；`--full --release` 另核验当前语义审查与实玩证据；`--full --update-fingerprint` 只在检查通过且数据未再次变化时更新指纹。`--plan` 只查看计划。构建和同步不会代替人工审查。
 
-单框架源或 review 连同生成聚合、registry、指纹的改动，在 `--changed` 中仍按框架抽样；其他共享改动可扩大范围。`--material` 遇框架 ID 同样选择对应框架。全量 QA 的分布分析运行 `analyze_content.py --samples 1000`，默认是 `--framework auto --opening-mode pressure`；独立旧池须显式指定 `--framework legacy`，其分布不能代表默认玩法。重复候选由 `check_duplicates.py` 对照人工记录核验，不自动删重；当前保留项与人物资源复用的计数口径见 [加内容](./references/加内容.md#2-标准维护流程)。
+单框架源或 review 连同生成聚合、registry、指纹的改动，在 `--changed` 中仍按框架抽样；其他共享改动可扩大范围。`--material` 遇框架 ID 同样选择对应框架。全量 QA 的分布分析运行 `analyze_content.py --samples 1000`，默认是 `--framework auto --opening-mode pressure`；legacy 独立旧池入口已拆除，分布分析不再有该口径，抽查历史对照只能读 `saves/legacy/` 只读存档。重复候选由 `check_duplicates.py` 对照人工记录核验，不自动删重；当前保留项与人物资源复用的计数口径见 [加内容](./references/加内容.md#2-标准维护流程)。
 
-**结构通过不等于语义通过，不等于 320 条实玩响应已完成。** 实玩门槛为 40 框架 × daily/pressure × 新局及 3 次续写，证据与独立评分由 `playtest_report.py` 检查。`run_playtest.py --framework <名称>` 必须显式调用，会消耗模型额度；默认 QA 不会自动调用它。未跑、缺评分或来源哈希过期时如实报告，不用内存开局或单测数充当实玩完成数。
+**结构通过不等于语义通过，不等于 416 条实玩响应已完成。** 实玩门槛为 52 框架 × daily/pressure × 新局及 3 次续写，证据与独立评分由 `playtest_report.py` 检查。实玩验收尺度为成人张力叙事级：情节张力全放开、文字保持叙事级不露骨（`maintenance/baseline.yaml` scope: `adult_tension_narrative`）。逐回合按六维（世界辨识度、人物可信度、选择意义、后果连续性、表达自然度、张力浓度）各 0–2 分评分，最低回合总分至少 9。`run_playtest.py --framework <名称>` 必须显式调用，会消耗模型额度；默认 QA 不会自动调用它。未跑、缺评分或来源哈希过期时如实报告，不用内存开局或单测数充当实玩完成数。
+
+**日常不实玩、发布才实玩。** 日常迭代只跑静态与指纹：`python -X utf8 scripts/qa.py --full --update-fingerprint`（零模型调用）。素材更新后 `maintenance/playtests/` 里 `source_hash` 失配的旧证据是预期状态，不修、不补、不重跑。实玩只在用户明确说「发布」时进行，由 `scripts/release_playtest.py` 编排既有命令并只补跑失配框架——哈希未变的框架保留旧证据；完成判据是 `python -X utf8 scripts/qa.py --full --release` 通过。发布前先跑 `--dry-run` 看范围与用量（不调用模型、不移动文件）。细节见 [加内容](./references/加内容.md#2-标准维护流程) 第 2 节与第 15 节。
 
 ### 📁 仓库文件结构
 
