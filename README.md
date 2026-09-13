@@ -4,13 +4,6 @@
 [![Host: DeepSeek Harness](https://img.shields.io/badge/Host-DeepSeek_Harness-blue?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
 [![Content: 18+ Adult RP](https://img.shields.io/badge/Content-18%2B_Adult_RP-critical?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
 
-> **身份博弈、心理拉扯与克制交锋——专为成年人打造的高张力互动叙事。**  
-> 告别死板说教与扫兴拒答，让角色坦诚面对欲望、私心与对抗。文字保持叙事级考究不露骨，剧情沉浸不断档。
-
----
-
-### ✨ 为什么不同？
-
 * 🔓 **自带18+破甲，尺度全放开**  
   内置脱敏叙事与语境铺垫，彻底告别机械拒绝与出戏说教，角色敢于直面冲突、暧昧与利益较量。
 * 🧠 **活人感 NPC，有底线拒迎合**  
