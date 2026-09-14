@@ -1,6 +1,5 @@
 # 🎭 adult-tension
 
-[![Release](https://img.shields.io/github/v/release/daha1216/dsh-adult-tension?style=flat-square)](https://github.com/daha1216/dsh-adult-tension/releases)
 [![Host: DeepSeek Harness](https://img.shields.io/badge/Host-DeepSeek_Harness-blue?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
 [![Content: 18+ Adult RP](https://img.shields.io/badge/Content-18%2B_Adult_RP-critical?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
 
@@ -253,9 +252,3 @@ python scripts/qa.py --changed
 职责导航见 [素材架构](./references/素材架构.md)，L0-L3 扩充、审查和有证据的直接清理见 [加内容](./references/加内容.md)。`maintenance/data_manifest.yaml` 管文件职责与依赖，`maintenance/core_review_decisions.yaml` 管核心池人工处置，`maintenance/framework_reviews/*.yaml` 管框架审查。冻结整节的字节哈希须与 `maintenance/baseline.yaml` 一致；历史记录见 [PROGRESS.md](./PROGRESS.md)，不当作当前验收证明。
 
 </details>
-
----
-
-## 🏷️ 版本发布
-
-各阶段稳定版本可在 [GitHub Releases](https://github.com/daha1216/dsh-adult-tension/releases) 获取。日常游玩建议直接拉取 `main` 分支获取最新的世界框架与素材更新。
