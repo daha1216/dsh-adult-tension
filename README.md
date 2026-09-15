@@ -3,6 +3,8 @@
 [![Host: DeepSeek Harness](https://img.shields.io/badge/Host-DeepSeek_Harness-blue?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
 [![Content: 18+ Adult RP](https://img.shields.io/badge/Content-18%2B_Adult_RP-critical?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
 
+[简体中文](./README.md) · [English](./README.en.md)
+
 > **专为高张力、强连续性的成人互动叙事打造**——自带 18+ 深度破甲，活人感 NPC 拒绝迎合，52 套世界随心开局，世界自行运转不漂移。
 
 * 🔓 **自带18+破甲，尺度全放开**  
