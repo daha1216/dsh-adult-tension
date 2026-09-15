@@ -6,9 +6,9 @@
 
 当前冻结范围与哈希以 `maintenance/baseline.yaml` 为唯一基线：SKILL 指定的整节必须逐字节不变，不能通过改基线或重排换行绕过。其余运行与维护文档按接口同步，不扩大修改边界。
 
-当前框架编辑源为 `authoring/frameworks/`，保留 40 个框架。日常流程为编辑 authoring → `build_frameworks.py --write` → `sync_governance.py --write` → `qa.py`；默认 auto 只使用来源哈希匹配且审查有效的框架，无隐式 legacy 回退。工作状态按唯一 session 绑定，不再依赖共享默认文件。
+当前框架编辑源为 `authoring/frameworks/`，保留 52 个框架。日常流程为编辑 authoring → `build_frameworks.py --write` → `sync_governance.py --write` → `qa.py`；默认 auto 只使用来源哈希匹配且审查有效的框架，无隐式 legacy 回退。工作状态按唯一 session 绑定，不再依赖共享默认文件。
 
-**历史数字不可当作当前验收**：以下旧测试、体检、抽样与哈希记录仅对应当时版本，已过时，未在本轮复测。结构通过不等于语义通过，不等于 320 条实玩响应已完成；当前完成情况必须由实际 QA 输出、`maintenance/playtests/` 证据和独立评分确认。`run_playtest.py` 需显式调用并消耗模型额度，默认 QA 不会自动执行。
+**历史数字不可当作当前验收**：以下旧测试、体检、抽样与哈希记录仅对应当时版本，已过时，未在本轮复测。结构通过不等于语义通过，不等于 416 条实玩响应已完成；当前完成情况必须由实际 QA 输出、`maintenance/playtests/` 证据和独立评分确认。`run_playtest.py` 需显式调用并消耗模型额度，默认 QA 不会自动执行。
 
 ## 本轮清理依据
 
@@ -55,3 +55,4 @@
 | 2026-09-10 | 第二轮素材治理与实玩验收（六点指令）：44 失败案三因分类（model_deviation 28/summary_loss 14/source_gap 2）→协议 v3（FOLLOWUPS 重写+八条规则）+4 框架定点修+模板修；桥接 569→0（G01-G13 全闭合，FROZEN 46 未动）；非核心 1,573→0 全审落库、244 重复候选清零、成年锚定源修；28 框架 pairs 资源差异化；宿主闭环 9 步验收通过；三轮实玩重跑（垫片截断污染批与 provider MODEL_DISABLED 故障两起取证归档）终验 79/80（318/320 回合，续写均值 9.66）；登记簿 errors 0/warnings 0；指纹更新 5301735b…（走 `--update-fingerprint` 正规流程）；release 门禁仅剩 mat-3f430a8a-pressure 1 例拦截。详见 maintenance/implementation_report.md |
 | 2026-09-11 | 第三轮：实玩 80/80 达成。协议升级 v4（生成请求要求义务当回合上屏、规则串要求被异议条款在前文逐字出现过、评分简报第 9 条；三次措辞迭代的废批原样归档 v4-draft-aborted/v4a-nullified）；全量重跑 40 框架×两模式 80 份（320/320 回合，开局均值 10.00、续写 9.92、零分维度 0、无阻断案例），独立评审 glm-independent-review-v4 出具 80 份评分，第二模型 gemini-3.8-flash-high 在 12 例分层抽样上复核一致（12/12 通过、11/12 同分）；qa.py --full --release 全绿（291 测试、registry errors 0/warnings 0）；归因拆分（A/A'/B'/C/E 五批消融）：评分口径 +43 例、协议 v3 −35 例、素材修复 +35 例——第二轮「36→79」主要由评审口径变化造成，不能记为素材修复成果；另修 40 处 owner 定位符（pools.yaml 15 行 + 登记簿 44 处）并撤下 v1.3.0 tag 待重打。详见 maintenance/implementation_report.md §8-§9 与 maintenance/attribution_report.md |
 | 2026-09-11 | 第三轮收口：v1.3.0 重打并远端全绿。撤 tag 后重推（ecf7756），GitHub Actions quality 两个 job（Python 3.10/3.13）均通过，tag push 的 Release acceptance gate 步骤 ✓。此前远端必红的两个原因都已消除：实玩 79/80 与哈希口径。修 CI 本地失真：scripts/data/pools.yaml 是本机唯一 CRLF 工作区文件（61,569 字节，git blob 为 LF 59,260 字节），check_content.content_fingerprint() 与 data_contract.core_review_errors() 按原始字节哈希，导致记录值（指纹 5301735b…、pools.yaml 依赖 09dd9de8…）只在 Windows 工作区成立、干净 LF 检出必报 CORE_REVIEW_DEPENDENCY_STALE；改为按 LF 规范化后比对，记录更新为指纹 e8d68934…、依赖 7228d018…，工作区文件同步为 LF，并在干净 clone 中复跑 qa.py --full --release 全绿（291 测试）。素材内容与 80 份转写不受影响（转写用结构化 digest）。 |
+| 2026-09-15 | 发布 v1.4.0：素材层扩容至 52 世界框架（新增 12、40 个既有框架全量扩写 +813 条）＋审查协议 v5（六维含张力浓度、达标总分≥9）＋跨文件重句 24 条登记接受（reviewed 29/unresolved 0）＋计数链口径同步（104 案/416 响应）。全量实玩发布：48 框架重跑 384 次生成调用零失败、4 框架哈希沿用零成本，104 案 416/416 响应全过、独立评审 glm-independent-review-v3 104 份全绿；qa.py --full --release 306 测试全绿，指纹 a131a543…→4bb68621…（--update-fingerprint 正规流程，终审复跑值不变）。事故如实记录：评审模型个人配额 429 冷却中断一次（60/96 评审落盘保留、36 份重置后补齐零失败）；树状态快照测试随发布前后两次重钉（46→48→0）。详见 maintenance/implementation_report.md §10 |

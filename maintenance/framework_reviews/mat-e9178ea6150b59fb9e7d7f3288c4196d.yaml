@@ -1,8 +1,9 @@
-id: "mat-e9178ea6150b59fb9e7d7f3288c4196d"
-name: "河岸康复与互助居所"
-source_hash: "5fdc6abf6d7e96cdba4c350e7d25fe2e090609ebe90f45b4750009fca7ab81b0"
-semantic_status: "REVIEWED"
-reason: "路线信息核验、空盒试摆和自由短读分别支持可达性、厨房取用与休息；生活轮值不被当医疗照护，新住户不被要求证明体力，退出不附持续监督义务。"
+id: mat-e9178ea6150b59fb9e7d7f3288c4196d
+name: 河岸康复与互助居所
+source_hash: 105b69b70553e8f5935a55213c7cc743903eef0bf72493cdaea2242c139fff5b
+semantic_status: REVIEWED
+reason: 路线信息核验、空盒试摆和自由短读分别支持可达性、厨房取用与休息；生活轮值不被当医疗照护，新住户不被要求证明体力，退出不附持续监督义务；2026-09-12 第二波收尾：新增活动/地点经机械复核（space/people/daily/pressure_bindings
+  全通过），activity_functions 补齐至覆盖全部活动后同步源哈希。
 checks:
   era_and_theme: true
   space: true
@@ -11,29 +12,33 @@ checks:
   pressure_bindings: true
   distinct_functions: true
 quality:
-  grade: "B"
-  reason: "Static source review only; narrative acceptance is tracked independently in maintenance/playtests."
+  grade: B
+  reason: Static source review only; narrative acceptance is tracked independently in maintenance/playtests.
 activity_functions:
-  辨认地图上遗漏的休息点: "核对路线信息而非考核体力"
-  调整备餐台的收纳位置: "用空盒试摆减少日常取物负担"
-  为彼此挑一段短读物: "可随时停下的共同短读"
+  辨认地图上遗漏的休息点: 核对路线信息而非考核体力
+  调整备餐台的收纳位置: 用空盒试摆减少日常取物负担
+  为彼此挑一段短读物: 可随时停下的共同短读
+  守一夜家属陪护椅: 照护与修复：在巡房与探视时段之间守住这边的床，并知道该等谁的一句话
+  按住录音键确认清单: 信息交换：让签字前说过的话留成能查、双方都认的一句
+  签掉一份代签申请: 第三方与打断：决定这一笔挂在自己名下，还是让另一个署名的人承担
+  把出门单按手印登记: 空间与退出：把这一趟外出留成可查的一行，不让它落在别人名下
+  把活动室的杯子收完再走: 日常接触：在没有旁人的这一段里把两个人今天的相处收个尾
+  在露台背风处递一杯热水: 日常接触：在露台关门前把这一段没有旁人的时间过完
 chemistry:
   pairs:
-    -
-      pair: 0
-      needs: "协调员希望发现可改的问题，新住户希望不被当成需要完成调查的人"
-      misreading: "少说反馈被当成没有需要，连续询问被当成在测试配合程度"
-      asymmetric_cost: "协调员损失一次路线观察；住户消耗的是当天有限体力与自主感"
-      ritual: "每到休息点先问停、回还是继续，不要求给理由"
-      conflict_loop: "越想收全意见越追问，住户越疲倦越少说，协调员又误以为没问到点"
-      repair: "停在最近座椅，只记本人愿意指出的一处，未走路段保持未知"
-      irreversible_threshold: "把未经许可的身体情况写成住户展板案例，删去姓名也可能已被邻居认出"
-    -
-      pair: 1
-      needs: "轮值员希望下一班顺手接用，照护者希望今天真正下班"
-      misreading: "留下交接笔记被当成承诺续班，准时走被当成不关心共同厨房"
-      asymmetric_cost: "轮值员可能重复清点；照护者会失去自己安排的休息或工作时间"
-      ritual: "交班前各说一次自己负责到几点"
-      conflict_loop: "越担心无人接班越含糊问能不能再帮，照护者越难明确拒绝，下一次又被默认排入"
-      repair: "把可暂停事项收好，未找到接班交轮值负责人处理，按原约结束"
-      irreversible_threshold: "在本人明确拒绝后仍以其名义确认长期值班表，后续须撤回而不能称作先前默契"
+  - pair: 0
+    needs: 协调员希望发现可改的问题，新住户希望不被当成需要完成调查的人
+    misreading: 少说反馈被当成没有需要，连续询问被当成在测试配合程度
+    asymmetric_cost: 协调员损失一次路线观察；住户消耗的是当天有限体力与自主感
+    ritual: 每到休息点先问停、回还是继续，不要求给理由
+    conflict_loop: 越想收全意见越追问，住户越疲倦越少说，协调员又误以为没问到点
+    repair: 停在最近座椅，只记本人愿意指出的一处，未走路段保持未知
+    irreversible_threshold: 把未经许可的身体情况写成住户展板案例，删去姓名也可能已被邻居认出
+  - pair: 1
+    needs: 轮值员希望下一班顺手接用，照护者希望今天真正下班
+    misreading: 留下交接笔记被当成承诺续班，准时走被当成不关心共同厨房
+    asymmetric_cost: 轮值员可能重复清点；照护者会失去自己安排的休息或工作时间
+    ritual: 交班前各说一次自己负责到几点
+    conflict_loop: 越担心无人接班越含糊问能不能再帮，照护者越难明确拒绝，下一次又被默认排入
+    repair: 把可暂停事项收好，未找到接班交轮值负责人处理，按原约结束
+    irreversible_threshold: 在本人明确拒绝后仍以其名义确认长期值班表，后续须撤回而不能称作先前默契

@@ -11,3 +11,31 @@ reviews:
     path_prefixes: [/照护与修复/, /身体靠近/, /场景动作/非交易靠近/]
     disposition: KEEP_INDEX_REFERENCE
     reason: action_categories 是 pools 动作的分类索引。相同显示名称用于查找同一动作，不是两份独立文案；删除任一侧会破坏旧入口或分类。
+  # --- identities.yaml × world_frameworks.yaml：npc/player 原型字段的跨文件同句登记 ---
+  # 注意：check_duplicates.py:23 要求候选的每个 occurrence（含框架侧 /frameworks/... 路径）都落在某前缀下，
+  # 故每组同时登记池子侧与框架 pair 侧前缀。
+  - files: [identities.yaml, world_frameworks.yaml]
+    kind: cross_file
+    path_prefixes: [/npc/成人行业与感官服务/, /npc/学术与专业/, /npc/医疗与照护/, /npc/屏幕与镜头/, /frameworks/课时铃的两端/pairs/0/npc/, /frameworks/课时铃的两端/pairs/3/npc/, /frameworks/老澡堂与打烊后的钟点/pairs/2/npc/, /frameworks/动捕棚与中之人/pairs/0/npc/]
+    disposition: KEEP_ACCEPTED_REUSE
+    reason: npc 职能字段是身份原型的基准表述，框架 pairs 引用同一原型时必然逐字相同。同一句原型在池子与框架两侧各声明一次，不构成两份独立文案；改写任一侧都会改动素材指纹并连带作废关联证据，故登记接受，不扩写、不合并、不改写。
+  - files: [identities.yaml, world_frameworks.yaml]
+    kind: cross_file
+    path_prefixes: [/player/初次见面的网友/, /frameworks/课时铃的两端/pairs/0/player/, /frameworks/动捕棚与中之人/pairs/0/player/, /frameworks/打赏榜与最后一格/pairs/0/player/]
+    disposition: KEEP_ACCEPTED_REUSE
+    reason: 玩家轴「初次见面的网友」是全局复用的位置名（课时铃 pair0、动捕棚 pair0、打赏榜 pair0），其 baseline 与 reputation 描述的是同一个线上相识、线下初见的关系事实，跨框架复用语义自然且正是位置轴的设计意图，故登记接受。
+  - files: [identities.yaml, world_frameworks.yaml]
+    kind: cross_file
+    path_prefixes: [/player/合租室友/, /player/竞争者/, /player/相亲对象/, /player/前任/, /frameworks/课时铃的两端/pairs/2/player/, /frameworks/恋爱禁令与歌友会/pairs/1/player/, /frameworks/恋爱禁令与歌友会/pairs/2/player/, /frameworks/打赏榜与最后一格/pairs/3/player/]
+    disposition: KEEP_ACCEPTED_REUSE
+    reason: 合租室友、竞争者、相亲对象、前任四个玩家位置的 baseline/reputation 描述的是关系几何本身（同住平摊、同业对打、被撮合介绍、分手后重逢），不依赖具体框架设定；框架只是把同一位置放进自己的道具里，故登记接受。
+  - files: [identities.yaml, world_frameworks.yaml]
+    kind: cross_file
+    path_prefixes: [/player/知情不报者/, /player/教练/, /frameworks/恋爱禁令与歌友会/pairs/3/player/, /frameworks/课时铃的两端/pairs/3/player/, /frameworks/动捕棚与中之人/pairs/3/player/]
+    disposition: KEEP_ACCEPTED_REUSE
+    reason: 知情不报者与教练是压力位与执教位的高频位置，其 reputation 描述的是同一种关系承诺（嘴严但被逼到绝境会交底、只认场上表现不拿私交换位置）；重复出现正是该位置的核心张力，判为语义自然，登记接受。
+  - files: [identities.yaml, world_frameworks.yaml]
+    kind: cross_file
+    path_prefixes: [/player/上司/, /player/下属/, /frameworks/恋爱禁令与歌友会/pairs/0/player/, /frameworks/动捕棚与中之人/pairs/2/player/]
+    disposition: KEEP_ACCEPTED_REUSE
+    reason: 上司与下属的 baseline 描述的是职权与私域分离这一同一条规矩（白天的职权不带进这扇门、事情办完人却不走），恋爱禁令 pair0 与动捕棚 pair2 分别把它落在艺人条线与项目组条线上，语义各自成立，故登记接受。

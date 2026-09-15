@@ -253,7 +253,7 @@ def main() -> int:
     parser.add_argument("action", choices=["run", "check", "stats"])
     parser.add_argument("--batch", required=True, help="directory holding <stem>.json transcripts")
     parser.add_argument("--out-dir", help="review output directory (default: batch directory)")
-    parser.add_argument("--brief", default=ROOT / "maintenance/attribution_review_protocol.md", type=Path)
+    parser.add_argument("--brief", default=ROOT / "maintenance/playtest_review_protocol_v5.md", type=Path)
     parser.add_argument("--reviewer", default="glm-independent-review-v3")
     parser.add_argument("--model-patch", default="maintenance/playtest_reviewer_glm.yml")
     parser.add_argument("--dsh-entry", type=Path)
@@ -267,12 +267,13 @@ def main() -> int:
     parser.add_argument("--check-existing", action="store_true", help="include already reviewed cases in this run")
     parser.add_argument("--prompt-template", default=(
         "你是独立于生成器的评分者，reviewer={reviewer}，工作目录 {root}。"
-        "第一步：读评分简报 {brief}（含八条校准与批次适用说明，先确认本批该用哪几条）。"
+        "第一步：读评分简报 {brief}（含十条校准与批次适用说明，先确认本批该用哪几条）。"
         "第二步：读实玩转写 {transcript}（4 回合，每回合含 request 与 response，首回合正文以「世界观 / 人物 / 正文」标题开头）。"
         "第三步：可选参考框架文件 {framework}，只用于姓名、年龄、称呼核对；该文件现值为修复后版本，不得因素材后改而扣分。"
         "第四步：用写文件工具把评分写到 {out}，只写这一个文件。必须照抄：framework_id={fid}、name={name}、mode={mode}、"
         "transcript_sha256={sha}、reviewer={reviewer}、protocol={protocol}、aggregation={aggregation}。"
-        "其余字段按简报的输出契约：scores 与 evidence（五维，evidence 必须是该回合正文的逐字子串）、total、passed、"
+        "其余字段按简报的输出契约：scores 与 evidence（六维，含 tension_density 张力浓度：0 分=整回合无欲望、对抗、风险等张力来源且无张力推进；"
+        "2 分=张力有来源且有升级或有代价落点；纯事务性平淡回合 ≤1 分；露骨描写不加分反记 blocking；evidence 必须是该回合正文的逐字子串）、total、passed、"
         "turn_reviews（4 条，每条含 turn/scores/evidence/reason/blocking_findings/total/passed）、blocking_findings、summary。"
         "硬约束：案例级 scores 取最低回合那一套；不修改转写、不重跑生成、不改门槛、不碰其他文件，"
         "不得创建脚本、诊断或临时文件，除 {out} 外不得在工作区写入任何文件。{extra}"))

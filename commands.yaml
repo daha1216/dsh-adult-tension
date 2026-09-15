@@ -109,11 +109,11 @@ command_categories:
       - triggers: [强制表内]
         canonical: 强制表内
         advance_turn: false
-        behavior: 开局结构骰只取表内池（build_opening --complete --force-table）；不绕过 auto 审查门禁，独立旧池须显式 --framework legacy
+        behavior: 开局结构骰只取表内池（build_opening --complete --force-table）；不绕过 auto 审查门禁，独立旧池入口已拆除，legacy 不再可选
       - triggers: [表外全随机]
         canonical: 表外全随机
         advance_turn: false
-        behavior: 自由表外世界显式使用 build_opening --complete --framework legacy --all-custom，配齐 --custom KEY=VALUE；auto 仍限已审框架，自拟核心规则或时代等不兼容时拒绝，无静默回退；不绕过日常模式限制或状态校验
+        behavior: 自由表外世界使用 build_opening --complete --all-custom，配齐 --custom KEY=VALUE；独立旧池入口已拆除，--framework legacy 直接报错；auto 仍限已审框架，自拟核心规则或时代等不兼容时拒绝，无静默回退；不绕过日常模式限制或状态校验
       - triggers: [预锁]
         canonical: 预锁
         advance_turn: false
@@ -171,7 +171,7 @@ runtime_binding: |
   提交必须显式使用 --session <session> --expected-state-token <state_token>，或兼容 --state <state_path>。
   --state 旧调用可不带 token；携带时同样在文件锁内验证。失败不输出成功回执，过期 token 拒绝写入。
   过期后重新读取切片并重新判断 patch，不能仅替换 token 重放；成功后记录新 token。
-  auto 只使用来源哈希匹配且审查有效的框架，无合格框架时报错，无隐式 legacy 回退。
+  auto 只使用来源哈希匹配且审查有效的框架，无合格框架时报错，无隐式 legacy 回退；独立旧池入口已拆除，--framework legacy 报错。
   开局只有校验通过且要求的状态写入都成功才追加历史；输出已存在或状态写入失败不污染历史。
   提交后的 event_changes 含新 resolved/cancelled 终态及 outcome；取消说明用 cancel_outcome。
   终态事件保留在 events 中，resolved_summary 是结果摘要，不做物理归档。

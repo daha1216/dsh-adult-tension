@@ -222,14 +222,16 @@ class DocumentationConsistencyTests(unittest.TestCase):
         for path in ("README.md", "references/加内容.md", "references/素材架构.md"):
             document = read(path)
             for marker in ("DeepSeek Harness", str(required), "结构通过不等于语义通过", "独立评分",
-                           "playtest_report.py", "run_playtest.py", "显式调用", "模型额度", "默认 QA 不会自动"):
+                           "playtest_report.py", "run_playtest.py", "显式调用", "模型额度", "默认 QA 不会自动",
+                           "成人张力叙事级", "张力浓度"):
                 self.assertIn(marker, document, (path, marker))
 
     def test_stale_reports_and_removed_reviews_are_not_current_authority(self) -> None:
-        for path in ("PROGRESS.md", "references/素材整理报告.md"):
+        # PROGRESS 首屏给的是当前门槛；素材整理报告是冻结的历史报告，仍留旧数 320。
+        for path, marker in (("PROGRESS.md", "416"), ("references/素材整理报告.md", "320")):
             lead = read(path)[:1200]
             self.assertIn("已过时", lead)
-            self.assertIn("320", lead)
+            self.assertIn(marker, lead)
         maintenance = read("references/加内容.md")
         for marker in ("references/governance_decisions.yaml", "10 份历史 review", "已删除", "git", "history"):
             self.assertIn(marker, maintenance)

@@ -113,8 +113,13 @@ def load_tables() -> dict[str, Any]:
     }
 
 
-def name_pool_for_era(names: dict, era: str, gender: str = "male") -> tuple[list, list]:
-    """时代命中专属名池则用该池，支持按 gender ('male'/'female') 精准分流，否则回退顶层。"""
+def name_pool_for_era(names: dict, era: str, gender: str = "male") -> tuple[list, list, str]:
+    """时代命中专属名池则用该池，支持按 gender ('male'/'female') 精准分流，否则回退顶层。
+
+    返回 (surnames, givens, separator)：separator 是姓与名之间的连接符，来自 names.yaml
+    时代池的 `separator` 键（西式构名的池为 "·"，缺省 "" 即连写）。只有该池显式声明时
+    才拆分；顶层回退池一律连写。
+    """
     era_pools = names.get("eras") or {}
     pool = era_pools.get(str(era)) if isinstance(era_pools, dict) else None
     given_key = f"given_{gender}" if gender in ("male", "female") else "given"
@@ -122,18 +127,20 @@ def name_pool_for_era(names: dict, era: str, gender: str = "male") -> tuple[list
         surnames = pool.get("surnames") or []
         givens = pool.get(given_key) or pool.get("given") or []
         if surnames and givens:
-            return list(surnames), list(givens)
+            return list(surnames), list(givens), str(pool.get("separator") or "")
     top_givens = names.get(given_key) or names.get("given") or []
-    return list(names.get("surnames") or []), list(top_givens)
+    return list(names.get("surnames") or []), list(top_givens), ""
 
 
-def make_name(rng: random.Random, surnames: list[str], givens: list[str], used: set[str]) -> str:
+def make_name(rng: random.Random, surnames: list[str], givens: list[str],
+              used: set[str], separator: str = "") -> str:
     for _ in range(80):
         surname = pick(rng, surnames)
         given = pick(rng, givens)
         if given.startswith(surname):
             continue
-        name = f"{surname}{given}"
+        # 西式池用「·」分隔（卡彭·文森特）；中文池 separator 为空，保持连写（沈砚舟）。
+        name = f"{surname}{separator}{given}" if separator else f"{surname}{given}"
         if name not in used and len(name) >= 2:
             used.add(name)
             return name
@@ -403,13 +410,13 @@ def fill_opening(skeleton: dict[str, Any], roll: dict[str, Any],
     rng_names = rng_for(seed, "names")
     rng_body = rng_for(seed, "body")
     names_table = tables["names"]
-    surnames_m, givens_m = name_pool_for_era(names_table, era, gender="male")
-    surnames_f, givens_f = name_pool_for_era(names_table, era, gender="female")
+    surnames_m, givens_m, sep_m = name_pool_for_era(names_table, era, gender="male")
+    surnames_f, givens_f, sep_f = name_pool_for_era(names_table, era, gender="female")
     era_pool = (names_table.get("eras") or {}).get(str(era)) or {}
     era_pool_hit = bool(era_pool.get("surnames") and (era_pool.get("given_male") or era_pool.get("given")))
     used: set[str] = set()
-    player_candidates = [make_name(rng_names, surnames_m, givens_m, used) for _ in range(4)]
-    npc_candidates = [make_name(rng_names, surnames_f, givens_f, used) for _ in range(4)]
+    player_candidates = [make_name(rng_names, surnames_m, givens_m, used, sep_m) for _ in range(4)]
+    npc_candidates = [make_name(rng_names, surnames_f, givens_f, used, sep_f) for _ in range(4)]
     player_name = player_candidates[0]
     # 主 NPC 优先避开与玩家同姓：时代名池常仅 8 姓，同姓开局（如「夏侯景舟 × 夏侯知微」）
     # 容易被读成亲属；在候选内取首位异姓者，全部同姓时保留首选，抽取顺序与确定性不变。

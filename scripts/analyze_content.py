@@ -41,7 +41,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--samples", type=int, default=1000)
     parser.add_argument("--format", choices=("text", "json"), default="text")
-    parser.add_argument("--framework", default="auto", help="Default reviewed pool; use legacy for the independent old-pool distribution")
+    parser.add_argument("--framework", default="auto", help="Default reviewed pool; pass auto or an explicit world framework name")
     parser.add_argument("--opening-mode", choices=("daily", "pressure"), default="pressure")
     args = parser.parse_args(argv)
     if args.samples < 0:

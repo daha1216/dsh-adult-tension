@@ -1,4 +1,4 @@
-"""Select a coherent world package before the unchanged legacy draw pipeline."""
+"""Select a coherent world package before the shared scoped draw pipeline."""
 from __future__ import annotations
 
 import copy
@@ -9,6 +9,12 @@ import random
 
 class FrameworkError(ValueError):
     pass
+
+
+# 与 roll_opening.SCOPED_DRAW 同值：窄化 pools 后回调抽取体时传此值。
+# 用字符串常量而非模块对象，因为 _common.load_sibling 每次调用都会重新 exec 目标文件，
+# 模块级对象的 is 身份跨加载不稳定。
+SCOPED_DRAW = "\x00scoped-draw"
 
 
 def source_hash(package):
@@ -68,8 +74,11 @@ def build(roll_module, pools, seed, mode, locks, custom, recent, opening_mode, r
         if requested not in (None, "auto", locked):
             raise FrameworkError("--framework 与锁定的世界框架不一致")
         requested = locked
-    if requested in (None, "legacy"):
-        return roll_module(pools, seed, mode, locks, custom, recent, opening_mode)
+    if requested == "legacy":
+        raise FrameworkError(
+            "独立旧池入口已拆除，不接受 'legacy'；请传 auto（自动选择已审核框架）或显式框架名")
+    if requested is None:
+        requested = "auto"  # None 与 auto 同义：没有框架名就按已审核框架自动选择，不再直抽全池
     if requested != "auto" and requested not in registry:
         raise FrameworkError(f"未知世界框架：{requested}")
     eligible = {name: candidates(package, locks, custom, opening_mode)
@@ -80,10 +89,10 @@ def build(roll_module, pools, seed, mode, locks, custom, recent, opening_mode, r
     rng = random.Random(f"{seed}:world-framework/v1")
     if requested == "auto":
         if not eligible:
-            raise FrameworkError("没有符合锁定条件且已审核的框架；可调整条件或显式使用 --framework legacy，不会自动回退旧池")
+            raise FrameworkError("没有符合锁定条件且已审核的框架；可放宽锁定条件或换一个框架名，不会抽取未审素材")
         requested = rng.choice(list(eligible))
     if requested not in eligible:
-        raise FrameworkError("该世界框架与所选素材不兼容；请调整锁定值或使用 --framework legacy，不会静默替换用户选择")
+        raise FrameworkError("该世界框架与所选素材不兼容；请调整锁定值或换一个框架名，不会静默替换用户选择")
     package = registry[requested]
     activity_name, place, pair_index, pressure_name = rng.choice(eligible[requested])
     pair = package["pairs"][pair_index]
@@ -99,9 +108,9 @@ def build(roll_module, pools, seed, mode, locks, custom, recent, opening_mode, r
     scoped["玩家化身轴"]["称谓"] = list(pair["appellations"])
     scoped["场景动作"] = [activity_name]
     scoped["场景动作·靠近"] = [activity_name]
-    scoped["场景动作·交易"] = []
-    scoped["表层风味"] = ["直率", "沉静", "耐心", "爽朗"]
-    scoped["口癖"] = ["说话简短", "先问来意", "爱举例子", "偶尔自嘲"]
+    # 场景动作·交易、表层风味、口癖均不再硬编码：deepcopy(pools) 已带 pools.yaml 的交易摊牌
+    # 桶与 character_pools.yaml 的完整展平池，这里透传即可（原先的硬编码把 22 条交易动作清空、
+    # 把 120 风味 / 48 口癖顶成各四种，导致 auto 开局千篇一律）。
     scoped["场景动作分类"] = {activity["category"]: [activity_name]}
     scoped["处境侧"] = [pressure_name or activity_name]
     if pressure:
@@ -127,7 +136,7 @@ def build(roll_module, pools, seed, mode, locks, custom, recent, opening_mode, r
         if pressure:
             defaults.update({"压力来源": pressure["source"], "张力引擎": "、".join(pressure["engines"])})
         custom = {**defaults, **custom}
-    roll = roll_module(scoped, seed, mode, locks, custom, recent, opening_mode)
+    roll = roll_module(scoped, seed, mode, locks, custom, recent, opening_mode, SCOPED_DRAW)
     if "场景动作·对照" in roll:
         roll.pop("场景动作·对照")
     roll["世界框架"] = requested

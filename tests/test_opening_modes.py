@@ -49,11 +49,12 @@ class OpeningModeTests(unittest.TestCase):
 
     def test_daily_openings_reuse_curated_materials_and_validate(self) -> None:
         pools = ROLL.load_pools()
-        legacy = set(pools["核心规则"]) | set(pools["社会规则"]) | set(pools["张力引擎"])
-        legacy |= set(pools["处境侧"])
-        legacy |= set(pools["场景动作"])
+        curated = set(pools["核心规则"]) | set(pools["社会规则"]) | set(pools["张力引擎"])
+        curated |= set(pools["处境侧"])
+        curated |= set(pools["场景动作"])
         for seed in range(20):
-            roll = BUILD.build_roll(seed, {}, {}, False, False, opening_mode="daily")
+            roll = BUILD.build_roll(seed, {}, {}, False, False, opening_mode="daily",
+                                    framework=ROLL.SCOPED_DRAW)
             state = FILL.fill_opening(BUILD.build_skeleton(roll), roll)
             self.assertEqual([], VALIDATOR.validate_data(state, "opening"), seed)
             self.assertEqual([], VALIDATOR.validate_data(state, "save"), seed)
@@ -66,7 +67,7 @@ class OpeningModeTests(unittest.TestCase):
             self.assertLessEqual(len([x for x in state["world"]["tension_engines"] if x]), 1)
             selected = {roll[k] for k in ("核心规则", "社会规则", "处境", "场景动作")}
             selected |= set(x for x in roll["张力引擎"].split("、") if x)
-            self.assertTrue(selected <= legacy, (seed, selected - legacy))
+            self.assertTrue(selected <= curated, (seed, selected - curated))
 
     def test_daily_roll_is_deterministic_and_pressure_remains_distinct(self) -> None:
         daily_a = BUILD.build_roll(123, {}, {}, False, False, opening_mode="daily")
@@ -77,8 +78,10 @@ class OpeningModeTests(unittest.TestCase):
         self.assertGreaterEqual(len([x for x in pressure["张力引擎"].split("、") if x]), 2)
 
     def test_daily_rejects_explicit_pressure_material(self) -> None:
+        # 日常开局的锁校验属共享抽取体行为；独立旧池入口已拆除，直接钉在抽取体上。
         with self.assertRaisesRegex(ROLL.AnchorError, "日常开局"):
-            ROLL.build_roll(ROLL.load_pools(), 1, "table", {"压力来源": "舆论发酵"}, {}, opening_mode="daily")
+            ROLL.build_roll(ROLL.load_pools(), 1, "table", {"压力来源": "舆论发酵"}, {},
+                            opening_mode="daily", framework=ROLL.SCOPED_DRAW)
 
     def test_roll_file_preserves_mode_and_rejects_conflict(self) -> None:
         roll = BUILD.build_roll(9, {}, {}, False, False, opening_mode="daily")
@@ -160,7 +163,7 @@ class OpeningModeLifecycleTests(unittest.TestCase):
             state["world"]["pressure_seeds"]["near_event_id"] = value
             self.assertTrue(any("near_event_id" in error for error in VALIDATOR.validate_data(state, "save")))
 
-    def test_legacy_roll_and_save_keep_pressure_default(self):
+    def test_roll_and_save_without_opening_mode_keep_pressure_default(self):
         roll = BUILD.build_roll(4, {}, {}, False, False)
         roll.pop("opening_mode")
         state = FILL.fill_opening(BUILD.build_skeleton(roll), roll)
@@ -177,11 +180,13 @@ class OpeningModeLifecycleTests(unittest.TestCase):
             self.assertEqual([], VALIDATOR.validate_data(state, "opening"))
 
     def test_daily_locks_reject_crisis_situation_and_two_engines(self):
+        # 日常开局的锁校验属共享抽取体行为；独立旧池入口已拆除，直接钉在抽取体上。
         pools = ROLL.load_pools()
         for locks in ({"张力引擎": "情感拉扯、旧情重逢"}, {"处境": "资源断供"}):
             with self.assertRaisesRegex(ROLL.AnchorError, "日常开局"):
-                ROLL.build_roll(pools, 4, "table", locks, opening_mode="daily")
-        roll = ROLL.build_roll(pools, 4, "table", {"处境": "今夜话没说完", "场景动作": "递纸巾"}, opening_mode="daily")
+                ROLL.build_roll(pools, 4, "table", locks, opening_mode="daily", framework=ROLL.SCOPED_DRAW)
+        roll = ROLL.build_roll(pools, 4, "table", {"处境": "今夜话没说完", "场景动作": "递纸巾"},
+                               opening_mode="daily", framework=ROLL.SCOPED_DRAW)
         self.assertEqual("今夜话没说完", roll["处境"])
         self.assertEqual("递纸巾", roll["场景动作"])
 

@@ -13,18 +13,21 @@ V=load('framework_validate','scripts/validate_state.py')
 class WorldFrameworkTests(unittest.TestCase):
  def test_all_frameworks_support_daily_and_pressure(self):
   pools=R.load_pools(); tables=F.load_tables()
-  self.assertEqual(len(pools['世界框架']), 40)
+  self.assertEqual(len(pools['世界框架']), 52)
   for name in pools['世界框架']:
    for mode in ('daily','pressure'):
     roll=B.build_roll(17,{}, {},False,False,mode,name)
     state=F.fill_opening(B.build_skeleton(roll),roll,tables)
     self.assertEqual([],V.validate_data(state,'opening'),(name,mode))
     self.assertEqual(name,state['world']['framework']['name'])
- def test_auto_can_select_framework_and_legacy_is_unchanged(self):
+ def test_auto_can_select_framework_and_removed_entry_point_raises(self):
   auto=B.build_roll(1,{}, {},False,False,'daily','auto')
   self.assertIn(auto['世界框架'],R.load_pools()['世界框架审查'])
-  legacy=B.build_roll(1,{}, {},False,False,'daily','legacy')
-  self.assertIsNone(legacy.get('世界框架'))
+  # None 视同 auto：未指定框架时按 auto 选，不再是旧池直抽入口。
+  implicit=B.build_roll(1,{}, {},False,False,'daily',None)
+  self.assertIn(implicit['世界框架'],R.load_pools()['世界框架审查'])
+  with self.assertRaisesRegex(ValueError, "独立旧池入口已拆除"):
+   B.build_roll(1,{}, {},False,False,'daily','legacy')
  def test_framework_rejects_incompatible_lock(self):
   with patch.object(B, 'load_roll_opening', return_value=R), self.assertRaisesRegex(ValueError, "世界框架"):
    B.build_roll(1,{'地点':'写字楼'}, {},False,False,'daily','仙门山下百业镇')

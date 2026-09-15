@@ -1,5 +1,7 @@
 # 补评评分简报（第二轮归因与可复现评分）
 
+> **历史口径声明（阶段 3 尺度切换起）**：本简报仅适用于 `scope: non_explicit_narrative` 历史批次（协议 v2/v3/v4 转写）的补评与归因。`maintenance/baseline.yaml` 现行验收尺度已改为 `adult_tension_narrative`（成人张力叙事级）与六维评分（含 `tension_density`、`minimum_score: 9`）；新批次（协议 `adult-tension-narrative-brief-v5`）一律使用 `maintenance/playtest_review_protocol_v5.md`。正文按历史口径原样保留。
+
 用途：对**已归档**的实玩转写做评分侧补评，用于"协议 / 素材 / 评分口径"三段归因，以及后续批次的可复现独立评分。本文件不改变任何门槛：维度、聚合与门槛仍以 `maintenance/baseline.yaml`（`minimum_score: 8`）和 `scripts/playtest_report.py` 的机器复核为准。
 
 评分者必须独立于生成器（reviewer ≠ generator），逐案例输出 `<stem>.review.yaml`。

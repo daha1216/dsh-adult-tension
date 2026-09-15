@@ -1856,6 +1856,8 @@
 | `mat-45320bc0f8ce500f853ca9760dadc863` | legacy_weight |
 | `mat-e095a3ccb34452789794b79d3540afc9` | reviewed_frameworks |
 
+（注：`legacy_weight` 契约单元已判 DEPRECATED，legacy 独立入口已于阶段 4 拆除，见 maintenance/implementation_report.md；本表保留阶段 1 划分时的原始读数。）
+
 ## P3 不可达清单
 
 共 2 个单元：既不被任何框架选择字段引用，也不在 legacy 抽取路径上。
@@ -1876,6 +1878,7 @@
    - 跨文件 label 联动：identities.yaml `npc/<family>`、`player/<position>`，identity_profiles.yaml `<family>/*`（7 子键），locations.yaml `<place>`，location_profiles.yaml `<place>/*`（6 子键），names.yaml `eras/<era>`，character_meta.yaml `社会位置关系/<position>` 与上述引用按同一 label 匹配（框架模式 `prepare_tables` 以框架内联素材覆盖 identities/locations/location_profiles 的同名键，故这类引用是「名称级」而非「内容级」消费，见冲突 3）。
    - 框架字段结构示例（`authoring/frameworks/mat-00c8740516f7519592b47bb547fe5c27.yaml`「远途休假与小镇停留」）：`material: {eras: [远途休假季], aesthetics: [暖色生活流, 写实文学, 恋爱轻喜], rule: <整句>, social_rule: <整句>, places: {深夜机场候机区: {details: [...], profile: {...}}}, pairs: [{family: 艺术与传播, position: 同侪, appellations: [直呼其名], ...}], activities: {交换沿途手账: {category: 信息交换, ...}}, pressures: {返程班次取消: {source: 预定返程班次被取消, engines: [时限逼近, 资源锁定], ...}}}`。
 3. **P2 legacy 链**：`build_opening.py --framework legacy`（非 complete 默认即 legacy；显式 `--framework legacy` 同路径）→ `roll_opening.load_pools()` 读取 pools.yaml（顶层抽取池 + 时代与地点/场景动作/玩家化身轴 + meta 契约）、character_meta、twists、character_pools、action_categories、action_metadata、twist_profiles、world_frameworks（legacy_weight/reviewed_frameworks）→ `build_roll` legacy 分支抽取（含 `场景动作·对照` 读交易摊牌桶、`--twist` 读转折池/转折画像）→ `fill_opening.fill_opening` 依 roll 值查 names/identities/locations/location_profiles/identity_profiles/action_metadata/templates/character_meta。单元落在这些读取域内（按 label ∈ 对应池/桶判定，如 situation_beats 键须 ∈ 处境侧）即 P2。
+（注：本条为阶段 1 划分时的读取链事实；legacy 独立入口已于阶段 4 拆除，`build_opening.py --framework legacy` 现在直接报错，非 complete 默认已改为 `auto`，见 maintenance/implementation_report.md。抽取体本身保留，作为框架模式内部管线。）
 4. **P3**：其余单元，逐一给出不可达原因（所在池组 + roll_opening 是否读取该组）。
 
 ## 结构性事实（读取链完整性）
@@ -1929,4 +1932,4 @@
 - **names.yaml 顶层 `surnames/given_male/given_female`**：判 P2 依赖「传媒舆论危机期/契约共存时代/远途休假季」3 个可抽时代缺少完整专属名池这一现状；一旦补齐这 3 个名池，三个顶层池即回到不可达（`given` 则任何情况下都需要 given_male/given_female 同时缺失才可达）。DEPRECATED 前建议保留或加 cleanup 标注。
 - **identities.yaml npc 成员的「成员级」可达**：本划分以「族条目」为单元（族 ∈ 身份侧 即可达）；族内单个成员 dict 按 `seed % len(npc_pool)` 全员可达，无成员级死条目判定。
 - **meta.gate_aesthetics 门控**：美学基调命中 gate 时 表层风味/口癖 抽「—」；但两个池仍被 load/展平，character_pools 单元按「被读取」判 P2，不按「必被抽中」。
-- **`场景动作·对照`**：legacy 压力开局会从 交易摊牌 桶抽一个对照动作（世界框架模式 pop 掉该键），交易桶条目因此仍算 legacy 可达；纯框架模式下交易桶仅剩 build() 里 `scoped['场景动作·交易']=[]` 的空覆盖。
+- **`场景动作·对照`**：legacy 压力开局会从 交易摊牌 桶抽一个对照动作（世界框架模式 pop 掉该键），交易桶条目因此仍算 legacy 可达；纯框架模式下交易桶仅剩 build() 里 `scoped['场景动作·交易']=[]` 的空覆盖。（注：legacy 独立入口已于阶段 4 拆除，见 maintenance/implementation_report.md；处置口径不变。）

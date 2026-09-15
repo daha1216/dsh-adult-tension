@@ -1,0 +1,61 @@
+id: mat-39d6515fec4ac776e1bd0854b6c45305
+name: 征信所与保人堂
+source_hash: d7d20c79d0d847d08834c74b2eb605a8d2d6e6e186b7d06b8eeb16b477050a17
+semantic_status: REVIEWED
+reason: 征信所、保人堂与商团三条线打通：8 地点各带见证人/出口/可用项，9 活动集中在信息交换/调查与核验/第三方与打断/空间与退出四类，10 压力各绑 2 组三元组，活动/地点/人物搭配三向可达。机制是「结论随委托人计价」：只认委托状上的手印、同一件事换委托人另出结论、正副两纸封存三十天、具结不可改——查证行为本身被写成有价钱的行当，玩家每次落笔都要先报来处。与同
+  era 框架零地点、零美学重叠。
+checks:
+  era_and_theme: true
+  space: true
+  people: true
+  daily: true
+  pressure_bindings: true
+  distinct_functions: true
+quality:
+  grade: A
+  reason: Static source review only; narrative acceptance is tracked independently in maintenance/playtests.
+    「两份矛盾的报告都算数」与封存三十天副纸构成既有框架没有的查证经济，直接决定玩家能写什么、谁能调阅；判为明显独特。
+activity_functions:
+  接一份委托状: 信息交换：认手印不认话，先问替谁来问
+  对同一件事写两份结论: 调查与核验：让两份互相矛盾的结论同时生效
+  保人具结: 交易摊牌：在保人堂案上把保额一次定死
+  当铺二楼认物件: 调查与核验：凭物件来历辨认经手过的人
+  同业茶室打听行情: 第三方与打断：同业互通与行规拦阻
+  后巷递话: 空间与退出：把话递到不留见证的地方
+  诊察室问伤势: 调查与核验：从伤势读出一份没写进报告的事
+  商团侧厅对账: 调查与核验：当着委托人把两份报告摆开
+  货栈验箱留字据: 调查与核验：当场验货并把结论留在纸上
+chemistry:
+  pairs:
+  - pair: 0
+    needs: 同席撰稿人需要结论不被同行抢写；玩家需要两份矛盾报告都能留档
+    misreading: 把另出一份当成抢单，把封存当成替对方兜底
+    asymmetric_cost: 同席丢的是所里的座位，玩家丢的是自己那份报告的可信度
+    ritual: 落笔前先各自报一遍替谁来问
+    conflict_loop: 越想把结论写平越要互相遮掩，越遮掩两份报告越对不上
+    repair: 把两份都留正副两纸，柜门上写同一天到期
+    irreversible_threshold: 把对方写的那一份抽走不报，会终止同席共事
+  - pair: 1
+    needs: 接案先生需要所里出的结论兜得住；玩家需要照实写还能交件
+    misreading: 把要求写平听成逼着作伪，把照实写听成不接这单
+    asymmetric_cost: 接案先生担的是所里信誉，玩家担的是这一份报告的署名
+    ritual: 交件那天当着交件人把副纸入柜
+    conflict_loop: 越怕坏了行规越要写得平，越写得平委托人越要另找一份
+    repair: 另立一份委托，把写得平的那部分单独出
+    irreversible_threshold: 背着接案先生改掉正纸上的结论，会终止撰稿资格
+  - pair: 2
+    needs: 具结人需要保额一次定死；跑街需要委托状按时递到
+    misreading: 把不许改当成不近人情，把催件当成不认具结的分量
+    asymmetric_cost: 具结人押的是自己在保人堂的名声，跑街押的是这一趟的来处
+    ritual: 具结前把手印按在正纸与副纸同一处
+    conflict_loop: 越急着递到越要催，越催越容易漏掉来处那一句
+    repair: 把这一份退回重按手印，另约一次具结
+    irreversible_threshold: 事后补办具结，会终止在保人堂的经手资格
+  - pair: 3
+    needs: 查案员需要当铺二楼的物证对得上；账房需要那件东西不被追问
+    misreading: 把认物件当成要抄当铺，把不问来处当成能糊过去
+    asymmetric_cost: 查案员丢的是这一案的线，账房丢的是二楼账房与当铺的往来
+    ritual: 认物件前先把当票摊在灯下
+    conflict_loop: 越想查清来历越要动册子，越动册子越藏不住当过两次
+    repair: 把当票原样放回，只记物件不记人
+    irreversible_threshold: 把那件东西的去向写进报告，会终止账房与查案员之间的照面

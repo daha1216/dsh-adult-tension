@@ -67,6 +67,11 @@ LOCKABLE_KEYS = set(CUSTOM_KEYS) | {
 MULTI_LOCK_KEYS = {"张力引擎"}
 MULTI_SEPARATOR = re.compile(r"[、，,]")
 MODE_LABELS = {"table": "表内", "all_custom": "表外全随机", "force_table": "强制表内"}
+# 内部递归 sentinel：world_frameworks.build 窄化 pools 后回调 build_roll 时使用，
+# 表示「pools 已作用域化，直接执行抽取体」。它不是对外入口（legacy 独立抽取已拆除）。
+# 用字符串常量而非模块对象：_common.load_sibling 每次调用会重新 exec 目标文件，
+# 模块级对象的 is 身份跨加载不稳定，字符串按值比较才是可靠的。
+SCOPED_DRAW = "\x00scoped-draw"
 POWER_STRUCTURES = {"player_high", "npc_high", "equal", "switchable"}
 TWIST_CATEGORIES = ("信息类", "人事类", "资源类", "制度类", "时限类", "关系类", "意外类")
 
@@ -158,6 +163,21 @@ def _parse_meta(raw: dict[str, Any]) -> dict[str, Any]:
             place: _flat(eras, f"meta.location_eras.{place}")
             for place, eras in era_map.items()
         }
+    # gate_flavor_subsets 是可选键（gate 基调→{表层风味,口癖} 专属子集）：
+    # 写实门控基调改抽各自子集而不是置「—」；缺失时（如测试合成 fixture）保留旧的置「—」行为。
+    subsets = meta.get("gate_flavor_subsets")
+    if subsets is not None:
+        if not isinstance(subsets, dict) or not subsets:
+            raise AnchorError("meta.gate_flavor_subsets 必须是 基调→{表层风味,口癖} 映射")
+        cleaned_subsets: dict[str, dict[str, list[str]]] = {}
+        for tone, entry in subsets.items():
+            if not isinstance(entry, dict):
+                raise AnchorError(f"meta.gate_flavor_subsets.{tone} 必须是 {{表层风味,口癖}} 映射")
+            cleaned_subsets[str(tone)] = {
+                axis: _flat(entry.get(axis), f"meta.gate_flavor_subsets.{tone}.{axis}")
+                for axis in ("表层风味", "口癖")
+            }
+        meta["gate_flavor_subsets"] = cleaned_subsets
     return meta
 
 
@@ -313,7 +333,6 @@ def load_pools() -> dict[str, Any]:
     pools["人物生成倾向"] = _profile_weights(char_meta.get("人物生成倾向"))
     pools["配角功能"] = _flat(char_meta.get("配角功能"), "配角功能")
     pools["世界框架"] = frameworks.get("frameworks") or {}
-    pools["世界框架旧池权重"] = frameworks.get("legacy_weight", 10)
     pools["世界框架审查"] = frameworks.get("reviewed_frameworks") or {}
     if not pools["世界框架"]:
         raise AnchorError("世界框架素材包为空")
@@ -350,6 +369,16 @@ def load_pools() -> dict[str, Any]:
     for name in meta["gate_aesthetics"]:
         if name not in pools["美学基调"]:
             raise AnchorError(f"meta.gate_aesthetics 引用了不存在的美学基调：{name!r}")
+    gate_set = set(meta["gate_aesthetics"])
+    for tone, entry in (meta.get("gate_flavor_subsets") or {}).items():
+        if tone not in pools["美学基调"]:
+            raise AnchorError(f"meta.gate_flavor_subsets 引用了不存在的美学基调：{tone!r}")
+        if tone not in gate_set:
+            raise AnchorError(f"meta.gate_flavor_subsets.{tone} 未列在 meta.gate_aesthetics 名单内")
+        for axis in ("表层风味", "口癖"):
+            missing = [item for item in entry[axis] if item not in pools[axis]]
+            if missing:
+                raise AnchorError(f"meta.gate_flavor_subsets.{tone}.{axis} 引用了不存在的条目：{missing!r}")
     for family in meta["identity_weights"]:
         if family not in pools["身份侧"]:
             raise AnchorError(f"meta.identity_weights 引用了不存在的身份族：{family!r}")
@@ -443,18 +472,43 @@ def _combine_multi(key: str, raw: str, pool: list[str], count: int,
     return "、".join(picks)
 
 
+def _framework_roll(pools: dict[str, Any], seed: int, mode: str, locks, custom, recent,
+                    opening_mode: str, requested: str | None) -> dict[str, Any]:
+    """委托 world_frameworks.build 选择世界框架；legacy 独立入口已拆除。"""
+    module = _COMMON.load_sibling("world_frameworks")
+    try:
+        return module.build(build_roll, pools, seed, mode, locks, custom, recent,
+                            opening_mode, requested)
+    except module.FrameworkError as exc:
+        raise AnchorError(str(exc)) from exc
+
+
 def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
                locks: dict[str, str] | None = None,
                custom: dict[str, str] | None = None,
                recent: dict[str, set[str]] | None = None,
                opening_mode: str = "pressure", framework: str | None = None) -> dict[str, Any]:
-    """框架使用独立随机流，旧 DRAW_PLAN 的消费顺序保持不变。"""
-    if framework not in (None, "legacy") or "世界框架" in (locks or {}):
-        module = _COMMON.load_sibling("world_frameworks")
-        try:
-            return module.build(build_roll, pools, seed, mode, locks, custom, recent, opening_mode, framework)
-        except module.FrameworkError as exc:
-            raise AnchorError(str(exc)) from exc
+    """框架使用独立随机流，旧 DRAW_PLAN 的消费顺序保持不变。
+
+    framework 只接受 "auto" 或已登记的世界框架名。独立旧池（legacy）入口已拆除：
+    传 "legacy" 直接报错；传 None 视同 auto，走框架选择，不再回退到未窄化的全池抽取。
+
+    内部递归回调（world_frameworks.build 窄化 pools 后回抽）传 SCOPED_DRAW sentinel，
+    走抽取体但不属于对外入口；`locks` 携带「世界框架」键时同样委托框架层处理。
+    """
+    if framework == SCOPED_DRAW:
+        pass  # 内部递归：pools 已窄化，直接执行抽取体
+    elif "世界框架" in (locks or {}):
+        # 玩家锁定「世界框架」：由框架层校验一致性并完成选择
+        return _framework_roll(pools, seed, mode, locks, custom, recent, opening_mode, framework)
+    elif framework == "legacy":
+        raise AnchorError(
+            "独立旧池入口已拆除，--framework 不接受 'legacy'；"
+            "请传 auto（自动选择已审核框架）或显式框架名")
+    else:
+        # None 与 "auto" 同义：外部未指定框架时按 auto 走框架选择，不再有全池直抽出口。
+        return _framework_roll(pools, seed, mode, locks, custom, recent, opening_mode,
+                               "auto" if framework is None else framework)
     if opening_mode not in ("pressure", "daily"):
         raise AnchorError(f"未知开局类型：{opening_mode}")
     locks = dict(locks or {})
@@ -689,12 +743,15 @@ def build_roll(pools: dict[str, Any], seed: int, mode: str = "table",
     else:
         roll["场景动作·对照"] = rng.choice(pools["场景动作·交易"]) if pools["场景动作·交易"] else "—"
     gate = roll["美学基调"] in gate_aesthetics()
-    if gate:
+    # 写实门控保留：gate 基调改抽 meta.gate_flavor_subsets 里的相称子集（语域控制），
+    # 只有未登记子集的 gate 基调才写「—」；非 gate 基调行为不变（抽全池）。
+    subset = ((pools.get("meta") or {}).get("gate_flavor_subsets") or {}).get(roll["美学基调"]) if gate else None
+    if gate and subset is None:
         roll["表层风味"] = "—"
         roll["口癖"] = "—"
     else:
-        draw("表层风味", pools["表层风味"])
-        draw("口癖", pools["口癖"])
+        draw("表层风味", subset["表层风味"] if subset else pools["表层风味"])
+        draw("口癖", subset["口癖"] if subset else pools["口癖"])
 
     appearance = _appearance_items(pools, gate)    # Filter high-risk fantasy-only appearance signals outside fantasy worlds.
     if not any(token in str(roll.get("时代", "")) for token in ("幻想", "玄幻", "异世界", "地下城", "神怪", "废土")):
@@ -946,7 +1003,7 @@ def main(argv: list[str] | None = None) -> int:
                         help="预锁字段，可重复（如 --lock 时代=当代都市）")
     parser.add_argument("--custom", action="append", default=[], metavar="KEY=VALUE",
                         help="表外自定义值，仅与 --all-custom 一起使用")
-    parser.add_argument("--framework", default="auto", help="auto 只抽已审核框架；旧池须显式选择 legacy")
+    parser.add_argument("--framework", default="auto", help="auto 自动选择已审核框架；也可指定世界框架名称（独立旧池入口已拆除）")
     parser.add_argument("--opening-mode", choices=["pressure", "daily"], default="pressure")
     parser.add_argument("--format", choices=["text", "json"], default="text")
     args = parser.parse_args(argv)

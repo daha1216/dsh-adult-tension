@@ -78,7 +78,7 @@
    - `build_frameworks.build` ×2 → `world_frameworks.build`（`scripts/world_frameworks.py:60`）
    - `roll_opening.compatibility_reasons` ×1 → 需重新 rg 定位（`scripts/roll_opening.py` 无顶层定义）
    - 改完走 `material_registry.py --sync --decisions` → `qa.py --full --update-fingerprint`。
-2. **登记-only 项**（报告 §3）：`legacy_weight` 死值（报告称 `roll_opening.py:316`）、3 个时代名池缺失（传媒舆论危机期/契约共存时代/远途休假季）、templates 近重复 7 对。
+2. **登记-only 项**（报告 §3）：`legacy_weight` 死值（报告称 `roll_opening.py:316`；注：legacy 独立入口已于阶段 4 拆除，见 maintenance/implementation_report.md）、3 个时代名池缺失（传媒舆论危机期/契约共存时代/远途休假季）、templates 近重复 7 对。
 3. **G10 遗留**：动力舱维修工玩家侧时代映射。
 4. **框架级 `bridge_status`**：`authoring/frameworks/mat-d8ec69422b1354538ef3c705f4beb804.yaml`（幕末町屋与道场）仍为 `bridge_required`（`material.bridge_explanation` 已填）。这与单元级 `BRIDGE_REQUIRED=0` 不是同一口径，报告 §2 需加一句限定，否则"全闭合"会被误读为框架级也无待办。
 5. **244 重复候选**：当前 `scripts/check_duplicates.py` 输出 `reviewed_candidates 5 / unresolved 0`，244 不可复现 → 报告改成工具可复现的口径或删数。

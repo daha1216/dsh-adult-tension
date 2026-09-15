@@ -1,9 +1,11 @@
 id: mat-2bfa7ee5ec9a5289aa2ca12c4af25323
 name: 湘西山路与乡志
-source_hash: 88edf769c8e3238881624dc22f4d92270a035e796897c5e53fe4930fa27366fd
+source_hash: 07dca21a6ce3ce84e3ea4621a2b188e03883e0174fbeeeb87c3bfff1dc76d208
 semantic_status: REVIEWED
 reason: 义庄观察不越入破损内间，寺院口述成为可不记稿的共同听讲，医馆行囊只做日用照料。编纂人、向导不冒充营造或医疗专家；桥况只绑定行前准备，异议只绑定实际编纂人参与的谈话。；2026-09-10
-  第二人物组资源/限制差异化强化后同步源哈希。
+  第二人物组资源/限制差异化强化后同步源哈希；2026-09-12 第二波收尾：新增活动/地点经机械复核（space/people/daily/pressure_bindings 全通过），activity_functions
+  补齐至覆盖全部活动后同步源哈希。；2026-09-12 可达性修复（阶段3遗留1/3）：按 dispatch 落点为 3 个身份族补压力行并修复成年向/高张力 daily-only 地点，新增 pair/pressure
+  经逐项审读，pressure_bindings 与绑定活动场景语义相容、引擎逐字取自白名单
 checks:
   era_and_theme: true
   space: true
@@ -13,12 +15,17 @@ checks:
   distinct_functions: true
 quality:
   grade: B
-  reason: Static source review only; narrative acceptance is tracked independently
-    in maintenance/playtests.
+  reason: Static source review only; narrative acceptance is tracked independently in maintenance/playtests.
 activity_functions:
   试辨旧屋营造痕: 建筑证据辨识
   听讲乡俗与回应: 民俗叙事相遇与日常回应
   整理采药行囊: 行旅照料与体力适配
+  按旧例分纸人旁的铺位: 空间与退出：在不碰倒纸人的前提下把两处铺位分定
+  试推断龙石卡榫: 调查与核验：判断石是停住了还是还会续落
+  数长明灯灯油余量: 调查与核验：把撤出时辰压在灯熄之前
+  把采药人换下的药碾过一遍: 照护与修复：分清哪几味是本人采的，哪几味是别处来的
+  在暴雨里点一次干火种: 照护与修复：把火留在庙里，不让队伍在雨里走散
+  当客商面分清祖上与自己的: 信息交换：把祖上的名气和自己出的力分开算
 chemistry:
   pairs:
   - pair: 0
@@ -37,3 +44,11 @@ chemistry:
     conflict_loop: 编纂人想多访一户，向导不断催回，双方都没吃好饭
     repair: 删去一处访问，按各自体力分开安排
     irreversible_threshold: 隐瞒桥况催同行者离开医馆，会终止带路信任
+  - pair: 3
+    needs: 守棺人需要停灵簿有人见证落笔；笔客需要乡志不写门内事
+    misreading: 把翻停灵簿当成要替两房断吉时
+    asymmetric_cost: 逾例之记追的是守棺人的传人身份，你至多丢一页底稿
+    ritual: 进棚先看长明灯油还剩几指
+    conflict_loop: 两房越僵，簿越空，灯油越短，守棺人越不肯自己落笔
+    repair: 请两房长辈进棚当面落笔，乡志仍留白
+    irreversible_threshold: 灯灭后逾例既成，义庄传人换人，门内话从此对不上

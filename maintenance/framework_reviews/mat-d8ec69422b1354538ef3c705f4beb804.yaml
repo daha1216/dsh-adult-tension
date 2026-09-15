@@ -1,8 +1,11 @@
-id: "mat-d8ec69422b1354538ef3c705f4beb804"
-name: "幕末町屋与道场"
-source_hash: "d4690c6500c2872dda5e8b172d2327bf6c1210db8ff069cfc03d926bce59e1a8"
-semantic_status: "REVIEWED"
-reason: "完整保留鸭川雨廊、壬生道场与神乐坂置屋，但确认第三处在江户，明确多日旅程或书信桥接并标 bridge_required。活动改为木材判断、护具修补、邀帖意图表达；压力不替任何人赋予屯所权力。"
+id: mat-d8ec69422b1354538ef3c705f4beb804
+name: 幕末町屋与道场
+source_hash: 7d03b10141f3d6b07891b5c3491119de91eacc22eb069b7ff257281adbe55110
+semantic_status: REVIEWED
+reason: 完整保留鸭川雨廊、壬生道场与神乐坂置屋，但确认第三处在江户，明确多日旅程或书信桥接并标 bridge_required。活动改为木材判断、护具修补、邀帖意图表达；压力不替任何人赋予屯所权力；2026-09-12
+  第二波收尾：新增活动/地点经机械复核（space/people/daily/pressure_bindings 全通过），activity_functions 补齐至覆盖全部活动后同步源哈希。；2026-09-12
+  可达性修复（阶段3遗留1/3）：按 dispatch 落点为 3 个身份族补压力行并修复成年向/高张力 daily-only 地点，新增 pair/pressure 经逐项审读，pressure_bindings
+  与绑定活动场景语义相容、引擎逐字取自白名单
 checks:
   era_and_theme: true
   space: true
@@ -11,29 +14,43 @@ checks:
   pressure_bindings: true
   distinct_functions: true
 quality:
-  grade: "B"
-  reason: "Static source review only; narrative acceptance is tracked independently in maintenance/playtests."
+  grade: B
+  reason: Static source review only; narrative acceptance is tracked independently in maintenance/playtests.
 activity_functions:
-  辨认旧屋木纹: "材料判断与修缮取舍"
-  修整练习用具: "器具维护而非武艺效忠"
-  商量艺事邀帖称呼: "礼数学习与意图表达"
+  辨认旧屋木纹: 材料判断与修缮取舍
+  修整练习用具: 器具维护而非武艺效忠
+  商量艺事邀帖称呼: 礼数学习与意图表达
+  教一个动作: 照护与修复：把解绳的动作练到不必低头也能完成
+  教她一个身段: 身体靠近：学会在宴席上不惊动旁人地交接一件东西
+  替她挽一次发: 身体靠近：在开席前把发式挽成能撑过整场宴席的样子
+  用嘴咬住发绳扎单马尾: 身体靠近：赶在开席前把散开的头发束紧，不让廊下的人看出方才动过手
+  用掌心温热她腕上冰凉的翡翠玉镯: 身体靠近：把镯子暖回能戴的样子，也把这只镯子的来路问清楚
+  递上一块干净白布替她拭刀: 日常接触：把刀上的水与暗色擦净，不让它带着痕迹过夜
+  桥番扣刀问夜: 第三方与打断：在开审之前弄清谁的名字会被写进桥番的扣留簿
+  核对年季身契的账页: 账目核验与身契名分的取舍
 chemistry:
   pairs:
-    -
-      pair: 0
-      needs: "修缮匠需要旧材损失被理解；书役需要传话不等于替屋主担保"
-      misreading: "把追问签名听成不信任介绍人"
-      asymmetric_cost: "工匠损耗木料，书役伤及介绍人的情面"
-      ritual: "先指一处愿意保留的旧木痕"
-      conflict_loop: "书役越讲交情，工匠越守住不动手，双方都像不讲情面"
-      repair: "先做可撤回的木样比较，再各自向有权者确认"
-      irreversible_threshold: "未经许可拆掉纪念旧柱，无法靠赔钱恢复原物与信任"
-    -
-      pair: 1
-      needs: "书役需要熟人尊重屯所边界；修缮匠需要不被当成杂役随叫随到"
-      misreading: "把许可时段当成故意摆身份"
-      asymmetric_cost: "书役承担管事责问，工匠承担白跑和工具占用"
-      ritual: "借前取木牌，结束由各自收回自己的工具"
-      conflict_loop: "临时请帮忙不断延长，书役难拒绝管事，工匠越来越冷淡"
-      repair: "把一件护具修完即结束，其他件另约有工钱的一日"
-      irreversible_threshold: "擅借对方名义替屯所作政治表态，会中断代递书信"
+  - pair: 0
+    needs: 修缮匠需要旧材损失被理解；书役需要传话不等于替屋主担保
+    misreading: 把追问签名听成不信任介绍人
+    asymmetric_cost: 工匠损耗木料，书役伤及介绍人的情面
+    ritual: 先指一处愿意保留的旧木痕
+    conflict_loop: 书役越讲交情，工匠越守住不动手，双方都像不讲情面
+    repair: 先做可撤回的木样比较，再各自向有权者确认
+    irreversible_threshold: 未经许可拆掉纪念旧柱，无法靠赔钱恢复原物与信任
+  - pair: 1
+    needs: 书役需要熟人尊重屯所边界；修缮匠需要不被当成杂役随叫随到
+    misreading: 把许可时段当成故意摆身份
+    asymmetric_cost: 书役承担管事责问，工匠承担白跑和工具占用
+    ritual: 借前取木牌，结束由各自收回自己的工具
+    conflict_loop: 临时请帮忙不断延长，书役难拒绝管事，工匠越来越冷淡
+    repair: 把一件护具修完即结束，其他件另约有工钱的一日
+    irreversible_threshold: 擅借对方名义替屯所作政治表态，会中断代递书信
+  - pair: 4
+    needs: 见习艺伎需要赎身余数被如实点清；债主需要账目干净不沾人身折算
+    misreading: 把核账听成要当场逼赎或收人抵数
+    asymmetric_cost: 债主折一笔账只是数目，她认错一栏就要多奉公三年
+    ritual: 先在玄关低案上把账页与借据并排
+    conflict_loop: 债主越让息，当家人越想把差额折成年季，她越不敢自己开口
+    repair: 写明只按原数收息的回执，改契之议交还三方当面谈
+    irreversible_threshold: 在折算改契上落笔，新契落册后此前的缓期与情面一并清零

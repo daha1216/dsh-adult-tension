@@ -289,7 +289,10 @@ def resolve_roll(args: argparse.Namespace) -> dict[str, Any]:
         roll = roll_from_file(args.roll_file)
         stored_mode = roll.get("opening_mode", "pressure")
         requested_framework = getattr(args, "framework", None)
-        if requested_framework not in (None, "auto", roll.get("世界框架", "legacy")):
+        stored_framework = roll.get("世界框架")
+        # 旧 roll（无「世界框架」键）没有框架记录：显式 --framework 一律视为不一致，
+        # 不静默改动已有开局。新 roll 则要求显式值与记录相符（auto 视为“不指定”）。
+        if requested_framework not in (None, "auto", stored_framework):
             raise SystemExit("ERROR: --framework 与已有 roll 不一致")
         if args.opening_mode is not None and args.opening_mode != stored_mode:
             raise SystemExit("ERROR: --opening-mode 与已有 roll 不一致；请重新生成，不改写已有开局")
@@ -298,7 +301,7 @@ def resolve_roll(args: argparse.Namespace) -> dict[str, Any]:
     custom = parse_pairs(args.custom, "custom")
     return build_roll(args.seed, locks, custom, args.all_custom, args.force_table,
                       getattr(args, "opening_mode", None) or "pressure",
-                      framework=getattr(args, "framework", None) or ("auto" if args.complete else "legacy"))
+                      framework=getattr(args, "framework", None) or "auto")
 
 
 def complete_opening(args: argparse.Namespace) -> int:
@@ -461,7 +464,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--check", type=Path, default=None, metavar="FILE",
                         help="校验已生成骨架/填充文件并列出待填项")
     parser.add_argument("--framework", default=None,
-                        help="auto 混合新框架与旧池；legacy 仅旧池；也可指定世界框架名称")
+                        help="auto 自动选择已审核框架；也可指定世界框架名称（独立旧池入口已拆除）")
     parser.add_argument("--opening-mode", choices=["pressure", "daily"], default=None,
                         help="新开局类型；生产开局未选择时只返回选择提示")
     parser.add_argument("--complete", action="store_true",

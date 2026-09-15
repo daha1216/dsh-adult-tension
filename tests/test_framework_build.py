@@ -47,7 +47,7 @@ class FrameworkBuildTests(unittest.TestCase):
         built = self.build()
         self.assertEqual(["Demo"], list(built["frameworks"]))
         self.assertEqual({}, built["reviewed_frameworks"])
-        self.assertEqual(0, built["legacy_weight"])
+        self.assertNotIn("legacy_weight", built)
 
     def test_approval_requires_exact_identity_hash_and_all_checks(self):
         self.write(self.reviews / f"{self.key}.yaml", self.review())
@@ -89,10 +89,10 @@ class FrameworkBuildTests(unittest.TestCase):
         self.assertIn("duplicate key", errors[0])
 
     def test_auto_has_no_implicit_legacy_fallback(self):
-        def legacy(*args):
-            self.fail("auto called legacy")
+        def old_pool(*args):
+            self.fail("auto called the removed old-pool entry point")
         with self.assertRaises(frameworks.FrameworkError):
-            frameworks.build(legacy, {"世界框架": {}}, 11, "all_random", {}, {}, {}, "daily", "auto")
+            frameworks.build(old_pool, {"世界框架": {}}, 11, "all_random", {}, {}, {}, "daily", "auto")
 
     def test_pressure_binding_is_exact_not_cartesian(self):
         pressure = {"bindings": [{"activity": "repair", "place": "shop", "pair": 0}]}

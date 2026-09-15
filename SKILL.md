@@ -124,9 +124,9 @@ python scripts/build_opening.py --complete --opening-mode daily [--session ID] [
 
 人物介绍的年龄直接取 `opening_brief.player.age` 与 `opening_brief.npc.age`，不凭身份猜测或补默认年龄。现场条件读 brief 的 `scene_profile` 与 `situation`。框架技术边界 `technology_boundary` 及有值的 `bridge_explanation` 已写入现有 `world.constants`，完整 brief 与续玩活切片均保留这些约束，不新增 v3 字段；不要用省略这些信息的 compact brief 代替完整开局源。
 
-默认 `auto` 只选来源哈希匹配、语义审查有效的框架；没有合格框架时明确报错，无隐式 `legacy` 回退。独立旧池必须显式使用 `--framework legacy`。点名框架可用于定向检查，不代表已取得默认抽取或发布资格。
+默认 `auto` 只选来源哈希匹配、语义审查有效的框架；没有合格框架时明确报错，无隐式 `legacy` 回退。独立旧池入口已随阶段 4 拆除，`--framework legacy` 会被直接拒绝，只能传 `auto` 或已登记的框架名。点名框架可用于定向检查，不代表已取得默认抽取或发布资格。
 
-`--all-custom` 不解除框架约束；自拟核心规则、时代等与所有已审框架都不兼容时，`auto` 会拒绝，不静默回退。玩家明确要求自由表外世界时，使用 `--framework legacy --all-custom` 并补齐所需 `--custom KEY=VALUE`，仍遵守日常模式限制与状态校验。
+`--all-custom` 不解除框架约束；自拟核心规则、时代等与所有已审框架都不兼容时，`auto` 会拒绝，不静默回退。玩家明确要求自由表外世界时，用 `--all-custom` 并补齐所需 `--custom KEY=VALUE`（独立旧池入口已拆除，不能再借 `--framework legacy` 兜底）；仍遵守日常模式限制与状态校验。
 
 仅新局必须依次使用 `世界观`、`人物`、`正文` 三个标题，前两项各 1-2 句。世界观优先交代框架独特规则和一个地方细节，只写玩家此刻合理知道的时代、地点、重要秩序、资源或危险；人物简要介绍玩家和主要 NPC 的姓名、明确成年年龄、身份及当前处境，不泄露隐藏动机。命名服从时代、文化和生活背景，不局限现代姓名。载入与续玩不重复三个标题。
 
@@ -261,3 +261,13 @@ python scripts/build_opening.py --complete --opening-mode daily [--session ID] [
 - 状态冲突：保留未提交 patch，重新读取所绑定会话的活切片与 token，再判断是否重做或另存；不得猜测全局工作档、自动合并或强行覆盖。
 - 事件重复：按稳定事件 ID 与 `semantic_key` 去重；保留原 `source`、`due_at`，不得换 ID 重建。
 - 存档版本旧或缺失：按 `references/状态总结.md`「载入流程」停止载入并逐项报告错误，不自动迁移、不猜测字段。`turn: 0` 的旧档可载入，按回合 1 接续并告知玩家。
+
+## 维护与验收：日常不实玩、发布才实玩
+
+日常迭代只跑静态与指纹检查，不消耗模型额度：
+
+```powershell
+python -X utf8 scripts/qa.py --full --update-fingerprint
+```
+
+此时 `maintenance/playtests/` 里因素材更新而 `source_hash` 失配的旧实玩证据是**预期状态**，不修、不补、不重跑；默认 QA 不会自动调用 `run_playtest.py`。只有用户明确说「发布」才进行实玩，由 `scripts/release_playtest.py` 统一编排既有命令（不新增判据、不改动被调脚本），且只重跑失配框架——哈希未变的框架继续沿用旧证据。完成判据是 `python -X utf8 scripts/qa.py --full --release` 通过。流程细节、何时必须升版本、发布步骤与恢复方式见 `references/加内容.md` 第 2 节与第 15 节。

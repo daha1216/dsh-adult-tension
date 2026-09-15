@@ -53,7 +53,7 @@ def aggregate(index_path=INDEX, authoring=AUTHORING, reviews=REVIEWS):
     actual = {path.stem for path in authoring.glob("*.yaml")}
     if actual != seen:
         raise ValueError(f"Unindexed/missing authoring files: {actual ^ seen}")
-    return {"version": 1, "legacy_weight": 0, "reviewed_frameworks": approved, "frameworks": frames}
+    return {"version": 1, "reviewed_frameworks": approved, "frameworks": frames}
 
 
 def bootstrap():

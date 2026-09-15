@@ -1,9 +1,10 @@
 id: mat-0cc59e86706659aa89202725d9f89f5c
 name: 检疫站旁的生活区
-source_hash: bc7a348bee6ffbc2e323c948f67afeadd5e3437ae3b70fdaed59d84c423ae9b5
+source_hash: d642a80f50b64d3de0e4c5997b9626df211454f3c6e66a86a1a6c9794fcf7887
 semantic_status: REVIEWED
-reason: 厨房改为各自在家的语音共餐，保留原地点但不假定隔窗递物可跨检疫边界；试读、做饭与夜班交接产生不同结果。2026-09-10 定点修复：『旧版通告仍在流传』beats
-  写明更正后取物时段为次日下午两点到四点，消除生成端无值可依的缺口。；2026-09-10 第二人物组资源/限制差异化强化后同步源哈希。
+reason: 厨房改为各自在家的语音共餐，保留原地点但不假定隔窗递物可跨检疫边界；试读、做饭与夜班交接产生不同结果。2026-09-10 定点修复：『旧版通告仍在流传』beats 写明更正后取物时段为次日下午两点到四点，消除生成端无值可依的缺口。；2026-09-10
+  第二人物组资源/限制差异化强化后同步源哈希；2026-09-12 第二波收尾：新增活动/地点经机械复核（space/people/daily/pressure_bindings 全通过），activity_functions
+  补齐至覆盖全部活动后同步源哈希。
 checks:
   era_and_theme: true
   space: true
@@ -13,12 +14,15 @@ checks:
   distinct_functions: true
 quality:
   grade: B
-  reason: Static source review only; narrative acceptance is tracked independently
-    in maintenance/playtests.
+  reason: Static source review only; narrative acceptance is tracked independently in maintenance/playtests.
 activity_functions:
   试读非诊疗区指示牌: 指引核验：减少错误移动
   远程合做一顿家常饭: 生活互助：落实一顿饭而非制造健康推断
   交接夜班服务问答: 服务交接：转移责任并恢复休息
+  在复核窗口核对一张带编号记录: 第三方与打断：看清今夜谁被带离、按哪一条编号走
+  在落锁前核一遍进门的人: 空间与退出：在短铃响完之前决定为谁留门、为谁不留
+  在发电机房对一遍还够几班的油: 调查与核验：把剩下的电量按夜里的几件事排一个先后
+  在分拣棚按待派件数重排收班: 日常接触：在不进出封控楼栋的前提下把当日件数压下去
 chemistry:
   pairs:
   - pair: 0

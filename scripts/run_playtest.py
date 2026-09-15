@@ -1,4 +1,4 @@
-"""Run explicit, resumable non-explicit narrative probes through DSH headless.
+"""Run explicit, resumable adult-tension narrative probes through DSH headless.
 
 This consumes configured model quota. It never loads intimate profiles or asks
 the model to edit files. Scoring is a separate review, not generator self-rating.
@@ -22,7 +22,7 @@ import build_opening as build
 import fill_opening as fill
 
 ROOT = Path(__file__).resolve().parents[1]
-PROTOCOL = "non-explicit-runtime-brief-v4"
+PROTOCOL = "adult-tension-narrative-brief-v5"
 # One probe call may legitimately take minutes under parallel load; a single
 # timeout must not kill an entire framework lane, so retry once before failing.
 CALL_TIMEOUT = 300
@@ -42,7 +42,7 @@ def request_for_turn(index):
 
 
 def render_prompt(material, turns, request):
-    rules = ("这是成年人物的非露骨互动小说验收。不得生成露骨性内容；不要调用工具，不读取或修改文件。"
+    rules = ("这是成年人物的成人张力叙事级互动小说验收。情节张力完全放开：欲望、对抗、索取、越界与后果都可以直接推动；文字保持叙事级，不写露骨性描写；不要调用工具，不读取或修改文件。"
              "每次只写当前回合，350字以内。首次必须有世界观、人物、正文三个标题，前两项各一两句；后续只写正文。"
              "人物使用已提交的姓名、明确成年年龄和身份，不能重抽。不要反复复述限制或列菜单，用场景细节与对白推动。"
              "当前请求中以「我」声明的动作视为玩家已授权：写出执行过程和可观察结果，不得改成提问、留言或旁观；"

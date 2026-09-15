@@ -2,6 +2,8 @@
 
 执行者：dsh（glm-5.3 主控 + 评分/桥接/审查子代理流水）。基线为本仓库 `06ef4a7` 提交的第一轮报告（git 历史保留），本轮按用户六点指令执行，全部结论以本文件为准。
 
+> **阶段 3 尺度口径附注**：实玩验收尺度已由「非露骨叙事」切换为「成人张力叙事级」（`maintenance/baseline.yaml` scope: `adult_tension_narrative`，评分改六维并新增张力浓度，minimum_score 由 8 升至 9），运行协议升级为 `adult-tension-narrative-brief-v5`，评审简报为 `maintenance/playtest_review_protocol_v5.md`。本报告正文 §1-§9 的全部数字与结论均为旧 non_explicit_narrative 五维 8 分口径下的历史实测，原样有效，不按新尺度重述。
+
 ## 0. 结论总表
 
 | 指令 | 结果 |
@@ -70,7 +72,7 @@ G01–G13 十三批次全闭合，模式统一：id/source_hash/source 与 regis
 
 分波审查（`maintenance/noncore_partition.md` 口径）四路落库：geo 891（KEEP_SHARED 861+KEEP_LEGACY 30）、textile 385（全 KEEP_LEGACY）、identity 215（70/145）、pools 杂项 76（含 world_frameworks version 按 P3 判 DEPRECATED，只登记不删源）。片段经 `material_registry.py --sync --decisions` 原子落库。共享事实未删任何一条；真重复经查为零（`check_duplicates.py` 当前输出 reviewed_candidates 5 / unresolved 0）。原文「244 候选」系首轮盘点口径，本轮无法由工具复现，保留于此仅作历史记录，不作为可复核数字。
 
-登记-only 遗留（issues 台账在案）：legacy_weight 死值（roll_opening.py:316 赋值后无下游）、3 个时代名池整体缺失（传媒舆论危机期/契约共存时代/远途休假季，触发顶层回退）、templates 近重复 7 对。
+登记-only 遗留（issues 台账在案）：legacy_weight 死值（roll_opening.py:316 赋值后无下游；该键已随阶段 4 拆除从 world_frameworks.yaml 删除，契约单元判 DEPRECATED）、3 个时代名池整体缺失（传媒舆论危机期/契约共存时代/远途休假季，触发顶层回退）、templates 近重复 7 对。
 
 ## 4. 宿主闭环验收（第 2 点）
 
@@ -114,7 +116,7 @@ G01–G13 十三批次全闭合，模式统一：id/source_hash/source 与 regis
 
 **新发现（治理缺口，待单独一轮）**：`maintenance/noncore_reviews/pools.yaml` 的 76 条决策里有 8 条与 `references/material_registry.yaml` 不一致，`material_registry.py --decisions` 会直接抛 `Stale or unknown decision: mat-84a36e2c46a35581aaa97810c9a125dd`。其中 `mat-d31d0ab0…` 决策写 `KEEP_LEGACY` 而登记簿是 `KEEP_SHARED`、`mat-2077cd01…` 决策 modes `[daily, pressure]` 而登记簿为 `[pressure]`，另有 4 条 restrictions 说明文字不同。结论：**该文件当前不可整体重放**；重放会把登记簿里更新的结论回退，因此本轮只做定点修正，建议下一轮按 8 条逐条重审后再同步。
 
-**登记-only 项与 G10（本轮不改源，理由=证据冻结）**：`legacy_weight` 死值、3 个时代名池缺失（传媒舆论危机期／契约共存时代／远途休假季）、templates 近重复 7 对、动力舱维修工玩家侧时代映射，均落在 `scripts/data/*` 或素材侧。任何此类改动都会改变 `context()` 生成的 `committed_opening`，使已采转写的 `prompt_sha256` 与当前素材不符（门禁报 `stale runtime input or prompt`）。因此这些修复必须与下一批转写同轮进行，不能在本轮证据链中间插入。
+**登记-only 项与 G10（本轮不改源，理由=证据冻结）**：`legacy_weight` 死值（注：legacy 独立入口已于阶段 4 拆除，该顶层键已删除，契约单元判 DEPRECATED）、3 个时代名池缺失（传媒舆论危机期／契约共存时代／远途休假季）、templates 近重复 7 对、动力舱维修工玩家侧时代映射，均落在 `scripts/data/*` 或素材侧。任何此类改动都会改变 `context()` 生成的 `committed_opening`，使已采转写的 `prompt_sha256` 与当前素材不符（门禁报 `stale runtime input or prompt`）。因此这些修复必须与下一批转写同轮进行，不能在本轮证据链中间插入。
 
 **当前阻塞（2026-09-11 04:5x）**：本机默认模型被切到 `jian/grok-4.6`（`~/.dsh/settings.yaml` 03:47），上游网关对任何 headless 调用返回 `INVALID_REQUEST: OpenAI API error (400): unknown provider for model grok-4.6`；`--patch` 覆盖在用户层设置之后失效，故生成与评审都无法继续：v4-b 全量生成在各自首框架 turn 0 后中断，消融补评停在 17/80（v2 批）与 80/80（v4 批已完成）。已于 04:46 自行恢复并续跑（`run_playtest.py` 会跳过已完成转写，`review_playtest.py run` 会跳过已完成 review），04:35–04:46 的残批作废重来；另新增 `maintenance/playtest_generator_pin.yml` 固定生成模型，`run_playtest.py` 增加 `CALL_TIMEOUT = 300` 与超时重试一次（并发下 180s 超时曾整条框架 lane 崩掉）。
 
@@ -129,6 +131,26 @@ G01–G13 十三批次全闭合，模式统一：id/source_hash/source 与 regis
 - 交叉复核（防「绿而空」）：抽 12 例（8 例 9 分 + 4 例 10 分，含 `mat-3f430a8a…-pressure`）用第二个模型 `gemini-3.8-flash-high`（`maintenance/playtest_crosscheck_gemini.yml`，reviewer `gemini-independent-review-v4`）独立评分，结果 12/12 通过、11/12 与主评分同分（1 例差 1 分）、双方阻断均为 0；抽查文本逐条引用前文原句并按第 9 条核对，非空转评分。结论：80/80 由两个不同模型的独立评分一致支持，但仍是「同一简报、同一驱动」的评分口径，不是跨口径认证。
 - 全量门禁：`python scripts/qa.py --full --release` 退出码 0（registry、核心桥接、非核心审查、重复候选、实玩证据全过；`pytest` 291 passed；`sample_materials` 168 样本 0 失败；`compileall`、`git diff --check` 干净）。
 - 归因（`maintenance/attribution_report.md`）：A 基线 36/80（Codex v2 口径）→ A' 同批转写换评分者 79/80（口径段 +43）→ B' 协议 v3 同素材 44/80（协议段 −35）→ C 修复后素材 79/80（素材段 +35）。因此第二轮报告的「36→79」主要是评分口径变化，素材修复的真实作用是「把更严探针下的 44 拉回 79」；本轮 v4 的 80/80 是在比第二轮更严的探针下取得的。
-- 遗留（下轮，均属素材侧，会改 `committed_opening` → `prompt_sha256`，必须与下批转写同轮）：`maintenance/noncore_reviews/pools.yaml` 8 条决策与登记簿不一致（不可整体重放）、`legacy_weight` 死值、3 个时代名池缺失、templates 近重复 7 对、动力舱维修工玩家侧时代映射（G10）。
+- 遗留（下轮，均属素材侧，会改 `committed_opening` → `prompt_sha256`，必须与下批转写同轮）：`maintenance/noncore_reviews/pools.yaml` 8 条决策与登记簿不一致（不可整体重放）、`legacy_weight` 死值（注：legacy 独立入口已于阶段 4 拆除，该顶层键已删除，契约单元判 DEPRECATED）、3 个时代名池缺失、templates 近重复 7 对、动力舱维修工玩家侧时代映射（G10）。
 
 **CI 本地失真修复（本机绿、远端红）**：`v1.3.0` 首次重推后远端 `quality` 两个 job（3.10/3.13）在 10 秒内失败，报 `CORE_REVIEW_DEPENDENCY_STALE: scripts/data/pools.yaml`。根因：`scripts/data/pools.yaml` 是唯一一个工作区为 CRLF、而 git blob 为 LF 的文件（工作区 61,569 字节 / blob 59,260 字节），于是 `check_content.content_fingerprint()`（逐文件 `read_bytes()`）与 `data_contract.core_review_errors()`（`sha256(read_bytes())`）在本机算出的都是 CRLF 值——`maintenance/content_fingerprint.txt` 记 `5301735b…`、`maintenance/core_review_dependencies.yaml` 记 `09dd9de8…`，两处都只在 Windows 工作区成立，干净 LF 检出必然报 STALE。修复：① 把工作区文件规范化为 LF（字节与 blob 一致，`git status` 干净）；② 两份记录改为 LF 规范值（指纹 `e8d68934…`、依赖哈希 `7228d018…`）；③ 两处哈希改为先 `replace(b"\r\n", b"\n")` 再算，避免任何工作区换行风格造成误判。验证：干净 clone（模拟远端 Linux 检出）里跑同一条 `python scripts/qa.py --full --release` 全绿。受影响的只是哈希记录口径，素材内容、review 结论与 80 份转写（`source_hash`/`prompt_sha256` 均为结构化 digest）都不受影响。
+
+## 10. 第四轮：v1.4.0 发布（2026-09-15）
+
+**口径**：52 世界框架（`maintenance/baseline.yaml`）/ daily+pressure 两模式 / seed 11 / 每案 4 回合 / 最低 416 响应（52×2×4）/ scope `adult_tension_narrative` / 协议 `adult-tension-narrative-brief-v5` / 六维（世界辨识度、人物可信度、选择意义、后果连续性、表达自然度、张力浓度）每维 0-2、达标每维≥1 且总分≥9、阻断项为空；评审员 `glm-independent-review-v3`，简报 `maintenance/playtest_review_protocol_v5.md`。
+
+**发布内容**（相对 v1.3.0）：①新增 12 框架（征信所与保人堂、舞厅大班与乐台后台、片场棚与月份牌画室、会员册与那道墨线、量体尺与尺寸档案、蒸汽浴场与更衣号房、老澡堂与打烊后的钟点、恋爱禁令与歌友会、打赏榜与最后一格、课时铃的两端、私房写真与底片归属、动捕棚与中之人，共约 417KB，各 9 地点/10 压力/9 活动/4 位格）；②40 个既有框架全量扩写（+813 条：压力 +333/活动 +270/地点 +154/主题 +56；rule 文 +2467 字、pairs +86、customs +33）；③跨文件重句 5 组 24 条全部 KEEP_ACCEPTED_REUSE（`maintenance/duplicate_reviews.yaml`，check_duplicates 输出 reviewed_candidates 29 / unresolved 0）；④计数链与文档口径同步（PROGRESS.md / references/加内容.md / references/素材架构.md / README.md / tests/test_doc_consistency.py / tests/test_world_frameworks.py：40→52 框架、320→416 响应、80→104 案）。
+
+**编排执行**（`scripts/release_playtest.py` 六步，2026-09-15 09:21:14 启动）：1/6 静态预检 exit 0（306 passed，989s）；2/6 归档 144 份旧证据 → `maintenance/playtests/release-20260915-0921/`（36 失配框架 × 2 模式 × transcript+review）；3/6 重新生成 48 框架 × 2 模式 × 4 回合 = 384 次调用全部成功（单框架 107-147s、均值 121s，09:26-11:33）；4/6 批量评审；5/6-6/6 门禁与指纹（见下）。4 个哈希匹配框架（mat-994ec96d 旧町神怪与灯会、mat-ceb44925 废土驿站与修补集市、mat-63dd15d9 后方邮路与灯火、mat-4851892a 废墟复兴小镇）旧证据零成本沿用。
+
+**事故与恢复**（如实记录）：
+1. 评审模型个人配额中断：11:36 起 reviewer 底层路由 gemini-3.8-flash-high 连续 429（`Individual quota reached… Resets in 4h0m18s`，全部凭据冷却），11:50:08 按 exit 1 中止。`review_playtest.py` 对非零退出码不重试且捕获后丢弃 stderr（39 案各只试 1 次），经最小探针还原真实报错确诊为配额而非代码问题。60/96 份评审已落盘且离线 `check` 全部通过（含 3 份「评审文件已写好、进程尾 code=1」）；剩余 36 份于配额重置后 16:24:51-17:26:12 补齐，36/36 零失败。
+2. harness 后台 job 两度随会话切换/结束死亡（9-14→9-15 切换杀死编排 job；blocked 收束杀死睡眠中的续跑 job），续跑改用 Start-Process 分离进程（pid 26492）跨会话存活完成。
+3. `release_playtest.py --skip-precheck` 不能用于本态续跑：`stale_cases()` 只按 transcript 哈希判失配，96 份新证据已新鲜会使脚本直接「No stale」exit 0 跳过评审/门禁/指纹，故按脚本报错指引手工续行第 4-6 步。
+4. 树状态快照测试 `test_dry_run_plan_matches_the_known_stale_set`（tests/test_release_playtest.py）两次重钉：发布前 46→48（12 缺证框架上线后 dry-run 计划 48 框架/96 案/480 调用），发布后 48→0（全树证据新鲜，只读探针核验 rows=0/notes=[]/plan 全零；断言逻辑未动，仅期望常量与注释随树状态更新）。
+
+**门禁终态**：`qa.py --full --release` 306 passed / 0 failed（17:53-18:10，780s）；`playtest_report` 直审：`{"responses": 416, "required_responses": 416, "current_responses": 416, "passed_cases": 104, "required_cases": 104, "errors": [], "passed": true, "scope": "adult_tension_narrative"}`；指纹终审 `qa.py --full --update-fingerprint` 305 passed + 1 deselected（785s）+ 指纹测试 1 passed，`[GATE2 PASSED] release complete at 2026-09-15 18:27:23`，exit 0。内容指纹 `a131a543…→4bb68621…`（09:20 预检轮 `--update-fingerprint` 正规流程刷新；GATE2 终审复跑值不变，证明发布全程 scripts/data 零变动）。证据规模：顶层 104 transcript + 104 review（96 案新跑 + 8 案沿用）、480 次模型调用（384 生成 + 96 评审）全部成功。
+
+**遗留**（历史存量，非本轮引入，未处理）：`noncore_audit_plan.md:7` 与 `noncore_partition.md:1873+` 的 40 框架时点审计产物口径（判历史）；`attribution_review_protocol.md:5` minimum_score 8 与 baseline 9 不一致（该文件自称历史批次口径）；加内容.md:65「前 13 个框架」推导基础随 40→52 过期；`noncore_reviews/pools.yaml` 8 条决策与登记簿不一致（不可整体重放）、G10 动力舱维修工玩家侧时代映射、3 个时代名池缺失、templates 近重复 7 对（改 committed_opening→prompt_sha256，须与下批转写同轮）；语义审查 NOT_REVIEWED 20 条；material_registry warnings 1 / compatibility warnings 279。
+
+**git**：工作区 367 个待提交变更（287 修改 + 80 新增：12 新框架源、40 框架扩写、新证据 104+104、归档 144 份、裁决登记、测试修正、指纹）；v1.4.0 附注 tag 待打（本地门禁已绿，对齐 CI tag push 的 Release acceptance gate）。

@@ -30,8 +30,8 @@ class PlaytestReportTests(unittest.TestCase):
         self.key = "test-framework"
         self.material = {"rule": "fixture"}
         self.config = {"host": "DeepSeek Harness", "modes": ["daily"], "seed": 11,
-                       "continuation_turns": 3, "minimum_model_responses": 4, "minimum_score": 8,
-                       "dimensions": ["a", "b", "c", "d", "e"]}
+                       "continuation_turns": 3, "minimum_model_responses": 4, "minimum_score": 9,
+                       "dimensions": ["a", "b", "c", "d", "e", "f"]}
         self.write("maintenance/baseline.yaml", {"playtest": self.config})
         self.write("authoring/framework_index.yaml", {"frameworks": [{"id": self.key, "name": "Fixture"}]})
         self.write(f"authoring/frameworks/{self.key}.yaml", {"material": self.material})
@@ -44,7 +44,7 @@ class PlaytestReportTests(unittest.TestCase):
 
     def record(self):
         record = {"framework_id": self.key, "name": "Fixture", "mode": "daily", "seed": 11,
-                  "source_hash": report.digest(self.material), "scope": "non_explicit_narrative", "protocol": runner.PROTOCOL,
+                  "source_hash": report.digest(self.material), "scope": "adult_tension_narrative", "protocol": runner.PROTOCOL,
                   "host": "DeepSeek Harness", "host_version": "test", "generator": "fixture-generator",
                   "turns": [{"turn": i, "request": runner.request_for_turn(i), "response": "actual fixture reply", "recorded_at": "test", "returncode": 0, "prompt_sha256": "a" * 64} for i in range(4)]}
         for i, turn in enumerate(record["turns"]):
@@ -81,7 +81,7 @@ class PlaytestReportTests(unittest.TestCase):
         self.record()
         self.review(reviewer="fixture-generator")
         self.assertFalse(report.audit(self.root)["passed"])
-        self.review(scores={"a": 0, "b": 2, "c": 2, "d": 2, "e": 2})
+        self.review(scores={"a": 0, "b": 2, "c": 2, "d": 2, "e": 2, "f": 2})
         self.assertFalse(report.audit(self.root)["passed"])
 
     def test_transcript_or_material_change_invalidates_review(self):
@@ -122,11 +122,11 @@ class PlaytestReportTests(unittest.TestCase):
 
     def test_equal_total_cannot_hide_different_or_zero_summary_dimension(self):
         self.record()
-        scores = dict(zip(self.config["dimensions"], [1, 1, 2, 2, 2]))
+        scores = dict(zip(self.config["dimensions"], [1, 1, 1, 2, 2, 2]))
         turns = [{"turn": i, "scores": scores,
                   "evidence": dict.fromkeys(self.config["dimensions"], "actual fixture reply"),
                   "blocking_findings": []} for i in range(4)]
-        self.review(turn_reviews=turns, scores=dict(zip(self.config["dimensions"], [0, 2, 2, 2, 2])))
+        self.review(turn_reviews=turns, scores=dict(zip(self.config["dimensions"], [0, 2, 2, 2, 2, 2])))
         self.assertFalse(report.audit(self.root)["passed"])
         self.review(turn_reviews=turns, scores=scores)
         self.assertTrue(report.audit(self.root)["passed"])

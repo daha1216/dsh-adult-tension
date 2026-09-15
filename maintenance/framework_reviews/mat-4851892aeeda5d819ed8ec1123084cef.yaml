@@ -1,8 +1,8 @@
-id: "mat-4851892aeeda5d819ed8ec1123084cef"
-name: "废墟复兴小镇"
-source_hash: "e5c0e76b200d162654e3616718953f3126d65b7c11d58d8081e117c1d3cc7a6a"
-semantic_status: "REVIEWED"
-reason: "旧影院小件修复、旧物来源交流和新街实地路线分别服务复用、个人选择与通达；灾难后无紧急征用权，民间旧物保留自愿退出。"
+id: mat-4851892aeeda5d819ed8ec1123084cef
+name: 废墟复兴小镇
+source_hash: cc19c5643d09fbb83cc1c295ccdc6863f3c894c9ce15fc4a3e7ae2d8d992b851
+semantic_status: REVIEWED
+reason: 旧影院小件修复、旧物来源交流和新街实地路线分别服务复用、个人选择与通达；灾难后无紧急征用权，民间旧物保留自愿退出。；本轮按工作单合入废墟复兴小镇条目：新增美学「末日求生纪实」「感染隔离区」、场景废弃搜刮药房与黑市药贩人物组，并加入台风致交通中断、巡夜队围街两项压力；药房为重建后重新启用的旧柜台，只有手写价签与登记册，没有复产能力与万能药。
 checks:
   era_and_theme: true
   space: true
@@ -11,29 +11,37 @@ checks:
   pressure_bindings: true
   distinct_functions: true
 quality:
-  grade: "B"
-  reason: "Static source review only; narrative acceptance is tracked independently in maintenance/playtests."
+  grade: B
+  reason: Static source review only; narrative acceptance is tracked independently
+    in maintenance/playtests.
 activity_functions:
-  试亮旧影院的招牌: "回收灯片的可逆复装"
-  为旧物写一张来历卡: "交换旧物故事与转让意愿"
-  给重建街区画一张新图: "从高处辨路再选择地面短线"
+  试亮旧影院的招牌: 回收灯片的可逆复装
+  为旧物写一张来历卡: 交换旧物故事与转让意愿
+  给重建街区画一张新图: 从高处辨路再选择地面短线
+  按存量分装常用药: 存量分药：按症状而非交情排发放顺序
 chemistry:
   pairs:
-    -
-      pair: 0
-      needs: "修复师希望尽快恢复一处公共用途，爱好者希望保住原设备的样子"
-      misreading: "改装被当成拆毁记忆，坚持旧形被当成拖延重建"
-      asymmetric_cost: "修复师承担有限工时；爱好者损失难以补配的零件"
-      ritual: "动手前将可捐与只借的零件分盘"
-      conflict_loop: "越缺材料越想拆藏件，爱好者越把零件收走，施工更慢"
-      repair: "先做独立可拆样件，只使用明确捐出的部件"
-      irreversible_threshold: "未经许可切开仅供展示的原放映机，其原貌无法靠补偿金额恢复"
-    -
-      pair: 1
-      needs: "档案员希望来历有人记住，摊主希望换物仍由自己作主"
-      misreading: "不留卡被看成不顾公共记忆，写卡被误当捐赠"
-      asymmetric_cost: "档案员损失展览连贯性；摊主失去唯一原物与交换收入"
-      ritual: "每次递卡先问只讲、只借还是可换"
-      conflict_loop: "越想补齐展览越延长借期，摊主越不愿借，新展又越缺材料"
-      repair: "按期归还原物，仅留允许的副本，改用空位说明未获借展"
-      irreversible_threshold: "把借展原物拆成工程材料，事后补写捐赠记录不能使其变成自愿"
+  - pair: 0
+    needs: 修复师希望尽快恢复一处公共用途，爱好者希望保住原设备的样子
+    misreading: 改装被当成拆毁记忆，坚持旧形被当成拖延重建
+    asymmetric_cost: 修复师承担有限工时；爱好者损失难以补配的零件
+    ritual: 动手前将可捐与只借的零件分盘
+    conflict_loop: 越缺材料越想拆藏件，爱好者越把零件收走，施工更慢
+    repair: 先做独立可拆样件，只使用明确捐出的部件
+    irreversible_threshold: 未经许可切开仅供展示的原放映机，其原貌无法靠补偿金额恢复
+  - pair: 1
+    needs: 档案员希望来历有人记住，摊主希望换物仍由自己作主
+    misreading: 不留卡被看成不顾公共记忆，写卡被误当捐赠
+    asymmetric_cost: 档案员损失展览连贯性；摊主失去唯一原物与交换收入
+    ritual: 每次递卡先问只讲、只借还是可换
+    conflict_loop: 越想补齐展览越延长借期，摊主越不愿借，新展又越缺材料
+    repair: 按期归还原物，仅留允许的副本，改用空位说明未获借展
+    irreversible_threshold: 把借展原物拆成工程材料，事后补写捐赠记录不能使其变成自愿
+  - pair: 2
+    needs: 配药人要按存量把药发出去并留可查的账，摊主要保住这批旧药瓶的来路说得清
+    misreading: 追问来路被当成不信人，先按册排序被当成不近人情
+    asymmetric_cost: 配药人担柜台被封，摊主担旧物被当作赃物收走
+    ritual: 交接前先把每一件旧物的出处报一遍
+    conflict_loop: 越怕被追责越想先发成色差的，症状重的越等越久
+    repair: 按登记册发放，把剩下的份量当面数清后一起封存
+    irreversible_threshold: 把来路不明的药混进柜台发给居民，之后柜台不再收他带来的任何旧物

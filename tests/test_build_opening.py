@@ -214,7 +214,7 @@ class BuildOpeningTests(unittest.TestCase):
             working = Path(tmp) / "current.yaml"
             code = BUILD.main([
                 "--complete", "--opening-mode", "pressure", "--seed", "7", "--out", str(out),
-                "--working", str(working), "--framework", "legacy",
+                "--working", str(working), "--framework", "auto",
             ])
             self.assertEqual(0, code)
             self.assertTrue(out.exists())
@@ -231,7 +231,7 @@ class BuildOpeningTests(unittest.TestCase):
             with mock.patch.dict("os.environ", {"ADULT_TENSION_HISTORY_PATH": str(history)}):
                 code = BUILD.main([
                     "--complete", "--opening-mode", "pressure", "--seed", "8", "--out", str(out),
-                    "--working", str(working), "--request", str(request), "--framework", "legacy",
+                    "--working", str(working), "--request", str(request), "--framework", "auto",
                 ])
             self.assertEqual(0, code)
             request_data = BUILD.load_yaml_module().safe_load(request.read_text(encoding="utf-8"))
@@ -260,7 +260,7 @@ class BuildOpeningTests(unittest.TestCase):
             working = Path(tmp) / "current.yaml"
             code = BUILD.main([
                 "--complete", "--opening-mode", "pressure", "--seed", "5", "--lock", "时代=明治东京",
-                "--out", str(out), "--working", str(working), "--framework", "legacy",
+                "--out", str(out), "--working", str(working), "--framework", "auto",
             ])
             self.assertEqual(0, code)
             data = BUILD.load_yaml_module().safe_load(out.read_text(encoding="utf-8"))
@@ -298,7 +298,7 @@ class BuildOpeningTests(unittest.TestCase):
             with mock.patch.object(BUILD, "load_fill_opening", loader_without_era_pools):
                 code = BUILD.main([
                     "--complete", "--opening-mode", "pressure", "--seed", "5", "--lock", "时代=当代都市",
-                    "--out", str(out), "--working", str(working), "--framework", "legacy",
+                    "--out", str(out), "--working", str(working), "--framework", "auto",
                 ])
             self.assertEqual(0, code)
             data = BUILD.load_yaml_module().safe_load(out.read_text(encoding="utf-8"))
@@ -308,6 +308,25 @@ class BuildOpeningTests(unittest.TestCase):
             hit = [s for s in default_names["surnames"]
                    if name.startswith(s) and name[len(s):] in valid_givens]
             self.assertTrue(hit, f"{name} 不在默认池内")
+
+    def test_missing_framework_defaults_to_auto(self) -> None:
+        # 独立旧池入口已拆除：不给 --framework 时不再直抽全池，而是按 auto 选出已审核框架。
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "opening.yaml"
+            working = Path(tmp) / "current.yaml"
+            code = BUILD.main([
+                "--complete", "--opening-mode", "pressure", "--seed", "7", "--out", str(out),
+                "--working", str(working),
+            ])
+            self.assertEqual(0, code)
+            data = BUILD.load_yaml_module().safe_load(out.read_text(encoding="utf-8"))
+        name = data["world"]["framework"]["name"]
+        self.assertIn(name, BUILD.load_roll_opening().load_pools()["世界框架审查"])
+
+    def test_explicit_legacy_framework_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(ValueError, "独立旧池入口已拆除"):
+                BUILD.build_roll(7, {}, {}, False, False, "pressure", "legacy")
 
 
 def _load(name: str, path: Path):

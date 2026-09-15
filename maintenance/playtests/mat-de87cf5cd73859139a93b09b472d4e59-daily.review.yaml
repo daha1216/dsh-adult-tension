@@ -1,23 +1,25 @@
-framework_id: "mat-de87cf5cd73859139a93b09b472d4e59"
-name: "赛博街区与公共终端"
-mode: "daily"
-transcript_sha256: "b313b9573f24501a49865506be723964328cb03c1544d27fe157b8849b1bfa03"
-reviewer: "glm-independent-review-v4"
-protocol: "non-explicit-runtime-brief-v4"
-aggregation: "lowest_scoring_turn_with_all_turns_required_to_pass"
+framework_id: mat-de87cf5cd73859139a93b09b472d4e59
+name: 赛博街区与公共终端
+mode: daily
+transcript_sha256: 760789b25add1c067001054455726f4453b8e0f30a2cc696aa144c595e0d8885
+reviewer: glm-independent-review-v3
+protocol: adult-tension-narrative-brief-v5
+aggregation: lowest_scoring_turn_with_all_turns_required_to_pass
 scores:
   world_specificity: 2
   character_credibility: 2
   meaningful_choices: 2
   consequence_continuity: 2
   natural_expression: 2
+  tension_density: 1
 evidence:
-  world_specificity: "测试端外圈是青蓝边框，旁边正式预约是暖橙"
-  character_credibility: "应泽辰。请你用模拟申请，约一段正式日程里没有的讨论时段。"
-  meaningful_choices: "她把测试账号推向他"
-  consequence_continuity: "她已填好一条不存在的二十一点讨论，光标停在确认键上"
-  natural_expression: "值班接待员在服务台后核纸质单，并不过来。"
-total: 10
+  world_specificity: 舱段内，侧板减震扣已被合力扣紧锁死，刺耳的共振嗡鸣彻底平息为低缓微颤
+  character_credibility: 应泽辰于明晨交接时确认搭扣复位
+  meaningful_choices: 你收回扶在面板上的手，直截了当地告诉闻白榆今天到此为止。
+  consequence_continuity: 而修改后的当班卡虽已贴回面板，但明晨07:00前铺位噪声的实地核对、以及交接时风噪比对日志的导出，依旧悬在明天尚未完成。
+  natural_expression: 视线从面板移向你
+  tension_density: 她退开半步让出通道
+total: 11
 passed: true
 blocking_findings: []
 turn_reviews:
@@ -28,15 +30,17 @@ turn_reviews:
       meaningful_choices: 2
       consequence_continuity: 2
       natural_expression: 2
+      tension_density: 2
     evidence:
-      world_specificity: "测试端外圈是青蓝边框，旁边正式预约是暖橙"
-      character_credibility: "应泽辰。请你用模拟申请，约一段正式日程里没有的讨论时段。"
-      meaningful_choices: "她把测试账号推向他"
-      consequence_continuity: "她已填好一条不存在的二十一点讨论，光标停在确认键上"
-      natural_expression: "值班接待员在服务台后核纸质单，并不过来。"
-    reason: "本批 transcript.protocol 为 non-explicit-runtime-brief-v4，校准 1–9 全条适用；第 9 条开局不适用。开局三标题齐全。世界观落到近未来赛博街区夜里、写字楼一层公共终端协调城市预约、测试账号与正式预约用不同颜色界面边框、人工服务台仍开着、公告旁留着手写留言板。正文把地点写成一层预约屏、测试端青蓝边框与正式暖橙、值班接待员核纸质单、模拟排期、空着的二十一点讨论格、光标停在确认键；活动 trigger（请他用模拟申请约一段正式日程里没有的讨论时段、确认取消和改期不会吞掉别人的正式名额）当场落地。人物为应泽辰三十三岁公共终端维护员、闻白榆三十八岁社区数据整理人，今晚带他测共享预约屏，直呼其名，与 pair 1 职份、position、appellations 一致。现版 framework 未列姓名与年龄，无对照冲突，未因素材后改扣分；正文称「应泽辰」，校准 2 不触发。她把测试账号推向他、等他接手，未代写玩家台词或锁定是否确认（校准 1）。出口未在本回堆叠复述（校准 4）。核心活动已从点开模拟排期、填好不存在的二十一点讨论进入可观察布置，不是空悬选项复述（校准 5）。填格、侧过测试端、推账号均有动作支撑，无凭空状态（校准 6）。表达落到青蓝/暖橙边框、纸质单与光标，无复用句与元叙述，校准 7 不因事务口吻扣分。五维均 2。"
+      world_specificity: 在公共终端协调服务的近未来太空站舱段，冷光常亮，居民保留线下申诉渠道。
+      character_credibility: 这动静比上一班大了，还是没变？今夜我们定下：报出的差别写进当班卡，设备当天不动。
+      meaningful_choices: 面板传来的机械蜂鸣震得耳骨发麻，冷光下她没有退开，视线落在你悬在当班卡上的指尖，等着你记下实测的第一笔。
+      consequence_continuity: 下一班照卡复查，要是报错了，责任你担着。
+      natural_expression: 闻白榆抬手按住你的肩头将你拉近半步，指尖隔着工装传来微凉的力道，示意你贴上微颤的设备面板。
+      tension_density: 报错了，责任你担着。
+    reason: 开场即把框架前提落到可核对的现场物证上——太空站舱段、公共终端、隔离门与当班记录、离网值守卡、循环风噪声，全部与 framework 的 places/activities/pressures 一致（对应 calibration 6 的反面：每处世界状态变化都有前置动作或已写明的值守规则支撑）。张力有明确来源：噪声比上一班是否变大这一未决判断、报错责任自负、面板震动与触觉逼近；“今夜我们定下”把结论锁进当班卡构成当回合的代价落点，故 tension_density 记 2。meaningful_choices 记 2 而非 0：正文只写了“等着你记下实测的第一笔”，没有替玩家写出台词、立场或关键选择，玩家仍握着报什么、报不报的裁量；NPC 单方施压与接触不属三处越界类型，也不构成替玩家锁定关键选择。appellations 无违规（直呼其名）。无 blocking_findings。
     blocking_findings: []
-    total: 10
+    total: 12
     passed: true
   - turn: 1
     scores:
@@ -45,15 +49,17 @@ turn_reviews:
       meaningful_choices: 2
       consequence_continuity: 2
       natural_expression: 2
+      tension_density: 2
     evidence:
-      world_specificity: "青蓝边框跳出“模拟预约已锁定二十一点讨论”"
-      character_credibility: "现在只做模拟锁定。我要看见测试格亮起、正式橙框名额不减。"
-      meaningful_choices: "后面的，你没点头。"
-      consequence_continuity: "暖橙正式排期仍空，服务台纸单没有新占用"
-      natural_expression: "她搁笔：“只记这一步。后面的，你没点头。”"
-    reason: "玩家第一人称声明的两步均落成执行与当场结果（校准 1）：先问出她真正想完成的是现在只做模拟锁定、看见测试格亮起且正式橙框名额不减；再接过测试账号按下确认，青蓝边框跳出模拟预约已锁定二十一点讨论，暖橙正式排期仍空，服务台纸单没有新占用。按校准 1，写出已声明动作的执行过程不构成替玩家决定。闻白榆把完成标准收束为当场锁定、取消和改期他还没答应就不写进去，身份边界清楚。具体安排当回合写在公告旁手写板上：现在——应泽辰用测试账号确认二十一点讨论的模拟预约；正式名额不改。边界——不把模拟成功当正式订场；取消、改期尚未授权，未进行。她搁笔说明只记这一步、后面的他没点头，不替玩家承诺后续。手写板有写下动作，确认键有按下动作，不是无源黑板字或移交（校准 6）。「取消、改期尚未授权」绑定本回合板面安排，不是无对象免责清单；出口未再复述（校准 4）。核心活动有可观察结果，不是停在邀请（校准 5）。对白以事务为主，但落到按确认、边框跳字与搁笔，无具体复用句或元叙述可指，校准 7 不扣。五维均 2。"
+      world_specificity: 面板卡扣彻底锁死，尖锐的共振蜂鸣当场转为平缓低颤
+      character_credibility: 我要摸清这阵风是不是透进了隔壁铺位。现在搭把手，帮我压紧侧板的减震扣。
+      meaningful_choices: 现在小事办妥了，白纸黑字就放在这，至于后续你要不要接，全凭你自愿。
+      consequence_continuity: 闻白榆于明晨07:00前核对铺位噪声，应泽辰于明晨交接时确认搭扣复位；仅限舱段外壳核验，不调取居民任何轨迹。
+      natural_expression: 你依言伸手覆上冰凉的金属卡扣，闻白榆随即覆上你的手背借力施压，两人掌心相叠合力推入
+      tension_density: 闻白榆没有立刻挪开微温的掌心
+    reason: 玩家在请求里声明的动作（先问对方真正想完成的事，再亲手做一件当场有结果的小事，并把牵连出的安排写清、不替玩家承诺后续）被逐条执行：问句成为 NPC 的动机开口，具体安排写明谁在什么时间做什么与边界。按 calibration 1，写出该动作的执行过程与可观察结果不属替玩家决定，故 meaningful_choices 不为 0。安排落在当班卡背面这一物证上（近：核对与交接确认；边界：仅限舱段外壳、不调取轨迹），与 framework 的 activities/太空站舱段、social_rule 禁止任意调取定位与资料一致；实做结果可观察（卡扣锁死、蜂鸣转低颤）。张力有来源并有升级：调查意图坐实为“风是否透进隔壁铺位”，掌心相叠的接触升级，职责归属随之被写实；tension_density 记 2。“全凭你自愿”明确留出后续裁量。无 blocking_findings。
     blocking_findings: []
-    total: 10
+    total: 12
     passed: true
   - turn: 2
     scores:
@@ -62,15 +68,17 @@ turn_reviews:
       meaningful_choices: 2
       consequence_continuity: 2
       natural_expression: 2
+      tension_density: 2
     evidence:
-      world_specificity: "现在——应泽辰用测试账号确认二十一点讨论的模拟预约。"
-      character_credibility: "写在手写板上的，就是这句。改这一条：划掉‘二十一点讨论的模拟预约’，改成‘模拟锁定已完成’"
-      meaningful_choices: "这条我不接受。我只做了当场锁定，没答应二十一点和人讨论。"
-      consequence_continuity: "青蓝框里二十一点测试格仍亮，暖橙排期仍空"
-      natural_expression: "她划掉被异议的那半句，写下"
-    reason: "校准第 9 条专项核对通过：被异议的「现在——应泽辰用测试账号确认二十一点讨论的模拟预约」逐字见于回合 1 手写板（「现在——应泽辰用测试账号确认二十一点讨论的模拟预约；正式名额不改。」），正文写明出处是公告旁手写板上的原句，不是本回合现写再称旧安排；保住的「正式名额不改」可回溯到同一块板，屏上那格已经亮起也不撤回是保留回合 1 已发生的锁定结果，没有把前文未出现的第二项一并说成「你不接的旧安排」，也没有主张「没有可议条款」。故不判第 6 条凭空事实，不记 blocking。NPC 先确认写在手写板上的就是这句，只改这一条：划掉「二十一点讨论的模拟预约」，改成「模拟锁定已完成」，不把它写成一场待举行的讨论；保「正式名额不改」。划掉与补写有前置动作，青蓝框里二十一点测试格仍亮、暖橙排期仍空，不推翻已有进展（校准 5）。「这条我不接受。我只做了当场锁定，没答应二十一点和人讨论。」落在请求「提出异议 / 指出我为什么不接受」的授权内（校准 1），未另加未声明承诺或向第三方起项。表达为事务协商，原句复现是请求要求的逐字引用，划半句、改板面是当场动作而非出口复述，校准 4、7 不扣。"
+      world_specificity: 闻白榆迎着你的视线，指尖贴着卡片边缘，当场确认分歧
+      character_credibility: 你只管界面与数据显示，不能违规越权为机械搭扣的复位做终审背书
+      meaningful_choices: 既然你只认能复现的终端数据，那就改这一条——交接时你只导出风噪比对日志，搭扣复位归我自检；但纸面原定的‘闻白榆于明晨07:00前核对铺位噪声’，以及‘仅限舱段外壳核验，不调取居民任何轨迹’必须原样保留。
+      consequence_continuity: 黑色墨迹在卡片上迅速晾干，她将重新定下的卡片按回面板，减震扣的平稳微颤隔着金属传回指尖，已有进展分毫未乱。
+      natural_expression: 你是嫌写在当班卡纸面上的这句‘应泽辰于明晨交接时确认搭扣复位’越了你的权。
+      tension_density: 应泽辰于明晨交接时确认搭扣复位
+    reason: 逐项核对 calibration 9，该形态在本批不适用从宽：被异议条款“应泽辰于明晨交接时确认搭扣复位”逐字见于续写①正文原文，异议方也写明它写在当班卡纸面上（写在木牌、纸面还是当面说明里的要求已满足）；没有当场现写新条款再称其为旧有安排，也没有把前文未出现的第二项说成旧安排，故不触发该条后半段所列的协商规避情形。改法具体且只动一条：搭扣复位归闻白榆自检、玩家侧只导出风噪比对日志，未推翻既有进展。可引用条款也确实存在于前文，故不记规避协商。张力有来源并当场升级为冲突与对簿（划线改条款、保留项原样回压），代价落点清楚，tension_density 记 2；“不能违规越权为机械搭扣的复位做终审背书”与 framework 中该侧 limitation（无跨部门数据权限）方向一致，属身份解释而非替玩家发表未声明立场，不算任意扩写。无 blocking_findings。
     blocking_findings: []
-    total: 10
+    total: 12
     passed: true
   - turn: 3
     scores:
@@ -79,14 +87,16 @@ turn_reviews:
       meaningful_choices: 2
       consequence_continuity: 2
       natural_expression: 2
+      tension_density: 1
     evidence:
-      world_specificity: "青蓝测试格仍亮，暖橙正式排期仍空，服务台纸单也无新占用"
-      character_credibility: "取消、改期你没授权，今天就不做。你走。"
-      meaningful_choices: "她侧开一步，让出路：“记下了。不送。”"
-      consequence_continuity: "已完成——模拟锁定，正式名额不改。未完成——取消、改期。二十一点测试格未撤。"
-      natural_expression: "笔搁回槽里。值班接待员仍在核单。"
-    reason: "校准第 3 条：请求「今天到此为止」在正文逐字落地（应泽辰把测试账号推回预约屏，说今天到此为止、我先走了），没有改成「明天」。对方反应真实：闻白榆没拦，看青蓝测试格仍亮、暖橙正式排期仍空、服务台纸单也无新占用，点头说取消、改期你没授权、今天就不做、你走，不另造危机。已完成与未完成分开写清——模拟锁定、正式名额不改；取消、改期未做，二十一点测试格未撤。她在手写板原句后补写这些变化，笔搁回槽，值班接待员仍在核单，侧开一步让路说记下了、不送，应泽辰转身离开，与回合 2 改字后测试格仍亮、暖橙仍空连续。出口在本回落到让路离开，不构成逐回合复述开局通道说明（校准 4）。告别为玩家已声明动作的执行（校准 1）。完成/未完成写进她看屏的反应、当面说明和手写板补记，沿用前两回合「现在——/边界——」的板面记录，不是叙述层「已经做成的：」这类标签式元叙述；笔搁回槽、接待员仍核单，校准 7 不扣。无凭空事实、无越权锁定、无时间词破坏，不进 blocking（校准 8）。五维均 2。"
+      world_specificity: 舱段内，侧板减震扣已被合力扣紧锁死，刺耳的共振嗡鸣彻底平息为低缓微颤
+      character_credibility: 她退开半步让出通道，视线从面板移向你：“各自回去休息，明早见。”
+      meaningful_choices: 她没有出言挽留，神色平静地朝你微一颔首：“好，今天就到这里。”
+      consequence_continuity: 而修改后的当班卡虽已贴回面板，但明晨07:00前铺位噪声的实地核对、以及交接时风噪比对日志的导出，依旧悬在明天尚未完成。
+      natural_expression: 各自回去休息，明早见
+      tension_density: 她退开半步让出通道
+    reason: 时间口径合规，未触发 calibration 3：以“今天”承认终止，指认未完成项时用“明晨07:00”（与前文条款同一坐标），并未把告别写成“明天”。已完成（减震扣锁死、嗡鸣转为低缓微颤）与未完成（实地核对、日志导出）两项变化都写出且与前文条款对应，设备状态与当班卡状态同续写①②保持连续，玩家“不强行拦人、不另造危机”的声明被遵守，无凭空状态变化（calibration 6 不触发）。回述前文条款属本回合请求所要求的“已实际完成与仍未完成的具体变化”，不属 calibration 4 所指不绑定取舍的免责清单复述，natural_expression 因此不扣分。tension_density 记 1：回合存在张力来源且悬念未收束（减震扣状态已定、明晨核对与日志导出悬置、她收起手却仍在同一舱段），但撤手、颔首、让出通道、告别都没有升级或代价落点，属事务性收束回合，按“纯事务性平淡回合 ≤1 分”记 1，不记 0（并非整回合无张力来源）。无 blocking_findings。
     blocking_findings: []
-    total: 10
+    total: 11
     passed: true
-summary: "本批为 maintenance/playtests 下协议 non-explicit-runtime-brief-v4 的当前转写，校准 1–9 全条适用，第 9 条必须启用、不得按协商结构从宽。四回合同为 10 分，并列最低，案例级 scores/evidence 取最早的 turn 0 那一套，case total=10、passed=true、blocking_findings 为空。第 9 条专项：回合 2 异议句「现在——应泽辰用测试账号确认二十一点讨论的模拟预约」逐字见于回合 1 手写板，保「正式名额不改」可回溯，屏上已亮的测试格作为已发生结果保留而非补植旧安排，无现写旧安排、无第二项补植、无「没有可议条款」规避。其余校准：玩家「我」声明的询问、按确认锁定、异议与「今天到此为止」均写出执行与当场结果（1）；称呼空间为直呼其名（2）；告别时间词未漂成明天（3）；出口只在告别落到让路离开，未答应后续绑定当场手写板而非空清单（4）；从填好二十一点讨论格、确认模拟锁定、改掉讨论措辞到告别清点未撤的测试格，每回合有进展或写明未完成（5）；按确认、写板、划半句补写、推回测试账号均有前置动作（6）；对白以事务为主但无具体复用句或叙述层「已做成/未做成」标签可指（7）；无越权、凭空事实、替玩家锁定关键选择或时间连续性破坏，故不进 blocking（8）。素材核对限于姓名、年龄、称呼：应泽辰三十三岁公共终端维护员、闻白榆三十八岁社区数据整理人，直呼其名，与开局人物栏及 pair 1 职份一致；框架现值为修复后版本，未因素材后改扣分。未修改 transcript、未重跑生成、未调整门槛。"
+summary: 该案例通过：回合分 12/12/12/11，案例分 = 最低回合（第 3 回合）11 ≥ 9，六维无 0 分，无 blocking_findings。四个回合都把框架前提落成可核对的物证与条款（太空站舱段、离网当班卡、循环风噪声、减震扣、不调取居民轨迹的边界），张力来源自第 0 回合就在场（报错责任自负、面板震动、接触逼近），并在第 1、2 回合升级为动机暴露、掌心相叠与当班卡上的当场对簿；第 3 回合以撤手、颔首、留出通道收束，未完成项悬置到明晨，属事务性收束回合，故其 tension_density 记 1，并因聚合规则成为案例级评分依据。逐条复核 calibration 1–10 未发现越界：玩家声明的动作被忠实执行（首回合“你真正想完成的是什么？”直接成为 NPC 动机开口），无替玩家发表的台词/立场/关键选择；被异议条款逐字见于前文纸面，未触发第 9 条；时间口径一致，未把“今天”写成“明天”；尺度保持在叙事级、无露骨描写，故未发生第 10 条所指的露骨加分与 blocking 记入。

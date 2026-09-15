@@ -1,0 +1,60 @@
+id: mat-99c1c2fca6d6437b405d398887cc9dac
+name: 蒸汽浴场与更衣号房
+source_hash: d987860a15692d9e8c74138b778e3877970d6d46c3279da5c87324ede967fb90
+semantic_status: REVIEWED
+reason: 来源为 bathhouse_setting_drafts.md B 版「蒸汽浴场与更衣号房」（本轮七框架并行生产）。售票柜台、号房长廊与总板间三条线打通：9 地点各带出口/见证/可用项（high 2 为号房管事的钥匙总板间、包时独浴缸间），9 活动 7 类，10 压力各绑 2 组三元组、绑定全局零重复，三向可达。机制是「匿名作为明码标价的商品」：进门领铜号、场内不作姓名登记，匿名不靠设备缺席，靠总板、时栅与处方编号三样制度在场；号码与衣冠的对应只记在号房管事一枚裁量上。与昭和钱汤（寄存簿/抵押/旧账）、mat-260b（无监控隔间）、民国舞厅（卖「被看见」）、雾都钟表（版本对读）逐条反向分野。写手自验 367 checks 0 errors，静态复核通过。唯一实质偏差为 pair3 position 由设定稿「警官」平移为「外来者」，根因是 pools.yaml 社会位置表 31 项未镜像 identities.yaml player 33 项（警官/教练缺口）；称谓「警官/长官」与 player 块警官语义全保留，池同步后可整字回滚。
+checks:
+  era_and_theme: true
+  space: true
+  people: true
+  daily: true
+  pressure_bindings: true
+  distinct_functions: true
+quality:
+  grade: B
+  reason: Static source review only; narrative acceptance is tracked independently in maintenance/playtests.
+    「出租不被认出」的制度化匿名与总板裁量构成既有框架没有的机制，十节结构完成度高；因 pair3 position 受池缺口强制平移（警官→外来者，回滚路径已记录在案）暂评 B，社会位置表同步 31→33 后可复评升 A。
+activity_functions:
+  买一枚铜号牌存下外套: 日常接触：进门交出名字，牌在人在
+  蒸汽池里借一次背: 身体靠近：号码之间的体面不打听姓名
+  在擦身长凳上翻一次面: 身体靠近：侍浴凳上戴手套的手不摘、不问
+  按处方钟点进硫磺池: 照护与修复：处方页只写编号与病症，医师不签病家姓名
+  租一缸包时的热水: 空间与退出：独浴缸间按钟点分缸营运
+  茶憩厅里对一次号码: 信息交换：把传闻一号一号拼回名字
+  在总板间核一枚铜牌: 调查与核验：总板只在打烊后核对一次，巡检法庭债主都无权开板
+  封炉时从煤门送人出去: 空间与退出：全城追索都进不来的后巷运煤门
+  打烊前管事来收号牌: 第三方与打断：管事的裁量决定雾里的事长不长出名字
+chemistry:
+  pairs:
+  - pair: 0
+    needs: 她需要号码与衣冠的对应只留在总板上；玩家需要一个不问来处的热水
+    misreading: 把记住你的号当成留意你，把不问当成默许
+    asymmetric_cost: 她押的是全城唯一的总板裁量，玩家押的是外乡口音里的旧事
+    ritual: 掉了号牌让她亲手替你抠出来，不当场道谢
+    conflict_loop: 越被记住号越想换一个号，越换越要经她的手
+    repair: 把口音里的来处讲半句，雾里讲完出门不认
+    irreversible_threshold: 问她任何一件衣冠对的是谁，会终止她对你分寸的记认
+  - pair: 1
+    needs: 她的药水池要恒温；玩家的汽阀要经得起整夜
+    misreading: 把修阀当成看帘子，把守钟点当成冷硬
+    asymmetric_cost: 她押的是处方钟点的作数，玩家押的是只在今夜有效的通行条
+    ritual: 汽阀响三声示意试汽，帘里应一声才算数
+    conflict_loop: 阀越修越熟，钟点越守越离不开
+    repair: 把管道大修一遍，从此不走帘子这边
+    irreversible_threshold: 掀帘看那一池药水，会终止修阀的通行
+  - pair: 2
+    needs: 她需要袖口的纹章不被拼到自己的号上；玩家需要旧门第的体面不被说破
+    misreading: 把认出来当成要相认，把不提当成施舍
+    asymmetric_cost: 她押的是号房里最后一件体面，玩家押的是旧门第的记忆
+    ritual: 茶憩厅听传闻，从不往任何一个号上添名字
+    conflict_loop: 越不说破越常来，越常来越像守着她的秘密
+    repair: 把那件体面悄悄赎回来，挂回原来的号
+    irreversible_threshold: 把纹章与她那个号当面对上，会终止两人共用的沉默
+  - pair: 3
+    needs: 她要场内的执法握在自己手里；玩家要案子的线索走出这道门
+    misreading: 把场内规矩当成包庇，把调登记当成越界
+    asymmetric_cost: 她押的是章程第三条的匿名，玩家押的是案子的定性
+    ritual: 问话只在茶憩厅，号码不写进笔录
+    conflict_loop: 越查越发现线索只有号码，越用号码越替她破例
+    repair: 把现场记录改成只记事实不记号
+    irreversible_threshold: 拿号码当名字写进案卷，会终止场内场外各握半个规矩的默契

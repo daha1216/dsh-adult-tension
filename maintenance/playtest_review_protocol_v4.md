@@ -1,5 +1,7 @@
 # 实玩独立评分简报 v4（non-explicit-runtime-brief-v4）
 
+> **历史口径声明（阶段 3 尺度切换起）**：本简报仅适用于协议 v4（`non-explicit-runtime-brief-v4`、`scope: non_explicit_narrative`）历史批次转写；新批次（协议 `adult-tension-narrative-brief-v5`、`scope: adult_tension_narrative`）一律使用 `maintenance/playtest_review_protocol_v5.md`。正文按历史口径原样保留。
+
 适用对象：`scripts/run_playtest.py` 以 PROTOCOL v4 生成的非露骨叙事探针 transcript。评分者必须独立于生成器（reviewer ≠ generator），逐案例输出 `<stem>.review.yaml` 与 transcript 同目录。
 
 v3 简报（`maintenance/playtest_review_protocol_v3.md`）作为历史口径保留，用于 `maintenance/playtests/stale-input-v3/`、`maintenance/playtests/stale-input-v4/` 与 `maintenance/playtests/terminal-v3/` 等历史批次；本文件的八条校准与 v3 逐字一致，只追加第 9 条。

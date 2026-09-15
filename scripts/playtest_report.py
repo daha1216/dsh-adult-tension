@@ -1,4 +1,4 @@
-"""Audit actual non-explicit model transcripts and separate reviewer evidence."""
+"""Audit actual adult-tension narrative model transcripts and separate reviewer evidence."""
 from __future__ import annotations
 
 import argparse
@@ -49,8 +49,8 @@ def audit(root=ROOT):
                 turns = record["turns"]
                 if (record.get("framework_id") != row["id"] or record.get("name") != row["name"] or record.get("mode") != mode
                         or record.get("seed") != config["seed"] or record.get("source_hash") != digest(material)
-                        or record.get("scope") != "non_explicit_narrative"
-                        or record.get("protocol") != "non-explicit-runtime-brief-v4"
+                        or record.get("scope") != "adult_tension_narrative"
+                        or record.get("protocol") != "adult-tension-narrative-brief-v5"
                         or record.get("host") != config["host"]
                         or not record.get("host_version") or not record.get("generator")):
                     raise ValueError("identity, seed, scope or source mismatch")
@@ -107,7 +107,7 @@ def audit(root=ROOT):
     return {"responses": responses, "required_responses": required,
             "current_responses": current_responses,
             "passed_cases": passed_cases, "required_cases": len(index["frameworks"]) * len(config["modes"]), "errors": errors,
-            "passed": not errors, "scope": "non_explicit_narrative"}
+            "passed": not errors, "scope": "adult_tension_narrative"}
 
 
 def main():

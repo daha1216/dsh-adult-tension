@@ -1,9 +1,11 @@
 id: mat-295d0099c528557f847e965c60eeefe5
 name: 同人街区与录音协作
-source_hash: f2a346348682615aa87b75210457637545e5c9d9b2998d46c76e1b4310ec15ca
+source_hash: 393b73c19f3f6a29b72d924dd592152614900571f354b24241af5523ccc1ced4
 semantic_status: REVIEWED
-reason: 六处工作空间保留并区分权限；备用更衣室有真实用途切换，道具支撑、配合复盘、试录与闲听不再共用记录结果。2026-09-10 定点修复：customs
-  留痕条款加限定——仅活动实际完成后才留一页记录，留痕不替代活动本身。；2026-09-10 第二人物组资源/限制差异化强化后同步源哈希。
+reason: 六处工作空间保留并区分权限；备用更衣室有真实用途切换，道具支撑、配合复盘、试录与闲听不再共用记录结果。2026-09-10 定点修复：customs 留痕条款加限定——仅活动实际完成后才留一页记录，留痕不替代活动本身。；2026-09-10
+  第二人物组资源/限制差异化强化后同步源哈希；2026-09-12 第二波收尾：新增活动/地点经机械复核（space/people/daily/pressure_bindings 全通过），activity_functions
+  补齐至覆盖全部活动后同步源哈希。；2026-09-12 可达性修复（阶段3遗留1/3）：按 dispatch 落点为 3 个身份族补压力行并修复成年向/高张力 daily-only 地点，新增 pair/pressure
+  经逐项审读，pressure_bindings 与绑定活动场景语义相容、引擎逐字取自白名单
 checks:
   era_and_theme: true
   space: true
@@ -13,8 +15,7 @@ checks:
   distinct_functions: true
 quality:
   grade: B
-  reason: Static source review only; narrative acceptance is tracked independently
-    in maintenance/playtests.
+  reason: Static source review only; narrative acceptance is tracked independently in maintenance/playtests.
 activity_functions:
   试录地方故事: 声音协作：建立可复现的表演节奏
   校对活动菜单: 实物对照：限定文案的真实承诺
@@ -22,6 +23,10 @@ activity_functions:
   复看公开赛的一次配合: 复盘学习：更新对动作因果的理解
   给道具底座加可拆支撑: 实物修护：改善展示稳定性
   试听环境音节目: 听觉共处：交换偏好而不强制生产
+  校对合志分工表: 调查与核验：在压盘前把没确认的署名与分工挑出来
+  清点寄存道具箱: 信息交换：让每只箱子都能凭票找回自己的主人
+  试戴主题展演配饰: 身体靠近：确认展演配饰在正式上场前不会松脱或夹痛
+  盯住装车顺序: 空间与退出：在司机等待计费走完之前把必到的箱子先装上车
 chemistry:
   pairs:
   - pair: 0
@@ -40,3 +45,19 @@ chemistry:
     conflict_loop: 越赶输出越漏名单，越补名单越挤试听时间
     repair: 先锁定署名页，再分别完成声音和排版
     irreversible_threshold: 把他人录音署成自己制作后结束联合署名
+  - pair: 4
+    needs: 驻店店员需要陪席栏划回可选；接单人需要不替店方背折抵单
+    misreading: 把对照合约当成要她当场撕约走人
+    asymmetric_cost: 她中途解约按剩余月份全赔，你损失的只是一份收货班
+    ritual: 交接早晚班钥匙时顺手核一眼当日折抵单
+    conflict_loop: 店长按日落章催得越紧，两人越难把那一栏当面对清
+    repair: 划注过的单子送店方回签，期间她仍只接台面班
+    irreversible_threshold: 在折抵单上签下陪席默认，年内再划回就要按违约计
+  - pair: 5
+    needs: 声优需要许可范围逐字守住；剪辑接单人需要加录必见单
+    misreading: 把划回委托单当成不敬业或要拆社团台
+    asymmetric_cost: 样带越界流出由她本人担责，你只丢一单棚费
+    ritual: 开录前把划过线的委托单夹在谱架上
+    conflict_loop: 摊位费押在合约里，她越缺钱越容易对新线让步，你越提醒越像多管
+    repair: 双方签认划回范围，母带加锁另存留档
+    irreversible_threshold: 按新线录成的样带进入流通剪片，越界部分从此算她的默认许可

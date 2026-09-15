@@ -1,8 +1,11 @@
 id: mat-4b650ae3628b5c79b6f00d09d3ffb1c0
 name: 地方行业与公共记忆
-source_hash: 7b1babccdaeecd61de9c98150f9ea4b444ce2b5717e47b9646031645d562d33a
+source_hash: ffd37e51a0d64c32e5e5437ce0809428eba362072c812346157720e9984fc81f
 semantic_status: REVIEWED
-reason: 六类场所均保留，医疗与殡葬入口维持非诊疗、非告别活动边界；试走、讲解、考证、实物保护和试听有实质差异。；2026-09-10 第二人物组资源/限制差异化强化后同步源哈希。
+reason: 六类场所均保留，医疗与殡葬入口维持非诊疗、非告别活动边界；试走、讲解、考证、实物保护和试听有实质差异。；2026-09-10 第二人物组资源/限制差异化强化后同步源哈希；2026-09-12
+  第二波收尾：新增活动/地点经机械复核（space/people/daily/pressure_bindings 全通过），activity_functions 补齐至覆盖全部活动后同步源哈希。；2026-09-12
+  可达性修复（阶段3遗留1/3）：按 dispatch 落点为 3 个身份族补压力行并修复成年向/高张力 daily-only 地点，新增 pair/pressure 经逐项审读，pressure_bindings
+  与绑定活动场景语义相容、引擎逐字取自白名单
 checks:
   era_and_theme: true
   space: true
@@ -12,8 +15,7 @@ checks:
   distinct_functions: true
 quality:
   grade: B
-  reason: Static source review only; narrative acceptance is tracked independently
-    in maintenance/playtests.
+  reason: Static source review only; narrative acceptance is tracked independently in maintenance/playtests.
 activity_functions:
   试走公共服务导览: 可达性试走：减少问路与绕行
   试讲领养日说明: 讲解演练：改善双向理解
@@ -21,6 +23,12 @@ activity_functions:
   给旧物试配保护衬垫: 预防修护：改变实物支撑条件
   编排公开训练访谈: 叙事编排：改变因果理解
   试调街区声音展: 审美共处：形成可选择的听觉体验
+  在叫号屏之外核一遍复诊: 调查与核验：在进诊室之前弄清哪一项结果先出、哪一项要重排
+  在闭馆前翻一遍未入选的稿件: 调查与核验：在评审开场前弄清这一轮的选件口径到底是什么
+  逐件核对一匣旧物的登记单: 调查与核验：弄清哪几件有编号、哪几件没有，以及少掉的那一件去了哪里
+  在付印前把署名栏留空: 第三方与打断：在付印钟点之前决定这一栏写谁，或者干脆留空
+  在授权到期后核一遍素材副本: 调查与核验：弄清手上这些素材的授权范围与实际用途对不对得上
+  在收工前清一遍更衣格: 空间与退出：在锅炉熄火之前弄清哪几格还锁着东西、东西归谁
 chemistry:
   pairs:
   - pair: 0
@@ -39,3 +47,19 @@ chemistry:
     conflict_loop: 越追求整齐越碰旧物，越抗议越拖布展
     repair: 先试可撤衬垫再决定借展
     irreversible_threshold: 未经物主同意清除旧痕后不再借展实物
+  - pair: 3
+    needs: 出镜者需要私录段有明确处置；素材管理员需要台账销号闭环
+    misreading: 把追回拷贝当成对工作室宣战
+    asymmetric_cost: 私录段被当默认许可由她本人担责，你至多丢这份核对工
+    ritual: 月底续约前把授权与底单逐段对位
+    conflict_loop: 外发拷贝越追越显眼，她越想私了，你越怕台账断号
+    repair: 按台账追回销号，私录段封存待签
+    irreversible_threshold: 私录段被对方当续约筹码摆上桌，边界从此重谈
+  - pair: 4
+    needs: 入殓师需要登记簿落笔有人见证；志愿整理人需要档案不记争
+    misreading: 把见证落笔当成要替哪一方主张遗体归属
+    asymmetric_cost: 她按到场单方办理就要交出排期权，你只是档案少一页名姓
+    ritual: 沿革底稿只记年份与旧例，名姓页留白
+    conflict_loop: 两房催排期越紧，登记簿越空，门内的话越难不出棚
+    repair: 请两方到场当面落笔，档案只记事不记争
+    irreversible_threshold: 按到场单方落笔办理，越权之记追到守簿人头上

@@ -23,6 +23,7 @@ BUILD = load("build_opening", "scripts/build_opening.py")
 FILL = load("fill_opening", "scripts/fill_opening.py")
 COMMIT = load("commit_turn", "scripts/commit_turn.py")
 VALIDATOR = load("validate_state", "scripts/validate_state.py")
+ROLL = BUILD.load_roll_opening()
 
 
 def iso_plus(moment) -> str:
@@ -35,7 +36,10 @@ class CommitTurnLifecycleTests(unittest.TestCase):
     def setUp(self) -> None:
         # 显式预锁压力与处境：夹具不再依赖固定种子的抽取结果（任何表的词条增删都会
         # 级联改变各轴取值）。锁定非时限组合，保证 near 事件无死线、far 钩子过期测试成立。
-        roll = BUILD.build_roll(7, {"压力来源": "舆论发酵", "处境": "资源断供"}, {}, False, False)
+        # 独立旧池入口已拆除：该夹具锁定的是旧池词条，不是某个已审框架，故直接钉在
+        # 共享抽取体（SCOPED_DRAW）上，只测 turn 提交机制，不参与世界框架选择。
+        roll = BUILD.build_roll(7, {"压力来源": "舆论发酵", "处境": "资源断供"}, {}, False, False,
+                                framework=ROLL.SCOPED_DRAW)
         self.state = FILL.fill_opening(BUILD.build_skeleton(roll), roll)
         self.near_id = "evt-002"
         self.far_id = "evt-003"

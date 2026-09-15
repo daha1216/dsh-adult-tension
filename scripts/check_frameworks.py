@@ -47,8 +47,8 @@ def check_frameworks(registry, pools, categories, identity_profiles, report):
         return
     if type(registry.get("version")) is not int or registry["version"] != 1:
         error("version", "仅支持版本 1")
-    if registry.get("legacy_weight") != 0:
-        error("legacy_weight", "默认池不得混入旧池；固定为 0，legacy 保留显式入口")
+    if "legacy_weight" in registry:
+        error("legacy_weight", "独立旧池入口已拆除；该键不再属于契约，不得写回构建聚合")
     frameworks = mapping(registry.get("frameworks"), "frameworks")
     for name, package in frameworks.items():
         text(name, "name")
@@ -121,6 +121,7 @@ def check_frameworks(registry, pools, categories, identity_profiles, report):
             error(str(name), "存在没有活动入口的地点")
         if set(range(len(pairs))) - covered_pairs:
             error(str(name), "存在无法抽到的人物搭配")
+        bound_activities, bound_places, bound_pairs = set(), set(), set()
         for label, pressure in mapping(package.get("pressures"), f"{name}.pressures").items():
             path = f"{name}.pressures.{label}"
             pressure = mapping(pressure, path)
@@ -145,7 +146,22 @@ def check_frameworks(registry, pools, categories, identity_profiles, report):
                 if (binding["place"] not in activity.get("places", [])
                         or type(binding["pair"]) is not int or binding["pair"] not in activity.get("pairs", [])):
                     error(path, "压力引用不存在的活动配套")
+                    continue
                 signature = (binding["activity"], binding["place"], binding["pair"])
                 if signature in seen:
                     error(path, "压力绑定重复")
                 seen.add(signature)
+                bound_activities.add(binding["activity"])
+                bound_places.add(binding["place"])
+                bound_pairs.add(binding["pair"])
+        # Reverse reachability: a place/pair an activity declares is only ever reachable at
+        # runtime when some pressure binding names that exact (activity, place, pair) triple
+        # (world_frameworks.pressure_allows). Forward checks above prove entry points exist;
+        # these prove the declared material is actually reachable from a pressure.
+        activities = package.get("activities") or {}
+        if set(activities) - bound_activities:
+            error(str(name), "存在没有压力绑定的活动")
+        if set(places) - bound_places:
+            error(str(name), "存在没有压力绑定的地点")
+        if set(range(len(pairs))) - bound_pairs:
+            error(str(name), "存在没有压力绑定的人物搭配")

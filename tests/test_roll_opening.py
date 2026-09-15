@@ -68,10 +68,12 @@ class RollOpeningTests(unittest.TestCase):
             self.assertTrue(items, f"转折类 {category} 没有条目")
 
     def test_same_seed_is_deterministic(self) -> None:
-        self.assertEqual(MOD.build_roll(self.pools, 7), MOD.build_roll(self.pools, 7))
+        self.assertEqual(MOD.build_roll(self.pools, 7, framework=MOD.SCOPED_DRAW),
+                         MOD.build_roll(self.pools, 7, framework=MOD.SCOPED_DRAW))
 
     def test_different_seeds_differ(self) -> None:
-        self.assertNotEqual(MOD.build_roll(self.pools, 3), MOD.build_roll(self.pools, 99))
+        self.assertNotEqual(MOD.build_roll(self.pools, 3, framework=MOD.SCOPED_DRAW),
+                            MOD.build_roll(self.pools, 99, framework=MOD.SCOPED_DRAW))
 
     def test_recent_cooldown_avoids_primary_repeatable_choices(self) -> None:
         recent = {
@@ -80,7 +82,7 @@ class RollOpeningTests(unittest.TestCase):
             "处境": set(self.pools["处境侧"]),
             "场景动作": set(self.pools["场景动作·靠近"]),
         }
-        roll = MOD.build_roll(self.pools, 7, recent=recent)
+        roll = MOD.build_roll(self.pools, 7, recent=recent, framework=MOD.SCOPED_DRAW)
         self.assertIn(roll["地点"], self.pools["时代与地点"]["地点"])
         self.assertIn(roll["身份族"], self.pools["身份侧"])
         self.assertIn(roll["处境"], self.pools["处境侧"])
@@ -88,49 +90,49 @@ class RollOpeningTests(unittest.TestCase):
 
     def test_recent_cooldown_does_not_override_explicit_lock(self) -> None:
         place = self.pools["时代与地点"]["地点"][0]
-        roll = MOD.build_roll(self.pools, 7, locks={"地点": place}, recent={"地点": {place}})
+        roll = MOD.build_roll(self.pools, 7, locks={"地点": place}, recent={"地点": {place}}, framework=MOD.SCOPED_DRAW)
         self.assertEqual(place, roll["地点"])
 
     def test_protocol_version_and_draw_plan_are_explicit(self) -> None:
-        roll = MOD.build_roll(self.pools, 1)
+        roll = MOD.build_roll(self.pools, 1, framework=MOD.SCOPED_DRAW)
         self.assertEqual(roll["protocol_version"], MOD.PROTOCOL_VERSION)
         self.assertEqual(tuple(MOD.DRAW_PLAN), MOD.DRAW_PLAN)
 
     def test_all_custom_requires_custom_values_or_marks_required(self) -> None:
-        roll = MOD.build_roll(self.pools, 1, mode="all_custom")
+        roll = MOD.build_roll(self.pools, 1, mode="all_custom", framework=MOD.SCOPED_DRAW)
         for key in MOD.CUSTOM_KEYS:
             self.assertEqual(roll.get(key), "custom_required", key)
-        roll = MOD.build_roll(self.pools, 1, mode="all_custom", custom={"时代": "自定义时代"})
+        roll = MOD.build_roll(self.pools, 1, mode="all_custom", custom={"时代": "自定义时代"}, framework=MOD.SCOPED_DRAW)
         self.assertEqual(roll["时代"], "自定义时代")
 
     def test_explicit_lock_precedes_all_custom(self) -> None:
-        roll = MOD.build_roll(self.pools, 1, mode="all_custom", locks={"时代": "当代都市"})
+        roll = MOD.build_roll(self.pools, 1, mode="all_custom", locks={"时代": "当代都市"}, framework=MOD.SCOPED_DRAW)
         self.assertEqual(roll["时代"], "当代都市")
 
     def test_invalid_locks_raise_anchor_error(self) -> None:
         for locks in ({"不存在": "x"}, {"时代": ""}):
             with self.assertRaises(MOD.AnchorError):
-                MOD.build_roll(self.pools, 1, locks=locks)
+                MOD.build_roll(self.pools, 1, locks=locks, framework=MOD.SCOPED_DRAW)
 
     def test_force_table_rejects_out_of_pool_lock(self) -> None:
         with self.assertRaises(MOD.AnchorError):
-            MOD.build_roll(self.pools, 1, mode="force_table", locks={"时代": "表外时代"})
+            MOD.build_roll(self.pools, 1, mode="force_table", locks={"时代": "表外时代"}, framework=MOD.SCOPED_DRAW)
 
     def test_all_custom_marks_axes(self) -> None:
-        roll = MOD.build_roll(self.pools, 1, mode="all_custom")
+        roll = MOD.build_roll(self.pools, 1, mode="all_custom", framework=MOD.SCOPED_DRAW)
         for key in MOD.CUSTOM_KEYS:
             self.assertEqual(roll.get(key), "custom_required", key)
 
     def test_lock_overrides_draw(self) -> None:
-        roll = MOD.build_roll(self.pools, 1, locks={"时代": "当代都市"})
+        roll = MOD.build_roll(self.pools, 1, locks={"时代": "当代都市"}, framework=MOD.SCOPED_DRAW)
         self.assertEqual(roll["时代"], "当代都市")
 
     def test_lock_value_must_be_in_pool(self) -> None:
         with self.assertRaises(MOD.AnchorError):
-            MOD.build_roll(self.pools, 1, locks={"时代": "表外时代"})
+            MOD.build_roll(self.pools, 1, locks={"时代": "表外时代"}, framework=MOD.SCOPED_DRAW)
 
     def test_lock_single_tension_engine_completes_to_two_distinct(self) -> None:
-        roll = MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯"})
+        roll = MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯"}, framework=MOD.SCOPED_DRAW)
         engines = [part.strip() for part in roll["张力引擎"].split("、")]
         self.assertEqual(2, len(engines))
         self.assertIn("情感拉扯", engines)
@@ -139,42 +141,51 @@ class RollOpeningTests(unittest.TestCase):
             self.assertIn(engine, self.pools["张力引擎"], engine)
 
     def test_lock_double_tension_engine_preserved(self) -> None:
-        roll = MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、时限逼近"})
+        roll = MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、时限逼近"}, framework=MOD.SCOPED_DRAW)
         self.assertEqual("情感拉扯、时限逼近", roll["张力引擎"])
-        roll = MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯,组织更迭"})
+        roll = MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯,组织更迭"}, framework=MOD.SCOPED_DRAW)
         self.assertEqual("情感拉扯、组织更迭", roll["张力引擎"])
 
     def test_lock_duplicate_tension_engine_rejected(self) -> None:
         with self.assertRaises(MOD.AnchorError):
-            MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、情感拉扯"})
+            MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、情感拉扯"}, framework=MOD.SCOPED_DRAW)
 
     def test_lock_tension_engine_out_of_pool_rejected(self) -> None:
         with self.assertRaises(MOD.AnchorError):
-            MOD.build_roll(self.pools, 7, locks={"张力引擎": "表外引擎"})
+            MOD.build_roll(self.pools, 7, locks={"张力引擎": "表外引擎"}, framework=MOD.SCOPED_DRAW)
         with self.assertRaises(MOD.AnchorError):
-            MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、表外引擎"})
+            MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、表外引擎"}, framework=MOD.SCOPED_DRAW)
 
     def test_lock_tension_engine_too_many_values_rejected(self) -> None:
         with self.assertRaises(MOD.AnchorError):
-            MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、时限逼近、名声保卫"})
+            MOD.build_roll(self.pools, 7, locks={"张力引擎": "情感拉扯、时限逼近、名声保卫"}, framework=MOD.SCOPED_DRAW)
 
     def test_all_custom_tension_engine_custom_completes_to_two(self) -> None:
-        roll = MOD.build_roll(self.pools, 7, mode="all_custom", custom={"张力引擎": "自定义引擎"})
+        roll = MOD.build_roll(self.pools, 7, mode="all_custom", custom={"张力引擎": "自定义引擎"}, framework=MOD.SCOPED_DRAW)
         engines = [part.strip() for part in roll["张力引擎"].split("、")]
         self.assertEqual(2, len(engines))
         self.assertIn("自定义引擎", engines)
         self.assertEqual(len(set(engines)), 2)
         roll = MOD.build_roll(self.pools, 7, mode="all_custom",
-                              custom={"张力引擎": "自定义引擎A、自定义引擎B"})
+                              custom={"张力引擎": "自定义引擎A、自定义引擎B"}, framework=MOD.SCOPED_DRAW)
         self.assertEqual("自定义引擎A、自定义引擎B", roll["张力引擎"])
 
-    def test_realism_aesthetic_skips_flavor_and_quirk(self) -> None:
-        roll = MOD.build_roll(self.pools, 1, locks={"美学基调": "写实文学"})
-        self.assertEqual(roll["表层风味"], "—")
-        self.assertEqual(roll["口癖"], "—")
+    def test_realism_aesthetic_draws_subset_flavor_and_quirk(self) -> None:
+        roll = MOD.build_roll(self.pools, 1, locks={"美学基调": "写实文学"}, framework=MOD.SCOPED_DRAW)
+        subset = self.pools["meta"]["gate_flavor_subsets"]["写实文学"]
+        self.assertIn(roll["表层风味"], subset["表层风味"])
+        self.assertIn(roll["口癖"], subset["口癖"])
+        legacy = dict(
+            self.pools,
+            meta={key: value for key, value in (self.pools.get("meta") or {}).items()
+                  if key != "gate_flavor_subsets"},
+        )
+        fallback = MOD.build_roll(legacy, 1, locks={"美学基调": "写实文学"}, framework=MOD.SCOPED_DRAW)
+        self.assertEqual(fallback["表层风味"], "—")
+        self.assertEqual(fallback["口癖"], "—")
 
     def test_realism_aesthetic_restricts_appearance(self) -> None:
-        roll = MOD.build_roll(self.pools, 2, locks={"美学基调": "写实文学"})
+        roll = MOD.build_roll(self.pools, 2, locks={"美学基调": "写实文学"}, framework=MOD.SCOPED_DRAW)
         for entry in roll["外观·主NPC"]:
             if entry["axis"] == "发色":
                 self.assertEqual(entry["group"], "自然发色")
@@ -210,27 +221,27 @@ class RollOpeningTests(unittest.TestCase):
                     os.environ["ADULT_TENSION_HISTORY_PATH"] = original
 
     def test_default_seed_retries_when_history_signature_repeats(self) -> None:
-        first = MOD.build_roll(self.pools, 10)
+        first = MOD.build_roll(self.pools, 10, framework=MOD.SCOPED_DRAW)
         with mock.patch.object(MOD, "recent_signatures", return_value={MOD._roll_signature(first)}), \
              mock.patch.object(MOD, "recent_cooldowns", return_value={}), \
              mock.patch.object(MOD, "append_history") as append, \
              mock.patch.object(MOD.random, "SystemRandom", return_value=mock.Mock(randrange=mock.Mock(side_effect=[10, 11]))):
             buffer = io.StringIO()
             with contextlib.redirect_stdout(buffer):
-                code = MOD.main(["--format", "json", "--framework", "legacy"])
+                code = MOD.main(["--format", "json", "--framework", MOD.SCOPED_DRAW])
         self.assertEqual(code, 0)
         data = json.loads(buffer.getvalue())
         self.assertEqual(data["seed"], 11)
         append.assert_called_once()
 
     def test_explicit_seed_warns_but_remains_deterministic(self) -> None:
-        roll = MOD.build_roll(self.pools, 10)
+        roll = MOD.build_roll(self.pools, 10, framework=MOD.SCOPED_DRAW)
         stderr = io.StringIO()
         with mock.patch.object(MOD, "recent_signatures", return_value={MOD._roll_signature(roll)}), \
              mock.patch.object(MOD, "recent_cooldowns", return_value={}), \
              mock.patch.object(MOD, "append_history"):
             with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(stderr):
-                code = MOD.main(["--seed", "10", "--format", "json", "--framework", "legacy"])
+                code = MOD.main(["--seed", "10", "--format", "json", "--framework", MOD.SCOPED_DRAW])
         self.assertEqual(code, 0)
         self.assertIn("显式 seed 保持确定性", stderr.getvalue())
 
@@ -261,7 +272,7 @@ class RollOpeningTests(unittest.TestCase):
         # 单锁一项杠杆引擎时，补抽不得再叠出第二项杠杆引擎。
         leverage = sorted(MOD.LEVERAGE_ENGINES)[0]
         for seed in range(60):
-            roll = MOD.build_roll(self.pools, seed, locks={"张力引擎": leverage})
+            roll = MOD.build_roll(self.pools, seed, locks={"张力引擎": leverage}, framework=MOD.SCOPED_DRAW)
             engines = [part.strip() for part in MOD.MULTI_SEPARATOR.split(roll["张力引擎"])]
             self.assertIn(leverage, engines)
             self.assertEqual(len(engines), 2)
@@ -272,7 +283,7 @@ class RollOpeningTests(unittest.TestCase):
 
     def test_lock_two_leverage_engines_may_stack_explicitly(self) -> None:
         a, b = sorted(MOD.LEVERAGE_ENGINES)[:2]
-        roll = MOD.build_roll(self.pools, 3, locks={"张力引擎": f"{a}、{b}"})
+        roll = MOD.build_roll(self.pools, 3, locks={"张力引擎": f"{a}、{b}"}, framework=MOD.SCOPED_DRAW)
         engines = {part.strip() for part in MOD.MULTI_SEPARATOR.split(roll["张力引擎"])}
         self.assertEqual({a, b}, engines)
 
@@ -283,27 +294,27 @@ class RollOpeningTests(unittest.TestCase):
 
     def test_scene_action_defaults_to_approach_bucket(self) -> None:
         for seed in range(24):
-            roll = MOD.build_roll(self.pools, seed)
+            roll = MOD.build_roll(self.pools, seed, framework=MOD.SCOPED_DRAW)
             self.assertIn(roll["场景动作"], self.pools["场景动作·靠近"], roll["场景动作"])
 
     def test_lock_can_use_trade_scene_action(self) -> None:
         item = self.pools["场景动作·交易"][0]
-        roll = MOD.build_roll(self.pools, 1, locks={"场景动作": item})
+        roll = MOD.build_roll(self.pools, 1, locks={"场景动作": item}, framework=MOD.SCOPED_DRAW)
         self.assertEqual(item, roll["场景动作"])
 
     def test_table_mode_does_not_stack_leverage_engines(self) -> None:
         for seed in range(40):
-            roll = MOD.build_roll(self.pools, seed)
+            roll = MOD.build_roll(self.pools, seed, framework=MOD.SCOPED_DRAW)
             engines = {part.strip() for part in roll["张力引擎"].split("、") if part.strip()}
             self.assertFalse(engines <= MOD.LEVERAGE_ENGINES and len(engines) == 2, roll["张力引擎"])
 
     def test_lock_may_stack_leverage_engines(self) -> None:
-        roll = MOD.build_roll(self.pools, 1, locks={"张力引擎": "债务压力、第三方施压"})
+        roll = MOD.build_roll(self.pools, 1, locks={"张力引擎": "债务压力、第三方施压"}, framework=MOD.SCOPED_DRAW)
         self.assertEqual("债务压力、第三方施压", roll["张力引擎"])
 
     def test_player_high_avoids_leverage_situation(self) -> None:
         for seed in range(24):
-            roll = MOD.build_roll(self.pools, seed, locks={"权力结构": "player_high"})
+            roll = MOD.build_roll(self.pools, seed, locks={"权力结构": "player_high"}, framework=MOD.SCOPED_DRAW)
             self.assertNotIn(roll["处境"], MOD.SITUATION_LEVERAGE, roll["处境"])
 
     # ── 时代×地点和解（meta.location_eras）──
@@ -313,7 +324,7 @@ class RollOpeningTests(unittest.TestCase):
         era_map = (self.pools.get("meta") or {}).get("location_eras") or {}
         self.assertTrue(era_map, "真实池应带 meta.location_eras")
         for seed in range(1, 41):
-            roll = MOD.build_roll(self.pools, seed)
+            roll = MOD.build_roll(self.pools, seed, framework=MOD.SCOPED_DRAW)
             if roll["地点"] in era_map:
                 self.assertIn(roll["时代"], era_map[roll["地点"]],
                               f"seed={seed}: {roll['时代']}×{roll['地点']}")
@@ -322,7 +333,7 @@ class RollOpeningTests(unittest.TestCase):
         # 锁地点：时代让路（硬锁地点是稀缺签），seed 1-20 恒在配套名单内。
         compat = ["剑与魔法大陆", "异世界王都", "魔法公会边境"]
         for seed in range(1, 21):
-            roll = MOD.build_roll(self.pools, seed, locks={"地点": "魔法工坊地下室"})
+            roll = MOD.build_roll(self.pools, seed, locks={"地点": "魔法工坊地下室"}, framework=MOD.SCOPED_DRAW)
             self.assertEqual("魔法工坊地下室", roll["地点"])
             self.assertIn(roll["时代"], compat, roll["时代"])
 
@@ -330,7 +341,7 @@ class RollOpeningTests(unittest.TestCase):
         # 锁时代（名单外时代）：地点重抽时绝不落在 12 个硬锁地点上。
         era_map = (self.pools.get("meta") or {}).get("location_eras") or {}
         for seed in range(1, 21):
-            roll = MOD.build_roll(self.pools, seed, locks={"时代": "当代都市"})
+            roll = MOD.build_roll(self.pools, seed, locks={"时代": "当代都市"}, framework=MOD.SCOPED_DRAW)
             self.assertEqual("当代都市", roll["时代"])
             self.assertNotIn(roll["地点"], era_map, roll["地点"])
 
@@ -339,7 +350,7 @@ class RollOpeningTests(unittest.TestCase):
         stderr = io.StringIO()
         with contextlib.redirect_stderr(stderr):
             roll = MOD.build_roll(self.pools, 7, locks={"时代": "当代都市",
-                                                        "地点": "魔法工坊地下室"})
+                                                        "地点": "魔法工坊地下室"}, framework=MOD.SCOPED_DRAW)
         self.assertEqual("当代都市", roll["时代"])
         self.assertEqual("魔法工坊地下室", roll["地点"])
         self.assertIn("按玩家意愿保留", stderr.getvalue())
@@ -347,10 +358,10 @@ class RollOpeningTests(unittest.TestCase):
     def test_location_eras_all_custom_never_yields(self) -> None:
         # all_custom 自拟值不让路；custom_required 占位符同样不被和解触碰。
         roll = MOD.build_roll(self.pools, 7, mode="all_custom",
-                              custom={"时代": "当代都市", "地点": "魔法工坊地下室"})
+                              custom={"时代": "当代都市", "地点": "魔法工坊地下室"}, framework=MOD.SCOPED_DRAW)
         self.assertEqual("当代都市", roll["时代"])
         self.assertEqual("魔法工坊地下室", roll["地点"])
-        roll = MOD.build_roll(self.pools, 7, mode="all_custom")
+        roll = MOD.build_roll(self.pools, 7, mode="all_custom", framework=MOD.SCOPED_DRAW)
         self.assertEqual("custom_required", roll["时代"])
         self.assertEqual("custom_required", roll["地点"])
 
@@ -408,7 +419,7 @@ class RollOpeningTests(unittest.TestCase):
         self.assertEqual({"地点A": ["时代A"]}, pools["meta"]["location_eras"])
 
     def test_player_avatar_axes_present(self) -> None:
-        roll = MOD.build_roll(self.pools, 3)
+        roll = MOD.build_roll(self.pools, 3, framework=MOD.SCOPED_DRAW)
         self.assertIn(roll["玩家称谓"], self.pools["玩家化身轴"]["称谓"])
         self.assertIn(roll["玩家年龄段"], self.pools["玩家化身轴"]["年龄段"])
         self.assertIn(roll["玩家社会位置"], self.pools["玩家化身轴"]["社会位置"])

@@ -17,10 +17,10 @@ import roll_opening
 
 
 class LongRuntimeTests(unittest.TestCase):
-    def test_three_hundred_turns_daily_pressure_and_legacy(self):
+    def test_three_hundred_turns_daily_and_pressure(self):
         pools, tables = roll_opening.load_pools(), fill_opening.load_tables()
         framework = next(iter(pools["世界框架"]))
-        for mode, selection in (("daily", framework), ("pressure", framework), ("pressure", "legacy")):
+        for mode, selection in (("daily", framework), ("pressure", framework)):
             with self.subTest(mode=mode, framework=selection), tempfile.TemporaryDirectory() as directory:
                 drawn = roll_opening.build_roll(pools, 11, recent={}, opening_mode=mode, framework=selection)
                 state = fill_opening.fill_opening(build_opening.build_skeleton(drawn), drawn, tables)

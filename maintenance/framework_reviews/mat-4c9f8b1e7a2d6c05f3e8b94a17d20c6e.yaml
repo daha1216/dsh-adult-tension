@@ -1,0 +1,61 @@
+id: mat-4c9f8b1e7a2d6c05f3e8b94a17d20c6e
+name: 舞厅大班与乐台后台
+source_hash: dddaf974a5aa6feb9beeeca1888faa508e096a7ee0ff38f74d7ff75ed6b29eee
+semantic_status: REVIEWED
+reason: 舞厅、乐台与后台全配套：9 地点各带见证人/出口/可用项，9 活动覆盖 7 类中的7 类，10 压力各绑 2 组三元组，活动/地点/人物搭配三向可达。核心机制把「同一具身体按被看见与不被看见分别定价」写成点单落字、停乐清场与三层账房三条真实入口，陪舞不陪身落成由当班大班执行的制度边界。与同
+  era 的民国报馆与手艺街零地点、零美学、零机制重叠；力学集中在可见性分割与档期稀缺，非名词替换。
+checks:
+  era_and_theme: true
+  space: true
+  people: true
+  daily: true
+  pressure_bindings: true
+  distinct_functions: true
+quality:
+  grade: A
+  reason: Static source review only; narrative acceptance is tracked independently in maintenance/playtests.
+    可见性分割机制在既有 40 框架中无同类，且直接改写玩家在台面上/台面下的选择与代价；判为明显独特。
+activity_functions:
+  台面上落一笔点单: 交易摊牌：当众落字才算数，把当夜的价钱定在纸面上
+  停乐清场作废一场: 退出与制止：用班主的权限把已经开演的一场当场作废
+  台下排一个人的档期: 资源分配：在同一个人与两桌客人之间排先后
+  花榜贴报墙前听闲话: 信息交换：名次看得见，来历只能从闲话里凑
+  在化妆间换行头: 照护与修复：帘子内外切换被看见与被定价的状态
+  从后门送一个人出去: 空间与退出：把一个人从册子上移到锅炉房出入册的时辰里
+  核一遍当晚的白账: 调查与核验：把台面册与白账两本手工账对到一起
+  跑场茶室打听缺不缺人: 信息交换：同业之间问行情，不替同行接经手的场子
+  在二层候场廊等下一场: 日常接触：换场间隙里等候与自然后续
+chemistry:
+  pairs:
+  - pair: 0
+    needs: 舞女需要有人在天亮前把台面上那一笔认下来；玩家需要她承认自己递过条子
+    misreading: 把当众落字当成替她作主，把她没说出口的沉默当成默许
+    asymmetric_cost: 舞女损失当晚排档与台面上的体面，玩家押上的是账房能认的那一笔
+    ritual: 落字前先把笔推过去让她看一眼单子最后一行
+    conflict_loop: 越想把这件事压小越要当众办，越当众办她越没法不申辩
+    repair: 把当晚的档期让回一场，并当着领班把停乐的命令撤了
+    irreversible_threshold: 在台面上替她替她签下那张单子，会终止当晚的配合
+  - pair: 1
+    needs: 跑场中介需要知道这栋楼今晚缺不缺人；玩家需要同业不越过自己接单
+    misreading: 把打听人数听成挖角，把不问来处当成默认放行
+    asymmetric_cost: 中介坏的是街上那条「不替同行接场子」的行规，玩家坏的是自己排档的独占
+    ritual: 茶室里先把茶钱压在碗底再开口
+    conflict_loop: 两边越怕被抢单越不肯先报来处，越不报来处越只能互相猜
+    repair: 把经手的那一份让回对方，只留打听不带人走
+    irreversible_threshold: 背着他把人从后门送出去，会终止同业之间所有互通
+  - pair: 2
+    needs: 锅炉工需要夜里不出事；玩家需要有人替自己把那晚瞒住
+    misreading: 把不问当成不知情，把出入册只记时辰当成可以放心
+    asymmetric_cost: 锅炉工丢的是这份夜里唯一的差事，玩家丢的是后门这条唯一不在册子上的路
+    ritual: 后门上闩前对一遍出入册上的时辰
+    conflict_loop: 越想查清那晚越要把名字写进册子，越想保人越要让它空着
+    repair: 把那一页按原样翻回去，只补时辰不补名字
+    irreversible_threshold: 把他的名字写进出入册，会终止后门这条线
+  - pair: 3
+    needs: 大班需要账面对得上；玩家需要自己排的档不被推翻
+    misreading: 把抹账当成保人，把核账当成要动自己排的档
+    asymmetric_cost: 大班担的是全楼层面的账，玩家担的是自己一层点单的信用
+    ritual: 核账前先把两本册子摊在同一张桌上
+    conflict_loop: 上一层越想抹平越要往下核，下一层越怕被记越不肯落字
+    repair: 把有争议的那一晚另立一页，谁都认一半
+    irreversible_threshold: 当着外人把白账摊开，会终止上下两层之间的排档授权

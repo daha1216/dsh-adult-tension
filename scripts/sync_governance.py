@@ -4,12 +4,24 @@ from __future__ import annotations
 import argparse
 import json
 
-from build_frameworks import ROOT, REVIEWS, aggregate, digest
+from build_frameworks import ROOT, REVIEWS, INDEX, aggregate, digest
 from material_inventory import read_yaml
 import material_registry as catalog
 from data_contract import core_review_errors
 
 ORPHANS = {"天平两端真名典当夜", "妖狐内丹子时反噬"}
+
+
+def review_ids():
+    """Authoring id per framework name.
+
+    Reviews live at maintenance/framework_reviews/<authoring id>.yaml, the same
+    id space as authoring/frameworks/ and as qa.scope() matches. A framework's
+    registry unit id is content-derived (uuid5 of file#path:kind:label) and only
+    coincides with its authoring id for frameworks created by bootstrap(); never
+    assume the two agree.
+    """
+    return {row["name"]: row["id"] for row in read_yaml(INDEX)["frameworks"]}
 
 
 def decisions(registry, current):
@@ -21,6 +33,7 @@ def decisions(registry, current):
     live = {row["id"] for row in current}
     result = []
     compiled = aggregate()
+    ids = review_ids()
     for key, row in registry["entries"].items():
         source, label = row["source"], row["source"]["label"]
         is_framework = row["kind"] == "framework" and label in removed
@@ -35,7 +48,8 @@ def decisions(registry, current):
     for name, material_hash in compiled["reviewed_frameworks"].items():
         row = next(r for r in current if r["kind"] == "framework" and r["source"]["label"] == name)
         key = row["id"]
-        review = read_yaml(REVIEWS / f"{key}.yaml")
+        reviewed_id = ids.get(name, key)
+        review = read_yaml(REVIEWS / f"{reviewed_id}.yaml")
         frame = compiled["frameworks"][name]
         result.append({"id": key, "source_hash": material_hash, "status": "KEEP_FRAMEWORK",
                        "modes": ["daily", "pressure"], "owners": [name],
