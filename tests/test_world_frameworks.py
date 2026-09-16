@@ -3,6 +3,7 @@ import importlib.util
 import unittest
 from unittest.mock import patch
 from pathlib import Path
+import pytest
 ROOT=Path(__file__).parents[1]
 def load(name,path):
  s=importlib.util.spec_from_file_location(name,ROOT/path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
@@ -11,6 +12,7 @@ R=load('framework_roll','scripts/roll_opening.py')
 F=load('framework_fill','scripts/fill_opening.py')
 V=load('framework_validate','scripts/validate_state.py')
 class WorldFrameworkTests(unittest.TestCase):
+ @pytest.mark.slow
  def test_all_frameworks_support_daily_and_pressure(self):
   pools=R.load_pools(); tables=F.load_tables()
   self.assertEqual(len(pools['世界框架']), 52)

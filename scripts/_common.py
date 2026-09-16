@@ -17,8 +17,10 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import io
 import os
 import re
+import sys
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -30,6 +32,24 @@ except ImportError:  # pragma: no cover
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = Path(__file__).resolve().parent / "data"
+
+
+def _force_utf8_stdio() -> None:
+    """让不带 `-X utf8` 的裸跑也按 UTF-8 输出中文。
+
+    宿主与玩家环境不保证记得 `-X utf8`；Windows 管道/控制台默认走本地编码，
+    中文会乱码或直接 UnicodeEncodeError。只改编码，不动缓冲与换行。
+    pytest 捕获流或已损坏的流不适用 reconfigure，跳过即可。
+    """
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            if isinstance(stream, io.TextIOWrapper) and (stream.encoding or "").lower().replace("-", "") != "utf8":
+                stream.reconfigure(encoding="utf-8")
+        except (ValueError, OSError):
+            pass
+
+
+_force_utf8_stdio()
 
 
 class CommonError(RuntimeError):

@@ -231,4 +231,9 @@ For maintenance workflows and custom content expansion guidelines, consult [`ref
 
 ## 📄 License
 
-This project is licensed under the [MIT License](./LICENSE).
+This repository is dual-licensed by content type (see [LICENSE](./LICENSE) for details):
+
+- **Code & engineering config** (`scripts/*.py`, `tests/`, `.github/`, `pytest.ini`, dependency manifests): [MIT License](./LICENSE)
+- **Narrative materials & documentation** (world frameworks, material pools, copy templates, review records, and docs): [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — free to use and adapt with attribution, non-commercial only
+
+This project is strictly for fictional adult interactive fiction (18+); the license terms do not replace the compliance statement in this README.

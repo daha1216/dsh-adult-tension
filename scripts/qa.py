@@ -113,6 +113,8 @@ def write_fingerprint(value):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     selectors = parser.add_mutually_exclusive_group(required=True)
+    selectors.add_argument("--smoke", action="store_true",
+                           help="Fast push-time gate: full structural checks plus every test not marked slow")
     selectors.add_argument("--changed", action="store_true")
     selectors.add_argument("--full", action="store_true")
     selectors.add_argument("--framework")
@@ -146,10 +148,14 @@ def main(argv=None):
     commands = [python + ["scripts/build_frameworks.py"], python + ["scripts/check_content.py"],
                 python + ["scripts/material_registry.py", "--summary"]]
     if selected["full"]:
-        commands.extend(python + ["scripts/" + script, *flags] for script, flags in (
-            ("material_inventory.py", ["--summary"]), ("check_material_compatibility.py", ["--summary"]),
-            ("material_quality.py", ["--summary"]), ("check_duplicates.py", []), ("analyze_content.py", ["--samples", "1000"]),
-            ("framework_coverage.py", ["--summary"])))
+        full_scripts = (("material_inventory.py", ["--summary"]), ("check_material_compatibility.py", ["--summary"]),
+                        ("material_quality.py", ["--summary"]), ("check_duplicates.py", []),
+                        ("analyze_content.py", ["--samples", "1000"]), ("framework_coverage.py", ["--summary"]))
+        if args.smoke:
+            # analyze_content is a distribution report that always exits 0;
+            # its 1000-sample simulation is the slowest non-test step, so smoke skips it.
+            full_scripts = tuple(row for row in full_scripts if row[0] != "analyze_content.py")
+        commands.extend(python + ["scripts/" + script, *flags] for script, flags in full_scripts)
     sample = python + ["scripts/sample_materials.py", "--summary"]
     for name in selected["frameworks"]:
         sample.extend(["--framework", name])
@@ -158,11 +164,14 @@ def main(argv=None):
     tests = selected["tests"] or (["tests/test_framework_build.py"]
                                  if selected["frameworks"] else [])
     test_command = python + ["-m", "pytest", "-q", *tests]
+    if args.smoke:
+        test_command.extend(["-m", "not slow"])
     if args.update_fingerprint:
         test_command.extend(["-k", "not test_content_fingerprint"])
     commands.extend([test_command, python + ["-m", "compileall", "-q", "scripts", "tests"],
                      ["git", "diff", "--check"]])
-    print(json.dumps({"scope": selected, "commands": commands, "release": args.release}, ensure_ascii=False, indent=2))
+    print(json.dumps({"scope": selected, "commands": commands, "release": args.release, "smoke": args.smoke},
+                     ensure_ascii=False, indent=2))
     if args.plan:
         return 0
     errors = validate_files() + frozen_errors() + core_review_errors()

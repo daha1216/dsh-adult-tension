@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import io
 import json
+import pytest
 import tempfile
 import unittest
 from pathlib import Path
@@ -47,6 +48,7 @@ class OpeningModeTests(unittest.TestCase):
             self.assertFalse(request.exists())
             self.assertIn("压力开局", stdout.write.call_args_list[0].args[0])
 
+    @pytest.mark.slow
     def test_daily_openings_reuse_curated_materials_and_validate(self) -> None:
         pools = ROLL.load_pools()
         curated = set(pools["核心规则"]) | set(pools["社会规则"]) | set(pools["张力引擎"])
@@ -171,6 +173,7 @@ class OpeningModeLifecycleTests(unittest.TestCase):
         self.assertEqual([], VALIDATOR.validate_data(state, "opening"))
         self.assertEqual("pressure", LIVE.extract_live_slice(state)["opening_mode"])
 
+    @pytest.mark.slow
     def test_single_daily_engine_is_not_supplemented(self):
         for engine in ROLL.load_pools()["meta"]["daily_opening"]["张力引擎"]:
             roll = BUILD.build_roll(4, {"张力引擎": engine}, {}, False, False, opening_mode="daily")

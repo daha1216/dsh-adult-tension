@@ -228,7 +228,7 @@ python scripts/sync_governance.py --write
 python scripts/qa.py --changed
 ```
 
-`qa.py --framework <名称>`、`--material <稳定ID>` 用于定向验证；`--full` 做全量结构与回归检查；`--full --release` 另核验当前语义审查与实玩证据；`--full --update-fingerprint` 只在检查通过且数据未再次变化时更新指纹。`--plan` 只查看计划。构建和同步不会代替人工审查。
+`qa.py --framework <名称>`、`--material <稳定ID>` 用于定向验证；`--full` 做全量结构与回归检查；`--smoke` 跳过穷举型慢测试（全框架×双模式、多种子多样性等 `slow` 标记项）与纯报告性的分布分析，适合提交前快速把关，CI 的 push/PR 即走此档（tag 与发布门禁仍跑 `--full`）；`--full --release` 另核验当前语义审查与实玩证据；`--full --update-fingerprint` 只在检查通过且数据未再次变化时更新指纹。`--plan` 只查看计划。构建和同步不会代替人工审查。脚本自身已按 UTF-8 处理输出，裸跑 `python scripts/<工具>.py` 无需再带 `-X utf8`。
 
 单框架源或 review 连同生成聚合、registry、指纹的改动，在 `--changed` 中仍按框架抽样；其他共享改动可扩大范围。`--material` 遇框架 ID 同样选择对应框架。全量 QA 的分布分析运行 `analyze_content.py --samples 1000`，默认是 `--framework auto --opening-mode pressure`；legacy 独立旧池入口已拆除，分布分析不再有该口径，抽查历史对照只能读 `saves/legacy/` 只读存档。重复候选由 `check_duplicates.py` 对照人工记录核验，不自动删重；当前保留项与人物资源复用的计数口径见 [加内容](./references/加内容.md#2-标准维护流程)。
 
@@ -254,3 +254,14 @@ python scripts/qa.py --changed
 职责导航见 [素材架构](./references/素材架构.md)，L0-L3 扩充、审查和有证据的直接清理见 [加内容](./references/加内容.md)。`maintenance/data_manifest.yaml` 管文件职责与依赖，`maintenance/core_review_decisions.yaml` 管核心池人工处置，`maintenance/framework_reviews/*.yaml` 管框架审查。冻结整节的字节哈希须与 `maintenance/baseline.yaml` 一致；历史记录见 [PROGRESS.md](./PROGRESS.md)，不当作当前验收证明。
 
 </details>
+
+---
+
+## 📄 许可
+
+本仓库按内容类型采用双许可（详见 [LICENSE](./LICENSE)）：
+
+- **代码与工程配置**（`scripts/*.py`、`tests/`、`.github/`、`pytest.ini`、依赖清单）：[MIT License](./LICENSE)
+- **叙事素材与文档**（世界框架、素材池、文案模板、审查记录及各文档）：[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh)——可自由使用与改编（需署名），不得商用
+
+本项目仅面向虚构成年人互动叙事（18+）；许可条款不替代 README 中的合规声明。

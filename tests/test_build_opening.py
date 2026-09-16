@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import datetime as dt
 import importlib.util
+import pytest
 import tempfile
 import unittest
 from pathlib import Path
@@ -238,6 +239,7 @@ class BuildOpeningTests(unittest.TestCase):
             self.assertTrue(request_data["history_used"])
             self.assertFalse(request_data["history_duplicate"])
 
+    @pytest.mark.slow
     def test_ten_seeds_keep_triple_diversity(self) -> None:
         fill = _load("fill_opening", Path(__file__).parents[1] / "scripts" / "fill_opening.py")
         triples = []

@@ -1,20 +1,37 @@
 """Inventory every YAML field; classification is not semantic approval.
 
 Read-only maintenance tool, never imported by the opening/turn pipeline.
+Every maintenance entry script imports this module first, so the UTF-8 stdio
+normalization below covers bare `python scripts/<tool>.py` runs as well.
 """
 from __future__ import annotations
 
 import argparse
 from collections import Counter
 import hashlib
+import io
 import json
 from pathlib import Path
+import sys
 
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "scripts/data"
 INDEX = ROOT / "references/material_architecture.yaml"
+
+
+def _force_utf8_stdio() -> None:
+    """让不带 `-X utf8` 的裸跑也按 UTF-8 输出中文（同 scripts/_common.py）。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            if isinstance(stream, io.TextIOWrapper) and (stream.encoding or "").lower().replace("-", "") != "utf8":
+                stream.reconfigure(encoding="utf-8")
+        except (ValueError, OSError):
+            pass
+
+
+_force_utf8_stdio()
 
 
 class UniqueLoader(yaml.SafeLoader):

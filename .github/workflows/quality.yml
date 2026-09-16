@@ -3,10 +3,17 @@ name: quality
 on:
   push:
   pull_request:
+  schedule:
+    # GitHub Actions 用 UTC；19:00 UTC = 北京时间次日 03:00。
+    - cron: "0 19 * * *"
   workflow_dispatch:
     inputs:
       release:
         description: Require semantic and real-model acceptance evidence
+        type: boolean
+        default: false
+      full:
+        description: Run the exhaustive suite (slow tests included)
         type: boolean
         default: false
 
@@ -28,9 +35,12 @@ jobs:
           cache-dependency-path: requirements-dev.txt
       - name: Install dependencies
         run: python -m pip install -r requirements-dev.txt
-      - name: Full quality checks
-        if: ${{ !startsWith(github.ref, 'refs/tags/') && !inputs.release }}
-        run: python scripts/qa.py --full
       - name: Release acceptance gate
         if: ${{ startsWith(github.ref, 'refs/tags/') || inputs.release }}
         run: python scripts/qa.py --full --release
+      - name: Nightly exhaustive checks
+        if: ${{ github.event_name == 'schedule' || inputs.full }}
+        run: python scripts/qa.py --full
+      - name: Smoke quality checks
+        if: ${{ !startsWith(github.ref, 'refs/tags/') && !inputs.release && github.event_name != 'schedule' && !inputs.full }}
+        run: python scripts/qa.py --smoke
