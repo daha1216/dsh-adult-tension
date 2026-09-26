@@ -1,0 +1,129 @@
+<svg viewBox="0 0 860 286" width="860" height="286" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 纯白瓷质渐变底板 -->
+    <linearGradient id="sliceBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#fafbfc" />
+    </linearGradient>
+
+    <!-- 苹果精细微灰边框 -->
+    <linearGradient id="sliceBdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+
+    <!-- 冰蓝环境微光 -->
+    <linearGradient id="sliceAura" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.06" />
+    </linearGradient>
+
+    <filter id="softBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="25" result="blur" />
+    </filter>
+
+    <filter id="cardShdw" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.03" />
+    </filter>
+  </defs>
+
+  <style>
+    .font-sans {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-mono {
+      font-family: "SF Mono", "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, monospace;
+      font-variant-numeric: tabular-nums;
+    }
+    .font-title {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+
+  <!-- 主卡片底板 (840 居中) -->
+  <g transform="translate(10, 4)">
+    <rect width="840" height="278" rx="16" fill="url(#sliceBg)" stroke="url(#sliceBdr)" stroke-width="1.1" filter="url(#cardShdw)" />
+    
+    <!-- 漫射微晕 -->
+    <g clip-path="url(#sliceClip)">
+      <clipPath id="sliceClip">
+        <rect width="840" height="278" rx="16" />
+      </clipPath>
+      <circle cx="790" cy="40" r="140" fill="url(#sliceAura)" filter="url(#softBlur)" />
+      <circle cx="50" cy="240" r="100" fill="#f0f9ff" opacity="0.6" filter="url(#softBlur)" />
+    </g>
+
+    <!-- ================= 顶栏控制台条 (y=16) ================= -->
+    <g transform="translate(24, 16)">
+      <!-- 场景徽标 -->
+      <rect width="138" height="22" rx="6" fill="#f0f9ff" stroke="#bae6fd" stroke-width="0.9" />
+      <circle cx="12" cy="11" r="3" fill="#0284c7" />
+      <text x="24" y="15" class="font-sans" font-size="11" font-weight="600" fill="#0284c7">盛唐长安 · 压力博弈</text>
+
+      <text x="148" y="15.5" class="font-sans" font-size="12" font-weight="500" fill="#64748b">实况交互切片</text>
+
+      <!-- 右侧等宽状态指标 -->
+      <text x="792" y="15" class="font-mono" font-size="11" font-weight="500" fill="#94a3b8" text-anchor="end">
+        NPC 戒备值 85% · 门闩已反锁 · 离屏禁军逼近
+      </text>
+    </g>
+
+    <!-- 分割细线 -->
+    <line x1="24" y1="46" x2="816" y2="46" stroke="#f1f5f9" stroke-width="1" />
+
+    <!-- ================= 气泡 1：玩家开局 (右侧轻量气泡, y=56) ================= -->
+    <g transform="translate(816, 56)">
+      <!-- 气泡底板 -->
+      <rect x="-210" y="0" width="210" height="30" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="0.9" />
+      <text x="-198" y="19" class="font-sans" font-size="11.5" font-weight="600" fill="#64748b">你：</text>
+      <text x="-172" y="19" class="font-mono" font-size="12" font-weight="500" fill="#1e293b">开局，盛唐长安 压力模式</text>
+    </g>
+
+    <!-- ================= 气泡 2：AI 活人感 NPC 交互展开 (左侧微展板, y=96) ================= -->
+    <g transform="translate(24, 96)">
+      <!-- 浅灰微边框底衬 -->
+      <rect width="792" height="106" rx="10" fill="#fafbfc" stroke="#f1f5f9" stroke-width="1" />
+      
+      <!-- 2.1 世界观与人物身份条 (微小精致胶囊) -->
+      <g transform="translate(16, 14)">
+        <rect width="60" height="18" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8" />
+        <text x="30" y="13" class="font-sans" font-size="10.5" font-weight="600" fill="#64748b" text-anchor="middle">世界观</text>
+        <text x="68" y="13.5" class="font-sans" font-size="12" font-weight="400" fill="#475569">盛唐长安。宵禁将至，六百响更鼓只余最后沉闷尾音。</text>
+      </g>
+
+      <g transform="translate(16, 38)">
+        <rect width="60" height="18" rx="4" fill="#fdf2f8" stroke="#fbcfe8" stroke-width="0.8" />
+        <text x="30" y="13" class="font-sans" font-size="10.5" font-weight="600" fill="#db2777" text-anchor="middle">NPC</text>
+        <text x="68" y="13.5" class="font-sans" font-size="12" font-weight="600" fill="#1e293b">沈青澜</text>
+        <text x="114" y="13.5" class="font-sans" font-size="12" font-weight="400" fill="#64748b">（大理寺录事，素白袖口攥着半截暗账，背抵卷宗库门）</text>
+      </g>
+
+      <!-- 2.2 NPC 台词与心理动作 (高亮剧情正文) -->
+      <g transform="translate(16, 68)">
+        <text class="font-sans" font-size="12.5" fill="#334155">
+          <tspan font-weight="600" fill="#0f172a">正文：</tspan>
+          她警惕地盯着你腰间的佩刀：“<tspan font-weight="700" fill="#0284c7">今夜值守的明明不是你……站住。</tspan>”身后的门闩已被她悄悄插死。
+        </text>
+        <text y="20" class="font-sans" font-size="11.5" fill="#94a3b8">
+          （系统沉淀：NPC 触发利益防卫，拒绝服从，巡夜禁军正向此走来...）
+        </text>
+      </g>
+    </g>
+
+    <!-- ================= 气泡 3：玩家第一拍抉择反击 (右侧气泡, y=214) ================= -->
+    <g transform="translate(816, 214)">
+      <!-- 气泡底板 (带微透冰蓝高光) -->
+      <rect x="-480" y="0" width="480" height="38" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1" />
+      <text x="-466" y="23" class="font-sans" font-size="12" font-weight="700" fill="#0284c7">你：</text>
+      <text x="-442" y="23" class="font-sans" font-size="12.5" font-weight="500" fill="#0f172a">
+        走上前反手按住门板，凑近她耳边：“把账本交出来，或者我现在带你出去。”
+      </text>
+    </g>
+  </g>
+</svg>
