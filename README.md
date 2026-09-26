@@ -9,25 +9,19 @@
   </span>
 </p>
 
-<!-- 顶部 Apple 瓷质大标题与 4 胶囊标签展台 -->
-<!-- 独立超开阔项目大标题与核心金句 (完全脱框独立呈现) -->
+<!-- 独立超开阔项目大标题与核心金句 -->
 <img src="./assets/title-hero.svg" alt="dsh-adult-tension Title" width="100%" style="max-width: 860px; margin: 4px 0 10px 0;" />
 
 <!-- 4 大特性胶囊微展条 -->
 <img src="./assets/capsules-bar.svg" alt="dsh-adult-tension Capsules" width="100%" style="max-width: 860px; margin-bottom: 24px;" />
 
-<!-- 4 大核心特性展板（55% 冰川透蓝环境微光） -->
+<!-- 4 大核心特性展板（纯白瓷质 · 55% 冰川透蓝环境光） -->
 <img src="./assets/feature-grid-v7.svg" alt="dsh-adult-tension 核心特性展板" width="100%" style="max-width: 860px;" />
 
-<br/><br/>
-
-<p align="center" style="font-size: 13px; color: #94a3b8; margin: 18px auto 8px auto;">
+<!-- 极简低调微注脚 -->
+<p align="center" style="font-size: 13px; color: #94a3b8; margin: 20px auto 10px auto;">
   💡 原生适配 <b>DeepSeek Harness</b>（入口 <code>SKILL.md</code>）。请<b>完整克隆仓库</b>使用以保证 52 套世界与状态机正常运转。
 </p>
-  <p style="margin: 0; font-size: 12.5px; color: #64748b; line-height: 1.6;">
-    专为 <b>DeepSeek Harness</b> 打造（入口 <code>SKILL.md</code>）。请<b>完整克隆仓库</b>使用，单拷文件缺少后台状态机脚本与世界数据将无法运行。
-  </p>
-</div>
 
 </div>
 
