@@ -24,7 +24,7 @@
 </p>
 
 <!-- 苹果 2×2 瓷白特性微展板 (带 55% 冰川透蓝环境光) -->
-<img src="./assets/feature-grid.svg" alt="dsh-adult-tension 核心特性展板" width="100%" />
+<img src="./assets/feature-grid-v3.svg" alt="dsh-adult-tension 核心特性展板" width="100%" />
 
 <br/><br/>
 
