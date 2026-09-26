@@ -16,7 +16,7 @@
 <img src="./assets/capsules-bar-en.svg" alt="dsh-adult-tension Capsules" width="100%" style="max-width: 860px; margin-bottom: 24px;" />
 
 <!-- 4 Core Feature Cards (Pure Porcelain & Glacier Aura) -->
-<img src="./assets/feature-grid-v7-en.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
+<img src="./assets/feature-grid-v8-en.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
 
 <p align="center" style="margin: 20px auto 16px auto;"><img src="./assets/badge-skill-pill-v2-en.svg" alt="Native Agent Skill" height="32" /></p>
 
@@ -28,7 +28,7 @@
 <br/>
 ## 🎬 Gameplay Slice
 
-<img src="./assets/interactive-slice-en.svg" alt="dsh-adult-tension Gameplay Slice" width="100%" style="max-width: 860px; margin: 12px 0 24px 0;" />
+<img src="./assets/interactive-slice-v3-en.svg" alt="dsh-adult-tension Gameplay Slice" width="100%" style="max-width: 860px; margin: 12px 0 24px 0;" />
 
 ---
 ## 📦 Built-in Assets: A Complete World Library
@@ -232,4 +232,5 @@ This repository is dual-licensed by content type (see [LICENSE](./LICENSE) for d
 - **Narrative materials & documentation** (world frameworks, material pools, copy templates, review records, and docs): [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — free to use and adapt with attribution, non-commercial only
 
 This project is strictly for fictional adult interactive fiction (18+); the license terms do not replace the compliance statement in this README.
+
 
