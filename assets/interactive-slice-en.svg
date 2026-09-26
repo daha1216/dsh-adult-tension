@@ -1,32 +1,38 @@
-<svg viewBox="0 0 860 286" width="860" height="286" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 860 440" width="860" height="440" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="sliceBg" x1="0%" y1="0%" x2="0%" y2="100%">
+    <!-- Ceramic white gradient background -->
+    <linearGradient id="panelBgEn" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="100%" stop-color="#fafbfc" />
+      <stop offset="100%" stop-color="#f8fafc" />
     </linearGradient>
 
-    <linearGradient id="sliceBdr" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- Subtle gray border -->
+    <linearGradient id="borderGradEn" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#e2e8f0" />
       <stop offset="100%" stop-color="#cbd5e1" />
     </linearGradient>
 
-    <linearGradient id="sliceAura" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.12" />
-      <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.06" />
+    <!-- Glacier blue aura -->
+    <linearGradient id="blueAuraEn" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.03" />
     </linearGradient>
 
-    <filter id="softBlur" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="25" result="blur" />
-    </filter>
+    <!-- Tension alert energy bar -->
+    <linearGradient id="tensionGradEn" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="70%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#dc2626" />
+    </linearGradient>
 
-    <filter id="cardShdw" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.03" />
+    <filter id="softShadowEn" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.04" />
     </filter>
   </defs>
 
   <style>
     .font-sans {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", -system-ui, sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
@@ -34,83 +40,220 @@
       font-family: "SF Mono", "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, monospace;
       font-variant-numeric: tabular-nums;
     }
-    .font-title {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-    }
   </style>
 
-  <g transform="translate(10, 4)">
-    <rect width="840" height="278" rx="16" fill="url(#sliceBg)" stroke="url(#sliceBdr)" stroke-width="1.1" filter="url(#cardShdw)" />
-    
-    <g clip-path="url(#sliceClipEn)">
-      <clipPath id="sliceClipEn">
-        <rect width="840" height="278" rx="16" />
+  <!-- Main Card Plate (840 centered) -->
+  <g transform="translate(10, 6)">
+    <rect width="840" height="428" rx="16" fill="url(#panelBgEn)" stroke="url(#borderGradEn)" stroke-width="1.1" filter="url(#softShadowEn)" />
+
+    <!-- Ambient Glow -->
+    <g clip-path="url(#cardClipEn)">
+      <clipPath id="cardClipEn">
+        <rect width="840" height="428" rx="16" />
       </clipPath>
-      <circle cx="790" cy="40" r="140" fill="url(#sliceAura)" filter="url(#softBlur)" />
-      <circle cx="50" cy="240" r="100" fill="#f0f9ff" opacity="0.6" filter="url(#softBlur)" />
+      <circle cx="810" cy="50" r="160" fill="url(#blueAuraEn)" filter="blur(20px)" />
+      <circle cx="50" cy="380" r="120" fill="#f0f9ff" opacity="0.6" filter="blur(20px)" />
     </g>
 
-    <!-- Top Console Header -->
-    <g transform="translate(24, 16)">
-      <rect width="146" height="22" rx="6" fill="#f0f9ff" stroke="#bae6fd" stroke-width="0.9" />
-      <circle cx="12" cy="11" r="3" fill="#0284c7" />
-      <text x="24" y="15" class="font-sans" font-size="11" font-weight="600" fill="#0284c7">Chang'an · Tension Duel</text>
+    <!-- ================= 1. Top HUD: Real-time Telemetry (y=16) ================= -->
+    <g transform="translate(20, 16)">
+      <!-- World Scene Pill -->
+      <rect width="180" height="26" rx="7" fill="#f0f9ff" stroke="#bae6fd" stroke-width="0.9" />
+      <circle cx="12" cy="13" r="3.5" fill="#0284c7" />
+      <text x="24" y="17.5" class="font-sans" font-size="11" font-weight="700" fill="#0284c7">Tang Dynasty · Archives</text>
 
-      <text x="156" y="15.5" class="font-sans" font-size="12" font-weight="500" fill="#64748b">Live Interactive Slice</text>
+      <!-- Time Stamp -->
+      <rect x="188" y="0" width="116" height="26" rx="7" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.9" />
+      <text x="246" y="17" class="font-mono" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle">Curfew 02:45 AM</text>
 
-      <text x="792" y="15" class="font-mono" font-size="11" font-weight="500" fill="#94a3b8" text-anchor="end">
-        Vigilance 85% · Deadbolt Locked · Guards Approaching
-      </text>
-    </g>
-
-    <line x1="24" y1="46" x2="816" y2="46" stroke="#f1f5f9" stroke-width="1" />
-
-    <!-- Turn 1: User Start -->
-    <g transform="translate(816, 56)">
-      <rect x="-260" y="0" width="260" height="30" rx="8" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="0.9" />
-      <text x="-248" y="19" class="font-sans" font-size="11.5" font-weight="600" fill="#64748b">You:</text>
-      <text x="-218" y="19" class="font-mono" font-size="12" font-weight="500" fill="#1e293b">Start, Chang'an High-Pressure</text>
-    </g>
-
-    <!-- Turn 2: Living NPC Stance & Response -->
-    <g transform="translate(24, 96)">
-      <rect width="792" height="106" rx="10" fill="#fafbfc" stroke="#f1f5f9" stroke-width="1" />
-      
-      <g transform="translate(16, 14)">
-        <rect width="74" height="18" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8" />
-        <text x="37" y="13" class="font-sans" font-size="10.5" font-weight="600" fill="#64748b" text-anchor="middle">Worldview</text>
-        <text x="82" y="13.5" class="font-sans" font-size="12" font-weight="400" fill="#475569">Tang Dynasty Chang'an. Curfew is imminent, the 600th night-watch drum fading into silence.</text>
+      <!-- Tension Meter -->
+      <g transform="translate(312, 0)">
+        <rect width="248" height="26" rx="7" fill="#fff1f2" stroke="#fecdd3" stroke-width="0.9" />
+        <text x="12" y="17.5" class="font-sans" font-size="11" font-weight="700" fill="#e11d48">Tension: 85%</text>
+        <rect x="94" y="8" width="86" height="10" rx="5" fill="#ffe4e6" />
+        <rect x="94" y="8" width="73" height="10" rx="5" fill="url(#tensionGradEn)" />
+        <text x="216" y="17" class="font-mono" font-size="10" font-weight="700" fill="#be123c" text-anchor="middle">CRITICAL</text>
       </g>
 
-      <g transform="translate(16, 38)">
-        <rect width="48" height="18" rx="4" fill="#fdf2f8" stroke="#fbcfe8" stroke-width="0.8" />
-        <text x="24" y="13" class="font-sans" font-size="10.5" font-weight="600" fill="#db2777" text-anchor="middle">NPC</text>
-        <text x="56" y="13.5" class="font-sans" font-size="12" font-weight="600" fill="#1e293b">Shen Qinglan</text>
-        <text x="146" y="13.5" class="font-sans" font-size="12" font-weight="400" fill="#64748b">(Court clerk, clutch torn ledger fragments, backing against archive doors)</text>
+      <!-- Proximity & Threat -->
+      <g transform="translate(568, 0)">
+        <rect width="232" height="26" rx="7" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.9" />
+        <text x="12" y="17" class="font-sans" font-size="11" font-weight="600" fill="#475569">Dist: <tspan font-family="'SF Mono', Menlo, monospace" font-weight="700" fill="#0284c7">0.4m</tspan></text>
+        <circle cx="94" cy="13" r="2.5" fill="#cbd5e1" />
+        <text x="108" y="17" class="font-sans" font-size="11" font-weight="600" fill="#475569">Guards: <tspan font-family="'SF Mono', Menlo, monospace" font-weight="700" fill="#e11d48">2 turns</tspan></text>
+      </g>
+    </g>
+
+    <!-- Divider Line -->
+    <line x1="20" y1="52" x2="820" y2="52" stroke="#f1f5f9" stroke-width="1" />
+
+    <!-- ================= 2. Main Arena: Dual-Track Confrontation (y=62) ================= -->
+    <g transform="translate(20, 62)">
+      <!-- 2.1 Left: Living NPC Telemetry & Decision Engine (w=268) -->
+      <g transform="translate(0, 0)">
+        <rect width="268" height="298" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" />
+        
+        <!-- Header -->
+        <path d="M 0 12 C 0 5.37 5.37 0 12 0 L 256 0 C 262.63 0 268 5.37 268 12 L 268 42 L 0 42 Z" fill="#f8fafc" stroke="#f1f5f9" stroke-width="1" />
+        <circle cx="22" cy="21" r="11" fill="#fbcfe8" />
+        <text x="22" y="25" class="font-sans" font-size="11" font-weight="700" fill="#db2777" text-anchor="middle">S</text>
+        <text x="40" y="25.5" class="font-sans" font-size="12.5" font-weight="700" fill="#0f172a">Shen Qinglan</text>
+        
+        <rect x="134" y="11" width="122" height="20" rx="5" fill="#fdf2f8" stroke="#fbcfe8" stroke-width="0.8" />
+        <text x="195" y="24.5" class="font-sans" font-size="9.5" font-weight="600" fill="#db2777" text-anchor="middle">Dali Temple Clerk · 21y</text>
+
+        <!-- Telemetry Items -->
+        <g transform="translate(14, 52)">
+          <text class="font-sans" font-size="10" font-weight="700" fill="#94a3b8" letter-spacing="0.5">LIVING NPC TELEMETRY</text>
+
+          <!-- Metric 1: Heart Rate -->
+          <g transform="translate(0, 14)">
+            <rect width="240" height="28" rx="6" fill="#f8fafc" stroke="#f1f5f9" stroke-width="0.8" />
+            <text x="10" y="18.5" class="font-sans" font-size="11" font-weight="600" fill="#475569">💓 Heart Rate</text>
+            <text x="228" y="18.5" class="font-mono" font-size="11" font-weight="700" fill="#e11d48" text-anchor="end">132 bpm (Overload)</text>
+          </g>
+
+          <!-- Metric 2: Body Action -->
+          <g transform="translate(0, 48)">
+            <rect width="240" height="28" rx="6" fill="#f8fafc" stroke="#f1f5f9" stroke-width="0.8" />
+            <text x="10" y="18.5" class="font-sans" font-size="11" font-weight="600" fill="#475569">🖐️ Defense</text>
+            <text x="228" y="18.5" class="font-sans" font-size="10.5" font-weight="600" fill="#0284c7" text-anchor="end">Locked Brass Bolt · Backed</text>
+          </g>
+
+          <!-- Metric 3: Gaze -->
+          <g transform="translate(0, 82)">
+            <rect width="240" height="28" rx="6" fill="#f8fafc" stroke="#f1f5f9" stroke-width="0.8" />
+            <text x="10" y="18.5" class="font-sans" font-size="11" font-weight="600" fill="#475569">👁️ Gaze Focus</text>
+            <text x="228" y="18.5" class="font-sans" font-size="10.5" font-weight="600" fill="#d97706" text-anchor="end">Locked on Saber ↘ Dilated</text>
+          </g>
+
+          <!-- Decision: Refuse submission -->
+          <g transform="translate(0, 118)">
+            <rect width="240" height="58" rx="7" fill="#fff1f2" stroke="#fecdd3" stroke-width="0.9" />
+            <circle cx="14" cy="16" r="4" fill="#e11d48" />
+            <text x="26" y="20" class="font-sans" font-size="10.5" font-weight="700" fill="#be123c">Refuse Submission · Defense Active</text>
+            <text x="12" y="38" class="font-sans" font-size="10" font-weight="500" fill="#9f1239">Identifies you as intruder; defends ledger</text>
+            <text x="12" y="50" class="font-mono" font-size="9.5" font-weight="600" fill="#e11d48">SUBMISSION: 0% · HOSTILITY: 85%</text>
+          </g>
+
+          <!-- Engine Status -->
+          <g transform="translate(0, 186)">
+            <rect width="240" height="42" rx="6" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="0.8" />
+            <circle cx="12" cy="14" r="3" fill="#10b981" />
+            <text x="22" y="17" class="font-mono" font-size="9.5" font-weight="700" fill="#0f172a">ZERO-DRIFT YAML STATE</text>
+            <text x="10" y="33" class="font-mono" font-size="9.5" font-weight="500" fill="#64748b">state: LOCKED_ARCHIVE | escape: 0%</text>
+          </g>
+        </g>
       </g>
 
-      <g transform="translate(16, 68)">
-        <text class="font-sans" font-size="12.5" fill="#334155">
-          <tspan font-weight="600" fill="#0f172a">Narrative:</tspan>
-          Warily eyeing your blade: "<tspan font-weight="700" fill="#0284c7">You weren't scheduled for patrol tonight... Halt.</tspan>" Deadbolt slid into place.
+      <!-- 2.2 Right: 3-Beat Confrontation Arena (w=520) -->
+      <g transform="translate(280, 0)">
+        <rect width="520" height="298" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" />
+
+        <!-- Turn 1: Player Start (y=12) -->
+        <g transform="translate(16, 12)">
+          <rect width="488" height="30" rx="7" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.8" />
+          <rect x="8" y="5" width="40" height="20" rx="4" fill="#e2e8f0" />
+          <text x="28" y="19" class="font-sans" font-size="10" font-weight="700" fill="#475569" text-anchor="middle">YOU</text>
+          <text x="56" y="20" class="font-mono" font-size="11.5" font-weight="600" fill="#0f172a">Initialize, Tang Dynasty · Extreme Tension Mode</text>
+          <text x="476" y="19.5" class="font-mono" font-size="10" font-weight="600" fill="#94a3b8" text-anchor="end">TURN 01</text>
+        </g>
+
+        <!-- Turn 1: NPC Reaction & Non-Compliance (y=50) -->
+        <g transform="translate(16, 50)">
+          <rect width="488" height="126" rx="9" fill="#f0f9ff" fill-opacity="0.35" stroke="#bae6fd" stroke-width="1" />
+          
+          <g transform="translate(12, 12)">
+            <rect width="84" height="19" rx="4" fill="#fdf2f8" stroke="#fbcfe8" stroke-width="0.8" />
+            <text x="54" y="14" class="font-sans" font-size="9.5" font-weight="700" fill="#db2777" text-anchor="middle">Shen Qinglan</text>
+            <text x="96" y="14" class="font-sans" font-size="11" font-weight="500" fill="#64748b">
+              Holding torn ledger tight against her silk sleeve, back to the door
+            </text>
+          </g>
+
+          <g transform="translate(12, 44)">
+            <text class="font-sans" font-size="12.5" fill="#0f172a" font-weight="600">
+              Eyes fixed on your saber: “<tspan fill="#0284c7" font-weight="700">You are NOT on duty tonight... STOP!</tspan>”
+            </text>
+            <text y="22" class="font-sans" font-size="11" fill="#475569" font-weight="400">
+              The heavy brass bolt clicks shut behind her. Retreat severed. Distant gongs echo outside.
+            </text>
+          </g>
+
+          <!-- State mutation -->
+          <g transform="translate(12, 94)">
+            <rect width="464" height="22" rx="5" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8" />
+            <circle cx="10" cy="11" r="3" fill="#0284c7" />
+            <text x="20" y="15" class="font-mono" font-size="9.8" font-weight="600" fill="#0284c7">
+              YAML MUTATION: suspicion: 85% ↗ | door_locked: true | reject_submission: 100%
+            </text>
+          </g>
+        </g>
+
+        <!-- Turn 2: Player Counter & Proximity (y=186) -->
+        <g transform="translate(16, 186)">
+          <rect width="488" height="98" rx="9" fill="#f0f9ff" stroke="#38bdf8" stroke-width="1.2" />
+          
+          <g transform="translate(12, 12)">
+            <rect width="40" height="19" rx="4" fill="#0284c7" />
+            <text x="32" y="14" class="font-sans" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">YOU</text>
+            <text x="48" y="14" class="font-sans" font-size="11" font-weight="700" fill="#0284c7">Breaking Safe Distance · Spatial Dominance</text>
+            <text x="472" y="14" class="font-mono" font-size="10" font-weight="700" fill="#0284c7" text-anchor="end">TURN 02</text>
+          </g>
+
+          <g transform="translate(12, 42)">
+            <text class="font-sans" font-size="11.5" font-weight="500" fill="#334155">
+              Step forward into <tspan fill="#e11d48" font-weight="700">0.4m alert radius</tspan>, slamming hand onto door beside her ear:
+            </text>
+            <text y="24" class="font-sans" font-size="12.5" font-weight="700" fill="#0369a1">
+              “Hand over the ledger, or I take you out of here right now.”
+            </text>
+            <text y="42" class="font-sans" font-size="10.5" font-weight="500" fill="#94a3b8">
+              (Physical proximity applied: triggers pupil dilation, heart rate spike, defense re-evaluation)
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- ================= 3. Bottom: Probabilistic Branch Inference (y=372) ================= -->
+    <g transform="translate(20, 372)">
+      <rect width="800" height="38" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.9" />
+
+      <g transform="translate(14, 12)">
+        <text class="font-sans" font-size="10.5" font-weight="700" fill="#334155">Next-Turn Decision Fork:</text>
+      </g>
+
+      <!-- 3 Branch Chips -->
+      <g transform="translate(180, 8)">
+        <!-- Branch 1 -->
+        <rect width="160" height="22" rx="5" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.8" />
+        <circle cx="10" cy="11" r="3" fill="#f59e0b" />
+        <text x="20" y="15" class="font-sans" font-size="9.5" font-weight="600" fill="#334155">Stab Hairpin / Seize Saber</text>
+        <text x="152" y="15" class="font-mono" font-size="10" font-weight="700" fill="#d97706" text-anchor="end">35%</text>
+
+        <!-- Branch 2 -->
+        <g transform="translate(168, 0)">
+          <rect width="168" height="22" rx="5" fill="#f0fdf4" stroke="#86efac" stroke-width="0.8" />
+          <circle cx="10" cy="11" r="3" fill="#16a34a" />
+          <text x="20" y="15" class="font-sans" font-size="9.5" font-weight="600" fill="#166534">Blackmail / Tentative Pact</text>
+          <text x="160" y="15" class="font-mono" font-size="10" font-weight="700" fill="#15803d" text-anchor="end">48%</text>
+        </g>
+
+        <!-- Branch 3 -->
+        <g transform="translate(344, 0)">
+          <rect width="150" height="22" rx="5" fill="#fff1f2" stroke="#fca5a5" stroke-width="0.8" />
+          <circle cx="10" cy="11" r="3" fill="#ef4444" />
+          <text x="20" y="15" class="font-sans" font-size="9.5" font-weight="600" fill="#991b1b">Destroy &amp; Tear Ledger</text>
+          <text x="142" y="15" class="font-mono" font-size="10" font-weight="700" fill="#b91c1c" text-anchor="end">17%</text>
+        </g>
+      </g>
+
+      <g transform="translate(712, 14)">
+        <text class="font-mono" font-size="10" font-weight="700" fill="#0284c7">
+          ● ZERO-DRIFT
         </text>
-        <text y="20" class="font-sans" font-size="11.5" fill="#94a3b8">
-          (YAML State: Triggered defensive stance, refuses to comply, patrolling guards closing in...)
-        </text>
       </g>
-    </g>
-
-    <!-- Turn 3: User Counter-Play -->
-    <g transform="translate(816, 214)">
-      <rect x="-530" y="0" width="530" height="38" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1" />
-      <text x="-516" y="23" class="font-sans" font-size="12" font-weight="700" fill="#0284c7">You:</text>
-      <text x="-484" y="23" class="font-sans" font-size="12.5" font-weight="500" fill="#0f172a">
-        I step forward, pressing my hand flat against the door panel: "Hand over the ledger, or I take you out now."
-      </text>
     </g>
   </g>
 </svg>
