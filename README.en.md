@@ -17,7 +17,7 @@
 <img src="./assets/capsules-bar-en.svg" alt="dsh-adult-tension Capsules" width="100%" style="max-width: 860px; margin-bottom: 24px;" />
 
 <!-- 4 Core Feature Cards -->
-<img src="./assets/feature-grid-v6-en.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
+<img src="./assets/feature-grid-v7-en.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
 
 <br/><br/>
 
