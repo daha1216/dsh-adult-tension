@@ -18,7 +18,7 @@
 <!-- 4 Core Feature Cards (Pure Porcelain & Glacier Aura) -->
 <img src="./assets/feature-grid-v7-en.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
 
-<p align="center" style="margin: 20px auto 16px auto;"><img src="./assets/badge-skill-pill-en.svg" alt="Native Agent Skill" height="32" /></p>
+<p align="center" style="margin: 20px auto 16px auto;"><img src="./assets/badge-skill-pill-v2-en.svg" alt="Native Agent Skill" height="32" /></p>
 
 <!-- Minimalist Subtle Footnote -->
 
