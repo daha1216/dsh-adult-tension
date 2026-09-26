@@ -18,7 +18,7 @@
 <!-- 4 大核心特性展板（纯白瓷质 · 55% 冰川透蓝环境光） -->
 <img src="./assets/feature-grid-v7.svg" alt="dsh-adult-tension 核心特性展板" width="100%" style="max-width: 860px;" />
 
-<p align="center" style="margin: 20px auto 16px auto;"><img src="./assets/badge-skill-pill.svg" alt="Native Agent Skill" height="32" /></p>
+<p align="center" style="margin: 20px auto 16px auto;"><img src="./assets/badge-skill-pill-v2.svg" alt="Native Agent Skill" height="32" /></p>
 
 <!-- 极简低调微注脚 -->
 
