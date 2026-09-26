@@ -17,31 +17,16 @@
 
 <br/><br/>
 
-<!-- 双栏规整提示卡片（苹果系统控制台质感：安装指南 + 18+ 合规边界） -->
-<table align="center" style="width: 100%; max-width: 860px; border-collapse: separate; border-spacing: 12px 0; margin: 0 auto 24px auto; background: transparent; border: none;">
-  <tr>
-    <!-- 左栏：安装提示 -->
-    <td style="width: 50%; vertical-align: top; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
-      <div style="display: flex; align-items: center; margin-bottom: 6px;">
-        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #0284c7; margin-right: 8px;"></span>
-        <span style="font-size: 13px; font-weight: 600; color: #334155;">原生 Skill 安装指南</span>
-      </div>
-      <p style="margin: 0; font-size: 12.2px; color: #64748b; line-height: 1.6;">
-        专为 <b>DeepSeek Harness</b> 打造（入口 <code>SKILL.md</code>）。请<b>完整克隆仓库</b>使用，单拷文件缺少后台状态机脚本与世界数据将无法运行。
-      </p>
-    </td>
-    <!-- 右栏：合规声明 -->
-    <td style="width: 50%; vertical-align: top; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
-      <div style="display: flex; align-items: center; margin-bottom: 6px;">
-        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #e11d48; margin-right: 8px;"></span>
-        <span style="font-size: 13px; font-weight: 600; color: #334155;">合规声明（18+ Only）</span>
-      </div>
-      <p style="margin: 0; font-size: 12.2px; color: #64748b; line-height: 1.6;">
-        严格仅限虚构成年人互动叙事。所有参与角色设定必须明确<b>年满 18 周岁</b>，严禁生成任何涉未成年人违规内容。
-      </p>
-    </td>
-  </tr>
-</table>
+<!-- 苹果浅色规整安装提示条 -->
+<div align="left" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 20px; max-width: 860px; margin: 0 auto 20px auto; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
+  <div style="display: flex; align-items: center; margin-bottom: 4px;">
+    <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #0284c7; margin-right: 8px;"></span>
+    <span style="font-size: 13px; font-weight: 600; color: #334155;">原生 Skill 安装指南</span>
+  </div>
+  <p style="margin: 0; font-size: 12.5px; color: #64748b; line-height: 1.6;">
+    专为 <b>DeepSeek Harness</b> 打造（入口 <code>SKILL.md</code>）。请<b>完整克隆仓库</b>使用，单拷文件缺少后台状态机脚本与世界数据将无法运行。
+  </p>
+</div>
 
 </div>
 
