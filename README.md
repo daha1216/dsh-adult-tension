@@ -31,15 +31,11 @@
 <img src="./assets/interactive-slice-v5.svg" alt="dsh-adult-tension 体验切片" width="100%" style="max-width: 860px; margin: 12px 0 24px 0;" />
 
 ---
-## 📦 内置素材：从设定到角色的一整套世界库
+<img src="./assets/header-worlds-v1.svg" alt="内置世界库" width="100%" style="max-width: 860px; margin: 36px 0 14px 0;" />
 
 每次开局都不是干瘪的名词拼接，而是时代风土、身份权力、人际暗涌与微观动作的深度咬合。系统内置 **52 个世界框架** 与上千项微观素材，涵盖从历史正剧、都市暗潮到异界幻想的丰富舞台：
 
-* 🏛️ **历史正剧与风云**：盛唐夜市坊志、幕末町屋道场、一九二八芝加哥禁酒期黑帮……
-* ⚡ **近未来边缘与科幻**：赛博街区公共终端、星海边境生活站、废土修补集市……
-* 🏮 **异界契约与志怪**：契约城非人街坊、旧町神怪灯会、仙门藏书与驿镖……
-* 🎙️ **当代行业与市井**：传媒编辑室暗访、成年创作者艺术季、同人展录音协作……
-* 🍸 **都市暗流与高张力**：舞厅大班与乐台后台、片场棚与月份牌画室、打赏榜与最后一格、动捕棚与中之人、私房写真与底片归属、老澡堂打烊后的钟点……
+<img src="./assets/worlds-matrix-v1.svg" alt="52 套世界风土卡片矩阵" width="100%" style="max-width: 860px; margin: 16px 0 20px 0;" />
 
 <details>
 <summary><b>📜 点击展开：52 套世界框架完整名录</b></summary>
@@ -260,6 +256,7 @@ python scripts/qa.py --changed
 - **叙事素材与文档**（世界框架、素材池、文案模板、审查记录及各文档）：[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh)——可自由使用与改编（需署名），不得商用
 
 本项目仅面向虚构成年人互动叙事（18+）；许可条款不替代 README 中的合规声明。
+
 
 
 
