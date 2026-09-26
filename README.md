@@ -18,6 +18,13 @@
 <!-- 4 大核心特性展板（纯白瓷质 · 55% 冰川透蓝环境光） -->
 <img src="./assets/feature-grid-v7.svg" alt="dsh-adult-tension 核心特性展板" width="100%" style="max-width: 860px;" />
 
+<p align="center" style="margin: 18px auto 14px auto;">
+  <span style="display: inline-flex; align-items: center; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 4px 14px; box-shadow: 0 1px 2px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 12.5px; color: #475569;">
+    <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #0284c7; margin-right: 8px;"></span>
+    <b>原生 Agent Skill</b>&nbsp;· 专为 DeepSeek Harness 运行时打造
+  </span>
+</p>
+
 <!-- 极简低调微注脚 -->
 
 
