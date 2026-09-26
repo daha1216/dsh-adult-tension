@@ -21,7 +21,9 @@
 
 <br/><br/>
 
-<!-- 苹果现代控制台安装指南展卡 -->`n<img src="./assets/install-callout.svg" alt="dsh-adult-tension Installation Guide" width="100%" style="max-width: 860px; margin-top: 14px;" />
+<p align="center" style="font-size: 13px; color: #94a3b8; margin: 18px auto 8px auto;">
+  💡 原生适配 <b>DeepSeek Harness</b>（入口 <code>SKILL.md</code>）。请<b>完整克隆仓库</b>使用以保证 52 套世界与状态机正常运转。
+</p>
   <p style="margin: 0; font-size: 12.5px; color: #64748b; line-height: 1.6;">
     专为 <b>DeepSeek Harness</b> 打造（入口 <code>SKILL.md</code>）。请<b>完整克隆仓库</b>使用，单拷文件缺少后台状态机脚本与世界数据将无法运行。
   </p>
