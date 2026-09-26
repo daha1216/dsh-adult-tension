@@ -19,9 +19,7 @@
 <img src="./assets/feature-grid-v7.svg" alt="dsh-adult-tension 核心特性展板" width="100%" style="max-width: 860px;" />
 
 <!-- 极简低调微注脚 -->
-<p align="center" style="font-size: 13px; color: #94a3b8; margin: 20px auto 10px auto;">
-  💡 原生适配 <b>DeepSeek Harness</b>（入口 <code>SKILL.md</code>）。请<b>完整克隆仓库</b>使用以保证 52 套世界与状态机正常运转。
-</p>
+
 
 </div>
 

@@ -19,9 +19,7 @@
 <img src="./assets/feature-grid-v7-en.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
 
 <!-- Minimalist Subtle Footnote -->
-<p align="center" style="font-size: 13px; color: #94a3b8; margin: 20px auto 10px auto;">
-  💡 Native skill for <b>DeepSeek Harness</b> (entry: <code>SKILL.md</code>). Please <b>clone the full repository</b> to ensure autonomous state machine scripts work properly.
-</p>
+
 
 </div>
 
