@@ -26,7 +26,7 @@
 </div>
 
 <br/>
-## 🎬 体验切片
+<img src="./assets/header-slice.svg" alt="体验切片" width="100%" style="max-width: 860px; margin: 32px 0 12px 0;" />
 
 <img src="./assets/interactive-slice.svg" alt="dsh-adult-tension 体验切片" width="100%" style="max-width: 860px; margin: 12px 0 24px 0;" />
 
@@ -260,3 +260,4 @@ python scripts/qa.py --changed
 - **叙事素材与文档**（世界框架、素材池、文案模板、审查记录及各文档）：[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh)——可自由使用与改编（需署名），不得商用
 
 本项目仅面向虚构成年人互动叙事（18+）；许可条款不替代 README 中的合规声明。
+

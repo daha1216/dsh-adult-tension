@@ -232,3 +232,4 @@ This repository is dual-licensed by content type (see [LICENSE](./LICENSE) for d
 - **Narrative materials & documentation** (world frameworks, material pools, copy templates, review records, and docs): [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — free to use and adapt with attribution, non-commercial only
 
 This project is strictly for fictional adult interactive fiction (18+); the license terms do not replace the compliance statement in this README.
+
