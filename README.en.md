@@ -42,17 +42,27 @@ Every opening is a deep integration of era culture, institutional power, emotion
 * 🍸 **Urban Undercurrents & High Tension**: Ballroom manager & stage backstage, film studio & calendar atelier, livestream leaderboard & final tier, mocap studio & virtual performer, private photography & negative rights, old bathhouse after hours...
 
 <details>
-<summary><b>📜 Click to expand: Full Catalog of all 52 World Frameworks</b></summary>
+<summary><b>📜 Click to expand: Complete Catalog of 52 World Frameworks (Copy tags to start)</b></summary>
+<br/>
 
-| Genre Category | Full Framework List (52 Total) |
-| :--- | :--- |
-| **Urban Undercurrents & High Tension** | Ballroom Manager & Stage Backstage · Film Studio & Calendar Atelier · Credit Agency & Guarantor House · Old Bathhouse After Hours · Romance Ban & Fan Club · Steam Baths & Locker Room · Membership Ledger & The Ink Line · Livestream Leaderboard & Final Tier · Mocap Studio & Virtual Performer · Both Ends of the Class Bell · Measuring Tape & Tailor Archive · Private Photography & Negative Rights |
-| **Historical Drama & Turmoil** | Chang'an Night Market & Chronicle · Bakumatsu Machiya & Dojo · Prohibition Jazz & Newspapers · Foggy City Clocks & Dock Street · Meiji Tailoring & Translation Town · Republican Press & Craftsman Alley · Dynastic Guilds & Academy · Showa Corner Coffeehouse Tour · Xiangxi Mountain Trails & County Records · Wind-Blown Courier Station & Old Maps · Rear-Line Postal Route & Lanterns |
-| **Near-Future & Cyberpunk** | Cyber District & Public Terminal · Deep Space Frontier Life Station · Wasteland Post & Repair Bazaar · Winter Shelter Communal Life · Quarantine Station Residential Zone · Underground Utility Tunnel & City Repair Bureau · A Decade After Spiritual Awakening · Ruin Revival Town |
-| **Fantasy Contracts & Occult** | Immortal Sect Archive & Caravans · Contract City & Non-Human Enclaves · Old Town Spirits & Lantern Festival · Dungeon Safe-Floor Camp · Royal Workshop & Commission Street · Mirage Caravan Route & Ghost Market · Traveling Circus & Mechanical Stage · Foothill Guild Town Below Sect · Retired Hero Sanctuary |
-| **Modern Industries & Urban Life** | Media Editorial Room & Public Records · Doujin Enclave & Voice Recording · Adult Creators & Campus Art Season · Night School Credits & Open Lab · Corner Communal Living Circle · Cassette Tapes & Night Market Enclave · Y2K Web Neighborhood · Coastal Ferry & Observation Voyage · Local Crafts & Public Memory · Urban Leisure & Shared Lounge · Long-Distance Vacation & Small-Town Stay · Riverbank Rehabilitation & Mutual Living Residence |
+#### 🍸 Urban Undercurrents & High Tension (12 worlds)
+`Ballroom Manager & Backstage` · `Studio & Calendar Atelier` · `Credit Bureau & Surety Guild` · `Old Bathhouse After-Hours` · `Love Ban & Fan Meet` · `Steam Bathhouse & Locker Cubicles` · `Membership Ledger & Inked Line` · `Tipping Leaderboard & Final Cell` · `Mocap Studio & Performer Inside` · `Bell Between Class Hours` · `Measuring Tape & Fitting Dossier` · `Private Boudoir Photography & Negative Ownership`
 
-> 💡 **How to Start**: Found an intriguing world? Simply say: *"Start, Ballroom Manager & Stage Backstage High-Pressure Mode"* or *"Start, Cyber District"*, and the AI will immediately load the corresponding setting and unique character relationships.
+#### 🏛️ Historical Drama & Strife (11 worlds)
+`Chang'an Night Market & Ward Chronicle` · `Bakumatsu Dojo & Machiya` · `Prohibition Jazz & Newspaper` · `Fog City Clockwork & Port Wharf` · `Meiji Western Tailoring & Translation Town` · `Republican Newspaper & Craft Street` · `Dynasty Crafts & Academy` · `Showa Corner Cafe Pilgrimage` · `Xiangxi Mountain Road & Annals` · `Windswept Outpost & Vintage Map` · `Homefront Postal Route & Lanterns`
+
+#### ⚡ Cyberpunk & Sci-Fi Frontier (8 worlds)
+`Cyber District & Public Terminals` · `Deep-Space Outpost & Habitats` · `Wasteland Bazaar & Repair Stalls` · `Winter Bunker Public Life` · `Quarantine Station & Living Quarters` · `Underground Utility Corridor & City Repair Bureau` · `Ten Years After Spiritual Awakening` · `Ruins Revival Township`
+
+#### 🏮 Dark Fantasy & Monster Lore (9 worlds)
+`Immortal Archives & Courier Escort` · `Pact City Non-human Quarter` · `Old Town Yokai Lantern Fair` · `Dungeon Safe-Floor Camp` · `Capital Workshop & Commission Street` · `Mirage Trade Route & Ghost Market` · `Traveling Circus & Clockwork Stage` · `Immortal Sect Town Below` · `City of Retired Heroes`
+
+#### 🎙️ Modern Professions & Urban Life (12 worlds)
+`Media Editorial Undercover & Public Records` · `Doujin Street & Audio Collaboration` · `Adult Creators & Campus Art Season` · `Night School Credits & Open Lab` · `Corner Communal Life Circle` · `Cassette & Night Market Street` · `Millennium Web Neighbourhood` · `Coastal Ferry & Observation Journey` · `Local Trades & Public Memory` · `Urban Leisure & Shared Reception` · `Long-haul Vacation & Small-town Stay` · `Riverbank Recovery & Mutual Aid Lodge`
+
+---
+
+> 💡 **How to Start**: Found a world you like? Simply message: **"Initialize, Ballroom Manager & Backstage Extreme Mode"** or **"Initialize, Cyber District"**, and the AI will automatically load that setting and its character web.
 </details>
 
 ---
@@ -167,59 +177,27 @@ Other contemporary models also work smoothly; longer roleplays increasingly rely
 ## 🛠️ CLI Helper Tools & Underlying Architecture
 
 <details>
-<summary>Click to expand: Local CLI tools, state contracts, and maintenance specifications</summary>
+<summary><b>📜 Click to expand: Complete Catalog of 52 World Frameworks (Copy tags to start)</b></summary>
+<br/>
 
-Regular players do not need to run scripts. These utilities are for deterministic seeding, generating twist directions, inspecting runtime state, or validating data integrity:
+#### 🍸 Urban Undercurrents & High Tension (12 worlds)
+`Ballroom Manager & Backstage` · `Studio & Calendar Atelier` · `Credit Bureau & Surety Guild` · `Old Bathhouse After-Hours` · `Love Ban & Fan Meet` · `Steam Bathhouse & Locker Cubicles` · `Membership Ledger & Inked Line` · `Tipping Leaderboard & Final Cell` · `Mocap Studio & Performer Inside` · `Bell Between Class Hours` · `Measuring Tape & Fitting Dossier` · `Private Boudoir Photography & Negative Ownership`
 
-```bash
-# Install runtime dependencies (Python 3.10+; requires only PyYAML)
-python -m pip install -r requirements.txt
+#### 🏛️ Historical Drama & Strife (11 worlds)
+`Chang'an Night Market & Ward Chronicle` · `Bakumatsu Dojo & Machiya` · `Prohibition Jazz & Newspaper` · `Fog City Clockwork & Port Wharf` · `Meiji Western Tailoring & Translation Town` · `Republican Newspaper & Craft Street` · `Dynasty Crafts & Academy` · `Showa Corner Cafe Pilgrimage` · `Xiangxi Mountain Road & Annals` · `Windswept Outpost & Vintage Map` · `Homefront Postal Route & Lanterns`
 
-# Install testing and maintenance dependencies
-python -m pip install -r requirements-dev.txt
+#### ⚡ Cyberpunk & Sci-Fi Frontier (8 worlds)
+`Cyber District & Public Terminals` · `Deep-Space Outpost & Habitats` · `Wasteland Bazaar & Repair Stalls` · `Winter Bunker Public Life` · `Quarantine Station & Living Quarters` · `Underground Utility Corridor & City Repair Bureau` · `Ten Years After Spiritual Awakening` · `Ruins Revival Township`
 
-# Fully automated opening generation (backend for the "Start" command)
-python scripts/build_opening.py --complete --opening-mode daily --seed 42
-# Replace "daily" with "pressure" for high-tension mode.
+#### 🏮 Dark Fantasy & Monster Lore (9 worlds)
+`Immortal Archives & Courier Escort` · `Pact City Non-human Quarter` · `Old Town Yokai Lantern Fair` · `Dungeon Safe-Floor Camp` · `Capital Workshop & Commission Street` · `Mirage Trade Route & Ghost Market` · `Traveling Circus & Clockwork Stage` · `Immortal Sect Town Below` · `City of Retired Heroes`
 
-# Generate 2–3 mid-game plot twists
-python scripts/roll_opening.py --twist --seed 42
+#### 🎙️ Modern Professions & Urban Life (12 worlds)
+`Media Editorial Undercover & Public Records` · `Doujin Street & Audio Collaboration` · `Adult Creators & Campus Art Season` · `Night School Credits & Open Lab` · `Corner Communal Life Circle` · `Cassette & Night Market Street` · `Millennium Web Neighbourhood` · `Coastal Ferry & Observation Journey` · `Local Trades & Public Memory` · `Urban Leisure & Shared Reception` · `Long-haul Vacation & Small-town Stay` · `Riverbank Recovery & Mutual Aid Lodge`
 
-# Human-readable state HUD (backend for "Status" command)
-python scripts/live_slice.py --session <session> --human
+---
 
-# Query session state and specific events (session ID from opening brief)
-python scripts/live_slice.py --session <session> --format json
-python scripts/live_slice.py --session <session> --event <ID>
-
-# Commit a turn with state token validation
-python scripts/commit_turn.py --session <session> --expected-state-token <state_token> --patch '<json>'
-
-# Validate YAML save structure and state schema
-python scripts/validate_state.py path/to/save.yaml
-
-# List or inspect named save slots
-python scripts/manage_saves.py list
-python scripts/manage_saves.py load main
-```
-
-### 📁 Repository Structure
-
-| Path | Description |
-| --- | --- |
-| `SKILL.md` | Core runtime execution rules (master prompt) |
-| `commands.yaml` | Master command registry: trigger words, behaviors, and CLI bindings |
-| `references/` | Guides for opening pipelines, character creation, world simulation, and saves |
-| `scripts/` | Procedural rollers, turn committers, state slicers, and save management utilities |
-| `scripts/data/` | Runtime datasets (`world_frameworks.yaml` is auto-generated; do not edit directly) |
-| `authoring/frameworks/` | Individual world framework authoring source files |
-| `maintenance/` | Manifest responsibilities, review decisions, baseline locks, and playtest evidence |
-| `saves/` | Active working sessions under `sessions/`, named slots under `slots/` |
-| `tests/` | Automated test suites and documentation consistency checks |
-| `agents/` | AI tool configurations (e.g., `openai.yaml`) |
-
-For maintenance workflows and custom content expansion guidelines, consult [`references/加内容.md`](./references/加内容.md) and [`references/素材架构.md`](./references/素材架构.md).
-
+> 💡 **How to Start**: Found a world you like? Simply message: **"Initialize, Ballroom Manager & Backstage Extreme Mode"** or **"Initialize, Cyber District"**, and the AI will automatically load that setting and its character web.
 </details>
 
 ---
@@ -232,6 +210,7 @@ This repository is dual-licensed by content type (see [LICENSE](./LICENSE) for d
 - **Narrative materials & documentation** (world frameworks, material pools, copy templates, review records, and docs): [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — free to use and adapt with attribution, non-commercial only
 
 This project is strictly for fictional adult interactive fiction (18+); the license terms do not replace the compliance statement in this README.
+
 
 
 
