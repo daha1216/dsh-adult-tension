@@ -1,19 +1,19 @@
-<svg viewBox="0 0 860 216" width="860" height="216" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 860 196" width="860" height="196" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Ceramic white gradient background -->
-    <linearGradient id="cleanBgEn" x1="0%" y1="0%" x2="0%" y2="100%">
+    <!-- Ceramic white plate -->
+    <linearGradient id="realBgEn" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
       <stop offset="100%" stop-color="#fafbfc" />
     </linearGradient>
 
-    <!-- Subtle gray border -->
-    <linearGradient id="cleanBdrEn" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- Subtle border -->
+    <linearGradient id="realBdrEn" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#e2e8f0" />
       <stop offset="100%" stop-color="#cbd5e1" />
     </linearGradient>
 
-    <filter id="cleanShdwEn" x="-5%" y="-5%" width="110%" height="115%">
-      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.03" />
+    <filter id="realShdwEn" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.03" />
     </filter>
   </defs>
 
@@ -29,52 +29,54 @@
     }
   </style>
 
-  <!-- Main Card Plate (840 centered) -->
+  <!-- Main Card Plate -->
   <g transform="translate(10, 6)">
-    <rect width="840" height="204" rx="14" fill="url(#cleanBgEn)" stroke="url(#cleanBdrEn)" stroke-width="1.1" filter="url(#cleanShdwEn)" />
+    <rect width="840" height="184" rx="12" fill="url(#realBgEn)" stroke="url(#realBdrEn)" stroke-width="1.1" filter="url(#realShdwEn)" />
 
-    <!-- Left 3.5px Glacier Blue Accent Bar -->
-    <rect x="0" y="16" width="3.5" height="172" rx="1.75" fill="#38bdf8" />
-
-    <g transform="translate(28, 24)">
-      <!-- Top HUD: Scene & Live Telemetry -->
-      <g transform="translate(0, 0)">
-        <text class="font-sans" font-size="12.5" font-weight="700" fill="#0284c7">Tang Dynasty · High-Tension Encounter</text>
-        <text x="270" y="0" class="font-sans" font-size="12" font-weight="400" fill="#94a3b8">Dali Temple Archives · Curfew Imminent</text>
-        <text x="784" y="0" class="font-mono" font-size="11.5" font-weight="500" fill="#64748b" text-anchor="end">
-          Tension 85% · Dist 0.4m · Door Latched
+    <g transform="translate(24, 20)">
+      <!-- Turn 1: Player Start -->
+      <g transform="translate(0, 10)">
+        <text class="font-sans" font-size="13" fill="#1e293b">
+          <tspan font-weight="700" fill="#0f172a">YOU: </tspan>
+          <tspan font-family="'SF Mono', Menlo, monospace" font-size="12" fill="#0284c7" font-weight="600">Initialize, Tang Dynasty Extreme Mode</tspan>
         </text>
       </g>
 
-      <!-- Thin Divider Line -->
-      <line x1="0" y1="16" x2="784" y2="16" stroke="#f1f5f9" stroke-width="1" />
+      <!-- Turn 2: Real AI Delivery (World / NPC / Story) -->
+      <g transform="translate(0, 38)">
+        <text class="font-sans" font-size="13" fill="#1e293b">
+          <tspan font-weight="700" fill="#0f172a">AI: </tspan>
+        </text>
 
-      <!-- Dialogue & Live Action -->
-      <g transform="translate(0, 42)">
-        <!-- Beat 1 -->
-        <text class="font-sans" font-size="12.5" fill="#475569">
+        <g transform="translate(28, 0)">
+          <!-- World -->
+          <text class="font-sans" font-size="12.5" fill="#334155">
+            <tspan font-weight="700" fill="#475569">[World]</tspan>
+            <tspan fill="#334155">Tang Dynasty Chang'an. Curfew approaches; the six-hundredth drumbeat fades into silence.</tspan>
+          </text>
+
+          <!-- NPC -->
+          <text y="24" class="font-sans" font-size="12.5" fill="#334155">
+            <tspan font-weight="700" fill="#475569">[NPC]</tspan>
+            <tspan fill="#334155">Shen Qinglan, Dali Temple clerk, clutching a torn ledger in her silk sleeve.</tspan>
+          </text>
+
+          <!-- Story -->
+          <text y="48" class="font-sans" font-size="12.5" fill="#334155">
+            <tspan font-weight="700" fill="#475569">[Story]</tspan>
+            <tspan fill="#334155">Back pressed to the archive door, eyeing your saber: </tspan>
+            <tspan font-weight="700" fill="#0284c7">“You are NOT on duty tonight... STOP!”</tspan>
+            <tspan fill="#334155">The heavy brass bolt has been quietly latched behind her.</tspan>
+          </text>
+        </g>
+      </g>
+
+      <!-- Turn 3: Player Action -->
+      <g transform="translate(0, 134)">
+        <text class="font-sans" font-size="13" fill="#1e293b">
           <tspan font-weight="700" fill="#0f172a">YOU: </tspan>
-          <tspan font-family="'SF Mono', Menlo, monospace" font-size="12" fill="#334155">Initialize, Tang Dynasty · Extreme Tension Mode</tspan>
-        </text>
-
-        <!-- Beat 2 -->
-        <text y="32" class="font-sans" font-size="12.5" fill="#334155">
-          <tspan font-weight="700" fill="#0f172a">Shen Qinglan</tspan>
-          <tspan font-size="12" fill="#64748b"> (Archive Clerk)</tspan>
-          <tspan fill="#475569">: Back pressed to door, torn ledger clutched in silk sleeve—</tspan>
-          <tspan font-weight="700" fill="#0284c7">“You are NOT on duty tonight... STOP!”</tspan>
-        </text>
-
-        <!-- Beat 3 -->
-        <text y="64" class="font-sans" font-size="12.5" fill="#334155">
-          <tspan font-weight="700" fill="#0284c7">YOU: </tspan>
-          <tspan fill="#475569">Step into her space, slamming hand onto the door beside her ear: </tspan>
-          <tspan font-weight="700" fill="#0369a1">“Hand over the ledger, or I take you out of here right now.”</tspan>
-        </text>
-
-        <!-- Footnote -->
-        <text y="96" class="font-sans" font-size="11.5" fill="#94a3b8">
-          (Engine Footprint: NPC interest defense triggered · 0% submission · Patrol footsteps approaching...)
+          <tspan fill="#334155">Step forward, pressing your hand to the door beside her: </tspan>
+          <tspan font-weight="700" fill="#0284c7">“Hand over the ledger, or I take you out of here right now.”</tspan>
         </text>
       </g>
     </g>
