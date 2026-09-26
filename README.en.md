@@ -10,9 +10,7 @@
 </p>
 
 <!-- Top Apple Ceramic Header & 4 Capsule Badges -->
-<img src="./assets/header-capsules-en.svg" alt="dsh-adult-tension Header" width="100%" style="max-width: 860px;" />
-
-<!-- Core Hero Banner (Apple Minimalist Slogan Board) -->`n<img src="./assets/hero-slogan-en.svg" alt="dsh-adult-tension Hero Slogan" width="100%" style="max-width: 860px; margin: 8px 0 16px 0;" />
+<img src="./assets/hero-banner-en.svg" alt="dsh-adult-tension Hero" width="100%" style="max-width: 860px; margin-bottom: 24px;" />
 
 <!-- 4 Core Feature Cards -->
 <img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />

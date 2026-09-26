@@ -10,9 +10,7 @@
 </p>
 
 <!-- 顶部 Apple 瓷质大标题与 4 胶囊标签展台 -->
-<img src="./assets/header-capsules.svg" alt="dsh-adult-tension Header" width="100%" style="max-width: 860px;" />
-
-<!-- 核心金句展台（Apple 极简通透矢量展板） -->`n<img src="./assets/hero-slogan.svg" alt="dsh-adult-tension Hero Slogan" width="100%" style="max-width: 860px; margin: 8px 0 16px 0;" />
+<img src="./assets/hero-banner.svg" alt="dsh-adult-tension Hero" width="100%" style="max-width: 860px; margin-bottom: 24px;" />
 
 <!-- 4 大核心特性展板（55% 冰川透蓝环境微光） -->
 <img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension 核心特性展板" width="100%" style="max-width: 860px;" />
