@@ -10,7 +10,11 @@
 </p>
 
 <!-- Top Apple Ceramic Header & 4 Capsule Badges -->
-<img src="./assets/hero-banner-en.svg" alt="dsh-adult-tension Hero" width="100%" style="max-width: 860px; margin-bottom: 24px;" />
+<!-- Standalone Open Hero Title & Core Slogan -->
+<img src="./assets/title-hero.svg" alt="dsh-adult-tension Title" width="100%" style="max-width: 860px; margin: 4px 0 10px 0;" />
+
+<!-- 4 Core Feature Capsules -->
+<img src="./assets/capsules-bar-en.svg" alt="dsh-adult-tension Capsules" width="100%" style="max-width: 860px; margin-bottom: 24px;" />
 
 <!-- 4 Core Feature Cards -->
 <img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
