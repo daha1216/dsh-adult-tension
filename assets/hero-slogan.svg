@@ -1,0 +1,97 @@
+<svg viewBox="0 0 860 114" width="860" height="114" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 纯白瓷质渐变底板 -->
+    <linearGradient id="sloganPlate" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#fafbfc" />
+    </linearGradient>
+
+    <!-- 苹果精细微灰边框 -->
+    <linearGradient id="sloganBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+
+    <!-- 55% 冰川透蓝环境微晕 -->
+    <linearGradient id="sloganAura" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.14" />
+      <stop offset="55%" stop-color="#7dd3fc" stop-opacity="0.11" />
+      <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0.08" />
+    </linearGradient>
+
+    <filter id="auraBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="30" result="blur" />
+    </filter>
+
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#0f172a" flood-opacity="0.025" />
+    </filter>
+  </defs>
+
+  <style>
+    .font-sans {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-mono {
+      font-family: "SF Mono", "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, monospace;
+      font-variant-numeric: tabular-nums;
+    }
+    .font-title {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+
+  <!-- 纯白瓷质主卡底板 -->
+  <rect x="2" y="2" width="856" height="110" rx="14" fill="url(#sloganPlate)" stroke="url(#sloganBorder)" stroke-width="1.1" filter="url(#cardShadow)" />
+
+  <!-- 右上角 55% 冰川透蓝环境光晕 -->
+  <g clip-path="url(#sloganClip)">
+    <clipPath id="sloganClip">
+      <rect x="2" y="2" width="856" height="110" rx="14" />
+    </clipPath>
+    <circle cx="800" cy="30" r="130" fill="url(#sloganAura)" filter="url(#auraBlur)" />
+    <circle cx="60" cy="90" r="90" fill="#f0f9ff" opacity="0.6" filter="url(#auraBlur)" />
+  </g>
+
+  <!-- 顶部微字胶囊标 -->
+  <g transform="translate(430, 26)">
+    <rect x="-142" y="-12" width="284" height="20" rx="10" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.8" />
+    <text x="0" y="2" class="font-mono" font-size="9.5" font-weight="600" fill="#64748b" text-anchor="middle" letter-spacing="1">
+      PERSISTENT ADULT INTERACTIVE NARRATIVE
+    </text>
+  </g>
+
+  <!-- 主标语 (大字号 · 冷板岩灰 #334155 · 饱满视觉锚点) -->
+  <text x="430" y="66" class="font-title" font-size="20" fill="#334155" text-anchor="middle">
+    专为高张力、强连续性的成人互动叙事打造
+  </text>
+
+  <!-- 底部 4 个轻柔微标签组 (平滑中灰 #64748b 配微圆点) -->
+  <g transform="translate(430, 93)" class="font-sans" font-size="12" fill="#64748b">
+    <!-- Tag 1: 18+ 深度破甲 -->
+    <text x="-258" y="0" text-anchor="middle">
+      <tspan fill="#e11d48">●</tspan> 18+ 深度语境破甲
+    </text>
+
+    <!-- Tag 2: 活人感 NPC -->
+    <text x="-86" y="0" text-anchor="middle">
+      <tspan fill="#7c3aed">●</tspan> 活人感 NPC 拒绝迎合
+    </text>
+
+    <!-- Tag 3: 52 套世界 -->
+    <text x="86" y="0" text-anchor="middle">
+      <tspan fill="#0284c7">●</tspan> 52 套世界随心开局
+    </text>
+
+    <!-- Tag 4: 零漂移状态机 -->
+    <text x="258" y="0" text-anchor="middle">
+      <tspan fill="#16a34a">●</tspan> 零漂移自运行状态机
+    </text>
+  </g>
+</svg>

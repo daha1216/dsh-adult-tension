@@ -12,15 +12,7 @@
 <!-- 顶部 Apple 瓷质大标题与 4 胶囊标签展台 -->
 <img src="./assets/header-capsules.svg" alt="dsh-adult-tension Header" width="100%" style="max-width: 860px;" />
 
-<!-- 核心金句展台（工业级 Apple 排版：微副标 + 饱满中灰聚焦） -->
-<div align="center" style="max-width: 760px; margin: 16px auto 26px auto; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif;">
-  <p style="font-size: 17.5px; font-weight: 600; color: #334155; line-height: 1.5; margin: 0 0 6px 0; letter-spacing: -0.2px;">
-    专为高张力、强连续性的成人互动叙事打造
-  </p>
-  <p style="font-size: 13.5px; font-weight: 400; color: #64748b; line-height: 1.6; margin: 0;">
-    自带 18+ 深度破甲 · 活人感 NPC 拒绝迎合 · 52 套世界随心开局 · 零漂移自运行状态机
-  </p>
-</div>
+<!-- 核心金句展台（Apple 极简通透矢量展板） -->`n<img src="./assets/hero-slogan.svg" alt="dsh-adult-tension Hero Slogan" width="100%" style="max-width: 860px; margin: 8px 0 16px 0;" />
 
 <!-- 4 大核心特性展板（55% 冰川透蓝环境微光） -->
 <img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension 核心特性展板" width="100%" style="max-width: 860px;" />

@@ -12,15 +12,7 @@
 <!-- Top Apple Ceramic Header & 4 Capsule Badges -->
 <img src="./assets/header-capsules-en.svg" alt="dsh-adult-tension Header" width="100%" style="max-width: 860px;" />
 
-<!-- Core Hero Banner -->
-<div align="center" style="max-width: 760px; margin: 16px auto 26px auto; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif;">
-  <p style="font-size: 17.5px; font-weight: 600; color: #334155; line-height: 1.5; margin: 0 0 6px 0; letter-spacing: -0.2px;">
-    Tailored for High-Tension, Persistent Mature Interactive Storytelling
-  </p>
-  <p style="font-size: 13.5px; font-weight: 400; color: #64748b; line-height: 1.6; margin: 0;">
-    Built-in 18+ contextual desensitization · Living NPCs refusing to cater · 52 curated worlds · Zero-drift state machine
-  </p>
-</div>
+<!-- Core Hero Banner (Apple Minimalist Slogan Board) -->`n<img src="./assets/hero-slogan-en.svg" alt="dsh-adult-tension Hero Slogan" width="100%" style="max-width: 860px; margin: 8px 0 16px 0;" />
 
 <!-- 4 Core Feature Cards -->
 <img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
