@@ -17,7 +17,7 @@
 <img src="./assets/capsules-bar.svg" alt="dsh-adult-tension Capsules" width="100%" style="max-width: 860px; margin-bottom: 24px;" />
 
 <!-- 4 大核心特性展板（55% 冰川透蓝环境微光） -->
-<img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension 核心特性展板" width="100%" style="max-width: 860px;" />
+<img src="./assets/feature-grid-v5.svg" alt="dsh-adult-tension 核心特性展板" width="100%" style="max-width: 860px;" />
 
 <br/><br/>
 
