@@ -9,25 +9,19 @@
   </span>
 </p>
 
-<!-- Top Apple Ceramic Header & 4 Capsule Badges -->
 <!-- Standalone Open Hero Title & Core Slogan -->
-<img src="./assets/title-hero.svg" alt="dsh-adult-tension Title" width="100%" style="max-width: 860px; margin: 4px 0 10px 0;" />
+<img src="./assets/title-hero-en.svg" alt="dsh-adult-tension Title" width="100%" style="max-width: 860px; margin: 4px 0 10px 0;" />
 
 <!-- 4 Core Feature Capsules -->
 <img src="./assets/capsules-bar-en.svg" alt="dsh-adult-tension Capsules" width="100%" style="max-width: 860px; margin-bottom: 24px;" />
 
-<!-- 4 Core Feature Cards -->
+<!-- 4 Core Feature Cards (Pure Porcelain & Glacier Aura) -->
 <img src="./assets/feature-grid-v7-en.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
 
-<br/><br/>
-
-<p align="center" style="font-size: 13px; color: #94a3b8; margin: 18px auto 8px auto;">
+<!-- Minimalist Subtle Footnote -->
+<p align="center" style="font-size: 13px; color: #94a3b8; margin: 20px auto 10px auto;">
   💡 Native skill for <b>DeepSeek Harness</b> (entry: <code>SKILL.md</code>). Please <b>clone the full repository</b> to ensure autonomous state machine scripts work properly.
 </p>
-  <p style="margin: 0; font-size: 12.5px; color: #64748b; line-height: 1.6;">
-    Tailored for <b>DeepSeek Harness</b> (entry: <code>SKILL.md</code>). Please <b>clone the entire repository</b>; copying single files without scripts and world assets will prevent execution.
-  </p>
-</div>
 
 </div>
 
