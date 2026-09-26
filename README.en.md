@@ -28,19 +28,9 @@
 <br/>
 ## 🎬 Gameplay Slice
 
-*Note: Below is an ultra-condensed slice demonstrating the interactive logic. In actual gameplay, narration is nuanced, atmospheric, and psychological, far richer than a brief summary.*
-
-> **You**: `Start, High-Pressure Mode in Tang Dynasty Chang'an`
-> 
-> **AI**:  
-> **【Worldview】** Tang Dynasty Chang'an. Curfew is imminent, the 600th night-watch drum fading into a heavy silence.  
-> **【Character】** Shen Qinglan, court clerk of the Judicial Review (Dali Si), her plain silk sleeve clutching torn ledger fragments.  
-> **【Story Beat】** She backs against the archive vault doors, warily eyeing the blade at your hip: "You weren't scheduled for patrol tonight... Halt." The wooden deadbolt behind her has already been quietly slid into place.  
-> 
-> **You**: I step forward, pressing my hand flat against the door panel beside her ear, and whisper: "Hand over the ledger, or I'm taking you out of here right now."
+<img src="./assets/interactive-slice-en.svg" alt="dsh-adult-tension Gameplay Slice" width="100%" style="max-width: 860px; margin: 12px 0 24px 0;" />
 
 ---
-
 ## 📦 Built-in Assets: A Complete World Library
 
 Every opening is a deep integration of era culture, institutional power, emotional undercurrents, and micro-actions rather than generic prompt generation. The system incorporates **52 World Frameworks** and thousands of granular elements:
