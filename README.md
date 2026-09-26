@@ -1,11 +1,11 @@
 <div align="center">
 
-<h1 align="center" style="border-bottom: none; font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #0f172a;">
+<h1 align="center" style="border-bottom: none; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #334155;">
   🎭 dsh-adult-tension
 </h1>
 
 <!-- 苹果浅色状态药丸标签组 (与个人主页设计语言统一) -->
-<p align="center" style="margin-top: 4px; margin-bottom: 16px;">
+<p align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif; margin-top: 4px; margin-bottom: 16px;">
   <code>📱 DeepSeek Harness 原生 Skill</code> &nbsp;·&nbsp;
   <code>🔞 18+ 深度语境破甲</code> &nbsp;·&nbsp;
   <code>🌐 52 套世界状态机</code> &nbsp;·&nbsp;
@@ -18,19 +18,19 @@
 </p>
 
 <!-- 核心金句展台 (居中无界沉浸感) -->
-<p align="center" style="font-size: 15px; font-weight: 500; color: #334155; line-height: 1.6; max-width: 720px; margin-top: 0; margin-bottom: 28px;">
+<p align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 15px; font-weight: 400; color: #475569; line-height: 1.65; max-width: 720px; margin-top: 0; margin-bottom: 28px;">
   专为高张力、强连续性的成人互动叙事打造。<br/>
   自带 18+ 深度破甲，活人感 NPC 拒绝迎合，52 套世界随心开局，世界自行运转不漂移。
 </p>
 
 <!-- 苹果 2×2 瓷白特性微展板 (带 55% 冰川透蓝环境光) -->
-<img src="./assets/feature-grid-v3.svg" alt="dsh-adult-tension 核心特性展板" width="100%" />
+<img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension 核心特性展板" width="100%" />
 
 <br/><br/>
 
 <!-- 苹果浅色规整提示条 (纯净灰边，无生硬感叹号色块) -->
-<div align="left" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 20px; max-width: 820px; margin: 0 auto 20px auto; box-shadow: 0 1px 3px rgba(15,23,42,0.03);">
-  <p style="margin: 0; font-size: 13px; color: #334155; line-height: 1.6;">
+<div align="left" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 22px; max-width: 820px; margin: 0 auto 20px auto; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
+  <p style="margin: 0; font-size: 13px; color: #475569; line-height: 1.6;">
     💡 <b>安装提示</b>：本项目为 <b>DeepSeek Harness</b> 原生 Skill（入口 <code>SKILL.md</code>，其他 Agent 需自测）。请<b>完整克隆仓库</b>使用，单拷文件缺少后台脚本与数据将无法运行。
   </p>
   <p style="margin: 8px 0 0 0; font-size: 12.5px; color: #64748b; line-height: 1.5;">

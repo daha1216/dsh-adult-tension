@@ -1,26 +1,46 @@
-# 🎭 adult-tension
+<div align="center">
 
-[![Host: DeepSeek Harness](https://img.shields.io/badge/Host-DeepSeek_Harness-blue?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
-[![Content: 18+ Adult RP](https://img.shields.io/badge/Content-18%2B_Adult_RP-critical?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
+<h1 align="center" style="border-bottom: none; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #334155;">
+  🎭 dsh-adult-tension
+</h1>
 
-[English](./README.en.md) · [简体中文](./README.md)
+<!-- Apple-style status pills -->
+<p align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif; margin-top: 4px; margin-bottom: 16px;">
+  <code>📱 DeepSeek Harness Native Skill</code> &nbsp;·&nbsp;
+  <code>🔞 18+ Mature Roleplay</code> &nbsp;·&nbsp;
+  <code>🌐 52 World State Machines</code> &nbsp;·&nbsp;
+  <code>🧠 Living NPCs with Autonomy</code>
+</p>
 
-> **Tailored for High-Tension, Persistent Mature Interactive Storytelling** — Built-in 18+ contextual desensitization, living NPCs who refuse to be mere "yes-men", 52 rich world frameworks, and an autonomous world timeline that never drifts.
+<!-- Language switch link -->
+<p align="center" style="font-size: 13px; color: #64748b; margin-top: -6px; margin-bottom: 24px;">
+  <a href="./README.en.md" style="font-weight: 600; color: #0284c7; text-decoration: none;">English</a> &nbsp;·&nbsp; <a href="./README.md" style="color: #64748b; text-decoration: none;">简体中文</a>
+</p>
 
-* 🔓 **Built-in 18+ Desensitization, Full Freedom of Expression**  
-  Context-aware narrative framing eliminates mechanical refusals and immersion-breaking moralizing. Characters authentically face intense conflict, intimacy, leverage, and moral ambiguity.
-* 🧠 **Living NPCs with Autonomy and Personal Boundaries**  
-  NPCs maintain persistent memories, stances, and self-interests. They test boundaries, hesitate, push back, refuse, and even pursue agendas behind your back—never acting as passive props.
-* 🌐 **52 Curated World Frameworks, Thousands of Interlocking Assets**  
-  From Republican-era espionage and near-future cyberpunk to classical dark fantasy. Deeply interlocks era lore, high-stakes dilemmas, and physical micro-actions for virtually non-repeating stories.
-* ⏳ **Autonomous World Pacing, Full-Dimensional Checkpoint Resumes**  
-  Time flows naturally while off-screen events are continuously simulated. Lightweight YAML saves let you resume long-term plotlines from the exact point without amnesia, rerolling, or drift.
+<!-- Core hero quote -->
+<p align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 15px; font-weight: 400; color: #475569; line-height: 1.65; max-width: 720px; margin-top: 0; margin-bottom: 28px;">
+  Tailored for high-tension, persistent mature interactive storytelling.<br/>
+  Built-in 18+ contextual desensitization, living NPCs who refuse to be mere "yes-men", 52 rich worlds, and zero-drift autonomous state evolution.
+</p>
 
-> 💡 **Installation Note**: This project is a native **DeepSeek Harness** Skill (entry point: `SKILL.md`; compatibility with other agents must be self-tested). Please **clone the entire repository**; copying single files without the supporting scripts and data files will prevent it from running.  
-> ⚠️ **Compliance Notice (18+ Only)**: Exclusively for fictional adult interactions. All participating characters must be unambiguously 18 years of age or older.
+<!-- Apple 2x2 Feature Board -->
+<img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension Core Features" width="100%" />
 
----
+<br/><br/>
 
+<!-- Apple clean callout note -->
+<div align="left" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 22px; max-width: 820px; margin: 0 auto 20px auto; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
+  <p style="margin: 0; font-size: 13px; color: #475569; line-height: 1.6;">
+    💡 <b>Installation Note</b>: This project is a native <b>DeepSeek Harness</b> Skill (entry point: <code>SKILL.md</code>, other agents must self-test). Please <b>clone the entire repository</b>; copying single files without the supporting scripts and data will prevent it from running.
+  </p>
+  <p style="margin: 8px 0 0 0; font-size: 12.5px; color: #64748b; line-height: 1.5;">
+    ⚠️ <b>Compliance Notice (18+ Only)</b>: Exclusively for fictional adult interactions. All participating characters must be explicitly 18 years of age or older.
+  </p>
+</div>
+
+</div>
+
+<br/>
 ## 🎬 Gameplay Slice
 
 *Note: Below is an ultra-condensed slice demonstrating the interactive logic. In actual gameplay, narration is nuanced, atmospheric, and psychological, far richer than a brief summary.*
