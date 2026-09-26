@@ -1,46 +1,25 @@
-<div align="center">
+# 🎭 adult-tension
 
-<h1 align="center" style="border-bottom: none; font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #0f172a;">
-  🎭 dsh-adult-tension
-</h1>
+[![Host: DeepSeek Harness](https://img.shields.io/badge/Host-DeepSeek_Harness-blue?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
+[![Content: 18+ Adult RP](https://img.shields.io/badge/Content-18%2B_Adult_RP-critical?style=flat-square)](https://github.com/daha1216/dsh-adult-tension)
 
-<!-- 苹果浅色状态药丸标签组 (与个人主页设计语言统一) -->
-<p align="center" style="margin-top: 4px; margin-bottom: 16px;">
-  <code>📱 DeepSeek Harness 原生 Skill</code> &nbsp;·&nbsp;
-  <code>🔞 18+ 深度语境破甲</code> &nbsp;·&nbsp;
-  <code>🌐 52 套世界状态机</code> &nbsp;·&nbsp;
-  <code>🧠 活人感独立意志</code>
-</p>
+[简体中文](./README.md) · [English](./README.en.md)
 
-<!-- 语言切换极简小链接 -->
-<p align="center" style="font-size: 13px; color: #64748b; margin-top: -6px; margin-bottom: 24px;">
-  <a href="./README.md" style="font-weight: 600; color: #0284c7; text-decoration: none;">简体中文</a> &nbsp;·&nbsp; <a href="./README.en.md" style="color: #64748b; text-decoration: none;">English</a>
-</p>
+> **专为高张力、强连续性的成人互动叙事打造**——自带 18+ 深度破甲，活人感 NPC 拒绝迎合，52 套世界随心开局，世界自行运转不漂移。
 
-<!-- 核心金句展台 (居中无界沉浸感) -->
-<p align="center" style="font-size: 15px; font-weight: 500; color: #334155; line-height: 1.6; max-width: 720px; margin-top: 0; margin-bottom: 28px;">
-  专为高张力、强连续性的成人互动叙事打造。<br/>
-  自带 18+ 深度破甲，活人感 NPC 拒绝迎合，52 套世界随心开局，世界自行运转不漂移。
-</p>
+* 🔓 **自带18+破甲，尺度全放开**  
+  内置脱敏叙事与语境铺垫，彻底告别机械拒绝与出戏说教，角色敢于直面冲突、暧昧与利益较量。
+* 🧠 **活人感 NPC，有底线拒迎合**  
+  NPC 拥有独立记忆与立场，会试探、犹豫、拒绝，甚至在你离开后暗中行动，绝不做被动顺从的工具人。
+* 🌐 **52 套现成世界，上千项素材咬合**  
+  从民国谍战、赛博街区到古典志怪，深度咬合时代风土、处境困境与微观动作，每次开局都是新剧本。
+* ⏳ **世界自行运转，全维原点续玩**  
+  时间自然流逝，离屏事件按时推演；随时用轻量 YAML 存档，长线剧情不失忆、不重掷、不漂移。
 
-<!-- 苹果 2×2 瓷白特性微展板 (带 55% 冰川透蓝环境光) -->
-<img src="./assets/feature-grid.svg" alt="dsh-adult-tension 核心特性展板" width="100%" />
+> 💡 **安装提示**：本项目为 **DeepSeek Harness** 原生 Skill（入口 `SKILL.md`，其他 Agent 需自测）。请**完整克隆仓库**使用，单拷文件缺少后台脚本与数据将无法运行。  
+> ⚠️ **合规声明（18+ Only）**：仅限虚构成年人互动，所有参与角色设定必须明确年满 18 岁。
 
-<br/><br/>
-
-<!-- 苹果浅色规整提示条 (纯净灰边，无生硬感叹号色块) -->
-<div align="left" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 20px; max-width: 820px; margin: 0 auto 20px auto; box-shadow: 0 1px 3px rgba(15,23,42,0.03);">
-  <p style="margin: 0; font-size: 13px; color: #334155; line-height: 1.6;">
-    💡 <b>安装提示</b>：本项目为 <b>DeepSeek Harness</b> 原生 Skill（入口 <code>SKILL.md</code>，其他 Agent 需自测）。请<b>完整克隆仓库</b>使用，单拷文件缺少后台脚本与数据将无法运行。
-  </p>
-  <p style="margin: 8px 0 0 0; font-size: 12.5px; color: #64748b; line-height: 1.5;">
-    ⚠️ <b>合规声明（18+ Only）</b>：仅限虚构成年人互动，所有参与角色设定必须明确年满 18 岁。
-  </p>
-</div>
-
-</div>
-
-<br/>
+---
 
 ## 🎬 体验切片
 
