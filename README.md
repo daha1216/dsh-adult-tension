@@ -1,47 +1,61 @@
 <div align="center">
 
-<h1 align="center" style="border-bottom: none; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #334155;">
-  🎭 dsh-adult-tension
-</h1>
-
-<!-- 苹果浅色状态药丸标签组 (与个人主页设计语言统一) -->
-<p align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif; margin-top: 4px; margin-bottom: 16px;">
-  <code>📱 DeepSeek Harness 原生 Skill</code> &nbsp;·&nbsp;
-  <code>🔞 18+ 深度语境破甲</code> &nbsp;·&nbsp;
-  <code>🌐 52 套世界状态机</code> &nbsp;·&nbsp;
-  <code>🧠 活人感独立意志</code>
+<!-- 顶部极简语言切换（精细微灰 Segmented 按钮质感） -->
+<p align="right" style="max-width: 860px; margin: 12px auto 6px auto; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 12.5px;">
+  <span style="background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 12px; padding: 4px 10px; display: inline-block;">
+    <a href="./README.md" style="font-weight: 600; color: #0284c7; text-decoration: none;">简体中文</a>
+    <span style="color: #cbd5e1; margin: 0 4px;">|</span>
+    <a href="./README.en.md" style="font-weight: 400; color: #64748b; text-decoration: none;">English</a>
+  </span>
 </p>
 
-<!-- 语言切换极简小链接 -->
-<p align="center" style="font-size: 13px; color: #64748b; margin-top: -6px; margin-bottom: 24px;">
-  <a href="./README.md" style="font-weight: 600; color: #0284c7; text-decoration: none;">简体中文</a> &nbsp;·&nbsp; <a href="./README.en.md" style="color: #64748b; text-decoration: none;">English</a>
-</p>
+<!-- 顶部 Apple 瓷质大标题与 4 胶囊标签展台 -->
+<img src="./assets/header-capsules.svg" alt="dsh-adult-tension Header" width="100%" style="max-width: 860px;" />
 
-<!-- 核心金句展台 (居中无界沉浸感) -->
-<p align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 15px; font-weight: 400; color: #475569; line-height: 1.65; max-width: 720px; margin-top: 0; margin-bottom: 28px;">
-  专为高张力、强连续性的成人互动叙事打造。<br/>
-  自带 18+ 深度破甲，活人感 NPC 拒绝迎合，52 套世界随心开局，世界自行运转不漂移。
-</p>
+<!-- 核心金句展台（工业级 Apple 排版：微副标 + 饱满中灰聚焦） -->
+<div align="center" style="max-width: 760px; margin: 16px auto 26px auto; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif;">
+  <p style="font-size: 17.5px; font-weight: 600; color: #334155; line-height: 1.5; margin: 0 0 6px 0; letter-spacing: -0.2px;">
+    专为高张力、强连续性的成人互动叙事打造
+  </p>
+  <p style="font-size: 13.5px; font-weight: 400; color: #64748b; line-height: 1.6; margin: 0;">
+    自带 18+ 深度破甲 · 活人感 NPC 拒绝迎合 · 52 套世界随心开局 · 零漂移自运行状态机
+  </p>
+</div>
 
-<!-- 苹果 2×2 瓷白特性微展板 (带 55% 冰川透蓝环境光) -->
-<img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension 核心特性展板" width="100%" />
+<!-- 4 大核心特性展板（55% 冰川透蓝环境微光） -->
+<img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension 核心特性展板" width="100%" style="max-width: 860px;" />
 
 <br/><br/>
 
-<!-- 苹果浅色规整提示条 (纯净灰边，无生硬感叹号色块) -->
-<div align="left" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 22px; max-width: 820px; margin: 0 auto 20px auto; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
-  <p style="margin: 0; font-size: 13px; color: #475569; line-height: 1.6;">
-    💡 <b>安装提示</b>：本项目为 <b>DeepSeek Harness</b> 原生 Skill（入口 <code>SKILL.md</code>，其他 Agent 需自测）。请<b>完整克隆仓库</b>使用，单拷文件缺少后台脚本与数据将无法运行。
-  </p>
-  <p style="margin: 8px 0 0 0; font-size: 12.5px; color: #64748b; line-height: 1.5;">
-    ⚠️ <b>合规声明（18+ Only）</b>：仅限虚构成年人互动，所有参与角色设定必须明确年满 18 岁。
-  </p>
-</div>
+<!-- 双栏规整提示卡片（苹果系统控制台质感：安装指南 + 18+ 合规边界） -->
+<table align="center" style="width: 100%; max-width: 860px; border-collapse: separate; border-spacing: 12px 0; margin: 0 auto 24px auto; background: transparent; border: none;">
+  <tr>
+    <!-- 左栏：安装提示 -->
+    <td style="width: 50%; vertical-align: top; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
+      <div style="display: flex; align-items: center; margin-bottom: 6px;">
+        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #0284c7; margin-right: 8px;"></span>
+        <span style="font-size: 13px; font-weight: 600; color: #334155;">原生 Skill 安装指南</span>
+      </div>
+      <p style="margin: 0; font-size: 12.2px; color: #64748b; line-height: 1.6;">
+        专为 <b>DeepSeek Harness</b> 打造（入口 <code>SKILL.md</code>）。请<b>完整克隆仓库</b>使用，单拷文件缺少后台状态机脚本与世界数据将无法运行。
+      </p>
+    </td>
+    <!-- 右栏：合规声明 -->
+    <td style="width: 50%; vertical-align: top; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
+      <div style="display: flex; align-items: center; margin-bottom: 6px;">
+        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #e11d48; margin-right: 8px;"></span>
+        <span style="font-size: 13px; font-weight: 600; color: #334155;">合规声明（18+ Only）</span>
+      </div>
+      <p style="margin: 0; font-size: 12.2px; color: #64748b; line-height: 1.6;">
+        严格仅限虚构成年人互动叙事。所有参与角色设定必须明确<b>年满 18 周岁</b>，严禁生成任何涉未成年人违规内容。
+      </p>
+    </td>
+  </tr>
+</table>
 
 </div>
 
 <br/>
-
 ## 🎬 体验切片
 
 *注：以下为展示交互逻辑的超浓缩切片。实际游玩中正文描写极其细腻饱满，氛围铺垫与心理博弈层次极佳，表现力远胜简述。*

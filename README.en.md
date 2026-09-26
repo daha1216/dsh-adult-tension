@@ -1,42 +1,55 @@
 <div align="center">
 
-<h1 align="center" style="border-bottom: none; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #334155;">
-  🎭 dsh-adult-tension
-</h1>
-
-<!-- Apple-style status pills -->
-<p align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif; margin-top: 4px; margin-bottom: 16px;">
-  <code>📱 DeepSeek Harness Native Skill</code> &nbsp;·&nbsp;
-  <code>🔞 18+ Mature Roleplay</code> &nbsp;·&nbsp;
-  <code>🌐 52 World State Machines</code> &nbsp;·&nbsp;
-  <code>🧠 Living NPCs with Autonomy</code>
+<!-- Top Minimalist Language Switcher -->
+<p align="right" style="max-width: 860px; margin: 12px auto 6px auto; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 12.5px;">
+  <span style="background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 12px; padding: 4px 10px; display: inline-block;">
+    <a href="./README.en.md" style="font-weight: 600; color: #0284c7; text-decoration: none;">English</a>
+    <span style="color: #cbd5e1; margin: 0 4px;">|</span>
+    <a href="./README.md" style="font-weight: 400; color: #64748b; text-decoration: none;">简体中文</a>
+  </span>
 </p>
 
-<!-- Language switch link -->
-<p align="center" style="font-size: 13px; color: #64748b; margin-top: -6px; margin-bottom: 24px;">
-  <a href="./README.en.md" style="font-weight: 600; color: #0284c7; text-decoration: none;">English</a> &nbsp;·&nbsp; <a href="./README.md" style="color: #64748b; text-decoration: none;">简体中文</a>
-</p>
+<!-- Top Apple Ceramic Header & 4 Capsule Badges -->
+<img src="./assets/header-capsules-en.svg" alt="dsh-adult-tension Header" width="100%" style="max-width: 860px;" />
 
-<!-- Core hero quote -->
-<p align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif; font-size: 15px; font-weight: 400; color: #475569; line-height: 1.65; max-width: 720px; margin-top: 0; margin-bottom: 28px;">
-  Tailored for high-tension, persistent mature interactive storytelling.<br/>
-  Built-in 18+ contextual desensitization, living NPCs who refuse to be mere "yes-men", 52 rich worlds, and zero-drift autonomous state evolution.
-</p>
+<!-- Core Hero Banner -->
+<div align="center" style="max-width: 760px; margin: 16px auto 26px auto; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', sans-serif;">
+  <p style="font-size: 17.5px; font-weight: 600; color: #334155; line-height: 1.5; margin: 0 0 6px 0; letter-spacing: -0.2px;">
+    Tailored for High-Tension, Persistent Mature Interactive Storytelling
+  </p>
+  <p style="font-size: 13.5px; font-weight: 400; color: #64748b; line-height: 1.6; margin: 0;">
+    Built-in 18+ contextual desensitization · Living NPCs refusing to cater · 52 curated worlds · Zero-drift state machine
+  </p>
+</div>
 
-<!-- Apple 2x2 Feature Board -->
-<img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension Core Features" width="100%" />
+<!-- 4 Core Feature Cards -->
+<img src="./assets/feature-grid-v4.svg" alt="dsh-adult-tension Core Features" width="100%" style="max-width: 860px;" />
 
 <br/><br/>
 
-<!-- Apple clean callout note -->
-<div align="left" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 22px; max-width: 820px; margin: 0 auto 20px auto; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
-  <p style="margin: 0; font-size: 13px; color: #475569; line-height: 1.6;">
-    💡 <b>Installation Note</b>: This project is a native <b>DeepSeek Harness</b> Skill (entry point: <code>SKILL.md</code>, other agents must self-test). Please <b>clone the entire repository</b>; copying single files without the supporting scripts and data will prevent it from running.
-  </p>
-  <p style="margin: 8px 0 0 0; font-size: 12.5px; color: #64748b; line-height: 1.5;">
-    ⚠️ <b>Compliance Notice (18+ Only)</b>: Exclusively for fictional adult interactions. All participating characters must be explicitly 18 years of age or older.
-  </p>
-</div>
+<!-- Two-Column Callout Cards (Installation Guide + 18+ Compliance) -->
+<table align="center" style="width: 100%; max-width: 860px; border-collapse: separate; border-spacing: 12px 0; margin: 0 auto 24px auto; background: transparent; border: none;">
+  <tr>
+    <td style="width: 50%; vertical-align: top; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
+      <div style="display: flex; align-items: center; margin-bottom: 6px;">
+        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #0284c7; margin-right: 8px;"></span>
+        <span style="font-size: 13px; font-weight: 600; color: #334155;">Native Skill Installation</span>
+      </div>
+      <p style="margin: 0; font-size: 12.2px; color: #64748b; line-height: 1.6;">
+        Tailored for <b>DeepSeek Harness</b> (entry: <code>SKILL.md</code>). Please <b>clone the entire repository</b>; copying single files without scripts and world assets will prevent execution.
+      </p>
+    </td>
+    <td style="width: 50%; vertical-align: top; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
+      <div style="display: flex; align-items: center; margin-bottom: 6px;">
+        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #e11d48; margin-right: 8px;"></span>
+        <span style="font-size: 13px; font-weight: 600; color: #334155;">Compliance Notice (18+ Only)</span>
+      </div>
+      <p style="margin: 0; font-size: 12.2px; color: #64748b; line-height: 1.6;">
+        Exclusively for fictional adult roleplay. All participating character profiles must be explicitly <b>18 years of age or older</b>. Non-consensual or underage content is strictly prohibited.
+      </p>
+    </td>
+  </tr>
+</table>
 
 </div>
 
