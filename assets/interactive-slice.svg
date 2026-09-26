@@ -1,25 +1,19 @@
-<svg viewBox="0 0 860 380" width="860" height="380" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 860 216" width="860" height="216" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <!-- 纯白瓷质渐变底板 -->
-    <linearGradient id="bgPlate" x1="0%" y1="0%" x2="0%" y2="100%">
+    <linearGradient id="cleanBg" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" />
       <stop offset="100%" stop-color="#fafbfc" />
     </linearGradient>
 
-    <!-- 苹果精细微灰边框 -->
-    <linearGradient id="bdrGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- 苹果极细微灰边框 -->
+    <linearGradient id="cleanBdr" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#e2e8f0" />
       <stop offset="100%" stop-color="#cbd5e1" />
     </linearGradient>
 
-    <!-- 极轻柔环境光晕 (左上与右下) -->
-    <linearGradient id="softAura" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.08" />
-      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.02" />
-    </linearGradient>
-
-    <filter id="plateShadow" x="-5%" y="-5%" width="110%" height="115%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.04" />
+    <filter id="cleanShdw" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.03" />
     </filter>
   </defs>
 
@@ -37,115 +31,52 @@
 
   <!-- 主卡片底板 (840 居中) -->
   <g transform="translate(10, 6)">
-    <rect width="840" height="368" rx="16" fill="url(#bgPlate)" stroke="url(#bdrGrad)" stroke-width="1.1" filter="url(#plateShadow)" />
+    <rect width="840" height="204" rx="14" fill="url(#cleanBg)" stroke="url(#cleanBdr)" stroke-width="1.1" filter="url(#cleanShdw)" />
 
-    <!-- 极轻环境光 -->
-    <g clip-path="url(#plateClip)">
-      <clipPath id="plateClip">
-        <rect width="840" height="368" rx="16" />
-      </clipPath>
-      <circle cx="800" cy="40" r="140" fill="url(#softAura)" />
-    </g>
+    <!-- 左侧 3.5px 极简冰川蓝品牌竖线 -->
+    <rect x="0" y="16" width="3.5" height="172" rx="1.75" fill="#38bdf8" />
 
-    <!-- ================= 1. 顶栏：极简沉浸态势栏 (y=16) ================= -->
-    <g transform="translate(24, 18)">
-      <!-- 场景坐标 -->
-      <circle cx="5" cy="8" r="3.5" fill="#0284c7" />
-      <text x="16" y="12" class="font-sans" font-size="12.5" font-weight="700" fill="#0f172a">盛唐长安 · 大理寺案牍库</text>
-      <text x="178" y="12" class="font-sans" font-size="12" font-weight="400" fill="#94a3b8">深夜宵禁 02:45</text>
-
-      <!-- 右侧张力遥测 (极简单行，零杂乱色块) -->
-      <text x="792" y="12" class="font-mono" font-size="11.5" font-weight="500" fill="#64748b" text-anchor="end">
-        NPC 戒备值 <tspan font-weight="700" fill="#e11d48">85%</tspan> · 空间距 <tspan font-weight="700" fill="#0284c7">0.4m</tspan> · 禁军步声距 2 拍
-      </text>
-    </g>
-
-    <!-- 优雅细分割线 -->
-    <line x1="24" y1="46" x2="816" y2="46" stroke="#f1f5f9" stroke-width="1" />
-
-    <!-- ================= 2. 交互交锋主体 (y=58) ================= -->
-    <g transform="translate(24, 58)">
-
-      <!-- 第 1 拍：玩家开局 (右侧极简药丸) -->
-      <g transform="translate(792, 0)">
-        <rect x="-214" y="0" width="214" height="28" rx="7" fill="#f8fafc" stroke="#e2e8f0" stroke-width="0.8" />
-        <text x="-202" y="18" class="font-sans" font-size="11" font-weight="700" fill="#64748b">你：</text>
-        <text x="-178" y="18" class="font-mono" font-size="11.5" font-weight="500" fill="#1e293b">开局，盛唐长安 压力模式</text>
-      </g>
-
-      <!-- 第 2 拍：NPC 活人感防御爆发 (核心戏剧冲突卡片) (y=40) -->
-      <g transform="translate(0, 40)">
-        <rect width="792" height="136" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.9" />
-
-        <!-- 左侧高雅冰蓝竖线 -->
-        <rect x="0" y="14" width="3.5" height="108" rx="1.75" fill="#0284c7" />
-
-        <g transform="translate(20, 16)">
-          <!-- 人物身份与环境 -->
-          <text class="font-sans" font-size="12" font-weight="700" fill="#0f172a">沈青澜</text>
-          <text x="46" y="0" class="font-sans" font-size="11.5" font-weight="500" fill="#64748b">（大理寺录事 · 21岁）</text>
-          <text x="178" y="0" class="font-sans" font-size="11.5" font-weight="400" fill="#94a3b8">
-            素白袖口死死攥着半截暗账，背脊紧抵案牍库门板
-          </text>
-
-          <!-- 核心对白 (大字号、考究排版) -->
-          <g transform="translate(0, 30)">
-            <text class="font-sans" font-size="14.5" font-weight="600" fill="#1e293b">
-              她冷冷盯住你腰间的佩刀：“<tspan font-weight="700" fill="#0284c7">今夜值守的明明不是你……站住。</tspan>”
-            </text>
-            <text y="24" class="font-sans" font-size="12.5" font-weight="400" fill="#475569">
-              喀哒一声微响——她反手将身后的沉重门闩悄然插死，退路已绝。暗室外隐约传来禁军巡夜更鼓。
-            </text>
-          </g>
-
-          <!-- 活人感判定底栏 (极简单行代码条，彰显底层状态机) -->
-          <g transform="translate(0, 84)">
-            <rect width="752" height="22" rx="4" fill="#f8fafc" stroke="#f1f5f9" stroke-width="0.8" />
-            <text x="10" y="15" class="font-mono" font-size="10.5" font-weight="500" fill="#64748b">
-              ⚡ <tspan font-weight="700" fill="#0284c7">ZERO-DRIFT EVENT</tspan>：触发核心利益防卫 · 顺从度 0%（驳回强制指令）· 门闩已上锁
-            </text>
-          </g>
-        </g>
-      </g>
-
-      <!-- 第 3 拍：玩家近身反制 (右侧高张力交锋视窗) (y=190) -->
-      <g transform="translate(0, 190)">
-        <rect width="792" height="66" rx="10" fill="#f0f9ff" fill-opacity="0.5" stroke="#bae6fd" stroke-width="1" />
-
-        <g transform="translate(20, 16)">
-          <text class="font-sans" font-size="12" font-weight="700" fill="#0284c7">你</text>
-          <text x="20" y="0" class="font-sans" font-size="11.5" font-weight="500" fill="#64748b">（近身破局 · 0.4m 极近距离压迫）</text>
-
-          <g transform="translate(0, 24)">
-            <text class="font-sans" font-size="13" font-weight="500" fill="#0f172a">
-              走上前一步跨入安全边界，反手按在她耳侧门板上，凑近她微颤的侧脸：
-              <tspan font-weight="700" fill="#0369a1">“把账本交出来，或者我现在带你出去。”</tspan>
-            </text>
-          </g>
-        </g>
-      </g>
-    </g>
-
-    <!-- ================= 3. 底栏：自主推演分支 (y=328) ================= -->
-    <g transform="translate(24, 328)">
-      <text x="0" y="14" class="font-sans" font-size="11.5" font-weight="600" fill="#64748b">
-        NPC 下拍自主决策分支：
-      </text>
-
-      <g transform="translate(136, 0)">
-        <text y="14" class="font-sans" font-size="11.5" fill="#475569">
-          <tspan font-weight="600" fill="#334155">① 拔簪反刺/夺刀突围</tspan> <tspan font-family="'SF Mono', Menlo, monospace" font-size="10.5" fill="#94a3b8">35%</tspan>
-          <tspan fill="#cbd5e1">  ·  </tspan>
-          <tspan font-weight="600" fill="#0284c7">② 利益绑架/试探结盟</tspan> <tspan font-family="'SF Mono', Menlo, monospace" font-size="10.5" fill="#0284c7">48%</tspan>
-          <tspan fill="#cbd5e1">  ·  </tspan>
-          <tspan font-weight="600" fill="#334155">③ 决意玉碎/撕毁暗账</tspan> <tspan font-family="'SF Mono', Menlo, monospace" font-size="10.5" fill="#94a3b8">17%</tspan>
+    <g transform="translate(28, 24)">
+      <!-- 顶栏：场景与实时指标 -->
+      <g transform="translate(0, 0)">
+        <text class="font-sans" font-size="12.5" font-weight="700" fill="#0284c7">盛唐长安 · 压力博弈</text>
+        <text x="136" y="0" class="font-sans" font-size="12" font-weight="400" fill="#94a3b8">大理寺案牍库 · 宵禁将至</text>
+        <text x="784" y="0" class="font-mono" font-size="11.5" font-weight="500" fill="#64748b" text-anchor="end">
+          戒备值 85% · 空间距 0.4m · 门闩已反锁
         </text>
       </g>
 
-      <text x="792" y="14" class="font-mono" font-size="10.5" font-weight="600" fill="#94a3b8" text-anchor="end">
-        STATE MACHINE v3.0
-      </text>
+      <!-- 细分割线 -->
+      <line x1="0" y1="16" x2="784" y2="16" stroke="#f1f5f9" stroke-width="1" />
+
+      <!-- 对话与动作实况 -->
+      <g transform="translate(0, 42)">
+        <!-- 拍 1 -->
+        <text class="font-sans" font-size="12.5" fill="#475569">
+          <tspan font-weight="700" fill="#0f172a">你：</tspan>
+          <tspan font-family="'SF Mono', Menlo, monospace" font-size="12" fill="#334155">开局，盛唐长安 压力模式</tspan>
+        </text>
+
+        <!-- 拍 2 -->
+        <text y="32" class="font-sans" font-size="12.5" fill="#334155">
+          <tspan font-weight="700" fill="#0f172a">沈青澜</tspan>
+          <tspan font-size="12" fill="#64748b">（大理寺录事）</tspan>
+          <tspan fill="#475569">：素白袖口攥着半截暗账，背抵库门插死门闩——</tspan>
+          <tspan font-weight="700" fill="#0284c7">“今夜值守的明明不是你……站住。”</tspan>
+        </text>
+
+        <!-- 拍 3 -->
+        <text y="64" class="font-sans" font-size="12.5" fill="#334155">
+          <tspan font-weight="700" fill="#0284c7">你：</tspan>
+          <tspan fill="#475569">走上前一步按住门板，凑近她耳侧：</tspan>
+          <tspan font-weight="700" fill="#0369a1">“把账本交出来，或者我现在带你出去。”</tspan>
+        </text>
+
+        <!-- 状态机静默沉淀 -->
+        <text y="96" class="font-sans" font-size="11.5" fill="#94a3b8">
+          （系统沉淀：NPC 触发核心利益防卫，顺从度 0% 拒绝服从，巡夜禁军步声逼近...）
+        </text>
+      </g>
     </g>
   </g>
 </svg>
-
