@@ -21,12 +21,7 @@
 
 <br/><br/>
 
-<!-- 苹果浅色规整安装提示条 -->
-<div align="left" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 20px; max-width: 860px; margin: 0 auto 20px auto; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
-  <div style="display: flex; align-items: center; margin-bottom: 4px;">
-    <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #0284c7; margin-right: 8px;"></span>
-    <span style="font-size: 13px; font-weight: 600; color: #334155;">原生 Skill 安装指南</span>
-  </div>
+<!-- 苹果现代控制台安装指南展卡 -->`n<img src="./assets/install-callout.svg" alt="dsh-adult-tension Installation Guide" width="100%" style="max-width: 860px; margin-top: 14px;" />
   <p style="margin: 0; font-size: 12.5px; color: #64748b; line-height: 1.6;">
     专为 <b>DeepSeek Harness</b> 打造（入口 <code>SKILL.md</code>）。请<b>完整克隆仓库</b>使用，单拷文件缺少后台状态机脚本与世界数据将无法运行。
   </p>
