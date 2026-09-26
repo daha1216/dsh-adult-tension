@@ -21,12 +21,7 @@
 
 <br/><br/>
 
-<!-- Apple Minimalist Installation Callout -->
-<div align="left" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 20px; max-width: 860px; margin: 0 auto 20px auto; box-shadow: 0 1px 3px rgba(15,23,42,0.02); font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC', sans-serif;">
-  <div style="display: flex; align-items: center; margin-bottom: 4px;">
-    <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #0284c7; margin-right: 8px;"></span>
-    <span style="font-size: 13px; font-weight: 600; color: #334155;">Native Skill Installation</span>
-  </div>
+<!-- Apple Modern Installation Console Card -->`n<img src="./assets/install-callout-en.svg" alt="dsh-adult-tension Installation Guide" width="100%" style="max-width: 860px; margin-top: 14px;" />
   <p style="margin: 0; font-size: 12.5px; color: #64748b; line-height: 1.6;">
     Tailored for <b>DeepSeek Harness</b> (entry: <code>SKILL.md</code>). Please <b>clone the entire repository</b>; copying single files without scripts and world assets will prevent execution.
   </p>
