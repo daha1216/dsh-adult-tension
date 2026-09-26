@@ -31,9 +31,9 @@
 <img src="./assets/interactive-slice-v5.svg" alt="dsh-adult-tension 体验切片" width="100%" style="max-width: 860px; margin: 12px 0 24px 0;" />
 
 ---
-<img src="./assets/header-worlds-v1.svg" alt="内置世界库" width="100%" style="max-width: 860px; margin: 36px 0 14px 0;" />
+<img src="./assets/header-worlds-v2.svg" alt="内置世界库" width="100%" style="max-width: 860px; margin: 36px 0 14px 0;" />
 
-每次开局都不是干瘪的名词拼接，而是时代风土、身份权力、人际暗涌与微观动作的深度咬合。系统内置 **52 个世界框架** 与上千项微观素材，涵盖从历史正剧、都市暗潮到异界幻想的丰富舞台：
+每次开局都不是干瘪的名词拼接，而是时代风土、身份权力、人际暗涌与微观动作的深度咬合。系统内置 **` 52 套 ` 跨时代独立世界框架** 与上千项微观素材，涵盖从历史正剧、都市暗潮到异界幻想的丰富舞台：
 
 <img src="./assets/worlds-matrix-v1.svg" alt="52 套世界风土卡片矩阵" width="100%" style="max-width: 860px; margin: 16px 0 20px 0;" />
 
@@ -208,6 +208,7 @@
 - **叙事素材与文档**（世界框架、素材池、文案模板、审查记录及各文档）：[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh)——可自由使用与改编（需署名），不得商用
 
 本项目仅面向虚构成年人互动叙事（18+）；许可条款不替代 README 中的合规声明。
+
 
 
 
