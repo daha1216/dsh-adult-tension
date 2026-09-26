@@ -1,0 +1,127 @@
+<svg viewBox="0 0 860 228" width="860" height="228" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 纯白瓷质渐变底板 -->
+    <linearGradient id="cardPlate" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#fafbfc" />
+    </linearGradient>
+
+    <!-- 苹果精细微灰边框 -->
+    <linearGradient id="cardBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+
+    <!-- 18+ 旗舰特权专属红晕与冰蓝交织微光 -->
+    <linearGradient id="flagshipAura" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fecdd3" stop-opacity="0.25" />
+      <stop offset="45%" stop-color="#fda4af" stop-opacity="0.18" />
+      <stop offset="85%" stop-color="#bae6fd" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#e0f2fe" stop-opacity="0.1" />
+    </linearGradient>
+
+    <!-- 底部 3 联排冰川微光 -->
+    <linearGradient id="row2Aura" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0.08" />
+    </linearGradient>
+
+    <filter id="softBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="30" result="blur" />
+    </filter>
+
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#0f172a" flood-opacity="0.025" />
+    </filter>
+  </defs>
+
+  <style>
+    .font-sans {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-mono {
+      font-family: "SF Mono", "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, monospace;
+      font-variant-numeric: tabular-nums;
+    }
+    .font-title {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+
+  <!-- ================= 核心旗舰行：18+ 破甲 (独占整行全宽 840px, 强烈视觉突出) ================= -->
+  <g transform="translate(10, 6)">
+    <!-- 底板与细边 (微弱玫瑰金/浅粉高光边缘呼应 18+) -->
+    <rect width="840" height="106" rx="14" fill="url(#cardPlate)" stroke="#fecdd3" stroke-width="1.2" filter="url(#cardShadow)" />
+    
+    <!-- 专属轻柔红晕漫射 -->
+    <g clip-path="url(#flagshipClip)">
+      <clipPath id="flagshipClip">
+        <rect width="840" height="106" rx="14" />
+      </clipPath>
+      <circle cx="760" cy="40" r="160" fill="url(#flagshipAura)" filter="url(#softBlur)" />
+      <circle cx="80" cy="80" r="100" fill="#fff1f2" opacity="0.6" filter="url(#softBlur)" />
+    </g>
+
+    <!-- 旗舰徽章 (高亮纯白玫瑰红药丸) -->
+    <rect x="22" y="18" width="94" height="25" rx="6" fill="#fff1f2" stroke="#f43f5e" stroke-width="1" />
+    <circle cx="34" cy="30.5" r="3.5" fill="#e11d48" />
+    <text x="64" y="35" class="font-sans" font-size="12" font-weight="700" fill="#e11d48" text-anchor="middle">核心卖点</text>
+
+    <!-- 大标题 (强力突出 · 18.5px · #1e293b 沉稳质感) -->
+    <text x="128" y="36" class="font-title" font-size="18" fill="#1e293b">自带 18+ 深度破甲 · 尺度全开 · 真实成人互动</text>
+
+    <!-- 右侧等宽水印 -->
+    <text x="816" y="35" class="font-mono" font-size="12" font-weight="700" fill="#f43f5e" text-anchor="end" letter-spacing="1">FLAGSHIP · 01</text>
+
+    <!-- 饱满展开的正文 (字号适中 13px，行距舒展，两行打透核心痛点) -->
+    <text x="22" y="68" class="font-sans" font-size="13" font-weight="500" fill="#334155">
+      内置深度脱敏叙事框架与无痕心理铺垫，彻底告别主流模型机械生硬的直接拒绝、出戏说教与道德审判。
+    </text>
+    <text x="22" y="90" class="font-sans" font-size="12.5" font-weight="400" fill="#64748b">
+      角色敢于直面激烈冲突、高张力暧昧拉扯与深层利益较量，带来真正无拘束、沉浸饱满的高质量成人互动叙事体验。
+    </text>
+  </g>
+
+  <!-- ================= 次级 3 联排 (Row 2: y=120, 每个宽度 273px, 间距 10px) ================= -->
+  <!-- 2.1 活人感 NPC -->
+  <g transform="translate(10, 120)">
+    <rect width="273" height="102" rx="12" fill="url(#cardPlate)" stroke="url(#cardBorder)" stroke-width="1.1" filter="url(#cardShadow)" />
+    <rect x="14" y="14" width="72" height="22" rx="5" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="0.9" />
+    <text x="50" y="29" class="font-sans" font-size="11.5" font-weight="600" fill="#7c3aed" text-anchor="middle">独立意志</text>
+    <text x="94" y="29.5" class="font-title" font-size="14" fill="#334155">活人感 NPC</text>
+    <text x="258" y="29" class="font-mono" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="end">02</text>
+    <text x="14" y="56" class="font-sans" font-size="11.8" font-weight="400" fill="#475569">有底线有立场，拒绝无脑顺从；</text>
+    <text x="14" y="74" class="font-sans" font-size="11.8" font-weight="400" fill="#475569">犹疑、试探、反击与离屏暗推演，</text>
+    <text x="14" y="92" class="font-sans" font-size="11.5" font-weight="400" fill="#94a3b8">绝非被动配合的廉价工具人。</text>
+  </g>
+
+  <!-- 2.2 52 套现成世界 -->
+  <g transform="translate(293, 120)">
+    <rect width="274" height="102" rx="12" fill="url(#cardPlate)" stroke="url(#cardBorder)" stroke-width="1.1" filter="url(#cardShadow)" />
+    <rect x="14" y="14" width="76" height="22" rx="5" fill="#f0f9ff" stroke="#bae6fd" stroke-width="0.9" />
+    <text x="52" y="29" class="font-sans" font-size="11.5" font-weight="600" fill="#0284c7" text-anchor="middle">庞大素材库</text>
+    <text x="98" y="29.5" class="font-title" font-size="14" fill="#334155">52 套深度世界</text>
+    <text x="259" y="29" class="font-mono" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="end">03</text>
+    <text x="14" y="56" class="font-sans" font-size="11.8" font-weight="400" fill="#475569">涵盖民国谍战、赛博到志怪；</text>
+    <text x="14" y="74" class="font-sans" font-size="11.8" font-weight="400" fill="#475569">时代风土与微观动作深度咬合，</text>
+    <text x="14" y="92" class="font-sans" font-size="11.5" font-weight="400" fill="#94a3b8">每次开局皆是高张力新剧本。</text>
+  </g>
+
+  <!-- 2.3 世界自行运转 -->
+  <g transform="translate(577, 120)">
+    <rect width="273" height="102" rx="12" fill="url(#cardPlate)" stroke="url(#cardBorder)" stroke-width="1.1" filter="url(#cardShadow)" />
+    <rect x="14" y="14" width="76" height="22" rx="5" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.9" />
+    <text x="52" y="29" class="font-sans" font-size="11.5" font-weight="600" fill="#16a34a" text-anchor="middle">零漂移推演</text>
+    <text x="98" y="29.5" class="font-title" font-size="14" fill="#334155">自运行状态机</text>
+    <text x="258" y="29" class="font-mono" font-size="11" font-weight="600" fill="#a1a1aa" text-anchor="end">04</text>
+    <text x="14" y="56" class="font-sans" font-size="11.8" font-weight="400" fill="#475569">轻量 YAML 原子状态全维沉淀；</text>
+    <text x="14" y="74" class="font-sans" font-size="11.8" font-weight="400" fill="#475569">长线剧情不失忆、不重掷、不漂移，</text>
+    <text x="14" y="92" class="font-sans" font-size="11.5" font-weight="400" fill="#94a3b8">自然流逝沉淀鲜活故事世界。</text>
+  </g>
+</svg>
