@@ -22,7 +22,7 @@
 
 ## 阶段记录
 
-### 阶段 0：仓库与 Skill 外壳 —— 完成
+### 阶段 0：仓库与 Skill 外壳 —— 完成（收尾提交 `20f9683`）
 
 `spec/DELIVERY_PLAN.md` 阶段 0 第一条（新建空仓库、放入 `spec/`、写根目录说明文件）已由上一个会话完成：独立 Git 仓库 `D:\projects\adult-tension-v2`（分支 `main`）；`spec/` 已放入并与原蓝图逐字核对；根目录 `AGENTS.md`、`CLAUDE.md`、`ENVIRONMENT.md`、`.gitattributes`（`* text=auto eol=lf`）。
 
