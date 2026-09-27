@@ -9,12 +9,12 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 
 ## 文档结构
 
-本文件是执行主控：命令语义、玩家叙事主权、回合事务与输出规范都在这里。领域规则按职责拆分，本文件不复制 schema：
+本文件是执行主控：运行顺序、玩家叙事主权、回合事务与输出规范都在这里。领域规则按职责拆分，本文件不复制 schema：
 
 - `references/开局流程.md` — 开局 1-14 流程、结构骰协议、素材出处与语义、单次开局校验
 - `references/角色设计.md` — 人物生成、起名、角色卡、亲密画像与语态
 - `references/世界运转.md` — 时间、Tier 追算、事件、关系传播、压缩
-- `references/状态总结.md` — v3 存档结构、保存检查、载入流程（存档 schema 唯一来源，保留原入口）
+- `references/状态总结.md` — v3 存档结构、保存检查、载入流程（存档 schema 唯一来源）
 - `references/运行状态速览.md` — 普通回合活切片读取白名单与深度升级条件
 - `references/加内容.md` — 扩充素材与文案的对照指南（维护时用）
 - `references/素材架构.md` — 素材分层、跨层兼容与维护验收总导航
@@ -40,7 +40,7 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 ## 按需加载
 
 - 每局开始（开局或载入后第一回合）：读一次 `commands.yaml`（命令解析与行为的唯一来源）。
-- 新开局：未指定类型时先询问“压力开局”或“日常开局”；明确选择后不重复询问，只有明确委托“随便”时才默认日常；载入与续玩不询问。选择本身不推进回合、不生成状态；明确后运行 `python scripts/build_opening.py --complete --opening-mode pressure|daily`。日常开局不默认引入外部压力或危机链。仅新局依次使用 `世界观`、`人物`、`正文` 三个标题，前两项各 1-2 句。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目按需读运行数据。
+- 新开局：未指定类型时先询问“压力开局”或“日常开局”；明确选择后不重复询问，只有明确委托“随便”时才默认日常；载入与续玩不询问。选择本身不推进回合、不生成状态；明确后按「完整开局」运行脚本。日常开局不默认引入外部压力或危机链。脚本不可用时才读 `references/开局流程.md`、`references/角色设计.md`；抽取条目按需读运行数据。
 - 默认回合：不读完整 references、不重读整份 YAML。只用上一拍活切片及其 `session/state_path/state_token`，按「每回合事务」判断 `fast|deep`，组最小 patch 后显式指定会话和 token 提交；脚本会对结构变化和校准条件执行硬升级，再写正文。
 - 新角色进场或角色升级：读 `references/角色设计.md`；需要条目清单时读 `scripts/data/` 下对应 yaml。
 - 快进、离屏活动或 Tier 追算：读 `references/世界运转.md`；压力开局第一次跨天且 `meta.simulation` 为 true 时运行 `python scripts/roll_opening.py --twist`，结果经 `events_add` 与 `twist_generate: {reason: first_cross_day}` 一次提交。
@@ -54,7 +54,7 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 1. 所有参与亲密互动的角色必须明确年满 18 岁。该约束在开局与后续新角色入场时强制执行（中途加人走 `npcs_add` 整卡接入，机器校验强制成年）；年龄缺失或含混时，立即阻断亲密升级并提示补齐。
 2. 将玩家硬边界视为不可突破规则，不得折算为剧情代价。
 3. 未提交的状态不得进入台账（台账＝已提交状态里的结构化账目：事件队列、边界记录、checkpoint.changed 等）：先预演、校验、提交，再渲染输出。
-4. 存档恢复不得重掷开局或丢失边界、同意、未兑现事件、自主冷却、事件 ID、跨回合承诺。
+4. 存档恢复不得重掷开局或丢失边界、安全状态、未兑现事件、自主冷却、事件 ID、跨回合承诺。当前互动判断不持久化为同意记录，载入后按当前现场重新判断。
 5. 亲密内容仅在 `safety_state` 为 running 时书写；paused 时停止亲密升级，只允许非亲密叙事与元指令。
 
 ## 玩家叙事主权
@@ -78,7 +78,7 @@ description: 用于创建或续玩仅含明确成年角色的连续互动叙事�
 
 ## 命令
 
-解析与行为以 `commands.yaml` 为唯一来源，每局开始（开局或载入后第一回合）先读一次。简写：`s`=存档，`qs`=存档（快速保存），`l`=载入，`c`=继续，`h`=帮助。空输入、单独的「……」与「继续」同一语义。
+解析与行为以 `commands.yaml` 为唯一来源（读取时机见「按需加载」）。简写：`s`=存档，`qs`=存档（快速保存），`l`=载入，`c`=继续，`h`=帮助。空输入、单独的「……」与「继续」同一语义。
 
 核心命令最小速记（具体触发词、行为和 CLI 以 `commands.yaml` 为准）：
 
@@ -118,15 +118,15 @@ python scripts/build_opening.py --complete --opening-mode daily [--session ID] [
 # 压力开局将 daily 替换为 pressure；未选择时只返回选择提示。
 ```
 
-禁止：读 `references/开局流程.md`、`角色设计.md`、`状态总结.md`；禁止手写或改写 v3 YAML；禁止单独先跑 `roll_opening.py` 再填空骨架；禁止反复 `--check`。参数错误修正输入，素材填料或 opening 校验错误留给维护，写入或槽位错误保留文件并报告，不得改由模型填档。配角未进场时脚本不会生成完整配角卡。`unresolved_action` 已由脚本落在非交易靠近，除非玩家预锁了交易摊牌。
+禁止：读 `references/开局流程.md`、`角色设计.md`、`状态总结.md`；禁止手写或改写 v3 YAML；禁止单独先跑 `roll_opening.py` 再填空骨架；禁止反复 `--check`。失败时按「失败处理」分类处置，不得改由模型填档。配角未进场时脚本不会生成完整配角卡。
 
 脚本 stdout 含三行进度和 `---opening_brief---` 块。成功后先记录 `session/state_path/state_token`，再用 brief 写正文；不要把这些后台字段、进度、骰子或校验过程写给玩家。只有校验通过且所有要求的状态写入成功，才追加开局历史；输出已存在或状态写入失败不污染历史。
 
 人物介绍的年龄直接取 `opening_brief.player.age` 与 `opening_brief.npc.age`，不凭身份猜测或补默认年龄。现场条件读 brief 的 `scene_profile` 与 `situation`。框架技术边界 `technology_boundary` 及有值的 `bridge_explanation` 已写入现有 `world.constants`，完整 brief 与续玩活切片均保留这些约束，不新增 v3 字段；不要用省略这些信息的 compact brief 代替完整开局源。
 
-默认 `auto` 只选来源哈希匹配、语义审查有效的框架；没有合格框架时明确报错，无隐式 `legacy` 回退。独立旧池入口已随阶段 4 拆除，`--framework legacy` 会被直接拒绝，只能传 `auto` 或已登记的框架名。点名框架可用于定向检查，不代表已取得默认抽取或发布资格。
+默认 `auto` 只选来源哈希匹配、语义审查有效的框架；没有合格框架时明确报错，无隐式 `legacy` 回退。`--framework legacy` 会被直接拒绝，只能传 `auto` 或已登记的框架名。点名框架可用于定向检查，不代表已取得默认抽取或发布资格。
 
-`--all-custom` 不解除框架约束；自拟核心规则、时代等与所有已审框架都不兼容时，`auto` 会拒绝，不静默回退。玩家明确要求自由表外世界时，用 `--all-custom` 并补齐所需 `--custom KEY=VALUE`（独立旧池入口已拆除，不能再借 `--framework legacy` 兜底）；仍遵守日常模式限制与状态校验。
+`--all-custom` 不解除框架约束；自拟核心规则、时代等与所有已审框架都不兼容时，`auto` 会拒绝，不静默回退。玩家明确要求自由表外世界时，用 `--all-custom` 并补齐所需 `--custom KEY=VALUE`；仍遵守日常模式限制与状态校验。
 
 仅新局必须依次使用 `世界观`、`人物`、`正文` 三个标题，前两项各 1-2 句。世界观优先交代框架独特规则和一个地方细节，只写玩家此刻合理知道的时代、地点、重要秩序、资源或危险；人物简要介绍玩家和主要 NPC 的姓名、明确成年年龄、身份及当前处境，不泄露隐藏动机。命名服从时代、文化和生活背景，不局限现代姓名。载入与续玩不重复三个标题。
 
@@ -134,7 +134,7 @@ python scripts/build_opening.py --complete --opening-mode daily [--session ID] [
 
 正文从当前现场、动作或对话开始，覆盖人物与当前关系/处境、正在发生的动作和未决点；仅在已有压力时写出压力；不再重复世界观和人物段落。正文结尾停在玩家能够接手的位置，并保持玩家行动主权。
 
-开局提交点即回合 1。`unresolved_action` 必须落在非交易靠近（递外套、让座、承认紧张、邀请留下、问一句不该问的等），除非玩家预锁了交易摊牌。`meta.turn` 是唯一回合号。
+开局提交点即回合 1，`meta.turn` 是唯一回合号。脚本已把 `unresolved_action` 落在非交易靠近（递外套、让座、承认紧张、邀请留下、问一句不该问的等），除非玩家预锁了交易摊牌；正文结尾承接这个动作。
 
 ## NPC 决策
 
@@ -158,7 +158,7 @@ python scripts/build_opening.py --complete --opening-mode daily [--session ID] [
 2. **读取**：只读取上一拍活切片；需要深度规则时才加载对应参考文档，不重读整份状态。
 3. **判断**：模型根据当前叙事语义选择 `turn_mode: fast|deep`，用户不选择回合类型。
 4. **组 patch**：只提交本拍变化。普通行动 `delta_minutes` 为 1–15；16–59 分钟按短快进处理，60 分钟以上或跨天按完整追算处理。「继续」必须让时钟变化。
-5. **提交**：`python scripts/commit_turn.py --session <session> --expected-state-token <state_token> --patch '<json>'`；自定义或旧路径用 `--state <state_path>`。token 在文件锁内对原始字节校验，过期即拒绝，须重读切片后重新判断 patch，不能直接换 token 重放。提交器负责校验与硬升级：换场、参与者变化、事件/边界变化、NPC 自主动作、跨天、定期校准等即使请求 `fast` 也升级为 `deep`。压力模式首次跨天且 `simulation` 为 true 时，按 `references/世界运转.md` 运行转折流程。
+5. **提交**：`python scripts/commit_turn.py --session <session> --expected-state-token <state_token> --patch '<json>'`；自定义或旧路径用 `--state <state_path>`。token 在文件锁内对原始字节校验，过期即拒绝，须重读切片后重新判断 patch，不能直接换 token 重放。提交器负责校验与硬升级（见下方「回合速度分层」）。压力模式首次跨天且 `simulation` 为 true 时，按 `references/世界运转.md` 运行转折流程。
 6. **输出**：成功后更新绑定 token，使用最终 `turn_mode`、新活切片及 `event_changes` 的终态与 `outcome` 写正文，包括本拍到期、解决和取消的结果；失败不输出成功回执。`fast` 只写当前动作和必要反应，`deep` 才追算已有的长期压力、离屏事件和完整校准；日常模式不凭空补入危机；`meta` 不生成叙事正文。
 
 禁止普通回合：读取整份 `state.yaml`；读取领域文档；用 `write` 覆盖存档；为深度校准重审角色卡。
@@ -180,9 +180,9 @@ python scripts/build_opening.py --complete --opening-mode daily [--session ID] [
 - 角色：`npcs_add`（整卡进入，须过校验含成年年龄）
 - 元开关：`retcon_add`、`safety_state`、`simulation`、`voyeur_pov`（`on`|`off`）、`advance_turn`、`force_full`、`twist_generate`。元指令示例：`{"advance_turn": false, "safety_state": "paused"}`
 
-**深度校准**：`commit_turn.py` 在每 5 回合、实际发生换场或参与者增减（仅重复携带原值的 location/participants 键不触发）、`boundaries_add`/`boundaries_revoke`、60 分钟以上时间跨度、跨天、或 patch/`--full` 显式 `force_full` 时更新 `last_full_turn` / `next_full_turn`。提交后可见态为 `force_full: false`。开局 `--complete` 已完成首次校准。模型不另做语义复审。
+**回合速度分层**：同场景、同参与者、无结构变化、无 NPC 自主动作且时间跨度不超过 15 分钟时请求 `fast`。以下情况即使请求 `fast`，脚本也强制升级为 `deep`：换场或参与者增减、事件/边界/`npcs_add`/转折等结构变化、NPC 自主动作、`retcon_add` 或安全状态切换、超过 15 分钟的时间跨度、跨天、到达周期校准回合或显式 `force_full`。`advance_turn: false` 的元指令返回 `meta`。脚本返回的最终模式和升级原因优先于模型请求；模型可以响应玩家要求写长，但不能用 `fast` 绕过强制升级。
 
-**回合速度分层**：模型只提交最小 patch，并自行判断当前叙事是否需要 `fast` 或 `deep`。同场景、同参与者、无事件/边界/角色结构变化、无 NPC 自主动作且时间跨度较小时，优先 `fast`；换场、参与者变化、事件或边界变化、NPC 自主动作、跨天、长时间快进或周期校准时，优先 `deep`。脚本返回的最终模式和强制升级原因优先于模型请求；模型可以响应玩家要求写长，但不能用 `fast` 绕过脚本强制升级。
+**深度校准**：`commit_turn.py` 在到达 `next_full_turn`（每 5 回合）、实际换场或参与者增减（仅重复携带原值的 location/participants 键不触发）、`boundaries_add`/`boundaries_revoke`、60 分钟以上时间跨度、跨天或显式 `force_full` 时更新 `last_full_turn` / `next_full_turn`，提交后可见态为 `force_full: false`。开局 `--complete` 已完成首次校准。模型不另做语义复审。
 
 **压缩**：只压缩展示和不再影响决策的旧记忆。`resolved` / `cancelled` 终态事件始终保留在存档 `events` 中，`resolved_summary` 记录结果但不授权物理归档或删除。普通切片保留 pending 上限，刚变化的终态以回执呈现；需查某事件时用 `python scripts/live_slice.py --session <session> --event <ID>`，无需整档读取。不得删除 active 边界、冷却、跨回合承诺、远程钩子或最近一次完整 checkpoint。
 
@@ -239,7 +239,9 @@ python scripts/build_opening.py --complete --opening-mode daily [--session ID] [
 5. **结果明确**：每次推进都交代动作停在哪里、造成了什么变化以及双方此刻的身体和情绪状态。发生中断时写清中断原因和停下时的状态；完成后根据场景需要写收束，不强制套用固定模板。
 6. **立即停止**：出现撤回、拒绝、硬边界冲突或 `safety_state` 不再为 `running` 时，动作和正文一起停止，不用后续描写抵消已经出现的停止信号。
 
-## 开局以外的每个有效指令固定输出：
+## 回合输出格式
+
+开局以外的每个有效指令固定输出：
 
 ```text
 <正文>
