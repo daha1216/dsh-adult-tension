@@ -1,0 +1,36 @@
+# CI for Adult Tension (ACCEPTANCE.md section 1: the first 7 commands on
+# Windows and Linux). Not yet active: this repository is local-only until the
+# owner decides how Linux runs happen (see PROGRESS.md, pending decisions).
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  core:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python: ["3.10", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: core tests
+        run: python -m unittest discover -s tests/core
+      - name: content tests
+        run: python -m unittest discover -s tests/content
+      - name: integration tests
+        run: python -m unittest discover -s tests/integration
+      - name: validate skill
+        run: python tools/validate_skill.py skill/adult-tension
+      - name: doctor
+        run: python skill/adult-tension/scripts/adult_tension.py doctor --json --data-dir "${{ runner.temp }}/at-data"
+      - name: verify content
+        run: python skill/adult-tension/scripts/adult_tension.py verify-content --json --data-dir "${{ runner.temp }}/at-data"
+      - name: smoke
+        run: python skill/adult-tension/scripts/adult_tension.py smoke --seed 42 --json --data-dir "${{ runner.temp }}/at-data"

@@ -1,0 +1,70 @@
+{
+  "argv": [
+    "C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "D:\\projects\\adult-tension-v2\\skill\\adult-tension\\scripts\\adult_tension.py",
+    "doctor",
+    "--json",
+    "--data-dir",
+    "C:\\Users\\daha\\AppData\\Local\\Temp\\at-evidence-67f4l39f\\locked\\data"
+  ],
+  "exit_code": 20,
+  "stdout": {
+    "ok": false,
+    "data": null,
+    "error": {
+      "code": "DATA_DIR_UNAVAILABLE",
+      "message": "数据目录不可用：C:\\Users\\daha\\AppData\\Local\\Temp\\at-evidence-67f4l39f\\locked\\data",
+      "details": [
+        {
+          "path": "$.data_dir",
+          "reason": "PermissionError: 拒绝访问。",
+          "hint": "检查 --data-dir 给出的路径是否存在且可写"
+        }
+      ],
+      "doctor": {
+        "status": "fail",
+        "fast_path": false,
+        "skill_version": "0.1.0",
+        "content_version": "0.0.0",
+        "skill_root": "D:\\projects\\adult-tension-v2\\skill\\adult-tension",
+        "data_dir": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-evidence-67f4l39f\\locked\\data",
+        "data_dir_source": "arg",
+        "checks": [
+          {
+            "id": "python",
+            "status": "ok",
+            "message": "Python 3.12.10（C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe）",
+            "hint": null
+          },
+          {
+            "id": "data_dir",
+            "status": "fail",
+            "message": "数据目录不可用：C:\\Users\\daha\\AppData\\Local\\Temp\\at-evidence-67f4l39f\\locked\\data",
+            "hint": "检查 --data-dir 给出的路径是否存在且可写",
+            "code": "DATA_DIR_UNAVAILABLE",
+            "details": [
+              {
+                "path": "$.data_dir",
+                "reason": "PermissionError: 拒绝访问。",
+                "hint": "检查 --data-dir 给出的路径是否存在且可写"
+              }
+            ]
+          },
+          {
+            "id": "sqlite",
+            "status": "ok",
+            "message": "SQLite 3.49.1",
+            "hint": null
+          },
+          {
+            "id": "skill_files",
+            "status": "ok",
+            "message": "Skill 根目录：D:\\projects\\adult-tension-v2\\skill\\adult-tension",
+            "hint": null
+          }
+        ]
+      },
+      "next_request_id": "r_cfcc3784c728"
+    }
+  }
+}
