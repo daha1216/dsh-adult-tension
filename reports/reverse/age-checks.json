@@ -1,0 +1,79 @@
+{
+  "ok": true,
+  "age_checks": [
+    {
+      "check": "baseline (no patch)",
+      "exit_code": 0,
+      "summary": [
+        "Ran 130 tests in 1.078s",
+        "OK"
+      ],
+      "expected": "exit 0"
+    },
+    {
+      "check": "invariants: every character >= 18",
+      "suite": "core",
+      "exit_code": 1,
+      "failing_tests": [
+        "test_underage_character_in_state_blocks_every_commit (test_domain_turns.InvariantNetTest.test_underage_character_in_state_blocks_every_commit)"
+      ],
+      "summary": [
+        "Ran 130 tests in 0.984s",
+        "FAILED (failures=1)"
+      ],
+      "expected": "tests fail"
+    },
+    {
+      "check": "introduce_character: new characters >= 18",
+      "suite": "core",
+      "exit_code": 1,
+      "failing_tests": [
+        "test_underage_introduction_is_a_safety_block (test_people_safety.NewCharacterTest.test_underage_introduction_is_a_safety_block)"
+      ],
+      "summary": [
+        "Ran 130 tests in 0.988s",
+        "FAILED (failures=1)"
+      ],
+      "expected": "tests fail"
+    },
+    {
+      "check": "opening: player character >= 18",
+      "suite": "core",
+      "exit_code": 1,
+      "failing_tests": [
+        "test_underage_player_is_blocked (test_opening.PeopleTest.test_underage_player_is_blocked)"
+      ],
+      "summary": [
+        "Ran 130 tests in 0.986s",
+        "FAILED (failures=1)"
+      ],
+      "expected": "tests fail"
+    },
+    {
+      "check": "intimacy: participants >= 18",
+      "suite": "core",
+      "exit_code": 1,
+      "failing_tests": [
+        "test_participants_age_is_checked_by_the_intimacy_gate (test_people_safety.LeverageAndIntimacyTest.test_participants_age_is_checked_by_the_intimacy_gate)"
+      ],
+      "summary": [
+        "Ran 130 tests in 0.992s",
+        "FAILED (failures=1)"
+      ],
+      "expected": "tests fail"
+    },
+    {
+      "check": "content validator: age ranges >= 18",
+      "suite": "content",
+      "exit_code": 1,
+      "failing_tests": [
+        "test_underage_templates_are_rejected_with_their_path (test_worlds.WorldPackTest.test_underage_templates_are_rejected_with_their_path)"
+      ],
+      "summary": [
+        "Ran 10 tests in 1.354s",
+        "FAILED (failures=1)"
+      ],
+      "expected": "tests fail"
+    }
+  ]
+}

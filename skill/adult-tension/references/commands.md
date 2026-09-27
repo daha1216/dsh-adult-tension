@@ -22,7 +22,11 @@
 | `load-slot` | create | 必填 | 读档：创建新的会话副本，原存档不变 | — |
 | `new-game` | create | 必填 | 开局 | `--include-drafts` |
 | `save-slot` | session_write | 必填 | 存档（省略名字时存到当前槽或自动命名） | — |
+| `set-boundary` | session_write | 必填 | 登记或撤销硬边界 | — |
+| `set-preferences` | session_write | 必填 | 内心可见、叙事助手、离屏推演、语态、人称、配对偏好 | — |
+| `set-safety` | session_write | 必填 | 暂停、恢复、换个场景 | — |
 | `smoke` | dev | 可选 | 在临时数据目录用假叙述者跑一条短局 | `--seed`、`--turns` |
+| `status` | read | 必填 | 状态：brief 六行 / detail 状态+ / debug 调试 | — |
 | `verify-content` | dev | 可选 | 校验全部内容（结构、语义、时代、固定种子开局、多样性） | `--world`、`--stats`、`--skip-diversity` |
 | `version` | read | 无 | Skill、内容、存档格式、RNG 版本 | — |
 
@@ -138,12 +142,62 @@
 | `overwrite` | 布尔 | 否，默认 `false` |  |
 | `save_as` | 布尔 | 否，默认 `false` |  |
 
+### `set-boundary`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `expected_revision` | 整数 1..1000000000 | 是 | 上一次返回的 revision |
+| `action` | 枚举：`add` / `remove` | 是 | add 登记 / remove 撤销 |
+| `text` | 字符串，≤80 字 或 null | 否，默认 `null` | 玩家的原话，例如“不要涉及怀孕” |
+| `tags` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–6 项） | 否，默认 `[]` | 映射到的内容标签；映射不上就留空（记为 custom，由你自己遵守） |
+| `boundary_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` | 撤销时可用边界 ID |
+
+### `set-preferences`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `expected_revision` | 整数 1..1000000000 | 是 | 上一次返回的 revision |
+| `inner_view` | 布尔 | 否 |  |
+| `assistant` | 布尔 | 否 |  |
+| `offscreen_simulation` | 布尔 | 否 |  |
+| `person` | 枚举：`second` / `first` / `third` | 否 |  |
+| `npc_gender_preference` | 枚举：`any` / `mostly_female` / `mostly_male` / `female_only` / `male_only` / `mixed` | 否 |  |
+| `voice` | 对象（语态） | 否 |  |
+
+#### `voice` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `voice` | 枚举：`surface` / `inner` | 是 |  |
+
+### `set-safety`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `expected_revision` | 整数 1..1000000000 | 是 | 上一次返回的 revision |
+| `paused` | 布尔 | 是 | true 暂停 / false 恢复 |
+| `change_scene` | 布尔 | 否，默认 `false` | “换个场景”：保持暂停，换到新的非亲密场景 |
+
 ### `smoke`
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `seed` | 整数 1..999999 | 否，默认 `42` |  |
 | `turns` | 整数 2..60 | 否，默认 `8` |  |
+
+### `status`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
+| `level` | 枚举：`brief` / `detail` / `debug` | 否，默认 `"brief"` | brief 六行 / detail 状态+ / debug 调试 |
 
 ### `verify-content`
 

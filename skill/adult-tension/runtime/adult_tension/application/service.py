@@ -488,3 +488,74 @@ def list_worlds(ctx, payload):
             for w in worlds
         ],
     }
+
+
+# ---------------------------------------------------------------------------
+# meta commands: boundaries, pause, preferences (revision changes, turn does not)
+
+
+def _meta_write(ctx, command, payload, apply):
+    def handler(conn, session, now):
+        new_state, result = apply(session["state"], session["content"])
+        state = session["state"]
+        if new_state is not None:
+            repo.update_session(conn, new_state, now)
+            repo.insert_turn_log(
+                conn, new_state["session_id"], new_state["turn"], new_state["revision"], "meta", None, None,
+                {"command": command, "input": {k: v for k, v in payload.items() if k not in ("session_id", "request_id", "expected_revision")}},
+                None, None, now,
+            )
+            state = new_state
+        response = {"revision": state["revision"], "turn": state["turn"], "changed": new_state is not None}
+        response.update({k: v for k, v in result.items() if k != "changed"})
+        response["context"] = CX.brief(state, session["content"], save_info(session))
+        return response
+
+    return session_write(ctx, command, payload, handler)
+
+
+def set_boundary(ctx, payload):
+    from ..domain import meta
+
+    payload = validate(specs.SET_BOUNDARY, payload)
+    if payload["action"] == "remove" and not (payload["boundary_id"] or payload["text"]):
+        raise AppError(INVALID_INPUT, "撤销边界要给 boundary_id 或原话", [detail("$.boundary_id", "缺少要撤销的边界", None, INVALID_INPUT)])
+    return _meta_write(
+        ctx,
+        "set-boundary",
+        payload,
+        lambda state, content: meta.set_boundary(state, content, payload["action"], payload["text"], payload["tags"], payload["boundary_id"]),
+    )
+
+
+def set_safety(ctx, payload):
+    from ..domain import meta
+
+    payload = validate(specs.SET_SAFETY, payload)
+    return _meta_write(ctx, "set-safety", payload, lambda state, content: meta.set_safety(state, payload["paused"], payload["change_scene"]))
+
+
+def set_preferences(ctx, payload):
+    from ..domain import meta
+
+    payload = validate(specs.SET_PREFERENCES, payload)
+    changes = {k: v for k, v in payload.items() if k not in ("session_id", "request_id", "expected_revision")}
+    return _meta_write(ctx, "set-preferences", payload, lambda state, content: meta.set_preferences(state, content, changes))
+
+
+def status(ctx, payload):
+    from ..projections import status as ST
+
+    payload = validate(specs.STATUS, payload)
+    session = repo.load_session(ctx.db(), payload["session_id"])
+    state, content = session["state"], session["content"]
+    out = {"session_id": session["session_id"], "revision": session["revision"], "turn": session["turn"], "level": payload["level"]}
+    if payload["level"] == "brief":
+        out["lines"] = ST.lines(state, content)
+        out["text"] = "\n".join("%s %s" % ("①②③④⑤⑥"[i], line) for i, line in enumerate(out["lines"]))
+    elif payload["level"] == "detail":
+        out["lines"] = ST.lines(state, content)
+        out["sections"] = ST.detail_sections(state, content)
+    else:
+        out["debug"] = ST.debug_view(state, content, save_info(session), repo.recent_turn_log(ctx.db(), session["session_id"], 5))
+    return out

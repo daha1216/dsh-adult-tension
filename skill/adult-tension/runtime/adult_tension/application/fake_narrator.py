@@ -10,8 +10,8 @@ from ..domain import rng
 from ..domain import state as SS
 from ..domain import structure as ST
 
-KINDS = ("continue", "attempt", "result", "wait", "move", "time", "promise", "roll")
-WEIGHTS = (3, 4, 2, 2, 1, 2, 1, 1)
+KINDS = ("continue", "attempt", "result", "wait", "move", "time", "promise", "roll", "reveal", "voice", "evidence")
+WEIGHTS = (3, 4, 2, 2, 1, 2, 1, 1, 1, 1, 1)
 MOODS = ("绷着", "松了口气", "若有所思", "不耐烦", "心不在焉", "警惕")
 
 
@@ -42,6 +42,41 @@ class FakeNarrator:
             "quotes": [],
         }
         turn = state["turn"] + 1
+        majors = [c for c in present if state["characters"][c]["tier"] == "major" and state["characters"][c].get("intimacy")]
+        if kind == "reveal" and present:
+            npc = self._pick(state, "reveal.npc", sorted(present))
+            secrets = sorted(
+                fid
+                for fid, fact in state["facts"].items()
+                if npc in fact["known_by"] and player not in fact["known_by"] and fact["visibility"] == "private" and fact["truth"]
+            )
+            if secrets and SS.has_edge_either(state, npc, player):
+                ops.append({"op": "reveal_fact", "fact_id": self._pick(state, "reveal.fact", secrets), "from": npc, "to": [player]})
+                ops.append({"op": "npc_action", "npc_id": npc, "action": "压低声音说了一件事", "significant": False})
+                commit.update(action_mode="continue", player_input="继续")
+                commit["summary"] = "%s对玩家角色说了一件事。" % state["characters"][npc]["name"]
+                commit["open_action"] = "%s说完，等着看反应" % state["characters"][npc]["name"]
+                return self._finish(state, commit, turn)
+            kind = "continue"
+        if kind == "voice" and majors:
+            npc = self._pick(state, "voice.npc", sorted(majors))
+            current = state["preferences"]["voice"].get(npc, {})
+            voice = "surface" if current.get("voice") == "inner" else "inner"
+            ops.append({"op": "set_voice", "npc_id": npc, "voice": voice, "cause": "player_request", "note": "玩家要对方换个说话方式"})
+            ops.append({"op": "npc_response", "npc_id": npc, "response": self._pick(state, "voice.resp", ["refuse", "partial"]), "note": "换了语气回答"})
+            commit.update(action_mode="attempt", player_authorized=True, acts_on=[npc], player_input="别装了，说点真心话")
+            commit["summary"] = "玩家角色请%s说真心话。" % state["characters"][npc]["name"]
+            commit["open_action"] = "%s的话停在一半" % state["characters"][npc]["name"]
+            return self._finish(state, commit, turn)
+        if kind == "evidence" and majors:
+            npc = self._pick(state, "evidence.npc", sorted(majors))
+            ops.append({"op": "intimacy_evidence", "npc_id": npc, "item": "likes", "direction": "add", "value": "被人记住随口说过的话", "evidence": "玩家角色记得那句话"})
+            ops.append({"op": "npc_action", "npc_id": npc, "action": "愣了一下，笑了", "significant": False})
+            commit["summary"] = "%s笑了一下。" % state["characters"][npc]["name"]
+            commit["open_action"] = "%s的笑还没收起来" % state["characters"][npc]["name"]
+            return self._finish(state, commit, turn)
+        if kind in ("reveal", "voice", "evidence"):
+            kind = "continue"
         if kind == "move":
             here = SS.location(world, state["scene"]["location_id"])
             target = self._pick(state, "move.to", sorted(here["exits"]))
@@ -137,6 +172,9 @@ class FakeNarrator:
                 )
                 commit["summary"] = "四周安静，远处传来汽笛。"
                 commit["open_action"] = "汽笛声还在回响"
+        return self._finish(state, commit, turn)
+
+    def _finish(self, state, commit, turn):
         if state["requests"].get("chapter_summary"):
             commit["chapter_summary"] = "第%d回合之前：玩家角色在%s度过了一段夜班。" % (turn, state["world_title"])
         return commit

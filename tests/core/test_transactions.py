@@ -167,6 +167,49 @@ class SaveLoadTest(unittest.TestCase):
             self.assertEqual(caught.exception.code, "NOT_FOUND")
 
 
+class MetaCommandTest(unittest.TestCase):
+    def test_meta_commands_change_revision_not_turn_and_replay(self):
+        with app() as ctx:
+            ids = Ids()
+            sid = open_game(ctx, ids, mode="daily", seed=12)["session_id"]
+            rid = ids()
+            payload = {"session_id": sid, "request_id": rid, "expected_revision": 1, "action": "add", "text": "不要涉及怀孕", "tags": ["pregnancy"]}
+            first = service.set_boundary(ctx, payload)
+            self.assertEqual((first["revision"], first["turn"]), (2, 1))
+            self.assertEqual(first["receipt"], "已记下：不会出现涉及怀孕")
+            self.assertEqual(first["context"]["safety"]["boundaries"], ["不要涉及怀孕"])
+            again = service.set_boundary(ctx, payload)
+            self.assertTrue(again["replayed"])
+            paused = service.set_safety(ctx, {"session_id": sid, "request_id": ids(), "expected_revision": 2, "paused": True})
+            self.assertEqual(paused["receipt"], "已暂停。说“继续”恢复，或说“换个场景”")
+            self.assertTrue(paused["context"]["safety"]["paused"])
+            prefs = service.set_preferences(ctx, {"session_id": sid, "request_id": ids(), "expected_revision": 3, "assistant": True})
+            self.assertEqual(prefs["receipt"], "叙事助手：开")
+            status = service.status(ctx, {"session_id": sid})
+            self.assertEqual(len(status["lines"]), 6)
+            self.assertIn("已暂停", status["lines"][4])
+            self.assertIn("不要涉及怀孕", status["lines"][4])
+            detail_view = service.status(ctx, {"session_id": sid, "level": "detail"})
+            self.assertTrue(detail_view["sections"])
+            debug_view = service.status(ctx, {"session_id": sid, "level": "debug"})
+            self.assertEqual(debug_view["debug"]["invariant_problems"], [])
+            self.assertLessEqual(debug_view["debug"]["context_bytes"]["brief"], 6 * 1024)
+            self.assertEqual(session(ctx, sid)["turn"], 1)
+
+    def test_bad_meta_inputs(self):
+        with app() as ctx:
+            ids = Ids()
+            sid = open_game(ctx, ids, mode="daily", seed=13)["session_id"]
+            with self.assertRaises(AppError) as caught:
+                service.set_boundary(ctx, {"session_id": sid, "request_id": ids(), "expected_revision": 1, "action": "add", "text": "不要X", "tags": ["nope"]})
+            self.assertEqual(caught.exception.details[0]["path"], "$.tags[0]")
+            with self.assertRaises(AppError):
+                service.set_safety(ctx, {"session_id": sid, "request_id": ids(), "expected_revision": 1, "paused": False, "change_scene": True})
+            with self.assertRaises(AppError):
+                service.set_preferences(ctx, {"session_id": sid, "request_id": ids(), "expected_revision": 1})
+            self.assertEqual(session(ctx, sid)["revision"], 1)
+
+
 class NewGameCommandTest(unittest.TestCase):
     def test_mode_is_required_unless_replaying(self):
         with app() as ctx:

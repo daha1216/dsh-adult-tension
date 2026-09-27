@@ -24,6 +24,20 @@ class WorldPackTest(unittest.TestCase):
             _normalized, problems = worldpack.validate_world(pack, tag_ids=TAG_IDS)
             self.assertEqual(problems, [], pack["id"])
 
+    def test_underage_templates_are_rejected_with_their_path(self):
+        import copy
+
+        pack = copy.deepcopy(STORE.world("harbor_night_shift"))
+        pack["character_templates"][2]["age_range"] = [16, 30]
+        pack["background_cast"][0]["age_range"] = [17, 40]
+        pack["player_identities"][1]["age_range"] = [15, 40]
+        _normalized, problems = worldpack.validate_world(pack, tag_ids=TAG_IDS)
+        paths = {p["path"] for p in problems if "小于 18" in p["reason"]}
+        self.assertEqual(
+            paths,
+            {"$.character_templates[2].age_range", "$.background_cast[0].age_range", "$.player_identities[1].age_range"},
+        )
+
     def test_fixed_seed_openings_come_from_one_world(self):
         for pack in worlds():
             count, failures = opening_checks.fixed_seed_openings(pack, range(1, 11))

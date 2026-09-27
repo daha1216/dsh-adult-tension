@@ -102,3 +102,45 @@ VERIFY_CONTENT = _obj(
     },
     "verify-content",
 )
+
+SET_BOUNDARY = _obj(
+    dict(
+        session_write_fields(),
+        action=F(S.Enum("add", "remove"), desc="add 登记 / remove 撤销"),
+        text=F(S.Nullable(S.Str(1, 80)), required=False, default=None, desc="玩家的原话，例如“不要涉及怀孕”"),
+        tags=F(S.List(S.Id(), max_items=6, unique=True), required=False, default=[], desc="映射到的内容标签；映射不上就留空（记为 custom，由你自己遵守）"),
+        boundary_id=F(S.Nullable(S.Id()), required=False, default=None, desc="撤销时可用边界 ID"),
+    ),
+    "set-boundary",
+)
+
+SET_SAFETY = _obj(
+    dict(
+        session_write_fields(),
+        paused=F(S.Bool(), desc="true 暂停 / false 恢复"),
+        change_scene=F(S.Bool(), required=False, default=False, desc="“换个场景”：保持暂停，换到新的非亲密场景"),
+    ),
+    "set-safety",
+)
+
+VOICE_CHANGE = S.Obj({"npc_id": F(S.Id()), "voice": F(S.Enum("surface", "inner"))}, name="语态")
+SET_PREFERENCES = _obj(
+    dict(
+        session_write_fields(),
+        inner_view=F(S.Bool(), required=False),
+        assistant=F(S.Bool(), required=False),
+        offscreen_simulation=F(S.Bool(), required=False),
+        person=F(S.Enum(*ST.PERSONS), required=False),
+        npc_gender_preference=F(S.Enum(*ST.NPC_GENDER_PREFERENCES), required=False),
+        voice=F(VOICE_CHANGE, required=False),
+    ),
+    "set-preferences",
+)
+
+STATUS = _obj(
+    {
+        "session_id": F(SESSION_ID),
+        "level": F(S.Enum("brief", "detail", "debug"), required=False, default="brief", desc="brief 六行 / detail 状态+ / debug 调试"),
+    },
+    "status",
+)

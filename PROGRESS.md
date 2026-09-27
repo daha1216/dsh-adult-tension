@@ -4,8 +4,8 @@
 
 ## 当前状态
 
-- 当前阶段：阶段 2（人物、知识、关系与安全）
-- 下一步：`reveal_fact`/`spread_rumor`/误信揭晓 → 语态与内心可见、倾向卡证据 → 把柄与亲密结构检查 → 登场与升格 → 边界、暂停、换个场景 → `set-boundary`/`set-safety`/`set-preferences`/`status`
+- 当前阶段：阶段 3（时间、事件与长期记忆）
+- 下一步：结算顺序补齐离屏推演、传播与上下文请求 → 快进预览 + 提交 → 转折 → `undo-turn`、`replaces_turn`、追溯 → 章节摘要与归档、列表上限 → `tools/simulate.py` 两条 300 回合模拟
 
 ## 待决事项（需要用户决定）
 
@@ -163,6 +163,49 @@
 
 遗留：P1/P4（真实宿主试玩与 `released`）；反向验证 4（注释掉年龄检查）在阶段 2 年龄检查全部到位后统一做并保存输出。
 
+### 阶段 2：人物、知识、关系与安全 —— 自动化部分完成；真实宿主试玩待 P1
+
+做了什么：
+
+- **新操作**（`domain/ops_people.py`，注册进同一张操作表）：`reveal_fact`（只沿关系边；当面告知双方都在场；内心事实永不传播；告诉真相时纠正同键误信并在 `applied.corrected` 里报告信息集变化）、`spread_rumor`（生成新的假事实，来源 `rumor`，原事实不变；无渠道时沿关系边且在场，经走样渠道可达没有关系边的人，精确渠道不能走样）、`set_voice`（玩家要求 > 已激活 > NPC 自主 > 默认；NPC 自主切入里层必须有触发因素，`alone` 与 `drunk` 由引擎核对；语态与关系变化不能共用原因）、`intimacy_evidence`（同项同方向 2 个不同回合、界线放宽 3 个，同回合只算一次，数值不截断）、`identity_update`、`npc_update`、`introduce_character`（成年检查、按层级补齐字段、名字取自名字池、重要人物不同姓、世界与已有 ID 不复用、配对偏好）、`promote_character`（只升不降、保留 ID、补齐字段、身份卡与倾向卡只创建一次）、`leverage_set`/`leverage_release`（持有方必须知道依据；玩家作为持有方需要玩家本人指令）。
+- **卡片**（`domain/cards.py`）：各层级的必填字段；一次提交里同一 NPC 的身份/倾向卡最多改 2 项。
+- **亲密结构检查**（`domain/turn.py`）：参与者必须写明、都是在场的成年重要角色、没有醉酒/睡着/失去意识、每个 NPC 本提交有 `partial`/`genuine` 回应或主动行动、玩家的同意只来自 `result`/`attempt` + 授权、任意两人之间没有生效中的把柄（开局时生效或本提交新建的都算，本提交才解除的仍然阻断）；不保存任何同意记录。
+- **元命令**（`domain/meta.py` + 应用层）：`set-boundary`（映射标签，映射不上记为 `custom` 并保留原话）、`set-safety`（暂停、恢复时清空互动判断、“换个场景”保持暂停并开新场景）、`set-preferences`（内心可见、叙事助手、离屏推演、人称、配对偏好、玩家要求的语态）。三者改变 revision、不推进回合，重放幂等。
+- **`status`**（`projections/status.py`）：六行人话（不露字段名与关系数值，伏笔、传闻、概率事件不进玩家的待办）、状态+（关系变化原因、承诺与期限、玩家知道的秘密、人物、谁可能出手、设置）、调试（结构化状态、最近提交、上下文体积、不变量检查）。
+- `SKILL.md` 更新为 13 478 字节（边界、暂停、偏好、状态、新操作）；参考文件重新生成。假叙述者增加告知、语态、倾向证据三类回合。
+
+执行过的命令（阶段收尾）：
+
+| 命令 | 退出码 | 结果 |
+|---|---|---|
+| `python -m unittest discover -s tests/core` | 0 | 133 个测试，1.01 s |
+| `python -m unittest discover -s tests/content` | 0 | 10 个测试，1.42 s |
+| `python -m unittest discover -s tests/integration` | 0 | 17 个测试，8.38 s |
+| `python tools/validate_skill.py skill/adult-tension` | 0 | OK（第一次跑出 1 处：我的临时脚本在 Skill 里留下了 `__pycache__`，已删除，见 D4） |
+| `doctor` / `verify-content` / `smoke --seed 42` | 0 / 0 / 0 | `warn`（没有 released 世界）/ 0 处问题 / 通过；另跑 `smoke --turns 30` 两条各 31 回合通过 |
+| `python tools/reverse_checks.py` | 0 | 反向验证 4：五处年龄检查逐一注释掉，每一处都让测试失败（`reports/reverse/age-checks.json`） |
+| `python tools/benchmark.py --json` | 0 | `reports/benchmarks/stage2.json` |
+
+基准（P95）：进程内 开局 4.4 ms、提交 3.85 ms、上下文 1.23 ms、保存 4.87 ms、读档 5.56 ms（各 200 次）；冷进程 `new-game` 92.4 ms、`commit-turn` 82.3 ms、`get-context` 70.2 ms、第一次 `doctor` 211.4 ms、之后 `doctor` 66.1 ms（各 50 次）。全部低于门槛。
+
+追溯（本阶段的 P0 行）：
+
+| 需求 | 证据 |
+|---|---|
+| 知识边界 / 信息差与误信 | `tests/core/test_people_safety.py::KnowledgeTravelTest`（沿关系边、在场、内心不传播、揭晓纠正误信、传闻是新事实原事实不变、走样渠道） |
+| 关系传播（本阶段部分） | 同上；冻结时不传播在阶段 3 |
+| 表层/里层语态 | `VoiceTest`（自主切换的触发、玩家要求优先、语态不改关系、原因不共用） |
+| 内心可见 | `test_inner_facts_never_travel`；`SafetyTest.test_preferences_and_player_requested_voice` |
+| 亲密偏好与演化 | `CardEvolutionTest`（2 回合、界线放宽 3 回合、同回合一次、逐项上限、数值不截断、身份卡逐项） |
+| 身份与处境 | `test_identity_is_created_once`；把柄阻断亲密 |
+| 新角色登场与升格 | `NewCharacterTest`（年龄、缺失年龄、层级字段、名字池、同姓、ID 不复用、配对偏好、升格只升不降并补齐） |
+| 硬边界 / 暂停 / 同意可撤回 / 处境不是同意 | `LeverageAndIntimacyTest`、`SafetyTest`（边界 SAFETY_BLOCK、亲密标签边界、暂停阻断亲密与冲突但不阻断剧情、换个场景保持暂停、恢复清空判断、不继承同意） |
+| 状态 / 状态+ | `StatusTest`（六行、无字段名与关系数值、伏笔不进待办、状态+ 只列玩家知道的事）；`MetaCommandTest` |
+| 配对偏好 / 玩家角色设定 / 人称 | `test_gender_preference_applies_to_new_characters`；`PeopleTest`；`set-preferences` 的 `person` |
+| 继续 / 等待 | `ModeRulesTest`（继续与等待不替玩家移动、承诺、同意；必须有可观察的变化） |
+
+遗留：真实宿主试玩（剧本 3、6、7、8、9、10 的主干）依赖 P1；`SKILL.md` 余量约 2.9 KB，阶段 3、4 的说明要更紧凑。
+
 ## 规范冲突与选择
 
 | # | 冲突 | 暂行选择 | 理由 | 状态 |
@@ -193,6 +236,12 @@
 - **“重开 N 号”**：本机 `opening_history` 记录每个种子的开局条件；`new-game` 带 `replay: true` 时恢复这些条件；不带时 `seed` + 条件就是纯函数。
 - **`include_drafts` 的开发开关**：环境变量 `ADULT_TENSION_INCLUDE_DRAFTS=1` 等同 `--include-drafts`，只由测试环境设置，不写进 `SKILL.md`。
 - **上下文深度**：开局、读档、每 5 回合、地点变化、新角色登场、跨日给完整上下文；“上一次提交出错后给完整上下文”在阶段 3 实现（需要在不改变状态的前提下记录失败）。
+- **`identity_update` 与 `npc_update`**（新增操作）：规范要求身份卡“只能逐项演化”、其余字段“通过对应操作修改”，但没有列出操作名；这两个操作各改一项，原因必填。
+- **一次提交里同一 NPC 的身份/倾向卡最多改 2 项**：落实“不允许一次重写整张卡或整体翻转”。
+- **新角色的名字**：重要与次要角色的姓必须取自世界名字池，且与本局重要人物不同姓（亲属写 `kin_of`）；背景人物不限。
+- **`reveal_fact` 告知假事实**：接收者加入误信名单；告知真事实时，接收者若误信同键假事实，会被移出误信名单、改为“知道这个说法不真”。
+- **元命令的重复调用**：已经暂停时再暂停、登记同一句边界，返回同样的回执但不改状态（revision 不变），避免玩家重复说一遍时报错。
+- **状态里的待办**只列约定、截止、机会；伏笔、风声、概率事件属于引擎与叙事，不作为玩家可见的倒计时。
 
 ## 默认值调整
 
@@ -204,3 +253,6 @@
 |---|---|---|---|
 | D1 | 开局把台风、医务室、凌晨两点签到等写死在人物组合的文本里，与抽到的活动/压力/地点矛盾（例：压力是“被扣下的外烟”，组合文本却说台风前吊最后一船） | 组合文本描述了具体场景，而组合与活动、地点是独立抽取的 | 组合文本改为只写人物之间的关系与处境；钩子去掉场所假设，必须依赖地点的钩子用 `location_ids` 限定 |
 | D2 | `smoke` 的两次运行复用了同一批 `request_id` 与存档名 | 测试脚本的计数器按运行重置 | 请求号与存档名按模式区分；引擎当时正确返回了 `IDEMPOTENCY_CONFLICT` 与 `SLOT_CONFLICT` |
+| D3 | 反向验证 4 第一次运行：注释掉“登场年龄”“亲密参与者年龄”“内容校验年龄”三处检查后测试仍然通过 | 前两处被不变量兜底网以另一个路径拦下，测试只断言了错误码；第三处没有测试 | 测试改为断言各自检查的错误路径，并补了内容校验的年龄测试；复跑五处全部让测试失败 |
+| D4 | `validate_skill` 报 Skill 运行时目录里有 `__pycache__` | 我的一次临时预览脚本没有设置字节码缓存目录 | 删除缓存；之后的临时脚本都设置 `PYTHONPYCACHEPREFIX`；`validate_skill` 的这条检查本身工作正常 |
+| D5 | 状态六行把远期伏笔连同倒计时列进了“压力与待办” | 待办取了所有涉及玩家的事件 | 只列约定、截止、机会，并补测试 |

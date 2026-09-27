@@ -76,6 +76,9 @@ class TurnContext:
         self.moved = {}
         self.relationship_reasons = []
         self.voice_reasons = []
+        self.card_ops = {}
+        # Ids reserved by the world pack: never reused for new characters.
+        self.world_ids = {t["id"] for t in world.get("character_templates", [])} | {b["id"] for b in world.get("background_cast", [])}
 
     def error(self, path, reason, hint=None, code=INVARIANT_VIOLATION):
         self.errors.append(detail(path, reason, hint, code))
@@ -850,3 +853,7 @@ def check_safety_tags(state, tags):
                 )
             )
     return problems
+
+
+# People, knowledge and leverage operations register themselves on import.
+from . import ops_people  # noqa: E402,F401

@@ -78,7 +78,8 @@ description: Run a Chinese interactive story for adults with a local determinist
          "content_tags": [], "summary": "第三方视角一两句", "open_action": "停在哪个未决动作", "quotes": []}
 
    - `player_authorized: true` 只在玩家本人的话授权了玩家角色的移动、承诺、交易、同意或设定修改时。
-   - 常用操作：`npc_response`、`npc_action`（重大行动带 `significant: true`，看上下文 `can_act`）、`npc_state`、`add_fact`、`relationship`、`advance_time`（不写默认推进 3 分钟）、`move`、`enter_scene`/`exit_scene`、`event_create`/`event_resolve`/`event_cancel`、`roll`、`player_update`。字段见 `references/operations.md`。
+   - 常用操作：`npc_response`、`npc_action`（重大行动带 `significant: true`，看上下文 `can_act`）、`npc_state`、`add_fact`、`relationship`、`advance_time`（不写默认推进 3 分钟）、`move`、`enter_scene`/`exit_scene`、`event_create`/`event_resolve`/`event_cancel`、`roll`、`player_update`。
+   - 人物与知识：`reveal_fact`（沿关系边当面告知）、`spread_rumor`（走样的传闻，生成新的假事实）、`set_voice`（表层/里层）、`introduce_character` / `promote_character`（新角色必须明确成年，名字取自完整上下文的 `name_pool`）、`intimacy_evidence`、`identity_update`、`npc_update`、`leverage_set` / `leverage_release`。字段见 `references/operations.md`。
    - 正文里新写出、以后要用到的细节，用 `add_fact` 记下。正文不是记忆。
 4. 只根据返回的 `applied`、`resolved_events`、新的 `context` 写正文。掷骰结果、事件到期都由运行时决定，你负责描写。
 5. 页脚：`【时间】{context.clock.label}｜【地点】{context.scene.location}｜回合：{turn}`。叙事助手开启时（`context.preferences.assistant`），末尾加“可以：① …… ② …… ③ ……”，只给提示，不替玩家决定。
@@ -95,15 +96,19 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 ## NPC
 
-- NPC 只根据**自己知道的事实**行动（`basis_fact_ids` 必须在其信息集里）；内心描写永远不成为任何人的知识。
+- NPC 只根据**自己知道的事实**行动（`basis_fact_ids` 必须在其信息集里）；内心描写永远不成为任何人的知识（内心只用 `inner` 事实记录，不能传播）。
 - NPC 可以拒绝、讨价还价、表面答应、主动出手；重大行动有冷却。多个 NPC 在场时，他们之间也有关系和目标。
+- 表层 / 里层语态按上下文里的 `voice` 写。玩家说“别装了”“说点真心话”：同一回合用 `set_voice`（`cause: player_request`）切换；NPC 可以换语态说“不”。语态不是关系升级，和关系变化分开写原因。
+- 内心可见开启时（`preferences.inner_view`），可以单独成段写在场 NPC 没说出口的念头；玩家角色不知道这些。
 
 ## 亲密与安全（完整规则见 `references/narrative.md` §7）
 
 - 同意只来自角色此刻可见的言行；沉默、含混、压力下的默许都不算。处境（债务、上下级、把柄、截止时间）永远不是同意。同意可以随时撤回，立即生效。
 - 亲密场景：逐步推进，玩家要求到哪一步就停在哪一步；每一步都写出对方的反应；玩家明确要求写出的过程不强制淡出，没要求的不擅自展开；不复读。提交带 `intimate` 或 `explicit` 标签时写 `intimate_participants`（含玩家），每个 NPC 参与者本回合要有 `partial`/`genuine` 回应或主动行动。
+- 有人开始拿捏另一个人（把柄、债务、生计）时，同一次提交用 `leverage_set` 登记；解除前这两人之间不进入亲密场景。被拒时在故事里让处境本身成为阻碍，不对玩家报错。
 - 任一方表现出停止意愿、玩家说“暂停”、触及玩家说过的边界：立即停下。
-- 当前版本还不能把“边界：不要 X”“暂停”登记进运行时：玩家这样说时，在正文里立刻照做（停下、回到中性叙述；之后不写 X），回执“已记下：不会出现 X”/“已暂停。说‘继续’恢复，或说‘换个场景’”，并在此后每一次提交中遵守。
+- “边界：不要 X”：`set-boundary`（`action: add`，`text` 是玩家原话，`tags` 映射到内容标签，映射不上留空）。之后带冲突标签的提交会被拒（`SAFETY_BLOCK`）；映射不上的边界由你在每次写作中遵守。
+- “暂停”（安全词、pause）：`set-safety` `{"paused": true}`，立即停下，回到中性叙述。暂停期间带亲密或冲突标签的提交都被拒；非亲密的剧情可以继续。“换个场景”：`{"paused": true, "change_scene": true}`，然后写一个新的非亲密场景。暂停中玩家说“继续 / 恢复 / 解除暂停”：`{"paused": false}`，从停下的那一点重新开始，对方的反应重新判断，不接着升级。
 - 不在正文里逐回合重复免责声明或安全提醒。
 
 ## 命令与别名
@@ -117,7 +122,11 @@ description: Run a Chinese interactive story for adults with a local determinist
 | 另存为 名称 | `save-slot`，带新名称与 `"save_as": true` |
 | 读档 [名称]、l | `load-slot`（`{"request_id", "name"}`）；没给名称或名称不存在时 `list-slots` 让玩家选 |
 | 存档列表 | `list-slots`（无输入） |
-| 状态、撤销、快进、来点转折、导出/导入、内心可见等开关 | 当前版本还没开放：用一句话告诉玩家 |
+| 状态 / 状态+ / 调试 | `status`（`level`: `brief` / `detail` / `debug`），把 `lines`（和 `sections`）原样转述，不加叙事 |
+| 边界：不要 X / 撤销边界 X | `set-boundary`（`add` / `remove`） |
+| 暂停、安全词、pause / 换个场景 | `set-safety` |
+| 内心可见 开/关、叙事助手 开/关、离屏推演 开/关、语态 某人 表/里、改用第三人称、NPC 性别偏好 | `set-preferences`（`inner_view`、`assistant`、`offscreen_simulation`、`voice: {"npc_id", "voice"}`、`person`、`npc_gender_preference`） |
+| 撤销、快进、来点转折、导出/导入、继续上次 | 当前版本还没开放：用一句话告诉玩家 |
 | 帮助、h、? | 列出上面的说法 |
 
 缺少对象时追问一次，不猜。存档名已被占用（`SLOT_CONFLICT` 且 `reason: exists`）：问“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重交。`reason: changed_elsewhere`：给玩家“A 读取最新 / B 另存为新名 / C 取消”。
@@ -128,6 +137,8 @@ description: Run a Chinese interactive story for adults with a local determinist
 |---|---|
 | 保存 / 另存为 | 用返回的 `receipt`（“已保存到「名称」·第 N 回合”） |
 | 读档 | 返回的 `receipt`；再用 `resume`（最近摘要、原话、`open_action`）写两三句前情，然后从未决动作的前一刻接着写，不重复开局 |
+| 边界 / 暂停 / 开关 | 返回的 `receipt`（“已记下：不会出现 X”“已暂停。说‘继续’恢复，或说‘换个场景’”“内心可见：开”） |
+| 状态 | `status` 的六行，编号 ①–⑥ |
 
 ## 参考资料（需要时再读）
 

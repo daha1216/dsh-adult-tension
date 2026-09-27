@@ -41,6 +41,16 @@
 | `event_cancel` | 因剧情取消未结束的事件（outcome: cancelled_by_story） |
 | `roll` | 即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能再嵌套 roll，也不能推进时间）。结果以返回的 applied 为准 |
 | `player_update` | 玩家角色的姓名、称谓、背景、资源与风险。只能在 result 或 rewrite 模式、并带 player_authorized |
+| `reveal_fact` | 把一条事实从知情人告诉别人。只能沿已有的关系边进行，当面告知时双方都要在场；内心事实永远不能传播。告诉某人真相时，若他正误信同键的假事实，引擎记录他的信息集变化 |
+| `spread_rumor` | 传出一条走样的传闻：生成新的假事实（来源为传闻），原事实不变。不经渠道时沿关系边、双方在场；经世界里的走样渠道时可以传到没有关系边的人 |
+| `set_voice` | 切换 NPC 的表层/里层语态。玩家要求（player_request）优先；NPC 自主切入里层（npc_self）要写触发因素：alone 独处 / drunk 醉意 / breakdown 情绪崩溃 / exposed 被戳穿；revert 切回表层。语态只改变说话方式，不是关系升级，note 不能与同一提交里的关系变化共用原因 |
+| `intimacy_evidence` | 为私密倾向卡的某一项记一条证据。同一项同一方向需要至少 2 条来自不同回合的证据才会改动（界线项的放宽 remove 需要 3 条）；数值项用 increase/decrease，列表项用 add/remove，文字项用 set |
+| `identity_update` | 逐项修改身份卡（资源、限制、义务用 add/remove；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换 |
+| `npc_update` | 修改 NPC 的公开身份、外貌、当前目标、对关系的态度或处境（不含身份卡与倾向卡） |
+| `introduce_character` | 新角色登场：必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason |
+| `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给 |
+| `leverage_set` | 登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一提交里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间，双方之间的亲密提交被拒 |
+| `leverage_release` | 解除把柄（把柄被销毁、债务结清、秘密已经公开等），原因必填。同一提交里先解除再亲密不算解除 |
 
 ## `advance_time`
 
@@ -234,6 +244,311 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `add_background` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
 | `add_resources` | 数组（字符串，≤60 字，0–4 项） | 否，默认 `[]` |  |
 | `add_risks` | 数组（字符串，≤60 字，0–4 项） | 否，默认 `[]` |  |
+
+## `reveal_fact`
+
+把一条事实从知情人告诉别人。只能沿已有的关系边进行，当面告知时双方都要在场；内心事实永远不能传播。告诉某人真相时，若他正误信同键的假事实，引擎记录他的信息集变化
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`reveal_fact` | 是 |  |
+| `fact_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `from` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `to` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，1–12 项） | 是 |  |
+| `spread` | 布尔 | 否，默认 `false` |  |
+
+## `spread_rumor`
+
+传出一条走样的传闻：生成新的假事实（来源为传闻），原事实不变。不经渠道时沿关系边、双方在场；经世界里的走样渠道时可以传到没有关系边的人
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`spread_rumor` | 是 |  |
+| `from` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `source_fact_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `key` | 字符串，≤80 字，点分的 ASCII 小写键，例如 lin_wan.secret.press | 是 |  |
+| `text` | 字符串，≤120 字 | 是 |  |
+| `believed_by` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，1–20 项） | 是 |  |
+| `channel_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+
+## `set_voice`
+
+切换 NPC 的表层/里层语态。玩家要求（player_request）优先；NPC 自主切入里层（npc_self）要写触发因素：alone 独处 / drunk 醉意 / breakdown 情绪崩溃 / exposed 被戳穿；revert 切回表层。语态只改变说话方式，不是关系升级，note 不能与同一提交里的关系变化共用原因
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`set_voice` | 是 |  |
+| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `voice` | 枚举：`surface` / `inner` | 是 |  |
+| `cause` | 枚举：`player_request` / `npc_self` / `revert` | 是 |  |
+| `trigger` | 枚举：`alone` / `drunk` / `breakdown` / `exposed` 或 null | 否，默认 `null` |  |
+| `note` | 字符串，≤80 字 | 是 |  |
+
+## `intimacy_evidence`
+
+为私密倾向卡的某一项记一条证据。同一项同一方向需要至少 2 条来自不同回合的证据才会改动（界线项的放宽 remove 需要 3 条）；数值项用 increase/decrease，列表项用 add/remove，文字项用 set
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`intimacy_evidence` | 是 |  |
+| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `item` | 枚举：`desire_level` / `self_control` / `attraction_sources` / `likes` / `dislikes` / `preconditions` / `boundaries` / `expression` / `desired_position` | 是 |  |
+| `direction` | 枚举：`increase` / `decrease` / `add` / `remove` / `set` | 是 |  |
+| `value` | 字符串，≤80 字 或 null | 否，默认 `null` |  |
+| `evidence` | 字符串，≤80 字 | 是 |  |
+
+## `identity_update`
+
+逐项修改身份卡（资源、限制、义务用 add/remove；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`identity_update` | 是 |  |
+| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `item` | 枚举：`authority` / `resources` / `limits` / `obligations` / `exposure_risk` / `hidden_mismatch` | 是 |  |
+| `action` | 枚举：`add` / `remove` / `set` | 是 |  |
+| `value` | 字符串，≤120 字 | 是 |  |
+| `reason` | 字符串，≤80 字 | 是 |  |
+
+## `npc_update`
+
+修改 NPC 的公开身份、外貌、当前目标、对关系的态度或处境（不含身份卡与倾向卡）
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`npc_update` | 是 |  |
+| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `field` | 枚举：`public_role` / `appearance` / `current_goal` / `relationship_stance` / `situation_trigger` / `situation_pressure` | 是 |  |
+| `value` | 字符串，≤120 字 | 是 |  |
+| `reason` | 字符串，≤80 字 | 是 |  |
+
+## `introduce_character`
+
+新角色登场：必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`introduce_character` | 是 |  |
+| `id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `name` | 字符串，≤12 字 | 是 |  |
+| `tier` | 枚举：`background` / `supporting` / `major` | 是 |  |
+| `age` | 整数 0..120 | 是 |  |
+| `gender` | 枚举：`female` / `male` / `nonbinary` | 是 |  |
+| `gender_reason` | 字符串，≤80 字 或 null | 否，默认 `null` |  |
+| `adult_context` | 字符串，≤80 字 | 是 |  |
+| `public_role` | 字符串，≤30 字 | 是 |  |
+| `kin_of` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `present` | 布尔 | 否，默认 `true` |  |
+| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
+| `line` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
+| `identity` | 对象（身份） 或 null | 否，默认 `null` |  |
+| `decision` | 对象（决策卡） 或 null | 否，默认 `null` |  |
+| `intimacy` | 对象（私密倾向卡） 或 null | 否，默认 `null` |  |
+| `voices` | 对象（语态） 或 null | 否，默认 `null` |  |
+| `situation` | 对象（处境） 或 null | 否，默认 `null` |  |
+| `schedule` | 数组（对象，0–6 项） 或 null | 否，默认 `null` |  |
+
+#### `identity` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `authority` | 字符串，≤120 字 | 是 |  |
+| `resources` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `limits` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `obligations` | 数组（字符串，≤80 字，0–8 项） | 否，默认 `[]` |  |
+| `exposure_risk` | 字符串，≤120 字 | 是 |  |
+| `hidden_mismatch` | 字符串，≤120 字 | 是 |  |
+
+#### `decision` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `core_value` | 字符串，≤60 字 | 否 |  |
+| `current_goal` | 字符串，≤80 字 | 否 |  |
+| `pressure_responses` | 对象（压力反应四档） | 否 |  |
+| `withdrawal` | 字符串，≤120 字 | 否 |  |
+| `relationship_stance` | 字符串，≤80 字 | 否 |  |
+| `contrast` | 字符串，≤80 字 | 否 |  |
+| `prefers` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
+| `avoids` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
+| `never` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
+
+#### `intimacy` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `desire_level` | 整数 0..5 | 是 |  |
+| `attraction_sources` | 数组（字符串，≤80 字，2–8 项） | 是 |  |
+| `likes` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `dislikes` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `preconditions` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `boundaries` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `expression` | 字符串，≤80 字 | 是 |  |
+| `self_control` | 整数 0..5 | 是 |  |
+| `desired_position` | 字符串，≤40 字 | 是 |  |
+
+#### `voices` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `surface` | 字符串，≤120 字 | 是 |  |
+| `inner` | 字符串，≤120 字 | 是 |  |
+
+#### `situation` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `trigger` | 字符串，≤120 字 | 是 |  |
+| `pressure` | 字符串，≤120 字 | 是 |  |
+| `exits` | 数组（对象，2–4 项） | 是 |  |
+
+#### `schedule[]` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `from` | 整数 0..1439 | 是 |  |
+| `to` | 整数 0..1439 | 是 |  |
+| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+
+#### `pressure_responses` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `low` | 字符串，≤120 字 | 是 |  |
+| `mid` | 字符串，≤120 字 | 是 |  |
+| `high` | 字符串，≤120 字 | 是 |  |
+| `breaking` | 字符串，≤120 字 | 是 |  |
+
+#### `exits[]` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `option` | 字符串，≤80 字 | 是 |  |
+| `cost` | 字符串，≤120 字 | 是 |  |
+
+不能出现在 `roll` 的分支里。
+
+## `promote_character`
+
+把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`promote_character` | 是 |  |
+| `character_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `to_tier` | 枚举：`supporting` / `major` | 是 |  |
+| `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
+| `line` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
+| `identity` | 对象（身份） 或 null | 否，默认 `null` |  |
+| `decision` | 对象（决策卡） 或 null | 否，默认 `null` |  |
+| `intimacy` | 对象（私密倾向卡） 或 null | 否，默认 `null` |  |
+| `voices` | 对象（语态） 或 null | 否，默认 `null` |  |
+| `situation` | 对象（处境） 或 null | 否，默认 `null` |  |
+| `schedule` | 数组（对象，0–6 项） 或 null | 否，默认 `null` |  |
+
+#### `identity` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `authority` | 字符串，≤120 字 | 是 |  |
+| `resources` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `limits` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `obligations` | 数组（字符串，≤80 字，0–8 项） | 否，默认 `[]` |  |
+| `exposure_risk` | 字符串，≤120 字 | 是 |  |
+| `hidden_mismatch` | 字符串，≤120 字 | 是 |  |
+
+#### `decision` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `core_value` | 字符串，≤60 字 | 否 |  |
+| `current_goal` | 字符串，≤80 字 | 否 |  |
+| `pressure_responses` | 对象（压力反应四档） | 否 |  |
+| `withdrawal` | 字符串，≤120 字 | 否 |  |
+| `relationship_stance` | 字符串，≤80 字 | 否 |  |
+| `contrast` | 字符串，≤80 字 | 否 |  |
+| `prefers` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
+| `avoids` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
+| `never` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
+
+#### `intimacy` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `desire_level` | 整数 0..5 | 是 |  |
+| `attraction_sources` | 数组（字符串，≤80 字，2–8 项） | 是 |  |
+| `likes` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `dislikes` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `preconditions` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `boundaries` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
+| `expression` | 字符串，≤80 字 | 是 |  |
+| `self_control` | 整数 0..5 | 是 |  |
+| `desired_position` | 字符串，≤40 字 | 是 |  |
+
+#### `voices` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `surface` | 字符串，≤120 字 | 是 |  |
+| `inner` | 字符串，≤120 字 | 是 |  |
+
+#### `situation` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `trigger` | 字符串，≤120 字 | 是 |  |
+| `pressure` | 字符串，≤120 字 | 是 |  |
+| `exits` | 数组（对象，2–4 项） | 是 |  |
+
+#### `schedule[]` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `from` | 整数 0..1439 | 是 |  |
+| `to` | 整数 0..1439 | 是 |  |
+| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+
+#### `pressure_responses` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `low` | 字符串，≤120 字 | 是 |  |
+| `mid` | 字符串，≤120 字 | 是 |  |
+| `high` | 字符串，≤120 字 | 是 |  |
+| `breaking` | 字符串，≤120 字 | 是 |  |
+
+#### `exits[]` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `option` | 字符串，≤80 字 | 是 |  |
+| `cost` | 字符串，≤120 字 | 是 |  |
+
+不能出现在 `roll` 的分支里。
+
+## `leverage_set`
+
+登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一提交里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间，双方之间的亲密提交被拒
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`leverage_set` | 是 |  |
+| `holder` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `subject` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `basis_fact_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `basis_text` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
+| `origin` | 字符串，≤60 字 | 是 |  |
+
+## `leverage_release`
+
+解除把柄（把柄被销毁、债务结清、秘密已经公开等），原因必填。同一提交里先解除再亲密不算解除
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`leverage_release` | 是 |  |
+| `leverage_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `reason` | 字符串，≤80 字 | 是 |  |
 
 ## 取值表
 
