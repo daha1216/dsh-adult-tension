@@ -124,7 +124,8 @@ class DocumentationConsistencyTests(unittest.TestCase):
         self.assertIn(f"{len(index)} 个世界框架", read("README.md"))
 
     def test_runtime_docs_bind_sessions_and_keep_legacy_paths_explicit(self) -> None:
-        paths = ("SKILL.md", "README.md", "saves/README.md", "references/状态总结.md",
+        # README 是面向玩家的落地页，不承担会话绑定细节；该契约由运行时文档各自声明。
+        paths = ("SKILL.md", "saves/README.md", "references/状态总结.md",
                  "references/运行状态速览.md", "references/开局流程.md", "commands.yaml")
         for path in paths:
             with self.subTest(path=path):
@@ -144,7 +145,7 @@ class DocumentationConsistencyTests(unittest.TestCase):
             self.assertIn("过期", document)
 
     def test_opening_failure_does_not_pollute_history_contract(self) -> None:
-        for path in ("SKILL.md", "README.md", "references/开局流程.md", "commands.yaml"):
+        for path in ("SKILL.md", "references/开局流程.md", "commands.yaml"):
             document = read(path)
             self.assertRegex(document, r"(?:写入失败|状态写入失败)不污染(?:开局)?历史")
             self.assertIn("输出已存在", document)
@@ -153,7 +154,7 @@ class DocumentationConsistencyTests(unittest.TestCase):
         self.assertIn("sample_materials.py", maintenance)
 
     def test_terminal_receipts_are_retained_and_targeted_without_full_dump(self) -> None:
-        for path in ("SKILL.md", "README.md", "references/世界运转.md", "references/状态总结.md",
+        for path in ("SKILL.md", "references/世界运转.md", "references/状态总结.md",
                      "references/运行状态速览.md", "commands.yaml"):
             with self.subTest(path=path):
                 document = read(path)
@@ -184,7 +185,8 @@ class DocumentationConsistencyTests(unittest.TestCase):
                     and isinstance(node.func, ast.Attribute) and node.func.attr == "add_argument"
                     for arg in node.args if isinstance(arg, ast.Constant) and isinstance(arg.value, str)}
         self.assertTrue(set(flags) <= accepted)
-        for path in ("README.md", "references/加内容.md", "references/素材架构.md"):
+        # 维护契约由维护文档声明；README 是玩家落地页，不承担维护细节。
+        for path in ("references/加内容.md", "references/素材架构.md"):
             document = read(path)
             for flag in flags:
                 self.assertIn(flag, document, (path, flag))
@@ -194,7 +196,7 @@ class DocumentationConsistencyTests(unittest.TestCase):
             self.assertLess(ordered.index("sync_governance.py"), ordered.index("qa.py"))
 
     def test_maintenance_authorities_and_content_levels_are_documented(self) -> None:
-        for path in ("README.md", "references/加内容.md", "references/素材架构.md"):
+        for path in ("references/加内容.md", "references/素材架构.md"):
             document = read(path)
             for marker in ("authoring/frameworks/", "maintenance/data_manifest.yaml",
                            "maintenance/core_review_decisions.yaml", "maintenance/framework_reviews/",
@@ -207,7 +209,7 @@ class DocumentationConsistencyTests(unittest.TestCase):
             self.assertIn(marker, document)
 
     def test_auto_requires_current_reviews_without_implicit_legacy(self) -> None:
-        for path in ("README.md", "SKILL.md", "references/开局流程.md", "references/加内容.md",
+        for path in ("SKILL.md", "references/开局流程.md", "references/加内容.md",
                      "references/素材架构.md", "commands.yaml"):
             document = read(path).replace("`", "")
             self.assertRegex(document, r"(?:无|不)隐式", path)
@@ -219,7 +221,7 @@ class DocumentationConsistencyTests(unittest.TestCase):
         config = baseline["playtest"]
         required = baseline["framework_selection"]["retained_count"] * len(config["modes"]) * (config["continuation_turns"] + 1)
         self.assertEqual(config["minimum_model_responses"], required)
-        for path in ("README.md", "references/加内容.md", "references/素材架构.md"):
+        for path in ("references/加内容.md", "references/素材架构.md"):
             document = read(path)
             for marker in ("DeepSeek Harness", str(required), "结构通过不等于语义通过", "独立评分",
                            "playtest_report.py", "run_playtest.py", "显式调用", "模型额度", "默认 QA 不会自动",
