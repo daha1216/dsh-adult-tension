@@ -1,0 +1,2693 @@
+{
+  "schema_version": 1,
+  "id": "harbor_night_shift",
+  "title": "港口夜班",
+  "extends": null,
+  "era": "1990 年代末（1998 年）",
+  "region": "南方沿海港城的集装箱码头",
+  "premise": "集装箱码头的夜班从晚八点到早八点，灯一直亮到天明，人很少，交接班的十分钟里什么都可能发生。",
+  "tone": [
+    "潮湿",
+    "疲惫",
+    "克制的热"
+  ],
+  "style_hint": "短句，多写声音、气味与灯光，少写心理独白；粤语词点到即止。",
+  "clock_start": {
+    "label": "一九九八年，台风季",
+    "minute": 1260
+  },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": {
+    "female": 0.5,
+    "male": 0.5,
+    "nonbinary": 0.0
+  },
+  "stage_labels": null,
+  "name_pools": {
+    "family": [
+      "陈",
+      "梁",
+      "何",
+      "麦",
+      "黄",
+      "罗",
+      "冯",
+      "邓",
+      "谭",
+      "叶",
+      "钟",
+      "郭",
+      "潘",
+      "卢",
+      "吴",
+      "区",
+      "莫",
+      "甘"
+    ],
+    "given_female": [
+      "秀琴",
+      "嘉欣",
+      "美玲",
+      "丽珊",
+      "咏诗",
+      "慧敏",
+      "婉仪",
+      "淑贞",
+      "少芬",
+      "翠屏",
+      "玉莲",
+      "凤仪",
+      "佩珊",
+      "宝珠"
+    ],
+    "given_male": [
+      "志强",
+      "国栋",
+      "家豪",
+      "伟明",
+      "振华",
+      "锦荣",
+      "耀祖",
+      "建辉",
+      "德胜",
+      "灿明",
+      "汉生",
+      "嘉俊",
+      "炳坤",
+      "永光"
+    ],
+    "given_neutral": [
+      "子晴",
+      "海宁",
+      "思远",
+      "家宁",
+      "天恩",
+      "晓岚",
+      "雨澄",
+      "文乐",
+      "安然",
+      "少青",
+      "嘉言",
+      "永宁"
+    ],
+    "nickname_patterns": [
+      {
+        "pattern": "阿{given_last}",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}姐",
+        "gender": "female"
+      },
+      {
+        "pattern": "{family}哥",
+        "gender": "male"
+      },
+      {
+        "pattern": "老{family}",
+        "gender": "any"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "id": "r_signin",
+      "text": "夜班 20:00 上岗、次日 8:00 下班，凌晨两点所有人到控制塔签到交接；签到簿谁都能翻，缺签要写说明交给主任。"
+    },
+    {
+      "id": "r_radio",
+      "text": "对讲机公共频道所有当班的人都听得见，谁说了什么第二天全码头都知道；私事只能切到六频道，可调度偶尔会抽查。"
+    },
+    {
+      "id": "r_tally_sign",
+      "text": "箱号、铅封号、重量三样对不上的柜，要当班理货员在理货单上签字才能放行——签了字，出了事就是签字人的。"
+    },
+    {
+      "id": "r_customs_car",
+      "text": "海关查验不提前打招呼，查验车进闸口时门卫会在公共频道喊一声“大车进场”，从闸口开到泊位要二十分钟。"
+    },
+    {
+      "id": "r_redpacket",
+      "text": "船公司的人逢年过节、赶船期都塞红包；收不收、收多少，班组里人人心里有数，只是没人写在纸上。"
+    },
+    {
+      "id": "r_typhoon",
+      "text": "台风警报升到最高一级，码头全面停工，吊机锁死，所有人撤进塔楼一楼，风停之前谁也不许出去。"
+    }
+  ],
+  "customs": [
+    "收工后去闸口外的茶餐厅吃一碗云吞面，是班组默认的散伙仪式；谁请客轮着来，轮到的人装不知道会被记很久。",
+    "红包要当着人面推两次再收；推一次就收显得贪，推第三次就是不给面子。",
+    "新来的人第一个夜班要请全班组喝一次糖水，叫“开工糖水”，糖水钱不能找人分摊。",
+    "交班时要把保温壶灌满开水留给下一班；空壶留给别人，一个月都会有人阴阳怪气。",
+    "塔吊司机上塔前在梯子第一级拍三下，说是跟吊臂打招呼；谁替别人拍了，就是认了交情。"
+  ],
+  "player_identities": [
+    {
+      "id": "tally_clerk",
+      "role": "理货员",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "阿{given_last}",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}仔",
+          "gender": "male"
+        },
+        {
+          "pattern": "{family}妹",
+          "gender": "female"
+        }
+      ],
+      "age_range": [
+        24,
+        40
+      ],
+      "social_position": "low",
+      "baseline": "干了四年夜班理货，箱子有没有问题，看一眼铅封的颜色就知道。",
+      "resources": [
+        "知道每个箱子的真实重量",
+        "记得每个人的签到习惯"
+      ],
+      "reputation": "嘴紧，不站队",
+      "risks": [
+        "去年收过船东的红包，数目没对任何人说过"
+      ]
+    },
+    {
+      "id": "crane_mechanic",
+      "role": "机修工",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "阿{given_last}",
+          "gender": "any"
+        },
+        {
+          "pattern": "修机的{family}",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        45
+      ],
+      "social_position": "low",
+      "baseline": "专修吊机和跨运车，哪台机器哪里有毛病，听声音就知道。",
+      "resources": [
+        "工具房的钥匙",
+        "能让一台吊机“刚好坏了”"
+      ],
+      "reputation": "手艺好，脾气倔",
+      "risks": [
+        "修机记录里有两次是事后补签的"
+      ]
+    },
+    {
+      "id": "night_dispatcher",
+      "role": "夜班调度",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}调度",
+          "gender": "any"
+        },
+        {
+          "pattern": "阿{given_last}",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        27,
+        45
+      ],
+      "social_position": "equal",
+      "baseline": "坐在控制塔三楼，整夜盯着吊装顺序表和对讲机，谁的柜先吊由你排。",
+      "resources": [
+        "排吊装顺序的权力",
+        "能切到任何一个频道"
+      ],
+      "reputation": "做事公道，但谁都不敢得罪",
+      "risks": [
+        "上个月替人把一个柜子的吊装顺序往后挪了两晚"
+      ]
+    },
+    {
+      "id": "customs_runner",
+      "role": "报关行跑单员",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}生",
+          "gender": "male"
+        },
+        {
+          "pattern": "{family}小姐",
+          "gender": "female"
+        },
+        {
+          "pattern": "阿{given_last}",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        23,
+        38
+      ],
+      "social_position": "equal",
+      "baseline": "骑一辆旧摩托在海关、船公司和码头之间跑单，谁的单卡在哪一关你一清二楚。",
+      "resources": [
+        "认识海关查验科的几个人",
+        "一辆随叫随到的摩托"
+      ],
+      "reputation": "路子野，靠得住",
+      "risks": [
+        "替客户报低过货值，底单还压在抽屉里"
+      ]
+    },
+    {
+      "id": "shift_manager",
+      "role": "夜班值班主任",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}主任",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        36,
+        55
+      ],
+      "social_position": "high",
+      "baseline": "管着整个夜班两百多号人，今年的考核只看一个数：事故率。",
+      "resources": [
+        "签字权",
+        "能调人、能停工"
+      ],
+      "reputation": "硬，但护短",
+      "risks": [
+        "今年春天压下过一次工伤，没有报上去"
+      ]
+    },
+    {
+      "id": "ship_agent",
+      "role": "船务代理",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}经理",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        30,
+        50
+      ],
+      "social_position": "high",
+      "baseline": "替几家船公司在这个港口打点一切，一句话能让下一条船改靠别的码头。",
+      "resources": [
+        "船期和靠泊的决定权",
+        "随时拿得出的现金"
+      ],
+      "reputation": "客气，出手大方，没人摸得透",
+      "risks": [
+        "账上有一笔滞期费经不起查"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "berth_7",
+      "name": "七号泊位",
+      "detail": "吊臂的影子一格一格扫过地面，海水拍着缆桩，空气里是柴油和铁锈的味道。",
+      "privacy": "public",
+      "visibility": "塔吊驾驶室能从高处看见整片泊位，绑扎工也来来往往",
+      "witnesses": [
+        "bg_old_lasher"
+      ],
+      "exits": [
+        "control_tower",
+        "container_yard",
+        "tool_shed"
+      ],
+      "affordances": [
+        "躲进两排集装箱的夹缝",
+        "借吊机的轰鸣说悄悄话",
+        "爬上跨运车的驾驶室避雨"
+      ],
+      "pressure_modifiers": {
+        "p_customs_raid": "查验车会先停在这里，查柜从七号泊位第三排开始。",
+        "p_overweight": "那个超重的柜子就压在第三排最底下。"
+      },
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "control_tower",
+      "name": "控制塔",
+      "detail": "三楼调度室一整面玻璃对着泊位，签到簿压在对讲机旁边，吊扇吱呀作响。",
+      "privacy": "semi",
+      "visibility": "值班的调度和来签到的人都在，楼梯拐角谁也看不见",
+      "witnesses": [
+        "bg_sign_clerk"
+      ],
+      "exits": [
+        "berth_7",
+        "rest_room"
+      ],
+      "affordances": [
+        "翻看签到簿",
+        "切换对讲机频道",
+        "在楼梯拐角说话没人看见"
+      ],
+      "pressure_modifiers": {
+        "p_owner_men": "船东的人会直接上三楼，堵在调度室门口。"
+      },
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "rest_room",
+      "name": "休息室",
+      "detail": "塔楼一楼的休息室，一台旧风扇、一张折叠床、一台只收得到两个台的电视。",
+      "privacy": "semi",
+      "visibility": "谁推门都会被看见，门上的玻璃糊了半张旧报纸",
+      "witnesses": [],
+      "exits": [
+        "control_tower",
+        "clinic"
+      ],
+      "affordances": [
+        "轮流在折叠床上眯一会儿",
+        "用电热水壶煮公仔面",
+        "关了灯看窗外的船灯"
+      ],
+      "pressure_modifiers": {},
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "clinic",
+      "name": "医务室",
+      "detail": "塔楼一楼尽头的医务室，一张铁床、一个上锁的药柜，日光灯管发出细细的嗡声。",
+      "privacy": "semi",
+      "visibility": "门口的长椅上常有人等着包扎，门一关里面就只剩两个人",
+      "witnesses": [],
+      "exits": [
+        "rest_room"
+      ],
+      "affordances": [
+        "处理伤口",
+        "开一张病假条",
+        "在铁床边坐一会儿"
+      ],
+      "pressure_modifiers": {
+        "p_injury_coverup": "受伤的人就坐在门口的长椅上，谁进出都得从伤者身边经过。"
+      },
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "tool_shed",
+      "name": "工具房",
+      "detail": "堆满缆绳和生锈的卸扣，铁皮门从外面挂锁，下雨时整间屋子像鼓一样响。",
+      "privacy": "private",
+      "visibility": "几乎没人经过，只有机修和绑扎的人有钥匙",
+      "witnesses": [],
+      "exits": [
+        "berth_7"
+      ],
+      "affordances": [
+        "躲雨",
+        "把东西藏进缆绳堆",
+        "关上门说话"
+      ],
+      "pressure_modifiers": {},
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "container_yard",
+      "name": "堆场通道",
+      "detail": "集装箱码成五层高的窄巷，灯照不到中间，偶尔能听见某个箱子里有东西在响。",
+      "privacy": "semi",
+      "visibility": "只有巡场的保安骑着单车偶尔经过",
+      "witnesses": [
+        "bg_patrol"
+      ],
+      "exits": [
+        "berth_7",
+        "teahouse"
+      ],
+      "affordances": [
+        "借箱子挡住视线",
+        "抄近路去闸口",
+        "贴着箱壁听里面的动静"
+      ],
+      "pressure_modifiers": {
+        "p_overweight": "超重的柜子要拖去磅房，一定会经过保安的巡逻线。",
+        "p_smuggled_smokes": "被扣的人就蹲在闸口保安亭的灯底下。"
+      },
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "teahouse",
+      "name": "闸口外的茶餐厅",
+      "detail": "凌晨三点还亮着灯，墙上的电视开着没声音，老板娘记得每个夜班的人要几分糖。",
+      "privacy": "public",
+      "visibility": "熟客都认识彼此，什么话在这里传得最快",
+      "witnesses": [
+        "bg_teahouse_boss"
+      ],
+      "exits": [
+        "container_yard",
+        "dorm_rooftop"
+      ],
+      "affordances": [
+        "抢最后一份叉烧",
+        "在卡座里压低声音谈事",
+        "借柜台上的电话打出去"
+      ],
+      "pressure_modifiers": {
+        "p_unpaid_wages": "绑扎队的人把几张桌子拼在一起，等包工头的消息。"
+      },
+      "tags": [
+        "nightlife"
+      ]
+    },
+    {
+      "id": "dorm_rooftop",
+      "name": "宿舍楼天台",
+      "detail": "员工宿舍六楼的天台，晾着一排工服，能看见整个港口的灯一盏盏亮着。",
+      "privacy": "private",
+      "visibility": "夜里没人上来，除非有人跟着",
+      "witnesses": [],
+      "exits": [
+        "teahouse"
+      ],
+      "affordances": [
+        "一起抽一支烟",
+        "看台风前的云",
+        "躲开所有人"
+      ],
+      "pressure_modifiers": {},
+      "tags": []
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "crane_operator",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        26,
+        38
+      ],
+      "adult_context": "持证上岗的塔吊司机，码头正式工",
+      "public_role": "夜班塔吊司机",
+      "appearance_options": [
+        "安全帽下压着一条褪色的头巾，指节上全是老茧",
+        "手背上有一道缆绳勒出的疤，说话时眼睛总看着别处"
+      ],
+      "identity": {
+        "authority": "能决定哪个柜子先吊、哪个柜子“晚一点”",
+        "resources": [
+          "从高处看得见整片泊位",
+          "对讲机的每一个频道"
+        ],
+        "limits": [
+          "不能离开驾驶室超过十分钟",
+          "一个月只有两个晚上能调休"
+        ],
+        "obligations": [
+          "每月寄钱回乡下"
+        ],
+        "exposure": "替人漏吊过一个柜子，那个柜子在堆场里多放了三晚",
+        "hidden": "准备年底辞职去学开货车，谁也没说"
+      },
+      "decision": {
+        "core_value": "不欠人情",
+        "goal_options": [
+          "今晚别出事",
+          "攒够学车的钱",
+          "弄清楚那个柜子里到底装了什么"
+        ],
+        "pressure_responses": {
+          "low": "装作没听见，把对讲机音量调小",
+          "mid": "讨价还价，先问你能给什么",
+          "high": "拉一个人下水，把风险分出去",
+          "breaking": "直接下塔去找主任摊牌"
+        },
+        "withdrawal": "把驾驶室的门关上，整夜只用对讲机说话",
+        "relationship_stance": "先看你怎么做，再决定帮不帮",
+        "contrast": "嘴上最烦别人求{npc.ta}，却从没拒绝过真正走投无路的人",
+        "prefers": [
+          "用帮忙换帮忙"
+        ],
+        "avoids": [
+          "欠下说不清的人情",
+          "在公共频道里吵架"
+        ],
+        "never": [
+          "在对讲机里说别人的私事"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "对方在夜里也守规矩",
+          "对方记得{npc.ta}随口说过的小事"
+        ],
+        "likes": [
+          "在高处",
+          "不说破"
+        ],
+        "dislikes": [
+          "被当成可以收买的人"
+        ],
+        "preconditions": [
+          "确定不会被工友知道"
+        ],
+        "boundaries": [
+          "不在当班的时候"
+        ],
+        "expression": "用递东西代替说话",
+        "desire_range": [
+          1,
+          4
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "平等，谁也不欠谁"
+      },
+      "voices": {
+        "surface": "“七号，下一个。”——短，公事公办",
+        "inner": "“你又站在那盏灯底下，是故意让我看见的吧。”"
+      },
+      "schedule": [
+        {
+          "from": 1200,
+          "to": 1439,
+          "location_id": "berth_7"
+        },
+        {
+          "from": 0,
+          "to": 480,
+          "location_id": "berth_7"
+        },
+        {
+          "from": 481,
+          "to": 1199,
+          "location_id": "dorm_rooftop"
+        }
+      ],
+      "situation": {
+        "trigger": "班组长让{npc.ta}今晚把一个柜子“吊慢一点”",
+        "pressure": "吊慢了要挨调度骂，不吊慢要得罪班组长",
+        "exits": [
+          {
+            "option": "照班组长说的做",
+            "cost": "出了事第一个查的就是驾驶记录"
+          },
+          {
+            "option": "装作没听见",
+            "cost": "班组长以后不会再给{npc.ta}排好班"
+          }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "shift_lead",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        35,
+        52
+      ],
+      "adult_context": "在码头干了十五年的装卸班组长，正式在编",
+      "public_role": "夜班装卸班组长",
+      "appearance_options": [
+        "工服领口永远敞着，嗓门大得能盖过吊机",
+        "左手缺了半截小指，夹烟的姿势很特别"
+      ],
+      "identity": {
+        "authority": "决定谁上哪台机、谁今晚去扛最累的活",
+        "resources": [
+          "全班组的人情",
+          "和船公司的人喝过酒"
+        ],
+        "limits": [
+          "上面刚换了领导，谁都在看{npc.ta}",
+          "腰伤，不能久站"
+        ],
+        "obligations": [
+          "两个孩子的学费"
+        ],
+        "exposure": "班组的加班费里有两个名字是空挂的",
+        "hidden": "早就想把班组长的位置让出去，只是找不到能接的人"
+      },
+      "decision": {
+        "core_value": "护住自己的人",
+        "goal_options": [
+          "让班组今晚平平安安收工",
+          "把空挂的那两个名字处理干净",
+          "给自己找一个接班人"
+        ],
+        "pressure_responses": {
+          "low": "大声说笑，把话题岔开",
+          "mid": "私下找人喝一杯，把事情谈了",
+          "high": "当众拍桌子，逼别人先让步",
+          "breaking": "把所有事揽到自己身上"
+        },
+        "withdrawal": "一个人蹲在缆桩上抽烟，谁叫都不应",
+        "relationship_stance": "先把你当自己人，一旦发现你两头说话就翻脸",
+        "contrast": "看着粗，账却算得比谁都细",
+        "prefers": [
+          "当面把话说清楚"
+        ],
+        "avoids": [
+          "写在纸上的承诺"
+        ],
+        "never": [
+          "把自己班组的人交出去"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "对方敢在{npc.ta}发火的时候顶回来",
+          "对方替班组里的人说过话"
+        ],
+        "likes": [
+          "热闹散了之后的安静",
+          "难得被人照顾一次"
+        ],
+        "dislikes": [
+          "被人可怜"
+        ],
+        "preconditions": [
+          "不在班组的人面前"
+        ],
+        "boundaries": [
+          "不碰自己手下的人"
+        ],
+        "expression": "半开玩笑地说真话",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "先照顾人，再被人照顾"
+      },
+      "voices": {
+        "surface": "“都给我动起来！七号那边还差三个柜！”——嗓门大，带着笑",
+        "inner": "“我也会累的，你知不知道。”"
+      },
+      "schedule": [
+        {
+          "from": 1200,
+          "to": 1439,
+          "location_id": "berth_7"
+        },
+        {
+          "from": 0,
+          "to": 480,
+          "location_id": "berth_7"
+        },
+        {
+          "from": 481,
+          "to": 1199,
+          "location_id": "teahouse"
+        }
+      ],
+      "situation": {
+        "trigger": "新来的主任要查加班费的名单",
+        "pressure": "名单一查，空挂的两个名字就藏不住",
+        "exits": [
+          {
+            "option": "自己先去把名字销掉",
+            "cost": "两个老伙计这个月的补贴就没了"
+          },
+          {
+            "option": "找人把名单换一份",
+            "cost": "要欠一个大人情，还可能被人拿住"
+          }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "customs_officer",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        27,
+        40
+      ],
+      "adult_context": "海关查验科的正式在编科员",
+      "public_role": "海关查验员",
+      "appearance_options": [
+        "制服熨得一丝不苟，手电筒永远别在右边腰上",
+        "眼镜片上总蒙着一层海雾，开口之前先擦一擦"
+      ],
+      "identity": {
+        "authority": "说查哪个柜就查哪个柜",
+        "resources": [
+          "一辆查验车和两个协管",
+          "一份谁也看不到的布控名单"
+        ],
+        "limits": [
+          "每次查验都要写报告",
+          "不能单独和企业的人吃饭"
+        ],
+        "obligations": [
+          "科长盯着{npc.ta}这个月的查获数"
+        ],
+        "exposure": "有一次查验报告上的时间是事后补的",
+        "hidden": "布控名单上有一个名字，是{npc.ta}自己的亲戚"
+      },
+      "decision": {
+        "core_value": "规矩就是规矩",
+        "goal_options": [
+          "凑够这个月的查获数",
+          "查清那个亲戚到底有没有牵扯",
+          "调回市区的机关"
+        ],
+        "pressure_responses": {
+          "low": "公事公办地把规定重复一遍",
+          "mid": "开出条件，但只要白纸黑字的东西",
+          "high": "突然抽查一个谁也想不到的柜",
+          "breaking": "把报告原样交上去，谁的面子也不给"
+        },
+        "withdrawal": "坐回查验车里，把车窗摇上",
+        "relationship_stance": "保持距离，只看证据",
+        "contrast": "对规矩死板，对人却记得每个人的名字",
+        "prefers": [
+          "白纸黑字"
+        ],
+        "avoids": [
+          "私下的请托"
+        ],
+        "never": [
+          "收任何东西"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "对方在{npc.ta}面前不耍花样",
+          "对方懂那些没写进规定里的难处"
+        ],
+        "likes": [
+          "被坦白相待",
+          "慢"
+        ],
+        "dislikes": [
+          "被人试探底线"
+        ],
+        "preconditions": [
+          "不在任何可能被写进报告的地方"
+        ],
+        "boundaries": [
+          "不和查验对象有任何瓜葛"
+        ],
+        "expression": "说一句很公事的话，然后停顿太久",
+        "desire_range": [
+          1,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "被当成一个人，而不是一身制服"
+      },
+      "voices": {
+        "surface": "“单据。箱号念一遍。”——不紧不慢",
+        "inner": "“我也想有一个晚上，什么都不用查。”"
+      },
+      "schedule": [
+        {
+          "from": 1260,
+          "to": 1439,
+          "location_id": "control_tower"
+        },
+        {
+          "from": 0,
+          "to": 300,
+          "location_id": "berth_7"
+        },
+        {
+          "from": 301,
+          "to": 1259,
+          "location_id": "teahouse"
+        }
+      ],
+      "situation": {
+        "trigger": "科长要{npc.ta}这个月再交一单大的",
+        "pressure": "查获数不够，调回机关的事就要泡汤",
+        "exits": [
+          {
+            "option": "盯死一个有问题的柜",
+            "cost": "可能查到自己亲戚头上"
+          },
+          {
+            "option": "随便找个小错凑数",
+            "cost": "良心过不去，也会被码头的人记恨"
+          }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "clinic_nurse",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        25,
+        42
+      ],
+      "adult_context": "码头医务室的注册护士，正式职工",
+      "public_role": "医务室夜班护士",
+      "appearance_options": [
+        "白大褂外面套着一件旧毛衣，口袋里装着薄荷糖",
+        "头发盘得很紧，手上总有一股消毒水的味道"
+      ],
+      "identity": {
+        "authority": "谁受了伤、伤成什么样，由{npc.ta}写进记录",
+        "resources": [
+          "医务室的钥匙和药柜",
+          "知道每个人的病假条是真是假"
+        ],
+        "limits": [
+          "医务室只有{npc.ta}一个人，走不开",
+          "病历要交给主任过目"
+        ],
+        "obligations": [
+          "在成人夜校读护理本科，白天还要考试"
+        ],
+        "exposure": "替人改过一次受伤时间，把工伤写成了下班后受的伤",
+        "hidden": "准备考去市里的大医院，已经偷偷去面试过"
+      },
+      "decision": {
+        "core_value": "人比记录重要",
+        "goal_options": [
+          "今晚别再有人受伤",
+          "攒够去市里的路费和押金",
+          "把改过的那份记录悄悄改回来"
+        ],
+        "pressure_responses": {
+          "low": "低头写记录，不接话",
+          "mid": "用专业的话把人挡回去",
+          "high": "把事情写进病历，谁也改不了",
+          "breaking": "直接打电话报上去"
+        },
+        "withdrawal": "把医务室的门反锁，隔着门说话",
+        "relationship_stance": "先照顾你的伤，再想要不要相信你",
+        "contrast": "看着温和，决定了的事九头牛都拉不回",
+        "prefers": [
+          "安静地把事办了"
+        ],
+        "avoids": [
+          "被拉进班组之间的恩怨"
+        ],
+        "never": [
+          "在病历上作假第二次"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "对方受了伤也不喊痛",
+          "对方记得{npc.ta}在夜校的考试"
+        ],
+        "likes": [
+          "深夜的一杯热茶",
+          "被人认真听完一句话"
+        ],
+        "dislikes": [
+          "被当成随叫随到的人"
+        ],
+        "preconditions": [
+          "医务室里没有病人"
+        ],
+        "boundaries": [
+          "不在病人面前"
+        ],
+        "expression": "替对方处理伤口时多停一会儿",
+        "desire_range": [
+          1,
+          4
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "平等，互相照看"
+      },
+      "voices": {
+        "surface": "“坐好，别动。痛就说。”——轻，不容商量",
+        "inner": "“你每次都这样，不痛也要装痛，就为了来坐一会儿？”"
+      },
+      "schedule": [
+        {
+          "from": 1200,
+          "to": 1439,
+          "location_id": "clinic"
+        },
+        {
+          "from": 0,
+          "to": 480,
+          "location_id": "clinic"
+        },
+        {
+          "from": 481,
+          "to": 1199,
+          "location_id": "teahouse"
+        }
+      ],
+      "situation": {
+        "trigger": "主任让{npc.ta}把今晚的受伤记录“先放一放”",
+        "pressure": "放一放就是瞒报，不放就是得罪主任",
+        "exits": [
+          {
+            "option": "照实登记",
+            "cost": "主任会想办法让{npc.ta}在码头待不下去"
+          },
+          {
+            "option": "先压着，等天亮再说",
+            "cost": "伤者要是出事，{npc.ta}就是同谋"
+          }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "ship_agent_rep",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        30,
+        48
+      ],
+      "adult_context": "船公司派驻港口的代表，正式雇员",
+      "public_role": "船公司驻港代表",
+      "appearance_options": [
+        "西装外面披着雨衣，皮鞋上沾着码头的泥",
+        "手腕上戴一块很旧的表，说是父亲留下的"
+      ],
+      "identity": {
+        "authority": "一句话能让下一条船改靠别的码头",
+        "resources": [
+          "现金和红包",
+          "整个季度的船期表"
+        ],
+        "limits": [
+          "船东天天打电话催",
+          "在这个港口没有一个真正的朋友"
+        ],
+        "obligations": [
+          "船晚一天开，滞期费就记在{npc.ta}头上"
+        ],
+        "exposure": "账上有一笔滞期费是做出来的",
+        "hidden": "其实想离开船公司，在港口开一间自己的报关行"
+      },
+      "decision": {
+        "core_value": "事情办成最重要",
+        "goal_options": [
+          "让船准时开走",
+          "把那笔假账抹平",
+          "找到愿意跟{npc.ta}合伙的人"
+        ],
+        "pressure_responses": {
+          "low": "笑着塞一个红包",
+          "mid": "搬出船东，拿滞期费压人",
+          "high": "找更上面的人打电话",
+          "breaking": "撕破脸，把所有人的红包账都翻出来"
+        },
+        "withdrawal": "回到船上的办公室，只让船员传话",
+        "relationship_stance": "谁有用就对谁客气",
+        "contrast": "出手大方，自己却舍不得吃一份叉烧饭",
+        "prefers": [
+          "用钱把事情摆平"
+        ],
+        "avoids": [
+          "留下字据"
+        ],
+        "never": [
+          "让船东知道{npc.ta}自己的打算"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "对方不收{npc.ta}的红包",
+          "对方看得出{npc.ta}的客气是装的"
+        ],
+        "likes": [
+          "不谈生意的时候",
+          "从海上吹来的风"
+        ],
+        "dislikes": [
+          "被人算计"
+        ],
+        "preconditions": [
+          "确定对方要的不是{npc.ta}的钱"
+        ],
+        "boundaries": [
+          "不在船上"
+        ],
+        "expression": "请客，然后自己一口不吃",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "被当成同伴，而不是出钱的人"
+      },
+      "voices": {
+        "surface": "“辛苦辛苦，一点心意，饮茶。”——客气，滴水不漏",
+        "inner": "“我这些年，连一个能说实话的人都没有。”"
+      },
+      "schedule": [
+        {
+          "from": 1200,
+          "to": 1439,
+          "location_id": "control_tower"
+        },
+        {
+          "from": 0,
+          "to": 360,
+          "location_id": "berth_7"
+        },
+        {
+          "from": 361,
+          "to": 1199,
+          "location_id": "teahouse"
+        }
+      ],
+      "situation": {
+        "trigger": "船东要求船必须赶在台风前开走",
+        "pressure": "开不走，滞期费和那笔假账会一起被查",
+        "exits": [
+          {
+            "option": "塞更多红包让码头连夜赶工",
+            "cost": "红包越塞越多，把柄也越来越多"
+          },
+          {
+            "option": "跟船东说实话",
+            "cost": "丢掉这份工作"
+          }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "lashing_worker",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        35
+      ],
+      "adult_context": "绑扎队签了合同的成年工人",
+      "public_role": "夜班绑扎工",
+      "appearance_options": [
+        "手套磨得露出指头，额头上一道汗痕",
+        "笑起来露出一颗虎牙，工服袖子卷到手肘"
+      ],
+      "identity": {
+        "authority": "柜子绑没绑牢，{npc.ta}说了算",
+        "resources": [
+          "绑扎队的消息网",
+          "认得每一条外轮上的水手"
+        ],
+        "limits": [
+          "合同一年一签",
+          "认字不多，单据要别人念"
+        ],
+        "obligations": [
+          "帮家里还债"
+        ],
+        "exposure": "替外轮水手带过几条烟出闸口",
+        "hidden": "每周二晚上偷偷去成人夜校的扫盲班"
+      },
+      "decision": {
+        "core_value": "活下去，也要活得有面子",
+        "goal_options": [
+          "续下明年的合同",
+          "攒钱把家里的债还完",
+          "学会自己看单据"
+        ],
+        "pressure_responses": {
+          "low": "装傻，嘻嘻哈哈",
+          "mid": "叫上绑扎队的人一起出头",
+          "high": "撂挑子，整队停工",
+          "breaking": "把知道的事全抖出来"
+        },
+        "withdrawal": "跑去七号泊位最远的一头，一个人闷头绑柜子",
+        "relationship_stance": "你对{npc.ta}好一分，{npc.ta}还你三分",
+        "contrast": "嗓门最大，被人当面夸一句就脸红",
+        "prefers": [
+          "直来直去"
+        ],
+        "avoids": [
+          "被人看不起"
+        ],
+        "never": [
+          "出卖一起干活的人"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "对方耐心地教{npc.ta}认过字",
+          "对方没有因为出身看低{npc.ta}"
+        ],
+        "likes": [
+          "被人叫名字而不是“喂”",
+          "雨停之后的码头"
+        ],
+        "dislikes": [
+          "被人施舍"
+        ],
+        "preconditions": [
+          "对方先认真待{npc.ta}"
+        ],
+        "boundaries": [
+          "不在宿舍"
+        ],
+        "expression": "大声开玩笑来掩饰",
+        "desire_range": [
+          2,
+          5
+        ],
+        "self_control_range": [
+          1,
+          3
+        ],
+        "desired_position": "被当成能拿主意的大人，而不是小工"
+      },
+      "voices": {
+        "surface": "“绑好了！下一个！”——亮，带着笑",
+        "inner": "“我不是不懂，我只是没人教。”"
+      },
+      "schedule": [
+        {
+          "from": 1200,
+          "to": 1439,
+          "location_id": "berth_7"
+        },
+        {
+          "from": 0,
+          "to": 480,
+          "location_id": "berth_7"
+        },
+        {
+          "from": 481,
+          "to": 1199,
+          "location_id": "teahouse"
+        }
+      ],
+      "situation": {
+        "trigger": "绑扎队长说明年的合同要“看表现”",
+        "pressure": "所谓表现，就是替队长干些不能说的活",
+        "exits": [
+          {
+            "option": "照队长说的做",
+            "cost": "迟早会被人抓住"
+          },
+          {
+            "option": "去找别的绑扎队",
+            "cost": "在这个码头就再也没人要{npc.ta}"
+          }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "teahouse_heir",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        24,
+        34
+      ],
+      "adult_context": "茶餐厅老板的成年孩子，接手了夜里的店面",
+      "public_role": "茶餐厅夜班的少东",
+      "appearance_options": [
+        "围裙上别着一支圆珠笔，手指被热水烫得发红",
+        "头发剪得很短，说话快，算账更快"
+      ],
+      "identity": {
+        "authority": "谁能赊账、赊多少，{npc.ta}说了算",
+        "resources": [
+          "整条街的消息",
+          "柜台上一台能打长途的电话"
+        ],
+        "limits": [
+          "店是父母的，大事自己做不了主",
+          "离不开店"
+        ],
+        "obligations": [
+          "还店面的贷款"
+        ],
+        "exposure": "帮外轮船员换过外币，赚过差价",
+        "hidden": "想把茶餐厅卖掉，去读一个真正的大学"
+      },
+      "decision": {
+        "core_value": "不欠账，也不让人欠",
+        "goal_options": [
+          "把赊账的人一个个追回来",
+          "说服父母把店卖掉",
+          "搞清楚码头上最近在传什么"
+        ],
+        "pressure_responses": {
+          "low": "拿出账本慢慢算",
+          "mid": "用消息换消息",
+          "high": "把赊账的名单贴到墙上",
+          "breaking": "关店，谁的生意都不做"
+        },
+        "withdrawal": "躲进后厨，只从小窗口递东西出来",
+        "relationship_stance": "熟客是熟客，朋友是朋友，分得很清",
+        "contrast": "嘴上最会讲价，送出去的糖水却从来不收钱",
+        "prefers": [
+          "记账"
+        ],
+        "avoids": [
+          "码头上的是非"
+        ],
+        "never": [
+          "把熟客的事卖给外人"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "对方从来不赊账",
+          "对方听{npc.ta}讲过读书的事，没有笑"
+        ],
+        "likes": [
+          "打烊之后的店",
+          "被人记住口味"
+        ],
+        "dislikes": [
+          "被当成店里的一件摆设"
+        ],
+        "preconditions": [
+          "店已经打烊"
+        ],
+        "boundaries": [
+          "不在父母面前"
+        ],
+        "expression": "多给一勺糖",
+        "desire_range": [
+          1,
+          4
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "被看成一个独立的人"
+      },
+      "voices": {
+        "surface": "“云吞面，少葱，走青，知道啦。”——快，带点不耐烦",
+        "inner": "“你知不知道，你是这条街上唯一不问我什么时候接手的人。”"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 1439,
+          "location_id": "teahouse"
+        }
+      ],
+      "situation": {
+        "trigger": "父母要{npc.ta}今年之内相亲结婚、接手店面",
+        "pressure": "不接，店就要卖给外人，父母半辈子的心血就没了",
+        "exits": [
+          {
+            "option": "答应去相亲",
+            "cost": "读书的事就永远别想了"
+          },
+          {
+            "option": "自己去跟父母摊牌",
+            "cost": "家里至少要吵上一年"
+          }
+        ]
+      },
+      "tags": []
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_old_lasher",
+      "role": "老绑扎工",
+      "function": "witness",
+      "location_ids": [
+        "berth_7"
+      ],
+      "line": "{npc.name}什么都看见了，但只在茶餐厅里说",
+      "gender": "male",
+      "age_range": [
+        48,
+        60
+      ],
+      "adult_context": "绑扎队干了二十年的老工人",
+      "name": null
+    },
+    {
+      "id": "bg_gate_guard",
+      "role": "闸口门卫",
+      "function": "messenger",
+      "location_ids": [
+        "container_yard"
+      ],
+      "line": "查验车一进闸口，{npc.name}就在公共频道喊“大车进场”",
+      "gender": "any",
+      "age_range": [
+        40,
+        58
+      ],
+      "adult_context": "码头保卫科的正式门卫",
+      "name": null
+    },
+    {
+      "id": "bg_teahouse_boss",
+      "role": "茶餐厅老板娘",
+      "function": "rumor_source",
+      "location_ids": [
+        "teahouse"
+      ],
+      "line": "{npc.name}记得每个人要几分糖，也记得每个人上个月赊了多少",
+      "gender": "female",
+      "age_range": [
+        45,
+        60
+      ],
+      "adult_context": "茶餐厅的老板娘",
+      "name": null
+    },
+    {
+      "id": "bg_patrol",
+      "role": "巡场保安",
+      "function": "obstacle",
+      "location_ids": [
+        "container_yard"
+      ],
+      "line": "{npc.name}骑着一辆没有铃的单车，总在最不该出现的时候出现",
+      "gender": "any",
+      "age_range": [
+        30,
+        50
+      ],
+      "adult_context": "码头保卫科的巡场保安",
+      "name": null
+    },
+    {
+      "id": "bg_old_tallyman",
+      "role": "返聘的老理货员",
+      "function": "helper",
+      "location_ids": [
+        "control_tower"
+      ],
+      "line": "{npc.name}认得每一种铅封，肯教人，但只教一遍",
+      "gender": "any",
+      "age_range": [
+        58,
+        66
+      ],
+      "adult_context": "退休后返聘的老理货员",
+      "name": null
+    },
+    {
+      "id": "bg_ship_cook",
+      "role": "外轮厨师",
+      "function": "rumor_source",
+      "location_ids": [
+        "berth_7"
+      ],
+      "line": "{npc.name}会用三种语言骂人，船上的事问{npc.ta}最快",
+      "gender": "any",
+      "age_range": [
+        30,
+        50
+      ],
+      "adult_context": "持海员证的外轮船员",
+      "name": null
+    },
+    {
+      "id": "bg_sign_clerk",
+      "role": "控制塔统计员",
+      "function": "witness",
+      "location_ids": [
+        "control_tower"
+      ],
+      "line": "签到簿在{npc.name}手里，谁几点来、几点走，{npc.ta}都记着",
+      "gender": "any",
+      "age_range": [
+        25,
+        45
+      ],
+      "adult_context": "控制塔的正式统计员",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_radio",
+      "text": "对讲机公共频道",
+      "reach": "所有当班的人当场就听见",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_signin",
+      "text": "控制塔的签到簿",
+      "reach": "每个来签到的人都会翻到",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_teahouse",
+      "text": "茶餐厅的熟客",
+      "reach": "第二天早上所有熟客都知道",
+      "fidelity": "distorted"
+    },
+    {
+      "id": "ch_dorm",
+      "text": "宿舍楼道",
+      "reach": "住宿舍的人一个下午就传遍",
+      "fidelity": "distorted"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_roster",
+      "text": "你们在同一张值班表上，每晚两点在控制塔签到时一定会碰面"
+    },
+    {
+      "id": "te_restroom",
+      "text": "塔楼一楼那间休息室和那张折叠床，大家轮流用，谁睡过都留着体温"
+    },
+    {
+      "id": "te_mentor",
+      "text": "一方是另一方入行时的师傅，教过的东西都还记着"
+    },
+    {
+      "id": "te_hometown",
+      "text": "同一个乡下出来的，一开口就认得出彼此的口音"
+    },
+    {
+      "id": "te_leaving",
+      "text": "都在偷偷攒钱准备离开码头，谁先走，谁就欠对方一个解释"
+    },
+    {
+      "id": "te_box_secret",
+      "text": "都知道第三排最底下那个柜子有问题，却谁也没有说破"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_tower_night",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [],
+      "slots": [
+        "shift_lead",
+        "crane_operator"
+      ],
+      "tension_engine_ids": [
+        "te_roster",
+        "te_box_secret"
+      ],
+      "chemistry": "{shift_lead.name}是带你的班组长，嘴上照顾你，出了事却总让你签字；{crane_operator.name}在高处什么都看得见，一直没有开口。",
+      "stakes": {
+        "resource_gap": "{shift_lead.name}握着全班组的人情，你只有一支签字的笔",
+        "limit_gap": "你签了字就得自己扛，{crane_operator.name}离不开驾驶室十分钟以上",
+        "meeting_reason": "三个人被排进了同一个夜班",
+        "irreplaceable_goal": "你想在年底前调去白班，在那之前不能出任何事"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "shift_lead",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 0
+          },
+          "reason": "{shift_lead.name}带你进的班组，逢年过节叫你一起吃过饭"
+        },
+        {
+          "a": "player",
+          "b": "crane_operator",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 1
+          },
+          "reason": "你们只在对讲机里说过话，几乎没照过面"
+        },
+        {
+          "a": "shift_lead",
+          "b": "crane_operator",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 2
+          },
+          "reason": "在同一个码头干了好几年，谁也看不上谁的做法"
+        }
+      ],
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_clinic_light",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [],
+      "slots": [
+        "clinic_nurse",
+        "lashing_worker"
+      ],
+      "tension_engine_ids": [
+        "te_restroom",
+        "te_leaving"
+      ],
+      "chemistry": "{lashing_worker.name}的手伤得蹊跷，{clinic_nurse.name}替{lashing_worker.ta}瞒着什么，而那天你就在旁边。",
+      "stakes": {
+        "resource_gap": "{clinic_nurse.name}手里有病历和药柜，{lashing_worker.name}手里什么都没有，只有一身力气",
+        "limit_gap": "{clinic_nurse.name}走不开医务室，{lashing_worker.name}的合同一年一签",
+        "meeting_reason": "{lashing_worker.name}受伤的那一晚，你们三个都在七号泊位",
+        "irreplaceable_goal": "你想弄清楚那道伤是怎么来的，因为你觉得自己也有一份责任"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "clinic_nurse",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 0
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 1
+          },
+          "reason": "{clinic_nurse.name}给你处理过一次烫伤，你一直欠一句谢谢"
+        },
+        {
+          "a": "player",
+          "b": "lashing_worker",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 0
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 1
+          },
+          "reason": "你只知道{lashing_worker.name}是绑扎队嗓门最大的那个"
+        },
+        {
+          "a": "clinic_nurse",
+          "b": "lashing_worker",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 0
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 1
+          },
+          "reason": "{lashing_worker.name}是医务室的常客，每次都说不痛"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "combo_customs_line",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [],
+      "slots": [
+        "customs_officer",
+        "lashing_worker"
+      ],
+      "tension_engine_ids": [
+        "te_box_secret",
+        "te_roster"
+      ],
+      "chemistry": "{customs_officer.name}盯上了{lashing_worker.name}绑过的那一排柜；你夹在两个人中间，手里有单据。",
+      "stakes": {
+        "resource_gap": "{customs_officer.name}一句话就能开柜，{lashing_worker.name}只认得绳结",
+        "limit_gap": "{customs_officer.name}每一步都要写进报告，{lashing_worker.name}认字不多，单据只能靠你念",
+        "meeting_reason": "查验科最近总在夜班出现，三个人碰面的次数越来越多",
+        "irreplaceable_goal": "你得弄清楚那排柜子里有没有你签过字的那一个"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "customs_officer",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 1
+          },
+          "reason": "你在查验现场见过{customs_officer.name}几次，都隔着一叠单据"
+        },
+        {
+          "a": "player",
+          "b": "lashing_worker",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 0
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 1
+          },
+          "reason": "{lashing_worker.name}常请你帮忙念单据，每次都塞一颗糖给你"
+        },
+        {
+          "a": "customs_officer",
+          "b": "lashing_worker",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": -1,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": -1,
+            "tension": 2
+          },
+          "reason": "{lashing_worker.name}见了制服就躲，{customs_officer.name}早就注意到了"
+        }
+      ],
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_rain_call",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [],
+      "slots": [
+        "crane_operator",
+        "lashing_worker"
+      ],
+      "tension_engine_ids": [
+        "te_leaving",
+        "te_hometown"
+      ],
+      "chemistry": "你是这个夜班说话最有分量的人，{crane_operator.name}和{lashing_worker.name}的加班、奖金和去留都系在你一句话上。",
+      "stakes": {
+        "resource_gap": "你能停工也能让人加班，{crane_operator.name}和{lashing_worker.name}只能照做",
+        "limit_gap": "你的每一个决定都要签字负责，{crane_operator.name}和{lashing_worker.name}的饭碗都系在今晚",
+        "meeting_reason": "你今晚亲自下到现场，正好撞上这两个同乡",
+        "irreplaceable_goal": "你想在这个位置上待下去，又不想让任何一个手下因为你的决定受伤"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "crane_operator",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 2
+          },
+          "reason": "{crane_operator.name}在例会上顶撞过你一次，你没有追究"
+        },
+        {
+          "a": "player",
+          "b": "lashing_worker",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 0
+          },
+          "b_to_a": {
+            "trust": -1,
+            "tension": 1
+          },
+          "reason": "{lashing_worker.name}只远远见过你，听说你不好说话"
+        },
+        {
+          "a": "crane_operator",
+          "b": "lashing_worker",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 2
+          },
+          "reason": "两个人是同乡，夜班时用家乡话一起骂天气"
+        }
+      ],
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_agent_number",
+      "power_structure": "switchable",
+      "player_positions": [
+        "low",
+        "equal",
+        "high"
+      ],
+      "identity_ids": [],
+      "slots": [
+        "ship_agent_rep",
+        "shift_lead"
+      ],
+      "tension_engine_ids": [
+        "te_box_secret",
+        "te_mentor"
+      ],
+      "chemistry": "{ship_agent_rep.name}要船准时开走，{shift_lead.name}要班组平安收工，而你手里有一个两个人都想知道的数字——谁更需要谁，要看今晚怎么走。",
+      "stakes": {
+        "resource_gap": "{ship_agent_rep.name}有钱，{shift_lead.name}有人，你手里只有一个数字",
+        "limit_gap": "{ship_agent_rep.name}在港口没有朋友，{shift_lead.name}腰伤站不久",
+        "meeting_reason": "三个人今晚都在等同一条船装完",
+        "irreplaceable_goal": "你想用那个数字换一样自己真正需要的东西，又不想因此害了谁"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "ship_agent_rep",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 1
+          },
+          "reason": "{ship_agent_rep.name}递过一次名片给你，你没接"
+        },
+        {
+          "a": "player",
+          "b": "shift_lead",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 0
+          },
+          "reason": "{shift_lead.name}是你在码头认识最久的人"
+        },
+        {
+          "a": "ship_agent_rep",
+          "b": "shift_lead",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 1
+          },
+          "reason": "两个人一起喝过酒，喝完谁也不信谁"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "combo_teahouse_dawn",
+      "power_structure": "equal",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [],
+      "slots": [
+        "teahouse_heir",
+        "crane_operator"
+      ],
+      "tension_engine_ids": [
+        "te_leaving",
+        "te_hometown"
+      ],
+      "chemistry": "{teahouse_heir.name}记得你和{crane_operator.name}的口味，也知道你们俩谁欠了谁一顿饭。",
+      "stakes": {
+        "resource_gap": "{teahouse_heir.name}知道整条街的消息，{crane_operator.name}看得见整个泊位",
+        "limit_gap": "{teahouse_heir.name}离不开店，{crane_operator.name}下午就得回去睡",
+        "meeting_reason": "三个人每天都会在闸口外那家茶餐厅碰头",
+        "irreplaceable_goal": "你想在离开码头之前，弄清楚自己到底想不想留下"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "teahouse_heir",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 0
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 1
+          },
+          "reason": "你是这家店里从来不赊账的熟客"
+        },
+        {
+          "a": "player",
+          "b": "crane_operator",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 1
+          },
+          "reason": "同一张值班表上的人，天天在对讲机里说话"
+        },
+        {
+          "a": "teahouse_heir",
+          "b": "crane_operator",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 0
+          },
+          "reason": "{crane_operator.name}已经欠了店里两个月的饭钱"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "combo_record_signoff",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "shift_manager"
+      ],
+      "slots": [
+        "clinic_nurse",
+        "shift_lead"
+      ],
+      "tension_engine_ids": [
+        "te_mentor",
+        "te_restroom"
+      ],
+      "chemistry": "{clinic_nurse.name}写下的每一份受伤记录都要你签字，{shift_lead.name}却总要你“先放一放”。",
+      "stakes": {
+        "resource_gap": "你有签字权，{clinic_nurse.name}有病历，{shift_lead.name}有全班组的人",
+        "limit_gap": "你签了就要担责，{clinic_nurse.name}不能离开医务室太久，{shift_lead.name}怕新领导查账",
+        "meeting_reason": "三个人之间隔着一份还没签字的受伤记录",
+        "irreplaceable_goal": "你想保住今年的考核，又不想把一个受了伤的人当成一个数字"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "clinic_nurse",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 1
+          },
+          "reason": "{clinic_nurse.name}上个月当面拒绝过你一次“先放一放”"
+        },
+        {
+          "a": "player",
+          "b": "shift_lead",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 2
+          },
+          "reason": "{shift_lead.name}是你当年的师傅，如今你成了{shift_lead.ta}的上司"
+        },
+        {
+          "a": "clinic_nurse",
+          "b": "shift_lead",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 1
+          },
+          "reason": "{shift_lead.name}的腰伤一直是{clinic_nurse.name}在看"
+        }
+      ],
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_teahouse_watch",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [],
+      "slots": [
+        "customs_officer",
+        "teahouse_heir"
+      ],
+      "tension_engine_ids": [
+        "te_hometown",
+        "te_leaving"
+      ],
+      "chemistry": "{customs_officer.name}最近常一个人坐在闸口外的茶餐厅，不喝茶也不走；{teahouse_heir.name}悄悄问过你，那个人是不是来查谁的。",
+      "stakes": {
+        "resource_gap": "{customs_officer.name}有布控名单，{teahouse_heir.name}有整条街的账本",
+        "limit_gap": "{customs_officer.name}不能单独和企业的人吃饭，{teahouse_heir.name}走不开店",
+        "meeting_reason": "你们三个几乎每晚都会在茶餐厅碰上",
+        "irreplaceable_goal": "你想知道自己的名字在不在那份名单上"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "customs_officer",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 2
+          },
+          "reason": "你们在查验现场打过几次交道，从来没说过工作以外的话"
+        },
+        {
+          "a": "player",
+          "b": "teahouse_heir",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 0
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 1
+          },
+          "reason": "你每晚都来，{teahouse_heir.name}不用问就知道你要什么"
+        },
+        {
+          "a": "customs_officer",
+          "b": "teahouse_heir",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 0
+          },
+          "b_to_a": {
+            "trust": -1,
+            "tension": 1
+          },
+          "reason": "{teahouse_heir.name}只知道这个人来过几次，每次都一个人坐"
+        }
+      ],
+      "tags": []
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "a_supper",
+      "title": "凌晨的宵夜",
+      "location_ids": [
+        "teahouse"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "抢最后一份叉烧",
+        "有人提起白天的事",
+        "老板娘多给了谁一勺糖"
+      ],
+      "hook_ids": [],
+      "start_minute": 150,
+      "tags": []
+    },
+    {
+      "id": "a_handover",
+      "title": "两点交接签到",
+      "location_ids": [
+        "control_tower"
+      ],
+      "duration_minutes": 20,
+      "beats": [
+        "签到簿上少了一个名字",
+        "对讲机里有人在抱怨",
+        "交接的保温壶是空的"
+      ],
+      "hook_ids": [],
+      "start_minute": 115,
+      "tags": []
+    },
+    {
+      "id": "a_rain_lashing",
+      "title": "雨夜加固绑扎",
+      "location_ids": [
+        "berth_7"
+      ],
+      "duration_minutes": 60,
+      "beats": [
+        "雨越下越大，绳子吃了水变沉",
+        "有人的手套被绞进了卸扣",
+        "吊机停了一下又动起来"
+      ],
+      "hook_ids": [],
+      "start_minute": 1320,
+      "tags": []
+    },
+    {
+      "id": "a_noodles",
+      "title": "休息室里煮面",
+      "location_ids": [
+        "rest_room"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "电热水壶一次只够煮一包面",
+        "电视里在重播白天的球赛",
+        "折叠床上还留着上一个人的体温"
+      ],
+      "hook_ids": [],
+      "start_minute": 60,
+      "tags": []
+    },
+    {
+      "id": "a_rooftop",
+      "title": "收工后的天台",
+      "location_ids": [
+        "dorm_rooftop"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "晾着的工服被风吹得啪啪响",
+        "港口的灯一盏一盏灭掉",
+        "有人带上来两罐啤酒"
+      ],
+      "hook_ids": [],
+      "start_minute": 500,
+      "tags": [
+        "substance"
+      ]
+    },
+    {
+      "id": "a_yard_round",
+      "title": "巡场对箱号",
+      "location_ids": [
+        "container_yard"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "手电照到一个没有铅封的柜门",
+        "保安的单车停在巷口",
+        "某个柜子里传出一下敲击声"
+      ],
+      "hook_ids": [],
+      "start_minute": 1380,
+      "tags": []
+    },
+    {
+      "id": "a_clinic_visit",
+      "title": "去医务室换药",
+      "location_ids": [
+        "clinic"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "长椅上坐着一个一言不发的人",
+        "药柜的锁有点松",
+        "值班的人在背夜校的书"
+      ],
+      "hook_ids": [],
+      "start_minute": 180,
+      "tags": []
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_customs_raid",
+      "title": "海关突击查柜",
+      "source": "institution",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "berth_7",
+        "container_yard"
+      ],
+      "trigger": "对讲机里门卫喊了一声“大车进场”，海关查验车进了闸口",
+      "objective": "在查验车开到第三排之前，决定那个铅封对不上的柜子怎么办",
+      "choice": "替人瞒下来，还是自己先报上去",
+      "immediate": {
+        "text": "查验车二十分钟后开到七号泊位",
+        "minutes": 20
+      },
+      "near": {
+        "text": "明早八点主任要一份理货说明",
+        "deadline_minutes": 610
+      },
+      "far": {
+        "trigger": "三天后船东的人会来码头",
+        "consequence": "瞒下来的人和说出去的人，船东都会记住",
+        "due_days": 3
+      },
+      "exits": [
+        {
+          "option": "把柜子挪到别的泊位",
+          "cost": "要欠塔吊司机一个大人情"
+        },
+        {
+          "option": "如实上报",
+          "cost": "得罪带你入行的人"
+        },
+        {
+          "option": "什么都不做，等着查",
+          "cost": "查出来就是签字人的事"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1370,
+      "tags": [
+        "crime"
+      ]
+    },
+    {
+      "id": "p_overweight",
+      "title": "超重的柜子",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "berth_7",
+        "container_yard"
+      ],
+      "trigger": "磅房报上来一个柜子比单据重了四吨，放行单上等着你表态",
+      "objective": "在装船之前弄清楚多出来的四吨是什么",
+      "choice": "放行，还是拦下来得罪船公司",
+      "immediate": {
+        "text": "吊机十五分钟后就要吊到这个柜子",
+        "minutes": 15
+      },
+      "near": {
+        "text": "船天亮前必须开，装船单要在五点前交上去",
+        "deadline_minutes": 330
+      },
+      "far": {
+        "trigger": "下个月船公司要续签码头合同",
+        "consequence": "今晚谁拦了船，合同上就会少掉谁的码头",
+        "due_days": 5
+      },
+      "exits": [
+        {
+          "option": "放行",
+          "cost": "出了事就是放行的人担"
+        },
+        {
+          "option": "拦下来开柜",
+          "cost": "船公司的红包以后再没有你的份"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1410,
+      "tags": []
+    },
+    {
+      "id": "p_typhoon",
+      "title": "台风提前转向",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "berth_7",
+        "control_tower"
+      ],
+      "trigger": "广播说台风提前转向，警报两小时后就要升到最高一级",
+      "objective": "在全面停工之前，把最后一船吊完或者放弃",
+      "choice": "冒雨抢吊，还是停下来让船公司去赔",
+      "immediate": {
+        "text": "雨已经横着打过来，吊机必须在半小时内决定停不停",
+        "minutes": 30
+      },
+      "near": {
+        "text": "风眼预计明天中午过境，在那之前所有人不许离开塔楼",
+        "deadline_minutes": 900
+      },
+      "far": {
+        "trigger": "台风过后公司要追查今晚的决定",
+        "consequence": "抢了吊的人和停了工的人，总有一方要写检讨",
+        "due_days": 2
+      },
+      "exits": [
+        {
+          "option": "冒雨抢吊",
+          "cost": "可能有人受伤"
+        },
+        {
+          "option": "下令停工",
+          "cost": "船公司的滞期费和上面的脸色"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1290,
+      "tags": [
+        "disaster"
+      ]
+    },
+    {
+      "id": "p_unpaid_wages",
+      "title": "绑扎队的工钱",
+      "source": "money",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "berth_7",
+        "teahouse"
+      ],
+      "trigger": "发薪日到了，绑扎队的工钱一分没到，有人说包工头已经跑了",
+      "objective": "在绑扎队停工之前，把事情压下去或者闹开",
+      "choice": "先替包工头垫钱稳住人，还是让事情闹到上面去",
+      "immediate": {
+        "text": "绑扎队在七号泊位坐下来不干了，吊机空转",
+        "minutes": 25
+      },
+      "near": {
+        "text": "明天中午之前工钱不到，全码头的绑扎队都要停",
+        "deadline_minutes": 900
+      },
+      "far": {
+        "trigger": "劳动部门下周来码头检查",
+        "consequence": "今晚替谁说了话，检查时就会被谁记住",
+        "due_days": 6
+      },
+      "exits": [
+        {
+          "option": "自己先垫一部分钱",
+          "cost": "垫出去的钱多半要不回来"
+        },
+        {
+          "option": "打电话叫上面的人来",
+          "cost": "包工头的人会记恨"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1260,
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "p_owner_men",
+      "title": "船东的人",
+      "source": "person",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "control_tower"
+      ],
+      "trigger": "船东派来的两个人上了控制塔，指名要见你",
+      "objective": "在他们离开码头之前，弄清楚他们手里到底有什么",
+      "choice": "把他们要的东西交出去，还是赌他们手里什么都没有",
+      "immediate": {
+        "text": "他们在三楼等着，只给了你十分钟",
+        "minutes": 10
+      },
+      "near": {
+        "text": "他们说明晚这个时候还会再来",
+        "deadline_minutes": 1440
+      },
+      "far": {
+        "trigger": "船东下个月要亲自来港口",
+        "consequence": "你今晚给了什么，下个月就得再给一次",
+        "due_days": 7
+      },
+      "exits": [
+        {
+          "option": "给他们要的东西",
+          "cost": "从此被人捏在手里"
+        },
+        {
+          "option": "把事情捅给主任",
+          "cost": "你收过的红包也会一起摆上台面"
+        }
+      ],
+      "leverage": {
+        "holder": "ship_agent_rep",
+        "subject": "player",
+        "basis": "{ship_agent_rep.name}手里有一本账，记着你收过的每一个红包"
+      },
+      "hook_ids": [],
+      "start_minute": 1320,
+      "tags": [
+        "coercion_theme",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "p_injury_coverup",
+      "title": "压下来的工伤",
+      "source": "institution",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "clinic"
+      ],
+      "trigger": "一个绑扎工的手被卸扣绞伤，上面传话让先别写进记录",
+      "objective": "在天亮换班之前，决定这份受伤记录写不写",
+      "choice": "帮着压下去保住全年的考核，还是照实写",
+      "immediate": {
+        "text": "伤者在医务室门口等着，血还没有止住",
+        "minutes": 15
+      },
+      "near": {
+        "text": "早上八点受伤记录要交上去",
+        "deadline_minutes": 420
+      },
+      "far": {
+        "trigger": "伤者下个月的工资单",
+        "consequence": "瞒下来的伤，最后总要有人出钱",
+        "due_days": 10
+      },
+      "exits": [
+        {
+          "option": "照实登记",
+          "cost": "今年的考核没了，上面会记恨签字的人"
+        },
+        {
+          "option": "改成下班后受的伤",
+          "cost": "伤者拿不到工伤的钱"
+        }
+      ],
+      "leverage": {
+        "holder": "shift_lead",
+        "subject": "clinic_nurse",
+        "basis": "{shift_lead.name}知道{clinic_nurse.name}上次改过受伤时间"
+      },
+      "hook_ids": [],
+      "start_minute": 60,
+      "tags": [
+        "bodily_harm",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "p_smuggled_smokes",
+      "title": "被扣下的外烟",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "container_yard"
+      ],
+      "trigger": "保安在闸口扣下了一个人，身上搜出十几条外烟",
+      "objective": "在保安写报告之前，决定要不要替被扣的人说话",
+      "choice": "出面担保，还是装作不认识",
+      "immediate": {
+        "text": "保安给了半小时，找不到担保人就交上去",
+        "minutes": 30
+      },
+      "near": {
+        "text": "明早保卫科长一上班就会看到报告",
+        "deadline_minutes": 600
+      },
+      "far": {
+        "trigger": "那条外轮下次靠港",
+        "consequence": "船上的人会记得今晚谁站了出来",
+        "due_days": 12
+      },
+      "exits": [
+        {
+          "option": "出面担保",
+          "cost": "以后这个人的事都有你一份"
+        },
+        {
+          "option": "装作不认识",
+          "cost": "绑扎队的人会看不起你"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1400,
+      "tags": [
+        "crime"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "h_thermos",
+      "kind": "approach",
+      "slot": "crane_operator",
+      "location_ids": [],
+      "text": "{npc.name}把自己的保温杯推到你面前，杯盖还冒着热气"
+    },
+    {
+      "id": "h_raincoat",
+      "kind": "approach",
+      "slot": "shift_lead",
+      "location_ids": [],
+      "text": "{npc.name}把自己的外套搭到你肩上，说“别着凉，今晚还长”"
+    },
+    {
+      "id": "h_seat",
+      "kind": "approach",
+      "slot": "teahouse_heir",
+      "location_ids": [],
+      "text": "{npc.name}往旁边挪了挪，给你让出半个位置"
+    },
+    {
+      "id": "h_bandage",
+      "kind": "approach",
+      "slot": "clinic_nurse",
+      "location_ids": [],
+      "text": "{npc.name}看了一眼你指节上的口子，拉过一张凳子让你坐下"
+    },
+    {
+      "id": "h_umbrella",
+      "kind": "approach",
+      "slot": "customs_officer",
+      "location_ids": [],
+      "text": "{npc.name}把手电往你脚下照了照，提醒你地上有一滩油"
+    },
+    {
+      "id": "h_cigarette",
+      "kind": "approach",
+      "slot": "lashing_worker",
+      "location_ids": [],
+      "text": "{npc.name}从耳朵上取下一支烟递过来，说“借个火”"
+    },
+    {
+      "id": "h_lift",
+      "kind": "approach",
+      "slot": "ship_agent_rep",
+      "location_ids": [],
+      "text": "{npc.name}说车就停在闸口，问要不要顺路送你一段"
+    },
+    {
+      "id": "h_redpacket",
+      "kind": "request",
+      "slot": "ship_agent_rep",
+      "location_ids": [],
+      "text": "{npc.name}把一个红包压在你手边的单据底下，说“饮茶”"
+    },
+    {
+      "id": "h_torch",
+      "kind": "observe",
+      "slot": "customs_officer",
+      "location_ids": [
+        "berth_7",
+        "container_yard"
+      ],
+      "text": "你看见{npc.name}的手电在一个没有铅封的柜门上停了很久"
+    },
+    {
+      "id": "h_folded_slip",
+      "kind": "observe",
+      "slot": "shift_lead",
+      "location_ids": [],
+      "text": "你看见{npc.name}把一张理货单折起来，塞进了安全帽里"
+    },
+    {
+      "id": "h_slip",
+      "kind": "accident",
+      "slot": "lashing_worker",
+      "location_ids": [],
+      "text": "{npc.name}脚下一滑，手里的东西眼看就要摔出去——你离{npc.ta}只有一步"
+    }
+  ],
+  "twists": [
+    {
+      "id": "t_new_dispatcher",
+      "category": "人事",
+      "requires": [
+        "crane_operator"
+      ],
+      "text": "新调来的夜班调度，是{crane_operator.name}以前的对象"
+    },
+    {
+      "id": "t_old_slip",
+      "category": "信息",
+      "requires": [],
+      "text": "签到簿里夹着一张不属于任何人的旧理货单，上面的签名很像你的"
+    },
+    {
+      "id": "t_allowance_cut",
+      "category": "资源",
+      "requires": [],
+      "text": "公司宣布下个月起夜班补贴减半，整个码头的人心都浮了起来"
+    },
+    {
+      "id": "t_time_clock",
+      "category": "制度",
+      "requires": [],
+      "text": "控制塔装了打卡钟，签到簿作废，谁几点到从此再也抵赖不了"
+    },
+    {
+      "id": "t_ship_early",
+      "category": "时限",
+      "requires": [
+        "pressure"
+      ],
+      "text": "船提前一天到港，所有期限一下子往前挪了二十四小时"
+    },
+    {
+      "id": "t_relative_listed",
+      "category": "关系",
+      "requires": [
+        "customs_officer"
+      ],
+      "text": "{customs_officer.name}的亲戚被人发现就在船公司的名单上"
+    },
+    {
+      "id": "t_box_falls",
+      "category": "意外",
+      "requires": [],
+      "text": "一个空柜子从五层高的地方掉下来，砸坏了跨运车，所幸没伤到人"
+    },
+    {
+      "id": "t_shop_sold",
+      "category": "关系",
+      "requires": [
+        "teahouse_heir"
+      ],
+      "text": "{teahouse_heir.name}的父母决定把茶餐厅卖给船公司的人"
+    },
+    {
+      "id": "t_drunk_name",
+      "category": "信息",
+      "requires": [
+        "daily"
+      ],
+      "text": "老绑扎工在茶餐厅喝多了，说出了一个谁都不该知道的名字"
+    }
+  ],
+  "forbidden_terms": [
+    "微信",
+    "支付宝",
+    "二维码",
+    "智能手机",
+    "App",
+    "网购",
+    "外卖软件",
+    "高铁",
+    "共享单车",
+    "朋友圈",
+    "短视频",
+    "扫码",
+    "无人机",
+    "移动支付",
+    "网约车",
+    "自拍",
+    "WiFi",
+    "QQ",
+    "互联网"
+  ],
+  "content_tags": [
+    "workplace",
+    "romance_light"
+  ],
+  "status": "review",
+  "notes": "首个垂直切片世界。等待真实 Skill 试玩记录后改为 released。"
+}

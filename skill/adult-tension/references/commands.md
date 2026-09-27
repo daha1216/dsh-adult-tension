@@ -5,15 +5,153 @@
 调用：`<python> scripts/adult_tension.py <command> --json [--input-file PATH] [--data-dir PATH]`
 
 - 输入是一个 JSON 对象，来自 `--input-file`（UTF-8，可带 BOM）。需要输入的命令在没有 `--input-file` 且 stdin 不是终端时读取 stdin；可选输入只从 `--input-file` 读取（`--input-file -` 表示 stdin）。
-- 输出是一个信封 `{"ok", "data", "error"}`，以 UTF-8 字节写到 stdout。成功与失败都附带 `next_request_id`（成功在 `data` 里，失败在 `error` 里）。
-- 全局参数：`--json`（输出 JSON，始终如此）、`--pretty`（缩进输出）、`--debug`（日志记录输入）、`--input-file PATH`、`--data-dir PATH`。
+- 输出是一个信封 `{"ok", "data", "error"}`，以 UTF-8 字节写到 stdout。成功与失败都附带 `next_request_id`（成功在 `data` 里，失败在 `error` 里），下一次写操作直接用它。
+- 全局参数：`--json`（输出 JSON，始终如此）、`--pretty`（缩进输出）、`--debug`、`--input-file PATH`、`--data-dir PATH`。
+- 写操作都带 `request_id`；会话内的写操作还带 `session_id` 与 `expected_revision`。同一 `request_id` + 同一输入重放时返回原响应并标记 `replayed: true`。
+- 开发开关（环境变量，由测试环境设置，玩家不需要）：`ADULT_TENSION_HOME` 指定数据目录；`ADULT_TENSION_INCLUDE_DRAFTS=1` 让未发布的世界参与开局与世界列表。
 
 ## 命令一览
 
 | 命令 | 类别 | 输入 | 作用 | 专用参数 |
 |---|---|---|---|---|
+| `commit-turn` | session_write | 必填 | 叙事回合：提交操作，返回结果与下一回合上下文 | — |
 | `doctor` | diagnostic | 无 | 检查环境并完成首次初始化（幂等） | — |
+| `get-context` | read | 必填 | 当前上下文（brief / full） | — |
+| `list-slots` | read | 无 | 存档列表 | — |
+| `list-worlds` | read | 可选 | 世界列表、一句话介绍、支持的模式 | `--include-drafts` |
+| `load-slot` | create | 必填 | 读档：创建新的会话副本，原存档不变 | — |
+| `new-game` | create | 必填 | 开局 | `--include-drafts` |
+| `save-slot` | session_write | 必填 | 存档（省略名字时存到当前槽或自动命名） | — |
+| `smoke` | dev | 可选 | 在临时数据目录用假叙述者跑一条短局 | `--seed`、`--turns` |
+| `verify-content` | dev | 可选 | 校验全部内容（结构、语义、时代、固定种子开局、多样性） | `--world`、`--stats`、`--skip-diversity` |
 | `version` | read | 无 | Skill、内容、存档格式、RNG 版本 | — |
+
+## 输入字段
+
+### `commit-turn`
+
+操作列表的字段见 `references/operations.md`。
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `expected_revision` | 整数 1..1000000000 | 是 | 上一次返回的 revision |
+| `action_mode` | 枚举：`result` / `attempt` / `rewrite` / `continue` / `wait` | 是 | result / attempt / rewrite / continue / wait |
+| `player_input` | 字符串，≤2000 字 | 是 | 玩家这一句的原话（继续时可为空字符串） |
+| `player_authorized` | 布尔 | 否，默认 `false` | 玩家本人的话授权了玩家角色的移动、承诺、交易、同意或设定修改时为 true |
+| `acts_on` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–8 项） 或 null | 否，默认 `null` | 玩家行动作用到的 NPC（身体、意志、财物）；attempt 不作用于任何 NPC 时写 [] |
+| `operations` | 数组（操作对象（按 `op` 区分），0–40 项） | 是 | 操作列表（可以为空数组） |
+| `content_tags` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–12 项） | 是 | 本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags |
+| `intimate_participants` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–6 项） | 否，默认 `[]` | content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家） |
+| `summary` | 字符串，≤120 字 | 是 | 本回合发生了什么，第三方视角，≤120 字 |
+| `open_action` | 字符串，≤80 字 | 是 | 回合停在哪里、谁在等谁，≤80 字 |
+| `quotes` | 数组（字符串，≤80 字，0–3 项） | 否，默认 `[]` | ≤3 条对后续有意义的原话，每条 ≤80 字 |
+| `chapter_summary` | 字符串，≤300 字 或 null | 否，默认 `null` | 上下文 requests.chapter_summary 为 true 时必填，≤300 字 |
+| `replaces_turn` | 整数 1..1000000 或 null | 否，默认 `null` | “刚才不算，改成……”时填上一回合的回合号 |
+
+### `get-context`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
+| `depth` | 枚举：`brief` / `full` | 否，默认 `"brief"` |  |
+
+### `list-worlds`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `include_drafts` | 布尔 | 否，默认 `false` |  |
+
+### `load-slot`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `name` | 字符串，≤60 字 | 是 |  |
+
+### `new-game`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `mode` | 枚举：`daily` / `pressure` / `random` 或 null | 否，默认 `null` | daily 日常 / pressure 有压力 / random 玩家明确说“随便”时；replay 时可省略 |
+| `seed` | 整数 1..999999 或 null | 否，默认 `null` |  |
+| `replay` | 布尔 | 否，默认 `false` | “重开 N 号”：按本机记录的该种子开局条件复现 |
+| `locks` | 对象（锁定） | 否，默认 `{}` |  |
+| `excludes` | 对象（排除） | 否，默认 `{}` |  |
+| `player` | 对象（玩家设定） | 否，默认 `{}` |  |
+| `npc_gender_preference` | 枚举：`any` / `mostly_female` / `mostly_male` / `female_only` / `male_only` / `mixed` | 否，默认 `"any"` |  |
+| `custom_world` | 自定义世界包 或 null | 否，默认 `null` |  |
+| `preferences` | 对象（偏好） | 否，默认 `{}` |  |
+| `include_drafts` | 布尔 | 否，默认 `false` |  |
+
+#### `locks` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `world_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `combo_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `activity_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `pressure_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `hook_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `identity_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+
+#### `excludes` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `content_tags` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–20 项） | 否，默认 `[]` |  |
+| `world_ids` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–20 项） | 否，默认 `[]` |  |
+| `location_ids` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–20 项） | 否，默认 `[]` |  |
+
+#### `player` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `gender` | 枚举：`female` / `male` / `nonbinary` 或 null | 否，默认 `null` |  |
+| `age` | 整数 0..120 或 null | 否，默认 `null` |  |
+| `age_band` | 数组（整数 0..120，2–2 项） 或 null | 否，默认 `null` |  |
+| `identity_hint` | 字符串，≤20 字 或 null | 否，默认 `null` |  |
+| `social_position` | 枚举：`low` / `equal` / `high` 或 null | 否，默认 `null` |  |
+| `name` | 字符串，≤12 字 或 null | 否，默认 `null` |  |
+| `title` | 字符串，≤12 字 或 null | 否，默认 `null` |  |
+
+#### `preferences` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `inner_view` | 布尔 | 否 |  |
+| `assistant` | 布尔 | 否 |  |
+| `offscreen_simulation` | 布尔 | 否 |  |
+| `person` | 枚举：`second` / `first` / `third` | 否 |  |
+
+### `save-slot`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `expected_revision` | 整数 1..1000000000 | 是 | 上一次返回的 revision |
+| `name` | 字符串，≤60 字 或 null | 否，默认 `null` |  |
+| `overwrite` | 布尔 | 否，默认 `false` |  |
+| `save_as` | 布尔 | 否，默认 `false` |  |
+
+### `smoke`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `seed` | 整数 1..999999 | 否，默认 `42` |  |
+| `turns` | 整数 2..60 | 否，默认 `8` |  |
+
+### `verify-content`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `world` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `stats` | 布尔 | 否，默认 `false` |  |
+| `skip_diversity` | 布尔 | 否，默认 `false` |  |
 
 ## 错误码
 

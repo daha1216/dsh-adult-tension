@@ -246,6 +246,39 @@ class Obj(Spec):
         return "对象" if not self.name else "对象（%s）" % self.name
 
 
+class Map(Spec):
+    """An object used as a dictionary: keys match a pattern, values share one spec."""
+
+    def __init__(self, value, key_pattern=None, key_hint=None, max_items=None):
+        self.value = value
+        self.key_pattern = re.compile(key_pattern) if key_pattern else None
+        self.key_hint = key_hint
+        self.max_items = max_items
+
+    def check(self, value, path, errors):
+        if not isinstance(value, dict):
+            return self._type_error(value, path, errors, "对象")
+        if self.max_items is not None and len(value) > self.max_items:
+            errors.append(detail(path, "最多 %d 项" % self.max_items, None, INVALID_INPUT))
+            return MISSING
+        out = {}
+        bad = False
+        for key, item in value.items():
+            if self.key_pattern is not None and not self.key_pattern.fullmatch(key):
+                errors.append(detail("%s.%s" % (path, key), "键名不合法：%s" % key, self.key_hint, INVALID_INPUT))
+                bad = True
+                continue
+            checked = self.value.check(item, "%s.%s" % (path, key), errors)
+            if checked is MISSING:
+                bad = True
+            else:
+                out[key] = checked
+        return MISSING if bad else out
+
+    def doc(self):
+        return "对象（键 → %s）" % self.value.doc()
+
+
 class Tagged(Spec):
     """An object whose shape is chosen by a discriminator field (e.g. `op`)."""
 
