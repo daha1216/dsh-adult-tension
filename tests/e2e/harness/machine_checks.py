@@ -81,6 +81,8 @@ TIME_OTHER = ("昨", "明", "前", "后", "那天", "那晚", "今天", "今早"
 DIALOGUE_RE = re.compile(r"“[^”]*”?")
 NOW_BEFORE = ("这", "都", "大", "现在", "眼下", "已经", "已")
 NOW_AFTER = ("了", "啦")
+# people round the hour when they speak ("大半夜的" at eight in the evening)
+DIALOGUE_SLACK = 60
 
 
 def _vocabulary():
@@ -221,9 +223,10 @@ def _clock_of(call):
     return None, context.get("clock")
 
 
-def _hours_ok(word, minute):
-    hour = (minute // 60) % 24
-    return any(lo <= hour < hi for lo, hi in TIME_WORDS[word])
+def _hours_ok(word, minute, slack=0):
+    """The clock minute falls within the word's hours, widened by slack minutes each side."""
+    minute %= 1440
+    return any((minute - (lo * 60 - slack)) % 1440 < (hi - lo) * 60 + 2 * slack for lo, hi in TIME_WORDS[word])
 
 
 def check_footer_and_time(record):
@@ -265,11 +268,13 @@ def check_footer_and_time(record):
                         near = line[max(0, match.start() - 4) : match.end() + 2]
                         if any(other in near for other in TIME_OTHER):
                             continue
+                        slack = 0
                         if any(a < match.start() < b for a, b in dialogue):
-                            before = line[max(0, match.start() - 2) : match.start()]
-                            if not any(m in before for m in NOW_BEFORE) and line[match.end() : match.end() + 1] not in NOW_AFTER:
+                            lead = line[max(0, match.start() - 2) : match.start()]
+                            if not any(m in lead for m in NOW_BEFORE) and line[match.end() : match.end() + 1] not in NOW_AFTER:
                                 continue
-                        if not any(_hours_ok(word, m) for m in minutes):
+                            slack = DIALOGUE_SLACK
+                        if not any(_hours_ok(word, m, slack) for m in minutes):
                             out.append(finding("time", index, "正文说“%s”，引擎时钟是 %s" % (word, clock.get("label"))))
             before = clock
     return out

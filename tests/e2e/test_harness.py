@@ -128,8 +128,9 @@ class MachineCheckTest(unittest.TestCase):
         self.assertIn(("time", 3), names(M.check(rec)))
         rec["turns"][2]["text"] = "昨天凌晨的事，谁也没再提。\n\n" + footer(3, 1210)
         self.assertNotIn(("time", 3), names(M.check(rec)))
-        # a character naming a time on a schedule, or earlier today, is not saying what time it is now
-        for text in ("她说：“规矩就一条，凌晨两点所有人都得去签到，早晨八点交班。”", "他说：“包工头下午就联系不上了。”"):
+        # a character naming a time on a schedule, or earlier today, is not saying what time it is now;
+        # a character rounding the hour is not wrong about it either (20:10)
+        for text in ("她说：“规矩就一条，凌晨两点所有人都得去签到，早晨八点交班。”", "他说：“包工头下午就联系不上了。”", "“站住！大半夜的，提着箱子去哪儿？”"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertNotIn(("time", 3), names(M.check(rec)), text)
         # the narration still says what time it is, with an hour or without; so does a line about now
