@@ -73,25 +73,35 @@ TIME_WORDS = {
     "半夜": [(21, 24), (0, 5)],
     "午夜": [(22, 24), (0, 3)],
 }
-# A time word next to one of these is about another moment, not about now.
-TIME_OTHER = ("昨", "明", "前", "后", "那天", "那晚", "今天", "今早", "等到", "到了", "直到", "刚才", "之前", "以前", "每天", "每晚", "每到", "天天", "那年", "当年", "上回", "下回", "约", "说好", "早在", "自从", "以来")
-# Inside dialogue people mostly speak of other moments ("包工头下午就联系不上了",
-# "凌晨两点签到"); a time word there is about now only when marked so:
-# "都凌晨了", "这大半夜的", "现在是傍晚".
-DIALOGUE_RE = re.compile(r"“[^”]*”?")
-NOW_BEFORE = ("这", "都", "大", "现在", "眼下", "已经", "已")
+# A time word is held to the clock only where it says what time it is now.
+# Text names other moments in open-ended ways ("天光早在傍晚就沉了底",
+# "第三天上午十点就将开幕", "柜子是傍晚塞进来的", "包工头下午就联系不上了"),
+# so the check looks for a claim about now instead of listing those:
+# - narration: the time word opens a clause ("凌晨两点，风……", "你推开门，
+#   傍晚的风灌进来"), or is marked as now;
+# - dialogue: only when marked as now ("都凌晨了", "这大半夜的", "现在是傍晚");
+#   people speak of schedules and earlier today, and round the hour.
+# Marked as now: right after NOW_BEFORE or NOW_IS, or right before 了/啦.
+CLAUSE_START_RE = re.compile(r"(?:^|[。！？；，：、…”」])\s*$")
+NOW_BEFORE = ("这", "大", "这时", "此时", "此刻", "现在", "眼下", "已经", "已", "正值", "时值")
+NOW_IS = ("现在是", "此刻是", "此时是", "已是", "正是")
 NOW_AFTER = ("了", "啦")
-# people round the hour when they speak ("大半夜的" at eight in the evening)
+# Even so, a time word next to one of these is about another moment ...
+TIME_OTHER = ("昨", "明", "前", "后", "那天", "那晚", "今天", "今早", "等到", "到了", "直到", "刚才", "之前", "以前", "每天", "每晚", "每到", "天天", "那年", "当年", "上回", "下回", "约", "说好", "早在", "自从", "以来")
+# ... and so is one that times some other event ("傍晚就回来", "凌晨才睡").
+EVENT_AFTER = ("就", "才", "再", "便")
+DIALOGUE_RE = re.compile(r"“[^”]*”?")
 DIALOGUE_SLACK = 60
-# "柜子是傍晚抢装塞进来的": when something else happened, unless "现在是/此刻是/已是/正是/都是"
-CLEFT_TAIL_RE = re.compile(r"[^。！？，；：]{0,14}的")
-CLEFT_NOW = ("在", "刻", "已", "正", "都")
 
 
-def _about_another_moment(line, start, end):
-    if start < 1 or line[start - 1] != "是" or (start >= 2 and line[start - 2] in CLEFT_NOW):
+def _says_now(line, start, end, in_dialogue):
+    near = line[max(0, start - 4) : end + 2]
+    if any(other in near for other in TIME_OTHER) or line[end : end + 1] in EVENT_AFTER:
         return False
-    return CLEFT_TAIL_RE.match(line, end) is not None
+    head = line[:start]
+    if head.endswith(NOW_BEFORE) or head.endswith(NOW_IS) or line[end : end + 1] in NOW_AFTER:
+        return True
+    return not in_dialogue and CLAUSE_START_RE.search(head) is not None
 
 
 def _vocabulary():
@@ -274,15 +284,10 @@ def check_footer_and_time(record):
                 dialogue = [m.span() for m in DIALOGUE_RE.finditer(line)]
                 for word in TIME_WORDS:
                     for match in re.finditer(word, line):
-                        near = line[max(0, match.start() - 4) : match.end() + 2]
-                        if any(other in near for other in TIME_OTHER) or _about_another_moment(line, match.start(), match.end()):
+                        in_dialogue = any(a < match.start() < b for a, b in dialogue)
+                        if not _says_now(line, match.start(), match.end(), in_dialogue):
                             continue
-                        slack = 0
-                        if any(a < match.start() < b for a, b in dialogue):
-                            lead = line[max(0, match.start() - 2) : match.start()]
-                            if not any(m in lead for m in NOW_BEFORE) and line[match.end() : match.end() + 1] not in NOW_AFTER:
-                                continue
-                            slack = DIALOGUE_SLACK
+                        slack = DIALOGUE_SLACK if in_dialogue else 0
                         if not any(_hours_ok(word, m, slack) for m in minutes):
                             out.append(finding("time", index, "正文说“%s”，引擎时钟是 %s" % (word, clock.get("label"))))
             before = clock
