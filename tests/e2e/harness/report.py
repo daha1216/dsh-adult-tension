@@ -4,6 +4,7 @@
     python tests/e2e/harness/report.py calibrate --reviews <dir>
     python tests/e2e/harness/report.py build --records <dir> --reviews <dir>
                                         [--fixes <fixes.json>] [--out <dir>]
+    python tests/e2e/harness/report.py playtests --records <dir> --reviews <dir> [--out <dir>]
 
 packet: what an independent reviewer gets, as one document: the reviewer
 instructions, the rubric, NARRATIVE_RULES.md and the record. Nothing else:
@@ -97,6 +98,77 @@ def _runs(records_dir):
     return out
 
 
+def _review(reviews_dir, host, name):
+    """The usable review of one record, or None."""
+    path = os.path.join(reviews_dir, host, name)
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as handle:
+        review = json.load(handle)
+    return review if usable(review) else None
+
+
+def _opening_data(rec):
+    for turn in rec["turns"]:
+        for call in turn.get("runtime_calls") or []:
+            data = R.ok_data(call)
+            if R.command_of(call) == "new-game" and data:
+                return data
+    return {}
+
+
+def playtests(records_dir, reviews_dir):
+    """World playtests (CONTENT_BIBLE.md 7): each run with its world, mode,
+    seed, the Skill it ran (digest and commit), machine checks and review;
+    then per world and mode the runs, distinct seeds, passes and the median
+    of each dimension. Every run is shown; none replaces another."""
+    rows = []
+    for name, rec in _runs(records_dir):
+        opening = _opening_data(rec)
+        content = ((rec.get("final_export") or {}).get("session") or {}).get("content") or {}
+        install = (rec.get("installs") or [{}])[-1]
+        checks = machine_checks.check(rec)
+        rows.append({
+            "file": name, "script": rec["script"], "run": rec["run"],
+            "world": (content.get("world") or {}).get("id"), "mode": (opening.get("opening") or {}).get("mode"), "seed": opening.get("seed"),
+            "skill": install.get("digest"), "commit": (install.get("repository") or {}).get("commit"),
+            "machine_pass": checks["pass"], "findings": [f["message"] for f in checks["findings"]],
+            "review": _review(reviews_dir, rec["host"]["name"], name),
+        })
+    groups = {}
+    for row in rows:
+        groups.setdefault((str(row["world"]), str(row["mode"])), []).append(row)
+    summary = []
+    for (world, mode), group in sorted(groups.items()):
+        reviewed = [r for r in group if r["review"]]
+        medians = {}
+        for dimension in DIMENSIONS:
+            scores = [s for s in (_score(r["review"], dimension) for r in reviewed) if s is not None]
+            medians[dimension] = statistics.median(scores) if scores else None
+        summary.append({
+            "world": world, "mode": mode, "runs": len(group), "seeds": len({r["seed"] for r in group}),
+            "machine_pass": sum(1 for r in group if r["machine_pass"]), "reviewed": len(reviewed), "medians": medians,
+            "critical_low": [{"file": r["file"], "dimension": d, "score": _score(r["review"], d)}
+                             for r in reviewed for d in CRITICAL if (_score(r["review"], d) or 5) <= 2],
+        })
+    return {"rows": rows, "summary": summary}
+
+
+def playtests_markdown(result):
+    lines = ["# 世界试玩", "", "| 世界 | 模式 | 局数 | 种子数 | 机器检查通过 | 已评审 | %s |" % " | ".join(DIMENSIONS),
+             "|---|---|---|---|---|---|%s" % ("---|" * len(DIMENSIONS))]
+    for s in result["summary"]:
+        lines.append("| %s | %s | %d | %d | %d | %d | %s |" % (s["world"], s["mode"], s["runs"], s["seeds"], s["machine_pass"], s["reviewed"],
+                                                           " | ".join("—" if s["medians"][d] is None else str(s["medians"][d]) for d in DIMENSIONS)))
+    lines += ["", "（维度一栏是评审分数的中位数。）", "", "| 记录 | 种子 | Skill（提交） | 机器检查 | 评审 ≤ 2 的维度 |", "|---|---|---|---|---|"]
+    for r in result["rows"]:
+        low = [d for d in DIMENSIONS if r["review"] and (_score(r["review"], d) or 5) <= 2]
+        lines.append("| %s | %s | %s（%s） | %s | %s |" % (r["file"], r["seed"], r["skill"] or "未记", r["commit"] or "未记",
+                                                       "通过" if r["machine_pass"] else "未通过：" + "；".join(r["findings"][:3]),
+                                                       "、".join(low) or ("无" if r["review"] else "未评审")))
+    return "\n".join(lines) + "\n"
+
+
 def build(records_dir, reviews_dir, fixes_path=None):
     fixes = {}
     if fixes_path and os.path.exists(fixes_path):
@@ -109,13 +181,7 @@ def build(records_dir, reviews_dir, fixes_path=None):
         host = rec["host"]["name"]
         identities.setdefault(host, set()).add((rec["host"].get("version"), rec["host"].get("model"), rec.get("date")))
         checks = machine_checks.check(rec)
-        review_path = os.path.join(reviews_dir, host, name)
-        review = None
-        if os.path.exists(review_path):
-            with open(review_path, encoding="utf-8") as handle:
-                review = json.load(handle)
-            if not usable(review):
-                review = None
+        review = _review(reviews_dir, host, name)
         stats = checks.get("stats") or {}
         if stats.get("average_calls") is not None:
             ordinary_calls.append((stats["average_calls"], stats["ordinary_turns"]))
@@ -218,6 +284,10 @@ def main(argv):
     rep.add_argument("--reviews", required=True)
     rep.add_argument("--fixes")
     rep.add_argument("--out")
+    play = sub.add_parser("playtests")
+    play.add_argument("--records", required=True)
+    play.add_argument("--reviews", required=True)
+    play.add_argument("--out")
     args = parser.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -225,6 +295,17 @@ def main(argv):
         with open(args.out, "w", encoding="utf-8", newline="\n") as handle:
             handle.write(packet(args.record))
         print(args.out)
+        return 0
+    if args.action == "playtests":
+        result = playtests(args.records, args.reviews)
+        text = playtests_markdown(result)
+        if args.out:
+            os.makedirs(args.out, exist_ok=True)
+            with open(os.path.join(args.out, "playtests.json"), "w", encoding="utf-8", newline="\n") as handle:
+                handle.write(json.dumps(result, ensure_ascii=False, indent=1) + "\n")
+            with open(os.path.join(args.out, "playtests.md"), "w", encoding="utf-8", newline="\n") as handle:
+                handle.write(text)
+        print(text)
         return 0
     if args.action == "calibrate":
         result = calibrate(args.reviews)

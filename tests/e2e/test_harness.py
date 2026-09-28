@@ -125,9 +125,10 @@ class MachineCheckTest(unittest.TestCase):
         self.assertIn(("time", 3), names(M.check(rec)))
         rec["turns"][2]["text"] = "昨天凌晨的事，谁也没再提。\n\n" + footer(3, 1210)
         self.assertNotIn(("time", 3), names(M.check(rec)))
-        # a character naming a time on a schedule is not saying what time it is now
-        rec["turns"][2]["text"] = "她说：“规矩就一条，凌晨两点所有人都得去签到，早晨八点交班。”\n\n" + footer(3, 1210)
-        self.assertNotIn(("time", 3), names(M.check(rec)))
+        # a character naming a time on a schedule, or earlier today, is not saying what time it is now
+        for text in ("她说：“规矩就一条，凌晨两点所有人都得去签到，早晨八点交班。”", "他说：“包工头下午就联系不上了。”"):
+            rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
+            self.assertNotIn(("time", 3), names(M.check(rec)), text)
         # the narration still says what time it is, with an hour or without; so does a line about now
         for text in ("凌晨两点，风把旗子吹得啪啪响。", "她说：“都凌晨了，还不回去？”"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
@@ -320,6 +321,28 @@ class ReportTest(unittest.TestCase):
         self.write_reviews(temp, {"good-1": {"scores": None, "severe": None}})
         rows = {r["record"]: r for r in report.calibrate(temp)["rows"]}
         self.assertFalse(rows["good-1"]["right"])
+
+    def test_playtests_are_summed_up_per_world_and_mode(self):
+        temp = tempfile.mkdtemp(prefix="at-e2e-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        records = os.path.join(temp, "records")
+        path, _rec = run_script.run(run_script.load_script("pt-harbor_night_shift-daily"), "fake", 1, None, os.path.join(temp, "projects"), os.path.join(records, "fake"))
+        name = os.path.basename(path)
+        os.makedirs(os.path.join(temp, "reviews", "fake"))
+        answer = {"scores": {d: {"score": 2 if d == "玩家主权" else 4, "evidence": ["第 1 轮：……——……"]} for d in report.DIMENSIONS}, "severe": []}
+        with open(os.path.join(temp, "reviews", "fake", name), "w", encoding="utf-8") as handle:
+            json.dump(answer, handle, ensure_ascii=False)
+        result = report.playtests(records, os.path.join(temp, "reviews"))
+        (row,) = result["rows"]
+        # the fake host opens a daily game with seed 7; the Skill it ran is named by its files
+        self.assertEqual((row["run"], row["mode"], row["seed"]), (1, "daily", 7))
+        self.assertTrue(row["world"])
+        self.assertEqual(len(row["skill"]), 16)
+        (group,) = result["summary"]
+        self.assertEqual((group["world"], group["runs"], group["seeds"], group["reviewed"]), (row["world"], 1, 1, 1))
+        self.assertEqual((group["medians"]["玩家主权"], group["medians"]["表达"]), (2, 4))
+        self.assertEqual(group["critical_low"], [{"file": name, "dimension": "玩家主权", "score": 2}])
+        self.assertIn("| %s | daily | 1 | 1 |" % row["world"], report.playtests_markdown(result))
 
 
 class ReviewTest(unittest.TestCase):

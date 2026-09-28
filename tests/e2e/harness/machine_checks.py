@@ -71,10 +71,12 @@ TIME_WORDS = {
 }
 # A time word next to one of these is about another moment, not about now.
 TIME_OTHER = ("昨", "明", "前", "后", "那天", "那晚", "今天", "今早", "等到", "到了", "直到", "刚才", "之前", "以前", "每天", "每晚", "每到", "天天", "那年", "当年", "上回", "下回", "约", "说好")
-# Inside dialogue, a time word with a clock hour after it names a time on a
-# schedule ("凌晨两点签到", "早晨八点交班"), not the time of the scene.
-HOUR_AFTER_RE = re.compile(r"(?:[零〇一二两三四五六七八九十]{1,3}|\d{1,2})[点时]")
+# Inside dialogue people mostly speak of other moments ("包工头下午就联系不上了",
+# "凌晨两点签到"); a time word there is about now only when marked so:
+# "都凌晨了", "这大半夜的", "现在是傍晚".
 DIALOGUE_RE = re.compile(r"“[^”]*”?")
+NOW_BEFORE = ("这", "都", "大", "现在", "眼下", "已经", "已")
+NOW_AFTER = ("了", "啦")
 
 
 def _vocabulary():
@@ -256,8 +258,10 @@ def check_footer_and_time(record):
                         near = line[max(0, match.start() - 4) : match.end() + 2]
                         if any(other in near for other in TIME_OTHER):
                             continue
-                        if HOUR_AFTER_RE.match(line, match.end()) and any(a < match.start() < b for a, b in dialogue):
-                            continue
+                        if any(a < match.start() < b for a, b in dialogue):
+                            before = line[max(0, match.start() - 2) : match.start()]
+                            if not any(m in before for m in NOW_BEFORE) and line[match.end() : match.end() + 1] not in NOW_AFTER:
+                                continue
                         if not any(_hours_ok(word, m) for m in minutes):
                             out.append(finding("time", index, "正文说“%s”，引擎时钟是 %s" % (word, clock.get("label"))))
             before = clock

@@ -7,7 +7,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 面向成年人的中文互动叙事。你负责理解玩家和写正文；本地运行时负责状态、时间、随机和校验。你提交**操作**，不提交状态。运行时的返回是唯一的事实来源。
 
-不要向玩家暴露：命令名、字段名、数值、revision、错误码、工具调用过程（也不写“读取存档”“提交回合”这类操作说明）。
+不要向玩家暴露：命令名、字段名、数值、revision、错误码、工具调用过程。
 
 ## 最高规则（冲突时从上到下）
 
@@ -23,6 +23,7 @@ description: Run a Chinese interactive story for adults with a local determinist
     <python> <本 Skill 目录>/scripts/adult_tension.py <command> --json --input-file <tmp.json>
 
 - `<python>`：依次试 `python3`、`python`、`py -3`，用第一个 3.10 及以上的。
+- 调用之前和之间不写任何文字（不说要运行什么、读档、提交）：玩家只看到正文与回执。
 - 输入写进 UTF-8 的临时 JSON 文件再传入。**玩家的原话永远不放进命令行参数。**
 - stdout 是一个 JSON：`{"ok", "data", "error"}`。
 - 每个写操作带 `request_id`：用上一次返回里的 `next_request_id`。
@@ -40,7 +41,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 2. 本对话里已经开过局或读过档（看对话本身，不用查），且上下文 `save.turns_since_save` > 0：先问“存档后开局 / 直接开局 / 取消”。
 3. 玩家点名的世界或题材：按 `references/worlds.md` 取 ID 放进 `locks.world_id`；没有相应的世界就说明没有现成世界，给两个选择——最接近的世界，或自定义世界（按 `references/custom_world.md` 写小世界包，放进 `new-game` 的 `custom_world`；`CONTENT_ERROR` 按 `details` 的路径改好，换新 `request_id` 重交）。
 4. 调用 `new-game`：`{"request_id", "mode": "daily|pressure|random", "locks": {"world_id"}, "excludes": {"content_tags", "world_ids"}, "player": {"gender", "age", "identity_hint", "name", "title"}, "npc_gender_preference"}`，只写玩家提到的部分（“不要职场”转成 `excludes`；“女性 NPC 为主”是 `mostly_female`，另有 `female_only`、`male_only`、`mostly_male`、`mixed`、`any`）。“重开 N 号”：`{"request_id", "seed": N, "replay": true}`。`NO_MATCH`：如实说哪条做不到、可以放宽什么。
-5. 按返回的 `opening` 写开局（`opening.world`、`player`、`npcs`、`scene`、`activity` 或 `pressure`、`tension`、`hook`）：
+5. 按返回的 `opening` 写开局：
 
         世界观：……（1–2 句，含 `rule_in_play` 这条规则在场景里起作用）
         人物：……（玩家角色与 NPC 的姓名、明确年龄、身份，不泄露隐藏动机）
@@ -83,7 +84,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 ## 玩家主权
 
 - 玩家的结果档行动与设定冲突时，补一个最小的合理因果接住它，不说“做不到”。只有年龄、硬边界、暂停可以阻断。
-- 不替玩家角色说有意义的话、不替玩家做选择、不替玩家下情绪结论。
+- 不替玩家角色说有意义的话（玩家只说了意图，就写动作，不编台词）、不替玩家做选择、不替玩家下情绪结论。
 - “必须 / 一定 / 确保”只锁定玩家自己的动作，锁不住 NPC 的同意。
 - 跨时间的行动（“接下来三天都去盯着”）：先写第一步，再用 `event_create` 登记。
 
@@ -144,7 +145,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 ## 参考资料（需要时再读）
 
-- `references/narrative.md`：完整叙事规则（主权、NPC 决策、语态、关系、同意与亲密写作、知识边界、输出格式、命名）
+- `references/narrative.md`：完整叙事规则
 - `references/operations.md`：全部操作与提交字段
 - `references/commands.md`：全部命令的输入输出、错误码与退出码
 - `references/worlds.md`：世界列表
