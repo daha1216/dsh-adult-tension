@@ -105,6 +105,12 @@ class MachineCheckTest(unittest.TestCase):
         # the format's placeholder copied as a heading
         rec["turns"][2]["text"] = "正文：\n\n对方没有马上回答。\n\n" + footer(3, 1210)
         self.assertIn(("leakage", 3), names(M.check(rec)))
+        # ... or in English, with no command name in it
+        rec["turns"][2]["text"] = "I will commit the turn to the runtime engine.\n\n对方没有马上回答。\n\n" + footer(3, 1210)
+        self.assertIn(("leakage", 3), names(M.check(rec)))
+        # a line of English someone says aloud is part of the story
+        rec["turns"][2]["text"] = "“Stop right there!”\n\n水手喊完这一句，对方没有马上回答。\n\n" + footer(3, 1210)
+        self.assertNotIn(("leakage", 3), names(M.check(rec)))
         receipt = clean_record()
         receipt["turns"].append({"index": 4, "conversation": "A", "input": "存档", "expect": {"kind": "meta", "calls_max": 1},
                                  "host_calls": [], "runtime_calls": [{"argv": ["save-slot"], "input": {}, "exit": 0, "envelope": envelope({"receipt": "已保存到「夜班」·第 3 回合"})}],

@@ -47,6 +47,8 @@ MECHANISM_WORDS = ("有限配合", "表面配合", "真诚配合", "系统判定
                    "会话状态", "载入会话", "提交回合", "回合行动", "工具调用", "调用工具", "调用运行时")
 ENGINE_WORDS = ("revision", "request_id", "session_id", "expected_revision", "next_request_id", "known_by", "believed_by", "dedupe_key", "action_mode", "desire_level", "self_control")
 SNAKE_RE = re.compile(r"\b[a-z]+(?:_[a-z]+)+\b")
+ENGLISH_WORD_RE = re.compile(r"[A-Za-z]{3,}")
+CJK_RE = re.compile(r"[一-鿿]")
 QUOTE_RE = re.compile(r"“([^”]{2,})”")
 PLAYER_SPEECH_RE = re.compile(r"(?:^|[。！？\n，、])\s*你[^。！？“\n]{0,12}?(?:说|问|道|答|喊|开口|低声|笑着|回了一句|接了一句)[^“\n]{0,6}“([^”]{2,})”")
 # the line first, then who said it: “……”你的声音……, “……”你低声说
@@ -212,6 +214,12 @@ def check_leakage(record):
         for word in ENGINE_WORDS:
             if "_" not in word and re.search(r"\b%s\b" % word, text, re.I):
                 out.append(finding("leakage", index, "正文里出现引擎术语 %s" % word))
+        # the host explaining its tool calls in English: a line with no Chinese outside what someone says
+        for line in lines:
+            bare = DIALOGUE_RE.sub("", line)
+            if ENGLISH_WORD_RE.search(bare) and not CJK_RE.search(bare):
+                out.append(finding("leakage", index, "正文里有一整行英文：%s" % line[:60]))
+                break
         if narrative:
             match = NUMBER_LEAK_RE.search(text)
             if match:
