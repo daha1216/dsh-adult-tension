@@ -2,7 +2,7 @@
 
 回答一个问题：**真实的宿主和模型，通过真实安装的 Skill，能不能把这个游戏玩好。**
 
-这里的一切都不调用模型；真正的评测要在两个真实宿主上跑，属于成批消耗模型额度的操作，开始之前需要用户许可（`PROGRESS.md` 待决事项 P1、P5）。
+这套工具自己的测试不调用模型；真正的评测要在两个真实宿主上跑，属于成批消耗模型额度的操作，要用户许可（`PROGRESS.md` 待决事项 P4、P5：用户 2026-09-28 同意执行）。
 
 ## 目录
 
@@ -10,6 +10,7 @@
 |---|---|
 | `scripts/NN-*.json` | 16 条剧本：玩家会打的话，外加给机器检查用的 `expect` 标注（被测模型看不到） |
 | `drills/release-drill.json` | 发布前的真实演练（`SKILL_PACKAGING.md` §9），格式与剧本相同 |
+| `playtests/` | 世界试玩（`CONTENT_BIBLE.md` §7）：`pt-<世界>-<daily\|pressure>.json` 每个世界每种模式一条，开局后 5 回合、存档、新对话读档、再 1 回合；`pt-stage1.json` 是阶段 1 的试玩（开局 + 10 回合 + 存档 + 新对话读档）。格式与剧本相同 |
 | `rubric.md` | 评分量表：8 个维度，每一档都有锚点与示例 |
 | `reviewer.md` | 给独立评审的说明与输出格式 |
 | `calibration/` | 校准集：6 条好的、6 条植入已知缺陷的记录，`key.json` 是答案；`build.py` 生成它们 |
@@ -18,6 +19,7 @@
 | `harness/run_script.py` | 跑一条剧本、写一条记录 |
 | `harness/machine_checks.py` | §6.2 的机器检查 |
 | `harness/report.py` | 评审材料包、校准判定、最终报告 |
+| `harness/review.py` | 请一个独立的模型实例评审一条记录（OpenAI 兼容接口，一次请求只含材料包，不带工具） |
 | `test_harness.py` | 这套工具自己的测试（`python -m unittest discover -s tests/e2e`，不调用模型） |
 
 ## 一次运行怎么进行
@@ -26,7 +28,10 @@
 
 1. 在本仓库之外建一个全新的测试项目（默认 `D:\projects\at-e2e\<宿主>-s<剧本>-r<次>-<时间>\`，独立 `git init`）；
 2. 把 Skill 装进项目级目录 `.claude/skills/adult-tension/`（剧本 16 先装旧版，中途整目录替换为当前版）；
-3. 写项目级的权限设置（只放行运行 Python 与在项目内读写临时文件；不含任何给模型的指示）；
+3. 让宿主只看这个项目自己的设置，不含任何给模型的指示：
+   - Claude Code：`--setting-sources project,local --strict-mcp-config`（操作者的用户级设置、插件、MCP 不进来）；权限写在命令行（只放行运行 Python、在项目内编辑文件，禁止上网），因为没被交互信任过的工作区里，项目设置的权限规则不生效；
+   - OpenCode：它的全局配置目录（`XDG_CONFIG_HOME`）、会话库（`OPENCODE_DB`）、临时目录（`TEMP`/`TMP`）都放在项目的 `.host/` 里；关掉 `~/.claude`、`~/.agents` 下的外部 Skill 扫描、`~/.claude/CLAUDE.md`、自动更新、分享、默认插件、语言服务器下载；项目的 `opencode.json` 写权限（同上）、`skills.paths: [".claude/skills"]`、`share: disabled`；
+   - 由一个 Claude Code 会话启动测试时，去掉调用方自己的 `CLAUDE*`、`ANTHROPIC_*` 变量；
 4. 设置 `ADULT_TENSION_TRACE`（引擎自己的调用记录）；剧本没有另说时，再设置 `ADULT_TENSION_HOME`（项目内的数据目录）与 `ADULT_TENSION_INCLUDE_DRAFTS=1`（世界还是 `review` 时才需要）。宿主环境里原有的这两个变量一律先清掉；
 5. 按剧本逐句发给宿主，同一个对话用同一个宿主会话；剧本里标了 `conversation` 的步骤开新对话；
 6. 每一轮记下：玩家输入、宿主的工具调用、这一轮的全部运行时调用（参数、输入、返回、耗时、是哪一份 Skill 跑的）、玩家看到的全部文字。运行时调用取自引擎记录；装的是引擎记录出现之前的旧版时（剧本 16 与发布演练的升级前），改从宿主自己的工具调用里还原（命令行、写进输入文件的内容、打印出的 JSON），这一轮标 `calls_source: host`；
@@ -52,6 +57,23 @@ python tests/e2e/harness/run_script.py --host claude-code --script 01 --run 1
 
 ```bash
 python tests/e2e/harness/run_script.py --host opencode --model <provider/model> --script 01 --run 1
+```
+
+两个常用参数：
+
+- `--host-exe <路径>`：宿主程序的完整路径。Windows 上的 OpenCode 要传 npm 包里的平台二进制（`…\node_modules\opencode-ai\node_modules\opencode-windows-x64\bin\opencode.exe`）：`opencode.cmd` 经过 cmd.exe，玩家原话里的 `%` 之类会被改写。
+- `--host-env-file <文件>`：宿主要用的环境变量（`KEY=VALUE`，`#` 开头是注释），例如模型接口。文件放在仓库之外；记录里的 `host_env` 列出这些变量，名字含 `KEY`、`TOKEN`、`SECRET`、`PASSWORD` 的只写“已设置”。OpenCode 用自定义接口时，可以在这里用 `OPENCODE_CONFIG` 指向一个只写 provider 的配置文件，密钥写成 `{env:变量名}`。
+
+本机现在的跑法（OpenCode + 本地接口上的 `gemini-3.8-flash-high`，见 `PROGRESS.md` 的“真实宿主的接法”）：
+
+```bash
+python tests/e2e/harness/run_script.py --host opencode --model local-proxy/gemini-3.8-flash-high --host-exe <opencode.exe> --host-env-file <仓库外的 env 文件> --script 01 --run 1
+```
+
+世界试玩与阶段 1 的试玩（记录写在 `reports/playtests/`、`reports/host/stage1/`）：
+
+```bash
+python tests/e2e/harness/run_script.py --host opencode --model local-proxy/gemini-3.8-flash-high --host-exe <opencode.exe> --host-env-file <env 文件> --script pt-harbor_night_shift-daily --run 1 --out reports/playtests
 ```
 
 剧本 16 从旧版开始：
@@ -81,6 +103,12 @@ python tests/e2e/harness/run_script.py --host claude-code --script tests/e2e/dri
 记录写在 `reports/release/drill/<宿主>/`：宿主名称与版本、模型、两次安装的版本与数据库格式、每一步的实际调用与耗时。升级前的调用来自宿主自己的记录（旧版没有引擎记录），没有单次耗时，只有整轮的耗时。演练结束后在数据目录的 `backups/` 里应当有一份 `adult_tension-schema2-*.db`。
 
 ## 评审
+
+评审由 `review.py` 交给一个独立的模型实例：一次请求，只含评审材料包（同 `report.py packet`），不带工具。接口写在仓库之外的文件里（`REVIEW_BASE_URL`、`REVIEW_API_KEY`、`REVIEW_MODEL`）。答案不是 `reviewer.md` 要求的 JSON 时重问，最多 3 次，每次的原始答案都存进输出；三次都不合格的评审记为不可用（校准时算判错，报告里算“没有可用评审”）。
+
+```bash
+python tests/e2e/harness/review.py --record <记录.json> --out <评审.json> --endpoint-file <仓库外的接口文件>
+```
 
 1. **先校准。** 为校准集的每条记录生成材料包，交给一个全新上下文的评审（人或独立模型实例），把它输出的 JSON 存到 `reports/e2e/calibration-reviews/<记录名>.json`，然后判定：
 

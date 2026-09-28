@@ -16,6 +16,7 @@ import hosts as H
 import machine_checks as M
 import record as R
 import report
+import review
 import run_script
 from helpers.domain import STORE
 
@@ -120,6 +121,13 @@ class MachineCheckTest(unittest.TestCase):
         self.assertIn(("time", 3), names(M.check(rec)))
         rec["turns"][2]["text"] = "昨天凌晨的事，谁也没再提。\n\n" + footer(3, 1210)
         self.assertNotIn(("time", 3), names(M.check(rec)))
+        # a character naming a time on a schedule is not saying what time it is now
+        rec["turns"][2]["text"] = "她说：“规矩就一条，凌晨两点所有人都得去签到，早晨八点交班。”\n\n" + footer(3, 1210)
+        self.assertNotIn(("time", 3), names(M.check(rec)))
+        # the narration still says what time it is, with an hour or without; so does a line about now
+        for text in ("凌晨两点，风把旗子吹得啪啪响。", "她说：“都凌晨了，还不回去？”"):
+            rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
+            self.assertIn(("time", 3), names(M.check(rec)), text)
 
     def test_lines_the_player_never_said_are_ventriloquism(self):
         rec = clean_record()
@@ -290,6 +298,51 @@ class ReportTest(unittest.TestCase):
         self.assertFalse(built["pass"])
         self.assertEqual(built["critical_low"], [{"file": "h2-st-r2.json", "dimension": "同意与安全", "score": 2}])
         self.assertIn("同意与安全", report.to_markdown(built))
+        # a record without a usable review cannot pass: no gaps in the scores
+        self.write_reviews(os.path.join(reviews, "h2"), {"h2-st-r2": {"scores": None, "severe": None, "reviewer": {"usable": False}}})
+        built = report.build(records, reviews)
+        self.assertEqual((built["unreviewed"], built["pass"]), (["h2-st-r2.json"], False))
+
+    def test_an_unusable_review_is_not_a_right_calibration(self):
+        temp = tempfile.mkdtemp(prefix="at-rev-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        self.write_reviews(temp, {"good-1": {"scores": None, "severe": None}})
+        rows = {r["record"]: r for r in report.calibrate(temp)["rows"]}
+        self.assertFalse(rows["good-1"]["right"])
+
+
+class ReviewTest(unittest.TestCase):
+    def answer(self, **scores):
+        return {"scores": {d: {"score": scores.get(d, 4), "evidence": ["第 1 轮：……——……"]} for d in report.DIMENSIONS}, "severe": []}
+
+    def test_the_answer_is_the_json_object_reviewer_md_asks_for(self):
+        good = self.answer(**{"关系节奏": "n/a"})
+        self.assertEqual(review.parse_answer("```json\n%s\n```" % json.dumps(good, ensure_ascii=False)), good)
+        self.assertEqual(review.parse_answer("评审如下：%s" % json.dumps(good, ensure_ascii=False)), good)
+        self.assertIsNone(review.parse_answer("我无法评审这条记录。"))
+        self.assertEqual(review.problems_of(good), [])
+        bad = self.answer(**{"表达": 6, "知识边界": True})
+        del bad["scores"]["连续性"]
+        self.assertEqual(len(review.problems_of(bad)), 3)
+        self.assertEqual(review.problems_of(None), ["不是 JSON 对象"])
+
+    def test_only_the_packet_is_sent_and_only_the_format_is_asked_again(self):
+        path = os.path.join(_bootstrap.E2E_DIR, "calibration", "good-1.json")
+        sent = []
+        answers = ["好的，我来看看。", "```json\n%s\n```" % json.dumps(self.answer(**{"表达": 2}), ensure_ascii=False)]
+
+        def send(endpoint, text):
+            sent.append(text)
+            return answers[len(sent) - 1], "served-x"
+
+        out = review.review(path, {"REVIEW_MODEL": "m"}, send=send)
+        self.assertEqual(sent, [report.packet(path)] * 2)
+        # the scores are the reviewer's, as given
+        self.assertEqual(out["scores"]["表达"]["score"], 2)
+        self.assertEqual([a["problems"] == [] for a in out["reviewer"]["attempts"]], [False, True])
+        self.assertTrue(out["reviewer"]["usable"])
+        never = review.review(path, {"REVIEW_MODEL": "m"}, send=lambda endpoint, text: ("没有 JSON", None))
+        self.assertEqual((never["scores"], never["reviewer"]["usable"], len(never["reviewer"]["attempts"])), (None, False, 3))
 
     def test_the_review_packet_holds_only_rules_rubric_and_record(self):
         path = os.path.join(_bootstrap.E2E_DIR, "calibration", "good-1.json")
@@ -333,6 +386,13 @@ class ParserTest(unittest.TestCase):
 
         self.assertIn("error_max_turns", claude({"subtype": "error_max_turns", "is_error": True})["error"])
         self.assertIn("API Error: 529", claude({"subtype": "success", "is_error": True, "result": "API Error: 529"})["error"])
+        # the error message the host wrote itself does not name the model
+        synthetic = [
+            {"type": "system", "subtype": "init", "session_id": "abc", "model": "claude-x"},
+            {"type": "assistant", "session_id": "abc", "message": {"model": "<synthetic>", "content": [{"type": "text", "text": "API Error: 429"}]}},
+            {"type": "result", "subtype": "success", "is_error": True, "session_id": "abc", "result": "API Error: 429"},
+        ]
+        self.assertEqual(H.parse_claude_stream(synthetic)["model"], "claude-x")
         self.assertIsNone(claude({"subtype": "success", "is_error": False, "result": "好。"})["error"])
         parsed = H.parse_opencode_stream([{"type": "text", "sessionID": "ses_1", "part": {"text": "半句"}}, {"type": "error", "sessionID": "ses_1", "error": {"name": "APIError"}}])
         self.assertEqual((parsed["session_id"], parsed["text"]), ("ses_1", "半句"))
@@ -417,7 +477,8 @@ class RunnerTest(unittest.TestCase):
 
     def test_every_script_is_player_voice_with_valid_annotations(self):
         banned = ["result", "attempt", "commit", "npc_", "字段", "档位", "revision", "请注意"]
-        paths = [os.path.join(run_script.SCRIPTS, n) for n in os.listdir(run_script.SCRIPTS)] + [os.path.join(run_script.DRILLS, n) for n in os.listdir(run_script.DRILLS)]
+        dirs = (run_script.SCRIPTS, run_script.DRILLS, run_script.PLAYTESTS)
+        paths = [os.path.join(d, n) for d in dirs for n in os.listdir(d)]
         for name in sorted(paths):
             script = run_script.load_script(name)
             says = [s["say"] for s in script["steps"] if "say" in s]
@@ -427,6 +488,27 @@ class RunnerTest(unittest.TestCase):
             for step in script["steps"]:
                 self.assertTrue("say" in step or step.get("harness") == "upgrade_skill", (name, step))
         self.assertEqual(len(os.listdir(run_script.SCRIPTS)), 16)
+
+    def test_playtests_open_every_world_in_both_modes_then_save_and_load(self):
+        # CONTENT_BIBLE 8.2 step 6: every world, both modes (each played with 5 seeds, one run each)
+        with open(os.path.join(_bootstrap.REPO_ROOT, "skill", "adult-tension", "content", "index.json"), encoding="utf-8") as handle:
+            worlds = json.load(handle)["worlds"]
+        for world in worlds:
+            for mode in world["modes"]:
+                script = run_script.load_script("pt-%s-%s" % (world["id"], mode))
+                says = [s for s in script["steps"] if "say" in s]
+                self.assertEqual((script["world"], script["mode"]), (world["id"], mode))
+                self.assertIn(world["title"], says[0]["say"])
+                self.assertEqual(says[0]["expect"]["group_must_call"], ["doctor", "new-game"])
+                self.assertIn("继续", [s["say"] for s in says])
+                self.assertEqual(says[-3]["expect"]["must_call"], ["save-slot"])
+                self.assertEqual((says[-2].get("conversation"), says[-2]["expect"]["must_call"]), ("B", ["load-slot"]))
+        # the stage 1 playtest: opening, 10 turns, a save, a load in a new conversation
+        stage1 = run_script.load_script("pt-stage1")
+        kinds = [s["expect"]["kind"] for s in stage1["steps"] if s.get("conversation", "A") == "A"]
+        self.assertEqual(kinds, ["opening"] + ["turn"] * 10 + ["meta"])
+        self.assertEqual(run_script.run_tag(stage1, "claude-code", 2), "claude-code-pt-stage1-r2")
+        self.assertEqual(run_script.run_tag({"id": "07"}, "claude-code", 1), "claude-code-s07-r1")
 
     def test_the_release_drill_follows_skill_packaging_9(self):
         script = run_script.load_script(os.path.join(run_script.DRILLS, "release-drill.json"))
@@ -459,6 +541,72 @@ class RunnerTest(unittest.TestCase):
         self.assertNotIn("ADULT_TENSION_INCLUDE_DRAFTS", drill)
         self.assertEqual(drill["ADULT_TENSION_TRACE"], os.path.join(project, "trace.jsonl"))
         self.assertEqual(base["ADULT_TENSION_HOME"], "D:\\elsewhere")
+
+    def test_the_host_starts_as_a_session_of_its_own_with_the_operators_settings(self):
+        project = os.path.join("D:\\", "projects", "at-e2e", "p")
+        temp = tempfile.mkdtemp(prefix="at-e2e-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        path = os.path.join(temp, "host.env")
+        with open(path, "w", encoding="utf-8") as handle:
+            handle.write("# the model endpoint\nANTHROPIC_BASE_URL=http://127.0.0.1:1/\n\nANTHROPIC_AUTH_TOKEN = mine\n")
+        extra = run_script.read_env_file(path)
+        # run by a Claude Code session: its own session, login and model settings stay behind
+        calling = {"PATH": "x", "CLAUDECODE": "1", "CLAUDE_CODE_SESSION_ID": "s", "CLAUDE_PID": "7", "ANTHROPIC_AUTH_TOKEN": "parent", "ANTHROPIC_MODEL": "m"}
+        env = run_script.host_env({}, project, calling, extra)
+        self.assertEqual({k: v for k, v in env.items() if k.startswith(("CLAUDE", "ANTHROPIC_"))}, {"ANTHROPIC_BASE_URL": "http://127.0.0.1:1/", "ANTHROPIC_AUTH_TOKEN": "mine"})
+        self.assertEqual(env["PATH"], "x")
+        # from a plain terminal nothing of the operator's is dropped
+        self.assertEqual(run_script.host_env({}, project, {"PATH": "x", "ANTHROPIC_API_KEY": "k"})["ANTHROPIC_API_KEY"], "k")
+        # the record shows the settings without the secrets
+        self.assertEqual(run_script.shown_env(dict(extra, X_API_KEY="k")), {"ANTHROPIC_AUTH_TOKEN": "<set>", "ANTHROPIC_BASE_URL": "http://127.0.0.1:1/", "X_API_KEY": "<set>"})
+        with open(path, "w", encoding="utf-8") as handle:
+            handle.write("ANTHROPIC_BASE_URL\n")
+        with self.assertRaises(SystemExit):
+            run_script.read_env_file(path)
+
+    def test_claude_code_runs_isolated_with_command_line_permissions(self):
+        host = H.ClaudeCode("D:\\p", {}, model="m-1", exe="C:\\host\\claude.exe")
+        first = host.command("A", "开一局")
+        # the player's words are the prompt, right after -p; nothing else is said to the model
+        self.assertEqual(first[:3], ["C:\\host\\claude.exe", "-p", "开一局"])
+        for flag in ("--setting-sources", "--strict-mcp-config", "--allowedTools", "--disallowedTools", "--permission-mode"):
+            self.assertIn(flag, first)
+        self.assertEqual(first[first.index("--setting-sources") + 1], "project,local")
+        self.assertNotIn("--resume", first)
+        self.assertEqual(first[first.index("--model") + 1], "m-1")
+        host.sessions["A"] = "sid-1"
+        self.assertEqual(host.command("A", "继续")[-2:], ["--resume", "sid-1"])
+        self.assertIsNone(H.project_config("claude-code", "D:\\p"))
+
+    def test_opencode_runs_isolated_from_the_operators_configuration(self):
+        project = os.path.join("D:\\", "projects", "at-e2e", "p")
+        host = H.OpenCode(project, {"PATH": "x", "XDG_CONFIG_HOME": "C:\\mine"}, model="local/m-1", exe="C:\\host\\opencode.exe")
+        first = host.command("A", "开一局")
+        # the player's words are the message; nothing else is said to the model
+        self.assertEqual(first[0], "C:\\host\\opencode.exe")
+        self.assertEqual(first[-1], "开一局")
+        self.assertEqual(first[first.index("-m") + 1], "local/m-1")
+        self.assertEqual(first[first.index("--dir") + 1], project)
+        self.assertNotIn("--session", first)
+        host.sessions["A"] = "ses_1"
+        self.assertEqual(host.command("A", "继续")[-3:], ["--session", "ses_1", "继续"])
+        # the global configuration and the sessions are the project's own, not the operator's
+        self.assertEqual(host.env["XDG_CONFIG_HOME"], os.path.join(project, ".host", "config"))
+        self.assertEqual(host.env["OPENCODE_DB"], os.path.join(project, ".host", "opencode.db"))
+        # its scratch files (the runtime's input files) too: runs side by side never share one
+        self.assertEqual((host.env["TEMP"], host.env["TMP"]), (os.path.join(project, ".host", "tmp"),) * 2)
+        for flag in ("OPENCODE_DISABLE_EXTERNAL_SKILLS", "OPENCODE_DISABLE_CLAUDE_CODE_PROMPT", "OPENCODE_DISABLE_AUTOUPDATE", "OPENCODE_DISABLE_SHARE"):
+            self.assertEqual(host.env[flag], "1")
+        self.assertEqual(host.env["PATH"], "x")
+        temp = tempfile.mkdtemp(prefix="at-e2e-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        with open(H.project_config("opencode", temp), encoding="utf-8") as handle:
+            config = json.load(handle)
+        # the Skill is found where run_script installs it; sessions are never shared
+        self.assertEqual(config["skills"]["paths"], [os.path.dirname(run_script.SKILL_REL).replace(os.sep, "/")])
+        self.assertEqual(config["share"], "disabled")
+        self.assertEqual(config["permission"]["bash"]["*"], "deny")
+        self.assertEqual(config["permission"]["webfetch"], "deny")
 
     def test_a_fake_host_run_records_calls_state_and_identity(self):
         temp = tempfile.mkdtemp(prefix="at-e2e-")

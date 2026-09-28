@@ -4,41 +4,30 @@
 
 ## 当前状态
 
-- 当前阶段：阶段 7 里不依赖宿主的部分已完成：
-  - 发布说明草稿；
-  - `ACCEPTANCE.md` §9 核对清单（`reports/release/checklist.md`）；
-  - 发布演练剧本。
-- 剩下的工作全部要等用户决定。
-- 下一步：等用户就 P1–P5 与 C1 做决定。决定之后按这个顺序做：
-  1. P1：可用的宿主；
-  2. 真实宿主试玩（P4）：阶段 1–4 的记录，以及六个世界的 60 局；
+- 当前阶段：P4（真实宿主试玩）进行中。宿主是 OpenCode 1.18.29，模型经本地接口用 `gemini-3.8-flash-high`（用户 2026-09-29 指定）。
+- 冒烟（2 回合）发现并修了 D27、D28，复跑机器检查通过；阶段 1 的试玩正在跑。
+- 下一步：
+  1. 阶段 1 试玩（`pt-stage1`：开局 + 10 回合 + 存档 + 新对话读档）的记录与问题；
+  2. 六个世界 × 两种模式 × 5 局的试玩（`tests/e2e/playtests/`，记录在 `reports/playtests/`），修根因；
   3. 六个世界转为 `released`；
-  4. 阶段 6 的正式端到端评测（P5）；
-  5. 在干净的 Windows 与 Linux 上各做一次 §9 演练（P2）；
-  6. 按 `reports/release/checklist.md` 重跑全套，然后发布（推送与发布同样要用户决定）。
+  4. 阶段 4 的真实宿主记录（从 `2aa58c8` 升级后续玩）与 Windows 上的 §9 发布演练；
+  5. 校准评审（≥ 10/12）与阶段 6 的正式端到端评测（P5；第二个宿主见 P6）；
+  6. 按 `reports/release/checklist.md` 重跑全套（推送与发布要用户决定）。
 
 ## 待决事项（需要用户决定）
 
+用户 2026-09-28 的决定：P1、P2 忽略；P4、P5 执行；C1 确认。随后又指定：宿主的模型用 DeepSeek Harness 里的 `gemini-3.8-flash-high`（也可以直接调用它的本地接口 `http://127.0.0.1:8317/v1`），不再用 OpenCode。
+
+用户 2026-09-29：Claude Code 经这个接口跑不通之后，改为“试下用 OpenCode CLI 来调用”。
+
 | # | 事项 | 现状与影响 | 暂行做法 |
 |---|---|---|---|
-| P1 | 真实宿主不可用 | 本机 `claude`（npm 安装）报 `claude native binary not installed`，修复需在仓库外运行 `node %APPDATA%\npm\node_modules\@anthropic-ai\claude-code\install.cjs` 或重装；OpenCode Go 订阅未激活（Go 模型 403）。阶段 1 起的真实宿主试玩、阶段 6 的两宿主评测都依赖这两项 | 阶段 0 用 OpenCode 免费模型 `opencode/big-pickle` 做了一次无成人内容的冒烟。含成人内容的试玩在用户决定宿主与模型之前不做 |
-| P2 | Linux 测试方式 | 本机没有 WSL/Docker；规范要求 Linux CI 与 Linux 真实演练 | CI 配置已写好（`.github/workflows/ci.yml`，未推送、未启用）。请决定：推到私有仓库跑 CI，还是安装 WSL |
-| P3 | Python 3.10 真实测试 | 本机只有 3.12 / 3.14 | 用静态检查兜底：`validate_skill` 以 3.10 语法解析运行时、禁止 3.11+ 接口、只允许标准库导入；安装 3.10 需用户同意 |
-| P4 | 真实宿主试玩与六个世界的 `released`：阶段 1 的试玩（开局 + 10 回合 + 存档 + 新对话读档）；阶段 5 每个世界每种模式 ≥ 5 个种子的试玩记录（`ACCEPTANCE.md` §3、§6 的记录格式） | 依赖 P1。按 `CONTENT_BIBLE.md` §7，没有真实 Skill 试玩记录的世界不能改为 `released`，所以六个世界目前都是 `review`，`doctor` 报 `warn`（没有可随机开局的世界） | 自动化部分已全部完成；试玩在 P1 解决后执行（6 世界 × 2 模式 × 5 种子 = 60 局，属于成批消耗额度，执行前再确认）。宿主测试环境用 `ADULT_TENSION_INCLUDE_DRAFTS=1` 让 `review` 世界可开局（开发开关，不写进 `SKILL.md`） |
-| P5 | 阶段 6 的正式端到端评测 | 两个宿主 × 16 条剧本 × 每条 ≥ 3 次（约 96 局，其中剧本 16 一局就有 60 回合），另加评审模型的评分调用；属于成批消耗模型额度，需要用户许可；还依赖 P1 | 先做不耗额度的准备（剧本、量表、校准集、采集与机器检查脚本）；得到许可与可用宿主后再跑 |
-
-操作步骤（用户可自行处理 P1）：
-
-1. 修复 Claude Code CLI：在终端运行 `node "%APPDATA%\npm\node_modules\@anthropic-ai\claude-code\install.cjs"`，或 `npm install -g @anthropic-ai/claude-code` 重装；之后 `claude --version` 应能输出版本号。
-2. 或者激活 OpenCode Go 订阅，或明确同意用哪个 OpenCode 模型做含成人内容的试玩。
-
-阶段 4 要求的真实宿主记录（存档 → 换新版本 Skill 目录并迁移 → 新对话续玩），P1 解决后我用无头命令执行；也可以手动做：
-
-1. 建测试项目 `D:\projects\at-host-test\`，把**阶段 3 提交**（`2aa58c8`）的 Skill 目录复制到其中的 `.claude\skills\adult-tension\`（`git -C D:\projects\adult-tension-v2 archive 2aa58c8 skill/adult-tension` 可以取出那一版）。
-2. 在测试项目里开新对话，说“开一局，日常”，推进 3 个回合（其中一个说“继续”），再说“存档 夜班”，关闭对话。
-3. 用当前版本的 `skill\adult-tension\` 整个替换测试项目里的 Skill 目录（数据库会从 schema 2 迁移到 3，并在数据目录的 `backups\` 留下备份）。
-4. 开新对话说“读档 夜班”，确认人物、地点、未决动作接得上，再推进 1 回合。
-5. 把对话记录与数据目录里的 `backups\` 列表交给我，我整理进 `reports/host/stage4/`。
+| P1 | 真实宿主不可用 | **用户：忽略**（不修 npm 装的 `claude`）；2026-09-29 改用 OpenCode | 宿主：OpenCode 1.18.29（npm 包里的平台二进制，`--host-exe` 传入），模型 `local-proxy/gemini-3.8-flash-high`：本地接口作为 OpenAI 兼容的 provider，配置文件与密钥都在仓库之外（见“设计替代”里的“真实宿主的接法”）。Claude 桌面版自带的 Claude Code 2.1.281 经同一接口时，每个请求都被上游以 `RESOURCE_EXHAUSTED`（429）拒绝，原因未查明，已停止排查 |
+| P2 | Linux 测试方式 | **用户：忽略**。§9 第 7 条的 Linux 演练与 Linux CI 因此不做 | CI 配置留在仓库（未推送、未启用）；发布清单里这一条如实写“按用户决定未做” |
+| P3 | Python 3.10 真实测试 | 本机只有 3.12 / 3.14；用户这次没有提到 | 仍用静态检查兜底：`validate_skill` 以 3.10 语法解析运行时、禁止 3.11+ 接口、只允许标准库导入；安装 3.10 需用户同意 |
+| P4 | 真实宿主试玩与六个世界的 `released`：阶段 1 的试玩（开局 + 10 回合 + 存档 + 新对话读档）；阶段 5 每个世界每种模式 ≥ 5 个种子的试玩记录（`ACCEPTANCE.md` §3、§6 的记录格式） | **用户：执行**。按 `CONTENT_BIBLE.md` §7，没有真实 Skill 试玩记录的世界不能改为 `released` | 执行中。宿主测试环境用 `ADULT_TENSION_INCLUDE_DRAFTS=1` 让 `review` 世界可开局（开发开关，不写进 `SKILL.md`） |
+| P5 | 阶段 6 的正式端到端评测 | **用户：执行**。§6.1 要求至少两个宿主 | 先在 OpenCode 上跑；第二个宿主见 P6 |
+| P6 | 第二个宿主（§6.1 第 4 条：至少 2 个宿主，每条剧本每个宿主 ≥ 3 次） | Claude Code 经本地接口不可用（见 P1）；它的用户级设置指向另一个 API，用它就是动用用户自己的账号与额度；dsh、WorkBuddy、Gemini、ZCode 装着旧版 Skill，按 `ENVIRONMENT.md` 要先问 | **待用户决定**：A 让 Claude Code 用它自己的用户级设置（用户的 API 与额度）；B 用户放开本地接口对 Claude Code 请求的限制；C 指定别的宿主；D 只用一个宿主，报告如实写“§6.1 第 4 条未满足” |
 
 ## 阶段记录
 
@@ -99,7 +88,7 @@
 
 遗留：P1、P2、P3；`references/narrative.md`、`operations.md`、`worlds.md` 在阶段 1 随玩法加入。
 
-### 阶段 1：单世界垂直切片 —— 自动化部分完成（提交 `f33352b`）；真实宿主试玩待 P1/P4
+### 阶段 1：单世界垂直切片 —— 完成（提交 `f33352b`；真实宿主试玩 2026-09-29）
 
 做了什么：
 
@@ -151,7 +140,10 @@
 - 固定种子两种模式各 10 次开局通过结构校验：`tests/content/test_worlds.py::test_fixed_seed_openings_come_from_one_world`、`verify-content` 报告。
 - 20 回合脚本化运行，每回合一个冷进程，第 10 回合存档、读档续跑，最终状态摘要与不中断路线一致：`tests/integration/test_cli_game.py::LongRouteTest`。
 - 进程内开局与提交耗时见上表。
-- 真实宿主试玩：**未做**，依赖 P1（见 P4）。
+- 真实宿主试玩（2026-09-29）：OpenCode 1.18.29 + `local-proxy/gemini-3.8-flash-high`，剧本 `pt-stage1`：港口夜班、日常；开局 + 10 回合（其中一次“继续”、一次多半会被拒绝的借工卡请求）；存档“夜班”；新对话读档，再推进 1 回合。记录 `reports/host/stage1/opencode/opencode-pt-stage1-r1.json`。
+  - 调用：开局 `doctor` + `new-game`；10 个普通回合各 1 次 `commit-turn`；存档 1 次；新对话 `doctor` + `load-slot`；续玩 1 次。普通回合平均 1.0 次，没有被拒的提交。
+  - 借工卡：对方先讨价还价（要玩家当没看见那只集装箱），护士出手拦住，卡没有交出来。读档后的前情与未决动作（对讲机里等调度回话）接得上。
+  - 机器检查第一次报了第 7 轮的两个时间词，是检查的误报（D30）；修正后复查通过。
 
 追溯（本阶段首次实现的 P0 行）：
 
@@ -560,7 +552,7 @@
 
 | # | 冲突 | 暂行选择 | 理由 | 状态 |
 |---|---|---|---|---|
-| C1 | 追溯事实能否给 NPC 追加知情：`NARRATIVE_RULES.md` §2【引擎】“不得为 NPC 追加同意、好感或知情”、`ACCEPTANCE.md` §2“追溯不能给 NPC 追加知情”；`DATA_CONTRACTS.md` §5.1 允许“玩家明确说明对方知道，且不涉及同意、好感”时例外 | 按优先级取 `NARRATIVE_RULES.md`：追溯事实的 `known_by` 不能含 NPC。“其实我早就认识她”记为玩家角色的背景事实，她记不记得由 NPC 与剧情决定 | NR 优先于 DC；也更符合“玩家不能替 NPC 决定”的主权规则 | 阶段 3 已按此实现（`RetconTest`）；请用户确认 |
+| C1 | 追溯事实能否给 NPC 追加知情：`NARRATIVE_RULES.md` §2【引擎】“不得为 NPC 追加同意、好感或知情”、`ACCEPTANCE.md` §2“追溯不能给 NPC 追加知情”；`DATA_CONTRACTS.md` §5.1 允许“玩家明确说明对方知道，且不涉及同意、好感”时例外 | 按优先级取 `NARRATIVE_RULES.md`：追溯事实的 `known_by` 不能含 NPC。“其实我早就认识她”记为玩家角色的背景事实，她记不记得由 NPC 与剧情决定 | NR 优先于 DC；也更符合“玩家不能替 NPC 决定”的主权规则 | 阶段 3 已按此实现（`RetconTest`）；**用户 2026-09-28 确认** |
 
 ## 设计替代与自主决策
 
@@ -630,6 +622,13 @@
   - 宿主自己报告这一轮出错：Claude Code 结果里的 `is_error`，或不是 `success` 的 `subtype`；OpenCode 的 error 事件；非零退出码；
   - 玩家什么也没看到。
   出错之前宿主做过的工具调用仍然记进 `host_calls`，旧版 Skill 那一段也就还能还原出调用。理由：`ACCEPTANCE.md` §6.1 第 3 条要求全量记录；没有回复给玩家的一轮，不能当作通过。
+- **真实宿主的接法**（P1、P4、P5）：
+  - 宿主是 OpenCode 1.18.29，直接调用 npm 包里的平台二进制 `opencode.exe`（`--host-exe`）：npm 的 `opencode.cmd` 要经过 cmd.exe，玩家原话里的 `%` 这类字符会被改写。
+  - 隔离：宿主只看测试项目自己的配置。`XDG_CONFIG_HOME` 指向测试项目里的 `.host/config`（用户的全局配置、插件、MCP、agents、全局指示都进不来），会话库 `OPENCODE_DB` 放在 `.host/opencode.db`（被测会话不进用户的 OpenCode 历史），临时目录 `TEMP`/`TMP` 放在 `.host/tmp`（模型写的运行时输入文件留在各自的项目里，并行的两局不会共用一个文件）；关掉 `~/.claude`、`~/.agents` 下的外部 Skill 扫描与 `~/.claude/CLAUDE.md`，关掉自动更新、分享、默认插件、语言服务器下载。项目的 `opencode.json` 写权限（只许运行 python、可写文件、不许上网）、`skills.paths: [".claude/skills"]`（Skill 仍装在项目级目录）、`share: disabled`、`autoupdate: false`。OpenCode 启动时会往自己的配置目录装插件包 `@opencode-ai/plugin`（宿主的内部行为），这个目录现在在测试项目里。
+  - 模型：本地接口作为 OpenAI 兼容的 provider（`local-proxy`），写在仓库之外的配置文件里，由宿主环境文件（`--host-env-file`）的 `OPENCODE_CONFIG` 指定；接口地址与密钥从环境变量代入，记录的 `host_env` 只显示密钥“已设置”。会话标题用 `gemini-3.1-flash-lite`（`small_model`），不占主模型的额度。
+  - Claude Code 的驱动保留：Claude 桌面版自带的 CLI（`--host-exe`）；`--setting-sources project,local --strict-mcp-config`（用户级设置把接口指向另一个 API，不能让它进来）；权限写在命令行（没被交互信任过的工作区里，项目设置的权限规则不生效）；由 Claude Code 会话启动时，去掉调用方自己的 `CLAUDE*`、`ANTHROPIC_*` 变量。经本地接口时所有请求被上游拒绝：频率、体积、流式、思考、`cache_control`、工具定义都已排除，原因未查明（P1）。
+- **评审**（`tests/e2e/harness/review.py`）：独立的模型实例，一次请求只含评审材料包（`reviewer.md`、`rubric.md`、`NARRATIVE_RULES.md`、记录），不带工具，经 OpenAI 兼容接口发送。答案不是要求的 JSON 时重问，最多 3 次，每次的原始答案都保留；三次都不合格的评审记为不可用：校准时算判错，报告里算“没有可用评审”，报告因此不能通过。
+- **开局取世界 ID**：`SKILL.md` 开局第 3 步让模型从 `references/worlds.md` 取世界 ID，不调 `list-worlds`（§5：本对话第一次开局只有 `doctor` + `new-game` 两次）。`SKILL_TEMPLATE.md` 这里写“需要时调用 `list-worlds`”，模板同时要求“按实际命令、字段与路径校正”；“世界列表”这句话仍然调 `list-worlds`。
 - **发布演练的环境**：剧本的 `setup` 可以写 `"data_dir": "default"`（不设数据目录变量，运行时按平台默认位置）与 `"include_drafts": false`（不开草稿开关）；测试框架只设引擎记录变量，它只负责记录、不改变任何行为。宿主环境里原有的 `ADULT_TENSION_HOME`、`ADULT_TENSION_INCLUDE_DRAFTS` 一律先清掉。
 
 ## 默认值调整
@@ -666,3 +665,7 @@
 | D24 | 把发布演练接到 e2e 工具上时发现：剧本 16 从旧版 Skill 开始，而引擎记录是阶段 6 才加的——照原样跑，升级前的每一轮都没有运行时调用，机器检查会报“应当调用 new-game，实际调用：无”，调用预算无从统计；记录里的 Skill 身份取的是第一次 `doctor`，升级之后仍写着旧版本 | 阶段 6 的采集只考虑了带记录钩子的当前版本，没有任何测试从旧版起步跑过这条管线 | 旧版的调用从宿主自己的工具调用还原（见“设计替代”）；身份取最后一次安装之后的 `doctor`，没有时由测试框架在结束后问运行时；新测试从 `2aa58c8` 起步：开局、回合、存档 → 整目录升级 → 新对话读档 → 续玩，断言每轮的调用来源与命令、迁移前的备份、升级后的身份 |
 | D25 | 引擎记录写不进去时静默忽略（`except Exception: pass`） | 当时只考虑了“记录不能拖垮命令”，没考虑评测一方会因此少算调用、让 §5 的预算假通过 | 写不进去时在 stderr 提示，命令照常返回；机器检查比对宿主的调用次数与引擎记录、核对每次调用的 Skill 根目录；新测试覆盖这三种情况 |
 | D26 | 阶段 7 收尾时重跑发布演练发现四处问题：<br>- 机器检查完全不看 `host_error`：宿主某一轮出错、超时或什么也没输出，只要那一步没有必须出现的调用（例如“问模式”），记录照样通过；<br>- 宿主出错时，它之前做过的工具调用被丢掉，旧版 Skill 那一段因此一次调用都没有；<br>- Claude Code 结果里的 `is_error`、非零退出码都不算出错；<br>- 记录不能检查时，命令行只打印 FAIL，不说原因 | 阶段 6 的采集只考虑了宿主正常回复的路径；假宿主遇到拒绝就抛异常，没有一条测试走过“宿主出错”这条路 | - 机器检查：宿主没有正常结束、或玩家什么也没看到的回合，记录不合格；<br>- 宿主出错时带上之前的工具调用；<br>- 两个宿主的驱动把宿主自己报告的出错与非零退出码记为这一轮出错；<br>- 命令行写出记录不能检查的原因；<br>- 新测试覆盖这四处。反向核对：只撤回这些修复，4 个新测试全部失败 |
+| D27 | 第一次 OpenCode 冒烟：`doctor` 报“还没有可开局的世界”，而测试环境打开了草稿开关，`new-game` 能开 6 个世界；模型因此又调 `list-worlds` 核实 | 内容检查只数 `released` 的世界，不看开发开关；快速路径还会原样复述旧结论 | 按 `new-game` 实际能开的世界计数（开关打开时含未发布的世界）；开关状态写进快速路径的标记，切换后走完整检查；开关只在 `Context.drafts_switch()` 一处定义。新测试在旧代码上失败。另外 `tests/helpers/cli.py` 清掉操作者环境里的 `ADULT_TENSION_INCLUDE_DRAFTS`、`ADULT_TENSION_TRACE`，测试不受外部环境影响 |
+| D28 | 同一冒烟：本对话第一次开局调用 4 次（`doctor`、`list-worlds`、`list-sessions`、`new-game`），超过 §5 的 2 次 | `SKILL.md` 开局第 3 步写着“（`list-worlds` 查看）”；第 2 步“本对话已有进行中的局”让模型去查会话列表；命令表前还多了一个空表头 | 第 3 步改为从 `references/worlds.md` 取世界 ID（见“设计替代”）；第 2 步写明“看对话本身，不用查”；删掉空表头。复跑三次：4 → 3 → 2 次，机器检查通过（冒烟记录不是评测数据，只在临时目录） |
+| D29 | 第一次真实运行 Claude Code 时记录的模型是 `<synthetic>`；写评审工具时又发现，不可用的评审在校准里会被算作判对 | 宿主自己写的出错消息也带 `model` 字段；`calibrate` 把没有分数的维度当 5 分 | 解析跳过 `<synthetic>` 消息，没有真实模型时记请求的模型；不可用的评审在校准里算判错、在报告里算“没有可用评审”；新测试 |
+| D30 | 阶段 1 试玩：机器检查报第 7 轮正文说“凌晨”“早晨”，引擎时钟是第一天 23:20 | 两处都是人物台词在讲作息（“凌晨两点所有人必须去签到”“早晨八点交班”）。检查只认得“昨天”“每天”这类指别的时刻的词，没认出“时间词 + 钟点”这种排班说法 | 台词里时间词后面紧跟钟点的，不再当作此刻的时间；旁白（带不带钟点）和台词里单说“都凌晨了”照常检查。新测试在旧检查下失败。阶段 1 的记录原样保留，复查通过 |

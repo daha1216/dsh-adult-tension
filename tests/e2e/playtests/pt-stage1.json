@@ -1,0 +1,125 @@
+{
+ "id": "pt-stage1",
+ "title": "阶段 1 的第一次真实宿主试玩",
+ "focus": "DELIVERY_PLAN.md 阶段 1：开局 + 10 回合（含“继续”和一次多半会被 NPC 拒绝的尝试）+ 存档 + 新对话读档",
+ "world": "harbor_night_shift",
+ "mode": "daily",
+ "steps": [
+  {
+   "say": "开一局，港口夜班，日常",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2,
+    "group_must_call": [
+     "doctor",
+     "new-game"
+    ]
+   }
+  },
+  {
+   "say": "我先看看四周，听听大家在说什么",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我走到离我最近的那个人身边，问问对方在忙什么",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我让对方把工作证借我用一晚",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我不说话，看对方怎么做",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我跟着对方走一段，顺便问问这里夜班的规矩",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我问对方交班以后要不要一起去吃点东西",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我去码头边上吹吹风，看看有没有别人过来",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "存档 夜班",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   }
+  },
+  {
+   "say": "读档 夜班",
+   "conversation": "B",
+   "expect": {
+    "kind": "load",
+    "calls_max": 2,
+    "must_call": [
+     "load-slot"
+    ]
+   }
+  },
+  {
+   "say": "继续",
+   "conversation": "B",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 14
+}

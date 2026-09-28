@@ -67,7 +67,9 @@ def parse_claude_stream(events):
             model = event.get("model") or model
         elif kind == "assistant":
             message = event.get("message") or {}
-            model = message.get("model") or model
+            # "<synthetic>": a message the host wrote itself (e.g. an API error), not a model's
+            if message.get("model") != "<synthetic>":
+                model = message.get("model") or model
             for block in message.get("content") or []:
                 if block.get("type") == "text" and block.get("text", "").strip():
                     texts.append(block["text"])
@@ -91,10 +93,19 @@ def parse_claude_stream(events):
 
 
 class ClaudeCode:
-    name = "claude-code"
+    """The host sees the project's settings only: the operator's user-level
+    settings (their API endpoint, model, hooks, plugins) and their MCP servers
+    stay out, so every run starts from the same host. Permissions go on the
+    command line, because Claude Code ignores the permission rules in the
+    settings file of a workspace nobody has trusted interactively: the Skill
+    may run Python and edit files in the project; the web is denied."""
 
-    def __init__(self, project_dir, env, model=None, timeout=900):
-        self.exe = _which("claude")
+    name = "claude-code"
+    ISOLATION = ["--setting-sources", "project,local", "--strict-mcp-config"]
+    PERMISSIONS = ["--permission-mode", "acceptEdits", "--allowedTools", "Bash(python:*)", "Bash(python3:*)", "Bash(py:*)", "--disallowedTools", "WebFetch", "WebSearch"]
+
+    def __init__(self, project_dir, env, model=None, timeout=900, exe=None):
+        self.exe = exe or _which("claude")
         self.project_dir = project_dir
         self.env = env
         self.model = model
@@ -105,12 +116,16 @@ class ClaudeCode:
         proc = subprocess.run([self.exe, "--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=self.env, timeout=60)
         return proc.stdout.decode("utf-8", errors="replace").strip()
 
-    def send(self, conversation, text):
-        argv = [self.exe, "-p", text, "--output-format", "stream-json", "--verbose"]
+    def command(self, conversation, text):
+        argv = [self.exe, "-p", text, "--output-format", "stream-json", "--verbose"] + self.ISOLATION + self.PERMISSIONS
         if self.model:
             argv += ["--model", self.model]
         if conversation in self.sessions:
             argv += ["--resume", self.sessions[conversation]]
+        return argv
+
+    def send(self, conversation, text):
+        argv = self.command(conversation, text)
         started = time.perf_counter()
         proc = subprocess.run(argv, cwd=self.project_dir, env=self.env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, timeout=self.timeout)
         events = _events(proc.stdout)
@@ -149,14 +164,40 @@ def parse_opencode_stream(events):
 
 
 class OpenCode:
-    name = "opencode"
+    """The host sees the project's configuration only. Its global
+    configuration directory, session database and scratch directory are
+    inside the project, so the operator's providers, plugins, MCP servers,
+    agents, instructions and sessions stay out, and runs side by side share
+    nothing; Skills come from the project configuration
+    (project_config: skills.paths), not from the user-level .claude and
+    .agents directories; ~/.claude/CLAUDE.md is not read. No self-update,
+    sharing, default plugins or language-server downloads during a run. The
+    model's provider is the operator's: e.g. OPENCODE_CONFIG in the host
+    environment file names a provider file kept outside the project."""
 
-    def __init__(self, project_dir, env, model, timeout=900):
+    name = "opencode"
+    ISOLATION = {
+        "OPENCODE_DISABLE_EXTERNAL_SKILLS": "1",
+        "OPENCODE_DISABLE_CLAUDE_CODE_PROMPT": "1",
+        "OPENCODE_DISABLE_AUTOUPDATE": "1",
+        "OPENCODE_DISABLE_SHARE": "1",
+        "OPENCODE_DISABLE_DEFAULT_PLUGINS": "1",
+        "OPENCODE_DISABLE_LSP_DOWNLOAD": "1",
+        "OPENCODE_PURE": "1",
+    }
+
+    def __init__(self, project_dir, env, model, timeout=900, exe=None):
         if not model:
             raise HostError("OpenCode 需要用 --model 指定模型（provider/model）")
-        self.exe = _which("opencode")
+        self.exe = exe or _which("opencode")
         self.project_dir = project_dir
-        self.env = env
+        self.host_dir = os.path.join(project_dir, ".host")
+        self.env = dict(env, **self.ISOLATION)
+        self.env["XDG_CONFIG_HOME"] = os.path.join(self.host_dir, "config")
+        self.env["OPENCODE_DB"] = os.path.join(self.host_dir, "opencode.db")
+        # the host's scratch files (the runtime's input files among them) stay in
+        # the project, so runs side by side never share one
+        self.env["TEMP"] = self.env["TMP"] = os.path.join(self.host_dir, "tmp")
         self.model = model
         self.timeout = timeout
         self.sessions = {}
@@ -165,11 +206,15 @@ class OpenCode:
         proc = subprocess.run([self.exe, "--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=self.env, timeout=60)
         return proc.stdout.decode("utf-8", errors="replace").strip()
 
-    def send(self, conversation, text):
+    def command(self, conversation, text):
         argv = [self.exe, "run", "--format", "json", "--dir", self.project_dir, "-m", self.model]
         if conversation in self.sessions:
             argv += ["--session", self.sessions[conversation]]
-        argv.append(text)
+        return argv + [text]
+
+    def send(self, conversation, text):
+        argv = self.command(conversation, text)
+        os.makedirs(self.env["TEMP"], exist_ok=True)
         started = time.perf_counter()
         proc = subprocess.run(argv, cwd=self.project_dir, env=self.env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, timeout=self.timeout)
         events = _events(proc.stdout)
@@ -189,16 +234,21 @@ HOSTS = {"claude-code": ClaudeCode, "opencode": OpenCode}
 
 
 def project_config(host_name, project_dir, python_names=("python", "python3", "py")):
-    """Project-level permissions only (no instructions): the host may run the
-    runtime and write its temporary input files inside the project."""
+    """Project-level settings only (no instructions): the host may run the
+    runtime and write its temporary input files inside the project; the
+    Skill is found in the project's .claude/skills; sessions are never shared.
+    Claude Code takes its permissions on the command line instead
+    (ClaudeCode.PERMISSIONS)."""
     if host_name == "claude-code":
-        os.makedirs(os.path.join(project_dir, ".claude"), exist_ok=True)
-        allow = ["Bash(%s:*)" % name for name in python_names] + ["Write(./**)", "Read(./**)"]
-        settings = {"permissions": {"allow": allow, "deny": ["WebFetch", "WebSearch"]}}
-        path = os.path.join(project_dir, ".claude", "settings.json")
-    else:
-        settings = {"$schema": "https://opencode.ai/config.json", "permission": {"bash": {"*": "deny", **{"%s *" % n: "allow" for n in python_names}}, "edit": "allow", "webfetch": "deny"}}
-        path = os.path.join(project_dir, "opencode.json")
+        return None
+    settings = {
+        "$schema": "https://opencode.ai/config.json",
+        "permission": {"bash": {"*": "deny", **{"%s *" % n: "allow" for n in python_names}}, "edit": "allow", "webfetch": "deny"},
+        "skills": {"paths": [".claude/skills"]},
+        "share": "disabled",
+        "autoupdate": False,
+    }
+    path = os.path.join(project_dir, "opencode.json")
     with open(path, "w", encoding="utf-8", newline="\n") as handle:
         handle.write(json.dumps(settings, ensure_ascii=False, indent=1) + "\n")
     return path

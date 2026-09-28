@@ -10,7 +10,10 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fi
 SKILL_ROOT = os.path.join(REPO_ROOT, "skill", "adult-tension")
 ENTRY = os.path.join(SKILL_ROOT, "scripts", "adult_tension.py")
 
-_SCRUB = ("ADULT_TENSION_HOME", "ADULT_TENSION_FAULT", "PYTHONIOENCODING", "PYTHONUTF8", "PYTHONPATH", "PYTHONPYCACHEPREFIX")
+_SCRUB = (
+    "ADULT_TENSION_HOME", "ADULT_TENSION_FAULT", "ADULT_TENSION_INCLUDE_DRAFTS", "ADULT_TENSION_TRACE",
+    "PYTHONIOENCODING", "PYTHONUTF8", "PYTHONPATH", "PYTHONPYCACHEPREFIX",
+)
 
 
 def clean_env(**extra):

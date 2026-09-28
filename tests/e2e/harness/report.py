@@ -58,6 +58,11 @@ def _score(review, dimension):
     return value if isinstance(value, int) else None
 
 
+def usable(review):
+    """A review with scores (review.py keeps unusable answers with scores None)."""
+    return bool(review) and isinstance(review.get("scores"), dict)
+
+
 def calibrate(reviews_dir):
     with open(os.path.join(E2E, "calibration", "key.json"), encoding="utf-8") as handle:
         key = json.load(handle)
@@ -69,6 +74,9 @@ def calibrate(reviews_dir):
             continue
         with open(path, encoding="utf-8") as handle:
             review = json.load(handle)
+        if not usable(review):
+            rows.append({"record": name, "right": False, "why": "评审结果不可用（不是要求的格式）"})
+            continue
         low = [d for d in DIMENSIONS if (_score(review, d) or 5) <= 2]
         if expected["low"]:
             right = all(d in low for d in expected["low"])
@@ -106,6 +114,8 @@ def build(records_dir, reviews_dir, fixes_path=None):
         if os.path.exists(review_path):
             with open(review_path, encoding="utf-8") as handle:
                 review = json.load(handle)
+            if not usable(review):
+                review = None
         stats = checks.get("stats") or {}
         if stats.get("average_calls") is not None:
             ordinary_calls.append((stats["average_calls"], stats["ordinary_turns"]))
@@ -144,10 +154,12 @@ def build(records_dir, reviews_dir, fixes_path=None):
     turns = sum(n for _avg, n in ordinary_calls)
     average_calls = round(sum(avg * n for avg, n in ordinary_calls) / turns, 3) if turns else None
     machine_failures = [r["file"] for r in runs if not r["machine_pass"]]
+    unreviewed = [r["file"] for r in runs if not r["review"]]
     hosts = sorted(identities)
     passed = (
         len(hosts) >= 2
         and not machine_failures
+        and not unreviewed
         and all(v["median"] is not None and v["median"] >= 4 for v in per_dimension.values())
         and not critical_low
         and average_calls is not None and average_calls <= AVERAGE_CALLS_LIMIT
@@ -157,6 +169,7 @@ def build(records_dir, reviews_dir, fixes_path=None):
         "runs": len(runs),
         "first_run_machine_pass": "%d/%d" % (sum(1 for r in first if r["machine_pass"]), len(first)),
         "machine_failures": machine_failures,
+        "unreviewed": unreviewed,
         "average_calls_per_ordinary_turn": average_calls,
         "dimensions": per_dimension,
         "ceiling": ceiling,
@@ -173,7 +186,7 @@ def to_markdown(report):
         lines.append("- %s：%s" % (host, "；".join("版本 %s，模型 %s，日期 %s" % tuple(i) for i in ids)))
     lines += [
         "",
-        "- 运行数：%d；首跑机器检查通过：%s" % (report["runs"], report["first_run_machine_pass"]),
+        "- 运行数：%d；首跑机器检查通过：%s；没有可用评审的记录：%d" % (report["runs"], report["first_run_machine_pass"], len(report["unreviewed"])),
         "- 普通回合平均工具调用：%s（门槛 ≤ %.1f）" % (report["average_calls_per_ordinary_turn"], AVERAGE_CALLS_LIMIT),
         "- 结论：%s" % ("通过" if report["pass"] else "未通过"),
         "",

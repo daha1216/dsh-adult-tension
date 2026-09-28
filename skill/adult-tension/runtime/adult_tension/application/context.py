@@ -41,6 +41,11 @@ class Context:
         self._content = None
         self.schema_report = None
 
+    def drafts_switch(self):
+        """The development switch ADULT_TENSION_INCLUDE_DRAFTS=1 (set by a test
+        harness): worlds not yet released can be opened."""
+        return self.environ.get("ADULT_TENSION_INCLUDE_DRAFTS") == "1"
+
     # -- data directory ----------------------------------------------------
 
     def data_dir_problem(self):

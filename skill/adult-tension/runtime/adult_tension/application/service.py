@@ -152,8 +152,8 @@ def _content_snapshot(ctx, pack):
 
 
 def include_drafts(ctx, payload):
-    """--include-drafts, or the development switch ADULT_TENSION_INCLUDE_DRAFTS=1 set by a test harness."""
-    return bool(payload.get("include_drafts")) or ctx.environ.get("ADULT_TENSION_INCLUDE_DRAFTS") == "1"
+    """--include-drafts, or the development switch (Context.drafts_switch)."""
+    return bool(payload.get("include_drafts")) or ctx.drafts_switch()
 
 
 def _world_candidates(ctx, conditions, include_drafts):

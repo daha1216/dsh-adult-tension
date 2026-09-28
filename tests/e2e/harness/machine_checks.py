@@ -66,6 +66,10 @@ TIME_WORDS = {
 }
 # A time word next to one of these is about another moment, not about now.
 TIME_OTHER = ("昨", "明", "前", "后", "那天", "那晚", "今天", "今早", "等到", "到了", "直到", "刚才", "之前", "以前", "每天", "每晚", "每到", "天天", "那年", "当年", "上回", "下回", "约", "说好")
+# Inside dialogue, a time word with a clock hour after it names a time on a
+# schedule ("凌晨两点签到", "早晨八点交班"), not the time of the scene.
+HOUR_AFTER_RE = re.compile(r"(?:[零〇一二两三四五六七八九十]{1,3}|\d{1,2})[点时]")
+DIALOGUE_RE = re.compile(r"“[^”]*”?")
 
 
 def _vocabulary():
@@ -241,10 +245,13 @@ def check_footer_and_time(record):
         if clock:
             minutes = [clock["minute"]] + ([before["minute"]] if before else [])
             for line in prose_lines(turn.get("text")):
+                dialogue = [m.span() for m in DIALOGUE_RE.finditer(line)]
                 for word in TIME_WORDS:
                     for match in re.finditer(word, line):
                         near = line[max(0, match.start() - 4) : match.end() + 2]
                         if any(other in near for other in TIME_OTHER):
+                            continue
+                        if HOUR_AFTER_RE.match(line, match.end()) and any(a < match.start() < b for a, b in dialogue):
                             continue
                         if not any(_hours_ok(word, m) for m in minutes):
                             out.append(finding("time", index, "正文说“%s”，引擎时钟是 %s" % (word, clock.get("label"))))

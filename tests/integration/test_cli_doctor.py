@@ -86,6 +86,33 @@ class DoctorTest(unittest.TestCase):
             self.assertEqual(env["data"]["data_dir_source"], "env")
             self.assertTrue(os.path.isfile(os.path.join(data_dir, "adult_tension.db")))
 
+    def test_unreleased_worlds_count_only_under_the_development_switch(self):
+        # doctor tells the host what new-game offers, so the host need not look again
+        with open(os.path.join(SKILL_ROOT, "content", "index.json"), encoding="utf-8") as handle:
+            worlds = json.load(handle)["worlds"]
+        released = sum(1 for w in worlds if w["status"] == "released")
+
+        def content(env):
+            return next(c for c in env["data"]["checks"] if c["id"] == "content")
+
+        with temp_dir() as tmp:
+            data_dir = os.path.join(tmp, "data")
+            code, env, _raw = run_cli(["doctor"], data_dir)
+            self.assertEqual(code, 0, env)
+            if released:
+                self.assertIn("%d 个世界可开局" % released, content(env)["message"])
+            else:
+                self.assertEqual((content(env)["status"], content(env)["hint"]), ("warn", "等待世界包发布"))
+            drafts = clean_env(ADULT_TENSION_INCLUDE_DRAFTS="1")
+            code, env, _raw = run_cli(["doctor"], data_dir, env=drafts)
+            self.assertEqual(code, 0, env)
+            self.assertFalse(env["data"]["fast_path"])  # the switch is part of what the fast path remembers
+            self.assertEqual(content(env)["status"], "ok")
+            self.assertIn("%d 个世界可开局" % len(worlds), content(env)["message"])
+            code, env, _raw = run_cli(["doctor"], data_dir, env=drafts)
+            self.assertTrue(env["data"]["fast_path"])
+            self.assertIn("%d 个世界可开局" % len(worlds), content(env)["message"])
+
     def test_tampered_content_is_reported(self):
         with temp_dir() as tmp:
             skill = copy_skill(tmp)

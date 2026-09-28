@@ -50,6 +50,7 @@ import record as R  # noqa: E402
 
 SCRIPTS = os.path.join(E2E, "scripts")
 DRILLS = os.path.join(E2E, "drills")
+PLAYTESTS = os.path.join(E2E, "playtests")
 DEFAULT_ROOT = os.path.join("D:" + os.sep, "projects", "at-e2e")
 SKILL_REL = os.path.join(".claude", "skills", "adult-tension")
 
@@ -57,6 +58,8 @@ SKILL_REL = os.path.join(".claude", "skills", "adult-tension")
 def load_script(name):
     if os.path.isfile(name):
         path = name
+    elif os.path.isfile(os.path.join(PLAYTESTS, "%s.json" % name)):
+        path = os.path.join(PLAYTESTS, "%s.json" % name)
     else:
         matches = sorted(glob.glob(os.path.join(SCRIPTS, "%s-*.json" % name)))
         if len(matches) != 1:
@@ -135,10 +138,45 @@ def skill_files(project):
     return {"skill_version": version and version.group(1), "db_schema": schema and int(schema.group(1)), "trace": traced}
 
 
-def host_env(setup, project, base):
+def _from_calling_session(name, base):
+    """A Claude Code session that runs this harness hands its own identity to
+    its children: session ids, its messaging socket, its login and model
+    mapping. The host under test starts as a session of its own, as in a
+    player's terminal, so those are dropped."""
+    return "CLAUDECODE" in base and (name.startswith("CLAUDE") or name.startswith("ANTHROPIC_"))
+
+
+def read_env_file(path):
+    """KEY=VALUE lines (blank lines and # comments skipped): the operator's
+    settings for the host, e.g. the model endpoint and its key. Kept outside
+    the repository; the record keeps the names, and the values of the ones
+    that are not secrets."""
+    env = {}
+    with open(path, encoding="utf-8") as handle:
+        for n, line in enumerate(handle, 1):
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            name, sep, value = line.partition("=")
+            if not sep or not name.strip():
+                raise SystemExit("%s:%d 不是 KEY=VALUE" % (path, n))
+            env[name.strip()] = value.strip()
+    return env
+
+
+SECRET_WORDS = ("KEY", "TOKEN", "SECRET", "PASSWORD")
+
+
+def shown_env(extra):
+    return {k: ("<set>" if any(w in k.upper() for w in SECRET_WORDS) else v) for k, v in sorted(extra.items())}
+
+
+def host_env(setup, project, base, extra=None):
     """The host's environment: the engine trace always; a data directory in the
     project and the draft switch unless the script says otherwise."""
-    env = dict(base, ADULT_TENSION_TRACE=os.path.join(project, "trace.jsonl"))
+    env = {k: v for k, v in base.items() if not _from_calling_session(k, base)}
+    env.update(extra or {})
+    env["ADULT_TENSION_TRACE"] = os.path.join(project, "trace.jsonl")
     env.pop("ADULT_TENSION_HOME", None)
     env.pop("ADULT_TENSION_INCLUDE_DRAFTS", None)
     if setup.get("data_dir") != "default":
@@ -278,19 +316,20 @@ def fill_placeholders(text, turns):
     return re.sub(r"\{seed:(\d+)\}", seed, text)
 
 
-def make_host(name, project, env, model):
+def make_host(name, project, env, model, exe=None):
     if name == "fake":
         return FakeHost(project, env)
-    return H.HOSTS[name](project, env, model) if name == "opencode" else H.HOSTS[name](project, env, model=model)
+    return H.HOSTS[name](project, env, model, exe=exe)
 
 
-def run(script, host_name, run_index, model, root, out_dir, keep_events=False, previous=None):
+def run(script, host_name, run_index, model, root, out_dir, keep_events=False, previous=None, host_exe=None, extra_env=None):
     root = _safe_root(root, host_name)
     checks = preflight(host_name)
     if checks["found"]:
         raise SystemExit("宿主的用户级 Skill 目录里有同名 Skill，评测会混进旧版：%s。请先处理（不要让我打开或删除它们）。" % "、".join(checks["found"]))
     stamp = time.strftime("%Y%m%d-%H%M%S")
-    project = os.path.join(root, "%s-s%s-r%d-%s" % (host_name, script["id"], run_index, stamp))
+    tag = run_tag(script, host_name, run_index)
+    project = os.path.join(root, "%s-%s" % (tag, stamp))
     os.makedirs(project)
     subprocess.run(["git", "init", "-q", project], check=True)
     setup = script.get("setup") or {}
@@ -300,16 +339,18 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
     installs = [dict(skill_files(project), after_turn=0, source=installed)]
     if host_name != "fake":
         H.project_config(host_name, project)
-    env = host_env(setup, project, os.environ)
+    env = host_env(setup, project, os.environ, extra_env)
     trace = env["ADULT_TENSION_TRACE"]
-    host = make_host(host_name, project, env, model)
+    host = make_host(host_name, project, env, model, host_exe)
     rec = {
         "format": R.FORMAT,
         "version": R.VERSION,
         "script": script["id"],
         "run": run_index,
         "date": datetime.date.today().isoformat(),
-        "host": {"name": host_name, "version": host.version(), "model": model or getattr(host, "model", None)},
+        # model: what the host reported serving the turns; requested_model: what it was asked for
+        "host": {"name": host_name, "version": host.version(), "model": None, "requested_model": model or getattr(host, "model", None)},
+        "host_env": shown_env(extra_env or {}),
         "project": project,
         "installed_from": installed,
         "installs": installs,
@@ -354,9 +395,11 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
             turn["host_error"] = error
         if keep_events:
             turn["events"] = reply.get("events")
-        if reply.get("model") and not rec["host"].get("model"):
-            rec["host"]["model"] = reply["model"]
+        if reply.get("model"):
+            turn["model"] = reply["model"]
+            rec["host"]["model"] = rec["host"]["model"] or reply["model"]
         rec["turns"].append(turn)
+    rec["host"]["model"] = rec["host"]["model"] or rec["host"]["requested_model"]
     # The Skill the host ran last: its own doctor after the last install, else ask the runtime.
     last = installs[-1]["after_turn"]
     doctor = next((c for t in rec["turns"] if t["index"] > last for c in t["runtime_calls"] if R.command_of(c) == "doctor" and R.ok_data(c)), None)
@@ -369,9 +412,15 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
             with open(exported["data"]["path"], encoding="utf-8") as handle:
                 rec["final_export"] = json.load(handle)
     os.makedirs(out_dir, exist_ok=True)
-    path = os.path.join(out_dir, "%s-s%s-r%d.json" % (host_name, script["id"], run_index))
+    path = os.path.join(out_dir, "%s.json" % tag)
     R.save(rec, path)
     return path, rec
+
+
+def run_tag(script, host_name, run_index):
+    """claude-code-s01-r1 for the numbered scripts, claude-code-pt-winter_shelter-daily-r3 for the others."""
+    name = "s%s" % script["id"] if str(script["id"]).isdigit() else script["id"]
+    return "%s-%s-r%d" % (host_name, name, run_index)
 
 
 def main(argv):
@@ -384,11 +433,14 @@ def main(argv):
     parser.add_argument("--out", default=os.path.join(REPO, "reports", "e2e", "records"))
     parser.add_argument("--keep-events", action="store_true")
     parser.add_argument("--previous", help="旧版 Skill 的 git 提交（剧本 16）")
+    parser.add_argument("--host-exe", help="宿主可执行文件（默认在 PATH 上找）")
+    parser.add_argument("--host-env-file", help="给宿主的 KEY=VALUE 环境变量文件（模型接口与密钥；放在仓库之外）")
     args = parser.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     script = load_script(args.script)
-    path, rec = run(script, args.host, args.run, args.model, args.root, os.path.join(args.out, args.host), args.keep_events, args.previous)
+    extra = read_env_file(args.host_env_file) if args.host_env_file else None
+    path, rec = run(script, args.host, args.run, args.model, args.root, os.path.join(args.out, args.host), args.keep_events, args.previous, args.host_exe, extra)
     result = machine_checks.check(rec)
     print("record: %s" % path)
     for line in machine_checks.summary_lines(result):

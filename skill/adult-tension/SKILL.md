@@ -37,8 +37,8 @@ description: Run a Chinese interactive story for adults with a local determinist
 ## 开局
 
 1. 玩家没说日常还是压力：问一句“1 日常 / 2 有压力”。只有玩家说“随便”才用 `random`。读档永远不问。
-2. 本对话已有进行中的局，且上下文 `save.turns_since_save` > 0：先问“存档后开局 / 直接开局 / 取消”。
-3. 玩家要的题材不在任何世界里（`list-worlds` 查看）：说明没有现成世界，给两个选择——最接近的世界，或自定义世界（按 `references/custom_world.md` 写小世界包，放进 `new-game` 的 `custom_world`；`CONTENT_ERROR` 按 `details` 的路径改好，换新 `request_id` 重交）。
+2. 本对话里已经开过局或读过档（看对话本身，不用查），且上下文 `save.turns_since_save` > 0：先问“存档后开局 / 直接开局 / 取消”。
+3. 玩家点名的世界或题材：按 `references/worlds.md` 取 ID 放进 `locks.world_id`；没有相应的世界就说明没有现成世界，给两个选择——最接近的世界，或自定义世界（按 `references/custom_world.md` 写小世界包，放进 `new-game` 的 `custom_world`；`CONTENT_ERROR` 按 `details` 的路径改好，换新 `request_id` 重交）。
 4. 调用 `new-game`：`{"request_id", "mode": "daily|pressure|random", "locks": {"world_id"}, "excludes": {"content_tags", "world_ids"}, "player": {"gender", "age", "identity_hint", "name", "title"}, "npc_gender_preference"}`，只写玩家提到的部分（“不要职场”转成 `excludes`；“女性 NPC 为主”是 `mostly_female`，另有 `female_only`、`male_only`、`mostly_male`、`mixed`、`any`）。“重开 N 号”：`{"request_id", "seed": N, "replay": true}`。`NO_MATCH`：如实说哪条做不到、可以放宽什么。
 5. 按返回的 `opening` 写开局（`opening.world`、`player`、`npcs`、`scene`、`activity` 或 `pressure`、`tension`、`hook`）：
 
@@ -118,8 +118,6 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 ## 命令与别名
 
-| 玩家说 | 你做 |
-|---|---|
 元命令只输出回执（返回的 `receipt`），不写叙事。
 
 | 玩家说 | 你做 |

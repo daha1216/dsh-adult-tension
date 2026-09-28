@@ -85,12 +85,14 @@ def _content_check(ctx):
             CONTENT_ERROR,
             problems,
         )
-    if summary["released_worlds"] == 0:
+    # what new-game offers: the released worlds, or every world under the development switch
+    openable = summary["worlds"] if ctx.drafts_switch() else summary["released_worlds"]
+    if openable == 0:
         return _check("content", "warn", "内容版本 %s，还没有可开局的世界" % summary["content_version"], "等待世界包发布")
     return _check(
         "content",
         "ok",
-        "内容版本 %s，%d 个世界可开局" % (summary["content_version"], summary["released_worlds"]),
+        "内容版本 %s，%d 个世界可开局" % (summary["content_version"], openable),
     )
 
 
@@ -119,6 +121,8 @@ def _expected_marker(ctx):
         "skill_root": ctx.skill_root,
         "python": "%d.%d" % tuple(sys.version_info[:2]),
         "content_stamp": ctx.content().stamp(),
+        # the content check counts unreleased worlds only under the switch
+        "drafts_switch": ctx.drafts_switch(),
     }
 
 
