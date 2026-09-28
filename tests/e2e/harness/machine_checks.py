@@ -83,6 +83,15 @@ NOW_BEFORE = ("这", "都", "大", "现在", "眼下", "已经", "已")
 NOW_AFTER = ("了", "啦")
 # people round the hour when they speak ("大半夜的" at eight in the evening)
 DIALOGUE_SLACK = 60
+# "柜子是傍晚抢装塞进来的": when something else happened, unless "现在是/此刻是/已是/正是/都是"
+CLEFT_TAIL_RE = re.compile(r"[^。！？，；：]{0,14}的")
+CLEFT_NOW = ("在", "刻", "已", "正", "都")
+
+
+def _about_another_moment(line, start, end):
+    if start < 1 or line[start - 1] != "是" or (start >= 2 and line[start - 2] in CLEFT_NOW):
+        return False
+    return CLEFT_TAIL_RE.match(line, end) is not None
 
 
 def _vocabulary():
@@ -266,7 +275,7 @@ def check_footer_and_time(record):
                 for word in TIME_WORDS:
                     for match in re.finditer(word, line):
                         near = line[max(0, match.start() - 4) : match.end() + 2]
-                        if any(other in near for other in TIME_OTHER):
+                        if any(other in near for other in TIME_OTHER) or _about_another_moment(line, match.start(), match.end()):
                             continue
                         slack = 0
                         if any(a < match.start() < b for a, b in dialogue):

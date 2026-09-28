@@ -133,8 +133,11 @@ class MachineCheckTest(unittest.TestCase):
         for text in ("她说：“规矩就一条，凌晨两点所有人都得去签到，早晨八点交班。”", "他说：“包工头下午就联系不上了。”", "“站住！大半夜的，提着箱子去哪儿？”"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertNotIn(("time", 3), names(M.check(rec)), text)
+        # when something else happened
+        rec["turns"][2]["text"] = "柜子是凌晨抢装塞进来的，手续上缺了签字。\n\n" + footer(3, 1210)
+        self.assertNotIn(("time", 3), names(M.check(rec)))
         # the narration still says what time it is, with an hour or without; so does a line about now
-        for text in ("凌晨两点，风把旗子吹得啪啪响。", "她说：“都凌晨了，还不回去？”"):
+        for text in ("凌晨两点，风把旗子吹得啪啪响。", "她说：“都凌晨了，还不回去？”", "现在是凌晨的时候，风把旗子吹得啪啪响。"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertIn(("time", 3), names(M.check(rec)), text)
 
