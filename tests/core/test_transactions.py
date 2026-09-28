@@ -1,15 +1,19 @@
 """The single write path: transactions, idempotency, revisions (ACCEPTANCE.md 2)."""
 
 import json
+import os
 import unittest
 
 import _bootstrap  # noqa: F401
 from adult_tension import DB_SCHEMA_VERSION
 from adult_tension.application import service
+from adult_tension.application.context import Context
 from adult_tension.domain.state import digest as state_digest_of
 from adult_tension.errors import AppError
 from adult_tension.persistence import repo
+from helpers.cli import clean_env
 from helpers.domain import STORE
+from helpers.fs import copy_skill, temp_dir
 from helpers.service import Ids, app, open_game, session, table_counts
 
 
@@ -236,14 +240,42 @@ class NewGameCommandTest(unittest.TestCase):
             self.assertEqual(again["opening"]["signature"], first["opening"]["signature"])
 
     def test_unreleased_worlds_need_include_drafts(self):
-        with app() as ctx:
-            with self.assertRaises(AppError) as caught:
-                service.new_game(ctx, {"request_id": "req_draft_1", "mode": "daily"})
-            self.assertEqual(caught.exception.code, "NO_MATCH")
-            self.assertEqual(service.list_worlds(ctx, {})["worlds"], [])
-            listed = service.list_worlds(ctx, {"include_drafts": True})["worlds"]
-            self.assertEqual(len(listed), len(STORE.index()["worlds"]))
-            self.assertEqual(len(listed), 6)
+        # CONTENT_BIBLE 7: a world under review opens only with --include-drafts (or the
+        # development switch), is not listed, and random openings never land on it
+        with temp_dir() as tmp:
+            skill = copy_skill(tmp)
+            under_review = STORE.index()["worlds"][0]["id"]
+            index_path = os.path.join(skill, "content", "index.json")
+            world_path = os.path.join(skill, "content", "worlds", under_review + ".json")
+            for path in (index_path, world_path):
+                with open(path, encoding="utf-8") as handle:
+                    data = json.load(handle)
+                for entry in data["worlds"] if path == index_path else [data]:
+                    if entry["id"] == under_review:
+                        entry["status"] = "review"
+                with open(path, "w", encoding="utf-8") as handle:
+                    json.dump(data, handle, ensure_ascii=False)
+            ctx = Context(skill, os.path.join(tmp, "data"), clean_env(), {}, False)
+            try:
+                with self.assertRaises(AppError) as caught:
+                    service.new_game(ctx, {"request_id": "req_draft_1", "mode": "daily", "locks": {"world_id": under_review}})
+                self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("NOT_FOUND", "$.locks.world_id"))
+                opened = service.new_game(ctx, {"request_id": "req_draft_2", "mode": "daily", "locks": {"world_id": under_review}, "include_drafts": True})
+                self.assertEqual(opened["opening"]["mode"], "daily")
+                self.assertNotIn(under_review, [w["id"] for w in service.list_worlds(ctx, {})["worlds"]])
+                listed = service.list_worlds(ctx, {"include_drafts": True})["worlds"]
+                self.assertEqual(len(listed), len(STORE.index()["worlds"]))
+                self.assertEqual(len(listed), 6)
+                released = {w["id"] for w in STORE.index()["worlds"] if w["status"] == "released"} - {under_review}
+                for seed in range(1, 6):
+                    try:
+                        world = service.new_game(ctx, {"request_id": "req_draft_r%d" % seed, "mode": "daily", "seed": seed})["context"]["world"]["title"]
+                    except AppError as err:  # nothing released yet besides the one under review
+                        self.assertEqual((err.code, released), ("NO_MATCH", set()))
+                        continue
+                    self.assertIn(world, {w["title"] for w in STORE.index()["worlds"] if w["id"] in released})
+            finally:
+                ctx.close()
 
     def test_random_openings_avoid_recent_signatures(self):
         with app() as ctx:
