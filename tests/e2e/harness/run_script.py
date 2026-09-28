@@ -424,7 +424,8 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
         }
         if error:
             turn["host_error"] = error
-        if keep_events:
+        # a turn that failed or showed the player nothing keeps the host's own events, to find out why
+        if keep_events or error or not (reply["text"] or "").strip():
             turn["events"] = reply.get("events")
         if reply.get("model"):
             turn["model"] = reply["model"]

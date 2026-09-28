@@ -680,6 +680,8 @@ class RunnerTest(unittest.TestCase):
         self.assertTrue(os.path.isfile(path))
         markdown = R.to_markdown(rec)
         self.assertIn("工具调用：new-game", markdown)
+        # turns that went well keep no raw host events unless asked
+        self.assertFalse(any("events" in t for t in rec["turns"]))
 
     def test_a_turn_the_host_did_not_finish_keeps_the_calls_it_made(self):
         temp = tempfile.mkdtemp(prefix="at-e2e-")
@@ -693,6 +695,8 @@ class RunnerTest(unittest.TestCase):
         self.assertEqual([R.command_of(c) for c in turn["runtime_calls"]], ["doctor", "load-slot"])
         self.assertIsNotNone(R.error_code(turn["runtime_calls"][1]))
         self.assertEqual([(f["check"], f["turn"]) for f in M.check_record(rec)], [("record", 1)])
+        # the failed turn keeps whatever the host reported, to find out why
+        self.assertIn("events", turn)
 
     def test_an_older_skill_without_the_trace_is_recorded_from_host_calls_and_upgraded(self):
         import adult_tension
