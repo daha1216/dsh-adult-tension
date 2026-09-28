@@ -127,7 +127,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 | 世界列表 | `list-worlds` |
 | 继续、c、……、空输入 | `commit-turn`（`continue`） |
 | 存档 [名称]、s、快速存档、qs / 另存为 名称 | `save-slot`（`name`；不给名字存到当前槽或自动命名）/ 另加 `"save_as": true` |
-| 读档 [名称]、l | `load-slot`；没给名称或不存在时 `list-slots` 让玩家选。回执后用 `resume` 写两三句前情，从未决动作的前一刻接着写，不重复开局 |
+| 读档 [名称]、l | 有名称就直接 `load-slot`（不存在时错误里列有现有存档，让玩家选）；没给名称才先 `list-slots`。回执后用 `resume` 写两三句前情，从未决动作的前一刻接着写，不重复开局 |
 | 存档列表 / 删除存档 名称 | `list-slots` / 先问“确定删除「名称」吗？”，确认后 `delete-slot` 带 `"confirm": true` |
 | 继续上次、恢复 | `list-sessions`：一个就接上，多个列出让玩家选；接上时 `get-context` 带 `"depth": "full"`，写两三句前情再接续。当前局暂停中说“恢复”：问“恢复上次会话 / 读取存档 / 解除暂停” |
 | 导出 [存档名] | `export-save`（`session_id` 或 `slot`；玩家给了路径才写 `path`），告诉玩家文件路径 |
