@@ -38,8 +38,11 @@ class DoctorTest(unittest.TestCase):
             ids = [c["id"] for c in data["checks"]]
             for expected in ("python", "data_dir", "sqlite", "migrations", "skill_files", "content"):
                 self.assertIn(expected, ids)
-            for sub in ("backups", "exports", "logs"):
+            for sub in ("backups", "exports", "inputs", "logs"):
                 self.assertTrue(os.path.isdir(os.path.join(data_dir, sub)))
+            # the host writes its input files here: in the data directory, ready, never in the Skill
+            self.assertEqual(os.path.normcase(data["input_dir"]), os.path.normcase(os.path.join(data_dir, "inputs")))
+            self.assertFalse(os.path.normcase(data["input_dir"]).startswith(os.path.normcase(SKILL_ROOT)))
             self.assertEqual(schema_version(data_dir), DB_SCHEMA_VERSION)
             self.assertTrue(os.path.isfile(os.path.join(data_dir, "version.json")))
             self.assertTrue(data["next_request_id"].startswith("r_"))

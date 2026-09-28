@@ -171,6 +171,7 @@ def run(ctx, payload):
         "skill_root": ctx.skill_root,
         "data_dir": ctx.data_dir,
         "data_dir_source": ctx.data_dir_source,
+        "input_dir": paths.inputs_dir(ctx.data_dir),
         "checks": checks,
     }
     if failed:

@@ -11,7 +11,7 @@ APP_DIR_NAME = "adult-tension"
 ENV_VAR = "ADULT_TENSION_HOME"
 DB_FILE = "adult_tension.db"
 MARKER_FILE = "version.json"
-SUBDIRS = ("backups", "exports", "logs")
+SUBDIRS = ("backups", "exports", "inputs", "logs")
 
 
 def platform_default(platform=None, environ=None, home=None):
@@ -61,6 +61,13 @@ def is_inside(path, root):
 
 def db_path(data_dir):
     return os.path.join(data_dir, DB_FILE)
+
+
+def inputs_dir(data_dir):
+    """Where the host writes the runtime's input files (SKILL.md). They carry
+    what the player said, so they are user data: in the data directory,
+    never in the Skill directory (SKILL_PACKAGING.md 1)."""
+    return os.path.join(data_dir, "inputs")
 
 
 def marker_path(data_dir):

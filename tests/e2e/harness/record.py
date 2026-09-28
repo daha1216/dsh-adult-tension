@@ -215,12 +215,16 @@ def calls_from_host(host_calls):
         data = call.get("input")
         if not isinstance(data, dict):
             continue
-        path = data.get("file_path") or data.get("filePath")
-        old = data.get("old_string", data.get("oldString"))
+        path = data.get("file_path") or data.get("filePath") or data.get("path")
+        old = data.get("old_string", data.get("oldString", data.get("oldText")))
         if path and isinstance(data.get("content"), str):
             files.write(path, data["content"])
         elif path and isinstance(old, str):
-            files.edit(path, old, data.get("new_string", data.get("newString")) or "", bool(data.get("replace_all", data.get("replaceAll"))))
+            files.edit(path, old, data.get("new_string", data.get("newString", data.get("newText"))) or "", bool(data.get("replace_all", data.get("replaceAll"))))
+        elif path and isinstance(data.get("edits"), list):  # Pi: several replacements in one call
+            for edit in data["edits"]:
+                if isinstance(edit, dict) and isinstance(edit.get("oldText"), str):
+                    files.edit(path, edit["oldText"], edit.get("newText") or "", False)
         elif isinstance(data.get("command"), str):
             output = call.get("output")
             envelopes = _envelopes(output)

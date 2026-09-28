@@ -22,7 +22,7 @@
 2. 环境变量 `ADULT_TENSION_HOME`；
 3. 平台默认：Windows `%LOCALAPPDATA%\adult-tension`；macOS `~/Library/Application Support/adult-tension`；Linux `$XDG_DATA_HOME/adult-tension`，未设置时 `~/.local/share/adult-tension`。
 
-目录内容：`adult_tension.db`（全部状态与存档）、`backups/`（迁移前的备份）、`exports/`（导出的存档）、`logs/`（运行日志，默认不记录玩家原文）、`cache/`（Python 字节码缓存，可随时删除）、`version.json`（`doctor` 的版本标记）。
+目录内容：`adult_tension.db`（全部状态与存档）、`backups/`（迁移前的备份）、`exports/`（导出的存档）、`inputs/`（宿主交给运行时的输入文件，含玩家这一回合的话；`doctor` 返回的 `input_dir`，可随时删除）、`logs/`（运行日志，默认不记录玩家原文）、`cache/`（Python 字节码缓存，可随时删除）、`version.json`（`doctor` 的版本标记）。
 
 数据目录永远不在 Skill 目录内部。升级 Skill = 替换 Skill 目录，数据目录不动；卸载 Skill = 删除 Skill 目录，数据目录保留。
 

@@ -17,6 +17,9 @@ import shutil
 import subprocess
 import time
 
+# Where run_script installs the Skill in a test project.
+SKILL_REL = os.path.join(".claude", "skills", "adult-tension")
+
 
 class HostError(Exception):
     """The host did not finish a turn. `host_calls`: the tool calls it had
@@ -230,16 +233,157 @@ class OpenCode:
         return parsed
 
 
-HOSTS = {"claude-code": ClaudeCode, "opencode": OpenCode}
+# -- Pi (pi -p --mode json) ---------------------------------------------------------------------------
+
+
+def _pi_text(content):
+    if isinstance(content, str):
+        return content
+    return "".join(part.get("text", "") for part in content or [] if isinstance(part, dict) and part.get("type") == "text")
+
+
+def parse_pi_stream(events):
+    """JSON events -> {session_id, model, text, host_calls, cost, error}. The
+    completed messages (message_end) are the record: the assistant's text
+    blocks are what the player saw, its tool calls pair with the tool
+    results by id. The turn failed when its last assistant message stopped
+    on an error, an abort or the output limit, or a retry finally failed; a
+    message that ended in an error is not part of the reply (a retry that
+    succeeded follows it)."""
+    session_id = model = error = None
+    texts = []
+    calls = {}
+    order = []
+    cost = 0.0
+    for event in events:
+        kind = event.get("type")
+        if kind == "session":
+            session_id = event.get("id") or session_id
+        elif kind == "message_end":
+            message = event.get("message") or {}
+            if message.get("role") == "assistant":
+                if message.get("model"):
+                    model = "%s/%s" % (message["provider"], message["model"]) if message.get("provider") else message["model"]
+                cost += ((message.get("usage") or {}).get("cost") or {}).get("total") or 0
+                stop = message.get("stopReason")
+                if stop in ("error", "aborted", "length"):
+                    error = "宿主报告这一轮出错（%s）：%s" % (stop, (message.get("errorMessage") or "")[:300])
+                    continue
+                error = None
+                for block in message.get("content") or []:
+                    if block.get("type") == "text" and block.get("text", "").strip():
+                        texts.append(block["text"])
+                    elif block.get("type") == "toolCall":
+                        calls[block.get("id")] = {"tool": block.get("name"), "input": block.get("arguments"), "output": None}
+                        order.append(block.get("id"))
+            elif message.get("role") == "toolResult" and message.get("toolCallId") in calls:
+                call = calls[message["toolCallId"]]
+                call["output"] = _pi_text(message.get("content"))
+                call["status"] = "error" if message.get("isError") else "completed"
+        elif kind == "auto_retry_end" and not event.get("success"):
+            error = "宿主重试后仍失败：%s" % (event.get("finalError") or "")[:300]
+    return {"session_id": session_id, "model": model, "text": "\n\n".join(texts), "host_calls": [calls[i] for i in order], "cost": cost or None, "error": error}
+
+
+def _pi_argv(exe):
+    """Pi runs on Node. On Windows its npm command is a .cmd shim, which runs
+    through cmd.exe and its quoting (a player's line with % or " in it would
+    change on the way), so the package's own CLI script runs under node."""
+    if exe.lower().endswith(".js"):
+        return [_which("node"), exe]
+    if os.path.splitext(exe)[1].lower() in (".cmd", ".bat", ".ps1"):
+        package = os.path.join(os.path.dirname(exe), "node_modules", "@earendil-works", "pi-coding-agent")
+        try:
+            with open(os.path.join(package, "package.json"), encoding="utf-8") as handle:
+                script = (json.load(handle).get("bin") or {}).get("pi")
+        except (OSError, ValueError, AttributeError):
+            script = None
+        if not script:
+            raise HostError("找不到 pi 的 CLI 脚本：%s（用 --host-exe 指向它的 cli.js）" % package)
+        node = os.path.join(os.path.dirname(exe), "node.exe")
+        return [node if os.path.exists(node) else _which("node"), os.path.join(package, script)]
+    return [exe]
+
+
+class Pi:
+    """The host sees the installed Skill and the project, nothing of the
+    operator's: its agent directory (settings, models, credentials, trust
+    decisions, user skills, extensions, instructions) and its sessions are
+    inside the project, so runs side by side share nothing. Only the
+    installed Skill loads (--no-skills with --skill: the user-level
+    ~/.agents/skills, which Pi reads whatever its agent directory, stays
+    out); no extensions, prompt templates or themes; no startup network
+    (update checks, model catalog) and no install telemetry. The model's
+    provider is the operator's: AT_PI_MODELS in the host environment file
+    names a models.json kept outside the project (its key read from the
+    environment), and the agent directory gets a copy."""
+
+    name = "pi"
+    ISOLATION = {"PI_OFFLINE": "1", "PI_TELEMETRY": "0"}
+    NO_DISCOVERY = ["--no-skills", "--no-extensions", "--no-prompt-templates", "--no-themes"]
+
+    def __init__(self, project_dir, env, model, timeout=900, exe=None):
+        if not model:
+            raise HostError("pi 需要用 --model 指定模型（provider/model）")
+        self.models = env.get("AT_PI_MODELS")
+        if not self.models or not os.path.isfile(self.models):
+            raise HostError("pi 需要模型配置：在宿主环境文件里用 AT_PI_MODELS 指向一个 models.json（%s）" % self.models)
+        self.argv = _pi_argv(exe or _which("pi"))
+        self.project_dir = project_dir
+        self.host_dir = os.path.join(project_dir, ".host")
+        self.agent_dir = os.path.join(self.host_dir, "pi-agent")
+        self.sessions_dir = os.path.join(self.host_dir, "sessions")
+        self.env = dict(env, **self.ISOLATION)
+        self.env["PI_CODING_AGENT_DIR"] = self.agent_dir
+        # the host's scratch files (the runtime's input files among them) stay in
+        # the project, so runs side by side never share one
+        self.env["TEMP"] = self.env["TMP"] = os.path.join(self.host_dir, "tmp")
+        self.model = model
+        self.timeout = timeout
+        self.sessions = {}
+
+    def version(self):
+        proc = subprocess.run(self.argv + ["--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=self.env, timeout=60)
+        return proc.stdout.decode("utf-8", errors="replace").strip()
+
+    def command(self, conversation, text):
+        argv = self.argv + ["-p", "--mode", "json"] + self.NO_DISCOVERY
+        argv += ["--skill", os.path.join(self.project_dir, SKILL_REL), "--session-dir", self.sessions_dir, "--model", self.model]
+        if conversation in self.sessions:
+            argv += ["--session", self.sessions[conversation]]
+        # after "--" a line starting with "-" is still the player's words
+        return argv + ["--", text]
+
+    def send(self, conversation, text):
+        for path in (self.agent_dir, self.sessions_dir, self.env["TEMP"]):
+            os.makedirs(path, exist_ok=True)
+        shutil.copyfile(self.models, os.path.join(self.agent_dir, "models.json"))
+        argv = self.command(conversation, text)
+        started = time.perf_counter()
+        proc = subprocess.run(argv, cwd=self.project_dir, env=self.env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, timeout=self.timeout)
+        events = _events(proc.stdout)
+        parsed = parse_pi_stream(events)
+        if not parsed["session_id"]:
+            raise HostError("宿主没有返回会话：exit %d，%s" % (proc.returncode, proc.stderr.decode("utf-8", errors="replace")[:500]), parsed["host_calls"])
+        if proc.returncode and not parsed["error"]:
+            parsed["error"] = "宿主退出码 %d：%s" % (proc.returncode, proc.stderr.decode("utf-8", errors="replace")[:300])
+        self.sessions[conversation] = parsed["session_id"]
+        parsed["model"] = parsed["model"] or self.model
+        parsed["seconds"] = round(time.perf_counter() - started, 1)
+        parsed["events"] = events
+        return parsed
+
+
+HOSTS = {"claude-code": ClaudeCode, "opencode": OpenCode, "pi": Pi}
 
 
 def project_config(host_name, project_dir, python_names=("python", "python3", "py")):
     """Project-level settings only (no instructions): the host may run the
     runtime and write its temporary input files inside the project; the
     Skill is found in the project's .claude/skills; sessions are never shared.
-    Claude Code takes its permissions on the command line instead
-    (ClaudeCode.PERMISSIONS)."""
-    if host_name == "claude-code":
+    Claude Code and Pi take theirs on the command line instead
+    (ClaudeCode.PERMISSIONS, Pi.command)."""
+    if host_name != "opencode":
         return None
     settings = {
         "$schema": "https://opencode.ai/config.json",

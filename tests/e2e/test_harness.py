@@ -468,6 +468,38 @@ class ParserTest(unittest.TestCase):
         self.assertEqual((parsed["session_id"], parsed["text"]), ("ses_1", "半句"))
         self.assertIn("APIError", parsed["error"])
 
+    def pi(self, *messages, extra=()):
+        events = [{"type": "session", "version": 3, "id": "01a0-sid", "cwd": "D:\\p"}, {"type": "agent_start"}]
+        events += [{"type": "message_end", "message": m} for m in messages] + list(extra)
+        return H.parse_pi_stream(H._events("\n".join(json.dumps(e, ensure_ascii=False) for e in events).encode("utf-8")))
+
+    def test_pi_json_events(self):
+        # the shapes of a real run (pi 0.87.1): a bash call, its result, the reply
+        call = {"type": "toolCall", "id": "c1", "name": "bash", "arguments": {"command": "python x doctor --json"}}
+        parsed = self.pi(
+            {"role": "user", "content": [{"type": "text", "text": "开一局"}]},
+            {"role": "assistant", "provider": "local", "model": "m-1", "stopReason": "toolUse", "content": [{"type": "thinking", "thinking": "先查环境"}, call], "usage": {"cost": {"total": 0}}},
+            {"role": "toolResult", "toolCallId": "c1", "toolName": "bash", "content": [{"type": "text", "text": "{\"ok\": true}"}], "isError": False},
+            {"role": "assistant", "provider": "local", "model": "m-1", "stopReason": "stop", "content": [{"type": "text", "text": "环境没问题。"}]},
+        )
+        self.assertEqual((parsed["session_id"], parsed["model"], parsed["text"]), ("01a0-sid", "local/m-1", "环境没问题。"))
+        self.assertEqual(parsed["host_calls"], [{"tool": "bash", "input": {"command": "python x doctor --json"}, "output": "{\"ok\": true}", "status": "completed"}])
+        self.assertIsNone(parsed["error"])
+        self.assertIsNone(parsed["cost"])
+
+    def test_pi_errors_and_retries(self):
+        failed = {"role": "assistant", "provider": "local", "model": "m-1", "stopReason": "error", "errorMessage": "429 Too Many Requests", "content": [{"type": "text", "text": "半句"}]}
+        reply = {"role": "assistant", "provider": "local", "model": "m-1", "stopReason": "stop", "content": [{"type": "text", "text": "好。"}]}
+        parsed = self.pi(failed)
+        self.assertIn("429", parsed["error"])
+        self.assertEqual(parsed["text"], "")
+        # a retry that succeeded: the failed message is not part of the reply
+        parsed = self.pi(failed, reply)
+        self.assertEqual((parsed["text"], parsed["error"]), ("好。", None))
+        self.assertIn("length", self.pi(dict(reply, stopReason="length"))["error"])
+        parsed = self.pi(failed, extra=[{"type": "auto_retry_end", "success": False, "attempt": 3, "finalError": "overloaded"}])
+        self.assertIn("overloaded", parsed["error"])
+
 
 class HostCallsTest(unittest.TestCase):
     """Runtime calls rebuilt from the host's own tool calls (a Skill older than the trace)."""
@@ -510,6 +542,22 @@ class HostCallsTest(unittest.TestCase):
         ])
         self.assertEqual([(R.command_of(c), c["input"]["request_id"]) for c in calls], [("save-slot", "req_00000002"), ("save-slot", "req_00000003")])
         self.assertEqual(R.ok_data(calls[0]), {"receipt": "已保存"})
+
+    def test_pi_tool_names_and_keys(self):
+        runtime = "python D:/p/.claude/skills/adult-tension/scripts/adult_tension.py commit-turn --json --input-file D:/p/in.json"
+        ran = {"tool": "bash", "input": {"command": runtime}, "output": json.dumps(envelope({})), "status": "completed"}
+        calls = R.calls_from_host([
+            {"tool": "write", "input": {"path": "D:/p/in.json", "content": json.dumps({"request_id": "req_00000005"})}, "output": "Successfully wrote to D:/p/in.json", "status": "completed"},
+            ran,
+            {"tool": "edit", "input": {"path": "D:/p/in.json", "edits": [{"oldText": "req_00000005", "newText": "req_00000006"}]}, "output": "", "status": "completed"},
+            ran,
+            # the older single-replacement form
+            {"tool": "edit", "input": {"path": "D:/p/in.json", "oldText": "req_00000006", "newText": "req_00000007"}, "output": "", "status": "completed"},
+            # reading a file changes nothing
+            {"tool": "read", "input": {"path": "D:/p/in.json"}, "output": "{}", "status": "completed"},
+            ran,
+        ])
+        self.assertEqual([c["input"]["request_id"] for c in calls], ["req_00000005", "req_00000006", "req_00000007"])
 
     def test_heredocs_into_a_file_or_into_stdin(self):
         body = json.dumps({"request_id": "req_00000004", "note": "adult_tension.py doctor"}, ensure_ascii=False)
@@ -689,6 +737,51 @@ class RunnerTest(unittest.TestCase):
         self.assertEqual(config["share"], "disabled")
         self.assertEqual(config["permission"]["bash"]["*"], "deny")
         self.assertEqual(config["permission"]["webfetch"], "deny")
+
+    def test_pi_runs_isolated_from_the_operators_configuration(self):
+        temp = tempfile.mkdtemp(prefix="at-e2e-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        models = os.path.join(temp, "models.json")
+        with open(models, "w", encoding="utf-8") as handle:
+            handle.write("{\"providers\": {}}\n")
+        project = os.path.join("D:\\", "projects", "at-e2e", "p")
+        operator = {"PATH": "x", "AT_PI_MODELS": models, "PI_CODING_AGENT_DIR": "C:\\mine"}
+        host = H.Pi(project, operator, model="local/m-1", exe="C:\\host\\pi.exe")
+        first = host.command("A", "开一局")
+        # the player's words are the message, after "--"; nothing else is said to the model
+        self.assertEqual(first[:4], ["C:\\host\\pi.exe", "-p", "--mode", "json"])
+        self.assertEqual(first[-2:], ["--", "开一局"])
+        # only the Skill installed for the run: nothing discovered, no extensions
+        for flag in ("--no-skills", "--no-extensions", "--no-prompt-templates", "--no-themes"):
+            self.assertIn(flag, first)
+        self.assertEqual(first[first.index("--skill") + 1], os.path.join(project, run_script.SKILL_REL))
+        self.assertEqual(first[first.index("--model") + 1], "local/m-1")
+        self.assertNotIn("--session", first)
+        host.sessions["A"] = "sid-1"
+        self.assertEqual(host.command("A", "继续")[-4:], ["--session", "sid-1", "--", "继续"])
+        # settings, models, credentials and sessions are the project's own, not the operator's
+        self.assertEqual(host.env["PI_CODING_AGENT_DIR"], os.path.join(project, ".host", "pi-agent"))
+        self.assertEqual(first[first.index("--session-dir") + 1], os.path.join(project, ".host", "sessions"))
+        self.assertEqual((host.env["TEMP"], host.env["TMP"]), (os.path.join(project, ".host", "tmp"),) * 2)
+        self.assertEqual((host.env["PI_OFFLINE"], host.env["PI_TELEMETRY"]), ("1", "0"))
+        self.assertEqual(host.env["PATH"], "x")
+        self.assertIsNone(H.project_config("pi", project))
+        # the operator names the model provider; without it there is no run
+        with self.assertRaises(H.HostError):
+            H.Pi(project, {"PATH": "x"}, model="local/m-1", exe="C:\\host\\pi.exe")
+
+    def test_pi_runs_its_cli_script_under_node_not_through_the_npm_shim(self):
+        temp = tempfile.mkdtemp(prefix="at-e2e-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        package = os.path.join(temp, "node_modules", "@earendil-works", "pi-coding-agent")
+        os.makedirs(package)
+        with open(os.path.join(package, "package.json"), "w", encoding="utf-8") as handle:
+            json.dump({"bin": {"pi": "dist/bundle/cli.js"}}, handle)
+        open(os.path.join(temp, "node.exe"), "w").close()
+        self.assertEqual(H._pi_argv(os.path.join(temp, "pi.cmd")), [os.path.join(temp, "node.exe"), os.path.join(package, "dist/bundle/cli.js")])
+        self.assertEqual(H._pi_argv("/usr/local/bin/pi"), ["/usr/local/bin/pi"])
+        with self.assertRaises(H.HostError):
+            H._pi_argv(os.path.join(temp, "elsewhere", "pi.cmd"))
 
     def test_a_fake_host_run_records_calls_state_and_identity(self):
         temp = tempfile.mkdtemp(prefix="at-e2e-")

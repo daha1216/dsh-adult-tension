@@ -1,6 +1,6 @@
 """Run one end-to-end script on one host and write its record.
 
-    python tests/e2e/harness/run_script.py --host claude-code|opencode|fake
+    python tests/e2e/harness/run_script.py --host claude-code|opencode|pi|fake
         --script 01 [--run 1] [--model provider/model]
         [--root D:\\projects\\at-e2e] [--out reports/e2e/records]
 
@@ -53,7 +53,7 @@ SCRIPTS = os.path.join(E2E, "scripts")
 DRILLS = os.path.join(E2E, "drills")
 PLAYTESTS = os.path.join(E2E, "playtests")
 DEFAULT_ROOT = os.path.join("D:" + os.sep, "projects", "at-e2e")
-SKILL_REL = os.path.join(".claude", "skills", "adult-tension")
+SKILL_REL = H.SKILL_REL
 
 
 def load_script(name):
@@ -88,6 +88,7 @@ def _safe_root(root, host_name):
 USER_SKILL_DIRS = {
     "claude-code": [os.path.join("~", ".claude", "skills")],
     "opencode": [os.path.join("~", ".config", "opencode", "skills"), os.path.join("~", ".agents", "skills"), os.path.join("~", ".claude", "skills")],
+    "pi": [os.path.join("~", ".pi", "agent", "skills"), os.path.join("~", ".agents", "skills")],
 }
 SKILL_NAMES = ("adult-tension", "dsh-adult-tension")
 
@@ -457,7 +458,7 @@ def run_tag(script, host_name, run_index):
 
 def main(argv):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--host", required=True, choices=("claude-code", "opencode", "fake"))
+    parser.add_argument("--host", required=True, choices=("claude-code", "opencode", "pi", "fake"))
     parser.add_argument("--script", required=True)
     parser.add_argument("--run", type=int, default=1)
     parser.add_argument("--model")
