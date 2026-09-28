@@ -6,6 +6,7 @@ the Skill (tools/make_db_fixture.py): one session at turn 7 and a slot.
 
 import json
 import os
+import pathlib
 import shutil
 import sqlite3
 import unittest
@@ -20,8 +21,15 @@ FIXTURE = os.path.join(REPO_ROOT, "tests", "fixtures", "db_v1", "adult_tension.d
 SLOT = "旧版本的存档"
 
 
+def connect(path):
+    if os.path.abspath(path) == os.path.abspath(FIXTURE):
+        # The committed fixture is only ever read: no journal or WAL files next to it.
+        return sqlite3.connect(pathlib.Path(FIXTURE).as_uri() + "?immutable=1", uri=True)
+    return sqlite3.connect(path)
+
+
 def schema(path):
-    conn = sqlite3.connect(path)
+    conn = connect(path)
     try:
         return int(conn.execute("SELECT value FROM meta WHERE key='schema_version'").fetchone()[0])
     finally:
@@ -29,7 +37,7 @@ def schema(path):
 
 
 def tables(path):
-    conn = sqlite3.connect(path)
+    conn = connect(path)
     try:
         return sorted(r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'"))
     finally:
@@ -37,7 +45,7 @@ def tables(path):
 
 
 def old_session_facts(path):
-    conn = sqlite3.connect(path)
+    conn = connect(path)
     try:
         return json.loads(zlib.decompress(conn.execute("SELECT state FROM sessions").fetchone()[0]))["facts"]
     finally:
