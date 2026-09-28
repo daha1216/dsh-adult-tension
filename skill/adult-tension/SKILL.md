@@ -38,7 +38,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 1. 玩家没说日常还是压力：问一句“1 日常 / 2 有压力”。只有玩家说“随便”才用 `random`。读档永远不问。
 2. 本对话已有进行中的局，且上下文 `save.turns_since_save` > 0：先问“存档后开局 / 直接开局 / 取消”。
-3. 玩家要的题材不在任何世界里（`list-worlds` 查看）：说明没有现成世界，给最接近的世界让玩家选。
+3. 玩家要的题材不在任何世界里（`list-worlds` 查看）：说明没有现成世界，给两个选择——最接近的世界，或自定义世界（按 `references/custom_world.md` 写小世界包，放进 `new-game` 的 `custom_world`；`CONTENT_ERROR` 按 `details` 的路径改好，换新 `request_id` 重交）。
 4. 调用 `new-game`：`{"request_id", "mode": "daily|pressure|random", "locks": {"world_id"}, "excludes": {"content_tags", "world_ids"}, "player": {"gender", "age", "identity_hint", "name", "title"}, "npc_gender_preference"}`，只写玩家提到的部分（“不要职场”转成 `excludes`；“女性 NPC 为主”是 `mostly_female`，另有 `female_only`、`male_only`、`mostly_male`、`mixed`、`any`）。“重开 N 号”：`{"request_id", "seed": N, "replay": true}`。`NO_MATCH`：如实说哪条做不到、可以放宽什么。
 5. 按返回的 `opening` 写开局（`opening.world`、`player`、`npcs`、`scene`、`activity` 或 `pressure`、`tension`、`hook`）：
 
@@ -125,6 +125,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 | 玩家说 | 你做 |
 |---|---|
 | 开局、新游戏、开局 日常 / 压力、开局 港口、重开 N 号 | 开局流程 |
+| 自定义世界 …… | 写小世界包 → `new-game`（`custom_world`） |
 | 世界列表 | `list-worlds` |
 | 继续、c、……、空输入 | `commit-turn`（`continue`） |
 | 存档 [名称]、s、快速存档、qs / 另存为 名称 | `save-slot`（`name`；不给名字存到当前槽或自动命名）/ 另加 `"save_as": true` |
@@ -149,4 +150,5 @@ description: Run a Chinese interactive story for adults with a local determinist
 - `references/operations.md`：全部操作与提交字段
 - `references/commands.md`：全部命令的输入输出、错误码与退出码
 - `references/worlds.md`：世界列表
+- `references/custom_world.md`：自定义世界的写法、下限与示例
 - `references/troubleshooting.md`：环境问题、数据目录、升级与卸载

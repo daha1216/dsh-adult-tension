@@ -44,6 +44,8 @@ def run(ctx, payload):
     tags, errs = S.validate(TAG_TABLE, store.tags())
     problems.extend(dict(e, code=CONTENT_ERROR, world="tags.json") for e in errs)
     tag_ids = {t["id"] for t in (tags or {"tags": []})["tags"]}
+    if payload["file"]:
+        return _verify_file(payload, tag_ids, problems)
     entries = index["worlds"]
     if payload["world"]:
         entries = [w for w in entries if w["id"] == payload["world"]]
@@ -109,3 +111,37 @@ def run(ctx, payload):
         raise AppError(CONTENT_ERROR, "内容校验发现 %d 处问题" % len(problems), problems, report=report)
     report["ok"] = True
     return report
+
+
+def _verify_file(payload, tag_ids, problems):
+    """One world pack file on its own (a source being written, a new-world skeleton)."""
+    import os
+
+    from ..jsonio import decode_bytes, loads_strict, plain
+
+    path = payload["file"]
+    if not os.path.isfile(path):
+        raise AppError(CONTENT_ERROR, "文件不存在：%s" % path, [detail("$.file", "文件不存在", None, CONTENT_ERROR)])
+    with open(path, "rb") as handle:
+        raw = plain(loads_strict(decode_bytes(handle.read(), path), path))
+    label = raw.get("id") if isinstance(raw, dict) and isinstance(raw.get("id"), str) else os.path.basename(path)
+    if isinstance(raw, dict) and raw.get("extends"):
+        problems.append(dict(detail("$.extends", "带 extends 的源文件要先编译（tools/compile_content.py）再校验", None, CONTENT_ERROR), world=label))
+    else:
+        custom = raw.get("custom") if isinstance(raw, dict) else None
+        pack, errs = worldpack.validate_world(raw, custom=custom, tag_ids=tag_ids)
+        problems.extend(dict(e, world=label) for e in errs)
+        report = {"file": path, "world": label, "problems": 0}
+        if pack is not None:
+            count, failures = opening_checks.fixed_seed_openings(pack)
+            report["fixed_seed_openings"] = {"count": count, "failures": failures}
+            for failure in failures:
+                problems.append(dict(detail("opening:%s:%d" % (failure["mode"], failure["seed"]), "；".join(failure["problems"][:3]), "修内容或开局规则", CONTENT_ERROR), world=label))
+            if payload["stats"]:
+                report["stats"] = worldpack.world_stats(pack)
+        report["problems"] = len(problems)
+        if not problems:
+            report["ok"] = True
+            return report
+        raise AppError(CONTENT_ERROR, "世界包有 %d 处问题" % len(problems), problems, report=report)
+    raise AppError(CONTENT_ERROR, "世界包有 %d 处问题" % len(problems), problems)

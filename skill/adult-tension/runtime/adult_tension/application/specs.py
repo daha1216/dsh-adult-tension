@@ -146,6 +146,7 @@ VERIFY_CONTENT = _obj(
         "world": F(S.Nullable(S.Id()), required=False, default=None),
         "stats": F(S.Bool(), required=False, default=False),
         "skip_diversity": F(S.Bool(), required=False, default=False),
+        "file": F(S.Nullable(S.Str(1, 400)), required=False, default=None, desc="只校验这一个世界包文件（写作中的源文件或 new-world 骨架）"),
     },
     "verify-content",
 )

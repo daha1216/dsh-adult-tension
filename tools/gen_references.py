@@ -145,10 +145,87 @@ def render_worlds():
     return "".join(lines)
 
 
+CUSTOM_EXAMPLE = os.path.join(_runtime.REPO_ROOT, "content-src", "examples", "custom_world.json")
+
+
+def render_custom_world():
+    from adult_tension.content.store import ContentStore
+    from adult_tension.domain import structure as ST
+    from adult_tension.domain import worldpack
+
+    m = ST.CUSTOM_MINIMUMS
+    with open(CUSTOM_EXAMPLE, "rb") as handle:
+        example = handle.read().decode("utf-8").strip()
+    lines = [GENERATED_NOTE, "# 自定义世界\n\n"]
+    lines.append(
+        "玩家要的时代或地方不在任何世界里、并且选了自定义世界时，你写一个小型世界包，放进 `new-game` 的 `custom_world` 字段提交。"
+        "引擎用与正式世界相同的校验器检查它：数量下限更低，其余规则一条不降。"
+        "它只存在于这一局的存档里：不进世界列表，不参与开局去重，也不能“重开 N 号”（用同一个世界包和同一个种子重新开局即可复现）。\n\n"
+    )
+    lines.append("## 提交与修正\n\n")
+    lines.append("1. 先和玩家确认：时代与地方、日常还是有压力、想见到的两三个人。玩家没说的，按时代常识补齐，不要追问细节。\n")
+    lines.append("2. 从文末的示例改起，写一个 JSON 对象：`\"custom\": true`，`id` 用 `custom_` 开头的小写字母、数字、下划线，不写 `extends`。\n")
+    lines.append("3. 调用 `new-game`，输入 `{\"request_id\", \"mode\", \"custom_world\": {...}}`；可带 `seed`、`player`、`npc_gender_preference`、`excludes.content_tags`，不带 `locks.world_id`、`excludes.world_ids`、`replay`。\n")
+    lines.append("4. 返回 `CONTENT_ERROR` 时，`details` 一次列出全部问题，路径以 `$.custom_world` 开头；逐条改好，换新的 `request_id` 重交。只有需要玩家补设定时才把问题讲给玩家。\n\n")
+    lines.append("## 数量下限\n\n| 项 | 下限 |\n|---|---|\n")
+    rows = [
+        ("世界规则 `rules`", m["rules"]),
+        ("地点 `locations`", m["locations"]),
+        ("人物模板 `character_templates`", m["character_templates"]),
+        ("人物组合 `cast_combos`", m["cast_combos"]),
+        ("张力引擎 `tension_engines`", m["tension_engines"]),
+        ("玩家身份 `player_identities`", m["player_identities"]),
+        ("钩子 `hooks`", m["hooks"]),
+        ("姓 `name_pools.family`", m["family"]),
+        ("名（女、男、中性名合计）", m["given_total"]),
+    ]
+    for label, need in rows:
+        lines.append("| %s | %d |\n" % (label, need))
+    lines.append("| 按要开的模式：日常活动 `daily_activities` 或压力 `pressures` | %d |\n\n" % m["mode_items"])
+    lines.append(
+        "要开日常模式就写够日常活动，要开压力模式就写够压力；模式是“随便”时，只写够了一种就开那一种，两种都够就随机。"
+        "其余列表（风俗、背景人物、关系渠道、转折、昵称规则）可以为空；写了就按同样的规则检查。"
+        "名池小的世界，同性别的名用完后引擎先用中性名，再重复；每种性别各写 4 个名最稳妥。\n\n"
+    )
+    lines.append("## 不降低的规则\n\n")
+    lines.append("- **成年**：人物模板、背景人物、玩家身份的 `age_range` 下限 ≥ 18；人物模板与背景人物写明 `adult_context`（成年身份与处境）。\n")
+    lines.append(
+        "- **校园与师徒意象**：%s 这类词只能出现在明示成年的语境里——同一条文字（或该人物的 `adult_context`）里要有 %s 之类的词。\n"
+        % ("、".join(worldpack.MINOR_TERMS), "、".join(worldpack.ADULT_MARKERS))
+    )
+    lines.append(
+        "- **性别可变**：`gender: \"any\"` 的人物，文本里不写“他”“她”，用 `{npc.ta}`；人物组合、钩子、转折里用 `{槽位.name}`、`{槽位.ta}`。"
+        "可用属性：`name`、`ta`、`family`、`given`、`call`、`role`、`title`。`{family}`、`{given}`、`{given_last}` 只用在称呼模板里。\n"
+    )
+    lines.append(
+        "- **占位的作用域**：人物模板与背景人物用 `npc`、`player`；钩子用 `npc`（即钩子的 `slot`）、`player`；人物组合用它的槽位与 `player`；"
+        "转折用人物模板 ID 与 `player`；压力只有 `player`（带 `leverage` 时加上把柄双方）；日常活动只有 `player`；世界层、规则、地点、玩家身份、张力引擎、关系渠道的文字不用占位（玩家身份的称呼模板除外）。\n"
+    )
+    lines.append("- **引用按 ID**：地点出口、组合槽位与张力引擎、钩子槽位、活动与压力的地点都要能解析；ID 在包内唯一，`player` 是保留字。\n")
+    lines.append("- **时代**：`forbidden_terms` 写本世界不该出现的词（器物、说法），校验器扫描全部文本。\n")
+    lines.append("- **原创**：不用真实在世人物、已知作品的角色名与专有设定。\n")
+    lines.append(
+        "- **有内容**：不写空串、“待补”“TODO”“—”或与字段名相同的文字；同一包内不写重复的整句。"
+        "地点至少一个 `public`、一个 `semi` 或 `private`，任意两个地点的 `privacy`、`visibility`、`affordances` 不能完全相同。\n"
+    )
+    lines.append("- **压力**：五拍齐全，`near.deadline_minutes` 大于 `immediate.minutes`，出路至少两条且各有代价；带 `leverage` 标记的压力写明 `leverage` 的双方与依据，双方要同在某个人物组合里。\n")
+    tags = ContentStore(os.path.join(_runtime.SKILL_ROOT, "content")).tags()["tags"]
+    lines.append("- **标签**：`content_tags` 与各处 `tags` 只能用内容标签表里的 ID：%s。\n\n" % "、".join("`%s` %s" % (t["id"], t["label"]) for t in tags))
+    lines.append("## 字段\n\n")
+    lines.append(render_spec(worldpack.WORLD, 2))
+    lines.append("\n## 示例\n\n一个能通过校验、两种模式都能开局的最小世界：\n\n```json\n%s\n```\n" % example)
+    return "".join(lines)
+
+
 def generated_files():
     """Map of reference file name -> expected content."""
     _runtime.use_runtime()
-    return {"commands.md": render_commands(), "operations.md": render_operations(), "worlds.md": render_worlds()}
+    return {
+        "commands.md": render_commands(),
+        "operations.md": render_operations(),
+        "worlds.md": render_worlds(),
+        "custom_world.md": render_custom_world(),
+    }
 
 
 def main(argv):

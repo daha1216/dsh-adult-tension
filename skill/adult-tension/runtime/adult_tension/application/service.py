@@ -18,6 +18,7 @@ from datetime import datetime
 
 from .. import schema as S
 from ..errors import (
+    CONTENT_ERROR,
     IDEMPOTENCY_CONFLICT,
     INVALID_INPUT,
     INVARIANT_VIOLATION,
@@ -194,6 +195,47 @@ def _plan_across(ctx, world_ids, seed, conditions):
     raise opening.no_match(reasons or ["没有可用的世界"], conditions["locks"].get("world_id"), conditions)
 
 
+MODE_ITEMS = (("daily", "daily_activities", "日常活动"), ("pressure", "pressures", "压力"))
+
+
+def _custom_world(ctx, raw, conditions):
+    """Validate a player-described world with the same validator (CONTENT_BIBLE 5).
+
+    The lowered minimum "daily activities or pressures, >= 2 by mode" depends
+    on the mode asked for, so it is checked here; a random mode settles on the
+    one mode the world can open, if it can open only one.
+    """
+    from ..domain import structure as ST
+    from ..domain import worldpack
+
+    if not isinstance(raw, dict):
+        raise AppError(CONTENT_ERROR, "自定义世界应为一个 JSON 对象", [detail("$.custom_world", "应为对象", "格式见 references/custom_world.md", CONTENT_ERROR)])
+    tag_ids = [t["id"] for t in ctx.content().tags()["tags"]]
+    pack, problems = worldpack.validate_world(raw, custom=True, tag_ids=tag_ids)
+    problems = [dict(p, path="$.custom_world" + p["path"][1:] if p["path"].startswith("$") else p["path"]) for p in problems]
+    if raw.get("extends") is not None:
+        problems.append(detail("$.custom_world.extends", "自定义世界不能引用底包", "把需要的命名池、风俗直接写进这个世界", CONTENT_ERROR))
+    if raw.get("id") in {w["id"] for w in ctx.content().index()["worlds"]}:
+        problems.append(detail("$.custom_world.id", "与现有世界重名：%s" % raw["id"], "换一个 ID，例如加 custom_ 前缀", CONTENT_ERROR))
+    need = ST.CUSTOM_MINIMUMS["mode_items"]
+    counts = {mode: len(raw[key]) if isinstance(raw.get(key), list) else 0 for mode, key, _label in MODE_ITEMS}
+    if conditions["mode"] == "random":
+        openable = [mode for mode, _key, _label in MODE_ITEMS if counts[mode] >= need]
+        if len(openable) == 1:
+            conditions["mode"] = openable[0]
+    else:
+        for mode, key, label in MODE_ITEMS:
+            if mode == conditions["mode"] and counts[mode] < need:
+                problems.append(detail("$.custom_world.%s" % key, "要开%s模式，%s至少 %d 条，现有 %d 条" % ("日常" if mode == "daily" else "压力", label, need, counts[mode]), "补齐，或换一种模式开局", CONTENT_ERROR))
+    if problems:
+        raise AppError(
+            CONTENT_ERROR,
+            "自定义世界有 %d 处问题" % len(problems) if len(problems) > 1 else problems[0]["reason"],
+            problems,
+        )
+    return pack
+
+
 def seed_stream():
     while True:
         yield 1 + int.from_bytes(os.urandom(4), "big") % 999999
@@ -208,11 +250,17 @@ def new_game(ctx, payload):
         problems.append(detail("$.seed", "“重开 N 号”必须给出种子编号", None, INVALID_INPUT))
     if payload["mode"] is None and not payload["replay"]:
         problems.append(detail("$.mode", "缺少模式", "先问玩家“1 日常 / 2 有压力”；玩家说“随便”才用 random", INVALID_INPUT))
+    custom = None
     if payload["custom_world"] is not None:
-        problems.append(detail("$.custom_world", "自定义世界在当前版本还没有开放", "先用现有世界开局", INVALID_INPUT))
+        if payload["replay"]:
+            problems.append(detail("$.replay", "自定义世界没有开局记录，不能“重开 N 号”", "带同一个 custom_world 与 seed 重新开局即可复现", INVALID_INPUT))
+        if payload["locks"].get("world_id") or payload["excludes"].get("world_ids"):
+            problems.append(detail("$.locks.world_id", "自定义世界不和现有世界一起锁定或排除", "去掉 world_id 的锁定与排除", INVALID_INPUT))
     if problems:
         raise AppError(INVALID_INPUT, problems[0]["reason"], problems)
     conditions = opening.normalize_conditions(payload)
+    if payload["custom_world"] is not None:
+        custom = _custom_world(ctx, payload["custom_world"], conditions)
 
     def handler(conn, now):
         seed = payload["seed"]
@@ -229,13 +277,19 @@ def new_game(ctx, payload):
                     "本机没有 %d 号开局的记录" % seed,
                     [detail("$.seed", "找不到这个种子的开局条件", "请玩家说明模式（日常/有压力），用同一种子与条件重开", NOT_FOUND)],
                 )
-        worlds = _world_candidates(ctx, conditions, include_drafts(ctx, payload))
-        if not worlds:
-            raise opening.no_match(["排除之后没有可选的世界"], None, conditions)
-        if seed is None:
-            history = repo.opening_history(conn)
-            seed, _result = opening.choose_seed(lambda s: _plan_across(ctx, worlds, s, conditions)[1][0], seed_stream(), history)
-        pack, planned = _plan_across(ctx, worlds, seed, conditions)
+        if custom is not None:
+            # A custom world lives only in this game's snapshot: no history, no dedupe.
+            if seed is None:
+                seed = next(seed_stream())
+            pack, planned = custom, opening.plan(custom, seed, conditions)
+        else:
+            worlds = _world_candidates(ctx, conditions, include_drafts(ctx, payload))
+            if not worlds:
+                raise opening.no_match(["排除之后没有可选的世界"], None, conditions)
+            if seed is None:
+                history = repo.opening_history(conn)
+                seed, _result = opening.choose_seed(lambda s: _plan_across(ctx, worlds, s, conditions)[1][0], seed_stream(), history)
+            pack, planned = _plan_across(ctx, worlds, seed, conditions)
         content = _content_snapshot(ctx, pack)
         state, opening_payload = opening.instantiate(pack, seed, conditions, planned, content["content_version"])
         state["session_id"] = new_session_id(conn)

@@ -36,15 +36,15 @@ EXIT_OPTION = S.Obj({"option": F(_str(1, 80)), "cost": F(_str(1, 120))})
 IDENTITY = S.Obj(
     {
         "id": F(S.Id()),
-        "role": F(_str(1, 20)),
-        "gender": F(S.Enum(*ST.TEMPLATE_GENDERS), required=False, default="any"),
-        "title_patterns": F(S.List(NAME_PATTERN, min_items=1)),
-        "age_range": F(_range(0, 120)),
-        "social_position": F(S.Enum(*ST.SOCIAL_POSITIONS)),
-        "baseline": F(_str(1, 200)),
-        "resources": F(_texts(1, 80)),
-        "reputation": F(_str(1, 80)),
-        "risks": F(_texts(1, 120)),
+        "role": F(_str(1, 20), desc="身份名，例如“长住的撰稿人”"),
+        "gender": F(S.Enum(*ST.TEMPLATE_GENDERS), required=False, default="any", desc="any 表示按玩家设定"),
+        "title_patterns": F(S.List(NAME_PATTERN, min_items=1), desc="别人怎么称呼玩家，例如 {family}老师"),
+        "age_range": F(_range(0, 120), desc="年龄范围，下限 ≥ 18"),
+        "social_position": F(S.Enum(*ST.SOCIAL_POSITIONS), desc="相对于世界里主要人物的社会位置"),
+        "baseline": F(_str(1, 200), desc="玩家眼下的处境"),
+        "resources": F(_texts(1, 80), desc="玩家手里有什么"),
+        "reputation": F(_str(1, 80), desc="别人眼里的玩家"),
+        "risks": F(_texts(1, 120), desc="玩家怕失去什么"),
     },
     name="玩家身份",
 )
@@ -53,13 +53,13 @@ LOCATION = S.Obj(
     {
         "id": F(S.Id()),
         "name": F(_str(1, 20)),
-        "detail": F(_str(1, 200)),
-        "privacy": F(S.Enum(*ST.PRIVACY)),
-        "visibility": F(_str(1, 120)),
-        "witnesses": F(S.List(S.Id(), unique=True), required=False, default=[]),
-        "exits": F(S.List(S.Id(), min_items=1, unique=True)),
-        "affordances": F(S.List(_str(1, 60), min_items=2)),
-        "pressure_modifiers": F(S.Map(_str(1, 120), S.ID_PATTERN, S.ID_HINT), required=False, default={}),
+        "detail": F(_str(1, 200), desc="看得见、摸得着的细节"),
+        "privacy": F(S.Enum(*ST.PRIVACY), desc="public 人来人往；semi 半开放；private 关得上门"),
+        "visibility": F(_str(1, 120), desc="谁能看见这里发生的事"),
+        "witnesses": F(S.List(S.Id(), unique=True), required=False, default=[], desc="常在这里的背景人物 ID"),
+        "exits": F(S.List(S.Id(), min_items=1, unique=True), desc="相连的地点 ID"),
+        "affordances": F(S.List(_str(1, 60), min_items=2), desc="在这里能做的事"),
+        "pressure_modifiers": F(S.Map(_str(1, 120), S.ID_PATTERN, S.ID_HINT), required=False, default={}, desc="压力 ID → 这个压力在这里有什么不同"),
         "tags": F(S.List(S.Id(), unique=True), required=False, default=[]),
     },
     name="地点",
@@ -68,65 +68,71 @@ LOCATION = S.Obj(
 TEMPLATE = S.Obj(
     {
         "id": F(S.Id()),
-        "gender": F(S.Enum(*ST.TEMPLATE_GENDERS)),
-        "gender_reason": F(S.Nullable(_str(1, 120)), required=False, default=None),
-        "age_range": F(_range(0, 120)),
-        "adult_context": F(_str(1, 80)),
-        "public_role": F(_str(1, 30)),
-        "appearance_options": F(S.List(_str(1, 120), min_items=2)),
+        "gender": F(S.Enum(*ST.TEMPLATE_GENDERS), desc="any 表示由会话的性别偏好决定，文本全部用占位"),
+        "gender_reason": F(S.Nullable(_str(1, 120)), required=False, default=None, desc="性别写死时的叙事理由"),
+        "age_range": F(_range(0, 120), desc="年龄范围，下限 ≥ 18"),
+        "adult_context": F(_str(1, 80), desc="明示成年身份与处境的一句话"),
+        "public_role": F(_str(1, 30), desc="别人知道的身份"),
+        "appearance_options": F(S.List(_str(1, 120), min_items=2), desc="外貌候选，开局抽一条"),
         "identity": F(
             S.Obj(
                 {
-                    "authority": F(_str(1, 120)),
-                    "resources": F(_texts(1, 80)),
-                    "limits": F(_texts(1, 80)),
-                    "obligations": F(_texts(0, 80), required=False, default=[]),
-                    "exposure": F(_str(1, 120)),
-                    "hidden": F(_str(1, 120)),
+                    "authority": F(_str(1, 120), desc="能决定什么"),
+                    "resources": F(_texts(1, 80), desc="手里有什么"),
+                    "limits": F(_texts(1, 80), desc="做不到什么"),
+                    "obligations": F(_texts(0, 80), required=False, default=[], desc="对谁负有什么责任"),
+                    "exposure": F(_str(1, 120), desc="一旦被人知道就麻烦的事"),
+                    "hidden": F(_str(1, 120), desc="只有自己知道的事"),
                 }
-            )
+            ),
+            desc="身份：权力、资源、限制、暴露点、隐藏的事",
         ),
         "decision": F(
             S.Obj(
                 {
-                    "core_value": F(_str(1, 60)),
-                    "goal_options": F(S.List(_str(1, 80), min_items=2)),
+                    "core_value": F(_str(1, 60), desc="最看重的东西"),
+                    "goal_options": F(S.List(_str(1, 80), min_items=2), desc="目标候选，开局抽一条"),
                     "pressure_responses": F(
-                        S.Obj({level: F(_str(1, 120)) for level in ("low", "mid", "high", "breaking")})
+                        S.Obj({level: F(_str(1, 120)) for level in ("low", "mid", "high", "breaking")}),
+                        desc="四档压力下的反应：low、mid、high、breaking",
                     ),
-                    "withdrawal": F(_str(1, 120)),
-                    "relationship_stance": F(_str(1, 80)),
-                    "contrast": F(_str(1, 80)),
-                    "prefers": F(_texts(1, 80)),
-                    "avoids": F(_texts(1, 80)),
-                    "never": F(_texts(1, 80)),
+                    "withdrawal": F(_str(1, 120), desc="退缩时的具体表现"),
+                    "relationship_stance": F(_str(1, 80), desc="对人的基本态度"),
+                    "contrast": F(_str(1, 80), desc="表面和内里的反差"),
+                    "prefers": F(_texts(1, 80), desc="偏好的做法"),
+                    "avoids": F(_texts(1, 80), desc="回避的事"),
+                    "never": F(_texts(1, 80), desc="无论如何不做的事"),
                 }
-            )
+            ),
+            desc="决策：NPC 按这些自己做决定",
         ),
         "intimacy_tendency": F(
             S.Obj(
                 {
-                    "attraction_sources": F(S.List(_str(1, 80), min_items=2)),
+                    "attraction_sources": F(S.List(_str(1, 80), min_items=2), desc="被什么吸引"),
                     "likes": F(_texts(1, 60)),
                     "dislikes": F(_texts(1, 60)),
-                    "preconditions": F(_texts(1, 80)),
-                    "boundaries": F(_texts(1, 80)),
-                    "expression": F(_str(1, 80)),
-                    "desire_range": F(_range(0, 5)),
-                    "self_control_range": F(_range(0, 5)),
-                    "desired_position": F(_str(1, 40)),
+                    "preconditions": F(_texts(1, 80), desc="靠近之前需要的条件"),
+                    "boundaries": F(_texts(1, 80), desc="不越过的线"),
+                    "expression": F(_str(1, 80), desc="好感怎么表现出来"),
+                    "desire_range": F(_range(0, 5), desc="欲望 0–5 的范围，开局取一个值"),
+                    "self_control_range": F(_range(0, 5), desc="自制 0–5 的范围，开局取一个值"),
+                    "desired_position": F(_str(1, 40), desc="想要的相处位置"),
                 }
-            )
+            ),
+            desc="亲密倾向（不等于许可）",
         ),
-        "voices": F(S.Obj({"surface": F(_str(1, 120)), "inner": F(_str(1, 120))})),
+        "voices": F(S.Obj({"surface": F(_str(1, 120), desc="说出口的话"), "inner": F(_str(1, 120), desc="心里的话")}), desc="表层与里层语态的示例"),
         "schedule": F(
             S.List(
                 S.Obj({"from": F(S.Int(0, 1439)), "to": F(S.Int(0, 1439)), "location_id": F(S.Id())}),
                 min_items=1,
-            )
+            ),
+            desc="作息：一天里各时段在哪（从零点起的分钟），离屏推演用",
         ),
         "situation": F(
-            S.Obj({"trigger": F(_str(1, 120)), "pressure": F(_str(1, 120)), "exits": F(S.List(EXIT_OPTION, min_items=2))})
+            S.Obj({"trigger": F(_str(1, 120)), "pressure": F(_str(1, 120)), "exits": F(S.List(EXIT_OPTION, min_items=2))}),
+            desc="这个人自己的处境：起因、压力、至少两条各有代价的出路",
         ),
         "tags": F(S.List(S.Id(), unique=True), required=False, default=[]),
     },
@@ -137,41 +143,46 @@ BACKGROUND = S.Obj(
     {
         "id": F(S.Id()),
         "role": F(_str(1, 20)),
-        "function": F(S.Enum(*ST.BACKGROUND_FUNCTIONS)),
-        "location_ids": F(S.List(S.Id(), min_items=1, unique=True)),
-        "line": F(_str(1, 120)),
+        "function": F(S.Enum(*ST.BACKGROUND_FUNCTIONS), desc="在剧情里起什么作用"),
+        "location_ids": F(S.List(S.Id(), min_items=1, unique=True), desc="常在的地点"),
+        "line": F(_str(1, 120), desc="一句描写，用 {npc.name}"),
         "gender": F(S.Enum(*ST.TEMPLATE_GENDERS)),
-        "age_range": F(_range(0, 120)),
-        "adult_context": F(_str(1, 80)),
-        "name": F(S.Nullable(_str(1, 8)), required=False, default=None),
+        "age_range": F(_range(0, 120), desc="年龄范围，下限 ≥ 18"),
+        "adult_context": F(_str(1, 80), desc="明示成年身份的一句话"),
+        "name": F(S.Nullable(_str(1, 8)), required=False, default=None, desc="固定名字；省略时开局生成"),
     },
     name="背景人物",
 )
 
 CHANNEL = S.Obj(
-    {"id": F(S.Id()), "text": F(_str(1, 60)), "reach": F(_str(1, 80)), "fidelity": F(S.Enum(*ST.CHANNEL_FIDELITY))},
+    {
+        "id": F(S.Id()),
+        "text": F(_str(1, 60), desc="渠道，例如“茶餐厅的熟客”"),
+        "reach": F(_str(1, 80), desc="传到谁、多快"),
+        "fidelity": F(S.Enum(*ST.CHANNEL_FIDELITY), desc="exact 原样传；distorted 传走样"),
+    },
     name="关系渠道",
 )
-ENGINE = S.Obj({"id": F(S.Id()), "text": F(_str(1, 120))}, name="张力引擎")
-RULE = S.Obj({"id": F(S.Id()), "text": F(_str(1, 200))}, name="世界规则")
-EDGE_VALUES = S.Obj({"trust": F(S.Int(-5, 5)), "tension": F(S.Int(0, 5))})
+ENGINE = S.Obj({"id": F(S.Id()), "text": F(_str(1, 120), desc="不靠外部压力也持续制造张力的结构")}, name="张力引擎")
+RULE = S.Obj({"id": F(S.Id()), "text": F(_str(1, 200), desc="能在回合里改变一个选择的规则")}, name="世界规则")
+EDGE_VALUES = S.Obj({"trust": F(S.Int(-5, 5), desc="信任"), "tension": F(S.Int(0, 5), desc="张力")})
 
 COMBO = S.Obj(
     {
         "id": F(S.Id()),
-        "power_structure": F(S.Enum(*ST.POWER_STRUCTURES)),
-        "player_positions": F(S.List(S.Enum(*ST.SOCIAL_POSITIONS), min_items=1, unique=True)),
-        "identity_ids": F(S.List(S.Id(), unique=True), required=False, default=[]),
-        "slots": F(S.List(S.Id(), 1, 4, unique=True)),
-        "tension_engine_ids": F(S.List(S.Id(), min_items=1, unique=True)),
-        "chemistry": F(_str(1, 200)),
+        "power_structure": F(S.Enum(*ST.POWER_STRUCTURES), desc="玩家占上风、NPC 占上风、平等、可反转"),
+        "player_positions": F(S.List(S.Enum(*ST.SOCIAL_POSITIONS), min_items=1, unique=True), desc="配得上的玩家社会位置"),
+        "identity_ids": F(S.List(S.Id(), unique=True), required=False, default=[], desc="只配这些玩家身份；省略表示不限"),
+        "slots": F(S.List(S.Id(), 1, 4, unique=True), desc="同场的人物模板 ID"),
+        "tension_engine_ids": F(S.List(S.Id(), min_items=1, unique=True), desc="用到的张力引擎"),
+        "chemistry": F(_str(1, 200), desc="人物之间的化学反应，用 {槽位.name}"),
         "stakes": F(
             S.Obj(
                 {
-                    "resource_gap": F(_str(1, 120)),
-                    "limit_gap": F(_str(1, 120)),
-                    "meeting_reason": F(_str(1, 120)),
-                    "irreplaceable_goal": F(_str(1, 120)),
+                    "resource_gap": F(_str(1, 120), desc="资源差异"),
+                    "limit_gap": F(_str(1, 120), desc="限制差异"),
+                    "meeting_reason": F(_str(1, 120), desc="为什么会遇到"),
+                    "irreplaceable_goal": F(_str(1, 120), desc="一条不可被替代的个人目标"),
                 }
             )
         ),
@@ -179,8 +190,8 @@ COMBO = S.Obj(
             S.List(
                 S.Obj(
                     {
-                        "a": F(S.Id()),
-                        "b": F(S.Id()),
+                        "a": F(S.Id(), desc="player 或槽位"),
+                        "b": F(S.Id(), desc="player 或槽位"),
                         "stage": F(S.Enum(*ST.STAGES)),
                         "a_to_b": F(EDGE_VALUES),
                         "b_to_a": F(EDGE_VALUES),
@@ -199,11 +210,11 @@ ACTIVITY = S.Obj(
     {
         "id": F(S.Id()),
         "title": F(_str(1, 20)),
-        "location_ids": F(S.List(S.Id(), min_items=1, unique=True)),
-        "duration_minutes": F(S.Int(5, 600)),
-        "beats": F(S.List(_str(1, 80), min_items=2)),
-        "hook_ids": F(S.List(S.Id(), unique=True), required=False, default=[]),
-        "start_minute": F(S.Nullable(S.Int(0, 1439)), required=False, default=None),
+        "location_ids": F(S.List(S.Id(), min_items=1, unique=True), desc="可以发生的地点"),
+        "duration_minutes": F(S.Int(5, 600), desc="时长（分钟）"),
+        "beats": F(S.List(_str(1, 80), min_items=2), desc="活动里会发生的小事"),
+        "hook_ids": F(S.List(S.Id(), unique=True), required=False, default=[], desc="偏好的钩子"),
+        "start_minute": F(S.Nullable(S.Int(0, 1439)), required=False, default=None, desc="开局时刻（从零点起的分钟）；省略时用世界的起始时刻"),
         "tags": F(S.List(S.Id(), unique=True), required=False, default=[]),
     },
     name="日常活动",
@@ -213,23 +224,24 @@ PRESSURE = S.Obj(
     {
         "id": F(S.Id()),
         "title": F(_str(1, 20)),
-        "source": F(S.Enum(*ST.PRESSURE_SOURCES)),
-        "flags": F(S.List(S.Enum(*ST.PRESSURE_FLAGS), unique=True), required=False, default=[]),
-        "location_ids": F(S.List(S.Id(), min_items=1, unique=True)),
-        "trigger": F(_str(1, 120)),
-        "objective": F(_str(1, 120)),
-        "choice": F(_str(1, 120)),
-        "immediate": F(S.Obj({"text": F(_str(1, 120)), "minutes": F(S.Int(1, 240))})),
-        "near": F(S.Obj({"text": F(_str(1, 120)), "deadline_minutes": F(S.Int(1, 4320))})),
-        "far": F(S.Obj({"trigger": F(_str(1, 120)), "consequence": F(_str(1, 120)), "due_days": F(S.Int(1, 30))})),
-        "exits": F(S.List(EXIT_OPTION, min_items=2)),
+        "source": F(S.Enum(*ST.PRESSURE_SOURCES), desc="压力来自哪里"),
+        "flags": F(S.List(S.Enum(*ST.PRESSURE_FLAGS), unique=True), required=False, default=[], desc="timed 有明确倒计时；leverage 一方握有另一方的把柄或生计"),
+        "location_ids": F(S.List(S.Id(), min_items=1, unique=True), desc="可以发生的地点"),
+        "trigger": F(_str(1, 120), desc="发生了什么"),
+        "objective": F(_str(1, 120), desc="要在什么之前做到什么"),
+        "choice": F(_str(1, 120), desc="真正的两难"),
+        "immediate": F(S.Obj({"text": F(_str(1, 120)), "minutes": F(S.Int(1, 240), desc="本场景的时长")}), desc="立即层：本场景内看得见的压力"),
+        "near": F(S.Obj({"text": F(_str(1, 120)), "deadline_minutes": F(S.Int(1, 4320), desc="从开局算起，大于 immediate.minutes")}), desc="近期层：带期限"),
+        "far": F(S.Obj({"trigger": F(_str(1, 120)), "consequence": F(_str(1, 120)), "due_days": F(S.Int(1, 30), desc="几天后")}), desc="远期层：开局只作伏笔"),
+        "exits": F(S.List(EXIT_OPTION, min_items=2), desc="出路，至少两条，各有代价"),
         "leverage": F(
-            S.Nullable(S.Obj({"holder": F(S.Id()), "subject": F(S.Id()), "basis": F(_str(1, 120))})),
+            S.Nullable(S.Obj({"holder": F(S.Id()), "subject": F(S.Id()), "basis": F(_str(1, 120), desc="构成把柄的一句事实")})),
             required=False,
             default=None,
+            desc="带 leverage 标记时必填：holder、subject 取槽位或 player",
         ),
-        "hook_ids": F(S.List(S.Id(), unique=True), required=False, default=[]),
-        "start_minute": F(S.Nullable(S.Int(0, 1439)), required=False, default=None),
+        "hook_ids": F(S.List(S.Id(), unique=True), required=False, default=[], desc="偏好的钩子"),
+        "start_minute": F(S.Nullable(S.Int(0, 1439)), required=False, default=None, desc="开局时刻（从零点起的分钟）；省略时用世界的起始时刻"),
         "tags": F(S.List(S.Id(), unique=True), required=False, default=[]),
     },
     name="压力",
@@ -238,10 +250,10 @@ PRESSURE = S.Obj(
 HOOK = S.Obj(
     {
         "id": F(S.Id()),
-        "kind": F(S.Enum(*ST.HOOK_KINDS)),
-        "slot": F(S.Id()),
-        "location_ids": F(S.List(S.Id(), unique=True), required=False, default=[]),
-        "text": F(_str(1, 120)),
+        "kind": F(S.Enum(*ST.HOOK_KINDS), desc="approach 非交易性的靠近（优先）；observe；request；accident"),
+        "slot": F(S.Id(), desc="发出钩子的人物模板 ID"),
+        "location_ids": F(S.List(S.Id(), unique=True), required=False, default=[], desc="只在这些地点；省略表示不限"),
+        "text": F(_str(1, 120), desc="开局收尾的动作，用 {npc.name}"),
     },
     name="钩子",
 )
@@ -249,7 +261,7 @@ TWIST = S.Obj(
     {
         "id": F(S.Id()),
         "category": F(S.Enum(*ST.TWIST_CATEGORIES)),
-        "requires": F(S.List(S.Str(1, 40), unique=True), required=False, default=[]),
+        "requires": F(S.List(S.Str(1, 40), unique=True), required=False, default=[], desc="前提：pressure 或 daily（只在该模式）、人物模板 ID（该人物在局）、压力 ID"),
         "text": F(_str(1, 160)),
     },
     name="转折",
@@ -260,16 +272,23 @@ WORLD = S.Obj(
         "schema_version": F(S.Int(1, 1)),
         "id": F(S.Id()),
         "title": F(_str(1, 20)),
-        "extends": F(S.Nullable(S.Id()), required=False, default=None),
-        "custom": F(S.Bool(), required=False, default=False),
-        "era": F(_str(1, 40)),
-        "region": F(_str(1, 40)),
-        "premise": F(_str(1, 200)),
-        "tone": F(S.List(_str(1, 12), 1, 8)),
-        "style_hint": F(_str(1, 120)),
-        "clock_start": F(S.Obj({"label": F(S.Nullable(_str(1, 40)), required=False, default=None), "minute": F(S.Int(0, 1439))})),
-        "clock_style": F(S.Enum("hm", "shichen"), required=False, default="hm"),
-        "default_person": F(S.Enum(*ST.PERSONS), required=False, default="second"),
+        "extends": F(S.Nullable(S.Id()), required=False, default=None, desc="时代底包 ID，编译期展开；自定义世界不写"),
+        "custom": F(S.Bool(), required=False, default=False, desc="自定义世界必须为 true"),
+        "era": F(_str(1, 40), desc="具体的时代"),
+        "region": F(_str(1, 40), desc="具体的地方"),
+        "premise": F(_str(1, 200), desc="人为什么同在此处、一天怎么过"),
+        "tone": F(S.List(_str(1, 12), 1, 8), desc="基调词"),
+        "style_hint": F(_str(1, 120), desc="一句写给叙事者的文风提示，具体到句式或感官"),
+        "clock_start": F(
+            S.Obj(
+                {
+                    "label": F(S.Nullable(_str(1, 40)), required=False, default=None, desc="起始日的显示标签"),
+                    "minute": F(S.Int(0, 1439), desc="开局时刻：从零点起的分钟（1140 即 19:00）"),
+                }
+            )
+        ),
+        "clock_style": F(S.Enum("hm", "shichen"), required=False, default="hm", desc="hm 显示 19:00；shichen 显示时辰"),
+        "default_person": F(S.Enum(*ST.PERSONS), required=False, default="second", desc="叙述人称"),
         "default_npc_gender_mix": F(
             S.Obj(
                 {
@@ -277,9 +296,15 @@ WORLD = S.Obj(
                     "male": F(S.Num(0, 1)),
                     "nonbinary": F(S.Num(0, 1), required=False, default=0.0),
                 }
-            )
+            ),
+            desc="性别可变的人物按这个比例定性别，之和为 1",
         ),
-        "stage_labels": F(S.Nullable(S.Obj({stage: F(_str(1, 8), required=False) for stage in ST.STAGES})), required=False, default=None),
+        "stage_labels": F(
+            S.Nullable(S.Obj({stage: F(_str(1, 8), required=False) for stage in ST.STAGES})),
+            required=False,
+            default=None,
+            desc="按本世界的说法给关系阶段改名",
+        ),
         "name_pools": F(
             S.Obj(
                 {
@@ -287,27 +312,27 @@ WORLD = S.Obj(
                     "given_female": F(S.List(_str(1, 4), unique=True)),
                     "given_male": F(S.List(_str(1, 4), unique=True)),
                     "given_neutral": F(S.List(_str(1, 4), unique=True)),
-                    "nickname_patterns": F(S.List(NAME_PATTERN)),
+                    "nickname_patterns": F(S.List(NAME_PATTERN), desc="昵称规则，例如 小{family}"),
                 }
             )
         ),
-        "rules": F(S.List(RULE)),
-        "customs": F(S.List(_str(1, 200))),
-        "player_identities": F(S.List(IDENTITY)),
-        "locations": F(S.List(LOCATION)),
-        "character_templates": F(S.List(TEMPLATE)),
-        "background_cast": F(S.List(BACKGROUND)),
-        "channels": F(S.List(CHANNEL)),
-        "tension_engines": F(S.List(ENGINE)),
-        "cast_combos": F(S.List(COMBO)),
-        "daily_activities": F(S.List(ACTIVITY)),
-        "pressures": F(S.List(PRESSURE)),
-        "hooks": F(S.List(HOOK)),
-        "twists": F(S.List(TWIST)),
-        "forbidden_terms": F(S.List(_str(1, 20), unique=True)),
-        "content_tags": F(S.List(S.Id(), unique=True)),
-        "status": F(S.Enum("draft", "review", "released")),
-        "notes": F(S.Str(0, 2000), required=False, default=""),
+        "rules": F(S.List(RULE), required=False, default=[], desc="影响剧情的世界规则"),
+        "customs": F(S.List(_str(1, 200)), required=False, default=[], desc="可以直接写进正文的风俗与礼节"),
+        "player_identities": F(S.List(IDENTITY), required=False, default=[], desc="玩家身份池；玩家没指定时从这里抽"),
+        "locations": F(S.List(LOCATION), required=False, default=[], desc="地点档案"),
+        "character_templates": F(S.List(TEMPLATE), required=False, default=[], desc="主要人物；具体姓名与年龄开局时生成"),
+        "background_cast": F(S.List(BACKGROUND), required=False, default=[], desc="背景人物：只有角色与功能，可以被升格"),
+        "channels": F(S.List(CHANNEL), required=False, default=[], desc="消息传播的路径"),
+        "tension_engines": F(S.List(ENGINE), required=False, default=[], desc="张力引擎"),
+        "cast_combos": F(S.List(COMBO), required=False, default=[], desc="谁和谁同场"),
+        "daily_activities": F(S.List(ACTIVITY), required=False, default=[], desc="日常模式的开局活动"),
+        "pressures": F(S.List(PRESSURE), required=False, default=[], desc="压力模式的开局压力"),
+        "hooks": F(S.List(HOOK), required=False, default=[], desc="开局收尾的钩子"),
+        "twists": F(S.List(TWIST), required=False, default=[], desc="转折候选"),
+        "forbidden_terms": F(S.List(_str(1, 20), unique=True), required=False, default=[], desc="本世界不该出现的词"),
+        "content_tags": F(S.List(S.Id(), unique=True), required=False, default=[], desc="本世界涉及的内容标签"),
+        "status": F(S.Enum("draft", "review", "released"), desc="自定义世界写 draft"),
+        "notes": F(S.Str(0, 2000), required=False, default="", desc="作者备注，运行时不读"),
     },
     name="世界包",
 )

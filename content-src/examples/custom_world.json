@@ -1,0 +1,170 @@
+{
+ "schema_version": 1,
+ "id": "custom_guesthouse",
+ "title": "淡季民宿",
+ "custom": true,
+ "era": "当代，十一月",
+ "region": "北方海边小镇的一家民宿",
+ "premise": "旅游季过去了，民宿只剩两个长住的客人和一个守店的人；风大的晚上，谁也不想一个人待在房间里。",
+ "tone": ["冷风", "慢", "试探"],
+ "style_hint": "多写风声、暖气片和海的颜色；对话短，停顿多。",
+ "clock_start": {"label": "十一月的第二个周末", "minute": 1140},
+ "default_npc_gender_mix": {"female": 0.5, "male": 0.5},
+ "name_pools": {
+  "family": ["林", "许", "周", "宋"],
+  "given_female": ["晚晴", "若溪", "静宜", "书瑶"],
+  "given_male": ["远舟", "启明", "振声", "海川"],
+  "given_neutral": ["一帆", "知秋"],
+  "nickname_patterns": [{"pattern": "小{family}", "gender": "any"}]
+ },
+ "rules": [
+  {"id": "r_heating", "text": "锅炉晚上十一点自动关，之后只有一楼客厅的壁炉是暖的。"},
+  {"id": "r_ferry", "text": "去市区的末班车下午五点就走，天黑以后谁也离不开镇子。"}
+ ],
+ "customs": ["守店的人每晚九点在客厅煮一锅姜茶，谁下来谁喝。"],
+ "player_identities": [
+  {
+   "id": "long_stay_writer",
+   "role": "长住的撰稿人",
+   "title_patterns": [{"pattern": "{family}老师", "gender": "any"}],
+   "age_range": [28, 45],
+   "social_position": "equal",
+   "baseline": "来这里赶一本拖了半年的稿子，已经住了三个星期。",
+   "resources": ["一台旧笔记本", "付到月底的房费"],
+   "reputation": "早出晚归，客气但不熟",
+   "risks": ["编辑下周要来看稿"]
+  }
+ ],
+ "locations": [
+  {
+   "id": "living_room",
+   "name": "一楼客厅",
+   "detail": "壁炉、长沙发、一整面对着海的窗，窗框被风吹得轻轻响。",
+   "privacy": "public",
+   "visibility": "住客进出都要经过，门口和楼梯口都能看见沙发，只有壁炉边的角落看不见",
+   "exits": ["terrace"],
+   "affordances": ["坐在壁炉边烤手", "借一本架子上的旧书"]
+  },
+  {
+   "id": "terrace",
+   "name": "屋顶露台",
+   "detail": "晾衣绳上挂着没收的床单，能看见整条黑下来的海岸线。",
+   "privacy": "private",
+   "visibility": "只有从客厅的楼梯上来才看得见",
+   "exits": ["living_room"],
+   "affordances": ["一起把床单收下来", "躲在床单后面避风"]
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "keeper",
+   "gender": "any",
+   "age_range": [30, 42],
+   "adult_context": "民宿的合伙人，淡季一个人守店",
+   "public_role": "守店的人",
+   "appearance_options": ["袖口总挽到手肘，手背上有烫伤的旧疤", "围一条洗得发白的格子围巾，走路很轻"],
+   "identity": {"authority": "决定谁能用壁炉、谁的房费可以晚交", "resources": ["每个房间的备用钥匙"], "limits": ["合伙人在城里，大事要打电话问"], "exposure": "民宿其实下个月就要转让，还没告诉长住的客人", "hidden": "想留下来的只有{npc.ta}自己"},
+   "decision": {"core_value": "把手上的事做完", "goal_options": ["撑过这个冬天", "找到愿意接手的人"], "pressure_responses": {"low": "笑一笑，去厨房再烧一壶水", "mid": "把话题转到天气上", "high": "直接说出转让的事", "breaking": "关了店，当晚就走"}, "withdrawal": "整晚待在厨房，门开着一条缝", "relationship_stance": "对长住的人好，但不交底", "contrast": "看上去什么都不在乎，其实记得每个客人喝茶放不放糖", "prefers": ["用做事代替说话"], "avoids": ["被人可怜"], "never": ["翻客人的东西"]},
+   "intimacy_tendency": {"attraction_sources": ["对方愿意帮忙干活", "对方不追问{npc.ta}的过去"], "likes": ["安静的陪伴"], "dislikes": ["被人一眼看穿"], "preconditions": ["确定对方不是一时兴起"], "boundaries": ["不在客房里"], "expression": "把最好的那只杯子留给对方", "desire_range": [1, 4], "self_control_range": [3, 5], "desired_position": "平等，各自有退路"},
+   "voices": {"surface": "“姜茶在锅里，自己盛。”", "inner": "“你要是也走了，这里就真的只剩风了。”"},
+   "schedule": [{"from": 1080, "to": 1439, "location_id": "living_room"}, {"from": 0, "to": 1079, "location_id": "terrace"}],
+   "situation": {"trigger": "合伙人今晚打电话，说有人想来看房", "pressure": "看房的人明早就到，客人们还什么都不知道", "exits": [{"option": "今晚就告诉大家", "cost": "长住的客人可能提前搬走"}, {"option": "先瞒着", "cost": "明早被撞见时更难解释"}]}
+  },
+  {
+   "id": "photographer",
+   "gender": "any",
+   "age_range": [26, 38],
+   "adult_context": "独立摄影师，接商业单子养活自己",
+   "public_role": "来拍冬海的摄影师",
+   "appearance_options": ["相机一直挂在脖子上，镜头盖总是找不到", "头发被风吹得乱糟糟，自己也不在意"],
+   "identity": {"authority": "决定拍谁、不拍谁", "resources": ["一台老胶片机和最后三卷胶卷"], "limits": ["钱只够再住十天"], "exposure": "这次来其实是躲一个合作方", "hidden": "那组冬海的照片是给已经分开的人的"},
+   "decision": {"core_value": "只拍真的东西", "goal_options": ["拍到一次暴风前的海", "决定要不要回城"], "pressure_responses": {"low": "举起相机，把话题拍掉", "mid": "开个玩笑，说自己明天就走", "high": "把胶卷交给别人保管", "breaking": "连夜收拾东西"}, "withdrawal": "一整天待在海边，谁也不理", "relationship_stance": "先靠近，再后退一步", "contrast": "看上去最随便，冲洗照片时比谁都认真", "prefers": ["并肩走，不面对面"], "avoids": ["被问什么时候回去"], "never": ["偷拍别人"]},
+   "intimacy_tendency": {"attraction_sources": ["对方在镜头前不躲", "对方能陪{npc.ta}在风里站很久"], "likes": ["黄昏"], "dislikes": ["被安排好的浪漫"], "preconditions": ["双方都清楚这可能只是一个冬天"], "boundaries": ["不拍对方不愿意的样子"], "expression": "把刚冲好的一张照片塞进对方口袋", "desire_range": [2, 4], "self_control_range": [2, 4], "desired_position": "轮流主导"},
+   "voices": {"surface": "“别动，光正好。”", "inner": "“我拍了你十几张，一张都不敢给你看。”"},
+   "schedule": [{"from": 960, "to": 1439, "location_id": "terrace"}, {"from": 0, "to": 959, "location_id": "living_room"}],
+   "situation": {"trigger": "躲着的合作方打听到了{npc.ta}在这个镇子", "pressure": "对方说周末要来当面谈", "exits": [{"option": "见一面把话说清楚", "cost": "那组照片可能保不住"}, {"option": "再换一个地方躲", "cost": "钱只够买一张车票"}]}
+  },
+  {
+   "id": "night_guest",
+   "gender": "any",
+   "age_range": [32, 50],
+   "adult_context": "外地来的工程监理，住在镇上等风停",
+   "public_role": "被风困住的过路客",
+   "appearance_options": ["工装外套上还沾着水泥灰", "说话前总先清一下嗓子"],
+   "identity": {"authority": "能签字决定码头工程停不停", "resources": ["一辆停在镇口的皮卡"], "limits": ["工程不停，每天都要去工地看一眼"], "exposure": "工地上周出了点事，报告还没交", "hidden": "其实是这家民宿老板的旧识"},
+   "decision": {"core_value": "说话算数", "goal_options": ["等风停就走", "弄清楚民宿为什么要卖"], "pressure_responses": {"low": "沉默，喝完手里的茶", "mid": "用工程上的事岔开", "high": "直说自己认识老板", "breaking": "开车冒着风走"}, "withdrawal": "回到皮卡里坐着，发动机一直开着暖风", "relationship_stance": "不主动，但有求必应", "contrast": "看起来最硬的人，每晚都给家里的老狗打电话问好", "prefers": ["把话说在明处"], "avoids": ["欠别人的情"], "never": ["在背后议论人"]},
+   "intimacy_tendency": {"attraction_sources": ["对方说话算数", "对方不怕{npc.ta}的沉默"], "likes": ["一起修东西"], "dislikes": ["拐弯抹角"], "preconditions": ["事情都摆在明处"], "boundaries": ["不做让人说闲话的事"], "expression": "默默把对方的车窗擦干净", "desire_range": [1, 3], "self_control_range": [4, 5], "desired_position": "照顾对方，但不替对方做主"},
+   "voices": {"surface": "“风明天下午停，我查过了。”", "inner": "“我在这儿多住一晚，不全是因为风。”"},
+   "schedule": [{"from": 1140, "to": 1439, "location_id": "living_room"}, {"from": 0, "to": 1139, "location_id": "terrace"}],
+   "situation": {"trigger": "工地打来电话，报告明天必须交", "pressure": "要么照实写，要么替手下的人担着", "exits": [{"option": "照实写", "cost": "手下的人会丢工作"}, {"option": "自己担下来", "cost": "明年的工程可能拿不到"}]}
+  }
+ ],
+ "tension_engines": [
+  {"id": "te_one_fire", "text": "整栋楼只剩一楼的壁炉是暖的，晚上谁也躲不开谁"}
+ ],
+ "cast_combos": [
+  {
+   "id": "combo_storm_night",
+   "power_structure": "equal",
+   "player_positions": ["equal"],
+   "slots": ["keeper", "photographer"],
+   "tension_engine_ids": ["te_one_fire"],
+   "chemistry": "{keeper.name}守着这家店，{photographer.name}住在你隔壁；三个人都有一件没说出口的事，风大的晚上都下楼来烤火。",
+   "stakes": {"resource_gap": "{keeper.name}有全部的钥匙，你只有到月底的房费", "limit_gap": "你得赶稿，{photographer.name}的钱只够再住十天", "meeting_reason": "淡季里最后几个没走的人", "irreplaceable_goal": "你想在编辑来之前写完最后一章"},
+   "relations": [
+    {"a": "player", "b": "keeper", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 0}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "住了三个星期，每晚都喝{keeper.name}煮的姜茶"},
+    {"a": "player", "b": "photographer", "stage": "stranger", "a_to_b": {"trust": 0, "tension": 1}, "b_to_a": {"trust": 0, "tension": 1}, "reason": "住隔壁，只在楼梯上点过头"},
+    {"a": "keeper", "b": "photographer", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 1}, "b_to_a": {"trust": 1, "tension": 0}, "reason": "房费是按天付的，{keeper.name}从来没催过"}
+   ]
+  }
+ ],
+ "daily_activities": [
+  {"id": "a_ginger_tea", "title": "九点的姜茶", "location_ids": ["living_room"], "duration_minutes": 40, "beats": ["锅里的姜茶快见底了", "有人问起楼上那盏总亮着的灯"]},
+  {"id": "a_sheets", "title": "收床单", "location_ids": ["terrace"], "duration_minutes": 20, "beats": ["一阵风把床单掀到栏杆外", "两个人同时伸手去抓"]}
+ ],
+ "pressures": [
+  {
+   "id": "p_viewing",
+   "title": "明早有人来看房",
+   "source": "person",
+   "flags": ["timed"],
+   "location_ids": ["living_room"],
+   "trigger": "合伙人在电话里说，买家明早九点来看房",
+   "objective": "在客人们下楼吃早饭之前，决定转让的事说不说",
+   "choice": "今晚说出实情，还是让大家明早自己撞见",
+   "immediate": {"text": "守店的人在客厅里打完这通电话，一抬头就看见了你", "minutes": 20},
+   "near": {"text": "明早九点买家进门", "deadline_minutes": 840},
+   "far": {"trigger": "月底合伙人回镇上办手续", "consequence": "留下的人和先走的人，都要重新决定这个冬天住在哪", "due_days": 5},
+   "exits": [
+    {"option": "今晚就在壁炉边告诉所有人", "cost": "长住的客人可能提前退房"},
+    {"option": "替守店的人瞒到买家走", "cost": "明早被撞见时，你也成了知情不报的人"}
+   ],
+   "start_minute": 1140
+  },
+  {
+   "id": "p_storm_tide",
+   "title": "今晚的风暴潮",
+   "source": "nature",
+   "flags": ["timed"],
+   "location_ids": ["terrace", "living_room"],
+   "trigger": "镇上的广播喇叭说今晚十点风暴潮到岸，让人别出门",
+   "objective": "在风到之前把露台上的东西收下来、把窗钉牢",
+   "choice": "冒风上露台抢收，还是守在一楼等别人去",
+   "immediate": {"text": "露台上的床单已经被风扯开了一角", "minutes": 15},
+   "near": {"text": "十点整风暴潮到岸", "deadline_minutes": 180},
+   "far": {"trigger": "风停以后镇上来人检查受损的房子", "consequence": "民宿要是被判定不安全，这个冬天谁也住不下去", "due_days": 2},
+   "exits": [
+    {"option": "一起上露台抢收", "cost": "风太大，有人可能会受伤"},
+    {"option": "放弃露台，只守一楼", "cost": "晾着的东西全被吹走，第二天要赔"}
+   ],
+   "start_minute": 1140
+  }
+ ],
+ "hooks": [
+  {"id": "h_blanket", "kind": "approach", "slot": "keeper", "text": "{npc.name}把沙发上唯一的毯子往你那边推了推"}
+ ],
+ "forbidden_terms": ["飞船", "魔法"],
+ "content_tags": ["romance_light"],
+ "status": "draft",
+ "notes": "自定义世界的最小示例（references/custom_world.md 引用）"
+}

@@ -67,7 +67,7 @@ _register(
     "optional",
     "dev",
     "校验全部内容（结构、语义、时代、固定种子开局、多样性）",
-    {"--world": ("world", "str"), "--stats": ("stats", "bool"), "--skip-diversity": ("skip_diversity", "bool")},
+    {"--world": ("world", "str"), "--stats": ("stats", "bool"), "--skip-diversity": ("skip_diversity", "bool"), "--file": ("file", "str")},
     "VERIFY_CONTENT",
 )
 _register(

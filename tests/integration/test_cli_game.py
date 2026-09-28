@@ -249,5 +249,32 @@ class TimeCommandsTest(unittest.TestCase):
             self.assertEqual((code, env["error"]["code"]), (10, "INVARIANT_VIOLATION"))
 
 
+class CustomWorldTest(unittest.TestCase):
+    """RUNTIME_PROTOCOL 4.3: a custom world goes in with new-game; problems come back with paths."""
+
+    def test_open_a_custom_world_and_fix_it_after_a_content_error(self):
+        path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "content-src", "examples", "custom_world.json")
+        with open(path, encoding="utf-8") as handle:
+            world = json.load(handle)
+        broken = json.loads(json.dumps(world))
+        broken["character_templates"][1]["age_range"] = [17, 30]
+        broken["locations"][0]["exits"] = ["attic"]
+        with temp_dir() as tmp:
+            data_dir = os.path.join(tmp, "data")
+            payload = {"request_id": "req_custom_000001", "mode": "daily", "seed": 12, "custom_world": broken}
+            code, env, _raw = run_cli(["new-game"], data_dir, payload=payload, env=clean_env())
+            self.assertEqual((code, env["error"]["code"]), (10, "CONTENT_ERROR"))
+            found = {d["path"] for d in env["error"]["details"]}
+            self.assertTrue({"$.custom_world.character_templates[1].age_range", "$.custom_world.locations[0].exits[0]"} <= found, found)
+            # The model fixes the draft and sends it again, with a new request id.
+            payload = dict(payload, request_id="req_custom_000002", custom_world=world)
+            code, env, _raw = run_cli(["new-game"], data_dir, payload=payload, env=clean_env())
+            self.assertEqual(code, 0, env)
+            state, content, _revision = db_state(data_dir, env["data"]["session_id"])
+            self.assertEqual((state["world_id"], content["world"]["custom"]), ("custom_guesthouse", True))
+            code, env, _raw = run_cli(["list-worlds"], data_dir, env=clean_env())
+            self.assertNotIn("custom_guesthouse", {w["id"] for w in env["data"]["worlds"]})
+
+
 if __name__ == "__main__":
     unittest.main()

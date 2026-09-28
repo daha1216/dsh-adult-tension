@@ -32,7 +32,7 @@
 | `smoke` | dev | 可选 | 在临时数据目录用假叙述者跑一条短局 | `--seed`、`--turns` |
 | `status` | read | 必填 | 状态：brief 六行 / detail 状态+ / debug 调试 | — |
 | `undo-turn` | session_write | 必填 | 撤销上一回合（最多退到本次读档或开局） | — |
-| `verify-content` | dev | 可选 | 校验全部内容（结构、语义、时代、固定种子开局、多样性） | `--world`、`--stats`、`--skip-diversity` |
+| `verify-content` | dev | 可选 | 校验全部内容（结构、语义、时代、固定种子开局、多样性） | `--world`、`--stats`、`--skip-diversity`、`--file` |
 | `version` | read | 无 | Skill、内容、存档格式、RNG 版本 | — |
 
 ## 输入字段
@@ -265,6 +265,7 @@
 | `world` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
 | `stats` | 布尔 | 否，默认 `false` |  |
 | `skip_diversity` | 布尔 | 否，默认 `false` |  |
+| `file` | 字符串，≤400 字 或 null | 否，默认 `null` | 只校验这一个世界包文件（写作中的源文件或 new-world 骨架） |
 
 ## 错误码
 

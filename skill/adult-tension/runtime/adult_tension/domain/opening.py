@@ -289,11 +289,14 @@ class _Names:
     def given(self, gender, key):
         pool_key = {"female": "given_female", "male": "given_male"}.get(gender, "given_neutral")
         pool = sorted(self.pools[pool_key])
-        if gender in ("female", "male") and self.pools["given_neutral"] and rng.unit(self.seed, "names.neutral", key) < 0.15:
-            pool = sorted(self.pools["given_neutral"])
+        neutral = sorted(self.pools["given_neutral"])
+        if gender in ("female", "male") and neutral and rng.unit(self.seed, "names.neutral", key) < 0.15:
+            pool = neutral
         if not pool:
-            pool = sorted(self.pools["given_neutral"] or self.pools["given_female"] + self.pools["given_male"])
-        fresh = [g for g in pool if g not in self.used_given] or pool
+            pool = neutral or sorted(self.pools["given_female"] + self.pools["given_male"])
+        # A small pool (a custom world has as few as four names) runs out:
+        # an unused neutral name comes before a repeated one.
+        fresh = [g for g in pool if g not in self.used_given] or [g for g in neutral if g not in self.used_given] or pool
         given = rng.pick(self.seed, "names.given", fresh, key)
         self.used_given.add(given)
         return given
