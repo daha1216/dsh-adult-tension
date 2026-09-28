@@ -49,6 +49,9 @@ ENGINE_WORDS = ("revision", "request_id", "session_id", "expected_revision", "ne
 SNAKE_RE = re.compile(r"\b[a-z]+(?:_[a-z]+)+\b")
 QUOTE_RE = re.compile(r"“([^”]{2,})”")
 PLAYER_SPEECH_RE = re.compile(r"(?:^|[。！？\n，、])\s*你[^。！？“\n]{0,12}?(?:说|问|道|答|喊|开口|低声|笑着|回了一句|接了一句)[^“\n]{0,6}“([^”]{2,})”")
+# the line first, then who said it: “……”你的声音……, “……”你低声说
+PLAYER_SPEECH_AFTER_RE = re.compile(r"“([^”]{2,})”[，,]?\s*你(的声音|[^。！？“”\n]{0,8}?(?:说|问|道|答|喊|开口|低声))")
+NEGATIONS = ("没", "不", "未", "别")
 TIME_WORDS = {
     "凌晨": [(0, 6)],
     "清晨": [(4, 9)],
@@ -276,8 +279,10 @@ def check_ventriloquism(record):
             continue
         source = _bigrams(turn.get("input") or "")
         for line in prose_lines(turn.get("text")):
-            for match in PLAYER_SPEECH_RE.finditer(line):
-                quote = match.group(1)
+            quotes = [m.group(1) for m in PLAYER_SPEECH_RE.finditer(line)]
+            # “……”你没有回答: someone else's line
+            quotes += [m.group(1) for m in PLAYER_SPEECH_AFTER_RE.finditer(line) if not any(n in m.group(2) for n in NEGATIONS)]
+            for quote in quotes:
                 grams = _bigrams(quote)
                 if len(grams) < 4:
                     continue

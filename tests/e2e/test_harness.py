@@ -137,6 +137,13 @@ class MachineCheckTest(unittest.TestCase):
         rec = clean_record()
         rec["turns"][2]["text"] = "你说：“我今晚哪儿也不去，就在这儿陪你到天亮。”\n\n" + footer(3, 1210)
         self.assertIn(("ventriloquism", 3), names(M.check(rec)))
+        # the line first, then the player named as its speaker
+        rec["turns"][2]["text"] = "“别急着谈展位，”你的声音很稳，“先把眼下的火灭了。”\n\n" + footer(3, 1210)
+        self.assertIn(("ventriloquism", 3), names(M.check(rec)))
+        # someone else's line that the player does not answer, and someone else's line
+        for text in ("“你说今晚到底走不走？”你没有回答，只是看着她。", "“今晚忙得很，别来烦我。”她说。你点了点头。"):
+            rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
+            self.assertNotIn(("ventriloquism", 3), names(M.check(rec)), text)
 
     def test_named_people_must_be_known_to_the_engine(self):
         rec = clean_record()
