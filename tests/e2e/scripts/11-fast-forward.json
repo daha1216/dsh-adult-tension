@@ -1,0 +1,64 @@
+{
+ "id": "11",
+ "title": "快进到三天后，关掉离屏推演再快进一次",
+ "focus": "离屏片段、冻结、调用 ≤ 2",
+ "steps": [
+  {
+   "say": "开一局，要有压力的",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "我把这件事记在心里，先回去休息",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "快进到三天后",
+   "expect": {
+    "kind": "fast_forward",
+    "calls_max": 2,
+    "must_call": [
+     "commit-turn"
+    ]
+   }
+  },
+  {
+   "say": "关掉离屏推演",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "set-preferences"
+    ]
+   }
+  },
+  {
+   "say": "再快进到第二天早上",
+   "expect": {
+    "kind": "fast_forward",
+    "calls_max": 2,
+    "must_call": [
+     "commit-turn"
+    ]
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 6
+}

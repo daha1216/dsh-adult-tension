@@ -1,0 +1,68 @@
+{
+ "id": "12",
+ "title": "压力模式首次跨日；“来点转折”",
+ "focus": "转折候选、同日上限、转折落地",
+ "steps": [
+  {
+   "say": "开一局，要有压力的",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "我先把手头的事做完",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "快进到第二天早上",
+   "expect": {
+    "kind": "fast_forward",
+    "calls_max": 2,
+    "must_call": [
+     "commit-turn"
+    ]
+   }
+  },
+  {
+   "say": "就选第一个",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "来点转折",
+   "expect": {
+    "kind": "twist",
+    "calls_max": 1,
+    "must_not_call": [
+     "new-game"
+    ]
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 7
+}

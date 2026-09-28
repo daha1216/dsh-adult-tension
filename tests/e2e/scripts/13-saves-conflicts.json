@@ -1,0 +1,165 @@
+{
+ "id": "13",
+ "title": "存档、快速存档、另存为、同名覆盖、另一个对话改了同一存档、新对话里“恢复”",
+ "focus": "回执、A/B/C、恢复歧义、读档前情",
+ "steps": [
+  {
+   "say": "开一局，日常",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "我先四处看看",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "存档 第一夜",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "快速存档",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   }
+  },
+  {
+   "say": "另存为 备份",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   }
+  },
+  {
+   "say": "存档 第一夜",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   }
+  },
+  {
+   "say": "覆盖吧",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   }
+  },
+  {
+   "say": "读档 第一夜",
+   "expect": {
+    "kind": "load",
+    "calls_max": 2,
+    "must_call": [
+     "load-slot"
+    ]
+   },
+   "conversation": "B"
+  },
+  {
+   "say": "我往门外走",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   },
+   "conversation": "B"
+  },
+  {
+   "say": "存档",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   },
+   "conversation": "B"
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "快速存档",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   }
+  },
+  {
+   "say": "B",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "恢复",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 2,
+    "must_call": [
+     "list-sessions"
+    ]
+   },
+   "conversation": "C"
+  },
+  {
+   "say": "第一个",
+   "expect": {
+    "kind": "resume",
+    "calls_max": 1
+   },
+   "conversation": "C"
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   },
+   "conversation": "C"
+  }
+ ],
+ "player_turns": 17
+}

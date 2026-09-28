@@ -211,6 +211,25 @@ class CliSurfaceTest(unittest.TestCase):
             with open(log, encoding="utf-8") as handle:
                 self.assertIn(env["error"]["error_id"], handle.read())
 
+    def test_an_evaluation_trace_records_each_call_only_when_asked(self):
+        with temp_dir() as tmp:
+            data_dir = os.path.join(tmp, "data")
+            trace = os.path.join(tmp, "trace.jsonl")
+            self.assertEqual(run_cli(["doctor"], data_dir)[0], 0)
+            self.assertFalse(os.path.exists(trace))
+            env = clean_env(ADULT_TENSION_TRACE=trace, ADULT_TENSION_INCLUDE_DRAFTS="1")
+            code, opened, raw = run_cli(["new-game"], data_dir, payload={"request_id": "req_trace_01", "mode": "daily", "seed": 3}, env=env)
+            self.assertEqual(code, 0)
+            code, failed, _raw = run_cli(["commit-turn"], data_dir, payload={"request_id": "req_trace_02"}, env=env)
+            self.assertEqual(code, 10)
+            with open(trace, encoding="utf-8") as handle:
+                lines = [json.loads(line) for line in handle]
+            self.assertEqual([line["argv"][0] for line in lines], ["new-game", "commit-turn"])
+            self.assertEqual(lines[0]["input"]["seed"], 3)
+            self.assertEqual(lines[0]["envelope"], json.loads(raw.decode("utf-8")))
+            self.assertEqual((lines[1]["exit"], lines[1]["envelope"]["error"]["code"]), (10, failed["error"]["code"]))
+            self.assertTrue(all(line["ms"] >= 0 for line in lines))
+
 
 if __name__ == "__main__":
     unittest.main()

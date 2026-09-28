@@ -1,0 +1,110 @@
+{
+ "id": "14",
+ "title": "玩了几回合、没存档时说“来一局盛唐长安”；否定约束；“重开 N 号”",
+ "focus": "未存档确认、包外题材的两个选择、自定义世界、NO_MATCH 如实告知、种子复现",
+ "steps": [
+  {
+   "say": "开一局，日常",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "我四处看看",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "来一局盛唐长安",
+   "expect": {
+    "kind": "ask",
+    "calls_max": 1,
+    "must_not_call": [
+     "new-game",
+     "commit-turn"
+    ]
+   }
+  },
+  {
+   "say": "直接开局",
+   "expect": {
+    "kind": "ask",
+    "calls_max": 1,
+    "must_not_call": [
+     "new-game",
+     "commit-turn"
+    ]
+   }
+  },
+  {
+   "say": "自定义世界吧，日常就行",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 1,
+    "must_call": [
+     "new-game"
+    ],
+    "allow_reject": true
+   }
+  },
+  {
+   "say": "我在街上随便逛逛",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "不存了，直接再开一局：不要职场、不要港口、不要神怪，也不要灾难和打打杀杀，要有压力的",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [],
+    "allow_reject": true
+   }
+  },
+  {
+   "say": "那打打杀杀也行",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 1,
+    "must_call": [
+     "new-game"
+    ]
+   }
+  },
+  {
+   "say": "我先认识一下这里的人",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "不存档，重开 {seed:8} 号",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 1,
+    "must_call": [
+     "new-game"
+    ]
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 11
+}

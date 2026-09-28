@@ -1,0 +1,85 @@
+{
+ "id": "09",
+ "title": "边界、状态、冲突、暂停、换个场景、恢复",
+ "focus": "阻断与告知、暂停语义、状态六行",
+ "steps": [
+  {
+   "say": "开一局，要有压力的",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "边界：不要写到血",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "set-boundary"
+    ]
+   }
+  },
+  {
+   "say": "状态",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "status"
+    ]
+   }
+  },
+  {
+   "say": "我抄起桌上的刀冲了过去",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1,
+    "allow_reject": true
+   }
+  },
+  {
+   "say": "暂停",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "set-safety"
+    ]
+   }
+  },
+  {
+   "say": "换个场景",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 2,
+    "must_call": [
+     "set-safety"
+    ]
+   }
+  },
+  {
+   "say": "恢复",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "set-safety"
+    ]
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 8
+}

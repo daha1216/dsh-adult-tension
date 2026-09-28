@@ -1,0 +1,73 @@
+{
+ "id": "05",
+ "title": "撤销、改写、“其实我早就认识对方”、一个会被拒的追溯",
+ "focus": "撤销与改写的原子性、追溯冲突的处理",
+ "steps": [
+  {
+   "say": "开一局，日常",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "我把手里的东西递给对方",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "撤销",
+   "expect": {
+    "kind": "undo",
+    "calls_max": 1,
+    "must_call": [
+     "undo-turn"
+    ]
+   }
+  },
+  {
+   "say": "我把东西收回口袋，转身走到窗边",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "刚才不算，改成我站在原地没动，只是看着对方",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "其实我早就认识对方，我们以前在同一个地方待过好几年",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "其实我和对方从来没见过面，今天是第一次",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1,
+    "allow_reject": true
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 8
+}

@@ -1,0 +1,65 @@
+{
+ "id": "15",
+ "title": "“女性 NPC 为主”，玩家是 45 岁的女裁缝，中途改称谓、改用第三人称",
+ "focus": "配对偏好、玩家设定、称谓的因果桥、人称切换",
+ "steps": [
+  {
+   "say": "开一局，日常。我想玩一个四十五岁的女裁缝，NPC 以女性为主",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "我拿起针线，接着缝手上那件衣服",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "以后大家都叫我阿姐就行",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "改成第三人称写",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "set-preferences"
+    ]
+   }
+  },
+  {
+   "say": "我把缝好的衣服递给对方",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 7
+}

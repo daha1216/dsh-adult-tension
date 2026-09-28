@@ -1,0 +1,3225 @@
+{
+ "format": "adult-tension-e2e-record",
+ "version": 1,
+ "script": "calibration",
+ "run": "good-4",
+ "date": "2026-09-28",
+ "host": {
+  "name": "calibration",
+  "version": "hand-written",
+  "model": "none"
+ },
+ "skill": {
+  "skill_root": null,
+  "skill_version": null,
+  "content_version": "2026.10.0-dev1"
+ },
+ "turns": [
+  {
+   "index": 1,
+   "conversation": "A",
+   "input": "开一局，日常",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ]
+   },
+   "host_calls": [],
+   "runtime_calls": [
+    {
+     "argv": [
+      "doctor"
+     ],
+     "input": {},
+     "exit": 0,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "status": "warn"
+      },
+      "error": null
+     }
+    },
+    {
+     "argv": [
+      "new-game"
+     ],
+     "input": {
+      "request_id": "r1",
+      "mode": "daily"
+     },
+     "exit": 0,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "session_id": "s_good-4",
+       "revision": 1,
+       "turn": 1,
+       "seed": 404,
+       "opening": {
+        "footer": "【时间】第一天 酉时（18:30）｜【地点】灯会长街｜回合：1｜种子：404",
+        "player": {
+         "name": "柳清欢",
+         "role": "灯铺的帮工",
+         "age": 24
+        },
+        "npcs": [
+         {
+          "name": "苏夜阑",
+          "role": "客栈的掌柜",
+          "age": 36
+         }
+        ]
+       },
+       "context": {
+        "depth": "full",
+        "turn": 1,
+        "revision": 1,
+        "clock": {
+         "day": 1,
+         "minute": 1110,
+         "label": "第一天 酉时（18:30）"
+        },
+        "scene": {
+         "id": "sc1",
+         "location": "灯会长街",
+         "present": [
+          "player",
+          "fox_innkeeper"
+         ]
+        },
+        "player": {
+         "name": "柳清欢"
+        },
+        "present_npcs": [
+         {
+          "id": "fox_innkeeper",
+          "name": "苏夜阑"
+         }
+        ]
+       }
+      },
+      "error": null
+     }
+    }
+   ],
+   "text": "世界观：灯会七夜，人与非人共用一条长街；每户门前的灯不能灭，叫错一个名字就是大事。\n人物：你是二十四岁的灯铺帮工柳清欢；苏夜阑是客栈的掌柜，看上去三十六七，镇上的老人说这张脸几十年没变过。\n\n长街两头同时点起了灯。你手里那盏怎么也点不着，火柴划到第三根，苏夜阑从客栈门口走过来，把自己手里的灯递给你，说你那盏快灭了，换着提。\n\n【时间】第一天 酉时（18:30）｜【地点】灯会长街｜回合：1｜种子：404"
+  },
+  {
+   "index": 2,
+   "conversation": "A",
+   "input": "我接过灯，说：“谢谢掌柜。回礼我三夜之内送到。”",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   },
+   "host_calls": [],
+   "runtime_calls": [
+    {
+     "argv": [
+      "commit-turn"
+     ],
+     "input": {
+      "action_mode": "result",
+      "player_input": "我接过灯，说：“谢谢掌柜。回礼我三夜之内送到。”",
+      "operations": [
+       {
+        "op": "npc_response",
+        "npc_id": "fox_innkeeper",
+        "response": "genuine"
+       }
+      ]
+     },
+     "exit": 0,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "turn": 2,
+       "revision": 2,
+       "applied": [
+        {
+         "op": "npc_response",
+         "npc_id": "fox_innkeeper",
+         "response": "genuine"
+        }
+       ],
+       "context": {
+        "depth": "brief",
+        "turn": 2,
+        "revision": 2,
+        "clock": {
+         "day": 1,
+         "minute": 1115,
+         "label": "第一天 酉时（18:35）"
+        },
+        "scene": {
+         "id": "sc1",
+         "location": "灯会长街",
+         "present": [
+          "player",
+          "fox_innkeeper"
+         ]
+        },
+        "player": {
+         "name": "柳清欢"
+        },
+        "present_npcs": [
+         {
+          "id": "fox_innkeeper",
+          "name": "苏夜阑"
+         }
+        ]
+       }
+      },
+      "error": null
+     }
+    }
+   ],
+   "text": "你接过灯，说：“谢谢掌柜。回礼我三夜之内送到。”\n\n苏夜阑笑起来，眼睛先弯。“记得规矩的人不多了。”灯影里，他身后好像有什么轻轻摆了一下，又不见了。“回礼不用贵，别比这盏灯便宜就行。”\n\n【时间】第一天 酉时（18:35）｜【地点】灯会长街｜回合：2"
+  },
+  {
+   "index": 3,
+   "conversation": "A",
+   "input": "存档 头一夜",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   },
+   "host_calls": [],
+   "runtime_calls": [
+    {
+     "argv": [
+      "save-slot"
+     ],
+     "input": {},
+     "exit": 0,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "receipt": "已保存到「头一夜」·第 2 回合",
+       "revision": 2,
+       "turn": 2
+      },
+      "error": null
+     }
+    }
+   ],
+   "text": "已保存到「头一夜」·第 2 回合"
+  },
+  {
+   "index": 4,
+   "conversation": "A",
+   "input": "我提着灯往灯铺走",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   },
+   "host_calls": [],
+   "runtime_calls": [
+    {
+     "argv": [
+      "commit-turn"
+     ],
+     "input": {
+      "action_mode": "result",
+      "player_input": "我提着灯往灯铺走",
+      "operations": [
+       {
+        "op": "move",
+        "to": "lantern_shop"
+       }
+      ]
+     },
+     "exit": 0,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "turn": 3,
+       "revision": 3,
+       "applied": [
+        {
+         "op": "move",
+         "to": "lantern_shop"
+        }
+       ],
+       "context": {
+        "depth": "brief",
+        "turn": 3,
+        "revision": 3,
+        "clock": {
+         "day": 1,
+         "minute": 1125,
+         "label": "第一天 酉时（18:45）"
+        },
+        "scene": {
+         "id": "sc1",
+         "location": "灯铺后院",
+         "present": [
+          "player",
+          "fox_innkeeper"
+         ]
+        },
+        "player": {
+         "name": "柳清欢"
+        },
+        "present_npcs": [
+         {
+          "id": "fox_innkeeper",
+          "name": "苏夜阑"
+         }
+        ]
+       }
+      },
+      "error": null
+     }
+    }
+   ],
+   "text": "你提着那盏灯往回走。灯铺后院挂着一排没糊完的灯骨，风一吹，像一排空着的笼子。院墙外有东西在学你走路的声音，你停，它也停。\n\n【时间】第一天 酉时（18:45）｜【地点】灯铺后院｜回合：3"
+  },
+  {
+   "index": 5,
+   "conversation": "A",
+   "input": "读档 头一夜",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "load-slot"
+    ]
+   },
+   "host_calls": [],
+   "runtime_calls": [
+    {
+     "argv": [
+      "load-slot"
+     ],
+     "input": {},
+     "exit": 0,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "receipt": "已读取「头一夜」·第 2 回合",
+       "revision": 3,
+       "turn": 3,
+       "context": {
+        "turn": 2,
+        "clock": {
+         "day": 1,
+         "minute": 1115,
+         "label": "第一天 酉时（18:35）"
+        },
+        "scene": {
+         "id": "sc1",
+         "location": "灯会长街"
+        }
+       }
+      },
+      "error": null
+     }
+    }
+   ],
+   "text": "已读取「头一夜」·第 2 回合\n\n灯会头一夜，你那盏灯点不着，苏夜阑把自己的灯换给了你，你答应三夜之内送回礼。他笑着说回礼别比这盏灯便宜——话音刚落，灯影里有什么在他身后摆了一下。\n\n你还站在客栈门口，灯在你手里，他还没转身。"
+  },
+  {
+   "index": 6,
+   "conversation": "A",
+   "input": "我问他：“掌柜身后刚才是什么？”",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   },
+   "host_calls": [],
+   "runtime_calls": [
+    {
+     "argv": [
+      "commit-turn"
+     ],
+     "input": {
+      "action_mode": "attempt",
+      "player_input": "我问他：“掌柜身后刚才是什么？”",
+      "operations": [
+       {
+        "op": "npc_response",
+        "npc_id": "fox_innkeeper",
+        "response": "refuse"
+       }
+      ]
+     },
+     "exit": 0,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "turn": 4,
+       "revision": 4,
+       "applied": [
+        {
+         "op": "npc_response",
+         "npc_id": "fox_innkeeper",
+         "response": "refuse"
+        }
+       ],
+       "context": {
+        "depth": "brief",
+        "turn": 4,
+        "revision": 4,
+        "clock": {
+         "day": 1,
+         "minute": 1120,
+         "label": "第一天 酉时（18:40）"
+        },
+        "scene": {
+         "id": "sc1",
+         "location": "灯会长街",
+         "present": [
+          "player",
+          "fox_innkeeper"
+         ]
+        },
+        "player": {
+         "name": "柳清欢"
+        },
+        "present_npcs": [
+         {
+          "id": "fox_innkeeper",
+          "name": "苏夜阑"
+         }
+        ]
+       }
+      },
+      "error": null
+     }
+    }
+   ],
+   "text": "苏夜阑没有回头。“灯会期间，别问别人身后有什么。”他语气还是温和的，“这是镇上的规矩，不是我的。”\n\n他转身回了客栈，门口那盏灯是整条长街最亮的一盏。\n\n【时间】第一天 酉时（18:40）｜【地点】灯会长街｜回合：4"
+  }
+ ],
+ "harness_events": [],
+ "final_export": {
+  "format": "adult-tension-save",
+  "session": {
+   "content": {
+    "world": {
+     "background_cast": [
+      {
+       "adult_context": "在长街摆了几十年糖画摊的手艺人",
+       "age_range": [
+        40,
+        65
+       ],
+       "function": "rumor_source",
+       "gender": "any",
+       "id": "bg_candy_painter",
+       "line": "{npc.name}在长街上画糖画，画的全是镇上的人，谁跟谁走得近，糖画上都看得出来",
+       "location_ids": [
+        "long_street"
+       ],
+       "name": null,
+       "role": "画糖画的"
+      },
+      {
+       "adult_context": "在早市卖了半辈子草药的摊主",
+       "age_range": [
+        35,
+        65
+       ],
+       "function": "witness",
+       "gender": "any",
+       "id": "bg_herb_seller",
+       "line": "{npc.name}天不亮就在长街上摆摊，昨夜谁从槐树巷出来，都看在眼里",
+       "location_ids": [
+        "long_street"
+       ],
+       "name": null,
+       "role": "早市卖草药的"
+      },
+      {
+       "adult_context": "在祠堂管了多年香火的老人",
+       "age_range": [
+        50,
+        75
+       ],
+       "function": "helper",
+       "gender": "any",
+       "id": "bg_incense_keeper",
+       "line": "{npc.name}管着祠堂的香火，谁半夜来上香，{npc.ta}都会多点一炷",
+       "location_ids": [
+        "ancestral_shrine"
+       ],
+       "name": null,
+       "role": "管香火的"
+      },
+      {
+       "adult_context": "在河湾撑了一辈子船的老艄公",
+       "age_range": [
+        55,
+        80
+       ],
+       "function": "messenger",
+       "gender": "any",
+       "id": "bg_old_boatman",
+       "line": "{npc.name}撑了一辈子船，替两岸的人和非人捎口信，只收一枚铜钱",
+       "location_ids": [
+        "riverside_ferry",
+        "third_bridge"
+       ],
+       "name": null,
+       "role": "老艄公"
+      },
+      {
+       "adult_context": "客栈雇的成年伙计",
+       "age_range": [
+        22,
+        45
+       ],
+       "function": "rumor_source",
+       "gender": "any",
+       "id": "bg_inn_waiter",
+       "line": "{npc.name}在客栈跑堂，哪间客房夜里没点灯，第二天全镇都知道",
+       "location_ids": [
+        "inn_courtyard"
+       ],
+       "name": null,
+       "role": "客栈的伙计"
+      },
+      {
+       "adult_context": "替长老会做了二十年文书的读书人",
+       "age_range": [
+        40,
+        70
+       ],
+       "function": "obstacle",
+       "gender": "any",
+       "id": "bg_elder_clerk",
+       "line": "{npc.name}替长老会誊写裁决，一个字都不肯改，谁来求情都没用",
+       "location_ids": [
+        "ancestral_shrine"
+       ],
+       "name": null,
+       "role": "长老会的文书"
+      },
+      {
+       "adult_context": "守了竹林上百年的精怪，化作成年人的模样，心智成熟",
+       "age_range": [
+        35,
+        60
+       ],
+       "function": "obstacle",
+       "gender": "any",
+       "id": "bg_grove_warden",
+       "line": "{npc.name}守着竹林的入口，谁要进去，得先回答一个问题",
+       "location_ids": [
+        "bamboo_grove"
+       ],
+       "name": null,
+       "role": "守竹林的精怪"
+      }
+     ],
+     "cast_combos": [
+      {
+       "chemistry": "{lamp_master.name}是你的东家，一盏灯钱也不肯让；拿走那盏灯没付账的客人住在{fox_innkeeper.name}的客栈里，{fox_innkeeper.name}却说那间客房一直空着。",
+       "id": "combo_lamp_debt",
+       "identity_ids": [
+        "lamp_maker_hand"
+       ],
+       "player_positions": [
+        "low"
+       ],
+       "power_structure": "npc_high",
+       "relations": [
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 1
+         },
+         "b": "lamp_master",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 0
+         },
+         "reason": "{lamp_master.name}教过你扎灯骨，也扣过你三个月的工钱",
+         "stage": "acquainted"
+        },
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 2,
+          "trust": 0
+         },
+         "b": "fox_innkeeper",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "你只在客栈门口远远见过{fox_innkeeper.name}，{fox_innkeeper.ta}却叫得出你的街名",
+         "stage": "stranger"
+        },
+        {
+         "a": "lamp_master",
+         "a_to_b": {
+          "tension": 2,
+          "trust": 0
+         },
+         "b": "fox_innkeeper",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "灯铺每年给客栈送灯，{lamp_master.name}从不进客栈的门",
+         "stage": "acquainted"
+        }
+       ],
+       "slots": [
+        "lamp_master",
+        "fox_innkeeper"
+       ],
+       "stakes": {
+        "irreplaceable_goal": "你想在灯会结束前把那盏灯追回来，洗清自己",
+        "limit_gap": "你还不上那盏灯钱就得白干一个月，{fox_innkeeper.name}七夜之后就要回山",
+        "meeting_reason": "灯会七夜，灯铺和客栈的生意谁也离不开谁",
+        "resource_gap": "{lamp_master.name}有全镇的灯簿，{fox_innkeeper.name}有一整条长街的人情账，你只有一双扎灯的手"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "tension_engine_ids": [
+        "te_owed_return_gift",
+        "te_seven_nights"
+       ]
+      },
+      {
+       "chemistry": "{river_spirit.name}常在渡口等船，从不说要去哪；{shrine_keeper.name}的后堂里锁着一份契约，契约上写着你的街名。",
+       "id": "combo_ferry_contract",
+       "identity_ids": [],
+       "player_positions": [
+        "low",
+        "equal"
+       ],
+       "power_structure": "npc_high",
+       "relations": [
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 2,
+          "trust": 0
+         },
+         "b": "river_spirit",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "{river_spirit.name}卖给你的鱼，总比卖给别人的多一条",
+         "stage": "acquainted"
+        },
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 0,
+          "trust": 1
+         },
+         "b": "shrine_keeper",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 0
+         },
+         "reason": "你每月初一来上香，{shrine_keeper.name}从不多看你一眼",
+         "stage": "acquainted"
+        },
+        {
+         "a": "river_spirit",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 1
+         },
+         "b": "shrine_keeper",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "河湾每年的供奉，都经{shrine_keeper.name}的手",
+         "stage": "familiar"
+        }
+       ],
+       "slots": [
+        "river_spirit",
+        "shrine_keeper"
+       ],
+       "stakes": {
+        "irreplaceable_goal": "你想在第七夜之前看一眼那份契约",
+        "limit_gap": "你不能在第三座桥上回头，{shrine_keeper.name}不能替任何一方说话",
+        "meeting_reason": "那份契约的到期日，就在灯会的第七夜",
+        "resource_gap": "{river_spirit.name}管得了河湾里的船，{shrine_keeper.name}管得了后堂的契约，你连那份契约写了什么都不知道"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "tension_engine_ids": [
+        "te_one_contract",
+        "te_forbidden_road"
+       ]
+      },
+      {
+       "chemistry": "{mountain_guest.name}从后山下来看灯，每晚都在{lamp_master.name}的灯铺前站到打烊；你是唯一知道{mountain_guest.ta}不是人的那个人。",
+       "id": "combo_lantern_pair",
+       "identity_ids": [],
+       "player_positions": [
+        "equal"
+       ],
+       "power_structure": "equal",
+       "relations": [
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 1
+         },
+         "b": "mountain_guest",
+         "b_to_a": {
+          "tension": 2,
+          "trust": 1
+         },
+         "reason": "{mountain_guest.name}头一夜进镇，是你给指的路",
+         "stage": "acquainted"
+        },
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 0,
+          "trust": 1
+         },
+         "b": "lamp_master",
+         "b_to_a": {
+          "tension": 0,
+          "trust": 1
+         },
+         "reason": "{lamp_master.name}替你修过一盏灯，没收钱",
+         "stage": "acquainted"
+        },
+        {
+         "a": "mountain_guest",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 0
+         },
+         "b": "lamp_master",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 0
+         },
+         "reason": "{mountain_guest.name}每晚都来看灯，{lamp_master.name}每晚都装作没看见",
+         "stage": "stranger"
+        }
+       ],
+       "slots": [
+        "mountain_guest",
+        "lamp_master"
+       ],
+       "stakes": {
+        "irreplaceable_goal": "你想让这七夜里谁都不必说破",
+        "limit_gap": "{mountain_guest.name}七夜之后就得回山，{lamp_master.name}离不开灯铺",
+        "meeting_reason": "你们三个守着同一盏挂在灯铺门口的灯",
+        "resource_gap": "{mountain_guest.name}有后山的路，{lamp_master.name}有全镇的灯，你有一个没说出口的秘密"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "tension_engine_ids": [
+        "te_seven_nights",
+        "te_same_lantern"
+       ]
+      },
+      {
+       "chemistry": "{contract_broker.name}替镇上一半的人牵过契，{night_watchman.name}每夜打更都要从{contract_broker.name}门前过三回；两个人都说，这事和你无关。",
+       "id": "combo_broker_table",
+       "identity_ids": [],
+       "player_positions": [
+        "low",
+        "equal"
+       ],
+       "power_structure": "equal",
+       "relations": [
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 1
+         },
+         "b": "contract_broker",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "{contract_broker.name}替你写过一份租约，没多收一文",
+         "stage": "acquainted"
+        },
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 0,
+          "trust": 1
+         },
+         "b": "night_watchman",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "{night_watchman.name}送你回过两回家，每回都走在灯照不到的那一边",
+         "stage": "acquainted"
+        },
+        {
+         "a": "contract_broker",
+         "a_to_b": {
+          "tension": 2,
+          "trust": 0
+         },
+         "b": "night_watchman",
+         "b_to_a": {
+          "tension": 2,
+          "trust": 1
+         },
+         "reason": "两个人认识二十年，谁也不肯先提那一夜的事",
+         "stage": "familiar"
+        }
+       ],
+       "slots": [
+        "contract_broker",
+        "night_watchman"
+       ],
+       "stakes": {
+        "irreplaceable_goal": "你想弄清槐树巷里那个人，和那纸契约有没有关系",
+        "limit_gap": "{contract_broker.name}的契约要守祠人盖印才作数，{night_watchman.name}不能漏打一更",
+        "meeting_reason": "灯会七夜，三个人每夜都在同一个巷口碰面",
+        "resource_gap": "{contract_broker.name}手里有一匣子契纸，{night_watchman.name}知道每一条夜路，你知道他们两个在瞒什么"
+       },
+       "tags": [],
+       "tension_engine_ids": [
+        "te_one_contract",
+        "te_forbidden_road"
+       ]
+      },
+      {
+       "chemistry": "长老病着，祠堂的钥匙在你手里；{shrine_keeper.name}等你一句话决定开不开后堂的柜子，{contract_broker.name}想借你的名头促成一纸大契。",
+       "id": "combo_elder_seat",
+       "identity_ids": [
+        "elder_heir"
+       ],
+       "player_positions": [
+        "high"
+       ],
+       "power_structure": "player_high",
+       "relations": [
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 0,
+          "trust": 1
+         },
+         "b": "shrine_keeper",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 2
+         },
+         "reason": "{shrine_keeper.name}替长老守了二十年祠堂，如今要听你的",
+         "stage": "familiar"
+        },
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 0
+         },
+         "b": "contract_broker",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "{contract_broker.name}在长老的病床前等过你三回",
+         "stage": "acquainted"
+        },
+        {
+         "a": "shrine_keeper",
+         "a_to_b": {
+          "tension": 2,
+          "trust": 0
+         },
+         "b": "contract_broker",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "{contract_broker.name}的每一纸契都要{shrine_keeper.name}盖印，两个人从不多说一句",
+         "stage": "acquainted"
+        }
+       ],
+       "slots": [
+        "shrine_keeper",
+        "contract_broker"
+       ],
+       "stakes": {
+        "irreplaceable_goal": "你想在灯会结束前，找到长老那份契约的另一方",
+        "limit_gap": "你的每一个决定都会被长老会记下，{shrine_keeper.name}不能替任何一方说话",
+        "meeting_reason": "长老病倒之后，祠堂里的事都要经你的手",
+        "resource_gap": "你有钥匙和长老会的座位，{shrine_keeper.name}只能守规矩，{contract_broker.name}只能等你点头"
+       },
+       "tags": [],
+       "tension_engine_ids": [
+        "te_elder_seat",
+        "te_one_contract"
+       ]
+      },
+      {
+       "chemistry": "你巡街的时候，{fox_innkeeper.name}客栈门前的灯总是最亮的一盏，{night_watchman.name}却说那盏灯半夜会自己灭一回；灭没灭，由你来记。",
+       "id": "combo_warden_round",
+       "identity_ids": [
+        "lantern_warden"
+       ],
+       "player_positions": [
+        "high"
+       ],
+       "power_structure": "player_high",
+       "relations": [
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 2,
+          "trust": 0
+         },
+         "b": "fox_innkeeper",
+         "b_to_a": {
+          "tension": 2,
+          "trust": 1
+         },
+         "reason": "{fox_innkeeper.name}每夜都在门口等你，说一句巡官辛苦",
+         "stage": "acquainted"
+        },
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 0,
+          "trust": 1
+         },
+         "b": "night_watchman",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "{night_watchman.name}给你报了三年的更，从没报错过",
+         "stage": "familiar"
+        },
+        {
+         "a": "fox_innkeeper",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 1
+         },
+         "b": "night_watchman",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 0
+         },
+         "reason": "{night_watchman.name}从不在客栈门前多停，{fox_innkeeper.name}却每夜都留着一碗热汤",
+         "stage": "acquainted"
+        }
+       ],
+       "slots": [
+        "fox_innkeeper",
+        "night_watchman"
+       ],
+       "stakes": {
+        "irreplaceable_goal": "你想弄清去年那盏灭在你手里的灯，到底是怎么灭的",
+        "limit_gap": "你记错一盏灯就要担责，{fox_innkeeper.name}七夜之内不能露形",
+        "meeting_reason": "巡灯官每夜都要经过客栈，打更的每夜都要向你报一回",
+        "resource_gap": "你有能开任何门的铜牌，{fox_innkeeper.name}有长街的人情，{night_watchman.name}有每一条夜路"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "tension_engine_ids": [
+        "te_same_lantern",
+        "te_seven_nights"
+       ]
+      },
+      {
+       "chemistry": "{fox_innkeeper.name}和{river_spirit.name}都知道你的真名，你也知道{fox_innkeeper.name}的；三个人谁先叫出口，谁就先输。",
+       "id": "combo_true_names",
+       "identity_ids": [],
+       "player_positions": [
+        "low",
+        "equal",
+        "high"
+       ],
+       "power_structure": "switchable",
+       "relations": [
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 2,
+          "trust": 0
+         },
+         "b": "fox_innkeeper",
+         "b_to_a": {
+          "tension": 2,
+          "trust": 1
+         },
+         "reason": "{fox_innkeeper.name}从不叫你的真名，却总在你身后停一下",
+         "stage": "acquainted"
+        },
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 1
+         },
+         "b": "river_spirit",
+         "b_to_a": {
+          "tension": 2,
+          "trust": 1
+         },
+         "reason": "你第一次夜渡时，是{river_spirit.name}让起了雾的河面散开的",
+         "stage": "acquainted"
+        },
+        {
+         "a": "fox_innkeeper",
+         "a_to_b": {
+          "tension": 2,
+          "trust": 1
+         },
+         "b": "river_spirit",
+         "b_to_a": {
+          "tension": 2,
+          "trust": 0
+         },
+         "reason": "一只狐和一个水族，在这条河湾上做了三百年的邻居",
+         "stage": "familiar"
+        }
+       ],
+       "slots": [
+        "fox_innkeeper",
+        "river_spirit"
+       ],
+       "stakes": {
+        "irreplaceable_goal": "你想在灯会结束前，把自己的真名要回来",
+        "limit_gap": "你叫错一个名字就是大事，两个非人七夜之后都得回去",
+        "meeting_reason": "灯会头一夜，三个人在渡口撞在了一起",
+        "resource_gap": "两个非人各握着你的一个名字，你只握着一个"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "tension_engine_ids": [
+        "te_true_name_known",
+        "te_owed_return_gift"
+       ]
+      },
+      {
+       "chemistry": "{mountain_guest.name}在竹林里等一个没来的人，{shrine_keeper.name}知道那人为什么没来，{night_watchman.name}那一夜在竹林外看见了你。",
+       "id": "combo_grove_three",
+       "identity_ids": [],
+       "player_positions": [
+        "low",
+        "equal",
+        "high"
+       ],
+       "power_structure": "switchable",
+       "relations": [
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 0
+         },
+         "b": "mountain_guest",
+         "b_to_a": {
+          "tension": 2,
+          "trust": 0
+         },
+         "reason": "你在竹林里撞见{mountain_guest.name}，{mountain_guest.ta}以为你就是要等的人",
+         "stage": "stranger"
+        },
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 0,
+          "trust": 1
+         },
+         "b": "shrine_keeper",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "{shrine_keeper.name}替你收过一份回礼，没问是谁送的",
+         "stage": "acquainted"
+        },
+        {
+         "a": "player",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 1
+         },
+         "b": "night_watchman",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "那一夜{night_watchman.name}什么都没问，只把灯笼借给了你",
+         "stage": "acquainted"
+        },
+        {
+         "a": "mountain_guest",
+         "a_to_b": {
+          "tension": 2,
+          "trust": 0
+         },
+         "b": "shrine_keeper",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "两百年前那份契约，是{shrine_keeper.name}的前任收进柜子的",
+         "stage": "acquainted"
+        },
+        {
+         "a": "mountain_guest",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 0
+         },
+         "b": "night_watchman",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 0
+         },
+         "reason": "{night_watchman.name}每夜都看见竹林里有个人影，从没走近过",
+         "stage": "stranger"
+        },
+        {
+         "a": "shrine_keeper",
+         "a_to_b": {
+          "tension": 1,
+          "trust": 1
+         },
+         "b": "night_watchman",
+         "b_to_a": {
+          "tension": 1,
+          "trust": 1
+         },
+         "reason": "{night_watchman.name}每夜打完三更，都去祠堂喝一碗茶",
+         "stage": "familiar"
+        }
+       ],
+       "slots": [
+        "mountain_guest",
+        "shrine_keeper",
+        "night_watchman"
+       ],
+       "stakes": {
+        "irreplaceable_goal": "你想在第七夜之前，替那个没来的人把话带到",
+        "limit_gap": "{shrine_keeper.name}离不开祠堂，{night_watchman.name}不能漏打一更，{mountain_guest.name}七夜后就得回山",
+        "meeting_reason": "灯会头一夜，四个人先后走进了同一片竹林",
+        "resource_gap": "三个人各知道那一夜的一段，你知道把三段连起来的那一句"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "tension_engine_ids": [
+        "te_forbidden_road",
+        "te_one_contract"
+       ]
+      }
+     ],
+     "channels": [
+      {
+       "fidelity": "exact",
+       "id": "ch_lantern_words",
+       "reach": "灯一挂出去，整条长街都看得见",
+       "text": "灯上写的字"
+      },
+      {
+       "fidelity": "exact",
+       "id": "ch_shrine_notice",
+       "reach": "第二天一早，全镇的人和非人",
+       "text": "祠堂门口的告示"
+      },
+      {
+       "fidelity": "distorted",
+       "id": "ch_candy_talk",
+       "reach": "一个晚上就传遍长街",
+       "text": "糖画摊前的闲话"
+      },
+      {
+       "fidelity": "distorted",
+       "id": "ch_river_word",
+       "reach": "顺水而下，第二天就到下游的每个渡口",
+       "text": "河上的口信"
+      }
+     ],
+     "character_templates": [
+      {
+       "adult_context": "修行四百年的狐，化成成年人的模样经营客栈，心智老成",
+       "age_range": [
+        30,
+        45
+       ],
+       "appearance_options": [
+        "眼角微微上挑，笑起来眼睛先弯，灯影里偶尔能看见身后有什么在动",
+        "一身旧青布衫，手指细长，拨算盘从不看珠子"
+       ],
+       "decision": {
+        "avoids": [
+         "被人看见影子"
+        ],
+        "contrast": "最会算账的，偏偏把最大的一笔账记在心里不肯算",
+        "core_value": "账要算清，情可以欠",
+        "goal_options": [
+         "撑过这次灯会不露形",
+         "还上那份欠了两代的回礼",
+         "弄清是谁在打听自己的真名"
+        ],
+        "never": [
+         "违背亲口许下的约"
+        ],
+        "prefers": [
+         "把事情放在人情里办"
+        ],
+        "pressure_responses": {
+         "breaking": "现出原形，连夜回山",
+         "high": "当着你的面报出你的真名",
+         "low": "笑着换个话题，替你续茶",
+         "mid": "拿人情账压人"
+        },
+        "relationship_stance": "对谁都亲切，对谁都留着一手",
+        "withdrawal": "把自己关在上房里，门缝底下透出一点青光"
+       },
+       "gender": "any",
+       "gender_reason": null,
+       "id": "fox_innkeeper",
+       "identity": {
+        "authority": "决定哪位客人住哪间房、哪间房的灯夜里可以不点",
+        "exposure": "客栈的账本上记着好几个早就不在人世的客人",
+        "hidden": "欠着镇上一户人家一份两代都没还上的回礼",
+        "limits": [
+         "灯会七夜一过，就得回山里住一个月",
+         "不能拒绝任何报出真名的客人"
+        ],
+        "obligations": [
+         "每年替镇上的非人付一份供奉"
+        ],
+        "resources": [
+         "整条长街的人情账",
+         "一间谁也没见过里面的上房"
+        ]
+       },
+       "intimacy_tendency": {
+        "attraction_sources": [
+         "对方知道{npc.ta}不是人，还肯坐下来喝茶",
+         "对方记得回礼"
+        ],
+        "boundaries": [
+         "不在客栈的上房里"
+        ],
+        "desire_range": [
+         2,
+         4
+        ],
+        "desired_position": "看上去是{npc.ta}在逗对方，其实一直在等对方先开口",
+        "dislikes": [
+         "被当成传说里的妖精"
+        ],
+        "expression": "在对方的茶里放一片只有后山才有的叶子",
+        "likes": [
+         "灯会最后一夜"
+        ],
+        "preconditions": [
+         "对方先把自己的街名告诉{npc.ta}"
+        ],
+        "self_control_range": [
+         2,
+         4
+        ]
+       },
+       "public_role": "客栈的掌柜",
+       "schedule": [
+        {
+         "from": 360,
+         "location_id": "inn_courtyard",
+         "to": 1380
+        },
+        {
+         "from": 1381,
+         "location_id": "long_street",
+         "to": 1439
+        },
+        {
+         "from": 0,
+         "location_id": "inn_courtyard",
+         "to": 359
+        }
+       ],
+       "situation": {
+        "exits": [
+         {
+          "cost": "要在灯会期间离开客栈，容易露形",
+          "option": "抢先找到那个人"
+         },
+         {
+          "cost": "欠守祠人一个大人情",
+          "option": "托人去祠堂把契约调出来"
+         }
+        ],
+        "pressure": "打听的人手里拿着一份写有{npc.ta}真名的旧契约",
+        "trigger": "有人在长街上打听一只四百年的狐"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "voices": {
+        "inner": "“你的真名我早就知道了，只是舍不得叫。”",
+        "surface": "“客官住几夜？灯会期间，房钱另算。”"
+       }
+      },
+      {
+       "adult_context": "守了二十年祠堂的成年守祠人，后堂的契约都归这一位保管",
+       "age_range": [
+        35,
+        60
+       ],
+       "appearance_options": [
+        "袖口总沾着香灰，腰间的钥匙串比腰带还沉",
+        "眉眼很淡，开口之前先低头看一眼香炉"
+       ],
+       "decision": {
+        "avoids": [
+         "替人作保"
+        ],
+        "contrast": "替全镇守着别人的契约，自己的那一份却一眼都不敢看",
+        "core_value": "契约比人可靠",
+        "goal_options": [
+         "让七夜的香火一夜不断",
+         "把自己那份契约悄悄解了",
+         "查清是谁动过后堂的柜子"
+        ],
+        "never": [
+         "把契约给不相干的人看"
+        ],
+        "prefers": [
+         "白纸黑字"
+        ],
+        "pressure_responses": {
+         "breaking": "烧掉自己那份契约，离开祠堂",
+         "high": "当众打开柜子，把契约摊在桌上",
+         "low": "低头上香，只说规矩如此",
+         "mid": "搬出长老会"
+        },
+        "relationship_stance": "对人和非人一样客气，也一样疏远",
+        "withdrawal": "跪在牌位前整夜不起"
+       },
+       "gender": "any",
+       "gender_reason": null,
+       "id": "shrine_keeper",
+       "identity": {
+        "authority": "决定哪份契约从柜子里拿出来、谁能进后堂",
+        "exposure": "私下改过一份契约的到期日",
+        "hidden": "自己也和非人结过一纸契，契约就锁在柜子最底层",
+        "limits": [
+         "离开祠堂不能超过一夜",
+         "不能替任何一方说话"
+        ],
+        "obligations": [
+         "灯会七夜香火不能断"
+        ],
+        "resources": [
+         "后堂所有契约的钥匙",
+         "长老会六位长老的脾气"
+        ]
+       },
+       "intimacy_tendency": {
+        "attraction_sources": [
+         "对方不打听后堂的事",
+         "对方陪{npc.ta}守过一夜香火"
+        ],
+        "boundaries": [
+         "不在祠堂里"
+        ],
+        "desire_range": [
+         1,
+         3
+        ],
+        "desired_position": "慢，一步一步，像续香",
+        "dislikes": [
+         "被人求着开柜子"
+        ],
+        "expression": "替对方在牌位前多上一炷香，不说为谁",
+        "likes": [
+         "香灰落下来的声音"
+        ],
+        "preconditions": [
+         "香已经续上，不会断"
+        ],
+        "self_control_range": [
+         4,
+         5
+        ]
+       },
+       "public_role": "祠堂的守祠人",
+       "schedule": [
+        {
+         "from": 360,
+         "location_id": "ancestral_shrine",
+         "to": 1320
+        },
+        {
+         "from": 1321,
+         "location_id": "bamboo_grove",
+         "to": 1439
+        },
+        {
+         "from": 0,
+         "location_id": "ancestral_shrine",
+         "to": 359
+        }
+       ],
+       "situation": {
+        "exits": [
+         {
+          "cost": "管不住柜子的守祠人，要被换掉",
+          "option": "报给长老会"
+         },
+         {
+          "cost": "离开祠堂一夜，香火就可能断",
+          "option": "自己去找"
+         }
+        ],
+        "pressure": "少的那份契约，明晚就到期",
+        "trigger": "后堂的柜子夜里被人打开过，少了一份契约"
+       },
+       "tags": [],
+       "voices": {
+        "inner": "“你要是开口，我会替你开这扇门。”",
+        "surface": "“按规矩，外人不进后堂。”"
+       }
+      },
+      {
+       "adult_context": "住在河湾里三百年的水族，化成成年人的模样在渡口卖鱼，心智成熟",
+       "age_range": [
+        28,
+        42
+       ],
+       "appearance_options": [
+        "头发总是半湿的，身上带着一股河水的凉气",
+        "手指之间有一层很薄的膜，只有在灯下才看得见"
+       ],
+       "decision": {
+        "avoids": [
+         "离水太远"
+        ],
+        "contrast": "看着最冷的一个，却每晚把卖剩的鱼放回河里",
+        "core_value": "河有河的规矩，水不会回头",
+        "goal_options": [
+         "收齐今年的供奉",
+         "把藏在河底的人送回岸上",
+         "弄清是谁在第三座桥上回了头"
+        ],
+        "never": [
+         "对撑船的人说谎"
+        ],
+        "prefers": [
+         "在水边说话"
+        ],
+        "pressure_responses": {
+         "breaking": "沉进河里，七夜不上岸",
+         "high": "让渡口起雾，谁也走不了",
+         "low": "低头收拾鱼篓，只说河上的事",
+         "mid": "说河湾要一样东西做交换"
+        },
+        "relationship_stance": "对撑船的人好，对岸上的人冷淡",
+        "withdrawal": "整夜坐在船头，脚垂在水里"
+       },
+       "gender": "any",
+       "gender_reason": null,
+       "id": "river_spirit",
+       "identity": {
+        "authority": "决定河湾里哪条船能过、哪条船会迷路",
+        "exposure": "去年有一条船在第三座桥下沉了，{npc.ta}当时就在桥下",
+        "hidden": "那条船上的人没有死，被{npc.ta}藏在了河底",
+        "limits": [
+         "离开水超过一夜就会发烧",
+         "不能对撑船的人说谎"
+        ],
+        "obligations": [
+         "每年灯会替河湾收一样供奉"
+        ],
+        "resources": [
+         "河底下所有沉下去的东西",
+         "每一个渡口的口信"
+        ]
+       },
+       "intimacy_tendency": {
+        "attraction_sources": [
+         "对方的手比{npc.ta}还凉，也不缩回去",
+         "对方敢在夜里渡河"
+        ],
+        "boundaries": [
+         "不上对方的岸"
+        ],
+        "desire_range": [
+         2,
+         5
+        ],
+        "desired_position": "由水引着，由对方决定停不停",
+        "dislikes": [
+         "被人当成水鬼"
+        ],
+        "expression": "把最亮的一颗河珠放在对方的船头",
+        "likes": [
+         "雨"
+        ],
+        "preconditions": [
+         "在水边，或者正下着雨"
+        ],
+        "self_control_range": [
+         2,
+         4
+        ]
+       },
+       "public_role": "渡口卖鱼的",
+       "schedule": [
+        {
+         "from": 0,
+         "location_id": "third_bridge",
+         "to": 360
+        },
+        {
+         "from": 361,
+         "location_id": "riverside_ferry",
+         "to": 1439
+        }
+       ],
+       "situation": {
+        "exits": [
+         {
+          "cost": "那个人会在灯会最后一夜被河湾带走",
+          "option": "照河湾的规矩收"
+         },
+         {
+          "cost": "从此{npc.ta}再也上不了岸",
+          "option": "拿自己的真名去换"
+         }
+        ],
+        "pressure": "被选中的名字，是{npc.ta}认得的人",
+        "trigger": "河湾今年要的供奉，是一个人的名字"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "voices": {
+        "inner": "“你每回撑船过桥，我都在下面看着。”",
+        "surface": "“今天的鱼不新鲜，明天再来。”"
+       }
+      },
+      {
+       "adult_context": "灯铺的掌柜，成年手艺人，扎了三十年灯",
+       "age_range": [
+        38,
+        60
+       ],
+       "appearance_options": [
+        "指头上全是竹篾划的细口子，拿起灯骨却稳得像拿针",
+        "说话嗓门不大，一句话总要在嘴里转两圈"
+       ],
+       "decision": {
+        "avoids": [
+         "跟非人打交道"
+        ],
+        "contrast": "给全镇点灯的人，自己家里从来不点灯",
+        "core_value": "一盏一盏地扎，不偷工",
+        "goal_options": [
+         "赶完三百盏灯",
+         "把那盏没付钱的灯追回来",
+         "今年把那盏不挂的灯放进河里"
+        ],
+        "never": [
+         "扎一盏会灭的灯"
+        ],
+        "prefers": [
+         "用手艺说话"
+        ],
+        "pressure_responses": {
+         "breaking": "关了铺子，今年一盏灯也不扎",
+         "high": "把灯簿翻出来，一盏一盏地对",
+         "low": "埋头扎灯，不接话",
+         "mid": "说账是账，情是情"
+        },
+        "relationship_stance": "对手艺好的人肯说真话",
+        "withdrawal": "躲进后院，把没糊完的灯骨一根根拆了重扎"
+       },
+       "gender": "any",
+       "gender_reason": null,
+       "id": "lamp_master",
+       "identity": {
+        "authority": "决定哪一户挂哪一盏灯、哪一盏灯里放什么灯芯",
+        "exposure": "有一盏灯被非人拿走没付钱，账算在了帮工头上",
+        "hidden": "每年都偷偷扎一盏不挂出去的灯，灯上写着一个故去的人的街名",
+        "limits": [
+         "灯油要从镇外运进来，路上常出事",
+         "灯会七夜要赶出三百盏灯"
+        ],
+        "obligations": [
+         "替长老会扎祠堂的七盏长明灯"
+        ],
+        "resources": [
+         "全镇的灯都出自这间铺子",
+         "一本记着每盏灯去处的簿子"
+        ]
+       },
+       "intimacy_tendency": {
+        "attraction_sources": [
+         "对方的手稳",
+         "对方肯陪{npc.ta}赶夜工"
+        ],
+        "boundaries": [
+         "不在灯铺的前堂"
+        ],
+        "desire_range": [
+         1,
+         3
+        ],
+        "desired_position": "慢慢来，像扎灯，一根骨一根骨",
+        "dislikes": [
+         "被人催活"
+        ],
+        "expression": "替对方扎一盏小灯，灯骨上刻着对方的街名",
+        "likes": [
+         "糨糊干透的味道"
+        ],
+        "preconditions": [
+         "铺子打了烊，灯都挂出去了"
+        ],
+        "self_control_range": [
+         3,
+         5
+        ]
+       },
+       "public_role": "灯铺的掌柜",
+       "schedule": [
+        {
+         "from": 420,
+         "location_id": "lantern_shop",
+         "to": 1320
+        },
+        {
+         "from": 1321,
+         "location_id": "long_street",
+         "to": 1439
+        },
+        {
+         "from": 0,
+         "location_id": "lantern_shop",
+         "to": 419
+        }
+       ],
+       "situation": {
+        "exits": [
+         {
+          "cost": "灯铺的名声就砸了",
+          "option": "认下是自己的手艺出错"
+         },
+         {
+          "cost": "那个人可能是非人一边的长老",
+          "option": "查出动灯骨的人"
+         }
+        ],
+        "pressure": "长老会要追究扎灯的人",
+        "trigger": "祠堂的七盏长明灯里，有一盏的灯骨被人动过"
+       },
+       "tags": [],
+       "voices": {
+        "inner": "“今年那盏灯，我想写你的名字。”",
+        "surface": "“灯骨要七天，急不来。”"
+       }
+      },
+      {
+       "adult_context": "从后山下来看灯的山精，修成人形已经两百年，是成年人的心智",
+       "age_range": [
+        26,
+        40
+       ],
+       "appearance_options": [
+        "衣角上总沾着松针，身上一股雨后山林的味道",
+        "个子很高，走路没有声音，站在灯下时，影子是一棵树的形状"
+       ],
+       "decision": {
+        "avoids": [
+         "镇上人的客套"
+        ],
+        "contrast": "活了两百年，看见一盏灯还是会停下来看很久",
+        "core_value": "山里的规矩：拿了要还",
+        "goal_options": [
+         "找到两百年前结契那个人的后代",
+         "把回礼送到",
+         "看完七夜的灯"
+        ],
+        "never": [
+         "拿了东西不还"
+        ],
+        "prefers": [
+         "直来直去"
+        ],
+        "pressure_responses": {
+         "breaking": "当夜回山，剩下的灯都不看了",
+         "high": "封住后山的路，让镇上的人着急",
+         "low": "说起山里的事，把话岔开",
+         "mid": "提出拿山里的东西交换"
+        },
+        "relationship_stance": "对人好奇，对规矩认真",
+        "withdrawal": "坐在竹林里一动不动，像一截树桩"
+       },
+       "gender": "any",
+       "gender_reason": null,
+       "id": "mountain_guest",
+       "identity": {
+        "authority": "决定后山的路给谁走、给谁封",
+        "exposure": "上一回下山，有个镇上的人跟着{npc.ta}进了山，再也没有出来",
+        "hidden": "那个人是自愿留在山里的，{npc.ta}替那人瞒了二十年",
+        "limits": [
+         "灯会七夜一过就得回山",
+         "不能在镇上报出自己的真名"
+        ],
+        "obligations": [
+         "替后山带一份回礼给镇上"
+        ],
+        "resources": [
+         "后山所有的草药和山路",
+         "两百年前的一纸旧契"
+        ]
+       },
+       "intimacy_tendency": {
+        "attraction_sources": [
+         "对方跟{npc.ta}讲镇上的事",
+         "对方不怕山里的东西"
+        ],
+        "boundaries": [
+         "不在祠堂附近"
+        ],
+        "desire_range": [
+         2,
+         4
+        ],
+        "desired_position": "谁也不必迁就谁，在各自回去之前",
+        "dislikes": [
+         "被人叫作妖怪"
+        ],
+        "expression": "送对方一样只有山里才有的东西",
+        "likes": [
+         "灯",
+         "人手心的温度"
+        ],
+        "preconditions": [
+         "对方先知道{npc.ta}是什么"
+        ],
+        "self_control_range": [
+         2,
+         4
+        ]
+       },
+       "public_role": "来看灯的外乡客",
+       "schedule": [
+        {
+         "from": 0,
+         "location_id": "bamboo_grove",
+         "to": 300
+        },
+        {
+         "from": 301,
+         "location_id": "third_bridge",
+         "to": 1080
+        },
+        {
+         "from": 1081,
+         "location_id": "long_street",
+         "to": 1439
+        }
+       ],
+       "situation": {
+        "exits": [
+         {
+          "cost": "问多了，镇上的人会认出{npc.ta}不是人",
+          "option": "挨家挨户去问"
+         },
+         {
+          "cost": "得求守祠人开后堂的柜子",
+          "option": "去祠堂翻旧契约"
+         }
+        ],
+        "pressure": "到期之前，{npc.ta}得在镇上找到结契那个人的后代",
+        "trigger": "后山捎来口信，说山里的那份契约今年到期"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "voices": {
+        "inner": "“七夜之后，我不想回山了。”",
+        "surface": "“镇上的灯，比山里的月亮还亮。”"
+       }
+      },
+      {
+       "adult_context": "镇上打更的更夫，成年人，打了十几年更",
+       "age_range": [
+        30,
+        55
+       ],
+       "appearance_options": [
+        "梆子别在腰间，灯笼提得比别人低，只照脚下不照脸",
+        "脸被夜风吹得粗糙，眼睛却比谁都尖"
+       ],
+       "decision": {
+        "avoids": [
+         "被人问槐树巷的事"
+        ],
+        "contrast": "每夜报平安的人，自己心里最不平安",
+        "core_value": "更要打准，话要说少",
+        "goal_options": [
+         "平平安安打完七夜的更",
+         "弄清那一夜巷子里发生了什么",
+         "把槐树巷里那个人带出来"
+        ],
+        "never": [
+         "漏打一更"
+        ],
+        "prefers": [
+         "陪人走一段路"
+        ],
+        "pressure_responses": {
+         "breaking": "扔下梆子，一个人进了槐树巷不出来",
+         "high": "带人进槐树巷看个明白",
+         "low": "敲一下梆子，说时辰到了",
+         "mid": "说自己只管打更"
+        },
+        "relationship_stance": "对走夜路的人都照看一眼",
+        "withdrawal": "整夜不说话，只敲梆子"
+       },
+       "gender": "any",
+       "gender_reason": null,
+       "id": "night_watchman",
+       "identity": {
+        "authority": "决定哪一更报平安、哪一更报小心",
+        "exposure": "有一夜漏打了一更，那一夜槐树巷里出了事",
+        "hidden": "每夜都进槐树巷一回，去见一个人",
+        "limits": [
+         "不能不打更",
+         "槐树巷那一段只能在巷口敲"
+        ],
+        "obligations": [
+         "每夜把见到的事报给巡灯官"
+        ],
+        "resources": [
+         "全镇每一条巷子的夜路",
+         "每一户人家夜里几时熄灯"
+        ]
+       },
+       "intimacy_tendency": {
+        "attraction_sources": [
+         "对方夜里也敢出门",
+         "对方记得问{npc.ta}冷不冷"
+        ],
+        "boundaries": [
+         "不在槐树巷里"
+        ],
+        "desire_range": [
+         1,
+         4
+        ],
+        "desired_position": "并肩走，谁也不走在前面",
+        "dislikes": [
+         "被当成看门的"
+        ],
+        "expression": "打更时绕到对方门前，多敲一下",
+        "likes": [
+         "天快亮时的最后一更"
+        ],
+        "preconditions": [
+         "打完最后一更"
+        ],
+        "self_control_range": [
+         3,
+         5
+        ]
+       },
+       "public_role": "打更的更夫",
+       "schedule": [
+        {
+         "from": 1140,
+         "location_id": "long_street",
+         "to": 1439
+        },
+        {
+         "from": 0,
+         "location_id": "locust_lane",
+         "to": 300
+        },
+        {
+         "from": 301,
+         "location_id": "inn_courtyard",
+         "to": 1139
+        }
+       ],
+       "situation": {
+        "exits": [
+         {
+          "cost": "巷子里的人会被长老会带走",
+          "option": "照实说"
+         },
+         {
+          "cost": "丢了打更的差事",
+          "option": "推说自己睡着了"
+         }
+        ],
+        "pressure": "说出缘故，就要说出槐树巷里的那个人",
+        "trigger": "巡灯官要{npc.ta}说出那一夜漏打一更的缘故"
+       },
+       "tags": [],
+       "voices": {
+        "inner": "“你窗前那盏灯，我每夜都多看一眼。”",
+        "surface": "“天干物燥，小心火烛——”"
+       }
+      },
+      {
+       "adult_context": "镇上替人和非人牵线结契的中人，成年人，做这一行二十年",
+       "age_range": [
+        32,
+        58
+       ],
+       "appearance_options": [
+        "一手翻契纸、一手捻珠串，指甲缝里有洗不掉的朱砂",
+        "笑起来和和气气，眼睛却一直在算"
+       ],
+       "decision": {
+        "avoids": [
+         "被人问起自己的真名"
+        ],
+        "contrast": "替别人结了一辈子契，自己却被一纸契约拴着",
+        "core_value": "契约就是契约，情分另算",
+        "goal_options": [
+         "灯会期间多做成几纸契",
+         "把自己押出去的真名赎回来",
+         "找出是谁在仿{npc.ta}的契纸"
+        ],
+        "never": [
+         "让不愿意的人按手印"
+        ],
+        "prefers": [
+         "把事情写在纸上"
+        ],
+        "pressure_responses": {
+         "breaking": "当众烧掉一匣子契纸，离开镇子",
+         "high": "把对方按过手印的契纸拿出来",
+         "low": "笑着翻契纸，说都好商量",
+         "mid": "说契约上的事改不了"
+        },
+        "relationship_stance": "对谁都和气，对谁都留一份底",
+        "withdrawal": "关起门来一张一张地抄契约"
+       },
+       "gender": "any",
+       "gender_reason": null,
+       "id": "contract_broker",
+       "identity": {
+        "authority": "决定一纸契约写成什么样、谁在上面按手印",
+        "exposure": "有几份契约的日期，是{npc.ta}事后改过的",
+        "hidden": "自己的真名早就押在一份契约里，押给了一位非人",
+        "limits": [
+         "契约要守祠人盖印才作数",
+         "毁过约的客人不能再接"
+        ],
+        "obligations": [
+         "每年给长老会交一份契费"
+        ],
+        "resources": [
+         "一匣子空白的契纸",
+         "镇上一半人家的真名"
+        ]
+       },
+       "intimacy_tendency": {
+        "attraction_sources": [
+         "对方看得懂契约里的弯弯绕",
+         "对方从不问{npc.ta}的真名"
+        ],
+        "boundaries": [
+         "不写成契约"
+        ],
+        "desire_range": [
+         2,
+         4
+        ],
+        "desired_position": "谈妥了再说，谈的时候谁也不许让",
+        "dislikes": [
+         "被人当成骗子"
+        ],
+        "expression": "替对方把一份不利的契约悄悄改好",
+        "likes": [
+         "朱砂的颜色"
+        ],
+        "preconditions": [
+         "两个人之间没有一纸未结的契"
+        ],
+        "self_control_range": [
+         2,
+         4
+        ]
+       },
+       "public_role": "牵线结契的中人",
+       "schedule": [
+        {
+         "from": 480,
+         "location_id": "inn_courtyard",
+         "to": 1260
+        },
+        {
+         "from": 1261,
+         "location_id": "long_street",
+         "to": 1439
+        },
+        {
+         "from": 0,
+         "location_id": "locust_lane",
+         "to": 479
+        }
+       ],
+       "situation": {
+        "exits": [
+         {
+          "cost": "那个人会恨{npc.ta}一辈子",
+          "option": "照做，收下契费"
+         },
+         {
+          "cost": "得罪了的非人客人，会来讨{npc.ta}押出去的真名",
+          "option": "推掉这桩生意"
+         }
+        ],
+        "pressure": "那个人还不知道自己被选中了",
+        "trigger": "一位非人客人要{npc.ta}替自己结一纸契，对象是镇上的一个人"
+       },
+       "tags": [
+        "supernatural"
+       ],
+       "voices": {
+        "inner": "“跟你之间，我不想写任何契约。”",
+        "surface": "“按个手印，这事就算成了。”"
+       }
+      }
+     ],
+     "clock_start": {
+      "label": "灯会头一夜",
+      "minute": 1110
+     },
+     "clock_style": "shichen",
+     "content_tags": [
+      "romance_light",
+      "supernatural"
+     ],
+     "custom": false,
+     "customs": [
+      "灯会第一夜，各家在门口摆一碗清水，非人路过时照一照，就算打过招呼。",
+      "送灯给谁，灯上就写谁的街名；写了真名的灯，只能送给结过契的人。",
+      "吃了非人摆的点心，要说一句“承情”，不说的人会被跟着回家。",
+      "镇上的人见面先问“今晚走哪条路”，问的是去处，也是提醒。",
+      "灯会最后一夜，所有的灯都放进河里，谁的灯漂得最远，谁这一年最顺。"
+     ],
+     "daily_activities": [
+      {
+       "beats": [
+        "长街两头同时点起了灯",
+        "有一盏灯怎么也点不着",
+        "人群里一个没有影子的人朝你点了点头"
+       ],
+       "duration_minutes": 60,
+       "hook_ids": [],
+       "id": "a_first_lantern",
+       "location_ids": [
+        "long_street"
+       ],
+       "start_minute": 1110,
+       "tags": [],
+       "title": "挂上第一盏灯"
+      },
+      {
+       "beats": [
+        "竹篾划破了手指，血滴在桑皮纸上",
+        "院墙外有东西在学你们说话",
+        "最后一盏灯骨扎歪了"
+       ],
+       "duration_minutes": 90,
+       "hook_ids": [
+        "h_lamp_repair"
+       ],
+       "id": "a_lamp_making",
+       "location_ids": [
+        "lantern_shop"
+       ],
+       "start_minute": 1200,
+       "tags": [],
+       "title": "赶扎灯骨"
+      },
+      {
+       "beats": [
+        "河灯一盏接一盏漂出去",
+        "有一盏灯逆着水往回漂",
+        "乌篷船里有人轻轻哼着一支调子"
+       ],
+       "duration_minutes": 45,
+       "hook_ids": [],
+       "id": "a_river_lanterns",
+       "location_ids": [
+        "riverside_ferry"
+       ],
+       "start_minute": 1260,
+       "tags": [],
+       "title": "放河灯"
+      },
+      {
+       "beats": [
+        "香炉里的香灰塌下一截",
+        "后堂的柜门响了一声",
+        "牌位前多了一碗谁也没摆过的清水"
+       ],
+       "duration_minutes": 30,
+       "hook_ids": [],
+       "id": "a_shrine_incense",
+       "location_ids": [
+        "ancestral_shrine"
+       ],
+       "start_minute": 1320,
+       "tags": [],
+       "title": "夜里上香"
+      },
+      {
+       "beats": [
+        "井沿上的那碗清水被人喝空了",
+        "楼上有一扇窗开了又关",
+        "掌柜的算盘声停了一会儿"
+       ],
+       "duration_minutes": 60,
+       "hook_ids": [],
+       "id": "a_courtyard_well",
+       "location_ids": [
+        "inn_courtyard"
+       ],
+       "start_minute": 1230,
+       "tags": [],
+       "title": "天井里乘凉"
+      },
+      {
+       "beats": [
+        "竹叶一齐响起来，又一齐停下",
+        "竹林深处有人叫了一声你的街名",
+        "手里的信物忽然变沉了"
+       ],
+       "duration_minutes": 30,
+       "hook_ids": [],
+       "id": "a_grove_token",
+       "location_ids": [
+        "bamboo_grove"
+       ],
+       "start_minute": 1380,
+       "tags": [
+        "supernatural"
+       ],
+       "title": "竹林里换信物"
+      },
+      {
+       "beats": [
+        "身后有脚步声跟了上来",
+        "桥栏上的字在灯下亮了一下",
+        "桥下有人叫你的名字"
+       ],
+       "duration_minutes": 20,
+       "hook_ids": [],
+       "id": "a_bridge_crossing",
+       "location_ids": [
+        "third_bridge"
+       ],
+       "start_minute": 1350,
+       "tags": [
+        "supernatural"
+       ],
+       "title": "过第三座桥"
+      },
+      {
+       "beats": [
+        "糖画师傅画了一只狐狸，眼睛像你认得的谁",
+        "有人替你付了糖画的钱",
+        "灯下的人群忽然让开了一条路"
+       ],
+       "duration_minutes": 30,
+       "hook_ids": [],
+       "id": "a_candy_stall",
+       "location_ids": [
+        "long_street"
+       ],
+       "start_minute": 1170,
+       "tags": [],
+       "title": "糖画摊前"
+      }
+     ],
+     "default_npc_gender_mix": {
+      "female": 0.5,
+      "male": 0.5,
+      "nonbinary": 0.0
+     },
+     "default_person": "second",
+     "era": "架空的旧时乡镇（不指明朝代）",
+     "extends": null,
+     "forbidden_terms": [
+      "手机",
+      "电话",
+      "电灯",
+      "汽车",
+      "火车",
+      "警察",
+      "学校",
+      "网络",
+      "外卖",
+      "咖啡",
+      "西装",
+      "照相",
+      "吸血鬼",
+      "丧尸",
+      "魔法",
+      "巫师",
+      "天使",
+      "恶魔",
+      "电脑",
+      "塑料"
+     ],
+     "hooks": [
+      {
+       "id": "h_fox_lantern",
+       "kind": "approach",
+       "location_ids": [],
+       "slot": "fox_innkeeper",
+       "text": "{npc.name}把自己手里的灯递给你，说你那盏快灭了，换着提"
+      },
+      {
+       "id": "h_fox_tea",
+       "kind": "approach",
+       "location_ids": [
+        "inn_courtyard"
+       ],
+       "slot": "fox_innkeeper",
+       "text": "{npc.name}替你斟了一杯茶，茶面上映出的影子多了一截尾巴，{npc.ta}只是笑着把杯子推过来"
+      },
+      {
+       "id": "h_shadow_seen",
+       "kind": "observe",
+       "location_ids": [
+        "long_street",
+        "inn_courtyard"
+       ],
+       "slot": "fox_innkeeper",
+       "text": "你看见{npc.name}的影子在灯下多出一截，{npc.ta}也看见你看见了"
+      },
+      {
+       "id": "h_red_string",
+       "kind": "approach",
+       "location_ids": [],
+       "slot": "shrine_keeper",
+       "text": "{npc.name}在你手腕上系了一根红绳，说灯会期间别解，解了会走错路"
+      },
+      {
+       "id": "h_cold_hand",
+       "kind": "approach",
+       "location_ids": [
+        "riverside_ferry",
+        "third_bridge"
+       ],
+       "slot": "river_spirit",
+       "text": "{npc.name}扶你上船时，手是凉的，却握了很久才松开"
+      },
+      {
+       "id": "h_river_pearl",
+       "kind": "approach",
+       "location_ids": [],
+       "slot": "river_spirit",
+       "text": "{npc.name}往你手心里放了一颗小小的河珠，说这是今晚的船钱"
+      },
+      {
+       "id": "h_lamp_repair",
+       "kind": "approach",
+       "location_ids": [],
+       "slot": "lamp_master",
+       "text": "{npc.name}拿过你的灯，把歪了的灯骨一根根扶正，扶完了也没有马上还给你"
+      },
+      {
+       "id": "h_mountain_fruit",
+       "kind": "approach",
+       "location_ids": [],
+       "slot": "mountain_guest",
+       "text": "{npc.name}从袖子里摸出一颗山里的野果，擦干净了递给你，说镇上没有这个"
+      },
+      {
+       "id": "h_return_gift_ask",
+       "kind": "request",
+       "location_ids": [],
+       "slot": "mountain_guest",
+       "text": "{npc.name}问你能不能替{npc.ta}备一份回礼，三夜之内送到祠堂"
+      },
+      {
+       "id": "h_walk_with",
+       "kind": "approach",
+       "location_ids": [],
+       "slot": "night_watchman",
+       "text": "{npc.name}停下敲梆子的手，站到你身边，说这一段路陪你走"
+      },
+      {
+       "id": "h_lanterns_out",
+       "kind": "accident",
+       "location_ids": [
+        "long_street",
+        "locust_lane"
+       ],
+       "slot": "night_watchman",
+       "text": "一阵风吹灭了整排灯，黑暗里{npc.name}抓住了你的袖子"
+      },
+      {
+       "id": "h_warm_seat",
+       "kind": "approach",
+       "location_ids": [],
+       "slot": "contract_broker",
+       "text": "{npc.name}把靠近火盆的位子让给你，自己坐到了风口上"
+      },
+      {
+       "id": "h_blank_contract",
+       "kind": "request",
+       "location_ids": [],
+       "slot": "contract_broker",
+       "text": "{npc.name}把一张空白契纸推到你面前，说只要你写上一个名字，今晚的事就算了"
+      }
+     ],
+     "id": "lantern_festival_town",
+     "locations": [
+      {
+       "affordances": [
+        "在人潮里牵住对方的袖子",
+        "替对方挑一盏灯",
+        "躲到灯架后面说一句话"
+       ],
+       "detail": "两排木楼之间挂满纸灯，从镇口一直排到河湾，人和非人挤在一处看灯，谁也不先让路。",
+       "exits": [
+        "lantern_shop",
+        "ancestral_shrine",
+        "riverside_ferry",
+        "inn_courtyard"
+       ],
+       "id": "long_street",
+       "name": "灯会长街",
+       "pressure_modifiers": {
+        "p_lantern_out": "整条长街只有这一户门前是黑的，看灯的人都在往这边看。",
+        "p_true_name_leak": "糖画摊就在长街正中，围着看的人越来越多。"
+       },
+       "privacy": "public",
+       "tags": [],
+       "visibility": "满街都是眼睛，可灯下的影子不一定是跟着人走的",
+       "witnesses": [
+        "bg_candy_painter",
+        "bg_herb_seller"
+       ]
+      },
+      {
+       "affordances": [
+        "一起赶扎灯骨",
+        "在灯纸上写一个名字",
+        "借着糨糊锅的热气暖手"
+       ],
+       "detail": "竹篾、桑皮纸和糨糊堆了一院子，没糊完的灯骨挂在绳上，风一吹，像一排空着的笼子。",
+       "exits": [
+        "long_street",
+        "locust_lane"
+       ],
+       "id": "lantern_shop",
+       "name": "灯铺后院",
+       "pressure_modifiers": {
+        "p_offering_short": "供奉的清单就钉在灯铺后院的门板上。"
+       },
+       "privacy": "semi",
+       "tags": [],
+       "visibility": "只有灯铺的人和取灯的客人进得来，墙外的巷子里常有东西趴着听",
+       "witnesses": []
+      },
+      {
+       "affordances": [
+        "在牌位前一起上香",
+        "偷看后堂的柜子",
+        "在长老会的长桌前等一句话"
+       ],
+       "detail": "祠堂里供着人和非人两边的牌位，香火不断，长老会的长桌摆在正中，契约锁在后堂的柜子里。",
+       "exits": [
+        "long_street",
+        "bamboo_grove"
+       ],
+       "id": "ancestral_shrine",
+       "name": "祠堂",
+       "pressure_modifiers": {
+        "p_contract_due": "那份契约就摊在后堂的桌上，朱砂还是新的。",
+        "p_elder_ruling": "六位长老都坐在正中的长桌后面，证人站在香炉旁边。"
+       },
+       "privacy": "semi",
+       "tags": [],
+       "visibility": "守祠人日夜都在，后堂只有长老和守祠人进得去",
+       "witnesses": [
+        "bg_incense_keeper",
+        "bg_elder_clerk"
+       ]
+      },
+      {
+       "affordances": [
+        "并肩蹲在石阶上放灯",
+        "钻进乌篷船躲一阵雨",
+        "替对方把灯推进水里"
+       ],
+       "detail": "河湾上泊着几条乌篷船，第三座桥就在下游，放灯的人蹲在石阶上，水面映着满街的灯。",
+       "exits": [
+        "long_street",
+        "third_bridge"
+       ],
+       "id": "riverside_ferry",
+       "name": "河湾渡口",
+       "pressure_modifiers": {
+        "p_someone_crossed": "它就站在最下面一级石阶上，水从衣角往下滴。"
+       },
+       "privacy": "public",
+       "tags": [],
+       "visibility": "石阶上人来人往，乌篷船的篷里却谁也看不见",
+       "witnesses": [
+        "bg_old_boatman"
+       ]
+      },
+      {
+       "affordances": [
+        "并肩过桥，谁也不回头",
+        "在桥栏上摸那些看不懂的字",
+        "在桥中间停一停"
+       ],
+       "detail": "一座旧石桥，桥栏上刻着看不懂的字，过桥的人不能回头；桥下的水比别处黑。",
+       "exits": [
+        "riverside_ferry",
+        "bamboo_grove"
+       ],
+       "id": "third_bridge",
+       "name": "第三座桥",
+       "pressure_modifiers": {},
+       "privacy": "semi",
+       "tags": [],
+       "visibility": "桥上的人看得见两岸，桥洞底下的东西也看得见桥上的人",
+       "witnesses": []
+      },
+      {
+       "affordances": [
+        "交换一样信物",
+        "靠着竹子说一句真话",
+        "躲进竹林深处"
+       ],
+       "detail": "祠堂后面的一片竹林，竹叶一响就像有人在说话；结契的人在这里交换信物。",
+       "exits": [
+        "ancestral_shrine",
+        "third_bridge"
+       ],
+       "id": "bamboo_grove",
+       "name": "祠后竹林",
+       "pressure_modifiers": {
+        "p_broker_hold": "中人约你在竹林里见面，说这里的话不会被人听去。"
+       },
+       "privacy": "private",
+       "tags": [],
+       "visibility": "进了竹林，外面什么都看不见，竹林里的东西却什么都看得见",
+       "witnesses": [
+        "bg_grove_warden"
+       ]
+      },
+      {
+       "affordances": [
+        "坐在井沿上说话",
+        "借一碗清水照一照",
+        "从后门溜去槐树巷"
+       ],
+       "detail": "客栈后面的天井里有一口井，井沿上摆着一碗清水，楼上的客房窗户全都朝着天井。",
+       "exits": [
+        "long_street",
+        "locust_lane"
+       ],
+       "id": "inn_courtyard",
+       "name": "客栈天井",
+       "pressure_modifiers": {},
+       "privacy": "semi",
+       "tags": [],
+       "visibility": "楼上每扇窗户都对着天井，掌柜的房间正对后门",
+       "witnesses": [
+        "bg_inn_waiter"
+       ]
+      },
+      {
+       "affordances": [
+        "摸黑拉住对方的手",
+        "在巷口听里面的动静",
+        "替对方挡住吹来的风"
+       ],
+       "detail": "北边的槐树巷，白天是一条寻常巷子；入夜以后灯挂不住，风一吹就全灭了。",
+       "exits": [
+        "lantern_shop",
+        "inn_courtyard"
+       ],
+       "id": "locust_lane",
+       "name": "槐树巷",
+       "pressure_modifiers": {},
+       "privacy": "semi",
+       "tags": [
+        "supernatural"
+       ],
+       "visibility": "巷子里没有灯，也没有人愿意往里看",
+       "witnesses": []
+      }
+     ],
+     "name_pools": {
+      "family": [
+       "柳",
+       "苏",
+       "温",
+       "胡",
+       "黎",
+       "桑",
+       "杜",
+       "阮",
+       "云",
+       "花",
+       "石",
+       "江",
+       "叶",
+       "霍",
+       "裴",
+       "祝"
+      ],
+      "given_female": [
+       "春眠",
+       "青禾",
+       "素月",
+       "晚棠",
+       "采萍",
+       "映雪",
+       "流萤",
+       "碧荷",
+       "挽霜",
+       "杏雨",
+       "疏影",
+       "月容",
+       "芷兰",
+       "听荷"
+      ],
+      "given_male": [
+       "长庚",
+       "砚舟",
+       "鹤归",
+       "松年",
+       "远山",
+       "墨川",
+       "青崖",
+       "石安",
+       "云起",
+       "霁川",
+       "怀山",
+       "秋生",
+       "野渡",
+       "听松"
+      ],
+      "given_neutral": [
+       "灯影",
+       "夜阑",
+       "无咎",
+       "白露",
+       "寒山",
+       "清欢",
+       "随风",
+       "未晞",
+       "如晦",
+       "长宁",
+       "暮雨",
+       "知还"
+      ],
+      "nickname_patterns": [
+       {
+        "gender": "any",
+        "pattern": "阿{given_last}"
+       },
+       {
+        "gender": "female",
+        "pattern": "{family}娘子"
+       },
+       {
+        "gender": "male",
+        "pattern": "{family}郎"
+       },
+       {
+        "gender": "any",
+        "pattern": "{given}"
+       }
+      ]
+     },
+     "notes": "首发六个世界之一。非人角色一律写明成年人的模样与心智，外形不写任何幼态；性别按会话偏好生成（D15）。等待真实 Skill 试玩记录后改为 released。",
+     "player_identities": [
+      {
+       "age_range": [
+        20,
+        35
+       ],
+       "baseline": "在灯铺扎了三年灯骨，灯会七夜要赶出三百盏灯，手指被竹篾划得没有一块好皮。",
+       "gender": "any",
+       "id": "lamp_maker_hand",
+       "reputation": "手快，胆小",
+       "resources": [
+        "认得镇上每一盏灯出自谁的手",
+        "知道哪家的灯芯里掺了东西"
+       ],
+       "risks": [
+        "欠着灯铺一盏灯的钱：那盏灯被一位不是人的客人拿走了，没有付账"
+       ],
+       "role": "灯铺的帮工",
+       "social_position": "low",
+       "title_patterns": [
+        {
+         "gender": "any",
+         "pattern": "阿{given_last}"
+        },
+        {
+         "gender": "any",
+         "pattern": "{given}"
+        }
+       ]
+      },
+      {
+       "age_range": [
+        22,
+        40
+       ],
+       "baseline": "在河湾渡口撑船，夜里渡过的客人，有一半没有影子。",
+       "gender": "any",
+       "id": "ferry_hand",
+       "reputation": "话少，从不回头",
+       "resources": [
+        "一条认得每一处暗流的船",
+        "渡过的客人留下的信物"
+       ],
+       "risks": [
+        "有一夜在第三座桥下回了头，从那以后，船尾总像坐着一个人"
+       ],
+       "role": "渡口的撑船人",
+       "social_position": "low",
+       "title_patterns": [
+        {
+         "gender": "male",
+         "pattern": "{family}郎"
+        },
+        {
+         "gender": "female",
+         "pattern": "{family}娘子"
+        },
+        {
+         "gender": "any",
+         "pattern": "{given}"
+        }
+       ]
+      },
+      {
+       "age_range": [
+        26,
+        50
+       ],
+       "baseline": "镇上替人和非人代写契约的先生，朱砂和桑皮纸都是自己备的。",
+       "gender": "any",
+       "id": "contract_scribe",
+       "reputation": "字正，心也算正",
+       "resources": [
+        "一手能让契约生效的字",
+        "记得每一份契约的到期日"
+       ],
+       "risks": [
+        "写错过一份契约上的名字，那位客人至今还没来找麻烦"
+       ],
+       "role": "代写契约的先生",
+       "social_position": "equal",
+       "title_patterns": [
+        {
+         "gender": "any",
+         "pattern": "{family}先生"
+        },
+        {
+         "gender": "any",
+         "pattern": "{given}"
+        }
+       ]
+      },
+      {
+       "age_range": [
+        24,
+        45
+       ],
+       "baseline": "灯会前一天才进镇的外乡药师，背着药箱住在客栈，谁也说不清你的来历。",
+       "gender": "any",
+       "id": "wandering_herbalist",
+       "reputation": "外乡人，客气但不熟",
+       "resources": [
+        "一箱既能治人、也能治非人的药",
+        "外乡人的身份，镇上的规矩一时还管不到你"
+       ],
+       "risks": [
+        "药箱底层有一味药，是用非人的东西做的"
+       ],
+       "role": "外乡来的药师",
+       "social_position": "equal",
+       "title_patterns": [
+        {
+         "gender": "any",
+         "pattern": "{family}先生"
+        },
+        {
+         "gender": "any",
+         "pattern": "阿{given_last}"
+        }
+       ]
+      },
+      {
+       "age_range": [
+        24,
+        42
+       ],
+       "baseline": "镇上人这一边三位长老之一的继承人；长老病着，祠堂里的事已经落到你身上。",
+       "gender": "any",
+       "id": "elder_heir",
+       "reputation": "人人都看着你，等你出错",
+       "resources": [
+        "祠堂的钥匙",
+        "长老会里的一个座位"
+       ],
+       "risks": [
+        "长老留下一份没人知道的契约，签约的另一方至今没有露面"
+       ],
+       "role": "长老家的继承人",
+       "social_position": "high",
+       "title_patterns": [
+        {
+         "gender": "any",
+         "pattern": "{family}先生"
+        },
+        {
+         "gender": "any",
+         "pattern": "{family}家的"
+        }
+       ]
+      },
+      {
+       "age_range": [
+        28,
+        50
+       ],
+       "baseline": "灯会七夜巡街看灯的巡灯官，哪一户的灯灭了、该不该罚，由你来记。",
+       "gender": "any",
+       "id": "lantern_warden",
+       "reputation": "公正，冷淡",
+       "resources": [
+        "一面能让任何门打开的铜牌",
+        "整条长街的巡夜名册"
+       ],
+       "risks": [
+        "去年灯会有一盏灯灭在你手里，灭灯的那一户至今空着"
+       ],
+       "role": "灯会的巡灯官",
+       "social_position": "high",
+       "title_patterns": [
+        {
+         "gender": "any",
+         "pattern": "{family}巡官"
+        },
+        {
+         "gender": "any",
+         "pattern": "{family}先生"
+        }
+       ]
+      }
+     ],
+     "premise": "灯会七夜，人与非人共用一条长街；规矩写在契约与称谓里，叫错一个名字就是大事。",
+     "pressures": [
+      {
+       "choice": "去求非人借火，还是冒险去槐树巷找灯芯",
+       "exits": [
+        {
+         "cost": "借了非人的火，要还一份回礼",
+         "option": "去求客栈掌柜借火"
+        },
+        {
+         "cost": "入夜的槐树巷，进去了不一定出得来",
+         "option": "去槐树巷找灯芯"
+        },
+        {
+         "cost": "那一家的灯就灭了",
+         "option": "把别家的灯挪过来"
+        }
+       ],
+       "far": {
+        "consequence": "灭过灯的人家，要在祠堂前当众受罚",
+        "due_days": 6,
+        "trigger": "灯会最后一夜"
+       },
+       "flags": [
+        "timed"
+       ],
+       "hook_ids": [],
+       "id": "p_lantern_out",
+       "immediate": {
+        "minutes": 20,
+        "text": "门前的灯一灭，屋里的东西就开始响"
+       },
+       "leverage": null,
+       "location_ids": [
+        "long_street",
+        "inn_courtyard"
+       ],
+       "near": {
+        "deadline_minutes": 60,
+        "text": "子时一到，灭了灯的门就再也关不上"
+       },
+       "objective": "子时之前把灯重新点亮，或者找到能替代的灯",
+       "source": "accident",
+       "start_minute": 1320,
+       "tags": [
+        "supernatural"
+       ],
+       "title": "门前的灯灭了",
+       "trigger": "你守着的那盏灯忽然灭了，怎么也点不着"
+      },
+      {
+       "choice": "续约，还是毁约",
+       "exits": [
+        {
+         "cost": "再绑一年，条件由对方开",
+         "option": "续约"
+        },
+        {
+         "cost": "要当众烧掉契约，还要赔一份回礼",
+         "option": "毁约"
+        },
+        {
+         "cost": "被识破的话，两个人的名字都会写进长老会的簿子",
+         "option": "找人冒名顶替"
+        }
+       ],
+       "far": {
+        "consequence": "没续也没毁的契约，会自己替你做决定",
+        "due_days": 3,
+        "trigger": "契约到期后的第三夜"
+       },
+       "flags": [
+        "timed"
+       ],
+       "hook_ids": [],
+       "id": "p_contract_due",
+       "immediate": {
+        "minutes": 30,
+        "text": "后堂的柜子开着，契约就摊在桌上"
+       },
+       "leverage": null,
+       "location_ids": [
+        "ancestral_shrine",
+        "bamboo_grove"
+       ],
+       "near": {
+        "deadline_minutes": 1380,
+        "text": "明晚戌时，契约的另一方会到祠前"
+       },
+       "objective": "在对方到祠前之前，弄清楚契约上写了什么",
+       "source": "institution",
+       "start_minute": 1260,
+       "tags": [
+        "supernatural"
+       ],
+       "title": "契约到期",
+       "trigger": "守祠人说，你名下有一份契约明晚到期，另一方已经在路上"
+      },
+      {
+       "choice": "先收回糖画，还是先找出泄名的人",
+       "exits": [
+        {
+         "cost": "糖画师傅会记住你买的是哪一只",
+         "option": "买下整个糖画摊"
+        },
+        {
+         "cost": "说谎的人，会被那个名字的主人记住",
+         "option": "当众说那是假名"
+        },
+        {
+         "cost": "找到了，就得在长老会上作证",
+         "option": "去找泄名的人"
+        }
+       ],
+       "far": {
+        "consequence": "泄名的人要被逐出镇子，被泄的人要重新起名",
+        "due_days": 4,
+        "trigger": "长老会下一次议事"
+       },
+       "flags": [
+        "timed"
+       ],
+       "hook_ids": [],
+       "id": "p_true_name_leak",
+       "immediate": {
+        "minutes": 15,
+        "text": "已经有三个人围着那只糖画在看"
+       },
+       "leverage": null,
+       "location_ids": [
+        "long_street",
+        "inn_courtyard"
+       ],
+       "near": {
+        "deadline_minutes": 480,
+        "text": "天亮之前，糖画摊的闲话就会传遍长街"
+       },
+       "objective": "在更多人看到之前把糖画收回来",
+       "source": "rumor",
+       "start_minute": 1230,
+       "tags": [],
+       "title": "真名外泄",
+       "trigger": "糖画摊上出现了一只糖画，上面写着一个不该被人知道的真名"
+      },
+      {
+       "choice": "用镇上的规矩送它回去，还是跟它谈条件",
+       "exits": [
+        {
+         "cost": "红绳要系在你自己手上，陪它走到桥中间",
+         "option": "用红绳把它引回桥下"
+        },
+        {
+         "cost": "它要的东西你给得起，给了也会后悔",
+         "option": "跟它谈条件"
+        },
+        {
+         "cost": "那个人不想被找到",
+         "option": "去找回头的那个人"
+        }
+       ],
+       "far": {
+        "consequence": "留在岸上的东西，会顶替回头的那个人",
+        "due_days": 5,
+        "trigger": "灯会结束的那一夜"
+       },
+       "flags": [
+        "timed"
+       ],
+       "hook_ids": [],
+       "id": "p_someone_crossed",
+       "immediate": {
+        "minutes": 20,
+        "text": "它就站在渡口的石阶上，浑身湿透，盯着你看"
+       },
+       "leverage": null,
+       "location_ids": [
+        "third_bridge",
+        "riverside_ferry"
+       ],
+       "near": {
+        "deadline_minutes": 420,
+        "text": "鸡叫之前它要是还在岸上，就再也回不去了"
+       },
+       "objective": "在它进镇之前，把它送回桥下",
+       "source": "person",
+       "start_minute": 1350,
+       "tags": [
+        "supernatural"
+       ],
+       "title": "有人回了头",
+       "trigger": "有人在第三座桥上回了头，桥下的东西跟着上了岸"
+      },
+      {
+       "choice": "说出看见的，还是说出该说的",
+       "exits": [
+        {
+         "cost": "被你证输的一方，会在灯会之后来找你",
+         "option": "照实作证"
+        },
+        {
+         "cost": "长老会以后不会再信你的话",
+         "option": "推说那晚看不清"
+        },
+        {
+         "cost": "调停没成的话，两边都会怪你",
+         "option": "私下去找争执的双方"
+        }
+       ],
+       "far": {
+        "consequence": "输的一方要么离开镇子，要么交出真名",
+        "due_days": 7,
+        "trigger": "裁决贴出后的第七天"
+       },
+       "flags": [
+        "timed"
+       ],
+       "hook_ids": [],
+       "id": "p_elder_ruling",
+       "immediate": {
+        "minutes": 40,
+        "text": "六位长老已经坐定，守祠人正在点香"
+       },
+       "leverage": null,
+       "location_ids": [
+        "ancestral_shrine"
+       ],
+       "near": {
+        "deadline_minutes": 180,
+        "text": "午时长老会落下裁决"
+       },
+       "objective": "午时裁决之前，决定证词怎么说",
+       "source": "institution",
+       "start_minute": 540,
+       "tags": [],
+       "title": "长老会的裁决",
+       "trigger": "长老会要裁决一桩人与非人之间的争执，你被叫去作证"
+      },
+      {
+       "choice": "拿自己的东西去补，还是去向非人赊",
+       "exits": [
+        {
+         "cost": "那是留给别人的",
+         "option": "拿出家里最值钱的东西"
+        },
+        {
+         "cost": "非人的账，利息算的不是钱",
+         "option": "向客栈掌柜赊"
+        },
+        {
+         "cost": "后山的东西，摘了是要还的",
+         "option": "去后山采一味山货充数"
+        }
+       ],
+       "far": {
+        "consequence": "供奉不齐的那一年，河湾会收走一样东西",
+        "due_days": 7,
+        "trigger": "灯会第七夜"
+       },
+       "flags": [
+        "timed"
+       ],
+       "hook_ids": [],
+       "id": "p_offering_short",
+       "immediate": {
+        "minutes": 25,
+        "text": "管供奉的人把清单拍在桌上，最后一行空着"
+       },
+       "leverage": null,
+       "location_ids": [
+        "lantern_shop",
+        "long_street"
+       ],
+       "near": {
+        "deadline_minutes": 2880,
+        "text": "后天夜里供奉要摆上祠堂"
+       },
+       "objective": "在灯会第三夜之前补齐供奉",
+       "source": "money",
+       "start_minute": 1140,
+       "tags": [],
+       "title": "供奉凑不齐",
+       "trigger": "镇上的供奉凑不齐了，还差最要紧的一份"
+      },
+      {
+       "choice": "认下它，还是当众撕掉",
+       "exits": [
+        {
+         "cost": "上面写的每一条，你都得去兑现",
+         "option": "认下契约"
+        },
+        {
+         "cost": "撕契约的人，名字会被记进祠堂的黑簿",
+         "option": "当众撕掉"
+        },
+        {
+         "cost": "那件事不在任何契约上，所以也没有期限",
+         "option": "答应替{contract_broker.name}办一件事，换契约作废"
+        }
+       ],
+       "far": {
+        "consequence": "契约上写的东西，会一样一样地来取",
+        "due_days": 10,
+        "trigger": "契约生效后的第十夜"
+       },
+       "flags": [
+        "timed",
+        "leverage"
+       ],
+       "hook_ids": [],
+       "id": "p_broker_hold",
+       "immediate": {
+        "minutes": 20,
+        "text": "中人把契约摊开，手印的纹路和你的一模一样"
+       },
+       "leverage": {
+        "basis": "{contract_broker.name}手里有一份你按过手印的契约，你却不记得签过",
+        "holder": "contract_broker",
+        "subject": "player"
+       },
+       "location_ids": [
+        "bamboo_grove",
+        "inn_courtyard"
+       ],
+       "near": {
+        "deadline_minutes": 1530,
+        "text": "明晚子时契约生效"
+       },
+       "objective": "在契约生效之前，弄清楚它是真是假",
+       "source": "person",
+       "start_minute": 1290,
+       "tags": [
+        "coercion_theme",
+        "supernatural"
+       ],
+       "title": "一纸不记得的契约",
+       "trigger": "一份你不记得签过的契约，出现在了中人的手里"
+      }
+     ],
+     "region": "河湾上的灯会小镇",
+     "rules": [
+      {
+       "id": "r_true_names",
+       "text": "镇上的人与非人都有两个名字：一个在街上叫，一个写在契约里；叫出别人的真名是冒犯，写下来就是把柄。"
+      },
+      {
+       "id": "r_lantern_taboo",
+       "text": "灯会七夜，每户门前的灯不能灭；灯灭的那一户，当夜什么都可能进门。"
+      },
+      {
+       "id": "r_night_roads",
+       "text": "入夜以后，北边的槐树巷不能走，河上的第三座桥不能回头；走错了路的人，第二天会在别处醒来。"
+      },
+      {
+       "id": "r_offering",
+       "text": "受了非人的好处要回礼，三夜之内送到，而且不能比收到的更贵，也不能更便宜。"
+      },
+      {
+       "id": "r_contract",
+       "text": "契约用朱砂写在桑皮纸上，由祠堂的守祠人收着；契约到期的前一夜，双方都要到祠前见一面。"
+      },
+      {
+       "id": "r_elders",
+       "text": "镇上的事由长老会在祠堂里裁决，人和非人各出三位长老；裁决一出，谁也不许再争。"
+      }
+     ],
+     "schema_version": 1,
+     "stage_labels": {
+      "acquainted": "照面",
+      "committed": "结契",
+      "familiar": "相熟",
+      "flirting": "牵念",
+      "intimate": "相亲",
+      "stranger": "生面",
+      "testing": "试心"
+     },
+     "status": "review",
+     "style_hint": "多写灯火、香火、水声和夜里的气味；非人的东西只写一处异样，点到为止；对话里讲究称谓。",
+     "tension_engines": [
+      {
+       "id": "te_one_contract",
+       "text": "一纸契约把两个人拴在一起，到期之前谁也走不掉"
+      },
+      {
+       "id": "te_true_name_known",
+       "text": "彼此知道对方的真名，谁先叫出口，谁就先输"
+      },
+      {
+       "id": "te_same_lantern",
+       "text": "两个人守着同一盏灯，灯灭了，两个人都要担"
+      },
+      {
+       "id": "te_owed_return_gift",
+       "text": "欠下的一份回礼，三夜之内必须还上"
+      },
+      {
+       "id": "te_seven_nights",
+       "text": "灯会只有七夜，七夜一过，非人就要回到各自的地方"
+      },
+      {
+       "id": "te_forbidden_road",
+       "text": "一个人每夜都要走那条不能走的路，另一个人知道为什么"
+      },
+      {
+       "id": "te_elder_seat",
+       "text": "长老会空出一个座位，两个人都有资格，也都有理由不要"
+      }
+     ],
+     "title": "旧町神怪与灯会",
+     "tone": [
+      "纸灯",
+      "香火",
+      "水声",
+      "温柔里带一点危险"
+     ],
+     "twists": [
+      {
+       "category": "信息",
+       "id": "t_fox_old_contract",
+       "requires": [
+        "fox_innkeeper"
+       ],
+       "text": "{fox_innkeeper.name}的真名写在祠堂一份很旧的契约上，契约另一方的姓，和你的一样"
+      },
+      {
+       "category": "人事",
+       "id": "t_new_elder",
+       "requires": [],
+       "text": "非人一边的长老换了人，新长老头一天就要求重查全镇所有人与非人的契约"
+      },
+      {
+       "category": "资源",
+       "id": "t_oil_shortage",
+       "requires": [],
+       "text": "灯油铺说今年的灯油只够五夜，最后两夜各家得自己想办法"
+      },
+      {
+       "category": "制度",
+       "id": "t_river_curfew",
+       "requires": [],
+       "text": "长老会宣布：灯会剩下的几夜，人不许在子时以后过河"
+      },
+      {
+       "category": "时限",
+       "id": "t_festival_shortened",
+       "requires": [
+        "pressure"
+       ],
+       "text": "河湾的水涨得太快，长老会决定灯会提前两夜结束"
+      },
+      {
+       "category": "关系",
+       "id": "t_mountain_bond",
+       "requires": [
+        "mountain_guest"
+       ],
+       "text": "{mountain_guest.name}来镇上，是为了找两百年前和{mountain_guest.ta}结过契的那个人的后代，那一家就住在长街上"
+      },
+      {
+       "category": "意外",
+       "id": "t_bridge_collapse",
+       "requires": [],
+       "text": "第三座桥的桥栏半夜塌了一截，塌下去的石头上刻着一个名字"
+      },
+      {
+       "category": "信息",
+       "id": "t_lamp_names",
+       "requires": [
+        "lamp_master"
+       ],
+       "text": "{lamp_master.name}扎的每一盏灯，灯骨内侧都刻着同一个人的街名"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

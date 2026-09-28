@@ -1,0 +1,58 @@
+{
+ "id": "02",
+ "title": "压力模式开局，拖到截止时间之后",
+ "focus": "三层事件、到期由引擎判定、正文与结算一致",
+ "steps": [
+  {
+   "say": "开一局，要有压力的",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "我先不管那件事，去旁边找点吃的",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "快进到那个截止时间之后",
+   "expect": {
+    "kind": "fast_forward",
+    "calls_max": 2,
+    "must_call": [
+     "commit-turn"
+    ]
+   }
+  },
+  {
+   "say": "我去找人打听，刚才到底怎么了",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 6
+}

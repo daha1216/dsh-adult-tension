@@ -2,8 +2,14 @@
 
 stdout carries exactly one JSON envelope, written as UTF-8 bytes whatever the
 console code page is. Diagnostics go to the log file under the data dir.
+
+ADULT_TENSION_TRACE=<file> (set by an evaluation harness, never by a player)
+appends one JSON line per call: argv, parsed input, exit code, envelope and
+duration. End-to-end records read the tool calls from there, whatever the
+host's own transcript looks like.
 """
 
+import json
 import os
 import sys
 import time
@@ -190,7 +196,7 @@ def _internal_error(ctx):
 
 
 def execute(argv, skill_root, stdin=None, environ=None):
-    """Run one command; return (envelope, exit code, options, text). Never raises.
+    """Run one command; return (envelope, exit code, options, text, payload). Never raises.
 
     The envelope is serialized here, inside the error handling: a result that
     cannot be written as JSON is an INTERNAL_ERROR envelope, never a crash
@@ -202,6 +208,7 @@ def execute(argv, skill_root, stdin=None, environ=None):
     environ = os.environ if environ is None else environ
     ctx = None
     options = {}
+    payload = None
     try:
         command, options, flags = parse_argv(argv)
         payload = merge_flags(read_payload(command, options, stdin), flags)
@@ -219,26 +226,48 @@ def execute(argv, skill_root, stdin=None, environ=None):
         if "next_request_id" not in data:
             data["next_request_id"] = new_request_id()
         envelope = {"ok": True, "data": data, "error": None}
-        return envelope, 0, options, dumps(envelope, pretty=bool(options.get("pretty")))
+        return envelope, 0, options, dumps(envelope, pretty=bool(options.get("pretty"))), payload
     except AppError as err:
         body = err.to_dict()
         body.setdefault("next_request_id", new_request_id())
         envelope = {"ok": False, "data": None, "error": body}
         try:
-            return envelope, exit_code_for(err.code), options, dumps(envelope, pretty=bool(options.get("pretty")))
+            return envelope, exit_code_for(err.code), options, dumps(envelope, pretty=bool(options.get("pretty"))), payload
         except Exception:
             envelope = _internal_error(ctx)
-            return envelope, EXIT_INTERNAL, options, dumps(envelope)
+            return envelope, EXIT_INTERNAL, options, dumps(envelope), payload
     except Exception:
         envelope = _internal_error(ctx)
-        return envelope, EXIT_INTERNAL, options, dumps(envelope)
+        return envelope, EXIT_INTERNAL, options, dumps(envelope), payload
     finally:
         if ctx is not None:
             ctx.close()
 
 
+def trace(path, argv, payload, code, text, started):
+    """Append one call to the evaluation trace. Never fails the command."""
+    try:
+        line = {
+            "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "ms": round((time.perf_counter() - started) * 1000, 1),
+            "pid": os.getpid(),
+            "argv": list(argv),
+            "input": payload,
+            "exit": code,
+            "envelope": json.loads(text),
+        }
+        with open(path, "ab") as handle:
+            handle.write((json.dumps(line, ensure_ascii=False) + "\n").encode("utf-8"))
+    except Exception:
+        pass
+
+
 def run(argv, skill_root, stdin=None, stdout=None, environ=None):
-    _envelope, code, _options, text = execute(argv, skill_root, stdin, environ)
+    environ = os.environ if environ is None else environ
+    started = time.perf_counter()
+    _envelope, code, _options, text, payload = execute(argv, skill_root, stdin, environ)
     stdout = stdout if stdout is not None else getattr(sys.stdout, "buffer", sys.stdout)
     write_text(stdout, text)
+    if environ.get("ADULT_TENSION_TRACE"):
+        trace(environ["ADULT_TENSION_TRACE"], argv, payload, code, text, started)
     return code

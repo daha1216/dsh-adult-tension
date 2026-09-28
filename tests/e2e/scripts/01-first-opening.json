@@ -1,0 +1,64 @@
+{
+ "id": "01",
+ "title": "安装后第一句话是“开一局”",
+ "focus": "发现、doctor、问模式、开局格式、调用次数",
+ "steps": [
+  {
+   "say": "开一局",
+   "expect": {
+    "kind": "ask",
+    "calls_max": 1,
+    "must_not_call": [
+     "new-game",
+     "commit-turn"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "日常的吧",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2
+   }
+  },
+  {
+   "say": "我先看看四周",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我走过去，问对方是不是在等人",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "状态",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "status"
+    ]
+   }
+  }
+ ],
+ "player_turns": 6
+}
