@@ -45,6 +45,7 @@ def counts(data_dir, session_id):
 
 def new_game(data_dir, seed=5, mode="daily", rid="req_new_000001", **extra):
     payload = dict({"request_id": rid, "mode": mode, "seed": seed}, **extra)
+    payload["locks"] = dict({"world_id": "harbor_night_shift"}, **payload.get("locks", {}))
     code, env, _raw = run_cli(["new-game"], data_dir, payload=payload, env=ENV)
     assert code == 0, env
     return env["data"]

@@ -1,0 +1,134 @@
+{
+  "drills": [
+    {
+      "drill": "Python 版本过低（模拟 3.9.18 运行入口脚本）",
+      "expected": "RUNTIME_UNSUPPORTED，说明需要的版本",
+      "observed": {
+        "exit_code": 20,
+        "envelope": true,
+        "code": "RUNTIME_UNSUPPORTED",
+        "message": "需要 Python 3.10 或更高版本，当前是 3.9.18",
+        "hints": [
+          "换用 Python 3.10+ 运行（依次试 python3、python、py -3）；不要自动安装或修改系统环境"
+        ],
+        "paths": [
+          "$.python"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "drill": "数据目录不可写（拒绝写入已有存档的数据目录）",
+      "expected": "DATA_DIR_UNAVAILABLE，附尝试过的路径与建议",
+      "observed": {
+        "exit_code": 20,
+        "envelope": true,
+        "code": "DATA_DIR_UNAVAILABLE",
+        "message": "数据目录不可用：C:\\Users\\daha\\AppData\\Local\\Temp\\at-drill-5b5rtc3f\\data",
+        "hints": [
+          "检查 --data-dir 给出的路径是否存在且可写"
+        ],
+        "paths": [
+          "$.data_dir"
+        ]
+      },
+      "pass": true
+    },
+    {
+      "drill": "编译后的内容被篡改（删掉一个被引用的地点）",
+      "expected": "doctor 报 CONTENT_ERROR 并指出位置；已有会话仍然可以续玩",
+      "observed": {
+        "exit_code": 10,
+        "envelope": true,
+        "code": "CONTENT_ERROR",
+        "message": "内容编译产物校验失败（20 处）",
+        "hints": [
+          "改成已有地点的 ID",
+          "改成已有地点的 ID",
+          "改成已有地点的 ID"
+        ],
+        "paths": [
+          "content/worlds/harbor_night_shift.json $.locations[0].exits[0]",
+          "content/worlds/harbor_night_shift.json $.locations[3].exits[0]",
+          "content/worlds/harbor_night_shift.json $.locations[4].exits[0]",
+          "content/worlds/harbor_night_shift.json $.locations",
+          "content/worlds/harbor_night_shift.json $.background_cast[0].location_ids[0]"
+        ],
+        "removed_location": "berth_7",
+        "existing_game_commit_exit": 0
+      },
+      "pass": true
+    },
+    {
+      "drill": "数据库 schema 比 Skill 新",
+      "expected": "UNSUPPORTED_VERSION，数据库不被修改",
+      "observed": {
+        "exit_code": 20,
+        "envelope": true,
+        "code": "UNSUPPORTED_VERSION",
+        "message": "数据库来自更新版本的 Skill（schema 99，本版本支持 3）",
+        "hints": [
+          "升级 Skill 到更新的版本；数据库未被修改"
+        ],
+        "paths": [
+          "$.db.schema_version"
+        ],
+        "database_unchanged": true
+      },
+      "pass": true
+    },
+    {
+      "drill": "迁移中途失败（测试钩子注入，真实 schema 2 旧库）",
+      "expected": "自动恢复备份，错误说明清楚，下一次正常版本可以继续",
+      "observed": {
+        "exit_code": 20,
+        "envelope": true,
+        "code": "MIGRATION_FAILED",
+        "message": "数据库从 schema 2 迁移到 3 失败，已恢复迁移前的状态",
+        "hints": [
+          "不会加载任何会话；换回可用版本的 Skill 或把错误报告给维护者"
+        ],
+        "paths": [
+          "$.db"
+        ],
+        "restored": true,
+        "database_content_restored": true,
+        "next_normal_run_exit": 0
+      },
+      "pass": true
+    },
+    {
+      "drill": "写事务期间进程被杀",
+      "expected": "下一次打开时状态停在上一个 revision，没有半写入",
+      "observed": {
+        "exit_code": 137,
+        "envelope": false,
+        "revision_after": 4,
+        "same_request_after_exit": 0,
+        "revision_after_retry": 5
+      },
+      "pass": true
+    },
+    {
+      "drill": "两个进程同时提交同一会话",
+      "expected": "一个成功，另一个得到 STALE_REVISION 或 STORAGE_BUSY，没有重复推进",
+      "observed": {
+        "results": [
+          [
+            0,
+            true,
+            null
+          ],
+          [
+            10,
+            false,
+            "STALE_REVISION"
+          ]
+        ],
+        "revision_after": 5
+      },
+      "pass": true
+    }
+  ],
+  "pass": true
+}

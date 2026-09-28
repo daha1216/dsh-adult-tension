@@ -399,9 +399,65 @@ DENIED_NAMES = (
     "成龙",
     "李连杰",
     "甄子丹",
+    # 1920s treaty ports
+    "杜月笙",
+    "黄金荣",
+    "张啸林",
+    "徐志摩",
+    "陆小曼",
+    "阮玲玉",
+    "胡适",
+    "宋美龄",
+    "宋庆龄",
+    "张学良",
+    "袁世凯",
+    # Bakumatsu Kyoto
+    "桂小五郎",
+    "高杉晋作",
+    "吉田松阴",
+    "久坂玄瑞",
+    "中冈慎太郎",
+    "冈田以藏",
+    "芹泽鸭",
+    "永仓新八",
+    "山南敬助",
+    "岩仓具视",
+    "孝明天皇",
+    "松平容保",
+    "德川家茂",
+    # well-known folk-tale and fantasy works
+    "聂小倩",
+    "宁采臣",
+    "白素贞",
+    "许仙",
+    "法海",
+    "哪吒",
+    "犬夜叉",
+    "夏目贵志",
+    "千寻",
+    "无脸男",
 )
 
 SENTENCE_SPLIT = re.compile(r"[。！？；!?;\n]")
+ITEM_PATH_RE = re.compile(r"\$\.(\w+)\[(\d+)\]")
+
+# Fields the opening copies onto the character card or scene as written, so
+# a placeholder in them would reach the player unrendered.
+SHOWN_AS_WRITTEN = {
+    "character_templates": ("adult_context", "public_role", "gender_reason"),
+    "background_cast": ("adult_context", "role", "name"),
+    "daily_activities": ("title",),
+}
+
+
+def _field_after(path, match):
+    rest = path[match.end():].lstrip(".")
+    return re.split(r"[.\[]", rest, 1)[0]
+
+
+def _shown_as_written(path):
+    match = re.match(r"\$\.(\w+)\[(\d+)\]", path)
+    return bool(match) and _field_after(path, match) in SHOWN_AS_WRITTEN.get(match.group(1), ())
 NEAR_DUP_THRESHOLD = 0.85
 NEAR_DUP_MIN_LEN = 16
 
@@ -790,7 +846,13 @@ class _Checker:
                         self.add(path, "{%s} 只能用在称呼模板里" % attr, None)
                     continue
                 if scope not in allowed:
-                    self.add(path, "占位 {%s.%s} 在这里无法解析" % (scope, attr), "这里可用的作用域：%s" % ("、".join(sorted(allowed)) or "无"))
+                    if path.startswith("$.twists[") and scope in self.templates:
+                        hint = "把 %s 写进这个转折的 requires，它只在这个人物在局时出现" % scope
+                    elif _shown_as_written(path):
+                        hint = "这个字段原样显示，不做占位替换；直接写，不用代词"
+                    else:
+                        hint = "这里可用的作用域：%s" % ("、".join(sorted(allowed)) or "无")
+                    self.add(path, "占位 {%s.%s} 在这里无法解析" % (scope, attr), hint)
                 elif attr not in ("name", "ta", "family", "given", "call", "role", "title", "称呼"):
                     self.add(path, "未知占位属性：%s" % attr, "可用：name、ta、family、given、call、role、title")
             if self._pronoun_checked(path, template_gender) and gendered_pronoun_positions(text):
@@ -810,6 +872,8 @@ class _Checker:
         if not match:
             return set()
         group, index = match.group(1), int(match.group(2))
+        if _field_after(path, match) in SHOWN_AS_WRITTEN.get(group, ()):
+            return set()
         item = p[group][index]
         if group in ("character_templates", "background_cast"):
             return {"npc", "player"}
@@ -818,7 +882,9 @@ class _Checker:
         if group == "cast_combos":
             return {"player"} | set(item["slots"])
         if group == "twists":
-            return {"player"} | set(self.templates)
+            # A twist is offered only when the characters in `requires` are in
+            # the game, so only those can be named in its text.
+            return {"player"} | (set(item["requires"]) & set(self.templates))
         if group == "pressures":
             scopes = {"player"}
             if item["leverage"]:
@@ -876,8 +942,28 @@ def _tag_checks(pack, tag_ids):
     return problems
 
 
+def with_item_ids(problems, raw):
+    """Name the entry each problem sits in ("item": its id), so an author can
+    find it by id as well as by JSON path (ACCEPTANCE.md 3)."""
+    for problem in problems:
+        match = ITEM_PATH_RE.match(problem.get("path") or "")
+        if not match or not isinstance(raw, dict):
+            continue
+        group, index = raw.get(match.group(1)), int(match.group(2))
+        if isinstance(group, list) and index < len(group) and isinstance(group[index], dict):
+            item_id = group[index].get("id")
+            if isinstance(item_id, str):
+                problem.setdefault("item", item_id)
+    return problems
+
+
 def validate_world(raw, custom=None, tag_ids=None):
     """Validate one pack. Returns (pack or None, problems)."""
+    pack, problems = _validate_world(raw, custom, tag_ids)
+    return pack, with_item_ids(problems, raw)
+
+
+def _validate_world(raw, custom, tag_ids):
     pack, errors = S.validate(WORLD, raw)
     problems = [dict(e, code=CONTENT_ERROR) for e in errors]
     if pack is None:
@@ -934,13 +1020,9 @@ def cross_checks(packs, generic_strings):
                 continue
             entries.append(("%s %s" % (world_id, path), text))
     for left, right, score in near_duplicates(entries):
-        world = left.split(" ", 1)[0]
-        problems.append(
-            dict(
-                _problem(right, "与 %s 高度相似（相似度 %.2f ≥ %.2f）" % (left, score, NEAR_DUP_THRESHOLD), "改写其中一条，避免同形框架"),
-                world=world,
-            )
-        )
+        world, path = right.split(" ", 1)
+        found = _problem(path, "与 %s 高度相似（相似度 %.2f ≥ %.2f）" % (left, score, NEAR_DUP_THRESHOLD), "改写其中一条，避免同形框架")
+        problems.append(dict(with_item_ids([found], packs[world])[0], world=world))
     return problems
 
 

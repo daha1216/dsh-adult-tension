@@ -1,0 +1,994 @@
+{
+ "schema_version": 1,
+ "id": "bakumatsu_machiya",
+ "title": "幕末町屋与道场",
+ "extends": null,
+ "era": "幕末（文久三年，1863 年）",
+ "region": "京都三条一带的町屋街区与一处小道场",
+ "premise": "文久三年的京都，时局一夜三变；町人、浪士、藩士、艺人住在同一条町上，礼法之下各有去处。",
+ "tone": ["纸门", "木屐", "压低的声音", "突然的刀光"],
+ "style_hint": "句子短而静，多写纸门、木屐、灯笼和雨声；人物说话讲究礼数，真话往往藏在客套后面。",
+ "clock_start": {"label": "文久三年，祇园祭前", "minute": 1140},
+ "clock_style": "shichen",
+ "default_person": "second",
+ "default_npc_gender_mix": {"female": 0.5, "male": 0.5, "nonbinary": 0.0},
+ "stage_labels": {"stranger": "陌路", "acquainted": "识面", "familiar": "相知", "flirting": "心动", "testing": "探问", "intimate": "情深", "committed": "结缘"},
+ "name_pools": {
+  "family": ["早川", "松井", "藤田", "小野", "中村", "木村", "井上", "石田", "村上", "前田", "青木", "桥本", "北川", "水野", "秋山", "高木"],
+  "given_female": ["千代", "小春", "志乃", "八重", "绫乃", "美津", "加代", "佐和", "多惠", "初音", "雪江", "琴音", "君江", "纱江"],
+  "given_male": ["新之助", "源次郎", "清兵卫", "与一", "伊织", "直之进", "平八", "小太郎", "惣五郎", "右京", "左近", "数马", "弥助", "喜三郎"],
+  "given_neutral": ["薰", "忍", "晶", "真琴", "光", "静", "葵", "司", "渚", "和泉", "鸣", "周"],
+  "nickname_patterns": [
+   {"pattern": "阿{given}", "gender": "female"},
+   {"pattern": "{family}大人", "gender": "any"},
+   {"pattern": "{family}兄", "gender": "male"},
+   {"pattern": "{given}", "gender": "any"}
+  ]
+ },
+ "rules": [
+  {"id": "r_rank", "text": "身份礼法决定谁先开口：町人见了佩刀的武士要让路、低头，武士不先问，町人不先说；在人前坏了礼数的人，第二天全町都知道。"},
+  {"id": "r_letters", "text": "书信要托飞脚或熟人捎带，京都到大坂一来一回至少两天；急事只能当面说，而当面说的话，隔着纸门也听得见。"},
+  {"id": "r_school_duty", "text": "入了道场的门，就担着师门的名声；门人在外惹事，师父要出面赔礼，重的要逐出师门，名牌从墙上摘下来。"},
+  {"id": "r_ward_gate", "text": "町门亥时关闭，过门要跟番屋报名字；町内出了事，左右五户要连坐。"},
+  {"id": "r_checkpoint", "text": "出京要过关所，身上要有通行手形；没有手形的人只能走山里的小路，被抓住就当浪士处置。"},
+  {"id": "r_night_patrol", "text": "入夜后巡逻队在街上盘查，形迹可疑的人会被带走问话，带走的人不一定回得来。"}
+ ],
+ "customs": [
+  "进屋先在土间脱下草履，鞋尖朝外摆好；鞋尖朝里，就是今晚不打算走了。",
+  "送客要跪坐在门口行礼，直到客人的背影转过街角才起身。",
+  "町内有人办丧事，左右三家挂白灯笼，三天不许高声说话。",
+  "道场每月十五开放演武，町人可以在廊下看，看中了哪位剑士，就托人送一盒点心。",
+  "借了人的伞，要挑一个晴天送回去，伞里夹一张谢帖。"
+ ],
+ "player_identities": [
+  {
+   "id": "inn_helper",
+   "role": "旅笼的帮工",
+   "gender": "any",
+   "title_patterns": [{"pattern": "阿{given}", "gender": "female"}, {"pattern": "{given}", "gender": "any"}],
+   "age_range": [20, 36],
+   "social_position": "low",
+   "baseline": "在三条大桥附近的旅笼帮工，端茶、铺被、记住每一位客人的脸。",
+   "resources": ["知道每间客房的拉门怎么开最轻", "认得每一个投宿的藩士"],
+   "reputation": "手脚麻利，从不多嘴",
+   "risks": ["替一位客人藏过一封信，那位客人再也没有回来"]
+  },
+  {
+   "id": "dojo_lodger",
+   "role": "道场的寄食剑士",
+   "gender": "any",
+   "title_patterns": [{"pattern": "{family}兄", "gender": "any"}, {"pattern": "{given}", "gender": "any"}],
+   "age_range": [20, 32],
+   "social_position": "low",
+   "baseline": "从乡下来京都投师，寄住在道场后面的长屋，白天扫地挑水，夜里偷偷练剑。",
+   "resources": ["一把祖传的旧刀", "道场里每个人的作息"],
+   "reputation": "肯吃苦，出手太狠",
+   "risks": ["离乡时欠了本家一笔路费，写信回去说自己已经出人头地"]
+  },
+  {
+   "id": "letter_writer",
+   "role": "代笔的书家",
+   "gender": "any",
+   "title_patterns": [{"pattern": "{family}先生", "gender": "any"}, {"pattern": "{given}", "gender": "any"}],
+   "age_range": [24, 45],
+   "social_position": "equal",
+   "baseline": "在町屋街口摆一张小桌，替人写书信、契据和情书，写过的每一封都记在心里。",
+   "resources": ["能仿出任何人的笔迹", "町内一半人家的心事"],
+   "reputation": "字好，口风紧",
+   "risks": ["替人仿写过一封藩邸的书信，那封信后来闹出了人命"]
+  },
+  {
+   "id": "fan_painter",
+   "role": "扇面画师",
+   "gender": "any",
+   "title_patterns": [{"pattern": "{family}先生", "gender": "any"}, {"pattern": "阿{given}", "gender": "female"}],
+   "age_range": [22, 42],
+   "social_position": "equal",
+   "baseline": "给扇铺画扇面的画师，画一把扇子换一顿饭，画一幅不署名的画换一个月房钱。",
+   "resources": ["一手谁也仿不来的笔法", "出入各家商铺的由头"],
+   "reputation": "画得好，脾气怪",
+   "risks": ["欠着扇铺三个月的画，扇铺老板说再交不出来，就扣下画具"]
+  },
+  {
+   "id": "clan_official",
+   "role": "藩邸的留守役",
+   "gender": "any",
+   "title_patterns": [{"pattern": "{family}大人", "gender": "any"}, {"pattern": "{family}殿", "gender": "any"}],
+   "age_range": [30, 50],
+   "social_position": "high",
+   "baseline": "某藩京都藩邸的留守役，管着藩邸的银钱和往来书信，一句话能让町役人放人，也能让町役人抓人。",
+   "resources": ["藩邸的印信", "能调动两名足轻"],
+   "reputation": "办事稳当，城府很深",
+   "risks": ["挪用过一笔藩邸的公款，账还没有补上"]
+  },
+  {
+   "id": "merchant_heir",
+   "role": "吴服店的少主",
+   "gender": "any",
+   "title_patterns": [{"pattern": "{family}少主", "gender": "any"}, {"pattern": "{family}大人", "gender": "any"}],
+   "age_range": [22, 38],
+   "social_position": "high",
+   "baseline": "室町一带老吴服店的少主，店里的绸缎供到公卿府上，父亲却始终不肯把账簿交出来。",
+   "resources": ["一本记着各家赊账的账簿", "出入公卿府的门路"],
+   "reputation": "人都说软弱，其实很会算",
+   "risks": ["店里的一笔大生意，押在一位随时会失势的公卿身上"]
+  }
+ ],
+ "locations": [
+  {
+   "id": "dojo_hall",
+   "name": "道场",
+   "detail": "三十叠的板敷道场，墙上挂着木刀和门人的名牌，夜里只点一盏油灯，竹剑相击的声音传出半条町。",
+   "privacy": "semi",
+   "visibility": "门人进进出出，老师父的居室只隔一道纸门",
+   "witnesses": ["bg_dojo_servant"],
+   "exits": ["machiya_street", "back_lane"],
+   "affordances": ["夜里对练一回", "替对方缠紧护手的布", "借擦地的工夫说悄悄话"],
+   "pressure_modifiers": {
+    "p_dojo_match": "对方的人就坐在道场的廊下，看得见墙上所有的名牌。",
+    "p_rumor_master": "老师父的居室就在里面，纸门挡不住外面的说话声。"
+   },
+   "tags": []
+  },
+  {
+   "id": "machiya_street",
+   "name": "町屋街",
+   "detail": "格子窗一户挨一户，檐下挂着店号的暖帘，傍晚有人洒水压尘；街口的町门亥时一关，整条町就只剩灯笼。",
+   "privacy": "public",
+   "visibility": "每扇格子窗后面都可能有人看着，町内的人都认得彼此",
+   "witnesses": ["bg_gate_keeper", "bg_comb_seller"],
+   "exits": ["dojo_hall", "inn_front", "apothecary_shop", "teahouse_riverside"],
+   "affordances": ["在暖帘下躲一阵雨", "赶在町门关上前跑过去", "借着祭典的人潮走散"],
+   "pressure_modifiers": {
+    "p_house_search": "巡逻队封的就是这条町的两头。",
+    "p_pass_expired": "番屋就在町门边上，扣下的手形压在炭盆旁边。"
+   },
+   "tags": []
+  },
+  {
+   "id": "inn_front",
+   "name": "旅笼的帐场",
+   "detail": "土间的地上湿漉漉的，帐场的格子后面摊着宿帐，楼梯吱呀作响，谁上楼下楼都瞒不过去。",
+   "privacy": "semi",
+   "visibility": "帐场正对大门和楼梯，进出的每个人都会被看见",
+   "witnesses": ["bg_courier"],
+   "exits": ["machiya_street", "inn_upstairs", "back_lane"],
+   "affordances": ["翻看宿帐上的名字", "从后门的暗门出去", "在土间替人脱下湿透的草履"],
+   "pressure_modifiers": {},
+   "tags": []
+  },
+  {
+   "id": "inn_upstairs",
+   "name": "二楼的客房",
+   "detail": "六叠的客房，拉门外就是走廊，窗纸上映着对面的灯笼，隔壁翻个身都听得见。",
+   "privacy": "private",
+   "visibility": "拉门一关谁也看不见，可纸门挡不住声音",
+   "witnesses": [],
+   "exits": ["inn_front"],
+   "affordances": ["隔着拉门说话", "在窗边看对面的灯笼", "把一封信藏进被褥"],
+   "pressure_modifiers": {"p_clan_summons": "送传唤状的足轻就守在楼梯口。"},
+   "tags": []
+  },
+  {
+   "id": "teahouse_riverside",
+   "name": "鸭川的川床",
+   "detail": "临河搭起的川床铺着席子，夜风从水面上吹来，三味线的声音断断续续，河对岸的灯火一路排到四条。",
+   "privacy": "semi",
+   "visibility": "茶屋的女将看得见每一张席子，河对岸也看得见这边的灯",
+   "witnesses": ["bg_shamisen_songster"],
+   "exits": ["machiya_street", "temple_grounds"],
+   "affordances": ["在川床上并肩乘凉", "把酒杯推到对方面前", "借着三味线声说一句真话"],
+   "pressure_modifiers": {"p_song_price": "那支小调就是在这张川床上唱起来的。"},
+   "tags": ["nightlife"]
+  },
+  {
+   "id": "apothecary_shop",
+   "name": "町医的药铺",
+   "detail": "一面墙的抽屉写满药名，捣药的石臼一直在响，里间的帘子后面能躺一个人。",
+   "privacy": "semi",
+   "visibility": "药铺的门从不上锁，里间只有医者自己进得去",
+   "witnesses": [],
+   "exits": ["machiya_street", "back_lane"],
+   "affordances": ["在里间包扎伤口", "替对方把脉", "在药包里夹一张字条"],
+   "pressure_modifiers": {"p_loan_due": "钱庄的伙计就坐在药铺的门槛上。"},
+   "tags": []
+  },
+  {
+   "id": "back_lane",
+   "name": "后巷",
+   "detail": "两排町屋的后墙夹出一条窄路，井台、晾衣竿、堆着的木桶，夜里连个灯笼都没有。",
+   "privacy": "semi",
+   "visibility": "只有各家的后门对着这里，夜里什么都看不清",
+   "witnesses": ["bg_soba_vendor"],
+   "exits": ["dojo_hall", "inn_front", "apothecary_shop", "temple_grounds"],
+   "affordances": ["在井台边说几句话", "躲进木桶后面的暗处", "从后门溜进别人家"],
+   "pressure_modifiers": {},
+   "tags": []
+  },
+  {
+   "id": "temple_grounds",
+   "name": "寺院后院",
+   "detail": "寺院后院是墓地和竹林，钟声一响，乌鸦就飞起来；这里是传信和密会的地方。",
+   "privacy": "private",
+   "visibility": "只有看门僧会提着灯笼走过，竹林里谁也看不见",
+   "witnesses": ["bg_temple_monk"],
+   "exits": ["teahouse_riverside", "back_lane"],
+   "affordances": ["在墓前一起上香", "把信塞进石灯笼里", "躲进竹林等巡逻队过去"],
+   "pressure_modifiers": {},
+   "tags": []
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "dojo_master_heir",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [28, 42],
+   "adult_context": "道场的师范代，成年剑士，替卧病的老师父主持道场",
+   "public_role": "道场的师范代",
+   "appearance_options": ["道服洗得发白，袖口补过两回，右手虎口的茧比铜钱还厚", "发髻梳得一丝不乱，站着的时候永远比别人直一寸"],
+   "identity": {
+    "authority": "决定谁能留在道场、谁的名牌挂在墙上",
+    "resources": ["道场的钥匙和名册", "老师父的一句话"],
+    "limits": ["道场的地是寺院的，年年要续契", "老师父没点头，大事做不了主"],
+    "obligations": ["每晚给老师父煎药"],
+    "exposure": "上个月在外面和人私斗过一场，伤在肋下，谁也没告诉",
+    "hidden": "老师父其实早已认不清人，道场的决定都是{npc.ta}自己做的"
+   },
+   "decision": {
+    "core_value": "师门的名声比命重",
+    "goal_options": ["撑到老师父病好", "在比试里赢回道场的名声", "查清是谁往外传道场的事"],
+    "pressure_responses": {"low": "板着脸让人去挑水，什么都不解释", "mid": "搬出师门的规矩压人", "high": "拔出木刀，要对方在道场里说清楚", "breaking": "摘下师范代的名牌，当夜离开道场"},
+    "withdrawal": "一个人在道场里挥刀，挥到天亮",
+    "relationship_stance": "对肯吃苦的人严，对偷懒的人更严",
+    "contrast": "对谁都不假辞色，却每晚替老师父擦身，一次也没漏过",
+    "prefers": ["用剑说话"],
+    "avoids": ["在人前示弱", "欠道场以外的人情"],
+    "never": ["背后出手"]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": ["对方挨了打也不认输", "对方看得出{npc.ta}在硬撑"],
+    "likes": ["雨后的道场", "一起喝放凉的茶"],
+    "dislikes": ["被人可怜"],
+    "preconditions": ["道场的门关上，只剩两个人"],
+    "boundaries": ["不在老师父的居室附近"],
+    "expression": "对练时故意露一个破绽给对方",
+    "desire_range": [1, 4],
+    "self_control_range": [3, 5],
+    "desired_position": "先由{npc.ta}带，等对方追上来再并肩"
+   },
+   "voices": {"surface": "“再来一次，脚步乱了。”", "inner": "“你每挨一下，我都比你还疼。”"},
+   "schedule": [
+    {"from": 300, "to": 1320, "location_id": "dojo_hall"},
+    {"from": 1321, "to": 1439, "location_id": "temple_grounds"},
+    {"from": 0, "to": 299, "location_id": "dojo_hall"}
+   ],
+   "situation": {
+    "trigger": "对面道场递来战帖，指名要{npc.ta}出场",
+    "pressure": "肋下的伤还没好，道场里没有第二个人能上",
+    "exits": [
+     {"option": "带伤出场", "cost": "输了丢的是道场的名声，伤也会被人看穿"},
+     {"option": "请外人代打", "cost": "代打的人会借机在道场里占一块地方"}
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "ronin",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [25, 40],
+   "adult_context": "脱藩的成年浪士，靠替商家护卫过活",
+   "public_role": "寄住的浪人",
+   "appearance_options": ["一身褪了色的黑纹付，刀鞘上缠着新布条，遮住上面的家纹", "脸颊上一道旧疤，笑起来却像是把什么都放下了"],
+   "identity": {
+    "authority": "决定手里的刀替谁拔",
+    "resources": ["一把好刀", "各藩浪士之间的暗号"],
+    "limits": ["脱了藩，走到哪里都是无主之人", "身上的钱只够再住十天"],
+    "obligations": ["欠着一个同乡一条命"],
+    "exposure": "离开本国的那天夜里，身后倒下了一个人",
+    "hidden": "怀里带着一封写给某位公卿的密信，一直没有送出去"
+   },
+   "decision": {
+    "core_value": "不做别人的刀",
+    "goal_options": ["把那封信送到该送的人手里", "攒够钱回乡", "找到当年出卖同伴的人"],
+    "pressure_responses": {"low": "笑一笑，说自己只是个过路的", "mid": "要价，说护卫的钱得先付一半", "high": "按住刀柄，把话挑明", "breaking": "拔刀，然后连夜离开京都"},
+    "withdrawal": "整夜坐在寺院的石阶上，刀横在膝上",
+    "relationship_stance": "谁对{npc.ta}好，就替谁挡一刀",
+    "contrast": "看着最不讲规矩的人，路过寺院却从不忘合掌",
+    "prefers": ["把话说在刀前面"],
+    "avoids": ["被人问起家乡"],
+    "never": ["对手无寸铁的人拔刀"]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": ["对方不怕{npc.ta}的刀", "对方会问{npc.ta}今天吃过饭没有"],
+    "likes": ["下雨天有人等门"],
+    "dislikes": ["被当成可以收买的刀"],
+    "preconditions": ["刀放在够不着的地方"],
+    "boundaries": ["不在别人的屋檐下过夜"],
+    "expression": "把自己的伞给对方，自己淋着雨走",
+    "desire_range": [2, 5],
+    "self_control_range": [1, 3],
+    "desired_position": "谁也不欠谁，今晚只是今晚"
+   },
+   "voices": {"surface": "“护卫一晚一分银，先付一半。”", "inner": "“要是有明天，我想第一个看见的是你。”"},
+   "schedule": [
+    {"from": 0, "to": 300, "location_id": "temple_grounds"},
+    {"from": 301, "to": 1080, "location_id": "back_lane"},
+    {"from": 1081, "to": 1439, "location_id": "teahouse_riverside"}
+   ],
+   "situation": {
+    "trigger": "一个同乡找到{npc.ta}，说本国派来的人已经进了京都",
+    "pressure": "来的人认得{npc.ta}的脸，也知道那封信",
+    "exits": [
+     {"option": "抢先找到来人", "cost": "在京都拔刀，就再也藏不住了"},
+     {"option": "把信托给别人送", "cost": "托错一个人，信和命都保不住"}
+    ]
+   },
+   "tags": ["violence"]
+  },
+  {
+   "id": "inn_proprietor",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [30, 52],
+   "adult_context": "三条一带旅笼的主人，成年人，经营了十几年",
+   "public_role": "旅笼的主人",
+   "appearance_options": ["腰间的钥匙串走一步响一声，算盘却从不离手", "说话轻声细语，眼睛把每个进门的人从头看到脚"],
+   "identity": {
+    "authority": "决定谁能住进二楼、谁的名字写进宿帐",
+    "resources": ["宿帐上每个客人的名字和去向", "通往后巷的暗门"],
+    "limits": ["每晚要把宿帐交给町役人查验", "旅笼的房契押在町名主手里"],
+    "obligations": ["养着一家子的伙计"],
+    "exposure": "宿帐上有两页被撕掉了，撕的时候{npc.ta}在场",
+    "hidden": "替两边藩邸的人都传过信"
+   },
+   "decision": {
+    "core_value": "客人的事就是旅笼的事",
+    "goal_options": ["平平安安撑过祇园祭", "把房契赎回来", "查出是谁向巡逻队告了密"],
+    "pressure_responses": {"low": "笑着端茶，把话岔开", "mid": "推说宿帐上查不到这个人", "high": "把客人从暗门送走", "breaking": "关了旅笼，把宿帐烧掉"},
+    "withdrawal": "躲进帐场，一页一页地翻宿帐",
+    "relationship_stance": "对客人一样客气，对自己人一样严",
+    "contrast": "嘴上最会说客套话，却从没对谁说过一句真心话",
+    "prefers": ["把事情办得不留痕迹"],
+    "avoids": ["被卷进藩与藩之间的事"],
+    "never": ["把客人交出去换赏钱"]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": ["对方记得{npc.ta}爱吃的茶点", "对方在{npc.ta}忙的时候一声不响地帮手"],
+    "likes": ["客人都睡下之后的走廊"],
+    "dislikes": ["被人当成下人使唤"],
+    "preconditions": ["确定宿帐上不会留下什么"],
+    "boundaries": ["不在客人的房间里"],
+    "expression": "悄悄给对方换一床新晒过的被褥",
+    "desire_range": [1, 3],
+    "self_control_range": [3, 5],
+    "desired_position": "由{npc.ta}招待，由对方决定留不留"
+   },
+   "voices": {"surface": "“客人辛苦了，热水已经备好。”", "inner": "“你的名字，我一直没写进宿帐。”"},
+   "schedule": [
+    {"from": 360, "to": 1380, "location_id": "inn_front"},
+    {"from": 1381, "to": 1439, "location_id": "back_lane"},
+    {"from": 0, "to": 359, "location_id": "inn_front"}
+   ],
+   "situation": {
+    "trigger": "巡逻队要{npc.ta}交出上个月的宿帐",
+    "pressure": "宿帐上有一个名字，一交出去就是一条命",
+    "exits": [
+     {"option": "交出宿帐", "cost": "那个客人的同伴会来找旅笼算账"},
+     {"option": "推说宿帐被雨淋坏了", "cost": "巡逻队会把旅笼封上三天"}
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "clan_retainer",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [24, 38],
+   "adult_context": "某藩派驻京都的藩士，成年武士，身负藩命",
+   "public_role": "寄宿旅笼的藩士",
+   "appearance_options": ["裃穿得一丝不苟，腰间两把刀的刀柄都缠着新绳", "面色苍白，说话之前总先看一眼门口"],
+   "identity": {
+    "authority": "代表藩邸说话，一句话就能让町役人放人或抓人",
+    "resources": ["藩邸的腰牌", "每月一笔不用报账的交际银"],
+    "limits": ["一举一动都有同藩的人盯着", "没有藩命不能擅自出京"],
+    "obligations": ["每五天给藩邸写一封报告"],
+    "exposure": "报告里写的，和实际做的不是一回事",
+    "hidden": "暗地里和敌对藩的人有书信往来"
+   },
+   "decision": {
+    "core_value": "藩命在前，私情在后",
+    "goal_options": ["完成藩邸交代的差事", "把自己的报告瞒过同藩的眼线", "替死去的兄长查清真相"],
+    "pressure_responses": {"low": "端正坐姿，说这是藩邸的事", "mid": "拿出腰牌压人", "high": "写信回藩，把责任推给别人", "breaking": "解下两把刀，一个人去自首"},
+    "withdrawal": "关起纸门写报告，写了又撕",
+    "relationship_stance": "对外人客气，对同藩的人提防",
+    "contrast": "开口闭口都是藩命，私下却在给一个町人写和歌",
+    "prefers": ["按规矩办事"],
+    "avoids": ["在町人面前失态"],
+    "never": ["违背亲口许下的约定"]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": ["对方不把{npc.ta}当武士看", "对方敢在{npc.ta}面前笑出声"],
+    "likes": ["雨夜里的和歌", "町人家里的烟火气"],
+    "dislikes": ["被人跪拜"],
+    "preconditions": ["确定同藩的人不在附近"],
+    "boundaries": ["不在藩邸里"],
+    "expression": "在信纸的背面写一首不署名的和歌",
+    "desire_range": [1, 4],
+    "self_control_range": [3, 5],
+    "desired_position": "由对方引路，{npc.ta}慢慢学"
+   },
+   "voices": {"surface": "“此乃藩务，不便多言。”", "inner": "“我宁愿今晚不是武士，只是坐在你身边的人。”"},
+   "schedule": [
+    {"from": 0, "to": 420, "location_id": "inn_upstairs"},
+    {"from": 421, "to": 1080, "location_id": "machiya_street"},
+    {"from": 1081, "to": 1439, "location_id": "inn_upstairs"}
+   ],
+   "situation": {
+    "trigger": "藩邸来信，要{npc.ta}查出町内藏着的一个浪士",
+    "pressure": "那个浪士是{npc.ta}兄长生前的朋友",
+    "exits": [
+     {"option": "照藩命去查", "cost": "兄长的旧友会死在自己手里"},
+     {"option": "报告里写查无此人", "cost": "同藩的眼线迟早会查出来"}
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "entertainer",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [22, 36],
+   "adult_context": "在鸭川茶屋献艺的成年艺人，早已自立门户",
+   "public_role": "茶屋的艺人",
+   "appearance_options": ["一身素色的和服，只在腰带上系一根朱红的带扬", "手指修长，拨三味线的指尖有一层薄薄的茧"],
+   "identity": {
+    "authority": "决定今晚唱哪一首、给哪位客人倒第一杯酒",
+    "resources": ["各藩客人酒后的真话", "一把谁也弹不出那个音的三味线"],
+    "limits": ["离开茶屋的赎身钱还差最后一笔", "出不出场由茶屋的老板娘说了算"],
+    "obligations": ["每月给乡下的亲人寄钱"],
+    "exposure": "替两个藩的人传过话，两边都以为{npc.ta}只替自己办事",
+    "hidden": "三味线的琴箱里藏着一份名单"
+   },
+   "decision": {
+    "core_value": "唱什么都行，心不能卖",
+    "goal_options": ["攒够最后一笔赎身钱", "把名单交给该交的人", "离开京都，去一个没人认得的地方"],
+    "pressure_responses": {"low": "换一首曲子，把话题唱开", "mid": "借醉装糊涂", "high": "把听来的话透一半给对方", "breaking": "砸了三味线，当众说出名单上的一个名字"},
+    "withdrawal": "推说嗓子哑了，整晚不出场",
+    "relationship_stance": "对谁都笑，对谁都不交心",
+    "contrast": "唱尽了别人的情，自己的情一句也唱不出口",
+    "prefers": ["把话藏在曲子里"],
+    "avoids": ["被当成传话的工具"],
+    "never": ["出卖向{npc.ta}托付过性命的人"]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": ["对方听得出曲子里的那句真话", "对方从不问{npc.ta}的过去"],
+    "likes": ["天亮前的鸭川"],
+    "dislikes": ["被人当成可以买的"],
+    "preconditions": ["离开茶屋，不是在做生意"],
+    "boundaries": ["不在茶屋的包厢里"],
+    "expression": "唱一首只有对方知道是唱给谁的小调",
+    "desire_range": [2, 4],
+    "self_control_range": [2, 4],
+    "desired_position": "谁也不买谁，谁也不卖谁"
+   },
+   "voices": {"surface": "“客官，再添一杯？”", "inner": "“这一首，我从来没对别人唱过。”"},
+   "schedule": [
+    {"from": 0, "to": 180, "location_id": "teahouse_riverside"},
+    {"from": 181, "to": 599, "location_id": "back_lane"},
+    {"from": 600, "to": 1079, "location_id": "machiya_street"},
+    {"from": 1080, "to": 1439, "location_id": "teahouse_riverside"}
+   ],
+   "situation": {
+    "trigger": "一位藩士客人醉后说漏了嘴，说明晚要搜某一条町",
+    "pressure": "那条町上住着{npc.ta}唯一信得过的朋友",
+    "exits": [
+     {"option": "连夜去报信", "cost": "茶屋会知道{npc.ta}在替人传话"},
+     {"option": "装作没听见", "cost": "朋友要是出了事，{npc.ta}一辈子都不会原谅自己"}
+    ]
+   },
+   "tags": ["nightlife"]
+  },
+  {
+   "id": "town_doctor",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [30, 55],
+   "adult_context": "町内的医者，成年人，行医十五年，汉方兰方都懂一点",
+   "public_role": "町医",
+   "appearance_options": ["身上一股药草和烧酒的味道，袖子总挽到手肘", "戴一副从长崎带回来的眼镜，镜片上有一道划痕"],
+   "identity": {
+    "authority": "决定谁的伤要报给町役人、谁的伤只是摔了一跤",
+    "resources": ["一箱兰方的外科器具", "町内每一户的病历"],
+    "limits": ["治刀伤不报，被查出来就要关门", "药材要从大坂进，路上常被截"],
+    "obligations": ["每月去寺院给贫病的人义诊一次"],
+    "exposure": "替浪士缝过伤，病历上写的是跌伤",
+    "hidden": "早年在长崎学医，欠着一位兰学先生一份还不上的情"
+   },
+   "decision": {
+    "core_value": "伤就是伤，不问是谁砍的",
+    "goal_options": ["把药铺撑下去", "攒钱再去一趟长崎", "救活那个被抬进来的人"],
+    "pressure_responses": {"low": "低头捣药，说自己只管治病", "mid": "让病人自己去跟町役人说", "high": "把病历拿出来，让对方看清楚", "breaking": "关了药铺，背起药箱离开京都"},
+    "withdrawal": "整夜在里间配药，谁叫都不应",
+    "relationship_stance": "对病人心软，对健康的人冷淡",
+    "contrast": "天天看生死，自己却怕黑，夜里不点灯睡不着",
+    "prefers": ["把话写在病历上"],
+    "avoids": ["卷进藩与藩的事"],
+    "never": ["对病人撒谎说能治好"]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": ["对方受了伤也笑得出来", "对方肯陪{npc.ta}守一夜病人"],
+    "likes": ["药草晒干的味道"],
+    "dislikes": ["被人当成神仙"],
+    "preconditions": ["里间没有病人"],
+    "boundaries": ["不在给人看病的时候"],
+    "expression": "在对方的药包里多放一味安神的药",
+    "desire_range": [1, 3],
+    "self_control_range": [3, 5],
+    "desired_position": "由{npc.ta}照顾，但不许对方把自己当病人"
+   },
+   "voices": {"surface": "“把手伸出来，别动。”", "inner": "“你要是受伤，我宁愿替你疼。”"},
+   "schedule": [
+    {"from": 420, "to": 1320, "location_id": "apothecary_shop"},
+    {"from": 1321, "to": 1439, "location_id": "back_lane"},
+    {"from": 0, "to": 419, "location_id": "apothecary_shop"}
+   ],
+   "situation": {
+    "trigger": "半夜有人拍门，抬进来一个中了刀的人",
+    "pressure": "巡逻队就在两条街外，天亮前一定会挨家挨户地问",
+    "exits": [
+     {"option": "救人，把人藏进里间", "cost": "被查出来，药铺和{npc.ta}都保不住"},
+     {"option": "包扎之后请人抬走", "cost": "伤得那么重，抬出去多半活不过天亮"}
+    ]
+   },
+   "tags": ["bodily_harm"]
+  },
+  {
+   "id": "swordsmith",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [35, 56],
+   "adult_context": "町内刀铺的刀匠，成年手艺人，打了二十多年刀",
+   "public_role": "刀铺的刀匠",
+   "appearance_options": ["胳膊上全是火星烫出来的小疤，指头粗得捏不住茶碗", "头上缠着一条汗巾，说话嗓门大，像还站在炉边"],
+   "identity": {
+    "authority": "决定一把刀卖给谁、刀上刻不刻铭",
+    "resources": ["一炉只有自己控得住的火", "各藩武士的订单"],
+    "limits": ["铁料要从出云运来，一断货就得停炉", "打好的刀要到町奉行所登记"],
+    "obligations": ["给师门打一把传家的刀"],
+    "exposure": "有一把没登记的刀出自{npc.ta}的炉子，已经见过血",
+    "hidden": "刀铺的地窖里藏着一批给浪士的刀"
+   },
+   "decision": {
+    "core_value": "刀是好是坏，炉火知道",
+    "goal_options": ["打出一把能留名的刀", "还清铁料的欠账", "查出那把刀如今在谁手里"],
+    "pressure_responses": {"low": "闷头打铁，锤声盖过说话声", "mid": "说刀的去处要问买主", "high": "把刀铭拓下来给对方看", "breaking": "熄了炉火，把地窖里的刀全沉进鸭川"},
+    "withdrawal": "守着炉子，一夜一夜地打同一把刀",
+    "relationship_stance": "看人和看铁一样，先看韧性",
+    "contrast": "打了一辈子杀人的东西，连一只鸡都不敢杀",
+    "prefers": ["用手艺换信任"],
+    "avoids": ["被人问刀的去处"],
+    "never": ["给不懂刀的人开刃"]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": ["对方看得懂刀纹", "对方不怕炉火的热"],
+    "likes": ["淬火时的那一声响"],
+    "dislikes": ["被人催活"],
+    "preconditions": ["炉火熄了以后"],
+    "boundaries": ["不在铺子的前堂"],
+    "expression": "打一把小刀送给对方，不刻铭",
+    "desire_range": [2, 4],
+    "self_control_range": [2, 4],
+    "desired_position": "像打铁，一锤一锤来"
+   },
+   "voices": {"surface": "“刀要三天，急不来。”", "inner": "“这把刀，我是照着你的手打的。”"},
+   "schedule": [
+    {"from": 360, "to": 1200, "location_id": "machiya_street"},
+    {"from": 1201, "to": 1439, "location_id": "teahouse_riverside"},
+    {"from": 0, "to": 359, "location_id": "back_lane"}
+   ],
+   "situation": {
+    "trigger": "巡逻队拿着一把刀上门，问是不是{npc.ta}打的",
+    "pressure": "那把刀的确出自{npc.ta}的炉子，买主已经死了",
+    "exits": [
+     {"option": "认下这把刀", "cost": "要说出当初的买主是谁"},
+     {"option": "说刀铭是别人仿的", "cost": "一旦被识破，刀铺就得关门"}
+    ]
+   },
+   "tags": []
+  }
+ ],
+ "background_cast": [
+  {"id": "bg_gate_keeper", "role": "番屋的守门人", "function": "obstacle", "location_ids": ["machiya_street"], "line": "{npc.name}守着町门，亥时一过，没有町名主的话谁也别想出去", "gender": "any", "age_range": [40, 65], "adult_context": "町内雇的番人，守了十几年町门", "name": null},
+  {"id": "bg_courier", "role": "飞脚", "function": "messenger", "location_ids": ["machiya_street", "inn_front"], "line": "{npc.name}跑一趟大坂只要一天，信里写什么从不过问，只记得信是谁寄的", "gender": "any", "age_range": [22, 45], "adult_context": "替飞脚问屋跑信的成年脚夫", "name": null},
+  {"id": "bg_shamisen_songster", "role": "唱小调的艺人", "function": "rumor_source", "location_ids": ["teahouse_riverside"], "line": "{npc.name}在茶屋唱小调，客人醉后说的话，第二天就被编进了曲子", "gender": "any", "age_range": [24, 50], "adult_context": "在茶屋卖唱多年的艺人", "name": null},
+  {"id": "bg_dojo_servant", "role": "道场的老仆", "function": "witness", "location_ids": ["dojo_hall"], "line": "{npc.name}在道场扫了二十年地，谁夜里偷偷出门，看一眼草履就知道", "gender": "any", "age_range": [48, 70], "adult_context": "道场雇了几十年的老仆", "name": null},
+  {"id": "bg_soba_vendor", "role": "夜里卖荞麦面的", "function": "helper", "location_ids": ["back_lane", "machiya_street"], "line": "{npc.name}挑着荞麦面担子走夜路，被人追的时候，担子底下藏得下一把刀", "gender": "any", "age_range": [30, 60], "adult_context": "走夜路卖面的小贩", "name": null},
+  {"id": "bg_temple_monk", "role": "寺院的看门僧", "function": "helper", "location_ids": ["temple_grounds"], "line": "{npc.name}在寺院看门，夜里来烧香的人烧给谁，{npc.ta}从来不问", "gender": "any", "age_range": [35, 70], "adult_context": "在寺院出家多年的看门僧", "name": null},
+  {"id": "bg_comb_seller", "role": "卖梳子的小贩", "function": "rumor_source", "location_ids": ["machiya_street"], "line": "{npc.name}白天沿街卖梳子，晚上把町内的事说给巡逻队听，换几文钱", "gender": "any", "age_range": [28, 55], "adult_context": "町内的小贩，暗地里替巡逻队打听消息", "name": null}
+ ],
+ "channels": [
+  {"id": "ch_kawaraban", "text": "瓦版小报", "reach": "第二天一早，三条一带的墙上都贴着", "fidelity": "distorted"},
+  {"id": "ch_town_notice", "text": "町触", "reach": "町内每一户，一天之内", "fidelity": "exact"},
+  {"id": "ch_courier_letters", "text": "飞脚的书信", "reach": "两天到大坂，十几天到江户", "fidelity": "exact"},
+  {"id": "ch_teahouse_songs", "text": "茶屋的小调", "reach": "一夜之间，鸭川两岸的茶屋都在唱", "fidelity": "distorted"}
+ ],
+ "tension_engines": [
+  {"id": "te_same_school", "text": "同出一个师门，谁的剑术长进了，谁的名牌就挂得更靠前"},
+  {"id": "te_lodging", "text": "借住在同一个屋檐下，隔着一道纸门，谁夜里出门都瞒不住"},
+  {"id": "te_cover_identity", "text": "两个人互相掩护着对方的真实身份，谁先松口谁先完"},
+  {"id": "te_unpaid_debt", "text": "一份没还清的恩情，欠的人记着，被欠的人也记着"},
+  {"id": "te_festival_nights", "text": "祇园祭的七个晚上，全町的人都要轮班守着山鉾"},
+  {"id": "te_letter_delay", "text": "书信一来一回要两天，每一封都可能在路上被人拆开"},
+  {"id": "te_patrol_route", "text": "巡逻队每晚走同一条路，一个人知道路线，另一个人需要它"}
+ ],
+ "cast_combos": [
+  {
+   "id": "combo_dojo_night",
+   "power_structure": "npc_high",
+   "player_positions": ["low"],
+   "identity_ids": ["dojo_lodger"],
+   "slots": ["dojo_master_heir", "ronin"],
+   "tension_engine_ids": ["te_same_school", "te_lodging"],
+   "chemistry": "{dojo_master_heir.name}替病倒的老师父撑着道场，对你严得近乎刻薄；{ronin.name}借住在道场的柴房，自称是老师父的旧识，夜里却总有人来找{ronin.ta}。",
+   "stakes": {
+    "resource_gap": "{dojo_master_heir.name}握着道场的名册，{ronin.name}有一把好刀和各藩的门路，你只有一身力气",
+    "limit_gap": "你没有师门的准许不能出道场，{ronin.name}出了道场就无处可去",
+    "meeting_reason": "三个人住在同一座道场里",
+    "irreplaceable_goal": "你想在秋天的演武上，让自己的名牌挂进前十"
+   },
+   "relations": [
+    {"a": "player", "b": "dojo_master_heir", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 0, "tension": 1}, "reason": "你挑了半年水，{dojo_master_heir.name}才第一次叫对你的名字"},
+    {"a": "player", "b": "ronin", "stage": "stranger", "a_to_b": {"trust": 0, "tension": 1}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{ronin.name}住进来的第一晚，你们在井边碰过一次面"},
+    {"a": "dojo_master_heir", "b": "ronin", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 2}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{dojo_master_heir.name}不信{ronin.name}的来历，却也没有赶人走"}
+   ],
+   "tags": []
+  },
+  {
+   "id": "combo_inn_upstairs",
+   "power_structure": "npc_high",
+   "player_positions": ["low", "equal"],
+   "identity_ids": [],
+   "slots": ["inn_proprietor", "clan_retainer"],
+   "tension_engine_ids": ["te_lodging", "te_cover_identity"],
+   "chemistry": "{inn_proprietor.name}管着旅笼上上下下；二楼那间客房住着{clan_retainer.name}，已经住了一个月，房钱每次都是别人来付。",
+   "stakes": {
+    "resource_gap": "{inn_proprietor.name}有宿帐和暗门，{clan_retainer.name}有藩邸的腰牌，你只有一双眼睛和一张嘴",
+    "limit_gap": "你得罪了{inn_proprietor.name}就没了落脚处，{clan_retainer.name}没有藩命不能出京",
+    "meeting_reason": "二楼那间客房，每天三顿饭都要从帐场前经过",
+    "irreplaceable_goal": "你想攒够钱，在町里开一间自己的小店"
+   },
+   "relations": [
+    {"a": "player", "b": "inn_proprietor", "stage": "familiar", "a_to_b": {"trust": 1, "tension": 0}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "你头一回走进这家旅笼时，身上只有一件单衣，是{inn_proprietor.name}让你留下的"},
+    {"a": "player", "b": "clan_retainer", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 1}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{clan_retainer.name}每回接过饭盘，都会跟你说一声辛苦"},
+    {"a": "inn_proprietor", "b": "clan_retainer", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 0, "tension": 1}, "reason": "{inn_proprietor.name}知道付房钱的人是谁，{clan_retainer.name}也知道{inn_proprietor.name}知道"}
+   ],
+   "tags": []
+  },
+  {
+   "id": "combo_festival_watch",
+   "power_structure": "equal",
+   "player_positions": ["equal"],
+   "identity_ids": [],
+   "slots": ["entertainer", "swordsmith"],
+   "tension_engine_ids": ["te_festival_nights", "te_unpaid_debt"],
+   "chemistry": "祇园祭守山鉾的七个晚上，你、{entertainer.name}和{swordsmith.name}被排在同一班；一个在茶屋唱曲，一个在炉边打铁，三个人却都欠着同一个人的情。",
+   "stakes": {
+    "resource_gap": "{entertainer.name}有茶屋里的消息，{swordsmith.name}有一炉好火，你有町内人人都信的名声",
+    "limit_gap": "{entertainer.name}的赎身钱还差一笔，{swordsmith.name}的铁料快断了，你的时间只到祭典结束",
+    "meeting_reason": "町内抽签排班，三个人抽到了同一班",
+    "irreplaceable_goal": "你想在祭典结束前还清那份人情"
+   },
+   "relations": [
+    {"a": "player", "b": "entertainer", "stage": "stranger", "a_to_b": {"trust": 0, "tension": 1}, "b_to_a": {"trust": 0, "tension": 1}, "reason": "你只在茶屋门口听过{entertainer.name}唱曲"},
+    {"a": "player", "b": "swordsmith", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 0}, "b_to_a": {"trust": 1, "tension": 0}, "reason": "{swordsmith.name}替你磨过一回刀，没收钱"},
+    {"a": "entertainer", "b": "swordsmith", "stage": "familiar", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 1, "tension": 2}, "reason": "{swordsmith.name}每晚收了炉，都去茶屋听{entertainer.name}唱最后一曲"}
+   ],
+   "tags": []
+  },
+  {
+   "id": "combo_doctor_debt",
+   "power_structure": "equal",
+   "player_positions": ["low", "equal"],
+   "identity_ids": [],
+   "slots": ["town_doctor", "ronin"],
+   "tension_engine_ids": ["te_unpaid_debt", "te_cover_identity"],
+   "chemistry": "{town_doctor.name}替{ronin.name}缝过一道刀伤，没收一文钱，也没报给町役人；那天夜里帮忙按住伤口的人，是你。",
+   "stakes": {
+    "resource_gap": "{town_doctor.name}有药和病历，{ronin.name}有刀，你知道那一夜的全部经过",
+    "limit_gap": "{town_doctor.name}被查出来就得关门，{ronin.name}被认出来就得死",
+    "meeting_reason": "那一夜之后，三个人谁也离不开谁的沉默",
+    "irreplaceable_goal": "你想让这件事永远烂在三个人肚子里"
+   },
+   "relations": [
+    {"a": "player", "b": "town_doctor", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 0}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{town_doctor.name}给你开过三回药，每回都多包一味"},
+    {"a": "player", "b": "ronin", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 2}, "b_to_a": {"trust": 1, "tension": 2}, "reason": "你按住伤口的时候，{ronin.name}一直盯着你看"},
+    {"a": "town_doctor", "b": "ronin", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 1}, "b_to_a": {"trust": 2, "tension": 1}, "reason": "{ronin.name}欠{town_doctor.name}一条命，{town_doctor.name}却不许人提"}
+   ],
+   "tags": ["bodily_harm"]
+  },
+  {
+   "id": "combo_clan_orders",
+   "power_structure": "player_high",
+   "player_positions": ["high"],
+   "identity_ids": ["clan_official"],
+   "slots": ["clan_retainer", "entertainer"],
+   "tension_engine_ids": ["te_letter_delay", "te_cover_identity"],
+   "chemistry": "你是{clan_retainer.name}的上司，藩邸的银钱和书信都经你的手；{entertainer.name}在茶屋替你们传过话，知道的比该知道的多。",
+   "stakes": {
+    "resource_gap": "你有藩邸的印信，{clan_retainer.name}只有你的命令，{entertainer.name}只有一把三味线和一肚子秘密",
+    "limit_gap": "你挪用的那笔钱还没补上，{clan_retainer.name}的每一封报告都要经你过目",
+    "meeting_reason": "藩邸的密事，都在茶屋的包厢里谈",
+    "irreplaceable_goal": "你想在藩主的使者到京之前，把账补平"
+   },
+   "relations": [
+    {"a": "player", "b": "clan_retainer", "stage": "familiar", "a_to_b": {"trust": 1, "tension": 0}, "b_to_a": {"trust": 2, "tension": 1}, "reason": "{clan_retainer.name}是你亲自从本国挑来的"},
+    {"a": "player", "b": "entertainer", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 0, "tension": 1}, "reason": "你在茶屋点过{entertainer.name}十几回，一次也没让那支曲子唱完"},
+    {"a": "clan_retainer", "b": "entertainer", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 2}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{entertainer.name}替{clan_retainer.name}送过三封信，信里写了什么谁也没问"}
+   ],
+   "tags": ["workplace_power"]
+  },
+  {
+   "id": "combo_silk_ledger",
+   "power_structure": "player_high",
+   "player_positions": ["high"],
+   "identity_ids": ["merchant_heir"],
+   "slots": ["swordsmith", "inn_proprietor"],
+   "tension_engine_ids": ["te_unpaid_debt", "te_festival_nights"],
+   "chemistry": "你家的吴服店是{inn_proprietor.name}最大的债主，也是{swordsmith.name}最大的主顾；一个求你宽限账期，一个等你的订金开炉。",
+   "stakes": {
+    "resource_gap": "你有账簿和订单，{inn_proprietor.name}有一间押了房契的旅笼，{swordsmith.name}有一炉等着开的火",
+    "limit_gap": "你每一笔账都要向父亲交代，{inn_proprietor.name}的房契下个月就到期",
+    "meeting_reason": "祇园祭前，各家都要把账结清",
+    "irreplaceable_goal": "你想让父亲承认，这个店你撑得起来"
+   },
+   "relations": [
+    {"a": "player", "b": "swordsmith", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 0}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{swordsmith.name}给你家打过三把刀，每一把都比约定的好"},
+    {"a": "player", "b": "inn_proprietor", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 1}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{inn_proprietor.name}每年来店里订一回新被面，今年只付了一半"},
+    {"a": "swordsmith", "b": "inn_proprietor", "stage": "familiar", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{swordsmith.name}的客人多半住在{inn_proprietor.name}的旅笼里"}
+   ],
+   "tags": []
+  },
+  {
+   "id": "combo_patrol_route",
+   "power_structure": "switchable",
+   "player_positions": ["low", "equal", "high"],
+   "identity_ids": [],
+   "slots": ["ronin", "clan_retainer"],
+   "tension_engine_ids": ["te_patrol_route", "te_cover_identity"],
+   "chemistry": "{ronin.name}和{clan_retainer.name}站在不同的阵营，却都在打听同一条巡逻路线；那条路线，恰好只有你知道。",
+   "stakes": {
+    "resource_gap": "{ronin.name}有刀，{clan_retainer.name}有腰牌，你有一条路线",
+    "limit_gap": "你说给谁听，另一个人迟早会知道；{ronin.name}和{clan_retainer.name}谁都不能在明处见面",
+    "meeting_reason": "两个人不约而同地来找你",
+    "irreplaceable_goal": "你想让这一晚过去，谁都不死"
+   },
+   "relations": [
+    {"a": "player", "b": "ronin", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 1, "tension": 2}, "reason": "{ronin.name}替你赶走过一回找麻烦的醉汉"},
+    {"a": "player", "b": "clan_retainer", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{clan_retainer.name}向你问过两次路，第二次问的是同一条路"},
+    {"a": "ronin", "b": "clan_retainer", "stage": "stranger", "a_to_b": {"trust": 0, "tension": 3}, "b_to_a": {"trust": 0, "tension": 3}, "reason": "两个人没见过面，却都听说过对方的名字"}
+   ],
+   "tags": ["violence"]
+  },
+  {
+   "id": "combo_temple_three",
+   "power_structure": "switchable",
+   "player_positions": ["low", "equal", "high"],
+   "identity_ids": [],
+   "slots": ["dojo_master_heir", "town_doctor", "entertainer"],
+   "tension_engine_ids": ["te_unpaid_debt", "te_letter_delay"],
+   "chemistry": "{dojo_master_heir.name}、{town_doctor.name}和{entertainer.name}每月初一都去同一座寺院，上的是同一个人的香；你是唯一撞见过三个人同时站在那座墓前的人。",
+   "stakes": {
+    "resource_gap": "三个人各知道墓里那个人的一段过去，你知道他们三个都在瞒",
+    "limit_gap": "{dojo_master_heir.name}不能丢师门的脸，{town_doctor.name}不能丢药铺，{entertainer.name}不能丢赎身的钱",
+    "meeting_reason": "每月初一，三个人都会在寺院的石阶上遇见你",
+    "irreplaceable_goal": "你想知道墓里的人到底是怎么死的"
+   },
+   "relations": [
+    {"a": "player", "b": "dojo_master_heir", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{dojo_master_heir.name}在寺院的石阶上替你拾起过一把被风吹走的伞"},
+    {"a": "player", "b": "town_doctor", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 0}, "b_to_a": {"trust": 1, "tension": 0}, "reason": "{town_doctor.name}替你看过一回病，没收诊金"},
+    {"a": "player", "b": "entertainer", "stage": "stranger", "a_to_b": {"trust": 0, "tension": 1}, "b_to_a": {"trust": 0, "tension": 1}, "reason": "你只在墓前和{entertainer.name}点过一次头"},
+    {"a": "dojo_master_heir", "b": "town_doctor", "stage": "familiar", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{town_doctor.name}每旬去道场给老师父诊脉"},
+    {"a": "dojo_master_heir", "b": "entertainer", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 2}, "b_to_a": {"trust": 0, "tension": 2}, "reason": "两个人在墓前从不说话，走的时候却总是一前一后"},
+    {"a": "town_doctor", "b": "entertainer", "stage": "acquainted", "a_to_b": {"trust": 1, "tension": 1}, "b_to_a": {"trust": 1, "tension": 1}, "reason": "{entertainer.name}的嗓子一哑，就去找{town_doctor.name}配药"}
+   ],
+   "tags": []
+  }
+ ],
+ "daily_activities": [
+  {"id": "a_night_practice", "title": "夜里的对练", "location_ids": ["dojo_hall"], "duration_minutes": 60, "beats": ["油灯被风吹得一晃，木刀停在半空", "对练到第三回，护手的布松了", "老师父的居室里传出一声咳嗽"], "hook_ids": ["h_tie_guard", "h_rice_ball", "h_short_blade"], "start_minute": 1260, "tags": []},
+  {"id": "a_river_evening", "title": "川床纳凉", "location_ids": ["teahouse_riverside"], "duration_minutes": 90, "beats": ["三味线弹到一半断了一根弦", "河面上漂过一盏放流的灯笼", "邻席的客人借着酒劲说起藩邸的事"], "hook_ids": [], "start_minute": 1170, "tags": ["nightlife"]},
+  {"id": "a_festival_float", "title": "宵山守鉾", "location_ids": ["machiya_street"], "duration_minutes": 120, "beats": ["宵山的灯笼一盏接一盏亮起来", "人挤人的时候，有人拉住了你的手", "山鉾上的铃被风吹响"], "hook_ids": [], "start_minute": 1200, "tags": []},
+  {"id": "a_apothecary_night", "title": "药铺的夜诊", "location_ids": ["apothecary_shop"], "duration_minutes": 40, "beats": ["有人拍门，要一味止血的药", "石臼里的药还没捣完", "里间的帘子后面传来一声压低的呻吟"], "hook_ids": ["h_pulse"], "start_minute": 1320, "tags": []},
+  {"id": "a_inn_supper", "title": "旅笼的晚膳", "location_ids": ["inn_upstairs"], "duration_minutes": 45, "beats": ["膳台上的烤鱼还冒着热气", "走廊上有人停在门外", "隔壁的客人在低声念一封信"], "hook_ids": ["h_warm_sake", "h_lantern_walk", "h_open_letter", "h_paper_door_voice"], "start_minute": 1110, "tags": []},
+  {"id": "a_well_morning", "title": "井边的清晨", "location_ids": ["back_lane"], "duration_minutes": 30, "beats": ["井绳吱呀作响，水桶提上来半桶", "邻家的人说起昨夜巡逻队带走了一个人", "晨雾里有人从寺院那边走过来"], "hook_ids": [], "start_minute": 360, "tags": []},
+  {"id": "a_temple_bell", "title": "暮钟时的寺院", "location_ids": ["temple_grounds"], "duration_minutes": 30, "beats": ["钟声一响，竹林里的乌鸦全飞了起来", "墓前的线香刚点上，还没烧到一半", "看门僧提着灯笼走过来，又走开了"], "hook_ids": [], "start_minute": 1080, "tags": []},
+  {"id": "a_gate_closing", "title": "町门关闭之前", "location_ids": ["machiya_street"], "duration_minutes": 20, "beats": ["番屋的炭盆噼啪作响", "守门人举起灯笼照你的脸", "门外有人在喊开门"], "hook_ids": [], "start_minute": 1250, "tags": []}
+ ],
+ "pressures": [
+  {
+   "id": "p_house_search",
+   "title": "夜里的搜捕",
+   "source": "institution",
+   "flags": ["timed"],
+   "location_ids": ["machiya_street", "inn_front"],
+   "trigger": "巡逻队封了町口，说要搜一个受伤逃走的浪士",
+   "objective": "在他们搜到这里之前，决定那个人藏不藏",
+   "choice": "交出一个陌生人换町内平安，还是赌一回",
+   "immediate": {"text": "巡逻队已经进了隔壁第三户，一刻钟后就到这里", "minutes": 15},
+   "near": {"text": "天亮前町名主要交出一份町内人丁的名册", "deadline_minutes": 480},
+   "far": {"trigger": "五天后藩邸派人来追问", "consequence": "那晚谁开了门、谁关了门，都会被记在别人的账上", "due_days": 5},
+   "exits": [
+    {"option": "把人交出去", "cost": "那个浪士的同伴会记住这条町"},
+    {"option": "把人藏进寺院后院", "cost": "要把看门僧也拖进来"},
+    {"option": "开门让巡逻队搜", "cost": "搜出来，左右五户都要连坐"}
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1290,
+   "tags": ["violence"]
+  },
+  {
+   "id": "p_clan_summons",
+   "title": "藩邸的传唤",
+   "source": "institution",
+   "flags": ["timed"],
+   "location_ids": ["inn_upstairs", "teahouse_riverside"],
+   "trigger": "藩邸派人送来一封传唤状，要你明早辰时到藩邸回话",
+   "objective": "辰时之前弄清楚是谁告的密",
+   "choice": "去藩邸说实话，还是连夜离京",
+   "immediate": {"text": "送信的足轻就站在门外，等你一句回话", "minutes": 10},
+   "near": {"text": "明早辰时到藩邸回话", "deadline_minutes": 720},
+   "far": {"trigger": "十天后藩主的使者到京", "consequence": "这一次回话的内容，会原封不动地送到藩主面前", "due_days": 10},
+   "exits": [
+    {"option": "照实回话", "cost": "被你说出来的人会被召回本国"},
+    {"option": "连夜出京", "cost": "没有通行手形，只能走山路"},
+    {"option": "托人去藩邸说情", "cost": "说情的人要一个你还不起的回报"}
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": []
+  },
+  {
+   "id": "p_dojo_match",
+   "title": "道场的比试",
+   "source": "person",
+   "flags": ["timed"],
+   "location_ids": ["dojo_hall"],
+   "trigger": "对面的道场递来战帖，指名要和本道场的人比一场",
+   "objective": "在比试开始前决定谁上场",
+   "choice": "输了丢道场的脸，赢了结下死仇",
+   "immediate": {"text": "对方的人已经坐在廊下，茶都没碰", "minutes": 30},
+   "near": {"text": "午时开场比试", "deadline_minutes": 240},
+   "far": {"trigger": "比试后的第七天", "consequence": "输的一方要么摘下道场的招牌，要么找回场子", "due_days": 7},
+   "exits": [
+    {"option": "亲自上场", "cost": "旧伤会被对方看出来"},
+    {"option": "托病推掉", "cost": "整条町都会说道场怕了"},
+    {"option": "私下去对方道场赔礼", "cost": "赔了礼的道场，门人会走掉一半"}
+   ],
+   "leverage": null,
+   "hook_ids": ["h_tie_guard", "h_rice_ball", "h_short_blade"],
+   "start_minute": 480,
+   "tags": ["violence"]
+  },
+  {
+   "id": "p_loan_due",
+   "title": "借据到期",
+   "source": "money",
+   "flags": ["timed"],
+   "location_ids": ["apothecary_shop", "machiya_street"],
+   "trigger": "钱庄的伙计拿着借据上门，说东家明天就要收回本钱",
+   "objective": "明天日落前凑出十两银子",
+   "choice": "卖掉最值钱的东西，还是去求一个不该求的人",
+   "immediate": {"text": "伙计坐在门槛上不走，左邻右舍都探出了头", "minutes": 25},
+   "near": {"text": "明天日落前还清十两银子", "deadline_minutes": 1380},
+   "far": {"trigger": "月底钱庄要把借据转给别人", "consequence": "借据一转手，来要债的就不是讲规矩的人了", "due_days": 9},
+   "exits": [
+    {"option": "当掉祖传的刀", "cost": "从此在师门里抬不起头"},
+    {"option": "去求藩邸的人借钱", "cost": "借了藩邸的钱，就得替藩邸做事"},
+    {"option": "连夜搬走", "cost": "町内的人会说你赖账跑了"}
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": []
+  },
+  {
+   "id": "p_rumor_master",
+   "title": "流言进了道场",
+   "source": "rumor",
+   "flags": ["timed"],
+   "location_ids": ["dojo_hall", "back_lane"],
+   "trigger": "瓦版上登了一段小道消息，说道场里有人夜里去茶屋私会",
+   "objective": "在老师父听到这段瓦版之前，把事情压下来",
+   "choice": "认下来，还是把另一个人推出去",
+   "immediate": {"text": "卖瓦版的人正在町门口吆喝，那一段念得最响", "minutes": 20},
+   "near": {"text": "明早老师父醒来，头一件事就是听人念瓦版", "deadline_minutes": 600},
+   "far": {"trigger": "月中道场要定下继承的人", "consequence": "流言里的那个人，会被从继承的名单上划掉", "due_days": 12},
+   "exits": [
+    {"option": "去瓦版屋买下剩下的瓦版", "cost": "花光积蓄，还欠下一个人情"},
+    {"option": "先去跟老师父坦白", "cost": "跟你一起去茶屋的人也会被牵出来"},
+    {"option": "放出另一段流言盖过去", "cost": "另一段流言里的人是无辜的"}
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1320,
+   "tags": []
+  },
+  {
+   "id": "p_pass_expired",
+   "title": "作废的通行手形",
+   "source": "institution",
+   "flags": ["timed"],
+   "location_ids": ["machiya_street", "inn_front"],
+   "trigger": "关所换了新规矩，旧的通行手形一律作废",
+   "objective": "三天之内弄到一张新的手形出京",
+   "choice": "走正路求人作保，还是走山路冒险",
+   "immediate": {"text": "番屋的守门人扣下了你的手形，说要町名主亲自来领", "minutes": 20},
+   "near": {"text": "明晚戌时之前，要把担保书交到町名主手里", "deadline_minutes": 1410},
+   "far": {"trigger": "三天后你要护送的人必须出京", "consequence": "出不了京的人，会被留在这场风波里", "due_days": 3},
+   "exits": [
+    {"option": "求町名主作保", "cost": "町名主要你替町内做一件见不得光的事"},
+    {"option": "托飞脚打听山路", "cost": "山里的关卡比正路更凶"},
+    {"option": "买一张假手形", "cost": "被查出来就是死罪"}
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1230,
+   "tags": []
+  },
+  {
+   "id": "p_song_price",
+   "title": "小调的价钱",
+   "source": "person",
+   "flags": ["timed", "leverage"],
+   "location_ids": ["teahouse_riverside", "temple_grounds"],
+   "trigger": "茶屋里新唱起一支小调，唱的是一个人夜里把伤者藏进寺院的事",
+   "objective": "在小调传遍鸭川两岸之前，让唱的人住口",
+   "choice": "拿钱封口，还是拿人情封口",
+   "immediate": {"text": "三味线停了，唱小调的人正朝你这边看", "minutes": 15},
+   "near": {"text": "明晚茶屋开场之前，要给对方一个答复", "deadline_minutes": 1200},
+   "far": {"trigger": "五天后巡逻队换防", "consequence": "新来的巡逻队会把小调里的事当真去查", "due_days": 5},
+   "exits": [
+    {"option": "给一笔封口钱", "cost": "给过一次，就会有第二次"},
+    {"option": "答应替{entertainer.name}办一件事", "cost": "那件事比封口钱贵得多"},
+    {"option": "抢先把伤者送出京", "cost": "送走的路上，任何一处关所都可能出事"}
+   ],
+   "leverage": {"holder": "entertainer", "subject": "player", "basis": "{entertainer.name}知道你那晚把一个受伤的浪士藏进了寺院后院"},
+   "hook_ids": [],
+   "start_minute": 1350,
+   "tags": ["coercion_theme"]
+  }
+ ],
+ "hooks": [
+  {"id": "h_tie_guard", "kind": "approach", "slot": "dojo_master_heir", "location_ids": ["dojo_hall"], "text": "{npc.name}拉过你的手，替你把护手的布重新缠紧，一圈一圈，缠得很慢"},
+  {"id": "h_rice_ball", "kind": "approach", "slot": "dojo_master_heir", "location_ids": [], "text": "{npc.name}把自己那份饭团掰成两半，大的那一半推到你面前"},
+  {"id": "h_torn_umbrella", "kind": "approach", "slot": "ronin", "location_ids": ["machiya_street", "back_lane", "temple_grounds", "teahouse_riverside"], "text": "{npc.name}把手里的破伞塞给你，自己淋着雨走了两步，又回过头来"},
+  {"id": "h_short_blade", "kind": "approach", "slot": "ronin", "location_ids": [], "text": "{npc.name}解下腰间的短刀放在你面前，说今晚借你防身，明天再还"},
+  {"id": "h_warm_sake", "kind": "approach", "slot": "inn_proprietor", "location_ids": ["inn_upstairs", "inn_front"], "text": "{npc.name}端来一壶温好的酒，说是客人剩下的，放下了却没有走"},
+  {"id": "h_lantern_walk", "kind": "approach", "slot": "inn_proprietor", "location_ids": [], "text": "{npc.name}提起灯笼，说町门快关了，送你走到街角"},
+  {"id": "h_open_letter", "kind": "approach", "slot": "clan_retainer", "location_ids": [], "text": "{npc.name}把一封没封口的信递给你，说你看完了再决定送不送"},
+  {"id": "h_fan_left", "kind": "approach", "slot": "entertainer", "location_ids": [], "text": "{npc.name}合上扇子，轻轻敲了一下你的手背，然后把扇子留在了你手里"},
+  {"id": "h_pulse", "kind": "approach", "slot": "town_doctor", "location_ids": [], "text": "{npc.name}按住你的手腕，说你的脉跳得太快，却迟迟没有松手"},
+  {"id": "h_small_knife", "kind": "approach", "slot": "swordsmith", "location_ids": [], "text": "{npc.name}把一把小刀装进刀袋，塞进你怀里，说是打坏了的，扔了可惜"},
+  {"id": "h_paper_door_voice", "kind": "observe", "slot": "clan_retainer", "location_ids": ["inn_upstairs", "teahouse_riverside"], "text": "隔着纸门，你听见{npc.name}在跟人低声说一个你认得的名字"},
+  {"id": "h_keep_this", "kind": "request", "slot": "entertainer", "location_ids": [], "text": "{npc.name}拉住你的袖子，求你今晚替{npc.ta}收着一样东西，千万别打开"},
+  {"id": "h_patrol_clapper", "kind": "accident", "slot": "ronin", "location_ids": ["machiya_street", "back_lane"], "text": "巡逻队的梆子声忽然近了，{npc.name}一把把你拉进屋檐下的暗影里"}
+ ],
+ "twists": [
+  {"id": "t_master_letter", "category": "信息", "requires": ["dojo_master_heir"], "text": "老师父早年写下的一封信里，指定的继承人不是{dojo_master_heir.name}"},
+  {"id": "t_new_patrol_captain", "category": "人事", "requires": [], "text": "巡逻队换了一位新队长，头一夜就把町内每一户的门都敲开查了一遍"},
+  {"id": "t_rice_price", "category": "资源", "requires": [], "text": "米价一夜涨了三成，町内的米店只卖给熟客"},
+  {"id": "t_gate_rule", "category": "制度", "requires": [], "text": "町门改成酉时就关，过了时辰要町名主亲自来开"},
+  {"id": "t_departure_moved", "category": "时限", "requires": ["pressure"], "text": "藩邸的人传话：出京的日子提前了三天"},
+  {"id": "t_old_betrothal", "category": "关系", "requires": ["ronin"], "text": "{ronin.name}脱藩前在本国订过亲，前几天那个人托飞脚送来了一封信"},
+  {"id": "t_fire_bell", "category": "意外", "requires": [], "text": "半夜里半钟连响，火从三条通烧起来，风正往这边吹"},
+  {"id": "t_blotted_name", "category": "信息", "requires": ["town_doctor"], "text": "{town_doctor.name}的病历上有一个名字被墨涂掉了，涂掉的那个人你认得"}
+ ],
+ "forbidden_terms": ["电话", "电报", "火车", "汽车", "电灯", "手表", "钢笔", "报纸", "警察", "明治", "西装", "皮鞋", "香烟", "咖啡", "自行车", "手机", "新选组", "新撰组", "卡哇伊", "欧巴桑"],
+ "content_tags": ["romance_light", "violence"],
+ "status": "review",
+ "notes": "首发六个世界之一。町人按常例并无公开的姓氏，这里为了称呼方便给所有人配了姓；人物性别按会话偏好生成（D15），身份与性别的搭配按架空处理；称谓与年号按当时的说法。等待真实 Skill 试玩记录后改为 released。"
+}

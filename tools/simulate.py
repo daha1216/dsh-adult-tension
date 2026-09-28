@@ -1,12 +1,15 @@
 """Long-run simulation (ACCEPTANCE.md 9.4, 5; DELIVERY_PLAN stage 3).
 
-    python tools/simulate.py [--turns 300] [--cold N] [--json] [--out PATH]
+    python tools/simulate.py [--turns 300] [--mode daily|pressure|both]
+                             [--world ID] [--cold N] [--json] [--out PATH]
 
 Turn numbers count the opening as turn 1, so "turn 300" is the state after
 299 commits. Both routes play 10 turns past the last save/load.
 
-Two runs (pressure and daily, different seeds), played in-process through the
-real write path (application.service) with the deterministic fake narrator:
+Two runs (pressure and daily, different fixed seeds; --mode picks one),
+played in-process through the real write path (application.service) with the
+deterministic fake narrator. The seed chooses the world among all worlds, as
+new-game does; --world locks one world instead.
 
 - The straight route plays N turns. Before every 7th turn an invalid commit
   is injected: it must be rejected and leave the state digest unchanged.
@@ -87,13 +90,17 @@ def _randomness(result, state):
 class Route:
     """One route of one run: a data directory, a current session and counters."""
 
-    def __init__(self, name, data_dir, mode, seed):
+    def __init__(self, name, data_dir, mode, seed, world=None):
         self.name = name
         self.ctx = _ctx(data_dir)
         self.narrator = FakeNarrator(seed)
         self.n = 0
-        opened = service.new_game(self.ctx, {"request_id": self.rid("new"), "mode": mode, "seed": seed, "include_drafts": True})
+        request = {"request_id": self.rid("new"), "mode": mode, "seed": seed, "include_drafts": True}
+        if world:
+            request["locks"] = {"world_id": world}
+        opened = service.new_game(self.ctx, request)
         self.sid = opened["session_id"]
+        self.world = _load(self.ctx, self.sid)[0]["world_id"]
         self.stats = {
             "invalid_injected": 0,
             "invalid_rejected": 0,
@@ -320,9 +327,9 @@ def measure_side_by_side(points, cold=0, workdir=None):
     return reports
 
 
-def run_one(mode, seed, turns, workdir, cold=0):
-    straight = Route("%s_a" % mode, os.path.join(workdir, "%s-straight" % mode), mode, seed)
-    split = Route("%s_b" % mode, os.path.join(workdir, "%s-split" % mode), mode, seed)
+def run_one(mode, seed, turns, workdir, cold=0, world=None):
+    straight = Route("%s_a" % mode, os.path.join(workdir, "%s-straight" % mode), mode, seed, world)
+    split = Route("%s_b" % mode, os.path.join(workdir, "%s-split" % mode), mode, seed, world)
     points = []
     started = time.perf_counter()
     last = turns + PAST_LAST_LOAD
@@ -343,6 +350,7 @@ def run_one(mode, seed, turns, workdir, cold=0):
     result = {
         "mode": mode,
         "seed": seed,
+        "world": straight.world,
         "turns": final_state["turn"],
         "seconds": round(elapsed, 1),
         "digest_straight": straight.digest(),
@@ -402,15 +410,19 @@ def main(argv):
     parser.add_argument("--out", default=None)
     parser.add_argument("--keep", action="store_true", help="keep the temporary data directories")
     parser.add_argument("--cold", type=int, default=0, help="cold-process samples per point (0: skip)")
+    parser.add_argument("--mode", choices=("daily", "pressure", "both"), default="both")
+    parser.add_argument("--world", default=None, help="lock one world (default: the seed chooses, as new-game does)")
     args = parser.parse_args(argv)
     TURNS = args.turns
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     workdir = tempfile.mkdtemp(prefix="at-simulate-")
-    report = {"machine": benchmark.machine_info(), "turns": args.turns, "cold_samples": args.cold, "runs": []}
+    report = {"machine": benchmark.machine_info(), "turns": args.turns, "cold_samples": args.cold, "world_lock": args.world, "runs": []}
     try:
         for mode, seed in RUNS:
-            run = run_one(mode, seed, args.turns, workdir, args.cold)
+            if args.mode not in ("both", mode):
+                continue
+            run = run_one(mode, seed, args.turns, workdir, args.cold, args.world)
             run["gates"] = gates(run, args.turns)
             report["runs"].append(run)
     finally:
@@ -428,7 +440,7 @@ def main(argv):
         sys.stdout.buffer.write(text.encode("utf-8") + b"\n")
     else:
         for run in report["runs"]:
-            print("%s seed %d: %d turns in %.1fs" % (run["mode"], run["seed"], run["turns"], run["seconds"]))
+            print("%s seed %d (%s): %d turns in %.1fs" % (run["mode"], run["seed"], run["world"], run["turns"], run["seconds"]))
             for g in run["gates"]:
                 print("  [%s] %s: %s" % ("OK" if g["pass"] else "FAIL", g["gate"], json.dumps(g["value"], ensure_ascii=False)))
         print("PASS" if report["pass"] else "FAIL")

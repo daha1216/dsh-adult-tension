@@ -207,8 +207,11 @@ class ExportImportTest(unittest.TestCase):
             raw = handle.read()
         doc = json.loads(raw.decode("utf-8"))
         tampered = os.path.join(self.tmp, "tampered.json")
+        title = doc["session"]["content"]["world"]["title"]
+        changed = raw.replace(title.encode("utf-8"), (title[:-1] + "改").encode("utf-8"), 1)
+        self.assertNotEqual(changed, raw)
         with open(tampered, "wb") as handle:
-            handle.write(raw.replace("港口夜班".encode("utf-8"), "港口日班".encode("utf-8"), 1))
+            handle.write(changed)
         err = self.rejected("INVALID_INPUT", path=tampered)
         self.assertEqual(err.details[0]["path"], "$.checksum")
         truncated = os.path.join(self.tmp, "truncated.json")

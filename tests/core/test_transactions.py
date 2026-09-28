@@ -9,6 +9,7 @@ from adult_tension.application import service
 from adult_tension.domain.state import digest as state_digest_of
 from adult_tension.errors import AppError
 from adult_tension.persistence import repo
+from helpers.domain import STORE
 from helpers.service import Ids, app, open_game, session, table_counts
 
 
@@ -240,7 +241,9 @@ class NewGameCommandTest(unittest.TestCase):
                 service.new_game(ctx, {"request_id": "req_draft_1", "mode": "daily"})
             self.assertEqual(caught.exception.code, "NO_MATCH")
             self.assertEqual(service.list_worlds(ctx, {})["worlds"], [])
-            self.assertEqual(len(service.list_worlds(ctx, {"include_drafts": True})["worlds"]), 1)
+            listed = service.list_worlds(ctx, {"include_drafts": True})["worlds"]
+            self.assertEqual(len(listed), len(STORE.index()["worlds"]))
+            self.assertEqual(len(listed), 6)
 
     def test_random_openings_avoid_recent_signatures(self):
         with app() as ctx:

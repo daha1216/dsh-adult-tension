@@ -33,8 +33,14 @@ class Ids:
         return "%s_%06d" % (self.prefix, self.n)
 
 
+# Service tests are written against the harbor world; a seed alone would pick
+# any of the six. Tests about world choice call service.new_game themselves.
+REFERENCE_WORLD = "harbor_night_shift"
+
+
 def open_game(ctx, ids, mode="pressure", seed=7, **extra):
     payload = dict({"request_id": ids(), "mode": mode, "seed": seed, "include_drafts": True}, **extra)
+    payload["locks"] = dict({"world_id": REFERENCE_WORLD}, **payload.get("locks", {}))
     return service.new_game(ctx, payload)
 
 

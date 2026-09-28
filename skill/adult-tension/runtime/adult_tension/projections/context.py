@@ -2,7 +2,12 @@
 
 Pure functions of (state, content, save info). Lists are bounded so the
 brief context stays <= 6 KB and the full context <= 20 KB (UTF-8 JSON) no
-matter how long the game runs; the trimming order is fixed here.
+matter how long the game runs or how many people a world puts on stage.
+The brief context trims lists in a fixed order. The full context degrades
+detail step by step (_full_steps), least relevant first, and never drops a
+section the contract names: every major or supporting NPC keeps at least a
+summary card, every pending event and active leverage, every world rule and
+location, the latest chapter and a name pool to draw new names from.
 """
 
 import json
@@ -15,6 +20,8 @@ from ..domain import structure as ST
 
 BRIEF_LIMIT = 6 * 1024
 FULL_LIMIT = 20 * 1024
+# size_bytes is added after fitting; its own bytes count toward the limit.
+SIZE_FIELD_RESERVE = 24
 LIMITS = {"due_soon": 10, "known_facts": 8, "recent": 3, "nearby": 5}
 
 
@@ -283,16 +290,172 @@ def full(state, content, save=None):
         "given_male": pools["given_male"][:12],
         "given_neutral": pools["given_neutral"][:8],
     }
-    _fit(
-        context,
-        FULL_LIMIT,
-        ("name_pool", "background", "player_facts", "relationships", "events", "customs", "chapters", "known_facts", "due_soon"),
-    )
+    _fit_full(context, state)
     return context
+
+
+# -- full-context budget -------------------------------------------------------
+
+CARD_SUMMARY_KEYS = ("id", "name", "call", "age", "gender", "tier", "role", "adult_context", "location_id", "present", "can_act", "voice", "to_player")
+ROSTER_KEYS = ("id", "name", "tier", "role", "adult_context", "location_id", "present", "to_player")
+NAME_POOL_FLOOR = {"family_unused": 6, "given_female": 4, "given_male": 4, "given_neutral": 3}
+PLAYER_FACTS_FLOORS = (16, 8)
+CUSTOMS_FLOOR = 2
+
+
+def _card_summary(card):
+    """An absent NPC: who, where, how they stand with the player, what they
+    want and will never do, and their boundaries."""
+    out = {k: card[k] for k in CARD_SUMMARY_KEYS if k in card}
+    decision = {k: v for k, v in (card.get("decision") or {}).items() if k in ("core_value", "current_goal", "relationship_stance", "withdrawal", "never")}
+    if decision:
+        out["decision"] = decision
+    intimacy = {k: v for k, v in (card.get("intimacy") or {}).items() if k in ("boundaries", "preconditions")}
+    if intimacy:
+        out["intimacy"] = intimacy
+    out["detail"] = "summary"
+    return out
+
+
+def _card_compact(card):
+    """A present NPC under budget pressure: what the next beat needs (decision
+    with pressure responses, situation, intimacy numbers and boundaries), no
+    appearance or sample lines."""
+    out = {k: v for k, v in card.items() if k not in ("appearance", "voices")}
+    if "identity" in out:
+        out["identity"] = {k: v for k, v in out["identity"].items() if k in ("authority", "exposure_risk", "hidden_mismatch")}
+    if "decision" in out:
+        out["decision"] = {k: v for k, v in out["decision"].items() if k not in ("prefers", "avoids", "contrast")}
+    if "intimacy" in out:
+        out["intimacy"] = {k: v for k, v in out["intimacy"].items() if k not in ("likes", "dislikes", "attraction_sources")}
+    out["detail"] = "compact"
+    return out
+
+
+def _roster_line(card):
+    return dict({k: card[k] for k in ROSTER_KEYS if k in card}, detail="roster")
+
+
+def _card_order(context, state, present):
+    """Cards to shrink, least relevant first: anyone who has not just
+    responded in this scene, supporting before major, those no pending event
+    involves, then the weakest tie to the player."""
+    in_events = set()
+    for event in state["events"].values():
+        if event["state"] == "pending":
+            in_events.update(event["participants"])
+    responded = {r["npc_id"] for r in state["scene"]["responses"][-3:]}
+
+    def key(card):
+        tie = card.get("to_player") or {}
+        return (
+            card["id"] in responded,
+            card["tier"] == "major",
+            card["id"] in in_events,
+            abs(tie.get("trust", 0)) + tie.get("tension", 0),
+            card["id"],
+        )
+
+    return [c["id"] for c in sorted(context["characters"], key=key) if bool(c.get("present")) == present]
+
+
+def _replace_card(context, cid, shrink):
+    context["characters"] = [shrink(c) if c["id"] == cid else c for c in context["characters"]]
+
+
+def _full_steps(context, state):
+    """Degradation steps in order; each makes the context smaller."""
+    here = state["scene"]["location_id"]
+    nearby = set()
+    for loc in context["locations"]:
+        if loc["id"] == here:
+            nearby = set(loc.get("exits", []))
+
+    def drop(key):
+        return lambda: context.pop(key, None)
+
+    def pop_to(key, floor, holder=None):
+        def step():
+            target = context if holder is None else context.get(holder, {})
+            items = target.get(key)
+            while isinstance(items, list) and len(items) > floor and size_of(context) > FULL_LIMIT - SIZE_FIELD_RESERVE:
+                items.pop()
+        return step
+
+    def background_lines():
+        for item in context["background"]:
+            if item.get("location_id") != here:
+                item.pop("line", None)
+
+    def background_elsewhere():
+        context["background"] = [b for b in context["background"] if b.get("location_id") == here]
+
+    def far_locations(keep):
+        def step():
+            for loc in context["locations"]:
+                if loc["id"] not in keep:
+                    loc.pop("detail", None)
+                    loc.pop("affordances", None)
+        return step
+
+    def one_reason():
+        for edge in context["relationships"]:
+            edge["recent"] = edge["recent"][-1:]
+
+    def edges_elsewhere():
+        onstage = set(state["scene"]["present"])
+        context["relationships"] = [e for e in context["relationships"] if e["from"] in onstage or e["to"] in onstage]
+
+    def older_chapters():
+        context["chapters"] = context["chapters"][-1:]
+
+    def small_name_pool():
+        pool = context["name_pool"]
+        for key, floor in NAME_POOL_FLOOR.items():
+            pool[key] = pool[key][:floor]
+
+    def shrink_cards(present, shrink):
+        return [lambda cid=cid: _replace_card(context, cid, shrink) for cid in _card_order(context, state, present)]
+
+    # No information lost: the full lists carry these.
+    yield drop("known_facts")
+    yield drop("due_soon")
+    # Far from the scene.
+    yield background_lines
+    yield far_locations({here} | nearby)
+    yield from shrink_cards(False, _card_summary)
+    yield background_elsewhere
+    yield one_reason
+    yield pop_to("player_facts", PLAYER_FACTS_FLOORS[0])
+    yield older_chapters
+    yield small_name_pool
+    yield pop_to("customs", CUSTOMS_FLOOR, holder="world")
+    yield pop_to("player_facts", PLAYER_FACTS_FLOORS[1])
+    yield far_locations({here})
+    # Only now the people on stage lose flavour, then absent people shrink
+    # to a roster line and edges between absent people go.
+    yield from shrink_cards(True, _card_compact)
+    yield from shrink_cards(False, _roster_line)
+    yield edges_elsewhere
+    # A crowded scene: everyone on stage but the most relevant person keeps
+    # a summary, then a roster line.
+    crowd = _card_order(context, state, True)[:-1]
+    for shrink in (_card_summary, _roster_line):
+        for cid in crowd:
+            yield lambda cid=cid, shrink=shrink: _replace_card(context, cid, shrink)
+
+
+def _fit_full(context, state):
+    for step in _full_steps(context, state):
+        if size_of(context) <= FULL_LIMIT - SIZE_FIELD_RESERVE:
+            break
+        step()
+    context["size_bytes"] = size_of(context)
 
 
 def _fit(context, limit, order):
     """Trim lists in the given order until the context fits."""
+    limit -= SIZE_FIELD_RESERVE
     if size_of(context) <= limit:
         context["size_bytes"] = size_of(context)
         return
