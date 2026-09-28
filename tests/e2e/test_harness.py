@@ -144,8 +144,14 @@ class MachineCheckTest(unittest.TestCase):
         # the line first, then the player named as its speaker
         rec["turns"][2]["text"] = "“别急着谈展位，”你的声音很稳，“先把眼下的火灭了。”\n\n" + footer(3, 1210)
         self.assertIn(("ventriloquism", 3), names(M.check(rec)))
-        # someone else's line that the player does not answer, and someone else's line
-        for text in ("“你说今晚到底走不走？”你没有回答，只是看着她。", "“今晚忙得很，别来烦我。”她说。你点了点头。"):
+        # the player's own sentence running into a colon and a line
+        rec["turns"][2]["text"] = "你深吸了一口气，抬眼看着面前的两个人，声音压得极沉：“这局我一个人扛不下。”\n\n" + footer(3, 1210)
+        self.assertIn(("ventriloquism", 3), names(M.check(rec)))
+        rec["turns"][2]["text"] = "你深吸了一口气，声音压得极沉：\n\n“这局我一个人扛不下。”\n\n" + footer(3, 1210)
+        self.assertIn(("ventriloquism", 3), names(M.check(rec)))
+        # someone else's line that the player does not answer, someone else's line, someone else in the sentence
+        for text in ("“你说今晚到底走不走？”你没有回答，只是看着她。", "“今晚忙得很，别来烦我。”她说。你点了点头。",
+                     "你听见她压低了声音：“今晚别去七号泊位。”", "你看向志强，志强把烟掐了：“今晚别去七号泊位。”"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertNotIn(("ventriloquism", 3), names(M.check(rec)), text)
 

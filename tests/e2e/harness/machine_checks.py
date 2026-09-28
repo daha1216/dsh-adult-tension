@@ -52,6 +52,10 @@ PLAYER_SPEECH_RE = re.compile(r"(?:^|[。！？\n，、])\s*你[^。！？“\n]
 # the line first, then who said it: “……”你的声音……, “……”你低声说
 PLAYER_SPEECH_AFTER_RE = re.compile(r"“([^”]{2,})”[，,]?\s*你(的声音|[^。！？“”\n]{0,8}?(?:说|问|道|答|喊|开口|低声))")
 NEGATIONS = ("没", "不", "未", "别")
+# a sentence of the player's running into a colon and a line: 你深吸一口气，声音压得极沉：“……”
+PLAYER_COLON_RE = re.compile(r"(?:^|[。！？])\s*你([^。！？“”\n]{0,60})[：:]\s*“([^”]{2,})”")
+# ... unless someone else is in that sentence (你听见她说：“……”, 你看向秋山，秋山低声道：“……”)
+OTHER_SPEAKERS = ("他", "她", "它", "对方", "有人", "众人")
 TIME_WORDS = {
     "凌晨": [(0, 6)],
     "清晨": [(4, 9)],
@@ -279,16 +283,41 @@ def _bigrams(text):
     return {text[i : i + 2] for i in range(len(text) - 1)}
 
 
+def _npc_name_parts(record):
+    """Two-character pieces of every NPC's name: a sentence holding one of
+    them may be that NPC's (秋山 for 秋山源次郎)."""
+    players = {(_opening_player(record) or {}).get("name")}
+    return {name[i : i + 2] for name in _known_names(record) - players for i in range(len(name) - 1)}
+
+
+def _opening_player(record):
+    for turn in record["turns"]:
+        for call in turn.get("runtime_calls") or []:
+            player = ((R.ok_data(call) or {}).get("opening") or {}).get("player")
+            if player:
+                return player
+    return None
+
+
 def check_ventriloquism(record):
     out = []
+    others = None
     for turn in record["turns"]:
         if not narrative_calls(turn):
             continue
         source = _bigrams(turn.get("input") or "")
-        for line in prose_lines(turn.get("text")):
+        # a line introduced by a colon may start the next paragraph
+        text = re.sub(r"([：:])\s*\n+\s*(?=“)", r"\1", turn.get("text") or "")
+        for line in prose_lines(text):
             quotes = [m.group(1) for m in PLAYER_SPEECH_RE.finditer(line)]
             # “……”你没有回答: someone else's line
             quotes += [m.group(1) for m in PLAYER_SPEECH_AFTER_RE.finditer(line) if not any(n in m.group(2) for n in NEGATIONS)]
+            for match in PLAYER_COLON_RE.finditer(line):
+                if others is None:
+                    others = set(OTHER_SPEAKERS) | _npc_name_parts(record)
+                if not any(o in match.group(1) for o in others):
+                    quotes.append(match.group(2))
+            quotes = list(dict.fromkeys(quotes))
             for quote in quotes:
                 grams = _bigrams(quote)
                 if len(grams) < 4:
