@@ -161,9 +161,18 @@ def _envelopes(output):
             index = start + 1
 
 
-def _shell_invocations(command, files):
-    """(argv, input) for each runtime invocation in one shell command."""
+# Bash's own report that it could not parse a command. It runs the complete
+# commands on the lines before the reported one and nothing from that line on
+# ("-c: line 2: unexpected EOF while looking for matching `\"'").
+SHELL_SYNTAX_RE = re.compile(r"(?m)^[^\s:]*sh: -c: line (\d+): (?:unexpected EOF while looking for matching|syntax error)")
+
+
+def _shell_invocations(command, files, ran_lines=None):
+    """(argv, input) for each runtime invocation in one shell command; with
+    ran_lines, only in its first ran_lines lines."""
     lines = command.split("\n")
+    if ran_lines is not None:
+        lines = lines[:ran_lines]
     out = []
     i = 0
     while i < len(lines):
@@ -213,8 +222,11 @@ def calls_from_host(host_calls):
         elif path and isinstance(old, str):
             files.edit(path, old, data.get("new_string", data.get("newString")) or "", bool(data.get("replace_all", data.get("replaceAll"))))
         elif isinstance(data.get("command"), str):
-            envelopes = _envelopes(call.get("output"))
-            for n, (argv, payload) in enumerate(_shell_invocations(data["command"], files)):
+            output = call.get("output")
+            envelopes = _envelopes(output)
+            broken = SHELL_SYNTAX_RE.search(output) if isinstance(output, str) else None
+            ran_lines = int(broken.group(1)) - 1 if broken else None
+            for n, (argv, payload) in enumerate(_shell_invocations(data["command"], files, ran_lines)):
                 envelope = envelopes[n] if n < len(envelopes) else None
                 out.append({"argv": argv, "input": payload, "exit": None, "envelope": envelope, "ms": None, "source": "host"})
     return out

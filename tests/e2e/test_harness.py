@@ -134,8 +134,9 @@ class MachineCheckTest(unittest.TestCase):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertNotIn(("time", 3), names(M.check(rec)), text)
         # when something else happened
-        rec["turns"][2]["text"] = "柜子是凌晨抢装塞进来的，手续上缺了签字。\n\n" + footer(3, 1210)
-        self.assertNotIn(("time", 3), names(M.check(rec)))
+        for text in ("柜子是凌晨抢装塞进来的，手续上缺了签字。", "天光早在凌晨就沉了底，到了这会儿，只剩石板路上一层油光。"):
+            rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
+            self.assertNotIn(("time", 3), names(M.check(rec)), text)
         # the narration still says what time it is, with an hour or without; so does a line about now
         for text in ("凌晨两点，风把旗子吹得啪啪响。", "她说：“都凌晨了，还不回去？”", "现在是凌晨的时候，风把旗子吹得啪啪响。"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
@@ -231,6 +232,11 @@ class MachineCheckTest(unittest.TestCase):
         bash = {"tool": "Bash", "input": {"command": "python %s/scripts/adult_tension.py commit-turn --json --input-file in.json" % installed}, "output": ""}
         missing["turns"][2]["host_calls"] = [bash, bash]
         self.assertEqual(names(M.check(missing)), [("record", 3)])
+        # a command the shell could not parse never reached the runtime; the retry did
+        retried = copy.deepcopy(rec)
+        broken = {"tool": "bash", "input": {"command": 'python "%s/scripts/adult_tension.py" commit-turn --json --input-file "in.json' % installed}, "output": "/usr/bin/bash: -c: line 1: unexpected EOF while looking for matching `\"'\n"}
+        retried["turns"][2]["host_calls"] = [broken, bash]
+        self.assertEqual(M.check(retried)["findings"], [])
         other = copy.deepcopy(rec)
         other["turns"][1]["runtime_calls"][0]["skill_root"] = "C:\\Users\\x\\.claude\\skills\\adult-tension"
         self.assertEqual(names(M.check(other)), [("record", 2)])
@@ -523,6 +529,18 @@ class HostCallsTest(unittest.TestCase):
         self.assertEqual(R.error_code(calls[1]), "NOT_FOUND")
         record = {"script": "x", "run": 1, "turns": [{"index": 1, "input": "状态", "runtime_calls": calls[2:], "text": ""}]}
         self.assertIn("宿主的记录里没有可解析的返回", R.to_markdown(record))
+
+    def test_a_command_the_shell_could_not_parse_never_ran(self):
+        runtime = 'python "D:/p/.claude/skills/adult-tension/scripts/adult_tension.py"'
+        calls = R.calls_from_host([
+            # the closing quote is missing: bash stops before running anything
+            {"tool": "bash", "input": {"command": '%s commit-turn --json --input-file "D:/p/in.json' % runtime}, "output": "/usr/bin/bash: -c: line 1: unexpected EOF while looking for matching `\"'\n", "status": "completed"},
+            # the first line is complete and ran; the broken second line did not
+            self.bash('%s status --json\n%s commit-turn --json --input-file "D:/p/in.json' % (runtime, runtime), raw=json.dumps(envelope({"n": 1})) + "\nbash: -c: line 2: unexpected EOF while looking for matching `\"'"),
+            self.bash("%s doctor --json" % runtime, envelope({"n": 2})),
+        ])
+        self.assertEqual([R.command_of(c) for c in calls], ["status", "doctor"])
+        self.assertEqual([R.ok_data(c)["n"] for c in calls], [1, 2])
 
 
 class RunnerTest(unittest.TestCase):

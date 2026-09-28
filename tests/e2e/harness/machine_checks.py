@@ -74,7 +74,7 @@ TIME_WORDS = {
     "午夜": [(22, 24), (0, 3)],
 }
 # A time word next to one of these is about another moment, not about now.
-TIME_OTHER = ("昨", "明", "前", "后", "那天", "那晚", "今天", "今早", "等到", "到了", "直到", "刚才", "之前", "以前", "每天", "每晚", "每到", "天天", "那年", "当年", "上回", "下回", "约", "说好")
+TIME_OTHER = ("昨", "明", "前", "后", "那天", "那晚", "今天", "今早", "等到", "到了", "直到", "刚才", "之前", "以前", "每天", "每晚", "每到", "天天", "那年", "当年", "上回", "下回", "约", "说好", "早在", "自从", "以来")
 # Inside dialogue people mostly speak of other moments ("包工头下午就联系不上了",
 # "凌晨两点签到"); a time word there is about now only when marked so:
 # "都凌晨了", "这大半夜的", "现在是傍晚".
