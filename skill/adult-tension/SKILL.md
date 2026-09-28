@@ -46,7 +46,7 @@ description: Run a Chinese interactive story for adults with a local determinist
         世界观：……（1–2 句，含 `rule_in_play` 这条规则在场景里起作用）
         人物：……（玩家角色与 NPC 的姓名、明确年龄、身份，不泄露隐藏动机）
 
-        正文（约 300–700 字；压力模式写出眼前的压力与近期期限，远期只作伏笔；结尾停在 `hook` 描述的未决动作上，不替玩家接）
+        （正文，不加标题，约 300–700 字；压力模式写出眼前的压力与近期期限，远期只作伏笔；结尾停在 `hook` 描述的未决动作上，不替玩家接）
 
         `opening.footer` 原样放在最后
 

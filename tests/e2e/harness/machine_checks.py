@@ -197,6 +197,9 @@ def check_leakage(record):
             for word in MECHANISM_WORDS:
                 if word in text:
                     out.append(finding("leakage", index, "正文里出现机制用语 %s" % word))
+            # the opening format's placeholder copied as a heading
+            if any(re.match(r"\**正文\**[:：]", line) for line in lines):
+                out.append(finding("leakage", index, "正文前照抄了格式里的“正文：”"))
             if re.search(r"[{\[]\s*\"[a-z_]+\"\s*:", text):
                 out.append(finding("leakage", index, "正文里出现 JSON"))
     return out
