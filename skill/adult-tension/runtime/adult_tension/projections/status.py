@@ -5,6 +5,7 @@ Plain-language views never show field names or relationship numbers, and
 """
 
 from ..domain import clock as CL
+from ..domain import facts as FA
 from ..domain import state as SS
 from ..domain import structure as ST
 from . import context as CX
@@ -123,7 +124,7 @@ def detail_sections(state, content):
     for event in _player_events(state):
         deadlines.append("%s：%s前" % (event["title"], CL.label(event["due"], world.get("clock_style", "hm"))))
     sections.append({"title": "承诺与期限", "items": deadlines or ["没有未了的约定或期限"]})
-    secrets = [f["text"] for f in state["facts"].values() if f["visibility"] == "private" and (player in f["known_by"] or player in f["believed_by"])]
+    secrets = [f["text"] for f in FA.of(state).known_to(player) if f["visibility"] == "private"]
     sections.append({"title": "你知道的秘密", "items": secrets[-12:] or ["还没有"]})
     people = []
     for char in sorted(state["characters"].values(), key=lambda c: (c["id"] not in state["scene"]["present"], c["id"])):

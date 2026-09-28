@@ -23,12 +23,12 @@ description: Run a Chinese interactive story for adults with a local determinist
     <python> <本 Skill 目录>/scripts/adult_tension.py <command> --json --input-file <tmp.json>
 
 - `<python>`：依次试 `python3`、`python`、`py -3`，用第一个 3.10 及以上的。
-- 输入写进一个 UTF-8 的临时 JSON 文件（工作目录或系统临时目录都行）再传入。**玩家的原话永远不放进命令行参数。**
+- 输入写进 UTF-8 的临时 JSON 文件再传入。**玩家的原话永远不放进命令行参数。**
 - stdout 是一个 JSON：`{"ok", "data", "error"}`。
 - 每个写操作带 `request_id`：用上一次返回里的 `next_request_id`。
-- 会话内的写操作（`commit-turn`、`save-slot`）还要带 `session_id` 与 `expected_revision`（上一次返回的 `revision`）。
+- 会话内的写操作（`commit-turn`、`undo-turn`、`save-slot`、`set-*`）还要带 `session_id` 与 `expected_revision`（上一次返回的 `revision`）。
 - 超时、没有输出、输出不是 JSON：用**同一个** `request_id` 重试，最多 3 次。仍失败就运行 `doctor`，用一句话告诉玩家。
-- `IDEMPOTENCY_CONFLICT`：这个 `request_id` 之前已经成功过。先 `get-context` 确认上一次是否已经生效，再决定要不要用新的 `request_id` 补交。
+- `IDEMPOTENCY_CONFLICT`：这个 `request_id` 已用于别的请求。先 `get-context` 确认上一次是否生效，再决定是否换新 `request_id` 补交。
 
 ## 第一次
 
@@ -39,14 +39,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 1. 玩家没说日常还是压力：问一句“1 日常 / 2 有压力”。只有玩家说“随便”才用 `random`。读档永远不问。
 2. 本对话已有进行中的局，且上下文 `save.turns_since_save` > 0：先问“存档后开局 / 直接开局 / 取消”。
 3. 玩家要的题材不在任何世界里（`list-worlds` 查看）：说明没有现成世界，给最接近的世界让玩家选。
-4. 调用 `new-game`：
-
-        {"request_id": "...", "mode": "daily|pressure|random",
-         "locks": {"world_id": "..."}, "excludes": {"content_tags": ["workplace"], "world_ids": []},
-         "player": {"gender": "female", "age": 45, "identity_hint": "裁缝", "name": "...", "title": "..."},
-         "npc_gender_preference": "mostly_female"}
-
-   只写玩家提到的部分。“不要职场”这类话转成 `excludes`；“女性 NPC 为主”是 `mostly_female`（还有 `female_only`、`male_only`、`mostly_male`、`mixed`、`any`）。“重开 N 号”：`{"request_id": "...", "seed": N, "replay": true}`。返回 `NO_MATCH` 时如实告诉玩家哪条做不到、可以放宽什么，不假装已满足。
+4. 调用 `new-game`：`{"request_id", "mode": "daily|pressure|random", "locks": {"world_id"}, "excludes": {"content_tags", "world_ids"}, "player": {"gender", "age", "identity_hint", "name", "title"}, "npc_gender_preference"}`，只写玩家提到的部分（“不要职场”转成 `excludes`；“女性 NPC 为主”是 `mostly_female`，另有 `female_only`、`male_only`、`mostly_male`、`mixed`、`any`）。“重开 N 号”：`{"request_id", "seed": N, "replay": true}`。`NO_MATCH`：如实说哪条做不到、可以放宽什么。
 5. 按返回的 `opening` 写开局（`opening.world`、`player`、`npcs`、`scene`、`activity` 或 `pressure`、`tension`、`hook`）：
 
         世界观：……（1–2 句，含 `rule_in_play` 这条规则在场景里起作用）
@@ -77,11 +70,11 @@ description: Run a Chinese interactive story for adults with a local determinist
            {"op": "advance_time", "minutes": 10}],
          "content_tags": [], "summary": "第三方视角一两句", "open_action": "停在哪个未决动作", "quotes": []}
 
-   - `player_authorized: true` 只在玩家本人的话授权了玩家角色的移动、承诺、交易、同意或设定修改时。
-   - 常用操作：`npc_response`、`npc_action`（重大行动带 `significant: true`，看上下文 `can_act`）、`npc_state`、`add_fact`、`relationship`、`advance_time`（不写默认推进 3 分钟）、`move`、`enter_scene`/`exit_scene`、`event_create`/`event_resolve`/`event_cancel`、`roll`、`player_update`。
-   - 人物与知识：`reveal_fact`（沿关系边当面告知）、`spread_rumor`（走样的传闻，生成新的假事实）、`set_voice`（表层/里层）、`introduce_character` / `promote_character`（新角色必须明确成年，名字取自完整上下文的 `name_pool`）、`intimacy_evidence`、`identity_update`、`npc_update`、`leverage_set` / `leverage_release`。字段见 `references/operations.md`。
+   - `player_authorized: true` 只在玩家本人的话授权了玩家角色的移动、承诺、交易、同意、转折或设定修改时。
+   - 操作（字段见 `references/operations.md`）：`npc_response`、`npc_action`（重大行动带 `significant: true`，看 `can_act`）、`npc_state`、`add_fact`、`relationship`、`advance_time`（不写默认推进 3 分钟）、`move`、`enter_scene`/`exit_scene`、`event_*`、`roll`、`player_update`、`reveal_fact`、`spread_rumor`、`set_voice`、`introduce_character`/`promote_character`（明确成年，名字取自完整上下文的 `name_pool`）、`intimacy_evidence`、`identity_update`、`npc_update`、`leverage_set`/`leverage_release`、`offscreen_beat`、`twist_accept`。
    - 正文里新写出、以后要用到的细节，用 `add_fact` 记下。正文不是记忆。
-4. 只根据返回的 `applied`、`resolved_events`、新的 `context` 写正文。掷骰结果、事件到期都由运行时决定，你负责描写。
+   - 照上下文的 `requests` 附带：`chapter_summary` 为 true 时写 `chapter_summary`（≤300 字，第三方视角概括到上一回合为止的这一章）；`prologue` 为 true 时读完整上下文的 `prologue_merge`，把旧前情与其中各章合并成 ≤300 字写进 `prologue`；没要求就不写。
+4. 只根据返回的 `applied`、`resolved_events`、`simulation`、新的 `context` 写正文。掷骰、事件到期、离屏移动与消息传播都由运行时决定，你负责描写。
 5. 页脚：`【时间】{context.clock.label}｜【地点】{context.scene.location}｜回合：{turn}`。叙事助手开启时（`context.preferences.assistant`），末尾加“可以：① …… ② …… ③ ……”，只给提示，不替玩家决定。
 6. 返回的 `context` 就是下一回合的依据，不需要再调 `get-context`。信息不够时可以 `get-context` 带 `"depth": "full"`。
 
@@ -93,6 +86,18 @@ description: Run a Chinese interactive story for adults with a local determinist
 - 不替玩家角色说有意义的话、不替玩家做选择、不替玩家下情绪结论。
 - “必须 / 一定 / 确保”只锁定玩家自己的动作，锁不住 NPC 的同意。
 - 跨时间的行动（“接下来三天都去盯着”）：先写第一步，再用 `event_create` 登记。
+
+## 时间、离屏与转折
+
+- 快进（“快进到晚上”“三天后”）：先 `get-context` 带 `preview_time`（与 `advance_time` 同形：`until`/`days`/`minutes`），再提交一次：`advance_time` 放第一个，其后为 `preview.required_beats` 的每个 NPC 各写一条 `offscreen_beat`。正文写清到期事件的结果。
+- `offscreen_beat`：只写这个不在场 NPC 自己的行动、状态、去向、NPC 之间的关系与消息，依据他的目标与所知（预览的 `goal`、`knows`），不碰玩家角色。玩家“继续”时可以为 `requests.offscreen_beat_candidates` 里的 NPC 插一段简短离屏片段。跨度 ≥ 60 分钟或跨日时被点名的 NPC 必须有，缺了被拒，错误的 `preview` 给出补写所需。离屏推演关闭时没有离屏片段。
+- 转折：`requests.twist_offer` 出现（压力模式第一次跨日），或玩家说“来点转折”（`get-context` 带 `"want_twist": true`）时，正文后一句话列出候选（“可以选一个转折：① …… ② ……，或说你想要的”）。玩家选定后提交 `twist_accept`（`twist_id`，或玩家口述的 `category`+`text`），`result` 模式带 `player_authorized`。同一游戏日最多一次；玩家不理会就照常继续。
+
+## 撤销、改写、追溯
+
+- “撤销”“刚才不算”：`undo-turn`。回执“已撤销第 N 回合”，再一句话定位当前场景。最多退到本次读档或开局的那一回合。
+- “刚才不算，改成 Y”：一次 `commit-turn`，带 `"replaces_turn": 当前回合号`，按 Y 判定行动模式。
+- “其实……”：`action_mode: "rewrite"` 带 `player_authorized`，用 `add_fact`（`"origin": "retcon"`、`"visibility": "private"`、`"known_by": ["player"]`）或 `player_update` 补玩家角色自己的背景、物品、经历、称谓，可附 NPC 的反应（`npc_action`/`npc_state`）。追溯不给 NPC 追加知情、好感或同意；与已记录事实冲突会被拒：告诉玩家这与已发生的事矛盾，请换个说法。
 
 ## NPC
 
@@ -118,15 +123,17 @@ description: Run a Chinese interactive story for adults with a local determinist
 | 开局、新游戏、开局 日常 / 压力、开局 港口、重开 N 号 | 开局流程 |
 | 世界列表、有哪些世界 | `list-worlds`（无输入） |
 | 继续、c、……、空输入 | `commit-turn`（`continue`） |
-| 存档 [名称]、s、快速存档、qs | `save-slot`（`{"session_id", "request_id", "expected_revision", "name"}`；不给名字就存到当前槽或自动命名） |
+| 存档 [名称]、s、快速存档、qs | `save-slot`（带 `name`；不给名字就存到当前槽或自动命名） |
 | 另存为 名称 | `save-slot`，带新名称与 `"save_as": true` |
 | 读档 [名称]、l | `load-slot`（`{"request_id", "name"}`）；没给名称或名称不存在时 `list-slots` 让玩家选 |
 | 存档列表 | `list-slots`（无输入） |
 | 状态 / 状态+ / 调试 | `status`（`level`: `brief` / `detail` / `debug`），把 `lines`（和 `sections`）原样转述，不加叙事 |
 | 边界：不要 X / 撤销边界 X | `set-boundary`（`add` / `remove`） |
 | 暂停、安全词、pause / 换个场景 | `set-safety` |
-| 内心可见 开/关、叙事助手 开/关、离屏推演 开/关、语态 某人 表/里、改用第三人称、NPC 性别偏好 | `set-preferences`（`inner_view`、`assistant`、`offscreen_simulation`、`voice: {"npc_id", "voice"}`、`person`、`npc_gender_preference`） |
-| 撤销、快进、来点转折、导出/导入、继续上次 | 当前版本还没开放：用一句话告诉玩家 |
+| 内心可见 / 叙事助手 / 离屏推演 开关、语态 某人 表/里、人称、NPC 性别偏好 | `set-preferences`（`inner_view`、`assistant`、`offscreen_simulation`、`voice: {"npc_id", "voice"}`、`person`、`npc_gender_preference`） |
+| 撤销 / 刚才不算 / 刚才不算，改成 Y / 其实…… | 见“撤销、改写、追溯” |
+| 快进到……、跳到……、来点转折 | 见“时间、离屏与转折” |
+| 导出、导入、继续上次、恢复 | 当前版本还没开放：用一句话告诉玩家 |
 | 帮助、h、? | 列出上面的说法 |
 
 缺少对象时追问一次，不猜。存档名已被占用（`SLOT_CONFLICT` 且 `reason: exists`）：问“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重交。`reason: changed_elsewhere`：给玩家“A 读取最新 / B 另存为新名 / C 取消”。

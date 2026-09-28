@@ -10,9 +10,9 @@
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
-| `action_mode` | 枚举：`result` / `attempt` / `rewrite` / `continue` / `wait` | 是 | result / attempt / rewrite / continue / wait |
+| `action_mode` | 枚举：`result` / `attempt` / `rewrite` / `continue` / `wait` | 是 | result / attempt / rewrite（“其实……”）/ continue / wait |
 | `player_input` | 字符串，≤2000 字 | 是 | 玩家这一句的原话（继续时可为空字符串） |
-| `player_authorized` | 布尔 | 否，默认 `false` | 玩家本人的话授权了玩家角色的移动、承诺、交易、同意或设定修改时为 true |
+| `player_authorized` | 布尔 | 否，默认 `false` | 玩家本人的话授权了玩家角色的移动、承诺、交易、同意、转折或设定修改时为 true |
 | `acts_on` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–8 项） 或 null | 否，默认 `null` | 玩家行动作用到的 NPC（身体、意志、财物）；attempt 不作用于任何 NPC 时写 [] |
 | `operations` | 数组（操作对象（按 `op` 区分），0–40 项） | 是 | 操作列表（可以为空数组） |
 | `content_tags` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–12 项） | 是 | 本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags |
@@ -20,8 +20,9 @@
 | `summary` | 字符串，≤120 字 | 是 | 本回合发生了什么，第三方视角，≤120 字 |
 | `open_action` | 字符串，≤80 字 | 是 | 回合停在哪里、谁在等谁，≤80 字 |
 | `quotes` | 数组（字符串，≤80 字，0–3 项） | 否，默认 `[]` | ≤3 条对后续有意义的原话，每条 ≤80 字 |
-| `chapter_summary` | 字符串，≤300 字 或 null | 否，默认 `null` | 上下文 requests.chapter_summary 为 true 时必填，≤300 字 |
-| `replaces_turn` | 整数 1..1000000 或 null | 否，默认 `null` | “刚才不算，改成……”时填上一回合的回合号 |
+| `chapter_summary` | 字符串，≤300 字 或 null | 否，默认 `null` | 上下文 requests.chapter_summary 为 true 时必填：上一章（到上一回合为止）的摘要，≤300 字；没有要求时不写 |
+| `prologue` | 字符串，≤300 字 或 null | 否，默认 `null` | 上下文 requests.prologue 为 true 时必填：把完整上下文 prologue_merge 里的旧前情与最早几章合并成一段前情，≤300 字；没有要求时不写 |
+| `replaces_turn` | 整数 1..1000000 或 null | 否，默认 `null` | “刚才不算，改成……”：填当前最后一个回合的回合号，引擎在同一事务里撤销它再应用本次提交 |
 
 ## 操作一览
 
@@ -40,7 +41,7 @@
 | `event_resolve` | 在到期前结束事件：约定、截止、机会用 fulfilled（兑现）；伏笔、风声用 surfaced（提前浮出）。概率事件只能由引擎到期掷骰 |
 | `event_cancel` | 因剧情取消未结束的事件（outcome: cancelled_by_story） |
 | `roll` | 即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能再嵌套 roll，也不能推进时间）。结果以返回的 applied 为准 |
-| `player_update` | 玩家角色的姓名、称谓、背景、资源与风险。只能在 result 或 rewrite 模式、并带 player_authorized |
+| `player_update` | 玩家角色的姓名、称谓、背景、资源与风险。只能在 result 或 rewrite（“其实……”）模式、并带 player_authorized |
 | `reveal_fact` | 把一条事实从知情人告诉别人。只能沿已有的关系边进行，当面告知时双方都要在场；内心事实永远不能传播。告诉某人真相时，若他正误信同键的假事实，引擎记录他的信息集变化 |
 | `spread_rumor` | 传出一条走样的传闻：生成新的假事实（来源为传闻），原事实不变。不经渠道时沿关系边、双方在场；经世界里的走样渠道时可以传到没有关系边的人 |
 | `set_voice` | 切换 NPC 的表层/里层语态。玩家要求（player_request）优先；NPC 自主切入里层（npc_self）要写触发因素：alone 独处 / drunk 醉意 / breakdown 情绪崩溃 / exposed 被戳穿；revert 切回表层。语态只改变说话方式，不是关系升级，note 不能与同一提交里的关系变化共用原因 |
@@ -51,6 +52,8 @@
 | `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给 |
 | `leverage_set` | 登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一提交里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间，双方之间的亲密提交被拒 |
 | `leverage_release` | 解除把柄（把柄被销毁、债务结清、秘密已经公开等），原因必填。同一提交里先解除再亲密不算解除 |
+| `offscreen_beat` | 离屏片段：不在场的重要 NPC 在这段时间里做了什么。只能写上下文 `offscreen_beat_candidates` 或时间推进要求的 NPC；子操作只能是这个 NPC 自己的行动、状态、移动，NPC 之间的关系与消息，以及不涉及玩家的事件与把柄 |
+| `twist_accept` | 接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result 模式并带 player_authorized；同一游戏日最多接受一次 |
 
 ## `advance_time`
 
@@ -234,7 +237,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `player_update`
 
-玩家角色的姓名、称谓、背景、资源与风险。只能在 result 或 rewrite 模式、并带 player_authorized
+玩家角色的姓名、称谓、背景、资源与风险。只能在 result 或 rewrite（“其实……”）模式、并带 player_authorized
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -549,6 +552,32 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `op` | 枚举：`leverage_release` | 是 |  |
 | `leverage_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
 | `reason` | 字符串，≤80 字 | 是 |  |
+
+## `offscreen_beat`
+
+离屏片段：不在场的重要 NPC 在这段时间里做了什么。只能写上下文 `offscreen_beat_candidates` 或时间推进要求的 NPC；子操作只能是这个 NPC 自己的行动、状态、移动，NPC 之间的关系与消息，以及不涉及玩家的事件与把柄
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`offscreen_beat` | 是 |  |
+| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `summary` | 字符串，≤120 字 | 是 |  |
+| `operations` | 数组（离屏操作，0–6 项） | 否，默认 `[]` |  |
+
+不能出现在 `roll` 的分支里。
+
+## `twist_accept`
+
+接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result 模式并带 player_authorized；同一游戏日最多接受一次
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `op` | 枚举：`twist_accept` | 是 |  |
+| `twist_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `category` | 枚举：`信息` / `人事` / `资源` / `制度` / `时限` / `关系` / `意外` 或 null | 否，默认 `null` |  |
+| `text` | 字符串，≤160 字 或 null | 否，默认 `null` |  |
+
+不能出现在 `roll` 的分支里。
 
 ## 取值表
 

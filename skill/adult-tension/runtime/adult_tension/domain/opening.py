@@ -7,6 +7,7 @@ same opening. All combinations happen inside one world pack (D7).
 
 import math
 
+from .. import STATE_SCHEMA_VERSION
 from ..errors import NO_MATCH, SAFETY_BLOCK, AppError, detail
 from . import clock as CL
 from . import rng
@@ -576,6 +577,7 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
             "origin": "setup",
             "turn": 1,
             "spreading": False,
+            "coord": [1, len(facts)],
         }
         return fid
 
@@ -634,6 +636,7 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
                 "created_turn": 1,
                 "resolved_turn": None,
                 "note": None,
+                "coord": [1, len(events)],
             }
         if pr["leverage"]:
             lv = pr["leverage"]
@@ -663,7 +666,7 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
         "explicitness": "standard",
     }
     state = {
-        "schema_version": 1,
+        "schema_version": STATE_SCHEMA_VERSION,
         "session_id": None,
         "revision": 1,
         "turn": 1,
@@ -690,13 +693,15 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
         "counters": {
             "next": {"fact": len(facts) + 1, "event": len(events) + 1, "leverage": len(leverage) + 1, "scene": 2, "boundary": 1},
             "major_action_turn": {},
+            "event_keys": {e["dedupe_key"]: 1 for e in events.values()},
             "intimacy_evidence": {},
             "twists": {"auto_offered": False, "accepted_days": [], "accepted": []},
             "last_chapter_turn": 1,
+            "chapter_count": 0,
             "chapter_requested_at": None,
             "offscreen_beat_turn": {},
         },
-        "requests": {"chapter_summary": False, "twist_offer": None, "offscreen_beat_candidates": []},
+        "requests": {"chapter_summary": False, "prologue": False, "twist_offer": None, "offscreen_beat_candidates": []},
         "undo_floor": 1,
     }
 

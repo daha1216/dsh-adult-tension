@@ -3,7 +3,7 @@ but never advance the turn, and they write no narrative.
 """
 
 from ..errors import INVALID_INPUT, INVARIANT_VIOLATION, NOT_FOUND, AppError, detail
-from ..jsonio import copy
+from . import facts as FA
 from . import settlement
 from . import state as SS
 
@@ -21,6 +21,7 @@ BOUNDARY_PREFIXES = ("不想看到", "不想要", "不要", "别写", "别", "�
 
 def _bump(state):
     state["revision"] += 1
+    state["facts"] = state["facts"].settle()  # meta commands never change facts
     return state
 
 
@@ -32,7 +33,7 @@ def _boundary_subject(text):
 
 
 def set_boundary(state, content, action, text=None, tags=None, boundary_id=None):
-    work = copy(state)
+    work = FA.working_copy(state)
     boundaries = work["safety"]["boundaries"]
     if action == "add":
         valid = {t["id"] for t in content["tags"]}
@@ -67,7 +68,7 @@ def set_boundary(state, content, action, text=None, tags=None, boundary_id=None)
 
 
 def set_safety(state, paused, change_scene=False):
-    work = copy(state)
+    work = FA.working_copy(state)
     safety = work["safety"]
     if change_scene and not paused:
         raise AppError(INVARIANT_VIOLATION, "“换个场景”会保持暂停", [detail("$.change_scene", "换场景时 paused 必须为 true", "恢复用 paused: false", INVARIANT_VIOLATION)])
@@ -89,7 +90,7 @@ def set_safety(state, paused, change_scene=False):
 
 
 def set_preferences(state, content, changes):
-    work = copy(state)
+    work = FA.working_copy(state)
     prefs = work["preferences"]
     receipts = []
     problems = []
@@ -114,7 +115,8 @@ def set_preferences(state, content, changes):
         elif not char.get("voices"):
             problems.append(detail("$.voice.npc_id", "%s 没有表里两层语态" % char["name"], "只有重要角色有", INVARIANT_VIOLATION))
         else:
-            prefs["voice"][npc] = {"voice": voice["voice"], "cause": "player_request", "since_turn": work["turn"], "trigger": None}
+            # via: meta marks a player setting, which an undo of the story keeps.
+            prefs["voice"][npc] = {"voice": voice["voice"], "cause": "player_request", "since_turn": work["turn"], "trigger": None, "via": "meta"}
             receipts.append("%s：%s" % (char["name"], "里层语态" if voice["voice"] == "inner" else "表层语态"))
     if problems:
         raise AppError(problems[0]["code"], problems[0]["reason"], problems)

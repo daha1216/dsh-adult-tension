@@ -174,7 +174,12 @@ def bench_inprocess(samples, workdir):
         load_times.append(elapsed)
     results["save_slot"] = summarize(save_times, INPROC_THRESHOLDS["save_slot"])
     results["load_slot"] = summarize(load_times, INPROC_THRESHOLDS["load_slot"])
-    results["_state"] = {"turns_played": samples, "state_bytes_turn_%d" % (samples + 1): len(repo.pack(repo.load_session(ctx.db(), sid)["state"]))}
+    final = repo.load_session(ctx.db(), sid)["state"]
+    results["_state"] = {
+        "turns_played": samples,
+        "turn_blob_packed_bytes_turn_%d" % (samples + 1): len(repo.pack(repo.hot(final))),
+        "facts_turn_%d" % (samples + 1): repo.count_facts(ctx.db(), sid),
+    }
     ctx.close()
     return results
 

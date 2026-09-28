@@ -10,6 +10,7 @@ import tempfile
 import time
 
 from ..domain import invariants
+from ..domain import state as SS
 from ..errors import AppError
 from ..persistence import repo
 from . import service, specs
@@ -73,7 +74,7 @@ def play(ctx, seed, turns, mode="pressure"):
                 raise AssertionError("invalid commit accepted")
             except AppError as err:
                 after, _content = _state(ctx, session_id)
-                assert after == state, "rejected commit changed state"
+                assert SS.digest(after) == SS.digest(state), "rejected commit changed state"
                 steps.append({"step": "reject", "code": err.code})
             reject_checked = True
         if index + 1 == half:

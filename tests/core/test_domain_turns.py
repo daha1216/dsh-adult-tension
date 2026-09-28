@@ -248,7 +248,9 @@ class EventsTest(unittest.TestCase):
         second, _ = apply(state, tick)
         self.assertIn(first["events"][eid]["outcome"], ("hit", "miss"))
         self.assertEqual(first["events"][eid]["outcome"], second["events"][eid]["outcome"])
-        expected = "hit" if rng.unit(state["seed"], "event", eid) < 0.5 else "miss"
+        coord = state["events"][eid]["coord"]
+        self.assertEqual(coord, [state["turn"], 1])
+        expected = "hit" if rng.unit(state["seed"], "event", coord[0], coord[1]) < 0.5 else "miss"
         self.assertEqual(first["events"][eid]["outcome"], expected)
         rejected(state, commit("continue", [{"op": "event_resolve", "event_id": eid, "outcome": "fulfilled", "note": "手动"}]))
 

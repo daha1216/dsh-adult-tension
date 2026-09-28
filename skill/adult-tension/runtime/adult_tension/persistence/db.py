@@ -168,7 +168,63 @@ def _migrate_to_1(conn):
     )
 
 
-MIGRATIONS = {1: _migrate_to_1}
+def _migrate_to_2(conn):
+    # v2:
+    # - facts move out of the per-turn state blob into rows, so a commit's cost
+    #   does not grow with the game (domain/facts.py); fact_journal keeps each
+    #   turn's previous fact versions for undo and rewrite;
+    # - remember the last failed commit per session (next context is full);
+    # - index the turn log by turn (undo and rewrite look turns up) and the
+    #   idempotency records by scope (trimming stays cheap at 1000 records).
+    _exec_script(
+        conn,
+        """
+        CREATE TABLE facts (
+            session_id TEXT NOT NULL,
+            n INTEGER NOT NULL,
+            id TEXT NOT NULL,
+            key TEXT NOT NULL,
+            head TEXT NOT NULL,
+            truth INTEGER NOT NULL,
+            visibility TEXT NOT NULL,
+            origin TEXT NOT NULL,
+            turn INTEGER NOT NULL,
+            spreading INTEGER NOT NULL,
+            knowers TEXT NOT NULL,
+            text TEXT NOT NULL,
+            data TEXT NOT NULL,
+            PRIMARY KEY (session_id, id)
+        );
+        CREATE INDEX facts_key ON facts(session_id, key);
+        CREATE INDEX facts_spreading ON facts(session_id, spreading);
+        CREATE TABLE fact_journal (
+            session_id TEXT NOT NULL,
+            turn INTEGER NOT NULL,
+            id TEXT NOT NULL,
+            before TEXT,
+            PRIMARY KEY (session_id, turn, id)
+        );
+        CREATE TABLE commit_failures (
+            session_id TEXT PRIMARY KEY,
+            revision INTEGER NOT NULL,
+            failed_at TEXT NOT NULL
+        );
+        CREATE INDEX turn_log_turn ON turn_log(session_id, turn);
+        CREATE INDEX idempotency_scope ON idempotency(scope);
+        """,
+    )
+    from . import repo
+    from ..domain.upgrade import upgrade
+
+    for session_id, blob in conn.execute("SELECT session_id, state FROM sessions").fetchall():
+        state = upgrade(repo.unpack(blob))
+        repo.insert_facts(conn, session_id, sorted(state.pop("facts").values(), key=lambda f: int(f["id"][1:])))
+        conn.execute("UPDATE sessions SET state=? WHERE session_id=?", (repo.pack(state), session_id))
+    # Schema 1 never wrote undo points; any there would predate the journal.
+    conn.execute("DELETE FROM undo_points")
+
+
+MIGRATIONS = {1: _migrate_to_1, 2: _migrate_to_2}
 
 
 def _now_stamp():

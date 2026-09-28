@@ -6,6 +6,7 @@ import sqlite3
 import unittest
 
 import _bootstrap  # noqa: F401
+from adult_tension import DB_SCHEMA_VERSION
 from helpers.cli import SKILL_ROOT, clean_env, run_cli
 from helpers.fs import copy_skill, temp_dir, unwritable_dir
 
@@ -37,7 +38,7 @@ class DoctorTest(unittest.TestCase):
                 self.assertIn(expected, ids)
             for sub in ("backups", "exports", "logs"):
                 self.assertTrue(os.path.isdir(os.path.join(data_dir, sub)))
-            self.assertEqual(schema_version(data_dir), 1)
+            self.assertEqual(schema_version(data_dir), DB_SCHEMA_VERSION)
             self.assertTrue(os.path.isfile(os.path.join(data_dir, "version.json")))
             self.assertTrue(data["next_request_id"].startswith("r_"))
             # stdout is UTF-8 bytes regardless of the console code page
@@ -125,7 +126,7 @@ class DoctorTest(unittest.TestCase):
             self.assertFalse(os.path.exists(os.path.join(data_dir, "version.json")))
             code, env, _raw = run_cli(["doctor"], data_dir)
             self.assertEqual(code, 0, env)
-            self.assertEqual(schema_version(data_dir), 1)
+            self.assertEqual(schema_version(data_dir), DB_SCHEMA_VERSION)
 
 
 class CliSurfaceTest(unittest.TestCase):
@@ -147,6 +148,20 @@ class CliSurfaceTest(unittest.TestCase):
             code, env, _raw = run_cli(["version"], os.path.join(tmp, "d"), payload={"surprise": 1})
             self.assertEqual(code, 10)
             self.assertEqual(env["error"]["details"][0]["path"], "$.surprise")
+
+    def test_smoke_plays_both_modes_in_a_temporary_directory(self):
+        with temp_dir() as tmp:
+            data_dir = os.path.join(tmp, "data")
+            code, env, _raw = run_cli(["smoke", "--turns", "30"], data_dir)
+            self.assertEqual(code, 0, env)
+            runs = env["data"]["runs"]
+            self.assertEqual([r["mode"] for r in runs], ["daily", "pressure"])
+            for run in runs:
+                steps = [s["step"] for s in run["steps"]]
+                for step in ("new-game", "replay", "stale", "reject", "save", "load"):
+                    self.assertIn(step, steps)
+                self.assertEqual(run["turn"], 31)
+            self.assertFalse(os.path.exists(os.path.join(data_dir, "adult_tension.db")))  # the user's data dir is untouched
 
     def test_internal_error_is_an_envelope_with_log(self):
         with temp_dir() as tmp:

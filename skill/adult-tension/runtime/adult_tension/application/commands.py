@@ -46,8 +46,9 @@ _register(
     "LIST_WORLDS",
 )
 _register("new-game", APP + "service", "new_game", "required", "create", "开局", {"--include-drafts": ("include_drafts", "bool")}, "NEW_GAME")
-_register("get-context", APP + "service", "get_context", "required", "read", "当前上下文（brief / full）", spec="GET_CONTEXT")
+_register("get-context", APP + "service", "get_context", "required", "read", "当前上下文（brief / full）；可带快进预览 preview_time 与转折候选 want_twist", spec="GET_CONTEXT")
 _register("commit-turn", APP + "service", "commit_turn", "required", "session_write", "叙事回合：提交操作，返回结果与下一回合上下文", spec="COMMIT_TURN")
+_register("undo-turn", APP + "service", "undo_turn", "required", "session_write", "撤销上一回合（最多退到本次读档或开局）", spec="UNDO_TURN")
 _register("save-slot", APP + "service", "save_slot", "required", "session_write", "存档（省略名字时存到当前槽或自动命名）", spec="SAVE_SLOT")
 _register("load-slot", APP + "service", "load_slot", "required", "create", "读档：创建新的会话副本，原存档不变", spec="LOAD_SLOT")
 _register("list-slots", APP + "service", "list_slots", "none", "read", "存档列表")

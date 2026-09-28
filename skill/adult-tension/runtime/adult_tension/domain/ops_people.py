@@ -8,6 +8,7 @@ Tendency cards evolve item by item with evidence from distinct turns.
 from .. import schema as S
 from ..errors import INVARIANT_VIOLATION, NOT_FOUND, SAFETY_BLOCK, detail
 from . import cards as C
+from . import facts as FA
 from . import state as SS
 from . import structure as ST
 from .ops import FACT_KEY, _basis, _flush, _need_character, register
@@ -72,11 +73,13 @@ def op_reveal_fact(ctx, op, path):
     if not _flush(ctx, errs):
         return
     corrected = []
+    fact = FA.edit(state, fact["id"])
     for target in op["to"]:
         if fact["truth"]:
             fact["known_by"].append(target)
-            for other in state["facts"].values():
-                if other["key"] == fact["key"] and not other["truth"] and target in other["believed_by"]:
+            for other in FA.of(state).by_key(fact["key"]):
+                if not other["truth"] and target in other["believed_by"]:
+                    other = FA.edit(state, other["id"])
                     other["believed_by"].remove(target)
                     if target not in other["known_by"]:
                         other["known_by"].append(target)
@@ -152,6 +155,7 @@ def op_spread_rumor(ctx, op, path):
         "spreading": False,
         "source_fact_id": op["source_fact_id"],
         "channel_id": op["channel_id"],
+        "coord": ctx.fact_coord(),
     }
     ctx.observable = True
     if source != state["player_id"]:
@@ -568,6 +572,7 @@ def op_leverage_set(ctx, op, path):
             "origin": "offscreen" if ctx.in_beat else "observed",
             "turn": ctx.turn,
             "spreading": False,
+            "coord": ctx.fact_coord(),
         }
     lid = SS.next_id(state, "leverage", "lv")
     state["leverage"][lid] = {

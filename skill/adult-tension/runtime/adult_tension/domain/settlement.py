@@ -13,8 +13,20 @@ from . import rng
 from . import structure as ST
 
 
-def tier_for(minutes):
-    if minutes >= 60:
+ADVANCE_KEYS = ("minutes", "until", "days")
+
+
+def minutes_for(clock, spec):
+    """Minutes for an advance spec with exactly one of minutes / until / days."""
+    if "minutes" in spec:
+        return spec["minutes"]
+    if "days" in spec:
+        return spec["days"] * ST.MINUTES_PER_DAY
+    return CL.until_target(clock, spec["until"])
+
+
+def tier_for(minutes, crossed_day=False):
+    if minutes >= 60 or crossed_day:
         return "full"
     if minutes >= 16:
         return "brief"
@@ -42,7 +54,10 @@ def settle_events(state, until_clock, turn):
     resolved = []
     for event in due:
         if event["kind"] == "chance":
-            roll = rng.unit(state["seed"], "event", event["id"])
+            # Stable coordinates (creating turn, creation index), never the id:
+            # an undone and redone turn gets the same roll.
+            coord = event.get("coord") or [event["created_turn"], event["id"]]
+            roll = rng.unit(state["seed"], "event", coord[0], coord[1])
             outcome = "hit" if roll < event["probability"] else "miss"
         else:
             outcome = ST.DUE_OUTCOME[event["kind"]]
@@ -86,18 +101,20 @@ def advance(state, minutes, turn, hooks=None):
     hooks = hooks or {}
     before = dict(state["clock"])
     state["clock"] = CL.add_minutes(before, minutes)
+    crossed_day = state["clock"]["day"] > before["day"]
     report = {
         "from": before,
         "to": dict(state["clock"]),
         "minutes": minutes,
-        "tier": tier_for(minutes),
-        "crossed_day": state["clock"]["day"] > before["day"],
+        "tier": tier_for(minutes, crossed_day),
+        "crossed_day": crossed_day,
         "steps": ["clock"],
         "scene": None,
         "resolved_events": [],
         "expired_conditions": [],
         "offscreen": None,
         "propagation": None,
+        "requests": None,
     }
     if minutes >= ST.SCENE_BREAK_MINUTES:
         report["scene"] = new_scene(state, "time_skip")
@@ -112,6 +129,6 @@ def advance(state, minutes, turn, hooks=None):
         report["propagation"] = hooks["propagation"](state, report)
     report["steps"].append("propagation")
     if "requests" in hooks:
-        hooks["requests"](state, report)
+        report["requests"] = hooks["requests"](state, report)
     report["steps"].append("requests")
     return report

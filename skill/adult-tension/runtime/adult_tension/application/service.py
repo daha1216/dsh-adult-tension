@@ -20,9 +20,12 @@ from .. import schema as S
 from ..errors import (
     IDEMPOTENCY_CONFLICT,
     INVALID_INPUT,
+    INVARIANT_VIOLATION,
     NOT_FOUND,
+    SAFETY_BLOCK,
     SLOT_CONFLICT,
     STALE_REVISION,
+    STORAGE_BUSY,
     AppError,
     detail,
 )
@@ -262,15 +265,35 @@ def new_game(ctx, payload):
 
 
 def get_context(ctx, payload):
+    from ..domain import settlement, simulation
+
     payload = validate(specs.GET_CONTEXT, payload)
+    preview_time = payload["preview_time"]
+    if preview_time is not None:
+        given = [k for k in settlement.ADVANCE_KEYS if k in preview_time]
+        if len(given) != 1:
+            raise AppError(
+                INVALID_INPUT,
+                "preview_time 里 minutes、until、days 必须且只能给一个",
+                [detail("$.preview_time", "minutes、until、days 必须且只能给一个", None, INVALID_INPUT)],
+            )
     session = repo.load_session(ctx.db(), payload["session_id"])
+    state, content = session["state"], session["content"]
     project = CX.full if payload["depth"] == "full" else CX.brief
-    return {
+    out = {
         "session_id": session["session_id"],
         "revision": session["revision"],
         "turn": session["turn"],
-        "context": project(session["state"], session["content"], save_info(session)),
+        "context": project(state, content, save_info(session)),
     }
+    if preview_time is not None:
+        out["preview"] = simulation.preview(state, content["world"], preview_time)
+    if payload["want_twist"]:
+        candidates, note = simulation.requested_twists(state, content["world"])
+        out["twist_candidates"] = candidates
+        if note:
+            out["twist_note"] = note
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -288,28 +311,85 @@ DOMAIN_KEYS = (
     "open_action",
     "quotes",
     "chapter_summary",
+    "prologue",
     "replaces_turn",
 )
+# A failed commit with one of these codes makes the next context full.
+FAILURE_CODES = (INVALID_INPUT, INVARIANT_VIOLATION, NOT_FOUND, SAFETY_BLOCK)
+SESSION_ID_RE = re.compile(r"s_[a-z0-9]{2,38}")
 
 
-def choose_depth(state, result):
-    if result["location_changed"] or result["new_characters"] or result["crossed_day"]:
+def choose_depth(state, result, failed_before=False):
+    """DESIGN_DECISIONS defaults: full after a failed commit, on a new place,
+    a new character or a new day, every 5 turns, and when a prologue is due."""
+    if failed_before or result["location_changed"] or result["new_characters"] or result["crossed_day"]:
         return "full"
-    if state["turn"] % 5 == 0:
+    if state["requests"].get("prologue") or state["turn"] % 5 == 0:
         return "full"
     return "brief"
 
 
+def _mark_failure(ctx, session_id):
+    """Best effort: a busy database skips the marker, never the caller's error."""
+    conn = ctx.db()
+    try:
+        db.begin_write(conn)
+    except AppError as err:
+        if err.code == STORAGE_BUSY:
+            return
+        raise
+    try:
+        repo.mark_commit_failure(conn, session_id, now_iso())
+        conn.execute("COMMIT")
+    except BaseException:
+        if conn.in_transaction:
+            conn.execute("ROLLBACK")
+        raise
+
+
 def commit_turn(ctx, payload):
+    try:
+        return _commit_turn(ctx, payload)
+    except AppError as err:
+        sid = payload.get("session_id") if isinstance(payload, dict) else None
+        if err.code in FAILURE_CODES and isinstance(sid, str) and SESSION_ID_RE.fullmatch(sid):
+            _mark_failure(ctx, sid)
+        raise
+
+
+def _commit_turn(ctx, payload):
     from ..domain import turn
 
     payload = validate(specs.COMMIT_TURN, payload)
     commit = {key: payload[key] for key in DOMAIN_KEYS}
 
     def handler(conn, session, now):
-        new_state, result = turn.commit_turn(session["state"], session["content"], commit)
+        sid = session["session_id"]
+        state = session["state"]
+        snapshot = None
+        replacing = commit["replaces_turn"]
+        if replacing is not None:
+            snapshot = repo.undo_point(conn, sid, replacing)
+            if replacing == state["turn"] and snapshot is not None:
+                # Undo the replaced turn in this same transaction (RUNTIME_PROTOCOL 8):
+                # its facts first, so the domain sees the facts from before it.
+                repo.revert_turn_facts(conn, sid, replacing)
+                state["facts"] = repo.FactSource(conn, sid)
+        new_state, result = turn.commit_turn(state, session["content"], commit, snapshot)
+        failed_before = repo.take_commit_failure(conn, sid) is not None
+        replaced = result["replaced_turn"]
+        if replaced is not None:
+            repo.mark_turn_undone(conn, sid, replaced)
+            repo.delete_archive_turn(conn, sid, replaced)
+            repo.put_undo_point(conn, sid, new_state["turn"], result["undo_base"])
+        else:
+            repo.save_undo_point_from_session(conn, sid, new_state["turn"])
+        repo.write_fact_changes(conn, sid, new_state["turn"], new_state["facts"])
+        repo.trim_undo_points(conn, sid, turn.UNDO_KEEP)
         unsaved = session["turns_since_save"] + 1
         repo.update_session(conn, new_state, now, turns_since_save=unsaved)
+        for item in result["archive"]:
+            repo.add_archive(conn, sid, item["kind"], new_state["turn"], item["payload"], now)
         repo.insert_turn_log(
             conn,
             new_state["session_id"],
@@ -325,9 +405,9 @@ def commit_turn(ctx, payload):
         )
         if fault("kill_in_commit"):
             os._exit(137)  # test hook: the process dies inside the write transaction
-        depth = choose_depth(new_state, result)
+        depth = choose_depth(new_state, result, failed_before)
         project = CX.full if depth == "full" else CX.brief
-        return {
+        response = {
             "revision": new_state["revision"],
             "turn": new_state["turn"],
             "applied": result["applied"],
@@ -337,8 +417,45 @@ def commit_turn(ctx, payload):
             "default_time_advance": result["default_time_advance"],
             "context": project(new_state, session["content"], {"current_slot": session["current_slot"], "turns_since_save": unsaved}),
         }
+        for key in ("chapter", "twist", "replaced_turn"):
+            if result[key] is not None:
+                response[key] = result[key]
+        return response
 
     return session_write(ctx, "commit-turn", payload, handler)
+
+
+# ---------------------------------------------------------------------------
+# undo-turn
+
+
+def undo_turn(ctx, payload):
+    from ..domain import turn
+
+    payload = validate(specs.UNDO_TURN, payload)
+
+    def handler(conn, session, now):
+        sid = session["session_id"]
+        undone = session["state"]["turn"]
+        snapshot = repo.undo_point(conn, sid, undone)
+        new_state, result = turn.undo(session["state"], snapshot)
+        repo.revert_turn_facts(conn, sid, undone)
+        new_state["facts"] = repo.FactSource(conn, sid)
+        repo.delete_undo_point(conn, sid, undone)
+        repo.mark_turn_undone(conn, sid, undone)
+        repo.delete_archive_turn(conn, sid, undone)
+        unsaved = session["turns_since_save"] + 1
+        repo.update_session(conn, new_state, now, turns_since_save=unsaved)
+        repo.insert_turn_log(conn, sid, new_state["turn"], new_state["revision"], "undo", None, None, {"undone_turn": undone}, None, None, now)
+        return {
+            "revision": new_state["revision"],
+            "turn": new_state["turn"],
+            "undone_turn": result["undone_turn"],
+            "receipt": "已撤销第 %d 回合" % result["undone_turn"],
+            "context": CX.brief(new_state, session["content"], {"current_slot": session["current_slot"], "turns_since_save": unsaved}),
+        }
+
+    return session_write(ctx, "undo-turn", payload, handler)
 
 
 # ---------------------------------------------------------------------------

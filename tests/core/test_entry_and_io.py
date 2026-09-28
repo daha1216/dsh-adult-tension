@@ -42,7 +42,8 @@ class VersionGateTest(unittest.TestCase):
         self.assertEqual(json.loads(raw.decode("utf-8"))["error"]["code"], "RUNTIME_UNSUPPORTED")
 
     def test_entry_script_parses_with_old_grammar(self):
-        source = open(ENTRY, "rb").read().decode("utf-8")
+        with open(ENTRY, "rb") as handle:
+            source = handle.read().decode("utf-8")
         tree = ast.parse(source, feature_version=(3, 4))
         for node in ast.walk(tree):
             self.assertNotIsInstance(node, (ast.JoinedStr, ast.AnnAssign, ast.NamedExpr))

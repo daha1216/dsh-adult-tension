@@ -16,7 +16,7 @@
 |---|---|---|---|---|
 | `commit-turn` | session_write | 必填 | 叙事回合：提交操作，返回结果与下一回合上下文 | — |
 | `doctor` | diagnostic | 无 | 检查环境并完成首次初始化（幂等） | — |
-| `get-context` | read | 必填 | 当前上下文（brief / full） | — |
+| `get-context` | read | 必填 | 当前上下文（brief / full）；可带快进预览 preview_time 与转折候选 want_twist | — |
 | `list-slots` | read | 无 | 存档列表 | — |
 | `list-worlds` | read | 可选 | 世界列表、一句话介绍、支持的模式 | `--include-drafts` |
 | `load-slot` | create | 必填 | 读档：创建新的会话副本，原存档不变 | — |
@@ -27,6 +27,7 @@
 | `set-safety` | session_write | 必填 | 暂停、恢复、换个场景 | — |
 | `smoke` | dev | 可选 | 在临时数据目录用假叙述者跑一条短局 | `--seed`、`--turns` |
 | `status` | read | 必填 | 状态：brief 六行 / detail 状态+ / debug 调试 | — |
+| `undo-turn` | session_write | 必填 | 撤销上一回合（最多退到本次读档或开局） | — |
 | `verify-content` | dev | 可选 | 校验全部内容（结构、语义、时代、固定种子开局、多样性） | `--world`、`--stats`、`--skip-diversity` |
 | `version` | read | 无 | Skill、内容、存档格式、RNG 版本 | — |
 
@@ -41,9 +42,9 @@
 | `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
 | `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
 | `expected_revision` | 整数 1..1000000000 | 是 | 上一次返回的 revision |
-| `action_mode` | 枚举：`result` / `attempt` / `rewrite` / `continue` / `wait` | 是 | result / attempt / rewrite / continue / wait |
+| `action_mode` | 枚举：`result` / `attempt` / `rewrite` / `continue` / `wait` | 是 | result / attempt / rewrite（“其实……”）/ continue / wait |
 | `player_input` | 字符串，≤2000 字 | 是 | 玩家这一句的原话（继续时可为空字符串） |
-| `player_authorized` | 布尔 | 否，默认 `false` | 玩家本人的话授权了玩家角色的移动、承诺、交易、同意或设定修改时为 true |
+| `player_authorized` | 布尔 | 否，默认 `false` | 玩家本人的话授权了玩家角色的移动、承诺、交易、同意、转折或设定修改时为 true |
 | `acts_on` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–8 项） 或 null | 否，默认 `null` | 玩家行动作用到的 NPC（身体、意志、财物）；attempt 不作用于任何 NPC 时写 [] |
 | `operations` | 数组（操作对象（按 `op` 区分），0–40 项） | 是 | 操作列表（可以为空数组） |
 | `content_tags` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–12 项） | 是 | 本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags |
@@ -51,8 +52,9 @@
 | `summary` | 字符串，≤120 字 | 是 | 本回合发生了什么，第三方视角，≤120 字 |
 | `open_action` | 字符串，≤80 字 | 是 | 回合停在哪里、谁在等谁，≤80 字 |
 | `quotes` | 数组（字符串，≤80 字，0–3 项） | 否，默认 `[]` | ≤3 条对后续有意义的原话，每条 ≤80 字 |
-| `chapter_summary` | 字符串，≤300 字 或 null | 否，默认 `null` | 上下文 requests.chapter_summary 为 true 时必填，≤300 字 |
-| `replaces_turn` | 整数 1..1000000 或 null | 否，默认 `null` | “刚才不算，改成……”时填上一回合的回合号 |
+| `chapter_summary` | 字符串，≤300 字 或 null | 否，默认 `null` | 上下文 requests.chapter_summary 为 true 时必填：上一章（到上一回合为止）的摘要，≤300 字；没有要求时不写 |
+| `prologue` | 字符串，≤300 字 或 null | 否，默认 `null` | 上下文 requests.prologue 为 true 时必填：把完整上下文 prologue_merge 里的旧前情与最早几章合并成一段前情，≤300 字；没有要求时不写 |
+| `replaces_turn` | 整数 1..1000000 或 null | 否，默认 `null` | “刚才不算，改成……”：填当前最后一个回合的回合号，引擎在同一事务里撤销它再应用本次提交 |
 
 ### `get-context`
 
@@ -60,6 +62,16 @@
 |---|---|---|---|
 | `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
 | `depth` | 枚举：`brief` / `full` | 否，默认 `"brief"` |  |
+| `preview_time` | 对象（预览推进） 或 null | 否，默认 `null` | 快进预览：返回目标时钟、将到期的事件与确定性结果、必须写离屏片段的 NPC（附目标与信息集）、将到期的状态；不改变状态 |
+| `want_twist` | 布尔 | 否，默认 `false` | 玩家说“来点转折”时为 true：返回 2–3 个类别不同的转折候选 |
+
+#### `preview_time` 的字段
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `minutes` | 整数 1..43200 | 否 |  |
+| `until` | 枚举：`morning` / `noon` / `evening` / `night` / `next_morning` | 否 |  |
+| `days` | 整数 1..30 | 否 |  |
 
 ### `list-worlds`
 
@@ -198,6 +210,14 @@
 |---|---|---|---|
 | `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
 | `level` | 枚举：`brief` / `detail` / `debug` | 否，默认 `"brief"` | brief 六行 / detail 状态+ / debug 调试 |
+
+### `undo-turn`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `expected_revision` | 整数 1..1000000000 | 是 | 上一次返回的 revision |
 
 ### `verify-content`
 

@@ -9,8 +9,10 @@ working copy. Operations apply in order; later ones see earlier effects.
 from .. import schema as S
 from ..errors import INVARIANT_VIOLATION, NOT_FOUND, SAFETY_BLOCK, detail
 from . import clock as CL
+from . import facts as FA
 from . import rng
 from . import settlement
+from . import simulation
 from . import state as SS
 from . import structure as ST
 
@@ -77,8 +79,24 @@ class TurnContext:
         self.relationship_reasons = []
         self.voice_reasons = []
         self.card_ops = {}
+        self.fact_index = 0
+        self.event_index = 0
+        self.beats = []
+        self.beat_npcs = set()
+        self.beats_after_time = set()  # beats written after this commit's time skip
+        self.required_beats = []
+        self.beat_candidates = set(state["requests"].get("offscreen_beat_candidates") or [])
+        self.accepted_twist = None
         # Ids reserved by the world pack: never reused for new characters.
         self.world_ids = {t["id"] for t in world.get("character_templates", [])} | {b["id"] for b in world.get("background_cast", [])}
+
+    def fact_coord(self):
+        self.fact_index += 1
+        return [self.turn, self.fact_index]
+
+    def event_coord(self):
+        self.event_index += 1
+        return [self.turn, self.event_index]
 
     def error(self, path, reason, hint=None, code=INVARIANT_VIOLATION):
         self.errors.append(detail(path, reason, hint, code))
@@ -154,18 +172,18 @@ def op_advance_time(ctx, op, path):
         errs.append(detail(path, "一次提交最多一个 advance_time", "把两段时间合并成一次推进", INVARIANT_VIOLATION))
     if not _flush(ctx, errs):
         return
-    if "minutes" in op:
-        minutes = op["minutes"]
-    elif "days" in op:
-        minutes = op["days"] * ST.MINUTES_PER_DAY
-    else:
-        minutes = CL.until_target(ctx.state["clock"], op["until"])
-    advance(ctx, minutes, path)
+    advance(ctx, settlement.minutes_for(ctx.state["clock"], op), path)
 
 
 def advance(ctx, minutes, path, default=False):
     report = settlement.advance(ctx.state, minutes, ctx.turn, ctx.hooks)
     report["default"] = default
+    report["preview"] = simulation.preview_payload(ctx.state, ctx.world, report)
+    offscreen = report.get("offscreen") or {}
+    for npc in offscreen.get("required", []):
+        if npc not in ctx.required_beats:
+            ctx.required_beats.append(npc)
+    ctx.beat_candidates |= set(offscreen.get("required", [])) | set(offscreen.get("candidates", []))
     ctx.settlements.append(report)
     ctx.resolved_events.extend(report["resolved_events"])
     ctx.applied.append(
@@ -303,9 +321,10 @@ def op_npc_response(ctx, op, path):
             "known_by": [npc],
             "believed_by": [],
             "visibility": "private",
-            "origin": "observed",
+            "origin": "offscreen" if ctx.in_beat else "observed",
             "turn": ctx.turn,
             "spreading": False,
+            "coord": ctx.fact_coord(),
         }
         entry["intent_fact_id"] = fid
     ctx.responses.setdefault(npc, []).append(op["response"])
@@ -431,9 +450,33 @@ def op_add_fact(ctx, op, path):
             errs.append(detail(path, "内心事实只能属于一个 NPC 本人，必须为真，且永不传播", None, INVARIANT_VIOLATION))
     elif op["visibility"] == "private" and not op["known_by"] and not op["believed_by"]:
         errs.append(detail(path + ".known_by", "私密事实至少要有一个知情人", None, INVARIANT_VIOLATION))
-    if op["origin"] == "retcon":
-        errs.append(detail(path + ".origin", "追溯事实只能通过“其实……”的改写回合登记", "action_mode 用 rewrite（改写与追溯在后续版本开放）", INVARIANT_VIOLATION))
-    if op["truth"]:
+    retcon = op["origin"] == "retcon"
+    if retcon and (ctx.mode != "rewrite" or ctx.in_beat is not None):
+        errs.append(detail(path + ".origin", "追溯事实只能在玩家说“其实……”的改写回合登记", "action_mode 用 rewrite，并带 player_authorized", INVARIANT_VIOLATION))
+    elif retcon:
+        # NARRATIVE_RULES 2: a retcon never adds knowledge, liking or consent to an NPC.
+        if not op["truth"] or op["believed_by"] or op["spread"] or op["visibility"] != "private" or op["known_by"] != [state["player_id"]]:
+            errs.append(
+                detail(
+                    path,
+                    "追溯事实只补充玩家角色自己知道的真事：truth 为 true、visibility 为 private、known_by 只写玩家角色、不传播",
+                    "追溯不能给 NPC 追加知情、好感或同意；NPC 要知道，得在之后的回合里当面得知",
+                    INVARIANT_VIOLATION,
+                )
+            )
+        clash = next(iter(FA.of(state).by_key(op["key"])), None)
+        if clash is not None:
+            errs.append(
+                detail(
+                    path + ".key",
+                    "追溯与已记录的事实冲突：%s（%s）" % (clash["id"], clash["text"][:40]),
+                    "已经成立的事实不能被追溯改写；换一个不矛盾的补充，或请玩家换个说法",
+                    INVARIANT_VIOLATION,
+                )
+            )
+    elif ctx.mode == "rewrite" and ctx.in_beat is None:
+        errs.append(detail(path + ".origin", "“其实……”回合里的新事实都是追溯：origin 用 retcon", None, INVARIANT_VIOLATION))
+    if op["truth"] and not retcon:
         existing = SS.true_fact_by_key(state, op["key"])
         if existing is not None:
             errs.append(
@@ -463,9 +506,10 @@ def op_add_fact(ctx, op, path):
         "origin": "offscreen" if ctx.in_beat else op["origin"],
         "turn": ctx.turn,
         "spreading": bool(op["spread"]),
+        "coord": ctx.fact_coord(),
     }
     ctx.observable = True
-    ctx.applied.append({"op": "add_fact", "fact_id": fid, "key": op["key"], "known_by": known})
+    ctx.applied.append({"op": "add_fact", "fact_id": fid, "key": op["key"], "origin": state["facts"][fid]["origin"], "known_by": known})
 
 
 # ---------------------------------------------------------------------------
@@ -640,15 +684,16 @@ def op_event_create(ctx, op, path):
     if ctx.in_beat is not None and player in op["participants"]:
         errs.append(detail(path + ".participants", "离屏片段不能创建涉及玩家角色的事件", None, INVARIANT_VIOLATION))
     key = op["dedupe_key"]
-    same = [e for e in state["events"].values() if e["dedupe_key"].split("#")[0] == key]
-    if any(e["state"] == "pending" for e in same):
+    used = state["counters"].setdefault("event_keys", {}).get(key, 0)
+    if any(e["state"] == "pending" and e["dedupe_key"].split("#")[0] == key for e in state["events"].values()):
         errs.append(detail(path + ".dedupe_key", "已有同一去重键的未结束事件：%s" % key, "推进或结束那个事件，而不是再建一个", INVARIANT_VIOLATION))
-    elif same and not op["repeat"]:
+    elif used and not op["repeat"]:
         errs.append(detail(path + ".dedupe_key", "去重键 %s 已被结束的事件用过" % key, "确实是重复发生时带 repeat: true", INVARIANT_VIOLATION))
     if not _flush(ctx, errs):
         return
-    if same:
-        key = "%s#%d" % (key, len(same) + 1)
+    state["counters"]["event_keys"][key] = used + 1
+    if used:
+        key = "%s#%d" % (key, used + 1)
     tier = op["tier"]
     if tier is None:
         minutes = CL.minutes_between(state["clock"], due)
@@ -669,6 +714,7 @@ def op_event_create(ctx, op, path):
         "created_turn": ctx.turn,
         "resolved_turn": None,
         "note": None,
+        "coord": ctx.event_coord(),
     }
     ctx.observable = True
     ctx.applied.append({"op": "event_create", "event_id": eid, "kind": op["kind"], "due": due})
@@ -677,12 +723,21 @@ def op_event_create(ctx, op, path):
 def _pending_event(ctx, eid, path, errs):
     event = ctx.state["events"].get(eid)
     if event is None:
-        errs.append(detail(path, "事件不存在：%s" % eid, None, NOT_FOUND))
+        if _archived(ctx.state, eid):
+            errs.append(detail(path, "事件 %s 早已结束并随章节归档，终态不可修改" % eid, None, INVARIANT_VIOLATION))
+        else:
+            errs.append(detail(path, "事件不存在：%s" % eid, None, NOT_FOUND))
         return None
     if event["state"] != "pending":
         errs.append(detail(path, "事件 %s 已经结束（%s），终态不可修改" % (eid, event["outcome"]), None, INVARIANT_VIOLATION))
         return None
     return event
+
+
+def _archived(state, eid):
+    """Event ids are never reused: a past id missing from the state was archived."""
+    number = eid[1:] if eid.startswith("e") else ""
+    return number.isdigit() and 0 < int(number) < state["counters"]["next"]["event"]
 
 
 def _player_deal_guard(ctx, event, path, errs):
@@ -789,7 +844,7 @@ def op_roll(ctx, op, path):
         "add_resources": F(S.List(S.Str(1, 60), max_items=4), required=False, default=[]),
         "add_risks": F(S.List(S.Str(1, 60), max_items=4), required=False, default=[]),
     },
-    "玩家角色的姓名、称谓、背景、资源与风险。只能在 result 或 rewrite 模式、并带 player_authorized",
+    "玩家角色的姓名、称谓、背景、资源与风险。只能在 result 或 rewrite（“其实……”）模式、并带 player_authorized",
 )
 def op_player_update(ctx, op, path):
     errs = []
@@ -855,5 +910,6 @@ def check_safety_tags(state, tags):
     return problems
 
 
-# People, knowledge and leverage operations register themselves on import.
+# People, knowledge, leverage, offscreen and twist operations register themselves on import.
 from . import ops_people  # noqa: E402,F401
+from . import ops_time  # noqa: E402,F401

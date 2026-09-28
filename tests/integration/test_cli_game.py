@@ -23,7 +23,10 @@ def db_state(data_dir, session_id):
     conn = sqlite3.connect(os.path.join(data_dir, "adult_tension.db"))
     try:
         row = conn.execute("SELECT state, content, revision FROM sessions WHERE session_id=?", (session_id,)).fetchone()
-        return json.loads(zlib.decompress(row[0])), json.loads(zlib.decompress(row[1])), row[2]
+        state = json.loads(zlib.decompress(row[0]))
+        # facts are stored as rows, outside the per-turn state blob
+        state["facts"] = {fid: json.loads(data) for fid, data in conn.execute("SELECT id, data FROM facts WHERE session_id=? ORDER BY n", (session_id,))}
+        return state, json.loads(zlib.decompress(row[1])), row[2]
     finally:
         conn.close()
 
@@ -190,6 +193,60 @@ class LongRouteTest(unittest.TestCase):
             final_c = db_state(split, c)[0]
             self.assertEqual(final_a["turn"], 21)
             self.assertEqual(state_digest(final_a), state_digest(final_c))
+
+    def test_same_seed_and_commands_in_separate_processes_give_the_same_state(self):
+        with temp_dir() as tmp:
+            digests = []
+            for name in ("one", "two"):
+                data_dir = os.path.join(tmp, name)
+                sid = new_game(data_dir, seed=4242, mode="pressure", rid="req_new_%s" % name)["session_id"]
+                self.play(data_dir, sid, FakeNarrator(4242), 12, name)
+                digests.append(state_digest(db_state(data_dir, sid)[0]))
+            self.assertEqual(digests[0], digests[1])
+
+
+class TimeCommandsTest(unittest.TestCase):
+    """undo-turn and get-context's preview through the CLI."""
+
+    def test_preview_then_fast_forward_then_undo(self):
+        with temp_dir() as tmp:
+            data_dir = os.path.join(tmp, "data")
+            opened = new_game(data_dir, seed=11, mode="pressure", rid="req_new_time01")
+            sid = opened["session_id"]
+            code, env, _raw = run_cli(["get-context"], data_dir, payload={"session_id": sid, "preview_time": {"until": "next_morning"}}, env=ENV)
+            self.assertEqual(code, 0, env)
+            preview = env["data"]["preview"]
+            self.assertTrue(preview["crossed_day"])
+            beats = [
+                {"op": "offscreen_beat", "npc_id": p["npc_id"], "summary": "在别处过了一夜", "operations": [{"op": "npc_action", "npc_id": p["npc_id"], "action": "睡了一觉"}]}
+                for p in preview["required_beats"]
+            ]
+            state, _content, revision = db_state(data_dir, sid)
+            npc = next(c for c in state["scene"]["present"] if c != "player")
+            fast = {
+                "session_id": sid,
+                "request_id": "req_fast_00001",
+                "expected_revision": revision,
+                "action_mode": "continue",
+                "player_input": "快进到第二天早上",
+                "operations": [{"op": "advance_time", "until": "next_morning"}] + beats + [{"op": "npc_action", "npc_id": npc, "action": "伸了个懒腰"}],
+                "content_tags": [],
+                "summary": "一夜过去。",
+                "open_action": "天亮了，码头还没开工",
+            }
+            code, env, _raw = run_cli(["commit-turn"], data_dir, payload=fast, env=ENV)
+            self.assertEqual(code, 0, env)
+            self.assertEqual(env["data"]["resolved_events"], preview["resolved_events"])
+            self.assertEqual(env["data"]["context"]["depth"], "full")  # a new day
+            self.assertTrue(env["data"]["context"]["requests"]["chapter_summary"])
+            undo = {"session_id": sid, "request_id": "req_undo_00001", "expected_revision": env["data"]["revision"]}
+            code, env, _raw = run_cli(["undo-turn"], data_dir, payload=undo, env=ENV)
+            self.assertEqual(code, 0, env)
+            self.assertEqual((env["data"]["turn"], env["data"]["receipt"]), (1, "已撤销第 2 回合"))
+            code, again, _raw = run_cli(["undo-turn"], data_dir, payload=undo, env=ENV)
+            self.assertTrue(again["data"]["replayed"])  # a retried undo does not undo twice
+            code, env, _raw = run_cli(["undo-turn"], data_dir, payload=dict(undo, request_id="req_undo_00002", expected_revision=env["data"]["revision"]), env=ENV)
+            self.assertEqual((code, env["error"]["code"]), (10, "INVARIANT_VIOLATION"))
 
 
 if __name__ == "__main__":

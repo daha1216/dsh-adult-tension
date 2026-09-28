@@ -73,13 +73,32 @@ NEW_GAME = _obj(
     "new-game",
 )
 
+PREVIEW_TIME = S.Obj(
+    {
+        "minutes": F(S.Int(1, ST.MAX_ADVANCE_MINUTES), required=False),
+        "until": F(S.Enum("morning", "noon", "evening", "night", "next_morning"), required=False),
+        "days": F(S.Int(1, 30), required=False),
+    },
+    name="预览推进",
+    desc="与 advance_time 相同：minutes / until / days 三选一",
+)
+
 GET_CONTEXT = _obj(
     {
         "session_id": F(SESSION_ID),
         "depth": F(S.Enum("brief", "full"), required=False, default="brief"),
+        "preview_time": F(
+            S.Nullable(PREVIEW_TIME),
+            required=False,
+            default=None,
+            desc="快进预览：返回目标时钟、将到期的事件与确定性结果、必须写离屏片段的 NPC（附目标与信息集）、将到期的状态；不改变状态",
+        ),
+        "want_twist": F(S.Bool(), required=False, default=False, desc="玩家说“来点转折”时为 true：返回 2–3 个类别不同的转折候选"),
     },
     "get-context",
 )
+
+UNDO_TURN = _obj(session_write_fields(), "undo-turn")
 
 SAVE_SLOT = _obj(
     dict(

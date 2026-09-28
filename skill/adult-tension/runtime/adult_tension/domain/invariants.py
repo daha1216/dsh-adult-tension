@@ -6,6 +6,7 @@ missed. Any violation rejects the whole commit.
 
 from ..errors import INVARIANT_VIOLATION, SAFETY_BLOCK, detail
 from . import clock as CL
+from . import facts as FA
 from . import structure as ST
 
 
@@ -40,7 +41,12 @@ def check(state, before_clock=None):
     for cid in scene["present"]:
         if cid not in chars:
             bad("$.state.scene.present", "在场的人不存在：%s" % cid)
-    for fid, fact in state["facts"].items():
+    facts = state["facts"]
+    # A commit checks the facts it created or changed; the rest were checked
+    # when they were written and have not changed since.
+    checked = facts.changed_facts() if isinstance(facts, FA.FactView) else FA.of(state).all()
+    for fact in checked:
+        fid = fact["id"]
         base = "$.state.facts.%s" % fid
         for cid in fact["known_by"] + fact["believed_by"]:
             if cid not in chars:

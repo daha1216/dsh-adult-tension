@@ -1,12 +1,21 @@
-"""SQL for sessions, turn log, idempotency, slots, history and archive.
+"""SQL for sessions, facts, turn log, undo points, idempotency, slots, history and archive.
 
 Every function takes an open connection; transactions are owned by the
 application's write path. Snapshots are compact JSON compressed with zlib.
+States are upgraded to the current state schema when they are read.
+
+A session is stored as a per-turn state blob *without* its facts, plus one
+row per fact (domain/facts.py explains why). A loaded session's
+state["facts"] is a FactSource that reads rows on demand. Each commit writes
+only the facts it changed and journals their previous versions by turn, so
+undo and rewrite can put them back. Slots and exports hold complete states.
 """
 
 import json
 import zlib
 
+from ..domain import facts as FA
+from ..domain.upgrade import upgrade
 from ..errors import NOT_FOUND, AppError, detail
 
 IDEMPOTENCY_KEEP = 1000
@@ -15,6 +24,138 @@ HISTORY_KEEP = 50
 
 def pack(obj):
     return zlib.compress(json.dumps(obj, ensure_ascii=False, separators=(",", ":")).encode("utf-8"), 6)
+
+
+def hot(state):
+    """The per-turn blob: the state without its facts."""
+    return {k: v for k, v in state.items() if k != "facts"}
+
+
+# -- facts --------------------------------------------------------------------
+
+
+def _dump(obj):
+    return json.dumps(obj, ensure_ascii=False, separators=(",", ":"))
+
+
+def fact_row(session_id, fact):
+    knowers = "," + ",".join(fact["known_by"] + fact["believed_by"]) + ","
+    spreading = 1 if fact.get("spreading") and fact["visibility"] != "inner" else 0
+    return (
+        session_id,
+        FA.order(fact),
+        fact["id"],
+        fact["key"],
+        fact["key"].split(".", 1)[0],
+        1 if fact["truth"] else 0,
+        fact["visibility"],
+        fact["origin"],
+        fact["turn"],
+        spreading,
+        knowers,
+        fact["text"],
+        _dump(fact),
+    )
+
+
+FACT_INSERT = (
+    "INSERT OR REPLACE INTO facts(session_id, n, id, key, head, truth, visibility, origin, turn, spreading, knowers, text, data) "
+    "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)"
+)
+
+
+def insert_facts(conn, session_id, facts):
+    conn.executemany(FACT_INSERT, [fact_row(session_id, f) for f in facts])
+
+
+class FactSource(FA.FactsAPI):
+    """One session's facts, read from the facts table on demand."""
+
+    def __init__(self, conn, session_id):
+        self.conn = conn
+        self.session_id = session_id
+        self.cache = {}
+
+    def _rows(self, where, args, tail=" ORDER BY n"):
+        out = []
+        sql = "SELECT id, data FROM facts WHERE session_id=?" + where + tail
+        for fid, data in self.conn.execute(sql, (self.session_id,) + tuple(args)):
+            fact = self.cache.get(fid)
+            if fact is None:
+                fact = self.cache[fid] = json.loads(data)
+            out.append(fact)
+        return out
+
+    def get(self, fid, default=None):
+        if fid in self.cache:
+            return self.cache[fid]
+        found = self._rows(" AND id=?", (fid,), "")
+        return found[0] if found else default
+
+    def all(self):
+        return self._rows("", ())
+
+    def by_key(self, key):
+        return self._rows(" AND key=?", (key,))
+
+    def known_to(self, cid):
+        return self._rows(" AND instr(knowers, ?) > 0", ("," + cid + ",",))
+
+    def spreading(self):
+        return self._rows(" AND spreading=1", ())
+
+    def player_ranked(self, player, present_ids, present_names, recent_turn, limit=None, exclude=()):
+        # The same order as facts.rank_key, computed by SQLite so that only
+        # the returned rows are decoded.
+        mention, args = [], []
+        if present_ids:
+            mention.append("head IN (%s)" % ",".join("?" * len(present_ids)))
+            args.extend(present_ids)
+        for name in present_names:
+            if name:
+                mention.append("instr(text, ?) > 0")
+                args.append(name)
+        where = " AND instr(knowers, ?) > 0"
+        where_args = ["," + player + ","]
+        if exclude:
+            where += " AND id NOT IN (%s)" % ",".join("?" * len(exclude))
+            where_args.extend(exclude)
+        tail = (
+            " ORDER BY (CASE WHEN %s THEN 3 ELSE 0 END) + (CASE WHEN turn >= ? THEN 2 ELSE 0 END)"
+            " - (CASE WHEN origin='setup' AND head='player' THEN 1 ELSE 0 END) DESC, turn DESC, n"
+        ) % (" OR ".join(mention) or "0")
+        tail_args = args + [recent_turn]
+        if limit:
+            tail += " LIMIT ?"
+            tail_args.append(limit)
+        return self._rows(where, where_args + tail_args, tail)
+
+
+def write_fact_changes(conn, session_id, turn, view):
+    """Store a commit's new and changed facts; journal what they were."""
+    changed = view.changed_facts()
+    if not changed:
+        return
+    conn.executemany(FACT_INSERT, [fact_row(session_id, f) for f in changed])
+    conn.executemany(
+        "INSERT OR IGNORE INTO fact_journal(session_id, turn, id, before) VALUES(?,?,?,?)",
+        [(session_id, turn, f["id"], None if view.before[f["id"]] is None else _dump(view.before[f["id"]])) for f in changed],
+    )
+
+
+def revert_turn_facts(conn, session_id, turn):
+    """Put the facts back as they were before `turn` (undo, rewrite)."""
+    rows = conn.execute("SELECT id, before FROM fact_journal WHERE session_id=? AND turn=?", (session_id, turn)).fetchall()
+    for fid, before in rows:
+        if before is None:
+            conn.execute("DELETE FROM facts WHERE session_id=? AND id=?", (session_id, fid))
+        else:
+            conn.execute(FACT_INSERT, fact_row(session_id, json.loads(before)))
+    conn.execute("DELETE FROM fact_journal WHERE session_id=? AND turn=?", (session_id, turn))
+
+
+def count_facts(conn, session_id):
+    return conn.execute("SELECT COUNT(*) FROM facts WHERE session_id=?", (session_id,)).fetchone()[0]
 
 
 def unpack(blob):
@@ -49,13 +190,16 @@ def load_session(conn, session_id, with_content=True):
             [detail("$.session_id", "会话不存在：%s" % session_id, "用 list-sessions 列出实际存在的会话", NOT_FOUND)],
         )
     info = dict(zip(SESSION_COLUMNS, row[: len(SESSION_COLUMNS)]))
-    info["state"] = unpack(row[len(SESSION_COLUMNS)])
+    info["state"] = upgrade(unpack(row[len(SESSION_COLUMNS)]))
+    info["state"]["facts"] = FactSource(conn, session_id)
     if with_content:
         info["content"] = unpack(row[len(SESSION_COLUMNS) + 1])
     return info
 
 
 def insert_session(conn, state, content, origin, now, current_slot=None, slot_version=None):
+    """A new session from a complete state (opening, slot or import)."""
+    insert_facts(conn, state["session_id"], FA.of(state).all())
     conn.execute(
         "INSERT INTO sessions(session_id, revision, turn, world_id, world_title, mode, origin, state, content, "
         "current_slot, slot_version, turns_since_save, created_at, updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
@@ -67,7 +211,7 @@ def insert_session(conn, state, content, origin, now, current_slot=None, slot_ve
             state["world_title"],
             state["mode"],
             origin,
-            pack(state),
+            pack(hot(state)),
             pack(content),
             current_slot,
             slot_version,
@@ -79,15 +223,16 @@ def insert_session(conn, state, content, origin, now, current_slot=None, slot_ve
 
 
 def update_session(conn, state, now, turns_since_save=None):
+    """Write the per-turn blob; fact rows are written by write_fact_changes()."""
     if turns_since_save is None:
         conn.execute(
             "UPDATE sessions SET revision=?, turn=?, state=?, updated_at=? WHERE session_id=?",
-            (state["revision"], state["turn"], pack(state), now, state["session_id"]),
+            (state["revision"], state["turn"], pack(hot(state)), now, state["session_id"]),
         )
     else:
         conn.execute(
             "UPDATE sessions SET revision=?, turn=?, state=?, updated_at=?, turns_since_save=? WHERE session_id=?",
-            (state["revision"], state["turn"], pack(state), now, turns_since_save, state["session_id"]),
+            (state["revision"], state["turn"], pack(hot(state)), now, turns_since_save, state["session_id"]),
         )
 
 
@@ -138,8 +283,71 @@ def recent_turn_log(conn, session_id, limit=5):
     return out
 
 
+def mark_turn_undone(conn, session_id, turn):
+    conn.execute("UPDATE turn_log SET undone=1 WHERE session_id=? AND turn=? AND kind='commit' AND undone=0", (session_id, turn))
+
+
 def count_rows(conn, table, session_id):
     return conn.execute("SELECT COUNT(*) FROM %s WHERE session_id=?" % table, (session_id,)).fetchone()[0]
+
+
+# -- undo points ------------------------------------------------------------------
+# The state before turn N is stored under (session, N). Undo and rewrite read
+# it; a load starts a new session, so its undo history starts empty.
+
+
+def save_undo_point_from_session(conn, session_id, turn):
+    """Store the session's current (pre-commit) state blob as the point for `turn`."""
+    conn.execute(
+        "INSERT OR REPLACE INTO undo_points(session_id, turn, state) SELECT session_id, ?, state FROM sessions WHERE session_id=?",
+        (turn, session_id),
+    )
+
+
+def put_undo_point(conn, session_id, turn, state):
+    conn.execute("INSERT OR REPLACE INTO undo_points(session_id, turn, state) VALUES(?,?,?)", (session_id, turn, pack(hot(state))))
+
+
+def undo_point(conn, session_id, turn):
+    row = conn.execute("SELECT state FROM undo_points WHERE session_id=? AND turn=?", (session_id, turn)).fetchone()
+    return upgrade(unpack(row[0])) if row else None
+
+
+def delete_undo_point(conn, session_id, turn):
+    conn.execute("DELETE FROM undo_points WHERE session_id=? AND turn=?", (session_id, turn))
+
+
+def trim_undo_points(conn, session_id, keep):
+    conn.execute(
+        "DELETE FROM undo_points WHERE session_id=? AND turn NOT IN "
+        "(SELECT turn FROM undo_points WHERE session_id=? ORDER BY turn DESC LIMIT ?)",
+        (session_id, session_id, keep),
+    )
+    # The fact journal of a turn is only needed while its undo point exists.
+    conn.execute(
+        "DELETE FROM fact_journal WHERE session_id=? AND turn < "
+        "(SELECT COALESCE(MIN(turn), 1000000000) FROM undo_points WHERE session_id=?)",
+        (session_id, session_id),
+    )
+
+
+# -- commit failures ----------------------------------------------------------------
+# A failed commit leaves a marker; the next successful commit returns the full
+# context (DESIGN_DECISIONS defaults: "上一次提交出错").
+
+
+def mark_commit_failure(conn, session_id, now):
+    row = conn.execute("SELECT revision FROM sessions WHERE session_id=?", (session_id,)).fetchone()
+    if row is not None:
+        conn.execute("INSERT OR REPLACE INTO commit_failures(session_id, revision, failed_at) VALUES(?,?,?)", (session_id, row[0], now))
+
+
+def take_commit_failure(conn, session_id):
+    row = conn.execute("SELECT revision FROM commit_failures WHERE session_id=?", (session_id,)).fetchone()
+    if row is None:
+        return None
+    conn.execute("DELETE FROM commit_failures WHERE session_id=?", (session_id,))
+    return row[0]
 
 
 # -- idempotency ----------------------------------------------------------------
@@ -157,10 +365,12 @@ def idem_put(conn, scope, request_id, digest, response, now):
         "INSERT INTO idempotency(scope, request_id, digest, response, created_at) VALUES(?,?,?,?,?)",
         (scope, request_id, digest, pack(response), now),
     )
+    # Keep the newest IDEMPOTENCY_KEEP rows of the scope. The index on scope
+    # (rowids in order) finds the cut-off without reading the whole scope.
     conn.execute(
-        "DELETE FROM idempotency WHERE scope=? AND rowid NOT IN "
-        "(SELECT rowid FROM idempotency WHERE scope=? ORDER BY rowid DESC LIMIT ?)",
-        (scope, scope, IDEMPOTENCY_KEEP),
+        "DELETE FROM idempotency WHERE scope=? AND rowid < "
+        "(SELECT rowid FROM idempotency WHERE scope=? ORDER BY rowid DESC LIMIT 1 OFFSET ?)",
+        (scope, scope, IDEMPOTENCY_KEEP - 1),
     )
 
 
@@ -180,13 +390,15 @@ def get_slot(conn, name, with_blobs=False):
         return None
     info = dict(zip(SLOT_COLUMNS, row[: len(SLOT_COLUMNS)]))
     if with_blobs:
-        info["state"] = unpack(row[len(SLOT_COLUMNS)])
+        info["state"] = upgrade(unpack(row[len(SLOT_COLUMNS)]))
         info["content"] = unpack(row[len(SLOT_COLUMNS) + 1])
         info["archive"] = unpack(row[len(SLOT_COLUMNS) + 2])
     return info
 
 
 def put_slot(conn, name, state, content, archive, clock_label, open_action, version, now):
+    """`state` is complete (facts included): a slot outlives its session."""
+    state = FA.full_state(state)
     conn.execute("DELETE FROM slots WHERE name=?", (name,))
     conn.execute(
         "INSERT INTO slots(name, session_id, revision, turn, world_id, world_title, clock_label, open_action, version, state, content, archive, saved_at) "
@@ -231,6 +443,10 @@ def add_archive(conn, session_id, kind, turn, payload, now):
         "INSERT INTO archive(session_id, kind, turn, payload, created_at) VALUES(?,?,?,?,?)",
         (session_id, kind, turn, json.dumps(payload, ensure_ascii=False, separators=(",", ":")), now),
     )
+
+
+def delete_archive_turn(conn, session_id, turn):
+    conn.execute("DELETE FROM archive WHERE session_id=? AND turn=?", (session_id, turn))
 
 
 def restore_archive(conn, session_id, items, now):

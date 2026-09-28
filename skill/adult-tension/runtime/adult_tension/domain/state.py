@@ -1,7 +1,20 @@
 """Read helpers over the session state dict. No mutation except id allocation."""
 
+import hashlib
+
+from ..jsonio import canonical
 from . import clock as CL
+from . import facts as FA
 from . import structure as ST
+
+# Per-session identity: a loaded copy of a game differs only in these.
+SESSION_FIELDS = ("session_id", "undo_floor")
+
+
+def digest(state):
+    """Digest of the game itself: same seed, content and commands, same digest."""
+    clean = {k: v for k, v in FA.full_state(state).items() if k not in SESSION_FIELDS}
+    return hashlib.sha256(canonical(clean).encode("utf-8")).hexdigest()
 
 
 def next_id(state, kind, prefix):
@@ -41,11 +54,7 @@ def has_edge_either(state, a, b):
 
 def info_set(state, cid):
     """Fact ids the character knows or (mis)believes."""
-    return {
-        fid
-        for fid, fact in state["facts"].items()
-        if cid in fact["known_by"] or cid in fact["believed_by"]
-    }
+    return {fact["id"] for fact in FA.of(state).known_to(cid)}
 
 
 def knows(state, cid, fid):
@@ -54,10 +63,7 @@ def knows(state, cid, fid):
 
 
 def true_fact_by_key(state, key):
-    for fact in state["facts"].values():
-        if fact["key"] == key and fact["truth"]:
-            return fact
-    return None
+    return next((fact for fact in FA.of(state).by_key(key) if fact["truth"]), None)
 
 
 def stage_index(stage):

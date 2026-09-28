@@ -8,6 +8,8 @@ matter how long the game runs; the trimming order is fixed here.
 import json
 
 from ..domain import clock as CL
+from ..domain import facts as FA
+from ..domain import simulation
 from ..domain import state as SS
 from ..domain import structure as ST
 
@@ -53,26 +55,15 @@ def _npc_brief(state, world, cid):
     return entry
 
 
-def _fact_score(state, fact, present_names, present_ids):
-    score = 0
-    head = fact["key"].split(".", 1)[0]
-    if head in present_ids or any(name and name in fact["text"] for name in present_names):
-        score += 3
-    if fact["turn"] >= state["turn"] - 5:
-        score += 2
-    if fact["origin"] == "setup" and head == "player":
-        score -= 1
-    return score
-
-
 def player_facts(state, limit=None):
+    """The player's facts, most relevant first (facts.player_score): about
+    someone present, or recent. Storage answers this without reading every fact."""
     player = state["player_id"]
-    present_ids = set(state["scene"]["present"]) - {player}
+    present_ids = sorted(set(state["scene"]["present"]) - {player})
     present_names = [state["characters"][c]["name"] for c in present_ids]
-    facts = [f for f in state["facts"].values() if player in f["known_by"] or player in f["believed_by"]]
-    facts.sort(key=lambda f: (-_fact_score(state, f, present_names, present_ids), -f["turn"], f["id"]))
+    facts = FA.of(state).player_ranked(player, present_ids, present_names, state["turn"] - FA.RECENT_TURNS, limit)
     out = []
-    for fact in facts[:limit] if limit else facts:
+    for fact in facts:
         item = {"id": fact["id"], "text": fact["text"], "visibility": fact["visibility"]}
         if not fact["truth"]:
             item["believed_not_true"] = True
@@ -171,6 +162,11 @@ def brief(state, content, save=None):
         "save": save or {"current_slot": None, "turns_since_save": 0},
         "requests": dict(state["requests"]),
     }
+    chapters = state["memory"]["chapters"]
+    if chapters and len(context["recent"]) < LIMITS["recent"]:
+        # Right after a chapter closes its turns are archived; the chapter
+        # summary keeps the thread until new turn summaries accumulate.
+        context["last_chapter"] = chapters[-1]["summary"]
     _fit(context, BRIEF_LIMIT, ("known_facts", "due_soon", "nearby", "scene_responses", "recent", "last_quotes"))
     return context
 
@@ -273,8 +269,11 @@ def full(state, content, save=None):
     if state.get("pressure"):
         context["pressure"] = state["pressure"]
     context["chapters"] = [c["summary"] for c in state["memory"]["chapters"][-3:]]
+    context.pop("last_chapter", None)
     if state["memory"].get("prologue"):
         context["prologue"] = state["memory"]["prologue"]
+    if state["requests"].get("prologue"):
+        context["prologue_merge"] = simulation.prologue_source(state)
     context["tags"] = [t["id"] for t in content["tags"]]
     pools = world["name_pools"]
     used = {c.get("family") for c in state["characters"].values()}

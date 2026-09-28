@@ -6,6 +6,7 @@ import tempfile
 
 from adult_tension.application import service
 from adult_tension.application.context import Context
+from adult_tension.domain import facts as FA
 from adult_tension.persistence import repo
 
 from .cli import SKILL_ROOT, clean_env
@@ -38,7 +39,10 @@ def open_game(ctx, ids, mode="pressure", seed=7, **extra):
 
 
 def session(ctx, session_id):
-    return repo.load_session(ctx.db(), session_id)
+    """A stored session with its complete state (facts read into a dict)."""
+    info = repo.load_session(ctx.db(), session_id)
+    info["state"] = FA.full_state(info["state"])
+    return info
 
 
 def table_counts(ctx, session_id):
