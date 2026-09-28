@@ -111,6 +111,34 @@ SAVE_SLOT = _obj(
 )
 
 LOAD_SLOT = _obj({"request_id": F(S.RequestId()), "name": F(S.Str(1, 60))}, "load-slot")
+DELETE_SLOT = _obj(
+    dict(
+        session_write_fields(),
+        name=F(S.Str(1, 60)),
+        confirm=F(S.Bool(), required=False, default=False, desc="玩家确认删除后才为 true"),
+    ),
+    "delete-slot",
+)
+LIST_SESSIONS = _obj({"limit": F(S.Int(1, 20), required=False, default=10)}, "list-sessions")
+EXPORT_SAVE = _obj(
+    {
+        "session_id": F(S.Nullable(SESSION_ID), required=False, default=None, desc="导出这个会话的当前状态"),
+        "slot": F(S.Nullable(S.Str(1, 60)), required=False, default=None, desc="或导出这个存档"),
+        "path": F(S.Nullable(S.Str(1, 400)), required=False, default=None, desc="玩家明确给出的绝对路径（.json）；不给时写到数据目录的 exports/"),
+        "overwrite": F(S.Bool(), required=False, default=False),
+    },
+    "export-save",
+)
+IMPORT_SAVE = _obj(
+    {
+        "request_id": F(S.RequestId()),
+        "path": F(S.Nullable(S.Str(1, 400)), required=False, default=None, desc="导出文件的路径"),
+        "data": F(S.Nullable(S.Any("导出的 JSON 对象")), required=False, default=None, desc="或玩家粘贴的导出内容（整个 JSON 对象）"),
+        "slot": F(S.Nullable(S.Str(1, 60)), required=False, default=None, desc="同时写入这个存档槽（可省略）"),
+        "overwrite": F(S.Bool(), required=False, default=False, desc="存档名已被占用时，玩家确认覆盖"),
+    },
+    "import-save",
+)
 LIST_WORLDS = _obj({"include_drafts": F(S.Bool(), required=False, default=False)}, "list-worlds")
 SMOKE = _obj({"seed": F(S.Int(1, 999999), required=False, default=42), "turns": F(S.Int(2, 60), required=False, default=8)}, "smoke")
 VERIFY_CONTENT = _obj(

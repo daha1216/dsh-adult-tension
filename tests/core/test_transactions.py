@@ -1,9 +1,12 @@
 """The single write path: transactions, idempotency, revisions (ACCEPTANCE.md 2)."""
 
+import json
 import unittest
 
 import _bootstrap  # noqa: F401
+from adult_tension import DB_SCHEMA_VERSION
 from adult_tension.application import service
+from adult_tension.domain.state import digest as state_digest_of
 from adult_tension.errors import AppError
 from adult_tension.persistence import repo
 from helpers.service import Ids, app, open_game, session, table_counts
@@ -192,8 +195,14 @@ class MetaCommandTest(unittest.TestCase):
             detail_view = service.status(ctx, {"session_id": sid, "level": "detail"})
             self.assertTrue(detail_view["sections"])
             debug_view = service.status(ctx, {"session_id": sid, "level": "debug"})
-            self.assertEqual(debug_view["debug"]["invariant_problems"], [])
-            self.assertLessEqual(debug_view["debug"]["context_bytes"]["brief"], 6 * 1024)
+            debug = debug_view["debug"]
+            self.assertEqual(debug["state_problems"], [])  # the full state check, invariants included
+            self.assertLessEqual(debug["context_bytes"]["brief"], 6 * 1024)
+            self.assertEqual(debug["digest"], state_digest_of(session(ctx, sid)["state"]))
+            self.assertEqual(debug["facts"]["count"], len(session(ctx, sid)["state"]["facts"]))
+            self.assertEqual(debug["storage"]["undo"]["floor"], 1)
+            self.assertEqual(debug["storage"]["db_schema_version"], DB_SCHEMA_VERSION)
+            json.dumps(debug_view, ensure_ascii=False)  # the whole view can be written out
             self.assertEqual(session(ctx, sid)["turn"], 1)
 
     def test_bad_meta_inputs(self):

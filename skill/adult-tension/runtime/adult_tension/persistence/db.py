@@ -5,6 +5,7 @@ are forward-only; before migrating an existing database it is copied to
 backups/, and a failed migration restores that copy.
 """
 
+import json
 import os
 import sqlite3
 import time
@@ -224,7 +225,62 @@ def _migrate_to_2(conn):
     conn.execute("DELETE FROM undo_points")
 
 
-MIGRATIONS = {1: _migrate_to_1, 2: _migrate_to_2}
+def _migrate_to_3(conn):
+    # v3: a slot is kept like a session: its facts and archive are rows, so
+    # saving and loading copy rows inside SQLite instead of decoding and
+    # re-encoding everything (their cost no longer grows with the game).
+    # Sessions get a write sequence for "most recently played" (timestamps
+    # have one-second resolution).
+    _exec_script(
+        conn,
+        """
+        ALTER TABLE sessions ADD COLUMN activity INTEGER NOT NULL DEFAULT 0;
+        CREATE INDEX sessions_activity ON sessions(activity);
+        CREATE TABLE slot_facts (
+            slot TEXT NOT NULL,
+            n INTEGER NOT NULL,
+            id TEXT NOT NULL,
+            key TEXT NOT NULL,
+            head TEXT NOT NULL,
+            truth INTEGER NOT NULL,
+            visibility TEXT NOT NULL,
+            origin TEXT NOT NULL,
+            turn INTEGER NOT NULL,
+            spreading INTEGER NOT NULL,
+            knowers TEXT NOT NULL,
+            text TEXT NOT NULL,
+            data TEXT NOT NULL,
+            PRIMARY KEY (slot, id)
+        );
+        CREATE TABLE slot_archive (
+            slot TEXT NOT NULL,
+            seq INTEGER NOT NULL,
+            kind TEXT NOT NULL,
+            turn INTEGER,
+            payload TEXT NOT NULL,
+            PRIMARY KEY (slot, seq)
+        );
+        """,
+    )
+    from . import repo
+    from ..domain.upgrade import upgrade
+
+    for name, blob, archive in conn.execute("SELECT name, state, archive FROM slots").fetchall():
+        state = upgrade(repo.unpack(blob))
+        facts = state.pop("facts", None) or {}
+        repo.insert_slot_facts(conn, name, sorted(facts.values(), key=lambda f: int(f["id"][1:])))
+        for seq, item in enumerate(repo.unpack(archive)):
+            conn.execute(
+                "INSERT INTO slot_archive(slot, seq, kind, turn, payload) VALUES(?,?,?,?,?)",
+                (name, seq, item["kind"], item["turn"], json.dumps(item["payload"], ensure_ascii=False, separators=(",", ":"))),
+            )
+        conn.execute("UPDATE slots SET state=?, archive=? WHERE name=?", (repo.pack(state), repo.pack([]), name))
+    ordered = conn.execute("SELECT session_id FROM sessions ORDER BY updated_at, rowid").fetchall()
+    for position, (session_id,) in enumerate(ordered, 1):
+        conn.execute("UPDATE sessions SET activity=? WHERE session_id=?", (position, session_id))
+
+
+MIGRATIONS = {1: _migrate_to_1, 2: _migrate_to_2, 3: _migrate_to_3}
 
 
 def _now_stamp():

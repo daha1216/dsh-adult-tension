@@ -120,32 +120,28 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 | 玩家说 | 你做 |
 |---|---|
+元命令只输出回执（返回的 `receipt`），不写叙事。
+
+| 玩家说 | 你做 |
+|---|---|
 | 开局、新游戏、开局 日常 / 压力、开局 港口、重开 N 号 | 开局流程 |
-| 世界列表、有哪些世界 | `list-worlds`（无输入） |
+| 世界列表 | `list-worlds` |
 | 继续、c、……、空输入 | `commit-turn`（`continue`） |
-| 存档 [名称]、s、快速存档、qs | `save-slot`（带 `name`；不给名字就存到当前槽或自动命名） |
-| 另存为 名称 | `save-slot`，带新名称与 `"save_as": true` |
-| 读档 [名称]、l | `load-slot`（`{"request_id", "name"}`）；没给名称或名称不存在时 `list-slots` 让玩家选 |
-| 存档列表 | `list-slots`（无输入） |
-| 状态 / 状态+ / 调试 | `status`（`level`: `brief` / `detail` / `debug`），把 `lines`（和 `sections`）原样转述，不加叙事 |
+| 存档 [名称]、s、快速存档、qs / 另存为 名称 | `save-slot`（`name`；不给名字存到当前槽或自动命名）/ 另加 `"save_as": true` |
+| 读档 [名称]、l | `load-slot`；没给名称或不存在时 `list-slots` 让玩家选。回执后用 `resume` 写两三句前情，从未决动作的前一刻接着写，不重复开局 |
+| 存档列表 / 删除存档 名称 | `list-slots` / 先问“确定删除「名称」吗？”，确认后 `delete-slot` 带 `"confirm": true` |
+| 继续上次、恢复 | `list-sessions`：一个就接上，多个列出让玩家选；接上时 `get-context` 带 `"depth": "full"`，写两三句前情再接续。当前局暂停中说“恢复”：问“恢复上次会话 / 读取存档 / 解除暂停” |
+| 导出 [存档名] | `export-save`（`session_id` 或 `slot`；玩家给了路径才写 `path`），告诉玩家文件路径 |
+| 导入 路径 / 粘贴的内容 | `import-save`（`path` 或 `data`，可带 `slot`），回执后写两三句前情接续 |
+| 状态 / 状态+ / 调试 | `status`（`level`: `brief` / `detail` / `debug`），`lines`（和 `sections`）原样转述；六行编号 ①–⑥ |
 | 边界：不要 X / 撤销边界 X | `set-boundary`（`add` / `remove`） |
 | 暂停、安全词、pause / 换个场景 | `set-safety` |
 | 内心可见 / 叙事助手 / 离屏推演 开关、语态 某人 表/里、人称、NPC 性别偏好 | `set-preferences`（`inner_view`、`assistant`、`offscreen_simulation`、`voice: {"npc_id", "voice"}`、`person`、`npc_gender_preference`） |
 | 撤销 / 刚才不算 / 刚才不算，改成 Y / 其实…… | 见“撤销、改写、追溯” |
 | 快进到……、跳到……、来点转折 | 见“时间、离屏与转折” |
-| 导出、导入、继续上次、恢复 | 当前版本还没开放：用一句话告诉玩家 |
 | 帮助、h、? | 列出上面的说法 |
 
-缺少对象时追问一次，不猜。存档名已被占用（`SLOT_CONFLICT` 且 `reason: exists`）：问“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重交。`reason: changed_elsewhere`：给玩家“A 读取最新 / B 另存为新名 / C 取消”。
-
-## 回执（元命令只输出这些，不写叙事）
-
-| 场景 | 回执 |
-|---|---|
-| 保存 / 另存为 | 用返回的 `receipt`（“已保存到「名称」·第 N 回合”） |
-| 读档 | 返回的 `receipt`；再用 `resume`（最近摘要、原话、`open_action`）写两三句前情，然后从未决动作的前一刻接着写，不重复开局 |
-| 边界 / 暂停 / 开关 | 返回的 `receipt`（“已记下：不会出现 X”“已暂停。说‘继续’恢复，或说‘换个场景’”“内心可见：开”） |
-| 状态 | `status` 的六行，编号 ①–⑥ |
+缺少对象时追问一次，不猜。存档名已被占用（`SLOT_CONFLICT`，`reason: exists`）：问“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重交；`changed_elsewhere`：给“A 读取最新 / B 另存为新名 / C 取消”。导入被拒时如实说文件损坏或版本太新，不猜内容。
 
 ## 参考资料（需要时再读）
 
@@ -153,4 +149,4 @@ description: Run a Chinese interactive story for adults with a local determinist
 - `references/operations.md`：全部操作与提交字段
 - `references/commands.md`：全部命令的输入输出、错误码与退出码
 - `references/worlds.md`：世界列表
-- `references/troubleshooting.md`：环境问题
+- `references/troubleshooting.md`：环境问题、数据目录、升级与卸载

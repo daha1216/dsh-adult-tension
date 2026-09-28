@@ -1,7 +1,7 @@
 """Adult Tension runtime. Standard library only; Python 3.10+."""
 
-SKILL_VERSION = "0.2.0"
-DB_SCHEMA_VERSION = 2
+SKILL_VERSION = "0.3.0"
+DB_SCHEMA_VERSION = 3
 STATE_SCHEMA_VERSION = 2
 RNG_VERSION = 1
 SAVE_FORMAT = "adult-tension-save"

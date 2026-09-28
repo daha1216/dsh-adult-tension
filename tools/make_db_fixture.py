@@ -1,6 +1,6 @@
 """Create a real database with the current Skill code, as a migration fixture.
 
-    python tools/make_db_fixture.py <dest_dir>
+    python tools/make_db_fixture.py <dest_dir> [turns]
 
 Plays a short game (new game, a few turns, one save) through the real write
 path and leaves the data directory at <dest_dir>. Run it with the version of
@@ -25,12 +25,13 @@ from adult_tension.persistence import repo  # noqa: E402
 
 def main(argv):
     dest = os.path.abspath(argv[0])
+    turns = int(argv[1]) if len(argv) > 1 else 6
     env = {k: v for k, v in os.environ.items() if not k.startswith("ADULT_TENSION")}
     ctx = Context(_runtime.SKILL_ROOT, dest, env, {}, False)
     opened = service.new_game(ctx, {"request_id": "fixture_new_0001", "mode": "pressure", "seed": 2024, "include_drafts": True})
     sid = opened["session_id"]
     narrator = FakeNarrator(2024)
-    for index in range(6):
+    for index in range(turns):
         info = repo.load_session(ctx.db(), sid)
         commit = narrator.commit(info["state"], info["content"])
         service.commit_turn(ctx, dict(commit, session_id=sid, request_id="fixture_turn_%04d" % index, expected_revision=info["revision"]))

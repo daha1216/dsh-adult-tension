@@ -518,7 +518,7 @@ def save_slot(ctx, payload):
         from ..domain import state as SS
 
         label = SS.clock_label(state, content["world"])
-        repo.put_slot(conn, name, state, content, repo.archive_items(conn, state["session_id"]), label, state["memory"]["open_action"], version, now)
+        repo.put_slot(conn, name, state["session_id"], label, state["memory"]["open_action"], version, now)
         repo.set_save_info(conn, state["session_id"], name, version, now)
         verb = "已另存为" if payload["save_as"] else "已保存到"
         return {
@@ -561,8 +561,9 @@ def load_slot(ctx, payload):
         state = slot["state"]
         state["session_id"] = new_session_id(conn)
         state["undo_floor"] = state["turn"]
-        repo.insert_session(conn, state, slot["content"], "load_slot", now, current_slot=name, slot_version=slot["version"])
-        repo.restore_archive(conn, state["session_id"], slot["archive"], now)
+        repo.insert_session(conn, state, slot["content"], "load_slot", now, current_slot=name, slot_version=slot["version"], with_facts=False)
+        repo.copy_slot_rows(conn, name, state["session_id"], now)
+        state["facts"] = repo.FactSource(conn, state["session_id"])
         repo.insert_turn_log(conn, state["session_id"], state["turn"], state["revision"], "load", None, None, {"slot": name, "version": slot["version"]}, None, None, now)
         return {
             "session_id": state["session_id"],
@@ -592,6 +593,153 @@ def list_slots(ctx, payload):
             for s in slots
         ]
     }
+
+
+def delete_slot(ctx, payload):
+    payload = validate(specs.DELETE_SLOT, payload)
+    name = normalize_slot_name(payload["name"])
+    if not payload["confirm"]:
+        raise AppError(
+            INVALID_INPUT,
+            "删除存档需要玩家确认",
+            [detail("$.confirm", "玩家还没有确认", "先问“确定删除「%s」吗？”，确认后带 confirm: true 重交" % name, INVALID_INPUT)],
+        )
+
+    def handler(conn, session, now):
+        if repo.get_slot(conn, name) is None:
+            names = [s["name"] for s in repo.list_slots(conn)]
+            raise AppError(
+                NOT_FOUND,
+                "没有名为「%s」的存档" % name,
+                [detail("$.name", "存档不存在", "现有存档：%s" % ("、".join(names[:20]) or "（无）"), NOT_FOUND)],
+                available=names[:20],
+            )
+        repo.delete_slot(conn, name)
+        return {"revision": session["revision"], "turn": session["turn"], "deleted": name, "receipt": "已删除「%s」" % name}
+
+    return session_write(ctx, "delete-slot", payload, handler)
+
+
+# ---------------------------------------------------------------------------
+# sessions, export, import
+
+
+def list_sessions(ctx, payload):
+    from ..domain import clock as CL
+
+    payload = validate(specs.LIST_SESSIONS, payload)
+    out = []
+    for row in repo.list_sessions(ctx.db(), payload["limit"]):
+        state = row["state"]
+        memory = state["memory"]
+        last = memory["turns"][-1]["summary"] if memory["turns"] else (memory["chapters"][-1]["summary"] if memory["chapters"] else None)
+        out.append(
+            {
+                "session_id": row["session_id"],
+                "world_title": row["world_title"],
+                "mode": row["mode"],
+                "turn": row["turn"],
+                "clock_label": CL.label(state["clock"], row["clock_style"]),
+                "last_summary": last,
+                "open_action": memory["open_action"],
+                "paused": state["safety"]["paused"],
+                "current_slot": row["current_slot"],
+                "turns_since_save": row["turns_since_save"],
+                "origin": row["origin"],
+                "updated_at": row["updated_at"],
+            }
+        )
+    return {"sessions": out}
+
+
+def export_save(ctx, payload):
+    from ..domain import facts as FA
+    from . import transfer
+
+    payload = validate(specs.EXPORT_SAVE, payload)
+    if (payload["session_id"] is None) == (payload["slot"] is None):
+        raise AppError(INVALID_INPUT, "session_id 与 slot 必须且只能给一个", [detail("$", "说明要导出哪个会话或哪个存档", None, INVALID_INPUT)])
+    conn = ctx.db()
+    if payload["session_id"] is not None:
+        session = repo.load_session(conn, payload["session_id"])
+        state = FA.full_state(session["state"])
+        content = session["content"]
+        archive = repo.archive_items(conn, session["session_id"])
+        source = {"kind": "session", "session_id": session["session_id"], "current_slot": session["current_slot"]}
+    else:
+        name = normalize_slot_name(payload["slot"], "$.slot")
+        slot = repo.get_slot(conn, name, with_blobs=True)
+        if slot is None:
+            names = [s["name"] for s in repo.list_slots(conn)]
+            raise AppError(NOT_FOUND, "没有名为「%s」的存档" % name, [detail("$.slot", "存档不存在", "现有存档：%s" % ("、".join(names[:20]) or "（无）"), NOT_FOUND)], available=names[:20])
+        state = slot["state"]
+        state["facts"] = repo.slot_facts(conn, name)
+        content = slot["content"]
+        archive = repo.slot_archive(conn, name)
+        source = {"kind": "slot", "name": name, "version": slot["version"]}
+    doc = transfer.build(state, content, archive, source, now_iso())
+    target = transfer.export_target(ctx, payload["path"], "%s-第%d回合" % (state["world_title"], state["turn"]), payload["overwrite"])
+    size = transfer.write_file(target, doc)
+    return {
+        "path": target,
+        "bytes": size,
+        "checksum": doc["checksum"],
+        "format": doc["format"],
+        "schema_version": doc["schema_version"],
+        "turn": state["turn"],
+        "receipt": "已导出到 %s" % target,
+    }
+
+
+def import_save(ctx, payload):
+    from . import transfer
+
+    payload = validate(specs.IMPORT_SAVE, payload)
+    if (payload["path"] is None) == (payload["data"] is None):
+        raise AppError(INVALID_INPUT, "path 与 data 必须且只能给一个", [detail("$", "给出导出文件的路径，或粘贴的导出内容", None, INVALID_INPUT)])
+    slot_name = normalize_slot_name(payload["slot"], "$.slot") if payload["slot"] is not None else None
+    doc, raw = transfer.read_source(payload)
+    state, content, archive, upgraded = transfer.check(doc)
+
+    def handler(conn, now):
+        from ..domain import state as SS
+
+        backup = transfer.backup_import(ctx, doc, raw) if upgraded else None
+        state["session_id"] = new_session_id(conn)
+        state["undo_floor"] = state["turn"]
+        repo.insert_session(conn, state, content, "import", now)
+        repo.restore_archive(conn, state["session_id"], archive, now)
+        repo.insert_turn_log(conn, state["session_id"], state["turn"], state["revision"], "import", None, None, {"source": doc["source"], "exported_at": doc["exported_at"], "upgraded": upgraded}, None, None, now)
+        slot = None
+        save = {"current_slot": None, "turns_since_save": 0}
+        if slot_name is not None:
+            existing = repo.get_slot(conn, slot_name)
+            if existing is not None and not payload["overwrite"]:
+                raise AppError(
+                    SLOT_CONFLICT,
+                    "「%s」已存在" % slot_name,
+                    [detail("$.slot", "存档名已被占用", "问玩家是否覆盖；确认后带 overwrite: true 重交", SLOT_CONFLICT)],
+                    reason="exists",
+                )
+            version = (existing["version"] + 1) if existing else 1
+            label = SS.clock_label(state, content["world"])
+            repo.put_slot(conn, slot_name, state["session_id"], label, state["memory"]["open_action"], version, now)
+            repo.set_save_info(conn, state["session_id"], slot_name, version, now)
+            slot = {"name": slot_name, "version": version}
+            save = {"current_slot": slot_name, "turns_since_save": 0}
+        return {
+            "session_id": state["session_id"],
+            "revision": state["revision"],
+            "turn": state["turn"],
+            "upgraded_from": doc["schema_version"] if upgraded else None,
+            "backup": backup,
+            "slot": slot,
+            "receipt": "已导入「%s」·第 %d 回合" % (state["world_title"], state["turn"]),
+            "resume": _resume(state),
+            "context": CX.full(state, content, save),
+        }
+
+    return create_write(ctx, "import-save", payload, handler)
 
 
 def list_worlds(ctx, payload):
@@ -674,5 +822,26 @@ def status(ctx, payload):
         out["lines"] = ST.lines(state, content)
         out["sections"] = ST.detail_sections(state, content)
     else:
-        out["debug"] = ST.debug_view(state, content, save_info(session), repo.recent_turn_log(ctx.db(), session["session_id"], 5))
+        from .. import DB_SCHEMA_VERSION, SKILL_VERSION, STATE_SCHEMA_VERSION
+        from ..domain import rng
+
+        conn = ctx.db()
+        sid = session["session_id"]
+        storage = {
+            "skill_version": SKILL_VERSION,
+            "db_schema_version": DB_SCHEMA_VERSION,
+            "state_schema_version": STATE_SCHEMA_VERSION,
+            "rng_version": rng.RNG_VERSION,
+            "content_version": content["content_version"],
+            "origin": session["origin"],
+            "created_at": session["created_at"],
+            "updated_at": session["updated_at"],
+            "save": save_info(session),
+            "undo": {"floor": state["undo_floor"], "points": repo.count_rows(conn, "undo_points", sid)},
+            "archive_rows": repo.count_archive(conn, sid),
+            "turn_log_rows": repo.count_rows(conn, "turn_log", sid),
+            "last_failed_commit_revision": repo.commit_failure(conn, sid),
+            "data_dir": ctx.data_dir,
+        }
+        out["debug"] = ST.debug_view(state, content, save_info(session), repo.recent_turn_log(conn, sid, 5), storage)
     return out

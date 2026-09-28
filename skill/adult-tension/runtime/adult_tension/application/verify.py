@@ -54,7 +54,7 @@ def run(ctx, payload):
     for entry in entries:
         world_report = {"id": entry["id"], "status": entry["status"], "problems": 0}
         try:
-            raw = store.world(entry["id"])
+            raw = store.world_raw(entry["id"])
         except AppError as err:
             problems.extend(dict(d, code=CONTENT_ERROR, world=entry["id"]) for d in err.details)
             report["worlds"].append(world_report)

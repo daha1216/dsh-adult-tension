@@ -59,6 +59,7 @@ INVALID_EVERY = 7
 UNDO_AT = (25, 12)
 REPLACE_AT = (30, 17)
 LATENCY_SAMPLES = 200
+SAVE_LOAD_SAMPLES = 50
 REJECT_CODES = ("INVALID_INPUT", "INVARIANT_VIOLATION", "NOT_FOUND", "SAFETY_BLOCK")
 
 
@@ -240,6 +241,8 @@ class LatencyPoint:
         self.turn = state["turn"]
         self.commit = self.narrator.commit(state, content, force_kind="continue")
         self.samples = []
+        self.save_samples = []
+        self.load_samples = []
 
     def write(self, commit):
         self.n += 1
@@ -272,8 +275,23 @@ class LatencyPoint:
         service.undo_turn(self.ctx, {"session_id": self.sid, "request_id": "cold_%s_%05d" % (self.label, self.n), "expected_revision": envelope["data"]["revision"]})
         return elapsed
 
+    def save_load_sample(self):
+        """One save (to a fixed slot) and one load of it; returns (save_ms, load_ms)."""
+        self.n += 1
+        revision = repo.load_session(self.ctx.db(), self.sid, with_content=False)["revision"]
+        started = time.perf_counter()
+        service.save_slot(self.ctx, {"session_id": self.sid, "request_id": "lat_%s_%05d" % (self.label, self.n), "expected_revision": revision, "name": "measure-%s" % self.label, "overwrite": True})
+        saved = (time.perf_counter() - started) * 1000.0
+        self.n += 1
+        started = time.perf_counter()
+        service.load_slot(self.ctx, {"request_id": "lat_%s_%05d" % (self.label, self.n), "name": "measure-%s" % self.label})
+        return saved, (time.perf_counter() - started) * 1000.0
+
     def report(self):
         out = dict(_summary(self.samples), turn=self.turn, requested_turn=self.requested_turn, operations=[op["op"] for op in self.commit["operations"]])
+        if self.save_samples:
+            out["save_slot"] = _summary(self.save_samples)
+            out["load_slot"] = _summary(self.load_samples)
         if self.housekeeping is not None:
             out["housekeeping_commit"] = self.housekeeping
         return out
@@ -283,6 +301,11 @@ def measure_side_by_side(points, cold=0, workdir=None):
     for _ in range(LATENCY_SAMPLES):
         for point in points:
             point.samples.append(point.sample())
+    for _ in range(SAVE_LOAD_SAMPLES):
+        for point in points:
+            saved, loaded = point.save_load_sample()
+            point.save_samples.append(saved)
+            point.load_samples.append(loaded)
     cold_samples = {point.label: [] for point in points}
     for _ in range(cold):
         for point in points:

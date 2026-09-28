@@ -150,16 +150,34 @@ def detail_sections(state, content):
     return sections
 
 
-def debug_view(state, content, save, recent):
+DEBUG_RECENT_FACTS = 20
+
+
+def debug_view(state, content, save, recent, storage=None):
+    """调试：结构化状态、最近提交、上下文体积、校验信息 (PRODUCT_SPEC 4.4).
+
+    The per-turn state is shown whole; facts (never deleted, so unbounded) as
+    counts plus the most recent ones. `storage` comes from the application.
+    """
+    from ..domain import state_check
+
     brief = CX.brief(state, content, save)
     full = CX.full(state, content, save)
-    from ..domain import invariants
-
+    complete = FA.full_state(state)
+    facts = list(complete["facts"].values())
+    facts.sort(key=FA.order)
     return {
         "revision": state["revision"],
         "turn": state["turn"],
-        "state": state,
+        "digest": SS.digest(state),
+        "state": {k: v for k, v in state.items() if k != "facts"},
+        "facts": {
+            "count": len(facts),
+            "spreading": [f["id"] for f in facts if f.get("spreading")],
+            "recent": facts[-DEBUG_RECENT_FACTS:],
+        },
+        "storage": storage or {},
         "recent_commits": recent,
         "context_bytes": {"brief": brief["size_bytes"], "full": full["size_bytes"]},
-        "invariant_problems": invariants.check(state),
+        "state_problems": state_check.check_state(complete, content["world"]),
     }

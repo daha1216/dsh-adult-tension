@@ -15,8 +15,12 @@
 | 命令 | 类别 | 输入 | 作用 | 专用参数 |
 |---|---|---|---|---|
 | `commit-turn` | session_write | 必填 | 叙事回合：提交操作，返回结果与下一回合上下文 | — |
+| `delete-slot` | session_write | 必填 | 删除存档（需要 confirm: true） | — |
 | `doctor` | diagnostic | 无 | 检查环境并完成首次初始化（幂等） | — |
+| `export-save` | read | 必填 | 把会话或存档导出为文件（带完整性校验值） | — |
 | `get-context` | read | 必填 | 当前上下文（brief / full）；可带快进预览 preview_time 与转折候选 want_twist | — |
+| `import-save` | create | 必填 | 导入导出文件，得到一个新会话（可同时写入存档槽） | — |
+| `list-sessions` | read | 可选 | 最近的会话（续玩、恢复） | — |
 | `list-slots` | read | 无 | 存档列表 | — |
 | `list-worlds` | read | 可选 | 世界列表、一句话介绍、支持的模式 | `--include-drafts` |
 | `load-slot` | create | 必填 | 读档：创建新的会话副本，原存档不变 | — |
@@ -56,6 +60,25 @@
 | `prologue` | 字符串，≤300 字 或 null | 否，默认 `null` | 上下文 requests.prologue 为 true 时必填：把完整上下文 prologue_merge 里的旧前情与最早几章合并成一段前情，≤300 字；没有要求时不写 |
 | `replaces_turn` | 整数 1..1000000 或 null | 否，默认 `null` | “刚才不算，改成……”：填当前最后一个回合的回合号，引擎在同一事务里撤销它再应用本次提交 |
 
+### `delete-slot`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d | 是 |  |
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `expected_revision` | 整数 1..1000000000 | 是 | 上一次返回的 revision |
+| `name` | 字符串，≤60 字 | 是 |  |
+| `confirm` | 布尔 | 否，默认 `false` | 玩家确认删除后才为 true |
+
+### `export-save`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d 或 null | 否，默认 `null` | 导出这个会话的当前状态 |
+| `slot` | 字符串，≤60 字 或 null | 否，默认 `null` | 或导出这个存档 |
+| `path` | 字符串，≤400 字 或 null | 否，默认 `null` | 玩家明确给出的绝对路径（.json）；不给时写到数据目录的 exports/ |
+| `overwrite` | 布尔 | 否，默认 `false` |  |
+
 ### `get-context`
 
 | 字段 | 类型 | 必填 | 说明 |
@@ -72,6 +95,22 @@
 | `minutes` | 整数 1..43200 | 否 |  |
 | `until` | 枚举：`morning` / `noon` / `evening` / `night` / `next_morning` | 否 |  |
 | `days` | 整数 1..30 | 否 |  |
+
+### `import-save`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
+| `path` | 字符串，≤400 字 或 null | 否，默认 `null` | 导出文件的路径 |
+| `data` | 导出的 JSON 对象 或 null | 否，默认 `null` | 或玩家粘贴的导出内容（整个 JSON 对象） |
+| `slot` | 字符串，≤60 字 或 null | 否，默认 `null` | 同时写入这个存档槽（可省略） |
+| `overwrite` | 布尔 | 否，默认 `false` | 存档名已被占用时，玩家确认覆盖 |
+
+### `list-sessions`
+
+| 字段 | 类型 | 必填 | 说明 |
+|---|---|---|---|
+| `limit` | 整数 1..20 | 否，默认 `10` |  |
 
 ### `list-worlds`
 

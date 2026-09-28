@@ -10,6 +10,9 @@ Groups:
   age   ACCEPTANCE 7.4: each age check commented out makes tests fail
   time  stage 3 gates: required offscreen beats, undo reverting facts, the
         retcon knowledge rule, the settlement order, chapter archiving
+  cli   ACCEPTANCE 7.1, 7.2, 7.3, 7.5 through the real entry script: a deleted
+        referenced location, a stale revision, one changed byte in an export,
+        an anachronistic word in a location name
 """
 
 import json
@@ -145,12 +148,110 @@ def patch_checks(patches):
     return results
 
 
+def _cli(args, data_dir, payload=None, entry=None):
+    argv = [sys.executable, entry or _runtime.ENTRY_SCRIPT] + list(args) + ["--json", "--data-dir", data_dir]
+    temp = None
+    if payload is not None:
+        handle = tempfile.NamedTemporaryFile("wb", suffix=".json", delete=False)
+        handle.write(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
+        handle.close()
+        temp = handle.name
+        argv += ["--input-file", temp]
+    env = {k: v for k, v in os.environ.items() if not k.startswith("ADULT_TENSION") and k != "PYTHONPYCACHEPREFIX"}
+    env["ADULT_TENSION_INCLUDE_DRAFTS"] = "1"
+    try:
+        proc = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, env=env, timeout=300)
+    finally:
+        if temp:
+            os.remove(temp)
+    return proc.returncode, json.loads(proc.stdout.decode("utf-8"))
+
+
+def _outcome(label, code, envelope, expected_code, located):
+    error = envelope.get("error") or {}
+    return {
+        "check": label,
+        "exit_code": code,
+        "code": error.get("code"),
+        "message": error.get("message"),
+        "details": error.get("details", [])[:5],
+        "expected": "exit 10, %s%s" % (expected_code, "，并指出位置" if located else ""),
+        "as_expected": code == 10 and error.get("code") == expected_code and bool(located),
+    }
+
+
+def _tampered_skill(root, mutate):
+    skill = os.path.join(root, "adult-tension")
+    shutil.copytree(os.path.join(REPO, "skill", "adult-tension"), skill, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    path = os.path.join(skill, "content", "worlds", "harbor_night_shift.json")
+    with open(path, encoding="utf-8") as handle:
+        pack = json.load(handle)
+    mutate(pack)
+    with open(path, "w", encoding="utf-8") as handle:
+        json.dump(pack, handle, ensure_ascii=False)
+    return os.path.join(skill, "scripts", "adult_tension.py")
+
+
+def cli_checks():
+    results = []
+    root = tempfile.mkdtemp(prefix="at-reverse-cli-")
+    try:
+        # 7.1 a referenced location deleted from the compiled content
+        entry = _tampered_skill(os.path.join(root, "one"), lambda p: p.update(locations=[loc for loc in p["locations"] if loc["id"] != "tool_shed"]))
+        code, env = _cli(["verify-content", "--skip-diversity"], os.path.join(root, "d1"), entry=entry)
+        located = [d for d in (env.get("error") or {}).get("details", []) if "tool_shed" in d.get("reason", "") and d.get("world") == "harbor_night_shift"]
+        results.append(_outcome("7.1 删掉内容里一个被引用的地点 → verify-content 失败并指出位置", code, env, "CONTENT_ERROR", located))
+        # 7.2 a stale revision
+        data = os.path.join(root, "d2")
+        _code, opened = _cli(["new-game"], data, {"request_id": "rev_new_000001", "mode": "daily", "seed": 3})
+        session = opened["data"]
+        npc = next(c for c in session["context"]["scene"]["present"] if c != "player")
+        commit = {
+            "session_id": session["session_id"], "request_id": "rev_turn_00001", "expected_revision": session["revision"],
+            "action_mode": "continue", "player_input": "继续", "operations": [{"op": "npc_action", "npc_id": npc, "action": "看了看表"}],
+            "content_tags": [], "summary": "有人看表。", "open_action": "表针在走",
+        }
+        _cli(["commit-turn"], data, commit)
+        code, env = _cli(["commit-turn"], data, dict(commit, request_id="rev_turn_00002"))
+        results.append(_outcome("7.2 用过期 revision 提交 → STALE_REVISION", code, env, "STALE_REVISION", env.get("error", {}).get("current_revision") == session["revision"] + 1))
+        # 7.3 one byte of an export changed
+        _code, exported = _cli(["export-save"], data, {"session_id": session["session_id"]})
+        path = exported["data"]["path"]
+        with open(path, "rb") as handle:
+            raw = bytearray(handle.read())
+        position = raw.index(b'"turn":') + len(b'"turn":')
+        raw[position] = ord("9") if raw[position] != ord("9") else ord("8")
+        with open(path, "wb") as handle:
+            handle.write(bytes(raw))
+        code, env = _cli(["import-save"], data, {"request_id": "rev_import_001", "path": path})
+        located = [d for d in (env.get("error") or {}).get("details", []) if d.get("path") == "$.checksum"]
+        results.append(_outcome("7.3 篡改导出文件的一个字节 → 导入失败", code, env, "INVALID_INPUT", located))
+        # 7.5 an anachronistic word in a location name
+        entry = _tampered_skill(os.path.join(root, "five"), lambda p: p["locations"][0].update(name="扫码取件点"))
+        code, env = _cli(["verify-content", "--skip-diversity"], os.path.join(root, "d5"), entry=entry)
+        located = [d for d in (env.get("error") or {}).get("details", []) if d.get("path") == "$.locations[0].name"]
+        results.append(_outcome("7.5 把地点名换成另一个时代的词 → 跨世界扫描失败", code, env, "CONTENT_ERROR", located))
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+    return results
+
+
 def main(argv):
     group = "all"
     if "--group" in argv:
         group = argv[argv.index("--group") + 1]
     os.makedirs(OUT, exist_ok=True)
     all_ok = True
+    if group in ("all", "cli"):
+        results = cli_checks()
+        ok = all(r["as_expected"] for r in results)
+        all_ok = all_ok and ok
+        with open(os.path.join(OUT, "cli-checks.json"), "wb") as handle:
+            handle.write(json.dumps({"ok": ok, "group": "cli", "checks": results}, ensure_ascii=False, indent=2).encode("utf-8") + b"\n")
+        for item in results:
+            sys.stdout.buffer.write(("cli   %-60s exit=%s code=%s %s\n" % (item["check"], item["exit_code"], item["code"], "OK" if item["as_expected"] else "UNEXPECTED")).encode("utf-8"))
+        if group == "cli":
+            return 0 if all_ok else 1
     for name in (sorted(GROUPS) if group == "all" else [group]):
         filename, patches = GROUPS[name]
         results = patch_checks(patches)

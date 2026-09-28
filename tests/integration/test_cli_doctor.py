@@ -99,6 +99,42 @@ class DoctorTest(unittest.TestCase):
             self.assertEqual(env["error"]["code"], "CONTENT_ERROR")
             self.assertTrue(any("ghost_world" in d["path"] for d in env["error"]["details"]))
 
+    def test_a_deleted_location_is_reported_and_existing_games_play_on(self):
+        # SKILL_PACKAGING.md 10: compiled content tampered after a game started
+        with temp_dir() as tmp:
+            skill = copy_skill(tmp)
+            entry = os.path.join(skill, "scripts", "adult_tension.py")
+            data_dir = os.path.join(tmp, "data")
+            env_drafts = clean_env(ADULT_TENSION_INCLUDE_DRAFTS="1")
+            code, opened, _raw = run_cli(["new-game"], data_dir, payload={"request_id": "req_before_tamper", "mode": "daily", "seed": 5}, env=env_drafts, entry=entry)
+            self.assertEqual(code, 0, opened)
+            world_path = os.path.join(skill, "content", "worlds", "harbor_night_shift.json")
+            with open(world_path, encoding="utf-8") as handle:
+                world = json.load(handle)
+            here = opened["data"]["context"]["scene"]["location_id"]
+            removed = next(loc["id"] for loc in world["locations"] if loc["id"] != here and any(loc["id"] in other["exits"] for other in world["locations"]))
+            world["locations"] = [loc for loc in world["locations"] if loc["id"] != removed]
+            with open(world_path, "w", encoding="utf-8") as handle:
+                json.dump(world, handle, ensure_ascii=False)
+            code, env, _raw = run_cli(["doctor"], data_dir, entry=entry)
+            self.assertEqual((code, env["error"]["code"]), (10, "CONTENT_ERROR"))
+            self.assertTrue(any(removed in (d["reason"] + d["path"]) for d in env["error"]["details"]), env["error"]["details"][:5])
+            state = opened["data"]
+            npc = next(c for c in state["context"]["scene"]["present"] if c != "player")
+            commit = {
+                "session_id": state["session_id"],
+                "request_id": "req_after_tamper",
+                "expected_revision": state["revision"],
+                "action_mode": "continue",
+                "player_input": "继续",
+                "operations": [{"op": "npc_action", "npc_id": npc, "action": "看了看天"}],
+                "content_tags": [],
+                "summary": "天色变了。",
+                "open_action": "有人抬头看天",
+            }
+            code, env, _raw = run_cli(["commit-turn"], data_dir, payload=commit, env=env_drafts, entry=entry)
+            self.assertEqual(code, 0, env)  # the game uses its own content snapshot
+
     def test_newer_database_is_not_modified(self):
         with temp_dir() as tmp:
             data_dir = os.path.join(tmp, "data")

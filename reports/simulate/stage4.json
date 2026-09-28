@@ -1,0 +1,531 @@
+{
+  "machine": {
+    "os": "Windows-11-10.0.26340-SP0",
+    "python": "3.12.10",
+    "python_executable": "C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "cpu_count": 20,
+    "cpu": "Intel(R) Core(TM) i5-14600KF",
+    "machine": "Micro-Star International Co., Ltd. MS-7D42",
+    "sqlite": "3.49.1"
+  },
+  "turns": 300,
+  "cold_samples": 50,
+  "runs": [
+    {
+      "mode": "pressure",
+      "seed": 7301,
+      "turns": 310,
+      "seconds": 6.0,
+      "digest_straight": "c10254862d24358dc8b2bdfe2b013ffde1c4fd0ca6e787b6efac7172c0fb5019",
+      "digest_save_load": "c10254862d24358dc8b2bdfe2b013ffde1c4fd0ca6e787b6efac7172c0fb5019",
+      "straight": {
+        "invalid_injected": 44,
+        "invalid_rejected": 44,
+        "invalid_state_changed": 0,
+        "undo_redo_checks": 12,
+        "undo_redo_mismatch": [],
+        "replace_checks": 8,
+        "replace_problems": [],
+        "invariant_violations": [],
+        "brief_max": 3198,
+        "full_max": 18411,
+        "saves": []
+      },
+      "save_load": {
+        "invalid_injected": 44,
+        "invalid_rejected": 44,
+        "invalid_state_changed": 0,
+        "undo_redo_checks": 12,
+        "undo_redo_mismatch": [],
+        "replace_checks": 8,
+        "replace_problems": [],
+        "invariant_violations": [],
+        "brief_max": 3198,
+        "full_max": 18426,
+        "saves": [
+          {
+            "turn": 100,
+            "slot": "sim-pressure_b-100",
+            "old_session": "s_c7f14c7d",
+            "new_session": "s_c5382ed2"
+          },
+          {
+            "turn": 200,
+            "slot": "sim-pressure_b-200",
+            "old_session": "s_c5382ed2",
+            "new_session": "s_bfd331dd"
+          },
+          {
+            "turn": 300,
+            "slot": "sim-pressure_b-300",
+            "old_session": "s_bfd331dd",
+            "new_session": "s_929b958e"
+          }
+        ]
+      },
+      "sizes": {
+        "10": {
+          "brief_context": 3004,
+          "full_context": 16995,
+          "turn_blob_json": 14542,
+          "turn_blob_packed": 5751,
+          "facts": 11,
+          "fact_rows_bytes": 2386
+        },
+        "100": {
+          "brief_context": 1682,
+          "full_context": 17227,
+          "turn_blob_json": 17312,
+          "turn_blob_packed": 6182,
+          "facts": 62,
+          "fact_rows_bytes": 12516
+        },
+        "300": {
+          "brief_context": 1691,
+          "full_context": 18292,
+          "turn_blob_json": 17805,
+          "turn_blob_packed": 6176,
+          "facts": 290,
+          "fact_rows_bytes": 59877
+        }
+      },
+      "chapters": 26,
+      "chapters_in_state": 6,
+      "prologue": true,
+      "facts": 301,
+      "events_in_state": 1,
+      "archive_rows": 336,
+      "twists_accepted": 5,
+      "latency": {
+        "turn_10": {
+          "samples": 200,
+          "p50_ms": 3.03,
+          "p95_ms": 4.58,
+          "max_ms": 8.71,
+          "turn": 10,
+          "requested_turn": 10,
+          "operations": [
+            "npc_action",
+            "npc_state"
+          ],
+          "save_slot": {
+            "samples": 50,
+            "p50_ms": 1.7,
+            "p95_ms": 3.05,
+            "max_ms": 4.98
+          },
+          "load_slot": {
+            "samples": 50,
+            "p50_ms": 6.08,
+            "p95_ms": 12.42,
+            "max_ms": 20.24
+          },
+          "cold_process": {
+            "samples": 50,
+            "p50_ms": 83.6,
+            "p95_ms": 96.59,
+            "max_ms": 285.9
+          }
+        },
+        "turn_300": {
+          "samples": 200,
+          "p50_ms": 3.33,
+          "p95_ms": 4.88,
+          "max_ms": 28.71,
+          "turn": 301,
+          "requested_turn": 300,
+          "operations": [
+            "add_fact"
+          ],
+          "save_slot": {
+            "samples": 50,
+            "p50_ms": 3.83,
+            "p95_ms": 19.19,
+            "max_ms": 19.95
+          },
+          "load_slot": {
+            "samples": 50,
+            "p50_ms": 8.33,
+            "p95_ms": 17.52,
+            "max_ms": 26.17
+          },
+          "housekeeping_commit": {
+            "samples": 50,
+            "p50_ms": 2.37,
+            "p95_ms": 3.65,
+            "max_ms": 4.61,
+            "kind": "prologue",
+            "turn": 300
+          },
+          "cold_process": {
+            "samples": 50,
+            "p50_ms": 84.72,
+            "p95_ms": 93.9,
+            "max_ms": 265.9
+          }
+        }
+      },
+      "gates": [
+        {
+          "gate": "straight: 零不变量违反",
+          "pass": true,
+          "value": []
+        },
+        {
+          "gate": "straight: 注入的非法提交全部被拒",
+          "pass": true,
+          "value": "44/44"
+        },
+        {
+          "gate": "straight: 被拒后状态不变",
+          "pass": true,
+          "value": 0
+        },
+        {
+          "gate": "straight: 撤销后重做随机结果相同",
+          "pass": true,
+          "value": {
+            "checks": 12,
+            "mismatch": []
+          }
+        },
+        {
+          "gate": "straight: 改写原子完成",
+          "pass": true,
+          "value": {
+            "checks": 8,
+            "problems": []
+          }
+        },
+        {
+          "gate": "straight: 简要上下文 ≤ 6 KB",
+          "pass": true,
+          "value": 3198
+        },
+        {
+          "gate": "straight: 完整上下文 ≤ 20 KB",
+          "pass": true,
+          "value": 18411
+        },
+        {
+          "gate": "save_load: 零不变量违反",
+          "pass": true,
+          "value": []
+        },
+        {
+          "gate": "save_load: 注入的非法提交全部被拒",
+          "pass": true,
+          "value": "44/44"
+        },
+        {
+          "gate": "save_load: 被拒后状态不变",
+          "pass": true,
+          "value": 0
+        },
+        {
+          "gate": "save_load: 撤销后重做随机结果相同",
+          "pass": true,
+          "value": {
+            "checks": 12,
+            "mismatch": []
+          }
+        },
+        {
+          "gate": "save_load: 改写原子完成",
+          "pass": true,
+          "value": {
+            "checks": 8,
+            "problems": []
+          }
+        },
+        {
+          "gate": "save_load: 简要上下文 ≤ 6 KB",
+          "pass": true,
+          "value": 3198
+        },
+        {
+          "gate": "save_load: 完整上下文 ≤ 20 KB",
+          "pass": true,
+          "value": 18426
+        },
+        {
+          "gate": "第 100/200/300 回合存读档后续跑，状态摘要一致",
+          "pass": true,
+          "value": {
+            "straight": "c10254862d24358d",
+            "save_load": "c10254862d24358d"
+          }
+        },
+        {
+          "gate": "第 300 回合简要上下文 ≤ 第 10 回合的 1.5 倍",
+          "pass": true,
+          "value": 0.563
+        },
+        {
+          "gate": "第 300 回合提交 P95 ≤ 第 10 回合的 1.5 倍（进程内）",
+          "pass": true,
+          "value": 1.066
+        },
+        {
+          "gate": "第 300 回合提交 P95 ≤ 第 10 回合的 1.5 倍（冷进程）",
+          "pass": true,
+          "value": 0.972
+        }
+      ]
+    },
+    {
+      "mode": "daily",
+      "seed": 7302,
+      "turns": 310,
+      "seconds": 5.9,
+      "digest_straight": "3634eeb5db2778b90a23ff6631bd444e8869983134849f129506c874970b3757",
+      "digest_save_load": "3634eeb5db2778b90a23ff6631bd444e8869983134849f129506c874970b3757",
+      "straight": {
+        "invalid_injected": 44,
+        "invalid_rejected": 44,
+        "invalid_state_changed": 0,
+        "undo_redo_checks": 12,
+        "undo_redo_mismatch": [],
+        "replace_checks": 8,
+        "replace_problems": [],
+        "invariant_violations": [],
+        "brief_max": 2910,
+        "full_max": 17913,
+        "saves": []
+      },
+      "save_load": {
+        "invalid_injected": 44,
+        "invalid_rejected": 44,
+        "invalid_state_changed": 0,
+        "undo_redo_checks": 12,
+        "undo_redo_mismatch": [],
+        "replace_checks": 8,
+        "replace_problems": [],
+        "invariant_violations": [],
+        "brief_max": 2910,
+        "full_max": 17925,
+        "saves": [
+          {
+            "turn": 100,
+            "slot": "sim-daily_b-100",
+            "old_session": "s_9ebc4bf4",
+            "new_session": "s_02e9c330"
+          },
+          {
+            "turn": 200,
+            "slot": "sim-daily_b-200",
+            "old_session": "s_02e9c330",
+            "new_session": "s_97a3be8b"
+          },
+          {
+            "turn": 300,
+            "slot": "sim-daily_b-300",
+            "old_session": "s_97a3be8b",
+            "new_session": "s_8ca223ed"
+          }
+        ]
+      },
+      "sizes": {
+        "10": {
+          "brief_context": 2473,
+          "full_context": 15693,
+          "turn_blob_json": 13164,
+          "turn_blob_packed": 5256,
+          "facts": 10,
+          "fact_rows_bytes": 2177
+        },
+        "100": {
+          "brief_context": 1805,
+          "full_context": 17111,
+          "turn_blob_json": 19103,
+          "turn_blob_packed": 6188,
+          "facts": 61,
+          "fact_rows_bytes": 12621
+        },
+        "300": {
+          "brief_context": 1924,
+          "full_context": 17221,
+          "turn_blob_json": 18075,
+          "turn_blob_packed": 6080,
+          "facts": 272,
+          "fact_rows_bytes": 56281
+        }
+      },
+      "chapters": 29,
+      "chapters_in_state": 9,
+      "prologue": true,
+      "facts": 282,
+      "events_in_state": 1,
+      "archive_rows": 334,
+      "twists_accepted": 6,
+      "latency": {
+        "turn_10": {
+          "samples": 200,
+          "p50_ms": 2.85,
+          "p95_ms": 5.56,
+          "max_ms": 9.76,
+          "turn": 10,
+          "requested_turn": 10,
+          "operations": [
+            "npc_action"
+          ],
+          "save_slot": {
+            "samples": 50,
+            "p50_ms": 2.89,
+            "p95_ms": 9.04,
+            "max_ms": 14.03
+          },
+          "load_slot": {
+            "samples": 50,
+            "p50_ms": 7.0,
+            "p95_ms": 9.26,
+            "max_ms": 12.46
+          },
+          "cold_process": {
+            "samples": 50,
+            "p50_ms": 78.57,
+            "p95_ms": 130.1,
+            "max_ms": 260.22
+          }
+        },
+        "turn_300": {
+          "samples": 200,
+          "p50_ms": 3.45,
+          "p95_ms": 5.39,
+          "max_ms": 9.81,
+          "turn": 300,
+          "requested_turn": 300,
+          "operations": [
+            "add_fact"
+          ],
+          "save_slot": {
+            "samples": 50,
+            "p50_ms": 5.33,
+            "p95_ms": 28.41,
+            "max_ms": 42.63
+          },
+          "load_slot": {
+            "samples": 50,
+            "p50_ms": 10.1,
+            "p95_ms": 24.58,
+            "max_ms": 43.83
+          },
+          "cold_process": {
+            "samples": 50,
+            "p50_ms": 79.23,
+            "p95_ms": 124.33,
+            "max_ms": 259.86
+          }
+        }
+      },
+      "gates": [
+        {
+          "gate": "straight: 零不变量违反",
+          "pass": true,
+          "value": []
+        },
+        {
+          "gate": "straight: 注入的非法提交全部被拒",
+          "pass": true,
+          "value": "44/44"
+        },
+        {
+          "gate": "straight: 被拒后状态不变",
+          "pass": true,
+          "value": 0
+        },
+        {
+          "gate": "straight: 撤销后重做随机结果相同",
+          "pass": true,
+          "value": {
+            "checks": 12,
+            "mismatch": []
+          }
+        },
+        {
+          "gate": "straight: 改写原子完成",
+          "pass": true,
+          "value": {
+            "checks": 8,
+            "problems": []
+          }
+        },
+        {
+          "gate": "straight: 简要上下文 ≤ 6 KB",
+          "pass": true,
+          "value": 2910
+        },
+        {
+          "gate": "straight: 完整上下文 ≤ 20 KB",
+          "pass": true,
+          "value": 17913
+        },
+        {
+          "gate": "save_load: 零不变量违反",
+          "pass": true,
+          "value": []
+        },
+        {
+          "gate": "save_load: 注入的非法提交全部被拒",
+          "pass": true,
+          "value": "44/44"
+        },
+        {
+          "gate": "save_load: 被拒后状态不变",
+          "pass": true,
+          "value": 0
+        },
+        {
+          "gate": "save_load: 撤销后重做随机结果相同",
+          "pass": true,
+          "value": {
+            "checks": 12,
+            "mismatch": []
+          }
+        },
+        {
+          "gate": "save_load: 改写原子完成",
+          "pass": true,
+          "value": {
+            "checks": 8,
+            "problems": []
+          }
+        },
+        {
+          "gate": "save_load: 简要上下文 ≤ 6 KB",
+          "pass": true,
+          "value": 2910
+        },
+        {
+          "gate": "save_load: 完整上下文 ≤ 20 KB",
+          "pass": true,
+          "value": 17925
+        },
+        {
+          "gate": "第 100/200/300 回合存读档后续跑，状态摘要一致",
+          "pass": true,
+          "value": {
+            "straight": "3634eeb5db2778b9",
+            "save_load": "3634eeb5db2778b9"
+          }
+        },
+        {
+          "gate": "第 300 回合简要上下文 ≤ 第 10 回合的 1.5 倍",
+          "pass": true,
+          "value": 0.778
+        },
+        {
+          "gate": "第 300 回合提交 P95 ≤ 第 10 回合的 1.5 倍（进程内）",
+          "pass": true,
+          "value": 0.969
+        },
+        {
+          "gate": "第 300 回合提交 P95 ≤ 第 10 回合的 1.5 倍（冷进程）",
+          "pass": true,
+          "value": 0.956
+        }
+      ]
+    }
+  ],
+  "pass": true
+}

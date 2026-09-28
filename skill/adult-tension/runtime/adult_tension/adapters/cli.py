@@ -167,13 +167,35 @@ def log_internal_error(data_dir, error_id, text):
         return None
 
 
-def write_envelope(stream, envelope, pretty=False):
-    stream.write(dumps(envelope, pretty=pretty).encode("utf-8"))
+def write_text(stream, text):
+    stream.write(text.encode("utf-8"))
     stream.flush()
 
 
+def _internal_error(ctx):
+    error_id = "E" + time.strftime("%Y%m%d%H%M%S") + os.urandom(3).hex()
+    log_file = None
+    if ctx is not None:
+        log_file = log_internal_error(ctx.data_dir, error_id, traceback.format_exc())
+    hint = "状态没有改变；查看日志 %s，必要时导出存档" % log_file if log_file else "状态没有改变；必要时导出存档"
+    body = {
+        "code": INTERNAL_ERROR,
+        "message": "未预期错误（编号 %s）" % error_id,
+        "details": [detail("$", "未预期错误", hint)],
+        "error_id": error_id,
+        "log": log_file,
+        "next_request_id": new_request_id(),
+    }
+    return {"ok": False, "data": None, "error": body}
+
+
 def execute(argv, skill_root, stdin=None, environ=None):
-    """Run one command; return (envelope, exit code). Never raises."""
+    """Run one command; return (envelope, exit code, options, text). Never raises.
+
+    The envelope is serialized here, inside the error handling: a result that
+    cannot be written as JSON is an INTERNAL_ERROR envelope, never a crash
+    with nothing on stdout.
+    """
     from ..application.context import Context
 
     stdin = stdin if stdin is not None else getattr(sys.stdin, "buffer", sys.stdin)
@@ -192,35 +214,31 @@ def execute(argv, skill_root, stdin=None, environ=None):
             raise RuntimeError("injected internal error")  # test hook: exercises the INTERNAL_ERROR path
         module = __import__(command.module, fromlist=[command.func])
         data = getattr(module, command.func)(ctx, plain(payload))
+        if environ.get("ADULT_TENSION_FAULT") == "unserializable_result":
+            data["probe"] = object()  # test hook: a result that cannot become JSON
         if "next_request_id" not in data:
             data["next_request_id"] = new_request_id()
-        return {"ok": True, "data": data, "error": None}, 0, options
+        envelope = {"ok": True, "data": data, "error": None}
+        return envelope, 0, options, dumps(envelope, pretty=bool(options.get("pretty")))
     except AppError as err:
         body = err.to_dict()
         body.setdefault("next_request_id", new_request_id())
-        return {"ok": False, "data": None, "error": body}, exit_code_for(err.code), options
+        envelope = {"ok": False, "data": None, "error": body}
+        try:
+            return envelope, exit_code_for(err.code), options, dumps(envelope, pretty=bool(options.get("pretty")))
+        except Exception:
+            envelope = _internal_error(ctx)
+            return envelope, EXIT_INTERNAL, options, dumps(envelope)
     except Exception:
-        error_id = "E" + time.strftime("%Y%m%d%H%M%S") + os.urandom(3).hex()
-        log_file = None
-        if ctx is not None:
-            log_file = log_internal_error(ctx.data_dir, error_id, traceback.format_exc())
-        hint = "状态没有改变；查看日志 %s，必要时导出存档" % log_file if log_file else "状态没有改变；必要时导出存档"
-        body = {
-            "code": INTERNAL_ERROR,
-            "message": "未预期错误（编号 %s）" % error_id,
-            "details": [detail("$", "未预期错误", hint)],
-            "error_id": error_id,
-            "log": log_file,
-            "next_request_id": new_request_id(),
-        }
-        return {"ok": False, "data": None, "error": body}, EXIT_INTERNAL, options
+        envelope = _internal_error(ctx)
+        return envelope, EXIT_INTERNAL, options, dumps(envelope)
     finally:
         if ctx is not None:
             ctx.close()
 
 
 def run(argv, skill_root, stdin=None, stdout=None, environ=None):
-    envelope, code, options = execute(argv, skill_root, stdin, environ)
+    _envelope, code, _options, text = execute(argv, skill_root, stdin, environ)
     stdout = stdout if stdout is not None else getattr(sys.stdout, "buffer", sys.stdout)
-    write_envelope(stdout, envelope, pretty=bool(options.get("pretty")))
+    write_text(stdout, text)
     return code

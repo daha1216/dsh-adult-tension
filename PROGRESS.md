@@ -4,8 +4,8 @@
 
 ## 当前状态
 
-- 当前阶段：阶段 4（存档、会话与升级）
-- 下一步：快速存档 / 另存为 / 槽冲突的剩余路径 → 上下文 `save` 与“再开一局”的未存档确认 → `list-sessions`、续玩与“恢复”歧义 → `export-save` / `import-save`（完整性校验）→ 调试视图 → 迁移演练与 `SKILL_PACKAGING.md` §10 故障演练；存档与读档改为按行复制事实与归档（见阶段 3 遗留）
+- 当前阶段：阶段 5（内容工具与六个世界）
+- 下一步：`new-world` 脚手架与 `preview-openings` → 按 `CONTENT_BIBLE.md` 补齐其余五个世界（每个达到 §3 下限，过多样性门禁）→ 自定义世界（`custom_world` 校验与开局）→ 120 个固定种子开局 → 跨世界近似重复与时代扫描
 
 ## 待决事项（需要用户决定）
 
@@ -20,6 +20,14 @@
 
 1. 修复 Claude Code CLI：在终端运行 `node "%APPDATA%\npm\node_modules\@anthropic-ai\claude-code\install.cjs"`，或 `npm install -g @anthropic-ai/claude-code` 重装；之后 `claude --version` 应能输出版本号。
 2. 或者激活 OpenCode Go 订阅，或明确同意用哪个 OpenCode 模型做含成人内容的试玩。
+
+阶段 4 要求的真实宿主记录（存档 → 换新版本 Skill 目录并迁移 → 新对话续玩），P1 解决后我用无头命令执行；也可以手动做：
+
+1. 建测试项目 `D:\projects\at-host-test\`，把**阶段 3 提交**（`2aa58c8`）的 Skill 目录复制到其中的 `.claude\skills\adult-tension\`（`git -C D:\projects\adult-tension-v2 archive 2aa58c8 skill/adult-tension` 可以取出那一版）。
+2. 在测试项目里开新对话，说“开一局，日常”，推进 3 个回合（其中一个说“继续”），再说“存档 夜班”，关闭对话。
+3. 用当前版本的 `skill\adult-tension\` 整个替换测试项目里的 Skill 目录（数据库会从 schema 2 迁移到 3，并在数据目录的 `backups\` 留下备份）。
+4. 开新对话说“读档 夜班”，确认人物、地点、未决动作接得上，再推进 1 回合。
+5. 把对话记录与数据目录里的 `backups\` 列表交给我，我整理进 `reports/host/stage4/`。
 
 ## 阶段记录
 
@@ -285,6 +293,75 @@
 - `SKILL.md` 余量约 760 字节；阶段 4 加入导出、续玩说明时需要继续压缩。
 - 跨平台（Linux）的状态摘要一致待 P2。
 
+### 阶段 4：存档、会话与升级 —— 自动化部分完成（提交见下）；真实宿主记录待 P1
+
+做了什么：
+
+- **存档改为行复制**（数据库 schema 3）：存档槽像会话一样存放——每回合状态块与内容快照在 `slots`，事实在 `slot_facts`，归档在 `slot_archive`。存档与读档都在 SQLite 内复制行，不再经过 Python 解码和重新编码；旧存档的事实和归档在迁移时拆成行。
+- **快速存档、另存为、槽冲突**（阶段 1 已有）补齐测试：`exists` 需要 `overwrite`；本局当前槽在别处被覆盖时报 `changed_elsewhere`。覆盖存档不会清掉别的会话对这个槽的引用（D15）。
+- **`delete-slot`**（P1）：必须带 `confirm: true`；删除后，以它为当前槽的会话不再有当前槽。
+- **`list-sessions`**：按最近一次写入排序（新增的活动序号，D17），给出世界、回合、时钟（按该世界的时钟风格）、最近摘要、未决动作、是否暂停、当前槽与未存档回合数，供“继续上次 / 恢复”使用。
+- **导出与导入**：`export-save` 把会话或存档写成交换文件（完整状态含全部事实、内容快照、归档、来源），带对整份文件（除校验值外）的 sha256；默认写到数据目录的 `exports/`，玩家给出的路径必须是 Skill 目录以外、没有 `..` 的绝对 `.json` 路径，已存在的文件要 `overwrite`，写入是原子的。`import-save` 接受路径或粘贴的 JSON：先查格式、版本（更新 → `UNSUPPORTED_VERSION`）、随机算法版本、校验值，再对状态做**完整检查**（新模块 `domain/state_check.py`：各层字段必填/可选、未知字段、类型、引用、不变量），对内容快照跑世界包校验，对归档查格式；任何问题都不写入。较旧的文件先把原件复制到 `backups/` 再在内存里升级。成功后得到新会话，可同时写入存档槽。
+- **调试视图**：结构化状态（每回合状态块全文，事实给数量、扩散中的与最近 20 条）、状态摘要、最近提交、上下文体积、完整状态检查结果，以及存储信息（版本、来源、撤销深度、归档与回合记录行数、最近一次失败的提交、数据目录）。
+- **CLI**：信封的序列化移进错误处理之内，结果无法写成 JSON 时也返回带日志编号的 `INTERNAL_ERROR`，不会在 stdout 上什么都没有（D13）。
+- **内容在加载时校验**：运行时第一次加载一个世界包时跑世界包校验，编译产物被改动时 `doctor` 与开局都报 `CONTENT_ERROR` 并指出位置（D14）；`verify-content` 读未校验的原文自行报告。
+- **Skill 与文档**：`SKILL.md` 加入续玩、“恢复”的三选一、导出、导入、删除存档（15 745 字节）；`references/troubleshooting.md` 加入升级、导出导入与卸载（清除数据是单独的、需要玩家确认的操作）；参考文件重新生成。
+- **工具**：`tools/fault_drills.py`（§10 七项故障演练，经真实入口脚本）；`tools/reverse_checks.py` 增加 `cli` 组（`ACCEPTANCE.md` §7 第 1、2、3、5 项）；`tools/simulate.py` 增加第 10 / 300 回合存读档耗时；`tools/make_db_fixture.py` 可指定回合数，生成了 schema 2 的真实旧库 `tests/fixtures/db_v2/`（26 回合，含撤销点、事实日志、归档与存档）。
+
+执行过的命令（阶段收尾）：
+
+| 命令 | 退出码 | 结果 |
+|---|---|---|
+| `python -m unittest discover -s tests/core` | 0 | 171 个测试，2.3 s |
+| `python -m unittest discover -s tests/content` | 0 | 10 个测试，1.9 s |
+| `python -m unittest discover -s tests/integration` | 0 | 28 个测试，18.3 s |
+| `python tools/validate_skill.py skill/adult-tension` | 0 | OK，`SKILL.md` 15 745 字节 |
+| `adult_tension.py smoke --turns 30 --json` / `verify-content --json` | 0 / 0 | 两条各 31 回合通过 / 0 处问题 |
+| `python tools/reverse_checks.py` | 0 | `age` 5 处、`time` 5 处、`cli` 4 项全部按预期失败（`reports/reverse/`） |
+| `python tools/fault_drills.py` | 0 | 七项全部符合期望（`reports/stage4/fault-drills.json`） |
+| `python tools/benchmark.py --json` | 0 | `reports/benchmarks/stage4.json` |
+| `python tools/simulate.py --turns 300 --cold 50` | 0 | `reports/simulate/stage4.json`，全部门禁通过，状态摘要与阶段 3 相同 |
+
+故障演练（`SKILL_PACKAGING.md` §10；每项之前先存档，之后用正常进程确认存档能读、能玩）：
+
+| 演练 | 实际结果 |
+|---|---|
+| Python 版本过低（模拟 3.9.18） | exit 20，`RUNTIME_UNSUPPORTED`，写明需要 3.10，提示换用哪个解释器；数据库字节不变 |
+| 数据目录不可写（已有存档的目录被拒写） | exit 20，`DATA_DIR_UNAVAILABLE`，附路径与建议；数据库字节不变 |
+| 编译后的内容删掉一个被引用的地点 | `doctor` exit 10，`CONTENT_ERROR`，逐条指出引用它的位置；篡改前开的局照常提交成功 |
+| 数据库 schema 比 Skill 新（99） | exit 20，`UNSUPPORTED_VERSION`，提示升级；数据库字节不变 |
+| 迁移中途失败（注入，真实 schema 2 旧库） | exit 20，`MIGRATION_FAILED`，`restored: true`，全部表内容与迁移前一致；下一次正常运行迁移成功并读档 |
+| 写事务期间进程被杀 | exit 137 且无半写入；revision 停在 4；同一请求重交后成功（revision 5） |
+| 两个进程同时提交同一会话 | 一个成功，另一个 `STALE_REVISION`；revision 只前进一次 |
+
+基准（P95；各 200 / 50 次）：进程内 开局 9.87 ms、提交 6.93 ms、上下文 1.50 ms、保存 14.39 ms、读档 17.90 ms；冷进程 `new-game` 162.5 ms（P50 93.3 ms）、`commit-turn` 85.8 ms、`get-context` 75.9 ms、第一次 `doctor` 259.3 ms、之后 `doctor` 71.9 ms。全部低于门槛。冷进程 `new-game` 比阶段 3 多了开局前的世界包校验：新进程里导入校验模块约 18 ms、校验约 7 ms。
+
+两条 300 回合模拟（`reports/simulate/stage4.json`）：全部门禁通过；最终状态摘要与阶段 3 相同（压力 `c10254862d24358d…`、日常 `3634eeb5db2778b9…`）；第 300 回合提交 P95 是第 10 回合的 1.07 / 0.97 倍（进程内）、0.97 / 0.96 倍（冷进程）。存读档（同一进程轮流取样，各 50 次，P50 / P95）：压力 第 10 回合 保存 1.70 / 3.05 ms、读档 6.08 / 12.42 ms，第 300 回合 保存 3.83 / 19.19 ms、读档 8.33 / 17.52 ms；日常 第 10 回合 2.89 / 9.04、7.00 / 9.26 ms，第 300 回合 5.33 / 28.41、10.10 / 24.58 ms。存档是一份完整副本，复制的行数随局长增长（第 300 回合约 290 条事实、330 条归档），但都在 SQLite 内部完成，远低于 100 ms 的门槛。
+
+退出证据：
+
+- `ACCEPTANCE.md` §2“存档”：`SLOT_CONFLICT`（`exists` 与 `changed_elsewhere`）→ `test_transactions.py::SaveLoadTest`；读档恢复边界、暂停、事件、冷却、语态、偏好，读档创建新会话且原存档不变 → `test_saves.py::SaveLoadRestoreTest`；导入被篡改、截断、缺字段、版本过新（以及未知字段、未成年、内容快照损坏）的文件被拒且数据不变 → `ExportImportTest`；旧 schema 自动备份、迁移失败恢复 → `test_migration.py`（schema 1 与 schema 2 两个真实旧库）与故障演练。
+- `SKILL_PACKAGING.md` §10 故障演练全部符合期望（上表）。
+- 真实宿主记录：**未做**，依赖 P1（手动步骤见“待决事项”）。
+
+追溯（本阶段的 P0 行）：
+
+| 需求 | 证据 |
+|---|---|
+| 命名存档 / 快速存档 / 另存为 / 冲突 | `SaveLoadTest`；`SKILL.md` 命令表 |
+| 读档 | `SaveLoadRestoreTest`；读档不重掷（阶段 3 测试） |
+| 续玩与“恢复” | `SessionListTest`；`SKILL.md`（一个就接上、多个列出、暂停时三选一） |
+| 导出 / 导入 | `ExportImportTest`、`SavesThroughCliTest`、反向验证 7.3 |
+| 调试 | `MetaCommandTest`（完整检查、摘要、存储信息、可序列化）、`SavesThroughCliTest` |
+| 升级与迁移、备份、卸载说明 | `test_migration.py`、故障演练、`references/troubleshooting.md` |
+| 错误可识别且不损坏存档 | 故障演练 |
+
+遗留：
+
+- 真实宿主记录（存档 → 升级 → 新对话续玩）依赖 P1。
+- 存档与读档随局长线性增长（复制行）；第 300 回合 P95 在 30 ms 以内。
+- `SKILL.md` 余量约 640 字节；阶段 5 加自定义世界的说明时需要继续压缩。
+
 ## 规范冲突与选择
 
 | # | 冲突 | 暂行选择 | 理由 | 状态 |
@@ -333,6 +410,16 @@
 - **离屏候选**：每次提交末尾按“下一回合”计算（不在场、不在冷却中的重要 NPC，最多 3 个，优先有待办事件的、最久没有片段的）；玩家“继续”时可写，不强制。
 - **转折的授权**：`twist_accept` 需要 `result`/`attempt` 模式并带玩家授权（转折由玩家选定）；候选可从 `requests.twist_offer` 或 `want_twist` 取得，也可以接受玩家口述（类别必填）。
 - **幂等记录的修剪**：`idempotency(scope)` 上建索引，按行号找第 1000 条的位置删除更早的，成本不随记录数增长（D7）。
+- **存档的存放方式**（schema 3）：存档槽与会话同构（状态块 + 事实行 + 归档行），存档和读档都在库内复制。替代了“一个槽存一个完整 JSON”：语义不变（槽仍是某一 revision 的完整副本），存读档不再在 Python 里编解码整份数据。旧存档在迁移时拆成行，迁移用 schema 1、2 两个真实旧库测试。
+- **导出文件格式**：规范示例的字段之外增加 `skill_version`、`source`（来自会话还是存档）与 `checksum`；`session` 里是 `state`（完整状态）、`content`（内容快照）、`archive`。校验值覆盖除它自己以外的整个文件。
+- **导入的完整检查**：`domain/state_check.py` 按实际状态结构逐层列出必填与可选字段（从 300 回合模拟的真实状态中收集，并对照代码补齐只在少数路径出现的字段），未知字段一律报错；在 78 个开局、约 300 个模拟状态和两个旧库上零误报。未成年角色经不变量检查报 `SAFETY_BLOCK`，内容快照问题报 `CONTENT_ERROR`。
+- **导出路径**：不给路径时写 `exports/<世界>-第N回合-<时间>.json`；给路径时必须是绝对路径、以 `.json` 结尾、不含 `..`、不在 Skill 目录里、父目录已存在，已存在的文件要 `overwrite`。
+- **“最近会话”的排序**：会话表新增活动序号（有索引），每次状态写入时取全局最大值加一；时间戳只有秒级，不能用来区分同一秒内的写入（D17）。
+- **内容在加载时校验**：世界包第一次加载时校验（每个进程一次，约 7 ms，另加约 18 ms 的模块导入），换来 `doctor` 与开局都能发现编译后被改动的内容；`verify-content` 用 `world_raw()` 读原文，按“世界 + JSON 路径”报告。
+- **`delete-slot` 的分类**：按规范归为会话内写（带 `session_id` 与 `expected_revision`），不改变 revision。
+- **状态格式与事实行**：以后若有状态格式升级要改事实的形状，必须同时写一个数据库迁移去更新 `facts` 与 `slot_facts` 里的行（读取时的内存升级只作用于每回合状态块与完整状态）。
+
+## 默认值调整
 
 ## 默认值调整
 
@@ -354,3 +441,8 @@
 | D10 | 长局里假叙述者重复提交已生效的倾向证据，被引擎拒绝 | 叙述者每次都写同一个值 | 叙述者只写卡片上还没有的值（都有时写移除）；引擎行为正确 |
 | D11 | 写在 `advance_time` 之前的离屏片段也能满足“必须有片段”的要求 | 必需检查只看“本提交有没有这个 NPC 的片段” | 只认推进之后的片段，之前的给出专门的错误；反向验证覆盖 |
 | D12 | 提交后发现迁移测试以读写方式打开仓库里的旧库样本（WAL 库，打开时在样本目录生成临时的 -wal/-shm 文件） | 辅助函数对样本和临时副本用了同一个连接方式 | 样本改用 `immutable=1` 只读打开；样本文件本身未被改动（修改时间与 git 状态均未变） |
+| D13 | 经 CLI 调“调试”时进程崩溃，stdout 上没有信封（阶段 3 的回归） | 调试视图直接返回状态对象，事实来源不能写成 JSON；CLI 在错误处理之外序列化信封；测试只在内存状态上测过状态投影 | 调试视图只输出数据；信封在错误处理之内序列化，失败即 `INTERNAL_ERROR`；新增 CLI 测试与注入测试 |
+| D14 | 故障演练 3：删掉编译后内容里一个被引用的地点，`doctor` 仍报成功 | 内容检查只确认世界文件能解析 | 加载世界包时运行世界包校验（见“设计替代”） |
+| D15 | 覆盖别人的存档后，另一个对话再快速存档没有得到 `changed_elsewhere` | 我让覆盖时顺手清除所有会话对这个槽的引用 | 只有明确删除才清除引用；原有测试捕获 |
+| D16 | 引入活动序号后，基准的提交 P50 从约 2.6 ms 升到 10 ms | `MAX(activity)` 没有索引，每次写入都扫描整个会话表（含大字段） | 加索引；同样负载复测 P50 2.4 ms |
+| D17 | 新测试发现 `list-sessions` 顺序不对 | 按秒级 `updated_at` 排序，同一秒内的写入无法区分 | 改用活动序号 |

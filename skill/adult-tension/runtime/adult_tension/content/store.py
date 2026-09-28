@@ -2,6 +2,9 @@
 
 The runtime never parses content sources; it reads compiled JSON only and
 loads lazily: list-worlds reads index.json, an opening reads one world.
+A world is validated when it is first loaded (SKILL_PACKAGING 7, 10): a
+compiled file changed after the build is reported with its location instead
+of producing a broken opening.
 """
 
 import os
@@ -47,9 +50,24 @@ class ContentStore:
             self._tags = self._read("tags.json")
         return self._tags
 
+    def world_raw(self, world_id):
+        """The compiled file as parsed, without validation (verify-content validates it itself)."""
+        return self._read(os.path.join("worlds", world_id + ".json"))
+
     def world(self, world_id):
         if world_id not in self._worlds:
-            self._worlds[world_id] = self._read(os.path.join("worlds", world_id + ".json"))
+            from ..domain.worldpack import validate_world
+
+            rel = "worlds/%s.json" % world_id
+            raw = self._read(os.path.join("worlds", world_id + ".json"))
+            _pack, problems = validate_world(raw, custom=False, tag_ids=[t["id"] for t in self.tags()["tags"]])
+            if problems:
+                raise AppError(
+                    CONTENT_ERROR,
+                    "内容文件校验失败：content/%s" % rel,
+                    [dict(p, path="content/%s %s" % (rel, p["path"]), hint=p.get("hint") or "重新安装 Skill 目录") for p in problems],
+                )
+            self._worlds[world_id] = raw
         return self._worlds[world_id]
 
     def files(self):
