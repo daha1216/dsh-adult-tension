@@ -1,0 +1,92 @@
+{
+ "purpose": "阶段 7 的基准比阶段 5 的报告高 15–35%。把阶段 5 的代码（211ec0c）与当前代码在同一时段交替各跑两次（ABAB），分清是代码还是机器状态。",
+ "trees": {
+  "stage5": "211ec0c（git archive 到临时目录）",
+  "current": "阶段 7 工作区"
+ },
+ "machine": {
+  "os": "Windows-11-10.0.26340-SP0",
+  "python": "3.12.10",
+  "python_executable": "C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "cpu_count": 20,
+  "cpu": "Intel(R) Core(TM) i5-14600KF",
+  "machine": "Micro-Star International Co., Ltd. MS-7D42",
+  "sqlite": "3.49.1"
+ },
+ "order": [
+  "stage5-1",
+  "current-1",
+  "stage5-2",
+  "current-2"
+ ],
+ "p95_ms": {
+  "cold.doctor_first": {
+   "stage5-1": 316.05,
+   "current-1": 299.07,
+   "stage5-2": 306.6,
+   "current-2": 312.85
+  },
+  "cold.doctor_again": {
+   "stage5-1": 81.17,
+   "current-1": 71.42,
+   "stage5-2": 70.73,
+   "current-2": 76.92
+  },
+  "cold.version": {
+   "stage5-1": 67.14,
+   "current-1": 67.15,
+   "stage5-2": 63.39,
+   "current-2": 68.39
+  },
+  "cold.new_game": {
+   "stage5-1": 105.26,
+   "current-1": 113.27,
+   "stage5-2": 102.57,
+   "current-2": 105.92
+  },
+  "cold.commit_turn": {
+   "stage5-1": 93.15,
+   "current-1": 87.6,
+   "stage5-2": 88.02,
+   "current-2": 94.18
+  },
+  "cold.get_context": {
+   "stage5-1": 92.82,
+   "current-1": 80.19,
+   "stage5-2": 77.16,
+   "current-2": 87.44
+  },
+  "inprocess.opening": {
+   "stage5-1": 10.07,
+   "current-1": 9.12,
+   "stage5-2": 16.32,
+   "current-2": 17.51
+  },
+  "inprocess.commit_turn": {
+   "stage5-1": 6.56,
+   "current-1": 3.75,
+   "stage5-2": 6.07,
+   "current-2": 6.65
+  },
+  "inprocess.get_context": {
+   "stage5-1": 1.97,
+   "current-1": 0.98,
+   "stage5-2": 1.54,
+   "current-2": 1.71
+  },
+  "inprocess.save_slot": {
+   "stage5-1": 23.37,
+   "current-1": 11.41,
+   "stage5-2": 21.28,
+   "current-2": 22.02
+  },
+  "inprocess.load_slot": {
+   "stage5-1": 32.49,
+   "current-1": 15.07,
+   "stage5-2": 27.99,
+   "current-2": 26.99
+  }
+ },
+ "all_pass": true,
+ "conclusion": "两份代码的数字交替重叠，同一份代码两轮之间的波动（例如阶段 5 的进程内开局 10.07 → 16.32 ms）大于两份代码之间的差别：与阶段 5 报告的差距来自机器当时的状态，不是代码。所有数字都远低于门槛。"
+}

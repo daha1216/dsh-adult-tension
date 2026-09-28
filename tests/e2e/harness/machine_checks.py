@@ -7,7 +7,10 @@ Every check reads what the player saw (`text`) against what the engine did
 script's `expect` annotations only tell the checks what kind of step each
 turn is and which refusals are part of the script.
 
-checks: structure (commits legal or repaired, call budget, ACCEPTANCE 5),
+checks: the record (every turn finished, with a reply the player saw; every
+runtime call the host made is in the trace and came from the Skill
+installed for the run), structure (commits legal or
+repaired, call budget, ACCEPTANCE 5),
 leakage (field names, numbers, error codes, commands, revision), footer and
 time words against the engine clock, ventriloquism (the player character's
 lines come from the player), unknown people (a named person the engine
@@ -119,8 +122,10 @@ def check_structure(record):
                 out.append(finding("structure", index, "这一步不应当调用 %s" % name))
         rejections = [i for i, c in enumerate(calls) if R.command_of(c) in WRITE_COMMANDS and R.error_code(c)]
         if expect.get("budget_group"):
-            group = groups.setdefault(expect["budget_group"], {"calls": 0, "max": expect.get("group_max"), "turns": []})
+            group = groups.setdefault(expect["budget_group"], {"calls": 0, "max": expect.get("group_max"), "must": set(), "commands": set(), "turns": []})
             group["calls"] += len(calls)
+            group["must"].update(expect.get("group_must_call", []))
+            group["commands"].update(commands)
             group["turns"].append(index)
         budget = expect.get("calls_max")
         if budget is not None:
@@ -143,6 +148,8 @@ def check_structure(record):
     for name, group in groups.items():
         if group["max"] is not None and group["calls"] > group["max"]:
             out.append(finding("structure", group["turns"][-1], "%s 共调用 %d 次，超过 %d（ACCEPTANCE §5）" % (name, group["calls"], group["max"])))
+        for command in sorted(group["must"] - group["commands"]):
+            out.append(finding("structure", group["turns"][-1], "%s 里没有调用 %s（ACCEPTANCE §5：本对话第一次开局是 doctor + new-game）" % (name, command)))
     average = round(sum(ordinary) / float(len(ordinary)), 3) if ordinary else None
     return out, {"ordinary_turns": len(ordinary), "average_calls": average}
 
@@ -366,11 +373,47 @@ def check_repetition(record):
     return out
 
 
+# -- the record itself -------------------------------------------------------------------------------
+
+SKILL_REL = os.path.join(".claude", "skills", "adult-tension")
+
+
+def _same_path(a, b):
+    return os.path.normcase(os.path.normpath(a)) == os.path.normcase(os.path.normpath(b))
+
+
+def check_record(record):
+    """Every turn finished with a reply the player saw (ACCEPTANCE 6.1 item 3:
+    a turn the host failed, timed out or reported as an error is not a
+    complete record). Every runtime call the host made is in the engine
+    trace, and came from the Skill installed for this run (ACCEPTANCE 6.1
+    item 1): more calls in the host's record than in the trace means an
+    unwritten trace or another copy of the Skill somewhere."""
+    out = []
+    installed = os.path.join(record["project"], SKILL_REL) if record.get("project") else None
+    for turn in record["turns"]:
+        if turn.get("host_error"):
+            out.append(finding("record", turn["index"], "宿主这一轮没有正常结束：%s（记录不完整，ACCEPTANCE §6.1 第 3 条）" % turn["host_error"][:200]))
+        elif not (turn.get("text") or "").strip():
+            out.append(finding("record", turn["index"], "玩家这一轮什么也没看到"))
+        if turn.get("calls_source", "trace") != "trace":
+            continue
+        calls = turn.get("runtime_calls") or []
+        shown = len(R.calls_from_host(turn.get("host_calls")))
+        if shown > len(calls):
+            out.append(finding("record", turn["index"], "宿主调用了 %d 次运行时，引擎记录里只有 %d 次（记录没写全，或宿主调用了另一份 Skill）" % (shown, len(calls))))
+        for call in calls:
+            root = call.get("skill_root")
+            if installed and root and not _same_path(root, installed):
+                out.append(finding("record", turn["index"], "%s 来自另一份 Skill：%s" % (R.command_of(call), root)))
+    return out
+
+
 def check(record):
     problems = R.validate(record)
     if problems:
         return {"pass": False, "invalid_record": problems, "findings": [], "stats": {}}
-    findings = []
+    findings = check_record(record)
     structure, stats = check_structure(record)
     findings.extend(structure)
     findings.extend(check_leakage(record))
@@ -383,6 +426,13 @@ def check(record):
     return {"pass": not findings, "findings": findings, "stats": stats}
 
 
+def summary_lines(result):
+    """What a person reads: why the record could not be checked, or each finding."""
+    lines = ["[记录格式] %s" % problem for problem in result.get("invalid_record") or []]
+    lines += ["[%s] 第 %s 轮：%s" % (item["check"], item["turn"], item["message"]) for item in result["findings"]]
+    return lines
+
+
 def main(argv):
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -390,8 +440,8 @@ def main(argv):
     if "--json" in argv:
         print(json.dumps(result, ensure_ascii=False, indent=1))
     else:
-        for item in result["findings"]:
-            print("[%s] 第 %s 轮：%s" % (item["check"], item["turn"], item["message"]))
+        for line in summary_lines(result):
+            print(line)
         print("PASS" if result["pass"] else "FAIL")
     return 0 if result["pass"] else 1
 

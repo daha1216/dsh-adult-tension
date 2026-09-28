@@ -1,0 +1,16 @@
+cli   7.1 删掉内容里一个被引用的地点 → verify-content 失败并指出位置                   exit=10 code=CONTENT_ERROR OK
+cli   7.2 用过期 revision 提交 → STALE_REVISION                         exit=10 code=STALE_REVISION OK
+cli   7.3 篡改导出文件的一个字节 → 导入失败                                       exit=10 code=INVALID_INPUT OK
+cli   7.5 把地点名换成另一个时代的词 → 跨世界扫描失败                                  exit=10 code=CONTENT_ERROR OK
+age   baseline (no patch)                           exit=0 failing=0
+age   invariants: every character >= 18             exit=1 failing=2
+age   introduce_character: new characters >= 18     exit=1 failing=1
+age   opening: player character >= 18               exit=1 failing=2
+age   intimacy: participants >= 18                  exit=1 failing=1
+age   content validator: age ranges >= 18           exit=1 failing=2
+time  baseline (no patch)                           exit=0 failing=0
+time  required offscreen beats                      exit=1 failing=3
+time  undo reverts the turn's facts                 exit=1 failing=3
+time  retcon adds no NPC knowledge                  exit=1 failing=1
+time  settlement order: events before status        exit=1 failing=1
+time  chapter archives its turns                    exit=1 failing=2

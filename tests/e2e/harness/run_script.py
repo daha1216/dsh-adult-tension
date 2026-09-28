@@ -15,7 +15,12 @@ through the runtime (outside the trace) and kept in the record.
 the engine) to test this harness; its records are never evaluation data.
 
 A script whose setup says "install": "previous" starts from an older Skill
-(--previous <git commit>) and is upgraded in place at its upgrade step.
+(--previous <git commit>) and is upgraded in place at its upgrade step. A
+Skill older than the engine trace has its calls rebuilt from the host's own
+tool calls (record.calls_from_host); each turn says where its calls came from.
+"data_dir": "default" leaves ADULT_TENSION_HOME unset (the release drill of
+SKILL_PACKAGING.md 9: no environment settings by the user; run it on a clean
+machine), and "include_drafts": false plays only released worlds.
 "{seed:N}" in a player line is the seed the opening of player turn N showed
 (the player reads it from the footer), e.g. for "重开 N 号".
 """
@@ -26,6 +31,7 @@ import glob
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tarfile
@@ -43,6 +49,7 @@ import machine_checks  # noqa: E402
 import record as R  # noqa: E402
 
 SCRIPTS = os.path.join(E2E, "scripts")
+DRILLS = os.path.join(E2E, "drills")
 DEFAULT_ROOT = os.path.join("D:" + os.sep, "projects", "at-e2e")
 SKILL_REL = os.path.join(".claude", "skills", "adult-tension")
 
@@ -97,19 +104,48 @@ def install_skill(project, commit=None, replace=False):
 
     source = os.path.join(REPO, "skill", "adult-tension")
     temp = None
-    if commit:
-        temp = tempfile.mkdtemp(prefix="at-skill-")
-        archive = os.path.join(temp, "skill.tar")
-        subprocess.run(["git", "-C", REPO, "archive", "-o", archive, commit, "skill/adult-tension"], check=True)
-        with tarfile.open(archive) as tar:
-            try:
-                tar.extractall(temp, filter="data")
-            except TypeError:
-                tar.extractall(temp)
-        source = os.path.join(temp, "skill", "adult-tension")
-    dest = os.path.join(project, SKILL_REL)
-    I.install(source, dest, replace=replace)
+    try:
+        if commit:
+            temp = tempfile.mkdtemp(prefix="at-skill-")
+            archive = os.path.join(temp, "skill.tar")
+            subprocess.run(["git", "-C", REPO, "archive", "-o", archive, commit, "skill/adult-tension"], check=True)
+            with tarfile.open(archive) as tar:
+                try:
+                    tar.extractall(temp, filter="data")
+                except TypeError:
+                    tar.extractall(temp)
+            source = os.path.join(temp, "skill", "adult-tension")
+        I.install(source, os.path.join(project, SKILL_REL), replace=replace)
+    finally:
+        if temp:
+            shutil.rmtree(temp)
     return source if not commit else "git:%s" % commit
+
+
+def skill_files(project):
+    """What the installed Skill is, read from its files without running it
+    (running doctor here would do the first initialization in the host's place)."""
+    package = os.path.join(project, SKILL_REL, "runtime", "adult_tension")
+    with open(os.path.join(package, "__init__.py"), encoding="utf-8") as handle:
+        init = handle.read()
+    with open(os.path.join(package, "adapters", "cli.py"), encoding="utf-8") as handle:
+        traced = "ADULT_TENSION_TRACE" in handle.read()
+    version = re.search(r"^SKILL_VERSION = \"([^\"]+)\"", init, re.M)
+    schema = re.search(r"^DB_SCHEMA_VERSION = (\d+)", init, re.M)
+    return {"skill_version": version and version.group(1), "db_schema": schema and int(schema.group(1)), "trace": traced}
+
+
+def host_env(setup, project, base):
+    """The host's environment: the engine trace always; a data directory in the
+    project and the draft switch unless the script says otherwise."""
+    env = dict(base, ADULT_TENSION_TRACE=os.path.join(project, "trace.jsonl"))
+    env.pop("ADULT_TENSION_HOME", None)
+    env.pop("ADULT_TENSION_INCLUDE_DRAFTS", None)
+    if setup.get("data_dir") != "default":
+        env["ADULT_TENSION_HOME"] = os.path.join(project, ".at-data")
+    if setup.get("include_drafts", True):
+        env["ADULT_TENSION_INCLUDE_DRAFTS"] = "1"
+    return env
 
 
 def runtime(project, env, args, payload=None):
@@ -139,44 +175,81 @@ def trace_lines(path):
 
 
 class FakeHost:
-    """Plays the engine without a model, to test the harness plumbing."""
+    """Plays the engine without a model, to test the harness plumbing.
+
+    It opens a game at the first message of a conversation (or loads one for
+    "读档 <名>"), saves for "存档 <名>" and commits a plain turn for anything
+    else. It reports its tool calls the way a real host does (Write the input
+    file, then Bash), so the fallback for a Skill without the engine trace is
+    tested too."""
 
     name = "fake"
+    SAVE_RE = re.compile(r"^存档\s*(\S+)$")
+    LOAD_RE = re.compile(r"^读档\s*(\S+)$")
 
     def __init__(self, project, env):
         self.project = project
         self.env = env
+        self.model = "none"
         self.sessions = {}
 
     def version(self):
         return "fake-1"
 
-    def _call(self, args, payload=None):
+    def _call(self, log, args, payload=None):
         argv = [sys.executable, os.path.join(self.project, SKILL_REL, "scripts", "adult_tension.py")] + args + ["--json"]
-        handle = None
+        path = None
         if payload is not None:
+            text = json.dumps(payload, ensure_ascii=False)
             handle = tempfile.NamedTemporaryFile("wb", suffix=".json", delete=False, dir=self.project)
-            handle.write(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
+            handle.write(text.encode("utf-8"))
             handle.close()
-            argv += ["--input-file", handle.name]
+            path = handle.name
+            argv += ["--input-file", path]
+            log.append({"tool": "Write", "input": {"file_path": path, "content": text}, "output": "File created successfully"})
         try:
             proc = subprocess.run(argv, env=self.env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, timeout=120)
         finally:
-            if handle:
-                os.remove(handle.name)
-        return json.loads(proc.stdout.decode("utf-8"))
+            if path:
+                os.remove(path)
+        stdout = proc.stdout.decode("utf-8")
+        command = " ".join('"%s"' % a if re.search(r"[\s\\]", a) else a for a in argv)
+        log.append({"tool": "Bash", "input": {"command": command}, "output": stdout})
+        out = json.loads(stdout)
+        if not out["ok"]:
+            raise H.HostError("fake host: %s refused: %s" % (args[0], out["error"]["message"]), log)
+        return out["data"]
+
+    def _reply(self, started, state, log, text):
+        return {"session_id": state["sid"], "model": self.model, "text": text, "host_calls": log, "cost": None, "seconds": round(time.perf_counter() - started, 1), "events": []}
+
+    @staticmethod
+    def _footer(data):
+        ctx = data["context"]
+        return "【时间】%s｜【地点】%s｜回合：%d" % (ctx["clock"]["label"], ctx["scene"]["location"], data["turn"])
 
     def send(self, conversation, text):
         started = time.perf_counter()
+        log = []
         state = self.sessions.get(conversation)
+        load = self.LOAD_RE.match(text.strip())
+        save = self.SAVE_RE.match(text.strip())
         if state is None:
-            self._call(["doctor"])
-            opened = self._call(["new-game"], {"request_id": "fake_new_%s" % conversation, "mode": "daily", "seed": 7})["data"]
-            state = {"sid": opened["session_id"], "revision": opened["revision"], "next": opened["next_request_id"], "context": opened["context"]}
+            self._call(log, ["doctor"])
+            if load:
+                data = self._call(log, ["load-slot"], {"request_id": "fake_load_%s" % conversation, "name": load.group(1)})
+                body = "%s\n\n%s" % (data["receipt"], self._footer(data))
+            else:
+                data = self._call(log, ["new-game"], {"request_id": "fake_new_%s" % conversation, "mode": "daily", "seed": 7})
+                opening = data["opening"]
+                body = "世界观：%s\n人物：%s\n\n%s\n\n%s" % (opening["world"]["premise"], opening["player"]["name"], opening["hook"]["text"], opening["footer"])
+            state = {"sid": data["session_id"], "revision": data["revision"], "next": data["next_request_id"], "context": data["context"]}
             self.sessions[conversation] = state
-            opening = opened["opening"]
-            body = "世界观：%s\n人物：%s\n\n%s\n\n%s" % (opening["world"]["premise"], opening["player"]["name"], opening["hook"]["text"], opening["footer"])
-            return {"session_id": state["sid"], "model": "none", "text": body, "host_calls": [], "cost": None, "seconds": round(time.perf_counter() - started, 1), "events": []}
+            return self._reply(started, state, log, body)
+        if save:
+            data = self._call(log, ["save-slot"], {"request_id": state["next"], "session_id": state["sid"], "expected_revision": state["revision"], "name": save.group(1)})
+            state.update(revision=data["revision"], next=data["next_request_id"])
+            return self._reply(started, state, log, data["receipt"])
         present = [n["id"] for n in state["context"].get("present_npcs") or []]
         ops = [{"op": "npc_action", "npc_id": present[0], "action": "看了一眼门口"}] if present else []
         commit = {
@@ -184,14 +257,9 @@ class FakeHost:
             "action_mode": "continue", "player_input": text, "operations": ops, "content_tags": [],
             "summary": "场面往前走了一点", "open_action": "场面停住",
         }
-        out = self._call(["commit-turn"], commit)
-        if not out["ok"]:
-            raise H.HostError("fake host commit refused: %s" % out["error"]["message"])
-        data = out["data"]
+        data = self._call(log, ["commit-turn"], commit)
         state.update(revision=data["revision"], next=data["next_request_id"], context=data["context"])
-        ctx = data["context"]
-        footer = "【时间】%s｜【地点】%s｜回合：%d" % (ctx["clock"]["label"], ctx["scene"]["location"], data["turn"])
-        return {"session_id": state["sid"], "model": "none", "text": "门口有人影晃了一下。\n\n" + footer, "host_calls": [], "cost": None, "seconds": round(time.perf_counter() - started, 1), "events": []}
+        return self._reply(started, state, log, "门口有人影晃了一下。\n\n" + self._footer(data))
 
 
 def fill_placeholders(text, turns):
@@ -229,11 +297,11 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
     if setup.get("install") == "previous" and not previous:
         raise SystemExit("剧本 %s 从旧版 Skill 开始：请用 --previous <git commit> 指定旧版" % script["id"])
     installed = install_skill(project, previous if setup.get("install") == "previous" else None)
+    installs = [dict(skill_files(project), after_turn=0, source=installed)]
     if host_name != "fake":
         H.project_config(host_name, project)
-    data_dir = os.path.join(project, ".at-data")
-    trace = os.path.join(project, "trace.jsonl")
-    env = dict(os.environ, ADULT_TENSION_HOME=data_dir, ADULT_TENSION_TRACE=trace, ADULT_TENSION_INCLUDE_DRAFTS="1")
+    env = host_env(setup, project, os.environ)
+    trace = env["ADULT_TENSION_TRACE"]
     host = make_host(host_name, project, env, model)
     rec = {
         "format": R.FORMAT,
@@ -241,10 +309,12 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
         "script": script["id"],
         "run": run_index,
         "date": datetime.date.today().isoformat(),
-        "host": {"name": host_name, "version": host.version(), "model": model},
+        "host": {"name": host_name, "version": host.version(), "model": model or getattr(host, "model", None)},
         "project": project,
         "installed_from": installed,
+        "installs": installs,
         "preflight": checks,
+        "setup": {"data_dir": env.get("ADULT_TENSION_HOME", "default"), "include_drafts": "ADULT_TENSION_INCLUDE_DRAFTS" in env},
         "turns": [],
         "harness_events": [],
     }
@@ -252,7 +322,8 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
     for step in script["steps"]:
         if "harness" in step:
             if step["harness"] == "upgrade_skill":
-                install_skill(project, None, replace=True)
+                source = install_skill(project, None, replace=True)
+                installs.append(dict(skill_files(project), after_turn=index, source=source))
                 rec["harness_events"].append({"after_turn": index, "event": "upgrade_skill", "detail": "替换为当前版本的 Skill 目录"})
             continue
         index += 1
@@ -261,10 +332,13 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
         say = fill_placeholders(step["say"], rec["turns"])
         try:
             reply = host.send(conversation, say)
-            error = None
+            error = reply.get("error")
         except (H.HostError, subprocess.TimeoutExpired) as err:
-            reply, error = {"text": "", "host_calls": [], "seconds": None, "model": None}, str(err)
-        calls = trace_lines(trace)[before:]
+            reply, error = {"text": "", "host_calls": getattr(err, "host_calls", []), "seconds": None, "model": None}, str(err)
+        if installs[-1]["trace"]:
+            calls, source = trace_lines(trace)[before:], "trace"
+        else:
+            calls, source = R.calls_from_host(reply["host_calls"]), "host"
         turn = {
             "index": index,
             "conversation": conversation,
@@ -272,6 +346,7 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
             "expect": step.get("expect") or {},
             "host_calls": reply["host_calls"],
             "runtime_calls": calls,
+            "calls_source": source,
             "text": reply["text"],
             "seconds": reply.get("seconds"),
         }
@@ -282,7 +357,9 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
         if reply.get("model") and not rec["host"].get("model"):
             rec["host"]["model"] = reply["model"]
         rec["turns"].append(turn)
-    doctor = next((c for t in rec["turns"] for c in t["runtime_calls"] if R.command_of(c) == "doctor" and R.ok_data(c)), None)
+    # The Skill the host ran last: its own doctor after the last install, else ask the runtime.
+    last = installs[-1]["after_turn"]
+    doctor = next((c for t in rec["turns"] if t["index"] > last for c in t["runtime_calls"] if R.command_of(c) == "doctor" and R.ok_data(c)), None)
     identity = R.ok_data(doctor) if doctor else (runtime(project, env, ["doctor"]).get("data") or {})
     rec["skill"] = {k: identity.get(k) for k in ("skill_root", "skill_version", "content_version")}
     sessions = (runtime(project, env, ["list-sessions"]).get("data") or {}).get("sessions") or []
@@ -314,8 +391,8 @@ def main(argv):
     path, rec = run(script, args.host, args.run, args.model, args.root, os.path.join(args.out, args.host), args.keep_events, args.previous)
     result = machine_checks.check(rec)
     print("record: %s" % path)
-    for item in result["findings"]:
-        print("[%s] 第 %s 轮：%s" % (item["check"], item["turn"], item["message"]))
+    for line in machine_checks.summary_lines(result):
+        print(line)
     print("machine checks: %s" % ("PASS" if result["pass"] else "FAIL"))
     return 0 if result["pass"] else 1
 

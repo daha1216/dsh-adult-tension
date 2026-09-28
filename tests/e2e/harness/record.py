@@ -18,11 +18,15 @@ A record is one run of one script on one host, kept in full:
     }
 
 `runtime_calls` come from the engine's own trace (ADULT_TENSION_TRACE), so
-they are the same whatever the host's transcript looks like. `expect` is the
-script's annotation for the machine checks; the tested model never sees it.
+they are the same whatever the host's transcript looks like. An older Skill
+without the trace (the version a script starts from before an upgrade) gets
+them rebuilt from the host's own tool calls instead (`calls_from_host`,
+turn["calls_source"] == "host"). `expect` is the script's annotation for the
+machine checks; the tested model never sees it.
 """
 
 import json
+import re
 
 FORMAT = "adult-tension-e2e-record"
 VERSION = 1
@@ -73,12 +77,159 @@ def error_code(call):
     return None if envelope.get("ok") else (envelope.get("error") or {}).get("code")
 
 
+# -- runtime calls rebuilt from the host's own tool calls ---------------------------------
+#
+# Each runtime invocation in a shell command is one call. Its input is what
+# the host last wrote to the --input-file path (a Write/Edit tool call or a
+# heredoc into a file), or a heredoc fed to the runtime's stdin; its envelope
+# is the JSON the command printed. Exit code and duration are not known there.
+
+PATH_TOKEN = r"\"[^\"]+\"|'[^']+'|[^\s<>'\";&|]+"
+RUNTIME_RE = re.compile(r"adult_tension\.py[\"']?[ \t]+(?P<command>[a-z][a-z0-9-]*)(?P<rest>[^\n;&|<>]*)")
+INPUT_FILE_RE = re.compile(r"--input-file(?:=|[ \t]+)(?P<path>%s)" % PATH_TOKEN)
+HEREDOC_RE = re.compile(r"<<-?[ \t]*(?P<q>['\"]?)(?P<tag>[A-Za-z_]\w*)(?P=q)")
+FILE_TARGET_RE = re.compile(r"(?:>[ \t]*|\btee[ \t]+)(?P<path>%s)" % PATH_TOKEN)
+TOKEN_RE = re.compile(r"\"[^\"]*\"|'[^']*'|\S+")
+
+
+def _unquote(token):
+    token = token.strip()
+    if len(token) >= 2 and token[0] == token[-1] and token[0] in "\"'":
+        return token[1:-1]
+    return token
+
+
+def _path_key(path):
+    path = _unquote(path).replace("\\", "/")
+    drive = re.match(r"^/([A-Za-z])/(.*)$", path)  # Git Bash: /d/projects -> d:/projects
+    if drive:
+        path = "%s:/%s" % drive.groups()
+    return re.sub(r"^(\./)+", "", path).lower()
+
+
+class _Files:
+    """What the host wrote so far, in order."""
+
+    def __init__(self):
+        self.items = []
+
+    def write(self, path, content):
+        self.items.append((_path_key(path), content))
+
+    def read(self, path):
+        key = _path_key(path)
+        base = key.rsplit("/", 1)[-1]
+        tests = (lambda k: k == key, lambda k: k.endswith("/" + key), lambda k: k.rsplit("/", 1)[-1] == base)
+        for test in tests:
+            for written, content in reversed(self.items):
+                if test(written):
+                    return content
+        return None
+
+    def edit(self, path, old, new, replace_all):
+        content = self.read(path)
+        if content is not None and old and old in content:
+            self.write(path, content.replace(old, new) if replace_all else content.replace(old, new, 1))
+
+
+def _json_value(text):
+    try:
+        return json.loads(text) if text is not None else None
+    except ValueError:
+        return None
+
+
+def _envelopes(output):
+    """The runtime envelopes printed in a tool output, in order."""
+    out = []
+    decoder = json.JSONDecoder()
+    text = output if isinstance(output, str) else ""
+    index = 0
+    while True:
+        start = text.find("{", index)
+        if start < 0:
+            return out
+        try:
+            value, end = decoder.raw_decode(text, start)
+        except ValueError:
+            index = start + 1
+            continue
+        if isinstance(value, dict) and {"ok", "data", "error"} <= set(value):
+            out.append(value)
+            index = end
+        else:
+            index = start + 1
+
+
+def _shell_invocations(command, files):
+    """(argv, input) for each runtime invocation in one shell command."""
+    lines = command.split("\n")
+    out = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        i += 1
+        stdin, reader = None, None
+        heredoc = HEREDOC_RE.search(line)
+        if heredoc:
+            body = []
+            while i < len(lines) and lines[i].strip() != heredoc.group("tag"):
+                body.append(lines[i])
+                i += 1
+            i += 1
+            head = line[: heredoc.start()]
+            before = [m.start() for m in RUNTIME_RE.finditer(head)]
+            if before:
+                stdin, reader = "\n".join(body), before[-1]
+            else:
+                target = FILE_TARGET_RE.search(head + " " + line[heredoc.end() :].split("&&")[0])
+                if target:
+                    files.write(target.group("path"), "\n".join(body))
+        for match in RUNTIME_RE.finditer(line):
+            tokens = [_unquote(t) for t in TOKEN_RE.findall(match.group("rest"))]
+            while tokens and re.match(r"^\d$", tokens[-1]):  # the 2 of 2>&1
+                tokens.pop()
+            source = INPUT_FILE_RE.search(match.group("rest"))
+            if source:
+                payload = _json_value(files.read(source.group("path")))
+            else:
+                payload = _json_value(stdin) if match.start() == reader else None
+            out.append(([match.group("command")] + tokens, payload))
+    return out
+
+
+def calls_from_host(host_calls):
+    """Runtime calls in the trace's shape, rebuilt from a host's tool calls."""
+    files = _Files()
+    out = []
+    for call in host_calls or []:
+        data = call.get("input")
+        if not isinstance(data, dict):
+            continue
+        path = data.get("file_path") or data.get("filePath")
+        old = data.get("old_string", data.get("oldString"))
+        if path and isinstance(data.get("content"), str):
+            files.write(path, data["content"])
+        elif path and isinstance(old, str):
+            files.edit(path, old, data.get("new_string", data.get("newString")) or "", bool(data.get("replace_all", data.get("replaceAll"))))
+        elif isinstance(data.get("command"), str):
+            envelopes = _envelopes(call.get("output"))
+            for n, (argv, payload) in enumerate(_shell_invocations(data["command"], files)):
+                envelope = envelopes[n] if n < len(envelopes) else None
+                out.append({"argv": argv, "input": payload, "exit": None, "envelope": envelope, "ms": None, "source": "host"})
+    return out
+
+
 def _brief_call(call):
     out = {"command": command_of(call), "exit": call.get("exit")}
+    if call.get("source"):
+        out["source"] = call["source"]
     if call.get("input") is not None:
         out["input"] = call["input"]
     envelope = call.get("envelope") or {}
-    if envelope.get("ok"):
+    if not envelope:
+        out["result"] = "宿主的记录里没有可解析的返回"
+    elif envelope.get("ok"):
         data = envelope.get("data") or {}
         out["result"] = {k: data[k] for k in ("receipt", "turn", "revision", "applied", "resolved_events", "clock") if k in data}
     else:

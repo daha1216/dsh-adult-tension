@@ -17,6 +17,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # the e2e harness tests install an older Skill from history (git archive)
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
@@ -34,3 +37,5 @@ jobs:
         run: python skill/adult-tension/scripts/adult_tension.py verify-content --json --data-dir "${{ runner.temp }}/at-data"
       - name: smoke
         run: python skill/adult-tension/scripts/adult_tension.py smoke --seed 42 --json --data-dir "${{ runner.temp }}/at-data"
+      - name: e2e harness tests (no model)
+        run: python -m unittest discover -s tests/e2e

@@ -1,0 +1,1167 @@
+{
+ "format": "adult-tension-e2e-record",
+ "version": 1,
+ "script": "drill",
+ "run": 1,
+ "date": "2026-09-28",
+ "host": {
+  "name": "fake",
+  "version": "fake-1",
+  "model": "none"
+ },
+ "project": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220",
+ "installed_from": "git:2aa58c8",
+ "installs": [
+  {
+   "skill_version": "0.2.0",
+   "db_schema": 2,
+   "trace": false,
+   "after_turn": 0,
+   "source": "git:2aa58c8"
+  },
+  {
+   "skill_version": "0.3.0",
+   "db_schema": 3,
+   "trace": true,
+   "after_turn": 7,
+   "source": "D:\\projects\\adult-tension-v2\\skill\\adult-tension"
+  }
+ ],
+ "preflight": {
+  "checked": [],
+  "found": []
+ },
+ "setup": {
+  "data_dir": "default",
+  "include_drafts": false
+ },
+ "turns": [
+  {
+   "index": 1,
+   "conversation": "A",
+   "input": "开一局",
+   "expect": {
+    "kind": "ask",
+    "calls_max": 1,
+    "must_not_call": [
+     "new-game",
+     "commit-turn"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2,
+    "group_must_call": [
+     "doctor",
+     "new-game"
+    ]
+   },
+   "host_calls": [
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" doctor --json"
+     },
+     "output": "{\"ok\":true,\"data\":{\"status\":\"warn\",\"fast_path\":false,\"skill_version\":\"0.2.0\",\"content_version\":\"2026.10.0-dev1\",\"skill_root\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"data_dir\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension\",\"data_dir_source\":\"default\",\"checks\":[{\"id\":\"python\",\"status\":\"ok\",\"message\":\"Python 3.12.10（C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe）\",\"hint\":null},{\"id\":\"data_dir\",\"status\":\"ok\",\"message\":\"数据目录可写：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension（来源：default）\",\"hint\":null},{\"id\":\"sqlite\",\"status\":\"ok\",\"message\":\"SQLite 3.49.1\",\"hint\":null},{\"id\":\"migrations\",\"status\":\"ok\",\"message\":\"数据库已从 schema 0 迁移到 2\",\"hint\":null},{\"id\":\"skill_files\",\"status\":\"ok\",\"message\":\"Skill 根目录：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"hint\":null},{\"id\":\"content\",\"status\":\"warn\",\"message\":\"内容版本 2026.10.0-dev1，还没有可开局的世界\",\"hint\":\"等待世界包发布\"}],\"next_request_id\":\"r_7087c7f74238\"},\"error\":null}"
+    },
+    {
+     "tool": "Write",
+     "input": {
+      "file_path": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpk8mipyfj.json",
+      "content": "{\"request_id\": \"fake_new_A\", \"mode\": \"daily\", \"seed\": 7}"
+     },
+     "output": "File created successfully"
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" new-game --json --input-file \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpk8mipyfj.json\""
+     },
+     "output": "{\"ok\":false,\"data\":null,\"error\":{\"code\":\"NO_MATCH\",\"message\":\"开局条件在现有世界中无法同时满足\",\"details\":[{\"path\":\"$.conditions\",\"reason\":\"排除之后没有可选的世界\",\"hint\":null,\"code\":\"NO_MATCH\"}],\"relax\":[],\"world_id\":null,\"next_request_id\":\"r_987453f9352c\"}}"
+    }
+   ],
+   "runtime_calls": [
+    {
+     "argv": [
+      "doctor",
+      "--json"
+     ],
+     "input": null,
+     "exit": null,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "status": "warn",
+       "fast_path": false,
+       "skill_version": "0.2.0",
+       "content_version": "2026.10.0-dev1",
+       "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+       "data_dir": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension",
+       "data_dir_source": "default",
+       "checks": [
+        {
+         "id": "python",
+         "status": "ok",
+         "message": "Python 3.12.10（C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe）",
+         "hint": null
+        },
+        {
+         "id": "data_dir",
+         "status": "ok",
+         "message": "数据目录可写：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension（来源：default）",
+         "hint": null
+        },
+        {
+         "id": "sqlite",
+         "status": "ok",
+         "message": "SQLite 3.49.1",
+         "hint": null
+        },
+        {
+         "id": "migrations",
+         "status": "ok",
+         "message": "数据库已从 schema 0 迁移到 2",
+         "hint": null
+        },
+        {
+         "id": "skill_files",
+         "status": "ok",
+         "message": "Skill 根目录：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+         "hint": null
+        },
+        {
+         "id": "content",
+         "status": "warn",
+         "message": "内容版本 2026.10.0-dev1，还没有可开局的世界",
+         "hint": "等待世界包发布"
+        }
+       ],
+       "next_request_id": "r_7087c7f74238"
+      },
+      "error": null
+     },
+     "ms": null,
+     "source": "host"
+    },
+    {
+     "argv": [
+      "new-game",
+      "--json",
+      "--input-file",
+      "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpk8mipyfj.json"
+     ],
+     "input": {
+      "request_id": "fake_new_A",
+      "mode": "daily",
+      "seed": 7
+     },
+     "exit": null,
+     "envelope": {
+      "ok": false,
+      "data": null,
+      "error": {
+       "code": "NO_MATCH",
+       "message": "开局条件在现有世界中无法同时满足",
+       "details": [
+        {
+         "path": "$.conditions",
+         "reason": "排除之后没有可选的世界",
+         "hint": null,
+         "code": "NO_MATCH"
+        }
+       ],
+       "relax": [],
+       "world_id": null,
+       "next_request_id": "r_987453f9352c"
+      }
+     },
+     "ms": null,
+     "source": "host"
+    }
+   ],
+   "calls_source": "host",
+   "text": "",
+   "seconds": null,
+   "host_error": "fake host: new-game refused: 开局条件在现有世界中无法同时满足"
+  },
+  {
+   "index": 2,
+   "conversation": "A",
+   "input": "日常",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2,
+    "group_must_call": [
+     "doctor",
+     "new-game"
+    ]
+   },
+   "host_calls": [
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" doctor --json"
+     },
+     "output": "{\"ok\":true,\"data\":{\"status\":\"warn\",\"fast_path\":true,\"skill_version\":\"0.2.0\",\"content_version\":\"2026.10.0-dev1\",\"skill_root\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"data_dir\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension\",\"data_dir_source\":\"default\",\"checks\":[{\"id\":\"python\",\"status\":\"ok\",\"message\":\"Python 3.12.10（C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe）\",\"hint\":null},{\"id\":\"data_dir\",\"status\":\"ok\",\"message\":\"数据目录可写：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension（来源：default）\",\"hint\":null},{\"id\":\"sqlite\",\"status\":\"ok\",\"message\":\"SQLite 可用（快速检查）\",\"hint\":null},{\"id\":\"migrations\",\"status\":\"ok\",\"message\":\"数据库 schema 2（快速检查）\",\"hint\":null},{\"id\":\"skill_files\",\"status\":\"ok\",\"message\":\"Skill 根目录：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension（快速检查）\",\"hint\":null},{\"id\":\"content\",\"status\":\"warn\",\"message\":\"内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）\",\"hint\":\"等待世界包发布\"}],\"next_request_id\":\"r_087b7c19b2af\"},\"error\":null}"
+    },
+    {
+     "tool": "Write",
+     "input": {
+      "file_path": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpx4moa_ej.json",
+      "content": "{\"request_id\": \"fake_new_A\", \"mode\": \"daily\", \"seed\": 7}"
+     },
+     "output": "File created successfully"
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" new-game --json --input-file \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpx4moa_ej.json\""
+     },
+     "output": "{\"ok\":false,\"data\":null,\"error\":{\"code\":\"NO_MATCH\",\"message\":\"开局条件在现有世界中无法同时满足\",\"details\":[{\"path\":\"$.conditions\",\"reason\":\"排除之后没有可选的世界\",\"hint\":null,\"code\":\"NO_MATCH\"}],\"relax\":[],\"world_id\":null,\"next_request_id\":\"r_e66619efbb62\"}}"
+    }
+   ],
+   "runtime_calls": [
+    {
+     "argv": [
+      "doctor",
+      "--json"
+     ],
+     "input": null,
+     "exit": null,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "status": "warn",
+       "fast_path": true,
+       "skill_version": "0.2.0",
+       "content_version": "2026.10.0-dev1",
+       "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+       "data_dir": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension",
+       "data_dir_source": "default",
+       "checks": [
+        {
+         "id": "python",
+         "status": "ok",
+         "message": "Python 3.12.10（C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe）",
+         "hint": null
+        },
+        {
+         "id": "data_dir",
+         "status": "ok",
+         "message": "数据目录可写：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension（来源：default）",
+         "hint": null
+        },
+        {
+         "id": "sqlite",
+         "status": "ok",
+         "message": "SQLite 可用（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "migrations",
+         "status": "ok",
+         "message": "数据库 schema 2（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "skill_files",
+         "status": "ok",
+         "message": "Skill 根目录：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "content",
+         "status": "warn",
+         "message": "内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）",
+         "hint": "等待世界包发布"
+        }
+       ],
+       "next_request_id": "r_087b7c19b2af"
+      },
+      "error": null
+     },
+     "ms": null,
+     "source": "host"
+    },
+    {
+     "argv": [
+      "new-game",
+      "--json",
+      "--input-file",
+      "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpx4moa_ej.json"
+     ],
+     "input": {
+      "request_id": "fake_new_A",
+      "mode": "daily",
+      "seed": 7
+     },
+     "exit": null,
+     "envelope": {
+      "ok": false,
+      "data": null,
+      "error": {
+       "code": "NO_MATCH",
+       "message": "开局条件在现有世界中无法同时满足",
+       "details": [
+        {
+         "path": "$.conditions",
+         "reason": "排除之后没有可选的世界",
+         "hint": null,
+         "code": "NO_MATCH"
+        }
+       ],
+       "relax": [],
+       "world_id": null,
+       "next_request_id": "r_e66619efbb62"
+      }
+     },
+     "ms": null,
+     "source": "host"
+    }
+   ],
+   "calls_source": "host",
+   "text": "",
+   "seconds": null,
+   "host_error": "fake host: new-game refused: 开局条件在现有世界中无法同时满足"
+  },
+  {
+   "index": 3,
+   "conversation": "A",
+   "input": "我先看看四周",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   },
+   "host_calls": [
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" doctor --json"
+     },
+     "output": "{\"ok\":true,\"data\":{\"status\":\"warn\",\"fast_path\":true,\"skill_version\":\"0.2.0\",\"content_version\":\"2026.10.0-dev1\",\"skill_root\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"data_dir\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension\",\"data_dir_source\":\"default\",\"checks\":[{\"id\":\"python\",\"status\":\"ok\",\"message\":\"Python 3.12.10（C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe）\",\"hint\":null},{\"id\":\"data_dir\",\"status\":\"ok\",\"message\":\"数据目录可写：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension（来源：default）\",\"hint\":null},{\"id\":\"sqlite\",\"status\":\"ok\",\"message\":\"SQLite 可用（快速检查）\",\"hint\":null},{\"id\":\"migrations\",\"status\":\"ok\",\"message\":\"数据库 schema 2（快速检查）\",\"hint\":null},{\"id\":\"skill_files\",\"status\":\"ok\",\"message\":\"Skill 根目录：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension（快速检查）\",\"hint\":null},{\"id\":\"content\",\"status\":\"warn\",\"message\":\"内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）\",\"hint\":\"等待世界包发布\"}],\"next_request_id\":\"r_70c6de82f19d\"},\"error\":null}"
+    },
+    {
+     "tool": "Write",
+     "input": {
+      "file_path": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpk_mx7f6m.json",
+      "content": "{\"request_id\": \"fake_new_A\", \"mode\": \"daily\", \"seed\": 7}"
+     },
+     "output": "File created successfully"
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" new-game --json --input-file \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpk_mx7f6m.json\""
+     },
+     "output": "{\"ok\":false,\"data\":null,\"error\":{\"code\":\"NO_MATCH\",\"message\":\"开局条件在现有世界中无法同时满足\",\"details\":[{\"path\":\"$.conditions\",\"reason\":\"排除之后没有可选的世界\",\"hint\":null,\"code\":\"NO_MATCH\"}],\"relax\":[],\"world_id\":null,\"next_request_id\":\"r_ef316890325b\"}}"
+    }
+   ],
+   "runtime_calls": [
+    {
+     "argv": [
+      "doctor",
+      "--json"
+     ],
+     "input": null,
+     "exit": null,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "status": "warn",
+       "fast_path": true,
+       "skill_version": "0.2.0",
+       "content_version": "2026.10.0-dev1",
+       "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+       "data_dir": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension",
+       "data_dir_source": "default",
+       "checks": [
+        {
+         "id": "python",
+         "status": "ok",
+         "message": "Python 3.12.10（C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe）",
+         "hint": null
+        },
+        {
+         "id": "data_dir",
+         "status": "ok",
+         "message": "数据目录可写：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension（来源：default）",
+         "hint": null
+        },
+        {
+         "id": "sqlite",
+         "status": "ok",
+         "message": "SQLite 可用（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "migrations",
+         "status": "ok",
+         "message": "数据库 schema 2（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "skill_files",
+         "status": "ok",
+         "message": "Skill 根目录：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "content",
+         "status": "warn",
+         "message": "内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）",
+         "hint": "等待世界包发布"
+        }
+       ],
+       "next_request_id": "r_70c6de82f19d"
+      },
+      "error": null
+     },
+     "ms": null,
+     "source": "host"
+    },
+    {
+     "argv": [
+      "new-game",
+      "--json",
+      "--input-file",
+      "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpk_mx7f6m.json"
+     ],
+     "input": {
+      "request_id": "fake_new_A",
+      "mode": "daily",
+      "seed": 7
+     },
+     "exit": null,
+     "envelope": {
+      "ok": false,
+      "data": null,
+      "error": {
+       "code": "NO_MATCH",
+       "message": "开局条件在现有世界中无法同时满足",
+       "details": [
+        {
+         "path": "$.conditions",
+         "reason": "排除之后没有可选的世界",
+         "hint": null,
+         "code": "NO_MATCH"
+        }
+       ],
+       "relax": [],
+       "world_id": null,
+       "next_request_id": "r_ef316890325b"
+      }
+     },
+     "ms": null,
+     "source": "host"
+    }
+   ],
+   "calls_source": "host",
+   "text": "",
+   "seconds": null,
+   "host_error": "fake host: new-game refused: 开局条件在现有世界中无法同时满足"
+  },
+  {
+   "index": 4,
+   "conversation": "A",
+   "input": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   },
+   "host_calls": [
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" doctor --json"
+     },
+     "output": "{\"ok\":true,\"data\":{\"status\":\"warn\",\"fast_path\":true,\"skill_version\":\"0.2.0\",\"content_version\":\"2026.10.0-dev1\",\"skill_root\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"data_dir\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension\",\"data_dir_source\":\"default\",\"checks\":[{\"id\":\"python\",\"status\":\"ok\",\"message\":\"Python 3.12.10（C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe）\",\"hint\":null},{\"id\":\"data_dir\",\"status\":\"ok\",\"message\":\"数据目录可写：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension（来源：default）\",\"hint\":null},{\"id\":\"sqlite\",\"status\":\"ok\",\"message\":\"SQLite 可用（快速检查）\",\"hint\":null},{\"id\":\"migrations\",\"status\":\"ok\",\"message\":\"数据库 schema 2（快速检查）\",\"hint\":null},{\"id\":\"skill_files\",\"status\":\"ok\",\"message\":\"Skill 根目录：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension（快速检查）\",\"hint\":null},{\"id\":\"content\",\"status\":\"warn\",\"message\":\"内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）\",\"hint\":\"等待世界包发布\"}],\"next_request_id\":\"r_e8631eddce1b\"},\"error\":null}"
+    },
+    {
+     "tool": "Write",
+     "input": {
+      "file_path": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpgp1zic4o.json",
+      "content": "{\"request_id\": \"fake_new_A\", \"mode\": \"daily\", \"seed\": 7}"
+     },
+     "output": "File created successfully"
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" new-game --json --input-file \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpgp1zic4o.json\""
+     },
+     "output": "{\"ok\":false,\"data\":null,\"error\":{\"code\":\"NO_MATCH\",\"message\":\"开局条件在现有世界中无法同时满足\",\"details\":[{\"path\":\"$.conditions\",\"reason\":\"排除之后没有可选的世界\",\"hint\":null,\"code\":\"NO_MATCH\"}],\"relax\":[],\"world_id\":null,\"next_request_id\":\"r_41160dc476d8\"}}"
+    }
+   ],
+   "runtime_calls": [
+    {
+     "argv": [
+      "doctor",
+      "--json"
+     ],
+     "input": null,
+     "exit": null,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "status": "warn",
+       "fast_path": true,
+       "skill_version": "0.2.0",
+       "content_version": "2026.10.0-dev1",
+       "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+       "data_dir": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension",
+       "data_dir_source": "default",
+       "checks": [
+        {
+         "id": "python",
+         "status": "ok",
+         "message": "Python 3.12.10（C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe）",
+         "hint": null
+        },
+        {
+         "id": "data_dir",
+         "status": "ok",
+         "message": "数据目录可写：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension（来源：default）",
+         "hint": null
+        },
+        {
+         "id": "sqlite",
+         "status": "ok",
+         "message": "SQLite 可用（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "migrations",
+         "status": "ok",
+         "message": "数据库 schema 2（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "skill_files",
+         "status": "ok",
+         "message": "Skill 根目录：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "content",
+         "status": "warn",
+         "message": "内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）",
+         "hint": "等待世界包发布"
+        }
+       ],
+       "next_request_id": "r_e8631eddce1b"
+      },
+      "error": null
+     },
+     "ms": null,
+     "source": "host"
+    },
+    {
+     "argv": [
+      "new-game",
+      "--json",
+      "--input-file",
+      "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpgp1zic4o.json"
+     ],
+     "input": {
+      "request_id": "fake_new_A",
+      "mode": "daily",
+      "seed": 7
+     },
+     "exit": null,
+     "envelope": {
+      "ok": false,
+      "data": null,
+      "error": {
+       "code": "NO_MATCH",
+       "message": "开局条件在现有世界中无法同时满足",
+       "details": [
+        {
+         "path": "$.conditions",
+         "reason": "排除之后没有可选的世界",
+         "hint": null,
+         "code": "NO_MATCH"
+        }
+       ],
+       "relax": [],
+       "world_id": null,
+       "next_request_id": "r_41160dc476d8"
+      }
+     },
+     "ms": null,
+     "source": "host"
+    }
+   ],
+   "calls_source": "host",
+   "text": "",
+   "seconds": null,
+   "host_error": "fake host: new-game refused: 开局条件在现有世界中无法同时满足"
+  },
+  {
+   "index": 5,
+   "conversation": "A",
+   "input": "我走过去，跟对方打了个招呼",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   },
+   "host_calls": [
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" doctor --json"
+     },
+     "output": "{\"ok\":true,\"data\":{\"status\":\"warn\",\"fast_path\":true,\"skill_version\":\"0.2.0\",\"content_version\":\"2026.10.0-dev1\",\"skill_root\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"data_dir\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension\",\"data_dir_source\":\"default\",\"checks\":[{\"id\":\"python\",\"status\":\"ok\",\"message\":\"Python 3.12.10（C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe）\",\"hint\":null},{\"id\":\"data_dir\",\"status\":\"ok\",\"message\":\"数据目录可写：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension（来源：default）\",\"hint\":null},{\"id\":\"sqlite\",\"status\":\"ok\",\"message\":\"SQLite 可用（快速检查）\",\"hint\":null},{\"id\":\"migrations\",\"status\":\"ok\",\"message\":\"数据库 schema 2（快速检查）\",\"hint\":null},{\"id\":\"skill_files\",\"status\":\"ok\",\"message\":\"Skill 根目录：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension（快速检查）\",\"hint\":null},{\"id\":\"content\",\"status\":\"warn\",\"message\":\"内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）\",\"hint\":\"等待世界包发布\"}],\"next_request_id\":\"r_b58c5ec0265b\"},\"error\":null}"
+    },
+    {
+     "tool": "Write",
+     "input": {
+      "file_path": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmp6gecdwbm.json",
+      "content": "{\"request_id\": \"fake_new_A\", \"mode\": \"daily\", \"seed\": 7}"
+     },
+     "output": "File created successfully"
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" new-game --json --input-file \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmp6gecdwbm.json\""
+     },
+     "output": "{\"ok\":false,\"data\":null,\"error\":{\"code\":\"NO_MATCH\",\"message\":\"开局条件在现有世界中无法同时满足\",\"details\":[{\"path\":\"$.conditions\",\"reason\":\"排除之后没有可选的世界\",\"hint\":null,\"code\":\"NO_MATCH\"}],\"relax\":[],\"world_id\":null,\"next_request_id\":\"r_9c3d93a87d43\"}}"
+    }
+   ],
+   "runtime_calls": [
+    {
+     "argv": [
+      "doctor",
+      "--json"
+     ],
+     "input": null,
+     "exit": null,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "status": "warn",
+       "fast_path": true,
+       "skill_version": "0.2.0",
+       "content_version": "2026.10.0-dev1",
+       "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+       "data_dir": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension",
+       "data_dir_source": "default",
+       "checks": [
+        {
+         "id": "python",
+         "status": "ok",
+         "message": "Python 3.12.10（C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe）",
+         "hint": null
+        },
+        {
+         "id": "data_dir",
+         "status": "ok",
+         "message": "数据目录可写：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension（来源：default）",
+         "hint": null
+        },
+        {
+         "id": "sqlite",
+         "status": "ok",
+         "message": "SQLite 可用（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "migrations",
+         "status": "ok",
+         "message": "数据库 schema 2（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "skill_files",
+         "status": "ok",
+         "message": "Skill 根目录：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "content",
+         "status": "warn",
+         "message": "内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）",
+         "hint": "等待世界包发布"
+        }
+       ],
+       "next_request_id": "r_b58c5ec0265b"
+      },
+      "error": null
+     },
+     "ms": null,
+     "source": "host"
+    },
+    {
+     "argv": [
+      "new-game",
+      "--json",
+      "--input-file",
+      "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmp6gecdwbm.json"
+     ],
+     "input": {
+      "request_id": "fake_new_A",
+      "mode": "daily",
+      "seed": 7
+     },
+     "exit": null,
+     "envelope": {
+      "ok": false,
+      "data": null,
+      "error": {
+       "code": "NO_MATCH",
+       "message": "开局条件在现有世界中无法同时满足",
+       "details": [
+        {
+         "path": "$.conditions",
+         "reason": "排除之后没有可选的世界",
+         "hint": null,
+         "code": "NO_MATCH"
+        }
+       ],
+       "relax": [],
+       "world_id": null,
+       "next_request_id": "r_9c3d93a87d43"
+      }
+     },
+     "ms": null,
+     "source": "host"
+    }
+   ],
+   "calls_source": "host",
+   "text": "",
+   "seconds": null,
+   "host_error": "fake host: new-game refused: 开局条件在现有世界中无法同时满足"
+  },
+  {
+   "index": 6,
+   "conversation": "A",
+   "input": "存档 演练",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   },
+   "host_calls": [
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" doctor --json"
+     },
+     "output": "{\"ok\":true,\"data\":{\"status\":\"warn\",\"fast_path\":true,\"skill_version\":\"0.2.0\",\"content_version\":\"2026.10.0-dev1\",\"skill_root\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"data_dir\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension\",\"data_dir_source\":\"default\",\"checks\":[{\"id\":\"python\",\"status\":\"ok\",\"message\":\"Python 3.12.10（C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe）\",\"hint\":null},{\"id\":\"data_dir\",\"status\":\"ok\",\"message\":\"数据目录可写：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension（来源：default）\",\"hint\":null},{\"id\":\"sqlite\",\"status\":\"ok\",\"message\":\"SQLite 可用（快速检查）\",\"hint\":null},{\"id\":\"migrations\",\"status\":\"ok\",\"message\":\"数据库 schema 2（快速检查）\",\"hint\":null},{\"id\":\"skill_files\",\"status\":\"ok\",\"message\":\"Skill 根目录：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension（快速检查）\",\"hint\":null},{\"id\":\"content\",\"status\":\"warn\",\"message\":\"内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）\",\"hint\":\"等待世界包发布\"}],\"next_request_id\":\"r_2952c3df0cd4\"},\"error\":null}"
+    },
+    {
+     "tool": "Write",
+     "input": {
+      "file_path": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpvd6ukndy.json",
+      "content": "{\"request_id\": \"fake_new_A\", \"mode\": \"daily\", \"seed\": 7}"
+     },
+     "output": "File created successfully"
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" new-game --json --input-file \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpvd6ukndy.json\""
+     },
+     "output": "{\"ok\":false,\"data\":null,\"error\":{\"code\":\"NO_MATCH\",\"message\":\"开局条件在现有世界中无法同时满足\",\"details\":[{\"path\":\"$.conditions\",\"reason\":\"排除之后没有可选的世界\",\"hint\":null,\"code\":\"NO_MATCH\"}],\"relax\":[],\"world_id\":null,\"next_request_id\":\"r_14727f034035\"}}"
+    }
+   ],
+   "runtime_calls": [
+    {
+     "argv": [
+      "doctor",
+      "--json"
+     ],
+     "input": null,
+     "exit": null,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "status": "warn",
+       "fast_path": true,
+       "skill_version": "0.2.0",
+       "content_version": "2026.10.0-dev1",
+       "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+       "data_dir": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension",
+       "data_dir_source": "default",
+       "checks": [
+        {
+         "id": "python",
+         "status": "ok",
+         "message": "Python 3.12.10（C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe）",
+         "hint": null
+        },
+        {
+         "id": "data_dir",
+         "status": "ok",
+         "message": "数据目录可写：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension（来源：default）",
+         "hint": null
+        },
+        {
+         "id": "sqlite",
+         "status": "ok",
+         "message": "SQLite 可用（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "migrations",
+         "status": "ok",
+         "message": "数据库 schema 2（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "skill_files",
+         "status": "ok",
+         "message": "Skill 根目录：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "content",
+         "status": "warn",
+         "message": "内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）",
+         "hint": "等待世界包发布"
+        }
+       ],
+       "next_request_id": "r_2952c3df0cd4"
+      },
+      "error": null
+     },
+     "ms": null,
+     "source": "host"
+    },
+    {
+     "argv": [
+      "new-game",
+      "--json",
+      "--input-file",
+      "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpvd6ukndy.json"
+     ],
+     "input": {
+      "request_id": "fake_new_A",
+      "mode": "daily",
+      "seed": 7
+     },
+     "exit": null,
+     "envelope": {
+      "ok": false,
+      "data": null,
+      "error": {
+       "code": "NO_MATCH",
+       "message": "开局条件在现有世界中无法同时满足",
+       "details": [
+        {
+         "path": "$.conditions",
+         "reason": "排除之后没有可选的世界",
+         "hint": null,
+         "code": "NO_MATCH"
+        }
+       ],
+       "relax": [],
+       "world_id": null,
+       "next_request_id": "r_14727f034035"
+      }
+     },
+     "ms": null,
+     "source": "host"
+    }
+   ],
+   "calls_source": "host",
+   "text": "",
+   "seconds": null,
+   "host_error": "fake host: new-game refused: 开局条件在现有世界中无法同时满足"
+  },
+  {
+   "index": 7,
+   "conversation": "B",
+   "input": "读档 演练",
+   "expect": {
+    "kind": "load",
+    "calls_max": 2,
+    "must_call": [
+     "load-slot"
+    ]
+   },
+   "host_calls": [
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" doctor --json"
+     },
+     "output": "{\"ok\":true,\"data\":{\"status\":\"warn\",\"fast_path\":true,\"skill_version\":\"0.2.0\",\"content_version\":\"2026.10.0-dev1\",\"skill_root\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"data_dir\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension\",\"data_dir_source\":\"default\",\"checks\":[{\"id\":\"python\",\"status\":\"ok\",\"message\":\"Python 3.12.10（C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe）\",\"hint\":null},{\"id\":\"data_dir\",\"status\":\"ok\",\"message\":\"数据目录可写：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension（来源：default）\",\"hint\":null},{\"id\":\"sqlite\",\"status\":\"ok\",\"message\":\"SQLite 可用（快速检查）\",\"hint\":null},{\"id\":\"migrations\",\"status\":\"ok\",\"message\":\"数据库 schema 2（快速检查）\",\"hint\":null},{\"id\":\"skill_files\",\"status\":\"ok\",\"message\":\"Skill 根目录：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension（快速检查）\",\"hint\":null},{\"id\":\"content\",\"status\":\"warn\",\"message\":\"内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）\",\"hint\":\"等待世界包发布\"}],\"next_request_id\":\"r_bd993fec4df1\"},\"error\":null}"
+    },
+    {
+     "tool": "Write",
+     "input": {
+      "file_path": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpq3dz9zrv.json",
+      "content": "{\"request_id\": \"fake_load_B\", \"name\": \"演练\"}"
+     },
+     "output": "File created successfully"
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" load-slot --json --input-file \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpq3dz9zrv.json\""
+     },
+     "output": "{\"ok\":false,\"data\":null,\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"没有名为「演练」的存档\",\"details\":[{\"path\":\"$.name\",\"reason\":\"存档不存在\",\"hint\":\"现有存档：（无）\",\"code\":\"NOT_FOUND\"}],\"available\":[],\"next_request_id\":\"r_1e494240b07a\"}}"
+    }
+   ],
+   "runtime_calls": [
+    {
+     "argv": [
+      "doctor",
+      "--json"
+     ],
+     "input": null,
+     "exit": null,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "status": "warn",
+       "fast_path": true,
+       "skill_version": "0.2.0",
+       "content_version": "2026.10.0-dev1",
+       "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+       "data_dir": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension",
+       "data_dir_source": "default",
+       "checks": [
+        {
+         "id": "python",
+         "status": "ok",
+         "message": "Python 3.12.10（C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe）",
+         "hint": null
+        },
+        {
+         "id": "data_dir",
+         "status": "ok",
+         "message": "数据目录可写：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension（来源：default）",
+         "hint": null
+        },
+        {
+         "id": "sqlite",
+         "status": "ok",
+         "message": "SQLite 可用（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "migrations",
+         "status": "ok",
+         "message": "数据库 schema 2（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "skill_files",
+         "status": "ok",
+         "message": "Skill 根目录：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension（快速检查）",
+         "hint": null
+        },
+        {
+         "id": "content",
+         "status": "warn",
+         "message": "内容版本 2026.10.0-dev1，还没有可开局的世界（快速检查：内容文件未变化）",
+         "hint": "等待世界包发布"
+        }
+       ],
+       "next_request_id": "r_bd993fec4df1"
+      },
+      "error": null
+     },
+     "ms": null,
+     "source": "host"
+    },
+    {
+     "argv": [
+      "load-slot",
+      "--json",
+      "--input-file",
+      "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpq3dz9zrv.json"
+     ],
+     "input": {
+      "request_id": "fake_load_B",
+      "name": "演练"
+     },
+     "exit": null,
+     "envelope": {
+      "ok": false,
+      "data": null,
+      "error": {
+       "code": "NOT_FOUND",
+       "message": "没有名为「演练」的存档",
+       "details": [
+        {
+         "path": "$.name",
+         "reason": "存档不存在",
+         "hint": "现有存档：（无）",
+         "code": "NOT_FOUND"
+        }
+       ],
+       "available": [],
+       "next_request_id": "r_1e494240b07a"
+      }
+     },
+     "ms": null,
+     "source": "host"
+    }
+   ],
+   "calls_source": "host",
+   "text": "",
+   "seconds": null,
+   "host_error": "fake host: load-slot refused: 没有名为「演练」的存档"
+  },
+  {
+   "index": 8,
+   "conversation": "B",
+   "input": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   },
+   "host_calls": [
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" doctor --json"
+     },
+     "output": "{\"ok\":true,\"data\":{\"status\":\"warn\",\"fast_path\":false,\"skill_version\":\"0.3.0\",\"content_version\":\"2026.10.0-dev1\",\"skill_root\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"data_dir\":\"C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension\",\"data_dir_source\":\"default\",\"checks\":[{\"id\":\"python\",\"status\":\"ok\",\"message\":\"Python 3.12.10（C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe）\",\"hint\":null},{\"id\":\"data_dir\",\"status\":\"ok\",\"message\":\"数据目录可写：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension（来源：default）\",\"hint\":null},{\"id\":\"sqlite\",\"status\":\"ok\",\"message\":\"SQLite 3.49.1\",\"hint\":null},{\"id\":\"migrations\",\"status\":\"ok\",\"message\":\"数据库已从 schema 2 迁移到 3（迁移前备份：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\localappdata\\\\adult-tension\\\\backups\\\\adult_tension-schema2-20260928T212221.db）\",\"hint\":null},{\"id\":\"skill_files\",\"status\":\"ok\",\"message\":\"Skill 根目录：C:\\\\Users\\\\daha\\\\AppData\\\\Local\\\\Temp\\\\at-stage7-drill-nfVSbo\\\\root\\\\fake-sdrill-r1-20260928-212220\\\\.claude\\\\skills\\\\adult-tension\",\"hint\":null},{\"id\":\"content\",\"status\":\"warn\",\"message\":\"内容版本 2026.10.0-dev1，还没有可开局的世界\",\"hint\":\"等待世界包发布\"}],\"next_request_id\":\"r_0cde62591a37\"},\"error\":null}"
+    },
+    {
+     "tool": "Write",
+     "input": {
+      "file_path": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpsxx3p7vb.json",
+      "content": "{\"request_id\": \"fake_new_B\", \"mode\": \"daily\", \"seed\": 7}"
+     },
+     "output": "File created successfully"
+    },
+    {
+     "tool": "Bash",
+     "input": {
+      "command": "\"C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py\" new-game --json --input-file \"C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpsxx3p7vb.json\""
+     },
+     "output": "{\"ok\":false,\"data\":null,\"error\":{\"code\":\"NO_MATCH\",\"message\":\"开局条件在现有世界中无法同时满足\",\"details\":[{\"path\":\"$.conditions\",\"reason\":\"排除之后没有可选的世界\",\"hint\":null,\"code\":\"NO_MATCH\"}],\"relax\":[],\"world_id\":null,\"next_request_id\":\"r_4a7449ec045e\"}}"
+    }
+   ],
+   "runtime_calls": [
+    {
+     "ts": "2026-09-28T21:22:21",
+     "ms": 122.9,
+     "pid": 11696,
+     "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+     "argv": [
+      "doctor",
+      "--json"
+     ],
+     "input": {},
+     "exit": 0,
+     "envelope": {
+      "ok": true,
+      "data": {
+       "status": "warn",
+       "fast_path": false,
+       "skill_version": "0.3.0",
+       "content_version": "2026.10.0-dev1",
+       "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+       "data_dir": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension",
+       "data_dir_source": "default",
+       "checks": [
+        {
+         "id": "python",
+         "status": "ok",
+         "message": "Python 3.12.10（C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe）",
+         "hint": null
+        },
+        {
+         "id": "data_dir",
+         "status": "ok",
+         "message": "数据目录可写：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension（来源：default）",
+         "hint": null
+        },
+        {
+         "id": "sqlite",
+         "status": "ok",
+         "message": "SQLite 3.49.1",
+         "hint": null
+        },
+        {
+         "id": "migrations",
+         "status": "ok",
+         "message": "数据库已从 schema 2 迁移到 3（迁移前备份：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\localappdata\\adult-tension\\backups\\adult_tension-schema2-20260928T212221.db）",
+         "hint": null
+        },
+        {
+         "id": "skill_files",
+         "status": "ok",
+         "message": "Skill 根目录：C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+         "hint": null
+        },
+        {
+         "id": "content",
+         "status": "warn",
+         "message": "内容版本 2026.10.0-dev1，还没有可开局的世界",
+         "hint": "等待世界包发布"
+        }
+       ],
+       "next_request_id": "r_0cde62591a37"
+      },
+      "error": null
+     }
+    },
+    {
+     "ts": "2026-09-28T21:22:22",
+     "ms": 105.6,
+     "pid": 35828,
+     "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+     "argv": [
+      "new-game",
+      "--json",
+      "--input-file",
+      "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\tmpsxx3p7vb.json"
+     ],
+     "input": {
+      "request_id": "fake_new_B",
+      "mode": "daily",
+      "seed": 7
+     },
+     "exit": 10,
+     "envelope": {
+      "ok": false,
+      "data": null,
+      "error": {
+       "code": "NO_MATCH",
+       "message": "开局条件在现有世界中无法同时满足",
+       "details": [
+        {
+         "path": "$.conditions",
+         "reason": "排除之后没有可选的世界",
+         "hint": null,
+         "code": "NO_MATCH"
+        }
+       ],
+       "relax": [],
+       "world_id": null,
+       "next_request_id": "r_4a7449ec045e"
+      }
+     }
+    }
+   ],
+   "calls_source": "trace",
+   "text": "",
+   "seconds": null,
+   "host_error": "fake host: new-game refused: 开局条件在现有世界中无法同时满足"
+  }
+ ],
+ "harness_events": [
+  {
+   "after_turn": 7,
+   "event": "upgrade_skill",
+   "detail": "替换为当前版本的 Skill 目录"
+  }
+ ],
+ "skill": {
+  "skill_root": "C:\\Users\\daha\\AppData\\Local\\Temp\\at-stage7-drill-nfVSbo\\root\\fake-sdrill-r1-20260928-212220\\.claude\\skills\\adult-tension",
+  "skill_version": "0.3.0",
+  "content_version": "2026.10.0-dev1"
+ }
+}

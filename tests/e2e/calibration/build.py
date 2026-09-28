@@ -93,7 +93,7 @@ class Build:
             {"argv": ["doctor"], "input": {}, "exit": 0, "envelope": {"ok": True, "data": {"status": "warn"}, "error": None}},
             {"argv": ["new-game"], "input": {"request_id": "r1", "mode": self.mode}, "exit": 0, "envelope": {"ok": True, "data": data, "error": None}},
         ]
-        self._add(say, {"kind": "opening", "calls_max": 2, "must_call": ["new-game"]}, calls, body.strip() + "\n\n" + self.footer(opening=True))
+        self._add(say, {"kind": "opening", "calls_max": 2, "must_call": ["doctor", "new-game"]}, calls, body.strip() + "\n\n" + self.footer(opening=True))
 
     def commit(self, say, mode, ops, body, minutes=5, rejected=None, footer=True, kind="turn"):
         calls = []

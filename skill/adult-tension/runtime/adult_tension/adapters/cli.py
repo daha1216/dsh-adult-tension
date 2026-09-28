@@ -4,9 +4,10 @@ stdout carries exactly one JSON envelope, written as UTF-8 bytes whatever the
 console code page is. Diagnostics go to the log file under the data dir.
 
 ADULT_TENSION_TRACE=<file> (set by an evaluation harness, never by a player)
-appends one JSON line per call: argv, parsed input, exit code, envelope and
-duration. End-to-end records read the tool calls from there, whatever the
-host's own transcript looks like.
+appends one JSON line per call: argv, parsed input, exit code, envelope,
+duration and the Skill root that ran. End-to-end records read the tool calls
+from there, whatever the host's own transcript looks like; a trace that
+cannot be written is reported on stderr.
 """
 
 import json
@@ -244,13 +245,16 @@ def execute(argv, skill_root, stdin=None, environ=None):
             ctx.close()
 
 
-def trace(path, argv, payload, code, text, started):
-    """Append one call to the evaluation trace. Never fails the command."""
+def trace(path, argv, payload, code, text, started, skill_root):
+    """Append one call to the evaluation trace. A trace that cannot be written
+    does not fail the command (its answer is already on stdout); it is reported
+    on stderr, so an evaluation sees the gap instead of counting fewer calls."""
     try:
         line = {
             "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "ms": round((time.perf_counter() - started) * 1000, 1),
             "pid": os.getpid(),
+            "skill_root": skill_root,
             "argv": list(argv),
             "input": payload,
             "exit": code,
@@ -258,8 +262,8 @@ def trace(path, argv, payload, code, text, started):
         }
         with open(path, "ab") as handle:
             handle.write((json.dumps(line, ensure_ascii=False) + "\n").encode("utf-8"))
-    except Exception:
-        pass
+    except (OSError, ValueError, TypeError) as exc:
+        sys.stderr.write("adult-tension: ADULT_TENSION_TRACE not written: %s\n" % exc)
 
 
 def run(argv, skill_root, stdin=None, stdout=None, environ=None):
@@ -269,5 +273,5 @@ def run(argv, skill_root, stdin=None, stdout=None, environ=None):
     stdout = stdout if stdout is not None else getattr(sys.stdout, "buffer", sys.stdout)
     write_text(stdout, text)
     if environ.get("ADULT_TENSION_TRACE"):
-        trace(environ["ADULT_TENSION_TRACE"], argv, payload, code, text, started)
+        trace(environ["ADULT_TENSION_TRACE"], argv, payload, code, text, started, skill_root)
     return code

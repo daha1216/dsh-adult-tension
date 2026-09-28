@@ -179,12 +179,43 @@ class MachineCheckTest(unittest.TestCase):
         grouped["turns"][1]["expect"].update(budget_group="first", group_max=2)
         self.assertIn(("structure", 2), names(M.check(grouped)))
 
+    def test_the_first_opening_of_a_conversation_runs_doctor_and_new_game(self):
+        rec = clean_record()
+        rec["turns"][0]["expect"].update(budget_group="first_opening:A", group_max=2, group_must_call=["doctor", "new-game"])
+        self.assertEqual(M.check(rec)["findings"], [])
+        rec["turns"][0]["runtime_calls"] = rec["turns"][0]["runtime_calls"][1:]
+        self.assertEqual(names(M.check(rec)), [("structure", 1)])
+
+    def test_calls_missing_from_the_trace_or_from_another_skill_fail_the_record(self):
+        rec = clean_record()
+        rec["project"] = os.path.join("D:\\", "projects", "at-e2e", "p")
+        installed = os.path.join(rec["project"], ".claude", "skills", "adult-tension")
+        for turn in rec["turns"]:
+            for call in turn["runtime_calls"]:
+                call["skill_root"] = installed
+        self.assertEqual(M.check(rec)["findings"], [])
+        missing = copy.deepcopy(rec)
+        bash = {"tool": "Bash", "input": {"command": "python %s/scripts/adult_tension.py commit-turn --json --input-file in.json" % installed}, "output": ""}
+        missing["turns"][2]["host_calls"] = [bash, bash]
+        self.assertEqual(names(M.check(missing)), [("record", 3)])
+        other = copy.deepcopy(rec)
+        other["turns"][1]["runtime_calls"][0]["skill_root"] = "C:\\Users\\x\\.claude\\skills\\adult-tension"
+        self.assertEqual(names(M.check(other)), [("record", 2)])
+
+    def test_a_turn_the_host_did_not_finish_or_left_empty_fails_the_record(self):
+        rec = clean_record()
+        rec["turns"][1]["host_error"] = "宿主没有返回会话：exit 1"
+        rec["turns"][2]["text"] = " \n"
+        result = M.check(rec)
+        self.assertEqual(names(result), [("record", 2), ("record", 3), ("footer", 3)])
+        self.assertTrue(M.summary_lines(result)[0].startswith("[record] 第 2 轮：宿主这一轮没有正常结束：宿主没有返回会话"))
+
     def test_a_record_without_host_identity_is_not_checked(self):
         rec = clean_record()
         rec["host"]["model"] = ""
         result = M.check(rec)
         self.assertFalse(result["pass"])
-        self.assertTrue(result["invalid_record"])
+        self.assertEqual(M.summary_lines(result), ["[记录格式] 宿主身份缺少 model（ACCEPTANCE §6.1 第 5 条）"])
 
 
 class CalibrationTest(unittest.TestCase):
@@ -279,6 +310,7 @@ class ParserTest(unittest.TestCase):
         self.assertEqual([c["tool"] for c in parsed["host_calls"]], ["skill", "bash", "bash"])
         self.assertIn("doctor --json", parsed["host_calls"][2]["input"]["command"])
         self.assertIn("环境已就绪", parsed["text"])
+        self.assertIsNone(parsed["error"])
 
     def test_claude_stream_json(self):
         events = [
@@ -292,6 +324,89 @@ class ParserTest(unittest.TestCase):
         parsed = H.parse_claude_stream(H._events(raw))
         self.assertEqual((parsed["session_id"], parsed["model"], parsed["text"]), ("abc", "claude-x", "环境没问题。"))
         self.assertEqual(parsed["host_calls"], [{"tool": "Bash", "input": {"command": "python x doctor --json"}, "output": "{\"ok\": true}"}])
+        self.assertIsNone(parsed["error"])
+
+    def test_errors_the_host_reports_are_kept(self):
+        def claude(result):
+            events = [{"type": "system", "subtype": "init", "session_id": "abc", "model": "claude-x"}, dict(result, type="result", session_id="abc")]
+            return H.parse_claude_stream(H._events("\n".join(json.dumps(e, ensure_ascii=False) for e in events).encode("utf-8")))
+
+        self.assertIn("error_max_turns", claude({"subtype": "error_max_turns", "is_error": True})["error"])
+        self.assertIn("API Error: 529", claude({"subtype": "success", "is_error": True, "result": "API Error: 529"})["error"])
+        self.assertIsNone(claude({"subtype": "success", "is_error": False, "result": "好。"})["error"])
+        parsed = H.parse_opencode_stream([{"type": "text", "sessionID": "ses_1", "part": {"text": "半句"}}, {"type": "error", "sessionID": "ses_1", "error": {"name": "APIError"}}])
+        self.assertEqual((parsed["session_id"], parsed["text"]), ("ses_1", "半句"))
+        self.assertIn("APIError", parsed["error"])
+
+
+class HostCallsTest(unittest.TestCase):
+    """Runtime calls rebuilt from the host's own tool calls (a Skill older than the trace)."""
+
+    RUNTIME = "python .claude/skills/adult-tension/scripts/adult_tension.py"
+
+    def bash(self, command, *envelopes, raw=None):
+        output = raw if raw is not None else "\n".join(json.dumps(e, ensure_ascii=False, indent=1) for e in envelopes)
+        return {"tool": "Bash", "input": {"command": command}, "output": output}
+
+    def test_claude_code_writes_the_input_file_then_runs_the_runtime(self):
+        payload = {"request_id": "req_00000001", "mode": "daily"}
+        answer = envelope({"session_id": "s_1"})
+        script = "D:\\p\\.claude\\skills\\adult-tension\\scripts\\adult_tension.py"
+        calls = R.calls_from_host([
+            {"tool": "Write", "input": {"file_path": "D:\\p\\tmp\\in.json", "content": json.dumps(payload, ensure_ascii=False)}, "output": "ok"},
+            self.bash('python "%s" new-game --json --input-file "D:\\p\\tmp\\in.json" 2>&1' % script, answer),
+        ])
+        self.assertEqual(calls, [{"argv": ["new-game", "--json", "--input-file", "D:\\p\\tmp\\in.json"], "input": payload, "exit": None, "envelope": answer, "ms": None, "source": "host"}])
+
+    def test_the_input_file_under_other_spellings_and_the_latest_write_wins(self):
+        calls = R.calls_from_host([
+            {"tool": "Write", "input": {"file_path": "D:\\p\\in.json", "content": json.dumps({"n": 1})}},
+            self.bash("python /d/p/.claude/skills/adult-tension/scripts/adult_tension.py commit-turn --json --input-file /d/p/in.json", envelope({})),
+            {"tool": "Write", "input": {"file_path": "D:\\p\\in.json", "content": json.dumps({"n": 2})}},
+            self.bash("%s commit-turn --json --input-file ./in.json" % self.RUNTIME, envelope({})),
+            {"tool": "Edit", "input": {"file_path": "D:\\p\\in.json", "old_string": "2", "new_string": "3"}},
+            self.bash("%s commit-turn --json --input-file=in.json" % self.RUNTIME, envelope({})),
+            self.bash("%s commit-turn --json --input-file missing.json" % self.RUNTIME, envelope({})),
+        ])
+        self.assertEqual([c["input"] for c in calls], [{"n": 1}, {"n": 2}, {"n": 3}, None])
+
+    def test_opencode_tool_names_and_keys(self):
+        runtime = "python D:/p/.claude/skills/adult-tension/scripts/adult_tension.py save-slot --json --input-file D:/p/in.json"
+        calls = R.calls_from_host([
+            {"tool": "write", "input": {"filePath": "D:/p/in.json", "content": json.dumps({"request_id": "req_00000002"})}, "output": "", "status": "completed"},
+            {"tool": "bash", "input": {"command": runtime, "description": "存档"}, "output": json.dumps(envelope({"receipt": "已保存"}), ensure_ascii=False), "status": "completed"},
+            {"tool": "edit", "input": {"filePath": "D:/p/in.json", "oldString": "req_00000002", "newString": "req_00000003"}, "output": "", "status": "completed"},
+            {"tool": "bash", "input": {"command": runtime}, "output": json.dumps(envelope({})), "status": "completed"},
+        ])
+        self.assertEqual([(R.command_of(c), c["input"]["request_id"]) for c in calls], [("save-slot", "req_00000002"), ("save-slot", "req_00000003")])
+        self.assertEqual(R.ok_data(calls[0]), {"receipt": "已保存"})
+
+    def test_heredocs_into_a_file_or_into_stdin(self):
+        body = json.dumps({"request_id": "req_00000004", "note": "adult_tension.py doctor"}, ensure_ascii=False)
+        calls = R.calls_from_host([
+            self.bash("cat > /tmp/a.json <<'EOF'\n%s\nEOF\n%s new-game --json --input-file /tmp/a.json" % (body, self.RUNTIME), envelope({"n": 1})),
+            self.bash("cat <<EOF > b.json\n%s\nEOF\n%s new-game --json --input-file b.json" % (body, self.RUNTIME), envelope({"n": 2})),
+            self.bash("%s commit-turn --json <<'JSON'\n%s\nJSON" % (self.RUNTIME, body), envelope({"n": 3})),
+        ])
+        # the runtime named inside a heredoc body is data, not a call
+        self.assertEqual([R.command_of(c) for c in calls], ["new-game", "new-game", "commit-turn"])
+        self.assertEqual([c["input"]["request_id"] for c in calls], ["req_00000004"] * 3)
+        self.assertEqual([R.ok_data(c)["n"] for c in calls], [1, 2, 3])
+
+    def test_chained_calls_other_commands_and_unreadable_output(self):
+        runtime = 'python "C:\\Users\\x\\skills\\adult-tension\\scripts\\adult_tension.py"'
+        first = envelope({"status": "ok"})
+        second = {"ok": False, "data": None, "error": {"code": "NOT_FOUND", "message": "没有这个存档", "details": []}}
+        calls = R.calls_from_host([
+            self.bash("ls -la", raw="total 0"),
+            self.bash("%s doctor --json && %s list-slots --json" % (runtime, runtime), raw="warning: x\n" + json.dumps(first, indent=1) + "\n" + json.dumps(second, ensure_ascii=False)),
+            self.bash("%s status --json 2>&1" % runtime, raw="Traceback (most recent call last): {broken"),
+        ])
+        self.assertEqual([c["argv"] for c in calls], [["doctor", "--json"], ["list-slots", "--json"], ["status", "--json"]])
+        self.assertEqual([c["envelope"] for c in calls], [first, second, None])
+        self.assertEqual(R.error_code(calls[1]), "NOT_FOUND")
+        record = {"script": "x", "run": 1, "turns": [{"index": 1, "input": "状态", "runtime_calls": calls[2:], "text": ""}]}
+        self.assertIn("宿主的记录里没有可解析的返回", R.to_markdown(record))
 
 
 class RunnerTest(unittest.TestCase):
@@ -302,8 +417,9 @@ class RunnerTest(unittest.TestCase):
 
     def test_every_script_is_player_voice_with_valid_annotations(self):
         banned = ["result", "attempt", "commit", "npc_", "字段", "档位", "revision", "请注意"]
-        for name in sorted(os.listdir(run_script.SCRIPTS)):
-            script = run_script.load_script(os.path.join(run_script.SCRIPTS, name))
+        paths = [os.path.join(run_script.SCRIPTS, n) for n in os.listdir(run_script.SCRIPTS)] + [os.path.join(run_script.DRILLS, n) for n in os.listdir(run_script.DRILLS)]
+        for name in sorted(paths):
+            script = run_script.load_script(name)
             says = [s["say"] for s in script["steps"] if "say" in s]
             self.assertEqual(len(says), script["player_turns"], name)
             for say in says:
@@ -312,6 +428,38 @@ class RunnerTest(unittest.TestCase):
                 self.assertTrue("say" in step or step.get("harness") == "upgrade_skill", (name, step))
         self.assertEqual(len(os.listdir(run_script.SCRIPTS)), 16)
 
+    def test_the_release_drill_follows_skill_packaging_9(self):
+        script = run_script.load_script(os.path.join(run_script.DRILLS, "release-drill.json"))
+        self.assertEqual(script["setup"], {"install": "previous", "data_dir": "default", "include_drafts": False})
+        steps = script["steps"]
+        says = [s for s in steps if "say" in s]
+        self.assertEqual(len(says), script["player_turns"])
+        upgrade = steps.index({"harness": "upgrade_skill"})
+        before, after = [s for s in steps[:upgrade] if "say" in s], [s for s in steps[upgrade + 1 :] if "say" in s]
+        # a new conversation, "开一局", 3 turns with one "继续", a save; a new conversation loads it
+        self.assertEqual(before[0]["say"], "开一局")
+        turns = [s for s in before if s["expect"]["kind"] == "turn"]
+        self.assertEqual(len(turns), 3)
+        self.assertIn("继续", [s["say"] for s in turns])
+        self.assertIn("save-slot", before[-2]["expect"]["must_call"])
+        self.assertEqual((before[-1]["conversation"], before[-1]["expect"]["must_call"]), ("B", ["load-slot"]))
+        # after the upgrade, one more turn in that conversation
+        self.assertEqual([(s["conversation"], s["expect"]["kind"]) for s in after], [("B", "turn")])
+
+    def test_host_environment_follows_the_script_setup(self):
+        base = {"PATH": "x", "ADULT_TENSION_HOME": "D:\\elsewhere", "ADULT_TENSION_INCLUDE_DRAFTS": "1"}
+        project = os.path.join("D:\\", "projects", "at-e2e", "p")
+        env = run_script.host_env({}, project, base)
+        self.assertEqual(
+            (env["ADULT_TENSION_HOME"], env["ADULT_TENSION_INCLUDE_DRAFTS"], env["ADULT_TENSION_TRACE"], env["PATH"]),
+            (os.path.join(project, ".at-data"), "1", os.path.join(project, "trace.jsonl"), "x"),
+        )
+        drill = run_script.host_env({"data_dir": "default", "include_drafts": False}, project, base)
+        self.assertNotIn("ADULT_TENSION_HOME", drill)
+        self.assertNotIn("ADULT_TENSION_INCLUDE_DRAFTS", drill)
+        self.assertEqual(drill["ADULT_TENSION_TRACE"], os.path.join(project, "trace.jsonl"))
+        self.assertEqual(base["ADULT_TENSION_HOME"], "D:\\elsewhere")
+
     def test_a_fake_host_run_records_calls_state_and_identity(self):
         temp = tempfile.mkdtemp(prefix="at-e2e-")
         self.addCleanup(shutil.rmtree, temp, True)
@@ -319,11 +467,65 @@ class RunnerTest(unittest.TestCase):
         path, rec = run_script.run(script, "fake", 1, None, os.path.join(temp, "projects"), os.path.join(temp, "records"))
         self.assertEqual(R.validate(rec), [])
         self.assertEqual([len(t["runtime_calls"]) for t in rec["turns"]], [2, 1, 1, 1, 1, 1])
+        self.assertEqual({t["calls_source"] for t in rec["turns"]}, {"trace"})
+        for turn in rec["turns"]:
+            # what the host's own record shows is what the engine traced
+            shown = [(c["argv"][0], c["input"], c["envelope"]) for c in R.calls_from_host(turn["host_calls"])]
+            traced = [(c["argv"][0], c["input"] or None, c["envelope"]) for c in turn["runtime_calls"]]
+            self.assertEqual(shown, traced)
+        self.assertEqual(M.check_record(rec), [])
         self.assertEqual(rec["final_export"]["format"], "adult-tension-save")
         self.assertTrue(rec["skill"]["skill_root"].startswith(os.path.join(temp, "projects")))
         self.assertTrue(os.path.isfile(path))
         markdown = R.to_markdown(rec)
         self.assertIn("工具调用：new-game", markdown)
+
+    def test_a_turn_the_host_did_not_finish_keeps_the_calls_it_made(self):
+        temp = tempfile.mkdtemp(prefix="at-e2e-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        script = {"id": "err", "player_turns": 1, "steps": [{"say": "读档 没有这个存档"}]}
+        _path, rec = run_script.run(script, "fake", 1, None, os.path.join(temp, "projects"), os.path.join(temp, "records"))
+        self.assertEqual(R.validate(rec), [])
+        turn = rec["turns"][0]
+        self.assertIn("load-slot", turn["host_error"])
+        self.assertEqual([R.command_of(c) for c in R.calls_from_host(turn["host_calls"])], ["doctor", "load-slot"])
+        self.assertEqual([R.command_of(c) for c in turn["runtime_calls"]], ["doctor", "load-slot"])
+        self.assertIsNotNone(R.error_code(turn["runtime_calls"][1]))
+        self.assertEqual([(f["check"], f["turn"]) for f in M.check_record(rec)], [("record", 1)])
+
+    def test_an_older_skill_without_the_trace_is_recorded_from_host_calls_and_upgraded(self):
+        import adult_tension
+
+        temp = tempfile.mkdtemp(prefix="at-e2e-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        script = {
+            "id": "up", "setup": {"install": "previous"}, "player_turns": 5,
+            "steps": [
+                {"say": "开一局，日常"}, {"say": "继续"}, {"say": "存档 升级前"},
+                {"harness": "upgrade_skill"},
+                {"say": "读档 升级前", "conversation": "B"}, {"say": "继续", "conversation": "B"},
+            ],
+        }
+        # the stage 3 Skill: database schema 2, no engine trace
+        _path, rec = run_script.run(script, "fake", 1, None, os.path.join(temp, "projects"), os.path.join(temp, "records"), previous="2aa58c8")
+        self.assertEqual([(i["skill_version"], i["db_schema"], i["trace"], i["after_turn"]) for i in rec["installs"]], [
+            ("0.2.0", 2, False, 0),
+            (adult_tension.SKILL_VERSION, adult_tension.DB_SCHEMA_VERSION, True, 3),
+        ])
+        self.assertEqual([t["calls_source"] for t in rec["turns"]], ["host", "host", "host", "trace", "trace"])
+        self.assertEqual([[R.command_of(c) for c in t["runtime_calls"]] for t in rec["turns"]], [
+            ["doctor", "new-game"], ["commit-turn"], ["save-slot"], ["doctor", "load-slot"], ["commit-turn"],
+        ])
+        self.assertTrue(all(R.ok_data(c) is not None for t in rec["turns"] for c in t["runtime_calls"]))
+        self.assertEqual(rec["turns"][1]["runtime_calls"][0]["input"]["player_input"], "继续")
+        saved = R.ok_data(rec["turns"][2]["runtime_calls"][0])["turn"]
+        self.assertEqual(R.ok_data(rec["turns"][4]["runtime_calls"][0])["turn"], saved + 1)
+        # the upgrade migrated the database and kept a copy of the old one
+        backups = os.listdir(os.path.join(rec["project"], ".at-data", "backups"))
+        self.assertEqual([b.startswith("adult_tension-schema2-") for b in backups], [True])
+        self.assertEqual(rec["skill"]["skill_version"], adult_tension.SKILL_VERSION)
+        self.assertEqual(M.check_structure(rec)[0], [])
+        self.assertEqual(M.check_record(rec), [])
 
 
 if __name__ == "__main__":

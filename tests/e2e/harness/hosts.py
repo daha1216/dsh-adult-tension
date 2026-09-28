@@ -19,7 +19,12 @@ import time
 
 
 class HostError(Exception):
-    pass
+    """The host did not finish a turn. `host_calls`: the tool calls it had
+    made before that, when they are known."""
+
+    def __init__(self, message, host_calls=None):
+        Exception.__init__(self, message)
+        self.host_calls = host_calls or []
 
 
 def _which(name):
@@ -46,8 +51,10 @@ def _events(stdout_bytes):
 
 
 def parse_claude_stream(events):
-    """stream-json events -> {session_id, model, text, host_calls, cost}."""
-    session_id = model = None
+    """stream-json events -> {session_id, model, text, host_calls, cost, error}.
+    `error`: the host's own result says the turn failed (is_error, or a
+    subtype other than success, such as error_max_turns)."""
+    session_id = model = error = None
     texts = []
     calls = {}
     order = []
@@ -77,8 +84,10 @@ def parse_claude_stream(events):
         elif kind == "result":
             result_text = event.get("result")
             cost = event.get("total_cost_usd")
+            if event.get("is_error") or event.get("subtype", "success") != "success":
+                error = "宿主报告这一轮出错（%s）：%s" % (event.get("subtype"), (result_text or "")[:300])
     text = "\n\n".join(texts) if texts else (result_text or "")
-    return {"session_id": session_id, "model": model, "text": text, "host_calls": [calls[i] for i in order], "cost": cost}
+    return {"session_id": session_id, "model": model, "text": text, "host_calls": [calls[i] for i in order], "cost": cost, "error": error}
 
 
 class ClaudeCode:
@@ -107,7 +116,9 @@ class ClaudeCode:
         events = _events(proc.stdout)
         parsed = parse_claude_stream(events)
         if not parsed["session_id"]:
-            raise HostError("宿主没有返回会话：exit %d，%s" % (proc.returncode, proc.stderr.decode("utf-8", errors="replace")[:500]))
+            raise HostError("宿主没有返回会话：exit %d，%s" % (proc.returncode, proc.stderr.decode("utf-8", errors="replace")[:500]), parsed["host_calls"])
+        if proc.returncode and not parsed["error"]:
+            parsed["error"] = "宿主退出码 %d：%s" % (proc.returncode, proc.stderr.decode("utf-8", errors="replace")[:300])
         self.sessions[conversation] = parsed["session_id"]
         parsed["seconds"] = round(time.perf_counter() - started, 1)
         parsed["events"] = events
@@ -118,8 +129,10 @@ class ClaudeCode:
 
 
 def parse_opencode_stream(events):
-    """JSON events -> {session_id, text, host_calls}."""
-    session_id = None
+    """JSON events -> {session_id, text, host_calls, error}. The stage 0
+    transcript has no error event to copy; any event of type "error" counts,
+    and the caller checks the exit code as well."""
+    session_id = error = None
     texts = []
     calls = []
     for event in events:
@@ -130,7 +143,9 @@ def parse_opencode_stream(events):
         elif event.get("type") == "tool_use":
             state = part.get("state") or {}
             calls.append({"tool": part.get("tool"), "input": state.get("input"), "output": state.get("output"), "status": state.get("status")})
-    return {"session_id": session_id, "model": None, "text": "\n\n".join(texts), "host_calls": calls, "cost": None}
+        elif event.get("type") == "error":
+            error = "宿主报告这一轮出错：%s" % json.dumps(event.get("error", event), ensure_ascii=False)[:300]
+    return {"session_id": session_id, "model": None, "text": "\n\n".join(texts), "host_calls": calls, "cost": None, "error": error}
 
 
 class OpenCode:
@@ -160,7 +175,9 @@ class OpenCode:
         events = _events(proc.stdout)
         parsed = parse_opencode_stream(events)
         if not parsed["session_id"]:
-            raise HostError("宿主没有返回会话：exit %d，%s" % (proc.returncode, proc.stderr.decode("utf-8", errors="replace")[:500]))
+            raise HostError("宿主没有返回会话：exit %d，%s" % (proc.returncode, proc.stderr.decode("utf-8", errors="replace")[:500]), parsed["host_calls"])
+        if proc.returncode and not parsed["error"]:
+            parsed["error"] = "宿主退出码 %d：%s" % (proc.returncode, proc.stderr.decode("utf-8", errors="replace")[:300])
         self.sessions[conversation] = parsed["session_id"]
         parsed["model"] = self.model
         parsed["seconds"] = round(time.perf_counter() - started, 1)

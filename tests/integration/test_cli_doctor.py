@@ -3,11 +3,13 @@
 import json
 import os
 import sqlite3
+import subprocess
+import sys
 import unittest
 
 import _bootstrap  # noqa: F401
 from adult_tension import DB_SCHEMA_VERSION
-from helpers.cli import SKILL_ROOT, clean_env, run_cli
+from helpers.cli import ENTRY, SKILL_ROOT, clean_env, run_cli
 from helpers.fs import copy_skill, temp_dir, unwritable_dir
 
 
@@ -229,6 +231,17 @@ class CliSurfaceTest(unittest.TestCase):
             self.assertEqual(lines[0]["envelope"], json.loads(raw.decode("utf-8")))
             self.assertEqual((lines[1]["exit"], lines[1]["envelope"]["error"]["code"]), (10, failed["error"]["code"]))
             self.assertTrue(all(line["ms"] >= 0 for line in lines))
+            self.assertEqual({os.path.normcase(os.path.normpath(line["skill_root"])) for line in lines}, {os.path.normcase(os.path.normpath(SKILL_ROOT))})
+
+    def test_a_trace_that_cannot_be_written_is_reported_and_the_answer_stands(self):
+        with temp_dir() as tmp:
+            data_dir = os.path.join(tmp, "data")
+            env = clean_env(ADULT_TENSION_TRACE=os.path.join(tmp, "missing", "trace.jsonl"))
+            argv = [sys.executable, ENTRY, "doctor", "--json", "--data-dir", data_dir]
+            proc = subprocess.run(argv, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env, timeout=60)
+            self.assertEqual(proc.returncode, 0)
+            self.assertTrue(json.loads(proc.stdout.decode("utf-8"))["ok"])
+            self.assertIn("ADULT_TENSION_TRACE not written", proc.stderr.decode("utf-8"))
 
 
 if __name__ == "__main__":
