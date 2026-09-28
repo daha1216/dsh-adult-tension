@@ -12,9 +12,10 @@ The endpoint file (kept outside the repository) has KEY=VALUE lines:
 REVIEW_BASE_URL (".../v1"), REVIEW_API_KEY and REVIEW_MODEL.
 
 The answer must be the JSON object reviewer.md asks for. An answer that is
-not (no JSON, a dimension missing, a score out of range) is asked again, at
-most 3 attempts in all; every raw answer is kept in the output. Scores are
-taken as the reviewer gave them.
+not (no JSON, a dimension missing, a score out of range) goes back to the
+reviewer with what is wrong in its form, asking for the same review in the
+required form; at most 3 attempts in all; every raw answer is kept in the
+output. Scores are taken as the reviewer gave them.
 """
 
 import argparse
@@ -56,6 +57,25 @@ def parse_answer(text):
     return None
 
 
+def json_error(text):
+    """Where the answer stops being JSON, for the reviewer to fix."""
+    text = text or ""
+    start, end = text.find("{"), text.rfind("}")
+    if start == -1 or end <= start:
+        return "回答里没有 JSON 对象"
+    try:
+        json.loads(text[start : end + 1])
+    except ValueError as err:
+        return "JSON 在第 %d 行第 %d 列出错（%s）" % (err.lineno, err.colno, err.msg)
+    return None
+
+
+FORMAT_AGAIN = (
+    "上面的回答不能用：%s。请把同一份评审原样改成评审说明要求的 JSON 对象，分数和证据都不要改；"
+    "字符串里引用原文时用「」，或者把英文双引号写成 \\\"。只输出这个 JSON 对象。"
+)
+
+
 def problems_of(review):
     """What makes an answer unusable: the shape reviewer.md asks for."""
     if not isinstance(review, dict):
@@ -82,8 +102,9 @@ def problems_of(review):
     return out
 
 
-def ask(endpoint, text, timeout=900):
-    body = {"model": endpoint["REVIEW_MODEL"], "messages": [{"role": "user", "content": text}]}
+def ask(endpoint, messages, timeout=900, max_tokens=16000):
+    # room for a thinking model's reasoning and the whole JSON answer
+    body = {"model": endpoint["REVIEW_MODEL"], "max_tokens": max_tokens, "messages": messages}
     req = urllib.request.Request(
         endpoint["REVIEW_BASE_URL"].rstrip("/") + "/chat/completions",
         data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
@@ -97,11 +118,12 @@ def ask(endpoint, text, timeout=900):
 
 def review(record_path, endpoint, send=ask, wait=60):
     text = report.packet(record_path)
+    messages = [{"role": "user", "content": text}]
     attempts = []
     result = None
     for _ in range(ATTEMPTS):
         try:
-            answer, served = send(endpoint, text)
+            answer, served = send(endpoint, messages)
         except urllib.error.HTTPError as err:
             attempts.append({"error": "HTTP %d" % err.code, "retry_after": err.headers.get("Retry-After")})
             time.sleep(min(int(err.headers.get("Retry-After") or wait), 600))
@@ -112,6 +134,9 @@ def review(record_path, endpoint, send=ask, wait=60):
         if not found:
             result = parsed
             break
+        # only the form goes back: the answer that failed and what is wrong with it
+        wrong = [json_error(answer)] if parsed is None else found
+        messages = messages[:1] + [{"role": "assistant", "content": answer}, {"role": "user", "content": FORMAT_AGAIN % "；".join(wrong)}]
     out = dict(result or {"scores": None, "severe": None})
     out["reviewer"] = {
         "model": endpoint["REVIEW_MODEL"],

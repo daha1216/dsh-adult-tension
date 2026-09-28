@@ -7,7 +7,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 面向成年人的中文互动叙事。你负责理解玩家和写正文；本地运行时负责状态、时间、随机和校验。你提交**操作**，不提交状态。运行时的返回是唯一的事实来源。
 
-不要向玩家暴露：命令名、字段名、数值、revision、错误码、工具调用过程。
+不要向玩家暴露：命令名、字段名、数值、revision、错误码、工具调用过程（也不写“读取存档”“提交回合”这类操作说明）。
 
 ## 最高规则（冲突时从上到下）
 

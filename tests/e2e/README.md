@@ -91,7 +91,7 @@ python tests/e2e/harness/run_script.py --host claude-code --script 16 --run 1 --
 它和评测剧本的区别在 `setup` 里：
 
 - `"data_dir": "default"`：不设 `ADULT_TENSION_HOME`，数据目录由运行时按平台默认位置决定——和真实用户一样，用户不做任何环境变量操作；
-- `"include_drafts": false`：不开草稿开关，只有 `released` 的世界能开局。所以演练要等六个世界都转为 `released`（`PROGRESS.md` P4）之后才能通过；在那之前跑，第一步开局就会被拒；
+- `"include_drafts": false`：不开草稿开关，只有 `released` 的世界能开局。旧版 `2aa58c8` 的内容里没有 `released` 的世界，所以照这个设置，升级前的那一段永远开不了局：§9 在首个发布版之前做不到原样执行，怎么做见 `PROGRESS.md` 待决事项 P7；
 - 唯一由测试框架设置的变量是引擎记录 `ADULT_TENSION_TRACE`，它只负责记录，不改变任何行为。
 
 在干净的机器上跑（Windows 与 Linux 各一次；干净指：没有旧的数据目录、没有 `ADULT_TENSION_*` 变量、宿主的用户级目录里没有同名 Skill）：

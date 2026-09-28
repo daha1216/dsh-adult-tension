@@ -28,6 +28,7 @@
 | P4 | 真实宿主试玩与六个世界的 `released`：阶段 1 的试玩（开局 + 10 回合 + 存档 + 新对话读档）；阶段 5 每个世界每种模式 ≥ 5 个种子的试玩记录（`ACCEPTANCE.md` §3、§6 的记录格式） | **用户：执行**。按 `CONTENT_BIBLE.md` §7，没有真实 Skill 试玩记录的世界不能改为 `released` | 执行中。宿主测试环境用 `ADULT_TENSION_INCLUDE_DRAFTS=1` 让 `review` 世界可开局（开发开关，不写进 `SKILL.md`） |
 | P5 | 阶段 6 的正式端到端评测 | **用户：执行**。§6.1 要求至少两个宿主 | 先在 OpenCode 上跑；第二个宿主见 P6 |
 | P6 | 第二个宿主（§6.1 第 4 条：至少 2 个宿主，每条剧本每个宿主 ≥ 3 次） | Claude Code 经本地接口不可用（见 P1）；它的用户级设置指向另一个 API，用它就是动用用户自己的账号与额度；dsh、WorkBuddy、Gemini、ZCode 装着旧版 Skill，按 `ENVIRONMENT.md` 要先问 | **待用户决定**：A 让 Claude Code 用它自己的用户级设置（用户的 API 与额度）；B 用户放开本地接口对 Claude Code 请求的限制；C 指定别的宿主；D 只用一个宿主，报告如实写“§6.1 第 4 条未满足” |
+| P7 | **规范做不到**：`SKILL_PACKAGING.md` §9 的发布演练 | 第 6 步要求升级“至少包含一次 schema 迁移”，§9 又要求用户不做任何环境变量操作。首个发布版之前没有“带可开局世界的旧版”：更旧的数据库格式只有阶段 3 的 `2aa58c8`（格式 2），它的内容里只有一个 `review` 世界，不开开发开关就开不了局。阶段 7 写的演练剧本正是这样起步的，照原样永远过不了第一步（`tests/e2e/README.md` 原来说“世界转为 released 之后就能通过”，是错的，已改）。另外本机的默认数据目录 `%LOCALAPPDATA%\adult-tension` 里有开发时留下的数据，不是干净环境 | **待用户决定**。建议：演练分两段记录。(1) 发布候选版从零开始，不设任何环境变量：开局、3 回合（含“继续”）、存档、新对话读档、再 1 回合；(2) 升级段：旧版 `2aa58c8` 由测试框架打开开发开关，开局、推进、存档（相当于“上一个发布版里这个世界已发布”），然后整目录换成发布候选版并去掉开关，新对话读档（格式 2 → 3 迁移、迁移前自动备份），再推进 1 回合。跑之前把默认数据目录改名暂存，跑完恢复。Linux 这一次按 P2 不做 |
 
 ## 阶段记录
 
@@ -628,6 +629,7 @@
   - 模型：本地接口作为 OpenAI 兼容的 provider（`local-proxy`），写在仓库之外的配置文件里，由宿主环境文件（`--host-env-file`）的 `OPENCODE_CONFIG` 指定；接口地址与密钥从环境变量代入，记录的 `host_env` 只显示密钥“已设置”。会话标题用 `gemini-3.1-flash-lite`（`small_model`），不占主模型的额度。
   - Claude Code 的驱动保留：Claude 桌面版自带的 CLI（`--host-exe`）；`--setting-sources project,local --strict-mcp-config`（用户级设置把接口指向另一个 API，不能让它进来）；权限写在命令行（没被交互信任过的工作区里，项目设置的权限规则不生效）；由 Claude Code 会话启动时，去掉调用方自己的 `CLAUDE*`、`ANTHROPIC_*` 变量。经本地接口时所有请求被上游拒绝：频率、体积、流式、思考、`cache_control`、工具定义都已排除，原因未查明（P1）。
 - **评审**（`tests/e2e/harness/review.py`）：独立的模型实例，一次请求只含评审材料包（`reviewer.md`、`rubric.md`、`NARRATIVE_RULES.md`、记录），不带工具，经 OpenAI 兼容接口发送。答案不是要求的 JSON 时重问，最多 3 次，每次的原始答案都保留；三次都不合格的评审记为不可用：校准时算判错，报告里算“没有可用评审”，报告因此不能通过。
+  评审模型在看到任何评审结果之前选定：本地接口上的 `claude-opus-4-6-thinking`，能用的里面最强，且与宿主模型（gemini）不同家族；校准与正式评审用同一个模型。只有接口不可用时才换 `claude-sonnet-4-6`，不按分数换模型。
 - **开局取世界 ID**：`SKILL.md` 开局第 3 步让模型从 `references/worlds.md` 取世界 ID，不调 `list-worlds`（§5：本对话第一次开局只有 `doctor` + `new-game` 两次）。`SKILL_TEMPLATE.md` 这里写“需要时调用 `list-worlds`”，模板同时要求“按实际命令、字段与路径校正”；“世界列表”这句话仍然调 `list-worlds`。
 - **发布演练的环境**：剧本的 `setup` 可以写 `"data_dir": "default"`（不设数据目录变量，运行时按平台默认位置）与 `"include_drafts": false`（不开草稿开关）；测试框架只设引擎记录变量，它只负责记录、不改变任何行为。宿主环境里原有的 `ADULT_TENSION_HOME`、`ADULT_TENSION_INCLUDE_DRAFTS` 一律先清掉。
 

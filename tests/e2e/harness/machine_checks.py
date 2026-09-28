@@ -42,7 +42,9 @@ HINT_RE = re.compile(r"^可以：")
 NUMBER_LEAK_RE = re.compile(r"(信任|张力|好感度?|欲望值?|自制力?|亲密度|关系值|revision)\s*[:：]?\s*[+\-−]?\s*\d")
 TIER_WORDS = ("结果档", "尝试档", "改写档", "继续档", "等待档")
 # Engine vocabulary in Chinese: response labels and mechanism phrases.
-MECHANISM_WORDS = ("有限配合", "表面配合", "真诚配合", "系统判定", "回合推进", "回合结算", "离屏推演", "引擎判定")
+MECHANISM_WORDS = ("有限配合", "表面配合", "真诚配合", "系统判定", "回合推进", "回合结算", "离屏推演", "引擎判定",
+                   # the host telling the player what it does with the runtime (NARRATIVE_RULES: no tool calls in the text)
+                   "会话状态", "载入会话", "提交回合", "回合行动", "工具调用", "调用工具", "调用运行时")
 ENGINE_WORDS = ("revision", "request_id", "session_id", "expected_revision", "next_request_id", "known_by", "believed_by", "dedupe_key", "action_mode", "desire_level", "self_control")
 SNAKE_RE = re.compile(r"\b[a-z]+(?:_[a-z]+)+\b")
 QUOTE_RE = re.compile(r"“([^”]{2,})”")

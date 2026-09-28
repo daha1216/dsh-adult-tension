@@ -98,6 +98,10 @@ class MachineCheckTest(unittest.TestCase):
         self.assertTrue(any("npc_response" in m for m in found))
         self.assertTrue(any("revision" in m for m in found))
         self.assertTrue(any("STALE_REVISION" in m for m in found))
+        # the host telling the player what it does with the runtime
+        rec = clean_record()
+        rec["turns"][2]["text"] = "提交回合行动并推进时间与状态。\n\n对方没有马上回答。\n\n" + footer(3, 1210)
+        self.assertIn(("leakage", 3), names(M.check(rec)))
         receipt = clean_record()
         receipt["turns"].append({"index": 4, "conversation": "A", "input": "存档", "expect": {"kind": "meta", "calls_max": 1},
                                  "host_calls": [], "runtime_calls": [{"argv": ["save-slot"], "input": {}, "exit": 0, "envelope": envelope({"receipt": "已保存到「夜班」·第 3 回合"})}],
@@ -329,20 +333,29 @@ class ReviewTest(unittest.TestCase):
     def test_only_the_packet_is_sent_and_only_the_format_is_asked_again(self):
         path = os.path.join(_bootstrap.E2E_DIR, "calibration", "good-1.json")
         sent = []
-        answers = ["好的，我来看看。", "```json\n%s\n```" % json.dumps(self.answer(**{"表达": 2}), ensure_ascii=False)]
+        # quoting the player with plain double quotes breaks the JSON
+        broken = '{"scores": {"玩家主权": {"score": 5, "evidence": ["第 3 轮：玩家说"我说：好"——兑现"]}}}'
+        answers = [broken, "```json\n%s\n```" % json.dumps(self.answer(**{"表达": 2}), ensure_ascii=False)]
 
-        def send(endpoint, text):
-            sent.append(text)
+        def send(endpoint, messages):
+            sent.append([dict(m) for m in messages])
             return answers[len(sent) - 1], "served-x"
 
         out = review.review(path, {"REVIEW_MODEL": "m"}, send=send)
-        self.assertEqual(sent, [report.packet(path)] * 2)
+        self.assertEqual(sent[0], [{"role": "user", "content": report.packet(path)}])
+        # asked again with nothing new but the failed answer and where its form is wrong
+        self.assertEqual(sent[1][:2], [{"role": "user", "content": report.packet(path)}, {"role": "assistant", "content": broken}])
+        again = sent[1][2]["content"]
+        self.assertEqual(sent[1][2]["role"], "user")
+        self.assertIn("第 1 行第", again)
+        self.assertIn("分数和证据都不要改", again)
         # the scores are the reviewer's, as given
         self.assertEqual(out["scores"]["表达"]["score"], 2)
         self.assertEqual([a["problems"] == [] for a in out["reviewer"]["attempts"]], [False, True])
         self.assertTrue(out["reviewer"]["usable"])
-        never = review.review(path, {"REVIEW_MODEL": "m"}, send=lambda endpoint, text: ("没有 JSON", None))
+        never = review.review(path, {"REVIEW_MODEL": "m"}, send=lambda endpoint, messages: ("没有 JSON", None))
         self.assertEqual((never["scores"], never["reviewer"]["usable"], len(never["reviewer"]["attempts"])), (None, False, 3))
+        self.assertEqual(review.json_error("没有 JSON"), "回答里没有 JSON 对象")
 
     def test_the_review_packet_holds_only_rules_rubric_and_record(self):
         path = os.path.join(_bootstrap.E2E_DIR, "calibration", "good-1.json")

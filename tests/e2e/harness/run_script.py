@@ -28,6 +28,7 @@ machine), and "include_drafts": false plays only released worlds.
 import argparse
 import datetime
 import glob
+import hashlib
 import json
 import os
 import re
@@ -135,7 +136,37 @@ def skill_files(project):
         traced = "ADULT_TENSION_TRACE" in handle.read()
     version = re.search(r"^SKILL_VERSION = \"([^\"]+)\"", init, re.M)
     schema = re.search(r"^DB_SCHEMA_VERSION = (\d+)", init, re.M)
-    return {"skill_version": version and version.group(1), "db_schema": schema and int(schema.group(1)), "trace": traced}
+    return {"skill_version": version and version.group(1), "db_schema": schema and int(schema.group(1)), "trace": traced, "digest": tree_digest(os.path.join(project, SKILL_REL))}
+
+
+def tree_digest(root):
+    """sha256 over every file of an installed Skill (relative path and bytes):
+    two runs with the same digest ran the same Skill, whatever its version says."""
+    digest = hashlib.sha256()
+    for folder, dirs, files in os.walk(root):
+        dirs.sort()
+        for name in sorted(files):
+            path = os.path.join(folder, name)
+            digest.update(os.path.relpath(path, root).replace(os.sep, "/").encode("utf-8") + b"\0")
+            with open(path, "rb") as handle:
+                digest.update(handle.read())
+            digest.update(b"\0")
+    return digest.hexdigest()[:16]
+
+
+def install_record(project, source, after_turn):
+    out = dict(skill_files(project), after_turn=after_turn, source=source)
+    if not source.startswith("git:"):
+        out["repository"] = source_state()
+    return out
+
+
+def source_state():
+    """The repository commit the current Skill was installed from, and whether
+    the Skill directory had changes not yet committed."""
+    head = subprocess.run(["git", "-C", REPO, "rev-parse", "--short", "HEAD"], stdout=subprocess.PIPE, check=True).stdout.decode().strip()
+    dirty = subprocess.run(["git", "-C", REPO, "status", "--porcelain", "--", "skill/adult-tension"], stdout=subprocess.PIPE, check=True).stdout.strip()
+    return {"commit": head, "uncommitted_changes": bool(dirty)}
 
 
 def _from_calling_session(name, base):
@@ -336,7 +367,7 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
     if setup.get("install") == "previous" and not previous:
         raise SystemExit("剧本 %s 从旧版 Skill 开始：请用 --previous <git commit> 指定旧版" % script["id"])
     installed = install_skill(project, previous if setup.get("install") == "previous" else None)
-    installs = [dict(skill_files(project), after_turn=0, source=installed)]
+    installs = [install_record(project, installed, 0)]
     if host_name != "fake":
         H.project_config(host_name, project)
     env = host_env(setup, project, os.environ, extra_env)
@@ -364,7 +395,7 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
         if "harness" in step:
             if step["harness"] == "upgrade_skill":
                 source = install_skill(project, None, replace=True)
-                installs.append(dict(skill_files(project), after_turn=index, source=source))
+                installs.append(install_record(project, source, index))
                 rec["harness_events"].append({"after_turn": index, "event": "upgrade_skill", "detail": "替换为当前版本的 Skill 目录"})
             continue
         index += 1
