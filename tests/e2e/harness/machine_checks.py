@@ -101,6 +101,9 @@ TIME_WORDS = {
 #   傍晚的风灌进来"), or is marked as now;
 # - dialogue: only when marked as now ("都凌晨了", "这大半夜的", "现在是傍晚");
 #   people speak of schedules and earlier today, and round the hour.
+# A clause the time word opens may also tell what happened on the way, in a
+# turn that passed that time ("快进到第二天早上": "凌晨时分门外传来一阵闷响",
+# 20:35 to 07:00); a word marked as now is held to when the turn began or ended.
 # Marked as now: right after NOW_BEFORE or NOW_IS, or right before 了/啦.
 CLAUSE_START_RE = re.compile(r"(?:^|[。！？；，：、…”」])\s*$")
 NOW_BEFORE = ("这", "大", "这时", "此时", "此刻", "现在", "眼下", "已经", "已", "正值", "时值")
@@ -128,7 +131,7 @@ def _says_now(line, start, end, in_dialogue):
     """How the time word at line[start:end] claims to be the time now:
     "marked" (right after NOW_BEFORE or NOW_IS, or right before 了/啦),
     "clause" (narration where the word opens a clause), or None."""
-    near = line[max(0, start - 4) : end + 2]
+    near = line[max(0, start - 4) : start] + "|" + line[end : end + 2]  # not the word itself: 午后, 黎明
     if any(other in near for other in TIME_OTHER) or line[end : end + 1] in EVENT_AFTER or TRACE_RE.match(line, end):
         return None
     head = line[:start]
@@ -343,9 +346,21 @@ def _hours_ok(word, minute, slack=0):
     return any((minute - (lo * 60 - slack)) % 1440 < (hi - lo) * 60 + 2 * slack for lo, hi in TIME_WORDS[word])
 
 
+def _moment(clock):
+    """The clock as minutes since the game's first day began; None without a day."""
+    day, minute = clock.get("day"), clock.get("minute")
+    return (day - 1) * 1440 + minute if isinstance(day, int) and isinstance(minute, int) else None
+
+
+def _passed_through(word, start, end):
+    """Some minute from start to end (as _moment gives them) falls within the word's hours."""
+    return any(day * 1440 + lo * 60 <= end and start < day * 1440 + hi * 60
+               for day in range(start // 1440, end // 1440 + 1) for lo, hi in TIME_WORDS[word])
+
+
 def check_footer_and_time(record):
     out = []
-    before = None
+    before = game = None
     for turn in record["turns"]:
         index = turn["index"]
         calls = narrative_calls(turn)
@@ -375,6 +390,10 @@ def check_footer_and_time(record):
                     out.append(finding("footer", index, "页脚回合 %s 与引擎的 %s 不一致" % (got.group("turn"), want_turn)))
         if clock:
             minutes = [clock["minute"]] + ([before["minute"]] if before else [])
+            # the stretch of time this turn passed, from where the last one left the same game
+            now_game = (data.get("context") or {}).get("session_id") or data.get("session_id")
+            start, end = (_moment(before), _moment(clock)) if before and now_game == game else (None, None)
+            passed = (start, end) if start is not None and end is not None and start <= end else None
             scheduled = _scheduled(last)
             for line in prose_lines(turn.get("text")):
                 if line.startswith(OPENING_HEADS):
@@ -391,9 +410,12 @@ def check_footer_and_time(record):
                         if claim == "clause" and _names_scheduled(word, _time_after(line, match.end()), scheduled):
                             continue
                         slack = DIALOGUE_SLACK if in_dialogue else 0
-                        if not any(_hours_ok(word, m, slack) for m in minutes):
-                            out.append(finding("time", index, "正文说“%s”，引擎时钟是 %s" % (word, clock.get("label"))))
-            before = clock
+                        if any(_hours_ok(word, m, slack) for m in minutes):
+                            continue
+                        if claim == "clause" and passed and _passed_through(word, *passed):
+                            continue
+                        out.append(finding("time", index, "正文说“%s”，引擎时钟是 %s" % (word, clock.get("label"))))
+            before, game = clock, now_game
     return out
 
 

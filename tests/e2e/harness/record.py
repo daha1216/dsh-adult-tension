@@ -139,8 +139,16 @@ def _json_value(text):
         return None
 
 
-def _envelopes(output):
-    """The runtime envelopes printed in a tool output, in order."""
+# Python's report that the script it was given is not there ("python.exe: can't open
+# file 'D:\\p\\scripts\\adult_tension.py': [Errno 2] No such file or directory"): that
+# invocation never reached the runtime.
+CANNOT_OPEN_RE = re.compile(r"can't open file '[^'\n]*adult_tension\.py'")
+NOT_RUN = {"ok": False}
+
+
+def _printed(output):
+    """What the runtime invocations printed in a tool output, in order: each
+    envelope, and NOT_RUN where Python could not open the script."""
     out = []
     decoder = json.JSONDecoder()
     text = output if isinstance(output, str) else ""
@@ -148,17 +156,19 @@ def _envelopes(output):
     while True:
         start = text.find("{", index)
         if start < 0:
-            return out
+            break
         try:
             value, end = decoder.raw_decode(text, start)
         except ValueError:
             index = start + 1
             continue
         if isinstance(value, dict) and {"ok", "data", "error"} <= set(value):
-            out.append(value)
+            out.append((start, value))
             index = end
         else:
             index = start + 1
+    out += [(match.start(), NOT_RUN) for match in CANNOT_OPEN_RE.finditer(text)]
+    return [value for _, value in sorted(out, key=lambda item: item[0])]
 
 
 # Bash's own report that it could not parse a command. It runs the complete
@@ -246,18 +256,21 @@ def calls_from_host(host_calls):
                     files.edit(path, edit["oldText"], edit.get("newText") or "", False)
         elif isinstance(data.get("command"), str):
             output = call.get("output")
-            envelopes = _envelopes(output)
+            printed = _printed(output)
             broken = SHELL_SYNTAX_RE.search(output) if isinstance(output, str) else None
             ran_lines = int(broken.group(1)) - 1 if broken else None
             # each invocation that ran printed one envelope, in order; an alternative after a success
-            # (a || b) or a follow-up after a failure (a && b) never ran and printed none
+            # (a || b) or a follow-up after a failure (a && b) never ran and printed none; one whose
+            # script Python could not open failed without reaching the runtime
             previous, n = None, 0
             for argv, payload, joiner in _shell_invocations(data["command"], files, ran_lines):
                 if previous is not None and joiner and (previous.get("ok") is True) == (joiner == "||"):
                     continue
-                envelope = envelopes[n] if n < len(envelopes) else None
+                envelope = printed[n] if n < len(printed) else None
                 n += 1
                 previous = envelope
+                if envelope is NOT_RUN:
+                    continue
                 out.append({"argv": argv, "input": payload, "exit": None, "envelope": envelope, "ms": None, "source": "host"})
     return out
 

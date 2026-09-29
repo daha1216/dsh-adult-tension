@@ -149,6 +149,9 @@ class MachineCheckTest(unittest.TestCase):
         self.assertIn(("time", 3), names(M.check(rec)))
         rec["turns"][2]["text"] = "昨天凌晨的事，谁也没再提。\n\n" + footer(3, 1210)
         self.assertNotIn(("time", 3), names(M.check(rec)))
+        for text in ("明天午后的事，谁也没再提。", "午后以来，谁也没再提这件事。", "黎明前，谁也没再提这件事。"):
+            rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
+            self.assertNotIn(("time", 3), names(M.check(rec)), text)
         # a character naming a time on a schedule, or earlier today, is not saying what time it is now;
         # a character rounding the hour is not wrong about it either (20:10)
         for text in ("她说：“规矩就一条，凌晨两点所有人都得去签到，早晨八点交班。”", "他说：“包工头下午就联系不上了。”", "“站住！大半夜的，提着箱子去哪儿？”"):
@@ -163,7 +166,8 @@ class MachineCheckTest(unittest.TestCase):
         # the narration says what time it is where a clause opens with it or marks it as now; so does a line about now
         for text in ("凌晨两点，风把旗子吹得啪啪响。", "你推开门，凌晨的风灌了进来。", "窗外已是凌晨，街上没有人。",
                      "凌晨的风还在吹，旗子啪啪响。", "凌晨两点还有人在街上走。", "凌晨无人的街道上只有风在吹。",
-                     "她说：“都凌晨了，还不回去？”", "现在是凌晨的时候，风把旗子吹得啪啪响。"):
+                     "她说：“都凌晨了，还不回去？”", "现在是凌晨的时候，风把旗子吹得啪啪响。",
+                     "午后的风从门缝灌进来。", "黎明时分，风把旗子吹得啪啪响。"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertIn(("time", 3), names(M.check(rec)), text)
         # a clause may name the hour the engine has scheduled something for (the opening's deadline: 中午十二点落下裁决) ...
@@ -192,6 +196,30 @@ class MachineCheckTest(unittest.TestCase):
         self.assertNotIn(("time", 1), names(M.check(rec)))
         rec["turns"][0]["text"] = rec["turns"][0]["text"].replace("吊臂的影子", "凌晨两点，吊臂的影子")
         self.assertIn(("time", 1), names(M.check(rec)))
+
+    def test_a_turn_that_passed_the_night_may_tell_what_happened_on_the_way(self):
+        def night(text, games=("s_1", "s_1"), day=2, minute=420):
+            rec = clean_record()
+            rec["turns"][1]["runtime_calls"][0]["envelope"]["data"]["context"].update(session_id=games[0])
+            rec["turns"][1]["runtime_calls"][0]["envelope"]["data"]["context"]["clock"]["day"] = 1
+            context = rec["turns"][2]["runtime_calls"][0]["envelope"]["data"]["context"]
+            label = "第%s天 %02d:%02d" % ("一二三"[day - 1], minute // 60, minute % 60)
+            context.update(session_id=games[1], clock={"day": day, "minute": minute, "label": label})
+            rec["turns"][2]["input"] = "快进到第二天早上"
+            rec["turns"][2]["text"] = text + "\n\n【时间】%s｜【地点】七号泊位｜回合：3" % label
+            return names(M.check(rec))
+
+        # 20:05 on the first day to 07:00 on the second: the small hours were on the way
+        self.assertEqual(night("凌晨时分，门外传来一阵闷响。清晨的光从窗缝透进来。"), [])
+        self.assertEqual(night("半夜，雨越下越大。天亮以后，街上没有人。"), [])
+        # ... but not a time the night did not pass, nor a line marked as now
+        for text in ("傍晚的风从门缝灌进来。", "窗外已是凌晨，街上没有人。", "现在是凌晨，街上没有人。"):
+            self.assertIn(("time", 3), night(text), text)
+        # ... nor time that ran backwards, nor another game's clock
+        self.assertIn(("time", 3), night("凌晨时分，门外传来一阵闷响。", day=1))
+        self.assertIn(("time", 3), night("凌晨时分，门外传来一阵闷响。", games=("s_1", "s_2")))
+        # two days on, any hour was on the way
+        self.assertEqual(night("傍晚，雨停了一阵。", day=3), [])
 
     def test_lines_the_player_never_said_are_ventriloquism(self):
         rec = clean_record()
@@ -344,6 +372,11 @@ class MachineCheckTest(unittest.TestCase):
         retried = copy.deepcopy(rec)
         broken = {"tool": "bash", "input": {"command": 'python "%s/scripts/adult_tension.py" commit-turn --json --input-file "in.json' % installed}, "output": "/usr/bin/bash: -c: line 1: unexpected EOF while looking for matching `\"'\n"}
         retried["turns"][2]["host_calls"] = [broken, bash]
+        self.assertEqual(M.check(retried)["findings"], [])
+        # nor did a script path Python could not open
+        wrong = {"tool": "bash", "input": {"command": "python scripts/adult_tension.py commit-turn --json --input-file in.json"},
+                 "output": "C:\\Python312\\python.exe: can't open file 'D:\\\\projects\\\\at-e2e\\\\p\\\\scripts\\\\adult_tension.py': [Errno 2] No such file or directory\n\n\nCommand exited with code 2"}
+        retried["turns"][2]["host_calls"] = [wrong, bash]
         self.assertEqual(M.check(retried)["findings"], [])
         # alternatives after the one that answered never ran
         chain = {"tool": "bash", "input": {"command": " || ".join("%s %s/scripts/adult_tension.py doctor --json" % (p, installed) for p in ("python3", "python", "py -3"))},
@@ -1063,6 +1096,21 @@ class HostCallsTest(unittest.TestCase):
         ])
         self.assertEqual([R.command_of(c) for c in calls], ["status", "doctor"])
         self.assertEqual([R.ok_data(c)["n"] for c in calls], [1, 2])
+
+    def test_a_script_python_could_not_open_never_ran(self):
+        cannot = "python.exe: can't open file 'D:\\\\p\\\\scripts\\\\adult_tension.py': [Errno 2] No such file or directory\n"
+        wrong, right, ok = "python scripts/adult_tension.py status --json", self.RUNTIME + " doctor --json", envelope({"n": 1})
+
+        def calls(command, output):
+            return [(R.command_of(c), c["envelope"]) for c in R.calls_from_host([self.bash(command, raw=output)])]
+
+        self.assertEqual(calls(wrong, cannot), [])
+        # it failed: the alternative after it ran, a follow-up after && did not
+        self.assertEqual(calls(wrong + " || " + right, cannot + json.dumps(ok)), [("doctor", ok)])
+        self.assertEqual(calls(wrong + " && " + right, cannot), [])
+        # before or after one that ran, in the order they printed
+        self.assertEqual(calls(right + "; " + wrong, json.dumps(ok) + "\n" + cannot), [("doctor", ok)])
+        self.assertEqual(calls(wrong + "; " + right, cannot + json.dumps(ok)), [("doctor", ok)])
 
 
     def test_only_the_invocations_the_shell_ran_are_calls(self):
