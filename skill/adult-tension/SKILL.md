@@ -38,8 +38,8 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 1. 玩家没说日常还是压力：问一句“1 日常 / 2 有压力”。只有玩家说“随便”才用 `random`。读档永远不问。
 2. 本对话里已经开过局或读过档（看对话本身，不用查），且上下文 `save.turns_since_save` > 0：先问“存档后开局 / 直接开局 / 取消”。
-3. 玩家点名的世界或题材：按 `references/worlds.md` 取 ID 放进 `locks.world_id`；没有就说明没有现成世界，给两个选择：最接近的世界，或自定义世界（按 `references/custom_world.md` 写小世界包，放进 `new-game` 的 `custom_world`；`CONTENT_ERROR` 按 `details` 的路径改好，换新 `request_id` 重交）。
-4. 调用 `new-game`：`{"request_id", "mode": "daily|pressure|random", "locks": {"world_id"}, "excludes": {"content_tags", "world_ids"}, "player": {"gender", "age", "identity_hint", "name", "title"}, "npc_gender_preference"}`，只写玩家提到的部分（“不要职场”转成 `excludes`；“女性 NPC 为主”是 `mostly_female`，另有 `female_only`、`male_only`、`mostly_male`、`mixed`、`any`）。“重开 N 号”：`{"request_id", "seed": N, "replay": true}`。`NO_MATCH`：如实说哪条做不到、可以放宽什么。
+3. 玩家点名的世界或题材：按 `references/worlds.md` 取 ID 放进 `locks.world_id`；没有就说明没有现成世界，给两个选择：最接近的世界，或自定义世界（按 `references/custom_world.md` 写小世界包，直接放进 `new-game` 的 `custom_world`；`CONTENT_ERROR` 按 `details` 的路径改好，换新 `request_id` 重交）。
+4. 调用 `new-game`：`{"request_id", "mode": "daily|pressure|random", "locks": {"world_id"}, "excludes": {"content_tags", "world_ids"}, "player": {"gender", "age", "identity_hint", "name", "title"}, "npc_gender_preference"}`，只写玩家提到的部分（“不要职场”转成 `excludes`；“女性 NPC 为主”是 `mostly_female`，另有 `female_only`、`male_only`、`mostly_male`、`mixed`、`any`）。“重开 N 号”：`{"request_id", "seed": N, "replay": true}`。`NO_MATCH`：停下，如实说哪条做不到、可以放宽什么，由玩家选，不替玩家放宽或改开自定义世界。
 5. 按返回的 `opening` 写开局：
 
         世界观：……（1–2 句，含 `rule_in_play` 这条规则在场景里起作用）
@@ -71,7 +71,7 @@ description: Run a Chinese interactive story for adults with a local determinist
    - `player_authorized: true` 只在玩家本人的话授权了玩家角色的移动、承诺、交易、同意、转折或设定修改时。
    - 操作（字段见 `references/operations.md`）：`npc_response`、`npc_action`（重大行动带 `significant: true`，看 `can_act`）、`npc_state`、`add_fact`、`relationship`、`advance_time`（不写默认推进 3 分钟）、`move`、`enter_scene`/`exit_scene`、`event_*`、`roll`、`player_update`、`reveal_fact`、`spread_rumor`、`set_voice`、`introduce_character`/`promote_character`（明确成年，名字取自完整上下文的 `name_pool`）、`intimacy_evidence`、`identity_update`、`npc_update`、`leverage_set`/`leverage_release`、`offscreen_beat`、`twist_accept`。
    - 正文里新写出、以后要用到的细节用 `add_fact` 记下；新点名的人即使不在场也要 `introduce_character`。开局写出的，在第一次提交里补上。
-   - 照上下文的 `requests` 附带：`chapter_summary` 为 true 时写 `chapter_summary`（≤300 字，第三方视角概括到上一回合为止的这一章）；`prologue` 为 true 时读完整上下文的 `prologue_merge`，把旧前情与其中各章合并成 ≤300 字写进 `prologue`；没要求就不写。
+   - 上下文 `requests` 要求时写 `chapter_summary`（第三方视角）、`prologue`（合并完整上下文的 `prologue_merge`），见 `references/operations.md`；没要求就不写。
 4. 只根据返回的 `applied`、`resolved_events`、`simulation`、新的 `context` 写正文。掷骰、到期、离屏移动与传播由运行时决定，你负责描写。
 5. 页脚：`【时间】{context.clock.label}｜【地点】{context.scene.location}｜回合：{turn}`。叙事助手开启时（`context.preferences.assistant`），末尾加“可以：① …… ② …… ③ ……”，只给提示，不替玩家决定。
 6. 返回的 `context` 就是下一回合的依据，不需要再调 `get-context`。信息不够时可以 `get-context` 带 `"depth": "full"`。
@@ -87,7 +87,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 ## 时间、离屏与转折
 
-- 快进：先 `get-context` 带 `preview_time`（与 `advance_time` 同形：`until`（`morning`/`noon`/`evening`/`night`/`next_morning`）/`days`/`minutes`），只预览一次，再提交：`advance_time` 放第一个，其后为 `preview.required_beats` 的每个 NPC 各写一条 `offscreen_beat`。正文写清到期事件的结果。
+- 快进（玩家要求时才预览，普通回合直接提交）：先 `get-context` 带 `preview_time`（与 `advance_time` 同形：`until`（`morning`/`noon`/`evening`/`night`/`next_morning`）/`days`/`minutes`），只预览一次，再提交：`advance_time` 放第一个，其后为 `preview.required_beats` 的每个 NPC 各写一条 `offscreen_beat`。正文写清到期事件的结果。
 - `offscreen_beat`：只写这个不在场 NPC 自己的行动、状态、去向、NPC 之间的关系与消息，依据他的目标与所知（预览的 `goal`、`knows`），不碰玩家角色。玩家“继续”时可以为 `requests.offscreen_beat_candidates` 里的 NPC 插一段简短离屏片段。跨度 ≥ 60 分钟或跨日时被点名的 NPC 必须有。离屏推演关闭时没有离屏片段。
 - 转折：`requests.twist_offer` 出现，或玩家说“来点转折”（`get-context` 带 `"want_twist": true`）时，正文后一句话列出候选（“可以选一个转折：① …… ② ……，或说你想要的”）。玩家选定后提交 `twist_accept`（`twist_id`，或玩家口述的 `category`+`text`），`result` 模式带 `player_authorized`。同一游戏日最多一次；玩家不理会就照常继续。
 
@@ -122,7 +122,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 | 玩家说 | 你做 |
 |---|---|
 | 开局、新游戏、开局 日常 / 压力、开局 港口、重开 N 号 | 开局流程 |
-| 自定义世界 …… | 写小世界包 → `new-game`（`custom_world`） |
+| 自定义世界 …… | 开局流程第 3 步 |
 | 世界列表 | `list-worlds` |
 | 继续、c、……、空输入 | `commit-turn`（`continue`） |
 | 存档 [名称]、s、快速存档、qs / 另存为 名称 | `save-slot`（`name`；不给名字存到当前槽或自动命名）/ 另加 `"save_as": true` |
