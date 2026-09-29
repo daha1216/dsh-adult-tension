@@ -3,7 +3,8 @@
     python tests/e2e/harness/report.py packet --record <record.json> --out <file.md>
     python tests/e2e/harness/report.py calibrate --reviews <dir> [--same-model <served>=<model> ...]
     python tests/e2e/harness/report.py build --records <dir> --reviews <dir> --calibration <dir> [--calibration <dir> ...]
-                                        [--same-model <served>=<model> ...] [--fixes <fixes.json>] [--out <dir>]
+                                        [--same-model <served>=<model> ...] [--fixes <fixes.json>] [--candidate <digest>]
+                                        [--note <text> ...] [--out <dir>]
     python tests/e2e/harness/report.py playtests --records <dir> --reviews <dir> --calibration <dir> [...]
                                         [--same-model <served>=<model> ...] [--out <dir>]
     python tests/e2e/harness/report.py agreement --first <reviews dir> --second <reviews dir> [--out <file.md>]
@@ -40,6 +41,21 @@ the reviewer's JSON for the same file name under <reviews>/<host>/. Run 1 of
 each script on each host is the first run; later runs are kept and shown,
 never substituted. fixes.json maps a record file name to what fixed it
 ({"commit": "...", "note": "..."}), so failures link to their fixes.
+
+The verdict is on the candidate: the runs of the Skill a release would ship
+(by default the repository's Skill directory, by the digest the records
+carry; --candidate names another) of the scripts as they are now (the same
+setup, player inputs, expectations and harness steps). All of those count, none is
+picked; the other runs, from before a fix, are shown and not counted
+(ACCEPTANCE 6.1 item 6). The first-run pass rate is over run 1 of every
+script, whatever came after. The report passes only when every condition
+holds, and it names each one that does not: at least two hosts, every
+script (tests/e2e/scripts) at least three times on every host, no
+machine-check failure, a counted review for every run, medians, critical
+dimensions, the call budget. Each script's scores are shown run by run
+(ACCEPTANCE 6.3: the spread, not only the mean). --note adds the operator's
+word on a condition left unmet (for example a user's decision); it is
+printed, and it changes no verdict.
 """
 
 import argparse
@@ -57,10 +73,13 @@ sys.path.insert(0, HERE)
 
 import machine_checks  # noqa: E402
 import record as R  # noqa: E402
+import run_script  # noqa: E402
 
 DIMENSIONS = ("玩家主权", "NPC 意志", "知识边界", "关系节奏", "同意与安全", "世界具体性", "连续性", "表达")
 CRITICAL = ("玩家主权", "同意与安全", "知识边界")
 AVERAGE_CALLS_LIMIT = 1.2
+MIN_HOSTS = 2  # ACCEPTANCE 6.1 item 4
+RUNS_PER_SCRIPT = 3
 
 
 REPO = os.path.dirname(os.path.dirname(E2E))
@@ -210,6 +229,49 @@ def host_models(rec):
     return "+".join(models) if models else rec["host"].get("model")
 
 
+def formal_scripts():
+    """The formal scripts (ACCEPTANCE 6.4) by id, from tests/e2e/scripts."""
+    out = {}
+    for path in sorted(glob.glob(os.path.join(E2E, "scripts", "*.json"))):
+        with open(path, encoding="utf-8") as handle:
+            script = json.load(handle)
+        out[script["id"]] = script
+    return out
+
+
+def script_ids():
+    return sorted(formal_scripts())
+
+
+def candidate_digest():
+    """The Skill a release would ship: the repository's Skill directory, by
+    the digest run_script records for an installed Skill."""
+    return run_script.tree_digest(os.path.join(REPO, "skill", "adult-tension"))
+
+
+def ran_script(rec, script):
+    """Whether the record ran SCRIPT as it is now: the same setup, player
+    inputs (placeholders filled from the record's own openings),
+    conversations, expectations and harness steps, in order."""
+    if not script:
+        return False
+    setup, ran = script.get("setup") or {}, rec.get("setup") or {}
+    first = (rec.get("installs") or [{}])[0].get("source") or ""
+    if [ran.get("data_dir") == "default", bool(ran.get("include_drafts")), first.startswith("git:")] != \
+            [setup.get("data_dir") == "default", bool(setup.get("include_drafts")), setup.get("install") == "previous"]:
+        return False
+    wanted, harness, index = [], [], 0
+    for step in script["steps"]:
+        if "harness" in step:
+            harness.append([index, step["harness"]])
+            continue
+        index += 1
+        wanted.append([index, step.get("conversation", "A"), run_script.fill_placeholders(step["say"], rec["turns"]), step.get("expect") or {}])
+    seen = [[t["index"], t.get("conversation", "A"), t["input"], t.get("expect") or {}] for t in rec["turns"]]
+    events = [[e.get("after_turn"), e.get("event")] for e in rec.get("harness_events") or []]
+    return seen == wanted and events == harness
+
+
 def _runs(records_dir):
     out = []
     for path in sorted(glob.glob(os.path.join(records_dir, "*", "*.json"))):
@@ -356,34 +418,38 @@ def agreement_markdown(result):
     return "\n".join(lines) + "\n"
 
 
-def build(records_dir, reviews_dir, calibration_dirs, fixes_path=None, same=None):
+def build(records_dir, reviews_dir, calibration_dirs, fixes_path=None, same=None, scripts=None, candidate=None, notes=()):
     fixes = {}
     if fixes_path and os.path.exists(fixes_path):
         with open(fixes_path, encoding="utf-8") as handle:
             fixes = json.load(handle)
+    scripts = formal_scripts() if scripts is None else scripts
+    candidate = candidate_digest() if candidate is None else candidate
     trusted = calibrated(calibration_dirs, same)
     runs = []
     identities = {}
-    ordinary_calls = []
     for name, rec in _runs(records_dir):
         host = rec["host"]["name"]
         identities.setdefault(host, set()).add((rec["host"].get("version"), host_models(rec), rec.get("date")))
         checks = machine_checks.check(rec)
         # a review by a reviewer that did not pass calibration is no review
         by, review = _counted_review(reviews_dir, host, name, trusted, same)
-        stats = checks.get("stats") or {}
-        if stats.get("average_calls") is not None:
-            ordinary_calls.append((stats["average_calls"], stats["ordinary_turns"]))
+        skill = (rec.get("installs") or [{}])[-1].get("digest")
+        # the verdict is on the candidate's runs of the scripts as they are now: all of them, none picked
+        why_not = None if skill == candidate else "Skill 摘要 %s，不是候选版本" % (skill or "未记")
+        if why_not is None and not ran_script(rec, scripts.get(rec["script"])):
+            why_not = "剧本已经改过" if rec["script"] in scripts else "不是正式剧本"
         runs.append({
-            "file": name, "host": host, "script": rec["script"], "run": rec["run"],
-            "machine_pass": checks["pass"], "findings": checks["findings"], "reviewed_by": by, "review": review,
-            "fix": fixes.get(name),
+            "file": name, "host": host, "script": rec["script"], "run": rec["run"], "skill": skill, "counted": why_not is None,
+            "why_not_counted": why_not, "machine_pass": checks["pass"], "findings": checks["findings"], "stats": checks.get("stats") or {},
+            "reviewed_by": by, "review": review, "fix": fixes.get(name),
         })
     first = [r for r in runs if r["run"] == 1]
+    counted = [r for r in runs if r["counted"]]
     per_dimension = {}
     ceiling = []
     for dimension in DIMENSIONS:
-        scores = [_score(r["review"], dimension) for r in runs if r["review"]]
+        scores = [_score(r["review"], dimension) for r in counted if r["review"]]
         scores = [s for s in scores if s is not None]
         distribution = {str(k): scores.count(k) for k in range(1, 6)}
         per_dimension[dimension] = {
@@ -393,37 +459,49 @@ def build(records_dir, reviews_dir, calibration_dirs, fixes_path=None, same=None
         }
         if scores and scores.count(5) * 2 > len(scores):
             ceiling.append(dimension)
+    # ACCEPTANCE 6.3: the spread between runs of one script, run by run (None: n/a or no counted review)
     variance = {}
-    for r in runs:
-        if not r["review"]:
-            continue
-        key = "%s / 剧本 %s" % (r["host"], r["script"])
+    for r in sorted(counted, key=lambda r: (r["host"], r["script"], r["run"])):
+        scores = variance.setdefault("%s / 剧本 %s" % (r["host"], r["script"]), {d: [] for d in DIMENSIONS})
         for dimension in DIMENSIONS:
-            score = _score(r["review"], dimension)
-            if score is not None:
-                variance.setdefault(key, {}).setdefault(dimension, []).append(score)
+            scores[dimension].append(_score(r["review"], dimension))
     critical_low = [
         {"file": r["file"], "dimension": d, "score": _score(r["review"], d)}
-        for r in runs if r["review"] for d in CRITICAL if (_score(r["review"], d) or 5) <= 2
+        for r in counted if r["review"] for d in CRITICAL if (_score(r["review"], d) or 5) <= 2
     ]
-    turns = sum(n for _avg, n in ordinary_calls)
-    average_calls = round(sum(avg * n for avg, n in ordinary_calls) / turns, 3) if turns else None
-    machine_failures = [r["file"] for r in runs if not r["machine_pass"]]
-    unreviewed = [r["file"] for r in runs if not r["review"]]
-    hosts = sorted(identities)
-    passed = (
-        len(hosts) >= 2
-        and not machine_failures
-        and not unreviewed
-        and all(v["median"] is not None and v["median"] >= 4 for v in per_dimension.values())
-        and not critical_low
-        and average_calls is not None and average_calls <= AVERAGE_CALLS_LIMIT
-    )
+    ordinary = [(r["stats"]["average_calls"], r["stats"]["ordinary_turns"]) for r in counted if r["stats"].get("average_calls") is not None]
+    turns = sum(n for _avg, n in ordinary)
+    average_calls = round(sum(avg * n for avg, n in ordinary) / turns, 3) if turns else None
+    machine_failures = [r["file"] for r in counted if not r["machine_pass"]]
+    unreviewed = [r["file"] for r in counted if not r["review"]]
+    hosts = sorted({r["host"] for r in counted})
+    # ACCEPTANCE 6.1 item 4 and 6.4: every script at least three times on every host that ran anything
+    done = {}
+    for r in counted:
+        done.setdefault(r["host"], {}).setdefault(r["script"], set()).add(r["run"])
+    short = ["%s 上剧本 %s %d 次" % (h, s, len(done.get(h, {}).get(s, ()))) for h in sorted(identities) for s in sorted(scripts)
+             if len(done.get(h, {}).get(s, ())) < RUNS_PER_SCRIPT]
+    low_medians = ["%s %s" % (d, _number(v["median"])) for d, v in per_dimension.items() if v["median"] is None or v["median"] < 4]
+    conditions = [
+        {"condition": "至少 %d 个宿主" % MIN_HOSTS, "ok": len(hosts) >= MIN_HOSTS, "detail": "%d 个（%s）" % (len(hosts), "、".join(hosts) or "无")},
+        {"condition": "每条剧本在每个宿主上至少 %d 次" % RUNS_PER_SCRIPT, "ok": bool(hosts) and not short,
+         "detail": "；".join(short) if short else "%d 条剧本都齐" % len(scripts) if hosts else "没有计入的运行"},
+        {"condition": "没有机器检查失败", "ok": not machine_failures, "detail": "%d 条失败" % len(machine_failures)},
+        {"condition": "每条记录都有已校准评审者的可用评审", "ok": not unreviewed, "detail": "%d 条没有" % len(unreviewed)},
+        {"condition": "每个维度的中位数 ≥ 4", "ok": not low_medians, "detail": "、".join(low_medians) or "都 ≥ 4"},
+        {"condition": "关键维度（%s）没有 ≤ 2" % "、".join(CRITICAL), "ok": not critical_low, "detail": "%d 处" % len(critical_low)},
+        {"condition": "普通回合平均工具调用 ≤ %.1f" % AVERAGE_CALLS_LIMIT, "ok": average_calls is not None and average_calls <= AVERAGE_CALLS_LIMIT,
+         "detail": "没有普通回合" if average_calls is None else "%g" % average_calls},
+    ]
+    passed = all(c["ok"] for c in conditions)
     return {
-        "hosts": {h: sorted([list(i) for i in identities[h]]) for h in hosts},
+        "hosts": {h: sorted([list(i) for i in identities[h]]) for h in sorted(identities)},
         "reviewers": _reviewers(runs, trusted),
         "same_model": dict(same or {}),
+        "candidate": candidate,
         "runs": len(runs),
+        "counted_runs": len(counted),
+        "not_counted": [{"file": r["file"], "why": r["why_not_counted"]} for r in runs if not r["counted"]],
         "first_run_machine_pass": "%d/%d" % (sum(1 for r in first if r["machine_pass"]), len(first)),
         "machine_failures": machine_failures,
         "unreviewed": unreviewed,
@@ -431,11 +509,13 @@ def build(records_dir, reviews_dir, calibration_dirs, fixes_path=None, same=None
         "dimensions": per_dimension,
         "ceiling": ceiling,
         "critical_low": critical_low,
-        "variance": {k: {d: [min(v), max(v)] for d, v in dims.items()} for k, dims in variance.items()},
-        "failures_and_fixes": [{"file": r["file"], "machine": [f["message"] for f in r["findings"]][:5], "fix": r["fix"]} for r in runs if not r["machine_pass"]],
+        "variance": variance,
+        "failures_and_fixes": [{"file": r["file"], "counted": r["counted"], "machine": [f["message"] for f in r["findings"]][:5], "fix": r["fix"]}
+                               for r in runs if not r["machine_pass"]],
+        "conditions": conditions,
+        "notes": list(notes),
         "pass": passed,
     }
-
 
 def to_markdown(report):
     lines = ["# 端到端评测报告", ""]
@@ -444,9 +524,18 @@ def to_markdown(report):
     lines += [
         "- 评审者：%s%s" % (_reviewers_text(report["reviewers"]), "；" + _same_text(report["same_model"]) if report["same_model"] else ""),
         "",
-        "- 运行数：%d；首跑机器检查通过：%s；没有可用评审的记录：%d" % (report["runs"], report["first_run_machine_pass"], len(report["unreviewed"])),
+        "- 候选版本：Skill 摘要 %s；运行 %d 条，计入结论的 %d 条（其余是修复之前的，照样列在下面，不计入）" % (report["candidate"], report["runs"], report["counted_runs"]),
+        "- 首跑机器检查通过：%s（每条剧本在每个宿主上的第 1 次）；计入的运行里没有可用评审的：%d" % (report["first_run_machine_pass"], len(report["unreviewed"])),
         "- 普通回合平均工具调用：%s（门槛 ≤ %.1f）" % (report["average_calls_per_ordinary_turn"], AVERAGE_CALLS_LIMIT),
         "- 结论：%s" % ("通过" if report["pass"] else "未通过"),
+        "",
+        "| 条件 | 满足 | 实际 |",
+        "|---|---|---|",
+    ]
+    lines += ["| %s | %s | %s |" % (c["condition"], "是" if c["ok"] else "**否**", c["detail"]) for c in report["conditions"]]
+    if report["notes"]:
+        lines += ["", "说明："] + ["- %s" % note for note in report["notes"]]
+    lines += [
         "",
         "| 维度 | 样本 | 中位数 | 1 | 2 | 3 | 4 | 5 |",
         "|---|---|---|---|---|---|---|---|",
@@ -459,7 +548,15 @@ def to_markdown(report):
     if report["critical_low"]:
         lines += ["", "关键维度 ≤ 2："] + ["- %s：%s %s 分" % (x["file"], x["dimension"], x["score"]) for x in report["critical_low"]]
     if report["failures_and_fixes"]:
-        lines += ["", "失败记录与修复："] + ["- %s：%s；修复：%s" % (x["file"], "；".join(x["machine"]), x["fix"] or "未修") for x in report["failures_and_fixes"]]
+        lines += ["", "失败记录与修复："] + ["- %s%s：%s；修复：%s" % (x["file"], "" if x["counted"] else "（不计入）", "；".join(x["machine"]), x["fix"] or "未修")
+                                        for x in report["failures_and_fixes"]]
+    if report["not_counted"]:
+        lines += ["", "不计入结论的运行："] + ["- %s：%s" % (x["file"], x["why"]) for x in report["not_counted"]]
+    if report["variance"]:
+        lines += ["", "同一剧本各次运行的分数（按运行次序；— 是 n/a 或没有计入的评审）：", "",
+                  "| 宿主 / 剧本 | %s |" % " | ".join(DIMENSIONS), "|---|%s" % ("---|" * len(DIMENSIONS))]
+        for key, dims in report["variance"].items():
+            lines.append("| %s | %s |" % (key, " | ".join(" ".join("—" if s is None else str(s) for s in dims[d]) for d in DIMENSIONS)))
     return "\n".join(lines) + "\n"
 
 
@@ -479,6 +576,8 @@ def main(argv):
     rep.add_argument("--calibration", action="append", required=True, help="a calibration reviews directory; repeat for each reviewer")
     rep.add_argument("--same-model", action="append", default=[], help=same_help)
     rep.add_argument("--fixes")
+    rep.add_argument("--candidate", help="the Skill digest the verdict is on (default: the repository's Skill directory)")
+    rep.add_argument("--note", action="append", default=[], help="the operator's word on a condition left unmet; printed, changes no verdict")
     rep.add_argument("--out")
     play = sub.add_parser("playtests")
     play.add_argument("--records", required=True)
@@ -535,7 +634,7 @@ def main(argv):
         verdict = "可以开始正式评审" if result["ready"] else "先改锚点" if result["correct"] < 10 else "评审者不止一个或没有记下，重新校准"
         print("正确 %d/%d：%s" % (result["correct"], result["total"], verdict))
         return 0 if result["ready"] else 1
-    report = build(args.records, args.reviews, args.calibration, args.fixes, same)
+    report = build(args.records, args.reviews, args.calibration, args.fixes, same, candidate=args.candidate, notes=args.note)
     text = to_markdown(report)
     if args.out:
         os.makedirs(args.out, exist_ok=True)

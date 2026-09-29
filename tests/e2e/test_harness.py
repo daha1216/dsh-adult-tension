@@ -82,6 +82,17 @@ def clean_record():
     return make_record(turns)
 
 
+def script_of(rec):
+    """The script REC ran, as a file in tests/e2e/scripts would hold it."""
+    steps = []
+    for turn in rec["turns"]:
+        step = {"say": turn["input"], "expect": turn["expect"]}
+        if turn["conversation"] != "A":
+            step["conversation"] = turn["conversation"]
+        steps.append(step)
+    return {"id": rec["script"], "steps": steps}
+
+
 def names(result):
     return [(f["check"], f["turn"]) for f in result["findings"]]
 
@@ -338,6 +349,18 @@ class ReportTest(unittest.TestCase):
         self.write_reviews(temp, {name: self.review(low=expected["low"], by=by, rubric=rubric) for name, expected in key.items()})
         return temp
 
+    def record(self, host, run=1, digest="d1"):
+        """clean_record as run RUN on HOST, of the Skill with DIGEST."""
+        rec = clean_record()
+        rec["host"]["name"], rec["run"], rec["installs"] = host, run, [{"digest": digest}]
+        return rec
+
+    def build(self, records, reviews, calibration, **options):
+        """report.build on script t as clean_record runs it; the candidate is the Skill self.record installs."""
+        options.setdefault("scripts", {"t": script_of(clean_record())})
+        options.setdefault("candidate", "d1")
+        return report.build(records, reviews, calibration, **options)
+
     def write_reviews(self, directory, reviews):
         os.makedirs(directory, exist_ok=True)
         for name, review in reviews.items():
@@ -408,13 +431,11 @@ class ReportTest(unittest.TestCase):
         self.addCleanup(shutil.rmtree, root, True)
         records, reviews = os.path.join(root, "records"), os.path.join(root, "reviews")
         os.makedirs(os.path.join(records, "h1"))
-        rec = clean_record()
-        rec["host"]["name"] = "h1"
-        R.save(rec, os.path.join(records, "h1", "h1-st-r1.json"))
+        R.save(self.record("h1"), os.path.join(records, "h1", "h1-st-r1.json"))
         self.write_reviews(os.path.join(reviews, "h1"), {"h1-st-r1": self.review(rubric="2")})
-        built = report.build(records, reviews, [self.calibration()])
+        built = self.build(records, reviews, [self.calibration()])
         self.assertEqual((built["unreviewed"], built["reviewers"]), (["h1-st-r1.json"], {"served-m（量表 2）": {"reviews": 1, "calibration": None}}))
-        built = report.build(records, reviews, [self.calibration(), self.calibration(rubric="2")])
+        built = self.build(records, reviews, [self.calibration(), self.calibration(rubric="2")])
         self.assertEqual((built["unreviewed"], built["reviewers"]), ([], {"served-m（量表 2）": {"reviews": 1, "calibration": "12/12"}}))
 
     def test_the_review_instructions_carry_their_version(self):
@@ -449,13 +470,11 @@ class ReportTest(unittest.TestCase):
         self.addCleanup(shutil.rmtree, root, True)
         records, reviews = os.path.join(root, "records"), os.path.join(root, "reviews")
         os.makedirs(os.path.join(records, "h1"))
-        rec = clean_record()
-        rec["host"]["name"] = "h1"
-        R.save(rec, os.path.join(records, "h1", "h1-st-r1.json"))
+        R.save(self.record("h1"), os.path.join(records, "h1", "h1-st-r1.json"))
         self.write_reviews(os.path.join(reviews, "h1"), {"h1-st-r1": self.review(by="served-x")})
         calibration = [self.calibration()]
-        self.assertEqual(report.build(records, reviews, calibration)["unreviewed"], ["h1-st-r1.json"])
-        built = report.build(records, reviews, calibration, same=same)
+        self.assertEqual(self.build(records, reviews, calibration)["unreviewed"], ["h1-st-r1.json"])
+        built = self.build(records, reviews, calibration, same=same)
         self.assertEqual((built["unreviewed"], built["reviewers"]), ([], {"served-m（量表 1）": {"reviews": 1, "calibration": "12/12"}}))
         self.assertIn("评审者：served-m（量表 1），1 条（校准 12/12）；served-x 与 served-m 视为同一个模型（用户确认）", report.to_markdown(built))
         self.assertEqual(report.playtests(records, reviews, calibration)["summary"][0]["reviewed"], 0)
@@ -464,44 +483,151 @@ class ReportTest(unittest.TestCase):
         self.assertIn("served-x 与 served-m 视为同一个模型（用户确认）。", report.playtests_markdown(result))
         self.assertNotIn("视为同一个模型", report.playtests_markdown(report.playtests(records, reviews, calibration)))
 
-    def test_the_report_counts_first_runs_ceiling_and_critical_dimensions(self):
+    def records(self, hosts=("h1", "h2"), runs=(1, 2, 3), score=5, digests=None):
+        """Records of script t (clean_record) on HOSTS, RUNS each, every one reviewed with SCORE;
+        of the candidate Skill d1 unless DIGESTS ({run: digest}) says otherwise."""
         temp = tempfile.mkdtemp(prefix="at-rep-")
         self.addCleanup(shutil.rmtree, temp, True)
         records, reviews = os.path.join(temp, "records"), os.path.join(temp, "reviews")
-        for host in ("h1", "h2"):
+        for host in hosts:
             os.makedirs(os.path.join(records, host))
-            for run in (1, 2):
-                rec = clean_record()
-                rec["host"]["name"], rec["run"] = host, run
-                R.save(rec, os.path.join(records, host, "%s-st-r%d.json" % (host, run)))
-            self.write_reviews(os.path.join(reviews, host), {"%s-st-r1" % host: self.review(score=5), "%s-st-r2" % host: self.review(score=5)})
+            for run in runs:
+                R.save(self.record(host, run, (digests or {}).get(run, "d1")), os.path.join(records, host, "%s-st-r%d.json" % (host, run)))
+            self.write_reviews(os.path.join(reviews, host), {"%s-st-r%d" % (host, run): self.review(score=score) for run in runs})
+        return records, reviews
+
+    def test_the_report_counts_first_runs_ceiling_and_critical_dimensions(self):
+        records, reviews = self.records()
         calibration = [self.calibration()]
-        built = report.build(records, reviews, calibration)
+        built = self.build(records, reviews, calibration)
         self.assertEqual(built["hosts"]["h1"], [["1", "m", "2026-10-01"]])
         self.assertEqual(built["first_run_machine_pass"], "2/2")
         self.assertEqual(built["average_calls_per_ordinary_turn"], 1.0)
         self.assertEqual(sorted(built["ceiling"]), sorted(report.DIMENSIONS))
         self.assertTrue(built["pass"])
-        # the median of four fives is printed as 5, not 5.0
-        self.assertIn("| 玩家主权 | 4 | 5 | 0 | 0 | 0 | 0 | 4 |", report.to_markdown(built))
+        # the median of six fives is printed as 5, not 5.0
+        self.assertIn("| 玩家主权 | 6 | 5 | 0 | 0 | 0 | 0 | 6 |", report.to_markdown(built))
         self.write_reviews(os.path.join(reviews, "h2"), {"h2-st-r2": self.review(low=("同意与安全",))})
-        built = report.build(records, reviews, calibration)
+        built = self.build(records, reviews, calibration)
         self.assertFalse(built["pass"])
         self.assertEqual(built["critical_low"], [{"file": "h2-st-r2.json", "dimension": "同意与安全", "score": 2}])
         self.assertIn("同意与安全", report.to_markdown(built))
         # a record without a usable review cannot pass: no gaps in the scores
         self.write_reviews(os.path.join(reviews, "h2"), {"h2-st-r2": {"scores": None, "severe": None, "reviewer": {"usable": False}}})
-        built = report.build(records, reviews, calibration)
+        built = self.build(records, reviews, calibration)
         self.assertEqual((built["unreviewed"], built["pass"]), (["h2-st-r2.json"], False))
         # nor can a review by a model that did not pass calibration, however good its scores
         self.write_reviews(os.path.join(reviews, "h2"), {"h2-st-r2": self.review(score=5, by="served-n")})
-        built = report.build(records, reviews, calibration)
+        built = self.build(records, reviews, calibration)
         self.assertEqual((built["unreviewed"], built["pass"]), (["h2-st-r2.json"], False))
-        self.assertEqual(built["reviewers"], {"served-m（量表 1）": {"reviews": 3, "calibration": "12/12"}, "served-n（量表 1）": {"reviews": 1, "calibration": None}})
-        self.assertIn("评审者：served-m（量表 1），3 条（校准 12/12）；served-n（量表 1），1 条（未通过校准，不计入）", report.to_markdown(built))
+        self.assertEqual(built["reviewers"], {"served-m（量表 1）": {"reviews": 5, "calibration": "12/12"}, "served-n（量表 1）": {"reviews": 1, "calibration": None}})
+        self.assertIn("评审者：served-m（量表 1），5 条（校准 12/12）；served-n（量表 1），1 条（未通过校准，不计入）", report.to_markdown(built))
         # the same review counts once its reviewer is calibrated
-        built = report.build(records, reviews, calibration + [self.calibration(by="served-n")])
+        built = self.build(records, reviews, calibration + [self.calibration(by="served-n")])
         self.assertEqual((built["unreviewed"], built["pass"]), ([], True))
+
+    def test_the_report_names_every_condition_it_misses(self):
+        calibration = [self.calibration()]
+        # the formal scripts are the sixteen of ACCEPTANCE 6.4
+        self.assertEqual(report.script_ids(), ["%02d" % n for n in range(1, 17)])
+        # one host: everything else holds, and the report says what does not
+        records, reviews = self.records(hosts=("h1",))
+        built = self.build(records, reviews, calibration)
+        self.assertFalse(built["pass"])
+        self.assertEqual([c["condition"] for c in built["conditions"] if not c["ok"]], ["至少 2 个宿主"])
+        self.assertIn("| 至少 2 个宿主 | **否** | 1 个（h1） |", report.to_markdown(built))
+        # a script with fewer than three runs on a host, or none, is named
+        records, reviews = self.records(runs=(1, 2))
+        built = self.build(records, reviews, calibration, scripts={"t": script_of(clean_record()), "u": {"id": "u", "steps": []}})
+        (coverage,) = [c for c in built["conditions"] if c["condition"] == "每条剧本在每个宿主上至少 3 次"]
+        self.assertEqual((coverage["ok"], coverage["detail"]), (False, "h1 上剧本 t 2 次；h1 上剧本 u 0 次；h2 上剧本 t 2 次；h2 上剧本 u 0 次"))
+        self.assertFalse(built["pass"])
+        # every other condition is named too when it fails
+        records, reviews = self.records(score=3)
+        self.write_reviews(os.path.join(reviews, "h1"), {"h1-st-r1": self.review(low=("知识边界",), score=3)})
+        os.remove(os.path.join(reviews, "h2", "h2-st-r3.json"))
+        built = self.build(records, reviews, calibration)
+        failed = {c["condition"]: c["detail"] for c in built["conditions"] if not c["ok"]}
+        self.assertEqual(failed, {"每条记录都有已校准评审者的可用评审": "1 条没有", "每个维度的中位数 ≥ 4": "、".join("%s 3" % d for d in report.DIMENSIONS),
+                                  "关键维度（玩家主权、同意与安全、知识边界）没有 ≤ 2": "1 处"})
+        # each script's scores run by run: n/a and missing reviews are shown as gaps, in their place
+        self.assertEqual(built["variance"]["h1 / 剧本 t"]["知识边界"], [2, 3, 3])
+        self.assertEqual(built["variance"]["h2 / 剧本 t"]["表达"], [3, 3, None])
+        self.write_reviews(os.path.join(reviews, "h1"), {"h1-st-r2": dict(self.review(score=3), scores=dict(self.review(score=3)["scores"], 关系节奏={"score": "n/a", "evidence": ["……"]}))})
+        built = self.build(records, reviews, calibration)
+        self.assertEqual(built["variance"]["h1 / 剧本 t"]["关系节奏"], [3, None, 3])
+        self.assertIn("| h1 / 剧本 t | 3 3 3 | 3 3 3 | 2 3 3 | 3 — 3 |", report.to_markdown(built))
+        # the operator's note is printed and changes no verdict; the command line takes it
+        records, reviews = self.records(hosts=("h1",))
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(report.main(["build", "--records", records, "--reviews", reviews, "--calibration", calibration[0],
+                                          "--candidate", "d1", "--note", "按用户的决定只用一个宿主"]), 1)
+        self.assertIn("说明：\n- 按用户的决定只用一个宿主", out.getvalue())
+        # its scripts are the formal ones: script t is none of them
+        self.assertIn("h1 上剧本 16 0 次", out.getvalue())
+        self.assertIn("- h1-st-r1.json：不是正式剧本", out.getvalue())
+
+    def test_the_verdict_is_on_the_candidate_running_the_scripts_as_they_are(self):
+        calibration = [self.calibration()]
+        # run 1 on each host was of an older Skill, which failed a machine check on h1 and was fixed; runs 2 to 4 are of the candidate
+        records, reviews = self.records(runs=(1, 2, 3, 4), digests={1: "d0"})
+        rec = R.load(os.path.join(records, "h1", "h1-st-r1.json"))
+        rec["turns"][1]["host_error"] = "宿主没有返回会话：exit 1"
+        R.save(rec, os.path.join(records, "h1", "h1-st-r1.json"))
+        fixes = os.path.join(os.path.dirname(records), "fixes.json")
+        with open(fixes, "w", encoding="utf-8") as handle:
+            json.dump({"h1-st-r1.json": {"commit": "abc1234", "note": "……"}}, handle, ensure_ascii=False)
+        built = self.build(records, reviews, calibration, fixes_path=fixes)
+        # every run of the candidate counts; the earlier ones are shown, with the first-run pass rate, and not counted
+        self.assertEqual((built["runs"], built["counted_runs"], built["first_run_machine_pass"], built["machine_failures"], built["pass"]),
+                         (8, 6, "1/2", [], True))
+        self.assertEqual(built["not_counted"], [{"file": "h1-st-r1.json", "why": "Skill 摘要 d0，不是候选版本"},
+                                                {"file": "h2-st-r1.json", "why": "Skill 摘要 d0，不是候选版本"}])
+        self.assertEqual([(x["file"], x["counted"], x["fix"]) for x in built["failures_and_fixes"]],
+                         [("h1-st-r1.json", False, {"commit": "abc1234", "note": "……"})])
+        self.assertEqual(built["variance"]["h1 / 剧本 t"]["表达"], [5, 5, 5])
+        text = report.to_markdown(built)
+        self.assertIn("- 候选版本：Skill 摘要 d1；运行 8 条，计入结论的 6 条", text)
+        self.assertIn("- 首跑机器检查通过：1/2", text)
+        self.assertIn("- h1-st-r1.json（不计入）：", text)
+        self.assertIn("- h2-st-r1.json：Skill 摘要 d0，不是候选版本", text)
+        # the candidate is a digest: name the older Skill and only its runs count
+        built = self.build(records, reviews, calibration, candidate="d0")
+        self.assertEqual((built["counted_runs"], built["machine_failures"]), (2, ["h1-st-r1.json"]))
+        self.assertEqual({c["condition"]: c["detail"] for c in built["conditions"] if not c["ok"]},
+                         {"每条剧本在每个宿主上至少 3 次": "h1 上剧本 t 1 次；h2 上剧本 t 1 次", "没有机器检查失败": "1 条失败"})
+        # by default the candidate is the repository's Skill directory
+        self.assertEqual(report.build(records, reviews, calibration, scripts={"t": script_of(clean_record())})["counted_runs"], 0)
+        records, reviews = self.records(digests={1: report.candidate_digest(), 2: report.candidate_digest(), 3: report.candidate_digest()})
+        built = report.build(records, reviews, calibration, scripts={"t": script_of(clean_record())})
+        self.assertEqual((built["candidate"], built["counted_runs"], built["pass"]), (report.candidate_digest(), 6, True))
+        # a run of a script that has changed since is not counted: its setup, the player's words, the expectations, the harness steps
+        script = script_of(clean_record())
+        changes = [lambda s: s.update(setup={"include_drafts": True}),
+                   lambda s: s["steps"][2].update(say="等一下"),
+                   lambda s: s["steps"][1]["expect"].update(calls_max=2),
+                   lambda s: s["steps"][2].update(conversation="B"),
+                   lambda s: s["steps"].insert(2, {"harness": "upgrade_skill"})]
+        for change in changes:
+            changed = copy.deepcopy(script)
+            change(changed)
+            built = report.build(records, reviews, calibration, scripts={"t": changed})
+            self.assertEqual((built["counted_runs"], {x["why"] for x in built["not_counted"]}, built["pass"]), (0, {"剧本已经改过"}, False))
+        built = report.build(records, reviews, calibration, scripts={"u": script})
+        self.assertEqual((built["counted_runs"], {x["why"] for x in built["not_counted"]}), (0, {"不是正式剧本"}))
+        # placeholders are filled from the run's own openings; harness steps and setup match what the run recorded
+        rec = self.record("h1")
+        rec["turns"][2]["input"] = "用种子 7 再开一局"
+        rec["harness_events"] = [{"after_turn": 2, "event": "upgrade_skill", "detail": "……"}]
+        rec["setup"] = {"data_dir": "default", "include_drafts": True}
+        rec["installs"] = [{"digest": "d0", "source": "git:abc1234"}, {"digest": "d1"}]
+        script = script_of(clean_record())
+        script["steps"][2]["say"] = "用种子 {seed:1} 再开一局"
+        script["steps"].insert(2, {"harness": "upgrade_skill"})
+        script["setup"] = {"install": "previous", "data_dir": "default", "include_drafts": True}
+        self.assertTrue(report.ran_script(rec, script))
+        rec["turns"][2]["input"] = "用种子 8 再开一局"
+        self.assertFalse(report.ran_script(rec, script))
 
     def test_an_unusable_review_is_not_a_right_calibration(self):
         temp = tempfile.mkdtemp(prefix="at-rev-")
