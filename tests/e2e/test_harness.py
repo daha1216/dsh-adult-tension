@@ -354,6 +354,13 @@ class ReportTest(unittest.TestCase):
         result = report.calibrate(temp)
         self.assertEqual((result["correct"], result["ready"]), (9, False))
 
+    def test_the_host_identity_names_every_model_that_answered(self):
+        rec = clean_record()
+        self.assertEqual(report.host_models(rec), "m")
+        # the proxy switched models between turns
+        rec["turns"][0]["model"], rec["turns"][2]["model"] = "p/m-exp-a", "p/m-flash"
+        self.assertEqual(report.host_models(rec), "p/m-exp-a+p/m-flash")
+
     def test_a_calibration_speaks_for_the_one_model_that_answered(self):
         # the model the endpoint says answered, not the name asked for; several when the attempts differ
         self.assertEqual(report.reviewer_of(self.review(by="served-n")), "served-n")
@@ -392,6 +399,7 @@ class ReportTest(unittest.TestCase):
             self.write_reviews(os.path.join(reviews, host), {"%s-st-r1" % host: self.review(score=5), "%s-st-r2" % host: self.review(score=5)})
         calibration = [self.calibration()]
         built = report.build(records, reviews, calibration)
+        self.assertEqual(built["hosts"]["h1"], [["1", "m", "2026-10-01"]])
         self.assertEqual(built["first_run_machine_pass"], "2/2")
         self.assertEqual(built["average_calls_per_ordinary_turn"], 1.0)
         self.assertEqual(sorted(built["ceiling"]), sorted(report.DIMENSIONS))

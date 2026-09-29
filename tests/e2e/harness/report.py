@@ -144,6 +144,13 @@ def _reviewers_text(reviewers):
                     for name, v in sorted(reviewers.items())) or "无"
 
 
+def host_models(rec):
+    """Every model the host reported answering in the run, joined with + (a
+    proxy can switch models between turns); else the one the record names."""
+    models = sorted({t["model"] for t in rec["turns"] if t.get("model")})
+    return "+".join(models) if models else rec["host"].get("model")
+
+
 def _runs(records_dir):
     out = []
     for path in sorted(glob.glob(os.path.join(records_dir, "*", "*.json"))):
@@ -299,7 +306,7 @@ def build(records_dir, reviews_dir, calibration_dirs, fixes_path=None):
     ordinary_calls = []
     for name, rec in _runs(records_dir):
         host = rec["host"]["name"]
-        identities.setdefault(host, set()).add((rec["host"].get("version"), rec["host"].get("model"), rec.get("date")))
+        identities.setdefault(host, set()).add((rec["host"].get("version"), host_models(rec), rec.get("date")))
         checks = machine_checks.check(rec)
         # a review by a reviewer that did not pass calibration is no review
         by, review = _counted_review(reviews_dir, host, name, trusted)
