@@ -53,6 +53,13 @@ SNAKE_RE = re.compile(r"\b[a-z]+(?:_[a-z]+)+\b")
 ENGLISH_WORD_RE = re.compile(r"[A-Za-z]{3,}")
 CJK_RE = re.compile(r"[一-鿿]")
 QUOTE_RE = re.compile(r"“([^”]{2,})”")
+# A quote in the middle of a sentence, with no punctuation in it and no word of
+# speaking next to it, names a thing (笔尖落在“受伤原因及工位”那一栏上, 招牌上是
+# “陈记跌打正骨医馆”几个字): no one says it, and a scene may name it again. Set
+# any other way (after a colon, ending a sentence, next to 说/句, with a
+# sentence in it) a quote is taken as a line.
+SPOKEN_PUNCT_RE = re.compile(r"[，,。！？!?…；;～~—]")
+SPEAKING_WORDS = ("说", "道", "问", "答", "喊", "骂", "嚷", "吼", "念", "句", "声", "开口", "应")
 PLAYER_SPEECH_RE = re.compile(r"(?:^|[。！？\n，、])\s*你[^。！？“\n]{0,12}?(?:说|问|道|答|喊|开口|低声|笑着|回了一句|接了一句)[^“\n]{0,6}“([^”]{2,})”")
 # the line first, then who said it: “……”你的声音……, “……”你低声说
 PLAYER_SPEECH_AFTER_RE = re.compile(r"“([^”]{2,})”[，,]?\s*你(的声音|[^。！？“”\n]{0,8}?(?:说|问|道|答|喊|开口|低声))")
@@ -523,13 +530,24 @@ def _sentences(lines):
                 yield part
 
 
+def _names_a_thing(line, match):
+    """QUOTE_RE's MATCH in LINE names a thing rather than says a line (see
+    SPOKEN_PUNCT_RE)."""
+    start, end = match.span()
+    if SPOKEN_PUNCT_RE.search(match.group(1)) or not CJK_RE.match(line[start - 1 : start] or " ") or not CJK_RE.match(line[end : end + 1] or " "):
+        return False
+    near = line[max(0, start - 4) : start] + "|" + line[end : end + 3]
+    return not any(word in near for word in SPEAKING_WORDS)
+
+
 def check_repetition(record):
     """ACCEPTANCE 6.2: a sentence repeated two or more times within 10 turns
     (three occurrences: boilerplate, safety reminders, exit descriptions),
     or any dialogue line repeated within one scene. Narrative turns only.
     Scene ids are numbered within a game (every game opens in sc1), so a scene
     is (game, scene id): a replayed seed ("重开 N 号") is another game, and its
-    opening may say the lines of the first one again."""
+    opening may say the lines of the first one again. A quote that names a
+    thing is not a line (_names_a_thing)."""
     out = []
     history = []  # (turn index, sentence, bigrams)
     scene_lines = {}
@@ -557,8 +575,9 @@ def check_repetition(record):
         game = context.get("session_id") or data.get("session_id") or game
         seen = scene_lines.setdefault((game, (context.get("scene") or {}).get("id")), {})
         for line in lines:
-            for quote in QUOTE_RE.findall(line):
-                if len(quote) < 6:
+            for match in QUOTE_RE.finditer(line):
+                quote = match.group(1)
+                if len(quote) < 6 or _names_a_thing(line, match):
                     continue
                 if quote in seen and seen[quote] != index:
                     out.append(finding("repetition", index, "同一场景里重复的台词（第 %d 轮已出现）：“%s”" % (seen[quote], quote[:30])))

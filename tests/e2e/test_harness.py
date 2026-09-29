@@ -275,6 +275,20 @@ class MachineCheckTest(unittest.TestCase):
         same_game["turns"][0]["text"] = same_game["turns"][0]["text"].replace("有人把保温杯推到你面前。", "有人把保温杯推到你面前：“你别管这件事了。”")
         same_game["turns"][1]["text"] = "对方又说：“你别管这件事了。”\n\n" + footer(2, 1205)
         self.assertIn(("repetition", 2), names(M.check(same_game)))
+        # a quote that names a thing in the middle of a sentence (a form's column) is not a line, and
+        # a scene may name it again; a line is one however it is set: after a colon, ending a
+        # sentence, next to a word of speaking, with a sentence in it
+        cases = [("他的笔尖落在“受伤原因及工位”那一栏上。", "记录表上“受伤原因及工位”一栏还空着。", False),
+                 ("他说：“我明天再来找你们”", "他抬起头：“我明天再来找你们”随即转身。", True),
+                 ("他说：“我明天再来找你们”", "他摇头“我明天再来找你们”。", True),
+                 ("他说：“我明天再来找你们”", "他丢下一句“我明天再来找你们”就走了。", True),
+                 ("他说：“我明天再来找你们”", "他把“我明天再来找你们”又说了一遍。", True),
+                 ("她说：“你别管这件事了，快走”", "纸条上写着“你别管这件事了，快走”几个字。", True)]
+        for first, again, flagged in cases:
+            rec = clean_record()
+            rec["turns"][1]["text"] = first + "\n\n" + footer(2, 1205)
+            rec["turns"][2]["text"] = again + "\n\n" + footer(3, 1210)
+            self.assertEqual(("repetition", 3) in names(M.check(rec)), flagged, again)
 
     def test_rejections_repairs_and_budgets(self):
         rec = clean_record()
