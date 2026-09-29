@@ -205,7 +205,8 @@ def shown_env(extra):
 
 def host_env(setup, project, base, extra=None):
     """The host's environment: the engine trace always; a data directory in the
-    project and the draft switch unless the script says otherwise."""
+    project unless the script says otherwise; the draft switch only when the
+    script asks for it (the worlds are released; an older Skill may need it)."""
     env = {k: v for k, v in base.items() if not _from_calling_session(k, base)}
     env.update(extra or {})
     env["ADULT_TENSION_TRACE"] = os.path.join(project, "trace.jsonl")
@@ -213,7 +214,7 @@ def host_env(setup, project, base, extra=None):
     env.pop("ADULT_TENSION_INCLUDE_DRAFTS", None)
     if setup.get("data_dir") != "default":
         env["ADULT_TENSION_HOME"] = os.path.join(project, ".at-data")
-    if setup.get("include_drafts", True):
+    if setup.get("include_drafts", False):
         env["ADULT_TENSION_INCLUDE_DRAFTS"] = "1"
     return env
 

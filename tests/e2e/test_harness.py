@@ -860,9 +860,12 @@ class RunnerTest(unittest.TestCase):
         project = os.path.join("D:\\", "projects", "at-e2e", "p")
         env = run_script.host_env({}, project, base)
         self.assertEqual(
-            (env["ADULT_TENSION_HOME"], env["ADULT_TENSION_INCLUDE_DRAFTS"], env["ADULT_TENSION_TRACE"], env["PATH"]),
-            (os.path.join(project, ".at-data"), "1", os.path.join(project, "trace.jsonl"), "x"),
+            (env["ADULT_TENSION_HOME"], env["ADULT_TENSION_TRACE"], env["PATH"]),
+            (os.path.join(project, ".at-data"), os.path.join(project, "trace.jsonl"), "x"),
         )
+        # the worlds are released: the draft switch only when a script asks for it (an older Skill)
+        self.assertNotIn("ADULT_TENSION_INCLUDE_DRAFTS", env)
+        self.assertEqual(run_script.host_env({"include_drafts": True}, project, base)["ADULT_TENSION_INCLUDE_DRAFTS"], "1")
         drill = run_script.host_env({"data_dir": "default", "include_drafts": False}, project, base)
         self.assertNotIn("ADULT_TENSION_HOME", drill)
         self.assertNotIn("ADULT_TENSION_INCLUDE_DRAFTS", drill)
@@ -1023,7 +1026,8 @@ class RunnerTest(unittest.TestCase):
         temp = tempfile.mkdtemp(prefix="at-e2e-")
         self.addCleanup(shutil.rmtree, temp, True)
         script = {
-            "id": "up", "setup": {"install": "previous"}, "player_turns": 5,
+            # the stage 3 Skill's worlds are all in review
+            "id": "up", "setup": {"install": "previous", "include_drafts": True}, "player_turns": 5,
             "steps": [
                 {"say": "开一局，日常"}, {"say": "继续"}, {"say": "存档 升级前"},
                 {"harness": "upgrade_skill"},

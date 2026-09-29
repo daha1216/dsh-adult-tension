@@ -20,6 +20,8 @@ Adult Tension 是一个面向成年人的中文互动叙事 Skill。宿主里的
 
 - **Claude Code**：放到用户级 Skill 目录（`~/.claude/skills/adult-tension/`）或项目级 Skill 目录（`<项目>/.claude/skills/adult-tension/`）。
 - **Codex**：放到用户级 Skill 目录（`~/.agents/skills/adult-tension/`），或仓库里的 `.agents/skills/adult-tension/`（Codex 从当前目录一直找到仓库根）；`agents/openai.yaml` 提供显示名与默认提示。Codex 会自动发现新装的 Skill，没出现时重启 Codex。（位置依据 Codex 官方文档，2026-09 核对。）
+- **OpenCode**：放到用户级 Skill 目录（`~/.config/opencode/skills/adult-tension/`）或项目里的 `.opencode/skills/adult-tension/`；OpenCode 也会读 Claude Code 的 `.claude/skills/`。真实宿主试玩的前三轮用的是 OpenCode 1.18.29。
+- **pi**：放到用户级 Skill 目录（`~/.pi/agent/skills/adult-tension/`，或几个宿主共用的 `~/.agents/skills/adult-tension/`），或项目里的 `.pi/skills/adult-tension/`、`.agents/skills/adult-tension/`（项目级的要先信任这个项目）。之后的真实宿主试玩与端到端评测用的是 pi 0.87.1。（位置依据 pi 随包文档，2026-09 核对。）
 - **只有命令行的环境**：放在任意位置，直接运行：
 
   ```bash
@@ -39,7 +41,7 @@ Adult Tension 是一个面向成年人的中文互动叙事 Skill。宿主里的
    - macOS：`~/Library/Application Support/adult-tension`
    - Linux：`$XDG_DATA_HOME/adult-tension`，未设置时 `~/.local/share/adult-tension`
 
-目录里有：`adult_tension.db`（全部状态与存档）、`backups/`（升级前的数据库备份）、`exports/`（导出的存档）、`logs/`（运行日志，默认不记录玩家原文）、`cache/`（字节码缓存，可以随时删除）、`version.json`。
+目录里有：`adult_tension.db`（全部状态与存档）、`backups/`（升级前的数据库备份）、`exports/`（导出的存档）、`inputs/`（宿主交给运行时的输入文件，可以随时删除）、`logs/`（运行日志，默认不记录玩家原文）、`cache/`（字节码缓存，可以随时删除）、`version.json`。
 
 宿主的沙箱只允许写工作区时，`doctor` 会报 `DATA_DIR_UNAVAILABLE`，写明试过的路径与原因；请让宿主放行上面的目录，或用 `--data-dir` 指向一个可写的位置。运行时不会悄悄改用临时目录——那样存档会在重启后消失。
 
