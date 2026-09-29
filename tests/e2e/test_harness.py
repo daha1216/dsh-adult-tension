@@ -242,6 +242,15 @@ class MachineCheckTest(unittest.TestCase):
                      "你工装外侧别着的对讲机突然爆出一阵电流杂音：\n\n“呼叫调度！七号泊位的吊具已经降下来了！”"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertNotIn(("ventriloquism", 3), names(M.check(rec)), text)
+        # a line the player reads off something written is not the player's ...
+        for text in ("你垂眸一瞥，只见那纸角上写着娟秀却急促的一行铅笔字：“那三行若与北边或桥头有关，烦给个准话。”",
+                     "你低头看向纸条，上面写着：“今晚别去七号泊位。”"):
+            rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
+            self.assertNotIn(("ventriloquism", 3), names(M.check(rec)), text)
+        # ... but one the player writes is, and so is one the player says after seeing something
+        for text in ("你在纸上写着：“今晚别去七号泊位。”", "你提笔写道：“今晚别去七号泊位。”", "你看见纸条上的字，脸色一沉，声音压得极低：“今晚别去七号泊位。”"):
+            rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
+            self.assertIn(("ventriloquism", 3), names(M.check(rec)), text)
 
     def test_a_line_that_says_what_the_player_said_to_ask_is_theirs(self):
         rec = clean_record()

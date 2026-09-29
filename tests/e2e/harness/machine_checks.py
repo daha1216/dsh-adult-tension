@@ -70,6 +70,9 @@ PLAYER_COLON_RE = re.compile(r"(?:^|[。！？])\s*你([^。！？“”\n]{0,60
 OTHER_SPEAKERS = ("他", "她", "它", "对方", "有人", "众人")
 # ... or the sentence says the sound came out of something (你腰间的对讲机爆出一阵杂音：“……”)
 SOUND_FROM = ("传来", "传出", "响起", "响了", "爆出", "播出")
+# ... or that the player reads it off something written (你垂眸一瞥，只见那纸角上写着一行铅笔字：“……”);
+# writing it down is still the player's line (你在纸上写着：“……”)
+READ_OFF_RE = re.compile(r"(?:只见|看见|看到|瞥见|读到|看清|看向)[^：:]*?(?:写着|写的是|印着|刻着)")
 # The player may say what to ask or tell without quoting it (问她是不是在等人,
 # 说谭振华好像藏了什么). A line of one sentence that says at least half of that
 # has its source there, whatever address or framing it adds (“汪先生今晚坐在
@@ -482,7 +485,8 @@ def check_ventriloquism(record):
             for match in PLAYER_COLON_RE.finditer(line):
                 if others is None:
                     others = set(OTHER_SPEAKERS) | _npc_name_parts(record)
-                if not any(o in match.group(1) for o in others) and not any(s in match.group(1) for s in SOUND_FROM):
+                if not any(o in match.group(1) for o in others) and not any(s in match.group(1) for s in SOUND_FROM) \
+                        and not READ_OFF_RE.search(match.group(1)):
                     quotes.append(match.group(2))
             quotes = list(dict.fromkeys(quotes))
             for quote in quotes:
