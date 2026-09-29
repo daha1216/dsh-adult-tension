@@ -2,19 +2,27 @@
 
     python tests/e2e/harness/report.py packet --record <record.json> --out <file.md>
     python tests/e2e/harness/report.py calibrate --reviews <dir>
-    python tests/e2e/harness/report.py build --records <dir> --reviews <dir>
+    python tests/e2e/harness/report.py build --records <dir> --reviews <dir> --calibration <dir> [--calibration <dir> ...]
                                         [--fixes <fixes.json>] [--out <dir>]
-    python tests/e2e/harness/report.py playtests --records <dir> --reviews <dir> [--out <dir>]
+    python tests/e2e/harness/report.py playtests --records <dir> --reviews <dir> --calibration <dir> [...] [--out <dir>]
     python tests/e2e/harness/report.py agreement --first <reviews dir> --second <reviews dir> [--out <file.md>]
 
 packet: what an independent reviewer gets, as one document: the reviewer
 instructions, the rubric, NARRATIVE_RULES.md and the record. Nothing else:
 no script focus, no expectations, no implementation (ACCEPTANCE 6.1 item 7).
 
+The reviewer is the model the endpoint says answered (each attempt's
+served_model), not the name asked for: a proxy can serve one name with
+different models, even within one batch.
+
 calibrate: the reviewer's scores on the calibration set against key.json.
 A good record is judged right when no dimension is <= 2; a record with a
 planted defect when every planted dimension is <= 2. Below 10 of 12, fix the
-anchors before the formal review (ACCEPTANCE 6.3).
+anchors before the formal review (ACCEPTANCE 6.3). A calibration speaks for
+one reviewer: all twelve answered by the same model.
+
+playtests and build count a review only when its reviewer passed one of the
+calibrations given; the others are shown and not counted.
 
 agreement: two reviewers on the same records (<dir>/<host>/<file>): per
 dimension how often they give the same score or differ by one, the mean of
@@ -70,10 +78,20 @@ def usable(review):
     return bool(review) and isinstance(review.get("scores"), dict)
 
 
+def reviewer_of(review):
+    """The model that answered: every served_model in the attempts (joined
+    with + when they differ), the name asked for when no attempt names one
+    (reviews written by hand), None when nothing is recorded."""
+    reviewer = (review or {}).get("reviewer") or {}
+    served = sorted({a["served_model"] for a in reviewer.get("attempts") or [] if a.get("served_model")})
+    return "+".join(served) if served else reviewer.get("model")
+
+
 def calibrate(reviews_dir):
     with open(os.path.join(E2E, "calibration", "key.json"), encoding="utf-8") as handle:
         key = json.load(handle)
     rows = []
+    reviewers = set()
     for name, expected in sorted(key.items()):
         path = os.path.join(reviews_dir, name + ".json")
         if not os.path.exists(path):
@@ -84,6 +102,8 @@ def calibrate(reviews_dir):
         if not usable(review):
             rows.append({"record": name, "right": False, "why": "评审结果不可用（不是要求的格式）"})
             continue
+        # who gave the scores; an unusable review is judged wrong and names no one
+        reviewers.add(reviewer_of(review))
         low = [d for d in DIMENSIONS if (_score(review, d) or 5) <= 2]
         if expected["low"]:
             right = all(d in low for d in expected["low"])
@@ -93,7 +113,35 @@ def calibrate(reviews_dir):
             why = "好的记录；评审判为 ≤ 2 的：%s" % ("、".join(low) or "无")
         rows.append({"record": name, "right": right, "why": why})
     correct = sum(1 for r in rows if r["right"])
-    return {"correct": correct, "total": len(rows), "ready": correct >= 10, "rows": rows}
+    # the result speaks for one reviewer only: the same known model answered every record
+    reviewer = next(iter(reviewers)) if len(reviewers) == 1 else None
+    return {"correct": correct, "total": len(rows), "reviewer": reviewer, "reviewers": sorted(r or "未记" for r in reviewers),
+            "ready": correct >= 10 and reviewer is not None, "rows": rows}
+
+
+def calibrated(calibration_dirs):
+    """The reviewers that passed a calibration, each with its result ("12/12")."""
+    out = {}
+    for directory in calibration_dirs:
+        result = calibrate(directory)
+        if result["ready"]:
+            out[result["reviewer"]] = "%d/%d" % (result["correct"], result["total"])
+    return out
+
+
+def _reviewers(rows, trusted):
+    """Who reviewed how many records, and the calibration each passed (None: not calibrated, not counted)."""
+    out = {}
+    for row in rows:
+        if row["reviewed_by"]:
+            entry = out.setdefault(row["reviewed_by"], {"reviews": 0, "calibration": trusted.get(row["reviewed_by"])})
+            entry["reviews"] += 1
+    return out
+
+
+def _reviewers_text(reviewers):
+    return "、".join("%s %d 条（%s）" % (name, v["reviews"], "校准 %s" % v["calibration"] if v["calibration"] else "未通过校准，不计入")
+                    for name, v in sorted(reviewers.items())) or "无"
 
 
 def _runs(records_dir):
@@ -114,6 +162,16 @@ def _review(reviews_dir, host, name):
     return review if usable(review) else None
 
 
+def _counted_review(reviews_dir, host, name, trusted):
+    """Who gave the usable review of one record ("未记" when nothing says so),
+    and the review when that reviewer passed calibration, else None."""
+    review = _review(reviews_dir, host, name)
+    if review is None:
+        return None, None
+    by = reviewer_of(review) or "未记"
+    return by, (review if by in trusted else None)
+
+
 def _opening_data(rec):
     for turn in rec["turns"]:
         for call in turn.get("runtime_calls") or []:
@@ -123,23 +181,26 @@ def _opening_data(rec):
     return {}
 
 
-def playtests(records_dir, reviews_dir):
+def playtests(records_dir, reviews_dir, calibration_dirs):
     """World playtests (CONTENT_BIBLE.md 7): each run with its world, mode,
     seed, the Skill it ran (digest and commit), machine checks and review;
     then per world and mode the runs, distinct seeds, passes and the median
-    of each dimension. Every run is shown; none replaces another."""
+    of each dimension. Every run is shown; none replaces another. Only
+    reviews by a calibrated reviewer count."""
+    trusted = calibrated(calibration_dirs)
     rows = []
     for name, rec in _runs(records_dir):
         opening = _opening_data(rec)
         content = ((rec.get("final_export") or {}).get("session") or {}).get("content") or {}
         install = (rec.get("installs") or [{}])[-1]
         checks = machine_checks.check(rec)
+        by, review = _counted_review(reviews_dir, rec["host"]["name"], name, trusted)
         rows.append({
             "file": name, "script": rec["script"], "run": rec["run"],
             "world": (content.get("world") or {}).get("id"), "mode": (opening.get("opening") or {}).get("mode"), "seed": opening.get("seed"),
             "skill": install.get("digest"), "commit": (install.get("repository") or {}).get("commit"),
             "machine_pass": checks["pass"], "findings": [f["message"] for f in checks["findings"]],
-            "review": _review(reviews_dir, rec["host"]["name"], name),
+            "reviewed_by": by, "review": review,
         })
     groups = {}
     for row in rows:
@@ -158,11 +219,7 @@ def playtests(records_dir, reviews_dir):
                              for r in reviewed for d in CRITICAL if (_score(r["review"], d) or 5) <= 2],
         })
     # who reviewed: a reader has to know when the model under test graded its own runs
-    reviewers = {}
-    for row in rows:
-        if row["review"]:
-            model = (row["review"].get("reviewer") or {}).get("model") or "未记"
-            reviewers[model] = reviewers.get(model, 0) + 1
+    reviewers = _reviewers(rows, trusted)
     # ACCEPTANCE 6.3: a dimension where more than half the runs score 5 has anchors too loose
     ceiling = []
     for dimension in DIMENSIONS:
@@ -178,15 +235,14 @@ def playtests_markdown(result):
     for s in result["summary"]:
         lines.append("| %s | %s | %d | %d | %d | %d | %s |" % (s["world"], s["mode"], s["runs"], s["seeds"], s["machine_pass"], s["reviewed"],
                                                            " | ".join("—" if s["medians"][d] is None else str(s["medians"][d]) for d in DIMENSIONS)))
-    reviewers = "、".join("%s %d 条" % (model, n) for model, n in sorted(result["reviewers"].items())) or "无"
-    lines += ["", "（维度一栏是评审分数的中位数。评审者：%s。）" % reviewers, "",
+    lines += ["", "（维度一栏是评审分数的中位数。评审者：%s。）" % _reviewers_text(result["reviewers"]), "",
               "满分过半的维度（锚点太松，下一轮收紧）：%s" % ("、".join(result["ceiling"]) or "无"), "",
               "| 记录 | 种子 | Skill（提交） | 机器检查 | 评审 ≤ 2 的维度 |", "|---|---|---|---|---|"]
     for r in result["rows"]:
         low = [d for d in DIMENSIONS if r["review"] and (_score(r["review"], d) or 5) <= 2]
         lines.append("| %s | %s | %s（%s） | %s | %s |" % (r["file"], r["seed"], r["skill"] or "未记", r["commit"] or "未记",
                                                        "通过" if r["machine_pass"] else "未通过：" + "；".join(r["findings"][:3]),
-                                                       "、".join(low) or ("无" if r["review"] else "未评审")))
+                                                       "、".join(low) or ("无" if r["review"] else "评审者未通过校准" if r["reviewed_by"] else "未评审")))
     return "\n".join(lines) + "\n"
 
 
@@ -201,7 +257,7 @@ def agreement(first_dir, second_dir):
             continue
         records += 1
         for seen, review in zip(models, (first, second)):
-            seen.add((review.get("reviewer") or {}).get("model") or "未记")
+            seen.add(reviewer_of(review) or "未记")
         for dimension in DIMENSIONS:
             a, b = _score(first, dimension), _score(second, dimension)
             if a is not None and b is not None:
@@ -232,11 +288,12 @@ def agreement_markdown(result):
     return "\n".join(lines) + "\n"
 
 
-def build(records_dir, reviews_dir, fixes_path=None):
+def build(records_dir, reviews_dir, calibration_dirs, fixes_path=None):
     fixes = {}
     if fixes_path and os.path.exists(fixes_path):
         with open(fixes_path, encoding="utf-8") as handle:
             fixes = json.load(handle)
+    trusted = calibrated(calibration_dirs)
     runs = []
     identities = {}
     ordinary_calls = []
@@ -244,13 +301,14 @@ def build(records_dir, reviews_dir, fixes_path=None):
         host = rec["host"]["name"]
         identities.setdefault(host, set()).add((rec["host"].get("version"), rec["host"].get("model"), rec.get("date")))
         checks = machine_checks.check(rec)
-        review = _review(reviews_dir, host, name)
+        # a review by a reviewer that did not pass calibration is no review
+        by, review = _counted_review(reviews_dir, host, name, trusted)
         stats = checks.get("stats") or {}
         if stats.get("average_calls") is not None:
             ordinary_calls.append((stats["average_calls"], stats["ordinary_turns"]))
         runs.append({
             "file": name, "host": host, "script": rec["script"], "run": rec["run"],
-            "machine_pass": checks["pass"], "findings": checks["findings"], "review": review,
+            "machine_pass": checks["pass"], "findings": checks["findings"], "reviewed_by": by, "review": review,
             "fix": fixes.get(name),
         })
     first = [r for r in runs if r["run"] == 1]
@@ -295,6 +353,7 @@ def build(records_dir, reviews_dir, fixes_path=None):
     )
     return {
         "hosts": {h: sorted([list(i) for i in identities[h]]) for h in hosts},
+        "reviewers": _reviewers(runs, trusted),
         "runs": len(runs),
         "first_run_machine_pass": "%d/%d" % (sum(1 for r in first if r["machine_pass"]), len(first)),
         "machine_failures": machine_failures,
@@ -314,6 +373,7 @@ def to_markdown(report):
     for host, ids in report["hosts"].items():
         lines.append("- %s：%s" % (host, "；".join("版本 %s，模型 %s，日期 %s" % tuple(i) for i in ids)))
     lines += [
+        "- 评审者：%s" % _reviewers_text(report["reviewers"]),
         "",
         "- 运行数：%d；首跑机器检查通过：%s；没有可用评审的记录：%d" % (report["runs"], report["first_run_machine_pass"], len(report["unreviewed"])),
         "- 普通回合平均工具调用：%s（门槛 ≤ %.1f）" % (report["average_calls_per_ordinary_turn"], AVERAGE_CALLS_LIMIT),
@@ -345,11 +405,13 @@ def main(argv):
     rep = sub.add_parser("build")
     rep.add_argument("--records", required=True)
     rep.add_argument("--reviews", required=True)
+    rep.add_argument("--calibration", action="append", required=True, help="a calibration reviews directory; repeat for each reviewer")
     rep.add_argument("--fixes")
     rep.add_argument("--out")
     play = sub.add_parser("playtests")
     play.add_argument("--records", required=True)
     play.add_argument("--reviews", required=True)
+    play.add_argument("--calibration", action="append", required=True, help="a calibration reviews directory; repeat for each reviewer")
     play.add_argument("--out")
     agree = sub.add_parser("agreement")
     agree.add_argument("--first", required=True)
@@ -371,7 +433,7 @@ def main(argv):
         print(args.out)
         return 0
     if args.action == "playtests":
-        result = playtests(args.records, args.reviews)
+        result = playtests(args.records, args.reviews, args.calibration)
         text = playtests_markdown(result)
         if args.out:
             os.makedirs(args.out, exist_ok=True)
@@ -385,9 +447,14 @@ def main(argv):
         result = calibrate(args.reviews)
         for row in result["rows"]:
             print("[%s] %s：%s" % ("对" if row["right"] else "错", row["record"], row["why"]))
-        print("正确 %d/%d：%s" % (result["correct"], result["total"], "可以开始正式评审" if result["ready"] else "先改锚点"))
+        if result["reviewer"] is None:
+            print("评审者：%s——校准只能替同一个模型说话，要 12 条都由同一个已知的模型回答" % ("、".join(result["reviewers"]) or "无"))
+        else:
+            print("评审者：%s" % result["reviewer"])
+        verdict = "可以开始正式评审" if result["ready"] else "先改锚点" if result["correct"] < 10 else "评审者不止一个或没有记下，重新校准"
+        print("正确 %d/%d：%s" % (result["correct"], result["total"], verdict))
         return 0 if result["ready"] else 1
-    report = build(args.records, args.reviews, args.fixes)
+    report = build(args.records, args.reviews, args.calibration, args.fixes)
     text = to_markdown(report)
     if args.out:
         os.makedirs(args.out, exist_ok=True)

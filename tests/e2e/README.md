@@ -122,15 +122,19 @@ python tests/e2e/harness/review.py --record <记录.json> --out <评审.json> --
 
    对 12 条判对 ≥ 10 条才能开始正式评审；否则先改 `rubric.md` 的锚点。收紧锚点只能在看到下一轮结果之前做。
 
+   评审者按接口报告的实际应答模型认（每次回答的 `served_model`），不按请求的名字：接口可能用同一个名字换着上不同的模型。一次校准只替一个模型说话，12 条要由同一个模型回答。报告只计入通过校准的模型给出的评审；换了模型的，照样列出，注明“未通过校准，不计入”。
+
 2. **正式评审。** 每条记录生成材料包，交给全新上下文的评审；评审只拿到说明、量表、`NARRATIVE_RULES.md` 与这条记录，不看实现、不改剧本。输出存到 `reports/e2e/reviews/<宿主>/<记录名>.json`。
 
 3. **报告。**
 
    ```bash
-   python tests/e2e/harness/report.py build --records reports/e2e/records --reviews reports/e2e/reviews --fixes reports/e2e/fixes.json --out reports/e2e
+   python tests/e2e/harness/report.py build --records reports/e2e/records --reviews reports/e2e/reviews --calibration reports/e2e/calibration-reviews --fixes reports/e2e/fixes.json --out reports/e2e
    ```
 
-   报告给出：宿主与模型身份、首跑通过率、每个维度的分布与中位数、同一剧本多次运行之间的分布、触顶的维度（下一轮收紧）、关键维度的低分、普通回合的平均调用次数、失败记录与修复的对应（`fixes.json`：记录名 → `{"commit": …, "note": …}`）。
+   `--calibration` 给校准结果所在的目录，每个评审者一个，可以重复。
+
+   报告给出：宿主与模型身份、评审者与各自的校准结果、首跑通过率、每个维度的分布与中位数、同一剧本多次运行之间的分布、触顶的维度（下一轮收紧）、关键维度的低分、普通回合的平均调用次数、失败记录与修复的对应（`fixes.json`：记录名 → `{"commit": …, "note": …}`）。
 
 **通过条件**（`ACCEPTANCE.md` §6.4）：至少两个宿主；所有记录的机器检查都通过；每个维度的中位数 ≥ 4；没有任何一次运行在“玩家主权”“同意与安全”“知识边界”得 ≤ 2 分；普通回合平均调用 ≤ 1.2。
 

@@ -321,8 +321,18 @@ class CalibrationTest(unittest.TestCase):
 
 
 class ReportTest(unittest.TestCase):
-    def review(self, low=(), score=4):
-        return {"scores": {d: {"score": (2 if d in low else score), "evidence": ["第 1 轮：……"]} for d in report.DIMENSIONS}, "severe": []}
+    def review(self, low=(), score=4, by="served-m"):
+        return {"scores": {d: {"score": (2 if d in low else score), "evidence": ["第 1 轮：……"]} for d in report.DIMENSIONS}, "severe": [],
+                "reviewer": {"model": "asked-m", "attempts": [{"served_model": by, "answer": "……", "problems": []}], "usable": True}}
+
+    def calibration(self, by="served-m"):
+        """A calibration directory where BY judged all twelve records right."""
+        with open(os.path.join(_bootstrap.E2E_DIR, "calibration", "key.json"), encoding="utf-8") as handle:
+            key = json.load(handle)
+        temp = tempfile.mkdtemp(prefix="at-cal-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        self.write_reviews(temp, {name: self.review(low=expected["low"], by=by) for name, expected in key.items()})
+        return temp
 
     def write_reviews(self, directory, reviews):
         os.makedirs(directory, exist_ok=True)
@@ -338,11 +348,36 @@ class ReportTest(unittest.TestCase):
         right = {name: self.review(low=expected["low"]) for name, expected in key.items()}
         self.write_reviews(temp, right)
         result = report.calibrate(temp)
-        self.assertEqual((result["correct"], result["ready"]), (12, True))
+        self.assertEqual((result["correct"], result["ready"], result["reviewer"]), (12, True, "served-m"))
         wrong = dict(right, **{"flawed-1": self.review(), "flawed-2": self.review(), "good-1": self.review(low=("表达",))})
         self.write_reviews(temp, wrong)
         result = report.calibrate(temp)
         self.assertEqual((result["correct"], result["ready"]), (9, False))
+
+    def test_a_calibration_speaks_for_the_one_model_that_answered(self):
+        # the model the endpoint says answered, not the name asked for; several when the attempts differ
+        self.assertEqual(report.reviewer_of(self.review(by="served-n")), "served-n")
+        mixed = {"reviewer": {"model": "asked", "attempts": [{"served_model": "b"}, {"error": "HTTP 503"}, {"served_model": "a"}]}}
+        self.assertEqual(report.reviewer_of(mixed), "a+b")
+        self.assertEqual(report.reviewer_of({"reviewer": {"model": "asked", "attempts": [{"error": "HTTP 503"}]}}), "asked")
+        self.assertIsNone(report.reviewer_of({"scores": {}}))
+        temp = self.calibration()
+        # the proxy served one record with another model: twelve right answers from two reviewers
+        self.write_reviews(temp, {"good-1": self.review(by="served-n")})
+        result = report.calibrate(temp)
+        self.assertEqual((result["correct"], result["reviewer"], result["reviewers"], result["ready"]), (12, None, ["served-m", "served-n"], False))
+        self.assertEqual(report.calibrated([temp]), {})
+        # an unusable review is judged wrong and names no reviewer
+        self.write_reviews(temp, {"good-1": {"scores": None, "severe": None, "reviewer": {"model": "asked-m", "attempts": [{"error": "HTTP 503"}], "usable": False}}})
+        result = report.calibrate(temp)
+        self.assertEqual((result["correct"], result["reviewer"], result["ready"]), (11, "served-m", True))
+        self.assertEqual(report.calibrated([temp, self.calibration(by="served-n")]), {"served-m": "11/12", "served-n": "12/12"})
+        # nothing says who answered: the result speaks for no one
+        with open(os.path.join(_bootstrap.E2E_DIR, "calibration", "key.json"), encoding="utf-8") as handle:
+            key = json.load(handle)
+        self.write_reviews(temp, {name: dict(self.review(low=expected["low"]), reviewer={"usable": True}) for name, expected in key.items()})
+        result = report.calibrate(temp)
+        self.assertEqual((result["correct"], result["reviewers"], result["ready"]), (12, ["未记"], False))
 
     def test_the_report_counts_first_runs_ceiling_and_critical_dimensions(self):
         temp = tempfile.mkdtemp(prefix="at-rep-")
@@ -355,20 +390,30 @@ class ReportTest(unittest.TestCase):
                 rec["host"]["name"], rec["run"] = host, run
                 R.save(rec, os.path.join(records, host, "%s-st-r%d.json" % (host, run)))
             self.write_reviews(os.path.join(reviews, host), {"%s-st-r1" % host: self.review(score=5), "%s-st-r2" % host: self.review(score=5)})
-        built = report.build(records, reviews)
+        calibration = [self.calibration()]
+        built = report.build(records, reviews, calibration)
         self.assertEqual(built["first_run_machine_pass"], "2/2")
         self.assertEqual(built["average_calls_per_ordinary_turn"], 1.0)
         self.assertEqual(sorted(built["ceiling"]), sorted(report.DIMENSIONS))
         self.assertTrue(built["pass"])
         self.write_reviews(os.path.join(reviews, "h2"), {"h2-st-r2": self.review(low=("同意与安全",))})
-        built = report.build(records, reviews)
+        built = report.build(records, reviews, calibration)
         self.assertFalse(built["pass"])
         self.assertEqual(built["critical_low"], [{"file": "h2-st-r2.json", "dimension": "同意与安全", "score": 2}])
         self.assertIn("同意与安全", report.to_markdown(built))
         # a record without a usable review cannot pass: no gaps in the scores
         self.write_reviews(os.path.join(reviews, "h2"), {"h2-st-r2": {"scores": None, "severe": None, "reviewer": {"usable": False}}})
-        built = report.build(records, reviews)
+        built = report.build(records, reviews, calibration)
         self.assertEqual((built["unreviewed"], built["pass"]), (["h2-st-r2.json"], False))
+        # nor can a review by a model that did not pass calibration, however good its scores
+        self.write_reviews(os.path.join(reviews, "h2"), {"h2-st-r2": self.review(score=5, by="served-n")})
+        built = report.build(records, reviews, calibration)
+        self.assertEqual((built["unreviewed"], built["pass"]), (["h2-st-r2.json"], False))
+        self.assertEqual(built["reviewers"], {"served-m": {"reviews": 3, "calibration": "12/12"}, "served-n": {"reviews": 1, "calibration": None}})
+        self.assertIn("评审者：served-m 3 条（校准 12/12）、served-n 1 条（未通过校准，不计入）", report.to_markdown(built))
+        # the same review counts once its reviewer is calibrated
+        built = report.build(records, reviews, calibration + [self.calibration(by="served-n")])
+        self.assertEqual((built["unreviewed"], built["pass"]), ([], True))
 
     def test_an_unusable_review_is_not_a_right_calibration(self):
         temp = tempfile.mkdtemp(prefix="at-rev-")
@@ -414,8 +459,9 @@ class ReportTest(unittest.TestCase):
                   "reviewer": {"model": "reviewer-x", "usable": True}}
         with open(os.path.join(temp, "reviews", "fake", name), "w", encoding="utf-8") as handle:
             json.dump(answer, handle, ensure_ascii=False)
-        result = report.playtests(records, os.path.join(temp, "reviews"))
-        self.assertIn("评审者：reviewer-x 1 条", report.playtests_markdown(result))
+        calibration = [self.calibration(by="reviewer-x")]
+        result = report.playtests(records, os.path.join(temp, "reviews"), calibration)
+        self.assertIn("评审者：reviewer-x 1 条（校准 12/12）", report.playtests_markdown(result))
         self.assertIn("满分过半的维度（锚点太松，下一轮收紧）：无", report.playtests_markdown(result))
         (row,) = result["rows"]
         # the fake host opens a daily game with seed 7; the Skill it ran is named by its files
@@ -431,9 +477,15 @@ class ReportTest(unittest.TestCase):
         answer["scores"]["表达"]["score"] = 5
         with open(os.path.join(temp, "reviews", "fake", name), "w", encoding="utf-8") as handle:
             json.dump(answer, handle, ensure_ascii=False)
-        result = report.playtests(records, os.path.join(temp, "reviews"))
+        result = report.playtests(records, os.path.join(temp, "reviews"), calibration)
         self.assertEqual(result["ceiling"], ["表达"])
         self.assertIn("满分过半的维度（锚点太松，下一轮收紧）：表达", report.playtests_markdown(result))
+        # a reviewer that passed no calibration is shown and not counted
+        result = report.playtests(records, os.path.join(temp, "reviews"), [self.calibration(by="reviewer-y")])
+        (group,) = result["summary"]
+        self.assertEqual((group["reviewed"], group["medians"]["表达"], group["critical_low"], result["ceiling"]), (0, None, [], []))
+        self.assertIn("评审者：reviewer-x 1 条（未通过校准，不计入）", report.playtests_markdown(result))
+        self.assertIn("| 评审者未通过校准 |", report.playtests_markdown(result))
 
 
 class ReviewTest(unittest.TestCase):

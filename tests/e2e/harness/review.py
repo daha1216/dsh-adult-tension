@@ -16,6 +16,10 @@ not (no JSON, a dimension missing, a score out of range) goes back to the
 reviewer with what is wrong in its form, asking for the same review in the
 required form; at most 3 attempts in all; every raw answer is kept in the
 output. Scores are taken as the reviewer gave them.
+
+reviewer.model is the name asked for; each attempt's served_model is the
+model the endpoint says answered. Reports go by the latter (report.reviewer_of):
+one name can be served by different models.
 """
 
 import argparse
