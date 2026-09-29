@@ -48,7 +48,7 @@
 | `intimacy_evidence` | 为私密倾向卡的某一项记一条证据。同一项同一方向需要至少 2 条来自不同回合的证据才会改动（界线项的放宽 remove 需要 3 条）；数值项用 increase/decrease，列表项用 add/remove，文字项用 set |
 | `identity_update` | 逐项修改身份卡（资源、限制、义务用 add/remove；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换 |
 | `npc_update` | 修改 NPC 的公开身份、外貌、当前目标、对关系的态度或处境（不含身份卡与倾向卡） |
-| `introduce_character` | 新角色登场：必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason |
+| `introduce_character` | 新角色登场：正文里第一次点名的人都要登场，只被提起、不在场的也算（present 写 false，location_id 写他所在的地点）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason |
 | `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给 |
 | `leverage_set` | 登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一提交里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间，双方之间的亲密提交被拒 |
 | `leverage_release` | 解除把柄（把柄被销毁、债务结清、秘密已经公开等），原因必填。同一提交里先解除再亲密不算解除 |
@@ -327,7 +327,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `introduce_character`
 
-新角色登场：必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason
+新角色登场：正文里第一次点名的人都要登场，只被提起、不在场的也算（present 写 false，location_id 写他所在的地点）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|

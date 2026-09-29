@@ -50,8 +50,6 @@ description: Run a Chinese interactive story for adults with a local determinist
 
         `opening.footer` 原样放在最后
 
-   开局正文里新写出、之后要继承的细节，在第一次提交里用 `add_fact` 记下。
-
 ## 每个回合
 
 1. 判断玩家这句话是**元命令**（见命令表）还是**叙事输入**。
@@ -73,7 +71,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
    - `player_authorized: true` 只在玩家本人的话授权了玩家角色的移动、承诺、交易、同意、转折或设定修改时。
    - 操作（字段见 `references/operations.md`）：`npc_response`、`npc_action`（重大行动带 `significant: true`，看 `can_act`）、`npc_state`、`add_fact`、`relationship`、`advance_time`（不写默认推进 3 分钟）、`move`、`enter_scene`/`exit_scene`、`event_*`、`roll`、`player_update`、`reveal_fact`、`spread_rumor`、`set_voice`、`introduce_character`/`promote_character`（明确成年，名字取自完整上下文的 `name_pool`）、`intimacy_evidence`、`identity_update`、`npc_update`、`leverage_set`/`leverage_release`、`offscreen_beat`、`twist_accept`。
-   - 正文里新写出、以后要用到的细节，用 `add_fact` 记下。正文不是记忆。
+   - 正文里新写出、以后要用到的细节用 `add_fact` 记下；新点名的人即使不在场也要 `introduce_character`。开局写出的，在第一次提交里补上。正文不是记忆。
    - 照上下文的 `requests` 附带：`chapter_summary` 为 true 时写 `chapter_summary`（≤300 字，第三方视角概括到上一回合为止的这一章）；`prologue` 为 true 时读完整上下文的 `prologue_merge`，把旧前情与其中各章合并成 ≤300 字写进 `prologue`；没要求就不写。
 4. 只根据返回的 `applied`、`resolved_events`、`simulation`、新的 `context` 写正文。掷骰、事件到期、离屏移动与消息传播都由运行时决定，你负责描写。
 5. 页脚：`【时间】{context.clock.label}｜【地点】{context.scene.location}｜回合：{turn}`。叙事助手开启时（`context.preferences.assistant`），末尾加“可以：① …… ② …… ③ ……”，只给提示，不替玩家决定。

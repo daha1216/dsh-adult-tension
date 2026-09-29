@@ -96,14 +96,25 @@ DIALOGUE_RE = re.compile(r"“[^”]*”?")
 DIALOGUE_SLACK = 60
 
 
+# The opening's first two lines say what the world and its people are
+# (NARRATIVE_RULES 9): "凌晨两点所有人必须到控制塔签到" there is a rule of the
+# world, not the time now.
+OPENING_HEADS = ("世界观：", "人物：")
+
+
 def _says_now(line, start, end, in_dialogue):
+    """How the time word at line[start:end] claims to be the time now:
+    "marked" (right after NOW_BEFORE or NOW_IS, or right before 了/啦),
+    "clause" (narration where the word opens a clause), or None."""
     near = line[max(0, start - 4) : end + 2]
     if any(other in near for other in TIME_OTHER) or line[end : end + 1] in EVENT_AFTER:
-        return False
+        return None
     head = line[:start]
     if head.endswith(NOW_BEFORE) or head.endswith(NOW_IS) or line[end : end + 1] in NOW_AFTER:
-        return True
-    return not in_dialogue and CLAUSE_START_RE.search(head) is not None
+        return "marked"
+    if not in_dialogue and CLAUSE_START_RE.search(head) is not None:
+        return "clause"
+    return None
 
 
 def _vocabulary():
@@ -250,6 +261,60 @@ def _clock_of(call):
     return None, context.get("clock")
 
 
+def _scheduled(call):
+    """The minutes at which the events the engine told the model about fall due within
+    the next day (the context's due_soon and events: "中午十二点落下裁决"); prose names a
+    later one by its day ("第三天上午十点")."""
+    context = (R.ok_data(call) or {}).get("context") or {}
+    now = (context.get("clock") or {}).get("minute")
+    if not isinstance(now, int):
+        return []
+    items = list(context.get("due_soon") or []) + list(context.get("events") or [])
+    return [now + item["in_minutes"] for item in items if isinstance(item.get("in_minutes"), int) and 0 <= item["in_minutes"] < 1440]
+
+
+CN_DIGITS = {"零": 0, "〇": 0, "一": 1, "二": 2, "两": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+CN_NUMBER = r"(?:\d{1,2}|[零〇一二两三四五六七八九十]{1,3})"
+CLOCK_TIME_RE = re.compile(r"\s*(%s)\s*[点时]\s*(整|半|一刻|三刻|(%s)\s*分?)?" % (CN_NUMBER, CN_NUMBER))
+QUARTERS = {"整": 0, "半": 30, "一刻": 15, "三刻": 45}
+
+
+def _number(text):
+    """0-59 written in digits or Chinese ("两", "十二", "二十", "五十五"), or None."""
+    if text.isdigit():
+        return int(text)
+    tens, ten, ones = text.partition("十")
+    if not ten:
+        return CN_DIGITS.get(text) if len(text) == 1 else None
+    if len(tens) > 1 or len(ones) > 1 or (tens and tens not in CN_DIGITS) or (ones and ones not in CN_DIGITS):
+        return None
+    return (CN_DIGITS[tens] if tens else 1) * 10 + (CN_DIGITS[ones] if ones else 0)
+
+
+def _time_after(line, end):
+    """The clock time named right after a time word, as (hour, minute): "中午十二点" ->
+    (12, 0), "凌晨零时五十分" -> (0, 50), "下午3点半" -> (3, 30); None when there is none."""
+    match = CLOCK_TIME_RE.match(line, end)
+    if not match:
+        return None
+    hour = _number(match.group(1))
+    minute = QUARTERS.get(match.group(2) or "整")
+    if minute is None:
+        minute = _number(match.group(3))
+    if hour is None or minute is None:
+        return None
+    return hour, minute
+
+
+def _names_scheduled(word, named, scheduled):
+    """The time word with its clock time ("中午十二点") is when one of the scheduled events
+    falls due, to within 5 minutes (on a 12-hour dial: the word says which half of the day)."""
+    if named is None:
+        return False
+    at = (named[0] % 12) * 60 + named[1]
+    return any(_hours_ok(word, m) and min(abs(at - m % 720), 720 - abs(at - m % 720)) <= 5 for m in scheduled)
+
+
 def _hours_ok(word, minute, slack=0):
     """The clock minute falls within the word's hours, widened by slack minutes each side."""
     minute %= 1440
@@ -288,12 +353,20 @@ def check_footer_and_time(record):
                     out.append(finding("footer", index, "页脚回合 %s 与引擎的 %s 不一致" % (got.group("turn"), want_turn)))
         if clock:
             minutes = [clock["minute"]] + ([before["minute"]] if before else [])
+            scheduled = _scheduled(last)
             for line in prose_lines(turn.get("text")):
+                if line.startswith(OPENING_HEADS):
+                    continue
                 dialogue = [m.span() for m in DIALOGUE_RE.finditer(line)]
                 for word in TIME_WORDS:
                     for match in re.finditer(word, line):
                         in_dialogue = any(a < match.start() < b for a, b in dialogue)
-                        if not _says_now(line, match.start(), match.end(), in_dialogue):
+                        claim = _says_now(line, match.start(), match.end(), in_dialogue)
+                        if not claim:
+                            continue
+                        # an unmarked clause naming the hour the engine has scheduled something for is
+                        # about that ("中午十二点整当众落下裁决", the verdict due at 12:00)
+                        if claim == "clause" and _names_scheduled(word, _time_after(line, match.end()), scheduled):
                             continue
                         slack = DIALOGUE_SLACK if in_dialogue else 0
                         if not any(_hours_ok(word, m, slack) for m in minutes):

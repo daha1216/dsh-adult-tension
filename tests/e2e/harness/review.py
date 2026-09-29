@@ -125,7 +125,11 @@ def review(record_path, endpoint, send=ask, wait=60):
         try:
             answer, served = send(endpoint, messages)
         except urllib.error.HTTPError as err:
-            attempts.append({"error": "HTTP %d" % err.code, "retry_after": err.headers.get("Retry-After")})
+            # what the endpoint said (a model it does not serve, a quota), never the key
+            said = err.read().decode("utf-8", "replace")[:300]
+            if endpoint.get("REVIEW_API_KEY"):
+                said = said.replace(endpoint["REVIEW_API_KEY"], "<key>")
+            attempts.append({"error": "HTTP %d" % err.code, "detail": said, "retry_after": err.headers.get("Retry-After")})
             time.sleep(min(int(err.headers.get("Retry-After") or wait), 600))
             continue
         parsed = parse_answer(answer)
@@ -164,9 +168,18 @@ def main(argv):
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
     with open(args.out, "w", encoding="utf-8", newline="\n") as handle:
         handle.write(json.dumps(out, ensure_ascii=False, indent=1) + "\n")
-    usable = out["reviewer"]["usable"]
-    print("%s：%s" % (args.out, "可用" if usable else "三次都不是要求的格式"))
-    return 0 if usable else 1
+    print("%s：%s" % (args.out, outcome(out["reviewer"])))
+    return 0 if out["reviewer"]["usable"] else 1
+
+
+def outcome(reviewer):
+    """One line on how the review went: usable, no answer at all, or no answer in the required form."""
+    if reviewer["usable"]:
+        return "可用"
+    errors = [a for a in reviewer["attempts"] if "error" in a]
+    if len(errors) == len(reviewer["attempts"]):
+        return "%d 次都没有拿到回答：%s %s" % (len(errors), errors[-1]["error"], errors[-1].get("detail") or "")
+    return "%d 次都不是要求的格式" % len(reviewer["attempts"])
 
 
 if __name__ == "__main__":

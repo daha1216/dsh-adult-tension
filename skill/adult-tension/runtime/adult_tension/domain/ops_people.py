@@ -413,7 +413,7 @@ def _card_errors(tier, card, path, errs, allowed_missing=()):
         },
         **C.card_fields()
     ),
-    "新角色登场：必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason",
+    "新角色登场：正文里第一次点名的人都要登场，只被提起、不在场的也算（present 写 false，location_id 写他所在的地点）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason",
     branch=False,
 )
 def op_introduce_character(ctx, op, path):

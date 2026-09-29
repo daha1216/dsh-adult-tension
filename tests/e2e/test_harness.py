@@ -5,11 +5,13 @@ records built here, each with and without the problem the check looks for.
 """
 
 import copy
+import io
 import json
 import os
 import shutil
 import tempfile
 import unittest
+import urllib.error
 
 import _bootstrap  # noqa: F401
 import hosts as H
@@ -149,6 +151,32 @@ class MachineCheckTest(unittest.TestCase):
                      "她说：“都凌晨了，还不回去？”", "现在是凌晨的时候，风把旗子吹得啪啪响。"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertIn(("time", 3), names(M.check(rec)), text)
+        # a clause may name the hour the engine has scheduled something for (the opening's deadline: 中午十二点落下裁决) ...
+        rec["turns"][2]["text"] = "委员们坐定，中午十二点整当众落下裁决。\n\n" + footer(3, 1210)
+        self.assertIn(("time", 3), names(M.check(rec)))
+        context = rec["turns"][2]["runtime_calls"][0]["envelope"]["data"]["context"]
+        for key in ("due_soon", "events"):
+            context[key] = [{"id": "e2", "kind": "deadline", "title": "裁决", "in_minutes": 950, "due_label": "第二天 12:00"}]
+            rec["turns"][2]["text"] = "委员们坐定，中午十二点整当众落下裁决。\n\n" + footer(3, 1210)
+            self.assertNotIn(("time", 3), names(M.check(rec)), key)
+            # ... but not another time, a part of the day with no time, or a line marked as now
+            for text in ("委员们坐定，中午一点，裁决落下。", "委员们坐定，中午十二点半，裁决落下。", "委员们坐定，中午的风从门缝灌进来。",
+                         "窗外已是中午十二点，委员们坐定。"):
+                rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
+                self.assertIn(("time", 3), names(M.check(rec)), (key, text))
+            # ... nor the hour of an event more than a day away
+            context[key][0]["in_minutes"] += 1440
+            rec["turns"][2]["text"] = "委员们坐定，中午十二点整当众落下裁决。\n\n" + footer(3, 1210)
+            self.assertIn(("time", 3), names(M.check(rec)), key)
+            del context[key]
+        self.assertEqual([M._time_after(s, 2) for s in ("中午十二点", "凌晨两点", "凌晨零时五十分", "下午3点半", "傍晚六点二十", "中午的风")],
+                         [(12, 0), (2, 0), (0, 50), (3, 30), (6, 20), None])
+        # the opening's lines on the world and its people are rules and who people are, not the time now
+        rec = clean_record()
+        rec["turns"][0]["text"] = rec["turns"][0]["text"].replace("世界观：码头的夜班。", "世界观：码头的夜班，凌晨两点所有人必须到控制塔签到。")
+        self.assertNotIn(("time", 1), names(M.check(rec)))
+        rec["turns"][0]["text"] = rec["turns"][0]["text"].replace("吊臂的影子", "凌晨两点，吊臂的影子")
+        self.assertIn(("time", 1), names(M.check(rec)))
 
     def test_lines_the_player_never_said_are_ventriloquism(self):
         rec = clean_record()
@@ -412,7 +440,24 @@ class ReviewTest(unittest.TestCase):
         self.assertTrue(out["reviewer"]["usable"])
         never = review.review(path, {"REVIEW_MODEL": "m"}, send=lambda endpoint, messages: ("没有 JSON", None))
         self.assertEqual((never["scores"], never["reviewer"]["usable"], len(never["reviewer"]["attempts"])), (None, False, 3))
+        self.assertEqual(review.outcome(never["reviewer"]), "3 次都不是要求的格式")
         self.assertEqual(review.json_error("没有 JSON"), "回答里没有 JSON 对象")
+
+    def test_an_endpoint_that_refuses_is_recorded_with_what_it_said(self):
+        path = os.path.join(_bootstrap.E2E_DIR, "calibration", "good-1.json")
+        body = b'{"error":{"message":"unknown provider for model m (key sk-secret)","code":"model_not_found"}}'
+
+        def send(endpoint, messages):
+            raise urllib.error.HTTPError("http://x/v1/chat/completions", 400, "Bad Request", {}, io.BytesIO(body))
+
+        out = review.review(path, {"REVIEW_MODEL": "m", "REVIEW_API_KEY": "sk-secret"}, send=send, wait=0)
+        attempts = out["reviewer"]["attempts"]
+        self.assertEqual([a["error"] for a in attempts], ["HTTP 400"] * 3)
+        self.assertIn("model_not_found", attempts[0]["detail"])
+        self.assertNotIn("sk-secret", json.dumps(out))
+        self.assertFalse(out["reviewer"]["usable"])
+        # not an answer in the wrong form: no answer at all, and why
+        self.assertTrue(review.outcome(out["reviewer"]).startswith("3 次都没有拿到回答：HTTP 400"))
 
     def test_the_review_packet_holds_only_rules_rubric_and_record(self):
         path = os.path.join(_bootstrap.E2E_DIR, "calibration", "good-1.json")
