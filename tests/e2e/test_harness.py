@@ -360,6 +360,9 @@ class ReportTest(unittest.TestCase):
         # the proxy switched models between turns
         rec["turns"][0]["model"], rec["turns"][2]["model"] = "p/m-exp-a", "p/m-flash"
         self.assertEqual(report.host_models(rec), "p/m-exp-a+p/m-flash")
+        # and within one turn
+        rec["turns"][1]["model"] = "p/m-exp-a+p/m-flash"
+        self.assertEqual(report.host_models(rec), "p/m-exp-a+p/m-flash")
 
     def test_a_calibration_speaks_for_the_one_model_that_answered(self):
         # the model the endpoint says answered, not the name asked for; several when the attempts differ
@@ -631,6 +634,13 @@ class ParserTest(unittest.TestCase):
         parsed = self.pi({"role": "assistant", "provider": "local", "model": "m-high", "responseModel": "m-exp-a", "stopReason": "stop",
                           "content": [{"type": "text", "text": "好。"}]})
         self.assertEqual(parsed["model"], "local/m-exp-a")
+        # the endpoint switched models within one turn: every model that answered; a failed message names none
+        first = {"role": "assistant", "provider": "local", "model": "m-high", "responseModel": "m-flash", "stopReason": "toolUse", "content": [call]}
+        failed = {"role": "assistant", "provider": "local", "model": "m-high", "stopReason": "error", "errorMessage": "503", "content": []}
+        last = {"role": "assistant", "provider": "local", "model": "m-high", "responseModel": "m-exp-a", "stopReason": "stop", "content": [{"type": "text", "text": "好。"}]}
+        self.assertEqual(self.pi(first, failed, last)["model"], "local/m-exp-a+local/m-flash")
+        self.assertEqual(self.pi(first, failed)["model"], "local/m-flash")
+        self.assertEqual(self.pi(failed)["model"], "local/m-high")
 
     def test_pi_errors_and_retries(self):
         failed = {"role": "assistant", "provider": "local", "model": "m-1", "stopReason": "error", "errorMessage": "429 Too Many Requests", "content": [{"type": "text", "text": "半句"}]}

@@ -147,7 +147,7 @@ def _reviewers_text(reviewers):
 def host_models(rec):
     """Every model the host reported answering in the run, joined with + (a
     proxy can switch models between turns); else the one the record names."""
-    models = sorted({t["model"] for t in rec["turns"] if t.get("model")})
+    models = sorted({m for t in rec["turns"] if t.get("model") for m in t["model"].split("+")})
     return "+".join(models) if models else rec["host"].get("model")
 
 

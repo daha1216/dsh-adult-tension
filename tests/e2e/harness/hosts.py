@@ -249,10 +249,14 @@ def parse_pi_stream(events):
     results by id. The turn failed when its last assistant message stopped
     on an error, an abort or the output limit, or a retry finally failed; a
     message that ended in an error is not part of the reply (a retry that
-    succeeded follows it). The model is the one that served the turn: the
-    endpoint's answer (responseModel) where it names one, since the name
-    asked for may be an alias ("gemini-3.8-flash-high" served as "…-exp-a")."""
-    session_id = model = error = None
+    succeeded follows it). The model is every model that served the turn:
+    the endpoint's answer (responseModel) where messages name one, joined
+    with + when they differ, since the name asked for may be an alias the
+    endpoint serves with different models ("gemini-3.8-flash-high" as
+    "…-exp-a" or "gemini-3.8-flash"); the name asked for only when no
+    message names an answering model (a failed message names none)."""
+    session_id = error = asked = None
+    answered = []
     texts = []
     calls = {}
     order = []
@@ -264,10 +268,14 @@ def parse_pi_stream(events):
         elif kind == "message_end":
             message = event.get("message") or {}
             if message.get("role") == "assistant":
-                served = message.get("responseModel") or message.get("model")
-                if served:
-                    model = "%s/%s" % (message["provider"], served) if message.get("provider") else served
-                cost += ((message.get("usage") or {}).get("cost") or {}).get("total") or 0
+                name = message.get("responseModel") or message.get("model")
+                if name:
+                    name = "%s/%s" % (message["provider"], name) if message.get("provider") else name
+                    if not message.get("responseModel"):
+                        asked = name
+                    elif name not in answered:
+                        answered.append(name)
+                cost +=((message.get("usage") or {}).get("cost") or {}).get("total") or 0
                 stop = message.get("stopReason")
                 if stop in ("error", "aborted", "length"):
                     error = "宿主报告这一轮出错（%s）：%s" % (stop, (message.get("errorMessage") or "")[:300])
@@ -285,6 +293,7 @@ def parse_pi_stream(events):
                 call["status"] = "error" if message.get("isError") else "completed"
         elif kind == "auto_retry_end" and not event.get("success"):
             error = "宿主重试后仍失败：%s" % (event.get("finalError") or "")[:300]
+    model = "+".join(sorted(answered)) if answered else asked
     return {"session_id": session_id, "model": model, "text": "\n\n".join(texts), "host_calls": [calls[i] for i in order], "cost": cost or None, "error": error}
 
 
