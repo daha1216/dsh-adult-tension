@@ -416,6 +416,7 @@ class ReportTest(unittest.TestCase):
             json.dump(answer, handle, ensure_ascii=False)
         result = report.playtests(records, os.path.join(temp, "reviews"))
         self.assertIn("评审者：reviewer-x 1 条", report.playtests_markdown(result))
+        self.assertIn("满分过半的维度（锚点太松，下一轮收紧）：无", report.playtests_markdown(result))
         (row,) = result["rows"]
         # the fake host opens a daily game with seed 7; the Skill it ran is named by its files
         self.assertEqual((row["run"], row["mode"], row["seed"]), (1, "daily", 7))
@@ -426,6 +427,13 @@ class ReportTest(unittest.TestCase):
         self.assertEqual((group["medians"]["玩家主权"], group["medians"]["表达"]), (2, 4))
         self.assertEqual(group["critical_low"], [{"file": name, "dimension": "玩家主权", "score": 2}])
         self.assertIn("| %s | daily | 1 | 1 |" % row["world"], report.playtests_markdown(result))
+        # a dimension where more than half the runs score 5
+        answer["scores"]["表达"]["score"] = 5
+        with open(os.path.join(temp, "reviews", "fake", name), "w", encoding="utf-8") as handle:
+            json.dump(answer, handle, ensure_ascii=False)
+        result = report.playtests(records, os.path.join(temp, "reviews"))
+        self.assertEqual(result["ceiling"], ["表达"])
+        self.assertIn("满分过半的维度（锚点太松，下一轮收紧）：表达", report.playtests_markdown(result))
 
 
 class ReviewTest(unittest.TestCase):
@@ -559,6 +567,10 @@ class ParserTest(unittest.TestCase):
         self.assertEqual(parsed["host_calls"], [{"tool": "bash", "input": {"command": "python x doctor --json"}, "output": "{\"ok\": true}", "status": "completed"}])
         self.assertIsNone(parsed["error"])
         self.assertIsNone(parsed["cost"])
+        # the name asked for can be an alias: the model is the one the endpoint says answered
+        parsed = self.pi({"role": "assistant", "provider": "local", "model": "m-high", "responseModel": "m-exp-a", "stopReason": "stop",
+                          "content": [{"type": "text", "text": "好。"}]})
+        self.assertEqual(parsed["model"], "local/m-exp-a")
 
     def test_pi_errors_and_retries(self):
         failed = {"role": "assistant", "provider": "local", "model": "m-1", "stopReason": "error", "errorMessage": "429 Too Many Requests", "content": [{"type": "text", "text": "半句"}]}

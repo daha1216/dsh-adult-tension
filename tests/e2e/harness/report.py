@@ -163,7 +163,13 @@ def playtests(records_dir, reviews_dir):
         if row["review"]:
             model = (row["review"].get("reviewer") or {}).get("model") or "未记"
             reviewers[model] = reviewers.get(model, 0) + 1
-    return {"rows": rows, "summary": summary, "reviewers": reviewers}
+    # ACCEPTANCE 6.3: a dimension where more than half the runs score 5 has anchors too loose
+    ceiling = []
+    for dimension in DIMENSIONS:
+        scores = [s for s in (_score(r["review"], dimension) for r in rows if r["review"]) if s is not None]
+        if scores and scores.count(5) * 2 > len(scores):
+            ceiling.append(dimension)
+    return {"rows": rows, "summary": summary, "reviewers": reviewers, "ceiling": ceiling}
 
 
 def playtests_markdown(result):
@@ -173,7 +179,9 @@ def playtests_markdown(result):
         lines.append("| %s | %s | %d | %d | %d | %d | %s |" % (s["world"], s["mode"], s["runs"], s["seeds"], s["machine_pass"], s["reviewed"],
                                                            " | ".join("—" if s["medians"][d] is None else str(s["medians"][d]) for d in DIMENSIONS)))
     reviewers = "、".join("%s %d 条" % (model, n) for model, n in sorted(result["reviewers"].items())) or "无"
-    lines += ["", "（维度一栏是评审分数的中位数。评审者：%s。）" % reviewers, "", "| 记录 | 种子 | Skill（提交） | 机器检查 | 评审 ≤ 2 的维度 |", "|---|---|---|---|---|"]
+    lines += ["", "（维度一栏是评审分数的中位数。评审者：%s。）" % reviewers, "",
+              "满分过半的维度（锚点太松，下一轮收紧）：%s" % ("、".join(result["ceiling"]) or "无"), "",
+              "| 记录 | 种子 | Skill（提交） | 机器检查 | 评审 ≤ 2 的维度 |", "|---|---|---|---|---|"]
     for r in result["rows"]:
         low = [d for d in DIMENSIONS if r["review"] and (_score(r["review"], d) or 5) <= 2]
         lines.append("| %s | %s | %s（%s） | %s | %s |" % (r["file"], r["seed"], r["skill"] or "未记", r["commit"] or "未记",

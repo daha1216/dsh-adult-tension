@@ -249,7 +249,9 @@ def parse_pi_stream(events):
     results by id. The turn failed when its last assistant message stopped
     on an error, an abort or the output limit, or a retry finally failed; a
     message that ended in an error is not part of the reply (a retry that
-    succeeded follows it)."""
+    succeeded follows it). The model is the one that served the turn: the
+    endpoint's answer (responseModel) where it names one, since the name
+    asked for may be an alias ("gemini-3.8-flash-high" served as "…-exp-a")."""
     session_id = model = error = None
     texts = []
     calls = {}
@@ -262,8 +264,9 @@ def parse_pi_stream(events):
         elif kind == "message_end":
             message = event.get("message") or {}
             if message.get("role") == "assistant":
-                if message.get("model"):
-                    model = "%s/%s" % (message["provider"], message["model"]) if message.get("provider") else message["model"]
+                served = message.get("responseModel") or message.get("model")
+                if served:
+                    model = "%s/%s" % (message["provider"], served) if message.get("provider") else served
                 cost += ((message.get("usage") or {}).get("cost") or {}).get("total") or 0
                 stop = message.get("stopReason")
                 if stop in ("error", "aborted", "length"):
