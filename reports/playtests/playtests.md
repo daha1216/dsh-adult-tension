@@ -15,7 +15,7 @@
 | winter_shelter | daily | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 4.5 | 5 | 5 | 5 | 5 |
 | winter_shelter | pressure | 6 | 6 | 5 | 6 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
 
-（维度一栏是评审分数的中位数。评审者：gemini-3.8-flash 62 条（校准 12/12）。）
+（维度一栏是评审分数的中位数。评审者：gemini-3.8-flash（量表 1），62 条（校准 12/12）。）
 
 gemini-3.8-flash-exp-a 与 gemini-3.8-flash 视为同一个模型（用户确认）。
 

@@ -19,7 +19,8 @@ output. Scores are taken as the reviewer gave them.
 
 reviewer.model is the name asked for; each attempt's served_model is the
 model the endpoint says answered. Reports go by the latter (report.reviewer_of):
-one name can be served by different models.
+one name can be served by different models. reviewer.rubric_version is the
+rubric version in the packet: a calibration counts only for its own version.
 """
 
 import argparse
@@ -149,6 +150,7 @@ def review(record_path, endpoint, send=ask, wait=60):
     out["reviewer"] = {
         "model": endpoint["REVIEW_MODEL"],
         "date": datetime.date.today().isoformat(),
+        "rubric_version": report.rubric_version(),
         "packet_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
         "attempts": attempts,
         "usable": result is not None,

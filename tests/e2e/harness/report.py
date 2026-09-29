@@ -16,13 +16,16 @@ The reviewer is the model the endpoint says answered (each attempt's
 served_model), not the name asked for: a proxy can serve one name with
 different models, even within one batch. --same-model says that two served
 names are one model (the user's word on their own endpoint); the reports
-print every such statement.
+print every such statement. A review is also known by the rubric version it
+was made with (rubric.md states it; rubric_versions.json holds what each
+version was), so a reviewer reads as "model（量表 N）".
 
 calibrate: the reviewer's scores on the calibration set against key.json.
 A good record is judged right when no dimension is <= 2; a record with a
 planted defect when every planted dimension is <= 2. Below 10 of 12, fix the
 anchors before the formal review (ACCEPTANCE 6.3). A calibration speaks for
-one reviewer: all twelve answered by the same model.
+one reviewer: all twelve answered by the same model under the same rubric
+version. A new rubric version needs its own calibration.
 
 playtests and build count a review only when its reviewer passed one of the
 calibrations given; the others are shown and not counted.
@@ -41,8 +44,10 @@ never substituted. fixes.json maps a record file name to what fixed it
 
 import argparse
 import glob
+import hashlib
 import json
 import os
+import re
 import statistics
 import sys
 
@@ -59,6 +64,30 @@ AVERAGE_CALLS_LIMIT = 1.2
 
 
 REPO = os.path.dirname(os.path.dirname(E2E))
+VERSION_RE = re.compile(r"^量表版本：(\d+)\s*$", re.M)
+
+
+def _instructions():
+    """reviewer.md and rubric.md as the packet holds them."""
+    parts = []
+    for name in ("reviewer.md", "rubric.md"):
+        with open(os.path.join(E2E, name), encoding="utf-8") as handle:
+            parts.append(handle.read().strip())
+    return parts
+
+
+def rubric_version():
+    """The version rubric.md states. It covers reviewer.md as well: a change
+    to either is a new version (rubric_versions.json)."""
+    match = VERSION_RE.search(_instructions()[1])
+    if not match:
+        raise ValueError("rubric.md 没有写“量表版本：N”")
+    return match.group(1)
+
+
+def instructions_sha256():
+    """What a rubric version stands for: the digest of reviewer.md and rubric.md."""
+    return hashlib.sha256("\n\n---\n\n".join(_instructions()).encode("utf-8")).hexdigest()
 
 
 def packet(record_path):
@@ -92,6 +121,21 @@ def reviewer_of(review, same=None):
     return "+".join(served) if served else reviewer.get("model")
 
 
+def rubric_of(review):
+    """The rubric version the review was made with. Reviews from before the
+    version was recorded all used version 1: the instructions from a50c76a
+    on (the four reviews of calibration round 1 are older and part of no
+    judgement)."""
+    return str(((review or {}).get("reviewer") or {}).get("rubric_version") or 1)
+
+
+def judge_of(review, same=None):
+    """Who judged, as calibration and the reports count it: the model that
+    answered and the rubric version it used; None when no model is recorded."""
+    model = reviewer_of(review, same)
+    return "%s（量表 %s）" % (model, rubric_of(review)) if model else None
+
+
 def calibrate(reviews_dir, same=None):
     with open(os.path.join(E2E, "calibration", "key.json"), encoding="utf-8") as handle:
         key = json.load(handle)
@@ -108,7 +152,7 @@ def calibrate(reviews_dir, same=None):
             rows.append({"record": name, "right": False, "why": "评审结果不可用（不是要求的格式）"})
             continue
         # who gave the scores; an unusable review is judged wrong and names no one
-        reviewers.add(reviewer_of(review, same))
+        reviewers.add(judge_of(review, same))
         low = [d for d in DIMENSIONS if (_score(review, d) or 5) <= 2]
         if expected["low"]:
             right = all(d in low for d in expected["low"])
@@ -118,7 +162,7 @@ def calibrate(reviews_dir, same=None):
             why = "好的记录；评审判为 ≤ 2 的：%s" % ("、".join(low) or "无")
         rows.append({"record": name, "right": right, "why": why})
     correct = sum(1 for r in rows if r["right"])
-    # the result speaks for one reviewer only: the same known model answered every record
+    # the result speaks for one reviewer only: the same known model, under one rubric version, answered every record
     reviewer = next(iter(reviewers)) if len(reviewers) == 1 else None
     return {"correct": correct, "total": len(rows), "reviewer": reviewer, "reviewers": sorted(r or "未记" for r in reviewers),
             "ready": correct >= 10 and reviewer is not None, "rows": rows}
@@ -155,7 +199,7 @@ def _same_text(same):
 
 
 def _reviewers_text(reviewers):
-    return "、".join("%s %d 条（%s）" % (name, v["reviews"], "校准 %s" % v["calibration"] if v["calibration"] else "未通过校准，不计入")
+    return "；".join("%s，%d 条（%s）" % (name, v["reviews"], "校准 %s" % v["calibration"] if v["calibration"] else "未通过校准，不计入")
                     for name, v in sorted(reviewers.items())) or "无"
 
 
@@ -190,7 +234,7 @@ def _counted_review(reviews_dir, host, name, trusted, same=None):
     review = _review(reviews_dir, host, name)
     if review is None:
         return None, None
-    by = reviewer_of(review, same) or "未记"
+    by = judge_of(review, same) or "未记"
     return by, (review if by in trusted else None)
 
 
@@ -281,7 +325,7 @@ def agreement(first_dir, second_dir):
             continue
         records += 1
         for seen, review in zip(models, (first, second)):
-            seen.add(reviewer_of(review) or "未记")
+            seen.add(judge_of(review) or "未记")
         for dimension in DIMENSIONS:
             a, b = _score(first, dimension), _score(second, dimension)
             if a is not None and b is not None:

@@ -1,6 +1,6 @@
 # 两个评审者的一致程度
 
-同一批 24 条记录。第一评审者：claude-opus-4-6-thinking；第二评审者：gemini-3.8-flash、gemini-3.8-flash-exp-a。
+同一批 24 条记录。第一评审者：claude-opus-4-6-thinking（量表 1）；第二评审者：gemini-3.8-flash-exp-a（量表 1）、gemini-3.8-flash（量表 1）。
 
 | 维度 | 两边都打分 | 相同 | 相差 ≤ 1 | 第二减第一（平均） | 第一 ≤ 2 | 第二 ≤ 2 |
 |---|---|---|---|---|---|---|

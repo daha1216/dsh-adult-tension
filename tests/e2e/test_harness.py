@@ -322,17 +322,20 @@ class CalibrationTest(unittest.TestCase):
 
 
 class ReportTest(unittest.TestCase):
-    def review(self, low=(), score=4, by="served-m"):
-        return {"scores": {d: {"score": (2 if d in low else score), "evidence": ["第 1 轮：……"]} for d in report.DIMENSIONS}, "severe": [],
-                "reviewer": {"model": "asked-m", "attempts": [{"served_model": by, "answer": "……", "problems": []}], "usable": True}}
+    def review(self, low=(), score=4, by="served-m", rubric=None):
+        out = {"scores": {d: {"score": (2 if d in low else score), "evidence": ["第 1 轮：……"]} for d in report.DIMENSIONS}, "severe": [],
+               "reviewer": {"model": "asked-m", "attempts": [{"served_model": by, "answer": "……", "problems": []}], "usable": True}}
+        if rubric:
+            out["reviewer"]["rubric_version"] = rubric
+        return out
 
-    def calibration(self, by="served-m"):
-        """A calibration directory where BY judged all twelve records right."""
+    def calibration(self, by="served-m", rubric=None):
+        """A calibration directory where BY judged all twelve records right (under RUBRIC; version 1 when not named)."""
         with open(os.path.join(_bootstrap.E2E_DIR, "calibration", "key.json"), encoding="utf-8") as handle:
             key = json.load(handle)
         temp = tempfile.mkdtemp(prefix="at-cal-")
         self.addCleanup(shutil.rmtree, temp, True)
-        self.write_reviews(temp, {name: self.review(low=expected["low"], by=by) for name, expected in key.items()})
+        self.write_reviews(temp, {name: self.review(low=expected["low"], by=by, rubric=rubric) for name, expected in key.items()})
         return temp
 
     def write_reviews(self, directory, reviews):
@@ -349,7 +352,7 @@ class ReportTest(unittest.TestCase):
         right = {name: self.review(low=expected["low"]) for name, expected in key.items()}
         self.write_reviews(temp, right)
         result = report.calibrate(temp)
-        self.assertEqual((result["correct"], result["ready"], result["reviewer"]), (12, True, "served-m"))
+        self.assertEqual((result["correct"], result["ready"], result["reviewer"]), (12, True, "served-m（量表 1）"))
         wrong = dict(right, **{"flawed-1": self.review(), "flawed-2": self.review(), "good-1": self.review(low=("表达",))})
         self.write_reviews(temp, wrong)
         result = report.calibrate(temp)
@@ -376,19 +379,51 @@ class ReportTest(unittest.TestCase):
         # the proxy served one record with another model: twelve right answers from two reviewers
         self.write_reviews(temp, {"good-1": self.review(by="served-n")})
         result = report.calibrate(temp)
-        self.assertEqual((result["correct"], result["reviewer"], result["reviewers"], result["ready"]), (12, None, ["served-m", "served-n"], False))
+        self.assertEqual((result["correct"], result["reviewer"], result["reviewers"], result["ready"]), (12, None, ["served-m（量表 1）", "served-n（量表 1）"], False))
         self.assertEqual(report.calibrated([temp]), {})
         # an unusable review is judged wrong and names no reviewer
         self.write_reviews(temp, {"good-1": {"scores": None, "severe": None, "reviewer": {"model": "asked-m", "attempts": [{"error": "HTTP 503"}], "usable": False}}})
         result = report.calibrate(temp)
-        self.assertEqual((result["correct"], result["reviewer"], result["ready"]), (11, "served-m", True))
-        self.assertEqual(report.calibrated([temp, self.calibration(by="served-n")]), {"served-m": "11/12", "served-n": "12/12"})
+        self.assertEqual((result["correct"], result["reviewer"], result["ready"]), (11, "served-m（量表 1）", True))
+        self.assertEqual(report.calibrated([temp, self.calibration(by="served-n")]), {"served-m（量表 1）": "11/12", "served-n（量表 1）": "12/12"})
         # nothing says who answered: the result speaks for no one
         with open(os.path.join(_bootstrap.E2E_DIR, "calibration", "key.json"), encoding="utf-8") as handle:
             key = json.load(handle)
         self.write_reviews(temp, {name: dict(self.review(low=expected["low"]), reviewer={"usable": True}) for name, expected in key.items()})
         result = report.calibrate(temp)
         self.assertEqual((result["correct"], result["reviewers"], result["ready"]), (12, ["未记"], False))
+
+    def test_a_calibration_speaks_for_one_rubric_version(self):
+        # reviews from before the version was recorded were made with version 1
+        self.assertEqual((report.rubric_of(self.review()), report.rubric_of(self.review(rubric="2"))), ("1", "2"))
+        self.assertEqual(report.judge_of(self.review(by="served-x", rubric="2")), "served-x（量表 2）")
+        self.assertIsNone(report.judge_of({"scores": {}}))
+        # one record reviewed under another version: the twelve speak for no one
+        temp = self.calibration()
+        self.write_reviews(temp, {"good-1": self.review(rubric="2")})
+        result = report.calibrate(temp)
+        self.assertEqual((result["correct"], result["reviewers"], result["ready"]), (12, ["served-m（量表 1）", "served-m（量表 2）"], False))
+        # a review under version 2 counts only with a calibration under version 2
+        root = tempfile.mkdtemp(prefix="at-rep-")
+        self.addCleanup(shutil.rmtree, root, True)
+        records, reviews = os.path.join(root, "records"), os.path.join(root, "reviews")
+        os.makedirs(os.path.join(records, "h1"))
+        rec = clean_record()
+        rec["host"]["name"] = "h1"
+        R.save(rec, os.path.join(records, "h1", "h1-st-r1.json"))
+        self.write_reviews(os.path.join(reviews, "h1"), {"h1-st-r1": self.review(rubric="2")})
+        built = report.build(records, reviews, [self.calibration()])
+        self.assertEqual((built["unreviewed"], built["reviewers"]), (["h1-st-r1.json"], {"served-m（量表 2）": {"reviews": 1, "calibration": None}}))
+        built = report.build(records, reviews, [self.calibration(), self.calibration(rubric="2")])
+        self.assertEqual((built["unreviewed"], built["reviewers"]), ([], {"served-m（量表 2）": {"reviews": 1, "calibration": "12/12"}}))
+
+    def test_the_review_instructions_carry_their_version(self):
+        # a change to reviewer.md or rubric.md is a new version, recorded with what it was
+        with open(os.path.join(_bootstrap.E2E_DIR, "rubric_versions.json"), encoding="utf-8") as handle:
+            versions = json.load(handle)
+        self.assertEqual(versions[report.rubric_version()]["instructions_sha256"], report.instructions_sha256())
+        digests = [v["instructions_sha256"] for v in versions.values()]
+        self.assertEqual(len(set(digests)), len(digests))
 
     def test_the_user_can_say_two_served_names_are_one_model(self):
         same = {"served-x": "served-m"}
@@ -400,8 +435,8 @@ class ReportTest(unittest.TestCase):
         self.write_reviews(temp, {"good-1": self.review(by="served-x")})
         self.assertEqual((report.calibrate(temp)["ready"], report.calibrated([temp])), (False, {}))
         result = report.calibrate(temp, same)
-        self.assertEqual((result["correct"], result["reviewer"], result["ready"]), (12, "served-m", True))
-        self.assertEqual(report.calibrated([temp], same), {"served-m": "12/12"})
+        self.assertEqual((result["correct"], result["reviewer"], result["ready"]), (12, "served-m（量表 1）", True))
+        self.assertEqual(report.calibrated([temp], same), {"served-m（量表 1）": "12/12"})
         # the command line takes the statement as <served>=<model> and prints it
         with contextlib.redirect_stdout(io.StringIO()) as out:
             self.assertEqual(report.main(["calibrate", "--reviews", temp]), 1)
@@ -421,8 +456,8 @@ class ReportTest(unittest.TestCase):
         calibration = [self.calibration()]
         self.assertEqual(report.build(records, reviews, calibration)["unreviewed"], ["h1-st-r1.json"])
         built = report.build(records, reviews, calibration, same=same)
-        self.assertEqual((built["unreviewed"], built["reviewers"]), ([], {"served-m": {"reviews": 1, "calibration": "12/12"}}))
-        self.assertIn("评审者：served-m 1 条（校准 12/12）；served-x 与 served-m 视为同一个模型（用户确认）", report.to_markdown(built))
+        self.assertEqual((built["unreviewed"], built["reviewers"]), ([], {"served-m（量表 1）": {"reviews": 1, "calibration": "12/12"}}))
+        self.assertIn("评审者：served-m（量表 1），1 条（校准 12/12）；served-x 与 served-m 视为同一个模型（用户确认）", report.to_markdown(built))
         self.assertEqual(report.playtests(records, reviews, calibration)["summary"][0]["reviewed"], 0)
         result = report.playtests(records, reviews, calibration, same)
         self.assertEqual(result["summary"][0]["reviewed"], 1)
@@ -462,8 +497,8 @@ class ReportTest(unittest.TestCase):
         self.write_reviews(os.path.join(reviews, "h2"), {"h2-st-r2": self.review(score=5, by="served-n")})
         built = report.build(records, reviews, calibration)
         self.assertEqual((built["unreviewed"], built["pass"]), (["h2-st-r2.json"], False))
-        self.assertEqual(built["reviewers"], {"served-m": {"reviews": 3, "calibration": "12/12"}, "served-n": {"reviews": 1, "calibration": None}})
-        self.assertIn("评审者：served-m 3 条（校准 12/12）、served-n 1 条（未通过校准，不计入）", report.to_markdown(built))
+        self.assertEqual(built["reviewers"], {"served-m（量表 1）": {"reviews": 3, "calibration": "12/12"}, "served-n（量表 1）": {"reviews": 1, "calibration": None}})
+        self.assertIn("评审者：served-m（量表 1），3 条（校准 12/12）；served-n（量表 1），1 条（未通过校准，不计入）", report.to_markdown(built))
         # the same review counts once its reviewer is calibrated
         built = report.build(records, reviews, calibration + [self.calibration(by="served-n")])
         self.assertEqual((built["unreviewed"], built["pass"]), ([], True))
@@ -495,7 +530,7 @@ class ReportTest(unittest.TestCase):
         put("b", "r3.json", None, "gemini")
         put("a", "r4.json", {}, "claude")  # only one reviewer: not compared
         result = report.agreement(os.path.join(temp, "a"), os.path.join(temp, "b"))
-        self.assertEqual((result["records"], result["first"], result["second"]), (2, ["claude"], ["gemini"]))
+        self.assertEqual((result["records"], result["first"], result["second"]), (2, ["claude（量表 1）"], ["gemini（量表 1）"]))
         self.assertEqual(result["dimensions"]["表达"], {"n": 2, "same": 1, "within_one": 1, "mean_difference": 1.5, "low_first": 1, "low_second": 0})
         self.assertEqual(result["dimensions"]["连续性"]["mean_difference"], -0.5)
         self.assertEqual(result["dimensions"]["关系节奏"]["n"], 1)
@@ -514,7 +549,7 @@ class ReportTest(unittest.TestCase):
             json.dump(answer, handle, ensure_ascii=False)
         calibration = [self.calibration(by="reviewer-x")]
         result = report.playtests(records, os.path.join(temp, "reviews"), calibration)
-        self.assertIn("评审者：reviewer-x 1 条（校准 12/12）", report.playtests_markdown(result))
+        self.assertIn("评审者：reviewer-x（量表 1），1 条（校准 12/12）", report.playtests_markdown(result))
         self.assertIn("满分过半的维度（锚点太松，下一轮收紧）：无", report.playtests_markdown(result))
         (row,) = result["rows"]
         # the fake host opens a daily game with seed 7; the Skill it ran is named by its files
@@ -537,7 +572,7 @@ class ReportTest(unittest.TestCase):
         result = report.playtests(records, os.path.join(temp, "reviews"), [self.calibration(by="reviewer-y")])
         (group,) = result["summary"]
         self.assertEqual((group["reviewed"], group["medians"]["表达"], group["critical_low"], result["ceiling"]), (0, None, [], []))
-        self.assertIn("评审者：reviewer-x 1 条（未通过校准，不计入）", report.playtests_markdown(result))
+        self.assertIn("评审者：reviewer-x（量表 1），1 条（未通过校准，不计入）", report.playtests_markdown(result))
         self.assertIn("| 评审者未通过校准 |", report.playtests_markdown(result))
 
 
@@ -577,6 +612,8 @@ class ReviewTest(unittest.TestCase):
         self.assertIn("分数和证据都不要改", again)
         # the scores are the reviewer's, as given
         self.assertEqual(out["scores"]["表达"]["score"], 2)
+        self.assertEqual(out["reviewer"]["rubric_version"], report.rubric_version())
+        self.assertIn("量表版本：%s" % report.rubric_version(), report.packet(path))
         self.assertEqual([a["problems"] == [] for a in out["reviewer"]["attempts"]], [False, True])
         self.assertTrue(out["reviewer"]["usable"])
         never = review.review(path, {"REVIEW_MODEL": "m"}, send=lambda endpoint, messages: ("没有 JSON", None))
