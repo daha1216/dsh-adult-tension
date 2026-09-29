@@ -377,6 +377,32 @@ class ReportTest(unittest.TestCase):
         rows = {r["record"]: r for r in report.calibrate(temp)["rows"]}
         self.assertFalse(rows["good-1"]["right"])
 
+    def test_two_reviewers_are_compared_on_the_records_both_reviewed(self):
+        temp = tempfile.mkdtemp(prefix="at-rev-")
+        self.addCleanup(shutil.rmtree, temp, True)
+
+        def put(reviewer, name, scores, model):
+            os.makedirs(os.path.join(temp, reviewer, "pi"), exist_ok=True)
+            review = {"scores": None, "severe": None} if scores is None else \
+                {"scores": {d: {"score": scores.get(d, 4), "evidence": ["第 1 轮：……——……"]} for d in report.DIMENSIONS}, "severe": []}
+            review["reviewer"] = {"model": model}
+            with open(os.path.join(temp, reviewer, "pi", name), "w", encoding="utf-8") as handle:
+                json.dump(review, handle, ensure_ascii=False)
+
+        put("a", "r1.json", {"表达": 2, "连续性": 5}, "claude")
+        put("b", "r1.json", {"表达": 5, "连续性": 4}, "gemini")
+        put("a", "r2.json", {"关系节奏": "n/a"}, "claude")
+        put("b", "r2.json", {}, "gemini")
+        put("a", "r3.json", {}, "claude")  # the second reviewer gave no usable answer: not compared
+        put("b", "r3.json", None, "gemini")
+        put("a", "r4.json", {}, "claude")  # only one reviewer: not compared
+        result = report.agreement(os.path.join(temp, "a"), os.path.join(temp, "b"))
+        self.assertEqual((result["records"], result["first"], result["second"]), (2, ["claude"], ["gemini"]))
+        self.assertEqual(result["dimensions"]["表达"], {"n": 2, "same": 1, "within_one": 1, "mean_difference": 1.5, "low_first": 1, "low_second": 0})
+        self.assertEqual(result["dimensions"]["连续性"]["mean_difference"], -0.5)
+        self.assertEqual(result["dimensions"]["关系节奏"]["n"], 1)
+        self.assertIn("| 表达 | 2 | 1 | 1 | +1.50 | 1 | 0 |", report.agreement_markdown(result))
+
     def test_playtests_are_summed_up_per_world_and_mode(self):
         temp = tempfile.mkdtemp(prefix="at-e2e-")
         self.addCleanup(shutil.rmtree, temp, True)
@@ -384,10 +410,12 @@ class ReportTest(unittest.TestCase):
         path, _rec = run_script.run(run_script.load_script("pt-harbor_night_shift-daily"), "fake", 1, None, os.path.join(temp, "projects"), os.path.join(records, "fake"))
         name = os.path.basename(path)
         os.makedirs(os.path.join(temp, "reviews", "fake"))
-        answer = {"scores": {d: {"score": 2 if d == "玩家主权" else 4, "evidence": ["第 1 轮：……——……"]} for d in report.DIMENSIONS}, "severe": []}
+        answer = {"scores": {d: {"score": 2 if d == "玩家主权" else 4, "evidence": ["第 1 轮：……——……"]} for d in report.DIMENSIONS}, "severe": [],
+                  "reviewer": {"model": "reviewer-x", "usable": True}}
         with open(os.path.join(temp, "reviews", "fake", name), "w", encoding="utf-8") as handle:
             json.dump(answer, handle, ensure_ascii=False)
         result = report.playtests(records, os.path.join(temp, "reviews"))
+        self.assertIn("评审者：reviewer-x 1 条", report.playtests_markdown(result))
         (row,) = result["rows"]
         # the fake host opens a daily game with seed 7; the Skill it ran is named by its files
         self.assertEqual((row["run"], row["mode"], row["seed"]), (1, "daily", 7))

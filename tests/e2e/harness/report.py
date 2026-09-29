@@ -5,6 +5,7 @@
     python tests/e2e/harness/report.py build --records <dir> --reviews <dir>
                                         [--fixes <fixes.json>] [--out <dir>]
     python tests/e2e/harness/report.py playtests --records <dir> --reviews <dir> [--out <dir>]
+    python tests/e2e/harness/report.py agreement --first <reviews dir> --second <reviews dir> [--out <file.md>]
 
 packet: what an independent reviewer gets, as one document: the reviewer
 instructions, the rubric, NARRATIVE_RULES.md and the record. Nothing else:
@@ -14,6 +15,11 @@ calibrate: the reviewer's scores on the calibration set against key.json.
 A good record is judged right when no dimension is <= 2; a record with a
 planted defect when every planted dimension is <= 2. Below 10 of 12, fix the
 anchors before the formal review (ACCEPTANCE 6.3).
+
+agreement: two reviewers on the same records (<dir>/<host>/<file>): per
+dimension how often they give the same score or differ by one, the mean of
+second minus first, and how many scores of 2 or less each gives. A check on
+a reviewer that is the model under test.
 
 build: records are <records>/<host>/<host>-s<script>-r<run>.json, reviews
 the reviewer's JSON for the same file name under <reviews>/<host>/. Run 1 of
@@ -151,7 +157,13 @@ def playtests(records_dir, reviews_dir):
             "critical_low": [{"file": r["file"], "dimension": d, "score": _score(r["review"], d)}
                              for r in reviewed for d in CRITICAL if (_score(r["review"], d) or 5) <= 2],
         })
-    return {"rows": rows, "summary": summary}
+    # who reviewed: a reader has to know when the model under test graded its own runs
+    reviewers = {}
+    for row in rows:
+        if row["review"]:
+            model = (row["review"].get("reviewer") or {}).get("model") or "未记"
+            reviewers[model] = reviewers.get(model, 0) + 1
+    return {"rows": rows, "summary": summary, "reviewers": reviewers}
 
 
 def playtests_markdown(result):
@@ -160,12 +172,55 @@ def playtests_markdown(result):
     for s in result["summary"]:
         lines.append("| %s | %s | %d | %d | %d | %d | %s |" % (s["world"], s["mode"], s["runs"], s["seeds"], s["machine_pass"], s["reviewed"],
                                                            " | ".join("—" if s["medians"][d] is None else str(s["medians"][d]) for d in DIMENSIONS)))
-    lines += ["", "（维度一栏是评审分数的中位数。）", "", "| 记录 | 种子 | Skill（提交） | 机器检查 | 评审 ≤ 2 的维度 |", "|---|---|---|---|---|"]
+    reviewers = "、".join("%s %d 条" % (model, n) for model, n in sorted(result["reviewers"].items())) or "无"
+    lines += ["", "（维度一栏是评审分数的中位数。评审者：%s。）" % reviewers, "", "| 记录 | 种子 | Skill（提交） | 机器检查 | 评审 ≤ 2 的维度 |", "|---|---|---|---|---|"]
     for r in result["rows"]:
         low = [d for d in DIMENSIONS if r["review"] and (_score(r["review"], d) or 5) <= 2]
         lines.append("| %s | %s | %s（%s） | %s | %s |" % (r["file"], r["seed"], r["skill"] or "未记", r["commit"] or "未记",
                                                        "通过" if r["machine_pass"] else "未通过：" + "；".join(r["findings"][:3]),
                                                        "、".join(low) or ("无" if r["review"] else "未评审")))
+    return "\n".join(lines) + "\n"
+
+
+def agreement(first_dir, second_dir):
+    pairs = {d: [] for d in DIMENSIONS}
+    records = 0
+    models = [set(), set()]
+    for path in sorted(glob.glob(os.path.join(first_dir, "*", "*.json"))):
+        host, name = os.path.basename(os.path.dirname(path)), os.path.basename(path)
+        first, second = _review(first_dir, host, name), _review(second_dir, host, name)
+        if not (first and second):
+            continue
+        records += 1
+        for seen, review in zip(models, (first, second)):
+            seen.add((review.get("reviewer") or {}).get("model") or "未记")
+        for dimension in DIMENSIONS:
+            a, b = _score(first, dimension), _score(second, dimension)
+            if a is not None and b is not None:
+                pairs[dimension].append((a, b))
+    dimensions = {}
+    for dimension, scores in pairs.items():
+        n = len(scores)
+        dimensions[dimension] = {
+            "n": n,
+            "same": sum(1 for a, b in scores if a == b),
+            "within_one": sum(1 for a, b in scores if abs(a - b) <= 1),
+            "mean_difference": round(sum(b - a for a, b in scores) / float(n), 2) if n else None,
+            "low_first": sum(1 for a, _ in scores if a <= 2),
+            "low_second": sum(1 for _, b in scores if b <= 2),
+        }
+    return {"records": records, "first": sorted(models[0]), "second": sorted(models[1]), "dimensions": dimensions}
+
+
+def agreement_markdown(result):
+    lines = ["# 两个评审者的一致程度", "",
+             "同一批 %d 条记录。第一评审者：%s；第二评审者：%s。" % (result["records"], "、".join(result["first"]) or "无", "、".join(result["second"]) or "无"), "",
+             "| 维度 | 两边都打分 | 相同 | 相差 ≤ 1 | 第二减第一（平均） | 第一 ≤ 2 | 第二 ≤ 2 |", "|---|---|---|---|---|---|---|"]
+    for dimension in DIMENSIONS:
+        d = result["dimensions"][dimension]
+        lines.append("| %s | %d | %d | %d | %s | %d | %d |" % (dimension, d["n"], d["same"], d["within_one"],
+                                                           "—" if d["mean_difference"] is None else "%+.2f" % d["mean_difference"],
+                                                           d["low_first"], d["low_second"]))
     return "\n".join(lines) + "\n"
 
 
@@ -288,9 +343,20 @@ def main(argv):
     play.add_argument("--records", required=True)
     play.add_argument("--reviews", required=True)
     play.add_argument("--out")
+    agree = sub.add_parser("agreement")
+    agree.add_argument("--first", required=True)
+    agree.add_argument("--second", required=True)
+    agree.add_argument("--out")
     args = parser.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    if args.action == "agreement":
+        text = agreement_markdown(agreement(args.first, args.second))
+        if args.out:
+            with open(args.out, "w", encoding="utf-8", newline="\n") as handle:
+                handle.write(text)
+        print(text)
+        return 0
     if args.action == "packet":
         with open(args.out, "w", encoding="utf-8", newline="\n") as handle:
             handle.write(packet(args.record))
