@@ -213,6 +213,25 @@ class MachineCheckTest(unittest.TestCase):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertNotIn(("ventriloquism", 3), names(M.check(rec)), text)
 
+    def test_a_line_that_says_what_the_player_said_to_ask_is_theirs(self):
+        rec = clean_record()
+        rec["turns"][2]["input"] = "我走过去，问梁志强是不是在等人"
+
+        def flagged(line):
+            rec["turns"][2]["text"] = "你走到桌前，低声问了一句：“%s”\n\n%s" % (line, footer(3, 1210))
+            return ("ventriloquism", 3) in names(M.check(rec))
+
+        # the question the player asked, with an address and a clause of framing
+        self.assertFalse(flagged("梁先生今晚坐在这儿，是在等人？"))
+        # another sentence of the player's character is not what the player asked
+        self.assertTrue(flagged("是在等人？我可以帮你付茶钱，你跟我走。"))
+        # nor is one sentence that says something else
+        self.assertTrue(flagged("今晚的茶不错，我请客吧。"))
+        # what the player said to tell, about someone
+        rec["turns"][2]["input"] = "我去跟旁边的人随口提了一句，说梁志强好像藏了什么"
+        self.assertFalse(flagged("留神看……梁志强刚才手里好像往里衣塞了什么东西。"))
+        self.assertTrue(flagged("留神看……今晚这茶楼里有人要出事，你赶紧走。"))
+
     def test_named_people_must_be_known_to_the_engine(self):
         rec = clean_record()
         rec["turns"][2]["text"] = "%s从吊机后面走了出来。\n\n%s" % (STRANGER, footer(3, 1210))

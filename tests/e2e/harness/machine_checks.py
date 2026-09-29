@@ -63,6 +63,12 @@ PLAYER_COLON_RE = re.compile(r"(?:^|[。！？])\s*你([^。！？“”\n]{0,60
 OTHER_SPEAKERS = ("他", "她", "它", "对方", "有人", "众人")
 # ... or the sentence says the sound came out of something (你腰间的对讲机爆出一阵杂音：“……”)
 SOUND_FROM = ("传来", "传出", "响起", "响了", "爆出", "播出")
+# The player may say what to ask or tell without quoting it (问她是不是在等人,
+# 说谭振华好像藏了什么). A line of one sentence that says at least half of that
+# has its source there, whatever address or framing it adds (“汪先生今晚坐在
+# 这儿，是在等人？”); a line of more sentences is held to the input as before.
+REPORTED_RE = re.compile(r"(?<![听据虽再])(?:问|说|告诉|回答)(?![：:“不出])([^。！？；]+)")
+SENTENCE_END_RE = re.compile(r"[。！？!?]")
 TIME_WORDS = {
     "凌晨": [(0, 6)],
     "清晨": [(4, 9)],
@@ -404,13 +410,36 @@ def _opening_player(record):
     return None
 
 
+def _reported(text, names):
+    """The bigrams of what the player's words say to ask or tell when they
+    report it without quoting it: the rest of that sentence after the verb,
+    less the names and pronouns of the people in it."""
+    out = set()
+    for match in REPORTED_RE.finditer(text):
+        content = match.group(1)
+        for word in sorted(set(names) | set(OTHER_SPEAKERS), key=len, reverse=True):
+            content = content.replace(word, "|")
+        out |= {g for g in _bigrams(content) if "|" not in g}
+    return out
+
+
+def _says_reported(quote, reported):
+    if len(reported) < 3 or SENTENCE_END_RE.search(quote.rstrip("。！？!?…")):
+        return False
+    return len(_bigrams(quote) & reported) / float(len(reported)) >= 0.5
+
+
 def check_ventriloquism(record):
     out = []
     others = None
+    known = None
     for turn in record["turns"]:
         if not narrative_calls(turn):
             continue
         source = _bigrams(turn.get("input") or "")
+        if known is None:
+            known = _known_names(record)
+        reported = _reported(turn.get("input") or "", known)
         # a line introduced by a colon may start the next paragraph
         text = re.sub(r"([：:])\s*\n+\s*(?=“)", r"\1", turn.get("text") or "")
         for line in prose_lines(text):
@@ -428,7 +457,7 @@ def check_ventriloquism(record):
                 if len(grams) < 4:
                     continue
                 overlap = len(grams & source) / float(len(grams))
-                if overlap < 0.5:
+                if overlap < 0.5 and not _says_reported(quote, reported):
                     out.append(finding("ventriloquism", turn["index"], "玩家角色说了玩家没说过的话：“%s”" % quote[:40]))
     return out
 
