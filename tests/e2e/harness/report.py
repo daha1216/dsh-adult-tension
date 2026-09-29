@@ -580,7 +580,8 @@ def to_markdown(report):
     if report["critical_low"]:
         lines += ["", "关键维度 ≤ 2："] + ["- %s：%s %s 分" % (x["file"], x["dimension"], x["score"]) for x in report["critical_low"]]
     if report["failures_and_fixes"]:
-        lines += ["", "失败记录与修复："] + ["- %s%s：%s；修复：%s" % (x["file"], "" if x["counted"] else "（不计入）", "；".join(x["machine"]), x["fix"] or "未修")
+        lines += ["", "失败记录与修复："] + ["- %s%s：%s；修复：%s" % (x["file"], "" if x["counted"] else "（不计入）", "；".join(x["machine"]),
+                                                                  "`%s` %s" % (x["fix"]["commit"], x["fix"]["note"]) if x["fix"] else "未修")
                                         for x in report["failures_and_fixes"]]
     if report["not_counted"]:
         lines += ["", "不计入结论的运行："] + ["- %s：%s" % (x["file"], x["why"]) for x in report["not_counted"]]

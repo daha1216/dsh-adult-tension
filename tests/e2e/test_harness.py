@@ -656,6 +656,7 @@ class ReportTest(unittest.TestCase):
         self.assertIn("- 候选版本：Skill 摘要 d1；运行 8 条，计入结论的 6 条", text)
         self.assertIn("- 首跑机器检查通过：1/2", text)
         self.assertIn("- h1-st-r1.json（不计入）：", text)
+        self.assertIn("；修复：`abc1234` ……", text)
         self.assertIn("- h2-st-r1.json：Skill 摘要 d0，不是候选版本", text)
         # the candidate is a digest: name the older Skill and only its runs count
         built = self.build(records, reviews, calibration, candidate="d0")
