@@ -263,6 +263,18 @@ class MachineCheckTest(unittest.TestCase):
         other_scene = copy.deepcopy(line)
         other_scene["turns"][3]["runtime_calls"] = [commit_call(4, 1215, scene="sc2")]
         self.assertNotIn(("repetition", 4), names(M.check(other_scene)))
+        # every game opens in sc1: a replayed seed ("重开 7 号") is another game, whose opening may
+        # say the lines of the first one again
+        replay = copy.deepcopy(line)
+        opening = opening_call(1215)
+        opening["envelope"]["data"]["session_id"] = "s_2"
+        replay["turns"][3]["runtime_calls"] = [opening]
+        self.assertNotIn(("repetition", 4), names(M.check(replay)))
+        # ... while a turn goes on with the game in play: a line of its opening said again repeats
+        same_game = clean_record()
+        same_game["turns"][0]["text"] = same_game["turns"][0]["text"].replace("有人把保温杯推到你面前。", "有人把保温杯推到你面前：“你别管这件事了。”")
+        same_game["turns"][1]["text"] = "对方又说：“你别管这件事了。”\n\n" + footer(2, 1205)
+        self.assertIn(("repetition", 2), names(M.check(same_game)))
 
     def test_rejections_repairs_and_budgets(self):
         rec = clean_record()

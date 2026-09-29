@@ -526,10 +526,14 @@ def _sentences(lines):
 def check_repetition(record):
     """ACCEPTANCE 6.2: a sentence repeated two or more times within 10 turns
     (three occurrences: boilerplate, safety reminders, exit descriptions),
-    or any dialogue line repeated within one scene. Narrative turns only."""
+    or any dialogue line repeated within one scene. Narrative turns only.
+    Scene ids are numbered within a game (every game opens in sc1), so a scene
+    is (game, scene id): a replayed seed ("重开 N 号") is another game, and its
+    opening may say the lines of the first one again."""
     out = []
     history = []  # (turn index, sentence, bigrams)
     scene_lines = {}
+    game = None
     for turn in record["turns"]:
         index = turn["index"]
         calls = narrative_calls(turn)
@@ -548,9 +552,10 @@ def check_repetition(record):
             if len(earlier_turns) >= 2:
                 out.append(finding("repetition", index, "10 个回合内第 %d 次出现（第 %s 轮已有）：%s" % (len(earlier_turns) + 1, "、".join(str(t) for t in sorted(earlier_turns)), sentence[:30])))
             history.append((index, sentence, grams))
-        context = (R.ok_data(calls[-1]) or {}).get("context") or {}
-        scene = (context.get("scene") or {}).get("id")
-        seen = scene_lines.setdefault(scene, {})
+        data = R.ok_data(calls[-1]) or {}
+        context = data.get("context") or {}
+        game = context.get("session_id") or data.get("session_id") or game
+        seen = scene_lines.setdefault((game, (context.get("scene") or {}).get("id")), {})
         for line in lines:
             for quote in QUOTE_RE.findall(line):
                 if len(quote) < 6:
