@@ -144,6 +144,11 @@ def _reviewers(rows, trusted):
     return out
 
 
+def _number(value):
+    """A median as the reports print it: 5 rather than 5.0, a dash for none."""
+    return "—" if value is None else "%g" % value
+
+
 def _same_text(same):
     """The served names taken as one model, as the reports print them."""
     return "；".join("%s 与 %s 视为同一个模型（用户确认）" % (served, model) for served, model in sorted((same or {}).items()))
@@ -251,7 +256,7 @@ def playtests_markdown(result):
              "|---|---|---|---|---|---|%s" % ("---|" * len(DIMENSIONS))]
     for s in result["summary"]:
         lines.append("| %s | %s | %d | %d | %d | %d | %s |" % (s["world"], s["mode"], s["runs"], s["seeds"], s["machine_pass"], s["reviewed"],
-                                                           " | ".join("—" if s["medians"][d] is None else str(s["medians"][d]) for d in DIMENSIONS)))
+                                                           " | ".join(_number(s["medians"][d]) for d in DIMENSIONS)))
     lines += ["", "（维度一栏是评审分数的中位数。评审者：%s。）" % _reviewers_text(result["reviewers"]), ""]
     if result["same_model"]:
         lines += [_same_text(result["same_model"]) + "。", ""]
@@ -404,7 +409,7 @@ def to_markdown(report):
     ]
     for dimension, v in report["dimensions"].items():
         d = v["distribution"]
-        lines.append("| %s | %d | %s | %s | %s | %s | %s | %s |" % (dimension, v["n"], v["median"], d["1"], d["2"], d["3"], d["4"], d["5"]))
+        lines.append("| %s | %d | %s | %s | %s | %s | %s | %s |" % (dimension, v["n"], _number(v["median"]), d["1"], d["2"], d["3"], d["4"], d["5"]))
     if report["ceiling"]:
         lines += ["", "**触顶**（超过一半样本满分，下一轮收紧锚点）：%s" % "、".join(report["ceiling"])]
     if report["critical_low"]:

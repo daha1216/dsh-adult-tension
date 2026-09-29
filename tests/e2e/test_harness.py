@@ -447,6 +447,8 @@ class ReportTest(unittest.TestCase):
         self.assertEqual(built["average_calls_per_ordinary_turn"], 1.0)
         self.assertEqual(sorted(built["ceiling"]), sorted(report.DIMENSIONS))
         self.assertTrue(built["pass"])
+        # the median of four fives is printed as 5, not 5.0
+        self.assertIn("| 玩家主权 | 4 | 5 | 0 | 0 | 0 | 0 | 4 |", report.to_markdown(built))
         self.write_reviews(os.path.join(reviews, "h2"), {"h2-st-r2": self.review(low=("同意与安全",))})
         built = report.build(records, reviews, calibration)
         self.assertFalse(built["pass"])
