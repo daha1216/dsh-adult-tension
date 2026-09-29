@@ -48,11 +48,12 @@ carry; --candidate names another) of the scripts as they are now (the same
 setup, player inputs, expectations and harness steps). All of those count, none is
 picked; the other runs, from before a fix, are shown and not counted
 (ACCEPTANCE 6.1 item 6). The first-run pass rate is over run 1 of every
-script, whatever came after. Nor does a run count that failed only on turns
-where the host gave the player nothing (no tool call, no text: the model
-answered with an empty message): the user decided on 2026-09-29 that such a
-run is made up by another run of the script (PROGRESS P10); a failure on any
-other turn counts. The report passes only when every condition
+script, whatever came after. Nor does a failed run count that has a turn
+ending in an empty message (the player saw nothing and the host reported no
+error, with or without tool calls before it): the user decided on 2026-09-29
+that such a run is made up by another run of the script (PROGRESS P10). All
+its failures are still listed, the knock-on ones on later turns too, and the
+first-run pass rate still takes it. The report passes only when every condition
 holds, and it names each one that does not: at least two hosts, every
 script (tests/e2e/scripts) at least three times on every host, no
 machine-check failure, a counted review for every run, medians, critical
@@ -277,20 +278,21 @@ def ran_script(rec, script):
 
 
 def empty_replies(rec):
-    """The turns where the host gave the player nothing: no tool call, no
-    text, no error (the model answered with an empty message)."""
-    return [t["index"] for t in rec["turns"]
-            if not (t.get("text") or "").strip() and not t.get("host_calls") and not t.get("runtime_calls") and not t.get("host_error")]
+    """The turns that ended in an empty message: the player saw nothing and
+    the host reported no error (the model stopped without a word, whether or
+    not it made tool calls first)."""
+    return [t["index"] for t in rec["turns"] if not (t.get("text") or "").strip() and not t.get("host_error")]
 
 
 def made_up(rec, checks):
-    """The empty replies a run failed on, when they are all it failed on (the
-    user's decision of 2026-09-29: such a run is made up by another run of
-    the script, not counted); else []. A failure on any other turn counts."""
+    """The empty replies of a failed run (the user's decision of 2026-09-29,
+    PROGRESS P10: such a run is made up by another run of the script, not
+    counted, whatever else it failed on: the next turn often redoes what the
+    empty one left undone and runs over its budget); else []."""
     empty = empty_replies(rec)
-    if checks["pass"] or not empty or not checks["findings"] or checks.get("invalid_record"):
+    if checks["pass"] or not empty or checks.get("invalid_record"):
         return []
-    return empty if all(f["turn"] in empty for f in checks["findings"]) else []
+    return empty
 
 
 def _runs(records_dir):
@@ -560,8 +562,9 @@ def to_markdown(report):
     ]
     lines += ["| %s | %s | %s |" % (c["condition"], "是" if c["ok"] else "**否**", c["detail"]) for c in report["conditions"]]
     if report["made_up"]:
-        lines += ["", "宿主空回复：%d 条运行只因某一轮宿主什么也没给（没有工具调用、也没有正文）而不合格。按用户 2026-09-29 的决定，"
-                  "这样的运行不计入结论，同一剧本补跑一次，补跑的不论结果都计入；在别的轮次上还有失败的照常计入。首跑通过率照旧算它们不通过。" % len(report["made_up"])]
+        lines += ["", "宿主空回复：%d 条运行有一轮以空消息结束（玩家什么也没看到，宿主也没报错）而不合格。按用户 2026-09-29 的决定，"
+                  "这样的运行不计入结论，同一剧本补跑一次，补跑的不论结果都计入。它们的失败（包括后面轮次的连带失败）照样逐条列在下面，"
+                  "首跑通过率照旧算它们不通过。" % len(report["made_up"])]
     if report["notes"]:
         lines += ["", "说明："] + ["- %s" % note for note in report["notes"]]
     lines += [

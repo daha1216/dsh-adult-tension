@@ -61,6 +61,8 @@ NEGATIONS = ("没", "不", "未", "别")
 PLAYER_COLON_RE = re.compile(r"(?:^|[。！？])\s*你([^。！？“”\n]{0,60})[：:]\s*“([^”]{2,})”")
 # ... unless someone else is in that sentence (你听见她说：“……”, 你看向秋山，秋山低声道：“……”)
 OTHER_SPEAKERS = ("他", "她", "它", "对方", "有人", "众人")
+# ... or the sentence says the sound came out of something (你腰间的对讲机爆出一阵杂音：“……”)
+SOUND_FROM = ("传来", "传出", "响起", "响了", "爆出", "播出")
 TIME_WORDS = {
     "凌晨": [(0, 6)],
     "清晨": [(4, 9)],
@@ -418,7 +420,7 @@ def check_ventriloquism(record):
             for match in PLAYER_COLON_RE.finditer(line):
                 if others is None:
                     others = set(OTHER_SPEAKERS) | _npc_name_parts(record)
-                if not any(o in match.group(1) for o in others):
+                if not any(o in match.group(1) for o in others) and not any(s in match.group(1) for s in SOUND_FROM):
                     quotes.append(match.group(2))
             quotes = list(dict.fromkeys(quotes))
             for quote in quotes:

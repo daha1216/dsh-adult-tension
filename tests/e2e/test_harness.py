@@ -203,9 +203,13 @@ class MachineCheckTest(unittest.TestCase):
         self.assertIn(("ventriloquism", 3), names(M.check(rec)))
         rec["turns"][2]["text"] = "你深吸了一口气，声音压得极沉：\n\n“这局我一个人扛不下。”\n\n" + footer(3, 1210)
         self.assertIn(("ventriloquism", 3), names(M.check(rec)))
+        # the player speaking into a radio is still the player
+        rec["turns"][2]["text"] = "你把对讲机凑到嘴边，声音压得极低：“七号泊位的吊具先停下，谁也别动那个柜！”\n\n" + footer(3, 1210)
+        self.assertIn(("ventriloquism", 3), names(M.check(rec)))
         # someone else's line that the player does not answer, someone else's line, someone else in the sentence
         for text in ("“你说今晚到底走不走？”你没有回答，只是看着她。", "“今晚忙得很，别来烦我。”她说。你点了点头。",
-                     "你听见她压低了声音：“今晚别去七号泊位。”", "你看向志强，志强把烟掐了：“今晚别去七号泊位。”"):
+                     "你听见她压低了声音：“今晚别去七号泊位。”", "你看向志强，志强把烟掐了：“今晚别去七号泊位。”",
+                     "你工装外侧别着的对讲机突然爆出一阵电流杂音：\n\n“呼叫调度！七号泊位的吊具已经降下来了！”"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertNotIn(("ventriloquism", 3), names(M.check(rec)), text)
 
@@ -658,22 +662,28 @@ class ReportTest(unittest.TestCase):
         def empty(turns):
             turns[2].update(text="", runtime_calls=[], host_calls=[])
 
-        # the host gave nothing in turn 3 and that is all the run failed on: shown, not counted, and the script is one run short
+        # turn 3 ended in an empty message: the run is shown, not counted, and the script is one run short
         built = rewrite(empty)
         self.assertEqual((built["made_up"], built["not_counted"]), (["h1-st-r2.json"], [{"file": "h1-st-r2.json", "why": "宿主空回复（第 3 轮），按用户的决定补跑"}]))
         self.assertEqual({c["condition"]: c["detail"] for c in built["conditions"] if not c["ok"]}, {"每条剧本在每个宿主上至少 3 次": "h1 上剧本 t 2 次"})
         self.assertEqual(built["first_run_machine_pass"], "2/2")
-        self.assertIn("宿主空回复：1 条运行只因某一轮宿主什么也没给", report.to_markdown(built))
+        self.assertIn("宿主空回复：1 条运行有一轮以空消息结束", report.to_markdown(built))
         # a run more makes it up, and counts whatever its result
         R.save(self.record("h1", 4), os.path.join(records, "h1", "h1-st-r4.json"))
         self.write_reviews(os.path.join(reviews, "h1"), {"h1-st-r4": self.review(score=5)})
         built = self.build(records, reviews, calibration)
         self.assertEqual((built["counted_runs"], built["pass"]), (6, True))
-        # a failure on another turn counts: the empty reply does not excuse it
+        # so is a run that also failed on another turn (the next turn redoes what the empty one left): still listed
         built = rewrite(lambda turns: (empty(turns), turns[1]["runtime_calls"].insert(0, {"argv": ["get-context"], "input": {}, "exit": 0, "envelope": envelope({})})))
-        self.assertEqual((built["made_up"], built["machine_failures"], built["pass"]), ([], ["h1-st-r2.json"], False))
-        # nor is a turn with calls but no text an empty reply: the model did something and told the player nothing
-        built = rewrite(lambda turns: turns[2].update(text=""))
+        self.assertEqual((built["made_up"], built["machine_failures"], built["pass"]), (["h1-st-r2.json"], [], True))
+        listed = [f for f in built["failures_and_fixes"] if f["file"] == "h1-st-r2.json"][0]
+        self.assertFalse(listed["counted"])
+        self.assertTrue(any("预算" in m for m in listed["machine"]), listed)
+        # and one where the model read its files, made its calls and then said nothing
+        built = rewrite(lambda turns: turns[2].update(text="", host_calls=[{"tool": "read", "input": {"path": "SKILL.md"}, "output": "# Adult Tension"}]))
+        self.assertEqual((built["made_up"], built["machine_failures"]), (["h1-st-r2.json"], []))
+        # a turn the host broke off is not an empty message: it counts
+        built = rewrite(lambda turns: turns[2].update(text="", host_error="503 auth_unavailable"))
         self.assertEqual((built["made_up"], built["machine_failures"]), ([], ["h1-st-r2.json"]))
         self.assertNotIn("宿主空回复", report.to_markdown(built))
 

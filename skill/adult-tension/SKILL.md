@@ -87,7 +87,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 ## 时间、离屏与转折
 
-- 快进（“快进到晚上”“三天后”）：先 `get-context` 带 `preview_time`（与 `advance_time` 同形：`until`（`morning`/`noon`/`evening`/`night`/`next_morning`）/`days`/`minutes`），再提交一次：`advance_time` 放第一个，其后为 `preview.required_beats` 的每个 NPC 各写一条 `offscreen_beat`。正文写清到期事件的结果。
+- 快进（“快进到晚上”“三天后”）：先 `get-context` 带 `preview_time`（与 `advance_time` 同形：`until`（`morning`/`noon`/`evening`/`night`/`next_morning`）/`days`/`minutes`），只预览一次，再提交：`advance_time` 放第一个，其后为 `preview.required_beats` 的每个 NPC 各写一条 `offscreen_beat`。正文写清到期事件的结果。
 - `offscreen_beat`：只写这个不在场 NPC 自己的行动、状态、去向、NPC 之间的关系与消息，依据他的目标与所知（预览的 `goal`、`knows`），不碰玩家角色。玩家“继续”时可以为 `requests.offscreen_beat_candidates` 里的 NPC 插一段简短离屏片段。跨度 ≥ 60 分钟或跨日时被点名的 NPC 必须有。离屏推演关闭时没有离屏片段。
 - 转折：`requests.twist_offer` 出现，或玩家说“来点转折”（`get-context` 带 `"want_twist": true`）时，正文后一句话列出候选（“可以选一个转折：① …… ② ……，或说你想要的”）。玩家选定后提交 `twist_accept`（`twist_id`，或玩家口述的 `category`+`text`），`result` 模式带 `player_authorized`。同一游戏日最多一次；玩家不理会就照常继续。
 
