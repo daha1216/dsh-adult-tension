@@ -102,6 +102,12 @@ class SchemaTest(unittest.TestCase):
         self.assertIn("$.name", errs)
         self.assertIn("$.inner.x", errs)
 
+    def test_a_missing_field_says_what_it_takes(self):
+        spec = schema.Obj({"origin": schema.Field(schema.Enum("observed", "told"), desc="谁看见的"), "n": schema.Field(schema.Int(0, 5))})
+        _out, errs = schema.validate(spec, {})
+        hints = {e["path"]: e["hint"] for e in errs}
+        self.assertEqual(hints, {"$.origin": "origin：枚举：`observed` / `told`；谁看见的", "$.n": "n：%s" % schema.Int(0, 5).doc()})
+
     def test_out_of_range_is_rejected_not_clamped(self):
         errs = self.errors({"name": "a", "count": 6, "ratio": 1.0})
         self.assertIn("$.count", errs)

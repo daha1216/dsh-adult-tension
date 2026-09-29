@@ -167,9 +167,25 @@ def _envelopes(output):
 SHELL_SYNTAX_RE = re.compile(r"(?m)^[^\s:]*sh: -c: line (\d+): (?:unexpected EOF while looking for matching|syntax error)")
 
 
+# Redirections between two invocations on one line (2>&1, >/dev/null, < in.json): not operators.
+REDIRECT_RE = re.compile(r"\d*>&\d+|&>>?\s*\S+|\d*>>?\s*\S+|<\s*\S+")
+OPERATOR_RE = re.compile(r"\|\||&&|;|\||&")
+
+
+def _joiner(gap):
+    """How the shell joins two runtime invocations on one line, from the text
+    between them: "||" (the second runs only if the first failed) or "&&"
+    (only if it succeeded) when that operator is all that stands between
+    them; None when the second runs either way (;, a pipe) or other commands
+    in between make it unknowable."""
+    operators = OPERATOR_RE.findall(REDIRECT_RE.sub(" ", gap))
+    return operators[0] if len(operators) == 1 and operators[0] in ("||", "&&") else None
+
+
 def _shell_invocations(command, files, ran_lines=None):
-    """(argv, input) for each runtime invocation in one shell command; with
-    ran_lines, only in its first ran_lines lines."""
+    """(argv, input, joiner) for each runtime invocation in one shell command
+    (joiner: see _joiner; None for the first on a line); with ran_lines, only
+    in its first ran_lines lines."""
     lines = command.split("\n")
     if ran_lines is not None:
         lines = lines[:ran_lines]
@@ -194,7 +210,10 @@ def _shell_invocations(command, files, ran_lines=None):
                 target = FILE_TARGET_RE.search(head + " " + line[heredoc.end() :].split("&&")[0])
                 if target:
                     files.write(target.group("path"), "\n".join(body))
+        end = None
         for match in RUNTIME_RE.finditer(line):
+            joiner = _joiner(line[end : match.start()]) if end is not None else None
+            end = match.end()
             tokens = [_unquote(t) for t in TOKEN_RE.findall(match.group("rest"))]
             while tokens and re.match(r"^\d$", tokens[-1]):  # the 2 of 2>&1
                 tokens.pop()
@@ -203,7 +222,7 @@ def _shell_invocations(command, files, ran_lines=None):
                 payload = _json_value(files.read(source.group("path")))
             else:
                 payload = _json_value(stdin) if match.start() == reader else None
-            out.append(([match.group("command")] + tokens, payload))
+            out.append(([match.group("command")] + tokens, payload, joiner))
     return out
 
 
@@ -230,8 +249,15 @@ def calls_from_host(host_calls):
             envelopes = _envelopes(output)
             broken = SHELL_SYNTAX_RE.search(output) if isinstance(output, str) else None
             ran_lines = int(broken.group(1)) - 1 if broken else None
-            for n, (argv, payload) in enumerate(_shell_invocations(data["command"], files, ran_lines)):
+            # each invocation that ran printed one envelope, in order; an alternative after a success
+            # (a || b) or a follow-up after a failure (a && b) never ran and printed none
+            previous, n = None, 0
+            for argv, payload, joiner in _shell_invocations(data["command"], files, ran_lines):
+                if previous is not None and joiner and (previous.get("ok") is True) == (joiner == "||"):
+                    continue
                 envelope = envelopes[n] if n < len(envelopes) else None
+                n += 1
+                previous = envelope
                 out.append({"argv": argv, "input": payload, "exit": None, "envelope": envelope, "ms": None, "source": "host"})
     return out
 

@@ -49,6 +49,13 @@ class ModeRulesTest(unittest.TestCase):
         new, result = apply(self.state, commit("continue", [{"op": "npc_action", "npc_id": self.npc, "action": "看了看表"}]))
         self.assertTrue(result["default_time_advance"])
         self.assertEqual(CL.minutes_between(self.state["clock"], new["clock"]), 3)
+        # a short wait is no change by itself; a skip into a new scene is one: with the world
+        # frozen a fast-forward asks for no offscreen beats and is advance_time alone
+        frozen = dict(self.state, preferences=dict(self.state["preferences"], offscreen_simulation=False))
+        err = rejected(frozen, commit("continue", [{"op": "advance_time", "minutes": 59}]))
+        self.assertIn("可观察的变化", reasons(err))
+        new, result = apply(frozen, commit("continue", [{"op": "advance_time", "until": "next_morning"}]))
+        self.assertEqual((new["turn"], result["applied"][0]["new_scene"]), (frozen["turn"] + 1, True))
 
     def test_wait_mode_promise_and_consent_are_refused(self):
         err = rejected(

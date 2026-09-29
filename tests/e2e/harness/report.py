@@ -48,7 +48,11 @@ carry; --candidate names another) of the scripts as they are now (the same
 setup, player inputs, expectations and harness steps). All of those count, none is
 picked; the other runs, from before a fix, are shown and not counted
 (ACCEPTANCE 6.1 item 6). The first-run pass rate is over run 1 of every
-script, whatever came after. The report passes only when every condition
+script, whatever came after. Nor does a run count that failed only on turns
+where the host gave the player nothing (no tool call, no text: the model
+answered with an empty message): the user decided on 2026-09-29 that such a
+run is made up by another run of the script (PROGRESS P10); a failure on any
+other turn counts. The report passes only when every condition
 holds, and it names each one that does not: at least two hosts, every
 script (tests/e2e/scripts) at least three times on every host, no
 machine-check failure, a counted review for every run, medians, critical
@@ -272,6 +276,23 @@ def ran_script(rec, script):
     return seen == wanted and events == harness
 
 
+def empty_replies(rec):
+    """The turns where the host gave the player nothing: no tool call, no
+    text, no error (the model answered with an empty message)."""
+    return [t["index"] for t in rec["turns"]
+            if not (t.get("text") or "").strip() and not t.get("host_calls") and not t.get("runtime_calls") and not t.get("host_error")]
+
+
+def made_up(rec, checks):
+    """The empty replies a run failed on, when they are all it failed on (the
+    user's decision of 2026-09-29: such a run is made up by another run of
+    the script, not counted); else []. A failure on any other turn counts."""
+    empty = empty_replies(rec)
+    if checks["pass"] or not empty or not checks["findings"] or checks.get("invalid_record"):
+        return []
+    return empty if all(f["turn"] in empty for f in checks["findings"]) else []
+
+
 def _runs(records_dir):
     out = []
     for path in sorted(glob.glob(os.path.join(records_dir, "*", "*.json"))):
@@ -439,9 +460,13 @@ def build(records_dir, reviews_dir, calibration_dirs, fixes_path=None, same=None
         why_not = None if skill == candidate else "Skill 摘要 %s，不是候选版本" % (skill or "未记")
         if why_not is None and not ran_script(rec, scripts.get(rec["script"])):
             why_not = "剧本已经改过" if rec["script"] in scripts else "不是正式剧本"
+        empty = made_up(rec, checks) if why_not is None else []
+        if empty:
+            why_not = "宿主空回复（第 %s 轮），按用户的决定补跑" % "、".join(str(i) for i in empty)
         runs.append({
             "file": name, "host": host, "script": rec["script"], "run": rec["run"], "skill": skill, "counted": why_not is None,
-            "why_not_counted": why_not, "machine_pass": checks["pass"], "findings": checks["findings"], "stats": checks.get("stats") or {},
+            "why_not_counted": why_not, "made_up": bool(empty),
+            "machine_pass": checks["pass"], "findings": checks["findings"], "stats": checks.get("stats") or {},
             "reviewed_by": by, "review": review, "fix": fixes.get(name),
         })
     first = [r for r in runs if r["run"] == 1]
@@ -502,6 +527,7 @@ def build(records_dir, reviews_dir, calibration_dirs, fixes_path=None, same=None
         "runs": len(runs),
         "counted_runs": len(counted),
         "not_counted": [{"file": r["file"], "why": r["why_not_counted"]} for r in runs if not r["counted"]],
+        "made_up": [r["file"] for r in runs if r["made_up"]],
         "first_run_machine_pass": "%d/%d" % (sum(1 for r in first if r["machine_pass"]), len(first)),
         "machine_failures": machine_failures,
         "unreviewed": unreviewed,
@@ -524,7 +550,7 @@ def to_markdown(report):
     lines += [
         "- 评审者：%s%s" % (_reviewers_text(report["reviewers"]), "；" + _same_text(report["same_model"]) if report["same_model"] else ""),
         "",
-        "- 候选版本：Skill 摘要 %s；运行 %d 条，计入结论的 %d 条（其余是修复之前的，照样列在下面，不计入）" % (report["candidate"], report["runs"], report["counted_runs"]),
+        "- 候选版本：Skill 摘要 %s；运行 %d 条，计入结论的 %d 条（其余照样列在下面，写明为什么不计入）" % (report["candidate"], report["runs"], report["counted_runs"]),
         "- 首跑机器检查通过：%s（每条剧本在每个宿主上的第 1 次）；计入的运行里没有可用评审的：%d" % (report["first_run_machine_pass"], len(report["unreviewed"])),
         "- 普通回合平均工具调用：%s（门槛 ≤ %.1f）" % (report["average_calls_per_ordinary_turn"], AVERAGE_CALLS_LIMIT),
         "- 结论：%s" % ("通过" if report["pass"] else "未通过"),
@@ -533,6 +559,9 @@ def to_markdown(report):
         "|---|---|---|",
     ]
     lines += ["| %s | %s | %s |" % (c["condition"], "是" if c["ok"] else "**否**", c["detail"]) for c in report["conditions"]]
+    if report["made_up"]:
+        lines += ["", "宿主空回复：%d 条运行只因某一轮宿主什么也没给（没有工具调用、也没有正文）而不合格。按用户 2026-09-29 的决定，"
+                  "这样的运行不计入结论，同一剧本补跑一次，补跑的不论结果都计入；在别的轮次上还有失败的照常计入。首跑通过率照旧算它们不通过。" % len(report["made_up"])]
     if report["notes"]:
         lines += ["", "说明："] + ["- %s" % note for note in report["notes"]]
     lines += [

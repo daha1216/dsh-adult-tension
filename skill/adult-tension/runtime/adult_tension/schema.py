@@ -230,7 +230,9 @@ class Obj(Spec):
         for key, field in self.fields.items():
             if key not in value:
                 if field.required:
-                    errors.append(detail("%s.%s" % (path, key), "缺少必填字段", field.desc or None, INVALID_INPUT))
+                    # what the field takes, as the references say it: the model fixes the call from the error alone
+                    hint = "；".join(x for x in ("%s：%s" % (key, field.spec.doc()), field.desc) if x)
+                    errors.append(detail("%s.%s" % (path, key), "缺少必填字段", hint, INVALID_INPUT))
                     bad = True
                 elif field.default is not MISSING:
                     out[key] = _fresh(field.default)

@@ -186,6 +186,11 @@ def advance(ctx, minutes, path, default=False):
     ctx.beat_candidates |= set(offscreen.get("required", [])) | set(offscreen.get("candidates", []))
     ctx.settlements.append(report)
     ctx.resolved_events.extend(report["resolved_events"])
+    # a skip long enough to start a new scene is itself a change the player sees: a fast-forward
+    # is advance_time plus the beats asked for, and none are asked when the world is frozen
+    # or everyone is here (RUNTIME_PROTOCOL 6.4)
+    if report["scene"]:
+        ctx.observable = True
     ctx.applied.append(
         {
             "op": "advance_time",

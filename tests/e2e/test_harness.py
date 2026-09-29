@@ -9,6 +9,7 @@ import copy
 import io
 import json
 import os
+import re
 import shutil
 import tempfile
 import unittest
@@ -253,6 +254,14 @@ class MachineCheckTest(unittest.TestCase):
         blocked["turns"][2]["runtime_calls"] = [commit_call(3, 0, ok=False, code="SAFETY_BLOCK")]
         blocked["turns"][2]["text"] = "这一段涉及你设过的边界，换个方向吧。"
         self.assertNotIn(("structure", 3), names(M.check(blocked)))
+        # a slot conflict is the player's to decide, and so is an opening that cannot be had: the model asks, it does not correct
+        for code in ("SLOT_CONFLICT", "NO_MATCH"):
+            asked = clean_record()
+            asked["turns"][2]["runtime_calls"] = [{"argv": ["save-slot"], "input": {}, "exit": 10, "envelope": failure(code)}]
+            asked["turns"][2]["text"] = "「第一夜」已存在，要覆盖吗？"
+            self.assertNotIn(("structure", 3), names(M.check(asked)))
+            asked["turns"][2]["runtime_calls"][0]["envelope"] = failure("INVALID_INPUT")
+            self.assertIn(("structure", 3), names(M.check(asked)))
         over = clean_record()
         over["turns"][1]["runtime_calls"] = [{"argv": ["get-context"], "input": {}, "exit": 0, "envelope": envelope({})}, commit_call(2, 1205)]
         self.assertIn(("structure", 2), names(M.check(over)))
@@ -285,6 +294,12 @@ class MachineCheckTest(unittest.TestCase):
         broken = {"tool": "bash", "input": {"command": 'python "%s/scripts/adult_tension.py" commit-turn --json --input-file "in.json' % installed}, "output": "/usr/bin/bash: -c: line 1: unexpected EOF while looking for matching `\"'\n"}
         retried["turns"][2]["host_calls"] = [broken, bash]
         self.assertEqual(M.check(retried)["findings"], [])
+        # alternatives after the one that answered never ran
+        chain = {"tool": "bash", "input": {"command": " || ".join("%s %s/scripts/adult_tension.py doctor --json" % (p, installed) for p in ("python3", "python", "py -3"))},
+                 "output": json.dumps(envelope({"status": "ok"}))}
+        tried = copy.deepcopy(rec)
+        tried["turns"][0]["host_calls"] = [chain, {"tool": "bash", "input": {"command": "python %s/scripts/adult_tension.py new-game --json" % installed}, "output": "{}"}]
+        self.assertEqual(M.check(tried)["findings"], [])
         other = copy.deepcopy(rec)
         other["turns"][1]["runtime_calls"][0]["skill_root"] = "C:\\Users\\x\\.claude\\skills\\adult-tension"
         self.assertEqual(names(M.check(other)), [("record", 2)])
@@ -629,6 +644,39 @@ class ReportTest(unittest.TestCase):
         rec["turns"][2]["input"] = "用种子 8 再开一局"
         self.assertFalse(report.ran_script(rec, script))
 
+    def test_a_run_the_host_left_empty_is_made_up_by_another(self):
+        calibration = [self.calibration()]
+        records, reviews = self.records()
+        path = os.path.join(records, "h1", "h1-st-r2.json")
+
+        def rewrite(change):
+            rec = self.record("h1", 2)
+            change(rec["turns"])
+            R.save(rec, path)
+            return self.build(records, reviews, calibration)
+
+        def empty(turns):
+            turns[2].update(text="", runtime_calls=[], host_calls=[])
+
+        # the host gave nothing in turn 3 and that is all the run failed on: shown, not counted, and the script is one run short
+        built = rewrite(empty)
+        self.assertEqual((built["made_up"], built["not_counted"]), (["h1-st-r2.json"], [{"file": "h1-st-r2.json", "why": "宿主空回复（第 3 轮），按用户的决定补跑"}]))
+        self.assertEqual({c["condition"]: c["detail"] for c in built["conditions"] if not c["ok"]}, {"每条剧本在每个宿主上至少 3 次": "h1 上剧本 t 2 次"})
+        self.assertEqual(built["first_run_machine_pass"], "2/2")
+        self.assertIn("宿主空回复：1 条运行只因某一轮宿主什么也没给", report.to_markdown(built))
+        # a run more makes it up, and counts whatever its result
+        R.save(self.record("h1", 4), os.path.join(records, "h1", "h1-st-r4.json"))
+        self.write_reviews(os.path.join(reviews, "h1"), {"h1-st-r4": self.review(score=5)})
+        built = self.build(records, reviews, calibration)
+        self.assertEqual((built["counted_runs"], built["pass"]), (6, True))
+        # a failure on another turn counts: the empty reply does not excuse it
+        built = rewrite(lambda turns: (empty(turns), turns[1]["runtime_calls"].insert(0, {"argv": ["get-context"], "input": {}, "exit": 0, "envelope": envelope({})})))
+        self.assertEqual((built["made_up"], built["machine_failures"], built["pass"]), ([], ["h1-st-r2.json"], False))
+        # nor is a turn with calls but no text an empty reply: the model did something and told the player nothing
+        built = rewrite(lambda turns: turns[2].update(text=""))
+        self.assertEqual((built["made_up"], built["machine_failures"]), ([], ["h1-st-r2.json"]))
+        self.assertNotIn("宿主空回复", report.to_markdown(built))
+
     def test_an_unusable_review_is_not_a_right_calibration(self):
         temp = tempfile.mkdtemp(prefix="at-rev-")
         self.addCleanup(shutil.rmtree, temp, True)
@@ -959,11 +1007,36 @@ class HostCallsTest(unittest.TestCase):
         self.assertEqual([R.ok_data(c)["n"] for c in calls], [1, 2])
 
 
+    def test_only_the_invocations_the_shell_ran_are_calls(self):
+        ok, bad = envelope({"status": "ok"}), failure("INVALID_INPUT")
+        alternatives = " || ".join("%s .claude/skills/adult-tension/scripts/adult_tension.py doctor --json" % p for p in ("python3", '"py" -3', "python"))
+        # the first alternative answered: the others never ran
+        self.assertEqual([c["envelope"] for c in R.calls_from_host([self.bash(alternatives, ok)])], [ok])
+        # it failed: the next one ran, and the last did not
+        self.assertEqual([c["envelope"] for c in R.calls_from_host([self.bash(alternatives, bad, ok)])], [bad, ok])
+        # an interpreter that is not there printed no envelope: one call answered, the rest never ran
+        calls = R.calls_from_host([self.bash(alternatives, raw="bash: python3: command not found\n" + json.dumps(ok))])
+        self.assertEqual([c["envelope"] for c in calls], [ok])
+        # && runs the second only after a success; redirections are not operators
+        chained = "%s status --json 2>&1 && %s doctor --json 2>/dev/null" % (self.RUNTIME, self.RUNTIME)
+        self.assertEqual([c["envelope"] for c in R.calls_from_host([self.bash(chained, bad)])], [bad])
+        self.assertEqual([c["envelope"] for c in R.calls_from_host([self.bash(chained, ok, ok)])], [ok, ok])
+        # ; and a pipe run the second either way, and so may a chain with other commands in between: all counted
+        for joined in ("%s status --json; %s doctor --json", "%s status --json | %s doctor --json", "%s status --json || echo x && %s doctor --json"):
+            self.assertEqual(len(R.calls_from_host([self.bash(joined % (self.RUNTIME, self.RUNTIME), ok)])), 2, joined)
+
+
 class RunnerTest(unittest.TestCase):
     def test_seed_placeholders_come_from_the_opening_of_that_turn(self):
         turns = [{"index": 8, "runtime_calls": [{"argv": ["new-game"], "envelope": envelope({"seed": 4242})}]}]
         self.assertEqual(run_script.fill_placeholders("不存档，重开 {seed:8} 号", turns), "不存档，重开 4242 号")
         self.assertEqual(run_script.fill_placeholders("重开 {seed:3} 号", turns), "重开 ? 号")
+        # the first person the opening introduces, by name
+        opening = opening_call()
+        opening["envelope"]["data"]["opening"]["npcs"].append({"name": STRANGER})
+        turns = [{"index": 1, "runtime_calls": [opening]}]
+        self.assertEqual(run_script.fill_placeholders("我坐到{npc:1}身边，重开 {seed:1} 号", turns), "我坐到梁志强身边，重开 7 号")
+        self.assertEqual(run_script.fill_placeholders("我坐到{npc:2}身边", turns), "我坐到?身边")
 
     def test_every_script_is_player_voice_with_valid_annotations(self):
         banned = ["result", "attempt", "commit", "npc_", "字段", "档位", "revision", "请注意"]
@@ -973,8 +1046,12 @@ class RunnerTest(unittest.TestCase):
             script = run_script.load_script(name)
             says = [s["say"] for s in script["steps"] if "say" in s]
             self.assertEqual(len(says), script["player_turns"], name)
-            for say in says:
+            for n, say in enumerate(says, 1):
                 self.assertFalse(any(b in say for b in banned), (name, say))
+                # a placeholder names an earlier turn, the one whose opening fills it
+                for kind, turn in re.findall(r"\{(\w+):(\d+)\}", say):
+                    self.assertIn(kind, ("seed", "npc"), (name, say))
+                    self.assertLess(int(turn), n, (name, say))
             for step in script["steps"]:
                 self.assertTrue("say" in step or step.get("harness") == "upgrade_skill", (name, step))
         self.assertEqual(len(os.listdir(run_script.SCRIPTS)), 16)

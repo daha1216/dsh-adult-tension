@@ -32,7 +32,10 @@ import record as R  # noqa: E402
 
 NARRATIVE_COMMANDS = ("new-game", "commit-turn")
 WRITE_COMMANDS = ("new-game", "commit-turn", "undo-turn", "save-slot", "load-slot", "delete-slot", "set-boundary", "set-safety", "set-preferences", "import-save")
-BLOCKING_CODES = ("SAFETY_BLOCK",)
+# Rejections the model hands to the player instead of correcting the call: a block it tells
+# (NARRATIVE_RULES), a slot conflict it asks about (RUNTIME_PROTOCOL 9.2), an opening that
+# cannot be had it owns up to (RUNTIME_PROTOCOL 4.3).
+PLAYER_DECIDES_CODES = ("SAFETY_BLOCK", "SLOT_CONFLICT", "NO_MATCH")
 EXTRA_CALLS_AFTER_REJECTION = 2
 REPEAT_WINDOW = 10
 MIN_SENTENCE = 10
@@ -187,7 +190,7 @@ def check_structure(record):
                 out.append(finding("structure", index, "提交被拒后又调用了 %d 次，超过 %d 次的自动修正" % (after, EXTRA_CALLS_AFTER_REJECTION)))
             last_write = [c for c in calls if R.command_of(c) in WRITE_COMMANDS][-1]
             code = R.error_code(last_write)
-            if code and code not in BLOCKING_CODES and not expect.get("allow_reject"):
+            if code and code not in PLAYER_DECIDES_CODES and not expect.get("allow_reject"):
                 out.append(finding("structure", index, "%s 被拒（%s）后没有修正成功" % (R.command_of(last_write), code)))
         for call in calls:
             if R.error_code(call) == "INTERNAL_ERROR":

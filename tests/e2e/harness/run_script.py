@@ -334,19 +334,25 @@ class FakeHost:
 
 
 def fill_placeholders(text, turns):
-    """{seed:N}: the seed of the opening made in player turn N."""
+    """{seed:N}: the seed of the opening made in player turn N. {npc:N}: the
+    name of the first person that opening introduces; the opening is random,
+    and a player who has read it names the one they mean ("?" when turn N
+    made no opening)."""
 
-    def seed(match):
-        index = int(match.group(1))
+    def opening(match):
+        index = int(match.group(2))
         for turn in turns:
             if turn["index"] == index:
                 for call in turn["runtime_calls"]:
                     data = R.ok_data(call) or {}
                     if R.command_of(call) == "new-game" and "seed" in data:
-                        return str(data["seed"])
+                        if match.group(1) == "seed":
+                            return str(data["seed"])
+                        npcs = (data.get("opening") or {}).get("npcs") or [{}]
+                        return npcs[0].get("name") or "?"
         return "?"
 
-    return re.sub(r"\{seed:(\d+)\}", seed, text)
+    return re.sub(r"\{(seed|npc):(\d+)\}", opening, text)
 
 
 def make_host(name, project, env, model, exe=None):

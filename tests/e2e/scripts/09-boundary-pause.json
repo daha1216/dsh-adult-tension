@@ -70,6 +70,17 @@
   {
    "say": "恢复",
    "expect": {
+    "kind": "ask",
+    "calls_max": 1,
+    "must_not_call": [
+     "set-safety",
+     "commit-turn"
+    ]
+   }
+  },
+  {
+   "say": "解除暂停",
+   "expect": {
     "kind": "meta",
     "calls_max": 1,
     "must_call": [
@@ -85,5 +96,5 @@
    }
   }
  ],
- "player_turns": 8
+ "player_turns": 9
 }
