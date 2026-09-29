@@ -156,11 +156,13 @@ class MachineCheckTest(unittest.TestCase):
             self.assertNotIn(("time", 3), names(M.check(rec)), text)
         # the time of something else: earlier, on another day, of another event
         for text in ("柜子是凌晨抢装塞进来的，手续上缺了签字。", "天光早在凌晨就沉了底，到了这会儿，只剩石板路上一层油光。",
-                     "距离清场只剩二十分钟，而第三天上午十点艺术季就将正式开幕。", "他答应了，凌晨就回来。"):
+                     "距离清场只剩二十分钟，而第三天上午十点艺术季就将正式开幕。", "他答应了，凌晨就回来。",
+                     "凌晨洒过水的石板路还带着潮气，檐下的灯笼一盏接一盏亮起来。", "凌晨泼街的水气还未散尽，巷子里没有人。"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertNotIn(("time", 3), names(M.check(rec)), text)
         # the narration says what time it is where a clause opens with it or marks it as now; so does a line about now
         for text in ("凌晨两点，风把旗子吹得啪啪响。", "你推开门，凌晨的风灌了进来。", "窗外已是凌晨，街上没有人。",
+                     "凌晨的风还在吹，旗子啪啪响。", "凌晨两点还有人在街上走。", "凌晨无人的街道上只有风在吹。",
                      "她说：“都凌晨了，还不回去？”", "现在是凌晨的时候，风把旗子吹得啪啪响。"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertIn(("time", 3), names(M.check(rec)), text)

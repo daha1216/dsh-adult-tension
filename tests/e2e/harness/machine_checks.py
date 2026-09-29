@@ -103,6 +103,10 @@ NOW_AFTER = ("了", "啦")
 TIME_OTHER = ("昨", "明", "前", "后", "那天", "那晚", "今天", "今早", "等到", "到了", "直到", "刚才", "之前", "以前", "每天", "每晚", "每到", "天天", "那年", "当年", "上回", "下回", "约", "说好", "早在", "自从", "以来")
 # ... and so is one that times some other event ("傍晚就回来", "凌晨才睡").
 EVENT_AFTER = ("就", "才", "再", "便")
+# ... and so is one that times something done then whose trace is still there
+# ("傍晚洒过水的石板路还带着潮气", "傍晚泼街的水气还未散尽"): the time word, what was
+# done, 的, the thing, and 还/仍/尚/犹 in the same clause.
+TRACE_RE = re.compile(r"[^，。！？；、“”\n]{1,6}的[^，。！？；、“”\n]{0,8}?[还仍尚犹]")
 DIALOGUE_RE = re.compile(r"“[^”]*”?")
 DIALOGUE_SLACK = 60
 
@@ -118,7 +122,7 @@ def _says_now(line, start, end, in_dialogue):
     "marked" (right after NOW_BEFORE or NOW_IS, or right before 了/啦),
     "clause" (narration where the word opens a clause), or None."""
     near = line[max(0, start - 4) : end + 2]
-    if any(other in near for other in TIME_OTHER) or line[end : end + 1] in EVENT_AFTER:
+    if any(other in near for other in TIME_OTHER) or line[end : end + 1] in EVENT_AFTER or TRACE_RE.match(line, end):
         return None
     head = line[:start]
     if head.endswith(NOW_BEFORE) or head.endswith(NOW_IS) or line[end : end + 1] in NOW_AFTER:
