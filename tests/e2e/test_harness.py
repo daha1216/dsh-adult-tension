@@ -4,6 +4,7 @@ These tests never call a model. Machine checks are exercised on small
 records built here, each with and without the problem the check looks for.
 """
 
+import contextlib
 import copy
 import io
 import json
@@ -388,6 +389,45 @@ class ReportTest(unittest.TestCase):
         self.write_reviews(temp, {name: dict(self.review(low=expected["low"]), reviewer={"usable": True}) for name, expected in key.items()})
         result = report.calibrate(temp)
         self.assertEqual((result["correct"], result["reviewers"], result["ready"]), (12, ["未记"], False))
+
+    def test_the_user_can_say_two_served_names_are_one_model(self):
+        same = {"served-x": "served-m"}
+        self.assertEqual(report.reviewer_of(self.review(by="served-x"), same), "served-m")
+        both = {"reviewer": {"model": "asked", "attempts": [{"served_model": "served-x"}, {"served_model": "served-m"}]}}
+        self.assertEqual((report.reviewer_of(both), report.reviewer_of(both, same)), ("served-m+served-x", "served-m"))
+        # a calibration answered under both names speaks for one model only when the user says so
+        temp = self.calibration()
+        self.write_reviews(temp, {"good-1": self.review(by="served-x")})
+        self.assertEqual((report.calibrate(temp)["ready"], report.calibrated([temp])), (False, {}))
+        result = report.calibrate(temp, same)
+        self.assertEqual((result["correct"], result["reviewer"], result["ready"]), (12, "served-m", True))
+        self.assertEqual(report.calibrated([temp], same), {"served-m": "12/12"})
+        # the command line takes the statement as <served>=<model> and prints it
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(report.main(["calibrate", "--reviews", temp]), 1)
+            self.assertEqual(report.main(["calibrate", "--reviews", temp, "--same-model", "served-x=served-m"]), 0)
+        self.assertIn("served-x 与 served-m 视为同一个模型（用户确认）", out.getvalue())
+        with contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
+            report.main(["calibrate", "--reviews", temp, "--same-model", "served-x"])
+        # the reviews under the other name count as that model's, and the reports say why
+        root = tempfile.mkdtemp(prefix="at-rep-")
+        self.addCleanup(shutil.rmtree, root, True)
+        records, reviews = os.path.join(root, "records"), os.path.join(root, "reviews")
+        os.makedirs(os.path.join(records, "h1"))
+        rec = clean_record()
+        rec["host"]["name"] = "h1"
+        R.save(rec, os.path.join(records, "h1", "h1-st-r1.json"))
+        self.write_reviews(os.path.join(reviews, "h1"), {"h1-st-r1": self.review(by="served-x")})
+        calibration = [self.calibration()]
+        self.assertEqual(report.build(records, reviews, calibration)["unreviewed"], ["h1-st-r1.json"])
+        built = report.build(records, reviews, calibration, same=same)
+        self.assertEqual((built["unreviewed"], built["reviewers"]), ([], {"served-m": {"reviews": 1, "calibration": "12/12"}}))
+        self.assertIn("评审者：served-m 1 条（校准 12/12）；served-x 与 served-m 视为同一个模型（用户确认）", report.to_markdown(built))
+        self.assertEqual(report.playtests(records, reviews, calibration)["summary"][0]["reviewed"], 0)
+        result = report.playtests(records, reviews, calibration, same)
+        self.assertEqual(result["summary"][0]["reviewed"], 1)
+        self.assertIn("served-x 与 served-m 视为同一个模型（用户确认）。", report.playtests_markdown(result))
+        self.assertNotIn("视为同一个模型", report.playtests_markdown(report.playtests(records, reviews, calibration)))
 
     def test_the_report_counts_first_runs_ceiling_and_critical_dimensions(self):
         temp = tempfile.mkdtemp(prefix="at-rep-")
