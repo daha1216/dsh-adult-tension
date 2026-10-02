@@ -1,0 +1,16 @@
+core	exit=0	21.2s	python -m unittest discover -s tests/core
+content	exit=0	29.2s	python -m unittest discover -s tests/content
+integration	exit=0	69.6s	python -m unittest discover -s tests/integration
+e2e	exit=0	24.2s	python -m unittest discover -s tests/e2e
+validate_skill	exit=0	0.5s	python tools/validate_skill.py skill/adult-tension
+compile_check	exit=0	2.3s	python tools/compile_content.py --check
+references_check	exit=0	0.3s	python tools/gen_references.py --check
+doctor	exit=0	0.7s	python skill/adult-tension/scripts/adult_tension.py doctor --json
+verify_content	exit=0	2.7s	python skill/adult-tension/scripts/adult_tension.py verify-content --json
+smoke	exit=0	0.8s	python skill/adult-tension/scripts/adult_tension.py smoke --seed 42 --json
+benchmark	exit=1	157.3s	python tools/benchmark.py --json
+simulate_daily	exit=0	20.9s	python tools/simulate.py --turns 300 --mode daily --json
+simulate_pressure	exit=0	19.0s	python tools/simulate.py --turns 300 --mode pressure --json
+reverse_checks	exit=0	277.7s	python tools/reverse_checks.py --group all
+fault_drills	exit=0	23.9s	python tools/fault_drills.py --out reports/release/2026-09-30/fault-drills.json
+done

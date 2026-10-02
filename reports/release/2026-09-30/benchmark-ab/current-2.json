@@ -1,0 +1,112 @@
+{
+  "machine": {
+    "os": "Windows-11-10.0.26340-SP0",
+    "python": "3.12.10",
+    "python_executable": "C:\\Users\\daha\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "cpu_count": 20,
+    "cpu": "Intel(R) Core(TM) i5-14600KF",
+    "machine": "Micro-Star International Co., Ltd. MS-7D42",
+    "sqlite": "3.49.1"
+  },
+  "cold": {
+    "doctor_first": {
+      "samples": 50,
+      "p50_ms": 512.4,
+      "p95_ms": 559.14,
+      "max_ms": 604.72,
+      "threshold_ms": 1500,
+      "pass": true
+    },
+    "doctor_again": {
+      "samples": 50,
+      "p50_ms": 265.79,
+      "p95_ms": 475.71,
+      "max_ms": 501.53,
+      "threshold_ms": 400,
+      "pass": false
+    },
+    "version": {
+      "samples": 50,
+      "p50_ms": 184.36,
+      "p95_ms": 217.84,
+      "max_ms": 233.4,
+      "threshold_ms": 400,
+      "pass": true
+    },
+    "new_game": {
+      "samples": 50,
+      "p50_ms": 187.99,
+      "p95_ms": 307.55,
+      "max_ms": 465.33,
+      "threshold_ms": 800,
+      "pass": true
+    },
+    "commit_turn": {
+      "samples": 50,
+      "p50_ms": 177.1,
+      "p95_ms": 199.64,
+      "max_ms": 248.86,
+      "threshold_ms": 500,
+      "pass": true
+    },
+    "get_context": {
+      "samples": 50,
+      "p50_ms": 177.33,
+      "p95_ms": 202.59,
+      "max_ms": 223.96,
+      "threshold_ms": 400,
+      "pass": true
+    }
+  },
+  "inprocess": {
+    "opening": {
+      "samples": 200,
+      "p50_ms": 6.67,
+      "p95_ms": 15.03,
+      "max_ms": 47.28,
+      "threshold_ms": 300,
+      "pass": true
+    },
+    "commit_turn": {
+      "samples": 200,
+      "p50_ms": 3.88,
+      "p95_ms": 6.04,
+      "max_ms": 71.06,
+      "threshold_ms": 80,
+      "pass": true
+    },
+    "get_context": {
+      "samples": 200,
+      "p50_ms": 0.9,
+      "p95_ms": 1.52,
+      "max_ms": 3.09,
+      "threshold_ms": 30,
+      "pass": true
+    },
+    "save_slot": {
+      "samples": 200,
+      "p50_ms": 5.57,
+      "p95_ms": 22.63,
+      "max_ms": 36.66,
+      "threshold_ms": 100,
+      "pass": true
+    },
+    "load_slot": {
+      "samples": 200,
+      "p50_ms": 7.87,
+      "p95_ms": 26.37,
+      "max_ms": 51.28,
+      "threshold_ms": 100,
+      "pass": true
+    }
+  },
+  "notes": {
+    "turns_played": 200,
+    "turn_blob_packed_bytes_turn_201": 6279,
+    "facts_turn_201": 200
+  },
+  "ok": false,
+  "failures": [
+    "cold.doctor_again"
+  ]
+}
