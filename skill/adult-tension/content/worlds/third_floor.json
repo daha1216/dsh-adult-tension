@@ -1,0 +1,2483 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "便利店的成年店员",
+   "age_range": [
+    20,
+    35
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_store_clerk",
+   "line": "{npc.name}每晚看着谁进了楼门、几点下来，从不多问",
+   "location_ids": [
+    "alley_mouth"
+   ],
+   "name": null,
+   "role": "便利店夜班店员"
+  },
+  {
+   "adult_context": "成年的外卖骑手",
+   "age_range": [
+    22,
+    40
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_delivery",
+   "line": "{npc.name}一晚上上下楼七八趟，替人捎东西也捎话",
+   "location_ids": [
+    "stairwell",
+    "alley_mouth"
+   ],
+   "name": null,
+   "role": "外卖骑手"
+  },
+  {
+   "adult_context": "绳艺工作室的成年助教",
+   "age_range": [
+    25,
+    40
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_assistant",
+   "line": "{npc.name}在课上替老师递绳子、看着每个人的手，一有不对就按铃",
+   "location_ids": [
+    "rope_studio"
+   ],
+   "name": null,
+   "role": "绳艺助教"
+  },
+  {
+   "adult_context": "楼里的老租户，成年人",
+   "age_range": [
+    50,
+    70
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_neighbor",
+   "line": "{npc.name}在二楼开了三十年裁缝铺，三楼的事{npc.ta}都知道一点，也都说一点",
+   "location_ids": [
+    "stairwell",
+    "alley_mouth"
+   ],
+   "name": null,
+   "role": "二楼裁缝"
+  },
+  {
+   "adult_context": "圈子里的成年人",
+   "age_range": [
+    24,
+    40
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_forum_poster",
+   "line": "{npc.name}在圈子里什么帖都发，谁的花名对上了谁的脸，{npc.ta}最先知道",
+   "location_ids": [
+    "rooftop",
+    "alley_mouth"
+   ],
+   "name": null,
+   "role": "圈内发帖人"
+  },
+  {
+   "adult_context": "附近的成年锁匠",
+   "age_range": [
+    35,
+    60
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_locksmith",
+   "line": "{npc.name}被二房东叫来换锁，问{npc.ta}换哪一把，{npc.ta}说都换",
+   "location_ids": [
+    "alley_mouth",
+    "stairwell"
+   ],
+   "name": null,
+   "role": "开锁师傅"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "{photo_owner.name}是你的老板，{regular_sitter.name}是工作室最老的客人之一；这一卷封袋上要签三个名字，第三个是你的。",
+   "id": "k_assistant_roll",
+   "identity_ids": [
+    "photo_assistant"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "photo_owner",
+     "b_to_a": {
+      "tension": 0,
+      "trust": 2
+     },
+     "reason": "{photo_owner.name}教你上卷的时候，手把手教了三遍",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "regular_sitter",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{regular_sitter.name}每次都会给你带一块点心",
+     "stage": "acquainted"
+    },
+    {
+     "a": "photo_owner",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "regular_sitter",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{photo_owner.name}拍了{regular_sitter.name}五卷，从没叫过{regular_sitter.ta}的真名",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "photo_owner",
+    "regular_sitter"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想替一个人守住{regular_sitter.ta}最后一卷",
+    "limit_gap": "{regular_sitter.name}下个月结婚，{photo_owner.name}的房租在涨",
+    "meeting_reason": "每个月的同一个下午，三个人都在北窗底下",
+    "resource_gap": "{photo_owner.name}有底片柜，{regular_sitter.name}有五卷封好的底片，你只有暗房的一把钥匙"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_negative_owner",
+    "te_flower_real"
+   ]
+  },
+  {
+   "chemistry": "{rope_master.name}是你的老师，{board_keeper.name}今晚来楼里找{rope_master.ta}，说有一条投诉要当面问清；你的课时卡上，只剩最后一格。",
+   "id": "k_learner_bell",
+   "identity_ids": [
+    "rope_learner"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "rope_master",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "你上了{rope_master.name}半年的课，一次都没用过安全词",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "board_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{board_keeper.name}说你看起来面熟",
+     "stage": "stranger"
+    },
+    {
+     "a": "rope_master",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "board_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{board_keeper.name}以前在{rope_master.name}的课上坐过一次",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "rope_master",
+    "board_keeper"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道这条投诉说的到底是什么",
+    "limit_gap": "你白天的身份经不起被挂，{rope_master.name}的租约月底到期",
+    "meeting_reason": "今晚是你的最后一节课",
+    "resource_gap": "{rope_master.name}有教室和铃，{board_keeper.name}有公示台，你只有一张快用完的课时卡"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_bell_and_heart",
+    "te_flower_real"
+   ]
+  },
+  {
+   "chemistry": "你按小时租暗房；{landlord_heir.name}的钥匙串上多了一把和你一样的钥匙，{photo_owner.name}说暗房最近总有人动过。",
+   "id": "k_darkroom_hours",
+   "identity_ids": [
+    "film_photographer"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "photo_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{photo_owner.name}借过你一卷过期胶片",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "landlord_heir",
+     "b_to_a": {
+      "tension": 0,
+      "trust": 1
+     },
+     "reason": "{landlord_heir.name}每月来收一次你的暗房租金",
+     "stage": "acquainted"
+    },
+    {
+     "a": "photo_owner",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "landlord_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{photo_owner.name}拍过{landlord_heir.name}的姑妈",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "photo_owner",
+    "landlord_heir"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道是谁在你的时段里进过暗房",
+    "limit_gap": "租约要涨，暗房可能不再出租",
+    "meeting_reason": "那天三个人在暗房门口碰上，翻牌是“占用”，里面没人",
+    "resource_gap": "{photo_owner.name}有底片柜，{landlord_heir.name}有整栋楼的钥匙，你有暗房的时间表"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_fourth_key",
+    "te_negative_owner"
+   ]
+  },
+  {
+   "chemistry": "你和{rope_master.name}同一年出师；{rival_lineage.name}带着竞标书来了，第一个找的人是你，要你站队。",
+   "id": "k_same_master",
+   "identity_ids": [
+    "fellow_teacher"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "rope_master",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "你们出师那天在天台上喝了一夜",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "rival_lineage",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{rival_lineage.name}当年替你说过一句话",
+     "stage": "acquainted"
+    },
+    {
+     "a": "rope_master",
+     "a_to_b": {
+      "tension": 3,
+      "trust": -1
+     },
+     "b": "rival_lineage",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 0
+     },
+     "reason": "当年那封逐出信是{rival_lineage.name}写的",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "rope_master",
+    "rival_lineage"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想保住老朋友的教室，又不想跟门派翻脸",
+    "limit_gap": "门派给你递了话，{rope_master.name}的租约月底到期",
+    "meeting_reason": "那天三个人在楼梯口的软木板前碰了面",
+    "resource_gap": "{rope_master.name}有教室，{rival_lineage.name}有门派和一份高价竞标书，你有两边都认的身份"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_lease_end",
+    "te_bell_and_heart"
+   ]
+  },
+  {
+   "chemistry": "你想用这间工作室二十年的底片做一期专题；{photo_owner.name}说每一卷都要拍的人自己点头，{regular_sitter.name}就是第一个你要说服的人。",
+   "id": "k_editor_archive",
+   "identity_ids": [
+    "magazine_editor"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "photo_owner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{photo_owner.name}好像认出了你",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "regular_sitter",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{regular_sitter.name}听说你要用底片，脸都白了",
+     "stage": "stranger"
+    },
+    {
+     "a": "photo_owner",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "regular_sitter",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{regular_sitter.name}只信{photo_owner.name}",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "photo_owner",
+    "regular_sitter"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想做一期好专题，也想弄清自己当年那一卷还在不在",
+    "limit_gap": "专题下个月付印，{regular_sitter.name}下个月结婚",
+    "meeting_reason": "三个人在北窗下面的长榻前谈过一次",
+    "resource_gap": "你有杂志和版面，{photo_owner.name}有底片柜，{regular_sitter.name}有一个不能被认出的花名"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_negative_owner",
+    "te_flower_real"
+   ]
+  },
+  {
+   "chemistry": "{landlord_heir.name}带你看三楼，说两家的租约都可以不续；{rope_master.name}正在上课，隔着镜墙看了你一眼，铃没响，课没停。",
+   "id": "k_buyer_tour",
+   "identity_ids": [
+    "building_buyer"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "landlord_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{landlord_heir.name}和你吃过两次饭谈价钱",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "rope_master",
+     "b_to_a": {
+      "tension": 2,
+      "trust": -1
+     },
+     "reason": "{rope_master.name}知道你是来买楼的",
+     "stage": "stranger"
+    },
+    {
+     "a": "landlord_heir",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "rope_master",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{landlord_heir.name}从小就在楼梯口看{rope_master.name}上下楼",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "landlord_heir",
+    "rope_master"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想买下这栋楼，可你的合伙人有别的打算",
+    "limit_gap": "{landlord_heir.name}的家里人逼着卖，{rope_master.name}的门派在抢",
+    "meeting_reason": "看楼那天正赶上一节课",
+    "resource_gap": "你有买楼的钱，{landlord_heir.name}有钥匙和租约，{rope_master.name}有十二年的教室"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_lease_end",
+    "te_fourth_key"
+   ]
+  },
+  {
+   "chemistry": "{regular_sitter.name}在两家都有花名，{rope_master.name}只认得其中一个；这件事，只有你知道。",
+   "id": "k_rooftop_smoke",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "regular_sitter",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{regular_sitter.name}求你别说",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "rope_master",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{rope_master.name}在天台上给你点过一次烟",
+     "stage": "acquainted"
+    },
+    {
+     "a": "regular_sitter",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "rope_master",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{rope_master.name}只知道{regular_sitter.name}在镜墙教室的那个花名",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "regular_sitter",
+    "rope_master"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想替{regular_sitter.name}守住，又怕守不住",
+    "limit_gap": "{regular_sitter.name}的花名正在网上被人对",
+    "meeting_reason": "三个人常在天台上碰见，各自点一根烟",
+    "resource_gap": "{regular_sitter.name}有两个花名，{rope_master.name}有一间教室，你有一个不该知道的秘密"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_flower_real",
+    "te_bell_and_heart"
+   ]
+  },
+  {
+   "chemistry": "{board_keeper.name}压着的那条投诉，说这栋楼里有人进过暗房、动过别人的底片；{photo_owner.name}说不是自己，{landlord_heir.name}的钥匙串叮当响了一下。",
+   "id": "k_complaint_night",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "board_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{board_keeper.name}找你问过一次话",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "photo_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{photo_owner.name}信你",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "landlord_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{landlord_heir.name}问过你暗房几点没人",
+     "stage": "acquainted"
+    },
+    {
+     "a": "board_keeper",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "photo_owner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{photo_owner.name}知道投诉里写的是这栋楼",
+     "stage": "stranger"
+    },
+    {
+     "a": "board_keeper",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "landlord_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{board_keeper.name}还没见过{landlord_heir.name}",
+     "stage": "stranger"
+    },
+    {
+     "a": "photo_owner",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "landlord_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{landlord_heir.name}的姑妈在{photo_owner.name}的底片柜里",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "board_keeper",
+    "photo_owner",
+    "landlord_heir"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在投诉挂出去之前，弄清是谁",
+    "limit_gap": "投诉人等不了了，再不挂就去别处发",
+    "meeting_reason": "那晚三个人在楼梯口的声控灯下站着，灯灭了谁都没跺脚",
+    "resource_gap": "{board_keeper.name}有那条投诉，{photo_owner.name}有底片柜，{landlord_heir.name}有第四把钥匙，你有一段关于那一晚的记忆"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_fourth_key",
+    "te_negative_owner"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "distorted",
+   "id": "ch_board",
+   "reach": "一挂出来全圈都看得到，转述的人会添上自己的猜测",
+   "text": "圈内投诉公示台"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_stair_corkboard",
+   "reach": "只有楼里的人看得到，写上去的字一清二楚",
+   "text": "楼梯口软木板"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_tailor_talk",
+   "reach": "第二天就传遍整条巷子，越传越离谱",
+   "text": "二楼裁缝的闲话"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "后巷三楼写真工作室的主理人，成年人，只拍胶片，拍了二十年",
+   "age_range": [
+    36,
+    55
+   ],
+   "appearance_options": [
+    "一件洗得发白的亚麻衬衫，脖子上挂着一台老相机，从不离身",
+    "说话很轻，按快门之前总要先问一句“可以吗”"
+   ],
+   "decision": {
+    "avoids": [
+     "被人当成偷拍的"
+    ],
+    "contrast": "拍过上千个人最私密的样子，自己从来不让人拍",
+    "core_value": "一卷一约，说到做到",
+    "goal_options": [
+     "把二十年的底片都还给拍的人",
+     "拍完最后一卷就关门",
+     "弄清那一卷没签字的人去了哪里"
+    ],
+    "never": [
+     "加洗一张没有签字的照片"
+    ],
+    "prefers": [
+     "先问可以吗"
+    ],
+    "pressure_responses": {
+     "breaking": "把底片柜的钥匙交给律师，自己离开这座城",
+     "high": "当着对方的面把一卷底片曝光",
+     "low": "笑笑，说“不拍也没关系”",
+     "mid": "把封袋和签名一张张摆出来"
+    },
+    "relationship_stance": "对镜头前的人温柔，对镜头外的世界警惕",
+    "withdrawal": "一个人在暗房里待一整夜，把底片一卷卷对着红灯看，一卷都不洗"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "photo_owner",
+   "identity": {
+    "authority": "决定什么被拍下来、底片留在谁手里",
+    "exposure": "底片柜里有一卷从没封袋，因为那天拍的人没来签字就走了",
+    "hidden": "{npc.ta}第一次要把底片柜空出一格，因为有人要求把自己那一卷拿走烧掉",
+    "limits": [
+     "每一卷都要拍的人点头才能动",
+     "房租涨了，客人却越来越少"
+    ],
+    "obligations": [
+     "每一卷拍完当场封袋双签"
+    ],
+    "resources": [
+     "二十年的底片柜和一台老相机",
+     "圈里的口碑：一卷一约，从不外流"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在镜头前不演",
+     "对方问{npc.ta}可不可以拍{npc.ta}"
+    ],
+    "boundaries": [
+     "不在快门声里"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}第一次站到镜头前面的那个人",
+    "dislikes": [
+     "被人急着要成片"
+    ],
+    "expression": "把相机递给对方，让对方拍{npc.ta}一张",
+    "likes": [
+     "北窗下午三点的光"
+    ],
+    "preconditions": [
+     "相机放下了，镜头盖盖着"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "写真主理人",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "photo_studio",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "darkroom",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "rooftop",
+     "to": 1320
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "那一卷里也有{npc.ta}的一部分",
+      "option": "还给对方"
+     },
+     {
+      "cost": "对方说再也不想踏进这栋楼",
+      "option": "约对方当面来取"
+     }
+    ],
+    "pressure": "那一卷的封袋上，另一个签名是{npc.ta}自己",
+    "trigger": "一个多年前的客人发来消息，要求把自己那一卷底片拿回去烧掉"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我替别人保管了二十年最私密的东西，自己的却没人保管。”",
+    "surface": "“可以吗？不可以也没关系。”"
+   }
+  },
+  {
+   "adult_context": "镜墙教室的绳艺主理人，成年人，教了十二年",
+   "age_range": [
+    32,
+    50
+   ],
+   "appearance_options": [
+    "手指关节上有薄茧，指甲剪得很短",
+    "说话慢，讲安全的时候一个字都不会省"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说成是在教坏人"
+    ],
+    "contrast": "教了十二年怎么信任别人，自己从来不让人绑",
+    "core_value": "安全词一出口，全场就停",
+    "goal_options": [
+     "保住这间教室",
+     "让老师门派承认{npc.ta}的教法",
+     "教完最后一个学员就收手"
+    ],
+    "never": [
+     "在别人没说可以的时候继续"
+    ],
+    "prefers": [
+     "先讲安全，再讲别的"
+    ],
+    "pressure_responses": {
+     "breaking": "把所有的绳子收进箱子，搬出这栋楼",
+     "high": "当着全班的面拒绝一个人上课",
+     "low": "把铃按一下，说“先停一下”",
+     "mid": "把课时卡上的记录一条条翻给对方看"
+    },
+    "relationship_stance": "课上严格，课下宽厚",
+    "withdrawal": "关了灯，一个人在镜墙前把一根绳子绑了又解，解了又绑"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "rope_master",
+   "identity": {
+    "authority": "决定这节课怎么上、绳子从哪里开始、在哪里停",
+    "exposure": "老师门派同一天递了竞标书，要把这间教室抢过去",
+    "hidden": "{npc.ta}有一段没删的练习录像，是很多年前和一个人一起拍的",
+    "limits": [
+     "租约月底到期，房东在等更高的价",
+     "老师门派当年把{npc.ta}逐出过师门"
+    ],
+    "obligations": [
+     "铃响开课，铃响归零"
+    ],
+    "resources": [
+     "一间镜墙教室和十二年的口碑",
+     "一屋子信任{npc.ta}的学员"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方记得{npc.ta}讲过的每一条安全规则",
+     "对方在课后帮{npc.ta}收绳子，一句话不说"
+    ],
+    "boundaries": [
+     "不在课上，不在镜子前"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}愿意把手递出去的那个人",
+    "dislikes": [
+     "被当成猎奇的对象"
+    ],
+    "expression": "把一根自己用了很多年的旧绳子送给对方",
+    "likes": [
+     "课后镜墙里只剩两个人的倒影"
+    ],
+    "preconditions": [
+     "铃已经响过，课结束了"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "绳艺老师",
+   "schedule": [
+    {
+     "from": 840,
+     "location_id": "rope_studio",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "rooftop",
+     "to": 1380
+    },
+    {
+     "from": 1381,
+     "location_id": "darkroom",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "等于否定自己十二年的教法",
+      "option": "道歉"
+     },
+     {
+      "cost": "学员会在公示台上看到{npc.ta}的名字",
+      "option": "不道歉"
+     }
+    ],
+    "pressure": "不道歉，门派就会在投诉公示台上挂{npc.ta}的名字",
+    "trigger": "老师门派要求{npc.ta}在竞标前公开道歉，承认当年“坏了规矩”"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我教了十二年怎么信一个人，可我自己从来没信过谁。”",
+    "surface": "“铃响了，今天就到这里，谁都不用勉强。”"
+   }
+  },
+  {
+   "adult_context": "老绳师门派的代表，成年人，带着竞标书来的",
+   "age_range": [
+    40,
+    62
+   ],
+   "appearance_options": [
+    "穿一件立领的中式外套，袖口绣着门派的标记",
+    "说话客气得过分，每一句都像在宣读"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说门派过时了"
+    ],
+    "contrast": "守着一门教人放松的手艺，自己一辈子都绷着",
+    "core_value": "规矩不能乱",
+    "goal_options": [
+     "拿下这间教室",
+     "让门派重新被人记住",
+     "弄清楚自己当年写那封信对不对"
+    ],
+    "never": [
+     "私下和人谈条件"
+    ],
+    "prefers": [
+     "按规矩来"
+    ],
+    "pressure_responses": {
+     "breaking": "把竞标书撤回，一个人回老家",
+     "high": "在投诉公示台上挂一个名字",
+     "low": "微微一笑，说“规矩就是规矩”",
+     "mid": "把门派的戒条拿出来念"
+    },
+    "relationship_stance": "对外人有礼，对门内的人苛刻",
+    "withdrawal": "坐在门派的老屋里，对着师父的照片一坐就是一夜"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "rival_lineage",
+   "identity": {
+    "authority": "决定什么才算“正宗”",
+    "exposure": "当年把镜墙教室的主理人逐出师门的那封信，是{npc.ta}写的",
+    "hidden": "{npc.ta}私下去过镜墙教室上课，用的是假花名",
+    "limits": [
+     "门派的规矩比人老，{npc.ta}自己也改不了",
+     "门派这几年学员越来越少"
+    ],
+    "obligations": [
+     "替师父守着门派的名声"
+    ],
+    "resources": [
+     "门派的名号和一群老学员",
+     "一份比市价高的竞标书"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不怕{npc.ta}的门派",
+     "对方看出{npc.ta}的手也会抖"
+    ],
+    "boundaries": [
+     "绝不在门派的人面前"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "让{npc.ta}可以不当门派代表的那个人",
+    "dislikes": [
+     "被人当成老古董"
+    ],
+    "expression": "把那封逐出信的底稿拿出来，交给对方",
+    "likes": [
+     "老屋里一盏旧台灯"
+    ],
+    "preconditions": [
+     "门派的事已经谈完"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "门派代表",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "stairwell",
+     "to": 900
+    },
+    {
+     "from": 901,
+     "location_id": "alley_mouth",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "rooftop",
+     "to": 1380
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "门派的积蓄会被掏空",
+      "option": "加价"
+     },
+     {
+      "cost": "门派里的人会说{npc.ta}吃里扒外",
+      "option": "去找主理人私下谈"
+     }
+    ],
+    "pressure": "换来的人比{npc.ta}狠得多",
+    "trigger": "师父让{npc.ta}三天内拿下教室，不然就换人来办"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“那封信是我写的，我到现在都不知道写得对不对。”",
+    "surface": "“我们门派讲究的是规矩，不是感情。”"
+   }
+  },
+  {
+   "adult_context": "常来写真工作室拍照的客人，成年人，拍了第五卷",
+   "age_range": [
+    24,
+    40
+   ],
+   "appearance_options": [
+    "每次来都换一种发型，像是在试哪个才是自己",
+    "包里总装着一本旧的诗集"
+   ],
+   "decision": {
+    "avoids": [
+     "被认出来"
+    ],
+    "contrast": "在镜头前最自由，在生活里最不自由",
+    "core_value": "这里的自己才是真的",
+    "goal_options": [
+     "拍完第六卷就结婚，从此不来",
+     "弄清楚谁对上了{npc.ta}的花名",
+     "把五卷底片都拿回来"
+    ],
+    "never": [
+     "让底片流出去"
+    ],
+    "prefers": [
+     "先确认没有别人"
+    ],
+    "pressure_responses": {
+     "breaking": "删掉所有的联系方式，再也不来",
+     "high": "当着两家主理人的面说要撤回所有的底片",
+     "low": "把诗集翻开挡住脸，说“没事”",
+     "mid": "要求看自己那一卷的封袋"
+    },
+    "relationship_stance": "白天谨慎，晚上放开",
+    "withdrawal": "在天台上坐着把诗集从头读到尾，读完再从头读"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "regular_sitter",
+   "identity": {
+    "authority": "决定自己被拍成什么样",
+    "exposure": "{npc.ta}的花名最近被人和真名对上了，有人在网上问",
+    "hidden": "{npc.ta}也在隔壁上过绳艺课，用的是另一个花名",
+    "limits": [
+     "花名和真名之间隔着一整个白天的生活",
+     "白天的工作不能让人知道{npc.ta}来过这里"
+    ],
+    "obligations": [
+     "每月来拍一次，说是给自己的礼物"
+    ],
+    "resources": [
+     "五卷封好的底片",
+     "一个只有这里的人知道的花名"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方从来不问{npc.ta}的真名",
+     "对方在{npc.ta}换了发型以后还认得出"
+    ],
+    "boundaries": [
+     "绝不在白天的生活里"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "两个花名都认得、却从不提的那个人",
+    "dislikes": [
+     "被人认出白天的身份"
+    ],
+    "expression": "在诗集里折一页，递给对方看",
+    "likes": [
+     "天台上傍晚的风"
+    ],
+    "preconditions": [
+     "这里没有第三个人"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "写真常客",
+   "schedule": [
+    {
+     "from": 900,
+     "location_id": "photo_studio",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "rooftop",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "rope_studio",
+     "to": 1320
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "那五卷就再也没有了",
+      "option": "求主理人把底片全拿回来"
+     },
+     {
+      "cost": "也许没人认得出，也许所有人都认得出",
+      "option": "什么都不做"
+     }
+    ],
+    "pressure": "下个月的婚礼上，对方的家人都会在",
+    "trigger": "有人在网上贴出了{npc.ta}的花名和一张模糊的背影，问“这是谁”"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“下个月我就要结婚了，这是最后一卷。”",
+    "surface": "“今天就叫我那个名字，别的不用问。”"
+   }
+  },
+  {
+   "adult_context": "圈内投诉公示台的管理人，成年人，白天在一家律所做文员",
+   "age_range": [
+    30,
+    48
+   ],
+   "appearance_options": [
+    "戴一副细框眼镜，随身一本手写的记录本",
+    "说话条理分明，从不说“我觉得”"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说“你凭什么”"
+    ],
+    "contrast": "替所有人主持公道，自己的那一桩至今没人还",
+    "core_value": "不冤枉一个人，也不放过一个人",
+    "goal_options": [
+     "弄清那条压着的投诉是真是假",
+     "让公示台成为一个大家都信的地方",
+     "不再做这件事"
+    ],
+    "never": [
+     "收钱撤投诉"
+    ],
+    "prefers": [
+     "证据先于名声"
+    ],
+    "pressure_responses": {
+     "breaking": "关掉公示台，从圈里消失",
+     "high": "当晚把投诉挂出来",
+     "low": "推一推眼镜，说“我还在核实”",
+     "mid": "把记录本翻到那一页"
+    },
+    "relationship_stance": "公事公办，私下心软",
+    "withdrawal": "一个人坐在律所的空办公室，把那条投诉的每一句话抄一遍"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "board_keeper",
+   "identity": {
+    "authority": "决定一条投诉挂不挂出来、挂多久",
+    "exposure": "{npc.ta}手里压着一条关于这栋楼的投诉，一直没挂",
+    "hidden": "{npc.ta}自己当年就是被人在圈里挂过才开始做这件事的",
+    "limits": [
+     "公示台没有执法权，只有名声",
+     "挂错一个名字，就是毁掉一个人"
+    ],
+    "obligations": [
+     "每条投诉都要两边都问过才挂"
+    ],
+    "resources": [
+     "一个圈里人人都看的公示台",
+     "一本记着每一条投诉来龙去脉的本子"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不问{npc.ta}那条投诉的内容",
+     "对方知道{npc.ta}当年也被挂过还肯站在{npc.ta}这边"
+    ],
+    "boundaries": [
+     "不在公示台的事情里"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "不需要{npc.ta}主持公道的那个人",
+    "dislikes": [
+     "被当成审判者"
+    ],
+    "expression": "把记录本里自己那一页撕下来，给对方看",
+    "likes": [
+     "律所下班后空荡荡的走廊"
+    ],
+    "preconditions": [
+     "记录本合上了"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "公示台管理人",
+   "schedule": [
+    {
+     "from": 1140,
+     "location_id": "alley_mouth",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "stairwell",
+     "to": 1380
+    },
+    {
+     "from": 1381,
+     "location_id": "rooftop",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "要是错了，就是毁了一个人",
+      "option": "挂出来"
+     },
+     {
+      "cost": "投诉人会觉得{npc.ta}在包庇",
+      "option": "再压一周，去楼里亲自问"
+     }
+    ],
+    "pressure": "投诉指向这栋楼里的一个人，证据只有一半",
+    "trigger": "压着的那条投诉，投诉人今天又发来消息：再不挂，就自己去别处发"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“当年没人替我核实，所以我才替别人核实。”",
+    "surface": "“我需要两边的说法，你先说。”"
+   }
+  },
+  {
+   "adult_context": "这栋楼的二房东，成年人，从过世的姑妈手里接下了整栋楼",
+   "age_range": [
+    28,
+    45
+   ],
+   "appearance_options": [
+    "一身运动服，钥匙串上挂着十几把钥匙",
+    "说话爽快，算账更爽快"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说趁火打劫"
+    ],
+    "contrast": "收着一整栋楼的租，自己住在楼里最小的那一间",
+    "core_value": "这栋楼不能砸在我手里",
+    "goal_options": [
+     "把租金提到能还清贷款的价",
+     "弄清姑妈那一卷底片里拍了什么",
+     "在拆迁前把楼卖掉"
+    ],
+    "never": [
+     "偷看别人的底片"
+    ],
+    "prefers": [
+     "先把账算清"
+    ],
+    "pressure_responses": {
+     "breaking": "把整栋楼挂牌出售，谁也不通知",
+     "high": "当场换锁",
+     "low": "笑着说“都好商量”",
+     "mid": "把租约拿出来，指着涨价那一条"
+    },
+    "relationship_stance": "爽快里带着算计",
+    "withdrawal": "一个人坐在姑妈的旧屋里翻那本旧账，翻到半夜"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "landlord_heir",
+   "identity": {
+    "authority": "决定谁续租、谁走",
+    "exposure": "第四把暗房钥匙在{npc.ta}的钥匙串上，{npc.ta}进去过",
+    "hidden": "姑妈年轻时在这栋楼的写真工作室拍过照，那一卷还在底片柜里",
+    "limits": [
+     "楼是姑妈的，自己只是暂管，家里人都盯着",
+     "旧楼明年可能要拆"
+    ],
+    "obligations": [
+     "每月还姑妈留下的一笔贷款"
+    ],
+    "resources": [
+     "整栋楼的钥匙和租约",
+     "姑妈留下的一本旧账"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不把{npc.ta}当房东",
+     "对方愿意听{npc.ta}讲姑妈的事"
+    ],
+    "boundaries": [
+     "不在任何一间租出去的屋子里"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}把钥匙串放下的那个人",
+    "dislikes": [
+     "被人当成只认钱的"
+    ],
+    "expression": "把姑妈的一张旧照片拿给对方看",
+    "likes": [
+     "天台上晾衣绳之间的夜风"
+    ],
+    "preconditions": [
+     "租约已经谈完"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "二房东",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "alley_mouth",
+     "to": 900
+    },
+    {
+     "from": 901,
+     "location_id": "stairwell",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "rooftop",
+     "to": 1380
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "一间做了十二年的教室就没了",
+      "option": "选价高的"
+     },
+     {
+      "cost": "家里人会说{npc.ta}不会管楼",
+      "option": "压价续租"
+     }
+    ],
+    "pressure": "家里人逼{npc.ta}选价高的",
+    "trigger": "两家工作室的租约同一个月到期，竞标的人开了更高的价"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“姑妈年轻的时候，也在这栋楼里被人好好看过一次。”",
+    "surface": "“租金的事好说，你先告诉我你还想不想在这儿。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "梅雨季的一个周四傍晚",
+  "minute": 1110
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "coercion_theme",
+  "workplace"
+ ],
+ "custom": false,
+ "customs": [
+  "新客人第一次来，先在楼梯口的软木板上写一个花名，写完自己撕下来带走。",
+  "拍完一卷，主理人会给客人泡一杯热茶，等手不抖了再签封袋。",
+  "绳艺课下课，每个人自己收自己用过的绳子，收不好的下次重来。",
+  "暗房的红灯灯泡坏了，谁先发现谁换，换完在门背后画一道。",
+  "两家的人在天台碰见，只点头，不打听对方今天约了谁。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "光从北窗慢慢移到长榻上",
+    "主理人上好卷，问了一句“可以吗”",
+    "快门声停了很久，谁都没说话"
+   ],
+   "duration_minutes": 90,
+   "hook_ids": [],
+   "id": "a_north_light",
+   "location_ids": [
+    "photo_studio"
+   ],
+   "start_minute": 900,
+   "tags": [],
+   "title": "北窗下拍一卷"
+  },
+  {
+   "beats": [
+    "铃响了，镜墙里的人都坐直了",
+    "老师把一个结拆开，从头再讲一遍",
+    "有人小声说了一个词，全场停了下来"
+   ],
+   "duration_minutes": 90,
+   "hook_ids": [],
+   "id": "a_rope_class",
+   "location_ids": [
+    "rope_studio"
+   ],
+   "start_minute": 1200,
+   "tags": [],
+   "title": "上一节绳艺课"
+  },
+  {
+   "beats": [
+    "显影液的味道有点冲",
+    "铁丝上晾着的那一卷，不是你的",
+    "门外有人在翻牌"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [],
+   "id": "a_develop",
+   "location_ids": [
+    "darkroom"
+   ],
+   "start_minute": 1320,
+   "tags": [],
+   "title": "在暗房洗一卷片"
+  },
+  {
+   "beats": [
+    "晾衣绳上的床单被风吹得啪啪响",
+    "高架上的车灯一条接一条",
+    "楼梯口有人上来了"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_rooftop_smoke",
+   "location_ids": [
+    "rooftop"
+   ],
+   "start_minute": 1260,
+   "tags": [],
+   "title": "上天台抽根烟"
+  },
+  {
+   "beats": [
+    "今天的课表被人改了一格",
+    "公示的打印纸被撕掉了一半",
+    "声控灯灭了"
+   ],
+   "duration_minutes": 10,
+   "hook_ids": [],
+   "id": "a_corkboard",
+   "location_ids": [
+    "stairwell"
+   ],
+   "start_minute": 1080,
+   "tags": [],
+   "title": "在楼梯口看软木板"
+  },
+  {
+   "beats": [
+    "冰柜的门上贴着一张寻人启事",
+    "店员找零的时候多看了你一眼",
+    "楼门的密码锁又坏了"
+   ],
+   "duration_minutes": 15,
+   "hook_ids": [],
+   "id": "a_store_run",
+   "location_ids": [
+    "alley_mouth"
+   ],
+   "start_minute": 1380,
+   "tags": [],
+   "title": "下楼去便利店"
+  },
+  {
+   "beats": [
+    "每一根都要从头到尾摸一遍",
+    "镜子里只剩两个人",
+    "一根绳子上有个结，不是今天打的"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_coil_rope",
+   "location_ids": [
+    "rope_studio"
+   ],
+   "start_minute": 1290,
+   "tags": [],
+   "title": "课后收绳子"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "当代",
+ "extends": null,
+ "forbidden_terms": [
+  "铜钱",
+  "衙门",
+  "民国",
+  "电报",
+  "黄包车",
+  "煤油灯",
+  "驿站",
+  "学生",
+  "少女",
+  "少年"
+ ],
+ "hooks": [
+  {
+   "id": "h_may_i",
+   "kind": "approach",
+   "location_ids": [
+    "photo_studio",
+    "rooftop",
+    "stairwell"
+   ],
+   "slot": "photo_owner",
+   "text": "{npc.name}把相机放下，镜头盖扣上，问你：“可以吗？不拍，就坐一会儿。”"
+  },
+  {
+   "id": "h_hand_camera",
+   "kind": "approach",
+   "location_ids": [
+    "photo_studio",
+    "rooftop"
+   ],
+   "slot": "photo_owner",
+   "text": "{npc.name}把脖子上的相机取下来递给你：“你拍我一张。”"
+  },
+  {
+   "id": "h_old_rope",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "rope_master",
+   "text": "{npc.name}把一根磨得很软的旧绳子放在你手心里，说用了很多年了"
+  },
+  {
+   "id": "h_after_bell",
+   "kind": "approach",
+   "location_ids": [
+    "rope_studio"
+   ],
+   "slot": "rope_master",
+   "text": "铃响过了，{npc.name}没收绳子，坐在镜墙前看着你"
+  },
+  {
+   "id": "h_letter_draft",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "rival_lineage",
+   "text": "{npc.name}从外套内袋里取出一张发黄的信纸，说这是底稿，只给你看"
+  },
+  {
+   "id": "h_folded_page",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "regular_sitter",
+   "text": "{npc.name}把诗集折了一页递给你，那一页上有一行被铅笔圈了起来"
+  },
+  {
+   "id": "h_torn_record",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "board_keeper",
+   "text": "{npc.name}从记录本上撕下一页，上面写的是{npc.ta}自己的名字"
+  },
+  {
+   "id": "h_aunt_photo",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "landlord_heir",
+   "text": "{npc.name}从钥匙串旁边的钱包里抽出一张旧照片：“我姑妈，年轻的时候。”"
+  },
+  {
+   "id": "h_ask_darkroom",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "landlord_heir",
+   "text": "{npc.name}晃了晃钥匙串：“暗房几点没人？我想进去看一样东西。”"
+  },
+  {
+   "id": "h_ask_side",
+   "kind": "request",
+   "location_ids": [
+    "stairwell",
+    "alley_mouth"
+   ],
+   "slot": "rival_lineage",
+   "text": "{npc.name}客客气气地拦住你：“想请你帮门派说一句话。”"
+  },
+  {
+   "id": "h_notebook_glance",
+   "kind": "observe",
+   "location_ids": [],
+   "slot": "board_keeper",
+   "text": "{npc.name}在记录本上写了几个字，抬头看了看你，又写了几个字"
+  },
+  {
+   "id": "h_dropped_roll",
+   "kind": "accident",
+   "location_ids": [
+    "stairwell"
+   ],
+   "slot": "regular_sitter",
+   "text": "{npc.name}的包掉在楼梯上，一卷没封袋的胶片滚到了你脚边"
+  }
+ ],
+ "id": "third_floor",
+ "locations": [
+  {
+   "affordances": [
+    "在便利店买两瓶水，等一个人下楼",
+    "看一眼三楼的窗户亮没亮",
+    "在楼门口把花名和真名对一遍"
+   ],
+   "detail": "一条窄巷的入口，一家通宵便利店，一排共享单车，墙上贴满了开锁和搬家的小广告，楼门的密码锁坏了一半。",
+   "exits": [
+    "stairwell"
+   ],
+   "id": "alley_mouth",
+   "name": "后巷口",
+   "pressure_modifiers": {
+    "p_real_name": "便利店的冰柜门上，贴着一张寻人启事，照片有点眼熟。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "便利店店员、路过的外卖骑手和在门口抽烟的人",
+   "witnesses": [
+    "bg_store_clerk"
+   ]
+  },
+  {
+   "affordances": [
+    "在软木板上看今天谁约了几点",
+    "等声控灯灭了再说话",
+    "在两扇门中间犹豫一下"
+   ],
+   "detail": "水泥楼梯，声控灯一跺脚才亮；左边是写真工作室的木门，右边是绳艺工作室的铁门，正中一块软木板，贴着两家的课表和公告。",
+   "exits": [
+    "alley_mouth",
+    "photo_studio",
+    "rope_studio",
+    "rooftop"
+   ],
+   "id": "stairwell",
+   "name": "三楼楼梯口",
+   "pressure_modifiers": {
+    "p_complaint_board": "软木板上多了一张打印纸，标题是“圈内公示”。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "两家的客人上下楼都要经过这里，谁在门口站了多久，两边都听得见",
+   "witnesses": [
+    "bg_delivery"
+   ]
+  },
+  {
+   "affordances": [
+    "在长榻上坐着等光",
+    "看主理人给相机上卷",
+    "在底片柜前找自己的卷号"
+   ],
+   "detail": "老洋房改的一间大屋，北窗，一张天鹅绒长榻、一面旧穿衣镜，墙边一排铁皮底片柜，每一格贴着卷号。",
+   "exits": [
+    "stairwell",
+    "darkroom"
+   ],
+   "id": "photo_studio",
+   "name": "写真工作室",
+   "pressure_modifiers": {
+    "p_sealed_roll": "工作台上摊着一只牛皮纸封袋，封口处只签了一个名字。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "主理人和约好的客人，门上挂着“拍摄中”的牌子就不会有人敲门",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "在镜子前看自己坐得直不直",
+    "帮着把用过的绳子一圈圈收好",
+    "铃响之前再练一遍那个结"
+   ],
+   "detail": "一整面墙的镜子，地上铺着软垫，天花板上一根粗木梁，墙上挂着一排麻绳，按长短分好，旁边是一只课时铃。",
+   "exits": [
+    "stairwell",
+    "darkroom"
+   ],
+   "id": "rope_studio",
+   "name": "镜墙教室",
+   "pressure_modifiers": {
+    "p_extra_footage": "角落里那台练习用的摄像机，红灯不知道什么时候亮着。",
+    "p_lease_bid": "镜子上贴着房东的便签：月底之前给答复。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "上课时有主理人和学员；课间门开着，楼梯口的人能看见镜子里的一角",
+   "witnesses": [
+    "bg_assistant"
+   ]
+  },
+  {
+   "affordances": [
+    "在红灯下看一卷刚洗出来的底片",
+    "把翻牌翻到“占用”",
+    "数一数铁丝上晾着几卷"
+   ],
+   "detail": "两家中间的一间小屋，红灯、三只显影盘、一根晾底片的铁丝，门上一块翻牌：“占用”或“空闲”。",
+   "exits": [
+    "photo_studio",
+    "rope_studio"
+   ],
+   "id": "darkroom",
+   "name": "共用暗房",
+   "pressure_modifiers": {
+    "p_fourth_key": "暗房的门锁上有一道新的划痕。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "门一关，只有里面的人；钥匙有四把，第四把在谁手里没人说得清",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "坐在塑料椅上看高架的车灯",
+    "替对方点一根烟",
+    "在晾衣绳中间说一句不想让别人听见的话"
+   ],
+   "detail": "楼顶的平台，晾衣绳、几盆半死的绿萝和一张塑料椅，看得见整条巷子的屋顶和远处的高架。",
+   "exits": [
+    "stairwell"
+   ],
+   "id": "rooftop",
+   "name": "天台",
+   "pressure_modifiers": {
+    "p_real_name": "天台的栏杆上有人用记号笔写了一个名字，又划掉了。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "两家的人都上来抽烟，晚上很少有人，衣服被风吹得啪啪响",
+   "witnesses": []
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "林",
+   "周",
+   "许",
+   "陈",
+   "沈",
+   "唐",
+   "叶",
+   "宋",
+   "苏",
+   "江",
+   "程",
+   "白",
+   "夏",
+   "顾"
+  ],
+  "given_female": [
+   "遥",
+   "晚晴",
+   "若初",
+   "青禾",
+   "知意",
+   "可宁",
+   "素心",
+   "南乔",
+   "月白",
+   "清欢",
+   "予安",
+   "沐晴"
+  ],
+  "given_male": [
+   "砚",
+   "怀远",
+   "景深",
+   "予川",
+   "承光",
+   "牧之",
+   "时雨",
+   "闻笛",
+   "清和",
+   "远舟",
+   "长安",
+   "慕白"
+  ],
+  "given_neutral": [
+   "一",
+   "小满",
+   "不语",
+   "阿柒",
+   "十一",
+   "朝颜",
+   "拾光",
+   "无名",
+   "半夏",
+   "雾",
+   "秋分",
+   "鹿"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "阿{given_last}"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}老师"
+   },
+   {
+    "gender": "any",
+    "pattern": "小{family}"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 5 个）。性别按会话偏好生成（D15）。",
+ "player_identities": [
+  {
+   "age_range": [
+    21,
+    32
+   ],
+   "baseline": "你在写真工作室打杂：上卷、递茶、封袋，偶尔替主理人去暗房洗片。",
+   "gender": "any",
+   "id": "photo_assistant",
+   "reputation": "手稳，嘴紧",
+   "resources": [
+    "暗房的一把钥匙",
+    "封袋上第三个签名栏"
+   ],
+   "risks": [
+    "你见过那一卷没封袋的底片"
+   ],
+   "role": "写真工作室的助理",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "小{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "阿{given_last}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    45
+   ],
+   "baseline": "你在镜墙教室上了半年课，课时卡快用完了，续不续还没想好。",
+   "gender": "any",
+   "id": "rope_learner",
+   "reputation": "认真，有点拘谨",
+   "resources": [
+    "一张快用完的课时卡",
+    "一个只有这里知道的花名"
+   ],
+   "risks": [
+    "白天的同事不知道你来这里"
+   ],
+   "role": "绳艺课学员",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "阿{given_last}"
+    },
+    {
+     "gender": "any",
+     "pattern": "小{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    45
+   ],
+   "baseline": "你按小时租用这间暗房洗自己的胶片，两家的人你都认识。",
+   "gender": "any",
+   "id": "film_photographer",
+   "reputation": "独来独往",
+   "resources": [
+    "暗房的使用时间表",
+    "一台和主理人同款的老相机"
+   ],
+   "risks": [
+    "你洗过的一卷里，混进了别人的底片"
+   ],
+   "role": "租暗房的自由摄影师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}老师"
+    },
+    {
+     "gender": "any",
+     "pattern": "阿{given_last}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    30,
+    50
+   ],
+   "baseline": "你在城另一头开教室，和镜墙教室的主理人同一年出师。",
+   "gender": "any",
+   "id": "fellow_teacher",
+   "reputation": "直爽，讲义气",
+   "resources": [
+    "自己的教室和学员",
+    "门派里的旧关系"
+   ],
+   "risks": [
+    "门派也给你递过话，要你站队"
+   ],
+   "role": "另一家绳艺教室的老师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}老师"
+    },
+    {
+     "gender": "any",
+     "pattern": "阿{given_last}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    35,
+    55
+   ],
+   "baseline": "你要做一期胶片私房摄影的专题，想用这间工作室二十年的底片。",
+   "gender": "any",
+   "id": "magazine_editor",
+   "reputation": "眼光毒，说话直",
+   "resources": [
+    "一本全国发行的杂志和一笔稿费",
+    "能让这间工作室被所有人知道的版面"
+   ],
+   "risks": [
+    "你自己当年在这里拍过一卷，没人知道"
+   ],
+   "role": "摄影杂志主编",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}主编"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}老师"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    32,
+    55
+   ],
+   "baseline": "你想买下这栋楼改成民宿，今天来看三楼。",
+   "gender": "any",
+   "id": "building_buyer",
+   "reputation": "客气，算得精",
+   "resources": [
+    "一笔足够买下整栋楼的钱",
+    "改造公司的图纸"
+   ],
+   "risks": [
+    "你的合伙人在背后另有打算"
+   ],
+   "role": "来看楼的买家",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}总"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}女士"
+    }
+   ]
+  }
+ ],
+ "premise": "这两行都把边界写在规矩里，一卷一约，铃响即止；规矩管得住快门和绳结，管不住人心。",
+ "pressures": [
+  {
+   "choice": "去找那个人，还是按规矩把这一卷曝光",
+   "exits": [
+    {
+     "cost": "那个人可能再也找不回那一天",
+     "option": "按规矩当场曝光"
+    },
+    {
+     "cost": "坏了一卷一约的规矩",
+     "option": "再等七天"
+    }
+   ],
+   "far": {
+    "consequence": "发现底片已经被处理，会以为是被人偷看过",
+    "due_days": 6,
+    "trigger": "那个人突然回来要底片"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_sealed_roll",
+   "immediate": {
+    "minutes": 20,
+    "text": "主理人把封袋推到你面前，说七天的期限只剩今晚"
+   },
+   "leverage": null,
+   "location_ids": [
+    "photo_studio",
+    "darkroom"
+   ],
+   "near": {
+    "deadline_minutes": 300,
+    "text": "今晚十二点期满"
+   },
+   "objective": "在约定的七天到期之前，找到另一个签名的人",
+   "source": "person",
+   "start_minute": 1200,
+   "tags": [],
+   "title": "只签了一个名字的封袋",
+   "trigger": "工作台上那只封袋只签了一个名字，拍的人没签就走了，这一卷的去留没人能定"
+  },
+  {
+   "choice": "删掉，还是交给画面里的人",
+   "exits": [
+    {
+     "cost": "就再也证明不了那天发生过什么",
+     "option": "当场删掉"
+    },
+    {
+     "cost": "要先找到{rope_master.name}，再解释你为什么看过",
+     "option": "交给画面里的人"
+    }
+   ],
+   "far": {
+    "consequence": "画面里的人会在圈里被认出来",
+    "due_days": 5,
+    "trigger": "这半分钟被人拷走"
+   },
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "hook_ids": [],
+   "id": "p_extra_footage",
+   "immediate": {
+    "minutes": 10,
+    "text": "摄像机的屏幕停在那半分钟的第一帧"
+   },
+   "leverage": {
+    "basis": "{rival_lineage.name}手里有一份同样的半分钟，拷贝的时间是三天前",
+    "holder": "rival_lineage",
+    "subject": "rope_master"
+   },
+   "location_ids": [
+    "rope_studio",
+    "darkroom"
+   ],
+   "near": {
+    "deadline_minutes": 1260,
+    "text": "明天下午下一节课开始"
+   },
+   "objective": "在下节课之前，决定这半分钟的去留",
+   "source": "person",
+   "start_minute": 1300,
+   "tags": [
+    "coercion_theme"
+   ],
+   "title": "多存了半分钟的录像",
+   "trigger": "教室角落那台练习用的摄像机，比规定多存了半分钟，那半分钟里只有一个人"
+  },
+  {
+   "choice": "去找公示台的人，还是先在楼里问",
+   "exits": [
+    {
+     "cost": "等于告诉对方你知道些什么",
+     "option": "去找公示台的人当面说清"
+    },
+    {
+     "cost": "撕掉的人会被当成心虚",
+     "option": "把打印件撕了"
+    }
+   ],
+   "far": {
+    "consequence": "两家都要三个月不接客，房租就交不上了",
+    "due_days": 4,
+    "trigger": "名字被挂出来"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_complaint_board",
+   "immediate": {
+    "minutes": 15,
+    "text": "二楼裁缝站在软木板前，回头问你认不认识上面说的人"
+   },
+   "leverage": null,
+   "location_ids": [
+    "stairwell",
+    "rooftop"
+   ],
+   "near": {
+    "deadline_minutes": 2700,
+    "text": "后天晚上公示台更新"
+   },
+   "objective": "在公示台正式挂名之前，弄清说的是谁",
+   "source": "institution",
+   "start_minute": 1080,
+   "tags": [],
+   "title": "公示台上的那张纸",
+   "trigger": "楼梯口的软木板上贴了一张“圈内公示”的打印件，名字被涂掉了，只留下这栋楼的门牌"
+  },
+  {
+   "choice": "找发帖的人，还是让当事人自己决定",
+   "exits": [
+    {
+     "cost": "对方会问你凭什么替别人出头",
+     "option": "去找发帖的人"
+    },
+    {
+     "cost": "也许当事人还不知道，你成了带坏消息的人",
+     "option": "告诉当事人"
+    }
+   ],
+   "far": {
+    "consequence": "一整个白天的身份就塌了",
+    "due_days": 3,
+    "trigger": "当事人白天的生活里有人看到"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_real_name",
+   "immediate": {
+    "minutes": 10,
+    "text": "手机里弹出一条消息：你看见那个帖子了吗"
+   },
+   "leverage": null,
+   "location_ids": [
+    "alley_mouth",
+    "rooftop"
+   ],
+   "near": {
+    "deadline_minutes": 240,
+    "text": "今晚帖子会被推上圈内热门"
+   },
+   "objective": "在帖子被更多人转之前，让它停下来",
+   "source": "person",
+   "start_minute": 1140,
+   "tags": [],
+   "title": "花名对上了真名",
+   "trigger": "圈里有人发了一张模糊的背影，配上一个花名和一个真名，说“认识的都懂”"
+  },
+  {
+   "choice": "加价，还是去找门派谈",
+   "exits": [
+    {
+     "cost": "教室就要涨课时费，学员会走一半",
+     "option": "凑钱加价"
+    },
+    {
+     "cost": "门派的条件是公开道歉",
+     "option": "去门派谈"
+    }
+   ],
+   "far": {
+    "consequence": "十二年的学员会散，课时卡会作废",
+    "due_days": 14,
+    "trigger": "教室被门派拿走"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_lease_bid",
+   "immediate": {
+    "minutes": 20,
+    "text": "二房东把两份竞标书并排摊在软垫上"
+   },
+   "leverage": null,
+   "location_ids": [
+    "rope_studio",
+    "stairwell"
+   ],
+   "near": {
+    "deadline_minutes": 4300,
+    "text": "月底给答复"
+   },
+   "objective": "在月底之前凑出能留下来的钱或理由",
+   "source": "money",
+   "start_minute": 840,
+   "tags": [],
+   "title": "两份竞标书",
+   "trigger": "门派的竞标书比镜墙教室的租金高出三成，二房东说月底之前给答复"
+  },
+  {
+   "choice": "换锁，还是先查是谁",
+   "exits": [
+    {
+     "cost": "进去过的人就再也查不出来了",
+     "option": "马上换锁"
+    },
+    {
+     "cost": "那一卷可能已经在路上",
+     "option": "先不声张，等那个人再来"
+    }
+   ],
+   "far": {
+    "consequence": "拍的人会认定是这栋楼出卖了自己",
+    "due_days": 4,
+    "trigger": "少的那一卷流出去"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_fourth_key",
+   "immediate": {
+    "minutes": 10,
+    "text": "翻牌是“空闲”，门却从里面反锁着"
+   },
+   "leverage": null,
+   "location_ids": [
+    "darkroom",
+    "photo_studio"
+   ],
+   "near": {
+    "deadline_minutes": 900,
+    "text": "明天上午两家都要用暗房"
+   },
+   "objective": "在两家各自报失之前，找到那一卷和那把钥匙",
+   "source": "person",
+   "start_minute": 1350,
+   "tags": [],
+   "title": "第四把钥匙",
+   "trigger": "暗房的门锁上多了一道新划痕，铁丝上的底片少了一卷"
+  }
+ ],
+ "region": "一条后巷的三楼，左边是只拍胶片的写真工作室，右边是绳艺教室，中间共用一间暗房",
+ "rules": [
+  {
+   "id": "r_one_roll",
+   "text": "写真一卷一约，拍完当场封袋双签；底片在谁手里，“不再加洗”就由谁说了算。"
+  },
+  {
+   "id": "r_bell",
+   "text": "绳艺课一节九十分钟，铃响开课，铃响归零；安全词一出口，全场即刻停。"
+  },
+  {
+   "id": "r_flower_names",
+   "text": "两家都不记真名，只记花名、卷号和课时卡号。"
+  },
+  {
+   "id": "r_darkroom_flip",
+   "text": "暗房翻牌“占用”的时候，谁都不许推门，哪怕里面没声音。"
+  },
+  {
+   "id": "r_public_board",
+   "text": "圈内投诉公示台挂出的名字，三个月内两家都不接。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": null,
+ "status": "review",
+ "style_hint": "写手和光：调焦的手指、收绳的手、暗房的红灯、北窗的光；话少，每一句“可以吗”都要等回答。",
+ "tension_engines": [
+  {
+   "id": "te_negative_owner",
+   "text": "底片在谁手里，谁就能决定一个人最私密的样子还在不在"
+  },
+  {
+   "id": "te_bell_and_heart",
+   "text": "铃响了课就结束，可有些东西没有铃"
+  },
+  {
+   "id": "te_flower_real",
+   "text": "花名和真名之间隔着一整个白天，一旦对上就回不去了"
+  },
+  {
+   "id": "te_fourth_key",
+   "text": "暗房有四把钥匙，第四把在谁手里，谁就进过别人的秘密"
+  },
+  {
+   "id": "te_lease_end",
+   "text": "两家的租约同一个月到期，楼里的每个人都在算自己还能待多久"
+  }
+ ],
+ "title": "后巷三楼",
+ "tone": [
+  "私密",
+  "信任",
+  "红灯",
+  "克制的亲近"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_owner_was_sitter",
+   "requires": [
+    "photo_owner"
+   ],
+   "text": "底片柜里最老的那一卷，拍的人是年轻时的{photo_owner.name}自己。"
+  },
+  {
+   "category": "关系",
+   "id": "t_lineage_letter",
+   "requires": [
+    "rival_lineage",
+    "rope_master"
+   ],
+   "text": "{rival_lineage.name}在门派里当众说，当年那封逐出信是被师父逼着写的，{rope_master.name}在场。"
+  },
+  {
+   "category": "制度",
+   "id": "t_building_demolish",
+   "requires": [],
+   "text": "街道办贴出通知：这一片明年列入旧改，所有租约只能签到年底。"
+  },
+  {
+   "category": "意外",
+   "id": "t_board_hacked",
+   "requires": [
+    "board_keeper"
+   ],
+   "text": "公示台被人黑了，所有压着没挂的投诉全被放了出来，{board_keeper.name}的真名也在里面。"
+  },
+  {
+   "category": "时限",
+   "id": "t_sitter_wedding",
+   "requires": [
+    "regular_sitter"
+   ],
+   "text": "{regular_sitter.name}的婚期提前到了下周六。"
+  },
+  {
+   "category": "资源",
+   "id": "t_aunt_roll",
+   "requires": [
+    "landlord_heir"
+   ],
+   "text": "{landlord_heir.name}在姑妈的遗物里找到一张封袋的存根，上面的卷号还在底片柜里。"
+  },
+  {
+   "category": "人事",
+   "id": "t_new_tenant",
+   "requires": [
+    "pressure"
+   ],
+   "text": "二楼裁缝铺关门了，搬进来的新租户是一家做网络直播的公司。"
+  },
+  {
+   "category": "意外",
+   "id": "t_power_cut",
+   "requires": [],
+   "text": "整栋楼停电，暗房里的红灯灭了，有一卷片正在显影。"
+  }
+ ]
+}

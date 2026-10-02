@@ -76,3 +76,21 @@ def render(text, scopes, names=None):
 
 def render_name_pattern(pattern, family, given):
     return render(pattern, {}, {"family": family, "given": given, "given_last": given[-1:] if given else ""})
+
+
+def full_name(pools, family, given):
+    """A full name in the world's name order (name_pools.order)."""
+    if pools.get("order") == "given_first":
+        return given + "·" + family
+    return family + given
+
+
+def split_name(pools, name):
+    """(family, given) of a full name; family is None when no pool family fits."""
+    if pools.get("order") == "given_first":
+        given, sep, family = name.rpartition("·")
+        if sep and given and family in pools["family"]:
+            return family, given
+        return None, name
+    family = next((f for f in sorted(pools["family"], key=len, reverse=True) if name.startswith(f)), None)
+    return family, name[len(family) :] if family else name

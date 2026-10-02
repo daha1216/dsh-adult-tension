@@ -1,0 +1,2529 @@
+{
+ "schema_version": 1,
+ "id": "calendar_poster",
+ "title": "月份牌",
+ "extends": null,
+ "era": "1930 年代",
+ "region": "通商口岸城市，片厂、画室、舞厅和征信所挤在同一条街上",
+ "premise": "一张脸可以卖三次：银幕一次，街墙一次，舞池一次；演员、画师、大班和侦探都在算这张脸到底归谁。",
+ "tone": [
+  "浮华",
+  "暧昧",
+  "算计",
+  "旧上海式的潮湿"
+ ],
+ "style_hint": "写光：弧光灯、红色安全灯、舞厅的水晶灯；对话客气而带刺，一句话里藏着一笔账。",
+ "clock_start": {
+  "label": "民国二十三年，梅雨季",
+  "minute": 1260
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "stage_labels": null,
+ "name_pools": {
+  "family": [
+   "沈",
+   "陆",
+   "顾",
+   "苏",
+   "许",
+   "叶",
+   "程",
+   "秦",
+   "白",
+   "唐",
+   "宋",
+   "方",
+   "江",
+   "傅",
+   "钟"
+  ],
+  "given_female": [
+   "曼丽",
+   "婉清",
+   "若兰",
+   "丽娟",
+   "宝珠",
+   "玉凤",
+   "秋萍",
+   "月华",
+   "佩芬",
+   "素云",
+   "蕙芳",
+   "小凤",
+   "采薇"
+  ],
+  "given_male": [
+   "慕之",
+   "叔平",
+   "少棠",
+   "文彬",
+   "子谦",
+   "鹤年",
+   "伯钧",
+   "仲豪",
+   "怀瑾",
+   "季常",
+   "维新",
+   "敬亭",
+   "立夫"
+  ],
+  "given_neutral": [
+   "如晦",
+   "一鸣",
+   "南星",
+   "雨亭",
+   "守拙",
+   "晚舟",
+   "知秋",
+   "青禾",
+   "远山",
+   "半夏",
+   "云生",
+   "墨卿"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "{family}先生",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}小姐",
+    "gender": "any"
+   },
+   {
+    "pattern": "阿{given_last}",
+    "gender": "any"
+   }
+  ]
+ },
+ "rules": [
+  {
+   "id": "r_face_contract",
+   "text": "片厂合同只锁“这张脸”，画室和舞厅可以照着画、照着请，署谁的名另算。"
+  },
+  {
+   "id": "r_ledger_book",
+   "text": "舞厅点单要客人自己走到台面册前当众落字，台下谈成的私约，场子一律不认。"
+  },
+  {
+   "id": "r_one_report",
+   "text": "征信所一份委托出一份结论；同一件事换一个雇主，就会多出一份互相打架的真相。"
+  },
+  {
+   "id": "r_negative_lock",
+   "text": "底片柜的钥匙只有制片主任和洗印师傅有，柜子里少了一卷，两个人都要担责。"
+  },
+  {
+   "id": "r_censor",
+   "text": "片子上映前要送审，审查处删掉的镜头，片厂必须当着人烧掉底片。"
+  }
+ ],
+ "customs": [
+  "演员第一次上银幕，要请全组人吃一顿生煎包，叫作“开脸”。",
+  "舞女下班不走正门，从锅炉房的后门出去，免得被客人跟。",
+  "茶室里打听消息，先在柜台上搁一支竹筹，竹筹上写着替谁问。",
+  "月份牌印出来的第一张，要送给画上的那个人，收不收由那个人决定。",
+  "征信所的报告写完要按两个手印，一个撰稿人的，一个委托人的。"
+ ],
+ "player_identities": [
+  {
+   "id": "script_girl",
+   "role": "片场场记",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "小{family}",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}场记",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    20,
+    35
+   ],
+   "social_position": "low",
+   "baseline": "在片场记每一条镜头和每一句台词，棚里的事你比导演记得还清楚。",
+   "resources": [
+    "一本记满每条镜头的场记簿",
+    "片场每个角落的出入时间"
+   ],
+   "reputation": "细心，从不多嘴",
+   "risks": [
+    "场记簿上记过一条不该记的镜头"
+   ]
+  },
+  {
+   "id": "band_musician",
+   "role": "舞厅乐手",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}师傅",
+     "gender": "any"
+    },
+    {
+     "pattern": "阿{given_last}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    45
+   ],
+   "social_position": "low",
+   "baseline": "在百乐舞厅的乐队里吹小号，每晚从乐台上看着整个舞池。",
+   "resources": [
+    "乐台上的视野",
+    "和每个舞女都说得上话"
+   ],
+   "reputation": "安静，吹得一手好曲子",
+   "risks": [
+    "欠了乐队领班一笔钱"
+   ]
+  },
+  {
+   "id": "errand_detective",
+   "role": "征信所的跑街",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "小{family}",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}跑街",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    40
+   ],
+   "social_position": "low",
+   "baseline": "替征信所递委托状、跑线人，哪条后巷通哪条街你都知道。",
+   "resources": [
+    "半条街的线人",
+    "一张谁都不会注意的脸"
+   ],
+   "reputation": "腿快，嘴紧",
+   "risks": [
+    "替两边雇主都跑过腿"
+   ]
+  },
+  {
+   "id": "tabloid_writer",
+   "role": "小报撰稿人",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}先生",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}小姐",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    24,
+    45
+   ],
+   "social_position": "equal",
+   "baseline": "给一家花边小报写影坛消息，片厂的人恨你，又离不开你。",
+   "resources": [
+    "一个专栏的版面",
+    "片厂和舞厅都有的熟人"
+   ],
+   "reputation": "笔头尖，消息快",
+   "risks": [
+    "写过一篇让人丢了合同的稿子"
+   ]
+  },
+  {
+   "id": "studio_heir",
+   "role": "片厂股东家的少当家",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}少",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}先生",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}小姐",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    24,
+    40
+   ],
+   "social_position": "high",
+   "baseline": "家里是片厂最大的股东，派你来看样片、决定撤不撤资。",
+   "resources": [
+    "一句话就能让片厂停工",
+    "家里的钱和面子"
+   ],
+   "reputation": "大方，也任性",
+   "risks": [
+    "家里要你娶或嫁一个你没见过的人"
+   ]
+  },
+  {
+   "id": "comprador",
+   "role": "洋行买办",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}先生",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}经理",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    30,
+    50
+   ],
+   "social_position": "high",
+   "baseline": "替洋行做广告生意，月份牌上的每一张美人图，都要经你的手印到全城。",
+   "resources": [
+    "洋行的广告预算",
+    "制版房和印刷厂的门路"
+   ],
+   "reputation": "精明，会说三种话",
+   "risks": [
+    "洋行在查你账上的一笔回扣"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "studio_floor",
+   "name": "片场大棚",
+   "detail": "铁皮顶的摄影棚，弧光灯一开整个棚子热得像蒸笼，布景是一间假的洋房客厅，墙背面钉着木条和报纸。",
+   "privacy": "semi",
+   "visibility": "开拍时导演、场记、灯光和一群看热闹的临时演员都在，收工后只剩守夜的场务",
+   "witnesses": [
+    "bg_lamp_boy",
+    "bg_extras_head"
+   ],
+   "exits": [
+    "darkroom",
+    "painting_room"
+   ],
+   "affordances": [
+    "在布景的假门后面躲一会儿",
+    "趁换灯的空当说一句台词外的话",
+    "借着收工的乱子把一样东西带出棚"
+   ],
+   "pressure_modifiers": {
+    "p_extra_forty_seconds": "试片间就在大棚隔壁，放映机的声音隔着铁皮墙都听得见。"
+   },
+   "tags": []
+  },
+  {
+   "id": "darkroom",
+   "name": "洗印间与底片柜",
+   "detail": "红灯底下一排药水盘，墙边是上了锁的底片柜，木牌上用粉笔写着每一卷的片名和日期。",
+   "privacy": "private",
+   "visibility": "只有洗印师傅和拿到钥匙的人能进，门一关，外面只看得见门缝下一线红光",
+   "witnesses": [
+    "bg_darkroom_master"
+   ],
+   "exits": [
+    "studio_floor"
+   ],
+   "affordances": [
+    "在红灯下看一格还没剪的底片",
+    "对着木牌找一卷不该存在的胶片",
+    "趁药水还没干把一卷底片换掉"
+   ],
+   "pressure_modifiers": {
+    "p_extra_forty_seconds": "底片柜的新锁还闪着光，木牌上的日期却是上个月的。"
+   },
+   "tags": []
+  },
+  {
+   "id": "painting_room",
+   "name": "月份牌画室",
+   "detail": "二楼朝北的一间屋，画架上是半成品的美人图，墙上钉满了样照，炭精粉的味道和松节油混在一起。",
+   "privacy": "private",
+   "visibility": "老画师和来做模特的人，门上挂着“作画中，勿扰”的牌子",
+   "witnesses": [
+    "bg_errand_runner"
+   ],
+   "exits": [
+    "studio_floor",
+    "tea_room"
+   ],
+   "affordances": [
+    "坐在画架前让人照着画",
+    "在样照墙上找一张熟悉的脸",
+    "把一张样照藏进画夹里"
+   ],
+   "pressure_modifiers": {
+    "p_wall_face": "画架上那张半成品，和街上新贴的那张月份牌，是同一张脸。"
+   },
+   "tags": []
+  },
+  {
+   "id": "tea_room",
+   "name": "跑场茶室",
+   "detail": "临街一间老茶室，各家片厂、舞厅和画室的跑腿都在这里喝茶等活，柜台上插着一排写了名字的竹筹。",
+   "privacy": "public",
+   "visibility": "整个茶室的人都竖着耳朵，谁跟谁坐一桌，第二天就成了消息",
+   "witnesses": [
+    "bg_errand_runner",
+    "bg_tabloid_man"
+   ],
+   "exits": [
+    "painting_room",
+    "dance_hall",
+    "agency_desk"
+   ],
+   "affordances": [
+    "在柜台上搁一支竹筹打听一个人",
+    "隔着屏风听邻桌说话",
+    "请人喝一壶茶，换一句实话"
+   ],
+   "pressure_modifiers": {
+    "p_double_report": "茶室里有人在打听那份报告，问的时间比你早。"
+   },
+   "tags": []
+  },
+  {
+   "id": "dance_hall",
+   "name": "百乐舞厅大厅",
+   "detail": "弹簧地板，乐台上的乐队一场三支曲子，大班台面册摆在入口的高台上，点单要客人自己走过去落字。",
+   "privacy": "public",
+   "visibility": "满厅的客人、舞女和乐手都看得见，台面上发生的事半个钟头就传到街上",
+   "witnesses": [
+    "bg_bandleader"
+   ],
+   "exits": [
+    "tea_room",
+    "dressing_corridor"
+   ],
+   "affordances": [
+    "在台面册上落一笔点单",
+    "跳一支慢四步，说一句只有对方听得见的话",
+    "在乐台停乐的那一刻看清全场"
+   ],
+   "pressure_modifiers": {
+    "p_line_crossed": "乐台停在半支曲子上，满厅的人都转过头来看这一桌。"
+   },
+   "tags": []
+  },
+  {
+   "id": "dressing_corridor",
+   "name": "二楼候场廊",
+   "detail": "舞厅二楼的一条窄廊，一边是化妆间的布帘，一边是通往后门锅炉房的铁梯，灯泡只剩一半是亮的。",
+   "privacy": "semi",
+   "visibility": "候场的舞女和送衣服的跑腿来来去去，布帘拉不严的时候谁都可能看一眼",
+   "witnesses": [
+    "bg_bandleader"
+   ],
+   "exits": [
+    "dance_hall"
+   ],
+   "affordances": [
+    "隔着布帘说话",
+    "从后门的铁梯送一个人出去",
+    "替对方扣上背后够不着的扣子"
+   ],
+   "pressure_modifiers": {
+    "p_line_crossed": "化妆间的布帘只拉了一半，帘外有人停住了脚步。"
+   },
+   "tags": []
+  },
+  {
+   "id": "agency_desk",
+   "name": "征信所接案台",
+   "detail": "两层小楼的楼下，一张案台、两把椅子、一盒印泥，墙上挂着“一委托一结论”的木牌，楼上是撰稿间。",
+   "privacy": "semi",
+   "visibility": "接案先生和来委托的人；楼上的撰稿人从楼梯缝里看得见谁来了",
+   "witnesses": [
+    "bg_tabloid_man"
+   ],
+   "exits": [
+    "tea_room"
+   ],
+   "affordances": [
+    "在委托状上按一个手印",
+    "要求调阅一份封存的副本",
+    "隔着案台把一句不该说的话说出来"
+   ],
+   "pressure_modifiers": {
+    "p_double_report": "接案台上并排摆着两份委托状，委托的是同一件事。"
+   },
+   "tags": []
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "rising_actress",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    21,
+    32
+   ],
+   "adult_context": "片厂的签约演员，成年人，去年才演上第一个有名字的角色",
+   "public_role": "片厂演员",
+   "appearance_options": [
+    "眉毛画得细长，卸了妆反而认不出来",
+    "说话带一点苏州口音，笑的时候先低头"
+   ],
+   "identity": {
+    "authority": "决定自己的脸给谁看，至少想这样决定",
+    "resources": [
+     "片厂的一纸合同",
+     "一张正在红起来的脸"
+    ],
+    "limits": [
+     "合同里写着这张脸归片厂所有，画室和舞厅可以照着用",
+     "合同只剩十一天"
+    ],
+    "obligations": [
+     "每月给乡下的弟弟寄学费"
+    ],
+    "exposure": "成名前在舞厅做过半年舞女，台面册上还有那半年的名字",
+    "hidden": "{npc.ta}偷偷留着那张起稿用的样照，就藏在化妆盒底下"
+   },
+   "decision": {
+    "core_value": "自己的名字",
+    "goal_options": [
+     "让月份牌上印上自己的名字",
+     "合同到期前找到下一家片厂",
+     "把舞厅那半年从台面册上抹掉"
+    ],
+    "pressure_responses": {
+     "low": "笑着说片厂的事{npc.ta}做不了主",
+     "mid": "拿出合同一条一条对",
+     "high": "当众撕掉一张贴错名字的月份牌",
+     "breaking": "收拾行李，连夜坐船去别的城市"
+    },
+    "withdrawal": "把化妆间的门锁上，对着镜子一层层卸妆，谁敲门都不开",
+    "relationship_stance": "对谁都甜，对谁都留一手",
+    "contrast": "全城墙上都是{npc.ta}的脸，没人知道{npc.ta}真名叫什么",
+    "prefers": [
+     "先把条件说在前头"
+    ],
+    "avoids": [
+     "被人提起舞厅那半年"
+    ],
+    "never": [
+     "拿自己的脸换角色"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方叫{npc.ta}的真名",
+     "对方看过{npc.ta}卸了妆的样子还会回头"
+    ],
+    "likes": [
+     "散场后空荡荡的片场"
+    ],
+    "dislikes": [
+     "被人当成画上的人"
+    ],
+    "preconditions": [
+     "门锁好，没有镜头"
+    ],
+    "boundaries": [
+     "不在片场和舞厅"
+    ],
+    "expression": "把一张没署名的样照送给对方",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "不把{npc.ta}当明星的那一个人"
+   },
+   "voices": {
+    "surface": "“那张画上的人不是我，是你们片厂的。”",
+    "inner": "“要是有人肯叫我一声真名，我就跟那个人走。”"
+   },
+   "schedule": [
+    {
+     "from": 540,
+     "to": 1080,
+     "location_id": "studio_floor"
+    },
+    {
+     "from": 1081,
+     "to": 1260,
+     "location_id": "painting_room"
+    },
+    {
+     "from": 1261,
+     "to": 1439,
+     "location_id": "dance_hall"
+    }
+   ],
+   "situation": {
+    "trigger": "隔壁片厂出的新月份牌，用的还是{npc.ta}的脸",
+    "pressure": "合同里的那一栏写得含糊，谁都可以说那张脸是自己的",
+    "exits": [
+     {
+      "option": "去征信所请人查清合同",
+      "cost": "要按手印，就要报出自己的真名"
+     },
+     {
+      "option": "去找画师当面问",
+      "cost": "画师背后是片厂的老板"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "poster_painter",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    40,
+    62
+   ],
+   "adult_context": "月份牌画室的老画师，成年人，画了二十年美人图",
+   "public_role": "月份牌画师",
+   "appearance_options": [
+    "手指上全是炭精粉，指甲缝里洗不干净",
+    "戴一副圆眼镜，镜片上有一道裂纹，一直没换"
+   ],
+   "identity": {
+    "authority": "决定画上的人长什么样、署谁的名",
+    "resources": [
+     "画室和一墙的样照",
+     "全城最熟的制版房关系"
+    ],
+    "limits": [
+     "画室是片厂老板出钱开的",
+     "眼睛越来越不好，细处要靠帮手"
+    ],
+    "obligations": [
+     "每月按期给片厂交稿"
+    ],
+    "exposure": "画上那张脸是照着一个人画的，版角却署了另一个名字",
+    "hidden": "画室墙上最老的那张样照，是{npc.ta}自己年轻时的爱人"
+   },
+   "decision": {
+    "core_value": "手艺不能骗人",
+    "goal_options": [
+     "画完最后一张自己满意的画",
+     "替画上的人把名字讨回来",
+     "在眼睛瞎掉之前离开片厂"
+    ],
+    "pressure_responses": {
+     "low": "推一推眼镜，说画画的事外行不懂",
+     "mid": "把画稿翻过来，让对方看背面的日期",
+     "high": "当着片厂的人把画撕了",
+     "breaking": "关了画室，一个人去江边坐到天亮"
+    },
+    "withdrawal": "背对着门画画，一整天不说一句话，饭放在门口也不吃",
+    "relationship_stance": "对画上的人温柔，对活人刻薄",
+    "contrast": "画了一辈子美人，自己从来不照镜子",
+    "prefers": [
+     "让作品说话"
+    ],
+    "avoids": [
+     "和片厂老板当面争"
+    ],
+    "never": [
+     "改别人的脸去讨好买主"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方能坐一下午不动让{npc.ta}画",
+     "对方看得出画里哪一笔是用了心的"
+    ],
+    "likes": [
+     "清早朝北的光"
+    ],
+    "dislikes": [
+     "催稿"
+    ],
+    "preconditions": [
+     "画室里只有两个人"
+    ],
+    "boundaries": [
+     "不在制版房和片厂"
+    ],
+    "expression": "画一张对方的像，不署名，放在对方的椅子上",
+    "desire_range": [
+     1,
+     3
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "画完以后陪{npc.ta}一起洗笔的人"
+   },
+   "voices": {
+    "surface": "“别动，光要走了。”",
+    "inner": "“我画过上千张脸，只有这一张不敢画完。”"
+   },
+   "schedule": [
+    {
+     "from": 480,
+     "to": 1020,
+     "location_id": "painting_room"
+    },
+    {
+     "from": 1021,
+     "to": 1200,
+     "location_id": "tea_room"
+    },
+    {
+     "from": 1201,
+     "to": 1380,
+     "location_id": "painting_room"
+    }
+   ],
+   "situation": {
+    "trigger": "片厂老板要{npc.ta}把一张画改成另一个演员的脸",
+    "pressure": "改了，原来的人就从墙上消失了",
+    "exits": [
+     {
+      "option": "照改",
+      "cost": "这辈子画过的最好的一张就毁了"
+     },
+     {
+      "option": "拒绝",
+      "cost": "画室下个月就会换人"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "dance_manager",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    32,
+    50
+   ],
+   "adult_context": "百乐舞厅的大班，成年人，管着一层的点单和一整个舞女班子",
+   "public_role": "舞厅大班",
+   "appearance_options": [
+    "旗袍领口总是扣到最上面一颗，手上一枚翡翠戒指",
+    "说话从不抬高声音，算账从不出错"
+   ],
+   "identity": {
+    "authority": "决定今晚谁上台、谁陪哪一桌、哪一场作废",
+    "resources": [
+     "台面册和三楼的账房",
+     "一张全城跑场中介都认的面子"
+    ],
+    "limits": [
+     "楼上的东家随时可以换人",
+     "台面上不许拒客，台下的事又不进场子"
+    ],
+    "obligations": [
+     "每晚散场前把白账交上楼"
+    ],
+    "exposure": "有一晚的账被{npc.ta}整晚抹掉过，月底流水一直对不上",
+    "hidden": "{npc.ta}在后门放走过一个欠了巨债的舞女"
+   },
+   "decision": {
+    "core_value": "规矩",
+    "goal_options": [
+     "守住台面上那条线",
+     "把账房的钥匙拿到自己手里",
+     "替手下的人攒够赎身的钱"
+    ],
+    "pressure_responses": {
+     "low": "微笑着请客人移步",
+     "mid": "当众停乐，把这一场作废",
+     "high": "把客人的名字从台面册上划掉，不许再进门",
+     "breaking": "把账房的钥匙扔在东家桌上，一个人走出后门"
+    },
+    "withdrawal": "坐在台面册后面，一页一页地对账，谁来问都只说一句“等散场”",
+    "relationship_stance": "护着自己的人，对外人冷",
+    "contrast": "管着一整个班子的舞，自己已经十年没下过舞池",
+    "prefers": [
+     "先立规矩，再谈交情"
+    ],
+    "avoids": [
+     "被人看见流眼泪"
+    ],
+    "never": [
+     "把自己的人卖给台下的客人"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在台面上守规矩，在台下也守",
+     "对方请{npc.ta}跳舞，而不是请{npc.ta}安排舞女"
+    ],
+    "likes": [
+     "散场后的空舞池"
+    ],
+    "dislikes": [
+     "被人当成可以买的"
+    ],
+    "preconditions": [
+     "散场，灯熄了一半"
+    ],
+    "boundaries": [
+     "不在台面上，不在手下的人面前"
+    ],
+    "expression": "散场后留一盏灯，问对方要不要跳一支",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "不用算账的舞伴"
+   },
+   "voices": {
+    "surface": "“这一场作废，先生请回。”",
+    "inner": "“我已经十年没跳过一支完整的曲子了。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1439,
+     "location_id": "dance_hall"
+    },
+    {
+     "from": 0,
+     "to": 120,
+     "location_id": "dressing_corridor"
+    },
+    {
+     "from": 600,
+     "to": 900,
+     "location_id": "tea_room"
+    }
+   ],
+   "situation": {
+    "trigger": "东家要{npc.ta}把某一晚整晚从账上抹掉",
+    "pressure": "那一晚有人在三楼小间出了事",
+    "exits": [
+     {
+      "option": "照办",
+      "cost": "从此和那件事绑在一起"
+     },
+     {
+      "option": "把那一页偷偷留下来",
+      "cost": "东家要是发现，第二天就会换掉大班"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "detective_writer",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    28,
+    45
+   ],
+   "adult_context": "征信所的撰稿人，成年人，前报馆记者",
+   "public_role": "征信所撰稿人",
+   "appearance_options": [
+    "衬衫袖口有墨迹，口袋里永远插着两支不同颜色的钢笔",
+    "眼睛下面青黑，说话前总要先想一想"
+   ],
+   "identity": {
+    "authority": "决定一份报告怎么写、写多细、写到哪一步停",
+    "resources": [
+     "复写纸、印泥和半条街的线人",
+     "楼上撰稿间的钥匙"
+    ],
+    "limits": [
+     "一份委托只能出一个结论",
+     "同一件事换一个雇主，就得另写一份"
+    ],
+    "obligations": [
+     "对按了手印的委托人负责"
+    ],
+    "exposure": "{npc.ta}正在为同一件事写两份结论完全相反的报告",
+    "hidden": "{npc.ta}被报馆辞退，是因为一篇写得太真的稿子"
+   },
+   "decision": {
+    "core_value": "真话总要有人写",
+    "goal_options": [
+     "写一份对得起自己的报告",
+     "弄清雇主背后真正想查的人",
+     "攒够钱重新开一家小报"
+    ],
+    "pressure_responses": {
+     "low": "说这件事要先报来处，不报不答",
+     "mid": "把副本封存的规矩搬出来",
+     "high": "把两份报告并排摊在委托人面前",
+     "breaking": "把报告烧了，退还定金"
+    },
+    "withdrawal": "上楼锁门，一夜写满一叠稿纸，第二天全部撕掉",
+    "relationship_stance": "谁都怀疑，谁都肯听",
+    "contrast": "整天替别人查真相，自己的事一个字都不写",
+    "prefers": [
+     "让纸面说话"
+    ],
+    "avoids": [
+     "当面被人问起报馆的事"
+    ],
+    "never": [
+     "在报告里编造事实"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不问{npc.ta}替谁做事",
+     "对方愿意看{npc.ta}写废的稿子"
+    ],
+    "likes": [
+     "深夜钢笔划纸的声音"
+    ],
+    "dislikes": [
+     "被人收买"
+    ],
+    "preconditions": [
+     "对方不是{npc.ta}正在查的人"
+    ],
+    "boundaries": [
+     "不在接案台前"
+    ],
+    "expression": "把一句没写进报告的话，单独说给对方听",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "可以把一整夜的稿子读给{npc.ta}听的人"
+   },
+   "voices": {
+    "surface": "“先说你替谁问。”",
+    "inner": "“这两份报告里，只有一份是真的，可我不知道该交哪一份。”"
+   },
+   "schedule": [
+    {
+     "from": 540,
+     "to": 1080,
+     "location_id": "agency_desk"
+    },
+    {
+     "from": 1081,
+     "to": 1260,
+     "location_id": "tea_room"
+    },
+    {
+     "from": 1261,
+     "to": 1439,
+     "location_id": "agency_desk"
+    }
+   ],
+   "situation": {
+    "trigger": "两个雇主为同一件事来了，两份结论必须在同一天交",
+    "pressure": "交出去的报告会决定一个人的去留",
+    "exits": [
+     {
+      "option": "照实写，两份都写成一样",
+      "cost": "两个雇主都会觉得被出卖"
+     },
+     {
+      "option": "退掉其中一份",
+      "cost": "退掉的那位雇主不是好惹的"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "studio_chief",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    36,
+    55
+   ],
+   "adult_context": "片厂的制片主任，成年人，管排期、合同和底片柜",
+   "public_role": "制片主任",
+   "appearance_options": [
+    "西装笔挺，怀表链子从马甲口袋垂下来",
+    "头发抹得很亮，看人时总像在估价"
+   ],
+   "identity": {
+    "authority": "决定谁上戏、合同续不续、哪一格底片留下",
+    "resources": [
+     "合同科的案桌和底片柜的钥匙",
+     "全城影院的排片关系"
+    ],
+    "limits": [
+     "片厂背后的股东随时可能撤资",
+     "审查处盯着每一部片子"
+    ],
+    "obligations": [
+     "向股东交每月的票房"
+    ],
+    "exposure": "送审版之外，还留着一份未剪版，多了不该留的四十秒",
+    "hidden": "片厂已经欠了三个月的工钱，账上只剩一笔借款"
+   },
+   "decision": {
+    "core_value": "片厂不能倒",
+    "goal_options": [
+     "在股东撤资前拍完这部戏",
+     "把一个演员的合同续成十年",
+     "拿回那四十秒的底片"
+    ],
+    "pressure_responses": {
+     "low": "递一支雪茄，说一切好商量",
+     "mid": "把合同条款一条条念出来",
+     "high": "停掉一个人的戏，换人重拍",
+     "breaking": "把底片柜的钥匙交给审查处"
+    },
+    "withdrawal": "关上合同科的门，把所有合同摊在地上，一份份重新看",
+    "relationship_stance": "对有用的人热情，对没用的人客气",
+    "contrast": "整天谈合同，自己签过的承诺一个都没兑现",
+    "prefers": [
+     "用条件换条件"
+    ],
+    "avoids": [
+     "和股东当面翻脸"
+    ],
+    "never": [
+     "让片厂停工"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不怕{npc.ta}",
+     "对方看穿了{npc.ta}的账还肯坐下来"
+    ],
+    "likes": [
+     "夜里空无一人的试片间"
+    ],
+    "dislikes": [
+     "被人当面拆穿"
+    ],
+    "preconditions": [
+     "合同已经签完，桌上没有条件"
+    ],
+    "boundaries": [
+     "不在合同科"
+    ],
+    "expression": "在试片间给对方单独放一卷没公映过的片子",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "能和{npc.ta}平起平坐谈条件的人"
+   },
+   "voices": {
+    "surface": "“合同就是合同，脸是片厂的。”",
+    "inner": "“要是这部戏也赔了，我就真的什么都没有了。”"
+   },
+   "schedule": [
+    {
+     "from": 540,
+     "to": 1140,
+     "location_id": "studio_floor"
+    },
+    {
+     "from": 1141,
+     "to": 1320,
+     "location_id": "darkroom"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "dance_hall"
+    }
+   ],
+   "situation": {
+    "trigger": "股东下周来看样片，看完决定撤不撤资",
+    "pressure": "能让股东留下的，只有那四十秒",
+    "exits": [
+     {
+      "option": "把四十秒剪进正片",
+      "cost": "演员会恨{npc.ta}，审查处可能会封片"
+     },
+     {
+      "option": "剪掉四十秒，交干净的样片",
+      "cost": "股东多半会撤资"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "taxi_dancer",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    20,
+    30
+   ],
+   "adult_context": "百乐舞厅的签约舞女，成年人，入行第三年",
+   "public_role": "舞女",
+   "appearance_options": [
+    "舞鞋的后跟磨歪了，走路一边轻一边重",
+    "头发烫成波浪，耳朵上一对不值钱的珍珠耳环"
+   ],
+   "identity": {
+    "authority": "决定台下的时间给谁，至少想这样决定",
+    "resources": [
+     "一张签约单，最后一行写着陪舞不陪身",
+     "全厅客人的喜好"
+    ],
+    "limits": [
+     "台面上不许拒客",
+     "欠大班一笔预支的钱"
+    ],
+    "obligations": [
+     "每月往家里寄钱"
+    ],
+    "exposure": "{npc.ta}和月份牌上的那个演员是同一个乡下出来的，没人知道",
+    "hidden": "{npc.ta}在给一个小报记者偷偷递消息"
+   },
+   "decision": {
+    "core_value": "自己挣出来的东西才算自己的",
+    "goal_options": [
+     "攒够钱离开舞厅",
+     "在花榜上排进前三",
+     "找到那个把{npc.ta}介绍进舞厅的人"
+    ],
+    "pressure_responses": {
+     "low": "甜甜地笑，说先生想跳哪一支",
+     "mid": "说签约单上最后一行写得清清楚楚",
+     "high": "当众喊停，请大班来",
+     "breaking": "脱掉舞鞋，从后门的铁梯走出去"
+    },
+    "withdrawal": "躲在化妆间的布帘后面，把耳环摘下来攥在手心里",
+    "relationship_stance": "对客人热，对同行冷，对自己最狠",
+    "contrast": "整晚在舞池里转，没人问过{npc.ta}自己想不想跳",
+    "prefers": [
+     "先看清是什么人"
+    ],
+    "avoids": [
+     "被同乡认出来"
+    ],
+    "never": [
+     "拿身子还债"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不点{npc.ta}的单，只是看着{npc.ta}跳",
+     "对方记得{npc.ta}说过想去看海"
+    ],
+    "likes": [
+     "后门铁梯上的冷风"
+    ],
+    "dislikes": [
+     "被人当成商品"
+    ],
+    "preconditions": [
+     "散场以后，不在舞厅"
+    ],
+    "boundaries": [
+     "绝不在台面上"
+    ],
+    "expression": "把一支只给一个人跳的曲子，悄悄留给对方",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "在后门铁梯上等{npc.ta}下班的人"
+   },
+   "voices": {
+    "surface": "“先生，这一支是慢四步。”",
+    "inner": "“再跳一年，我就去看海，一个人去也行。”"
+   },
+   "schedule": [
+    {
+     "from": 1140,
+     "to": 1439,
+     "location_id": "dance_hall"
+    },
+    {
+     "from": 0,
+     "to": 90,
+     "location_id": "dressing_corridor"
+    },
+    {
+     "from": 720,
+     "to": 1020,
+     "location_id": "tea_room"
+    }
+   ],
+   "situation": {
+    "trigger": "花榜贴出来，{npc.ta}的名字掉了两位",
+    "pressure": "掉出前五，下个月的场子就会少一半",
+    "exits": [
+     {
+      "option": "去求大班排几桌好客人",
+      "cost": "大班的人情是要还的"
+     },
+     {
+      "option": "答应一个熟客的私约",
+      "cost": "台下的事不进场子，出了事没人管"
+     }
+    ]
+   },
+   "tags": []
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_lamp_boy",
+   "role": "灯光助手",
+   "function": "witness",
+   "location_ids": [
+    "studio_floor"
+   ],
+   "line": "{npc.name}整天蹲在灯架上，棚里谁跟谁说过话都在{npc.ta}脚底下",
+   "gender": "any",
+   "age_range": [
+    19,
+    30
+   ],
+   "adult_context": "片厂雇的正式灯光工，成年人",
+   "name": null
+  },
+  {
+   "id": "bg_extras_head",
+   "role": "临时演员头目",
+   "function": "rumor_source",
+   "location_ids": [
+    "studio_floor",
+    "tea_room"
+   ],
+   "line": "{npc.name}手下有几十个临时演员，每个人都是一张嘴",
+   "gender": "any",
+   "age_range": [
+    35,
+    55
+   ],
+   "adult_context": "替片厂招临时演员的包工头，成年人",
+   "name": null
+  },
+  {
+   "id": "bg_errand_runner",
+   "role": "跑腿",
+   "function": "messenger",
+   "location_ids": [
+    "painting_room",
+    "tea_room"
+   ],
+   "line": "{npc.name}一天在画室、茶室和片厂之间跑十几趟，什么话都能捎",
+   "gender": "any",
+   "age_range": [
+    18,
+    28
+   ],
+   "adult_context": "茶室雇的成年跑腿，年满十八",
+   "name": null
+  },
+  {
+   "id": "bg_tabloid_man",
+   "role": "小报记者",
+   "function": "rumor_source",
+   "location_ids": [
+    "tea_room",
+    "agency_desk"
+   ],
+   "line": "{npc.name}在茶室最角落那桌坐了一整天，就等一句能上版面的话",
+   "gender": "any",
+   "age_range": [
+    25,
+    45
+   ],
+   "adult_context": "一家花边小报的外勤记者，成年人",
+   "name": null
+  },
+  {
+   "id": "bg_bandleader",
+   "role": "乐队领班",
+   "function": "witness",
+   "location_ids": [
+    "dance_hall",
+    "dressing_corridor"
+   ],
+   "line": "{npc.name}站在乐台上，全厅哪一桌出了事都看得最清楚",
+   "gender": "any",
+   "age_range": [
+    30,
+    55
+   ],
+   "adult_context": "舞厅雇的乐队领班，成年人",
+   "name": null
+  },
+  {
+   "id": "bg_patrol",
+   "role": "巡捕",
+   "function": "obstacle",
+   "location_ids": [
+    "tea_room",
+    "dance_hall"
+   ],
+   "line": "{npc.name}晚上来舞厅门口站一会儿，收一个信封就走",
+   "gender": "any",
+   "age_range": [
+    28,
+    50
+   ],
+   "adult_context": "租界巡捕房的巡捕，成年人",
+   "name": null
+  },
+  {
+   "id": "bg_darkroom_master",
+   "role": "洗印师傅",
+   "function": "helper",
+   "location_ids": [
+    "darkroom"
+   ],
+   "line": "{npc.name}在红灯底下待了二十年，看底片比看人准",
+   "gender": "any",
+   "age_range": [
+    45,
+    65
+   ],
+   "adult_context": "片厂的洗印师傅，成年人",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_tea_room",
+   "text": "跑场茶室的闲话",
+   "reach": "第二天上午传遍三家片厂和五家舞厅",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_tabloid",
+   "text": "花边小报",
+   "reach": "隔天早上印出来，全城的报摊都有",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_ledger",
+   "text": "台面册",
+   "reach": "当晚在场的人都看得见，落了字就改不了",
+   "fidelity": "exact"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_same_face",
+   "text": "同一张脸挂在两个人的生计上，谁也不肯先松手"
+  },
+  {
+   "id": "te_contract_days",
+   "text": "合同还剩十一天，每过一天，谈判的筹码就换一次手"
+  },
+  {
+   "id": "te_backstairs",
+   "text": "每晚散场都要从同一道后门的铁梯下去，总会碰上"
+  },
+  {
+   "id": "te_two_reports",
+   "text": "两份结论相反的报告压在同一张桌子上，谁先拿到谁就占了理"
+  },
+  {
+   "id": "te_old_town",
+   "text": "两个人是从同一个乡下出来的，谁也没说破"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "k_lamp_and_face",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "script_girl"
+   ],
+   "slots": [
+    "rising_actress",
+    "studio_chief"
+   ],
+   "tension_engine_ids": [
+    "te_same_face",
+    "te_contract_days"
+   ],
+   "chemistry": "{studio_chief.name}握着{rising_actress.name}的合同，也握着你的饭碗；{rising_actress.name}每次收工都会问你一句今天哪一条拍得最好。",
+   "stakes": {
+    "resource_gap": "{studio_chief.name}有合同和底片柜，{rising_actress.name}有一张正在红起来的脸，你只有一本场记簿",
+    "limit_gap": "{rising_actress.name}的合同还剩十一天，你随时可能被换掉",
+    "meeting_reason": "你们三个每天都在同一个棚里熬到收工",
+    "irreplaceable_goal": "你想让场记簿上的一条镜头，永远不被人看见"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "rising_actress",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "{rising_actress.name}记得你的名字，片场里没几个人记得"
+    },
+    {
+     "a": "player",
+     "b": "studio_chief",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{studio_chief.name}只叫你“场记”"
+    },
+    {
+     "a": "rising_actress",
+     "b": "studio_chief",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": -1,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{studio_chief.name}签下了{rising_actress.name}，也一直没让{rising_actress.ta}署过名"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_hall_ledger",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "band_musician"
+   ],
+   "slots": [
+    "dance_manager",
+    "taxi_dancer"
+   ],
+   "tension_engine_ids": [
+    "te_backstairs",
+    "te_old_town"
+   ],
+   "chemistry": "{dance_manager.name}是你的东家，台面册上的每一笔都过{dance_manager.ta}的眼；{taxi_dancer.name}每晚最后一支曲子，都要你吹得慢一点。",
+   "stakes": {
+    "resource_gap": "{dance_manager.name}有台面册和账房，{taxi_dancer.name}有一张签约单，你只有一把小号",
+    "limit_gap": "{taxi_dancer.name}欠着预支的钱，你欠着领班的钱",
+    "meeting_reason": "你们三个每晚都在同一个舞厅熬到散场",
+    "irreplaceable_goal": "你想在离开舞厅之前，替一个人还清一笔账"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "dance_manager",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 0
+     },
+     "reason": "{dance_manager.name}从不拖欠乐手的工钱"
+    },
+    {
+     "a": "player",
+     "b": "taxi_dancer",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "{taxi_dancer.name}下班时会在乐台边上等你收好号"
+    },
+    {
+     "a": "dance_manager",
+     "b": "taxi_dancer",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{dance_manager.name}替{taxi_dancer.name}挡过三次越线的客人"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_two_reports",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal",
+    "low"
+   ],
+   "identity_ids": [
+    "tabloid_writer"
+   ],
+   "slots": [
+    "detective_writer",
+    "rising_actress"
+   ],
+   "tension_engine_ids": [
+    "te_two_reports",
+    "te_same_face"
+   ],
+   "chemistry": "{detective_writer.name}在查{rising_actress.name}的合同，也在查{rising_actress.ta}的过去；你写的那篇稿子，正好夹在两份报告中间。",
+   "stakes": {
+    "resource_gap": "{detective_writer.name}有报告，{rising_actress.name}有那张脸，你有一个能登出来的版面",
+    "limit_gap": "{rising_actress.name}的合同快到期，{detective_writer.name}的两份报告要同一天交",
+    "meeting_reason": "你们三个在茶室的同一张桌子上碰过面",
+    "irreplaceable_goal": "你想写一篇真的稿子，又不想毁掉一个人"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "detective_writer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "你们当年在同一家报馆，{detective_writer.name}被辞退那天你在场"
+    },
+    {
+     "a": "player",
+     "b": "rising_actress",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": -1,
+      "tension": 2
+     },
+     "reason": "{rising_actress.name}知道你写过什么"
+    },
+    {
+     "a": "detective_writer",
+     "b": "rising_actress",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{detective_writer.name}的报告里，有{rising_actress.name}在舞厅的那半年"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_painter_and_dancer",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal",
+    "low"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "poster_painter",
+    "taxi_dancer"
+   ],
+   "tension_engine_ids": [
+    "te_old_town",
+    "te_same_face"
+   ],
+   "chemistry": "{poster_painter.name}要找一个新模特，{taxi_dancer.name}来了，坐在画架前，说只要画上署{taxi_dancer.ta}的名字。",
+   "stakes": {
+    "resource_gap": "{poster_painter.name}有画室和手艺，{taxi_dancer.name}有一张想被人记住的脸",
+    "limit_gap": "{poster_painter.name}的画室归片厂，{taxi_dancer.name}晚上要回舞厅上工",
+    "meeting_reason": "那天下午你恰好也在画室",
+    "irreplaceable_goal": "你想看这一张画，真的印上该印的名字"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "poster_painter",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 0
+     },
+     "reason": "{poster_painter.name}嫌你送稿太慢，又只信你送"
+    },
+    {
+     "a": "player",
+     "b": "taxi_dancer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "你在舞厅见过{taxi_dancer.name}，{taxi_dancer.ta}假装没认出你"
+    },
+    {
+     "a": "poster_painter",
+     "b": "taxi_dancer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{taxi_dancer.name}坐下的第一眼，{poster_painter.name}的手停了"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_heir_sees_rushes",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "studio_heir"
+   ],
+   "slots": [
+    "studio_chief",
+    "rising_actress"
+   ],
+   "tension_engine_ids": [
+    "te_contract_days",
+    "te_same_face"
+   ],
+   "chemistry": "你来看样片，决定片厂的生死；{studio_chief.name}请你进了试片间，{rising_actress.name}在门外等着，说想单独跟你说几句话。",
+   "stakes": {
+    "resource_gap": "你有撤资的权力，{studio_chief.name}有那四十秒，{rising_actress.name}只有自己",
+    "limit_gap": "片厂欠着工钱，{rising_actress.name}的合同十一天后到期",
+    "meeting_reason": "样片放映那天，三个人在同一间试片间",
+    "irreplaceable_goal": "你想弄清楚这家片厂到底值不值得救"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "studio_chief",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{studio_chief.name}在你家的饭桌上吃过三次饭"
+    },
+    {
+     "a": "player",
+     "b": "rising_actress",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "你只在月份牌上见过{rising_actress.name}的脸"
+    },
+    {
+     "a": "studio_chief",
+     "b": "rising_actress",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": -1,
+      "tension": 3
+     },
+     "reason": "{rising_actress.name}不知道那四十秒还留着"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_comprador_prints",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "comprador"
+   ],
+   "slots": [
+    "poster_painter",
+    "detective_writer"
+   ],
+   "tension_engine_ids": [
+    "te_two_reports",
+    "te_same_face"
+   ],
+   "chemistry": "你要把一张美人图印十万份发到全城，{poster_painter.name}说画上的名字不对，{detective_writer.name}说署名的那个人有问题。",
+   "stakes": {
+    "resource_gap": "你有洋行的广告预算，{poster_painter.name}有画，{detective_writer.name}有一份报告",
+    "limit_gap": "洋行在查你的账，{poster_painter.name}的画室归片厂",
+    "meeting_reason": "印刷前的最后一晚，两个人都来找过你",
+    "irreplaceable_goal": "你想保住饭碗，也想印一张不骗人的画"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "poster_painter",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{poster_painter.name}的画替你卖了五年的香烟"
+    },
+    {
+     "a": "player",
+     "b": "detective_writer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{detective_writer.name}是洋行请来查你的人"
+    },
+    {
+     "a": "poster_painter",
+     "b": "detective_writer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 0
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{detective_writer.name}在报馆时写过{poster_painter.name}的专访"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_backstair_night",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "dance_manager",
+    "detective_writer"
+   ],
+   "tension_engine_ids": [
+    "te_backstairs",
+    "te_two_reports"
+   ],
+   "chemistry": "{detective_writer.name}来舞厅查一晚被抹掉的账，{dance_manager.name}把{detective_writer.ta}请到了二楼候场廊，说要谈就别在大厅谈。",
+   "stakes": {
+    "resource_gap": "{dance_manager.name}有账房的钥匙，{detective_writer.name}有委托状，你有那一晚亲眼看见的事",
+    "limit_gap": "{dance_manager.name}的东家盯着，{detective_writer.name}的报告明天要交",
+    "meeting_reason": "那一晚你也在舞厅",
+    "irreplaceable_goal": "你想让那一晚的事有个了结"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "dance_manager",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{dance_manager.name}知道你那晚在场"
+    },
+    {
+     "a": "player",
+     "b": "detective_writer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{detective_writer.name}找你问过两次话"
+    },
+    {
+     "a": "dance_manager",
+     "b": "detective_writer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{dance_manager.name}看出{detective_writer.name}不是来跳舞的"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_three_faces",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "rising_actress",
+    "taxi_dancer",
+    "poster_painter"
+   ],
+   "tension_engine_ids": [
+    "te_old_town",
+    "te_same_face"
+   ],
+   "chemistry": "同一个乡下出来的{rising_actress.name}和{taxi_dancer.name}，一个在银幕上，一个在舞池里；{poster_painter.name}把两个人画进了同一张月份牌。",
+   "stakes": {
+    "resource_gap": "{rising_actress.name}有名气，{taxi_dancer.name}有秘密，{poster_painter.name}有那张画",
+    "limit_gap": "两个人都不想让对方的事被人知道",
+    "meeting_reason": "新月份牌上墙那天，三个人都去看过",
+    "irreplaceable_goal": "你想弄清楚画上到底是谁"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "rising_actress",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{rising_actress.name}请你帮忙看过一份合同"
+    },
+    {
+     "a": "player",
+     "b": "taxi_dancer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{taxi_dancer.name}托你送过一封没写地址的信"
+    },
+    {
+     "a": "player",
+     "b": "poster_painter",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 0
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 0
+     },
+     "reason": "{poster_painter.name}让你在画室坐过一个下午"
+    },
+    {
+     "a": "rising_actress",
+     "b": "taxi_dancer",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 3
+     },
+     "reason": "两个人在乡下是邻居，在城里装作不认识"
+    },
+    {
+     "a": "rising_actress",
+     "b": "poster_painter",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{poster_painter.name}画过{rising_actress.name}一百多张"
+    },
+    {
+     "a": "taxi_dancer",
+     "b": "poster_painter",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{taxi_dancer.name}只来画室坐过一次"
+    }
+   ],
+   "tags": []
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_wrap_shoot",
+   "title": "收工前最后一条",
+   "location_ids": [
+    "studio_floor"
+   ],
+   "duration_minutes": 60,
+   "beats": [
+    "弧光灯又烧了一盏，全场等着换灯",
+    "导演喊再来一条，没人敢说累",
+    "收工的铃响了，有人还站在布景里没动"
+   ],
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": []
+  },
+  {
+   "id": "a_sitting",
+   "title": "坐着让人画",
+   "location_ids": [
+    "painting_room"
+   ],
+   "duration_minutes": 90,
+   "beats": [
+    "老画师调了半天光，才开始下笔",
+    "窗外的雨把光弄暗了",
+    "画到一半，画师停下来擦眼镜"
+   ],
+   "hook_ids": [],
+   "start_minute": 900,
+   "tags": []
+  },
+  {
+   "id": "a_last_dance",
+   "title": "散场前最后一支曲子",
+   "location_ids": [
+    "dance_hall"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "乐队把最后一支曲子放慢了",
+    "台面册已经合上了",
+    "舞池里只剩两三对人"
+   ],
+   "hook_ids": [],
+   "start_minute": 1410,
+   "tags": []
+  },
+  {
+   "id": "a_backstair",
+   "title": "下后门铁梯",
+   "location_ids": [
+    "dressing_corridor"
+   ],
+   "duration_minutes": 20,
+   "beats": [
+    "锅炉房的热气从楼梯底下冒上来",
+    "有人在铁梯下面点了一根烟",
+    "后巷的黄包车只剩一辆"
+   ],
+   "hook_ids": [],
+   "start_minute": 30,
+   "tags": []
+  },
+  {
+   "id": "a_tea_inquiry",
+   "title": "去茶室打听一个人",
+   "location_ids": [
+    "tea_room"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "柜台上搁着三支竹筹，问的是同一个人",
+    "邻桌的人放低了声音",
+    "跑腿把一张纸条塞到你的茶碗底下"
+   ],
+   "hook_ids": [],
+   "start_minute": 660,
+   "tags": []
+  },
+  {
+   "id": "a_contract_reading",
+   "title": "看一份合同",
+   "location_ids": [
+    "agency_desk",
+    "painting_room"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "合同上有一行字写得特别小",
+    "印泥盒打开了，又合上",
+    "对面的人等你按手印，没催"
+   ],
+   "hook_ids": [],
+   "start_minute": 960,
+   "tags": []
+  },
+  {
+   "id": "a_dark_check",
+   "title": "进洗印间核底片",
+   "location_ids": [
+    "darkroom"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "红灯一开，所有人的脸都变了颜色",
+    "木牌上的日期和胶片盒上的对不上",
+    "门外有人在敲"
+   ],
+   "hook_ids": [],
+   "start_minute": 1320,
+   "tags": []
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_wall_face",
+   "title": "墙上那张脸",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "painting_room",
+    "tea_room"
+   ],
+   "trigger": "新一期月份牌贴满了全城，画上的脸是一个人，版角署的却是另一个名字",
+   "objective": "在下一批加印之前，让署名改过来，或者让这件事压下去",
+   "choice": "替画上的人讨名字，还是保住画室的饭碗",
+   "immediate": {
+    "text": "有人把一张月份牌拍在桌上，问这上面到底是谁",
+    "minutes": 30
+   },
+   "near": {
+    "text": "后天早上印刷厂开机加印十万张",
+    "deadline_minutes": 2400
+   },
+   "far": {
+    "trigger": "加印的月份牌发到外埠",
+    "consequence": "这张脸会跟着那个错的名字走遍全国",
+    "due_days": 8
+   },
+   "exits": [
+    {
+     "option": "去印刷厂把版改了",
+     "cost": "要得罪出钱的洋行"
+    },
+    {
+     "option": "让画上的人自己去登报声明",
+     "cost": "舞厅那半年也会被人翻出来"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": []
+  },
+  {
+   "id": "p_extra_forty_seconds",
+   "title": "多出来的四十秒",
+   "source": "person",
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "location_ids": [
+    "studio_floor",
+    "darkroom"
+   ],
+   "trigger": "洗印间里多了一卷未剪版，比送审的多出四十秒，那四十秒里只有一个人的脸",
+   "objective": "在股东看样片之前，决定这卷底片的去留",
+   "choice": "把它交出去，还是把它毁掉",
+   "immediate": {
+    "text": "底片柜的门开着，那一卷就在你手边",
+    "minutes": 20
+   },
+   "near": {
+    "text": "明天下午股东来看样片",
+    "deadline_minutes": 1200
+   },
+   "far": {
+    "trigger": "审查处来片厂抽查",
+    "consequence": "要是那四十秒还在，整部片子都会被封",
+    "due_days": 6
+   },
+   "exits": [
+    {
+     "option": "把底片交给画面里的那个人",
+     "cost": "制片主任会知道是你干的"
+    },
+    {
+     "option": "烧掉它",
+     "cost": "那就再也没有证据了"
+    }
+   ],
+   "leverage": {
+    "holder": "studio_chief",
+    "subject": "rising_actress",
+    "basis": "{studio_chief.name}手里那卷未剪版，留着{rising_actress.name}不愿意被人看见的四十秒"
+   },
+   "hook_ids": [],
+   "start_minute": 1300,
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "p_line_crossed",
+   "title": "台面上越了线",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "dance_hall",
+    "dressing_corridor"
+   ],
+   "trigger": "一桌客人越过了签约单最后一行，乐台停在半支曲子上",
+   "objective": "在这一场作废之前，决定是谁的错",
+   "choice": "站出来作证，还是装作什么都没看见",
+   "immediate": {
+    "text": "满厅的人都在看，那一桌的客人站起来了",
+    "minutes": 15
+   },
+   "near": {
+    "text": "明晚这位客人还会来，大班要先定下给不给进门",
+    "deadline_minutes": 1440
+   },
+   "far": {
+    "trigger": "客人的东家找上门",
+    "consequence": "舞厅要么赔礼，要么换大班",
+    "due_days": 4
+   },
+   "exits": [
+    {
+     "option": "当众作证",
+     "cost": "那位客人不会放过你"
+    },
+    {
+     "option": "劝舞女私下了结",
+     "cost": "这条线以后就再也守不住了"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1350,
+   "tags": []
+  },
+  {
+   "id": "p_double_report",
+   "title": "两个雇主",
+   "source": "money",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "agency_desk",
+    "tea_room"
+   ],
+   "trigger": "同一件事来了第二个雇主，两份委托状上按的是两个人的手印",
+   "objective": "在两份报告交出去之前，弄清两个雇主各自想要什么",
+   "choice": "写一份真的，还是写两份各自满意的",
+   "immediate": {
+    "text": "接案先生把两份委托状并排推到你面前",
+    "minutes": 30
+   },
+   "near": {
+    "text": "后天上午两份报告都要交",
+    "deadline_minutes": 2160
+   },
+   "far": {
+    "trigger": "两个雇主在同一个场合碰面",
+    "consequence": "两份报告会被拿出来对，一字一字地对",
+    "due_days": 5
+   },
+   "exits": [
+    {
+     "option": "退掉一个雇主",
+     "cost": "定金要双倍退还，人也得罪了"
+    },
+    {
+     "option": "两份都照实写",
+     "cost": "两个雇主都不会再来"
+    },
+    {
+     "option": "各写各的",
+     "cost": "这行的规矩就坏在你手里了"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1020,
+   "tags": []
+  },
+  {
+   "id": "p_contract_eleven",
+   "title": "合同只剩十一天",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "studio_floor",
+    "agency_desk"
+   ],
+   "trigger": "制片主任把续约合同放在桌上：十年，片厂独占这张脸",
+   "objective": "在合同到期前，决定续还是不续",
+   "choice": "签下十年，还是赌一把去别家片厂",
+   "immediate": {
+    "text": "合同就摊在桌上，笔已经拧开了",
+    "minutes": 20
+   },
+   "near": {
+    "text": "十一天后合同到期",
+    "deadline_minutes": 4300
+   },
+   "far": {
+    "trigger": "别家片厂开出的条件登在了小报上",
+    "consequence": "片厂会说是你泄的密",
+    "due_days": 11
+   },
+   "exits": [
+    {
+     "option": "签下十年",
+     "cost": "这张脸以后就不是自己的了"
+    },
+    {
+     "option": "拒签",
+     "cost": "片厂会让你在这十一天里一场戏都没有"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1000,
+   "tags": []
+  },
+  {
+   "id": "p_censor_burn",
+   "title": "审查处来烧片",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "darkroom",
+    "studio_floor"
+   ],
+   "trigger": "审查处的人来了，要当场烧掉一卷被删的底片，名单上写的卷号和柜子里的对不上",
+   "objective": "在审查处的人清点完之前，弄清少了哪一卷",
+   "choice": "如实报，还是替片厂瞒下",
+   "immediate": {
+    "text": "审查处的人戴着白手套，一卷卷地数",
+    "minutes": 40
+   },
+   "near": {
+    "text": "明天上午审查处要一份书面说明",
+    "deadline_minutes": 900
+   },
+   "far": {
+    "trigger": "审查处再来复查",
+    "consequence": "片厂会被停业整顿一个月",
+    "due_days": 9
+   },
+   "exits": [
+    {
+     "option": "把少的那一卷指给审查处看",
+     "cost": "片厂会知道是谁说的"
+    },
+    {
+     "option": "找一卷废片顶上",
+     "cost": "被查出来就是欺瞒官署"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1080,
+   "tags": []
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_unsigned_photo",
+   "kind": "approach",
+   "slot": "rising_actress",
+   "location_ids": [],
+   "text": "{npc.name}从化妆盒底下摸出一张样照，背面什么也没写，塞进你手里"
+  },
+  {
+   "id": "h_call_real_name",
+   "kind": "approach",
+   "slot": "rising_actress",
+   "location_ids": [
+    "dressing_corridor",
+    "studio_floor"
+   ],
+   "text": "{npc.name}卸了一半的妆，转过头来，小声说了一个你从没听过的名字：“这才是我。”"
+  },
+  {
+   "id": "h_hold_still",
+   "kind": "approach",
+   "slot": "poster_painter",
+   "location_ids": [
+    "painting_room"
+   ],
+   "text": "{npc.name}把画架往你这边转了转，说：“别动，光要走了，借你坐一会儿。”"
+  },
+  {
+   "id": "h_one_more_dance",
+   "kind": "approach",
+   "slot": "dance_manager",
+   "location_ids": [
+    "dance_hall"
+   ],
+   "text": "{npc.name}把台面册合上，留了一盏灯，问你还跳不跳最后一支"
+  },
+  {
+   "id": "h_unsent_line",
+   "kind": "approach",
+   "slot": "detective_writer",
+   "location_ids": [],
+   "text": "{npc.name}把一张写废的稿纸折起来递给你，说这一句没写进报告"
+  },
+  {
+   "id": "h_screening_room",
+   "kind": "approach",
+   "slot": "studio_chief",
+   "location_ids": [
+    "studio_floor",
+    "darkroom"
+   ],
+   "text": "{npc.name}关了试片间的灯，说要单独给你放一卷没公映过的片子"
+  },
+  {
+   "id": "h_back_stair_wait",
+   "kind": "approach",
+   "slot": "taxi_dancer",
+   "location_ids": [
+    "dressing_corridor"
+   ],
+   "text": "{npc.name}在后门铁梯的拐角停下来，把一只耳环摘下来放在你手心里"
+  },
+  {
+   "id": "h_slow_song",
+   "kind": "approach",
+   "slot": "taxi_dancer",
+   "location_ids": [
+    "dance_hall"
+   ],
+   "text": "{npc.name}跟乐队打了个手势，下一支曲子慢了下来"
+  },
+  {
+   "id": "h_chief_cigar",
+   "kind": "request",
+   "slot": "studio_chief",
+   "location_ids": [],
+   "text": "{npc.name}递过来一支雪茄，说：“帮我一个忙，合同的事就好谈。”"
+  },
+  {
+   "id": "h_painter_squint",
+   "kind": "observe",
+   "slot": "poster_painter",
+   "location_ids": [],
+   "text": "{npc.name}隔着裂了的镜片看了你很久，在画纸边上记了一个数"
+  },
+  {
+   "id": "h_ink_spill",
+   "kind": "accident",
+   "slot": "detective_writer",
+   "location_ids": [],
+   "text": "{npc.name}手一抖，墨水洒在了报告上，正好盖住一个名字"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_same_village",
+   "category": "关系",
+   "requires": [
+    "rising_actress",
+    "taxi_dancer"
+   ],
+   "text": "{rising_actress.name}和{taxi_dancer.name}是同一个乡下出来的，有人在小报上登了两个人小时候的合影。"
+  },
+  {
+   "id": "t_chief_debt",
+   "category": "资源",
+   "requires": [
+    "studio_chief"
+   ],
+   "text": "{studio_chief.name}借来撑片厂的那笔钱，债主是舞厅的东家。"
+  },
+  {
+   "id": "t_painter_eyes",
+   "category": "意外",
+   "requires": [
+    "poster_painter"
+   ],
+   "text": "{poster_painter.name}的眼睛一夜之间看不清了，画室剩下的稿子要找人接手。"
+  },
+  {
+   "id": "t_new_censor",
+   "category": "制度",
+   "requires": [
+    "pressure"
+   ],
+   "text": "审查处换了新处长，上任第一件事就是重审所有在拍的片子。"
+  },
+  {
+   "id": "t_report_leak",
+   "category": "信息",
+   "requires": [
+    "detective_writer"
+   ],
+   "text": "{detective_writer.name}写的一份报告，原封不动地登上了花边小报。"
+  },
+  {
+   "id": "t_shipping_ticket",
+   "category": "时限",
+   "requires": [],
+   "text": "去南洋的船票只剩最后一班，三天后开船。"
+  },
+  {
+   "id": "t_manager_replaced",
+   "category": "人事",
+   "requires": [
+    "dance_manager"
+   ],
+   "text": "舞厅东家宣布换大班，新来的人带着自己的一整个班子。"
+  },
+  {
+   "id": "t_fire_studio",
+   "category": "意外",
+   "requires": [],
+   "text": "片厂的大棚半夜失火，烧掉了半个布景，底片柜被人连夜搬走了。"
+  }
+ ],
+ "forbidden_terms": [
+  "手机",
+  "电视",
+  "网络",
+  "电脑",
+  "塑料",
+  "彩色照片",
+  "飞机场",
+  "高铁",
+  "微信",
+  "民国三十",
+  "地铁"
+ ],
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "coercion_theme",
+  "nightlife",
+  "workplace_power"
+ ],
+ "status": "review",
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 2 个）。性别按会话偏好生成（D15）。"
+}

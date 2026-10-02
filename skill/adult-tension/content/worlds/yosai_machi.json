@@ -1,0 +1,2491 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "千鹤屋雇的成年缝工",
+   "age_range": [
+    45,
+    65
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_seamstress",
+   "line": "{npc.name}低着头缝扣子，谁进了试衣间、待了多久，{npc.ta}心里都有数",
+   "location_ids": [
+    "tailor_shop",
+    "fitting_room"
+   ],
+   "name": null,
+   "role": "千鹤屋的老缝子"
+  },
+  {
+   "adult_context": "町里雇的成年点灯人",
+   "age_range": [
+    25,
+    45
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_lamp_lighter",
+   "line": "{npc.name}傍晚挨盏点灯，顺手替人捎一张纸条",
+   "location_ids": [
+    "machi_street",
+    "settlement_gate"
+   ],
+   "name": null,
+   "role": "点煤气灯的人"
+  },
+  {
+   "adult_context": "町内的成年世话役",
+   "age_range": [
+    55,
+    72
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_neighborhood_elder",
+   "line": "{npc.name}管着町内的婚丧礼数，谁家的门帘挂歪了，{npc.ta}第一个说",
+   "location_ids": [
+    "machi_street",
+    "gofuku_shop"
+   ],
+   "name": null,
+   "role": "町内的世话役"
+  },
+  {
+   "adult_context": "越前屋的成年番头",
+   "age_range": [
+    50,
+    66
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_banto",
+   "line": "{npc.name}守着越前屋的账场，谁想把少当家拉去洋裁店，先过{npc.ta}这一关",
+   "location_ids": [
+    "gofuku_shop",
+    "machi_street"
+   ],
+   "name": null,
+   "role": "越前屋的老番头"
+  },
+  {
+   "adult_context": "译书所的成年排字工",
+   "age_range": [
+    25,
+    50
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_typesetter",
+   "line": "{npc.name}一个个捡铅字，扉页上排的是谁的名字，{npc.ta}最清楚",
+   "location_ids": [
+    "translation_office"
+   ],
+   "name": null,
+   "role": "排字房的工人"
+  },
+  {
+   "adult_context": "番所的成年役人",
+   "age_range": [
+    30,
+    50
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_gate_guard",
+   "line": "{npc.name}一张一张验通行札，关门的时辰一到，谁求情都没用",
+   "location_ids": [
+    "settlement_gate",
+    "harbor"
+   ],
+   "name": null,
+   "role": "关门番所的役人"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "{tailor_owner.name}是你的师傅；{official_client.name}订了一套舞会礼服，给的尺寸纸条你看过，那不是{official_client.ta}家眷的尺寸。",
+   "id": "k_seam_order",
+   "identity_ids": [
+    "seam_helper"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "tailor_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{tailor_owner.name}手把手教你锁扣眼",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "official_client",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{official_client.name}从没正眼看过你，直到你看见了那张纸条",
+     "stage": "stranger"
+    },
+    {
+     "a": "tailor_owner",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "official_client",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{official_client.name}的订单能救千鹤屋，{tailor_owner.name}心里清楚",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "tailor_owner",
+    "official_client"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把礼服做好，又不想替人瞒下一件会出事的事",
+    "limit_gap": "礼服下个月要交，千鹤屋的契约快到期",
+    "meeting_reason": "你每天替师傅打下手，{official_client.name}每隔几天就来店里催一次",
+    "resource_gap": "{tailor_owner.name}有尺寸簿和缝纫机，{official_client.name}有官职和町内的执照，你只有一手针线"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_size_secret",
+    "te_half_curtain"
+   ]
+  },
+  {
+   "chemistry": "你替{famous_translator.name}誊稿，发现最好的那一章是{proofreader.name}的笔迹；{proofreader.name}替你瞒下过一页抄错的稿子。",
+   "id": "k_copy_desk",
+   "identity_ids": [
+    "copyist"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "famous_translator",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{famous_translator.name}夸过你的字",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "proofreader",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "你抄错的那一页，{proofreader.name}悄悄重抄了",
+     "stage": "familiar"
+    },
+    {
+     "a": "famous_translator",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "proofreader",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 1
+     },
+     "reason": "两个人合作三年，谁也没提过那一章",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "famous_translator",
+    "proofreader"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想让对的名字印在扉页上，又怕丢了这份差事",
+    "limit_gap": "下个月付印，扉页已经排好",
+    "meeting_reason": "你每天在楼上誊稿，两个人的稿子都经你的手",
+    "resource_gap": "{famous_translator.name}有名字和稿约，{proofreader.name}有一手好英文，你只有一手字"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_byline",
+    "te_size_secret"
+   ]
+  },
+  {
+   "chemistry": "{gofuku_heir.name}偷偷来你的写真馆，要穿一件洋装拍一张照，洋装是{tailor_owner.name}做的；{gofuku_heir.ta}求你别把底片给任何人看。",
+   "id": "k_portrait",
+   "identity_ids": [
+    "photographer"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "gofuku_heir",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "你替{gofuku_heir.name}拍过那张不能给家里看的照片",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "tailor_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{tailor_owner.name}的店招是你拍的",
+     "stage": "acquainted"
+    },
+    {
+     "a": "gofuku_heir",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "tailor_owner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{tailor_owner.name}量过{gofuku_heir.name}的尺寸，两家店谁也不知道",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "gofuku_heir",
+    "tailor_owner"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想替{gofuku_heir.name}守住那张照片",
+    "limit_gap": "越前屋要替{gofuku_heir.name}订亲，千鹤屋的契约快到期",
+    "meeting_reason": "你常替两家店拍招牌照，两边都信你",
+    "resource_gap": "{gofuku_heir.name}有一百年的门帘，{tailor_owner.name}有尺寸簿，你有一台照相机和那张底片"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_old_new",
+    "te_size_secret"
+   ]
+  },
+  {
+   "chemistry": "你欠{comprador.name}的商馆一笔货钱；{comprador.name}在你店里喝醉了，说商馆要撤，{gofuku_heir.name}就坐在隔壁桌，全听见了。",
+   "id": "k_kitchen_talk",
+   "identity_ids": [
+    "western_cook"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "comprador",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{comprador.name}替你从关门里进过货",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "gofuku_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{gofuku_heir.name}常来你店里偷偷吃一盘洋食",
+     "stage": "acquainted"
+    },
+    {
+     "a": "comprador",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "gofuku_heir",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{comprador.name}压下过越前屋的一张订单",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "comprador",
+    "gofuku_heir"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在商馆撤走之前，让这条町少吃点亏",
+    "limit_gap": "商馆一撤，你的欠款和越前屋的订单都要重算",
+    "meeting_reason": "两个人都是你店里的熟客",
+    "resource_gap": "{comprador.name}有商馆的订单和通行札，{gofuku_heir.name}有越前屋，你有一间洋食屋和一笔欠款"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_gate_line",
+    "te_old_new"
+   ]
+  },
+  {
+   "chemistry": "你来横滨签{famous_translator.name}的新书；{comprador.name}替你在居留地安排住处，顺口说了一句：{famous_translator.name}已经看不清稿子上的字了。",
+   "id": "k_publisher_deal",
+   "identity_ids": [
+    "publisher"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "famous_translator",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "你出过{famous_translator.name}的三本书",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "comprador",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{comprador.name}替你办过两次关门的通行札",
+     "stage": "acquainted"
+    },
+    {
+     "a": "famous_translator",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "comprador",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{comprador.name}知道{famous_translator.name}在美国认识的那个人",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "famous_translator",
+    "comprador"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想签下这本书，也想知道真正译它的人是谁",
+    "limit_gap": "书商的规矩是只买名字，你知道那名字是借来的",
+    "meeting_reason": "你在横滨的每一天，两个人都陪着",
+    "resource_gap": "你有书店和稿费，{famous_translator.name}有名字，{comprador.name}有关门里的消息"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_byline",
+    "te_gate_line"
+   ]
+  },
+  {
+   "chemistry": "老爷要洋装，太太要吴服，这笔大订单归你定；{tailor_owner.name}和{gofuku_heir.name}都来求你，{gofuku_heir.name}却偷偷说，自己更想做洋装。",
+   "id": "k_steward_order",
+   "identity_ids": [
+    "noble_steward"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "tailor_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{tailor_owner.name}替你量过一次尺寸，什么都没多问",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "gofuku_heir",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{gofuku_heir.name}在越前屋的门帘前给你行过一个很深的礼",
+     "stage": "acquainted"
+    },
+    {
+     "a": "tailor_owner",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "gofuku_heir",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "两家店是死对头，两个人却偷偷说过话",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "tailor_owner",
+    "gofuku_heir"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把老爷太太两边都摆平，又不想看着哪一家倒下",
+    "limit_gap": "订单给谁，另一家就要伤筋动骨",
+    "meeting_reason": "这一个月你住在町内，两家店天天派人来请",
+    "resource_gap": "你有华族家的订单，{tailor_owner.name}有町内唯一的缝纫机，{gofuku_heir.name}有一百年的门帘"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_old_new",
+    "te_half_curtain"
+   ]
+  },
+  {
+   "chemistry": "{tailor_owner.name}的那些旧金山来信一封没拆，{proofreader.name}说可以替{tailor_owner.ta}念；那天试衣间的帘子只拉了一半，你看见了两个人之间不该被人看见的一眼。",
+   "id": "k_half_curtain",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "tailor_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{tailor_owner.name}替你改过一件衣服",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "proofreader",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{proofreader.name}给你念过一首英文诗",
+     "stage": "acquainted"
+    },
+    {
+     "a": "tailor_owner",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "proofreader",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 2
+     },
+     "reason": "两个人之间那一眼，谁也没提",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "tailor_owner",
+    "proofreader"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道那些信里写着什么，也想知道那一眼是什么意思",
+    "limit_gap": "旧金山的船这个月又要到了",
+    "meeting_reason": "你和两个人都熟，常在千鹤屋和译书所之间走动",
+    "resource_gap": "{tailor_owner.name}有一摞没拆的信，{proofreader.name}有一手好英文，你看见了那一眼"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_half_curtain",
+    "te_gone_west"
+   ]
+  },
+  {
+   "chemistry": "居留地的舞会下个月开；{official_client.name}要一套尺寸不对的礼服，{gofuku_heir.name}偷偷做了一件洋装想穿去，{famous_translator.name}要在舞会上当翻译，可{famous_translator.ta}已经看不清请帖上的字。",
+   "id": "k_ball_night",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "official_client",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{official_client.name}托你办过一件小事",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "gofuku_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{gofuku_heir.name}只让你看过那件洋装",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "famous_translator",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{famous_translator.name}让你替{famous_translator.ta}念过一封信",
+     "stage": "acquainted"
+    },
+    {
+     "a": "official_client",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "gofuku_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{official_client.name}欠越前屋一条命",
+     "stage": "acquainted"
+    },
+    {
+     "a": "official_client",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "famous_translator",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{famous_translator.name}替县厅翻过几份洋文告示",
+     "stage": "acquainted"
+    },
+    {
+     "a": "gofuku_heir",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "famous_translator",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{famous_translator.name}夸过越前屋的绸缎",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "official_client",
+    "gofuku_heir",
+    "famous_translator"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想让那一夜，三个人都别出事",
+    "limit_gap": "舞会只有一夜，关门一关，谁都回不来",
+    "meeting_reason": "三个人这个月都绕着舞会转",
+    "resource_gap": "{official_client.name}有请帖和执照，{gofuku_heir.name}有一件没人知道的洋装，{famous_translator.name}有名字，你是三个人都愿意托付一件事的人"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_old_new",
+    "te_gate_line"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_curtain",
+   "reach": "一家店挂出什么字，全町一早就看见",
+   "text": "门帘上的字"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_elder_talk",
+   "reach": "从婚丧礼数说起，传到第三家已经变成了另一件事",
+   "text": "世话役的闲话"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_ship_mail",
+   "reach": "一个月一班船，信上写的什么只有收信人知道",
+   "text": "旧金山来的邮袋"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "洋裁店「千鹤屋」的店主，成年人，伴侣三年前去了美国就再没回来",
+   "age_range": [
+    28,
+    40
+   ],
+   "appearance_options": [
+    "一截软尺总挂在脖子上，手腕上别着一只针插",
+    "穿一件改过的洋装，腰身是自己量的，袖子是自己缝的"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说成被扔下的人"
+    ],
+    "contrast": "替整个町量了五年的身体，自己的心事一个数字都没记",
+    "core_value": "尺寸不会骗人",
+    "goal_options": [
+     "让店用自己的名字续下去",
+     "做出一件让整个横滨都记住的礼服",
+     "决定那些没拆的信还拆不拆"
+    ],
+    "never": [
+     "把客人的尺寸说给外人听"
+    ],
+    "prefers": [
+     "先量尺寸"
+    ],
+    "pressure_responses": {
+     "breaking": "收起缝纫机，把店门的钥匙寄去旧金山",
+     "high": "当着吴服店的人说出某位客人真正的尺寸",
+     "low": "把软尺绕在手上，说“先量，再说”",
+     "mid": "把尺寸簿翻到那一页，让对方看那个被改过的数字"
+    },
+    "relationship_stance": "手上利落，心里打结",
+    "withdrawal": "打烊后一个人坐在木人台前，把伴侣留下的那件西装拆了又缝"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "tailor_owner",
+   "identity": {
+    "authority": "决定谁的礼服先做、尺寸簿上的哪个数字可以改",
+    "exposure": "{npc.ta}在尺寸簿上替一个客人改过一个数字，替那人瞒下了一件事",
+    "hidden": "{npc.ta}每个月都去波止场等旧金山的船，信却一封也没拆",
+    "limits": [
+     "店是伴侣的名字开的，伴侣不回来，契约就没法续",
+     "吴服店的人说洋裁伤风败俗"
+    ],
+    "obligations": [
+     "每月十五去关门里给洋人太太量一次尺寸"
+    ],
+    "resources": [
+     "一本记了五年的尺寸簿和町内唯一一台缝纫机",
+     "居留地里几位洋人太太的订单"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方的手稳，替{npc.ta}扣扣子时不抖",
+     "对方不问那些没拆的信"
+    ],
+    "boundaries": [
+     "铺面上没有客人"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢拆开那些信的那个人",
+    "dislikes": [
+     "被当成一台缝纫机"
+    ],
+    "expression": "让对方替{npc.ta}量一次尺寸，数字只记在对方心里",
+    "likes": [
+     "软尺贴着身体慢慢绕过去的那一刻"
+    ],
+    "preconditions": [
+     "帘子已经拉严"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "千鹤屋的店主",
+   "schedule": [
+    {
+     "from": 480,
+     "location_id": "tailor_shop",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "fitting_room",
+     "to": 1260
+    },
+    {
+     "from": 900,
+     "location_id": "harbor",
+     "to": 960
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "{npc.ta}会知道伴侣到底还回不回来",
+      "option": "拆信"
+     },
+     {
+      "cost": "下个月房主就把铺面租给吴服店",
+      "option": "不拆，另想办法"
+     }
+    ],
+    "pressure": "那些信里也许就有，也许什么都没有",
+    "trigger": "房主说店的契约要换成{npc.ta}自己的名字，得有伴侣的亲笔信"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“尺寸簿上的数我改了一个，那个人到今天都不知道。”",
+    "surface": "“铺面上还有客人。能请你帮我把这一颗扣上吗？”"
+   }
+  },
+  {
+   "adult_context": "译书所的校对员，成年人，替一位有名的翻译家改了一半的稿子",
+   "age_range": [
+    25,
+    38
+   ],
+   "appearance_options": [
+    "一副圆眼镜，指尖被朱墨染红",
+    "说话慢，常常停下来找一个更准的词"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说只会挑错"
+    ],
+    "contrast": "替别人找了三年最准的词，自己想说的那一句一直没找到",
+    "core_value": "一个字也不能错",
+    "goal_options": [
+     "让扉页上有自己的名字",
+     "把那本书译到无可挑剔",
+     "知道翻译家为什么从不改自己的那一章"
+    ],
+    "never": [
+     "故意译错一个词去害人"
+    ],
+    "prefers": [
+     "先查原文"
+    ],
+    "pressure_responses": {
+     "breaking": "把自己改过的所有稿子抽回来，烧在译书所门口",
+     "high": "当着排字房的人说出那一章是谁译的",
+     "low": "推一推眼镜，说“这个词不对”",
+     "mid": "把两份稿子并排摊开，指给对方看哪一份是谁的"
+    },
+    "relationship_stance": "下笔准，开口犹豫",
+    "withdrawal": "夜里一个人坐在楼上的长桌前，把扉页上的名字一笔一笔描成自己的"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "proofreader",
+   "identity": {
+    "authority": "决定一页译稿上哪个词留下、哪个词划掉",
+    "exposure": "那本要出的译书里最好的一章是{npc.ta}重译的，翻译家一个字没动",
+    "hidden": "{npc.ta}在译稿的空白处写了一首诗，一直没擦",
+    "limits": [
+     "扉页上只能写一个人的名字，不是{npc.ta}",
+     "{npc.ta}没有出过洋，翻译家一句话就能让{npc.ta}走人"
+    ],
+    "obligations": [
+     "每晚改完二十页才能下楼"
+    ],
+    "resources": [
+     "一手好英文和译书所三年的稿子",
+     "排字房的人只认{npc.ta}改过的稿"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方读得出{npc.ta}改过的那一章",
+     "对方不催{npc.ta}把话说完"
+    ],
+    "boundaries": [
+     "不在长桌前"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}不用再找词的那个人",
+    "dislikes": [
+     "被当成一支朱笔"
+    ],
+    "expression": "把稿子空白处那首诗念给对方听",
+    "likes": [
+     "深夜楼上只剩一盏灯的时候"
+    ],
+    "preconditions": [
+     "稿子已经交给排字房"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "译书所校对员",
+   "schedule": [
+    {
+     "from": 540,
+     "location_id": "translation_office",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "machi_street",
+     "to": 1320
+    },
+    {
+     "from": 720,
+     "location_id": "tailor_shop",
+     "to": 780
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "翻译家会让{npc.ta}卷铺盖走人",
+      "option": "去找翻译家要署名"
+     },
+     {
+      "cost": "以后每一本书都会是这样",
+      "option": "认了"
+     }
+    ],
+    "pressure": "名字一印上，那一章就永远是别人的了",
+    "trigger": "译书所说下月付印，扉页上的名字已经排好"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“书上写的是别人的名字，可那些句子是我的。”",
+    "surface": "“这个词不对。原文的意思，比这个更轻。”"
+   }
+  },
+  {
+   "adult_context": "吴服店「越前屋」的少当家，成年人，被家里逼着去学洋裁",
+   "age_range": [
+    22,
+    32
+   ],
+   "appearance_options": [
+    "穿着家里的绸缎羽织，袖子里却藏着一截洋裁店的软尺",
+    "说话有大店人家的规矩，笑起来却不像"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说丢了家里的脸"
+    ],
+    "contrast": "替一百年的门帘撑着体面，自己穿什么都不能自己选",
+    "core_value": "门帘上的字比命重",
+    "goal_options": [
+     "让越前屋活过这个新时代",
+     "做一件只属于自己的洋装",
+     "推掉那门亲事"
+    ],
+    "never": [
+     "当众违背家里的规矩"
+    ],
+    "prefers": [
+     "先看门帘"
+    ],
+    "pressure_responses": {
+     "breaking": "把家纹的册子交给番头，一个人搬去关门那边",
+     "high": "当着番头的面说自己要学洋裁",
+     "low": "理一理羽织的袖子，说“家里有规矩”",
+     "mid": "从袖子里抽出那截软尺给对方看"
+    },
+    "relationship_stance": "人前守礼，人后叛逆",
+    "withdrawal": "夜里在越前屋的仓库里，对着一面旧镜子把那件没做完的洋装比了又比"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "gofuku_heir",
+   "identity": {
+    "authority": "决定越前屋接不接洋装的生意",
+    "exposure": "{npc.ta}偷偷去千鹤屋量过自己的尺寸，想做一件穿给自己看的洋装",
+    "hidden": "家里替{npc.ta}订了一门亲事，对方要的是一件吴服的嫁衣",
+    "limits": [
+     "家里要{npc.ta}守着吴服，又要{npc.ta}学洋裁来抢生意",
+     "町里的人都看着越前屋的门帘"
+    ],
+    "obligations": [
+     "每天早上替家里在门帘前行礼"
+    ],
+    "resources": [
+     "一百年的老店和几十家主顾的家纹",
+     "家里给的一笔学洋裁的钱"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不把{npc.ta}当成越前屋",
+     "对方夸{npc.ta}穿洋装的样子"
+    ],
+    "boundaries": [
+     "不在越前屋里"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢自己选衣服的那个人",
+    "dislikes": [
+     "被当成一块招牌"
+    ],
+    "expression": "穿上那件洋装，只让对方一个人看",
+    "likes": [
+     "软尺绕过手腕时那一下凉"
+    ],
+    "preconditions": [
+     "门帘已经收进去了"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "越前屋的少当家",
+   "schedule": [
+    {
+     "from": 420,
+     "location_id": "gofuku_shop",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "tailor_shop",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "machi_street",
+     "to": 1320
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "越前屋会被整个町笑话",
+      "option": "去提亲的人家说不"
+     },
+     {
+      "cost": "那件洋装就永远做不完了",
+      "option": "答应"
+     }
+    ],
+    "pressure": "嫁衣一做好，{npc.ta}就再也碰不了洋裁",
+    "trigger": "亲事的日子定在下个月，对方家里来人看嫁衣"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我想穿一件不用跪着穿的衣服。”",
+    "surface": "“家里有规矩。可规矩没说，我不能自己量一量。”"
+   }
+  },
+  {
+   "adult_context": "有名的翻译家，成年人，出过洋，译过十几本西书",
+   "age_range": [
+    40,
+    55
+   ],
+   "appearance_options": [
+    "一身合体的西装，口袋里插着一支钢笔",
+    "说话时常夹一两个英文词，笑容很得体"
+   ],
+   "decision": {
+    "avoids": [
+     "被人当面说眼睛不行了"
+    ],
+    "contrast": "让无数人读懂了西洋，自己最怕的是被人读懂",
+    "core_value": "名字比人活得久",
+    "goal_options": [
+     "保住自己的名字",
+     "在眼睛完全看不见之前译完最后一本书",
+     "替旧金山那个人带一句话"
+    ],
+    "never": [
+     "当众羞辱替自己干活的人"
+    ],
+    "prefers": [
+     "先维持体面"
+    ],
+    "pressure_responses": {
+     "breaking": "封笔，把所有书稿捐给译书所，从此不再署名",
+     "high": "当众承认有一章不是自己译的",
+     "low": "笑着说“这个问题很有意思”",
+     "mid": "把一本自己署名的书递过去，翻到扉页"
+    },
+    "relationship_stance": "体面，害怕",
+    "withdrawal": "夜里摘了眼镜，凑近灯一个字一个字地读，读到眼泪流下来"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "famous_translator",
+   "identity": {
+    "authority": "决定哪本书译、署谁的名",
+    "exposure": "{npc.ta}最近三本书，一大半是校对员译的",
+    "hidden": "{npc.ta}在美国认识一个人，就是千鹤屋那位一去不回的伴侣",
+    "limits": [
+     "近来眼睛坏了，看不清小字",
+     "书商只认{npc.ta}的名字，名字一倒，译书所就倒"
+    ],
+    "obligations": [
+     "每月给东京的报馆写一篇西洋见闻"
+    ],
+    "resources": [
+     "十几本书上的名字和东京几位大人物的赏识",
+     "译书所一半的稿约"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不戳破{npc.ta}的体面",
+     "对方肯替{npc.ta}念一页稿子"
+    ],
+    "boundaries": [
+     "不在人前"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "看清{npc.ta}以后还肯留下的那个人",
+    "dislikes": [
+     "被当成一个名字"
+    ],
+    "expression": "让对方替{npc.ta}念完最后一页，再把真话说出来",
+    "likes": [
+     "灯下有人替{npc.ta}读书的声音"
+    ],
+    "preconditions": [
+     "客人都走了"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "翻译家",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "translation_office",
+     "to": 900
+    },
+    {
+     "from": 901,
+     "location_id": "settlement_gate",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "harbor",
+     "to": 1260
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "大家会猜到{npc.ta}眼睛的事",
+      "option": "请人代读"
+     },
+     {
+      "cost": "读错一个字，书商就会起疑",
+      "option": "自己硬读"
+     }
+    ],
+    "pressure": "{npc.ta}的眼睛已经看不清序上的字",
+    "trigger": "东京的书商要{npc.ta}下个月当众朗读新书的序"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我的名字是借来的，眼睛也快要还回去了。”",
+    "surface": "“这个问题很有意思。在伦敦的时候，我也想过。”"
+   }
+  },
+  {
+   "adult_context": "居留地英国商馆的日本番头，成年人，替洋人做了八年的生意",
+   "age_range": [
+    28,
+    42
+   ],
+   "appearance_options": [
+    "一半和服一半洋装：外面是羽织，里面是浆过的白衬衫",
+    "说英语比说家乡话还顺，算账从不出错"
+   ],
+   "decision": {
+    "avoids": [
+     "被人叫“洋奴”"
+    ],
+    "contrast": "替两种人传了八年的话，自己的话谁也不听",
+    "core_value": "站在门槛上的人，两边都得算清",
+    "goal_options": [
+     "在商馆撤走之前替自己找一条后路",
+     "替千鹤屋拿下一笔大订单",
+     "在关门里外找到一个能说真话的人"
+    ],
+    "never": [
+     "替洋人去压价压到人家活不下去"
+    ],
+    "prefers": [
+     "先看风向"
+    ],
+    "pressure_responses": {
+     "breaking": "交了通行札，在码头上一个人坐到船开",
+     "high": "当着两家店的面说出商馆要撤",
+     "low": "用英文客套一句，说“生意好说”",
+     "mid": "从怀里掏出一张订单，只给对方看一角"
+    },
+    "relationship_stance": "两边都客气，两边都不信",
+    "withdrawal": "关门以后一个人站在关门外，看居留地的灯一盏一盏熄灭"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "comprador",
+   "identity": {
+    "authority": "决定哪家日本店能接到商馆的订单",
+    "exposure": "商馆要撤出横滨，{npc.ta}还没告诉任何一家等订单的店",
+    "hidden": "{npc.ta}偷偷替千鹤屋压下了一张吴服店的订单",
+    "limits": [
+     "日本人骂{npc.ta}是洋人的狗，洋人也从不把{npc.ta}当自己人",
+     "商馆随时可能撤走"
+    ],
+    "obligations": [
+     "每晚关门前回商馆交账"
+    ],
+    "resources": [
+     "商馆的订单和一张随时能进出关门的通行札",
+     "洋人那边的消息"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不叫{npc.ta}洋奴",
+     "对方愿意听{npc.ta}讲关门里面的事"
+    ],
+    "boundaries": [
+     "不在关门边上"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "两边都不是也愿意站在{npc.ta}身边的那个人",
+    "dislikes": [
+     "被当成一张通行札"
+    ],
+    "expression": "带对方去居留地里看一次洋人的舞会，只在窗外看",
+    "likes": [
+     "关门关上以后街上的那阵安静"
+    ],
+    "preconditions": [
+     "通行札已经交回番所"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "商馆番头",
+   "schedule": [
+    {
+     "from": 540,
+     "location_id": "settlement_gate",
+     "to": 1020
+    },
+    {
+     "from": 1021,
+     "location_id": "machi_street",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "harbor",
+     "to": 1260
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "吴服店会说{npc.ta}吃里扒外",
+      "option": "赶在撤走前把订单给千鹤屋"
+     },
+     {
+      "cost": "从此再也回不了这个町",
+      "option": "跟商馆一起走"
+     }
+    ],
+    "pressure": "那张压下来的订单，撤走以后就没人认了",
+    "trigger": "商馆下个月撤出横滨，{npc.ta}的位子也跟着没了"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“关门一关，我在哪一边都不算数。”",
+    "surface": "“生意好说。Business is business，对吧？”"
+   }
+  },
+  {
+   "adult_context": "县厅的官员，成年人，下个月要带家眷去居留地的舞会",
+   "age_range": [
+    32,
+    50
+   ],
+   "appearance_options": [
+    "一身新做的西装，胡子修得很整齐",
+    "说话客气，每句话都像在宣读告示"
+   ],
+   "decision": {
+    "avoids": [
+     "被人揭穿私事"
+    ],
+    "contrast": "替整个町定了十年的规矩，自己心里那一条一直没敢立",
+    "core_value": "体面就是规矩",
+    "goal_options": [
+     "让舞会上的家眷不丢县厅的脸",
+     "把那套尺寸不对的礼服悄悄做出来",
+     "还上欠越前屋的人情"
+    ],
+    "never": [
+     "用执照逼一家店做亏本的生意"
+    ],
+    "prefers": [
+     "先讲体面"
+    ],
+    "pressure_responses": {
+     "breaking": "撕了请帖，一个人去波止场坐了一夜",
+     "high": "当众宣布哪家店的执照要重审",
+     "low": "拱拱手，说“町内的事，好商量”",
+     "mid": "把舞会的请帖放在桌上，用手指按着"
+    },
+    "relationship_stance": "嘴上告示，心里私情",
+    "withdrawal": "夜里一个人坐在县厅的值房里，把那张写着尺寸的纸条看了又看"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "official_client",
+   "identity": {
+    "authority": "决定町内谁家的店能拿到官府的订单",
+    "exposure": "{npc.ta}订的那套礼服尺寸，不是家眷的",
+    "hidden": "{npc.ta}年轻时在吴服店的仓库里躲过一场大火，欠越前屋一条命",
+    "limits": [
+     "上面要町内‘文明开化’，又要守住旧礼",
+     "家眷不喜欢洋装，{npc.ta}却必须穿着去舞会"
+    ],
+    "obligations": [
+     "每月巡视一次町内的店铺"
+    ],
+    "resources": [
+     "县厅的官职和町内的营业执照",
+     "居留地舞会的请帖"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方替{npc.ta}守住那张纸条的秘密",
+     "对方不在{npc.ta}面前讲规矩"
+    ],
+    "boundaries": [
+     "不穿官服的时候"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}可以不讲体面的那个人",
+    "dislikes": [
+     "被当成一纸告示"
+    ],
+    "expression": "把那张写着尺寸的纸条交给对方，说出它是谁的",
+    "likes": [
+     "舞会散场后马车里的黑"
+    ],
+    "preconditions": [
+     "请帖已经收起"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "县厅官员",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "machi_street",
+     "to": 840
+    },
+    {
+     "from": 841,
+     "location_id": "tailor_shop",
+     "to": 960
+    },
+    {
+     "from": 961,
+     "location_id": "gofuku_shop",
+     "to": 1080
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "店主会知道{npc.ta}的秘密",
+      "option": "让洋裁店照纸条做"
+     },
+     {
+      "cost": "{npc.ta}要辜负另一个人",
+      "option": "按家眷的尺寸做"
+     }
+    ],
+    "pressure": "礼服的尺寸一对，事情就露了",
+    "trigger": "舞会就在下个月，礼服要做，尺寸的事不能让家眷知道"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“那套礼服的尺寸，不是给家里人的。”",
+    "surface": "“町内的事，好商量。只是这套礼服，要快。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "明治十四年初秋，一个起雾的下午",
+  "minute": 870
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "romance_light",
+  "intimate"
+ ],
+ "custom": false,
+ "customs": [
+  "新店开张，要给町内每家送一块手巾，手巾上印店名。",
+  "量体之前，裁缝要先洗手，当着客人的面擦干。",
+  "译书付印那天，译书所请排字房喝一顿酒，署名的人坐上座。",
+  "吴服店年底换门帘，旧门帘剪成小块分给老主顾。",
+  "旧金山的船靠岸那天，町内有人在美国的人家，会在门口挂一盏灯。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "软尺绕过肩膀，停了一下",
+    "划粉在料子上留下一道白线",
+    "铺面上的门铃响了"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_measure",
+   "location_ids": [
+    "tailor_shop",
+    "fitting_room"
+   ],
+   "start_minute": 900,
+   "tags": [],
+   "title": "量一次尺寸"
+  },
+  {
+   "beats": [
+    "缝纫机的针脚走歪了一针",
+    "煤油灯的灯芯要剪了",
+    "窗外的煤气灯一盏盏亮起来"
+   ],
+   "duration_minutes": 90,
+   "hook_ids": [],
+   "id": "a_sewing_machine",
+   "location_ids": [
+    "tailor_shop"
+   ],
+   "start_minute": 1140,
+   "tags": [],
+   "title": "踩缝纫机赶工"
+  },
+  {
+   "beats": [
+    "原文的一个词有两个意思",
+    "朱笔划掉了一整行",
+    "楼下的排字房在喊要稿子"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [],
+   "id": "a_proofread",
+   "location_ids": [
+    "translation_office"
+   ],
+   "start_minute": 1200,
+   "tags": [],
+   "title": "改一页译稿"
+  },
+  {
+   "beats": [
+    "番头把一匹京都绸缎抖开",
+    "门帘外有人往里看",
+    "账场后面传来算盘声"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_silk_look",
+   "location_ids": [
+    "gofuku_shop"
+   ],
+   "start_minute": 960,
+   "tags": [],
+   "title": "去吴服店看绸缎"
+  },
+  {
+   "beats": [
+    "洋人的马车从身边驶过",
+    "番所的人在验通行札",
+    "关门里飘出钢琴的声音"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_gate_walk",
+   "location_ids": [
+    "settlement_gate"
+   ],
+   "start_minute": 1050,
+   "tags": [],
+   "title": "在关门前走一走"
+  },
+  {
+   "beats": [
+    "海雾把港口遮了一半",
+    "汽笛响了两声",
+    "邮袋扔上码头，溅起一片水"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [],
+   "id": "a_wait_ship",
+   "location_ids": [
+    "harbor"
+   ],
+   "start_minute": 930,
+   "tags": [],
+   "title": "去波止场等船"
+  },
+  {
+   "beats": [
+    "点灯人举着长竿走过",
+    "吴服店收起了门帘",
+    "石板路上有一枚掉落的扣子"
+   ],
+   "duration_minutes": 25,
+   "hook_ids": [],
+   "id": "a_gaslight_walk",
+   "location_ids": [
+    "machi_street"
+   ],
+   "start_minute": 1110,
+   "tags": [],
+   "title": "煤气灯下散步"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "明治十四年",
+ "extends": null,
+ "forbidden_terms": [
+  "手机",
+  "电话",
+  "汽车",
+  "电视",
+  "收音机",
+  "民国",
+  "昭和",
+  "平成",
+  "学生",
+  "少女",
+  "少年"
+ ],
+ "hooks": [
+  {
+   "id": "h_button",
+   "kind": "approach",
+   "location_ids": [
+    "fitting_room",
+    "tailor_shop"
+   ],
+   "slot": "tailor_owner",
+   "text": "{npc.name}从帘后探出半张脸：“能请你帮我把这一颗扣上吗？”"
+  },
+  {
+   "id": "h_measure_you",
+   "kind": "approach",
+   "location_ids": [
+    "tailor_shop",
+    "fitting_room"
+   ],
+   "slot": "tailor_owner",
+   "text": "{npc.name}把软尺绕过你的肩，停了一下：“别动，我记一个数，只记在心里。”"
+  },
+  {
+   "id": "h_letters_ask",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "tailor_owner",
+   "text": "{npc.name}把一摞没拆的信推到你面前：“你替我拆一封，就一封。”"
+  },
+  {
+   "id": "h_poem_margin",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "proofreader",
+   "text": "{npc.name}把一页译稿递给你，空白处是一首诗：“这一行，我想念给你听。”"
+  },
+  {
+   "id": "h_red_ink",
+   "kind": "observe",
+   "location_ids": [],
+   "slot": "proofreader",
+   "text": "{npc.name}停下朱笔，从眼镜上方看了你很久，忘了往下写"
+  },
+  {
+   "id": "h_hidden_tape",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "gofuku_heir",
+   "text": "{npc.name}从袖子里抽出一截软尺，塞到你手里：“替我量一下，别告诉家里。”"
+  },
+  {
+   "id": "h_dress_show",
+   "kind": "approach",
+   "location_ids": [
+    "tailor_shop",
+    "fitting_room"
+   ],
+   "slot": "gofuku_heir",
+   "text": "{npc.name}把一件洋装比在身上，转了半圈：“你说，我穿这个，像不像我自己？”"
+  },
+  {
+   "id": "h_read_for_me",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "famous_translator",
+   "text": "{npc.name}把一页稿子递给你，声音压得很低：“念给我听，我看不清了。”"
+  },
+  {
+   "id": "h_translator_bow",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "famous_translator",
+   "text": "{npc.name}摘下眼镜，凑近你：“你是第一个看出来的人，我该谢你，还是该怕你？”"
+  },
+  {
+   "id": "h_window_ball",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "comprador",
+   "text": "{npc.name}拉着你走到关门边：“今晚居留地有舞会，我带你在窗外看一眼。”"
+  },
+  {
+   "id": "h_order_corner",
+   "kind": "observe",
+   "location_ids": [],
+   "slot": "comprador",
+   "text": "{npc.name}从怀里掏出一张订单，只让你看了一角，又收了回去"
+  },
+  {
+   "id": "h_slip_paper",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "official_client",
+   "text": "{npc.name}把一张写着尺寸的纸条塞进你手里：“这件事，我只托你。”"
+  },
+  {
+   "id": "h_carriage_rain",
+   "kind": "accident",
+   "location_ids": [
+    "machi_street",
+    "settlement_gate",
+    "harbor"
+   ],
+   "slot": "official_client",
+   "text": "一阵急雨，{npc.name}的马车停在你面前，车门开了：“上来，雨大。”"
+  }
+ ],
+ "id": "yosai_machi",
+ "locations": [
+  {
+   "affordances": [
+    "翻一翻尺寸簿上的数字",
+    "用手掂一掂英国呢料的分量",
+    "看店主用划粉在料子上画一道线"
+   ],
+   "detail": "一间铺面不大的洋裁店，玻璃橱窗里立着一具穿洋装的木人台，案板上摊着英国来的呢料，墙上挂着一本磨毛了边的尺寸簿。",
+   "exits": [
+    "machi_street",
+    "fitting_room"
+   ],
+   "id": "tailor_shop",
+   "name": "洋裁店「千鹤屋」",
+   "pressure_modifiers": {
+    "p_changed_size": "尺寸簿摊在案板上，有一行数字被人用小刀刮过又重写了。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "铺面上的客人看得见案板和木人台，看不见里间的帘子后面",
+   "witnesses": [
+    "bg_seamstress"
+   ]
+  },
+  {
+   "affordances": [
+    "隔着帘子递进去一截软尺",
+    "在镜子里看见身后的人",
+    "替人扣一颗够不着的扣子"
+   ],
+   "detail": "铺面后面一间小屋，一面西洋穿衣镜，一道蓝布帘子，帘子的铜环拉起来会响。",
+   "exits": [
+    "tailor_shop"
+   ],
+   "id": "fitting_room",
+   "name": "试衣间",
+   "pressure_modifiers": {
+    "p_half_curtain": "帘子的铜环卡住了，帘子只拉了一半。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "帘子一拉，里面就是客人的地方；帘子只拉一半，铺面上的人能看见镜子里的一角",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "在煤气灯下等一个人",
+    "看吴服店和洋裁店的门帘谁先挂出来",
+    "躲进一家店的屋檐下避雨"
+   ],
+   "detail": "一条石板路，一头通居留地的关门，一头通老町，洋裁店、吴服店、译书所、洋食屋门对门，煤气灯是今年才装的。",
+   "exits": [
+    "tailor_shop",
+    "gofuku_shop",
+    "translation_office",
+    "settlement_gate"
+   ],
+   "id": "machi_street",
+   "name": "町内通",
+   "pressure_modifiers": {
+    "p_client_war": "吴服店的伙计和洋裁店的缝子在街当中拦住了同一辆人力车。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "门对门的几家店都看得见街上，谁从谁家出来、手里拿着什么，半天就传遍町内",
+   "witnesses": [
+    "bg_lamp_lighter",
+    "bg_neighborhood_elder"
+   ]
+  },
+  {
+   "affordances": [
+    "摸一摸刚到的京都绸缎",
+    "看番头在账场后面拨算盘",
+    "在门帘前停一停，读上面的字"
+   ],
+   "detail": "町里开了一百年的吴服店，铺面上叠着一匹匹绸缎，账场后面挂着祖传的门帘，柜里收着几十家的家纹。",
+   "exits": [
+    "machi_street"
+   ],
+   "id": "gofuku_shop",
+   "name": "吴服店「越前屋」",
+   "pressure_modifiers": {
+    "p_client_war": "账场上摊着一张写着客人家纹的订单，墨还没干。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "番头和伙计守着铺面；账场的帘子后面说话，铺面上听不清",
+   "witnesses": [
+    "bg_banto"
+   ]
+  },
+  {
+   "affordances": [
+    "在一页译稿上找一个译错的词",
+    "看校对员用朱笔划掉一整段",
+    "在排字房闻油墨的味道"
+   ],
+   "detail": "一栋两层的木楼，楼下是排字房，楼上一排长桌，桌上堆满英文原书和写满朱笔的译稿，窗外能看见港口的桅杆。",
+   "exits": [
+    "machi_street"
+   ],
+   "id": "translation_office",
+   "name": "译书所",
+   "pressure_modifiers": {
+    "p_byline": "排字房的铅字盘里，扉页上的名字已经排好了。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "楼上的校对员各管各的稿子；楼下排字房的人只认得稿子上的署名",
+   "witnesses": [
+    "bg_typesetter"
+   ]
+  },
+  {
+   "affordances": [
+    "在关门前把通行札递给番所",
+    "看一辆洋人的马车驶进关内",
+    "隔着关门和里面的人说最后一句话"
+   ],
+   "detail": "町和外国人居留地之间的一道关门，门边一间番所，入夜就关，没有通行札的日本人不许留在关内。",
+   "exits": [
+    "machi_street",
+    "harbor"
+   ],
+   "id": "settlement_gate",
+   "name": "居留地关门",
+   "pressure_modifiers": {
+    "p_gate_close": "番所的钟敲了，关门的木栅开始往回推。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "番所的人看着每一个进出的人，关门前的半个钟头最热闹",
+   "witnesses": [
+    "bg_gate_guard"
+   ]
+  },
+  {
+   "affordances": [
+    "看一艘从旧金山来的船靠岸",
+    "在货箱之间读一封刚到的信",
+    "听汽笛声盖过所有人的说话声"
+   ],
+   "detail": "关门外是港口的石堤，蒸汽船和帆船挤在一起，码头上堆着从美国、英国运来的货箱，船票在码头边的小屋里卖。",
+   "exits": [
+    "settlement_gate"
+   ],
+   "id": "harbor",
+   "name": "波止场",
+   "pressure_modifiers": {
+    "p_ship_letter": "旧金山来的船靠岸了，邮袋正一只只扔上码头。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "搬运工、水手、等船的人；谁在码头上等哪一艘船，大家都看得见",
+   "witnesses": []
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "高木",
+   "冈田",
+   "森",
+   "石川",
+   "藤井",
+   "斋藤",
+   "前田",
+   "西村",
+   "远山",
+   "小野",
+   "青木",
+   "原田",
+   "桑原",
+   "长谷川"
+  ],
+  "given_female": [
+   "千鹤",
+   "菊",
+   "梅",
+   "雪",
+   "静",
+   "文",
+   "琴",
+   "缝",
+   "民",
+   "常",
+   "照",
+   "鹤乃"
+  ],
+  "given_male": [
+   "新之助",
+   "清太郎",
+   "喜一",
+   "荣次",
+   "德藏",
+   "文吉",
+   "源三",
+   "正雄",
+   "和助",
+   "辰吉",
+   "伊之助",
+   "平八"
+  ],
+  "given_neutral": [
+   "葵",
+   "薰",
+   "光",
+   "环",
+   "若",
+   "澄",
+   "冬",
+   "朔",
+   "渚",
+   "茜",
+   "律",
+   "晴"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "female",
+    "pattern": "阿{given}"
+   },
+   {
+    "gender": "male",
+    "pattern": "{family}君"
+   },
+   {
+    "gender": "any",
+    "pattern": "{given}"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 11 个）。性别按会话偏好生成（D15）。",
+ "player_identities": [
+  {
+   "age_range": [
+    19,
+    28
+   ],
+   "baseline": "你在千鹤屋做缝子，会踩缝纫机、会锁扣眼，还不会量尺寸。",
+   "gender": "any",
+   "id": "seam_helper",
+   "reputation": "手巧，嘴紧",
+   "resources": [
+    "一手好针线",
+    "千鹤屋每一位客人的样子"
+   ],
+   "risks": [
+    "你见过尺寸簿上那个被改过的数字"
+   ],
+   "role": "千鹤屋的缝子",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "阿{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    20,
+    30
+   ],
+   "baseline": "你在译书所誊抄译稿，一天抄三十页，英文认得一半。",
+   "gender": "any",
+   "id": "copyist",
+   "reputation": "细心，胆小",
+   "resources": [
+    "一手端正的字",
+    "所有译稿你都经过手"
+   ],
+   "risks": [
+    "你抄错过一页，校对员替你瞒下了"
+   ],
+   "role": "译书所的抄写员",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}君"
+    },
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    45
+   ],
+   "baseline": "你在町口开一间写真馆，町里的人穿什么去照相，你最先知道。",
+   "gender": "any",
+   "id": "photographer",
+   "reputation": "眼尖，好奇",
+   "resources": [
+    "一台从居留地买来的照相机和一间暗房",
+    "町内一半人家的合影底片"
+   ],
+   "risks": [
+    "你替一个人拍过一张不能给家里看的照片"
+   ],
+   "role": "町内写真馆的主人",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    25,
+    42
+   ],
+   "baseline": "你在居留地边上开一间洋食屋，洋人和日本人都来吃，你两边的话都听得懂一点。",
+   "gender": "any",
+   "id": "western_cook",
+   "reputation": "爽快，好管闲事",
+   "resources": [
+    "一间洋食屋和关门里几位洋人厨子的交情",
+    "町内的人都在你店里说过醉话"
+   ],
+   "risks": [
+    "你欠商馆一笔进货的钱"
+   ],
+   "role": "洋食屋的厨师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "阿{given}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    35,
+    55
+   ],
+   "baseline": "你在东京开书店、出译书，这次来横滨是要签下一本大书。",
+   "gender": "any",
+   "id": "publisher",
+   "reputation": "眼光毒，出手快",
+   "resources": [
+    "东京的书店和报馆的门路",
+    "一笔可以买下任何署名的稿费"
+   ],
+   "risks": [
+    "你知道那位翻译家的眼睛出了问题"
+   ],
+   "role": "东京来的书商",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}社长"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    35,
+    55
+   ],
+   "baseline": "你替一位华族老爷管家，老爷一家下个月要去舞会，礼服的事归你定。",
+   "gender": "any",
+   "id": "noble_steward",
+   "reputation": "讲礼数，说一不二",
+   "resources": [
+    "华族家的订单和一张随时能拿出的名片",
+    "东京一半吴服店都想讨好你"
+   ],
+   "risks": [
+    "老爷要洋装，太太要吴服，两边都要你来摆平"
+   ],
+   "role": "华族家的家令",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}家令"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}大人"
+    }
+   ]
+  }
+ ],
+ "premise": "新衣料和旧礼法对撞的时候，替人量身体的那双手，知道的比谁都多。",
+ "pressures": [
+  {
+   "choice": "照着做，还是问清楚",
+   "exits": [
+    {
+     "cost": "那人会知道你看过尺寸簿",
+     "option": "去问订礼服的人"
+    },
+    {
+     "cost": "店主会知道有人动过尺寸簿",
+     "option": "偷偷改回原来的数字"
+    }
+   ],
+   "far": {
+    "consequence": "穿上它的人和订它的人，舞会那天会当众对不上",
+    "due_days": 20,
+    "trigger": "礼服照错的尺寸做好了"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_changed_size",
+   "immediate": {
+    "minutes": 10,
+    "text": "剪刀已经架在呢料上，划粉线就照着那个被改过的数字画的"
+   },
+   "leverage": null,
+   "location_ids": [
+    "tailor_shop"
+   ],
+   "near": {
+    "deadline_minutes": 900,
+    "text": "明天早上开裁"
+   },
+   "objective": "在礼服裁下第一剪之前，弄清这个数字是谁的",
+   "source": "person",
+   "start_minute": 930,
+   "tags": [],
+   "title": "被改过的数字",
+   "trigger": "尺寸簿上有一行数字被人刮掉重写过，那套要赶在舞会前交的礼服，照的就是这一行"
+  },
+  {
+   "choice": "去争，还是认了",
+   "exits": [
+    {
+     "cost": "翻译家的体面和差事，都在你一句话里",
+     "option": "去找翻译家"
+    },
+    {
+     "cost": "书商只认名字，你会被当成搅局的人",
+     "option": "去找东京的书商"
+    }
+   ],
+   "far": {
+    "consequence": "那一章从此永远是别人的",
+    "due_days": 30,
+    "trigger": "书印出来了"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_byline",
+   "immediate": {
+    "minutes": 10,
+    "text": "排字工把扉页的铅字盘端到你面前：“明早上版，名字没错吧？”"
+   },
+   "leverage": null,
+   "location_ids": [
+    "translation_office"
+   ],
+   "near": {
+    "deadline_minutes": 720,
+    "text": "明早上版"
+   },
+   "objective": "在铅字上版之前，让扉页上写对名字",
+   "source": "person",
+   "start_minute": 1200,
+   "tags": [],
+   "title": "扉页",
+   "trigger": "译书付印在即，扉页上排的是翻译家的名字，可书里最好的一章是校对员译的"
+  },
+  {
+   "choice": "帮一家，还是两家都帮",
+   "exits": [
+    {
+     "cost": "越前屋会把你当成背弃旧礼的人",
+     "option": "替千鹤屋说话"
+    },
+    {
+     "cost": "千鹤屋的契约就续不下去了",
+     "option": "替越前屋说话"
+    }
+   ],
+   "far": {
+    "consequence": "另一家在町内抬不起头，可能撑不过这个冬天",
+    "due_days": 30,
+    "trigger": "一家拿下了订单"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_client_war",
+   "immediate": {
+    "minutes": 10,
+    "text": "世话役站在街当中，冲两家店的门帘各看了一眼，叹了口气"
+   },
+   "leverage": null,
+   "location_ids": [
+    "machi_street",
+    "gofuku_shop"
+   ],
+   "near": {
+    "deadline_minutes": 1080,
+    "text": "明天家令就要定"
+   },
+   "objective": "在家令拿主意之前，让两家都别闹出笑话",
+   "source": "money",
+   "start_minute": 960,
+   "tags": [],
+   "title": "同一位客人",
+   "trigger": "华族家的家令要给老爷太太订舞会的衣服，越前屋和千鹤屋都派人去请，町内的世话役说，谁抢了这笔生意谁就失了礼数"
+  },
+  {
+   "choice": "帮里面的人，还是先应付外面的人",
+   "exits": [
+    {
+     "cost": "你会站在帘子里，和那个人只隔一只手",
+     "option": "进去帮着扣上"
+    },
+    {
+     "cost": "你要编一个理由，世话役不好糊弄",
+     "option": "出去拦住世话役"
+    }
+   ],
+   "far": {
+    "consequence": "明天整个町都会说千鹤屋的试衣间不干净",
+    "due_days": 7,
+    "trigger": "被看见了"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_half_curtain",
+   "immediate": {
+    "minutes": 5,
+    "text": "帘子后面有人很轻地说了一声“够不着”，铺面的门铃同时响了"
+   },
+   "leverage": null,
+   "location_ids": [
+    "fitting_room",
+    "tailor_shop"
+   ],
+   "near": {
+    "deadline_minutes": 15,
+    "text": "世话役走进铺面"
+   },
+   "objective": "在世话役看见之前，把这件事遮过去",
+   "source": "person",
+   "start_minute": 990,
+   "tags": [],
+   "title": "只拉了一半的帘子",
+   "trigger": "试衣间的帘子铜环卡住了，帘子只拉了一半，里面的人后背的扣子还开着，铺面上来了一位世话役"
+  },
+  {
+   "choice": "去求番所，还是另想办法",
+   "exits": [
+    {
+     "cost": "今夜被扣下的就是你",
+     "option": "把自己的通行札给那人"
+    },
+    {
+     "cost": "你会欠下一个不好还的人情",
+     "option": "去找商馆的番头说情"
+    }
+   ],
+   "far": {
+    "consequence": "明天县厅就会知道，那人的家里和店都要受牵连",
+    "due_days": 3,
+    "trigger": "人被扣在番所"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_gate_close",
+   "immediate": {
+    "minutes": 5,
+    "text": "木栅开始往回推，关门里有人在喊你的名字"
+   },
+   "leverage": null,
+   "location_ids": [
+    "settlement_gate"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "关门合上"
+   },
+   "objective": "在关门合上之前，把那个人带出来",
+   "source": "institution",
+   "start_minute": 1080,
+   "tags": [],
+   "title": "关门",
+   "trigger": "番所的钟敲了，关门就要关，有一个人还在关门里面没出来，没有通行札，今夜出不来就要被扣在番所"
+  },
+  {
+   "choice": "替人拆开，还是原样送去",
+   "exits": [
+    {
+     "cost": "信上写的是什么，你都要一起扛",
+     "option": "自己送去，陪着店主拆"
+    },
+    {
+     "cost": "你就成了第一个知道的人，这件事你瞒不瞒得住",
+     "option": "先找人念一遍"
+    }
+   ],
+   "far": {
+    "consequence": "店主一个人拆开，一个人读完",
+    "due_days": 1,
+    "trigger": "信送到了"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_ship_letter",
+   "immediate": {
+    "minutes": 10,
+    "text": "邮差把那封信从邮袋里拣出来，看了看信封，抬头问：“千鹤屋怎么走？”"
+   },
+   "leverage": null,
+   "location_ids": [
+    "harbor",
+    "settlement_gate"
+   ],
+   "near": {
+    "deadline_minutes": 300,
+    "text": "今晚邮差就送到"
+   },
+   "objective": "在信被送到之前，决定由谁、怎么交给店主",
+   "source": "person",
+   "start_minute": 930,
+   "tags": [],
+   "title": "旧金山的信",
+   "trigger": "旧金山来的船靠岸了，邮袋里有一封寄给千鹤屋店主的信，信封上的字不是那位伴侣的"
+  }
+ ],
+ "region": "横滨外国人居留地边上的一条町：洋裁店、译书所、旧式吴服店挤在一起",
+ "rules": [
+  {
+   "id": "r_size_book",
+   "text": "洋裁店的尺寸簿只记数字不记名字，可老师傅看一眼数字就知道是谁。"
+  },
+  {
+   "id": "r_one_byline",
+   "text": "译书署名只能写一个人，担下全部误译的也是这一个人。"
+  },
+  {
+   "id": "r_curtain_word",
+   "text": "町内礼数大于实话，门帘上挂的字比账上写的更重要。"
+  },
+  {
+   "id": "r_gate_pass",
+   "text": "居留地的关门入夜就关，没有通行札的日本人不许留在关内。"
+  },
+  {
+   "id": "r_fitting_curtain",
+   "text": "试衣间的帘子一拉上，里面就是客人的地方，店主进去也要先出声。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": null,
+ "status": "review",
+ "style_hint": "写布料和手：软尺、划粉、扣子、朱笔、门帘；人说话讲礼数，真话藏在尺寸和措辞里。",
+ "tension_engines": [
+  {
+   "id": "te_size_secret",
+   "text": "尺寸簿上的一个数字，比一封信说得还多"
+  },
+  {
+   "id": "te_byline",
+   "text": "扉页上只写一个人的名字"
+  },
+  {
+   "id": "te_old_new",
+   "text": "吴服和洋裁争同一位客人，也争同一个町的脸面"
+  },
+  {
+   "id": "te_half_curtain",
+   "text": "试衣间的帘子只拉了一半"
+  },
+  {
+   "id": "te_gone_west",
+   "text": "去了美国的人，一个月一班船，信越来越少"
+  },
+  {
+   "id": "te_gate_line",
+   "text": "关门一关，里外就是两个世界"
+  }
+ ],
+ "title": "洋裁町",
+ "tone": [
+  "新旧交替",
+  "海雾",
+  "煤气灯",
+  "礼数"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_letter_news",
+   "requires": [
+    "tailor_owner"
+   ],
+   "text": "旧金山来信说：{tailor_owner.name}的伴侣三年前就在那边另成了家。"
+  },
+  {
+   "category": "关系",
+   "id": "t_translator_knew",
+   "requires": [
+    "famous_translator",
+    "tailor_owner"
+   ],
+   "text": "{famous_translator.name}在旧金山见过{tailor_owner.name}的伴侣，那些信里有一封是{famous_translator.ta}代笔的。"
+  },
+  {
+   "category": "人事",
+   "id": "t_heir_engaged",
+   "requires": [
+    "gofuku_heir"
+   ],
+   "text": "越前屋突然把{gofuku_heir.name}的亲事提前到了下个月初。"
+  },
+  {
+   "category": "资源",
+   "id": "t_merchant_leave",
+   "requires": [],
+   "text": "英国商馆宣布撤出横滨，町内所有接洋人订单的店都断了货源。"
+  },
+  {
+   "category": "制度",
+   "id": "t_dress_code",
+   "requires": [],
+   "text": "县厅下令：町内官员赴宴一律洋装，吴服店的大单一夜之间少了一半。"
+  },
+  {
+   "category": "意外",
+   "id": "t_fog_fire",
+   "requires": [],
+   "text": "雾夜里町口的煤气灯漏了气，起了一场小火。"
+  },
+  {
+   "category": "时限",
+   "id": "t_ball_moved",
+   "requires": [],
+   "text": "居留地的舞会提前到了这个周末。"
+  }
+ ]
+}

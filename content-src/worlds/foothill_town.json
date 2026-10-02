@@ -1,0 +1,2540 @@
+{
+ "schema_version": 1,
+ "id": "foothill_town",
+ "title": "山下镇",
+ "extends": null,
+ "era": "仙侠世界，收徒大典前三天",
+ "region": "一座仙门山脚下的集镇，镇上住满了来求仙的人和落选的人",
+ "premise": "上不了山的人，在山下怎么活？上了山又被赶下来的人，在山下还剩什么？",
+ "tone": [
+  "炉火",
+  "山风",
+  "大典前夜",
+  "落选"
+ ],
+ "style_hint": "写手艺和器物：磨剑石、符纸、锁链、木匣、榜牌；山上的人说话讲山规，山下的人说话讲价钱。",
+ "clock_start": {
+  "label": "收徒大典前三天的傍晚，镇上的客栈都挂上了“满”字牌",
+  "minute": 1050
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "stage_labels": null,
+ "name_pools": {
+  "family": [
+   "沈",
+   "顾",
+   "陆",
+   "江",
+   "苏",
+   "林",
+   "楚",
+   "叶",
+   "谢",
+   "温",
+   "闻",
+   "秦",
+   "萧",
+   "裴"
+  ],
+  "given_female": [
+   "漪",
+   "芷",
+   "瑶",
+   "茵",
+   "绾",
+   "凝",
+   "妤",
+   "霁",
+   "珞",
+   "纨",
+   "婳",
+   "簌"
+  ],
+  "given_male": [
+   "衍",
+   "珩",
+   "屿",
+   "骁",
+   "砚",
+   "晔",
+   "珏",
+   "渊",
+   "擎",
+   "戟",
+   "潭",
+   "槐"
+  ],
+  "given_neutral": [
+   "尘",
+   "舟",
+   "隐",
+   "弦",
+   "霜",
+   "遥",
+   "声",
+   "默",
+   "迟",
+   "归",
+   "白",
+   "风"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "阿{given}",
+    "gender": "any"
+   },
+   {
+    "pattern": "{given}姑娘",
+    "gender": "female"
+   },
+   {
+    "pattern": "{family}兄",
+    "gender": "male"
+   },
+   {
+    "pattern": "{family}道友",
+    "gender": "any"
+   }
+  ]
+ },
+ "rules": [
+  {
+   "id": "r_true_name",
+   "text": "真名一旦被人握住，签下的契就不能反悔；镇上人人都有一个俗名。"
+  },
+  {
+   "id": "r_repair_queue",
+   "text": "法器坏了要找镇上的修理铺，山门的人也得排队。"
+  },
+  {
+   "id": "r_permit_rooms",
+   "text": "大典前三天，镇上客栈只租给持山门帖子的人。"
+  },
+  {
+   "id": "r_no_dueling",
+   "text": "镇上不许斗法，谁先动手，谁就被赶出镇子。"
+  },
+  {
+   "id": "r_exile_step",
+   "text": "被逐出山门的人，不许再踏上石阶一步。"
+  }
+ ],
+ "customs": [
+  "大典前夜，落选过的人会在榜牌下点一盏灯，给新来的人照路。",
+  "修好的法器交还时，掌柜要当着主人的面试一次锋。",
+  "镇上的人见面先报俗名，真名只说给要托付性命的人。",
+  "灵兽寄养满一年没人领，就归寄养院；院里会替它重新起一个名字。",
+  "镖车出镇前，镖师要在镇口喝一碗酒，碗倒扣在镖旗下。"
+ ],
+ "player_identities": [
+  {
+   "id": "repair_hand",
+   "role": "修理铺的帮工",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    19,
+    28
+   ],
+   "social_position": "low",
+   "baseline": "你在法器修理铺帮工两年，会磨剑、会看裂痕，大典那年你没去考。",
+   "resources": [
+    "一手磨剑的功夫",
+    "铺子里每一件法器的来历"
+   ],
+   "reputation": "手稳，话少",
+   "risks": [
+    "你的真名写在掌柜的契上，契是你自己签的"
+   ]
+  },
+  {
+   "id": "failed_seeker",
+   "role": "落选滞留的求仙人",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    20,
+    30
+   ],
+   "social_position": "low",
+   "baseline": "你考了两届大典都没选上，盘缠花光了，留在镇上打零工，等下一届。",
+   "resources": [
+    "两届大典的经验和一身没处用的功夫",
+    "镇上一半的落选者都认得你"
+   ],
+   "reputation": "不服输，嘴硬",
+   "risks": [
+    "客栈不租给你，你睡在驿站的草料棚里"
+   ]
+  },
+  {
+   "id": "talisman_maker",
+   "role": "镇上符纸铺的店主",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}掌柜",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}道友",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    26,
+    45
+   ],
+   "social_position": "equal",
+   "baseline": "你在长街上开一间符纸铺，山上的人买你的符，山下的人也买。",
+   "resources": [
+    "一铺子符纸和一手画符的本事",
+    "长街上所有店主的交情"
+   ],
+   "reputation": "精明，讲信用",
+   "risks": [
+    "你画的一张符，三个月前出过一次事"
+   ]
+  },
+  {
+   "id": "beast_doctor",
+   "role": "灵兽寄养院的兽医",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}大夫",
+     "gender": "any"
+    },
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    25,
+    45
+   ],
+   "social_position": "equal",
+   "baseline": "你在灵兽寄养院给灵兽看病，哪头灵兽脾气坏、哪根锁链快断了，你最清楚。",
+   "resources": [
+    "一套治灵兽的方子和寄养院的钥匙",
+    "寄养院里每一头灵兽都认得你"
+   ],
+   "reputation": "温和，胆大",
+   "risks": [
+    "你替一个人瞒下了一头灵兽的来历"
+   ]
+  },
+  {
+   "id": "patrol_envoy",
+   "role": "山上派下来的巡山使",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}巡使",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}道长",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    45
+   ],
+   "social_position": "high",
+   "baseline": "你是山门派下山的巡山使，大典期间管着镇上的秩序，镇上的人见了你都要让路。",
+   "resources": [
+    "巡山使的令牌和调动守石阶门人的权力",
+    "山上的人脉"
+   ],
+   "reputation": "公正，冷淡",
+   "risks": [
+    "你当年也是在这座镇上住过一年才上的山"
+   ]
+  },
+  {
+   "id": "town_warden",
+   "role": "镇守",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}镇守",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}大人",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    35,
+    55
+   ],
+   "social_position": "high",
+   "baseline": "你是这座镇的镇守，镇上的户籍、真名契和客栈的牌照都归你管。",
+   "resources": [
+    "全镇的户籍和真名契的存档",
+    "镇上的巡丁"
+   ],
+   "reputation": "稳重，会算计",
+   "risks": [
+    "山门有人拿镇上的契在做买卖，你装作不知道"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "repair_shop",
+   "name": "法器修理铺",
+   "detail": "长街中段一间矮铺子，炉火常年不熄，墙上挂满待修的剑、铃、镜，柜台上一块磨剑石被磨出一道深槽。",
+   "privacy": "semi",
+   "visibility": "柜台前排队的人看得见掌柜的手，看不见后间炉子里在炼什么",
+   "witnesses": [
+    "bg_queue_cultivator"
+   ],
+   "exits": [
+    "main_street"
+   ],
+   "affordances": [
+    "在磨剑石上推一把剑，看它的裂痕",
+    "替排队的人登记法器的来历",
+    "在炉火边烘一烘湿透的袖子"
+   ],
+   "pressure_modifiers": {
+    "p_cracked_sword": "柜台上那把剑的裂痕里，渗出一点不像是锈的暗红。"
+   },
+   "tags": []
+  },
+  {
+   "id": "main_street",
+   "name": "镇上长街",
+   "detail": "一条青石长街从镇口一直铺到山脚，两边是客栈、符纸铺、药铺、卖干粮和草鞋的摊子，街尽头就是三千级石阶。",
+   "privacy": "public",
+   "visibility": "来求仙的、落选的、做买卖的挤在一条街上，谁和山上的人说过话，半条街都看见了",
+   "witnesses": [
+    "bg_talisman_vendor",
+    "bg_town_crier"
+   ],
+   "exits": [
+    "repair_shop",
+    "inn",
+    "beast_yard",
+    "post_station",
+    "mountain_steps"
+   ],
+   "affordances": [
+    "在人堆里听一句关于大典的新消息",
+    "买一张符纸，看卖符的人多瞧了你一眼",
+    "看一个穿山门外袍的人从街上走过"
+   ],
+   "pressure_modifiers": {
+    "p_true_name": "街角有人压低声音叫卖：“真名，现查现卖。”"
+   },
+   "tags": []
+  },
+  {
+   "id": "inn",
+   "name": "客栈「留仙居」",
+   "detail": "镇上最大的客栈，三层木楼，大堂里坐满了等大典的人，柜台后面挂着“满”字牌，楼上的房间只租给持山门帖子的人。",
+   "privacy": "public",
+   "visibility": "大堂里人挤人，谁拿着帖子、谁没有，掌柜一眼就看出来",
+   "witnesses": [
+    "bg_inn_runner"
+   ],
+   "exits": [
+    "main_street"
+   ],
+   "affordances": [
+    "在大堂角落要一壶茶，听邻桌说落选的事",
+    "看掌柜在柜台后面验一张帖子",
+    "上楼时在走廊里和人擦肩"
+   ],
+   "pressure_modifiers": {
+    "p_rooms_full": "柜台上压着一张帖子，掌柜对着灯照了又照。"
+   },
+   "tags": []
+  },
+  {
+   "id": "beast_yard",
+   "name": "灵兽寄养院",
+   "detail": "镇东一座围着石墙的大院，院里一排排兽栏，锁链上刻着符文，夜里能听见灵兽在栏里磨爪子。",
+   "privacy": "semi",
+   "visibility": "院里只有做工的人和来寄养、来领的人；兽栏深处说话，院门口听不见",
+   "witnesses": [
+    "bg_yard_keeper"
+   ],
+   "exits": [
+    "main_street"
+   ],
+   "affordances": [
+    "喂一头脾气不好的灵兽",
+    "检查一根锁链上的符文有没有磨损",
+    "在兽栏后面躲开外头的人"
+   ],
+   "pressure_modifiers": {
+    "p_chain_broke": "最里面那间兽栏的锁链断了一截，断口很齐。"
+   },
+   "tags": []
+  },
+  {
+   "id": "post_station",
+   "name": "驿站镖局",
+   "detail": "镇口一座驿站兼镖局，院里停着镖车，门口插着镖旗，后堂锁着一排等着送上山的货。",
+   "privacy": "semi",
+   "visibility": "镖师、驿卒和来托镖的人；后堂的门只有镖头开得了",
+   "witnesses": [],
+   "exits": [
+    "main_street"
+   ],
+   "affordances": [
+    "看镖师给镖车上一道封条",
+    "在后堂门口听一听木匣里的动静",
+    "替驿卒誊一封送上山的信"
+   ],
+   "pressure_modifiers": {
+    "p_sealed_box": "后堂那只不许打开的木匣，今夜自己响了三声。"
+   },
+   "tags": []
+  },
+  {
+   "id": "mountain_steps",
+   "name": "山门石阶下",
+   "detail": "三千级石阶的第一级，一座石牌坊，牌坊下立着一块榜牌，大典那天落选的名字会贴在这里。",
+   "privacy": "public",
+   "visibility": "等大典的人天天来看榜牌，守石阶的山门门人站在第一级上，谁往上多走一步都会被喝住",
+   "witnesses": [
+    "bg_step_guard"
+   ],
+   "exits": [
+    "main_street",
+    "back_stream"
+   ],
+   "affordances": [
+    "数一数石阶上有几个人往下走",
+    "站在第一级上，抬头看山门的灯",
+    "在榜牌前看一个名字，看很久"
+   ],
+   "pressure_modifiers": {
+    "p_formation_backflow": "石牌坊上的符纹一明一暗，像是在喘气。"
+   },
+   "tags": []
+  },
+  {
+   "id": "back_stream",
+   "name": "后山溪涧",
+   "detail": "从石阶旁一条小路下去，一道山溪从山门那边流下来，溪边的石头上长满青苔，夜里水声盖过一切。",
+   "privacy": "private",
+   "visibility": "夜里没有人来；水声大，两个人说话，一丈外就听不清",
+   "witnesses": [],
+   "exits": [
+    "mountain_steps"
+   ],
+   "affordances": [
+    "在溪边洗一洗手上的炉灰",
+    "坐在青苔石上，看山上的灯一盏盏灭",
+    "把一样东西沉进溪水里"
+   ],
+   "pressure_modifiers": {
+    "p_formation_backflow": "溪水忽然倒着往山上流了一丈，又落下来。"
+   },
+   "tags": []
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "repair_master",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    32,
+    48
+   ],
+   "adult_context": "法器修理铺的掌柜，成年人，二十年前收徒大典落选，从此在镇上替山上的人修剑",
+   "public_role": "修理铺掌柜",
+   "appearance_options": [
+    "两只手上全是炉火烫出的疤，左手少了一截小指",
+    "说话不紧不慢，看人先看对方腰上的法器"
+   ],
+   "identity": {
+    "authority": "决定哪一件法器先修、修好了交给谁",
+    "resources": [
+     "一座炉子和二十年修过的几千件法器",
+     "山上一半的人都欠{npc.ta}一份人情"
+    ],
+    "limits": [
+     "一辈子上不了山，修得再好也只是个匠人",
+     "铺子的炉火靠山上给的灵石，断了就停"
+    ],
+    "obligations": [
+     "大典之前，山上送来的法器都要修好送回"
+    ],
+    "exposure": "{npc.ta}认得那把裂了的剑，二十年前就是{npc.ta}亲手修的",
+    "hidden": "{npc.ta}当年落选，是因为替一个人顶了一个罪"
+   },
+   "decision": {
+    "core_value": "修好的东西，比修它的人活得久",
+    "goal_options": [
+     "在大典前修好那把剑",
+     "弄清剑上的裂痕是怎么来的",
+     "上一次山，哪怕只走到第一百级"
+    ],
+    "pressure_responses": {
+     "low": "低头磨剑，说“排队”",
+     "mid": "把剑递过去，指着裂痕让对方看",
+     "high": "当着山门的人说出这把剑当年的主人",
+     "breaking": "熄了炉火，把铺子的钥匙挂在牌坊上，一个人往山里走"
+    },
+    "withdrawal": "打烊后一个人坐在熄了一半的炉子前，把那截断指的地方按在冷铁上",
+    "relationship_stance": "手上热，嘴上冷",
+    "contrast": "替山上的人修了二十年的剑，自己想上山的那条路一直没修好",
+    "prefers": [
+     "先看裂痕"
+    ],
+    "avoids": [
+     "被人叫“落选的”"
+    ],
+    "never": [
+     "故意把法器修坏"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方看得懂{npc.ta}的手艺",
+     "对方不问{npc.ta}为什么落选"
+    ],
+    "likes": [
+     "炉火熄了以后铁慢慢变凉的声音"
+    ],
+    "dislikes": [
+     "被当成山上的下人"
+    ],
+    "preconditions": [
+     "铺子已经上了门板"
+    ],
+    "boundaries": [
+     "不在炉子前"
+    ],
+    "expression": "替对方打一件只合对方一个人手的小物件",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}觉得不上山也值得的那个人"
+   },
+   "voices": {
+    "surface": "“排队。山上的剑也得排队。”",
+    "inner": "“这道裂痕，二十年前我见过一次。”"
+   },
+   "schedule": [
+    {
+     "from": 420,
+     "to": 1260,
+     "location_id": "repair_shop"
+    },
+    {
+     "from": 1261,
+     "to": 1380,
+     "location_id": "back_stream"
+    },
+    {
+     "from": 1381,
+     "to": 1439,
+     "location_id": "repair_shop"
+    }
+   ],
+   "situation": {
+    "trigger": "山上传话：大典前修不好那把剑，铺子的灵石就断了",
+    "pressure": "修好了，剑的主人就要带着它回山上去认罪",
+    "exits": [
+     {
+      "option": "修",
+      "cost": "那个人回山上就没有活路"
+     },
+     {
+      "option": "拖着不修",
+      "cost": "铺子的炉火就要灭了"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "exiled_one",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    32
+   ],
+   "adult_context": "被逐出山门的人，成年人，在山上修了八年，三个月前被赶下山，如今在灵兽寄养院做工",
+   "public_role": "被逐下山的人",
+   "appearance_options": [
+    "还穿着山门的外袍，袖口的门徽被自己拆掉了",
+    "喂灵兽的时候会不自觉地掐一个山上的手诀"
+   ],
+   "identity": {
+    "authority": "决定那头没人领的灵兽今夜放不放",
+    "resources": [
+     "八年的山上功夫和一头认主的灵兽",
+     "山上的几条小路和一个旧同伴"
+    ],
+    "limits": [
+     "被逐的人不许踏上石阶一步",
+     "身上的修为在一天天散"
+    ],
+    "obligations": [
+     "寄养院的活要干满一年才给工钱"
+    ],
+    "exposure": "{npc.ta}是替别人背了罪才被赶下山的，那个人就在大典上主事",
+    "hidden": "那把裂了的剑是{npc.ta}的，剑上的血也是"
+   },
+   "decision": {
+    "core_value": "下了山，也不跪",
+    "goal_options": [
+     "在大典前把剑还回去",
+     "让真正有罪的人认罪",
+     "带着那头灵兽离开这座镇"
+    ],
+    "pressure_responses": {
+     "low": "把门徽的线头掐断，说“不关你的事”",
+     "mid": "把剑上的裂痕指给对方看，说那是怎么来的",
+     "high": "当着山门的人报出自己的道号",
+     "breaking": "放开所有兽栏的锁链，趁乱翻过后山"
+    },
+    "withdrawal": "夜里坐在兽栏里，靠着那头灵兽，看山门的灯一盏盏灭",
+    "relationship_stance": "倔，护短，不肯说软话",
+    "contrast": "被山门赶下来，却还天天朝着山门的方向坐",
+    "prefers": [
+     "先护着身边的人"
+    ],
+    "avoids": [
+     "被人可怜"
+    ],
+    "never": [
+     "说出替谁背的罪"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不问{npc.ta}为什么被逐",
+     "那头灵兽愿意让对方摸"
+    ],
+    "likes": [
+     "夜里灵兽贴着后背的暖"
+    ],
+    "dislikes": [
+     "被当成山上扔下来的废物"
+    ],
+    "preconditions": [
+     "门徽已经拆干净"
+    ],
+    "boundaries": [
+     "不在山门看得见的地方"
+    ],
+    "expression": "把道号告诉对方，只说一次",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}不再朝山上看的那个人"
+   },
+   "voices": {
+    "surface": "“修好要几天？我得在大典之前把它还回去。”",
+    "inner": "“我替那个人背了罪，可那个人连看我一眼都不肯。”"
+   },
+   "schedule": [
+    {
+     "from": 360,
+     "to": 1080,
+     "location_id": "beast_yard"
+    },
+    {
+     "from": 1081,
+     "to": 1200,
+     "location_id": "repair_shop"
+    },
+    {
+     "from": 1201,
+     "to": 1439,
+     "location_id": "back_stream"
+    }
+   ],
+   "situation": {
+    "trigger": "大典那天，替{npc.ta}定罪的那个人要主事",
+    "pressure": "剑还回去，就要当面对质",
+    "exits": [
+     {
+      "option": "去对质",
+      "cost": "山上没人会信一个被逐的人"
+     },
+     {
+      "option": "不去",
+      "cost": "这罪就背一辈子"
+     }
+    ]
+   },
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "escort",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    28,
+    42
+   ],
+   "adult_context": "驿路镖局的镖师，成年人，替山门押了十年的货",
+   "public_role": "镖师",
+   "appearance_options": [
+    "一身灰布短打，背上一杆缠着红绸的长枪，手腕上一串磨亮的铜钱",
+    "喝酒不醉，说话爽快，问到货就闭嘴"
+   ],
+   "identity": {
+    "authority": "决定镖车走哪条路、木匣交给谁",
+    "resources": [
+     "一辆镖车和镖局的旗号",
+     "一只山门交代不许打开的木匣"
+    ],
+    "limits": [
+     "丢了镖，镖局赔不起，{npc.ta}要拿命抵",
+     "山门的货只认帖子不认人"
+    ],
+    "obligations": [
+     "大典那天正午之前把木匣送上山"
+    ],
+    "exposure": "木匣里的东西会动，{npc.ta}半夜听见过里面有人叫{npc.ta}的名字",
+    "hidden": "{npc.ta}年轻时也来考过大典，落选那天就进了镖局"
+   },
+   "decision": {
+    "core_value": "镖在人在",
+    "goal_options": [
+     "把木匣按时送上山",
+     "弄清木匣里到底是什么",
+     "这一趟走完就收手"
+    ],
+    "pressure_responses": {
+     "low": "拍拍木匣，说“不该问的别问”",
+     "mid": "让对方把耳朵贴在木匣上听一听",
+     "high": "当着山门的人把封条撕了",
+     "breaking": "把木匣沉进后山溪涧，一个人连夜出镇"
+    },
+    "withdrawal": "夜里坐在后堂门口，枪横在膝上，听木匣里的动静听到天亮",
+    "relationship_stance": "嘴上豪爽，心里有一本谁也不给看的账",
+    "contrast": "替山门送了十年的东西，从来不知道自己送的是什么",
+    "prefers": [
+     "先护镖"
+    ],
+    "avoids": [
+     "被人当成山门的走狗"
+    ],
+    "never": [
+     "私开托付的货"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方敢陪{npc.ta}守一夜木匣",
+     "对方喝酒的时候不劝{npc.ta}少喝"
+    ],
+    "likes": [
+     "后半夜驿站院子里的月光"
+    ],
+    "dislikes": [
+     "被当成一杆枪"
+    ],
+    "preconditions": [
+     "镖已经交割"
+    ],
+    "boundaries": [
+     "不在镖车旁边"
+    ],
+    "expression": "把那串铜钱摘下来给对方，说是落选那年留下的",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}想收手的那个人"
+   },
+   "voices": {
+    "surface": "“喝一碗？货的事别问，问了你也不想知道。”",
+    "inner": "“那只匣子里的东西，叫过我的名字。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1439,
+     "location_id": "post_station"
+    },
+    {
+     "from": 0,
+     "to": 240,
+     "location_id": "post_station"
+    },
+    {
+     "from": 600,
+     "to": 900,
+     "location_id": "inn"
+    }
+   ],
+   "situation": {
+    "trigger": "木匣里的动静越来越大，封条上的符文开始褪色",
+    "pressure": "封条一破，镖就算丢了",
+    "exits": [
+     {
+      "option": "加一道封",
+      "cost": "要去求山上的人，木匣里的东西会知道"
+     },
+     {
+      "option": "打开看",
+      "cost": "镖局会把{npc.ta}交给山门处置"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "inn_keeper",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    35,
+    52
+   ],
+   "adult_context": "客栈「留仙居」的掌柜，成年人，开了三届大典的客栈",
+   "public_role": "客栈掌柜",
+   "appearance_options": [
+    "一身绸衫，算盘打得飞快，袖子里塞着一沓帖子的底样",
+    "笑脸迎人，眼睛却一直在看你腰上挂没挂帖子"
+   ],
+   "identity": {
+    "authority": "决定谁能住进楼上的房间",
+    "resources": [
+     "一座三层客栈和三届大典的门路",
+     "一沓山门帖子的底样"
+    ],
+    "limits": [
+     "山门查出假帖子，客栈就得封",
+     "楼上住的都是得罪不起的人"
+    ],
+    "obligations": [
+     "大典前三天只租给持帖的人"
+    ],
+    "exposure": "{npc.ta}偷偷卖假帖子，一张换一年的房钱",
+    "hidden": "{npc.ta}有个亲人在山上，十年没有回过信"
+   },
+   "decision": {
+    "core_value": "钱能买的东西，都不贵",
+    "goal_options": [
+     "这一届多赚一点，就把客栈盘出去",
+     "知道山上那个亲人还在不在",
+     "不让假帖子的事露出来"
+    ],
+    "pressure_responses": {
+     "low": "笑着说“满了满了”",
+     "mid": "从袖子里抽出一张帖子在灯下晃一晃",
+     "high": "当众揭穿一张假帖子，顺手撇清自己",
+     "breaking": "烧掉所有底样，连夜关了客栈"
+    },
+    "withdrawal": "客人睡下后，一个人在柜台后面把那沓底样一张一张数，数到最后一张停住",
+    "relationship_stance": "对人圆滑，对钱认真",
+    "contrast": "替几千个求仙的人安排过一张床，自己的亲人上了山就没下来",
+    "prefers": [
+     "先看帖子"
+    ],
+    "avoids": [
+     "被人说开黑店"
+    ],
+    "never": [
+     "把真帖子卖给出价高的人"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不要帖子也肯在大堂坐一夜",
+     "对方替{npc.ta}打听过山上那个亲人"
+    ],
+    "likes": [
+     "打烊后客栈大堂里的一盏孤灯"
+    ],
+    "dislikes": [
+     "被当成钱眼子"
+    ],
+    "preconditions": [
+     "帖子都收进了柜子"
+    ],
+    "boundaries": [
+     "不在柜台后面"
+    ],
+    "expression": "把楼上最好的那间房给对方住，不收钱，也不要帖子",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}不再看对方腰间的那个人"
+   },
+   "voices": {
+    "surface": "“满了满了——哎，你等等，你腰上那是什么？”",
+    "inner": "“我卖了几百张帖子，就是想有一张能把那个人带下山。”"
+   },
+   "schedule": [
+    {
+     "from": 420,
+     "to": 1380,
+     "location_id": "inn"
+    },
+    {
+     "from": 1381,
+     "to": 1439,
+     "location_id": "main_street"
+    },
+    {
+     "from": 300,
+     "to": 419,
+     "location_id": "mountain_steps"
+    }
+   ],
+   "situation": {
+    "trigger": "山门派人下山查帖子，第一个要查的就是留仙居",
+    "pressure": "一查，假帖子就藏不住",
+    "exits": [
+     {
+      "option": "把买假帖的人交出去",
+      "cost": "那些人会把{npc.ta}一起供出来"
+     },
+     {
+      "option": "连夜把底样烧了",
+      "cost": "已经卖出去的那些就成了死账"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "outer_deacon",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    30,
+    45
+   ],
+   "adult_context": "山门的外门执事，成年人，这一届收徒大典的主事之一",
+   "public_role": "山上的执事",
+   "appearance_options": [
+    "山门外袍上绣着执事的银纹，袖口一尘不染",
+    "说话温和，句句不离山规"
+   ],
+   "identity": {
+    "authority": "决定大典上谁的名字留下、谁的名字贴到榜牌上",
+    "resources": [
+     "大典的名册和山门的戒律",
+     "守石阶的门人都听{npc.ta}的"
+    ],
+    "limits": [
+     "上面还有长老，{npc.ta}只是个执事",
+     "一件旧事要是翻出来，{npc.ta}的银纹就要拆掉"
+    ],
+    "obligations": [
+     "大典之前每夜下山巡镇"
+    ],
+    "exposure": "三个月前被赶下山的那个人，是替{npc.ta}背的罪",
+    "hidden": "{npc.ta}每夜下山，其实是来看那个人还在不在"
+   },
+   "decision": {
+    "core_value": "山规在上",
+    "goal_options": [
+     "让这一届大典平平稳稳",
+     "把那件旧事永远压住",
+     "再和那个人说一次话"
+    ],
+    "pressure_responses": {
+     "low": "温声说“山规如此”",
+     "mid": "把大典名册翻到某一页，让对方看",
+     "high": "当众宣布一个人的名字不许上山",
+     "breaking": "解下执事的银纹，一个人走到被逐的人面前认罪"
+    },
+    "withdrawal": "巡完镇，一个人站在石阶第一级上，往下看寄养院的方向",
+    "relationship_stance": "表面守规矩，心里一直在破规矩",
+    "contrast": "掌着几百个人能不能上山，自己最想见的人却在山下",
+    "prefers": [
+     "先讲山规"
+    ],
+    "avoids": [
+     "被人当面提起那件旧事"
+    ],
+    "never": [
+     "亲手伤一个已经被逐的人"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不怕{npc.ta}的银纹",
+     "对方知道那件旧事却没说出去"
+    ],
+    "likes": [
+     "夜里山风把外袍吹起来的时候"
+    ],
+    "dislikes": [
+     "被当成一条山规"
+    ],
+    "preconditions": [
+     "银纹已经解下"
+    ],
+    "boundaries": [
+     "离石阶足够远"
+    ],
+    "expression": "把大典名册上对方的那一页撕下来交给对方",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢违一次山规的那个人"
+   },
+   "voices": {
+    "surface": "“山规如此，我也没有办法。”",
+    "inner": "“该被赶下山的是我，不是那个人。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1439,
+     "location_id": "main_street"
+    },
+    {
+     "from": 0,
+     "to": 120,
+     "location_id": "mountain_steps"
+    },
+    {
+     "from": 600,
+     "to": 1199,
+     "location_id": "mountain_steps"
+    }
+   ],
+   "situation": {
+    "trigger": "那把裂了的剑在镇上的修理铺里，剑上的血会说话",
+    "pressure": "剑一修好送回山上，旧事就要翻出来",
+    "exits": [
+     {
+      "option": "先去把剑拿走",
+      "cost": "修理铺的掌柜认得{npc.ta}"
+     },
+     {
+      "option": "由它去",
+      "cost": "{npc.ta}在大典上就要当着全山认罪"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "name_broker",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    26,
+    40
+   ],
+   "adult_context": "镇上卖消息的人，成年人，专门替人查真名",
+   "public_role": "卖真名的人",
+   "appearance_options": [
+    "一件洗得发白的长衫，腰上一只鼓鼓的布袋，里面全是写满名字的纸条",
+    "说话带笑，记性好得吓人"
+   ],
+   "identity": {
+    "authority": "决定谁的真名卖给谁、卖多少钱",
+    "resources": [
+     "一袋子查来的真名和三届大典的旧档",
+     "镇上每家客栈都有{npc.ta}的眼线"
+    ],
+    "limits": [
+     "卖错一个名字，买主就会找上门",
+     "山门禁止买卖真名，抓到要废掉修为"
+    ],
+    "obligations": [
+     "每查到一个名字，先问问那个人自己愿不愿意买回去"
+    ],
+    "exposure": "{npc.ta}手里有执事的真名，一直没敢卖",
+    "hidden": "{npc.ta}自己的真名也被人卖过一次，那人现在握着{npc.ta}的契"
+   },
+   "decision": {
+    "core_value": "名字是最值钱的东西",
+    "goal_options": [
+     "攒够钱把自己的契买回来",
+     "卖出那张最值钱的纸条",
+     "这一届大典后就不干了"
+    ],
+    "pressure_responses": {
+     "low": "笑一笑，说“问名字要先给钱”",
+     "mid": "从布袋里抽出一张纸条，只露一个字",
+     "high": "当众念出一个人的真名",
+     "breaking": "把一袋子纸条全倒进炉火里"
+    },
+    "withdrawal": "夜里蹲在溪边，把那张写着自己真名的纸条拿出来看，又塞回去",
+    "relationship_stance": "嘴上做买卖，心里怕被人握住",
+    "contrast": "卖了几百个人的名字，自己的那一个被人攥在手心里",
+    "prefers": [
+     "先开价"
+    ],
+    "avoids": [
+     "被人逼问自己的名字"
+    ],
+    "never": [
+     "把名字卖给要害人的买主"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不问{npc.ta}的真名",
+     "对方肯把自己的名字说给{npc.ta}听，不要钱"
+    ],
+    "likes": [
+     "炉火边纸条烧起来的那一下亮"
+    ],
+    "dislikes": [
+     "被当成一只布袋"
+    ],
+    "preconditions": [
+     "布袋已经扎紧"
+    ],
+    "boundaries": [
+     "不谈买卖的时候"
+    ],
+    "expression": "把写着对方真名的那张纸条当着对方的面烧掉",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢说出自己名字的那个人"
+   },
+   "voices": {
+    "surface": "“真名，现查现卖——你的要不要？我可以先不告诉别人。”",
+    "inner": "“我卖了一辈子名字，就想把自己的那一个买回来。”"
+   },
+   "schedule": [
+    {
+     "from": 600,
+     "to": 1200,
+     "location_id": "main_street"
+    },
+    {
+     "from": 1201,
+     "to": 1320,
+     "location_id": "inn"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "back_stream"
+    }
+   ],
+   "situation": {
+    "trigger": "握着{npc.ta}契的那个人来镇上了，要{npc.ta}交出执事的真名",
+    "pressure": "交出去，就是害死一个人",
+    "exits": [
+     {
+      "option": "交",
+      "cost": "那张契就能拿回来"
+     },
+     {
+      "option": "不交",
+      "cost": "那人会当众念出{npc.ta}的真名"
+     }
+    ]
+   },
+   "tags": []
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_queue_cultivator",
+   "role": "排队修剑的山上人",
+   "function": "witness",
+   "location_ids": [
+    "repair_shop",
+    "main_street"
+   ],
+   "line": "{npc.name}抱着一把断剑在铺子门口等了半天，谁进了后间，{npc.ta}都看在眼里",
+   "gender": "any",
+   "age_range": [
+    20,
+    40
+   ],
+   "adult_context": "山门的成年门人",
+   "name": null
+  },
+  {
+   "id": "bg_talisman_vendor",
+   "role": "卖符纸的摊主",
+   "function": "rumor_source",
+   "location_ids": [
+    "main_street"
+   ],
+   "line": "{npc.name}一边卖符一边讲大典的事，真的假的掺在一起卖",
+   "gender": "any",
+   "age_range": [
+    40,
+    60
+   ],
+   "adult_context": "镇上的成年摊主",
+   "name": null
+  },
+  {
+   "id": "bg_town_crier",
+   "role": "镇口敲锣报信的",
+   "function": "messenger",
+   "location_ids": [
+    "main_street",
+    "mountain_steps"
+   ],
+   "line": "{npc.name}敲一声锣，山上的消息就传遍了整条街",
+   "gender": "any",
+   "age_range": [
+    30,
+    50
+   ],
+   "adult_context": "镇上的成年更夫",
+   "name": null
+  },
+  {
+   "id": "bg_inn_runner",
+   "role": "客栈跑堂",
+   "function": "helper",
+   "location_ids": [
+    "inn",
+    "main_street"
+   ],
+   "line": "{npc.name}端茶的时候顺口告诉你，楼上哪间房的人还没睡",
+   "gender": "any",
+   "age_range": [
+    19,
+    30
+   ],
+   "adult_context": "留仙居的成年伙计",
+   "name": null
+  },
+  {
+   "id": "bg_yard_keeper",
+   "role": "寄养院的老院主",
+   "function": "obstacle",
+   "location_ids": [
+    "beast_yard"
+   ],
+   "line": "{npc.name}守着院门，没有寄养契的人一步也别想进兽栏",
+   "gender": "any",
+   "age_range": [
+    55,
+    70
+   ],
+   "adult_context": "寄养院的成年院主",
+   "name": null
+  },
+  {
+   "id": "bg_step_guard",
+   "role": "守石阶的门人",
+   "function": "obstacle",
+   "location_ids": [
+    "mountain_steps"
+   ],
+   "line": "{npc.name}站在第一级石阶上，谁往上多走一步，{npc.ta}就拔剑",
+   "gender": "any",
+   "age_range": [
+    22,
+    35
+   ],
+   "adult_context": "山门的成年门人",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_gong",
+   "text": "镇口的锣",
+   "reach": "一声锣响，全镇都知道山上传下来什么消息",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_queue_talk",
+   "text": "排队时的闲话",
+   "reach": "修理铺门口排队的人说的，传到客栈已经变了三回",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_paper_slip",
+   "text": "卖真名的纸条",
+   "reach": "一张纸条只写一个名字，写的是真是假要花钱才知道",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_step_board",
+   "text": "石阶下的榜牌",
+   "reach": "大典的结果一贴出来，谁都看得见",
+   "fidelity": "exact"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_failed",
+   "text": "上不了山的人要在山下过一辈子"
+  },
+  {
+   "id": "te_exiled",
+   "text": "被赶下山的人不肯说为什么"
+  },
+  {
+   "id": "te_true_name",
+   "text": "真名被人握住，契就不能反悔"
+  },
+  {
+   "id": "te_sealed_box",
+   "text": "一只不许打开的木匣，里面有东西在动"
+  },
+  {
+   "id": "te_cracked_sword",
+   "text": "一把剑上的裂痕，不像是练功留下的"
+  },
+  {
+   "id": "te_ceremony_eve",
+   "text": "大典还有三天，所有事都得在那之前了结"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "k_shop_hand",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "repair_hand"
+   ],
+   "slots": [
+    "repair_master",
+    "exiled_one"
+   ],
+   "tension_engine_ids": [
+    "te_cracked_sword",
+    "te_exiled"
+   ],
+   "chemistry": "你的真名写在{repair_master.name}的契上；{exiled_one.name}把一把裂了的剑交给铺子，{repair_master.name}让你来修，自己却盯着剑上的裂痕不说话。",
+   "stakes": {
+    "resource_gap": "{repair_master.name}有一座炉子和你的契，{exiled_one.name}有一把剑和八年的功夫，你只有一手磨剑的本事",
+    "limit_gap": "大典之前剑必须修好，{exiled_one.name}不肯说剑是怎么裂的",
+    "meeting_reason": "你天天在修理铺磨剑，{exiled_one.name}每天来问一次修好没有",
+    "irreplaceable_goal": "你想修好这把剑，也想知道裂痕里那点暗红是谁的血"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "repair_master",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{repair_master.name}收留了你，教你磨剑"
+    },
+    {
+     "a": "player",
+     "b": "exiled_one",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{exiled_one.name}每天都坐在铺子门槛上等"
+    },
+    {
+     "a": "repair_master",
+     "b": "exiled_one",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{repair_master.name}二十年前修过这把剑"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_no_permit",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "failed_seeker"
+   ],
+   "slots": [
+    "inn_keeper",
+    "outer_deacon"
+   ],
+   "tension_engine_ids": [
+    "te_failed",
+    "te_ceremony_eve"
+   ],
+   "chemistry": "你没有帖子，住不进客栈；{inn_keeper.name}说可以卖你一张，{outer_deacon.name}每夜下山巡镇，第一个查的就是留仙居。",
+   "stakes": {
+    "resource_gap": "{inn_keeper.name}有客栈和一沓帖子底样，{outer_deacon.name}有大典的名册，你只有两届的落选和一身功夫",
+    "limit_gap": "大典还有三天，你的盘缠只够买一张假帖子",
+    "meeting_reason": "你每夜在镇上找地方落脚，两个人你都躲不开",
+    "irreplaceable_goal": "你想再考一次，哪怕只能站在榜牌前看一眼"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "inn_keeper",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{inn_keeper.name}说你落选的样子像{inn_keeper.ta}那个上了山的亲人"
+    },
+    {
+     "a": "player",
+     "b": "outer_deacon",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "上一届大典，{outer_deacon.name}在名册上划掉过你的名字"
+    },
+    {
+     "a": "inn_keeper",
+     "b": "outer_deacon",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{outer_deacon.name}知道留仙居在卖什么，一直没查"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_talisman_box",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "talisman_maker"
+   ],
+   "slots": [
+    "name_broker",
+    "escort"
+   ],
+   "tension_engine_ids": [
+    "te_true_name",
+    "te_sealed_box"
+   ],
+   "chemistry": "{escort.name}来你的铺子买三道封条，说木匣快压不住了；{name_broker.name}跟在后面，说木匣里那东西叫的名字，{name_broker.ta}查得到。",
+   "stakes": {
+    "resource_gap": "{escort.name}有木匣和一杆枪，{name_broker.name}有一袋子真名，你有画封条的本事",
+    "limit_gap": "你画的封条出过一次事，木匣大典正午前要送上山",
+    "meeting_reason": "两个人都是你的老主顾",
+    "irreplaceable_goal": "你想帮{escort.name}把镖送到，又想知道那个名字是谁"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "name_broker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{name_broker.name}说过你的真名一文不值，所以你最信得过"
+    },
+    {
+     "a": "player",
+     "b": "escort",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "{escort.name}每趟出镖前都来你的铺子"
+    },
+    {
+     "a": "name_broker",
+     "b": "escort",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{name_broker.name}想看木匣想了十年"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_beast_yard",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "beast_doctor"
+   ],
+   "slots": [
+    "exiled_one",
+    "inn_keeper"
+   ],
+   "tension_engine_ids": [
+    "te_exiled",
+    "te_failed"
+   ],
+   "chemistry": "{exiled_one.name}在你的寄养院做工；那头没人领的灵兽认{exiled_one.ta}做主，{inn_keeper.name}说那头灵兽当年是{inn_keeper.ta}的亲人寄养在这里的。",
+   "stakes": {
+    "resource_gap": "{exiled_one.name}有八年的功夫和一头认主的灵兽，{inn_keeper.name}有一张寄养契，你有寄养院的钥匙",
+    "limit_gap": "满一年没人领，灵兽就归院里",
+    "meeting_reason": "你天天在寄养院，两个人都来找你说这头灵兽",
+    "irreplaceable_goal": "你想让灵兽跟对的人走"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "exiled_one",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "你替{exiled_one.name}瞒下了那头灵兽的来历"
+    },
+    {
+     "a": "player",
+     "b": "inn_keeper",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{inn_keeper.name}给寄养院送过三年的草料钱"
+    },
+    {
+     "a": "exiled_one",
+     "b": "inn_keeper",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{inn_keeper.name}认出了{exiled_one.name}外袍上拆掉的门徽"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_envoy_names",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "patrol_envoy"
+   ],
+   "slots": [
+    "repair_master",
+    "name_broker"
+   ],
+   "tension_engine_ids": [
+    "te_true_name",
+    "te_cracked_sword"
+   ],
+   "chemistry": "你是巡山使，奉命查镇上买卖真名的事；{name_broker.name}一见你就笑，说你的真名{name_broker.ta}也有，{repair_master.name}说你当年住在镇上那一年，每天都来铺子里看{repair_master.ta}修剑。",
+   "stakes": {
+    "resource_gap": "你有令牌和守石阶的门人，{name_broker.name}有一袋子真名，{repair_master.name}有二十年的旧账",
+    "limit_gap": "大典前要把卖真名的事办干净，可你自己的名字也在那只布袋里",
+    "meeting_reason": "你下山巡镇，这两个人你一个也躲不开",
+    "irreplaceable_goal": "你想办好这件差事，又不想让当年的事翻出来"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "repair_master",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "你上山前，{repair_master.name}送过你一把小刀"
+    },
+    {
+     "a": "player",
+     "b": "name_broker",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{name_broker.name}说你的真名{name_broker.ta}一直没卖"
+    },
+    {
+     "a": "repair_master",
+     "b": "name_broker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{name_broker.name}在铺子里查过很多法器主人的名字"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_warden_box",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "town_warden"
+   ],
+   "slots": [
+    "outer_deacon",
+    "escort"
+   ],
+   "tension_engine_ids": [
+    "te_sealed_box",
+    "te_ceremony_eve"
+   ],
+   "chemistry": "你是镇守；{escort.name}来报，木匣里的东西在叫人的名字，{outer_deacon.name}说那只匣子是山上的事，镇守不必过问。",
+   "stakes": {
+    "resource_gap": "你有全镇的户籍和真名契的存档，{outer_deacon.name}有山门的名册，{escort.name}有木匣",
+    "limit_gap": "木匣大典前要送上山，封条在褪色",
+    "meeting_reason": "这件事报到了你面前，两个人都在等你一句话",
+    "irreplaceable_goal": "你想守住这座镇，又不想得罪山上"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "outer_deacon",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{outer_deacon.name}每届大典都来镇守府喝一次茶"
+    },
+    {
+     "a": "player",
+     "b": "escort",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "{escort.name}替镇上押过三年的税银"
+    },
+    {
+     "a": "outer_deacon",
+     "b": "escort",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "木匣是{outer_deacon.name}亲手封的"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_why_exiled",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "exiled_one",
+    "outer_deacon"
+   ],
+   "tension_engine_ids": [
+    "te_exiled",
+    "te_ceremony_eve"
+   ],
+   "chemistry": "{exiled_one.name}不肯说自己为什么被赶下山；{outer_deacon.name}每夜下山巡镇，总在{exiled_one.name}看不见的地方站一会儿，今夜{outer_deacon.ta}拦住了你。",
+   "stakes": {
+    "resource_gap": "{exiled_one.name}有一把裂了的剑，{outer_deacon.name}有大典的名册，你是两个人都肯说一句话的人",
+    "limit_gap": "大典那天两个人要当面对上",
+    "meeting_reason": "你今夜在镇上碰见了他们两个",
+    "irreplaceable_goal": "你想知道三个月前山上到底发生了什么"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "exiled_one",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{exiled_one.name}只跟你说过山上的一件小事"
+    },
+    {
+     "a": "player",
+     "b": "outer_deacon",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{outer_deacon.name}问你：那个人在山下过得好不好"
+    },
+    {
+     "a": "exiled_one",
+     "b": "outer_deacon",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "在山上同门八年，三个月前一句话没说就分开了"
+    }
+   ],
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "k_box_sword_name",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "escort",
+    "repair_master",
+    "name_broker"
+   ],
+   "tension_engine_ids": [
+    "te_sealed_box",
+    "te_true_name"
+   ],
+   "chemistry": "{escort.name}说木匣里那东西叫的是{repair_master.name}的名字；{repair_master.name}不认，{name_broker.name}说那个名字是二十年前的，只有{name_broker.ta}的旧档里还有。",
+   "stakes": {
+    "resource_gap": "{escort.name}有木匣，{repair_master.name}有二十年前的旧事，{name_broker.name}有旧档，你有三个人都没有的一样东西：你没有欠谁",
+    "limit_gap": "木匣大典正午前要送上山",
+    "meeting_reason": "三个人都围着那只木匣打转",
+    "irreplaceable_goal": "你想知道木匣里到底关着谁"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "escort",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{escort.name}请你守过一夜木匣"
+    },
+    {
+     "a": "player",
+     "b": "repair_master",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{repair_master.name}替你修过一件东西，没收钱"
+    },
+    {
+     "a": "player",
+     "b": "name_broker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{name_broker.name}从没问过你的名字"
+    },
+    {
+     "a": "escort",
+     "b": "repair_master",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{repair_master.name}二十年前也托过一次镖"
+    },
+    {
+     "a": "escort",
+     "b": "name_broker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{name_broker.name}一直想看木匣"
+    },
+    {
+     "a": "repair_master",
+     "b": "name_broker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{name_broker.name}的旧档里有{repair_master.name}的真名"
+    }
+   ],
+   "tags": []
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_grind_sword",
+   "title": "在磨剑石上磨一把剑",
+   "location_ids": [
+    "repair_shop"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "磨剑石上的水被炉火烤干了",
+    "剑身上的裂痕又长了半寸",
+    "门外排队的人探头看了一眼"
+   ],
+   "hook_ids": [],
+   "start_minute": 1060,
+   "tags": []
+  },
+  {
+   "id": "a_inn_tea",
+   "title": "在客栈大堂喝茶",
+   "location_ids": [
+    "inn"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "邻桌在说上一届落选的人后来去了哪里",
+    "掌柜在柜台后面验一张帖子",
+    "楼上有人往下看了一眼"
+   ],
+   "hook_ids": [],
+   "start_minute": 1110,
+   "tags": []
+  },
+  {
+   "id": "a_feed_beast",
+   "title": "喂寄养院的灵兽",
+   "location_ids": [
+    "beast_yard"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "灵兽隔着栏杆嗅你的手",
+    "锁链上的符文暗了一块",
+    "院子另一头有人在叫你"
+   ],
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": []
+  },
+  {
+   "id": "a_escort_watch",
+   "title": "陪镖师守木匣",
+   "location_ids": [
+    "post_station"
+   ],
+   "duration_minutes": 120,
+   "beats": [
+    "院子里的镖旗被风吹得哗啦响",
+    "木匣里传出一声轻响",
+    "后半夜，镖师递给你一碗酒"
+   ],
+   "hook_ids": [],
+   "start_minute": 1320,
+   "tags": []
+  },
+  {
+   "id": "a_read_board",
+   "title": "去石阶下看榜牌",
+   "location_ids": [
+    "mountain_steps"
+   ],
+   "duration_minutes": 20,
+   "beats": [
+    "榜牌上的名字被雨淋花了几个",
+    "守石阶的门人看着你",
+    "山门的钟敲了一下"
+   ],
+   "hook_ids": [],
+   "start_minute": 1080,
+   "tags": []
+  },
+  {
+   "id": "a_stream_night",
+   "title": "夜里去后山溪涧",
+   "location_ids": [
+    "back_stream"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "溪水冲过青苔石的声音",
+    "山上的灯灭了一半",
+    "水里映出两个人的影子"
+   ],
+   "hook_ids": [],
+   "start_minute": 1380,
+   "tags": []
+  },
+  {
+   "id": "a_street_market",
+   "title": "逛长街的夜市",
+   "location_ids": [
+    "main_street"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "卖符纸的摊子前围了一圈人",
+    "有人在街角压低声音叫卖",
+    "一个穿山门外袍的人从你身边走过"
+   ],
+   "hook_ids": [],
+   "start_minute": 1150,
+   "tags": []
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_cracked_sword",
+   "title": "剑上的裂痕",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "repair_shop"
+   ],
+   "trigger": "一把山上的剑送来修，剑身的裂痕不像是练功留下的，裂缝里还渗着暗红",
+   "objective": "在大典之前，决定这把剑修不修、还给谁",
+   "choice": "修好它，还是弄清它",
+   "immediate": {
+    "text": "掌柜把剑放在柜台上，用指甲在裂痕上刮了一下，指甲上是红的",
+    "minutes": 10
+   },
+   "near": {
+    "text": "大典那天正午",
+    "deadline_minutes": 4200
+   },
+   "far": {
+    "trigger": "剑被送回山上",
+    "consequence": "剑上的血会被山上的人认出来，有人要当众认罪",
+    "due_days": 3
+   },
+   "exits": [
+    {
+     "option": "照常修好",
+     "cost": "剑的主人回山上就没有退路"
+    },
+    {
+     "option": "把裂痕留着",
+     "cost": "铺子交不了差，炉火的灵石就断了"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1080,
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "p_true_name",
+   "title": "现查现卖",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "main_street",
+    "inn"
+   ],
+   "trigger": "有人在镇上叫卖一个真名，说是一个山上来的人的；买到的人就能逼那人签一张不能反悔的契",
+   "objective": "在名字卖出去之前，把它截下来",
+   "choice": "买下来，还是让它卖掉",
+   "immediate": {
+    "text": "一张纸条在几只手里传来传去，每过一只手价钱就翻一倍",
+    "minutes": 10
+   },
+   "near": {
+    "text": "今夜三更之前",
+    "deadline_minutes": 300
+   },
+   "far": {
+    "trigger": "名字卖出去了",
+    "consequence": "那个人从此替买主做事，一辈子",
+    "due_days": 7
+   },
+   "exits": [
+    {
+     "option": "出钱买下",
+     "cost": "卖名字的人会记住你有钱"
+    },
+    {
+     "option": "去告诉名字的主人",
+     "cost": "那人会问你是从哪里知道的"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": []
+  },
+  {
+   "id": "p_chain_broke",
+   "title": "锁链断了",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "beast_yard",
+    "main_street"
+   ],
+   "trigger": "寄养院最里面那头灵兽的锁链断了，断口整齐，是被人用法器割开的",
+   "objective": "在灵兽伤人之前，把它找回来",
+   "choice": "抓回来，还是放它走",
+   "immediate": {
+    "text": "一声长啸从寄养院那边传过来，长街上的人都停了",
+    "minutes": 5
+   },
+   "near": {
+    "text": "天亮之前",
+    "deadline_minutes": 480
+   },
+   "far": {
+    "trigger": "灵兽伤了人",
+    "consequence": "寄养院要被封，那头灵兽要被山上的人斩了",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "一个人去找",
+     "cost": "灵兽认主，你未必拉得住"
+    },
+    {
+     "option": "叫守石阶的门人来",
+     "cost": "那头灵兽就活不过今夜"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "p_sealed_box",
+   "title": "木匣在响",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "post_station"
+   ],
+   "trigger": "山门交代不许打开的木匣，今夜在后堂响了三声，封条上的符文开始褪色",
+   "objective": "在封条褪尽之前，决定开还是不开",
+   "choice": "守着它，还是打开它",
+   "immediate": {
+    "text": "木匣里传出一声闷响，像是有人在里面用拳头敲",
+    "minutes": 5
+   },
+   "near": {
+    "text": "封条褪尽",
+    "deadline_minutes": 360
+   },
+   "far": {
+    "trigger": "封条破了",
+    "consequence": "镖算丢了，镖师要被押到山上处置",
+    "due_days": 2
+   },
+   "exits": [
+    {
+     "option": "再加一道封",
+     "cost": "要去求山上的人，就要说出木匣在响"
+    },
+    {
+     "option": "打开看一眼",
+     "cost": "看了，就不能装作不知道"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1290,
+   "tags": []
+  },
+  {
+   "id": "p_rooms_full",
+   "title": "满字牌",
+   "source": "money",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "inn"
+   ],
+   "trigger": "客栈挂了满字牌，只租给持帖的人；一个落选的人没有地方过夜，掌柜说可以卖一张帖子",
+   "objective": "在今夜关门之前，让这个人有个地方住",
+   "choice": "买帖子，还是另想办法",
+   "immediate": {
+    "text": "掌柜从袖子里抽出一张帖子，在灯下晃了一晃：“一年的房钱。”",
+    "minutes": 10
+   },
+   "near": {
+    "text": "客栈今夜子时关门",
+    "deadline_minutes": 240
+   },
+   "far": {
+    "trigger": "假帖子被查出来",
+    "consequence": "买帖子的人要被赶出镇，从此不许再考",
+    "due_days": 3
+   },
+   "exits": [
+    {
+     "option": "买下帖子",
+     "cost": "你就握住了掌柜的把柄，掌柜也握住了你的"
+    },
+    {
+     "option": "带人去驿站的草料棚",
+     "cost": "草料棚夜里有镖师守着，不让外人进"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": []
+  },
+  {
+   "id": "p_formation_backflow",
+   "title": "阵眼逆流",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "mountain_steps",
+    "back_stream"
+   ],
+   "trigger": "护山大阵的阵眼在后山，今夜阵纹忽明忽暗，溪水倒流，山上的人说有人在大典前动了阵眼",
+   "objective": "在山门封山之前，弄清是谁动的",
+   "choice": "去查，还是躲开",
+   "immediate": {
+    "text": "脚下的地轻轻一震，石阶上的灯全灭了",
+    "minutes": 5
+   },
+   "near": {
+    "text": "山门三更封山",
+    "deadline_minutes": 300
+   },
+   "far": {
+    "trigger": "山门封山",
+    "consequence": "大典推迟，镇上所有人的盘缠都要耗光",
+    "due_days": 10
+   },
+   "exits": [
+    {
+     "option": "顺着溪水往上找",
+     "cost": "你会走到被逐的人不许去的地方"
+    },
+    {
+     "option": "去报巡山使",
+     "cost": "第一个被怀疑的，是今夜在溪边的人"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1350,
+   "tags": []
+  },
+  {
+   "id": "p_failed_list",
+   "title": "落选榜",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "mountain_steps",
+    "main_street"
+   ],
+   "trigger": "大典前的初选榜贴出来了，一个你认得的名字被划掉了，旁边多了一个谁都没听过的名字",
+   "objective": "在大典之前，弄清那个名字是怎么换的",
+   "choice": "替人出头，还是装作没看见",
+   "immediate": {
+    "text": "榜牌前一个人跪在地上，手指按着那个被划掉的名字",
+    "minutes": 10
+   },
+   "near": {
+    "text": "大典前一天",
+    "deadline_minutes": 2880
+   },
+   "far": {
+    "trigger": "换上去的名字上了山",
+    "consequence": "被划掉的那个人再也没有机会了",
+    "due_days": 3
+   },
+   "exits": [
+    {
+     "option": "去找执事问",
+     "cost": "执事会记住你的脸"
+    },
+    {
+     "option": "去找卖真名的人查那个新名字",
+     "cost": "要花一大笔钱，还要欠一个人情"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1100,
+   "tags": []
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_sword_return",
+   "kind": "approach",
+   "slot": "repair_master",
+   "location_ids": [],
+   "text": "{npc.name}把一把磨好的小刀放在你手心：“替你打的，只合你的手。”"
+  },
+  {
+   "id": "h_test_edge",
+   "kind": "observe",
+   "slot": "repair_master",
+   "location_ids": [
+    "repair_shop"
+   ],
+   "text": "{npc.name}停下手里的锤子，隔着炉火看了你很久"
+  },
+  {
+   "id": "h_dao_name",
+   "kind": "approach",
+   "slot": "exiled_one",
+   "location_ids": [],
+   "text": "{npc.name}靠过来，在你耳边说了一个字：“这是我的道号，我只说这一次。”"
+  },
+  {
+   "id": "h_beast_lean",
+   "kind": "approach",
+   "slot": "exiled_one",
+   "location_ids": [
+    "beast_yard",
+    "back_stream"
+   ],
+   "text": "那头灵兽把头搁在你肩上，{npc.name}看着你笑了：“它不认生人，它认你。”"
+  },
+  {
+   "id": "h_coin_string",
+   "kind": "approach",
+   "slot": "escort",
+   "location_ids": [],
+   "text": "{npc.name}把手腕上那串铜钱摘下来，套在你手腕上：“落选那年留下的，送你。”"
+  },
+  {
+   "id": "h_listen_box",
+   "kind": "request",
+   "slot": "escort",
+   "location_ids": [
+    "post_station"
+   ],
+   "text": "{npc.name}把你拉到木匣边：“你听听，它叫的是不是一个人的名字？”"
+  },
+  {
+   "id": "h_best_room",
+   "kind": "approach",
+   "slot": "inn_keeper",
+   "location_ids": [],
+   "text": "{npc.name}把一把钥匙塞给你：“楼上最好那间，不收钱，也不要帖子。”"
+  },
+  {
+   "id": "h_ask_relative",
+   "kind": "request",
+   "slot": "inn_keeper",
+   "location_ids": [],
+   "text": "{npc.name}拉住你：“你要是上了山，替我问一个人，问那个人还记不记得家。”"
+  },
+  {
+   "id": "h_torn_page",
+   "kind": "approach",
+   "slot": "outer_deacon",
+   "location_ids": [],
+   "text": "{npc.name}从大典名册上撕下一页塞给你：“这一页上的人，替我看着。”"
+  },
+  {
+   "id": "h_deacon_watch",
+   "kind": "observe",
+   "slot": "outer_deacon",
+   "location_ids": [],
+   "text": "{npc.name}站在暗处，外袍的银纹在灯下一闪，{npc.ta}一直看着你"
+  },
+  {
+   "id": "h_burn_slip",
+   "kind": "approach",
+   "slot": "name_broker",
+   "location_ids": [],
+   "text": "{npc.name}抽出一张纸条，上面写着你的真名，当着你的面凑到灯上烧了"
+  },
+  {
+   "id": "h_stray_spell",
+   "kind": "accident",
+   "slot": "name_broker",
+   "location_ids": [
+    "main_street"
+   ],
+   "text": "长街上有人斗起法来，一道符火擦着你飞过，{npc.name}一把把你拽到身后"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_deacon_guilt",
+   "category": "信息",
+   "requires": [
+    "outer_deacon",
+    "exiled_one"
+   ],
+   "text": "{exiled_one.name}背的那桩罪，真正动手的是{outer_deacon.name}。"
+  },
+  {
+   "id": "t_box_person",
+   "category": "关系",
+   "requires": [
+    "escort",
+    "repair_master"
+   ],
+   "text": "木匣里关着的，是{repair_master.name}二十年前替之顶罪的那个人留下的一缕魂。"
+  },
+  {
+   "id": "t_broker_contract",
+   "category": "人事",
+   "requires": [
+    "name_broker"
+   ],
+   "text": "握着{name_broker.name}真名契的人，就是这一届大典的主事长老。"
+  },
+  {
+   "id": "t_ceremony_moved",
+   "category": "时限",
+   "requires": [],
+   "text": "山上传话：大典提前到明天。"
+  },
+  {
+   "id": "t_spirit_stone",
+   "category": "资源",
+   "requires": [],
+   "text": "山门停发灵石，镇上所有炉火三天后熄灭。"
+  },
+  {
+   "id": "t_new_rule",
+   "category": "制度",
+   "requires": [],
+   "text": "山门新规：凡在镇上住过的人，今届一律不收。"
+  },
+  {
+   "id": "t_beast_loose",
+   "category": "意外",
+   "requires": [],
+   "text": "寄养院所有兽栏的锁链在同一刻松开了。"
+  }
+ ],
+ "forbidden_terms": [
+  "手机",
+  "电话",
+  "汽车",
+  "民国",
+  "警察",
+  "咖啡",
+  "枪械",
+  "学生",
+  "少女",
+  "少年",
+  "弟子",
+  "徒弟"
+ ],
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "violence",
+  "supernatural",
+  "coercion_theme"
+ ],
+ "status": "review",
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 10 个）。真名契是世界前提（C2，coercion_theme）。山上的人一律称“门人”。性别按会话偏好生成（D15）。"
+}

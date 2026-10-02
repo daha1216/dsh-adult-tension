@@ -115,6 +115,7 @@
 | `given_male` | 数组（字符串，≤4 字） | 是 |  |
 | `given_neutral` | 数组（字符串，≤4 字） | 是 |  |
 | `nickname_patterns` | 数组（对象（称呼模板）） | 是 | 昵称规则，例如 小{family} |
+| `order` | 枚举：`family_first` / `given_first` | 否，默认 `"family_first"` | family_first 姓在前（沈砚舟）；given_first 名在前、姓在后，用“·”连接（艾达·米勒） |
 
 ### `rules[]` 的字段
 

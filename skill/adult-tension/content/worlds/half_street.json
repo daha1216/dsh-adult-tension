@@ -1,0 +1,2488 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "退休纺织女工，成年人",
+   "age_range": [
+    52,
+    70
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_mahjong_aunt",
+   "line": "{npc.name}一边摸牌一边说，谁家签了、谁家拿了多少，没有{npc.ta}不知道的",
+   "location_ids": [
+    "street_stall"
+   ],
+   "name": null,
+   "role": "打麻将的阿姨"
+  },
+  {
+   "adult_context": "退休的老钳工，成年人",
+   "age_range": [
+    60,
+    78
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_chess_uncle",
+   "line": "{npc.name}在路灯底下下了三十年棋，眼睛不看棋盘也看得见街上的事",
+   "location_ids": [
+    "street_stall",
+    "bath_front"
+   ],
+   "name": null,
+   "role": "下象棋的老街坊"
+  },
+  {
+   "adult_context": "保安公司派来的正式保安，成年人",
+   "age_range": [
+    30,
+    55
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_site_guard",
+   "line": "{npc.name}站在临时点门口，谁进去都要先报门牌号",
+   "location_ids": [
+    "notice_corner",
+    "relocation_office"
+   ],
+   "name": null,
+   "role": "拆迁办的保安"
+  },
+  {
+   "adult_context": "附近医院的夜班护工，成年人",
+   "age_range": [
+    25,
+    50
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_laundry_owner",
+   "line": "{npc.name}每晚十一点准时来洗夜班的工服，顺手帮人看着烘干机",
+   "location_ids": [
+    "laundromat"
+   ],
+   "name": null,
+   "role": "洗衣房的常客"
+  },
+  {
+   "adult_context": "外卖平台的骑手，成年人",
+   "age_range": [
+    20,
+    40
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_courier",
+   "line": "{npc.name}一天穿过这条街几十趟，谁的话都能顺路捎一句",
+   "location_ids": [
+    "street_stall",
+    "notice_corner",
+    "laundromat"
+   ],
+   "name": null,
+   "role": "送外卖的骑手"
+  },
+  {
+   "adult_context": "辖区派出所的正式民警，成年人",
+   "age_range": [
+    30,
+    50
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_cop",
+   "line": "{npc.name}晚上巡一趟，看见放贷的那家店门开着就会停下来",
+   "location_ids": [
+    "notice_corner",
+    "street_stall"
+   ],
+   "name": null,
+   "role": "辖区民警"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "{stall_owner.name}是你的老板，也是整条街的账本；{bath_keeper.name}每晚收工都来摊上吃一碗面，{stall_owner.name}从来不收{bath_keeper.ta}的钱。",
+   "id": "k_stall_night",
+   "identity_ids": [
+    "stall_helper"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "stall_owner",
+     "b_to_a": {
+      "tension": 0,
+      "trust": 2
+     },
+     "reason": "{stall_owner.name}收留你打工三年，骂你最多，也护你最多",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bath_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{bath_keeper.name}每晚坐你收拾的那张桌子，从不多说一句",
+     "stage": "acquainted"
+    },
+    {
+     "a": "stall_owner",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "bath_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{stall_owner.name}和{bath_keeper.name}的父亲是拜把子兄弟",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "stall_owner",
+    "bath_keeper"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在街拆之前，替自己攒够一间新房的押金",
+    "limit_gap": "你没有住处可搬，{bath_keeper.name}欠着煤栈的钱",
+    "meeting_reason": "你们三个每晚都在夜宵摊熬到最后一锅",
+    "resource_gap": "{stall_owner.name}有整条街的人情账，{bath_keeper.name}有澡堂的钥匙，你只有一份零工"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_same_table",
+    "te_old_debt"
+   ]
+  },
+  {
+   "chemistry": "{lender.name}的烟酒店就在你们楼下，{flatmate.name}最近总在店门口站很久，回来时脸色发白。",
+   "id": "k_iou_drawer",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": -1
+     },
+     "b": "lender",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "你在{lender.name}的店里买过烟，没借过钱",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "flatmate",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 2
+     },
+     "reason": "你和{flatmate.name}合租一年，一起吃过很多碗半夜的面",
+     "stage": "familiar"
+    },
+    {
+     "a": "lender",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "flatmate",
+     "b_to_a": {
+      "tension": 3,
+      "trust": -2
+     },
+     "reason": "{flatmate.name}上个月在{lender.name}那里签了一张借条",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "lender",
+    "flatmate"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道{flatmate.name}到底借了多少",
+    "limit_gap": "{flatmate.name}要被裁员了，你也没有多余的钱",
+    "meeting_reason": "你们住在同一栋楼，每天进出都要经过烟酒店",
+    "resource_gap": "{lender.name}有一抽屉借条，{flatmate.name}和你只有这个月凑不齐的房租"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_old_debt",
+    "te_thin_wall"
+   ]
+  },
+  {
+   "chemistry": "你要记录这条街，{stall_owner.name}什么都肯讲，唯独不讲新区铺面；{laundry_heir.name}什么都不肯讲，却每天替你把录音笔充好电。",
+   "id": "k_oral_history",
+   "identity_ids": [
+    "street_historian"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "stall_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{stall_owner.name}讲故事讲得最好，也最会挑着讲",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "laundry_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{laundry_heir.name}拒绝了你三次访谈，第四次给你倒了一杯水",
+     "stage": "stranger"
+    },
+    {
+     "a": "stall_owner",
+     "a_to_b": {
+      "tension": 0,
+      "trust": 1
+     },
+     "b": "laundry_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{stall_owner.name}是唯一知道那枚婚戒来历的人",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "stall_owner",
+    "laundry_heir"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在街拆之前把每个人的故事都留下来",
+    "limit_gap": "稿子月底要交，洗衣房的产权还卡着一个签名",
+    "meeting_reason": "你每天在夜宵摊和洗衣房之间来回做访谈",
+    "resource_gap": "你有出版社的经费，{stall_owner.name}有故事，{laundry_heir.name}有一抽屉没人认领的旧物"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_last_summer",
+    "te_same_table"
+   ]
+  },
+  {
+   "chemistry": "{flatmate.name}想画澡堂，{bath_keeper.name}不许任何人在池子里画画，除非是打烊后。",
+   "id": "k_bath_and_brush",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bath_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "你是{bath_keeper.name}的老主顾，每周二打烊前去",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "flatmate",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{flatmate.name}画过你，没给你看",
+     "stage": "familiar"
+    },
+    {
+     "a": "bath_keeper",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "flatmate",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{flatmate.name}偷偷在番台画了一张{bath_keeper.name}的侧脸，被抓住了",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "bath_keeper",
+    "flatmate"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想看这两个人在街拆之前和好",
+    "limit_gap": "{flatmate.name}可能要被裁，{bath_keeper.name}可能要卖掉澡堂",
+    "meeting_reason": "你住在{flatmate.name}隔壁，每周去两次澡堂",
+    "resource_gap": "{bath_keeper.name}有澡堂，{flatmate.name}有一本速写本，你有两边都信得过的面子"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_last_summer",
+    "te_thin_wall"
+   ]
+  },
+  {
+   "chemistry": "你的签字能让{relocation_agent.name}这个月的指标一次过线；{laundry_heir.name}是你小时候的邻居，等你开口已经等了十年。",
+   "id": "k_heir_returns",
+   "identity_ids": [
+    "returning_heir"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "relocation_agent",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{relocation_agent.name}已经给你打了七个电话",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "laundry_heir",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 2
+     },
+     "reason": "你们小时候在同一个门洞里躲过雨",
+     "stage": "familiar"
+    },
+    {
+     "a": "relocation_agent",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "laundry_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{relocation_agent.name}去洗衣房谈过三次，都没谈成",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "relocation_agent",
+    "laundry_heir"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道当年你家为什么搬走",
+    "limit_gap": "{relocation_agent.name}的指标月底到期，{laundry_heir.name}的产权证少一个签名",
+    "meeting_reason": "你回来签字的第一天，三个人都在等你",
+    "resource_gap": "你有祖屋的产权和全街最高的补偿款"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_one_signature",
+    "te_old_debt"
+   ]
+  },
+  {
+   "chemistry": "你手里的评估单能决定谁家多拿几万；{lender.name}想知道哪几户的钱先到账，{stall_owner.name}想知道自己的摊子算不算。",
+   "id": "k_agent_and_lender",
+   "identity_ids": [
+    "junior_agent"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": -1
+     },
+     "b": "lender",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{lender.name}请你抽过一包很贵的烟",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "stall_owner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{stall_owner.name}给你上菜时总是不说话",
+     "stage": "acquainted"
+    },
+    {
+     "a": "lender",
+     "a_to_b": {
+      "tension": 2,
+      "trust": -1
+     },
+     "b": "stall_owner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{lender.name}的上家，当年是从{stall_owner.name}的摊上起家的",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "lender",
+    "stall_owner"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在这份工作里，做一件对得起自己的事",
+    "limit_gap": "你的指标完不成就会被辞退，{lender.name}的账月底要交",
+    "meeting_reason": "你每晚都要在夜宵摊上被人围着问",
+    "resource_gap": "你有评估单和公司的车"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_one_signature",
+    "te_same_table"
+   ]
+  },
+  {
+   "chemistry": "{relocation_agent.name}来澡堂谈收购的事，被{bath_keeper.name}请进了打烊后的大池，说要谈就在这里谈。",
+   "id": "k_last_bath",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bath_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{bath_keeper.name}破例把今晚的钟点卖给了你",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "relocation_agent",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "你在公告墙前见过{relocation_agent.name}发呆",
+     "stage": "stranger"
+    },
+    {
+     "a": "bath_keeper",
+     "a_to_b": {
+      "tension": 2,
+      "trust": -1
+     },
+     "b": "relocation_agent",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{relocation_agent.name}小时候在这间澡堂学会了游泳，{bath_keeper.name}不知道",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "bath_keeper",
+    "relocation_agent"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在澡堂拆之前，再泡一次最后一池热水",
+    "limit_gap": "{bath_keeper.name}的煤只够烧一个礼拜，{relocation_agent.name}月底要交差",
+    "meeting_reason": "你恰好是那晚包场的另一个人",
+    "resource_gap": "{relocation_agent.name}有公司的价，{bath_keeper.name}有这一池水，你有两边都想要的那个答案"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_last_summer",
+    "te_one_signature"
+   ]
+  },
+  {
+   "chemistry": "三扇门挨着：{laundry_heir.name}的洗衣房、{lender.name}的烟酒店、{flatmate.name}和你合租的楼梯口。今晚三扇门都亮着灯。",
+   "id": "k_three_doors",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "laundry_heir",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{laundry_heir.name}替你收过一件落下的外套",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": -1
+     },
+     "b": "lender",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{lender.name}知道你住几楼",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "flatmate",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "你和{flatmate.name}共用一个冰箱",
+     "stage": "familiar"
+    },
+    {
+     "a": "laundry_heir",
+     "a_to_b": {
+      "tension": 2,
+      "trust": -1
+     },
+     "b": "lender",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{lender.name}想把洗衣房的产权抵过来",
+     "stage": "acquainted"
+    },
+    {
+     "a": "laundry_heir",
+     "a_to_b": {
+      "tension": 0,
+      "trust": 1
+     },
+     "b": "flatmate",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{flatmate.name}半夜常去洗衣房画烘干机",
+     "stage": "acquainted"
+    },
+    {
+     "a": "lender",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "flatmate",
+     "b_to_a": {
+      "tension": 3,
+      "trust": -2
+     },
+     "reason": "{flatmate.name}欠{lender.name}的钱，月底到期",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "laundry_heir",
+    "lender",
+    "flatmate"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在这条街拆掉之前，弄清谁欠了谁",
+    "limit_gap": "三个人都在等一笔拆迁款，也都怕它来",
+    "meeting_reason": "你们每天在同一段楼梯上擦肩而过",
+    "resource_gap": "{laundry_heir.name}有产权，{lender.name}有借条，{flatmate.name}有一本画满了秘密的速写本"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_thin_wall",
+    "te_old_debt"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "distorted",
+   "id": "ch_stall_talk",
+   "reach": "当晚就传遍整条街，第二天早上连菜市场都知道",
+   "text": "夜宵摊上的闲话"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_wall",
+   "reach": "贴出来的东西，所有路过的人都看得见",
+   "text": "巷口公告墙"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_group",
+   "reach": "群里的人一个小时之内都会看到，截图会被转出去",
+   "text": "楼栋的业主群"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "夜宵摊老板，成年人，在这条街摆了十九年摊",
+   "age_range": [
+    38,
+    55
+   ],
+   "appearance_options": [
+    "围裙上油点子洗不掉，左手腕戴一块停了的老手表",
+    "嗓门大，笑起来眼角全是褶子，炒锅颠得比谁都稳"
+   ],
+   "decision": {
+    "avoids": [
+     "被人当众问起新区铺面的事"
+    ],
+    "contrast": "看起来什么都往外说，其实最要紧的事一个字都没说过",
+    "core_value": "人情不能白欠",
+    "goal_options": [
+     "在街拆之前把每一笔人情账都结清",
+     "替自己找一个能继续摆摊的地方",
+     "弄清楚是谁第一个签的字"
+    ],
+    "never": [
+     "在摊上替人做担保"
+    ],
+    "prefers": [
+     "用一碗面换一句实话"
+    ],
+    "pressure_responses": {
+     "breaking": "收摊，第二天不出摊",
+     "high": "当着整桌人把一笔旧账念出来",
+     "low": "笑着岔开话题，往你碗里多加一勺",
+     "mid": "说起这条街谁欠谁什么，一笔一笔都对得上"
+    },
+    "relationship_stance": "热络，但心里每个人都有一个价",
+    "withdrawal": "把灯泡一串串拔掉，坐在空凳子中间抽烟，谁来都说打烊了"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "stall_owner",
+   "identity": {
+    "authority": "决定谁的账可以先欠着、谁的事可以在摊上说",
+    "exposure": "这些年替几户人家藏过几样不能见光的东西",
+    "hidden": "已经偷偷去看过新区的铺面，没跟任何人说",
+    "limits": [
+     "摊位不在拆迁名单上，可整条街拆了，客人也就没了",
+     "一个人顾不过来两边的锅"
+    ],
+    "obligations": [
+     "每月给乡下的老母亲寄钱"
+    ],
+    "resources": [
+     "整条街的人情账，全记在脑子里",
+     "每晚最后一锅的剩菜"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方记得{npc.ta}多年前随口说过的一件小事",
+     "对方吃完会把碗摞好送回灶台"
+    ],
+    "boundaries": [
+     "不在摊上，不当着熟客"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "收摊后陪{npc.ta}一起把凳子摞起来的那个人",
+    "dislikes": [
+     "被人可怜"
+    ],
+    "expression": "给对方留最后一份没卖完的菜",
+    "likes": [
+     "收摊后的那一根烟"
+    ],
+    "preconditions": [
+     "灯熄了，街上没人"
+    ],
+    "self_control_range": [
+     2,
+     5
+    ]
+   },
+   "public_role": "夜宵摊老板",
+   "schedule": [
+    {
+     "from": 1080,
+     "location_id": "street_stall",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "street_stall",
+     "to": 120
+    },
+    {
+     "from": 600,
+     "location_id": "laundromat",
+     "to": 1079
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "街坊会说{npc.ta}早就跟拆迁办穿了一条裤子",
+      "option": "交定金，先给自己留条后路"
+     },
+     {
+      "cost": "街拆完那天，{npc.ta}什么都没有",
+      "option": "不交，陪这条街撑到最后"
+     }
+    ],
+    "pressure": "交了定金，就等于告诉全街自己早就准备走",
+    "trigger": "新区铺面的定金要在月底前交"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“这条街拆了以后，你还会来找我吃一碗面吗？”",
+    "surface": "“坐，老位子给你留着。”"
+   }
+  },
+  {
+   "adult_context": "老澡堂的看池人，成年人，接了父亲的锅炉和债",
+   "age_range": [
+    28,
+    42
+   ],
+   "appearance_options": [
+    "手臂被锅炉烫过几道浅疤，夏天也穿长袖",
+    "头发总是湿的，身上有一股硫磺皂的味道"
+   ],
+   "decision": {
+    "avoids": [
+     "别人打听包场来过谁"
+    ],
+    "contrast": "守着一池热水，自己却很少下池",
+    "core_value": "说出口的话要作数",
+    "goal_options": [
+     "守住澡堂到拆迁那一天",
+     "卖个好价钱，从此离开锅炉房",
+     "弄清父亲那笔煤钱到底欠了谁"
+    ],
+    "never": [
+     "把包场客人的事说出去"
+    ],
+    "prefers": [
+     "当面讲定，不留字据"
+    ],
+    "pressure_responses": {
+     "breaking": "拉下锅炉的总闸，整座澡堂一起凉下去",
+     "high": "把包场的钟点卖给出价高的那一个",
+     "low": "低头擦番台，装没听见",
+     "mid": "说规矩：钟点到了就封炉，谁也不能多泡"
+    },
+    "relationship_stance": "对熟客客气，对生人冷",
+    "withdrawal": "躲进锅炉房，把门从里面闩上，只隔着门板说话"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "bath_keeper",
+   "identity": {
+    "authority": "决定打烊后的大池包给谁、包多久、什么时候封炉",
+    "exposure": "打烊后的包场从来不登记，谁来过只有{npc.ta}知道",
+    "hidden": "对面洗浴中心开了一个价，{npc.ta}没有一口回绝",
+    "limits": [
+     "煤栈压着这个冬天的煤",
+     "对面新开的洗浴中心在挖老客人"
+    ],
+    "obligations": [
+     "替父亲还清欠煤栈的钱"
+    ],
+    "resources": [
+     "澡堂后门和锅炉房的钥匙",
+     "一本记着三十年老主顾的票根簿"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在雾气里也守规矩，不乱看",
+     "对方肯陪{npc.ta}在锅炉房里熬一夜"
+    ],
+    "boundaries": [
+     "不在营业时间"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "可以背靠背坐在池沿上、什么都不用解释的人",
+    "dislikes": [
+     "被人催"
+    ],
+    "expression": "把封炉的时间往后推一刻钟",
+    "likes": [
+     "池水快凉时的那点安静"
+    ],
+    "preconditions": [
+     "锁好前门，钟点是{npc.ta}自己定的"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "澡堂看池人",
+   "schedule": [
+    {
+     "from": 840,
+     "location_id": "bath_front",
+     "to": 1380
+    },
+    {
+     "from": 1381,
+     "location_id": "bath_pool",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "bath_pool",
+     "to": 90
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "老主顾会说{npc.ta}把老澡堂卖给了仇家",
+      "option": "卖给对面，把父亲的债一次还清"
+     },
+     {
+      "cost": "利滚利，下一个冬天更难",
+      "option": "不卖，去找放贷的借煤钱"
+     }
+    ],
+    "pressure": "卖了，澡堂就没了；不卖，煤钱还不上",
+    "trigger": "对面洗浴中心开出的收购价只等到这个周末"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“你再坐一会儿，我就再晚一刻封炉。”",
+    "surface": "“钟点到了，水要凉了。”"
+   }
+  },
+  {
+   "adult_context": "拆迁公司派驻的协调员，成年人，在这条街待了两个月",
+   "age_range": [
+    27,
+    40
+   ],
+   "appearance_options": [
+    "衬衫袖口挽到小臂，胸前挂着工牌，总有一支笔夹在耳朵上",
+    "说话慢，笑得很礼貌，鞋擦得在老街上显得太干净"
+   ],
+   "decision": {
+    "avoids": [
+     "在夜宵摊上被认出来"
+    ],
+    "contrast": "穿得最体面，却是街上最孤单的那一个",
+    "core_value": "把事办成",
+    "goal_options": [
+     "月底前签够七成",
+     "替一户人家多争一点补偿",
+     "找到小时候住过的那间屋"
+    ],
+    "never": [
+     "伪造签名"
+    ],
+    "prefers": [
+     "先听对方要什么，再开口"
+    ],
+    "pressure_responses": {
+     "breaking": "把工牌摘下来，坐在台阶上不说话",
+     "high": "暗示不签的人家后面只会更吃亏",
+     "low": "微笑，说这是公司的规定",
+     "mid": "拿出评估单，一条一条讲道理"
+    },
+    "relationship_stance": "对每个人都客气，对谁都不说真话",
+    "withdrawal": "关上临时点的玻璃门，一整天不出来，电话也不接"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "relocation_agent",
+   "identity": {
+    "authority": "决定评估单上的面积怎么量、补偿款什么时候批",
+    "exposure": "替几户人家把面积量多了，换他们先签",
+    "hidden": "{npc.ta}小时候在这条街住过两年，没人认出来",
+    "limits": [
+     "月底签约率不到七成，{npc.ta}就会被调回总部坐冷板凳",
+     "评估单要经三个人签字"
+    ],
+    "obligations": [
+     "对公司的签约指标负责"
+    ],
+    "resources": [
+     "每一户的评估单",
+     "一份没公开的提前签约奖励名单"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不把{npc.ta}当成拆迁的人看",
+     "对方记得这条街以前的样子"
+    ],
+    "boundaries": [
+     "不在临时点里"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "能在台阶上并肩坐着、不谈补偿款的人",
+    "dislikes": [
+     "被人往身上泼脏水"
+    ],
+    "expression": "下班后绕一段远路陪对方走回去",
+    "likes": [
+     "老街夜里的煤炉味"
+    ],
+    "preconditions": [
+     "对方不是{npc.ta}要谈签约的户主"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "拆迁协调员",
+   "schedule": [
+    {
+     "from": 540,
+     "location_id": "relocation_office",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "notice_corner",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "street_stall",
+     "to": 1380
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "奖励名单一公开，先签的人会觉得被骗",
+      "option": "用提前签约奖励去换他们签字"
+     },
+     {
+      "cost": "月底前就会被调走",
+      "option": "跟总部说这三户拿不下"
+     }
+    ],
+    "pressure": "那三户里有一户，是{npc.ta}小时候住过的人家",
+    "trigger": "总部要求本周内拿下巷尾那三户"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我也在这条街上哭过一次，就在你身后那个门洞里。”",
+    "surface": "“我理解，我理解，但规定是这样的。”"
+   }
+  },
+  {
+   "adult_context": "在街面放贷的人，成年人，名义上开一家小烟酒店",
+   "age_range": [
+    35,
+    58
+   ],
+   "appearance_options": [
+    "金链子藏在领口里，手指上有被烟熏黄的茧",
+    "总穿一双老布鞋，走路没声音，记性好得吓人"
+   ],
+   "decision": {
+    "avoids": [
+     "和警察打交道"
+    ],
+    "contrast": "在街上放贷，自己却最怕被人追债",
+    "core_value": "账要算清",
+    "goal_options": [
+     "在拆迁款到账前收回所有的钱",
+     "把一户人家的借条改成拆迁款的分成",
+     "脱身"
+    ],
+    "never": [
+     "对借钱人的家里人动手"
+    ],
+    "prefers": [
+     "先给甜头，再谈条件"
+    ],
+    "pressure_responses": {
+     "breaking": "把借条撕了，扔在对方脚下，转身就走",
+     "high": "带着帮手上门，把屋里的电器一样样记下来",
+     "low": "笑着递一根烟，说不急",
+     "mid": "掏出借条，把日子念给对方听"
+    },
+    "relationship_stance": "对欠钱的人有耐心，对赖账的人没有",
+    "withdrawal": "关了烟酒店的卷帘门，在里面一个人一张张数借条"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "lender",
+   "identity": {
+    "authority": "决定谁的借条可以缓一缓、谁家的门今晚该去敲",
+    "exposure": "借条上的利息比法律允许的高得多",
+    "hidden": "{npc.ta}自己也欠着上面一笔还不清的钱",
+    "limits": [
+     "拆迁款一到账，好几家就要连本带利还，{npc.ta}得赶在签约前把账收紧",
+     "派出所的民警已经来过一次"
+    ],
+    "obligations": [
+     "替上面的人按月交数"
+    ],
+    "resources": [
+     "抽屉里一沓手写借条",
+     "两个随叫随到的帮手"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方从不跟{npc.ta}借钱",
+     "对方敢当面跟{npc.ta}说不"
+    ],
+    "boundaries": [
+     "绝不拿钱换亲近"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "不用算账的那一个人",
+    "dislikes": [
+     "被人当成坏人看"
+    ],
+    "expression": "替对方把一笔账悄悄抹掉，不说",
+    "likes": [
+     "凌晨收摊后的一碗白粥"
+    ],
+    "preconditions": [
+     "确认对方不欠{npc.ta}一分钱"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "烟酒店老板",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "notice_corner",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "street_stall",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "street_stall",
+     "to": 60
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "这件事要是被拆迁办知道，整条街都会翻脸",
+      "option": "逼那户人家把拆迁款分一半出来"
+     },
+     {
+      "cost": "上面的人从来不谈",
+      "option": "自己去跟上面的人谈"
+     }
+    ],
+    "pressure": "只有把一户人家的拆迁款提前抵过来，才凑得上",
+    "trigger": "上面的人要{npc.ta}这个月交双倍"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“这条街上，就你一个人看我的眼神不是怕。”",
+    "surface": "“不急，你慢慢想，日子我替你记着。”"
+   }
+  },
+  {
+   "adult_context": "合租屋里的室友，成年人，在附近一家公司做设计",
+   "age_range": [
+    24,
+    36
+   ],
+   "appearance_options": [
+    "总戴着一副大耳机，衣服上有颜料的痕迹",
+    "半夜还亮着台灯，桌上堆着外卖盒和速写本"
+   ],
+   "decision": {
+    "avoids": [
+     "被问起鞋架上那双拖鞋"
+    ],
+    "contrast": "画了整条街的人，自己却从不入画",
+    "core_value": "自由",
+    "goal_options": [
+     "把这条街在拆之前全部画下来",
+     "保住工作",
+     "找到一个能一起搬走的人"
+    ],
+    "never": [
+     "翻别人的东西"
+    ],
+    "prefers": [
+     "在纸上把话画出来"
+    ],
+    "pressure_responses": {
+     "breaking": "收拾一个包，连夜搬去朋友家",
+     "high": "当面把分摊表撕了，说大家各管各的",
+     "low": "戴上耳机，假装在忙",
+     "mid": "说房租的事等发了工资再说"
+    },
+    "relationship_stance": "嘴上说各管各的，其实谁的事都记着",
+    "withdrawal": "把房门反锁，整晚只能听见笔在纸上沙沙地响"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "flatmate",
+   "identity": {
+    "authority": "决定客厅那间房下个月租给谁",
+    "exposure": "鞋架上那双多出来的拖鞋，是{npc.ta}带回来的人的",
+    "hidden": "{npc.ta}在偷偷画这条街，打算拆完以后办一个展",
+    "limits": [
+     "公司在裁员，{npc.ta}的名字在名单边上",
+     "房东要涨租，这个月分摊还没凑齐"
+    ],
+    "obligations": [
+     "每月按时交自己那份房租"
+    ],
+    "resources": [
+     "二房东的电话",
+     "一本画满了这条街的速写本"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方肯让{npc.ta}画",
+     "对方半夜也会给{npc.ta}留一碗面"
+    ],
+    "boundaries": [
+     "不在公司同事面前"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "能一起在窗台上看对面的楼一栋栋空掉的人",
+    "dislikes": [
+     "被管"
+    ],
+    "expression": "画一张对方的速写，悄悄塞进门缝",
+    "likes": [
+     "窗台上的风"
+    ],
+    "preconditions": [
+     "门关着，隔壁的人睡了"
+    ],
+    "self_control_range": [
+     1,
+     4
+    ]
+   },
+   "public_role": "合租室友",
+   "schedule": [
+    {
+     "from": 540,
+     "location_id": "laundromat",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "rental_flat",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "rental_flat",
+     "to": 120
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "画展就要往后推，街可不等人",
+      "option": "先去夜宵摊打零工凑房租"
+     },
+     {
+      "cost": "借条一签，就再也不是各管各的了",
+      "option": "向放贷的人借一笔"
+     }
+    ],
+    "pressure": "如果被裁，这个月的房租和画展都没了着落",
+    "trigger": "公司的裁员名单下周一公布"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“你知道我画了你多少张吗？一张都不敢给你看。”",
+    "surface": "“房租我月底给，真的。”"
+   }
+  },
+  {
+   "adult_context": "洗衣房的主人，成年人，从父母手里接下这间铺子和楼上的房",
+   "age_range": [
+    30,
+    48
+   ],
+   "appearance_options": [
+    "说话轻声细语，总在折叠桌前叠别人落下的衣服",
+    "眼镜片很厚，手上有一枚褪了色的婚戒，从来不摘"
+   ],
+   "decision": {
+    "avoids": [
+     "被人提起那个失联的名字"
+    ],
+    "contrast": "替所有人收着落下的东西，自己的东西却一件也找不回来",
+    "core_value": "不欠任何人",
+    "goal_options": [
+     "找到失联的人，把字签了",
+     "就这样守着洗衣房，什么都不变",
+     "替楼上的老人找一个新住处"
+    ],
+    "never": [
+     "把别人落下的东西扔掉"
+    ],
+    "prefers": [
+     "做事不说话"
+    ],
+    "pressure_responses": {
+     "breaking": "关掉洗衣房的灯，坐在烘干机旁边哭",
+     "high": "把那枚婚戒摘下来，放进抽屉",
+     "low": "把衣服叠得更整齐一点",
+     "mid": "说这是家里的事，外人不懂"
+    },
+    "relationship_stance": "温和，但谁也走不进去",
+    "withdrawal": "把洗衣房的卷帘拉下一半，只留一盏灯，谁敲门都不应"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "laundry_heir",
+   "identity": {
+    "authority": "决定洗衣房夜里开不开、谁可以在这里过夜",
+    "exposure": "失联的那个人其实就在城里，{npc.ta}知道地址，一直没去找",
+    "hidden": "那枚婚戒，是那个失联的人留下的",
+    "limits": [
+     "产权证上还有一个失联多年的名字，签约需要两个人都签字",
+     "身体不好，夜里常常胸口疼"
+    ],
+    "obligations": [
+     "照顾楼上卧床的老人"
+    ],
+    "resources": [
+     "洗衣房和楼上那间房的产权",
+     "一抽屉别人落下又没来取的东西"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方会在深夜推门进来陪{npc.ta}坐一会儿",
+     "对方不问那枚戒指"
+    ],
+    "boundaries": [
+     "不在洗衣房的玻璃门前"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "能在烘干机旁边并排坐着、一句话不说的人",
+    "dislikes": [
+     "被人同情"
+    ],
+    "expression": "把对方的衣服洗好、叠好、放在最上面一格",
+    "likes": [
+     "烘干机转起来的那种暖"
+    ],
+    "preconditions": [
+     "楼上的老人睡着了"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "洗衣房老板",
+   "schedule": [
+    {
+     "from": 480,
+     "location_id": "laundromat",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "rental_flat",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "laundromat",
+     "to": 300
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "要见一面，就得把十年前的事重新翻出来",
+      "option": "去找那个人"
+     },
+     {
+      "cost": "那就等于承认那个人再也不会回来",
+      "option": "请律师按失踪处理"
+     }
+    ],
+    "pressure": "不找到那个人，这间铺子一分钱都拿不到",
+    "trigger": "拆迁办说产权证上的两个人必须都到场签字"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“要是那个人回来了，我该说什么？我连恨都恨不起来了。”",
+    "surface": "“你的衬衫我替你收起来了，在第三格。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "拆迁签约倒计时第三十天，七月",
+  "minute": 1260
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "coercion_theme",
+  "nightlife",
+  "workplace_power"
+ ],
+ "custom": false,
+ "customs": [
+  "夜宵摊上，熟客的碗不用自己端，吃完摞在桌角，老板会收。",
+  "谁家搬走，前一晚要在门口摆一张桌子，把屋里带不走的东西分给街坊。",
+  "在澡堂里不问别人包场是跟谁，问了就是坏规矩。",
+  "借了人情不当面说谢谢，下次在夜宵摊替对方结一次账就算还了。",
+  "洗衣房里落下的东西放在第三格，一个月没人来取，就归需要的人。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "老板把剩下的菜全倒进一口锅里",
+    "有人提起谁家今天去拆迁办了",
+    "灯泡一串串熄了，只剩最后一桌"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [],
+   "id": "a_last_wok",
+   "location_ids": [
+    "street_stall"
+   ],
+   "start_minute": 1380,
+   "tags": [],
+   "title": "收摊前的最后一锅"
+  },
+  {
+   "beats": [
+    "一张新告示压住了旧告示的一角",
+    "有人念出声来，念到补偿标准时停住了",
+    "人群慢慢散开，只剩两三个人还站着"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_wall_reading",
+   "location_ids": [
+    "notice_corner"
+   ],
+   "start_minute": 1230,
+   "tags": [],
+   "title": "看新贴的告示"
+  },
+  {
+   "beats": [
+    "番台的票根簿翻到了最后几页",
+    "池子里只剩两三个老主顾",
+    "看池人喊：还有半个钟点封炉"
+   ],
+   "duration_minutes": 90,
+   "hook_ids": [],
+   "id": "a_late_bath",
+   "location_ids": [
+    "bath_front",
+    "bath_pool"
+   ],
+   "start_minute": 1290,
+   "tags": [],
+   "title": "晚场的澡"
+  },
+  {
+   "beats": [
+    "烘干机转起来，整间屋子都在震",
+    "有人推门进来，看见你，愣了一下",
+    "衣服烘好了，两个人都没起身"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [],
+   "id": "a_dryer_wait",
+   "location_ids": [
+    "laundromat"
+   ],
+   "start_minute": 1350,
+   "tags": [],
+   "title": "等烘干机"
+  },
+  {
+   "beats": [
+    "冰箱里只剩两个鸡蛋和半把葱",
+    "隔壁的门开了一条缝",
+    "面煮好了，多盛了一碗"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_flat_noodles",
+   "location_ids": [
+    "rental_flat"
+   ],
+   "start_minute": 1410,
+   "tags": [],
+   "title": "半夜煮面"
+  },
+  {
+   "beats": [
+    "一户人家在门口摆出一张长桌",
+    "旧收音机、搪瓷盆、一摞老照片被街坊一样样挑走",
+    "最后一样东西没人要，主人自己抱回去了"
+   ],
+   "duration_minutes": 120,
+   "hook_ids": [],
+   "id": "a_moving_table",
+   "location_ids": [
+    "street_stall",
+    "notice_corner"
+   ],
+   "start_minute": 1170,
+   "tags": [],
+   "title": "搬家前夜的长桌"
+  },
+  {
+   "beats": [
+    "玻璃门上的“铁钉螺丝”还没撕干净",
+    "协调员给你倒了一杯水",
+    "评估单上的数字和你想的不一样"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_office_visit",
+   "location_ids": [
+    "relocation_office"
+   ],
+   "start_minute": 1020,
+   "tags": [],
+   "title": "去拆迁办问一句"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "当代，拆迁前最后一个夏天",
+ "extends": null,
+ "forbidden_terms": [
+  "铜钱",
+  "马车",
+  "电报",
+  "煤油灯",
+  "魔法",
+  "灵力",
+  "飞船",
+  "全息",
+  "丧尸",
+  "寻呼机",
+  "大哥大",
+  "朝廷",
+  "衙门"
+ ],
+ "hooks": [
+  {
+   "id": "h_saved_seat",
+   "kind": "approach",
+   "location_ids": [
+    "street_stall"
+   ],
+   "slot": "stall_owner",
+   "text": "{npc.name}把你常坐的那张凳子从叠起来的凳子堆里抽出来，擦了擦，放在灯底下"
+  },
+  {
+   "id": "h_extra_bowl",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "stall_owner",
+   "text": "{npc.name}端来一碗没点过的汤，说是多煮的，放下就走了"
+  },
+  {
+   "id": "h_later_close",
+   "kind": "approach",
+   "location_ids": [
+    "bath_front",
+    "bath_pool"
+   ],
+   "slot": "bath_keeper",
+   "text": "{npc.name}看了一眼钟，又看了一眼你，把封炉的牌子往后翻了一格"
+  },
+  {
+   "id": "h_dry_towel",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "bath_keeper",
+   "text": "{npc.name}递过来一条刚从锅炉房烘干的毛巾，还是热的"
+  },
+  {
+   "id": "h_steps_together",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "relocation_agent",
+   "text": "{npc.name}把工牌摘下来塞进口袋，在你旁边的台阶上坐下了"
+  },
+  {
+   "id": "h_light_cigarette",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "lender",
+   "text": "{npc.name}替你点上一根烟，自己没点，只是看着你"
+  },
+  {
+   "id": "h_sketch_slip",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "flatmate",
+   "text": "{npc.name}从门缝里塞进来一张纸，是一张你的速写"
+  },
+  {
+   "id": "h_shared_earphone",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "flatmate",
+   "text": "{npc.name}把一只耳机递给你，里面在放一首老歌"
+  },
+  {
+   "id": "h_folded_shirt",
+   "kind": "approach",
+   "location_ids": [
+    "laundromat"
+   ],
+   "slot": "laundry_heir",
+   "text": "{npc.name}把你的衬衫叠好，放在最上面一格，又往里面夹了一张纸条"
+  },
+  {
+   "id": "h_lender_watch",
+   "kind": "observe",
+   "location_ids": [],
+   "slot": "lender",
+   "text": "{npc.name}远远站着，看着你走过去，手里慢慢数着一沓纸"
+  },
+  {
+   "id": "h_wall_glance",
+   "kind": "observe",
+   "location_ids": [
+    "notice_corner"
+   ],
+   "slot": "relocation_agent",
+   "text": "{npc.name}在公告墙前停了很久，伸手抚平了一张告示翘起来的角"
+  },
+  {
+   "id": "h_dropped_ring",
+   "kind": "accident",
+   "location_ids": [
+    "laundromat"
+   ],
+   "slot": "laundry_heir",
+   "text": "{npc.name}手一滑，那枚婚戒滚到了烘干机底下"
+  }
+ ],
+ "id": "half_street",
+ "locations": [
+  {
+   "affordances": [
+    "坐在最靠灯的那张桌子等人",
+    "借着油锅的响声说一句只给对方听的话",
+    "替对方把账先结了"
+   ],
+   "detail": "塑料凳从排档门口一路摆到街心，油锅的热气和拆迁公告上的浆糊味搅在一起，头顶一串灯泡被风吹得来回晃。",
+   "exits": [
+    "notice_corner",
+    "bath_front",
+    "laundromat"
+   ],
+   "id": "street_stall",
+   "name": "夜宵摊",
+   "pressure_modifiers": {
+    "p_first_signer": "夜宵摊上，谁家签了没签，三杯啤酒下去就全说出来了。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "整条街的人都看得见谁跟谁坐了一桌，谁先起身结账",
+   "witnesses": [
+    "bg_mahjong_aunt",
+    "bg_chess_uncle"
+   ]
+  },
+  {
+   "affordances": [
+    "对着倒计时算自家还剩几天",
+    "把一张新告示贴到旧告示上面",
+    "假装看告示，等一个人路过"
+   ],
+   "detail": "拆迁公告一张压着一张贴到第三层，最上面那张写着签约倒计时，底下还露着去年的寻猫启事。",
+   "exits": [
+    "street_stall",
+    "relocation_office"
+   ],
+   "id": "notice_corner",
+   "name": "巷口公告墙",
+   "pressure_modifiers": {
+    "p_wall_notice": "公告墙前已经围了一圈人，有人拿手机对着新告示拍照。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "拆迁办的临时点就在墙边，来来往往的街坊都会停下看一眼",
+   "witnesses": [
+    "bg_site_guard"
+   ]
+  },
+  {
+   "affordances": [
+    "关上玻璃门单独谈条件",
+    "翻一份别人家的评估单",
+    "在签约单上停住笔"
+   ],
+   "detail": "由一间关了门的五金店改成，玻璃门上还贴着“铁钉螺丝”，里面两张办公桌、一台饮水机和一摞没人坐的塑料椅。",
+   "exits": [
+    "notice_corner"
+   ],
+   "id": "relocation_office",
+   "name": "拆迁办临时点",
+   "pressure_modifiers": {
+    "p_first_signer": "协调员把签约单推到桌子中间，笔帽已经拔了。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "门开着时街上的人看得见谁进去了，门一关，里面谈什么只有桌子两边的人知道",
+   "witnesses": [
+    "bg_site_guard"
+   ]
+  },
+  {
+   "affordances": [
+    "在番台买一张晚场的票",
+    "把一句话托看池人转交",
+    "看着炉子的温度表等人出来"
+   ],
+   "detail": "老澡堂的门厅，木头番台被手肘磨出了包浆，墙上一排竹柜牌，炉子在后头轰轰地响。",
+   "exits": [
+    "street_stall",
+    "bath_pool"
+   ],
+   "id": "bath_front",
+   "name": "澡堂番台",
+   "pressure_modifiers": {
+    "p_coal_cut": "番台上贴了一张手写的纸：本周起晚场提前一小时封炉。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "看池人坐在番台上，谁进谁出都在眼皮底下",
+   "witnesses": [
+    "bg_chess_uncle"
+   ]
+  },
+  {
+   "affordances": [
+    "包下一个钟点，只有两个人",
+    "在水凉之前把话说完",
+    "背对着背坐在池沿上"
+   ],
+   "detail": "打烊后整池可以包下，灯只留一盏，水汽把瓷砖上的旧广告泡得发白，池水一点点凉下去。",
+   "exits": [
+    "bath_front"
+   ],
+   "id": "bath_pool",
+   "name": "打烊后的大池",
+   "pressure_modifiers": {
+    "p_coal_cut": "池水比往常凉得快，包场的钟点只剩四十分钟。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "钟点内只有包场的人在，看池人守在门外，除非有人喊",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "守着烘干机等衣服干",
+    "在折叠桌上替对方叠一件衬衫",
+    "把一封不想在家里拆的信在这里拆开"
+   ],
+   "detail": "二十四小时开着，四台洗衣机两台坏了，烘干机转起来像一架小飞机，墙角有一张折叠桌给人叠衣服。",
+   "exits": [
+    "street_stall",
+    "rental_flat"
+   ],
+   "id": "laundromat",
+   "name": "自助洗衣房",
+   "pressure_modifiers": {
+    "p_flat_rent": "洗衣房的墙上，房东贴了一张下月起涨租的通知。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "深夜几乎没人，偶尔有夜班回来的人推门进来",
+   "witnesses": [
+    "bg_laundry_owner"
+   ]
+  },
+  {
+   "affordances": [
+    "在厨房里煮一锅面分着吃",
+    "坐在窗台上看对面的楼一栋栋空掉",
+    "敲开隔壁那扇门"
+   ],
+   "detail": "老楼三楼的两室一厅，客厅当了第三间房，鞋架上永远多一双不知道是谁的拖鞋，窗外正对着要拆的那半条街。",
+   "exits": [
+    "laundromat"
+   ],
+   "id": "rental_flat",
+   "name": "合租的三楼",
+   "pressure_modifiers": {
+    "p_flat_rent": "冰箱门上贴着分摊表，这个月那一栏还空着。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "门一关只有屋里的人，可墙薄，隔壁听得见说话的声调",
+   "witnesses": []
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "陈",
+   "林",
+   "黄",
+   "郑",
+   "吴",
+   "何",
+   "罗",
+   "梁",
+   "谢",
+   "许",
+   "苏",
+   "冯",
+   "邓",
+   "曾",
+   "彭"
+  ],
+  "given_female": [
+   "秀芬",
+   "丽华",
+   "美珍",
+   "晓红",
+   "慧敏",
+   "嘉怡",
+   "雅婷",
+   "咏仪",
+   "小燕",
+   "淑贞",
+   "佩玲",
+   "翠萍",
+   "玉梅"
+  ],
+  "given_male": [
+   "建华",
+   "志明",
+   "国强",
+   "伟雄",
+   "振宇",
+   "家明",
+   "锦荣",
+   "耀祖",
+   "文辉",
+   "俊杰",
+   "德胜",
+   "永昌",
+   "少锋"
+  ],
+  "given_neutral": [
+   "子晴",
+   "一凡",
+   "小雨",
+   "若水",
+   "安然",
+   "明朗",
+   "嘉禾",
+   "思远",
+   "晓阳",
+   "清和",
+   "星河",
+   "可乐"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "阿{given_last}"
+   },
+   {
+    "gender": "any",
+    "pattern": "老{family}"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}仔"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 1 个）。性别按会话偏好生成（D15）。",
+ "player_identities": [
+  {
+   "age_range": [
+    24,
+    45
+   ],
+   "baseline": "租了十年的房子要拆了，房东拿补偿，你只拿到一张搬家通知。",
+   "gender": "any",
+   "id": "old_tenant",
+   "reputation": "好说话，谁家有事都会搭把手",
+   "resources": [
+    "和整条街的人都熟",
+    "知道哪家的楼梯最晚还亮着灯"
+   ],
+   "risks": [
+    "月底前找不到新住处就要露宿"
+   ],
+   "role": "住了十年的租客",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "阿{given_last}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}生"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    20,
+    38
+   ],
+   "baseline": "在夜宵摊打了三年零工，端盘子、收碗、记账，知道每一桌在说什么。",
+   "gender": "any",
+   "id": "stall_helper",
+   "reputation": "手脚快，嘴巴紧",
+   "resources": [
+    "夜宵摊的账本",
+    "每一桌的闲话"
+   ],
+   "risks": [
+    "摊子要是收了，你就没工作了"
+   ],
+   "role": "夜宵摊的帮工",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "阿{given_last}"
+    },
+    {
+     "gender": "any",
+     "pattern": "小{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    50
+   ],
+   "baseline": "受一家小出版社委托，在拆之前把这条街的老人、老店和老故事记下来。",
+   "gender": "any",
+   "id": "street_historian",
+   "reputation": "肯听，不乱写",
+   "resources": [
+    "一台录音笔和一本访谈稿",
+    "出版社给的一点经费"
+   ],
+   "risks": [
+    "稿子写不完，钱就要退回去"
+   ],
+   "role": "来记录老街的人",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}老师"
+    },
+    {
+     "gender": "any",
+     "pattern": "阿{given_last}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    28,
+    50
+   ],
+   "baseline": "十年没回这条街，祖屋的产权在你名下，补偿款最多，所有人都在等你签字。",
+   "gender": "any",
+   "id": "returning_heir",
+   "reputation": "街坊说你出息了，也说你忘本",
+   "resources": [
+    "祖屋的产权证",
+    "城里的一份体面工作"
+   ],
+   "risks": [
+    "祖屋里有你不想再看见的东西"
+   ],
+   "role": "回来处理祖屋的人",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}家的"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}小姐"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    23,
+    35
+   ],
+   "baseline": "被派来协助协调员，手里有评估单和签约指标，街坊看见你就绕着走。",
+   "gender": "any",
+   "id": "junior_agent",
+   "reputation": "年轻，看起来好说话",
+   "resources": [
+    "评估单的复印件",
+    "公司的车"
+   ],
+   "risks": [
+    "指标完不成就会被辞退"
+   ],
+   "role": "拆迁公司的新人",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "小{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}主任"
+    }
+   ]
+  }
+ ],
+ "premise": "拆迁公告贴出来了，签约越早补偿越多；在这条街上住了几十年的人，要在搬走之前把彼此的人情账算清。",
+ "pressures": [
+  {
+   "choice": "把那个人说出来，还是替那个人瞒着",
+   "exits": [
+    {
+     "cost": "那个人会恨你一辈子",
+     "option": "当着街坊的面说出名字"
+    },
+    {
+     "cost": "等真相出来，街坊会觉得你也签了",
+     "option": "说你什么都不知道"
+    }
+   ],
+   "far": {
+    "consequence": "先签和后签的人家，从此在街上不再打招呼",
+    "due_days": 5,
+    "trigger": "签约率过了一半"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_first_signer",
+   "immediate": {
+    "minutes": 30,
+    "text": "整张桌子的人都在看你，等你说一句你知不知道"
+   },
+   "leverage": null,
+   "location_ids": [
+    "street_stall"
+   ],
+   "near": {
+    "deadline_minutes": 1380,
+    "text": "明晚八点街坊会在夜宵摊开，要商量是不是一起拖着不签"
+   },
+   "objective": "在明晚的街坊会之前，弄清第一个签字的是谁",
+   "source": "rumor",
+   "start_minute": 1320,
+   "tags": [],
+   "title": "第一个签字的人",
+   "trigger": "夜宵摊上传开了：有人今天下午偷偷去拆迁办签了字"
+  },
+  {
+   "choice": "让老澡堂提前关门，还是去借一笔不该借的钱",
+   "exits": [
+    {
+     "cost": "利息比煤钱还高",
+     "option": "去放贷的人那里借煤钱"
+    },
+    {
+     "cost": "老主顾会说规矩坏了",
+     "option": "把包场的钟点卖给出价高的人"
+    },
+    {
+     "cost": "这池水就再也不会热了",
+     "option": "提前关门"
+    }
+   ],
+   "far": {
+    "consequence": "对面洗浴中心会在第二天贴出半价券",
+    "due_days": 7,
+    "trigger": "澡堂关门的消息传出去"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_coal_cut",
+   "immediate": {
+    "minutes": 40,
+    "text": "锅炉房里只剩最后两堆煤，水温已经降了两度"
+   },
+   "leverage": null,
+   "location_ids": [
+    "bath_front",
+    "bath_pool"
+   ],
+   "near": {
+    "deadline_minutes": 2160,
+    "text": "礼拜六早上煤栈的车会来最后一次"
+   },
+   "objective": "在礼拜六之前凑齐煤钱，或者给老主顾一个交代",
+   "source": "money",
+   "start_minute": 1260,
+   "tags": [],
+   "title": "煤栈断煤",
+   "trigger": "煤栈派人来说，欠的煤钱不结清，这个礼拜不再送煤"
+  },
+  {
+   "choice": "用拆迁款去抵，还是去找警察",
+   "exits": [
+    {
+     "cost": "你就把整条街最大的秘密交到了{lender.name}手里",
+     "option": "答应用拆迁款抵账"
+    },
+    {
+     "cost": "{lender.name}的上家会知道是谁报的",
+     "option": "去派出所报案"
+    }
+   ],
+   "far": {
+    "consequence": "{lender.name}会第一个站在银行门口",
+    "due_days": 10,
+    "trigger": "拆迁款到账那天"
+   },
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "hook_ids": [],
+   "id": "p_iou_due",
+   "immediate": {
+    "minutes": 20,
+    "text": "{lender.name}的两个帮手站在门口，没进来，也没走"
+   },
+   "leverage": {
+    "basis": "你上个月替家里在{lender.name}那里借了三万块，借条上是你的名字",
+    "holder": "lender",
+    "subject": "player"
+   },
+   "location_ids": [
+    "rental_flat",
+    "street_stall",
+    "notice_corner"
+   ],
+   "near": {
+    "deadline_minutes": 2880,
+    "text": "月底那天中午{lender.name}会亲自来收"
+   },
+   "objective": "在月底之前，要么还钱，要么跟{lender.name}谈出一个条件",
+   "source": "person",
+   "start_minute": 1290,
+   "tags": [
+    "coercion_theme"
+   ],
+   "title": "借条到期",
+   "trigger": "{lender.name}把借条拍在桌上：月底到期，一分都不能少"
+  },
+  {
+   "choice": "多掏钱住到最后一天，还是现在就走",
+   "exits": [
+    {
+     "cost": "积蓄会少一大截",
+     "option": "多交三成，住到最后"
+    },
+    {
+     "cost": "离这条街的人和事都远了",
+     "option": "现在就搬去郊区"
+    }
+   ],
+   "far": {
+    "consequence": "没搬走的人会被一户户上门劝走",
+    "due_days": 20,
+    "trigger": "拆迁队进场"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_flat_rent",
+   "immediate": {
+    "minutes": 25,
+    "text": "冰箱门上的分摊表被人用红笔圈了出来"
+   },
+   "leverage": null,
+   "location_ids": [
+    "rental_flat"
+   ],
+   "near": {
+    "deadline_minutes": 2400,
+    "text": "月底交租日"
+   },
+   "objective": "在月底交租之前，决定留下还是搬走",
+   "source": "money",
+   "start_minute": 1350,
+   "tags": [],
+   "title": "房东涨租",
+   "trigger": "房东发来消息：拆迁前最后两个月，房租涨三成，不愿意的现在就搬"
+  },
+  {
+   "choice": "去问，还是装作没看见",
+   "exits": [
+    {
+     "cost": "你们之间的那点交情可能就到头了",
+     "option": "去找那个人当面问"
+    },
+    {
+     "cost": "保安看见了",
+     "option": "撕下那一页"
+    }
+   ],
+   "far": {
+    "consequence": "没上名单的人家会开始慌",
+    "due_days": 6,
+    "trigger": "第二批名单贴出来"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_wall_notice",
+   "immediate": {
+    "minutes": 15,
+    "text": "公告墙前围着一圈人，有人在名单上拿手指一行行往下点"
+   },
+   "leverage": null,
+   "location_ids": [
+    "notice_corner"
+   ],
+   "near": {
+    "deadline_minutes": 600,
+    "text": "明天一早，名单会被拍照发进业主群"
+   },
+   "objective": "在名单传遍整条街之前，去找那个人问清楚",
+   "source": "institution",
+   "start_minute": 1200,
+   "tags": [],
+   "title": "公告上的名字",
+   "trigger": "公告墙上贴出了第一批签约名单，你认识的一个人在上面"
+  },
+  {
+   "choice": "把失联的人找回来，还是让这份产权就这样作废",
+   "exits": [
+    {
+     "cost": "要见一面，就得把十年前的事重新说一遍",
+     "option": "去找那个失联的人"
+    },
+    {
+     "cost": "这是要坐牢的事",
+     "option": "找人冒签"
+    }
+   ],
+   "far": {
+    "consequence": "洗衣房会被直接拆掉，一分钱也拿不到",
+    "due_days": 14,
+    "trigger": "按无主处理的公告贴出"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_heir_signature",
+   "immediate": {
+    "minutes": 30,
+    "text": "协调员把通知单放在折叠桌上，压在一件没人取的衬衫下面"
+   },
+   "leverage": null,
+   "location_ids": [
+    "laundromat"
+   ],
+   "near": {
+    "deadline_minutes": 3600,
+    "text": "下周三是拆迁办给的最后期限"
+   },
+   "objective": "在拆迁办的期限之前找到那个人",
+   "source": "institution",
+   "start_minute": 1140,
+   "tags": [],
+   "title": "缺一个签名",
+   "trigger": "拆迁办通知：洗衣房那份产权证上的第二个人必须到场签字，不然按无主处理"
+  }
+ ],
+ "region": "南方老城区一条要拆的老街",
+ "rules": [
+  {
+   "id": "r_signing_order",
+   "text": "签约越早补偿越高；第一个签字的人，会被整条街记住。"
+  },
+  {
+   "id": "r_bath_hours",
+   "text": "老澡堂打烊后可以整池包下，钟点到了就封炉；水凉了，夜里说过的话就不作数。"
+  },
+  {
+   "id": "r_no_iou",
+   "text": "街坊之间借钱不打借条，谁借过谁的，夜宵摊老板全记得。"
+  },
+  {
+   "id": "r_double_sign",
+   "text": "产权证上有几个名字，签约就要几个人到场，少一个都不行。"
+  },
+  {
+   "id": "r_wall_first",
+   "text": "拆迁办的新消息先贴公告墙，贴出来之前说的都只能算传言。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": null,
+ "status": "review",
+ "style_hint": "写气味和声音：油锅、硫磺皂、烘干机、麻将牌；对话短而带口头禅，情绪藏在递东西的动作里。",
+ "tension_engines": [
+  {
+   "id": "te_same_table",
+   "text": "每晚都在夜宵摊的同一张桌子上碰面，谁先到谁给对方留座"
+  },
+  {
+   "id": "te_old_debt",
+   "text": "两个人之间有一笔多年前的人情，谁也没提，谁也没忘"
+  },
+  {
+   "id": "te_thin_wall",
+   "text": "住在同一层楼，墙薄得听得见对方几点关灯"
+  },
+  {
+   "id": "te_last_summer",
+   "text": "这条街只剩这一个夏天，过了月底，就再也不会在这里遇见"
+  },
+  {
+   "id": "te_one_signature",
+   "text": "一个人的签字决定另一个人的去留"
+  }
+ ],
+ "title": "半条街",
+ "tone": [
+  "闷热",
+  "烟火气",
+  "人情",
+  "告别"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_signed_first",
+   "requires": [
+    "stall_owner"
+   ],
+   "text": "第一个签字的，是{stall_owner.name}。"
+  },
+  {
+   "category": "关系",
+   "id": "t_agent_childhood",
+   "requires": [
+    "relocation_agent"
+   ],
+   "text": "{relocation_agent.name}小时候住的那间屋，就是你现在租的那间。"
+  },
+  {
+   "category": "人事",
+   "id": "t_lender_upstairs",
+   "requires": [
+    "lender"
+   ],
+   "text": "{lender.name}的上家亲自来了这条街，烟酒店的卷帘门白天也拉下来了。"
+  },
+  {
+   "category": "意外",
+   "id": "t_typhoon",
+   "requires": [],
+   "text": "台风提前登陆，整条街停电三天，夜宵摊和澡堂成了唯一亮灯的地方。"
+  },
+  {
+   "category": "资源",
+   "id": "t_extra_compensation",
+   "requires": [
+    "pressure"
+   ],
+   "text": "拆迁办宣布追加一笔提前签约奖励，只给本周内签字的人家。"
+  },
+  {
+   "category": "时限",
+   "id": "t_deadline_moved",
+   "requires": [
+    "pressure"
+   ],
+   "text": "总部把签约截止日提前了十天。"
+  },
+  {
+   "category": "制度",
+   "id": "t_heritage_bid",
+   "requires": [],
+   "text": "有人向文物局申请，把老澡堂列为历史建筑，拆迁暂停一个月等审批。"
+  },
+  {
+   "category": "意外",
+   "id": "t_sketchbook_lost",
+   "requires": [
+    "flatmate"
+   ],
+   "text": "{flatmate.name}的速写本丢了，最后一次有人看见它，是在夜宵摊的桌子上。"
+  }
+ ]
+}

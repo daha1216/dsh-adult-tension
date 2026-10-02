@@ -430,3 +430,40 @@ class StatusTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class NameOrderTest(unittest.TestCase):
+    """name_pools.order given_first: names read 名·姓 at the opening and for newcomers."""
+
+    def setUp(self):
+        import copy
+
+        from adult_tension.domain import opening, turn, worldpack
+        from helpers.domain import STORE, WORLD
+
+        self.turn = turn
+        world = copy.deepcopy(STORE.world(WORLD))
+        world["name_pools"].update(order="given_first", family=["米勒", "罗斯", "卡特", "黑尔", "韦伯", "福斯", "霍尔", "格林", "贝克", "奥康", "斯通", "莱尔"])
+        pack, problems = worldpack.validate_world(world, tag_ids={t["id"] for t in STORE.tags()["tags"]})
+        self.assertEqual(problems, [])
+        self.world = pack
+        self.content = dict(content(), world=pack)
+        conditions = opening.normalize_conditions({"mode": "daily", "locks": {"world_id": WORLD}})
+        self.state, _ = opening.build(pack, 5, conditions, "test")
+        self.state["session_id"] = "s_test"
+
+    def test_opening_names_put_the_given_name_first(self):
+        for cid, char in self.state["characters"].items():
+            self.assertIn(char["family"], self.world["name_pools"]["family"], cid)
+            self.assertEqual(char["name"], char["given"] + "·" + char["family"], cid)
+
+    def test_a_newcomer_takes_the_same_order(self):
+        taken = {c["family"] for c in self.state["characters"].values()}
+        family = next(f for f in self.world["name_pools"]["family"] if f not in taken)
+        good = major_card(name="艾达·" + family)
+        new, _ = self.turn.commit_turn(self.state, self.content, commit("continue", [good]))
+        self.assertEqual((new["characters"]["new_face"]["family"], new["characters"]["new_face"]["given"]), (family, "艾达"))
+        with self.assertRaises(Exception) as caught:
+            self.turn.commit_turn(self.state, self.content, commit("continue", [major_card(name=family + "艾达")]))
+        self.assertIn("姓不在本世界", reasons(caught.exception))
+        self.assertIn("·", " ".join(d.get("hint") or "" for d in caught.exception.details))

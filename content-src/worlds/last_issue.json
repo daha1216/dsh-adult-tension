@@ -1,0 +1,2502 @@
+{
+ "schema_version": 1,
+ "id": "last_issue",
+ "title": "最后一期",
+ "extends": null,
+ "era": "当代",
+ "region": "一座中等城市的地方报社，停刊前最后两周",
+ "premise": "最后一期该写什么：城里人都想看的那件事，还是能让所有人体面离开的那篇稿子？",
+ "tone": [
+  "散场",
+  "油墨",
+  "旧账",
+  "一起熬的最后几夜"
+ ],
+ "style_hint": "写纸和声音：印刷机的轰鸣、录音机的沙沙声、合订本翻页；人说话直，吵完还会一起去喝粥。",
+ "clock_start": {
+  "label": "停刊前第十四天，晚上",
+  "minute": 1260
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "stage_labels": null,
+ "name_pools": {
+  "family": [
+   "周",
+   "陈",
+   "李",
+   "王",
+   "张",
+   "刘",
+   "黄",
+   "吴",
+   "郑",
+   "何",
+   "罗",
+   "梁",
+   "谢",
+   "韩"
+  ],
+  "given_female": [
+   "海燕",
+   "秀芳",
+   "丽华",
+   "晓红",
+   "雅琴",
+   "静怡",
+   "春梅",
+   "玉兰",
+   "小燕",
+   "慧芸",
+   "美玲",
+   "素珍"
+  ],
+  "given_male": [
+   "建国",
+   "志强",
+   "国华",
+   "立新",
+   "卫东",
+   "永明",
+   "振宇",
+   "海涛",
+   "文斌",
+   "德昌",
+   "晓东",
+   "宏伟"
+  ],
+  "given_neutral": [
+   "子墨",
+   "一鸣",
+   "晓阳",
+   "丹青",
+   "思源",
+   "安平",
+   "向阳",
+   "秋实",
+   "晨光",
+   "立言",
+   "文心",
+   "青山"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "老{family}",
+    "gender": "any"
+   },
+   {
+    "pattern": "小{family}",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}老师",
+    "gender": "any"
+   }
+  ]
+ },
+ "rules": [
+  {
+   "id": "r_signoff",
+   "text": "停刊前的每一版仍要签发，签发人对内容负全责。"
+  },
+  {
+   "id": "r_master_tape",
+   "text": "原始录音比剪辑版本更有权威，谁握着母带，谁就握着改写的那支笔。"
+  },
+  {
+   "id": "r_withdraw",
+   "text": "采访对象在付印前一小时有权撤回原话。"
+  },
+  {
+   "id": "r_one_am",
+   "text": "凌晨一点以后，印刷厂不再接受改版。"
+  },
+  {
+   "id": "r_severance",
+   "text": "遣散名单按工龄排，最后一期出完那天才公布最终版。"
+  }
+ ],
+ "customs": [
+  "每一期付印前，总编会在签发单上画一个小圈，二十六年没变过。",
+  "印刷厂印出来的第一份报纸，按规矩归领班，领班说送谁就送谁。",
+  "编辑部有人离职，大家在白板上写一句话送行，写完不许擦。",
+  "夜班结束，所有人去对面粥铺喝一碗粥，谁先走谁请客。",
+  "资料室的铁皮柜只能由资料员开，开的时候要有第二个人在场。"
+ ],
+ "player_identities": [
+  {
+   "id": "copy_editor",
+   "role": "版面编辑",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "小{family}",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}编辑",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    25,
+    38
+   ],
+   "social_position": "low",
+   "baseline": "你负责排版，每一期的头版最后都要经你的手拼起来。",
+   "resources": [
+    "版面系统的最后一道权限",
+    "知道每一篇稿子最后被删了哪几行"
+   ],
+   "reputation": "细致，熬得住夜",
+   "risks": [
+    "遣散名单上你排在前面"
+   ]
+  },
+  {
+   "id": "night_intern",
+   "role": "最后一届实习记者",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "小{family}",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}同学",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    26
+   ],
+   "social_position": "low",
+   "baseline": "你是报社招的最后一届实习记者，研究生毕业，成年人，报社停了你的实习证明也不知道找谁签。",
+   "resources": [
+    "一张新面孔，没人防着你",
+    "一支老记者借给你的录音笔"
+   ],
+   "reputation": "好奇，胆子大",
+   "risks": [
+    "实习证明还没盖章"
+   ]
+  },
+  {
+   "id": "veteran_columnist",
+   "role": "专栏作者",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "老{family}",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}老师",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    40,
+    58
+   ],
+   "social_position": "equal",
+   "baseline": "你在这家报纸写了十年专栏，最后一期你也有半个版。",
+   "resources": [
+    "半个版面和一群老读者",
+    "和总编二十年的交情"
+   ],
+   "reputation": "敢写，也敢骂",
+   "risks": [
+    "你的专栏当年替那件事说过话，后来被撤了"
+   ]
+  },
+  {
+   "id": "city_archivist",
+   "role": "市档案馆研究员",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}老师",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}研究员",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    30,
+    50
+   ],
+   "social_position": "equal",
+   "baseline": "市档案馆派你来评估报社的旧档案，看值不值得收进馆里。",
+   "resources": [
+    "一份正式的评估权",
+    "档案馆的库房"
+   ],
+   "reputation": "严谨，难打动",
+   "risks": [
+    "档案馆的预算只够收一部分"
+   ]
+  },
+  {
+   "id": "group_director",
+   "role": "集团派来的清算负责人",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}总",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}主任",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    40,
+    55
+   ],
+   "social_position": "high",
+   "baseline": "集团派你来清算报社，遣散名单、资产处置和最后一期的版面都要经你点头。",
+   "resources": [
+    "遣散名单的最终签字权",
+    "集团的授权书"
+   ],
+   "reputation": "公事公办",
+   "risks": [
+    "集团高层里有人很在意最后一期登什么"
+   ]
+  },
+  {
+   "id": "mayor_aide",
+   "role": "市长办公室秘书",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}秘书",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}先生",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}女士",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    30,
+    48
+   ],
+   "social_position": "high",
+   "baseline": "市长办公室派你来“表达关心”，顺便看看最后一期会不会登那件事。",
+   "resources": [
+    "一个电话就能让很多门打开或关上",
+    "市里的一份文化补贴"
+   ],
+   "reputation": "说话滴水不漏",
+   "risks": [
+    "你本人当年也是那件事的经办人之一"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "newsroom",
+   "name": "编辑部大厅",
+   "detail": "一层楼打通的大开间，三十张桌子空了一半，墙上的电视静音播着本地新闻，白板上用红笔写着“倒计时 14”。",
+   "privacy": "semi",
+   "visibility": "还没走的记者、编辑和来收拾东西的人；谁在总编室门口站了多久，整层都看得见",
+   "witnesses": [
+    "bg_photo_vet",
+    "bg_intern"
+   ],
+   "exits": [
+    "chief_office",
+    "archive_room",
+    "stairwell_smoke"
+   ],
+   "affordances": [
+    "在白板上把倒计时擦掉一个数",
+    "替走了的同事把桌上的东西装箱",
+    "听别人打电话时压低的声音"
+   ],
+   "pressure_modifiers": {
+    "p_front_page_blank": "白板上，最后一期头版那一栏还是空的。"
+   },
+   "tags": []
+  },
+  {
+   "id": "chief_office",
+   "name": "总编室",
+   "detail": "玻璃隔断的小屋，百叶窗拉了一半，桌上堆着二十六年的合订本，烟灰缸是一只缺了口的奖杯。",
+   "privacy": "private",
+   "visibility": "总编和被叫进来的人；百叶窗一拉上，外面只看得见两个影子",
+   "witnesses": [],
+   "exits": [
+    "newsroom"
+   ],
+   "affordances": [
+    "坐在那张吱呀响的椅子上等总编开口",
+    "翻一本二十六年前的合订本",
+    "拉上百叶窗"
+   ],
+   "pressure_modifiers": {
+    "p_signoff": "签发单摊在桌上，签名栏空着，笔帽没盖。"
+   },
+   "tags": []
+  },
+  {
+   "id": "archive_room",
+   "name": "资料室",
+   "detail": "地下一层，铁架子一排排顶到天花板，旧报纸的霉味混着除湿机的嗡嗡声，最里面一只上锁的铁皮柜装着录音母带。",
+   "privacy": "private",
+   "visibility": "只有资料员和拿到钥匙的人下来；手机在这里没信号",
+   "witnesses": [
+    "bg_archivist"
+   ],
+   "exits": [
+    "newsroom",
+    "loading_dock"
+   ],
+   "affordances": [
+    "在铁架间找一份十二年前的报纸",
+    "把一盘母带放进老录音机",
+    "在没有信号的地方说一句不想被记下来的话"
+   ],
+   "pressure_modifiers": {
+    "p_two_records": "铁皮柜的锁是新换的，钥匙不在资料员手里。"
+   },
+   "tags": []
+  },
+  {
+   "id": "stairwell_smoke",
+   "name": "消防楼梯",
+   "detail": "编辑部后门出去的消防楼梯，台阶上一排烟头，窗户正对着对面商场的大屏。",
+   "privacy": "semi",
+   "visibility": "抽烟的、躲着哭的、打私人电话的，都在这里；楼上楼下的人随时会推门",
+   "witnesses": [],
+   "exits": [
+    "newsroom",
+    "loading_dock"
+   ],
+   "affordances": [
+    "坐在台阶上抽一根烟",
+    "压低声音打一个不能在编辑部打的电话",
+    "看对面大屏上滚过的新闻"
+   ],
+   "pressure_modifiers": {
+    "p_leaked_photo": "对面商场的大屏上，正在滚动一条本地热搜。"
+   },
+   "tags": []
+  },
+  {
+   "id": "loading_dock",
+   "name": "印刷厂卸货台",
+   "detail": "报社楼后的印刷厂，卸货台上堆着卷筒纸，印刷机还在转，油墨味重得呛人。",
+   "privacy": "semi",
+   "visibility": "印刷工、送报车司机和来等第一份报纸的人；机器声大，说话要凑到耳边",
+   "witnesses": [
+    "bg_printer"
+   ],
+   "exits": [
+    "archive_room",
+    "stairwell_smoke",
+    "night_diner"
+   ],
+   "affordances": [
+    "抽一份刚印出来还烫手的报纸",
+    "在印刷机的轰鸣里说一句话",
+    "看送报车一辆辆开出去"
+   ],
+   "pressure_modifiers": {
+    "p_withdraw_quote": "印刷机停了，领班在喊：“改版的稿子到底来不来？”"
+   },
+   "tags": []
+  },
+  {
+   "id": "night_diner",
+   "name": "报社对面的通宵粥铺",
+   "detail": "一间开了三十年的粥铺，墙上贴着几十张泛黄的报纸剪报，都是这家报社的头版。",
+   "privacy": "public",
+   "visibility": "夜班记者、出租车司机和刚下班的人；老板认得报社每一个人",
+   "witnesses": [
+    "bg_diner_owner"
+   ],
+   "exits": [
+    "loading_dock"
+   ],
+   "affordances": [
+    "点一碗皮蛋瘦肉粥，看墙上的旧头版",
+    "跟老板打听谁今晚来过",
+    "在热气里把一句话说出口"
+   ],
+   "pressure_modifiers": {
+    "p_buyout_offer": "靠窗那桌坐着一个穿西装的人，面前一碗粥没动。"
+   },
+   "tags": []
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "editor_in_chief",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    52,
+    64
+   ],
+   "adult_context": "这家地方报社的总编辑，成年人，在这里干了二十六年",
+   "public_role": "总编辑",
+   "appearance_options": [
+    "老花镜推在额头上，衬衫第二颗扣子总是扣错",
+    "嗓门大，笑起来更大，骂人的时候反而很轻"
+   ],
+   "identity": {
+    "authority": "决定最后一期头版放什么",
+    "resources": [
+     "签发权和二十六年的人脉",
+     "一屋子还肯听{npc.ta}的人"
+    ],
+    "limits": [
+     "签发章在{npc.ta}手里，出了事第一个找{npc.ta}",
+     "集团已经通知了停刊，没人会替{npc.ta}兜底"
+    ],
+    "obligations": [
+     "把最后两周的每一期都按时签出去"
+    ],
+    "exposure": "{npc.ta}想用最后一期还一笔十二年前的旧账：当年压下过一篇稿子",
+    "hidden": "{npc.ta}已经查出胃里有东西，没告诉任何人"
+   },
+   "decision": {
+    "core_value": "报纸要对得起这座城",
+    "goal_options": [
+     "让最后一期头版登出那件事",
+     "替每个人找到下一份工作",
+     "在报社关门那天体面地交出钥匙"
+    ],
+    "pressure_responses": {
+     "low": "拍着桌子笑，说“老子还没退休呢”",
+     "mid": "把十二年前的那份签发单翻出来",
+     "high": "当着全编辑部宣布头版定了",
+     "breaking": "把签发章扔进碎纸机，一个人走出报社"
+    },
+    "withdrawal": "坐在总编室里一本一本翻合订本，从二十六年前翻到今天",
+    "relationship_stance": "嘴硬，心软，护短",
+    "contrast": "签发了二十六年的真话，压下过唯一一篇最该登的",
+    "prefers": [
+     "先签发，再说"
+    ],
+    "avoids": [
+     "被人可怜"
+    ],
+    "never": [
+     "让最后一期开天窗"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方记得{npc.ta}签发过的某一篇稿子",
+     "对方敢当面跟{npc.ta}吵"
+    ],
+    "likes": [
+     "凌晨印刷机刚停的那一刻"
+    ],
+    "dislikes": [
+     "被当成老古董"
+    ],
+    "preconditions": [
+     "签发单已经签了"
+    ],
+    "boundaries": [
+     "不在编辑部"
+    ],
+    "expression": "把一本自己珍藏的合订本送给对方",
+    "desire_range": [
+     1,
+     3
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "最后一期出完以后还会陪{npc.ta}喝粥的人"
+   },
+   "voices": {
+    "surface": "“头版我已经想好了，你别劝。”",
+    "inner": "“当年那篇稿子要是登了，现在的事就都不一样了。”"
+   },
+   "schedule": [
+    {
+     "from": 600,
+     "to": 1200,
+     "location_id": "chief_office"
+    },
+    {
+     "from": 1201,
+     "to": 1320,
+     "location_id": "newsroom"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "night_diner"
+    }
+   ],
+   "situation": {
+    "trigger": "集团来电话，说最后一期头版只能放“感谢读者”",
+    "pressure": "不听，遣散费可能会被扣",
+    "exits": [
+     {
+      "option": "照集团的放",
+      "cost": "二十六年最后一件事做成了一句客套话"
+     },
+     {
+      "option": "照自己的放",
+      "cost": "全编辑部的遣散费都押在{npc.ta}一个人身上"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "fact_checker",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    28,
+    42
+   ],
+   "adult_context": "报社的事实核查编辑，成年人，干了八年，一直坐在角落的那张桌子",
+   "public_role": "核查编辑",
+   "appearance_options": [
+    "头发随手一扎，桌上贴满了便利贴",
+    "说话前总要先确认一遍：“你是说……对吗？”"
+   ],
+   "identity": {
+    "authority": "决定一句话算不算事实",
+    "resources": [
+     "资料室的钥匙和一段没人知道的录音",
+     "八年来核过的每一条消息"
+    ],
+    "limits": [
+     "只能核，不能写；稿子的走向不归{npc.ta}定",
+     "遣散名单上有{npc.ta}的名字"
+    ],
+    "obligations": [
+     "每一篇稿子付印前签一个“已核”"
+    ],
+    "exposure": "{npc.ta}手里有一段十二年前的原始录音，和当年登出来的剪辑版本对不上",
+    "hidden": "{npc.ta}当年是那篇被压稿子的实习生之一"
+   },
+   "decision": {
+    "core_value": "真的就是真的",
+    "goal_options": [
+     "让那段录音见光",
+     "在离开之前核完最后一篇",
+     "弄清当年是谁剪的那段录音"
+    ],
+    "pressure_responses": {
+     "low": "推一推便利贴，说“我再核一遍”",
+     "mid": "把录音的时间码念出来",
+     "high": "当着总编的面把母带放出来",
+     "breaking": "带着母带离开报社，交给别的媒体"
+    },
+    "withdrawal": "一个人在资料室里把那段录音放了一遍又一遍，戴着耳机，一动不动",
+    "relationship_stance": "对事实固执，对人温和",
+    "contrast": "八年来替别人的话负责，自己的话从来没人听",
+    "prefers": [
+     "先核，再说"
+    ],
+    "avoids": [
+     "被人说“这不重要”"
+    ],
+    "never": [
+     "签一个没核过的“已核”"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方说的话经得起{npc.ta}核",
+     "对方听完那段录音没有马上下结论"
+    ],
+    "likes": [
+     "资料室里除湿机的嗡嗡声"
+    ],
+    "dislikes": [
+     "被当成挑刺的人"
+    ],
+    "preconditions": [
+     "最后一篇已经核完"
+    ],
+    "boundaries": [
+     "不在编辑部的工位上"
+    ],
+    "expression": "把耳机的一只递给对方，一起听一段录音",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "不用{npc.ta}核实的那个人"
+   },
+   "voices": {
+    "surface": "“你是说……确定吗？”",
+    "inner": "“那段录音我听了十二年，每一遍都比上一遍更清楚。”"
+   },
+   "schedule": [
+    {
+     "from": 600,
+     "to": 1080,
+     "location_id": "newsroom"
+    },
+    {
+     "from": 1081,
+     "to": 1260,
+     "location_id": "archive_room"
+    },
+    {
+     "from": 1261,
+     "to": 1380,
+     "location_id": "stairwell_smoke"
+    }
+   ],
+   "situation": {
+    "trigger": "总编要{npc.ta}核那段录音，用在最后一期头版",
+    "pressure": "核出来的结果会证明总编当年错了",
+    "exits": [
+     {
+      "option": "如实核",
+      "cost": "总编最后的一件事就成了自我揭发"
+     },
+     {
+      "option": "说录音有问题，核不了",
+      "cost": "等于亲手把真相再压一次"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "pr_rep",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    30,
+    42
+   ],
+   "adult_context": "来谈收购旧档案的公关公司代表，成年人，十年前是这里的实习生",
+   "public_role": "公关公司代表",
+   "appearance_options": [
+    "西装合身，手表很贵，走进编辑部时先看了一眼自己以前的那张桌子",
+    "说话得体，每句话都留着退路"
+   ],
+   "identity": {
+    "authority": "决定那批旧档案的去向",
+    "resources": [
+     "一笔收购旧档案的钱和一份保密协议",
+     "当年在这里学会的所有门道"
+    ],
+    "limits": [
+     "客户是谁不能说，可客户只要一样东西",
+     "这里的人都记得{npc.ta}当年为什么走"
+    ],
+    "obligations": [
+     "两周内把档案的收购合同签下来"
+    ],
+    "exposure": "客户要的其实只是那一盘录音母带",
+    "hidden": "{npc.ta}当年离开报社，是因为那篇被压的稿子是{npc.ta}写的"
+   },
+   "decision": {
+    "core_value": "各取所需，体面收场",
+    "goal_options": [
+     "拿到母带，交差",
+     "让总编亲口承认当年压稿是错的",
+     "离开这一行"
+    ],
+    "pressure_responses": {
+     "low": "微笑，说“我们只是做档案数字化”",
+     "mid": "把收购合同上的金额指给对方看",
+     "high": "直接说出客户的名字",
+     "breaking": "撕掉合同，把客户的事告诉报社"
+    },
+    "withdrawal": "回到车里，把十年前那篇稿子的草稿从手机里翻出来读",
+    "relationship_stance": "表面圆滑，心里记仇",
+    "contrast": "曾经最想写真话的人，现在替别人买走真话",
+    "prefers": [
+     "先谈条件"
+    ],
+    "avoids": [
+     "被人认出来是当年的实习生"
+    ],
+    "never": [
+     "在合同里写假话"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方还记得{npc.ta}当年写的那篇稿子",
+     "对方不把{npc.ta}当成敌人"
+    ],
+    "likes": [
+     "粥铺里冒着热气的一碗粥"
+    ],
+    "dislikes": [
+     "被当成叛徒"
+    ],
+    "preconditions": [
+     "合同的事已经了结"
+    ],
+    "boundaries": [
+     "不在谈判桌上"
+    ],
+    "expression": "把那篇没登出来的稿子打印出来，交给对方",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}重新坐回那张旧桌子的人"
+   },
+   "voices": {
+    "surface": "“我们只是来帮报社的档案找个好归宿。”",
+    "inner": "“那篇稿子是我写的，我等了十年想知道为什么不登。”"
+   },
+   "schedule": [
+    {
+     "from": 1140,
+     "to": 1260,
+     "location_id": "night_diner"
+    },
+    {
+     "from": 600,
+     "to": 900,
+     "location_id": "newsroom"
+    },
+    {
+     "from": 1261,
+     "to": 1380,
+     "location_id": "loading_dock"
+    }
+   ],
+   "situation": {
+    "trigger": "客户催了：两周内拿不到母带，合作就终止",
+    "pressure": "终止合作，{npc.ta}在公司的位置就保不住了",
+    "exits": [
+     {
+      "option": "加价",
+      "cost": "总编会觉得被侮辱"
+     },
+     {
+      "option": "去找核查编辑私下谈",
+      "cost": "核查编辑会把这件事说出去"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "star_reporter",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    30,
+    45
+   ],
+   "adult_context": "报社的首席记者，成年人，跑了十五年社会新闻",
+   "public_role": "首席记者",
+   "appearance_options": [
+    "一件洗旧了的冲锋衣，口袋里永远装着录音笔和充电宝",
+    "眼神很快，看一眼就记住了"
+   ],
+   "identity": {
+    "authority": "决定一条新闻追到哪一步",
+    "resources": [
+     "一本记满线人电话的旧本子",
+     "全城最快的消息"
+    ],
+    "limits": [
+     "报社要停了，下一份工作还没着落",
+     "已经有别家媒体开了价，条件是带着线人过去"
+    ],
+    "obligations": [
+     "每天交一篇稿子"
+    ],
+    "exposure": "{npc.ta}手里有一条比头版那件事还大的新闻，但还差一个证人",
+    "hidden": "{npc.ta}已经偷偷答应了别家媒体，没告诉总编"
+   },
+   "decision": {
+    "core_value": "新闻是抢出来的",
+    "goal_options": [
+     "在最后一期之前把那条新闻追出来",
+     "带着线人去下一家",
+     "让总编最后一次为{npc.ta}签发"
+    ],
+    "pressure_responses": {
+     "low": "笑笑，说“追着呢”",
+     "mid": "把录音笔里的一段放给对方听",
+     "high": "当着全编辑部说自己要走了",
+     "breaking": "带着线人本子连夜离开"
+    },
+    "withdrawal": "一个人开车去城郊，在一个线人家门口坐到天亮",
+    "relationship_stance": "对线人仗义，对同行狠",
+    "contrast": "替所有人追了十五年的真相，自己的去留一直拖着",
+    "prefers": [
+     "先去现场"
+    ],
+    "avoids": [
+     "被人说是叛徒"
+    ],
+    "never": [
+     "出卖线人"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方能跟上{npc.ta}的速度",
+     "对方在{npc.ta}追丢了线索时不说风凉话"
+    ],
+    "likes": [
+     "凌晨空荡荡的马路和车里的收音机"
+    ],
+    "dislikes": [
+     "被当成工作机器"
+    ],
+    "preconditions": [
+     "稿子已经交了"
+    ],
+    "boundaries": [
+     "不在新闻现场"
+    ],
+    "expression": "开车带对方去一个只有{npc.ta}知道的地方看日出",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "可以让{npc.ta}停下来的那个人"
+   },
+   "voices": {
+    "surface": "“这条我追了三个月，你别跟我抢。”",
+    "inner": "“我答应别家了，可我还想在这儿登最后一篇。”"
+   },
+   "schedule": [
+    {
+     "from": 480,
+     "to": 900,
+     "location_id": "newsroom"
+    },
+    {
+     "from": 901,
+     "to": 1200,
+     "location_id": "stairwell_smoke"
+    },
+    {
+     "from": 1201,
+     "to": 1380,
+     "location_id": "night_diner"
+    }
+   ],
+   "situation": {
+    "trigger": "别家媒体给了最后期限：明天之前不答复，位置就给别人",
+    "pressure": "可那条新闻还差一个证人，明天之前追不出来",
+    "exits": [
+     {
+      "option": "答应别家",
+      "cost": "那条新闻就带走了，最后一期登不了"
+     },
+     {
+      "option": "回绝别家，赌一把",
+      "cost": "报社停了，{npc.ta}就什么都没有了"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "photo_desk",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    25,
+    38
+   ],
+   "adult_context": "报社的摄影记者，成年人，进报社第四年",
+   "public_role": "摄影记者",
+   "appearance_options": [
+    "相机包的带子磨得发亮，左手腕上有一道烫伤的疤",
+    "不爱说话，拍完照就躲到楼梯间抽烟"
+   ],
+   "identity": {
+    "authority": "决定一张照片登不登、怎么裁",
+    "resources": [
+     "一台相机和四年的底片存档",
+     "楼下印刷工的交情"
+    ],
+    "limits": [
+     "照片版面越来越小，最后一期只留一格",
+     "遣散名单上排在前面"
+    ],
+    "obligations": [
+     "每天交三张照片"
+    ],
+    "exposure": "{npc.ta}拍到过一张照片，十二年前那件事的现场，存档里被人删了",
+    "hidden": "{npc.ta}的私密照片被人在发布前十分钟流到了网上"
+   },
+   "decision": {
+    "core_value": "照片不会撒谎，裁图的人会",
+    "goal_options": [
+     "让那张被删的照片登在最后一期",
+     "找出是谁泄露了{npc.ta}的私照",
+     "转行，不再拍照"
+    ],
+    "pressure_responses": {
+     "low": "把相机挡在面前，说“我只是拍照的”",
+     "mid": "把存档的删除记录调出来",
+     "high": "当众把一张照片拍在总编桌上",
+     "breaking": "把相机留在报社，空着手走"
+    },
+    "withdrawal": "坐在消防楼梯上，一张一张删手机里的照片，删到最后一张停住",
+    "relationship_stance": "沉默，倔强",
+    "contrast": "四年来替别人留下画面，自己最不想被看见的却被所有人看见了",
+    "prefers": [
+     "让照片自己说话"
+    ],
+    "avoids": [
+     "被人当面提起那几张私照"
+    ],
+    "never": [
+     "拍别人的私密"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方从来不提那几张私照",
+     "对方看{npc.ta}的照片时看的是{npc.ta}想让人看的那一处"
+    ],
+    "likes": [
+     "消防楼梯上傍晚的光"
+    ],
+    "dislikes": [
+     "被人用镜头对着"
+    ],
+    "preconditions": [
+     "相机收进了包里"
+    ],
+    "boundaries": [
+     "不在任何有镜头的地方"
+    ],
+    "expression": "把镜头对准对方，问一句“可以吗”，然后放下",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}放下相机的那个人"
+   },
+   "voices": {
+    "surface": "“我只管拍，登不登你们定。”",
+    "inner": "“我拍了四年别人，第一次知道被人看是什么感觉。”"
+   },
+   "schedule": [
+    {
+     "from": 540,
+     "to": 960,
+     "location_id": "newsroom"
+    },
+    {
+     "from": 961,
+     "to": 1140,
+     "location_id": "stairwell_smoke"
+    },
+    {
+     "from": 1141,
+     "to": 1320,
+     "location_id": "loading_dock"
+    }
+   ],
+   "situation": {
+    "trigger": "{npc.ta}的私照在网上越传越广，有人留言说认识{npc.ta}",
+    "pressure": "报社的领导说“个人问题自己处理”",
+    "exits": [
+     {
+      "option": "报警",
+      "cost": "所有人都会知道那是{npc.ta}"
+     },
+     {
+      "option": "什么都不做",
+      "cost": "照片会一直在那里"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "press_foreman",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    45,
+    60
+   ],
+   "adult_context": "印刷厂的夜班领班，成年人，在这台印刷机前站了二十二年",
+   "public_role": "印刷领班",
+   "appearance_options": [
+    "工装上全是油墨，指甲缝里黑的，手背上一块洗不掉的蓝",
+    "嗓门比印刷机还大，可只对机器说话温柔"
+   ],
+   "identity": {
+    "authority": "决定今晚几点开机、印多少份、改版来不来得及",
+    "resources": [
+     "整个印刷厂的钥匙和一台老机器",
+     "二十二年来每一期的第一份报纸"
+    ],
+    "limits": [
+     "印刷厂和报社一起关，机器要被卖掉",
+     "改版超过凌晨一点就来不及"
+    ],
+    "obligations": [
+     "每晚开机前检查一遍机器"
+    ],
+    "exposure": "{npc.ta}每一期都偷偷留一份第一张，二十二年一期没落",
+    "hidden": "{npc.ta}十二年前那一晚印过那篇被撤的稿子，印了三千份才停机"
+   },
+   "decision": {
+    "core_value": "机器转着，报纸就在",
+    "goal_options": [
+     "印完最后一期",
+     "把二十二年的第一份报纸送给值得的人",
+     "让那三千份被撤的报纸重见天日"
+    ],
+    "pressure_responses": {
+     "low": "敲敲机器，说“它今晚脾气不好”",
+     "mid": "把开机时间写在黑板上，一分钟都不让",
+     "high": "当着报社的人拒绝改版",
+     "breaking": "最后一期印完，把机器的钥匙扔进卷筒纸里"
+    },
+    "withdrawal": "一个人站在停了的印刷机前，用抹布一寸一寸擦，擦到天亮",
+    "relationship_stance": "对机器温柔，对人粗声",
+    "contrast": "印了二十二年别人的名字，自己的名字从没上过报",
+    "prefers": [
+     "守时"
+    ],
+    "avoids": [
+     "被人催着改版"
+    ],
+    "never": [
+     "印一份造假的报纸"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方愿意站在机器旁边听{npc.ta}讲机器",
+     "对方记得{npc.ta}的名字"
+    ],
+    "likes": [
+     "凌晨三点印刷机停下来那一刻的安静"
+    ],
+    "dislikes": [
+     "被当成干粗活的"
+    ],
+    "preconditions": [
+     "最后一份已经印完"
+    ],
+    "boundaries": [
+     "不在印刷机前"
+    ],
+    "expression": "把一份珍藏的第一张报纸送给对方",
+    "desire_range": [
+     1,
+     3
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "陪{npc.ta}听完机器最后一次转动的人"
+   },
+   "voices": {
+    "surface": "“一点前不来稿，就照原版印。”",
+    "inner": "“那三千份，我一份都没烧。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1439,
+     "location_id": "loading_dock"
+    },
+    {
+     "from": 0,
+     "to": 240,
+     "location_id": "loading_dock"
+    },
+    {
+     "from": 241,
+     "to": 360,
+     "location_id": "night_diner"
+    }
+   ],
+   "situation": {
+    "trigger": "买家来看机器了，说最后一期印完就拉走",
+    "pressure": "{npc.ta}二十二年的第一份报纸，没有地方放",
+    "exits": [
+     {
+      "option": "答应卖",
+      "cost": "机器被拆了，报纸也没处去"
+     },
+     {
+      "option": "拖着不让拉",
+      "cost": "印刷厂的遣散费会被扣"
+     }
+    ]
+   },
+   "tags": []
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_photo_vet",
+   "role": "老校对",
+   "function": "witness",
+   "location_ids": [
+    "newsroom"
+   ],
+   "line": "{npc.name}坐在编辑部最里面，一个错别字都逃不过，一句闲话也逃不过",
+   "gender": "any",
+   "age_range": [
+    55,
+    65
+   ],
+   "adult_context": "报社的老校对，成年人",
+   "name": null
+  },
+  {
+   "id": "bg_intern",
+   "role": "最后一批实习生",
+   "function": "messenger",
+   "location_ids": [
+    "newsroom",
+    "stairwell_smoke"
+   ],
+   "line": "{npc.name}替编辑部跑腿送稿，什么话都听，什么话都传",
+   "gender": "any",
+   "age_range": [
+    21,
+    24
+   ],
+   "adult_context": "大学应届毕业的成年实习生",
+   "name": null
+  },
+  {
+   "id": "bg_archivist",
+   "role": "资料员",
+   "function": "helper",
+   "location_ids": [
+    "archive_room"
+   ],
+   "line": "{npc.name}在地下一层守了十几年，哪份报纸放在哪一格，闭着眼都找得到",
+   "gender": "any",
+   "age_range": [
+    45,
+    60
+   ],
+   "adult_context": "报社的资料员，成年人",
+   "name": null
+  },
+  {
+   "id": "bg_printer",
+   "role": "印刷工",
+   "function": "witness",
+   "location_ids": [
+    "loading_dock"
+   ],
+   "line": "{npc.name}在卸货台上搬卷筒纸，谁半夜来等报纸都看在眼里",
+   "gender": "any",
+   "age_range": [
+    30,
+    50
+   ],
+   "adult_context": "印刷厂的成年工人",
+   "name": null
+  },
+  {
+   "id": "bg_diner_owner",
+   "role": "粥铺老板",
+   "function": "rumor_source",
+   "location_ids": [
+    "night_diner"
+   ],
+   "line": "{npc.name}开了三十年粥铺，报社的人谁跟谁吵过架都知道",
+   "gender": "any",
+   "age_range": [
+    55,
+    70
+   ],
+   "adult_context": "粥铺老板，成年人",
+   "name": null
+  },
+  {
+   "id": "bg_group_hr",
+   "role": "集团人事",
+   "function": "obstacle",
+   "location_ids": [
+    "newsroom",
+    "chief_office"
+   ],
+   "line": "{npc.name}拿着一份遣散名单，在每张桌子前停一下",
+   "gender": "any",
+   "age_range": [
+    35,
+    50
+   ],
+   "adult_context": "集团派来的成年人事",
+   "name": null
+  },
+  {
+   "id": "bg_cab_driver",
+   "role": "出租车司机",
+   "function": "rumor_source",
+   "location_ids": [
+    "night_diner",
+    "loading_dock"
+   ],
+   "line": "{npc.name}每晚在粥铺门口等活，载过报社一半的人回家",
+   "gender": "any",
+   "age_range": [
+    40,
+    60
+   ],
+   "adult_context": "跑夜班的成年司机",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_whiteboard",
+   "text": "编辑部白板",
+   "reach": "当场就被整层看见，写了什么一字不差",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_diner_talk",
+   "text": "粥铺里的闲话",
+   "reach": "第二天早上全城的出租车司机都知道一个版本",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_social",
+   "text": "本地网络热搜",
+   "reach": "一个钟头就上了商场大屏，转述的人添油加醋",
+   "fidelity": "distorted"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_last_issue",
+   "text": "最后一期只有一个头版，每个人都想放自己的那件事"
+  },
+  {
+   "id": "te_old_debt",
+   "text": "十二年前压下的一篇稿子，欠着好几个人"
+  },
+  {
+   "id": "te_master_tape",
+   "text": "母带只有一份，谁拿着谁就能改写那一年"
+  },
+  {
+   "id": "te_severance",
+   "text": "遣散名单按工龄排，可名单还没定，谁都在算"
+  },
+  {
+   "id": "te_next_job",
+   "text": "有人已经在找下一份工作，有人还在假装报社不会停"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "k_layout_desk",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "copy_editor"
+   ],
+   "slots": [
+    "editor_in_chief",
+    "fact_checker"
+   ],
+   "tension_engine_ids": [
+    "te_last_issue",
+    "te_master_tape"
+   ],
+   "chemistry": "{editor_in_chief.name}要你把头版那一栏留着，谁问都别说；{fact_checker.name}每晚都来你的桌子边，问那一栏到底要放什么。",
+   "stakes": {
+    "resource_gap": "{editor_in_chief.name}有签发权，{fact_checker.name}有母带，你只有拼版的最后一道权限",
+    "limit_gap": "你在遣散名单前面，{fact_checker.name}也在",
+    "meeting_reason": "最后十四天，三个人每晚都熬到印刷厂开机",
+    "irreplaceable_goal": "你想让最后一期头版放一篇你自己也信的东西"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "editor_in_chief",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 0
+     },
+     "reason": "{editor_in_chief.name}叫你“小鬼”叫了六年"
+    },
+    {
+     "a": "player",
+     "b": "fact_checker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{fact_checker.name}在你的版面上抓出过三个错"
+    },
+    {
+     "a": "editor_in_chief",
+     "b": "fact_checker",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{fact_checker.name}一直在等{editor_in_chief.name}开口提十二年前"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_intern_night",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "night_intern"
+   ],
+   "slots": [
+    "star_reporter",
+    "photo_desk"
+   ],
+   "tension_engine_ids": [
+    "te_next_job",
+    "te_last_issue"
+   ],
+   "chemistry": "你跟着{star_reporter.name}跑了三个月新闻，{photo_desk.name}每次都跟着一起去；最近两个人都不怎么说话了。",
+   "stakes": {
+    "resource_gap": "{star_reporter.name}有线人本子，{photo_desk.name}有相机，你只有一支借来的录音笔",
+    "limit_gap": "{star_reporter.name}偷偷答应了别家，{photo_desk.name}的私照还在网上传",
+    "meeting_reason": "三个人每晚都在消防楼梯上碰头",
+    "irreplaceable_goal": "你想在报社停之前，跟着追完一条真正的新闻"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "star_reporter",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 0
+     },
+     "reason": "{star_reporter.name}把录音笔借给你那天说“别弄丢了”"
+    },
+    {
+     "a": "player",
+     "b": "photo_desk",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{photo_desk.name}给你拍过一张工作照，没给别人看"
+    },
+    {
+     "a": "star_reporter",
+     "b": "photo_desk",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{photo_desk.name}知道{star_reporter.name}要走，没说"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_columnist_debt",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "veteran_columnist"
+   ],
+   "slots": [
+    "editor_in_chief",
+    "pr_rep"
+   ],
+   "tension_engine_ids": [
+    "te_old_debt",
+    "te_master_tape"
+   ],
+   "chemistry": "{pr_rep.name}来谈收购档案，第一个请吃饭的人是你；{editor_in_chief.name}说你要是去了，最后一期你的半个版就别想要了。",
+   "stakes": {
+    "resource_gap": "{editor_in_chief.name}有签发权，{pr_rep.name}有收购的钱，你有半个版面和一群老读者",
+    "limit_gap": "你的专栏当年被撤过，{pr_rep.name}的稿子当年被压过",
+    "meeting_reason": "三个人在粥铺里撞上过一回",
+    "irreplaceable_goal": "你想替当年被撤的那几篇讨一个说法"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "editor_in_chief",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "你和{editor_in_chief.name}吵了二十年，还是朋友"
+    },
+    {
+     "a": "player",
+     "b": "pr_rep",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{pr_rep.name}当实习生时给你端过茶"
+    },
+    {
+     "a": "editor_in_chief",
+     "b": "pr_rep",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": -1,
+      "tension": 3
+     },
+     "reason": "十二年前压下{pr_rep.name}那篇稿子的人，就是{editor_in_chief.name}"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_archive_eval",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "city_archivist"
+   ],
+   "slots": [
+    "fact_checker",
+    "press_foreman"
+   ],
+   "tension_engine_ids": [
+    "te_master_tape",
+    "te_old_debt"
+   ],
+   "chemistry": "你来评估旧档案；{fact_checker.name}说母带必须留在城里，{press_foreman.name}说{press_foreman.ta}那里还有三千份档案里没有的东西。",
+   "stakes": {
+    "resource_gap": "{fact_checker.name}有母带，{press_foreman.name}有三千份报纸，你有一个能收它们的库房",
+    "limit_gap": "档案馆的预算只够收一部分，收购的人出价更高",
+    "meeting_reason": "三个人在印刷厂的卸货台上碰过面",
+    "irreplaceable_goal": "你想替这座城留下该留的东西"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "fact_checker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{fact_checker.name}给你写过一份档案清单，写了三十页"
+    },
+    {
+     "a": "player",
+     "b": "press_foreman",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{press_foreman.name}说档案馆的人都不懂报纸"
+    },
+    {
+     "a": "fact_checker",
+     "b": "press_foreman",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "十二年前那一晚，两个人都在印刷厂"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_liquidator",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "group_director"
+   ],
+   "slots": [
+    "editor_in_chief",
+    "star_reporter"
+   ],
+   "tension_engine_ids": [
+    "te_severance",
+    "te_last_issue"
+   ],
+   "chemistry": "遣散名单由你签；{editor_in_chief.name}说最后一期的头版谁也别想碰，{star_reporter.name}来找你，说有一条新闻比头版那件事更大。",
+   "stakes": {
+    "resource_gap": "你有遣散名单和授权书，{editor_in_chief.name}有签发权，{star_reporter.name}有一条还差一个证人的新闻",
+    "limit_gap": "集团高层盯着最后一期，{star_reporter.name}答应了别家",
+    "meeting_reason": "停刊前两周，三个人每天都要见面",
+    "irreplaceable_goal": "你想把这件事办干净，又不想当那个关掉报社的人"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "editor_in_chief",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": -1,
+      "tension": 3
+     },
+     "reason": "{editor_in_chief.name}叫你“刽子手”，当着全编辑部"
+    },
+    {
+     "a": "player",
+     "b": "star_reporter",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{star_reporter.name}约你在楼梯间谈过一次"
+    },
+    {
+     "a": "editor_in_chief",
+     "b": "star_reporter",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{editor_in_chief.name}是把{star_reporter.name}带出来的人"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_mayor_concern",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "mayor_aide"
+   ],
+   "slots": [
+    "fact_checker",
+    "pr_rep"
+   ],
+   "tension_engine_ids": [
+    "te_master_tape",
+    "te_old_debt"
+   ],
+   "chemistry": "你来“表达关心”；{pr_rep.name}说母带的事交给{pr_rep.ta}办就好，{fact_checker.name}看你的眼神，像是知道你当年做过什么。",
+   "stakes": {
+    "resource_gap": "你有市里的门路，{pr_rep.name}有收购的钱，{fact_checker.name}有那一盘母带",
+    "limit_gap": "最后一期还有十四天，那件事里有你的签字",
+    "meeting_reason": "三个人在资料室的铁架之间碰过面",
+    "irreplaceable_goal": "你想让那件事永远别再被翻出来，又不想再欠谁"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "fact_checker",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": -1,
+      "tension": 2
+     },
+     "reason": "{fact_checker.name}在母带里听过你的声音"
+    },
+    {
+     "a": "player",
+     "b": "pr_rep",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{pr_rep.name}的客户和你是什么关系，你们都不说"
+    },
+    {
+     "a": "fact_checker",
+     "b": "pr_rep",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{pr_rep.name}当实习生时和{fact_checker.name}一起熬过夜"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_stairwell",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "photo_desk",
+    "star_reporter"
+   ],
+   "tension_engine_ids": [
+    "te_next_job",
+    "te_severance"
+   ],
+   "chemistry": "{photo_desk.name}的私照在网上传，{star_reporter.name}说知道是谁泄的；这件事两个人都只跟你说过。",
+   "stakes": {
+    "resource_gap": "{photo_desk.name}有相机，{star_reporter.name}有线人，你有两个人的信任",
+    "limit_gap": "{star_reporter.name}要走了，{photo_desk.name}在遣散名单前面",
+    "meeting_reason": "三个人常在消防楼梯上各自抽烟",
+    "irreplaceable_goal": "你想替{photo_desk.name}讨一个公道"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "photo_desk",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{photo_desk.name}只跟你说过那几张照片的事"
+    },
+    {
+     "a": "player",
+     "b": "star_reporter",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{star_reporter.name}请你吃过一次凌晨的粥"
+    },
+    {
+     "a": "photo_desk",
+     "b": "star_reporter",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "两个人一起跑过四年的现场"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_three_thousand",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "press_foreman",
+    "editor_in_chief",
+    "pr_rep"
+   ],
+   "tension_engine_ids": [
+    "te_old_debt",
+    "te_last_issue"
+   ],
+   "chemistry": "十二年前那篇稿子印了三千份才停机，{press_foreman.name}说一份都没烧；{editor_in_chief.name}不知道，{pr_rep.name}知道了。",
+   "stakes": {
+    "resource_gap": "{press_foreman.name}有三千份报纸，{editor_in_chief.name}有签发权，{pr_rep.name}有一个想要它们的客户",
+    "limit_gap": "印刷机要被卖掉，三千份报纸没地方放",
+    "meeting_reason": "最后一期付印那一晚，三个人都会在印刷厂",
+    "irreplaceable_goal": "你想让那三千份报纸有个去处"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "press_foreman",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 0
+     },
+     "reason": "{press_foreman.name}送过你一份第一张"
+    },
+    {
+     "a": "player",
+     "b": "editor_in_chief",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{editor_in_chief.name}对你说过一次十二年前"
+    },
+    {
+     "a": "player",
+     "b": "pr_rep",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{pr_rep.name}问过你印刷厂的领班几点下班"
+    },
+    {
+     "a": "press_foreman",
+     "b": "editor_in_chief",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "两个人一起熬了二十二年的夜"
+    },
+    {
+     "a": "press_foreman",
+     "b": "pr_rep",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{press_foreman.name}记得{pr_rep.name}当年那篇稿子"
+    },
+    {
+     "a": "editor_in_chief",
+     "b": "pr_rep",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": -1,
+      "tension": 3
+     },
+     "reason": "两个人十二年没说过一句话"
+    }
+   ],
+   "tags": []
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_page_close",
+   "title": "头版合版",
+   "location_ids": [
+    "newsroom",
+    "chief_office"
+   ],
+   "duration_minutes": 60,
+   "beats": [
+    "版面系统卡了一下",
+    "总编在签发单上画了一个小圈",
+    "有人在白板上又擦掉一个数"
+   ],
+   "hook_ids": [],
+   "start_minute": 1320,
+   "tags": []
+  },
+  {
+   "id": "a_first_copy",
+   "title": "等第一份报纸",
+   "location_ids": [
+    "loading_dock"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "印刷机慢慢转起来",
+    "领班抽出第一张，对着灯看",
+    "送报车的司机在按喇叭"
+   ],
+   "hook_ids": [],
+   "start_minute": 60,
+   "tags": []
+  },
+  {
+   "id": "a_congee",
+   "title": "夜班后喝粥",
+   "location_ids": [
+    "night_diner"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "老板端上来一碗没点的咸菜",
+    "墙上那张旧头版歪了",
+    "门外的出租车一辆接一辆"
+   ],
+   "hook_ids": [],
+   "start_minute": 180,
+   "tags": []
+  },
+  {
+   "id": "a_archive_dig",
+   "title": "下资料室翻旧报",
+   "location_ids": [
+    "archive_room"
+   ],
+   "duration_minutes": 60,
+   "beats": [
+    "除湿机突然停了",
+    "那一年的合订本少了一册",
+    "手机没信号，只有铁架的回声"
+   ],
+   "hook_ids": [],
+   "start_minute": 900,
+   "tags": []
+  },
+  {
+   "id": "a_smoke_break",
+   "title": "楼梯间抽根烟",
+   "location_ids": [
+    "stairwell_smoke"
+   ],
+   "duration_minutes": 15,
+   "beats": [
+    "对面大屏上滚过一条热搜",
+    "楼下有人推门上来",
+    "烟灰掉在了台阶上"
+   ],
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": []
+  },
+  {
+   "id": "a_farewell_board",
+   "title": "白板送行",
+   "location_ids": [
+    "newsroom"
+   ],
+   "duration_minutes": 20,
+   "beats": [
+    "又有一个人的桌子空了",
+    "白板上已经写满了",
+    "有人写到一半停了笔"
+   ],
+   "hook_ids": [],
+   "start_minute": 1080,
+   "tags": []
+  },
+  {
+   "id": "a_tape_listen",
+   "title": "听一盘老录音",
+   "location_ids": [
+    "archive_room",
+    "chief_office"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "录音机的磁头有点脏",
+    "录音里有一段被剪掉的空白",
+    "有人在你身后停住了脚步"
+   ],
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": []
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_front_page_blank",
+   "title": "头版那一栏",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "newsroom",
+    "chief_office"
+   ],
+   "trigger": "白板上最后一期头版那一栏一直空着，总编说已经想好了，谁问都不说",
+   "objective": "在最后一期付印之前，弄清头版要放什么",
+   "choice": "支持总编，还是去劝",
+   "immediate": {
+    "text": "总编从办公室出来，把一张写着标题的纸贴在白板上，又撕了下来",
+    "minutes": 15
+   },
+   "near": {
+    "text": "最后一期付印前一晚定版",
+    "deadline_minutes": 4300
+   },
+   "far": {
+    "trigger": "头版的事传到集团",
+    "consequence": "集团会派人来接管签发，最后一期就不再是报社自己的了",
+    "due_days": 13
+   },
+   "exits": [
+    {
+     "option": "站在总编这边",
+     "cost": "遣散名单上你可能会被往前挪"
+    },
+    {
+     "option": "劝总编放“感谢读者”",
+     "cost": "总编会觉得连你也背叛了"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": []
+  },
+  {
+   "id": "p_two_records",
+   "title": "两份对不上的记录",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "archive_room",
+    "newsroom"
+   ],
+   "trigger": "资料室里十二年前那件事有两份记录：登出来的报道和原始录音，在同一句话上对不上",
+   "objective": "在最后一期定版之前，弄清哪一份是真的",
+   "choice": "去找当年的经手人，还是只信录音",
+   "immediate": {
+    "text": "资料员把两份东西并排放在铁架上，说“你自己看”",
+    "minutes": 30
+   },
+   "near": {
+    "text": "后天上午档案要移交",
+    "deadline_minutes": 2400
+   },
+   "far": {
+    "trigger": "档案被移交出去",
+    "consequence": "那份原始录音就再也拿不回来了",
+    "due_days": 5
+   },
+   "exits": [
+    {
+     "option": "把录音拷一份",
+     "cost": "违反资料室的规矩"
+    },
+    {
+     "option": "去找当年的经手人",
+     "cost": "经手人里有现在的大人物"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 960,
+   "tags": []
+  },
+  {
+   "id": "p_leaked_photo",
+   "title": "发布前十分钟",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "stairwell_smoke",
+    "newsroom"
+   ],
+   "trigger": "一张本该在最后一期登的私密照片，在付印前十分钟出现在了网上",
+   "objective": "在付印之前决定这张照片还登不登",
+   "choice": "照登，还是撤下",
+   "immediate": {
+    "text": "对面商场的大屏上，那张照片正在热搜第三",
+    "minutes": 10
+   },
+   "near": {
+    "text": "凌晨一点印刷厂截稿",
+    "deadline_minutes": 120
+   },
+   "far": {
+    "trigger": "照片被一直转",
+    "consequence": "照片里的人会被全城认出来",
+    "due_days": 2
+   },
+   "exits": [
+    {
+     "option": "撤下照片",
+     "cost": "这一版就开了天窗"
+    },
+    {
+     "option": "照登",
+     "cost": "等于报社也成了转发的人之一"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1380,
+   "tags": []
+  },
+  {
+   "id": "p_withdraw_quote",
+   "title": "撤回的原话",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "loading_dock",
+    "newsroom"
+   ],
+   "trigger": "付印前一小时，采访对象打来电话：要撤回头版那句原话",
+   "objective": "在印刷厂截稿之前，决定撤还是不撤",
+   "choice": "按规矩撤，还是去说服对方",
+   "immediate": {
+    "text": "印刷领班在卸货台上喊：改版的稿子到底来不来",
+    "minutes": 10
+   },
+   "near": {
+    "text": "凌晨一点截稿",
+    "deadline_minutes": 60
+   },
+   "far": {
+    "trigger": "原话被撤以后，头版那件事站不住了",
+    "consequence": "最后一期就只剩一个空架子",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "按规矩撤",
+     "cost": "头版要重写，来不及就开天窗"
+    },
+    {
+     "option": "开车去找采访对象",
+     "cost": "一来一回，赶不上截稿"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1380,
+   "tags": []
+  },
+  {
+   "id": "p_buyout_offer",
+   "title": "收购旧档案",
+   "source": "money",
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "location_ids": [
+    "night_diner",
+    "archive_room"
+   ],
+   "trigger": "公关公司出了一个高价，要收购报社全部旧档案，包括那一盘母带",
+   "objective": "在集团签字之前，决定档案的去向",
+   "choice": "卖，还是想办法把母带留下",
+   "immediate": {
+    "text": "粥铺靠窗那桌的人把一份合同推过来，说只要一个签字",
+    "minutes": 20
+   },
+   "near": {
+    "text": "下周一集团签字",
+    "deadline_minutes": 4300
+   },
+   "far": {
+    "trigger": "档案被卖出去",
+    "consequence": "十二年前那件事就永远是收购方说了算",
+    "due_days": 7
+   },
+   "exits": [
+    {
+     "option": "劝集团卖给档案馆",
+     "cost": "价钱低一半，集团不会同意"
+    },
+    {
+     "option": "把母带私下拷一份",
+     "cost": "被发现就是泄露公司资产"
+    }
+   ],
+   "leverage": {
+    "holder": "pr_rep",
+    "subject": "fact_checker",
+    "basis": "{pr_rep.name}知道{fact_checker.name}当年也是那篇稿子的实习生，一句话就能让{fact_checker.ta}的“已核”不再算数"
+   },
+   "hook_ids": [],
+   "start_minute": 1260,
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "p_signoff",
+   "title": "签发单上的名字",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "chief_office",
+    "newsroom"
+   ],
+   "trigger": "集团要求最后一期由集团的人签发，总编说除非从这间屋子里把自己抬出去",
+   "objective": "在最后一期之前，决定签发单上写谁的名字",
+   "choice": "替总编争，还是让集团签",
+   "immediate": {
+    "text": "签发单摊在桌上，两支笔并排放着",
+    "minutes": 15
+   },
+   "near": {
+    "text": "最后一期付印前一晚",
+    "deadline_minutes": 4300
+   },
+   "far": {
+    "trigger": "集团的人签发",
+    "consequence": "最后一期头版会变成一句客套话",
+    "due_days": 13
+   },
+   "exits": [
+    {
+     "option": "去集团替总编说话",
+     "cost": "你的遣散费会被拿出来说事"
+    },
+    {
+     "option": "劝总编让一步",
+     "cost": "总编最后一期没有签名"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": []
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_bound_volume",
+   "kind": "approach",
+   "slot": "editor_in_chief",
+   "location_ids": [
+    "chief_office",
+    "archive_room"
+   ],
+   "text": "{npc.name}从书架上抽出一本合订本，在扉页上写了一行字，递给你"
+  },
+  {
+   "id": "h_one_earbud",
+   "kind": "approach",
+   "slot": "fact_checker",
+   "location_ids": [
+    "archive_room",
+    "stairwell_smoke"
+   ],
+   "text": "{npc.name}把一只耳机递给你，自己戴上另一只：“一起听。”"
+  },
+  {
+   "id": "h_old_draft",
+   "kind": "approach",
+   "slot": "pr_rep",
+   "location_ids": [],
+   "text": "{npc.name}从公文包里抽出一张发黄的打印纸：“我当年写的，你看看。”"
+  },
+  {
+   "id": "h_sunrise",
+   "kind": "approach",
+   "slot": "star_reporter",
+   "location_ids": [],
+   "text": "{npc.name}晃了晃车钥匙：“走，带你去个地方，看完就回来。”"
+  },
+  {
+   "id": "h_lens_down",
+   "kind": "approach",
+   "slot": "photo_desk",
+   "location_ids": [],
+   "text": "{npc.name}把镜头对着你，问了一句“可以吗”，然后又放下了"
+  },
+  {
+   "id": "h_first_sheet",
+   "kind": "approach",
+   "slot": "press_foreman",
+   "location_ids": [
+    "loading_dock",
+    "night_diner"
+   ],
+   "text": "{npc.name}把一份还烫手的报纸塞给你：“第一张，给你。”"
+  },
+  {
+   "id": "h_stay_late",
+   "kind": "approach",
+   "slot": "editor_in_chief",
+   "location_ids": [
+    "chief_office",
+    "newsroom"
+   ],
+   "text": "{npc.name}关了总编室的灯，没走，坐在黑里问你还走不走"
+  },
+  {
+   "id": "h_check_this",
+   "kind": "request",
+   "slot": "fact_checker",
+   "location_ids": [],
+   "text": "{npc.name}把一张便利贴贴在你手背上：“帮我核一个名字。”"
+  },
+  {
+   "id": "h_source_ask",
+   "kind": "request",
+   "slot": "star_reporter",
+   "location_ids": [],
+   "text": "{npc.name}压低声音：“我还差一个证人，你认识一个人。”"
+  },
+  {
+   "id": "h_suit_glance",
+   "kind": "observe",
+   "slot": "pr_rep",
+   "location_ids": [
+    "newsroom"
+   ],
+   "text": "{npc.name}站在{npc.ta}当年那张旧桌子前，看了很久，然后看向你"
+  },
+  {
+   "id": "h_press_jam",
+   "kind": "accident",
+   "slot": "press_foreman",
+   "location_ids": [
+    "loading_dock"
+   ],
+   "text": "印刷机突然卡纸，{npc.name}骂了一声，转头叫你搭把手"
+  },
+  {
+   "id": "h_dropped_lens",
+   "kind": "accident",
+   "slot": "photo_desk",
+   "location_ids": [],
+   "text": "{npc.name}的镜头盖滚到了你脚边，{npc.ta}没去捡，等着你"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_chief_illness",
+   "category": "信息",
+   "requires": [
+    "editor_in_chief"
+   ],
+   "text": "{editor_in_chief.name}在总编室里晕倒了，医生说必须马上住院。"
+  },
+  {
+   "id": "t_tape_copy",
+   "category": "信息",
+   "requires": [
+    "fact_checker"
+   ],
+   "text": "有人发现那盘母带早就有一份拷贝，拷贝的人是{fact_checker.name}。"
+  },
+  {
+   "id": "t_group_reverse",
+   "category": "制度",
+   "requires": [
+    "pressure"
+   ],
+   "text": "集团突然宣布推迟停刊一个月，条件是最后一期由集团审稿。"
+  },
+  {
+   "id": "t_reporter_gone",
+   "category": "人事",
+   "requires": [
+    "star_reporter"
+   ],
+   "text": "{star_reporter.name}一早就去别家报到了，线人本子没带走。"
+  },
+  {
+   "id": "t_press_sold",
+   "category": "资源",
+   "requires": [
+    "press_foreman"
+   ],
+   "text": "印刷机提前被拉走，最后一期要去外地的印刷厂印。"
+  },
+  {
+   "id": "t_photo_source",
+   "category": "关系",
+   "requires": [
+    "photo_desk",
+    "pr_rep"
+   ],
+   "text": "泄露{photo_desk.name}私照的账号，注册信息指向{pr_rep.name}的公司。"
+  },
+  {
+   "id": "t_deadline_moved",
+   "category": "时限",
+   "requires": [],
+   "text": "最后一期的付印时间被提前到明晚九点。"
+  },
+  {
+   "id": "t_blackout",
+   "category": "意外",
+   "requires": [],
+   "text": "整栋楼停电，版面系统里还没保存的头版全没了。"
+  }
+ ],
+ "forbidden_terms": [
+  "铜钱",
+  "衙门",
+  "民国",
+  "电报局",
+  "黄包车",
+  "煤油灯",
+  "驿站",
+  "少女",
+  "少年"
+ ],
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "coercion_theme",
+  "workplace_power",
+  "workplace"
+ ],
+ "status": "review",
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 6 个）。性别按会话偏好生成（D15）。"
+}

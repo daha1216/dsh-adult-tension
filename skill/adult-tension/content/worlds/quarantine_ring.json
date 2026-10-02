@@ -1,0 +1,2536 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "站上的成年安保",
+   "age_range": [
+    28,
+    45
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_patrol",
+   "line": "{npc.name}沿着环廊一圈一圈地走，谁在不该在的地方，{npc.ta}都要问一句",
+   "location_ids": [
+    "ring_corridor",
+    "bunk_row"
+   ],
+   "name": null,
+   "role": "夜巡的安保"
+  },
+  {
+   "adult_context": "在站上住了十年的成年老站员",
+   "age_range": [
+    58,
+    75
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_old_resident",
+   "line": "{npc.name}每晚都在观景窗前坐一会儿，谁跟谁并肩站过，{npc.ta}都记得",
+   "location_ids": [
+    "ring_corridor",
+    "observation_deck"
+   ],
+   "name": null,
+   "role": "住了十年的老站员"
+  },
+  {
+   "adult_context": "后勤部的成年办事员",
+   "age_range": [
+    30,
+    50
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_ration_clerk",
+   "line": "{npc.name}坐在挡板后面刷卡，看见谁的手在抖，{npc.ta}会多给一包盐",
+   "location_ids": [
+    "ration_window"
+   ],
+   "name": null,
+   "role": "配给窗口的办事员"
+  },
+  {
+   "adult_context": "替黑市跑腿的成年站员",
+   "age_range": [
+    22,
+    35
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_vent_runner",
+   "line": "{npc.name}在环廊里来回窜，换气角的价钱和闲话都是{npc.ta}传出去的",
+   "location_ids": [
+    "vent_corner",
+    "ring_corridor"
+   ],
+   "name": null,
+   "role": "黑市跑腿"
+  },
+  {
+   "adult_context": "医疗舱的成年勤务",
+   "age_range": [
+    25,
+    40
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_med_orderly",
+   "line": "{npc.name}推着担架车在检疫舱和环廊之间来回，舱里的消息都是{npc.ta}带出来的",
+   "location_ids": [
+    "quarantine_pod",
+    "ring_corridor"
+   ],
+   "name": null,
+   "role": "医疗舱的勤务"
+  },
+  {
+   "adult_context": "同一舱段的成年住户",
+   "age_range": [
+    30,
+    55
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_bunk_neighbor",
+   "line": "{npc.name}睡得很浅，隔壁舱里几个人的呼吸声，{npc.ta}都数得出来",
+   "location_ids": [
+    "bunk_row"
+   ],
+   "name": null,
+   "role": "隔壁舱的住户"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "你在配给窗口排队时，看见过{power_mechanic.name}袖口底下那道没包扎的伤；{vent_trader.name}后来找到你，说只要你不说，换气角的东西你随便挑一样。",
+   "id": "k_loader_wound",
+   "identity_ids": [
+    "cargo_loader"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "power_mechanic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{power_mechanic.name}知道你看见了",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "vent_trader",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{vent_trader.name}给你开过一个你还不起的价",
+     "stage": "acquainted"
+    },
+    {
+     "a": "power_mechanic",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "vent_trader",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{power_mechanic.name}在换气角欠着一笔账",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "power_mechanic",
+    "vent_trader"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想保住自己的配给，又不想眼看着一个人烂掉",
+    "limit_gap": "今晚的抽查就要查到动力班组",
+    "meeting_reason": "你们三个在配给队伍里前后排过好几回",
+    "resource_gap": "{power_mechanic.name}有动力舱的门卡和一个班组，{vent_trader.name}有满箱的货，你只有一张货舱门卡"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "tension_engine_ids": [
+    "te_hidden_wound",
+    "te_vent_market"
+   ]
+  },
+  {
+   "chemistry": "你的劳务合同二十一天后到期，过期不离站就要再签三年；{station_chief.name}说放行名单可以加你一个，条件是你替{station_chief.ta}去跟{quarantine_officer.name}说一句话。",
+   "id": "k_laborer_release",
+   "identity_ids": [
+    "contract_laborer"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "station_chief",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{station_chief.name}记得你的名字，这让你心里发毛",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "quarantine_officer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{quarantine_officer.name}看你手臂的时候，多看了你一眼",
+     "stage": "stranger"
+    },
+    {
+     "a": "station_chief",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "quarantine_officer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{station_chief.name}一直想让{quarantine_officer.name}灵活一点",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "station_chief",
+    "quarantine_officer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想离开这里，又不想踩着别人走",
+    "limit_gap": "第一批放行名单今夜定",
+    "meeting_reason": "{station_chief.name}在劳务舱段训过话，{quarantine_officer.name}抽查过你的手臂",
+    "resource_gap": "{station_chief.name}有配给和总部，{quarantine_officer.name}有放行章，你只有一张劳务卡"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_release_jump",
+    "te_ration_cut"
+   ]
+  },
+  {
+   "chemistry": "{comms_operator.name}每天多领一份配给，说是替同舱的人领的，可那个舱号只登记了一个人；{quarantine_medic.name}问过你，厨房的饭是不是每天多出一份。",
+   "id": "k_cook_bunk",
+   "identity_ids": [
+    "galley_cook"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "comms_operator",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{comms_operator.name}每天都来窗口说一声谢谢",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "quarantine_medic",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{quarantine_medic.name}在你厨房里吃过一碗没放盐的汤",
+     "stage": "acquainted"
+    },
+    {
+     "a": "comms_operator",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "quarantine_medic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{quarantine_medic.name}的点名册上，{comms_operator.name}的舱号旁边画着一个问号",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "comms_operator",
+    "quarantine_medic"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想让每个人都吃上饭，又不想替一个藏着的人担干系",
+    "limit_gap": "配给明天减半，夜间点名就在今晚",
+    "meeting_reason": "两个人都是你厨房的熟客",
+    "resource_gap": "{comms_operator.name}有通讯舱，{quarantine_medic.name}有测温枪和病历，你有一口锅"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_one_bunk",
+    "te_ration_cut"
+   ]
+  },
+  {
+   "chemistry": "你跟着{quarantine_medic.name}带走过三个体温超线的人，每一次{quarantine_medic.ta}都不让你看那些人的脸；{power_mechanic.name}来医疗舱拿过一回消毒棉，说是替别人拿的。",
+   "id": "k_aide_fever",
+   "identity_ids": [
+    "med_aide"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "quarantine_medic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{quarantine_medic.name}教过你怎么推担架才不晃",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "power_mechanic",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{power_mechanic.name}拿消毒棉时手在抖",
+     "stage": "stranger"
+    },
+    {
+     "a": "quarantine_medic",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "power_mechanic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{quarantine_medic.name}的抽查名单上，动力班组排在今晚",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "quarantine_medic",
+    "power_mechanic"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想救人，又知道救一个可能害一群",
+    "limit_gap": "今晚抽查动力班组",
+    "meeting_reason": "你在医疗舱当班时，两个人都来过",
+    "resource_gap": "{quarantine_medic.name}有药柜和测温枪，{power_mechanic.name}有一道藏着的伤，你有医疗舱的门卡"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "tension_engine_ids": [
+    "te_taken_away",
+    "te_hidden_wound"
+   ]
+  },
+  {
+   "chemistry": "你是检疫局派来督查的，{station_chief.name}一见面就递过来一张放行名单；{quarantine_officer.name}私下对你说，名单上有一个人的体温记录被改过。",
+   "id": "k_inspector_list",
+   "identity_ids": [
+    "inspector"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "station_chief",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{station_chief.name}给你安排的舱比别人大一倍",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "quarantine_officer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{quarantine_officer.name}跟你说话时从不绕弯",
+     "stage": "acquainted"
+    },
+    {
+     "a": "station_chief",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "quarantine_officer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{quarantine_officer.name}已经替{station_chief.name}签过一回",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "station_chief",
+    "quarantine_officer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把名单查清楚，又知道总部在看着你",
+    "limit_gap": "第一批放行今夜定",
+    "meeting_reason": "{station_chief.name}亲自来对接口接的你，{quarantine_officer.name}陪你巡过一遍检疫舱",
+    "resource_gap": "你有督查权，{station_chief.name}有全站的配给和总部，{quarantine_officer.name}有放行章"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_release_jump",
+    "te_taken_away"
+   ]
+  },
+  {
+   "chemistry": "你的货船被扣在对接口，货单和实物差了一箱；{vent_trader.name}说那一箱在换气角，{comms_operator.name}说船上的通讯记录里，有人替那一箱打过掩护。",
+   "id": "k_captain_cargo",
+   "identity_ids": [
+    "freighter_captain"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "vent_trader",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{vent_trader.name}从你船上收过货",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "comms_operator",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{comms_operator.name}替你转过一条家里的消息",
+     "stage": "stranger"
+    },
+    {
+     "a": "vent_trader",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "comms_operator",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{comms_operator.name}替{vent_trader.name}压过一条通讯",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "vent_trader",
+    "comms_operator"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把船和船员都带走，又不想把那一箱里的东西交出去",
+    "limit_gap": "明早开箱查货",
+    "meeting_reason": "你的船一靠港，两个人就都找上了你",
+    "resource_gap": "你有一艘货船和一船的货，{vent_trader.name}有换气角，{comms_operator.name}有通讯记录"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_vent_market",
+    "te_one_bunk"
+   ]
+  },
+  {
+   "chemistry": "{vent_trader.name}在换气角卖一种东西：盖好章的检疫记录；{quarantine_officer.name}一直在查是谁的章，查到最后，查到了自己的抽屉。",
+   "id": "k_officer_trader",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "quarantine_officer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{quarantine_officer.name}抽查时没让你挽袖子",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "vent_trader",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{vent_trader.name}送过你一包合成咖啡",
+     "stage": "acquainted"
+    },
+    {
+     "a": "quarantine_officer",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "vent_trader",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{quarantine_officer.name}知道换气角在卖什么",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "quarantine_officer",
+    "vent_trader"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道那枚章是怎么从抽屉里出去的",
+    "limit_gap": "检疫员今夜就要查到那枚章的来历",
+    "meeting_reason": "这两个人你都在环廊上碰见过",
+    "resource_gap": "{quarantine_officer.name}有放行章，{vent_trader.name}有一枚一模一样的，你是两个人都还信得过的人"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_release_jump",
+    "te_vent_market"
+   ]
+  },
+  {
+   "chemistry": "{power_mechanic.name}手上的伤藏了三天；替{power_mechanic.name}包扎的，正是{comms_operator.name}舱里藏着的那个人；{quarantine_medic.name}已经在点名册上画了两个问号。",
+   "id": "k_three_wounds",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "power_mechanic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{power_mechanic.name}给你看过那道伤",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "comms_operator",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{comms_operator.name}替你转过一条消息",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "quarantine_medic",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{quarantine_medic.name}给你量过三回体温",
+     "stage": "acquainted"
+    },
+    {
+     "a": "power_mechanic",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "comms_operator",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{comms_operator.name}舱里那个人替{power_mechanic.name}换过布",
+     "stage": "acquainted"
+    },
+    {
+     "a": "power_mechanic",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "quarantine_medic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{quarantine_medic.name}盯着{power_mechanic.name}的袖口看过",
+     "stage": "stranger"
+    },
+    {
+     "a": "comms_operator",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "quarantine_medic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "两个问号里，有一个画在{comms_operator.name}的舱号边上",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "power_mechanic",
+    "comms_operator",
+    "quarantine_medic"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想让伤口和藏着的人都熬过去，又知道今晚总要有一个被查出来",
+    "limit_gap": "今晚抽查，今晚点名",
+    "meeting_reason": "三个人你都在配给队伍里碰见过",
+    "resource_gap": "{power_mechanic.name}有伤，{comms_operator.name}有一个藏着的人，{quarantine_medic.name}有点名册，你是唯一一个不在任何名单上的人"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "tension_engine_ids": [
+    "te_hidden_wound",
+    "te_one_bunk"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_station_cast",
+   "reach": "每天早晚各一次，说的都是数字，数字后面的事一个字不提",
+   "text": "站务广播"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_vent_talk",
+   "reach": "压在换气扇底下说的，传出来的时候已经换了三个版本",
+   "text": "换气角的闲话"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_queue_whisper",
+   "reach": "前一个人说给后一个人，排到队尾就变了样",
+   "text": "配给队伍里的耳语"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "检疫员，成年人，全站唯一能签放行单的人，被上面要求“灵活处理”",
+   "age_range": [
+    30,
+    48
+   ],
+   "appearance_options": [
+    "一身白色的检疫制服，胸口别着放行章",
+    "开口前会先看一眼对方的手臂"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说“灵活一点”"
+    ],
+    "contrast": "能放所有人走，唯独放不了自己",
+    "core_value": "章盖下去，就是一条命",
+    "goal_options": [
+     "守住放行名单",
+     "查清换气角那些盖好章的纸是从哪来的",
+     "撑过二十一天"
+    ],
+    "never": [
+     "在不该签的地方盖章"
+    ],
+    "prefers": [
+     "先看手臂"
+    ],
+    "pressure_responses": {
+     "breaking": "把放行章交出去，自己走进检疫舱",
+     "high": "当着站务长的面撕掉那张加塞的放行单",
+     "low": "看一眼对方的手臂，说“挽起来”",
+     "mid": "把放行名单递给对方看，指着最后一行"
+    },
+    "relationship_stance": "严，累",
+    "withdrawal": "夜里一个人对着体温曲线，一条一条看"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "quarantine_officer",
+   "identity": {
+    "authority": "决定谁上放行名单",
+    "exposure": "{npc.ta}已经替站务长签过一个不该签的放行",
+    "hidden": "{npc.ta}自己的体温记录有一天是空着的",
+    "limits": [
+     "站务长要{npc.ta}在名单上加人",
+     "签错一个放行，整个站都可能出事"
+    ],
+    "obligations": [
+     "每天夜里亲自抽查一段舱号"
+    ],
+    "resources": [
+     "放行章和全站的体温记录",
+     "检疫局的派驻身份"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方从不求{npc.ta}放行",
+     "对方主动挽起袖子"
+    ],
+    "boundaries": [
+     "身上没带放行章"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}想在放行单上写自己名字的那个人",
+    "dislikes": [
+     "被当成一枚章"
+    ],
+    "expression": "说出自己空着的那一天去了哪",
+    "likes": [
+     "夜间模式下两个人背靠着观景窗"
+    ],
+    "preconditions": [
+     "抽查还没结束"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "检疫员",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "quarantine_pod",
+     "to": 1320
+    },
+    {
+     "from": 1321,
+     "location_id": "bunk_row",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "ring_corridor",
+     "to": 240
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "被挤下去的人要再等二十一天",
+      "option": "加"
+     },
+     {
+      "cost": "站务长会让检疫局换人",
+      "option": "不加"
+     }
+    ],
+    "pressure": "加了，有人被挤下去；不加，{npc.ta}的派驻就到头了",
+    "trigger": "站务长送来一个名字，要{npc.ta}今夜加进第一批放行"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "voices": {
+    "inner": "“我签过一个不该签的放行。那个人现在就在站里。”",
+    "surface": "“袖子挽起来。我看一眼就好。”"
+   }
+  },
+  {
+   "adult_context": "换气角的黑市商人，成年人，什么都能换，包括检疫记录",
+   "age_range": [
+    30,
+    55
+   ],
+   "appearance_options": [
+    "一件缝了十几个口袋的工装背心，每个口袋都鼓着",
+    "笑起来眼角全是纹，说话总压在换气扇的噪声底下"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说是蛀虫"
+    ],
+    "contrast": "什么都能替别人弄到，唯独弄不到一张自己的放行单",
+    "core_value": "什么都能换，就看你拿什么来",
+    "goal_options": [
+     "在补给船到之前把货出完",
+     "把那一箱从对接口弄出来",
+     "别让章的来历露馅"
+    ],
+    "never": [
+     "换出去一样会害死人的东西"
+    ],
+    "prefers": [
+     "先开价"
+    ],
+    "pressure_responses": {
+     "breaking": "把所有的货扔进回收口，自己去自首",
+     "high": "当着巡逻的面掀开货箱，让大家都分一点",
+     "low": "从口袋里摸出一样东西，问对方是不是缺这个",
+     "mid": "把一张盖好章的纸在对方面前晃一晃"
+    },
+    "relationship_stance": "油滑，讲信用",
+    "withdrawal": "夜里靠在货箱上，数今晚换出去的东西"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "vent_trader",
+   "identity": {
+    "authority": "决定换气角今晚换什么、换给谁",
+    "exposure": "{npc.ta}那枚检疫章是从检疫员的抽屉里出来的，{npc.ta}知道是谁拿的",
+    "hidden": "对接口冻结的那一箱是{npc.ta}的货，里面装着一个人",
+    "limits": [
+     "被抓到就是冻结加驱逐",
+     "补给船一到，黑市就不值钱了"
+    ],
+    "obligations": [
+     "每晚换气扇第二次转起来时开张"
+    ],
+    "resources": [
+     "几箱谁也不知道从哪来的货",
+     "一枚说不清来路的检疫章"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方跟{npc.ta}换东西从不讨价",
+     "对方拿出来换的是一句真话"
+    ],
+    "boundaries": [
+     "换气角只剩两个人"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}想换一张正经放行单的那个人",
+    "dislikes": [
+     "被当成一个货柜"
+    ],
+    "expression": "说出对接口那一箱里装的是谁",
+    "likes": [
+     "换气扇底下两个人头挨着头说话"
+    ],
+    "preconditions": [
+     "换气扇还没转起来"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "黑市商人",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "vent_corner",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "vent_corner",
+     "to": 240
+    },
+    {
+     "from": 241,
+     "location_id": "observation_deck",
+     "to": 360
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "失手一次，换气角就再也开不了张",
+      "option": "去对接口偷"
+     },
+     {
+      "cost": "那个人会被带离",
+      "option": "让箱子里的人自己出来"
+     }
+    ],
+    "pressure": "开箱之前不把人弄出来，箱子里的人就要被当成偷渡带走",
+    "trigger": "对接口要开箱查货了，那一箱藏不住了"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "voices": {
+    "inner": "“对接口那一箱，装的不是货。”",
+    "surface": "“你缺什么？说出来，我这里都有。”"
+   }
+  },
+  {
+   "adult_context": "动力舱维修工，成年人，手上的伤藏了三天",
+   "age_range": [
+    26,
+    42
+   ],
+   "appearance_options": [
+    "工服袖口一直往下拉，盖住右手腕",
+    "满身机油味，指甲缝里黑得洗不掉"
+   ],
+   "decision": {
+    "avoids": [
+     "被人当成病源"
+    ],
+    "contrast": "替全站撑着动力，自己手上那道口子却没人能替着撑",
+    "core_value": "班组的饭不能因为我断",
+    "goal_options": [
+     "撑到检疫期结束",
+     "不连累班组",
+     "弄到一点干净的药"
+    ],
+    "never": [
+     "让班组替{npc.ta}挨罚"
+    ],
+    "prefers": [
+     "先顾班组"
+    ],
+    "pressure_responses": {
+     "breaking": "一个人锁在动力舱里不出来",
+     "high": "当着检疫员挽起袖子",
+     "low": "把袖口往下拉了拉，笑笑说“没事”",
+     "mid": "把手腕伸给对方看，又飞快地缩回去"
+    },
+    "relationship_stance": "硬撑，护短",
+    "withdrawal": "夜里在散热片边，一遍遍换手腕上的布"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "power_mechanic",
+   "identity": {
+    "authority": "决定动力舱今夜的检修先修哪一段",
+    "exposure": "那道伤是被一根沾着站外灰尘的管线划的，{npc.ta}怕的不只是停配给",
+    "hidden": "替{npc.ta}包扎的人，是一个没登记的人",
+    "limits": [
+     "伤口要是被查出来，全班组停发配给",
+     "伤口已经开始发烫"
+    ],
+    "obligations": [
+     "每晚给散热片换一次冷却液"
+    ],
+    "resources": [
+     "一张动力舱的门卡和一身检修手艺",
+     "动力班组的人都听{npc.ta}的"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方看见了伤口却没说出去",
+     "对方替{npc.ta}换过一回布"
+    ],
+    "boundaries": [
+     "动力舱只有两个人"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢挽起袖子的那个人",
+    "dislikes": [
+     "被当成一个传染源"
+    ],
+    "expression": "把手腕上的布解开给对方看",
+    "likes": [
+     "有人很轻地握着{npc.ta}那只受伤的手腕"
+    ],
+    "preconditions": [
+     "袖子已经放下来了"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "动力舱维修工",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "power_bay",
+     "to": 1380
+    },
+    {
+     "from": 1381,
+     "location_id": "ration_window",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "power_bay",
+     "to": 300
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "黑市要的价，{npc.ta}得拿门卡换",
+      "option": "今晚去换气角换药"
+     },
+     {
+      "cost": "{npc.ta}会被带离，班组跟着受罚",
+      "option": "去医疗舱自首"
+     }
+    ],
+    "pressure": "被查出来，班组全员停配给",
+    "trigger": "伤口发烫，今晚的抽查查到动力班组"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "voices": {
+    "inner": "“这道口子不是普通的伤。我怕的不只是停配给。”",
+    "surface": "“没事，划了一下。你别说出去，好吗？”"
+   }
+  },
+  {
+   "adult_context": "医疗舱的医生，成年人，负责把体温超线的人带离",
+   "age_range": [
+    30,
+    50
+   ],
+   "appearance_options": [
+    "一副护目镜挂在脖子上，手套从不摘",
+    "走路很快，鞋底在环廊上几乎不出声"
+   ],
+   "decision": {
+    "avoids": [
+     "被人叫“收人的”"
+    ],
+    "contrast": "每天带走别人，夜里却总梦见被带走的是自己",
+    "core_value": "先救能救的",
+    "goal_options": [
+     "撑到补给船来",
+     "让检疫舱里的人活着出来",
+     "不再带走认识的人"
+    ],
+    "never": [
+     "丢下一个还能救的人"
+    ],
+    "prefers": [
+     "先量体温"
+    ],
+    "pressure_responses": {
+     "breaking": "打开检疫舱的门，自己走进去陪着",
+     "high": "当着全站的面公布药柜的存量",
+     "low": "举起测温枪对着对方的额头，说“别动”",
+     "mid": "把一盒药塞进对方口袋，什么也不说"
+    },
+    "relationship_stance": "冷静，心里压着事",
+    "withdrawal": "夜里在医疗舱一盒一盒点药"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "quarantine_medic",
+   "identity": {
+    "authority": "决定一个人是送检疫舱还是留在居住区",
+    "exposure": "{npc.ta}带走的第一个人，现在还在检疫舱里，一直没出来",
+    "hidden": "{npc.ta}私下给黑市流过一盒药，换了一个人的命",
+    "limits": [
+     "药柜里的抗生素只够再撑十天",
+     "被带离的人里有{npc.ta}认识的"
+    ],
+    "obligations": [
+     "每晚带着测温枪巡一遍舱段"
+    ],
+    "resources": [
+     "医疗舱的药柜和测温枪",
+     "全站每个人的病历"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方被测温枪对着时不躲",
+     "对方问{npc.ta}今天带走了几个"
+    ],
+    "boundaries": [
+     "手套已经摘了"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢摘下手套的那个人",
+    "dislikes": [
+     "被当成一把测温枪"
+    ],
+    "expression": "带对方去检疫舱看那个一直没出来的人",
+    "likes": [
+     "摘下手套以后的那一会儿"
+    ],
+    "preconditions": [
+     "还在巡舱"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "医疗舱医生",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "quarantine_pod",
+     "to": 1300
+    },
+    {
+     "from": 1301,
+     "location_id": "ring_corridor",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "quarantine_pod",
+     "to": 240
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "那个人可能就再也出不来",
+      "option": "照规矩带走"
+     },
+     {
+      "cost": "瞒报会连累整个医疗舱",
+      "option": "改一个读数"
+     }
+    ],
+    "pressure": "体温超线就得带走，这是规矩",
+    "trigger": "今晚的抽查名单上有一个{npc.ta}认识的人"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "voices": {
+    "inner": "“我带走的第一个人，到现在还没出来。”",
+    "surface": "“别动，额头。……好，正常。”"
+   }
+  },
+  {
+   "adult_context": "通讯舱的值班员，成年人，舱号只登记了一个人，舱里却住着两个",
+   "age_range": [
+    24,
+    40
+   ],
+   "appearance_options": [
+    "耳朵上总戴着一只通讯耳麦，另一只耳朵上挂着一个旧耳钉",
+    "领配给时总领两份，说是替人领的"
+   ],
+   "decision": {
+    "avoids": [
+     "被人问舱里住了几个"
+    ],
+    "contrast": "替全站听着外面的消息，自己舱里的事却一句也不能说",
+    "core_value": "人藏得住，消息也压得住",
+    "goal_options": [
+     "撑过二十一天，把藏着的人送走",
+     "不让点名查到自己的舱",
+     "弄到第二份配给"
+    ],
+    "never": [
+     "出卖藏着的人"
+    ],
+    "prefers": [
+     "先压着"
+    ],
+    "pressure_responses": {
+     "breaking": "把藏着的人送上对接口，自己留下",
+     "high": "当着点名的人打开舱门",
+     "low": "压了压耳麦，说“我替人领的”",
+     "mid": "把舱号牌转过去给对方看"
+    },
+    "relationship_stance": "机灵，嘴紧",
+    "withdrawal": "夜里坐在通讯舱，盯着一条一条进来的信号"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "comms_operator",
+   "identity": {
+    "authority": "决定哪一条站外通讯能进来、哪一条不放",
+    "exposure": "{npc.ta}舱里藏着的人，是从对接口那艘货船上下来的",
+    "hidden": "{npc.ta}替换气角的黑市压过一条通讯记录",
+    "limits": [
+     "舱里多一个人，查出来就是偷渡",
+     "配给减半，两个人只够吃一份"
+    ],
+    "obligations": [
+     "每晚值通讯舱的夜班"
+    ],
+    "resources": [
+     "通讯舱的值班权限",
+     "知道站上每一条进出的消息"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方知道{npc.ta}舱里有人也没去报",
+     "对方替{npc.ta}领过一回配给"
+    ],
+    "boundaries": [
+     "通讯舱没有别人"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}想说实话的那个人",
+    "dislikes": [
+     "被当成一个传声筒"
+    ],
+    "expression": "说出舱里那个人是谁",
+    "likes": [
+     "通讯舱里只有信号声的一会儿"
+    ],
+    "preconditions": [
+     "耳麦还亮着"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "通讯员",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "ration_window",
+     "to": 1300
+    },
+    {
+     "from": 1301,
+     "location_id": "bunk_row",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "ring_corridor",
+     "to": 300
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "{npc.ta}就欠下一个随时能被要回去的人情",
+      "option": "去求那人别报"
+     },
+     {
+      "cost": "对接口有摄像头",
+      "option": "连夜把人送走"
+     }
+    ],
+    "pressure": "报上去，藏着的人会被当成偷渡带走",
+    "trigger": "同班组的人听见了舱里的第二个声音，说要去报"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "voices": {
+    "inner": "“我舱里那个人，是从对接口那艘船上下来的。”",
+    "surface": "“我替人领的。别问是谁。”"
+   }
+  },
+  {
+   "adult_context": "空间站的站务长，成年人，嘴上说要“灵活处理”，手里握着全站的配给",
+   "age_range": [
+    38,
+    56
+   ],
+   "appearance_options": [
+    "一身笔挺的站务制服，肩章擦得发亮",
+    "笑容很得体，说话从不提高声音"
+   ],
+   "decision": {
+    "avoids": [
+     "被人当面说是总部的狗"
+    ],
+    "contrast": "替全站做每一个决定，却没有一个决定是自己想做的",
+    "core_value": "规矩要守，也要灵活",
+    "goal_options": [
+     "把总部要的人送走",
+     "让检疫期按时结束",
+     "保住站务长的位子"
+    ],
+    "never": [
+     "在广播里说一句假话"
+    ],
+    "prefers": [
+     "先看考核"
+    ],
+    "pressure_responses": {
+     "breaking": "亲自去对接口，把要送的人推上船",
+     "high": "在全站广播里宣布配给减半",
+     "low": "拍拍对方的肩，说“灵活一点”",
+     "mid": "把一张写着名字的纸条推到对方面前"
+    },
+    "relationship_stance": "得体，冷",
+    "withdrawal": "夜里在站务室一遍遍改配给表"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "station_chief",
+   "identity": {
+    "authority": "决定配给怎么分、放行名单该加谁",
+    "exposure": "{npc.ta}要提前送走的那个人，是总部一个大人物的亲属",
+    "hidden": "{npc.ta}自己的家人在第二批放行名单上，{npc.ta}没说",
+    "limits": [
+     "检疫期一延长，{npc.ta}的考核就完了",
+     "总部有人要{npc.ta}送一个人提前离站"
+    ],
+    "obligations": [
+     "每天早晚各广播一次检疫进度"
+    ],
+    "resources": [
+     "全站的配给调度权",
+     "跟总部的直线通讯"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方当面拒绝{npc.ta}却不让{npc.ta}难堪",
+     "对方不提{npc.ta}的考核"
+    ],
+    "boundaries": [
+     "站务室门关着"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢不灵活一回的那个人",
+    "dislikes": [
+     "被当成一张配给表"
+    ],
+    "expression": "说出自己的家人排在第二批",
+    "likes": [
+     "关了广播以后的一段安静"
+    ],
+    "preconditions": [
+     "广播还开着"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "站务长",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "ring_corridor",
+     "to": 1300
+    },
+    {
+     "from": 1301,
+     "location_id": "observation_deck",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "ring_corridor",
+     "to": 120
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "全站都会知道放行能买",
+      "option": "逼检疫员签"
+     },
+     {
+      "cost": "{npc.ta}的位子保不到检疫期结束",
+      "option": "回绝总部"
+     }
+    ],
+    "pressure": "检疫员不签，{npc.ta}就得换掉检疫员",
+    "trigger": "总部来了指令：今夜之前把那个人加进第一批放行"
+   },
+   "tags": [
+    "coercion_theme"
+   ],
+   "voices": {
+    "inner": "“我的家人在第二批。我一个字都没跟人说。”",
+    "surface": "“灵活一点。规矩是死的，人是活的。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "检疫倒计时二十一天零三小时的夜里",
+  "minute": 1200
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "coercion_theme",
+  "bodily_harm"
+ ],
+ "custom": false,
+ "customs": [
+  "领配给时把袖口挽起来，让下一个人看见你的手臂。",
+  "倒计时每过一整天，环廊的灯会暗一下，大家都抬头看。",
+  "在换气角说的话，不出换气角。",
+  "被带离的人，舱门上贴一条蓝胶带，等人回来再撕。",
+  "新调来的人要请同班组喝一杯合成咖啡。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "前面的人把袖口往下拉了拉",
+    "读卡机嘀了一声，没有通过",
+    "窗口里的人把一份配给多看了两眼"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_ration_queue",
+   "location_ids": [
+    "ration_window"
+   ],
+   "start_minute": 1110,
+   "tags": [],
+   "title": "在配给窗口排队"
+  },
+  {
+   "beats": [
+    "换气扇转起来，所有人都压低了声音",
+    "货箱上多了一样新东西",
+    "有人从你身后挤过去，塞给你一张纸条"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_vent_browse",
+   "location_ids": [
+    "vent_corner"
+   ],
+   "start_minute": 1260,
+   "tags": [],
+   "title": "在换气角转一圈"
+  },
+  {
+   "beats": [
+    "货船的舷灯闪了三下",
+    "窗外的星转过去一圈",
+    "窗玻璃上照出一个人站在你身后"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_window_watch",
+   "location_ids": [
+    "observation_deck"
+   ],
+   "start_minute": 1380,
+   "tags": [],
+   "title": "在观景窗看货船"
+  },
+  {
+   "beats": [
+    "倒计时跳了一格",
+    "一扇舱门上贴着蓝胶带",
+    "夜巡的安保跟你擦肩而过"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [],
+   "id": "a_ring_walk",
+   "location_ids": [
+    "ring_corridor"
+   ],
+   "start_minute": 1230,
+   "tags": [],
+   "title": "绕环廊走一圈"
+  },
+  {
+   "beats": [
+    "舱里的人把手贴在玻璃上",
+    "读数屏上的曲线往下走了一点",
+    "走廊那头有脚步声过来"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_pod_visit",
+   "location_ids": [
+    "quarantine_pod"
+   ],
+   "start_minute": 1290,
+   "tags": [],
+   "title": "隔着玻璃探视"
+  },
+  {
+   "beats": [
+    "隔壁舱有人翻身",
+    "门外有脚步声停下了",
+    "舱顶的通风口吹下来一阵冷风"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [],
+   "id": "a_bunk_rest",
+   "location_ids": [
+    "bunk_row"
+   ],
+   "start_minute": 1400,
+   "tags": [],
+   "title": "在舱里躺一会儿"
+  },
+  {
+   "beats": [
+    "压力表的指针跳了一下",
+    "有人把袖子往下拉",
+    "散热片烫得碰不得"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [],
+   "id": "a_bay_shift",
+   "location_ids": [
+    "power_bay"
+   ],
+   "start_minute": 1350,
+   "tags": [],
+   "title": "跟着动力班组值一段"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "远未来",
+ "extends": null,
+ "forbidden_terms": [
+  "学生",
+  "少女",
+  "少年",
+  "校园",
+  "皇帝",
+  "马车",
+  "灵气",
+  "魔法"
+ ],
+ "hooks": [
+  {
+   "id": "h_sleeve_up",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "quarantine_officer",
+   "text": "{npc.name}托起你的手腕，把袖子轻轻往上推：“我看一眼就好。”"
+  },
+  {
+   "id": "h_officer_stare",
+   "kind": "observe",
+   "location_ids": [
+    "ring_corridor",
+    "ration_window"
+   ],
+   "slot": "quarantine_officer",
+   "text": "{npc.name}站在环廊那头，目光在你手臂上停了很久"
+  },
+  {
+   "id": "h_pocket_gift",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "vent_trader",
+   "text": "{npc.name}从背心口袋里摸出一小包东西塞给你：“你缺这个吧，算我请的。”"
+  },
+  {
+   "id": "h_vent_whisper",
+   "kind": "approach",
+   "location_ids": [
+    "vent_corner"
+   ],
+   "slot": "vent_trader",
+   "text": "{npc.name}凑到你耳边，压在换气扇的噪声底下：“今晚有好东西，给你留着。”"
+  },
+  {
+   "id": "h_snack_trade",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "power_mechanic",
+   "text": "{npc.name}把一包速食塞进你手里，低声说：“别说。今晚换气角见，我拿东西跟你换。”"
+  },
+  {
+   "id": "h_wrist_slip",
+   "kind": "accident",
+   "location_ids": [],
+   "slot": "power_mechanic",
+   "text": "{npc.name}伸手去接东西，袖口滑了上去，露出一道没包扎的伤；{npc.ta}看见你看见了"
+  },
+  {
+   "id": "h_temp_gun",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "quarantine_medic",
+   "text": "{npc.name}举起测温枪，红点落在你额头上，读数出来了，{npc.ta}的手却还停在半空"
+  },
+  {
+   "id": "h_carry_help",
+   "kind": "request",
+   "location_ids": [
+    "quarantine_pod",
+    "ring_corridor"
+   ],
+   "slot": "quarantine_medic",
+   "text": "{npc.name}拦住你：“帮我扶一下这个人，我一个人抬不动。”"
+  },
+  {
+   "id": "h_half_ration",
+   "kind": "approach",
+   "location_ids": [
+    "ration_window",
+    "ring_corridor",
+    "bunk_row"
+   ],
+   "slot": "comms_operator",
+   "text": "{npc.name}把多领的那份配给分了一半给你：“吃吧，别问。”"
+  },
+  {
+   "id": "h_earpiece",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "comms_operator",
+   "text": "{npc.name}摘下耳麦，扣到你耳朵上：“你听，这是站外的声音。”"
+  },
+  {
+   "id": "h_shoulder_pat",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "station_chief",
+   "text": "{npc.name}拍了拍你的肩，笑得很得体：“辛苦了，有什么难处跟我说。”"
+  },
+  {
+   "id": "h_window_share",
+   "kind": "approach",
+   "location_ids": [
+    "observation_deck"
+   ],
+   "slot": "station_chief",
+   "text": "{npc.name}在观景窗前给你让出半扇窗：“这里看得见货船，过来看看。”"
+  },
+  {
+   "id": "h_note_slide",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "station_chief",
+   "text": "{npc.name}把一张折好的纸条塞进你手心：“替我带给检疫员，别打开。”"
+  }
+ ],
+ "id": "quarantine_ring",
+ "locations": [
+  {
+   "affordances": [
+    "抬头看墙上的倒计时",
+    "顺着弧形的地面慢慢走一圈",
+    "靠着舷壁听舱外的嗡嗡声"
+   ],
+   "detail": "空间站的环形主廊，弧形的地面一直向上弯，每一面墙上都跳着检疫倒计时，灯调到了夜间模式。",
+   "exits": [
+    "ration_window",
+    "vent_corner",
+    "quarantine_pod",
+    "power_bay",
+    "bunk_row",
+    "observation_deck"
+   ],
+   "id": "ring_corridor",
+   "name": "环廊",
+   "pressure_modifiers": {
+    "p_fever_check": "测温枪的红点在走廊尽头晃。",
+    "p_release_jump": "环廊的屏幕上，放行名单一行一行往上滚。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "整个居住区的人都要从这里过，谁去了哪一段舱，转个弯就有人看见",
+   "witnesses": [
+    "bg_patrol",
+    "bg_old_resident"
+   ]
+  },
+  {
+   "affordances": [
+    "排进队里，挽起袖口",
+    "看窗口上贴的今天的定量",
+    "数一数前面还有几个人"
+   ],
+   "detail": "环廊一侧的配给窗口，一块挡板、一台读卡机、一条排到转角的队，窗口上贴着今天每人的定量。",
+   "exits": [
+    "ring_corridor"
+   ],
+   "id": "ration_window",
+   "name": "配给窗口",
+   "pressure_modifiers": {
+    "p_bunk_count": "队伍里有人小声说起一个多领配给的舱号。",
+    "p_ration_cut": "窗口上新贴的通知还没干透，“减半”两个字写得很大。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "排队的人前后挨着，谁领了几份、谁把袖口往下拉了拉，后面的人都看得见",
+   "witnesses": [
+    "bg_ration_clerk"
+   ]
+  },
+  {
+   "affordances": [
+    "在货箱前蹲下看今晚有什么",
+    "压低声音问一句价",
+    "背对着入口站着，假装只是来透气"
+   ],
+   "detail": "环廊背面一个被换气扇的噪声罩住的角落，几只货箱拼成柜台，什么都能换：药、烟、合成咖啡，还有盖好章的纸。",
+   "exits": [
+    "ring_corridor",
+    "power_bay"
+   ],
+   "id": "vent_corner",
+   "name": "换气角",
+   "pressure_modifiers": {
+    "p_cargo_freeze": "柜台上空出一块，好像少了一只箱子。",
+    "p_ration_cut": "货箱上的价签全被改过，墨迹还是新的。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "来的人都不想被看见；换气扇一转，说话声出不了这个角",
+   "witnesses": [
+    "bg_vent_runner"
+   ]
+  },
+  {
+   "affordances": [
+    "隔着玻璃跟舱里的人比个手势",
+    "看读数屏上的体温曲线",
+    "在门口的消毒垫上站一会儿"
+   ],
+   "detail": "居住区尽头一排透明的检疫舱，舱里的人隔着玻璃看外面，门口立着体温读数屏。",
+   "exits": [
+    "ring_corridor"
+   ],
+   "id": "quarantine_pod",
+   "name": "检疫舱",
+   "pressure_modifiers": {
+    "p_fever_check": "一间空舱的灯亮了，像在等人。",
+    "p_release_jump": "检疫舱门口贴着放行名单的副本，最后一行被人用指甲划过。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "只有检疫员和医护能进；隔着玻璃，里外都看得见对方的脸",
+   "witnesses": [
+    "bg_med_orderly"
+   ]
+  },
+  {
+   "affordances": [
+    "在散热片边擦一把汗",
+    "看管线上的压力表",
+    "靠着舱壁坐下，听机器的轰鸣"
+   ],
+   "detail": "环形站底部的动力舱，管线和散热片挤满了舱壁，热得人一进去就出汗，只有维修班组有门卡。",
+   "exits": [
+    "ring_corridor",
+    "vent_corner"
+   ],
+   "id": "power_bay",
+   "name": "动力舱",
+   "pressure_modifiers": {
+    "p_wound_spread": "地上有几滴干了的血，被人用鞋底蹭过。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "门卡刷开的人才进得来；机器的轰鸣盖住了一切说话声",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "在舱门口看一眼舱号",
+    "关上舱门，靠在门板上",
+    "隔着板墙听隔壁的动静"
+   ],
+   "detail": "一段并排的单人睡舱，每扇舱门上印着舱号，门里一张床、一个储物格，夜间点名就挨个敲这些门。",
+   "exits": [
+    "ring_corridor"
+   ],
+   "id": "bunk_row",
+   "name": "居住舱段",
+   "pressure_modifiers": {
+    "p_bunk_count": "一扇舱门里传出两个人压低的说话声。",
+    "p_fever_check": "走廊那头已经开始一扇一扇地敲门了。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "舱门一关，就只剩自己；隔壁舱的翻身声隔着板墙听得见",
+   "witnesses": [
+    "bg_bunk_neighbor"
+   ]
+  },
+  {
+   "affordances": [
+    "靠着窗看对接口的货船",
+    "数窗外转过去的星",
+    "在窗玻璃上找身后那个人的倒影"
+   ],
+   "detail": "环廊外侧一段巨大的观景窗，窗外是缓慢旋转的星，和对接口那艘被扣着的货船。",
+   "exits": [
+    "ring_corridor"
+   ],
+   "id": "observation_deck",
+   "name": "观景窗",
+   "pressure_modifiers": {
+    "p_cargo_freeze": "对接口那艘货船的货舱门开着一条缝，亮着灯。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "夜里来的人不多，来了也都只是看窗外；谁跟谁并肩站着，窗玻璃上照得出来",
+   "witnesses": []
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "奥森",
+   "卡列",
+   "瓦尔加",
+   "莫雷诺",
+   "恩科",
+   "哈桑",
+   "林德",
+   "科瓦奇",
+   "索伦",
+   "维加",
+   "门萨",
+   "欧阳",
+   "塔希",
+   "雷耶"
+  ],
+  "given_female": [
+   "艾达",
+   "米娜",
+   "索菲",
+   "蕾雅",
+   "塔莎",
+   "伊莉",
+   "娜迪",
+   "卡雅",
+   "茉拉",
+   "维拉",
+   "阿妮",
+   "洛蒂"
+  ],
+  "given_male": [
+   "诺亚",
+   "卡伊",
+   "马特",
+   "伊桑",
+   "拉斐",
+   "托马",
+   "卢卡",
+   "奥马",
+   "迪伦",
+   "萨米",
+   "安东",
+   "雷欧"
+  ],
+  "given_neutral": [
+   "艾许",
+   "奥瑞",
+   "凯恩",
+   "诺维",
+   "伊尔",
+   "萨吉",
+   "雷恩",
+   "塔尔",
+   "米洛",
+   "夏恩",
+   "维恩",
+   "柯尔"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "{given}"
+   },
+   {
+    "gender": "any",
+    "pattern": "老{family}"
+   },
+   {
+    "gender": "female",
+    "pattern": "{given}姐"
+   },
+   {
+    "gender": "male",
+    "pattern": "{given}哥"
+   }
+  ],
+  "order": "given_first"
+ },
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 17 个）。检疫与放行是胁迫题材的前提，按 C2 打 coercion_theme；亲密只来自人物本身。名在前。性别按会话偏好生成（D15）。",
+ "player_identities": [
+  {
+   "age_range": [
+    22,
+    42
+   ],
+   "baseline": "你在对接口的货舱装卸货，检疫期里只进货不进人，你每天看着那艘被扣的货船。",
+   "gender": "any",
+   "id": "cargo_loader",
+   "reputation": "能扛，话少",
+   "resources": [
+    "一身力气和一张货舱门卡",
+    "对接口的每一只箱子你都搬过"
+   ],
+   "risks": [
+    "你搬过一只比货单上重的箱子"
+   ],
+   "role": "货舱装卸工",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "老{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    40
+   ],
+   "baseline": "你是签了三年合同来站上干活的劳务工，合同二十一天后到期，过期不走就要自动续签。",
+   "gender": "any",
+   "id": "contract_laborer",
+   "reputation": "能忍，算得清",
+   "resources": [
+    "一张劳务卡和一身杂活手艺",
+    "劳务舱段的人都跟你一条心"
+   ],
+   "risks": [
+    "你的合同里有一条，你签字时没看懂"
+   ],
+   "role": "合同劳务工",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "老{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    48
+   ],
+   "baseline": "你在生活区的厨房做饭，全站每个人的配给都从你的锅里过一遍。",
+   "gender": "any",
+   "id": "galley_cook",
+   "reputation": "热心，眼尖",
+   "resources": [
+    "一间厨房和全站的口味",
+    "谁每天多吃一口，你心里有数"
+   ],
+   "risks": [
+    "你每天多做一份饭，不知道是给谁吃的"
+   ],
+   "role": "生活区的厨师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}师傅"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    42
+   ],
+   "baseline": "你在医疗舱当护理员，跟着医生巡舱、量体温、把超线的人推进检疫舱。",
+   "gender": "any",
+   "id": "med_aide",
+   "reputation": "细心，嘴严",
+   "resources": [
+    "一张医疗舱的门卡和一双稳的手",
+    "全站的人都怕你，也都求你"
+   ],
+   "risks": [
+    "你推进检疫舱的人里，有一个是你认识的"
+   ],
+   "role": "医疗舱的护理员",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}护理"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    32,
+    52
+   ],
+   "baseline": "你是检疫局派来督查这一轮检疫的，放行名单最后要你点头才算数。",
+   "gender": "any",
+   "id": "inspector",
+   "reputation": "冷静，较真",
+   "resources": [
+    "检疫局的督查权",
+    "一条能直接打回检疫局的线路"
+   ],
+   "risks": [
+    "派你来之前，有人跟你说过“这一站要灵活处理”"
+   ],
+   "role": "检疫局的督察",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}督察"
+    },
+    {
+     "gender": "any",
+     "pattern": "{given}督察"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    30,
+    55
+   ],
+   "baseline": "你的货船被扣在对接口，船员和货都困在站上，等检疫期结束才能走。",
+   "gender": "any",
+   "id": "freighter_captain",
+   "reputation": "强硬，护短",
+   "resources": [
+    "一艘货船和一船的货",
+    "跑这条航线的商人都认你"
+   ],
+   "risks": [
+    "你的货单和实物差了一箱，你知道差的是什么"
+   ],
+   "role": "被扣的货船船长",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}船长"
+    },
+    {
+     "gender": "any",
+     "pattern": "{given}船长"
+    }
+   ]
+  }
+ ],
+ "premise": "二十一天里谁也不能离站；数据比人先到，可数据也会说谎。",
+ "pressures": [
+  {
+   "choice": "去问清楚，还是捅出去",
+   "exits": [
+    {
+     "cost": "检疫员身后有站务长",
+     "option": "去找检疫员问清楚"
+    },
+    {
+     "cost": "站务长会记住是谁",
+     "option": "把加塞的事捅到全站广播"
+    }
+   ],
+   "far": {
+    "consequence": "下一班要再等二十一天",
+    "due_days": 21,
+    "trigger": "被挤下来的人错过这一班"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_release_jump",
+   "immediate": {
+    "minutes": 5,
+    "text": "屏幕刷新了一次，名单最后一行换了个名字"
+   },
+   "leverage": null,
+   "location_ids": [
+    "ring_corridor",
+    "quarantine_pod"
+   ],
+   "near": {
+    "deadline_minutes": 240,
+    "text": "对接口开闸"
+   },
+   "objective": "在对接口开闸之前，决定要不要替被挤下去的人出头",
+   "source": "institution",
+   "start_minute": 1200,
+   "tags": [
+    "coercion_theme"
+   ],
+   "title": "放行加塞",
+   "trigger": "第一批放行名单贴出来了，最后一个名字是今早才加上去的，原来排在那里的人被挤到了第二批"
+  },
+  {
+   "choice": "去换气角换，还是分给班组",
+   "exits": [
+    {
+     "cost": "黑市要的东西你未必给得起",
+     "option": "去换气角换"
+    },
+    {
+     "cost": "你自己撑不到补给船来",
+     "option": "把自己那份分给班组"
+    }
+   ],
+   "far": {
+    "consequence": "班组之间会开始互相盯着别人的舱",
+    "due_days": 3,
+    "trigger": "配给断了"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_ration_cut",
+   "immediate": {
+    "minutes": 5,
+    "text": "窗口的挡板落下来半截，排在后面的人开始往前挤"
+   },
+   "leverage": null,
+   "location_ids": [
+    "ration_window",
+    "ring_corridor"
+   ],
+   "near": {
+    "deadline_minutes": 60,
+    "text": "窗口关闭"
+   },
+   "objective": "在窗口关闭之前，决定这一份怎么分",
+   "source": "money",
+   "start_minute": 1110,
+   "tags": [],
+   "title": "配给减半",
+   "trigger": "补给船延误，配给窗口贴出通知：明天起每人减半，换气角的东西一夜之间涨了三倍"
+  },
+  {
+   "choice": "应一声，还是让开",
+   "exits": [
+    {
+     "cost": "被查出来就是一起瞒报",
+     "option": "替隔壁舱应一声"
+    },
+    {
+     "cost": "隔壁的人会被带走",
+     "option": "让开路"
+    }
+   ],
+   "far": {
+    "consequence": "当场带走，连同班组停发配给",
+    "due_days": 1,
+    "trigger": "查出超线的人"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_fever_check",
+   "immediate": {
+    "minutes": 5,
+    "text": "测温枪的红点落在隔壁舱门上，门里没人应"
+   },
+   "leverage": null,
+   "location_ids": [
+    "bunk_row",
+    "ring_corridor"
+   ],
+   "near": {
+    "deadline_minutes": 30,
+    "text": "查到你这一段"
+   },
+   "objective": "在查到你这一段之前，决定替不替谁遮一下",
+   "source": "institution",
+   "start_minute": 1320,
+   "tags": [],
+   "title": "夜间抽查",
+   "trigger": "检疫员带着测温枪开始夜间抽查，按舱号点名，一个不落"
+  },
+  {
+   "choice": "先包扎，还是叫医疗舱",
+   "exits": [
+    {
+     "cost": "你就成了知情不报",
+     "option": "先替那人包扎"
+    },
+    {
+     "cost": "那人会被带离，班组跟着受罚",
+     "option": "叫医疗舱"
+    }
+   ],
+   "far": {
+    "consequence": "整个动力班组停发配给",
+    "due_days": 7,
+    "trigger": "伤口被查出来"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_wound_spread",
+   "immediate": {
+    "minutes": 5,
+    "text": "有人喊了一声，一把扳手当啷一声滑到你脚边"
+   },
+   "leverage": null,
+   "location_ids": [
+    "power_bay",
+    "ring_corridor"
+   ],
+   "near": {
+    "deadline_minutes": 15,
+    "text": "医疗舱来人"
+   },
+   "objective": "在医疗舱来人之前，决定怎么办",
+   "source": "accident",
+   "start_minute": 1260,
+   "tags": [
+    "bodily_harm"
+   ],
+   "title": "伤口发黑",
+   "trigger": "有人在检修时晕倒了，袖子挽上去，手臂上的伤口已经发黑"
+  },
+  {
+   "choice": "去对接口看，还是去问黑市",
+   "exits": [
+    {
+     "cost": "对接口有摄像头",
+     "option": "去对接口看一眼"
+    },
+    {
+     "cost": "黑市商人问你拿什么换",
+     "option": "去找黑市商人问"
+    }
+   ],
+   "far": {
+    "consequence": "货主、搬运工、签单的人全都要查",
+    "due_days": 14,
+    "trigger": "开箱查出来"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_cargo_freeze",
+   "immediate": {
+    "minutes": 10,
+    "text": "有人压在换气扇的噪声底下说：“那箱子是热的。”"
+   },
+   "leverage": null,
+   "location_ids": [
+    "vent_corner",
+    "observation_deck"
+   ],
+   "near": {
+    "deadline_minutes": 600,
+    "text": "明早开箱"
+   },
+   "objective": "在明早开箱之前，弄清那只箱子里是什么",
+   "source": "rumor",
+   "start_minute": 1230,
+   "tags": [],
+   "title": "热的箱子",
+   "trigger": "换气角有人说，对接口冻结的那一箱货里装着的不是货，是一个人"
+  },
+  {
+   "choice": "去敲门提醒，还是去拦要报的人",
+   "exits": [
+    {
+     "cost": "你就知道了不该知道的",
+     "option": "去敲门提醒"
+    },
+    {
+     "cost": "那人会问你凭什么",
+     "option": "去拦住要报的人"
+    }
+   ],
+   "far": {
+    "consequence": "多出来的那个人会被当成偷渡带走",
+    "due_days": 21,
+    "trigger": "被报上去"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_bunk_count",
+   "immediate": {
+    "minutes": 5,
+    "text": "有人压低声音说，那间舱夜里有两个人的呼吸声"
+   },
+   "leverage": null,
+   "location_ids": [
+    "bunk_row",
+    "ration_window"
+   ],
+   "near": {
+    "deadline_minutes": 120,
+    "text": "夜间点名"
+   },
+   "objective": "在夜间点名之前，决定帮不帮那间舱",
+   "source": "person",
+   "start_minute": 1250,
+   "tags": [
+    "coercion_theme"
+   ],
+   "title": "舱里的第二个人",
+   "trigger": "一个舱号里传出两个人的声音，同班组的人已经在议论，有人说要去报"
+  }
+ ],
+ "region": "银河边境的一座环形空间站，检疫期还剩二十一天",
+ "rules": [
+  {
+   "id": "r_fever_out",
+   "text": "体温超线的人当场带离检疫舱，不经过居住区。"
+  },
+  {
+   "id": "r_wound_report",
+   "text": "瞒报伤口的人，连同所在班组全员停发配给。"
+  },
+  {
+   "id": "r_cargo_freeze",
+   "text": "货单和实物不符时，先冻结货物，再查人。"
+  },
+  {
+   "id": "r_no_leave",
+   "text": "检疫期内任何人不得离站，对接口只进货不进人。"
+  },
+  {
+   "id": "r_one_bunk",
+   "text": "每个舱号只登记一个人，夜间点名按舱号来。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": null,
+ "status": "review",
+ "style_hint": "写冷和近：夜间模式的灯、弧形的地面、换气扇的噪声、袖口底下的伤；人和人挨得很近，谁都怕被对方看见什么。",
+ "tension_engines": [
+  {
+   "id": "te_release_jump",
+   "text": "放行名单被人加了塞"
+  },
+  {
+   "id": "te_vent_market",
+   "text": "换气角的黑市什么都能换"
+  },
+  {
+   "id": "te_ration_cut",
+   "text": "配给要断供了"
+  },
+  {
+   "id": "te_taken_away",
+   "text": "熟人被带离居住区"
+  },
+  {
+   "id": "te_one_bunk",
+   "text": "两个人只登记了一个舱号"
+  },
+  {
+   "id": "te_hidden_wound",
+   "text": "有人藏着一道伤口"
+  }
+ ],
+ "title": "检疫环",
+ "tone": [
+  "检疫",
+  "倒计时",
+  "封闭",
+  "配给"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_stamp_drawer",
+   "requires": [
+    "quarantine_officer",
+    "vent_trader"
+   ],
+   "text": "{vent_trader.name}那枚检疫章，是从{quarantine_officer.name}的抽屉里出来的，拿走它的人每天都在{quarantine_officer.name}身边。"
+  },
+  {
+   "category": "关系",
+   "id": "t_bunk_crate",
+   "requires": [
+    "comms_operator",
+    "vent_trader"
+   ],
+   "text": "{comms_operator.name}舱里藏着的人，和{vent_trader.name}那一箱里的人是一家。"
+  },
+  {
+   "category": "人事",
+   "id": "t_chief_family",
+   "requires": [
+    "station_chief"
+   ],
+   "text": "有人在通讯记录里看到：{station_chief.name}的家人在第二批放行名单上。"
+  },
+  {
+   "category": "资源",
+   "id": "t_supply_early",
+   "requires": [],
+   "text": "补给船提前一天到了，配给窗口明天恢复全份。"
+  },
+  {
+   "category": "时限",
+   "id": "t_extend",
+   "requires": [],
+   "text": "检疫局通知：检疫期延长七天。"
+  },
+  {
+   "category": "制度",
+   "id": "t_pair_roll",
+   "requires": [],
+   "text": "站务广播新规：从今晚起，夜间点名改成两人一组互相作证。"
+  },
+  {
+   "category": "意外",
+   "id": "t_hull_alarm",
+   "requires": [],
+   "text": "环廊外侧的舷壁报警了，一段舱被临时封闭，里面的人都出不来。"
+  }
+ ]
+}

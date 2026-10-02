@@ -13,6 +13,7 @@ import _bootstrap  # noqa: F401
 from adult_tension.application import service
 from adult_tension.application.fake_narrator import FakeNarrator
 from adult_tension.domain import state as SS
+from adult_tension.domain.text import full_name
 from adult_tension.persistence import repo
 from adult_tension.projections import context as CX
 from helpers.domain import STORE
@@ -107,7 +108,7 @@ class Game:
                 {
                     "op": "introduce_character",
                     "id": cid,
-                    "name": families[i] + "客" + FILL[i],
+                    "name": full_name(world["name_pools"], families[i], "客" + FILL[i]),
                     "tier": tier,
                     "age": 30 + i,
                     "gender": ("female", "male")[i % 2],
@@ -150,7 +151,7 @@ class FullContextBudgetTest(unittest.TestCase):
         return full
 
     def test_three_person_combos_with_newcomers_stay_within_budget(self):
-        self.assertEqual(len(TRIOS), 5)
+        self.assertEqual(len(TRIOS), 25)
         for world_id, combo_id in TRIOS:
             for mode in ("pressure", "daily"):
                 with app() as ctx:

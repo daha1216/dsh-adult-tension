@@ -290,6 +290,8 @@ def full(state, content, save=None):
         "given_male": pools["given_male"][:12],
         "given_neutral": pools["given_neutral"][:8],
     }
+    if pools.get("order") == "given_first":
+        context["name_pool"]["order"] = "名在前、姓在后，中间用“·”"
     _fit_full(context, state)
     return context
 

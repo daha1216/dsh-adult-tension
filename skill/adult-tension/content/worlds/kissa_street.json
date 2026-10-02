@@ -1,0 +1,2545 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "退休多年的成年常客",
+   "age_range": [
+    66,
+    80
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_old_reader",
+   "line": "{npc.name}每天坐在第一个位子上看报，谁的杯子少了，总是{npc.ta}先发现",
+   "location_ids": [
+    "hakuba"
+   ],
+   "name": null,
+   "role": "每天来看报的退休老人"
+  },
+  {
+   "adult_context": "牛奶店的成年送奶员",
+   "age_range": [
+    25,
+    45
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_milkman",
+   "line": "{npc.name}凌晨挨家送牛奶，顺手把纸条塞进门缝",
+   "location_ids": [
+    "arcade",
+    "hakuba"
+   ],
+   "name": null,
+   "role": "送牛奶的"
+  },
+  {
+   "adult_context": "私铁的成年站务员",
+   "age_range": [
+    30,
+    55
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_station_staff",
+   "line": "{npc.name}吹完末班车的哨，记得是谁没赶上",
+   "location_ids": [
+    "station",
+    "yotaka"
+   ],
+   "name": null,
+   "role": "车站的站务员"
+  },
+  {
+   "adult_context": "振兴会的成年会长",
+   "age_range": [
+    55,
+    70
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_association",
+   "line": "{npc.name}挨家挨户收联名信，谁不签就在本子上记一笔",
+   "location_ids": [
+    "arcade",
+    "hakuba"
+   ],
+   "name": null,
+   "role": "商店街振兴会会长"
+  },
+  {
+   "adult_context": "理发店的成年店主",
+   "age_range": [
+    40,
+    60
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_barber",
+   "line": "{npc.name}一边剃头一边讲，整条街的闲话都是从{npc.ta}的椅子上传出去的",
+   "location_ids": [
+    "arcade",
+    "sento"
+   ],
+   "name": null,
+   "role": "理发店店主"
+  },
+  {
+   "adult_context": "松之汤雇的成年锅炉工",
+   "age_range": [
+    45,
+    65
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_boiler_man",
+   "line": "{npc.name}在锅炉房里烧了二十年柴，听见什么都只说一半",
+   "location_ids": [
+    "sento"
+   ],
+   "name": null,
+   "role": "钱汤的锅炉工"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "{second_owner.name}是你的老板，今天取下了一只杯子却不说是谁的；{bandai_keeper.name}说那只杯子的主人，昨晚还在松之汤泡过澡。",
+   "id": "k_counter_help",
+   "identity_ids": [
+    "part_timer"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "second_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{second_owner.name}手把手教你煮虹吸咖啡",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bandai_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{bandai_keeper.name}说你擦杯子的样子像白桦的老店主",
+     "stage": "acquainted"
+    },
+    {
+     "a": "second_owner",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "bandai_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 2
+     },
+     "reason": "{bandai_keeper.name}看着{second_owner.name}长大，有一件事一直没告诉{second_owner.ta}",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "second_owner",
+    "bandai_keeper"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在店卖掉之前，弄清那只杯子为什么被取下",
+    "limit_gap": "店要卖了，你的工作跟着没了",
+    "meeting_reason": "你每天收工都去松之汤，{bandai_keeper.name}总给你留着最后一池水",
+    "resource_gap": "{second_owner.name}有一间店和十四个杯子，{bandai_keeper.name}有三十年的眼睛，你只会煮咖啡"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_transfer",
+    "te_cup_gone"
+   ]
+  },
+  {
+   "chemistry": "你住在{bandai_keeper.name}的钱汤二楼，房租靠烧锅炉抵；{night_waiter.name}每天早上交了班来泡第一池水，总要问你一句昨晚谁来过。",
+   "id": "k_boiler_room",
+   "identity_ids": [
+    "sento_lodger"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "bandai_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{bandai_keeper.name}收留了刚上京的你",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "night_waiter",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{night_waiter.name}在你烧锅炉的时候哼过一首歌",
+     "stage": "acquainted"
+    },
+    {
+     "a": "bandai_keeper",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "night_waiter",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{bandai_keeper.name}知道{night_waiter.name}那只杯子的事",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "bandai_keeper",
+    "night_waiter"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想留在这条街，也想知道{night_waiter.name}每天问的那个人是谁",
+    "limit_gap": "锅炉快坏了，钱汤关门你就没地方住",
+    "meeting_reason": "钱汤一开门三个人就碰面",
+    "resource_gap": "{bandai_keeper.name}有钱汤和你的住处，{night_waiter.name}有夜鹰的钥匙，你只有锅炉房的钥匙"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_old_flame",
+    "te_last_train"
+   ]
+  },
+  {
+   "chemistry": "你的杯子在白桦挂了八年；{photographer.name}每周三都拍你常坐的那个位子，说你不在的时候它最好看；{second_owner.name}今天把你的杯子取下来擦了很久。",
+   "id": "k_eight_years",
+   "identity_ids": [
+    "regular_commuter"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "second_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{second_owner.name}记得你八年来每一次点的东西",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "photographer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{photographer.name}拍过你的背影，没问过你",
+     "stage": "acquainted"
+    },
+    {
+     "a": "second_owner",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "photographer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{photographer.name}每周三的咖啡只喝一半，{second_owner.name}从不收全价",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "second_owner",
+    "photographer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道走了以后，那个位子会不会还有人留着",
+    "limit_gap": "你明年可能调去大阪，店可能今年就卖",
+    "meeting_reason": "每周三三个人都在白桦",
+    "resource_gap": "{second_owner.name}有店，{photographer.name}有底片，你有一只挂了八年的杯子"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_cup_gone",
+    "te_transfer"
+   ]
+  },
+  {
+   "chemistry": "振兴会的签字你有一票；{land_agent.name}来找过你三次，{jazz_owner.name}说只要你不签，那本欠账簿就不会落到地产公司手里。",
+   "id": "k_vote",
+   "identity_ids": [
+    "bookshop_keeper"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "jazz_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "你和{jazz_owner.name}做了十几年邻居，借过彼此的书和唱片",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "land_agent",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{land_agent.name}小时候在你的店里蹭过书看",
+     "stage": "acquainted"
+    },
+    {
+     "a": "jazz_owner",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "land_agent",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{jazz_owner.name}记得那家豆腐店是怎么关的",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "jazz_owner",
+    "land_agent"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想守住这条街，也不想当最后一个不签的人",
+    "limit_gap": "年底前过半数就签了，你的价钱最高",
+    "meeting_reason": "你们三个人的店在同一条拱廊下，抬头就看见",
+    "resource_gap": "{land_agent.name}有收购的钱和一沓意向书，{jazz_owner.name}有一本两家合用的欠账簿，你有一票"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_merged_tab",
+    "te_transfer"
+   ]
+  },
+  {
+   "chemistry": "白桦的地契有一半押在你的柜子里；{second_owner.name}来求你宽限三个月，{jazz_owner.name}说那本欠账簿上的钱其实是{jazz_owner.ta}欠的。",
+   "id": "k_loan_file",
+   "identity_ids": [
+    "bank_officer"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "second_owner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{second_owner.name}每次来金库都穿最好的衣服",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "jazz_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{jazz_owner.name}请你听过一整面唱片，一句话没说",
+     "stage": "acquainted"
+    },
+    {
+     "a": "second_owner",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "jazz_owner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{second_owner.name}不知道{jazz_owner.name}欠了多少",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "second_owner",
+    "jazz_owner"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把账收回来，又不想做那个拆掉白桦的人",
+    "limit_gap": "上面催你年底前收回，你的上司和地产公司有来往",
+    "meeting_reason": "你来商店街查账，这两个人你都得见",
+    "resource_gap": "你有整条街的贷款和催收的权力，{second_owner.name}有一间店，{jazz_owner.name}有一本账簿"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_merged_tab",
+    "te_transfer"
+   ]
+  },
+  {
+   "chemistry": "你的图纸上，松之汤的烟囱是第一个要拆的；{land_agent.name}是你派来的人，却迟迟收不下这条街；{bandai_keeper.name}说认得你，三十年前你在这条街坐过一整年。",
+   "id": "k_station_tower",
+   "identity_ids": [
+    "developer_boss"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "land_agent",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{land_agent.name}是你亲手提拔的",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "bandai_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{bandai_keeper.name}一眼就认出了你",
+     "stage": "stranger"
+    },
+    {
+     "a": "land_agent",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "bandai_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{land_agent.name}小时候每天来松之汤，{bandai_keeper.name}给过{land_agent.ta}咖啡牛奶",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "land_agent",
+    "bandai_keeper"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想盖起大楼，也想知道{bandai_keeper.name}记得的是哪一年的你",
+    "limit_gap": "年底前要动工，{land_agent.name}在暗地里拖你的进度",
+    "meeting_reason": "你亲自来商店街看一眼，这两个人你都躲不开",
+    "resource_gap": "你有图纸和钱，{land_agent.name}有一沓意向书，{bandai_keeper.name}有一座钱汤和三十年的记性"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_transfer",
+    "te_old_flame"
+   ]
+  },
+  {
+   "chemistry": "{photographer.name}的“空座”影展第一张照片里有你的背影；{night_waiter.name}认得那张照片拍的位子，说那原本是{night_waiter.ta}的位子。",
+   "id": "k_empty_seat",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "photographer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{photographer.name}拍了你的背影，你最近才知道",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "night_waiter",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "你错过末班车那晚，{night_waiter.name}请了你第一杯咖啡",
+     "stage": "acquainted"
+    },
+    {
+     "a": "photographer",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "night_waiter",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{photographer.name}在夜鹰翻底片，{night_waiter.name}每次都替{photographer.ta}续杯",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "photographer",
+    "night_waiter"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道那张照片里，自己坐的是谁的位子",
+    "limit_gap": "影展下个月开幕，{night_waiter.name}下周要去新宿试唱",
+    "meeting_reason": "三个人都常在末班车前后出现在这条街",
+    "resource_gap": "{photographer.name}有底片和一个影展，{night_waiter.name}有末班车后唯一的灯，你有一个被拍下来的背影"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_last_train",
+    "te_cup_gone"
+   ]
+  },
+  {
+   "chemistry": "一箱寄存了十年的唱片没人认领；{jazz_owner.name}说主人是白桦老店主的旧情人，{second_owner.name}想在卖店之前弄清楚，{photographer.name}说自己有一张那个人的照片。",
+   "id": "k_deposit_box",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "jazz_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{jazz_owner.name}让你听过那箱唱片里的一首",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "second_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{second_owner.name}跟你提过那只没名字的杯子",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "photographer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{photographer.name}给你看过那张旧照片的一角",
+     "stage": "acquainted"
+    },
+    {
+     "a": "jazz_owner",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "second_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "两家店合用一本账簿，账上的事谁也不提",
+     "stage": "familiar"
+    },
+    {
+     "a": "jazz_owner",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "photographer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{photographer.name}拍过蓝调的空座位",
+     "stage": "acquainted"
+    },
+    {
+     "a": "second_owner",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "photographer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{photographer.name}每周三都来白桦",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "jazz_owner",
+    "second_owner",
+    "photographer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把唱片交到该收的人手里",
+    "limit_gap": "满一年没人认领，唱片就归店里处置；白桦也快卖了",
+    "meeting_reason": "三个人都想先打开那箱唱片",
+    "resource_gap": "{jazz_owner.name}有那箱唱片，{second_owner.name}有父亲留下的一只没名字的杯子，{photographer.name}有一张旧照片，你有一个他们都没有的线索"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_deposit",
+    "te_old_flame"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_cup_row",
+   "reach": "谁的杯子挂着、谁的被取下，常客一进门就看见",
+   "text": "吧台上的杯子"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_barber_chair",
+   "reach": "一个下午传遍整条街，传到钱汤已经变了样",
+   "text": "理发店的闲话"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_bandai_word",
+   "reach": "只说给一个人听，从不添油加醋",
+   "text": "番台上的一句话"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "喫茶「白桦」的第二代店主，成年人，父母过世后接手这家店十年",
+   "age_range": [
+    30,
+    42
+   ],
+   "appearance_options": [
+    "围裙口袋里插着一支铅笔和一沓记账小票",
+    "擦杯子的时候总把杯底翻过来，看一眼上面的名字"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说守着一间死店"
+    ],
+    "contrast": "替整条街的人守着他们的习惯，自己的心事从来没摆上过吧台",
+    "core_value": "店在，人就在",
+    "goal_options": [
+     "把店卖个好价钱，去东京",
+     "替十四个杯子找到下家",
+     "弄清父亲留下的那只没写名字的杯子是谁的"
+    ],
+    "never": [
+     "把常客的杯子随手扔掉"
+    ],
+    "prefers": [
+     "先擦杯子"
+    ],
+    "pressure_responses": {
+     "breaking": "摘下所有杯子装进纸箱，锁上店门",
+     "high": "当着常客的面说出店要转让",
+     "low": "把咖啡推过去，说“先喝，凉了就苦了”",
+     "mid": "把杯子从钩子上取下来，摆在对方面前"
+    },
+    "relationship_stance": "对常客周到，对自己的事一句不提",
+    "withdrawal": "打烊后关掉一半的灯，坐在吧台边，一只一只看杯底的名字"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "second_owner",
+   "identity": {
+    "authority": "决定吧台上挂谁的杯子、哪个位子给谁留着",
+    "exposure": "{npc.ta}已经在地产公司的意向书上按过一次手印，第二天又去要了回来",
+    "hidden": "{npc.ta}想去东京市中心开一家自己的店，这个念头藏了五年",
+    "limits": [
+     "店面的地契一半押在信用金库",
+     "一个人守店，病一天就关一天门"
+    ],
+    "obligations": [
+     "每天早上七点开门，给常客留着他们的位子"
+    ],
+    "resources": [
+     "一间开了三十年的喫茶店和十四个常客的杯子",
+     "父亲留下的虹吸壶和一本进豆子的账"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方记得{npc.ta}父亲煮咖啡的手法",
+     "对方不问店卖不卖"
+    ],
+    "boundaries": [
+     "不在吧台后面"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢留下，也敢走的那个人",
+    "dislikes": [
+     "被当成看店的"
+    ],
+    "expression": "把一只新杯子挂上钩子，杯底写上对方的名字",
+    "likes": [
+     "打烊后虹吸壶里剩下的最后一点咖啡"
+    ],
+    "preconditions": [
+     "店门已经挂上“准备中”的牌子"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "白桦的店主",
+   "schedule": [
+    {
+     "from": 420,
+     "location_id": "hakuba",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "sento",
+     "to": 1290
+    },
+    {
+     "from": 1291,
+     "location_id": "upstairs",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "常客们会说{npc.ta}把父亲的店卖给了推土机",
+      "option": "卖"
+     },
+     {
+      "cost": "信用金库下个月就要收回押着的那一半地契",
+      "option": "不卖"
+     }
+    ],
+    "pressure": "卖了，十四个杯子就没处挂了",
+    "trigger": "地产公司的人今天下午来看铺子，开的价够在东京开两家店"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“十四个杯子我一个都放不下，可我也想走。”",
+    "surface": "“你的还在。咖啡还是老样子？”"
+   }
+  },
+  {
+   "adult_context": "钱汤「松之汤」的主人，成年人，在番台上坐了三十年",
+   "age_range": [
+    50,
+    66
+   ],
+   "appearance_options": [
+    "坐在番台上，膝上一个木账匣，一边收钱一边织毛线",
+    "说话声音不大，可两边澡堂都听得见"
+   ],
+   "decision": {
+    "avoids": [
+     "被人当成长舌的"
+    ],
+    "contrast": "替全街保守了三十年的秘密，自己那一个最守不住",
+    "core_value": "看见的事不说",
+    "goal_options": [
+     "让松之汤撑到锅炉坏的那一天",
+     "把那封信交给该收的人",
+     "在关门之前等一个人回来"
+    ],
+    "never": [
+     "把在番台上看见的事说出去"
+    ],
+    "prefers": [
+     "先看，再说"
+    ],
+    "pressure_responses": {
+     "breaking": "熄掉锅炉，挂上“本日休业”，一连几天不开门",
+     "high": "从番台上站起来，当着两边的人说一句真话",
+     "low": "低头织毛线，说“水温正好”",
+     "mid": "把账匣里一张发黄的旧票据推给对方看"
+    },
+    "relationship_stance": "什么都看见，什么都不说",
+    "withdrawal": "关门后一个人坐在空池边上，听水从排水口一点点流干"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "bandai_keeper",
+   "identity": {
+    "authority": "决定谁能在打烊后进来泡最后一池水",
+    "exposure": "{npc.ta}知道白桦老店主当年喜欢的人是谁，那人现在每周还来泡澡",
+    "hidden": "{npc.ta}的账匣底下压着一封三十年前没交出去的信",
+    "limits": [
+     "燃料费年年涨，锅炉快撑不住了",
+     "子女都在东京，不肯回来接手"
+    ],
+    "obligations": [
+     "每天下午三点开门，夜里十二点放掉最后一池水"
+    ],
+    "resources": [
+     "一座烧了四十年的钱汤和番台上的位子",
+     "三十年里整条街每一个人的作息"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方从不打听别人的事",
+     "对方愿意帮{npc.ta}擦一遍池边的瓷砖"
+    ],
+    "boundaries": [
+     "不在番台上"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "终于回头看了{npc.ta}一眼的那个人",
+    "dislikes": [
+     "被当成只会收钱的"
+    ],
+    "expression": "把那封压了三十年的信拿给对方看",
+    "likes": [
+     "最后一池水冒起来的热气"
+    ],
+    "preconditions": [
+     "钱汤已经打烊"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "番台上的人",
+   "schedule": [
+    {
+     "from": 900,
+     "location_id": "sento",
+     "to": 1439
+    },
+    {
+     "from": 600,
+     "location_id": "arcade",
+     "to": 840
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "要拿房子去信用金库抵押",
+      "option": "借钱修"
+     },
+     {
+      "cost": "整条街就没有地方一边洗澡一边说话了",
+      "option": "关门"
+     }
+    ],
+    "pressure": "修不起，松之汤就要关门",
+    "trigger": "锅炉今天又漏水了，修一次的钱够烧半年的柴"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我看了三十年别人，没有一个人回头看过我。”",
+    "surface": "“水温正好，进去吧。”"
+   }
+  },
+  {
+   "adult_context": "每周三来白桦的摄影师，成年人，给东京的杂志拍街景为生",
+   "age_range": [
+    28,
+    45
+   ],
+   "appearance_options": [
+    "一台旧单反挂在胸前，镜头盖从来不盖",
+    "总坐靠窗的位子，咖啡只喝一半"
+   ],
+   "decision": {
+    "avoids": [
+     "被人拍"
+    ],
+    "contrast": "拍了几百张没有人的座位，从来不敢拍一张有人的",
+    "core_value": "人走了，位子还在",
+    "goal_options": [
+     "把影展办起来",
+     "拍下白桦关门前的最后一天",
+     "找到照片里那个背影的主人"
+    ],
+    "never": [
+     "偷拍别人的私事"
+    ],
+    "prefers": [
+     "先看光线"
+    ],
+    "pressure_responses": {
+     "breaking": "把所有底片寄还给照片里的人，从此不再拍",
+     "high": "当着店主的面拍下那一排空钩子",
+     "low": "举起相机又放下，说“光线不对”",
+     "mid": "把一张洗好的照片放在对方面前"
+    },
+    "relationship_stance": "镜头后面专注，镜头前面躲闪",
+    "withdrawal": "末班车之后坐在通宵喫茶里，一张一张翻底片，翻到天亮"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "photographer",
+   "identity": {
+    "authority": "决定哪一张底片洗出来",
+    "exposure": "{npc.ta}拍的每一个空座位，都有一个已经不来的人坐过",
+    "hidden": "{npc.ta}在筹备一个叫“空座”的影展，第一张照片里有对方的背影",
+    "limits": [
+     "杂志说空座位的照片没人看",
+     "暗房是借朋友的，每次只能用一个晚上"
+    ],
+    "obligations": [
+     "每周三下午来，一直坐到末班车"
+    ],
+    "resources": [
+     "几百张商店街空座位的底片",
+     "东京一家杂志的约稿"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不躲{npc.ta}的镜头",
+     "对方能说出一张照片里少了什么"
+    ],
+    "boundaries": [
+     "不在镜头后面"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}愿意放下相机去看的那个人",
+    "dislikes": [
+     "被当成闯进来的外人"
+    ],
+    "expression": "给对方拍第一张有人的照片，只洗一张",
+    "likes": [
+     "暗房红灯下照片慢慢显出来的那一刻"
+    ],
+    "preconditions": [
+     "相机已经收进包里"
+    ],
+    "self_control_range": [
+     2,
+     5
+    ]
+   },
+   "public_role": "摄影师",
+   "schedule": [
+    {
+     "from": 900,
+     "location_id": "hakuba",
+     "to": 1380
+    },
+    {
+     "from": 1381,
+     "location_id": "yotaka",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "yotaka",
+     "to": 300
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "影展就办不成了",
+      "option": "去拍大楼"
+     },
+     {
+      "cost": "暗房的钱付不起",
+      "option": "不去"
+     }
+    ],
+    "pressure": "不拍新大楼，就没有约稿",
+    "trigger": "杂志说下个月起不要街景了，要拍东京的新大楼"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我拍了三年空座位，其实是在等一个人坐回来。”",
+    "surface": "“别动，就这样坐着……算了，你还是让开吧，我拍的是空位子。”"
+   }
+  },
+  {
+   "adult_context": "商店街地下爵士喫茶「蓝调」的店主，成年人，年轻时在横滨的俱乐部吹过萨克斯",
+   "age_range": [
+    40,
+    58
+   ],
+   "appearance_options": [
+    "戴一副圆框眼镜，换唱片之前先用袖口擦一下唱针",
+    "话很少，店里只准听不准聊"
+   ],
+   "decision": {
+    "avoids": [
+     "有人在放唱片的时候说话"
+    ],
+    "contrast": "替别人保管了十年的唱片，自己的萨克斯锁在柜子里生锈",
+    "core_value": "音乐不撒谎",
+    "goal_options": [
+     "给那箱寄存唱片找到主人",
+     "还清欠账再关店",
+     "再吹一次萨克斯"
+    ],
+    "never": [
+     "把别人寄存的东西卖掉"
+    ],
+    "prefers": [
+     "先听"
+    ],
+    "pressure_responses": {
+     "breaking": "把两千张唱片卖给东京的收藏家，封了地下室",
+     "high": "把寄存的唱片当众放出来",
+     "low": "调大音量，说“听完这一面”",
+     "mid": "把欠账簿翻到那一页摊开"
+    },
+    "relationship_stance": "对音乐挑剔，对人宽容",
+    "withdrawal": "关店后在漆黑的地下室里放那张开场的唱片，一个人从头听到尾"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "jazz_owner",
+   "identity": {
+    "authority": "决定今晚放哪一张唱片、哪一箱寄存唱片可以打开",
+    "exposure": "寄存在店里的那箱唱片，主人十年前就不来了，{npc.ta}知道那人是谁",
+    "hidden": "{npc.ta}欠白桦的钱，比账簿上写的多一倍",
+    "limits": [
+     "地下室漏水，唱片怕潮",
+     "生意全靠十几个老客撑着"
+    ],
+    "obligations": [
+     "每晚八点开唱，第一张永远是同一张"
+    ],
+    "resources": [
+     "两千张唱片和一套从美军基地流出来的音响",
+     "一本和白桦合用的欠账簿"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方安静听完一整面唱片",
+     "对方叫得出开场那张唱片的名字"
+    ],
+    "boundaries": [
+     "不在唱机旁边"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "听得懂{npc.ta}不说话的那个人",
+    "dislikes": [
+     "被当成过时的人"
+    ],
+    "expression": "从柜子里拿出萨克斯，只吹给对方一个人听",
+    "likes": [
+     "唱针落下之前那一声轻响"
+    ],
+    "preconditions": [
+     "唱片已经放完"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "蓝调的店主",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "basement_jazz",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "basement_jazz",
+     "to": 120
+    },
+    {
+     "from": 840,
+     "location_id": "hakuba",
+     "to": 1000
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "白桦的店主会知道{npc.ta}这些年在用谁的钱",
+      "option": "坦白"
+     },
+     {
+      "cost": "账簿落到地产公司手里，就成了逼{npc.ta}搬走的借口",
+      "option": "拖着"
+     }
+    ],
+    "pressure": "账一清，{npc.ta}欠的那一半就藏不住了",
+    "trigger": "白桦要转让，合用的欠账簿要清账"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“那箱唱片的主人，我等了十年。”",
+    "surface": "“嘘。听完这一面再说。”"
+   }
+  },
+  {
+   "adult_context": "东京一家不动产公司派来收铺子的中介，成年人，在这条商店街长大",
+   "age_range": [
+    30,
+    40
+   ],
+   "appearance_options": [
+    "一身新西装，皮鞋擦得太亮，在商店街里格格不入",
+    "公文包里一沓意向书和一包没拆的烟"
+   ],
+   "decision": {
+    "avoids": [
+     "被叫小时候的绰号"
+    ],
+    "contrast": "回来拆自己长大的街，每一家店都还记得{npc.ta}的名字",
+    "core_value": "这条街欠我一个交代",
+    "goal_options": [
+     "年底前收齐整条街",
+     "保住白桦，哪怕砸了自己的饭碗",
+     "让当年挤走豆腐店的人认一句错"
+    ],
+    "never": [
+     "往别人家门上泼油漆"
+    ],
+    "prefers": [
+     "先谈价钱"
+    ],
+    "pressure_responses": {
+     "breaking": "撕掉所有意向书，辞职回到这条街",
+     "high": "当众说出谁家已经偷偷签了",
+     "low": "递一支烟，说“只是来看看”",
+     "mid": "把意向书摊开，指着价钱"
+    },
+    "relationship_stance": "嘴上谈生意，心里算旧账",
+    "withdrawal": "下了末班车，一个人站在当年豆腐店的卷帘门前抽完一支烟"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "land_agent",
+   "identity": {
+    "authority": "决定哪家铺子开什么价、先找谁谈",
+    "exposure": "{npc.ta}家以前就是商店街上的一家豆腐店，十年前被挤走",
+    "hidden": "{npc.ta}偷偷把白桦的价钱压低了一半，想让店主不肯卖",
+    "limits": [
+     "公司限期年底前收齐整条街，收不齐就换人",
+     "街上的老人都认得{npc.ta}小时候的样子"
+    ],
+    "obligations": [
+     "每周交一份收购进度"
+    ],
+    "resources": [
+     "公司给的收购预算和一沓意向书",
+     "信用金库和区役所的门路"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方叫{npc.ta}的本名而不是职位",
+     "对方记得那家豆腐店"
+    ],
+    "boundaries": [
+     "不谈生意的时候"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "看得见{npc.ta}西装下面那个人的人",
+    "dislikes": [
+     "被当成推土机"
+    ],
+    "expression": "带对方去看当年豆腐店留下的那块木招牌",
+    "likes": [
+     "松之汤里和从前一样的水温"
+    ],
+    "preconditions": [
+     "西装已经脱下"
+    ],
+    "self_control_range": [
+     1,
+     4
+    ]
+   },
+   "public_role": "地产公司的人",
+   "schedule": [
+    {
+     "from": 780,
+     "location_id": "arcade",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "hakuba",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "sento",
+     "to": 1320
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "整条街都会恨{npc.ta}",
+      "option": "收"
+     },
+     {
+      "cost": "{npc.ta}会丢掉工作，公司换一个更狠的人来",
+      "option": "放水"
+     }
+    ],
+    "pressure": "收齐了，这条街就没了",
+    "trigger": "公司来电话：年底前收不齐，{npc.ta}就调去北海道的分公司"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我回来，是想看看这条街还记不记得我。”",
+    "surface": "“只是来看看，价钱好商量。”"
+   }
+  },
+  {
+   "adult_context": "通宵喫茶「夜鹰」的夜班店员，成年人，以前在新宿的酒吧驻唱",
+   "age_range": [
+    24,
+    34
+   ],
+   "appearance_options": [
+    "白衬衫的袖口卷到手肘，手腕上一块停了的表",
+    "收拾桌子的时候会小声哼歌"
+   ],
+   "decision": {
+    "avoids": [
+     "被人问为什么不唱了"
+    ],
+    "contrast": "陪了几百个错过末班车的人，自己的那一班一直没赶上",
+    "core_value": "夜里的人都该有个地方去",
+    "goal_options": [
+     "攒钱再去新宿唱一次",
+     "知道那只杯子为什么被取下",
+     "让错过末班车的人有个地方坐"
+    ],
+    "never": [
+     "把一个没地方去的人赶出店"
+    ],
+    "prefers": [
+     "先给人倒一杯水"
+    ],
+    "pressure_responses": {
+     "breaking": "交了钥匙，坐首班车去新宿，不再回来",
+     "high": "当着客人的面唱完一整首歌",
+     "low": "笑一笑，续一杯咖啡，说“天亮还早”",
+     "mid": "把那块停了的表摘下来给对方看"
+    },
+    "relationship_stance": "夜里温柔，白天消失",
+    "withdrawal": "早上六点交了班，一个人坐在空站台上等首班车，来了一班也不上"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "night_waiter",
+   "identity": {
+    "authority": "决定末班车之后谁能在店里坐到天亮",
+    "exposure": "{npc.ta}以前和白桦的店主好过一阵，今天被取下的那只杯子是{npc.ta}的",
+    "hidden": "唱片公司的人又来找{npc.ta}，说再给一次机会",
+    "limits": [
+     "白天要睡觉，商店街的事都是听来的",
+     "嗓子坏过一次，不敢再唱高音"
+    ],
+    "obligations": [
+     "每晚十一点接班，早上六点交班"
+    ],
+    "resources": [
+     "夜鹰的钥匙和末班车后整条街唯一的一盏灯",
+     "新宿认识的几个唱片公司的人"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方错过末班车却没有抱怨",
+     "对方听出了{npc.ta}哼的那首歌"
+    ],
+    "boundaries": [
+     "不在夜鹰的柜台后面"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "陪{npc.ta}等到天亮的那个人",
+    "dislikes": [
+     "被当成夜里的摆设"
+    ],
+    "expression": "在空着的店里不开灯，为对方唱一首歌",
+    "likes": [
+     "天快亮时窗外发白的那一刻"
+    ],
+    "preconditions": [
+     "首班车已经开过"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "夜鹰的夜班",
+   "schedule": [
+    {
+     "from": 1380,
+     "location_id": "yotaka",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "yotaka",
+     "to": 360
+    },
+    {
+     "from": 361,
+     "location_id": "station",
+     "to": 420
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "错过末班车的人就没地方坐了",
+      "option": "去"
+     },
+     {
+      "cost": "这可能是最后一次机会",
+      "option": "不去"
+     }
+    ],
+    "pressure": "去了，夜鹰的夜班就没人守",
+    "trigger": "唱片公司约{npc.ta}下周去新宿试唱"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“那只杯子是我的，可取下它的人不是我。”",
+    "surface": "“末班车走了？坐吧，天亮还早。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "1987 年 11 月，一个下着冷雨的星期三下午",
+  "minute": 900
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "romance_light",
+  "intimate"
+ ],
+ "custom": false,
+ "customs": [
+  "常客第一次来满一年，店主会替那人挂一只杯子，杯底写名字。",
+  "钱汤打烊前最后一池水，留给在商店街做了一整天生意的人。",
+  "错过末班车的人在夜鹰坐到天亮，第一杯咖啡店里请。",
+  "爵士喫茶里点歌要写在纸条上，从吧台推过去，不许出声。",
+  "有人搬走，商店街会在拱廊下摆一桌，各家出一道菜。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "酒精灯的火苗被门缝的风吹歪了",
+    "水顶上去的那一刻，店里所有人都不说话",
+    "咖啡落回下壶，香味一下子散开"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_siphon",
+   "location_ids": [
+    "hakuba"
+   ],
+   "start_minute": 930,
+   "tags": [],
+   "title": "看虹吸壶煮咖啡"
+  },
+  {
+   "beats": [
+    "水龙头的热水要放一会儿才来",
+    "一只杯子的杯底，名字快被洗掉了",
+    "门上的铃铛忽然响了一声"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [],
+   "id": "a_wash_cups",
+   "location_ids": [
+    "hakuba"
+   ],
+   "start_minute": 1210,
+   "tags": [],
+   "title": "打烊后洗杯子"
+  },
+  {
+   "beats": [
+    "池水烫得人倒吸一口气",
+    "隔墙那边有人在说商店街的事",
+    "番台上的毛线又长了一截"
+   ],
+   "duration_minutes": 50,
+   "hook_ids": [],
+   "id": "a_bath",
+   "location_ids": [
+    "sento"
+   ],
+   "start_minute": 1230,
+   "tags": [],
+   "title": "泡钱汤"
+  },
+  {
+   "beats": [
+    "唱针放下去，先是一阵沙沙声",
+    "第二首的萨克斯独奏，有人跟着打拍子",
+    "一面放完，店里静得能听见楼梯上的雨"
+   ],
+   "duration_minutes": 25,
+   "hook_ids": [],
+   "id": "a_listen_record",
+   "location_ids": [
+    "basement_jazz"
+   ],
+   "start_minute": 1260,
+   "tags": [],
+   "title": "听一面唱片"
+  },
+  {
+   "beats": [
+    "天桥的台阶被雨打湿了",
+    "站务员看了一眼手表",
+    "电车的灯从弯道那头照过来"
+   ],
+   "duration_minutes": 15,
+   "hook_ids": [],
+   "id": "a_last_train_run",
+   "location_ids": [
+    "station"
+   ],
+   "start_minute": 1395,
+   "tags": [],
+   "title": "赶末班车"
+  },
+  {
+   "beats": [
+    "咖啡续到第三杯",
+    "凌晨三点，店里只剩两桌",
+    "窗外的站台灯一盏一盏亮了"
+   ],
+   "duration_minutes": 240,
+   "hook_ids": [],
+   "id": "a_until_dawn",
+   "location_ids": [
+    "yotaka"
+   ],
+   "start_minute": 1420,
+   "tags": [],
+   "title": "在夜鹰坐到天亮"
+  },
+  {
+   "beats": [
+    "卷帘门一扇接一扇拉下来，声音传得很远",
+    "振兴会的告示被风掀起一角",
+    "最后一家店门口还站着一个人"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_shutters",
+   "location_ids": [
+    "arcade"
+   ],
+   "start_minute": 1200,
+   "tags": [],
+   "title": "商店街打烊拉卷帘门"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "1987 年（昭和六十二年）",
+ "extends": null,
+ "forbidden_terms": [
+  "手机",
+  "智能手机",
+  "微信",
+  "互联网",
+  "网吧",
+  "平成",
+  "令和",
+  "民国",
+  "衙门",
+  "便利贴",
+  "学生",
+  "少女",
+  "少年"
+ ],
+ "hooks": [
+  {
+   "id": "h_your_cup",
+   "kind": "approach",
+   "location_ids": [
+    "hakuba"
+   ],
+   "slot": "second_owner",
+   "text": "{npc.name}把你的杯子从钩子上取下来，放在你面前：“你的还在。”"
+  },
+  {
+   "id": "h_last_siphon",
+   "kind": "approach",
+   "location_ids": [
+    "hakuba"
+   ],
+   "slot": "second_owner",
+   "text": "{npc.name}把虹吸壶里最后一点咖啡倒给你：“不收钱，陪我坐一会儿。”"
+  },
+  {
+   "id": "h_owner_glance",
+   "kind": "observe",
+   "location_ids": [
+    "hakuba"
+   ],
+   "slot": "second_owner",
+   "text": "{npc.name}擦着一只杯子，从杯沿上方看了你很久"
+  },
+  {
+   "id": "h_last_bath",
+   "kind": "approach",
+   "location_ids": [
+    "sento"
+   ],
+   "slot": "bandai_keeper",
+   "text": "{npc.name}从番台上探出身，小声说：“最后一池水，给你留着。”"
+  },
+  {
+   "id": "h_old_letter",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "bandai_keeper",
+   "text": "{npc.name}把一封发黄的信递给你：“你替我看看，这个字写的是谁？”"
+  },
+  {
+   "id": "h_one_photo",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "photographer",
+   "text": "{npc.name}把一张刚洗出来的照片推到你面前，照片上是你的背影"
+  },
+  {
+   "id": "h_lens_turn",
+   "kind": "observe",
+   "location_ids": [
+    "hakuba",
+    "yotaka",
+    "basement_jazz"
+   ],
+   "slot": "photographer",
+   "text": "{npc.name}的镜头本来对着空位子，慢慢转向了你"
+  },
+  {
+   "id": "h_saxophone",
+   "kind": "approach",
+   "location_ids": [
+    "basement_jazz"
+   ],
+   "slot": "jazz_owner",
+   "text": "{npc.name}关掉唱机，从柜子里拿出一支旧萨克斯：“只吹一首，你听着。”"
+  },
+  {
+   "id": "h_note_slip",
+   "kind": "request",
+   "location_ids": [
+    "basement_jazz"
+   ],
+   "slot": "jazz_owner",
+   "text": "{npc.name}从吧台推过来一张纸条：“替我把这个交给白桦。”"
+  },
+  {
+   "id": "h_real_name",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "land_agent",
+   "text": "{npc.name}松开领带，叫了你的名字：“别叫我课长，叫我小时候的名字。”"
+  },
+  {
+   "id": "h_wet_suit",
+   "kind": "accident",
+   "location_ids": [
+    "arcade",
+    "station"
+   ],
+   "slot": "land_agent",
+   "text": "{npc.name}在拱廊外被雨淋透了，站在你面前，公文包里的意向书全湿了"
+  },
+  {
+   "id": "h_first_coffee",
+   "kind": "approach",
+   "location_ids": [
+    "yotaka"
+   ],
+   "slot": "night_waiter",
+   "text": "{npc.name}把一杯咖啡放在你面前：“末班车后的第一杯，店里请。”"
+  },
+  {
+   "id": "h_hum_song",
+   "kind": "approach",
+   "location_ids": [
+    "yotaka",
+    "hakuba"
+   ],
+   "slot": "night_waiter",
+   "text": "{npc.name}一边收拾桌子一边哼歌，哼到一半停下来，问你听没听过"
+  }
+ ],
+ "id": "kissa_street",
+ "locations": [
+  {
+   "affordances": [
+    "看一眼吧台上的杯子少了哪一个",
+    "在常坐的位子上点一杯老样子",
+    "隔着虹吸壶看店主的手"
+   ],
+   "detail": "一间开了三十年的喫茶店，吧台上方一排铜钩挂着常客的杯子，虹吸壶在酒精灯上咕嘟作响，第三个位子的皮面磨得发亮。",
+   "exits": [
+    "arcade",
+    "upstairs"
+   ],
+   "id": "hakuba",
+   "name": "喫茶「白桦」",
+   "pressure_modifiers": {
+    "p_shop_sale": "店门口停着一辆黑色的车，车上下来一个拿公文包的人。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "吧台只有八个位子，谁坐在谁旁边，常客们一进门就看见",
+   "witnesses": [
+    "bg_old_reader"
+   ]
+  },
+  {
+   "affordances": [
+    "坐在榻榻米上翻一只旧纸箱",
+    "从窗户看拱廊顶上的雨水往下淌",
+    "把楼下的门铃声当成一个借口"
+   ],
+   "detail": "店后一道窄木梯上去，是店主住的六叠间，榻榻米上摞着寄存的唱片箱，窗户正对着商店街的拱廊顶。",
+   "exits": [
+    "hakuba"
+   ],
+   "id": "upstairs",
+   "name": "白桦二楼",
+   "pressure_modifiers": {
+    "p_cup_down": "纸箱里有一只没写名字的杯子，用报纸包了三层。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "只有店主和被请上去的人；楼下的门铃一响，二楼听得一清二楚",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "在一扇拉下一半的卷帘门前停一停",
+    "读一读告示栏上新贴的纸",
+    "听两家店主隔着街说话"
+   ],
+   "detail": "一条两百米长的有顶商店街，五家喫茶店、一间理发店、一间旧书店，卷帘门上贴着振兴会的告示和地产公司的传单。",
+   "exits": [
+    "hakuba",
+    "sento",
+    "yotaka",
+    "station",
+    "basement_jazz"
+   ],
+   "id": "arcade",
+   "name": "商店街拱廊",
+   "pressure_modifiers": {
+    "p_landshark": "一扇卷帘门上被人用红漆写了一个大大的“卖”字。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "白天买菜的、送货的、闲逛的人来来往往，谁在谁家门口站了多久，理发店里都有人看着",
+   "witnesses": [
+    "bg_barber",
+    "bg_milkman"
+   ]
+  },
+  {
+   "affordances": [
+    "在番台前多付一份钱，替人买一块肥皂",
+    "泡在热水里听隔墙有人在说你",
+    "出来以后在门口喝一瓶咖啡牛奶"
+   ],
+   "detail": "烟囱比商店街所有的屋顶都高，进门是一座番台，左右两边是男汤女汤，墙上画着褪了色的富士山。",
+   "exits": [
+    "arcade"
+   ],
+   "id": "sento",
+   "name": "钱汤「松之汤」",
+   "pressure_modifiers": {
+    "p_old_flame": "隔着墙，有人在说三十年前那件事，声音压得很低。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "番台上的人看得见两边，其余的人只听得见隔墙的水声和说话声",
+   "witnesses": [
+    "bg_boiler_man"
+   ]
+  },
+  {
+   "affordances": [
+    "点一张寄存在店里的唱片",
+    "在音乐声里凑近一个人的耳朵说话",
+    "看店主换唱片之前用袖口擦唱针"
+   ],
+   "detail": "拱廊尽头一段向下的楼梯，推开厚门是一间低矮的地下室，墙上两千张唱片，一套大音箱，店里的规矩是只听不聊。",
+   "exits": [
+    "arcade"
+   ],
+   "id": "basement_jazz",
+   "name": "地下爵士喫茶「蓝调」",
+   "pressure_modifiers": {
+    "p_merged_tab": "唱机旁边摊着一本旧账簿，两家店的字迹混在同一页上。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "客人都背对着门坐，盯着音箱；说话的人会被店主看一眼",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "在靠窗的卡座上看着空站台",
+    "续一杯咖啡，再续一杯",
+    "听夜班店员小声哼的那首歌"
+   ],
+   "detail": "车站口一间窄长的店，末班车之后整条街只剩它亮着灯，橙色的灯罩，靠窗一排卡座正对站台。",
+   "exits": [
+    "arcade",
+    "station"
+   ],
+   "id": "yotaka",
+   "name": "通宵喫茶「夜鹰」",
+   "pressure_modifiers": {
+    "p_last_train": "墙上的钟停在十一点三十八分，指针走得很慢。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "错过末班车的人、睡不着的人，谁在谁对面坐到天亮，夜班店员都记得",
+   "witnesses": [
+    "bg_station_staff"
+   ]
+  },
+  {
+   "affordances": [
+    "在长椅上数开过去的电车",
+    "看末班车的尾灯拐过弯去",
+    "在天桥上回头看一眼商店街的灯"
+   ],
+   "detail": "单线的小站，一座天桥，站台上一排木长椅，末班车 23:40，站务员吹完哨就关灯。",
+   "exits": [
+    "arcade",
+    "yotaka"
+   ],
+   "id": "station",
+   "name": "私铁站台",
+   "pressure_modifiers": {
+    "p_last_train": "站务员举起了哨子。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "站务员和等车的人；末班车之后，站台上剩下的人一眼就能看见",
+   "witnesses": [
+    "bg_station_staff"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "佐藤",
+   "铃木",
+   "高桥",
+   "田中",
+   "渡边",
+   "伊藤",
+   "中村",
+   "小林",
+   "加藤",
+   "吉田",
+   "山本",
+   "松本",
+   "井上",
+   "木村"
+  ],
+  "given_female": [
+   "千代子",
+   "和子",
+   "节子",
+   "洋子",
+   "惠美",
+   "由纪",
+   "久美",
+   "明美",
+   "雅子",
+   "直子",
+   "典子",
+   "幸子"
+  ],
+  "given_male": [
+   "健一",
+   "浩二",
+   "茂",
+   "隆",
+   "诚",
+   "博",
+   "修",
+   "胜",
+   "清",
+   "稔",
+   "达也",
+   "和夫"
+  ],
+  "given_neutral": [
+   "薰",
+   "渚",
+   "光",
+   "忍",
+   "晶",
+   "望",
+   "翼",
+   "真琴",
+   "瑞希",
+   "遥",
+   "步",
+   "亘"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "female",
+    "pattern": "{given}酱"
+   },
+   {
+    "gender": "male",
+    "pattern": "{family}君"
+   },
+   {
+    "gender": "any",
+    "pattern": "{given}"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 8 个）。性别按会话偏好生成（D15）。",
+ "player_identities": [
+  {
+   "age_range": [
+    20,
+    28
+   ],
+   "baseline": "你在白桦打工一年，会煮虹吸咖啡，会擦十四个杯子，还没有自己的杯子。",
+   "gender": "any",
+   "id": "part_timer",
+   "reputation": "手脚麻利，话少",
+   "resources": [
+    "吧台后面的位置",
+    "每个常客的口味"
+   ],
+   "risks": [
+    "店要是卖了，你就没了工作"
+   ],
+   "role": "白桦的打工店员",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "female",
+     "pattern": "{given}酱"
+    },
+    {
+     "gender": "male",
+     "pattern": "{family}君"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    34
+   ],
+   "baseline": "你从乡下上京，在松之汤二楼借住，帮着烧锅炉、擦池子抵房租。",
+   "gender": "any",
+   "id": "sento_lodger",
+   "reputation": "老实，嘴紧",
+   "resources": [
+    "锅炉房的钥匙",
+    "整条街的人都在你面前泡过澡"
+   ],
+   "risks": [
+    "住处随时会因为钱汤关门没了"
+   ],
+   "role": "寄住在钱汤二楼的人",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    28,
+    42
+   ],
+   "baseline": "你在东京的公司上班，每晚坐末班车回来，在白桦有一只挂了八年的杯子。",
+   "gender": "any",
+   "id": "regular_commuter",
+   "reputation": "守时，念旧",
+   "resources": [
+    "一只挂在吧台上的杯子",
+    "东京一家公司的职位"
+   ],
+   "risks": [
+    "公司说明年要调你去大阪"
+   ],
+   "role": "每天坐末班车回来的常客",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    30,
+    50
+   ],
+   "baseline": "你在白桦斜对面开旧书店，和整条街做了十几年邻居，振兴会的签字你有一票。",
+   "gender": "any",
+   "id": "bookshop_keeper",
+   "reputation": "博学，固执",
+   "resources": [
+    "一间旧书店和振兴会的一票",
+    "整条街的旧账和旧信"
+   ],
+   "risks": [
+    "地产公司给你的价钱最高，你还没告诉任何人"
+   ],
+   "role": "商店街旧书店的店主",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}老板"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    32,
+    48
+   ],
+   "baseline": "你在信用金库管这条街的贷款，哪家店还得起、哪家店的地契押在你的柜子里，你最清楚。",
+   "gender": "any",
+   "id": "bank_officer",
+   "reputation": "客气，算得清",
+   "resources": [
+    "整条街的贷款和抵押",
+    "上面催收的命令"
+   ],
+   "risks": [
+    "你的上司和地产公司有来往"
+   ],
+   "role": "信用金库的贷款负责人",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}课长"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    35,
+    55
+   ],
+   "baseline": "你的公司要在这里盖一栋车站大楼，整条商店街都在图纸上。",
+   "gender": "any",
+   "id": "developer_boss",
+   "reputation": "谈吐体面，出手狠",
+   "resources": [
+    "一张车站大楼的图纸和收购的钱",
+    "银行和区役所的门路"
+   ],
+   "risks": [
+    "你年轻时在这条街的某家喫茶店里坐过一整年"
+   ],
+   "role": "东京来的开发商",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}社长"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    }
+   ]
+  }
+ ],
+ "premise": "常客的习惯比招牌活得久。可店要转让了，那些寄存在店里的东西和心事，谁来认领？",
+ "pressures": [
+  {
+   "choice": "帮着留下这间店，还是劝店主放手",
+   "exits": [
+    {
+     "cost": "店主会觉得你替人做了主",
+     "option": "当着来人的面说这店不卖"
+    },
+    {
+     "cost": "常客们会说你帮着卖店",
+     "option": "帮店主把价钱谈上去"
+    }
+   ],
+   "far": {
+    "consequence": "十四个杯子要在一个月里各自有个去处",
+    "due_days": 30,
+    "trigger": "意向书签了"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_shop_sale",
+   "immediate": {
+    "minutes": 10,
+    "text": "一个拿公文包的人推门进来，铃铛响了一声，所有常客都抬起头"
+   },
+   "leverage": null,
+   "location_ids": [
+    "hakuba"
+   ],
+   "near": {
+    "deadline_minutes": 300,
+    "text": "今晚打烊前要给答复"
+   },
+   "objective": "在店主签字之前，让该说的话说出口",
+   "source": "money",
+   "start_minute": 930,
+   "tags": [],
+   "title": "看铺子的人",
+   "trigger": "地产公司的人今天来白桦看铺子，开出的价钱够在东京开两家店"
+  },
+  {
+   "choice": "追问，还是假装没看见",
+   "exits": [
+    {
+     "cost": "你会知道一件店主不想让你知道的事",
+     "option": "去找杯子的主人"
+    },
+    {
+     "cost": "店主可能当场就把店卖了",
+     "option": "问店主"
+    }
+   ],
+   "far": {
+    "consequence": "空钩子会一直挂在那里，谁也不敢挂新的",
+    "due_days": 7,
+    "trigger": "那个人再也没出现"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_cup_down",
+   "immediate": {
+    "minutes": 10,
+    "text": "店主把一只用报纸包着的杯子塞进了纸箱，手在发抖"
+   },
+   "leverage": null,
+   "location_ids": [
+    "hakuba",
+    "upstairs"
+   ],
+   "near": {
+    "deadline_minutes": 480,
+    "text": "今晚末班车之前"
+   },
+   "objective": "在那个人彻底不来之前，弄清杯子为什么被取下",
+   "source": "person",
+   "start_minute": 960,
+   "tags": [],
+   "title": "被取下的杯子",
+   "trigger": "吧台上少了一只杯子，钩子空着，店主不肯说是谁的"
+  },
+  {
+   "choice": "替人遮掩，还是让真相出来",
+   "exits": [
+    {
+     "cost": "大家会以为你也知道内情",
+     "option": "当众打断"
+    },
+    {
+     "cost": "你会被拉进一个三十年的秘密",
+     "option": "私下去找番台上的人"
+    }
+   ],
+   "far": {
+    "consequence": "当年那两个人里还活着的那一个，会被整条街指指点点",
+    "due_days": 5,
+    "trigger": "闲话传开"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_old_flame",
+   "immediate": {
+    "minutes": 10,
+    "text": "理发店店主的嗓门一下子大了：“我可没瞎说，那年的事番台上的人最清楚！”"
+   },
+   "leverage": null,
+   "location_ids": [
+    "sento",
+    "hakuba"
+   ],
+   "near": {
+    "deadline_minutes": 720,
+    "text": "明天早上理发店开门"
+   },
+   "objective": "在闲话传遍整条街之前，把它截下来",
+   "source": "person",
+   "start_minute": 1250,
+   "tags": [],
+   "title": "当众说破",
+   "trigger": "有人当着一屋子街坊，提起了三十年前白桦老店主的那段旧情，还说那人就在这条街上"
+  },
+  {
+   "choice": "把账算清，还是替人瞒下",
+   "exits": [
+    {
+     "cost": "两个做了十年邻居的人可能就此翻脸",
+     "option": "当面对账"
+    },
+    {
+     "cost": "这笔钱要从你自己口袋里出",
+     "option": "替人把差额补上"
+    }
+   ],
+   "far": {
+    "consequence": "两家店都会被逼着签字",
+    "due_days": 10,
+    "trigger": "账簿落到地产公司手里"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_merged_tab",
+   "immediate": {
+    "minutes": 15,
+    "text": "账簿摊开在桌上，两家店的字迹挤在同一页，有一行被墨水涂掉了"
+   },
+   "leverage": null,
+   "location_ids": [
+    "basement_jazz",
+    "hakuba"
+   ],
+   "near": {
+    "deadline_minutes": 2880,
+    "text": "后天信用金库来查账"
+   },
+   "objective": "在地产公司拿到这本账簿之前，把数对清",
+   "source": "money",
+   "start_minute": 1260,
+   "tags": [],
+   "title": "一本账簿",
+   "trigger": "白桦和蓝调合用了十年的欠账簿要清账了，账上的数对不上，差的那一半一直有人在悄悄填"
+  },
+  {
+   "choice": "找主人，还是替主人留着",
+   "exits": [
+    {
+     "cost": "整条街都会开始猜那人是谁",
+     "option": "在每家店贴一张认领的告示"
+    },
+    {
+     "cost": "你会看到一些不该看的东西",
+     "option": "打开箱子找线索"
+    }
+   ],
+   "far": {
+    "consequence": "那箱唱片里夹着的东西，再也回不到主人手里",
+    "due_days": 7,
+    "trigger": "唱片被卖给东京的收藏家"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_unclaimed_records",
+   "immediate": {
+    "minutes": 10,
+    "text": "店主把那箱唱片从架子顶上搬下来，箱子上的名字被潮气洇开了"
+   },
+   "leverage": null,
+   "location_ids": [
+    "basement_jazz"
+   ],
+   "near": {
+    "deadline_minutes": 4200,
+    "text": "三天后的周六"
+   },
+   "objective": "在下周之前找到唱片的主人",
+   "source": "person",
+   "start_minute": 1230,
+   "tags": [],
+   "title": "没人认领的唱片",
+   "trigger": "寄存在蓝调的那箱唱片满十年了，主人一直没来，店主说下周就要处置"
+  },
+  {
+   "choice": "让对方上车，还是开口留",
+   "exits": [
+    {
+     "cost": "对方可能为你错过的不只是一班车",
+     "option": "开口留"
+    },
+    {
+     "cost": "你会在夜鹰坐到天亮，一个人",
+     "option": "什么都不说"
+    }
+   ],
+   "far": {
+    "consequence": "那个人搬去了东京，杯子留在吧台上没人取",
+    "due_days": 3,
+    "trigger": "末班车开走"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_last_train",
+   "immediate": {
+    "minutes": 5,
+    "text": "站台广播响了：末班车即将进站"
+   },
+   "leverage": null,
+   "location_ids": [
+    "station"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "23:40 发车"
+   },
+   "objective": "在车门关上之前，决定说不说那句话",
+   "source": "person",
+   "start_minute": 1400,
+   "tags": [],
+   "title": "末班车",
+   "trigger": "有人要坐末班车走，说这一走就不回这条街了；你是唯一知道的人"
+  },
+  {
+   "choice": "去查，还是先把门擦干净",
+   "exits": [
+    {
+     "cost": "警察来了，整条街都会知道谁家没签",
+     "option": "报警"
+    },
+    {
+     "cost": "那个人可能也不知道是谁干的",
+     "option": "去问地产公司的人"
+    }
+   ],
+   "far": {
+    "consequence": "这条街年底前就会拆",
+    "due_days": 30,
+    "trigger": "表决通过"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_landshark",
+   "immediate": {
+    "minutes": 10,
+    "text": "一桶没盖盖子的红漆还摆在卷帘门下，漆没干"
+   },
+   "leverage": null,
+   "location_ids": [
+    "arcade"
+   ],
+   "near": {
+    "deadline_minutes": 1260,
+    "text": "明天晚上振兴会开会表决"
+   },
+   "objective": "在明天开会之前，弄清是谁干的",
+   "source": "institution",
+   "start_minute": 1320,
+   "tags": [],
+   "title": "红漆",
+   "trigger": "夜里有人往不肯签字的店的卷帘门上泼了红漆，写了一个“卖”字，振兴会连夜开会"
+  }
+ ],
+ "region": "东京近郊一条私铁沿线的商店街：五家喫茶店、一间钱汤，末班车 23:40",
+ "rules": [
+  {
+   "id": "r_cup_hook",
+   "text": "常客的杯子挂在吧台上，名字写在杯底；杯子被取下，就是那个人不再来了。"
+  },
+  {
+   "id": "r_bandai",
+   "text": "钱汤的番台看得见男女两边，坐在上面的人什么都看见，什么都不说。"
+  },
+  {
+   "id": "r_last_light",
+   "text": "末班车开走以后，整条商店街只剩通宵喫茶「夜鹰」一盏灯。"
+  },
+  {
+   "id": "r_deposit",
+   "text": "寄存在店里的东西，主人一年不来认领，店主就有权处置。"
+  },
+  {
+   "id": "r_lease_signature",
+   "text": "一家店转让，要整条街的振兴会过半数签字；一个人改口，整条街都得重算。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": null,
+ "status": "review",
+ "style_hint": "写手和器物：虹吸壶、杯底的名字、唱针、番台的毛线；人说话客气，心事藏在“老样子”三个字里。",
+ "tension_engines": [
+  {
+   "id": "te_transfer",
+   "text": "店要转让，签字之前每一天都算数"
+  },
+  {
+   "id": "te_cup_gone",
+   "text": "吧台上少了一只杯子，没人说是谁取下的"
+  },
+  {
+   "id": "te_old_flame",
+   "text": "三十年前的旧情，有人记得，有人想当众说破"
+  },
+  {
+   "id": "te_merged_tab",
+   "text": "两家店的欠账记在一本簿子上，一清账就什么都藏不住"
+  },
+  {
+   "id": "te_deposit",
+   "text": "寄存在店里的东西，主人迟迟不来认领"
+  },
+  {
+   "id": "te_last_train",
+   "text": "末班车 23:40，赶不上就得在这条街过夜"
+  }
+ ],
+ "title": "喫茶街",
+ "tone": [
+  "咖啡香",
+  "冷雨",
+  "昭和末年",
+  "慢慢散场"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_cup_owner",
+   "requires": [
+    "night_waiter",
+    "second_owner"
+   ],
+   "text": "那只被取下的杯子是{night_waiter.name}的，取下它的是{second_owner.name}。"
+  },
+  {
+   "category": "关系",
+   "id": "t_records_owner",
+   "requires": [
+    "jazz_owner",
+    "bandai_keeper"
+   ],
+   "text": "寄存唱片的主人，就是{bandai_keeper.name}那封信要交给的人。"
+  },
+  {
+   "category": "人事",
+   "id": "t_agent_tofu",
+   "requires": [
+    "land_agent"
+   ],
+   "text": "整条街都想起来了：{land_agent.name}就是当年被挤走的那家豆腐店的人，如今回来替东京人收铺子。"
+  },
+  {
+   "category": "意外",
+   "id": "t_boiler_burst",
+   "requires": [],
+   "text": "松之汤的锅炉半夜炸了一根管子，整条街都听见了。"
+  },
+  {
+   "category": "资源",
+   "id": "t_bank_call",
+   "requires": [],
+   "text": "信用金库突然收紧放款，整条街的贷款都要提前还。"
+  },
+  {
+   "category": "时限",
+   "id": "t_vote_moved",
+   "requires": [],
+   "text": "振兴会的表决提前到了今晚。"
+  },
+  {
+   "category": "制度",
+   "id": "t_station_plan",
+   "requires": [],
+   "text": "区役所贴出公告：车站前要拓宽马路，拱廊的一半在规划线里。"
+  }
+ ]
+}

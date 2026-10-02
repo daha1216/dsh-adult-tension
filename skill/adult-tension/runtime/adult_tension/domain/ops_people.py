@@ -12,6 +12,7 @@ from . import facts as FA
 from . import state as SS
 from . import structure as ST
 from .ops import FACT_KEY, _basis, _flush, _need_character, register
+from .text import split_name
 
 F = S.Field
 EVIDENCE_NEEDED = 2
@@ -377,10 +378,12 @@ def _name_ok(ctx, name, tier, kin_of, path, errs):
         errs.append(detail(path + ".name", "本局已经有人叫“%s”" % name, "换一个名字", INVARIANT_VIOLATION))
     if tier == "background":
         return None
-    families = sorted(ctx.world["name_pools"]["family"], key=len, reverse=True)
-    family = next((f for f in families if name.startswith(f)), None)
+    family, _given = split_name(ctx.world["name_pools"], name)
     if family is None:
-        errs.append(detail(path + ".name", "名字“%s”的姓不在本世界的名字池里" % name, "从完整上下文 name_pool 里取姓，不自造出戏的名字", INVARIANT_VIOLATION))
+        hint = "从完整上下文 name_pool 里取姓，不自造出戏的名字"
+        if ctx.world["name_pools"].get("order") == "given_first":
+            hint += "；本世界名在前、姓在后，中间用“·”"
+        errs.append(detail(path + ".name", "名字“%s”的姓不在本世界的名字池里" % name, hint, INVARIANT_VIOLATION))
         return None
     taken = {c.get("family") for c in state["characters"].values() if c["tier"] in ("major", "supporting") and c.get("family")}
     if family in taken and not kin_of:
@@ -441,13 +444,13 @@ def op_introduce_character(ctx, op, path):
         errs.append(detail(path + ".location_id", "地点不在本局快照中：%s" % location, None, NOT_FOUND))
     if not _flush(ctx, errs):
         return
-    families = sorted(ctx.world["name_pools"]["family"], key=len, reverse=True)
-    family = next((f for f in families if op["name"].startswith(f)), "")
+    family, given = split_name(ctx.world["name_pools"], op["name"])
+    family = family or ""
     char = {
         "id": cid,
         "name": op["name"],
         "family": family,
-        "given": op["name"][len(family) :],
+        "given": given if family else op["name"],
         "call": op["name"],
         "tier": op["tier"],
         "age": op["age"],

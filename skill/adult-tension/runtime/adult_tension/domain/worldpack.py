@@ -10,7 +10,7 @@ import re
 from .. import schema as S
 from ..errors import CONTENT_ERROR, detail
 from . import structure as ST
-from .text import PLACEHOLDER_RE, gendered_pronoun_positions, placeholders, stray_braces
+from .text import PLACEHOLDER_RE, full_name, gendered_pronoun_positions, placeholders, stray_braces
 
 F = S.Field
 
@@ -313,6 +313,7 @@ WORLD = S.Obj(
                     "given_male": F(S.List(_str(1, 4), unique=True)),
                     "given_neutral": F(S.List(_str(1, 4), unique=True)),
                     "nickname_patterns": F(S.List(NAME_PATTERN), desc="昵称规则，例如 小{family}"),
+                    "order": F(S.Enum("family_first", "given_first"), required=False, default="family_first", desc="family_first 姓在前（沈砚舟）；given_first 名在前、姓在后，用“·”连接（艾达·米勒）"),
                 }
             )
         ),
@@ -918,6 +919,7 @@ class _Checker:
         full_names = set()
         for family in pools["family"]:
             for given in pools["given_female"] + pools["given_male"] + pools["given_neutral"]:
+                full_names.add(full_name(pools, family, given))
                 full_names.add(family + given)
         for name in DENIED_NAMES:
             if name in full_names:

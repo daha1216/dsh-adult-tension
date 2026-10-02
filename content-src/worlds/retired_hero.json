@@ -1,0 +1,2533 @@
+{
+ "schema_version": 1,
+ "id": "retired_hero",
+ "title": "勇者退休以后",
+ "extends": null,
+ "era": "剑与魔法，魔王死后第十年",
+ "region": "一座由勇者、魔族和普通人共同经营的边境城市",
+ "premise": "仗打完了，英雄得学着过日子：当年的仇人成了邻居，当年的战友成了债主。",
+ "tone": [
+  "战后",
+  "旧账",
+  "邻里",
+  "麦酒"
+ ],
+ "style_hint": "写打完仗以后的日常：麦酒、面包、修灯、排队还债；旧伤藏在围裙和袖口底下，一提当年，屋里就安静。",
+ "clock_start": {
+  "label": "停战十周年前三天的傍晚",
+  "minute": 1080
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "stage_labels": null,
+ "name_pools": {
+  "family": [
+   "格雷",
+   "布兰",
+   "索恩",
+   "哈伦",
+   "莫里",
+   "塔尔",
+   "奥克伍",
+   "卡斯特",
+   "伯恩",
+   "里德",
+   "德拉",
+   "沃尔",
+   "阿什",
+   "柯林"
+  ],
+  "given_female": [
+   "瑟琳",
+   "莉娅",
+   "诺拉",
+   "薇拉",
+   "伊瑟",
+   "米拉",
+   "卡琳",
+   "茵格",
+   "黛芙",
+   "罗薇",
+   "赛妲",
+   "菲奥"
+  ],
+  "given_male": [
+   "罗兰",
+   "巴德",
+   "加斯",
+   "托林",
+   "埃文",
+   "哈康",
+   "维尔",
+   "卡兰",
+   "奥斯",
+   "德里",
+   "伦恩",
+   "西格"
+  ],
+  "given_neutral": [
+   "艾许",
+   "洛",
+   "雷恩",
+   "凯",
+   "塞恩",
+   "莫恩",
+   "弗林",
+   "安珀",
+   "林恩",
+   "希尔",
+   "阿斯",
+   "诺斯"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "{given}",
+    "gender": "any"
+   },
+   {
+    "pattern": "{given}大姐",
+    "gender": "female"
+   },
+   {
+    "pattern": "{given}老兄",
+    "gender": "male"
+   },
+   {
+    "pattern": "{family}家的",
+    "gender": "any"
+   }
+  ],
+  "order": "given_first"
+ },
+ "rules": [
+  {
+   "id": "r_no_rank",
+   "text": "旧军阶不能用来差遣人，城务按居民身份表决。"
+  },
+  {
+   "id": "r_bed_deposit",
+   "text": "地下城的安全层仍开放，下去的人要在营地押下铺位钱。"
+  },
+  {
+   "id": "r_war_contract",
+   "text": "战时签的旧契还在生效，欠额按年滚到今天。"
+  },
+  {
+   "id": "r_horn_ring",
+   "text": "魔族居民进城不许遮角，角上要挂居民铜环。"
+  },
+  {
+   "id": "r_draw_report",
+   "text": "城里拔剑要先报给巡街的，旧战场上的规矩不算数。"
+  }
+ ],
+ "customs": [
+  "酒馆里不问对方战时在哪一边。",
+  "每年停战日全城熄灯一刻钟，人和魔族各点各的蜡。",
+  "还旧契的钱要当着契约厅的钟交，钟响一下算一笔。",
+  "在矿道里捡到旧战具，要挂在城门口认领三天。",
+  "新邻居搬来，要送一块面包和一撮盐，魔族也一样。"
+ ],
+ "player_identities": [
+  {
+   "id": "camp_porter",
+   "role": "地下城营地的搬运工",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "搬货的{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    40
+   ],
+   "social_position": "low",
+   "baseline": "你在安全层营地替冒险者扛行李、搬补给，一天下去三趟，工钱按趟结。",
+   "resources": [
+    "一副好肩膀",
+    "安全层的每一条路你都扛着东西走过"
+   ],
+   "reputation": "能扛事，话少",
+   "risks": [
+    "你在矿道里搬过一箱不该见光的旧战具"
+   ]
+  },
+  {
+   "id": "indebted_vet",
+   "role": "欠着旧契的老兵",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "老{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    30,
+    48
+   ],
+   "social_position": "low",
+   "baseline": "你打了六年仗，退伍时只领到一纸勋章，战时签的那份旧契却跟了你十年。",
+   "resources": [
+    "一枚勋章和一身打仗的本事",
+    "老兵们都认你这张脸"
+   ],
+   "reputation": "倔，讲义气",
+   "risks": [
+    "你那份旧契的欠额，比你这辈子能挣的还多"
+   ]
+  },
+  {
+   "id": "workshop_smith",
+   "role": "委托街的铁匠",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{given}师傅",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}师傅",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    24,
+    45
+   ],
+   "social_position": "equal",
+   "baseline": "你在委托街开一间铁匠铺，人的犁头和魔族的角环都打。",
+   "resources": [
+    "一间铁匠铺和一手好活",
+    "人和魔族都来找你"
+   ],
+   "reputation": "实在，手巧",
+   "risks": [
+    "战时你打过的剑，有几把砍过魔族"
+   ]
+  },
+  {
+   "id": "city_healer",
+   "role": "城里的医师",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{given}医师",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}医师",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    26,
+    48
+   ],
+   "social_position": "equal",
+   "baseline": "你在城里行医，人和魔族都看，从地下城抬上来的伤员也都送到你这里。",
+   "resources": [
+    "一间诊所和一手好医术",
+    "城里一半的人欠你一点人情"
+   ],
+   "reputation": "细心，心软",
+   "risks": [
+    "你战时在魔王军的营地里当过俘虏医师"
+   ]
+  },
+  {
+   "id": "council_member",
+   "role": "城务会的议员",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}议员",
+     "gender": "any"
+    },
+    {
+     "pattern": "{given}议员",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    30,
+    55
+   ],
+   "social_position": "high",
+   "baseline": "你是城务会的议员，明天的表决你手里有一票，全城都在等你怎么投。",
+   "resources": [
+    "城务会的一票和议员的身份",
+    "城里每个区都有人求你说话"
+   ],
+   "reputation": "稳重，算得清",
+   "risks": [
+    "你这个议员的位子，是靠一份旧契换来的"
+   ]
+  },
+  {
+   "id": "guild_master",
+   "role": "冒险者公会的会长",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}会长",
+     "gender": "any"
+    },
+    {
+     "pattern": "{given}会长",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    32,
+    55
+   ],
+   "social_position": "high",
+   "baseline": "你是冒险者公会的会长，下地下城的委托都要过你的手。",
+   "resources": [
+    "公会和几十个听你调遣的冒险者",
+    "城务会也要给公会几分面子"
+   ],
+   "reputation": "果断，护短",
+   "risks": [
+    "你派下去的一队人，有一个是你不该派的"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "tavern",
+   "name": "断剑酒馆",
+   "detail": "委托街尽头一家老兵开的酒馆，墙上挂着一把据说砍过魔王的长剑，吧台上刻满了战时的部队番号。",
+   "privacy": "semi",
+   "visibility": "老兵们天天在这里喝，谁跟谁坐一桌、谁替谁付了账，第二天全城都知道",
+   "witnesses": [
+    "bg_old_vet",
+    "bg_gossip_bard"
+   ],
+   "exits": [
+    "commission_street",
+    "tavern_room"
+   ],
+   "affordances": [
+    "在吧台上找自己当年部队的番号",
+    "要一杯麦酒，坐到墙上那把剑底下",
+    "听老兵们讲当年"
+   ],
+   "pressure_modifiers": {
+    "p_contract_due": "吧台后面贴着一张契约厅的催缴单，被酒渍泡皱了。",
+    "p_village_rumor": "角落那桌的人压低声音，不停地往门口看。"
+   },
+   "tags": []
+  },
+  {
+   "id": "tavern_room",
+   "name": "酒馆楼上的客房",
+   "detail": "酒馆二楼的几间客房，木地板一踩就响，窗户正对着城门口那盏守夜魔灯。",
+   "privacy": "private",
+   "visibility": "门一关，楼下的吵嚷只剩一层闷响；谁进了谁的屋，只有楼梯知道",
+   "witnesses": [],
+   "exits": [
+    "tavern"
+   ],
+   "affordances": [
+    "靠在窗边看城门口的魔灯",
+    "把门闩插上",
+    "在床沿坐下，听楼下的动静"
+   ],
+   "pressure_modifiers": {
+    "p_noble_arrival": "隔壁客房新住进一个人，箱子上烙着一个旧家徽。"
+   },
+   "tags": []
+  },
+  {
+   "id": "commission_street",
+   "name": "委托街",
+   "detail": "城里最热闹的一条街，两边是铁匠铺、修灯铺和贴满委托单的告示墙，人和魔族在同一个摊子前讨价。",
+   "privacy": "public",
+   "visibility": "白天人挤人，谁揭了哪张委托、谁跟谁说了话，告示墙前的人都看得见",
+   "witnesses": [
+    "bg_courier",
+    "bg_demon_baker"
+   ],
+   "exits": [
+    "tavern",
+    "contract_hall",
+    "demon_quarter",
+    "dungeon_camp"
+   ],
+   "affordances": [
+    "在告示墙前挑一张委托单",
+    "在修灯铺门口看法师修灯",
+    "跟魔族摊主讨一回价"
+   ],
+   "pressure_modifiers": {
+    "p_vote": "告示墙上新贴的城务会告示被人画了一把剑。",
+    "p_noble_arrival": "街口停着一辆马车，车门上的家徽被人用泥抹了一半。"
+   },
+   "tags": []
+  },
+  {
+   "id": "contract_hall",
+   "name": "契约厅",
+   "detail": "一座石砌的老厅堂，正中挂着一口铜钟，钟下一排高柜，柜里锁着战时签下的所有旧契。",
+   "privacy": "semi",
+   "visibility": "来的都是还债和催债的，排队的人都低着头，不想被熟人认出来",
+   "witnesses": [
+    "bg_hall_clerk"
+   ],
+   "exits": [
+    "commission_street"
+   ],
+   "affordances": [
+    "排队看一眼自己的欠额",
+    "在铜钟底下等着被叫号",
+    "翻一翻柜台上公开的旧契抄本"
+   ],
+   "pressure_modifiers": {
+    "p_contract_due": "门口钉着一排到期的旧契，最上面那份的抵押物写着一家酒馆的地契。",
+    "p_vote": "执掌人的门关着，里面有人在大声争吵。"
+   },
+   "tags": []
+  },
+  {
+   "id": "demon_quarter",
+   "name": "角街",
+   "detail": "城东一条住满魔族的老街，屋檐压得很低，门框都凿高了一截好让角过去，街口立着停战时的界碑。",
+   "privacy": "public",
+   "visibility": "魔族邻居们互相都认得，生人一进街，窗户后面就有眼睛",
+   "witnesses": [
+    "bg_demon_baker"
+   ],
+   "exits": [
+    "commission_street"
+   ],
+   "affordances": [
+    "在界碑前站一会儿",
+    "买一个魔族面包师烤的黑麦面包",
+    "抬头数屋檐下挂着几只居民铜环"
+   ],
+   "pressure_modifiers": {
+    "p_village_rumor": "界碑上被人用炭写了一个村子的名字。",
+    "p_vote": "家家门口都挂出了居民铜环，像是要给谁看。"
+   },
+   "tags": []
+  },
+  {
+   "id": "dungeon_camp",
+   "name": "安全层营地",
+   "detail": "地下城第一层的一片空洞，营火、铺位、木栅栏，再往下就是没人担保的地方。",
+   "privacy": "semi",
+   "visibility": "下来的冒险者都在营火边歇脚，谁交了押金、谁一直没上来，营头的簿子上都有",
+   "witnesses": [
+    "bg_adventurer"
+   ],
+   "exits": [
+    "commission_street",
+    "mine_tunnel"
+   ],
+   "affordances": [
+    "交押金换一把铺位钥匙",
+    "在营火边烤干湿透的靴子",
+    "趴在栅栏上听下面的动静"
+   ],
+   "pressure_modifiers": {
+    "p_dungeon_collapse": "营火的火苗忽然往一边倒，地底下传来一声闷响。",
+    "p_glove_found": "营头的簿子上，有一行字被划掉了。"
+   },
+   "tags": []
+  },
+  {
+   "id": "mine_tunnel",
+   "name": "旧矿道",
+   "detail": "从营地侧边岔出去的一条废矿道，战时被当成运兵的暗道，墙上还钉着当年的路标。",
+   "privacy": "private",
+   "visibility": "很少有人来；矿道里说的话，只有岩壁听得见",
+   "witnesses": [],
+   "exits": [
+    "dungeon_camp"
+   ],
+   "affordances": [
+    "举着灯读墙上的旧路标",
+    "在碎石堆里翻一翻",
+    "靠着岩壁坐下歇口气"
+   ],
+   "pressure_modifiers": {
+    "p_glove_found": "碎石堆里露出一截烧焦的皮子。",
+    "p_dungeon_collapse": "矿道顶上簌簌地往下掉土。"
+   },
+   "tags": []
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "retired_warrior",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    32,
+    46
+   ],
+   "adult_context": "断剑酒馆的老板，成年人，当年勇者小队的前锋，退役后开了这家酒馆",
+   "public_role": "酒馆老板",
+   "appearance_options": [
+    "左手少了两根手指，端酒杯却比谁都稳",
+    "围裙底下还系着一条旧军用皮带"
+   ],
+   "identity": {
+    "authority": "决定谁能在酒馆里赊账、谁坐哪一桌",
+    "resources": [
+     "一间酒馆和墙上那把“斩魔王的剑”",
+     "全城的老兵都认这张脸"
+    ],
+    "limits": [
+     "酒馆的地契押在契约厅，旧契的欠额年年滚",
+     "墙上那把剑是假的，被人看穿，酒馆的招牌就倒了"
+    ],
+    "obligations": [
+     "每年停战日要在城门口讲一遍当年的事"
+    ],
+    "exposure": "真剑当年断在魔王身上，砍下最后一剑的不是{npc.ta}，是一个没留下名字的人",
+    "hidden": "{npc.ta}战时签过一份旧契，换了整支小队的命，欠的是契约厅"
+   },
+   "decision": {
+    "core_value": "剑可以是假的，酒不能掺水",
+    "goal_options": [
+     "保住酒馆",
+     "还清那份旧契",
+     "找到那个没留下名字的人"
+    ],
+    "pressure_responses": {
+     "low": "把一杯麦酒推到对方面前，说“先喝，账以后算”",
+     "mid": "当着对方的面把墙上的剑扶正，问对方是不是也觉得那是假的",
+     "high": "当着满屋老兵说出砍下最后一剑的不是自己",
+     "breaking": "把墙上的剑摘下来，扛着它下地下城"
+    },
+    "withdrawal": "打烊后擦一遍墙上的剑，擦到看不见灰为止",
+    "relationship_stance": "豪爽，嘴硬",
+    "contrast": "当了十年英雄，夜里却最怕有人问起那一剑",
+    "prefers": [
+     "先倒酒"
+    ],
+    "avoids": [
+     "被人叫“勇者大人”"
+    ],
+    "never": [
+     "在酒馆里动刀"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方知道剑是假的也不说破",
+     "对方不把{npc.ta}当英雄"
+    ],
+    "likes": [
+     "打烊后两个人坐在吧台上喝剩下的半桶"
+    ],
+    "dislikes": [
+     "被当成一块招牌"
+    ],
+    "preconditions": [
+     "酒馆已经打烊"
+    ],
+    "boundaries": [
+     "楼下没有客人"
+    ],
+    "expression": "说出那一剑到底是谁砍的",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢摘下那把剑的那个人"
+   },
+   "voices": {
+    "surface": "“十年了，还有人以为那是真的。喝你的。”",
+    "inner": "“砍下最后一剑的人没留下名字。我只是站得最近。”"
+   },
+   "schedule": [
+    {
+     "from": 1020,
+     "to": 1439,
+     "location_id": "tavern"
+    },
+    {
+     "from": 0,
+     "to": 60,
+     "location_id": "tavern"
+    },
+    {
+     "from": 600,
+     "to": 780,
+     "location_id": "commission_street"
+    }
+   ],
+   "situation": {
+    "trigger": "契约厅送来通知：酒馆的地契三天后到期，欠额滚到了一个还不起的数",
+    "pressure": "还不上，酒馆就归契约厅",
+    "exits": [
+     {
+      "option": "下地下城接一单大活",
+      "cost": "{npc.ta}十年没拔过剑了"
+     },
+     {
+      "option": "把墙上的剑卖给想收藏的贵族",
+      "cost": "剑是假的，被识破就是诈骗"
+     }
+    ]
+   },
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "demon_mediator",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    35,
+    60
+   ],
+   "adult_context": "魔族调解人，成年人，战时是魔王军的军师，如今替城里人和魔族调解纠纷",
+   "public_role": "调解人",
+   "appearance_options": [
+    "一对弯角上挂着居民铜环，袖口绣着魔族的家纹",
+    "说话慢条斯理，笑的时候不露牙"
+   ],
+   "identity": {
+    "authority": "决定一桩纠纷在城务会上怎么讲",
+    "resources": [
+     "两边的话都说得通，两边的账都记得",
+     "角街的魔族都听{npc.ta}的"
+    ],
+    "limits": [
+     "城里有一半的人记得{npc.ta}战时的样子",
+     "居民身份每年要复核，一票否决就得出城"
+    ],
+    "obligations": [
+     "每桩人和魔族的纠纷都要{npc.ta}到场"
+    ],
+    "exposure": "{npc.ta}当年献过一条计，烧了一个村子，村里活下来的人就在城里",
+    "hidden": "停战是{npc.ta}牵的线，魔王死的那夜，{npc.ta}知道是谁砍的最后一剑"
+   },
+   "decision": {
+    "core_value": "话说清楚，仗就不用再打",
+    "goal_options": [
+     "保住魔族居民的身份",
+     "替当年那个村子还一笔账",
+     "在城里活得像一个邻居"
+    ],
+    "pressure_responses": {
+     "low": "微微低头，说“我是来谈的”",
+     "mid": "把双方的旧账一笔一笔摊在桌上",
+     "high": "当着城务会承认那个村子是{npc.ta}烧的",
+     "breaking": "摘下角上的铜环，出城不再回来"
+    },
+    "withdrawal": "夜里坐在角街的屋顶上，看城里的灯一盏一盏灭",
+    "relationship_stance": "温和，深算",
+    "contrast": "替两边谈成了和平，自己却在哪一边都不算自己人",
+    "prefers": [
+     "先听两边说完"
+    ],
+    "avoids": [
+     "被人叫“军师”"
+    ],
+    "never": [
+     "替人传一句假话"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方跟{npc.ta}说话时不盯着{npc.ta}的角",
+     "对方知道那个村子的事还肯坐下"
+    ],
+    "likes": [
+     "两个人说着说着忘了谁是哪一边的"
+    ],
+    "dislikes": [
+     "被当成一个阴谋"
+    ],
+    "preconditions": [
+     "今天的调解已经结束"
+    ],
+    "boundaries": [
+     "没有人认出{npc.ta}的地方"
+    ],
+    "expression": "让对方碰一碰{npc.ta}的角",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}觉得自己是个邻居的那个人"
+   },
+   "voices": {
+    "surface": "“别紧张。我是来还钱的，或者说，是来谈怎么还。”",
+    "inner": "“那个村子是我烧的。你要是想听，我从头讲。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1260,
+     "location_id": "commission_street"
+    },
+    {
+     "from": 1261,
+     "to": 1439,
+     "location_id": "demon_quarter"
+    },
+    {
+     "from": 540,
+     "to": 720,
+     "location_id": "contract_hall"
+    }
+   ],
+   "situation": {
+    "trigger": "城务会要复核魔族居民的身份，有人翻出了那个村子的旧事",
+    "pressure": "一票否决，角街的魔族就得出城",
+    "exits": [
+     {
+      "option": "当众认下",
+      "cost": "城里有人会要{npc.ta}偿命"
+     },
+     {
+      "option": "找人压住翻旧事的人",
+      "cost": "那就和战时没两样了"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "contract_keeper",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    34,
+    52
+   ],
+   "adult_context": "契约厅的执掌人，成年人，手里握着半座城的旧债",
+   "public_role": "契约厅执掌人",
+   "appearance_options": [
+    "一身熨得笔挺的灰呢长袍，手指上戴着刻着契印的戒指",
+    "看人时先看对方的手，好像在估一只手能按几个印"
+   ],
+   "identity": {
+    "authority": "决定一份旧契的欠额怎么滚、什么时候催",
+    "resources": [
+     "契约厅的总簿和半座城的旧债",
+     "契印戒指，按下去就是城里认的契"
+    ],
+    "limits": [
+     "旧契是战时王都签的，王都早不在了，{npc.ta}只是个守簿子的",
+     "城务会里有人要提案废除旧契"
+    ],
+    "obligations": [
+     "每个季度都要把欠额按年滚一遍"
+    ],
+    "exposure": "{npc.ta}自己也欠着一份旧契，债主就是{npc.ta}守的这本总簿",
+    "hidden": "总簿里有一页被撕掉了，撕的人是{npc.ta}"
+   },
+   "decision": {
+    "core_value": "契是契，人是人",
+    "goal_options": [
+     "把旧债收齐，交还王都的继承人",
+     "保住契约厅",
+     "弄清撕掉那一页的理由能不能说出口"
+    ],
+    "pressure_responses": {
+     "low": "把契约拿出来，指着欠额那一行",
+     "mid": "按着戒指提醒对方：契印还在",
+     "high": "当着城务会宣读谁欠了多少",
+     "breaking": "把总簿扔进炉子里，看着它烧"
+    },
+    "withdrawal": "夜里一个人在契约厅里，把一页契约抄了又抄",
+    "relationship_stance": "冷，守规矩",
+    "contrast": "替一座城记着所有人的债，却不知道自己的债该向谁还",
+    "prefers": [
+     "先查簿子"
+    ],
+    "avoids": [
+     "被人骂“吸血的”"
+    ],
+    "never": [
+     "改动簿子上的一个数"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方欠了债也不躲着{npc.ta}",
+     "对方问{npc.ta}自己欠着谁"
+    ],
+    "likes": [
+     "契约厅打烊后的那一壶热茶"
+    ],
+    "dislikes": [
+     "被当成一本账"
+    ],
+    "preconditions": [
+     "契约厅还开着门"
+    ],
+    "boundaries": [
+     "没有欠{npc.ta}钱的人在场"
+    ],
+    "expression": "把总簿上被撕掉的那一页说给对方听",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}想合上那本总簿的那个人"
+   },
+   "voices": {
+    "surface": "“契是契，人是人。你欠的是契，不是我。”",
+    "inner": "“总簿上少了一页，是我撕的。”"
+   },
+   "schedule": [
+    {
+     "from": 540,
+     "to": 1080,
+     "location_id": "contract_hall"
+    },
+    {
+     "from": 1081,
+     "to": 1200,
+     "location_id": "tavern"
+    },
+    {
+     "from": 1201,
+     "to": 1380,
+     "location_id": "contract_hall"
+    }
+   ],
+   "situation": {
+    "trigger": "城务会明天表决要不要废除旧契",
+    "pressure": "废了，{npc.ta}就什么都不是；不废，全城都恨{npc.ta}",
+    "exits": [
+     {
+      "option": "去游说议员",
+      "cost": "得拿别人的欠额去换"
+     },
+     {
+      "option": "让表决照常进行",
+      "cost": "{npc.ta}头一回不知道明天在哪"
+     }
+    ]
+   },
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "deposed_noble",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    30,
+    50
+   ],
+   "adult_context": "被废黜的贵族，成年人，战后家族封地被分给了居民，十年后回城做客",
+   "public_role": "旧贵族",
+   "appearance_options": [
+    "一件过时的天鹅绒外套，袖扣是家徽，被磨得看不清了",
+    "举止规矩得过分，坐下前总要先擦一擦椅子"
+   ],
+   "identity": {
+    "authority": "决定家族的旧印信交给谁",
+    "resources": [
+     "家族的旧印信和一箱借据",
+     "王都里还有几个记得这个家族的老人"
+    ],
+    "limits": [
+     "家族的封地如今是城里的居民区，没人想还",
+     "身上的钱只够住到停战日"
+    ],
+    "obligations": [
+     "家族遗训：回城一次，就要把旧债收一次"
+    ],
+    "exposure": "{npc.ta}回城不是来收债，是来找当年替家族挡过一刀的人",
+    "hidden": "家族有一份旧契，债主一栏写着一个魔族的名字"
+   },
+   "decision": {
+    "core_value": "体面比命重",
+    "goal_options": [
+     "拿回一点家族的东西",
+     "找到那个替家族挡刀的人",
+     "在停战日前体面地离开"
+    ],
+    "pressure_responses": {
+     "low": "优雅地鞠一躬，说“请允许我坐下”",
+     "mid": "拿出一张借据，轻轻放在对方面前",
+     "high": "当众亮出家族的旧印信",
+     "breaking": "把印信扔进城外的河里"
+    },
+    "withdrawal": "夜里在客房里一遍遍擦家徽袖扣",
+    "relationship_stance": "矜持，孤单",
+    "contrast": "从小被教着怎么当主人，却从没学过怎么当客人",
+    "prefers": [
+     "先讲礼数"
+    ],
+    "avoids": [
+     "被人叫“前任大人”"
+    ],
+    "never": [
+     "在别人面前失态"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方把{npc.ta}当一个普通客人",
+     "对方笑话{npc.ta}的礼数却没有恶意"
+    ],
+    "likes": [
+     "有人替{npc.ta}把椅子擦了"
+    ],
+    "dislikes": [
+     "被当成一个来讨债的"
+    ],
+    "preconditions": [
+     "印信已经收起来了"
+    ],
+    "boundaries": [
+     "客房的门关着"
+    ],
+    "expression": "解下一枚家徽袖扣送给对方",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}忘了礼数的那个人"
+   },
+   "voices": {
+    "surface": "“请允许我坐下。……这椅子，有人擦过吗？”",
+    "inner": "“我回来不是收债的。我在找一个人。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1260,
+     "location_id": "tavern"
+    },
+    {
+     "from": 1261,
+     "to": 1439,
+     "location_id": "tavern_room"
+    },
+    {
+     "from": 600,
+     "to": 780,
+     "location_id": "demon_quarter"
+    }
+   ],
+   "situation": {
+    "trigger": "停战日到了，{npc.ta}身上的钱只够再住一夜",
+    "pressure": "走，还是拿出那张写着魔族名字的旧契",
+    "exits": [
+     {
+      "option": "拿出旧契",
+      "cost": "角街会乱"
+     },
+     {
+      "option": "空手走",
+      "cost": "家族最后一次回城，什么也没带走"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "camp_master",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    30,
+    48
+   ],
+   "adult_context": "地下城安全层营地的营头，成年人，替下去的人看铺位、收押金",
+   "public_role": "营头",
+   "appearance_options": [
+    "一身被地下城的苔藓染成青色的皮甲，腰上挂着一串铺位钥匙",
+    "嗓门大，眼睛在暗处也看得清"
+   ],
+   "identity": {
+    "authority": "决定谁能在安全层过夜",
+    "resources": [
+     "安全层的铺位和押金",
+     "知道地下城每一条还能走的路"
+    ],
+    "limits": [
+     "安全层下面一层最近有塌方的声音",
+     "城务会想关了营地，换成收费的官营"
+    ],
+    "obligations": [
+     "每个下去的人都要{npc.ta}点头"
+    ],
+    "exposure": "{npc.ta}在矿道里捡到过一只旧手套，是当年勇者小队一个人的，{npc.ta}没挂出去认领",
+    "hidden": "{npc.ta}战时是被丢在地下城里的逃兵，是营地救了{npc.ta}"
+   },
+   "decision": {
+    "core_value": "下去容易上来难，押金不退",
+    "goal_options": [
+     "保住营地",
+     "查清塌方的声音",
+     "把那只手套还给该还的人"
+    ],
+    "pressure_responses": {
+     "low": "把铺位钥匙抛给对方，说“押金先交”",
+     "mid": "把对方拉到一边，指着地上的裂缝",
+     "high": "当着冒险者的面说安全层不安全了",
+     "breaking": "一个人下到塌方那一层，不带钥匙"
+    },
+    "withdrawal": "夜里坐在营火边，一把一把数钥匙",
+    "relationship_stance": "粗，讲义气",
+    "contrast": "看守着别人的退路，自己的那条早就塌了",
+    "prefers": [
+     "先数人头"
+    ],
+    "avoids": [
+     "被人叫“逃兵”"
+    ],
+    "never": [
+     "扔下一个人在地下城"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在地下城里也睡得着",
+     "对方不问{npc.ta}战时在哪"
+    ],
+    "likes": [
+     "营火边两个人裹着同一张毯子"
+    ],
+    "dislikes": [
+     "被当成一个看门的"
+    ],
+    "preconditions": [
+     "营地里还有人醒着"
+    ],
+    "boundaries": [
+     "营火只剩炭了"
+    ],
+    "expression": "把那只旧手套拿出来给对方看",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢上去晒太阳的那个人"
+   },
+   "voices": {
+    "surface": "“押金先交，钥匙再给。下面不讲交情。”",
+    "inner": "“那只手套，我捡到三年了。我知道是谁的。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1439,
+     "location_id": "dungeon_camp"
+    },
+    {
+     "from": 0,
+     "to": 360,
+     "location_id": "dungeon_camp"
+    },
+    {
+     "from": 600,
+     "to": 720,
+     "location_id": "commission_street"
+    }
+   ],
+   "situation": {
+    "trigger": "安全层下面一层塌了半边，有一队冒险者没上来",
+    "pressure": "下去救人，营地就得关一天",
+    "exits": [
+     {
+      "option": "下去",
+      "cost": "塌方随时会再来"
+     },
+     {
+      "option": "上报城务会",
+      "cost": "营地就会被收成官营"
+     }
+    ]
+   },
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "fading_mage",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    34,
+    55
+   ],
+   "adult_context": "前宫廷法师，成年人，当年勇者小队的法师，法力一年年衰退，在委托街修魔灯糊口",
+   "public_role": "修灯法师",
+   "appearance_options": [
+    "一身打满补丁的法师袍，手指上全是被魔灯烫出的小疤",
+    "说话时常停下来，像在找一个想不起来的词"
+   ],
+   "identity": {
+    "authority": "决定城里哪一盏魔灯还能亮",
+    "resources": [
+     "一间修灯铺和一手快要用不出来的法术",
+     "记得当年小队里每个人的事"
+    ],
+    "limits": [
+     "法力一年年衰退，再过两年就什么也用不出来了",
+     "修灯铺的租金欠着契约厅"
+    ],
+    "obligations": [
+     "每晚给城门口那盏守夜魔灯补一回法力"
+    ],
+    "exposure": "{npc.ta}知道那把真剑断在哪，也知道砍下最后一剑的人是谁",
+    "hidden": "{npc.ta}的法力是被战时一份旧契抽走的，债主还在城里"
+   },
+   "decision": {
+    "core_value": "能亮一盏是一盏",
+    "goal_options": [
+     "在法力用尽前修好城门口那盏灯",
+     "把当年的事写下来",
+     "讨回被旧契抽走的东西"
+    ],
+    "pressure_responses": {
+     "low": "把一盏修好的小魔灯塞到对方手里",
+     "mid": "点起一小簇火，照着对方的脸看",
+     "high": "当众说出那份抽走法力的旧契在谁手里",
+     "breaking": "把剩下的法力一次用光，点亮整条街"
+    },
+    "withdrawal": "夜里一盏一盏试修好的魔灯，试到手指发烫",
+    "relationship_stance": "迷糊，温柔",
+    "contrast": "当年能点燃一座城，如今却连一盏灯都要修半天",
+    "prefers": [
+     "先修"
+    ],
+    "avoids": [
+     "被人可怜"
+    ],
+    "never": [
+     "把没修好的灯说成修好了"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方等{npc.ta}把话想起来",
+     "对方不在意{npc.ta}已经用不出大法术"
+    ],
+    "likes": [
+     "一盏小魔灯在两个人中间慢慢亮起来"
+    ],
+    "dislikes": [
+     "被当成一个过气的"
+    ],
+    "preconditions": [
+     "铺子里还有客人"
+    ],
+    "boundaries": [
+     "灯都熄了"
+    ],
+    "expression": "用最后一点法力在对方掌心点一朵火",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}不再害怕法力用尽的那个人"
+   },
+   "voices": {
+    "surface": "“这盏灯……我记得怎么修，等我想一想。”",
+    "inner": "“砍下最后一剑的人，我知道是谁。只是没人问过我。”"
+   },
+   "schedule": [
+    {
+     "from": 540,
+     "to": 1020,
+     "location_id": "commission_street"
+    },
+    {
+     "from": 1021,
+     "to": 1200,
+     "location_id": "tavern"
+    },
+    {
+     "from": 1201,
+     "to": 1439,
+     "location_id": "commission_street"
+    }
+   ],
+   "situation": {
+    "trigger": "城门口那盏守夜魔灯今夜要灭，{npc.ta}的法力不够补满",
+    "pressure": "灯一灭，城外的魔物就会靠近",
+    "exits": [
+     {
+      "option": "用掉最后的法力",
+      "cost": "{npc.ta}以后就再也用不出法术了"
+     },
+     {
+      "option": "去求契约厅借法力",
+      "cost": "得再签一份旧契"
+     }
+    ]
+   },
+   "tags": []
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_old_vet",
+   "role": "酒馆里的老兵",
+   "function": "witness",
+   "location_ids": [
+    "tavern",
+    "commission_street"
+   ],
+   "line": "{npc.name}每天坐在同一张凳子上，谁进门、谁坐到了剑底下，{npc.ta}都会多看一眼",
+   "gender": "any",
+   "age_range": [
+    55,
+    72
+   ],
+   "adult_context": "打过十年仗的成年老兵",
+   "name": null
+  },
+  {
+   "id": "bg_demon_baker",
+   "role": "角街的魔族面包师",
+   "function": "helper",
+   "location_ids": [
+    "demon_quarter",
+    "commission_street"
+   ],
+   "line": "{npc.name}角上沾着面粉，谁家缺了面包，{npc.ta}第二天一早就送过去",
+   "gender": "any",
+   "age_range": [
+    40,
+    70
+   ],
+   "adult_context": "在城里住了八年的成年魔族",
+   "name": null
+  },
+  {
+   "id": "bg_hall_clerk",
+   "role": "契约厅的抄写员",
+   "function": "obstacle",
+   "location_ids": [
+    "contract_hall"
+   ],
+   "line": "{npc.name}抱着一摞旧契在柜台后面走来走去，谁想看总簿，先得过{npc.ta}这一关",
+   "gender": "any",
+   "age_range": [
+    25,
+    40
+   ],
+   "adult_context": "契约厅雇的成年抄写员",
+   "name": null
+  },
+  {
+   "id": "bg_gossip_bard",
+   "role": "吟游诗人",
+   "function": "rumor_source",
+   "location_ids": [
+    "tavern",
+    "commission_street"
+   ],
+   "line": "{npc.name}把城里的事编成歌，三分真七分假，唱得全城都会",
+   "gender": "any",
+   "age_range": [
+    25,
+    45
+   ],
+   "adult_context": "走过七座城的成年吟游诗人",
+   "name": null
+  },
+  {
+   "id": "bg_courier",
+   "role": "城务会的跑腿",
+   "function": "messenger",
+   "location_ids": [
+    "commission_street",
+    "contract_hall"
+   ],
+   "line": "{npc.name}一路小跑，怀里揣着城务会的告示，也揣着议员们的闲话",
+   "gender": "any",
+   "age_range": [
+    20,
+    35
+   ],
+   "adult_context": "城务会雇的成年跑腿",
+   "name": null
+  },
+  {
+   "id": "bg_adventurer",
+   "role": "营地里的冒险者",
+   "function": "witness",
+   "location_ids": [
+    "dungeon_camp",
+    "mine_tunnel"
+   ],
+   "line": "{npc.name}在营火边磨剑，谁下去了、谁上来了，{npc.ta}都看在眼里",
+   "gender": "any",
+   "age_range": [
+    22,
+    40
+   ],
+   "adult_context": "接地下城委托的成年冒险者",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_bard_song",
+   "text": "吟游诗人的歌",
+   "reach": "今晚在酒馆唱的，明天全城都会哼，词每唱一遍就变一点",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_contract_book",
+   "text": "契约厅的总簿",
+   "reach": "谁欠谁、欠多少、哪年签的，一笔不差",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_quarter_whisper",
+   "text": "角街的传话",
+   "reach": "魔族邻居之间口口相传，传到人这边时已经换了说法",
+   "fidelity": "distorted"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_hero_ledger",
+   "text": "旧功勋账：当年谁做了什么，如今谁在冒领"
+  },
+  {
+   "id": "te_demon_neighbor",
+   "text": "当年的敌人成了邻居"
+  },
+  {
+   "id": "te_old_contract",
+   "text": "战时签的旧契，欠额滚到了今天"
+  },
+  {
+   "id": "te_noble_return",
+   "text": "被废黜的贵族回城做客"
+  },
+  {
+   "id": "te_old_glove",
+   "text": "矿道里挖出了当年小队的旧手套"
+  },
+  {
+   "id": "te_dungeon",
+   "text": "地下城安全层出了事"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "k_porter_glove",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "camp_porter"
+   ],
+   "slots": [
+    "camp_master",
+    "retired_warrior"
+   ],
+   "tension_engine_ids": [
+    "te_old_glove",
+    "te_dungeon"
+   ],
+   "chemistry": "你在矿道里替{camp_master.name}搬过一箱旧战具，箱底少了一只手套；{retired_warrior.name}听说以后请你喝了三晚的酒，每晚都问那箱东西是从哪挖出来的。",
+   "stakes": {
+    "resource_gap": "{camp_master.name}有营地和铺位钥匙，{retired_warrior.name}有酒馆和全城老兵的面子，你只有一副肩膀",
+    "limit_gap": "停战日前，那只手套要么挂出去，要么永远藏着",
+    "meeting_reason": "你替营地扛了三年货，这两个人你都常打交道",
+    "irreplaceable_goal": "你想保住饭碗，又想知道那只手套是谁的"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "camp_master",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{camp_master.name}给你的工钱从没少过"
+    },
+    {
+     "a": "player",
+     "b": "retired_warrior",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{retired_warrior.name}请你喝过三晚的酒"
+    },
+    {
+     "a": "camp_master",
+     "b": "retired_warrior",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{retired_warrior.name}从不下地下城，却总问营地的事"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_vet_debt",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "indebted_vet"
+   ],
+   "slots": [
+    "contract_keeper",
+    "retired_warrior"
+   ],
+   "tension_engine_ids": [
+    "te_old_contract",
+    "te_hero_ledger"
+   ],
+   "chemistry": "你战时签的那份旧契，欠额滚了十年，{contract_keeper.name}每个季度给你寄一回通知；{retired_warrior.name}当年是你的队长，说这笔账{retired_warrior.ta}替你扛一半。",
+   "stakes": {
+    "resource_gap": "{contract_keeper.name}有总簿和契印，{retired_warrior.name}有一间押在契约厅的酒馆，你只有一枚勋章",
+    "limit_gap": "旧契三天后到期",
+    "meeting_reason": "你和{retired_warrior.name}一起打过六年仗，{contract_keeper.name}的通知一封没落下",
+    "irreplaceable_goal": "你想还清这笔账，又不想让老队长替你扛"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "contract_keeper",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{contract_keeper.name}的通知你一封都没拆"
+    },
+    {
+     "a": "player",
+     "b": "retired_warrior",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "{retired_warrior.name}当年把你从死人堆里拖出来"
+    },
+    {
+     "a": "contract_keeper",
+     "b": "retired_warrior",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "酒馆的地契押在{contract_keeper.name}的柜子里"
+    }
+   ],
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "k_smith_horns",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "workshop_smith"
+   ],
+   "slots": [
+    "demon_mediator",
+    "deposed_noble"
+   ],
+   "tension_engine_ids": [
+    "te_demon_neighbor",
+    "te_noble_return"
+   ],
+   "chemistry": "{demon_mediator.name}找你打过一对角上的铜环；{deposed_noble.name}拿着家族的旧印信来请你熔了重铸，印信背面刻着一个魔族的名字。",
+   "stakes": {
+    "resource_gap": "{demon_mediator.name}有角街的人心，{deposed_noble.name}有旧印信和一箱借据，你有一座熔炉",
+    "limit_gap": "停战日前，印信要么熔掉，要么交出去",
+    "meeting_reason": "这两个人都在你的铁匠铺里坐过",
+    "irreplaceable_goal": "你想把活干好，又想知道印信背面那个名字是谁"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "demon_mediator",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{demon_mediator.name}夸过你打的铜环"
+    },
+    {
+     "a": "player",
+     "b": "deposed_noble",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{deposed_noble.name}给的定金是平时的三倍"
+    },
+    {
+     "a": "demon_mediator",
+     "b": "deposed_noble",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "印信背面那个名字，{demon_mediator.name}好像认得"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_healer_mage",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "city_healer"
+   ],
+   "slots": [
+    "fading_mage",
+    "camp_master"
+   ],
+   "tension_engine_ids": [
+    "te_dungeon",
+    "te_hero_ledger"
+   ],
+   "chemistry": "{fading_mage.name}的法力一年年衰退，每个月都来你这里看一回；{camp_master.name}从地下城抬上来的伤员都是你治的，{camp_master.ta}却从不让你看自己身上的旧伤。",
+   "stakes": {
+    "resource_gap": "{fading_mage.name}有修灯铺和快用尽的法术，{camp_master.name}有营地，你有一间诊所",
+    "limit_gap": "安全层下面有塌方的声音，城门口的魔灯也快灭了",
+    "meeting_reason": "这两个人都是你诊所的常客",
+    "irreplaceable_goal": "你想治好两个人身上的病，也想知道两个人当年是什么关系"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "fading_mage",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{fading_mage.name}给你的诊所修过一盏灯，没收钱"
+    },
+    {
+     "a": "player",
+     "b": "camp_master",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{camp_master.name}每次抬人上来都说一句“交给你了”"
+    },
+    {
+     "a": "fading_mage",
+     "b": "camp_master",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{fading_mage.name}看{camp_master.name}的眼神，像认得一个旧人"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_council_vote",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "council_member"
+   ],
+   "slots": [
+    "contract_keeper",
+    "demon_mediator"
+   ],
+   "tension_engine_ids": [
+    "te_old_contract",
+    "te_demon_neighbor"
+   ],
+   "chemistry": "明天的城务会，你手里有一票：{contract_keeper.name}要你投票保住旧契，{demon_mediator.name}要你投票保住角街的居民身份，两份提案被绑在了一起。",
+   "stakes": {
+    "resource_gap": "你有一票，{contract_keeper.name}有半座城的旧债，{demon_mediator.name}有角街的人心",
+    "limit_gap": "明早表决",
+    "meeting_reason": "你当议员这几年，两个人都在城务会上跟你交过手",
+    "irreplaceable_goal": "你想投一票对得起自己的，又知道哪一票都会让人恨你"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "contract_keeper",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "你的议员位子，跟{contract_keeper.name}的总簿有点关系"
+    },
+    {
+     "a": "player",
+     "b": "demon_mediator",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{demon_mediator.name}替你调解过一桩纠纷"
+    },
+    {
+     "a": "contract_keeper",
+     "b": "demon_mediator",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "两个人在城务会上吵了十年"
+    }
+   ],
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "k_guild_camp",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "guild_master"
+   ],
+   "slots": [
+    "camp_master",
+    "fading_mage"
+   ],
+   "tension_engine_ids": [
+    "te_dungeon",
+    "te_old_glove"
+   ],
+   "chemistry": "公会派下去的一队人没上来，{camp_master.name}说是塌方；{fading_mage.name}说塌方那一层，就是当年小队砍下魔王的地方。",
+   "stakes": {
+    "resource_gap": "你有公会和几十个冒险者，{camp_master.name}有营地，{fading_mage.name}记得当年的事",
+    "limit_gap": "下面的人撑不了几天",
+    "meeting_reason": "公会的委托都要经{camp_master.name}的营地，{fading_mage.name}替公会修过灯",
+    "irreplaceable_goal": "你想把人救上来，又怕挖出当年的事"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "camp_master",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{camp_master.name}从不跟你多说一句"
+    },
+    {
+     "a": "player",
+     "b": "fading_mage",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{fading_mage.name}给公会写过一份地下城的旧图"
+    },
+    {
+     "a": "camp_master",
+     "b": "fading_mage",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{camp_master.name}一见{fading_mage.name}就转身走"
+    }
+   ],
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "k_sword_and_horns",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "retired_warrior",
+    "demon_mediator"
+   ],
+   "tension_engine_ids": [
+    "te_hero_ledger",
+    "te_demon_neighbor"
+   ],
+   "chemistry": "{demon_mediator.name}每个月来酒馆一回，坐在离那把剑最远的一桌；{retired_warrior.name}说当年在战场上见过这对角，两个人谁也不先开口。",
+   "stakes": {
+    "resource_gap": "{retired_warrior.name}有酒馆和墙上那把剑，{demon_mediator.name}有角街和当年的记忆，你是两个人都肯跟着说话的人",
+    "limit_gap": "停战日就要到了",
+    "meeting_reason": "你在酒馆里见过这两个人隔着整间屋子不说话",
+    "irreplaceable_goal": "你想知道那一仗里两个人到底欠了彼此什么"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "retired_warrior",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{retired_warrior.name}给你留过剑底下那张桌子"
+    },
+    {
+     "a": "player",
+     "b": "demon_mediator",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{demon_mediator.name}请你替{demon_mediator.ta}点过一杯酒"
+    },
+    {
+     "a": "retired_warrior",
+     "b": "demon_mediator",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 3
+     },
+     "reason": "战场上，两个人隔着一条河对望过三天"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_noble_debt",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "deposed_noble",
+    "contract_keeper",
+    "retired_warrior"
+   ],
+   "tension_engine_ids": [
+    "te_noble_return",
+    "te_old_contract"
+   ],
+   "chemistry": "{deposed_noble.name}回城那天拿出一张旧契，债主一栏写着契约厅；{contract_keeper.name}说那份契的抵押物，是{retired_warrior.name}酒馆的地契。",
+   "stakes": {
+    "resource_gap": "{deposed_noble.name}有旧契和印信，{contract_keeper.name}有总簿，{retired_warrior.name}有一间快保不住的酒馆，你是唯一一个不欠谁的",
+    "limit_gap": "停战日一过，旧契就要交割",
+    "meeting_reason": "三个人你都在酒馆里碰见过",
+    "irreplaceable_goal": "你想让这笔账算清楚，又不想看着酒馆关门"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "deposed_noble",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{deposed_noble.name}请你替{deposed_noble.ta}带过一回路"
+    },
+    {
+     "a": "player",
+     "b": "contract_keeper",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{contract_keeper.name}跟你喝过一回茶"
+    },
+    {
+     "a": "player",
+     "b": "retired_warrior",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{retired_warrior.name}给你赊过账"
+    },
+    {
+     "a": "deposed_noble",
+     "b": "contract_keeper",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{deposed_noble.name}的家族当年是契约厅的大主顾"
+    },
+    {
+     "a": "deposed_noble",
+     "b": "retired_warrior",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{retired_warrior.name}当年替{deposed_noble.name}家挡过一刀"
+    },
+    {
+     "a": "contract_keeper",
+     "b": "retired_warrior",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{contract_keeper.name}催过{retired_warrior.name}九回账"
+    }
+   ],
+   "tags": [
+    "coercion_theme"
+   ]
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_tavern_night",
+   "title": "在酒馆喝到打烊",
+   "location_ids": [
+    "tavern"
+   ],
+   "duration_minutes": 60,
+   "beats": [
+    "一个老兵在吧台上找到了自己部队的番号",
+    "墙上的剑被谁的胳膊碰歪了",
+    "吟游诗人换了一首没人爱听的歌"
+   ],
+   "hook_ids": [],
+   "start_minute": 1260,
+   "tags": []
+  },
+  {
+   "id": "a_pick_job",
+   "title": "在告示墙前挑委托",
+   "location_ids": [
+    "commission_street"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "一张委托单上写着“报酬：抵一份旧契的欠额”",
+    "一个魔族摊主冲你点了点头",
+    "修灯铺里飘出一股焦味"
+   ],
+   "hook_ids": [],
+   "start_minute": 1100,
+   "tags": []
+  },
+  {
+   "id": "a_pay_queue",
+   "title": "在契约厅排队",
+   "location_ids": [
+    "contract_hall"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "铜钟敲了一下，有人的名字被叫到",
+    "前面的人掏空了钱袋还差一点",
+    "柜台后面的抄写员抬头看了你一眼"
+   ],
+   "hook_ids": [],
+   "start_minute": 600,
+   "tags": []
+  },
+  {
+   "id": "a_black_bread",
+   "title": "在角街买面包",
+   "location_ids": [
+    "demon_quarter"
+   ],
+   "duration_minutes": 20,
+   "beats": [
+    "面包师的角上沾着面粉",
+    "一扇窗户后面有人在看你",
+    "界碑底下放着一小束干花"
+   ],
+   "hook_ids": [],
+   "start_minute": 1110,
+   "tags": []
+  },
+  {
+   "id": "a_camp_fire",
+   "title": "在营火边过夜",
+   "location_ids": [
+    "dungeon_camp"
+   ],
+   "duration_minutes": 90,
+   "beats": [
+    "营火噼啪响了一声",
+    "栅栏下面传来石头滚落的声音",
+    "营头又数了一遍钥匙"
+   ],
+   "hook_ids": [],
+   "start_minute": 1320,
+   "tags": []
+  },
+  {
+   "id": "a_read_marks",
+   "title": "在矿道里读旧路标",
+   "location_ids": [
+    "mine_tunnel"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "路标上的箭头指向一条被封死的岔道",
+    "碎石里有一块烧黑的布",
+    "身后的脚步声停了"
+   ],
+   "hook_ids": [],
+   "start_minute": 660,
+   "tags": []
+  },
+  {
+   "id": "a_window_lamp",
+   "title": "在客房窗边看守夜魔灯",
+   "location_ids": [
+    "tavern_room"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "魔灯闪了一下，又亮起来",
+    "楼下有人笑得很大声",
+    "楼梯吱呀响了一声"
+   ],
+   "hook_ids": [],
+   "start_minute": 1380,
+   "tags": []
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_contract_due",
+   "title": "旧契到期",
+   "source": "money",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "contract_hall",
+    "tavern"
+   ],
+   "trigger": "契约厅门口钉出了一排到期的旧契，最上面那份的抵押物，是全城最老的那家酒馆",
+   "objective": "在钟敲第七下之前，决定替不替人出这笔钱",
+   "choice": "出钱，还是去找执掌人谈",
+   "immediate": {
+    "text": "契约厅的铜钟敲了五下，催缴单上又多了一行名字",
+    "minutes": 10
+   },
+   "near": {
+    "text": "钟敲七下",
+    "deadline_minutes": 120
+   },
+   "far": {
+    "trigger": "没人还上",
+    "consequence": "酒馆归了契约厅，老兵们没地方去了",
+    "due_days": 3
+   },
+   "exits": [
+    {
+     "option": "替人还一部分",
+     "cost": "钱一花出去，契约厅就知道你有钱"
+    },
+    {
+     "option": "去找执掌人谈",
+     "cost": "执掌人会要你拿别的东西换"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1020,
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "p_dungeon_collapse",
+   "title": "安全层塌方",
+   "source": "nature",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "dungeon_camp",
+    "mine_tunnel"
+   ],
+   "trigger": "安全层下面传来一声闷响，有一队冒险者还没上来",
+   "objective": "在下一次塌方之前，决定下不下去",
+   "choice": "下去找人，还是封路",
+   "immediate": {
+    "text": "地面裂开一道缝，铺位钥匙叮叮当当响成一片",
+    "minutes": 5
+   },
+   "near": {
+    "text": "下一次塌方",
+    "deadline_minutes": 60
+   },
+   "far": {
+    "trigger": "那队人没救上来",
+    "consequence": "营地会被收成官营，下面再没人管",
+    "due_days": 2
+   },
+   "exits": [
+    {
+     "option": "下去找人",
+     "cost": "塌方随时会再来"
+    },
+    {
+     "option": "封住下去的路",
+     "cost": "下面的人就只能自己想办法"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "p_noble_arrival",
+   "title": "旧贵族进城",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "commission_street",
+    "tavern"
+   ],
+   "trigger": "一辆挂着旧家徽的马车停在委托街口，车上下来的人说要见当年替家族挡过刀的那一个",
+   "objective": "在停战日之前，决定帮不帮那人找",
+   "choice": "带路，还是挡在前面",
+   "immediate": {
+    "text": "马车门一开，满街的人都停了手里的活",
+    "minutes": 10
+   },
+   "near": {
+    "text": "停战日的钟声",
+    "deadline_minutes": 1440
+   },
+   "far": {
+    "trigger": "旧印信落进别人手里",
+    "consequence": "封地的旧账会被翻出来，角街的地也算在里面",
+    "due_days": 7
+   },
+   "exits": [
+    {
+     "option": "给那人带路",
+     "cost": "城里有人会说你巴结旧主子"
+    },
+    {
+     "option": "把马车拦在街口",
+     "cost": "那人会记住你的无礼"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1050,
+   "tags": []
+  },
+  {
+   "id": "p_vote",
+   "title": "城务表决",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "contract_hall",
+    "commission_street"
+   ],
+   "trigger": "城务会明早表决复核魔族居民的身份，告示贴满了委托街",
+   "objective": "在明早表决之前，决定替谁说话",
+   "choice": "去城务会，还是不掺和",
+   "immediate": {
+    "text": "一张告示被人撕下一半，剩下的半张写着“居民身份复核”",
+    "minutes": 10
+   },
+   "near": {
+    "text": "明早表决",
+    "deadline_minutes": 720
+   },
+   "far": {
+    "trigger": "复核没通过",
+    "consequence": "角街一半的魔族要出城",
+    "due_days": 2
+   },
+   "exits": [
+    {
+     "option": "去替角街说话",
+     "cost": "老兵们会说你忘了打过的仗"
+    },
+    {
+     "option": "不去",
+     "cost": "表决照常进行，你的名字不在任何一边"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1080,
+   "tags": []
+  },
+  {
+   "id": "p_village_rumor",
+   "title": "烧村的旧事",
+   "source": "rumor",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "tavern",
+    "demon_quarter"
+   ],
+   "trigger": "酒馆里有人传，当年烧村子的那个魔族军师就住在角街，今晚有人要去讨说法",
+   "objective": "在有人动手之前，拦住或者跟上",
+   "choice": "拦，还是跟着去看着",
+   "immediate": {
+    "text": "吟游诗人唱到一半停了，有人拍了桌子",
+    "minutes": 5
+   },
+   "near": {
+    "text": "今晚有人去角街",
+    "deadline_minutes": 180
+   },
+   "far": {
+    "trigger": "没人拦",
+    "consequence": "角街会见血，十年的停战就破了一角",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "去角街报信",
+     "cost": "酒馆里的人会觉得你站错了边"
+    },
+    {
+     "option": "跟着去，看着别出事",
+     "cost": "人多手杂，谁也拦不住第一拳"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "p_glove_found",
+   "title": "矿道里的手套",
+   "source": "accident",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "mine_tunnel",
+    "dungeon_camp"
+   ],
+   "trigger": "矿道塌开的一角露出一只烧焦的旧手套，指节上嵌着勇者小队的徽记",
+   "objective": "在挂出去认领之前，决定这只手套交给谁",
+   "choice": "收着，还是交出去",
+   "immediate": {
+    "text": "手套从碎石里滑出来，落在你脚边",
+    "minutes": 5
+   },
+   "near": {
+    "text": "挂出去认领之前",
+    "deadline_minutes": 240
+   },
+   "far": {
+    "trigger": "手套被挂到城门口",
+    "consequence": "全城都会来认，当年的事瞒不住了",
+    "due_days": 3
+   },
+   "exits": [
+    {
+     "option": "自己收着",
+     "cost": "按规矩捡到旧战具要挂出去"
+    },
+    {
+     "option": "交给营头",
+     "cost": "营头的脸色一下子变了"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 600,
+   "tags": []
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_beer_push",
+   "kind": "approach",
+   "slot": "retired_warrior",
+   "location_ids": [
+    "tavern"
+   ],
+   "text": "{npc.name}把一杯麦酒推到你面前，顺手把墙上的剑扶正：“先喝，账以后算。”"
+  },
+  {
+   "id": "h_scar_hand",
+   "kind": "approach",
+   "slot": "retired_warrior",
+   "location_ids": [],
+   "text": "{npc.name}把缺了两根手指的手搁在你肩上，掂了掂：“你肩膀够硬，扛过东西。”"
+  },
+  {
+   "id": "h_sword_glance",
+   "kind": "observe",
+   "slot": "retired_warrior",
+   "location_ids": [
+    "tavern"
+   ],
+   "text": "{npc.name}擦着杯子，眼睛却一直在你和墙上那把剑之间来回"
+  },
+  {
+   "id": "h_horn_bow",
+   "kind": "approach",
+   "slot": "demon_mediator",
+   "location_ids": [],
+   "text": "{npc.name}微微低头，角上的铜环叮地一响：“别紧张，我是来谈的。”"
+  },
+  {
+   "id": "h_touch_horn",
+   "kind": "approach",
+   "slot": "demon_mediator",
+   "location_ids": [],
+   "text": "{npc.name}见你盯着那对角，笑了笑，把头偏过来一点：“想摸就摸，不收钱。”"
+  },
+  {
+   "id": "h_roof_seat",
+   "kind": "approach",
+   "slot": "demon_mediator",
+   "location_ids": [
+    "demon_quarter"
+   ],
+   "text": "{npc.name}在屋檐下给你让出半个位子：“坐这里，看得见整座城的灯。”"
+  },
+  {
+   "id": "h_ring_check",
+   "kind": "observe",
+   "slot": "contract_keeper",
+   "location_ids": [],
+   "text": "{npc.name}远远看了一眼你的手，像在数你按过几个印"
+  },
+  {
+   "id": "h_tea_offer",
+   "kind": "approach",
+   "slot": "contract_keeper",
+   "location_ids": [
+    "contract_hall"
+   ],
+   "text": "{npc.name}倒了两杯热茶，推一杯给你：“坐。欠不欠债，茶都是一样的。”"
+  },
+  {
+   "id": "h_chair_wipe",
+   "kind": "request",
+   "slot": "deposed_noble",
+   "location_ids": [],
+   "text": "{npc.name}站在一把椅子前犹豫了一下，回头看你：“能替我擦一擦吗？”"
+  },
+  {
+   "id": "h_cuff_gift",
+   "kind": "approach",
+   "slot": "deposed_noble",
+   "location_ids": [],
+   "text": "{npc.name}解下一枚袖扣放在你掌心：“我身上只有这个算得上礼物。”"
+  },
+  {
+   "id": "h_key_toss",
+   "kind": "approach",
+   "slot": "camp_master",
+   "location_ids": [
+    "dungeon_camp"
+   ],
+   "text": "{npc.name}把一把铺位钥匙抛过来，你接住了，{npc.ta}咧嘴一笑：“手挺快。”"
+  },
+  {
+   "id": "h_crack_trip",
+   "kind": "accident",
+   "slot": "camp_master",
+   "location_ids": [
+    "dungeon_camp",
+    "mine_tunnel"
+   ],
+   "text": "{npc.name}一脚踩进地上的裂缝，你伸手去拉，两个人一起撞在岩壁上"
+  },
+  {
+   "id": "h_lamp_gift",
+   "kind": "approach",
+   "slot": "fading_mage",
+   "location_ids": [],
+   "text": "{npc.name}把一盏刚修好的小魔灯塞进你手里，灯在你掌心亮了：“它喜欢你。”"
+  },
+  {
+   "id": "h_word_lost",
+   "kind": "request",
+   "slot": "fading_mage",
+   "location_ids": [],
+   "text": "{npc.name}拉住你：“那个词……就是那个，你知道我想说什么吗？”"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_last_blow",
+   "category": "信息",
+   "requires": [
+    "camp_master",
+    "retired_warrior"
+   ],
+   "text": "砍下魔王最后一剑的人，是{camp_master.name}；{retired_warrior.name}一直知道。"
+  },
+  {
+   "id": "t_noble_creditor",
+   "category": "关系",
+   "requires": [
+    "deposed_noble",
+    "demon_mediator"
+   ],
+   "text": "{deposed_noble.name}家族那份旧契上写着的魔族债主，是{demon_mediator.name}的亲人。"
+  },
+  {
+   "id": "t_keeper_page",
+   "category": "人事",
+   "requires": [
+    "contract_keeper"
+   ],
+   "text": "契约厅的抄写员说漏了嘴：{contract_keeper.name}撕掉的那一页，是{contract_keeper.ta}自己的旧契。"
+  },
+  {
+   "id": "t_buyout",
+   "category": "资源",
+   "requires": [],
+   "text": "王都的继承人派人来了，带着一车金币，说愿意折价买断全城的旧契。"
+  },
+  {
+   "id": "t_armistice_early",
+   "category": "时限",
+   "requires": [],
+   "text": "停战日提前了一天，明晚全城就要熄灯。"
+  },
+  {
+   "id": "t_rank_ban",
+   "category": "制度",
+   "requires": [],
+   "text": "城务会贴出新告示：旧军阶的称呼，在城里一律不许叫。"
+  },
+  {
+   "id": "t_dungeon_beast",
+   "category": "意外",
+   "requires": [],
+   "text": "地下城深处爬上来一只当年没清干净的魔物，撞翻了营地的栅栏。"
+  }
+ ],
+ "forbidden_terms": [
+  "手机",
+  "电话",
+  "汽车",
+  "电灯",
+  "枪",
+  "火药",
+  "咖啡",
+  "电脑",
+  "学生",
+  "少女",
+  "少年"
+ ],
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "violence",
+  "coercion_theme"
+ ],
+ "status": "review",
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 14 个）。旧契线是胁迫题材，按 C2 打 coercion_theme；亲密只来自人物本身。西式名，名在前。性别按会话偏好生成（D15）。"
+}

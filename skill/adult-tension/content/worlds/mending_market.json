@@ -1,0 +1,2490 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "灾变前就住在这里的成年老住户",
+   "age_range": [
+    60,
+    80
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_old_resident",
+   "line": "{npc.name}守着一个卖针线的小摊，灾变以前的事{npc.ta}都记得，谁在墙前多站了一会儿，{npc.ta}也记得",
+   "location_ids": [
+    "market_wall",
+    "mending_stall"
+   ],
+   "name": null,
+   "role": "集市的老住户"
+  },
+  {
+   "adult_context": "在集市熬了十年汤的成年住户",
+   "age_range": [
+    40,
+    65
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_soup_keeper",
+   "line": "{npc.name}守着一口大锅，谁饿着肚子路过，{npc.ta}就舀一碗递过去",
+   "location_ids": [
+    "market_wall",
+    "greenhouse"
+   ],
+   "name": null,
+   "role": "集市熬汤的人"
+  },
+  {
+   "adult_context": "两岸跑货的成年行商",
+   "age_range": [
+    30,
+    50
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_rumor_trader",
+   "line": "{npc.name}背着货从对岸过来，带来的货不多，带来的闲话不少",
+   "location_ids": [
+    "market_wall",
+    "footbridge"
+   ],
+   "name": null,
+   "role": "走货的行商"
+  },
+  {
+   "adult_context": "刚进巡夜队的成年队员",
+   "age_range": [
+    22,
+    35
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_watch_member",
+   "line": "{npc.name}拄着木棍站在桥头，谁要过桥，{npc.ta}都要先问一句名字",
+   "location_ids": [
+    "watch_post",
+    "footbridge"
+   ],
+   "name": null,
+   "role": "巡夜队的新队员"
+  },
+  {
+   "adult_context": "镇上唯一会修天线的成年住户",
+   "age_range": [
+    45,
+    65
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_radio_keeper",
+   "line": "{npc.name}抱着一台老收音机，台风、对岸、议会的消息，都是从{npc.ta}嘴里先传出来的",
+   "location_ids": [
+    "watch_post",
+    "market_wall"
+   ],
+   "name": null,
+   "role": "守收音机的人"
+  },
+  {
+   "adult_context": "管温室的成年住户",
+   "age_range": [
+    35,
+    60
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_greenhouse_keeper",
+   "line": "{npc.name}白天在菜畦里弯着腰，谁夜里来过温室，踩倒了哪一棵菜，{npc.ta}第二天都知道",
+   "location_ids": [
+    "greenhouse"
+   ],
+   "name": null,
+   "role": "温室的种菜人"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "你从废墟里捡回来的一枚旧勋章，被{clean_newcomer.name}高价换走，嵌进了集市的墙；{wall_mason.name}后来找到你，问那枚勋章是从哪一片废墟捡的。",
+   "id": "k_scavenger_card",
+   "identity_ids": [
+    "scavenger"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "wall_mason",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{wall_mason.name}嵌过你捡回来的好几件旧物",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "clean_newcomer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{clean_newcomer.name}换勋章时给的东西多得不像话",
+     "stage": "stranger"
+    },
+    {
+     "a": "wall_mason",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "clean_newcomer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{wall_mason.name}一直盯着{clean_newcomer.name}嵌进去的那枚勋章",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "wall_mason",
+    "clean_newcomer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想说实话，又怕说了以后自己也脱不了干系",
+    "limit_gap": "议会要来查墙了",
+    "meeting_reason": "你的旧物常经过这两个人的手",
+    "resource_gap": "{wall_mason.name}有一身手艺和全镇的信任，{clean_newcomer.name}有一张干净的来历卡，你只有一把撬棍"
+   },
+   "tags": [
+    "violence"
+   ],
+   "tension_engine_ids": [
+    "te_fake_card",
+    "te_raider_back"
+   ]
+  },
+  {
+   "chemistry": "你刚到镇上一个月，{night_watch.name}已经问过你两次来历；{pharmacist.name}给你配过一回药，说你手上的旧伤，像是灾变那年被什么东西咬的。",
+   "id": "k_newcomer_asks",
+   "identity_ids": [
+    "newcomer"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "night_watch",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{night_watch.name}问你来历时，一直盯着你的手",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "pharmacist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{pharmacist.name}给你的药，没让你按手印",
+     "stage": "acquainted"
+    },
+    {
+     "a": "night_watch",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "pharmacist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{night_watch.name}的家人，灾变那年没等到{pharmacist.name}的药",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "night_watch",
+    "pharmacist"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想留下来，又不想把旧伤的来历说出口",
+    "limit_gap": "第三次问来历就在今晚",
+    "meeting_reason": "你来镇上头一个月，两个人都找你说过话",
+    "resource_gap": "{night_watch.name}有问来历的权力，{pharmacist.name}有药和药账，你只有一张没写满的来历卡"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_raider_back",
+    "te_medicine_short"
+   ]
+  },
+  {
+   "chemistry": "你跟着{wall_mason.name}砌新墙，嵌进去的旧物里有一件来历卡是假的；{mender.name}认出那件东西自己修过，原主人早就死了。",
+   "id": "k_mason_wall",
+   "identity_ids": [
+    "mason"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "wall_mason",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{wall_mason.name}手抖的时候，是你替着嵌",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "mender",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{mender.name}修好的东西，常托你嵌进墙里",
+     "stage": "acquainted"
+    },
+    {
+     "a": "wall_mason",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "mender",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{mender.name}知道{wall_mason.name}写过一张假卡",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "wall_mason",
+    "mender"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想让墙上写的都是真话，又不想拆穿护着人的那一张",
+    "limit_gap": "议会明天来查墙",
+    "meeting_reason": "你跟这两个人在集市里搭伙干了好几年",
+    "resource_gap": "{wall_mason.name}有墙和来历卡，{mender.name}认得每一样修过的东西，你有一双砌墙的手"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_fake_card",
+    "te_old_debt"
+   ]
+  },
+  {
+   "chemistry": "你的种子和{pharmacist.name}的药都要从河对岸运过来；{bridge_keeper.name}说台风一来，便桥撑不过一夜。",
+   "id": "k_farmer_bridge",
+   "identity_ids": [
+    "seed_farmer"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bridge_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{bridge_keeper.name}替你扛过一袋种子过桥",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "pharmacist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{pharmacist.name}拿你的菜苗换过药",
+     "stage": "acquainted"
+    },
+    {
+     "a": "bridge_keeper",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "pharmacist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{pharmacist.name}的药，每一批都是{bridge_keeper.name}接过河的",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "bridge_keeper",
+    "pharmacist"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想让种子和药都赶在台风前过河",
+    "limit_gap": "台风今夜到",
+    "meeting_reason": "你常过桥，这两个人你都打过交道",
+    "resource_gap": "{bridge_keeper.name}有便桥，{pharmacist.name}有药房，你有一袋等着运过来的种子"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_bridge_out",
+    "te_medicine_short"
+   ]
+  },
+  {
+   "chemistry": "你是镇议会的议长，{clean_newcomer.name}的定居申请压在你桌上，来历卡干净得挑不出毛病；{night_watch.name}说灾变那年烧镇子的那伙人里，有一张一样的脸。",
+   "id": "k_head_raider",
+   "identity_ids": [
+    "council_head"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "clean_newcomer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{clean_newcomer.name}替议会修屋顶，一个钱没要",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "night_watch",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{night_watch.name}守过你家的门",
+     "stage": "acquainted"
+    },
+    {
+     "a": "clean_newcomer",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 0
+     },
+     "b": "night_watch",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 0
+     },
+     "reason": "{night_watch.name}已经问过{clean_newcomer.name}两次来历",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "clean_newcomer",
+    "night_watch"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想让镇子既守得住规矩，又容得下人",
+    "limit_gap": "定居申请明早就要表决",
+    "meeting_reason": "你当议长这几年，两个人都在议会门口等过你",
+    "resource_gap": "你有议长的章，{clean_newcomer.name}有一张干净的来历卡，{night_watch.name}有一段忘不掉的记忆"
+   },
+   "tags": [
+    "violence"
+   ],
+   "tension_engine_ids": [
+    "te_raider_back",
+    "te_old_debt"
+   ]
+  },
+  {
+   "chemistry": "你是巡夜队队长，队里的枪坏了一半；{mender.name}什么都修，就是不修枪，{bridge_keeper.name}说河对岸有人在攒枪。",
+   "id": "k_captain_gun",
+   "identity_ids": [
+    "patrol_captain"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "mender",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{mender.name}修好过你那盏马灯",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bridge_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{bridge_keeper.name}每天给你报一次水位",
+     "stage": "acquainted"
+    },
+    {
+     "a": "mender",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "bridge_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{bridge_keeper.name}知道{mender.name}灾变那年修过什么",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "mender",
+    "bridge_keeper"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想守住镇子，又不想逼一个人破自己的规矩",
+    "limit_gap": "台风过后，对岸的人可能就会来",
+    "meeting_reason": "你巡夜时常在修补摊和桥头停脚",
+    "resource_gap": "你有巡夜队和那一排坏枪，{mender.name}有一双能修好它们的手，{bridge_keeper.name}有便桥和对岸的消息"
+   },
+   "tags": [
+    "violence"
+   ],
+   "tension_engine_ids": [
+    "te_gun_request",
+    "te_bridge_out"
+   ]
+  },
+  {
+   "chemistry": "{pharmacist.name}的药账上，灾变那年有一盒药的去向写着{mender.name}的名字；{mender.name}说那盒药自己从没拿过。",
+   "id": "k_mender_pharmacist",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "mender",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{mender.name}给你修过一只锅，没收东西",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "pharmacist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{pharmacist.name}给你配过一回药",
+     "stage": "acquainted"
+    },
+    {
+     "a": "mender",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 1
+     },
+     "b": "pharmacist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "两个人灾变那年在同一个地窖里躲过一个月",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "mender",
+    "pharmacist"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道那盒药到底去了哪里",
+    "limit_gap": "议会要查灾变那年的旧账",
+    "meeting_reason": "你在集市里常跟这两个人打交道",
+    "resource_gap": "{pharmacist.name}有药账，{mender.name}有一个说不清的名字，你是两个人都信得过的人"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_medicine_short",
+    "te_old_debt"
+   ]
+  },
+  {
+   "chemistry": "{clean_newcomer.name}的来历卡上写着灾变那年在河对岸；{bridge_keeper.name}那年守的就是对岸的桥；{wall_mason.name}说，嵌进墙里的那枚勋章是从桥头捡的。",
+   "id": "k_three_cards",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "clean_newcomer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{clean_newcomer.name}帮你扛过一回东西",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "wall_mason",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{wall_mason.name}给你讲过墙上好几件旧物的来历",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bridge_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{bridge_keeper.name}在桥头跟你喝过一回酒",
+     "stage": "acquainted"
+    },
+    {
+     "a": "clean_newcomer",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "wall_mason",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{wall_mason.name}嵌那枚勋章时，手在抖",
+     "stage": "stranger"
+    },
+    {
+     "a": "clean_newcomer",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 0
+     },
+     "b": "bridge_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{bridge_keeper.name}见到{clean_newcomer.name}的第一眼，就去看了桥头的木板",
+     "stage": "stranger"
+    },
+    {
+     "a": "wall_mason",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bridge_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "两个人是灾变后最早回到镇上的",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "clean_newcomer",
+    "wall_mason",
+    "bridge_keeper"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在议会查墙之前，把那一年的事拼起来",
+    "limit_gap": "台风今夜到，议会明天查墙",
+    "meeting_reason": "三个人你都在集市和桥头碰见过",
+    "resource_gap": "{clean_newcomer.name}有来历卡，{wall_mason.name}有墙，{bridge_keeper.name}有那块木板，你是唯一一个那年不在场的人"
+   },
+   "tags": [
+    "violence"
+   ],
+   "tension_engine_ids": [
+    "te_fake_card",
+    "te_raider_back"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_radio",
+   "reach": "对岸电台每天播两次，天气和水位一个字不差，别的说得很含糊",
+   "text": "收音机广播"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_market_talk",
+   "reach": "上午在墙前说的，下午就传成了另一个样子",
+   "text": "集市闲话"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_bridge_board",
+   "reach": "谁过了桥、哪天过的，写得清清楚楚，可木板会被人刮",
+   "text": "桥头木板"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "集市里的修补匠，成年人，什么都能修，就是不修枪",
+   "age_range": [
+    30,
+    55
+   ],
+   "appearance_options": [
+    "一件缝满补丁的帆布围裙，每个口袋里都插着工具",
+    "眼睛总眯着，像随时在找一个零件的毛病"
+   ],
+   "decision": {
+    "avoids": [
+     "被人逼着修枪"
+    ],
+    "contrast": "能把一整座镇子的东西修好，自己心里那一处坏的却修不了",
+    "core_value": "坏了的能修，修不了的就送人",
+    "goal_options": [
+     "守住不修枪的规矩",
+     "把镇上的旧收音机都修响",
+     "弄清那盒药的去向"
+    ],
+    "never": [
+     "修一样会伤人的东西"
+    ],
+    "prefers": [
+     "先拆开看"
+    ],
+    "pressure_responses": {
+     "breaking": "把修补摊收了，出镇去找零件",
+     "high": "当着集市的人拒绝修一把枪",
+     "low": "递过去一把螺丝刀，让对方来拧",
+     "mid": "把一样修好的东西塞给对方，说“送你的”"
+    },
+    "relationship_stance": "温和，固执",
+    "withdrawal": "夜里在摊子上拆一台收音机，拆了装、装了拆"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "mender",
+   "identity": {
+    "authority": "决定一样坏东西能不能变回好东西",
+    "exposure": "{npc.ta}灾变那年修过一把枪，那把枪后来杀了人",
+    "hidden": "{npc.ta}认得那个新来的人手上的老茧，是常年握枪磨出来的",
+    "limits": [
+     "有人逼{npc.ta}修枪",
+     "修补摊的零件越来越难找"
+    ],
+    "obligations": [
+     "每修好一样东西都要刻一道小痕"
+    ],
+    "resources": [
+     "一个修补摊和一双什么都修得好的手",
+     "镇上一半的东西都经过这双手"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方愿意蹲下来跟{npc.ta}一起拧螺丝",
+     "对方不问{npc.ta}为什么不修枪"
+    ],
+    "boundaries": [
+     "集市已经散了"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}想把心里那一处也修一修的那个人",
+    "dislikes": [
+     "被当成一台修理机"
+    ],
+    "expression": "说出那把枪的事",
+    "likes": [
+     "一台收音机在两个人手里终于响了"
+    ],
+    "preconditions": [
+     "摊子还没收"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "修补匠",
+   "schedule": [
+    {
+     "from": 480,
+     "location_id": "mending_stall",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "market_wall",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "mending_stall",
+     "to": 1320
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "{npc.ta}会想起灾变那年的事",
+      "option": "修"
+     },
+     {
+      "cost": "镇上的人会说{npc.ta}见死不救",
+      "option": "不修"
+     }
+    ],
+    "pressure": "修，就破了自己的规矩；不修，镇子可能守不住",
+    "trigger": "巡夜队抬来一箱坏枪，说台风之后河对岸的人可能会来"
+   },
+   "tags": [
+    "violence"
+   ],
+   "voices": {
+    "inner": "“我灾变那年修过一把枪。修好以后，它杀了人。”",
+    "surface": "“递我那把螺丝刀。……对，就是这把。”"
+   }
+  },
+  {
+   "adult_context": "镇上药房的配药人，成年人，药房里每一盒药的去向都记得",
+   "age_range": [
+    28,
+    50
+   ],
+   "appearance_options": [
+    "袖口总是卷到肘弯，手腕上缠着一圈记数的细绳",
+    "开口前会先低头看一眼账本"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说偏心"
+    ],
+    "contrast": "替全镇记着每一盒药，却记不住自己上一次睡整觉是什么时候",
+    "core_value": "药只有这么多，账不能糊涂",
+    "goal_options": [
+     "撑到下一批药运过来",
+     "让药账干干净净",
+     "不再选谁活谁死"
+    ],
+    "never": [
+     "改一笔药账"
+    ],
+    "prefers": [
+     "先查账"
+    ],
+    "pressure_responses": {
+     "breaking": "把剩下的药全分出去，锁上药房",
+     "high": "当着议会念出灾变那年的药账",
+     "low": "把一盒药推过去，说“按个手印”",
+     "mid": "翻开药账给对方看，指着一行字"
+    },
+    "relationship_stance": "严谨，心软",
+    "withdrawal": "夜里在灯下一盒一盒点药，点完再点一遍"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "pharmacist",
+   "identity": {
+    "authority": "决定一盒药给谁",
+    "exposure": "灾变那年{npc.ta}把最后一盒药给了一个人，没给另一个，另一个死了",
+    "hidden": "药账上有一页是{npc.ta}后来补写的，写的不是实话",
+    "limits": [
+     "抗生素只剩最后几盒",
+     "便桥一断，河对岸的药就过不来"
+    ],
+    "obligations": [
+     "每一盒药都要登记去向，领药的人按手印"
+    ],
+    "resources": [
+     "药房的钥匙和一本手写的药账",
+     "镇上每个人的旧伤旧病都记在心里"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方领药时手印按得很认真",
+     "对方问{npc.ta}自己有没有吃药"
+    ],
+    "boundaries": [
+     "药房的门闩上了"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢合上药账的那个人",
+    "dislikes": [
+     "被当成一个药柜"
+    ],
+    "expression": "说出那一页补写的药账写的是谁",
+    "likes": [
+     "药房打烊后两个人分一碗热汤"
+    ],
+    "preconditions": [
+     "还有人在排队领药"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "配药人",
+   "schedule": [
+    {
+     "from": 420,
+     "location_id": "pharmacy",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "greenhouse",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "pharmacy",
+     "to": 1380
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "最重的那个可能撑不到明天",
+      "option": "按先来后到"
+     },
+     {
+      "cost": "另外两家会说{npc.ta}偏心",
+      "option": "给最重的"
+     }
+    ],
+    "pressure": "给谁，药账上都会多一笔{npc.ta}不想写的",
+    "trigger": "最后几盒抗生素，今天有三个人要"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“灾变那年，我手里只有一盒药，门口站着两个人。”",
+    "surface": "“按个手印。……这盒药，你要记得是谁给的。”"
+   }
+  },
+  {
+   "adult_context": "新来的定居者，成年人，来历卡写得很干净，太干净了",
+   "age_range": [
+    30,
+    48
+   ],
+   "appearance_options": [
+    "一身洗得发白的旧军装，肩章被拆掉了，留下两道针眼",
+    "手上有一层厚茧，握手时攥得很紧"
+   ],
+   "decision": {
+    "avoids": [
+     "被人问灾变那年在哪"
+    ],
+    "contrast": "想在一座自己烧过的镇子里重新活一次",
+    "core_value": "过去的事，能埋就埋",
+    "goal_options": [
+     "在镇上安顿下来",
+     "不让任何人认出自己",
+     "替当年烧掉的东西还一点"
+    ],
+    "never": [
+     "再拿起一把枪"
+    ],
+    "prefers": [
+     "先干活"
+    ],
+    "pressure_responses": {
+     "breaking": "半夜收拾东西，一个人出镇",
+     "high": "当着巡夜队承认当年的事",
+     "low": "一声不吭地帮对方扛起一样重东西",
+     "mid": "在墙前站着，说来历卡上就写“我不记得了”"
+    },
+    "relationship_stance": "沉默，勤快",
+    "withdrawal": "夜里坐在墙根下，摸着那枚嵌进砖缝的勋章"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "clean_newcomer",
+   "identity": {
+    "authority": "决定自己的过去要说多少",
+    "exposure": "{npc.ta}灾变那年跟着一伙掠夺者，烧过这座镇子",
+    "hidden": "{npc.ta}嵌进墙里的那枚勋章，是从一个死人身上摘的",
+    "limits": [
+     "巡夜队已经问过两次来历",
+     "镇上有人认得{npc.ta}的脸"
+    ],
+    "obligations": [
+     "每天去集市的墙前站一会儿"
+    ],
+    "resources": [
+     "一身能干重活的力气",
+     "一张写得挑不出错的来历卡"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不问{npc.ta}的来历卡",
+     "对方看见{npc.ta}手上的茧也没躲"
+    ],
+    "boundaries": [
+     "墙根下没有别人"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢说出过去的那个人",
+    "dislikes": [
+     "被当成一个罪人"
+    ],
+    "expression": "说出那枚勋章是从谁身上摘的",
+    "likes": [
+     "两个人在墙根下坐着，谁也不说话"
+    ],
+    "preconditions": [
+     "巡夜队还在附近"
+    ],
+    "self_control_range": [
+     1,
+     4
+    ]
+   },
+   "public_role": "新定居者",
+   "schedule": [
+    {
+     "from": 480,
+     "location_id": "market_wall",
+     "to": 960
+    },
+    {
+     "from": 961,
+     "location_id": "footbridge",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "market_wall",
+     "to": 1380
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "镇上有人会要{npc.ta}偿命",
+      "option": "说实话"
+     },
+     {
+      "cost": "{npc.ta}又成了一个没有家的人",
+      "option": "连夜走"
+     }
+    ],
+    "pressure": "答不上来就被赶出镇；答了，镇上的人会想起那一年",
+    "trigger": "巡夜队今晚要问{npc.ta}第三次来历"
+   },
+   "tags": [
+    "violence"
+   ],
+   "voices": {
+    "inner": "“这座镇子，灾变那年我来过。不是来救人的。”",
+    "surface": "“来历卡上写什么？……写我不记得了。”"
+   }
+  },
+  {
+   "adult_context": "巡夜队的队员，成年人，有权问任何人的来历",
+   "age_range": [
+    26,
+    45
+   ],
+   "appearance_options": [
+    "一盏手摇马灯挂在腰上，一根硬木棍斜背在身后",
+    "嗓门不大，问话却一个字一个字地问清楚"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说是疑心病"
+    ],
+    "contrast": "替一座镇子守着夜，自己心里那一夜却一直没过去",
+    "core_value": "问清楚，才睡得着",
+    "goal_options": [
+     "问清新来的那个人的来历",
+     "守住镇子过台风",
+     "不冤枉一个人"
+    ],
+    "never": [
+     "冤枉一个人"
+    ],
+    "prefers": [
+     "先问来历"
+    ],
+    "pressure_responses": {
+     "breaking": "扔下马灯，拿着木棍去找那个人",
+     "high": "当众问完第三次",
+     "low": "举起马灯照一照对方的脸",
+     "mid": "问对方从哪来，问完盯着眼睛等"
+    },
+    "relationship_stance": "认真，记仇",
+    "withdrawal": "夜里巡到便桥头，在那里站很久"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "night_watch",
+   "identity": {
+    "authority": "决定一个人的来历问几次",
+    "exposure": "灾变那年{npc.ta}的家人死在掠夺者手里，{npc.ta}记得其中一张脸",
+    "hidden": "{npc.ta}私下放过一个答不上来历的人，没报",
+    "limits": [
+     "队里的枪坏了一半",
+     "问错了人，镇上会说巡夜队欺负新来的"
+    ],
+    "obligations": [
+     "每夜巡三遍集市和便桥"
+    ],
+    "resources": [
+     "巡夜队员的身份和一盏马灯",
+     "镇上的每一条巷子都走过"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方被问来历时答得很坦白",
+     "对方陪{npc.ta}巡过一夜"
+    ],
+    "boundaries": [
+     "马灯已经熄了"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢不再问来历的那个人",
+    "dislikes": [
+     "被当成一根棍子"
+    ],
+    "expression": "说出家人死的那一夜",
+    "likes": [
+     "马灯熄了以后的一段黑路"
+    ],
+    "preconditions": [
+     "还在巡夜"
+    ],
+    "self_control_range": [
+     2,
+     5
+    ]
+   },
+   "public_role": "巡夜队员",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "watch_post",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "footbridge",
+     "to": 300
+    },
+    {
+     "from": 301,
+     "location_id": "market_wall",
+     "to": 420
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "镇上会知道那一年的事",
+      "option": "问"
+     },
+     {
+      "cost": "{npc.ta}这些年就白等了",
+      "option": "放过去"
+     }
+    ],
+    "pressure": "第三次问完，就得有个结果",
+    "trigger": "那张脸出现在镇上了，来历卡干干净净"
+   },
+   "tags": [
+    "violence"
+   ],
+   "voices": {
+    "inner": "“那一夜我记得一张脸。这些年我一直在等那张脸。”",
+    "surface": "“你从哪来？……不急，慢慢说。”"
+   }
+  },
+  {
+   "adult_context": "砌墙的老匠人，成年人，镇上每一面新墙都出自这双手",
+   "age_range": [
+    45,
+    66
+   ],
+   "appearance_options": [
+    "一双满是裂口的手，指缝里嵌着灰浆",
+    "背有点驼，看墙的时候却站得笔直"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说老糊涂"
+    ],
+    "contrast": "替全镇记住了灾变里的每一件东西，自己的那一件却一直没嵌上去",
+    "core_value": "墙会记得一切",
+    "goal_options": [
+     "把每一张来历卡都改成真话",
+     "找到勋章原主人的下落",
+     "再砌一面墙"
+    ],
+    "never": [
+     "嵌一件来历不明的东西"
+    ],
+    "prefers": [
+     "先看来历"
+    ],
+    "pressure_responses": {
+     "breaking": "把自己写的假卡片全烧了",
+     "high": "当众拆下一件嵌错的旧物",
+     "low": "把一块砖递给对方，让对方来嵌",
+     "mid": "指着墙上一件旧物，讲它的来历"
+    },
+    "relationship_stance": "慢，较真",
+    "withdrawal": "夜里打着灯在墙前，一张一张读来历卡"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "wall_mason",
+   "identity": {
+    "authority": "决定哪一件旧物嵌进墙里",
+    "exposure": "墙上有一张来历卡是{npc.ta}写的假话，为了护一个人",
+    "hidden": "那枚勋章的原主人，是{npc.ta}的亲人",
+    "limits": [
+     "有人在来历卡上造假，{npc.ta}签过名",
+     "手越来越抖，砌不了几年了"
+    ],
+    "obligations": [
+     "每砌一面墙都要亲手写一张来历卡"
+    ],
+    "resources": [
+     "一身砌墙的手艺",
+     "知道每一件嵌进墙里的旧物是谁的"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方读来历卡读得很认真",
+     "对方问{npc.ta}自己那一件是什么"
+    ],
+    "boundaries": [
+     "墙前没有人"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢嵌上自己那一件的那个人",
+    "dislikes": [
+     "被当成一面墙"
+    ],
+    "expression": "把自己一直没嵌上去的那件旧物拿给对方看",
+    "likes": [
+     "两个人一起把一件旧物按进灰浆里"
+    ],
+    "preconditions": [
+     "灰浆还没干"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "砌墙匠",
+   "schedule": [
+    {
+     "from": 420,
+     "location_id": "market_wall",
+     "to": 1020
+    },
+    {
+     "from": 1021,
+     "location_id": "greenhouse",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "market_wall",
+     "to": 1320
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "{npc.ta}这辈子砌的墙都要被人怀疑",
+      "option": "自己先认"
+     },
+     {
+      "cost": "护着的那个人会被赶出镇",
+      "option": "让人去查"
+     }
+    ],
+    "pressure": "查到{npc.ta}写的那一张，护着的人就藏不住了",
+    "trigger": "议会要查集市墙上的来历卡，有人举报造假"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“那枚勋章是我家里人的。我认得背面的刻字。”",
+    "surface": "“你来嵌。手按稳，它要在这里待一百年。”"
+   }
+  },
+  {
+   "adult_context": "守便桥的人，成年人，过桥人的名字都记在桥头的木板上",
+   "age_range": [
+    28,
+    50
+   ],
+   "appearance_options": [
+    "一身被河水泡得发硬的雨衣，腰上系着一圈粗绳",
+    "嗓门很大，像要压过河水的声音"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说那伙人是{npc.ta}放过来的"
+    ],
+    "contrast": "守着一座桥让人过河，自己却从来不敢过到对岸去",
+    "core_value": "桥在人在",
+    "goal_options": [
+     "撑过这次台风",
+     "看住河对岸攒枪的人",
+     "让那块木板干干净净"
+    ],
+    "never": [
+     "在大水里放人过桥"
+    ],
+    "prefers": [
+     "先看水"
+    ],
+    "pressure_responses": {
+     "breaking": "一个人在台风夜守在桥上不走",
+     "high": "当众封桥，谁也不许过",
+     "low": "把绳子的一头塞给对方，喊对方拽着",
+     "mid": "指着木板上的一个名字，问对方认不认得"
+    },
+    "relationship_stance": "粗，重情",
+    "withdrawal": "夜里坐在桥头，听河水涨了几寸"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "bridge_keeper",
+   "identity": {
+    "authority": "决定谁能过桥、什么时候封桥",
+    "exposure": "灾变那年{npc.ta}守的是对岸的桥，那伙掠夺者是从{npc.ta}的桥上过来的",
+    "hidden": "木板上有一个名字是{npc.ta}后来刮掉的",
+    "limits": [
+     "台风要来了，便桥撑不过一夜",
+     "河对岸有人在攒枪"
+    ],
+    "obligations": [
+     "每天早晚各量一次水位"
+    ],
+    "resources": [
+     "便桥和桥头那块记名的木板",
+     "知道河对岸每一个过桥的人"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方台风夜也肯来桥头陪{npc.ta}",
+     "对方不问木板上刮掉的那个名字"
+    ],
+    "boundaries": [
+     "桥头没有别人"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢过一回河的那个人",
+    "dislikes": [
+     "被当成一个看桥的"
+    ],
+    "expression": "说出刮掉的那个名字",
+    "likes": [
+     "雨里两个人拽着同一根绳子"
+    ],
+    "preconditions": [
+     "水还在涨"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "守桥人",
+   "schedule": [
+    {
+     "from": 360,
+     "location_id": "footbridge",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "watch_post",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "footbridge",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "对岸的人会骂{npc.ta}见死不救",
+      "option": "封桥"
+     },
+     {
+      "cost": "{npc.ta}可能跟着桥一起被冲走",
+      "option": "拼一夜加固"
+     }
+    ],
+    "pressure": "封桥，对岸的药和种子就过不来；不封，桥上可能死人",
+    "trigger": "台风今夜到，便桥撑不过去"
+   },
+   "tags": [
+    "violence"
+   ],
+   "voices": {
+    "inner": "“灾变那年，那伙人是从我守的桥上过来的。”",
+    "surface": "“拽着！别松手，这河不讲情面。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "台风来临前的午后",
+  "minute": 900
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "violence",
+  "disaster"
+ ],
+ "custom": false,
+ "customs": [
+  "新定居的人第一夜要在集市守夜，听老住户讲一件灾变那年的事。",
+  "修好的东西上要刻一道小痕，记是谁修的。",
+  "灾变日那天全镇停一天工，各自去墙前站一会儿。",
+  "吃饭前先说一句“还活着”，别人回一句“还活着”。",
+  "借东西不打欠条，还的时候多还一样小东西。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "摊主把你的东西拿起来对着光看",
+    "墙上一张来历卡被风吹得翻了个面",
+    "有人在你身后说了一句“还活着”"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_trade_mended",
+   "location_ids": [
+    "market_wall"
+   ],
+   "start_minute": 600,
+   "tags": [],
+   "title": "拿修好的东西换东西"
+  },
+  {
+   "beats": [
+    "收音机里忽然响了一声",
+    "修补匠把一颗螺丝递给你",
+    "牌子上“不修枪”三个字被人用指甲划过"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [],
+   "id": "a_watch_mend",
+   "location_ids": [
+    "mending_stall"
+   ],
+   "start_minute": 720,
+   "tags": [],
+   "title": "在修补摊看修东西"
+  },
+  {
+   "beats": [
+    "前面的人按完手印，看了一眼自己的拇指",
+    "配药人翻账本的手停了一下",
+    "门外有人咳嗽"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_med_queue",
+   "location_ids": [
+    "pharmacy"
+   ],
+   "start_minute": 840,
+   "tags": [],
+   "title": "排队领药"
+  },
+  {
+   "beats": [
+    "河水又涨了一寸",
+    "对岸有一点火光",
+    "桥头木板上的名字被雨打湿了"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_bridge_check",
+   "location_ids": [
+    "footbridge"
+   ],
+   "start_minute": 1000,
+   "tags": [],
+   "title": "去便桥看水位"
+  },
+  {
+   "beats": [
+    "玻璃顶棚外的云走得很快",
+    "菜畦里有虫在叫",
+    "长椅另一头有人坐下了"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [],
+   "id": "a_greenhouse_rest",
+   "location_ids": [
+    "greenhouse"
+   ],
+   "start_minute": 1100,
+   "tags": [],
+   "title": "在温室里歇一会儿"
+  },
+  {
+   "beats": [
+    "马灯照出墙上一排坏枪",
+    "问来历的簿子翻到了新的一页",
+    "远处有狗叫"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [],
+   "id": "a_night_patrol",
+   "location_ids": [
+    "watch_post"
+   ],
+   "start_minute": 1320,
+   "tags": [],
+   "title": "跟着巡夜队巡一段"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "灾后第十五年",
+ "extends": null,
+ "forbidden_terms": [
+  "手机",
+  "互联网",
+  "学生",
+  "少女",
+  "少年",
+  "校园",
+  "皇帝",
+  "魔法"
+ ],
+ "hooks": [
+  {
+   "id": "h_screwdriver",
+   "kind": "approach",
+   "location_ids": [
+    "mending_stall"
+   ],
+   "slot": "mender",
+   "text": "{npc.name}把一把螺丝刀塞到你手里：“你来拧这一颗，我手不够。”"
+  },
+  {
+   "id": "h_gift_radio",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "mender",
+   "text": "{npc.name}把一台刚修好的小收音机放到你手里：“拿着，送你的。”"
+  },
+  {
+   "id": "h_pill_press",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "pharmacist",
+   "text": "{npc.name}把一盒药放进你手心，按着你的手指压了压：“记得是谁给的。”"
+  },
+  {
+   "id": "h_soup_bowl",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "pharmacist",
+   "text": "{npc.name}把一碗热汤推到你面前：“药不够，汤管够。”"
+  },
+  {
+   "id": "h_ledger_look",
+   "kind": "observe",
+   "location_ids": [
+    "pharmacy"
+   ],
+   "slot": "pharmacist",
+   "text": "{npc.name}低头翻着药账，翻到一页停住，抬眼看了你一下"
+  },
+  {
+   "id": "h_lift_help",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "clean_newcomer",
+   "text": "{npc.name}一声不吭地接过你手里那袋重东西，扛到了自己肩上"
+  },
+  {
+   "id": "h_wall_stand",
+   "kind": "observe",
+   "location_ids": [
+    "market_wall"
+   ],
+   "slot": "clean_newcomer",
+   "text": "{npc.name}站在墙前，手指按着一枚嵌进砖缝的勋章，你走近时{npc.ta}没有回头"
+  },
+  {
+   "id": "h_lamp_face",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "night_watch",
+   "text": "{npc.name}举起马灯照了照你的脸，又放低了：“你不用怕，我只是看看。”"
+  },
+  {
+   "id": "h_ask_origin",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "night_watch",
+   "text": "{npc.name}拦住你，声音不大：“你从哪来？不急，慢慢说。”"
+  },
+  {
+   "id": "h_brick_hand",
+   "kind": "approach",
+   "location_ids": [
+    "market_wall"
+   ],
+   "slot": "wall_mason",
+   "text": "{npc.name}把一块砖递到你手里，手覆在你手背上：“手按稳。”"
+  },
+  {
+   "id": "h_card_story",
+   "kind": "approach",
+   "location_ids": [
+    "market_wall"
+   ],
+   "slot": "wall_mason",
+   "text": "{npc.name}指着墙上一件旧物，给你讲它的来历，讲着讲着笑了"
+  },
+  {
+   "id": "h_rope_end",
+   "kind": "approach",
+   "location_ids": [
+    "footbridge"
+   ],
+   "slot": "bridge_keeper",
+   "text": "{npc.name}把绳子的一头塞给你：“拽紧了！”"
+  },
+  {
+   "id": "h_river_slip",
+   "kind": "accident",
+   "location_ids": [
+    "footbridge"
+   ],
+   "slot": "bridge_keeper",
+   "text": "{npc.name}在湿滑的桥板上一个踉跄，你一把拽住，两个人一起撞在铁索上"
+  }
+ ],
+ "id": "mending_market",
+ "locations": [
+  {
+   "affordances": [
+    "读一张钉在墙上的来历卡",
+    "在摊子前拿修好的东西换东西",
+    "摸一摸嵌在砖缝里的一件旧物"
+   ],
+   "detail": "镇中心的集市，一面面新砌的墙围着摊子，砖缝里嵌着手表、钥匙、勋章、一只旧皮鞋，每件旧物底下钉着一张来历卡。",
+   "exits": [
+    "mending_stall",
+    "pharmacy",
+    "footbridge",
+    "watch_post",
+    "greenhouse"
+   ],
+   "id": "market_wall",
+   "name": "集市旧墙",
+   "pressure_modifiers": {
+    "p_fake_card": "墙前围了一圈人，有人在大声念一张来历卡。",
+    "p_raider_seen": "集市里的人说话声比平时低。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "全镇的人都在这里买卖、聊天，谁在墙前站了多久、摸了哪件旧物，摊主们都看得见",
+   "witnesses": [
+    "bg_old_resident",
+    "bg_rumor_trader"
+   ]
+  },
+  {
+   "affordances": [
+    "蹲在摊前看修补匠拆东西",
+    "读一读棚柱上那块“不修枪”的牌子",
+    "拿起一样修好的东西试一试"
+   ],
+   "detail": "集市一角搭着帆布棚的修补摊，桌上摊着拆开的收音机、钟表和锅，棚柱上挂着一块牌子：不修枪。",
+   "exits": [
+    "market_wall"
+   ],
+   "id": "mending_stall",
+   "name": "修补摊",
+   "pressure_modifiers": {
+    "p_gun_box": "摊子底下塞着一只长条木箱，用油布盖着。",
+    "p_old_debt": "桌上摊着一张泛黄的纸，压在一把扳手底下。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "来修东西的人蹲在摊前等，谁跟修补匠说了什么，旁边等的人都听得见",
+   "witnesses": [
+    "bg_old_resident"
+   ]
+  },
+  {
+   "affordances": [
+    "排进领药的队",
+    "看墙上那张手写的存量表",
+    "在柜台上按一个手印"
+   ],
+   "detail": "一间用旧邮局改的药房，柜台后面一排排药盒，墙上贴着一张手写的存量表，门口排着领药的队。",
+   "exits": [
+    "market_wall",
+    "greenhouse"
+   ],
+   "id": "pharmacy",
+   "name": "药房",
+   "pressure_modifiers": {
+    "p_medicine": "存量表上“抗生素”那一栏被红笔圈了。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "领药的人按手印、报名字，谁领了什么，后面排队的都看在眼里",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "在桥头的木板上找一个名字",
+    "扶着铁索往河里看水位",
+    "朝对岸望一望"
+   ],
+   "detail": "镇子东头横在河上的一座便桥，木板、铁索和旧车门拼起来的，桥头钉着一块记名字的木板。",
+   "exits": [
+    "market_wall",
+    "watch_post"
+   ],
+   "id": "footbridge",
+   "name": "便桥",
+   "pressure_modifiers": {
+    "p_raider_seen": "桥头木板上新写了一个名字，墨迹还没干。",
+    "p_typhoon": "河水已经漫到了桥面，铁索绷得嗡嗡响。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "过桥的人都要在桥头报名字，守桥人和巡夜队都盯着",
+   "witnesses": [
+    "bg_watch_member"
+   ]
+  },
+  {
+   "affordances": [
+    "翻一翻问来历的簿子",
+    "看墙上那一排枪",
+    "在马灯底下坐一会儿"
+   ],
+   "detail": "便桥和集市之间一座铁皮哨棚，墙上挂着马灯和一排坏了一半的枪，桌上一本问来历的簿子。",
+   "exits": [
+    "market_wall",
+    "footbridge"
+   ],
+   "id": "watch_post",
+   "name": "巡夜队哨棚",
+   "pressure_modifiers": {
+    "p_fake_card": "簿子摊开着，一个名字后面已经画了两道杠。",
+    "p_gun_box": "墙上挂枪的钉子空了一半。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "巡夜队的人轮班在这里，被叫进来问话的人，外面的人都知道",
+   "witnesses": [
+    "bg_watch_member",
+    "bg_radio_keeper"
+   ]
+  },
+  {
+   "affordances": [
+    "在菜畦间蹲下拔一把草",
+    "躺在长椅上看玻璃顶棚外的天",
+    "在没人的地方把话说完"
+   ],
+   "detail": "镇子西边一座塌了半边的旧车站，玻璃顶棚底下种满了菜，长椅还是当年候车的那几条。",
+   "exits": [
+    "market_wall",
+    "pharmacy"
+   ],
+   "id": "greenhouse",
+   "name": "旧车站温室",
+   "pressure_modifiers": {
+    "p_typhoon": "玻璃顶棚被风吹得哐哐响，有一块已经裂了。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "白天有人来浇水，夜里没人；在这里说的话，只有菜叶子听得见",
+   "witnesses": []
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "莫",
+   "唐",
+   "方",
+   "石",
+   "樊",
+   "尹",
+   "鲁",
+   "邵",
+   "谭",
+   "齐",
+   "贺",
+   "葛",
+   "庞",
+   "蒋"
+  ],
+  "given_female": [
+   "禾",
+   "苗",
+   "荞",
+   "菱",
+   "芦",
+   "棉",
+   "杏",
+   "桑",
+   "蒲",
+   "芸",
+   "葭",
+   "茵"
+  ],
+  "given_male": [
+   "铁",
+   "钧",
+   "岳",
+   "凿",
+   "锤",
+   "桩",
+   "垣",
+   "屹",
+   "岗",
+   "樵",
+   "犁",
+   "舵"
+  ],
+  "given_neutral": [
+   "灯",
+   "炉",
+   "麦",
+   "粟",
+   "晨",
+   "渡",
+   "远",
+   "归",
+   "安",
+   "生",
+   "平",
+   "野"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "老{family}"
+   },
+   {
+    "gender": "any",
+    "pattern": "阿{given}"
+   },
+   {
+    "gender": "female",
+    "pattern": "{given}姐"
+   },
+   {
+    "gender": "male",
+    "pattern": "{given}哥"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 18 个）。旧日掠夺者线打 violence，台风打 disaster。性别按会话偏好生成（D15）。",
+ "player_identities": [
+  {
+   "age_range": [
+    22,
+    45
+   ],
+   "baseline": "你每天去镇外的废墟里翻东西，捡回来的旧物，修补匠修，砌墙匠嵌。",
+   "gender": "any",
+   "id": "scavenger",
+   "reputation": "能吃苦，嘴紧",
+   "resources": [
+    "一把撬棍和一双认得废墟的眼睛",
+    "镇外每一片废墟你都翻过"
+   ],
+   "risks": [
+    "你从废墟里捡回来过一样不该捡的东西"
+   ],
+   "role": "拾荒人",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "老{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "阿{given}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    40
+   ],
+   "baseline": "你刚到镇上一个月，来历卡还没写满，在集市里帮人搬东西换口饭吃。",
+   "gender": "any",
+   "id": "newcomer",
+   "reputation": "警惕，勤快",
+   "resources": [
+    "一身力气和一张没写满的来历卡",
+    "镇上的人还不认得你"
+   ],
+   "risks": [
+    "你手上有一道旧伤，你不愿意说是怎么来的"
+   ],
+   "role": "新来的定居者",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "阿{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "老{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    45
+   ],
+   "baseline": "你跟着砌墙匠砌新墙，一块砖一块砖地垒，嵌进墙里的旧物都过过你的手。",
+   "gender": "any",
+   "id": "mason",
+   "reputation": "踏实，好奇",
+   "resources": [
+    "一手砌墙的活和一副好腰",
+    "集市的摊主都认得你"
+   ],
+   "risks": [
+    "你嵌过一件旧物，后来才知道它的来历卡是假的"
+   ],
+   "role": "砌墙的帮工",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "阿{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{given}师傅"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    50
+   ],
+   "baseline": "你在镇外开了几亩地，种子大半是从河对岸换来的，在集市上卖苗、卖种。",
+   "gender": "any",
+   "id": "seed_farmer",
+   "reputation": "实在，算得细",
+   "resources": [
+    "几亩地和一袋好种子",
+    "两岸跑货的人都跟你熟"
+   ],
+   "risks": [
+    "你的种子是从一个你不想见的人手里换来的"
+   ],
+   "role": "卖种子的农人",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}哥"
+    },
+    {
+     "gender": "any",
+     "pattern": "{given}姐"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    35,
+    58
+   ],
+   "baseline": "你是镇议会的议长，定居申请、修墙、分药，最后都要你点头。",
+   "gender": "any",
+   "id": "council_head",
+   "reputation": "稳重，顾全局",
+   "resources": [
+    "议会的表决权和一枚议长的章",
+    "镇上大半的人投过你的票"
+   ],
+   "risks": [
+    "灾变那年你做过一个决定，镇上只有几个人知道"
+   ],
+   "role": "镇议会的议长",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}议长"
+    },
+    {
+     "gender": "any",
+     "pattern": "老{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    30,
+    50
+   ],
+   "baseline": "你是巡夜队的队长，镇子的夜、便桥和那一排坏了一半的枪都归你管。",
+   "gender": "any",
+   "id": "patrol_captain",
+   "reputation": "硬朗，护短",
+   "resources": [
+    "巡夜队和问来历的权力",
+    "镇上的人睡觉前都要想一想你"
+   ],
+   "risks": [
+    "你放走过一个答不上来历的人"
+   ],
+   "role": "巡夜队队长",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}队长"
+    },
+    {
+     "gender": "any",
+     "pattern": "老{family}"
+    }
+   ]
+  }
+ ],
+ "premise": "灾难过去了，可灾难里欠下的债和做过的事没过去；正在重建的小镇，要不要记住这些？",
+ "pressures": [
+  {
+   "choice": "去求情，还是去对岸换",
+   "exits": [
+    {
+     "cost": "排在前面的人会恨你",
+     "option": "替最重的人去求"
+    },
+    {
+     "cost": "对岸要的是枪",
+     "option": "去河对岸换药"
+    }
+   ],
+   "far": {
+    "consequence": "下一批药过不了河，再病的人只能硬扛",
+    "due_days": 5,
+    "trigger": "药分完了"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_medicine",
+   "immediate": {
+    "minutes": 10,
+    "text": "领药的队伍里有人咳得直不起腰，后面的人往后退了一步"
+   },
+   "leverage": null,
+   "location_ids": [
+    "pharmacy",
+    "market_wall"
+   ],
+   "near": {
+    "deadline_minutes": 120,
+    "text": "药房关门"
+   },
+   "objective": "在药房关门之前，决定替不替谁去争那一盒",
+   "source": "money",
+   "start_minute": 960,
+   "tags": [],
+   "title": "最后三盒药",
+   "trigger": "药房的抗生素只剩最后三盒，今天来领药的有五个人"
+  },
+  {
+   "choice": "去问砌墙的，还是帮着查",
+   "exits": [
+    {
+     "cost": "砌墙匠会护着写卡的人",
+     "option": "去找砌墙匠问"
+    },
+    {
+     "cost": "被查出来的那个人会记住你",
+     "option": "帮着查"
+    }
+   ],
+   "far": {
+    "consequence": "墙上所有的来历卡都要被人怀疑",
+    "due_days": 7,
+    "trigger": "查出来"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_fake_card",
+   "immediate": {
+    "minutes": 10,
+    "text": "有人举着一张来历卡大声念，念到一半，念不下去了"
+   },
+   "leverage": null,
+   "location_ids": [
+    "market_wall",
+    "watch_post"
+   ],
+   "near": {
+    "deadline_minutes": 1440,
+    "text": "议会来查墙"
+   },
+   "objective": "在议会来查墙之前，弄清是哪一张",
+   "source": "rumor",
+   "start_minute": 1020,
+   "tags": [],
+   "title": "假的来历卡",
+   "trigger": "集市里有人说，墙上有一张来历卡是假的，嵌进去的旧物是从死人身上扒的"
+  },
+  {
+   "choice": "去桥上，还是去温室",
+   "exits": [
+    {
+     "cost": "风大水急，一脚踩空就是一条命",
+     "option": "去桥上帮着加固"
+    },
+    {
+     "cost": "桥上就少了一个人",
+     "option": "去温室帮着护菜"
+    }
+   ],
+   "far": {
+    "consequence": "镇子和对岸断了联系，药和种子一个月过不来",
+    "due_days": 30,
+    "trigger": "桥被冲断"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_typhoon",
+   "immediate": {
+    "minutes": 5,
+    "text": "一阵风刮过来，哐的一声，不知道哪里的铁皮被掀开了"
+   },
+   "leverage": null,
+   "location_ids": [
+    "footbridge",
+    "greenhouse"
+   ],
+   "near": {
+    "deadline_minutes": 240,
+    "text": "台风登陆"
+   },
+   "objective": "在台风登陆之前，决定去守哪一头",
+   "source": "nature",
+   "start_minute": 1080,
+   "tags": [
+    "disaster"
+   ],
+   "title": "台风",
+   "trigger": "收音机里说台风今夜到，河水已经漫上了便桥，对岸的药和种子还没运过来"
+  },
+  {
+   "choice": "挡在中间，还是去叫巡夜队",
+   "exits": [
+    {
+     "cost": "两边都会觉得你站错了",
+     "option": "挡在两个人中间"
+    },
+    {
+     "cost": "巡夜队来了，就要问第三次来历",
+     "option": "去叫巡夜队"
+    }
+   ],
+   "far": {
+    "consequence": "镇上会有人动手，十五年的规矩就破了",
+    "due_days": 1,
+    "trigger": "没人拦"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_raider_seen",
+   "immediate": {
+    "minutes": 5,
+    "text": "老住户手里的碗摔在地上，四下一下子静了"
+   },
+   "leverage": null,
+   "location_ids": [
+    "market_wall",
+    "footbridge"
+   ],
+   "near": {
+    "deadline_minutes": 30,
+    "text": "巡夜队来人"
+   },
+   "objective": "在有人动手之前，做点什么",
+   "source": "person",
+   "start_minute": 1050,
+   "tags": [
+    "violence"
+   ],
+   "title": "认出那张脸",
+   "trigger": "一个老住户突然指着一个人，说灾变那年烧镇子的就是这张脸"
+  },
+  {
+   "choice": "劝修补匠修，还是替修补匠挡回去",
+   "exits": [
+    {
+     "cost": "你就成了逼人破规矩的那个",
+     "option": "劝修补匠修"
+    },
+    {
+     "cost": "议会会记你一笔",
+     "option": "替修补匠挡回去"
+    }
+   ],
+   "far": {
+    "consequence": "巡夜队空着手守夜",
+    "due_days": 2,
+    "trigger": "枪没修好"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_gun_box",
+   "immediate": {
+    "minutes": 5,
+    "text": "木箱放在地上，油布滑下来，露出一截枪管"
+   },
+   "leverage": null,
+   "location_ids": [
+    "mending_stall",
+    "watch_post"
+   ],
+   "near": {
+    "deadline_minutes": 180,
+    "text": "天黑前"
+   },
+   "objective": "在天黑之前，决定这箱枪修不修",
+   "source": "institution",
+   "start_minute": 900,
+   "tags": [
+    "violence"
+   ],
+   "title": "一箱坏枪",
+   "trigger": "巡夜队把一箱坏枪抬到修补摊前，镇议会下了令：台风之后河对岸的人可能会来，今夜要修好"
+  },
+  {
+   "choice": "交给议会，还是塞回去",
+   "exits": [
+    {
+     "cost": "议会会翻出灾变那年的旧账",
+     "option": "把欠条交给议会"
+    },
+    {
+     "cost": "你就成了第二个知道的人",
+     "option": "把欠条塞回去"
+    }
+   ],
+   "far": {
+    "consequence": "欠债的人和债主的后人会当街算账",
+    "due_days": 3,
+    "trigger": "欠条传开"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_old_debt",
+   "immediate": {
+    "minutes": 5,
+    "text": "有人把一张从砖缝里掉出来的纸拍在桌上，纸上第一个字是“欠”"
+   },
+   "leverage": null,
+   "location_ids": [
+    "market_wall",
+    "mending_stall"
+   ],
+   "near": {
+    "deadline_minutes": 600,
+    "text": "天亮之前"
+   },
+   "objective": "在天亮之前，决定这张欠条交给谁",
+   "source": "accident",
+   "start_minute": 1140,
+   "tags": [],
+   "title": "砖缝里的欠条",
+   "trigger": "大风把墙上一件旧物刮了下来，背后藏着一张欠条，欠债的人还活着，就在镇上"
+  }
+ ],
+ "region": "废土上一座正在复兴的小镇，集市只收修好的东西",
+ "rules": [
+  {
+   "id": "r_mended_only",
+   "text": "集市只交换修好的东西；坏的东西不能买卖，只能送人。"
+  },
+  {
+   "id": "r_wall_relic",
+   "text": "每面新砌的墙都要嵌一件旧物，来历写在卡片上。"
+  },
+  {
+   "id": "r_three_asks",
+   "text": "巡夜队有权问任何人的来历，问三次不答，赶出镇外。"
+  },
+  {
+   "id": "r_medicine_book",
+   "text": "药房的每一盒药都要登记去向，领药的人按手印。"
+  },
+  {
+   "id": "r_bridge_name",
+   "text": "过便桥要报名字，守桥人记在桥头的木板上。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": null,
+ "status": "review",
+ "style_hint": "写旧和修：螺丝、灰浆、手写的来历卡、拆开的收音机、河水涨了几寸；人都在干活，说话简短，一句“还活着”就是问好。",
+ "tension_engines": [
+  {
+   "id": "te_medicine_short",
+   "text": "药房的存量见底"
+  },
+  {
+   "id": "te_fake_card",
+   "text": "墙上有一张来历卡是假的"
+  },
+  {
+   "id": "te_bridge_out",
+   "text": "台风要冲断便桥"
+  },
+  {
+   "id": "te_raider_back",
+   "text": "旧日的掠夺者回来定居了"
+  },
+  {
+   "id": "te_old_debt",
+   "text": "灾变那年欠下的债还在"
+  },
+  {
+   "id": "te_gun_request",
+   "text": "有人要修枪"
+  }
+ ],
+ "title": "修补集市",
+ "tone": [
+  "废土",
+  "重建",
+  "旧物",
+  "台风"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_medal_owner",
+   "requires": [
+    "wall_mason",
+    "clean_newcomer"
+   ],
+   "text": "{clean_newcomer.name}嵌进墙里的那枚勋章，原主人是{wall_mason.name}的亲人。"
+  },
+  {
+   "category": "关系",
+   "id": "t_bridge_name",
+   "requires": [
+    "bridge_keeper",
+    "clean_newcomer"
+   ],
+   "text": "{bridge_keeper.name}从木板上刮掉的那个名字，就是{clean_newcomer.name}当年的名字。"
+  },
+  {
+   "category": "人事",
+   "id": "t_ledger_page",
+   "requires": [
+    "pharmacist"
+   ],
+   "text": "有人发现{pharmacist.name}药账上灾变那年的一页，纸比别的页新。"
+  },
+  {
+   "category": "资源",
+   "id": "t_medicine_cache",
+   "requires": [],
+   "text": "拾荒的人在废墟里挖出一箱没开封的药，够全镇用一个月。"
+  },
+  {
+   "category": "时限",
+   "id": "t_typhoon_early",
+   "requires": [],
+   "text": "收音机里说台风提前了，天一黑就到。"
+  },
+  {
+   "category": "制度",
+   "id": "t_pair_asks",
+   "requires": [],
+   "text": "镇议会通过新规：问来历改成两个人一起问，问的人也要报自己的来历。"
+  },
+  {
+   "category": "意外",
+   "id": "t_wall_collapse",
+   "requires": [],
+   "text": "集市东边一面新墙塌了，砖缝里的旧物撒了一地，来历卡全混在了一起。"
+  }
+ ]
+}

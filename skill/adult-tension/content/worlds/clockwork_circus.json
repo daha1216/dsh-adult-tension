@@ -1,0 +1,2484 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "跟团跑了十年的成年吆喝手",
+   "age_range": [
+    25,
+    45
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_barker",
+   "line": "{npc.name}站在售票亭前扯着嗓子吆喝，城里的新闻和团里的闲话，都从{npc.ta}嘴里转一圈",
+   "location_ids": [
+    "ticket_booth",
+    "bonfire"
+   ],
+   "name": null,
+   "role": "拉客的吆喝手"
+  },
+  {
+   "adult_context": "团里的成年服装师",
+   "age_range": [
+    40,
+    60
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_dresser",
+   "line": "{npc.name}嘴里叼着一排别针，谁在镜子前多坐了一会儿、跟谁说了话，{npc.ta}都看在眼里",
+   "location_ids": [
+    "backstage"
+   ],
+   "name": null,
+   "role": "后台的服装师"
+  },
+  {
+   "adult_context": "跟团走了半辈子的成年厨子",
+   "age_range": [
+    45,
+    65
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_cook",
+   "line": "{npc.name}守着篝火边的大锅，谁错过了饭点，{npc.ta}都会留一碗",
+   "location_ids": [
+    "caravan_row",
+    "bonfire"
+   ],
+   "name": null,
+   "role": "团里的厨子"
+  },
+  {
+   "adult_context": "城里雇来的成年清扫工",
+   "age_range": [
+    50,
+    70
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_bench_sweeper",
+   "line": "{npc.name}一排一排扫看台，彩排时谁坐在哪里看了多久，{npc.ta}都知道",
+   "location_ids": [
+    "big_top"
+   ],
+   "name": null,
+   "role": "看台的清扫工"
+  },
+  {
+   "adult_context": "团里最老的成年团员",
+   "age_range": [
+    55,
+    72
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_lock_keeper",
+   "line": "{npc.name}腰上挂着后台的铜钥匙，没排班的人想进后台，得先过{npc.ta}这一关",
+   "location_ids": [
+    "backstage",
+    "big_top"
+   ],
+   "name": null,
+   "role": "管铜锁的老团员"
+  },
+  {
+   "adult_context": "城里的成年跑腿",
+   "age_range": [
+    20,
+    35
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_city_runner",
+   "line": "{npc.name}一天跑三趟营地，城里债主和督察的信都从{npc.ta}手里过",
+   "location_ids": [
+    "ticket_booth",
+    "big_top"
+   ],
+   "name": null,
+   "role": "城里送信的跑腿"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "你在彩排时扶过飞刀靶，那把刀擦着你的耳朵钉进木板；{knife_thrower.name}收刀时一句话没说，{stage_mechanic.name}当晚就把转盘拆了，叫你别往外说。",
+   "id": "k_roustabout_rig",
+   "identity_ids": [
+    "roustabout"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "stage_mechanic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{stage_mechanic.name}替你看过那只耳朵",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "knife_thrower",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{knife_thrower.name}那一刀以后，再没正眼看过你",
+     "stage": "acquainted"
+    },
+    {
+     "a": "stage_mechanic",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "knife_thrower",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{knife_thrower.name}知道是谁半夜进过{stage_mechanic.name}的车厢",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "stage_mechanic",
+    "knife_thrower"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想保住饭碗，又不想再站到那块靶子前",
+    "limit_gap": "今晚飞刀照常开演",
+    "meeting_reason": "你在团里打杂两年，这两个人都使唤过你",
+    "resource_gap": "{stage_mechanic.name}有图纸和签字，{knife_thrower.name}有十年的名声，你只有一只差点没了的耳朵"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "tension_engine_ids": [
+    "te_knife_rigged",
+    "te_teardown"
+   ]
+  },
+  {
+   "chemistry": "你是{trapeze_artist.name}的替补，练了两年还没上过一次梯子；{ringmaster.name}私下对你说，{trapeze_artist.name}约一满，那个位子就是你的。",
+   "id": "k_understudy_trapeze",
+   "identity_ids": [
+    "understudy"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 2
+     },
+     "b": "trapeze_artist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{trapeze_artist.name}替你缠过护手",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "ringmaster",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{ringmaster.name}许你的位子，没写在约上",
+     "stage": "acquainted"
+    },
+    {
+     "a": "trapeze_artist",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "ringmaster",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{ringmaster.name}还不知道{trapeze_artist.name}约满就走",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "trapeze_artist",
+    "ringmaster"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想上去飞，又不想踩着教你的人上去",
+    "limit_gap": "最后一场就在今晚",
+    "meeting_reason": "{trapeze_artist.name}手把手教过你，{ringmaster.name}签下了你",
+    "resource_gap": "{trapeze_artist.name}有全团最响的掌声，{ringmaster.name}有所有人的约，你只有两年的苦练"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_last_stop",
+    "te_old_contract"
+   ]
+  },
+  {
+   "chemistry": "你养的机械马和{puppeteer.name}的人偶都靠{stage_mechanic.name}上发条；{puppeteer.name}的人偶有一回在后台对你说：那天夜里车厢的门开过。",
+   "id": "k_tender_puppet",
+   "identity_ids": [
+    "beast_tender"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "puppeteer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{puppeteer.name}的人偶只跟你说过悄悄话",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "stage_mechanic",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{stage_mechanic.name}修好过你那匹失控的机械马",
+     "stage": "acquainted"
+    },
+    {
+     "a": "puppeteer",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "stage_mechanic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{puppeteer.name}一直想告诉{stage_mechanic.name}那一夜的事",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "puppeteer",
+    "stage_mechanic"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想弄清那一夜车厢里进了谁",
+    "limit_gap": "城里的收藏家今晚就来",
+    "meeting_reason": "你们三个常在后台等着上发条",
+    "resource_gap": "{stage_mechanic.name}有车厢和图纸，{puppeteer.name}有一具会说话的人偶，你有一圈机械兽"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_city_eyes",
+    "te_knife_rigged"
+   ]
+  },
+  {
+   "chemistry": "当年出事那一夜，伴奏的是你的手风琴；{old_hand.name}回来以后第一个找的就是你，{trapeze_artist.name}听说了，问你那一夜吊架上发生了什么。",
+   "id": "k_accordion_old",
+   "identity_ids": [
+    "accordionist"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 2
+     },
+     "b": "old_hand",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{old_hand.name}当年走的那天，你没去送",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "trapeze_artist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{trapeze_artist.name}上梯子前，总要等你那一个音",
+     "stage": "acquainted"
+    },
+    {
+     "a": "old_hand",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "trapeze_artist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "当年那一夜，{old_hand.name}在吊架下面",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "old_hand",
+    "trapeze_artist"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把那一夜说清楚，又怕说清楚以后就没有今晚这一场了",
+    "limit_gap": "今晚的最后一场，还是你伴奏",
+    "meeting_reason": "你跟{old_hand.name}在一个乐队里待过五年，{trapeze_artist.name}的每一场都是你伴奏",
+    "resource_gap": "{old_hand.name}有那份旧约，{trapeze_artist.name}有最后一场，你有一架记得那一夜节拍的手风琴"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_old_contract",
+    "te_last_stop"
+   ]
+  },
+  {
+   "chemistry": "马戏团欠着你的钱，第七夜之前还不上就要扣车；{ringmaster.name}说最后一场卖满就能还清，{trapeze_artist.name}私下来找过你，问你认不认得城里那家剧院的老板。",
+   "id": "k_patron_debt",
+   "identity_ids": [
+    "local_patron"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "ringmaster",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{ringmaster.name}请你坐过一回包厢",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "trapeze_artist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{trapeze_artist.name}落地谢幕时，往你的包厢看了一眼",
+     "stage": "stranger"
+    },
+    {
+     "a": "ringmaster",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "trapeze_artist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{trapeze_artist.name}是{ringmaster.name}的摇钱树",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "ringmaster",
+    "trapeze_artist"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把钱收回来，也想知道自己到底为什么借出去",
+    "limit_gap": "第七夜之前要还钱",
+    "meeting_reason": "马戏团进城那天，两个人都到你的商行来过",
+    "resource_gap": "你有那笔借款和城里的人脉，{ringmaster.name}有整个马戏团，{trapeze_artist.name}有一张约和一身功夫"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_teardown",
+    "te_last_stop"
+   ]
+  },
+  {
+   "chemistry": "你是城里派来查机关的督察，{stage_mechanic.name}的放行单上签名一笔不差；{ringmaster.name}请你喝了一杯，说第七夜之前一定要放行。",
+   "id": "k_inspector_sign",
+   "identity_ids": [
+    "safety_inspector"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "stage_mechanic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{stage_mechanic.name}给你看图纸时，一页也没藏",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "ringmaster",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{ringmaster.name}请你喝的那一杯，你没喝完",
+     "stage": "acquainted"
+    },
+    {
+     "a": "stage_mechanic",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "ringmaster",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{ringmaster.name}替{stage_mechanic.name}压下过一次事故",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "stage_mechanic",
+    "ringmaster"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把事故挡在开演之前，又知道停演会砸了一团人的饭碗",
+    "limit_gap": "第七夜之前要给结论",
+    "meeting_reason": "你来查机关这几天，两个人都陪你转过帐篷",
+    "resource_gap": "你有督察的签字权，{stage_mechanic.name}有图纸和放行单，{ringmaster.name}有一个等着卖满的最后一场"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "tension_engine_ids": [
+    "te_knife_rigged",
+    "te_city_eyes"
+   ]
+  },
+  {
+   "chemistry": "{knife_thrower.name}说昨天那一刀偏了是自己的手；{puppeteer.name}的人偶却在后台说，那天夜里有人进过机械师的车厢。",
+   "id": "k_knife_and_puppet",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "knife_thrower",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{knife_thrower.name}教过你怎么握刀",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "puppeteer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{puppeteer.name}的人偶冲你鞠过一躬",
+     "stage": "acquainted"
+    },
+    {
+     "a": "knife_thrower",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "puppeteer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "两个人那一夜都在后台",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "knife_thrower",
+    "puppeteer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在开演前弄清那半寸到底是谁的错",
+    "limit_gap": "离飞刀上场只剩几个钟头",
+    "meeting_reason": "你在后台和帐篷后面都碰见过这两个人",
+    "resource_gap": "{knife_thrower.name}有一排刀，{puppeteer.name}有一具会说话的人偶，你是两个人都肯说一句实话的人"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "tension_engine_ids": [
+    "te_knife_rigged",
+    "te_city_eyes"
+   ]
+  },
+  {
+   "chemistry": "{old_hand.name}带回来的那份旧约，见证人一栏签的是{stage_mechanic.name}；{ringmaster.name}说那份约早就作废了。",
+   "id": "k_three_contracts",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "ringmaster",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{ringmaster.name}在篝火边给你倒过酒",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "old_hand",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{old_hand.name}在售票亭前问过你团里还有谁",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "stage_mechanic",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{stage_mechanic.name}请你递过扳手",
+     "stage": "acquainted"
+    },
+    {
+     "a": "ringmaster",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 0
+     },
+     "b": "old_hand",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 0
+     },
+     "reason": "当年是{ringmaster.name}让{old_hand.name}走的",
+     "stage": "acquainted"
+    },
+    {
+     "a": "ringmaster",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "stage_mechanic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{stage_mechanic.name}欠着{ringmaster.name}一回",
+     "stage": "acquainted"
+    },
+    {
+     "a": "old_hand",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "stage_mechanic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{stage_mechanic.name}当年在那份约上签字时，手在抖",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "ringmaster",
+    "old_hand",
+    "stage_mechanic"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在拆帐之前，让那份约有个说法",
+    "limit_gap": "第七夜就要拆帐",
+    "meeting_reason": "三个人你都在篝火边碰见过",
+    "resource_gap": "{ringmaster.name}有所有的约，{old_hand.name}有那一份，{stage_mechanic.name}有见证人的签名，你是唯一一个跟那份约没关系的人"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_old_contract",
+    "te_teardown"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "distorted",
+   "id": "ch_barker_call",
+   "reach": "白天在售票亭前喊的，晚上全城都在传，传到第二天就变了一半",
+   "text": "吆喝手的嘴"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_sign_sheet",
+   "reach": "哪个机关、谁签的、几点签的，一笔不差",
+   "text": "放行单"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_bonfire_talk",
+   "reach": "团里的人散场后说的，第二天早上全营地都知道，各人说法不一样",
+   "text": "篝火边的闲话"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "马戏团的舞台机械师，成年人，团里每一个机关都出自这双手，每一次事故也都要这个人签字",
+   "age_range": [
+    28,
+    48
+   ],
+   "appearance_options": [
+    "工装背带上挂着一串大大小小的扳手",
+    "左手戴着一只皮护腕，护腕上用小刀刻满了日期"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说机关是{npc.ta}弄坏的"
+    ],
+    "contrast": "让所有人在半空里飞，自己的脚却从没离开过地面",
+    "core_value": "签了字，就得认",
+    "goal_options": [
+     "今晚每一个机关都平平安安",
+     "找出是谁锉了那颗齿",
+     "还清团主压下的那一笔"
+    ],
+    "never": [
+     "签一张不放心的放行单"
+    ],
+    "prefers": [
+     "先拆开查"
+    ],
+    "pressure_responses": {
+     "breaking": "把所有图纸烧掉，离团",
+     "high": "当着全团拒签压轴节目的放行单",
+     "low": "把一张放行单推过去，问对方敢不敢签",
+     "mid": "把锉过的齿轮放在对方手心"
+    },
+    "relationship_stance": "精确，倔",
+    "withdrawal": "夜里在车厢里一颗一颗擦齿轮"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "stage_mechanic",
+   "identity": {
+    "authority": "决定一个机关能不能上场",
+    "exposure": "{npc.ta}签过一张放行单，机关当晚就出了事，团主替{npc.ta}压了下来",
+    "hidden": "{npc.ta}发现飞刀转盘的齿被人锉过，锉痕是团里的工具留下的",
+    "limits": [
+     "谁签的谁认，出了事就是{npc.ta}的",
+     "团主催着新机关赶在第七夜前完工"
+    ],
+    "obligations": [
+     "每场开演前把所有机关过一遍手"
+    ],
+    "resources": [
+     "一节工坊车厢和满团的机关图纸",
+     "放行单上的签字"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方递扳手时递对了号",
+     "对方不催{npc.ta}签字"
+    ],
+    "boundaries": [
+     "车厢门关上了"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢离开地面一次的那个人",
+    "dislikes": [
+     "被当成一支签字的笔"
+    ],
+    "expression": "说出团主替{npc.ta}压下的那一次事故",
+    "likes": [
+     "车厢里两个人对着一盏灯拆同一个机关"
+    ],
+    "preconditions": [
+     "机关还没过完"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "舞台机械师",
+   "schedule": [
+    {
+     "from": 540,
+     "location_id": "workshop_wagon",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "big_top",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "workshop_wagon",
+     "to": 1380
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "出了事，{npc.ta}认",
+      "option": "签"
+     },
+     {
+      "cost": "团主会把那一次旧事翻出来",
+      "option": "不签"
+     }
+    ],
+    "pressure": "签了，那颗被锉过的齿就成了{npc.ta}的账；不签，压轴就开不了场",
+    "trigger": "团主要{npc.ta}今晚之前签好压轴节目的放行单"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "voices": {
+    "inner": "“我签过一张放行单，那天晚上有人从半空掉了下来。”",
+    "surface": "“这一颗齿被人锉过。不是我锉的。”"
+   }
+  },
+  {
+   "adult_context": "空中飞人，成年人，签了五年的约，还剩最后一站",
+   "age_range": [
+    24,
+    36
+   ],
+   "appearance_options": [
+    "一身缀着亮片的紧身演出服，外面披一件旧毛衣",
+    "手掌上全是老茧，笑起来眼睛弯成两道"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说只是团主的摇钱树"
+    ],
+    "contrast": "在半空里飞了五年，落地以后却不知道往哪里去",
+    "core_value": "最后一场，要飞得最好看",
+    "goal_options": [
+     "把最后一场飞完",
+     "体面地离团",
+     "带一个人一起走"
+    ],
+    "never": [
+     "在最后一场摔下来"
+    ],
+    "prefers": [
+     "先上梯子"
+    ],
+    "pressure_responses": {
+     "breaking": "不系搭扣，空手上梯子",
+     "high": "当着团主的面说出约满就走",
+     "low": "冲对方笑一笑，问对方签了没有",
+     "mid": "把护手的布条递给对方，让对方替{npc.ta}缠"
+    },
+    "relationship_stance": "明亮，任性",
+    "withdrawal": "夜里在篷车顶上压腿，看这座城的灯"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "trapeze_artist",
+   "identity": {
+    "authority": "决定最后一场飞不飞",
+    "exposure": "{npc.ta}已经和城里的一家剧院说好了，约一满就走，团主还不知道",
+    "hidden": "{npc.ta}知道搭扣的销子松了，还是打算上",
+    "limits": [
+     "约满之前离团要赔一整季的票钱",
+     "肩膀的旧伤越来越疼"
+    ],
+    "obligations": [
+     "每场上梯子前要听人喊一声{npc.ta}的名字"
+    ],
+    "resources": [
+     "一身空中的功夫",
+     "全团最响的掌声"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在下面喊{npc.ta}名字时声音最响",
+     "对方替{npc.ta}缠过护手"
+    ],
+    "boundaries": [
+     "篷车顶上只有两个人"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}想带着一起走的那个人",
+    "dislikes": [
+     "被当成一件道具"
+    ],
+    "expression": "说出约满以后要去哪",
+    "likes": [
+     "从梯子上下来，落进一个人怀里"
+    ],
+    "preconditions": [
+     "还没上梯子"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "空中飞人",
+   "schedule": [
+    {
+     "from": 900,
+     "location_id": "big_top",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "backstage",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "caravan_row",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "{npc.ta}的肩膀和销子都可能撑不住",
+      "option": "照飞"
+     },
+     {
+      "cost": "换搭扣要团主点头",
+      "option": "求机械师换搭扣"
+     }
+    ],
+    "pressure": "不飞，赔一季的票钱；飞，可能就是最后一次",
+    "trigger": "最后一场就在今晚，搭扣的销子松了一线"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "voices": {
+    "inner": "“约一满我就走。城里有一家剧院在等我，团主还不知道。”",
+    "surface": "“最后一场了。你签了吧？”"
+   }
+  },
+  {
+   "adult_context": "机械马戏团的团主，成年人，用一份份旧约把整个马戏团拴在一起",
+   "age_range": [
+    40,
+    60
+   ],
+   "appearance_options": [
+    "一顶缎面高礼帽，帽檐下一双笑眯眯的眼睛",
+    "怀表从不离手，开口前先看一眼表"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说把大家当牲口拴着"
+    ],
+    "contrast": "把一群没有家的人拴成一个家，自己却从来不知道该把心拴在哪里",
+    "core_value": "马戏团就是家，家规就是约",
+    "goal_options": [
+     "把团完整地带到下一座城",
+     "把旧约的事压下去",
+     "让最后一场卖满"
+    ],
+    "never": [
+     "让马戏团散在半路"
+    ],
+    "prefers": [
+     "先看账"
+    ],
+    "pressure_responses": {
+     "breaking": "第七夜不吹哨，把团留在这座城",
+     "high": "当着全团撕掉一个人的约，把那人赶出团",
+     "low": "拍拍对方的肩，说“一家人，不说两家话”",
+     "mid": "从怀里抽出一份约，放在对方面前"
+    },
+    "relationship_stance": "热络，狠",
+    "withdrawal": "夜里在篷车里一份一份翻旧约"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "ringmaster",
+   "identity": {
+    "authority": "决定谁跟着走、谁留下",
+    "exposure": "{npc.ta}当年用一份旧约留下了一个人，那个人后来死在了场上",
+    "hidden": "那颗被锉过的齿，是{npc.ta}让人锉的，想让飞刀出点事好卖票",
+    "limits": [
+     "马戏团欠着城里的钱，第七夜之前还不上就要被扣车",
+     "当年离团的那个人回来了"
+    ],
+    "obligations": [
+     "每座城的第七夜都要亲自吹拆帐的哨子"
+    ],
+    "resources": [
+     "全团所有人的约和一本账簿",
+     "这一路每座城的票房"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不怕{npc.ta}的约",
+     "对方叫{npc.ta}名字而不是叫“团主”"
+    ],
+    "boundaries": [
+     "帐篷里没有别人"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢撕掉一份约的那个人",
+    "dislikes": [
+     "被当成一本账簿"
+    ],
+    "expression": "说出死在场上的那个人是谁",
+    "likes": [
+     "散场后空荡荡的大帐篷里只剩两个人"
+    ],
+    "preconditions": [
+     "怀表还没合上"
+    ],
+    "self_control_range": [
+     2,
+     5
+    ]
+   },
+   "public_role": "团主",
+   "schedule": [
+    {
+     "from": 900,
+     "location_id": "ticket_booth",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "big_top",
+     "to": 1320
+    },
+    {
+     "from": 1321,
+     "location_id": "bonfire",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "出了事，账算在机械师头上",
+      "option": "逼机械师签字"
+     },
+     {
+      "cost": "那个人会恨{npc.ta}一辈子",
+      "option": "拿一个人的约去抵债"
+     }
+    ],
+    "pressure": "最后一场必须卖满，压轴节目必须上",
+    "trigger": "城里的债主说第七夜之前还不上钱就扣车"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "voices": {
+    "inner": "“我用一份约留下过一个人。那个人死在了场上。”",
+    "surface": "“一家人，不说两家话。你那份约，我替你收着。”"
+   }
+  },
+  {
+   "adult_context": "飞刀手，成年人，十年里一刀都没失过手，直到昨天的彩排",
+   "age_range": [
+    28,
+    45
+   ],
+   "appearance_options": [
+    "腰上一排刀鞘，每把刀柄都缠着不同颜色的布",
+    "眼神很稳，握手却很轻"
+   ],
+   "decision": {
+    "avoids": [
+     "被人说手抖了"
+    ],
+    "contrast": "十年没让一把刀落错地方，却不知道自己的手是从哪天开始抖的",
+    "core_value": "刀不会骗人，手会",
+    "goal_options": [
+     "今晚一刀都不偏",
+     "查清转盘是谁动的",
+     "让靶上的人不再怕"
+    ],
+    "never": [
+     "对着一个怕{npc.ta}的人出刀"
+    ],
+    "prefers": [
+     "先磨刀"
+    ],
+    "pressure_responses": {
+     "breaking": "把刀全扔进河里，不再上场",
+     "high": "当众说出半夜进车厢的人是谁",
+     "low": "把一把刀柄递给对方，让对方摸摸稳不稳",
+     "mid": "当着对方的面把一把刀钉进木板正中"
+    },
+    "relationship_stance": "沉稳，内疚",
+    "withdrawal": "夜里一个人在帐篷后面对着木板练刀，一刀一刀"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "knife_thrower",
+   "identity": {
+    "authority": "决定一把刀落在哪里",
+    "exposure": "{npc.ta}昨天那一刀偏了半寸，不全是转盘的错，{npc.ta}的手也抖了",
+    "hidden": "{npc.ta}知道是谁半夜进过机械师的车厢",
+    "limits": [
+     "转盘被人动过，手再稳也没用",
+     "靶上的搭档开始怕{npc.ta}了"
+    ],
+    "obligations": [
+     "每场开演前把每一把刀磨一遍"
+    ],
+    "resources": [
+     "一手十年没失过手的飞刀",
+     "全团最信得过的手"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方敢站在{npc.ta}的靶前",
+     "对方握过{npc.ta}的手说不抖"
+    ],
+    "boundaries": [
+     "帐篷后面没有人"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}的手重新稳下来的那个人",
+    "dislikes": [
+     "被当成一把刀"
+    ],
+    "expression": "承认昨天那一刀是自己的手抖了",
+    "likes": [
+     "两个人隔着一块木板对视"
+    ],
+    "preconditions": [
+     "刀还没磨完"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "飞刀手",
+   "schedule": [
+    {
+     "from": 900,
+     "location_id": "big_top",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "backstage",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "bonfire",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "那半寸还可能再偏一次",
+      "option": "上"
+     },
+     {
+      "cost": "今晚的飞刀就没了",
+      "option": "让机械师拆转盘"
+     }
+    ],
+    "pressure": "上场，靶上的人可能流血；不上，团主会说{npc.ta}怕了",
+    "trigger": "今晚的飞刀照常开演，转盘还没修好"
+   },
+   "tags": [
+    "bodily_harm"
+   ],
+   "voices": {
+    "inner": "“昨天那一刀偏了半寸。不全是转盘，是我的手。”",
+    "surface": "“你摸摸这把刀柄，稳不稳？”"
+   }
+  },
+  {
+   "adult_context": "几年前离团的旧人，成年人，带着团主签过字的旧约回来了",
+   "age_range": [
+    32,
+    50
+   ],
+   "appearance_options": [
+    "一件城里人的呢子大衣，袖口却磨出了马戏团的绳痕",
+    "说话时总往帐篷顶上看，像在找什么"
+   ],
+   "decision": {
+    "avoids": [
+     "被人当成逃兵"
+    ],
+    "contrast": "被赶出了唯一的家，回来却发现家里已经没有自己的位子",
+    "core_value": "约是约，账是账",
+    "goal_options": [
+     "让团主当着全团认下旧约",
+     "拿回该拿的那份钱",
+     "再进一次大帐篷"
+    ],
+    "never": [
+     "拿旧约换钱以外的东西"
+    ],
+    "prefers": [
+     "先看人"
+    ],
+    "pressure_responses": {
+     "breaking": "把旧约投进篝火，转身走",
+     "high": "当着全团念出旧约",
+     "low": "把旧约折起来又展开，问对方想不想看",
+     "mid": "指着帐篷顶上的吊架，讲当年那一夜"
+    },
+    "relationship_stance": "冷，念旧",
+    "withdrawal": "夜里在营地外面绕着篷车走，一辆一辆认"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "old_hand",
+   "identity": {
+    "authority": "决定那份旧约要不要摊开",
+    "exposure": "旧约里写着团主当年答应过、没做到的事，那件事害死了一个人",
+    "hidden": "{npc.ta}当年离团，是团主赶走的，不是自己逃的",
+    "limits": [
+     "离团这几年过得不好，钱都花光了",
+     "团里很多人以为{npc.ta}当年是逃走的"
+    ],
+    "obligations": [
+     "每到一座城都去马戏团的售票亭前站一站"
+    ],
+    "resources": [
+     "一份团主签过字的旧约",
+     "记得团里每一个老人的秘密"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方听{npc.ta}讲完那一夜",
+     "对方给{npc.ta}在篝火边留了位子"
+    ],
+    "boundaries": [
+     "营地的灯都熄了"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}觉得回来也值的那个人",
+    "dislikes": [
+     "被当成一个讨债的"
+    ],
+    "expression": "把旧约交给对方保管",
+    "likes": [
+     "两个人坐在空看台上看吊架"
+    ],
+    "preconditions": [
+     "旧约还在怀里"
+    ],
+    "self_control_range": [
+     2,
+     5
+    ]
+   },
+   "public_role": "回来的旧人",
+   "schedule": [
+    {
+     "from": 900,
+     "location_id": "ticket_booth",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "bonfire",
+     "to": 1320
+    },
+    {
+     "from": 1321,
+     "location_id": "caravan_row",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "当年那个人就白死了",
+      "option": "私下谈"
+     },
+     {
+      "cost": "团主会让{npc.ta}再也进不了营地",
+      "option": "当众念"
+     }
+    ],
+    "pressure": "不提，钱也许能拿到；提，那件事就压不住了",
+    "trigger": "团主答应今晚见{npc.ta}，条件是不在全团面前提旧约"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“那年我不是逃走的。是团主让我走的。”",
+    "surface": "“你想看看这份约吗？团主的字，你应该认得。”"
+   }
+  },
+  {
+   "adult_context": "机械人偶的操偶师，成年人，演出时从不露脸，人偶会说话，操偶师自己几乎不开口",
+   "age_range": [
+    25,
+    45
+   ],
+   "appearance_options": [
+    "一身黑衣，十根手指上都缠着细细的牵线",
+    "说话很轻，常常说一半就停，像在等人偶替自己说完"
+   ],
+   "decision": {
+    "avoids": [
+     "被人当成哑巴"
+    ],
+    "contrast": "替一个木头人说了几千句台词，自己的一句却总卡在喉咙里",
+    "core_value": "让人偶说，我听着",
+    "goal_options": [
+     "保住人偶不被卖掉",
+     "把看见的事说出来，一次",
+     "让人偶说一句{npc.ta}自己的话"
+    ],
+    "never": [
+     "让人偶说一句假话"
+    ],
+    "prefers": [
+     "先让人偶说"
+    ],
+    "pressure_responses": {
+     "breaking": "剪断所有的牵线，自己开口",
+     "high": "当着全团让人偶说出那一夜看见了谁",
+     "low": "让人偶向对方鞠一躬，自己躲在后面",
+     "mid": "让人偶说出一句只有对方听得懂的话"
+    },
+    "relationship_stance": "安静，敏感",
+    "withdrawal": "夜里坐在后台给人偶上发条，跟它小声说话"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "puppeteer",
+   "identity": {
+    "authority": "决定人偶在台上说什么",
+    "exposure": "{npc.ta}看见过是谁半夜溜进了机械师的车厢",
+    "hidden": "人偶说的台词，有一半是{npc.ta}自己想说却说不出口的",
+    "limits": [
+     "人偶的发条快坏了，只有机械师会修",
+     "团主想把人偶卖给城里的收藏家"
+    ],
+    "obligations": [
+     "每场开演前给人偶上一回发条"
+    ],
+    "resources": [
+     "一具会说话的机械人偶",
+     "后台每一面镜子后面的事都看得见"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方听得懂人偶话里的话",
+     "对方等{npc.ta}自己开口"
+    ],
+    "boundaries": [
+     "后台只剩两个人"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢自己开口的那个人",
+    "dislikes": [
+     "被当成人偶的影子"
+    ],
+    "expression": "不借人偶，自己说一句心里话",
+    "likes": [
+     "两个人在后台给人偶上发条，手碰在一起"
+    ],
+    "preconditions": [
+     "人偶还在台上"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "操偶师",
+   "schedule": [
+    {
+     "from": 900,
+     "location_id": "backstage",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "big_top",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "backstage",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "那就成了第二个动机关的人",
+      "option": "求机械师在发条里做点手脚"
+     },
+     {
+      "cost": "团主会当场把{npc.ta}赶出团",
+      "option": "让人偶在最后一场说出真相"
+     }
+    ],
+    "pressure": "卖了，{npc.ta}就再也说不出话了",
+    "trigger": "团主今晚就要把人偶卖给城里的收藏家"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“那天夜里，我看见有人进了机械师的车厢。我只告诉过它。”",
+    "surface": "“它说……它说你今天很好看。是它说的。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "第七天的午后，最后一场开演前",
+  "minute": 900
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "bodily_harm"
+ ],
+ "custom": false,
+ "customs": [
+  "开演前所有人在帐篷中央碰一下拳，谁也不许缺。",
+  "拆帐的最后一夜，每个人往篝火里扔一样这座城里得来的东西。",
+  "新来的人要在帐篷柱上刻自己名字的头一个字。",
+  "飞人上梯子前，下面的人要喊一声对方的名字。",
+  "离团的人，走的时候不许回头看帐篷。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "吊架在头顶轻轻晃",
+    "飞刀钉进木板，嗡的一声",
+    "看台上有人鼓了两下掌，又停了"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [],
+   "id": "a_rehearsal",
+   "location_ids": [
+    "big_top"
+   ],
+   "start_minute": 960,
+   "tags": [],
+   "title": "看一场彩排"
+  },
+  {
+   "beats": [
+    "镜子里有人从你身后走过",
+    "衣架上的亮片哗啦响了一声",
+    "铜锁被人从外面拧了一圈"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_mirror",
+   "location_ids": [
+    "backstage"
+   ],
+   "start_minute": 1080,
+   "tags": [],
+   "title": "在后台化妆镜前坐一会儿"
+  },
+  {
+   "beats": [
+    "一枚弹簧弹到了地上",
+    "图纸上有一处被人用铅笔改过",
+    "车门外有人敲了两下"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [],
+   "id": "a_wagon_help",
+   "location_ids": [
+    "workshop_wagon"
+   ],
+   "start_minute": 1000,
+   "tags": [],
+   "title": "在机械师的车厢帮把手"
+  },
+  {
+   "beats": [
+    "机械马的眼珠转了一下",
+    "隔壁篷车的窗帘拉开了一条缝",
+    "有人在车顶上捆行李"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_wind_horse",
+   "location_ids": [
+    "caravan_row"
+   ],
+   "start_minute": 1140,
+   "tags": [],
+   "title": "给机械马上发条"
+  },
+  {
+   "beats": [
+    "排队的人说昨晚飞刀偏了",
+    "售票的人把一张票多给了你",
+    "有个生人一直往帐篷里看"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_booth_chat",
+   "location_ids": [
+    "ticket_booth"
+   ],
+   "start_minute": 930,
+   "tags": [],
+   "title": "在售票亭前听城里的议论"
+  },
+  {
+   "beats": [
+    "有人往火里扔了一样这座城里得来的东西",
+    "土豆烤焦了一半",
+    "篝火对面有人一直看着你"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [],
+   "id": "a_bonfire_night",
+   "location_ids": [
+    "bonfire"
+   ],
+   "start_minute": 1320,
+   "tags": [],
+   "title": "在篝火边坐到散"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "架空的维多利亚风格年代",
+ "extends": null,
+ "forbidden_terms": [
+  "手机",
+  "电话",
+  "汽车",
+  "电灯",
+  "电脑",
+  "学生",
+  "少女",
+  "少年",
+  "校园",
+  "皇帝",
+  "魔法"
+ ],
+ "hooks": [
+  {
+   "id": "h_wrench_pass",
+   "kind": "approach",
+   "location_ids": [
+    "workshop_wagon",
+    "big_top",
+    "backstage"
+   ],
+   "slot": "stage_mechanic",
+   "text": "{npc.name}把一把扳手塞到你手里：“帮我扶着，别松。”"
+  },
+  {
+   "id": "h_gear_palm",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "stage_mechanic",
+   "text": "{npc.name}把一枚齿轮放在你掌心，用指尖点了点上面的锉痕：“你看这儿。”"
+  },
+  {
+   "id": "h_ladder_smile",
+   "kind": "approach",
+   "location_ids": [
+    "big_top"
+   ],
+   "slot": "trapeze_artist",
+   "text": "{npc.name}已经爬上了梯子，回头冲你笑：“喊我的名字，我就上去了。”"
+  },
+  {
+   "id": "h_wrap_hands",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "trapeze_artist",
+   "text": "{npc.name}把护手的布条递给你，伸出两只手：“帮我缠，紧一点。”"
+  },
+  {
+   "id": "h_top_hat",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "ringmaster",
+   "text": "{npc.name}摘下礼帽冲你行了个礼：“一家人，别客气。”"
+  },
+  {
+   "id": "h_watch_glance",
+   "kind": "observe",
+   "location_ids": [],
+   "slot": "ringmaster",
+   "text": "{npc.name}看了一眼怀表，又抬头看了你一眼，合上表盖的声音很响"
+  },
+  {
+   "id": "h_blade_palm",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "knife_thrower",
+   "text": "{npc.name}握住你的手腕，把一把刀放进你掌心：“别怕，刀尖朝外。”"
+  },
+  {
+   "id": "h_board_look",
+   "kind": "observe",
+   "location_ids": [
+    "big_top",
+    "bonfire"
+   ],
+   "slot": "knife_thrower",
+   "text": "{npc.name}站在木板前，刀在指间转着，眼睛却一直落在你身上"
+  },
+  {
+   "id": "h_contract_show",
+   "kind": "approach",
+   "location_ids": [
+    "bonfire"
+   ],
+   "slot": "old_hand",
+   "text": "{npc.name}在篝火边给你挪出位子，把一份旧约折了又展开：“想看吗？”"
+  },
+  {
+   "id": "h_old_seat",
+   "kind": "approach",
+   "location_ids": [
+    "big_top"
+   ],
+   "slot": "old_hand",
+   "text": "{npc.name}拉你在空看台上坐下：“当年我就坐在这里看吊架。”"
+  },
+  {
+   "id": "h_puppet_bow",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "puppeteer",
+   "text": "{npc.name}让人偶冲你鞠了一躬，人偶细声细气地说：“你来了。”"
+  },
+  {
+   "id": "h_string_tangle",
+   "kind": "accident",
+   "location_ids": [
+    "backstage"
+   ],
+   "slot": "puppeteer",
+   "text": "{npc.name}手里的牵线缠到了你手腕上，两个人越解越近"
+  }
+ ],
+ "id": "clockwork_circus",
+ "locations": [
+  {
+   "affordances": [
+    "在沙地圆场中间站一会儿",
+    "抬头看空中吊架",
+    "坐在看台第一排看彩排"
+   ],
+   "detail": "红白条纹的大帐篷，中间一个沙地圆场，头顶垂着空中吊架和飞刀机关的转盘，看台上的木凳磨得发亮。",
+   "exits": [
+    "backstage",
+    "ticket_booth"
+   ],
+   "id": "big_top",
+   "name": "大帐篷",
+   "pressure_modifiers": {
+    "p_inspector": "看台第一排坐着一个拿本子的生人。",
+    "p_knife_rig": "飞刀靶上新钉了一把刀，离靶心偏了半寸。",
+    "p_storm": "顶棚中间鼓起一个大水包。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "开演时满场都是眼睛，彩排时看台上也总坐着几个人",
+   "witnesses": [
+    "bg_bench_sweeper"
+   ]
+  },
+  {
+   "affordances": [
+    "在化妆镜前坐一会儿",
+    "拨一拨衣架上的亮片演出服",
+    "看铜锁上挂的排班牌"
+   ],
+   "detail": "大帐篷背后用帆布隔出来的后台，一排化妆镜、一排衣架，入口挂着一把铜锁，反拧两圈才开。",
+   "exits": [
+    "big_top",
+    "workshop_wagon",
+    "caravan_row"
+   ],
+   "id": "backstage",
+   "name": "后台",
+   "pressure_modifiers": {
+    "p_buckle_rumor": "衣架后面有两个人在小声说话，一见人来就散了。",
+    "p_inspector": "铜锁上贴了一张督察的封条，还没撕。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "只有排了班的人能进；谁跟谁在镜子前说了什么，镜子里的人都看得见",
+   "witnesses": [
+    "bg_dresser",
+    "bg_lock_keeper"
+   ]
+  },
+  {
+   "affordances": [
+    "看墙上挂的机关图纸",
+    "拿起一枚齿轮对着灯看",
+    "在工作台边坐下，看那份没签名的放行单"
+   ],
+   "detail": "一节改成工坊的篷车，满墙挂着齿轮、弹簧和图纸，工作台上摊着一份没签名的放行单。",
+   "exits": [
+    "backstage"
+   ],
+   "id": "workshop_wagon",
+   "name": "机械师的车厢",
+   "pressure_modifiers": {
+    "p_knife_rig": "工作台上摆着拆下来的转盘，有一颗齿明显被锉过。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "只有机械师和被请进来的人；车门一关，外面只听得见锉刀的声音",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "在篷车的台阶上坐一会儿",
+    "给机械马上一回发条",
+    "数一数哪几扇窗还亮着"
+   ],
+   "detail": "帐篷后面一圈篷车，团里的人都住在这里，晾着衣服，拴着机械马，夜里每扇小窗都亮一盏灯。",
+   "exits": [
+    "backstage",
+    "bonfire"
+   ],
+   "id": "caravan_row",
+   "name": "篷车营地",
+   "pressure_modifiers": {
+    "p_buckle_rumor": "飞人的篷车窗帘拉得严严实实。",
+    "p_teardown": "好几辆篷车已经开始往车顶上捆行李。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "团里的人抬头不见低头见，谁进了谁的篷车，第二天全团都知道",
+   "witnesses": [
+    "bg_cook"
+   ]
+  },
+  {
+   "affordances": [
+    "看玻璃上那张盖着红戳的海报",
+    "听排队的人议论昨晚的演出",
+    "跟售票的人搭两句话"
+   ],
+   "detail": "帐篷入口的售票亭，玻璃上贴着这座城的演出海报，第七夜那一张盖着“最后一场”的红戳。",
+   "exits": [
+    "big_top",
+    "bonfire"
+   ],
+   "id": "ticket_booth",
+   "name": "售票亭",
+   "pressure_modifiers": {
+    "p_old_hand": "售票亭前站着一个不排队的人，一直往帐篷里看。",
+    "p_storm": "售票亭的遮雨棚被风掀起了一角。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "城里的人在这里排队买票、打听，团里的人和城里的人在这里碰面",
+   "witnesses": [
+    "bg_barker",
+    "bg_city_runner"
+   ]
+  },
+  {
+   "affordances": [
+    "往篝火里添一根柴",
+    "接过一个烤得焦黑的土豆",
+    "听团里的人讲上一座城"
+   ],
+   "detail": "篷车营地外的一片空地，每夜散场后团里的人在这里生一堆篝火，烤土豆、喝酒、讲上一座城的事。",
+   "exits": [
+    "caravan_row",
+    "ticket_booth"
+   ],
+   "id": "bonfire",
+   "name": "篝火空地",
+   "pressure_modifiers": {
+    "p_old_hand": "篝火边的人都不说话了，看着营地入口。",
+    "p_teardown": "篝火边堆着几个打好的包袱。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "篝火边坐着的都是团里的人，城里的人很少进来",
+   "witnesses": [
+    "bg_cook",
+    "bg_barker"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "布莱克",
+   "温特",
+   "霍尔",
+   "格林",
+   "卡弗",
+   "罗斯",
+   "菲奇",
+   "哈德",
+   "莱恩",
+   "莫利",
+   "克劳",
+   "威洛",
+   "贝尔",
+   "杜兰"
+  ],
+  "given_female": [
+   "伊芙",
+   "罗莎",
+   "莉莉安",
+   "格蕾",
+   "玛格",
+   "艾琳",
+   "薇洛",
+   "黛西",
+   "奥莉",
+   "克拉拉",
+   "汉娜",
+   "菲比"
+  ],
+  "given_male": [
+   "埃德蒙",
+   "西奥",
+   "亚瑟",
+   "奥斯卡",
+   "雨果",
+   "费利克斯",
+   "伯纳",
+   "塞拉斯",
+   "托比",
+   "杰斯珀",
+   "莱昂",
+   "本尼"
+  ],
+  "given_neutral": [
+   "杰米",
+   "弗兰",
+   "阿什",
+   "罗宾",
+   "萨姆",
+   "芬",
+   "泰",
+   "卡西",
+   "洛伦",
+   "艾弗",
+   "诺尔",
+   "帕特"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "{given}"
+   },
+   {
+    "gender": "any",
+    "pattern": "小{given}"
+   },
+   {
+    "gender": "female",
+    "pattern": "{given}小姐"
+   },
+   {
+    "gender": "male",
+    "pattern": "{given}先生"
+   }
+  ],
+  "order": "given_first"
+ },
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 19 个）。机关事故打 bodily_harm。西式名，名在前。性别按会话偏好生成（D15）。",
+ "player_identities": [
+  {
+   "age_range": [
+    20,
+    40
+   ],
+   "baseline": "你在马戏团打杂，搭帐篷、扶靶子、给机械马上发条，什么活都干。",
+   "gender": "any",
+   "id": "roustabout",
+   "reputation": "能干，话少",
+   "resources": [
+    "一身力气和一双巧手",
+    "团里每个人都使唤过你"
+   ],
+   "risks": [
+    "你在彩排时扶过飞刀靶，那把刀擦着你的耳朵过去了"
+   ],
+   "role": "帐篷杂工",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "小{given}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    20,
+    32
+   ],
+   "baseline": "你是空中飞人的替补，练了两年，还没在正式演出里上过一次梯子。",
+   "gender": "any",
+   "id": "understudy",
+   "reputation": "要强，心急",
+   "resources": [
+    "一身练了两年的功夫",
+    "团里的人都说你迟早会上去"
+   ],
+   "risks": [
+    "团主私下许过你一个位子"
+   ],
+   "role": "空中飞人的替补",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "小{given}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    45
+   ],
+   "baseline": "你照看团里的机械马和机械熊，给它们上发条、换齿轮，在场上让它们听话。",
+   "gender": "any",
+   "id": "beast_tender",
+   "reputation": "温和，耐心",
+   "resources": [
+    "一圈机械兽和一手驯养的本事",
+    "城里的观众最爱看你的节目"
+   ],
+   "risks": [
+    "你的机械马有一回在场上失控，被人压了下来"
+   ],
+   "role": "机械兽的驯养师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}师傅"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    50
+   ],
+   "baseline": "你在马戏团的乐队里拉手风琴，每一个节目的节拍都是你定的。",
+   "gender": "any",
+   "id": "accordionist",
+   "reputation": "风趣，记性好",
+   "resources": [
+    "一架手风琴和一肚子曲子",
+    "团里每个人上场前都要看你一眼"
+   ],
+   "risks": [
+    "当年出事那一夜，伴奏的是你"
+   ],
+   "role": "乐队的手风琴手",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    32,
+    55
+   ],
+   "baseline": "你是这座城里的商人，马戏团来之前向你借了一笔钱，第七夜之前要还。",
+   "gender": "any",
+   "id": "local_patron",
+   "reputation": "精明，好奇",
+   "resources": [
+    "一笔借给马戏团的钱和城里的人脉",
+    "市政厅里有你的熟人"
+   ],
+   "risks": [
+    "你借钱给马戏团，不全是为了利息"
+   ],
+   "role": "投资马戏团的本城商人",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}老板"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    30,
+    52
+   ],
+   "baseline": "你是市政厅派来查马戏团机关的督察，第七夜之前，你说一句话就能让压轴节目停演。",
+   "gender": "any",
+   "id": "safety_inspector",
+   "reputation": "较真，冷静",
+   "resources": [
+    "督察的签字权",
+    "市政厅在你背后"
+   ],
+   "risks": [
+    "上一座城的事故报告，你看过"
+   ],
+   "role": "城里派来的机关督察",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}督察"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    }
+   ]
+  }
+ ],
+ "premise": "马戏团是一个家，也是一座笼子；第七夜拆帐篷的时候，谁跟着走，谁留下？",
+ "pressures": [
+  {
+   "choice": "拆开查，还是照常开演",
+   "exits": [
+    {
+     "cost": "今晚的飞刀就开不了场",
+     "option": "拆开机关查"
+    },
+    {
+     "cost": "那半圈说不定还会再多一次",
+     "option": "照常开演"
+    }
+   ],
+   "far": {
+    "consequence": "靶上的人会流血，签字的机械师要担责",
+    "due_days": 1,
+    "trigger": "机关带病上场"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_knife_rig",
+   "immediate": {
+    "minutes": 5,
+    "text": "刀柄还在木板上嗡嗡地颤"
+   },
+   "leverage": null,
+   "location_ids": [
+    "big_top",
+    "workshop_wagon"
+   ],
+   "near": {
+    "deadline_minutes": 240,
+    "text": "今晚开演"
+   },
+   "objective": "在今晚开演之前，决定这台机关上不上场",
+   "source": "accident",
+   "start_minute": 900,
+   "tags": [
+    "bodily_harm"
+   ],
+   "title": "多转的半圈",
+   "trigger": "飞刀机关的转盘在彩排时多转了半圈，一把刀擦着靶上那人的耳朵钉进了木板"
+  },
+  {
+   "choice": "报上去，还是替人补签",
+   "exits": [
+    {
+     "cost": "团主会知道是你",
+     "option": "把有问题的机关报上去"
+    },
+    {
+     "cost": "谁签的谁认",
+     "option": "替机械师补签"
+    }
+   ],
+   "far": {
+    "consequence": "压轴节目取消，团主会找人顶罪",
+    "due_days": 2,
+    "trigger": "没过复查"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_inspector",
+   "immediate": {
+    "minutes": 10,
+    "text": "督察把一叠签字单摊在桌上，一张一张地翻"
+   },
+   "leverage": null,
+   "location_ids": [
+    "big_top",
+    "backstage"
+   ],
+   "near": {
+    "deadline_minutes": 300,
+    "text": "复查结束"
+   },
+   "objective": "在复查结束之前，决定替不替谁说话",
+   "source": "institution",
+   "start_minute": 960,
+   "tags": [],
+   "title": "督察复查",
+   "trigger": "城里的督察来了，说要在第七夜之前复查所有机关，没签字的一律不许上演"
+  },
+  {
+   "choice": "写上名字，还是不写",
+   "exits": [
+    {
+     "cost": "又是一季离不开",
+     "option": "写上名字"
+    },
+    {
+     "cost": "这座城里，你一个人也不认识",
+     "option": "不写"
+    }
+   ],
+   "far": {
+    "consequence": "留下的人拿不到一季的工钱，也回不了团",
+    "due_days": 7,
+    "trigger": "没写名字"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_teardown",
+   "immediate": {
+    "minutes": 10,
+    "text": "团主把一本账簿拍在木箱上：“名字写上，跟着走。”"
+   },
+   "leverage": null,
+   "location_ids": [
+    "caravan_row",
+    "bonfire"
+   ],
+   "near": {
+    "deadline_minutes": 600,
+    "text": "拆帐"
+   },
+   "objective": "在拆帐之前，决定走还是留",
+   "source": "money",
+   "start_minute": 1200,
+   "tags": [],
+   "title": "谁跟着走",
+   "trigger": "团主宣布：第七夜拆帐，今晚之前要定下谁跟着走、谁留下，留下的人这一季的工钱不结"
+  },
+  {
+   "choice": "领到后面去说，还是去叫团主",
+   "exits": [
+    {
+     "cost": "团主会觉得你多事",
+     "option": "把那人领到后面去说"
+    },
+    {
+     "cost": "那人会觉得你站在团主那边",
+     "option": "去叫团主"
+    }
+   ],
+   "far": {
+    "consequence": "整个团都会知道那份旧约里写着什么",
+    "due_days": 3,
+    "trigger": "闹起来"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_old_hand",
+   "immediate": {
+    "minutes": 5,
+    "text": "那人把旧约高高举起来，团主的签名在灯下看得清清楚楚"
+   },
+   "leverage": null,
+   "location_ids": [
+    "ticket_booth",
+    "bonfire"
+   ],
+   "near": {
+    "deadline_minutes": 30,
+    "text": "团主出来"
+   },
+   "objective": "在闹起来之前，决定站在哪一边",
+   "source": "person",
+   "start_minute": 1140,
+   "tags": [],
+   "title": "旧约",
+   "trigger": "一个几年前离团的人回来了，手里攥着一份团主签过字的旧约，说团主欠的不只是钱"
+  },
+  {
+   "choice": "去查，还是去告诉飞人",
+   "exits": [
+    {
+     "cost": "后台铜锁，你没排班",
+     "option": "去查搭扣"
+    },
+    {
+     "cost": "飞人信不信你，不好说",
+     "option": "告诉飞人"
+    }
+   ],
+   "far": {
+    "consequence": "飞人在最后一场摔下来",
+    "due_days": 1,
+    "trigger": "没人查"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_buckle_rumor",
+   "immediate": {
+    "minutes": 10,
+    "text": "有人压低声音说“销子退了一线”，说完就走开了"
+   },
+   "leverage": null,
+   "location_ids": [
+    "backstage",
+    "caravan_row"
+   ],
+   "near": {
+    "deadline_minutes": 180,
+    "text": "最后一场开演"
+   },
+   "objective": "在最后一场开演之前，弄清搭扣到底有没有问题",
+   "source": "rumor",
+   "start_minute": 1080,
+   "tags": [
+    "bodily_harm"
+   ],
+   "title": "松了的销子",
+   "trigger": "后台传开了：空中飞人的搭扣有人动过，最后一场之前一定会出事"
+  },
+  {
+   "choice": "上去放水，还是清场",
+   "exits": [
+    {
+     "cost": "顶棚又湿又滑",
+     "option": "爬上去放水"
+    },
+    {
+     "cost": "满场的观众要退票",
+     "option": "清场"
+    }
+   ],
+   "far": {
+    "consequence": "今晚的演出没了，帐篷要提前拆",
+    "due_days": 1,
+    "trigger": "中柱倒了"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_storm",
+   "immediate": {
+    "minutes": 5,
+    "text": "雨点砸在帆布上，响得像鼓"
+   },
+   "leverage": null,
+   "location_ids": [
+    "big_top",
+    "ticket_booth"
+   ],
+   "near": {
+    "deadline_minutes": 60,
+    "text": "顶棚撑不住"
+   },
+   "objective": "在顶棚撑不住之前，决定怎么办",
+   "source": "nature",
+   "start_minute": 1170,
+   "tags": [],
+   "title": "暴雨",
+   "trigger": "一场暴雨压了下来，大帐篷的顶棚积了水，中柱在吱吱响，观众已经进场了一半"
+  }
+ ],
+ "region": "一支机械马戏团，每座城只停七天",
+ "rules": [
+  {
+   "id": "r_seven_days",
+   "text": "每座城只停七天，第七夜拆帐，不等人。"
+  },
+  {
+   "id": "r_sign_off",
+   "text": "机关由合格机械师签字放行，谁签的谁认。"
+  },
+  {
+   "id": "r_brass_lock",
+   "text": "后台铜锁反拧两圈，未排班者不得探视。"
+  },
+  {
+   "id": "r_contract_fee",
+   "text": "团里的约由团主一人保管，约满之前离团，要赔一整季的票钱。"
+  },
+  {
+   "id": "r_no_net",
+   "text": "压轴节目不挂保护网，这是马戏团的招牌。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": null,
+ "status": "review",
+ "style_hint": "写亮和响：煤气灯、亮片、发条的咔嗒声、刀钉进木板的嗡嗡声、篝火里的土豆；台上笑得越响，台下说话越轻。",
+ "tension_engines": [
+  {
+   "id": "te_knife_rigged",
+   "text": "飞刀机关被人动过手脚"
+  },
+  {
+   "id": "te_buckle_loose",
+   "text": "空中飞人的搭扣松了"
+  },
+  {
+   "id": "te_old_contract",
+   "text": "旧人带着团主签的旧约回来了"
+  },
+  {
+   "id": "te_teardown",
+   "text": "第七夜拆帐，不等人"
+  },
+  {
+   "id": "te_last_stop",
+   "text": "有人的约只剩最后一站"
+  },
+  {
+   "id": "te_city_eyes",
+   "text": "城里的人盯上了马戏团"
+  }
+ ],
+ "title": "机械马戏",
+ "tone": [
+  "马戏",
+  "机关",
+  "离别",
+  "煤气灯"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_filed_gear",
+   "requires": [
+    "ringmaster",
+    "stage_mechanic"
+   ],
+   "text": "锉那颗齿的人是{ringmaster.name}派去的，{stage_mechanic.name}的放行单上却已经签了字。"
+  },
+  {
+   "category": "关系",
+   "id": "t_saved_once",
+   "requires": [
+    "old_hand",
+    "trapeze_artist"
+   ],
+   "text": "{old_hand.name}当年那一夜从吊架下面接住的人，就是{trapeze_artist.name}。"
+  },
+  {
+   "category": "人事",
+   "id": "t_puppet_buyer",
+   "requires": [
+    "puppeteer"
+   ],
+   "text": "城里的收藏家提前来了，点名要买{puppeteer.name}的人偶。"
+  },
+  {
+   "category": "资源",
+   "id": "t_full_house",
+   "requires": [],
+   "text": "城里的报纸登了一篇好评，最后一场的票一早就卖光了。"
+  },
+  {
+   "category": "时限",
+   "id": "t_early_teardown",
+   "requires": [],
+   "text": "市政厅下了令：马戏团今夜散场后就得拆帐出城。"
+  },
+  {
+   "category": "制度",
+   "id": "t_net_rule",
+   "requires": [],
+   "text": "市政厅出了新规：所有高空节目必须挂保护网，否则不许演。"
+  },
+  {
+   "category": "意外",
+   "id": "t_horse_loose",
+   "requires": [],
+   "text": "一匹机械马的发条崩了，在营地里横冲直撞，撞翻了两辆篷车。"
+  }
+ ]
+}

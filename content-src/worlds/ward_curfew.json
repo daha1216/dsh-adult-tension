@@ -1,0 +1,2472 @@
+{
+ "schema_version": 1,
+ "id": "ward_curfew",
+ "title": "坊门落锁后",
+ "extends": null,
+ "era": "架空的盛唐",
+ "region": "长安城里的怀远坊，暮鼓六百声后坊门落锁，一坊人自己过完这一夜",
+ "premise": "坊门一关，这一坊就是一座孤岛，夜里的规矩由谁来定？",
+ "tone": [
+  "鼓声",
+  "灯火",
+  "一夜",
+  "刀光"
+ ],
+ "style_hint": "写声音和光：街鼓、木栓落下的闷响、灯笼、琴声、算盘、火把；人说话含蓄，一句话里藏着另一句。",
+ "clock_start": {
+  "label": "开元年间的一个暮春傍晚，街鼓敲到第五百九十声",
+  "minute": 1110
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "stage_labels": null,
+ "name_pools": {
+  "family": [
+   "李",
+   "王",
+   "杜",
+   "崔",
+   "卢",
+   "郑",
+   "裴",
+   "韦",
+   "萧",
+   "柳",
+   "薛",
+   "元",
+   "康",
+   "米"
+  ],
+  "given_female": [
+   "罗",
+   "婉",
+   "素",
+   "蘅",
+   "绮",
+   "玉",
+   "兰",
+   "绫",
+   "霜",
+   "檀",
+   "莺",
+   "锦"
+  ],
+  "given_male": [
+   "衡",
+   "晏",
+   "昭",
+   "琮",
+   "绪",
+   "让",
+   "晖",
+   "谦",
+   "琰",
+   "峻",
+   "迥",
+   "恪"
+  ],
+  "given_neutral": [
+   "远",
+   "澄",
+   "宁",
+   "舟",
+   "和",
+   "允",
+   "恒",
+   "乔",
+   "简",
+   "言",
+   "宜",
+   "青"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "阿{given}",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}娘子",
+    "gender": "female"
+   },
+   {
+    "pattern": "{family}郎",
+    "gender": "male"
+   }
+  ]
+ },
+ "rules": [
+  {
+   "id": "r_curfew",
+   "text": "闭坊鼓响毕仍在街心的人，由武侯押到天亮，交坊正问话。"
+  },
+  {
+   "id": "r_seal",
+   "text": "名籍只能本人按印；旁人代认，查出来要当众改正。"
+  },
+  {
+   "id": "r_island",
+   "text": "坊里的夜市不禁，可出了这一坊，夜里就没有你的路。"
+  },
+  {
+   "id": "r_vouch",
+   "text": "鼓声未尽时门外的人进不进得来，要门里有一个人肯替那人按印担保。"
+  },
+  {
+   "id": "r_dawn",
+   "text": "晨鼓一响坊门就开，夜里的事天亮前了不了，就要交到县里去。"
+  }
+ ],
+ "customs": [
+  "夜市上第一盏灯由坊里年纪最大的人点。",
+  "替人按印担保，要请对方喝一碗酒，喝了就是认下了。",
+  "琴房三更以后不接新客，楼上的灯熄了就是曲终。",
+  "胡商在坊里过节，会在货栈门口摆一盆火，谁都可以来烤一烤手。",
+  "犯夜被押的人，家里人可以送一碗热汤到武侯铺。"
+ ],
+ "player_identities": [
+  {
+   "id": "lantern_hand",
+   "role": "夜市挂灯的帮工",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    20,
+    30
+   ],
+   "social_position": "low",
+   "baseline": "你在怀远坊替夜市挂灯笼、收灯笼，一盏两个铜钱，坊里每一盏灯都经过你的手。",
+   "resources": [
+    "一副灯架和全坊夜市的门路",
+    "坊里人都认得你"
+   ],
+   "reputation": "手巧，眼尖",
+   "risks": [
+    "你的名籍是坊正署替你补的，按印的不是你本人"
+   ]
+  },
+  {
+   "id": "failed_candidate",
+   "role": "落第寄住的举子",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}生",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}郎君",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    24,
+    34
+   ],
+   "social_position": "low",
+   "baseline": "你进京考试落了第，借住在坊里一间小屋，靠替人写信抄书过日子。",
+   "resources": [
+    "一手好字和几篇被人传抄的诗",
+    "一张快到期的租契"
+   ],
+   "reputation": "清高，心软",
+   "risks": [
+    "你借了柜坊的钱，这个月还不上"
+   ]
+  },
+  {
+   "id": "tavern_keeper",
+   "role": "坊里酒肆的掌柜",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}掌柜",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}娘子",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}郎",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    45
+   ],
+   "social_position": "equal",
+   "baseline": "你在十字街口开一间酒肆，夜市一开，你的酒旗就是坊里最显眼的地方。",
+   "resources": [
+    "一间酒肆和一窖酒",
+    "全坊人喝醉后说的话"
+   ],
+   "reputation": "豪爽，嘴紧",
+   "risks": [
+    "胡商货栈欠你半年的酒钱"
+   ]
+  },
+  {
+   "id": "ward_physician",
+   "role": "坊里的医者",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}医",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}先生",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    50
+   ],
+   "social_position": "equal",
+   "baseline": "你在坊里开一间药铺，夜里有人敲门，不管是谁都得开。",
+   "resources": [
+    "一铺子药和一手治刀伤的本事",
+    "坊里人的病和伤都过过你的手"
+   ],
+   "reputation": "沉稳，不问来路",
+   "risks": [
+    "你替一个人治过刀伤，没报给武侯铺"
+   ]
+  },
+  {
+   "id": "county_officer",
+   "role": "万年县的县尉",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}少府",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}县尉",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    42
+   ],
+   "social_position": "high",
+   "baseline": "你是县里管治安的县尉，今夜来坊里办事，鼓响前没能出去，被锁在了坊里。",
+   "resources": [
+    "县尉的官身和查问任何人的权力",
+    "县里的案卷"
+   ],
+   "reputation": "精明，讲规矩",
+   "risks": [
+    "城外那桩血案是你的案子，上头催得紧"
+   ]
+  },
+  {
+   "id": "caravan_master",
+   "role": "西市来的大商人",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}大郎",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}东家",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    32,
+    50
+   ],
+   "social_position": "high",
+   "baseline": "你在西市有三间铺子和一支驼队，今夜来怀远坊谈一笔大买卖，被锁在了坊里。",
+   "resources": [
+    "一支驼队和西市三间铺子",
+    "县里和坊正都要给你几分面子"
+   ],
+   "reputation": "出手阔绰，记仇",
+   "risks": [
+    "你想吞下胡商货栈，这事还没人知道"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "ward_gate",
+   "name": "坊门",
+   "detail": "怀远坊的北门，两扇包铁的木门，门楼上挂着一面小鼓应和街鼓，门边一间武侯铺，木栓有小腿那么粗。",
+   "privacy": "public",
+   "visibility": "守门的老卒和巡夜的武侯都在门边；鼓响的时候，谁在门里谁在门外，一目了然",
+   "witnesses": [
+    "bg_gate_veteran"
+   ],
+   "exits": [
+    "cross_street"
+   ],
+   "affordances": [
+    "数着街鼓声，看门外还有谁在跑",
+    "替门外的人按一个印",
+    "隔着半掩的门缝和外面的人说话"
+   ],
+   "pressure_modifiers": {
+    "p_drum_end": "木栓已经落下一半，老卒的手搭在上面。"
+   },
+   "tags": []
+  },
+  {
+   "id": "cross_street",
+   "name": "十字街心",
+   "detail": "坊里两条街交成一个十字，夜市就摆在这里：胡饼炉、酒旗、卖灯的架子，灯笼一盏挨一盏挂到坊墙根。",
+   "privacy": "public",
+   "visibility": "夜市上全坊的人都在，谁跟谁在一盏灯下站久了，明早就有人说",
+   "witnesses": [
+    "bg_hubing_seller",
+    "bg_runner"
+   ],
+   "exits": [
+    "ward_gate",
+    "ledger_office",
+    "qin_house",
+    "hu_warehouse",
+    "well_lane"
+   ],
+   "affordances": [
+    "在灯架下挂一盏新灯",
+    "买两个刚出炉的胡饼，分一个出去",
+    "在人堆里被人从背后拉了一下袖子"
+   ],
+   "pressure_modifiers": {
+    "p_patrol_search": "巡夜的武侯举着火把，一盏一盏照过灯下的脸。"
+   },
+   "tags": []
+  },
+  {
+   "id": "ledger_office",
+   "name": "坊正署名籍房",
+   "detail": "坊正署后面一间小屋，三面墙的木架上码着全坊的名籍册，案上一方印泥、一支笔、一盏油灯。",
+   "privacy": "semi",
+   "visibility": "夜里只有书吏守着；门外的人看得见灯亮，看不见灯下在写什么",
+   "witnesses": [
+    "bg_ward_head"
+   ],
+   "exits": [
+    "cross_street"
+   ],
+   "affordances": [
+    "翻到一页名籍，看上面的指印",
+    "看书吏蘸墨，又停住笔",
+    "在灯下替一个人认一个名字"
+   ],
+   "pressure_modifiers": {
+    "p_name_claimed": "名籍册上，一个名字下面按了两个不一样的指印。"
+   },
+   "tags": []
+  },
+  {
+   "id": "qin_house",
+   "name": "琴房",
+   "detail": "坊东一座两层小楼，楼下是听曲的厅，楼上一间琴室，窗纸上映着人影，客人只能在楼下听。",
+   "privacy": "semi",
+   "visibility": "楼下的客人听得见琴，看不见楼上；楼上的人隔着窗纸看得见整条街",
+   "witnesses": [
+    "bg_tavern_hostess"
+   ],
+   "exits": [
+    "cross_street"
+   ],
+   "affordances": [
+    "在楼下点一支曲子",
+    "隔着窗纸看楼上的人影",
+    "替琴师调一根松了的弦"
+   ],
+   "pressure_modifiers": {
+    "p_buy_name": "楼下有个客人把一锭银子放在案上，说不要曲子。"
+   },
+   "tags": []
+  },
+  {
+   "id": "hu_warehouse",
+   "name": "胡商货栈",
+   "detail": "坊西一座大院，院里堆着成捆的丝绢和一箱箱香料，骆驼拴在后槽，账房里一盏油灯点到天亮。",
+   "privacy": "semi",
+   "visibility": "伙计、驼夫和来提货的人进进出出；账房的门一关，外面只听得见算盘声",
+   "witnesses": [
+    "bg_fire_priest"
+   ],
+   "exits": [
+    "cross_street",
+    "well_lane"
+   ],
+   "affordances": [
+    "在账房里看一页算不平的账",
+    "替伙计扶一扶要倒的货堆",
+    "在香料堆中间说一句不想让人听见的话"
+   ],
+   "pressure_modifiers": {
+    "p_debt_tonight": "账房的门开着，债主的灯笼就挂在院门口。"
+   },
+   "tags": []
+  },
+  {
+   "id": "well_lane",
+   "name": "坊墙下的井巷",
+   "detail": "坊墙根一条窄巷，尽头一口老井，井台上的石头被绳子磨出一道道沟，夜里没人来打水。",
+   "privacy": "private",
+   "visibility": "夜里没有人来；巷口一站，里面的人就出不去了",
+   "witnesses": [],
+   "exits": [
+    "cross_street",
+    "hu_warehouse"
+   ],
+   "affordances": [
+    "在井台边坐下，借着月光看清一个人的脸",
+    "打一桶井水洗一洗手上的东西",
+    "听坊墙外的更鼓声"
+   ],
+   "pressure_modifiers": {
+    "p_blood_blade": "井台的石头上，有一道没擦干净的暗红。"
+   },
+   "tags": []
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "ledger_clerk",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    28,
+    45
+   ],
+   "adult_context": "坊正署的书吏，成年人，管着全坊名籍十二年",
+   "public_role": "坊正书吏",
+   "appearance_options": [
+    "青布袍子的袖口总沾着墨",
+    "说话前先看一眼对方的手，像在认指印"
+   ],
+   "identity": {
+    "authority": "决定名籍上的哪一笔今夜能改",
+    "resources": [
+     "全坊的名籍册和坊正署的印泥",
+     "夜里唯一一把名籍房的钥匙"
+    ],
+    "limits": [
+     "坊正每月查一次册子，改过的笔迹瞒不过太久",
+     "书吏的品级低，得罪一个有门路的人就丢了差事"
+    ],
+    "obligations": [
+     "每夜守在名籍房，天亮前把当天的出入记清"
+    ],
+    "exposure": "{npc.ta}替一个人改过一笔名籍，那人后来出了事，{npc.ta}一直没说",
+    "hidden": "{npc.ta}自己的名籍也是别人替{npc.ta}按的印"
+   },
+   "decision": {
+    "core_value": "一笔写下，就是一个人的一辈子",
+    "goal_options": [
+     "守住名籍房，不让人顶认",
+     "把那一笔旧账改回来",
+     "知道是谁替自己按的印"
+    ],
+    "pressure_responses": {
+     "low": "低头写字，说“明早再来”",
+     "mid": "把名籍册翻到那一页，推到对方面前",
+     "high": "当着坊正的面说出一笔名籍是假的",
+     "breaking": "封了名籍房，把钥匙交还坊正，从此不碰笔"
+    },
+    "withdrawal": "熄了灯坐在名籍房里，摸着册子的书脊一本本数过去",
+    "relationship_stance": "落笔谨慎，开口更谨慎",
+    "contrast": "管着一坊人的名字，自己的名字却是别人认下的",
+    "prefers": [
+     "先对指印"
+    ],
+    "avoids": [
+     "被人催着落笔"
+    ],
+    "never": [
+     "替不认识的人改籍"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方的指印和名籍上的对得上",
+     "对方知道{npc.ta}改过的那一笔却不拿来要挟"
+    ],
+    "likes": [
+     "深夜灯下墨还没干的那一刻"
+    ],
+    "dislikes": [
+     "被当成一支笔"
+    ],
+    "preconditions": [
+     "名籍房的门已经落锁"
+    ],
+    "boundaries": [
+     "不在案前"
+    ],
+    "expression": "把对方的名字工工整整誊一遍，只给对方看",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}愿意放下笔的那个人"
+   },
+   "voices": {
+    "surface": "“按印吧。按了，这名字就是你的。”",
+    "inner": "“我改过一笔，那一笔要了一个人的命。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1439,
+     "location_id": "ledger_office"
+    },
+    {
+     "from": 0,
+     "to": 300,
+     "location_id": "ledger_office"
+    },
+    {
+     "from": 420,
+     "to": 600,
+     "location_id": "cross_street"
+    }
+   ],
+   "situation": {
+    "trigger": "坊正说下月朔日要重造全坊名籍，旧册子一律缴进县衙",
+    "pressure": "{npc.ta}改过的那一笔，新册子上就对不上了",
+    "exits": [
+     {
+      "option": "先把那一笔改回来",
+      "cost": "当年那个人的事就要翻出来"
+     },
+     {
+      "option": "由它去",
+      "cost": "重造的时候被查出，{npc.ta}要去县里挨板子"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "qin_player",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    34
+   ],
+   "adult_context": "坊东琴房的琴师，成年人，一张七弦琴弹了十年",
+   "public_role": "琴师",
+   "appearance_options": [
+    "指尖有弦磨出的薄茧，手腕上一根褪色的红绳",
+    "说话很轻，笑的时候先垂下眼"
+   ],
+   "identity": {
+    "authority": "决定今夜弹给谁听、楼上的窗开不开",
+    "resources": [
+     "一张传了三代的七弦琴",
+     "全坊有头脸的人都来听过{npc.ta}的曲子"
+    ],
+    "limits": [
+     "琴房是租的，房主说涨就涨",
+     "名字被人买走，就再也弹不了自己的曲子"
+    ],
+    "obligations": [
+     "每夜弹到三更，楼下有人点曲就得弹"
+    ],
+    "exposure": "{npc.ta}的真名在名籍上被人顶认过一次，从那以后只用艺名",
+    "hidden": "{npc.ta}每夜第一支曲子是弹给一个已经不来的人"
+   },
+   "decision": {
+    "core_value": "曲子可以卖，名字不卖",
+    "goal_options": [
+     "攒够钱赎回自己的琴房",
+     "知道顶认{npc.ta}名字的人是谁",
+     "弹一支只给一个人听的曲子"
+    ],
+    "pressure_responses": {
+     "low": "拨一下弦，说“听曲还是听人”",
+     "mid": "推开楼上的窗，让对方上来说话",
+     "high": "当着满楼客人停下琴，说出一句真话",
+     "breaking": "收起琴，熄了楼上的灯，三夜不开琴房"
+    },
+    "withdrawal": "客人散尽后，在楼上不点灯，把第一支曲子从头弹到尾",
+    "relationship_stance": "琴声热，人冷",
+    "contrast": "替全坊的人弹了十年的心事，自己的名字一直没敢说出口",
+    "prefers": [
+     "先弹一曲"
+    ],
+    "avoids": [
+     "被人问真名"
+    ],
+    "never": [
+     "为了钱弹不想弹的曲子"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方听出{npc.ta}第一支曲子里的那个人",
+     "对方从不问{npc.ta}的真名"
+    ],
+    "likes": [
+     "三更后楼上的静"
+    ],
+    "dislikes": [
+     "被当成一张琴"
+    ],
+    "preconditions": [
+     "楼下的客人已经散尽"
+    ],
+    "boundaries": [
+     "不在琴前"
+    ],
+    "expression": "把自己的真名写在对方掌心里",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}想把名字说出口的那个人"
+   },
+   "voices": {
+    "surface": "“曲子能买，人不能。你想听哪一支？”",
+    "inner": "“我的名字被人拿走过一次，我不想再丢第二次。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1439,
+     "location_id": "qin_house"
+    },
+    {
+     "from": 0,
+     "to": 180,
+     "location_id": "qin_house"
+    },
+    {
+     "from": 900,
+     "to": 1079,
+     "location_id": "cross_street"
+    }
+   ],
+   "situation": {
+    "trigger": "一位有门路的客人要替{npc.ta}赎身入籍，条件是从此只为一个人弹",
+    "pressure": "答应了，琴房就不是{npc.ta}的了",
+    "exits": [
+     {
+      "option": "答应",
+      "cost": "{npc.ta}的名字就写进了别人家的籍册"
+     },
+     {
+      "option": "不答应",
+      "cost": "那人放话要让琴房开不下去"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "hu_heir",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    24,
+    36
+   ],
+   "adult_context": "胡商货栈的少东家，成年人，父亲去年死在西去的商路上",
+   "public_role": "货栈少东家",
+   "appearance_options": [
+    "卷曲的头发用一根金丝带束着，说一口带口音的长安话",
+    "腰上挂一只算盘大小的铜秤"
+   ],
+   "identity": {
+    "authority": "决定货栈里哪批货先出、欠谁的账先还",
+    "resources": [
+     "一院子丝绢香料和二十头骆驼",
+     "父亲留下的一本商路账簿"
+    ],
+    "limits": [
+     "父亲死后，货栈欠着一笔今夜到期的账",
+     "胡人在坊里置产要看坊正的脸色"
+    ],
+    "obligations": [
+     "每夜对一遍账，天亮前给驼队派活"
+    ],
+    "exposure": "{npc.ta}知道那笔账的借据是假的，可证人今夜就在这一坊里",
+    "hidden": "{npc.ta}偷偷把父亲最贵的一箱香料藏在井巷的坊墙洞里"
+   },
+   "decision": {
+    "core_value": "账要算清，人要留下",
+    "goal_options": [
+     "保住货栈，不让人收走",
+     "弄清父亲那笔账到底是谁做的手脚",
+     "在长安落地生根"
+    ],
+    "pressure_responses": {
+     "low": "笑着打个哈哈，递上一杯葡萄酒",
+     "mid": "把父亲的账簿翻开，指给对方看那一行",
+     "high": "当着债主的面撕了借据",
+     "breaking": "连夜赶着骆驼出城，把货栈留给债主"
+    },
+    "withdrawal": "账房里一个人坐到天亮，把父亲的账簿从头翻一遍",
+    "relationship_stance": "嘴甜，心里算得清",
+    "contrast": "在长安活得像个长安人，夜里说梦话却是父亲的乡音",
+    "prefers": [
+     "先算账"
+    ],
+    "avoids": [
+     "被人叫“胡儿”"
+    ],
+    "never": [
+     "把父亲的东西拿去抵债"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不把{npc.ta}当外人",
+     "对方肯陪{npc.ta}对一夜的账"
+    ],
+    "likes": [
+     "香料堆里闷热的气味"
+    ],
+    "dislikes": [
+     "被当成钱袋子"
+    ],
+    "preconditions": [
+     "账已经对完"
+    ],
+    "boundaries": [
+     "不在账房里"
+    ],
+    "expression": "把父亲留下的那只铜秤送给对方",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}觉得长安是家的那个人"
+   },
+   "voices": {
+    "surface": "“喝一杯？账明天再算——不，今夜就得算。”",
+    "inner": "“那张借据是假的，我得在天亮前找到证人。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1439,
+     "location_id": "hu_warehouse"
+    },
+    {
+     "from": 0,
+     "to": 300,
+     "location_id": "hu_warehouse"
+    },
+    {
+     "from": 900,
+     "to": 1079,
+     "location_id": "cross_street"
+    }
+   ],
+   "situation": {
+    "trigger": "债主带着借据来了，说今夜三更不还钱，货栈就归{npc.ta}",
+    "pressure": "货栈一丢，{npc.ta}在长安就没有落脚的地方",
+    "exits": [
+     {
+      "option": "还钱",
+      "cost": "要卖掉父亲那箱最贵的香料"
+     },
+     {
+      "option": "不还",
+      "cost": "债主会去坊正署告{npc.ta}赖账"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "creditor",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    35,
+    52
+   ],
+   "adult_context": "坊里开柜坊的主人，成年人，放贷二十年",
+   "public_role": "柜坊主人",
+   "appearance_options": [
+    "一身素净的绸袍，袖子里永远揣着几张借据",
+    "说话慢条斯理，从不提高嗓门"
+   ],
+   "identity": {
+    "authority": "决定谁的债能宽限、谁的今夜就收",
+    "resources": [
+     "一间柜坊和半个坊的借据",
+     "坊正和武侯铺的交情"
+    ],
+    "limits": [
+     "放出去的钱太多，有几笔眼看收不回",
+     "县里新来的官说要查高利"
+    ],
+    "obligations": [
+     "每月初一去坊正署交一份例钱"
+    ],
+    "exposure": "{npc.ta}手里那张胡商货栈的借据，是当年和老东家一起做的假账",
+    "hidden": "{npc.ta}年轻时在琴房听过一支曲子，从此再没进去过"
+   },
+   "decision": {
+    "core_value": "钱不会说谎，人会",
+    "goal_options": [
+     "今夜收回货栈那笔账",
+     "在县里查到之前把账做干净",
+     "再听一次那支曲子"
+    ],
+    "pressure_responses": {
+     "low": "笑一笑，说“不急，喝杯茶”",
+     "mid": "把借据摊在桌上，一张一张数",
+     "high": "带着武侯上门收账",
+     "breaking": "把所有借据一把火烧了，关了柜坊"
+    },
+    "withdrawal": "夜里一个人在柜坊里点着灯，把借据按日子排好，再一张一张收起来",
+    "relationship_stance": "对钱刻薄，对人客气",
+    "contrast": "借了半坊人的钱，自己欠下的那一笔从来没还",
+    "prefers": [
+     "先看借据"
+    ],
+    "avoids": [
+     "被人当众叫“放贷的”"
+    ],
+    "never": [
+     "收一个人最后的口粮钱"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方欠{npc.ta}的钱却敢直视{npc.ta}",
+     "对方知道那支曲子的名字"
+    ],
+    "likes": [
+     "算盘停下来以后的那一阵静"
+    ],
+    "dislikes": [
+     "被当成一张借据"
+    ],
+    "preconditions": [
+     "柜坊的门已经上了板"
+    ],
+    "boundaries": [
+     "不谈钱的时候"
+    ],
+    "expression": "把对方那张借据当面撕了，说一句“两清”",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "不欠{npc.ta}什么也愿意来的那个人"
+   },
+   "voices": {
+    "surface": "“不急。这笔账今夜三更才到期。”",
+    "inner": "“那张借据是假的，可我已经回不了头了。”"
+   },
+   "schedule": [
+    {
+     "from": 600,
+     "to": 1080,
+     "location_id": "cross_street"
+    },
+    {
+     "from": 1081,
+     "to": 1260,
+     "location_id": "hu_warehouse"
+    },
+    {
+     "from": 1261,
+     "to": 1439,
+     "location_id": "qin_house"
+    }
+   ],
+   "situation": {
+    "trigger": "县里新来的官要查柜坊的账，第一个点名的就是{npc.ta}",
+    "pressure": "账一查，货栈那张假借据就露了",
+    "exits": [
+     {
+      "option": "赶在查账前把货栈收下",
+      "cost": "胡商少东家会拼了命去找证人"
+     },
+     {
+      "option": "把借据烧了",
+      "cost": "二十年放出去的钱就收不回来了"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "patrol_captain",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    28,
+    42
+   ],
+   "adult_context": "怀远坊武侯铺的头领，成年人，在军中待过五年",
+   "public_role": "巡夜武侯",
+   "appearance_options": [
+    "腰间一把横刀，刀鞘上缠着一圈旧麻绳",
+    "说话短，走路没声"
+   ],
+   "identity": {
+    "authority": "决定鼓响后谁算犯夜、谁押到天亮",
+    "resources": [
+     "武侯铺的六个人和坊门的钥匙",
+     "犯夜的人押不押、交不交坊正，全看{npc.ta}一句话"
+    ],
+    "limits": [
+     "上头要每月抓够犯夜的人数",
+     "手下有人收钱放人，{npc.ta}管不住"
+    ],
+    "obligations": [
+     "每夜巡坊三遍，天亮交钥匙"
+    ],
+    "exposure": "{npc.ta}今夜放了一个刀上带血的人进坊，没有记",
+    "hidden": "{npc.ta}的军籍上写着已经战死，在坊里用的是另一个名字"
+   },
+   "decision": {
+    "core_value": "坊门里的事，坊门里了",
+    "goal_options": [
+     "今夜不出人命",
+     "找到那个带血进坊的人",
+     "保住自己用的这个名字"
+    ],
+    "pressure_responses": {
+     "low": "手按刀柄，说“回家去”",
+     "mid": "举着火把照对方的脸，看得很仔细",
+     "high": "当街拔刀拦人",
+     "breaking": "把坊门钥匙扔给老卒，一个人翻出坊墙"
+    },
+    "withdrawal": "巡完第三遍，一个人坐在坊门的门槛上擦刀，擦到天亮",
+    "relationship_stance": "冷面，护短",
+    "contrast": "守着一坊人的门，自己的来处一个字不敢提",
+    "prefers": [
+     "先拦人，再问话"
+    ],
+    "avoids": [
+     "被人问在哪里当过兵"
+    ],
+    "never": [
+     "对不还手的人拔刀"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在火把下不躲{npc.ta}的眼睛",
+     "对方知道{npc.ta}的真名却替{npc.ta}瞒着"
+    ],
+    "likes": [
+     "三更以后坊里的寂静"
+    ],
+    "dislikes": [
+     "被当成看门的狗"
+    ],
+    "preconditions": [
+     "第三遍已经巡完"
+    ],
+    "boundaries": [
+     "刀已经放下"
+    ],
+    "expression": "把军中带回来的一枚铜牌给对方看，牌上是{npc.ta}的真名",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢说出真名的那个人"
+   },
+   "voices": {
+    "surface": "“鼓响完了。回家，别让我再看见你。”",
+    "inner": "“我在军籍上是个死人，在这坊里是个武侯。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1439,
+     "location_id": "ward_gate"
+    },
+    {
+     "from": 0,
+     "to": 120,
+     "location_id": "cross_street"
+    },
+    {
+     "from": 121,
+     "to": 300,
+     "location_id": "well_lane"
+    }
+   ],
+   "situation": {
+    "trigger": "上头下令今夜搜坊，要找一个在城外杀了人的逃犯",
+    "pressure": "那个人，{npc.ta}已经放进来了",
+    "exits": [
+     {
+      "option": "交人",
+      "cost": "{npc.ta}自己放人进坊的事也会露"
+     },
+     {
+      "option": "藏人",
+      "cost": "被查出来，武侯铺六个人都要跟着受罚"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "wanderer",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    24,
+    38
+   ],
+   "adult_context": "游侠，成年人，鼓响前最后一刻跑进坊门，横刀上的血还没干",
+   "public_role": "带刀的过客",
+   "appearance_options": [
+    "一身风尘的圆领袍，左袖被刀划开一道口子",
+    "眼神很亮，说话带笑，手却一直按在刀上"
+   ],
+   "identity": {
+    "authority": "决定今夜躲到哪里、对谁说实话",
+    "resources": [
+     "一把好刀和一身功夫",
+     "城外一桩只有{npc.ta}知道真相的血案"
+    ],
+    "limits": [
+     "城外死了人，武侯在搜",
+     "坊门一锁，{npc.ta}出不去，追的人也进不来"
+    ],
+    "obligations": [
+     "答应过一个人，天亮前把一样东西送到这一坊"
+    ],
+    "exposure": "{npc.ta}杀的那个人，是来这坊里收一笔假账的打手",
+    "hidden": "{npc.ta}要送的东西是胡商货栈老东家的遗书"
+   },
+   "decision": {
+    "core_value": "答应的事就要做到",
+    "goal_options": [
+     "天亮前把遗书送到",
+     "躲过今夜的搜坊",
+     "弄清是谁雇的那个打手"
+    ],
+    "pressure_responses": {
+     "low": "笑一笑，说“只是路过”",
+     "mid": "把刀放在桌上，刀口朝外",
+     "high": "在灯下把袖子卷起来，露出伤口",
+     "breaking": "翻过坊墙，从此不再回长安"
+    },
+    "withdrawal": "缩在井巷里，就着井水一遍遍洗刀，洗到刀上照出月亮",
+    "relationship_stance": "嘴上轻快，下手很重",
+    "contrast": "替别人送了一辈子的信，自己想说的话从来没送出去",
+    "prefers": [
+     "先看出路"
+    ],
+    "avoids": [
+     "被人逼到墙角"
+    ],
+    "never": [
+     "对没有刀的人出手"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方看见{npc.ta}的伤没有尖叫",
+     "对方肯替{npc.ta}在武侯面前说一句话"
+    ],
+    "likes": [
+     "井水洗过伤口的凉"
+    ],
+    "dislikes": [
+     "被当成亡命之徒"
+    ],
+    "preconditions": [
+     "刀已经入鞘"
+    ],
+    "boundaries": [
+     "不在被人追的时候"
+    ],
+    "expression": "把刀交给对方保管一夜",
+    "desire_range": [
+     3,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}愿意停下来的那个人"
+   },
+   "voices": {
+    "surface": "“别怕，血不是我的。”",
+    "inner": "“我答应过一个死人，天亮前把这封信送到。”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1200,
+     "location_id": "well_lane"
+    },
+    {
+     "from": 1201,
+     "to": 1320,
+     "location_id": "cross_street"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "hu_warehouse"
+    }
+   ],
+   "situation": {
+    "trigger": "武侯铺接到命令今夜搜坊，画像上的人和{npc.ta}有七分像",
+    "pressure": "被抓到，遗书就送不到了",
+    "exits": [
+     {
+      "option": "找人藏起来",
+      "cost": "藏{npc.ta}的人要担犯夜窝藏的罪"
+     },
+     {
+      "option": "自己去见武侯",
+      "cost": "城外那桩血案就说不清了"
+     }
+    ]
+   },
+   "tags": [
+    "violence"
+   ]
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_gate_veteran",
+   "role": "守坊门的老卒",
+   "function": "witness",
+   "location_ids": [
+    "ward_gate"
+   ],
+   "line": "{npc.name}守了二十年坊门，每一声鼓谁进谁出，{npc.ta}都记在心里",
+   "gender": "any",
+   "age_range": [
+    55,
+    70
+   ],
+   "adult_context": "退伍的成年老兵",
+   "name": null
+  },
+  {
+   "id": "bg_hubing_seller",
+   "role": "卖胡饼的",
+   "function": "rumor_source",
+   "location_ids": [
+    "cross_street"
+   ],
+   "line": "{npc.name}守着炉子，谁跟谁在灯下站了多久，第二天全坊都知道",
+   "gender": "any",
+   "age_range": [
+    35,
+    55
+   ],
+   "adult_context": "夜市上的成年摊主",
+   "name": null
+  },
+  {
+   "id": "bg_runner",
+   "role": "坊里跑腿的闲汉",
+   "function": "messenger",
+   "location_ids": [
+    "cross_street",
+    "ward_gate"
+   ],
+   "line": "{npc.name}一枚铜钱就肯跑一趟，话也替你捎到",
+   "gender": "any",
+   "age_range": [
+    20,
+    40
+   ],
+   "adult_context": "坊里的成年闲汉",
+   "name": null
+  },
+  {
+   "id": "bg_ward_head",
+   "role": "坊正",
+   "function": "obstacle",
+   "location_ids": [
+    "ledger_office",
+    "cross_street"
+   ],
+   "line": "{npc.name}端着茶碗站在署门口，谁的名籍有毛病，{npc.ta}都要问一句",
+   "gender": "any",
+   "age_range": [
+    45,
+    65
+   ],
+   "adult_context": "管一坊的成年坊正",
+   "name": null
+  },
+  {
+   "id": "bg_tavern_hostess",
+   "role": "酒肆当垆的",
+   "function": "witness",
+   "location_ids": [
+    "qin_house",
+    "cross_street"
+   ],
+   "line": "{npc.name}在琴房楼下卖酒，谁点了哪支曲子都看得清清楚楚",
+   "gender": "any",
+   "age_range": [
+    25,
+    45
+   ],
+   "adult_context": "当垆卖酒的成年人",
+   "name": null
+  },
+  {
+   "id": "bg_fire_priest",
+   "role": "祆祠的祝师",
+   "function": "helper",
+   "location_ids": [
+    "hu_warehouse",
+    "cross_street"
+   ],
+   "line": "{npc.name}在胡人里说话最有分量，肯替落难的人说一句",
+   "gender": "any",
+   "age_range": [
+    50,
+    70
+   ],
+   "adult_context": "坊中祆祠的成年祝师",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_drum",
+   "text": "街鼓",
+   "reach": "鼓声传遍全城，谁听不见都不算数",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_night_market_talk",
+   "text": "夜市上的闲话",
+   "reach": "一盏灯传一盏灯，传到坊墙根已经走了样",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_ledger",
+   "text": "名籍册上的指印",
+   "reach": "只有书吏翻得到，一个指印就是一个人",
+   "fidelity": "exact"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_locked_in",
+   "text": "坊门落锁，一坊人谁也出不去，谁也进不来"
+  },
+  {
+   "id": "te_name_seal",
+   "text": "名籍上的指印，有人顶认，有人想改"
+  },
+  {
+   "id": "te_debt_midnight",
+   "text": "一笔今夜三更到期的账，债主和欠债的人在同一坊里"
+  },
+  {
+   "id": "te_blood_blade",
+   "text": "有人带着没干的血跑进了坊门"
+  },
+  {
+   "id": "te_bought_name",
+   "text": "曲子可以买，有人想连名字一起买走"
+  },
+  {
+   "id": "te_dawn_drum",
+   "text": "晨鼓一响，今夜的事就要交到县里"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "k_lantern_ledger",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "lantern_hand"
+   ],
+   "slots": [
+    "ledger_clerk",
+    "patrol_captain"
+   ],
+   "tension_engine_ids": [
+    "te_name_seal",
+    "te_locked_in"
+   ],
+   "chemistry": "你的名籍是{ledger_clerk.name}替你补的，按印的不是你；{patrol_captain.name}今夜说，要把坊里名籍有毛病的人一个个叫出来问。",
+   "stakes": {
+    "resource_gap": "{ledger_clerk.name}有你的名籍，{patrol_captain.name}有坊门钥匙和六个武侯，你只有一副灯架",
+    "limit_gap": "名籍要重造，{patrol_captain.name}自己的名字也不干净",
+    "meeting_reason": "每夜挂灯收灯，你都要从名籍房门前和坊门下走过",
+    "irreplaceable_goal": "你想在名籍重造之前，让自己的名字变成真的"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "ledger_clerk",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{ledger_clerk.name}替你按过印，从没跟你提过代价"
+    },
+    {
+     "a": "player",
+     "b": "patrol_captain",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{patrol_captain.name}犯夜时放过你一次"
+    },
+    {
+     "a": "ledger_clerk",
+     "b": "patrol_captain",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "两个人都知道对方的名字有毛病，谁也不说"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_debt_poems",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "failed_candidate"
+   ],
+   "slots": [
+    "creditor",
+    "qin_player"
+   ],
+   "tension_engine_ids": [
+    "te_debt_midnight",
+    "te_bought_name"
+   ],
+   "chemistry": "你欠{creditor.name}的钱这个月还不上；{qin_player.name}买过你的几首诗谱成曲子，{creditor.name}说，只要你把那些诗的名字改成{creditor.ta}的，账就一笔勾销。",
+   "stakes": {
+    "resource_gap": "{creditor.name}有你的借据，{qin_player.name}有你的诗和一座琴房，你只有一手字",
+    "limit_gap": "租契快到期，{qin_player.name}也被人逼着卖名字",
+    "meeting_reason": "{qin_player.name}弹的是你的诗，{creditor.name}每夜坐在楼下听",
+    "irreplaceable_goal": "你想还清账，又不想把诗卖掉"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "creditor",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{creditor.name}借钱给你时一句难听话都没说"
+    },
+    {
+     "a": "player",
+     "b": "qin_player",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{qin_player.name}弹你的诗，从不提作者"
+    },
+    {
+     "a": "creditor",
+     "b": "qin_player",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{creditor.name}年轻时听过{qin_player.name}师父弹的一支曲子"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_tavern_debt",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "tavern_keeper"
+   ],
+   "slots": [
+    "hu_heir",
+    "creditor"
+   ],
+   "tension_engine_ids": [
+    "te_debt_midnight",
+    "te_locked_in"
+   ],
+   "chemistry": "{hu_heir.name}欠你半年的酒钱，今夜三更还欠{creditor.name}一笔大的；两个人约好今夜当着你的面把话说开，谁也没先开口。",
+   "stakes": {
+    "resource_gap": "{hu_heir.name}有一院子货，{creditor.name}有借据和武侯铺的交情，你有一间酒肆和半年的酒账",
+    "limit_gap": "坊门锁了，三更一到，账就要了",
+    "meeting_reason": "两个人都是你的熟客，今夜都要你做个见证",
+    "irreplaceable_goal": "你想收回酒钱，又不想看着货栈落进{creditor.name}手里"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "hu_heir",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "{hu_heir.name}的父亲在你的酒肆里喝过最后一顿酒"
+    },
+    {
+     "a": "player",
+     "b": "creditor",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{creditor.name}每月来你的酒肆坐一回，酒钱从不拖"
+    },
+    {
+     "a": "hu_heir",
+     "b": "creditor",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{hu_heir.name}认定借据是假的"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_wound_search",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "ward_physician"
+   ],
+   "slots": [
+    "wanderer",
+    "patrol_captain"
+   ],
+   "tension_engine_ids": [
+    "te_blood_blade",
+    "te_locked_in"
+   ],
+   "chemistry": "{wanderer.name}今夜带着一袖子血找上了你，说血不是{wanderer.ta}的；前后不到半个时辰，{patrol_captain.name}也找到你，问你今夜见没见过一个带刀的人。",
+   "stakes": {
+    "resource_gap": "{wanderer.name}有一把刀和一封要送的信，{patrol_captain.name}有火把和武侯铺，你有一手治刀伤的本事",
+    "limit_gap": "上头要搜坊，你替人治伤没报",
+    "meeting_reason": "两个人今夜都来找你，前后只差半个时辰",
+    "irreplaceable_goal": "你想把人救下来，又不想把自己搭进去"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "wanderer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 2
+     },
+     "reason": "{wanderer.name}说是坊门口的老卒指的路"
+    },
+    {
+     "a": "player",
+     "b": "patrol_captain",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "你给{patrol_captain.name}治过一次旧伤"
+    },
+    {
+     "a": "wanderer",
+     "b": "patrol_captain",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{patrol_captain.name}今夜亲手放{wanderer.name}进的坊门"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_officer_locked",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "county_officer"
+   ],
+   "slots": [
+    "ledger_clerk",
+    "wanderer"
+   ],
+   "tension_engine_ids": [
+    "te_blood_blade",
+    "te_name_seal"
+   ],
+   "chemistry": "你是县尉，被锁在了坊里；{ledger_clerk.name}说今夜刚有人来名籍房查一个名字，那个名字和你案卷上的逃犯一样，而{wanderer.name}正坐在你对面喝酒。",
+   "stakes": {
+    "resource_gap": "你有官身和案卷，{ledger_clerk.name}有名籍，{wanderer.name}有一把刀和一个真相",
+    "limit_gap": "天亮前要给上头交代，坊里没有你的人",
+    "meeting_reason": "坊门落锁，你们三个都出不去",
+    "irreplaceable_goal": "你想破案，又隐约觉得案卷上写的不是真的"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "ledger_clerk",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{ledger_clerk.name}给你送过三年的名籍抄本"
+    },
+    {
+     "a": "player",
+     "b": "wanderer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{wanderer.name}敬了你一碗酒，你没喝"
+    },
+    {
+     "a": "ledger_clerk",
+     "b": "wanderer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{ledger_clerk.name}认得{wanderer.name}要找的那个名字"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_caravan_deal",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "caravan_master"
+   ],
+   "slots": [
+    "hu_heir",
+    "qin_player"
+   ],
+   "tension_engine_ids": [
+    "te_debt_midnight",
+    "te_bought_name"
+   ],
+   "chemistry": "你今夜来怀远坊谈的买卖，是买下{hu_heir.name}的货栈；{qin_player.name}在楼上弹琴，你点了三支曲子，{qin_player.name}一支也没弹。",
+   "stakes": {
+    "resource_gap": "你有钱和驼队，{hu_heir.name}有一院子货和一笔今夜到期的账，{qin_player.name}有一张不肯为你弹的琴",
+    "limit_gap": "坊门锁了，你和他们一样出不去",
+    "meeting_reason": "你被锁在坊里，琴房和货栈只隔一条街",
+    "irreplaceable_goal": "你想要货栈，也想知道{qin_player.name}为什么不弹"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "hu_heir",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "你和{hu_heir.name}的父亲做过十年生意"
+    },
+    {
+     "a": "player",
+     "b": "qin_player",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{qin_player.name}说认得你，你不记得在哪里见过"
+    },
+    {
+     "a": "hu_heir",
+     "b": "qin_player",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "{hu_heir.name}每月替{qin_player.name}付一半琴房的租"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_name_and_qin",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "qin_player",
+    "ledger_clerk"
+   ],
+   "tension_engine_ids": [
+    "te_bought_name",
+    "te_name_seal"
+   ],
+   "chemistry": "{qin_player.name}的真名在名籍上被人顶认过，替人按印的是{ledger_clerk.name}；今夜有人要连{qin_player.name}的名字一起买走，{ledger_clerk.name}说只有你能替{qin_player.ta}作证。",
+   "stakes": {
+    "resource_gap": "{qin_player.name}有一张琴，{ledger_clerk.name}有名籍和一笔旧账，你见过{qin_player.name}本来的名字",
+    "limit_gap": "天亮之前，买名字的人就要去坊正署按印",
+    "meeting_reason": "坊门落锁，三个人都在这一坊里",
+    "irreplaceable_goal": "你想让{qin_player.name}把自己的名字拿回来"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "qin_player",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{qin_player.name}只对你说过一次真名"
+    },
+    {
+     "a": "player",
+     "b": "ledger_clerk",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{ledger_clerk.name}知道你见过那个名字"
+    },
+    {
+     "a": "qin_player",
+     "b": "ledger_clerk",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{ledger_clerk.name}欠{qin_player.name}一句对不住"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_letter_debt",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "wanderer",
+    "hu_heir",
+    "creditor"
+   ],
+   "tension_engine_ids": [
+    "te_blood_blade",
+    "te_debt_midnight"
+   ],
+   "chemistry": "{wanderer.name}带着一封遗书跑进坊门，要交给{hu_heir.name}；{creditor.name}说那封信是假的，三更一到，货栈就归{creditor.ta}。",
+   "stakes": {
+    "resource_gap": "{wanderer.name}有遗书和一把刀，{hu_heir.name}有一院子货，{creditor.name}有借据，你是三个人都肯说一句话的人",
+    "limit_gap": "三更账到期，武侯在搜坊",
+    "meeting_reason": "坊门一锁，三个人和你都在这一坊里",
+    "irreplaceable_goal": "你想在三更之前知道那封遗书上写的是什么"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "wanderer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{wanderer.name}在灯下拉住你问路"
+    },
+    {
+     "a": "player",
+     "b": "hu_heir",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{hu_heir.name}请你喝过葡萄酒"
+    },
+    {
+     "a": "player",
+     "b": "creditor",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{creditor.name}对你一向客气"
+    },
+    {
+     "a": "wanderer",
+     "b": "hu_heir",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{wanderer.name}说是{hu_heir.name}父亲托付的"
+    },
+    {
+     "a": "wanderer",
+     "b": "creditor",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{creditor.name}一看见那把刀，脸色就变了"
+    },
+    {
+     "a": "hu_heir",
+     "b": "creditor",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "借据上的字，{hu_heir.name}一个都不信"
+    }
+   ],
+   "tags": [
+    "violence"
+   ]
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_hang_lanterns",
+   "title": "挂夜市的灯笼",
+   "location_ids": [
+    "cross_street"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "一盏灯的竹骨断了一根",
+    "灯一盏盏亮起来，人影越来越多",
+    "最后一盏挂到坊墙根，墙外一片黑"
+   ],
+   "hook_ids": [],
+   "start_minute": 1110,
+   "tags": []
+  },
+  {
+   "id": "a_listen_qin",
+   "title": "在楼下听一支曲子",
+   "location_ids": [
+    "qin_house"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "楼上的窗纸上映出一个人影",
+    "一根弦忽然走了音",
+    "曲终时楼下没人说话"
+   ],
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": []
+  },
+  {
+   "id": "a_night_drink",
+   "title": "在夜市上喝一碗酒",
+   "location_ids": [
+    "cross_street"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "胡饼刚出炉，烫得人换手",
+    "邻桌在猜拳，输的人要唱一段",
+    "酒碗见底的时候，有人在你身边坐下"
+   ],
+   "hook_ids": [],
+   "start_minute": 1230,
+   "tags": []
+  },
+  {
+   "id": "a_count_ledger",
+   "title": "在账房里对一夜的账",
+   "location_ids": [
+    "hu_warehouse"
+   ],
+   "duration_minutes": 90,
+   "beats": [
+    "算盘珠子拨到一半停住了",
+    "一笔账怎么算都差三贯",
+    "院里的骆驼打了个响鼻"
+   ],
+   "hook_ids": [],
+   "start_minute": 1320,
+   "tags": []
+  },
+  {
+   "id": "a_well_wash",
+   "title": "在井巷里打水",
+   "location_ids": [
+    "well_lane"
+   ],
+   "duration_minutes": 15,
+   "beats": [
+    "井绳冰凉，吊上来的水里有月亮",
+    "坊墙外传来更鼓",
+    "巷口有一双脚停住了"
+   ],
+   "hook_ids": [],
+   "start_minute": 60,
+   "tags": []
+  },
+  {
+   "id": "a_watch_gate",
+   "title": "在坊门下看鼓声将尽",
+   "location_ids": [
+    "ward_gate"
+   ],
+   "duration_minutes": 15,
+   "beats": [
+    "鼓声一下一下近了又远",
+    "门外还有人在跑",
+    "木栓落下来，门里门外都静了"
+   ],
+   "hook_ids": [],
+   "start_minute": 1105,
+   "tags": []
+  },
+  {
+   "id": "a_seal_name",
+   "title": "去名籍房按一个印",
+   "location_ids": [
+    "ledger_office"
+   ],
+   "duration_minutes": 20,
+   "beats": [
+    "印泥是新调的，红得发亮",
+    "书吏翻到那一页，手停了停",
+    "按下去的那一刻，灯花爆了一下"
+   ],
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": []
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_drum_end",
+   "title": "鼓声将尽",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "ward_gate"
+   ],
+   "trigger": "街鼓快敲完了，一个人从朱雀街那边一路跑来，要进坊门；守门的老卒说，得有人替这人按印担保",
+   "objective": "在鼓声停下之前，决定认不认这个人",
+   "choice": "认下，还是不认",
+   "immediate": {
+    "text": "第五百九十七声鼓，门外的人离门还有三十步",
+    "minutes": 3
+   },
+   "near": {
+    "text": "鼓声敲完",
+    "deadline_minutes": 10
+   },
+   "far": {
+    "trigger": "门关上了",
+    "consequence": "那人要在门外的大街上过一夜，被巡街的金吾抓去",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "按印担保",
+     "cost": "那人今夜做的事，有一半要算在你头上"
+    },
+    {
+     "option": "说不认得",
+     "cost": "那人看你的眼神，你会记很久"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1108,
+   "tags": []
+  },
+  {
+   "id": "p_name_claimed",
+   "title": "顶认",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "ledger_office",
+    "cross_street"
+   ],
+   "trigger": "有人拿着名籍抄本，说一个坊里的人顶认了别人的名字，要当众改正",
+   "objective": "在坊正问话之前，弄清名籍上那个指印是谁按的",
+   "choice": "替人遮掩，还是让名字回到原主手里",
+   "immediate": {
+    "text": "一个人举着名籍抄本，指着一个名字大声念了出来",
+    "minutes": 10
+   },
+   "near": {
+    "text": "晨鼓一响坊正就问话",
+    "deadline_minutes": 600
+   },
+   "far": {
+    "trigger": "当众改正",
+    "consequence": "被顶认的人和顶认的人，有一个要从这一坊搬走",
+    "due_days": 3
+   },
+   "exits": [
+    {
+     "option": "去找书吏改一笔",
+     "cost": "你就成了改籍的同谋"
+    },
+    {
+     "option": "当众作证",
+     "cost": "两个人里总有一个要恨你"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": []
+  },
+  {
+   "id": "p_debt_tonight",
+   "title": "三更到期",
+   "source": "money",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "hu_warehouse"
+   ],
+   "trigger": "胡商货栈的一笔账今夜三更到期，债主带着借据和两个武侯坐在院子里，说到点不还，货栈就封",
+   "objective": "在三更之前，让这笔账有个着落",
+   "choice": "帮着还，还是帮着查",
+   "immediate": {
+    "text": "债主把借据压在算盘底下，账房的漏刻已经滴到二更",
+    "minutes": 10
+   },
+   "near": {
+    "text": "三更",
+    "deadline_minutes": 180
+   },
+   "far": {
+    "trigger": "货栈被封",
+    "consequence": "二十头骆驼和一院子货都归了债主，少东家要回西边去",
+    "due_days": 5
+   },
+   "exits": [
+    {
+     "option": "凑钱替人还上",
+     "cost": "这笔钱你一时半会儿要不回来"
+    },
+    {
+     "option": "去找能证明借据是假的人",
+     "cost": "那个人今夜可能不想被找到"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1260,
+   "tags": []
+  },
+  {
+   "id": "p_blood_blade",
+   "title": "刀上的血",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "well_lane",
+    "cross_street"
+   ],
+   "trigger": "有人在鼓响前最后一刻跑进坊门，刀上的血还没干；武侯说城外死了人",
+   "objective": "在武侯搜到之前，弄清血是谁的",
+   "choice": "藏人，还是交人",
+   "immediate": {
+    "text": "地上有一串血点，从坊门一直滴到这里",
+    "minutes": 10
+   },
+   "near": {
+    "text": "武侯三更搜坊",
+    "deadline_minutes": 240
+   },
+   "far": {
+    "trigger": "人被搜出来",
+    "consequence": "藏过这个人的地方都要被翻一遍，主人一起押走",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "把人藏起来",
+     "cost": "你要担窝藏的罪"
+    },
+    {
+     "option": "去武侯铺报信",
+     "cost": "那人还没来得及把要送的东西送到"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": [
+    "violence"
+   ]
+  },
+  {
+   "id": "p_buy_name",
+   "title": "买名字的人",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "qin_house"
+   ],
+   "trigger": "一位有门路的客人要替琴师赎身入籍，条件是琴师的名字从此写进那位客人家的籍册，只为一个人弹",
+   "objective": "在客人明早去坊正署按印之前，让琴师自己拿主意",
+   "choice": "帮琴师留下，还是帮琴师走",
+   "immediate": {
+    "text": "楼下那锭银子还放在案上，客人说：“不要曲子，要人。”",
+    "minutes": 10
+   },
+   "near": {
+    "text": "明早晨鼓之后",
+    "deadline_minutes": 600
+   },
+   "far": {
+    "trigger": "按了印",
+    "consequence": "琴师的名字就是别人家的了，琴房要关门",
+    "due_days": 3
+   },
+   "exits": [
+    {
+     "option": "替琴师回绝",
+     "cost": "那位客人记下了你的脸"
+    },
+    {
+     "option": "劝琴师答应",
+     "cost": "你再也听不到那支曲子"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1260,
+   "tags": []
+  },
+  {
+   "id": "p_patrol_search",
+   "title": "搜坊",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "cross_street",
+    "ward_gate"
+   ],
+   "trigger": "上头下令今夜搜坊，挨家挨户点人，名籍对不上的、来路不明的都要押到天亮",
+   "objective": "在武侯搜到之前，让该藏的藏好，该说的说清",
+   "choice": "帮着搜，还是帮着藏",
+   "immediate": {
+    "text": "火把从坊门那头一路亮过来，武侯在挨家敲门",
+    "minutes": 10
+   },
+   "near": {
+    "text": "三更前搜完全坊",
+    "deadline_minutes": 200
+   },
+   "far": {
+    "trigger": "搜出了人",
+    "consequence": "押到县里的人里，有一个是你认得的",
+    "due_days": 2
+   },
+   "exits": [
+    {
+     "option": "替武侯带路",
+     "cost": "坊里人会说你帮官府抓自己人"
+    },
+    {
+     "option": "给人报信",
+     "cost": "你的名字也会写进武侯的簿子"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1290,
+   "tags": []
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_ink_name",
+   "kind": "approach",
+   "slot": "ledger_clerk",
+   "location_ids": [],
+   "text": "{npc.name}把你的名字工工整整誊了一遍，推到你面前：“这才是你的字。”"
+  },
+  {
+   "id": "h_seal_wait",
+   "kind": "observe",
+   "slot": "ledger_clerk",
+   "location_ids": [
+    "ledger_office"
+   ],
+   "text": "{npc.name}握着笔，墨滴在纸上洇开了，{npc.ta}却一直看着你"
+  },
+  {
+   "id": "h_window_open",
+   "kind": "approach",
+   "slot": "qin_player",
+   "location_ids": [
+    "qin_house"
+   ],
+   "text": "{npc.name}推开楼上的窗，叫了你一声：“上来，这支曲子只弹给你。”"
+  },
+  {
+   "id": "h_palm_name",
+   "kind": "approach",
+   "slot": "qin_player",
+   "location_ids": [],
+   "text": "{npc.name}拉过你的手，用指尖在你掌心里慢慢写了一个字"
+  },
+  {
+   "id": "h_grape_wine",
+   "kind": "approach",
+   "slot": "hu_heir",
+   "location_ids": [],
+   "text": "{npc.name}给你斟了一杯葡萄酒：“陪我对一夜的账，我只信你。”"
+  },
+  {
+   "id": "h_father_scale",
+   "kind": "request",
+   "slot": "hu_heir",
+   "location_ids": [],
+   "text": "{npc.name}把一只铜秤塞到你手里：“替我收着，天亮前别给任何人。”"
+  },
+  {
+   "id": "h_torn_note",
+   "kind": "approach",
+   "slot": "creditor",
+   "location_ids": [],
+   "text": "{npc.name}从袖子里抽出一张借据，当着你的面撕成两半：“你的，两清了。”"
+  },
+  {
+   "id": "h_ask_tune",
+   "kind": "request",
+   "slot": "creditor",
+   "location_ids": [
+    "cross_street",
+    "hu_warehouse",
+    "ward_gate",
+    "ledger_office"
+   ],
+   "text": "{npc.name}低声问你：“琴房今夜弹不弹那一支？你替我去听听。”"
+  },
+  {
+   "id": "h_torch_face",
+   "kind": "approach",
+   "slot": "patrol_captain",
+   "location_ids": [],
+   "text": "{npc.name}举着火把走到你面前，照了照你的脸，忽然把火把放低了"
+  },
+  {
+   "id": "h_bronze_tag",
+   "kind": "approach",
+   "slot": "patrol_captain",
+   "location_ids": [],
+   "text": "{npc.name}把一枚铜牌放进你手心，上面刻的不是{npc.ta}现在的名字"
+  },
+  {
+   "id": "h_blade_keep",
+   "kind": "approach",
+   "slot": "wanderer",
+   "location_ids": [],
+   "text": "{npc.name}解下横刀递给你：“替我收一夜，我信你不会拔。”"
+  },
+  {
+   "id": "h_alley_pull",
+   "kind": "accident",
+   "slot": "wanderer",
+   "location_ids": [
+    "well_lane",
+    "cross_street"
+   ],
+   "text": "你经过井巷口，被一只带血的手拉了进去，{npc.name}捂住你的嘴：“别出声。”"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_forged_debt",
+   "category": "信息",
+   "requires": [
+    "creditor",
+    "hu_heir"
+   ],
+   "text": "{creditor.name}手里的借据，是当年和{hu_heir.name}的父亲合伙做的假账。"
+  },
+  {
+   "id": "t_letter_content",
+   "category": "关系",
+   "requires": [
+    "wanderer"
+   ],
+   "text": "{wanderer.name}送来的遗书上写着：货栈留给一个外人，不是少东家。"
+  },
+  {
+   "id": "t_captain_dead",
+   "category": "人事",
+   "requires": [
+    "patrol_captain"
+   ],
+   "text": "县里来人查军籍，{patrol_captain.name}的名字在阵亡簿上。"
+  },
+  {
+   "id": "t_gate_early",
+   "category": "时限",
+   "requires": [],
+   "text": "城里出了大事，今夜晨鼓提前一个时辰敲。"
+  },
+  {
+   "id": "t_fire_market",
+   "category": "意外",
+   "requires": [],
+   "text": "夜市上一座灯架倒了，火顺着灯笼烧到了坊墙根。"
+  },
+  {
+   "id": "t_new_ledger",
+   "category": "制度",
+   "requires": [],
+   "text": "县里下令全坊名籍重造，所有人天亮后重新按印。"
+  },
+  {
+   "id": "t_silk_price",
+   "category": "资源",
+   "requires": [],
+   "text": "西市传来消息：商路断了，丝绢的价钱一夜翻了三倍。"
+  }
+ ],
+ "forbidden_terms": [
+  "手机",
+  "电话",
+  "汽车",
+  "民国",
+  "警察",
+  "咖啡",
+  "妖怪",
+  "鬼魂",
+  "精怪",
+  "学生",
+  "少女",
+  "少年"
+ ],
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "violence"
+ ],
+ "status": "review",
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 9 个）。只写人，不写精怪。性别按会话偏好生成（D15）。"
+}

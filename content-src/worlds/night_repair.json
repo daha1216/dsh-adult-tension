@@ -1,0 +1,2510 @@
+{
+ "schema_version": 1,
+ "id": "night_repair",
+ "title": "夜班修理局",
+ "extends": null,
+ "era": "近未来",
+ "region": "一座巨型城市的修理局，地面是全息广告，地下是管廊",
+ "premise": "城市的一切都有记录，只有夜班修理工知道哪些记录是假的。",
+ "tone": [
+  "夜班",
+  "管廊",
+  "记录",
+  "霓虹"
+ ],
+ "style_hint": "写闷和亮：管廊里的水珠和读数表、头灯照出的三米、全息广告的光打在湿地上；人话少，手上的活多，一句“签了再走”比什么都重。",
+ "clock_start": {
+  "label": "夜班交接后的深夜",
+  "minute": 1260
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "stage_labels": null,
+ "name_pools": {
+  "family": [
+   "阮",
+   "邝",
+   "戚",
+   "骆",
+   "柏",
+   "冼",
+   "甘",
+   "卢",
+   "祝",
+   "麦",
+   "莫",
+   "简",
+   "钟",
+   "霍"
+  ],
+  "given_female": [
+   "琪",
+   "蔓",
+   "珊",
+   "莹",
+   "蕾",
+   "菲",
+   "娅",
+   "璐",
+   "潼",
+   "茜",
+   "妍",
+   "绮"
+  ],
+  "given_male": [
+   "岩",
+   "骏",
+   "锐",
+   "劲",
+   "斌",
+   "豪",
+   "浩",
+   "凯",
+   "炜",
+   "翔",
+   "铭",
+   "健"
+  ],
+  "given_neutral": [
+   "亮",
+   "夜",
+   "午",
+   "焰",
+   "弦",
+   "灰",
+   "烁",
+   "渊",
+   "启",
+   "敏",
+   "晨",
+   "屹"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "阿{given}",
+    "gender": "any"
+   },
+   {
+    "pattern": "老{family}",
+    "gender": "any"
+   },
+   {
+    "pattern": "{given}姐",
+    "gender": "female"
+   },
+   {
+    "pattern": "{given}仔",
+    "gender": "male"
+   }
+  ]
+ },
+ "rules": [
+  {
+   "id": "r_two_signout",
+   "text": "进管廊要双人签退；一个人出来，另一个就要记“失联”。"
+  },
+  {
+   "id": "r_blank_face",
+   "text": "公共终端记下一切，但门禁记录的头像栏可以是空白。"
+  },
+  {
+   "id": "r_outsource",
+   "text": "修理局的工单可以外判，外判的人不进任何名册。"
+  },
+  {
+   "id": "r_red_line",
+   "text": "一氧化碳读数过了红线，整段管廊立刻封闭，里面的人自己想办法。"
+  },
+  {
+   "id": "r_delete_sign",
+   "text": "终端记录可以删，删一条签一次名，签名本身删不掉。"
+  }
+ ],
+ "customs": [
+  "夜班交接时，上一班要在白板上留一句话，下一班不许擦。",
+  "井盖边挂着一串钥匙扣，每个“失联”的工号一个，没人摘。",
+  "外判工来上工，先给调度递一根烟，不点。",
+  "下井前在安全帽上写自己的血型。",
+  "修好一样没人认领的东西，就在上面贴一张写着日期的胶布。"
+ ],
+ "player_identities": [
+  {
+   "id": "tunnel_cleaner",
+   "role": "管廊清洁工",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "老{family}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    45
+   ],
+   "social_position": "low",
+   "baseline": "你在修理局做管廊清洁，夜里跟着检修队下井，扫检修队留下的焊渣和烟头。",
+   "resources": [
+    "一把扫帚和一双走惯了管廊的脚",
+    "井口卖烟的、炒粉的都跟你熟"
+   ],
+   "reputation": "能忍，眼尖",
+   "risks": [
+    "你见过有人一个人下井，签退本上却写着两个工号"
+   ]
+  },
+  {
+   "id": "probation_fixer",
+   "role": "试用期的修理工",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "小{family}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    32
+   ],
+   "social_position": "low",
+   "baseline": "你在修理局试用期的第三个月，夜班的活什么都干，就是还没签正式合同。",
+   "resources": [
+    "一身刚学会的手艺",
+    "车间的老工人都愿意带你"
+   ],
+   "reputation": "勤快，没底",
+   "risks": [
+    "这一轮裁员，你听说试用期的最先走"
+   ]
+  },
+  {
+   "id": "night_fixer",
+   "role": "夜班修理工",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{given}师傅",
+     "gender": "any"
+    },
+    {
+     "pattern": "老{family}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    26,
+    45
+   ],
+   "social_position": "equal",
+   "baseline": "你是修理局的正式夜班修理工，管廊、终端、路灯，夜里坏的都归你修。",
+   "resources": [
+    "一个正式工号和一手好活",
+    "夜班的人都信你"
+   ],
+   "reputation": "实在，讲义气",
+   "risks": [
+    "你签过一张不该签的双人签退"
+   ]
+  },
+  {
+   "id": "er_nurse",
+   "role": "社区医院的急诊护士",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}护士",
+     "gender": "any"
+    },
+    {
+     "pattern": "{given}护士",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    25,
+    42
+   ],
+   "social_position": "equal",
+   "baseline": "你在修理局对面的社区医院上夜班，管廊里抬出来的人都先送到你这里。",
+   "resources": [
+    "一张急诊科的工牌和一双稳的手",
+    "夜班的修理工都认得你"
+   ],
+   "reputation": "冷静，心软",
+   "risks": [
+    "你记得每一个从管廊抬上来的人，也记得哪些没有抬上来"
+   ]
+  },
+  {
+   "id": "section_manager",
+   "role": "修理局的区段主管",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}主管",
+     "gender": "any"
+    },
+    {
+     "pattern": "{given}主管",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    32,
+    52
+   ],
+   "social_position": "high",
+   "baseline": "你是修理局这一区段的夜班主管，排班、工单、签退本最后都要你签字。",
+   "resources": [
+    "区段主管的签字权",
+    "局里上上下下都要给你几分面子"
+   ],
+   "reputation": "稳重，算得清",
+   "risks": [
+    "上面要你配合这一轮裁员，你还没答应"
+   ]
+  },
+  {
+   "id": "auditor",
+   "role": "城市运营公司的审计员",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}审计",
+     "gender": "any"
+    },
+    {
+     "pattern": "{given}老师",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    30,
+    50
+   ],
+   "social_position": "high",
+   "baseline": "你是城市运营公司派来的审计员，来查修理局这个月的门禁和删除记录。",
+   "resources": [
+    "审计的调阅权",
+    "运营公司在你背后"
+   ],
+   "reputation": "冷静，较真",
+   "risks": [
+    "你来之前，有人给你递过一句话：别查七号管廊"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "duty_room",
+   "name": "夜班值班室",
+   "detail": "修理局一楼的值班室，一整面墙的监控屏，桌上一本翻卷了边的签退本，墙角的白板上写满了上一班留的话。",
+   "privacy": "semi",
+   "visibility": "夜班的人进进出出都要过这里，调度的眼睛从不离开监控屏",
+   "witnesses": [
+    "bg_gate_guard",
+    "bg_union_rep"
+   ],
+   "exits": [
+    "workshop",
+    "tunnel_mouth",
+    "rest_stair"
+   ],
+   "affordances": [
+    "翻一翻签退本上的工号",
+    "看白板上上一班留的那句话",
+    "盯着监控屏上的读数"
+   ],
+   "pressure_modifiers": {
+    "p_co_rising": "七号管廊那块屏上的数字变成了黄色。",
+    "p_layoff_talk": "白板角落被人用红笔写了一个“3”。"
+   },
+   "tags": []
+  },
+  {
+   "id": "workshop",
+   "name": "修理车间",
+   "detail": "值班室后面的大车间，堆满了没人认领的东西：断了的路灯、烧坏的终端、一台老式收音机，每一样上面都贴着写了日期的胶布。",
+   "privacy": "semi",
+   "visibility": "夜班的人在这里干活、吃饭、打盹；谁跟谁蹲在一块儿修什么，大家都看得见",
+   "witnesses": [
+    "bg_union_rep",
+    "bg_stair_cleaner"
+   ],
+   "exits": [
+    "duty_room"
+   ],
+   "affordances": [
+    "拿起一样没人认领的东西看看胶布上的日期",
+    "在工作台边借一把螺丝刀",
+    "坐在一堆旧零件上吃口东西"
+   ],
+   "pressure_modifiers": {
+    "p_outsource_grab": "车间门口站着两拨外判工，谁也不看谁。",
+    "p_hospital_call": "焊工的工作台上，手机屏幕一直亮着。"
+   },
+   "tags": []
+  },
+  {
+   "id": "tunnel_mouth",
+   "name": "管廊井口",
+   "detail": "修理局门外的一座井口，头顶是整面楼的全息广告，井盖边挂着一串钥匙扣，每一个都是一个“失联”的工号。",
+   "privacy": "public",
+   "visibility": "街上的人来来往往，谁在井口站了多久、谁下去了，卖烟的都看着",
+   "witnesses": [
+    "bg_cig_seller",
+    "bg_noodle_cart"
+   ],
+   "exits": [
+    "duty_room",
+    "tunnel_seven",
+    "terminal_kiosk"
+   ],
+   "affordances": [
+    "数一数井盖边挂了几个钥匙扣",
+    "在安全帽上写自己的血型",
+    "抬头看全息广告换了几轮"
+   ],
+   "pressure_modifiers": {
+    "p_co_rising": "井口往外冒着一股闷热的风。"
+   },
+   "tags": []
+  },
+  {
+   "id": "tunnel_seven",
+   "name": "七号管廊",
+   "detail": "地下二十米的一段老管廊，管子上结着水珠，头灯只照得见前面三米，墙上的读数表一闪一闪。",
+   "privacy": "private",
+   "visibility": "下面只有签了名的人；谁跟谁在里面说了什么，只有管子听得见",
+   "witnesses": [],
+   "exits": [
+    "tunnel_mouth"
+   ],
+   "affordances": [
+    "用头灯照一照管子上的焊缝",
+    "看墙上读数表的数字",
+    "靠着管子歇一口气"
+   ],
+   "pressure_modifiers": {
+    "p_co_rising": "读数表的指针抖着往红区挪。",
+    "p_hospital_call": "焊缝补了一半，焊枪还搁在地上。"
+   },
+   "tags": []
+  },
+  {
+   "id": "terminal_kiosk",
+   "name": "公共终端亭",
+   "detail": "街口一座玻璃终端亭，屏幕通宵亮着，门禁记录、缴费、报修都在这一块屏上，头顶的摄像头一直在转。",
+   "privacy": "public",
+   "visibility": "谁在终端前站过、查了什么，屏幕和摄像头都记着",
+   "witnesses": [
+    "bg_group_admin",
+    "bg_noodle_cart"
+   ],
+   "exits": [
+    "tunnel_mouth"
+   ],
+   "affordances": [
+    "在终端上查一条门禁记录",
+    "看头顶的摄像头转到了哪",
+    "在终端亭的玻璃上看自己的影子"
+   ],
+   "pressure_modifiers": {
+    "p_door_anomaly": "终端屏右下角跳着一个红色的感叹号。",
+    "p_face_video": "终端亭的玻璃上贴着一张打印出来的视频截图。"
+   },
+   "tags": []
+  },
+  {
+   "id": "rest_stair",
+   "name": "消防楼梯间",
+   "detail": "修理局大楼的消防楼梯，声控灯一跺脚才亮，楼梯拐角放着一把折叠椅和一个当烟灰缸的罐头。",
+   "privacy": "private",
+   "visibility": "很少有人走楼梯；谁在这里坐过，只有烟头知道",
+   "witnesses": [],
+   "exits": [
+    "duty_room"
+   ],
+   "affordances": [
+    "跺一脚让声控灯亮起来",
+    "坐在折叠椅上歇一会儿",
+    "隔着门听值班室的动静"
+   ],
+   "pressure_modifiers": {
+    "p_face_video": "楼梯拐角有人在小声地反复放着同一段视频。",
+    "p_layoff_talk": "罐头里多了好几个新烟头。"
+   },
+   "tags": []
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "dispatcher",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    34,
+    52
+   ],
+   "adult_context": "夜班调度员，成年人，排了十年夜班，知道每一个“失联”工号后面是谁",
+   "public_role": "夜班调度",
+   "appearance_options": [
+    "一件洗得发白的修理局夹克，胸口别着三支笔",
+    "眼睛一直盯着监控屏，说话时也不看人"
+   ],
+   "identity": {
+    "authority": "决定今夜谁下哪一段管廊",
+    "resources": [
+     "排班表和签退本",
+     "十年里每一个夜班的记录都记在脑子里"
+    ],
+    "limits": [
+     "裁员名单上可能有{npc.ta}的名字",
+     "签退本出了错，第一个担责的就是调度"
+    ],
+    "obligations": [
+     "每个“失联”工号，每年都要在签退本上再写一遍"
+    ],
+    "exposure": "{npc.ta}替一个人把“失联”改成过“调岗”，那个人现在用别的身份活着",
+    "hidden": "{npc.ta}排班时故意把一个人一直排在最安全的那一段"
+   },
+   "decision": {
+    "core_value": "名字可以从名册上消失，不能从签退本上消失",
+    "goal_options": [
+     "今夜不再多一个失联",
+     "保住调度这个位子",
+     "让那个改过身份的人平安"
+    ],
+    "pressure_responses": {
+     "low": "盯着监控屏，头也不回地说“签了再走”",
+     "mid": "把签退本推到对方面前，指着一个工号",
+     "high": "当着主管的面说出某个“失联”工号的下落",
+     "breaking": "撕掉签退本的最后一页，自己下管廊"
+    },
+    "withdrawal": "夜里一遍遍刷新七号管廊的读数",
+    "relationship_stance": "沉稳，固执",
+    "contrast": "替整个夜班记着谁进去、谁出来，自己却十年没从值班室出去过",
+    "prefers": [
+     "先看读数"
+    ],
+    "avoids": [
+     "被人说只会排班"
+    ],
+    "never": [
+     "让一个人单独下管廊"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方签退从不忘",
+     "对方问{npc.ta}吃饭了没有"
+    ],
+    "likes": [
+     "交班后两个人在楼梯间分一包烟"
+    ],
+    "dislikes": [
+     "被当成一张排班表"
+    ],
+    "preconditions": [
+     "监控屏还亮着"
+    ],
+    "boundaries": [
+     "值班室没有别人"
+    ],
+    "expression": "告诉对方那个改过身份的人是谁",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢离开值班室一夜的那个人"
+   },
+   "voices": {
+    "surface": "“签了再走。进去两个，就得出来两个。”",
+    "inner": "“那个工号后面是谁，我比谁都清楚。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1439,
+     "location_id": "duty_room"
+    },
+    {
+     "from": 0,
+     "to": 360,
+     "location_id": "duty_room"
+    },
+    {
+     "from": 361,
+     "to": 420,
+     "location_id": "rest_stair"
+    }
+   ],
+   "situation": {
+    "trigger": "七号管廊的读数在涨，签退本上少了一个人",
+    "pressure": "报了，那个人就是“失联”；不报，自己就是瞒报",
+    "exits": [
+     {
+      "option": "先不报，给二十分钟",
+      "cost": "出了事，调度第一个担责"
+     },
+     {
+      "option": "按规矩报",
+      "cost": "那个人从此只是一个工号"
+     }
+    ]
+   },
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "outsourced_fixer",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    28,
+    45
+   ],
+   "adult_context": "外判检修工，成年人，不在任何名册上，修过城里最危险的那一段管廊",
+   "public_role": "外判检修工",
+   "appearance_options": [
+    "一身没有工号的灰色工服，防毒面具总挂在脖子上",
+    "手背上全是烫伤的旧疤，指甲缝里是黑的"
+   ],
+   "identity": {
+    "authority": "决定一段管廊修到什么程度",
+    "resources": [
+     "一身没人比得上的手艺",
+     "知道管廊里每一处偷工减料的地方"
+    ],
+    "limits": [
+     "不在名册上，出了事没人认",
+     "外判的钱按单结，一单不接就没饭吃"
+    ],
+    "obligations": [
+     "接了的单一定修完"
+    ],
+    "exposure": "{npc.ta}原来有工号，就是“失联”的那一个",
+    "hidden": "{npc.ta}知道七号管廊的读数为什么老往上爬：有人偷换了材料"
+   },
+   "decision": {
+    "core_value": "修好就行，名字不重要",
+    "goal_options": [
+     "把七号管廊彻底修好",
+     "攒够钱给自己买一个新身份",
+     "让偷换材料的人认账"
+    ],
+    "pressure_responses": {
+     "low": "摘下防毒面具，说“别报，给我二十分钟”",
+     "mid": "把一截锈穿的管子扔到对方脚边",
+     "high": "当着审计的面说出材料是谁换的",
+     "breaking": "一个人下七号管廊，不签名"
+    },
+    "withdrawal": "夜里蹲在井口抽烟，听管廊里的风声",
+    "relationship_stance": "沉默，硬",
+    "contrast": "修好了城里最危险的那一段管廊，自己的名字却没地方写",
+    "prefers": [
+     "先动手"
+    ],
+    "avoids": [
+     "被人叫“外判的”"
+    ],
+    "never": [
+     "丢下一个人在管廊里"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方叫得出{npc.ta}的名字",
+     "对方不问{npc.ta}以前的工号"
+    ],
+    "likes": [
+     "从管廊上来时有人递过来一瓶水"
+    ],
+    "dislikes": [
+     "被当成一件工具"
+    ],
+    "preconditions": [
+     "面具已经戴上了"
+    ],
+    "boundaries": [
+     "井口没有人"
+    ],
+    "expression": "把以前的工牌拿出来给对方看",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}想要回名字的那个人"
+   },
+   "voices": {
+    "surface": "“别报。报了，那个人就是‘失联’。给我二十分钟。”",
+    "inner": "“我以前有工号。现在那个工号挂在井口。”"
+   },
+   "schedule": [
+    {
+     "from": 1260,
+     "to": 1380,
+     "location_id": "tunnel_mouth"
+    },
+    {
+     "from": 1381,
+     "to": 1439,
+     "location_id": "tunnel_seven"
+    },
+    {
+     "from": 0,
+     "to": 300,
+     "location_id": "tunnel_seven"
+    }
+   ],
+   "situation": {
+    "trigger": "七号管廊里还有一个人没出来，读数在涨",
+    "pressure": "下去，就是没签名的第二次",
+    "exits": [
+     {
+      "option": "下去",
+      "cost": "没有人陪{npc.ta}签退"
+     },
+     {
+      "option": "等调度派人",
+      "cost": "等派到人，读数早过线了"
+     }
+    ]
+   },
+   "tags": [
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "terminal_tech",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    26,
+    42
+   ],
+   "adult_context": "公共终端维护员，成年人，能删除一条记录，删一次要担一次责",
+   "public_role": "终端维护员",
+   "appearance_options": [
+    "耳朵上挂着一副无线耳机，一边总是摘下来的",
+    "背包里塞满了线缆和备用屏，走路叮当响"
+   ],
+   "identity": {
+    "authority": "决定哪一条记录留下、哪一条消失",
+    "resources": [
+     "终端的维护权限和一个删除码",
+     "整个街区的门禁和摄像记录"
+    ],
+    "limits": [
+     "每删一条都要签名，签名本身删不掉",
+     "上面在查谁动过记录"
+    ],
+    "obligations": [
+     "每晚巡一遍街区的终端亭"
+    ],
+    "exposure": "{npc.ta}删过一条记录，救过一个人，那条删除签名至今挂在{npc.ta}名下",
+    "hidden": "{npc.ta}知道那段换脸视频是从哪台终端传上去的"
+   },
+   "decision": {
+    "core_value": "记录不说谎，说谎的是看记录的人",
+    "goal_options": [
+     "查出换脸视频的源头",
+     "不再替别人担删除的责",
+     "保住维护员这份差事"
+    ],
+    "pressure_responses": {
+     "low": "摘下一边耳机，问对方想删什么",
+     "mid": "把终端屏转过来，让对方看一条记录",
+     "high": "当着审计调出上传视频的那条日志",
+     "breaking": "把删除码交给别人，自己辞职"
+    },
+    "withdrawal": "夜里坐在终端亭里，一条一条看街区的门禁记录",
+    "relationship_stance": "冷静，好奇",
+    "contrast": "能让任何一条记录消失，自己却被一条删除签名钉在原地",
+    "prefers": [
+     "先看日志"
+    ],
+    "avoids": [
+     "被人当成删帖的"
+    ],
+    "never": [
+     "替人删一条不该删的记录"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不求{npc.ta}删任何东西",
+     "对方愿意替{npc.ta}签一次名"
+    ],
+    "likes": [
+     "两个人挤在终端亭里看同一块屏"
+    ],
+    "dislikes": [
+     "被当成一个删除键"
+    ],
+    "preconditions": [
+     "终端亭的门开着"
+    ],
+    "boundaries": [
+     "摄像头照不到的地方"
+    ],
+    "expression": "说出那条救过人的删除记录是为了谁",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}不想再删任何记录的那个人"
+   },
+   "voices": {
+    "surface": "“你想删什么？删一条，我签一次名。”",
+    "inner": "“那段视频是从哪台终端传上去的，我知道。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1320,
+     "location_id": "terminal_kiosk"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "duty_room"
+    },
+    {
+     "from": 0,
+     "to": 240,
+     "location_id": "terminal_kiosk"
+    }
+   ],
+   "situation": {
+    "trigger": "审计要调这个月所有的删除记录",
+    "pressure": "{npc.ta}签过的那一条会被翻出来",
+    "exits": [
+     {
+      "option": "先把那一条的来龙去脉写清楚交上去",
+      "cost": "被救的那个人会被查"
+     },
+     {
+      "option": "什么也不做",
+      "cost": "{npc.ta}会被当成删记录的内鬼"
+     }
+    ]
+   },
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "hr_officer",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    30,
+    48
+   ],
+   "adult_context": "修理局的人事专员，成年人，这一轮裁员的名单就在这个人手里",
+   "public_role": "人事专员",
+   "appearance_options": [
+    "一身熨得平整的衬衫，工牌翻在背面",
+    "说话很客气，笑的时候嘴角不动"
+   ],
+   "identity": {
+    "authority": "决定裁员名单最后一格填谁",
+    "resources": [
+     "裁员名单和每个人的考勤记录",
+     "上头的授权"
+    ],
+    "limits": [
+     "名单交不上去，{npc.ta}自己就是下一个",
+     "夜班的人都恨{npc.ta}"
+    ],
+    "obligations": [
+     "明早九点前把名单交上去"
+    ],
+    "exposure": "名单上原本有{npc.ta}自己的名字，是{npc.ta}换下来的",
+    "hidden": "上头要裁的其实是整个夜班，这一轮只是开头"
+   },
+   "decision": {
+    "core_value": "规矩是上面定的，我只是填表",
+    "goal_options": [
+     "把名单按时交上去",
+     "把自己保下来",
+     "少裁一个是一个"
+    ],
+    "pressure_responses": {
+     "low": "客客气气地说“我们只是聊一聊”",
+     "mid": "把考勤记录推到对方面前，指着一个红字",
+     "high": "当着夜班所有人念出名单",
+     "breaking": "把名单撕了，自己去楼上辞职"
+    },
+    "withdrawal": "夜里一个人在空办公室，把名单写了又擦",
+    "relationship_stance": "客气，疲惫",
+    "contrast": "替上面裁了一个又一个人，自己也只是一个工号",
+    "prefers": [
+     "先按流程"
+    ],
+    "avoids": [
+     "被人说是刽子手"
+    ],
+    "never": [
+     "裁掉一个家里有病人的"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不把{npc.ta}当成上面的人",
+     "对方问{npc.ta}累不累"
+    ],
+    "likes": [
+     "空办公室里一杯放凉的咖啡"
+    ],
+    "dislikes": [
+     "被当成一把刀"
+    ],
+    "preconditions": [
+     "名单还没交"
+    ],
+    "boundaries": [
+     "办公室灯都关了"
+    ],
+    "expression": "让对方看名单上被换下来的那个名字",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢把名单撕了的那个人"
+   },
+   "voices": {
+    "surface": "“别紧张，我们只是聊一聊。”",
+    "inner": "“名单上原本有我。我把自己换下来了。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1320,
+     "location_id": "workshop"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "duty_room"
+    },
+    {
+     "from": 0,
+     "to": 120,
+     "location_id": "rest_stair"
+    }
+   ],
+   "situation": {
+    "trigger": "上面催名单，明早九点前必须交",
+    "pressure": "最后一格不填，{npc.ta}的名字就会回到上面",
+    "exits": [
+     {
+      "option": "填一个最不会闹的人",
+      "cost": "那个人家里有病人"
+     },
+     {
+      "option": "填自己",
+      "cost": "{npc.ta}明天就要收拾东西"
+     }
+    ]
+   },
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "streamer",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    23,
+    36
+   ],
+   "adult_context": "被换脸视频缠上的夜间主播，成年人，住在修理局楼上的公寓，靠夜里直播修东西攒粉丝",
+   "public_role": "夜间主播",
+   "appearance_options": [
+    "一件印着自己频道名字的卫衣，脖子上挂着补光灯",
+    "说着话会下意识找一眼镜头在哪"
+   ],
+   "identity": {
+    "authority": "决定直播间里讲什么、不讲什么",
+    "resources": [
+     "一个几万人的直播间",
+     "街区里一半的人认得这张脸"
+    ],
+    "limits": [
+     "换脸视频传开了，平台要封号",
+     "房租是靠打赏交的"
+    ],
+    "obligations": [
+     "每晚十一点准时开播"
+    ],
+    "exposure": "换脸视频里那副身体是修理局的一个人，{npc.ta}知道是谁",
+    "hidden": "{npc.ta}在井口偷拍到过一段画面，里面有不该出现的人"
+   },
+   "decision": {
+    "core_value": "脸是我的，谁也拿不走",
+    "goal_options": [
+     "让那段视频消失",
+     "找出是谁做的",
+     "保住直播间"
+    ],
+    "pressure_responses": {
+     "low": "对着镜头比个手势，把镜头转开",
+     "mid": "把手机递给对方，让对方看那段视频",
+     "high": "在直播间里说出视频里那副身体是谁",
+     "breaking": "当着几万人的面关掉直播，不再开"
+    },
+    "withdrawal": "半夜下播后一个人坐在黑屏前，一遍遍看那段视频",
+    "relationship_stance": "活泼，脆弱",
+    "contrast": "让几万人看着自己的脸，却在一夜之间不知道哪张脸是自己的",
+    "prefers": [
+     "先开镜头"
+    ],
+    "avoids": [
+     "被人说视频是真的"
+    ],
+    "never": [
+     "把别人的脸放进直播间"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方从没看过那段视频",
+     "对方不让{npc.ta}开镜头"
+    ],
+    "likes": [
+     "关了补光灯以后的一片黑"
+    ],
+    "dislikes": [
+     "被当成一张脸"
+    ],
+    "preconditions": [
+     "还在直播"
+    ],
+    "boundaries": [
+     "补光灯关着"
+    ],
+    "expression": "把偷拍的那段画面给对方看",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}不想再对着镜头的那个人"
+   },
+   "voices": {
+    "surface": "“这段不播。你别看镜头，看我。”",
+    "inner": "“视频里那副身体是谁，我知道。我拍到过。”"
+   },
+   "schedule": [
+    {
+     "from": 1260,
+     "to": 1380,
+     "location_id": "terminal_kiosk"
+    },
+    {
+     "from": 1381,
+     "to": 1439,
+     "location_id": "rest_stair"
+    },
+    {
+     "from": 0,
+     "to": 180,
+     "location_id": "rest_stair"
+    }
+   ],
+   "situation": {
+    "trigger": "平台说明早之前不处理那段视频，就封号",
+    "pressure": "封了号，房租就交不上",
+    "exits": [
+     {
+      "option": "求维护员删",
+      "cost": "删除签名会挂在维护员名下"
+     },
+     {
+      "option": "公开说出视频里的人是谁",
+      "cost": "那个人会丢工作"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "welder",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    28,
+    46
+   ],
+   "adult_context": "修理局的焊工，成年人，家人住在医院里，下了夜班就往病房跑",
+   "public_role": "焊工",
+   "appearance_options": [
+    "一身焊花烧出小洞的工装，护目镜推在额头上",
+    "眼睛总是红的，分不清是焊光熏的还是熬夜熬的"
+   ],
+   "identity": {
+    "authority": "决定七号管廊的那道焊缝什么时候补",
+    "resources": [
+     "全局唯一会焊那种管子的手艺",
+     "夜班的人都欠{npc.ta}一点情"
+    ],
+    "limits": [
+     "家人的医药费靠这份夜班工资",
+     "裁员名单上可能有{npc.ta}"
+    ],
+    "obligations": [
+     "每天下了班先去医院"
+    ],
+    "exposure": "{npc.ta}知道七号管廊的材料被人偷换了，可说出来就会丢工作",
+    "hidden": "{npc.ta}私下接外判的活，用的是别人的工号"
+   },
+   "decision": {
+    "core_value": "先把人顾住，再顾管子",
+    "goal_options": [
+     "保住工作，付得起医药费",
+     "补好七号管廊那道焊缝",
+     "在家人醒着的时候陪一会儿"
+    ],
+    "pressure_responses": {
+     "low": "推上护目镜，说“我先去趟医院”",
+     "mid": "把一张医药费单子塞给对方看",
+     "high": "当着主管说出材料被偷换的事",
+     "breaking": "扔下焊枪去医院，不管管廊"
+    },
+    "withdrawal": "夜里一边焊一边看手机，怕错过医院的电话",
+    "relationship_stance": "实在，焦虑",
+    "contrast": "焊得住城里最难焊的管子，却补不上家里那个窟窿",
+    "prefers": [
+     "先顾家里"
+    ],
+    "avoids": [
+     "被人说只会焊"
+    ],
+    "never": [
+     "焊一道自己不放心的缝"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方替{npc.ta}在医院守过一夜",
+     "对方不提{npc.ta}家里的事"
+    ],
+    "likes": [
+     "焊枪熄了以后，两个人在井口吹一会儿风"
+    ],
+    "dislikes": [
+     "被当成一台焊机"
+    ],
+    "preconditions": [
+     "医院的电话还没来"
+    ],
+    "boundaries": [
+     "没有人等着{npc.ta}去医院"
+    ],
+    "expression": "带对方去病房见一见家里的人",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     2,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢歇一口气的那个人"
+   },
+   "voices": {
+    "surface": "“我先去趟医院，焊缝回来补。你替我盯一下？”",
+    "inner": "“七号管廊的材料是被人换过的。我焊的时候就知道。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1320,
+     "location_id": "workshop"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "tunnel_seven"
+    },
+    {
+     "from": 0,
+     "to": 240,
+     "location_id": "workshop"
+    }
+   ],
+   "situation": {
+    "trigger": "医院半夜打电话来，家人病危，要家属去签字",
+    "pressure": "去了，七号管廊的急修就没人",
+    "exits": [
+     {
+      "option": "去医院",
+      "cost": "读数要是过线，管廊里会出事"
+     },
+     {
+      "option": "先焊完",
+      "cost": "也许就见不到最后一面"
+     }
+    ]
+   },
+   "tags": [
+    "bodily_harm"
+   ]
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_gate_guard",
+   "role": "值班室门口的保安",
+   "function": "obstacle",
+   "location_ids": [
+    "duty_room",
+    "tunnel_mouth"
+   ],
+   "line": "{npc.name}守在值班室门口，没签名的人，{npc.ta}一个也不放下井",
+   "gender": "any",
+   "age_range": [
+    35,
+    55
+   ],
+   "adult_context": "修理局雇的成年保安",
+   "name": null
+  },
+  {
+   "id": "bg_stair_cleaner",
+   "role": "楼道保洁",
+   "function": "witness",
+   "location_ids": [
+    "rest_stair",
+    "workshop"
+   ],
+   "line": "{npc.name}拖着拖把楼上楼下地走，谁在楼梯间待过，烟头和脚印{npc.ta}都见过",
+   "gender": "any",
+   "age_range": [
+    45,
+    62
+   ],
+   "adult_context": "修理局的成年夜班保洁",
+   "name": null
+  },
+  {
+   "id": "bg_noodle_cart",
+   "role": "街口炒粉摊老板",
+   "function": "helper",
+   "location_ids": [
+    "terminal_kiosk",
+    "tunnel_mouth"
+   ],
+   "line": "{npc.name}的炒粉摊开到天亮，夜班的人赊账，{npc.ta}从不催",
+   "gender": "any",
+   "age_range": [
+    40,
+    60
+   ],
+   "adult_context": "在这条街摆了十年摊的成年摊主",
+   "name": null
+  },
+  {
+   "id": "bg_union_rep",
+   "role": "工会的老代表",
+   "function": "messenger",
+   "location_ids": [
+    "workshop",
+    "duty_room"
+   ],
+   "line": "{npc.name}揣着一张传达单在车间里转，上面的话和下面的话都从{npc.ta}这里过",
+   "gender": "any",
+   "age_range": [
+    50,
+    64
+   ],
+   "adult_context": "在修理局干了三十年的成年老工人",
+   "name": null
+  },
+  {
+   "id": "bg_group_admin",
+   "role": "街区群的群主",
+   "function": "rumor_source",
+   "location_ids": [
+    "terminal_kiosk"
+   ],
+   "line": "{npc.name}靠在终端亭边刷手机，街区群里一半的消息是{npc.ta}转的",
+   "gender": "any",
+   "age_range": [
+    30,
+    50
+   ],
+   "adult_context": "住在这片街区的成年住户",
+   "name": null
+  },
+  {
+   "id": "bg_cig_seller",
+   "role": "井口卖烟的",
+   "function": "witness",
+   "location_ids": [
+    "tunnel_mouth"
+   ],
+   "line": "{npc.name}守着一个烟摊，谁在井口站了多久、谁下去没上来，{npc.ta}都看着",
+   "gender": "any",
+   "age_range": [
+    50,
+    70
+   ],
+   "adult_context": "在井口边摆摊的成年老住户",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_signbook",
+   "text": "签退本",
+   "reach": "谁进了哪段管廊、几点出来，手写的，一笔不差",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_district_group",
+   "text": "街区群",
+   "reach": "一段截图、一句语音，转三次就成了另一回事",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_whiteboard",
+   "text": "值班室白板",
+   "reach": "上一班留下的一句话，写得很短，下一班要猜意思",
+   "fidelity": "distorted"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_lost_id",
+   "text": "签退本上又少了一个人"
+  },
+  {
+   "id": "te_outsource",
+   "text": "外判工抢单，干活的人不在名册上"
+  },
+  {
+   "id": "te_co_rising",
+   "text": "管廊里的一氧化碳读数在往上爬"
+  },
+  {
+   "id": "te_deepfake",
+   "text": "一段换脸视频在街区里传"
+  },
+  {
+   "id": "te_door_log",
+   "text": "门禁记录出了异常"
+  },
+  {
+   "id": "te_layoff",
+   "text": "裁员名单最后一格空着"
+  },
+  {
+   "id": "te_hospital",
+   "text": "有人的家人住院了"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "k_cleaner_sign",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "tunnel_cleaner"
+   ],
+   "slots": [
+    "dispatcher",
+    "outsourced_fixer"
+   ],
+   "tension_engine_ids": [
+    "te_lost_id",
+    "te_outsource"
+   ],
+   "chemistry": "你在井口见过{outsourced_fixer.name}一个人下去，签退本上却写着两个工号；{dispatcher.name}后来问过你，那晚还看见了谁。",
+   "stakes": {
+    "resource_gap": "{dispatcher.name}有排班表和签退本，{outsourced_fixer.name}有一身手艺和一个没人知道的旧工号，你只有一把扫帚",
+    "limit_gap": "七号管廊的读数又在涨",
+    "meeting_reason": "你跟着检修队下井那几个月，两个人你都天天见",
+    "irreplaceable_goal": "你想保住这份活，又不想替一本假账作证"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "dispatcher",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{dispatcher.name}从不记错你的工号"
+    },
+    {
+     "a": "player",
+     "b": "outsourced_fixer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{outsourced_fixer.name}在井口分过你一根烟"
+    },
+    {
+     "a": "dispatcher",
+     "b": "outsourced_fixer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{dispatcher.name}每次派单给{outsourced_fixer.name}，都多看一眼签退本"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_probation_layoff",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "probation_fixer"
+   ],
+   "slots": [
+    "hr_officer",
+    "welder"
+   ],
+   "tension_engine_ids": [
+    "te_layoff",
+    "te_hospital"
+   ],
+   "chemistry": "你还在试用期，{hr_officer.name}说这一轮可以不裁你，前提是你顶上{welder.name}的夜班；{welder.name}的家人还在医院里。",
+   "stakes": {
+    "resource_gap": "{hr_officer.name}有名单和考勤，{welder.name}有全局最好的焊工手艺，你只有一份没签的合同",
+    "limit_gap": "名单明早九点前交",
+    "meeting_reason": "{welder.name}带过你三个月，{hr_officer.name}面试过你",
+    "irreplaceable_goal": "你想留下来，又不想拿别人的饭碗换"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "hr_officer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{hr_officer.name}给你的承诺，没有写在纸上"
+    },
+    {
+     "a": "player",
+     "b": "welder",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{welder.name}手把手教过你焊第一道缝"
+    },
+    {
+     "a": "hr_officer",
+     "b": "welder",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{welder.name}的考勤上有好几个红字"
+    }
+   ],
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "k_fixer_terminal",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "night_fixer"
+   ],
+   "slots": [
+    "terminal_tech",
+    "streamer"
+   ],
+   "tension_engine_ids": [
+    "te_deepfake",
+    "te_door_log"
+   ],
+   "chemistry": "{streamer.name}被一段换脸视频缠上了，视频里那副身体穿着你们局的工服；{terminal_tech.name}说能删掉那条记录，但删一条要签一次名，问你肯不肯当见证人。",
+   "stakes": {
+    "resource_gap": "{terminal_tech.name}有删除码，{streamer.name}有几万人的直播间，你有一身工服和一个正式工号",
+    "limit_gap": "平台明早之前就要封号",
+    "meeting_reason": "你修过{streamer.name}家的灯，{terminal_tech.name}常来车间借线缆",
+    "irreplaceable_goal": "你想帮人把视频弄下去，又不想自己的名字挂在删除记录上"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "terminal_tech",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{terminal_tech.name}借过你一把剥线钳，还回来时多了一卷胶布"
+    },
+    {
+     "a": "player",
+     "b": "streamer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{streamer.name}的直播间里放过你修灯的画面"
+    },
+    {
+     "a": "terminal_tech",
+     "b": "streamer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "上传视频的那台终端，{terminal_tech.name}心里有数"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_nurse_welder",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "er_nurse"
+   ],
+   "slots": [
+    "welder",
+    "outsourced_fixer"
+   ],
+   "tension_engine_ids": [
+    "te_hospital",
+    "te_co_rising"
+   ],
+   "chemistry": "{welder.name}的家人住在你值夜班的病区，{welder.name}每天下了班先来病房；上周从管廊里背上来一个一氧化碳中毒的人，是{outsourced_fixer.name}背的，没留名字。",
+   "stakes": {
+    "resource_gap": "{welder.name}有一手焊工和一张医药费单子，{outsourced_fixer.name}有一身手艺没有名字，你有急诊科的工牌",
+    "limit_gap": "七号管廊的读数还在涨，病房的电话随时会响",
+    "meeting_reason": "这两个人你都在急诊门口见过",
+    "irreplaceable_goal": "你想让管廊里不再抬人上来"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "welder",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "你替{welder.name}在病房守过一夜"
+    },
+    {
+     "a": "player",
+     "b": "outsourced_fixer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{outsourced_fixer.name}背人进来时，冲你点了一下头就走了"
+    },
+    {
+     "a": "welder",
+     "b": "outsourced_fixer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{welder.name}用的那个工号，是{outsourced_fixer.name}给的"
+    }
+   ],
+   "tags": [
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "k_manager_list",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "section_manager"
+   ],
+   "slots": [
+    "hr_officer",
+    "dispatcher"
+   ],
+   "tension_engine_ids": [
+    "te_layoff",
+    "te_lost_id"
+   ],
+   "chemistry": "你是夜班的区段主管，{hr_officer.name}要你在裁员名单上填最后一格；{dispatcher.name}排了十年班，知道你填谁，谁就再也不会出现在签退本上。",
+   "stakes": {
+    "resource_gap": "你有签字权，{hr_officer.name}有名单和上头的授权，{dispatcher.name}有十年的签退本",
+    "limit_gap": "天亮之前，最后一格必须有一个名字",
+    "meeting_reason": "你当主管这几年，两个人一个替你排班、一个替你做账",
+    "irreplaceable_goal": "你想守住夜班，又知道总得有一格被填上"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "hr_officer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{hr_officer.name}把名单先拿给你看了"
+    },
+    {
+     "a": "player",
+     "b": "dispatcher",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{dispatcher.name}替你瞒过一回签退本上的错"
+    },
+    {
+     "a": "hr_officer",
+     "b": "dispatcher",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{dispatcher.name}的名字，原本也在名单上"
+    }
+   ],
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "k_auditor_door",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "auditor"
+   ],
+   "slots": [
+    "terminal_tech",
+    "outsourced_fixer"
+   ],
+   "tension_engine_ids": [
+    "te_door_log",
+    "te_outsource"
+   ],
+   "chemistry": "你来审计修理局的门禁记录，头像栏空白的那几条都指向七号管廊；{terminal_tech.name}说那些记录有人删过，{outsourced_fixer.name}是唯一一个不在名册上、却总在那几个时间出现的人。",
+   "stakes": {
+    "resource_gap": "你有调阅权和运营公司撑腰，{terminal_tech.name}有删除码，{outsourced_fixer.name}什么也没有",
+    "limit_gap": "审计报告三天后交",
+    "meeting_reason": "你来修理局这一周，两个人都绕着你走",
+    "irreplaceable_goal": "你想把账查清楚，又开始怀疑该查的不是这两个人"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "terminal_tech",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{terminal_tech.name}交给你的日志，少了一页"
+    },
+    {
+     "a": "player",
+     "b": "outsourced_fixer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{outsourced_fixer.name}在井口替你扶过一回梯子"
+    },
+    {
+     "a": "terminal_tech",
+     "b": "outsourced_fixer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{terminal_tech.name}那条删除签名，删的就是{outsourced_fixer.name}的记录"
+    }
+   ],
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "k_dispatch_and_fixer",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "dispatcher",
+    "outsourced_fixer"
+   ],
+   "tension_engine_ids": [
+    "te_lost_id",
+    "te_co_rising"
+   ],
+   "chemistry": "{dispatcher.name}的签退本上，有一个“失联”工号一直没销；{outsourced_fixer.name}说那个工号是自己的，人还活着。",
+   "stakes": {
+    "resource_gap": "{dispatcher.name}有签退本，{outsourced_fixer.name}有一个挂在井口的旧工号，你是两个人都肯说实话的人",
+    "limit_gap": "七号管廊的读数又在往上爬",
+    "meeting_reason": "你在值班室和井口都跟这两个人碰过面",
+    "irreplaceable_goal": "你想让那个工号回到一个活人身上"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "dispatcher",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{dispatcher.name}把那本签退本给你看过一回"
+    },
+    {
+     "a": "player",
+     "b": "outsourced_fixer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{outsourced_fixer.name}跟你说过自己以前的工号"
+    },
+    {
+     "a": "dispatcher",
+     "b": "outsourced_fixer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "当年改“失联”的就是{dispatcher.name}"
+    }
+   ],
+   "tags": [
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "k_three_records",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "terminal_tech",
+    "streamer",
+    "hr_officer"
+   ],
+   "tension_engine_ids": [
+    "te_deepfake",
+    "te_layoff"
+   ],
+   "chemistry": "{streamer.name}的那段换脸视频，是从修理局一台公共终端传上去的；{terminal_tech.name}查到上传的时间，正好是{hr_officer.name}定下裁员名单的那一晚。",
+   "stakes": {
+    "resource_gap": "{terminal_tech.name}有日志，{streamer.name}有直播间，{hr_officer.name}有名单，你是唯一一个跟这件事没关系的人",
+    "limit_gap": "平台明早封号，名单明早交",
+    "meeting_reason": "三个人你都在这栋楼里碰见过",
+    "irreplaceable_goal": "你想知道那一晚到底是谁坐在那台终端前"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "terminal_tech",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{terminal_tech.name}请你吃过一回炒粉"
+    },
+    {
+     "a": "player",
+     "b": "streamer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{streamer.name}在楼道里跟你借过一回充电线"
+    },
+    {
+     "a": "player",
+     "b": "hr_officer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{hr_officer.name}在电梯里跟你点过头"
+    },
+    {
+     "a": "terminal_tech",
+     "b": "streamer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{streamer.name}求{terminal_tech.name}删过视频"
+    },
+    {
+     "a": "terminal_tech",
+     "b": "hr_officer",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{hr_officer.name}调过{terminal_tech.name}的删除记录"
+    },
+    {
+     "a": "streamer",
+     "b": "hr_officer",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{streamer.name}在井口偷拍到的人里，有{hr_officer.name}"
+    }
+   ],
+   "tags": [
+    "workplace_power"
+   ]
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_check_screens",
+   "title": "在值班室盯监控",
+   "location_ids": [
+    "duty_room"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "七号管廊那块屏闪了一下",
+    "签退本被风吹开了一页",
+    "白板上那句话被人用手指描了一遍"
+   ],
+   "hook_ids": [],
+   "start_minute": 1270,
+   "tags": []
+  },
+  {
+   "id": "a_fix_unclaimed",
+   "title": "修一样没人认领的东西",
+   "location_ids": [
+    "workshop"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "拆开的收音机里掉出一张旧照片",
+    "工作台上的胶布用完了",
+    "车间那头有人在打电话，声音压得很低"
+   ],
+   "hook_ids": [],
+   "start_minute": 1300,
+   "tags": []
+  },
+  {
+   "id": "a_down_shaft",
+   "title": "在井口等人上来",
+   "location_ids": [
+    "tunnel_mouth"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "全息广告换成了一则招聘启事",
+    "井盖边的钥匙扣被风吹得叮当响",
+    "井底传上来一声金属磕碰的声音"
+   ],
+   "hook_ids": [],
+   "start_minute": 1330,
+   "tags": []
+  },
+  {
+   "id": "a_tunnel_walk",
+   "title": "下七号管廊巡一段",
+   "location_ids": [
+    "tunnel_seven"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "头灯照到一道新补的焊缝",
+    "读数表的指针抖了一下",
+    "前面的黑暗里有脚步声"
+   ],
+   "hook_ids": [],
+   "start_minute": 1360,
+   "tags": []
+  },
+  {
+   "id": "a_kiosk_check",
+   "title": "在终端亭查记录",
+   "location_ids": [
+    "terminal_kiosk"
+   ],
+   "duration_minutes": 20,
+   "beats": [
+    "屏幕上跳出一条头像栏空白的记录",
+    "摄像头转过来对着你",
+    "玻璃外面有人等着用终端"
+   ],
+   "hook_ids": [],
+   "start_minute": 1250,
+   "tags": []
+  },
+  {
+   "id": "a_stair_break",
+   "title": "在楼梯间歇一会儿",
+   "location_ids": [
+    "rest_stair"
+   ],
+   "duration_minutes": 20,
+   "beats": [
+    "声控灯灭了，你没有跺脚",
+    "楼上传来开门的声音",
+    "罐头里的烟头还是热的"
+   ],
+   "hook_ids": [],
+   "start_minute": 1400,
+   "tags": []
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_co_rising",
+   "title": "读数在爬",
+   "source": "accident",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "duty_room",
+    "tunnel_mouth"
+   ],
+   "trigger": "七号管廊的一氧化碳读数在往上爬，签退本上进去两个工号，出来的只有一个",
+   "objective": "在读数过红线之前，把人弄出来，或者报失联",
+   "choice": "下去找人，还是按规矩报",
+   "immediate": {
+    "text": "报警器嘀了一声，读数又跳了一格",
+    "minutes": 5
+   },
+   "near": {
+    "text": "读数过红线",
+    "deadline_minutes": 20
+   },
+   "far": {
+    "trigger": "没人出来",
+    "consequence": "那个工号会挂上井口的钥匙扣",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "下去找人",
+     "cost": "没有第二个人陪你签退"
+    },
+    {
+     "option": "按规矩报失联",
+     "cost": "报了，那个人就从名册上消失了"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1320,
+   "tags": [
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_outsource_grab",
+   "title": "外判抢单",
+   "source": "money",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "workshop",
+    "duty_room"
+   ],
+   "trigger": "一张高价的急修工单挂上了系统，两个外判队同时抢，谁也不让",
+   "objective": "在工单超时之前，决定这一单归谁",
+   "choice": "派给熟人，还是按顺序",
+   "immediate": {
+    "text": "两部手机同时响起抢单成功的提示音",
+    "minutes": 5
+   },
+   "near": {
+    "text": "工单超时",
+    "deadline_minutes": 60
+   },
+   "far": {
+    "trigger": "工单被没资质的队抢走",
+    "consequence": "修出事来，账算在修理局头上",
+    "due_days": 3
+   },
+   "exits": [
+    {
+     "option": "把单派给熟人",
+     "cost": "另一队会把这事捅出去"
+    },
+    {
+     "option": "按顺序派",
+     "cost": "熟人这个月就没饭吃"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1290,
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "p_face_video",
+   "title": "换脸视频",
+   "source": "rumor",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "terminal_kiosk",
+    "rest_stair"
+   ],
+   "trigger": "一段换脸视频在街区群里传开了，视频里的人穿着修理局的工服，做着没做过的事",
+   "objective": "在早班上班之前，决定要不要替视频里的人做点什么",
+   "choice": "删，还是查",
+   "immediate": {
+    "text": "有人把手机举到你面前：“这是不是你们局里的人？”",
+    "minutes": 10
+   },
+   "near": {
+    "text": "早班上班前",
+    "deadline_minutes": 360
+   },
+   "far": {
+    "trigger": "视频传开",
+    "consequence": "视频里的人会被停职，没人会去查真假",
+    "due_days": 7
+   },
+   "exits": [
+    {
+     "option": "找终端维护员删记录",
+     "cost": "删一条，要签一次名"
+    },
+    {
+     "option": "去找发视频的人",
+     "cost": "那人背后可能还有别人"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1380,
+   "tags": []
+  },
+  {
+   "id": "p_door_anomaly",
+   "title": "门禁异常",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "terminal_kiosk",
+    "duty_room"
+   ],
+   "trigger": "门禁系统报了一条异常：凌晨两点，七号管廊的门开过一次，头像栏是空白",
+   "objective": "在审计上班之前，弄清是谁开的门",
+   "choice": "调监控，还是让记录消失",
+   "immediate": {
+    "text": "终端弹出一个红框，头像那一格什么也没有",
+    "minutes": 10
+   },
+   "near": {
+    "text": "审计上班",
+    "deadline_minutes": 420
+   },
+   "far": {
+    "trigger": "查不清",
+    "consequence": "整个夜班都要背这条异常",
+    "due_days": 14
+   },
+   "exits": [
+    {
+     "option": "调监控对时间",
+     "cost": "监控里可能有你不想看见的人"
+    },
+    {
+     "option": "让维护员把这条删了",
+     "cost": "删除记录会留下维护员的签名"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 150,
+   "tags": []
+  },
+  {
+   "id": "p_layoff_talk",
+   "title": "裁员约谈",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "duty_room",
+    "workshop"
+   ],
+   "trigger": "人事贴出了明早的约谈名单，夜班要裁三个人，名单上空着最后一格",
+   "objective": "在明早约谈之前，决定站在哪一边",
+   "choice": "去说情，还是去填那一格",
+   "immediate": {
+    "text": "打印机吐出一张纸，上面是三行工号，最后一行没有字",
+    "minutes": 10
+   },
+   "near": {
+    "text": "明早约谈",
+    "deadline_minutes": 540
+   },
+   "far": {
+    "trigger": "名单填满",
+    "consequence": "三个人明天就不用来了",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "去找人事说情",
+     "cost": "人事要你拿别人的工号换"
+    },
+    {
+     "option": "自己填上那一格",
+     "cost": "你的名字会在最后一行"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1260,
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "p_hospital_call",
+   "title": "医院的电话",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "workshop",
+    "duty_room"
+   ],
+   "trigger": "医院打来电话：焊工的家人半夜病危，要家属马上去签字，可七号管廊的急修只有焊工会",
+   "objective": "在医院等不及之前，决定谁去哪",
+   "choice": "放焊工走，还是先修管子",
+   "immediate": {
+    "text": "焊工的电话响了，那人听了两句，脸一下子白了",
+    "minutes": 5
+   },
+   "near": {
+    "text": "医院等签字",
+    "deadline_minutes": 60
+   },
+   "far": {
+    "trigger": "谁也没顾上",
+    "consequence": "要么错过了最后一面，要么管廊出了事",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "替焊工顶班下去",
+     "cost": "你没焊过那种管子"
+    },
+    {
+     "option": "放焊工走",
+     "cost": "急修没人干，读数还在涨"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1300,
+   "tags": []
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_signbook",
+   "kind": "approach",
+   "slot": "dispatcher",
+   "location_ids": [
+    "duty_room"
+   ],
+   "text": "{npc.name}把签退本推到你面前，头也没抬：“签了再走。我等你回来。”"
+  },
+  {
+   "id": "h_screen_glance",
+   "kind": "observe",
+   "slot": "dispatcher",
+   "location_ids": [
+    "duty_room"
+   ],
+   "text": "{npc.name}的眼睛从监控屏上挪开了一秒，正好落在你身上"
+  },
+  {
+   "id": "h_mask_off",
+   "kind": "approach",
+   "slot": "outsourced_fixer",
+   "location_ids": [
+    "tunnel_mouth",
+    "duty_room",
+    "workshop"
+   ],
+   "text": "{npc.name}摘下防毒面具，脸上全是灰，冲你咧嘴一笑：“有水吗？”"
+  },
+  {
+   "id": "h_helmet_write",
+   "kind": "approach",
+   "slot": "outsourced_fixer",
+   "location_ids": [
+    "tunnel_mouth"
+   ],
+   "text": "{npc.name}拿过你的安全帽，在上面写了几个字：“血型写错了，我替你改了。”"
+  },
+  {
+   "id": "h_shaft_slip",
+   "kind": "accident",
+   "slot": "outsourced_fixer",
+   "location_ids": [
+    "tunnel_mouth"
+   ],
+   "text": "{npc.name}从井口爬上来，脚下一滑，你伸手去拉，两个人一起跌坐在井盖边"
+  },
+  {
+   "id": "h_earphone",
+   "kind": "approach",
+   "slot": "terminal_tech",
+   "location_ids": [],
+   "text": "{npc.name}摘下一边耳机递给你：“听听，这是管廊里录到的声音。”"
+  },
+  {
+   "id": "h_screen_turn",
+   "kind": "approach",
+   "slot": "terminal_tech",
+   "location_ids": [
+    "terminal_kiosk",
+    "duty_room"
+   ],
+   "text": "{npc.name}把终端屏转向你，挤出半个位子：“过来，你看这条。”"
+  },
+  {
+   "id": "h_just_talk",
+   "kind": "request",
+   "slot": "hr_officer",
+   "location_ids": [],
+   "text": "{npc.name}在你面前坐下，把一张考勤表压在手底下：“耽误你几分钟。”"
+  },
+  {
+   "id": "h_cold_coffee",
+   "kind": "approach",
+   "slot": "hr_officer",
+   "location_ids": [],
+   "text": "{npc.name}把一杯没动过的咖啡推给你：“我喝不下，你喝吧。”"
+  },
+  {
+   "id": "h_light_off",
+   "kind": "approach",
+   "slot": "streamer",
+   "location_ids": [
+    "rest_stair",
+    "terminal_kiosk"
+   ],
+   "text": "{npc.name}把补光灯关了，在黑里冲你笑：“这段不播，就我们俩。”"
+  },
+  {
+   "id": "h_video_ask",
+   "kind": "request",
+   "slot": "streamer",
+   "location_ids": [],
+   "text": "{npc.name}把手机递到你面前：“你看，这个人像不像我？”"
+  },
+  {
+   "id": "h_warm_water",
+   "kind": "approach",
+   "slot": "welder",
+   "location_ids": [],
+   "text": "{npc.name}推上护目镜，把一瓶温水塞到你手里：“刚热的，拿着。”"
+  },
+  {
+   "id": "h_bench_seat",
+   "kind": "approach",
+   "slot": "welder",
+   "location_ids": [
+    "workshop"
+   ],
+   "text": "{npc.name}在工作台边给你挪出一块地方：“坐，这儿暖和。”"
+  },
+  {
+   "id": "h_phone_watch",
+   "kind": "observe",
+   "slot": "welder",
+   "location_ids": [],
+   "text": "{npc.name}一边干活一边看手机，抬头时撞上你的目光，愣了一下"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_lost_alive",
+   "category": "信息",
+   "requires": [
+    "dispatcher",
+    "outsourced_fixer"
+   ],
+   "text": "{dispatcher.name}签退本上那个一直没销的“失联”工号，就是{outsourced_fixer.name}以前的工号。"
+  },
+  {
+   "id": "t_upload_account",
+   "category": "关系",
+   "requires": [
+    "streamer",
+    "hr_officer"
+   ],
+   "text": "上传那段换脸视频的终端账号，登记在{hr_officer.name}名下，{streamer.name}还不知道。"
+  },
+  {
+   "id": "t_welder_badge",
+   "category": "人事",
+   "requires": [
+    "welder"
+   ],
+   "text": "有人查出{welder.name}私下接外判活，用的是别人的工号。"
+  },
+  {
+   "id": "t_spare_pipes",
+   "category": "资源",
+   "requires": [],
+   "text": "车间角落翻出一箱当年封存的原厂管材，够把七号管廊换一遍。"
+  },
+  {
+   "id": "t_audit_early",
+   "category": "时限",
+   "requires": [],
+   "text": "审计提前到今晚，凌晨三点就到。"
+  },
+  {
+   "id": "t_outsource_sign",
+   "category": "制度",
+   "requires": [],
+   "text": "局里发了新规：从今晚起，外判工下管廊也要签退。"
+  },
+  {
+   "id": "t_district_blackout",
+   "category": "意外",
+   "requires": [],
+   "text": "整片街区停电了，全息广告一下子全黑，只有管廊里的应急灯还亮着。"
+  }
+ ],
+ "forbidden_terms": [
+  "学生",
+  "少女",
+  "少年",
+  "校园",
+  "皇帝",
+  "马车",
+  "灵气",
+  "魔法"
+ ],
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "bodily_harm"
+ ],
+ "status": "review",
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 16 个）。职场权力线打 workplace_power，管廊中毒打 bodily_harm。性别按会话偏好生成（D15）。"
+}

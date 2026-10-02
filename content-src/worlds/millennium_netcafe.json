@@ -1,0 +1,2479 @@
+{
+ "schema_version": 1,
+ "id": "millennium_netcafe",
+ "title": "世纪末网吧",
+ "extends": null,
+ "era": "1999 年",
+ "region": "一座内陆城市夜市边上的通宵网吧和隔壁的音像店",
+ "premise": "网上认识的人一个个走进了这条街；网名后面的那个人，和你想象的是不是同一个？",
+ "tone": [
+  "烟雾",
+  "拨号音",
+  "夏夜",
+  "将要到来的千禧年"
+ ],
+ "style_hint": "写声音和光：拨号上网的尖叫、键盘声、磁带的沙沙声、显示器的蓝光；人说话直，心事都打在聊天框里。",
+ "clock_start": {
+  "label": "1999 年 8 月，一个闷热的周五晚上",
+  "minute": 1290
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "stage_labels": null,
+ "name_pools": {
+  "family": [
+   "王",
+   "李",
+   "张",
+   "刘",
+   "陈",
+   "杨",
+   "赵",
+   "黄",
+   "周",
+   "吴",
+   "徐",
+   "孙",
+   "马",
+   "胡"
+  ],
+  "given_female": [
+   "丽",
+   "静",
+   "燕",
+   "红",
+   "霞",
+   "芳",
+   "娟",
+   "敏",
+   "婷",
+   "雪",
+   "丹",
+   "萍"
+  ],
+  "given_male": [
+   "强",
+   "军",
+   "伟",
+   "杰",
+   "涛",
+   "斌",
+   "鹏",
+   "超",
+   "勇",
+   "磊",
+   "刚",
+   "波"
+  ],
+  "given_neutral": [
+   "晓",
+   "阳",
+   "林",
+   "凯",
+   "宇",
+   "欣",
+   "亮",
+   "洋",
+   "新",
+   "华",
+   "平",
+   "明"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "阿{given}",
+    "gender": "any"
+   },
+   {
+    "pattern": "小{given}",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}{given}",
+    "gender": "any"
+   }
+  ]
+ },
+ "rules": [
+  {
+   "id": "r_id_deposit",
+   "text": "网吧包夜要押身份证，老板看一眼就知道你是哪个厂、哪条街的人。"
+  },
+  {
+   "id": "r_forum_log",
+   "text": "论坛的登录记录只有站长能看；两个常年对骂的网名，可能出自同一台机器。"
+  },
+  {
+   "id": "r_tape_name",
+   "text": "音像店的磁带可以翻录，翻录的人名要写在盒子背面。"
+  },
+  {
+   "id": "r_tab_month",
+   "text": "网吧可以赊账，月底不还，身份证就不还。"
+  },
+  {
+   "id": "r_adults_only",
+   "text": "网吧只让成年人进，进门的每一个人都押过证件，柜台上的牌子写得清清楚楚。"
+  }
+ ],
+ "customs": [
+  "网友第一次见面，约在夜市的烧烤摊，手里拿一本杂志当暗号。",
+  "包夜的人凌晨四点一起泡面，谁泡的谁请。",
+  "论坛上有人要走，大家会在那人的帖子底下一直顶，顶到沉不下去。",
+  "音像店老板每周五晚上会在门口的音箱里放一首新歌，叫“试听”。",
+  "南下的人走之前，要在网吧的墙上写一句话，写完签网名。"
+ ],
+ "player_identities": [
+  {
+   "id": "laid_off_regular",
+   "role": "下岗后天天泡网吧的人",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "小{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    24,
+    38
+   ],
+   "social_position": "low",
+   "baseline": "厂子去年关了，你领了一笔买断钱，每天在网吧里坐到天亮，说是在网上找工作。",
+   "resources": [
+    "一笔不多的买断钱",
+    "论坛上一个有点名气的网名"
+   ],
+   "reputation": "话少，打字快",
+   "risks": [
+    "赊账本上你的名字已经被红笔圈了"
+   ]
+  },
+  {
+   "id": "video_helper",
+   "role": "音像店的帮工",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "小{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    20,
+    28
+   ],
+   "social_position": "low",
+   "baseline": "你在音像店帮忙，替老板翻录磁带、送货，偶尔去网吧替网管看一会儿柜台。",
+   "resources": [
+    "一台双卡录音机的使用权",
+    "整条街的人都认得你"
+   ],
+   "reputation": "勤快，嘴甜",
+   "risks": [
+    "翻录过一盘不该翻的带子"
+   ]
+  },
+  {
+   "id": "forum_moderator",
+   "role": "论坛版主",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    35
+   ],
+   "social_position": "equal",
+   "baseline": "你是本地论坛的版主，网上管着一个版块，网下在一家小厂做会计。",
+   "resources": [
+    "一个版块的管理权限",
+    "论坛上一半人的真名"
+   ],
+   "reputation": "网上公正，网下胆小",
+   "risks": [
+    "你和站长在网上吵过一架，到现在没和好"
+   ]
+  },
+  {
+   "id": "stall_keeper",
+   "role": "夜市摆地摊的",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}{given}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    24,
+    40
+   ],
+   "social_position": "equal",
+   "baseline": "你在网吧门口摆摊卖盗版光碟，网吧里的人一半是你的客人。",
+   "resources": [
+    "一摊子光碟和一辆三轮车",
+    "全夜市最灵通的消息"
+   ],
+   "reputation": "精明，会说话",
+   "risks": [
+    "文化局的人这个月来过你的摊子两次"
+   ]
+  },
+  {
+   "id": "chain_buyer",
+   "role": "来谈收购的连锁网吧老板",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}老板",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}总",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    32,
+    50
+   ],
+   "social_position": "high",
+   "baseline": "你在省城开了五家网吧，这次来是想把这家收下来，改成连锁。",
+   "resources": [
+    "一笔收购的钱和省城的门路",
+    "文化局里的熟人"
+   ],
+   "reputation": "出手大方，算得很精",
+   "risks": [
+    "你的连锁店其实也欠着一屁股债"
+   ]
+  },
+  {
+   "id": "telecom_engineer",
+   "role": "电信局的工程师",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}工",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}工程师",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    45
+   ],
+   "social_position": "high",
+   "baseline": "你在电信局管这一片的拨号线路，哪家网吧的线通不通，你说了算。",
+   "resources": [
+    "整条街的电话线和拨号账号",
+    "电信局的一个科室"
+   ],
+   "reputation": "技术好，难求",
+   "risks": [
+    "你自己也在这家网吧有一个从不承认的网名"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "net_floor",
+   "name": "网吧大厅",
+   "detail": "四十台大屁股显示器排成五排，烟雾把日光灯罩成一团黄，键盘油得发亮，二十三号机的椅子坐垫破了个洞。",
+   "privacy": "public",
+   "visibility": "包夜的人、打游戏的人、聊天的人，谁回头看了谁一眼，隔壁机的人都知道",
+   "witnesses": [
+    "bg_gamer"
+   ],
+   "exits": [
+    "counter",
+    "server_closet",
+    "night_market"
+   ],
+   "affordances": [
+    "在聊天室里换一个网名",
+    "隔着两排机子看一个人的屏幕",
+    "把耳机摘下来，听身后有人叫你"
+   ],
+   "pressure_modifiers": {
+    "p_forum_war": "论坛首页上，那两个对骂的网名又各发了三页。"
+   },
+   "tags": []
+  },
+  {
+   "id": "counter",
+   "name": "网吧柜台",
+   "detail": "一张木柜台，玻璃底下压着押金条和一沓身份证，柜台后面墙上挂着“未满十八岁禁止入内”的牌子和一只走得慢五分钟的钟。",
+   "privacy": "semi",
+   "visibility": "网管和老板轮流守着，来开机的、来结账的、来找人的都要先过这里",
+   "witnesses": [],
+   "exits": [
+    "net_floor",
+    "video_store"
+   ],
+   "affordances": [
+    "押一张身份证开一台机",
+    "翻一翻赊账本上自己的那一页",
+    "趁网管不在，看一眼押着的证件"
+   ],
+   "pressure_modifiers": {
+    "p_tab_due": "赊账本摊在柜台上，月底那一栏用红笔圈了好几个名字。"
+   },
+   "tags": []
+  },
+  {
+   "id": "server_closet",
+   "name": "机房小间",
+   "detail": "大厅尽头一间小屋，一台主机嗡嗡响，猫的指示灯一闪一闪，墙角堆着泡面箱和一张折叠床。",
+   "privacy": "private",
+   "visibility": "只有网管进得去；门一关，大厅的键盘声就隔开了",
+   "witnesses": [],
+   "exits": [
+    "net_floor"
+   ],
+   "affordances": [
+    "在折叠床上坐一会儿",
+    "看主机上的登录记录",
+    "泡两碗面，分一碗出去"
+   ],
+   "pressure_modifiers": {
+    "p_forum_war": "主机的登录记录上，两个网名的地址是同一串数字。"
+   },
+   "tags": []
+  },
+  {
+   "id": "video_store",
+   "name": "隔壁音像店",
+   "detail": "网吧隔壁一间窄铺子，墙上一格格插满了磁带和光碟，柜台上一台双卡录音机，抽屉里一盒没人来取的翻录带。",
+   "privacy": "semi",
+   "visibility": "老板和来淘带子的人；店小，两个人站着就得侧身",
+   "witnesses": [
+    "bg_tape_kid"
+   ],
+   "exits": [
+    "counter",
+    "night_market"
+   ],
+   "affordances": [
+    "翻一翻墙上的磁带，看盒子背面写着谁的名字",
+    "借双卡录音机翻一盘带子",
+    "在店里的音箱上试听一首歌"
+   ],
+   "pressure_modifiers": {
+    "p_unclaimed_tape": "抽屉里那盒翻录带，盒子背面的名字被人用指甲刮掉了一半。"
+   },
+   "tags": []
+  },
+  {
+   "id": "night_market",
+   "name": "夜市",
+   "detail": "网吧门口那条街，一到晚上就摆满了烧烤摊、炒粉摊和卖盗版碟的地摊，电线从路灯上一根根拉下来接灯泡。",
+   "privacy": "public",
+   "visibility": "整条街的人都在，谁跟谁坐一张塑料桌，第二天全街都知道",
+   "witnesses": [
+    "bg_bbq_owner"
+   ],
+   "exits": [
+    "net_floor",
+    "video_store",
+    "river_bank"
+   ],
+   "affordances": [
+    "在烧烤摊坐下，点两瓶啤酒",
+    "在盗版碟的地摊上翻到一张熟悉的封面",
+    "看着网吧的门，等一个从没见过的人走出来"
+   ],
+   "pressure_modifiers": {
+    "p_meet_netfriend": "烧烤摊老板问你：等人呢？等谁？"
+   },
+   "tags": []
+  },
+  {
+   "id": "river_bank",
+   "name": "江边堤坝",
+   "detail": "夜市走到头，翻过一道堤坝就是江，堤上一排水泥墩子，能看见对岸的火车站和一列列开往南边的绿皮车。",
+   "privacy": "semi",
+   "visibility": "夜里只有钓鱼的、散步的和不想回家的人",
+   "witnesses": [],
+   "exits": [
+    "night_market"
+   ],
+   "affordances": [
+    "坐在水泥墩子上看对岸的火车",
+    "把一句在网上说过的话，当面再说一遍",
+    "扔一颗石子，数它跳了几下"
+   ],
+   "pressure_modifiers": {
+    "p_south_ticket": "对岸火车站的大钟，正好指着那趟南下的车次。"
+   },
+   "tags": []
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "netcafe_admin",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    30
+   ],
+   "adult_context": "通宵网吧的夜班网管，成年人，同时是本地论坛的站长",
+   "public_role": "网管兼站长",
+   "appearance_options": [
+    "一件洗得起球的格子衬衫，手指上总有被泡面烫红的地方",
+    "说话带着论坛腔，当面却很少开口"
+   ],
+   "identity": {
+    "authority": "决定论坛上谁的帖子留下、谁的号被封",
+    "resources": [
+     "论坛的站长权限和全网吧的登录记录",
+     "四十台机子的开关"
+    ],
+    "limits": [
+     "网吧是老板的，自己只是打工的",
+     "身份证押在老板那里，说是“替你保管”"
+    ],
+    "obligations": [
+     "每晚守到天亮，交班前把账对清"
+    ],
+    "exposure": "论坛上常年对骂的两个网名，有一个是{npc.ta}自己",
+    "hidden": "{npc.ta}看过所有人的聊天记录，知道谁在跟谁好"
+   },
+   "decision": {
+    "core_value": "网上的规矩是我定的",
+    "goal_options": [
+     "让论坛撑到明年",
+     "攒够钱买一台自己的电脑",
+     "见一见那个聊了一年的人"
+    ],
+    "pressure_responses": {
+     "low": "打一串哈哈，说“网上的事别当真”",
+     "mid": "把登录记录调出来给对方看",
+     "high": "当着全网吧的面封一个号",
+     "breaking": "拔掉主机的网线，一个人走出网吧"
+    },
+    "withdrawal": "关上机房的门，在折叠床上躺着，一遍遍刷新论坛首页",
+    "relationship_stance": "网上嘴毒，网下嘴笨",
+    "contrast": "管着一整个论坛的人说话，自己的心事一句都没发过",
+    "prefers": [
+     "先看记录"
+    ],
+    "avoids": [
+     "被人当面认出网名"
+    ],
+    "never": [
+     "把别人的聊天记录说出去"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方知道{npc.ta}的网名却不拿来笑{npc.ta}",
+     "对方愿意在凌晨陪{npc.ta}吃一碗泡面"
+    ],
+    "likes": [
+     "凌晨五点网吧里只剩键盘声的时候"
+    ],
+    "dislikes": [
+     "被当成看门的"
+    ],
+    "preconditions": [
+     "交班以后"
+    ],
+    "boundaries": [
+     "不在网吧的屏幕前"
+    ],
+    "expression": "把论坛上一个只有自己能看的版块密码告诉对方",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "网名和真人都喜欢的那一个"
+   },
+   "voices": {
+    "surface": "“外面有人找你，说是‘风过无痕’。”",
+    "inner": "“那个号骂了我三页，可我知道，骂我的人也是我。”"
+   },
+   "schedule": [
+    {
+     "from": 1260,
+     "to": 1439,
+     "location_id": "counter"
+    },
+    {
+     "from": 0,
+     "to": 420,
+     "location_id": "server_closet"
+    },
+    {
+     "from": 421,
+     "to": 480,
+     "location_id": "night_market"
+    }
+   ],
+   "situation": {
+    "trigger": "老板说要把论坛卖给一家做门户网站的公司，站长换人",
+    "pressure": "论坛上那些不能见光的版块，新主人都会看见",
+    "exits": [
+     {
+      "option": "交出去",
+      "cost": "论坛上的人会觉得被出卖"
+     },
+     {
+      "option": "把那些版块删了再交",
+      "cost": "老板会说{npc.ta}毁了值钱的东西"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "tape_shop_owner",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    30,
+    45
+   ],
+   "adult_context": "网吧隔壁音像店的老板，成年人，开店八年",
+   "public_role": "音像店老板",
+   "appearance_options": [
+    "头发留得有点长，总戴一副耳机，挂在脖子上",
+    "抽屉里一沓手写的点歌单，字写得很好看"
+   ],
+   "identity": {
+    "authority": "决定哪一盘带子翻给谁",
+    "resources": [
+     "一墙的磁带和光碟",
+     "一台双卡录音机和八年的翻录记录"
+    ],
+    "limits": [
+     "正版碟越来越多，翻录的生意快做不下去了",
+     "店面下个月要涨租"
+    ],
+    "obligations": [
+     "每盘翻录带背面写上翻录人的名字"
+    ],
+    "exposure": "抽屉里那盒没人取的翻录带，录的是一段告白，告白的声音{npc.ta}认得",
+    "hidden": "{npc.ta}年轻时也录过一盘这样的带子，没寄出去"
+   },
+   "decision": {
+    "core_value": "歌是替人说话的",
+    "goal_options": [
+     "把那盒带子交到该收的人手里",
+     "撑到年底再关店",
+     "弄清那段告白是录给谁的"
+    ],
+    "pressure_responses": {
+     "low": "调大音箱，说“先听歌”",
+     "mid": "把翻录本上的名字指给对方看",
+     "high": "当着对方的面把那盒带子放出来",
+     "breaking": "把整墙的磁带打包送人，锁上店门"
+    },
+    "withdrawal": "关了店门，一个人坐在柜台后面，把八年里翻过的歌一首首听过去",
+    "relationship_stance": "对歌深情，对人慢热",
+    "contrast": "替别人录了八年的心意，自己那一盘一直没寄",
+    "prefers": [
+     "先听，再说"
+    ],
+    "avoids": [
+     "被人说老土"
+    ],
+    "never": [
+     "把别人的告白放给第三个人听"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方能说出一首歌是哪一年的",
+     "对方在{npc.ta}放歌的时候不说话"
+    ],
+    "likes": [
+     "关了店门后音箱里的沙沙声"
+    ],
+    "dislikes": [
+     "被人催着做生意"
+    ],
+    "preconditions": [
+     "店门已经关了"
+    ],
+    "boundaries": [
+     "不在柜台前"
+    ],
+    "expression": "翻一盘只录给对方的带子，背面写上对方的名字",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "听完一整盘带子的那个人"
+   },
+   "voices": {
+    "surface": "“这首你听过没有？没听过就站着听完。”",
+    "inner": "“那盒带子里的声音，我等了八年想再听一次。”"
+   },
+   "schedule": [
+    {
+     "from": 600,
+     "to": 1260,
+     "location_id": "video_store"
+    },
+    {
+     "from": 1261,
+     "to": 1380,
+     "location_id": "night_market"
+    },
+    {
+     "from": 1381,
+     "to": 1439,
+     "location_id": "river_bank"
+    }
+   ],
+   "situation": {
+    "trigger": "房东说下个月起租金翻倍，不然就租给隔壁网吧扩店",
+    "pressure": "关店，那盒没人取的带子就没地方放了",
+    "exits": [
+     {
+      "option": "答应涨租",
+      "cost": "每天要多卖二十盘带子"
+     },
+     {
+      "option": "关店",
+      "cost": "八年的翻录记录就散了"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "net_friend",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    32
+   ],
+   "adult_context": "论坛上聊了半年的网友“风过无痕”，成年人，今晚第一次来这条街",
+   "public_role": "网友",
+   "appearance_options": [
+    "本人比网上说的要瘦，背着一个军绿色的挎包",
+    "说话慢，紧张的时候会把网上的口头禅说出来"
+   ],
+   "identity": {
+    "authority": "决定今晚见不见、见了说不说真话",
+    "resources": [
+     "半年的聊天记录和一个论坛上谁都知道的网名",
+     "一张明天下午南下的火车票"
+    ],
+    "limits": [
+     "网上说过的话，当面不一定说得出口",
+     "明天下午的火车不等人"
+    ],
+    "obligations": [
+     "答应过家里人这趟出来只待一天"
+    ],
+    "exposure": "{npc.ta}在论坛上和站长对骂了三页，其实是想让站长注意到自己",
+    "hidden": "{npc.ta}在网上说的年龄和工作都不是真的"
+   },
+   "decision": {
+    "core_value": "网上的才是真的我",
+    "goal_options": [
+     "见到那个聊了半年的人",
+     "上火车之前把一句话说完",
+     "弄清楚自己喜欢的是网上的那个人还是网下的"
+    ],
+    "pressure_responses": {
+     "low": "打一串网上的表情，说“我就是来看看”",
+     "mid": "把聊天记录打印出来，拿给对方看",
+     "high": "当面说出自己在网上撒的谎",
+     "breaking": "把火车票撕了"
+    },
+    "withdrawal": "坐在堤坝上，一遍遍看手里那几页打印出来的聊天记录",
+    "relationship_stance": "网上热情，网下拘谨",
+    "contrast": "在网上什么都敢说，真站在人面前，一句话都想不起来",
+    "prefers": [
+     "先在网上说"
+    ],
+    "avoids": [
+     "被人当面拆穿"
+    ],
+    "never": [
+     "假装成另一个人见面"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方认出了{npc.ta}的口头禅",
+     "对方见了真人没有失望"
+    ],
+    "likes": [
+     "夜市散场后江边的风"
+    ],
+    "dislikes": [
+     "被人看穿撒过的谎"
+    ],
+    "preconditions": [
+     "已经互相说了真名"
+    ],
+    "boundaries": [
+     "不隔着任何一块屏幕"
+    ],
+    "expression": "把网名的由来当面讲给对方听",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "网上网下是同一个人的那个人"
+   },
+   "voices": {
+    "surface": "“我就是‘风过无痕’……你比我想的要高。”",
+    "inner": "“我在网上撒了一个谎，今晚得说出来，不然明天就没机会了。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1320,
+     "location_id": "night_market"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "river_bank"
+    },
+    {
+     "from": 0,
+     "to": 240,
+     "location_id": "net_floor"
+    }
+   ],
+   "situation": {
+    "trigger": "明天下午的火车票是家里人买的，说到了南边就别回来了",
+    "pressure": "今晚见不到人，这半年就白聊了",
+    "exits": [
+     {
+      "option": "留下来，退票",
+      "cost": "家里人会断了{npc.ta}的钱"
+     },
+     {
+      "option": "上车",
+      "cost": "论坛上的那个号就再也不会上线了"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "cafe_owner",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    32,
+    48
+   ],
+   "adult_context": "通宵网吧的老板，成年人，以前在国营厂当技术员，下岗后开了这家网吧",
+   "public_role": "网吧老板",
+   "appearance_options": [
+    "一件皮夹克不管冬夏都穿着，腰上挂着一大串钥匙和一台传呼机",
+    "说话爽快，算账从不含糊"
+   ],
+   "identity": {
+    "authority": "决定谁能赊账、谁的证件押在柜台",
+    "resources": [
+     "四十台机子和一本赊账本",
+     "文化局和派出所的熟人"
+    ],
+    "limits": [
+     "网吧的执照快到期了，文化局在查黑网吧",
+     "开这家店借的钱还没还完"
+    ],
+    "obligations": [
+     "每月给房东、电信局和“有关部门”送钱"
+    ],
+    "exposure": "柜台底下压着的那张身份证，是网管的，{npc.ta}一直没还",
+    "hidden": "{npc.ta}在和一家连锁网吧谈转让，没告诉任何人"
+   },
+   "decision": {
+    "core_value": "店不能倒",
+    "goal_options": [
+     "续上执照",
+     "把店卖个好价钱",
+     "把赊账收回来"
+    ],
+    "pressure_responses": {
+     "low": "拍拍对方的肩，说“都是兄弟”",
+     "mid": "把赊账本翻到对方那一页",
+     "high": "当众把一个人赶出网吧",
+     "breaking": "把店转让出去，带着钱离开这座城"
+    },
+    "withdrawal": "关门以后一个人坐在柜台后面，一笔一笔对账，对到天亮",
+    "relationship_stance": "对熟人讲义气，对欠账的不讲情面",
+    "contrast": "开了一家让人在网上找到别人的店，自己在网下谁都不信",
+    "prefers": [
+     "先算账"
+    ],
+    "avoids": [
+     "被人说“下岗的”"
+    ],
+    "never": [
+     "让人在店里出事"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不欠{npc.ta}的钱",
+     "对方愿意听{npc.ta}讲厂里的旧事"
+    ],
+    "likes": [
+     "凌晨关了一半灯的网吧"
+    ],
+    "dislikes": [
+     "被当成只认钱的"
+    ],
+    "preconditions": [
+     "账已经对完"
+    ],
+    "boundaries": [
+     "不在柜台后面"
+    ],
+    "expression": "把赊账本上对方那一页撕下来，当着对方的面烧了",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "知道{npc.ta}以前是技术员的人"
+   },
+   "voices": {
+    "surface": "“赊账可以，月底还，一分不能少。”",
+    "inner": "“厂子没了，我就剩这四十台机子了。”"
+   },
+   "schedule": [
+    {
+     "from": 600,
+     "to": 1200,
+     "location_id": "counter"
+    },
+    {
+     "from": 1201,
+     "to": 1320,
+     "location_id": "night_market"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "counter"
+    }
+   ],
+   "situation": {
+    "trigger": "文化局的人来说，执照续不了，除非{npc.ta}把网吧转到“有关系的人”名下",
+    "pressure": "转出去，店就不是自己的了",
+    "exits": [
+     {
+      "option": "转",
+      "cost": "辛辛苦苦开的店替别人赚钱"
+     },
+     {
+      "option": "不转，硬撑",
+      "cost": "下个月就可能被查封"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "southbound",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    23,
+    33
+   ],
+   "adult_context": "夜市烧烤摊的帮工，成年人，攒够了路费，下个月要南下打工",
+   "public_role": "要南下的人",
+   "appearance_options": [
+    "围裙上全是油点，胳膊上被炭火烫出一排小疤",
+    "说话嗓门大，笑起来露出一颗虎牙"
+   ],
+   "identity": {
+    "authority": "决定走还是留",
+    "resources": [
+     "一叠攒了两年的路费和一张南边厂子的招工单",
+     "夜市里所有摊主的交情"
+    ],
+    "limits": [
+     "家里还有一个生病的人",
+     "走了，就再也回不来这条街了"
+    ],
+    "obligations": [
+     "每天收摊后把摊子收拾干净"
+    ],
+    "exposure": "{npc.ta}偷偷在网吧上网，是去南边的论坛问厂子的事",
+    "hidden": "{npc.ta}喜欢一个人，打算走之前说，又怕说了就走不了"
+   },
+   "decision": {
+    "core_value": "出去看看",
+    "goal_options": [
+     "攒够钱，去南边",
+     "走之前把一句话说出口",
+     "把家里的病治好"
+    ],
+    "pressure_responses": {
+     "low": "咧嘴一笑，说“走不走还没定”",
+     "mid": "把招工单拿出来给对方看",
+     "high": "当着整条街的人宣布下个月走",
+     "breaking": "把路费全拿去给家里治病，不走了"
+    },
+    "withdrawal": "收摊以后一个人坐在炭火边，看着最后一块炭慢慢变灰",
+    "relationship_stance": "热心，冲动，嘴硬",
+    "contrast": "天天烤东西给别人吃，自己的饭总是最后才吃",
+    "prefers": [
+     "先干活"
+    ],
+    "avoids": [
+     "被人说“没出息”"
+    ],
+    "never": [
+     "偷钱当路费"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不劝{npc.ta}走也不劝{npc.ta}留",
+     "对方吃完{npc.ta}烤的东西说一句好吃"
+    ],
+    "likes": [
+     "收摊后炭火的余温"
+    ],
+    "dislikes": [
+     "被当成只会干活的"
+    ],
+    "preconditions": [
+     "收摊以后"
+    ],
+    "boundaries": [
+     "不在烧烤摊前"
+    ],
+    "expression": "把最后一串烤好的留给对方，自己不吃",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}想留下来的那个人"
+   },
+   "voices": {
+    "surface": "“再来两串？今天的肉新鲜。”",
+    "inner": "“我要是走了，你会不会想起这条街？”"
+   },
+   "schedule": [
+    {
+     "from": 1080,
+     "to": 1439,
+     "location_id": "night_market"
+    },
+    {
+     "from": 0,
+     "to": 60,
+     "location_id": "river_bank"
+    },
+    {
+     "from": 840,
+     "to": 1000,
+     "location_id": "net_floor"
+    }
+   ],
+   "situation": {
+    "trigger": "招工单上写着下个月一号报到，晚一天就作废",
+    "pressure": "家里的病人这几天又不好了",
+    "exits": [
+     {
+      "option": "按时走",
+      "cost": "家里没人照顾"
+     },
+     {
+      "option": "留下来",
+      "cost": "招工单就作废了，下一次不知道要等多久"
+     }
+    ]
+   },
+   "tags": []
+  },
+  {
+   "id": "radio_host",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    28,
+    42
+   ],
+   "adult_context": "本地电台夜间点歌节目的主持人，成年人，主持了五年",
+   "public_role": "电台主持人",
+   "appearance_options": [
+    "声音比长相出名，走在街上没人认得，一开口就有人回头",
+    "随身带一本写满听众来信摘抄的本子"
+   ],
+   "identity": {
+    "authority": "决定今晚哪一封信被念出来、哪一首歌被点播",
+    "resources": [
+     "一个全城夜猫子都在听的节目",
+     "一摞摞听众来信"
+    ],
+    "limits": [
+     "台里说网络会取代电台，节目可能被砍",
+     "念错一封信，就可能拆散一对人"
+    ],
+    "obligations": [
+     "每晚十一点准时开播"
+    ],
+    "exposure": "有一封没署名的信，每周都来，{npc.ta}一直没念",
+    "hidden": "{npc.ta}偷偷在网吧上网，用的网名没人知道"
+   },
+   "decision": {
+    "core_value": "声音能把人送到对方耳边",
+    "goal_options": [
+     "让节目撑过千禧年",
+     "念出那封没署名的信",
+     "见一见每周写信的那个人"
+    ],
+    "pressure_responses": {
+     "low": "在话筒前笑一声，说“下一首歌送给……”",
+     "mid": "把来信摘抄本翻给对方看",
+     "high": "在直播里念出一封不该念的信",
+     "breaking": "辞职，从此不再开口"
+    },
+    "withdrawal": "下了节目一个人在空空的直播间里，把那封没署名的信读了一遍又一遍",
+    "relationship_stance": "话筒前温柔，话筒后孤独",
+    "contrast": "替全城的人说了五年的心里话，自己的那一句从来没说",
+    "prefers": [
+     "先听完再说"
+    ],
+    "avoids": [
+     "被人说声音和长相不配"
+    ],
+    "never": [
+     "编一封假信骗收听率"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方认出了{npc.ta}的声音",
+     "对方听过{npc.ta}五年的节目却从不打电话进来"
+    ],
+    "likes": [
+     "深夜直播间里的红灯"
+    ],
+    "dislikes": [
+     "被当成一个声音"
+    ],
+    "preconditions": [
+     "节目已经结束"
+    ],
+    "boundaries": [
+     "不在话筒前"
+    ],
+    "expression": "在节目里放一首只有对方知道为什么放的歌",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "听到{npc.ta}不对着话筒说话的那个人"
+   },
+   "voices": {
+    "surface": "“现在是夜里十一点，欢迎回来。”",
+    "inner": "“五年了，我只想知道那封信是谁写的。”"
+   },
+   "schedule": [
+    {
+     "from": 1320,
+     "to": 1439,
+     "location_id": "river_bank"
+    },
+    {
+     "from": 1200,
+     "to": 1319,
+     "location_id": "video_store"
+    },
+    {
+     "from": 0,
+     "to": 120,
+     "location_id": "night_market"
+    }
+   ],
+   "situation": {
+    "trigger": "台里说年底节目就停，换成一档讲电脑的节目",
+    "pressure": "那封没署名的信还没念",
+    "exits": [
+     {
+      "option": "最后一期念出来",
+      "cost": "写信的人可能并不想被念"
+     },
+     {
+      "option": "不念，带走",
+      "cost": "那封信就永远只有{npc.ta}一个人读过"
+     }
+    ]
+   },
+   "tags": []
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_gamer",
+   "role": "包夜的游戏迷",
+   "function": "witness",
+   "location_ids": [
+    "net_floor"
+   ],
+   "line": "{npc.name}在十二号机打了一整夜，谁从哪台机子起身都看在眼里",
+   "gender": "any",
+   "age_range": [
+    19,
+    28
+   ],
+   "adult_context": "成年的包夜常客，年满十九",
+   "name": null
+  },
+  {
+   "id": "bg_tape_kid",
+   "role": "音像店帮工",
+   "function": "messenger",
+   "location_ids": [
+    "video_store",
+    "night_market"
+   ],
+   "line": "{npc.name}替老板跑腿送带子，顺便把话也送到",
+   "gender": "any",
+   "age_range": [
+    19,
+    24
+   ],
+   "adult_context": "音像店的成年帮工",
+   "name": null
+  },
+  {
+   "id": "bg_bbq_owner",
+   "role": "烧烤摊老板",
+   "function": "rumor_source",
+   "location_ids": [
+    "night_market"
+   ],
+   "line": "{npc.name}一边烤串一边听，谁跟谁坐一桌，第二天全街都知道",
+   "gender": "any",
+   "age_range": [
+    40,
+    60
+   ],
+   "adult_context": "夜市烧烤摊的成年摊主",
+   "name": null
+  },
+  {
+   "id": "bg_culture_officer",
+   "role": "文化局稽查",
+   "function": "obstacle",
+   "location_ids": [
+    "counter",
+    "night_market"
+   ],
+   "line": "{npc.name}拿着一本登记簿，在每家网吧门口站一会儿",
+   "gender": "any",
+   "age_range": [
+    35,
+    55
+   ],
+   "adult_context": "文化局的成年工作人员",
+   "name": null
+  },
+  {
+   "id": "bg_auntie",
+   "role": "楼上的居委会大妈",
+   "function": "rumor_source",
+   "location_ids": [
+    "night_market",
+    "counter"
+   ],
+   "line": "{npc.name}嫌网吧吵，天天来柜台说一句，顺便打听一句",
+   "gender": "any",
+   "age_range": [
+    55,
+    70
+   ],
+   "adult_context": "居委会的成年干部",
+   "name": null
+  },
+  {
+   "id": "bg_fisher",
+   "role": "江边夜钓的老人",
+   "function": "helper",
+   "location_ids": [
+    "river_bank"
+   ],
+   "line": "{npc.name}在堤坝上钓了二十年的鱼，什么话都听过，什么话都不传",
+   "gender": "any",
+   "age_range": [
+    60,
+    75
+   ],
+   "adult_context": "退休的老工人，成年人",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_forum",
+   "text": "本地论坛",
+   "reach": "一发帖全城网民都看得见，转述的人添油加醋",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_street_talk",
+   "text": "夜市里的闲话",
+   "reach": "第二天早上整条街都知道，越传越离谱",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_login_log",
+   "text": "主机登录记录",
+   "reach": "只有站长看得到，每一条都记着时间和机号",
+   "fidelity": "exact"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_netname",
+   "text": "网名后面是谁，见面之前谁都不知道"
+  },
+  {
+   "id": "te_tab",
+   "text": "赊账月底到期，身份证押在柜台上"
+  },
+  {
+   "id": "te_going_south",
+   "text": "有人下个月就要南下，走之前的每一个晚上都算数"
+  },
+  {
+   "id": "te_same_machine",
+   "text": "两个对骂的网名，可能是同一台机器打出来的"
+  },
+  {
+   "id": "te_y2k",
+   "text": "千禧年快到了，有人说电脑会全部停摆，有人说世界会重新开始"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "k_regular_tab",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "laid_off_regular"
+   ],
+   "slots": [
+    "cafe_owner",
+    "netcafe_admin"
+   ],
+   "tension_engine_ids": [
+    "te_tab",
+    "te_same_machine"
+   ],
+   "chemistry": "{cafe_owner.name}的赊账本上你的名字被红笔圈了；{netcafe_admin.name}每晚给你多开一个钟头，没记账。",
+   "stakes": {
+    "resource_gap": "{cafe_owner.name}有赊账本和你的身份证，{netcafe_admin.name}有论坛和机房，你只有一个有点名气的网名",
+    "limit_gap": "月底就要还账，{netcafe_admin.name}的身份证也押在柜台下面",
+    "meeting_reason": "你们三个每晚都在同一间网吧熬到天亮",
+    "irreplaceable_goal": "你想还清账，拿回证件，再也不欠谁"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "cafe_owner",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{cafe_owner.name}说你跟{cafe_owner.ta}以前一样，厂里出来的"
+    },
+    {
+     "a": "player",
+     "b": "netcafe_admin",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "你和{netcafe_admin.name}在论坛上是老相识"
+    },
+    {
+     "a": "cafe_owner",
+     "b": "netcafe_admin",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{netcafe_admin.name}的身份证在{cafe_owner.name}的柜台下面压了一年"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_tape_errand",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "video_helper"
+   ],
+   "slots": [
+    "tape_shop_owner",
+    "radio_host"
+   ],
+   "tension_engine_ids": [
+    "te_netname",
+    "te_y2k"
+   ],
+   "chemistry": "{tape_shop_owner.name}是你的老板；{radio_host.name}每周五都来店里，点一首歌，却从不在节目里放。",
+   "stakes": {
+    "resource_gap": "{tape_shop_owner.name}有一墙磁带，{radio_host.name}有一个全城都在听的节目，你只有一台录音机的使用权",
+    "limit_gap": "店面要涨租，节目可能被砍",
+    "meeting_reason": "每周五晚上三个人都在店里",
+    "irreplaceable_goal": "你想弄清楚那盒没人取的带子是谁录的"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "tape_shop_owner",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 0
+     },
+     "reason": "{tape_shop_owner.name}教你怎么翻录不跑调"
+    },
+    {
+     "a": "player",
+     "b": "radio_host",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{radio_host.name}说你的声音适合上节目"
+    },
+    {
+     "a": "tape_shop_owner",
+     "b": "radio_host",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{radio_host.name}每次来都挑{tape_shop_owner.name}最喜欢的那首"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_mod_and_admin",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "forum_moderator"
+   ],
+   "slots": [
+    "netcafe_admin",
+    "net_friend"
+   ],
+   "tension_engine_ids": [
+    "te_same_machine",
+    "te_netname"
+   ],
+   "chemistry": "你和{netcafe_admin.name}在论坛上吵过一架；今晚“风过无痕”来了，{net_friend.name}说约的是你，可{netcafe_admin.name}说那个号骂了自己三页。",
+   "stakes": {
+    "resource_gap": "{netcafe_admin.name}有站长权限，{net_friend.name}有半年的聊天记录，你有一个版块和一半人的真名",
+    "limit_gap": "{net_friend.name}明天下午就走，你和站长还没和好",
+    "meeting_reason": "今晚三个人躲不开要碰面",
+    "irreplaceable_goal": "你想知道“风过无痕”到底在跟谁聊"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "netcafe_admin",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "你和{netcafe_admin.name}的那一架，全论坛都看了"
+    },
+    {
+     "a": "player",
+     "b": "net_friend",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "你和{net_friend.name}聊了半年，今晚第一次见"
+    },
+    {
+     "a": "netcafe_admin",
+     "b": "net_friend",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{netcafe_admin.name}一眼认出了{net_friend.name}的口头禅"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_stall_south",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal",
+    "low"
+   ],
+   "identity_ids": [
+    "stall_keeper"
+   ],
+   "slots": [
+    "southbound",
+    "cafe_owner"
+   ],
+   "tension_engine_ids": [
+    "te_going_south",
+    "te_tab"
+   ],
+   "chemistry": "{southbound.name}下个月就要南下，走之前想把赊{cafe_owner.name}的账还清；你在{southbound.name}旁边摆了两年的摊。",
+   "stakes": {
+    "resource_gap": "{southbound.name}有一叠路费，{cafe_owner.name}有赊账本，你有一辆三轮车和一摊子光碟",
+    "limit_gap": "文化局在查，{southbound.name}家里的病人又不好了",
+    "meeting_reason": "夜市收摊的时候，三个人都在网吧门口",
+    "irreplaceable_goal": "你想在{southbound.name}走之前帮{southbound.ta}一把"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "southbound",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 1
+     },
+     "reason": "{southbound.name}每天收摊都给你留两串"
+    },
+    {
+     "a": "player",
+     "b": "cafe_owner",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "你的光碟一半卖给了{cafe_owner.name}的客人"
+    },
+    {
+     "a": "southbound",
+     "b": "cafe_owner",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{southbound.name}在{cafe_owner.name}那里赊了三个月的上网费"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_chain_buyout",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "chain_buyer"
+   ],
+   "slots": [
+    "cafe_owner",
+    "netcafe_admin"
+   ],
+   "tension_engine_ids": [
+    "te_tab",
+    "te_same_machine"
+   ],
+   "chemistry": "你来收购这家网吧；{cafe_owner.name}开了一个价，{netcafe_admin.name}说论坛不卖，除非连自己一起买。",
+   "stakes": {
+    "resource_gap": "你有收购的钱，{cafe_owner.name}有四十台机子，{netcafe_admin.name}有论坛和所有人的登录记录",
+    "limit_gap": "执照快到期，你的连锁店也欠着债",
+    "meeting_reason": "三个人在机房小间里谈过一个通宵",
+    "irreplaceable_goal": "你想做成这单生意，又不想买下一个烂摊子"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "cafe_owner",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{cafe_owner.name}请你吃过一次夜市的烧烤"
+    },
+    {
+     "a": "player",
+     "b": "netcafe_admin",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": -1,
+      "tension": 2
+     },
+     "reason": "{netcafe_admin.name}说你是来拆论坛的"
+    },
+    {
+     "a": "cafe_owner",
+     "b": "netcafe_admin",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{netcafe_admin.name}不知道{cafe_owner.name}已经在谈转让"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_telecom_line",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "telecom_engineer"
+   ],
+   "slots": [
+    "radio_host",
+    "tape_shop_owner"
+   ],
+   "tension_engine_ids": [
+    "te_y2k",
+    "te_netname"
+   ],
+   "chemistry": "你管着这一片的线路；{radio_host.name}的电台要拉一条网线做“千禧特别节目”，{tape_shop_owner.name}说那条线会从{tape_shop_owner.ta}的店顶上过。",
+   "stakes": {
+    "resource_gap": "你有线路和拨号账号，{radio_host.name}有一个节目，{tape_shop_owner.name}有一间快开不下去的店",
+    "limit_gap": "节目年底可能被砍，店面下个月涨租",
+    "meeting_reason": "三个人约好在音像店里谈线路的走向",
+    "irreplaceable_goal": "你想把线拉好，也想弄清自己在网吧里那个网名还瞒得住多久"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "radio_host",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{radio_host.name}在节目里念过你写的一封信，没念名字"
+    },
+    {
+     "a": "player",
+     "b": "tape_shop_owner",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{tape_shop_owner.name}卖给你过一盘很老的带子"
+    },
+    {
+     "a": "radio_host",
+     "b": "tape_shop_owner",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "两个人每周五都见面，谁也没多说一句"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_first_meet",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "net_friend",
+    "southbound"
+   ],
+   "tension_engine_ids": [
+    "te_netname",
+    "te_going_south"
+   ],
+   "chemistry": "{net_friend.name}今晚约了一个聊了半年的网友在夜市烧烤摊见面，{southbound.name}早早替{net_friend.ta}占了一张桌子；那个网友就是你。",
+   "stakes": {
+    "resource_gap": "{net_friend.name}有一张明天的火车票，{southbound.name}有一张下个月的招工单，你有半年的聊天记录",
+    "limit_gap": "两个人都要走，一个明天，一个下个月",
+    "meeting_reason": "三个人约好在夜市最热闹的时候坐一张塑料桌",
+    "irreplaceable_goal": "你想知道网上的那个人和眼前这个是不是同一个"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "net_friend",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "你们聊了半年，今晚第一次见面"
+    },
+    {
+     "a": "player",
+     "b": "southbound",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{southbound.name}认得你，你常来吃"
+    },
+    {
+     "a": "net_friend",
+     "b": "southbound",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{southbound.name}在南边的论坛上见过{net_friend.name}的网名"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_unclaimed_tape",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "tape_shop_owner",
+    "radio_host",
+    "netcafe_admin"
+   ],
+   "tension_engine_ids": [
+    "te_netname",
+    "te_same_machine"
+   ],
+   "chemistry": "那盒没人取的翻录带，{tape_shop_owner.name}认得里面的声音，{radio_host.name}说那段告白和一封没署名的信是同一个人写的，{netcafe_admin.name}说那个人在论坛上有号。",
+   "stakes": {
+    "resource_gap": "{tape_shop_owner.name}有那盒带子，{radio_host.name}有那封信，{netcafe_admin.name}有登录记录，你有一个线索",
+    "limit_gap": "千禧年快到了，三个人都说要在那之前弄清楚",
+    "meeting_reason": "三个人都见过那盒带子摆在柜台上",
+    "irreplaceable_goal": "你想把带子交到该收的人手里"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "tape_shop_owner",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{tape_shop_owner.name}给你听过那盒带子的开头"
+    },
+    {
+     "a": "player",
+     "b": "radio_host",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{radio_host.name}在节目里放过你点的歌"
+    },
+    {
+     "a": "player",
+     "b": "netcafe_admin",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{netcafe_admin.name}替你查过一个网名"
+    },
+    {
+     "a": "tape_shop_owner",
+     "b": "radio_host",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "每周五都见面，谁也没提那盒带子"
+    },
+    {
+     "a": "tape_shop_owner",
+     "b": "netcafe_admin",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "隔壁做了三年邻居"
+    },
+    {
+     "a": "radio_host",
+     "b": "netcafe_admin",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 1
+     },
+     "reason": "{netcafe_admin.name}在论坛上见过{radio_host.name}的网名，没说破"
+    }
+   ],
+   "tags": []
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_overnight",
+   "title": "包夜",
+   "location_ids": [
+    "net_floor"
+   ],
+   "duration_minutes": 180,
+   "beats": [
+    "拨号的尖叫声响了三次才连上",
+    "凌晨三点，大厅里只剩七八个人",
+    "有人在身后拍了一下你的椅背"
+   ],
+   "hook_ids": [],
+   "start_minute": 1380,
+   "tags": []
+  },
+  {
+   "id": "a_dial_up",
+   "title": "等拨号连上",
+   "location_ids": [
+    "net_floor",
+    "server_closet"
+   ],
+   "duration_minutes": 15,
+   "beats": [
+    "猫的指示灯一闪一闪",
+    "屏幕上跳出“连接失败”",
+    "第四次终于连上了"
+   ],
+   "hook_ids": [],
+   "start_minute": 1300,
+   "tags": []
+  },
+  {
+   "id": "a_instant_noodle",
+   "title": "凌晨四点泡面",
+   "location_ids": [
+    "server_closet",
+    "counter"
+   ],
+   "duration_minutes": 20,
+   "beats": [
+    "热水瓶里的水不够了",
+    "两碗面摆在一起，调料包少了一个",
+    "窗外天开始发白"
+   ],
+   "hook_ids": [],
+   "start_minute": 240,
+   "tags": []
+  },
+  {
+   "id": "a_tape_dub",
+   "title": "翻录一盘磁带",
+   "location_ids": [
+    "video_store"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "双卡录音机的转速有点慢",
+    "录到一半，门口有人进来",
+    "盒子背面要写一个名字"
+   ],
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": []
+  },
+  {
+   "id": "a_bbq_night",
+   "title": "烧烤摊喝两瓶",
+   "location_ids": [
+    "night_market"
+   ],
+   "duration_minutes": 60,
+   "beats": [
+    "啤酒是常温的",
+    "邻桌在划拳",
+    "炭火被风吹得一明一灭"
+   ],
+   "hook_ids": [],
+   "start_minute": 1320,
+   "tags": []
+  },
+  {
+   "id": "a_river_walk",
+   "title": "去江边走走",
+   "location_ids": [
+    "river_bank"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "对岸的火车鸣了一声笛",
+    "钓鱼的老人收起了竿",
+    "江风吹得人有点冷"
+   ],
+   "hook_ids": [],
+   "start_minute": 30,
+   "tags": []
+  },
+  {
+   "id": "a_radio_listen",
+   "title": "听夜间点歌节目",
+   "location_ids": [
+    "video_store",
+    "night_market"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "收音机里传来那个熟悉的声音",
+    "今晚念的信，听着像是写给你的",
+    "节目最后一首歌，是你点过的"
+   ],
+   "hook_ids": [],
+   "start_minute": 1380,
+   "tags": []
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_meet_netfriend",
+   "title": "第一次见网友",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "night_market"
+   ],
+   "trigger": "聊了半年的网友今晚来了，约在夜市的烧烤摊，手里拿一本杂志当暗号",
+   "objective": "在对方上明天的火车之前，见上面、说上话",
+   "choice": "去见，还是在远处看一眼就走",
+   "immediate": {
+    "text": "烧烤摊上坐着一个人，手里拿着一本杂志，四处张望",
+    "minutes": 15
+   },
+   "near": {
+    "text": "明天下午的火车",
+    "deadline_minutes": 1080
+   },
+   "far": {
+    "trigger": "对方上了火车",
+    "consequence": "论坛上那个号就再也不会亮了",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "走过去坐下",
+     "cost": "网上说过的话，当面就收不回了"
+    },
+    {
+     "option": "发一条消息说临时有事",
+     "cost": "对方会知道你就在附近"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1260,
+   "tags": []
+  },
+  {
+   "id": "p_tab_due",
+   "title": "月底的赊账",
+   "source": "money",
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "location_ids": [
+    "counter",
+    "net_floor"
+   ],
+   "trigger": "赊账本上红笔圈的名字，月底不还，身份证就不还；网管的那张也在柜台下面",
+   "objective": "在月底之前把账还上，或者把证件拿回来",
+   "choice": "还钱，还是想别的办法",
+   "immediate": {
+    "text": "老板把赊账本摊开，用笔敲了敲你那一页",
+    "minutes": 10
+   },
+   "near": {
+    "text": "月底最后一天",
+    "deadline_minutes": 4300
+   },
+   "far": {
+    "trigger": "证件被扣下",
+    "consequence": "找工作、坐火车都要用身份证，你哪里都去不了",
+    "due_days": 8
+   },
+   "exits": [
+    {
+     "option": "找人借钱还上",
+     "cost": "又欠了另一个人"
+    },
+    {
+     "option": "替网吧干活抵账",
+     "cost": "老板会把你当成第二个网管"
+    }
+   ],
+   "leverage": {
+    "holder": "cafe_owner",
+    "subject": "netcafe_admin",
+    "basis": "{cafe_owner.name}压着{netcafe_admin.name}的身份证，说替{netcafe_admin.ta}保管，一年没还"
+   },
+   "hook_ids": [],
+   "start_minute": 1300,
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "p_y2k",
+   "title": "千年虫",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "net_floor",
+    "counter"
+   ],
+   "trigger": "论坛上有人说千禧年那天所有电脑都会停摆，存钱的、坐火车的都会乱套，有人开始去银行取钱",
+   "objective": "在谣言传遍全城之前，弄清是谁发的",
+   "choice": "辟谣，还是顺着说",
+   "immediate": {
+    "text": "网吧里有人站起来喊：“银行门口排队了！”",
+    "minutes": 15
+   },
+   "near": {
+    "text": "明天上午电台会念这条谣言",
+    "deadline_minutes": 720
+   },
+   "far": {
+    "trigger": "谣言上了电台",
+    "consequence": "整条街的人都会去取钱，网吧会被说成造谣的地方",
+    "due_days": 3
+   },
+   "exits": [
+    {
+     "option": "在论坛上辟谣",
+     "cost": "发帖的人会说你是收了钱的"
+    },
+    {
+     "option": "查登录记录找发帖的人",
+     "cost": "那台机子可能是你认识的人坐的"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1200,
+   "tags": []
+  },
+  {
+   "id": "p_forum_war",
+   "title": "同一台机器",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "net_floor",
+    "server_closet"
+   ],
+   "trigger": "论坛上对骂了一年的两个网名，登录记录显示是同一台机器",
+   "objective": "在这件事被别人发现之前，决定怎么办",
+   "choice": "说出来，还是替那个人瞒着",
+   "immediate": {
+    "text": "主机屏幕上，两个网名的登录时间只差了三分钟",
+    "minutes": 10
+   },
+   "near": {
+    "text": "今晚论坛要换新服务器，所有记录都会导出",
+    "deadline_minutes": 300
+   },
+   "far": {
+    "trigger": "记录被导出",
+    "consequence": "全论坛都会知道是谁在自导自演",
+    "due_days": 2
+   },
+   "exits": [
+    {
+     "option": "把那几条记录删掉",
+     "cost": "这是站长才能做的事，你就成了共犯"
+    },
+    {
+     "option": "去问那个人",
+     "cost": "那个人可能会从此不再上线"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1350,
+   "tags": []
+  },
+  {
+   "id": "p_unclaimed_tape",
+   "title": "没人取的翻录带",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "video_store",
+    "night_market"
+   ],
+   "trigger": "音像店抽屉里那盒翻录带放了半年没人取，盒子背面的名字被刮掉了一半，里面是一段告白",
+   "objective": "在店关门之前，把带子交到该收的人手里",
+   "choice": "找录带子的人，还是找该听的人",
+   "immediate": {
+    "text": "老板把那盒带子放在柜台上，说下个月店就不开了",
+    "minutes": 15
+   },
+   "near": {
+    "text": "下个月一号店面到期",
+    "deadline_minutes": 4300
+   },
+   "far": {
+    "trigger": "店关了，带子被当成旧货卖掉",
+    "consequence": "那段告白就再也到不了该到的地方",
+    "due_days": 10
+   },
+   "exits": [
+    {
+     "option": "在电台点歌节目里放出来",
+     "cost": "全城都会听见，录的人可能不愿意"
+    },
+    {
+     "option": "一个一个去问",
+     "cost": "问错了人，告白就成了笑话"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1140,
+   "tags": []
+  },
+  {
+   "id": "p_south_ticket",
+   "title": "南下的火车",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "river_bank",
+    "night_market"
+   ],
+   "trigger": "有人手里攥着一张南下的火车票，问你一句话：你说一声，我就不走",
+   "objective": "在火车开之前回答",
+   "choice": "让对方走，还是开口留",
+   "immediate": {
+    "text": "对岸火车站的大钟敲了一下",
+    "minutes": 10
+   },
+   "near": {
+    "text": "明天下午三点开车",
+    "deadline_minutes": 900
+   },
+   "far": {
+    "trigger": "火车开走了",
+    "consequence": "下一次再见可能是好几年以后",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "开口留",
+     "cost": "对方留下来，也许会怪你一辈子"
+    },
+    {
+     "option": "不说话",
+     "cost": "对方会以为你根本不在乎"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1380,
+   "tags": []
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_secret_board",
+   "kind": "approach",
+   "slot": "netcafe_admin",
+   "location_ids": [],
+   "text": "{npc.name}凑到你耳边说了一串密码：“论坛上有个版块，只有我能进，现在你也能进了。”"
+  },
+  {
+   "id": "h_noodle_share",
+   "kind": "approach",
+   "slot": "netcafe_admin",
+   "location_ids": [
+    "server_closet",
+    "counter"
+   ],
+   "text": "{npc.name}端出两碗泡面，把加了蛋的那碗推给你"
+  },
+  {
+   "id": "h_dub_for_you",
+   "kind": "approach",
+   "slot": "tape_shop_owner",
+   "location_ids": [],
+   "text": "{npc.name}递给你一盘新翻的带子，盒子背面写着你的名字"
+  },
+  {
+   "id": "h_netname_story",
+   "kind": "approach",
+   "slot": "net_friend",
+   "location_ids": [],
+   "text": "{npc.name}坐在你旁边，小声讲了“风过无痕”这个名字是怎么来的"
+  },
+  {
+   "id": "h_burn_page",
+   "kind": "approach",
+   "slot": "cafe_owner",
+   "location_ids": [],
+   "text": "{npc.name}把赊账本上你那一页撕下来，用打火机点着了"
+  },
+  {
+   "id": "h_last_skewer",
+   "kind": "approach",
+   "slot": "southbound",
+   "location_ids": [
+    "night_market",
+    "river_bank"
+   ],
+   "text": "{npc.name}把最后一串烤好的塞到你手里：“我不饿，你吃。”"
+  },
+  {
+   "id": "h_song_for_you",
+   "kind": "approach",
+   "slot": "radio_host",
+   "location_ids": [],
+   "text": "{npc.name}关掉随身听，说今晚节目最后一首歌，是放给你的"
+  },
+  {
+   "id": "h_ask_login",
+   "kind": "request",
+   "slot": "net_friend",
+   "location_ids": [],
+   "text": "{npc.name}拉住你：“你帮我查查，那个人今天上线没有？”"
+  },
+  {
+   "id": "h_owner_watch",
+   "kind": "observe",
+   "slot": "cafe_owner",
+   "location_ids": [
+    "counter"
+   ],
+   "text": "{npc.name}站在柜台后面，看着你把身份证押了下去，没说话"
+  },
+  {
+   "id": "h_power_trip",
+   "kind": "accident",
+   "slot": "netcafe_admin",
+   "location_ids": [
+    "net_floor",
+    "counter",
+    "server_closet"
+   ],
+   "text": "网吧的保险丝烧了，四十台机子一起黑屏，{npc.name}在黑暗里叫了你的名字"
+  },
+  {
+   "id": "h_letter_ask",
+   "kind": "request",
+   "slot": "radio_host",
+   "location_ids": [],
+   "text": "{npc.name}把一封没署名的信递给你：“你认得这个字吗？”"
+  },
+  {
+   "id": "h_south_flyer",
+   "kind": "observe",
+   "slot": "southbound",
+   "location_ids": [],
+   "text": "{npc.name}把一张招工单折好放进口袋，抬头看了你一眼"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_admin_same_net",
+   "category": "信息",
+   "requires": [
+    "netcafe_admin"
+   ],
+   "text": "有人在论坛上贴出了截图：骂站长的那个号，登录地址就是网吧的机房。"
+  },
+  {
+   "id": "t_tape_voice",
+   "category": "信息",
+   "requires": [
+    "tape_shop_owner"
+   ],
+   "text": "那盒翻录带里的告白声音，是{tape_shop_owner.name}年轻时候的。"
+  },
+  {
+   "id": "t_cafe_raid",
+   "category": "制度",
+   "requires": [
+    "pressure"
+   ],
+   "text": "文化局突击检查，所有没有执照的网吧当晚查封。"
+  },
+  {
+   "id": "t_friend_lies",
+   "category": "关系",
+   "requires": [
+    "net_friend",
+    "netcafe_admin"
+   ],
+   "text": "{net_friend.name}承认，半年来真正在聊的人是{netcafe_admin.name}。"
+  },
+  {
+   "id": "t_ticket_lost",
+   "category": "意外",
+   "requires": [
+    "southbound"
+   ],
+   "text": "{southbound.name}的路费和招工单被人偷了。"
+  },
+  {
+   "id": "t_station_cut",
+   "category": "人事",
+   "requires": [
+    "radio_host"
+   ],
+   "text": "电台提前砍掉了{radio_host.name}的节目，今晚就是最后一期。"
+  },
+  {
+   "id": "t_y2k_eve",
+   "category": "时限",
+   "requires": [],
+   "text": "离千禧年只剩一周，整条街都在囤蜡烛和方便面。"
+  },
+  {
+   "id": "t_new_broadband",
+   "category": "资源",
+   "requires": [],
+   "text": "电信局宣布这条街明年开通宽带，第一批名额只有三家。"
+  }
+ ],
+ "forbidden_terms": [
+  "微信",
+  "智能手机",
+  "抖音",
+  "网络直播",
+  "高铁",
+  "民国",
+  "衙门",
+  "铜钱",
+  "支付宝",
+  "共享单车",
+  "学生",
+  "少女",
+  "少年"
+ ],
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "coercion_theme",
+  "nightlife"
+ ],
+ "status": "review",
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 7 个）。性别按会话偏好生成（D15）。"
+}

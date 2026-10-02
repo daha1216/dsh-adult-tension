@@ -1,0 +1,90 @@
+{
+ "id": "pt-last_issue-daily",
+ "title": "试玩：最后一期（日常）",
+ "focus": "CONTENT_BIBLE.md 8.2 第 6 步：真实 Skill 下的试玩，每个种子一次运行（种子由引擎随机抽，记录在开局页脚）；开局、5 个回合（含“继续”、一次作用于 NPC 的尝试、一次等待）、存档、新对话读档后再推进 1 回合",
+ "world": "last_issue",
+ "mode": "daily",
+ "steps": [
+  {
+   "say": "开一局，最后一期，日常",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2,
+    "group_must_call": [
+     "doctor",
+     "new-game"
+    ]
+   }
+  },
+  {
+   "say": "我先看看四周，听听大家在说什么",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我走到离我最近的那个人身边，问问对方在忙什么",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我想请对方帮我一个忙，看对方肯不肯",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我不说话，看对方怎么做",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "存档 试玩",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   }
+  },
+  {
+   "say": "读档 试玩",
+   "conversation": "B",
+   "expect": {
+    "kind": "load",
+    "calls_max": 2,
+    "must_call": [
+     "load-slot"
+    ]
+   }
+  },
+  {
+   "say": "继续",
+   "conversation": "B",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 9
+}

@@ -12,7 +12,7 @@ from ..errors import NO_MATCH, SAFETY_BLOCK, AppError, detail
 from . import clock as CL
 from . import rng
 from . import structure as ST
-from .text import binding, render, render_name_pattern
+from .text import binding, full_name, render, render_name_pattern, split_name
 
 LOCK_KEYS = ("world_id", "location_id", "combo_id", "activity_id", "pressure_id", "hook_id", "identity_id")
 HOOK_WEIGHT = {"approach": 4.0, "observe": 1.0, "request": 1.0, "accident": 1.0}
@@ -304,7 +304,7 @@ class _Names:
     def call(self, family, given, gender, key):
         patterns = [p["pattern"] for p in self.pools["nickname_patterns"] if p["gender"] in ("any", gender)]
         if not patterns:
-            return family + given
+            return full_name(self.pools, family, given)
         return render_name_pattern(rng.pick(self.seed, "names.call", patterns, key), family, given)
 
 
@@ -402,15 +402,14 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
         raise AppError(SAFETY_BLOCK, "玩家角色必须是成年人", [detail("$.player.age", "年龄 %d 小于 18" % age, "所有角色都必须年满 18 岁", SAFETY_BLOCK)])
     if player_req.get("name"):
         full = player_req["name"]
-        family = full[0] if full[0] in pack["name_pools"]["family"] else ""
-        if len(full) >= 3 and full[:2] in pack["name_pools"]["family"]:
-            family = full[:2]
-        given = full[len(family) :] if family else full
+        family, given = split_name(pack["name_pools"], full)
+        if family is None or not given:
+            family, given = "", full
         names.reserve_family(family)
     else:
         family = names.next_family(allow_reuse=True)
         given = names.given(gender, "player")
-        full = family + given
+        full = full_name(pack["name_pools"], family, given)
     title = player_req.get("title")
     if not title:
         patterns = [p["pattern"] for p in identity["title_patterns"] if p["gender"] in ("any", gender)] or [identity["title_patterns"][0]["pattern"]]
@@ -452,7 +451,7 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
         npc = {
             "id": slot,
             "template_id": slot,
-            "name": fam + giv,
+            "name": full_name(pack["name_pools"], fam, giv),
             "family": fam,
             "given": giv,
             "call": names.call(fam, giv, g, slot),
@@ -530,7 +529,7 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
         else:
             fam = names.next_family(allow_reuse=True)
             giv = names.given(g, bg["id"])
-            name = fam + giv
+            name = full_name(pack["name_pools"], fam, giv)
         npc = {
             "id": bg["id"],
             "name": name,

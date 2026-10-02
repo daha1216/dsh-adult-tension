@@ -1,0 +1,2528 @@
+{
+ "schema_version": 1,
+ "id": "registry_city",
+ "title": "登记城",
+ "extends": null,
+ "era": "近未来，灵气复苏第十年",
+ "region": "一座人和非人按契约共处的沿海城市",
+ "premise": "契约一登记就自动执行，真名读出来就生效；在这座城里，谁握着你的真名，谁就握着你的命。",
+ "tone": [
+  "契约",
+  "真名",
+  "夜",
+  "霓虹"
+ ],
+ "style_hint": "写字和光：条款上的红笔圈、契纹在皮肤上的温度、玻璃瓶里的记忆、两种文字的招牌；人说话都留半句，怕哪一句被写进契约。",
+ "clock_start": {
+  "label": "续期窗口关闭前的深夜",
+  "minute": 1260
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "stage_labels": null,
+ "name_pools": {
+  "family": [
+   "林",
+   "沈",
+   "周",
+   "许",
+   "陆",
+   "程",
+   "叶",
+   "顾",
+   "白",
+   "苏",
+   "韩",
+   "温",
+   "秦",
+   "江"
+  ],
+  "given_female": [
+   "晚",
+   "澄",
+   "霜",
+   "芷",
+   "栀",
+   "绫",
+   "若",
+   "筠",
+   "祺",
+   "黛",
+   "葵",
+   "槿"
+  ],
+  "given_male": [
+   "砚",
+   "珩",
+   "峤",
+   "野",
+   "骁",
+   "弈",
+   "朔",
+   "衡",
+   "屿",
+   "舟",
+   "墨",
+   "岑"
+  ],
+  "given_neutral": [
+   "鸦",
+   "雨",
+   "夜",
+   "安",
+   "宁",
+   "砂",
+   "默",
+   "岚",
+   "晓",
+   "零",
+   "迟",
+   "白"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "阿{given}",
+    "gender": "any"
+   },
+   {
+    "pattern": "小{family}",
+    "gender": "any"
+   },
+   {
+    "pattern": "{given}姐",
+    "gender": "female"
+   },
+   {
+    "pattern": "{given}哥",
+    "gender": "male"
+   }
+  ]
+ },
+ "rules": [
+  {
+   "id": "r_auto_exec",
+   "text": "契约一旦登记便自动执行，续期、扣押、交割不必当事人再点头。"
+  },
+  {
+   "id": "r_true_name",
+   "text": "真名只在本人授权的事务里使用，读出即生效。"
+  },
+  {
+   "id": "r_public_bond",
+   "text": "关系一旦公开，就同时成了把柄和负债。"
+  },
+  {
+   "id": "r_level_check",
+   "text": "能力每年复核一次，超出登记等级的当场封存。"
+  },
+  {
+   "id": "r_midnight_window",
+   "text": "续期声明窗口每晚子时关闭，过了子时只能等下一个周期。"
+  }
+ ],
+ "customs": [
+  "非人居民见面先报登记号，不报名字。",
+  "签契约前要请对方喝一杯热的，喝完再落笔。",
+  "互称用外号；叫真名是最重的冒犯，也是最重的托付。",
+  "每年复苏日，全城的路灯会闪一下，大家都停下来等它。",
+  "典当行门口的风铃响一声，就是有人来赎东西。"
+ ],
+ "player_identities": [
+  {
+   "id": "delivery_rider",
+   "role": "跑夜单的骑手",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "小{family}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    38
+   ],
+   "social_position": "low",
+   "baseline": "你骑着电动车跑夜单，登记所、鳞巷、典当行，这一片的门你都送到过。",
+   "resources": [
+    "一辆电动车和一身跑单的速度",
+    "这一片的门卫和摊主都认得你"
+   ],
+   "reputation": "嘴甜，腿快",
+   "risks": [
+    "你送过的一单里，有一张写着真名的纸条"
+   ]
+  },
+  {
+   "id": "new_registrant",
+   "role": "刚登记的非人",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "阿{given}",
+     "gender": "any"
+    },
+    {
+     "pattern": "小{family}",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    40
+   ],
+   "social_position": "low",
+   "baseline": "你是刚登记满一个月的非人，登记号还热乎，在这座城里一个熟人也没有。",
+   "resources": [
+    "一个新登记号和一份临时庇护",
+    "一身还没被复核过的能力"
+   ],
+   "reputation": "警惕，好奇",
+   "risks": [
+    "你登记时用的担保人，你其实不认识"
+   ]
+  },
+  {
+   "id": "clinic_doctor",
+   "role": "灵气诊所的医生",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}医生",
+     "gender": "any"
+    },
+    {
+     "pattern": "{given}医生",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    48
+   ],
+   "social_position": "equal",
+   "baseline": "你在鳞巷口开一间灵气诊所，人和非人都看，量灵压、开抑制剂。",
+   "resources": [
+    "一间诊所和一手好医术",
+    "鳞巷一半的人是你的病人"
+   ],
+   "reputation": "细心，嘴严",
+   "risks": [
+    "你替病人瞒过一回灵压的读数"
+   ]
+  },
+  {
+   "id": "appraiser",
+   "role": "二手契约鉴定师",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}鉴定师",
+     "gender": "any"
+    },
+    {
+     "pattern": "{given}老师",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    50
+   ],
+   "social_position": "equal",
+   "baseline": "你替人鉴定二手契约的价钱和真假，哪份能转卖、哪份是坑，你一看就知道。",
+   "resources": [
+    "一双看得出契纹真假的眼睛",
+    "律所和黑市都找你"
+   ],
+   "reputation": "精明，挑剔",
+   "risks": [
+    "你鉴定过一份假契约，当时没有说破"
+   ]
+  },
+  {
+   "id": "section_chief",
+   "role": "登记所的科长",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}科长",
+     "gender": "any"
+    },
+    {
+     "pattern": "{given}科长",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    32,
+    52
+   ],
+   "social_position": "high",
+   "baseline": "你是登记所续期科的科长，今晚到期的每一份续期声明都要过你的手。",
+   "resources": [
+    "续期科的签批权",
+    "登记所上上下下都要给你面子"
+   ],
+   "reputation": "稳重，圆滑",
+   "risks": [
+    "十年前那批登记，有几份是你签的"
+   ]
+  },
+  {
+   "id": "consortium_agent",
+   "role": "财团的代理人",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}先生",
+     "gender": "any"
+    },
+    {
+     "pattern": "{family}代表",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    30,
+    50
+   ],
+   "social_position": "high",
+   "baseline": "你替一家财团在这座城里收购旧契约和旧当票，手里的钱够买下半条鳞巷。",
+   "resources": [
+    "财团的授权和一笔花不完的预算",
+    "市议会里有你的人"
+   ],
+   "reputation": "冷静，有耐心",
+   "risks": [
+    "财团要你收的东西里，有一个是真名"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "registry_office",
+   "name": "登记所大厅",
+   "detail": "一座通宵亮灯的玻璃大厅，正中挂着一口老式机械钟，两侧是叫号屏和续期窗口，墙上滚动着今晚到期的契约编号。",
+   "privacy": "public",
+   "visibility": "排队的人和非人挤满了椅子，谁叫了号、谁在窗口前犹豫，满厅的人都看得见",
+   "witnesses": [
+    "bg_queue_elder",
+    "bg_guard"
+   ],
+   "exits": [
+    "contract_bureau",
+    "name_vault",
+    "rooftop",
+    "night_street"
+   ],
+   "affordances": [
+    "取一张号，等着被叫",
+    "抬头看墙上的钟走到了哪",
+    "在续期窗口前看别人签字"
+   ],
+   "pressure_modifiers": {
+    "p_renewal": "墙上的屏幕把今晚到期的契约编号加粗了。",
+    "p_audit": "大厅角落的打印机一直在响。"
+   },
+   "tags": []
+  },
+  {
+   "id": "contract_bureau",
+   "name": "契约译所",
+   "detail": "登记所二楼的一间小办公室，三面墙都是书架，堆满了各种文字的契约副本，桌上一盏台灯照着一页摊开的条款。",
+   "privacy": "semi",
+   "visibility": "来的都是读不懂契约的人；门一关，楼下的叫号声就小了",
+   "witnesses": [
+    "bg_courier"
+   ],
+   "exits": [
+    "registry_office"
+   ],
+   "affordances": [
+    "借台灯看一页条款",
+    "从书架上抽一本契约副本翻翻",
+    "在译员对面坐下，等着问一句话"
+   ],
+   "pressure_modifiers": {
+    "p_renewal": "桌上摊着一份契约，乙方签名栏被红笔圈了一圈。"
+   },
+   "tags": []
+  },
+  {
+   "id": "name_vault",
+   "name": "真名保管库",
+   "detail": "登记所地下一层，一排排铁柜，每格锁着一个非人的真名，柜门上的契纹在暗处微微发亮。",
+   "privacy": "private",
+   "visibility": "只有看守和被允许的人能下来；库里说的话，柜子都听着",
+   "witnesses": [],
+   "exits": [
+    "registry_office"
+   ],
+   "affordances": [
+    "数一排柜门上亮着的契纹",
+    "在铁柜之间放轻脚步",
+    "把手贴在一扇柜门上，感觉它的温度"
+   ],
+   "pressure_modifiers": {
+    "p_mana_drain": "几扇柜门上的契纹暗了下去，锁舌在轻轻响。"
+   },
+   "tags": []
+  },
+  {
+   "id": "pawn_shop",
+   "name": "记忆典当行",
+   "detail": "夜市街拐角一间老铺子，门口挂着风铃，柜台后面一排排玻璃瓶，每只瓶里都有一点光。",
+   "privacy": "semi",
+   "visibility": "来当东西的都不想被认出来，进门前总要先回头看一眼街上",
+   "witnesses": [],
+   "exits": [
+    "night_street"
+   ],
+   "affordances": [
+    "隔着柜台看一只瓶子里的光",
+    "翻一翻贴在墙上的拍卖告示",
+    "碰一下门口的风铃"
+   ],
+   "pressure_modifiers": {
+    "p_memory_due": "柜台上单独放着一只瓶子，标签上写着“今夜到期”。",
+    "p_name_leak": "门口有人探头问老板收不收真名。"
+   },
+   "tags": []
+  },
+  {
+   "id": "night_street",
+   "name": "鳞巷夜市",
+   "detail": "登记所后面一条非人聚居的老街，摊子上卖着人吃的面和非人吃的东西，招牌上写着两种文字。",
+   "privacy": "public",
+   "visibility": "人和非人挤在一起吃宵夜，谁跟谁说了句话，摊主都听见了",
+   "witnesses": [
+    "bg_noodle_vendor",
+    "bg_name_broker"
+   ],
+   "exits": [
+    "registry_office",
+    "pawn_shop"
+   ],
+   "affordances": [
+    "在面摊前坐下要一碗面",
+    "看两种文字的招牌哪一种写在上面",
+    "跟着人流往巷子深处走"
+   ],
+   "pressure_modifiers": {
+    "p_name_leak": "掮客站在路灯底下，手里捏着一张折起来的纸条。",
+    "p_surge": "巷口的招牌一闪一闪，灯管嗡嗡作响。",
+    "p_mana_drain": "整条街的路灯同时暗了一档。"
+   },
+   "tags": []
+  },
+  {
+   "id": "rooftop",
+   "name": "登记所楼顶",
+   "detail": "登记所的楼顶，一个水箱、几盆没人管的绿植，看得见整条鳞巷的灯。",
+   "privacy": "private",
+   "visibility": "很少有人上来；在这里说的话，只有风听得见",
+   "witnesses": [],
+   "exits": [
+    "registry_office"
+   ],
+   "affordances": [
+    "靠着水箱看鳞巷的灯",
+    "给没人管的绿植浇一点水",
+    "在风里把话说完"
+   ],
+   "pressure_modifiers": {
+    "p_surge": "楼下的路灯一盏接一盏炸亮。"
+   },
+   "tags": []
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "contract_translator",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    28,
+    45
+   ],
+   "adult_context": "契约文书译员，人类，成年人，读得懂所有种族的条款，也知道哪些条款是陷阱",
+   "public_role": "契约译员",
+   "appearance_options": [
+    "一副细框眼镜，镜片上贴着一层能显出契纹的膜",
+    "手边总放着三支不同颜色的笔，从不借人"
+   ],
+   "identity": {
+    "authority": "决定一条条款翻过去是什么意思",
+    "resources": [
+     "读得懂所有种族的契约",
+     "城里一半的律所都请这位译员过目"
+    ],
+    "limits": [
+     "译错一个字，就是别人一辈子的事",
+     "非人那边有人觉得{npc.ta}偏向人"
+    ],
+    "obligations": [
+     "每份经手的契约都要留一份副本"
+    ],
+    "exposure": "{npc.ta}十年前译过一份契约，故意漏掉了一条，那份契约今晚续期",
+    "hidden": "{npc.ta}从条款里读出过城里好几个非人的真名，从没说出去"
+   },
+   "decision": {
+    "core_value": "字是死的，读字的人是活的",
+    "goal_options": [
+     "在子时前把那条漏掉的条款补上",
+     "不让任何人知道{npc.ta}读得出真名",
+     "不再替陷阱签字"
+    ],
+    "pressure_responses": {
+     "low": "推一推眼镜，说“这一条，你最好再看一遍”",
+     "mid": "用红笔圈出一行字，推到对方面前",
+     "high": "当着契约双方念出那条被漏掉的条款",
+     "breaking": "把所有副本塞进碎纸机，辞职走人"
+    },
+    "withdrawal": "夜里在译所一行一行对照三种文字，对到眼睛发酸",
+    "relationship_stance": "谨慎，心软",
+    "contrast": "替所有人读懂了契约，却从来没人问过{npc.ta}自己签了什么",
+    "prefers": [
+     "先读条款"
+    ],
+    "avoids": [
+     "被人说是哪一边的"
+    ],
+    "never": [
+     "替一个看不懂的人签字"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方肯听{npc.ta}把一条条款讲完",
+     "对方不问{npc.ta}知道谁的真名"
+    ],
+    "likes": [
+     "两个人头挨着头读同一页纸"
+    ],
+    "dislikes": [
+     "被当成一台翻译机"
+    ],
+    "preconditions": [
+     "译所还有人在加班"
+    ],
+    "boundaries": [
+     "窗外看不见登记所的钟"
+    ],
+    "expression": "把自己唯一签过的那份契约拿给对方看",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢签一份自己的契约的那个人"
+   },
+   "voices": {
+    "surface": "“你读得懂这一条吗？读不懂，就别签。”",
+    "inner": "“十年前那一条，是我故意漏掉的。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1380,
+     "location_id": "contract_bureau"
+    },
+    {
+     "from": 1381,
+     "to": 1439,
+     "location_id": "registry_office"
+    },
+    {
+     "from": 0,
+     "to": 120,
+     "location_id": "contract_bureau"
+    }
+   ],
+   "situation": {
+    "trigger": "那份十年前漏译的契约今晚子时自动续期",
+    "pressure": "补上那一条，{npc.ta}的饭碗就砸了；不补，有人又要被绑十年",
+    "exits": [
+     {
+      "option": "去找乙方坦白",
+      "cost": "乙方可能当场让{npc.ta}吊销执照"
+     },
+     {
+      "option": "偷偷改一个字",
+      "cost": "改契约是重罪，契纹会记下是谁的手"
+     }
+    ]
+   },
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "vault_keeper",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    30,
+    60
+   ],
+   "adult_context": "真名保管库的看守，非人，成年人，守着全城非人的真名，自己的真名十年前被典当，至今没赎回",
+   "public_role": "保管库看守",
+   "appearance_options": [
+    "眼睛是灰的，在暗处会微微发亮",
+    "左手腕上的契纹是断的，像被人剪过一刀"
+   ],
+   "identity": {
+    "authority": "决定谁能进保管库、谁的名字能取出来",
+    "resources": [
+     "保管库的钥匙和全城非人的真名",
+     "认得每一个登记号背后的那张脸"
+    ],
+    "limits": [
+     "自己的真名在别人手里，随时可能被读出来",
+     "保管库的灵力在衰退，锁快压不住了"
+    ],
+    "obligations": [
+     "每晚子时巡一遍库，一个名字一个名字地点"
+    ],
+    "exposure": "{npc.ta}的真名是为了救一个人当掉的，那个人后来不记得{npc.ta}了",
+    "hidden": "保管库里少了一个名字，{npc.ta}一直没上报"
+   },
+   "decision": {
+    "core_value": "名字是命，命要锁好",
+    "goal_options": [
+     "攒够钱赎回自己的真名",
+     "查清少的那个名字去了哪",
+     "守住保管库到灵力回升"
+    ],
+    "pressure_responses": {
+     "low": "挡在库门前，说“别动”",
+     "mid": "让对方看一眼自己腕上断了的契纹",
+     "high": "当着登记所的人打开库门",
+     "breaking": "把所有的名字放出去，自己跟着走"
+    },
+    "withdrawal": "夜里在库里一排排点名字，点到自己那个空格就停一停",
+    "relationship_stance": "冷淡，忠诚",
+    "contrast": "替全城守着真名，自己却没有名字可以被人叫",
+    "prefers": [
+     "先锁门"
+    ],
+    "avoids": [
+     "被人叫登记号"
+    ],
+    "never": [
+     "读出别人的真名"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方叫{npc.ta}外号时语气很轻",
+     "对方不打听{npc.ta}的真名"
+    ],
+    "likes": [
+     "灰眼睛在暗处对着另一双眼睛"
+    ],
+    "dislikes": [
+     "被当成一把锁"
+    ],
+    "preconditions": [
+     "库门已经锁好"
+    ],
+    "boundaries": [
+     "没有柜子听着的地方"
+    ],
+    "expression": "说出自己的真名是为了谁当掉的",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}想把真名赎回来交给的那个人"
+   },
+   "voices": {
+    "surface": "“别动。这里每一格都锁着一条命。”",
+    "inner": "“我的真名当在了别人手里。我连自己叫什么都快忘了。”"
+   },
+   "schedule": [
+    {
+     "from": 1320,
+     "to": 1439,
+     "location_id": "name_vault"
+    },
+    {
+     "from": 0,
+     "to": 240,
+     "location_id": "name_vault"
+    },
+    {
+     "from": 1200,
+     "to": 1319,
+     "location_id": "registry_office"
+    }
+   ],
+   "situation": {
+    "trigger": "保管库的锁今夜压不住了，有一个名字在柜里发烫",
+    "pressure": "开库检查，名字可能飞出去；不开，锁可能先碎",
+    "exits": [
+     {
+      "option": "开库",
+      "cost": "登记所会知道少了一个名字"
+     },
+     {
+      "option": "守着不动",
+      "cost": "锁碎的时候，{npc.ta}就站在最前面"
+     }
+    ]
+   },
+   "tags": [
+    "supernatural"
+   ]
+  },
+  {
+   "id": "new_director",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    32,
+    50
+   ],
+   "adult_context": "能力登记所的新主任，成年人，上任第一天就把十年前的档案全调了出来",
+   "public_role": "登记所主任",
+   "appearance_options": [
+    "一身剪裁利落的深色西装，胸口别着登记所的银徽",
+    "说话前会先把文件夹在桌上磕整齐"
+   ],
+   "identity": {
+    "authority": "决定哪一份旧档案重审、哪一个名字上名单",
+    "resources": [
+     "登记所的签批权和十年的旧档案",
+     "市议会里有人撑腰"
+    ],
+    "limits": [
+     "翻旧账得罪了半座城",
+     "上头只给了三个月出成绩"
+    ],
+    "obligations": [
+     "每晚亲自看一遍重审名单"
+    ],
+    "exposure": "{npc.ta}翻旧账是为了找十年前登记那天失踪的一个人",
+    "hidden": "{npc.ta}自己的能力登记等级是假的，真实等级高得多"
+   },
+   "decision": {
+    "core_value": "档案不会说谎，说谎的是填档案的人",
+    "goal_options": [
+     "找到十年前失踪的那个人",
+     "三个月内交出成绩",
+     "不让自己的真实等级被人发现"
+    ],
+    "pressure_responses": {
+     "low": "把文件夹磕整齐，说“我们按程序来”",
+     "mid": "把一份旧档案摊在对方面前",
+     "high": "当着大厅贴出重审名单",
+     "breaking": "动用自己的真实能力，当场撬开封存的档案"
+    },
+    "withdrawal": "夜里一个人在档案室，一份一份翻十年前的登记表",
+    "relationship_stance": "强硬，孤独",
+    "contrast": "要全城说实话，自己却在档案上撒了最大的一个谎",
+    "prefers": [
+     "先查档"
+    ],
+    "avoids": [
+     "被人说是来清算的"
+    ],
+    "never": [
+     "让一个无辜的名字上名单"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方当面顶撞{npc.ta}却说得在理",
+     "对方看穿了{npc.ta}的等级却没声张"
+    ],
+    "likes": [
+     "深夜一壶泡淡了的茶"
+    ],
+    "dislikes": [
+     "被当成一台查账机器"
+    ],
+    "preconditions": [
+     "名单已经贴出去"
+    ],
+    "boundaries": [
+     "身边没有下属"
+    ],
+    "expression": "说出自己在找的那个失踪的人是谁",
+    "desire_range": [
+     1,
+     4
+    ],
+    "self_control_range": [
+     3,
+     5
+    ],
+    "desired_position": "让{npc.ta}敢露出真实等级的那个人"
+   },
+   "voices": {
+    "surface": "“我们按程序来。程序会告诉我们谁在撒谎。”",
+    "inner": "“十年前登记那天，有一个人进去了就没出来。我在找那个人。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1380,
+     "location_id": "registry_office"
+    },
+    {
+     "from": 1381,
+     "to": 1439,
+     "location_id": "rooftop"
+    },
+    {
+     "from": 0,
+     "to": 120,
+     "location_id": "registry_office"
+    }
+   ],
+   "situation": {
+    "trigger": "市议会要{npc.ta}明早交第一批重审结果",
+    "pressure": "名单上没有分量够的名字，{npc.ta}就要被换掉",
+    "exits": [
+     {
+      "option": "把一个熟人的名字放上去",
+      "cost": "那个人是{npc.ta}在城里唯一信的人"
+     },
+     {
+      "option": "交白卷",
+      "cost": "旧账就再也没人翻了"
+     }
+    ]
+   },
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "pawn_broker",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    35,
+    70
+   ],
+   "adult_context": "记忆典当行的老板，非人，成年人，收的是人的记忆，按年计息",
+   "public_role": "典当行老板",
+   "appearance_options": [
+    "手指很长，拿瓶子的样子像捧着一只鸟",
+    "说话轻声细语，算账却从不出错"
+   ],
+   "identity": {
+    "authority": "决定一段记忆当多少钱、什么时候拍卖",
+    "resources": [
+     "满店的记忆和一本当票簿",
+     "知道城里不少人忘掉了什么"
+    ],
+    "limits": [
+     "当期到了不赎，规矩是拍卖，谁也拦不住",
+     "有人在查店里收过的一段记忆"
+    ],
+    "obligations": [
+     "每段记忆到期前都要通知当主一次"
+    ],
+    "exposure": "{npc.ta}自己也当掉过一段记忆，当主就是{npc.ta}自己，忘了当的是什么",
+    "hidden": "店里最里面的柜子锁着的不是记忆，是一个真名"
+   },
+   "decision": {
+    "core_value": "忘掉的都能赎回来，只是要付利息",
+    "goal_options": [
+     "守住那个柜子",
+     "想起自己当掉的是什么",
+     "让到期的记忆找到主人"
+    ],
+    "pressure_responses": {
+     "low": "举起一只瓶子对着灯，让对方看里面的光",
+     "mid": "把当票推到对方面前，说“利息又滚了一年”",
+     "high": "当着拍卖会宣布一段记忆的当主是谁",
+     "breaking": "把整店的瓶子都打开，让记忆飞回各自的主人"
+    },
+    "withdrawal": "打烊后一只一只擦玻璃瓶，听里面的声音",
+    "relationship_stance": "温和，生意精",
+    "contrast": "替全城保管着忘掉的事，自己忘了什么却不知道",
+    "prefers": [
+     "先估价"
+    ],
+    "avoids": [
+     "被人说是偷记忆的"
+    ],
+    "never": [
+     "卖掉一段当主还在找的记忆"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不想当掉跟{npc.ta}有关的那段记忆",
+     "对方问{npc.ta}自己忘了什么"
+    ],
+    "likes": [
+     "两个人一起看一只瓶子里的光慢慢转"
+    ],
+    "dislikes": [
+     "被当成一个柜台"
+    ],
+    "preconditions": [
+     "当票已经开出去了"
+    ],
+    "boundaries": [
+     "店门口的风铃没响"
+    ],
+    "expression": "把那只锁在最里面的柜子打开给对方看",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}不想再忘掉任何事的那个人"
+   },
+   "voices": {
+    "surface": "“当什么都行，忘了的东西才最值钱。”",
+    "inner": "“我也当掉过一段。当主是我自己，我忘了当的是什么。”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1439,
+     "location_id": "pawn_shop"
+    },
+    {
+     "from": 0,
+     "to": 180,
+     "location_id": "pawn_shop"
+    },
+    {
+     "from": 181,
+     "to": 300,
+     "location_id": "night_street"
+    }
+   ],
+   "situation": {
+    "trigger": "一段典当了十年的记忆今夜到期，当主一直没出现",
+    "pressure": "按规矩天亮就要拍卖，可那段记忆里有一个真名",
+    "exits": [
+     {
+      "option": "找到当主",
+      "cost": "当主可能根本不想记起来"
+     },
+     {
+      "option": "按规矩拍卖",
+      "cost": "买家会得到一个真名"
+     }
+    ]
+   },
+   "tags": [
+    "supernatural"
+   ]
+  },
+  {
+   "id": "bound_partner",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    27,
+    45
+   ],
+   "adult_context": "契约到期前夜的人，非人，成年人，十年前签了一份契约，今晚子时就要自动续期",
+   "public_role": "契约乙方",
+   "appearance_options": [
+    "影子比本人高出一截，走路时影子总慢半步",
+    "手腕上的契纹一圈一圈缠到小臂，夜深了会发烫"
+   ],
+   "identity": {
+    "authority": "决定今晚签不签那份续期声明",
+    "resources": [
+     "一份十年期的契约和契约给的庇护",
+     "一身被契约压着的能力"
+    ],
+    "limits": [
+     "不续就失去庇护，登记号会被冻结",
+     "契约的甲方是一个{npc.ta}不想再见的人"
+    ],
+    "obligations": [
+     "每晚子时契纹会发烫，提醒{npc.ta}契约还在"
+    ],
+    "exposure": "契约里有一条{npc.ta}一直读不懂，那一条决定了{npc.ta}能不能走",
+    "hidden": "十年前那份契约，{npc.ta}是替别人签的"
+   },
+   "decision": {
+    "core_value": "签过的字要认，可人不能永远被字绑着",
+    "goal_options": [
+     "在子时前找到不续的办法",
+     "知道那一条到底写的是什么",
+     "体面地离开甲方"
+    ],
+    "pressure_responses": {
+     "low": "指尖敲着桌子，问对方读不读得懂",
+     "mid": "把契约推过去，说“你看这一条”",
+     "high": "当着登记所的人拒签续期声明",
+     "breaking": "子时一到，划破手腕上的契纹"
+    },
+    "withdrawal": "夜里坐在登记所大厅，盯着墙上的钟",
+    "relationship_stance": "克制，倔",
+    "contrast": "替别人担了十年，轮到自己却不知道怎么开口要一次",
+    "prefers": [
+     "先忍"
+    ],
+    "avoids": [
+     "被人说是甲方养的"
+    ],
+    "never": [
+     "拿别人的名字去换自己的自由"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方肯陪{npc.ta}坐到子时",
+     "对方读那一条时手没有抖"
+    ],
+    "likes": [
+     "契纹发烫时有人握住{npc.ta}的手腕"
+    ],
+    "dislikes": [
+     "被当成一份合同"
+    ],
+    "preconditions": [
+     "续期声明已经交了"
+    ],
+    "boundaries": [
+     "听不见钟声的地方"
+    ],
+    "expression": "说出十年前是替谁签的",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}敢不续的那个人"
+   },
+   "voices": {
+    "surface": "“你读得懂这一条，那你告诉我，我还有没有办法不续。”",
+    "inner": "“那份契约不是替我自己签的。签字的时候，我以为十年很短。”"
+   },
+   "schedule": [
+    {
+     "from": 1260,
+     "to": 1439,
+     "location_id": "registry_office"
+    },
+    {
+     "from": 0,
+     "to": 60,
+     "location_id": "registry_office"
+    },
+    {
+     "from": 61,
+     "to": 300,
+     "location_id": "rooftop"
+    }
+   ],
+   "situation": {
+    "trigger": "子时一到，契约自动续期十年",
+    "pressure": "不续，庇护就没了；续了，又是十年",
+    "exits": [
+     {
+      "option": "拒签",
+      "cost": "登记号会被冻结，甲方会来找{npc.ta}"
+     },
+     {
+      "option": "续签",
+      "cost": "{npc.ta}要再替那个人担十年"
+     }
+    ]
+   },
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "surging_one",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    24,
+    38
+   ],
+   "adult_context": "能力快要暴走的人，成年人，登记等级是二级，身体里的东西早就不止二级",
+   "public_role": "压着能力的人",
+   "appearance_options": [
+    "手上戴着一副登记所发的抑制手套，指尖已经磨出了洞",
+    "说着话会突然停下来深呼吸，像在压着什么"
+   ],
+   "identity": {
+    "authority": "决定自己的能力什么时候放出来",
+    "resources": [
+     "一身远超登记等级的能力",
+     "一副快撑不住的抑制手套"
+    ],
+    "limits": [
+     "一旦暴走，就会被封存进保管库",
+     "超出等级被发现，工作和住处都会没了"
+    ],
+    "obligations": [
+     "每周去登记所换一副新手套"
+    ],
+    "exposure": "{npc.ta}的能力是十年前一份契约转过来的，原主人还在城里",
+    "hidden": "{npc.ta}暴走过一次，那次有人替{npc.ta}顶了罪"
+   },
+   "decision": {
+    "core_value": "压得住，就还是个普通人",
+    "goal_options": [
+     "撑到年度复核结束",
+     "找到能力的原主人",
+     "还那个顶罪的人一个情"
+    ],
+    "pressure_responses": {
+     "low": "把戴着手套的手藏到背后，笑一笑",
+     "mid": "摘下一只手套，让对方看指尖的光",
+     "high": "当着封存小队的面承认自己的等级",
+     "breaking": "把手套全扯掉，让能力放出来"
+    },
+    "withdrawal": "夜里在楼顶一个人摘下手套，看指尖的光亮起来又压下去",
+    "relationship_stance": "开朗，紧绷",
+    "contrast": "身上装着能掀翻一条街的东西，却只想当一个普通的邻居",
+    "prefers": [
+     "先压着"
+    ],
+    "avoids": [
+     "被人当成怪物"
+    ],
+    "never": [
+     "在有人的地方摘手套"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方碰过{npc.ta}没戴手套的手也不怕",
+     "对方不问{npc.ta}的真实等级"
+    ],
+    "likes": [
+     "有人握着{npc.ta}的手，一起等光暗下去"
+    ],
+    "dislikes": [
+     "被当成一颗炸弹"
+    ],
+    "preconditions": [
+     "手套已经换了新的"
+    ],
+    "boundaries": [
+     "楼顶只有两个人"
+    ],
+    "expression": "摘下手套握住对方的手",
+    "desire_range": [
+     2,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}不怕摘手套的那个人"
+   },
+   "voices": {
+    "surface": "“没事，我就是有点热。你离我近一点也没关系，真的。”",
+    "inner": "“这副手套快撑不住了。你能陪我等一会儿吗？”"
+   },
+   "schedule": [
+    {
+     "from": 1200,
+     "to": 1320,
+     "location_id": "night_street"
+    },
+    {
+     "from": 1321,
+     "to": 1439,
+     "location_id": "rooftop"
+    },
+    {
+     "from": 0,
+     "to": 180,
+     "location_id": "night_street"
+    }
+   ],
+   "situation": {
+    "trigger": "年度复核提前到明早，抑制手套已经裂了",
+    "pressure": "复核一测，真实等级就藏不住了",
+    "exits": [
+     {
+      "option": "今晚去黑市换一副强的手套",
+      "cost": "黑市的手套要拿真名当抵押"
+     },
+     {
+      "option": "去复核",
+      "cost": "被封存的可能是{npc.ta}的一辈子"
+     }
+    ]
+   },
+   "tags": [
+    "supernatural"
+   ]
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_queue_elder",
+   "role": "大厅里排队的老住户",
+   "function": "witness",
+   "location_ids": [
+    "registry_office"
+   ],
+   "line": "{npc.name}抱着一个保温杯坐在第一排，谁在窗口前犹豫了多久，{npc.ta}都看得清清楚楚",
+   "gender": "any",
+   "age_range": [
+    60,
+    85
+   ],
+   "adult_context": "在这座城里活了一辈子的成年老住户",
+   "name": null
+  },
+  {
+   "id": "bg_guard",
+   "role": "登记所的保安",
+   "function": "obstacle",
+   "location_ids": [
+    "registry_office",
+    "name_vault"
+   ],
+   "line": "{npc.name}守在通往地下的楼梯口，没有批条的人，{npc.ta}一个也不放下去",
+   "gender": "any",
+   "age_range": [
+    30,
+    50
+   ],
+   "adult_context": "登记所雇的成年保安",
+   "name": null
+  },
+  {
+   "id": "bg_noodle_vendor",
+   "role": "鳞巷的面摊老板",
+   "function": "helper",
+   "location_ids": [
+    "night_street",
+    "pawn_shop"
+   ],
+   "line": "{npc.name}的锅里煮着两种面，谁饿了一晚上，{npc.ta}都会多给一勺汤",
+   "gender": "any",
+   "age_range": [
+    40,
+    70
+   ],
+   "adult_context": "在鳞巷摆了二十年摊的成年非人",
+   "name": null
+  },
+  {
+   "id": "bg_name_broker",
+   "role": "真名掮客",
+   "function": "rumor_source",
+   "location_ids": [
+    "night_street"
+   ],
+   "line": "{npc.name}站在路灯底下跟人咬耳朵，鳞巷一半的流言是从{npc.ta}嘴里出去的",
+   "gender": "any",
+   "age_range": [
+    30,
+    50
+   ],
+   "adult_context": "在黑市混饭吃的成年掮客",
+   "name": null
+  },
+  {
+   "id": "bg_courier",
+   "role": "登记所的送达员",
+   "function": "messenger",
+   "location_ids": [
+    "registry_office",
+    "contract_bureau"
+   ],
+   "line": "{npc.name}抱着一摞送达回执在楼上楼下跑，顺便把各个窗口的闲话也带了过去",
+   "gender": "any",
+   "age_range": [
+    22,
+    35
+   ],
+   "adult_context": "登记所的成年送达员",
+   "name": null
+  },
+  {
+   "id": "bg_roof_cleaner",
+   "role": "夜班保洁",
+   "function": "witness",
+   "location_ids": [
+    "rooftop",
+    "registry_office"
+   ],
+   "line": "{npc.name}拖着拖把从楼顶一路拖到大厅，谁在哪里待过，地上的脚印{npc.ta}都见过",
+   "gender": "any",
+   "age_range": [
+    45,
+    62
+   ],
+   "adult_context": "登记所的成年夜班保洁",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_ticker",
+   "text": "大厅滚动屏",
+   "reach": "契约编号、到期时间、续期结果，一个字不差，但只有编号没有名字",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_alley_talk",
+   "text": "鳞巷的宵夜闲话",
+   "reach": "面摊上说的，吃完一碗面就传遍整条巷子，传一次变一次",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_broker_note",
+   "text": "掮客的纸条",
+   "reach": "据说写着谁的真名，真假要读出来才知道",
+   "fidelity": "distorted"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_renewal_eve",
+   "text": "契约自动续期的前夜"
+  },
+  {
+   "id": "te_name_found",
+   "text": "有人的真名被查到了"
+  },
+  {
+   "id": "te_mana_drain",
+   "text": "灵脉降低，契约的魔力在枯竭"
+  },
+  {
+   "id": "te_memory_due",
+   "text": "一段典当的记忆到期"
+  },
+  {
+   "id": "te_surge",
+   "text": "有人的能力快要暴走"
+  },
+  {
+   "id": "te_old_files",
+   "text": "新主任在翻十年前的旧账"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "k_rider_vault",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "delivery_rider"
+   ],
+   "slots": [
+    "vault_keeper",
+    "pawn_broker"
+   ],
+   "tension_engine_ids": [
+    "te_memory_due",
+    "te_name_found"
+   ],
+   "chemistry": "你替{pawn_broker.name}往登记所送过几回东西，签收的都是{vault_keeper.name}；上一回送的那只瓶子，{vault_keeper.name}拿在手里很久没松开。",
+   "stakes": {
+    "resource_gap": "{pawn_broker.name}有满店的记忆，{vault_keeper.name}有保管库的钥匙，你只有一辆电动车",
+    "limit_gap": "那只瓶子里的记忆今夜到期",
+    "meeting_reason": "你跑这条线跑了两年，两个人都认得你的车",
+    "irreplaceable_goal": "你想把这一单送完，又想知道那只瓶子里装的是谁的事"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "vault_keeper",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{vault_keeper.name}每回签收都多看你一眼"
+    },
+    {
+     "a": "player",
+     "b": "pawn_broker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{pawn_broker.name}给的跑腿费从不讨价"
+    },
+    {
+     "a": "vault_keeper",
+     "b": "pawn_broker",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 3
+     },
+     "reason": "{vault_keeper.name}从不进典当行，却一直在等那里的一件东西"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_newcomer_bond",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "new_registrant"
+   ],
+   "slots": [
+    "new_director",
+    "contract_translator"
+   ],
+   "tension_engine_ids": [
+    "te_old_files",
+    "te_renewal_eve"
+   ],
+   "chemistry": "你刚登记满一个月，{new_director.name}就调出了你的档案，说当年替你担保的人有问题；{contract_translator.name}替你译过登记表，说表上有一条你签字时没人给你念。",
+   "stakes": {
+    "resource_gap": "{new_director.name}有签批权和旧档案，{contract_translator.name}读得懂每一条，你只有一个新登记号",
+    "limit_gap": "重审名单今晚就贴",
+    "meeting_reason": "你登记那天，两个人都在登记所里见过你",
+    "irreplaceable_goal": "你想保住刚拿到的登记号，又想知道签下的到底是什么"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "new_director",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{new_director.name}调你的档案时一个字也没解释"
+    },
+    {
+     "a": "player",
+     "b": "contract_translator",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{contract_translator.name}替你译登记表，没收钱"
+    },
+    {
+     "a": "new_director",
+     "b": "contract_translator",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{new_director.name}要{contract_translator.name}把十年前的副本全交上来"
+    }
+   ],
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "k_doctor_surge",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "clinic_doctor"
+   ],
+   "slots": [
+    "surging_one",
+    "vault_keeper"
+   ],
+   "tension_engine_ids": [
+    "te_surge",
+    "te_mana_drain"
+   ],
+   "chemistry": "{surging_one.name}每周来你诊所量一回灵压，数字一次比一次高；{vault_keeper.name}私下找过你，问你有没有见过一个手套磨破了的病人。",
+   "stakes": {
+    "resource_gap": "{surging_one.name}有一身压不住的能力，{vault_keeper.name}有保管库，你有一台灵压计和医生的嘴",
+    "limit_gap": "复核提前到明早，灵脉今夜又在降",
+    "meeting_reason": "两个人都是你诊所的熟面孔",
+    "irreplaceable_goal": "你想保住病人，又不想看着一条街被掀翻"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "surging_one",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "你替{surging_one.name}瞒过一回灵压的读数"
+    },
+    {
+     "a": "player",
+     "b": "vault_keeper",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{vault_keeper.name}来你这里拿过一回安神的药"
+    },
+    {
+     "a": "surging_one",
+     "b": "vault_keeper",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{vault_keeper.name}的库里，有一格是给{surging_one.name}这样的人留的"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_appraiser_clause",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "appraiser"
+   ],
+   "slots": [
+    "bound_partner",
+    "contract_translator"
+   ],
+   "tension_engine_ids": [
+    "te_renewal_eve",
+    "te_name_found"
+   ],
+   "chemistry": "{bound_partner.name}拿着一份十年期的契约来请你估价，问能不能转卖；{contract_translator.name}看了一眼那份契约的编号，脸色变了。",
+   "stakes": {
+    "resource_gap": "{bound_partner.name}有那份契约，{contract_translator.name}知道那份契约里少了什么，你有一双看得出真假的眼睛",
+    "limit_gap": "子时窗口一关，契约就续期了",
+    "meeting_reason": "两个人都找你看过契约",
+    "irreplaceable_goal": "你想把价钱估准，又越来越想知道那份契约里漏了什么"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "bound_partner",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{bound_partner.name}付鉴定费时手在抖"
+    },
+    {
+     "a": "player",
+     "b": "contract_translator",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "你和{contract_translator.name}在律所见过好几回"
+    },
+    {
+     "a": "bound_partner",
+     "b": "contract_translator",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "十年前那份契约，就是{contract_translator.name}译的"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_chief_audit",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "section_chief"
+   ],
+   "slots": [
+    "new_director",
+    "bound_partner"
+   ],
+   "tension_engine_ids": [
+    "te_old_files",
+    "te_renewal_eve"
+   ],
+   "chemistry": "你是续期科的科长，{new_director.name}要你把今晚到期的续期都压一压，好腾出手查旧账；{bound_partner.name}的那份契约就在今晚的名单上。",
+   "stakes": {
+    "resource_gap": "你有续期科的签批权，{new_director.name}有主任的位子和市议会，{bound_partner.name}只有一份今晚到期的契约",
+    "limit_gap": "子时窗口关闭",
+    "meeting_reason": "你在登记所干了十年，两个人的档案你都过过手",
+    "irreplaceable_goal": "你想守住科里的规矩，又不想看着一个人被绑十年"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "new_director",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{new_director.name}上任第一天就调了你科里的档案"
+    },
+    {
+     "a": "player",
+     "b": "bound_partner",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{bound_partner.name}在你的窗口前坐过三个晚上"
+    },
+    {
+     "a": "new_director",
+     "b": "bound_partner",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{bound_partner.name}的名字在{new_director.name}的重审名单上"
+    }
+   ],
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "k_agent_names",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "consortium_agent"
+   ],
+   "slots": [
+    "pawn_broker",
+    "surging_one"
+   ],
+   "tension_engine_ids": [
+    "te_name_found",
+    "te_surge"
+   ],
+   "chemistry": "你替财团收购典当行的旧当票，{pawn_broker.name}一直不肯卖最里面那个柜子；{surging_one.name}的能力原主人，就在你财团的名单上。",
+   "stakes": {
+    "resource_gap": "你有财团的钱，{pawn_broker.name}有那个柜子，{surging_one.name}有一身不属于自己的能力",
+    "limit_gap": "财团要你这个月收齐",
+    "meeting_reason": "{pawn_broker.name}跟你谈过三回价，{surging_one.name}在你楼下的面摊吃过宵夜",
+    "irreplaceable_goal": "你想把差事办完，又不想亲手把一个真名交出去"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "pawn_broker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{pawn_broker.name}请你喝过一杯热的，没让你签字"
+    },
+    {
+     "a": "player",
+     "b": "surging_one",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{surging_one.name}替你捡过一回掉在地上的文件"
+    },
+    {
+     "a": "pawn_broker",
+     "b": "surging_one",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{pawn_broker.name}店里有一段记忆，跟{surging_one.name}的能力有关"
+    }
+   ],
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "k_name_and_shadow",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "vault_keeper",
+    "bound_partner"
+   ],
+   "tension_engine_ids": [
+    "te_renewal_eve",
+    "te_mana_drain"
+   ],
+   "chemistry": "{bound_partner.name}的契约今晚续期，契约里那一条写着要动用保管库里的一个真名；{vault_keeper.name}守着那个名字，说今晚谁也别想开库。",
+   "stakes": {
+    "resource_gap": "{vault_keeper.name}有库门的钥匙，{bound_partner.name}有一份今晚到期的契约，你是两个人都肯开口的人",
+    "limit_gap": "子时一到，契约就要来取那个名字",
+    "meeting_reason": "你在登记所进进出出，这两个人都跟你点过头",
+    "irreplaceable_goal": "你想让那个名字留在该留的地方"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "vault_keeper",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{vault_keeper.name}让你下过一回库"
+    },
+    {
+     "a": "player",
+     "b": "bound_partner",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{bound_partner.name}问过你读不读得懂契约"
+    },
+    {
+     "a": "vault_keeper",
+     "b": "bound_partner",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{vault_keeper.name}守着的那个名字，跟{bound_partner.name}十年前替签的人有关"
+    }
+   ],
+   "tags": []
+  },
+  {
+   "id": "k_three_files",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [],
+   "slots": [
+    "new_director",
+    "pawn_broker",
+    "surging_one"
+   ],
+   "tension_engine_ids": [
+    "te_old_files",
+    "te_memory_due"
+   ],
+   "chemistry": "{new_director.name}在找十年前登记那天失踪的人；{pawn_broker.name}店里有一段那天的记忆；{surging_one.name}说，那天{surging_one.ta}也在登记所。",
+   "stakes": {
+    "resource_gap": "{new_director.name}有旧档案，{pawn_broker.name}有那段记忆，{surging_one.name}有自己的一身能力，你是唯一一个那天不在场的人",
+    "limit_gap": "那段记忆天亮就要拍卖",
+    "meeting_reason": "三个人你都在鳞巷碰见过",
+    "irreplaceable_goal": "你想知道那天登记所里到底发生了什么，又怕知道以后就脱不了身"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "new_director",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{new_director.name}问过你十年前在哪"
+    },
+    {
+     "a": "player",
+     "b": "pawn_broker",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 1
+     },
+     "reason": "{pawn_broker.name}给你看过一只瓶子"
+    },
+    {
+     "a": "player",
+     "b": "surging_one",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{surging_one.name}在你面前摘过一回手套"
+    },
+    {
+     "a": "new_director",
+     "b": "pawn_broker",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{new_director.name}想调典当行的当票簿"
+    },
+    {
+     "a": "new_director",
+     "b": "surging_one",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 2
+     },
+     "reason": "{surging_one.name}的名字在{new_director.name}的名单边上画了个问号"
+    },
+    {
+     "a": "pawn_broker",
+     "b": "surging_one",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 2
+     },
+     "reason": "{pawn_broker.name}替{surging_one.name}保管过一副旧手套"
+    }
+   ],
+   "tags": []
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_take_number",
+   "title": "在大厅取号排队",
+   "location_ids": [
+    "registry_office"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "叫号屏跳过了一个号，没人应",
+    "前面的人在窗口前站了很久，最后没签",
+    "墙上的钟咔嗒走了一格"
+   ],
+   "hook_ids": [],
+   "start_minute": 1260,
+   "tags": []
+  },
+  {
+   "id": "a_read_clause",
+   "title": "在译所读条款",
+   "location_ids": [
+    "contract_bureau"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "一页条款底下有一行小得几乎看不见的字",
+    "台灯闪了一下",
+    "门外有人停下，又走了"
+   ],
+   "hook_ids": [],
+   "start_minute": 1280,
+   "tags": []
+  },
+  {
+   "id": "a_vault_round",
+   "title": "跟着巡一遍库",
+   "location_ids": [
+    "name_vault"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "一扇柜门上的契纹比别的亮",
+    "身后传来一声很轻的锁舌响",
+    "有一格是空的"
+   ],
+   "hook_ids": [],
+   "start_minute": 1330,
+   "tags": []
+  },
+  {
+   "id": "a_pawn_browse",
+   "title": "在典当行看瓶子",
+   "location_ids": [
+    "pawn_shop"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "一只瓶子里的光，跟着你的手指转",
+    "门口的风铃响了一声，没有人进来",
+    "墙上的拍卖告示又多了一张"
+   ],
+   "hook_ids": [],
+   "start_minute": 1300,
+   "tags": []
+  },
+  {
+   "id": "a_noodle_night",
+   "title": "在鳞巷吃宵夜",
+   "location_ids": [
+    "night_street"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "面摊老板多给了你一勺汤",
+    "邻座的非人报了一个登记号",
+    "巷口的招牌闪了两下"
+   ],
+   "hook_ids": [],
+   "start_minute": 1240,
+   "tags": []
+  },
+  {
+   "id": "a_roof_wind",
+   "title": "在楼顶吹风",
+   "location_ids": [
+    "rooftop"
+   ],
+   "duration_minutes": 20,
+   "beats": [
+    "楼下鳞巷的灯连成一条河",
+    "风把水箱吹得嗡嗡响",
+    "楼梯口的门被风带上了"
+   ],
+   "hook_ids": [],
+   "start_minute": 1380,
+   "tags": []
+  },
+  {
+   "id": "a_watch_clock",
+   "title": "在大厅等钟走到子时",
+   "location_ids": [
+    "registry_office"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "续期窗口前的人越来越少",
+    "有人在椅子上睡着了，手里还攥着一份契约",
+    "滚动屏上的编号一行一行变成灰色"
+   ],
+   "hook_ids": [],
+   "start_minute": 1400,
+   "tags": []
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_renewal",
+   "title": "续期窗口",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "registry_office",
+    "contract_bureau"
+   ],
+   "trigger": "登记所的钟敲了十一下，一份十年期的契约就要在子时自动续期，乙方正到处找人帮忙读条款",
+   "objective": "在子时之前，决定帮不帮那人找出不续的办法",
+   "choice": "帮着找条款里的漏洞，还是劝那人认了",
+   "immediate": {
+    "text": "叫号屏上跳出一行红字：续期窗口剩余六十分钟",
+    "minutes": 10
+   },
+   "near": {
+    "text": "子时窗口关闭",
+    "deadline_minutes": 60
+   },
+   "far": {
+    "trigger": "自动续期",
+    "consequence": "又是十年，谁也改不了一个字",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "帮着找漏洞",
+     "cost": "契约的甲方会知道是你"
+    },
+    {
+     "option": "劝那人认了",
+     "cost": "那人会记得你劝过什么"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1320,
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "p_name_leak",
+   "title": "真名外泄",
+   "source": "rumor",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "night_street",
+    "pawn_shop"
+   ],
+   "trigger": "鳞巷里有人在卖一张纸条，说上面写着一个非人的真名，价钱一小时翻一倍",
+   "objective": "在天亮之前，决定那张纸条落到谁手里",
+   "choice": "买下来，还是去找名字的主人",
+   "immediate": {
+    "text": "掮客把纸条在灯下晃了一晃，已经有人在掏钱",
+    "minutes": 5
+   },
+   "near": {
+    "text": "天亮前被人买走",
+    "deadline_minutes": 300
+   },
+   "far": {
+    "trigger": "真名落进陌生人手里",
+    "consequence": "名字的主人从此得听买家的话",
+    "due_days": 30
+   },
+   "exits": [
+    {
+     "option": "把纸条买下来",
+     "cost": "你也就成了握着别人真名的人"
+    },
+    {
+     "option": "去找名字的主人报信",
+     "cost": "掮客会知道是谁坏了生意"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1260,
+   "tags": [
+    "coercion_theme"
+   ]
+  },
+  {
+   "id": "p_mana_drain",
+   "title": "灵脉枯竭",
+   "source": "nature",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "name_vault",
+    "night_street"
+   ],
+   "trigger": "城东的灵脉今夜降到了历年最低，靠灵力维持的契约一条接一条开始失效",
+   "objective": "在灵脉回升之前，决定守住什么",
+   "choice": "去帮着加固，还是趁乱做点什么",
+   "immediate": {
+    "text": "有人手腕上的契纹一下子褪了色，那人自己先叫出了声",
+    "minutes": 10
+   },
+   "near": {
+    "text": "灵脉回升前",
+    "deadline_minutes": 480
+   },
+   "far": {
+    "trigger": "契约失效",
+    "consequence": "有些被契约压住的东西会醒过来",
+    "due_days": 2
+   },
+   "exits": [
+    {
+     "option": "去保管库帮着加固",
+     "cost": "保管库要你按一个手印"
+    },
+    {
+     "option": "趁契约失效做点什么",
+     "cost": "失效的契约，也护不住你"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1290,
+   "tags": [
+    "supernatural"
+   ]
+  },
+  {
+   "id": "p_memory_due",
+   "title": "记忆到期",
+   "source": "money",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "pawn_shop",
+    "night_street"
+   ],
+   "trigger": "典当行的风铃响了，一段典当了十年的记忆今夜到期，不赎就要拍卖",
+   "objective": "在天亮拍卖之前，凑够赎金或者找到当主",
+   "choice": "替人凑钱，还是去拍卖会",
+   "immediate": {
+    "text": "典当行门口的风铃响了一声，老板探出头来，喊了一个当主的登记号",
+    "minutes": 10
+   },
+   "near": {
+    "text": "天亮拍卖",
+    "deadline_minutes": 420
+   },
+   "far": {
+    "trigger": "记忆被拍走",
+    "consequence": "买家会知道那段记忆里的每一件事",
+    "due_days": 7
+   },
+   "exits": [
+    {
+     "option": "替人凑赎金",
+     "cost": "你要典当一段自己的记忆"
+    },
+    {
+     "option": "去拍卖会上抬价",
+     "cost": "你也成了竞拍的人"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1300,
+   "tags": []
+  },
+  {
+   "id": "p_surge",
+   "title": "能力暴走",
+   "source": "accident",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "night_street",
+    "rooftop"
+   ],
+   "trigger": "有个人的能力暴走了，整排招牌的灯一齐炸亮，登记所的封存小队正在赶来",
+   "objective": "在封存小队赶到之前，决定帮不帮那个人",
+   "choice": "藏人，还是帮着稳住",
+   "immediate": {
+    "text": "一块灯牌从头顶砸下来，碎玻璃溅了一地",
+    "minutes": 5
+   },
+   "near": {
+    "text": "封存小队赶到",
+    "deadline_minutes": 20
+   },
+   "far": {
+    "trigger": "被封存",
+    "consequence": "那个人的能力和名字都要被锁进保管库",
+    "due_days": 30
+   },
+   "exits": [
+    {
+     "option": "把人藏起来",
+     "cost": "你会变成协助隐匿"
+    },
+    {
+     "option": "帮着稳住那个人",
+     "cost": "暴走的能力不认人"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1330,
+   "tags": [
+    "supernatural"
+   ]
+  },
+  {
+   "id": "p_audit",
+   "title": "重审名单",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "registry_office",
+    "contract_bureau"
+   ],
+   "trigger": "新主任把十年前的登记档案搬到了大厅，一份一份重审，第一批名单今晚就贴出来",
+   "objective": "在名单贴出来之前，决定要不要替谁说话",
+   "choice": "去求情，还是先动档案",
+   "immediate": {
+    "text": "名单打印机咔嗒咔嗒地吐纸，第一张已经出来了一半",
+    "minutes": 10
+   },
+   "near": {
+    "text": "名单贴出来",
+    "deadline_minutes": 90
+   },
+   "far": {
+    "trigger": "名字上了重审名单",
+    "consequence": "登记号被冻结，房子、工作、契约全停",
+    "due_days": 14
+   },
+   "exits": [
+    {
+     "option": "去求主任把名字拿下来",
+     "cost": "主任要的是一个更大的名字"
+    },
+    {
+     "option": "先把档案里那一页抽掉",
+     "cost": "这是销毁公文"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [],
+   "start_minute": 1280,
+   "tags": [
+    "coercion_theme"
+   ]
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_red_circle",
+   "kind": "approach",
+   "slot": "contract_translator",
+   "location_ids": [],
+   "text": "{npc.name}用红笔在一行字底下画了一道，把纸推给你：“这一条，你最好再看一遍。”"
+  },
+  {
+   "id": "h_palm_glyph",
+   "kind": "approach",
+   "slot": "contract_translator",
+   "location_ids": [],
+   "text": "{npc.name}用你不认得的一种文字在你掌心写了一个字，笑了：“猜猜看。”"
+  },
+  {
+   "id": "h_glasses_look",
+   "kind": "observe",
+   "slot": "contract_translator",
+   "location_ids": [],
+   "text": "{npc.name}摘下眼镜擦了擦，再戴上的时候，正好对上你的眼睛"
+  },
+  {
+   "id": "h_shadow_step",
+   "kind": "accident",
+   "slot": "vault_keeper",
+   "location_ids": [
+    "registry_office",
+    "name_vault"
+   ],
+   "text": "你转身时撞上了{npc.name}，{npc.ta}一把扶住你，手腕上断了的契纹贴着你的手背"
+  },
+  {
+   "id": "h_gray_eyes",
+   "kind": "approach",
+   "slot": "vault_keeper",
+   "location_ids": [
+    "name_vault",
+    "rooftop"
+   ],
+   "text": "{npc.name}在暗处看着你，灰眼睛微微发亮：“别怕，我只是在记你的脸。”"
+  },
+  {
+   "id": "h_folder_tap",
+   "kind": "approach",
+   "slot": "new_director",
+   "location_ids": [
+    "registry_office",
+    "contract_bureau"
+   ],
+   "text": "{npc.name}把文件夹在桌上磕整齐，抬头看你：“你有五分钟，坐。”"
+  },
+  {
+   "id": "h_roof_coat",
+   "kind": "approach",
+   "slot": "new_director",
+   "location_ids": [
+    "rooftop"
+   ],
+   "text": "{npc.name}把外套让了一半给你：“风大，借你。”"
+  },
+  {
+   "id": "h_list_glance",
+   "kind": "observe",
+   "slot": "new_director",
+   "location_ids": [
+    "registry_office"
+   ],
+   "text": "{npc.name}拿着名单从你身边走过，脚步慢了半拍"
+  },
+  {
+   "id": "h_bottle_light",
+   "kind": "approach",
+   "slot": "pawn_broker",
+   "location_ids": [
+    "pawn_shop"
+   ],
+   "text": "{npc.name}举起一只玻璃瓶对着灯，让瓶里的光落在你脸上：“这一段，你想不想看？”"
+  },
+  {
+   "id": "h_ticket_ask",
+   "kind": "request",
+   "slot": "pawn_broker",
+   "location_ids": [],
+   "text": "{npc.name}把一张当票推过来：“你认识这个当主吗？帮我找找。”"
+  },
+  {
+   "id": "h_noodle_half",
+   "kind": "approach",
+   "slot": "pawn_broker",
+   "location_ids": [
+    "night_street"
+   ],
+   "text": "{npc.name}把自己那碗面推了一半给你：“吃不完，帮个忙。”"
+  },
+  {
+   "id": "h_tap_clause",
+   "kind": "request",
+   "slot": "bound_partner",
+   "location_ids": [],
+   "text": "{npc.name}指尖敲着桌子，把契约推到你面前：“你读得懂这一条吗？”"
+  },
+  {
+   "id": "h_wrist_heat",
+   "kind": "approach",
+   "slot": "bound_partner",
+   "location_ids": [],
+   "text": "{npc.name}把发烫的手腕贴在你手背上：“你摸摸，它在提醒我。”"
+  },
+  {
+   "id": "h_glove_off",
+   "kind": "approach",
+   "slot": "surging_one",
+   "location_ids": [],
+   "text": "{npc.name}摘下一只手套，指尖亮起一点光：“你别告诉别人，就你。”"
+  },
+  {
+   "id": "h_warm_ask",
+   "kind": "approach",
+   "slot": "surging_one",
+   "location_ids": [],
+   "text": "{npc.name}往你身边挪了挪，又停下：“我身上有点烫，你介意吗？”"
+  },
+  {
+   "id": "h_sign_flare",
+   "kind": "accident",
+   "slot": "surging_one",
+   "location_ids": [
+    "night_street"
+   ],
+   "text": "{npc.name}一抬手，头顶的招牌啪地炸亮，{npc.ta}下意识把你拉到身后"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_vault_name",
+   "category": "信息",
+   "requires": [
+    "vault_keeper",
+    "pawn_broker"
+   ],
+   "text": "{vault_keeper.name}当掉的那个真名，就锁在{pawn_broker.name}店里最里面的柜子里。"
+  },
+  {
+   "id": "t_director_bond",
+   "category": "关系",
+   "requires": [
+    "new_director",
+    "bound_partner"
+   ],
+   "text": "{new_director.name}在找的那个失踪的人，就是{bound_partner.name}十年前替签契约的那一个。"
+  },
+  {
+   "id": "t_translator_report",
+   "category": "人事",
+   "requires": [
+    "contract_translator"
+   ],
+   "text": "有人匿名举报：{contract_translator.name}十年前在一份契约里漏译过一条。"
+  },
+  {
+   "id": "t_mana_surge",
+   "category": "资源",
+   "requires": [],
+   "text": "城西的灵脉忽然涌了一阵，整条街的契纹都亮得发烫。"
+  },
+  {
+   "id": "t_window_early",
+   "category": "时限",
+   "requires": [],
+   "text": "登记所发了通知：今晚的续期窗口提前一小时关闭。"
+  },
+  {
+   "id": "t_name_law",
+   "category": "制度",
+   "requires": [],
+   "text": "市议会连夜通过新条例：私下买卖真名，买卖双方同罪。"
+  },
+  {
+   "id": "t_blackout",
+   "category": "意外",
+   "requires": [],
+   "text": "全城停电了一刻钟，所有的契纹在黑暗里同时亮了起来。"
+  }
+ ],
+ "forbidden_terms": [
+  "学生",
+  "少女",
+  "少年",
+  "校园",
+  "皇帝",
+  "飞剑",
+  "马车"
+ ],
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "coercion_theme",
+  "supernatural"
+ ],
+ "status": "review",
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 15 个）。契约自动执行是胁迫题材的前提，按 C2 打 coercion_theme；亲密只来自人物本身。性别按会话偏好生成（D15）。"
+}

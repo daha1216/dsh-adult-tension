@@ -1,0 +1,90 @@
+{
+ "id": "pt-clockwork_circus-pressure",
+ "title": "试玩：机械马戏（有压力）",
+ "focus": "CONTENT_BIBLE.md 8.2 第 6 步：真实 Skill 下的试玩，每个种子一次运行（种子由引擎随机抽，记录在开局页脚）；开局、5 个回合（含“继续”、一次作用于 NPC 的尝试、一次等待）、存档、新对话读档后再推进 1 回合",
+ "world": "clockwork_circus",
+ "mode": "pressure",
+ "steps": [
+  {
+   "say": "开一局，机械马戏，要有压力的",
+   "expect": {
+    "kind": "opening",
+    "calls_max": 2,
+    "must_call": [
+     "new-game"
+    ],
+    "budget_group": "first_opening:A",
+    "group_max": 2,
+    "group_must_call": [
+     "doctor",
+     "new-game"
+    ]
+   }
+  },
+  {
+   "say": "我先弄清楚眼下最急的是什么事",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我去找能帮上忙的人，把情况跟对方说清楚",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "继续",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我想让对方答应替我分担一部分，看对方肯不肯",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "我不说话，看对方怎么做",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  },
+  {
+   "say": "存档 试玩",
+   "expect": {
+    "kind": "meta",
+    "calls_max": 1,
+    "must_call": [
+     "save-slot"
+    ]
+   }
+  },
+  {
+   "say": "读档 试玩",
+   "conversation": "B",
+   "expect": {
+    "kind": "load",
+    "calls_max": 2,
+    "must_call": [
+     "load-slot"
+    ]
+   }
+  },
+  {
+   "say": "继续",
+   "conversation": "B",
+   "expect": {
+    "kind": "turn",
+    "calls_max": 1
+   }
+  }
+ ],
+ "player_turns": 9
+}

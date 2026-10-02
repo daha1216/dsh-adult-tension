@@ -1,0 +1,2502 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "公司的正式导播，成年人",
+   "age_range": [
+    28,
+    45
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_director",
+   "line": "{npc.name}盯着三块屏幕，谁在棚里多说了一句台本外的话都听得见",
+   "location_ids": [
+    "mocap_stage",
+    "control_room"
+   ],
+   "name": null,
+   "role": "直播导播"
+  },
+  {
+   "adult_context": "运营部的成年员工",
+   "age_range": [
+    24,
+    35
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_ops_colleague",
+   "line": "{npc.name}在茶水间什么都聊，经纪人办公室的门开了几次都数着",
+   "location_ids": [
+    "office_floor",
+    "corridor_lounge"
+   ],
+   "name": null,
+   "role": "运营同事"
+  },
+  {
+   "adult_context": "物业的成年保洁员",
+   "age_range": [
+    40,
+    60
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_cleaner",
+   "line": "{npc.name}凌晨推着车经过，谁还没走、跟谁一起没走，都看在眼里",
+   "location_ids": [
+    "corridor_lounge",
+    "office_floor"
+   ],
+   "name": null,
+   "role": "夜班保洁"
+  },
+  {
+   "adult_context": "咖啡馆的成年店主",
+   "age_range": [
+    30,
+    50
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_cafe_owner",
+   "line": "{npc.name}把店里最安静的位置留给熟客，什么都不问",
+   "location_ids": [
+    "street_cafe"
+   ],
+   "name": null,
+   "role": "咖啡馆老板"
+  },
+  {
+   "adult_context": "资深粉丝，成年人",
+   "age_range": [
+    22,
+    40
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_fan_watcher",
+   "line": "{npc.name}在咖啡馆坐了一下午，手机里存着六任的声纹对比",
+   "location_ids": [
+    "street_cafe"
+   ],
+   "name": null,
+   "role": "考据粉"
+  },
+  {
+   "adult_context": "写字楼的成年保安",
+   "age_range": [
+    30,
+    55
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_security",
+   "line": "{npc.name}守着写字楼的门禁，没卡的人一步都进不来",
+   "location_ids": [
+    "corridor_lounge",
+    "street_cafe"
+   ],
+   "name": null,
+   "role": "楼下保安"
+  },
+  {
+   "adult_context": "大学毕业的成年实习生",
+   "age_range": [
+    21,
+    25
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_tech_intern",
+   "line": "{npc.name}替夜班技术跑腿送文件，也替人捎话",
+   "location_ids": [
+    "control_room",
+    "office_floor"
+   ],
+   "name": null,
+   "role": "技术实习生"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "{ops_manager.name}握着排班表和合同，{seventh_voice.name}下播后总会在走廊上等你一起下楼；你是直播间里那个删弹幕的人。",
+   "id": "k_night_shift",
+   "identity_ids": [
+    "night_moderator"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "ops_manager",
+     "b_to_a": {
+      "tension": 0,
+      "trust": 1
+     },
+     "reason": "{ops_manager.name}只记得你的房管账号名",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 2
+     },
+     "b": "seventh_voice",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{seventh_voice.name}下播后会跟你抱怨弹幕",
+     "stage": "familiar"
+    },
+    {
+     "a": "ops_manager",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "seventh_voice",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 0
+     },
+     "reason": "{ops_manager.name}亲手挑中了{seventh_voice.name}，也亲手启动了替代计划",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "ops_manager",
+    "seventh_voice"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想替{seventh_voice.name}守住那一点真的东西",
+    "limit_gap": "{seventh_voice.name}的候补已经搬进了办公区，你的兼职随时可以不续",
+    "meeting_reason": "你们三个每晚都在同一个钟头下班",
+    "resource_gap": "{ops_manager.name}有合同和权限，{seventh_voice.name}有一副全网认得的声音，你只有一个房管账号"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_replaceable",
+    "te_contract_ban"
+   ]
+  },
+  {
+   "chemistry": "{understudy.name}每天在录音间练四个钟头，{night_engineer.name}在导播间看着；你做的音效，两张嘴都要用。",
+   "id": "k_mirror_booth",
+   "identity_ids": [
+    "foley_contractor"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "understudy",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{understudy.name}请你帮忙听过一次练习录音",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 0,
+      "trust": 1
+     },
+     "b": "night_engineer",
+     "b_to_a": {
+      "tension": 0,
+      "trust": 1
+     },
+     "reason": "{night_engineer.name}和你一起吃过很多次凌晨的泡面",
+     "stage": "acquainted"
+    },
+    {
+     "a": "understudy",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "night_engineer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{night_engineer.name}从不回放{understudy.name}的练习录音",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "understudy",
+    "night_engineer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道这盘素材最后会被用来做什么",
+    "limit_gap": "你的合同下个月到期，{understudy.name}还没正式上台",
+    "meeting_reason": "三个人在同一层楼熬到凌晨",
+    "resource_gap": "{night_engineer.name}有六任的原始数据，{understudy.name}有越来越像的声音，你只有一盘素材"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_mirror",
+    "te_replaceable"
+   ]
+  },
+  {
+   "chemistry": "你和{seventh_voice.name}同一年出道，现在{understudy.name}坐在你们中间的工位上，练的是{seventh_voice.name}的声音。",
+   "id": "k_same_year",
+   "identity_ids": [
+    "sister_vtuber"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "seventh_voice",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "你们出道那天一起在走廊里哭过",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "understudy",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{understudy.name}叫你“前辈”，叫得很恭敬",
+     "stage": "acquainted"
+    },
+    {
+     "a": "seventh_voice",
+     "a_to_b": {
+      "tension": 3,
+      "trust": -1
+     },
+     "b": "understudy",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 1
+     },
+     "reason": "{understudy.name}以前是{seventh_voice.name}的粉丝",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "seventh_voice",
+    "understudy"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道“永续计划”到底要换掉多少人",
+    "limit_gap": "你的皮套也在名单上，下一个可能就是你",
+    "meeting_reason": "三个人共用一间录音间，排班表一格挨着一格",
+    "resource_gap": "{seventh_voice.name}有当家皮套，{understudy.name}有经纪人的看好，你有自己的直播间"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_mirror",
+    "te_true_voice"
+   ]
+  },
+  {
+   "chemistry": "{top_donor.name}在咖啡馆里给{doujin_artist.name}约了一张稿：画屏幕后面的那个人；你是今年同人展的主催，两个人都来找你要展位。",
+   "id": "k_fan_and_artist",
+   "identity_ids": [
+    "doujin_organizer"
+   ],
+   "player_positions": [
+    "equal",
+    "low"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "top_donor",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{top_donor.name}是你展会的老赞助人",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "doujin_artist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "{doujin_artist.name}的第一本同人是在你的展上卖的",
+     "stage": "familiar"
+    },
+    {
+     "a": "top_donor",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "doujin_artist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{doujin_artist.name}的画，{top_donor.name}每张都买",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "top_donor",
+    "doujin_artist"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想办一届不被公司下架的展",
+    "limit_gap": "{top_donor.name}刚被挤下榜一，{doujin_artist.name}收到了律师函",
+    "meeting_reason": "三个人在同一家咖啡馆的签名板下面碰面",
+    "resource_gap": "{top_donor.name}有钱，{doujin_artist.name}有画，你有展位和人脉"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_ranking",
+    "te_true_voice"
+   ]
+  },
+  {
+   "chemistry": "你来看周年直播的数据，报告由你写；{ops_manager.name}请你进了导播间，{seventh_voice.name}下播后在走廊上等你，说想单独聊几句。",
+   "id": "k_investor_report",
+   "identity_ids": [
+    "investor_rep"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "ops_manager",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{ops_manager.name}给你看过一份很漂亮的数据报告",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "seventh_voice",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "你听了{seventh_voice.name}三年的直播，{seventh_voice.ta}不知道",
+     "stage": "stranger"
+    },
+    {
+     "a": "ops_manager",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "seventh_voice",
+     "b_to_a": {
+      "tension": 3,
+      "trust": -1
+     },
+     "reason": "{seventh_voice.name}还不知道候补的事已经定了",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "ops_manager",
+    "seventh_voice"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想知道这家公司到底值不值得继续投",
+    "limit_gap": "公司现金流只撑到周年直播之后，{seventh_voice.name}的候补随时可以顶上",
+    "meeting_reason": "周年直播前一周，三个人在同一层楼",
+    "resource_gap": "你有撤资的权力，{ops_manager.name}有“永续计划”，{seventh_voice.name}只有自己"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_replaceable",
+    "te_ranking"
+   ]
+  },
+  {
+   "chemistry": "你刚接手“永续计划”；{night_engineer.name}拒绝交出原始数据，{top_donor.name}发来一封长邮件，说屏幕后面换了人，要公司给一个说法。",
+   "id": "k_producer_desk",
+   "identity_ids": [
+    "new_producer"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "night_engineer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{night_engineer.name}说你是来拆这间棚子的人",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "top_donor",
+     "b_to_a": {
+      "tension": 2,
+      "trust": -1
+     },
+     "reason": "{top_donor.name}在邮件里叫你“刽子手”",
+     "stage": "stranger"
+    },
+    {
+     "a": "night_engineer",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "top_donor",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{night_engineer.name}在后台流水里看了{top_donor.name}三年",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "night_engineer",
+    "top_donor"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你不想让上一家公司的事再来一遍",
+    "limit_gap": "老板要你一个月内出成果，{top_donor.name}的邮件抄送了论坛",
+    "meeting_reason": "周年直播前，三个人都在等你的决定",
+    "resource_gap": "你有人事权，{night_engineer.name}有数据，{top_donor.name}有三年的打赏记录和一个全网认识的账号"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_ranking",
+    "te_mirror"
+   ]
+  },
+  {
+   "chemistry": "每晚下播，{seventh_voice.name}都要在动捕棚的地上坐着喝完一杯水，{night_engineer.name}隔着玻璃调设备；最近这个钟头，常常多了一个你。",
+   "id": "k_after_stream",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "seventh_voice",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{seventh_voice.name}问过你一次“我是第几个”",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 0,
+      "trust": 1
+     },
+     "b": "night_engineer",
+     "b_to_a": {
+      "tension": 0,
+      "trust": 1
+     },
+     "reason": "{night_engineer.name}替你开过一次棚子的门",
+     "stage": "acquainted"
+    },
+    {
+     "a": "seventh_voice",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 2
+     },
+     "b": "night_engineer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 2
+     },
+     "reason": "{night_engineer.name}是唯一见过{seventh_voice.name}素颜的同事",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "seventh_voice",
+    "night_engineer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想听一次{seventh_voice.name}不用皮套的声音",
+    "limit_gap": "恋爱禁令和保密协议压在每个人身上",
+    "meeting_reason": "每晚下播后，最后走的总是你们三个",
+    "resource_gap": "{seventh_voice.name}有声音，{night_engineer.name}有数据，你有今晚出现在这里的理由"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_true_voice",
+    "te_contract_ban"
+   ]
+  },
+  {
+   "chemistry": "周年直播前夜，{understudy.name}在咖啡馆二楼让{doujin_artist.name}画一张像，{top_donor.name}坐在楼下，一直盯着楼梯口。",
+   "id": "k_anniversary_eve",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "understudy",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{understudy.name}今晚第一次用原本的声音跟你说话",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "doujin_artist",
+     "b_to_a": {
+      "tension": 0,
+      "trust": 1
+     },
+     "reason": "{doujin_artist.name}给你画过一张速写",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "top_donor",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{top_donor.name}请你喝过一杯咖啡，问你认不认识“里面的人”",
+     "stage": "acquainted"
+    },
+    {
+     "a": "understudy",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "doujin_artist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{doujin_artist.name}一眼看出{understudy.name}在模仿谁",
+     "stage": "stranger"
+    },
+    {
+     "a": "understudy",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "top_donor",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{understudy.name}以前在榜上排在{top_donor.name}后面",
+     "stage": "stranger"
+    },
+    {
+     "a": "doujin_artist",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "top_donor",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{top_donor.name}约过{doujin_artist.name}十几张稿",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "understudy",
+    "doujin_artist",
+    "top_donor"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在明晚之前让一个人知道真相",
+    "limit_gap": "明晚直播后半段就要换人，谁都没告诉粉丝",
+    "meeting_reason": "咖啡馆打烊前的最后一个钟头",
+    "resource_gap": "{understudy.name}有一个要说出口的秘密，{doujin_artist.name}有一张没公开的图，{top_donor.name}有一份声纹对比"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_mirror",
+    "te_ranking"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "distorted",
+   "id": "ch_forum",
+   "reach": "一个钟头内顶上首页，截图会变形，话会被添油加醋",
+   "text": "粉丝论坛"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_gossip",
+   "reach": "第二天早上全公司都知道，版本各不相同",
+   "text": "公司茶水间"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_backend",
+   "reach": "实时滚动，每一笔都记着账号和时间",
+   "text": "后台打赏流水"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "公司当家皮套的第七任中之人，成年人，接手第三年",
+   "age_range": [
+    22,
+    32
+   ],
+   "appearance_options": [
+    "素颜时眼睛下面总有一层青，嗓子哑了就用气声说话",
+    "动捕服脱到腰间，手腕上缠着一圈运动胶布"
+   ],
+   "decision": {
+    "avoids": [
+     "被问“你是第几任”"
+    ],
+    "contrast": "全网都爱那个声音，没人见过{npc.ta}的脸",
+    "core_value": "至少留下一点是自己的",
+    "goal_options": [
+     "在离开之前让粉丝记住真名",
+     "把原始音轨带走",
+     "在周年直播上唱一首自己写的歌"
+    ],
+    "never": [
+     "用皮套的身份去骗粉丝的钱"
+    ],
+    "prefers": [
+     "先把这一场播完再说"
+    ],
+    "pressure_responses": {
+     "breaking": "拔掉动捕服的线，当场下播",
+     "high": "直播里说一句台本外的真话",
+     "low": "用那张脸的语气打个哈哈",
+     "mid": "下播后去找经纪人对合同"
+    },
+    "relationship_stance": "镜头前甜，镜头后倦",
+    "withdrawal": "躲进录音间，关上门，一遍一遍听自己第一场直播的录音"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "seventh_voice",
+   "identity": {
+    "authority": "决定那张脸今晚怎么笑、对谁笑，至少在镜头里是这样",
+    "exposure": "{npc.ta}被告知“皮套永续计划”已经启动，候补就坐在隔壁工位",
+    "hidden": "{npc.ta}自己偷偷存着每一场直播的原始音轨，想留一份属于自己的东西",
+    "limits": [
+     "皮套归公司，走的那天声纹和权限当场注销",
+     "合同里有一条恋爱禁令"
+    ],
+    "obligations": [
+     "每周五场直播，一场都不能缺"
+    ],
+    "resources": [
+     "一副全网最认得出的声音",
+     "粉丝三年的喜欢"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方听出了{npc.ta}真声和皮套声的不同",
+     "对方叫{npc.ta}的真名而不是皮套名"
+    ],
+    "boundaries": [
+     "不在直播里，不在公司的任何一块屏幕上"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "认得{npc.ta}真声的那个人",
+    "dislikes": [
+     "被当成那张脸"
+    ],
+    "expression": "在录音间里用真声说一句话给对方听",
+    "likes": [
+     "下播后只剩待机灯的动捕棚"
+    ],
+    "preconditions": [
+     "动捕相机已经关了"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "中之人",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "mocap_stage",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "corridor_lounge",
+     "to": 90
+    },
+    {
+     "from": 840,
+     "location_id": "voice_booth",
+     "to": 1140
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "等于亲口承认自己只是一个可以换的人",
+      "option": "照台本回应，说是感冒"
+     },
+     {
+      "cost": "公司会说{npc.ta}不配合，候补随时可以顶上",
+      "option": "不回应"
+     }
+    ],
+    "pressure": "帖子已经顶到首页，经纪人要{npc.ta}今晚直播里“回应一下”",
+    "trigger": "论坛上有人发了声纹对比帖，说{npc.ta}和第三个月的笑声不一样"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“三年了，他们爱的到底是我，还是那张脸？”",
+    "surface": "“今天也谢谢大家，晚安喵——好了，关了吗？”"
+   }
+  },
+  {
+   "adult_context": "动捕棚的夜班技术，成年人，在这里值了四年夜班",
+   "age_range": [
+    28,
+    42
+   ],
+   "appearance_options": [
+    "连帽衫，耳朵上永远挂着一只单耳耳机",
+    "说话慢，手指在键盘上比嘴快"
+   ],
+   "decision": {
+    "avoids": [
+     "被人追问前几任去了哪里"
+    ],
+    "contrast": "记得每一任的每一个小动作，自己却没人记得",
+    "core_value": "数据不会说谎",
+    "goal_options": [
+     "保护好每一任留下的东西",
+     "弄清楚“永续计划”到底要拿走什么",
+     "离开这家公司去做自己的项目"
+    ],
+    "never": [
+     "把一个人的原始数据卖给别人"
+    ],
+    "prefers": [
+     "先查日志"
+    ],
+    "pressure_responses": {
+     "breaking": "把六任的数据全部拷走，当晚辞职",
+     "high": "当着经纪人的面拒绝删除数据",
+     "low": "说“这个我做不了主”，转头去调设备",
+     "mid": "把回放拖到那一秒，让对方自己看"
+    },
+    "relationship_stance": "对人冷淡，对数据温柔",
+    "withdrawal": "一个人坐在导播间，把六任的直播回放并排放着看，一句话不说"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "night_engineer",
+   "identity": {
+    "authority": "决定动捕数据留不留、回放给谁看",
+    "exposure": "{npc.ta}是唯一同时见过六任素颜的人",
+    "hidden": "{npc.ta}私下留着第一任的动作数据，从没删过",
+    "limits": [
+     "权限是公司给的，一句话就能收回",
+     "签了保密协议，什么都不能说"
+    ],
+    "obligations": [
+     "每晚备份当天所有数据"
+    ],
+    "resources": [
+     "动捕系统的最高权限",
+     "六任中之人全部的原始数据"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不问{npc.ta}前几任的事",
+     "对方在{npc.ta}值夜班时带一份热的宵夜"
+    ],
+    "boundaries": [
+     "不在监控能拍到的地方"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "让{npc.ta}忘记看屏幕的人",
+    "dislikes": [
+     "被当成工具人"
+    ],
+    "expression": "把一段只拍了对方的动捕回放存成一份不上传的文件",
+    "likes": [
+     "凌晨四点只剩机器嗡嗡声的棚子"
+    ],
+    "preconditions": [
+     "数据已经备份完"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "动捕工程师",
+   "schedule": [
+    {
+     "from": 1260,
+     "location_id": "control_room",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "mocap_stage",
+     "to": 360
+    },
+    {
+     "from": 361,
+     "location_id": "corridor_lounge",
+     "to": 420
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "第七任的一切就成了公司的",
+      "option": "照交"
+     },
+     {
+      "cost": "被查出来就是违约",
+      "option": "拖着不交，说数据损坏"
+     }
+    ],
+    "pressure": "交出去，候补就能学会第七任的每一个动作",
+    "trigger": "经纪人要{npc.ta}把第七任的原始数据交给“永续计划”的团队"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“六个人，我一个都没留住。”",
+    "surface": "“已经关了，这里没人。”"
+   }
+  },
+  {
+   "adult_context": "砸了三年钱的榜一，成年人，白天在一家公司做财务",
+   "age_range": [
+    26,
+    45
+   ],
+   "appearance_options": [
+    "衬衫熨得一丝不苟，手机壳上贴着那张脸的贴纸",
+    "说话客气，打字却很凶"
+   ],
+   "decision": {
+    "avoids": [
+     "被人叫“韭菜”"
+    ],
+    "contrast": "花了三年的钱，只为确认一件事：自己没有爱错人",
+    "core_value": "喜欢就要喜欢得清楚",
+    "goal_options": [
+     "弄清楚屏幕后面是谁",
+     "拿回榜一",
+     "收到一次最后一格的邀请"
+    ],
+    "never": [
+     "去公司楼下堵人"
+    ],
+    "prefers": [
+     "用钱说话"
+    ],
+    "pressure_responses": {
+     "breaking": "注销账号，把三年的记录一起删掉",
+     "high": "在直播间里公开发声纹对比",
+     "low": "刷一个礼物，说“没事，继续”",
+     "mid": "私信经纪人要一个解释"
+    },
+    "relationship_stance": "对外人刻薄，对那张脸卑微",
+    "withdrawal": "关掉弹幕，一个人看三年前的录播，一直看到天亮"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "top_donor",
+   "identity": {
+    "authority": "决定打赏榜上谁排第一",
+    "exposure": "{npc.ta}开始怀疑屏幕后面换了人，偷偷在做自己的声纹对比",
+    "hidden": "{npc.ta}在最后一格私域邀请里被拒过一次，没跟任何人说",
+    "limits": [
+     "钱是自己挣的，不是无底洞",
+     "最近被一个新号掀翻了榜一"
+    ],
+    "obligations": [
+     "每月还信用卡"
+    ],
+    "resources": [
+     "三年的打赏记录和一个全网都认识的账号",
+     "一份不低的工资和一张信用卡"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不是因为钱才对{npc.ta}好",
+     "对方告诉{npc.ta}一句真话，哪怕难听"
+    ],
+    "boundaries": [
+     "不在任何会被截图的地方"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "屏幕外的那个人",
+    "dislikes": [
+     "被当成提款机"
+    ],
+    "expression": "第一次用真名而不是账号名跟对方打招呼",
+    "likes": [
+     "凌晨三点刚下播后的安静"
+    ],
+    "preconditions": [
+     "不在直播间，不在榜单上"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "榜一大哥",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "street_cafe",
+     "to": 1439
+    },
+    {
+     "from": 720,
+     "location_id": "street_cafe",
+     "to": 780
+    },
+    {
+     "from": 0,
+     "location_id": "corridor_lounge",
+     "to": 60
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "信用卡会爆",
+      "option": "跟着砸"
+     },
+     {
+      "cost": "可能会发现那是公司自己的号",
+      "option": "不砸了，去找新号是谁"
+     }
+    ],
+    "pressure": "这周的最后一格邀请只给榜一",
+    "trigger": "一个新号一晚上砸掉了{npc.ta}三个月的工资，把{npc.ta}挤到了榜二"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“三年，我只想知道我喜欢的是不是同一个人。”",
+    "surface": "“别管我，继续播。”"
+   }
+  },
+  {
+   "adult_context": "公司的经纪运营总监，成年人，一手捧红了当家皮套",
+   "age_range": [
+    32,
+    48
+   ],
+   "appearance_options": [
+    "西装外套搭在椅背上，手里永远拿着平板",
+    "笑起来很亲切，眼神在算数据"
+   ],
+   "decision": {
+    "avoids": [
+     "被人提起第一任"
+    ],
+    "contrast": "捧红了一张脸，那张脸里曾经是自己",
+    "core_value": "那张脸不能倒",
+    "goal_options": [
+     "让周年直播破纪录",
+     "把“永续计划”推下去，换一个更听话的中之人",
+     "在公司倒闭之前给自己留条后路"
+    ],
+    "never": [
+     "让周年直播开天窗"
+    ],
+    "prefers": [
+     "先看数据再说话"
+    ],
+    "pressure_responses": {
+     "breaking": "把整个项目卖给投资方，自己走人",
+     "high": "当场注销一个人的权限",
+     "low": "拍拍对方的肩，说“我们是一家人”",
+     "mid": "把合同条款翻出来念"
+    },
+    "relationship_stance": "对数据冷静，对人亲切，对自己最狠",
+    "withdrawal": "关上办公室的门，一个人看第一任的老录播，看着看着就笑了"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "ops_manager",
+   "identity": {
+    "authority": "决定谁坐进那张皮套、谁的权限被注销",
+    "exposure": "{npc.ta}自己就是第一任中之人，没人知道",
+    "hidden": "公司的现金流只够撑到周年直播之后",
+    "limits": [
+     "投资方要看周年直播的数据，掉了就撤资",
+     "“永续计划”是上面压下来的，{npc.ta}也做不了主"
+    ],
+    "obligations": [
+     "每周给投资方交一份数据报告"
+    ],
+    "resources": [
+     "合同、权限和排班表",
+     "投资方的信任"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不看{npc.ta}手里的平板",
+     "对方知道{npc.ta}也曾站在荧光格里"
+    ],
+    "boundaries": [
+     "不在公司的任何一间屋子里"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "不需要{npc.ta}管理的那个人",
+    "dislikes": [
+     "被当成资本的嘴"
+    ],
+    "expression": "在凌晨的走廊上给对方唱一句第一任的开场白",
+    "likes": [
+     "深夜空荡荡的运营办公区"
+    ],
+    "preconditions": [
+     "数据报告已经交了"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "经纪人",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "office_floor",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "control_room",
+     "to": 1320
+    },
+    {
+     "from": 1321,
+     "location_id": "corridor_lounge",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "那句话会让第七任再也做不回自己",
+      "option": "让第七任照台本说"
+     },
+     {
+      "cost": "赌输了公司就没了",
+      "option": "不让说，赌一把真实"
+     }
+    ],
+    "pressure": "唯一能保证数据的，是让第七任在直播里说一句会上热搜的话",
+    "trigger": "投资方下了最后通牒：周年直播数据不达标就撤资"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我比谁都知道，被换掉是什么滋味。”",
+    "surface": "“数据不会骗人，我们只是在保护这张脸。”"
+   }
+  },
+  {
+   "adult_context": "“永续计划”招来的候补中之人，成年人，刚签约两个月",
+   "age_range": [
+    21,
+    30
+   ],
+   "appearance_options": [
+    "说话的时候会下意识模仿那张脸的语气，自己都没发觉",
+    "工位上摆着一只和第七任一样的保温杯"
+   ],
+   "decision": {
+    "avoids": [
+     "被第七任当面看见"
+    ],
+    "contrast": "在模仿一个曾经喜欢的人，模仿得越像越不是自己",
+    "core_value": "要么成为那张脸，要么什么都不是",
+    "goal_options": [
+     "正式接手那张脸",
+     "让第七任体面地走",
+     "弄清楚自己到底喜欢的是那张脸还是那个人"
+    ],
+    "never": [
+     "在第七任背后说坏话"
+    ],
+    "prefers": [
+     "先把台词练熟"
+    ],
+    "pressure_responses": {
+     "breaking": "退出“永续计划”，把合同撕了",
+     "high": "在会议上说“我比第七任更像”",
+     "low": "低头说“我只是在练习”",
+     "mid": "把自己的练习录音放给对方听"
+    },
+    "relationship_stance": "对前辈恭敬，对自己苛刻",
+    "withdrawal": "在录音间里一遍遍模仿第七任的笑声，模仿到哭出来"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "understudy",
+   "identity": {
+    "authority": "决定自己是来顶替谁，还是来做谁",
+    "exposure": "{npc.ta}以前是第七任的粉丝，打赏过",
+    "hidden": "{npc.ta}知道自己被招来是为了什么，一直没说",
+    "limits": [
+     "合同里写着“声线须与当前角色一致”",
+     "在正式上台之前，什么都不是"
+    ],
+    "obligations": [
+     "每天在录音间练四个钟头的台词"
+    ],
+    "resources": [
+     "一副练了两个月、越来越像的声音",
+     "经纪人的看好"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方叫{npc.ta}的名字，而不是“候补”",
+     "对方听了{npc.ta}原本的声音说好听"
+    ],
+    "boundaries": [
+     "不在第七任看得见的地方"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "不拿{npc.ta}和任何人比的那个人",
+    "dislikes": [
+     "被当成替身"
+    ],
+    "expression": "用自己原本的声音给对方唱一首歌",
+    "likes": [
+     "录音间里关了灯的安静"
+    ],
+    "preconditions": [
+     "不在练习时间"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "候补",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "voice_booth",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "office_floor",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "corridor_lounge",
+     "to": 1380
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "从此{npc.ta}就是一个冒名的人",
+      "option": "答应"
+     },
+     {
+      "cost": "合同里写着保密，违约金是一年的薪水",
+      "option": "告诉第七任"
+     }
+    ],
+    "pressure": "上台那一刻，粉丝会以为还是同一个人",
+    "trigger": "经纪人通知{npc.ta}：周年直播后半段由{npc.ta}接手，第七任不会被告知"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我越来越像前辈，可我本来不是这样说话的。”",
+    "surface": "“我只是候补，前辈别在意。”"
+   }
+  },
+  {
+   "adult_context": "街角咖啡馆二楼的同人画师，成年人，画那张脸画了三年",
+   "age_range": [
+    24,
+    38
+   ],
+   "appearance_options": [
+    "指甲上沾着数位笔的磨痕，帆布包上别满了吧唧",
+    "说话时喜欢比划，比划着就画起来了"
+   ],
+   "decision": {
+    "avoids": [
+     "被说成蹭热度"
+    ],
+    "contrast": "画了三年同一张脸，却一直在找脸后面的那个人",
+    "core_value": "画里的人要是真的",
+    "goal_options": [
+     "出一本只画中之人的本子",
+     "让公司承认那张脸背后是一个个真人",
+     "画完这张就不画了"
+    ],
+    "never": [
+     "画别人的真脸卖钱"
+    ],
+    "prefers": [
+     "用画说话"
+    ],
+    "pressure_responses": {
+     "breaking": "清空账号，从此不再画那张脸",
+     "high": "在账号上公开那张没发的图",
+     "low": "笑着说“我只是个画画的”",
+     "mid": "把三年的稿子翻给对方看"
+    },
+    "relationship_stance": "对角色深情，对公司冷淡",
+    "withdrawal": "在约稿角画一整夜，画完一张就撕一张"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "doujin_artist",
+   "identity": {
+    "authority": "决定同人本里的那张脸是谁",
+    "exposure": "{npc.ta}画过一张没公开的图：那张脸的皮套底下，是第七任的真脸",
+    "hidden": "{npc.ta}在第三任的时候和中之人私下见过面",
+    "limits": [
+     "公司的二创规范随时可以下架{npc.ta}的本子",
+     "画的是别人的角色，版权不是自己的"
+    ],
+    "obligations": [
+     "每月按时交约稿"
+    ],
+    "resources": [
+     "一个几万粉丝的画师账号",
+     "咖啡馆二楼的约稿角"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方能认出{npc.ta}每一张画里藏的小细节",
+     "对方坐在约稿角让{npc.ta}画一下午"
+    ],
+    "boundaries": [
+     "不在约稿角，不在网上"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "让{npc.ta}放下笔的那个人",
+    "dislikes": [
+     "被当成免费画手"
+    ],
+    "expression": "画一张对方的速写，不签名，夹在对方的书里",
+    "likes": [
+     "咖啡馆打烊后二楼的台灯"
+    ],
+    "preconditions": [
+     "稿子已经交完"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "同人画师",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "street_cafe",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "corridor_lounge",
+     "to": 1320
+    },
+    {
+     "from": 1321,
+     "location_id": "street_cafe",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "三年的心血全没了",
+      "option": "下架"
+     },
+     {
+      "cost": "第七任的身份可能就此暴露",
+      "option": "不下架，公开说明"
+     }
+    ],
+    "pressure": "那本书里画的是第七任的真实轮廓",
+    "trigger": "公司发来律师函，要{npc.ta}下架一本画了中之人剪影的同人本"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我画了三年，最想画的是皮套下面那个人。”",
+    "surface": "“我画的是那张脸，不是谁。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "周年直播前一周，深夜下播后",
+  "minute": 1410
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "coercion_theme",
+  "workplace_power",
+  "workplace"
+ ],
+ "custom": false,
+ "customs": [
+  "每一任中之人走的那天，夜班技术会把那一任的待机动作播一遍，叫作“送行”。",
+  "新皮套第一次开播，全公司在走廊里一起看，不许拍照。",
+  "粉丝之间管中之人叫“里面的人”，在公司里谁都不说这三个字。",
+  "咖啡馆的签名板每任换一次，旧的那块收进老板的仓库。",
+  "榜一的账号名会被写在周年直播的感谢名单上，念到的时候全场刷屏。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "弹幕突然刷起了同一句话",
+    "导播在耳机里提醒下一段台本",
+    "礼物特效盖住了半张脸"
+   ],
+   "duration_minutes": 120,
+   "hook_ids": [],
+   "id": "a_late_stream",
+   "location_ids": [
+    "mocap_stage",
+    "control_room"
+   ],
+   "start_minute": 1260,
+   "tags": [],
+   "title": "深夜直播"
+  },
+  {
+   "beats": [
+    "贩卖机吞了一枚硬币没出货",
+    "电梯门开了又关",
+    "高架桥上的车灯一条条划过去"
+   ],
+   "duration_minutes": 15,
+   "hook_ids": [],
+   "id": "a_vending",
+   "location_ids": [
+    "corridor_lounge"
+   ],
+   "start_minute": 30,
+   "tags": [],
+   "title": "贩卖机前买水"
+  },
+  {
+   "beats": [
+    "耳机里的回放和自己的声音叠在一起",
+    "门上的红灯亮着",
+    "谱架上的便签掉了一张"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [],
+   "id": "a_booth_practice",
+   "location_ids": [
+    "voice_booth"
+   ],
+   "start_minute": 900,
+   "tags": [],
+   "title": "录音间练台词"
+  },
+  {
+   "beats": [
+    "曲线在周三晚上掉了一截",
+    "运营同事在背后小声说话",
+    "经纪人办公室的门开了一条缝"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_data_review",
+   "location_ids": [
+    "office_floor"
+   ],
+   "start_minute": 660,
+   "tags": [],
+   "title": "看数据大屏"
+  },
+  {
+   "beats": [
+    "邻桌在放一段音频",
+    "老板端来一杯没点的饮料",
+    "二楼约稿角的灯还亮着"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [],
+   "id": "a_cafe_signboard",
+   "location_ids": [
+    "street_cafe"
+   ],
+   "start_minute": 1140,
+   "tags": [],
+   "title": "去咖啡馆签名板下坐坐"
+  },
+  {
+   "beats": [
+    "进度条卡在百分之九十九",
+    "某一任的文件夹名字被人改过",
+    "门外传来保洁推车的声音"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [],
+   "id": "a_backup_night",
+   "location_ids": [
+    "control_room"
+   ],
+   "start_minute": 120,
+   "tags": [],
+   "title": "凌晨备份数据"
+  },
+  {
+   "beats": [
+    "监视器上那张脸做了一遍旧的待机动作",
+    "棚子里没人说话",
+    "有人在黑幕后面轻轻吸了一下鼻子"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_send_off",
+   "location_ids": [
+    "mocap_stage"
+   ],
+   "start_minute": 90,
+   "tags": [],
+   "title": "送行"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "当代",
+ "extends": null,
+ "forbidden_terms": [
+  "铜钱",
+  "衙门",
+  "民国",
+  "电报",
+  "黄包车",
+  "煤油灯",
+  "飞鸽传书",
+  "驿站",
+  "少女"
+ ],
+ "hooks": [
+  {
+   "id": "h_true_voice",
+   "kind": "approach",
+   "location_ids": [
+    "mocap_stage",
+    "voice_booth",
+    "control_room"
+   ],
+   "slot": "seventh_voice",
+   "text": "{npc.name}关掉话筒，用哑掉的真声叫了你一声"
+  },
+  {
+   "id": "h_warm_water",
+   "kind": "approach",
+   "location_ids": [
+    "mocap_stage",
+    "corridor_lounge"
+   ],
+   "slot": "seventh_voice",
+   "text": "{npc.name}把动捕服脱到腰间，坐在地上，朝你伸手要那杯温水"
+  },
+  {
+   "id": "h_private_replay",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "night_engineer",
+   "text": "{npc.name}把一段只拍了你的回放存下来，文件名是你的名字"
+  },
+  {
+   "id": "h_real_name_hello",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "top_donor",
+   "text": "{npc.name}收起手机，第一次用真名跟你打招呼"
+  },
+  {
+   "id": "h_first_line",
+   "kind": "approach",
+   "location_ids": [
+    "corridor_lounge"
+   ],
+   "slot": "ops_manager",
+   "text": "{npc.name}在凌晨的走廊上，小声唱了一句很老的开场白"
+  },
+  {
+   "id": "h_own_voice",
+   "kind": "approach",
+   "location_ids": [
+    "voice_booth"
+   ],
+   "slot": "understudy",
+   "text": "{npc.name}关上录音间的门，用你从没听过的声音说：“这才是我本来的样子。”"
+  },
+  {
+   "id": "h_sketch_in_book",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "doujin_artist",
+   "text": "{npc.name}把一张速写夹进你的书里，没签名"
+  },
+  {
+   "id": "h_moderator_ask",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "ops_manager",
+   "text": "{npc.name}把平板递过来：“帮我看看今晚的弹幕，有几条要删。”"
+  },
+  {
+   "id": "h_log_check",
+   "kind": "observe",
+   "location_ids": [],
+   "slot": "night_engineer",
+   "text": "{npc.name}盯着日志看了很久，抬头看了你一眼，又低下去"
+  },
+  {
+   "id": "h_spilled_coffee",
+   "kind": "accident",
+   "location_ids": [],
+   "slot": "doujin_artist",
+   "text": "{npc.name}的咖啡洒在了画稿上，正好盖住那张脸的眼睛"
+  },
+  {
+   "id": "h_donor_ask",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "top_donor",
+   "text": "{npc.name}压低声音：“你在公司里，帮我确认一件事。”"
+  },
+  {
+   "id": "h_cup_swap",
+   "kind": "observe",
+   "location_ids": [],
+   "slot": "understudy",
+   "text": "{npc.name}拿起那只保温杯，又放下，看了看你"
+  }
+ ],
+ "id": "the_seventh",
+ "locations": [
+  {
+   "affordances": [
+    "站进荧光格里，让那张脸跟着自己动",
+    "在待机灯下坐在地上喝一杯温水",
+    "趁相机还没关，做一个台本里没有的动作"
+   ],
+   "detail": "四面黑幕，天花板上一圈红外相机，地上贴着荧光胶带画的站位格，正中一台监视器上是那张二次元的脸。",
+   "exits": [
+    "control_room",
+    "voice_booth",
+    "corridor_lounge"
+   ],
+   "id": "mocap_stage",
+   "name": "动捕棚",
+   "pressure_modifiers": {
+    "p_voiceprint_post": "监视器右下角，弹幕还在滚，有人刷了一张声纹对比图。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "开播时有导播、技术和经纪在玻璃后面看着；下播后只剩一排待机灯和值夜班的人",
+   "witnesses": [
+    "bg_director"
+   ]
+  },
+  {
+   "affordances": [
+    "在后台流水里找一个熟悉的账号",
+    "隔着单向玻璃看棚里的人",
+    "把一段回放拖回第三个月"
+   ],
+   "detail": "动捕棚隔壁的一间小屋，一面单向玻璃，三块屏幕：直播画面、弹幕、后台的打赏流水。",
+   "exits": [
+    "mocap_stage",
+    "office_floor"
+   ],
+   "id": "control_room",
+   "name": "导播间",
+   "pressure_modifiers": {
+    "p_last_slot": "后台流水最上面一行，榜一的账号刚刚掉到了第二。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "导播和夜班技术，经纪人偶尔进来站在身后看",
+   "witnesses": [
+    "bg_tech_intern"
+   ]
+  },
+  {
+   "affordances": [
+    "用真声把一句台词念一遍",
+    "摘下耳机，在隔音的安静里说一句真话",
+    "录一段不会被交上去的音"
+   ],
+   "detail": "两平米的隔音小间，墙上贴着吸音棉，一支话筒、一副耳机、一张贴满台本便签的谱架。",
+   "exits": [
+    "mocap_stage"
+   ],
+   "id": "voice_booth",
+   "name": "录音间",
+   "pressure_modifiers": {
+    "p_voice_cancel": "话筒的指示灯还亮着，可权限列表里已经少了一个名字。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "门一关，外面谁也听不见；门上的红灯亮着，就没人会推门",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "看一眼数据大屏上的那条曲线",
+    "路过候补的工位，看看桌上摆了什么",
+    "在经纪人的办公室门口等一个答复"
+   ],
+   "detail": "开放工位，墙上一块大屏轮播各个皮套的数据，角落里新搬来一张工位，桌上贴着“候补”两个字。",
+   "exits": [
+    "control_room",
+    "corridor_lounge"
+   ],
+   "id": "office_floor",
+   "name": "运营办公区",
+   "pressure_modifiers": {
+    "p_understudy_desk": "新搬来的那张工位上，摆着一只和你一模一样的保温杯。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "白天整层都是运营、商务和美术，谁跟经纪人多说了两句，午饭时就有人知道",
+   "witnesses": [
+    "bg_ops_colleague"
+   ]
+  },
+  {
+   "affordances": [
+    "在贩卖机前替对方多按一瓶",
+    "坐在沙发上看高架桥的车灯",
+    "等电梯门关上再说话"
+   ],
+   "detail": "电梯口一排沙发和一台自动贩卖机，窗外是写字楼对面的高架桥，深夜车灯一条一条划过去。",
+   "exits": [
+    "mocap_stage",
+    "office_floor",
+    "street_cafe"
+   ],
+   "id": "corridor_lounge",
+   "name": "走廊休息区",
+   "pressure_modifiers": {
+    "p_anniversary_crash": "走廊尽头的大屏上，周年直播的倒计时还剩不到一天。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "加班的人出来买水，保洁凌晨推着车经过",
+   "witnesses": [
+    "bg_cleaner"
+   ]
+  },
+  {
+   "affordances": [
+    "在签名板下面坐一会儿，听邻桌聊那张脸",
+    "去二楼约稿角看一张没完成的同人图",
+    "用另一个名字点一杯咖啡"
+   ],
+   "detail": "写字楼对面街角的一家咖啡馆，墙上挂满了公司各个皮套的周边和粉丝签名板，二楼是同人画师的约稿角。",
+   "exits": [
+    "corridor_lounge"
+   ],
+   "id": "street_cafe",
+   "name": "楼下谷子咖啡馆",
+   "pressure_modifiers": {
+    "p_voiceprint_post": "邻桌两个人正对着手机放一段音频，一遍又一遍。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "粉丝、同人画师和公司员工混在一起，谁坐在哪张签名板下面，都有人拍照",
+   "witnesses": [
+    "bg_cafe_owner",
+    "bg_fan_watcher"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "林",
+   "周",
+   "许",
+   "陈",
+   "沈",
+   "唐",
+   "叶",
+   "宋",
+   "苏",
+   "江",
+   "程",
+   "白",
+   "夏"
+  ],
+  "given_female": [
+   "晓棠",
+   "雨桐",
+   "思琪",
+   "若溪",
+   "诗涵",
+   "梓萱",
+   "一诺",
+   "可欣",
+   "语嫣",
+   "星辰",
+   "欣妍",
+   "佳怡"
+  ],
+  "given_male": [
+   "子豪",
+   "宇航",
+   "浩然",
+   "俊熙",
+   "嘉树",
+   "博文",
+   "天翊",
+   "泽宇",
+   "明轩",
+   "一帆",
+   "思远",
+   "景行"
+  ],
+  "given_neutral": [
+   "小鹿",
+   "柚子",
+   "安然",
+   "晴川",
+   "星野",
+   "七七",
+   "阿树",
+   "南风",
+   "木木",
+   "初一",
+   "小满",
+   "鹿鸣"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "小{family}"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}老师"
+   },
+   {
+    "gender": "any",
+    "pattern": "阿{given_last}"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 4 个）。性别按会话偏好生成（D15）。",
+ "player_identities": [
+  {
+   "age_range": [
+    21,
+    32
+   ],
+   "baseline": "你是公司签的兼职房管，每晚在直播间删弹幕，偶尔进导播间帮忙。",
+   "gender": "any",
+   "id": "night_moderator",
+   "reputation": "手快，嘴严",
+   "resources": [
+    "直播间的管理权限",
+    "看得见每一条被删的弹幕"
+   ],
+   "risks": [
+    "删过一条不该删的声纹对比帖"
+   ],
+   "role": "直播间房管",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "小{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}房管"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    38
+   ],
+   "baseline": "公司外包的音效师，替那张脸做每一声笑和每一次眨眼的音效。",
+   "gender": "any",
+   "id": "foley_contractor",
+   "reputation": "耳朵比谁都灵",
+   "resources": [
+    "一盘六任全部的声音素材",
+    "录音间的临时门卡"
+   ],
+   "risks": [
+    "合同下个月到期，续不续由经纪人说了算"
+   ],
+   "role": "外包音效师",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}老师"
+    },
+    {
+     "gender": "any",
+     "pattern": "小{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    32
+   ],
+   "baseline": "你是同一家公司另一张皮套里的人，和第七任同一年出道。",
+   "gender": "any",
+   "id": "sister_vtuber",
+   "reputation": "人缘好，嘴巴紧",
+   "resources": [
+    "自己的粉丝和一个直播间",
+    "同为“里面的人”的经验"
+   ],
+   "risks": [
+    "你的皮套也在“永续计划”的名单上"
+   ],
+   "role": "同期另一张皮套的中之人",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}老师"
+    },
+    {
+     "gender": "any",
+     "pattern": "小{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    25,
+    40
+   ],
+   "baseline": "你主办这座城市最大的同人展，公司每年都要来你这里租展位。",
+   "gender": "any",
+   "id": "doujin_organizer",
+   "reputation": "热心，也精明",
+   "resources": [
+    "一场上万人的展会",
+    "画师和粉丝的人脉"
+   ],
+   "risks": [
+    "今年的展会场地费还没凑齐"
+   ],
+   "role": "同人展主催",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}主催"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}老师"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    30,
+    50
+   ],
+   "baseline": "投资方派来的人，周年直播的数据由你写进报告，决定撤资还是追投。",
+   "gender": "any",
+   "id": "investor_rep",
+   "reputation": "客气，算得清",
+   "resources": [
+    "一份决定公司生死的报告",
+    "看任何后台数据的权限"
+   ],
+   "risks": [
+    "你自己也是那张脸的老粉，没人知道"
+   ],
+   "role": "投资方代表",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}总"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}女士"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    28,
+    45
+   ],
+   "baseline": "公司刚请来的制作人，第一件事就是接手“永续计划”。",
+   "gender": "any",
+   "id": "new_producer",
+   "reputation": "空降，没人服",
+   "resources": [
+    "排班表和人事权",
+    "老板的信任"
+   ],
+   "risks": [
+    "你上一家公司的项目就是被这样的计划搞垮的"
+   ],
+   "role": "新上任的制作人",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}制作人"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}总"
+    }
+   ]
+  }
+ ],
+ "premise": "屏幕上的那张脸已经换过六个人；第七任想知道，粉丝爱的到底是谁，自己能不能把名字留下。",
+ "pressures": [
+  {
+   "choice": "照台本否认，还是说一句真话",
+   "exits": [
+    {
+     "cost": "等于承认里面的人可以随便换",
+     "option": "照台本说是感冒"
+    },
+    {
+     "cost": "公司会认定是不配合",
+     "option": "什么都不说"
+    }
+   ],
+   "far": {
+    "consequence": "全网都会开始考据前六任是谁",
+    "due_days": 4,
+    "trigger": "帖子被大号转发"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_voiceprint_post",
+   "immediate": {
+    "minutes": 15,
+    "text": "有人把手机屏幕转过来，上面是那张对比图"
+   },
+   "leverage": null,
+   "location_ids": [
+    "mocap_stage",
+    "street_cafe"
+   ],
+   "near": {
+    "deadline_minutes": 1200,
+    "text": "明晚八点下一场直播"
+   },
+   "objective": "在下一场直播之前，决定要不要回应",
+   "source": "person",
+   "start_minute": 1380,
+   "tags": [],
+   "title": "声纹对比帖",
+   "trigger": "论坛首页挂着一张声纹对比图，说当家皮套里的人和第三个月的不一样"
+  },
+  {
+   "choice": "查下去，还是让邀请照常发出",
+   "exits": [
+    {
+     "cost": "这是越权，查到了也不能说",
+     "option": "把新号的登录记录调出来"
+    },
+    {
+     "cost": "收到邀请的人也许根本不是粉丝",
+     "option": "照常发邀请"
+    }
+   ],
+   "far": {
+    "consequence": "要是公司自己的号，三年的信任一夜就塌了",
+    "due_days": 6,
+    "trigger": "新号被扒出是谁"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_last_slot",
+   "immediate": {
+    "minutes": 20,
+    "text": "后台流水上，新号又砸了一笔"
+   },
+   "leverage": null,
+   "location_ids": [
+    "control_room",
+    "street_cafe"
+   ],
+   "near": {
+    "deadline_minutes": 2400,
+    "text": "周日晚上邀请发出"
+   },
+   "objective": "在邀请发出去之前，弄清新号背后是谁",
+   "source": "money",
+   "start_minute": 1320,
+   "tags": [],
+   "title": "最后一格",
+   "trigger": "这周的最后一格私域只给榜一，一个新号一晚上把榜一换了人"
+  },
+  {
+   "choice": "去问经纪人，还是去问候补",
+   "exits": [
+    {
+     "cost": "候补签了保密协议，说了就违约",
+     "option": "去问候补"
+    },
+    {
+     "cost": "等于提前宣告自己知道了",
+     "option": "直接去找经纪人摊牌"
+    }
+   ],
+   "far": {
+    "consequence": "粉丝会在不知情的情况下看到另一个人",
+    "due_days": 7,
+    "trigger": "周年直播当晚"
+   },
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "hook_ids": [],
+   "id": "p_understudy_desk",
+   "immediate": {
+    "minutes": 15,
+    "text": "排班表更新了，周年直播的后半段写着“待定”"
+   },
+   "leverage": {
+    "basis": "{ops_manager.name}手里的合同写着皮套归公司，随时可以让{seventh_voice.name}的声纹当场注销",
+    "holder": "ops_manager",
+    "subject": "seventh_voice"
+   },
+   "location_ids": [
+    "office_floor",
+    "voice_booth"
+   ],
+   "near": {
+    "deadline_minutes": 4300,
+    "text": "周年直播前一天彩排"
+   },
+   "objective": "在周年直播之前，弄清后半段到底由谁来播",
+   "source": "institution",
+   "start_minute": 600,
+   "tags": [
+    "coercion_theme"
+   ],
+   "title": "隔壁的工位",
+   "trigger": "候补的工位上摆着一只和{seventh_voice.name}一模一样的保温杯，经纪人说那只是巧合"
+  },
+  {
+   "choice": "备份一份私下留着，还是让它就这样消失",
+   "exits": [
+    {
+     "cost": "违反保密协议，被查到就开除",
+     "option": "偷偷备份"
+    },
+    {
+     "cost": "那个人三年的声音就再也没有了",
+     "option": "点确认"
+    }
+   ],
+   "far": {
+    "consequence": "公司会问是谁留的备份",
+    "due_days": 9,
+    "trigger": "前一任回来要自己的录音"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_voice_cancel",
+   "immediate": {
+    "minutes": 10,
+    "text": "屏幕上弹出一个确认框：永久删除，是或否"
+   },
+   "leverage": null,
+   "location_ids": [
+    "voice_booth",
+    "control_room"
+   ],
+   "near": {
+    "deadline_minutes": 300,
+    "text": "今晚十二点系统自动清除"
+   },
+   "objective": "在数据被清除之前，决定要不要留一份",
+   "source": "institution",
+   "start_minute": 1140,
+   "tags": [],
+   "title": "权限被注销",
+   "trigger": "录音间的权限列表里，前一任中之人的名字今天被删了，删的时候没人通知"
+  },
+  {
+   "choice": "加班修，还是延期",
+   "exits": [
+    {
+     "cost": "所有人都得陪着熬",
+     "option": "通宵修"
+    },
+    {
+     "cost": "粉丝会以为是换人换出了问题",
+     "option": "延期"
+    }
+   ],
+   "far": {
+    "consequence": "投资方会当场撤资",
+    "due_days": 2,
+    "trigger": "正式直播再崩一次"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_anniversary_crash",
+   "immediate": {
+    "minutes": 30,
+    "text": "彩排画面停在那半张僵住的脸上，导播在骂人"
+   },
+   "leverage": null,
+   "location_ids": [
+    "corridor_lounge",
+    "mocap_stage"
+   ],
+   "near": {
+    "deadline_minutes": 1260,
+    "text": "明晚八点正式开播"
+   },
+   "objective": "在正式直播前把问题找出来",
+   "source": "institution",
+   "start_minute": 1200,
+   "tags": [],
+   "title": "周年直播崩了半张脸",
+   "trigger": "周年直播彩排时，动捕突然丢了半张脸的数据，那张脸一半在笑，一半僵着"
+  },
+  {
+   "choice": "否认，还是承认是同事",
+   "exits": [
+    {
+     "cost": "以后两个人就不能再一起走出这栋楼",
+     "option": "说是同事一起加班"
+    },
+    {
+     "cost": "论坛会替你说",
+     "option": "什么都不说"
+    }
+   ],
+   "far": {
+    "consequence": "恋爱禁令会被拿出来，违约金是一年的收入",
+    "due_days": 5,
+    "trigger": "照片被扒出是谁"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_romance_photo",
+   "immediate": {
+    "minutes": 10,
+    "text": "考据粉把手机举到你面前，问照片上是不是你"
+   },
+   "leverage": null,
+   "location_ids": [
+    "street_cafe",
+    "corridor_lounge"
+   ],
+   "near": {
+    "deadline_minutes": 720,
+    "text": "明天上午经纪人会看到"
+   },
+   "objective": "在照片被扒清之前，决定怎么办",
+   "source": "person",
+   "start_minute": 30,
+   "tags": [],
+   "title": "被拍到的那张照片",
+   "trigger": "有人在写字楼楼下拍到两个人一起走出来，照片发到了论坛，脸打了码，可背影认得出"
+  }
+ ],
+ "region": "一家虚拟主播公司的动捕棚、办公区和楼下的谷子咖啡馆",
+ "rules": [
+  {
+   "id": "r_skin_owned",
+   "text": "皮套归公司，中之人可以走，走的那天声纹与权限当场注销。"
+  },
+  {
+   "id": "r_true_voice",
+   "text": "台词外的声音一律算事故；认出真声的人，有义务装作没听出来。"
+  },
+  {
+   "id": "r_last_slot",
+   "text": "打赏榜公开记名，私域按档期定价，只有最后一格不卖，只给邀请。"
+  },
+  {
+   "id": "r_no_romance",
+   "text": "中之人的合同里有恋爱禁令，被拍到和谁一起出现，就算违约。"
+  },
+  {
+   "id": "r_derivative",
+   "text": "同人二创要守公司的规范，画了中之人的真脸，本子当天下架。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": null,
+ "status": "review",
+ "style_hint": "写屏幕和声音：待机灯、弹幕、耳机里的回声；人前用皮套的语气，人后用哑掉的真声。",
+ "tension_engines": [
+  {
+   "id": "te_replaceable",
+   "text": "那张脸换过六次，每个人都在算自己是不是下一个被换掉的"
+  },
+  {
+   "id": "te_true_voice",
+   "text": "认出真声的人必须装作没听见，越装越难"
+  },
+  {
+   "id": "te_ranking",
+   "text": "打赏榜第一和第二之间只差一个晚上的工资"
+  },
+  {
+   "id": "te_contract_ban",
+   "text": "合同里的恋爱禁令，让每一次下播后的温水都像违约"
+  },
+  {
+   "id": "te_mirror",
+   "text": "候补越来越像，像得连自己都快认不出"
+  }
+ ],
+ "title": "第七任",
+ "tone": [
+  "荧光",
+  "失眠",
+  "替身",
+  "被看见又不被看见"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_first_was_manager",
+   "requires": [
+    "ops_manager"
+   ],
+   "text": "论坛上有人扒出，当家皮套的第一任中之人就是{ops_manager.name}。"
+  },
+  {
+   "category": "信息",
+   "id": "t_data_leak",
+   "requires": [
+    "night_engineer"
+   ],
+   "text": "六任的原始动捕数据被人放到了网上，日志显示最后一次拷贝是{night_engineer.name}的账号。"
+  },
+  {
+   "category": "资源",
+   "id": "t_investor_pull",
+   "requires": [],
+   "text": "投资方提前撤资，公司下个月的工资发不出来了。"
+  },
+  {
+   "category": "制度",
+   "id": "t_new_rule",
+   "requires": [
+    "pressure"
+   ],
+   "text": "公司发了新规：所有中之人禁止在公司以外的地方见同事。"
+  },
+  {
+   "category": "人事",
+   "id": "t_understudy_quit",
+   "requires": [
+    "understudy"
+   ],
+   "text": "{understudy.name}退出了“永续计划”，走之前留下一段录音。"
+  },
+  {
+   "category": "意外",
+   "id": "t_donor_bankrupt",
+   "requires": [
+    "top_donor"
+   ],
+   "text": "{top_donor.name}的信用卡被冻结了，银行打电话到{top_donor.ta}的公司。"
+  },
+  {
+   "category": "时限",
+   "id": "t_contract_end",
+   "requires": [],
+   "text": "有一任中之人的合同就在三天后到期，续约书还没签。"
+  },
+  {
+   "category": "关系",
+   "id": "t_artist_meet",
+   "requires": [
+    "doujin_artist",
+    "seventh_voice"
+   ],
+   "text": "{doujin_artist.name}在咖啡馆认出了素颜的{seventh_voice.name}，两个人都没说话。"
+  }
+ ]
+}

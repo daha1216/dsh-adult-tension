@@ -1,0 +1,2521 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "雪茄店雇的成年店员",
+   "age_range": [
+    25,
+    50
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_counter_clerk",
+   "line": "{npc.name}只看引荐卡背面的签名，从不抬头看人",
+   "location_ids": [
+    "cigar_shop"
+   ],
+   "name": null,
+   "role": "雪茄店店员"
+  },
+  {
+   "adult_context": "街口卖报的成年人，年满十八",
+   "age_range": [
+    18,
+    30
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_newsboy",
+   "line": "{npc.name}在街口喊了一下午晚报，谁进了雪茄店没出来，{npc.ta}都数着",
+   "location_ids": [
+    "cigar_shop",
+    "back_alley"
+   ],
+   "name": null,
+   "role": "卖报人"
+  },
+  {
+   "adult_context": "总会雇的成年侍应，管吧台",
+   "age_range": [
+    28,
+    55
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_bartender",
+   "line": "{npc.name}擦着咖啡杯，谁跟谁碰了杯都记在心里",
+   "location_ids": [
+    "main_hall"
+   ],
+   "name": null,
+   "role": "吧台侍应"
+  },
+  {
+   "adult_context": "总会雇的成年看门人",
+   "age_range": [
+    30,
+    50
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_bouncer",
+   "line": "{npc.name}守在楼梯口，册上没你的名字，就别想往下走一级",
+   "location_ids": [
+    "main_hall",
+    "cigar_shop"
+   ],
+   "name": null,
+   "role": "看门人"
+  },
+  {
+   "adult_context": "衣帽间的成年雇工",
+   "age_range": [
+    20,
+    40
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_coat_check",
+   "line": "{npc.name}替人挂大衣，也替人往大衣口袋里塞纸条",
+   "location_ids": [
+    "phone_corridor"
+   ],
+   "name": null,
+   "role": "衣帽间侍应"
+  },
+  {
+   "adult_context": "曾经的会员，成年人",
+   "age_range": [
+    45,
+    70
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_struck_member",
+   "line": "{npc.name}被划掉快一年了，还每晚来后巷站一会儿，什么都肯说",
+   "location_ids": [
+    "back_alley"
+   ],
+   "name": null,
+   "role": "被除名的老会员"
+  },
+  {
+   "adult_context": "乐队的成年鼓手",
+   "age_range": [
+    25,
+    45
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_drummer",
+   "line": "{npc.name}在后台替人望风，鼓点一变就是有人来了",
+   "location_ids": [
+    "dressing_room",
+    "main_hall"
+   ],
+   "name": null,
+   "role": "鼓手"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "引荐你的人昨晚被划掉了；{register_keeper.name}的钢笔停在你那一行上方，{jazz_singer.name}的引荐人和你的是同一个人。",
+   "id": "k_new_name",
+   "identity_ids": [
+    "new_member"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "register_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{register_keeper.name}今晚第一次看清你的脸",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "jazz_singer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{jazz_singer.name}在后台替你倒过一杯“咖啡”",
+     "stage": "acquainted"
+    },
+    {
+     "a": "register_keeper",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "jazz_singer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{jazz_singer.name}那一行，是{register_keeper.name}亲手写上去的",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "register_keeper",
+    "jazz_singer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想让自己的名字留在册上，而不必拿别人去换",
+    "limit_gap": "你们两个的引荐人都没了，三个月内找不到新的就会被一起划掉",
+    "meeting_reason": "今晚打烊后，正册就要重誊",
+    "resource_gap": "{register_keeper.name}有正册和那支笔，{jazz_singer.name}有一副嗓子，你只有一张刚写上的名字"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_sponsor_chain",
+    "te_one_pen"
+   ]
+  },
+  {
+   "chemistry": "{bootlegger.name}的卡车今晚要从后巷卸货，{fed_agent.name}在对街坐了三天；你是乐台上唯一看得见两边的人。",
+   "id": "k_monthly_fee",
+   "identity_ids": [
+    "piano_player"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "bootlegger",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{bootlegger.name}请你弹过一支{bootlegger.ta}母亲爱听的曲子",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "fed_agent",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{fed_agent.name}在咖啡馆里问过你几点打烊",
+     "stage": "stranger"
+    },
+    {
+     "a": "bootlegger",
+     "a_to_b": {
+      "tension": 3,
+      "trust": -1
+     },
+     "b": "fed_agent",
+     "b_to_a": {
+      "tension": 3,
+      "trust": -1
+     },
+     "reason": "两个人都知道对方是谁，谁也没先动",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "bootlegger",
+    "fed_agent"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想在两边都翻脸之前，从这件事里干干净净地出来",
+    "limit_gap": "你欠着鼓手的钱，{bootlegger.name}知道",
+    "meeting_reason": "卸货和蹲守都在同一个钟头",
+    "resource_gap": "{bootlegger.name}有卡车和月费账，{fed_agent.name}有一张搜查令，你只有乐台上的一个位置"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_across_street",
+    "te_one_pen"
+   ]
+  },
+  {
+   "chemistry": "你引荐过的人被划掉了，{expelled_merchant.name}在后巷等你；{register_keeper.name}说你的名字今晚也要重新看一遍。",
+   "id": "k_sponsor_old",
+   "identity_ids": [
+    "club_member"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "expelled_merchant",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{expelled_merchant.name}当年和你同一晚入会",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "register_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{register_keeper.name}每年都替你在新年那一页写一句祝词",
+     "stage": "acquainted"
+    },
+    {
+     "a": "expelled_merchant",
+     "a_to_b": {
+      "tension": 3,
+      "trust": -1
+     },
+     "b": "register_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "划掉{expelled_merchant.name}的那道墨线，是{register_keeper.name}亲手画的",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "expelled_merchant",
+    "register_keeper"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想弄清楚自己引荐的人到底是替谁担的事",
+    "limit_gap": "你和{expelled_merchant.name}不得在街上说话，可{expelled_merchant.ta}就站在后门",
+    "meeting_reason": "今晚打烊后，你的那一行要重新过墨",
+    "resource_gap": "{register_keeper.name}有正册，{expelled_merchant.name}有那一页副本，你有五年的会员资格"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_back_alley",
+    "te_sponsor_chain"
+   ]
+  },
+  {
+   "chemistry": "{fed_agent.name}要正册，{reporter.name}要正册上的名字；你在查一桩火灾理赔，查到最后，两个人都拦在你前面。",
+   "id": "k_two_notebooks",
+   "identity_ids": [
+    "insurance_man"
+   ],
+   "player_positions": [
+    "equal",
+    "low"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "fed_agent",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{fed_agent.name}借你看过一页车牌记录",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "reporter",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{reporter.name}写过你们公司拖赔的稿子",
+     "stage": "acquainted"
+    },
+    {
+     "a": "fed_agent",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "reporter",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{reporter.name}想采访{fed_agent.name}，被拒了三次",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "fed_agent",
+    "reporter"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想把那桩火灾查清，又不想变成谁的线人",
+    "limit_gap": "{fed_agent.name}的上司收钱，{reporter.name}的主编不许碰",
+    "meeting_reason": "三个人在对街咖啡馆的同一张桌子上坐过",
+    "resource_gap": "{fed_agent.name}有警徽，{reporter.name}有版面，你有一份正当查案的理由"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_across_street",
+    "te_pen_name"
+   ]
+  },
+  {
+   "chemistry": "东家派你来盯账房；{register_keeper.name}把正册推到你面前，说要看就看，{bootlegger.name}在门外等着跟你谈月费。",
+   "id": "k_owner_nephew",
+   "identity_ids": [
+    "owner_relative"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "register_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{register_keeper.name}知道你是来干什么的",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bootlegger",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{bootlegger.name}在你小时候抱过你",
+     "stage": "acquainted"
+    },
+    {
+     "a": "register_keeper",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bootlegger",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{register_keeper.name}替{bootlegger.name}在册上留着几个不能写全的名字",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "register_keeper",
+    "bootlegger"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想弄清楚这间总会到底是谁的",
+    "limit_gap": "东家要你月底前拿到把柄，{bootlegger.name}的车上周被截了",
+    "meeting_reason": "账房的两把钥匙，一把在你手里",
+    "resource_gap": "你有东家的一句话，{register_keeper.name}有那支笔，{bootlegger.name}有半个城的月费账"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_one_pen",
+    "te_sponsor_chain"
+   ]
+  },
+  {
+   "chemistry": "你的选票一半在总会里；{fed_agent.name}在查你的竞选经费，{jazz_singer.name}答应在你的募款晚会上唱一支歌。",
+   "id": "k_alderman_votes",
+   "identity_ids": [
+    "alderman"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "fed_agent",
+     "b_to_a": {
+      "tension": 2,
+      "trust": -1
+     },
+     "reason": "{fed_agent.name}的小本子上有你司机的车牌",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "jazz_singer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{jazz_singer.name}在你的上一次募款晚会上唱过",
+     "stage": "acquainted"
+    },
+    {
+     "a": "fed_agent",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "jazz_singer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{jazz_singer.name}在后巷见过{fed_agent.name}两次",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "fed_agent",
+    "jazz_singer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想赢下选举，又不想让任何人替你挨那一刀",
+    "limit_gap": "下个月就投票，{jazz_singer.name}的引荐人刚被划掉",
+    "meeting_reason": "募款晚会就设在总会大厅",
+    "resource_gap": "你有市政厅的门路，{fed_agent.name}有一本小本子，{jazz_singer.name}有一副全南区都认的嗓子"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_across_street",
+    "te_pen_name"
+   ]
+  },
+  {
+   "chemistry": "{expelled_merchant.name}每晚在后巷等{jazz_singer.name}下台，说手里有一页正册的副本，上面写着谁才该被划掉；这话是你在小门边抽烟时听见的。",
+   "id": "k_struck_night",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "expelled_merchant",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{expelled_merchant.name}以前在大厅里请你喝过一杯",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "jazz_singer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "你在台下听过{jazz_singer.name}唱了一整季",
+     "stage": "acquainted"
+    },
+    {
+     "a": "expelled_merchant",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "jazz_singer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "{expelled_merchant.name}就是引荐{jazz_singer.name}的那个人",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "expelled_merchant",
+    "jazz_singer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想看清那一页上写的是谁",
+    "limit_gap": "两个人不能在街上说话，被看见就一起完",
+    "meeting_reason": "那晚后巷的路灯闪了一下，三个人都站在灯底下",
+    "resource_gap": "{expelled_merchant.name}有那一页，{jazz_singer.name}有一副嗓子，你有一个能把话带进大厅的身份"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_back_alley",
+    "te_sponsor_chain"
+   ]
+  },
+  {
+   "chemistry": "{reporter.name}偷拍过一页正册，{register_keeper.name}知道少了哪一页，{bootlegger.name}知道那一页上有谁；底片还没洗，就在你手里。",
+   "id": "k_ink_and_press",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "reporter",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "{reporter.name}把底片交给你保管，说只信你",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "register_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{register_keeper.name}今晚多看了你两眼",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 0
+     },
+     "b": "bootlegger",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 0
+     },
+     "reason": "{bootlegger.name}请你喝过一杯，问你最近替谁跑腿",
+     "stage": "acquainted"
+    },
+    {
+     "a": "reporter",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "register_keeper",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{register_keeper.name}知道{reporter.name}的笔名",
+     "stage": "stranger"
+    },
+    {
+     "a": "reporter",
+     "a_to_b": {
+      "tension": 2,
+      "trust": -1
+     },
+     "b": "bootlegger",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "{reporter.name}写过{bootlegger.name}的卡车",
+     "stage": "stranger"
+    },
+    {
+     "a": "register_keeper",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "bootlegger",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "两个人在账房里对过十一年的账",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "reporter",
+    "register_keeper",
+    "bootlegger"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "你想决定这卷底片的去向，而不是被人决定",
+    "limit_gap": "三个人都想要那卷底片，又都不能明着要",
+    "meeting_reason": "今晚十一点前，晚报要定版",
+    "resource_gap": "{reporter.name}有版面，{register_keeper.name}有正册，{bootlegger.name}有月费账，你有一卷没洗的底片"
+   },
+   "tags": [],
+   "tension_engine_ids": [
+    "te_pen_name",
+    "te_one_pen"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "distorted",
+   "id": "ch_cup_talk",
+   "reach": "当晚就在大厅里传开，第二天变了三个版本",
+   "text": "咖啡杯底下的闲话"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_evening_paper",
+   "reach": "第二天傍晚印出来，南区的报摊都有",
+   "text": "晚报"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_register",
+   "reach": "打烊后改，第二天一早东家过目，落了墨就算数",
+   "text": "会员正册"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "地下总会的司册，成年人，替东家管会员正册十一年",
+   "age_range": [
+    34,
+    56
+   ],
+   "appearance_options": [
+    "一身深灰呢子，袖口别着两只银袖箍",
+    "钢笔永远拧开着，笔尖上一点没擦净的墨"
+   ],
+   "decision": {
+    "avoids": [
+     "被人当面问{npc.ta}从哪里来"
+    ],
+    "contrast": "替全城的人记着名字，自己却是个没名字的人",
+    "core_value": "册子不能乱",
+    "goal_options": [
+     "让正册干干净净地过完这个冬天",
+     "查出谁在偷看正册",
+     "攒够钱在东家察觉之前离开这座城"
+    ],
+    "never": [
+     "为了钱改一个名字"
+    ],
+    "prefers": [
+     "先看清册上写着什么"
+    ],
+    "pressure_responses": {
+     "breaking": "锁上账房，把正册塞进火炉",
+     "high": "当着全厅的面划掉一个名字",
+     "low": "笑一笑，说名字的事要等打烊",
+     "mid": "把正册翻到那一页，让对方自己看"
+    },
+    "relationship_stance": "对谁都客气，对谁都留着一页",
+    "withdrawal": "把自己关在账房里，一行一行地誊册，敲门的人一个都不理"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "register_keeper",
+   "identity": {
+    "authority": "决定谁的名字留在册上、谁被一道墨线划掉",
+    "exposure": "{npc.ta}替一个人改过正册，那一行底下其实还有一道擦不掉的旧墨线",
+    "hidden": "{npc.ta}自己的名字从来不在册上，东家也不知道{npc.ta}从哪里来",
+    "limits": [
+     "东家可以一夜之间换掉司册",
+     "正册只能在打烊后改，白天什么都做不了"
+    ],
+    "obligations": [
+     "每晚打烊后誊册，第二天一早交东家过目"
+    ],
+    "resources": [
+     "烫金的会员正册和账房的钥匙",
+     "全城一半体面人的底细"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不怕被划掉还肯说真话",
+     "对方问起{npc.ta}自己的名字"
+    ],
+    "boundaries": [
+     "绝不在账房的桃木桌前"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "不需要被写进册子的那个人",
+    "dislikes": [
+     "被人当成那支笔"
+    ],
+    "expression": "把一个从不告诉别人的名字说给对方听",
+    "likes": [
+     "打烊后空荡荡的大厅"
+    ],
+    "preconditions": [
+     "正册已经合上"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "司册",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "cigar_shop",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "main_hall",
+     "to": 1380
+    },
+    {
+     "from": 1381,
+     "location_id": "ledger_room",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "ledger_room",
+     "to": 180
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "引荐人会跟着一起被划掉",
+      "option": "照划"
+     },
+     {
+      "cost": "东家会知道{npc.ta}在犹豫",
+      "option": "拖到明晚"
+     }
+    ],
+    "pressure": "那个人的引荐人，正是{npc.ta}自己当年引进来的",
+    "trigger": "东家要{npc.ta}在今晚打烊后划掉一个人，理由一个字都没说"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我划了一辈子的名字，只想有人叫一次我的。”",
+    "surface": "“引荐你的人，昨晚被划掉了。你还想进去吗？”"
+   }
+  },
+  {
+   "adult_context": "总会乐台上的歌手，成年人，从新奥尔良一路唱到北边",
+   "age_range": [
+    22,
+    38
+   ],
+   "appearance_options": [
+    "嗓子低，开口前总要先清一下喉咙",
+    "手腕上缠着一条褪了色的丝巾，从来不摘"
+   ],
+   "decision": {
+    "avoids": [
+     "被人追问引荐人的事"
+    ],
+    "contrast": "唱了一晚上的情歌，下台就把丝巾缠得更紧",
+    "core_value": "台上的四分钟是自己的",
+    "goal_options": [
+     "保住自己在册上的那一行",
+     "唱进一家真正的剧院",
+     "弄清引荐人为什么被划掉"
+    ],
+    "never": [
+     "在台上唱别人写好的告密词"
+    ],
+    "prefers": [
+     "先唱，再说"
+    ],
+    "pressure_responses": {
+     "breaking": "从后巷的小门走掉，连行头都不要",
+     "high": "唱到一半停下来，当众点一个人的名字",
+     "low": "把一支快歌唱得更快，谁也插不进话",
+     "mid": "下台时故意从那一桌旁边走过"
+    },
+    "relationship_stance": "台上热，台下冷",
+    "withdrawal": "坐在后台镜子前，一张一张地把镜框上的照片取下来又插回去"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "jazz_singer",
+   "identity": {
+    "authority": "决定今晚唱哪一支、唱给哪一桌听",
+    "exposure": "引荐{npc.ta}的那个人被划掉前，托{npc.ta}保管了一样东西",
+    "hidden": "{npc.ta}在后巷见过被除名的人，不止一次",
+    "limits": [
+     "名字在正册第三页，引荐人刚被划掉",
+     "被除名就再也上不了任何一家总会的台"
+    ],
+    "obligations": [
+     "每周往南边寄钱"
+    ],
+    "resources": [
+     "一副全南区都认的嗓子",
+     "乐队和侍应的人缘"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方听出{npc.ta}哪一句唱走了调",
+     "对方在后巷站着等，而不是在大厅里吹口哨"
+    ],
+    "boundaries": [
+     "不在乐台上"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "听完一整支歌才开口的人",
+    "dislikes": [
+     "被当成总会的摆设"
+    ],
+    "expression": "把一支没唱完的歌在后台唱完给对方听",
+    "likes": [
+     "散场后只剩一盏灯的乐台"
+    ],
+    "preconditions": [
+     "不在大厅，不在册子底下"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "爵士歌手",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "main_hall",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "dressing_room",
+     "to": 120
+    },
+    {
+     "from": 840,
+     "location_id": "dressing_room",
+     "to": 1080
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "司册的人情要拿东西换",
+      "option": "去求司册"
+     },
+     {
+      "cost": "作保的人从此和{npc.ta}连在一起",
+      "option": "去找一个会员作保"
+     }
+    ],
+    "pressure": "找不到新的引荐人，正册上的那一行就会跟着消失",
+    "trigger": "引荐人被划掉以后，有人在后台镜子上插了一张字条：三个月内另找引荐人"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“册上那一行要是没了，我在这座城里就什么都不是。”",
+    "surface": "“这一支是给门口那位的，别回头。”"
+   }
+  },
+  {
+   "adult_context": "供着全场私酒的酒庄主，成年人，运酒的卡车跑遍南区",
+   "age_range": [
+    30,
+    52
+   ],
+   "appearance_options": [
+    "大衣内衬缝着一排口袋，每只口袋里一叠不同面额的钞票",
+    "笑起来露出一颗金牙，眼睛从来不笑"
+   ],
+   "decision": {
+    "avoids": [
+     "和警察当面撕破脸"
+    ],
+    "contrast": "卖了一辈子酒，自己一口不沾",
+    "core_value": "生意要做下去",
+    "goal_options": [
+     "把被截的那车酒找回来",
+     "让对街那个探员换个地方坐",
+     "在东家倒台之前另找一棵树"
+    ],
+    "never": [
+     "出卖供货的兄弟"
+    ],
+    "prefers": [
+     "钱能办的事用钱办"
+    ],
+    "pressure_responses": {
+     "breaking": "把整本月费账寄给报社",
+     "high": "叫手下把一个人请到后巷谈",
+     "low": "递一支雪茄，说什么事都好谈",
+     "mid": "把月费账翻开给对方看一行"
+    },
+    "relationship_stance": "对朋友大方，对叛徒不留情",
+    "withdrawal": "坐在地窖的酒桶上，一个人一瓶一瓶地数，数错了就从头再数"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "bootlegger",
+   "identity": {
+    "authority": "决定今晚的酒进不进得了门，谁的月费照付",
+    "exposure": "{npc.ta}的月费账上有一个名字，是对街那个探员的上司",
+    "hidden": "{npc.ta}最大的一车酒上周被截了，截车的人就在总会里",
+    "limits": [
+     "每一车酒都可能被截",
+     "对街的探员已经盯了三天"
+    ],
+    "obligations": [
+     "按月给好几位警官送信封"
+    ],
+    "resources": [
+     "三辆卡车、一座地窖和一本警官的月费账",
+     "总会东家的生意伙伴身份"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不要{npc.ta}的钱",
+     "对方敢在探员眼皮底下坐到{npc.ta}旁边"
+    ],
+    "boundaries": [
+     "不在总会大厅"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "知道{npc.ta}不喝酒的那一个人",
+    "dislikes": [
+     "被人当成钱袋"
+    ],
+    "expression": "开着空卡车载对方在南区兜一圈，一句话不说",
+    "likes": [
+     "凌晨卸完货以后的空卡车"
+    ],
+    "preconditions": [
+     "生意谈完了，桌上没有账"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "私酒商",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "back_alley",
+     "to": 300
+    },
+    {
+     "from": 1140,
+     "location_id": "main_hall",
+     "to": 1380
+    },
+    {
+     "from": 1381,
+     "location_id": "phone_corridor",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "东家会嫌{npc.ta}坏了场子",
+      "option": "当众追问"
+     },
+     {
+      "cost": "等到的也可能是对街的探员",
+      "option": "先忍下来，打烊后在后巷等"
+     }
+    ],
+    "pressure": "截车的人就在今晚的客人里",
+    "trigger": "被截的那车酒出现在了总会的吧台上，酒瓶上的封蜡还是{npc.ta}的"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我替半个城付月费，没人替我付过一次。”",
+    "surface": "“这杯算我的，喝完咱们谈谈对街那位。”"
+   }
+  },
+  {
+   "adult_context": "禁酒署派来的联邦探员，成年人，在对街咖啡馆坐了三天",
+   "age_range": [
+    28,
+    46
+   ],
+   "appearance_options": [
+    "帽檐压得很低，大衣口袋里一本写满了车牌号的小本子",
+    "说话带着东部口音，咖啡一口没喝"
+   ],
+   "decision": {
+    "avoids": [
+     "被人知道{npc.ta}进过总会"
+    ],
+    "contrast": "要把全城的酒都倒进下水道，自己夜里睡不着时也想喝一杯",
+    "core_value": "法就是法",
+    "goal_options": [
+     "拿到正册，一网打尽",
+     "找到上司收钱的证据",
+     "在调走之前做成一件事"
+    ],
+    "never": [
+     "收一个信封"
+    ],
+    "prefers": [
+     "证据说话"
+    ],
+    "pressure_responses": {
+     "breaking": "一个人冲进雪茄店，不等支援",
+     "high": "亮出警徽，要求对方跟{npc.ta}走一趟",
+     "low": "把帽檐推高一点，说只是来喝杯咖啡",
+     "mid": "掏出小本子，念一个车牌号"
+    },
+    "relationship_stance": "对坏人狠，对自己更狠",
+    "withdrawal": "回到廉价旅馆，把小本子上的每一个车牌号重抄一遍"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "fed_agent",
+   "identity": {
+    "authority": "决定哪一晚冲进去、抓谁、放过谁",
+    "exposure": "{npc.ta}进过那间总会一次，用的是假名字，正册上还留着那一行",
+    "hidden": "{npc.ta}知道上司收钱，手里还没有证据",
+    "limits": [
+     "上司在私酒商的月费账上",
+     "抓错一次人，就会被调回华盛顿坐办公室"
+    ],
+    "obligations": [
+     "每周向上司报告一次"
+    ],
+    "resources": [
+     "一张搜查令和一本记满车牌的小本子",
+     "禁酒署和报社的门路"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方明知{npc.ta}是谁还肯坐下来",
+     "对方说的话和小本子上的对得上"
+    ],
+    "boundaries": [
+     "不在任何会被写进报告的地方"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "让{npc.ta}忘了自己戴着警徽的那个人",
+    "dislikes": [
+     "被人收买"
+    ],
+    "expression": "把小本子上的一页撕下来，当着对方的面烧掉",
+    "likes": [
+     "凌晨四点空无一人的咖啡馆"
+    ],
+    "preconditions": [
+     "不在执勤的那几个钟头"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "联邦探员",
+   "schedule": [
+    {
+     "from": 600,
+     "location_id": "cigar_shop",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "back_alley",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "back_alley",
+     "to": 120
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "明天可能就被调走",
+      "option": "抗命留下"
+     },
+     {
+      "cost": "没有支援，出了事没人知道",
+      "option": "撤岗，改去后巷私下等"
+     }
+    ],
+    "pressure": "撤岗就等于放掉三天的蹲守",
+    "trigger": "上司命令{npc.ta}今晚撤岗，说那间总会“已经查过了”"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“要是连册子上那个假名字也是我，我还算不算干净？”",
+    "surface": "“我只是来喝杯咖啡，你也是吗？”"
+   }
+  },
+  {
+   "adult_context": "被总会除名的布商，成年人，三个月前还是正册第一页的人",
+   "age_range": [
+    35,
+    60
+   ],
+   "appearance_options": [
+    "大衣是好料子，袖口却磨破了",
+    "每晚站在后巷同一盏路灯底下，脚边一地烟头"
+   ],
+   "decision": {
+    "avoids": [
+     "被人可怜"
+    ],
+    "contrast": "当年亲手划掉过别人，现在轮到自己站在后巷",
+    "core_value": "名字要拿回来",
+    "goal_options": [
+     "在三个月期满那天被重新引荐",
+     "让真正该被划掉的人被划掉",
+     "保住布庄"
+    ],
+    "never": [
+     "求东家"
+    ],
+    "prefers": [
+     "先把账算清"
+    ],
+    "pressure_responses": {
+     "breaking": "一把火烧了布庄，离开这座城",
+     "high": "把那一页副本拍在司册面前",
+     "low": "装作只是路过，点一支烟",
+     "mid": "拦住一个会员，问{npc.ta}还记不记得自己"
+    },
+    "relationship_stance": "对旧朋友恨，对陌生人软",
+    "withdrawal": "回到空荡荡的布庄，一匹一匹地量布，量完再卷回去"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "expelled_merchant",
+   "identity": {
+    "authority": "决定自己还要不要回到那本册子上",
+    "exposure": "{npc.ta}被划掉，是替别人担了一桩事",
+    "hidden": "{npc.ta}手里有正册的一页副本，是被划掉那晚偷撕下来的",
+    "limits": [
+     "三个月内不得被引荐，也不得在街上和会员说话",
+     "名声已经跟着那道墨线一起没了"
+    ],
+    "obligations": [
+     "布庄还欠着一屋子工人的工钱"
+    ],
+    "resources": [
+     "一肚子总会的旧事",
+     "一家快倒闭的布庄"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在后巷停下来和{npc.ta}说话",
+     "对方不提{npc.ta}被划掉的事"
+    ],
+    "boundaries": [
+     "不在后巷，不在总会门口"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "愿意和被除名的人站在同一盏路灯底下的人",
+    "dislikes": [
+     "被人施舍"
+    ],
+    "expression": "量一块布替对方做一条围巾，不收钱",
+    "likes": [
+     "凌晨的布庄，一屋子布的味道"
+    ],
+    "preconditions": [
+     "对方不是来打听那一页的"
+    ],
+    "self_control_range": [
+     1,
+     3
+    ]
+   },
+   "public_role": "被除名的人",
+   "schedule": [
+    {
+     "from": 1200,
+     "location_id": "back_alley",
+     "to": 1439
+    },
+    {
+     "from": 0,
+     "location_id": "back_alley",
+     "to": 240
+    },
+    {
+     "from": 600,
+     "location_id": "cigar_shop",
+     "to": 900
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "回到册上，但当初的冤屈永远洗不掉",
+      "option": "交"
+     },
+     {
+      "cost": "再等三个月，布庄撑不到那时候",
+      "option": "不交"
+     }
+    ],
+    "pressure": "交出去，{npc.ta}就没有能让真相翻身的东西了",
+    "trigger": "有人愿意在期满那天引荐{npc.ta}，条件是交出那一页副本"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“我划掉过别人，现在我知道站在这儿是什么滋味了。”",
+    "surface": "“三个月，还剩二十一天。”"
+   }
+  },
+  {
+   "adult_context": "南区一家晚报的记者，成年人，专跑夜间新闻",
+   "age_range": [
+    25,
+    42
+   ],
+   "appearance_options": [
+    "帽带上插着一张记者证，衬衫领子总有一边翻着",
+    "口袋里塞着铅笔头和半包压扁的香烟"
+   ],
+   "decision": {
+    "avoids": [
+     "被人认出笔名"
+    ],
+    "contrast": "天天揭别人的老底，自己用笔名过日子",
+    "core_value": "名字该见报",
+    "goal_options": [
+     "登出那一页正册",
+     "查清谁在给警察付月费",
+     "离开晚报，去纽约的大报"
+    ],
+    "never": [
+     "为了头条编一个名字"
+    ],
+    "prefers": [
+     "先拿证据"
+    ],
+    "pressure_responses": {
+     "breaking": "把底片寄给纽约的报社，连夜搭火车走",
+     "high": "当众念出一个会员的名字",
+     "low": "请对方抽烟，说只是随便聊聊",
+     "mid": "掏出铅笔，问一个对方不想回答的问题"
+    },
+    "relationship_stance": "嘴上刻薄，心里软",
+    "withdrawal": "坐在报社的打字机前，打满一页又撕掉，一直打到天亮"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "reporter",
+   "identity": {
+    "authority": "决定明天的版面上写谁的名字",
+    "exposure": "{npc.ta}偷拍过一页正册，底片还没洗",
+    "hidden": "{npc.ta}自己也是正册上的会员，用的是笔名",
+    "limits": [
+     "主编的老板也在总会的正册上",
+     "登错一个名字，就可能被人在后巷堵住"
+    ],
+    "obligations": [
+     "每晚十一点前交稿"
+    ],
+    "resources": [
+     "一个专栏和一台借来的相机",
+     "警局、总会和码头的线人"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方不怕上报纸",
+     "对方读过{npc.ta}写的每一篇稿子"
+    ],
+    "boundaries": [
+     "不在报社，不在总会"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "知道{npc.ta}笔名的那个人",
+    "dislikes": [
+     "被人当成工具"
+    ],
+    "expression": "把一篇永远不会登出来的稿子念给对方听",
+    "likes": [
+     "凌晨刚印出来的报纸油墨味"
+    ],
+    "preconditions": [
+     "稿子已经交了"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "晚报记者",
+   "schedule": [
+    {
+     "from": 540,
+     "location_id": "cigar_shop",
+     "to": 1020
+    },
+    {
+     "from": 1200,
+     "location_id": "main_hall",
+     "to": 1380
+    },
+    {
+     "from": 1381,
+     "location_id": "phone_corridor",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "晚报就待不下去了",
+      "option": "偷偷把稿子给别家报社"
+     },
+     {
+      "cost": "没人会信一封匿名信",
+      "option": "改成匿名投书"
+     }
+    ],
+    "pressure": "不登，三个月的跑腿就白费了",
+    "trigger": "主编压下了{npc.ta}的稿子，说老板不许碰那间总会"
+   },
+   "tags": [],
+   "voices": {
+    "inner": "“要是把那一页登出去，我自己的名字也在上面。”",
+    "surface": "“我不写你，我写你身后那本册子。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "1928 年 11 月，禁酒令第九年",
+  "minute": 1290
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "romance_light",
+  "intimate",
+  "coercion_theme",
+  "violence",
+  "nightlife",
+  "crime"
+ ],
+ "custom": false,
+ "customs": [
+  "新会员第一晚要请全厅喝一轮，杯子由司册亲手递过去。",
+  "被划掉的人，第二天早上会收到一个空信封，里面什么都没有。",
+  "乐台点歌要在纸巾上写桌号，写名字的会被侍应撕掉。",
+  "打烊的最后一支曲子固定是慢歌，曲子一停，司册就进账房。",
+  "会员之间在街上碰见，不打招呼，只碰一下帽檐。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "侍应端来一托盘咖啡杯",
+    "司册亲手把第一杯递过来",
+    "有人举杯，有人没动"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_first_round",
+   "location_ids": [
+    "main_hall"
+   ],
+   "start_minute": 1320,
+   "tags": [],
+   "title": "新会员请全厅喝一轮"
+  },
+  {
+   "beats": [
+    "鼓手把节奏放慢了",
+    "大厅的灯熄了一半",
+    "司册已经站到了账房门口"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [],
+   "id": "a_last_slow_song",
+   "location_ids": [
+    "main_hall",
+    "dressing_room"
+   ],
+   "start_minute": 1410,
+   "tags": [],
+   "title": "打烊前的慢歌"
+  },
+  {
+   "beats": [
+    "大衣口袋里多了一张折起来的纸",
+    "电话在你身后响了",
+    "侍应把找零塞进你手心，多了一枚硬币"
+   ],
+   "duration_minutes": 15,
+   "hook_ids": [],
+   "id": "a_coat_note",
+   "location_ids": [
+    "phone_corridor"
+   ],
+   "start_minute": 1380,
+   "tags": [],
+   "title": "去衣帽间取大衣"
+  },
+  {
+   "beats": [
+    "卡车熄了火，车灯还亮着",
+    "一箱酒从车厢里递下来",
+    "巷口有人停住了脚步"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [],
+   "id": "a_unload",
+   "location_ids": [
+    "back_alley"
+   ],
+   "start_minute": 60,
+   "tags": [],
+   "title": "后巷卸酒"
+  },
+  {
+   "beats": [
+    "晚报头版是一桩南区的火灾",
+    "店员把报纸折好，夹进一张卡片",
+    "对街咖啡馆的窗帘动了一下"
+   ],
+   "duration_minutes": 15,
+   "hook_ids": [],
+   "id": "a_buy_paper",
+   "location_ids": [
+    "cigar_shop"
+   ],
+   "start_minute": 1080,
+   "tags": [],
+   "title": "在雪茄店买晚报"
+  },
+  {
+   "beats": [
+    "钢笔划纸的声音一直没停",
+    "台灯的灯罩烫得发红",
+    "司册翻过一页，停在你的名字上"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [],
+   "id": "a_ledger_wait",
+   "location_ids": [
+    "ledger_room"
+   ],
+   "start_minute": 30,
+   "tags": [],
+   "title": "在账房等司册誊册"
+  },
+  {
+   "beats": [
+    "镜子上又多插了一张照片",
+    "咖啡杯里是正经的威士忌",
+    "台上的鼓点从门缝里传进来"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "a_backstage_drink",
+   "location_ids": [
+    "dressing_room"
+   ],
+   "start_minute": 1260,
+   "tags": [],
+   "title": "后台喝一杯"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "1928 年",
+ "extends": null,
+ "forbidden_terms": [
+  "手机",
+  "电视",
+  "网络",
+  "电脑",
+  "塑料",
+  "直播",
+  "飞机",
+  "微信",
+  "互联网",
+  "民国",
+  "衙门",
+  "铜钱"
+ ],
+ "hooks": [
+  {
+   "id": "h_pen_pause",
+   "kind": "approach",
+   "location_ids": [
+    "ledger_room",
+    "main_hall"
+   ],
+   "slot": "register_keeper",
+   "text": "{npc.name}的钢笔在你那一行上方停了很久，最后只轻轻点了一下，没有落墨"
+  },
+  {
+   "id": "h_say_my_name",
+   "kind": "approach",
+   "location_ids": [
+    "ledger_room"
+   ],
+   "slot": "register_keeper",
+   "text": "{npc.name}合上正册，低声问你：“你知道我叫什么吗？”"
+  },
+  {
+   "id": "h_song_for_door",
+   "kind": "approach",
+   "location_ids": [
+    "main_hall"
+   ],
+   "slot": "jazz_singer",
+   "text": "{npc.name}在台上朝你这边点了点头：“这一支，给门口那位。”"
+  },
+  {
+   "id": "h_scarf",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "jazz_singer",
+   "text": "{npc.name}把手腕上的丝巾解下来，系在你的大衣扣子上"
+  },
+  {
+   "id": "h_empty_truck",
+   "kind": "approach",
+   "location_ids": [
+    "back_alley"
+   ],
+   "slot": "bootlegger",
+   "text": "{npc.name}拍了拍空卡车的车门：“上来，带你兜一圈，不谈生意。”"
+  },
+  {
+   "id": "h_burn_page",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "fed_agent",
+   "text": "{npc.name}从小本子上撕下一页，当着你的面点着了"
+  },
+  {
+   "id": "h_scarf_cloth",
+   "kind": "approach",
+   "location_ids": [
+    "back_alley",
+    "cigar_shop"
+   ],
+   "slot": "expelled_merchant",
+   "text": "{npc.name}从大衣里掏出一块布料，在你脖子上比了比，说正好做一条围巾"
+  },
+  {
+   "id": "h_unpublished",
+   "kind": "approach",
+   "location_ids": [],
+   "slot": "reporter",
+   "text": "{npc.name}掏出一张皱巴巴的稿纸：“这一篇永远登不出来，我念给你听。”"
+  },
+  {
+   "id": "h_monthly_ask",
+   "kind": "request",
+   "location_ids": [],
+   "slot": "bootlegger",
+   "text": "{npc.name}把一个信封推过来：“替我把这个送到对街，别问里面是什么。”"
+  },
+  {
+   "id": "h_plate_number",
+   "kind": "observe",
+   "location_ids": [],
+   "slot": "fed_agent",
+   "text": "{npc.name}在小本子上记下了一个车牌号，抬头看了你一眼"
+  },
+  {
+   "id": "h_flash_pop",
+   "kind": "accident",
+   "location_ids": [
+    "main_hall"
+   ],
+   "slot": "reporter",
+   "text": "{npc.name}的相机闪光灯突然炸了一下，全厅的人都转过头来"
+  },
+  {
+   "id": "h_old_friend",
+   "kind": "request",
+   "location_ids": [
+    "back_alley"
+   ],
+   "slot": "expelled_merchant",
+   "text": "{npc.name}隔着三步远压低声音：“替我问司册一句话，就一句。”"
+  }
+ ],
+ "id": "the_register",
+ "locations": [
+  {
+   "affordances": [
+    "把引荐卡推过柜台",
+    "买一份晚报，顺便看清对街窗口里的人",
+    "在帘子掀开前最后改一次主意"
+   ],
+   "detail": "临街的雪茄店，玻璃柜里摆着古巴雪茄和报纸，柜台后面那道绿丝绒帘子才是真正的门。",
+   "exits": [
+    "main_hall",
+    "back_alley"
+   ],
+   "id": "cigar_shop",
+   "name": "雪茄店前柜",
+   "pressure_modifiers": {
+    "p_agent_watch": "对街咖啡馆靠窗的那个座位，同一个人已经坐了三天。"
+   },
+   "privacy": "public",
+   "tags": [],
+   "visibility": "白天进出的是买烟买报的路人，对街咖啡馆的窗户正对着店门",
+   "witnesses": [
+    "bg_counter_clerk",
+    "bg_newsboy"
+   ]
+  },
+  {
+   "affordances": [
+    "在乐台下点一支曲子",
+    "用咖啡杯碰一次杯",
+    "看清今晚谁坐了谁的老位置"
+   ],
+   "detail": "楼梯往下二十级，水晶灯、乐台、一张长吧台，酒装在咖啡杯里端上来，烟雾压得灯光发黄。",
+   "exits": [
+    "cigar_shop",
+    "ledger_room",
+    "phone_corridor",
+    "dressing_room"
+   ],
+   "id": "main_hall",
+   "name": "地下总会大厅",
+   "pressure_modifiers": {
+    "p_public_strike": "乐台停了，满厅的人都往账房那扇门看。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "会员、乐手、侍应和私酒贩子都在场，谁跟谁坐一桌，打烊前司册都会知道",
+   "witnesses": [
+    "bg_bartender",
+    "bg_bouncer"
+   ]
+  },
+  {
+   "affordances": [
+    "看一眼正册上自己的那一行",
+    "在司册誊册的时候坐着等",
+    "趁台灯照不到的地方说一句真话"
+   ],
+   "detail": "大厅尽头一扇包铁皮的门，里面一张桃木桌，桌上摊着烫金的会员正册，台灯只照得见册子那一圈。",
+   "exits": [
+    "main_hall"
+   ],
+   "id": "ledger_room",
+   "name": "账房",
+   "pressure_modifiers": {
+    "p_double_strike": "正册摊开在两页之间，一道墨线还没干。",
+    "p_register_missing": "桃木桌上那块压册子的铜镇纸还在，册子不见了。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "只有司册和被叫进来的人；门一关，大厅的乐声只剩低音",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "假装打一个电话",
+    "在大衣口袋里塞一张纸条",
+    "在衣帽间的大衣中间站一会儿"
+   ],
+   "detail": "大厅侧面一条窄走廊，墙上一部摇把电话，旁边是衣帽间，挂满了湿大衣。",
+   "exits": [
+    "main_hall"
+   ],
+   "id": "phone_corridor",
+   "name": "电话走廊",
+   "pressure_modifiers": {
+    "p_shipment_hijack": "电话响了第三遍，没人敢去接。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "等电话的人和寄存大衣的侍应来来去去，说话声音高一点，大厅里就听得见",
+   "witnesses": [
+    "bg_coat_check"
+   ]
+  },
+  {
+   "affordances": [
+    "对着镜子说一句不敢在台上说的话",
+    "替对方把一张照片从镜框上取下来",
+    "从小门溜到后巷"
+   ],
+   "detail": "乐台背后一间小屋，镜子边上插满了照片和欠条，一扇小门通向后巷。",
+   "exits": [
+    "main_hall",
+    "back_alley"
+   ],
+   "id": "dressing_room",
+   "name": "乐手后台",
+   "pressure_modifiers": {
+    "p_unclaimed_line": "镜子边上插着一张引荐卡，签名那一栏被人用墨涂掉了。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "台上的歌手和乐手，偶尔有会员被请进来喝一杯",
+   "witnesses": [
+    "bg_drummer"
+   ]
+  },
+  {
+   "affordances": [
+    "和一个被除名的人说话，赌没人看见",
+    "帮着卸一箱酒",
+    "在路灯闪灭的那一下交出一样东西"
+   ],
+   "detail": "垃圾桶、运酒卡车的车辙和一盏总是闪的路灯，被除名的人就站在这里，离后门三步远。",
+   "exits": [
+    "dressing_room",
+    "cigar_shop"
+   ],
+   "id": "back_alley",
+   "name": "后巷",
+   "pressure_modifiers": {
+    "p_shipment_hijack": "卡车的后门开着，车厢里一半是空的。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "夜里只有抽烟的乐手、卸货的工人和不该在这里的人",
+   "witnesses": [
+    "bg_struck_member"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "米勒",
+   "罗斯",
+   "卡特",
+   "黑尔",
+   "韦伯",
+   "福斯",
+   "霍尔",
+   "格林",
+   "贝克",
+   "奥康纳",
+   "斯通",
+   "莱尔",
+   "道尔"
+  ],
+  "given_female": [
+   "艾达",
+   "露丝",
+   "梅布尔",
+   "海伦",
+   "伊迪丝",
+   "格蕾丝",
+   "薇拉",
+   "玛奇",
+   "黛西",
+   "莉莲",
+   "艾琳",
+   "茱恩"
+  ],
+  "given_male": [
+   "亚瑟",
+   "沃尔特",
+   "弗兰克",
+   "哈罗德",
+   "乔治",
+   "埃迪",
+   "莱奥",
+   "欧文",
+   "西奥",
+   "雷蒙德",
+   "维克",
+   "塞缪尔"
+  ],
+  "given_neutral": [
+   "弗兰基",
+   "莱斯利",
+   "西德尼",
+   "马里昂",
+   "埃弗里",
+   "乔丹",
+   "洛根",
+   "泰勒",
+   "雷恩",
+   "凯西",
+   "艾利",
+   "杰西"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "male",
+    "pattern": "{family}先生"
+   },
+   {
+    "gender": "female",
+    "pattern": "{family}小姐"
+   },
+   {
+    "gender": "any",
+    "pattern": "{given}"
+   }
+  ],
+  "order": "given_first"
+ },
+ "notes": "第二批世界（用户 2026-10-03 素材库的改写，见 content-src/concepts/batch2-concepts.md 第 3 个）。名在前、姓在后（name_pools.order）。性别按会话偏好生成（D15）。",
+ "player_identities": [
+  {
+   "age_range": [
+    22,
+    40
+   ],
+   "baseline": "你拿着一张引荐卡进了总会，名字刚写上正册最后一页，引荐你的人昨晚被划掉了。",
+   "gender": "any",
+   "id": "new_member",
+   "reputation": "干净，没人知道你的底细",
+   "resources": [
+    "一张刚写上的名字",
+    "一个还没人认识的脸"
+   ],
+   "risks": [
+    "引荐人出了事，你可能跟着被划掉"
+   ],
+   "role": "刚入会的新人",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "male",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}小姐"
+    },
+    {
+     "gender": "any",
+     "pattern": "{given}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    45
+   ],
+   "baseline": "在乐台上弹钢琴，每晚从琴键上方看着整个大厅。",
+   "gender": "any",
+   "id": "piano_player",
+   "reputation": "安静，耳朵灵",
+   "resources": [
+    "乐台上的视野",
+    "和歌手、侍应都说得上话"
+   ],
+   "risks": [
+    "欠鼓手一笔赌债"
+   ],
+   "role": "乐队钢琴手",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "male",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}小姐"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    30,
+    55
+   ],
+   "baseline": "你在正册上待了五年，引荐过三个人，其中一个上周出了事。",
+   "gender": "any",
+   "id": "club_member",
+   "reputation": "体面，讲规矩",
+   "resources": [
+    "一张熟面孔和几个能托事的朋友",
+    "引荐别人的资格"
+   ],
+   "risks": [
+    "你引荐的人出了事，你的名字也在风口上"
+   ],
+   "role": "老会员",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "male",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}小姐"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    28,
+    50
+   ],
+   "baseline": "替保险公司查南区的火灾和失窃案，最近几桩都和那间总会有关。",
+   "gender": "any",
+   "id": "insurance_man",
+   "reputation": "仔细，难糊弄",
+   "resources": [
+    "一张理赔单和一份查案的正当理由",
+    "警局档案室的熟人"
+   ],
+   "risks": [
+    "公司要你尽快结案，不许深挖"
+   ],
+   "role": "保险公司理赔员",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "male",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}小姐"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    25,
+    45
+   ],
+   "baseline": "总会的东家是你的舅舅，派你来盯着司册和账房。",
+   "gender": "any",
+   "id": "owner_relative",
+   "reputation": "被人敬着，也被人防着",
+   "resources": [
+    "东家的一句话",
+    "账房的另一把钥匙"
+   ],
+   "risks": [
+    "东家要你在月底前拿到司册的把柄"
+   ],
+   "role": "东家的亲戚",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "male",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}小姐"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    38,
+    60
+   ],
+   "baseline": "南区的市议员，下个月要连任，选票一半来自总会会员。",
+   "gender": "any",
+   "id": "alderman",
+   "reputation": "笑容多，承诺少",
+   "resources": [
+    "市政厅的门路和一张能让警局闭嘴的嘴",
+    "选区里的每一个名字"
+   ],
+   "risks": [
+    "对街那个探员正在查你的竞选经费"
+   ],
+   "role": "市议员",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}议员"
+    },
+    {
+     "gender": "male",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}女士"
+    }
+   ]
+  }
+ ],
+ "premise": "名字写在册上，你才在这座城里存在；划掉它的那支笔，握在一个人手里。",
+ "pressures": [
+  {
+   "choice": "去求一个会员作保，还是自己去找司册谈",
+   "exits": [
+    {
+     "cost": "作保的人从此和你连坐",
+     "option": "找一个老会员作保"
+    },
+    {
+     "cost": "司册开口就会问你拿什么来换",
+     "option": "直接去账房找司册"
+    }
+   ],
+   "far": {
+    "consequence": "你的名字会被一道墨线划掉，从此进不了南区任何一家总会",
+    "due_days": 10,
+    "trigger": "三个月期满还找不到引荐人"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_unclaimed_line",
+   "immediate": {
+    "minutes": 20,
+    "text": "侍应递来一个空信封，说是有人留给你的"
+   },
+   "leverage": null,
+   "location_ids": [
+    "dressing_room",
+    "main_hall"
+   ],
+   "near": {
+    "deadline_minutes": 240,
+    "text": "今晚打烊后正册重誊"
+   },
+   "objective": "在三个月期满之前，找到一个肯为你作保的新引荐人",
+   "source": "person",
+   "start_minute": 1260,
+   "tags": [],
+   "title": "引荐人被划掉了",
+   "trigger": "引荐你的人昨晚被划掉了，你的那一行还在，但下面的墨迹有点晕开"
+  },
+  {
+   "choice": "答应司册的条件，还是赌{register_keeper.name}不敢落墨",
+   "exits": [
+    {
+     "cost": "从此你在册上的那一行是{register_keeper.name}的",
+     "option": "答应司册替{register_keeper.ta}办一件事"
+    },
+    {
+     "cost": "东家会问你为什么怕",
+     "option": "去找东家"
+    }
+   ],
+   "far": {
+    "consequence": "被划掉的名字会传遍南区，你在城里的生意和朋友都会断",
+    "due_days": 2,
+    "trigger": "东家早上过目"
+   },
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "hook_ids": [],
+   "id": "p_double_strike",
+   "immediate": {
+    "minutes": 15,
+    "text": "司册把正册转过来，让你看那道铅笔线"
+   },
+   "leverage": {
+    "basis": "{register_keeper.name}手里的那支笔，随时可以把你那一行描成一道墨线",
+    "holder": "register_keeper",
+    "subject": "player"
+   },
+   "location_ids": [
+    "ledger_room",
+    "main_hall"
+   ],
+   "near": {
+    "deadline_minutes": 180,
+    "text": "今晚打烊后落墨"
+   },
+   "objective": "在打烊之前，让这道虚线被擦掉",
+   "source": "institution",
+   "start_minute": 1350,
+   "tags": [
+    "coercion_theme"
+   ],
+   "title": "那一道墨线",
+   "trigger": "正册上你那一行底下，多了一道铅笔画的虚线，只要再描一遍墨就成了真的"
+  },
+  {
+   "choice": "去对街看一眼，还是告诉总会的人",
+   "exits": [
+    {
+     "cost": "东家会损失一整晚的生意，怪你多嘴",
+     "option": "告诉司册今晚停业"
+    },
+    {
+     "cost": "你会被记进探员的小本子",
+     "option": "去对街咖啡馆问老板"
+    }
+   ],
+   "far": {
+    "consequence": "会员正册要是被搜走，全城一半的体面人都会被点名",
+    "due_days": 3,
+    "trigger": "禁酒署突击搜查"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_agent_watch",
+   "immediate": {
+    "minutes": 20,
+    "text": "卖报人凑过来，说对街那位下午走了，没付咖啡钱"
+   },
+   "leverage": null,
+   "location_ids": [
+    "cigar_shop",
+    "back_alley"
+   ],
+   "near": {
+    "deadline_minutes": 300,
+    "text": "今晚午夜是例行的卸货时间"
+   },
+   "objective": "在探员冲进来之前，弄清那扇窗户为什么空了",
+   "source": "institution",
+   "start_minute": 1140,
+   "tags": [],
+   "title": "对街的窗户",
+   "trigger": "对街咖啡馆里的探员已经坐了三天，今天下午那个座位空了"
+  },
+  {
+   "choice": "当众搜身，还是悄悄去找",
+   "exits": [
+    {
+     "cost": "所有会员都会知道出事了",
+     "option": "关门搜查全场"
+    },
+    {
+     "cost": "要是找错了人，就再也没机会",
+     "option": "悄悄查衣帽间和后台"
+    }
+   ],
+   "far": {
+    "consequence": "所有在册的名字都会见光",
+    "due_days": 2,
+    "trigger": "正册出现在晚报或禁酒署手里"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_register_missing",
+   "immediate": {
+    "minutes": 15,
+    "text": "司册从账房出来，脸色是白的，在你耳边说了一句话"
+   },
+   "leverage": null,
+   "location_ids": [
+    "ledger_room",
+    "main_hall"
+   ],
+   "near": {
+    "deadline_minutes": 480,
+    "text": "东家早上七点过目"
+   },
+   "objective": "在东家早上过目之前，把正册找回来",
+   "source": "institution",
+   "start_minute": 1380,
+   "tags": [],
+   "title": "正册不见了",
+   "trigger": "账房的桃木桌上只剩一块铜镇纸，烫金的会员正册不见了"
+  },
+  {
+   "choice": "告诉私酒商，还是先私下问吧台侍应",
+   "exits": [
+    {
+     "cost": "截车的人会知道是你说的",
+     "option": "告诉私酒商"
+    },
+    {
+     "cost": "要是被人看见，你就成了截车的人",
+     "option": "把那几瓶酒偷偷换掉"
+    }
+   ],
+   "far": {
+    "consequence": "后巷会流一次血，总会也会被牵连",
+    "due_days": 3,
+    "trigger": "私酒商自己查出来"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_shipment_hijack",
+   "immediate": {
+    "minutes": 15,
+    "text": "电话响了，那头的人只说了一句“看看吧台”"
+   },
+   "leverage": null,
+   "location_ids": [
+    "back_alley",
+    "phone_corridor"
+   ],
+   "near": {
+    "deadline_minutes": 120,
+    "text": "今晚打烊前私酒商会来对账"
+   },
+   "objective": "在私酒商发现之前，弄清是谁截的车",
+   "source": "money",
+   "start_minute": 1300,
+   "tags": [],
+   "title": "被截的那车酒",
+   "trigger": "上周被截的那车酒，今晚出现在了总会的吧台上，酒瓶封蜡上的印记一眼就认得出"
+  },
+  {
+   "choice": "替那个人说话，还是低头喝你的咖啡",
+   "exits": [
+    {
+     "cost": "你的名字和那个人连在一起",
+     "option": "站出来作保"
+    },
+    {
+     "cost": "司册会记住是谁拖的",
+     "option": "找人在打烊前把这件事拖到明晚"
+    }
+   ],
+   "far": {
+    "consequence": "一串名字会接连被划，谁都不知道下一个是谁",
+    "due_days": 7,
+    "trigger": "被划掉的人的引荐人跟着被追查"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [],
+   "id": "p_public_strike",
+   "immediate": {
+    "minutes": 10,
+    "text": "满厅的人都放下了杯子，司册的钢笔已经拧开了"
+   },
+   "leverage": null,
+   "location_ids": [
+    "main_hall",
+    "cigar_shop"
+   ],
+   "near": {
+    "deadline_minutes": 60,
+    "text": "墨线落下，今晚就生效"
+   },
+   "objective": "在墨线落下之前，决定站不站出来",
+   "source": "person",
+   "start_minute": 1320,
+   "tags": [],
+   "title": "当众划名",
+   "trigger": "乐台停了，司册站到大厅中间，翻开正册，说今晚要当众划一个名字"
+  }
+ ],
+ "region": "芝加哥南区，雪茄店暗门后的一间地下总会",
+ "rules": [
+  {
+   "id": "r_two_sponsors",
+   "text": "入会要两名会员引荐；被引荐的人出了事，引荐人的名字一起划掉。"
+  },
+  {
+   "id": "r_night_ledger",
+   "text": "正册只在打烊后改，白天发生的一切，要到深夜才被承认。"
+  },
+  {
+   "id": "r_struck_silence",
+   "text": "被除名的人三个月内不得再被引荐，也不得在街上和会员说话。"
+  },
+  {
+   "id": "r_coffee_cups",
+   "text": "酒一律装在咖啡杯里端上来，谁端着玻璃杯，谁就是外人。"
+  },
+  {
+   "id": "r_monthly_fee",
+   "text": "警局的月费由私酒商按月付，哪一个月断了，那个月就会有人被抓。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": null,
+ "status": "review",
+ "style_hint": "写声音和墨：乐台的小号、摇把电话的铃、钢笔划纸的沙沙声；对话短，客气，每句话后面都有一个名字。",
+ "tension_engines": [
+  {
+   "id": "te_sponsor_chain",
+   "text": "引荐即连坐：一个人出事，一串名字跟着摇晃"
+  },
+  {
+   "id": "te_one_pen",
+   "text": "那支笔握在一个人手里，求那个人的人越来越多"
+  },
+  {
+   "id": "te_across_street",
+   "text": "对街的探员已经坐了三天，谁都在算那扇窗户什么时候空"
+  },
+  {
+   "id": "te_back_alley",
+   "text": "被划掉的人每晚站在后巷，离后门只有三步"
+  },
+  {
+   "id": "te_pen_name",
+   "text": "每个人都在册上留了一个名字，不一定是真名"
+  }
+ ],
+ "title": "在册",
+ "tone": [
+  "烟雾",
+  "爵士",
+  "连坐",
+  "低声的威胁"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_keeper_origin",
+   "requires": [
+    "register_keeper"
+   ],
+   "text": "有人在晚报上登了一张十年前的通缉照片，照片上的人很像{register_keeper.name}。"
+  },
+  {
+   "category": "人事",
+   "id": "t_agent_inside",
+   "requires": [
+    "fed_agent"
+   ],
+   "text": "正册上一个用了三年的会员名字，被人认出就是{fed_agent.name}。"
+  },
+  {
+   "category": "制度",
+   "id": "t_owner_arrest",
+   "requires": [
+    "pressure"
+   ],
+   "text": "总会的东家在别的案子里被捕了，账房的钥匙一夜之间没人管。"
+  },
+  {
+   "category": "信息",
+   "id": "t_merchant_page",
+   "requires": [
+    "expelled_merchant"
+   ],
+   "text": "{expelled_merchant.name}手里那一页副本被人抢走了，抢的人是总会的会员。"
+  },
+  {
+   "category": "时限",
+   "id": "t_raid_tonight",
+   "requires": [],
+   "text": "有人打电话来说，禁酒署今晚凌晨两点突击。"
+  },
+  {
+   "category": "资源",
+   "id": "t_singer_offer",
+   "requires": [
+    "jazz_singer"
+   ],
+   "text": "纽约一家剧院给{jazz_singer.name}发来电报，下周一开排。"
+  },
+  {
+   "category": "意外",
+   "id": "t_truck_fire",
+   "requires": [
+    "bootlegger"
+   ],
+   "text": "{bootlegger.name}停在后巷的卡车半夜起火，车厢里装的不是酒。"
+  },
+  {
+   "category": "信息",
+   "id": "t_reporter_named",
+   "requires": [
+    "reporter"
+   ],
+   "text": "晚报登出了一份总会会员名单，署名是{reporter.name}的笔名，可{reporter.name}说那不是自己写的。"
+  }
+ ]
+}
