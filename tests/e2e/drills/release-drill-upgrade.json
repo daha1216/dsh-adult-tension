@@ -1,0 +1,13 @@
+{
+ "id": "drill-upgrade",
+ "title": "发布前的真实演练（SKILL_PACKAGING.md §9），第二段：从旧版升级",
+ "focus": "旧版那段由测试框架直接玩（开局、推进、存档，不经模型；PROGRESS P7），然后用发布候选版的 Skill 目录整个替换旧的（含一次数据库迁移）；宿主在新对话里读档，再推进 1 回合。用户不做任何 Python、SQLite 或环境变量操作",
+ "setup": {"install": "previous", "data_dir": "default", "include_drafts": false},
+ "steps": [
+  {"harness": "play_previous", "mode": "daily", "turns": 3, "save": "演练"},
+  {"harness": "upgrade_skill"},
+  {"say": "读档 演练", "expect": {"kind": "load", "calls_max": 2, "must_call": ["load-slot"]}},
+  {"say": "继续", "expect": {"kind": "turn", "calls_max": 1}}
+ ],
+ "player_turns": 2
+}

@@ -243,7 +243,7 @@ def _pi_text(content):
 
 
 def parse_pi_stream(events):
-    """JSON events -> {session_id, model, text, host_calls, cost, error}. The
+    """JSON events -> {session_id, model, text, host_calls, cost, error, finish}. The
     completed messages (message_end) are the record: the assistant's text
     blocks are what the player saw, its tool calls pair with the tool
     results by id. The turn failed when its last assistant message stopped
@@ -254,8 +254,10 @@ def parse_pi_stream(events):
     with + when they differ, since the name asked for may be an alias the
     endpoint serves with different models ("gemini-3.8-flash-high" as
     "…-exp-a" or "gemini-3.8-flash"); the name asked for only when no
-    message names an answering model (a failed message names none)."""
-    session_id = error = asked = None
+    message names an answering model (a failed message names none). finish
+    is how the last assistant message ended and how many tokens it wrote,
+    to tell an endpoint that stopped early (PROGRESS P10) from the model."""
+    session_id = error = asked = finish = None
     answered = []
     texts = []
     calls = {}
@@ -277,6 +279,7 @@ def parse_pi_stream(events):
                         answered.append(name)
                 cost +=((message.get("usage") or {}).get("cost") or {}).get("total") or 0
                 stop = message.get("stopReason")
+                finish = {"stop": stop, "output_tokens": (message.get("usage") or {}).get("output")}
                 if stop in ("error", "aborted", "length"):
                     error = "宿主报告这一轮出错（%s）：%s" % (stop, (message.get("errorMessage") or "")[:300])
                     continue
@@ -294,7 +297,8 @@ def parse_pi_stream(events):
         elif kind == "auto_retry_end" and not event.get("success"):
             error = "宿主重试后仍失败：%s" % (event.get("finalError") or "")[:300]
     model = "+".join(sorted(answered)) if answered else asked
-    return {"session_id": session_id, "model": model, "text": "\n\n".join(texts), "host_calls": [calls[i] for i in order], "cost": cost or None, "error": error}
+    return {"session_id": session_id, "model": model, "text": "\n\n".join(texts), "host_calls": [calls[i] for i in order], "cost": cost or None,
+            "error": error, "finish": finish}
 
 
 def _pi_argv(exe):

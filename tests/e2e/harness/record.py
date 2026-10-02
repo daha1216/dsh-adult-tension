@@ -303,7 +303,16 @@ def to_markdown(record):
         "- 宿主：%s %s；模型：%s；日期：%s" % (host.get("name"), host.get("version"), host.get("model"), record.get("date")),
         "",
     ]
-    events = {e.get("after_turn"): e for e in record.get("harness_events") or []}
+    events = {}
+    for event in record.get("harness_events") or []:
+        events.setdefault(event.get("after_turn"), []).append(event)
+
+    def harness(after_turn):
+        for event in events.get(after_turn, []):
+            lines.append("> 测试框架：%s（%s）" % (event.get("event"), event.get("detail", "")))
+            lines.append("")
+
+    harness(0)
     for turn in record.get("turns") or []:
         lines.append("## 第 %d 轮（对话 %s）" % (turn["index"], turn.get("conversation", "A")))
         lines.append("")
@@ -321,8 +330,5 @@ def to_markdown(record):
         lines.append("")
         lines.append(turn.get("text") or "（无）")
         lines.append("")
-        if turn["index"] in events:
-            event = events[turn["index"]]
-            lines.append("> 测试框架：%s（%s）" % (event.get("event"), event.get("detail", "")))
-            lines.append("")
+        harness(turn["index"])
     return "\n".join(lines) + "\n"

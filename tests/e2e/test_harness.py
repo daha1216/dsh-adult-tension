@@ -1,4 +1,4 @@
-"""The end-to-end harness itself: machine checks, stream parsers, runner.
+"""The end-to-end harness itself: machine checks, stream parsers, runner, batches.
 
 These tests never call a model. Machine checks are exercised on small
 records built here, each with and without the problem the check looks for.
@@ -16,6 +16,7 @@ import unittest
 import urllib.error
 
 import _bootstrap  # noqa: F401
+import batch
 import hosts as H
 import machine_checks as M
 import record as R
@@ -737,6 +738,13 @@ class ReportTest(unittest.TestCase):
         self.assertTrue(report.ran_script(rec, script))
         rec["turns"][2]["input"] = "用种子 8 再开一局"
         self.assertFalse(report.ran_script(rec, script))
+        # and the parameters of a harness step: what the harness played on the older Skill
+        rec["turns"][2]["input"] = "用种子 7 再开一局"
+        script["steps"].insert(0, {"harness": "play_previous", "mode": "daily", "turns": 4, "save": "升级前"})
+        rec["harness_events"].insert(0, {"after_turn": 0, "event": "play_previous", "detail": "……", "params": {"mode": "daily", "turns": 4, "save": "升级前"}})
+        self.assertTrue(report.ran_script(rec, script))
+        script["steps"][0]["turns"] = 3
+        self.assertFalse(report.ran_script(rec, script))
 
     def test_a_run_the_host_left_empty_is_made_up_by_another(self):
         calibration = [self.calibration()]
@@ -754,10 +762,10 @@ class ReportTest(unittest.TestCase):
 
         # turn 3 ended in an empty message: the run is shown, not counted, and the script is one run short
         built = rewrite(empty)
-        self.assertEqual((built["made_up"], built["not_counted"]), (["h1-st-r2.json"], [{"file": "h1-st-r2.json", "why": "宿主空回复（第 3 轮），按用户的决定补跑"}]))
+        self.assertEqual((built["made_up"], built["not_counted"]), (["h1-st-r2.json"], [{"file": "h1-st-r2.json", "why": "接口没有给出完整的回复（第 3 轮空消息），按用户的决定补跑"}]))
         self.assertEqual({c["condition"]: c["detail"] for c in built["conditions"] if not c["ok"]}, {"每条剧本在每个宿主上至少 3 次": "h1 上剧本 t 2 次"})
         self.assertEqual(built["first_run_machine_pass"], "2/2")
-        self.assertIn("宿主空回复：1 条运行有一轮以空消息结束", report.to_markdown(built))
+        self.assertIn("接口没有给出完整的回复：1 条运行有一轮以空消息结束", report.to_markdown(built))
         # a run more makes it up, and counts whatever its result
         R.save(self.record("h1", 4), os.path.join(records, "h1", "h1-st-r4.json"))
         self.write_reviews(os.path.join(reviews, "h1"), {"h1-st-r4": self.review(score=5)})
@@ -775,7 +783,37 @@ class ReportTest(unittest.TestCase):
         # a turn the host broke off is not an empty message: it counts
         built = rewrite(lambda turns: turns[2].update(text="", host_error="503 auth_unavailable"))
         self.assertEqual((built["made_up"], built["machine_failures"]), ([], ["h1-st-r2.json"]))
-        self.assertNotIn("宿主空回复", report.to_markdown(built))
+        self.assertNotIn("接口没有给出完整的回复", report.to_markdown(built))
+
+    def test_the_thinking_sent_as_the_text_or_a_reply_cut_off_is_made_up_too(self):
+        calibration = [self.calibration()]
+        records, reviews = self.records()
+        path = os.path.join(records, "h1", "h1-st-r2.json")
+
+        def rewrite(text, **turn):
+            rec = self.record("h1", 2)
+            rec["turns"][2].update(text=text, **turn)
+            R.save(rec, path)
+            built = self.build(records, reviews, calibration)
+            return built, {x["file"]: x["why"] for x in built["not_counted"]}.get("h1-st-r2.json")
+
+        # D66: the reply opens with a line "thought" and the model's reasoning (no footer: the run failed)
+        built, why = rewrite("Thought\nThe player wants to go on, so I commit a plain turn.\n\n远处的对讲机响了两声，梁志强转身去看吊机。")
+        self.assertEqual((built["made_up"], built["machine_failures"], why), (["h1-st-r2.json"], [], "接口没有给出完整的回复（第 3 轮思考外露），按用户的决定补跑"))
+        # D70: the engine committed the turn and the reply stops mid-sentence, footer and all gone
+        built, why = rewrite("远处的对讲机响了两声，梁志强转身去看")
+        self.assertEqual((built["made_up"], built["machine_failures"], why), (["h1-st-r2.json"], [], "接口没有给出完整的回复（第 3 轮回复中途断掉），按用户的决定补跑"))
+        self.assertIn("接口没有给出完整的回复：1 条运行", report.to_markdown(built))
+        # the model's own failures count: only the footer left out, its sentences finished (a closing quote too);
+        # a hint line last; "thought" further down; no turn committed (the engine refused it); a host error
+        for text, turn in (("远处的对讲机响了两声，梁志强转身去看吊机。", {}),
+                           ("梁志强说：“吊机那边我去看。”", {}),
+                           ("远处的对讲机响了两声，梁志强转身去看\n\n可以：继续 / 存档", {}),
+                           ("远处的对讲机响了两声。\nthought\n梁志强转身去看吊机。", {}),
+                           ("远处的对讲机响了两声，梁志强转身去看", {"runtime_calls": [commit_call(3, 1210, ok=False, code="INVARIANT_VIOLATION")]}),
+                           ("远处的对讲机响了两声，梁志强转身去看", {"host_error": "宿主报告这一轮出错（error）：503"})):
+            built, why = rewrite(text, **turn)
+            self.assertEqual((built["made_up"], built["machine_failures"], why), ([], ["h1-st-r2.json"], None), text)
 
     def test_an_unusable_review_is_not_a_right_calibration(self):
         temp = tempfile.mkdtemp(prefix="at-rev-")
@@ -977,12 +1015,14 @@ class ParserTest(unittest.TestCase):
             {"role": "user", "content": [{"type": "text", "text": "开一局"}]},
             {"role": "assistant", "provider": "local", "model": "m-1", "stopReason": "toolUse", "content": [{"type": "thinking", "thinking": "先查环境"}, call], "usage": {"cost": {"total": 0}}},
             {"role": "toolResult", "toolCallId": "c1", "toolName": "bash", "content": [{"type": "text", "text": "{\"ok\": true}"}], "isError": False},
-            {"role": "assistant", "provider": "local", "model": "m-1", "stopReason": "stop", "content": [{"type": "text", "text": "环境没问题。"}]},
+            {"role": "assistant", "provider": "local", "model": "m-1", "stopReason": "stop", "content": [{"type": "text", "text": "环境没问题。"}], "usage": {"output": 42}},
         )
         self.assertEqual((parsed["session_id"], parsed["model"], parsed["text"]), ("01a0-sid", "local/m-1", "环境没问题。"))
         self.assertEqual(parsed["host_calls"], [{"tool": "bash", "input": {"command": "python x doctor --json"}, "output": "{\"ok\": true}", "status": "completed"}])
         self.assertIsNone(parsed["error"])
         self.assertIsNone(parsed["cost"])
+        # how the last message ended and what it wrote, to tell an endpoint that stopped early
+        self.assertEqual(parsed["finish"], {"stop": "stop", "output_tokens": 42})
         # the name asked for can be an alias: the model is the one the endpoint says answered
         parsed = self.pi({"role": "assistant", "provider": "local", "model": "m-high", "responseModel": "m-exp-a", "stopReason": "stop",
                           "content": [{"type": "text", "text": "好。"}]})
@@ -1168,7 +1208,7 @@ class RunnerTest(unittest.TestCase):
                     self.assertIn(kind, ("seed", "npc"), (name, say))
                     self.assertLess(int(turn), n, (name, say))
             for step in script["steps"]:
-                self.assertTrue("say" in step or step.get("harness") == "upgrade_skill", (name, step))
+                self.assertTrue("say" in step or step.get("harness") in ("play_previous", "upgrade_skill"), (name, step))
         self.assertEqual(len(os.listdir(run_script.SCRIPTS)), 16)
 
     def test_playtests_open_every_world_in_both_modes_then_save_and_load(self):
@@ -1193,25 +1233,40 @@ class RunnerTest(unittest.TestCase):
         self.assertEqual(run_script.run_tag({"id": "07"}, "claude-code", 1), "claude-code-s07-r1")
 
     def test_the_release_drill_follows_skill_packaging_9(self):
-        script = run_script.load_script(os.path.join(run_script.DRILLS, "release-drill.json"))
-        self.assertEqual(script["setup"], {"install": "previous", "data_dir": "default", "include_drafts": False})
-        steps = script["steps"]
-        says = [s for s in steps if "say" in s]
-        self.assertEqual(len(says), script["player_turns"])
-        upgrade = steps.index({"harness": "upgrade_skill"})
-        before, after = [s for s in steps[:upgrade] if "say" in s], [s for s in steps[upgrade + 1 :] if "say" in s]
-        # a new conversation, "开一局", 3 turns with one "继续", a save; a new conversation loads it
-        self.assertEqual(before[0]["say"], "开一局")
-        turns = [s for s in before if s["expect"]["kind"] == "turn"]
+        # in two parts (PROGRESS P7, option C); the user sets nothing: the platform's data directory, released worlds only
+        fresh = run_script.load_script(os.path.join(run_script.DRILLS, "release-drill.json"))
+        upgrade = run_script.load_script(os.path.join(run_script.DRILLS, "release-drill-upgrade.json"))
+        self.assertEqual(fresh["setup"], {"data_dir": "default", "include_drafts": False})
+        self.assertEqual(upgrade["setup"], {"install": "previous", "data_dir": "default", "include_drafts": False})
+        # the candidate from nothing: a new conversation, "开一局", 3 turns with one "继续", a save;
+        # a new conversation loads it and plays one more turn
+        self.assertTrue(all("say" in s for s in fresh["steps"]))
+        first = [s for s in fresh["steps"] if s.get("conversation", "A") == "A"]
+        second = [s for s in fresh["steps"] if s.get("conversation") == "B"]
+        self.assertEqual(first[0]["say"], "开一局")
+        turns = [s for s in first if s["expect"]["kind"] == "turn"]
         self.assertEqual(len(turns), 3)
         self.assertIn("继续", [s["say"] for s in turns])
-        self.assertIn("save-slot", before[-2]["expect"]["must_call"])
-        self.assertEqual((before[-1]["conversation"], before[-1]["expect"]["must_call"]), ("B", ["load-slot"]))
-        # after the upgrade, one more turn in that conversation
-        self.assertEqual([(s["conversation"], s["expect"]["kind"]) for s in after], [("B", "turn")])
+        self.assertIn("save-slot", first[-1]["expect"]["must_call"])
+        self.assertEqual([(s["expect"]["kind"], s["expect"].get("must_call")) for s in second], [("load", ["load-slot"]), ("turn", None)])
+        # the upgrade: the harness plays the older Skill to a save, the candidate replaces it,
+        # and the host loads that save in a new conversation and plays one more turn
+        steps = upgrade["steps"]
+        self.assertEqual([s.get("harness") for s in steps[:2]], ["play_previous", "upgrade_skill"])
+        self.assertEqual(steps[2]["say"], "读档 %s" % steps[0]["save"])
+        self.assertEqual([(s.get("conversation", "A"), s["expect"]["kind"]) for s in steps[2:]], [("A", "load"), ("A", "turn")])
+        # script 16 the same way: every turn the host plays is on the candidate, 60 of them after the load
+        script = run_script.load_script("16")
+        steps = script["steps"]
+        self.assertEqual(script["setup"], {"install": "previous", "include_drafts": False})
+        self.assertEqual([s.get("harness") for s in steps[:2]], ["play_previous", "upgrade_skill"])
+        self.assertTrue(all("say" in s for s in steps[2:]))
+        self.assertEqual((steps[2]["say"], steps[2]["expect"]["must_call"]), ("读档 %s" % steps[0]["save"], ["load-slot"]))
+        kinds = [s["expect"]["kind"] for s in steps[3:]]
+        self.assertEqual((len(kinds), kinds.count("fast_forward"), kinds.count("load")), (60, 3, 1))
 
     def test_host_environment_follows_the_script_setup(self):
-        base = {"PATH": "x", "ADULT_TENSION_HOME": "D:\\elsewhere", "ADULT_TENSION_INCLUDE_DRAFTS": "1"}
+        base = {"PATH": "x", "ADULT_TENSION_HOME": "D:\\elsewhere", "ADULT_TENSION_INCLUDE_DRAFTS": "1", "LOCALAPPDATA": "C:\\Users\\u\\AppData\\Local"}
         project = os.path.join("D:\\", "projects", "at-e2e", "p")
         env = run_script.host_env({}, project, base)
         self.assertEqual(
@@ -1226,6 +1281,10 @@ class RunnerTest(unittest.TestCase):
         self.assertNotIn("ADULT_TENSION_INCLUDE_DRAFTS", drill)
         self.assertEqual(drill["ADULT_TENSION_TRACE"], os.path.join(project, "trace.jsonl"))
         self.assertEqual(base["ADULT_TENSION_HOME"], "D:\\elsewhere")
+        # the platform's default is looked up under a user profile of the project's own, never the machine's
+        profile = os.path.join(project, ".platform-data")
+        self.assertEqual((drill["LOCALAPPDATA"], drill["XDG_DATA_HOME"]), (profile, profile))
+        self.assertEqual(env["LOCALAPPDATA"], base["LOCALAPPDATA"])
 
     def test_the_host_starts_as_a_session_of_its_own_with_the_operators_settings(self):
         project = os.path.join("D:\\", "projects", "at-e2e", "p")
@@ -1409,6 +1468,120 @@ class RunnerTest(unittest.TestCase):
         self.assertEqual(rec["skill"]["skill_version"], adult_tension.SKILL_VERSION)
         self.assertEqual(M.check_structure(rec)[0], [])
         self.assertEqual(M.check_record(rec), [])
+
+    def test_the_harness_plays_the_older_skill_to_a_save_that_the_host_loads_on_the_candidate(self):
+        import adult_tension
+
+        temp = tempfile.mkdtemp(prefix="at-e2e-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        script = run_script.load_script(os.path.join(run_script.DRILLS, "release-drill-upgrade.json"))
+        _path, rec = run_script.run(script, "fake", 1, None, os.path.join(temp, "projects"), os.path.join(temp, "records"), previous="2aa58c8")
+        self.assertEqual(R.validate(rec), [])
+        played, upgraded = rec["harness_events"]
+        self.assertEqual((played["event"], played["after_turn"], played["params"]), ("play_previous", 0, {"mode": "daily", "turns": 3, "save": "演练"}))
+        self.assertEqual([(c["command"], c["ok"]) for c in played["done"]["calls"]],
+                         [("doctor", True), ("new-game", True)] + [("commit-turn", True)] * 3 + [("save-slot", True)])
+        self.assertEqual((upgraded["event"], upgraded["after_turn"]), ("upgrade_skill", 0))
+        self.assertEqual([i["db_schema"] for i in rec["installs"]], [2, adult_tension.DB_SCHEMA_VERSION])
+        # every turn the host played is on the candidate and in the engine trace; none of the harness's calls is
+        self.assertEqual([[R.command_of(c) for c in t["runtime_calls"]] for t in rec["turns"]], [["doctor", "load-slot"], ["commit-turn"]])
+        self.assertEqual({t["calls_source"] for t in rec["turns"]}, {"trace"})
+        loaded = R.ok_data(rec["turns"][0]["runtime_calls"][1])
+        self.assertEqual((loaded["turn"], len(loaded["resume"]["recent"])), (played["done"]["turn"], 3))
+        # nothing set by the user: the platform's own data directory, under the project's clean profile,
+        # migrated with a copy of the old database; the host never had the draft switch
+        self.assertEqual(rec["setup"], {"data_dir": "default", "include_drafts": False})
+        doctor = R.ok_data(rec["turns"][0]["runtime_calls"][0])
+        self.assertEqual((doctor["data_dir_source"], doctor["data_dir"]), ("default", os.path.join(rec["project"], ".platform-data", "adult-tension")))
+        backups = os.listdir(os.path.join(doctor["data_dir"], "backups"))
+        self.assertEqual([b.startswith("adult_tension-schema2-") for b in backups], [True])
+        self.assertEqual(M.check(rec)["findings"], [])
+        self.assertTrue(report.ran_script(rec, script))
+        # the draft switch is for the harness's own calls, never left in the environment the host gets
+        env = run_script.host_env(script["setup"], rec["project"], os.environ)
+        run_script.play_previous(rec["project"], env, {"mode": "daily", "turns": 1, "save": "再一次"})
+        self.assertNotIn("ADULT_TENSION_INCLUDE_DRAFTS", env)
+        # the reviewer reads what the harness did before the host's first turn
+        markdown = R.to_markdown(rec)
+        self.assertLess(markdown.index("测试框架：play_previous"), markdown.index("测试框架：upgrade_skill"))
+        self.assertLess(markdown.index("测试框架：upgrade_skill"), markdown.index("## 第 1 轮"))
+        # a harness step this harness does not know stops the run
+        with self.assertRaises(SystemExit):
+            run_script.run({"id": "x", "player_turns": 0, "steps": [{"harness": "rename_data_dir"}]}, "fake", 1, None,
+                           os.path.join(temp, "projects"), os.path.join(temp, "records"))
+
+
+
+class BatchTest(unittest.TestCase):
+    def test_a_script_is_done_once_a_run_of_the_candidate_counts(self):
+        temp = tempfile.mkdtemp(prefix="at-batch-")
+        self.addCleanup(shutil.rmtree, temp, True)
+        os.makedirs(os.path.join(temp, "h1"))
+        script = script_of(clean_record())
+
+        def put(run, digest="d1", change=None):
+            rec = clean_record()
+            rec["host"]["name"], rec["run"], rec["installs"] = "h1", run, [{"digest": digest}]
+            if change:
+                change(rec)
+            R.save(rec, os.path.join(temp, "h1", "h1-t-r%d.json" % run))
+
+        self.assertEqual(batch.standing(temp, "h1", script, "d1"), {"counted": [], "made_up": [], "next_run": 1})
+        # an older Skill, and the script before it changed: neither counts, both took a run number
+        put(1, digest="d0")
+        put(2, change=lambda rec: rec["turns"][1].update(input="等一下"))
+        # the endpoint left turn 3 empty: made up by another run
+        put(3, change=lambda rec: rec["turns"][2].update(text="", runtime_calls=[], host_calls=[]))
+        self.assertEqual(batch.standing(temp, "h1", script, "d1"), {"counted": [], "made_up": [3], "next_run": 4})
+        # which counts whatever it ends in (here the model left the footer out)
+        put(4, change=lambda rec: rec["turns"][2].update(text="远处的对讲机响了两声，梁志强转身去看吊机。"))
+        self.assertEqual(batch.standing(temp, "h1", script, "d1"), {"counted": [{"run": 4, "pass": False}], "made_up": [3], "next_run": 5})
+        put(5)
+        self.assertEqual(batch.standing(temp, "h1", script, "d1")["counted"], [{"run": 4, "pass": False}, {"run": 5, "pass": True}])
+
+    def test_a_batch_stops_at_a_counted_failure_and_starts_again_where_it_stopped(self):
+        temp = tempfile.mkdtemp(prefix="at-batch-")
+        self.addCleanup(shutil.rmtree, temp, True)
+
+        def run(records, lanes, *scripts):
+            argv = ["--host", "fake", "--lanes", str(lanes), "--root", os.path.join(temp, "projects"), "--out", records, "--log", os.path.join(temp, "batch.log")]
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                code = batch.main(argv + ["--scripts"] + list(scripts))
+            done = sorted(os.listdir(os.path.join(records, "fake"))) if os.path.isdir(os.path.join(records, "fake")) else []
+            return code, done, out.getvalue()
+
+        # the fake host plays script 02 through but not 01 (it opens without asking first): 03 never starts
+        records = os.path.join(temp, "one")
+        code, done, said = run(records, 1, "02", "01", "03")
+        self.assertEqual((code, done), (1, ["fake-s01-r1.json", "fake-s02-r1.json"]))
+        self.assertIn("停止新开：fake-s01-r1 是计入的失败，候选版本过不了", said)
+        # started again: 02 has its counted run and 01 its counted failure, so nothing new runs
+        code, done, said = run(records, 1, "02", "01", "03")
+        self.assertEqual((code, done), (1, ["fake-s01-r1.json", "fake-s02-r1.json"]))
+        self.assertIn("跳过 02：已有计入的运行：r1", said)
+        # two lanes, both through
+        records = os.path.join(temp, "two")
+        self.assertEqual(run(records, 2, "02", "03")[:2], (0, ["fake-s02-r1.json", "fake-s03-r1.json"]))
+        # the endpoint left a turn empty: the next run of the script makes it up, and counts
+        records = os.path.join(temp, "made-up")
+        silence = os.path.join(temp, "silence")
+        open(silence, "w").close()
+        os.environ["AT_FAKE_SILENCE"] = silence
+        try:
+            code, done, said = run(records, 1, "02")
+        finally:
+            del os.environ["AT_FAKE_SILENCE"]
+        self.assertEqual((code, done), (0, ["fake-s02-r1.json", "fake-s02-r2.json"]))
+        self.assertIn("fake-s02-r1 不合格，有一轮接口没有给出完整的回复，按用户的决定补跑", said)
+        self.assertIn("02：fake-s02-r2 通过", said)
+        # a STOP file in the records directory: nothing starts
+        records = os.path.join(temp, "three")
+        os.makedirs(records)
+        open(os.path.join(records, "STOP"), "w").close()
+        code, done, said = run(records, 2, "02")
+        self.assertEqual((code, done), (1, []))
+        self.assertIn("记录目录里有 STOP 文件", said)
 
 
 if __name__ == "__main__":

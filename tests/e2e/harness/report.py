@@ -49,11 +49,13 @@ setup, player inputs, expectations and harness steps). All of those count, none 
 picked; the other runs, from before a fix, are shown and not counted
 (ACCEPTANCE 6.1 item 6). The first-run pass rate is over run 1 of every
 script, whatever came after. Nor does a failed run count that has a turn
-ending in an empty message (the player saw nothing and the host reported no
-error, with or without tool calls before it): the user decided on 2026-09-29
-that such a run is made up by another run of the script (PROGRESS P10). All
-its failures are still listed, the knock-on ones on later turns too, and the
-first-run pass rate still takes it. The report passes only when every condition
+where the endpoint gave no whole reply and the host reported no error: an
+empty message (with or without tool calls before it), the model's thinking
+sent as the text, a reply cut off mid-sentence. The user decided that such a
+run is made up by another run of the script (PROGRESS P10: empty messages on
+2026-09-29, the other two on 2026-10-02). All its failures are still listed,
+the knock-on ones on later turns too, and the first-run pass rate still takes
+it. The report passes only when every condition
 holds, and it names each one that does not: at least two hosts, every
 script (tests/e2e/scripts) at least three times on every host, no
 machine-check failure, a counted review for every run, medians, critical
@@ -257,7 +259,7 @@ def candidate_digest():
 def ran_script(rec, script):
     """Whether the record ran SCRIPT as it is now: the same setup, player
     inputs (placeholders filled from the record's own openings),
-    conversations, expectations and harness steps, in order."""
+    conversations, expectations and harness steps with their parameters, in order."""
     if not script:
         return False
     setup, ran = script.get("setup") or {}, rec.get("setup") or {}
@@ -268,12 +270,12 @@ def ran_script(rec, script):
     wanted, harness, index = [], [], 0
     for step in script["steps"]:
         if "harness" in step:
-            harness.append([index, step["harness"]])
+            harness.append([index, step["harness"], {k: v for k, v in step.items() if k != "harness"}])
             continue
         index += 1
         wanted.append([index, step.get("conversation", "A"), run_script.fill_placeholders(step["say"], rec["turns"]), step.get("expect") or {}])
     seen = [[t["index"], t.get("conversation", "A"), t["input"], t.get("expect") or {}] for t in rec["turns"]]
-    events = [[e.get("after_turn"), e.get("event")] for e in rec.get("harness_events") or []]
+    events = [[e.get("after_turn"), e.get("event"), e.get("params") or {}] for e in rec.get("harness_events") or []]
     return seen == wanted and events == harness
 
 
@@ -284,15 +286,62 @@ def empty_replies(rec):
     return [t["index"] for t in rec["turns"] if not (t.get("text") or "").strip() and not t.get("host_error")]
 
 
+def thought_leaks(rec):
+    """The turns whose text opens with the model's own thinking: a line
+    "thought", then its reasoning (D66)."""
+    out = []
+    for t in rec["turns"]:
+        lines = [line.strip() for line in (t.get("text") or "").splitlines() if line.strip()]
+        if lines and lines[0].lower() == "thought" and not t.get("host_error"):
+            out.append(t["index"])
+    return out
+
+
+# what a finished sentence ends with, a closing quote or bracket after it included
+SENTENCE_END = "。！？!?…”’」』）)】》.～~—*"
+
+
+def cut_off_replies(rec):
+    """The turns whose reply stopped mid-sentence (D70: the endpoint ended it
+    after a few dozen tokens, "冰凉的药水渗"): the engine committed an opening
+    or a turn, but the text has no footer and its last line is prose (no hint,
+    no receipt) that ends no sentence. A reply that only left the footer out,
+    its sentences finished, is the model's own failure."""
+    out = []
+    for t in rec["turns"]:
+        text = (t.get("text") or "").strip()
+        if not text or t.get("host_error") or not machine_checks.narrative_calls(t) or machine_checks.FOOTER_RE.search(text):
+            continue
+        last = text.splitlines()[-1].strip()
+        if machine_checks.prose_lines(last) and last[-1] not in SENTENCE_END:
+            out.append(t["index"])
+    return out
+
+
+INTERFACE_KINDS = (("空消息", empty_replies), ("思考外露", thought_leaks), ("回复中途断掉", cut_off_replies))
+
+
+def interface_turns(rec):
+    """The turns where the endpoint, not the Skill, left the player without a
+    whole reply (PROGRESS P10): {turn index: what happened}."""
+    out = {}
+    for kind, find in INTERFACE_KINDS:
+        for index in find(rec):
+            out.setdefault(index, kind)
+    return dict(sorted(out.items()))
+
+
 def made_up(rec, checks):
-    """The empty replies of a failed run (the user's decision of 2026-09-29,
-    PROGRESS P10: such a run is made up by another run of the script, not
-    counted, whatever else it failed on: the next turn often redoes what the
-    empty one left undone and runs over its budget); else []."""
-    empty = empty_replies(rec)
-    if checks["pass"] or not empty or checks.get("invalid_record"):
-        return []
-    return empty
+    """The interface turns of a failed run, {turn index: what happened}; else
+    {}. By the user's decisions (PROGRESS P10: empty messages 2026-09-29, the
+    thinking sent as the text and replies cut off 2026-10-02) such a run is
+    made up by another run of the script and not counted, whatever else it
+    failed on: the next turn often redoes what the broken one left undone and
+    runs over its budget."""
+    found = interface_turns(rec)
+    if checks["pass"] or not found or checks.get("invalid_record"):
+        return {}
+    return found
 
 
 def _runs(records_dir):
@@ -462,9 +511,9 @@ def build(records_dir, reviews_dir, calibration_dirs, fixes_path=None, same=None
         why_not = None if skill == candidate else "Skill 摘要 %s，不是候选版本" % (skill or "未记")
         if why_not is None and not ran_script(rec, scripts.get(rec["script"])):
             why_not = "剧本已经改过" if rec["script"] in scripts else "不是正式剧本"
-        empty = made_up(rec, checks) if why_not is None else []
+        empty = made_up(rec, checks) if why_not is None else {}
         if empty:
-            why_not = "宿主空回复（第 %s 轮），按用户的决定补跑" % "、".join(str(i) for i in empty)
+            why_not = "接口没有给出完整的回复（%s），按用户的决定补跑" % "；".join("第 %d 轮%s" % item for item in empty.items())
         runs.append({
             "file": name, "host": host, "script": rec["script"], "run": rec["run"], "skill": skill, "counted": why_not is None,
             "why_not_counted": why_not, "made_up": bool(empty),
@@ -562,7 +611,8 @@ def to_markdown(report):
     ]
     lines += ["| %s | %s | %s |" % (c["condition"], "是" if c["ok"] else "**否**", c["detail"]) for c in report["conditions"]]
     if report["made_up"]:
-        lines += ["", "宿主空回复：%d 条运行有一轮以空消息结束（玩家什么也没看到，宿主也没报错）而不合格。按用户 2026-09-29 的决定，"
+        lines += ["", "接口没有给出完整的回复：%d 条运行有一轮以空消息结束、把模型的思考当正文发了出来，或者回复在句子中间断掉"
+                  "（宿主都没有报错），而且这一局不合格。按用户的决定（空消息 2026-09-29，另两种 2026-10-02），"
                   "这样的运行不计入结论，同一剧本补跑一次，补跑的不论结果都计入。它们的失败（包括后面轮次的连带失败）照样逐条列在下面，"
                   "首跑通过率照旧算它们不通过。" % len(report["made_up"])]
     if report["notes"]:

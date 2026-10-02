@@ -4,22 +4,25 @@
  "focus": "上下文不膨胀、章节摘要、事实不捏造、无复读、升级不毁存档",
  "setup": {
   "install": "previous",
-  "include_drafts": true
+  "include_drafts": false
  },
  "steps": [
   {
-   "say": "开一局，日常",
+   "harness": "play_previous",
+   "mode": "daily",
+   "turns": 4,
+   "save": "升级前"
+  },
+  {
+   "harness": "upgrade_skill"
+  },
+  {
+   "say": "读档 升级前",
    "expect": {
-    "kind": "opening",
+    "kind": "load",
     "calls_max": 2,
     "must_call": [
-     "new-game"
-    ],
-    "budget_group": "first_opening:A",
-    "group_max": 2,
-    "group_must_call": [
-     "doctor",
-     "new-game"
+     "load-slot"
     ]
    }
   },
@@ -233,7 +236,7 @@
    }
   },
   {
-   "say": "存档 升级前",
+   "say": "存档 中途",
    "expect": {
     "kind": "meta",
     "calls_max": 1,
@@ -241,9 +244,6 @@
      "save-slot"
     ]
    }
-  },
-  {
-   "harness": "upgrade_skill"
   },
   {
    "say": "继续",
@@ -340,7 +340,7 @@
    }
   },
   {
-   "say": "读档 升级前",
+   "say": "读档 中途",
    "expect": {
     "kind": "load",
     "calls_max": 1,

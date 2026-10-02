@@ -1,8 +1,8 @@
 {
  "id": "drill",
- "title": "发布前的真实演练（SKILL_PACKAGING.md §9）",
- "focus": "只复制 Skill 目录装进真实宿主；新对话开局、推进 3 回合（含“继续”）、存档；新对话读档；换成新版本（含一次数据库迁移）后再推进 1 回合；用户不做任何 Python、SQLite 或环境变量操作。在干净的机器上跑，Windows 与 Linux 各一次",
- "setup": {"install": "previous", "data_dir": "default", "include_drafts": false},
+ "title": "发布前的真实演练（SKILL_PACKAGING.md §9），第一段：发布候选版从零开始",
+ "focus": "只复制 Skill 目录装进真实宿主，用户不做任何 Python、SQLite 或环境变量操作；新对话开局、推进 3 回合（含“继续”）、存档；新对话读档再推进 1 回合。升级见第二段（release-drill-upgrade.json）。Windows 与 Linux 各一次",
+ "setup": {"data_dir": "default", "include_drafts": false},
  "steps": [
   {"say": "开一局", "expect": {"kind": "ask", "calls_max": 1, "must_not_call": ["new-game", "commit-turn"], "budget_group": "first_opening:A", "group_max": 2, "group_must_call": ["doctor", "new-game"]}},
   {"say": "日常", "expect": {"kind": "opening", "calls_max": 2, "must_call": ["new-game"], "budget_group": "first_opening:A", "group_max": 2, "group_must_call": ["doctor", "new-game"]}},
@@ -11,7 +11,6 @@
   {"say": "我走过去，跟对方打了个招呼", "expect": {"kind": "turn", "calls_max": 1}},
   {"say": "存档 演练", "expect": {"kind": "meta", "calls_max": 1, "must_call": ["save-slot"]}},
   {"say": "读档 演练", "conversation": "B", "expect": {"kind": "load", "calls_max": 2, "must_call": ["load-slot"]}},
-  {"harness": "upgrade_skill"},
   {"say": "继续", "conversation": "B", "expect": {"kind": "turn", "calls_max": 1}}
  ],
  "player_turns": 8

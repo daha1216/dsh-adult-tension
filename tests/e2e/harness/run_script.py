@@ -18,9 +18,15 @@ A script whose setup says "install": "previous" starts from an older Skill
 (--previous <git commit>) and is upgraded in place at its upgrade step. A
 Skill older than the engine trace has its calls rebuilt from the host's own
 tool calls (record.calls_from_host); each turn says where its calls came from.
-"data_dir": "default" leaves ADULT_TENSION_HOME unset (the release drill of
-SKILL_PACKAGING.md 9: no environment settings by the user; run it on a clean
-machine), and "include_drafts": false plays only released worlds.
+A "play_previous" step plays the part before the upgrade itself, on the older
+Skill's runtime and with no model (PROGRESS P7, option C): an opening, a few
+plain turns and a save, so every turn the host plays is on the candidate.
+"data_dir": "default" leaves ADULT_TENSION_HOME unset, so the runtime finds
+its data directory by the platform's rule, as on a user's machine (the
+release drill of SKILL_PACKAGING.md 9: no environment settings by the user);
+the host's LOCALAPPDATA (XDG_DATA_HOME on Linux) is an empty folder in the
+project, a clean user profile, and the machine's own data directory is left
+alone. "include_drafts": false plays only released worlds.
 "{seed:N}" in a player line is the seed the opening of player turn N showed
 (the player reads it from the footer), e.g. for "重开 N 号".
 """
@@ -38,6 +44,7 @@ import sys
 import tarfile
 import tempfile
 import time
+import uuid
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 E2E = os.path.dirname(HERE)
@@ -206,7 +213,9 @@ def shown_env(extra):
 def host_env(setup, project, base, extra=None):
     """The host's environment: the engine trace always; a data directory in the
     project unless the script says otherwise; the draft switch only when the
-    script asks for it (the worlds are released; an older Skill may need it)."""
+    script asks for it (the worlds are released; an older Skill may need it).
+    The platform default is found under a user profile of the project's own
+    (PLATFORM_DATA), never the machine's."""
     env = {k: v for k, v in base.items() if not _from_calling_session(k, base)}
     env.update(extra or {})
     env["ADULT_TENSION_TRACE"] = os.path.join(project, "trace.jsonl")
@@ -214,9 +223,15 @@ def host_env(setup, project, base, extra=None):
     env.pop("ADULT_TENSION_INCLUDE_DRAFTS", None)
     if setup.get("data_dir") != "default":
         env["ADULT_TENSION_HOME"] = os.path.join(project, ".at-data")
+    else:
+        profile = os.path.join(project, PLATFORM_DATA)
+        env["LOCALAPPDATA"] = env["XDG_DATA_HOME"] = profile
     if setup.get("include_drafts", False):
         env["ADULT_TENSION_INCLUDE_DRAFTS"] = "1"
     return env
+
+
+PLATFORM_DATA = ".platform-data"
 
 
 def runtime(project, env, args, payload=None):
@@ -238,6 +253,57 @@ def runtime(project, env, args, payload=None):
     return json.loads(proc.stdout.decode("utf-8"))
 
 
+# What the harness has the first person on the scene do while it plays the
+# older Skill (action, summary, open action): ordinary, world-neutral
+# moments, so the host takes over a story that has begun without being told
+# how it should go on. With nobody on the scene the player just waits.
+PREVIOUS_TURNS = (
+    ("抬头看了一眼来人，又低头忙手上的事", "{npc}看见{player}走近，没有主动搭话", "{npc}手上的活还没停"),
+    ("停下手里的事，朝{player}点了点头", "{npc}注意到{player}，点头算是打过招呼", "{npc}像是在等{player}先开口"),
+    ("往门口张望了一下，像在等什么人", "{npc}几次看向门口，似乎在等人", "门口还没有人来"),
+    ("压低声音说这两天不太平，让{player}小心些", "{npc}提醒{player}这两天不太平", "{npc}的话说了一半"),
+)
+PREVIOUS_ALONE = ("{player}在原地待了一会儿，四周没什么动静", "{player}还没拿定主意")
+
+
+def play_previous(project, env, step):
+    """The part of a script before the upgrade, played on the older Skill's
+    runtime with no model (PROGRESS P7, option C): doctor, an opening in
+    step["mode"], step["turns"] plain turns and a save named step["save"].
+    The older Skill's worlds are still in review, so these calls, and only
+    these, turn the draft switch on; none goes into the engine trace. A call
+    the older runtime refuses stops the run. Returns what was done."""
+    env = dict(env, ADULT_TENSION_INCLUDE_DRAFTS="1")
+    done = []
+
+    def call(args, payload=None):
+        out = runtime(project, env, args, payload)
+        done.append({"command": args[0], "ok": bool(out.get("ok"))})
+        if not out.get("ok"):
+            raise SystemExit("旧版运行时拒绝了测试框架的 %s：%s" % (args[0], (out.get("error") or {}).get("message")))
+        return out["data"]
+
+    call(["doctor"])
+    data = opened = call(["new-game"], {"request_id": "harness_%s" % uuid.uuid4().hex[:12], "mode": step.get("mode", "daily")})
+    session, player = data["session_id"], ((data.get("opening") or {}).get("player") or {}).get("name")
+    for n in range(step.get("turns", 3)):
+        present = (data.get("context") or {}).get("present_npcs") or []
+        if present:
+            action, summary, open_action = PREVIOUS_TURNS[n % len(PREVIOUS_TURNS)]
+            names = {"npc": present[0]["name"], "player": player}
+            ops = [{"op": "npc_action", "npc_id": present[0]["id"], "action": action.format(**names)}]
+        else:
+            (summary, open_action), names, ops = PREVIOUS_ALONE, {"player": player}, []
+        data = call(["commit-turn"], {
+            "request_id": data["next_request_id"], "session_id": session, "expected_revision": data["revision"],
+            "action_mode": "continue", "player_input": "继续", "content_tags": [], "operations": ops,
+            "summary": summary.format(**names), "open_action": open_action.format(**names),
+        })
+    call(["save-slot"], {"request_id": data["next_request_id"], "session_id": session, "expected_revision": data["revision"], "name": step["save"]})
+    world = ((opened.get("opening") or {}).get("world") or {}).get("title")
+    return {"session_id": session, "seed": opened.get("seed"), "world": world, "turn": data.get("turn"), "slot": step["save"], "calls": done}
+
+
 def trace_lines(path):
     if not os.path.exists(path):
         return []
@@ -248,11 +314,14 @@ def trace_lines(path):
 class FakeHost:
     """Plays the engine without a model, to test the harness plumbing.
 
-    It opens a game at the first message of a conversation (or loads one for
-    "读档 <名>"), saves for "存档 <名>" and commits a plain turn for anything
-    else. It reports its tool calls the way a real host does (Write the input
-    file, then Bash), so the fallback for a Skill without the engine trace is
-    tested too."""
+    It opens a game at the first message of a conversation, loads one for
+    "读档 <名>" (at any point), saves for "存档 <名>", shows "状态" and
+    commits a plain turn for anything else. It reports its tool calls the way
+    a real host does (Write the input file, then Bash), so the fallback for a
+    Skill without the engine trace is tested too. When AT_FAKE_SILENCE names
+    a file that exists, the next turn of a conversation under way ends in an
+    empty message, as an endpoint's sometimes does, and the file goes (to
+    test the make-ups of a batch)."""
 
     name = "fake"
     SAVE_RE = re.compile(r"^存档\s*(\S+)$")
@@ -263,6 +332,7 @@ class FakeHost:
         self.env = env
         self.model = "none"
         self.sessions = {}
+        self.loads = 0
 
     def version(self):
         return "fake-1"
@@ -303,17 +373,23 @@ class FakeHost:
         started = time.perf_counter()
         log = []
         state = self.sessions.get(conversation)
+        silence = self.env.get("AT_FAKE_SILENCE")
+        if state is not None and silence and os.path.exists(silence):
+            os.remove(silence)
+            return self._reply(started, state, log, "")
         load = self.LOAD_RE.match(text.strip())
         save = self.SAVE_RE.match(text.strip())
         if state is None:
             self._call(log, ["doctor"])
-            if load:
-                data = self._call(log, ["load-slot"], {"request_id": "fake_load_%s" % conversation, "name": load.group(1)})
-                body = "%s\n\n%s" % (data["receipt"], self._footer(data))
-            else:
-                data = self._call(log, ["new-game"], {"request_id": "fake_new_%s" % conversation, "mode": "daily", "seed": 7})
-                opening = data["opening"]
-                body = "世界观：%s\n人物：%s\n\n%s\n\n%s" % (opening["world"]["premise"], opening["player"]["name"], opening["hook"]["text"], opening["footer"])
+        if load:
+            self.loads += 1
+            data = self._call(log, ["load-slot"], {"request_id": "fake_load_%d" % self.loads, "name": load.group(1)})
+            body = "%s\n\n%s" % (data["receipt"], self._footer(data))
+        elif state is None:
+            data = self._call(log, ["new-game"], {"request_id": "fake_new_%s" % conversation, "mode": "daily", "seed": 7})
+            opening = data["opening"]
+            body = "世界观：%s\n人物：%s\n\n%s\n\n%s" % (opening["world"]["premise"], opening["player"]["name"], opening["hook"]["text"], opening["footer"])
+        if load or state is None:
             state = {"sid": data["session_id"], "revision": data["revision"], "next": data["next_request_id"], "context": data["context"]}
             self.sessions[conversation] = state
             return self._reply(started, state, log, body)
@@ -321,6 +397,9 @@ class FakeHost:
             data = self._call(log, ["save-slot"], {"request_id": state["next"], "session_id": state["sid"], "expected_revision": state["revision"], "name": save.group(1)})
             state.update(revision=data["revision"], next=data["next_request_id"])
             return self._reply(started, state, log, data["receipt"])
+        if text.strip() == "状态":
+            data = self._call(log, ["status"], {"session_id": state["sid"]})
+            return self._reply(started, state, log, data["text"])
         present = [n["id"] for n in state["context"].get("present_npcs") or []]
         ops = [{"op": "npc_action", "npc_id": present[0], "action": "看了一眼门口"}] if present else []
         commit = {
@@ -328,6 +407,12 @@ class FakeHost:
             "action_mode": "continue", "player_input": text, "operations": ops, "content_tags": [],
             "summary": "场面往前走了一点", "open_action": "场面停住",
         }
+        # what the engine asks to be written with this commit (a long run reaches both)
+        asked = state["context"].get("requests") or {}
+        if asked.get("chapter_summary"):
+            commit["chapter_summary"] = "这一章里场面一点点往前走，没有人把话说破"
+        if asked.get("prologue"):
+            commit["prologue"] = "此前几章里场面一点点往前走，没有人把话说破"
         data = self._call(log, ["commit-turn"], commit)
         state.update(revision=data["revision"], next=data["next_request_id"], context=data["context"])
         return self._reply(started, state, log, "门口有人影晃了一下。\n\n" + self._footer(data))
@@ -401,10 +486,7 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
     index = 0
     for step in script["steps"]:
         if "harness" in step:
-            if step["harness"] == "upgrade_skill":
-                source = install_skill(project, None, replace=True)
-                installs.append(install_record(project, source, index))
-                rec["harness_events"].append({"after_turn": index, "event": "upgrade_skill", "detail": "替换为当前版本的 Skill 目录"})
+            rec["harness_events"].append(harness_step(project, env, step, index, installs))
             continue
         index += 1
         before = len(trace_lines(trace))
@@ -435,6 +517,8 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
         # a turn that failed or showed the player nothing keeps the host's own events, to find out why
         if keep_events or error or not (reply["text"] or "").strip():
             turn["events"] = reply.get("events")
+        if reply.get("finish"):
+            turn["finish"] = reply["finish"]
         if reply.get("model"):
             turn["model"] = reply["model"]
             rec["host"]["model"] = rec["host"]["model"] or reply["model"]
@@ -455,6 +539,28 @@ def run(script, host_name, run_index, model, root, out_dir, keep_events=False, p
     path = os.path.join(out_dir, "%s.json" % tag)
     R.save(rec, path)
     return path, rec
+
+
+def harness_step(project, env, step, after_turn, installs):
+    """A step the harness takes itself, between the host's turns; returns its
+    event for the record, with the step's parameters (what report.ran_script
+    compares). A step this harness does not know stops the run."""
+    params = {k: v for k, v in step.items() if k != "harness"}
+    event = {"after_turn": after_turn, "event": step["harness"]}
+    if step["harness"] == "upgrade_skill":
+        source = install_skill(project, None, replace=True)
+        installs.append(install_record(project, source, after_turn))
+        event["detail"] = "替换为当前版本的 Skill 目录"
+    elif step["harness"] == "play_previous":
+        done = play_previous(project, env, step)
+        event["detail"] = "测试框架不经模型，在旧版 Skill 上开局（%s，%s）、推进 %d 回合并存档「%s」；这一段不是宿主玩的" % (
+            done["world"], params.get("mode", "daily"), params.get("turns", 3), done["slot"])
+        event["done"] = done
+    else:
+        raise SystemExit("不认识的测试框架步骤：%s" % step["harness"])
+    if params:
+        event["params"] = params
+    return event
 
 
 def run_tag(script, host_name, run_index):

@@ -9,14 +9,15 @@
 | 路径 | 内容 |
 |---|---|
 | `scripts/NN-*.json` | 16 条剧本：玩家会打的话，外加给机器检查用的 `expect` 标注（被测模型看不到） |
-| `drills/release-drill.json` | 发布前的真实演练（`SKILL_PACKAGING.md` §9），格式与剧本相同 |
+| `drills/release-drill.json`、`drills/release-drill-upgrade.json` | 发布前的真实演练（`SKILL_PACKAGING.md` §9），两段：发布候选版从零开始；从旧版升级。格式与剧本相同 |
 | `playtests/` | 世界试玩（`CONTENT_BIBLE.md` §7）：`pt-<世界>-<daily\|pressure>.json` 每个世界每种模式一条，开局后 5 回合、存档、新对话读档、再 1 回合；`pt-stage1.json` 是阶段 1 的试玩（开局 + 10 回合 + 存档 + 新对话读档）。格式与剧本相同 |
 | `rubric.md` | 评分量表：8 个维度，每一档都有锚点与示例 |
 | `reviewer.md` | 给独立评审的说明与输出格式 |
 | `calibration/` | 校准集：6 条好的、6 条植入已知缺陷的记录，`key.json` 是答案；`build.py` 生成它们 |
 | `harness/record.py` | 记录格式、给评审看的 Markdown |
-| `harness/hosts.py` | 宿主驱动：Claude Code（`claude -p … --output-format stream-json`）与 OpenCode（`opencode run --format json`） |
+| `harness/hosts.py` | 宿主驱动：Claude Code（`claude -p … --output-format stream-json`）、OpenCode（`opencode run --format json`）与 pi（`pi -p --mode json`） |
 | `harness/run_script.py` | 跑一条剧本、写一条记录 |
+| `harness/batch.py` | 成批跑剧本：几路并行，直到每条剧本有一局计入，接口问题的局自动补跑 |
 | `harness/machine_checks.py` | §6.2 的机器检查 |
 | `harness/report.py` | 评审材料包、校准判定、最终报告 |
 | `harness/review.py` | 请一个独立的模型实例评审一条记录（OpenAI 兼容接口，一次请求只含材料包，不带工具） |
@@ -27,14 +28,14 @@
 `run_script.py` 为每一次运行：
 
 1. 在本仓库之外建一个全新的测试项目（默认 `D:\projects\at-e2e\<宿主>-s<剧本>-r<次>-<时间>\`，独立 `git init`）；
-2. 把 Skill 装进项目级目录 `.claude/skills/adult-tension/`（剧本 16 先装旧版，中途整目录替换为当前版）；
+2. 把 Skill 装进项目级目录 `.claude/skills/adult-tension/`（剧本 16 与演练的升级段先装旧版，到了 `upgrade_skill` 再整目录替换为当前版）；
 3. 让宿主只看这个项目自己的设置，不含任何给模型的指示：
    - Claude Code：`--setting-sources project,local --strict-mcp-config`（操作者的用户级设置、插件、MCP 不进来）；权限写在命令行（只放行运行 Python、在项目内编辑文件，禁止上网），因为没被交互信任过的工作区里，项目设置的权限规则不生效；
    - OpenCode：它的全局配置目录（`XDG_CONFIG_HOME`）、会话库（`OPENCODE_DB`）、临时目录（`TEMP`/`TMP`）都放在项目的 `.host/` 里；关掉 `~/.claude`、`~/.agents` 下的外部 Skill 扫描、`~/.claude/CLAUDE.md`、自动更新、分享、默认插件、语言服务器下载；项目的 `opencode.json` 写权限（同上）、`skills.paths: [".claude/skills"]`、`share: disabled`；
    - 由一个 Claude Code 会话启动测试时，去掉调用方自己的 `CLAUDE*`、`ANTHROPIC_*` 变量；
-4. 设置 `ADULT_TENSION_TRACE`（引擎自己的调用记录）；剧本没有另说时，再设置 `ADULT_TENSION_HOME`（项目内的数据目录）。`ADULT_TENSION_INCLUDE_DRAFTS=1` 只在剧本要求时设置（`"include_drafts": true`）：六个世界都已 `released`，只有从旧版起步的剧本 16 需要它，旧版里的世界还是 `review`。宿主环境里原有的这两个变量一律先清掉；
-5. 按剧本逐句发给宿主，同一个对话用同一个宿主会话；剧本里标了 `conversation` 的步骤开新对话。玩家的话里可以有占位，发出之前按这一局已有的回合填好：`{seed:N}` 是第 N 轮开局的种子，`{npc:N}` 是第 N 轮开局介绍的第一个人的名字（开局是随机的，场上有两个人时“对方”说不清是谁，玩家看了开局会点名）；
-6. 每一轮记下：玩家输入、宿主的工具调用、这一轮的全部运行时调用（参数、输入、返回、耗时、是哪一份 Skill 跑的）、玩家看到的全部文字。运行时调用取自引擎记录；装的是引擎记录出现之前的旧版时（剧本 16 与发布演练的升级前），改从宿主自己的工具调用里还原（命令行、写进输入文件的内容、打印出的 JSON），这一轮标 `calls_source: host`；
+4. 设置 `ADULT_TENSION_TRACE`（引擎自己的调用记录）；剧本没有另说时，再设置 `ADULT_TENSION_HOME`（项目内的数据目录）。剧本写了 `"data_dir": "default"` 时不设它，而把宿主的 `LOCALAPPDATA`（Linux 是 `XDG_DATA_HOME`）指向项目里的空目录 `.platform-data`：运行时照平台默认规则在那里建数据目录，像一台干净机器上的用户目录，本机真实的默认数据目录不动。`ADULT_TENSION_INCLUDE_DRAFTS=1` 只在剧本要求时设置（`"include_drafts": true`）：六个世界都已 `released`，现在没有剧本要它。宿主环境里原有的这两个变量一律先清掉；
+5. 按剧本逐句发给宿主，同一个对话用同一个宿主会话；剧本里标了 `conversation` 的步骤开新对话。`harness` 步骤由测试框架自己做，不经宿主：`play_previous` 在旧版的运行时上直接开局（`mode`）、推进 `turns` 个平常回合、存档为 `save`，不经模型，调用不进引擎记录，旧版的世界还是 `review`，只有这几次调用打开草稿开关（`PROGRESS.md` P7 选 C）；`upgrade_skill` 把 Skill 目录整个替换为当前版本。记录的 `harness_events` 写下每一步、它的参数和做了什么，给评审看的记录里也写着（宿主第 1 轮之前做的写在最前面）。玩家的话里可以有占位，发出之前按这一局已有的回合填好：`{seed:N}` 是第 N 轮开局的种子，`{npc:N}` 是第 N 轮开局介绍的第一个人的名字（开局是随机的，场上有两个人时“对方”说不清是谁，玩家看了开局会点名）；
+6. 每一轮记下：玩家输入、宿主的工具调用、这一轮的全部运行时调用（参数、输入、返回、耗时、是哪一份 Skill 跑的）、玩家看到的全部文字。运行时调用取自引擎记录；宿主玩的是引擎记录出现之前的旧版时，改从宿主自己的工具调用里还原（命令行、写进输入文件的内容、打印出的 JSON），这一轮标 `calls_source: host`。宿主报告了这一轮怎么结束、写了多少 token 的（目前是 pi），也记下来（`finish`），用来核对接口是不是提前停了；
 7. 结束后经运行时导出最终状态（不进引擎记录），连同宿主名称与版本、模型标识、日期、每次安装的 Skill 版本与数据库格式（`installs`）、最后一版的 Skill 根目录与版本写进记录；
 8. 当场跑机器检查。除了 `ACCEPTANCE.md` §6.2 的各项，还核对记录本身，下面任何一种都算记录不合格：
    - 某一轮宿主没有正常结束（进程出错、超时、宿主自己报告这一轮出错），或者玩家什么也没看到。出错之前宿主做过的工具调用照样记下，便于查原因；
@@ -78,35 +79,48 @@ python tests/e2e/harness/run_script.py --host opencode --model local-proxy/gemin
 python tests/e2e/harness/run_script.py --host opencode --model local-proxy/gemini-3.8-flash-high --host-exe <opencode.exe> --host-env-file <env 文件> --script pt-harbor_night_shift-daily --run 1 --out reports/playtests
 ```
 
-剧本 16 从旧版开始：
+剧本 16 从旧版开始（`PROGRESS.md` P7 选 C）：测试框架在旧版 `2aa58c8` 上玩到存档“升级前”，整目录升级，宿主在新对话里读这个存档（数据库从格式 2 迁移到 3）后连续玩 60 回合，宿主的每一回合都在当前版本上：
 
 ```bash
-python tests/e2e/harness/run_script.py --host claude-code --script 16 --run 1 --previous <旧版的 git 提交>
+python tests/e2e/harness/run_script.py --host claude-code --script 16 --run 1 --previous 2aa58c8
 ```
 
 记录写在 `reports/e2e/records/<宿主>/`。每条剧本在每个宿主上至少跑 3 次（`--run 1`、`2`、`3`）；第 1 次就是首跑，之后的运行不替换它。
 
+成批地跑（每条剧本在一路里跑到有一局计入为止；按下面的规矩补跑的局接着用下一个编号；计入的局机器检查失败、某一局没留下记录、记录目录里有 `STOP` 文件，都不再新开，正在跑的跑完；已有计入运行的剧本跳过，所以停下的批次可以接着跑。其余参数原样交给 `run_script.py`）：
+
+```bash
+python tests/e2e/harness/batch.py --host pi --model <provider/model> --host-env-file <env 文件> --previous 2aa58c8 --lanes 2 --scripts 16 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+```
+
 修复（改 Skill、剧本或检查）之后接着编号重跑（`--run 4`、`5`……），原来的记录全部留着，失败的在 `fixes.json` 里链接到修复。结论只看候选版本的运行：记录里的 Skill 摘要与候选版本相同（默认是仓库里现在的 `skill/adult-tension/`，`--candidate <摘要>` 可以另指），而且跑的就是现在的剧本（setup、玩家输入、期望和宿主操作都一致）；这样的运行全部计入，一条也不挑。Skill 一改摘要就变，每条剧本都要重新跑满 3 次；只改了某条剧本，就重跑那一条。其余的运行照样列在报告里，注明为什么不计入。
 
-宿主空回复（某一轮以空消息结束：玩家什么也没看到，宿主也没报错；之前有没有工具调用都算）：按用户 2026-09-29 的决定，有这样一轮的失败局不计入结论，同一条剧本接着编号补跑一局，补跑的不论结果都计入。这一局的失败，包括后面轮次的连带失败（空了一轮，下一轮常把上一轮的事补做了而超预算），照样逐条列在报告里，查出的问题照样修；首跑通过率照旧算它不通过。
+接口没有给出完整的回复（宿主都没有报错）：某一轮以空消息结束（玩家什么也没看到，之前有没有工具调用都算）；把模型的思考当正文发了出来（正文第一行是 `thought`，不分大小写）；回复在句子中间断掉（引擎提交了开局或回合，正文却没有页脚，最后一行是正文而不是提示或回执，结尾也不是句末的标点；只是少了页脚、句子完整的不算）。按用户的决定（空消息 2026-09-29，另两种 2026-10-02），有这样一轮的失败局不计入结论，同一条剧本接着编号补跑一局，补跑的不论结果都计入。这一局的失败，包括后面轮次的连带失败（空了一轮，下一轮常把上一轮的事补做了而超预算），照样逐条列在报告里，查出的问题照样修；首跑通过率照旧算它不通过。
 
 ## 发布前的真实演练（`SKILL_PACKAGING.md` §9）
 
-`drills/release-drill.json` 把 §9 的七步写成剧本：新对话说“开一局” → 选日常 → 3 个回合（其中一个是“继续”）→ 存档“演练” → 新对话读档 → 整目录替换为当前版本（从旧版 `2aa58c8` 起步，数据库从格式 2 迁移到 3，迁移前自动备份）→ 再推进 1 回合。
+§9 的七步分两段跑（`PROGRESS.md` P7，用户 2026-10-02 选 C）。首个发布版之前没有一个数据库格式更旧、行为又和候选版一致的旧版，旧版 `2aa58c8` 的世界也还是 `review`，所以升级那一步单独成段，旧版的部分由测试框架自己玩：
 
-它和评测剧本的区别在 `setup` 里：
+- `drills/release-drill.json`，发布候选版从零开始：新对话说“开一局” → 选日常 → 3 个回合（其中一个是“继续”）→ 存档“演练” → 新对话读档 → 再推进 1 回合；
+- `drills/release-drill-upgrade.json`，从旧版升级：测试框架在旧版 `2aa58c8` 上开局、推进 3 回合、存档“演练”（不经模型）→ 整目录替换为发布候选版 → 宿主在新对话里读档（数据库从格式 2 迁移到 3，迁移前自动备份）→ 再推进 1 回合。
 
-- `"data_dir": "default"`：不设 `ADULT_TENSION_HOME`，数据目录由运行时按平台默认位置决定——和真实用户一样，用户不做任何环境变量操作；
-- `"include_drafts": false`：不开草稿开关，只有 `released` 的世界能开局。旧版 `2aa58c8` 的内容里没有 `released` 的世界，所以照这个设置，升级前的那一段永远开不了局：§9 在首个发布版之前做不到原样执行，怎么做见 `PROGRESS.md` 待决事项 P7；
-- 唯一由测试框架设置的变量是引擎记录 `ADULT_TENSION_TRACE`，它只负责记录，不改变任何行为。
+它们和评测剧本的区别在 `setup` 里：
 
-在干净的机器上跑（Windows 与 Linux 各一次；干净指：没有旧的数据目录、没有 `ADULT_TENSION_*` 变量、宿主的用户级目录里没有同名 Skill）：
+- `"data_dir": "default"`：不设 `ADULT_TENSION_HOME`，数据目录由运行时按平台默认规则决定——和真实用户一样，用户不做任何环境变量操作。宿主的 `LOCALAPPDATA`（Linux 是 `XDG_DATA_HOME`）指向测试项目里的空目录 `.platform-data`，相当于干净机器上的用户目录；
+- `"include_drafts": false`：宿主那边不开草稿开关，只有 `released` 的世界能开局；
+- 测试框架给宿主设的只有引擎记录 `ADULT_TENSION_TRACE`（只负责记录，不改变任何行为）和上面那个用户目录。
+
+在干净的机器上跑（Windows 与 Linux 各一次；干净指：没有 `ADULT_TENSION_*` 变量、宿主的用户级目录里没有同名 Skill）：
 
 ```bash
-python tests/e2e/harness/run_script.py --host claude-code --script tests/e2e/drills/release-drill.json --previous 2aa58c8 --out reports/release/drill
+python tests/e2e/harness/run_script.py --host pi --model <provider/model> --host-env-file <env 文件> --script tests/e2e/drills/release-drill.json --out reports/release/drill
 ```
 
-记录写在 `reports/release/drill/<宿主>/`：宿主名称与版本、模型、两次安装的版本与数据库格式、每一步的实际调用与耗时。升级前的调用来自宿主自己的记录（旧版没有引擎记录），没有单次耗时，只有整轮的耗时。演练结束后在数据目录的 `backups/` 里应当有一份 `adult_tension-schema2-*.db`。
+```bash
+python tests/e2e/harness/run_script.py --host pi --model <provider/model> --host-env-file <env 文件> --script tests/e2e/drills/release-drill-upgrade.json --previous 2aa58c8 --out reports/release/drill
+```
+
+记录写在 `reports/release/drill/<宿主>/`：宿主名称与版本、模型、每次安装的版本与数据库格式、测试框架在旧版上做了什么、每一步的实际调用与耗时。升级段结束后，测试项目的 `.platform-data/adult-tension/backups/` 里应当有一份 `adult_tension-schema2-*.db`。
 
 ## 评审
 
@@ -151,6 +165,6 @@ python tests/e2e/harness/review.py --record <记录.json> --out <评审.json> --
 按下面的步骤手动跑一条剧本，把结果交给我整理成记录：
 
 1. 用 `run_script.py` 的同样方式建测试项目（或手动：在 `D:\projects\at-e2e\` 下新建目录、`git init`、用 `python tools/install_skill.py <项目>\.claude\skills\adult-tension` 安装 Skill）。
-2. 在终端里先设置两个环境变量再启动宿主：`ADULT_TENSION_HOME=<项目>\.at-data`、`ADULT_TENSION_TRACE=<项目>\trace.jsonl`；剧本 16 另设 `ADULT_TENSION_INCLUDE_DRAFTS=1`（从旧版起步）；发布演练只设 `ADULT_TENSION_TRACE`。
-3. 开新对话，按剧本文件里 `say` 的顺序逐句输入；遇到 `harness: upgrade_skill` 时关掉对话、用当前版本替换 Skill 目录、再开对话继续；遇到 `conversation` 变化时开新对话。
+2. 在终端里先设置两个环境变量再启动宿主：`ADULT_TENSION_HOME=<项目>\.at-data`、`ADULT_TENSION_TRACE=<项目>\trace.jsonl`；发布演练不设 `ADULT_TENSION_HOME`，改设 `LOCALAPPDATA=<项目>\.platform-data`（Linux 是 `XDG_DATA_HOME`）。
+3. 开新对话，按剧本文件里 `say` 的顺序逐句输入；遇到 `harness` 步骤先停下，由我用测试框架做（`play_previous` 在旧版上玩到存档，`upgrade_skill` 替换 Skill 目录），做完再开对话继续；遇到 `conversation` 变化时开新对话。
 4. 结束后用宿主自带的导出功能把整段对话导出到测试项目里，连同 `trace.jsonl` 一起交给我。
