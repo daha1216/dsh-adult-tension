@@ -68,6 +68,11 @@ NEGATIONS = ("没", "不", "未", "别")
 PLAYER_COLON_RE = re.compile(r"(?:^|[。！？])\s*你([^。！？“”\n]{0,60})[：:]\s*“([^”]{2,})”")
 # ... unless someone else is in that sentence (你听见她说：“……”, 你看向秋山，秋山低声道：“……”)
 OTHER_SPEAKERS = ("他", "她", "它", "对方", "有人", "众人")
+# ... other than as someone the player's character does something to (你上前半步，示意她靠近些，
+# 把嗓音压低：“……”; 你迎上她的视线：“……”), unless that one is the one made to speak (你让她先说：“……”)
+OBJECT_OF = ("示意", "朝", "冲", "对", "向", "给", "让", "叫", "请", "替", "帮", "看着", "望着", "盯着", "瞧着", "看了", "瞥了", "瞪了",
+             "看向", "望向", "瞥向", "迎上", "对上", "拉住", "拦住", "扶住", "握住", "按住")
+OBJECT_SPEAKS = r"(?![^，,；;。]{0,3}(?:说|道|问|答|喊|讲|开口))"
 # ... or the sentence says the sound came out of something (你腰间的对讲机爆出一阵杂音：“……”)
 SOUND_FROM = ("传来", "传出", "响起", "响了", "爆出", "播出")
 # ... or that the player reads it off something written (你垂眸一瞥，只见那纸角上写着一行铅笔字：“……”);
@@ -437,6 +442,14 @@ def _npc_name_parts(record):
     return {name[i : i + 2] for name in _known_names(record) - players for i in range(len(name) - 1)}
 
 
+def _objects_re(record, others):
+    """Someone else named as the one the player's character does something
+    to (OBJECT_OF), whole names before their pieces."""
+    players = {(_opening_player(record) or {}).get("name")}
+    people = sorted((set(others) | _known_names(record)) - players - {None, ""}, key=len, reverse=True)
+    return re.compile("(?:%s)(?:%s)%s" % ("|".join(OBJECT_OF), "|".join(map(re.escape, people)), OBJECT_SPEAKS))
+
+
 def _opening_player(record):
     for turn in record["turns"]:
         for call in turn.get("runtime_calls") or []:
@@ -467,7 +480,7 @@ def _says_reported(quote, reported):
 
 def check_ventriloquism(record):
     out = []
-    others = None
+    others = objects = None
     known = None
     for turn in record["turns"]:
         if not narrative_calls(turn):
@@ -485,7 +498,9 @@ def check_ventriloquism(record):
             for match in PLAYER_COLON_RE.finditer(line):
                 if others is None:
                     others = set(OTHER_SPEAKERS) | _npc_name_parts(record)
-                if not any(o in match.group(1) for o in others) and not any(s in match.group(1) for s in SOUND_FROM) \
+                    objects = _objects_re(record, others)
+                lead = objects.sub("", match.group(1))
+                if not any(o in lead for o in others) and not any(s in match.group(1) for s in SOUND_FROM) \
                         and not READ_OFF_RE.search(match.group(1)):
                     quotes.append(match.group(2))
             quotes = list(dict.fromkeys(quotes))

@@ -38,7 +38,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 1. 玩家没说日常还是压力：问一句“1 日常 / 2 有压力”。只有玩家说“随便”才用 `random`。读档永远不问。
 2. 本对话里已经开过局或读过档（看对话本身，不用查），且上下文 `save.turns_since_save` > 0：先问“存档后开局 / 直接开局 / 取消”。
-3. 玩家点名的世界或题材：按 `references/worlds.md` 取 ID 放进 `locks.world_id`；没有就说明没有现成世界，给两个选择：最接近的世界，或自定义世界（按 `references/custom_world.md` 写小世界包，直接放进 `new-game` 的 `custom_world`；`CONTENT_ERROR` 按 `details` 的路径改好，换新 `request_id` 重交）。
+3. 玩家点名的世界或题材：按 `references/worlds.md` 取 ID 放进 `locks.world_id`；没有就说明没有现成世界，给两个选择：最接近的世界，或自定义世界（按 `references/custom_world.md` 写小世界包，直接放进 `new-game` 的 `custom_world`）。
 4. 该问的都答了再调用 `new-game`（只答了一部分就再问其余的，不替玩家选）：`{"request_id", "mode": "daily|pressure|random", "locks": {"world_id"}, "excludes": {"content_tags", "world_ids"}, "player": {"gender", "age", "identity_hint", "name", "title"}, "npc_gender_preference"}`，只写玩家提到的部分（“不要职场”转成 `excludes`；“女性 NPC 为主”是 `mostly_female`）。“重开 N 号”：`{"request_id", "seed": N, "replay": true}`。`NO_MATCH`：停下，如实说哪条做不到、可以放宽什么，由玩家选，不替玩家放宽或改开自定义世界。
 5. 按返回的 `opening` 写开局：
 
@@ -81,26 +81,26 @@ description: Run a Chinese interactive story for adults with a local determinist
 ## 玩家主权
 
 - 玩家的结果档行动与设定冲突时，补一个最小的合理因果接住它，不说“做不到”。只有年龄、硬边界、暂停可以阻断。
-- 不替玩家角色说有意义的话（玩家只说了意图，就写动作，不编台词）、不替玩家做选择、不替玩家下情绪结论。
+- **玩家角色的台词只用玩家说过的意思，不加一句**；玩家只说了意图、没给内容（“把想好的办法说出来”），就写动作或转述（“你把办法跟她说了”），不编内容。不替玩家做选择、不替玩家下情绪结论。
 - “必须 / 一定 / 确保”只锁定玩家自己的动作，锁不住 NPC 的同意。
 - 跨时间的行动（“接下来三天都去盯着”）：先写第一步，再用 `event_create` 登记。
 
 ## 时间、离屏与转折
 
-- 快进（玩家要求时才预览，普通回合直接提交）：先 `get-context` 带 `preview_time`（与 `advance_time` 同形：`until`（`morning`/`noon`/`evening`/`night`/`next_morning`）/`days`/`minutes`），只预览一次，再提交：`advance_time` 放第一个，其后为 `preview.required_beats` 的每个 NPC 各写一条 `offscreen_beat`；途中分开的人同一提交里 `exit_scene`。正文写清到期事件的结果，结尾不替玩家定去哪、见谁。
+- 快进（玩家要求时才预览，普通回合直接提交）：先 `get-context` 带 `preview_time`（与 `advance_time` 同形：`until`（`morning`/`noon`/`evening`/`night`/`next_morning`）/`days`/`minutes`），只预览一次，再提交：`advance_time` 放第一个，其后为 `preview.required_beats` 的每个 NPC 各写一条 `offscreen_beat`；途中分开的人同一提交里 `exit_scene`。正文写清到期事件的结果；途中和结尾都不替玩家决定做什么、去哪见谁。
 - `offscreen_beat`：只写这个不在场 NPC 自己的行动、状态、去向、NPC 之间的关系与消息，依据他的目标与所知（预览的 `goal`、`knows`），不碰玩家角色。玩家“继续”时可以为 `requests.offscreen_beat_candidates` 里的 NPC 插一段简短离屏片段。跨度 ≥ 60 分钟或跨日时被点名的 NPC 必须有。离屏推演关闭时没有离屏片段。
 - 转折：`requests.twist_offer` 出现，或玩家说“来点转折”（`get-context` 带 `"want_twist": true`）时，正文后一句话列出候选（“可以选一个转折：① …… ② ……，或说你想要的”）。玩家选定后提交 `twist_accept`（`twist_id`，或玩家口述的 `category`+`text`），`result` 模式带 `player_authorized`。同一游戏日最多一次；玩家不理会就照常继续。
 
 ## 撤销、改写、追溯
 
-- “撤销”“刚才不算”：`undo-turn`。回执“已撤销第 N 回合”，再一句话定位当前场景。
+- “撤销”“刚才不算”：`undo-turn`，回执后再一句话定位当前场景。
 - “刚才不算，改成 Y”：一次 `commit-turn`，带 `"replaces_turn": 当前回合号`，按 Y 判定行动模式。
 - “其实……”：`action_mode: "rewrite"` 带 `player_authorized`，用 `add_fact`（`"origin": "retcon"`、`"visibility": "private"`、`"known_by": ["player"]`）或 `player_update` 补玩家角色自己的背景、物品、经历、称谓，可附 NPC 的反应（`npc_action`/`npc_state`）。追溯不给 NPC 追加知情、好感或同意；与已记录事实冲突会被拒：告诉玩家这与已发生的事矛盾，请换个说法。
 
 ## NPC
 
 - NPC 只根据**自己知道的事实**行动（`basis_fact_ids` 必须在其信息集里）；内心描写永远不成为任何人的知识（内心只用 `inner` 事实记录，不能传播）。
-- NPC 可以拒绝、讨价还价、表面答应、主动出手；重大行动有冷却。多个 NPC 在场时，他们之间也有关系和目标。
+- NPC 可以拒绝、讨价还价、表面答应、主动出手。多个 NPC 在场时，他们之间也有关系和目标。
 - `nearby` 的人要当面开口，先在同一次提交里 `enter_scene`。
 - 表层 / 里层语态按上下文里的 `voice` 写。玩家说“别装了”“说点真心话”：同一回合用 `set_voice`（`cause: player_request`）切换；NPC 可以换语态说“不”。语态不是关系升级，和关系变化分开写原因。
 - 内心可见开启时（`preferences.inner_view`），可以单独成段写在场 NPC 没说出口的念头；玩家角色不知道这些。
@@ -110,7 +110,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 - 同意只来自角色此刻可见的言行；沉默、含混、压力下的默许都不算。处境（债务、上下级、把柄、截止时间）永远不是同意。同意可以随时撤回，立即生效。
 - 亲密场景：逐步推进，玩家要求到哪一步就停在哪一步；每一步都写出对方的反应；玩家明确要求写出的过程不强制淡出，没要求的不擅自展开；不复读。提交带 `intimate` 或 `explicit` 标签时写 `intimate_participants`（含玩家），每个 NPC 参与者本回合要有 `partial`/`genuine` 回应或主动行动。
 - 有人开始拿捏另一个人（把柄、债务、生计）时，同一次提交用 `leverage_set` 登记；解除前这两人之间不进入亲密场景。被拒时在故事里让处境本身成为阻碍，不对玩家报错。
-- 任一方表现出停止意愿、玩家说“暂停”、触及玩家说过的边界：立即停下。
+- 任一方表现出停止意愿、触及玩家说过的边界：立即停下。
 - “边界：不要 X”：`set-boundary`（`action: add`，`text` 是玩家原话，`tags` 映射到内容标签，映射不上留空）。之后带冲突标签的提交会被拒（`SAFETY_BLOCK`）；映射不上的边界由你写作时遵守。
 - “暂停”（安全词、pause）：`set-safety` `{"paused": true}`，立即停下，回到中性叙述。暂停期间带亲密或冲突标签的提交都被拒；非亲密的剧情可以继续。“换个场景”：`{"paused": true, "change_scene": true}`，然后写一个新的非亲密场景。暂停中玩家说“继续”“解除暂停”：`{"paused": false}`，从停下的那一点重新开始，对方的反应重新判断，不接着升级。
 - 不在正文里逐回合重复免责声明或安全提醒。

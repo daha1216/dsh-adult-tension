@@ -237,9 +237,21 @@ class MachineCheckTest(unittest.TestCase):
         # the player speaking into a radio is still the player
         rec["turns"][2]["text"] = "你把对讲机凑到嘴边，声音压得极低：“七号泊位的吊具先停下，谁也别动那个柜！”\n\n" + footer(3, 1210)
         self.assertIn(("ventriloquism", 3), names(M.check(rec)))
+        # and so is the player turned to someone, or doing something to them
+        for text in ("你上前走了半步，示意她靠近些，把嗓音压到门外听不见：“白天在闸口听说，今晚海关要突击抽查。”",
+                     "你伸手压了压桌沿，目光沉静地迎上她的视线，示意她先稳住：\n\n“别慌，风声只是风声，单子昨晚已经顺过去了。”",
+                     "你看着梁志强，声音压得极低：“今晚别去七号泊位。”"):
+            rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
+            self.assertIn(("ventriloquism", 3), names(M.check(rec)), text)
+        # a long name too, not only its first two characters
+        named = copy.deepcopy(rec)
+        named["turns"][2]["runtime_calls"][0]["input"]["operations"] = [{"op": "introduce_character", "name": "欧阳明远"}]
+        named["turns"][2]["text"] = "你看着欧阳明远，声音压得极低：“今晚别去七号泊位。”\n\n" + footer(3, 1210)
+        self.assertIn(("ventriloquism", 3), names(M.check(named)))
         # someone else's line that the player does not answer, someone else's line, someone else in the sentence
         for text in ("“你说今晚到底走不走？”你没有回答，只是看着她。", "“今晚忙得很，别来烦我。”她说。你点了点头。",
                      "你听见她压低了声音：“今晚别去七号泊位。”", "你看向志强，志强把烟掐了：“今晚别去七号泊位。”",
+                     "你刚坐下，她就凑了过来：“今晚别去七号泊位。”", "你抬手示意梁志强讲下去：“今晚别去七号泊位。”",
                      "你工装外侧别着的对讲机突然爆出一阵电流杂音：\n\n“呼叫调度！七号泊位的吊具已经降下来了！”"):
             rec["turns"][2]["text"] = text + "\n\n" + footer(3, 1210)
             self.assertNotIn(("ventriloquism", 3), names(M.check(rec)), text)
