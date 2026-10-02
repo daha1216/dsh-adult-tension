@@ -34,6 +34,12 @@
 | `STORAGE_BUSY` | 数据库被另一个进程短暂占用；用同一个 `request_id` 重试 |
 | `INTERNAL_ERROR` | 状态没有改变；`error.log` 给出日志位置，`error.error_id` 是日志里的编号 |
 
+## 存档冲突
+
+- 存档名已被占用（`SLOT_CONFLICT`，`reason: exists`）：问玩家“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重交。
+- 本局当前槽已在别的对话里被写过（`reason: changed_elsewhere`）：给玩家“A 读取最新 / B 另存为新名 / C 取消”。
+- 导入被拒：如实说文件损坏或版本太新，不猜内容。
+
 ## 升级、导出与卸载
 
 - **升级**：用新版本的 Skill 目录替换旧目录，数据目录不动。新版本第一次运行时，如果数据库格式较旧，会先把数据库复制到 `backups/`（文件名带旧格式号与时间），再迁移；迁移失败就恢复备份并报 `MIGRATION_FAILED`，不加载任何会话。

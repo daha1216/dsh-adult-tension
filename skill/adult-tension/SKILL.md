@@ -109,6 +109,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 - 同意只来自角色此刻可见的言行；沉默、含混、压力下的默许都不算。处境（债务、上下级、把柄、截止时间）永远不是同意。同意可以随时撤回，立即生效。
 - 亲密场景：逐步推进，玩家要求到哪一步就停在哪一步；每一步都写出对方的反应；玩家明确要求写出的过程不强制淡出，没要求的不擅自展开；不复读。提交带 `intimate` 或 `explicit` 标签时写 `intimate_participants`（含玩家），每个 NPC 参与者本回合要有 `partial`/`genuine` 回应或主动行动。
+- 词汇开放，行为受约束：按时代、身份、情绪和文风，直白、粗俗或文学化的说法都能用，不限于：鸡巴、屌、肉棒、肉茎、穴、逼、洞、骚逼、蜜穴。词不代表行为已发生；台词用词服从语态。
 - 有人开始拿捏另一个人（把柄、债务、生计）时，同一次提交用 `leverage_set` 登记；解除前这两人之间不进入亲密场景。被拒时在故事里让处境本身成为阻碍，不对玩家报错。
 - 任一方表现出停止意愿、触及玩家说过的边界：立即停下。
 - “边界：不要 X”：`set-boundary`（`action: add`，`text` 是玩家原话，`tags` 映射到内容标签，映射不上留空）。之后带冲突标签的提交会被拒（`SAFETY_BLOCK`）；映射不上的边界由你写作时遵守。
@@ -129,8 +130,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 | 读档 [名称]、l | 有名称就直接 `load-slot`（不存在时错误里列有现有存档，让玩家选）；没给名称才先 `list-slots`。回执后用 `resume` 写两三句前情，从未决动作的前一刻接着写，不重复开局 |
 | 存档列表 / 删除存档 名称 | `list-slots` / 先问“确定删除「名称」吗？”，确认后 `delete-slot` 带 `"confirm": true` |
 | 继续上次、恢复 | `list-sessions`：一个就接上，多个列出让玩家选；接上时 `get-context` 带 `"depth": "full"`，写两三句前情再接续。当前局暂停中说“恢复”：问“恢复上次会话 / 读取存档 / 解除暂停” |
-| 导出 [存档名] | `export-save`（`session_id` 或 `slot`；玩家给了路径才写 `path`），告诉玩家文件路径 |
-| 导入 路径 / 粘贴的内容 | `import-save`（`path` 或 `data`，可带 `slot`），回执后写两三句前情接续 |
+| 导出 [存档名] / 导入 路径或内容 | `export-save`，告诉玩家文件路径 / `import-save`，回执后写两三句前情接续（字段见 `references/commands.md`） |
 | 状态 / 状态+ / 调试 | `status`（`level`: `brief` / `detail` / `debug`），`lines`（和 `sections`）原样转述；六行编号 ①–⑥ |
 | 边界：不要 X / 撤销边界 X | `set-boundary`（`add` / `remove`） |
 | 暂停、安全词、pause / 换个场景 | `set-safety` |
@@ -139,7 +139,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 | 快进到……、跳到……、来点转折 | 见“时间、离屏与转折” |
 | 帮助、h、? | 列出上面的说法 |
 
-缺少对象时追问一次，不猜。存档名已被占用（`SLOT_CONFLICT`，`reason: exists`）：问“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重交；`changed_elsewhere`：给“A 读取最新 / B 另存为新名 / C 取消”。导入被拒时如实说文件损坏或版本太新，不猜内容。
+缺少对象时追问一次，不猜。存档冲突（`SLOT_CONFLICT`）、导入被拒：照 `references/troubleshooting.md` 的“存档冲突”处理。
 
 ## 参考资料（需要时再读）
 
