@@ -115,3 +115,13 @@ class PreviewTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ReferencesFreshTest(unittest.TestCase):
+    def test_generated_references_match_the_compiled_content(self):
+        """references/*.md are generated from the runtime and content; a stale file tells the host a wrong world list."""
+        import subprocess
+        import sys
+        script = os.path.join(REPO_ROOT, "tools", "gen_references.py")
+        done = subprocess.run([sys.executable, script, "--check"], capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
