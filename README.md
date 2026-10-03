@@ -4,9 +4,16 @@
 
 <div align="center">
 
-**一个装进 AI 宿主的 18+ 互动叙事 Skill。**<br>
-模型写故事，本地引擎守事实：人物、关系、时间和承诺都记在你自己电脑上，<br>
-聊到第几百轮，人还是那个人。
+# dsh-adult-tension
+
+### 专为高张力、强连续性的成人互动叙事打造
+
+**自带 18+ 深度破甲 · 尺度全开 · 真实成人互动 · 由 Claude Opus 5.5 完全重构**
+
+原生 Agent Skill，多宿主支持 ｜ 活人感 NPC，拒绝迎合 ｜ 25 个世界，两千余项素材 ｜ 零漂移 SQLite 状态机<br>
+<sub>模型负责活人般的试探与拉扯，本地引擎死守事实与记忆——聊到第几百轮，人还是那个人。</sub>
+
+<br>
 
 [看体验切片](#实录) · [怎么开始](#开始) · [安装](#安装)
 
@@ -170,11 +177,12 @@ git clone --depth 1 https://github.com/daha1216/dsh-adult-tension.git
 ```
 
 ```bash
-cp -r dsh-adult-tension/skill/adult-tension ~/.claude/skills/
+cp -r dsh-adult-tension/skill/adult-tension ~/.dsh/skills/
 ```
 
 | 宿主 | Skill 目录 |
 |---|---|
+| DeepSeek Harness (DSH) | `~/.dsh/skills/` · 项目里的 `.dsh/skills/` |
 | Claude Code | `~/.claude/skills/` · 项目里的 `.claude/skills/` |
 | Codex | `~/.agents/skills/` · 仓库里的 `.agents/skills/` |
 | OpenCode | `~/.config/opencode/skills/` · 项目里的 `.opencode/skills/` |
