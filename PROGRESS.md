@@ -24,6 +24,7 @@
   - 端到端到此暂停，不再跑。当前 Skill（`a21f61d7…`）没有跑过端到端；上一次计入的局全部通过的是 `87044f0b…`（剧本 01–15）；剧本 16 与发布演练没有通过的记录。
   - 发布清单（`reports/release/checklist.md`）没有重跑，结论（还不能发布）和未满足的条目照旧，没有改写成已满足。
   - 推送：新建 GitHub 私有仓库 `daha1216/adult-tension-v2`（https://github.com/daha1216/adult-tension-v2），推送 `main` 的全部历史。`ENVIRONMENT.md` 写的是只在本地提交，这次推送是用户明确要求的；以后每次推送仍先问用户。
+  - **发布到公开仓库**（2026-10-03）：用户要求把 `daha1216/dsh-adult-tension`（公开仓库，95 星、4 个 fork，装的是旧项目）先备份，再用本项目完全替换。备份是镜像克隆，没有打开过内容：`D:\projects\dsh-adult-tension-backup-20261003.git`，另有一个校验过的 bundle 文件 `D:\projects\dsh-adult-tension-backup-20261003.bundle`（全部分支和标签）。推送前在全部 77 个提交里扫了密钥，没有命中。用户选择公开推送完整历史，并删掉全部旧分支和标签：`main` 强推到 `cbbe45e`，删除分支 `backup-pre-apple-light`、`codex/material-governance` 和标签 v0.1.0–v1.4.0。远端只剩 `main`，外加 GitHub 自己管理、删不掉的 `refs/pull/2/head`；4 个 fork 里的旧内容不受影响。以后每次推送仍先问用户。
   - 可见性选私有：`ENVIRONMENT.md` 提醒过，一次推送就可能把成人内容公开到用户名下。要公开，由用户决定。
   - 仓库的 GitHub Actions 在推送前已关闭：`.github/workflows/ci.yml` 一遇到 push 就会跑，而 CI 按用户决定不做（P2）。
   - 推送前扫过全部历史：949 个文件版本、70 条提交说明，接口密钥一处也没有。命中的只有三类：本地接口地址（127.0.0.1）、测试里的假值（`sk-secret`、`parent`）、世界包里人物的 `secret` 字段。提交作者都是 `daha1216@users.noreply.github.com`。
