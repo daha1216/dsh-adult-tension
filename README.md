@@ -4,6 +4,8 @@
 
 <div align="center">
 
+<b>中文</b> · <a href="./README.en.md">English</a>
+
 ### dsh-adult-tension<br>专为高张力、强连续性的成人互动叙事打造
 
 <p>
