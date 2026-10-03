@@ -8,8 +8,8 @@
 
 <p>
 <strong>18+ 深度破甲 · 尺度全开 · Claude Opus 5.5 重构</strong><br>
-原生 Agent Skill ｜ 活人感 NPC，拒绝迎合<br>
-25 个世界，两千余项素材 ｜ 零漂移 SQLite 状态机<br>
+原生 Agent Skill ｜ 活人感 NPC<br>
+数千余项素材库 ｜ 零漂移 SQLite 状态机<br>
 <sub>这里没有百依百顺的玩偶，只有各怀心事的成年人。</sub>
 </p>
 
