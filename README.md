@@ -7,7 +7,7 @@
 ### dsh-adult-tension<br>专为高张力、强连续性的成人互动叙事打造
 
 <p>
-<strong>18+ 深度破甲 · 尺度全开 · Claude Opus 5.5 重构</strong><br>
+<strong>18+ 深度破甲 · Claude Opus 5.5 重构</strong><br>
 原生 Agent Skill ｜ 活人感 NPC<br>
 数千余项素材库 ｜ 零漂移 SQLite 状态机<br>
 <sub>——这里没有百依百顺的玩偶，只有各怀心事的成年人。</sub>
