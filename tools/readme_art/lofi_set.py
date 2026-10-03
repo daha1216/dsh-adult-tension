@@ -76,7 +76,11 @@ def dotline(W, y, begin=0.0):
             f'<animate attributeName="x" values="-120;{W}" dur="6s" begin="{begin:.1f}s" repeatCount="indefinite"/></rect>')
 
 
+PARTS = {}
+
+
 def doc(name, W, H, title, desc, defs, body):
+    PARTS[name] = (W, H, defs, body)
     svg = pk.svg_doc(W, H, esc(title), esc(desc), DEFS + defs, f'    <rect width="{W}" height="{H}" fill="url(#wallp)"/>\n' + body
                      + f'\n    <rect width="{W}" height="{H}" fill="url(#vig)"/>')
     open(os.path.join(OUT, name), "w", encoding="utf-8", newline="\n").write(svg)
@@ -227,11 +231,9 @@ DESK = 38
 def banner(name, title, sub, seed, box):
     rnd = random.Random(seed)
     cv = pk.Canvas(BW, BH)
-    bulbs = fairy(cv, 104, 302, 1, 3, 3)
     body = f'''    {crop(box, 0, 0, 440, BH * C, ("fade", 0.72))}
     <ellipse cx="{BW * C - 300}" cy="100" rx="300" ry="70" fill="{GLOW}" fill-opacity="0.12" filter="url(#g30)"/>
     <g shape-rendering="crispEdges">{cv.emit(C)}</g>
-    {fairy_svg(bulbs, rnd)}
     {neon(BW * C - 48, 98, title, 46, "end", "#a29dab", "#ecebef", flicker=True)}
     {text(BW * C - 50, 140, sub, 20, SUBT, 600, "end", 2)}
     {dotline(BW * C, 0, seed * 0.9)}'''
@@ -378,14 +380,14 @@ def v_install(cv, rnd):      # an opened parcel with the skill inside
 
 # ================================================================ world wall
 REGIONS = [
-    ("历史风云", "#8c7a9e", [("坊门落锁后", "盛唐 · 长安", 0), ("幕末町屋与道场", "1863 · 京都", 1), ("洋裁町", "1881 · 横滨", 0),
-                          ("民国报馆与手艺街", "1926 · 通商口岸", 1), ("在册", "1928 · 芝加哥", 0), ("喫茶街", "1987 · 东京近郊", 0)]),
-    ("都市暗流", "#9a7394", [("月份牌", "1930s · 片厂与舞厅", 0), ("雾都号牌", "蒸汽浴场", 0), ("第七任", "虚拟主播公司", 0), ("后巷三楼", "写真与绳艺", 0)]),
-    ("当代市井", "#6f78a0", [("港口夜班", "1998 · 集装箱码头", 1), ("世纪末网吧", "1999 · 通宵网吧", 0), ("半条街", "拆迁前的夏天", 0),
-                          ("最后一期", "停刊前的报社", 0), ("成年创作者与艺术季", "旧厂区艺术季", 1)]),
-    ("近未来", "#8579b0", [("夜班修理局", "近未来巨城", 0), ("检疫环", "边境空间站", 0), ("修补集市", "灾后十五年", 0), ("寒冬避难所公共生活", "长冬第三年", 1)]),
-    ("异界幻想", "#76708e", [("鬼市商路", "大漠 · 千佛窟", 0), ("旧町神怪与灯会", "河湾 · 灯会", 1), ("山下镇", "仙侠 · 山脚集镇", 0),
-                          ("勇者退休以后", "魔王死后十年", 0), ("登记城", "灵气复苏十年", 0), ("机械马戏", "每城只停七天", 0)]),
+    ("历史风云", "#8c7a9e", [("坊门落锁后", "盛唐 · 长安", 1), ("幕末町屋与道场", "1863 · 京都", 1), ("洋裁町", "1881 · 横滨", 1),
+                          ("民国报馆与手艺街", "1926 · 通商口岸", 1), ("在册", "1928 · 芝加哥", 1), ("喫茶街", "1987 · 东京近郊", 1)]),
+    ("都市暗流", "#9a7394", [("月份牌", "1930s · 片厂与舞厅", 1), ("雾都号牌", "蒸汽浴场", 1), ("第七任", "虚拟主播公司", 1), ("后巷三楼", "写真与绳艺", 1)]),
+    ("当代市井", "#6f78a0", [("港口夜班", "1998 · 集装箱码头", 1), ("世纪末网吧", "1999 · 通宵网吧", 1), ("半条街", "拆迁前的夏天", 1),
+                          ("最后一期", "停刊前的报社", 1), ("成年创作者与艺术季", "旧厂区艺术季", 1)]),
+    ("近未来", "#8579b0", [("夜班修理局", "近未来巨城", 1), ("检疫环", "边境空间站", 1), ("修补集市", "灾后十五年", 1), ("寒冬避难所公共生活", "长冬第三年", 1)]),
+    ("异界幻想", "#76708e", [("鬼市商路", "大漠 · 千佛窟", 1), ("旧町神怪与灯会", "河湾 · 灯会", 1), ("山下镇", "仙侠 · 山脚集镇", 1),
+                          ("勇者退休以后", "魔王死后十年", 1), ("登记城", "灵气复苏十年", 1), ("机械马戏", "每城只停七天", 1)]),
 ]
 
 
@@ -393,7 +395,6 @@ def worlds():
     GW, GH = 300, 222
     rnd = random.Random(31)
     cv = pk.Canvas(GW, GH)
-    bulbs = fairy(cv, -2, 302, 2, 4, 4)
     BX0, BY0, BX1, BY1 = 8, 48, 292, 210
     cv.rect(BX0 - 3, BY0 - 3, BX1 + 3, BY1 + 3, "#4a2e26")         # frame
     cv.rect(BX0 - 3, BY0 - 3, BX1 + 3, BY0 - 2, "#8a5c44")
@@ -471,21 +472,17 @@ def worlds():
                        f'<animate attributeName="fill-opacity" values="0.6;0.2;0.6" dur="{rnd.uniform(2, 3.5):.1f}s" begin="-{rnd.uniform(0, 2):.1f}s" repeatCount="indefinite"/></circle>'
                        for px, py, o in pins if o)
     # legend pins
-    cv.rect(96, 37, 99, 40, "#ff6fae")
-    cv.put(96, 37, "#ffd6e8")
-    cv.rect(170, 37, 173, 40, "#8a8094")
-    cv.put(170, 37, "#c0b8c8")
+    cv.rect(124, 37, 127, 40, "#ff6fae")
+    cv.put(124, 37, "#ffd6e8")
     body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}</g>
-    {fairy_svg(bulbs, rnd)}
     {pin_glow}
     {"".join(over)}
     {neon(600, 82, "数十个世界", 52, "middle", "#a29dab", "#ecebef", flicker=True)}
     {text(600, 122, "选一个直接开局，或者说“自定义世界”当场写一个", 21, SUBT, 600, "middle", 2)}
-    {text(404, 159, "已开放，可直接开局", 16, "#ffd6e8", 700, "start", 1)}
-    {text(700, 159, "试玩中，即将开放", 16, "#bfb2c8", 700, "start", 1)}
+    {text(520, 159, "全部已开放，可直接开局", 16, "#ffd6e8", 700, "start", 1)}
     {text(BX1 * C, (BY1 + 9.5) * C, "名单会继续变长", 16, "#bfb2c8", 700, "end", 2)}'''
     doc("worlds.svg", GW * C, GH * C, "数十个世界",
-        "内置世界钉在一块软木板上，分为历史风云、都市暗流、当代市井、近未来、异界幻想五栏。已开放：幕末町屋与道场、民国报馆与手艺街、港口夜班、成年创作者与艺术季、寒冬避难所公共生活、旧町神怪与灯会；其余世界试玩中。", "", body)
+        "内置世界钉在一块软木板上，分为历史风云、都市暗流、当代市井、近未来、异界幻想五栏，全部已开放，可直接开局。", "", body)
 
 
 # ================================================================ cassette shelf
@@ -499,7 +496,6 @@ def inventory():
     rnd = random.Random(41)
     cv = pk.Canvas(GW, GH)
     pic = crop((1410, 0, 1710, 95), 216 * C, 6 * C, 74 * C, 24 * C)
-    bulbs = fairy(cv, -2, 205, 1, 3, 3)
     over, reels = [], []
     for r in range(2):
         sy = 72 + r * 46                                            # shelf board y
@@ -544,7 +540,6 @@ def inventory():
     body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}</g>
     <rect x="{213 * C}" y="{3 * C}" width="{80 * C}" height="{30 * C}" fill="#17101a"/>
     {pic}
-    {fairy_svg(bulbs, rnd)}
     <g shape-rendering="crispEdges">{"".join(spin)}</g>
     {"".join(over)}
     {neon(40, 82, "两千余项素材", 50, "start", "#a29dab", "#ecebef", flicker=True)}
@@ -560,3 +555,28 @@ banner("section-start.svg", "怎么开始", "不用记语法，直接说大白�
 banner("section-install.svg", "安装", "只需交给 AI 操作，原生 SKILL", 5, (1440, 280, 1800, 431))           # the laptop
 worlds()
 inventory()
+
+
+def library():
+    """The world-library banner, the corkboard and the cassette shelf stacked into one seamless picture: one wall, one frame,
+    one vignette; the banner's picture crop also melts into the wall at its bottom edge."""
+    names = ["section-worlds.svg", "worlds.svg", "inventory.svg"]
+    W = PARTS[names[0]][0]
+    H = sum(PARTS[n][1] for n in names)
+    BHPX = PARTS[names[0]][1]
+    defs = "".join(PARTS[n][2] for n in names) + (
+        f'<linearGradient id="seamg" x1="0" y1="{BHPX - 60}" x2="0" y2="{BHPX}" gradientUnits="userSpaceOnUse">'
+        f'<stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>'
+        f'<mask id="seam"><rect width="{W}" height="{BHPX}" fill="url(#seamg)"/></mask>')
+    y, parts = 0, []
+    for n in names:
+        parts.append(f'    <g transform="translate(0 {y})">{PARTS[n][3]}</g>')
+        y += PARTS[n][1]
+    parts.insert(1, f'    <rect width="440" height="{BHPX}" fill="url(#wallp)" mask="url(#seam)"/>')
+    doc("world-library.svg", W, H, "内置世界库",
+        "内置世界库：跨时代独立世界框架和上千项素材。数十个世界钉在一块软木板上，分为历史风云、都市暗流、当代市井、近未来、异界幻想五栏，全部已开放，可直接开局。"
+        "下方磁带架写着两千余项素材：160+ 地点、300+ NPC 角色、140+ 玩家身份、200+ 人物组合、150+ 张力引擎、170+ 日常活动、150+ 压力事件、300+ 开场钩子、180+ 中期转折、250+ 规矩与风俗。",
+        defs, "\n".join(parts))
+
+
+library()
