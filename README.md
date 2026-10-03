@@ -8,7 +8,8 @@
 
 <p>
 <strong>18+ 深度破甲 · 尺度全开 · Claude Opus 5.5 重构</strong><br>
-原生 Agent Skill ｜ 活人感 NPC，拒绝迎合 ｜ 25 个世界，两千余项素材 ｜ 零漂移 SQLite 状态机<br>
+原生 Agent Skill ｜ 活人感 NPC，拒绝迎合<br>
+25 个世界，两千余项素材 ｜ 零漂移 SQLite 状态机<br>
 <sub>模型负责活人般的试探与拉扯，本地引擎死守事实与记忆——聊到第几百轮，人还是那个人。</sub>
 </p>
 
