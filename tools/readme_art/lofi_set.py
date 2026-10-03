@@ -12,7 +12,9 @@ sys.path.insert(0, os.path.dirname(__file__))
 import pixkit as pk  # noqa: E402
 from PIL import Image  # noqa: E402  (dev-only: crops the user's picture)
 
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".github", "readme-lofi")
+OUT = os.environ.get("README_OUT") or os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".github", "readme-lofi")
+os.makedirs(OUT, exist_ok=True)
+BG = os.environ.get("README_BG", "dusk")       # dusk (default): dithered sky; wall: striped wallpaper; mosaic: the picture in big dark blocks
 C = 4
 SANS = "-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif"
 MONO = "ui-monospace,Consolas,monospace"
@@ -79,9 +81,55 @@ def dotline(W, y, begin=0.0):
 PARTS = {}
 
 
+def webp_href(img):
+    buf = io.BytesIO()
+    img.save(buf, "WEBP", lossless=True)
+    return "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
+
+
+DUSK = [(17, 13, 34), (24, 17, 48), (33, 21, 60), (44, 25, 70), (57, 28, 76), (70, 30, 78), (84, 33, 80)]
+
+
+def background(name, W, H):
+    """The backdrop behind every picture, picked by README_BG; each picture gets its own patch, chosen by its name."""
+    if BG == "wall":
+        return f'<rect width="{W}" height="{H}" fill="url(#wallp)"/>'
+    rnd = random.Random(sum(map(ord, name)))
+    if BG == "mosaic":
+        BLK = 24
+        pw, ph = PIC.size
+        cw = min(pw, ph * W / H)
+        ch = cw * H / W
+        x0 = rnd.uniform(0, pw - cw)
+        y0 = rnd.uniform(0, ph - ch)
+        small = PIC.crop((round(x0), round(y0), round(x0 + cw), round(y0 + ch))).resize((max(1, W // BLK), max(1, H // BLK)), Image.BOX)
+        small = Image.eval(small, lambda v: int(v * 0.32))                   # darken so type and notes stay readable
+        tint = Image.new("RGB", small.size, (40, 20, 60))
+        small = Image.blend(small, tint, 0.25)                                  # pull every block toward the violet wall
+        return (f'<image href="{webp_href(small)}" width="{W}" height="{H}" preserveAspectRatio="none" style="image-rendering:pixelated"/>')
+    # dusk: an ordered-dither ramp in 8px blocks, deep violet at the top to a dim rose at the bottom, a few blinking stars
+    BLK = 8
+    w, h = W // BLK, H // BLK
+    img = Image.new("RGB", (w, h))
+    px = img.load()
+    for y in range(h):
+        for x in range(w):
+            t = min(0.9999, y / max(1, h - 1))
+            v = t * (len(DUSK) - 1)
+            i = int(v)
+            if i + 1 < len(DUSK) and pk.dth(x, y, v - i):
+                i += 1
+            px[x, y] = DUSK[i]
+    stars = "".join(f'<rect x="{rnd.randrange(w) * BLK}" y="{rnd.randrange(max(1, h * 2 // 3)) * BLK}" width="4" height="4" fill="#e9dcff">'
+                    f'<animate attributeName="opacity" values="0.7;0.1;0.7" dur="{rnd.uniform(2.5, 5):.1f}s" begin="-{rnd.uniform(0, 4):.1f}s" repeatCount="indefinite"/></rect>'
+                    for _ in range(max(4, W * H // 60000)))
+    return (f'<image href="{webp_href(img)}" width="{W}" height="{H}" preserveAspectRatio="none" style="image-rendering:pixelated"/>'
+            f'<g shape-rendering="crispEdges">{stars}</g>')
+
+
 def doc(name, W, H, title, desc, defs, body):
     PARTS[name] = (W, H, defs, body)
-    svg = pk.svg_doc(W, H, esc(title), esc(desc), DEFS + defs, f'    <rect width="{W}" height="{H}" fill="url(#wallp)"/>\n' + body
+    svg = pk.svg_doc(W, H, esc(title), esc(desc), DEFS + defs, f'    {background(name, W, H)}\n' + body
                      + f'\n    <rect width="{W}" height="{H}" fill="url(#vig)"/>')
     open(os.path.join(OUT, name), "w", encoding="utf-8", newline="\n").write(svg)
     print(name, len(svg) // 1024, "KB")
@@ -567,12 +615,12 @@ def library():
     defs = "".join(PARTS[n][2] for n in names) + (
         f'<linearGradient id="seamg" x1="0" y1="{BHPX - 60}" x2="0" y2="{BHPX}" gradientUnits="userSpaceOnUse">'
         f'<stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>'
-        f'<mask id="seam"><rect width="{W}" height="{BHPX}" fill="url(#seamg)"/></mask>')
+        f'<mask id="seam"><rect width="440" height="{BHPX}" fill="url(#seamg)"/></mask>')
     y, parts = 0, []
     for n in names:
         parts.append(f'    <g transform="translate(0 {y})">{PARTS[n][3]}</g>')
         y += PARTS[n][1]
-    parts.insert(1, f'    <rect width="440" height="{BHPX}" fill="url(#wallp)" mask="url(#seam)"/>')
+    parts.insert(1, f'    <g mask="url(#seam)">{background("world-library.svg", W, H)}</g>')
     doc("world-library.svg", W, H, "内置世界库",
         "内置世界库：跨时代独立世界框架和上千项素材。数十个世界钉在一块软木板上，分为历史风云、都市暗流、当代市井、近未来、异界幻想五栏，全部已开放，可直接开局。"
         "下方磁带架写着两千余项素材：160+ 地点、300+ NPC 角色、140+ 玩家身份、200+ 人物组合、150+ 张力引擎、170+ 日常活动、150+ 压力事件、300+ 开场钩子、180+ 中期转折、250+ 规矩与风俗。",
