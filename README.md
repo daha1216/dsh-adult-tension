@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/readme/hero-dark.svg">
-  <img alt="Adult Tension：一句话，走进另一个人生。" src=".github/readme/hero-light.svg" width="100%">
+  <img alt="Adult Tension：18+ 互动叙事，这次，NPC 是活人。" src=".github/readme/hero-light.svg" width="100%">
 </picture>
 
 <div align="center">
@@ -32,10 +32,10 @@
 <br>
 <br>
 
-## 不只是聊天。<br>是一个会自己运转的世界。
+## 不是陪聊。<br>是一群有自己主意的人。
 
-NPC 有目标、顾虑和只有自己知道的事，会拒绝，也会主动出手。<br>
-你不在场的时候，他们也在生活；承诺会到期，风声会传开。
+他们会拒绝你，会跟你讨价还价，会表面答应、背后另有打算。<br>
+你不在场的时候，他们也在生活。
 
 <br>
 
@@ -43,7 +43,7 @@ NPC 有目标、顾虑和只有自己知道的事，会拒绝，也会主动出�
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/readme/bento-dark.svg">
-  <img alt="25 个世界、两种开局、零依赖、上下文上限 20 KB、每回合一次工具调用、表层与里层、随时暂停" src=".github/readme/bento-light.svg" width="100%">
+  <img alt="活人感 NPC、25 个世界、随心定制开局、自行运转的世界、表里两层、Opus 5.5 重构、随时暂停" src=".github/readme/bento-light.svg" width="100%">
 </picture>
 
 <div align="center">
@@ -222,6 +222,6 @@ python tools/validate_skill.py skill/adult-tension
 
 <br>
 
-<sub>仅限成年人。所有人物与情节均为虚构。</sub>
+<sub>由 Claude Opus 5.5 从零重构。仅限成年人，所有人物与情节均为虚构。</sub>
 
 </div>
