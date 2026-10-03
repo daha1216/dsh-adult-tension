@@ -151,7 +151,7 @@ class FullContextBudgetTest(unittest.TestCase):
         return full
 
     def test_three_person_combos_with_newcomers_stay_within_budget(self):
-        self.assertEqual(len(TRIOS), 25)
+        self.assertEqual(len(TRIOS), 24)
         for world_id, combo_id in TRIOS:
             for mode in ("pressure", "daily"):
                 with app() as ctx:

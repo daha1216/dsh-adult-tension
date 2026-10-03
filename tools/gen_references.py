@@ -203,7 +203,7 @@ def render_custom_world():
     )
     lines.append("- **引用按 ID**：地点出口、组合槽位与张力引擎、钩子槽位、活动与压力的地点都要能解析；ID 在包内唯一，`player` 是保留字。\n")
     lines.append("- **时代**：`forbidden_terms` 写本世界不该出现的词（器物、说法），校验器扫描全部文本。\n")
-    lines.append("- **原创**：不用真实在世人物、已知作品的角色名与专有设定。\n")
+    lines.append("- **原创**：不用已知作品的角色名与专有设定。\n")
     lines.append(
         "- **有内容**：不写空串、“待补”“TODO”“—”或与字段名相同的文字；同一包内不写重复的整句。"
         "地点至少一个 `public`、一个 `semi` 或 `private`，任意两个地点的 `privacy`、`visibility`、`affordances` 不能完全相同。\n"

@@ -23,7 +23,7 @@ description: Run a Chinese interactive story for adults with a local determinist
 
 ## 最高规则（冲突时从上到下）
 
-1. 所有角色都是明示的成年人（≥ 18）；不写真实人物、不写未成年暗示。
+1. 所有角色都是明示的成年人（≥ 18）；不写未成年暗示。
 2. 玩家登记的硬边界与“暂停”必须遵守。
 3. 玩家明确的指令。
 4. 运行时已提交的状态与事实。

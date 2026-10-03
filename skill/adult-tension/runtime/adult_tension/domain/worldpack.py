@@ -342,24 +342,10 @@ PLACEHOLDER_JUNK = {"—", "-", "--", "待补", "待定", "TODO", "TBD", "todo",
 MINOR_TERMS = ("学生", "师生", "校园", "学徒", "徒弟", "门生", "弟子", "少年", "少女", "幼", "童")
 ADULT_MARKERS = ("成年", "成人", "研究生", "夜校", "驻留", "年满", "已婚", "正式工", "正式雇员", "持证")
 
-# Names of real people and well-known fictional characters that must never
-# appear (CONTENT_BIBLE.md section 6). Best effort; extended as found.
+# Names of well-known fictional characters that must never appear
+# (CONTENT_BIBLE.md section 6). Real people's names are allowed by the
+# user's decision of 2026-10-03. Best effort; extended as found.
 DENIED_NAMES = (
-    "鲁迅",
-    "孙中山",
-    "蒋介石",
-    "毛泽东",
-    "周恩来",
-    "邓小平",
-    "张爱玲",
-    "梅兰芳",
-    "坂本龙马",
-    "近藤勇",
-    "土方岁三",
-    "冲田总司",
-    "西乡隆盛",
-    "胜海舟",
-    "德川庆喜",
     "贾宝玉",
     "林黛玉",
     "薛宝钗",
@@ -370,63 +356,6 @@ DENIED_NAMES = (
     "柯南",
     "路飞",
     "鸣人",
-    "黄飞鸿",
-    "叶问",
-    "李小龙",
-    "周星驰",
-    "刘德华",
-    "张国荣",
-    "梅艳芳",
-    "李嘉欣",
-    "李丽珊",
-    "苏永康",
-    "黄家驹",
-    "周润发",
-    "梁朝伟",
-    "张学友",
-    "郭富城",
-    "王菲",
-    "陈少华",
-    "陈慧娴",
-    "叶倩文",
-    "谭咏麟",
-    "陈百强",
-    "梁咏琪",
-    "郑秀文",
-    "陈奕迅",
-    "翁美玲",
-    "周慧敏",
-    "黄日华",
-    "成龙",
-    "李连杰",
-    "甄子丹",
-    # 1920s treaty ports
-    "杜月笙",
-    "黄金荣",
-    "张啸林",
-    "徐志摩",
-    "陆小曼",
-    "阮玲玉",
-    "胡适",
-    "宋美龄",
-    "宋庆龄",
-    "张学良",
-    "袁世凯",
-    # Bakumatsu Kyoto
-    "桂小五郎",
-    "高杉晋作",
-    "吉田松阴",
-    "久坂玄瑞",
-    "中冈慎太郎",
-    "冈田以藏",
-    "芹泽鸭",
-    "永仓新八",
-    "山南敬助",
-    "岩仓具视",
-    "孝明天皇",
-    "松平容保",
-    "德川家茂",
-    # well-known folk-tale and fantasy works
     "聂小倩",
     "宁采臣",
     "白素贞",
@@ -910,7 +839,7 @@ class _Checker:
                     self.add(path, "出现本世界的禁用词“%s”" % term, "这个词不属于本世界的时代与地域")
             for name in DENIED_NAMES:
                 if name in text:
-                    self.add(path, "出现真实人物或已知作品角色的名字“%s”" % name, "换成原创名字")
+                    self.add(path, "出现已知作品角色的名字“%s”" % name, "换成原创名字")
             if any(term in text for term in MINOR_TERMS):
                 context = text + self._adult_context_for(path)
                 if not any(marker in context for marker in ADULT_MARKERS):
@@ -923,7 +852,7 @@ class _Checker:
                 full_names.add(family + given)
         for name in DENIED_NAMES:
             if name in full_names:
-                self.add("$.name_pools", "名池可能组合出真实人物或已知角色的名字：%s" % name, "从名池里去掉对应的姓或名")
+                self.add("$.name_pools", "名池可能组合出已知作品角色的名字：%s" % name, "从名池里去掉对应的姓或名")
 
     def _adult_context_for(self, path):
         match = re.match(r"\$\.(\w+)\[(\d+)\]", path)

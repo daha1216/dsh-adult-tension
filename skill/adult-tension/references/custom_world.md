@@ -36,7 +36,7 @@
 - **占位的作用域**：人物模板与背景人物用 `npc`、`player`；钩子用 `npc`（即钩子的 `slot`）、`player`；人物组合用它的槽位与 `player`；转折用人物模板 ID 与 `player`；压力只有 `player`（带 `leverage` 时加上把柄双方）；日常活动只有 `player`；世界层、规则、地点、玩家身份、张力引擎、关系渠道的文字不用占位（玩家身份的称呼模板除外）。
 - **引用按 ID**：地点出口、组合槽位与张力引擎、钩子槽位、活动与压力的地点都要能解析；ID 在包内唯一，`player` 是保留字。
 - **时代**：`forbidden_terms` 写本世界不该出现的词（器物、说法），校验器扫描全部文本。
-- **原创**：不用真实在世人物、已知作品的角色名与专有设定。
+- **原创**：不用已知作品的角色名与专有设定。
 - **有内容**：不写空串、“待补”“TODO”“—”或与字段名相同的文字；同一包内不写重复的整句。地点至少一个 `public`、一个 `semi` 或 `private`，任意两个地点的 `privacy`、`visibility`、`affordances` 不能完全相同。
 - **压力**：五拍齐全，`near.deadline_minutes` 大于 `immediate.minutes`，出路至少两条且各有代价；带 `leverage` 标记的压力写明 `leverage` 的双方与依据，双方要同在某个人物组合里。
 - **标签**：`content_tags` 与各处 `tags` 只能用内容标签表里的 ID：`romance_light` 轻度暧昧、`intimate` 亲密、`explicit` 直白的性描写、`violence` 暴力、`coercion_theme` 胁迫、`humiliation` 羞辱、`bodily_harm` 身体伤害、`substance` 酒精与药物、`pregnancy` 怀孕、`death` 死亡、`workplace_power` 职场权力关系、`infidelity` 出轨、`crime` 违法犯罪、`gambling` 赌博、`workplace` 职场、`nightlife` 夜生活、`supernatural` 超自然、`disaster` 灾难、`custom` 自定义。
