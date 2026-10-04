@@ -628,3 +628,124 @@ def library():
 
 
 library()
+
+
+# ================================================================ architecture board
+KINDS = {   # body, top highlight, accent bar, title ink, subtitle ink
+    "run": ("#3e3850", "#6a6284", "#a874ff", "#efeaf5", SUBT),
+    "data": ("#2c4450", "#4f6f80", "#9fe9ff", "#e6fbff", "#a9cfd9"),
+    "note": ("#f6eedd", "#fffaf0", "#ff6fae", "#2a1e2e", "#7a6a72"),
+}
+WIRE, DATA_WIRE = "#c4bfcc", "#9fe9ff"
+
+
+def architecture():
+    """How one turn travels: the player talks to the host, the host calls the local runtime with JSON, the runtime's layers
+    hand down to the pure domain and write one SQLite transaction in the user's data folder; world packs are compiled ahead."""
+    GW, GH = 300, 228
+    cv = pk.Canvas(GW, GH)
+    over, packets = [], []
+
+    def panel(x0, y0, x1, y1, kind, title, sub):
+        body, hi, acc, ink, subink = KINDS[kind]
+        cv.rect(x0 + 1, y0 + 1, x1 + 1, y1 + 1, "#140d14")
+        cv.rect(x0, y0, x1, y1, body)
+        cv.rect(x0, y0, x1, y0 + 1, hi)
+        cv.rect(x0, y0, x0 + 2, y1, acc)
+        for sx, sy in [(x1 - 2, y0 + 2), (x1 - 2, y1 - 3)]:
+            cv.put(sx, sy, "#2a2030" if kind != "note" else "#c8bca8")
+        cx = (x0 + 2 + x1) / 2 * C
+        over.append(text(cx, (y0 + 6.2) * C, title, 21, ink, 800, "middle", 1))
+        over.append(text(cx, (y0 + 11) * C, sub, 15, subink, 600, "middle", 1))
+
+    def wire(x0, y0, x1, y1, col=WIRE):
+        """An axis-aligned 1-cell wire from (x0, y0) to (x1, y1) with a pixel arrowhead at the far end."""
+        if y0 == y1:
+            d = 1 if x1 > x0 else -1
+            cv.rect(min(x0, x1), y0, max(x0, x1), y0 + 1, col)
+            for k in range(3):
+                cv.rect(x1 - d * (k + 1), y0 - k, x1 - d * (k + 1) + 1, y0 + k + 1, col)
+        else:
+            d = 1 if y1 > y0 else -1
+            cv.rect(x0, min(y0, y1), x0 + 1, max(y0, y1), col)
+            for k in range(3):
+                cv.rect(x0 - k, y1 - d * (k + 1), x0 + k + 1, y1 - d * (k + 1) + 1, col)
+        a, b = ((x0 + 0.5) * C, (y0 + 0.5) * C), ((x1 + 0.5) * C, (y1 + 0.5) * C)
+        dur = max(1.2, math.hypot(b[0] - a[0], b[1] - a[1]) / 90)
+        packets.append(f'<rect x="-4" y="-4" width="8" height="8" fill="{col}" filter="url(#g6)" opacity="0.9">'
+                       f'<animateMotion path="M{a[0]:.0f} {a[1]:.0f}L{b[0]:.0f} {b[1]:.0f}" dur="{dur:.1f}s" begin="-{len(packets) * 0.37 % dur:.1f}s" repeatCount="indefinite"/></rect>'
+                       f'<rect x="-2" y="-2" width="4" height="4" fill="#ffffff">'
+                       f'<animateMotion path="M{a[0]:.0f} {a[1]:.0f}L{b[0]:.0f} {b[1]:.0f}" dur="{dur:.1f}s" begin="-{(len(packets) - 1) * 0.37 % dur:.1f}s" repeatCount="indefinite"/></rect>')
+
+    # the runtime case, with a strip of tape for its label
+    FX0, FY0, FX1, FY1 = 6, 86, 200, 184
+    cv.rect(FX0 + 1, FY0 + 1, FX1 + 2, FY1 + 2, "#140d14")
+    cv.rect(FX0, FY0, FX1 + 1, FY1 + 1, "#5a5274")
+    cv.rect(FX0 + 1, FY0 + 1, FX1, FY1, "#221c2e")
+    cv.rect(FX0 + 1, FY0 + 1, FX1, FY0 + 2, "#6a6284")
+    for sx, sy in [(FX0 + 2, FY0 + 3), (FX1 - 2, FY0 + 3), (FX0 + 2, FY1 - 2), (FX1 - 2, FY1 - 2)]:
+        cv.put(sx, sy, "#8a82a0")
+    cv.rect(15, FY0 - 4, 113, FY0 + 4, "#8579b0")
+    cv.rect(15, FY0 - 4, 113, FY0 - 3, "#ffffff")
+    over.append(text(64 * C, (FY0 + 1.8) * C, "runtime/ · 只用 Python 标准库", 17, "#ffffff", 800, "middle", 2, SANS,
+                     'stroke="#2a1a24" stroke-width="3" paint-order="stroke"'))
+
+    panel(8, 50, 56, 64, "note", "玩家", "说一句话")
+    panel(80, 50, 180, 64, "note", "Agent 宿主 + 模型", "写正文 · 决定提交哪些操作")
+    panel(222, 50, 292, 64, "note", "SKILL.md", "规则 + references")
+    panel(14, 94, 192, 108, "run", "adapters/cli", "解析参数 · 输出 JSON 信封 · 退出码")
+    panel(14, 116, 192, 130, "run", "application", "唯一写入口：幂等 · revision 检查 · 一次写一个事务")
+    panel(14, 138, 70, 152, "run", "content", "只读世界包")
+    panel(75, 138, 131, 152, "run", "projections", "上下文 · 状态")
+    panel(136, 138, 192, 152, "run", "persistence", "SQLite 仓储")
+    panel(14, 160, 192, 174, "run", "domain", "纯函数：操作校验 · 时间结算 · 开局 · 随机派生")
+    panel(222, 138, 292, 152, "data", "用户数据目录", "SQLite 存档库")
+    panel(8, 198, 70, 212, "data", "content/", "编译好的世界包")
+    panel(116, 198, 180, 212, "note", "tools/", "编译 · 校验 · 生成参考")
+    panel(222, 198, 292, 212, "note", "content-src/", "世界源文件")
+
+    NX0, NY0, NX1, NY1 = 224, 90, 290, 128                        # a sticky note with the three promises
+    cv.rect(NX0 + 1, NY0 + 1, NX1 + 1, NY1 + 1, "#140d14")
+    cv.rect(NX0, NY0, NX1, NY1, "#ffe9a0")
+    cv.rect(NX0, NY0, NX1, NY0 + 2, "#f2d880")
+    cv.rect(NX1 - 4, NY1 - 4, NX1, NY1, "#e6cf80")
+    cv.rect(256, NY0 - 1, 259, NY0 + 2, "#ff6fae")
+    cv.put(256, NY0 - 1, "#ffd6e8")
+    for k, line in enumerate(["一回合 = 一次事务", "重试不会重复推进", "同一种子，同一结果"]):
+        over.append(text((NX0 + 5) * C, (NY0 + 13 + k * 9) * C, line, 17, "#5a3a20", 800, "start", 1))
+    wire(57, 57, 79, 57)
+    wire(221, 57, 182, 57)
+    over.append(text(201 * C, 54 * C, "每回合加载", 14, "#bfb2c8", 700, "middle", 1))
+    wire(120, 65, 120, 93)
+    wire(140, 93, 140, 66)
+    over.append(text(117 * C, 81 * C, "JSON 调用", 15, "#d9d2e2", 700, "end", 1))
+    over.append(text(143 * C, 81 * C, "结果 + 下一回合上下文", 15, "#d9d2e2", 700, "start", 1))
+    wire(103, 109, 103, 115)
+    for x in (42, 103, 164):
+        wire(x, 131, x, 137)
+    wire(72, 131, 72, 159)
+    wire(193, 145, 221, 145, DATA_WIRE)
+    wire(221, 205, 182, 205)
+    wire(115, 205, 72, 205)
+    wire(39, 197, 39, 186, DATA_WIRE)
+    over.append(text(43 * C, 192.4 * C, "开局时读取", 14, "#a9cfd9", 700, "start", 1))
+
+    for k, (kind, label) in enumerate([("note", "宿主与开发工具"), ("run", "运行时分层"), ("data", "数据")]):
+        x = 8 + k * 62
+        cv.rect(x, 219, x + 4, 223, KINDS[kind][0])
+        cv.rect(x, 219, x + 1, 223, KINDS[kind][2])
+        over.append(text((x + 7) * C, 222.6 * C, label, 14, "#bfb2c8", 700, "start", 1))
+
+    body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}</g>
+    <g shape-rendering="crispEdges">{"".join(packets)}</g>
+    {"".join(over)}
+    {neon(600, 82, "引擎架构", 52, "middle", "#a29dab", "#ecebef", flicker=True)}
+    {text(600, 122, "模型写故事，本地运行时守事实；存档只在你自己的电脑上", 21, SUBT, 600, "middle", 2)}
+    {dotline(GW * C, 0, 2.4)}'''
+    doc("architecture.svg", GW * C, GH * C, "引擎架构",
+        "玩家对 Agent 宿主说话，宿主按 SKILL.md 的规则写正文，用 JSON 调用本地运行时并拿回结果和下一回合上下文。"
+        "运行时只用 Python 标准库，分 adapters/cli、application、content、projections、persistence、domain 六层：application 是唯一写入口，"
+        "domain 只放纯函数，persistence 把每一回合写成一次 SQLite 事务，存进用户数据目录。世界源文件由 tools 编译成只读世界包，开局时读取。", "", body)
+
+
+architecture()
