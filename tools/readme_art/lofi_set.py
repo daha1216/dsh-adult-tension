@@ -739,10 +739,10 @@ def architecture():
     body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}</g>
     <g shape-rendering="crispEdges">{"".join(packets)}</g>
     {"".join(over)}
-    {neon(600, 82, "引擎架构", 52, "middle", "#a29dab", "#ecebef", flicker=True)}
+    {neon(600, 82, "SKILL架构", 52, "middle", "#a29dab", "#ecebef", flicker=True)}
     {text(600, 122, "模型写故事，本地运行时守事实；存档只在你自己的电脑上", 21, SUBT, 600, "middle", 2)}
     {dotline(GW * C, 0, 2.4)}'''
-    doc("architecture.svg", GW * C, GH * C, "引擎架构",
+    doc("architecture.svg", GW * C, GH * C, "SKILL架构",
         "玩家对 Agent 宿主说话，宿主按 SKILL.md 的规则写正文，用 JSON 调用本地运行时并拿回结果和下一回合上下文。"
         "运行时只用 Python 标准库，分 adapters/cli、application、content、projections、persistence、domain 六层：application 是唯一写入口，"
         "domain 只放纯函数，persistence 把每一回合写成一次 SQLite 事务，存进用户数据目录。世界源文件由 tools 编译成只读世界包，开局时读取。", "", body)
