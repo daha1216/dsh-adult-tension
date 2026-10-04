@@ -740,7 +740,7 @@ def architecture():
     <g shape-rendering="crispEdges">{"".join(packets)}</g>
     {"".join(over)}
     {neon(600, 82, "SKILL架构", 52, "middle", "#a29dab", "#ecebef", flicker=True)}
-    {text(600, 122, "模型写故事，本地运行时守事实；存档只在你自己的电脑上", 21, SUBT, 600, "middle", 2)}
+    {text(600, 122, "无需理会，当正常SKILL使用就行", 21, SUBT, 600, "middle", 2)}
     {dotline(GW * C, 0, 2.4)}'''
     doc("architecture.svg", GW * C, GH * C, "SKILL架构",
         "玩家对 Agent 宿主说话，宿主按 SKILL.md 的规则写正文，用 JSON 调用本地运行时并拿回结果和下一回合上下文。"
