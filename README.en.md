@@ -252,6 +252,12 @@ Adding a world: following `spec/CONTENT_BIBLE.md`, draft it with `tools/new_worl
 
 </details>
 
+<br>
+
+<p align="center">
+  <img src=".github/readme-lofi/architecture.svg" width="100%" alt="Skill architecture: nothing to manage, just use it like any other skill. The player talks to the Agent host, which calls the local runtime with JSON as SKILL.md describes; the runtime has six layers (adapters/cli, application, content, projections, persistence, domain), saves go to SQLite in the user's data folder, and world sources are compiled by tools into read-only world packs.">
+</p>
+
 <div align="center">
 
 <br>

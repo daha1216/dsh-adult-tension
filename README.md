@@ -246,6 +246,12 @@ python tools/validate_skill.py skill/adult-tension
 
 </details>
 
+<br>
+
+<p align="center">
+  <img src=".github/readme-lofi/architecture.svg" width="100%" alt="SKILL 架构：无需理会，当正常 SKILL 使用就行。玩家对 Agent 宿主说话，宿主按 SKILL.md 用 JSON 调用本地运行时；运行时分 adapters/cli、application、content、projections、persistence、domain 六层，存档写进用户数据目录里的 SQLite；世界源文件由 tools 编译成只读世界包。">
+</p>
+
 <div align="center">
 
 <br>
