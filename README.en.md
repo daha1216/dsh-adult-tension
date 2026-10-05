@@ -40,7 +40,7 @@ Every world is open. Pick one and play.
 Don't see what you want? Just say "custom world" (`自定义世界`), name the year and the place, and one is made for you on the spot.
 
 <details>
-<summary><b>See all 25 worlds at a glance (click to open)</b></summary>
+<summary><b>See all 35 worlds at a glance (click to open)</b></summary>
 <br>
 
 | World | In one line |
@@ -70,6 +70,16 @@ Don't see what you want? Just say "custom world" (`自定义世界`), name the y
 | After the Hero Retires (勇者退休以后) | The armor rusts on the wall; old comrades-in-arms come to collect debts, and a former demon prisoner now shares your bed. |
 | Registry City (登记城) | The registrar's finger traces your true name on the parchment; if you don't want to be struck off and exiled, change your clothes tonight and come to his side hall. |
 | Clockwork Circus (机械马戏) | Steam and machine oil mixed with face powder; before the tents come down on the last night of the tour, someone always wants to leave their heart in this clockwork body. |
+| Snowbound Onsen (雪夜汤宿) | Snow seals the mountain and kills the heating; everyone at the hot-spring inn carries a debt they'd rather hide, and the distance by the steaming pool shrinks night by night. |
+| Concession Darkroom (法租界暗房) | A roll of film hides in the sour tang of developer; before the gates drop, whoever holds the negatives holds someone's life. |
+| Acid-Rain Wreck City (酸雨沉船城) | Neon soaks in acid rain and the neural clinic bills by the hour; before the storm locks the city, everyone must decide what to put on the operating table. |
+| Withered Shrine (枯枝神殿) | The thousand-year sacred tree is dying inch by inch; priests and visitors keep to the warm-stone baths, and no one dares speak of the old covenant of atonement first. |
+| Changming Temple (长明古刹) | A blizzard buries the mountain; in the only temple offering shelter, monks, swordsmen and a fugitive from the imperial register share one ever-burning lamp. |
+| Guild Backroom (公会暗室) | The bankrupt ledger lies open on the table, the forbidden abyss contract pinned beneath it; take it or not, an answer is due by dawn. |
+| Labyrinth Depths (迷宫深层) | The safe zone has collapsed, the expedition scattered; survivors crowd under a dying magic-stone lamp, where trust is scarcer than rations. |
+| Cliff Fortress (绝壁要塞) | Steam mechs hold the last mountain pass; Squad Zero has one night left, and some words will never get another chance to be said. |
+| Dragonfall Chasm (巨龙坠落之堑) | The dragon-slaying banner stands beside the fallen beast; on the eve of the last stand, comrades test each other's limits in the snow. |
+| Blackstone Manor (黑石古堡) | One storm-locked night on the island; the head maid's resignation lands on the desk at dawn, and staying or leaving hangs on one unspoken sentence. |
 
 </details>
 
