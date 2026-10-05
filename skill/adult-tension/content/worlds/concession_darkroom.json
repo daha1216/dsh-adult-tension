@@ -1,0 +1,2363 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "公馆沙龙雇佣的职业护院，负责清查来客枪械",
+   "age_range": [
+    28,
+    48
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_corridor_guard",
+   "line": "{npc.name}叉着双臂堵在通往暗房的楼梯拐角，没有掌柜口信，谁也别想往下走一步。",
+   "location_ids": [
+    "gallery_corridor"
+   ],
+   "name": null,
+   "role": "画廊看门护院"
+  },
+  {
+   "adult_context": "沙龙受雇钢琴演奏者，长年在此以听音辨人",
+   "age_range": [
+    30,
+    56
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_salon_pianist",
+   "line": "{npc.name}端坐在钢琴前弹奏着爵士乐，双眼虽盲，耳朵却听得清每一句贴身耳语。",
+   "location_ids": [
+    "salon_hall"
+   ],
+   "name": null,
+   "role": "大厅盲琴师"
+  },
+  {
+   "adult_context": "活跃在法租界各名流聚会的社交常客",
+   "age_range": [
+    26,
+    45
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_society_hostess",
+   "line": "{npc.name}摇着羽毛折扇掩嘴轻笑，谁家昨晚典当了祖传翡翠，{npc.ta}比典当行还要清楚。",
+   "location_ids": [
+    "salon_hall",
+    "veranda_bar"
+   ],
+   "name": null,
+   "role": "沙龙交际常客"
+  },
+  {
+   "adult_context": "在公馆吧台干了二十余年的老佣人",
+   "age_range": [
+    35,
+    62
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_bar_tender",
+   "line": "{npc.name}擦拭着白镴调酒壶，只要把一枚银元扣在杯底，就能替你给指定客人递话。",
+   "location_ids": [
+    "veranda_bar"
+   ],
+   "name": null,
+   "role": "临街吧台老调酒师"
+  },
+  {
+   "adult_context": "专门侍候贵宾吸烟室的侍应",
+   "age_range": [
+    25,
+    50
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_valet_waiter",
+   "line": "{npc.name}捧着银托盘站在雪茄室屏风旁，低垂着眼帘，却把每个人的交易尽收眼底。",
+   "location_ids": [
+    "smoking_room"
+   ],
+   "name": null,
+   "role": "吸烟室侍应执事"
+  },
+  {
+   "adult_context": "常年在洋房后巷等候接应客人的黄包车夫",
+   "age_range": [
+    28,
+    52
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_alley_rickshaw",
+   "line": "{npc.name}戴着旧毡帽守在黄包车边，车篷下拉着防雨布，随时准备带人冲出后巷。",
+   "location_ids": [
+    "iron_gate"
+   ],
+   "name": null,
+   "role": "后巷接应车夫"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "{master_photographer.name}手里捏着那卷致命的名册底片，{police_inspector.name}带着搜查令堵在暗房门外；你在水槽边经手这卷胶片，稍有迟疑就会成为双方的替罪羊。",
+   "id": "combo_darkroom_leverage",
+   "identity_ids": [
+    "darkroom_assistant"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "master_photographer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "多年在暗房共同洗印秘密照片，彼此熟知对方藏私货的手法",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "police_inspector",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "只在门缝外见过对方腰间晃动的枪套",
+     "stage": "stranger"
+    },
+    {
+     "a": "master_photographer",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 0
+     },
+     "b": "police_inspector",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 0
+     },
+     "reason": "对方手里的搜查令正是冲着这卷底片而来",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "master_photographer",
+    "police_inspector"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在暗房被查抄前完成底片洗印并保全性命。",
+    "limit_gap": "你一旦被搜出身带底片便难逃重罪，而{police_inspector.name}在公馆内也不敢公然违抗公董局中立禁令。",
+    "meeting_reason": "督察限令在暗房显影完成前交出底片。",
+    "resource_gap": "{master_photographer.name}掌握底片藏匿点，{police_inspector.name}手握拘捕权，你手里只有一瓶快要用完的定影液。"
+   },
+   "tags": [
+    "workplace"
+   ],
+   "tension_engine_ids": [
+    "te_single_negative",
+    "te_curfew_iron_gate"
+   ]
+  },
+  {
+   "chemistry": "{customs_broker.name}怀里的最后一张船票开出了天价，{cabinet_singer.name}急于逃离公馆，愿押上全部珠宝；你在吧台角落居中牵线，稍不留神就会被两方同时赖账。",
+   "id": "combo_ticket_bargain",
+   "identity_ids": [
+    "society_reporter",
+    "salon_broker"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "customs_broker",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "曾帮对方在报纸副刊登过一则寻找海外旧友的联络暗号",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "cabinet_singer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "在后台化妆间曾帮对方藏过一盒未申报的首饰，没要任何回报",
+     "stage": "flirting"
+    },
+    {
+     "a": "customs_broker",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "cabinet_singer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "为了一张未记名船票在桌底互相开价施压",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "customs_broker",
+    "cabinet_singer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在午夜前敲定这桩交易并抽得自己的出境路费。",
+    "limit_gap": "{customs_broker.name}怕假票被当场识破，{cabinet_singer.name}不敢让金主和巡捕发现自己要走。",
+    "meeting_reason": "在吧台借调酒掩护完成末班船票与珠宝对验。",
+    "resource_gap": "{customs_broker.name}捏着出境船票，{cabinet_singer.name}怀揣名贵珠宝，你只有一张能让消息传开或压下的嘴。"
+   },
+   "tags": [
+    "nightlife"
+   ],
+   "tension_engine_ids": [
+    "te_last_ticket"
+   ]
+  },
+  {
+   "chemistry": "你包下了公馆顶层套房并握着大笔黄金，{salon_owner.name}急需你的资金维持公馆周转，而{antiquarian_runner.name}正抱着锦盒来求你资助夹带字画出关。",
+   "id": "combo_patron_mastery",
+   "identity_ids": [
+    "exiled_patron"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "salon_owner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "你是公馆包月套房的贵客，按期支付高昂的租金",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 0,
+      "trust": 1
+     },
+     "b": "antiquarian_runner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "曾买下过对方揭裱的一副旧对联，知道对方手艺精湛",
+     "stage": "acquainted"
+    },
+    {
+     "a": "salon_owner",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "antiquarian_runner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "大厅挂着对方修缮的字画，但在抽成比例上争执不下",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "salon_owner",
+    "antiquarian_runner"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在资产被全面查封前把房契地契换成能带走的东西。",
+    "limit_gap": "你的黄金一旦被捕房冻结就一文不值，{salon_owner.name}必须在破晓前向银行偿还抵押欠款。",
+    "meeting_reason": "在吸烟室密谈字画转手资金。",
+    "resource_gap": "你握有公馆急需的大黄鱼金条，{salon_owner.name}握有套房钥匙，{antiquarian_runner.name}只有一箱藏着密件的摹本。"
+   },
+   "tags": [
+    "nightlife"
+   ],
+   "tension_engine_ids": [
+    "te_blackmail_portrait"
+   ]
+  },
+  {
+   "chemistry": "{police_inspector.name}既是沙龙名义上的保护伞也是暗中勒索者，{salon_owner.name}以美酒与分红将其套牢，而受庇护的{cabinet_singer.name}暗中记着两人私相授受的密账。",
+   "id": "combo_concession_undercurrent",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "salon_owner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "在洋房宴会上有过数面之缘，保持着礼貌而疏离的交际",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "police_inspector",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "警靴声在大厅回荡，每次靠近都带来盘查的威胁",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "cabinet_singer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "曾在回廊角落替对方捡起过掉落的登船指南小册子",
+     "stage": "familiar"
+    },
+    {
+     "a": "salon_owner",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "police_inspector",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "每月例规钱从不拖欠，但搜查令进门时依然互不相让",
+     "stage": "testing"
+    },
+    {
+     "a": "salon_owner",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "cabinet_singer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "公馆提供庇护套房，也靠{cabinet_singer.name}的名气吸引豪客",
+     "stage": "familiar"
+    },
+    {
+     "a": "police_inspector",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 0
+     },
+     "b": "cabinet_singer",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 0
+     },
+     "reason": "督察借盘查之名反复上门施压，名角虚与委蛇借机探听口风",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "salon_owner",
+    "police_inspector",
+    "cabinet_singer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在宵禁铁闸落下前迫使对方做出不可撤销的让步。",
+    "limit_gap": "三人只要有一人向公董局告密，公馆的平静假象便会顷刻瓦解。",
+    "meeting_reason": "在大厅舞会包厢核对今晚巡捕放行名单。",
+    "resource_gap": "{police_inspector.name}有枪和拘捕令，{salon_owner.name}有公馆与暗室，{cabinet_singer.name}有一副歌喉与随身暗账。"
+   },
+   "tags": [
+    "nightlife",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_curfew_iron_gate",
+    "te_double_agent_wire"
+   ]
+  },
+  {
+   "chemistry": "{police_inspector.name}在画廊逐幅查验义卖字画，{antiquarian_runner.name}抱着那轴藏了底片的山水摹本站在你身后发抖；督察的手已经伸向了锦盒。",
+   "id": "combo_scroll_inspection",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "police_inspector",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 1
+     },
+     "reason": "上个月在沙龙门口被对方盘问过一次，对方记住了你的脸",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 1
+     },
+     "b": "antiquarian_runner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "常在画廊碰面，对方曾替你补过一张撕破的旧照片",
+     "stage": "familiar"
+    },
+    {
+     "a": "police_inspector",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "antiquarian_runner",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 0
+     },
+     "reason": "督察早就怀疑这位装裱师替人夹带东西",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "police_inspector",
+    "antiquarian_runner"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "让这轴画在今晚不被拆开，或者至少不让自己被拖下水。",
+    "limit_gap": "{police_inspector.name}不能在名流面前毁画，{antiquarian_runner.name}一旦被拆穿全家都要受牵连。",
+    "meeting_reason": "义卖前的例行核验恰好轮到这轴画。",
+    "resource_gap": "{police_inspector.name}有搜查令和一队巡捕，{antiquarian_runner.name}有一门揭裱手艺，你只有站在画廊里的这个位置。"
+   },
+   "tags": [
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_blackmail_portrait",
+    "te_curfew_iron_gate"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "distorted",
+   "id": "ch_salon_rumors",
+   "reach": "三杯酒下肚后在公馆名流与常客之间迅速传开",
+   "text": "沙龙吸烟室耳语"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_concession_gazette",
+   "reach": "次日清晨送达法租界所有巡捕房、银行与领事馆案头",
+   "text": "租界晚邮报特刊"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "法租界社交公馆的掌门人，周旋于租界督察与走私商之间维持沙龙中立",
+   "age_range": [
+    32,
+    50
+   ],
+   "appearance_options": [
+    "一身剪裁考究的深色丝绒长衫，袖口露出金嵌玛瑙袖扣，指缝间夹着细长的象牙烟嘴",
+    "神色雍容而冷淡，笑意永远不达眼底，翻看公馆请柬的手指保养得极为白净"
+   ],
+   "decision": {
+    "avoids": [
+     "弄脏袖口",
+     "与巡捕在大庭广众下发生言语冲突"
+    ],
+    "contrast": "在舞厅中谈笑风生挥金如土，独处时却在账本上反复核算每一枚金币的去向",
+    "core_value": "在乱局中保全自身资产与体面",
+    "goal_options": [
+     "拿回被各方势力要挟的洋房房契",
+     "在公馆交割前套现最后一笔通关黄金",
+     "查出是谁在暗房翻拍了名流名单"
+    ],
+    "never": [
+     "将暗房钥匙交到任何外人手中"
+    ],
+    "prefers": [
+     "在水晶吊灯下用法语轻声交谈"
+    ],
+    "pressure_responses": {
+     "breaking": "摔碎高脚杯，下令护院拉下整栋洋房的总电闸熄灯赶客",
+     "high": "亮出公董局董事的庇护名片，示意巡警门外等候",
+     "low": "端着香槟浅笑不语，轻描淡写地将话题岔到明晚的义演舞会",
+     "mid": "关上吸烟室的双层隔音木门，冷声给对方划出不可逾越的底线"
+    },
+    "relationship_stance": "客套而戒备，视所有人为棋子但绝不轻易撕破脸皮",
+    "withdrawal": "反锁三楼私人套房，站在窗前静静注视着街面巡捕车经过"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "salon_owner",
+   "identity": {
+    "authority": "决定今晚谁能踏入沙龙大门，谁又必须在午夜前被请出洋房",
+    "exposure": "曾私自借出公馆三楼套房给秘密特使落脚，留下了签名登记簿底单",
+    "hidden": "早已买通船长准备在明日破晓前登上前往马尼拉的最后一班客轮",
+    "limits": [
+     "洋房地产早已抵押给法商银行",
+     "一旦暗房窝藏底片的事情败露便自身难保"
+    ],
+    "obligations": [
+     "每月给捕房按时供奉例规银子"
+    ],
+    "resources": [
+     "整栋老洋房每一道暗门与保险柜的钥匙",
+     "公董局法籍董事亲笔签署的庇护文书"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在绝境下依然沉着的眼神",
+     "能一眼看穿{npc.ta}华丽伪装下的疲惫与恐惧"
+    ],
+    "boundaries": [
+     "绝不在沙龙公共大厅发生越界举动"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "表面从容掌控，实则渴望有人让{npc.ta}卸下防备",
+    "dislikes": [
+     "粗鲁的步步紧逼",
+     "拿钱或把柄来换温存的人"
+    ],
+    "expression": "把一杯白兰地推过去，问对方今晚要不要留下，再等对方开口",
+    "likes": [
+     "深夜壁炉前的安静对饮",
+     "隔着丝绒布料的试探性触碰"
+    ],
+    "preconditions": [
+     "房门反锁、窗帘拉严，且是双方都没有生意要谈的时候"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "公馆沙龙主人",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "private_suite",
+     "to": 300
+    },
+    {
+     "from": 301,
+     "location_id": "gallery_corridor",
+     "to": 720
+    },
+    {
+     "from": 721,
+     "location_id": "smoking_room",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "salon_hall",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "失去在租界立足的最后一处不动产",
+      "option": "拿出暗藏的房产转让底单作为过路费打发巡捕"
+     },
+     {
+      "cost": "彻底背叛与暗房技师达成的同盟誓约",
+      "option": "将暗房里的秘密底片交出作为替罪凭证"
+     }
+    ],
+    "pressure": "公董局的庇护令在今夜午夜十二点准时失效",
+    "trigger": "巡捕房副督察突然带人封锁后巷，指名要核查三楼住客的身份证明"
+   },
+   "tags": [
+    "nightlife"
+   ],
+   "voices": {
+    "inner": "“外头的巡捕车已经转了三趟，这满屋子人究竟谁才是索命鬼。”",
+    "surface": "“今晚公馆只有朋友，没有党派，各位手里的酒可别洒了。”"
+   }
+  },
+  {
+   "adult_context": "公馆专属暗房冲洗师，精通微缩照相术与底片复刻",
+   "age_range": [
+    28,
+    48
+   ],
+   "appearance_options": [
+    "围着磨损严重的深灰色皮围裙，手指被海波定影液泡得微微泛白，指缝常年带着酸味",
+    "鼻梁上架着黄铜细框眼镜，眼神锐利，在红光灯罩下显得深邃莫测"
+   ],
+   "decision": {
+    "avoids": [
+     "强光直射眼睛",
+     "让外人触碰干燥架上的底片"
+    ],
+    "contrast": "手指因长期接触药水粗糙冰凉，抚摸湿润相纸时动作却格外轻柔",
+    "core_value": "用影像铭刻真相并换取逃离漩涡的资本",
+    "goal_options": [
+     "将名册底片以最高价转手给能带自己出境的买家",
+     "在巡捕破门前将所有见不得光的底片彻底溶解",
+     "带上相机底片登上开往香港的货轮"
+    ],
+    "never": [
+     "将没有定影完全的底片暴露在白炽灯下"
+    ],
+    "prefers": [
+     "在红灯微光下压低声音对质"
+    ],
+    "pressure_responses": {
+     "breaking": "打翻水槽里的药水，从后门冲入后巷",
+     "high": "把整瓶冰醋酸举在底片箱上方，威胁要将底片当场毁掉",
+     "low": "低头专注于摆弄显影夹，假装听不懂客人的言外之意",
+     "mid": "熄灭暗房红灯，在伸手不见五指的黑暗中警告对方后退"
+    },
+    "relationship_stance": "只相信影像印迹，对口头承诺充满戒备",
+    "withdrawal": "将自己闩在地下红光暗房，整夜不肯踏出包铅木门一步"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "master_photographer",
+   "identity": {
+    "authority": "对暗房内所有显影药水配比与底片存留拥有绝对处置权",
+    "exposure": "暗房深处私自翻印过租界要员与走私商人的秘密交易合影",
+    "hidden": "那卷撤退名册的微缩原件就缝在{npc.ta}贴身棉背心的夹层里",
+    "limits": [
+     "离开暗房的药剂与设备便无法翻印任何东西",
+     "双眼长期在暗室红光下工作患有严重夜盲"
+    ],
+    "obligations": [
+     "每冲印一卷底片都必须登记在掌柜的流水簿上"
+    ],
+    "resources": [
+     "一台德国进口的徕卡翻拍相机",
+     "暗房地下排水管暗格里私藏的一卷未公开底片"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在暗室黑暗中不慌不乱、肯听{npc.ta}指挥的安静",
+     "不嫌弃{npc.ta}指尖药水酸味的人"
+    ],
+    "boundaries": [
+     "不许拉开暗房通气口的百叶窗"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "在自己熟悉的暗处掌握节奏，但要对方点头才往前",
+    "dislikes": [
+     "轻佻的审视",
+     "带着巡捕房烟味的靠近"
+    ],
+    "expression": "摘下眼镜，借着看底片停在对方身边，留出一步让对方选择进退",
+    "likes": [
+     "红光下靠得很近却不说话的时刻",
+     "对方替{npc.ta}擦干湿手"
+    ],
+    "preconditions": [
+     "今晚的底片都已定影上架，双方都不急着走"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "首席摄影冲洗师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "darkroom_cellar",
+     "to": 360
+    },
+    {
+     "from": 361,
+     "location_id": "gallery_corridor",
+     "to": 840
+    },
+    {
+     "from": 841,
+     "location_id": "iron_gate",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "darkroom_cellar",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "被破门而入的搜查者当场人赃并获",
+      "option": "不开门，继续在红灯下完成定影"
+     },
+     {
+      "cost": "彻底失去换取南洋船票的唯一筹码",
+      "option": "直接将胶卷浸入废酸桶销毁"
+     }
+    ],
+    "pressure": "再过三分钟底片若不放入定影液就会彻底报废",
+    "trigger": "一卷要紧底片在定影水槽中刚洗出一半，门外传来了皮靴声"
+   },
+   "tags": [
+    "workplace"
+   ],
+   "voices": {
+    "inner": "“这卷胶片就是我的买命钱，谁想空手套走，先从我的尸体上踩过去。”",
+    "surface": "“底片见光就会化成白板，想看清楚，就走近点。”"
+   }
+  },
+  {
+   "adult_context": "穿梭于十六铺码头与黑市钱庄的走私掮客，垄断出境船票与黄金兑换",
+   "age_range": [
+    30,
+    48
+   ],
+   "appearance_options": [
+    "披着厚重的双排扣毛呢大衣，领口竖起，皮鞋锃亮却沾着码头的煤渣印子",
+    "转动大拇指上的金扳指，嘴角总挂着算计的哂笑，口袋里金币碰撞叮当轻响"
+   ],
+   "decision": {
+    "avoids": [
+     "和巡捕在同一张桌子上饮酒",
+     "别人碰自己的公文皮包"
+    ],
+    "contrast": "表面唯利是图，却将一枚旧十字架吊坠小心缝在大衣里衬",
+    "core_value": "黄金拿到手才是真理，落袋为安绝不多留",
+    "goal_options": [
+     "在开船前用手中船票榨干洋房里避难名流的最后一根金条",
+     "换取暗房里那卷免检凭证底片",
+     "甩开眼线在铁闸锁死前带钱登上驳船"
+    ],
+    "never": [
+     "在款项全额付清之前提前交出船票原件"
+    ],
+    "prefers": [
+     "在吧台昏暗角落用现钞和金条直接验资"
+    ],
+    "pressure_responses": {
+     "breaking": "扔下皮箱里的假钞转移视线，翻越回廊吧台仓皇外逃",
+     "high": "直接拍下沾有印油的印章，逼对方立刻签字画押",
+     "low": "晃了晃手里的高脚杯，吹着口哨嘲讽对方出价太低",
+     "mid": "掏出镀金怀表看时间，声称再过半小时船票还要涨价三成"
+    },
+    "relationship_stance": "市侩而敏锐，谁有真金白银谁就是座上宾",
+    "withdrawal": "躲在吧台百叶窗后反复清点怀中的金条，拒绝任何人靠近"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "customs_broker",
+   "identity": {
+    "authority": "掌握今晚唯一一班法国邮轮头等舱与统舱的现存余票",
+    "exposure": "倒卖伪造钢印的船票，已被两名买家在后巷堵截过",
+    "hidden": "手里那两张头等舱客票其中一张是假票，专用来套取名贵首饰",
+    "limits": [
+     "在巡捕房黑名单上榜上有名",
+     "必须在黎明前将所有黄金移交至洋行金库抵账"
+    ],
+    "obligations": [
+     "向码头帮派定期缴纳泊位保护金"
+    ],
+    "resources": [
+     "法商轮船公司加盖钢印的空白客票两张",
+     "随身小牛皮夹里的一叠美金与法币大钞"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "敢当面拆穿{npc.ta}假票、却没去告发的人",
+     "对方身上那种不肯讨价还价的骨气"
+    ],
+    "boundaries": [
+     "生意和私情两本账，绝不混着算"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "习惯先出价，却想遇到一个让{npc.ta}忘了出价的人",
+    "dislikes": [
+     "假正经的道德说教",
+     "拿身体来压票价的人"
+    ],
+    "expression": "嘴上还在耍贫，手却把大衣披到对方肩上，然后不再说话等对方表态",
+    "likes": [
+     "生意谈完后在吧台多喝一杯",
+     "对方抢过{npc.ta}的怀表说今晚不看时间"
+    ],
+    "preconditions": [
+     "这一晚双方之间没有任何未结的票款或交易"
+    ],
+    "self_control_range": [
+     1,
+     3
+    ]
+   },
+   "public_role": "黑市船票掮客",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "veranda_bar",
+     "to": 420
+    },
+    {
+     "from": 421,
+     "location_id": "iron_gate",
+     "to": 900
+    },
+    {
+     "from": 901,
+     "location_id": "smoking_room",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "veranda_bar",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "自己彻底失去逃离租界的退路",
+      "option": "拿出贴身私藏的唯一一张真票平息事端"
+     },
+     {
+      "cost": "将公馆主人引向对立面并彻底撕毁合作关系",
+      "option": "挑拨买家去三楼套房找另一位贵宾的麻烦"
+     }
+    ],
+    "pressure": "离最后一班开往外海的驳船离岸只剩四十分钟",
+    "trigger": "黑市买家发现到手的船票钢印有重影，带着打手堵在吧台外"
+   },
+   "tags": [
+    "nightlife",
+    "crime"
+   ],
+   "voices": {
+    "inner": "“外头风声越来越紧，今夜若捞不够本钱，明早我也得沉江喂鱼。”",
+    "surface": "“这年头良心值几个铜子儿？一张船票一条命，价高者得。”"
+   }
+  },
+  {
+   "adult_context": "法租界中央巡捕房高级督察，掌控租界夜间搜查与逮捕大权",
+   "age_range": [
+    33,
+    52
+   ],
+   "appearance_options": [
+    "深蓝毛呢制服笔挺，肩章泛着冷光，皮靴擦得能照出人影，腰间枪套扣得严实",
+    "面容冷峻，眼神如鹰般在沙龙宾客间逡巡，举止威严却带着久居官场的城府"
+   ],
+   "decision": {
+    "avoids": [
+     "在有记者的公开场合留下任何手迹签字",
+     "公然受贿被同僚撞见"
+    ],
+    "contrast": "身着代表秩序的制服，内心却在算计如何毁灭证据以逃避法办",
+    "core_value": "维护自身权位与身家安全，铲除一切可能威胁自己的把柄",
+    "goal_options": [
+     "查抄出记录自己勾当的底片并就地销毁",
+     "在租界变天前借职务之便搜刮最后一批逃难名流的黄金",
+     "将私通的罪名嫁祸给沙龙里的替罪羊"
+    ],
+    "never": [
+     "在底片彻底销毁前解除对后巷的封锁"
+    ],
+    "prefers": [
+     "在隔音良好的房间里单对单问话"
+    ],
+    "pressure_responses": {
+     "breaking": "鸣枪示警，下令破门强行搜缴并封锁整条后巷",
+     "high": "关上房门，把手枪拍在桌面上推向一边，开始单独问话",
+     "low": "指尖轻轻敲击枪套，用漫不经心的巡视目光施压",
+     "mid": "命令警员在公馆门外拉起绳索，阻断宾客出入通道"
+    },
+    "relationship_stance": "高高在上，将所有人视为潜在的嫌疑犯或勒索对象",
+    "withdrawal": "独自端坐于吸烟室正中央的真皮大椅上，拒绝任何侍者添酒"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "police_inspector",
+   "identity": {
+    "authority": "以搜查间谍名义对租界内任何建筑发布搜查扣押令",
+    "exposure": "受贿签署的假放行条底根被某家小报记者暗中拍下了相片",
+    "hidden": "此行搜查暗房真正的目的是销毁拍下自己受贿证据的底片",
+    "limits": [
+     "受到公董局与各领馆中立政策的制约",
+     "私吞走私货物的受贿把柄握在别人手中"
+    ],
+    "obligations": [
+     "在宵禁前向警务处提交一份夜间嫌疑人登记名册"
+    ],
+    "resources": [
+     "巡捕房盖有火漆公章的夜间特许通行令三张",
+     "调动一队警员与便衣暗探的手令"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对方在{npc.ta}面前毫不畏惧、平视而谈的姿态",
+     "唯一一个看穿{npc.ta}也在害怕的人"
+    ],
+    "boundaries": [
+     "不许碰触自己的配枪与证件皮夹",
+     "穿着制服时绝不越界"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "习惯发号施令，却只在对方自愿时放下身段",
+    "dislikes": [
+     "轻佻的嘲笑",
+     "想用亲近换放行条的人"
+    ],
+    "expression": "摘下白手套放在桌上，问一句“现在我不是督察了，你还愿意坐着吗”",
+    "likes": [
+     "卸下制服外套后的片刻松弛",
+     "在没有任何公务的深夜里平等地喝一杯"
+    ],
+    "preconditions": [
+     "对方既不在{npc.ta}的嫌疑名单上，也不有求于{npc.ta}的职权"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "巡捕房特别督察",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "smoking_room",
+     "to": 480
+    },
+    {
+     "from": 481,
+     "location_id": "iron_gate",
+     "to": 960
+    },
+    {
+     "from": 961,
+     "location_id": "gallery_corridor",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "salon_hall",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "激怒持信人背后的黑市商会",
+      "option": "立即将截获的信封当众焚毁并扣留持信人"
+     },
+     {
+      "cost": "从此将自己的命门送入对方掌心",
+      "option": "私下与持信人互换把柄"
+     }
+    ],
+    "pressure": "警务处派遣的内务检查组还有半小时抵达公馆门前",
+    "trigger": "随行暗探在画廊角落截获了一封藏有巡捕房签批假票的信封"
+   },
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "voices": {
+    "inner": "“那张相片要是流出去，明天上绞刑架的就是我。掘地三尺也必须找出来。”",
+    "surface": "“巡捕房办案只认证据。只要交出底片，今晚大家都能体面收场。”"
+   }
+  },
+  {
+   "adult_context": "曾红极一时的舞厅驻唱名角，因掌握要人机密躲入公馆寻求庇护",
+   "age_range": [
+    22,
+    36
+   ],
+   "appearance_options": [
+    "一身月白色真丝演出服，外罩黑色水貂披肩，头发微乱却更添慵懒",
+    "眼波流转，说话声调柔和却藏着一丝惊弓之鸟的颤音"
+   ],
+   "decision": {
+    "avoids": [
+     "独自停留在漆黑狭窄的地下通道",
+     "刺鼻的雪茄烈烟"
+    ],
+    "contrast": "台前风情万种颠倒众生，卸下浓妆后神情空洞落寞如荒原",
+    "core_value": "摆脱金主掌控，换取真正的自由",
+    "goal_options": [
+     "用盒中的全部珠宝换取一张去往香港的合法客票",
+     "用要员的秘密副页换取巡捕房撤销通缉",
+     "在今夜宵禁前通过公馆密道逃出法租界"
+    ],
+    "never": [
+     "将珠宝盒的钥匙交给任何声称要保护自己的人"
+    ],
+    "prefers": [
+     "在留声机慢板爵士乐掩护下倾吐心声"
+    ],
+    "pressure_responses": {
+     "breaking": "冲到大厅水晶吊灯下，高声揭露客人的走私阴谋",
+     "high": "拔下翡翠发簪握在手里，冷声说谁再往前一步就把副页的事喊出去",
+     "low": "柔声浅唱掩盖尴尬，在敬酒时悄悄将求救纸条塞入对方掌心",
+     "mid": "借口头痛回绝邀舞，躲回套房拉紧窗帘"
+    },
+    "relationship_stance": "对谁都笑，却绝不轻易对任何一位客人托付真心",
+    "withdrawal": "蜷在私人套房窗边的贵妃榻上，拉上帐幔不见任何人"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "cabinet_singer",
+   "identity": {
+    "authority": "以沙龙特约嘉宾名义在公馆各套房与大厅自由出入",
+    "exposure": "首饰盒夹层里藏着一份某要员亲手写下的受贿名册副页",
+    "hidden": "暗中与暗房技师约定，只要拿到翻拍底片就一同乘船离开",
+    "limits": [
+     "被督察与沙龙金主严密监视行动",
+     "名下没有任何合法的身份证件与出境护照"
+    ],
+    "obligations": [
+     "每晚必须在沙龙大厅为贵宾献唱两支夜曲"
+    ],
+    "resources": [
+     "各界政要富商赠送的钻石胸针与翡翠戒指一盒",
+     "偷听记下的公馆通气孔与后巷脱身路径"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "不贪恋{npc.ta}的名气，把{npc.ta}当普通人对待的目光",
+     "危急时毫不犹豫挡在{npc.ta}前面的人"
+    ],
+    "boundaries": [
+     "不许在有外人窥探的门缝或窗前发生实质亲密"
+    ],
+    "desire_range": [
+     2,
+     5
+    ],
+    "desired_position": "表面柔顺，却要由{npc.ta}自己决定何时靠近",
+    "dislikes": [
+     "粗暴的撕扯",
+     "把{npc.ta}当作炫耀战利品的言语"
+    ],
+    "expression": "卸下披肩，先问一句“你喜欢的是台上那个，还是现在这个”",
+    "likes": [
+     "被安静地抱一会儿",
+     "额头相抵时温存而颤抖的轻吻"
+    ],
+    "preconditions": [
+     "对方从没向{npc.ta}开过价，也没拿船票许过诺"
+    ],
+    "self_control_range": [
+     1,
+     4
+    ]
+   },
+   "public_role": "避难驻唱名角",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "private_suite",
+     "to": 360
+    },
+    {
+     "from": 361,
+     "location_id": "salon_hall",
+     "to": 780
+    },
+    {
+     "from": 781,
+     "location_id": "gallery_corridor",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "salon_hall",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "重新沦为笼中之物且再无逃脱可能",
+      "option": "顺从登上金主的轿车离开公馆"
+     },
+     {
+      "cost": "摔伤脚踝并直接撞入巡捕后巷包围圈",
+      "option": "冒险翻出二楼窗台顺排水管下到后巷"
+     }
+    ],
+    "pressure": "大厅的晚宴音乐将在二十分钟后结束，届时保镖便会破门",
+    "trigger": "一位大金主派来两个黑衣保镖堵在套房门外，要强行带{npc.ta}登车离开租界"
+   },
+   "tags": [
+    "nightlife"
+   ],
+   "voices": {
+    "inner": "“这里没有一句真话。我自己的路，我自己走出去。”",
+    "surface": "“要是真体贴我，就带我离开这笼子，我唱一辈子歌给你听。”"
+   }
+  },
+  {
+   "adult_context": "公馆特约古董字画修复商，暗中精通在卷轴夹层装裱微缩胶卷",
+   "age_range": [
+    26,
+    44
+   ],
+   "appearance_options": [
+    "长衫下摆总是挽起半截，手指修长整洁，指甲修剪得极为圆润以防刮伤丝绢",
+    "说话轻声细语，随身携带着一柄牛角小刮刀与牛皮包边的装裱工具匣"
+   ],
+   "decision": {
+    "avoids": [
+     "卷入大厅的斗殴冲突",
+     "衣襟沾染定影药水异味"
+    ],
+    "contrast": "胆子小，裁切宣纸与装裱底片时的手法却稳得像外科手术",
+    "core_value": "凭一门手艺两头通吃，在乱世夹缝中保全家人",
+    "goal_options": [
+     "将夹带底片的山水画安全移交给出关商队",
+     "拿到一笔足够全家避难的款子",
+     "从巡捕眼皮底下取回自己伪造字画的废料纸包"
+    ],
+    "never": [
+     "丢弃揭裱古画用的牛角刮刀"
+    ],
+    "prefers": [
+     "在无风无火星的安静屋子里低语商议"
+    ],
+    "pressure_responses": {
+     "breaking": "跪倒在地连声求饶，供出字画夹层的拆解暗语",
+     "high": "用牛角刮刀划破指尖将血滴在画绢上，谎称古画破损不能示人",
+     "low": "低眉顺眼地连声称是，将手中画卷小心收入锦盒",
+     "mid": "借口字画需要避光防潮，迅速将卷轴塞入贴身暗袋"
+    },
+    "relationship_stance": "谨小慎微，谁强势就顺着谁，但暗中留有后路",
+    "withdrawal": "躲在二楼画廊拐角的丝绒长凳上，用丝绢仔细擦拭牛角刮刀"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "antiquarian_runner",
+   "identity": {
+    "authority": "对公馆展出的所有古董字画有权进行封箱、鉴定与借调修缮",
+    "exposure": "曾为敌对两派同时装裱过彼此刺探的密件卷轴",
+    "hidden": "暗中复刻了暗房技师的私章，随时可以伪造封签",
+    "limits": [
+     "体弱，无法进行任何激烈对抗",
+     "家中老小的户籍登记被控制在租界商会手中"
+    ],
+    "obligations": [
+     "必须保证沙龙今晚义卖的古画在巡捕核验前不露破绽"
+    ],
+    "resources": [
+     "特制的防潮浆糊配方与揭裱夹层手艺",
+     "一幅已在轴心挖空藏匿三卷底片的山水摹本"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "真心欣赏{npc.ta}手艺、肯坐下看{npc.ta}揭一整夜裱的人",
+     "{npc.ta}双手发抖时安静握住、什么也不要求的人"
+    ],
+    "boundaries": [
+     "不许毁坏随身携带的传家装裱工具"
+    ],
+    "desire_range": [
+     1,
+     4
+    ],
+    "desired_position": "习惯退后，但这一次想自己往前走一步",
+    "dislikes": [
+     "轻蔑的嘲弄",
+     "被当作无足轻重的炮灰推到前线"
+    ],
+    "expression": "红着脸把一方自己裱的小画塞给对方，再小声问能不能多待一会儿",
+    "likes": [
+     "在无人的字画储藏架后紧紧相拥",
+     "对方温热的手掌抚平自己紧绷的脊背"
+    ],
+    "preconditions": [
+     "对方没有在今晚的生意里替{npc.ta}出过钱或出过面"
+    ],
+    "self_control_range": [
+     2,
+     5
+    ]
+   },
+   "public_role": "字画装裱师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "smoking_room",
+     "to": 400
+    },
+    {
+     "from": 401,
+     "location_id": "darkroom_cellar",
+     "to": 840
+    },
+    {
+     "from": 841,
+     "location_id": "veranda_bar",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "gallery_corridor",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "毁掉价值连城的古画并引发全场火警骚乱",
+      "option": "当场撞翻展台烛台引燃画卷锦缎"
+     },
+     {
+      "cost": "那人被巡捕戴上手铐押走，从此记恨{npc.ta}",
+      "option": "拉出身边的人替自己顶撞巡捕转移注意力"
+     }
+    ],
+    "pressure": "再过几秒夹层里的胶卷就会直接暴露在灯光下",
+    "trigger": "巡捕在画廊例行盘查，伸手要去撕开卷轴两端的锦缎裱边"
+   },
+   "tags": [
+    "workplace"
+   ],
+   "voices": {
+    "inner": "“轴心里的底片只要一露馅，我和全家就都得掉脑袋。菩萨保佑混过今晚。”",
+    "surface": "“这画轴金贵得很，经不起折腾，各位抬抬手。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "深秋夜，宵禁前两小时",
+  "minute": 1260
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "nightlife",
+  "workplace",
+  "crime",
+  "coercion_theme",
+  "intimate"
+ ],
+ "custom": false,
+ "customs": [
+  "在沙龙吸烟室借火时，火柴划燃后如果连吹两次，意思是随行有眼线、换个地方说话。",
+  "暗房门口亮红灯表示里面正在定影，无论任何人敲门都不能开，硬闯会被当成毁坏底片的贼。",
+  "洋房楼梯拐角挂着油画，画框右下角若是别着白茶花，代表今晚有要紧的黑市船票流出。",
+  "在吧台点一杯不加冰的薄荷朗姆酒，是将密信或胶卷塞给酒保的暗号。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "红灯下定影液泛起刺鼻酸气",
+    "竹夹夹起一张显影中的湿漉漉相纸",
+    "水槽底部浮现出一排模糊的人名轮廓"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "h_wet_negative",
+    "h_darkroom_whisper"
+   ],
+   "id": "a_darkroom_developing",
+   "location_ids": [
+    "darkroom_cellar"
+   ],
+   "start_minute": 1270,
+   "tags": [
+    "workplace"
+   ],
+   "title": "暗房显影试片"
+  },
+  {
+   "beats": [
+    "水晶吊灯下留声机播放着舒缓的爵士夜曲",
+    "舞池边侍者托盘里香槟杯碰得叮当脆响",
+    "屏风后传来关于外币汇率暴跌的低声议论"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [
+    "h_champagne_spill"
+   ],
+   "id": "a_salon_soiree",
+   "location_ids": [
+    "salon_hall"
+   ],
+   "start_minute": 1290,
+   "tags": [
+    "nightlife"
+   ],
+   "title": "洋房晚间沙龙舞会"
+  },
+  {
+   "beats": [
+    "雪茄蓝雾中火柴划燃又被连吹两声",
+    "真皮茶几上推过一只沉甸甸的牛皮信封",
+    "落地座钟的钟摆声沉闷地敲击着神经"
+   ],
+   "duration_minutes": 35,
+   "hook_ids": [
+    "h_cigar_spark",
+    "h_pocketwatch"
+   ],
+   "id": "a_smoking_room_bargain",
+   "location_ids": [
+    "smoking_room"
+   ],
+   "start_minute": 1330,
+   "tags": [],
+   "title": "吸烟室密谈"
+  },
+  {
+   "beats": [
+    "雨水顺着回廊玻璃雨棚滴答落下",
+    "铜吧台上推过一杯没有冰块的薄荷朗姆酒",
+    "百叶窗外巡捕车的车灯光束横扫而过"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [
+    "h_bar_rum_pass"
+   ],
+   "id": "a_veranda_nightcap",
+   "location_ids": [
+    "veranda_bar"
+   ],
+   "start_minute": 1360,
+   "tags": [
+    "nightlife"
+   ],
+   "title": "临街吧台夜饮探听"
+  },
+  {
+   "beats": [
+    "厚地毯吸去了走廊中所有的脚步声",
+    "大幅油画的画框后传来微弱的纸张摩挲声",
+    "三楼套房的门缝透出一抹壁炉的暖光"
+   ],
+   "duration_minutes": 25,
+   "hook_ids": [
+    "h_corridor_corner"
+   ],
+   "id": "a_corridor_patrol",
+   "location_ids": [
+    "gallery_corridor"
+   ],
+   "start_minute": 1390,
+   "tags": [],
+   "title": "二楼画廊夜巡"
+  },
+  {
+   "beats": [
+    "铁闸小窗口的手电筒白光晃过湿冷青石板",
+    "黄包车夫压低帽檐咳嗽了两声",
+    "远处界河铁桥上响起了宵禁警报"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [
+    "h_rickshaw_signal"
+   ],
+   "id": "a_iron_gate_rendezvous",
+   "location_ids": [
+    "iron_gate"
+   ],
+   "start_minute": 1420,
+   "tags": [],
+   "title": "后巷铁闸换岗接应"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "1940（租界变天前夕）",
+ "extends": null,
+ "forbidden_terms": [
+  "手机",
+  "电脑",
+  "互联网",
+  "微信",
+  "打印机",
+  "录音笔",
+  "智能",
+  "监控",
+  "U盘",
+  "摄像头",
+  "网线",
+  "电子",
+  "激光",
+  "红外",
+  "无线网络",
+  "高铁"
+ ],
+ "hooks": [
+  {
+   "id": "h_wet_negative",
+   "kind": "approach",
+   "location_ids": [
+    "darkroom_cellar"
+   ],
+   "slot": "master_photographer",
+   "text": "{master_photographer.name}用竹夹夹着刚从定影液里捞出的底片凑到红灯前，手指滴着水珠，转头望向你：“这张脸，你认得吧？”"
+  },
+  {
+   "id": "h_champagne_spill",
+   "kind": "approach",
+   "location_ids": [
+    "salon_hall"
+   ],
+   "slot": "salon_owner",
+   "text": "{salon_owner.name}端着高脚杯穿过舞池人群停在你的身侧，微笑着倾身耳语，杯中香槟差点溅在你的袖口上。"
+  },
+  {
+   "id": "h_bar_rum_pass",
+   "kind": "approach",
+   "location_ids": [
+    "veranda_bar"
+   ],
+   "slot": "customs_broker",
+   "text": "{customs_broker.name}把一杯调好的薄荷朗姆酒推到你面前，杯垫下压着半张折叠的泛黄船票边缘。"
+  },
+  {
+   "id": "h_cigar_spark",
+   "kind": "approach",
+   "location_ids": [
+    "smoking_room"
+   ],
+   "slot": "police_inspector",
+   "text": "{police_inspector.name}划燃一根火柴递到你面前示意借火，目光冷得像刀：“有些话，出了这扇门就不能认了。”"
+  },
+  {
+   "id": "h_corridor_corner",
+   "kind": "approach",
+   "location_ids": [
+    "gallery_corridor",
+    "private_suite"
+   ],
+   "slot": "cabinet_singer",
+   "text": "{cabinet_singer.name}在油画阴影处拉住你的袖子，把你带进转角，披肩上的貂毛擦过你的手背，声音压得极低：“带我走，无论去哪。”"
+  },
+  {
+   "id": "h_darkroom_whisper",
+   "kind": "approach",
+   "location_ids": [
+    "darkroom_cellar",
+    "gallery_corridor"
+   ],
+   "slot": "antiquarian_runner",
+   "text": "{antiquarian_runner.name}抱着装裱锦盒悄悄挪到你身边，压低声音近乎哀求：“求你，这轴画万万不能拆，里头有不能见天日的东西。”"
+  },
+  {
+   "id": "h_pocketwatch",
+   "kind": "approach",
+   "location_ids": [
+    "smoking_room"
+   ],
+   "slot": "customs_broker",
+   "text": "{customs_broker.name}在你对面的皮沙发上坐下，啪地打开镀金怀表放在茶几上：“我只给你一支雪茄的工夫。”"
+  },
+  {
+   "id": "h_screen_glance",
+   "kind": "observe",
+   "location_ids": [
+    "salon_hall"
+   ],
+   "slot": "salon_owner",
+   "text": "透过水晶吊灯的倒影，{salon_owner.name}正在壁炉旁神色冷峻地将一张烧掉半截的电报纸塞入炉灰。"
+  },
+  {
+   "id": "h_handcuff_clink",
+   "kind": "observe",
+   "location_ids": [
+    "iron_gate"
+   ],
+   "slot": "police_inspector",
+   "text": "{police_inspector.name}站在后巷铁闸前低头抽烟，腰间的手铐在手电筒反光下泛着冷光。"
+  },
+  {
+   "id": "h_key_request",
+   "kind": "request",
+   "location_ids": [
+    "darkroom_cellar"
+   ],
+   "slot": "master_photographer",
+   "text": "{master_photographer.name}反手按住门闩，把一枚沉甸甸的黄铜通风管钥匙塞进你掌心，急促地说：“帮我把胶卷送去三楼。”"
+  },
+  {
+   "id": "h_rickshaw_signal",
+   "kind": "accident",
+   "location_ids": [
+    "iron_gate"
+   ],
+   "slot": "customs_broker",
+   "text": "一辆转弯的黄包车在湿滑青石板上擦过铁门，{customs_broker.name}怀里的公文包脱手跌落，散出一角盖有洋行火漆印的空白信笺。"
+  }
+ ],
+ "id": "concession_darkroom",
+ "locations": [
+  {
+   "affordances": [
+    "在红灯下翻动定影水槽",
+    "将底片夹入木架夹层",
+    "从内侧闩上沉重的包铅木门"
+   ],
+   "detail": "洋房地窖改建的狭长暗室，一盏罩着红玻璃的安全灯悬在水槽上方，空气中弥漫着酸涩刺鼻的醋酸与定影液气味，厚重的包铅木门阻断了外界一切声响。",
+   "exits": [
+    "gallery_corridor",
+    "iron_gate"
+   ],
+   "id": "darkroom_cellar",
+   "name": "地下红光暗房",
+   "pressure_modifiers": {
+    "p_microfilm_bargain": "暗房水槽夹层藏着最后一卷翻拍胶卷。",
+    "p_negative_raid": "红光暗房是全洋房唯一能就地彻底溶毁底片的地方。"
+   },
+   "privacy": "private",
+   "tags": [
+    "workplace"
+   ],
+   "visibility": "红灯下只能看清半米内的轮廓，一旦关灯则是绝对黑暗，只有池水晃动的微响。",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "借油画画框掩护低声交谈",
+    "打探套房门缝透出的动静",
+    "顺着转角木梯下到地下室"
+   ],
+   "detail": "铺着厚重波斯地毯的长廊，两侧挂满了西洋油画与装裱精美的黑白肖像，尽头是通往地下室的逼仄转角木梯；拐角处摆着一张褪色的丝绒长凳。",
+   "exits": [
+    "darkroom_cellar",
+    "salon_hall",
+    "private_suite"
+   ],
+   "id": "gallery_corridor",
+   "name": "二楼画廊回廊",
+   "pressure_modifiers": {
+    "p_search_warrant": "回廊两侧挂满大幅油画，画框夹层极易藏匿薄纸包裹。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "回廊两侧有立柱遮挡，站廊下能俯瞰大厅舞池，套房门口的人影一览无余。",
+   "witnesses": [
+    "bg_corridor_guard"
+   ]
+  },
+  {
+   "affordances": [
+    "在钢琴和舞池喧哗声中递过一杯酒",
+    "穿过落地窗走向回廊吧台",
+    "留意各桌客人的眼神动向"
+   ],
+   "detail": "高挑的水晶吊灯下浮动着香槟与脂粉的甜腻气息，留声机流淌着慢板爵士乐，宾客们端着高脚杯在波斯地毯上交错起舞。",
+   "exits": [
+    "gallery_corridor",
+    "veranda_bar",
+    "smoking_room"
+   ],
+   "id": "salon_hall",
+   "name": "洋房沙龙大厅",
+   "pressure_modifiers": {
+    "p_curfew_countdown": "大厅里的老摆钟每过一刻钟就会重重鸣响一次。"
+   },
+   "privacy": "public",
+   "tags": [
+    "nightlife"
+   ],
+   "visibility": "灯火通明，所有人的动作都在众目睽睽之下，但喧闹的人声正好掩盖了低语。",
+   "witnesses": [
+    "bg_salon_pianist",
+    "bg_society_hostess"
+   ]
+  },
+  {
+   "affordances": [
+    "将酒杯推到铜吧台边角对暗号",
+    "从百叶窗缝隙查看公馆外巡捕岗哨",
+    "在铜托盘底下压一张字条"
+   ],
+   "detail": "半开放式的柚木吧台正对着花园铁栅栏，雨水打在玻璃遮雨棚上沙沙作响，铜质调酒器折射着昏黄的马灯光晕。",
+   "exits": [
+    "salon_hall",
+    "smoking_room",
+    "iron_gate"
+   ],
+   "id": "veranda_bar",
+   "name": "临街回廊吧台",
+   "pressure_modifiers": {
+    "p_ticket_extortion": "吧台是倒卖黑市船票与外币最常交接的角落。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "nightlife"
+   ],
+   "visibility": "吧台角落光线昏暗，只有调酒处的马灯微亮，侍应生背身调酒时看不见客人手里的动作。",
+   "witnesses": [
+    "bg_bar_tender"
+   ]
+  },
+  {
+   "affordances": [
+    "划火柴时借火凑近说话",
+    "翻看茶几上的旧法文报纸",
+    "反手掩上吸烟室的双层隔音门"
+   ],
+   "detail": "沉重的深红色丝绒窗帘拉得严严实实，真皮沙发陷在缭绕的雪茄蓝雾中，空气凝滞而燥热，角落摆着黄铜痰盂与落地大钟。",
+   "exits": [
+    "salon_hall",
+    "veranda_bar",
+    "private_suite"
+   ],
+   "id": "smoking_room",
+   "name": "雪茄吸烟室",
+   "pressure_modifiers": {
+    "p_double_agent_trap": "浓厚的雪茄烟雾能遮掩桌面下递交的小物件。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "浓厚的烟雾与暗淡的壁灯让彼此面孔模糊，只看得见雪茄头明灭的红星。",
+   "witnesses": [
+    "bg_valet_waiter"
+   ]
+  },
+  {
+   "affordances": [
+    "反锁厚重的红木雕花套房门",
+    "拉上临街的墨绿色丝绒窗帘",
+    "检查梳妆台首饰盒的隐秘夹层"
+   ],
+   "detail": "厚重的红木双开门内铺着白狐皮地毯，壁炉里烧着松木，雕花大床上垂着墨绿色帐幔，窗边一张贵妃榻，空气里带着冷杉香水与微醺的白兰地酒气。",
+   "exits": [
+    "gallery_corridor",
+    "smoking_room"
+   ],
+   "id": "private_suite",
+   "name": "公馆三楼私人套房",
+   "pressure_modifiers": {
+    "p_negative_raid": "套房内的大理石壁炉可以烘干湿透的底片，也能焚化密件。"
+   },
+   "privacy": "private",
+   "tags": [],
+   "visibility": "厚重窗帘阻隔了街道所有的光线，只有壁炉火光在墙壁上投下摇曳的影子。",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "叩击铁闸上的观察小窗对暗语",
+    "向守门的巡警塞一卷钞票通融",
+    "在黄包车防雨布下交换包裹"
+   ],
+   "detail": "通往公馆后巷的狭窄铁门，高耸的砖墙上缠绕着带刺铁丝网，青石板路在细雨中泛着湿冷反光，墙根停着接应的黄包车。",
+   "exits": [
+    "darkroom_cellar",
+    "veranda_bar"
+   ],
+   "id": "iron_gate",
+   "name": "后巷铁闸",
+   "pressure_modifiers": {
+    "p_curfew_countdown": "十一点整铁闸落锁上链，任何人不得进出。"
+   },
+   "privacy": "semi",
+   "tags": [],
+   "visibility": "街灯昏黄，雨雾朦胧，只有铁闸门上的小窗口透出一束手电筒的白光。",
+   "witnesses": [
+    "bg_alley_rickshaw"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "顾",
+   "沈",
+   "方",
+   "陆",
+   "傅",
+   "裴",
+   "周",
+   "董",
+   "严",
+   "乔",
+   "唐",
+   "白",
+   "郑",
+   "楚",
+   "聂",
+   "席"
+  ],
+  "given_female": [
+   "曼丽",
+   "采薇",
+   "宛柔",
+   "念慈",
+   "语冰",
+   "嘉仪",
+   "映雪",
+   "佩兰",
+   "晚晴",
+   "舒窈",
+   "凝香",
+   "锦华"
+  ],
+  "given_male": [
+   "振廷",
+   "念祖",
+   "继业",
+   "怀瑾",
+   "伯庸",
+   "彦卿",
+   "仲衡",
+   "崇文",
+   "世荣",
+   "宏毅",
+   "子衿",
+   "敬之"
+  ],
+  "given_neutral": [
+   "未名",
+   "见微",
+   "怀安",
+   "舒怀",
+   "平澜",
+   "予安",
+   "知秋",
+   "墨卿",
+   "希言",
+   "廷玉",
+   "令仪",
+   "清允"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "male",
+    "pattern": "{family}先生"
+   },
+   {
+    "gender": "female",
+    "pattern": "{family}太太"
+   },
+   {
+    "gender": "female",
+    "pattern": "{family}小姐"
+   },
+   {
+    "gender": "any",
+    "pattern": "小{family}"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}老板"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "末代法租界暗房与沙龙。亲密倾向一律与票、钱、职权、庇护脱钩；督察与掮客的亲密前提要求双方无交易、无职权关系。待真实试玩后再转 released。",
+ "player_identities": [
+  {
+   "age_range": [
+    21,
+    35
+   ],
+   "baseline": "在公馆地下暗房干了三年，双手常年浸着定影液的酸味；经手过上千张不能见光的底片，却连一张属于自己的离沪船票都买不起。",
+   "gender": "any",
+   "id": "darkroom_assistant",
+   "reputation": "嘴严手稳，从不多问",
+   "resources": [
+    "暗房后备通风管钥匙",
+    "偷留的一小卷未显影底片剪边"
+   ],
+   "risks": [
+    "私藏底片如果被巡捕或东家搜出，会被打断双手扔进黄浦江"
+   ],
+   "role": "暗房副手",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "小{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}师傅"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    38
+   ],
+   "baseline": "靠给法租界画报写名流秘闻维生，出入沙龙如自家客厅；相机藏在礼帽里，拍下的花边背后往往牵着要命的时局底牌。",
+   "gender": "any",
+   "id": "society_reporter",
+   "reputation": "消息灵通，笔锋刁钻",
+   "resources": [
+    "法租界工部局特派记者证",
+    "随身小型蔡司相机"
+   ],
+   "risks": [
+    "得罪了沙龙幕后的真正金主，明早可能会横尸苏州河"
+   ],
+   "role": "小报专栏记者",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}记者"
+    },
+    {
+     "gender": "male",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}女士"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    42
+   ],
+   "baseline": "穿梭于沙龙名流与黑市掮客之间，熟知洋房里每一扇暗门和每一杯酒背后的要价，谁想见谁都得经这双带丝绒手套的手。",
+   "gender": "any",
+   "id": "salon_broker",
+   "reputation": "面面俱到，价高者得",
+   "resources": [
+    "沙龙二楼贵宾休息室万能钥匙",
+    "一份记录各界要人软肋的人情账簿"
+   ],
+   "risks": [
+    "脚踩几只船，随时会被其中一方当作弃子灭口"
+   ],
+   "role": "沙龙引见人",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}经理"
+    },
+    {
+     "gender": "male",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}小姐"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    45
+   ],
+   "baseline": "带着家族最后的金条与房契躲进法租界，包下了公馆顶层的豪华套房；表面挥金如土，实则箱底资产快被勒索一空。",
+   "gender": "any",
+   "id": "exiled_patron",
+   "reputation": "出手阔绰的常客",
+   "resources": [
+    "两根未兑现的大黄鱼金条",
+    "法租界公董局董事的私人引荐信"
+   ],
+   "risks": [
+    "租界一旦变天，名下所有房产与资产会被立即查封"
+   ],
+   "role": "避难遗老眷属",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "male",
+     "pattern": "{family}公子"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}小姐"
+    },
+    {
+     "gender": "male",
+     "pattern": "{family}先生"
+    },
+    {
+     "gender": "female",
+     "pattern": "{family}太太"
+    }
+   ]
+  }
+ ],
+ "premise": "战局倒计时下的最后避风港。楼上是名流、遗老、走私商与各方线人交错的画廊沙龙，楼下是弥漫定影液酸涩气息的狭窄暗房。一卷拍下撤退名册的微缩胶卷失踪，在宵禁铁闸合拢前，谁握住底片，谁就握住开往南洋的末班船票。",
+ "pressures": [
+  {
+   "choice": "是将底片藏进三楼套房，还是冒险从后巷运走。",
+   "exits": [
+    {
+     "cost": "证件被当场扣押并记入重点监视档案",
+     "option": "亮出记者证或名流请柬与巡捕据理力争拖延时间"
+    },
+    {
+     "cost": "底片随时可能在搜查翻动中被撕毁暴露",
+     "option": "将底片藏入二楼大幅油画画框夹层中"
+    },
+    {
+     "cost": "公馆陷入混乱，趁乱脱身但招致巡捕鸣枪追查",
+     "option": "拉下吸烟室的电闸制造全楼停电"
+    }
+   ],
+   "far": {
+    "consequence": "沙龙被永久查封，所有涉案人员列入引渡名单。",
+    "due_days": 3,
+    "trigger": "公董局搜查报告送达领事馆"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_corridor_corner",
+    "h_champagne_spill"
+   ],
+   "id": "p_search_warrant",
+   "immediate": {
+    "minutes": 15,
+    "text": "督察在大厅核验公馆名册，巡捕已沿着二楼逐间查房，离暗房还有十五分钟。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "salon_hall",
+    "gallery_corridor"
+   ],
+   "near": {
+    "deadline_minutes": 120,
+    "text": "午夜宵禁前警务处将对整栋洋房进行地毯式封存。"
+   },
+   "objective": "在搜查队进入暗房前将核心底片转移或藏妥。",
+   "source": "institution",
+   "start_minute": 1260,
+   "tags": [
+    "crime"
+   ],
+   "title": "巡捕房搜查令",
+   "trigger": "一队持枪巡捕突然在公馆门前拉起绳索封锁，出示特批搜查令要逐层搜缴微缩底片。"
+  },
+  {
+   "choice": "是拿出金条买通守门巡警，还是冒险从暗房通风井翻越铁丝网。",
+   "exits": [
+    {
+     "cost": "失去到达对岸后唯一的安家本钱",
+     "option": "将一根金条塞入巡警大衣口袋"
+    },
+    {
+     "cost": "后背被警棍重重砸中留下伤",
+     "option": "借黄包车翻倒挡住巡警视线强行冲关"
+    }
+   ],
+   "far": {
+    "consequence": "法租界与外界水陆通道彻底断绝，城内搜捕拉网展开。",
+    "due_days": 1,
+    "trigger": "界河铁桥换防重兵把守"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_rickshaw_signal"
+   ],
+   "id": "p_curfew_countdown",
+   "immediate": {
+    "minutes": 20,
+    "text": "守门巡警的铜哨已经含在嘴里，铁闸只留下一人宽的缝隙，二十分钟后就要合拢。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "iron_gate",
+    "veranda_bar"
+   ],
+   "near": {
+    "deadline_minutes": 80,
+    "text": "十一点宵禁哨音吹响后，后巷所有无路条者当场关押。"
+   },
+   "objective": "在铁锁扣死之前拿到通行路条或完成撤离。",
+   "source": "institution",
+   "start_minute": 1380,
+   "tags": [],
+   "title": "后巷铁闸宵禁锁门",
+   "trigger": "后巷传来沉重的铁链拖地声，巡警开始给铁闸挂锁，宣布今晚提前关闸。"
+  },
+  {
+   "choice": "是变卖贴身首饰，还是拿对方伪造船票的证据对赌压价。",
+   "exits": [
+    {
+     "cost": "抵埠后将身无分文",
+     "option": "交出全部珠宝首饰与现钞换取船票"
+    },
+    {
+     "cost": "与黑市掮客结下死仇",
+     "option": "出示对方伪造船票的钢印底版反向要挟"
+    }
+   ],
+   "far": {
+    "consequence": "滞留租界的人全部失去出境机会。",
+    "due_days": 14,
+    "trigger": "下一班远洋客轮因战事无限期停航"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_bar_rum_pass",
+    "h_pocketwatch"
+   ],
+   "id": "p_ticket_extortion",
+   "immediate": {
+    "minutes": 30,
+    "text": "掮客的怀表盖哒的一声扣上，声称另一位贵宾已在套房内备好现金等着提票。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "veranda_bar",
+    "smoking_room"
+   ],
+   "near": {
+    "deadline_minutes": 90,
+    "text": "十二点半开往南洋的末班轮船起锚离泊。"
+   },
+   "objective": "在客轮起锚前凑齐黄金，或者迫使对方按原约定交票。",
+   "source": "money",
+   "start_minute": 1320,
+   "tags": [],
+   "title": "黑市客票坐地起价",
+   "trigger": "黑市掮客突然合上公文包，声称巡捕房戒严，最后一张船票必须再加三根金条。"
+  },
+  {
+   "choice": "是将底片当场剪为两段各执一半，还是借关灯黑暗制造混乱脱身。",
+   "exits": [
+    {
+     "cost": "在摸索中被碎玻璃划伤并遗落随身钥匙",
+     "option": "当场熄灭红灯将所有人推入绝对黑暗"
+    },
+    {
+     "cost": "两份残卷信息皆残缺，大幅贬值且得罪双方",
+     "option": "当众将胶卷剪成两截各给一份"
+    }
+   ],
+   "far": {
+    "consequence": "暗房作为事发源头被双方派人纵火烧毁。",
+    "due_days": 5,
+    "trigger": "黑帮与巡捕在租界全面开战"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_wet_negative",
+    "h_darkroom_whisper"
+   ],
+   "id": "p_microfilm_bargain",
+   "immediate": {
+    "minutes": 15,
+    "text": "击锤已经扳开，枪油味混着定影液酸气在狭窄暗室弥漫。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "darkroom_cellar",
+    "gallery_corridor"
+   ],
+   "near": {
+    "deadline_minutes": 45,
+    "text": "枪声一旦响起，门外护院与巡捕将在三分钟内包围暗房。"
+   },
+   "objective": "在火拼之前平息争端并保全底片原件。",
+   "source": "person",
+   "start_minute": 1300,
+   "tags": [
+    "crime"
+   ],
+   "title": "水槽底片当面对质",
+   "trigger": "两方买家同时出现在暗房红灯前，一人拔出了手枪，另一人拿出了汇票，都要独占刚冲洗出的微缩胶卷。"
+  },
+  {
+   "choice": "是当众公开自己的全部通信，还是暗中把嫌疑引向另一位常客。",
+   "exits": [
+    {
+     "cost": "暴露自己与外籍高官的秘密利益纽带",
+     "option": "拿出公董局董事亲笔信当众宣读澄清"
+    },
+    {
+     "cost": "欠下老调酒师一份还不清的人情",
+     "option": "托调酒师递密信，借后门引开盯梢的人"
+    }
+   ],
+   "far": {
+    "consequence": "涉事的人从此无法在法租界任何公开场所露面。",
+    "due_days": 7,
+    "trigger": "黑市悬赏在全城地下网络传开"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_cigar_spark"
+   ],
+   "id": "p_double_agent_trap",
+   "immediate": {
+    "minutes": 25,
+    "text": "大厅角落的两位黑衣客手一直插在大衣口袋内，视线死死锁定在沙龙主位上。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "smoking_room",
+    "salon_hall"
+   ],
+   "near": {
+    "deadline_minutes": 70,
+    "text": "舞会结束灯光熄灭的瞬间，有人会借拥挤下手。"
+   },
+   "objective": "在有人动手前找出风声的源头并自证清白。",
+   "source": "rumor",
+   "start_minute": 1340,
+   "tags": [],
+   "title": "双面密电走漏风声",
+   "trigger": "吸烟室里流传出一张字条，声称沙龙常客中潜伏着向公董局告密的内奸，黑市已有人出钱要买这人的命。"
+  },
+  {
+   "choice": "是留在暗房堵漏抢救，还是带上湿底片冲上楼找壁炉烘干。",
+   "exits": [
+    {
+     "cost": "在楼梯留下一路水渍，引来巡捕顺着痕迹追查",
+     "option": "用大衣裹住底片盒冲上三楼壁炉"
+    },
+    {
+     "cost": "双手被锋利的铜皮划破",
+     "option": "用手死死按住爆裂的水管等人来关总阀"
+    }
+   ],
+   "far": {
+    "consequence": "整栋洋房停止一切沙龙活动并被迫提前交割。",
+    "due_days": 10,
+    "trigger": "洋房地基被积水浸泡受损"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_wet_negative"
+   ],
+   "id": "p_negative_raid",
+   "immediate": {
+    "minutes": 20,
+    "text": "锈水正漫过水槽边缘，药水被迅速稀释，底片上的影像逐渐模糊。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "darkroom_cellar",
+    "private_suite"
+   ],
+   "near": {
+    "deadline_minutes": 60,
+    "text": "积水渗到地下电闸，整栋洋房随时会跳闸起火。"
+   },
+   "objective": "在底片药膜脱落前抢救出名册微缩胶卷。",
+   "source": "accident",
+   "start_minute": 1280,
+   "tags": [],
+   "title": "暗房水管爆裂",
+   "trigger": "洋房老旧的铜水管在水压下突然爆裂，冰冷的锈水灌入暗房水槽，没烘干的底片眼看就要被泡烂。"
+  }
+ ],
+ "region": "法租界霞飞路深处的老洋房公馆与地下暗房",
+ "rules": [
+  {
+   "id": "r_curfew",
+   "text": "夜间十一点正准时宵禁，界河关卡铁闸落锁；宵禁后在界内走动，巡捕房有权不经审讯就地关押。"
+  },
+  {
+   "id": "r_salon_neutral",
+   "text": "公馆沙龙对一切阵营保持中立，凡带枪械入内者必须交由门厅保管，违者当场逐出且永久除名。"
+  },
+  {
+   "id": "r_darkroom_key",
+   "text": "地下暗房实行双人登记制，冲洗微缩胶卷与特约底片必须由掌柜与技师同时在场核验。"
+  },
+  {
+   "id": "r_concession_seal",
+   "text": "出境通关文牒必须加盖法巡捕房与总商会双重火漆印，单印或伪造印章一律当场没收并扣人。"
+  },
+  {
+   "id": "r_whisper_board",
+   "text": "沙龙内不得公开散发时局传单，一切消息只在画廊屏风后与吸烟室耳语交接。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "杯酒试探",
+  "committed": "生死同盟",
+  "familiar": "暗室深浅",
+  "flirting": "暧昧周旋",
+  "intimate": "身心相抵",
+  "stranger": "点头交际",
+  "testing": "利益对赌"
+ },
+ "status": "review",
+ "style_hint": "定影液的酸涩味、暗房红灯下的阴影与汗水、留声机慵懒的爵士乐、走廊尽头巡捕皮靴的脚步声、丝绸与毛呢擦过的静电。",
+ "tension_engines": [
+  {
+   "id": "te_single_negative",
+   "text": "同一张要紧底片只冲印出一份样张，洗印师与买家各扣半卷剪边，谁也不能单独出手换钱。"
+  },
+  {
+   "id": "te_last_ticket",
+   "text": "去往南洋的末班轮船只剩一张未记名客舱票，两个走投无路的人必须在宵禁前分出归属。"
+  },
+  {
+   "id": "te_curfew_iron_gate",
+   "text": "十一点正后巷铁闸合拢上锁，若无巡捕房夜行路条，门里门外皆成绝路。"
+  },
+  {
+   "id": "te_blackmail_portrait",
+   "text": "三楼套房保险柜里锁着一张被偷拍的密会照片底片，买下它需要一大笔黄金，毁掉它需要有人冒险撬柜。"
+  },
+  {
+   "id": "te_double_agent_wire",
+   "text": "两人各自握着对方投靠敌对势力的密电底稿，坐在一张圆桌前低语交锋。"
+  }
+ ],
+ "title": "末代法租界的暗房与沙龙",
+ "tone": [
+  "胶片酸味",
+  "红光与阴影",
+  "浮华末路",
+  "高压拉扯"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_fake_passport",
+   "requires": [
+    "customs_broker"
+   ],
+   "text": "黑市那批船票的原版钢印早被巡捕房暗中调包，{customs_broker.name}手里的现票其实都是一查就扣人的诱捕票。"
+  },
+  {
+   "category": "人事",
+   "id": "t_new_commissioner",
+   "requires": [
+    "police_inspector"
+   ],
+   "text": "巡捕房突然换防，{police_inspector.name}的签批权在今夜被新派来的外籍督察全权收回。"
+  },
+  {
+   "category": "资源",
+   "id": "t_fuel_blackout",
+   "requires": [],
+   "text": "自来火公司切断了霞飞路沿线的煤气，洋房各处的煤气灯在深夜一盏盏暗下去，只剩烛火。"
+  },
+  {
+   "category": "制度",
+   "id": "t_curfew_ahead",
+   "requires": [],
+   "text": "公董局发布紧急布告，界河沿线铁闸与岗哨关闭时间提前整整一个小时。"
+  },
+  {
+   "category": "时限",
+   "id": "t_midnight_deadline",
+   "requires": [
+    "pressure"
+   ],
+   "text": "末班轮船拉响起锚汽笛，船长宣布半小时内未登船验关的客票一律作废。"
+  },
+  {
+   "category": "关系",
+   "id": "t_secret_lovers",
+   "requires": [
+    "master_photographer",
+    "cabinet_singer"
+   ],
+   "text": "{master_photographer.name}与{cabinet_singer.name}多年前就在南洋相识，那卷名册底片正是两人联手带出来的脱身筹码。"
+  },
+  {
+   "category": "意外",
+   "id": "t_chimney_fire",
+   "requires": [],
+   "text": "大厅壁炉的烟道被未燃尽的密件纸灰堵塞起火，浓烟倒灌，宾客纷纷涌向回廊。"
+  }
+ ]
+}

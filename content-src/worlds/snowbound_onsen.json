@@ -1,0 +1,1023 @@
+{
+  "schema_version": 1,
+  "id": "snowbound_onsen",
+  "title": "雪夜汤宿",
+  "extends": null,
+  "era": "1980 年代末深冬（暴雪封山第 3 夜）",
+  "region": "深山峡谷老派秘汤别馆",
+  "premise": "暴雪压垮高压线封死山道，老牌温泉旅馆断电断暖；在零下十五度的失温威胁与 42℃ 硫磺温泉的蒸腾中，七个各怀私密与罪责的人，不得不分担热源，也分担算计。",
+  "tone": ["冷暖反差", "肉体张力", "窒息封闭", "阶层瓦解"],
+  "style_hint": "着力描写湿冷单薄的棉织浴衣、桧木被硫磺水汽蒸透的酸涩木香、窗外暴雪砸在杉木板的闷响、水流从竹笕落入池底的空洞回音，以及冷得发抖的指尖贴上滚烫潮湿肌肤的战栗感。",
+  "clock_start": { "label": "第一天 22:30", "minute": 1350 },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": { "female": 0.5, "male": 0.35, "nonbinary": 0.15 },
+  "stage_labels": {
+    "stranger": "陌路客",
+    "acquainted": "点头相识",
+    "familiar": "共炉熟知",
+    "flirting": "暗生情愫",
+    "testing": "利害试探",
+    "intimate": "肌肤之亲",
+    "committed": "生死盟约"
+  },
+  "content_tags": ["explicit", "coercion_theme", "violence", "substance", "humiliation", "infidelity", "bodily_harm"],
+  "forbidden_terms": ["互联网", "智能机", "短信", "电子邮件", "监控探头", "行车记录仪", "无人机", "全球定位"],
+  "status": "review",
+  "notes": "1980年代末深山老铺在极端严寒与停电下的封闭群像。C2：寒冷与压力只逼出处境和选择，亲密只来自角色本身；失能状态不进入任何亲密描写，出路代价均为社交、资源或信息代价。",
+  "name_pools": {
+    "family": ["白石", "桐岛", "高槻", "浅井", "神崎", "橘", "筱原", "五十岚", "长谷川", "黑泽", "水城", "真田"],
+    "given_female": ["千鹤", "麻耶", "静香", "由纪", "怜奈", "美咲", "梨乃", "真寻", "绫音", "枫", "诗织", "小夜"],
+    "given_male": ["律", "宗介", "修一", "慎太郎", "悠真", "直纪", "拓海", "征四郎", "一马", "健吾", "彰", "凉介"],
+    "given_neutral": ["葵", "萤", "薰", "遥", "凪", "翼", "光", "晴", "响", "忍", "真澄", "真琴"],
+    "nickname_patterns": [
+      { "pattern": "{family}先生", "gender": "male" },
+      { "pattern": "{family}夫人", "gender": "female" },
+      { "pattern": "阿{given_last}", "gender": "any" }
+    ]
+  },
+  "rules": [
+    { "id": "r_bath_rotation", "text": "内汤男女分浴，每日 22:00 切换门帘；午夜 00:00 后露天风吕改为挂栓私享，门栓从里面扣上即不可敲门催促。" },
+    { "id": "r_generator_curfew", "text": "柴油发电机每晚 23:00 准时掐闸熄灯，客房全断电无暖气，仅能依靠底楼地炉与地下温泉取暖。" },
+    { "id": "r_no_inquiry", "text": "百年老店客簿仅收现金与假名，住客彼此严禁追问进山由头，但若擅动配给干粮，女将有权驱逐至外廊冰库。" },
+    { "id": "r_fuel_ration", "text": "柴油与炭块归女将单人锁存，私自将发热炭盆移入客房属于严重越权，一旦被发现当场收缴铺盖。" }
+  ],
+  "customs": [
+    "入馆后全员脱卸厚重大衣只着单层棉浴衣，在骤冷骤热的过道中走动，衣襟半散皆视作寻常。",
+    "熄灯后全员必须围聚地炉分食粗茶与烤饭团，离席超过一刻钟需向众人交代去向。",
+    "晨起第一通锣响，各房必须派一人持铁锹清扫内院出水口积雪，推脱者午餐配给减半。",
+    "深夜无热水淋浴，若想擦拭身子，需用地炉吊壶的热水浸透布巾，换水时往往伴随私下耳语。"
+  ],
+  "player_identities": [
+    {
+      "id": "stranded_auditor",
+      "role": "信贷会社高级审查员",
+      "gender": "any",
+      "title_patterns": [{ "pattern": "{family}审查官", "gender": "any" }],
+      "age_range": [35, 48],
+      "social_position": "high",
+      "baseline": "办事严谨狠厉，见账不见人，习惯用制度和契约碾压违约者。",
+      "resources": ["别馆完整的抵押账本复印件", "一沓未冻结的大额现金", "一台只能收听、无法发报的便携收音机"],
+      "reputation": "金融界的冷血追债犬，从不讲私情面子。",
+      "risks": ["随身携带的清算账本一旦被当事人发现，极易遭遇人身报复", "体能薄弱，在严寒山道上缺乏独自徒步突围能力"]
+    },
+    {
+      "id": "runaway_lover",
+      "role": "潜逃私奔的婚纱设计师",
+      "gender": "any",
+      "title_patterns": [{ "pattern": "{given}老师", "gender": "any" }],
+      "age_range": [28, 38],
+      "social_position": "equal",
+      "baseline": "举止优雅但神经极度过敏，擅长察言观色并极度注重体面。",
+      "resources": ["一箱高定首饰与私藏现钞", "剪裁贴身的备用保暖内衬衣物", "对人体骨骼线条与伪装的敏锐直觉"],
+      "reputation": "上流名媛圈的宠儿，但在底层亡命之徒眼中是待宰肥羊。",
+      "risks": ["财物露白引发暴力抢劫", "山下债主随时可能雇佣讨债打手包围别馆"]
+    },
+    {
+      "id": "undercover_stringer",
+      "role": "冒名顶替的周刊无牌撰稿人",
+      "gender": "any",
+      "title_patterns": [{ "pattern": "阿{given_last}", "gender": "any" }],
+      "age_range": [22, 32],
+      "social_position": "low",
+      "baseline": "底层摸爬滚打，习惯低眉顺眼，善于在暗中观察并利用他人软肋。",
+      "resources": ["缝在内衣夹层的微型磁带录音机", "一根开锁细铁丝与小刮刀", "熟悉日式老屋全部排气道与偷窥夹缝"],
+      "reputation": "看着像个落魄跑腿的小工，毫无防备价值。",
+      "risks": ["偷录一旦暴露，会被盛怒的权贵和凶徒当场销毁工具并殴打", "随身盘缠极少，经不起长期封山的消耗"]
+    },
+    {
+      "id": "retired_mechanic",
+      "role": "滞留的公路铲雪车司机",
+      "gender": "any",
+      "title_patterns": [{ "pattern": "老{family}", "gender": "any" }],
+      "age_range": [45, 58],
+      "social_position": "low",
+      "baseline": "沉默寡言，粗暴直接，只相信机械原理与实在利益。",
+      "resources": ["一把多功能重型管钳与螺母组", "两升私藏的高标号防冻柴油", "对山谷气候与雪崩落石坡向的直觉经验"],
+      "reputation": "脾气暴躁的老酒鬼，但全馆取暖维生离不开这双手。",
+      "risks": ["长期酗酒引起的手抖，可能导致精密抢修失败", "翻覆的工程车内藏有私运违禁品，一旦被查获将面临牢狱之灾"]
+    }
+  ],
+  "locations": [
+    {
+      "id": "hearth_lounge",
+      "name": "一楼围炉茶歇间",
+      "detail": "下沉式炭火地炉悬着铸铁鸣壶，四周是深色破旧榻榻米，墙角摆着断电的挂钟与老式收音机。",
+      "privacy": "public",
+      "visibility": "火光照亮半圈人脸，角落阴影极深；从各客房走廊进出的必经要道。",
+      "witnesses": ["bg_hearth_tender"],
+      "exits": ["hallway_1f", "kitchen_storage"],
+      "affordances": ["用铁火箸拨弄炭火", "为身旁的人倾倒温热清酒", "在铁壶沸腾的嘶嘶声中低声交谈"],
+      "pressure_modifiers": {
+        "p_generator_shutdown": "火苗被穿堂风吹得忽明忽暗，每个人都在火光里偷看别人藏油的那只手。",
+        "p_ledger_burn": "火盆周围弥漫着焦糊味，所有人都紧盯着那团逐渐发红的纸角。"
+      },
+      "tags": []
+    },
+    {
+      "id": "hallway_1f",
+      "name": "一楼木结构主走廊",
+      "detail": "走廊一侧是落地障子窗，窗外积雪已压至腰间高，踏在杉木长地板上每一步都发出沉闷呻吟。",
+      "privacy": "public",
+      "visibility": "应急小红灯挂在梁下，仅能看清脚下三步。",
+      "witnesses": ["bg_patrol_handyman"],
+      "exits": ["hearth_lounge", "onsen_changing", "kitchen_storage", "hallway_2f"],
+      "affordances": ["侧身贴墙避让来人", "伸手试探障子门缝渗入的寒风", "敲响某扇紧闭的房门"],
+      "pressure_modifiers": {
+        "p_theft_investigation": "走廊两侧纸门紧闭，杂役的皮靴声在木板上沉重回响。"
+      },
+      "tags": []
+    },
+    {
+      "id": "kitchen_storage",
+      "name": "厨房后库与冷藏间",
+      "detail": "悬挂着熏渍腌肉与整坛渍菜，角落用麻袋遮盖着最后半桶柴油，散发着生米与重柴油气味。",
+      "privacy": "semi",
+      "visibility": "极其逼仄昏暗，仅有一扇通往雪地的小木窗，呼气立成白雾。",
+      "witnesses": [],
+      "exits": ["hearth_lounge", "hallway_1f"],
+      "affordances": ["清点剩余油料与干粮", "挤在立柜后狭窄缝隙里避开来人", "撬动麻袋上的铅封"],
+      "pressure_modifiers": {
+        "p_generator_shutdown": "油桶底部只剩薄薄一层黑油，金属量勺刮擦出刺耳噪音。"
+      },
+      "tags": []
+    },
+    {
+      "id": "onsen_changing",
+      "name": "桧木更衣室",
+      "detail": "蒸气从门缝漫进，两排无柜门竹藤置物筐，一面微泛水汽的发黄大穿衣镜，地板竹席冰凉潮湿。",
+      "privacy": "semi",
+      "visibility": "挂着厚重深色麻帘，视线常被白雾吞没；转角两步之内极易和人撞个满怀。",
+      "witnesses": ["bg_bath_maid"],
+      "exits": ["hallway_1f", "onsen_roten"],
+      "affordances": ["系紧或松开浴衣腰带", "借擦头发的毛巾暗中打量", "翻检遗落在竹筐里的衣物或挂表"],
+      "pressure_modifiers": {
+        "p_onsen_midnight_lock": "更衣帘外木屐声逼近，仅剩三秒决定是扣紧前襟还是侧身躲进阴影。"
+      },
+      "tags": []
+    },
+    {
+      "id": "onsen_roten",
+      "name": "溪涧露天风吕",
+      "detail": "悬崖巨石围成的池塘，42℃ 泉水泛着浓烈硫磺白雾；外头是黑松林狂暴风雪，池边落满厚雪。",
+      "privacy": "private",
+      "visibility": "风雪水汽弥漫，门栓扣上后外人无法窥探；风声与溪流声彻底掩盖低语。",
+      "witnesses": [],
+      "exits": ["onsen_changing"],
+      "affordances": ["浸入滚烫池水将手臂搭在冰冷积雪岩石上", "推开漂在水面的竹托盘", "从里面扣上木栓"],
+      "pressure_modifiers": {
+        "p_onsen_midnight_lock": "水温正随外界气温缓慢下滑，留在池里的人得算清楚还能泡多久。",
+        "p_icefall_collapse": "头顶绝壁的积雪大块坍落，碎冰不断砸入冒着热气的泉水池中。"
+      },
+      "tags": []
+    },
+    {
+      "id": "hallway_2f",
+      "name": "二楼客房通廊",
+      "detail": "狭窄陡峭的木阶梯上方，通往各间被寒气冻透的客房，铺着磨损起毛的旧红地毯，尽头的楼梯拐角堆着几张旧坐垫。",
+      "privacy": "public",
+      "visibility": "完全无灯，仅靠窗外积雪映进来的惨白反光，能看清各房门牌挂绳。",
+      "witnesses": ["bg_coughing_elder"],
+      "exits": ["hallway_1f", "annex_guestroom"],
+      "affordances": ["扶着冰凉扶手听楼下动静", "辨别不同房间里传出的咳嗽与翻身声", "轻推未上锁的拉门"],
+      "pressure_modifiers": {
+        "p_hypothermia_room": "走廊木板结了一层白霜，脚底一滑便会发出惊醒全楼的闷响。"
+      },
+      "tags": []
+    },
+    {
+      "id": "annex_guestroom",
+      "name": "二楼椿之客房",
+      "detail": "八叠榻榻米和室，壁龛挂着风雪归舟图，未生炭火的室内室温逼近零度，两床单薄棉被叠在角落。",
+      "privacy": "private",
+      "visibility": "障子门闭合后外界不可见，但隔音极差，哪怕衣料摩擦都能被隔壁辨听。",
+      "witnesses": [],
+      "exits": ["hallway_2f"],
+      "affordances": ["将两床棉被拼在一起拉紧", "隔着纸门压低嗓音说话", "用冻僵的指节检查藏在被褥夹层的行李"],
+      "pressure_modifiers": {
+        "p_hypothermia_room": "呼出的白气在棉被边缘结成薄霜，手脚逐渐失去知觉。"
+      },
+      "tags": []
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "keeper_chizuru",
+      "gender": "female",
+      "gender_reason": "百年老铺若女将职位传统上由女性继承，掌控账房与内务",
+      "age_range": [28, 36],
+      "adult_context": "独自支撑败落别馆的若女将，丈夫因巨额赌债潜逃，表面恪守祖训体面，暗中克扣物资准备卷款弃馆。",
+      "public_role": "别馆若女将",
+      "appearance_options": [
+        "素色细棉和服挽着利落发髻，后颈线条在水汽里泛白，眼角带着数日未眠的微红",
+        "腰间挂着沉甸甸的铜制钥匙串，步履轻盈无声，手指骨节因常年浸泡冷水微显粗糙"
+      ],
+      "identity": {
+        "authority": "掌控全馆门房钥匙、配给干粮发放以及发电机开闭闸权力",
+        "resources": ["别馆总钥匙串", "地炉仅剩的木炭储备", "私藏的半桶高标号防冻柴油"],
+        "limits": ["受家族宗法与客栈声誉捆绑，不可公开驱逐已付定金的住客", "没有抗衡暴力的体能"],
+        "obligations": ["维持住客最基础的生还底线直至通路恢复"],
+        "exposure": "一旦私藏燃油与变卖房契之事公开，将丧失对全馆仆役的统领正当性",
+        "hidden": "账房暗格里的抵押合同显示，这座旅馆早在半年前就已被丈夫私下全额抵押"
+      },
+      "decision": {
+        "core_value": "在暴雪融化山道打通前，筹足脱身资金并保全家族门面",
+        "goal_options": ["找机会收回或销毁不利于别馆产权的抵押借据原件", "以私用炭火为筹码从富裕住客手中换取现钞", "在柴油耗尽前维持旅馆不发生冻死人的惨剧"],
+        "pressure_responses": {
+          "low": "垂眸添茶，用温婉而疏离的客套话转移话题拖延时间",
+          "mid": "搬出旅馆百年清规，以削减该房次日配给口粮进行隐性施压",
+          "high": "反锁账房拉门，扣留对方随身证件作为谈判条件",
+          "breaking": "摔碎祖传茶具彻底撕破脸皮，威胁拉下全馆总电闸同归于尽"
+        },
+        "withdrawal": "躲入后库清点油料，拒绝回应任何客房的敲门呼唤",
+        "relationship_stance": "视所有住客为潜在的讨债者或肥羊，保持礼貌而警惕的安全距离",
+        "contrast": "言语愈是温顺谦卑，算盘与账目卡得愈是分毫不让",
+        "prefers": ["在水汽缭绕的走廊拐角进行耳语交易", "白纸黑字的签字确认"],
+        "avoids": ["面对面的肢体暴力对抗", "无担保的口头承诺"],
+        "never": ["在他人注视下交出账房钥匙"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": ["在失控危机中展现出沉稳果断决策力的成年人", "能够看穿自己的伪装却没有当场戳穿的默契目光"],
+        "likes": ["被温暖宽厚的手掌包裹住冻僵的指尖", "私密隔间里没有第三人的低沉对谈"],
+        "dislikes": ["轻佻无礼的动手动脚", "居高临下的施舍态度"],
+        "preconditions": ["确信对方没有把自己的秘密向第三人告发", "室内环境有门栓保护"],
+        "boundaries": ["绝不在祖先牌位所在的账房前失态", "拒绝任何带侮辱意味的接触"],
+        "expression": "借着递送热毛巾或整理浴衣领口，指尖在对方颈侧多停留两秒",
+        "desire_range": [2, 4],
+        "self_control_range": [3, 5],
+        "desired_position": "表面克制承接，暗中掌握节奏与进退"
+      },
+      "voices": {
+        "surface": "山里天寒地冻，怠慢之处还望海涵，我再去挑两块好炭来。",
+        "inner": "这群人走不出这道峡谷，谁也别想带着我的账本活着下山。"
+      },
+      "schedule": [
+        { "from": 0, "to": 360, "location_id": "annex_guestroom" },
+        { "from": 361, "to": 660, "location_id": "kitchen_storage" },
+        { "from": 661, "to": 1380, "location_id": "hearth_lounge" },
+        { "from": 1381, "to": 1439, "location_id": "kitchen_storage" }
+      ],
+      "situation": {
+        "trigger": "玄关清扫积雪时，有人撞见账房拉门未锁，露出了印有抵押清算字样的封皮",
+        "pressure": "若不在此夜将抵押凭证彻底收回销毁，一旦山道打通，自己将被立刻扫地出门",
+        "exits": [
+          { "option": "提供一间生有私炭的暖阁换取凭证交还", "cost": "消耗宝贵的取暖炭，且面临被其他冻馁住客围攻的风险" },
+          { "option": "让杂役强行搜查并扣押可疑行李", "cost": "彻底激化与住客的矛盾，可能引发暴力冲突" }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "photographer_ritsu",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [30, 42],
+      "adult_context": "混迹边缘调查的纪实摄影师，因偷拍到要人私密丑闻遭追查遁入深山，暗盒里的胶卷是唯一的保命底牌。",
+      "public_role": "独立纪实摄影师",
+      "appearance_options": [
+        "下颌线削瘦，常年挂着一台机械旁轴相机，手指被定影液染成深褐色",
+        "身形精瘦挺拔，浴衣下隐约露出锁骨与肋下的旧擦伤"
+      ],
+      "identity": {
+        "authority": "对全馆采光、视觉盲区与偷拍视角的熟悉",
+        "resources": ["机械胶片相机与冲洗药水", "藏有政商私密证据的特制暗盒", "强光防水手电筒"],
+        "limits": ["胶卷一旦受潮或曝光即告报废", "体能不足以在雪地里单独长途跋涉"],
+        "obligations": ["在追查者封锁山门前将底片安全交予出版方"],
+        "exposure": "若是让住客知晓相机里拍下了每个人的面孔，会瞬间成为众矢之的",
+        "hidden": "暗盒里不仅有政商丑闻，还无意间拍下了别馆某人行凶未遂的画面"
+      },
+      "decision": {
+        "core_value": "保住底片的真实性，以此换取下半生的安稳",
+        "goal_options": ["物色一个能掩护自己带底片突围的同伴", "用拍到的把柄敲打当事人换取现款", "在断电的漆黑中找到冲洗显影的安全环境"],
+        "pressure_responses": {
+          "low": "歪头点燃半截受潮香烟，用带刺的讽刺话化解盘问",
+          "mid": "拿出裁切的小样照片一角，敲打对方要害逼其退步",
+          "high": "拆下金属三脚架当作防身短棍，背靠实墙做出戒备姿态",
+          "breaking": "将未冲洗的胶卷拉出来晾在火光下，以玉石俱焚相要挟"
+        },
+        "withdrawal": "躲入更衣室阴暗角落擦拭镜头，谁问话都不抬头",
+        "relationship_stance": "将所有人视作镜头里的被摄对象，也是潜在的勒索与被勒索方",
+        "contrast": "镜头语言极尽残酷真实，私下相处时却渴望被毫无保留地接纳",
+        "prefers": ["光线晦暗的狭窄死角", "直截了当的利益交换"],
+        "avoids": ["过于刺眼的明火照射", "群体围坐的公开审判"],
+        "never": ["将相机底盖朝向陌生人打开"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": ["神经强韧、不作伪态的同伴", "在严寒中敢于先放下戒备的人"],
+        "likes": ["粗糙而滚烫的肌肤触感", "暗处急促的呼气打在侧颈"],
+        "dislikes": ["矫揉造作的姿态", "以施舍者自居的上位者做派"],
+        "preconditions": ["双方都已放下随身的刀具与器材", "已建立初步的情报交换"],
+        "boundaries": ["绝不让对方触碰装有底片的内袋", "拒绝情感依附与未来许诺"],
+        "expression": "用沾有显影液气味的手指握住对方手腕，引向自己心口，让对方听听{npc.ta}的心跳有多乱",
+        "desire_range": [3, 5],
+        "self_control_range": [2, 4],
+        "desired_position": "先进攻性地试探，到关键处却把主动权让出去"
+      },
+      "voices": {
+        "surface": "别紧张啊，这种天气胶卷都冻脆了，拍不出什么好名堂。",
+        "inner": "你们每个人的秘密，都在我的暗盒里存着呢。"
+      },
+      "schedule": [
+        { "from": 0, "to": 180, "location_id": "onsen_roten" },
+        { "from": 181, "to": 480, "location_id": "annex_guestroom" },
+        { "from": 481, "to": 1140, "location_id": "hearth_lounge" },
+        { "from": 1141, "to": 1380, "location_id": "hallway_1f" },
+        { "from": 1381, "to": 1439, "location_id": "onsen_changing" }
+      ],
+      "situation": {
+        "trigger": "更衣室竹筐里遗落的相机背带被杂役踩到，险些曝光暗盒",
+        "pressure": "必须在今夜找到一个绝对避光且有微温水源的地方完成底片定影",
+        "exits": [
+          { "option": "冒险借用后厨温水桶进行暗袋操作", "cost": "必须以透露某张偷拍照作为交换许可" },
+          { "option": "将底片藏入露天风吕水下岩缝待雪化", "cost": "面临硫磺水渗漏彻底损毁画面的风险" }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "lady_maya",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [34, 44],
+      "adult_context": "大财阀会长的新宠伴侣，盗走巨额海外债权印鉴随同谋潜逃，却在风雪中被丢在别馆孤立无援。",
+      "public_role": "富商家眷住客",
+      "appearance_options": [
+        "单薄浴衣外裹着名贵却被炭火熏黑的开司米披肩，香水味与硫磺味交杂",
+        "面容保养极佳，手指上有褪下戒指后的苍白勒痕，眼神如受惊的鹿般警觉"
+      ],
+      "identity": {
+        "authority": "拥有巨额无记名本票与商社海外账户印鉴的兑付权力",
+        "resources": ["一整箱未拆封的大额日元现钞", "三件价值不菲的钻石首饰", "防身用小型警报哨"],
+        "limits": ["体质极度畏寒，无力单独在雪地求生", "一旦行踪见报将面临家族的刑事诉讼"],
+        "obligations": ["在会长的追责人员赶到之前离开本岛"],
+        "exposure": "箱子里盖有会长私印的转账公文一旦被核验，当场构成职务侵占罪",
+        "hidden": "出逃前因遭遇家暴，曾下药致会长昏迷，至今生死未卜"
+      },
+      "decision": {
+        "core_value": "不惜任何代价活过暴雪夜，找到一个能护送自己安全下山的可靠同盟",
+        "goal_options": ["重金收买铲雪司机或体能充沛者作为护卫", "用钱换取女将提供独立生火的避难暖房", "隐匿印鉴防止被信贷人员追索冻结"],
+        "pressure_responses": {
+          "low": "收紧披肩微微昂首，用居高临下的口吻斥退打听者",
+          "mid": "拉开皮箱一角露出成捆现钞，试图以金钱直接购买特权与柴火",
+          "high": "面色惨白地抓紧身边之人的衣袖，泣声诉说绝望以博取庇护",
+          "breaking": "歇斯底里地将钞票扔向火盆，尖叫着质问所有人到底要从自己身上榨取什么"
+        },
+        "withdrawal": "将椿之客房拉门从内死死顶住，用所有棉被将自己裹成一团",
+        "relationship_stance": "渴望获得强有力的庇护，又深恐再次落入他人的利用圈套",
+        "contrast": "外表是娇贵不耐风霜的弱者，骨子里却有背叛豪门的孤注一掷狠劲",
+        "prefers": ["温暖封闭的私密室内", "明确的效忠承诺"],
+        "avoids": ["零度以下的露天环境", "赤身裸体的群体场合"],
+        "never": ["让装有印鉴的首饰盒离开自己两步之外"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": ["体格强健、却在幽暗处表现出克制温柔的保护者", "完全无视自己金钱地位的纯粹目光"],
+        "likes": ["被紧紧裹在宽大干燥的怀抱与被褥中", "带有占有欲却缓慢的抚摸"],
+        "dislikes": ["带着下流窥探意味的嬉皮笑脸", "借机勒索敲诈的威胁口吻"],
+        "preconditions": ["对方先做出排除外界危险的防护举措", "双方都在温暖的掩体之内"],
+        "boundaries": ["不接受在冰冷的公共地板上越界", "绝不承诺金钱以外的婚姻契约"],
+        "expression": "将发抖的冰凉双足悄悄探入对方的棉被深处，咬住下唇不敢看对方眼睛",
+        "desire_range": [3, 5],
+        "self_control_range": [1, 3],
+        "desired_position": "完全交托，在被紧紧抱住时寻求安全感"
+      },
+      "voices": {
+        "surface": "钱不是问题……只要能让屋里暖和起来，多少定金我都付。",
+        "inner": "只要能活着走出去，这些废纸全烧了我也无所谓。"
+      },
+      "schedule": [
+        { "from": 0, "to": 480, "location_id": "annex_guestroom" },
+        { "from": 481, "to": 1140, "location_id": "hearth_lounge" },
+        { "from": 1141, "to": 1320, "location_id": "onsen_changing" },
+        { "from": 1321, "to": 1439, "location_id": "onsen_roten" }
+      ],
+      "situation": {
+        "trigger": "客房水管彻底封冻破裂，室内滴水成冰，体温急剧下降",
+        "pressure": "若继续孤守房内将陷入严重失温，若去地炉围坐则箱中首饰面临被窥窃",
+        "exits": [
+          { "option": "带着贴身首饰转移至地炉角落挤坐", "cost": "暴露在杂役与陌生人的众目睽睽之下，丧失体面" },
+          { "option": "邀请另一位住客进入客房合宿抗寒", "cost": "让出私密防线，对方会看到箱子里不该被看到的东西" }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "doctor_shinsuke",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [42, 54],
+      "adult_context": "前外科主刀医生，因重大医疗过失致死被吊销执照，药箱内私藏有未销毁的管制镇痛安瓿与手术器械。",
+      "public_role": "避世落魄医生",
+      "appearance_options": [
+        "金丝眼镜框略有弯折，大衣内衬散发着微苦的消毒水与药草味",
+        "双手关节修长异常洁净，但在严寒中偶尔会出现轻微震颤"
+      ],
+      "identity": {
+        "authority": "全馆唯一的急救、伤情判断与药物调配能力",
+        "resources": ["便携外科缝合包与消毒剂", "六支医用管制镇痛注射液", "水银体温计与听诊器"],
+        "limits": ["受执业污点重创，自我认同崩解，有轻度药物依赖倾向", "体力不敌壮年劳工"],
+        "obligations": ["不可见死不救的职业残余本能"],
+        "exposure": "随身携带的镇痛安瓿若被翻出，将直接坐实非法持有管制药品罪名",
+        "hidden": "当年那场医疗事故的当事人档案，就压在皮箱夹层的笔记本里"
+      },
+      "decision": {
+        "core_value": "在与世隔绝中守住作为医者的最后一点尊严",
+        "goal_options": ["用有限药物换取安稳的口粮与避风床位", "救治出现失温并发症的住客以建立威信", "隐匿过失医疗记录防止遭遇病患家属报复"],
+        "pressure_responses": {
+          "low": "慢条斯理地摘下眼镜擦拭，用冰冷客观的医学术语瓦解对方情绪",
+          "mid": "取出针管与药瓶在指尖把玩，暗示全馆的止痛药都在自己手里",
+          "high": "以病人需要隔离为由封锁特定房门进行施压",
+          "breaking": "自己将半支镇痛剂推入静脉，在半昏沉中冷眼旁观局势崩塌"
+        },
+        "withdrawal": "反锁在后库隔间清点药品，不理会走廊的喧闹",
+        "relationship_stance": "习惯把他人看作需要诊断的身体，以此保持距离",
+        "contrast": "解剖刀般冷硬的言辞下，藏着对活人体温近乎固执的珍惜",
+        "prefers": ["安静无杂音的处置环境", "遵从医嘱的病人"],
+        "avoids": ["歇斯底里的情绪爆发", "未经消毒的蛮横拉扯"],
+        "never": ["在他人逼迫下交出全部镇痛针剂"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": ["知道自己的过去却仍然不把自己当罪人看的人", "在自己面前不逞强、也不把自己当救命稻草的人"],
+        "likes": ["在绝对静谧中听对方慢慢平稳下来的心跳", "被人当作普通人而不是医生对待"],
+        "dislikes": ["轻佻虚浮的花言巧语", "毫无节制的酗酒烂醉者"],
+        "preconditions": ["对方神志清醒、身体已经回暖", "自己当晚没有碰过针剂"],
+        "boundaries": ["绝不在对方受伤、失温或用药时越界", "不涉足任何涉及金钱交易的情感承诺"],
+        "expression": "量完体温后没有立刻收回手，低声问一句“还冷吗”，等对方先回答",
+        "desire_range": [2, 4],
+        "self_control_range": [3, 5],
+        "desired_position": "放下医生的身份，在对方面前做回一个普通人"
+      },
+      "voices": {
+        "surface": "核心体温一旦降到 33 度，你的神志就会开始说胡话，把衣服脱光冻死在雪里。",
+        "inner": "我能把一个人的体温救回来，却从来留不住任何一个人。"
+      },
+      "schedule": [
+        { "from": 0, "to": 300, "location_id": "annex_guestroom" },
+        { "from": 301, "to": 720, "location_id": "hearth_lounge" },
+        { "from": 721, "to": 1200, "location_id": "kitchen_storage" },
+        { "from": 1201, "to": 1439, "location_id": "hearth_lounge" }
+      ],
+      "situation": {
+        "trigger": "有住客因极寒旧伤复发引起剧烈肌肉痉挛倒地",
+        "pressure": "若不出手救治将引发人员伤亡；若动用管制药物，自己的私藏底牌将彻底暴露",
+        "exits": [
+          { "option": "用推拿与热敷缓解痛苦", "cost": "耗费大量热水与体力，见效缓慢且伤者极度怨恨" },
+          { "option": "公开注射半支镇痛针剂迅速止痛", "cost": "稀缺药物存量减少，且引发其他人对止痛药的争抢" }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "fugitive_sosuke",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [28, 38],
+      "adult_context": "因重大亏空与过失伤人被追捕的前押运员，身材魁梧，伪装成登山客潜入别馆，靴筒藏有折叠猎刀。",
+      "public_role": "受困登山客",
+      "appearance_options": [
+        "骨架极宽，防寒外套下裹着洗得发硬的粗线毛衣，肩背肌肉轮廓分明",
+        "面庞冷峻，眼神如孤狼般始终警惕地扫视门口与退路"
+      ],
+      "identity": {
+        "authority": "全馆压倒性的格斗与重体力破拆能力",
+        "resources": ["高碳钢折叠猎刀", "高热量压缩干粮三日份", "高强度攀登绳索"],
+        "limits": ["背负通缉令，不敢接触任何外部通讯", "缺乏谈判头脑，容易诉诸暴力"],
+        "obligations": ["在搜捕人员封锁山脚之前翻越黑松林隘口脱身"],
+        "exposure": "左小臂上纹有前服役部队的刺青编码，极易被识破身份",
+        "hidden": "背包深处除了干粮，还藏有从押运车截留的十公斤金条"
+      },
+      "decision": {
+        "core_value": "隐匿行踪活命突围，对任何敢阻碍或窥探自己的人绝不留情",
+        "goal_options": ["物色一个体能合格的向导或能开铲雪车的同伴结伴突围", "抢夺足够的柴油和高热量物资据守单间", "在被全员怀疑前将知晓自己底细的人控制住"],
+        "pressure_responses": {
+          "low": "拉低毛线帽压住眉眼，抱臂靠在阴暗门柱旁冷眼旁观",
+          "mid": "粗暴截断对方话头，反手扣住对方腕骨展示力量差距",
+          "high": "拔出靴筒短刀抵在对方咽喉，逼其交出通道钥匙",
+          "breaking": "打晕阻拦者强行破门，孤身一人在暴雪中突围"
+        },
+        "withdrawal": "盘踞在通往露天风吕的石阶拐角，刀不离手闭目养神",
+        "relationship_stance": "将弱者视作碍事的累赘，对心怀鬼胎的智识阶层充满戒备",
+        "contrast": "外表凶悍宛如野兽，内心深处却极度渴望脱离逃亡泥潭的片刻安宁",
+        "prefers": ["有双向撤退路线的开阔区域", "少废话的直接较量"],
+        "avoids": ["人多口杂的密室争吵", "繁文缛节的社交客套"],
+        "never": ["在陌生人面前解下绑在靴筒里的刀鞘"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": ["在绝境中敢直视自己凶狠目光而不退缩的人", "知道自己底细却没有出卖、还肯替自己守夜的人"],
+        "likes": ["结实的身体相互抵靠时那种沉甸甸的质感", "汗水与硫磺水混在皮肤上的滚烫"],
+        "dislikes": ["算计利益的假意逢迎", "自恃高贵的呼来喝去"],
+        "preconditions": ["对方已亲眼见过自己的凶狠手段却并未选择出卖", "离开了旁人的视线"],
+        "boundaries": ["绝不让对方从背后限制自己的双手", "拒绝探听自己真实姓名的追问"],
+        "expression": "把自己唯一的外衣扔给对方，然后背过身去守着门，一夜不睡",
+        "desire_range": [3, 5],
+        "self_control_range": [2, 4],
+        "desired_position": "被允许卸下戒备、敢背对门坐下的那一个"
+      },
+      "voices": {
+        "surface": "外头雪崩把路基冲断了，谁想现在出去，谁就自己去填峡谷。",
+        "inner": "只要这屋里谁敢向山下通风报信，我就在天亮前送那人去后山喂狼。"
+      },
+      "schedule": [
+        { "from": 0, "to": 360, "location_id": "onsen_roten" },
+        { "from": 361, "to": 900, "location_id": "hallway_1f" },
+        { "from": 901, "to": 1260, "location_id": "hearth_lounge" },
+        { "from": 1261, "to": 1439, "location_id": "kitchen_storage" }
+      ],
+      "situation": {
+        "trigger": "分派清扫积雪工具时，有人无意碰到{npc.ta}背包底部沉重的金属硬块",
+        "pressure": "金条与刀具随时有被搜查缴械的危险，周围人的疑心正在发酵",
+        "exits": [
+          { "option": "主动承担后门最危险繁重的破冰铲雪劳役转移注意", "cost": "极度消耗体力，且暴露在风雪严寒中" },
+          { "option": "将金条分出一小块秘密塞给女将作为特别食宿费", "cost": "落入被长期敲诈勒索的被动陷阱" }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "id": "singer_ayane",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [24, 32],
+      "adult_context": "巡回酒吧驻唱歌手，烟酒过量导致嗓音微哑，因山路封闭滞留于此，精通察言观色并极度务实求生。",
+      "public_role": "巡回酒吧驻唱歌手",
+      "appearance_options": [
+        "单薄棉浴衣松松系在腰际，微卷长发随意散在肩头，眼尾带着一抹没卸干净的深紫色眼影",
+        "身形修长，指间夹着细长香烟，行走时浴衣下摆露出小腿"
+      ],
+      "identity": {
+        "authority": "以调和气氛为名在各房与走廊自由串门而不引起警惕",
+        "resources": ["两盒未开封的进口薄荷烟", "半瓶私藏苏格兰威士忌", "对人情绪波动的极高敏锐度"],
+        "limits": ["没有任何抗寒装备，极度依赖公共热源", "经济拮据"],
+        "obligations": ["在嗓子彻底冻哑前赶往下一场演出合同"],
+        "exposure": "随身携带的借贷逾期传票若被公开，将失去所有体面的社交声誉",
+        "hidden": "曾受雇于某位富商打探商业情报，皮包深处藏有目标人物的底细"
+      },
+      "decision": {
+        "core_value": "在严寒中游走于各方强者之间，用敏锐的情绪价值换取温暖与庇护",
+        "goal_options": ["在女将眼皮底下蹭到最靠近地炉内圈的位置", "用半瓶威士忌换取医生的一盒退烧药", "在对峙双方之间周旋抽身自保"],
+        "pressure_responses": {
+          "low": "吐出一口烟圈，用沙哑慵懒的笑声化解剑拔弩张的僵局",
+          "mid": "贴近强硬者耳畔吐露第三方的小秘密，以此换取同盟",
+          "high": "跪坐在榻榻米上掉眼泪，用弱者姿态诱使双方停火",
+          "breaking": "将酒瓶狠狠砸在门柱上，厉声痛斥所有虚伪者的自私自利"
+        },
+        "withdrawal": "躲到二楼楼梯拐角的旧坐垫堆里，裹紧披肩一口口抿着冷酒",
+        "relationship_stance": "从不相信任何人的道德自律，只信看得见的热源与实利",
+        "contrast": "表面放浪轻佻游刃有余，独处时却因孤立无援而抱膝发抖",
+        "prefers": ["炭火通红、酒意微醺的多人场合", "留有退路的言语试探"],
+        "avoids": ["一对一无见证人的暴力死角", "无遮挡的冰雪户外"],
+        "never": ["在任何人面前喝到彻底丧失知觉"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": ["能看穿自己的逢场作戏却依然愿意递上一杯热茶的从容成年人", "在严寒中分出自己的被子却什么都不索取的人"],
+        "likes": ["被带着酒气与体温的厚实大衣裹住", "耳廓被滚烫气息轻呵时的酥麻感"],
+        "dislikes": ["粗鲁的强行拉扯", "斤斤计较的小家子气"],
+        "preconditions": ["双方都清醒，且都是自己想靠近", "确认对方不是冲着自己皮包里的东西来的"],
+        "boundaries": ["绝不让对方在自己的咽喉与面容上留下伤痕", "拒绝充当任何人的依附品"],
+        "expression": "借着斟酒或递火柴的动作，膝头轻轻靠上对方大腿外侧，眼神含笑",
+        "desire_range": [2, 5],
+        "self_control_range": [2, 4],
+        "desired_position": "若即若离地引着对方走，始终给自己留抽身的余地"
+      },
+      "voices": {
+        "surface": "这山里的雪下得真好，把平常那些见不得人的规矩，全给冻成冰柱了。",
+        "inner": "只要能挨过今晚不被冻死，明天就算要我跪在雪地里求人我也认了。"
+      },
+      "schedule": [
+        { "from": 0, "to": 420, "location_id": "annex_guestroom" },
+        { "from": 421, "to": 1140, "location_id": "hearth_lounge" },
+        { "from": 1141, "to": 1320, "location_id": "onsen_changing" },
+        { "from": 1321, "to": 1439, "location_id": "hearth_lounge" }
+      ],
+      "situation": {
+        "trigger": "地炉边的座位因炭火缩小重新排挤，{npc.ta}被杂役粗暴赶到靠近冷风的门边",
+        "pressure": "若不能重新挤入内圈，薄单衣在后半夜将无法抵御零下低温",
+        "exits": [
+          { "option": "拿出珍藏的半瓶威士忌请众人共饮以重回内圈", "cost": "消耗最后的奢侈品，且极易引来酒后纠缠" },
+          { "option": "上二楼敲响一间单人客房请求分被避寒", "cost": "必须放下面子求人，还要向对方交代自己的来历" }
+        ]
+      },
+      "tags": []
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_hearth_tender",
+      "role": "添炭老者",
+      "function": "witness",
+      "location_ids": ["hearth_lounge"],
+      "line": "{npc.name}用火箸敲了敲生铁壶，低声道：“火不能灭，外头雪封死了，火一灭人就得硬。”",
+      "gender": "male",
+      "age_range": [60, 75],
+      "adult_context": "馆里干了四十年的老长工，谁进山躲债、谁半夜钻进哪间房，全记在心里。",
+      "name": null
+    },
+    {
+      "id": "bg_bath_maid",
+      "role": "盲眼搓背老妇",
+      "function": "rumor_source",
+      "location_ids": ["onsen_changing"],
+      "line": "{npc.name}摸索着拧干冒烟的热布巾：“别遮啦，这位客人……背上的抓痕还没结痂呢。”",
+      "gender": "female",
+      "age_range": [55, 68],
+      "adult_context": "长年在风吕间伺候，眼盲心亮，凭气味和皮肤粗细就能识破客人的底细。",
+      "name": null
+    },
+    {
+      "id": "bg_patrol_handyman",
+      "role": "巡道杂役",
+      "function": "obstacle",
+      "location_ids": ["hallway_1f"],
+      "line": "{npc.name}将昏黄手电筒直直照向你的脸：“发电机掐了，别在走廊乱晃，回自个儿房去！”",
+      "gender": "male",
+      "age_range": [35, 50],
+      "adult_context": "受女将死令彻夜巡查防范失火与偷油的粗暴杂工，极易动粗并勒索过路钱。",
+      "name": null
+    },
+    {
+      "id": "bg_coughing_elder",
+      "role": "咳血的老住客",
+      "function": "obstacle",
+      "location_ids": ["hallway_2f"],
+      "line": "{npc.name}扶着纸门剧烈呛咳：“谁……谁在外面走动……给我口热水……”",
+      "gender": "male",
+      "age_range": [65, 80],
+      "adult_context": "肺病晚期进山静养的孤寡老商人，夜里咳醒就会扶门张望，随时可能撞破私会并招来全员注目。",
+      "name": null
+    },
+    {
+      "id": "bg_stragler_driver",
+      "role": "被困货车司机",
+      "function": "messenger",
+      "location_ids": ["hearth_lounge"],
+      "line": "{npc.name}拍打着沾满煤灰的军大衣：“收音机里说了，山下大塌方，铲雪车翻下峡谷，没个四五天根本进不来人。”",
+      "gender": "male",
+      "age_range": [40, 55],
+      "adult_context": "滞留在此的走私货车司机，深谙黑市行情与各方周旋手段。",
+      "name": null
+    },
+    {
+      "id": "bg_innocence_maid",
+      "role": "年轻帮厨女侍",
+      "function": "helper",
+      "location_ids": ["kitchen_storage"],
+      "line": "{npc.name}哆哆嗦嗦从围裙底塞出一小捧干木炭：“女将严令锁库……这给您，千万别让杂役看见。”",
+      "gender": "female",
+      "age_range": [19, 24],
+      "adult_context": "从山外村落招来的短工，冻得受不了，极易被温和体贴或小恩小惠打动。",
+      "name": null
+    }
+  ],
+  "channels": [
+    { "id": "ch_hearth_whisper", "text": "一楼地炉围火对坐时的低声耳语", "reach": "围坐一圈的四到六人", "fidelity": "exact" },
+    { "id": "ch_creaky_floor", "text": "穿透单薄障子门与走廊木板的动静与脚步声", "reach": "二楼邻近两三间客房与楼梯拐角", "fidelity": "distorted" }
+  ],
+  "tension_engines": [
+    { "id": "te_thermal_hunger", "text": "室温跌破零度，热源只剩地炉、温泉和几床被子：谁肯把自己的那一份分给谁、谁不肯，每晚都在重新划分彼此的关系。" },
+    { "id": "te_semi_nude_exposure", "text": "全员只着薄棉浴衣，水汽和骤冷让掩藏的刺青、伤疤、针孔、钥匙与暗袋里的票据无所遁形，山下的身份在这里遮不住任何东西。" },
+    { "id": "te_fuel_strife", "text": "剩下的柴油是用来维持温泉循环，还是给某一间客房供暖；救全馆还是救个别人，每一次分油都在逼人站队。" },
+    { "id": "te_predator_prey", "text": "山下手握资产与生杀大权的人，在冰封雪窟里因体弱沦为弱者；握有体力、管钳与刀刃的底层粗人，反而成了别人活命要仰仗的人。" }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_mist_bargain",
+      "power_structure": "npc_high",
+      "player_positions": ["low"],
+      "identity_ids": ["undercover_stringer"],
+      "slots": ["keeper_chizuru", "fugitive_sosuke"],
+      "tension_engine_ids": ["te_thermal_hunger", "te_predator_prey"],
+      "chemistry": "{keeper_chizuru.name}站在账房门槛边，手里的铜钥匙串叮当作响；身后的{fugitive_sosuke.name}抱着臂堵住楼梯退路。两人一文一武，把你堵在过道死角，要你交出偷录的磁带，换今晚唯一一床厚棉被。",
+      "stakes": {
+        "resource_gap": "{keeper_chizuru.name}握有取暖钥匙，{fugitive_sosuke.name}有压倒性的体力，而你只有冻僵的手指和一盒磁带",
+        "limit_gap": "你若高声呼救将引来全员围观导致身份曝光，而对方动粗同样害怕惊动别人",
+        "meeting_reason": "后半夜熄灯后，全馆只剩地炉微温，三人在走廊转角狭路相逢",
+        "irreplaceable_goal": "在不交出磁带的前提下，换得一处可以避风过夜的暖阁"
+      },
+      "relations": [
+        { "a": "player", "b": "keeper_chizuru", "stage": "stranger", "a_to_b": { "trust": 0, "tension": 2 }, "b_to_a": { "trust": 0, "tension": 2 }, "reason": "{keeper_chizuru.name}怀疑你住通铺是为了偷看客簿和账目" },
+        { "a": "player", "b": "fugitive_sosuke", "stage": "stranger", "a_to_b": { "trust": 0, "tension": 3 }, "b_to_a": { "trust": 0, "tension": 3 }, "reason": "{fugitive_sosuke.name}察觉到你在暗处偷看{fugitive_sosuke.ta}靴筒里藏的刀" },
+        { "a": "keeper_chizuru", "b": "fugitive_sosuke", "stage": "acquainted", "a_to_b": { "trust": 1, "tension": 2 }, "b_to_a": { "trust": 1, "tension": 2 }, "reason": "两人私下有约：{fugitive_sosuke.name}替{keeper_chizuru.name}震慑不守规矩的住客，换一间不登记的单间与热食" }
+      ],
+      "tags": ["workplace_power"]
+    },
+    {
+      "id": "combo_steamy_blackmail",
+      "power_structure": "switchable",
+      "player_positions": ["equal"],
+      "identity_ids": ["runaway_lover"],
+      "slots": ["photographer_ritsu", "lady_maya"],
+      "tension_engine_ids": ["te_semi_nude_exposure", "te_thermal_hunger"],
+      "chemistry": "更衣室里水汽滚烫，{photographer_ritsu.name}用擦头发的毛巾遮着手里的相机，镜头正对着{lady_maya.name}的手提箱扣锁。{lady_maya.name}发丝湿透地挡在皮箱前，惊恐与羞愤交加，而你恰好掀开麻帘走进来。",
+      "stakes": {
+        "resource_gap": "{lady_maya.name}有巨额现金，{photographer_ritsu.name}有能曝光丑闻的相机，你有一箱价值连城的首饰",
+        "limit_gap": "谁也不能在更衣室大声喧哗，否则引来老仆清场，所有人的秘密都会被摆上台面",
+        "meeting_reason": "午夜换帘前最后一批进汤擦洗身子",
+        "irreplaceable_goal": "在彼此都抓着对方把柄的尴尬里，谈出一个三方都能接受的平衡"
+      },
+      "relations": [
+        { "a": "player", "b": "photographer_ritsu", "stage": "acquainted", "a_to_b": { "trust": 1, "tension": 1 }, "b_to_a": { "trust": 1, "tension": 2 }, "reason": "同在时尚圈边缘混过，知道对方不是安分守己的人" },
+        { "a": "player", "b": "lady_maya", "stage": "stranger", "a_to_b": { "trust": 1, "tension": 1 }, "b_to_a": { "trust": 0, "tension": 2 }, "reason": "{lady_maya.name}看出你随身的首饰并非凡品，担心你是商社派来的眼线" },
+        { "a": "photographer_ritsu", "b": "lady_maya", "stage": "stranger", "a_to_b": { "trust": 0, "tension": 3 }, "b_to_a": { "trust": 0, "tension": 3 }, "reason": "{photographer_ritsu.name}手里捏着{lady_maya.name}出逃前夜的偷拍底片" }
+      ],
+      "tags": ["infidelity"]
+    },
+    {
+      "id": "combo_cold_embrace",
+      "power_structure": "equal",
+      "player_positions": ["high"],
+      "identity_ids": ["stranded_auditor"],
+      "slots": ["lady_maya", "singer_ayane"],
+      "tension_engine_ids": ["te_thermal_hunger", "te_semi_nude_exposure"],
+      "chemistry": "二楼椿之室的水管彻底冻裂，室温逼近零下，{lady_maya.name}与{singer_ayane.name}冻得受不了，裹着单衣敲响了你那间唯一还有一盆暗炭的客房。三人在狭小和室里各裹一床被子挤坐，谁也说不清黑暗里那些试探是为了取暖，还是为了摸清彼此的底细。",
+      "stakes": {
+        "resource_gap": "你有全馆最暖和的一盆暗炭与干净被褥，两人只有单薄的浴衣和各自的秘密",
+        "limit_gap": "若任由人在门外冻出好歹，清算会变成人命官司；若开门纳人，公文包里的账本就藏不住了",
+        "meeting_reason": "深夜全馆断电断暖，严寒逼着落单的人寻找热源",
+        "irreplaceable_goal": "熬过这一夜，同时守住公文包里的秘密"
+      },
+      "relations": [
+        { "a": "player", "b": "lady_maya", "stage": "stranger", "a_to_b": { "trust": 0, "tension": 2 }, "b_to_a": { "trust": 0, "tension": 3 }, "reason": "{lady_maya.name}随身带着的商社印鉴，正是你这次进山要追查的资产" },
+        { "a": "player", "b": "singer_ayane", "stage": "acquainted", "a_to_b": { "trust": 1, "tension": 1 }, "b_to_a": { "trust": 1, "tension": 2 }, "reason": "{singer_ayane.name}曾在你经手审查的一家歌厅驻唱，知道你私生活里的一些软肋" },
+        { "a": "lady_maya", "b": "singer_ayane", "stage": "stranger", "a_to_b": { "trust": 0, "tension": 2 }, "b_to_a": { "trust": 1, "tension": 1 }, "reason": "{lady_maya.name}看不起{singer_ayane.name}的轻浮作风，{singer_ayane.name}则暗讽对方豪门失宠的狼狈" }
+      ],
+      "tags": ["coercion_theme"]
+    },
+    {
+      "id": "combo_life_or_honor",
+      "power_structure": "player_high",
+      "player_positions": ["low"],
+      "identity_ids": ["retired_mechanic"],
+      "slots": ["keeper_chizuru", "doctor_shinsuke"],
+      "tension_engine_ids": ["te_fuel_strife", "te_predator_prey"],
+      "chemistry": "发电机气缸爆燃彻底停摆，冰霜迅速在走廊蔓延。{keeper_chizuru.name}和{doctor_shinsuke.name}打着手电筒跌跌撞撞奔进后库。{keeper_chizuru.name}手里攥着私汤的木栓钥匙，{doctor_shinsuke.name}手里托着一支镇痛针剂，两人围在满手油污的你身旁，各自开价。",
+      "stakes": {
+        "resource_gap": "发电机能不能重启，只看你手里的管钳和手艺；两人只有拿来交换的特权物件",
+        "limit_gap": "机组受损严重，剩下的燃油只够低速运转三小时，满足不了暖气泵和药品保温箱两头",
+        "meeting_reason": "深夜断电引发失温恐慌，发电机告急",
+        "irreplaceable_goal": "用自己无可替代的手艺，为自己在别馆争到最核心的生存保障"
+      },
+      "relations": [
+        { "a": "player", "b": "keeper_chizuru", "stage": "acquainted", "a_to_b": { "trust": 0, "tension": 2 }, "b_to_a": { "trust": 1, "tension": 2 }, "reason": "{keeper_chizuru.name}拖欠了你上个季度的抢修工钱，此刻却不得不低头求你" },
+        { "a": "player", "b": "doctor_shinsuke", "stage": "stranger", "a_to_b": { "trust": 0, "tension": 1 }, "b_to_a": { "trust": 1, "tension": 2 }, "reason": "{doctor_shinsuke.name}的药品要靠电力保温，对你的进度寸步不离" },
+        { "a": "keeper_chizuru", "b": "doctor_shinsuke", "stage": "acquainted", "a_to_b": { "trust": 1, "tension": 1 }, "b_to_a": { "trust": 0, "tension": 2 }, "reason": "{keeper_chizuru.name}在{doctor_shinsuke.name}进馆时扣下了两支针剂作为押金" }
+      ],
+      "tags": ["workplace_power"]
+    },
+    {
+      "id": "combo_fugitive_conspiracy",
+      "power_structure": "equal",
+      "player_positions": ["equal"],
+      "identity_ids": ["runaway_lover"],
+      "slots": ["lady_maya", "fugitive_sosuke"],
+      "tension_engine_ids": ["te_thermal_hunger", "te_predator_prey"],
+      "chemistry": "{lady_maya.name}在后库角落拦住了{fugitive_sosuke.name}，一个手里攥着钞票，一个背包里压着金条，低语声在冷气里凝成白雾。你端着空米桶推门进来，两人同时住了口。",
+      "stakes": {
+        "resource_gap": "{lady_maya.name}有出逃的钱，{fugitive_sosuke.name}有破雪开路的力气和刀",
+        "limit_gap": "两人都不敢让别馆其他人知道这个联手出逃的计划",
+        "meeting_reason": "暗中商量合力破开山道的脱身方案时被你撞见",
+        "irreplaceable_goal": "在两人互相猜忌的缝隙里，为自己挣到一个下山的位置"
+      },
+      "relations": [
+        { "a": "player", "b": "lady_maya", "stage": "acquainted", "a_to_b": { "trust": 1, "tension": 1 }, "b_to_a": { "trust": 1, "tension": 1 }, "reason": "你给{lady_maya.name}改过礼服，知道对方在豪门里的真实处境" },
+        { "a": "player", "b": "fugitive_sosuke", "stage": "stranger", "a_to_b": { "trust": 0, "tension": 2 }, "b_to_a": { "trust": 0, "tension": 2 }, "reason": "{fugitive_sosuke.name}冷眼警告过你不要多管闲事" },
+        { "a": "lady_maya", "b": "fugitive_sosuke", "stage": "testing", "a_to_b": { "trust": 1, "tension": 2 }, "b_to_a": { "trust": 1, "tension": 2 }, "reason": "两人在山下早有勾连，正互相试探对方是否留了后手" }
+      ],
+      "tags": ["crime"]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "act_evening_bath",
+      "title": "晚间换帘前清池浸泡",
+      "location_ids": ["onsen_changing", "onsen_roten"],
+      "duration_minutes": 60,
+      "beats": [
+        "内汤与露天池交界处水汽翻滚，众人借着水雾遮掩褪去单衣浸入滚烫池水",
+        "池边巨石上的积雪被水汽蒸融，水下有人悄悄调整坐姿，避免和旁人碰到",
+        "更衣室外传来挂钟敲响十点的沉重回声，门帘即将翻转"
+      ],
+      "hook_ids": [],
+      "start_minute": 1320,
+      "tags": []
+    },
+    {
+      "id": "act_midnight_hearth",
+      "title": "熄灯后围炉分食",
+      "location_ids": ["hearth_lounge"],
+      "duration_minutes": 90,
+      "beats": [
+        "发电机掐闸的瞬间全馆陷入黑暗，地炉的一点红炭成为唯一光源",
+        "铁壶嘶嘶作响，粗陶茶碗在冻僵的手指间传递，每个人都在火光暗处打量旁人神色",
+        "有人借着添柴的动作挪近火盆，衣料摩擦声在寂静中格外清晰"
+      ],
+      "hook_ids": [],
+      "start_minute": 1380,
+      "tags": []
+    },
+    {
+      "id": "act_corridor_whisper",
+      "title": "后半夜走廊借火周旋",
+      "location_ids": ["hallway_1f", "hallway_2f"],
+      "duration_minutes": 45,
+      "beats": [
+        "木地板在赤足踏过时发出细碎吱呀声，寒气顺着脚踝往上爬",
+        "在通往后库的转角处两道身影猝然相撞，手电筒光在单衣前襟一晃而过",
+        "借火或讨要热水的低语在纸门外回荡，引得隔壁咳嗽声骤停"
+      ],
+      "hook_ids": [],
+      "start_minute": 90,
+      "tags": []
+    },
+    {
+      "id": "act_roten_solitude",
+      "title": "凌晨挂栓私享风吕",
+      "location_ids": ["onsen_roten"],
+      "duration_minutes": 60,
+      "beats": [
+        "木栓扣上的闷响隔绝了外界风雪，42℃ 的硫磺泉水蒸得眼眶发烫",
+        "暴雪砸在池边杉木遮棚上簌簌作响，冰水滴在滚烫肩膀上激起一阵战栗",
+        "水面漂浮的木托盘缓缓打旋，池里两人各守一角沉默对视"
+      ],
+      "hook_ids": [],
+      "start_minute": 180,
+      "tags": []
+    },
+    {
+      "id": "act_morning_snowplow",
+      "title": "清晨破门铲雪",
+      "location_ids": ["hearth_lounge", "hallway_1f"],
+      "duration_minutes": 75,
+      "beats": [
+        "晨锣敲响，众人裹着受潮大衣在玄关集合，合力推开被两尺厚雪顶住的木门",
+        "铁锹铲击冻土的声音刺耳，呼出的白气与发汗的热气在额角凝结成霜",
+        "清点各房到场人数，确认有没有人在昨夜失温受困"
+      ],
+      "hook_ids": [],
+      "start_minute": 390,
+      "tags": []
+    },
+    {
+      "id": "act_afternoon_ration",
+      "title": "午后后库清点干粮",
+      "location_ids": ["kitchen_storage"],
+      "duration_minutes": 60,
+      "beats": [
+        "当面称量仅剩的白米与腌萝卜，天平砝码在昏暗中发出清脆撞击声",
+        "排队领粮的住客目光扫过角落盖着麻袋的油桶，空气中满是压抑的窃窃私语",
+        "有人暗中把私藏的罐头塞进围裙，换取多一勺滚烫的杂炊"
+      ],
+      "hook_ids": [],
+      "start_minute": 720,
+      "tags": []
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_generator_shutdown",
+      "title": "柴油见底",
+      "source": "nature",
+      "flags": ["timed"],
+      "location_ids": ["hearth_lounge", "kitchen_storage"],
+      "trigger": "发电机的油只够撑最后半小时，全馆即将失去照明与水泵供水。",
+      "objective": "在全馆陷入冰窖之前，决定剩下的燃油给谁用。",
+      "choice": "把燃油集中维持公共地炉与温泉循环，还是配给重症客房做电热取暖？",
+      "immediate": { "text": "发电机气缸发出剧烈爆鸣，照明灯泡开始泛红闪烁。", "minutes": 15 },
+      "near": { "text": "水泵停转，露天风吕水温开始每十分钟下滑一度。", "deadline_minutes": 60 },
+      "far": { "trigger": "午夜气温跌破零下十五度", "consequence": "全馆管道冻结爆裂，彻底失去内部热源。", "due_days": 1 },
+      "exits": [
+        { "option": "拿出私藏的高标号柴油换全员供暖一小时", "cost": "交出自己最后的逃生底牌，并被全员怀疑还藏着更多" },
+        { "option": "支持关闭客房供电，全员搬到地炉边打地铺", "cost": "失去私密空间，随身行李暴露在所有人眼皮底下" },
+        { "option": "放任断电，各自裹着棉被硬扛", "cost": "体弱的人会迅速失温，天亮时可能出现伤亡" }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1365,
+      "tags": []
+    },
+    {
+      "id": "p_onsen_midnight_lock",
+      "title": "午夜换栓",
+      "source": "institution",
+      "flags": ["timed"],
+      "location_ids": ["onsen_changing", "onsen_roten"],
+      "trigger": "挂钟敲响 23:45，老仆开始收走分浴门帘，走廊的炭盆也要一并熄掉。",
+      "objective": "在走廊炭盆熄灭前，决定是回冰冷的客房，还是留在池里过夜。",
+      "choice": "留下就要和池里的另一个人共处到天亮，离开就要穿着湿衣走过零下的走廊。",
+      "immediate": { "text": "老仆在门外拖着木屐收帘，铁火钳拨灭炭盆的声音一下下传进来。", "minutes": 10 },
+      "near": { "text": "走廊炭盆全部熄灭，从更衣室回客房的路上再没有一处热源。", "deadline_minutes": 15 },
+      "far": { "trigger": "凌晨三点温泉出水口结冰", "consequence": "池水停止流动，留在池里的人只能泡在慢慢变凉的水里。", "due_days": 1 },
+      "exits": [
+        { "option": "抓起浴衣在最后三分钟冲出更衣室返回客房", "cost": "湿发在走廊里冻成冰碴，独自在零度的客房硬扛一夜" },
+        { "option": "和池里的人说好各守一边，从里面扣上门栓就地过夜", "cost": "第二天一早全馆都会知道你们在私汤里过了一夜，流言会传得比雪还快" },
+        { "option": "塞钱给老仆，让走廊的炭盆再留一个钟头", "cost": "损失一笔现金，也让老仆开始琢磨你的财力从哪来" }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1425,
+      "tags": []
+    },
+    {
+      "id": "p_ledger_burn",
+      "title": "火盆里的账本",
+      "source": "person",
+      "flags": ["timed"],
+      "location_ids": ["hearth_lounge"],
+      "trigger": "借着围炉添炭的混乱，有人正把抵押卷宗的一角缓缓探向通红的炭火。",
+      "objective": "在关键的抵押单据化为灰烬之前拦下来，或者谈出一个妥协。",
+      "choice": "当场喝止夺回账本，还是借机向对方要一笔更大的让步？",
+      "immediate": { "text": "纸张边缘已经发黄卷曲，焦糊味在围炉间弥漫开来。", "minutes": 5 },
+      "near": { "text": "整份抵押存根即将烧穿盖着印鉴的那一页。", "deadline_minutes": 15 },
+      "far": { "trigger": "天亮后山下的清算程序启动", "consequence": "缺了原始凭证，借据彻底失效，别馆产权成了一笔无头死账。", "due_days": 2 },
+      "exits": [
+        { "option": "赤手冲上前把纸页从火里拍打抢出", "cost": "手掌烫伤，且当众和女将撕破脸" },
+        { "option": "压低声音提出用沉默换私藏物资与暖房", "cost": "成了渎职的共谋，留下一个永远会被拿来要挟的把柄" },
+        { "option": "任由其烧毁，暗中用录音机录下对方焚证时的自白", "cost": "失去纸质原件，日后举证要花上加倍的代价" }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1410,
+      "tags": []
+    },
+    {
+      "id": "p_hypothermia_room",
+      "title": "椿之室失温",
+      "source": "nature",
+      "flags": ["timed"],
+      "location_ids": ["annex_guestroom", "hallway_2f"],
+      "trigger": "二楼水管爆裂，椿之室地面浸水结冰，住在里面的人嘴唇发紫、神志模糊，被褥湿透冻硬。",
+      "objective": "在受困者体温跌破 34℃ 之前，把人救回来。",
+      "choice": "把人背到公共地炉边，还是就在房里想办法复温？",
+      "immediate": { "text": "受困者指节僵白，呼出的白气越来越弱，已经站不起来。", "minutes": 20 },
+      "near": { "text": "受困者开始说胡话，把守在身边的人错认成别的什么人。", "deadline_minutes": 45 },
+      "far": { "trigger": "清晨低温峰值来临", "consequence": "受困者冻毙，山道打通后别馆将被封存调查。", "due_days": 1 },
+      "exits": [
+        { "option": "叫醒医生，用保温毯与热盐水袋复温", "cost": "消耗稀缺的医药，欠下医生一个沉重的人情" },
+        { "option": "把人背到一楼地炉内圈安置", "cost": "挤占别人仅存的热源位置，引发全员争抢" },
+        { "option": "把自己的干被褥让给受困者，守在房里添炭到天亮", "cost": "自己在零度里熬一夜，次日体力透支，还要整夜和对方没锁的行李同处一室" }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 120,
+      "tags": []
+    },
+    {
+      "id": "p_theft_investigation",
+      "title": "首饰失窃",
+      "source": "money",
+      "flags": ["timed"],
+      "location_ids": ["hearth_lounge", "hallway_1f"],
+      "trigger": "一枚贵重胸针不翼而飞，巡道杂役手持铁棍堵死大门，宣布封馆清查。",
+      "objective": "在清查演变成流血冲突前找到去向，或化解对峙。",
+      "choice": "接受当众翻检行李，还是联合其他被怀疑的人硬顶回去？",
+      "immediate": { "text": "杂役已经开始粗暴地翻倒通铺客人的行囊，嚷着要所有人把包打开。", "minutes": 15 },
+      "near": { "text": "搜查逼近藏着违禁物品的那几间房。", "deadline_minutes": 40 },
+      "far": { "trigger": "暴雪平息后山下的调查人员入山", "consequence": "因盗窃与非法拘禁，所有人都被扣留审查，没法按时离山。", "due_days": 3 },
+      "exits": [
+        { "option": "主动打开自己的包配合清查", "cost": "私密文件与现钞全部暴露在众人眼前" },
+        { "option": "指出更衣室脚印的漏洞，把嫌疑引向第三方", "cost": "得罪被你指认的人，多了一个记恨你的暗敌" },
+        { "option": "联合力气大的人逼退杂役，强行打破封锁", "cost": "彻底升级为暴力对峙，全馆秩序荡然无存" }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1200,
+      "tags": []
+    },
+    {
+      "id": "p_icefall_collapse",
+      "title": "冰瀑塌落",
+      "source": "accident",
+      "flags": ["timed"],
+      "location_ids": ["onsen_roten"],
+      "trigger": "后山积雪带下一片冰瀑，碎石与坚冰轰然砸落，堵死了露天风吕通往更衣室的木廊。",
+      "objective": "在池水凉透之前打通退路，或者让主楼的人知道这里有人。",
+      "choice": "冒险从湿滑的岩壁爬出去，还是敲温泉铁管向主楼求救？",
+      "immediate": { "text": "落石激起两米高的滚烫水花，木廊立柱断裂，退路被乱石塞满。", "minutes": 10 },
+      "near": { "text": "头顶岩壁出现第二道裂纹，随时可能再塌一次。", "deadline_minutes": 30 },
+      "far": { "trigger": "次日清晨山洪溢流", "consequence": "露天池被山洪淹没，困在里面的人生还无望。", "due_days": 1 },
+      "exits": [
+        { "option": "合力用粗木枝撬开一条仅容一人侧身钻出的石缝", "cost": "被碎冰和岩石划得满身是伤，湿衣冻在身上，回到主楼时已冻得说不出话" },
+        { "option": "用铁火箸敲打温泉铁管，等主楼的人来破拆", "cost": "全馆都会知道你们深夜一起在私汤里，流言第二天就传遍地炉" },
+        { "option": "退到池子最深处的岩凹里，等余震过去", "cost": "被困得更久，水温一点点流失，失温的风险越来越大" }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 240,
+      "tags": []
+    }
+  ],
+  "hooks": [
+    { "id": "h_wet_yukata", "kind": "approach", "slot": "keeper_chizuru", "location_ids": ["annex_guestroom"], "text": "{npc.name}端着一盆刚烧开的热水推开纸门，前襟被蒸汽打得半湿：“外头电掐了，客人……这屋里冷得厉害吧？”" },
+    { "id": "h_steam_accident", "kind": "accident", "slot": "lady_maya", "location_ids": ["onsen_roten"], "text": "{npc.name}在漫天浓雾里脚下一滑，一把扣住你的小臂才没摔进池里，手指冰凉发颤：“别出声……廊子上有手电筒光在晃……”" },
+    { "id": "h_darkroom_request", "kind": "request", "slot": "photographer_ritsu", "location_ids": ["hallway_1f"], "text": "{npc.name}在熄灯的楼梯转角把你拉进梁柱阴影里，压低声音：“帮我盯五分钟走廊，我分你一升柴油。”" },
+    { "id": "h_hearth_seat", "kind": "approach", "slot": "doctor_shinsuke", "location_ids": ["hearth_lounge"], "text": "{npc.name}往旁边挪了半个坐垫，把地炉最暖的那一角让给你，又把手边的温酒推过来：“手都冻青了，先暖一暖。”" },
+    { "id": "h_snow_shovel", "kind": "approach", "slot": "fugitive_sosuke", "location_ids": ["hallway_1f"], "text": "{npc.name}一言不发地接过你手里的铁锹，把门口最厚的那段雪铲开，才把锹塞回你手里。" },
+    { "id": "h_hearth_knee", "kind": "approach", "slot": "singer_ayane", "location_ids": ["hearth_lounge"], "text": "{npc.name}借着拨弄炭火的动作挪到你身边，膝头若有若无地碰了碰你的腿侧，把自己那碗还冒热气的茶推到你面前。" }
+  ],
+  "twists": [
+    { "id": "t_fake_lovers", "category": "关系", "requires": ["lady_maya", "fugitive_sosuke"], "text": "{lady_maya.name}与{fugitive_sosuke.name}在山下早有勾连，出逃前曾联手策划侵吞巨款，如今却防备着对方独吞金条。" },
+    { "id": "t_no_snowplow", "category": "时限", "requires": [], "text": "收音机在午夜终于调出断续信号：谷口发生大雪崩，铲雪队根本进不来，所有人至少还要困守七天。" },
+    { "id": "t_fuel_sabotage", "category": "资源", "requires": ["keeper_chizuru"], "text": "后库最后一桶备用柴油打开时，流出来的全是混着冰碴的黄水——真正的柴油两天前就被人暗中转移了。" },
+    { "id": "t_undercover_revealed", "category": "人事", "requires": ["photographer_ritsu"], "text": "从{photographer_ritsu.name}烘干的暗盒夹层里翻出来的不是照片，而是一张搜查部门签发的便衣证件。" },
+    { "id": "t_boiler_rupture", "category": "意外", "requires": [], "text": "凌晨三点，地下锅炉受剧烈温差影响管道爆裂，滚烫的硫磺水涌进一楼走廊，全员只能赤足踩着冰水往二楼撤。" },
+    { "id": "t_death_curfew", "category": "信息", "requires": ["doctor_shinsuke"], "text": "{doctor_shinsuke.name}在给咳血的老住客验伤时发现，对方颈侧有一个极其整齐的锐器刺孔——这不是病死，是谋杀。" }
+  ]
+}

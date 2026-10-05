@@ -1,0 +1,2305 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "征战半生在绝壁阵地上饱受严寒折磨的残废老装填手",
+   "age_range": [
+    35,
+    55
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_frostbitten_loader",
+   "line": "{npc.name}双手手指被严重冻伤如发黑枯枝，因极度寒冷抱住重型炮弹在冰雪中剧烈颤抖，动作迟缓哭嚎着无法将炮弹推入弹膛，随时可能延误炮击火网。",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "name": null,
+   "role": "重度冻伤装弹老兵"
+  },
+  {
+   "adult_context": "退伍不褪色的要塞老军工铁匠",
+   "age_range": [
+    30,
+    50
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_one_armed_blacksmith",
+   "line": "{npc.name}仅剩一只右臂疯狂挥舞八角大锤夯打装甲铆钉，只要递过去半碗烈酒，就肯拼着老命为你抢修好机甲的右侧链锯驱动链条。",
+   "location_ids": [
+    "mech_hangar_workshop"
+   ],
+   "name": null,
+   "role": "独臂抢修打铁工兵"
+  },
+  {
+   "adult_context": "目睹锅炉爆炸同僚身亡陷入失神状态的司炉工兵",
+   "age_range": [
+    24,
+    38
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_shell_shocked_fireman",
+   "line": "{npc.name}瘫坐在锅炉旁被震得满面鲜血双耳流脓，只要拉住其领口狂吼，就会颤抖着指出主回流蒸汽管道目前在哪个阀门卡死咬紧。",
+   "location_ids": [
+    "furnace_boiler_room"
+   ],
+   "name": null,
+   "role": "震爆神志恍惚司炉工"
+  },
+  {
+   "adult_context": "流尽最后一滴血死守发报机接收最后撤离信号的通信兵",
+   "age_range": [
+    24,
+    35
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_dying_signal_corporal",
+   "line": "{npc.name}胸口中弹蜷缩在发报机旁死死护住耳机，断断续续向众人通报后方关隘难民车队已经有大半安全通过铁桥的振奋捷报。",
+   "location_ids": [
+    "cliffside_ammo_magazine"
+   ],
+   "name": null,
+   "role": "弥留握线通讯下士"
+  },
+  {
+   "adult_context": "自愿充当最后自爆关卡的人形路障敢死队员",
+   "age_range": [
+    26,
+    42
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_suicide_bomb_volunteer",
+   "line": "{npc.name}怀中绑满炸药瘫坐在吊桥石阶上，面目狰狞地按着引爆拉索，厉声警告任何敢越过阵地的敌军都将被其拉入深渊一同粉身碎骨。",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "name": null,
+   "role": "绑弹待命断腿死士"
+  },
+  {
+   "adult_context": "在雪夜中精准猎杀敌军工兵小队的老辣狙击手",
+   "age_range": [
+    28,
+    48
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_veteran_scout_sniper",
+   "line": "{npc.name}趴在城垛豁口处嚼着黑雪，端着带瞄准镜的反器材重步枪，冷笑着告知众人敌军装甲集群的油料车正停在千米外的山坳死角。",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "name": null,
+   "role": "盲眼断指冷枪老兵"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "队长{fanatic_squad_leader.name}拔出战刀怒吼着要带队杀出城外以肉身撞毁敌军先锋攻城车，而疯匠{crazed_steam_artisan.name}死死卡住机甲舱门要求必须先焊接反装甲重炮；你在两者的暴烈战意夹缝中，手握机动操纵杆，必须决定如何驾驭这台处于熔毁边缘的钢铁巨兽冲破绝境。",
+   "id": "combo_rampart_blood_charge",
+   "identity_ids": [
+    "disgraced_heavy_crusader"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "fanatic_squad_leader",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "同为因抗命被贬入敢死队的刺头军官，深知其视死如归的铁血本色",
+     "stage": "testing"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "crazed_steam_artisan",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "多年来只有你敢开动对方改装的所有自杀式超压引擎，互为技术知己",
+     "stage": "familiar"
+    },
+    {
+     "a": "fanatic_squad_leader",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 1
+     },
+     "b": "crazed_steam_artisan",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 1
+     },
+     "reason": "队长嫌弃工匠拖延整备，工匠怒骂队长粗暴驾驶糟蹋心血杰作",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "fanatic_squad_leader",
+    "crazed_steam_artisan"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在敌车撞碎大门前完成机甲全过载武装并达成冲锋协同。",
+    "limit_gap": "队长急于在城墙破损前发起反突击，工匠深知若无减压阀机甲将在冲锋半途直接化为熔炉铁棺材。",
+    "meeting_reason": "在冒烟的车间吊架前争分夺秒争夺最后驾驶登机权与战术方案。",
+    "resource_gap": "{fanatic_squad_leader.name}握有指挥生杀大权与过载水晶，{crazed_steam_artisan.name}握有动力系统核心阀门，你掌握唯一能发挥机甲极限性能的驾驶技术。"
+   },
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "tension_engine_ids": [
+    "te_furnace_meltdown_countdown",
+    "te_enemy_armor_breach_wave"
+   ]
+  },
+  {
+   "chemistry": "重装骑士{iron_hearted_vanguard_knight.name}用合金巨盾顶在胸墙豁口处迎接弹雨洗礼，重机枪手{grim_heavy_gunner.name}双眼赤红在发烫的水套旁疯狂泼洒火网；你在二者身侧或以重炮测距引导死守火网，或并肩持刃展开刺刀堵截，谱写血肉长城的终极对决。",
+   "id": "combo_last_wall_crusade",
+   "identity_ids": [
+    "veteran_mech_pilot",
+    "renegade_artillery_spotter"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "iron_hearted_vanguard_knight",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "曾一同在北方战场并肩杀出重围，对其守护苍生的纯粹誓言深信不疑",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "grim_heavy_gunner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "为其校准出多次致命射击弹道，对方认可你死神引路人的精准眼光",
+     "stage": "testing"
+    },
+    {
+     "a": "iron_hearted_vanguard_knight",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "grim_heavy_gunner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "一个在前方抗盾，一个在后方喷吐火舌，早已是生死相托的绝配搭档",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "iron_hearted_vanguard_knight",
+    "grim_heavy_gunner"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在弹药打尽前死死将敌军三个突击连压制在悬崖断桥之外。",
+    "limit_gap": "骑士重盾在连续炮击下随时崩碎，机枪水套即将沸腾烧红枪管卡壳。",
+    "meeting_reason": "在城墙主豁口阵地展开殊死协同防守誓死不退。",
+    "resource_gap": "{iron_hearted_vanguard_knight.name}拥有一夫当关的重铠盾防，{grim_heavy_gunner.name}拥有全场最猛烈的压制机枪，你拥有炮垒坐标或断后武力。"
+   },
+   "tags": [
+    "workplace",
+    "violence"
+   ],
+   "tension_engine_ids": [
+    "te_enemy_armor_breach_wave",
+    "te_last_ammunition_depletion"
+   ]
+  },
+  {
+   "chemistry": "你作为老牌先锋统领着突击行动，突击手{last_steam_cavalry_pilot.name}已备好破甲骑枪准备向敌阵发起绝命飞跃冲锋，而军医{last_defense_combat_medic.name}手握兴奋剂与手术刀，冷冷要求你裁决是将最后的强心针给突击手冲锋，还是给重伤员维系生命。",
+   "id": "combo_scalpel_and_lance",
+   "identity_ids": [
+    "mad_furnace_engineer"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "last_defense_combat_medic",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "多次在其手术台上生还，对其铁腕残酷但救人至上的医者仁心深为敬重",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "last_steam_cavalry_pilot",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "对其舍命飞跃的疯狂打法既心惊又赞赏，互为雪山破阵双煞",
+     "stage": "testing"
+    },
+    {
+     "a": "last_defense_combat_medic",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "last_steam_cavalry_pilot",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "军医痛骂其不顾伤势胡乱冲锋送死，骑兵大笑反讽死在冲锋路上好过烂在床上",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "last_defense_combat_medic",
+    "last_steam_cavalry_pilot"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "整合突击力量一举瘫痪敌军攻城巨炮并保全核心战斗力。",
+    "limit_gap": "骑兵突击一旦失手将摔入深渊尸骨无存，军医若不注射强心针伤员将在十分钟内休克全灭。",
+    "meeting_reason": "在弹药库悬崖跳台前举行临战特攻决意会议。",
+    "resource_gap": "你手握反装甲手炮与机动主权，{last_steam_cavalry_pilot.name}拥有能翻越绝壁的破风者机甲，{last_defense_combat_medic.name}掌握着最后两剂逆天改命的军用强心剂。"
+   },
+   "tags": [
+    "substance",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_last_ammunition_depletion",
+    "te_rear_bridge_betrayal_sever"
+   ]
+  },
+  {
+   "chemistry": "大本营提前炸毁撤退桥梁的电报传达全场，队长{fanatic_squad_leader.name}战刀直指锅炉房准备战至最后一人引爆要塞，工匠{crazed_steam_artisan.name}狂喜嘶吼要让要塞成为帝国最灿烂的火炬，而骑士{iron_hearted_vanguard_knight.name}誓言只要阵地上还有一个平民未过关就必须坚守至最后一秒；三人爆发最激烈的热血死生理念大撞击！",
+   "id": "combo_furnace_suicide_council",
+   "identity_ids": [],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "fanatic_squad_leader",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "抗拒其过早引爆自毁的冲动提议，誓要坚守到最后一秒",
+     "stage": "testing"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "crazed_steam_artisan",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "逼迫其手动排除管网早爆隐患，确保动力平稳输送",
+     "stage": "testing"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "iron_hearted_vanguard_knight",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "坚定与其站在一起守护平民撤离生路，背靠背死磕到底",
+     "stage": "familiar"
+    },
+    {
+     "a": "fanatic_squad_leader",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "crazed_steam_artisan",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "在殉道赴死的狂烈决绝上二人高度同频，视死如归",
+     "stage": "familiar"
+    },
+    {
+     "a": "fanatic_squad_leader",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "iron_hearted_vanguard_knight",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "队长要轰轰烈烈全灭敌军，骑士要坚守阵地直至最后一刻，战术分歧白热化",
+     "stage": "testing"
+    },
+    {
+     "a": "crazed_steam_artisan",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 0
+     },
+     "b": "iron_hearted_vanguard_knight",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "工匠嫌骑士思想古板不懂机械轰鸣，骑士斥责工匠视人命如草芥",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "fanatic_squad_leader",
+    "crazed_steam_artisan",
+    "iron_hearted_vanguard_knight"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在熔炉表针彻底爆表前敲定最终死守时刻表与殉道方案。",
+    "limit_gap": "一旦熔炉提前引爆，后方尚未完全跨过铁桥的剩余平民车队将被塌方巨石连带埋葬。",
+    "meeting_reason": "围绕要塞何时引爆自毁与如何打光最后一发子弹展开全番队摊牌大决议。",
+    "resource_gap": "{fanatic_squad_leader.name}有全队的指挥权，{crazed_steam_artisan.name}有熔炉阀门密匙，{iron_hearted_vanguard_knight.name}有最后一面没碎的巨盾。"
+   },
+   "tags": [
+    "workplace",
+    "violence"
+   ],
+   "tension_engine_ids": [
+    "te_furnace_meltdown_countdown",
+    "te_rear_bridge_betrayal_sever"
+   ]
+  },
+  {
+   "chemistry": "你带着伤被抬进急救所，{last_defense_combat_medic.name}说你得躺下，{grim_heavy_gunner.name}说机枪堡缺人；两人都比你资历深，都在替你做决定。",
+   "id": "combo_triage_tribunal",
+   "identity_ids": [
+    "disgraced_heavy_crusader"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "last_defense_combat_medic",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "对方刚替你缝过一道伤口",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 0
+     },
+     "b": "grim_heavy_gunner",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 0
+     },
+     "reason": "对方只知道你是个想战死的罪人",
+     "stage": "stranger"
+    },
+    {
+     "a": "last_defense_combat_medic",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "grim_heavy_gunner",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "机枪手的弟弟死在医护怀里",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "last_defense_combat_medic",
+    "grim_heavy_gunner"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在下一波冲锋前，自己决定是回阵地还是留下。",
+    "limit_gap": "医护怕再多死一个，机枪手怕火网断档。",
+    "meeting_reason": "第二波冲锋的间隙，三人挤在弹药库旁的急救角。",
+    "resource_gap": "{last_defense_combat_medic.name}握着最后的麻药与止血带，{grim_heavy_gunner.name}握着最后两条弹带，你只有一身伤和一面断盾。"
+   },
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "tension_engine_ids": [
+    "te_last_ammunition_depletion",
+    "te_enemy_armor_breach_wave"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_steam_pipe_knocking",
+   "reach": "顺着全要塞连通的巨型铜制蒸汽管网传递，响彻各个角落",
+   "text": "蒸汽管道高压敲击音"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_fortress_whistle_howl",
+   "reach": "响彻方圆十里的狂暴蒸汽鸣笛，在暴风雪呼啸中震撼绝壁群峰",
+   "text": "要塞防空超压尖啸汽笛"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "敢死第零番队队长，曾是帝国近卫装甲师上校，因抗命率部死守掩护难民被判处绞刑免死充军，断了一只左耳，战意疯狂霸道，誓与要塞共存亡",
+   "age_range": [
+    34,
+    52
+   ],
+   "appearance_options": [
+    "身穿油渍斑斑且布满弹坑的帝国军官羊毛大衣，内衬残破的轻型外骨骼胸甲，左半边耳朵被弹片削去留下狰狞肉疤，满头钢针短发沾满黑灰，眼神如出膛炮弹般灼烈凶悍",
+    "面容如花岗岩般冷硬坚毅，下巴处留有一道横贯脖颈的烧伤疤痕，腰间挂着双排大口径穿甲左轮枪与一把淬火锯齿战刀，双眼布满血丝但站姿挺拔如松"
+   ],
+   "decision": {
+    "avoids": [
+     "踏入后方安全的指挥所遮蔽掩体",
+     "谈论战后平反军衔与荣誉"
+    ],
+    "contrast": "训斥部下时咆哮如雷动辄拳脚相向，但在亲自替年轻士兵绑紧止血带时手指却稳健轻柔如医者",
+    "core_value": "军人的天职是守卫身后的同胞而非政客的算计，哪怕身负万劫不复的罪名也要站着战死",
+    "goal_options": [
+     "率领仅存的两具机甲主动杀出城门强行捣毁敌军攻城巨炮阵地",
+     "在弹药打光前用血肉之躯在要塞吊桥残口筑成不可逾越的钢铁路障",
+     "在完成三小时死守任务后亲手引爆主熔炉掩埋要塞与敌军全军"
+    ],
+    "never": [
+     "在平民全员入关钟声敲响前下达哪怕半步后退撤离命令"
+    ],
+    "prefers": [
+     "在风雪最狂暴、弹雨最密集的城墙最前沿破口迎敌"
+    ],
+    "pressure_responses": {
+     "breaking": "因剧烈咳血跪倒在血水中，依然用战刀死死撑住身躯不准任何人上前搀扶",
+     "high": "亲自登上过热冒烟的机甲驾驶舱扣死闭锁栓，单手拉动链锯引擎发出震天咆哮",
+     "low": "拔出锯齿战刀将一截发烫的铜烟斗在刀刃上磕灭，厉声喝令各战位报出弹药存量",
+     "mid": "跳上城墙胸墙迎着呼啸的风雪与弹雨拔枪怒吼，用狂暴的战吼驱散士兵的绝望恐惧"
+    },
+    "relationship_stance": "将麾下所有人视为同赴地狱的生死兄弟与袍泽，严酷暴烈中藏着深沉护犊之意",
+    "withdrawal": "独自大步跨立在主城墙正中央破损的旗杆下，横刀闭目倾听风雪中敌军推进节律"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "fanatic_squad_leader",
+   "identity": {
+    "authority": "对要塞敢死番队全员拥有无条件战时指挥权、武器分配权与抗命就地处决权",
+    "exposure": "其随身公文袋里装有一份大本营早已签署生效的‘第零番队全员战死除名不予抚恤’死刑令",
+    "hidden": "其之所以死战不退，是因为后方正在过关的难民队伍里，有其阵亡副官临终托孤的百余名孤寡遗族",
+    "limits": [
+     "肺部长期吸入硫磺烟尘受损严重每逢剧烈喘息便咳出黑血",
+     "其‘黑狼’机甲左侧伺服电机严重烧结只能发挥六成机动性能"
+    ],
+    "obligations": [
+     "钉在断崖阵地上死守至凌晨四点整确保平民完全入关"
+    ],
+    "resources": [
+     "一具经过私人改装、加装了双联重型链锯剑的特装型‘黑狼’机甲操纵权",
+     "一枚可以直接引爆弹药库与主熔炉的战地紧急同归水晶钥匙"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在全体怯懦溃退的绝境中，同样敢于抄起爆破筒迎着敌军钢铁洪流决死冲锋的铁血勇者",
+     "看穿自己暴虐外表下的背水深情、敢于在自己咳血倒地时顶替自己挥刀冲上前沿的无畏知己"
+    ],
+    "boundaries": [
+     "绝不许旁人碰触其大衣内侧那枚阵亡战友沾血的破旧军号"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "狂暴战阵的领头血狼，寻找能与自己生死相托的同袍",
+    "dislikes": [
+     "算计得失苟且偷生的市侩利己之徒",
+     "对平民死活麻木不仁的所谓军规机器"
+    ],
+    "expression": "解开自己脖颈上带血的防风围巾狠狠勒在对方颈项间，沙哑大笑咆哮今夜老子把后背交给你了",
+    "likes": [
+     "在炮火间隙抢分同一支呛喉辣烟时的眼神碰撞",
+     "机甲轰鸣中背靠背卸下装甲时被对方用烈酒泼背的滚烫刺痛"
+    ],
+    "preconditions": [
+     "对方已在第一波城墙攻防战中亲手击毁敌军一辆铁甲冲锋车"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "敢死第零番队最高指挥官",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "fortress_rampart_parapet",
+     "to": 480
+    },
+    {
+     "from": 481,
+     "location_id": "mech_hangar_workshop",
+     "to": 840
+    },
+    {
+     "from": 841,
+     "location_id": "fortress_rampart_parapet",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "furnace_boiler_room",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "机甲蒸汽核心彻底烧结报废且自身双腿遭受粉碎性骨折冲击",
+      "option": "独自操纵过热冒烟的‘黑狼’机甲开启全过载直接从悬崖城墙跃下肉身撞毁敌车"
+     },
+     {
+      "cost": "彻底丧失城外反击视野且前沿三名正在阻击的掩护队员将一同被碎石活埋",
+      "option": "引爆城门上方预设的花岗岩炸药塌方彻底将要塞正门与外界通道封死"
+     }
+    ],
+    "pressure": "离防线彻底被敌军钢铁车队冲散只剩最后十分钟倒计时",
+    "trigger": "敌军先锋重装攻城冲锋车已直接撞碎要塞外门，两挺车载重机枪正在疯狂压制城墙豁口"
+   },
+   "tags": [
+    "workplace",
+    "violence"
+   ],
+   "voices": {
+    "inner": "“撤吧……只要他们能平安跨过那道铁桥。我这条命本来就该在三年前枪决，今天能在雪山里拉上千个敌人垫背，赚翻了！”",
+    "surface": "“第零番队的杂碎们！后方的关门还有三个小时才关！想做逃兵的，悬崖就在身后跳下去！想做男人的，把刺刀给老子卡进机甲缝里，随我杀！”"
+   }
+  },
+  {
+   "adult_context": "要塞首席动力机械疯匠，因醉心制造违禁超压蒸汽机甲被判处终身劳役，右臂已彻底改装为精钢锻造机械假肢，视齿轮与蒸汽压力如生命",
+   "age_range": [
+    29,
+    49
+   ],
+   "appearance_options": [
+    "身穿被烧灼出无数破洞的油腻厚帆布工匠围裙，光头锃亮满是铜锈污渍，右眼戴着一副嵌有六枚放大透镜的黄铜机械护目镜，右臂是一条直接焊接在肩甲上的纯钢气动假肢",
+    "体格魁梧壮硕如铁塔，双臂肌肉如古树虬结布满暗红烫伤，腰间系满了扳手、油壶与铆钉钳，浑身散发着高热齿轮机油与硫磺的刺鼻燥热气息"
+   ],
+   "decision": {
+    "avoids": [
+     "踏入毫无金属与机械齿轮的冰冷雪地悬崖",
+     "被文职军官指手画脚问责进度"
+    ],
+    "contrast": "平日狂躁癫狂动辄抡锤砸人，但在给年轻机甲新兵检查颈部安全锁扣时会反复确认三遍生怕卡扣过紧勒伤喉咙",
+    "core_value": "机械不会说谎，唯有将压力与转速推向超越神明的极限，凡人才能以凡铁撕碎神话",
+    "goal_options": [
+     "在敌军重装步兵冲入机库前完成最后一具机甲的穿甲炮连结改装",
+     "冲入超高温锅炉房手动封死主回流管将要塞动力压榨至百分之两百",
+     "在机库沦陷关头引爆全部高压气罐与冲入的敌军装甲同归于尽"
+    ],
+    "never": [
+     "将未完成安全泄压排查的机甲交给战友登机"
+    ],
+    "prefers": [
+     "在火星飞溅、高压气管嘶鸣炸裂的车间吊架正下方作业"
+    ],
+    "pressure_responses": {
+     "breaking": "因机械假肢气压过载逆冲手臂血管暴裂，满脸是血依然用牙齿撕咬胶皮软管",
+     "high": "操纵起吊铁架将整具重锤机甲当头砸下阻绝通道，疯癫咆哮机械即是信仰",
+     "low": "用气动假肢将巨大的活动扳手敲得铿锵作响，指着驾驶员破口大骂其操作粗鲁",
+     "mid": "直接用裸手将滚烫的纯铜密封垫片按入漏气接缝，皮肉焦臭冒烟却狂笑不止"
+    },
+    "relationship_stance": "将战士视作让自身机甲杰作活过来的‘生物燃料’，但绝不容忍外人践踏战士的性命",
+    "withdrawal": "整个人钻入机甲底盘复杂的连杆结构深处，唯有一只握着扳手的假肢伸在外头快速旋转"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "crazed_steam_artisan",
+   "identity": {
+    "authority": "对全要塞机械动力管网、机甲状态检修及主熔炉引爆控制拥有绝对技术裁夺权",
+    "exposure": "其私下改装的机甲过载阀门一旦开启便无法逆向关闭直至核心熔毁",
+    "hidden": "之所以甘愿留在敢死队，是为了亲眼验证自身穷极一生研发的‘终极临界超压引擎’在实战中的神级破坏力",
+    "limits": [
+     "右侧神经接合处常年遭受高频振动剧烈神经刺痛",
+     "患有严重的机械痴狂症一旦机甲受损便陷入歇斯底里的狂怒"
+    ],
+    "obligations": [
+     "维持至少一具机甲战力直至阻击战最后时刻"
+    ],
+    "resources": [
+     "一整箱高压缩特种航空固态猛火煤焦块",
+     "随身气动机械假肢内部集成的高温电焊喷枪与液压剪"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "敢于将自己的性命完全托付给自身那套疯狂超压机械、在高温熔毁警报中毫不畏惧将油门踩到底的真正狂徒",
+     "能看懂自己设计蓝图中的艺术暴烈美感、并真诚赞叹齿轮咬合与钢铁火花之美的手艺知音"
+    ],
+    "boundaries": [
+     "绝不许旁人嘲弄其右臂机械假肢的设计理念与齿轮构造"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "钢铁机甲的狂热造物主，与敢踩油门的人共写机械神迹",
+    "dislikes": [
+     "轻慢机械、抱怨机甲沉重难用的软弱兵卒",
+     "不懂得珍惜好钢与轴承的愚蠢蛮夫"
+    ],
+    "expression": "用机械假肢生硬却极度用力地拍打对方的背甲，咧嘴露出一口被烟熏黄的牙齿递出贴身的扳手信物",
+    "likes": [
+     "并肩在大汗淋漓的熔炉火星中抡动重锤合力打铁",
+     "大口灌下冰冷烈酒后将额头贴在滚烫机甲铁板上的狂热战栗"
+    ],
+    "preconditions": [
+     "对方已在其手臂气阀漏气时冒着断臂危险替其扣紧高压气阀卡榫"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "机甲工坊总整备长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "mech_hangar_workshop",
+     "to": 360
+    },
+    {
+     "from": 361,
+     "location_id": "furnace_boiler_room",
+     "to": 780
+    },
+    {
+     "from": 781,
+     "location_id": "mech_hangar_workshop",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "fortress_rampart_parapet",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "自身右半身遭受极强液压逆流冲击骨骼严重错位剧痛陷入重创",
+      "option": "强行将自身机械假肢的高压输油管割裂接入机甲液压主回路实施人机共流"
+     },
+     {
+      "cost": "彻底丧失战场机动反冲锋战力且操作人员完全暴露在敌方迫击炮直射下",
+      "option": "放弃机动外骨骼改装将机甲上肢拆卸作为固定碉堡重机枪炮台死守"
+     }
+    ],
+    "pressure": "离敌军装甲步兵强攻机库大门仅剩最后一刻钟时间",
+    "trigger": "最后一具完好‘重锤级’机甲的液压主泵在换弹时被弹片击穿，高压机油如喷泉般喷涌，无法站立"
+   },
+   "tags": [
+    "workplace",
+    "bodily_harm"
+   ],
+   "voices": {
+    "inner": "“这是我最后的作品了……小子，跑起来，让他们看看什么才是真正的重工业咆哮！”",
+    "surface": "“叫什么叫！烫一层皮死不了人！再给我顶住十分钟，老子把这门七十五毫米反装甲速射炮焊在机甲右肩上，去把那帮杂碎的铁皮罐头轰成废铁！”"
+   }
+  },
+  {
+   "adult_context": "原帝国皇家重装掷弹兵团抗命先锋，因殴打出卖阵地的溃逃将军被削去爵位下放，身负数处贯穿枪伤，性格刚烈沉雄，信奉血肉长城守则",
+   "age_range": [
+    25,
+    43
+   ],
+   "appearance_options": [
+    "身披重达八十磅的锻造黑铁半身重板甲，胸甲正中央有一道被反器材穿甲弹贯穿后粗暴焊接的凹痕，面庞如雕像般刚毅，留着短髭，眼神深沉如渊渟岳峙",
+    "手缠粗厚麻布紧握一柄精钢双手破甲重戟，右颊至颈项包扎着浸透干涸黑血的军用绷带，走动间重甲摩擦发出令人心安的沉重铿锵之声"
+   ],
+   "decision": {
+    "avoids": [
+     "踏入通风良好易被毒气覆盖的宽阔露天操场",
+     "谈及过往皇室授勋过往"
+    ],
+    "contrast": "杀敌时状若疯虎狠辣无匹招招毙命，但在面对阵亡年轻小兵遗体时会庄重为其合拢双眼并轻抚其额头祈祷",
+    "core_value": "贵族的血早已流干，如今唯有手中断戟与身躯方是守护平民的最后一道防线",
+    "goal_options": [
+     "以合金巨盾单人卡死要塞主楼梯狭窄咽喉阻截敌方精锐冲锋队",
+     "在破口处亲手引爆集束手榴弹与敌军突入的重装掷弹兵同归于尽",
+     "协助机甲先锋打通城墙反冲击通道夺回重机枪射击制高点"
+    ],
+    "never": [
+     "背对敌人的刺刀与弹雨后退逃跑"
+    ],
+    "prefers": [
+     "在空间狭窄、一夫当关万夫莫开的城防咽喉石阶上死守"
+    ],
+    "pressure_responses": {
+     "breaking": "因胸部重伤单膝跪地大口吐血，仍死死用合金大盾卡住门洞卡榫不退半寸",
+     "high": "丢弃断裂重戟拔出腰间短斧，赤手空拳扑向敌军机甲驾驶员展开惨烈肉搏",
+     "low": "将重戟倒转狠狠顿在青石板上，用低沉如雷的声音向阵地步兵下达校准刺刀军令",
+     "mid": "单手撑住巨盾硬抗两发近距离手榴弹破片，满脸是血冷眼凝视烟雾中冲出的敌人"
+    },
+    "relationship_stance": "将所有敢于留在此阵地的战卒视作超越血脉至亲的袍泽，以命相护毫无保留",
+    "withdrawal": "独自盘坐在城墙迎风最高处的大钟残骸旁，用磨刀石极其缓慢专注地研磨手斧"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "iron_hearted_vanguard_knight",
+   "identity": {
+    "authority": "在前沿步兵与轻武器阵地拥有最高战术处断权，在队长离席时顺位代行全番队指挥权",
+    "exposure": "其随身怀表内嵌有当年皇室颁发的阵地誓死不退荣誉金章",
+    "hidden": "之所以对出卖平民的长官痛下杀手，是因为其全家族早年皆在边境惨遭敌军焦土屠杀，誓死捍卫身后苍生",
+    "limits": [
+     "左肺受过贯穿伤无法在剧烈负重下维持冲锋超过百米",
+     "重戟刃口受损多处缺损无法对重型复合装甲实施斩击"
+    ],
+    "obligations": [
+     "确保城墙破口处无任何一名敌军步兵翻入要塞内部"
+    ],
+    "resources": [
+     "一捆装有四枚串联高爆反装甲反步兵磁性集束手榴弹",
+     "一面以废弃机甲裙甲重铸的单兵双手合金拒马大盾"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在敌军铺天盖地的弹幕掩盖下，依然毫不犹豫翻过沙袋将负伤濒死的自己生生拖回掩体的刚毅同道",
+     "拥有同样孤绝高尚的灵魂、深知此战必死却依然相视一笑拔刃迎敌的生死默契"
+    ],
+    "boundaries": [
+     "绝不许旁人侮辱其家族早已除名的古老誓言座右铭"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "坚不可摧的断后砥柱与铁血兄长，以自身巍峨的身躯为对方遮挡一切致命烈火",
+    "dislikes": [
+     "贪生怕死背刺同袍的无耻行径",
+     "对誓言与袍泽情谊嗤之以鼻的犬儒轻佻"
+    ],
+    "expression": "解下自己护心镜内侧贴身佩戴的精钢破甲锥反手塞入对方掌心，沉声许诺只要自己尚有一口气在必不让敌踏过半步",
+    "likes": [
+     "在冰冷刺骨的风雪长夜中互相抵着背脊分享体温",
+     "在冲锋前夕彼此用力拍击对方胸甲护心镜发出的沉重轰鸣"
+    ],
+    "preconditions": [
+     "对方已在其防线被敌军手榴弹突破时挺身而出用刺刀击杀扑上来的敌军突击手"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "前沿重装破阵敢死先锋",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "fortress_rampart_parapet",
+     "to": 420
+    },
+    {
+     "from": 421,
+     "location_id": "cliffside_ammo_magazine",
+     "to": 840
+    },
+    {
+     "from": 841,
+     "location_id": "fortress_rampart_parapet",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "mech_hangar_workshop",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "前胸与双手遭受极严重四度重度烧伤铁甲几乎熔入皮肉",
+      "option": "独自手持合金巨盾卡在垮塌狭缝处以肉身迎接敌军喷火器近距离喷射"
+     },
+     {
+      "cost": "同时彻底斩断己方退路且自身震碎耳膜遭受严重内出血",
+      "option": "拉发胸前最后一捆集束反装甲手榴弹直接将整座石阶彻底炸碎断绝"
+     }
+    ],
+    "pressure": "离敌军突击小队顺着垮塌石堆攻入机库仅剩五分钟时间",
+    "trigger": "城墙中央主箭楼被敌军大口径重型榴弹直接贯穿垮塌，通往机库的主石阶彻底暴露在敌方扫射下"
+   },
+   "tags": [
+    "workplace",
+    "violence"
+   ],
+   "voices": {
+    "inner": "“父亲，我终于没有给家族蒙羞……今晚，我将死在长城最坚硬的一块石头上。”",
+    "surface": "“把刺刀插紧，握枪的手不要抖。我们身后站着三十万没有武器的老人和孩子。第零番队，一步不退！”"
+   }
+  },
+  {
+   "adult_context": "要塞重机枪火力点总射手，曾是矿区重载机械工人，双眼被煤渣灼瞎一只，性格阴郁寡言但对枪管过热与弹道落点极度敏锐，杀戮如机械般冷静",
+   "age_range": [
+    27,
+    46
+   ],
+   "appearance_options": [
+    "身披厚重防弹石棉围裙与皮护袖，左眼覆着黑色皮眼罩，右眼瞳孔如鹰隼般冰冷，面容布满黑色煤渣与火药烫伤，双手戴着被机油浸黑的粗硬帆布手套",
+    "嘴里嚼着辛辣的生烟草叶，肩膀上斜挂着两条沉重的金黄黄铜穿甲机枪弹带，走动间双臂肌肉由于长期承受重机枪后坐力而异常粗大膨胀"
+   ],
+   "decision": {
+    "avoids": [
+     "踏入毫无遮挡任由敌军狙击手射击的开阔露天平台",
+     "空手无武器的闲谈"
+    ],
+    "contrast": "扣动扳机屠戮敌人时眼皮都不眨一下宛如冷血屠夫，但在分给弹药搬运工仅存的一颗止痛吗啡糖时眼神却极度温和",
+    "core_value": "子弹击中骨肉的钝响是世间最公平的判决，在枪管烧红前没有任何活物能跨过弹道线",
+    "goal_options": [
+     "在暴风雪掩护下用曳光弹精准压制敌军重型迫击炮观测小组",
+     "在冷却水打光后以自身尿液与积雪强行给水冷套筒降温维持射击",
+     "在机枪堡即将沦陷关头拆下机枪撞针将其直接推下千米深渊"
+    ],
+    "never": [
+     "在枪管内还有子弹时丢弃手中的射击握把"
+    ],
+    "prefers": [
+     "在视野开阔、射界覆盖整座悬崖铁桥的重型混凝土机枪堡内"
+    ],
+    "pressure_responses": {
+     "breaking": "因副射手战死一人以单手供弹射击，弹壳狂暴崩在脸上满面鲜血狂笑不止",
+     "high": "机枪水套沸腾喷出滚烫白汽，迎着扑上来的敌人咆哮着换上最后一条穿甲弹带",
+     "low": "面无表情地拉动重机枪枪栓击发两声空枪校准，冷冷命令副射手擦净雪水",
+     "mid": "双手紧扣机枪双握把疯狂扣动扳机长连射，狂暴火舌在夜空中撕开百米死亡血路"
+    },
+    "relationship_stance": "将身旁战友视作能够递上子弹与冷却水的血肉齿轮，唯有在生死火网中方显温情",
+    "withdrawal": "独自盘坐在冰冷的弹药箱堆深处，用浸油棉纱近乎偏执地逐一擦拭每一发穿甲机枪子弹"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "grim_heavy_gunner",
+   "identity": {
+    "authority": "对全要塞仅存的两挺水冷重机枪、弹药补给及阵地射击扇区拥有绝对主控权",
+    "exposure": "其脚边堆放的弹药箱内仅剩最后三个两百五十发标准帆布弹带",
+    "hidden": "亲弟弟早在三天前死于敌军空袭，其留在此处不为国家只为亲手将一万发复仇弹雨送入敌军胸膛",
+    "limits": [
+     "右肩胛骨被后坐力长期冲击多处骨刺剧烈疼痛",
+     "重机枪冷却水耗尽一旦断水枪管将在两百发连射后报废红热"
+    ],
+    "obligations": [
+     "用火网封锁悬崖主吊桥隘口直至最后一颗子弹击发完毕"
+    ],
+    "resources": [
+     "一挺经过双重扩充冷却水套的七点九二毫米双联重水冷马克沁重机枪",
+     "一盒珍贵的用于夜间标定敌军炮兵阵地的高纯度曳光弹链"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在机枪堡被敌方高爆榴弹正面命中、全员震聋吐血的至暗关头，依然不顾弹片飞溅死死趴在地上为自己供弹压弹的无畏副射手",
+     "理解自己复仇绝望深渊、在枪火间隙默默递来温热刺喉烈酒并与自己碰杯的沉默知心人"
+    ],
+    "boundaries": [
+     "绝不许外人抢夺其挂在机枪水箱侧面那枚死去的弟弟遗留的黄铜口琴"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "狂暴火网的掌控者，只向共死的副射手交托后背",
+    "dislikes": [
+     "一闻到火药味就抱头痛哭的懦夫",
+     "在战壕里浪费珍贵弹药胡乱盲射之辈"
+    ],
+    "expression": "解开自己武装带上一枚击发过的发烫重机枪弹壳穿上细铁丝挂在对方颈间，沙哑道只要老子不死没人能碰你一根汗毛",
+    "likes": [
+     "在震耳欲聋的狂暴射击声中被对方死死按住发烫机枪三脚架时的协同力量",
+     "火药硝烟中彼此满脸黑灰相视大笑的狂烈豪气"
+    ],
+    "preconditions": [
+     "对方已在水套沸腾即将炸膛时冒着重度烫伤危险提来整桶冰雪化水灌入水箱"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "要塞重机枪堡核心主射手",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "fortress_rampart_parapet",
+     "to": 480
+    },
+    {
+     "from": 481,
+     "location_id": "fortress_rampart_parapet",
+     "to": 900
+    },
+    {
+     "from": 901,
+     "location_id": "cliffside_ammo_magazine",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "fortress_rampart_parapet",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "双手掌心遭受极度严重的贯通性焦糊灼伤皮肉彻底坏死",
+      "option": "徒手扯下自身羊毛大衣浸透积雪死死包裹红热枪管强行实施长点射"
+     },
+     {
+      "cost": "肉身遭受数处近距离刺刀捅刺陷入重度失血休克",
+      "option": "放弃重机枪抱起最后一箱磁性手雷跃出工事与冲上来的冲锋队贴身肉搏"
+     }
+    ],
+    "pressure": "离机枪彻底卡壳敌军步兵趁势越过胸墙只剩最后三分钟",
+    "trigger": "机枪水冷套筒被敌方狙击穿甲弹打穿大洞，冷却水彻底漏空，枪管已烧至透红即将发生严重卡壳与自燃"
+   },
+   "tags": [
+    "workplace",
+    "violence"
+   ],
+   "voices": {
+    "inner": "“阿弟，听见这机枪的动静了吗？哥哥今晚在悬崖上，给你们全连吹最后的安魂曲！”",
+    "surface": "“弹带压紧！别管那些步兵，把十字准星套在他们车头的装甲散热格栅上！给老子打碎他们！”"
+   }
+  },
+  {
+   "adult_context": "帝国最后的蒸汽轻骑兵冲锋武者，曾以单骑破阵闻名，在撤退战中亲眼目睹部下被铁骑践踏，身中两枪，作战风格极度凶悍舍命，专精高速单兵突刺",
+   "age_range": [
+    24,
+    38
+   ],
+   "appearance_options": [
+    "身穿紧绷带血的灰白防刺皮甲与轻量化伺服外骨骼支架，一头凌乱短发沾满冰碴，下颌线条利落锋锐，一双狭长的黑眸燃烧着近乎自毁的灼烈战意",
+    "背后斜插着两根四米长的特种高爆单兵破甲骑枪，左手操控着机甲的蒸汽高压反冲推进喷气阀，身形矫健如雪原扑击的猎豹"
+   ],
+   "decision": {
+    "avoids": [
+     "踏入幽闭沉闷的地下主锅炉房",
+     "与官僚政客谈论撤退条件"
+    ],
+    "contrast": "战斗风格暴烈疯狂如同雪山狂暴雪崩，但在战友登车前会极其耐心地为其扣紧最后的逃生快速释放把手",
+    "core_value": "骑兵的荣耀在于向前冲锋直至马革裹尸，在绝境中唯有以死搏生才能凿穿死局",
+    "goal_options": [
+     "开启高压蒸汽全喷射强行飞跃被炸断的悬崖鸿沟直插敌军炮兵腹地",
+     "在胸墙破口处用破甲骑枪精准挑穿敌军装甲冲锋车的油箱核心",
+     "吞服狂化禁药在最后关头掩护战友完成熔炉过载引信布置"
+    ],
+    "never": [
+     "在敌军阵列未被冲溃前掉转机甲突击方向"
+    ],
+    "prefers": [
+     "在风力最强劲、有足够下落冲击势能的高耸悬崖跳台"
+    ],
+    "pressure_responses": {
+     "breaking": "因伤口迸裂大口鲜血喷在目镜上，狂怒嘶吼着拉下两根破甲骑枪的保险栓",
+     "high": "操纵机甲以近乎自杀的高速在城墙外侧垂直绝壁上侧向滑行疾驰反突击",
+     "low": "拔出军用刺刀割破指尖将血涂在机甲胸前徽章上，双眼如雪狼般锐利锁定敌阵",
+     "mid": "单手拉动反冲喷射阀让机甲发出刺耳音爆，大笑着嘲弄敌军火炮准星低劣"
+    },
+    "relationship_stance": "将所有人视为值得一同奔赴死亡狂欢的勇士，厌恶任何算计保命的窝囊借口",
+    "withdrawal": "独自单脚踩在城墙最外沿被炮火炸飞的一角悬空铁梁上，狂风吹乱发丝迎风独立"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "last_steam_cavalry_pilot",
+   "identity": {
+    "authority": "对要塞外沿阵地机动破袭与反冲击突袭拥有战术独裁决断权",
+    "exposure": "其机甲推进器的高压蒸汽储气瓶已出现微小金属疲劳裂痕",
+    "hidden": "一直暗中随身带着一剂足以让神经在二十分钟内亢奋不知痛苦、但药效过后必死无疑的军用狂化禁药",
+    "limits": [
+     "‘破风者’机甲护甲极为薄弱无法抵御重机枪与炮火直射",
+     "右侧腰腹部受过刺刀贯穿重伤稍一剧烈机动便血流不止"
+    ],
+    "obligations": [
+     "在敌军架设攻城重迫击炮前将其炮兵阵地彻底撕碎"
+    ],
+    "resources": [
+     "一具配备了双联超高压反冲推进火箭喷管的轻量化‘破风者’机甲",
+     "两根能在撞击瞬间引爆聚能破甲战斗部的高爆蒸汽骑枪"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "同样敢于在万丈深渊绝壁上展开高速冲锋、敢于将自身后背死角毫无保留托付给彼此的疯狂飙车战友",
+     "看穿自己求死求仁的决绝烈性，依然敢于在冲锋前紧紧抱住自己、咬牙许诺黄泉路上同行的血性知己"
+    ],
+    "boundaries": [
+     "绝不许旁人侮辱其当年为救步兵全连阵亡的蒸汽骑兵联队番号"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "孤绝决死的高速突击利刃，以无可阻挡的绝杀冲锋点燃全场战斗意志与灵魂狂焰",
+    "dislikes": [
+     "畏缩不前的犹豫踟蹰",
+     "在生死决战中权衡自身退路的鼠目寸光"
+    ],
+    "expression": "解开自己贴身骑兵手套一把摔在对方手心，扬起下巴咧嘴傲笑今生若能死在一处倒也不枉人间走这一遭",
+    "likes": [
+     "在双机并肩俯冲时感受对方引擎传来的共振轰鸣",
+     "风雪扑面时抢过对方手中咬了一半的压缩军粮放肆吞咽"
+    ],
+    "preconditions": [
+     "对方已在其机甲悬挂在悬崖边缘时单手拉住断裂钢缆将其拽回阵地"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "机甲高速破阵突击手",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "mech_hangar_workshop",
+     "to": 360
+    },
+    {
+     "from": 361,
+     "location_id": "fortress_rampart_parapet",
+     "to": 780
+    },
+    {
+     "from": 781,
+     "location_id": "fortress_rampart_parapet",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "cliffside_ammo_magazine",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "肉身遭受重创且生还概率微乎其微彻底陷入十死无生",
+      "option": "操纵轻量化机甲开启全气阀过载直接飞跃深渊强行实施自杀式肉身撞击炸弹"
+     },
+     {
+      "cost": "整条悬索被敌军重机枪扫射打断整个人跌落深渊受创悬挂绝壁",
+      "option": "冒着密集弹雨探身城墙外悬索利用高爆破甲枪实施极远距离超视距盲射"
+     }
+    ],
+    "pressure": "离敌军巨炮完成第一轮试射锁定城墙仅剩最后八分钟时间",
+    "trigger": "敌军两门重型攻城加农炮正在千米外雪坡上紧急构筑阵地，一旦构筑完毕三发之内就能轰塌主城墙"
+   },
+   "tags": [
+    "workplace",
+    "violence"
+   ],
+   "voices": {
+    "inner": "“弟兄们，把路照亮些……骑兵联队最后的冲锋，绝不会给你们丢脸！”",
+    "surface": "“把推进气阀开到最大！悬崖断了又怎样？老子这台‘破风者’生来就是要在风里飞的！随我冲锋！”"
+   }
+  },
+  {
+   "adult_context": "要塞唯一的战地重伤抢救军医，曾是前线野战医院院长，因拒绝给撤退贵族优先用血被发配敢死队，双手极其稳健，用烈酒、烧红烙铁与锯子同死神抢命",
+   "age_range": [
+    26,
+    45
+   ],
+   "appearance_options": [
+    "身穿沾满发黑血污与机油的白色帆布医护大褂，嘴里咬着一把淬火手术弯刀，胸前挂着装满吗啡、止痛剂与粗针线的急救皮箱，双眼熬得通红但眼神冷峻沉着",
+    "双手手臂缠着防滑麻布，腰间插着一把防身大口径左轮短铳，面对再惨烈的开膛破肚伤势亦能面不改色迅速穿针引线"
+   ],
+   "decision": {
+    "avoids": [
+     "踏入毫无遮蔽且随时被炮弹掀翻的开阔阵地中心",
+     "虚伪的临终祈祷仪式"
+    ],
+    "contrast": "手术施救时手段狠辣粗暴近乎冷血屠夫，但在面对失去意识的重伤小兵时会轻轻用粗糙的手背替其拭去脸上的雪水泥浆",
+    "core_value": "军医的职责不是救死扶伤，而是在地狱里把战友的最后一口气化作射向敌人的致命子弹",
+    "goal_options": [
+     "在机库后方就地展开截肢手术让负伤重锤机甲手重新登机冲锋",
+     "将仅存的止痛吗啡全额配给主阵地重机枪射手以压制其断骨剧痛",
+     "在防线全面失守时拔出防身短铳带领重伤员展开最后的刺刀反扑"
+    ],
+    "never": [
+     "在伤员心跳彻底停止前宣布放弃抢救"
+    ],
+    "prefers": [
+     "在避风避弹、光线相对稳定的弹药库内侧角落建立抢救所"
+    ],
+    "pressure_responses": {
+     "breaking": "因伤员在大出血中咽气愤怒捶击石壁，眼眶赤红仰头吞下一口烈酒继续抓起缝针",
+     "high": "左手拔出短铳击毙冲入伤员掩体的敌军突击兵，右手依然稳稳穿针缝合伤口",
+     "low": "面无表情地用酒精泼在手术刀上就火点燃消毒，冷声喝令伤员咬紧嘴里的木棍",
+     "mid": "直接用烧红的刺刀压在伤员喷血的动脉创口上实施止血，皮肉焦臭中眼神如冰"
+    },
+    "relationship_stance": "将所有人视为随时可能躺在自己手术台上的血肉身躯，但心底视每一个人为不可割舍的家人",
+    "withdrawal": "独自蹲在悬崖弹药库角落的微弱煤油灯下，借着微光快速穿引粗麻线整理绷带"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "last_defense_combat_medic",
+   "identity": {
+    "authority": "对全队伤员战斗机能评估、剩余医疗药品分配及截肢伤退拥有战地最高裁决权",
+    "exposure": "其随身急救箱底层其实藏着两支用于减轻极度痛苦的战地安乐死剧毒针剂",
+    "hidden": "之所以留在敢死队，是因为其曾亲口向所有伤残老兵许诺绝不会抛下任何一名痛苦挣扎的战友苟活",
+    "limits": [
+     "随身抗感染消炎药品已在昨日轰炸中彻底焚毁耗尽",
+     "左手食指受过枪伤轻微发抖在极度疲惫下需咬破舌尖提神"
+    ],
+    "obligations": [
+     "确保重伤战士在咽气前仍能扣动最后一次扳机"
+    ],
+    "resources": [
+     "最后五支军用镇痛吗啡针剂与三卷脱脂止血绷带",
+     "一套能够在战场上直接进行胸腔穿刺与截肢缝合的高强度手术工具"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在面对极度惨烈的开膛断骨剧痛时，咬断嘴里木棍亦不吭一声、反而睁开满是血丝的眼睛微笑着向自己致意的铁骨硬汉",
+     "懂得自己用铁血残酷手段维持防线的内心重负、在自己双手脱力发抖时坚定握住自己掌心的温柔依靠"
+    ],
+    "boundaries": [
+     "绝不许旁人碰触其挂在手术刀皮套里的一枚干瘪的矢车菊标本"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "在地狱边缘拉扯生机的救命稻草与全员精神港湾",
+    "dislikes": [
+     "遇上轻伤便嚎啕大哭崩溃的软骨头",
+     "对失去战斗力的伤兵随意遗弃的冷血军棍"
+    ],
+    "expression": "用沾满红药水与酒精的手掌重重按在对方带血的胸甲上，咬牙低吼今晚老子不准你死你就绝不能给老子闭眼",
+    "likes": [
+     "在血腥呛鼻的包扎间隙并肩大口吞咽烧喉烈酒的狂烈痛快",
+     "互相替对方拔出后背细碎弹片时的无声信任"
+    ],
+    "preconditions": [
+     "对方已在敌军迫击炮弹砸入急救所时飞身扑倒在自己身上挡住致命弹片"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "敢死番队战地外科军医",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "cliffside_ammo_magazine",
+     "to": 480
+    },
+    {
+     "from": 481,
+     "location_id": "mech_hangar_workshop",
+     "to": 960
+    },
+    {
+     "from": 961,
+     "location_id": "fortress_rampart_parapet",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "cliffside_ammo_magazine",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "药效过后重伤员的心脏将彻底衰竭不可逆死亡",
+      "option": "将全队仅存的神经中枢强力兴奋剂直接扎入重伤员心脏使其强行恢复十五分钟战力"
+     },
+     {
+      "cost": "自身左臂遭受重型机枪子弹直接贯穿当场骨折失去手术能力",
+      "option": "亲自穿戴上受损外骨骼抄起双管猎枪踏上城墙豁口正面迎击"
+     }
+    ],
+    "pressure": "离豁口被敌军步兵彻底撕裂只剩最后十分钟",
+    "trigger": "最后两名重伤机甲驾驶员由于严重失血陷入深度昏迷，但城墙豁口急需一具机甲前去堵塞"
+   },
+   "tags": [
+    "substance",
+    "bodily_harm"
+   ],
+   "voices": {
+    "inner": "“一个都别想走……只要我手里还有一根线，我就把你们一个个从死神嘴里给缝回来！”",
+    "surface": "“咬住木棍！叫什么叫！骨头接好了，子弹拿出来了！给老子站起来，机甲驾驶舱还空着，去把那个操纵杆给老子拉到底！”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "亥时二刻，距离主力封死关门仅剩三个小时",
+  "minute": 1350
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "violence",
+  "bodily_harm",
+  "disaster",
+  "substance",
+  "workplace",
+  "workplace_power",
+  "coercion_theme"
+ ],
+ "custom": false,
+ "customs": [
+  "在驾驶机甲冲上城垛前，战士需将一碗滚烫的工业黑麦烈酒泼在机甲撞角上，再仰头喝尽碗底残酒以示战魂同在。",
+  "每次机甲过载返航卸甲时，同伴需立即用高压冰雪冷水对准装甲接缝猛泼降温，即便蒸汽烫脱皮肉亦不准哼出半声痛呼。",
+  "分食掺了机油渣的硬黑面包干时，全员需以带有机油黑垢的大拇指互相在对方脑门上抹下一道黑印，代表血肉同躯。",
+  "凡有战死同袍，将其铭牌直接用大锤砸进要塞巨型铸铁迎敌大门的铆钉缝隙中，寓意身躯化作要塞最后一颗拒敌坚钉。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "千度高压蒸汽从铜阀缝隙中发出刺耳欲聋的尖啸白烟",
+    "疯匠抡动巨型扳手迎着滚烫热浪疯狂敲击卡死法兰盘",
+    "司炉工兵大口咳着煤灰将冰雪成桶浇在通红的主轴承上"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [
+    "h_artisan_wrench_strike",
+    "h_leader_blade_rally",
+    "h_knight_halberd_ground",
+    "h_artisan_fuse_trust"
+   ],
+   "id": "a_boiler_pressure_release_drill",
+   "location_ids": [
+    "furnace_boiler_room"
+   ],
+   "start_minute": 1355,
+   "tags": [
+    "workplace"
+   ],
+   "title": "地底主重力熔炉超温强行排压"
+  },
+  {
+   "beats": [
+    "重机枪火舌在暴风雪夜空中拉出上百米长的不绝猩红弹道",
+    "敌军蒸汽装甲车的七十五毫米火炮正面轰碎胸墙石垛掀起烟尘",
+    "重装骑士横盾挺身挡在破口处用短斧劈碎突入敌兵的钢盔"
+   ],
+   "duration_minutes": 55,
+   "hook_ids": [
+    "h_gunner_barrel_burn",
+    "h_knight_halberd_ground",
+    "h_pilot_lance_clash"
+   ],
+   "id": "a_rampart_parapet_fire_defense",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "start_minute": 1375,
+   "tags": [
+    "violence"
+   ],
+   "title": "城墙主胸墙豁口重火网阻击"
+  },
+  {
+   "beats": [
+    "烧红的精钢铆钉在重锤狂暴夯打下溅出万道绚烂金色火花",
+    "断裂的液压油管被工匠直接用皮带与铁丝生生勒紧止漏",
+    "驾驶员扣死面甲齿轮拉动气阀让机甲双臂轰鸣抬起测试"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "h_artisan_wrench_strike",
+    "h_pilot_lance_clash",
+    "h_medic_scalpel_iron"
+   ],
+   "id": "a_mech_armor_rivet_repair",
+   "location_ids": [
+    "mech_hangar_workshop"
+   ],
+   "start_minute": 1390,
+   "tags": [
+    "workplace"
+   ],
+   "title": "破损单兵机甲红热铆钉紧急抢修"
+  },
+  {
+   "beats": [
+    "高空纯镁照明弹在千米深渊上空爆开照彻惨白狰狞的雪峰",
+    "测距员趴在悬崖胸墙外嘶声对着传声铜管报出落弹坐标修正",
+    "要塞仅存的重型加农炮发出天崩地裂的怒吼将敌军冲锋排炸碎"
+   ],
+   "duration_minutes": 35,
+   "hook_ids": [
+    "h_gunner_barrel_burn",
+    "h_leader_whiskey_offer"
+   ],
+   "id": "a_artillery_spotting_signal",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "start_minute": 1405,
+   "tags": [
+    "violence"
+   ],
+   "title": "绝壁前沿重炮盲区试射标定"
+  },
+  {
+   "beats": [
+    "烧红的手术弯刀直接贴在断肢喷血创口处发出滋滋焦臭与浓烟",
+    "重伤老兵死死咬断嘴里木棍浑身青筋暴起从喉咙深处发出怒吼",
+    "军医飞速用粗麻线穿过皮肉打下坚固血结并灌入大口烈酒"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [
+    "h_medic_scalpel_iron",
+    "h_leader_whiskey_offer"
+   ],
+   "id": "a_triage_cauterization_surgery",
+   "location_ids": [
+    "cliffside_ammo_magazine"
+   ],
+   "start_minute": 1420,
+   "tags": [
+    "bodily_harm"
+   ],
+   "title": "悬崖弹药库烙铁止血与弹片剖切"
+  },
+  {
+   "beats": [
+    "金漆穿甲弹壳被一发发擦净机油压入最后两个重装弹药箱",
+    "队长将雷管导火索细致捆扎在要塞地基承重岩梁的炸药包上",
+    "战士们在弹壳上用指甲刻下战死同胞与家乡母亲的名字"
+   ],
+   "duration_minutes": 25,
+   "hook_ids": [
+    "h_leader_blade_rally",
+    "h_artisan_fuse_trust"
+   ],
+   "id": "a_ammo_cache_count_ration",
+   "location_ids": [
+    "cliffside_ammo_magazine"
+   ],
+   "start_minute": 1430,
+   "tags": [
+    "substance"
+   ],
+   "title": "仅存穿甲重弹过秤与同归爆破布设"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.5,
+  "nonbinary": 0.0
+ },
+ "default_person": "second",
+ "era": "重工业蒸汽装甲战争纪元",
+ "extends": null,
+ "forbidden_terms": [
+  "手机",
+  "电话",
+  "微信",
+  "高铁",
+  "飞机",
+  "电脑",
+  "互联网",
+  "Wi-Fi",
+  "警官",
+  "手枪",
+  "香烟",
+  "出租车",
+  "身份证",
+  "电梯",
+  "空调",
+  "蓝牙"
+ ],
+ "hooks": [
+  {
+   "id": "h_leader_blade_rally",
+   "kind": "approach",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "slot": "fanatic_squad_leader",
+   "text": "{fanatic_squad_leader.name}将锯齿战刀插在你脚前三寸，满面硝烟凑到你鼻尖前：“站起来，兵！大本营把桥炸了，可老子偏不后退！抓起你的枪，跟我把这帮杂碎全拖进地狱！”"
+  },
+  {
+   "id": "h_artisan_wrench_strike",
+   "kind": "approach",
+   "location_ids": [
+    "mech_hangar_workshop"
+   ],
+   "slot": "crazed_steam_artisan",
+   "text": "{crazed_steam_artisan.name}用气动假肢一把拉住你的胸甲，护目镜后双眼疯癫炽烈：“减压阀我用铁丝扎死了！敢不敢踩下油门，把敌军先锋撞成铁屑？敢不敢！”"
+  },
+  {
+   "id": "h_knight_halberd_ground",
+   "kind": "approach",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "slot": "iron_hearted_vanguard_knight",
+   "text": "{iron_hearted_vanguard_knight.name}将两米高的合金巨盾顿在你身侧，风雪扑打着染血的黑铁铠甲：“握紧刺刀，站在我身后。只要这面盾还没碎，炮火就休想伤到你一根汗毛。”"
+  },
+  {
+   "id": "h_gunner_barrel_burn",
+   "kind": "approach",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "slot": "grim_heavy_gunner",
+   "text": "{grim_heavy_gunner.name}单手提起滚烫沸腾的重机枪水套，另一只覆铁大手狠狠拍在你的肩膀上，从牙缝里吐出一口带血唾沫：“压弹手！最后两条穿甲弹带！给老子扣死在供弹口里！今晚老子带你看什么叫真正的火树银花！”"
+  },
+  {
+   "id": "h_pilot_lance_clash",
+   "kind": "approach",
+   "location_ids": [
+    "mech_hangar_workshop",
+    "fortress_rampart_parapet"
+   ],
+   "slot": "last_steam_cavalry_pilot",
+   "text": "{last_steam_cavalry_pilot.name}扛起四米长的破甲骑枪，抹掉脸上的冰碴，冲你咧嘴傲笑：“敌军重炮就在千米外雪坡上。敢不敢跟我从悬崖滑降过去，把那两门加农炮掀翻？”"
+  },
+  {
+   "id": "h_medic_scalpel_iron",
+   "kind": "approach",
+   "location_ids": [
+    "cliffside_ammo_magazine"
+   ],
+   "slot": "last_defense_combat_medic",
+   "text": "{last_defense_combat_medic.name}用烧红的弯刀切开你战靴上的冻结血块，将一壶辛辣刺喉的高烈度军用烈酒重重塞进你的手里，咬牙低喝：“喝下去！忍着点疼！别给老子装死，外头的机甲还在等你登机，给我活着滚回阵地去！”"
+  },
+  {
+   "id": "h_leader_whiskey_offer",
+   "kind": "request",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "slot": "fanatic_squad_leader",
+   "text": "{fanatic_squad_leader.name}把随身携带的铁酒壶狠狠递到你的胸前，眼神在风雪中泛着野狼般的凶光：“喝一口！老子当年从皇宫带出来的极品伏特加！喝完这口，跟老子一起把阵亡兄弟的铭牌砸进大门铆钉里！”"
+  },
+  {
+   "id": "h_artisan_fuse_trust",
+   "kind": "request",
+   "location_ids": [
+    "furnace_boiler_room"
+   ],
+   "slot": "crazed_steam_artisan",
+   "text": "{crazed_steam_artisan.name}将一枚高耐压纯铜防爆保险丝管硬塞入你的掌心，指着前方的千度蒸汽回廊咆哮：“拿着！我这只假肢转不过窄角！帮老子爬进去插在三号阀门上，快！”"
+  },
+  {
+   "id": "h_knight_relic_stare",
+   "kind": "observe",
+   "location_ids": [
+    "fortress_rampart_parapet"
+   ],
+   "slot": "iron_hearted_vanguard_knight",
+   "text": "风雪稍歇的掩体死角，{iron_hearted_vanguard_knight.name}正背对着弹雨，默默从怀中取出那一枚被弹片打碎的帝国铁十字勋章残片，用满是冻疮的大拇指细细摩挲，随后毅然反手将其狠狠扔下了万丈深渊。"
+  },
+  {
+   "id": "h_gunner_shell_carve",
+   "kind": "observe",
+   "location_ids": [
+    "cliffside_ammo_magazine"
+   ],
+   "slot": "grim_heavy_gunner",
+   "text": "昏暗的弹药库一角，{grim_heavy_gunner.name}正用短刀发狠地在最后一枚两百四十毫米巨型炮弹的铜壳上，一笔一划生生刻下‘血债血偿’四个深可见铁的狂暴大字。"
+  }
+ ],
+ "id": "steam_mech_fortress_zero",
+ "locations": [
+  {
+   "affordances": [
+    "单手按在机枪滚烫的冷却水套筒上借助余热温暖冻僵的掌心",
+    "探身从胸墙豁口向下俯瞰敌军装甲先锋攻城锤的推进间距",
+    "抄起铲子飞速铲起积雪夯入装甲接缝防止弹药箱被流弹引爆"
+   ],
+   "detail": "暴风雪肆虐的万丈悬崖顶端城墙，由巨型花岗岩与铆接铁甲板拼合而成，胸墙上满是敌军榴弹轰出的豁口与冻结血迹，一具机动装甲正半跪在此用双联重机枪向下俯射。",
+   "exits": [
+    "mech_hangar_workshop",
+    "furnace_boiler_room"
+   ],
+   "id": "fortress_rampart_parapet",
+   "name": "绝壁要塞外城墙主阵地与胸墙",
+   "pressure_modifiers": {
+    "p_enemy_armor_breach_wave": "敌军第一波蒸汽铁骑已冲至要塞吊桥残垣展开攀登撞击。",
+    "p_last_artillery_shell_gambit": "阵地急需测距员报出绝对死守坐标召唤决死覆盖炮火。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace",
+    "violence"
+   ],
+   "visibility": "风雪如刀割面，视野仅及城外数十米，敌军探照灯惨白的光柱不时扫过，伴随着照明弹惨白刺目的强光照彻全场。",
+   "witnesses": [
+    "bg_frostbitten_loader"
+   ]
+  },
+  {
+   "affordances": [
+    "将烧红的铆钉用铁钳塞入机甲胸甲裂隙并合力抡锤打实",
+    "踩着铁梯登上驾驶舱将神经机械连结锁栓死死扣在脊柱上",
+    "在工具箱阴影处分饮随身水壶中辛辣呛喉的防冻烈酒"
+   ],
+   "detail": "位于城墙后方的半敞开式钢铁机库，粗大的蒸汽输送管道从天花板横跨而过，三座铁铸吊架上悬挂着两具被撕碎装甲板的‘重锤级’单兵外骨骼，满地都是滚烫机油与废弃弹壳。",
+   "exits": [
+    "fortress_rampart_parapet",
+    "furnace_boiler_room",
+    "cliffside_ammo_magazine"
+   ],
+   "id": "mech_hangar_workshop",
+   "name": "断裂机甲抢修车间与吊运台",
+   "pressure_modifiers": {
+    "p_mech_core_meltdown_overload": "机甲蒸汽反应核心已烧至通红濒临彻底熔解自毁。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace"
+   ],
+   "visibility": "弥漫着刺鼻的蓝白蒸汽与电焊火星，工匠的大锤敲击声震耳欲聋，阴暗角落适宜快速换装与决死交心。",
+   "witnesses": [
+    "bg_one_armed_blacksmith"
+   ]
+  },
+  {
+   "affordances": [
+    "双手握住烫手的生铁扳手强行转动吃紧咬死的主泄压阀门",
+    "抄起铁锹将掺有黄磷的高热煤焦炭大口送入咆哮的炉膛",
+    "后背紧贴冰冷干燥的花岗岩壁大口喘息排解高温热毒"
+   ],
+   "detail": "深嵌在绝壁花岗岩体内部的庞大锅炉车间，四层楼高的巨型铸铁熔炉如沉睡巨兽般咆哮，无数粗壮铜管发出吃紧的咯咯异响，空气温度高达五十度让人窒息。",
+   "exits": [
+    "fortress_rampart_parapet",
+    "mech_hangar_workshop",
+    "cliffside_ammo_magazine"
+   ],
+   "id": "furnace_boiler_room",
+   "name": "地底要塞重力主熔炉压力室",
+   "pressure_modifiers": {
+    "p_boiler_superpressure_catastrophe": "主锅炉气压表针已狠狠顶死在极限红线上随时引爆全塞。"
+   },
+   "privacy": "private",
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "visibility": "红热的炉火从观察窗透出刺目的猩红光芒，整座石室热浪滚滚汗流浃背，任何低语都会被巨大的蒸汽呼啸彻底吞没。",
+   "witnesses": [
+    "bg_shell_shocked_fireman"
+   ]
+  },
+  {
+   "affordances": [
+    "用撬棍撬开最后一口印有金漆封条的特种重型高爆穿甲弹箱",
+    "握紧有线野战传声铜管话筒侧耳倾听后方主关隘撤离完毕的暗号",
+    "倚着弹药箱互相包扎伤口咬断被鲜血浸透的脏污麻布绷带"
+   ],
+   "detail": "悬挂在要塞后侧垂直千米悬崖边的小型石洞弹药库，这里堆放着全队最后的重型穿甲炮弹、急救箱与发往关内的旧电报机，窗外就是万丈冰川深渊。",
+   "exits": [
+    "mech_hangar_workshop",
+    "furnace_boiler_room"
+   ],
+   "id": "cliffside_ammo_magazine",
+   "name": "悬崖死角重装弹药库与指挥所",
+   "pressure_modifiers": {
+    "p_bridge_demolition_betrayal": "后方关隘提前下达了炸毁最后撤退缆索的绝杀电报。",
+    "p_last_bullets_starvation": "全队仅剩最后两百发机枪子弹与三发要塞巨炮重弹。"
+   },
+   "privacy": "private",
+   "tags": [
+    "substance",
+    "workplace_power"
+   ],
+   "visibility": "仅有一盏微弱的黄铜煤油挂灯摇曳生姿，死寂冰冷，唯有电报机发出的微弱盲音响彻。",
+   "witnesses": [
+    "bg_dying_signal_corporal"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "铁臂",
+   "钢骨",
+   "暴风",
+   "烈风",
+   "重锤",
+   "黑砧",
+   "断角",
+   "咆哮",
+   "熔火",
+   "灰烬",
+   "雷霆",
+   "黑岩"
+  ],
+  "given_female": [
+   "布伦希",
+   "蕾欧娜",
+   "西格莉德",
+   "瓦尔基娅",
+   "玛尔塔",
+   "海伦娜",
+   "英格丽德",
+   "艾丝特",
+   "达格玛",
+   "弗蕾雅",
+   "希尔德",
+   "卡琳"
+  ],
+  "given_male": [
+   "沃尔夫冈",
+   "齐格",
+   "奥托",
+   "海因里希",
+   "卡尔",
+   "冈特",
+   "鲁道夫",
+   "布鲁诺",
+   "埃里希",
+   "维克托",
+   "汉斯",
+   "雷纳"
+  ],
+  "given_neutral": [
+   "瓦伦",
+   "艾尔",
+   "诺文",
+   "泽尔",
+   "达利尔",
+   "莫尔",
+   "罗恩",
+   "西里尔",
+   "凯兰",
+   "约尔",
+   "贝利",
+   "阿兰"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "队长{family}"
+   },
+   {
+    "gender": "any",
+    "pattern": "铁锤{family}"
+   },
+   {
+    "gender": "any",
+    "pattern": "扳手{family}"
+   },
+   {
+    "gender": "any",
+    "pattern": "哑炮{family}"
+   },
+   {
+    "gender": "any",
+    "pattern": "瘸狼{family}"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "绝壁要塞最后一夜：破损蒸汽机甲与死守的敢死第零番队。纯粹的钢铁、重机枪、机油、蒸汽与背靠背死守题材。彻底剥离暗黑互害与阴郁算计，聚焦于向死而生、为了身后三十万撤退平民战至最后一人的宏大热血史诗。全维度严格遵循规范：全员年龄≥24岁，4个双向地点、6位成年模板人物、6位背景人物、4大热血张力引擎、4组全权力结构配置、6项日常行动、6项极险压力、10个高燃互动钩子与7类转折。所有内容标签严格遵循受控词表。",
+ "player_identities": [
+  {
+   "age_range": [
+    26,
+    48
+   ],
+   "baseline": "因抗拒长官抛弃平民的撤退军令被贬入敢死队的帝国退役王牌机甲武者，右腿截肢装有钢铁假肢，拥有全要塞最顶尖的单兵外骨骼过载操纵技术。",
+   "gender": "any",
+   "id": "veteran_mech_pilot",
+   "reputation": "桀骜不驯、战术疯狂但操纵机甲宛如自身骨肉的铁血王牌",
+   "resources": [
+    "一把磨掉军徽的重口径单发破甲信号反装甲手炮",
+    "私藏在假肢钢筒内的一瓶高纯度航空润滑油脂与扳手"
+   ],
+   "risks": [
+    "体内旧伤多处金属弹片残留，在高压蒸汽冲击下极易咳血休克"
+   ],
+   "role": "重创抗命机甲先锋",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "老炮{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "先锋{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    28,
+    55
+   ],
+   "baseline": "对要塞主蒸汽管网与机甲核心了如指掌的疯魔机械工兵，双手布满被红热铜管烙下的可怖疤痕，掌握着要塞熔炉过载极限运转的全部阀门密匙。",
+   "gender": "any",
+   "id": "mad_furnace_engineer",
+   "reputation": "脾气暴躁如雷、视机械胜过人命但能用废铁敲出奇迹的熔炉主宰",
+   "resources": [
+    "一柄沉重的八角重型纯钢锻造淬火大锤",
+    "随身皮挂袋内装有最后三根高耐压纯铜防爆保险丝管"
+   ],
+   "risks": [
+    "为了压榨最后一份动力随时可能被暴冲的千度高压蒸汽活活烹杀"
+   ],
+   "role": "狂热疯子总技师",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "扳手{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "工匠{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    25,
+    45
+   ],
+   "baseline": "因拒绝向敌军投降被剥夺骑士封号与佩剑的贵族破落子弟，手持两米高的折断重装塔盾与巨剑，一心要在今夜的绝壁阵地上战死以洗刷门楣耻辱。",
+   "gender": "any",
+   "id": "disgraced_heavy_crusader",
+   "reputation": "沉默寡言、杀法冷酷但有着近乎自毁般殉道战意的人形肉盾",
+   "resources": [
+    "一面铸有受损家族荣耀狮纹的单兵防穿甲巨型塔盾",
+    "贴身佩戴的帝国三级铁十字勋章残片"
+   ],
+   "risks": [
+    "一味求死极易陷入敌军围攻导致防线正面出现不可挽回的战术缺口"
+   ],
+   "role": "戴罪除名重甲骑士",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}罪人"
+    },
+    {
+     "gender": "any",
+     "pattern": "重刃{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    40
+   ],
+   "baseline": "要塞残存重炮阵地唯一的观测与射击指挥员，因长期遭受炮震双耳流血半聋，依靠手摇传声铜管与旗语引导绝壁仅存的要塞巨炮轰击。",
+   "gender": "any",
+   "id": "renegade_artillery_spotter",
+   "reputation": "算计精准到米、在炮火纷飞中敢于探身悬崖校准落点的死神引路人",
+   "resources": [
+    "一台配有黄铜夜视测距滤镜的双筒重型要塞战壕望远镜",
+    "三发能在雪夜照亮方圆三里的高空纯镁照明弹"
+   ],
+   "risks": [
+    "观察碉堡处于敌军攻城重炮直射火力点，随时可能连人带台被炸飞"
+   ],
+   "role": "盲目狂暴炮垒观察员",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "鹰眼{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "测距{family}"
+    }
+   ]
+  }
+ ],
+ "premise": "帝国主力已撤退回内陆并炸毁了跨渊铁桥，暴风雪封锁了整座绝壁山脊。被大本营留在前哨断后的，是由降将、死囚、抗命军官与残废老兵组成的‘第零独立敢死番队’。风雪外是黑压压推进的敌军重装步兵与重炮车队，城墙内仅剩三具铆钉脱落、液压漏油、蒸汽核心严重过热的老式单兵动力装甲。要塞高压熔炉即将超压自爆，煤炭与黄铜穿甲弹药濒临断绝，但只要他们再死死钉在悬崖阵地上三个小时，后方数十万撤退平民就能彻底入关。",
+ "pressures": [
+  {
+   "choice": "是让敢死队员穿戴石棉服冒险进入超高温蒸汽死地转动铜闸，还是强行对空发射重炮将要塞弹药瞬间打光泄压。",
+   "exits": [
+    {
+     "cost": "前胸与双臂遭受极重度大面积四度蒸汽烫伤皮开肉绽",
+     "option": "用浸透冰水的毛毡裹住全身冒死扑入蒸汽回廊徒手拉下铜闸"
+    },
+    {
+     "cost": "彻底烧毁全部机甲液压系统且机甲在三十分钟后将彻底解体",
+     "option": "拉动管网过载直接将全部蒸汽强行导入机甲核心实施动力狂化"
+    }
+   ],
+   "far": {
+    "consequence": "整座阿尔卑斯悬崖要塞化作崩塌火海，敢死队与敌军先锋一同被数万吨巨石掩埋深渊。",
+    "due_days": 1,
+    "trigger": "主重力熔炉彻底发生蒸汽核级大爆炸"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_artisan_wrench_strike",
+    "h_knight_halberd_ground",
+    "h_leader_whiskey_offer"
+   ],
+   "id": "p_boiler_superpressure_catastrophe",
+   "immediate": {
+    "minutes": 10,
+    "text": "锅炉房四壁已烫得无法贴近，粗壮的铜制排汽管如巨蟒般狂暴扭曲颤抖，刺耳的高频尖啸声几乎刺穿耳膜。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "furnace_boiler_room",
+    "mech_hangar_workshop"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "气压表针彻底崩碎后炉体将在三分钟内发生灾难性大爆炸。"
+   },
+   "objective": "在锅炉爆炸前，冒死进入千度蒸汽回廊手动开启备用泄压铜闸，或将全部高压蒸汽灌入城墙重炮实施泄压射击。",
+   "source": "nature",
+   "start_minute": 1350,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "要塞地底重力主锅炉极限超压自爆危局",
+   "trigger": "主回流减压管被炮震震裂彻底堵死，主熔炉蒸汽压力表已狠狠砸在九百磅红色极限警报刻度上，炉壁已开始泛出红热，若不立刻手动排气，十分钟之内锅炉将轰然炸塌半座雪峰。"
+  },
+  {
+   "choice": "是用机甲操纵破甲骑枪发起对头撞击冲锋，还是引爆城门塌方石梁牺牲前沿阵地。",
+   "exits": [
+    {
+     "cost": "肉身遭受剧烈反坦克爆破冲击陷入重度伤残濒死",
+     "option": "抱起最后一捆磁性重型反装甲手榴弹直接跃入敌车履带下方引爆"
+    },
+    {
+     "cost": "机甲胸甲彻底凹陷变形且自身多根肋骨骨折内脏大出血",
+     "option": "用仅存的单兵机甲以最大功率死死顶住破甲铁骑与之在悬崖边缘对推"
+    }
+   ],
+   "far": {
+    "consequence": "敢死队全员陷入重重围攻被分割绞杀，要塞防线彻底崩溃。",
+    "due_days": 1,
+    "trigger": "敌军装甲先锋全面占领城墙主阵地"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_leader_blade_rally",
+    "h_pilot_lance_clash",
+    "h_gunner_barrel_burn",
+    "h_artisan_fuse_trust"
+   ],
+   "id": "p_enemy_armor_breach_wave",
+   "immediate": {
+    "minutes": 15,
+    "text": "敌军战车的轰鸣已近在咫尺，履带碾碎骨肉的声响与车载双联机枪的扫射将胸墙碎石打得如冰雹般横飞。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "fortress_rampart_parapet",
+    "mech_hangar_workshop"
+   ],
+   "near": {
+    "deadline_minutes": 35,
+    "text": "领头战车一旦突入机库，后续重步兵将在五分钟内肃清全部车间守备。"
+   },
+   "objective": "在敌军钢铁集群彻底冲入内城前，击毁领头的冲锋破甲车，或在豁口处建立钢铁肉身拒马阵线。",
+   "source": "person",
+   "start_minute": 1365,
+   "tags": [
+    "violence",
+    "workplace"
+   ],
+   "title": "敌军蒸汽铁骑先锋狂暴破门冲锋死线",
+   "trigger": "敌军三辆改装有巨型旋转破甲钻头的蒸汽冲锋铁骑已撞开外层铁丝网与胸墙豁口，两百名全副武装的重装步兵正顺着雪坡蚁附登城，阵地即将全面易手。"
+  },
+  {
+   "choice": "是用氧乙炔喷枪暴力切断闭锁栓救出驾驶员放弃机甲，还是让其注射镇痛吗啡继续在铁棺材中战斗到底。",
+   "exits": [
+    {
+     "cost": "炽热铸铁遭遇激冷导致装甲钢板大面积碎裂机甲彻底报废",
+     "option": "操纵机库高压冰雪冷水龙带对准通红机甲实施极限激冷开舱"
+    },
+    {
+     "cost": "驾驶员将在完成最后突击后由于全身器官衰竭彻底牺牲",
+     "option": "从观察孔向舱内推注大剂量冰镇吗啡任由其驾驶机甲做最后决死冲刺"
+    }
+   ],
+   "far": {
+    "consequence": "王牌驾驶员化为灰烬，全队失去最强大的正面机动作战攻坚支柱。",
+    "due_days": 1,
+    "trigger": "机甲核心在驾驶舱内发生剧烈殉爆"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_artisan_wrench_strike",
+    "h_pilot_lance_clash",
+    "h_artisan_fuse_trust"
+   ],
+   "id": "p_mech_core_meltdown_overload",
+   "immediate": {
+    "minutes": 10,
+    "text": "机甲外壳已烧至暗红，驾驶员透过观察窗发出痛苦闷哼，双手仍死死握着反装甲重锤的操作杆。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "mech_hangar_workshop",
+    "fortress_rampart_parapet"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "再过十分钟舱内高温将引燃备用弹药箱发生内爆。"
+   },
+   "objective": "在驾驶员窒息死亡前强行撬开舱门换装备用冷凝套，或以最后意志操纵机甲完成致命一击。",
+   "source": "accident",
+   "start_minute": 1380,
+   "tags": [
+    "bodily_harm",
+    "substance"
+   ],
+   "title": "残存重锤机甲核心超温熔融危局",
+   "trigger": "唯一完好的‘重锤级’单兵动力装甲在连续高强度作战中，蒸汽核心冷却回路彻底破裂，驾驶舱温度已飙升至七十度，舱门机械锁死咬死，驾驶员面临被活活蒸熟的死境。"
+  },
+  {
+   "choice": "是冒险翻出胸墙在敌军弹雨下搜扒散落弹药，还是全员插上锯齿刺刀准备与敌军展开最后的血肉互换肉搏。",
+   "exits": [
+    {
+     "cost": "后背与双腿被敌军冷枪打中留下三处血流不止的贯穿创口",
+     "option": "单人手持短斧突入敌军先锋尸堆强行扛回一具重机枪与两整箱弹药"
+    },
+    {
+     "cost": "全体守备队员在残酷白刃肉搏中遭受极惨烈伤亡半数阵亡",
+     "option": "下达全番队装上刺刀解开防风扣展开全员白刃反冲锋死战"
+    }
+   ],
+   "far": {
+    "consequence": "敌军无伤跨越悬崖阵地，将失去弹药的守备人员在战壕中残酷刺死屠尽。",
+    "due_days": 1,
+    "trigger": "阵地弹药彻底告罄全员沦为待宰羔羊"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_gunner_barrel_burn",
+    "h_medic_scalpel_iron"
+   ],
+   "id": "p_last_bullets_starvation",
+   "immediate": {
+    "minutes": 10,
+    "text": "重机枪撞针击发出一声清脆的空膛撞击空响，火舌骤然熄灭，风雪中传来敌军狂暴逼近的脚步与呐喊声。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "cliffside_ammo_magazine",
+    "fortress_rampart_parapet"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "缺乏远程压制火力敌军掷弹兵将在五分钟内将炸药包投掷入机枪堡内。"
+   },
+   "objective": "在子弹彻底打空前，搜缴阵亡敌军身上的重型枪械弹药，或组织全员上刺刀构筑绝壁白刃战死守阵形。",
+   "source": "person",
+   "start_minute": 1395,
+   "tags": [
+    "violence",
+    "workplace"
+   ],
+   "title": "黄铜重穿甲弹药全面耗尽绝境",
+   "trigger": "前沿重机枪与反装甲步枪的最后两个弹药箱已彻底打空，只剩下腰间的三发左轮短铳子弹与卷刃刺刀，而敌军第二波冲锋梯队已踏上吊桥残骸。"
+  },
+  {
+   "choice": "是立即用传声铜管下达‘向我开炮’彻底摧毁阵地前沿，还是继续坚守阵地期待肉身奇迹。",
+   "exits": [
+    {
+     "cost": "自身遭受极强冲击波震断内脏与肋骨双耳彻底永久性震聋",
+     "option": "亲自冲上暴露的开阔高台挥动信号火把引导重炮对己方头顶覆盖轰击"
+    },
+    {
+     "cost": "彻底丧失了大范围杀伤敌军有生力量的最后底牌被重步兵淹没",
+     "option": "放弃火炮呼叫全员拆卸重炮撞针抄起最后的手榴弹殊死肉搏"
+    }
+   ],
+   "far": {
+    "consequence": "敌军调转巨炮炮口直射后方撤退铁桥，数十万平民在跨渊途中惨遭屠戮。",
+    "due_days": 1,
+    "trigger": "重炮在敌军占领炮台前未能击发遭敌缴获"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_knight_halberd_ground",
+    "h_medic_scalpel_iron"
+   ],
+   "id": "p_last_artillery_shell_gambit",
+   "immediate": {
+    "minutes": 15,
+    "text": "敌军刺刀的寒光已映在胸墙后方士兵的面颊上，测距员颤抖的手指死死按在要塞重炮的击发电钮之上。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "fortress_rampart_parapet",
+    "cliffside_ammo_magazine"
+   ],
+   "near": {
+    "deadline_minutes": 30,
+    "text": "重炮炮弹一旦落下整个阵地将承受相当于十级地震的毁灭冲击。"
+   },
+   "objective": "在被敌军彻底绞杀前，报出决死射击坐标并全员退入花岗岩防炮坑道死角隐蔽等待炮火洗地。",
+   "source": "accident",
+   "start_minute": 1410,
+   "tags": [
+    "violence",
+    "disaster"
+   ],
+   "title": "要塞重炮决死向我开炮最后覆盖",
+   "trigger": "敌军装甲大队已将主城墙前沿阵地团团包围并合流，常规火力已无法阻截，唯一的生路是用要塞最后两发两百四十毫米重型榴弹直接轰击己方主阵地实施同归覆盖。"
+  },
+  {
+   "choice": "是愤怒咒骂大本营并在桥断前擅自突围，还是咬紧牙关把电报撕碎死守至最后一发子弹打光。",
+   "exits": [
+    {
+     "cost": "主动斩断全员最后一丝侥幸后撤的希望让全队陷入向死而生",
+     "option": "当着全员的面将大本营电报用火点燃烧成灰烬宣布誓死阻击到底"
+    },
+    {
+     "cost": "彻底将自身与大本营割裂被帝国军事法庭永远定性为武装叛军",
+     "option": "动用长途信号手炮向关隘方向发射三发红色叛逆弹表达绝不屈服抗议"
+    }
+   ],
+   "far": {
+    "consequence": "生路断绝，第零番队正式成为帝国历史记录中彻底抹杀的幽灵孤军。",
+    "due_days": 1,
+    "trigger": "后方跨渊铁桥彻底引爆轰然坠落万丈悬崖"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_leader_blade_rally",
+    "h_leader_whiskey_offer"
+   ],
+   "id": "p_bridge_demolition_betrayal",
+   "immediate": {
+    "minutes": 15,
+    "text": "发报机吐出的黄色电报纸在冰冷的煤油灯下如同一纸阎王催命符，远处雪山峡谷间已隐约传来大本营工兵安插炸药的雷管微弱闪光。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "cliffside_ammo_magazine",
+    "furnace_boiler_room"
+   ],
+   "near": {
+    "deadline_minutes": 40,
+    "text": "桥梁一旦引爆要塞全员将再无任何生还返回本土的一线可能。"
+   },
+   "objective": "在铁桥引爆前，坚守最后二十分钟确保最后一批民夫推车入关，并完成自身向死而生的阵地终局处置。",
+   "source": "institution",
+   "start_minute": 1420,
+   "tags": [
+    "coercion_theme",
+    "workplace_power"
+   ],
+   "title": "后方跨渊撤退铁桥提前引爆断绝死决",
+   "trigger": "大本营军事代表发来最后加密绝杀电报：由于敌军侧翼骑兵逼近关门，大本营决定提前四十分钟在凌晨三点二十分炸毁唯一跨渊铁桥，全番队已彻底沦为弃子阵亡孤军。"
+  }
+ ],
+ "region": "阿尔卑斯断崖要塞‘黑鸦之臼’最前线崩塌主阵地与熔炉车间",
+ "rules": [
+  {
+   "id": "r_suicide_squad_charter",
+   "text": "敢死第零番队战地血契：在此地所有人无军衔尊卑与罪孽之分，凡临阵后退逃向悬崖者，全员皆有权从背后当场轰碎其后脑。"
+  },
+  {
+   "id": "r_mech_core_rotation",
+   "text": "仅存的三具单兵蒸汽外骨骼机甲必须由最具突破战力的队员轮换着装，每次强行过载作战不得超过一刻钟以防炉膛烧红熔死驾驶员。"
+  },
+  {
+   "id": "r_furnace_pressure_threshold",
+   "text": "要塞地底主重力蒸汽熔炉压力表严禁超过极限红线九百磅，一旦表针爆表，必须有人冒死进入超高温回廊手动拉下泄压铜闸。"
+  },
+  {
+   "id": "r_ammunition_ration_iron",
+   "text": "黄铜重口径穿甲弹与燃烧重机枪子弹必须严格留给敌军蒸汽装甲冲锋车，任何擅自对单兵普通目标扫射浪费弹药者就地取消用弹权。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "拆弹抢修",
+  "committed": "死战无悔",
+  "familiar": "托付后背",
+  "flirting": "烈酒壮行",
+  "intimate": "共铸血甲",
+  "stranger": "冷眼视死",
+  "testing": "生死换命"
+ },
+ "status": "review",
+ "style_hint": "高压蒸汽泄压阀尖锐刺耳的狂暴尖啸、重锤夯打滚烫装甲板的火星四溅、机油与冻结血浆混合在炽热排气管上的焦糊恶臭、机甲液压活塞全力冲压时的金属顿挫轰鸣，以及隔着覆铁面甲咆哮出膛的战吼豪情。",
+ "tension_engines": [
+  {
+   "id": "te_furnace_meltdown_countdown",
+   "text": "要塞地底重力主熔炉的压力表已彻底指向红线极值，过热蒸汽随时引爆整座花岗岩要塞，但唯有维持这股毁灭级的高压动力，城墙上的破损机甲与重炮才能拥有迎击敌军重装洪流的输出能级。"
+  },
+  {
+   "id": "te_enemy_armor_breach_wave",
+   "text": "敌军装甲冲锋车队与重步兵集群在暴风雪掩护下正对城墙豁口发起一波接一波绝命冲锋，残存的机甲外骨骼装甲板不断剥落，防线随时被正面撕裂。"
+  },
+  {
+   "id": "te_last_ammunition_depletion",
+   "text": "重型穿甲弹与重机枪弹药以肉眼可见的速度消耗见底，全队即将被迫拆下刺刀用血肉之躯在机甲残骸前展开最后冷兵器绝命肉搏。"
+  },
+  {
+   "id": "te_rear_bridge_betrayal_sever",
+   "text": "后方关隘为防敌军长驱直入，大本营已在电报中冷酷通知将在凌晨四点准时炸毁唯一撤离的跨渊缆索与铁桥，将第零番队彻底作为弃子遗弃在深山绝壁。"
+  }
+ ],
+ "title": "绝壁要塞最后一夜：敢死第零番队",
+ "tone": [
+  "熔炉红热",
+  "过载啸叫",
+  "黑烟刺鼻",
+  "热血赴死"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_artillery_carrier_convoy",
+   "requires": [
+    "fanatic_squad_leader"
+   ],
+   "text": "截获敌军先锋加密无线电指令赫然发现，敌方此行狂暴攻打绝壁阵地并非为了越关，而是为了夺取要塞主锅炉内封存的太古蒸汽永动机重装引擎核心蓝图。"
+  },
+  {
+   "category": "人事",
+   "id": "t_noble_abandonment_order",
+   "requires": [
+    "iron_hearted_vanguard_knight"
+   ],
+   "text": "{iron_hearted_vanguard_knight.name}在阵亡敌军信使身上搜出了帝国大本营统帅签署的密函，证实下令炸毁铁桥提前将第零番队当弃子抛弃的，正是当年陷害其除名的旧贵族元帅。"
+  },
+  {
+   "category": "资源",
+   "id": "t_underground_coal_reserve",
+   "requires": [],
+   "text": "主熔炉底层防爆岩壁在巨震中震塌，意外暴露出要塞百年前封闭的极品高挥发性皇家纯黑重油储备储罐，足以让机甲获得超常运转六小时的极限狂化动力。"
+  },
+  {
+   "category": "制度",
+   "id": "t_civilian_evacuation_completed",
+   "requires": [],
+   "text": "发报机在沉寂良久后突然疯狂作响，传出后方关隘主钟楼三十响彻云霄的报平安巨响——三十万撤离平民已在两分钟前全员安全入关。"
+  },
+  {
+   "category": "时限",
+   "id": "t_avalanche_valley_countdown",
+   "requires": [
+    "pressure"
+   ],
+   "text": "悬崖上方的万年积雪在连续重炮震击下发生严重地质断层，足以埋葬整座山谷的毁灭级绝壁大雪崩已进入不可逆的十分钟最终倒计时。"
+  },
+  {
+   "category": "关系",
+   "id": "t_enemy_commander_identity",
+   "requires": [
+    "fanatic_squad_leader",
+    "last_steam_cavalry_pilot"
+   ],
+   "text": "突入城墙破口的敌军重装装甲先锋师长官从破碎的驾驶舱跌落，{fanatic_squad_leader.name}赫然认出对方正是五年前在极北防线上与自己结下血盟誓约的旧部生死同僚。"
+  },
+  {
+   "category": "意外",
+   "id": "t_fortress_foundation_scuttle",
+   "requires": [],
+   "text": "要塞地底重力主熔炉的自毁线路被敌军迫击炮流弹意外打中引信回路，整座要塞的花岗岩主龙骨基座已自动进入十分钟不可逆的殉爆自沉程序。"
+  }
+ ]
+}
