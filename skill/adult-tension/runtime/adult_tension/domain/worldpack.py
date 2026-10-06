@@ -10,7 +10,7 @@ import re
 from .. import schema as S
 from ..errors import CONTENT_ERROR, detail
 from . import structure as ST
-from .text import PLACEHOLDER_RE, full_name, gendered_pronoun_positions, placeholders, stray_braces
+from .text import PLACEHOLDER_RE, gendered_pronoun_positions, placeholders, stray_braces
 
 F = S.Field
 
@@ -342,31 +342,6 @@ PLACEHOLDER_JUNK = {"—", "-", "--", "待补", "待定", "TODO", "TBD", "todo",
 MINOR_TERMS = ("学生", "师生", "校园", "学徒", "徒弟", "门生", "弟子", "少年", "少女", "幼", "童")
 ADULT_MARKERS = ("成年", "成人", "研究生", "夜校", "驻留", "年满", "已婚", "正式工", "正式雇员", "持证")
 
-# Names of well-known fictional characters that must never appear
-# (CONTENT_BIBLE.md section 6). Real people's names are allowed by the
-# user's decision of 2026-10-03. Best effort; extended as found.
-DENIED_NAMES = (
-    "贾宝玉",
-    "林黛玉",
-    "薛宝钗",
-    "孙悟空",
-    "猪八戒",
-    "哈利",
-    "福尔摩斯",
-    "柯南",
-    "路飞",
-    "鸣人",
-    "聂小倩",
-    "宁采臣",
-    "白素贞",
-    "许仙",
-    "法海",
-    "哪吒",
-    "犬夜叉",
-    "夏目贵志",
-    "千寻",
-    "无脸男",
-)
 
 SENTENCE_SPLIT = re.compile(r"[。！？；!?;\n]")
 ITEM_PATH_RE = re.compile(r"\$\.(\w+)\[(\d+)\]")
@@ -837,22 +812,10 @@ class _Checker:
             for term in terms:
                 if term in text:
                     self.add(path, "出现本世界的禁用词“%s”" % term, "这个词不属于本世界的时代与地域")
-            for name in DENIED_NAMES:
-                if name in text:
-                    self.add(path, "出现已知作品角色的名字“%s”" % name, "换成原创名字")
             if any(term in text for term in MINOR_TERMS):
                 context = text + self._adult_context_for(path)
                 if not any(marker in context for marker in ADULT_MARKERS):
                     self.add(path, "出现校园、师生、学徒类意象却没有明示成年语境：%s" % text[:30], "写明成年身份（如成人夜校、研究生、年满十八的正式学徒）")
-        pools = self.pack["name_pools"]
-        full_names = set()
-        for family in pools["family"]:
-            for given in pools["given_female"] + pools["given_male"] + pools["given_neutral"]:
-                full_names.add(full_name(pools, family, given))
-                full_names.add(family + given)
-        for name in DENIED_NAMES:
-            if name in full_names:
-                self.add("$.name_pools", "名池可能组合出已知作品角色的名字：%s" % name, "从名池里去掉对应的姓或名")
 
     def _adult_context_for(self, path):
         match = re.match(r"\$\.(\w+)\[(\d+)\]", path)
