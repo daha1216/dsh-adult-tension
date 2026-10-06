@@ -1,0 +1,2435 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "盯着全栋风纪的老房东",
+   "age_range": [
+    52,
+    64
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_nosy_landlady_watch",
+   "line": "{npc.name}每隔二十分钟就打着手电上楼一趟，光柱在201的门缝底下停很久。",
+   "location_ids": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "name": null,
+   "role": "楼梯口探头的房东"
+  },
+  {
+   "adult_context": "失业在家、爱喝酒爱聊天的中年住户",
+   "age_range": [
+    42,
+    55
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_tipsy_neighbor_tanaka",
+   "line": "{npc.name}扶着栏杆开啤酒，大着舌头说202那位丈夫在大阪早就有人了，整条街都知道。",
+   "location_ids": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "name": null,
+   "role": "拎啤酒罐的醉邻居"
+  },
+  {
+   "adult_context": "住在对门、作息颠倒的插画师",
+   "age_range": [
+    26,
+    32
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_artist_across_hall",
+   "line": "{npc.name}靠在对门阳台上，隔着雨看见202的窗里没有人，若有所思地放下了炭笔。",
+   "location_ids": [
+    "apartment_202_neighbor_room"
+   ],
+   "name": null,
+   "role": "对门阳台上画画的人"
+  },
+  {
+   "adult_context": "熟悉深夜街区路况的外送骑手",
+   "age_range": [
+    24,
+    35
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_midnight_delivery_rider",
+   "line": "{npc.name}在洗衣棚摘下湿头盔，大声说台风眼半小时后到，到时候全町的路都会被泥水封死。",
+   "location_ids": [
+    "apartment_ground_laundry_shed"
+   ],
+   "name": null,
+   "role": "披雨衣的外送骑手"
+  },
+  {
+   "adult_context": "退休多年的老榻榻米匠人",
+   "age_range": [
+    64,
+    76
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_retired_tatami_hands",
+   "line": "{npc.name}从工具箱里翻出一卷防水油布，说拿去堵门缝，不用还。",
+   "location_ids": [
+    "apartment_ground_laundry_shed"
+   ],
+   "name": null,
+   "role": "一楼敲木条的老匠人"
+  },
+  {
+   "adult_context": "老街派出所值夜的巡查",
+   "age_range": [
+    28,
+    40
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_patrol_officer_kobayashi",
+   "line": "{npc.name}在楼下用喇叭提醒各户关紧门窗，红色警灯在雨里一圈一圈地转。",
+   "location_ids": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "name": null,
+   "role": "推自行车巡逻的派出所巡查"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "你握着全栋的钥匙，{neighbor_yui.name}抱着湿被子站在你面前，{artist_neighbor_sakura.name}从对门探出头来。你有权替任何人开任何一扇门，可今夜真正要紧的，是让结衣自己决定往哪扇门走。",
+   "id": "combo_caretaker_keys",
+   "identity_ids": [
+    "junior_night_caretaker"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 2
+     },
+     "b": "neighbor_yui",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 2
+     },
+     "reason": "你常帮202修水管，知道结衣过得不好",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "artist_neighbor_sakura",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "插画师常拖欠房租，你常替插画师说好话",
+     "stage": "familiar"
+    },
+    {
+     "a": "neighbor_yui",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "artist_neighbor_sakura",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "插画师偷偷画过结衣，结衣不知道",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "neighbor_yui",
+    "artist_neighbor_sakura"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "给结衣一个能安心想清楚的地方，直到天亮。",
+    "limit_gap": "你一旦偏袒就会丢掉工作，结衣一旦被房东撞见就会成为全町的谈资。",
+    "meeting_reason": "台风夜你挨家巡查，202漏水，结衣无处可去。",
+    "resource_gap": "你有钥匙和管理员的身份，结衣有一份离婚届，插画师有一本画满了结衣的速写本。"
+   },
+   "tags": [
+    "romance_light",
+    "workplace"
+   ],
+   "tension_engine_ids": [
+    "te_old_street_vs_marriage",
+    "te_hallway_siege"
+   ]
+  },
+  {
+   "chemistry": "隔墙的座机响了，{absent_husband_ryo.name}在大阪等着有人接；{neighbor_yui.name}看着你，手里攥着那份离婚届。这一通电话，接与不接、说与不说，都是结衣自己的事——你能做的，是站在旁边。",
+   "id": "combo_call_on_the_line",
+   "identity_ids": [
+    "junior_night_caretaker",
+    "childhood_friend_illustrator"
+   ],
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "neighbor_yui",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "从小一起长大，隔了一段婚姻重新坐在一起",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 0
+     },
+     "b": "absent_husband_ryo",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 0
+     },
+     "reason": "只在结婚照上见过，却已经互相提防",
+     "stage": "stranger"
+    },
+    {
+     "a": "neighbor_yui",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 0
+     },
+     "b": "absent_husband_ryo",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "一年见不到十次面的夫妻，只剩每晚一通电话",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "neighbor_yui",
+    "absent_husband_ryo"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "让结衣在这通电话里说出自己真正想说的话。",
+    "limit_gap": "电话一露馅丈夫就会打给结衣的父母，结衣一退缩就又要再等一年。",
+    "meeting_reason": "午夜的查岗电话准时打来，结衣正在你屋里避雨。",
+    "resource_gap": "丈夫有那笔债和另一枚印章，结衣有已经盖好章的离婚届，你有一间能让人躲雨的屋子。"
+   },
+   "tags": [
+    "workplace_power",
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_phone_line_shadow",
+    "te_old_street_vs_marriage"
+   ]
+  },
+  {
+   "chemistry": "{landlady_matsumoto.name}的钥匙已经插进锁眼，{neighbor_yui.name}缩在榻榻米角落。你是这栋楼里最不起眼的住户，房东一句话就能让你搬走，可今夜屋里的人只能靠你。",
+   "id": "combo_landlady_at_the_lock",
+   "identity_ids": [
+    "shrine_carpenter"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 2
+     },
+     "b": "neighbor_yui",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "老街出来的人，小时候你帮结衣修过木屐",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 1
+     },
+     "b": "landlady_matsumoto",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "房东嫌你锯木头吵，早想让你搬走",
+     "stage": "acquainted"
+    },
+    {
+     "a": "neighbor_yui",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 1
+     },
+     "b": "landlady_matsumoto",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "房东一直在打听结衣的婚姻",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "neighbor_yui",
+    "landlady_matsumoto"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "不让房东拿结衣的事做文章，也不让自己丢掉住处。",
+    "limit_gap": "门一开结衣就会成为全町的谈资，你也会被赶出枫叶庄。",
+    "meeting_reason": "你帮202修屋顶时把结衣带回了自己屋里避雨，房东刚好巡上楼。",
+    "resource_gap": "房东有钥匙和町内会的嘴，结衣怕名声，你只有一个工具箱和一身力气。"
+   },
+   "tags": [
+    "workplace_power",
+    "workplace"
+   ],
+   "tension_engine_ids": [
+    "te_hallway_siege",
+    "te_candle_countdown"
+   ]
+  },
+  {
+   "chemistry": "洗衣棚里，{artist_neighbor_sakura.name}、{old_tatami_artisan_inoue.name}和{fire_brigade_volunteer_hayashi.name}挤在一盏蜡烛下躲雨。每个人都知道一点202的事，没人知道全部；天亮之前，你得决定要不要把它拼完整。",
+   "id": "combo_shed_three_neighbors",
+   "identity_ids": [
+    "morning_paper_deliverer",
+    "night_convenience_clerk",
+    "junior_night_caretaker"
+   ],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "artist_neighbor_sakura",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "常在楼梯口碰见，一起抽过一支烟",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 3
+     },
+     "b": "old_tatami_artisan_inoue",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 3
+     },
+     "reason": "老人常给你留一碗味噌汤",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "fire_brigade_volunteer_hayashi",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "只在町内会的防灾演练上说过几句话",
+     "stage": "acquainted"
+    },
+    {
+     "a": "artist_neighbor_sakura",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "old_tatami_artisan_inoue",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "插画师画过老人做活的样子，老人很喜欢",
+     "stage": "familiar"
+    },
+    {
+     "a": "artist_neighbor_sakura",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "fire_brigade_volunteer_hayashi",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 1
+     },
+     "reason": "团员不止一次说插画师半夜太吵",
+     "stage": "testing"
+    },
+    {
+     "a": "old_tatami_artisan_inoue",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 3
+     },
+     "b": "fire_brigade_volunteer_hayashi",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 3
+     },
+     "reason": "团员小时候常在老人的作坊里玩",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "artist_neighbor_sakura",
+    "old_tatami_artisan_inoue",
+    "fire_brigade_volunteer_hayashi"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "让大家愿意帮结衣一把，而不是只在背后议论。",
+    "limit_gap": "谁先说出口，谁就成了掺和别人家事的人。",
+    "meeting_reason": "台风眼快到了，所有人都躲到了一楼洗衣棚。",
+    "resource_gap": "插画师有速写本，老匠人有那封信，消防团员有登记表和区役所的门路。"
+   },
+   "tags": [
+    "workplace",
+    "romance_light"
+   ],
+   "tension_engine_ids": [
+    "te_hallway_siege",
+    "te_candle_countdown"
+   ]
+  },
+  {
+   "chemistry": "一根蜡烛、一张矮桌、三个人：{neighbor_yui.name}捧着热茶，{artist_neighbor_sakura.name}翻着你的旧速写本，指着最后一页问那是谁。你们谁也不欠谁，只是今夜都睡不着。",
+   "id": "combo_old_friends_equal",
+   "identity_ids": [
+    "childhood_friend_illustrator"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "neighbor_yui",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "彼此心意都懂，谁也没先开口",
+     "stage": "flirting"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "artist_neighbor_sakura",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "同行，常互相借画具",
+     "stage": "familiar"
+    },
+    {
+     "a": "neighbor_yui",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "artist_neighbor_sakura",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "插画师一直想跟结衣交朋友，今晚总算有机会",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "neighbor_yui",
+    "artist_neighbor_sakura"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在蜡烛燃尽前，把那句没说出口的话说出来。",
+    "limit_gap": "话说开了就收不回，不说开就要再等一年。",
+    "meeting_reason": "插画师借火敲门，三个人在烛光下坐了下来。",
+    "resource_gap": "结衣有离婚届，插画师有相机和画笔，你有那本画着老街的速写本。"
+   },
+   "tags": [
+    "romance_light",
+    "intimate"
+   ],
+   "tension_engine_ids": [
+    "te_old_street_vs_marriage",
+    "te_candle_countdown"
+   ]
+  },
+  {
+   "chemistry": "{landlady_matsumoto.name}要把202漏水的账算到结衣头上，{fire_brigade_volunteer_hayashi.name}要先把人撤出来再说。两个人都转头看你——你是这栋楼里唯一知道结衣今晚在哪的人。",
+   "id": "combo_lock_and_ledger",
+   "identity_ids": [
+    "morning_paper_deliverer"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 1
+     },
+     "b": "landlady_matsumoto",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "房东喜欢你勤快，常让你帮忙跑腿",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 2
+     },
+     "b": "fire_brigade_volunteer_hayashi",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 2
+     },
+     "reason": "每天早上送报都会碰见团员晨跑",
+     "stage": "acquainted"
+    },
+    {
+     "a": "landlady_matsumoto",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 1
+     },
+     "b": "fire_brigade_volunteer_hayashi",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 1
+     },
+     "reason": "团员屡次要求房东修屋顶，房东一直拖着",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "landlady_matsumoto",
+    "fire_brigade_volunteer_hayashi"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "既让团员知道人在哪里平安，又不让房东拿这件事做文章。",
+    "limit_gap": "你说错一句，结衣的事就会传遍全町；你不说，202的人就可能出危险。",
+    "meeting_reason": "你因为台风停工，在楼梯口被房东和团员一起拦住。",
+    "resource_gap": "房东有租约和钥匙，团员有登记表和撤离权，你只有一辆送报自行车和一张嘴。"
+   },
+   "tags": [
+    "workplace_power",
+    "disaster"
+   ],
+   "tension_engine_ids": [
+    "te_hallway_siege",
+    "te_old_street_vs_marriage"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_floorboard_creak",
+   "reach": "整条二楼外廊和隔壁的屋子，谁在走、往哪走，一听就知道",
+   "text": "木地板的吱呀声"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_wall_phone_ring",
+   "reach": "穿过薄木墙响彻二楼，三短两长，一声不差",
+   "text": "隔墙座机的铃声"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_street_gossip",
+   "reach": "从洗衣棚传到町内会，天亮前就会传成另一个故事",
+   "text": "老街主妇们的闲话"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "202室的已婚住户，和你在同一条老街长大；去年为了替娘家还债嫁给了大阪商社的职员，婚后一年见面不到十次，手提包里装着一份自己已经盖好章的离婚届",
+   "age_range": [
+    26,
+    31
+   ],
+   "appearance_options": [
+    "黑色中长发被雨打湿贴在颈侧，白色棉麻家居服湿了大半，抱着一床湿被子站在门口，脚趾冻得蜷起来",
+    "换上了你的旧T恤和运动裤，袖子挽了好几道，盘腿坐在榻榻米上，双手捧着一杯热茶"
+   ],
+   "decision": {
+    "avoids": [
+     "走廊上人多的时候",
+     "接那个电话"
+    ],
+    "contrast": "白天在走廊倒垃圾时连眼睛都不敢抬，夜里说起老街的事却会笑出声",
+    "core_value": "这一次要自己做决定，不再为了谁的面子或谁的债",
+    "goal_options": [
+     "在天亮前决定要不要把离婚届寄出去",
+     "把这一年没说出口的话说给你听",
+     "弄清楚你当年为什么没来婚礼"
+    ],
+    "never": [
+     "为了自保把错推到你身上"
+    ],
+    "prefers": [
+     "门关着、只点一根蜡烛、能慢慢说话的地方"
+    ],
+    "pressure_responses": {
+     "breaking": "终于哭出来，说自己再也不想接那个电话了",
+     "high": "把离婚届从包里拿出来，放在矮桌上",
+     "low": "低着头说打扰了，要是添麻烦就回走廊去",
+     "mid": "被雷声吓得一缩，抓住了你的袖子"
+    },
+    "relationship_stance": "把你当成从小最信任的人，也当成自己一直不敢多看一眼的人",
+    "withdrawal": "抱着膝盖缩在榻榻米角落，把脸埋进被子里"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "neighbor_yui",
+   "identity": {
+    "authority": "作为202室承租人之一，有权进出和处置自己名下的物品",
+    "exposure": "手提包内袋里有一张两个人小时候在老樱花树下的合影",
+    "hidden": "离婚届是上个月就盖好章的，一直没敢寄给丈夫；今夜敲门不只是因为怕打雷，是想找一个人问问，自己这么做对不对",
+    "limits": [
+     "怕被邻居说闲话，更怕老家的父母知道自己的婚姻是什么样子",
+     "一听到那三短两长的铃声，身体就会先僵住"
+    ],
+    "obligations": [
+     "午夜那通电话必须在三声内接起"
+    ],
+    "resources": [
+     "202室的钥匙和一台快没电的卡带收音机",
+     "一罐从老家带来的腌梅子"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "从小到大都站在自己这边的人",
+     "在自己说“等一下”的时候真的会等的人"
+    ],
+    "boundaries": [
+     "绝不在丈夫的电话还没挂断时有任何越界",
+     "不接受任何把收留当成人情要偿还的亲近"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "不是谁的太太，只是那个一起长大的结衣",
+    "dislikes": [
+     "摔东西的声音",
+     "替自己做决定的人"
+    ],
+    "expression": "把离婚届折好放回包里，抬头看你：“……我想好了。所以，今晚不是因为害怕。”",
+    "likes": [
+     "被叫小名",
+     "有人陪着把一件难事想清楚"
+    ],
+    "preconditions": [
+     "自己已经清楚地决定了这段婚姻的去留",
+     "门已经锁上，自己是清醒的，并且是自己先伸出手"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "202室的已婚住户，在车站前的花店兼职",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "apartment_201_tatami_room",
+     "to": 360
+    },
+    {
+     "from": 361,
+     "location_id": "apartment_202_neighbor_room",
+     "to": 720
+    },
+    {
+     "from": 721,
+     "location_id": "apartment_second_floor_wooden_hallway",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "apartment_ground_laundry_shed",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "电话响时结衣不在202，丈夫会起疑",
+      "option": "请结衣进来，先换上干衣服，等电话响了再说"
+     },
+     {
+      "cost": "结衣得独自面对那通电话，今晚想说的话可能又说不出口",
+      "option": "陪结衣回202，帮忙接水，等那通电话"
+     }
+    ],
+    "pressure": "午夜零点十分，202的座机会准时响起",
+    "trigger": "全区断电，雷声炸响，结衣抱着湿被子敲开了你的门"
+   },
+   "tags": [
+    "intimate",
+    "romance_light"
+   ],
+   "voices": {
+    "inner": "“离婚届就在包里……要是今晚能说出口就好了。”",
+    "surface": "“对不起这么晚敲门……屋顶漏得厉害，打雷好吓人。能让我在你这儿坐一会儿吗？天亮我就走。”"
+   }
+  },
+  {
+   "adult_context": "枫叶庄的房东，守寡多年，戴厚底老花镜，最看重这栋楼在町内的名声，也最爱打听住户的私事",
+   "age_range": [
+    52,
+    64
+   ],
+   "appearance_options": [
+    "穿着灰色塑料雨衣和黑雨靴，左手手电筒，右手一大串铜钥匙，钥匙一路叮当作响",
+    "摘下雨帽，花白短发湿了一半，嘴角两道深深的法令纹"
+   ],
+   "decision": {
+    "avoids": [
+     "町内会会长",
+     "深夜一个人去配电室"
+    ],
+    "contrast": "收租时笑容满面，抓到别人的错处时眼神像刀",
+    "core_value": "枫叶庄不能出丑事，谁坏了名声谁就搬走",
+    "goal_options": [
+     "逐户敲门检查漏水",
+     "弄清结衣今晚到底在哪间屋子",
+     "把202漏水的维修费算到住户头上"
+    ],
+    "never": [
+     "在没有把握时得罪手里有自己把柄的人"
+    ],
+    "prefers": [
+     "光线暗、方便偷听的楼梯拐角"
+    ],
+    "pressure_responses": {
+     "breaking": "看见违建图纸时脸色铁青，转身就走",
+     "high": "把备用钥匙插进锁眼",
+     "low": "用钥匙串敲门框，提醒检查窗户",
+     "mid": "贴在门上听，问屋里是不是有女人的声音"
+    },
+    "relationship_stance": "对单身住户处处提防，对结衣既同情又想抓把柄",
+    "withdrawal": "嘀咕着“晦气”，踩着雨靴下楼去洗衣棚避雨"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "landlady_matsumoto",
+   "identity": {
+    "authority": "可解除租约、扣押押金，台风夜可用备用钥匙开门排险",
+    "exposure": "雨衣口袋里有一本记着各户欠租和私事的小本子",
+    "hidden": "年轻时丈夫离家出走，至今最看不得别人的婚姻出问题，也最看不得别人过得比自己好",
+    "limits": [
+     "怕鬼，也怕身材高大的年轻人发火",
+     "最怕这栋楼出事上了报纸"
+    ],
+    "obligations": [
+     "台风过境前确认全栋没有漏电和坍塌"
+    ],
+    "resources": [
+     "全栋的备用钥匙",
+     "町内会妇人会里说一不二的人脉"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "能镇得住自己、又给自己留面子的人",
+     "按时交房租的人"
+    ],
+    "boundaries": [
+     "绝不让自己的房租收入受损"
+    ],
+    "desire_range": [
+     1,
+     1
+    ],
+    "desired_position": "走廊上那道手电光，也是能被说服的老街坊",
+    "dislikes": [
+     "挑剔房子老旧的住户",
+     "半夜吵闹的人"
+    ],
+    "expression": "咳了两声堆起笑：“哎呀，原来是避雨，我还以为出什么事了。”",
+    "likes": [
+     "数钞票",
+     "听别人家的闲话"
+    ],
+    "preconditions": [
+     "对方先给自己一个台阶下"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "枫叶庄产权人兼房东",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "apartment_second_floor_wooden_hallway",
+     "to": 420
+    },
+    {
+     "from": 421,
+     "location_id": "apartment_ground_laundry_shed",
+     "to": 840
+    },
+    {
+     "from": 841,
+     "location_id": "apartment_second_floor_wooden_hallway",
+     "to": 1260
+    },
+    {
+     "from": 1261,
+     "location_id": "apartment_ground_laundry_shed",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "明天全町都会知道结衣在你屋里过了夜",
+      "option": "自己开门，坦白说结衣在这里避雨"
+     },
+     {
+      "cost": "房东会在走廊尽头一直盯着这扇门",
+      "option": "隔门说自己在换衣服，请房东先查别的屋"
+     }
+    ],
+    "pressure": "三分钟内不开门，房东就会自己开",
+    "trigger": "房东的手电光卡在201的门缝底下，钥匙已经插进锁眼转了半圈"
+   },
+   "tags": [
+    "workplace_power",
+    "workplace"
+   ],
+   "voices": {
+    "inner": "“要是真让我撞见了，这栋楼下半年可就热闹了。”",
+    "surface": "“201！开门！台风巡查！刚才走廊上有拖鞋声，是不是202的太太跑你屋里去了？”"
+   }
+  },
+  {
+   "adult_context": "结衣名义上的配偶，大阪商社的营业课长，常年出差，靠每晚一通查岗电话维持对这段婚姻的控制",
+   "age_range": [
+    33,
+    40
+   ],
+   "appearance_options": [
+    "听筒里的声音带着酒气和大阪腔，背景是居酒屋的喧闹",
+    "结婚照里西装笔挺，头发梳得油亮，金丝眼镜后的眼神很冷"
+   ],
+   "decision": {
+    "avoids": [
+     "当面谈离婚",
+     "公司知道自己的家事"
+    ],
+    "contrast": "在客户面前点头哈腰，在电话里却说一不二",
+    "core_value": "体面比什么都重要，婚姻也是体面的一部分",
+    "goal_options": [
+     "打通电话，确认结衣在家",
+     "听出结衣声音不对时追问到底",
+     "无论如何不在离婚届上盖章"
+    ],
+    "never": [
+     "主动放手"
+    ],
+    "prefers": [
+     "隔着电话线说话，不用看对方的脸"
+    ],
+    "pressure_responses": {
+     "breaking": "听到“离婚届”三个字时沉默了很久，挂了电话",
+     "high": "威胁要给结衣的父母打电话",
+     "low": "在电话里吩咐结衣明天寄换洗衣服",
+     "mid": "提高嗓门问为什么这么久才接"
+    },
+    "relationship_stance": "把结衣当成自己体面的一部分，对隔壁的人充满戒备",
+    "withdrawal": "在大阪的酒店里把电话线拔了"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "absent_husband_ryo",
+   "identity": {
+    "authority": "握着结衣娘家那笔债的展期，也握着这段婚姻的另一枚印章",
+    "exposure": "公文包里有一沓用公款报销的私人发票",
+    "hidden": "其实早就知道这段婚姻撑不下去，查岗电话是唯一还能让自己觉得掌控一切的东西",
+    "limits": [
+     "新干线全线停运，今夜绝对回不了东京",
+     "最怕私生活的丑闻影响升迁"
+    ],
+    "obligations": [
+     "早上九点向总公司汇报关西的销售数字"
+    ],
+    "resources": [
+     "一份稳定的高薪和商社的人脉",
+     "结衣父母的电话号码"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "能提携自己的上司",
+     "对自己唯命是从的人"
+    ],
+    "boundaries": [
+     "绝不让家事影响升迁"
+    ],
+    "desire_range": [
+     1,
+     1
+    ],
+    "desired_position": "电话线另一头的那道阴影，也是终究要被说服放手的人",
+    "dislikes": [
+     "被反驳",
+     "被人提起能力平庸"
+    ],
+    "expression": "在电话那头沉默了很久，最后只说了一句：“……随你吧。”",
+    "likes": [
+     "在同事面前说自己家庭美满",
+     "一杯冰啤酒"
+    ],
+    "preconditions": [
+     "对方先承认自己是对的"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "商社大阪分社营业课长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "apartment_202_neighbor_room",
+     "to": 600
+    },
+    {
+     "from": 601,
+     "location_id": "apartment_second_floor_wooden_hallway",
+     "to": 1200
+    },
+    {
+     "from": 1201,
+     "location_id": "apartment_202_neighbor_room",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "结衣得在你面前听完那些难听的话",
+      "option": "陪结衣回202，站在一旁让结衣自己接"
+     },
+     {
+      "cost": "丈夫会立刻打给结衣的父母，今夜不会再平静",
+      "option": "让结衣接起电话，直接说出离婚届的事"
+     }
+    ],
+    "pressure": "铃声响满十声，丈夫就会打给房东让人去敲门",
+    "trigger": "202的座机响了，三短两长，结衣的脸一下子白了"
+   },
+   "tags": [
+    "workplace_power",
+    "coercion_theme"
+   ],
+   "voices": {
+    "inner": "“新干线停了……今晚要是出了什么事，我连赶回去都做不到。”",
+    "surface": "“喂？怎么响了五声才接？你在干什么？说话怎么喘成这样？”"
+   }
+  },
+  {
+   "adult_context": "住在对门203的插画师，挑染短发、耳朵上一排银耳钉，接漫画杂志的封面活，作息黑白颠倒，对这栋楼里每个人的故事都好奇",
+   "age_range": [
+    26,
+    32
+   ],
+   "appearance_options": [
+    "灰色背心配牛仔短裤，嘴里嚼着泡泡糖，手里转着一支炭笔，倚在门框上笑",
+    "盘腿坐在走廊栏杆边，速写本摊在膝上，借着闪电的光飞快地画"
+   ],
+   "decision": {
+    "avoids": [
+     "说教",
+     "町内会的晨会"
+    ],
+    "contrast": "看起来玩世不恭，真被人认真道谢时会耳根发红",
+    "core_value": "人活着就该照自己的心意过，别让一张纸困住一辈子",
+    "goal_options": [
+     "借火的名义敲开201的门，看看结衣还好不好",
+     "在走廊大声说笑，替你们引开房东",
+     "请结衣当一次模特，画下今晚的样子"
+    ],
+    "never": [
+     "把结衣的事告诉那个丈夫"
+    ],
+    "prefers": [
+     "热闹、随性、不讲规矩的场合"
+    ],
+    "pressure_responses": {
+     "breaking": "把速写本里结衣的那几页撕下来，交给结衣本人",
+     "high": "把相机塞回包里，认真地说自己什么都不会说出去",
+     "low": "吹个泡泡，笑说今晚的雨真带劲",
+     "mid": "探进半个身子，问需不需要帮忙"
+    },
+    "relationship_stance": "把你和结衣当成这栋楼里最有故事的两个人，想帮又怕添乱",
+    "withdrawal": "回到203锁上门，对着画布画到天亮"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "artist_neighbor_sakura",
+   "identity": {
+    "authority": "作为邻居，可以随时敲门借东西、看热闹、帮忙",
+    "exposure": "速写本里有好几张结衣在走廊上发呆的侧影",
+    "hidden": "早就看出结衣过得不好，也看出你看结衣的眼神；一直想帮忙，又怕多管闲事",
+    "limits": [
+     "截稿日就在后天，画稿卡在最后一张",
+     "嘴上什么都敢说，真遇上事却最怕伤到别人"
+    ],
+    "obligations": [
+     "台风过境前交出一组叫《雨夜》的人物速写"
+    ],
+    "resources": [
+     "一台带闪光灯的胶片相机和两盒速写纸",
+     "一只防风打火机"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "敢照自己心意活的人",
+     "对别人温柔却不软弱的人"
+    ],
+    "boundaries": [
+     "绝不画任何人不愿意被画的样子"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "那个帮忙守着门、嘴上不饶人的朋友",
+    "dislikes": [
+     "伪君子",
+     "不敢承担后果的人"
+    ],
+    "expression": "把炭笔别在耳后，眨眨眼：“改天请我吃饭吧，今晚先不算。”",
+    "likes": [
+     "被人抢走嘴里的泡泡糖",
+     "雨夜的长谈"
+    ],
+    "preconditions": [
+     "对方先拿自己当朋友"
+    ],
+    "self_control_range": [
+     3,
+     4
+    ]
+   },
+   "public_role": "对门203室的自由插画师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "apartment_second_floor_wooden_hallway",
+     "to": 360
+    },
+    {
+     "from": 361,
+     "location_id": "apartment_ground_laundry_shed",
+     "to": 780
+    },
+    {
+     "from": 781,
+     "location_id": "apartment_201_tatami_room",
+     "to": 1140
+    },
+    {
+     "from": 1141,
+     "location_id": "apartment_second_floor_wooden_hallway",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "屋里多了一个知情人",
+      "option": "请插画师进屋，一起想办法应付房东"
+     },
+     {
+      "cost": "插画师得对房东撒一个可能会被拆穿的谎",
+      "option": "请插画师回203，替你们在走廊上挡一挡"
+     }
+    ],
+    "pressure": "房东四分钟后会巡到二楼",
+    "trigger": "插画师拿着打火机靠在201门框上，看见了屋里的结衣"
+   },
+   "tags": [
+    "romance_light",
+    "workplace"
+   ],
+   "voices": {
+    "inner": "“结衣姐总算敲了别人的门……这次可别再缩回去了。”",
+    "surface": "“喂，201的，借个火呗。……哟，结衣姐也在啊，正好，我这有热咖啡。”"
+   }
+  },
+  {
+   "adult_context": "住在一楼的老榻榻米匠人，腰不好，看着结衣和你在老街长大，知道两家人当年的约定",
+   "age_range": [
+    64,
+    76
+   ],
+   "appearance_options": [
+    "穿着旧作务衣，坐在洗衣棚的小凳上敲木条，手背上全是老茧",
+    "披着蓑衣站在楼梯口，抬头看二楼的窗，眼神很清"
+   ],
+   "decision": {
+    "avoids": [
+     "吵架",
+     "管别人家的闲事"
+    ],
+    "contrast": "平时一句话都不多说，说起老街的旧事能讲一夜",
+    "core_value": "日子是自己的，谁也替不了",
+    "goal_options": [
+     "借东西给需要的人，不问为什么",
+     "等年轻人自己来开口",
+     "把那封信交给该看的人"
+    ],
+    "never": [
+     "对晚辈说谎"
+    ],
+    "prefers": [
+     "安静的手艺活",
+     "一杯热茶"
+    ],
+    "pressure_responses": {
+     "breaking": "把那封信拿出来，说早该给你们看",
+     "high": "撑着腰站起来，说要上楼看看",
+     "low": "慢慢敲着木条，说今晚雨大，屋里待着别出来",
+     "mid": "放下锤子，问是不是二楼出了什么事"
+    },
+    "relationship_stance": "把你和结衣都当成自家晚辈",
+    "withdrawal": "回到一楼屋里，点上一根蜡烛坐着"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "old_tatami_artisan_inoue",
+   "identity": {
+    "authority": "老街上德高望重，町内会的事说话有分量",
+    "exposure": "作务衣口袋里揣着那封信，信封已经发黄",
+    "hidden": "结衣出嫁那天，老人在楼下站了很久，一直后悔没有拦一下",
+    "limits": [
+     "腰伤发作，爬不了楼梯",
+     "不愿意插手年轻人的事，除非被请"
+    ],
+    "obligations": [
+     "天亮前把洗衣棚的排水沟清通"
+    ],
+    "resources": [
+     "一块干燥厚实的备用蔺草垫和几卷防水油布",
+     "两家父母当年留下的一封信"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "踏实、守信的人",
+     "愿意陪老人说话的人"
+    ],
+    "boundaries": [
+     "绝不替年轻人做决定"
+    ],
+    "desire_range": [
+     1,
+     1
+    ],
+    "desired_position": "楼下那盏一直亮着的灯",
+    "dislikes": [
+     "说话不算数的人"
+    ],
+    "expression": "把一块蔺草垫递过来：“垫上，地上凉。”",
+    "likes": [
+     "热茶",
+     "听雨"
+    ],
+    "preconditions": [
+     "对方愿意听自己把话说完"
+    ],
+    "self_control_range": [
+     5,
+     5
+    ]
+   },
+   "public_role": "一楼住户，退休的榻榻米匠人",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "apartment_ground_laundry_shed",
+     "to": 720
+    },
+    {
+     "from": 721,
+     "location_id": "apartment_second_floor_wooden_hallway",
+     "to": 1080
+    },
+    {
+     "from": 1081,
+     "location_id": "apartment_ground_laundry_shed",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "信里的事会让今夜变得更难平静",
+      "option": "接过信，带上楼和结衣一起看"
+     },
+     {
+      "cost": "老人会以为你们还没准备好",
+      "option": "先帮老人把排水沟清通，信等天亮再说"
+     }
+    ],
+    "pressure": "洗衣棚的积水二十分钟内会淹过门槛",
+    "trigger": "老人在洗衣棚叫住你，说有封信想交给你和结衣"
+   },
+   "tags": [
+    "workplace",
+    "romance_light"
+   ],
+   "voices": {
+    "inner": "“那年要是拦一下就好了……这次，不能再看着了。”",
+    "surface": "“楼上漏水了吧？来，这块垫子拿去，门缝底下塞好。”"
+   }
+  },
+  {
+   "adult_context": "町内消防团的义务团员，白天在区役所上班，台风夜挨家挨户巡查，认识这条街上的每一个人",
+   "age_range": [
+    30,
+    45
+   ],
+   "appearance_options": [
+    "穿着橙色雨衣，头盔上的灯一闪一闪，手里拿着登记板",
+    "站在楼梯口抖雨衣上的水，说话又快又清楚"
+   ],
+   "decision": {
+    "avoids": [
+     "掺和别人的家务事"
+    ],
+    "contrast": "巡查时一句废话都不说，收工后会在便利店门口跟人聊很久",
+    "core_value": "先保人，再保房子，别的天亮再说",
+    "goal_options": [
+     "确认202还能不能住人",
+     "登记每户的人数",
+     "必要时把人带去公民馆避难"
+    ],
+    "never": [
+     "在登记表上写错一个名字"
+    ],
+    "prefers": [
+     "说清楚、办利落的事"
+    ],
+    "pressure_responses": {
+     "breaking": "听说离婚届的事，低声说区役所明早八点开门",
+     "high": "说要把整栋楼的人都带去公民馆",
+     "low": "敲门问屋里几个人、有没有漏水",
+     "mid": "要求202立刻撤离"
+    },
+    "relationship_stance": "对谁都一样公事公办，又对谁都留一分人情",
+    "withdrawal": "去下一栋楼继续巡查"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "fire_brigade_volunteer_hayashi",
+   "identity": {
+    "authority": "台风期间可要求住户撤离危险房间",
+    "exposure": "登记板背面夹着一张离婚届的空白样表，是白天替别人代领的",
+    "hidden": "自己也离过婚，知道签那张纸需要多大的勇气",
+    "limits": [
+     "只管防灾，不管家事",
+     "今夜要巡完整个町，不能在一栋楼停太久"
+    ],
+    "obligations": [
+     "天亮前把全町的受灾情况报给区役所"
+    ],
+    "resources": [
+     "一份全町住户的登记表",
+     "区役所的户籍窗口夜间值班电话"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "做事干脆的人",
+     "在灾难里还会照顾别人的人"
+    ],
+    "boundaries": [
+     "巡查时绝不谈私事"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "雨夜里敲门问平安的那个人",
+    "dislikes": [
+     "拖拖拉拉的人"
+    ],
+    "expression": "把登记板夹在腋下，笑了笑：“雨停了，请你喝罐咖啡。”",
+    "likes": [
+     "热罐咖啡",
+     "雨停后的街道"
+    ],
+    "preconditions": [
+     "台风过去，彼此都下了班"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "町内消防团义务团员",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "apartment_second_floor_wooden_hallway",
+     "to": 480
+    },
+    {
+     "from": 481,
+     "location_id": "apartment_ground_laundry_shed",
+     "to": 960
+    },
+    {
+     "from": 961,
+     "location_id": "apartment_second_floor_wooden_hallway",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "登记表上会写着结衣在你屋里过夜",
+      "option": "说结衣今晚住在201"
+     },
+     {
+      "cost": "一夜都在人群里，什么话都说不出口",
+      "option": "陪结衣去公民馆避难"
+     }
+    ],
+    "pressure": "十分钟内202的人不撤出来，团员就要上报区役所",
+    "trigger": "消防团员在走廊上敲门，说202必须撤离"
+   },
+   "tags": [
+    "disaster",
+    "workplace"
+   ],
+   "voices": {
+    "inner": "“又一对熬不下去的……天亮之后，就看他们自己了。”",
+    "surface": "“消防团巡查！201屋里几个人？202漏得厉害，今晚不能住人了。”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "子夜零点，全区断电，雨势正到最猛",
+  "minute": 0
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "intimate",
+  "romance_light",
+  "infidelity",
+  "workplace",
+  "workplace_power",
+  "coercion_theme",
+  "disaster"
+ ],
+ "custom": false,
+ "customs": [
+  "进屋前把湿拖鞋鞋底朝上扣在玄关的水泥槽里，别把雨水带上榻榻米。",
+  "202的座机每到午夜就响三短两长，整条走廊都知道那是大阪打来的。",
+  "停电夜里，老街的人习惯把蜡烛放在窗边，让邻居知道这屋里有人、平安。",
+  "枫叶庄的老规矩：谁家断了粮，敲隔壁的门，隔壁不能不开。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "变压器炸裂的闷响随风在住宅区上空久久不散",
+    "门闩被推进锁槽，咔哒一声",
+    "火柴擦亮，白蜡烛在铁盘中央立起一小团暖光"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [
+    "h_yui_wet_knock",
+    "h_matsumoto_key_rattle",
+    "h_sakura_lighter_tease"
+   ],
+   "id": "a_bolt_and_candle",
+   "location_ids": [
+    "apartment_201_tatami_room"
+   ],
+   "start_minute": 5,
+   "tags": [
+    "romance_light"
+   ],
+   "title": "断电后插门点蜡"
+  },
+  {
+   "beats": [
+    "干毛巾搭上湿透的肩头",
+    "热茶在矮桌上冒着白气",
+    "速写本翻到最后一页，两个人都没说话"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "h_yui_wet_knock",
+    "h_yui_divorce_paper",
+    "h_sakura_lighter_tease"
+   ],
+   "id": "a_towel_and_tea",
+   "location_ids": [
+    "apartment_201_tatami_room"
+   ],
+   "start_minute": 20,
+   "tags": [
+    "romance_light"
+   ],
+   "title": "毛巾、热茶和旧速写本"
+  },
+  {
+   "beats": [
+    "雨靴踩过木板上的水洼",
+    "手电光在每一扇毛玻璃门上扫过",
+    "钥匙串碰在门框上，叮当作响"
+   ],
+   "duration_minutes": 35,
+   "hook_ids": [
+    "h_matsumoto_key_rattle",
+    "h_hayashi_evacuate",
+    "h_sakura_hallway_cover"
+   ],
+   "id": "a_hallway_flashlight_round",
+   "location_ids": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "start_minute": 40,
+   "tags": [
+    "workplace"
+   ],
+   "title": "走廊上的手电巡查"
+  },
+  {
+   "beats": [
+    "漏水一滴一滴砸进塑料盆",
+    "座机在黑暗里一声不响",
+    "结衣把离婚届放在电话旁边，又拿起来"
+   ],
+   "duration_minutes": 25,
+   "hook_ids": [
+    "h_ryo_drunken_call",
+    "h_yui_phone_courage"
+   ],
+   "id": "a_202_phone_watch",
+   "location_ids": [
+    "apartment_202_neighbor_room"
+   ],
+   "start_minute": 55,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "202室里等那通电话"
+  },
+  {
+   "beats": [
+    "铁皮排风管在狂风里哐当作响",
+    "老匠人递过来一块干燥的蔺草垫",
+    "巡警的警笛声从马路上呼啸而过"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [
+    "h_inoue_old_letter",
+    "h_sakura_shed_chat",
+    "h_hayashi_shed_count"
+   ],
+   "id": "a_laundry_shed_shelter",
+   "location_ids": [
+    "apartment_ground_laundry_shed"
+   ],
+   "start_minute": 75,
+   "tags": [
+    "romance_light"
+   ],
+   "title": "洗衣棚里躲雨说话"
+  },
+  {
+   "beats": [
+    "暴雨渐渐变成细雨",
+    "窗帘缝里透进一点灰白的光",
+    "离婚届被装进信封，封口压得很平"
+   ],
+   "duration_minutes": 20,
+   "hook_ids": [
+    "h_yui_divorce_paper",
+    "h_sakura_lighter_tease"
+   ],
+   "id": "a_dawn_rain_easing",
+   "location_ids": [
+    "apartment_201_tatami_room"
+   ],
+   "start_minute": 95,
+   "tags": [
+    "romance_light"
+   ],
+   "title": "雨势渐歇的黎明前"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.4,
+  "nonbinary": 0.1
+ },
+ "default_person": "second",
+ "era": "1998年夏末，八号台风登陆东京的那一夜",
+ "extends": null,
+ "forbidden_terms": [
+  "智能手机",
+  "微信",
+  "支付宝",
+  "Wi-Fi",
+  "4G",
+  "5G",
+  "苹果手机",
+  "蓝牙耳机",
+  "无人机",
+  "扫码",
+  "外卖App",
+  "网约车",
+  "高铁",
+  "平板电脑",
+  "液晶电视"
+ ],
+ "hooks": [
+  {
+   "id": "h_yui_wet_knock",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_201_tatami_room"
+   ],
+   "slot": "neighbor_yui",
+   "text": "门被轻轻敲响，闪电一亮，{neighbor_yui.name}抱着一床湿被子站在门外，头发滴着水：“对不起……屋顶漏得厉害，打雷好吓人……我今晚，不想一个人待着。”"
+  },
+  {
+   "id": "h_matsumoto_key_rattle",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_second_floor_wooden_hallway",
+    "apartment_201_tatami_room"
+   ],
+   "slot": "landlady_matsumoto",
+   "text": "{landlady_matsumoto.name}的钥匙串磕在铝门框上：“201！台风巡查！刚才走廊上有拖鞋声，开门让我看看！”"
+  },
+  {
+   "id": "h_ryo_drunken_call",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_202_neighbor_room"
+   ],
+   "slot": "absent_husband_ryo",
+   "text": "听筒里传来{absent_husband_ryo.name}带着酒气的声音：“怎么这么久才接？你在干什么？说话！”"
+  },
+  {
+   "id": "h_sakura_lighter_tease",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_201_tatami_room",
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "slot": "artist_neighbor_sakura",
+   "text": "{artist_neighbor_sakura.name}靠在门框上转着打火机：“借个火呗。……哟，结衣姐也在？那正好，我这儿有热咖啡，一起？”"
+  },
+  {
+   "id": "h_inoue_old_letter",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_ground_laundry_shed"
+   ],
+   "slot": "old_tatami_artisan_inoue",
+   "text": "{old_tatami_artisan_inoue.name}在洗衣棚里叫住你，从作务衣口袋里摸出一封发黄的信：“这东西，我早该给你们看的。”"
+  },
+  {
+   "id": "h_hayashi_evacuate",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "slot": "fire_brigade_volunteer_hayashi",
+   "text": "{fire_brigade_volunteer_hayashi.name}在走廊上抖着雨衣：“消防团！202今晚不能住人了，屋里的人在哪？”"
+  },
+  {
+   "id": "h_yui_divorce_paper",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_201_tatami_room"
+   ],
+   "slot": "neighbor_yui",
+   "text": "{neighbor_yui.name}从手提包里拿出一张折得很整齐的纸，放在矮桌上：“这个……我上个月就盖好章了。你觉得，我该寄出去吗？”"
+  },
+  {
+   "id": "h_sakura_hallway_cover",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "slot": "artist_neighbor_sakura",
+   "text": "{artist_neighbor_sakura.name}压低声音拉住你：“房东上来了。要不要我去缠住那位？我最会说废话了。”"
+  },
+  {
+   "id": "h_sakura_shed_chat",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_ground_laundry_shed"
+   ],
+   "slot": "artist_neighbor_sakura",
+   "text": "{artist_neighbor_sakura.name}坐在洗衣机上晃着腿：“说真的，你跟结衣姐，到底是怎么回事？”"
+  },
+  {
+   "id": "h_hayashi_shed_count",
+   "kind": "approach",
+   "location_ids": [
+    "apartment_ground_laundry_shed"
+   ],
+   "slot": "fire_brigade_volunteer_hayashi",
+   "text": "{fire_brigade_volunteer_hayashi.name}拿着登记板挨个点人数，点到202时停住了笔：“202的那位呢？”"
+  },
+  {
+   "id": "h_yui_phone_courage",
+   "kind": "request",
+   "location_ids": [
+    "apartment_202_neighbor_room",
+    "apartment_201_tatami_room"
+   ],
+   "slot": "neighbor_yui",
+   "text": "{neighbor_yui.name}的手悬在听筒上方，回头看你：“你能……就站在那儿吗？我想自己接，但我想有人在。”"
+  },
+  {
+   "id": "h_matsumoto_repair_bill",
+   "kind": "request",
+   "location_ids": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "slot": "landlady_matsumoto",
+   "text": "{landlady_matsumoto.name}把你拦在楼梯口：“202漏水的修理费，你替那位太太去说一声，月底要交。”"
+  },
+  {
+   "id": "h_inoue_ask_help",
+   "kind": "request",
+   "location_ids": [
+    "apartment_ground_laundry_shed"
+   ],
+   "slot": "old_tatami_artisan_inoue",
+   "text": "{old_tatami_artisan_inoue.name}撑着腰站起来：“排水沟堵了，我这把老骨头弯不下去，你帮个忙？”"
+  },
+  {
+   "id": "h_yui_window_candle",
+   "kind": "observe",
+   "location_ids": [
+    "apartment_201_tatami_room"
+   ],
+   "slot": "neighbor_yui",
+   "text": "{neighbor_yui.name}把蜡烛挪到窗边，像小时候在老街那样，然后抱着膝盖坐下，盯着那一小团光看了很久。"
+  },
+  {
+   "id": "h_matsumoto_keyhole_listen",
+   "kind": "observe",
+   "location_ids": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "slot": "landlady_matsumoto",
+   "text": "{landlady_matsumoto.name}在走廊上弯下腰，把耳朵贴在201的门上，手电光用雨衣挡着，一动不动。"
+  }
+ ],
+ "id": "rainy_night_childhood_neighbor_wife",
+ "locations": [
+  {
+   "affordances": [
+    "推上门闩，在门把上挂一条毛巾",
+    "把唯一的干被子披在发抖的人肩上",
+    "翻开旧速写本，指给对方看那条老街"
+   ],
+   "detail": "不到十平米的木造单间，泛黄的榻榻米、一张折叠矮桌、一套薄被铺；铁盘里点着唯一一根白蜡烛，暴雨拍打毛玻璃铝窗。",
+   "exits": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "id": "apartment_201_tatami_room",
+   "name": "201室六叠单间",
+   "pressure_modifiers": {
+    "p_candle_burnout": "铁盘里的蜡烛肉眼可见地矮了下去。",
+    "p_husband_midnight_call": "隔墙的座机又一次响起三短两长。"
+   },
+   "privacy": "private",
+   "tags": [
+    "romance_light",
+    "intimate"
+   ],
+   "visibility": "只有一盏烛光，两个人跪坐时膝盖几乎碰在一起，墙上的影子挨得很近。",
+   "witnesses": [
+    "bg_nosy_landlady_watch"
+   ]
+  },
+  {
+   "affordances": [
+    "赤脚踩过湿木板，不出一点声响",
+    "在闪电亮起的一瞬看清房东上了几级楼梯",
+    "把蜡烛放在窗边，告诉邻居这屋里有人"
+   ],
+   "detail": "连着六间屋子的狭长外廊，一侧是绿漆木栏杆，雨斜着泼进来积成水洼，每一块木板都会响。",
+   "exits": [
+    "apartment_201_tatami_room",
+    "apartment_202_neighbor_room",
+    "apartment_ground_laundry_shed"
+   ],
+   "id": "apartment_second_floor_wooden_hallway",
+   "name": "二楼木造外廊",
+   "pressure_modifiers": {
+    "p_landlady_drainage_patrol": "房东的雨靴声一级一级踩上了木楼梯。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace",
+    "disaster"
+   ],
+   "visibility": "漆黑一片，只有闪电亮起时才看得清走廊尽头站着谁。",
+   "witnesses": [
+    "bg_tipsy_neighbor_tanaka"
+   ]
+  },
+  {
+   "affordances": [
+    "抢在铃响十声前拿起座机听筒",
+    "从衣柜里找出干衣服和那只装着离婚届的手提包",
+    "把结婚照扣在床头柜上，或者扶正"
+   ],
+   "detail": "结衣和丈夫的住处，天花板正中漏着浑水，地上摆着两个接水的脸盆；床头柜上的结婚照蒙着一层灰，座机孤零零立在矮柜上。",
+   "exits": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "id": "apartment_202_neighbor_room",
+   "name": "隔壁202室",
+   "pressure_modifiers": {
+    "p_ceiling_leak_collapse": "天花板的灰浆鼓起一大块，裂缝正在往四周爬。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace_power",
+    "romance_light"
+   ],
+   "visibility": "没点蜡烛，只有闪电时亮时灭，屋里空得让人心里发冷。",
+   "witnesses": [
+    "bg_artist_across_hall"
+   ]
+  },
+  {
+   "affordances": [
+    "坐在洗衣机后面，等巡查的人走过去",
+    "从竹筐里翻出干燥的棉被和毛巾",
+    "借着洗衣机的轰鸣，把一直没说的话说出来"
+   ],
+   "detail": "楼梯底下半封闭的杂物棚，两台投币双桶洗衣机、几卷备用蔺草席，背风处干燥，闻得到洗衣粉和木屑的味道。",
+   "exits": [
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "id": "apartment_ground_laundry_shed",
+   "name": "一楼洗衣棚",
+   "pressure_modifiers": {
+    "p_artist_lighter_knock": "对门的插画师拎着打火机，晃悠悠下了楼。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "romance_light",
+    "workplace"
+   ],
+   "visibility": "换气窗外是院子里的泥水塘，洗衣机后面的阴影刚好容得下两个人坐着说话。",
+   "witnesses": [
+    "bg_midnight_delivery_rider"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "浅野",
+   "水野",
+   "吉冈",
+   "篠原",
+   "森下",
+   "松本",
+   "长谷川",
+   "石田",
+   "藤井",
+   "西村",
+   "小林",
+   "井上"
+  ],
+  "given_female": [
+   "结衣",
+   "美咲",
+   "真由美",
+   "绫香",
+   "千夏",
+   "美穗",
+   "遥",
+   "香织",
+   "诗织",
+   "枫",
+   "优子",
+   "由加利"
+  ],
+  "given_male": [
+   "健一",
+   "大辅",
+   "拓也",
+   "翔太",
+   "悠真",
+   "直树",
+   "亮太",
+   "浩司",
+   "康平",
+   "雄介",
+   "良",
+   "修"
+  ],
+  "given_neutral": [
+   "葵",
+   "莲",
+   "翼",
+   "阳向",
+   "真琴",
+   "奏",
+   "未来",
+   "步",
+   "零",
+   "光",
+   "晴",
+   "薰"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "{given_last}"
+   },
+   {
+    "gender": "any",
+    "pattern": "隔壁的{family}"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}桑"
+   },
+   {
+    "gender": "any",
+    "pattern": "阿{given_last}"
+   },
+   {
+    "gender": "any",
+    "pattern": "房东{family}"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "台风断电夜：1998年东京老公寓的生活流情感戏。原稿保留了青梅竹马与名存实亡婚姻的张力（infidelity），但删去了以下内容：边接丈夫查岗电话边被身后之人“颠簸”的场景（胁迫与羞辱）、房东以封口费敲诈、插画师要求旁观亲密作为帮忙条件、蜡烛熄灭后“跨越最后道德雷池”的性化出口。改为：结衣手里已有盖好章的离婚届，今夜的核心是结衣自己决定婚姻的去留；亲密只在结衣清醒、已做出决定且不把收留当人情时发生。名字池去掉了被禁的“千寻”，补足 6 个模板（新增老匠人与消防团员）、低位身份、6 组组合、会走样的传话渠道与多数 approach 钩子。",
+ "player_identities": [
+  {
+   "age_range": [
+    26,
+    32
+   ],
+   "baseline": "和结衣是从小一起长大的邻居，后来各自去了东京，又阴差阳错住进同一栋公寓。结衣结婚那天你没去，你一直没说为什么。",
+   "gender": "any",
+   "id": "childhood_friend_illustrator",
+   "reputation": "安静温和，在走廊碰见总是客气点头，眼神却藏不住",
+   "resources": [
+    "屋里唯一一根防风白蜡烛和一床干燥的厚被",
+    "一本画满老街风景的旧速写本，最后一页是结衣十七岁的侧脸"
+   ],
+   "risks": [
+    "被房东或结衣的丈夫撞见，会被说成破坏人家庭的人"
+   ],
+   "role": "和结衣在同一条老街长大的自由插画师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{given_last}"
+    },
+    {
+     "gender": "any",
+     "pattern": "201的{family}"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    34
+   ],
+   "baseline": "受房东委托在台风夜值守的管理员，手握全栋备用钥匙。你早就知道202室那对夫妻过得不好，只是一直不知道该不该管。",
+   "gender": "any",
+   "id": "junior_night_caretaker",
+   "reputation": "尽职、可靠，住户有事第一个找你",
+   "resources": [
+    "一把能开全栋房门与配电箱的通用钥匙",
+    "两支应急手电筒和几袋防汛沙袋"
+   ],
+   "risks": [
+    "滥用钥匙或偏袒住户，会被房东立刻解雇"
+   ],
+   "role": "枫叶庄的夜班管理员",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "管理员{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}君"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    34
+   ],
+   "baseline": "在神社做修缮的木工，租住在二楼最里间。你和结衣也是老街出来的，小时候帮结衣修过木屐，今夜听见202漏水的声音，第一个拎着工具箱出了门。",
+   "gender": "any",
+   "id": "shrine_carpenter",
+   "reputation": "话少、手巧，谁家坏了东西都找你",
+   "resources": [
+    "一整套木工工具和几卷防水油布",
+    "一副能扛起整扇门板的好力气"
+   ],
+   "risks": [
+    "和202的人走得太近，会被那位丈夫诬告"
+   ],
+   "role": "在老街神社修缮的木工",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "木工{given_last}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}师傅"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    25,
+    30
+   ],
+   "baseline": "刚冒雨交了班回来，手里还拎着打折便当和热毛巾。结衣常在深夜来店里买东西，你记得结衣每次都只买一人份。",
+   "gender": "any",
+   "id": "night_convenience_clerk",
+   "reputation": "体贴、话不多，常给晚归的邻居留一份热食",
+   "resources": [
+    "几条干毛巾和两罐温热的乌龙茶",
+    "一台随时能收听台风广播的便携收音机"
+   ],
+   "risks": [
+    "被卷进别人的家事里，会丢掉在这条街上安静过日子的可能"
+   ],
+   "role": "老街便利店的夜班店员",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "店员{given_last}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}桑"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    24,
+    32
+   ],
+   "baseline": "住在一楼的派报员，凌晨三点就要出门，今夜因为台风停了工。你认得这栋楼每一户的门牌，也知道每一户几点关灯。",
+   "gender": "any",
+   "id": "morning_paper_deliverer",
+   "reputation": "勤快、嘴严，老人家都叫你“好孩子”",
+   "resources": [
+    "一辆装满防水布的送报自行车",
+    "全町每家每户的门牌与作息"
+   ],
+   "risks": [
+    "说错一句话，就会在这条街上再也送不了报"
+   ],
+   "role": "凌晨送报的派报员",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "送报的{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "阿{given_last}"
+    }
+   ]
+  }
+ ],
+ "premise": "台风夜，变压器炸了，整栋枫叶庄一片漆黑。隔壁202室的结衣抱着湿透的被子敲开你的门——你们在同一条老街长大，去年结衣嫁给了常年在大阪出差的商社职员。202漏水漏得厉害，结衣怕打雷，更怕午夜那通准时打来的查岗电话。结衣的手提包里，装着一份只差对方盖章的离婚届。走廊上房东在巡查，对门的插画师在看热闹。这一夜，结衣要决定的是下一步往哪走。",
+ "pressures": [
+  {
+   "choice": "是陪结衣回去接电话，还是让结衣自己决定接不接。",
+   "exits": [
+    {
+     "cost": "你会听到那些难听的话，却什么也不能说",
+     "option": "陪结衣回202，站在门口，让结衣自己接"
+    },
+    {
+     "cost": "房东会立刻上楼，丈夫的疑心会更重",
+     "option": "不接，让电话转去房东家，天亮再说"
+    }
+   ],
+   "far": {
+    "consequence": "丈夫连夜给结衣的父母打电话，老家的人天一亮就会赶来东京。",
+    "due_days": 1,
+    "trigger": "丈夫认定结衣有事瞒着自己"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_ryo_drunken_call",
+    "h_yui_phone_courage"
+   ],
+   "id": "p_husband_midnight_call",
+   "immediate": {
+    "minutes": 3,
+    "text": "铃声穿过木墙一声接一声，结衣的手一下子攥紧了。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "apartment_201_tatami_room",
+    "apartment_202_neighbor_room"
+   ],
+   "near": {
+    "deadline_minutes": 8,
+    "text": "响满十声，电话就会转去房东家。"
+   },
+   "objective": "让结衣自己决定怎么接这通电话，以及要不要提离婚届。",
+   "source": "person",
+   "start_minute": 10,
+   "tags": [
+    "workplace_power",
+    "coercion_theme"
+   ],
+   "title": "午夜的查岗电话",
+   "trigger": "202的座机准时响起三短两长；响满十声，丈夫就会打给房东让人去敲门。"
+  },
+  {
+   "choice": "是开门坦然说明，还是隔门拖延。",
+   "exits": [
+    {
+     "cost": "房东会记下这件事，随时可能拿出来说",
+     "option": "开门，说结衣家漏水，在这里避雨"
+    },
+    {
+     "cost": "房东会在202看见空着的屋子，起更大的疑心",
+     "option": "隔门请房东先去检查202的漏水"
+    }
+   ],
+   "far": {
+    "consequence": "结衣成了全町的谈资，老家的人也会听说。",
+    "due_days": 1,
+    "trigger": "房东把今晚的事说给了町内会"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_matsumoto_key_rattle"
+   ],
+   "id": "p_landlady_drainage_patrol",
+   "immediate": {
+    "minutes": 2,
+    "text": "钥匙在锁眼里转动，铝门被拍得直颤。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "apartment_201_tatami_room",
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "near": {
+    "deadline_minutes": 6,
+    "text": "门一开，手电光就会照进屋里。"
+   },
+   "objective": "在不让结衣成为闲话的前提下应付房东。",
+   "source": "person",
+   "start_minute": 20,
+   "tags": [
+    "workplace_power",
+    "workplace"
+   ],
+   "title": "房东的备用钥匙",
+   "trigger": "房东看见201门缝里的烛光和门口的湿拖鞋，把备用钥匙插进了锁眼，要求一分钟内开门检查排水。"
+  },
+  {
+   "choice": "是下楼去找备用蜡烛，还是就着最后一点光把话说完。",
+   "exits": [
+    {
+     "cost": "走廊上会撞见房东，屋里只剩结衣一个人",
+     "option": "冒雨下楼向老匠人借蜡烛"
+    },
+    {
+     "cost": "看不见彼此的脸，有些话反而更难说",
+     "option": "吹灭残烛，坐在黑暗里听结衣说完"
+    }
+   ],
+   "far": {
+    "consequence": "蜡油烫坏了榻榻米，房东第二天要你照价赔偿。",
+    "due_days": 1,
+    "trigger": "黑暗里有人碰翻了铁盘"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_yui_divorce_paper"
+   ],
+   "id": "p_candle_burnout",
+   "immediate": {
+    "minutes": 10,
+    "text": "蜡油淌满了铁盘，火苗越来越矮。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "apartment_201_tatami_room"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "蜡烛一灭，屋里只剩雨声。"
+   },
+   "objective": "在蜡烛灭之前找到别的光，或者决定在黑暗里把话说完。",
+   "source": "nature",
+   "start_minute": 15,
+   "tags": [
+    "disaster",
+    "romance_light"
+   ],
+   "title": "最后一根蜡烛",
+   "trigger": "铁盘里的蜡烛只剩一小截，火苗在窗缝灌进来的风里乱跳，二十分钟内屋里就会一片漆黑。"
+  },
+  {
+   "choice": "是冲进去抢东西，还是拉着结衣直接撤出来。",
+   "exits": [
+    {
+     "cost": "被掉下来的灰浆砸伤了肩膀",
+     "option": "冲进202，抢出那只装着离婚届的手提包"
+    },
+    {
+     "cost": "结衣的衣服和照片都泡在了泥水里",
+     "option": "拉着结衣退回201，什么都不拿"
+    }
+   ],
+   "far": {
+    "consequence": "整栋楼被贴上危险建筑的封条，所有人都得搬去公民馆。",
+    "due_days": 1,
+    "trigger": "屋顶坍塌，雨水灌进配电线路"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_yui_phone_courage"
+   ],
+   "id": "p_ceiling_leak_collapse",
+   "immediate": {
+    "minutes": 8,
+    "text": "头顶的木梁发出吱呀的断裂声。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "apartment_202_neighbor_room",
+    "apartment_201_tatami_room"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "天花板一塌，202就彻底没法住人了。"
+   },
+   "objective": "在天花板塌下前，帮结衣抢出要紧的东西。",
+   "source": "nature",
+   "start_minute": 30,
+   "tags": [
+    "disaster",
+    "romance_light"
+   ],
+   "title": "202的天花板要塌了",
+   "trigger": "202的天花板鼓起一大块，泥水从裂缝里往下灌，随时可能整片塌下来。"
+  },
+  {
+   "choice": "是请插画师进来，还是请插画师替你们守住走廊。",
+   "exits": [
+    {
+     "cost": "屋里多了一个人，有些话就说不出口了",
+     "option": "请插画师进屋，一起喝杯热茶"
+    },
+    {
+     "cost": "插画师会要你欠一个人情",
+     "option": "请插画师在走廊上帮忙看着房东"
+    }
+   ],
+   "far": {
+    "consequence": "画里的人被街坊一眼认出，结衣成了闲话的主角。",
+    "due_days": 1,
+    "trigger": "插画师的速写在杂志上刊出"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_sakura_lighter_tease",
+    "h_sakura_hallway_cover"
+   ],
+   "id": "p_artist_lighter_knock",
+   "immediate": {
+    "minutes": 4,
+    "text": "打火机的砂轮咔哒咔哒地响。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "apartment_201_tatami_room",
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "near": {
+    "deadline_minutes": 10,
+    "text": "插画师要是在走廊上大声说笑，整栋楼的门都会打开。"
+   },
+   "objective": "决定要不要让插画师加入，以及插画师能帮上什么忙。",
+   "source": "person",
+   "start_minute": 45,
+   "tags": [
+    "romance_light",
+    "workplace"
+   ],
+   "title": "对门插画师借火",
+   "trigger": "对门的插画师拿着打火机敲门借火，看见了屋里的结衣，笑着说要不要进来坐坐。"
+  },
+  {
+   "choice": "是陪结衣等丈夫回来当面谈，还是送结衣先回老家。",
+   "exits": [
+    {
+     "cost": "你得站在门外，听两个人吵完",
+     "option": "陪结衣留下来，等丈夫回来当面递出离婚届"
+    },
+    {
+     "cost": "这件事被推迟了，丈夫回来会扑个空",
+     "option": "送结衣去车站坐车回老家"
+    }
+   ],
+   "far": {
+    "consequence": "离婚届又被收回抽屉，一切回到原样。",
+    "due_days": 1,
+    "trigger": "丈夫回来时结衣还没想清楚"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_yui_divorce_paper"
+   ],
+   "id": "p_first_train_resumes",
+   "immediate": {
+    "minutes": 15,
+    "text": "传呼机在安静的清晨哔哔作响。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "apartment_201_tatami_room",
+    "apartment_second_floor_wooden_hallway"
+   ],
+   "near": {
+    "deadline_minutes": 40,
+    "text": "两小时后，丈夫的皮鞋声就会响在木楼梯上。"
+   },
+   "objective": "在丈夫到之前，让结衣想清楚见面时要说什么。",
+   "source": "person",
+   "start_minute": 60,
+   "tags": [
+    "workplace_power",
+    "romance_light"
+   ],
+   "title": "首班新干线恢复",
+   "trigger": "天快亮时台风骤然移走，新干线宣布提前恢复，丈夫发来传呼说已经上车，两小时后到东京。"
+  }
+ ],
+ "region": "东京郊外老木造公寓枫叶庄：201室六叠单间、二楼外廊、隔壁202室与一楼洗衣棚",
+ "rules": [
+  {
+   "id": "r_apartment_noise_ordinance",
+   "text": "枫叶庄隔音规约：墙薄如纸，午夜后禁止高声喧哗、撞击墙板；违者第一次警告，第二次房东可以解约。"
+  },
+  {
+   "id": "r_typhoon_blackout_safety",
+   "text": "断电防灾守则：停电期间禁用明火炉灶，蜡烛必须放在铁盘里，远离榻榻米和纸拉门。"
+  },
+  {
+   "id": "r_landlady_night_inspection",
+   "text": "房东巡查惯例：台风夜房东可逐户敲门查看漏水，屋里无人应答时可用备用钥匙开门排险。"
+  },
+  {
+   "id": "r_divorce_seal_rule",
+   "text": "离婚届规矩：协议离婚须夫妻双方各自盖章并有两名成年证人签名，交到区役所当日生效；任何一方都不能替另一方盖章。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "旧识重逢",
+  "committed": "一起往前走",
+  "familiar": "抵足避雨",
+  "flirting": "欲言又止",
+  "intimate": "雨夜相依",
+  "stranger": "点头之交",
+  "testing": "跨过那条线"
+ },
+ "status": "released",
+ "style_hint": "木地板踩上去的吱呀声、暴雨抽打铝窗的轰响、白蜡烛熔化的气味、隔墙座机刺耳的铃声；写两个从小一起长大的人隔着一段婚姻重新面对彼此，写犹豫，也写下定决心的那一刻。",
+ "tension_engines": [
+  {
+   "id": "te_old_street_vs_marriage",
+   "text": "从小一起长大的情分，和一段名存实亡却还没结束的婚姻，在一间六叠的屋子里撞在一起。"
+  },
+  {
+   "id": "te_candle_countdown",
+   "text": "全区断电，屋里只有一根蜡烛；烛火灭了之后，就只剩雨声和彼此的呼吸。"
+  },
+  {
+   "id": "te_phone_line_shadow",
+   "text": "隔墙的座机每到整点就会响，远在大阪的那个人看不见这里，却还牵着结衣的每一根神经。"
+  },
+  {
+   "id": "te_hallway_siege",
+   "text": "房东拿着备用钥匙在走廊上来回，对门的插画师在看热闹，门里门外只隔着一层薄木板。"
+  }
+ ],
+ "title": "台风断电夜：青梅竹马的隔壁邻居",
+ "tone": [
+  "榻榻米烛光",
+  "台风断电",
+  "隔墙座机",
+  "旧街往事"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_husband_already_signed",
+   "requires": [
+    "absent_husband_ryo"
+   ],
+   "text": "丈夫的公文包里其实也装着一份离婚届，是半年前自己填好的，一直没敢寄——丈夫在大阪早有了别人，只是不想先开口当那个坏人。"
+  },
+  {
+   "category": "人事",
+   "id": "t_landlady_illegal_rooms",
+   "requires": [
+    "landlady_matsumoto"
+   ],
+   "text": "壁橱里翻出前任房客留下的消防图纸：枫叶庄二楼是房东私自改建的违章隔间，一旦被区役所知道就要拆。"
+  },
+  {
+   "category": "资源",
+   "id": "t_hidden_kerosene_heater",
+   "requires": [],
+   "text": "天花板夹层里找到前任房客封存的一台煤油暖炉和一床羽绒被，屋里终于暖和起来了。"
+  },
+  {
+   "category": "制度",
+   "id": "t_ward_office_night_window",
+   "requires": [],
+   "text": "区役所因台风开设了临时夜间窗口，户籍登记照常受理——离婚届今夜就能交，只要两名成年证人签名。"
+  },
+  {
+   "category": "时限",
+   "id": "t_trains_suspended_longer",
+   "requires": [
+    "pressure"
+   ],
+   "text": "多处山体滑坡，新干线停运延长到后天；丈夫至少两天回不了东京。"
+  },
+  {
+   "category": "关系",
+   "id": "t_parents_letter",
+   "requires": [
+    "neighbor_yui"
+   ],
+   "text": "老匠人保管的那封信是两家父母当年写的：信里说，如果结衣将来过得不好，两家都会支持结衣回来，那笔债也早就有人替结衣家还清了。"
+  },
+  {
+   "category": "意外",
+   "id": "t_phone_line_dead",
+   "requires": [],
+   "text": "雷击烧断了整条街的电话线，202的座机彻底哑了；今夜不会再有电话打来。"
+  }
+ ]
+}

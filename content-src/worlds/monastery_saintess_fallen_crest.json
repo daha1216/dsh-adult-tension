@@ -1,0 +1,2449 @@
+{
+  "schema_version": 1,
+  "id": "monastery_saintess_fallen_crest",
+  "title": "大圣堂告解夜：圣女与封印学者",
+  "extends": null,
+  "era": "西幻神圣帝国，圣辉历三百一十二年的雨季",
+  "region": "圣城大圣堂：忏悔密龛、地下圣水池、主殿石廊与圣女祈祷露台",
+  "premise": "讨伐深渊领主归来后，大圣女的左肩胛下多了一道暗紫色的咒痕。每到午夜它就灼痛发作，圣光随之黯淡；一旦被裁判所的测魔罗盘照到，就是异端火刑。全城唯一懂得封印古咒的人，是被关在忏悔室里的异端学者。黎明有万人朝圣大典，午夜终钟后偏殿落栅；门外，副审判长在巡夜，红衣枢机在等圣女失足。这一夜，圣女要决定把秘密交给谁。",
+  "tone": [
+    "圣堂烛影",
+    "暗紫咒痕",
+    "格栅告解",
+    "雨夜宵禁"
+  ],
+  "style_hint": "蜂蜡烛火在格栅上投下的细碎光影、圣袍金线摩擦的轻响、咒痕灼痛时压住的一口气、门外重铠铁靴踏过石板的回声；写信仰与真相的拉扯，写高高在上的人第一次求人。",
+  "clock_start": {
+    "label": "终钟前一刻，距偏殿落栅还有两个时辰",
+    "minute": 1380
+  },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": {
+    "female": 0.5,
+    "male": 0.4,
+    "nonbinary": 0.1
+  },
+  "stage_labels": {
+    "stranger": "隔栅相望",
+    "acquainted": "秘密在手",
+    "familiar": "并肩守夜",
+    "flirting": "话里藏光",
+    "testing": "信与不信",
+    "intimate": "卸下圣冠",
+    "committed": "同守黎明"
+  },
+  "name_pools": {
+    "family": [
+      "尤菲莉亚",
+      "西尔维娅",
+      "埃莉诺",
+      "奥蕾莉亚",
+      "罗莎琳",
+      "伊索尔德",
+      "瓦伦蒂娜",
+      "阿德莱德",
+      "维尔德",
+      "格兰特",
+      "洛林",
+      "阿什福"
+    ],
+    "given_female": [
+      "尤菲",
+      "希露菲",
+      "塞西尔",
+      "艾蕾娜",
+      "奥莉",
+      "贝雅",
+      "萝莎",
+      "薇尔",
+      "伊索",
+      "诺拉",
+      "蒂娜",
+      "艾达"
+    ],
+    "given_male": [
+      "雷恩",
+      "加百列",
+      "卢卡斯",
+      "罗兰",
+      "维克托",
+      "凯恩",
+      "达米安",
+      "尤利安",
+      "特里斯",
+      "阿德里",
+      "费利克",
+      "马蒂亚"
+    ],
+    "given_neutral": [
+      "诺亚",
+      "维尔",
+      "艾尔",
+      "希尔",
+      "尤尔",
+      "米夏",
+      "安洁",
+      "塞拉",
+      "克莱尔",
+      "雷亚",
+      "奥利",
+      "伊芙"
+    ],
+    "nickname_patterns": [
+      {
+        "pattern": "圣女{family}",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}阁下",
+        "gender": "any"
+      },
+      {
+        "pattern": "审判官{family}",
+        "gender": "any"
+      },
+      {
+        "pattern": "{given_last}修士",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}骑士长",
+        "gender": "any"
+      }
+    ],
+    "order": "given_first"
+  },
+  "rules": [
+    {
+      "id": "r_sanctuary_midnight_curfew",
+      "text": "内殿宵禁章程：午夜终钟后偏殿落下铁栅，除值守忏悔密龛的神职人员外，任何人不得在祈祷区逗留。"
+    },
+    {
+      "id": "r_saintess_inviolable_authority",
+      "text": "圣女身份宪令：圣女为神降容器，未经大主教与圣女本人许可，任何人不得搜检圣女的身体。"
+    },
+    {
+      "id": "r_inquisition_heresy_audit",
+      "text": "裁判所搜检律令：审判官有权对身带深渊秽气者实施测魔罗盘检验，罗盘指针转过三圈即可当场羁押候审。"
+    },
+    {
+      "id": "r_confession_seal",
+      "text": "告解保密誓约：在忏悔密龛内说出的话，听告者不得向任何人转述；违者褫夺圣职，告解所得不得作为定罪证据。"
+    }
+  ],
+  "customs": [
+    "进入忏悔密龛前要熄掉龛外两侧的白蜡，只留一盏暗红香灯，表示告解开始。",
+    "圣殿骑士巡夜路过时会用剑鞘轻碰石壁两下，龛内的人应低诵一句“愿圣光庇佑世人”。",
+    "侍奉修女送圣水时，会在托盘边缘压一张祈祷纸，上面写着第二天的第一件事。",
+    "大圣堂的老规矩：在圣水池边说出的誓言，第二天必须当着证人再说一遍才算数。"
+  ],
+  "player_identities": [
+    {
+      "id": "heretic_seal_scholar",
+      "role": "被羁押在忏悔室的异端古咒学者",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{given_last}学者",
+          "gender": "any"
+        },
+        {
+          "pattern": "异端{family}",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        28,
+        38
+      ],
+      "social_position": "low",
+      "baseline": "因研究深渊古咒被判终身羁押在大圣堂的学者。全城只有你读得懂那道咒痕，也只有你知道封印它需要什么——一道写在腕上的墨印、一段要念满一个时辰的古咒，以及被封印者本人的同意。",
+      "resources": [
+        "一卷亲手抄录的深渊封印古咒",
+        "一小瓶能暂时压住咒痕灼痛的没药墨水"
+      ],
+      "reputation": "穿着旧黑袍、说话很轻，连看守都承认你从不撒谎",
+      "risks": [
+        "一旦被发现替圣女施咒，你会被当成罪魁祸首绑上火刑柱"
+      ]
+    },
+    {
+      "id": "inquisition_adjutant",
+      "role": "宗教裁判所派驻大圣堂的副审判官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "审判官{family}",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}副审",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        28,
+        38
+      ],
+      "social_position": "high",
+      "baseline": "裁判所派驻大圣堂的实权副审判官，手握搜查令与测魔罗盘。你已经察觉圣女身上的异常，却还没决定这件事该交给谁来审。",
+      "resources": [
+        "一枚能感应百步内深渊秽气的纯银测魔罗盘",
+        "一份由红衣枢机签署的紧急扣押令"
+      ],
+      "reputation": "铁面无私，却以从不冤枉人著称",
+      "risks": [
+        "在没有铁证时向圣女发难，会被狂热教众当场围堵"
+      ]
+    },
+    {
+      "id": "forbidden_archive_keeper",
+      "role": "地下禁书秘阁的掌印学士",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "秘阁{given_last}",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}学士",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        30,
+        45
+      ],
+      "social_position": "equal",
+      "baseline": "守护地下禁书秘阁的学士，亲手整理过记载深渊咒痕的古籍。你不站任何一派，只是今夜被叫醒，被要求在天亮前找出一个答案。",
+      "resources": [
+        "一本记载咒痕各阶段与封印法门的羊皮古卷",
+        "通往地下圣水池的密道钥匙"
+      ],
+      "reputation": "博学而沉默，手里握着历代圣女的秘档",
+      "risks": [
+        "私藏禁书一旦被裁判所发现，会被当作异端同谋"
+      ]
+    },
+    {
+      "id": "templar_high_protector",
+      "role": "圣殿骑士团驻殿守护长",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}骑士长",
+          "gender": "any"
+        },
+        {
+          "pattern": "守护长{family}",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        30,
+        42
+      ],
+      "social_position": "high",
+      "baseline": "发誓以生命守护圣女的骑士团守护长。今夜巡查时听见忏悔室里压低的痛哼，你开始怀疑自己守护的究竟是圣女，还是圣女的秘密。",
+      "resources": [
+        "一柄刻有破邪符文的秘银长剑",
+        "大圣堂外围两百名骑士的调兵信符"
+      ],
+      "reputation": "在骑士中威望极高，对圣女的忠诚人尽皆知",
+      "risks": [
+        "若被指包庇异端，骑士勋位会被当场褫夺"
+      ]
+    },
+    {
+      "id": "herb_garden_lay_brother",
+      "role": "照管圣堂药圃的在俗修士",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{given_last}修士",
+          "gender": "any"
+        },
+        {
+          "pattern": "药圃{family}",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        26,
+        40
+      ],
+      "social_position": "low",
+      "baseline": "照管后山药圃的在俗修士，负责给圣女配安神草茶。你早发现圣女要的止痛草越来越多，却一直没敢问为什么。",
+      "resources": [
+        "一篓刚晾干的止痛草与安神香",
+        "一把能打开药圃侧门的旧钥匙"
+      ],
+      "reputation": "手巧、话少，修女们生病时第一个想到的人",
+      "risks": [
+        "配给圣女的药一旦被查出异常，第一个被问罪的就是你"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "confessional_inner_sanctum",
+      "name": "大圣堂深处的忏悔密龛",
+      "detail": "偏殿深处的黑胡桃木忏悔室，分为告解狭间与听告暗阁，中间隔着一扇雕满天使的镂空格栅，两侧挂着紫红天鹅绒帘。",
+      "privacy": "private",
+      "visibility": "只有一盏暗红香灯，格栅缝隙里能看清对面的人有没有在发抖。",
+      "witnesses": [
+        "bg_patrolling_templar_guard"
+      ],
+      "exits": [
+        "cathedral_grand_nave_corridor",
+        "sacred_baptismal_crypt_pool"
+      ],
+      "affordances": [
+        "拉上天鹅绒帘、转动黄铜门闩",
+        "隔着格栅听完一段说不出口的告解",
+        "在格栅下的活动隔板上递过去一张写好的古咒"
+      ],
+      "pressure_modifiers": {
+        "p_inquisition_compass_raid": "门外测魔罗盘的蜂鸣一下比一下尖。",
+        "p_curse_midnight_flare": "格栅那头的呼吸越来越重，香灯的火苗也跟着歪了。"
+      },
+      "tags": [
+        "workplace_power",
+        "intimate"
+      ]
+    },
+    {
+      "id": "sacred_baptismal_crypt_pool",
+      "name": "地下圣水池",
+      "detail": "顺着暗门盘旋而下的石窟，中央一池圣山引来的温泉，水面漂着白百合花瓣，四周石柱刻满退魔经文。",
+      "privacy": "private",
+      "visibility": "石壁上的荧光苔藓发出幽蓝的光，水汽让人看不清三步之外。",
+      "witnesses": [
+        "bg_whispering_candle_sister"
+      ],
+      "exits": [
+        "confessional_inner_sanctum"
+      ],
+      "affordances": [
+        "在池边石阶上铺开古咒卷轴，按经文的顺序点燃七支白蜡",
+        "用圣水打湿手帕，敷在灼痛的咒痕上",
+        "坐在石柱的阴影里，等一段古咒念完"
+      ],
+      "pressure_modifiers": {
+        "p_nave_iron_gate_lockdown": "墙上的铜水钟一滴一滴催着落栅的时辰。"
+      },
+      "tags": [
+        "romance_light",
+        "intimate"
+      ]
+    },
+    {
+      "id": "cathedral_grand_nave_corridor",
+      "name": "主殿彩窗石廊",
+      "detail": "高耸的石质长廊，一侧是数十幅圣徒彩绘玻璃窗，雨夜的闪电偶尔把整条长廊照得通亮。",
+      "privacy": "public",
+      "visibility": "每三十步一盏壁烛，铁靴踏在石板上会拖出长长的回音。",
+      "witnesses": [
+        "bg_old_bellringer"
+      ],
+      "exits": [
+        "confessional_inner_sanctum",
+        "saintess_private_chapel_balcony"
+      ],
+      "affordances": [
+        "贴着天使石柱避开巡逻骑士的火把",
+        "往忏悔室外的告解木箱里投一张纸条",
+        "借闪电的一瞬间看清帘后有几个人影"
+      ],
+      "pressure_modifiers": {
+        "p_attendant_sister_knock": "石廊另一头传来银壶碰托盘的轻响。"
+      },
+      "tags": [
+        "workplace",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "saintess_private_chapel_balcony",
+      "name": "圣女的顶层祈祷露台",
+      "detail": "大圣堂三楼专供圣女静修的露台，正对主殿二十米高的圣母像，白纱窗幔被夜风吹起，一张紫杉跪垫摆在银圣器架前。",
+      "privacy": "semi",
+      "visibility": "俯瞰整座空旷主殿，楼下的火把往哪走一目了然。",
+      "witnesses": [
+        "bg_herbalist_monk"
+      ],
+      "exits": [
+        "cathedral_grand_nave_corridor"
+      ],
+      "affordances": [
+        "在圣母像下把今夜的事说给一个人听",
+        "在圣器架上找出能掩盖秽气的天青石熏香",
+        "看楼下巡逻骑士的火把，算好落栅前的路线"
+      ],
+      "pressure_modifiers": {
+        "p_cardinal_tribunal_siege": "红衣枢机的火把队伍正在往偏殿包抄。"
+      },
+      "tags": [
+        "romance_light",
+        "workplace_power"
+      ]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "saintess_euphilia",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        26,
+        33
+      ],
+      "adult_context": "帝国光明大圣堂第一圣女，十九岁受圣冠、二十六岁率军讨伐深渊领主，归来后左肩胛下多了一道每夜灼痛的咒痕，至今瞒着所有人",
+      "public_role": "帝国大圣女兼神降代言人",
+      "appearance_options": [
+        "银白长发编成一束垂在背后，纯白圣袍滚着金线，站在烛光里像一尊不会累的雕像",
+        "摘了圣冠，坐在格栅后，额角全是冷汗，左手一直按着右肩，指节发白"
+      ],
+      "identity": {
+        "authority": "主持全城祈福大典，可推荐赦免异端，并调动圣女亲卫",
+        "resources": [
+          "一枚秘银圣女徽记与内殿通行权",
+          "祭坛密室里一瓶能救一座城的高纯度圣露"
+        ],
+        "limits": [
+          "咒痕一旦被测魔罗盘照到，就会被定为深渊魔女送上火刑柱",
+          "从不在人前示弱，越痛越要把背挺直"
+        ],
+        "obligations": [
+          "黎明时主持万人朝圣的初光大典"
+        ],
+        "exposure": "随身的丝包里藏着一瓶用来掩盖秽气的退魔圣油，已经快用完了",
+        "hidden": "从被选为圣女那天起就再没被人叫过本名；最怕的不是火刑，而是让那些跪拜的人知道神降的容器也会碎"
+      },
+      "decision": {
+        "core_value": "信众信的是圣光，不是我；但只要还站在这里，就不能让圣光在我身上熄灭",
+        "goal_options": [
+          "说服异端学者替自己封印咒痕，但不交出任何不该交的东西",
+          "在大典前决定是否向大主教坦白",
+          "弄清这道咒痕到底是诅咒，还是深渊领主留下的讯息"
+        ],
+        "pressure_responses": {
+          "low": "扬起下颌，冷冷地说这只是讨伐留下的旧伤",
+          "mid": "按着肩膀，声音发紧地问对方到底能不能封印",
+          "high": "痛得跪坐在格栅前，却仍不肯开口求救",
+          "breaking": "终于说出自己的本名，说自己撑不下去了"
+        },
+        "withdrawal": "独自去地下圣水池，把整条手臂浸在冰凉的泉水里",
+        "relationship_stance": "把对方当成唯一的希望，也当成一个必须先确认可信的陌生人",
+        "contrast": "在千级白玉阶上受万人跪拜时不动如山，在格栅后被问一句“疼吗”却红了眼眶",
+        "prefers": [
+          "门闩落下、烛火昏暗、只有两个人的告解"
+        ],
+        "avoids": [
+          "裁判所的刑具大厅",
+          "被人当众搀扶"
+        ],
+        "never": [
+          "拿圣女的身份去命令别人替自己受罪"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "不跪拜自己、只把自己当成一个会痛的人的人",
+          "在自己最狼狈时没有趁机要任何东西的人"
+        ],
+        "likes": [
+          "被叫本名",
+          "有人陪着坐到天亮"
+        ],
+        "dislikes": [
+          "满口教义的伪善者",
+          "拿秘密谈条件的人"
+        ],
+        "preconditions": [
+          "咒痕已经封住，痛楚退去，自己完全清醒",
+          "封印与亲近是两件不相干的事，对方从未把它们绑在一起"
+        ],
+        "boundaries": [
+          "绝不接受以封印或沉默为交换的亲近",
+          "骑士在门外时不让人察觉任何异样"
+        ],
+        "expression": "把圣冠摘下来放在对方膝上：“今夜，我只是尤菲。”",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "不是被跪拜的圣女，而是被平等对待的人"
+      },
+      "voices": {
+        "surface": "“异端，听说你读得懂深渊的文字。那就告诉我，这东西还能不能封住。”",
+        "inner": "“如果连这个人都救不了我……黎明的大典，我还能站得住吗。”"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 360,
+          "location_id": "confessional_inner_sanctum"
+        },
+        {
+          "from": 361,
+          "to": 780,
+          "location_id": "sacred_baptismal_crypt_pool"
+        },
+        {
+          "from": 781,
+          "to": 1140,
+          "location_id": "saintess_private_chapel_balcony"
+        },
+        {
+          "from": 1141,
+          "to": 1439,
+          "location_id": "confessional_inner_sanctum"
+        }
+      ],
+      "situation": {
+        "trigger": "终钟敲响，圣女肩胛下的咒痕骤然灼亮，圣女按着肩膀跪坐在格栅前",
+        "pressure": "副审判官的罗盘夜巡十五分钟后经过忏悔室",
+        "exits": [
+          {
+            "option": "隔着格栅递过古咒，请圣女自己决定要不要封印",
+            "cost": "封印要念满一个时辰，罗盘夜巡一定会撞上"
+          },
+          {
+            "option": "先给圣女一瓶没药墨水止痛，封印改到明夜",
+            "cost": "黎明大典时咒痕随时可能再次发作"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "inquisitor_valeria",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        29,
+        38
+      ],
+      "adult_context": "裁判所副审判长，黑红轻甲、金色高马尾，誓要清除一切深渊秽气，却也是全大陆唯一一个从未判错过案的审判官",
+      "public_role": "宗教裁判所副审判长",
+      "appearance_options": [
+        "黑红轻甲勾着银边，腰间挂着测魔罗盘和圣银镣铐，神情冷得像冬天的剑",
+        "卸了胸甲坐在石阶上，一页页翻着调查笔记，眉头始终没有松开"
+      ],
+      "identity": {
+        "authority": "对低阶神职人员拥有拘押审问权，可申请对任何人实施罗盘检验",
+        "resources": [
+          "一把能打开七处地牢与回廊铁栅的审判钥匙",
+          "一枚高敏度的测魔罗盘"
+        ],
+        "limits": [
+          "没有铁证不能对圣女动手，否则会被教众撕碎",
+          "最怕的不是深渊，而是判错一个人"
+        ],
+        "obligations": [
+          "黎明前确认主殿内没有任何深渊秽气"
+        ],
+        "exposure": "调查笔记里夹着一张圣女讨伐归来时的速写，背面写着“圣女不对劲”",
+        "hidden": "当年是因为圣女在战场上救过自己的整支小队，才从骑士转入裁判所；最怕的就是亲手把恩人送上火刑柱"
+      },
+      "decision": {
+        "core_value": "圣光容不得阴影，但定罪必须有证据",
+        "goal_options": [
+          "按程序要求圣女接受罗盘检验",
+          "找到咒痕的来源，确认是诅咒还是堕落",
+          "弄清楚那个异端学者到底在帮圣女还是在害圣女"
+        ],
+        "pressure_responses": {
+          "low": "用剑柄轻敲石柱，提醒房内注意宵禁",
+          "mid": "按住剑柄，厉声问龛内为何反锁",
+          "high": "举起罗盘对准门缝，手却在抖",
+          "breaking": "看见咒痕的那一刻跪了下去，说这是战伤，不是堕落"
+        },
+        "withdrawal": "独自站在彩窗前，任由雨打在脸上",
+        "relationship_stance": "把圣女当成恩人与调查对象，把你当成可疑的异端或关键的证人",
+        "contrast": "审讯时一个字都不放过，被人认真道谢时却会别过脸去",
+        "prefers": [
+          "程序清楚、有证人在场的审讯"
+        ],
+        "avoids": [
+          "私下的交易",
+          "被人用感情说服"
+        ],
+        "never": [
+          "在没有证据时给人定罪"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "敢在自己拔剑时讲道理的人",
+          "在信仰崩塌时还能站得笔直的人"
+        ],
+        "likes": [
+          "一起把一份卷宗读到最后一页",
+          "雨停后的石廊"
+        ],
+        "dislikes": [
+          "钻教义空子的人",
+          "拿信仰谋私的人"
+        ],
+        "preconditions": [
+          "案子已经结了，彼此之间没有审与被审的关系"
+        ],
+        "boundaries": [
+          "调查期间绝不与相关人员发展私情"
+        ],
+        "expression": "收剑入鞘，低声说：“等这件事结束，我请你喝一杯，别告诉别人。”",
+        "desire_range": [
+          1,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "先是同一边的人，再说别的"
+      },
+      "voices": {
+        "surface": "“裁判所，例行秽气排查。请开门，罗盘检验只需要一刻钟。”",
+        "inner": "“罗盘不会骗人……可我宁愿它这一次是坏的。”"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 420,
+          "location_id": "cathedral_grand_nave_corridor"
+        },
+        {
+          "from": 421,
+          "to": 840,
+          "location_id": "saintess_private_chapel_balcony"
+        },
+        {
+          "from": 841,
+          "to": 1260,
+          "location_id": "cathedral_grand_nave_corridor"
+        },
+        {
+          "from": 1261,
+          "to": 1439,
+          "location_id": "confessional_inner_sanctum"
+        }
+      ],
+      "situation": {
+        "trigger": "测魔罗盘的指针在忏悔室门外转了第一圈",
+        "pressure": "指针转满三圈，按律可以当场破门羁押",
+        "exits": [
+          {
+            "option": "开门，请副审判长亲眼看看那道咒痕的来历",
+            "cost": "从此这件事只能按裁判所的程序走"
+          },
+          {
+            "option": "隔门以告解保密誓约请副审判长等到天亮",
+            "cost": "副审判长会在门外守到天亮，谁也走不了"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "workplace"
+      ]
+    },
+    {
+      "id": "attendant_sister_cecilia",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        26,
+        34
+      ],
+      "adult_context": "侍奉圣女七年的修女，浅亚麻色卷发，嘴上没个正经，却是整座大圣堂最守得住秘密的人",
+      "public_role": "圣女行宫侍奉修女长",
+      "appearance_options": [
+        "灰蓝修女袍、白头巾，端着圣水银壶倚在门边，笑得像什么都知道",
+        "蹲在药柜前清点止痛草，嘴里低声数着，越数眉头越紧"
+      ],
+      "identity": {
+        "authority": "统管圣女行宫的日常起居、圣水更换与访客通传",
+        "resources": [
+          "一本记着圣女每夜要多少止痛草的小账",
+          "修女会里流传的所有密道和所有闲话"
+        ],
+        "limits": [
+          "圣女一旦被审，自己作为贴身侍奉会第一个被问罪",
+          "看着胆大，其实最怕被人当成只会嚼舌根的人"
+        ],
+        "obligations": [
+          "零点前把洗涤圣体用的温圣水送进内殿"
+        ],
+        "exposure": "小账最后一页写着：如果圣女不说，我就去找大主教",
+        "hidden": "七年前和圣女一起从孤儿院被选进大圣堂；那道咒痕是圣女归来那晚自己第一个发现的，一直在等圣女开口"
+      },
+      "decision": {
+        "core_value": "跟一个人就要护到底，但护到底不等于陪着一起瞒到死",
+        "goal_options": [
+          "借送圣水的名义进门，看清今晚谈到哪一步",
+          "替圣女拖住巡夜的骑士",
+          "试探你，确认你不是裁判所派来的"
+        ],
+        "pressure_responses": {
+          "low": "吐吐舌头，说今晚的雨真吵",
+          "mid": "收起笑容，问你知不知道这事会烧死多少人",
+          "high": "把那本小账拍在格栅上",
+          "breaking": "第一次在圣女面前哭，说自己等这句话等了半年"
+        },
+        "withdrawal": "躲在圣水台后擦银壶，擦到能照出人影",
+        "relationship_stance": "把你当成可能的救星，也当成需要盯紧的外人",
+        "contrast": "平时什么玩笑都敢开，真被人郑重托付时却会结巴",
+        "prefers": [
+          "热闹里只有两个人听得懂的玩笑"
+        ],
+        "avoids": [
+          "修道院的晨会",
+          "被人当成小孩看待"
+        ],
+        "never": [
+          "把圣女的秘密告诉红衣枢机"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "接得住自己玩笑、又看得穿玩笑底下那句真话的人",
+          "对圣女好、却不跪拜圣女的人"
+        ],
+        "likes": [
+          "深夜被递一杯热牛奶",
+          "被记住随口说过的小事"
+        ],
+        "dislikes": [
+          "假正经的人",
+          "拿别人真心当把柄的人"
+        ],
+        "preconditions": [
+          "圣女平安度过今夜，并且对方是真心"
+        ],
+        "boundaries": [
+          "圣女最难的时候绝不让私事添乱"
+        ],
+        "expression": "把一张祈祷纸塞进你手心：“天亮再看，现在不许看。”",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          3,
+          4
+        ],
+        "desired_position": "嘴上闹、心里认真的那个人"
+      },
+      "voices": {
+        "surface": "“圣水送来了，顺便看看圣女阁下有没有被你这个异端吓到。”",
+        "inner": "“半年了，总算有人知道了……这次别让尤菲一个人扛。”"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 300,
+          "location_id": "saintess_private_chapel_balcony"
+        },
+        {
+          "from": 301,
+          "to": 720,
+          "location_id": "cathedral_grand_nave_corridor"
+        },
+        {
+          "from": 721,
+          "to": 1140,
+          "location_id": "confessional_inner_sanctum"
+        },
+        {
+          "from": 1141,
+          "to": 1439,
+          "location_id": "sacred_baptismal_crypt_pool"
+        }
+      ],
+      "situation": {
+        "trigger": "修女端着圣水推门进来，看见圣女按着肩膀，银壶差点脱手",
+        "pressure": "巡夜骑士两分钟后会经过门口，修女惊呼一声就全完了",
+        "exits": [
+          {
+            "option": "请修女留下帮忙点蜡、递水",
+            "cost": "修女从此也是知情人，一旦事发会一起被审"
+          },
+          {
+            "option": "请修女出去替你们拖住骑士",
+            "cost": "修女要撒一个随时会被拆穿的谎"
+          }
+        ]
+      },
+      "tags": [
+        "workplace",
+        "romance_light"
+      ]
+    },
+    {
+      "id": "cardinal_ignis",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        55,
+        68
+      ],
+      "adult_context": "裁判所红衣枢机兼异端大审判官，猩红长袍、金十字法杖，一直把圣女视作夺取大主教之位的绊脚石",
+      "public_role": "宗教裁判所红衣枢机",
+      "appearance_options": [
+        "猩红长袍拖过石板，金法杖底端每走一步都在地上顿一下，深陷的眼睛像在称量人的分量",
+        "身后跟着两名举火把的黑袍执事，身上带着硫磺和熏香混在一起的气味"
+      ],
+      "identity": {
+        "authority": "拥有异端案终审权与教籍褫夺权",
+        "resources": [
+          "可封锁全殿地宫秘道的命令权",
+          "一队听命于自己的圣裁军"
+        ],
+        "limits": [
+          "没有大主教与元老院一致认可，不敢公然审判圣女",
+          "自己与深渊教派暗通书信，一旦败露同样会上火刑柱"
+        ],
+        "obligations": [
+          "大典前肃清内殿一切可疑之事"
+        ],
+        "exposure": "长袍暗袋里有几封与深渊教派往来的密信残片",
+        "hidden": "当年就是枢机把讨伐深渊领主的路线泄露了出去，圣女的咒痕本就是枢机设下的局"
+      },
+      "decision": {
+        "core_value": "教廷的权柄才是真正的神，圣洁不过是给信众看的",
+        "goal_options": [
+          "以搜查令包抄忏悔室",
+          "逼圣女在大典前交出主教金印",
+          "试探异端学者，看能不能收为己用"
+        ],
+        "pressure_responses": {
+          "low": "用法杖顿地，问圣女是否还在静思",
+          "mid": "宣读紧急搜查令",
+          "high": "命执事架起破门槌",
+          "breaking": "看见自己的密信被摆在面前时踉跄后退"
+        },
+        "withdrawal": "收起法杖退回裁判所，连夜调兵",
+        "relationship_stance": "把圣女当成猎物，把你当成可以利用的棋子",
+        "contrast": "人前满口神的慈爱，人后算的全是权柄",
+        "prefers": [
+          "火光通明、便于施压的审讯室"
+        ],
+        "avoids": [
+          "万人在场的公开大典",
+          "教皇直属骑士团"
+        ],
+        "never": [
+          "在掌控枢机院之前公开与骑士团翻脸"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "手腕比自己更狠的人",
+          "懂得利益交换的同类"
+        ],
+        "likes": [
+          "把玩主教金印",
+          "看对手自乱阵脚"
+        ],
+        "dislikes": [
+          "自命清高的人",
+          "没有利用价值的人"
+        ],
+        "preconditions": [
+          "对方拿出足以让自己上火刑柱的证据"
+        ],
+        "boundaries": [
+          "绝不拿自己的枢机席位冒险"
+        ],
+        "expression": "收起法杖假笑：“既然殿下在静修，老朽就不打扰了。”",
+        "desire_range": [
+          1,
+          1
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "门外那道猩红的阴影，也是可以被反将一军的老狐狸"
+      },
+      "voices": {
+        "surface": "“圣女殿下，深夜石廊风寒，门关得太紧可容易招来流言。开门吧。”",
+        "inner": "“只要罗盘转满三圈，那顶圣冠明天就该换人戴了。”"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 480,
+          "location_id": "saintess_private_chapel_balcony"
+        },
+        {
+          "from": 481,
+          "to": 960,
+          "location_id": "cathedral_grand_nave_corridor"
+        },
+        {
+          "from": 961,
+          "to": 1260,
+          "location_id": "saintess_private_chapel_balcony"
+        },
+        {
+          "from": 1261,
+          "to": 1439,
+          "location_id": "cathedral_grand_nave_corridor"
+        }
+      ],
+      "situation": {
+        "trigger": "红衣枢机的法杖在忏悔室门外顿了三下，身后执事已经扛来了破门槌",
+        "pressure": "三分钟后枢机就会以紧急搜查令为由下令破门",
+        "exits": [
+          {
+            "option": "隔门念出枢机密信里的一句暗语",
+            "cost": "枢机暂时退走，却会在大典上当众发难"
+          },
+          {
+            "option": "请圣女隔门以神降代言人身份命令枢机退下",
+            "cost": "圣女要当众许下一个对自己不利的承诺"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "workplace"
+      ]
+    },
+    {
+      "id": "templar_commander_roland",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        35,
+        48
+      ],
+      "adult_context": "圣殿骑士团驻殿团长，跟随圣女出征深渊，回来后一直守在偏殿门外，只认誓言不认派系",
+      "public_role": "圣殿骑士团驻殿团长",
+      "appearance_options": [
+        "重铠擦得锃亮，头盔夹在臂弯，脸上有一道深渊战役留下的旧疤",
+        "坐在偏殿门口的石阶上，长剑横在膝头，一夜没合眼"
+      ],
+      "identity": {
+        "authority": "宵禁期间对偏殿所有门禁与铁栅拥有现场处置权",
+        "resources": [
+          "偏殿铁栅的绞盘钥匙",
+          "一支只听命于自己的十二人骑士小队"
+        ],
+        "limits": [
+          "没有大主教手谕不能阻拦裁判所执法",
+          "誓言要求自己守护圣女，也要求自己守护信仰"
+        ],
+        "obligations": [
+          "落栅前确认偏殿所有人员去向"
+        ],
+        "exposure": "盔甲内衬里缝着一块深渊战役的残旗",
+        "hidden": "在深渊里亲眼看见圣女替自己挡下了那一击，那道咒痕本该落在自己身上"
+      },
+      "decision": {
+        "core_value": "誓言写什么就做什么，但誓言从没说过要把恩人交出去",
+        "goal_options": [
+          "按时巡到忏悔室门口，确认圣女平安",
+          "拒绝枢机没有大主教手谕的破门要求",
+          "落栅前把该走的人送出偏殿"
+        ],
+        "pressure_responses": {
+          "low": "用剑鞘轻碰石壁两下，等里面回话",
+          "mid": "要求龛内的人报上名字",
+          "high": "挡在门前，对枢机说没有手谕谁也不能进",
+          "breaking": "听到咒痕两个字时单膝跪地，说那一击本该是自己的"
+        },
+        "withdrawal": "回到石阶上，把长剑横在膝头",
+        "relationship_stance": "对谁都守礼，对谁都保持距离",
+        "contrast": "平时一句废话都不说，提起深渊战役时会说很久",
+        "prefers": [
+          "规矩清楚、责任分明的场合"
+        ],
+        "avoids": [
+          "教廷高层的派系之争"
+        ],
+        "never": [
+          "违背自己的誓言"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "说话算话、对小人物也讲礼貌的人",
+          "愿意替别人担下后果的人"
+        ],
+        "likes": [
+          "一碗热汤",
+          "安静的黎明"
+        ],
+        "dislikes": [
+          "拿权压人的人",
+          "让底下人背锅的人"
+        ],
+        "preconditions": [
+          "对方先证明自己不是来利用誓言的"
+        ],
+        "boundaries": [
+          "当值时绝不谈私事"
+        ],
+        "expression": "把头盔放下，递过来一块干粮：“守完这一夜，我们再说别的。”",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "守着门的那个人，也是关键时刻肯让开的那个人"
+      },
+      "voices": {
+        "surface": "“偏殿巡查。龛内的人请报上名字，落栅前我要清点人数。”",
+        "inner": "“那天在深渊里……挡下那一击的，本该是我。”"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 360,
+          "location_id": "cathedral_grand_nave_corridor"
+        },
+        {
+          "from": 361,
+          "to": 780,
+          "location_id": "saintess_private_chapel_balcony"
+        },
+        {
+          "from": 781,
+          "to": 1140,
+          "location_id": "cathedral_grand_nave_corridor"
+        },
+        {
+          "from": 1141,
+          "to": 1439,
+          "location_id": "saintess_private_chapel_balcony"
+        }
+      ],
+      "situation": {
+        "trigger": "骑士团长被枢机叫到忏悔室门口，手按剑柄却没有拔",
+        "pressure": "枢机限团长两分钟内让开，否则以包庇异端论处",
+        "exits": [
+          {
+            "option": "隔门告诉团长，咒痕是深渊战役留下的",
+            "cost": "团长会动摇，但从此也成了知情人"
+          },
+          {
+            "option": "请团长按规矩向枢机索要大主教手谕",
+            "cost": "枢机会转而去惊动大主教，事情闹得更大"
+          }
+        ]
+      },
+      "tags": [
+        "workplace",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "archbishop_aldric",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        60,
+        75
+      ],
+      "adult_context": "年迈的圣城大主教，亲手为圣女加冕，如今病重卧床，却仍是唯一能压住红衣枢机的人",
+      "public_role": "圣城大主教",
+      "appearance_options": [
+        "白发稀疏，裹着厚毯坐在祈祷露台的轮椅上，手里捻着一串磨得发亮的念珠",
+        "咳嗽得很厉害，说话却依然清楚，眼神像能看穿一切"
+      ],
+      "identity": {
+        "authority": "可签发手谕阻止任何对圣女的审判，也可宣布圣女退位",
+        "resources": [
+          "一枚大主教金印",
+          "历代圣女的秘档与封印古卷的正本"
+        ],
+        "limits": [
+          "病重，一夜只能清醒一两个时辰",
+          "一旦签手谕保圣女，就等于和枢机公开决裂"
+        ],
+        "obligations": [
+          "黎明大典上为圣女祝圣"
+        ],
+        "exposure": "床头的祈祷书里夹着一份早已写好的继任者名单",
+        "hidden": "早就知道咒痕的事，一直在等圣女自己来说，因为只有自己说出口，才不算是被揭发"
+      },
+      "decision": {
+        "core_value": "教会可以犯错，但不能对自己的孩子撒谎",
+        "goal_options": [
+          "在清醒的时辰里见圣女一面",
+          "决定签不签那份保护手谕",
+          "看清那个异端学者值不值得托付"
+        ],
+        "pressure_responses": {
+          "low": "捻着念珠，说夜里风大，让人把窗关上",
+          "mid": "要求立刻见圣女",
+          "high": "让人把金印拿来",
+          "breaking": "在手谕上按下金印，说这是自己最后一件事"
+        },
+        "withdrawal": "闭上眼睛，在轮椅上低声念经",
+        "relationship_stance": "把圣女当成自己的孩子，把你当成一个需要考验的人",
+        "contrast": "在大典上威严得不可直视，私下却会记得每个修女的名字",
+        "prefers": [
+          "安静的祈祷与坦白"
+        ],
+        "avoids": [
+          "枢机院的争吵"
+        ],
+        "never": [
+          "对神撒谎"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "诚实的人",
+          "敢在大主教面前说真话的人"
+        ],
+        "likes": [
+          "一杯热蜂蜜水",
+          "清晨第一声钟"
+        ],
+        "dislikes": [
+          "阿谀奉承的人",
+          "利用信仰的人"
+        ],
+        "preconditions": [
+          "对方愿意在自己面前说出全部实情"
+        ],
+        "boundaries": [
+          "绝不让私情影响教会的裁决"
+        ],
+        "expression": "握住对方的手，轻轻拍了两下：“孩子，说吧，我听着。”",
+        "desire_range": [
+          1,
+          1
+        ],
+        "self_control_range": [
+          5,
+          5
+        ],
+        "desired_position": "最后一个能替圣女挡住风雨的长者"
+      },
+      "voices": {
+        "surface": "“让圣女来见我。不管是什么事，今夜都要说清楚。”",
+        "inner": "“我等了半年……等圣女自己开口。”"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 600,
+          "location_id": "saintess_private_chapel_balcony"
+        },
+        {
+          "from": 601,
+          "to": 1200,
+          "location_id": "cathedral_grand_nave_corridor"
+        },
+        {
+          "from": 1201,
+          "to": 1439,
+          "location_id": "saintess_private_chapel_balcony"
+        }
+      ],
+      "situation": {
+        "trigger": "大主教在露台上醒来，让人去请圣女，说今夜必须见一面",
+        "pressure": "大主教清醒的时辰只剩不到半个时辰",
+        "exits": [
+          {
+            "option": "陪圣女去露台，把咒痕的事全部说给大主教听",
+            "cost": "封印要中断，咒痕会在路上再次发作"
+          },
+          {
+            "option": "先替圣女去见大主教，说明圣女随后就到",
+            "cost": "大主教会先问你的罪"
+          }
+        ]
+      },
+      "tags": [
+        "workplace",
+        "workplace_power"
+      ]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_patrolling_templar_guard",
+      "role": "巡夜的重装骑士",
+      "function": "obstacle",
+      "location_ids": [
+        "cathedral_grand_nave_corridor"
+      ],
+      "line": "{npc.name}每隔一刻钟巡到偏殿尽头，铁靴踏过石板，嘴里嘀咕今夜忏悔室的香灯怎么一直不灭。",
+      "gender": "any",
+      "age_range": [
+        25,
+        40
+      ],
+      "adult_context": "恪守巡夜条例的骑士团正式成员",
+      "name": null
+    },
+    {
+      "id": "bg_old_bellringer",
+      "role": "提摇铃的老司铎",
+      "function": "rumor_source",
+      "location_ids": [
+        "confessional_inner_sanctum"
+      ],
+      "line": "{npc.name}一边熄蜡一边说，裁判所今天下午往地牢搬了一整车铁链，谁也不知道要锁谁。",
+      "gender": "any",
+      "age_range": [
+        58,
+        72
+      ],
+      "adult_context": "在大圣堂敲钟四十年的老司铎",
+      "name": null
+    },
+    {
+      "id": "bg_whispering_candle_sister",
+      "role": "添油剪烛的修女",
+      "function": "witness",
+      "location_ids": [
+        "sacred_baptismal_crypt_pool"
+      ],
+      "line": "{npc.name}捧着烛台走过池边，看见水汽里有两个人影，赶紧低头绕开。",
+      "gender": "any",
+      "age_range": [
+        24,
+        35
+      ],
+      "adult_context": "负责深夜添油剪烛的正式修女",
+      "name": null
+    },
+    {
+      "id": "bg_herbalist_monk",
+      "role": "背药篓的修道士",
+      "function": "messenger",
+      "location_ids": [
+        "saintess_private_chapel_balcony"
+      ],
+      "line": "{npc.name}在露台晾着草药，高声提醒楼下的执事，再过两刻钟偏殿就要落栅了。",
+      "gender": "any",
+      "age_range": [
+        28,
+        50
+      ],
+      "adult_context": "照管后山花圃的修道士",
+      "name": null
+    },
+    {
+      "id": "bg_templar_squire",
+      "role": "抱着头盔的骑士侍从",
+      "function": "helper",
+      "location_ids": [
+        "cathedral_grand_nave_corridor"
+      ],
+      "line": "{npc.name}在转角等着，说只要有团长的口信，随时可以去后山修道院借两匹快马。",
+      "gender": "any",
+      "age_range": [
+        22,
+        28
+      ],
+      "adult_context": "已宣誓入团的成年骑士侍从",
+      "name": null
+    },
+    {
+      "id": "bg_inquisition_scribe",
+      "role": "抱卷宗的裁判所书记",
+      "function": "witness",
+      "location_ids": [
+        "confessional_inner_sanctum"
+      ],
+      "line": "{npc.name}把一份搜查卷宗从门缝塞进来，抬头看见格栅后的人影，转身就走。",
+      "gender": "any",
+      "age_range": [
+        25,
+        40
+      ],
+      "adult_context": "替裁判所抄写审讯记录的书记",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_cathedral_bell_chime",
+      "text": "主塔午夜圣钟",
+      "reach": "全城都能听见，落栅与大典的时辰按钟声原样报出",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_stone_corridor_echo",
+      "text": "石廊里的铁靴回声",
+      "reach": "整条主殿长廊，谁往哪扇门走，听得一清二楚",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_sisterhood_whisper",
+      "text": "修女会里口口相传的闲话",
+      "reach": "全殿修女与执事，天亮前就能传到圣城的集市",
+      "fidelity": "distorted"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_curse_secret_who_tells",
+      "text": "咒痕是真的，问题只剩由谁、在什么时候、用什么方式说出来：圣女自己坦白、裁判所揭发、还是被枢机拿去夺权。"
+    },
+    {
+      "id": "te_nave_curfew_countdown",
+      "text": "午夜终钟后偏殿落栅，封印要念满一个时辰；在铁栅落下之前没走的人，就得在偏殿里待到黎明。"
+    },
+    {
+      "id": "te_inquisition_siege",
+      "text": "副审判官在门外等罗盘转满三圈，红衣枢机在石廊里等一个借口，门内门外只隔一扇雕花木门。"
+    },
+    {
+      "id": "te_oath_vs_mercy",
+      "text": "骑士、修女、审判官都欠圣女一条命，也都发过守护信仰的誓；今夜每个人都得在誓言与恩情之间选一次。"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_inquisitor_holds_the_key",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "inquisition_adjutant"
+      ],
+      "slots": [
+        "saintess_euphilia",
+        "attendant_sister_cecilia"
+      ],
+      "tension_engine_ids": [
+        "te_curse_secret_who_tells",
+        "te_oath_vs_mercy"
+      ],
+      "chemistry": "你握着罗盘和扣押令，站在{saintess_euphilia.name}面前；{attendant_sister_cecilia.name}端着圣水挡在门边，没走。你有权一句话结束这一切，可今夜真正难的，是要不要给对方一个自己开口的机会。",
+      "stakes": {
+        "resource_gap": "你有罗盘与扣押令，圣女有神降身份与圣露，修女有半年的止痛草小账。",
+        "limit_gap": "罗盘一旦转满三圈就再无回头，圣女一旦被羁押就失去坦白的主动权。",
+        "meeting_reason": "夜巡时罗盘在忏悔室门外动了，你推门进去，正撞上咒痕发作。",
+        "irreplaceable_goal": "在黎明大典前，让真相以对信众伤害最小的方式说出来。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "saintess_euphilia",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 3
+          },
+          "reason": "圣女救过你的命，如今你却握着能审判圣女的罗盘"
+        },
+        {
+          "a": "player",
+          "b": "attendant_sister_cecilia",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 3
+          },
+          "reason": "修女怕你，又不得不信你"
+        },
+        {
+          "a": "saintess_euphilia",
+          "b": "attendant_sister_cecilia",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 2
+          },
+          "reason": "从孤儿院一起被选进来的人，彼此都在等对方先说"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "intimate"
+      ]
+    },
+    {
+      "id": "combo_door_between_two_oaths",
+      "power_structure": "switchable",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "templar_high_protector",
+        "forbidden_archive_keeper"
+      ],
+      "slots": [
+        "saintess_euphilia",
+        "inquisitor_valeria"
+      ],
+      "tension_engine_ids": [
+        "te_inquisition_siege",
+        "te_curse_secret_who_tells"
+      ],
+      "chemistry": "{inquisitor_valeria.name}在门外举着罗盘，{saintess_euphilia.name}在门内按着肩膀。门一开，事情就交给裁判所；门不开，就得有人先把咒痕的来历说清楚。",
+      "stakes": {
+        "resource_gap": "审判官有程序与罗盘，圣女有神降身份，你有古卷或骑士的誓言。",
+        "limit_gap": "程序一旦启动圣女只能受审，拖得太久审判官会把你也列为同谋。",
+        "meeting_reason": "罗盘夜巡恰好在咒痕发作时巡到忏悔室门口。",
+        "irreplaceable_goal": "让圣女和审判官隔着格栅，把深渊战役那一夜从头说一遍。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "saintess_euphilia",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 2
+          },
+          "reason": "你守护圣女多年，今夜第一次知道圣女瞒着这么大的事"
+        },
+        {
+          "a": "player",
+          "b": "inquisitor_valeria",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 3
+          },
+          "reason": "审判官不确定你是证人还是共犯"
+        },
+        {
+          "a": "saintess_euphilia",
+          "b": "inquisitor_valeria",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 2
+          },
+          "reason": "审判官的整支小队曾被圣女救下，如今却要来审圣女"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "workplace"
+      ]
+    },
+    {
+      "id": "combo_scholar_behind_the_grille",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "heretic_seal_scholar"
+      ],
+      "slots": [
+        "saintess_euphilia",
+        "cardinal_ignis"
+      ],
+      "tension_engine_ids": [
+        "te_inquisition_siege",
+        "te_nave_curfew_countdown"
+      ],
+      "chemistry": "{cardinal_ignis.name}的火把在石廊里越来越近，想要的不是真相而是圣冠；{saintess_euphilia.name}隔着格栅看着你手里的古咒。你是整座大圣堂地位最低的人，却握着唯一能决定今夜怎么收场的东西。",
+      "stakes": {
+        "resource_gap": "枢机有搜查令与圣裁军，圣女有神降身份，你只有一卷古咒和一瓶墨水。",
+        "limit_gap": "封印被枢机撞破你会被当作施咒者烧死，咒痕不封圣女会在大典上倒下。",
+        "meeting_reason": "圣女今夜第一次走进你的忏悔室，枢机恰好在同一夜带兵巡查。",
+        "irreplaceable_goal": "不让咒痕变成枢机夺权的工具，同时让圣女自己决定要不要封印。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "saintess_euphilia",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 3
+          },
+          "reason": "圣女当年在判决书上签过字，今夜却要来求你"
+        },
+        {
+          "a": "player",
+          "b": "cardinal_ignis",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 2
+          },
+          "reason": "当年就是枢机判你终身羁押"
+        },
+        {
+          "a": "saintess_euphilia",
+          "b": "cardinal_ignis",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 3
+          },
+          "reason": "名义上的同僚，实际上的夺位者"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_nave_three_vigils",
+      "power_structure": "switchable",
+      "player_positions": [
+        "low",
+        "equal",
+        "high"
+      ],
+      "identity_ids": [
+        "herb_garden_lay_brother",
+        "forbidden_archive_keeper",
+        "templar_high_protector"
+      ],
+      "slots": [
+        "inquisitor_valeria",
+        "attendant_sister_cecilia",
+        "templar_commander_roland"
+      ],
+      "tension_engine_ids": [
+        "te_oath_vs_mercy",
+        "te_nave_curfew_countdown"
+      ],
+      "chemistry": "偏殿落栅前的石廊里，{inquisitor_valeria.name}、{attendant_sister_cecilia.name}和{templar_commander_roland.name}都被困在了同一盏壁烛下。每个人都知道一点，没人知道全部；你得在铁栅落下前把碎片拼起来。",
+      "stakes": {
+        "resource_gap": "审判官有罗盘，修女有小账，骑士团长有绞盘钥匙。",
+        "limit_gap": "三人互相防着，谁先开口谁就要担后果。",
+        "meeting_reason": "雨夜宵禁，所有人都被困在偏殿石廊。",
+        "irreplaceable_goal": "让三个人愿意把各自知道的说出来。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "inquisitor_valeria",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 2
+          },
+          "reason": "审判官问过你几次话，你每次都答得很小心"
+        },
+        {
+          "a": "player",
+          "b": "attendant_sister_cecilia",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 1
+          },
+          "reason": "修女常来找你拿东西，顺便聊几句"
+        },
+        {
+          "a": "player",
+          "b": "templar_commander_roland",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 1
+          },
+          "reason": "团长认得你，每次见面都点头"
+        },
+        {
+          "a": "inquisitor_valeria",
+          "b": "attendant_sister_cecilia",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 3
+          },
+          "reason": "一个要查，一个要护，见面就过招"
+        },
+        {
+          "a": "inquisitor_valeria",
+          "b": "templar_commander_roland",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 2
+          },
+          "reason": "深渊战役的旧战友，如今各守一边"
+        },
+        {
+          "a": "attendant_sister_cecilia",
+          "b": "templar_commander_roland",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 1
+          },
+          "reason": "修女每次守夜都给团长送一碗热汤"
+        }
+      ],
+      "tags": [
+        "workplace",
+        "romance_light"
+      ]
+    },
+    {
+      "id": "combo_archive_equal_counsel",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "forbidden_archive_keeper"
+      ],
+      "slots": [
+        "saintess_euphilia",
+        "archbishop_aldric"
+      ],
+      "tension_engine_ids": [
+        "te_curse_secret_who_tells",
+        "te_nave_curfew_countdown"
+      ],
+      "chemistry": "{archbishop_aldric.name}在露台上等着，{saintess_euphilia.name}在楼下迟迟不肯上来。你不属于任何一方，只是那个读过古卷、知道咒痕从哪来的人。",
+      "stakes": {
+        "resource_gap": "大主教有金印与手谕，圣女有神降身份，你有古卷与密道钥匙。",
+        "limit_gap": "大主教清醒的时辰有限，圣女一旦错过这次就再没有坦白的机会。",
+        "meeting_reason": "大主教半夜醒来，派人叫醒了你，要你在天亮前给出答案。",
+        "irreplaceable_goal": "让圣女在大主教清醒时亲口说出咒痕的事。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "saintess_euphilia",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 2
+          },
+          "reason": "圣女常来秘阁借书，却从没说过为什么"
+        },
+        {
+          "a": "player",
+          "b": "archbishop_aldric",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 1
+          },
+          "reason": "大主教当年把秘阁交给了你"
+        },
+        {
+          "a": "saintess_euphilia",
+          "b": "archbishop_aldric",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 2
+          },
+          "reason": "亲手加冕的长者与不敢开口的晚辈"
+        }
+      ],
+      "tags": [
+        "workplace",
+        "romance_light"
+      ]
+    },
+    {
+      "id": "combo_gate_chain_of_command",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "herb_garden_lay_brother"
+      ],
+      "slots": [
+        "cardinal_ignis",
+        "templar_commander_roland"
+      ],
+      "tension_engine_ids": [
+        "te_inquisition_siege",
+        "te_oath_vs_mercy"
+      ],
+      "chemistry": "{cardinal_ignis.name}要{templar_commander_roland.name}立刻破门，团长要大主教手谕，两个人都转头看向你——你篓里那些止痛草，正好能证明圣女这半年在忍着什么。",
+      "stakes": {
+        "resource_gap": "枢机有权柄与圣裁军，团长有绞盘钥匙与誓言，你只有一篓草药和一把旧钥匙。",
+        "limit_gap": "你站错边会被当成同谋，团长违令会被褫夺勋位。",
+        "meeting_reason": "你送止痛草来偏殿，被宵禁困在了门口，正赶上枢机要求破门。",
+        "irreplaceable_goal": "让破门的要求回到正当程序，而不是谁的火把多听谁的。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "cardinal_ignis",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 2
+          },
+          "reason": "枢机把你当成随手能用的小修士"
+        },
+        {
+          "a": "player",
+          "b": "templar_commander_roland",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 1
+          },
+          "reason": "团长的旧伤一直是你配的药"
+        },
+        {
+          "a": "cardinal_ignis",
+          "b": "templar_commander_roland",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 3
+          },
+          "reason": "一个要破门，一个要手谕"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "a_confessional_curtain_draw",
+      "title": "终钟前拉上告解帘",
+      "location_ids": [
+        "confessional_inner_sanctum"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "终钟的余音在石柱间慢慢散去",
+        "紫红天鹅绒帘被拉死，外面的烛光一下子没了",
+        "黄铜门闩扣上，发出一声沉沉的响"
+      ],
+      "hook_ids": [
+        "h_saintess_grille_ask",
+        "h_valeria_compass_knock",
+        "h_cecilia_holy_water",
+        "h_ignis_staff_raid"
+      ],
+      "start_minute": 1385,
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "a_seal_rite_by_the_pool",
+      "title": "圣水池边的封印古咒",
+      "location_ids": [
+        "sacred_baptismal_crypt_pool"
+      ],
+      "duration_minutes": 60,
+      "beats": [
+        "七支白蜡沿池边点起，火光映在水面上",
+        "没药墨水在腕上画出第一道印",
+        "古咒念到一半，咒痕的灼痛终于退了一点"
+      ],
+      "hook_ids": [
+        "h_saintess_true_name",
+        "h_cecilia_holy_water"
+      ],
+      "start_minute": 1395,
+      "tags": [
+        "romance_light"
+      ]
+    },
+    {
+      "id": "a_nave_compass_patrol",
+      "title": "石廊里的罗盘夜巡",
+      "location_ids": [
+        "cathedral_grand_nave_corridor"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "铁靴在磨光的石板上踏出整齐的声响",
+        "罗盘指针在每一扇门前轻轻颤一下",
+        "剑鞘在圣徒石像的底座上敲了两下"
+      ],
+      "hook_ids": [
+        "h_valeria_compass_knock",
+        "h_cecilia_ledger_slip",
+        "h_ignis_staff_raid",
+        "h_roland_gate_count"
+      ],
+      "start_minute": 1410,
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "a_balcony_old_man_waits",
+      "title": "露台上等人的大主教",
+      "location_ids": [
+        "saintess_private_chapel_balcony"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "夜风把白纱窗幔吹得鼓起来",
+        "念珠一颗一颗在枯瘦的指间滑过",
+        "楼下有人在叫圣女的名字，又停了"
+      ],
+      "hook_ids": [
+        "h_aldric_summons",
+        "h_roland_old_wound",
+        "h_saintess_balcony_silhouette"
+      ],
+      "start_minute": 1420,
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "a_grille_long_confession",
+      "title": "格栅后的长告解",
+      "location_ids": [
+        "confessional_inner_sanctum"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "香灯的火苗被呼吸吹得一歪",
+        "格栅那头的人说起深渊战役的最后一夜",
+        "说到一半停住了，很久才接上下一句"
+      ],
+      "hook_ids": [
+        "h_saintess_grille_ask",
+        "h_valeria_shared_scroll",
+        "h_cecilia_holy_water"
+      ],
+      "start_minute": 1430,
+      "tags": [
+        "romance_light"
+      ]
+    },
+    {
+      "id": "a_pre_gate_last_round",
+      "title": "落栅前的最后一圈",
+      "location_ids": [
+        "cathedral_grand_nave_corridor"
+      ],
+      "duration_minutes": 20,
+      "beats": [
+        "绞盘铁索开始吱呀转动",
+        "壁烛一盏接一盏被剪灭",
+        "骑士团长站在铁栅下，最后清点一次人数"
+      ],
+      "hook_ids": [
+        "h_roland_gate_count",
+        "h_ignis_staff_raid",
+        "h_cecilia_ledger_slip",
+        "h_valeria_compass_knock"
+      ],
+      "start_minute": 1435,
+      "tags": [
+        "workplace"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_curse_midnight_flare",
+      "title": "午夜咒痕发作",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "confessional_inner_sanctum",
+        "sacred_baptismal_crypt_pool"
+      ],
+      "trigger": "终钟一响，圣女肩胛下的咒痕灼亮，圣光随之黯淡；若在大典前不封住，万人面前圣女会连祝圣的光都放不出来。",
+      "objective": "在黎明前封住咒痕，或者想出另一种让圣女撑过大典的办法。",
+      "choice": "是现在就开始一个时辰的封印古咒，还是先止痛、把封印留到明夜。",
+      "immediate": {
+        "text": "圣女按着肩膀跪坐下来，额角的冷汗滴在格栅上。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "咒痕的暗紫光已经透出圣袍，再拖下去连香灯都遮不住。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "咒痕在大典上当众发作",
+        "consequence": "万人看见圣女的圣光熄灭，枢机当场以异端之名要求审判。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "去圣水池边点燃七支白蜡，开始一个时辰的古咒",
+          "cost": "封印期间谁都不能离开，宵禁巡查一定会撞上"
+        },
+        {
+          "option": "只用没药墨水压住灼痛，陪圣女熬到天亮",
+          "cost": "咒痕只是被压住，大典上随时可能再发"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_saintess_grille_ask"
+      ],
+      "start_minute": 1380,
+      "tags": [
+        "workplace_power",
+        "romance_light"
+      ]
+    },
+    {
+      "id": "p_inquisition_compass_raid",
+      "title": "副审判官的罗盘破门令",
+      "source": "institution",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "confessional_inner_sanctum",
+        "cathedral_grand_nave_corridor"
+      ],
+      "trigger": "罗盘指针在忏悔室门外转了第二圈，副审判官已拔剑一寸，转满三圈便可依律破门羁押。",
+      "objective": "决定是开门让程序进来，还是以告解保密誓约争取时间。",
+      "choice": "是现在开门，还是隔门请审判官等到天亮。",
+      "immediate": {
+        "text": "罗盘的蜂鸣透过门板，尖得刺耳。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "审判官已叫来第二名书记作见证。",
+        "deadline_minutes": 10
+      },
+      "far": {
+        "trigger": "罗盘转满三圈",
+        "consequence": "圣女被当场戴上圣银镣铐押往地牢，失去坦白的机会。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "开门，请审判官坐下来听圣女说完深渊战役",
+          "cost": "从此每句话都会被记进卷宗"
+        },
+        {
+          "option": "隔门宣告告解保密誓约，并报上自己的名字",
+          "cost": "你的名字会被写进审判官的笔记"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_valeria_compass_knock"
+      ],
+      "start_minute": 1395,
+      "tags": [
+        "workplace_power",
+        "workplace"
+      ]
+    },
+    {
+      "id": "p_nave_iron_gate_lockdown",
+      "title": "偏殿铁栅落下",
+      "source": "institution",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "cathedral_grand_nave_corridor",
+        "saintess_private_chapel_balcony"
+      ],
+      "trigger": "守殿骑士已拉动绞盘，执事通报再过一刻钟偏殿铁栅落下，到清晨初光礼拜才会升起。",
+      "objective": "决定谁出去、谁留下，以及封印在哪里完成。",
+      "choice": "是赶在落栅前把圣女送回行宫，还是留在偏殿里把封印念完。",
+      "immediate": {
+        "text": "壁烛一盏接一盏熄灭，绞盘铁索吱呀作响。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "铁栅落下后，只有大主教的手谕能让它提前升起。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "落栅时圣女仍不在行宫",
+        "consequence": "清晨点名时圣女缺席，流言在大典前传遍全城。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "护送圣女在铁栅落下前回到行宫",
+          "cost": "封印中断，咒痕会在路上再次发作"
+        },
+        {
+          "option": "留在偏殿，把封印念完",
+          "cost": "要在封闭的偏殿里守到天亮，并想好清晨怎么解释"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_roland_gate_count"
+      ],
+      "start_minute": 1410,
+      "tags": [
+        "disaster",
+        "workplace"
+      ]
+    },
+    {
+      "id": "p_attendant_sister_knock",
+      "title": "侍奉修女的圣水与试探",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "confessional_inner_sanctum",
+        "cathedral_grand_nave_corridor"
+      ],
+      "trigger": "侍奉修女端着圣水敲门，说枢机的执事正在石廊里打听今夜圣女在哪。",
+      "objective": "弄清修女站在哪一边，以及修女知道多少。",
+      "choice": "是请修女进来坦白，还是请修女出去替你们挡人。",
+      "immediate": {
+        "text": "门外银壶轻碰托盘，一句压低的“是我”。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "执事一刻钟后会来行宫查圣女是否就寝。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "修女被执事盘问时说漏了嘴",
+        "consequence": "枢机提前知道咒痕的事，抢在圣女坦白前召集了枢机院。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "请修女进来，把那本止痛草小账也带来",
+          "cost": "行宫无人值守，执事会起疑"
+        },
+        {
+          "option": "请修女回行宫，替圣女应付执事的盘问",
+          "cost": "修女要撒一个可能会被拆穿的谎"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_cecilia_holy_water"
+      ],
+      "start_minute": 1420,
+      "tags": [
+        "workplace",
+        "romance_light"
+      ]
+    },
+    {
+      "id": "p_cardinal_tribunal_siege",
+      "title": "红衣枢机的火把包抄",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "cathedral_grand_nave_corridor",
+        "confessional_inner_sanctum"
+      ],
+      "trigger": "红衣枢机带着执事与破门槌进了偏殿，声称接到密报有人在忏悔室施行深渊邪术。",
+      "objective": "在不交出圣女的前提下，让枢机退回去。",
+      "choice": "是拿出枢机通敌的密信当面对质，还是请圣女以神降代言人身份压下去。",
+      "immediate": {
+        "text": "法杖在门外石板上重重顿了三下。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "枢机已派人去请大主教签搜查手谕。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "枢机破门撞见封印古咒",
+        "consequence": "你被当场以施行邪术论处，圣女被扣上包庇异端的罪名。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "把枢机密信的残片从门缝递出去",
+          "cost": "密信从此不在自己手里，枢机随时可能派人来抢"
+        },
+        {
+          "option": "请圣女隔门许诺大典后交出一处教区",
+          "cost": "圣女一系要割掉一块领地"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_ignis_staff_raid"
+      ],
+      "start_minute": 1435,
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "p_storm_window_collapse",
+      "title": "雷击震碎彩窗",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "confessional_inner_sanctum",
+        "sacred_baptismal_crypt_pool"
+      ],
+      "trigger": "一道雷劈中尖塔十字架，偏殿上方的彩绘玻璃整片碎落，暴雨裹着碎玻璃灌进来。",
+      "objective": "护住所有人退到地下圣水池，并保住古咒卷轴。",
+      "choice": "是先护人，还是先抢卷轴。",
+      "immediate": {
+        "text": "彩窗炸开的脆响和暴雨一起砸进来，烛火全灭了。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "碎石堵住了上方的木梯，偏殿与外面断了联系。",
+        "deadline_minutes": 25
+      },
+      "far": {
+        "trigger": "雨水灌进地下秘阁",
+        "consequence": "封印古卷的正本被泡毁，往后再没有人能完整施咒。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "先护着圣女退到圣水池，再回来抢卷轴",
+          "cost": "卷轴有几页被雨水泡花了"
+        },
+        {
+          "option": "先抢卷轴，再去找人",
+          "cost": "圣女被碎玻璃划伤了手臂"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_saintess_true_name"
+      ],
+      "start_minute": 1439,
+      "tags": [
+        "disaster",
+        "romance_light"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "h_saintess_grille_ask",
+      "kind": "approach",
+      "slot": "saintess_euphilia",
+      "location_ids": [
+        "confessional_inner_sanctum"
+      ],
+      "text": "{saintess_euphilia.name}隔着格栅坐下，按着右肩，声音很平：“我听说你读得懂深渊的文字。我不求你，我只问你——这东西封得住吗？”"
+    },
+    {
+      "id": "h_valeria_compass_knock",
+      "kind": "approach",
+      "slot": "inquisitor_valeria",
+      "location_ids": [
+        "cathedral_grand_nave_corridor",
+        "confessional_inner_sanctum"
+      ],
+      "text": "罗盘的蜂鸣贴着门缝响起，{inquisitor_valeria.name}的声音冷得像剑：“裁判所，例行排查。请开门，罗盘检验只要一刻钟。”"
+    },
+    {
+      "id": "h_cecilia_holy_water",
+      "kind": "approach",
+      "slot": "attendant_sister_cecilia",
+      "location_ids": [
+        "confessional_inner_sanctum",
+        "cathedral_grand_nave_corridor",
+        "sacred_baptismal_crypt_pool"
+      ],
+      "text": "{attendant_sister_cecilia.name}端着圣水倚在门框上，目光扫过圣女按着的肩膀，笑意淡了：“圣水送来了。顺便问一句——你是来救人的，还是来审人的？”"
+    },
+    {
+      "id": "h_ignis_staff_raid",
+      "kind": "approach",
+      "slot": "cardinal_ignis",
+      "location_ids": [
+        "cathedral_grand_nave_corridor",
+        "confessional_inner_sanctum"
+      ],
+      "text": "{cardinal_ignis.name}的法杖在门外顿了三下：“圣女殿下，老朽接到密报，说这里有人在施深渊邪术。请开门。”"
+    },
+    {
+      "id": "h_roland_gate_count",
+      "kind": "approach",
+      "slot": "templar_commander_roland",
+      "location_ids": [
+        "cathedral_grand_nave_corridor"
+      ],
+      "text": "{templar_commander_roland.name}站在铁栅下，手按绞盘：“一刻钟后落栅。走不走，你们自己定。”"
+    },
+    {
+      "id": "h_aldric_summons",
+      "kind": "approach",
+      "slot": "archbishop_aldric",
+      "location_ids": [
+        "saintess_private_chapel_balcony"
+      ],
+      "text": "{archbishop_aldric.name}在轮椅上睁开眼，咳了两声：“去请圣女来。不管是什么事，今夜我都要听圣女亲口说。”"
+    },
+    {
+      "id": "h_saintess_true_name",
+      "kind": "approach",
+      "slot": "saintess_euphilia",
+      "location_ids": [
+        "sacred_baptismal_crypt_pool"
+      ],
+      "text": "{saintess_euphilia.name}把手臂浸在圣水里，没回头：“十九岁以后，就再没人叫过我的本名。你愿意叫一次吗？”"
+    },
+    {
+      "id": "h_valeria_shared_scroll",
+      "kind": "approach",
+      "slot": "inquisitor_valeria",
+      "location_ids": [
+        "confessional_inner_sanctum"
+      ],
+      "text": "{inquisitor_valeria.name}在格栅另一侧坐下，把罗盘放在膝上：“好，我听。但听完之后该怎么判，我还是会怎么判。”"
+    },
+    {
+      "id": "h_cecilia_ledger_slip",
+      "kind": "approach",
+      "slot": "attendant_sister_cecilia",
+      "location_ids": [
+        "cathedral_grand_nave_corridor"
+      ],
+      "text": "{attendant_sister_cecilia.name}在石廊尽头拦住你，塞过来一本小账：“半年了，止痛草一天比一天多。今晚要是没人开口，我就去找大主教。”"
+    },
+    {
+      "id": "h_roland_old_wound",
+      "kind": "approach",
+      "slot": "templar_commander_roland",
+      "location_ids": [
+        "saintess_private_chapel_balcony"
+      ],
+      "text": "{templar_commander_roland.name}把头盔放在石栏上，低声问你：“那道伤……是不是深渊里那一击留下的？”"
+    },
+    {
+      "id": "h_saintess_ask_one_night",
+      "kind": "request",
+      "slot": "saintess_euphilia",
+      "location_ids": [
+        "confessional_inner_sanctum"
+      ],
+      "text": "{saintess_euphilia.name}站起来，第一次没有用圣女的口气：“给我一夜。大典之后，我自己去向大主教坦白。如果我食言，你再说出去。”"
+    },
+    {
+      "id": "h_ignis_side_deal",
+      "kind": "request",
+      "slot": "cardinal_ignis",
+      "location_ids": [
+        "cathedral_grand_nave_corridor"
+      ],
+      "text": "{cardinal_ignis.name}在石廊阴影里压低声音：“学者，把那卷古咒交给老朽，你的异端罪名明天就能赦免。这对谁都好。”"
+    },
+    {
+      "id": "h_aldric_seal_offer",
+      "kind": "request",
+      "slot": "archbishop_aldric",
+      "location_ids": [
+        "saintess_private_chapel_balcony"
+      ],
+      "text": "{archbishop_aldric.name}把金印推到你面前：“这份手谕能保圣女平安过大典。可我得先知道，你值不值得我信。”"
+    },
+    {
+      "id": "h_saintess_balcony_silhouette",
+      "kind": "observe",
+      "slot": "saintess_euphilia",
+      "location_ids": [
+        "saintess_private_chapel_balcony"
+      ],
+      "text": "{saintess_euphilia.name}一个人站在圣母像下，背挺得笔直，左手却一直按着右肩，按得指节发白。"
+    },
+    {
+      "id": "h_valeria_notes_pause",
+      "kind": "observe",
+      "slot": "inquisitor_valeria",
+      "location_ids": [
+        "cathedral_grand_nave_corridor"
+      ],
+      "text": "{inquisitor_valeria.name}站在彩窗下，把调查笔记里那张速写翻过来看了很久，又夹了回去。"
+    }
+  ],
+  "twists": [
+    {
+      "id": "t_curse_is_a_message",
+      "category": "信息",
+      "requires": [
+        "saintess_euphilia"
+      ],
+      "text": "古卷最后一页写着：这类咒痕不是堕落的印记，而是深渊领主临死前留下的坐标——它指向的，正是通敌泄露讨伐路线的那个人。"
+    },
+    {
+      "id": "t_valeria_filed_preservation",
+      "category": "人事",
+      "requires": [
+        "inquisitor_valeria"
+      ],
+      "text": "副审判官半年前就已秘密申请封存深渊战役的全部卷宗；审判官早在查这件事，只是一直在等圣女自己开口。"
+    },
+    {
+      "id": "t_original_scroll_found",
+      "category": "资源",
+      "requires": [],
+      "text": "秘阁深处找到了封印古咒的原本，按原本施咒只需要半个时辰，而且不再需要没药墨水。"
+    },
+    {
+      "id": "t_confession_amnesty",
+      "category": "制度",
+      "requires": [],
+      "text": "圣座今年颁布了自陈宽宥令：神职人员在被揭发前主动坦白身上的深渊伤痕，可免于火刑——期限正是今日黎明。"
+    },
+    {
+      "id": "t_gate_drops_early",
+      "category": "时限",
+      "requires": [
+        "pressure"
+      ],
+      "text": "暴雨冲坏了偏殿的承重石梁，执事决定把落栅提前半个时辰。"
+    },
+    {
+      "id": "t_sister_saintess_old_promise",
+      "category": "关系",
+      "requires": [
+        "saintess_euphilia",
+        "attendant_sister_cecilia"
+      ],
+      "text": "修女说出了孤儿院的旧事：被选进大圣堂那天，圣女对修女说过，“要是有一天我做错了，你要第一个告诉我。”"
+    },
+    {
+      "id": "t_gate_winch_snaps",
+      "category": "意外",
+      "requires": [],
+      "text": "雷击劈断了绞盘钢索，铁栅卡死在地槽里，偏殿里外都出不去，只能等清晨的工匠来拆。"
+    }
+  ],
+  "forbidden_terms": [
+    "手机",
+    "电话",
+    "微信",
+    "高铁",
+    "飞机",
+    "电脑",
+    "互联网",
+    "Wi-Fi",
+    "警官",
+    "手枪",
+    "香烟",
+    "出租车",
+    "身份证",
+    "电梯",
+    "空调",
+    "蓝牙"
+  ],
+  "content_tags": [
+    "intimate",
+    "romance_light",
+    "workplace",
+    "workplace_power",
+    "coercion_theme",
+    "disaster"
+  ],
+  "status": "released",
+  "notes": "大圣堂告解夜：西幻宗教政治戏。原稿核心是“深渊淫纹令圣女午夜发情、神志迷离，异端修士以秘术抚摸为条件掌控其身心”，属于非清醒状态下的亲密与以救治换性，另有幼态侍奉修女、后宫修罗场与性化出口，已整体重写：咒痕改为每夜灼痛、令圣光黯淡的战伤诅咒，封印是一段要念满一个时辰的古咒加腕上墨印，与亲密无关；新增“告解保密誓约”规则。侍奉修女改为与圣女同龄的成年修女长。补足 6 个模板（新增骑士团长与大主教）、低位身份、6 组组合、会走样的传话渠道与多数 approach 钩子。"
+}

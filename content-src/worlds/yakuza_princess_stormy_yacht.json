@@ -1,0 +1,1331 @@
+{
+  "schema_version": 1,
+  "id": "yakuza_princess_stormy_yacht",
+  "title": "暴风雨中的黑龙丸：极道千金与贴身保镖",
+  "extends": null,
+  "era": "当代，公海上一场热带气旋的深夜",
+  "region": "私人游艇黑龙丸：底层防弹避难室、轮机走廊、主甲板套房与后甲板停机坪",
+  "premise": "热带气旋撕开公海的夜，游艇黑龙丸副机受损抛锚，船上的护卫若头带人叛变。龙神会第四代继承人九条明步左肩中弹，被贴身保镖护进底层防弹避难室。门外，叛徒在逐舱搜人，要的是瑞士账户的密钥；驾驶室里，老舵手腹部中枪还死死握着舵轮。失血让明步发起高烧，却仍用命令的口气说话。这一夜，主仆的规矩、活下去的办法、谁来接掌龙神会，都要在天亮前定下来。",
+  "tone": ["怒海孤舟", "防弹暗室", "主仆之间", "叛乱之夜"],
+  "style_hint": "巨浪砸在防弹舷窗上的闷响、船身倾斜时滚过地毯的酒瓶、应急红灯下渗血的纱布、门外军靴踩过积水的声音；写高位者在最狼狈时仍不肯低头，写守护者第一次越过规矩说出自己的想法。",
+  "clock_start": {
+    "label": "子夜零点，副机停摆，甲板上的枪声暂时停了",
+    "minute": 0
+  },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": {
+    "female": 0.5,
+    "male": 0.45,
+    "nonbinary": 0.05
+  },
+  "stage_labels": {
+    "stranger": "主仆有别",
+    "acquainted": "患难与共",
+    "familiar": "近身相护",
+    "flirting": "话里带刺",
+    "testing": "越过规矩",
+    "intimate": "风浪相依",
+    "committed": "并肩掌舵"
+  },
+  "name_pools": {
+    "family": ["九条", "桐生", "真岛", "冴岛", "风间", "堂岛", "锦山", "黑岩", "伊达", "世良", "菅井", "胜矢"],
+    "given_female": ["明步", "冴子", "由美", "薰", "真澄", "静香", "雅美", "美羽", "奈奈", "绘里", "丽华", "沙织"],
+    "given_male": ["一马", "吾朗", "大河", "修平", "龙司", "慎吾", "健二", "隆史", "宗介", "大介", "胜弘", "孝之"],
+    "given_neutral": ["司", "怜", "莲", "夜", "影", "刹那", "苍", "戒", "岚", "凛", "镜", "渚"],
+    "nickname_patterns": [
+      {"pattern": "{family}大小姐", "gender": "any"},
+      {"pattern": "若头{family}", "gender": "any"},
+      {"pattern": "{given_last}头目", "gender": "any"},
+      {"pattern": "保镖{family}", "gender": "any"},
+      {"pattern": "阿{given_last}", "gender": "any"}
+    ],
+    "order": "family_first"
+  },
+  "rules": [
+    {
+      "id": "r_yakuza_code_of_subordination",
+      "text": "龙神会家规：保镖对当家直系必须绝对服从，以下犯上者断指谢罪；但家规第一条写着，护主之命高于一切礼数。"
+    },
+    {
+      "id": "r_watertight_compartment_protocol",
+      "text": "游艇水密隔离规程：主副机停摆时，底层避难室的水密门一旦从内侧锁死，外面无法用寻常工具打开。"
+    },
+    {
+      "id": "r_mutiny_terms",
+      "text": "叛乱者的规矩：密钥到手之前不许伤继承人性命；密钥到手之后，船上不留活口。"
+    },
+    {
+      "id": "r_succession_witness",
+      "text": "继承见证规矩：当家换代须有两名以上直系老臣在场见证，见证人亲口承认，新当家才算数。"
+    }
+  ],
+  "customs": [
+    "进避难室前，保镖要先交出主武器，单膝跪地，等大小姐叫自己的名字。",
+    "大小姐下令时习惯用涂着黑色甲油的食指点一下对方的胸口。",
+    "九条家的满背刺青只给生死与共的人看，外人多看一眼都算冒犯。",
+    "船身倾斜时，保镖要先护住大小姐的头，再顾自己。"
+  ],
+  "player_identities": [
+    {
+      "id": "sworn_bodyguard",
+      "role": "九条家的首席贴身保镖",
+      "gender": "any",
+      "title_patterns": [
+        {"pattern": "保镖{family}", "gender": "any"},
+        {"pattern": "阿{given_last}", "gender": "any"}
+      ],
+      "age_range": [26, 34],
+      "social_position": "low",
+      "baseline": "年满十八那年进了九条家，从那以后只做一件事：站在大小姐身后。今夜你把中弹的大小姐背进了避难室，第一次发现自己守护的这个人，也会害怕。",
+      "resources": [
+        "一把贴身的陶瓷战术匕首和两个备用弹匣",
+        "一只从医务室抢出来的急救箱"
+      ],
+      "reputation": "冷静、寡言，在关东黑道里出了名的不怕死",
+      "risks": [
+        "越过主仆的规矩，天亮后要按家规断指谢罪"
+      ]
+    },
+    {
+      "id": "tactical_navigator",
+      "role": "黑龙丸的退役特战大副",
+      "gender": "any",
+      "title_patterns": [
+        {"pattern": "大副{family}", "gender": "any"},
+        {"pattern": "{family}君", "gender": "any"}
+      ],
+      "age_range": [30, 40],
+      "social_position": "equal",
+      "baseline": "受雇驾驶这艘游艇的航海专家，熟悉船上每一条管线。你不属于龙神会，只想让船上活着的人都活到天亮。",
+      "resources": [
+        "整艘船的管线蓝图",
+        "一把能控制水密门和空调的工程主钥匙"
+      ],
+      "reputation": "沉着、专业，对黑道的规矩敬而远之",
+      "risks": [
+        "天亮前修不好副机，整艘船会在风暴里倾覆"
+      ]
+    },
+    {
+      "id": "undercover_secretary",
+      "role": "大小姐身边的机要秘书，也是关西派来的卧底",
+      "gender": "any",
+      "title_patterns": [
+        {"pattern": "秘书{family}", "gender": "any"},
+        {"pattern": "{given_last}", "gender": "any"}
+      ],
+      "age_range": [27, 34],
+      "social_position": "equal",
+      "baseline": "表面上是大小姐最信任的秘书，实际上是关西派来的卧底。今夜叛乱提前爆发，连你的上线都没通知你；你得决定自己到底站哪一边。",
+      "resources": [
+        "一台加密的单兵发报机",
+        "一套能破解保险柜的电子探针"
+      ],
+      "reputation": "文质彬彬、心思缜密，深得大小姐信任",
+      "risks": [
+        "卧底身份一旦暴露，两边都不会放过你"
+      ]
+    },
+    {
+      "id": "hired_ronin_swordsman",
+      "role": "九条家重金聘来的独行剑客",
+      "gender": "any",
+      "title_patterns": [
+        {"pattern": "{family}先生", "gender": "any"},
+        {"pattern": "剑客{given_last}", "gender": "any"}
+      ],
+      "age_range": [30, 42],
+      "social_position": "high",
+      "baseline": "不属于任何组的雇佣剑客，只认契约和实力。今夜你的契约写的是“保九条明步平安到岸”，而整艘船上，只有你不必听任何人的命令。",
+      "resources": [
+        "一柄定制的太刀和一身古流剑术",
+        "一张记着叛徒海外账户的软盘"
+      ],
+      "reputation": "桀骜不驯，却从不违约",
+      "risks": [
+        "不受任何一方约束，随时可能被两边一起当成威胁"
+      ]
+    },
+    {
+      "id": "ship_galley_cook",
+      "role": "黑龙丸的船厨",
+      "gender": "any",
+      "title_patterns": [
+        {"pattern": "厨师{family}", "gender": "any"},
+        {"pattern": "阿{given_last}", "gender": "any"}
+      ],
+      "age_range": [25, 40],
+      "social_position": "low",
+      "baseline": "在黑龙丸上做了三年饭的船厨，叛乱开始时躲进了冷库。你知道船上每个人爱吃什么，也知道叛徒们今晚在厨房里说了什么。",
+      "resources": [
+        "一把剁骨刀和一串冷库钥匙",
+        "整艘船的储粮和淡水存量"
+      ],
+      "reputation": "手艺好、嘴严，船员都叫你“老板”",
+      "risks": [
+        "被叛徒发现偷听过他们的计划，就会被灭口"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "yacht_lower_armored_panic_room",
+      "name": "底层防弹避难室",
+      "detail": "水线以下的避难室，四壁是十公分厚的复合装甲，正中一张固定在甲板上的黑色皮沙发，角落里有急救箱和一只雪茄柜；应急红灯把整间屋子染成暗红。",
+      "privacy": "private",
+      "visibility": "红灯下看得清伤口的血色，也看得清对方在强撑，暴风雨的撞击在舱壁外变成闷雷。",
+      "witnesses": ["bg_hammer_enforcer"],
+      "exits": ["yacht_bilge_engineering_corridor"],
+      "affordances": [
+        "从里面转动六道锁舌，锁死水密门",
+        "打开急救箱，清创、止血、换纱布",
+        "让发着烧的人靠在自己肩上，听船身的动静"
+      ],
+      "pressure_modifiers": {
+        "p_wound_fever_spike": "红灯下，伤口的纱布又渗出了一圈血。",
+        "p_hatch_breach_charge": "门外传来金属切割和安装炸药的声音。"
+      },
+      "tags": ["intimate", "workplace_power"]
+    },
+    {
+      "id": "yacht_bilge_engineering_corridor",
+      "name": "轮机走廊",
+      "detail": "充满机油蒸汽的底层通道，管道在颠簸中嘶嘶漏气，铁格栅地面下积着随船身左右晃荡的海水，红色故障灯一闪一闪。",
+      "privacy": "public",
+      "visibility": "蒸汽遮住视线，踩在铁格栅上的每一步都会暴露位置。",
+      "witnesses": ["bg_traitor_lieutenant_shadow"],
+      "exits": ["yacht_lower_armored_panic_room", "yacht_main_deck_owners_stateroom"],
+      "affordances": [
+        "拧开泄压阀，用蒸汽挡住追兵",
+        "躲在管线的阴影里等巡逻的人走过去",
+        "拉下手动排水阀，把积水排出船外"
+      ],
+      "pressure_modifiers": {
+        "p_mutineer_sweep": "叛徒的枪灯正顺着走廊一间一间往这边照。"
+      },
+      "tags": ["violence", "disaster"]
+    },
+    {
+      "id": "yacht_main_deck_owners_stateroom",
+      "name": "主甲板当家套房",
+      "detail": "两百平米的海景套房，两面防弹舷窗外是翻滚的黑浪，真皮大床、翻倒的水晶杯、散落一地的账册，墙上挂着九条家历代家主传下来的太刀。",
+      "privacy": "semi",
+      "visibility": "闪电一亮，整间套房像白昼，风暴的咆哮震耳欲聋。",
+      "witnesses": ["bg_loyal_family_doctor"],
+      "exits": ["yacht_bilge_engineering_corridor", "yacht_open_stern_helipad_deck"],
+      "affordances": [
+        "从刀架上取下家传的太刀",
+        "在酒柜暗格里打开卫星通讯终端",
+        "隔着监控分屏看驾驶室里的老舵手"
+      ],
+      "pressure_modifiers": {
+        "p_engine_room_flooding": "右舷配电室的海水正往套房下面的电缆井里灌。"
+      },
+      "tags": ["workplace_power", "romance_light"]
+    },
+    {
+      "id": "yacht_open_stern_helipad_deck",
+      "name": "后甲板停机坪",
+      "detail": "直面风暴的露天平台，狂风卷着暴雨抽打甲板，系留绳绷得嗡嗡作响，栏杆外就是看不见底的黑海。",
+      "privacy": "public",
+      "visibility": "视线不到五米，只有桅杆上的红色防撞灯在雨幕里闪。",
+      "witnesses": ["bg_rival_sniper"],
+      "exits": ["yacht_main_deck_owners_stateroom"],
+      "affordances": [
+        "冒着被卷下海的危险割断直升机的系留绳",
+        "向夜空打出九条家的三联红色信号弹",
+        "抓住栏杆，顶着风浪把人拉回来"
+      ],
+      "pressure_modifiers": {
+        "p_freighter_collision_course": "雷达上，一艘失控的散货轮正顺着洋流朝这边漂来。"
+      },
+      "tags": ["disaster", "violence"]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "yakuza_heiress_akaho",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [27, 34],
+      "adult_context": "关东龙神会第四代唯一继承人，从小被当成接班人养大，杀伐决断、从不示弱；今夜被亲信伏击，左肩中弹，失血发烧，仍坚持亲自指挥",
+      "public_role": "龙神会第四代继承人兼黑龙商事执行董事",
+      "appearance_options": [
+        "乌黑长发被冷汗打湿贴在颈侧，黑西装左肩洇开一大片血，右手仍握着一把手枪，下巴抬得很高",
+        "西装外套搭在沙发扶手上，只剩一件黑色背心，左肩缠着纱布，背上露出一角夜叉牡丹的刺青，脸色白得吓人"
+      ],
+      "identity": {
+        "authority": "对龙神会三万组员与四百家关联企业拥有最终决定权",
+        "resources": [
+          "一枚刻着九曜纹的当家戒指",
+          "瑞士账户的物理密钥"
+        ],
+        "limits": [
+          "失血和高烧让手越来越抖，枪都快握不住了",
+          "从不在属下面前示弱，宁可昏过去也不喊疼"
+        ],
+        "obligations": ["天亮前夺回黑龙丸，主持换代"],
+        "exposure": "公文夹里有一份老当家病危时写给自己的遗嘱原件",
+        "hidden": "从来没有选择过要不要当这个继承人；最怕的不是死，而是死的时候身边没有一个不是因为家规才留下的人"
+      },
+      "decision": {
+        "core_value": "我是九条家的明步，龙神会不能断在我手里",
+        "goal_options": [
+          "撑到天亮，亲自带人夺回驾驶室",
+          "弄清这次叛乱背后是谁",
+          "在换代之前，决定谁才是自己真正信得过的人"
+        ],
+        "pressure_responses": {
+          "low": "抬着下巴说，把门锁死，别用那种眼神看我",
+          "mid": "疼得一缩，咬着牙说这点伤算不了什么",
+          "high": "枪从手里滑下去，抓住保镖的袖子不放",
+          "breaking": "终于说出自己害怕，说不想一个人死在这里"
+        },
+        "withdrawal": "裹紧西装缩在沙发角落，盯着门一言不发",
+        "relationship_stance": "把保镖当成最后一道墙，也当成这些年唯一一个从没骗过自己的人",
+        "contrast": "在组员面前一句话能让人断指，在避难室里被问一句“疼不疼”却半天说不出话",
+        "prefers": ["门锁死、只有一盏灯、只有两个人的地方"],
+        "avoids": ["在叛徒面前露出一丝虚弱", "被人碰到伤口"],
+        "never": ["向叛徒低头或出卖忠于自己的人"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在枪林弹雨里始终挡在自己身前的人",
+          "敢在自己面前说“不”、却从不越过自己意愿的人"
+        ],
+        "likes": ["被直接叫名字", "有人陪着熬到天亮"],
+        "dislikes": ["唯唯诺诺的属下", "说一套做一套的人"],
+        "preconditions": [
+          "烧已经退了，伤口包扎好，自己完全清醒",
+          "门已锁死，外面暂时安全，并且是自己先开口"
+        ],
+        "boundaries": [
+          "绝不在高烧或神志不清时有任何越界",
+          "不接受因为救命之恩而来的亲近"
+        ],
+        "expression": "摘下九曜戒指放进你掌心：“天亮之后我是当家。现在，我只是明步。”",
+        "desire_range": [2, 4],
+        "self_control_range": [3, 5],
+        "desired_position": "不是被效忠的主人，而是被选择的人"
+      },
+      "voices": {
+        "surface": "“跪什么跪，过来。把急救箱拿来，替我把这件西装剪开——手别抖。”",
+        "inner": "“好冷……这个人要是也背叛我，我就真的什么都没有了。”"
+      },
+      "schedule": [
+        {"from": 0, "to": 360, "location_id": "yacht_lower_armored_panic_room"},
+        {"from": 361, "to": 720, "location_id": "yacht_main_deck_owners_stateroom"},
+        {"from": 721, "to": 1080, "location_id": "yacht_bilge_engineering_corridor"},
+        {"from": 1081, "to": 1439, "location_id": "yacht_open_stern_helipad_deck"}
+      ],
+      "situation": {
+        "trigger": "明步跌坐在避难室的沙发上，左肩的血已经浸透了西装，门外传来军靴声",
+        "pressure": "失血再不止住，十二分钟内就会休克",
+        "exits": [
+          {"option": "剪开西装清创止血，按住伤口直到血止住", "cost": "明步疼得昏过去一阵，醒来时会记得是谁一直在旁边"},
+          {"option": "先用止血带勒住，再去走廊找医生", "cost": "明步要独自在避难室里待几分钟，门外随时可能有人来"}
+        ]
+      },
+      "tags": ["intimate", "workplace_power"]
+    },
+    {
+      "id": "traitor_lieutenant_shibata",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [40, 50],
+      "adult_context": "黑龙丸的武装护卫若头，老当家的旧部，脸上一道刀疤；受关西重金收买发动叛乱，目标是瑞士账户的密钥",
+      "public_role": "黑龙丸安保若头，今夜的叛乱头目",
+      "appearance_options": [
+        "黑色战术背心、迷彩裤、军靴，手里一把装着消音器的冲锋枪，刀疤从眉骨一直划到嘴角",
+        "站在走廊尽头叼着雪茄，用枪灯一扇门一扇门地照"
+      ],
+      "identity": {
+        "authority": "指挥船上三十名叛变的枪手",
+        "resources": [
+          "定向爆破炸药和气割焊枪",
+          "游艇武器库的全部存货"
+        ],
+        "limits": [
+          "拿到密钥之前不敢伤大小姐的命",
+          "怕风暴把船掀翻，自己也一起沉下去"
+        ],
+        "obligations": ["清晨五点前控制全船，等关西的船来接应"],
+        "exposure": "背心内袋里装着和关西签的分赃协议",
+        "hidden": "十年前在老当家面前被当众羞辱过一次，这些年一直在等这一天"
+      },
+      "decision": {
+        "core_value": "九条家的时代该结束了",
+        "goal_options": [
+          "炸开避难室的门",
+          "用广播逼大小姐交出密钥",
+          "抓住保镖，用来要挟大小姐"
+        ],
+        "pressure_responses": {
+          "low": "用枪托砸门，在门外喊话",
+          "mid": "下令装炸药，开始倒数",
+          "high": "手下死伤惨重，端起机枪对着走廊乱扫",
+          "breaking": "被枪口顶住时腿一软，开始求饶"
+        },
+        "withdrawal": "带着残部退回驾驶室，拼命呼叫关西支援",
+        "relationship_stance": "把大小姐当成换钱的筹码，把保镖当成必须除掉的障碍",
+        "contrast": "在老当家灵前哭得最响，拔枪时却最狠",
+        "prefers": ["躲在重火力后面发号施令"],
+        "avoids": ["在狭窄的地方和人近身搏斗"],
+        "never": ["拿到密钥之前放弃"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "钱和权",
+          "看别人在自己面前低头"
+        ],
+        "likes": ["数钞票", "听手下叫自己“头目”"],
+        "dislikes": ["被人轻蔑地笑", "手下办事拖沓"],
+        "preconditions": ["对方先被缴了械"],
+        "boundaries": ["绝不错过和关西会合的时间"],
+        "expression": "冷笑着把枪口垂下：“行，算你狠。今晚这笔账，我们记着。”",
+        "desire_range": [1, 1],
+        "self_control_range": [2, 4],
+        "desired_position": "门外那个拿着炸药的人，也是最后会被反将一军的叛徒"
+      },
+      "voices": {
+        "surface": "“明步！别躲了！把密钥交出来，我保你下船时还是个活人！”",
+        "inner": "“密钥要是跟着那丫头沉了海，这些年就全白费了。”"
+      },
+      "schedule": [
+        {"from": 0, "to": 420, "location_id": "yacht_bilge_engineering_corridor"},
+        {"from": 421, "to": 840, "location_id": "yacht_main_deck_owners_stateroom"},
+        {"from": 841, "to": 1260, "location_id": "yacht_open_stern_helipad_deck"},
+        {"from": 1261, "to": 1439, "location_id": "yacht_bilge_engineering_corridor"}
+      ],
+      "situation": {
+        "trigger": "若头的人在避难室门外装好了炸药，引信开始倒数",
+        "pressure": "五分钟后炸药起爆",
+        "exits": [
+          {"option": "从通风管道绕出去，在走廊里夺下起爆器", "cost": "你会受伤，而避难室里只剩大小姐一个人"},
+          {"option": "接通门上的高压电网，让炸药提前引爆", "cost": "水密门变形，再也打不开，只能从别的路杀出去"}
+        ]
+      },
+      "tags": ["violence", "workplace_power"]
+    },
+    {
+      "id": "loyal_helmsman_goro",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [55, 66],
+      "adult_context": "黑龙丸的老舵手，九条家三代的老臣，断过一根小指；今夜腹部中枪，独自守在驾驶室里不让船翻",
+      "public_role": "游艇舵手兼九条家元老",
+      "appearance_options": [
+        "银发被雨打湿，旧水手服上全是血，双手死死握着黄铜舵轮，嘴里叼着一支熄灭的烟斗",
+        "整个人靠在舵轮上，用铁链把自己的手腕和轮辐缠在一起"
+      ],
+      "identity": {
+        "authority": "掌控黑龙丸的航向，也握着自沉装置的开关",
+        "resources": [
+          "一根直通避难室的铜制传声管",
+          "最后两枚红色求救信号弹"
+        ],
+        "limits": [
+          "失血太多，随时可能昏过去",
+          "一个人守着驾驶室，下不去底层"
+        ],
+        "obligations": ["只要还有一口气，就不让船翻"],
+        "exposure": "胸前口袋里有老当家托付的继承公证书副本",
+        "hidden": "看着明步长大，早就决定今夜要用这条命换明步上岸"
+      },
+      "decision": {
+        "core_value": "只要我还握着舵，九条家就不会沉",
+        "goal_options": [
+          "调整船头角度，让叛徒站不稳",
+          "通过传声管告诉保镖走廊的死角",
+          "天亮前拼死启动副机"
+        ],
+        "pressure_responses": {
+          "low": "在传声管里喊：抓稳，前面有大浪",
+          "mid": "声音越来越弱，说机舱快淹了",
+          "high": "叛徒踹开驾驶室时引爆了闪光弹",
+          "breaking": "用最后的力气把舵轮锁死在顺风的方向"
+        },
+        "withdrawal": "靠着舵轮喘气，用带血的手擦老当家的照片",
+        "relationship_stance": "把明步当成自己的孩子，把保镖当成可以托付的人",
+        "contrast": "平时只会默默擦甲板，风暴里却像一尊不倒的石像",
+        "prefers": ["风浪最大的舵轮前"],
+        "avoids": ["丢下同伴自己逃"],
+        "never": ["把舵交给叛徒"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "讲义气、肯为别人拼命的人",
+          "有老当家风范的年轻人"
+        ],
+        "likes": ["烈酒", "听年轻人讲打赢的事"],
+        "dislikes": ["背叛家门的人", "贪生怕死的人"],
+        "preconditions": ["对方先证明自己会护着明步"],
+        "boundaries": ["绝不让九条家断了根"],
+        "expression": "在传声管里咳了两声：“小子，大小姐就交给你了。”",
+        "desire_range": [1, 1],
+        "self_control_range": [5, 5],
+        "desired_position": "风暴里替所有人握着舵的那个老人"
+      },
+      "voices": {
+        "surface": "“传声管听得见吗？！大小姐的伤怎么样了？右边有大浪，抓稳！”",
+        "inner": "“老当家……五郎这条命今晚就交代了，可孙女一定要上岸。”"
+      },
+      "schedule": [
+        {"from": 0, "to": 600, "location_id": "yacht_main_deck_owners_stateroom"},
+        {"from": 601, "to": 1200, "location_id": "yacht_open_stern_helipad_deck"},
+        {"from": 1201, "to": 1439, "location_id": "yacht_main_deck_owners_stateroom"}
+      ],
+      "situation": {
+        "trigger": "传声管里传来老舵手的咳嗽声，说自己快撑不住了",
+        "pressure": "八分钟后老舵手可能昏过去，船会横着吃浪",
+        "exits": [
+          {"option": "通过传声管教老舵手用铁链把舵锁死", "cost": "船能撑住，但老舵手就再也离不开舵轮了"},
+          {"option": "冲上驾驶室替老舵手掌舵", "cost": "避难室只剩大小姐一个人"}
+        ]
+      },
+      "tags": ["disaster", "violence"]
+    },
+    {
+      "id": "hammer_enforcer_goda",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [30, 38],
+      "adult_context": "叛乱的先锋打手，身高近两米，扛着一把液压破拆锤，负责砸开避难室的门",
+      "public_role": "叛乱冲锋队长",
+      "appearance_options": [
+        "光头、满臂刺青，穿着撕掉袖子的防弹背心，肩上扛着二十公斤的破拆锤",
+        "护目镜后面全是血丝，腰上挂了一圈震撼弹，走起路来铁链哗哗作响"
+      ],
+      "identity": {
+        "authority": "在走廊上可以先动手再报告",
+        "resources": [
+          "一把液压破拆锤和几枚铝热剂手雷",
+          "一件重型防弹背心"
+        ],
+        "limits": [
+          "块头太大，在窄走廊里转身很慢",
+          "脾气暴躁，一激就乱了阵脚"
+        ],
+        "obligations": ["十分钟内砸开水密门"],
+        "exposure": "后颈有一块防弹背心挡不住的旧伤疤",
+        "hidden": "私下和关西签了单独的赏金协议，想自己独吞那枚当家戒指"
+      },
+      "decision": {
+        "core_value": "在锤子面前，什么规矩都是废话",
+        "goal_options": [
+          "一锤一锤砸开门铰链",
+          "门开了就往里冲",
+          "抓住保镖，跟保镖正面硬碰"
+        ],
+        "pressure_responses": {
+          "low": "抡锤砸门，整间避难室嗡嗡作响",
+          "mid": "把铝热剂贴在门把手上",
+          "high": "被割伤后发狂，乱挥锤子",
+          "breaking": "锤子被夺下，整个人瘫在积水里"
+        },
+        "withdrawal": "拖着伤腿往回爬，喊同伴掩护",
+        "relationship_stance": "把保镖当成要打倒的对手",
+        "contrast": "在同伴面前嚣张，真对上保镖的眼睛时会发怵",
+        "prefers": ["直线走廊里的正面冲锋"],
+        "avoids": ["满是蒸汽和死角的地方"],
+        "never": ["门没砸开之前后退一步"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "比自己更能打的人",
+          "一大笔赏金"
+        ],
+        "likes": ["烈酒", "砸东西"],
+        "dislikes": ["暗算", "被人指挥"],
+        "preconditions": ["对方先在力气上赢过自己"],
+        "boundaries": ["绝不让人夺走自己的锤子"],
+        "expression": "把锤子扔在地上，喘着粗气：“……行，你赢了。”",
+        "desire_range": [1, 1],
+        "self_control_range": [1, 2],
+        "desired_position": "走廊上那堵会动的墙"
+      },
+      "voices": {
+        "surface": "“开门！老子再砸三锤，这门就废了！”",
+        "inner": "“只要拿到那枚戒指，下半辈子就不用再看谁的脸色。”"
+      },
+      "schedule": [
+        {"from": 0, "to": 360, "location_id": "yacht_bilge_engineering_corridor"},
+        {"from": 361, "to": 780, "location_id": "yacht_lower_armored_panic_room"},
+        {"from": 781, "to": 1140, "location_id": "yacht_bilge_engineering_corridor"},
+        {"from": 1141, "to": 1439, "location_id": "yacht_open_stern_helipad_deck"}
+      ],
+      "situation": {
+        "trigger": "巨汉一锤砸在水密门铰链上，两颗螺栓崩飞",
+        "pressure": "四分钟后铰链断裂，门会整个倒下",
+        "exits": [
+          {"option": "在门缝打开的一瞬间冲出去，先下手", "cost": "你会挂彩，但能把巨汉挡在门外"},
+          {"option": "引爆门后的灭火器气罐，把门外的人掀翻", "cost": "走廊被浓烟封死，接下来只能摸黑打"}
+        ]
+      },
+      "tags": ["violence", "bodily_harm"]
+    },
+    {
+      "id": "family_doctor_morita",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [55, 70],
+      "adult_context": "九条家两代的家庭医生，随船出海，叛乱开始后躲在主卧沙发后面给伤员缝针",
+      "public_role": "九条家家庭医生",
+      "appearance_options": [
+        "白发、圆眼镜，袖子挽到手肘，手上全是别人的血，手却稳得很",
+        "提着一只染血的出诊箱，在颠簸的走廊里一手扶墙一手护箱"
+      ],
+      "identity": {
+        "authority": "船上所有人的伤都由自己说了算",
+        "resources": [
+          "一箱抗生素、血浆和缝合包",
+          "九条家每个人的病历"
+        ],
+        "limits": [
+          "年纪大了，跑不动",
+          "不会用枪，也不想用"
+        ],
+        "obligations": ["让船上每一个受伤的人活到天亮，不分哪一边"],
+        "exposure": "出诊箱夹层里有老当家最后几个月的真实病历",
+        "hidden": "知道老当家其实不是病死的，一直不敢说"
+      },
+      "decision": {
+        "core_value": "躺在我面前的都是病人",
+        "goal_options": [
+          "尽快赶到避难室给大小姐处理伤口",
+          "给受伤的叛徒也止血",
+          "决定要不要说出老当家的死因"
+        ],
+        "pressure_responses": {
+          "low": "推推眼镜，说伤口要先清创",
+          "mid": "厉声说再拖下去会感染",
+          "high": "不顾枪口冲过走廊去救人",
+          "breaking": "说出老当家的死因，声音发抖"
+        },
+        "withdrawal": "躲回沙发后面，一言不发地缝针",
+        "relationship_stance": "对谁都一样，只认伤口",
+        "contrast": "缝针时稳如磐石，说起老当家时会掉眼泪",
+        "prefers": ["灯光亮、器械齐的地方"],
+        "avoids": ["站队"],
+        "never": ["见死不救"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "爱惜性命的人",
+          "愿意听医生话的人"
+        ],
+        "likes": ["一杯热茶", "病人醒过来的那一刻"],
+        "dislikes": ["拿命开玩笑的人"],
+        "preconditions": ["对方先把伤养好"],
+        "boundaries": ["绝不因为私情改医嘱"],
+        "expression": "把一卷纱布塞给你：“压住，别松手，直到我说可以。”",
+        "desire_range": [1, 1],
+        "self_control_range": [5, 5],
+        "desired_position": "风暴里那双不抖的手"
+      },
+      "voices": {
+        "surface": "“让开，让我看伤口。……还好，没伤到骨头，先止血。”",
+        "inner": "“老当家的事……今晚要是不说，恐怕就再没机会了。”"
+      },
+      "schedule": [
+        {"from": 0, "to": 480, "location_id": "yacht_main_deck_owners_stateroom"},
+        {"from": 481, "to": 960, "location_id": "yacht_lower_armored_panic_room"},
+        {"from": 961, "to": 1439, "location_id": "yacht_main_deck_owners_stateroom"}
+      ],
+      "situation": {
+        "trigger": "老医生在主卧沙发后面招手，说有血浆，但一个人送不下去",
+        "pressure": "走廊上的叛徒十分钟后会搜到主卧",
+        "exits": [
+          {"option": "背着医生和血浆冲回避难室", "cost": "路上会撞上巡逻的叛徒"},
+          {"option": "只拿血浆回去，让医生留在原地", "cost": "医生会被叛徒发现"}
+        ]
+      },
+      "tags": ["workplace", "romance_light"]
+    },
+    {
+      "id": "radio_officer_mashima",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [28, 40],
+      "adult_context": "黑龙丸的通讯长，叛乱开始时被锁在了通讯室里，手里还握着唯一能联系外界的无线电",
+      "public_role": "黑龙丸通讯长",
+      "appearance_options": [
+        "戴着耳机，坐在一排闪烁的仪表前，额头上贴着一块创可贴",
+        "抱着一台便携电台缩在桌子底下，眼睛盯着门"
+      ],
+      "identity": {
+        "authority": "掌握船上所有对外通讯",
+        "resources": [
+          "能联系海上保安厅的无线电频道",
+          "叛徒今晚所有通话的录音"
+        ],
+        "limits": [
+          "被锁在通讯室里出不去",
+          "不属于任何一方，谁占了船就要听谁的"
+        ],
+        "obligations": ["保持和岸上的联系"],
+        "exposure": "录音里有若头和关西通话的全部内容",
+        "hidden": "叛乱开始前其实收到过一条警告，没来得及上报"
+      },
+      "decision": {
+        "core_value": "让外面的人知道这船上发生了什么",
+        "goal_options": [
+          "联系上海上保安厅",
+          "把录音交给能用它的人",
+          "活着出去"
+        ],
+        "pressure_responses": {
+          "low": "在频道里一遍一遍地呼叫",
+          "mid": "压低声音说叛徒就在门外",
+          "high": "把录音带塞进通风口",
+          "breaking": "说出那条没上报的警告"
+        },
+        "withdrawal": "把耳机扣上，假装什么都没听见",
+        "relationship_stance": "对谁都警惕，只信电波",
+        "contrast": "平时话最多，害怕时一句话都说不出",
+        "prefers": ["安静的通讯室"],
+        "avoids": ["打打杀杀"],
+        "never": ["把频道交给叛徒"]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "讲道理的人",
+          "在危险里还记得来救自己的人"
+        ],
+        "likes": ["清楚的信号", "一杯热咖啡"],
+        "dislikes": ["满嘴谎话的人"],
+        "preconditions": ["先活着下船"],
+        "boundaries": ["值班时绝不谈私事"],
+        "expression": "把耳机摘下来挂在你脖子上：“听，岸上的人在叫我们。”",
+        "desire_range": [1, 2],
+        "self_control_range": [4, 5],
+        "desired_position": "风暴里唯一连着岸的那根线"
+      },
+      "voices": {
+        "surface": "“这里是黑龙丸，这里是黑龙丸，有人听得见吗？”",
+        "inner": "“那条警告……要是当时报上去就好了。”"
+      },
+      "schedule": [
+        {"from": 0, "to": 600, "location_id": "yacht_main_deck_owners_stateroom"},
+        {"from": 601, "to": 1200, "location_id": "yacht_bilge_engineering_corridor"},
+        {"from": 1201, "to": 1439, "location_id": "yacht_main_deck_owners_stateroom"}
+      ],
+      "situation": {
+        "trigger": "通讯长从门缝里塞出一张纸条：我有录音，救我出去",
+        "pressure": "叛徒十五分钟后会来砸通讯室的门",
+        "exits": [
+          {"option": "撬开通讯室的门，把人带走", "cost": "动静太大，会引来走廊上的叛徒"},
+          {"option": "让通讯长把录音从通风口递出来，人先留在里面", "cost": "通讯长会被叛徒抓住"}
+        ]
+      },
+      "tags": ["disaster", "workplace"]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_hammer_enforcer",
+      "role": "扛破拆锤的叛乱壮汉",
+      "function": "obstacle",
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "line": "{npc.name}抡着液压锤一下一下砸门，每一锤都震得整间避难室嗡嗡作响。",
+      "gender": "any",
+      "age_range": [30, 40],
+      "adult_context": "叛乱一方的打手",
+      "name": null
+    },
+    {
+      "id": "bg_traitor_lieutenant_shadow",
+      "role": "端冲锋枪的叛乱枪手",
+      "function": "obstacle",
+      "location_ids": ["yacht_bilge_engineering_corridor"],
+      "line": "{npc.name}在铁格栅上吐了口烟，枪灯扫过每一个通风口。",
+      "gender": "any",
+      "age_range": [28, 45],
+      "adult_context": "跟着若头叛变的老组员",
+      "name": null
+    },
+    {
+      "id": "bg_loyal_family_doctor",
+      "role": "躲在沙发后缝针的老医生",
+      "function": "helper",
+      "location_ids": ["yacht_main_deck_owners_stateroom"],
+      "line": "{npc.name}从沙发后面递出两袋血浆和一卷纱布，小声说伤口一定要先清干净。",
+      "gender": "any",
+      "age_range": [55, 70],
+      "adult_context": "九条家的家庭医生",
+      "name": null
+    },
+    {
+      "id": "bg_rival_sniper",
+      "role": "藏在雷达塔上的狙击手",
+      "function": "witness",
+      "location_ids": ["yacht_open_stern_helipad_deck"],
+      "line": "{npc.name}在雷达天线后面架着热成像狙击枪，红色的激光点在甲板上来回扫。",
+      "gender": "any",
+      "age_range": [28, 40],
+      "adult_context": "关西雇来的职业狙击手",
+      "name": null
+    },
+    {
+      "id": "bg_hiding_steward",
+      "role": "躲在酒窖里的调酒师",
+      "function": "rumor_source",
+      "location_ids": ["yacht_main_deck_owners_stateroom"],
+      "line": "{npc.name}缩在碎酒桶堆里发抖，说若头开火前跟关西通过电话，说只要大小姐一死，关东就归他们。",
+      "gender": "any",
+      "age_range": [25, 35],
+      "adult_context": "随船的调酒师",
+      "name": null
+    },
+    {
+      "id": "bg_coastguard_radio_voice",
+      "role": "无线电里的海上保安厅通讯员",
+      "function": "messenger",
+      "location_ids": ["yacht_main_deck_owners_stateroom"],
+      "line": "{npc.name}在公共频道里一遍遍呼叫黑龙丸，说巡逻舰已经侦测到交火，正顶着风暴赶来。",
+      "gender": "any",
+      "age_range": [25, 40],
+      "adult_context": "海上保安厅的值班通讯员",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_brass_speaking_tube",
+      "text": "铜制传声管",
+      "reach": "从避难室直通驾驶台，老舵手的每句话都原样传下来",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_door_intercom",
+      "text": "水密门对讲机",
+      "reach": "门内门外，叛徒的喊话和倒数一字不差",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_crew_rumor",
+      "text": "船员之间的耳语",
+      "reach": "从厨房到轮机舱，每传一次就多一分夸张",
+      "fidelity": "distorted"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_rank_vs_trust",
+      "text": "家规要保镖服从，伤势要保镖做主；今夜谁听谁的，决定了明步能不能活到天亮。"
+    },
+    {
+      "id": "te_wound_and_fever",
+      "text": "失血和高烧让明步越来越难撑，可明步越难撑，越不肯示弱。"
+    },
+    {
+      "id": "te_door_siege",
+      "text": "门外有炸药、有铁锤、有枪，门里只有一个急救箱和两个人。"
+    },
+    {
+      "id": "te_storm_capsize",
+      "text": "热带气旋还在加强，老舵手在流血，船身倾斜一次比一次接近翻船的角度。"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_ronin_contract",
+      "power_structure": "player_high",
+      "player_positions": ["high"],
+      "identity_ids": ["hired_ronin_swordsman"],
+      "slots": ["yakuza_heiress_akaho", "family_doctor_morita"],
+      "tension_engine_ids": ["te_rank_vs_trust", "te_wound_and_fever"],
+      "chemistry": "你的契约只写了一句话：保{yakuza_heiress_akaho.name}平安到岸。整艘船上只有你不必听任何人的命令，{family_doctor_morita.name}却在等你一句话，决定先救谁。",
+      "stakes": {
+        "resource_gap": "你有刀和契约，大小姐有密钥和戒指，医生有血浆和那份病历。",
+        "limit_gap": "你一旦插手九条家的事就不再是局外人，大小姐一旦倒下龙神会就散了。",
+        "meeting_reason": "叛乱爆发时你正在主卧护卫，医生和大小姐都在身边。",
+        "irreplaceable_goal": "让大小姐活着上岸，而且是作为当家上岸。"
+      },
+      "relations": [
+        {"a": "player", "b": "yakuza_heiress_akaho", "stage": "acquainted", "a_to_b": {"trust": 2, "tension": 2}, "b_to_a": {"trust": 1, "tension": 3}, "reason": "大小姐花钱雇你，却从不信你"},
+        {"a": "player", "b": "family_doctor_morita", "stage": "acquainted", "a_to_b": {"trust": 2, "tension": 1}, "b_to_a": {"trust": 2, "tension": 1}, "reason": "医生替你缝过一次刀伤"},
+        {"a": "yakuza_heiress_akaho", "b": "family_doctor_morita", "stage": "familiar", "a_to_b": {"trust": 3, "tension": 1}, "b_to_a": {"trust": 3, "tension": 2}, "reason": "医生看着大小姐长大，大小姐只在医生面前不逞强"}
+      ],
+      "tags": ["workplace_power", "romance_light"]
+    },
+    {
+      "id": "combo_corridor_breakthrough",
+      "power_structure": "switchable",
+      "player_positions": ["high", "equal"],
+      "identity_ids": ["hired_ronin_swordsman", "tactical_navigator"],
+      "slots": ["yakuza_heiress_akaho", "hammer_enforcer_goda"],
+      "tension_engine_ids": ["te_door_siege", "te_rank_vs_trust"],
+      "chemistry": "{hammer_enforcer_goda.name}在门外一锤一锤地砸，{yakuza_heiress_akaho.name}靠在沙发上，命令你守住门。可门守不住了——你得决定是听命令守在这里，还是自己做主冲出去。",
+      "stakes": {
+        "resource_gap": "巨汉有破拆锤和防弹背心，大小姐有命令权，你有刀或整艘船的蓝图。",
+        "limit_gap": "门一倒巨汉就会冲进来，你一出去避难室就没人守。",
+        "meeting_reason": "叛徒找到了避难室，派出了最能砸的人。",
+        "irreplaceable_goal": "在门倒下之前，把走廊变成自己的地盘。"
+      },
+      "relations": [
+        {"a": "player", "b": "yakuza_heiress_akaho", "stage": "familiar", "a_to_b": {"trust": 2, "tension": 2}, "b_to_a": {"trust": 2, "tension": 2}, "reason": "共事多年，今夜第一次需要彼此"},
+        {"a": "player", "b": "hammer_enforcer_goda", "stage": "stranger", "a_to_b": {"trust": 0, "tension": 3}, "b_to_a": {"trust": 0, "tension": 3}, "reason": "门两边的对手"},
+        {"a": "yakuza_heiress_akaho", "b": "hammer_enforcer_goda", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 3}, "b_to_a": {"trust": 0, "tension": 3}, "reason": "大小姐曾当众罚过巨汉"}
+      ],
+      "tags": ["violence", "bodily_harm"]
+    },
+    {
+      "id": "combo_bodyguard_and_traitor",
+      "power_structure": "npc_high",
+      "player_positions": ["low"],
+      "identity_ids": ["sworn_bodyguard"],
+      "slots": ["yakuza_heiress_akaho", "traitor_lieutenant_shibata"],
+      "tension_engine_ids": ["te_door_siege", "te_wound_and_fever"],
+      "chemistry": "{traitor_lieutenant_shibata.name}在门外倒数，{yakuza_heiress_akaho.name}在门内发着烧，还在用命令的口气说话。你是船上身份最低的人，可这一夜，门里门外两个人的命，都在你手上。",
+      "stakes": {
+        "resource_gap": "若头有三十名枪手和炸药，大小姐有密钥，你只有一把匕首和一只急救箱。",
+        "limit_gap": "门被炸开大小姐会被抓走，你违抗命令天亮后要按家规谢罪。",
+        "meeting_reason": "伏击之后，你把中弹的大小姐背进了避难室。",
+        "irreplaceable_goal": "先让大小姐活下来，再让叛徒付出代价。"
+      },
+      "relations": [
+        {"a": "player", "b": "yakuza_heiress_akaho", "stage": "familiar", "a_to_b": {"trust": 3, "tension": 2}, "b_to_a": {"trust": 3, "tension": 2}, "reason": "跟了这么多年，彼此都知道对方没说出口的话"},
+        {"a": "player", "b": "traitor_lieutenant_shibata", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 3}, "b_to_a": {"trust": 0, "tension": 3}, "reason": "若头当年亲手教过你用刀"},
+        {"a": "yakuza_heiress_akaho", "b": "traitor_lieutenant_shibata", "stage": "familiar", "a_to_b": {"trust": 0, "tension": 3}, "b_to_a": {"trust": 0, "tension": 3}, "reason": "从小叫“叔叔”的人，今夜要自己的命"}
+      ],
+      "tags": ["violence", "workplace_power"]
+    },
+    {
+      "id": "combo_crew_three_hands",
+      "power_structure": "switchable",
+      "player_positions": ["low", "equal", "high"],
+      "identity_ids": ["ship_galley_cook", "undercover_secretary", "hired_ronin_swordsman"],
+      "slots": ["loyal_helmsman_goro", "family_doctor_morita", "radio_officer_mashima"],
+      "tension_engine_ids": ["te_storm_capsize", "te_rank_vs_trust"],
+      "chemistry": "船要翻了：{loyal_helmsman_goro.name}在驾驶室流血，{family_doctor_morita.name}在主卧缝针，{radio_officer_mashima.name}被锁在通讯室里。三个人各握着一样救命的东西，你得在天亮前把它们连起来。",
+      "stakes": {
+        "resource_gap": "舵手有航向，医生有血浆，通讯长有无线电和录音。",
+        "limit_gap": "三个人被困在三个地方，你一次只能去一处。",
+        "meeting_reason": "叛乱把船切成了几块，你是少数还能走动的人。",
+        "irreplaceable_goal": "让船不翻、让伤员活着、让岸上的人知道这里发生了什么。"
+      },
+      "relations": [
+        {"a": "player", "b": "loyal_helmsman_goro", "stage": "familiar", "a_to_b": {"trust": 3, "tension": 1}, "b_to_a": {"trust": 2, "tension": 1}, "reason": "老舵手常来厨房要一碗热汤"},
+        {"a": "player", "b": "family_doctor_morita", "stage": "acquainted", "a_to_b": {"trust": 2, "tension": 1}, "b_to_a": {"trust": 2, "tension": 1}, "reason": "医生替你处理过烫伤"},
+        {"a": "player", "b": "radio_officer_mashima", "stage": "familiar", "a_to_b": {"trust": 2, "tension": 1}, "b_to_a": {"trust": 2, "tension": 1}, "reason": "通讯长总在深夜来找吃的"},
+        {"a": "loyal_helmsman_goro", "b": "family_doctor_morita", "stage": "familiar", "a_to_b": {"trust": 3, "tension": 1}, "b_to_a": {"trust": 3, "tension": 1}, "reason": "两个老臣，一起送走了老当家"},
+        {"a": "loyal_helmsman_goro", "b": "radio_officer_mashima", "stage": "acquainted", "a_to_b": {"trust": 2, "tension": 1}, "b_to_a": {"trust": 2, "tension": 1}, "reason": "一个掌舵一个通讯，天天对讲"},
+        {"a": "family_doctor_morita", "b": "radio_officer_mashima", "stage": "acquainted", "a_to_b": {"trust": 2, "tension": 1}, "b_to_a": {"trust": 2, "tension": 1}, "reason": "医生给通讯长开过安眠药"}
+      ],
+      "tags": ["disaster", "workplace"]
+    },
+    {
+      "id": "combo_navigator_equal_watch",
+      "power_structure": "equal",
+      "player_positions": ["equal"],
+      "identity_ids": ["tactical_navigator"],
+      "slots": ["yakuza_heiress_akaho", "loyal_helmsman_goro"],
+      "tension_engine_ids": ["te_storm_capsize", "te_wound_and_fever"],
+      "chemistry": "传声管里，{loyal_helmsman_goro.name}的声音越来越弱；沙发上，{yakuza_heiress_akaho.name}发着烧，坚持要亲自上驾驶室。你不是龙神会的人，只是唯一知道怎么让这艘船活下来的人。",
+      "stakes": {
+        "resource_gap": "舵手有航向和传声管，大小姐有命令权，你有蓝图和主钥匙。",
+        "limit_gap": "舵手随时会昏过去，大小姐的伤经不起再折腾。",
+        "meeting_reason": "大小姐要上驾驶室，你得告诉大小姐那条路能不能走。",
+        "irreplaceable_goal": "在船翻之前修好副机，并劝住大小姐别拿命去冒险。"
+      },
+      "relations": [
+        {"a": "player", "b": "yakuza_heiress_akaho", "stage": "acquainted", "a_to_b": {"trust": 2, "tension": 2}, "b_to_a": {"trust": 2, "tension": 2}, "reason": "大小姐敬你是专业的，却不习惯听外人的话"},
+        {"a": "player", "b": "loyal_helmsman_goro", "stage": "familiar", "a_to_b": {"trust": 3, "tension": 1}, "b_to_a": {"trust": 3, "tension": 1}, "reason": "一起跑过十几趟远洋"},
+        {"a": "yakuza_heiress_akaho", "b": "loyal_helmsman_goro", "stage": "familiar", "a_to_b": {"trust": 3, "tension": 1}, "b_to_a": {"trust": 3, "tension": 1}, "reason": "老舵手看着大小姐长大"}
+      ],
+      "tags": ["disaster", "romance_light"]
+    },
+    {
+      "id": "combo_galley_overheard",
+      "power_structure": "npc_high",
+      "player_positions": ["low"],
+      "identity_ids": ["ship_galley_cook"],
+      "slots": ["traitor_lieutenant_shibata", "radio_officer_mashima"],
+      "tension_engine_ids": ["te_door_siege", "te_rank_vs_trust"],
+      "chemistry": "{traitor_lieutenant_shibata.name}让你去给通讯室送饭，顺便看看{radio_officer_mashima.name}还老不老实。你托盘底下压着一张纸条，若头不知道，通讯长也还不知道。",
+      "stakes": {
+        "resource_gap": "若头有枪和人，通讯长有无线电和录音，你只有一个托盘和一张纸条。",
+        "limit_gap": "纸条一旦被发现你就没命，不递出去岸上就永远不知道。",
+        "meeting_reason": "叛徒需要有人做饭，你被从冷库里拎了出来。",
+        "irreplaceable_goal": "把录音送到能用它的人手里，同时别让若头起疑。"
+      },
+      "relations": [
+        {"a": "player", "b": "traitor_lieutenant_shibata", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 3}, "b_to_a": {"trust": 1, "tension": 2}, "reason": "若头以为你只是个厨子"},
+        {"a": "player", "b": "radio_officer_mashima", "stage": "familiar", "a_to_b": {"trust": 2, "tension": 1}, "b_to_a": {"trust": 2, "tension": 1}, "reason": "你常给通讯长留夜宵"},
+        {"a": "traitor_lieutenant_shibata", "b": "radio_officer_mashima", "stage": "acquainted", "a_to_b": {"trust": 0, "tension": 3}, "b_to_a": {"trust": 0, "tension": 3}, "reason": "若头锁了通讯长，通讯长录了若头的话"}
+      ],
+      "tags": ["violence", "workplace_power"]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "a_panic_room_lockdown",
+      "title": "避难室的六道锁舌",
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "duration_minutes": 25,
+      "beats": [
+        "齿轮咬合声一道接一道响起",
+        "应急红灯亮起，整间屋子染成暗红",
+        "外面的风浪和枪声隔着钢板变成闷响"
+      ],
+      "hook_ids": ["h_akaho_wounded_command", "h_shibata_door_threat", "h_goda_hammer_smash"],
+      "start_minute": 5,
+      "tags": ["workplace_power"]
+    },
+    {
+      "id": "a_wound_cleaning",
+      "title": "红灯下清创包扎",
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "duration_minutes": 40,
+      "beats": [
+        "剪刀剪开浸透血的西装袖子",
+        "碘伏碰到伤口，明步咬住了嘴唇",
+        "纱布一圈一圈缠好，血终于不再往外渗"
+      ],
+      "hook_ids": ["h_akaho_wounded_command", "h_akaho_fever_name", "h_goro_tube_call"],
+      "start_minute": 20,
+      "tags": ["romance_light"]
+    },
+    {
+      "id": "a_speaking_tube_report",
+      "title": "传声管里的海况",
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "duration_minutes": 20,
+      "beats": [
+        "铜管里传来驾驶室的风暴声",
+        "老舵手沙哑的声音一句一句报着浪高",
+        "船身转过一个角度，倾斜暂时缓下来"
+      ],
+      "hook_ids": ["h_goro_tube_call", "h_akaho_fever_name"],
+      "start_minute": 45,
+      "tags": ["disaster"]
+    },
+    {
+      "id": "a_corridor_skirmish",
+      "title": "轮机走廊的遭遇",
+      "location_ids": ["yacht_bilge_engineering_corridor"],
+      "duration_minutes": 35,
+      "beats": [
+        "蒸汽从泄压阀里喷出，走廊一片白",
+        "铁格栅下的积水被踩得四溅",
+        "锤子砸在钢管上，火星照亮了整条走廊"
+      ],
+      "hook_ids": ["h_goda_hammer_smash", "h_shibata_door_threat", "h_mashima_note"],
+      "start_minute": 60,
+      "tags": ["violence"]
+    },
+    {
+      "id": "a_stateroom_blade_and_radio",
+      "title": "套房里取刀与发报",
+      "location_ids": ["yacht_main_deck_owners_stateroom"],
+      "duration_minutes": 30,
+      "beats": [
+        "家传的太刀从倒下的刀架上被拾起",
+        "卫星终端连通，屏幕上跳出东京总部的回应",
+        "闪电照亮舷窗外的黑浪"
+      ],
+      "hook_ids": ["h_morita_plasma", "h_mashima_note", "h_goro_tube_call"],
+      "start_minute": 85,
+      "tags": ["workplace_power"]
+    },
+    {
+      "id": "a_dawn_helipad",
+      "title": "破晓时的后甲板",
+      "location_ids": ["yacht_open_stern_helipad_deck"],
+      "duration_minutes": 25,
+      "beats": [
+        "风雨渐弱，天边泛起一线暗红",
+        "九条家的直升机穿过云层，旋翼压平了浪花",
+        "明步披着保镖的外套站在停机坪上"
+      ],
+      "hook_ids": ["h_akaho_dawn_choice", "h_shibata_door_threat"],
+      "start_minute": 110,
+      "tags": ["workplace_power"]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_wound_fever_spike",
+      "title": "失血与高烧",
+      "source": "nature",
+      "flags": ["timed"],
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "trigger": "明步左肩的伤口还在渗血，体温已经烧到三十九度半，手开始发抖，说话越来越慢。",
+      "objective": "止住血、压下烧，让明步清醒地撑到天亮。",
+      "choice": "是在避难室里尽力处理，还是冒险去主卧找医生和血浆。",
+      "immediate": {"text": "纱布又红了一圈，明步的额头烫得吓人。", "minutes": 8},
+      "near": {"text": "再拖下去，伤口会感染，人会昏迷。", "deadline_minutes": 20},
+      "far": {"trigger": "明步在避难室里昏迷不醒", "consequence": "天亮时没有人能主持换代，龙神会陷入内斗。", "due_days": 1},
+      "exits": [
+        {"option": "用急救箱里的东西清创缝合，整夜守着换药", "cost": "你一步也离不开避难室，走廊上的事只能交给别人"},
+        {"option": "冒险去主卧接医生和血浆回来", "cost": "路上要穿过叛徒的巡逻线"}
+      ],
+      "leverage": null,
+      "hook_ids": ["h_akaho_wounded_command", "h_akaho_fever_name"],
+      "start_minute": 5,
+      "tags": ["bodily_harm", "romance_light"]
+    },
+    {
+      "id": "p_hatch_breach_charge",
+      "title": "门外的炸药",
+      "source": "person",
+      "flags": ["timed"],
+      "location_ids": ["yacht_lower_armored_panic_room", "yacht_bilge_engineering_corridor"],
+      "trigger": "若头的人在水密门外装了四联定向炸药，引信一秒一响，五分钟后起爆。",
+      "objective": "在起爆前阻止爆炸，或者护住大小姐挨过冲击。",
+      "choice": "是出去拆，还是留在里面挡。",
+      "immediate": {"text": "引信的蜂鸣透过钢板一声接一声。", "minutes": 2},
+      "near": {"text": "起爆的冲击波足以震伤屋里所有人。", "deadline_minutes": 5},
+      "far": {"trigger": "炸药炸穿了底层隔舱", "consequence": "海水灌进避难室，屋里的人被困在水下。", "due_days": 1},
+      "exits": [
+        {"option": "从通风管绕出去，在走廊里夺下起爆器", "cost": "背上被破片划伤"},
+        {"option": "把沙发垫叠起来，用身体护住大小姐", "cost": "冲击波震得你吐了血"}
+      ],
+      "leverage": null,
+      "hook_ids": ["h_shibata_door_threat"],
+      "start_minute": 20,
+      "tags": ["violence", "bodily_harm"]
+    },
+    {
+      "id": "p_mutineer_sweep",
+      "title": "叛徒逐舱搜查",
+      "source": "person",
+      "flags": ["timed"],
+      "location_ids": ["yacht_bilge_engineering_corridor"],
+      "trigger": "十二名枪手顺着轮机走廊一间一间踹门，枪灯距离避难室只剩二十米。",
+      "objective": "在他们合围之前打乱他们的节奏。",
+      "choice": "是躲在暗处一个一个对付，还是放蒸汽封住走廊。",
+      "immediate": {"text": "军靴踩水的声音一步步逼近。", "minutes": 6},
+      "near": {"text": "他们在门口集结后，就能用火力压住整条走廊。", "deadline_minutes": 15},
+      "far": {"trigger": "叛徒找到避难室的通风口", "consequence": "他们往通风口里灌烟，逼屋里的人开门。", "due_days": 1},
+      "exits": [
+        {"option": "躲进蒸汽管道，悄悄放倒走在最前面的人", "cost": "剩下的人会慌乱开枪，流弹四飞"},
+        {"option": "拉下高压蒸汽阀，把整条走廊封住", "cost": "你们自己的退路也被封了"}
+      ],
+      "leverage": null,
+      "hook_ids": ["h_goda_hammer_smash"],
+      "start_minute": 30,
+      "tags": ["violence", "bodily_harm"]
+    },
+    {
+      "id": "p_engine_room_flooding",
+      "title": "配电室进水",
+      "source": "nature",
+      "flags": ["timed"],
+      "location_ids": ["yacht_bilge_engineering_corridor", "yacht_lower_armored_panic_room"],
+      "trigger": "右舷水密门被浪打裂，海水灌进主配电室，备用发电机冒着白烟，十五分钟后全船断电。",
+      "objective": "保住避难室的独立供电。",
+      "choice": "是下水去拉隔离闸，还是放弃电力改用手动通风。",
+      "immediate": {"text": "红灯开始乱闪，空气里全是电缆烧焦的味道。", "minutes": 5},
+      "near": {"text": "主电网短路后，避难室的电动门会锁死。", "deadline_minutes": 15},
+      "far": {"trigger": "发电机短路引起油气爆炸", "consequence": "船尾起火，整艘船开始下沉。", "due_days": 1},
+      "exits": [
+        {"option": "跳进齐腰深的海水里拉下隔离闸", "cost": "手臂被电弧灼伤"},
+        {"option": "放弃电力，点起冷光棒，用手摇风箱通风", "cost": "避难室越来越闷，明步的烧更难退"}
+      ],
+      "leverage": null,
+      "hook_ids": ["h_goro_tube_call"],
+      "start_minute": 40,
+      "tags": ["disaster"]
+    },
+    {
+      "id": "p_freighter_collision_course",
+      "title": "漂来的散货轮",
+      "source": "nature",
+      "flags": ["timed"],
+      "location_ids": ["yacht_open_stern_helipad_deck", "yacht_main_deck_owners_stateroom"],
+      "trigger": "一艘失去动力的十万吨散货轮顺着洋流朝黑龙丸漂来，距离不到三海里，十五分钟后就会撞上。",
+      "objective": "在撞上之前避开，或者让对方看见自己。",
+      "choice": "是上甲板发射信号弹，还是配合老舵手砍断锚链滑开。",
+      "immediate": {"text": "雷达屏上那团红色的回波越来越大。", "minutes": 7},
+      "near": {"text": "两船相撞，没有人能活下来。", "deadline_minutes": 15},
+      "far": {"trigger": "散货轮拦腰撞上黑龙丸", "consequence": "游艇断成两截，所有秘密一起沉进海底。", "due_days": 1},
+      "exits": [
+        {"option": "冲上后甲板，朝货轮驾驶室打出信号弹", "cost": "差点被巨浪卷下海"},
+        {"option": "配合老舵手砍断锚链，让船顺浪滑开", "cost": "船身猛地倾斜，套房里的东西砸了一地"}
+      ],
+      "leverage": null,
+      "hook_ids": ["h_goro_tube_call", "h_mashima_note"],
+      "start_minute": 55,
+      "tags": ["disaster"]
+    },
+    {
+      "id": "p_dawn_rival_ship",
+      "title": "破晓前的关西船",
+      "source": "institution",
+      "flags": ["timed"],
+      "location_ids": ["yacht_main_deck_owners_stateroom", "yacht_open_stern_helipad_deck"],
+      "trigger": "关西的接应船已经进入二十海里范围，天亮时就会靠上来；在那之前不夺回黑龙丸，就再没有机会。",
+      "objective": "在关西的船到之前，夺回驾驶室或者撤离。",
+      "choice": "是带着大小姐去驾驶室和若头做个了断，还是叫直升机来接人撤离。",
+      "immediate": {"text": "海平面上已经能看见探照灯的光。", "minutes": 10},
+      "near": {"text": "关西的船一靠上来，船上的人就都没救了。", "deadline_minutes": 25},
+      "far": {"trigger": "关西的人登上黑龙丸", "consequence": "九条家在关东的地盘被一夜吞并。", "due_days": 1},
+      "exits": [
+        {"option": "陪大小姐去驾驶室，当面和若头了结", "cost": "大小姐带着伤去拼命，你得一直挡在前面"},
+        {"option": "叫直升机来接人，放弃黑龙丸", "cost": "游艇被引爆自沉，船上的账册全部沉海"}
+      ],
+      "leverage": null,
+      "hook_ids": ["h_akaho_dawn_choice"],
+      "start_minute": 75,
+      "tags": ["workplace_power", "violence"]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "h_akaho_wounded_command",
+      "kind": "approach",
+      "slot": "yakuza_heiress_akaho",
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "text": "{yakuza_heiress_akaho.name}跌坐在黑色皮沙发上，左肩的血已经浸透了西装，右手还握着枪：“锁门。急救箱拿过来，替我把衣服剪开——手别抖。”"
+    },
+    {
+      "id": "h_shibata_door_threat",
+      "kind": "approach",
+      "slot": "traitor_lieutenant_shibata",
+      "location_ids": ["yacht_lower_armored_panic_room", "yacht_bilge_engineering_corridor", "yacht_open_stern_helipad_deck"],
+      "text": "门上的对讲机沙沙作响，{traitor_lieutenant_shibata.name}的声音带着笑：“明步，门外有四公斤炸药。密钥交出来，我保你活着下船。”"
+    },
+    {
+      "id": "h_goro_tube_call",
+      "kind": "approach",
+      "slot": "loyal_helmsman_goro",
+      "location_ids": ["yacht_lower_armored_panic_room", "yacht_main_deck_owners_stateroom"],
+      "text": "墙上的铜管里传来{loyal_helmsman_goro.name}的咳嗽声：“听得见吗？！老夫中了三枪，快撑不住了……右边有大浪，抓稳！”"
+    },
+    {
+      "id": "h_goda_hammer_smash",
+      "kind": "approach",
+      "slot": "hammer_enforcer_goda",
+      "location_ids": ["yacht_lower_armored_panic_room", "yacht_bilge_engineering_corridor"],
+      "text": "轰的一声，水密门的铰链凹进来一块，{hammer_enforcer_goda.name}在门外吼：“再三锤！这门就废了！”"
+    },
+    {
+      "id": "h_morita_plasma",
+      "kind": "approach",
+      "slot": "family_doctor_morita",
+      "location_ids": ["yacht_main_deck_owners_stateroom"],
+      "text": "{family_doctor_morita.name}从沙发后面探出头，举起两袋血浆：“我有这个，可我一个人送不下去。大小姐的伤，到底怎么样了？”"
+    },
+    {
+      "id": "h_mashima_note",
+      "kind": "approach",
+      "slot": "radio_officer_mashima",
+      "location_ids": ["yacht_main_deck_owners_stateroom", "yacht_bilge_engineering_corridor"],
+      "text": "通讯室门缝底下塞出一张纸条，是{radio_officer_mashima.name}的字：“我录下了若头和关西的通话。救我出去。”"
+    },
+    {
+      "id": "h_akaho_fever_name",
+      "kind": "approach",
+      "slot": "yakuza_heiress_akaho",
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "text": "烧得迷迷糊糊的{yakuza_heiress_akaho.name}忽然抓住你的手腕：“别叫大小姐……叫我名字。就一次。”"
+    },
+    {
+      "id": "h_akaho_dawn_choice",
+      "kind": "approach",
+      "slot": "yakuza_heiress_akaho",
+      "location_ids": ["yacht_open_stern_helipad_deck", "yacht_main_deck_owners_stateroom"],
+      "text": "{yakuza_heiress_akaho.name}扶着栏杆站起来，看着天边的光：“天快亮了。你说，我是去驾驶室，还是上直升机？”"
+    },
+    {
+      "id": "h_goro_last_order",
+      "kind": "approach",
+      "slot": "loyal_helmsman_goro",
+      "location_ids": ["yacht_main_deck_owners_stateroom"],
+      "text": "监控屏上，{loyal_helmsman_goro.name}用铁链把自己的手腕缠在舵轮上，对着镜头笑了一下：“剩下的，交给你们了。”"
+    },
+    {
+      "id": "h_morita_old_secret",
+      "kind": "approach",
+      "slot": "family_doctor_morita",
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "text": "{family_doctor_morita.name}缝完最后一针，摘下眼镜：“有件事，我瞒了大小姐两年。老当家……不是病死的。”"
+    },
+    {
+      "id": "h_akaho_dont_go",
+      "kind": "request",
+      "slot": "yakuza_heiress_akaho",
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "text": "你刚要起身，{yakuza_heiress_akaho.name}拽住了你的衣角，没看你：“……别出去。这是命令。”停了一下，又低声说，“不是命令也行。”"
+    },
+    {
+      "id": "h_shibata_offer",
+      "kind": "request",
+      "slot": "traitor_lieutenant_shibata",
+      "location_ids": ["yacht_bilge_engineering_corridor"],
+      "text": "{traitor_lieutenant_shibata.name}在走廊尽头放下枪：“保镖，开门，我给你关西若头的位置。你跟着九条家这么多年，得到了什么？”"
+    },
+    {
+      "id": "h_mashima_frequency",
+      "kind": "request",
+      "slot": "radio_officer_mashima",
+      "location_ids": ["yacht_main_deck_owners_stateroom"],
+      "text": "{radio_officer_mashima.name}把耳机递给你：“保安厅在线上。你来说，我们船上现在是什么情况。”"
+    },
+    {
+      "id": "h_akaho_gun_down",
+      "kind": "observe",
+      "slot": "yakuza_heiress_akaho",
+      "location_ids": ["yacht_lower_armored_panic_room"],
+      "text": "{yakuza_heiress_akaho.name}手里的枪终于滑到了地毯上，人还坐得笔直，眼睛却一直盯着门，盯得眼眶发红。"
+    },
+    {
+      "id": "h_goda_corridor_roar",
+      "kind": "observe",
+      "slot": "hammer_enforcer_goda",
+      "location_ids": ["yacht_bilge_engineering_corridor"],
+      "text": "红灯下，{hammer_enforcer_goda.name}把一整瓶伏特加浇在自己头上，提着锤子一步一个水花地走过来。"
+    }
+  ],
+  "twists": [
+    {
+      "id": "t_key_bound_to_two",
+      "category": "信息",
+      "requires": ["yakuza_heiress_akaho"],
+      "text": "瑞士账户的密钥其实需要两个人同时确认：继承人本人，和老当家指定的一名见证人——而那个见证人的名字，明步从没对任何人说过。"
+    },
+    {
+      "id": "t_shibata_betrayed_too",
+      "category": "人事",
+      "requires": ["traitor_lieutenant_shibata"],
+      "text": "若头的副手突然在走廊里倒戈开枪：关西早就下令，拿到密钥后连若头一起灭口，叛乱一方当场自己打了起来。"
+    },
+    {
+      "id": "t_hidden_armory",
+      "category": "资源",
+      "requires": [],
+      "text": "避难室沙发底座下面有个暗格，里面封存着两把霰弹枪、几件防弹背心和一整箱急救用品。"
+    },
+    {
+      "id": "t_succession_by_witness",
+      "category": "制度",
+      "requires": ["yakuza_heiress_akaho"],
+      "text": "老舵手和老医生都是直系老臣，按家规，只要两人亲口见证，明步今夜就能在船上完成换代，不必等回到东京。"
+    },
+    {
+      "id": "t_storm_eye_calm",
+      "category": "时限",
+      "requires": ["pressure"],
+      "text": "风眼正好停在黑龙丸上方，接下来三个小时风平浪静，翻船的危险暂时解除了。"
+    },
+    {
+      "id": "t_old_promise_on_deck",
+      "category": "关系",
+      "requires": ["yakuza_heiress_akaho"],
+      "text": "明步护身符里夹着一张旧纸条，是老当家的字：“将来明步若要选一个人站在身边，让明步自己选，谁也不许拦。”"
+    },
+    {
+      "id": "t_charges_cook_off",
+      "category": "意外",
+      "requires": [],
+      "text": "漏电引爆了叛徒堆在走廊里的备用炸药，外面的通道整个塌了，避难室反而被彻底封成了一座孤岛。"
+    }
+  ],
+  "forbidden_terms": ["智能手机", "微信", "支付宝", "Wi-Fi", "4G", "5G", "苹果手机", "蓝牙耳机", "无人机", "扫码", "外卖App", "网约车", "高铁", "平板电脑", "液晶电视"],
+  "content_tags": ["intimate", "romance_light", "workplace", "workplace_power", "violence", "bodily_harm", "disaster"],
+  "status": "released",
+  "notes": "暴风雨中的黑龙丸：当代极道动作戏。原稿以“神经毒素致千金高烧神志迷离、保镖以推拿吸吮排毒为名在沙发上占有”为核心，属于非清醒状态下的亲密；叛徒台词中还有大量性暴力威胁，已整体重写：毒素改为枪伤失血引起的高烧，救治就是清创包扎，与亲密无关；亲密只在烧退、伤口处理好、明步完全清醒并主动开口时发生。删去叛徒与打手的性化威胁台词，暴力保留在动作戏层面。补足 6 个模板（新增家庭医生与通讯长）、低位身份、6 组组合、会走样的传话渠道与多数 approach 钩子。"
+}

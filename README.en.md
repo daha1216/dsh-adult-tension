@@ -40,7 +40,7 @@ Every world is open. Pick one and play.
 Don't see what you want? Just say "custom world" (`自定义世界`), name the year and the place, and one is made for you on the spot.
 
 <details>
-<summary><b>See all 35 worlds at a glance (click to open)</b></summary>
+<summary><b>See all 39 worlds at a glance (click to open)</b></summary>
 <br>
 
 | World | In one line |
@@ -80,6 +80,10 @@ Don't see what you want? Just say "custom world" (`自定义世界`), name the y
 | Cliff Fortress (绝壁要塞) | Steam mechs hold the last mountain pass; Squad Zero has one night left, and some words will never get another chance to be said. |
 | Dragonfall Chasm (巨龙坠落之堑) | The dragon-slaying banner stands beside the fallen beast; on the eve of the last stand, comrades test each other's limits in the snow. |
 | Blackstone Manor (黑石古堡) | One storm-locked night on the island; the head maid's resignation lands on the desk at dawn, and staying or leaving hangs on one unspoken sentence. |
+| Floor 88 Lockdown (八十八层封楼夜) | A storm seals the tower and the CEO's offshore ledger lands in your hands; whistleblow, confess, or let the old guard seize power — someone must speak before dawn. |
+| Cathedral Confession Night (大圣堂告解夜) | A curse from the abyss war burns the saintess every night, and the only one who can chant the full seal is a scholar the church once cast out. |
+| Typhoon Blackout (台风断电夜) | The whole old street loses power; next door, your childhood friend keeps a signed divorce paper in a drawer, and tonight the choice is hers alone. |
+| The Black Dragon (黑龙丸) | Mutiny on a storm-tossed yacht; the yakuza heiress burns with fever from a gunshot wound, and only her bodyguard can be trusted until dawn. |
 
 </details>
 
