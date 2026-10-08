@@ -1,0 +1,2569 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "浮空要塞守备队成年哨兵。",
+   "age_range": [
+    28,
+    35
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_parapet_lamp_sentry",
+   "line": "{npc.name}：“天哪……顶层的防爆水晶全亮起了红光！里面到底发生了什么……”",
+   "location_ids": [
+    "parapet_catwalk"
+   ],
+   "name": null,
+   "role": "在外层回廊操控探照灯的高空哨兵"
+  },
+  {
+   "adult_context": "要塞宪兵突击队成年士官。",
+   "age_range": [
+    29,
+    38
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_gendarme_breacher",
+   "line": "{npc.name}：“总督有令！凡妨碍执法者就地格杀！开火！”",
+   "location_ids": [
+    "decompression_airlock"
+   ],
+   "name": null,
+   "role": "端着转轮机枪向减压舱扫射的宪兵先锋"
+  },
+  {
+   "adult_context": "轮机车间成年正式技工。",
+   "age_range": [
+    27,
+    34
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_scalded_stoker",
+   "line": "{npc.name}：“压力表爆了……主悬浮翼要脱落了！我们都会掉下去……”",
+   "location_ids": [
+    "boiler_core_hall"
+   ],
+   "name": null,
+   "role": "在锅炉房被蒸汽烫伤的司炉工"
+  },
+  {
+   "adult_context": "浮空城码头成年在册索具工。",
+   "age_range": [
+    45,
+    58
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_dock_rigger",
+   "line": "{npc.name}：“三号锚链我给你们留着，绞盘一松就能放飞艇！”",
+   "location_ids": [
+    "parapet_catwalk"
+   ],
+   "name": null,
+   "role": "在下层码头收放锚链的老索具工"
+  },
+  {
+   "adult_context": "裁判所随军成年神甫。",
+   "age_range": [
+    30,
+    40
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_scripture_chanter",
+   "line": "{npc.name}：“主啊，降下烈火，净化这深渊的罪孽吧！”",
+   "location_ids": [
+    "decompression_airlock"
+   ],
+   "name": null,
+   "role": "跟着审查官念诵绝罚经文的随军执事"
+  },
+  {
+   "adult_context": "要塞机要室成年话务员。",
+   "age_range": [
+    26,
+    33
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_telegraph_clerk",
+   "line": "{npc.name}：“帝都急电！命总督立刻暂停一切强攻，调查组特使已登艇升空！”",
+   "location_ids": [
+    "boiler_core_hall"
+   ],
+   "name": null,
+   "role": "在通信中枢拼命收发电报的话务员"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "你握着重剑与纯阳圣血。石室里是长袍撕裂、高热滚烫、咬牙死撑的首席学者{grand_alchemist_scholar.name}；门外是开启毒气阀疯狂攻门的总督{paranoid_fortress_governor.name}。你要先用圣血与臂弯稳住学者的神智，让这位刻薄的天才放下傲慢；再在毒气涌入、门板崩塌前斩断一切桎梏，护着学者杀出血路。",
+   "id": "combo_fl_captain_lead",
+   "identity_ids": [
+    "pc_holy_blood_royal_captain"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 4
+     },
+     "b": "grand_alchemist_scholar",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 5
+     },
+     "reason": "十年深藏的爱慕在极境中再也压不住。",
+     "stage": "flirting"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "paranoid_fortress_governor",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "祸害全城三万人的草包贪官。",
+     "stage": "stranger"
+    },
+    {
+     "a": "grand_alchemist_scholar",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "paranoid_fortress_governor",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "誓要当众揭发其贪腐。",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "chief_engine_engineer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "卫队长钦佩动力长对导师的忠诚。",
+     "stage": "familiar"
+    },
+    {
+     "a": "grand_alchemist_scholar",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 5
+     },
+     "b": "chief_engine_engineer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "亲手带出来的王牌技师。",
+     "stage": "familiar"
+    },
+    {
+     "a": "paranoid_fortress_governor",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 1
+     },
+     "b": "chief_engine_engineer",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "总督把动力长当随时能枪毙的苦工。",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "grand_alchemist_scholar",
+    "paranoid_fortress_governor",
+    "chief_engine_engineer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "助术士完成解咒调配，毒气窒息前砸开减压舱生擒总督。",
+    "limit_gap": "卫队长誓死护住学者，术士要驯服血脉守住尊严，总督要灭口自保。",
+    "meeting_reason": "卫队长按军令随术士进入封闭工房，总督以清除异端为名重兵包围。",
+    "resource_gap": "卫队长握近战武力与圣血，术士握全城动力密码与炼金爆剂，总督握两百宪兵与毒气阀门。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_mana_surge_vs_holy_blood",
+    "te_scholar_pride_vs_neurotoxin"
+   ]
+  },
+  {
+   "chemistry": "你身体失控，大脑却在绝对主导。面对毫不迟疑割腕供血的卫队长{holy_blood_royal_captain.name}，你在剧痛里冷静推演解药公式；总督{paranoid_fortress_governor.name}灌毒破门时，你用炼金爆炸反向重创外敌，指挥卫队长直捣总督老巢，在雷暴之巅夺下全城控制权。",
+   "id": "combo_fl_scholar_lead",
+   "identity_ids": [
+    "pc_grand_alchemist_scholar"
+   ],
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "holy_blood_royal_captain",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "生死相托中击碎心防。",
+     "stage": "intimate"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "paranoid_fortress_governor",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "企图谋杀自己的无耻政客。",
+     "stage": "stranger"
+    },
+    {
+     "a": "holy_blood_royal_captain",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 1
+     },
+     "b": "paranoid_fortress_governor",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 1
+     },
+     "reason": "军法对决。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "holy_blood_royal_captain",
+    "paranoid_fortress_governor"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "压住暴走，带卫队长突入机房重构浮空平衡。",
+    "limit_gap": "术士要以凡人智慧驯服本能，卫队长要守护学者，总督要灭口保官。",
+    "meeting_reason": "术士因实验反噬封锁工房自救，总督引兵围攻。",
+    "resource_gap": "术士握命脉参数与神性解析，卫队长握破障武力与圣血，总督握行政兵权。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_mana_surge_vs_holy_blood",
+    "te_hull_tilt_vs_boiler_overload"
+   ]
+  },
+  {
+   "chemistry": "你在底层控制台冒险违抗军令，通过铜管监听顶层导师{grand_alchemist_scholar.name}与卫队长{holy_blood_royal_captain.name}在高热与暴走魔力中的绝命互救。你必须赶在宪兵破门前精准调控排风与蒸汽，抽走毒气，指引两人穿过检修井，在机房核心完成反杀。",
+   "id": "combo_fl_engineer_lead",
+   "identity_ids": [
+    "pc_chief_engine_engineer"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 5
+     },
+     "b": "grand_alchemist_scholar",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "再造恩师。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "holy_blood_royal_captain",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "钦佩其忠贞。",
+     "stage": "familiar"
+    },
+    {
+     "a": "holy_blood_royal_captain",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "grand_alchemist_scholar",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "在动力长见证下缔结誓约。",
+     "stage": "intimate"
+    }
+   ],
+   "slots": [
+    "grand_alchemist_scholar",
+    "holy_blood_royal_captain"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "五分钟内排除毒气，确保导师清醒抵达机房。",
+    "limit_gap": "动力长要报恩救师，术士与卫队长要粉碎阴谋。",
+    "meeting_reason": "动力长在底层抢修，通过铜管与顶层两人秘密通话。",
+    "resource_gap": "动力长握排风暗管与机房阀门，术士与卫队长握魔导学术与统帅武力。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_hull_tilt_vs_boiler_overload",
+    "te_scholar_pride_vs_neurotoxin"
+   ]
+  },
+  {
+   "chemistry": "你握着两百宪兵与毒气阀门，隔着三层铅玻璃向反锁在内的首席{grand_alchemist_scholar.name}与卫队长{holy_blood_royal_captain.name}下最后通牒。你可以下令重弩轰杀毁灭罪证；也可以在察觉炉心即将自爆、自己也会坠海时，放下身段与两人做一场残酷的停战博弈。",
+   "id": "combo_fl_governor_lead",
+   "identity_ids": [
+    "pc_paranoid_fortress_governor"
+   ],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "grand_alchemist_scholar",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "灭口对象。",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 1
+     },
+     "b": "holy_blood_royal_captain",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 1
+     },
+     "reason": "体制内的刺头。",
+     "stage": "testing"
+    },
+    {
+     "a": "holy_blood_royal_captain",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "grand_alchemist_scholar",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "门外越逼，室内越坚。",
+     "stage": "intimate"
+    }
+   ],
+   "slots": [
+    "grand_alchemist_scholar",
+    "holy_blood_royal_captain"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "炉心自爆前夺下泄压密码，或把两人当替罪羊击毙。",
+    "limit_gap": "总督求活命保官位，术士与卫队长要公义与要塞安全。",
+    "meeting_reason": "总督带队围剿禁术实验室，被结界阻隔。",
+    "resource_gap": "总督握行政暴力与毒气开关，术士握泄压算法，卫队长握近战绝杀。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_scholar_pride_vs_neurotoxin",
+    "te_mana_surge_vs_holy_blood"
+   ]
+  },
+  {
+   "chemistry": "你、卫队长{holy_blood_royal_captain.name}与狂热审查官{fanatical_heresy_overseer.name}在破碎的试验塔前展开理性与教条的终极对决；窗外，老伙计{airship_smuggler_helmsman.name}的飞艇正顶着雷暴等你们。你在圣血护卫下用炼金术反向引爆圣光回路，击碎审查官的狂信。",
+   "id": "combo_fl_reason_vs_faith",
+   "identity_ids": [
+    "pc_grand_alchemist_scholar"
+   ],
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "holy_blood_royal_captain",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "神罚雷火中十指相扣。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "fanatical_heresy_overseer",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "愚昧残暴的刽子手。",
+     "stage": "stranger"
+    },
+    {
+     "a": "holy_blood_royal_captain",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "fanatical_heresy_overseer",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "拔剑断绝一切妥协。",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "airship_smuggler_helmsman",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "过命的老伙计。",
+     "stage": "familiar"
+    },
+    {
+     "a": "holy_blood_royal_captain",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "airship_smuggler_helmsman",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "两人互相看不顺眼，又不得不倚重对方。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "fanatical_heresy_overseer",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 0
+     },
+     "b": "airship_smuggler_helmsman",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 0
+     },
+     "reason": "审查官视走私舵手为异端的帮凶。",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "holy_blood_royal_captain",
+    "fanatical_heresy_overseer",
+    "airship_smuggler_helmsman"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "圣火吞噬全室前瓦解破魔钻，把审查官轰出试验塔。",
+    "limit_gap": "学者要科学自由，卫队长誓死护卫，审查官要灭绝异端立威。",
+    "meeting_reason": "审查官攻破外层水晶墙突入净化。",
+    "resource_gap": "学者握元素炼金与神性解析，卫队长握近战护盾，审查官握破魔重器，舵手握空中退路。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_reason_vs_inquisitor_ballista",
+    "te_mana_surge_vs_holy_blood"
+   ]
+  },
+  {
+   "chemistry": "你手握真理圣镜与破魔重钻，面对结界里魔气冲天的女学者{grand_alchemist_scholar.name}与拔剑相向的卫队长{holy_blood_royal_captain.name}。你可以击穿结界降下圣火；也可以在亲眼看见两人宁死不屈、用科学解析神明本源时，第一次感到信仰的动摇。",
+   "id": "combo_fl_overseer_lead",
+   "identity_ids": [
+    "pc_fanatical_heresy_overseer"
+   ],
+   "player_positions": [
+    "equal",
+    "high",
+    "low"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "grand_alchemist_scholar",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "必须净化的魔物。",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "holy_blood_royal_captain",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "被蛊惑的叛军。",
+     "stage": "stranger"
+    },
+    {
+     "a": "grand_alchemist_scholar",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "holy_blood_royal_captain",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "圣火威压前紧紧相拥毫不畏缩。",
+     "stage": "committed"
+    }
+   ],
+   "slots": [
+    "grand_alchemist_scholar",
+    "holy_blood_royal_captain"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "血脉完全觉醒前完成照定，或见证异端灰飞烟灭。",
+    "limit_gap": "审查官要维护正统，学者与卫队长要打破神权活出自我。",
+    "meeting_reason": "审查官前来血脉核验，遭遇武装抵抗。",
+    "resource_gap": "审查官握教廷特权与破魔武器，学者与卫队长握魔导真理与舍命武力。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_reason_vs_inquisitor_ballista",
+    "te_mana_surge_vs_holy_blood"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_copper_speaking_tube",
+   "reach": "埋在防爆石壁里的真空声管，拔开铜阀塞即可原声对话，极微弱的喘息也清晰可辨。",
+   "text": "试验塔加厚纯铜对讲飞筒"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_catwalk_storm_echo",
+   "reach": "狂风与雨幕在环形金属壁间撕扯，正常的呼喊被扭曲得像厉鬼嚎叫。",
+   "text": "高空回廊的雷暴回音"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_boiler_pipe_morse",
+   "reach": "用扳手按固定频率敲击生铁管壁，在全塔管网里精准传递情报。",
+   "text": "机房供能管道的敲击码"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "皇家魔导科学院终身特等首席学者兼浮空炉心总设计师，年满二十九岁的成年领主。",
+   "age_range": [
+    29,
+    36
+   ],
+   "appearance_options": [
+    "墨黑丝绒长袍在实验台边撕开一道深痕，瓷白肌肤在金丝回路下若隐若现，黑丝长腿因高热痉挛微颤，秘银项圈贴着细颈，眼镜滑落，紫晶的眼蒙着水雾，咬破的唇渗血仍维持着学者最后的清明",
+    "褪去外袍只剩黑色束胸与开衩短裙，马甲线随滚烫的呼吸起伏，眼神桀骜如寒梅，手里握着装满中和剂的水晶滴管"
+   ],
+   "decision": {
+    "avoids": [
+     "满口教条的狂徒",
+     "贪生怕死的政客"
+    ],
+    "contrast": "平日令全要塞学者闻风丧胆的毒舌女魔头；困在结界里时，烈焰焚身般脆弱又凄美。",
+    "core_value": "一切超自然力量不过是尚未解析的方程式。血是魅魔的，大脑仍是首席的。",
+    "goal_options": [
+     "在清醒前提下用卫队长的圣血调配中和剂压住暴走",
+     "结界失效前推导出完整的逆向封印公式",
+     "挫败毒气强攻，与卫队长夺下浮空城控制权"
+    ],
+    "never": [
+     "为压住痛苦向践踏科学的强权出卖成果"
+    ],
+    "prefers": [
+     "意志如铁、在强权前不动摇且尊重真理的骑士"
+    ],
+    "pressure_responses": {
+     "breaking": "心核险些烧穿时泪光盈盈，扑进卫队长怀里寻求一点凉意。",
+     "high": "毒气涌入时砸碎浓缩水银瓶，在桌面点燃冰冷的炼金火墙。",
+     "low": "撑着黄铜桌沿，用傲慢的学术腔调命令递药，极力压住颤抖的声线。",
+     "mid": "体温逼近临界时攥紧卫队长胸甲大口喘息，咬紧牙不发一声哀求。"
+    },
+    "relationship_stance": "原把护卫当沉默的帝国兵刃；今夜才看见那副铠甲下十年的忠诚与傲骨，压抑已久的心动再也藏不住。",
+    "withdrawal": "蜷进实验台深处的阴影，用浸满薄荷酒精的毛巾捂住脸平复心跳。"
+   },
+   "gender": "female",
+   "gender_reason": "标题人物“女首席”“女大炼金术士”，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "grand_alchemist_scholar",
+   "identity": {
+    "authority": "禁术实验全权裁决、禁忌文献调阅与防爆结界紧急升降",
+    "exposure": "体内流着原初真祖血脉，曾暗中对神核古物做活体解析。",
+    "hidden": "左手无名指骨里植着一枚能瓦解教廷破邪结界的黑水银导魔针。",
+    "limits": [
+     "血脉觉醒带来的高热与反噬，每一刻钟神智都要被灼烧一次",
+     "结界三小时内无法从内破除"
+    ],
+    "obligations": [
+     "捍卫凡人理性，绝不让禁术成果沦为教廷奴役民众的武器。"
+    ],
+    "resources": [
+     "炉心核心平衡公式与全要塞动力断路图",
+     "三支能瞬间恢复精神力的“星髓魔露”"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "自己最狼狈时毫无轻慢、以血肉之躯作护盾的守护",
+     "能以势均力敌的意志承受自己魔导冲击的坦荡灵魂"
+    ],
+    "boundaries": [
+     "守住学者的尊严",
+     "终生平权同盟"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "推翻腐朽神殿后共掌浮空城的开拓伴侣",
+    "dislikes": [
+     "乘人之危的窥视",
+     "软弱退缩的无能"
+    ],
+    "expression": "体温回落后环住卫队长的脖颈：‘公式解出来了，我也清醒了。现在，换我来问你要不要。’",
+    "likes": [
+     "高热退去后被对方从背后锁进怀里，听那沉稳的心跳",
+     "任由对方的手指在项圈卡扣处细致检查，附带克制的轻抚"
+    ],
+    "preconditions": [
+     "高热已退、魔力已稳，神智完全清明",
+     "绝无借体质失控的半推半就"
+    ],
+    "self_control_range": [
+     3,
+     4
+    ]
+   },
+   "public_role": "帝国皇家首席大炼金术士",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "sanctum_alchemy_lab",
+     "to": 45
+    },
+    {
+     "from": 46,
+     "location_id": "sanctum_alchemy_lab",
+     "to": 165
+    },
+    {
+     "from": 166,
+     "location_id": "decompression_airlock",
+     "to": 285
+    },
+    {
+     "from": 286,
+     "location_id": "boiler_core_hall",
+     "to": 1364
+    },
+    {
+     "from": 1365,
+     "location_id": "sanctum_alchemy_lab",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "卫队长吸入毒气肺部灼伤呕血，失血过多半休克",
+      "option": "卫队长扯下防毒面具套在术士脸上，把圣血灌进反应釜引燃中和烈焰"
+     },
+     {
+      "cost": "沸腾水银烫伤后背与双臂，留下永久的炼金疤痕",
+      "option": "术士引爆三号水银储罐，用气浪反向堵住毒气喷口"
+     }
+    ],
+    "pressure": "结界锁死无法通风，毒气会瓦解术士仅存的意志，引发魔力自爆。",
+    "trigger": "总督下令开启通风主管，向实验室注入高纯“死魂紫雾”，毒气已越过滤网，五分钟后达到致死浓度。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "这魔纹越烧越烫……不行，我是帝国首席，绝不能让这具身体替我做决定。",
+    "surface": "“退后三步，这是第十四次警告！五分钟后读数破四百，就照我左肩刺下来。现在——把第三排的冰晶试剂递给我。”"
+   }
+  },
+  {
+   "adult_context": "皇家近卫魔导军团第一特种支队总指挥官兼首席护剑官，年满三十二岁的成年军官。",
+   "age_range": [
+    32,
+    38
+   ],
+   "appearance_options": [
+    "纯黑暗银半身板甲刻着雄狮暗纹，卸下护手露出布满老茧的手掌，腕上一道割开渗血的放血口，面容刚毅如岩石，墨绿的眼布满血丝却镇定如山，嗓音低沉沙哑",
+    "卸去重甲只穿深蓝战术背心，汗湿的臂膀与胸肌冒着热气，单膝跪地扶剑，专注地望着前方"
+   ],
+   "decision": {
+    "avoids": [
+     "残害无辜的宗教疯子",
+     "推诿塞责的贪官"
+    ],
+    "contrast": "人前冷酷寡言的人肉盾牌；骨子里深情如火，敢为至爱向整个帝国开战。",
+    "core_value": "我的剑只为守护这片星空下最聪明的头脑拔出。你的血脉是什么，与我无关。",
+    "goal_options": [
+     "用圣血与意志替术士筑起最后的屏障",
+     "破门前组织火力击溃宪兵与审查官",
+     "打破军律枷锁，与术士结为平权同盟"
+    ],
+    "never": [
+     "把失去自卫能力的学者交给宪兵领赏"
+    ],
+    "prefers": [
+     "傲岸自信、坚守良知的女杰"
+    ],
+    "pressure_responses": {
+     "breaking": "看见术士口吐鲜血倒地，不顾失血疯狂倾注生命力。",
+     "high": "巨弩破门时扬剑斩断射入的钢箭，横刀挡在碎玻璃前怒吼。",
+     "low": "拔剑割开左臂，用铜杯接满金色圣血稳稳递上实验桌。",
+     "mid": "用臂弯按住术士剧烈战栗的肩，把体温渡给她降下高热。"
+    },
+    "relationship_stance": "鄙夷总督的阴险与审查官的狂热；对这位高傲毒舌的女学者，是越过主从界限十年的深沉爱慕。",
+    "withdrawal": "靠在铸铁闸门旁沉默地擦剑，眼神冷如玄铁。"
+   },
+   "gender": "male",
+   "gender_reason": "与女首席对位、原稿以“男人”书写的卫队长，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "holy_blood_royal_captain",
+   "identity": {
+    "authority": "特级警戒区防卫生杀权与紧急状态独立开火权",
+    "exposure": "多次私下向术士输送自己的禁忌圣血样本。",
+    "hidden": "剑鞘底部藏着一枚能瞬间切断塔外能源的零度冰晶引信。",
+    "limits": [
+     "受卫队誓词与军法束缚，被宪兵队制度掣肘",
+     "不通高深炼金理论，全靠术士指引"
+    ],
+    "obligations": [
+     "不惜一切护住首席学者，誓死守住浮空城不坠。"
+    ],
+    "resources": [
+     "试验塔全部防爆齿轮机械钥匙与破甲飞索",
+     "先皇所赐世袭铁券与战时紧急接管令"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "学者荣光下对真理的执着与脆弱里的不屈傲骨",
+     "放下一切防备、清醒地全心托付的信任"
+    ],
+    "boundaries": [
+     "恪守守护骑士的誓言",
+     "生死同盟"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "新政权中永远立在她身侧的护国元帅",
+    "dislikes": [
+     "出卖袍泽",
+     "践踏战士尊严"
+    ],
+    "expression": "单膝跪地把滴血的手腕递到她唇边：‘喝下去。别管魅魔还是神明，你永远是你。’",
+    "likes": [
+     "风暴平息后把精疲力竭的学者打横抱到毛毯上",
+     "擦去对方唇边的血痕，深情对视相拥"
+    ],
+    "preconditions": [
+     "对方高热已退、完全清醒自愿",
+     "绝不乘人之危"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "皇家特种卫队首席指挥官",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "sanctum_alchemy_lab",
+     "to": 45
+    },
+    {
+     "from": 46,
+     "location_id": "sanctum_alchemy_lab",
+     "to": 165
+    },
+    {
+     "from": 166,
+     "location_id": "decompression_airlock",
+     "to": 285
+    },
+    {
+     "from": 286,
+     "location_id": "boiler_core_hall",
+     "to": 1364
+    },
+    {
+     "from": 1365,
+     "location_id": "sanctum_alchemy_lab",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "右臂三度电击烧伤，手掌肌肉严重萎缩",
+      "option": "卫队长徒手抓住通电的钢索硬扛电弧，反手挥剑斩断"
+     },
+     {
+      "cost": "魔力回路崩塌，深度昏迷高烧三日",
+      "option": "术士榨干最后一丝神核魔力，用冲击波把倒钩连窗框炸飞"
+     }
+    ],
+    "pressure": "电网带着数千伏电弧，术士离被拖出窗外只剩三秒。",
+    "trigger": "审查官的两架重装床弩射出破魔倒钩锥，穿透铅玻璃张开雷光电网，倒钩锁链就要勾住脱力倒地的术士拖出窗外。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "她体温高得吓人。哪怕把这身血流干，也绝不让任何人把她带走。",
+    "surface": "“别再推开我！我的血能压住你的逆流，十年前在极北要塞就证明过了。靠在我肩上，深呼吸——只要我站着，这里就最安全。”"
+   }
+  },
+  {
+   "adult_context": "元老院派驻浮空城的最高执政官，年满三十五岁的成年贵族。",
+   "age_range": [
+    35,
+    48
+   ],
+   "appearance_options": [
+    "深红丝绒金边礼服在狂风里猎猎作响，红宝石别针泛着血光，苍白浮肿的脸因恐惧仕途断送而扭曲，右手金雕左轮，左手死扳毒气总阀，尖声催促宪兵加速进攻",
+    "换上防弹轻胸甲躲在盾牌阵后，神经质地用丝帕擦额角冷汗，眼神阴鸷如毒蛇"
+   ],
+   "decision": {
+    "avoids": [
+     "不畏生死的铁血军官",
+     "洞察一切的学者泰斗"
+    ],
+    "contrast": "口口声声为帝国利益的忠臣；实则自私懦弱、草菅人命。",
+    "core_value": "炉心有一丝爆炸风险，我的乌纱帽就保不住。放毒气，给我往死里打！",
+    "goal_options": [
+     "用毒气与床弩击杀或生擒首席，推卸全盘责任",
+     "解除卫队长武装扣押审讯，掩盖管理失职",
+     "调查团赶到前清扫封锁现场"
+    ],
+    "never": [
+     "自身受到直接威胁时还坚守职责"
+    ],
+    "prefers": [
+     "百依百顺、容易收买的软骨头"
+    ],
+    "pressure_responses": {
+     "breaking": "重剑架上脖子、贪腐账本被公开时跪地涕泗横流。",
+     "high": "结界反爆波及指挥所时瘫在盾牌后尖叫撤退。",
+     "low": "在扩音铜管里声嘶力竭宣读戒严令，威胁剥夺室内人员全家头衔。",
+     "mid": "下令向减压舱抛掷高爆手雷，不惜炸裂外层装甲。"
+    },
+    "relationship_stance": "视首席为不可控的狂人，视卫队长为冥顽的绊脚石，视审查官为可利用又须防备的恶犬。",
+    "withdrawal": "退进逃生飞艇停机坪，企图抛下全城独自逃逸。"
+   },
+   "gender": "male",
+   "gender_reason": "八字胡、自称“老子”的总督，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "paranoid_fortress_governor",
+   "identity": {
+    "authority": "全城戒严、战时就地处决与要塞自毁重锤启动",
+    "exposure": "克扣防雷维修专款数千万金币赌博挥霍的账册。",
+    "hidden": "礼服夹层里藏着能单向切断试验塔氧气循环的窒息手柄。",
+    "limits": [
+     "毫无军事与魔导知识，突发混乱中极易自乱阵脚",
+     "受元老院调查组暗中制衡，必须伪造合法程序"
+    ],
+    "obligations": [
+     "确保炉心运转，扑灭任何可能引发舆论哗然的异端丑闻。"
+    ],
+    "resources": [
+     "两百名直属宪兵与六门魔导转轮炮",
+     "通往逃生浮空艇密道的纯金钥匙卡"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "金钱与权位堆出的排场",
+     "懂得逢迎、能替自己办事的聪明人"
+    ],
+    "boundaries": [
+     "不损害自身利益与官位",
+     "官场自保"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "在要塞废墟上独揽横财的独裁者",
+    "dislikes": [
+     "被利刃逼视咽喉",
+     "钱摆不平的钢铁意志"
+    ],
+    "expression": "晃着金左轮冷笑：‘首席，平日在元老院你看都不看我一眼。现在，把炉心密码交出来。’",
+    "likes": [
+     "在奢华沙发上数着金币听下属汇报",
+     "看昔日瞧不起自己的人落魄"
+    ],
+    "preconditions": [
+     "双方清醒自愿",
+     "绝不以权势或生死相胁"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "浮空城最高行政总督",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "parapet_catwalk",
+     "to": 45
+    },
+    {
+     "from": 46,
+     "location_id": "decompression_airlock",
+     "to": 165
+    },
+    {
+     "from": 166,
+     "location_id": "parapet_catwalk",
+     "to": 285
+    },
+    {
+     "from": 286,
+     "location_id": "boiler_core_hall",
+     "to": 1364
+    },
+    {
+     "from": 1365,
+     "location_id": "parapet_catwalk",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "腹部中弹，手掌被雷管炸碎两根手指",
+      "option": "卫队长飞身用剑柄砸飞总督的手，以肉身压灭雷管"
+     },
+     {
+      "cost": "神核反噬当场喷血，左眼暂时失明",
+      "option": "术士调动残存的真祖精神力发出一记“心灵尖啸”震晕总督"
+     }
+    ],
+    "pressure": "雷管火星烧过一半，全城三万人三秒后坠海。",
+    "trigger": "总督被逼入绝境，亲手把雷管插进主炉心过载泄压阀，限两人自废双手跪地受缚，否则三秒后引爆。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "快弄死他们！实验记录一旦被元老院看到，那两千万的去向就瞒不住了。",
+    "surface": "“卫队长！最后一次警告！立刻交出那个异端！宪兵队听令，所有毒气阀门开到最大，一个活口都不许留！”"
+   }
+  },
+  {
+   "adult_context": "裁判所驻浮空城特派异端血脉审查官，年满三十岁的成年圣职者。",
+   "age_range": [
+    30,
+    42
+   ],
+   "appearance_options": [
+    "纯白镶银高领法袍，枯瘦如骷髅，眼窝深陷却精光如炬，黄金十字架被雨水洗得锃亮，右手刺目的神判铜镜，左手燃着白焰的审判权杖，在雷暴中步步紧逼",
+    "白斗篷被硝烟熏黑，单手操控便携圣光投射器，面部肌肉因狂热抽搐"
+   ],
+   "decision": {
+    "avoids": [
+     "崇尚理性的学者",
+     "只遵军法的武将"
+    ],
+    "contrast": "人前代表至高正义的使徒；实则偏执残暴、不惜毁灭一切的狂信刽子手。",
+    "core_value": "非人的血哪怕一滴存在于帝国天空，都是亵渎。圣火必须净化这间工房。",
+    "goal_options": [
+     "用圣镜与破魔钻击穿八重结界，完成现场定罪",
+     "破门后当场执行火刑",
+     "把卫队长以纵容异端押回帝都受审"
+    ],
+    "never": [
+     "目标未化为灰烬前中止净化"
+    ],
+    "prefers": [
+     "盲从教条的狂热信徒"
+    ],
+    "pressure_responses": {
+     "breaking": "权杖被极酸融成废铁、圣镜被轰碎时信仰崩塌瘫软。",
+     "high": "破门刹那高举权杖向室内无差别倾泻圣光烈焰。",
+     "low": "在门外高声念诵绝罚经文，用刺目光芒照射观察窗。",
+     "mid": "亲自操纵破魔钻轰击门铰链，电弧漫天。"
+    },
+    "relationship_stance": "视首席为必须铲除的魔物，视卫队长为被蛊惑的叛徒，视总督为懦弱的世俗蠢猪。",
+    "withdrawal": "退守升降机房，试图引动圣光自毁符阵同归于尽。"
+   },
+   "gender": "male",
+   "gender_reason": "枯瘦如骷髅的审查官，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "fanatical_heresy_overseer",
+   "identity": {
+    "authority": "异端血脉最终火刑判决与神圣破魔圣物无限征调",
+    "exposure": "曾为制造“圣徒奇迹”在边境水井投毒，害死数百信徒。",
+    "hidden": "权杖把手里藏着一管能瞬间融化生物魔导回路的圣灵纯净水银。",
+    "limits": [
+     "盲信圣光全能，蔑视机械与化学",
+     "死守宗教程序，缺乏应变"
+    ],
+    "obligations": [
+     "在血脉完全觉醒前当场净化焚烧。"
+    ],
+    "resources": [
+     "“神圣破魔钻”等三件高阶破结界重器",
+     "红衣主教签署的特赦与必杀双重手谕"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对教义毫无保留的虔诚",
+     "能替教廷立下大功的同道"
+    ],
+    "boundaries": [
+     "不沾世俗肉欲",
+     "唯神独尊"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "把浮空要塞改造成宗教要塞的裁判长",
+    "dislikes": [
+     "对神权的讥笑",
+     "任何深渊相关的诱惑"
+    ],
+    "expression": "举起圣镜对准室内：‘可悲的堕落者！唯有烈火与灰烬，才是你最终的归宿！’",
+    "likes": [
+     "居高临下施行神罚洗礼",
+     "用经文摧毁异端的精神防线"
+    ],
+    "preconditions": [
+     "双方清醒自愿",
+     "恪守戒律"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "裁判所特派异端审查总监",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "decompression_airlock",
+     "to": 45
+    },
+    {
+     "from": 46,
+     "location_id": "decompression_airlock",
+     "to": 165
+    },
+    {
+     "from": 166,
+     "location_id": "sanctum_alchemy_lab",
+     "to": 285
+    },
+    {
+     "from": 286,
+     "location_id": "parapet_catwalk",
+     "to": 1364
+    },
+    {
+     "from": 1365,
+     "location_id": "decompression_airlock",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "后背与双臂被高温钢板大面积烫伤",
+      "option": "卫队长推倒数千斤的精钢冷却箱死死扣住毒烟源头"
+     },
+     {
+      "cost": "本源精血亏空大半当场休克，审查官毁容陷入狂暴",
+      "option": "术士把本源剧毒凝成一枚血珠，反向射穿豁口击中审查官"
+     }
+    ],
+    "pressure": "白烟上千度，三十秒内不决断，两人将被融化皮肉。",
+    "trigger": "审查官在铅玻璃上融开一道豁口，把一整瓶圣灵纯净水银倒进中央反应釜，剧毒白烟瞬间引燃试验台。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "亲手焚死一位觉醒的真祖，回帝都就能晋升红衣大主教。",
+    "surface": "“卫队长，睁眼看清楚！圣镜已经照出她身上的真祖之印！滚开，否则圣火连你一起化成灰！”"
+   }
+  },
+  {
+   "adult_context": "科学院地下动力轮机车间首席总工程师，年满二十九岁的成年技师。",
+   "age_range": [
+    29,
+    36
+   ],
+   "appearance_options": [
+    "厚牛皮工装沾满机油与防锈蜡，胸前挂着护目镜与游标卡尺，汗水顺着煤灰脸颊淌下，手上布满烫伤与厚茧，握着两尺长的重型精钢扳手，焦虑里透着拼死一搏",
+    "只穿单薄工字背心，古铜色的肌肉在蒸汽里冒着热气，在减压阀间飞奔调度"
+   ],
+   "decision": {
+    "avoids": [
+     "外行指挥内行的官僚",
+     "焚烧技术典籍的神职"
+    ],
+    "contrast": "看着只会摆弄齿轮的苦工；实则胆识过人的机械天才。",
+    "core_value": "这条命是导师从爆炸废墟里刨出来的。往实验室灌毒气，就是往三万人的棺材上钉钉子。",
+    "goal_options": [
+     "偷偷反向开启泄压阀，稀释抽离毒气",
+     "用速凝胶泥抢修管路，维持炉心最低压力",
+     "引导两人从检修竖井撤进动力车间"
+    ],
+    "never": [
+     "为保饭碗出卖导师的控制参数"
+    ],
+    "prefers": [
+     "尊重工匠、敢担责任的英杰"
+    ],
+    "pressure_responses": {
+     "breaking": "仪表崩飞、导师重伤撤出时跪地痛哭自责。",
+     "high": "主锅炉超载时爬上滚烫的管道，用身体扳动锈死的排气重锤。",
+     "low": "在总督眼皮底下拧松非核心气阀制造白雾，掩护手上的跳线。",
+     "mid": "抡扳手砸晕企图关闭排风阀的宪兵，反锁车间铁门。"
+    },
+    "relationship_stance": "把导师当重若父母的恩师，钦佩卫队长的忠勇，对总督与审查官恨之入骨。",
+    "withdrawal": "钻进电缆地沟，用扳手敲管道传递求生暗号。"
+   },
+   "gender": "male",
+   "gender_reason": "原稿称导师为“恩师父母”的动力长，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "chief_engine_engineer",
+   "identity": {
+    "authority": "主减压阀物理控制与全要塞蒸汽动力紧急配平",
+    "exposure": "违规给导师实验室加装超标的备用输能管线。",
+    "hidden": "工作台底座藏着一套能切断总督府电力的紧急接地刀闸。",
+    "limits": [
+     "在总督与宪兵面前毫无话语权",
+     "无法同时顾及七处过载阀门"
+    ],
+    "obligations": [
+     "死守炉心压力平衡，护送导师与卫队长脱险。"
+    ],
+    "resources": [
+     "试验塔暗装排风检修竖井图",
+     "破拆扳手与速凝炼金修补胶泥"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "倾囊相授的恩情",
+     "力挽狂澜的英雄气概"
+    ],
+    "boundaries": [
+     "恪守弟子的分寸",
+     "誓死守卫导师"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "新城邦中执掌动力工业的总管",
+    "dislikes": [
+     "破坏精密仪器",
+     "贬低工程学"
+    ],
+    "expression": "满脸油污与热泪，双手呈上黄铜主控手柄：‘三号减压阀打通了，毒气全排出去了！请您下令！’",
+    "likes": [
+     "检修完和信任的人坐在高空钢梁上喝冰麦酒",
+     "得到敬重之人一句拍肩赞许"
+    ],
+    "preconditions": [
+     "双方清醒自愿、平等相待",
+     "与师恩完全无关"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "要塞轮机总工程师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "boiler_core_hall",
+     "to": 45
+    },
+    {
+     "from": 46,
+     "location_id": "boiler_core_hall",
+     "to": 165
+    },
+    {
+     "from": 166,
+     "location_id": "boiler_core_hall",
+     "to": 285
+    },
+    {
+     "from": 286,
+     "location_id": "boiler_core_hall",
+     "to": 1364
+    },
+    {
+     "from": 1365,
+     "location_id": "boiler_core_hall",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "枪走火擦过右耳撕裂耳垂，惊动机房主力",
+      "option": "动力长反手一扳手砸碎宪兵的手腕夺枪"
+     },
+     {
+      "cost": "暴露撤退路线，暂时失去主战兵刃",
+      "option": "卫队长从检修竖井掷出重剑贯穿宪兵"
+     }
+    ],
+    "pressure": "枪一响动力长必死，减压通道会被永久焊死。",
+    "trigger": "动力长抢修排风阀时被总督心腹发现，转轮枪顶住了太阳穴，手指扣在扳机上。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "排风管早被我改成单向抽风了。卫队长，一定要带导师活着出来。",
+    "surface": "“总督，万万不能切断主蒸汽回路！压力一降，平衡轴承两分钟就会抱死，整座要塞会像生铁一样砸进海里！”"
+   }
+  },
+  {
+   "adult_context": "高空私掠飞艇在册执照舵手，年满三十岁的成年飞行员。",
+   "age_range": [
+    30,
+    42
+   ],
+   "appearance_options": [
+    "油亮的皮质飞行夹克领口翻着羊毛，护目镜推在额上，脸上被高空寒风刻出细纹，腰间别着信号枪，咧嘴笑时露出一颗金牙",
+    "被暴雨打湿的长围巾在风里翻飞，单手攥着三号锚链，冲回廊上的人用力挥手"
+   ],
+   "decision": {
+    "avoids": [
+     "吃拿卡要的宪兵",
+     "过河拆桥的雇主"
+    ],
+    "contrast": "满嘴跑风的走私贩子；关键时刻手稳得像钉子。",
+    "core_value": "我只信两样东西：风向，和首席给的药方。当年那一船人是她救的。",
+    "goal_options": [
+     "在雷暴里稳住飞艇等待接应",
+     "替突围者引开巡逻艇",
+     "把首席与卫队长送到元老院调查团的旗舰"
+    ],
+    "never": [
+     "丢下首席自己逃跑"
+    ],
+    "prefers": [
+     "说话算话、不嫌弃自己出身的人"
+    ],
+    "pressure_responses": {
+     "breaking": "锚链被雷劈断时死死拽住缆绳不放。",
+     "high": "顶着雷暴把飞艇贴到步道边缘接人。",
+     "low": "叼着烟斗看风向，嘴上抱怨天气。",
+     "mid": "打出信号弹把宪兵巡逻艇引向东侧。"
+    },
+    "relationship_stance": "对首席是过命的交情与感恩，对卫队长是互相看不顺眼又不得不倚重。",
+    "withdrawal": "缩回驾驶舱，一边修仪表一边哼走调的船歌。"
+   },
+   "gender": "male",
+   "gender_reason": "新增的走私飞艇舵手，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "airship_smuggler_helmsman",
+   "identity": {
+    "authority": "一艘系在下层三号锚链上的小型破风飞艇",
+    "exposure": "替首席偷运过教廷禁运的古神遗物。",
+    "hidden": "船舱夹板里藏着三箱帝都元老院的通行文书。",
+    "limits": [
+     "飞艇太小，最多载四个人",
+     "无照私掠被宪兵抓到就是死罪"
+    ],
+    "obligations": [
+     "把首席平安送出浮空城，还上当年的救命之恩。"
+    ],
+    "resources": [
+     "熟悉雷暴云层里每一道上升气流",
+     "首席多年来的稀有草药供货渠道"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "共同闯过雷暴的默契",
+     "不问出身的信任"
+    ],
+    "boundaries": [
+     "不越老伙计的分寸",
+     "乘客安全优先"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "新城邦里专跑自由航线的首席舵手",
+    "dislikes": [
+     "把自己当一次性工具",
+     "拿恩情做交易"
+    ],
+    "expression": "把飞行护目镜扣到首席头上：‘抓稳了。这趟不收钱，回头请我喝酒就行。’",
+    "likes": [
+     "落地后在码头小酒馆请对方喝最烈的朗姆",
+     "被对方喊一声“老伙计”"
+    ],
+    "preconditions": [
+     "双方清醒自愿、彼此对等",
+     "与报恩完全无关"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "走私草药的破风飞艇舵手",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "parapet_catwalk",
+     "to": 45
+    },
+    {
+     "from": 46,
+     "location_id": "parapet_catwalk",
+     "to": 165
+    },
+    {
+     "from": 166,
+     "location_id": "parapet_catwalk",
+     "to": 285
+    },
+    {
+     "from": 286,
+     "location_id": "boiler_core_hall",
+     "to": 1364
+    },
+    {
+     "from": 1365,
+     "location_id": "parapet_catwalk",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "肩关节脱臼，飞艇左侧气囊破裂只能低空飞行",
+      "option": "舵手单手吊在缆绳上用脚蹬开塔壁，硬把飞艇推离"
+     },
+     {
+      "cost": "卫队长被飞索勒伤双手，一时无法握剑",
+      "option": "卫队长从步道甩出破甲飞索钩住飞艇龙骨拉稳"
+     }
+    ],
+    "pressure": "飞艇一旦撞毁，唯一的空中退路就没了。",
+    "trigger": "一道落雷劈中三号锚链，飞艇猛地失控撞向试验塔外壁，舵手被甩出驾驶舱挂在缆绳上。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "当年那一船疫病难民是她救的。今晚轮到我还了。",
+    "surface": "“首席！我的破风飞艇就系在三号锚链上！你们冲下来，我立刻拉引擎——雷暴再大也闯得过去！”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "夜里十点四十五，八级雷暴，八重结界已锁",
+  "minute": 1365
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster",
+  "explicit",
+  "death"
+ ],
+ "custom": false,
+ "customs": [
+  "进入禁术工房特级受控区前，主试学者与卫队官须在黄铜气密门前解下配剑，接受水银圣水除魔喷雾。",
+  "八级雷暴过载警报时，核心实验区所有重力电梯断电锁死，唯一对外通信是纯机械的黄铜抽气飞筒。",
+  "凡血脉鉴定出现非人纯血特征者，裁判所法典勒令佩戴双重秘银禁魔锁具并移送净化熔炉。",
+  "实验室出现魔导暴走征兆时，最高主试官有权拉下黄铜主控手柄封闭所有排风井。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "雷暴肆虐，长袍撕裂的学者软倒在实验台边，黑丝长腿因高热痉挛",
+    "卫队长扣紧幽蓝的秘银项圈，割破手腕把圣血喂进学者唇间",
+    "圣血中和下学者剧烈战栗，攥着卫队长的胸甲，用沙哑傲慢的语调下令推演公式"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [
+    "hk_scholar_fever_approach",
+    "hk_captain_collar_approach",
+    "hk_scholar_desk_observe"
+   ],
+   "id": "act_fl_collar_injection",
+   "location_ids": [
+    "sanctum_alchemy_lab"
+   ],
+   "start_minute": 1370,
+   "tags": [
+    "intimate"
+   ],
+   "title": "高热暴走与项圈注射"
+  },
+  {
+   "beats": [
+    "高热终于退去，卫队长从背后拥住脱力的学者，托住学者颤抖的右手写字",
+    "羊皮纸上公式飞舞，两人额头相贴，在水汽里互诉十年心迹",
+    "学者把第一支深蓝抗性药剂推进卫队长静脉，两人清醒地立下平权血誓"
+   ],
+   "duration_minutes": 65,
+   "hook_ids": [
+    "hk_scholar_whisper_request",
+    "hk_captain_shield_approach",
+    "hk_captain_armor_observe"
+   ],
+   "id": "act_fl_equation_embrace",
+   "location_ids": [
+    "sanctum_alchemy_lab"
+   ],
+   "start_minute": 1435,
+   "tags": [
+    "intimate"
+   ],
+   "title": "圣血互换解咒推演"
+  },
+  {
+   "beats": [
+    "钢门被破魔钻凿穿，机枪与重弩齐射，卫队长挥剑格挡跳弹",
+    "学者顺着豁口掷出三瓶水银炸弹，白炽烈焰吞没先锋宪兵",
+    "两人拉下转盘把毒气反吹向敌阵，封死外廊"
+   ],
+   "duration_minutes": 50,
+   "hook_ids": [
+    "hk_governor_gas_approach",
+    "hk_overseer_drill_approach",
+    "hk_governor_pistol_observe"
+   ],
+   "id": "act_fl_mercury_firewall",
+   "location_ids": [
+    "decompression_airlock"
+   ],
+   "start_minute": 65,
+   "tags": [
+    "workplace"
+   ],
+   "title": "过渡舱水银火墙反击"
+  },
+  {
+   "beats": [
+    "三十米风速下步道剧烈倾斜，卫队长用皮带把虚弱的学者绑在背上",
+    "单手扣着结冰的索道在电弧中攀爬，子弹擦着钢梁迸火",
+    "断索一刻，飞艇贴着步道冲来，两人荡进机房通风口"
+   ],
+   "duration_minutes": 55,
+   "hook_ids": [
+    "hk_helmsman_anchor_approach",
+    "hk_engineer_boiler_request",
+    "hk_engineer_tools_observe"
+   ],
+   "id": "act_fl_catwalk_crossing",
+   "location_ids": [
+    "parapet_catwalk"
+   ],
+   "start_minute": 120,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "高空回廊钢缆横渡"
+  },
+  {
+   "beats": [
+    "蒸汽弥漫，仪表全线爆表，动力长抡扳手与宪兵殊死搏斗",
+    "卫队长从天而降斩断枪管，学者扑向主控台用带血的手重组接线",
+    "三人扳下重锤排气阀，金色蒸汽冲天而起，要塞重新稳稳悬浮"
+   ],
+   "duration_minutes": 50,
+   "hook_ids": [
+    "hk_engineer_wrench_approach",
+    "hk_overseer_drill_approach",
+    "hk_overseer_robe_observe"
+   ],
+   "id": "act_fl_boiler_stabilization",
+   "location_ids": [
+    "boiler_core_hall"
+   ],
+   "start_minute": 180,
+   "tags": [
+    "workplace"
+   ],
+   "title": "机房重锤泄压肉搏"
+  },
+  {
+   "beats": [
+    "雷云散去，金光刺透铅水晶，总督与审查官被绑跪受审",
+    "学者摘下破损的项圈，把主控权杖放进卫队长掌心，十指相扣",
+    "全城汽笛齐鸣，宣告自由新秩序，两人在云海之巅深吻"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [
+    "hk_scholar_fever_approach",
+    "hk_captain_shield_approach",
+    "hk_scholar_desk_observe"
+   ],
+   "id": "act_fl_dawn_proclamation",
+   "location_ids": [
+    "sanctum_alchemy_lab"
+   ],
+   "start_minute": 235,
+   "tags": [
+    "intimate"
+   ],
+   "title": "破晓云海并肩接管"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.45,
+  "nonbinary": 0.05
+ },
+ "default_person": "second",
+ "era": "魔导蒸汽朋克帝国三千米浮空枢纽绝密禁术研究院雷暴夜",
+ "extends": null,
+ "forbidden_terms": [
+  "现代",
+  "手机",
+  "手枪",
+  "西装",
+  "高跟鞋",
+  "网吧",
+  "电脑",
+  "互联网",
+  "汽车",
+  "监控"
+ ],
+ "hooks": [
+  {
+   "id": "hk_scholar_fever_approach",
+   "kind": "approach",
+   "location_ids": [
+    "sanctum_alchemy_lab",
+    "decompression_airlock"
+   ],
+   "slot": "grand_alchemist_scholar",
+   "text": "{grand_alchemist_scholar.name}扶着黄铜水管勉强站稳，长袍撕裂，紫晶的眼蒙着高热的水雾：“退后！熵增已经破四百了。要么挖出我的神核，要么——把你的血给我。”"
+  },
+  {
+   "id": "hk_captain_collar_approach",
+   "kind": "approach",
+   "location_ids": [
+    "sanctum_alchemy_lab",
+    "decompression_airlock"
+   ],
+   "slot": "holy_blood_royal_captain",
+   "text": "{holy_blood_royal_captain.name}小臂上的割痕淌着金色圣血，掌心按住你滚烫的锁骨边缘：“别再咬嘴唇了。张口，喝下去——只要我站在这里，没人能把你当异端。”"
+  },
+  {
+   "id": "hk_governor_gas_approach",
+   "kind": "approach",
+   "location_ids": [
+    "decompression_airlock",
+    "sanctum_alchemy_lab",
+    "parapet_catwalk"
+   ],
+   "slot": "paranoid_fortress_governor",
+   "text": "{paranoid_fortress_governor.name}隔着防弹窗拧紧毒气总阀，面孔扭曲：“把主控密码交出来！否则就在里面把自己的内脏咳出来吧！”"
+  },
+  {
+   "id": "hk_overseer_drill_approach",
+   "kind": "approach",
+   "location_ids": [
+    "decompression_airlock",
+    "sanctum_alchemy_lab",
+    "boiler_core_hall"
+   ],
+   "slot": "fanatical_heresy_overseer",
+   "text": "{fanatical_heresy_overseer.name}操纵破魔重钻在合金门上钻出漫天火雨，高举圣火权杖尖叫：“撕开你的伪装吧！任何非人的血脉都必须化为灰烬！”"
+  },
+  {
+   "id": "hk_engineer_wrench_approach",
+   "kind": "approach",
+   "location_ids": [
+    "boiler_core_hall",
+    "decompression_airlock",
+    "parapet_catwalk"
+   ],
+   "slot": "chief_engine_engineer",
+   "text": "{chief_engine_engineer.name}推开检修井盖翻身跃出，满头大汗攥着扳手：“毒气正被抽往外海！可东翼龙骨快断了——最后一道减压手柄，必须由导师亲手输入公式！”"
+  },
+  {
+   "id": "hk_scholar_whisper_request",
+   "kind": "request",
+   "location_ids": [
+    "sanctum_alchemy_lab",
+    "decompression_airlock"
+   ],
+   "slot": "grand_alchemist_scholar",
+   "text": "高热退去，{grand_alchemist_scholar.name}环住你的后颈，眼神第一次这样清明：“我现在完全清醒。把剑递给我——走出这扇门，这片云海由你我说了算。”"
+  },
+  {
+   "id": "hk_captain_shield_approach",
+   "kind": "approach",
+   "location_ids": [
+    "decompression_airlock",
+    "sanctum_alchemy_lab"
+   ],
+   "slot": "holy_blood_royal_captain",
+   "text": "钻头穿透门板的瞬间，{holy_blood_royal_captain.name}把你护进实验台死角，滚烫的铁屑砸在背甲上：“闭眼靠紧！十年前我发过誓护你周全。”"
+  },
+  {
+   "id": "hk_engineer_boiler_request",
+   "kind": "request",
+   "location_ids": [
+    "boiler_core_hall",
+    "parapet_catwalk"
+   ],
+   "slot": "chief_engine_engineer",
+   "text": "{chief_engine_engineer.name}用背顶住滚烫的减压重锤，满口鲜血嘶吼：“别管我！快把手柄插进主控水晶槽！只要要塞不掉下去就值了！”"
+  },
+  {
+   "id": "hk_helmsman_anchor_approach",
+   "kind": "approach",
+   "location_ids": [
+    "parapet_catwalk",
+    "boiler_core_hall"
+   ],
+   "slot": "airship_smuggler_helmsman",
+   "text": "{airship_smuggler_helmsman.name}从雷暴里把飞艇贴到步道边，冲你甩出舷梯，金牙一闪：“跳！这趟不收钱，抓稳了！”"
+  },
+  {
+   "id": "hk_helmsman_signal_approach",
+   "kind": "approach",
+   "location_ids": [
+    "parapet_catwalk",
+    "decompression_airlock"
+   ],
+   "slot": "airship_smuggler_helmsman",
+   "text": "{airship_smuggler_helmsman.name}顺着锚链攀上回廊，把信号枪塞进你手里：“红弹引开巡逻艇，绿弹叫我来接。别打错了。”"
+  },
+  {
+   "id": "hk_scholar_desk_observe",
+   "kind": "observe",
+   "location_ids": [
+    "sanctum_alchemy_lab",
+    "decompression_airlock"
+   ],
+   "slot": "grand_alchemist_scholar",
+   "text": "凌乱的实验台前，{grand_alchemist_scholar.name}长袍撕裂，秘银项圈泛着冷光，紫晶的眼噙着泪微阖喘息，唇角仍挂着傲视神权的冷笑。"
+  },
+  {
+   "id": "hk_captain_armor_observe",
+   "kind": "observe",
+   "location_ids": [
+    "sanctum_alchemy_lab",
+    "decompression_airlock"
+   ],
+   "slot": "holy_blood_royal_captain",
+   "text": "幽蓝结界光下，{holy_blood_royal_captain.name}暗银板甲挺拔如松，左臂淌着金色圣血，重剑斜指地面，像一座不可逾越的钢铁壁垒。"
+  },
+  {
+   "id": "hk_governor_pistol_observe",
+   "kind": "observe",
+   "location_ids": [
+    "decompression_airlock",
+    "parapet_catwalk"
+   ],
+   "slot": "paranoid_fortress_governor",
+   "text": "红光里，{paranoid_fortress_governor.name}的深红礼服沾满污渍，金枪在雨幕中神经质地挥动，身后机枪喷吐火舌。"
+  },
+  {
+   "id": "hk_overseer_robe_observe",
+   "kind": "observe",
+   "location_ids": [
+    "decompression_airlock",
+    "parapet_catwalk",
+    "boiler_core_hall"
+   ],
+   "slot": "fanatical_heresy_overseer",
+   "text": "浓烟翻滚中，{fanatical_heresy_overseer.name}白袍染黑，高举黄金权杖立在破门框前，圣镜折射出刺目的死光。"
+  },
+  {
+   "id": "hk_engineer_tools_observe",
+   "kind": "observe",
+   "location_ids": [
+    "boiler_core_hall",
+    "parapet_catwalk"
+   ],
+   "slot": "chief_engine_engineer",
+   "text": "蒸汽深处，{chief_engine_engineer.name}满身油污与烫伤，双手死扣扳手与滚烫的减压铁锤较劲，血水顺着额角淌下。"
+  },
+  {
+   "id": "hk_helmsman_cockpit_observe",
+   "kind": "observe",
+   "location_ids": [
+    "parapet_catwalk",
+    "boiler_core_hall"
+   ],
+   "slot": "airship_smuggler_helmsman",
+   "text": "雷暴云下，{airship_smuggler_helmsman.name}的小飞艇像一片叶子在气流里起伏，驾驶舱的灯始终亮着，对准步道。"
+  },
+  {
+   "id": "hk_engineer_gauge_approach",
+   "kind": "approach",
+   "location_ids": [
+    "boiler_core_hall",
+    "sanctum_alchemy_lab"
+   ],
+   "slot": "chief_engine_engineer",
+   "text": "{chief_engine_engineer.name}盯着在猩红区狂颤的表针，回头冲你吼：“压力还能撑六分钟！你们要往上走就现在，我替你们把蒸汽压住！”"
+  }
+ ],
+ "id": "floating_city_alchemist_isolation",
+ "locations": [
+  {
+   "affordances": [
+    "扣紧秘银项圈，注入极寒稳定剂强制降温",
+    "划破卫队长手腕，把纯阳圣血渡进术士口中中和暴走",
+    "高热退去后，两人促膝在实验桌边推演解咒方程"
+   ],
+   "detail": "试验塔极顶的圆形高厅，穹顶由两百块防爆秘银铅水晶拼成半球天窗，窗外雷暴电弧肆虐。中央是黄铜蒸馏管、水晶冷却皿与精钢反应釜围成的炼金台，台上散落着古神遗物残片与沸腾的紫红药液。四壁八重禁魔结界符文幽蓝发亮，双重气密门已从内锁死。",
+   "exits": [
+    "decompression_airlock"
+   ],
+   "id": "sanctum_alchemy_lab",
+   "name": "禁术工房核心试验殿",
+   "pressure_modifiers": {
+    "p_governor_neurotoxin_purge": "天花板四个泄压阀嘶嘶尖啸，灰绿色毒气开始渗出。",
+    "p_mana_overload_fever": "魔纹已蔓延到锁骨咽喉，体温突破四十二度红线。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "气密门厚一尺，观察窗是三层铅玻璃，外面看不清室内；结界隔绝一切声响。",
+   "witnesses": [
+    "bg_gendarme_breacher"
+   ]
+  },
+  {
+   "affordances": [
+    "转动泄压转盘排空渗入的毒气",
+    "合力把备件箱推死在第二道闸门前阻截切割",
+    "在红光下给虚脱的同伴包扎止血、互换信物"
+   ],
+   "detail": "连接实验室与外廊的狭长过渡舱，两侧是重型齿轮传动闸门，墙上嵌着蒸汽压力表、防毒面具挂架与两套魔导潜水重铠。铸铁网格地板下排风涡轮轰鸣，中央一个巨大的纯铜泄压转盘调节两舱气压。",
+   "exits": [
+    "sanctum_alchemy_lab",
+    "parapet_catwalk"
+   ],
+   "id": "decompression_airlock",
+   "name": "双重气密减压过渡舱",
+   "pressure_modifiers": {
+    "p_governor_neurotoxin_purge": "过滤棉已发黑饱和，每三分钟必须轮换戴面具呼吸。",
+    "p_inquisitor_drill_breach": "外侧钢门被重弩连中三箭，门板中段裂开碗口粗的缝。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "狭长无掩体，红色减压灯把舱室染成血红。",
+   "witnesses": [
+    "bg_gendarme_breacher",
+    "bg_scripture_chanter"
+   ]
+  },
+  {
+   "affordances": [
+    "顶风攀上外挂副炉心切断过载蒸汽管",
+    "借闪电掩护射杀瞭望台的探照灯哨兵",
+    "背着失去意识的同伴横跨风暴裂隙"
+   ],
+   "detail": "悬在三千米雷暴边缘的镂空钢架步道，外侧只有齐腰高的生铁栏杆，下方是电闪雷鸣的暗红云峡。风速每秒三十米，冰雨雪粒如铁砂抽打钢板，尽头通往主悬浮翼的缆绳锚定基座，地面覆着薄冰。",
+   "exits": [
+    "decompression_airlock",
+    "boiler_core_hall"
+   ],
+   "id": "parapet_catwalk",
+   "name": "试验塔外层高空检修回廊",
+   "pressure_modifiers": {
+    "p_hull_jettison_crisis": "东侧悬浮翼撕开两米豁口，步道倾斜三十度。",
+    "p_lightning_overcharge": "天雷每三十秒轰击一次步道避雷针，火花四溅。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "visibility": "暴雨中视野极差，只有雷电炸裂的瞬间能看清人影。",
+   "witnesses": [
+    "bg_parapet_lamp_sentry",
+    "bg_dock_rigger"
+   ]
+  },
+  {
+   "affordances": [
+    "合力扳下备用减压重锤阀释放临界压力",
+    "用电缆短路总督控制室的仪表屏",
+    "借飞轮掩护解决突入机房的宪兵"
+   ],
+   "detail": "震耳欲聋、白汽灼热的钢铁心脏。中央是三层楼高的八角形秘银重力锅炉，粗如巨树的黄铜气管像血管般延伸，内部流淌着金黄魔导液。巨大的飞轮疯狂咬合，温度高达五十度，地上积着机油与冷凝水。",
+   "exits": [
+    "parapet_catwalk"
+   ],
+   "id": "boiler_core_hall",
+   "name": "塔底主浮空炉心总机车间",
+   "pressure_modifiers": {
+    "p_hull_jettison_crisis": "三个减压表针全部打进猩红区，安全阀尖啸。",
+    "p_lightning_overcharge": "雷击电流注入主发电机，电闸连环爆鸣起火。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "蒸汽弥漫，能见度不足五米，机械轰鸣盖过正常说话声。",
+   "witnesses": [
+    "bg_scalded_stoker",
+    "bg_telegraph_clerk"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "阿诺德",
+   "海森堡",
+   "瓦伦泰",
+   "斯特林",
+   "奥古斯都",
+   "雷德",
+   "诺克提斯",
+   "西尔维",
+   "温特斯",
+   "布莱特",
+   "克劳福德",
+   "霍华德"
+  ],
+  "given_female": [
+   "艾琳娜",
+   "赛拉菲娅",
+   "奥菲莉娅",
+   "薇薇安",
+   "卡米拉",
+   "海伦娜",
+   "莫妮卡",
+   "贝雅",
+   "伊莎贝尔",
+   "罗莎",
+   "格蕾丝",
+   "艾薇"
+  ],
+  "given_male": [
+   "艾德蒙",
+   "维克多",
+   "加拉哈德",
+   "雷文",
+   "达米安",
+   "巴尔萨泽",
+   "罗兰",
+   "卡修斯",
+   "亚瑟",
+   "利奥",
+   "西奥",
+   "爱德华"
+  ],
+  "given_neutral": [
+   "席恩",
+   "卡兰",
+   "艾登",
+   "诺亚",
+   "格温",
+   "雷恩",
+   "埃里斯",
+   "罗宾",
+   "凯",
+   "瑞恩",
+   "阿什",
+   "萨姆"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "首席学者"
+   },
+   {
+    "gender": "any",
+    "pattern": "卫队长"
+   },
+   {
+    "gender": "any",
+    "pattern": "浮空要塞总督"
+   },
+   {
+    "gender": "any",
+    "pattern": "禁术总监"
+   },
+   {
+    "gender": "any",
+    "pattern": "大炼金师"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "保留魅魔真祖血脉觉醒、秘银项圈与圣血喂饲、毒气灌入与水银火墙、高空钢缆横渡、机房重锤泄压与破晓接管的主线。改动：六个角色固定性别；原稿把血脉觉醒写成“躁动饥渴”“春水”，属于体质导致的神志受损，改为魔力超载的高热，喂血、注射与相拥只作急救；亲密前提写明“高热已退、魔力已稳、神智清明”，相拥互诉心迹与血誓放在退烧之后；术士“好烫抱紧我”的请求改为清醒后的结盟；总督“跪着爬出来、留在地下室赏口饭”与审查官的性化描写改为夺权与宗教狂热；去掉写死的人名艾琳娜、加拉哈德、席恩、阿登；内容标签去掉 coercion_theme；补一名走私飞艇舵手凑足六个人物；转换为项目格式。",
+ "player_identities": [
+  {
+   "age_range": [
+    29,
+    36
+   ],
+   "baseline": "高开叉墨黑丝绒炼金长袍，金丝魔导回路在薄纱间蜿蜒，勾勒出挺拔丰盈的曲线，长腿裹在薄黑丝里。颈上一道幽蓝秘银抑魔项圈，银发微卷，金丝眼镜后紫晶般的眼因高热泛着湿意，咬破的下唇渗着血。",
+   "gender": "any",
+   "id": "pc_grand_alchemist_scholar",
+   "reputation": "全大陆最傲慢刻薄、智慧绝伦的炼金泰斗，三十七篇禁术论文引发教廷两次绝罚抗议。",
+   "resources": [
+    "浮空炉心全部阀门密码与紧急配重脱离协议",
+    "大陆唯一一颗能抑制神性侵蚀的“创生之泪”"
+   ],
+   "risks": [
+    "血脉事实一旦被结界外的审查官核实，会被剥夺爵位送上净化熔炉"
+   ],
+   "role": "血脉觉醒仍死守自尊的女首席",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}首席"
+    },
+    {
+     "gender": "any",
+     "pattern": "真理织网者"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    32,
+    38
+   ],
+   "baseline": "纯黑暗银合金半身板甲，深蓝武装衣绷在花岗岩般的胸膛上，腰跨泛金辉的秘银破魔重剑，戴防导电皮手套。面容如斧削，左颊一道火药划痕，墨绿的眼冷静内敛，立在反锁的气密门前像一座钢铁要塞。",
+   "gender": "any",
+   "id": "pc_holy_blood_royal_captain",
+   "reputation": "近卫军团最恪尽职守的铁卫，十年贴身护卫首席从无闪失。",
+   "resources": [
+    "天生能中和魔力高热的“纯阳圣血”",
+    "试验塔重装卫队调度密令与破甲炸药"
+   ],
+   "risks": [
+    "被裁定包庇异端隐匿不报，全家军功剥夺、以叛国罪处绞"
+   ],
+   "role": "身负圣血誓死护卫的卫队长",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}队长"
+    },
+    {
+     "gender": "any",
+     "pattern": "帝国铁卫"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    35,
+    48
+   ],
+   "baseline": "缀满金流苏与绶带的深红丝绒礼服，硕大的蓝宝石领结，面容苍白浮肿，八字胡修剪整齐，鹰眼时刻乱转，手里捏着能向实验室注入毒气的黄铜扳手，身后八名转轮机枪宪兵。",
+   "gender": "any",
+   "id": "pc_paranoid_fortress_governor",
+   "reputation": "阴狠的官僚政客，极度恐惧实验事故连累仕途，对学者阶层满怀猜忌。",
+   "resources": [
+    "主副引擎动力分配总闸与防空重炮阵列",
+    "皇帝签署的“特殊动乱紧急清除令”"
+   ],
+   "risks": [
+    "炉心在任内坠毁，会被元老院处以极刑"
+   ],
+   "role": "唯恐丑闻曝光的多疑总督",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}总督"
+    },
+    {
+     "gender": "any",
+     "pattern": "浮空要塞执政"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    30,
+    42
+   ],
+   "baseline": "纯白镶银的宽大法袍，胸前沉重的黄金十字架与一面刺目的“真理神判铜镜”，面容枯瘦，眼眶深陷，燃着病态的净化狂热，正在门外指挥卫兵架设破壁重弩。",
+   "gender": "any",
+   "id": "pc_fanatical_heresy_overseer",
+   "reputation": "铁腕异端猎犬，曾亲手把三位公爵送上火刑柱。",
+   "resources": [
+    "能破除大部分结界的“破邪圣光钻”",
+    "可向枢机院同步转播现场异相的传音大阵"
+   ],
+   "risks": [
+    "若被证实诬陷首席学者，会被科学院以滥用职权扣押流放"
+   ],
+   "role": "狂热搜寻异端的审查官",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}特使"
+    },
+    {
+     "gender": "any",
+     "pattern": "断罪主教"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    29,
+    36
+   ],
+   "baseline": "沾满机油与黄铜油污的厚牛皮连体工装，胸前挂着游标卡尺与护目镜，双臂结实，脸被蒸汽熏得通红，在巨大的控制台齿轮与气阀间双手翻飞。",
+   "gender": "any",
+   "id": "pc_chief_engine_engineer",
+   "reputation": "首席亲手带出来的王牌技师，对导师亦师亦友，工程技术独步要塞。",
+   "resources": [
+    "工房底部隐蔽通风管的手动泄压摇柄",
+    "能临时短路防爆门电闸的大功率跳线电缆"
+   ],
+   "risks": [
+    "暗中破坏减压阀被宪兵抓获，会被当场枪决"
+   ],
+   "role": "拼死稳住炉心的首席动力长",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}动力长"
+    },
+    {
+     "gender": "any",
+     "pattern": "铜阀工程师"
+    }
+   ]
+  }
+ ],
+ "premise": "三千米雷暴云海上的浮空城顶层实验室，二十九岁的帝国首席女炼金术士解析禁物时遭反噬，体内潜藏的“魅魔真祖”血脉觉醒，魔力超载、高热不退。为防炉心殉爆，术士亲手升起八重封闭结界，把自己和三十二岁的贴身卫队长一起锁在工房里。毒气与断电倒计时中，两人先救命、再推演解咒，最后在清醒对等中立下救赎誓约。",
+ "pressures": [
+  {
+   "choice": "用项圈电击强制休克，还是以卫队长的心头血换毒？",
+   "exits": [
+    {
+     "cost": "失血过千毫升当场晕厥，三日内无法重武作战",
+     "option": "卫队长划开胸膛引出心头圣血灌进学者口中"
+    },
+    {
+     "cost": "后颈神经刺伤，左臂四十八小时瘫痪",
+     "option": "学者亲手把两根秘银长针刺进自己后颈截断神经传导"
+    }
+   ],
+   "far": {
+    "consequence": "学者彻底魔化，卫队长被迫亲手封印学者，要塞核心技术失传。",
+    "due_days": 1,
+    "trigger": "真祖意志抹杀凡人理智"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_scholar_fever_approach",
+    "hk_captain_collar_approach"
+   ],
+   "id": "p_mana_overload_fever",
+   "immediate": {
+    "minutes": 5,
+    "text": "学者双眸化作紫晶重瞳，十指在台面抠出深痕，浑身滚烫如炭。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "sanctum_alchemy_lab"
+   ],
+   "near": {
+    "deadline_minutes": 12,
+    "text": "喉部与声带将被高热灼坏。"
+   },
+   "objective": "十五分钟内配好圣血中和剂，锁紧秘银项圈。",
+   "source": "accident",
+   "start_minute": 1365,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "血脉高热焚心暴走",
+   "trigger": "古神遗物辐射诱发血脉，学者体温十分钟内从三十八度飙到四十二度，十五分钟内不镇压将丧失神智、回路自爆。"
+  },
+  {
+   "choice": "用酸液融断主排气管，还是让动力长在底层短路电闸？",
+   "exits": [
+    {
+     "cost": "肺部大面积化学灼伤，呼吸机能永久受损",
+     "option": "卫队长把唯一的面具给学者，攀上排风口用铁拳砸碎毒气喷嘴"
+    },
+    {
+     "cost": "两人皮肤被灼伤，实验室仪器全部报废",
+     "option": "学者引爆两坛浓硫酸，用强酸蒸汽腐蚀整条通风管"
+    }
+   ],
+   "far": {
+    "consequence": "所有人死在封闭石室，总督伪造意外销毁罪证。",
+    "due_days": 1,
+    "trigger": "毒气达致死浓度"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_governor_gas_approach",
+    "hk_scholar_whisper_request"
+   ],
+   "id": "p_governor_neurotoxin_purge",
+   "immediate": {
+    "minutes": 4,
+    "text": "苦杏仁味的毒雾从天花板缓缓沉降。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "sanctum_alchemy_lab"
+   ],
+   "near": {
+    "deadline_minutes": 10,
+    "text": "吸入者剧烈眩晕、四肢痉挛。"
+   },
+   "objective": "十二分钟内切断主毒气管路并反向压制气阀。",
+   "source": "institution",
+   "start_minute": 1410,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "title": "总督毒气窒息逼降",
+   "trigger": "物理破门受阻，总督以防止异端扩散为由开启战备毒气回路，滤网只能阻隔十二分钟。"
+  },
+  {
+   "choice": "在门后埋水银地雷反杀，还是挥剑斩断钻机传动轴？",
+   "exits": [
+    {
+     "cost": "佩剑崩成数截，虎口撕裂见骨",
+     "option": "卫队长隔门一剑刺穿副官咽喉，把剑别死在钻头齿轮里"
+    },
+    {
+     "cost": "电弧反噬心律失常，当场休克",
+     "option": "学者把高压电容搭上门板，逆向电弧烧毁钻机电机"
+    }
+   ],
+   "far": {
+    "consequence": "所有人被圣火吞噬，异端罪名坐实。",
+    "due_days": 1,
+    "trigger": "破魔钻轰碎防爆门"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_overseer_drill_approach",
+    "hk_captain_shield_approach"
+   ],
+   "id": "p_inquisitor_drill_breach",
+   "immediate": {
+    "minutes": 3,
+    "text": "合金门在钻击下金属悲鸣，火星从缝隙喷射。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "decompression_airlock"
+   ],
+   "near": {
+    "deadline_minutes": 9,
+    "text": "门栓崩断，十名喷火狂信徒封锁全室。"
+   },
+   "objective": "大门击穿前布设电弧陷阱、斩落钻头。",
+   "source": "person",
+   "start_minute": 40,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "审查官破魔钻碎壁",
+   "trigger": "审查官调来两架破魔钻与十名圣火狂信徒，钻头已深入合金门板三分之二，十分钟后破门。"
+  },
+  {
+   "choice": "穿绝缘铠甲爬梯，还是用重弩射出导电飞索接地？",
+   "exits": [
+    {
+     "cost": "全身电弧灼伤，毛发尽焦",
+     "option": "卫队长徒手攀上避雷塔，把重剑插进地线插槽导流"
+    },
+    {
+     "cost": "双臂被飞旋钢缆绞伤骨裂",
+     "option": "动力长用绞盘把主电缆拖进云层高空放电"
+    }
+   ],
+   "far": {
+    "consequence": "全塔死寂失控下坠。",
+    "due_days": 1,
+    "trigger": "雷电烧毁全塔主控"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_engineer_wrench_approach",
+    "hk_governor_gas_approach"
+   ],
+   "id": "p_lightning_overcharge",
+   "immediate": {
+    "minutes": 5,
+    "text": "扶手电弧乱窜，空气里是焦糊味。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "parapet_catwalk"
+   ],
+   "near": {
+    "deadline_minutes": 13,
+    "text": "机房保险丝连锁殉爆，全塔大停电。"
+   },
+   "objective": "雷击引燃主发电机前攀上避雷塔拉下接地分流闸。",
+   "source": "nature",
+   "start_minute": 105,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "超级落雷击穿避雷网",
+   "trigger": "暗红雷云连降九道落雷击毁避雷针网络，数亿焦耳电流顺着步道与电缆狂暴蔓延。"
+  },
+  {
+   "choice": "炸飞东翼弃卒保帅，还是冒险重启备用重力泵？",
+   "exits": [
+    {
+     "cost": "左小臂被滑动的仪器柜碾压骨折",
+     "option": "学者扒住控制台，用鲜血在主控水晶上改写配重参数"
+    },
+    {
+     "cost": "要塞失去远航能力，被迫迫降在边境冻土",
+     "option": "动力长与卫队长合力转动绞轮斩断东翼连接锁链"
+    }
+   ],
+   "far": {
+    "consequence": "全城三万人同归于尽，空中奇迹彻底毁灭。",
+    "due_days": 1,
+    "trigger": "要塞翻滚坠海"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_engineer_boiler_request",
+    "hk_overseer_drill_approach"
+   ],
+   "id": "p_hull_jettison_crisis",
+   "immediate": {
+    "minutes": 6,
+    "text": "地面倾斜，实验桌与铁柜雪崩般滑移。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "boiler_core_hall"
+   ],
+   "near": {
+    "deadline_minutes": 15,
+    "text": "倾角过四十五度，主锅炉倾覆大爆炸。"
+   },
+   "objective": "切断受损悬浮翼连接栓，重设配重平衡。",
+   "source": "accident",
+   "start_minute": 150,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "悬浮翼断裂倾覆坠海",
+   "trigger": "破门与雷暴让东翼三根主龙骨断了两根，要塞倾斜三十五度，炉心冷却液倒灌干烧，十八分钟后翻滚坠海。"
+  },
+  {
+   "choice": "开启全频段广播揭露真相，还是对准旗舰发动反制重炮？",
+   "exits": [
+    {
+     "cost": "成为帝国头号通缉的反贼",
+     "option": "学者用首席代码接管发射塔，在三大帝国公开频段直播贪腐铁证"
+    },
+    {
+     "cost": "主炮超负荷炸膛，三名炮手重伤",
+     "option": "卫队长用防空主炮一发轰爆旗舰通信桅杆"
+    }
+   ],
+   "far": {
+    "consequence": "整座浮空城化作燃烧的残骸坠落。",
+    "due_days": 1,
+    "trigger": "舰队饱和齐射"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_scholar_whisper_request",
+    "hk_governor_gas_approach"
+   ],
+   "id": "p_senate_fleet_bombardment",
+   "immediate": {
+    "minutes": 10,
+    "text": "主炮充能的红光穿透云海照亮窗户。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "sanctum_alchemy_lab"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "试探性重炮将轰塌顶层三分之一。"
+   },
+   "objective": "用顶层发射塔向全舰队公开总督的贪腐证据与自卫录音。",
+   "source": "rumor",
+   "start_minute": 0,
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "title": "元老院舰队主炮围城",
+   "trigger": "总督谎报浮空城已被深渊攻陷，元老院派三艘无畏战舰封锁云海，主炮充能三十分钟倒计时。"
+  }
+ ],
+ "region": "魔导蒸汽朋克帝国三千米浮空城禁术研究院顶层",
+ "rules": [
+  {
+   "id": "r_fl_barrier_three_hours",
+   "text": "八重秘银隔音结界一旦闭合，必须运行满三小时、能量石耗尽后才能从外部切断。"
+  },
+  {
+   "id": "r_fl_mana_surge_interval",
+   "text": "觉醒者体内魔导压力每三十分钟翻倍，无纯阳圣血或极低温介质中和会引发神经自燃。"
+  },
+  {
+   "id": "r_fl_reactor_overload",
+   "text": "实验室溢散魔导波动超过三百兆焦耳，顶层副炉心将连锁殉爆，东部悬浮翼脱落坠海。"
+  },
+  {
+   "id": "r_fl_inquisitor_warrant",
+   "text": "裁判所审查官持枢机朱批搜查令时，可用魔导重炮轰破实验室外层防爆水晶壁。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "项圈与圣血",
+  "committed": "共掌浮空城",
+  "familiar": "方程前的坦诚",
+  "flirting": "退烧后的耳语",
+  "intimate": "机舱里的相拥",
+  "stranger": "结界里的傲慢",
+  "testing": "炉心过载的托付"
+ },
+ "status": "released",
+ "style_hint": "魔导蒸汽朋克的冷硬机械感与血脉觉醒的炽热反差：冷凝管里药液咕嘟作响、撕裂的黑丝绒下滚烫的瓷白肌肤、手指在黄铜桌面抓出深痕、秘银项圈扣上颈项的清脆机括声、雷暴闪光照亮两人急促的喘息。台词兼具学术的严谨与傲慢，亲密只在高热退去之后。",
+ "tension_engines": [
+  {
+   "id": "te_mana_surge_vs_holy_blood",
+   "text": "真祖血脉在女炼金术士体内暴走的高热，对上卫队长体内的纯阳圣血：封闭结界里两个成年人势均力敌的意志较量。"
+  },
+  {
+   "id": "te_scholar_pride_vs_neurotoxin",
+   "text": "首席学者誓死捍卫真理的孤傲，对上多疑总督灌入毒气灭口掩盖贪腐的倒计时。"
+  },
+  {
+   "id": "te_hull_tilt_vs_boiler_overload",
+   "text": "悬浮翼撕裂坠海与炉心超压爆炸，两场灾难同时逼近。"
+  },
+  {
+   "id": "te_reason_vs_inquisitor_ballista",
+   "text": "追求凡人自由的炼金泰斗，对上手持破魔巨弩轰城的狂信审查官。"
+  }
+ ],
+ "title": "浮空城禁术工房：女首席与圣血卫队长",
+ "tone": [
+  "体质觉醒",
+  "封闭结界",
+  "傲慢与本能",
+  "密室博弈"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_floating_1",
+   "requires": [],
+   "text": "中和方程深度解析揭晓：所谓魅魔血脉根本不是深渊诅咒，而是一万年前建立浮空城文明的古代贤者的“全脑超频基因”，教皇国为垄断神权才把它污名化。"
+  },
+  {
+   "category": "人事",
+   "id": "t_floating_2",
+   "requires": [],
+   "text": "审查官的法袍被水银蒸气撕裂，后背露出大片漆黑的深渊魔鳞：此人早已向深渊投诚，奉命斩除古代贤者的血脉。"
+  },
+  {
+   "category": "资源",
+   "id": "t_floating_3",
+   "requires": [],
+   "text": "卫队长剑柄暗格弹开，里面是一枚能接管全城防空重炮、反锁定元老院旗舰的纯金主控符文密钥。"
+  },
+  {
+   "category": "制度",
+   "id": "t_floating_4",
+   "requires": [],
+   "text": "飞筒送来帝都羽书：元老院政变已被皇家卫队扑灭，女皇签署特赦，取缔裁判所特权，晋升女学者为摄政大公。"
+  },
+  {
+   "category": "时限",
+   "id": "t_floating_5",
+   "requires": [
+    "pressure"
+   ],
+   "text": "落雷击穿穹顶避雷器，冷凝系统连锁自燃，室内氧气骤降，压制高热的时间被压缩到不足四分钟。"
+  },
+  {
+   "category": "关系",
+   "id": "t_floating_6",
+   "requires": [],
+   "text": "总督被擒时怀表掉落，里面是卫队长生母年轻时的画像：总督是卫队长生父被流放前私下托孤、隐瞒其身世二十年的远房叔父。"
+  },
+  {
+   "category": "意外",
+   "id": "t_floating_7",
+   "requires": [],
+   "text": "东翼脱落砸穿云层下的古龙骨地脉，反重力上升气流大爆发，扑灭了塔内的水银毒火，托着要塞穿出雷云跃上晴空。"
+  }
+ ]
+}

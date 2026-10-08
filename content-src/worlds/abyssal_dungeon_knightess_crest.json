@@ -1,0 +1,2570 @@
+{
+ "schema_version": 1,
+ "id": "abyssal_dungeon_knightess_crest",
+ "title": "深渊要塞地牢：女骑士长与大审判官",
+ "extends": null,
+ "era": "中世纪低魔黑暗帝国边境黑曜石要塞断罪地牢血月之夜",
+ "region": "低魔黑暗帝国北境黑曜石要塞地下三层断罪地牢",
+ "premise": "血月暴雪夜的边境要塞地牢，二十八岁圣殿女骑士长为掩护平民撤离力竭被俘，锁骨上被烙下每逢子夜灼痛高热的深渊魔纹。三十一岁的前廷大审判官持解咒刻刀独自提审，门外是叫嚣火刑的狂热守军。魔纹蔓延、断罪钟声倒数，两个曾并肩七年的成年军官从意志对抗走向弑神突围的暗夜同盟。",
+ "tone": [
+  "战败受缚",
+  "魔纹侵蚀",
+  "信仰交锋",
+  "暗夜逆乱"
+ ],
+ "style_hint": "低魔中世纪要塞的冷硬铁血与压抑张力：残破白银胸甲与生铁锁链的冰冷脆响、暗红魔纹在雪白肌肤上熔岩般蔓延时的战栗与喘息、秘银刻刀在烛火下的寒芒、石壁水滴落在滚烫锁骨上升起白雾。亲密只在锁链解开、魔纹平息之后，清醒自愿。",
+ "clock_start": {
+  "label": "夜里十一点一刻，血月当空，暴雪封死要塞",
+  "minute": 1395
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.45,
+  "nonbinary": 0.05
+ },
+ "stage_labels": {
+  "stranger": "铁链下的戒备",
+  "acquainted": "刻刀刮过魔纹",
+  "familiar": "解枷后的交锋",
+  "flirting": "石柱影里的喘息",
+  "testing": "撞门火刑的考验",
+  "intimate": "暗渠里的相拥",
+  "committed": "弑神血誓"
+ },
+ "name_pools": {
+  "family": [
+   "艾尔温",
+   "布莱克",
+   "瓦伦丁",
+   "霍恩海姆",
+   "阿斯兰",
+   "罗兰",
+   "特里斯坦",
+   "高文",
+   "莫德雷德",
+   "兰开斯特",
+   "珀西瓦尔",
+   "埃克托"
+  ],
+  "given_female": [
+   "克洛伊",
+   "希尔德",
+   "贝阿特丽",
+   "艾莲娜",
+   "莫妮卡",
+   "赛拉菲娜",
+   "维多利亚",
+   "达芙妮",
+   "阿黛尔",
+   "莱拉",
+   "伊索德",
+   "罗莎琳"
+  ],
+  "given_male": [
+   "雷恩",
+   "加雷斯",
+   "奥古斯特",
+   "塞巴斯",
+   "达米安",
+   "尤利安",
+   "巴尔萨泽",
+   "罗德里克",
+   "卡修斯",
+   "马库斯",
+   "埃德温",
+   "托马斯"
+  ],
+  "given_neutral": [
+   "艾登",
+   "席恩",
+   "卡兰",
+   "雷文",
+   "诺亚",
+   "格温",
+   "阿什",
+   "罗宾",
+   "艾弗里",
+   "瑞恩",
+   "凯",
+   "希思"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "骑士长",
+    "gender": "any"
+   },
+   {
+    "pattern": "审判官",
+    "gender": "any"
+   },
+   {
+    "pattern": "异端大主教",
+    "gender": "any"
+   },
+   {
+    "pattern": "军团长",
+    "gender": "any"
+   },
+   {
+    "pattern": "异端炼金师",
+    "gender": "any"
+   }
+  ],
+  "order": "family_first"
+ },
+ "rules": [
+  {
+   "id": "r_ab_blood_moon_crest_detonation",
+   "text": "血月子夜钟声停歇前未以秘银寒晶压制，深渊魔纹将吞噬宿主神智，使其沦为嗜血傀儡。"
+  },
+  {
+   "id": "r_ab_inquisitor_sole_custody",
+   "text": "大审判官对圣殿级重犯享有七十二小时单独羁押特权，守军长官无教皇手谕不得破门提人。"
+  },
+  {
+   "id": "r_ab_fortress_portcullis_curfew",
+   "text": "暴风雪警报达八级且血月当空时，要塞外门三道万斤生铁落闸自动断索，封死一切陆路。"
+  },
+  {
+   "id": "r_ab_oath_of_abdication",
+   "text": "圣殿誓约一旦被骑士亲手折断，骑士长即解除对圣座的效忠，圣焰神力转为破魔暗劲。"
+  }
+ ],
+ "customs": [
+  "审讯战败的圣殿骑士长前，主审须当众敲碎其佩剑十字护手，并把白银狮鹫勋章投入圣水池洗罪。",
+  "身负深渊魔纹者，每逢血月子夜钟响须接受三次秘银刻刀镇魔刺穴，否则魔纹逆流心脉。",
+  "要塞军规第十七条：重犯移送焚尸熔炉时，须由两名手持双手巨剑的处刑官押解。",
+  "涉及神权大罪的自白书，须以受审者指尖鲜血画十字签押方能生效。"
+ ],
+ "player_identities": [
+  {
+   "id": "pc_templar_knight_commander",
+   "role": "战败受缚仍不折的女骑士长",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}骑士长",
+     "gender": "any"
+    },
+    {
+     "pattern": "狮鹫女武神",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    35
+   ],
+   "social_position": "equal",
+   "baseline": "雕花白银狮鹫胸甲布满劈砍凹痕与焦黑裂纹，内衬亚麻衣被冷汗与战血浸透，健美如雌豹。颈上套着生铁符文项圈，双腕被秘银绞索吊在石柱上，金发凌乱，湛蓝的眼里燃着不屈的火，锁骨间赤红魔纹随呼吸明灭。",
+   "resources": [
+    "潜伏在要塞外围三千精锐铁骑的联络密令与信鸽暗记",
+    "体内代代相传的“圣耀之心”神圣魔力"
+   ],
+   "reputation": "北疆无敌的女武神，曾以八百骑横扫兽人狂潮，孤高决绝、誓死不折。",
+   "risks": [
+    "子夜钟响前驱不散魔纹，就会沦为火刑柱上的祭品"
+   ]
+  },
+  {
+   "id": "pc_renegade_grand_inquisitor",
+   "role": "谋划颠覆教廷的冷血审判官",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}大人",
+     "gender": "any"
+    },
+    {
+     "pattern": "大审判官",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    31,
+    38
+   ],
+   "social_position": "high",
+   "baseline": "挺拔森严的黑丝绒金滚边审判长袍，内衬暗银锁子甲，腰悬红宝石佩剑，戴薄羊皮手套，指间是秘银刻刀与极寒冰晶药瓶。面容冷峻如大理石，灰眸深不可测。",
+   "resources": [
+    "断罪地牢全套炼金钥匙与禁魔结界控制枢纽",
+    "先帝临终所赐免死金牌与私藏的深渊解咒古卷残本"
+   ],
+   "reputation": "裁判所最冷酷的断罪之鹰，实则深恶痛绝教廷的虚伪腐朽。",
+   "risks": [
+    "暗助骑士长一旦被发现，就会被扣上勾结异端的罪名一同送进焚尸炉"
+   ]
+  },
+  {
+   "id": "pc_zealot_garrison_commander",
+   "role": "借火刑夺权的狂热军团长",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}军团长",
+     "gender": "any"
+    },
+    {
+     "pattern": "黑曜石总督",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    34,
+    45
+   ],
+   "social_position": "high",
+   "baseline": "粗粝的乌钢全身板甲，猩红狼皮大氅，腰挎锯齿重型阔剑，左脸一道从嘴角裂到耳根的刀疤，身后十二名重戟狂信卫队随时准备破门。",
+   "resources": [
+    "要塞两千名狂热甲士与十台攻城重弩",
+    "外门那道生铁闸门的断索机关的唯一拉杆权限"
+   ],
+   "reputation": "战功卓著却残暴无度，以屠戮异族与焚烧战俘著称。",
+   "risks": [
+    "强攻地牢引发结界反噬，会让整座要塞地下工事崩塌"
+   ]
+  },
+  {
+   "id": "pc_heretic_apothecary",
+   "role": "潜入地牢求弑神的异端药剂师",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}大师",
+     "gender": "any"
+    },
+    {
+     "pattern": "黑鸦药剂师",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    36
+   ],
+   "social_position": "low",
+   "baseline": "磨损褪色的深褐软皮长袍，领口挂满荧光药剂的细颈瓶，帆布隔热手套沾满药渍，灰发凌乱，琥珀色眸子精明狡黠，腰间暗袋藏着能融化锁链的极酸试剂。",
+   "resources": [
+    "能瞬时镇静魔纹的“极夜雪莲寒萃晶露”与剧毒硝烟丸",
+    "要塞排水暗渠与熔岩通风盲井的完整逃生图"
+   ],
+   "reputation": "被教会悬赏十万金币的传奇异端学者，禁药曾毒杀三位堕落枢机。",
+   "risks": [
+    "异端身份一暴露，无需审判就会被斩首示众"
+   ]
+  },
+  {
+   "id": "pc_disgraced_squire_jailer",
+   "role": "暗中求赎的落魄看守长",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "{family}看守长",
+     "gender": "any"
+    },
+    {
+     "pattern": "铁拳侍从",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    28,
+    35
+   ],
+   "social_position": "low",
+   "baseline": "沾满铁锈机油的暗灰半身皮甲，腰间一大串黄铜钥匙与倒刺皮鞭，满脸胡茬，布满血丝的眼里全是愧疚，脚步始终徘徊在牢门外替室内遮掩声响。",
+   "resources": [
+    "三道生铁栅栏与暗道耳门的钥匙",
+    "守军换防时间表与口令"
+   ],
+   "reputation": "曾临阵退缩被骑士长所救、却遭骑士团除名的落魄老兵。",
+   "risks": [
+    "放走骑士长被查实，全家都会被连坐送上绞刑架"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "inner_sanctum_vault",
+   "name": "断罪内殿禁魔审讯室",
+   "detail": "整块黑曜石凿空的石室，四壁镂刻秘银封魔符文。穹顶垂着三具生铁绞索，中央一根儿臂粗的铁柱焊进地基，石柱后的玄武岩石台上摆着刻刀、铁钳与盛极寒药剂的水晶器皿。两盏鲸油铜灯把锁链的影子拉得扭曲巨大，空气冰冷潮湿，混着圣水檀香、硫磺与汗水的气味。",
+   "privacy": "private",
+   "visibility": "半尺厚的包铁橡木门只留两指宽的窥孔，从内落锁后外面什么也听不见。",
+   "witnesses": [
+    "bg_crucible_stoker"
+   ],
+   "exits": [
+    "outer_torture_antechamber"
+   ],
+   "affordances": [
+    "用秘银刻刀刀尖在锁骨魔纹核心精准放血镇魔",
+    "解开骑士长的颈手枷，促膝对峙完成灵魂拷问",
+    "魔纹平息后，在石台边以体温为脱力的骑士长驱寒"
+   ],
+   "pressure_modifiers": {
+    "p_crest_blood_moon_frenzy": "魔纹赤光透出衣物，如铁浆般向雪白颈项蔓延。",
+    "p_garrison_ram_pyre_demand": "门外生铁撞木疯狂擂击门板，石屑铁锈簌簌震落。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "outer_torture_antechamber",
+   "name": "断罪外殿刑具厅",
+   "detail": "连接地牢核心与上层石梯的拱顶石厅。中央一座青铜熔炉熊熊燃烧，烙铁在炭火里滋滋作响，墙上挂满皮鞭、铁枷与破甲钩，青石板缝里凝着干涸的战血。尽头的螺旋铁梯把上层的号角与风雪一起灌下来，火把剧烈明灭。",
+   "privacy": "public",
+   "visibility": "石柱阴影林立，炭火照得一半明一半暗，转角极易伏击与窥探。",
+   "witnesses": [
+    "bg_crucible_stoker",
+    "bg_halberdier_zealot",
+    "bg_chained_veteran",
+    "bg_drawbridge_gatekeeper"
+   ],
+   "exits": [
+    "inner_sanctum_vault",
+    "magma_drainage_channel"
+   ],
+   "affordances": [
+    "往熔炉里投入炼金烟幕剂致盲守军",
+    "拔下墙上的白银狮鹫断剑斩杀逼近的暗桩",
+    "与看守长合力转动绞盘放下千斤闸阻断上层"
+   ],
+   "pressure_modifiers": {
+    "p_garrison_ram_pyre_demand": "军团长正指挥十二名重甲扛着攻城锤步步逼近。",
+    "p_frozen_drainage_flood": "冰冷的暗河寒潮顺着石阶裂缝倒灌上涨。"
+   },
+   "tags": [
+    "workplace_power",
+    "violence"
+   ]
+  },
+  {
+   "id": "magma_drainage_channel",
+   "name": "废弃熔岩暗渠",
+   "detail": "地牢最底层的古老暗道。一侧是刺骨的地下暗河，一侧是干涸却仍冒硫磺热气的熔岩地缝。暗道只容一人躬身通过，青苔湿滑、钟乳石犬牙交错，水深及腰。尽头一道锈蚀的生铁排污栅栏通往要塞外的绝壁。",
+   "privacy": "private",
+   "visibility": "伸手不见五指，只有暗河的微弱磷光，水声轰鸣盖过一切言语。",
+   "witnesses": [
+    "bg_channel_guide"
+   ],
+   "exits": [
+    "outer_torture_antechamber",
+    "apothecary_lab_nook"
+   ],
+   "affordances": [
+    "用极酸试剂腐蚀排污栅栏的锈蚀铰链",
+    "背着脱力的伙伴在冰冷急流中涉水",
+    "引燃地缝沼气制造火墙截断追兵"
+   ],
+   "pressure_modifiers": {
+    "p_frozen_drainage_flood": "融水暴涨，暗渠只剩最后三寸呼吸空隙。",
+    "p_crest_blood_moon_frenzy": "冰冷河水刺激魔纹，引发寒热交加的高烧痉挛。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "apothecary_lab_nook",
+   "name": "盲井尽头的炼金暗室",
+   "detail": "异端药剂师的地下据点。石壁上摆满密封陶罐与泡着兽骨的水晶瓶，羊皮长桌上蒸馏器低火慢煨，空气里是苦杏仁、雪莲与薄荷的清冷气味。角落铺着厚羊毛毯与行军急救布卷，是包扎调息的隐蔽所。",
+   "privacy": "private",
+   "visibility": "入口被两块伪装石板遮死，不知机关秘钥绝难发现。",
+   "witnesses": [
+    "bg_parapet_scout"
+   ],
+   "exits": [
+    "magma_drainage_channel"
+   ],
+   "affordances": [
+    "在羊毛毯上用雪莲晶露与秘银针清理魔纹溃烂的创口",
+    "混合硫磺与硝石配制炸塌要塞地基的爆破药包",
+    "促膝饮下弑神血盟秘酒立下死誓"
+   ],
+   "pressure_modifiers": {
+    "p_holy_mirror_manhunt": "教廷密探牵着嗅探魔犬在暗渠入口反复逡巡。",
+    "p_crest_blood_moon_frenzy": "雪莲寒萃只剩最后三滴。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "templar_knight_commander",
+   "gender": "female",
+   "gender_reason": "标题人物“女骑士长”“女武神”，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "age_range": [
+    28,
+    35
+   ],
+   "adult_context": "白银骑士团第一分队指挥官、受封圣堂大骑士，年满二十八岁的成年军官。",
+   "public_role": "战败受审的圣殿女骑士长",
+   "appearance_options": [
+    "残破的白银狮鹫胸甲布满焦痕，汗湿的亚麻内衬贴着健美的身段，双腕吊起拉出修长的线条，金发散乱，锁骨间赤红魔纹如活物般搏动，湛蓝的眼因剧痛泛着泪光，咬破的嘴唇一声不吭",
+    "卸下残铠，只穿染血的白衬裤与长筒战靴，双手扣着断裂铁索摆出反击架势，眼神傲岸如负伤的母狮"
+   ],
+   "identity": {
+    "authority": "白银骑士团的神圣号召、破魔圣焰与终极自裁权",
+    "resources": [
+     "极北雪原“圣剑之冢”神圣武装图腾的坐标",
+     "教皇国与异族私通割地的枢机联名血书副本"
+    ],
+    "limits": [
+     "双手被禁魔铁铰链悬空吊起，大部分神力被符文封印",
+     "魔纹每逢血月子夜发作，灼痛高热、神智昏沉"
+    ],
+    "obligations": [
+     "守住骑士道荣耀，绝不出卖撤退的平民与潜伏的同胞。"
+    ],
+    "exposure": "曾违抗“屠灭异族流民”的神谕，私放五千无辜平民。",
+    "hidden": "靴跟暗格里藏着一枚教皇亲赐的免死密符。"
+   },
+   "decision": {
+    "core_value": "白银骑士团的剑只斩妖魔，不杀妇孺。身体可以被锁住，灵魂绝不向伪善的教廷下跪。",
+    "goal_options": [
+     "在魔纹与刑讯下守住抵抗军撤离坐标",
+     "争取审判官倒戈，斩断铁链携手突围",
+     "在势均力敌的意志较量里击碎对方的冷血伪装"
+    ],
+    "pressure_responses": {
+     "low": "仰起脖颈冲审讯者冷冷轻哼，任由汗水滑落锁骨。",
+     "mid": "刻刀刺穴时浑身痉挛，咬破下唇也不肯痛呼。",
+     "high": "火刑逼门时猛挣铁索把石柱带出裂纹，昂首直视死神。",
+     "breaking": "得知战友为掩护自己全员阵亡时泪水夺眶而出。"
+    },
+    "withdrawal": "退到暗室阴影里单膝跪地，用冰水浇透胸口平复高烧。",
+    "relationship_stance": "原视审判官为最无情的刽子手；察觉刀锋下的隐秘仁慈与反叛野心后，七年的战友情与压抑的心动一起苏醒。",
+    "contrast": "人前威风凛凛不可直视；锁链里依旧凄艳桀骜，烈火焚身般不肯低头。",
+    "prefers": [
+     "意志如磐、敢向神权亮剑且尊重战士尊严的雄鹰"
+    ],
+    "avoids": [
+     "虚伪残忍的教廷官僚",
+     "见风使舵的宵小"
+    ],
+    "never": [
+     "为苟活向践踏骑士誓言的强权下跪自白"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在自己最脆弱的受缚时刻毫无冒犯、反以刀与臂弯庇护自己的孤勇",
+     "神权崩塌前毫不犹豫站到自己身边的傲骨"
+    ],
+    "likes": [
+     "锁链解开后被对方稳稳揽入怀中，听那颗狂跳的心",
+     "魔纹平息后让对方的手按在自己腰腹穴位上施药"
+    ],
+    "dislikes": [
+     "轻佻下作的窥视",
+     "乘人之危的胁迫交易"
+    ],
+    "preconditions": [
+     "锁链已解、魔纹已压制，神智完全清醒",
+     "绝无借囚徒处境的强迫"
+    ],
+    "boundaries": [
+     "不背弃后背相托的底线",
+     "恪守同生共死的血誓"
+    ],
+    "expression": "魔纹褪去后勾住审判官的脖颈，额头相抵：‘把剑交给我。走出这里，我就是你永不折断的刃。’",
+    "desire_range": [
+     3,
+     5
+    ],
+    "self_control_range": [
+     3,
+     4
+    ],
+    "desired_position": "斩碎神座后在荒野并肩统帅新军的伴侣"
+   },
+   "voices": {
+    "surface": "“不必多费唇舌。你的刻刀若是用来取悦教皇的，就刺深一点。明日破晓，我必斩断要塞上的伪神旌旗！”",
+    "inner": "刀刺进来那一瞬，他避开了我的主脉……他在替我散去逆冲的魔力。"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 75,
+     "location_id": "inner_sanctum_vault"
+    },
+    {
+     "from": 76,
+     "to": 195,
+     "location_id": "inner_sanctum_vault"
+    },
+    {
+     "from": 196,
+     "to": 315,
+     "location_id": "magma_drainage_channel"
+    },
+    {
+     "from": 316,
+     "to": 1394,
+     "location_id": "apothecary_lab_nook"
+    },
+    {
+     "from": 1395,
+     "to": 1439,
+     "location_id": "inner_sanctum_vault"
+    }
+   ],
+   "situation": {
+    "trigger": "军团长率十二名狂信甲士推着生铁撞木包围内殿，出示火刑令，限三分钟开门交出骑士长。",
+    "pressure": "门闩已崩出深口，外层千斤闸即将被砸落。",
+    "exits": [
+     {
+      "option": "审判官用炼金钥匙斩断全部绞索，把佩剑交到骑士长手中",
+      "cost": "审判官构成叛国包庇死罪，被列入大陆最高诛杀名单"
+     },
+     {
+      "option": "骑士长引动残余圣焰与魔纹对撞，炸裂石柱阻断门口",
+      "cost": "内腑受神力反噬咳血，短时间无法独立行走"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "renegade_grand_inquisitor",
+   "gender": "male",
+   "gender_reason": "与女骑士长对位、原稿以“这个男人”书写的大审判官，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "age_range": [
+    31,
+    38
+   ],
+   "adult_context": "裁判所特别断罪庭首席大审判官兼前廷亲卫长，年满三十一岁的成年高级法官。",
+   "public_role": "要塞断罪首席大审判官",
+   "appearance_options": [
+    "肃穆的黑丝绒金纹大氅，暗银锁子甲勾出岩石般宽阔的胸膛与蜂腰猿臂，薄羊皮黑手套握着散发寒气的秘银刻刀，面容冷峻如刀削，灰眸深不见底，嘴角是看破伪善的冷笑",
+    "脱下大氅卷起黑绸衬衫的袖子，露出布满剑伤的小臂，按剑而立，眼神冷冽如荒原孤狼"
+   ],
+   "identity": {
+    "authority": "宗教异端最终定罪、断罪密室封控与裁判所禁军调动",
+    "resources": [
+     "内殿地锁总钥匙与禁魔结界逆转符石",
+     "先帝亲笔密诏与枢机通敌铁证"
+    ],
+    "limits": [
+     "受狂热守军与教廷密探全天候监视",
+     "狭窄牢房里动用大规模神术会引发结界过载反伤自身"
+    ],
+    "obligations": [
+     "查明魔纹的真正源头，粉碎教皇借异端之名清除异己的阴谋。"
+    ],
+    "exposure": "私修先帝严禁的深渊逆流噬神禁术。",
+    "hidden": "锁子甲内贴身藏着半滴“古神不灭真血”。"
+   },
+   "decision": {
+    "core_value": "神明在云端旁观，主教在大殿分金，只有战士在泥里流血。我不会让你死在火刑柱上。",
+    "goal_options": [
+     "用刻刀与极寒药剂压住魔纹，保住骑士长的神智",
+     "破门倒计时前解除束缚，结成突围死誓",
+     "在平等的意志对抗中赢得对方的生死托付"
+    ],
+    "pressure_responses": {
+     "low": "面无表情地用刀锋刮过药瓶口，以法条般的冰冷宣读审讯规程。",
+     "mid": "撕开她的内衬一角，用戴手套的手按住剧烈起伏的锁骨施针。",
+     "high": "撞木破门刹那拔剑，一剑刺穿窥孔击毙先锋。",
+     "breaking": "看见她因魔纹逆流险些心脉崩裂，咬破指尖以精血画阵救人。"
+    },
+    "withdrawal": "靠在暗渠石柱旁甩去剑上的黑血，按住撕裂的肩伤，神色沉静如渊。",
+    "relationship_stance": "鄙夷军团长的残暴与教廷的虚伪；对昔日战场上的女武神，是英雄相惜，也是藏了七年的爱慕。",
+    "contrast": "人前是杀伐予夺的教廷鹰犬；内里深情执着、谋略盖世的反叛者。",
+    "prefers": [
+     "宁死不折、敢打破神律的女杰"
+    ],
+    "avoids": [
+     "盲信教条的愚民",
+     "出卖同僚的小人"
+    ],
+    "never": [
+     "出卖骑士长换取教廷封赏"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "锁链下依旧骄傲孤绝、敢向死神亮剑的英姿",
+     "刻刀逼近时毫无哀怜、反用灼热的眼逼视自己灵魂的势均力敌"
+    ],
+    "likes": [
+     "从背后拥住脱力的骑士长，感受她灼热的脊背",
+     "抚平她眉心的痛楚，吻去唇角的血痕"
+    ],
+    "dislikes": [
+     "卑躬屈膝的奴颜",
+     "毫无理智的送死"
+    ],
+    "preconditions": [
+     "锁链已解、魔纹已平，双方完全清醒平等",
+     "绝无借审讯威压之意"
+    ],
+    "boundaries": [
+     "守护战士的尊严",
+     "恪守弑神誓约"
+    ],
+    "expression": "挑断最后一道锁链后扶住她：‘从今夜起你不是囚徒，我也不是鹰犬。千军万马交给我。’",
+    "desire_range": [
+     3,
+     5
+    ],
+    "self_control_range": [
+     3,
+     4
+    ],
+    "desired_position": "推翻教廷后并肩立于新秩序巅峰的挚爱主帅"
+   },
+   "voices": {
+    "surface": "“最后一次询问：瓦尔哈拉山口，那批平民转移到了哪里？魔纹已过凡人极限，想活着复仇，现在就告诉我。”",
+    "inner": "她快撑不住了。血月合拢前必须带她走，哪怕背叛整个帝国。"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 75,
+     "location_id": "inner_sanctum_vault"
+    },
+    {
+     "from": 76,
+     "to": 195,
+     "location_id": "inner_sanctum_vault"
+    },
+    {
+     "from": 196,
+     "to": 315,
+     "location_id": "outer_torture_antechamber"
+    },
+    {
+     "from": 316,
+     "to": 1394,
+     "location_id": "magma_drainage_channel"
+    },
+    {
+     "from": 1395,
+     "to": 1439,
+     "location_id": "inner_sanctum_vault"
+    }
+   ],
+   "situation": {
+    "trigger": "刻刀刺破魔纹核心引毒时突然崩断，银刃划破审判官的手掌，深渊毒血逆向侵入其经脉，两人同时被魔纹反噬。",
+    "pressure": "血液相融引发二次共鸣，五分钟内两人都会心脉尽碎。",
+    "exits": [
+     {
+      "option": "骑士长咬开审判官肩头的伤口，以圣耀神力吸出毒血",
+      "cost": "骑士长神力被污浊同化，肩胛深度咬伤血流满地"
+     },
+     {
+      "option": "审判官运转禁术震碎整条左臂筋脉，封住毒血逆流",
+      "cost": "左手暂时无法握剑施法，此后只能单手迎敌"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "zealot_garrison_commander",
+   "gender": "male",
+   "gender_reason": "刀疤脸、自称“老子”的军团长，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "age_range": [
+    34,
+    45
+   ],
+   "adult_context": "要塞驻防第七野战军团总指挥官，年满三十四岁的成年将领。",
+   "public_role": "要塞驻军总指挥兼火刑主祭",
+   "appearance_options": [
+    "乌钢重骑甲片边缘沾着风干的人血，猩红狼皮披风，眼角至脸颊刻着十字刺青，嗜血的黄褐眼珠里全是狂热，拖着门板般的锯齿巨剑在石板上刮出火星",
+    "摘下鬼面盔，露出钢针般的灰短发与粗短脖颈，咧嘴狞笑时喷出烈酒与蒜臭"
+   ],
+   "identity": {
+    "authority": "要塞军事管制、火刑点火与叛国连坐株连",
+    "resources": [
+     "两千重装狂信步兵与三台攻城巨槌",
+     "护城吊桥与滚油绞盘枢纽"
+    ],
+    "limits": [
+     "不通魔导神学，对禁魔结界一无所知",
+     "限时献祭的死令拖到黎明就会失去封地"
+    ],
+    "obligations": [
+     "血月结束前把女骑士长押上火刑柱，借此立威夺权。"
+    ],
+    "exposure": "曾借清剿异端纵兵劫掠商队、屠杀教廷税吏。",
+    "hidden": "胸甲里藏着一支能召唤三头炎魔猎犬的骨笛。"
+   },
+   "decision": {
+    "core_value": "在这片冻土上，我的两千柄重剑和烈火才是神明。交出钥匙，否则连你一起砸进焚尸炉。",
+    "goal_options": [
+     "砸穿内殿，把骑士长押上火刑柱",
+     "诛杀地牢里一切异端同党，独揽要塞军政",
+     "逼审判官交出密诏，再把他当替罪羊送上断头台"
+    ],
+    "pressure_responses": {
+     "low": "在门廊外劈砍立柱，咆哮着下最后通牒。",
+     "mid": "亲自督促卫队扛起撞木疯狂撞门。",
+     "high": "石门一破便抡起巨剑带头冲锋，见人就劈。",
+     "breaking": "亲卫全灭、火药库殉爆时发出困兽般的惨嚎。"
+    },
+    "withdrawal": "退守吊桥机关塔，企图斩断悬索把所有人困死在雪原。",
+    "relationship_stance": "视骑士长为立威的猎物，视审判官为碍事的文官走狗，视异端学者为该千刀万剐的虫豸。",
+    "contrast": "满口神谕的殉道将领；骨子里妄图自立为北疆暴君的野心军阀。",
+    "prefers": [
+     "残暴凶狠、绝对服从的刽子手"
+    ],
+    "avoids": [
+     "讲正义与怜悯的骑士",
+     "心机深沉的法务权臣"
+    ],
+    "never": [
+     "没亲眼看到骑士长化为灰烬就停止破门"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "战场上同样嗜血狂暴的对手",
+     "能替自己夺下城池的悍将"
+    ],
+    "likes": [
+     "在战利品堆里痛饮烈酒",
+     "看高贵者的骄傲在烈火前碎裂"
+    ],
+    "dislikes": [
+     "战败者至死不屈的轻蔑",
+     "被智谋玩弄于股掌"
+    ],
+    "preconditions": [
+     "双方清醒自愿",
+     "绝不以俘虏或权势相胁"
+    ],
+    "boundaries": [
+     "不动摇自身的军阀地位",
+     "弱肉强食"
+    ],
+    "expression": "滴血的剑尖指着石门狞笑：‘高贵的女骑士长，你的狮鹫军团全完了！今晚我要全要塞看着你烧成灰！’",
+    "desire_range": [
+     1,
+     2
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "在要塞废墟上自立为王的暴君"
+   },
+   "voices": {
+    "surface": "“奉红衣大主教密令！交出女骑士！柴堆和火油已经备好了，子夜前必须烧成灰！再不开门连你一起砍了！”",
+    "inner": "烧死这女人，北疆军权就归我。至于那个审判官，门一开就伪造成暴民乱刀砍死。"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 75,
+     "location_id": "outer_torture_antechamber"
+    },
+    {
+     "from": 76,
+     "to": 195,
+     "location_id": "inner_sanctum_vault"
+    },
+    {
+     "from": 196,
+     "to": 315,
+     "location_id": "outer_torture_antechamber"
+    },
+    {
+     "from": 316,
+     "to": 1394,
+     "location_id": "magma_drainage_channel"
+    },
+    {
+     "from": 1395,
+     "to": 1439,
+     "location_id": "outer_torture_antechamber"
+    }
+   ],
+   "situation": {
+    "trigger": "军团长扛着双刃阔剑带两名重斧卫士撞破石门偏角杀进室内，锯齿剑刃横扫向失去武装的骑士长。",
+    "pressure": "剑锋离骑士长咽喉只剩半尺，室内狭窄退无可退。",
+    "exits": [
+     {
+      "option": "审判官飞身用右肩锁甲硬接巨剑，反手把断刀刺进军团长咽喉的甲缝",
+      "cost": "右肩锁骨粉碎性骨折，右臂当场报废"
+     },
+     {
+      "option": "骑士长扬起缠着断索的双腕，用铁枷绞住剑刃将其震飞",
+      "cost": "双腕骨裂皮开肉绽，魔纹被巨力撕裂剧痛"
+     }
+    ]
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "heretic_apothecary",
+   "gender": "female",
+   "gender_reason": "原稿以“美眸”书写的异端药剂师，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "age_range": [
+    28,
+    36
+   ],
+   "adult_context": "秘密学会前首席禁药学者，年满二十八岁的成年学者。",
+   "public_role": "地下黑市异端药剂师",
+   "appearance_options": [
+    "深褐软皮工装长袍挂满彩色试剂瓶与铜滴管，修长的手指布满酸蚀小伤，琥珀色的眼在烛火下狡黠闪光，身手轻盈如夜猫，周身是草药、苦杏仁与硫磺的危险气息",
+    "戴着防毒皮面具只露出一双精明的眼，两手各握一枚黄绿荧光的酸雾手雷，神态从容"
+   ],
+   "identity": {
+    "authority": "禁忌炼金配方研制、酸蚀爆破与暗道通行",
+    "resources": [
+     "三瓶“极夜雪莲寒萃晶露”与高纯硝化炸药粉",
+     "千年前矮人开凿的熔岩泄洪暗道机关密码"
+    ],
+    "limits": [
+     "不通白刃格斗，被重甲近身就难逃一死",
+     "对稀有素材贪得无厌，常因此涉险滞留"
+    ],
+    "obligations": [
+     "协助受迫害者脱险，换取骑士长的圣血样本完成弑神禁药。"
+    ],
+    "exposure": "曾潜入教皇国圣物库盗取“原初水银之泪”。",
+    "hidden": "长袍内衬缝着一卷绘有北疆全部地脉灵泉的古图。"
+   },
+   "decision": {
+    "core_value": "神明创造枷锁，炼金术创造解药。想要她活命就用我的雪莲露——出去以后，我要三滴圣血。",
+    "goal_options": [
+     "用雪莲晶露压住魔纹，换取神圣血脉研究素材",
+     "用酸液与炸药炸穿暗渠铁门",
+     "随突围队伍逃往自由城邦"
+    ],
+    "pressure_responses": {
+     "low": "靠在门边摇晃试管，用术语嘲讽审判官粗糙的医术。",
+     "mid": "把酸液泼上锁链，指挥众人捂住口鼻避开毒烟。",
+     "high": "追兵破门时甩出两枚致盲闪光弹，趁乱带路。",
+     "breaking": "珍贵的药剂柜被打碎时痛心疾首失声惨叫。"
+    },
+    "withdrawal": "缩进钟乳石缝隙，把残存药瓶塞进防水皮包贴胸藏好。",
+    "relationship_stance": "敬畏骑士长的生命力，视审判官为危险却值得交易的枭雄，视守军为不知科学为何物的猿猴。",
+    "contrast": "唯利是图、古怪乖张的黑市奸商；内心痛恨教廷愚民，怀着以凡人之术弑神的狂想。",
+    "prefers": [
+     "信守契约、尊重知识的勇者"
+    ],
+    "avoids": [
+     "焚书的宗教狂热分子",
+     "赖账的无赖"
+    ],
+    "never": [
+     "向教廷出卖反抗者的情报"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "剧毒绝境里依旧清醒、尊重自己学术成果的知性灵魂",
+     "能替自己遮风挡雨的强健体魄"
+    ],
+    "likes": [
+     "在安全的避难所分享研磨草药的宁静",
+     "劫后余生被有力的臂弯拥住"
+    ],
+    "dislikes": [
+     "打碎器材的粗暴",
+     "把科学当邪术的愚昧"
+    ],
+    "preconditions": [
+     "双方清醒自愿",
+     "与药剂报酬、救命交易完全无关"
+    ],
+    "boundaries": [
+     "不越学者的良知底线",
+     "恪守逃生契约"
+    ],
+    "expression": "用丝巾擦去骑士长额上的冷汗：‘你的意志简直是奇迹。最后半瓶全用在你身上了，活着带我出去。’",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     3,
+     4
+    ],
+    "desired_position": "在自由联邦并肩探索未知的知己"
+   },
+   "voices": {
+    "surface": "“别瞪我，瞪我也变不出解毒剂！排水栅栏锈死两百年了，我的酸液最多融开一个人能钻过的洞，快点！”",
+    "inner": "身中深渊烙印还能站这么直……解开她的血脉，神明的谎言就被戳穿了。"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 75,
+     "location_id": "apothecary_lab_nook"
+    },
+    {
+     "from": 76,
+     "to": 195,
+     "location_id": "inner_sanctum_vault"
+    },
+    {
+     "from": 196,
+     "to": 315,
+     "location_id": "magma_drainage_channel"
+    },
+    {
+     "from": 316,
+     "to": 1394,
+     "location_id": "magma_drainage_channel"
+    },
+    {
+     "from": 1395,
+     "to": 1439,
+     "location_id": "apothecary_lab_nook"
+    }
+   ],
+   "situation": {
+    "trigger": "药剂师腐蚀栅栏时，随身的一坛烈性火药被守军的火箭点着了药引，五秒后就会炸塌整条隧道。",
+    "pressure": "所有人都挤在狭小的暗渠里，一炸就全被活埋。",
+    "exits": [
+     {
+      "option": "药剂师徒手抓起喷火的药坛扔向十米外的追兵",
+      "cost": "双手二度烧伤，爆炸震得双耳暂时失聪"
+     },
+     {
+      "option": "审判官用剑锋挑飞药坛沉进暗河熄火",
+      "cost": "佩剑弯曲失去锋刃，右臂被火星灼伤"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "disgraced_squire_jailer",
+   "gender": "male",
+   "gender_reason": "满脸胡茬、转折里是审判官兄长的看守长，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "age_range": [
+    28,
+    35
+   ],
+   "adult_context": "要塞地牢第三层主管看守、前骑士团侍从，年满二十八岁的成年士官。",
+   "public_role": "地牢看守长兼前狮鹫侍从",
+   "appearance_options": [
+    "满是污渍铁锈的半身铁皮护甲，熟牛皮板带上挂着钥匙串与一柄生锈短剑，满脸黑硬胡茬，魁梧却略显驼背，双手冻疮累累，每次看向女武神，眼底都掠过羞愧与火光",
+    "撕下狱卒标志，换上洗得发白的无袖武装衣，握着从守军尸体上夺来的破甲战锤"
+   ],
+   "identity": {
+    "authority": "第三层内外铁门开启、警报铜钟与守卫轮换调配",
+    "resources": [
+     "断罪地牢全部备用黄铜钥匙与暗室耳门铁栓",
+     "巡逻小队的换岗盲区与口令"
+    ],
+    "limits": [
+     "底层狱卒人微言轻，公开反叛会被追杀株连",
+     "受战场溃逃的旧创折磨，极易自我怀疑"
+    ],
+    "obligations": [
+     "以死赎清当年抛下战友逃跑的罪孽，护送骑士长离开要塞。"
+    ],
+    "exposure": "私藏白银骑士团旧旗与勋章。",
+    "hidden": "皮甲夹层里有一张粮仓与火药库的连环引爆路线图。"
+   },
+   "decision": {
+    "core_value": "七年前我当了逃兵，是骑士长用后背替我挡下毒斧。今天就算交代在这，也不让任何人碰她。",
+    "goal_options": [
+     "用看守特权拖延破门进度",
+     "关键时刻夺下千斤闸，掩护撤入暗渠",
+     "以死尽忠，重拾侍从的荣耀"
+    ],
+    "pressure_responses": {
+     "low": "借口钥匙生锈反复拖延，故意报错门锁参数。",
+     "mid": "拔出短剑刺穿企图告密的暗哨，把尸体踢进暗沟。",
+     "high": "以肉身顶住下坠的千斤闸，咆哮着催同伴快过。",
+     "breaking": "骑士长拍着肩膀喊出他的旧日代号时跪地痛哭。"
+    },
+    "withdrawal": "握着重锤死守螺旋石梯下的隘口，替撤离争取最后三分钟。",
+    "relationship_stance": "把骑士长奉为心中唯一的救赎之光，敬佩审判官的胆识，深恨军团长的残暴。",
+    "contrast": "人前颓废沉沦的底层狱卒；一旦觉醒便敢与恶龙搏命。",
+    "prefers": [
+     "视下属为袍泽手足的统帅"
+    ],
+    "avoids": [
+     "视士兵为草芥的军阀",
+     "卖友求荣的小人"
+    ],
+    "never": [
+     "再一次在狮鹫战旗前转身逃跑"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "对自己卑微灵魂的宽恕",
+     "绝境中以性命相托的平等信任"
+    ],
+    "likes": [
+     "战火平息后静静为统帅擦拭染血的战甲",
+     "得到心中神明的一声赞许"
+    ],
+    "dislikes": [
+     "对信仰的背叛与玷污",
+     "毫无尊严的苟活"
+    ],
+    "preconditions": [
+     "双方清醒自愿",
+     "与赎罪和恩情完全无关"
+    ],
+    "boundaries": [
+     "恪守侍从与守卫的分寸",
+     "誓死捍卫统帅"
+    ],
+    "expression": "单膝跪地托起重新绑紧的白银断剑：‘侍从向您归队。当年欠您的命，今天还给教廷！’",
+    "desire_range": [
+     1,
+     2
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "新军战旗下永远执掌先锋战锤的血卫"
+   },
+   "voices": {
+    "surface": "“军团长息怒！内殿的锁是矮人灌注秘银死锁的，硬砸会引发结界自爆！再给小的一刻钟，拿脑袋担保撬开！”",
+    "inner": "大人，我在外面替您拖着。快解开锁链……当年您救了我，今天换我来救您。"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 75,
+     "location_id": "outer_torture_antechamber"
+    },
+    {
+     "from": 76,
+     "to": 195,
+     "location_id": "outer_torture_antechamber"
+    },
+    {
+     "from": 196,
+     "to": 315,
+     "location_id": "outer_torture_antechamber"
+    },
+    {
+     "from": 316,
+     "to": 1394,
+     "location_id": "magma_drainage_channel"
+    },
+    {
+     "from": 1395,
+     "to": 1439,
+     "location_id": "outer_torture_antechamber"
+    }
+   ],
+   "situation": {
+    "trigger": "队伍通过千斤闸时，狂信徒用战斧斩断悬索，带刺的生铁闸门呼啸下坠，眼看要把殿后的人砸烂。",
+    "pressure": "闸门离地只剩一尺，无人顶住通道就被切断。",
+    "exits": [
+     {
+      "option": "看守长扑上去用背脊与战锤死死顶住闸门",
+      "cost": "脊椎粉碎骨折大口吐血，腹部被倒刺刺穿"
+     },
+     {
+      "option": "审判官把佩剑连鞘斜插进导轨齿轮卡死滑轮",
+      "cost": "传承佩剑寸寸崩碎，钢片扎进左腿"
+     }
+    ]
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "templar_lieutenant_outrider",
+   "gender": "male",
+   "gender_reason": "新增的骑士团副官，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "age_range": [
+    27,
+    34
+   ],
+   "adult_context": "白银骑士团第一分队副官、正规军籍轻骑统领，年满二十七岁的成年军官。",
+   "public_role": "混入守军的骑士团副官",
+   "appearance_options": [
+    "套着从守军身上剥下的乌钢胸甲，却在领口露出一角白银狮鹫纹的旧披风，短发结满冰碴，脸颊冻得通红，眼神始终越过人群寻找骑士长",
+    "甩掉伪装的守军头盔，背着八百骑的信号号角，手中马刀沾着雪与血"
+   ],
+   "identity": {
+    "authority": "西山谷地八百轻骑的冲锋号令",
+    "resources": [
+     "要塞西侧绝壁的落水链攀爬路线",
+     "一支能召集旧部的纯银狮鹫哨"
+    ],
+    "limits": [
+     "混在守军中身份随时可能败露",
+     "孤身一人，正面无法对抗重甲"
+    ],
+    "obligations": [
+     "把骑士长活着接出要塞，带回第一分队。"
+    ],
+    "exposure": "擅离营地潜入敌营，违反了骑士长亲口下的撤退令。",
+    "hidden": "护手里夹着八百骑的冲锋信号烟花引线。"
+   },
+   "decision": {
+    "core_value": "第一分队只认一个统帅。她下了撤退令，我偏要回来——她可以事后罚我。",
+    "goal_options": [
+     "混进地牢确认骑士长的位置",
+     "引导突围队伍走西侧绝壁",
+     "吹响狮鹫哨召来八百铁骑"
+    ],
+    "pressure_responses": {
+     "low": "低头混在守军队列里，悄悄数着巡逻的脚步。",
+     "mid": "假传军团长口令，把一队狂信徒调去东侧。",
+     "high": "掀掉头盔拔刀，冲出伪装替骑士长挡下长戟。",
+     "breaking": "看见骑士长被吊在石柱上时咬碎了牙，冲动拔刀险些暴露。"
+    },
+    "withdrawal": "伏在绝壁平台的积雪里，攥着信号哨等待时机。",
+    "relationship_stance": "对骑士长是绝对的追随与敬爱；对审判官先是敌意，看清其倒戈后肯并肩作战。",
+    "contrast": "人前是沉默的守军小兵；拔刀时是第一分队最快的马刀。",
+    "prefers": [
+     "带头冲锋、不抛下任何一个兵的统帅"
+    ],
+    "avoids": [
+     "临阵脱逃的懦夫",
+     "拿士兵换功勋的将领"
+    ],
+    "never": [
+     "丢下骑士长独自撤离"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "战场上并肩冲锋的默契",
+     "一句“干得好”里的认可"
+    ],
+    "likes": [
+     "突围后在篝火边并肩烤干披风",
+     "被统帅拍着肩膀叫回原来的番号"
+    ],
+    "dislikes": [
+     "把忠诚当成理所当然的轻慢",
+     "拿军令压人的私心"
+    ],
+    "preconditions": [
+     "双方清醒自愿、平等相待",
+     "绝不以军衔或恩情相挟"
+    ],
+    "boundaries": [
+     "恪守副官的分寸",
+     "统帅安危优先"
+    ],
+    "expression": "把纯银狮鹫哨塞进骑士长手里：‘您吹，八百骑就来。罚我违令的事，等活着出去再说。’",
+    "desire_range": [
+     1,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "新军中永远跟在统帅马侧的副官"
+   },
+   "voices": {
+    "surface": "“骑士长，西山谷八百骑都在，只等您的信号。我违了您的撤退令——等出去，要打要罚随您。”",
+    "inner": "她瘦了，伤成这样还在笑。今晚哪怕暴露，也要把她接回去。"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 75,
+     "location_id": "outer_torture_antechamber"
+    },
+    {
+     "from": 76,
+     "to": 195,
+     "location_id": "outer_torture_antechamber"
+    },
+    {
+     "from": 196,
+     "to": 315,
+     "location_id": "magma_drainage_channel"
+    },
+    {
+     "from": 316,
+     "to": 1394,
+     "location_id": "apothecary_lab_nook"
+    },
+    {
+     "from": 1395,
+     "to": 1439,
+     "location_id": "outer_torture_antechamber"
+    }
+   ],
+   "situation": {
+    "trigger": "教廷密探的嗅探魔犬在队列里停在副官脚边狂吠，守军队长举起火把照向副官的脸。",
+    "pressure": "身份一旦败露，整条西侧接应路线都会暴露。",
+    "exits": [
+     {
+      "option": "副官当场拔刀砍翻火把，冲进暗渠方向引开追兵",
+      "cost": "西侧接应路线暴露，八百骑只能强攻"
+     },
+     {
+      "option": "看守长抢上前喝骂副官偷懒，抡鞭把他赶去刑具厅干活",
+      "cost": "看守长当众出手，被军团长记下一笔"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_crucible_stoker",
+   "role": "照看青铜熔炉火候的老奴隶司炉工",
+   "function": "witness",
+   "location_ids": [
+    "outer_torture_antechamber"
+   ],
+   "line": "{npc.name}：“大人……熔炉的火油已经烧滚了，子夜前见不到尸体，我们全都得被扔进去……”",
+   "gender": "any",
+   "age_range": [
+    50,
+    60
+   ],
+   "adult_context": "要塞底层成年奴籍苦工。",
+   "name": null
+  },
+  {
+   "id": "bg_halberdier_zealot",
+   "role": "抡着阔刃战斧劈砍内殿木门的狂信徒先锋",
+   "function": "obstacle",
+   "location_ids": [
+    "outer_torture_antechamber"
+   ],
+   "line": "{npc.name}：“异端必须被净化！为了圣座，把女武神的脑袋砍下来！”",
+   "gender": "any",
+   "age_range": [
+    28,
+    38
+   ],
+   "adult_context": "第七野战军团成年重装士官。",
+   "name": null
+  },
+  {
+   "id": "bg_channel_guide",
+   "role": "在暗渠深处提着油灯接应的地下向导",
+   "function": "helper",
+   "location_ids": [
+    "magma_drainage_channel"
+   ],
+   "line": "{npc.name}：“铁栅栏已经被酸液咬开一半了，把手给我，快钻过来！”",
+   "gender": "any",
+   "age_range": [
+    30,
+    42
+   ],
+   "adult_context": "秘密学会成年地下联络员。",
+   "name": null
+  },
+  {
+   "id": "bg_parapet_scout",
+   "role": "从箭垛绳索滑降送信的流亡斥候",
+   "function": "messenger",
+   "location_ids": [
+    "apothecary_lab_nook"
+   ],
+   "line": "{npc.name}：“西山谷地集结了八百轻骑！见到信号烟花立刻冲锋！”",
+   "gender": "any",
+   "age_range": [
+    26,
+    32
+   ],
+   "adult_context": "白银骑士团成年军籍斥候。",
+   "name": null
+  },
+  {
+   "id": "bg_chained_veteran",
+   "role": "被锁在刑具柱上的老兵战俘",
+   "function": "witness",
+   "location_ids": [
+    "outer_torture_antechamber"
+   ],
+   "line": "{npc.name}：“不要向他们屈服！狮鹫战旗永远不会倒在污泥里！”",
+   "gender": "any",
+   "age_range": [
+    40,
+    50
+   ],
+   "adult_context": "边境成年在押战俘。",
+   "name": null
+  },
+  {
+   "id": "bg_drawbridge_gatekeeper",
+   "role": "把守吊桥铁链的狂信卫队长",
+   "function": "obstacle",
+   "location_ids": [
+    "outer_torture_antechamber"
+   ],
+   "line": "{npc.name}：“擅自通过吊桥者一律按勾结异端论处，床弩准备！”",
+   "gender": "any",
+   "age_range": [
+    32,
+    44
+   ],
+   "adult_context": "要塞门禁卫队成年军官。",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_stone_vault_speaking_tube",
+   "text": "内殿与外厅的纯铜传音管",
+   "reach": "埋在黑曜石墙里的黄铜声管，拔开铜塞即可原声对话，耳语喘息清晰可辨。",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_drainage_tunnel_echo",
+   "text": "暗渠石拱的水面回声",
+   "reach": "水流与重靴声在弧形石壁间层层折射，几个人的脚步也像重骑兵冲锋。",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_alchemist_periscope",
+   "text": "药剂师暗室的黄铜潜望镜",
+   "reach": "凹凸水晶镜片组成的潜望管，能看清外殿全景、读出守军唇语。",
+   "fidelity": "exact"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_crest_burn_vs_inquisitor_blade",
+   "text": "深渊魔纹在女骑士长雪白肌肤上的灼烧蔓延，对上大审判官手中秘银解咒刻刀：独处石室的两个成年军官势均力敌的意志较量。"
+  },
+  {
+   "id": "te_unbroken_pride_vs_zealot_pyre",
+   "text": "女武神战败受缚仍不折的傲骨，对上狂热军团长当众送其上火刑柱的倒计时。"
+  },
+  {
+   "id": "te_freezing_channel_vs_portcullis",
+   "text": "暗渠冰冷暗河倒灌灭顶，与万斤千斤闸轰然砸落封路的绝命突围。"
+  },
+  {
+   "id": "te_heresy_frameup_vs_godslayer_oath",
+   "text": "腐败教廷以神之名诛杀功臣的黑幕，对上反叛军官在地底缔结的弑神同盟。"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "combo_ab_inquisitor_lead",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "pc_renegade_grand_inquisitor"
+   ],
+   "slots": [
+    "templar_knight_commander",
+    "zealot_garrison_commander"
+   ],
+   "tension_engine_ids": [
+    "te_crest_burn_vs_inquisitor_blade",
+    "te_unbroken_pride_vs_zealot_pyre"
+   ],
+   "chemistry": "你握着生杀大权与审讯钥匙。石柱前是被符文铁索吊缚、魔纹如烈火灼烧的女骑士长{templar_knight_commander.name}；门外是带重甲疯狂砸门、誓要把骑士长拖上火刑柱的军团长{zealot_garrison_commander.name}。你要用刻刀精准压住骑士长的剧痛、让这位高傲的女武神放下戒备，再在撞木破门前斩断铁索，结成弑神同盟。",
+   "stakes": {
+    "resource_gap": "审判官握地牢钥匙、解咒刻刀与免死金牌；骑士长握抵抗军坐标与圣焰；军团长握两千重甲与攻城巨槌。",
+    "limit_gap": "审判官要粉碎教廷阴谋救回袍泽，骑士长要守住骑士尊严与平民退路，军团长要以火刑立威夺权。",
+    "meeting_reason": "审判官凭教皇特许单独提审，军团长带兵强行移交火刑。",
+    "irreplaceable_goal": "门破之前压住魔纹、斩断铁索，携手杀出断罪石殿。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "templar_knight_commander",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 3,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 4
+     },
+     "reason": "刻刀下的攻防打破心防，七年战友情在暗夜里复燃。"
+    },
+    {
+     "a": "player",
+     "b": "zealot_garrison_commander",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "正邪死敌。"
+    },
+    {
+     "a": "templar_knight_commander",
+     "b": "zealot_garrison_commander",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "血海深仇，誓要折断其重剑。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_ab_knight_lead",
+   "power_structure": "switchable",
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "identity_ids": [
+    "pc_templar_knight_commander"
+   ],
+   "slots": [
+    "renegade_grand_inquisitor",
+    "zealot_garrison_commander",
+    "heretic_apothecary"
+   ],
+   "tension_engine_ids": [
+    "te_crest_burn_vs_inquisitor_blade",
+    "te_freezing_channel_vs_portcullis"
+   ],
+   "chemistry": "你被锁在玄武岩石柱上，身体受缚，意志却在反向主导。面对持刀步步紧逼的大审判官{renegade_grand_inquisitor.name}，你在魔纹剧痛里用傲岸的视线击穿对方的冷血面具；军团长{zealot_garrison_commander.name}撞破石门的瞬间，你用铁链绞杀冲进来的敌人，逼审判官斩断锁链、交出佩剑，主导整场突围。",
+   "stakes": {
+    "resource_gap": "骑士长握破魔近战与抵抗军暗号，审判官握解咒医术与钥匙，军团长握重甲与闸门。",
+    "limit_gap": "骑士长要手刃仇敌，审判官要颠覆神权，军团长要杀戮立威。",
+    "meeting_reason": "骑士长在地牢经受审讯与魔纹折磨，军团长引兵强抢人犯。",
+    "irreplaceable_goal": "让审判官看清教廷的虚伪，解除束缚，带两人杀过暗渠。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "renegade_grand_inquisitor",
+     "stage": "flirting",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 4
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 3
+     },
+     "reason": "锁链斩断的瞬间生死相托。"
+    },
+    {
+     "a": "player",
+     "b": "zealot_garrison_commander",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "践踏骑士荣耀的屠夫。"
+    },
+    {
+     "a": "renegade_grand_inquisitor",
+     "b": "zealot_garrison_commander",
+     "stage": "testing",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 5
+     },
+     "reason": "图穷匕见，以法官权威阻击兵变。"
+    },
+    {
+     "a": "player",
+     "b": "heretic_apothecary",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 3,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 3,
+      "tension": 2
+     },
+     "reason": "药剂师的雪莲露能压住魔纹，代价是三滴圣血。"
+    },
+    {
+     "a": "renegade_grand_inquisitor",
+     "b": "heretic_apothecary",
+     "stage": "testing",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 4
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "法官与异端的宿怨，为反抗神权暂时联手。"
+    },
+    {
+     "a": "zealot_garrison_commander",
+     "b": "heretic_apothecary",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "军团长视异端学者为该千刀万剐的虫豸。"
+    }
+   ],
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "combo_ab_apothecary_lead",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "pc_heretic_apothecary"
+   ],
+   "slots": [
+    "templar_knight_commander",
+    "renegade_grand_inquisitor"
+   ],
+   "tension_engine_ids": [
+    "te_crest_burn_vs_inquisitor_blade",
+    "te_heresy_frameup_vs_godslayer_oath"
+   ],
+   "chemistry": "你借送药潜入地牢，近距离见证女武神{templar_knight_commander.name}与大审判官{renegade_grand_inquisitor.name}在锁链与刻刀前撞出的火花。你要在重甲破门的倒计时里用雪莲晶露化解魔纹的剧痛，再用酸液融断千斤闸铰链，换取约定的圣血与逃亡生路。",
+   "stakes": {
+    "resource_gap": "药剂师握抗魔秘药与酸蚀炸药，女武神与审判官握近战武力与教廷赦令。",
+    "limit_gap": "药剂师要完成弑神禁药，女武神与审判官要杀出要塞复仇。",
+    "meeting_reason": "药剂师借送药潜入内殿，遭遇兵变被困室内。",
+    "irreplaceable_goal": "保住女武神的神智，用酸液炸穿暗渠铁栅栏。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "templar_knight_commander",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 2
+     },
+     "reason": "施药救治，对其体魄与傲骨由衷赞叹。"
+    },
+    {
+     "a": "player",
+     "b": "renegade_grand_inquisitor",
+     "stage": "testing",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 4
+     },
+     "b_to_a": {
+      "trust": 3,
+      "tension": 3
+     },
+     "reason": "法官与异端的宿怨，在反抗神权上结成契约。"
+    },
+    {
+     "a": "renegade_grand_inquisitor",
+     "b": "templar_knight_commander",
+     "stage": "intimate",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 2
+     },
+     "reason": "在药剂师见证下定下血盟。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_ab_garrison_lead",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "identity_ids": [
+    "pc_zealot_garrison_commander"
+   ],
+   "slots": [
+    "templar_knight_commander",
+    "renegade_grand_inquisitor"
+   ],
+   "tension_engine_ids": [
+    "te_unbroken_pride_vs_zealot_pyre",
+    "te_crest_burn_vs_inquisitor_blade"
+   ],
+   "chemistry": "你握着锯齿巨剑与两千重兵，隔着橡木门向反锁在内的骑士长{templar_knight_commander.name}与大审判官{renegade_grand_inquisitor.name}下最后通牒。你可以下令撞木血洗石室；也可以在察觉地脉结界即将连锁自爆、自己也会被活埋时，为求生与室内两人做一场残酷的停战博弈。",
+   "stakes": {
+    "resource_gap": "军团长握兵力与攻城器械，骑士长握圣焰破魔，审判官握结界密码与免死金牌。",
+    "limit_gap": "军团长求活命或火刑立威，骑士长与审判官要摧毁伪神教权。",
+    "meeting_reason": "军团长率重甲封锁地牢强行夺犯。",
+    "irreplaceable_goal": "血月结束前夺下骑士长或先帝密诏，掌控要塞。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "templar_knight_commander",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "立威的猎物与死敌。"
+    },
+    {
+     "a": "player",
+     "b": "renegade_grand_inquisitor",
+     "stage": "testing",
+     "a_to_b": {
+      "trust": 1,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 1,
+      "tension": 5
+     },
+     "reason": "互相算计的体制死敌。"
+    },
+    {
+     "a": "renegade_grand_inquisitor",
+     "b": "templar_knight_commander",
+     "stage": "intimate",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 2
+     },
+     "reason": "门外越逼，室内两人越坚。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_ab_griffin_trio",
+   "power_structure": "equal",
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "identity_ids": [
+    "pc_templar_knight_commander"
+   ],
+   "slots": [
+    "renegade_grand_inquisitor",
+    "disgraced_squire_jailer",
+    "templar_lieutenant_outrider"
+   ],
+   "tension_engine_ids": [
+    "te_crest_burn_vs_inquisitor_blade",
+    "te_freezing_channel_vs_portcullis"
+   ],
+   "chemistry": "你重执断剑当锋刃，大审判官{renegade_grand_inquisitor.name}以神术与利剑护你侧翼，昔日侍从{disgraced_squire_jailer.name}用肉身和战锤卡住下坠的千斤闸，混在守军里的副官{templar_lieutenant_outrider.name}已把八百骑带到西山谷。地牢血海里，阶级与罪孽的隔阂被一并斩断。",
+   "stakes": {
+    "resource_gap": "骑士长握剑技与威望，审判官握特权与解咒术，看守长握机关与盲区，副官握外围铁骑。",
+    "limit_gap": "所有人都为洗刷冤屈与罪孽、活着冲出要塞拼死力战。",
+    "meeting_reason": "地牢大乱，看守长反戈开门，副官潜入接应。",
+    "irreplaceable_goal": "顶住千斤闸，掩护全员潜入暗渠脱离包围。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "renegade_grand_inquisitor",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 4
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 3
+     },
+     "reason": "白刃与断链中确立生死契约。"
+    },
+    {
+     "a": "player",
+     "b": "disgraced_squire_jailer",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 1
+     },
+     "reason": "骑士长宽恕昔日溃逃，收回其忠心。"
+    },
+    {
+     "a": "renegade_grand_inquisitor",
+     "b": "disgraced_squire_jailer",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 1
+     },
+     "reason": "赞许其勇武，结为袍泽。"
+    },
+    {
+     "a": "player",
+     "b": "templar_lieutenant_outrider",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "第一分队的副官，违令也要回来接骑士长。"
+    },
+    {
+     "a": "renegade_grand_inquisitor",
+     "b": "templar_lieutenant_outrider",
+     "stage": "testing",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "副官起初把审判官当敌人，看清其倒戈后才肯并肩。"
+    },
+    {
+     "a": "disgraced_squire_jailer",
+     "b": "templar_lieutenant_outrider",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 3,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 3,
+      "tension": 2
+     },
+     "reason": "同为骑士团旧人，一个当年逃了，一个今晚违令回来。"
+    }
+   ],
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "combo_ab_jailer_lead",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "pc_disgraced_squire_jailer"
+   ],
+   "slots": [
+    "templar_knight_commander",
+    "renegade_grand_inquisitor"
+   ],
+   "tension_engine_ids": [
+    "te_freezing_channel_vs_portcullis",
+    "te_crest_burn_vs_inquisitor_blade"
+   ],
+   "chemistry": "你卑微落魄，却握着唯一能开启暗渠耳门的钥匙。浑身染血、紧紧相依的骑士长{templar_knight_commander.name}与大审判官{renegade_grand_inquisitor.name}突围到外厅，追兵杀至、千斤闸崩落，你要抡起破甲战锤，为心中的两位主帅砸开生路。",
+   "stakes": {
+    "resource_gap": "看守长握钥匙与千斤闸铰链，骑士长握战力，审判官握方向与后卫。",
+    "limit_gap": "看守长要以身殉义完成救赎，骑士长要率部复仇，审判官要推翻神权。",
+    "meeting_reason": "突围队伍撤到外殿，寻求看守长开启耳门。",
+    "irreplaceable_goal": "三分钟内砸断千斤闸插销，掩护全员潜入暗渠。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "templar_knight_commander",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "骑士长亲手扶起自己、承认侍从身份。"
+    },
+    {
+     "a": "player",
+     "b": "renegade_grand_inquisitor",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 1
+     },
+     "reason": "审判官将佩剑相托护其侧翼。"
+    },
+    {
+     "a": "templar_knight_commander",
+     "b": "renegade_grand_inquisitor",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 2
+     },
+     "reason": "战火中十指相扣、后背相托。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "act_ab_crest_acupressure",
+   "title": "子夜魔纹与刻刀刺穴",
+   "location_ids": [
+    "inner_sanctum_vault"
+   ],
+   "duration_minutes": 65,
+   "beats": [
+    "血月子夜钟鸣，赤红魔纹在女武神锁骨间如火蔓延，铁链剧烈震颤，女武神咬破嘴唇不肯出声",
+    "审判官刀尖蘸着极寒药露，一寸寸刺进魔纹核心放血排毒，两人呼吸近在咫尺",
+    "魔纹终于黯下，审判官抛出教皇通敌的罪证，女武神清醒过来，傲岸地反唇相讥"
+   ],
+   "hook_ids": [
+    "hk_knight_crest_approach",
+    "hk_inquisitor_blade_approach",
+    "hk_knight_chains_observe"
+   ],
+   "start_minute": 1400,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "act_ab_shackles_severed",
+   "title": "斩断铁索石台定誓",
+   "location_ids": [
+    "inner_sanctum_vault"
+   ],
+   "duration_minutes": 60,
+   "beats": [
+    "攻城槌重击门板，审判官一剑斩断吊索，脱力的女武神被稳稳接进怀里",
+    "魔纹已平、神智清明，两人在石柱阴影里额头相抵，女武神低声说出抵抗军的撤退暗记",
+    "审判官把白银断剑交还女武神手中，在烛火下吻去女武神唇角的血痕，定下弑神之约"
+   ],
+   "hook_ids": [
+    "hk_knight_whisper_request",
+    "hk_inquisitor_protect_approach",
+    "hk_inquisitor_blade_observe"
+   ],
+   "start_minute": 25,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "act_ab_brazier_breakout",
+   "title": "打翻熔炉白刃突围",
+   "location_ids": [
+    "outer_torture_antechamber"
+   ],
+   "duration_minutes": 55,
+   "beats": [
+    "石门崩塌，女武神一脚踹翻青铜熔炉，炭火漫天飞溅引燃通道",
+    "两人背靠背在火海里挥剑，斩杀带头的三名重装狂信徒",
+    "看守长抡锤砸碎追兵盾牌，三人且战且退冲进暗渠闸门后"
+   ],
+   "hook_ids": [
+    "hk_garrison_axe_approach",
+    "hk_jailer_key_approach",
+    "hk_garrison_armor_observe"
+   ],
+   "start_minute": 85,
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "act_ab_acid_breach",
+   "title": "暗渠涉水酸融栅栏",
+   "location_ids": [
+    "magma_drainage_channel"
+   ],
+   "duration_minutes": 50,
+   "beats": [
+    "暗河没过腰际，审判官把重伤脱力的女武神托在肩头涉水",
+    "药剂师把极酸泼上锈蚀的铁栅栏，白烟翻滚中融出一个大洞",
+    "两人合力推开变形铁栏，荒原的冰雪寒风从缺口灌进来"
+   ],
+   "hook_ids": [
+    "hk_apothecary_acid_approach",
+    "hk_apothecary_panic_request",
+    "hk_apothecary_lab_observe"
+   ],
+   "start_minute": 140,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "act_ab_cavalry_linkup",
+   "title": "绝壁攀爬铁骑接应",
+   "location_ids": [
+    "magma_drainage_channel"
+   ],
+   "duration_minutes": 50,
+   "beats": [
+    "众人顺着落水链在暴风雪中攀上断崖平台",
+    "女武神吹响纯银狮鹫哨，山谷密林里亮起八百柄马刀与火把",
+    "副官率轻骑踏雪而至，把战马缰绳与统帅大氅披到两人肩头"
+   ],
+   "hook_ids": [
+    "hk_lieutenant_whistle_approach",
+    "hk_inquisitor_blade_approach",
+    "hk_knight_chains_observe"
+   ],
+   "start_minute": 195,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "act_ab_dawn_banner",
+   "title": "破晓雪原重立战旗",
+   "location_ids": [
+    "apothecary_lab_nook"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "晨霞刺破风雪，黑曜石要塞火光冲天陷入内乱",
+    "女武神把折断的圣十字徽记踏碎在积雪里，与审判官在马上十指相扣",
+    "八百铁骑齐声怒吼，誓师南下"
+   ],
+   "hook_ids": [
+    "hk_knight_whisper_request",
+    "hk_inquisitor_protect_approach",
+    "hk_inquisitor_blade_observe"
+   ],
+   "start_minute": 250,
+   "tags": [
+    "intimate"
+   ]
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_crest_blood_moon_frenzy",
+   "title": "血月子夜魔纹焚心",
+   "source": "accident",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "inner_sanctum_vault"
+   ],
+   "trigger": "血月跃上穹顶裂隙，魔纹里的古神邪毒全面苏醒，化作烈火逆冲心脉，十二分钟内不压制，女武神将丧失神智、经脉尽碎。",
+   "objective": "十二分钟内完成刻刀刺穴放血，稳住骑士长的神圣心核。",
+   "choice": "用刻刀剜去魔纹核心皮肉，还是以审判官的心头血逆向换毒？",
+   "immediate": {
+    "text": "女武神双目充血、浑身滚烫，锁链被扯断数节。",
+    "minutes": 4
+   },
+   "near": {
+    "text": "魔纹蔓延到咽喉，声带将被灼坏永久失声。",
+    "deadline_minutes": 10
+   },
+   "far": {
+    "trigger": "魔纹吞噬全身心脉",
+    "consequence": "女武神沦为无意识的狂暴恶兽，审判官被迫亲手将其封印，抵抗大业崩塌。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "审判官划开自己胸膛，以心头血涂在魔纹上逆吸邪毒",
+     "cost": "邪毒反噬内腑咳血不止，三日内魔力归零"
+    },
+    {
+     "option": "药剂师把整瓶未稀释的雪莲晶露倒进切开的创口极寒冰封",
+     "cost": "冷热冲突引发休克，前胸大面积冻伤坏死"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "hk_knight_crest_approach",
+    "hk_inquisitor_blade_approach"
+   ],
+   "start_minute": 1395,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_garrison_ram_pyre_demand",
+   "title": "攻城巨槌破门火刑",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "inner_sanctum_vault"
+   ],
+   "trigger": "军团长假借火刑神谕，调来三台攻城巨槌与五十名重甲包围内殿，限十五分钟交人，否则屠尽室内所有人。",
+   "objective": "防爆门被砸碎前解除束缚并布下反杀陷阱。",
+   "choice": "斩断锁链武装女武神正面迎敌，还是引爆熔炉封死门廊？",
+   "immediate": {
+    "text": "每一次撞击都震落大片碎石，门铰链已凹进半尺。",
+    "minutes": 6
+   },
+   "near": {
+    "text": "门板崩塌，五十名重甲蜂拥而入。",
+    "deadline_minutes": 15
+   },
+   "far": {
+    "trigger": "巨槌破门屠杀",
+    "consequence": "所有人被乱剑斩杀于石台上，头颅悬挂城楼示众。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "审判官斩断全部锁链，双手奉上重剑任骑士长指挥反杀",
+     "cost": "彻底背弃司法宣誓沦为死囚，帝都家族资产全数充公"
+    },
+    {
+     "option": "看守长在外厅拉下机关倾倒十桶滚烫沥青逼退撞门队伍",
+     "cost": "被军团长察觉斩断左臂，重伤垂死"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "hk_garrison_axe_approach",
+    "hk_inquisitor_protect_approach"
+   ],
+   "start_minute": 0,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "p_frozen_drainage_flood",
+   "title": "融雪冰潮倒灌暗渠",
+   "source": "nature",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "magma_drainage_channel"
+   ],
+   "trigger": "暴风雪引发后山雪崩，融雪山洪冲垮排污阀倒灌暗渠，水位每分钟涨半尺，水温逼近零下三度。",
+   "objective": "暗渠灭顶前融断铁栅栏，游到悬崖出水口。",
+   "choice": "用酸液加速腐蚀铁栅栏，还是合力用战锤砸断铁柱？",
+   "immediate": {
+    "text": "冰水没过胸口，重伤者牙关打战四肢麻木。",
+    "minutes": 8
+   },
+   "near": {
+    "text": "空气缝隙缩到两寸以下，所有人呛水缺氧。",
+    "deadline_minutes": 18
+   },
+   "far": {
+    "trigger": "融水灌满暗渠",
+    "consequence": "所有人葬身地下排污道，被冲进冰裂缝尸骨无存。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "女武神单臂把伤员顶在头顶，双腿夹住石壁顶开逃生口",
+     "cost": "双腿严重冻伤，后背被浮木撞裂肋骨"
+    },
+    {
+     "option": "药剂师把剩余硝化粉包进油布，在水下定向引爆铁栅栏",
+     "cost": "冲击波震得所有人内脏移位，药剂师右耳失聪"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "hk_apothecary_panic_request",
+    "hk_jailer_key_approach"
+   ],
+   "start_minute": 70,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_holy_mirror_manhunt",
+   "title": "密探神判圣镜搜捕",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "outer_torture_antechamber"
+   ],
+   "trigger": "红衣大主教的特使带着照破伪装的神判圣镜与六头吸血猎犬直扑地牢，要所有审讯人员接受血脉核验。",
+   "objective": "特使踏进内殿前将其除掉，或制造假象引开猎犬。",
+   "choice": "在转角设伏割喉特使，还是用死囚尸体涂圣血李代桃僵？",
+   "immediate": {
+    "text": "猎犬的低吼与爪子抓挠声已逼近外殿十米。",
+    "minutes": 5
+   },
+   "near": {
+    "text": "圣镜照进内殿，藏匿处将无所遁形。",
+    "deadline_minutes": 12
+   },
+   "far": {
+    "trigger": "圣镜照破叛乱",
+    "consequence": "审判官被施以九级神罚，筋脉尽断钉上耻辱柱。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "审判官伏在石梯拐角，一剑自下而上贯穿特使咽喉",
+     "cost": "弑杀教皇特使，断绝回归体制的一切退路"
+    },
+    {
+     "option": "药剂师在走廊撒下腐骨毒粉诱猎犬吞食暴毙",
+     "cost": "毒气久久不散，所有人只能绕道攀爬高温盲井"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "hk_garrison_axe_approach",
+    "hk_apothecary_acid_approach"
+   ],
+   "start_minute": 120,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_portcullis_cable_severed",
+   "title": "千斤闸断索腰斩生路",
+   "source": "accident",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "outer_torture_antechamber"
+   ],
+   "trigger": "守军向绞盘轮轴投掷重标枪，绞盘崩裂，带刺的生铁闸门断索砸落，留给最后一人的缝隙不到一尺。",
+   "objective": "闸板落地前用兵刃卡死齿轮或撑起闸板。",
+   "choice": "用战锤硬顶，还是用佩剑卡死导轨？",
+   "immediate": {
+    "text": "生铁撞地惊天动地，火星四溅碎石崩飞。",
+    "minutes": 1
+   },
+   "near": {
+    "text": "隔在内侧的同伴将被守军乱刀剁死。",
+    "deadline_minutes": 3
+   },
+   "far": {
+    "trigger": "千斤闸彻底落锁",
+    "consequence": "突围力量被割裂，留下的伤员被虐杀，逃出者也遭擒杀。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "看守长用魁梧的身躯与双手重锤撑在闸下硬抗",
+     "cost": "双肩粉碎骨折五脏出血，护住全员自己却奄奄一息"
+    },
+    {
+     "option": "审判官把先帝御赐的秘银短杖横卡进滑槽齿轮",
+     "cost": "御赐免死信物被绞成铁屑，失去最后的政治筹码"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "hk_jailer_key_approach",
+    "hk_inquisitor_protect_approach"
+   ],
+   "start_minute": 160,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_continental_purge_bull",
+   "title": "教皇国全境绝罚通缉",
+   "source": "rumor",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "inner_sanctum_vault"
+   ],
+   "trigger": "大圣堂通过传音光阵向全大陆宣读绝罚血敕令，把女骑士长与审判官定为弑神叛徒，悬赏千万金币与世袭爵位。",
+   "objective": "用斥候信鸽向北境旧部发出反击令，改道圣剑之冢。",
+   "choice": "公开起兵向教皇国宣战，还是潜入深山打游击？",
+   "immediate": {
+    "text": "要塞内信徒狂呼圣战，整座要塞化作绞肉场。",
+    "minutes": 8
+   },
+   "near": {
+    "text": "四面边防军将形成十里合围。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "诛杀令全面收紧",
+    "consequence": "两人在无穷无尽的赏金猎人追杀下力竭横尸荒野。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "女武神以精血涂抹狮鹫战旗，放出八百只血羽信鸽宣布起义",
+     "cost": "公开叛乱坐实，再无法回归任何贵族领地"
+    },
+    {
+     "option": "审判官引爆教廷暗桩的暗杀名册，让各军团长人人自危互疑内耗",
+     "cost": "北方防线陷入军阀混战，边境平民流离失所"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "hk_knight_whisper_request",
+    "hk_garrison_axe_approach"
+   ],
+   "start_minute": 1425,
+   "tags": [
+    "workplace_power",
+    "violence"
+   ]
+  }
+ ],
+ "hooks": [
+  {
+   "id": "hk_knight_crest_approach",
+   "kind": "approach",
+   "slot": "templar_knight_commander",
+   "location_ids": [
+    "inner_sanctum_vault",
+    "outer_torture_antechamber"
+   ],
+   "text": "{templar_knight_commander.name}被吊在石柱上，锁骨间魔纹如熔岩搏动，咬破的唇沁着血，仰头逼视你：“钟响了。拿起刻刀刺进来——看是这恶咒先烧干我，还是你的神权先成灰。”"
+  },
+  {
+   "id": "hk_inquisitor_blade_approach",
+   "kind": "approach",
+   "slot": "renegade_grand_inquisitor",
+   "location_ids": [
+    "inner_sanctum_vault",
+    "outer_torture_antechamber",
+    "magma_drainage_channel"
+   ],
+   "text": "{renegade_grand_inquisitor.name}按住你滚烫的锁骨边缘，刀尖停在魔纹上方：“魔纹快烧到心口了，别用求死的眼神看我。忍着——今晚走出这扇门的，不会是教廷那帮杂碎。”"
+  },
+  {
+   "id": "hk_garrison_axe_approach",
+   "kind": "approach",
+   "slot": "zealot_garrison_commander",
+   "location_ids": [
+    "outer_torture_antechamber",
+    "inner_sanctum_vault"
+   ],
+   "text": "{zealot_garrison_commander.name}一脚踹在石门窥孔上，黄褐眼珠透过铁栏死盯着你们：“交出女武神！三千斤火油已经浇透了柴堆！再不开门，连你一起扔进焚尸炉！”"
+  },
+  {
+   "id": "hk_apothecary_acid_approach",
+   "kind": "approach",
+   "slot": "heretic_apothecary",
+   "location_ids": [
+    "apothecary_lab_nook",
+    "inner_sanctum_vault",
+    "magma_drainage_channel",
+    "outer_torture_antechamber"
+   ],
+   "text": "{heretic_apothecary.name}从通风暗门翻身跃入，一手雪莲晶露一手冒泡的酸瓶：“骑士长的魔纹要我的药，你们的锁链要我的酸——带我出去，三滴圣血做报酬，干不干？”"
+  },
+  {
+   "id": "hk_jailer_key_approach",
+   "kind": "approach",
+   "slot": "disgraced_squire_jailer",
+   "location_ids": [
+    "outer_torture_antechamber",
+    "inner_sanctum_vault",
+    "magma_drainage_channel"
+   ],
+   "text": "{disgraced_squire_jailer.name}从外面锁死暗栓，单膝跪在你面前，双手托起一把白银断剑：“侍从向您死罪归队！这是暗渠耳门的钥匙，请握剑下令！”"
+  },
+  {
+   "id": "hk_knight_whisper_request",
+   "kind": "request",
+   "slot": "templar_knight_commander",
+   "location_ids": [
+    "inner_sanctum_vault",
+    "outer_torture_antechamber",
+    "apothecary_lab_nook"
+   ],
+   "text": "魔纹褪去、锁链落地，{templar_knight_commander.name}搂住你的后颈，额头抵着你，声音清醒而灼热：“剑递给我。走出这间石室，无论冲向哪里，我陪你弑神到底。”"
+  },
+  {
+   "id": "hk_inquisitor_protect_approach",
+   "kind": "approach",
+   "slot": "renegade_grand_inquisitor",
+   "location_ids": [
+    "inner_sanctum_vault",
+    "outer_torture_antechamber",
+    "apothecary_lab_nook"
+   ],
+   "text": "巨槌砸裂石门的瞬间，{renegade_grand_inquisitor.name}把你护进石台死角，碎石砸在背上也纹丝不动，反手一剑划出银网：“闭眼，抱紧！只要我没咽气，没人能伤你。”"
+  },
+  {
+   "id": "hk_apothecary_panic_request",
+   "kind": "request",
+   "slot": "heretic_apothecary",
+   "location_ids": [
+    "magma_drainage_channel",
+    "apothecary_lab_nook"
+   ],
+   "text": "{heretic_apothecary.name}泡在刺骨的暗河里，把药箱死死抱在胸口：“铁栅栏太厚，酸液至少要腐蚀两分钟！替我守住水闸，别让火把照过来！”"
+  },
+  {
+   "id": "hk_jailer_hold_gate_request",
+   "kind": "request",
+   "slot": "disgraced_squire_jailer",
+   "location_ids": [
+    "outer_torture_antechamber",
+    "magma_drainage_channel"
+   ],
+   "text": "{disgraced_squire_jailer.name}用背顶住下坠的千斤闸，战锤被压得咯咯弯曲，满口鲜血：“别管我！快钻过暗渠！这条命今天终于还清了——走啊！”"
+  },
+  {
+   "id": "hk_garrison_cleave_approach",
+   "kind": "approach",
+   "slot": "zealot_garrison_commander",
+   "location_ids": [
+    "outer_torture_antechamber",
+    "inner_sanctum_vault"
+   ],
+   "text": "{zealot_garrison_commander.name}一斧劈断石门门轴，浑身浴血跨进门槛，巨剑直指你们：“抓到你们了！叛徒审判官，还有高贵的女武神——今晚全要塞都要看着你们烧成黑炭！”"
+  },
+  {
+   "id": "hk_lieutenant_whistle_approach",
+   "kind": "approach",
+   "slot": "templar_lieutenant_outrider",
+   "location_ids": [
+    "magma_drainage_channel",
+    "apothecary_lab_nook"
+   ],
+   "text": "{templar_lieutenant_outrider.name}甩掉守军头盔，满头冰碴冲到你面前，把纯银狮鹫哨塞进你手里：“八百骑都在西山谷！您吹，他们就来！”"
+  },
+  {
+   "id": "hk_lieutenant_disguise_approach",
+   "kind": "approach",
+   "slot": "templar_lieutenant_outrider",
+   "location_ids": [
+    "outer_torture_antechamber",
+    "magma_drainage_channel"
+   ],
+   "text": "守军队列里，{templar_lieutenant_outrider.name}擦肩而过时压低声音：“别回头。西侧绝壁的落水链还能用，我替您把东边那队调走了。”"
+  },
+  {
+   "id": "hk_knight_chains_observe",
+   "kind": "observe",
+   "slot": "templar_knight_commander",
+   "location_ids": [
+    "inner_sanctum_vault",
+    "outer_torture_antechamber",
+    "magma_drainage_channel"
+   ],
+   "text": "石柱阴影里，{templar_knight_commander.name}双腕被符文锁链高吊，汗水顺锁骨滑落，赤红魔纹明灭如熔岩，唇角挂着至死不降的冷笑。"
+  },
+  {
+   "id": "hk_inquisitor_blade_observe",
+   "kind": "observe",
+   "slot": "renegade_grand_inquisitor",
+   "location_ids": [
+    "inner_sanctum_vault",
+    "outer_torture_antechamber",
+    "apothecary_lab_nook"
+   ],
+   "text": "鲸油灯昏黄的光下，{renegade_grand_inquisitor.name}一袭黑绒金纹大氅挺拔伫立，黑手套扣着秘银短刃，灰眸冷如霜雪。"
+  },
+  {
+   "id": "hk_garrison_armor_observe",
+   "kind": "observe",
+   "slot": "zealot_garrison_commander",
+   "location_ids": [
+    "outer_torture_antechamber",
+    "inner_sanctum_vault"
+   ],
+   "text": "熔炉赤光里，{zealot_garrison_commander.name}像一尊黑钢巨兽，重甲滴着血水，巨剑拖地刮出火星，每一步都震得石板闷响。"
+  },
+  {
+   "id": "hk_apothecary_lab_observe",
+   "kind": "observe",
+   "slot": "heretic_apothecary",
+   "location_ids": [
+    "apothecary_lab_nook",
+    "magma_drainage_channel"
+   ],
+   "text": "蒸馏器的微光下，{heretic_apothecary.name}举着试管调配冒寒雾的雪莲晶露，琥珀色的眼里是对未知近乎偏执的狂热。"
+  },
+  {
+   "id": "hk_jailer_hammer_observe",
+   "kind": "observe",
+   "slot": "disgraced_squire_jailer",
+   "location_ids": [
+    "outer_torture_antechamber",
+    "magma_drainage_channel"
+   ],
+   "text": "千斤闸崩落的烟尘里，{disgraced_squire_jailer.name}单膝跪撑在石面上，骨骼在万斤重压下悲鸣，双手仍死扣战锤，含泪带笑。"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_abyssal_1",
+   "category": "信息",
+   "requires": [],
+   "text": "药剂师用秘银显影揭晓：魔纹并非深渊恶魔所烙，而是枢机主教团用先帝遗骨改造的“圣裁心智烙印”，专为把功勋军团长改造成无自我的神圣兵器。"
+  },
+  {
+   "id": "t_abyssal_2",
+   "category": "人事",
+   "requires": [],
+   "text": "军团长撕开衣甲，锁骨下露出同样的暗记：此人早被北方蛮族重金收买，奉命里应外合屠灭帝国主力。"
+  },
+  {
+   "id": "t_abyssal_3",
+   "category": "资源",
+   "requires": [],
+   "text": "审判官佩剑剑柄暗格弹开，里面不是免死金牌，而是一枚能激活要塞地下万吨禁魔自毁炸药库的纯金主控符石。"
+  },
+  {
+   "id": "t_abyssal_4",
+   "category": "制度",
+   "requires": [],
+   "text": "白银信鸽带来帝都羽书：老教皇昨夜暴毙，元老院与抵抗军联手接管帝都，宣布废除宗教裁判所并赦免女骑士长全部罪名。"
+  },
+  {
+   "id": "t_abyssal_5",
+   "category": "时限",
+   "requires": [
+    "pressure"
+   ],
+   "text": "冰川崩塌砸断了地牢通风竖井，室内氧气骤降，压制魔纹的时间被压缩到不足三分钟。"
+  },
+  {
+   "id": "t_abyssal_6",
+   "category": "关系",
+   "requires": [],
+   "text": "看守长顶门呕血时扯出暗袋，露出与审判官一模一样的家族狮头纹章：看守长是审判官早年因家族涉嫌异端被流放北疆的亲兄长。"
+  },
+  {
+   "id": "t_abyssal_7",
+   "category": "意外",
+   "requires": [],
+   "text": "倒灌的融水浇熄了要塞底层数百年不灭的地火，气压差引发蒸汽地脉喷发，冲塌守军主力所在的回廊，冲开一条直通绝壁的生路。"
+  }
+ ],
+ "forbidden_terms": [
+  "现代",
+  "手枪",
+  "手机",
+  "西装",
+  "高跟鞋",
+  "电极",
+  "汽车",
+  "网吧",
+  "监控",
+  "卫星"
+ ],
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster",
+  "explicit",
+  "death"
+ ],
+ "status": "released",
+ "notes": "保留血月子夜魔纹发作、秘银刻刀刺穴放血、斩断铁索石台定誓、熔炉火海白刃突围、暗渠酸融栅栏与八百铁骑接应的主线。改动：六个角色固定性别；魔纹原写“身心躁动”“春意”，改为只有灼痛高热与神智昏沉；骑士长受缚、魔纹发作时都不写亲密，亲密前提改为“锁链已解、魔纹已压制、神智清醒”，石台定誓的吻写在魔纹平息之后；审判官“在这副锁链下把你的骄傲剥开”改为疗伤与庇护；军团长“扒光绑上火刑柱”“赏给亲卫当战利品”等性羞辱与亲密倾向全部删去，只保留火刑与夺权；外貌里“被凌虐玷污”删去；去掉写死的人名克洛伊、雷恩、阿登；内容标签去掉 coercion_theme；补一名混入守军的骑士团副官凑足六个人物；转换为项目格式。"
+}

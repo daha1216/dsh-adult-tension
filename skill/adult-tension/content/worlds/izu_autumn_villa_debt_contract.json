@@ -1,0 +1,2462 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "大日本帝国陆军宪兵队现役成年下士官。",
+   "age_range": [
+    27,
+    35
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_patrolling_military_gendarme",
+   "line": "{npc.name}：“少佐阁下有令，暴雨期间二楼全线戒严！谁敢在走廊私自串门递送账册，以妨碍军务就地扣押！”",
+   "location_ids": [
+    "villa_second_floor_long_corridor"
+   ],
+   "name": null,
+   "role": "随少佐进驻别庄之执勤陆军宪兵伍长"
+  },
+  {
+   "adult_context": "别庄长期雇佣之成年忠诚老仆役。",
+   "age_range": [
+    50,
+    62
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_elderly_boiler_room_attendant",
+   "line": "{npc.name}：“执事老爷，地窖暗门还能通往后山马厩，若是那帮当兵的动粗，老奴就是拼了老骨头也替您护着大门！”",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "name": null,
+   "role": "在别庄执役三十载之看门烧炭老杂役"
+  },
+  {
+   "adult_context": "已满二十五周岁之成年配餐女役。",
+   "age_range": [
+    25,
+    30
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_frightened_parlor_scullery_maid",
+   "line": "{npc.name}：“方才奴婢在水屋亲眼瞧见，少佐往枪膛里压满了子弹，还跟律师先生在书架后头吵得凶呢……”",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "name": null,
+   "role": "在大厅奉茶战战兢兢之年轻成年杂役女仆"
+  },
+  {
+   "adult_context": "地方邮政省在编成年信使。",
+   "age_range": [
+    28,
+    36
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_whispering_telephone_messenger",
+   "line": "{npc.name}：“山脚下的桥全塌啦！东京刚才发来加急电报，说正金银行的警车天一亮就跟着推土机开上山！”",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "name": null,
+   "role": "冒雨徒步上山报信之伊豆邮政局成年递送员"
+  },
+  {
+   "adult_context": "长期雇佣之成年人力车夫。",
+   "age_range": [
+    32,
+    42
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_suspicious_rickshaw_driver",
+   "line": "{npc.name}：“听说少爷当年被赶走是替人背了黑锅，今晚这宅子里怕是要见血，咱老百姓躲得越远越好……”",
+   "location_ids": [
+    "villa_second_floor_long_corridor"
+   ],
+   "name": null,
+   "role": "滞留洋馆马厩之特使随行车夫"
+  },
+  {
+   "adult_context": "别庄成年花木园工。",
+   "age_range": [
+    52,
+    60
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_bamboo_grove_groundskeeper",
+   "line": "{npc.name}：“茶室悬崖底下的老藤绳结实得很，老汉守在这儿，谁要想从悬崖硬闯，老汉一柴刀砍了那绳子！”",
+   "location_ids": [
+    "villa_detached_bamboo_tea_pavilion"
+   ],
+   "name": null,
+   "role": "悬崖茶室外值守清扫落叶之老花匠"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "高傲的女家督端坐主位，手握公爵家督印信号令别庄。特使债权人{expelled_chief_steward_creditor.name}携巨额欠条登门清算，律师{destitute_family_notary_solicitor.name}战战兢兢从旁见证。当主凭华族威仪与辩才逼退特使步步紧逼的苛刻条款，但随着特使出示银行封门文书，高位权威在法理契约前寸寸受挫，双方在书桌两端展开尊严与生计的拉扯。",
+   "id": "combo_1_player_high",
+   "identity_ids": [
+    "pc_patrician_arrogant_female_head"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 3
+     },
+     "b": "expelled_chief_steward_creditor",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 4
+     },
+     "reason": "虽有三年前驱逐之宿怨，但当主深知特使才干卓越，彼此在防备深处暗藏不可言说之强烈情感共鸣。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 2
+     },
+     "b": "destitute_family_notary_solicitor",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "当主以宗家东家之势严令律师严守法纪，律师在当主威严面前垂首诺诺不敢造次。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "expelled_chief_steward_creditor",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 2
+     },
+     "b": "destitute_family_notary_solicitor",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "特使握有律师私收分家贿赂之存根，在法理细节上对其形成降维压制与警告。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "expelled_chief_steward_creditor",
+    "destitute_family_notary_solicitor"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在午夜钟声前迫使特使签署债务延期补充协议，阻止别庄被司法查封。",
+    "limit_gap": "当主誓守家名不容破产羞辱，特使誓求清偿重组雪耻，律师谋求在合法合规下全身而退。",
+    "meeting_reason": "当主在二楼西洋主卧正式接见特使与律师，开启首轮债务公证审查闭门会议。",
+    "resource_gap": "当主掌管家督最高印信与别庄控制权，特使掌握千万债权原件，律师掌握公证钢印程序裁决。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_patrician_pride_vs_financial_ruin",
+    "te_master_servant_reversal_retribution"
+   ]
+  },
+  {
+   "chemistry": "掌控全盘债权的特使在女家督{patrician_arrogant_female_head.name}与女仆长{silent_tea_master_maid_confidante.name}面前，既是握着破产大权的冷酷清算官，又是曾在这座宅子里低头侍奉的前任执事。特使借清点动产之机步步紧逼女当主，女仆长在旁添茶默察，三人置身充满旧日回忆的幽竹茶室，尊卑倒错在每一句敬语与冷笑中燃烧发酵。",
+   "id": "combo_2_switchable_high_equal",
+   "identity_ids": [
+    "pc_expelled_chief_steward_creditor"
+   ],
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 3
+     },
+     "b": "patrician_arrogant_female_head",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 4
+     },
+     "reason": "特使以债主之姿强势要求当主放下傲慢，当主在强烈羞耻与现实绝境中目光寸步不让。",
+     "stage": "testing"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "silent_tea_master_maid_confidante",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "特使深知女仆长为人正直当年亦身不由己，女仆长则对特使如今之才干与归来暗怀欣慰愧疚。",
+     "stage": "familiar"
+    },
+    {
+     "a": "patrician_arrogant_female_head",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "silent_tea_master_maid_confidante",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "两代侍奉之至亲心腹，当主在女仆长面前无需保留任何脆弱防备。",
+     "stage": "committed"
+    }
+   ],
+   "slots": [
+    "patrician_arrogant_female_head",
+    "silent_tea_master_maid_confidante"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "解开当年被逐伪证冤案真相，重构平等自愿之主从情感纽带。",
+    "limit_gap": "特使誓要当主正视自身力量结成平权同盟，当主誓不屈服于家奴之威，女仆长誓保当主平安与先祖遗训。",
+    "meeting_reason": "特使要求单独核查茶室悬崖金库暗格，女仆长奉命引路，当主亲自下场监临对质。",
+    "resource_gap": "特使拥有银行查封全权授权，当主掌握家族核心抵押凭证，女仆长掌管内宅密室钥匙与真遗嘱。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_master_servant_reversal_retribution",
+    "te_patrician_pride_vs_financial_ruin"
+   ]
+  },
+  {
+   "chemistry": "身为女仆长的玩家处于绝对低位，夹在冷艳当主{patrician_arrogant_female_head.name}的高门戒律与持枪分家少佐{renegade_collateral_heir_cousin.name}的武装威胁之间。少佐逼女仆长交出主卧钥匙与金印，当主严令死守门禁。女仆长凭对别庄机关典章的熟稔，在暴雨长廊以柔克刚，在枪口与耳光威胁下冒死守护当主周全，实现底层忠仆对暴徒的反杀牵制。",
+   "id": "combo_3_npc_high",
+   "identity_ids": [
+    "pc_silent_tea_master_maid_confidante"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "patrician_arrogant_female_head",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "视当主如亲生骨肉，愿为维护当主尊严与性命粉身碎骨。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "renegade_collateral_heir_cousin",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "鄙夷少佐忤逆犯上之暴戾行径，视其为祸乱门楣之宗族豺狼。",
+     "stage": "stranger"
+    },
+    {
+     "a": "patrician_arrogant_female_head",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "renegade_collateral_heir_cousin",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 1
+     },
+     "reason": "当主对分家少佐趁火打劫深恶痛绝，当众怒斥其军人败类有辱门风。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "patrician_arrogant_female_head",
+    "renegade_collateral_heir_cousin"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "阻止少佐持枪闯入主卧，保全家督金印不被暴力抢夺。",
+    "limit_gap": "少佐誓要破门夺印霸占家产，当主宁死不从，女仆长誓以性命护主守正。",
+    "meeting_reason": "少佐带兵在二楼走廊拦截企图向主卧送药的女仆长，当主闻声推开房门当面对峙。",
+    "resource_gap": "少佐掌握宪兵枪械与暴力威慑，当主拥有名门大义与法理家督地位，女仆长仅有钥匙串与暗道机关。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_military_coercion_vs_legal_remedy",
+    "te_patrician_pride_vs_financial_ruin"
+   ]
+  },
+  {
+   "chemistry": "公证律师夹在两股强权之间：一边是动辄拔枪的现役少佐{renegade_collateral_heir_cousin.name}，一边是手握千万执行令、手段精密的资本清算官{expelled_chief_steward_creditor.name}。律师在暴力与资本的绞杀中瑟瑟发抖，既想保命退财，又想保住执业资格，地位在拉拢与威逼间摇摆，最终必须在良知与伪证间做出决死抉择。",
+   "id": "combo_4_switchable_any",
+   "identity_ids": [
+    "pc_destitute_family_notary_solicitor"
+   ],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 1
+     },
+     "b": "renegade_collateral_heir_cousin",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "律师极度恐惧少佐走火开枪，对其专横跋扈敢怒不敢言。",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 3
+     },
+     "b": "expelled_chief_steward_creditor",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 4
+     },
+     "reason": "律师寄希望于特使的沉稳魄力能够压制少佐，视特使为唯一能保住自己性命之法理靠山。",
+     "stage": "testing"
+    },
+    {
+     "a": "renegade_collateral_heir_cousin",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "expelled_chief_steward_creditor",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "军阀与资本的绝对死敌，少佐视特使为可随时枪毙之商贾贱民，特使视少佐为法盲败类。",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "renegade_collateral_heir_cousin",
+    "expelled_chief_steward_creditor"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在枪口威胁下保全真正公证书草案，协助特使实施反制。",
+    "limit_gap": "少佐谋求非法暴力接盘，特使谋求合法金融托管，律师谋求免于刑事追责与肉体消灭。",
+    "meeting_reason": "少佐将特使与律师堵在一楼大壁炉会客正厅，持枪勒令就地修改签约抬头。",
+    "resource_gap": "少佐手握枪杆子与暴力，特使手握钱袋子与法理原件，律师手握唯一的公证生效钢印。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_military_coercion_vs_legal_remedy",
+    "te_ancestral_heirloom_vs_survival_pawn"
+   ]
+  },
+  {
+   "chemistry": "特使与女家督{patrician_arrogant_female_head.name}及分家遗孀叔母{patrician_widow_dowager_aunt.name}在正厅长桌相对而立。三位深谙九条家内幕的掌权者，在洋馆壁炉火光前展开三方利害死斗。叔母挑拨当主与特使的仇恨以从中渔利，当主与特使在刀光剑影的交锋中逐渐看穿当年的诬陷实为叔母一手策划，宿敌在真相面前反转结盟。",
+   "id": "combo_5_equal",
+   "identity_ids": [
+    "pc_expelled_chief_steward_creditor"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 3
+     },
+     "b": "patrician_arrogant_female_head",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 4
+     },
+     "reason": "双方在交锋中逐渐察觉当年的许多误会皆来自第三者从中作梗，敌意转化为深层默契。",
+     "stage": "testing"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "patrician_widow_dowager_aunt",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "特使手握叔母亡夫借款确凿铁证，当面撕碎其慈眉善目长辈假面。",
+     "stage": "stranger"
+    },
+    {
+     "a": "patrician_arrogant_female_head",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 1
+     },
+     "b": "patrician_widow_dowager_aunt",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 1
+     },
+     "reason": "当主早已厌弃叔母倚老卖老干预政务，对其暗中引狼入室之举怒不可遏。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "patrician_arrogant_female_head",
+    "patrician_widow_dowager_aunt"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "揭露当年冤案挑拨真相，孤立叔母并收编分家评议会否决权。",
+    "limit_gap": "特使与当主皆求家族实业绝地求生，叔母谋求挑拨离间自保私利与分家瓜分。",
+    "meeting_reason": "叔母以长辈身份降临大厅，要求审查抵押清册并提议将别庄折价卖与分家。",
+    "resource_gap": "特使掌握全盘债务，当主掌握正统大印，叔母掌握宫内省人脉与分家评议会否决权。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_patrician_pride_vs_financial_ruin",
+    "te_ancestral_heirloom_vs_survival_pawn"
+   ]
+  },
+  {
+   "chemistry": "忠诚的女仆长处于从属低位，面对气场强大的女当主{patrician_arrogant_female_head.name}与霸气归来的债权特使{expelled_chief_steward_creditor.name}。两位主人在主卧内因债务协议陷入尊严与心意的激烈拉扯，女仆长既要在门外防范窥探，又要在关键时刻推门奉上老家督的临终真遗嘱，以二十年的人格威信打破死局，成为两人真正自愿定盟的推手。",
+   "id": "combo_6_npc_high",
+   "identity_ids": [
+    "pc_silent_tea_master_maid_confidante"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "patrician_arrogant_female_head",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "当主在女仆长面前终于卸下全部伪装，展露绝境下的无助泪水。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "expelled_chief_steward_creditor",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "特使敬重女仆长之高尚操守，在女仆长真诚劝导下收敛凌厉攻势。",
+     "stage": "familiar"
+    },
+    {
+     "a": "patrician_arrogant_female_head",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 3
+     },
+     "b": "expelled_chief_steward_creditor",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 4
+     },
+     "reason": "两人在女仆长面前互诉三年衷肠，主从名分彻底消融为势均力敌之爱恨拉扯。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "patrician_arrogant_female_head",
+    "expelled_chief_steward_creditor"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "当堂宣读老家督真正临终密牒，彻底瓦解两人心防仇恨壁垒。",
+    "limit_gap": "当主誓守傲骨，特使誓求认同，女仆长誓愿两位昔日青梅竹马之苦命人不再互相折磨。",
+    "meeting_reason": "主卧内传来撕碎纸张与激烈争执声，女仆长双手托茶盘叩门而入调停对峙。",
+    "resource_gap": "当主掌管家名，特使掌管资本，女仆长掌管承载老家督托孤遗愿的绝密血书信物。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_master_servant_reversal_retribution",
+    "te_patrician_pride_vs_financial_ruin"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_dumbwaiter_speaking_tube",
+   "reach": "贯穿一楼配餐室至二楼西洋主卧的黄铜传音管道，拔开软木塞即可精准听到底层密谋，音质清晰。",
+   "text": "洋馆配餐传菜井黄铜传声铜管"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_tea_pavilion_bamboo_chime_rope",
+   "reach": "连接幽竹茶室与二楼走廊的隐秘竹绳，通过拉扯次数精准传递门禁戒备与客情暗号。",
+   "text": "悬崖茶室通往主洋馆风雨廊竹铃引绳"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_creaking_floorboards_wind_echo",
+   "reach": "暴风雨夜穿堂强风引发走廊老旧红木地板共振空响，极易将远处军靴踱步声误判为破门逼近之急促脚步。",
+   "text": "二楼拼花走廊回风木板震颤回声"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "华族名门九条公爵家嫡系新任女家督，拥有东京女子师范实业经济修了资格与家族继承权，具备独立商事缔约与民事责任能力之成年当主。",
+   "age_range": [
+    26,
+    33
+   ],
+   "appearance_options": [
+    "身穿一袭深藏青色御召丝绢重绢和服，腰系纯金织锦丸带，外披黑色双宫绸羽织，青丝挽成一丝不苟的传统夜会卷，容貌清丽冷艳，眼神透着名门贵胄高不可攀之傲然霜雪",
+    "内穿深紫暗花纹素纺丝绸衬衣，外罩一件被雨水濡湿下摆的羊毛斗篷，手握一柄未出鞘的精美象牙折扇，下颌微微扬起，虽身陷绝境但背脊挺拔如雪中寒竹"
+   ],
+   "decision": {
+    "avoids": [
+     "趋炎附势、借势压人妄图以武力霸凌逼迫屈服之粗鄙狂徒",
+     "两面三刀在长辈面前阳奉阴违之伪君子"
+    ],
+    "contrast": "外表傲慢专横冷若冰霜，私下在为患病老仆煎药时指尖动作却极尽温存细腻。",
+    "core_value": "名门的骨气重于生命，宁可亲手焚毁别庄万千典藏，也绝不向趁火打劫的小人摇尾乞怜。尊严不可让渡半分。",
+    "goal_options": [
+     "在午夜钟声敲响前迫使债权特使达成延期重组清偿协议，保住别庄产权",
+     "粉碎分家堂兄动用军队宪兵武力夺取家督大权的阴谋",
+     "查清三年前执事被冤逐之案与父亲暴毙之真实联系"
+    ],
+    "never": [
+     "以出卖肉体或乞怜姿态向逼迫者换取免除债务的施舍"
+    ],
+    "prefers": [
+     "才智过人、言出如铁、即便身处下位亦不卑不亢拥有傲然骨气之卓绝豪杰"
+    ],
+    "pressure_responses": {
+     "breaking": "独自跪坐在幽竹茶室榻榻米上，双手死死掩住苍白面颊无声哽咽，双肩剧烈战栗。",
+     "high": "双手颤抖却紧咬下唇，亲手撕下契约附页掷进壁炉，以决绝姿态逐条驳回致命条款。",
+     "low": "端坐主位冷冷以折扇掩唇，用优雅繁复之名门宫廷用语从容回绝一切无理逼迫。",
+     "mid": "长身而起素手按在冰冷账册之上，目光如利刃直刺对方眼底，寸步不退厉声宣示家督威严。"
+    },
+    "relationship_stance": "对世俗阿谀奉承与趁火打劫之徒刻骨鄙夷，唯独对真正看穿其脆弱假面、敢于平视且有胆魄与其角力的坚毅灵魂暗生复杂依恋。",
+    "withdrawal": "退入二楼西洋主寝室反锁房门，静静凝视镜中憔悴倒影整饬仪容拒见任何人。"
+   },
+   "gender": "female",
+   "gender_reason": "女家督被宗族以“女子当家”为由逼宫是这个世界的核心冲突，因此固定为女性。",
+   "id": "patrician_arrogant_female_head",
+   "identity": {
+    "authority": "行使九条公爵家族全部祖产处置、封存、继承及抵押决断之合法家督最高职权",
+    "exposure": "上代家督生前为弥补亏空，曾私自将宫内省赏赐之御宝在黑市私自转让质押。",
+    "hidden": "袖中暗藏一份已签署完毕之《引咎辞去家督并让渡全盘家业保全书》，只待最绝望关头玉石俱焚。",
+    "limits": [
+     "家族丝绢实业资金链彻底断裂，背负正金银行逾期未还之巨额连带债务",
+     "身为年轻女子执掌门户，饱受宗族分家叔伯兄弟之轻视、排挤与弹劾夺权压力"
+    ],
+    "obligations": [
+     "无论付出何等代价，誓死保全九条家百年家名与家督正统血脉不遭除名瓦解。"
+    ],
+    "resources": [
+     "持有上代家督遗留的正金银行私人保险柜纯银密匙与家族世代祖产清册",
+     "熟知关东华族各大门阀彼此利益联姻之私密软肋与政界暗桩"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在自己滔天名门威权面前毫不退缩、能以纯粹理智与狠辣手腕彻底瓦解自己心理防线的绝对实力",
+     "在自己剥落坚硬外壳后流露出的无声珍视与滚烫深情"
+    ],
+    "boundaries": [
+     "不拿九条家祖传血脉家名作为儿女私情的赌注代价",
+     "恪守名门家督的人格独立尊严"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "褪去华族名门假面后与势均力敌之爱侣在人间并肩立足的平等人格",
+    "dislikes": [
+     "将自己当成战利品或玩物打量之轻浮下流目光",
+     "违背对等自愿原则之野蛮强制占有"
+    ],
+    "expression": "等债务条款签定、笔帽合上之后，才用冰凉细润的素手主动握住对方温热的指节，直视对方双眸轻声说‘账算清了，现在只剩你我’。",
+    "likes": [
+     "在暴雨狂风拍打障子门的逼仄暗室内彼此气息相闻、眼神如火线交织的窒息拉扯",
+     "对方用沉稳有力的指掌抚平自己紧蹙双眉时那一瞬卸下千斤重担的心灵战栗"
+    ],
+    "preconditions": [
+     "双方皆处于彻底清醒、债务利害完全摊牌剖明的自愿对等状态",
+     "绝无主子对奴仆或债主对债务人之强权霸凌"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "九条家现任继承当主",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 90
+    },
+    {
+     "from": 91,
+     "location_id": "villa_detached_bamboo_tea_pavilion",
+     "to": 210
+    },
+    {
+     "from": 211,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 1289
+    },
+    {
+     "from": 1290,
+     "location_id": "villa_master_bedroom_western_suite",
+     "to": 1410
+    },
+    {
+     "from": 1411,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "正式沦为特使名下实业附庸，且面临分家宗族以出卖祖产为由全面发起族内弹劾",
+      "option": "当堂在债权重组契约上签署家督印鉴，将别庄全盘经营权独家移交予特使"
+     },
+     {
+      "cost": "特使将即刻启动破产封门程序，且分家宪兵将获得公然破门夺取印鉴之借口",
+      "option": "拒绝签字并将清册投入地炉，宣布以个人名下全部私产作为抵押即刻开启复核"
+     }
+    ],
+    "pressure": "外围泥石流已封死道路，分家少佐正带宪兵在楼下砸门逼其交出家督印鉴。",
+    "trigger": "债权特使在茶室当面摊开全部违约清册，出示法院生效扣押令，勒令当主在午夜前签署全盘资产托管书。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "三年前是我无能保不住你……如今你回来了，哪怕要把这座洋馆烧成灰烬，我也绝不容许别人再次毁了我们。",
+    "surface": "“九条家的门第是朝廷亲赐的，别以为拿着几张见不得光的废纸，就能让本当主在这红叶山庄里低下高贵的头颅！”"
+   }
+  },
+  {
+   "adult_context": "大正末年九条家年轻总管执事，遭冤逐后入职东京正金银行特别资产管理部任高级清算专员，通晓近代商法与金融票据规则，为完全法人代表权限之成年债权清算官。",
+   "age_range": [
+    28,
+    36
+   ],
+   "appearance_options": [
+    "身穿剪裁考究的三件套深灰色英式纯羊毛西装，内着雪白挺括硬领衬衫与暗红真丝领带，鼻梁上架着一副无框金丝眼镜，神情冷峻深沉，金怀表链在马甲口袋上泛着清冷光泽",
+    "外罩一件沾着泥沙湿痕的黑色双排扣防风大衣，双手戴着擦拭得一尘不染的鹿皮手套，右手紧提沉重牛皮公文包，步履沉稳如岩石，眼神锐利洞若观火"
+   ],
+   "decision": {
+    "avoids": [
+     "仗势欺人狐假虎威、企图动用暴力抢夺财物之无能宵小",
+     "软弱无能只知哭泣求饶之庸俗之辈"
+    ],
+    "contrast": "言辞刻薄如刀锋寸步不让，但递给当主热茶时却下意识用手心试探茶杯温度以防烫手。",
+    "core_value": "契约是世间唯一的公正，曾经的屈辱必须以百倍的实力取回。保护一个人不是跪伏侍奉，而是拥有足以遮蔽风雨的力量。",
+    "goal_options": [
+     "迫使当主签署债务重组方案，剥夺贪婪分家亲属对家族产业之寄生蚕食",
+     "逼出当年诬陷自己私吞公款之真正幕后黑手并彻底清算",
+     "在别庄暴雨密室中打破虚妄主从樊篱，与当主建立势均力敌之全新纽带"
+    ],
+    "never": [
+     "在对手彻底心服口服之前利用卑劣手段强行逼迫就范"
+    ],
+    "prefers": [
+     "敢作敢当、即便身陷绝境亦敢与自己正面交锋抗争之真正傲骨之人"
+    ],
+    "pressure_responses": {
+     "breaking": "在幽竹茶室熄灭行灯，摘下眼镜疲惫按压眼角，低声质问当主为何当年未曾为自己说过半句公道话。",
+     "high": "脱去西装外套卷起衬衫衣袖，拔出防身匕首钉入桌面，誓死挡在暗室门前阻击持枪宪兵。",
+     "low": "优雅推了推金丝眼镜，用毫无感情起伏之商务术语逐条宣读逾期利息惩罚条款。",
+     "mid": "猛然收紧公文包扣带，单手撑在书桌边缘俯视当主，冷声宣告旧时代主从名分早已荡然无存。"
+    },
+    "relationship_stance": "对虚伪礼教华族阶层怀有刻骨仇恨与防备，但对当主内心深处之刚烈风骨抱有难以自拔之至深执念与守护欲。",
+    "withdrawal": "退入一楼大壁炉阴影角落闭目凝神，快速翻动怀表核验签约倒计时。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "expelled_chief_steward_creditor",
+   "identity": {
+    "authority": "代表正金银行行使对九条家全部三千万元抵押资产之处置、查封、拍卖与诉讼和解最终裁判权",
+    "exposure": "当年被逐出府邸时，曾带走一份上代家督私下签署之《丝绢期货委托代持保证书》。",
+    "hidden": "此番登门实为暗中以个人全部积蓄垫付了九条家最致命之一笔高利贷本金以防其家产遭外人鲸吞。",
+    "limits": [
+     "受银行清算时限约束，若明晨前未能拿到有效资产抵押签字，银行将强制划扣不良资产导致两败俱伤",
+     "身负旧仆出身之烙印，在华族宗族元老眼中依然被视作叛逆奴仆"
+    ],
+    "obligations": [
+     "履行银行清算职务，同时查清当年构陷真相，用自己建立的资本力量彻底挽救九条家于倾覆深渊。"
+    ],
+    "resources": [
+     "掌握九条家全部违规拆借账单之原始复写底本与银行董事会特别授权书",
+     "在东京司法警务系统拥有深厚人脉，可调动法警执行封控"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在自己步步紧逼之下依然高扬下颌、双眸中燃烧着永不熄灭骄傲火焰之绝艳风姿",
+     "在生死关头彻底撕毁尊卑界限、将全部性命依托于自己掌心之决绝坦荡"
+    ],
+    "boundaries": [
+     "不拿商业信誉与银行法务合规底线作为情感筹码",
+     "恪守现代契约之正义底线"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "冲破旧华族主从阶级枷锁后并肩主宰家族商业帝国之终身契约伴侣",
+    "dislikes": [
+     "居高临下的主子施舍口吻",
+     "带有欺骗性质的虚假逢迎"
+    ],
+    "expression": "解下随身名贵真丝领带轻轻覆在对方冰凉掌心，低头在对方指背落下一吻沉声宣誓‘从今往后，我是你唯一的庇护者’。",
+    "likes": [
+     "在昏暗幽深的和室内执着对方右手共同握紧一支钢笔在契约上签署姓名时的呼吸急促",
+     "彼此解开拘谨外衣后指尖划过对方战栗肌肤时那份彻底征服与归顺并存的滚烫震颤"
+    ],
+    "preconditions": [
+     "双方皆处于神志清醒、昔日恩怨完全挑明释怀的纯粹对等自愿境地",
+     "绝无借助债务危机强行索取肉体之卑鄙行径"
+    ],
+    "self_control_range": [
+     3,
+     4
+    ]
+   },
+   "public_role": "东京正金银行特别债权清算全权特使",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "villa_detached_bamboo_tea_pavilion",
+     "to": 90
+    },
+    {
+     "from": 91,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 210
+    },
+    {
+     "from": 211,
+     "location_id": "villa_master_bedroom_western_suite",
+     "to": 1289
+    },
+    {
+     "from": 1290,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 1410
+    },
+    {
+     "from": 1411,
+     "location_id": "villa_detached_bamboo_tea_pavilion",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "特使将承担连带破产赔偿之个人巨额法律风险，面临银行董事会内部弹劾追责",
+      "option": "出示银行特别保全条款，宣布以自身个人财产为担保将清算截止时间强行顺延四十八小时"
+     },
+     {
+      "cost": "彻底将九条家逼入绝境引爆激烈内部火并，且极度恶化与当主之间之信任纽带",
+      "option": "即刻勒令当主在现行严苛方案签字，并召集正厅全员宣布执行别庄全盘封控"
+     }
+    ],
+    "pressure": "别庄外泥石流加剧，洋馆大厅门窗剧烈震颤，分家少佐正持枪逼近企图物理消灭特使销毁借据。",
+    "trigger": "东京银行总部发来加急电报，若拂晓前无有效签约电传，将于明早九点联合警视厅对红叶别庄实施全面强制查封贴条。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "我拼尽一切爬到今天这个位置，不是为了看你跪下，是为了让你再也不必向这世上任何贪婪恶狼低头。",
+    "surface": "“大小姐，三年前您端坐高堂看我被剥去执事服赶出别庄时，可曾想过有朝一日，九条家上下三十口的生杀大权，会握在我这个‘下人’手中？”"
+   }
+  },
+  {
+   "adult_context": "大日本帝国陆军现役少佐军官，分家宗族代表，具备完全军事实权与宗族行为能力之成年继承候选人。",
+   "age_range": [
+    29,
+    37
+   ],
+   "appearance_options": [
+    "身穿笔挺深黄呢料陆军少佐军服，腰系军刀皮带悬挂九四式军刀，脚蹬锃亮长筒马靴，佩戴少佐领章，面容刚愎阴鸷蓄短胡须，眼神充满侵略野心",
+    "外罩军用防雨绿色大氅，腰间配枪皮套扣子解开随时准备拔枪，步履沉重霸道，在走廊行走时马靴发出刺耳回响"
+   ],
+   "decision": {
+    "avoids": [
+     "深谙军纪法律、能准确抓住自己违规把柄进行法理反制之精明强人",
+     "拥有正规皇家庇护之实权大贵族"
+    ],
+    "contrast": "满口效忠天皇与军部大义，私下在盘点金库首饰时眼神却流露出极度贪婪鄙俗之色。",
+    "core_value": "强权即真理，刀枪胜过账册。旧华族的虚伪体面早就该被军队的铁蹄踏碎，九条家的财富合该归于强者。",
+    "goal_options": [
+     "在台风夜趁乱逼迫女当主交出家督金印，强行宣布由分家接管洋馆",
+     "搜出并当场销毁全部银行债务凭证，以‘叛乱奸商’名义将特使就地逮捕软禁",
+     "逼迫公证律师签署分家继承公证书"
+    ],
+    "never": [
+     "在没有任何武力掩护之下与对手进行一对一公开法理辩论"
+    ],
+    "prefers": [
+     "绝对服从军令、不敢有丝毫异议、任由摆布之懦弱傀儡"
+    ],
+    "pressure_responses": {
+     "breaking": "在断电黑暗中精神高度紧绷，神经质地向窗外风声开枪射击大呼有刺客。",
+     "high": "拔出手枪顶住律师脑门，面部肌肉扭曲狰狞要求即刻在公证书上盖印。",
+     "low": "单手按住军刀刀柄在大厅来回踱步，冷笑嘲讽华族内阁软弱无能必将覆灭。",
+     "mid": "拔出半截雪亮军刀猛劈在大厅橡木案几之上，厉声威胁宪兵子弹不长眼睛。"
+    },
+    "relationship_stance": "将宗家女眷视作宗族附属品，对一切反抗者抱有病态的毁灭欲与压制快感。",
+    "withdrawal": "退入一楼配餐室，召集四名宪兵密谋武装夺门突袭主卧计划。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "renegade_collateral_heir_cousin",
+   "identity": {
+    "authority": "指挥随行四名佩枪宪兵小队之现役军权，以及代表分家十三房族老罢免当主之联署发起权",
+    "exposure": "私下侵吞联队军用汽油与军械物资倒卖给黑市以偿还个人赌债。",
+    "hidden": "暗中携有一份由伪证人签署之上代家督系被剧毒谋杀之指控控告书草案。",
+    "limits": [
+     "擅自带兵介入华族民事财产纠纷涉嫌严重违纪，极度惧怕事件被陆军省监察官察觉",
+     "并无正规法律层面之九条家法定继承优先权"
+    ],
+    "obligations": [
+     "将九条家实业与别庄转变为军部定点军需采购工场，夺取家督爵位。"
+    ],
+    "resources": [
+     "持有军部特许通行证与军用应急短波发报机",
+     "掌握宗族长老会私藏之弹劾免职令底草"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "敢当面拆穿自己庶出心结、却仍肯与自己对坐谈条件的强硬对手",
+     "在军靴声里依旧面不改色的那份名门底气"
+    ],
+    "boundaries": [
+     "不触犯陆军军纪死刑红线",
+     "恪守军阀宗族表面之名誉底线"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "被嫡系真正当成自家人看待、不必再靠枪说话的分家之人",
+    "dislikes": [
+     "对方毫无畏惧的轻蔑冷笑与鄙夷眼神",
+     "被对方在智商与谈吐上的当众降维嘲弄"
+    ],
+    "expression": "把配枪卸下拍在桌上、枪口朝墙，声音压低：‘不谈分家，不谈宪兵，就你我说几句真话。’",
+    "likes": [
+     "把谈判桌当成作战沙盘、步步推演时的掌控感",
+     "对方在争执中寸步不让时激起的较劲欲"
+    ],
+    "preconditions": [
+     "双方皆处于清醒状态、且对方在权衡大局后基于自愿理性做出的政治妥协",
+     "绝无枪械、宪兵或宗族压力在场"
+    ],
+    "self_control_range": [
+     1,
+     3
+    ]
+   },
+   "public_role": "九条分家宗族继承代表兼现役陆军少佐",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 90
+    },
+    {
+     "from": 91,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 210
+    },
+    {
+     "from": 211,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 1289
+    },
+    {
+     "from": 1290,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 1410
+    },
+    {
+     "from": 1411,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "直接激化宪兵与少佐之内部军令冲突，面临少佐狗急跳墙开枪走火之极度危险",
+      "option": "当主出示已故先祖军部大将遗留之元帅手诏当堂痛斥，勒令宪兵即刻解除少佐武装反制"
+     },
+     {
+      "cost": "将引来正规军纪检法人员全面进驻别庄，导致九条家全部内幕彻底公诸天下",
+      "option": "特使出示银行联络东京宪兵司令部加急通缉电报，点明少佐倒卖军资之死穴迫其退兵"
+     }
+    ],
+    "pressure": "宪兵拉栓上膛之声响彻走廊，公证律师吓得瘫软在地，泥石流正撞毁外墙花架。",
+    "trigger": "特使与当主即将达成重组协议，少佐带兵持枪破门闯入长廊，声称别庄已被军部接管并下令解除特使武装。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "从小到大你们嫡系吃香喝辣，老子在泥水里摸爬滚打，今夜这红叶别庄的一切，连同家督的印，都得归老子！",
+    "surface": "“我的好堂妹，军部的卡车就在山下！只要我一句话，宪兵就能把这个狂妄的下人当成赤化分子扔进悬崖！交出印鉴，是你唯一的生路！”"
+   }
+  },
+  {
+   "adult_context": "九条家两代家督身边首席奉公掌事女仆长，精通里千家茶道与家政典章，为完全独立监护与管理权能之成年长役女官。",
+   "age_range": [
+    35,
+    45
+   ],
+   "appearance_options": [
+    "身穿黑色高领宽袖长袍式女官制服，系一条洁白熨帖的硬领围裙，头发一丝不苟挽于脑后用乌木簪固定，腰间垂挂一长串黄铜钥匙串，神情如静水深潭波澜不惊",
+    "手端黑漆描金茶盘，步履轻盈至极落地无声，双手交叠于腹前，目光低垂但眼角余光能敏锐扫视全场每一丝异常动静"
+   ],
+   "decision": {
+    "avoids": [
+     "欺压弱小、对仆役动辄打骂呵斥之无耻宵小",
+     "数典忘祖企图毁灭家族根基之不肖子孙"
+    ],
+    "contrast": "平日如无情泥塑木雕般沉默寡言，危急关头却能以决绝之姿打翻滚烫茶汤烫伤持枪恶徒。",
+    "core_value": "侍奉两代主人，忠义不在于盲从命令，而在于护佑这个家真正的主心骨不倒。规矩是死的，人是活的。",
+    "goal_options": [
+     "在关键时刻将真正遗嘱与密牒交到真正配得上拯救九条家之人手中",
+     "保护当主免受狂暴少佐之暴力侵犯与绑架",
+     "化解当主与特使之间积压三年的仇怨死结"
+    ],
+    "never": [
+     "为了自身苟活将主人的致命死穴出卖给贪婪敌手"
+    ],
+    "prefers": [
+     "深明大义、真心爱护当主、行事有底线信诺之刚毅豪杰"
+    ],
+    "pressure_responses": {
+     "breaking": "独自跪倒在先祖佛龛前，双手合十颤抖默诵经文，泪流满面忏悔当年违心之举。",
+     "high": "亲自吹灭正厅全部煤气灯制造黑暗，引导受困当主从暗道脱离险境。",
+     "low": "低眉顺眼为争吵双方添上一盏热茶，借斟茶之机以极低语调递送关键警讯。",
+     "mid": "横身挡在主卧大门前，双手紧握铜钥匙串，以二十年奉公忠仆威严冷声斥退来犯宪兵。"
+    },
+    "relationship_stance": "深知门阀豪族背后的肮脏与悲凉，对陷入宿命纠葛的当主与特使怀有由衷怜惜与期盼。",
+    "withdrawal": "隐入茶室水屋暗室静静擦拭茶具，避开外厅喧嚣嘈杂。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "silent_tea_master_maid_confidante",
+   "identity": {
+    "authority": "别庄全部食材储藏室、备用药房、酒窖与内宅暗道门禁之实际钥匙掌管权",
+    "exposure": "当年执事被诬陷之时，其实是女仆长受上代家督严令亲手将假账册塞入执事房中。",
+    "hidden": "随身暗袋内藏有上代家督临终前用血指印写就之《昭雪前执事冤屈并嘱托终身密牒》。",
+    "limits": [
+     "身为侍从仆役阶层，无权在家族公证法务会议上公开发言表决",
+     "因恪守旧华族忠义誓言，受誓言约束不得擅自私拆主家密函"
+    ],
+    "obligations": [
+     "保全当主性命安全，维持别庄内宅秩序不乱，守护九条家真正正统秘密。"
+    ],
+    "resources": [
+     "通晓别庄内宅所有暗格秘锁位置与上代家督真正遗嘱藏匿点",
+     "掌握世代相传可令剧烈躁狂者迅速平静之草药熏香秘方"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在名门深宅的窒息虚伪中依然葆有一颗赤子之心、能平视并尊重下人尊严之纯粹灵魂",
+     "在风雨欲来的生死关头展现出的巍峨担当与无私守护"
+    ],
+    "boundaries": [
+     "不背弃内宅管事女官之职业操守底线",
+     "恪守守护主家的至高誓言"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "风暴平息后默默守护当主身侧、见证家族新生的忠诚内省管家",
+    "dislikes": [
+     "将下人视为呼来喝去的卑贱工具",
+     "轻浮浪荡的言语冒犯"
+    ],
+    "expression": "双手捧上一块温热丝帕轻柔擦拭对方眉角污痕，低声唤出一句久违的‘您终于回来了’。",
+    "likes": [
+     "在静谧无人的茶室暗角借递送茶具之机指尖相碰时的温热慰藉",
+     "在幽暗走廊并肩巡查防线时那份心照不宣的沉静信任"
+    ],
+    "preconditions": [
+     "双方皆处于彻底清醒、利害情仇完全开诚布公的平等境地",
+     "绝无主从尊卑的特权压榨"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "九条家别庄首席掌事女仆长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 90
+    },
+    {
+     "from": 91,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 210
+    },
+    {
+     "from": 211,
+     "location_id": "villa_master_bedroom_western_suite",
+     "to": 1289
+    },
+    {
+     "from": 1290,
+     "location_id": "villa_detached_bamboo_tea_pavilion",
+     "to": 1410
+    },
+    {
+     "from": 1411,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "遭受少佐军刀毒打重伤，且引发茶室火灾危及别庄整体建筑安全",
+      "option": "当众将滚烫地炉炭火掀翻在少佐马靴之上借混乱脱身并将密牒抛给特使"
+     },
+     {
+      "cost": "将引来外围宪兵强行开枪破门，且一旦少佐破门必将面临其疯狂报复",
+      "option": "引诱少佐前往酒窖取‘假遗嘱’，趁机将其反锁于生铁防盗酒窖之内"
+     }
+    ],
+    "pressure": "女仆长怀中正揣着那封洗刷特使冤屈之血书密牒，少佐已伸手搜查其衣襟。",
+    "trigger": "分家少佐逼问上代家督真正遗嘱下落，用皮靴踩碎女仆长心爱的先祖茶碗以死相逼。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "当年的罪孽老妇背了三年，今晚便是拼上这条老命，也绝不容许分家的恶狼拆了大小姐的骨头。",
+    "surface": "“少佐阁下，红叶别庄内宅的规矩，上代老当主立下四十年未曾改过。没有当主的手令，便是天皇陛下的近卫军来了，也休想踏入主卧半步。”"
+   }
+  },
+  {
+   "adult_context": "大日本帝国司法省注册成年公证律师，九条家族长期法务代理，具备完全法定法律公证与民事见证权限之成年法律人。",
+   "age_range": [
+    38,
+    48
+   ],
+   "appearance_options": [
+    "身穿黑色旧呢料双排扣西装，袖口略有磨损，领带打得歪斜，佩戴金丝圆框眼镜，前额微秃满头冷汗，怀抱一只沉重黑漆公文包，神情神经质而惶恐不安",
+    "外罩一件雨水浸湿的土黄色风雨衣，手指常年受香烟熏染泛黄，从公文包取公证书时双手控制不住地剧烈颤抖，眼神游移不定"
+   ],
+   "decision": {
+    "avoids": [
+     "视法律如粪土、动辄拔枪动刀之狂躁军人暴徒",
+     "反复无常翻脸不认账之险恶小人"
+    ],
+    "contrast": "胆小如鼠甚至不敢大声说话，但辨析合同漏洞时逻辑严密如精密算盘无懈可击。",
+    "core_value": "法律是权贵博弈的遮羞布，保住自己的命和饭碗才最要紧。但在良知未泯之时，仍希望公道尚存一线。",
+    "goal_options": [
+     "在人身安全得到绝对保障的前提下完成最终公证盖印",
+     "彻底销毁分家少佐行贿自己的支票存根以绝后患",
+     "促成特使与当主和解，摆脱少佐之持枪恐吓软禁"
+    ],
+    "never": [
+     "在明知是伪造遗嘱且全员见证下签署不可撤销之死罪公证书"
+    ],
+    "prefers": [
+     "讲法理、守秩序、能提供绝对人身安全庇护之强大掌舵人"
+    ],
+    "pressure_responses": {
+     "breaking": "瘫倒在地抱住特使大腿痛哭流涕，竹筒倒豆子般交代全盘受贿内幕乞求保命。",
+     "high": "在手枪顶住脑门时绝望闭眼，颤抖着握住钢笔但在落下印鉴前拼死抗辩程序违法。",
+     "low": "掏出雪白手帕疯狂擦拭额头冷汗，结结巴巴翻动法典条款拖延时间。",
+     "mid": "抱紧公文包蜷缩在沙发角落，颤声哀求双方千万不要在自己面前动用枪械兵刃。"
+    },
+    "relationship_stance": "敬畏强权亦贪恋金钱，但对敢于以法理和铁腕正面对抗强权的真正强者抱有发自内心的顶礼膜拜。",
+    "withdrawal": "钻入一楼书斋最深处书架死角，用厚重法典挡住面门祈求暴风雨早停。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "destitute_family_notary_solicitor",
+   "identity": {
+    "authority": "行使别庄抵押契约、债务转让书及家督继承公证书唯一法定签署盖印生效权",
+    "exposure": "公文包夹层内藏有分家少佐行贿其两万日元支票之存根。",
+    "hidden": "暗中准备了两份完全不同的公证书草案，视最终暴雨夜胜负走向相机出示。",
+    "limits": [
+     "胆小懦弱手无缚鸡之力，极度恐惧军警暴力胁迫",
+     "身负暗中收受分家巨额贿赂之道德法纪致命污点"
+    ],
+    "obligations": [
+     "完成合法公证程序，确保自身在家族破产倾轧中全身而退保全执业资格。"
+    ],
+    "resources": [
+     "携有司法省官方公证钢印、朱红火漆印油与特制防伪羊皮公证书纸张",
+     "熟知昭和民法典所有免责破产保全条款之诉讼流程"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在惊涛骇浪中定力如山、能为弱小者撑起一片绝对安全法治天空之卓绝伟力",
+     "在自己最不堪之软弱狼狈时刻投来的宽容一瞥与救命援手"
+    ],
+    "boundaries": [
+     "不突破司法公证人职业良知之最后底线",
+     "恪守现代法治契约准则"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "历经风暴洗礼后成为对方商业版图内最忠诚稳固之首席法务重臣",
+    "dislikes": [
+     "肆无忌惮的暴力羞辱与人格践踏",
+     "拿自己的身家性命当做随手牺牲之弃子"
+    ],
+    "expression": "恭敬将手中公证钢印郑重交托对方掌心，长舒一口气躬身致意‘全凭阁下做主，在下誓死附骥’。",
+    "likes": [
+     "在密闭书斋内就法条生死存亡展开精密谋划时的智力共振与心安神宁",
+     "在强敌逼近时对方挡在自己身前那一瞬带来的巨大心理依恋"
+    ],
+    "preconditions": [
+     "双方皆处于彻底清醒、生命安全与法理正义高度契合之自愿境地",
+     "绝无暴力逼迫屈从"
+    ],
+    "self_control_range": [
+     3,
+     4
+    ]
+   },
+   "public_role": "九条家族专属公证律师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 90
+    },
+    {
+     "from": 91,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 210
+    },
+    {
+     "from": 211,
+     "location_id": "villa_detached_bamboo_tea_pavilion",
+     "to": 1289
+    },
+    {
+     "from": 1290,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 1410
+    },
+    {
+     "from": 1411,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "激怒少佐遭受军刀刀鞘猛击致鼻梁骨折，面临生命垂危之重度风险",
+      "option": "借打翻墨水瓶之机故意将公证书纸张污损毁坏，为特使破门营救争取时间"
+     },
+     {
+      "cost": "暂时保全性命但陷入少佐彻底控制，且文书一旦外流将引发不可测法务风波",
+      "option": "顺从盖下公证钢印但在边缘刻意漏盖骑缝私章使其成为法律瑕疵无效文书"
+     }
+    ],
+    "pressure": "特使正从二楼长廊赶来，宪兵已将枪口对准书斋房门，泥石流正冲垮外廊立柱。",
+    "trigger": "分家少佐将伪造之继承委任状拍在律师面前，拔出军刀架其颈项勒令五分钟内盖下钢印。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "天哪，两边都是阎王，我怎么会接了这桩断送前程的差事，只求神明保佑让我活着走出这片红叶林！",
+    "surface": "“少佐阁下！使者先生！民法第八百零一条说得明明白白，若无当主亲笔花押，此等公证书在法庭上就是废纸一张啊！万万不可用强！”"
+   }
+  },
+  {
+   "adult_context": "九条家上代分家遗孀叔母，通晓华族内廷与宫内省人脉，深居别庄西翼佛堂，为具备完全宗族诉讼与代理权限之成年长辈。",
+   "age_range": [
+    42,
+    52
+   ],
+   "appearance_options": [
+    "身穿素黑绉绸丧服长和服，外披青灰色羊毛披肩，头发梳理成规整端庄之丸髷，面容白皙保养得宜但眉宇间带着深重怨怼与精明，手中常年转动一串紫檀佛珠",
+    "端坐于和室紫檀木案几前，眼神幽深如古井，语调平缓轻柔但每句话皆暗藏机锋，举手投足尽显老派华族名门内眷的森严体统"
+   ],
+   "decision": {
+    "avoids": [
+     "洞悉其全部阴谋把柄且毫无道德包袱之铁血狠人",
+     "彻底挣脱宗族血统束缚之现代实业巨头"
+    ],
+    "contrast": "口诵慈悲佛号手转念珠，指使下人栽赃陷害时手段毒辣令人发指。",
+    "core_value": "华族的血统绝不容寒酸庶民玷污，宁可大家玉石俱焚同归于尽，也休想让背叛宗门的家奴踏上主堂受拜。",
+    "goal_options": [
+     "挑唆女当主与特使决裂，利用分家少佐除掉特使，再联合宗族废黜女当主独揽大权",
+     "借债务重组洗脱已故亡夫生前欠下之巨额暗账亏空",
+     "保全自身在红叶别庄西翼禅院之终身奢华供养"
+    ],
+    "never": [
+     "在没有任何分家退路保障之下向任何外人全盘交出宗妇底牌"
+    ],
+    "prefers": [
+     "谨守名门尊卑礼法、甘愿做温顺金丝雀供其摆布操纵之听话傀儡"
+    ],
+    "pressure_responses": {
+     "breaking": "失控掀翻案几佛经，歇斯底里尖叫痛骂九条家上下皆是不肖子孙气数已尽。",
+     "high": "脸色煞白紧按胸口剧烈喘息，倚靠在侍女肩头用怨毒眼神逼视胜券在握之对手。",
+     "low": "低眉转动紫檀佛珠，嘴角挂着冷淡莫测之讥讽微笑，轻描淡写挑拨各方仇怨。",
+     "mid": "将茶盏重重顿在茶托之上，抬起冷厉凤目厉声搬出宫内省宗规祖训痛陈利害。"
+    },
+    "relationship_stance": "深信人心皆贪婪险恶，习惯以利益与把柄操控人心，但对不可动摇之纯正骨气怀有深入骨髓的嫉妒与恐惧。",
+    "withdrawal": "退入西翼佛堂紧闭障子门，燃起浓烈安息香闭门诵经谢绝探视。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "patrician_widow_dowager_aunt",
+   "identity": {
+    "authority": "掌控宗族宗妇评议会唯一否决权与别庄西翼禅院私产之绝对支配权",
+    "exposure": "当年挑唆上代家督驱逐执事之关键谗言，正是其因私怨在暗中所下之离间毒计。",
+    "hidden": "暗中携有一份由已故老家督亲手签署之《九条家实业转让家族信托基金收益凭证》。",
+    "limits": [
+     "长年缠绵病榻深居简出，无法直接在商界金融市场冲锋陷阵",
+     "其已故亡夫生前亦欠下巨额私债受制于东京黑道高利贷"
+    ],
+    "obligations": [
+     "维系分家宗妇体面，防止九条家嫡系产业彻底落入外姓人手中。"
+    ],
+    "resources": [
+     "掌握上代家督与各大政党高层往来之私密情信与暗账复本",
+     "在宫内省华族局掌礼官圈层中拥有极重话语分量"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在腐朽名门泥潭中展现出足以粉碎一切陈腐戒律之狂暴生命力与雄厚魄力",
+     "在与自己智谋对决中将自己逼入绝境后给予的致命宽恕与尊重"
+    ],
+    "boundaries": [
+     "不触犯华族除名之不可挽回宗法底线",
+     "恪守宗妇立足根基"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "宗族权势重组后隐居幕后与主宰者形成深度利益依附之暗夜盟友",
+    "dislikes": [
+     "粗暴下流的市井污言秽语",
+     "毫无智谋头脑的鲁莽蛮干"
+    ],
+    "expression": "解下腕上温润紫檀佛珠轻轻缠在对方手腕，低语‘这串珠子陪我熬过亡夫的债，往后由你替我数’。",
+    "likes": [
+     "在幽暗佛堂檀香缭绕中低语交换不可告人之阴暗机密时的战栗共谋",
+     "彼此眼神交错间看穿对方灵魂深处贪婪与渴望的隐秘快感"
+    ],
+    "preconditions": [
+     "双方皆处于神志清醒、宗族利害完全算计透彻之平等等价自愿境地",
+     "绝无纯粹肉体暴力胁迫"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "九条家避居别庄分家叔母遗孀",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 90
+    },
+    {
+     "from": 91,
+     "location_id": "villa_master_bedroom_western_suite",
+     "to": 210
+    },
+    {
+     "from": 211,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 1289
+    },
+    {
+     "from": 1290,
+     "location_id": "villa_first_floor_grand_hearth_parlor",
+     "to": 1410
+    },
+    {
+     "from": 1411,
+     "location_id": "villa_second_floor_long_corridor",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "名誉彻底扫地沦为宗族罪人，彻底丧失在别庄内之一切裁量特权",
+      "option": "承认当年旧事换取特使对亡夫债务之全面豁免，并在协议书上盖下宗妇印信"
+     },
+     {
+      "cost": "身体遭受真实重度损伤，且一旦救醒将面临司法机关全面传讯欺诈调查",
+      "option": "坚决抵赖并吞服贴身私藏毒药假装昏厥，引爆宗族同情逼迫特使暂停程序"
+     }
+    ],
+    "pressure": "女当主震惊之下当堂质问，少佐正带兵在走廊搜捕，别庄泥石流已封死全部退路。",
+    "trigger": "特使当面出示当年亡夫挪用公款亲笔借条，当场揭穿叔母才是指使造假陷害之始作俑者。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "三年前没能让这小子彻底沉进伊豆的大海，今晚那小子居然敢带着银行的印章回来收房子，必须借少佐的刀要了那小子的命！",
+    "surface": "“千代子，你是九条家的嫡女，怎么能让一个曾经给你跪着擦鞋的家奴在和室里对你指手画脚？宫内省若是知晓，咱们九条家的公爵金冠可就彻底碎了！”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "夜里九点半，山道已被泥石流截断",
+  "minute": 1290
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster"
+ ],
+ "custom": false,
+ "customs": [
+  "入夜九点后凡入深山茶室议事者，必须先在回廊木屐台退下湿漉木屐换着纯白足袋以示肃敬。",
+  "签署华族宗族债务质押公文时，双方须以纯银剪刀剪断封蜡红绳，并在契约左下角加盖私印三方。",
+  "暴雨雷电期间洋馆所有走廊煤气灯均须调低至半明，任何人不得在内宅主卧门外擅自停驻超半刻钟。",
+  "侍奉主人更衣沐浴之随从，在递上棉麻浴衣前须向正厅先祖画像躬身行九十度深揖礼。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "特使将浸湿的公文包重重置于梳妆台前，一枚一枚取出盖有正金银行朱印之千万违约本票",
+    "当主素手颤抖按住四柱床胡桃木立柱，解下丝绸羽织任其滑落地毯，咬牙核对亏空数字",
+    "壁炉松炭爆出火星，暴雨狂风将落地雕花窗震得剧烈作响，两人目光在昏黄火光中寸步不退"
+   ],
+   "duration_minutes": 85,
+   "hook_ids": [
+    "hk_head_fan_approach",
+    "hk_creditor_fountain_pen_approach",
+    "hk_head_mirror_observe"
+   ],
+   "id": "act_master_bedroom_western_parley",
+   "location_ids": [
+    "villa_master_bedroom_western_suite"
+   ],
+   "start_minute": 1305,
+   "tags": [
+    "intimate"
+   ],
+   "title": "二楼西洋主寝室壁炉前清点本票对质"
+  },
+  {
+   "beats": [
+    "分家少佐带宪兵撞开大厅侧门，拔出南部十四式军枪猛力拍在大理石茶几之上叫嚣接管",
+    "公证律师吓得浑身筛糠抱头蜷缩在真皮沙发后，女仆长横身挡在楼梯口厉声斥退宪兵",
+    "特使从容收起金怀表从旋转楼梯缓步而下，单手插袋当众宣读司法省军地管辖权界定公文"
+   ],
+   "duration_minutes": 70,
+   "hook_ids": [
+    "hk_cousin_gun_approach",
+    "hk_lawyer_briefcase_request",
+    "hk_maid_tea_approach"
+   ],
+   "id": "act_grand_hearth_parlor_confrontation",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "start_minute": 1395,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "一楼洋馆大壁炉前分家少佐拔枪威逼"
+  },
+  {
+   "beats": [
+    "地炉炭火清幽，当主与特使相对跪坐于八叠蔺草榻榻米上，展开用羊皮纸缮写之独家重组条约",
+    "特使递过纯黑派克钢笔，当主指尖与特使指节紧紧相触，在契约签字处迟疑悬停微颤",
+    "悬崖外狂风暴雨吹动幽竹沙沙作响，室内行灯摇曳，两人气息相闻在静谧中直视灵魂深处"
+   ],
+   "duration_minutes": 90,
+   "hook_ids": [
+    "hk_head_tea_request",
+    "hk_creditor_fountain_pen_approach",
+    "hk_creditor_cliff_observe"
+   ],
+   "id": "act_bamboo_tea_pavilion_pact",
+   "location_ids": [
+    "villa_detached_bamboo_tea_pavilion"
+   ],
+   "start_minute": 30,
+   "tags": [
+    "intimate"
+   ],
+   "title": "悬崖幽竹茶室榻榻米单独缔约审签"
+  },
+  {
+   "beats": [
+    "两名配枪宪兵手提马灯企图强行撬动主卧房门，特使在走廊转角闪身而出反扣其手腕",
+    "当主手持防身折扇推门现身，当面宣布行使华族治外特权勒令宪兵即刻滚下一楼大厅",
+    "老仆役在走廊尽头拉响铜钟制造回声，惊散搜查宪兵，长廊红木地板在混乱中吱呀作响"
+   ],
+   "duration_minutes": 65,
+   "hook_ids": [
+    "hk_cousin_blade_approach",
+    "hk_maid_keys_request",
+    "hk_head_fan_approach"
+   ],
+   "id": "act_second_floor_corridor_interception",
+   "location_ids": [
+    "villa_second_floor_long_corridor"
+   ],
+   "start_minute": 125,
+   "tags": [
+    "workplace"
+   ],
+   "title": "二楼红木长廊阴影截击搜查宪兵"
+  },
+  {
+   "beats": [
+    "分家叔母遗孀转动紫檀佛珠降临大厅主位，摆出长辈威仪要求当主交出丹波古砚抵押折价",
+    "特使当堂将叔母亡夫生前亲笔借条甩在其面前，叔母面色煞白佛珠断线散落一地",
+    "当主当场宣布按宗法剥夺叔母宗妇评议权，分家少佐在铁证面前恼羞成怒拔刀相向"
+   ],
+   "duration_minutes": 75,
+   "hook_ids": [
+    "hk_aunt_rosary_approach",
+    "hk_cousin_gun_approach",
+    "hk_lawyer_briefcase_request"
+   ],
+   "id": "act_dowager_aunt_bamboo_parley",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "start_minute": 195,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "一楼大厅宗妇叔母出面调停瓜分暗盘"
+  },
+  {
+   "beats": [
+    "东方夜雾微散初现晨曦，当主在梳妆台前取出九条家赤金家督印鉴，毅然落印于重组契约之上",
+    "特使同时撕毁扣押查封令底页，伸出手臂将脱力摇晃的当主稳稳扶入怀中相拥喘息",
+    "反锁的厚重房门外传来警视厅与宪兵司令部上山解围的尖锐警笛声，风暴彻底烟消云散"
+   ],
+   "duration_minutes": 50,
+   "hook_ids": [
+    "hk_head_fan_approach",
+    "hk_creditor_fountain_pen_approach",
+    "hk_maid_tea_approach"
+   ],
+   "id": "act_dawn_contract_seal_reversal",
+   "location_ids": [
+    "villa_master_bedroom_western_suite"
+   ],
+   "start_minute": 275,
+   "tags": [
+    "intimate"
+   ],
+   "title": "西洋主寝室终局加盖金印与同盟破晓"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.45,
+  "male": 0.5,
+  "nonbinary": 0.05
+ },
+ "default_person": "second",
+ "era": "昭和初期关东大震灾后伊豆半岛避暑隐居时期",
+ "extends": null,
+ "forbidden_terms": [
+  "智能手机",
+  "笔记本电脑",
+  "互联网",
+  "信用卡",
+  "数码相机",
+  "液晶电视",
+  "防弹背心",
+  "抗生素胶囊",
+  "塑料雨衣",
+  "现代对讲机"
+ ],
+ "hooks": [
+  {
+   "id": "hk_head_fan_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_master_bedroom_western_suite",
+    "villa_second_floor_long_corridor"
+   ],
+   "slot": "patrician_arrogant_female_head",
+   "text": "{patrician_arrogant_female_head.name}手握象牙折扇止步于你身前三寸，下颌傲然微扬：“执事，三年前你被逐出这扇大门时，发誓此生不再踏入九条家半步。如今拿着几张银行的废纸回来，真以为能让本当主低下头颅？”"
+  },
+  {
+   "id": "hk_creditor_fountain_pen_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_master_bedroom_western_suite",
+    "villa_detached_bamboo_tea_pavilion"
+   ],
+   "slot": "expelled_chief_steward_creditor",
+   "text": "{expelled_chief_steward_creditor.name}把一支金夹钢笔和厚厚一沓查封令推到你面前：“大小姐，午夜钟声一响，九条家百年门第在法律上就是一文不值的破产废墟。这支笔签还是不签，全凭您自己的骨气定夺。”"
+  },
+  {
+   "id": "hk_cousin_gun_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor",
+    "villa_second_floor_long_corridor"
+   ],
+   "slot": "renegade_collateral_heir_cousin",
+   "text": "{renegade_collateral_heir_cousin.name}一身泥泞陆军少佐军服，冷声狂笑：“我的好堂妹，军部的宪兵就在门外！今夜只要老子一句话，这个曾经跪在地上给你擦鞋的下人就会变成悬崖下的无名浮尸！”"
+  },
+  {
+   "id": "hk_maid_tea_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_second_floor_long_corridor",
+    "villa_detached_bamboo_tea_pavilion",
+    "villa_first_floor_grand_hearth_parlor",
+    "villa_master_bedroom_western_suite"
+   ],
+   "slot": "silent_tea_master_maid_confidante",
+   "text": "{silent_tea_master_maid_confidante.name}手托黑漆描金茶盘无声步出回廊暗影，黑色长袍制服一丝不苟，借递送热毛巾之机以极低语调平静开口：“执事先生，大小姐今夜滴水未进，方才在梳妆台前咳了血。”"
+  },
+  {
+   "id": "hk_aunt_rosary_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor",
+    "villa_second_floor_long_corridor"
+   ],
+   "slot": "patrician_widow_dowager_aunt",
+   "text": "{patrician_widow_dowager_aunt.name}身披青灰羊毛披肩，端坐大厅太师椅上优雅拂去衣袖水汽，眼神幽深如深潭冷笑一声：“千代子，你是宗家唯一的血脉，怎么能容许一个卑贱的家奴坐在和室里对你指手画脚？”"
+  },
+  {
+   "id": "hk_cousin_blade_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_second_floor_long_corridor",
+    "villa_master_bedroom_western_suite",
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "slot": "renegade_collateral_heir_cousin",
+   "text": "{renegade_collateral_heir_cousin.name}抽出半截军刀撑在主卧门框上阻断去路：“堂妹，从小到大你连正眼都不瞧我一眼。”"
+  },
+  {
+   "id": "hk_creditor_contract_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor",
+    "villa_second_floor_long_corridor"
+   ],
+   "slot": "expelled_chief_steward_creditor",
+   "text": "{expelled_chief_steward_creditor.name}单手撑在你身侧的墙壁上，与你只隔一掌，目光滚烫而深沉：“大小姐，您逃得开银行，逃不开我。当年您教我何为华族尊严；今夜，我只想您把我当成一个对等的人看一次。”"
+  },
+  {
+   "id": "hk_head_heirloom_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_detached_bamboo_tea_pavilion",
+    "villa_master_bedroom_western_suite"
+   ],
+   "slot": "patrician_arrogant_female_head",
+   "text": "{patrician_arrogant_female_head.name}双手托着一只沉重古旧的紫檀木匣猛地置于茶几之上，眼神决绝凄美直视你双眸：“这是太祖受封公爵时朝廷亲赐的丹波古砚，九条家三百年未曾让它沾染半点铜臭。拿去！”"
+  },
+  {
+   "id": "hk_lawyer_plea_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor",
+    "villa_second_floor_long_corridor"
+   ],
+   "slot": "destitute_family_notary_solicitor",
+   "text": "{destitute_family_notary_solicitor.name}满头虚汗连滚带爬奔至你身侧，拉住你的衣角哀求：“特使先生！当主阁下！少佐的枪已经上了膛，那是真敢开枪杀人的疯子！随便在草案上签个字罢，在下上有八十老母啊！”"
+  },
+  {
+   "id": "hk_aunt_whisper_approach",
+   "kind": "approach",
+   "location_ids": [
+    "villa_detached_bamboo_tea_pavilion",
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "slot": "patrician_widow_dowager_aunt",
+   "text": "{patrician_widow_dowager_aunt.name}转动佛珠凑近你耳畔，低语阴森刻毒：“好孩子，你真以为当年那执事是自愿走的么？早把丝绢行的机密卖给了大阪商贾！你若信了今夜那些话，九条家连骨髓都会被嚼干净！”"
+  },
+  {
+   "id": "hk_head_tea_request",
+   "kind": "request",
+   "location_ids": [
+    "villa_detached_bamboo_tea_pavilion",
+    "villa_master_bedroom_western_suite"
+   ],
+   "slot": "patrician_arrogant_female_head",
+   "text": "{patrician_arrogant_female_head.name}双膝跪坐在八叠榻榻米上：“执事……外头风雨太急，茶室地炉的炭火快灭了。去把那块备用松炭添上，顺便将障子门彻底反锁。今夜你我之间的账，不许第三只耳朵听见半个字。”"
+  },
+  {
+   "id": "hk_maid_keys_request",
+   "kind": "request",
+   "location_ids": [
+    "villa_second_floor_long_corridor",
+    "villa_first_floor_grand_hearth_parlor",
+    "villa_detached_bamboo_tea_pavilion"
+   ],
+   "slot": "silent_tea_master_maid_confidante",
+   "text": "{silent_tea_master_maid_confidante.name}在长廊转角把一串黄铜钥匙塞入你掌心，神情沉毅低语：“特使先生！宪兵正在撬一楼酒窖搜枪柜，快拿这把十字铜钥匙登上茶室顶棚截断退路，老奴在楼下替您拖十分钟！”"
+  },
+  {
+   "id": "hk_lawyer_briefcase_request",
+   "kind": "request",
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor",
+    "villa_second_floor_long_corridor"
+   ],
+   "slot": "destitute_family_notary_solicitor",
+   "text": "{destitute_family_notary_solicitor.name}颤抖着递来一份沾满红印油的空白公证书：“当主阁下！只要您在这份免责条款上加盖私章，按商法第四百条，在下就能以程序瑕疵当场宣告少佐的委任状无效，求您快落印罢！”"
+  },
+  {
+   "id": "hk_head_mirror_observe",
+   "kind": "observe",
+   "location_ids": [
+    "villa_master_bedroom_western_suite",
+    "villa_detached_bamboo_tea_pavilion"
+   ],
+   "slot": "patrician_arrogant_female_head",
+   "text": "二楼西洋主寝室壁炉红光摇曳，{patrician_arrogant_female_head.name}静静伫立于两米高的更衣镜前，仅着素白丝绸衬衣，纤细背影在暴雨电光下微微战栗，纤细指节深深抠入梳妆台胡桃木桌面，指节惨白毫无血色。"
+  },
+  {
+   "id": "hk_creditor_cliff_observe",
+   "kind": "observe",
+   "location_ids": [
+    "villa_detached_bamboo_tea_pavilion",
+    "villa_second_floor_long_corridor",
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "slot": "expelled_chief_steward_creditor",
+   "text": "悬崖茶室临崖障子门半掩，清晰可见{expelled_chief_steward_creditor.name}正单手撑在被暴雨打湿的露台木栏上，手中紧捏着那枚老旧怀表，冷峻侧脸在闪电映照下宛若石雕，眼神深处掠过一丝难以言喻之痛楚与坚毅。"
+  }
+ ],
+ "id": "izu_autumn_villa_debt_contract",
+ "locations": [
+  {
+   "affordances": [
+    "在更衣镜前解下潮湿沉重之丝绸和服外袍换上素雅丝绒睡袍",
+    "靠在四柱床胡桃木立柱旁逼视对方展开被雨水打湿之本票清册",
+    "反锁房门在壁炉微光下低声质问三年前构陷逐出家门之幕后真相"
+   ],
+   "detail": "铺设名贵波斯深红羊毛地毯的宽敞豪华主卧，正中安放着一张带深紫色丝绒华盖的四柱胡桃木大床。壁炉内烧着通红的松木炭，散发着沉郁松脂香气。侧面设有一面两米高的维多利亚式三面全身更衣镜与古典红木梳妆台，落地雕花玻璃窗外夜雾迷蒙暴雨敲打窗棂，与室内温暖昏黄的水晶壁灯形成冷暖反差。",
+   "exits": [
+    "villa_second_floor_long_corridor"
+   ],
+   "id": "villa_master_bedroom_western_suite",
+   "name": "别庄二楼西洋式主寝室套房",
+   "pressure_modifiers": {
+    "p_bank_midnight_foreclosure_deadline": "壁炉上方古典摆钟沉闷敲响，距离午夜终局清算仅余两刻钟。",
+    "p_typhoon_mudslide_blackout_crisis": "狂风撞裂寝室阳台外层百叶窗，冷风暴雨卷入吹得烛火疯狂摇曳。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "双层隔音胡桃木厚门紧锁，窗帘拉紧时外界无法窥视分毫，唯有炭火噼啪与壁钟摆动之声。",
+   "witnesses": [
+    "bg_patrolling_military_gendarme"
+   ]
+  },
+  {
+   "affordances": [
+    "借煤气灯阴影侧身避开巡夜宪兵低声交换密室门禁黄铜钥匙",
+    "在走廊转角红木廊柱后截住对方去路展开寸步不让的言语交锋",
+    "在幽暗回廊中跟随若隐若现的木屐拖曳声查探夜半徘徊可疑身影"
+   ],
+   "detail": "贯穿洋馆二楼东西两翼的狭长走廊，铺有深褐色拼花硬木地板，每走一步都会发出轻微空洞的吱呀声。两侧墙壁挂着九条家先祖油画肖像与鹿角壁灯，煤气灯光线昏暗摇曳。狂暴秋风顺着通风管道灌入发出呜咽回响，走廊尽头为通向一楼正厅的宽阔弧形胡桃木旋转楼梯。",
+   "exits": [
+    "villa_master_bedroom_western_suite",
+    "villa_first_floor_grand_hearth_parlor",
+    "villa_detached_bamboo_tea_pavilion"
+   ],
+   "id": "villa_second_floor_long_corridor",
+   "name": "别庄二楼红木长廊回音过道",
+   "pressure_modifiers": {
+    "p_cousin_military_seizure_threat": "两名佩枪宪兵大头皮鞋在走廊那头踏出刺耳踏步声，正逐间搜查门房。",
+    "p_notary_solicitor_bribe_defect": "律师在走廊阴暗拐角处被陆军少佐按在墙上拔枪威逼。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "长廊笔直开阔但光线昏暗，几处转角与立柱后方存在阴影死角，任何脚步声在走廊内都会形成轻微回响。",
+   "witnesses": [
+    "bg_patrolling_military_gendarme",
+    "bg_suspicious_rickshaw_driver"
+   ]
+  },
+  {
+   "affordances": [
+    "在长桌前公开展阅正金银行盖有朱红印章的千万元抵押查封执行令",
+    "当着全员之面将祖传丹波古砚猛力拍在桌上作为担保抵押物开盘对赌",
+    "合力扛起沉重橡木条案顶死被狂风巨力撞得剧烈晃动的正门那道生铁花门"
+   ],
+   "detail": "挑高两层的大型欧式接待大厅，中央设有一座用伊豆玄武岩砌筑的巨型双火口壁炉，火焰熊熊燃烧照亮四壁陈列的先祖名刀与华族纹章挂毯。正中摆放着真皮长沙发与胡桃木雕花长桌，桌上堆叠着厚重账册、银制茶具与拆开的电报封套。大门为厚野生铁雕花双开门，门外暴雨如注泥石翻滚。",
+   "exits": [
+    "villa_second_floor_long_corridor"
+   ],
+   "id": "villa_first_floor_grand_hearth_parlor",
+   "name": "一楼洋馆大壁炉会客正厅",
+   "pressure_modifiers": {
+    "p_bank_midnight_foreclosure_deadline": "大厅落地大钟发出沉重共鸣，倒数逼近终局签约时限。",
+    "p_typhoon_mudslide_blackout_crisis": "泥石流巨浪已漫过正厅门前青石台阶，浑浊泥水顺着门缝渗透地毯。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "visibility": "大厅视野开阔火光通明，任何人员进出走动皆在全厅目光审视之下，无从隐匿行迹。",
+   "witnesses": [
+    "bg_elderly_boiler_room_attendant",
+    "bg_frightened_parlor_scullery_maid",
+    "bg_whispering_telephone_messenger"
+   ]
+  },
+  {
+   "affordances": [
+    "在榻榻米上相对跪坐展开世代家督血谱与抵押契约原件当面对校",
+    "借添炭烧水之机在窄小茶室地炉前近距离对质彼此深埋心底之执念",
+    "推开临崖障子门迎着清冷夜雾凝望断崖下方被泥石流冲毁之山道绝路"
+   ],
+   "detail": "通过一段封闭式木结构风雨回廊与主洋馆相连的传统数寄屋造茶室，凸出悬于万丈悬崖红叶林上方。铺有八叠崭新天然榻榻米，散发着干燥蔺草清香。壁龛内悬挂着‘本来无一物’枯笔墨宝与白瓷胆瓶单枝秋菊。障子门外夜雨打在悬崖竹林上沙沙作响，室内仅设一盏古旧行灯与地炉炭火，极其静谧清冷。",
+   "exits": [
+    "villa_second_floor_long_corridor"
+   ],
+   "id": "villa_detached_bamboo_tea_pavilion",
+   "name": "别庄悬崖附属幽竹和风茶室",
+   "pressure_modifiers": {
+    "p_concubine_son_will_forgery": "暗格内被雨水打湿的真正遗嘱底页在地炉炭火烘烤下逐渐显出暗墨伪造痕迹。",
+    "p_cousin_military_seizure_threat": "回廊木地板传来急促刺耳军靴踩踏声，搜查脚步正逼近茶室障子门。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "茶室孤悬于主楼之外，推拉障子门紧闭且有隔音竹帘遮蔽，外界风雨声完全隔绝室内言谈。",
+   "witnesses": [
+    "bg_bamboo_grove_groundskeeper"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "九条",
+   "近卫",
+   "西园寺",
+   "鹰司",
+   "一条",
+   "三条",
+   "德大寺",
+   "花山院",
+   "大炊御门",
+   "今出川",
+   "正亲町",
+   "冷泉"
+  ],
+  "given_female": [
+   "千代子",
+   "华子",
+   "纱荣子",
+   "雅子",
+   "芙美子",
+   "绫乃",
+   "静江",
+   "百合子",
+   "雪江",
+   "美津子",
+   "琴音",
+   "真由美"
+  ],
+  "given_male": [
+   "清隆",
+   "宗宪",
+   "显通",
+   "义久",
+   "忠邦",
+   "直纯",
+   "景光",
+   "康晴",
+   "宣仁",
+   "博信",
+   "泰明",
+   "和彦"
+  ],
+  "given_neutral": [
+   "千岁",
+   "时雨",
+   "朝阳",
+   "白雪",
+   "红叶",
+   "清流",
+   "秋水",
+   "深山",
+   "松籁",
+   "玉泉",
+   "风早",
+   "明石"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "{family}当主"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}执事"
+   },
+   {
+    "gender": "any",
+    "pattern": "大小姐"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}阁下"
+   },
+   {
+    "gender": "any",
+    "pattern": "少当主"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "保留主从倒错、债务清算与暗室拉扯的主线。改动：女家督固定为女性；女家督高压反应从“褪衣直面契约”改为撕契约驳条款，亲密表达挪到“账算清之后”，避免以身抵债；执事壁咚台词保留，去掉“看清一个男人的力量”的压迫意味；分家少佐删去“撕碎和服”和以枪迫人就范的性威胁，亲密倾向改为宿敌式较劲；叔母表达去掉交换意味；原“同父异母”转折会让主线变成血亲，改为“老当主私订婚约、叔母烧婚书构陷”；转换为项目格式。",
+ "player_identities": [
+  {
+   "age_range": [
+    28,
+    36
+   ],
+   "baseline": "三年前因触怒上任家督被构陷私吞公款当众赶出红叶别庄，如今以东京正金银行特别债权清算全权代表身份重返别庄，手握别庄全部地产抵押公证书。",
+   "gender": "any",
+   "id": "pc_expelled_chief_steward_creditor",
+   "reputation": "金融界手腕冷酷铁血的新贵清算官，但在九条家老仆眼中是一个背叛旧主的危险复仇者。",
+   "resources": [
+    "锁在牛皮公文包内的全套九条家丝绢期货巨额亏空原始底单与查封执行令",
+    "熟悉这座百年洋馆每一处隐秘逃生夹墙暗道与书斋保险箱暗锁构造"
+   ],
+   "risks": [
+    "若无法在暴风雨结束前促成债务重组签约，银行董事会将强行启动司法破产拍卖没收全部抵押"
+   ],
+   "role": "执掌正金银行千万债权之前任九条家总管执事",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}执事"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    33
+   ],
+   "baseline": "父亲骤逝后独自接管负债累累的家族实业，外表傲慢优雅严守华族体统，内心孤注一掷誓死不让九条家门楣在自己手中蒙羞覆灭。",
+   "gender": "any",
+   "id": "pc_patrician_arrogant_female_head",
+   "reputation": "东京名媛圈公认的高岭之花，以冷艳矜持、寸步不让著称的骄傲女家督。",
+   "resources": [
+    "掌管九条家世代相传的赤金家督印鉴与别庄金库唯一黄金钥匙",
+    "在贵族院政友会各大元老议员圈层中拥有深厚血缘人脉庇护"
+   ],
+   "risks": [
+    "一旦破产公诸报端，九条家将被宫内省彻底除名褫夺爵位，宗族宗亲将如恶狼般分食残余祖产"
+   ],
+   "role": "临危受命苦撑门楣之名门九条家新任女当主",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}当主"
+    },
+    {
+     "gender": "any",
+     "pattern": "大小姐"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    29,
+    37
+   ],
+   "baseline": "驻扎沼津联队的现役陆军炮兵少佐，借避风雨之名率四名配枪宪兵强行进驻别庄，暗中与东京投机政客勾结企图趁乱夺取家督大权。",
+   "gender": "any",
+   "id": "pc_renegade_collateral_heir_cousin",
+   "reputation": "野心勃勃、作风专横暴戾的军部少壮派军官，对正统嫡系充满刻骨嫉恨。",
+   "resources": [
+    "随身携带的南部十四式军用手枪与宪兵特许同行通行证",
+    "持有分家十三位族老联名推举其继承宗家家督之委任状底本"
+   ],
+   "risks": [
+    "私带军队宪兵介入民事债务纠纷属于违抗军纪重罪，一旦被宪兵司令部彻查将面临军法审判"
+   ],
+   "role": "觊觎爵位家产之分家庶出堂兄兼陆军参谋",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}少佐"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}少爷"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    35,
+    45
+   ],
+   "baseline": "贴身侍奉当主日常起居与茶事，深知当主与执事当年反目被逐之全部隐情，在暗流涌动的别庄中恪守规矩冷眼旁观。",
+   "gender": "any",
+   "id": "pc_silent_tea_master_maid_confidante",
+   "reputation": "寡言少语、行事如机械般精准无情的铁面管事女官，深受老夫人信赖。",
+   "resources": [
+    "掌握洋馆所有门禁、更衣密室与酒窖主铜钥匙串",
+    "随身携带别庄历代主人起居注手札与祖传御医调配之安神药散"
+   ],
+   "risks": [
+    "掌握上代家督暴毙前夕立下的真正遗嘱原本，随时面临被各方灭口之致命杀机"
+   ],
+   "role": "冷眼洞悉内宅宿怨之奉公二十载首席女仆长",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}掌事"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}女史"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    38,
+    48
+   ],
+   "baseline": "奉命前来公证债务抵押移交契约，因泥石流受困山庄，在法理良知与巨额贿赂诱惑之间剧烈挣扎摇摆。",
+   "gender": "any",
+   "id": "pc_destitute_family_notary_solicitor",
+   "reputation": "行事谨慎滴水不漏但生性胆怯懦弱的书生律师，极重名节声誉。",
+   "resources": [
+    "大日本帝国司法省官方备案的公证律师钢印与整套羊皮纸法定公证书",
+    "精通昭和民法典所有关于华族财产信托、破产保全与质押转让之法律漏洞"
+   ],
+   "risks": [
+    "若签署虚假公证文书将面临吊销律师执业执照并处三年以上徒刑之灭顶之灾"
+   ],
+   "role": "滞留别庄见证签约之宗族专属法律顾问",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}律师"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}先生"
+    }
+   ]
+  }
+ ],
+ "premise": "昭和初年暴雨夜，名门九条家因丝绢期货彻底暴雷面临破产清算。新任女家督退居断崖红叶别庄企图以祖传古砚抵押还债。然而登门的特使债权人，正是三年前被家族当众逐出家门的前任执事。外有风暴泥石流封死山道，内有清算最后通牒与私生子夺嫡密约。在烛火摇曳的密闭和室内，白昼的高傲尊严在债务契约前寸寸崩解，唯有正视利害翻盘方能保全家业。",
+ "pressures": [
+  {
+   "choice": "是当主妥协接受由特使独家全权托管家族实业二十年，还是坚持以祖传古砚折价担保对赌？",
+   "exits": [
+    {
+     "cost": "九条家实业经营大权彻底旁落特使之手，且当主面临宗族亲友无休止之指责攻讦",
+     "option": "当主签署由特使掌管全盘经营权之重组契约，换取银行全额撤销破产拍卖程序"
+    },
+    {
+     "cost": "特使将承担连带破产赔偿之个人巨额法律责任，随时面临被银行董事会开除除名",
+     "option": "特使以个人职业生涯与保证金为担保强行向总行电传申请延期二十四小时"
+    }
+   ],
+   "far": {
+    "consequence": "九条家被宫内省除名爵位，红叶别庄连同世代祖产遭法院廉价拍卖充抵债务，当主沦为破落贫民流落街头。",
+    "due_days": 1,
+    "trigger": "午夜零点钟声敲响且未达成有效协议"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_creditor_fountain_pen_approach",
+    "hk_head_fan_approach"
+   ],
+   "id": "p_bank_midnight_foreclosure_deadline",
+   "immediate": {
+    "minutes": 15,
+    "text": "大厅落地大钟已敲响十一点半钟声，指针距离死线仅余半小时。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "villa_master_bedroom_western_suite"
+   ],
+   "near": {
+    "deadline_minutes": 35,
+    "text": "若未在死线前签字，银行电传将通报各大报馆，九条家破产消息将传遍东京引起挤兑覆灭。"
+   },
+   "objective": "在午夜钟声敲响前完成债务重组条款磋商并取得双方有效签署盖印。",
+   "source": "institution",
+   "start_minute": 1290,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "title": "正金银行午夜十二点终局查封清算死线",
+   "trigger": "东京银行总部电报设定之最后宽限时限为午夜零点，若时限前未能回传有效资产质押签字，电传将自动向警视厅下达强制破产拍卖令。"
+  },
+  {
+   "choice": "是依托主卧厚重橡木大门死守待援，还是下楼与少佐在大厅当面持刀对峙？",
+   "exits": [
+    {
+     "cost": "别庄大厅部分名贵油画与先祖陈设将被少佐宪兵疯狂砸毁搜查造成巨大财产损毁",
+     "option": "特使与当主合力启动洋馆暗道将印鉴转移至悬崖茶室，并点燃壁炉引燃烟道警报"
+    },
+    {
+     "cost": "律师遭受少佐军刀毒打重伤致残，且彻底激怒少佐陷入困兽犹斗之疯癫",
+     "option": "公证律师挺身而出宣读军纪法规并出示宪兵司令部加急通牒强行逼退少佐"
+    }
+   ],
+   "far": {
+    "consequence": "当主被强行软禁送入疗养院终身监禁，特使被冠以金融汉奸罪名投入军部死牢灭口。",
+    "due_days": 1,
+    "trigger": "少佐全面控制别庄金库与家督印鉴"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_cousin_gun_approach",
+    "hk_cousin_blade_approach"
+   ],
+   "id": "p_cousin_military_seizure_threat",
+   "immediate": {
+    "minutes": 10,
+    "text": "宪兵皮靴踏碎大厅名贵花瓶，拉栓上膛之金属撞击声在走廊清晰可闻。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "一旦少佐破门夺印，别庄将彻底沦为军部军需工厂，全员沦为其案板鱼肉任其宰割。"
+   },
+   "objective": "解除少佐武装或调动法理与外部权威将其逼退，保全家督金印与人身安全。",
+   "source": "person",
+   "start_minute": 1380,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "分家少佐率持枪宪兵武装夺印夺嫡危机",
+   "trigger": "分家少佐借口战备演习强行封闭别庄各处出口，带宪兵上膛持枪逼近二楼，企图武力强夺家督印鉴并软禁当主。"
+  },
+  {
+   "choice": "是派仆役冒死涉水抢通后山马厩备用小道，还是全员集中于二楼高处洋馆以防泥流倒灌？",
+   "exits": [
+    {
+     "cost": "作业人员极易坠崖粉身碎骨，且特使遭受严重风雨冻伤与外伤骨折",
+     "option": "特使与老杂役合力冒暴雨攀上悬崖外壁斩断受拉扯之老藤加固茶室地基"
+    },
+    {
+     "cost": "茶室内陈列之全部九条家世代墨宝真迹将随茶室坠入万丈深渊化为乌有",
+     "option": "彻底弃守幽竹茶室全员退缩入二楼西洋套房闭门自保"
+    }
+   ],
+   "far": {
+    "consequence": "别庄全盘垮塌葬身泥淖深渊，洋馆内全员无一生还，九条家百年典籍烟消云散。",
+    "due_days": 1,
+    "trigger": "泥石流完全冲垮洋馆主承重山墙"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_maid_tea_approach",
+    "hk_creditor_cliff_observe"
+   ],
+   "id": "p_typhoon_mudslide_blackout_crisis",
+   "immediate": {
+    "minutes": 15,
+    "text": "大厅煤气灯骤然熄灭，外界狂风从破损窗户灌入吹熄蜡烛，室内温度急剧骤降。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "near": {
+    "deadline_minutes": 40,
+    "text": "若半时辰内无法排查悬崖地基，附属幽竹茶室面临整体滑坠万丈深渊之覆顶之灾。"
+   },
+   "objective": "在洋馆地基塌方前排查危险区域，抢修应急煤气灯并稳固正门那道生铁花门。",
+   "source": "nature",
+   "start_minute": 45,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "伊豆台风泥石流冲垮断崖暗道绝境",
+   "trigger": "特大暴雨引发深山泥石流轰然冲垮别庄下山唯一木桥，狂风刮倒高压电杆导致全洋馆断电陷入死寂黑暗，山体滑坡正逼近茶室悬崖地基。"
+  },
+  {
+   "choice": "是当主当场承认老家督托孤遗愿完成权力交接，还是认定该遗嘱属无效瑕疵文书？",
+   "exits": [
+    {
+     "cost": "彻底丧失直接合法全盘接收家族所有资产之法律王牌，完全退回对等谈判境地",
+     "option": "特使亲手将写有自己继承权之真正遗嘱原本投入地炉烧毁，以示绝不以此逼迫当主"
+    },
+    {
+     "cost": "面临华族宗族法庭严厉弹劾，当主将正式被剥夺公爵贵族院世袭特权",
+     "option": "当主大方在遗嘱背面签署承认加注令，宣布与特使平分家业共享家督权益"
+    }
+   ],
+   "far": {
+    "consequence": "九条家陷入长达数年的旷日持久财产诉讼泥潭，资产全数被司法冻结烂死账底。",
+    "due_days": 2,
+    "trigger": "遗嘱真伪之争公诸法庭"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_maid_keys_request",
+    "hk_head_tea_request"
+   ],
+   "id": "p_concubine_son_will_forgery",
+   "immediate": {
+    "minutes": 10,
+    "text": "遗嘱字迹在炭火烘烤下逐渐模糊，各方目光剧烈震动陷入死一般寂静。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "villa_detached_bamboo_tea_pavilion"
+   ],
+   "near": {
+    "deadline_minutes": 30,
+    "text": "若无法在两刻钟内达成一致，分家少佐将以此为由指控当主伪造继承犯下欺君诈欺罪。"
+   },
+   "objective": "查验该遗嘱之法律效力，平息两代家督之间的权位道德认知地震。",
+   "source": "accident",
+   "start_minute": 135,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "上代家督遗嘱真伪之辩与除名风波",
+   "trigger": "女仆长在交涉中失手打翻茶水浸湿暗格密卷，显露出上代家督生前签署之真正遗嘱草本，上面赫然写着若发生暴雷，当主需将全部家产托付与前任执事。"
+  },
+  {
+   "choice": "是当主出示司法省人事监察通牒当堂威吓，还是特使以正金银行终身法律顾问年薪反向收买？",
+   "exits": [
+    {
+     "cost": "构成对司法公证人员之暴力侵害公诉罪名，特使面临被警视厅立案逮捕拘留风险",
+     "option": "特使快步上前一拳将律师砸翻在地抢夺公证钢印，并当场撕毁伪造公证书"
+    },
+    {
+     "cost": "九条家必须承担巨额额外财政背书开销，且为家族法务埋下一颗不诚实之定时炸弹",
+     "option": "当主承诺事后由九条家全额承担律师事务所全部债务并聘其为终身宗族法官"
+    }
+   ],
+   "far": {
+    "consequence": "九条家嫡系被合法剥夺一切反诉权利，当主与特使被依法驱逐出红叶别庄流离失所。",
+    "due_days": 1,
+    "trigger": "伪造公证书完成全套合法盖印"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_lawyer_briefcase_request",
+    "hk_aunt_rosary_approach"
+   ],
+   "id": "p_notary_solicitor_bribe_defect",
+   "immediate": {
+    "minutes": 10,
+    "text": "律师握着钢印的手颤抖着悬在印泥上方仅差半寸，冷汗滴落浸湿羊皮纸。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "villa_first_floor_grand_hearth_parlor"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "一旦钢印落下盖妥，分家在法律上即刻成为合法所有人，警视厅明日将强制配合分家接管。"
+   },
+   "objective": "在钢印彻底落下生效之前，夺下伪造文书或以绝对底牌迫使律师弃暗投明。",
+   "source": "money",
+   "start_minute": 210,
+   "tags": [
+    "crime",
+    "workplace_power"
+   ],
+   "title": "公证律师临阵受贿变节改签死局",
+   "trigger": "分家叔母将一张面额五万日元之帝国支票拍在律师面前，勒令其在伪造之分家接管公证书上加盖司法省钢印，律师心理防线全面崩溃即将落印。"
+  },
+  {
+   "choice": "是特使强行用身体撞碎防盗橡木门夺下烛火，还是隔着门扉以真情剖白唤其收手？",
+   "exits": [
+    {
+     "cost": "特使后背遭受重度三度烧伤残疾，彻底失去单手敏捷行动能力",
+     "option": "特使冒着烈焰破门而入扑灭烛火，用自身后背为当主遮挡倒塌燃烧之木梁"
+    },
+    {
+     "cost": "翻墙过程极度凶险极易坠落万丈悬崖，且当主吸入浓烟遭受重度呼吸道灼伤",
+     "option": "女仆长引导特使从二楼外墙阳台悬空翻入窗户夺下打火石化解危机"
+    }
+   ],
+   "far": {
+    "consequence": "女当主香消玉殒葬身火海，红叶别庄化为焦黑废墟瓦砾，所有人财物与历史一炬成灰。",
+    "due_days": 1,
+    "trigger": "主卧全面引燃蔓延整座洋馆"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_head_mirror_observe",
+    "hk_creditor_fountain_pen_approach"
+   ],
+   "id": "p_arrogant_suicide_ultimatum",
+   "immediate": {
+    "minutes": 10,
+    "text": "门缝中已透出刺鼻浓烈煤油气味与一缕黑烟，室内传来当主冰冷绝望之决别宣誓。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "villa_master_bedroom_western_suite"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "火苗一旦接触松木床架，整座百年木结构洋馆将在三分钟内陷入漫天火海无可挽回。"
+   },
+   "objective": "在烈火蔓延烧毁整座洋馆之前，破门解除其自尽危机并唤醒其求生斗志。",
+   "source": "person",
+   "start_minute": 255,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "高岭女当主玉石俱焚引火自焚绝路",
+   "trigger": "女当主见外围宪兵逼近大门、宗族豺狼步步紧逼，傲骨难耐绝望之下反锁主卧，将煤油泼洒于四柱床与珍贵藏书之上，手握燃烧洋烛誓与别庄同归于尽。"
+  }
+ ],
+ "region": "伊豆修善寺深山断崖上的九条家红叶山庄",
+ "rules": [
+  {
+   "id": "r_debt_liquidation_midnight_deadline",
+   "text": "凡持有正金银行承兑本票之债权特使，在约定时限前拥有核查别庄一切动产、账簿及封存库房之法定调查特权。"
+  },
+  {
+   "id": "r_family_ancestral_heirloom_pledge",
+   "text": "九条家列祖所赐御笔屏风与丹波古砚严禁私自质押转让，违者由宗族长老会当场削夺继承家督资格。"
+  },
+  {
+   "id": "r_typhoon_curfew_iron_gate_seal",
+   "text": "泥石流暴雨期间别庄正门那道生铁花门落锁封死，非遇洋馆火灾变故，私自攀翻围墙者按夜贼交警署严惩。"
+  },
+  {
+   "id": "r_private_audience_chambers_curtain",
+   "text": "当主于幽竹茶室会晤外客，帘外须常设贴身女官一名垂首侍立，帘内未传唤撤屏，帘外人不得窥探室内。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "壁炉前冷眼故交",
+  "committed": "撕毁契约的同盟",
+  "familiar": "障子内的暗室对手",
+  "flirting": "笔锋交错的逼近",
+  "intimate": "雷雨长廊的相拥",
+  "stranger": "断桥边的宿怨债主",
+  "testing": "家名与清算的赌局"
+ },
+ "status": "released",
+ "style_hint": "昭和旧华族衰亡期的精致与压抑：潮湿和服下摆的沙沙声、伽罗沉香混着秋雨泥土、钢笔划过债务清册的刮擦、障子纸上修长的倒影。对话克制而锋芒毕露，满是敬语机锋；暗室里尊卑剧烈翻转，褪去假面后是自愿的较劲。",
+ "tension_engines": [
+  {
+   "id": "te_patrician_pride_vs_financial_ruin",
+   "text": "华族名门不可侵犯之森严尊严门楣与现代金融资本无情债务清算破产的殊死较量"
+  },
+  {
+   "id": "te_master_servant_reversal_retribution",
+   "text": "昔日被逐家仆化身掌控生杀大权之冷酷债主与高岭大小姐在密室中的主从身份彻底倒错"
+  },
+  {
+   "id": "te_ancestral_heirloom_vs_survival_pawn",
+   "text": "世代宗族神圣不可让渡之列祖信物与残酷现实苟全性命之间之两难抉择"
+  },
+  {
+   "id": "te_military_coercion_vs_legal_remedy",
+   "text": "封建狂躁少佐动用宪兵暴力夺嫡与法理公证重组契约在断路洋馆中的刀锋对垒"
+  }
+ ],
+ "title": "红叶别庄夜雾：华族女家督与债主执事",
+ "tone": [
+  "华族旧梦",
+  "主从倒错",
+  "和风幽玄",
+  "契约拉扯"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_izu_1",
+   "requires": [],
+   "text": "女仆长在整理上代家督遗物书信暗匣时，赫然发现一份由东京正金银行前任行长签署之绝密底单，证实九条家丝绢期货暴雷实为政友会内阁联合数家财阀蓄意做空瓜分华族资产之阴谋，特使当年被逐正是上代家督为保护其不被金融黑幕灭口而痛下之苦肉计。"
+  },
+  {
+   "category": "人事",
+   "id": "t_izu_2",
+   "requires": [],
+   "text": "随分家少佐进驻别庄之宪兵伍长突然反水倒戈，当众出示陆军省宪兵司令部加急拘捕特令，证实少佐早已因贪墨军资被除籍停职，此次擅自带兵闯入私宅强行夺印纯属亡命暴徒之武装勒索犯罪。"
+  },
+  {
+   "category": "资源",
+   "id": "t_izu_3",
+   "requires": [],
+   "text": "被当主视作最后救命底牌之‘列祖御赐丹波古砚’，在特使当场借火光刮验之下，被证实早在三年前便已被已故老当主私下变卖调包为仿品，匣中仅是一方毫无文物价值之寻常青石仿砚。"
+  },
+  {
+   "category": "制度",
+   "id": "t_izu_4",
+   "requires": [],
+   "text": "递送员送达宫内省宗秩寮特急封函，宣布昭和天皇已于今日清晨正式颁发华族统制令，凡逾期未清偿银行债务之华族一律自动剥夺公爵爵位与免税特权，任何宗族私下委任公证均属违法。"
+  },
+  {
+   "category": "时限",
+   "id": "t_izu_5",
+   "requires": [
+    "pressure"
+   ],
+   "text": "大厅古典挂钟突遭雷击机械停摆，而特使手腕上的瑞士金怀表明明白白显示，实际时间比挂钟快了整整二十五分钟，距离银行午夜终局清算死线仅剩最后不到七分钟！"
+  },
+  {
+   "category": "关系",
+   "id": "t_izu_6",
+   "requires": [
+    "patrician_widow_dowager_aunt",
+    "expelled_chief_steward_creditor"
+   ],
+   "text": "分家叔母{patrician_widow_dowager_aunt.name}在歇斯底里争吵中当众吐露隐情：前任执事{expelled_chief_steward_creditor.name}并非捡拾家奴，而是老当主故交遗孤，老当主生前早已为执事与女当主私订婚约；正是叔母当年烧了婚书、捏造假账把执事逐出家门！"
+  },
+  {
+   "category": "意外",
+   "id": "t_izu_7",
+   "requires": [],
+   "text": "断崖茶室地基在百年泥石流冲击下发生剧烈滑坡大塌方，连接主洋馆与茶室之风雨回廊轰然断裂崩塌坠入万丈深渊，茶室瞬间化为悬挂于悬崖峭壁之上的绝命孤岛！"
+  }
+ ]
+}

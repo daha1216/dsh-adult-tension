@@ -1,0 +1,2456 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "年满二十二岁与邮轮签署正规劳动合同的正职客房管家。",
+   "age_range": [
+    22,
+    25
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_patrolling_steward",
+   "line": "{npc.name}：夜深了，两位新婚贵宾若还需要加冰香槟，请随时拉动门边的黄铜唤铃。",
+   "location_ids": [
+    "honeymoon_presidential_suite"
+   ],
+   "name": null,
+   "role": "头等舱客房巡值管家"
+  },
+  {
+   "adult_context": "年满二十一岁的正规持枪随船安保队员。",
+   "age_range": [
+    21,
+    24
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_deck_sentry_marine",
+   "line": "{npc.name}：外面风力已经达到十级，长官严令所有乘客立即返回客舱，请出示房卡！",
+   "location_ids": [
+    "deck_first_class_promenade"
+   ],
+   "name": null,
+   "role": "甲板持械护卫"
+  },
+  {
+   "adult_context": "年满二十四岁从事轮机重体力作业的签约技术工。",
+   "age_range": [
+    24,
+    26
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_bilge_boiler_stoker",
+   "line": "{npc.name}：快钻进来，我拿蒸汽管道阀门掩护你们，安保那些人受不了这热气！",
+   "location_ids": [
+    "bilge_radio_communications_room"
+   ],
+   "name": null,
+   "role": "底舱检修司炉工"
+  },
+  {
+   "adult_context": "年满二十岁具备海员证的正职航海值更水手。",
+   "age_range": [
+    20,
+    23
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_lifeboat_lookout",
+   "line": "{npc.name}：听说两个小时前三号货舱发现了空箱，安保队现在疯了一样在顶层挨个抓人。",
+   "location_ids": [
+    "deck_first_class_promenade"
+   ],
+   "name": null,
+   "role": "救生艇甲板值更水手"
+  },
+  {
+   "adult_context": "年满二十一岁的合法正式受聘客房侍从。",
+   "age_range": [
+    21,
+    24
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_mirror_reflection_dummy",
+   "line": "{npc.name}：干净毛巾放在架子上了，安保长官在隔壁敲门呢，夫人您可得小心应对呀。",
+   "location_ids": [
+    "ensuite_marble_bathroom"
+   ],
+   "name": null,
+   "role": "特许客房保洁侍从"
+  },
+  {
+   "adult_context": "年满二十二岁的安保特勤队员。",
+   "age_range": [
+    22,
+    25
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_casino_cashier_guard",
+   "line": "{npc.name}：未持贵宾邀请函者不得在此滞留，请后退，否则我们将按公海安保规程搜查！",
+   "location_ids": [
+    "deck_first_class_promenade"
+   ],
+   "name": null,
+   "role": "贵宾厅筹码兑换守卫"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "你以密码参谋身份下达破密指令，{senior_spy_partner_elena.name}在床头挽臂轻笑掩护，{security_chief_inquisitor_kane.name}按枪站在门外步步盘查，假戏真做与反间谍嗅觉在咫尺之间交锋。",
+   "id": "combo_partner_suite_cover",
+   "identity_ids": [
+    "elite_codebreaker_specialist"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "senior_spy_partner_elena",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 4
+     },
+     "reason": "虽受纪律约束，但在生死边缘的贴身掩护中产生了深层情感依赖。",
+     "stage": "flirting"
+    },
+    {
+     "a": "senior_spy_partner_elena",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "security_chief_inquisitor_kane",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "你死我活的敌对职业反间谍死敌。",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "security_chief_inquisitor_kane",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 1
+     },
+     "reason": "门里破密，门外盘查，彼此都在等对方先露出破绽。",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "senior_spy_partner_elena",
+    "security_chief_inquisitor_kane"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在安保破门前完成暗号确认并维持新婚伪装完好无损。",
+    "limit_gap": "门外安保长官寸步不退，室内搭档必须把恩爱戏演到滴水不漏。",
+    "meeting_reason": "总统套房内紧急核验破译出的微缩胶卷暗号坐标。",
+    "resource_gap": "参谋掌握母港最高撤离密令，特工搭档唯有一把麻醉枪与过人胆识。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_wiretap_vs_true_conspiracy",
+    "te_fake_honeymoon_vs_iron_discipline"
+   ]
+  },
+  {
+   "chemistry": "{security_chief_inquisitor_kane.name}悍然推开套房大门长驱直入，{senior_spy_partner_elena.name}拉着你退入水雾弥漫的浴室反锁，花洒轰鸣，两人在门后屏息拔枪，猎人与猎物的位置瞬息万变。",
+   "id": "combo_inquisitor_bathroom_raid",
+   "identity_ids": [
+    "rookie_field_agent"
+   ],
+   "player_positions": [
+    "equal",
+    "low"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 5
+     },
+     "b": "senior_spy_partner_elena",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "并肩赴死结下的绝对战友信任与心照不宣的情感默契。",
+     "stage": "intimate"
+    },
+    {
+     "a": "security_chief_inquisitor_kane",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "player",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "将其定性为必须挖出身份的重点间谍嫌疑人。",
+     "stage": "stranger"
+    },
+    {
+     "a": "senior_spy_partner_elena",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "security_chief_inquisitor_kane",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 1
+     },
+     "reason": "交过手的老对手，一个在演，一个在拆戏。",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "senior_spy_partner_elena",
+    "security_chief_inquisitor_kane"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "借水汽掩护迫使安保主管放弃强闯退回走廊。",
+    "limit_gap": "水雾死角无法视物，任何声响误判都将导致拔枪交火。",
+    "meeting_reason": "安保突袭套房进行非法入室暴力搜查。",
+    "resource_gap": "安保主管手握全副武装突击队，特工唯有浴室地形与手中短刀。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_wiretap_vs_true_conspiracy",
+    "te_security_purge_vs_blindzone_clock"
+   ]
+  },
+  {
+   "chemistry": "{security_chief_inquisitor_kane.name}率队封死甲板通道步步搜查，{arms_heiress_guest_clara.name}倚门冷笑以豪门特权挡住去路，你在千金阳台阴影下悬空攀爬，贵女的傲慢与安保的枪口正面碰撞。",
+   "id": "combo_heiress_balcony_escape",
+   "identity_ids": [
+    "stowaway_mechanic_runner"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 3
+     },
+     "b": "arms_heiress_guest_clara",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "萍水相逢的逃亡避难，在千金骄纵外表下见到了难得的善意。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "security_chief_inquisitor_kane",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 1
+     },
+     "b": "arms_heiress_guest_clara",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 1
+     },
+     "reason": "心知肚明其窝藏嫌犯，但忌惮其家族势力不敢硬来。",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "security_chief_inquisitor_kane",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 0
+     },
+     "reason": "在逃的底舱杂工与搜船的安保总长，撞上就是一场追捕。",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "arms_heiress_guest_clara",
+    "security_chief_inquisitor_kane"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "借助千金特权阻截追兵赢得潜入发报室的关键空档。",
+    "limit_gap": "安保欲跨入名媛私领搜查，千金借题发挥痛斥侵犯尊严。",
+    "meeting_reason": "杂工被追捕逃入千金套房阳台避难借道。",
+    "resource_gap": "千金拥有船东黑金特权，底舱杂工身处被捕处死边缘。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_storm_containment_vs_ocean_isolation",
+    "te_security_purge_vs_blindzone_clock"
+   ]
+  },
+  {
+   "chemistry": "{purser_code_operator_marcus.name}在铁壁发报室内汗流浃背敲击电键，{senior_spy_partner_elena.name}持枪死守水密铁门，你手持外交公文与微缩胶卷倒数读秒，电波与铁血守备在雷暴中同频共振。",
+   "id": "combo_radio_room_last_sprint",
+   "identity_ids": [
+    "undercover_consular_attache"
+   ],
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 5
+     },
+     "b": "senior_spy_partner_elena",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "特情局同僚默契配合，在外交与行动两条战线上互为臂膀。",
+     "stage": "familiar"
+    },
+    {
+     "a": "purser_code_operator_marcus",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "senior_spy_partner_elena",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "严格按预定代号接头的线人，信守承诺以死捍卫发射窗口。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "purser_code_operator_marcus",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "在机油与电火花中结成的技术攻守阵线。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "senior_spy_partner_elena",
+    "purser_code_operator_marcus"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在雷达盲区归零前将全部绝密数据无损发回母港。",
+    "limit_gap": "水密门一旦关闭无法从外打开，必须在门内完成全部发报。",
+    "meeting_reason": "底舱检修暗室内紧急启动高频光电扫描发射程序。",
+    "resource_gap": "外交随员拥有免检公文袋，发报员唯有一台老旧电台与三分钟天线时间。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_security_purge_vs_blindzone_clock",
+    "te_wiretap_vs_true_conspiracy"
+   ]
+  },
+  {
+   "chemistry": "{disavowed_cleaner_viktor.name}在吧台前微笑着推过特调，指缝间露出匕首寒芒，{senior_spy_partner_elena.name}按住酒杯反手扣住其腕脉，你不动声色立于身侧成掎角之势，杀手与特工达成势均力敌的雨夜休战。",
+   "id": "combo_cleaner_bartender_pact",
+   "identity_ids": [
+    "rookie_field_agent"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 3
+     },
+     "b": "disavowed_cleaner_viktor",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 3
+     },
+     "reason": "深知其双手沾满血腥，但此刻为了生存必须与虎谋皮。",
+     "stage": "testing"
+    },
+    {
+     "a": "senior_spy_partner_elena",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 3
+     },
+     "b": "disavowed_cleaner_viktor",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 3
+     },
+     "reason": "老对手相遇互知底细，以专业实力赢得彼此暂时的停火敬意。",
+     "stage": "testing"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "senior_spy_partner_elena",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "经历数次生死考验后确立的无条件生死相托盟约。",
+     "stage": "committed"
+    }
+   ],
+   "slots": [
+    "senior_spy_partner_elena",
+    "disavowed_cleaner_viktor"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "策反职业清理人倒戈共同对付全船安保武装。",
+    "limit_gap": "杀手受命清洗全员，特工誓死自卫，彼此在咫尺间试探杀意。",
+    "meeting_reason": "回廊酒吧暗角处进行生死攸关的反水谈判。",
+    "resource_gap": "清理人拥有整艘船的除痕手段，特工拥有胶卷真相与退路通道。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_fake_honeymoon_vs_iron_discipline",
+    "te_security_purge_vs_blindzone_clock"
+   ]
+  },
+  {
+   "chemistry": "{security_chief_inquisitor_kane.name}持枪在贵宾厅入口拉起警戒线大举盘查，{casino_card_counter_lucas.name}以秒表卡准视线死角，掩护你在更衣柜暗格掉换胶卷，在枪口眼皮底下极限游走。",
+   "id": "combo_counter_vault_heist",
+   "identity_ids": [
+    "double_agent_sleeper"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "casino_card_counter_lucas",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "多次在赌场暗中传递情报培养出的精密技术默契。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "security_chief_inquisitor_kane",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "casino_card_counter_lucas",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "视作擅长玩弄心机的狡诈赌徒重点搜捕对象。",
+     "stage": "stranger"
+    },
+    {
+     "a": "security_chief_inquisitor_kane",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 1
+     },
+     "b": "player",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 1
+     },
+     "reason": "呼来喝去的底层侍从，但在封锁期间同样受到枪口监视。",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "casino_card_counter_lucas",
+    "security_chief_inquisitor_kane"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在安保彻底搜查前将胶卷安全转移出贵宾厅封锁圈。",
+    "limit_gap": "警报声四起，任何多余眼神交流都会引来当场开枪。",
+    "meeting_reason": "贵宾厅死角交接藏有胶卷的特制打火机道具。",
+    "resource_gap": "安保头目拥有封锁全厅武力，精算师与侍从唯有怀中秒表与假餐巾。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_security_purge_vs_blindzone_clock",
+    "te_storm_containment_vs_ocean_isolation"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_bathroom_steam_whisper",
+   "reach": "浴室内飞溅水流与排风机轰鸣掩盖下，两人相隔半寸的极轻低语。",
+   "text": "水汽轰鸣贴耳私语"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_suite_wiretap_pickup",
+   "reach": "天花板吊灯内微型无线拾音头传送到安保总控室耳机的音频信号。",
+   "text": "客房隐蔽无线收音"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_crew_corridor_gossip",
+   "reach": "在轮机舱与配餐通道内各怀心思的底层侍从水手辗转相传的走样流言。",
+   "text": "船员通道杂音传闻"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "年满二十二岁的情报局一级正式外勤行动特工，具备独立指挥行动权限。",
+   "age_range": [
+    22,
+    24
+   ],
+   "appearance_options": [
+    "身穿黑色露背丝绒晚礼服，发髻高挽戴珍珠项链，锁骨修长，眼眸冷若清潭却红唇如火。",
+    "换穿浅灰丝绸睡袍，未施粉黛神色冷峻，右手始终隐在袖中握着微型麻醉发射器。"
+   ],
+   "decision": {
+    "avoids": [
+     "自作聪明擅自脱离预定方案冒进者",
+     "在生死关头优柔寡断儿女情长之辈"
+    ],
+    "contrast": "公开场合千娇百媚极尽逢迎，密室死角内冷静利落拔枪杀伐。",
+    "core_value": "任务至上理性如铁，但绝不把并肩同行的搭档当做弃子牺牲。",
+    "goal_options": [
+     "在破晓前完好无损地将微缩胶卷光电发报回总部",
+     "引导搭档在严密监视下全身而退不留一丝破绽",
+     "在安保主管眼皮底下完成致命情报偷梁换柱"
+    ],
+    "never": [
+     "绝不抛下陷入重围的搭档独自乘坐逃生艇撤离。"
+    ],
+    "prefers": [
+     "临危不乱恪守纪律且能在高压下完美执行配合指令的专业搭档"
+    ],
+    "pressure_responses": {
+     "breaking": "后背紧贴冰冷瓷砖，呼吸急促用力抓紧搭档衣襟咬唇强抑震颤。",
+     "high": "反手将搭档护在身后，单手举枪指向房门，目光决绝毫无惧色。",
+     "low": "优雅挽住搭档手臂举杯巧笑，借侧头耳语报出环境威胁方位。",
+     "mid": "迅速拉搭档退入浴室反锁房门，拧开花洒冷声梳理突围路线。"
+    },
+    "relationship_stance": "外表清冷孤高对风月嗤之以鼻，内心深处渴望在谎言世界中得到一份真实归宿。",
+    "withdrawal": "退入浴室死角拉拢浴帘，借助水流轰鸣声封闭一切情感外露。"
+   },
+   "gender": "female",
+   "gender_reason": "伪装“新婚娇妻”的一级特工，固定性别不改变成年、自愿与清醒的亲密前提",
+   "id": "senior_spy_partner_elena",
+   "identity": {
+    "authority": "现场行动最高决断权，以及与后方母港潜艇撤离频道的联络密匙。",
+    "exposure": "一旦新婚破绽被安保主管抓获，不仅自身遭捕更会连累整个情报网被连根拔起。",
+    "hidden": "其实早已在过往多次配合中对搭档产生了超越纪律的深沉情愫，誓死相护。",
+    "limits": [
+     "受制于必须维持夫妻恩爱人设的铁律",
+     "不能在公海引发全面交火招致潜艇救援暴露"
+    ],
+    "obligations": [
+     "在雷达盲区内拿到微缩胶卷并确保搭档与自身零伤亡撤出邮轮。"
+    ],
+    "resources": [
+     "口红式单发麻醉飞镖两枚",
+     "伪装成晚宴手包的微型X光透视仪"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "枪口临近依然坚定回握的沉稳力量",
+     "危急时刻不惜以身相替挡住盘查的忠诚担当"
+    ],
+    "boundaries": [
+     "在窃听器有效监听范围内严禁任何动摇伪装的越界举动",
+     "任务未达成前严禁私人情感宣泄干扰判断"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "生死相托绝无虚饰的真实灵魂归宿",
+    "dislikes": [
+     "带着轻佻探究意味的上下打量",
+     "将专业演戏伪装与个人私欲混淆不清"
+    ],
+    "expression": "卸下耳坠以温热指尖轻碰对方脸颊止血，在安全距离外低声承诺活着回港。",
+    "likes": [
+     "水雾弥漫中无需言语的眼神默契",
+     "任务复盘时并肩坐于地板上的清醒平静"
+    ],
+    "preconditions": [
+     "新婚富豪假娇妻与对方都已完全清醒，眼前的危机已经解除",
+     "新婚富豪假娇妻出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "新婚富豪假娇妻",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "honeymoon_presidential_suite",
+     "to": 19
+    },
+    {
+     "from": 20,
+     "location_id": "ensuite_marble_bathroom",
+     "to": 79
+    },
+    {
+     "from": 80,
+     "location_id": "deck_first_class_promenade",
+     "to": 139
+    },
+    {
+     "from": 140,
+     "location_id": "honeymoon_presidential_suite",
+     "to": 1402
+    },
+    {
+     "from": 1403,
+     "location_id": "honeymoon_presidential_suite",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "消耗珍贵的掩护道具并面临被近距离端详微表情的风险。",
+      "option": "佯装倒翻红酒低笑应门"
+     },
+     {
+      "cost": "引来安保人员在走廊加设固定岗哨长期监视。",
+      "option": "退入浴室以正在更衣洗漱为由严词拒绝"
+     }
+    ],
+    "pressure": "若不立刻给出新婚夫妻的合理解释，房门将在十秒后被强行破开。",
+    "trigger": "安保长官在门外转动门把手，扬言接获走私举报进行搜查。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "花洒开到最大。听着，床头探头换了高灵敏型号……贴近我，别说话。",
+    "surface": "亲爱的，这瓶香槟的年份真合心意，今晚的公海夜色真是美极了。"
+   }
+  },
+  {
+   "adult_context": "年满二十三岁的航运集团特聘前军情反间谍安保长官，具备公海执法全权。",
+   "age_range": [
+    23,
+    26
+   ],
+   "appearance_options": [
+    "深蓝修身海军军官制服配高筒马靴，佩戴白手套，腰悬勃朗宁半自动手枪，面容如鹰隼般冷酷。",
+    "未戴军帽神色倨傲，手持便携式无线电探测器，领口别着反间谍徽章步履沉稳。"
+   ],
+   "decision": {
+    "avoids": [
+     "背景深厚持有强硬豁免权的高级外交官",
+     "亡命之徒式的无差别自杀式袭击"
+    ],
+    "contrast": "行事铁血狠辣毫无温情，却对忠于职责毫无私心的职业素养心存敬意。",
+    "core_value": "秩序压倒一切，任何完美的谎言在细节面前都会露出马脚。",
+    "goal_options": [
+     "在破晓前抓获潜伏于总统套房的特工小组人赃俱获",
+     "搜出藏在船上的微缩胶卷独揽功勋晋升",
+     "防范十二级暴风雨摧毁全船供电系统"
+    ],
+    "never": [
+     "绝不轻信任何嫌疑人单方面的口头证词与伪造证件。"
+    ],
+    "prefers": [
+     "破绽百出容易被言语攻破防线的慌乱目标"
+    ],
+    "pressure_responses": {
+     "breaking": "按住被暗算脱臼的手腕，咬牙后撤指示拉响全船警报。",
+     "high": "挥手喝令突击组携带破门撞锤与防暴盾牌封锁回廊。",
+     "low": "站在门外慢条斯理转动皮手套，语调冰冷出言试探。",
+     "mid": "拔枪上膛以枪柄叩门，下达三分钟开门通牒。"
+    },
+    "relationship_stance": "视所有人为潜在破坏分子，极度享受用心理战术击垮嫌疑人防线。",
+    "withdrawal": "撤至回廊尽头布置交叉火力点，架设红外侦测仪守株待兔。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "security_chief_inquisitor_kane",
+   "identity": {
+    "authority": "掌控全船六十名全副武装的护卫队，具备在公海羁押审讯任何可疑乘客的大权。",
+    "exposure": "若误捕引发跨国重大外交纠纷将立刻被集团推为替罪羊剥夺职位。",
+    "hidden": "其实早已暗中怀疑船东高层在利用邮轮从事走私洗钱，意图以此立功上位。",
+    "limits": [
+     "不能无故侵犯头等舱名流客人的外交豁免特权",
+     "受船长航海安全规程限制"
+    ],
+    "obligations": [
+     "在邮轮靠泊前截获潜入的间谍小组保全跨国集团核心机密。"
+    ],
+    "resources": [
+     "整艘邮轮电子门锁中央总控钥匙卡",
+     "各舱室窃听系统总机监听台调阅权"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在严酷审讯压迫下依然条理清晰的清冷胆识",
+     "身处绝境毫不崩溃的高阶特工意志"
+    ],
+    "boundaries": [
+     "严禁在公职搜查中进行侮辱人格的搜身行径",
+     "恪守职业审讯伦理绝不逾矩私相授受"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "令最强对手也不得不心悦诚服的铁血宿敌",
+    "dislikes": [
+     "哭天抢地的平庸求饶",
+     "毫无技术含量的拙劣谎言"
+    ],
+    "expression": "收枪入套退后半步正了正军帽，以平视目光冷硬致意并递上公平对决准许。",
+    "likes": [
+     "猫鼠游戏中势均力敌的智谋过招",
+     "识破高明伪装那一瞬间的智力征服感"
+    ],
+    "preconditions": [
+     "维多利亚号特勤安保总长与对方都已完全清醒，眼前的危机已经解除",
+     "维多利亚号特勤安保总长出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "维多利亚号特勤安保总长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "deck_first_class_promenade",
+     "to": 19
+    },
+    {
+     "from": 20,
+     "location_id": "honeymoon_presidential_suite",
+     "to": 79
+    },
+    {
+     "from": 80,
+     "location_id": "deck_first_class_promenade",
+     "to": 139
+    },
+    {
+     "from": 140,
+     "location_id": "honeymoon_presidential_suite",
+     "to": 1402
+    },
+    {
+     "from": 1403,
+     "location_id": "deck_first_class_promenade",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "引发头等舱贵宾强烈抗议导致船长直接介入问责。",
+      "option": "以防火巡检名义强制推门"
+     },
+     {
+      "cost": "套房内所有固定监控探头将同步断电盲区大增。",
+      "option": "拉下套房独立供电电闸制造被动"
+     }
+    ],
+    "pressure": "若不立刻破门搜查，关键物证将在雷达盲区内被彻底传输出境。",
+    "trigger": "无线电侦测仪在总统套房外侦测到微弱的高频震荡波信号。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "别演了，蜜月夫妻可不会在洗澡时用摩尔斯电码敲击水管……开门！",
+    "surface": "抱歉打扰两位新婚雅兴，例行安保排查，还请打开房门行个方便。"
+   }
+  },
+  {
+   "adult_context": "年满二十一岁的欧陆军火跨国集团合法法定继承人，拥有完全民事权利。",
+   "age_range": [
+    21,
+    23
+   ],
+   "appearance_options": [
+    "身穿浅金真丝斜裁吊带晚裙，披皮草短坎肩，佩戴硕大祖母绿耳坠，举手投足傲慢娇俏。",
+    "微醺斜倚在门廊雕花扶手上，手指把玩着一枚纯金火机，眼神慵懒却暗含审视。"
+   ],
+   "decision": {
+    "avoids": [
+     "阿谀奉承极尽谄媚的庸俗贵族",
+     "唯唯诺诺毫无担当之辈"
+    ],
+    "contrast": "外表是娇生惯养不知人间疾苦的军火千金，实则枪法精准胆识过人。",
+    "core_value": "厌弃冷血交易，寻找能够真正平等对待自己的清醒灵魂。",
+    "goal_options": [
+     "在破晓前测试隔壁新婚夫妻的真实身份底牌",
+     "借助特工力量摆脱家族管家的贴身监控摆布",
+     "保全自身平安在直布罗陀港口下船自立"
+    ],
+    "never": [
+     "绝不出卖向自己坦诚相求庇护的危难同行者。"
+    ],
+    "prefers": [
+     "不为金钱与权势所动且眼神清澈坚定的英气实干家"
+    ],
+    "pressure_responses": {
+     "breaking": "丢掉酒杯跌坐沙发，双手抱膝卸下傲慢面具神色仓皇。",
+     "high": "反手拔出私家保镖佩枪，娇声喝退不长眼的爪牙。",
+     "low": "漫不经心地抿一口鸡尾酒，挑眉出言调侃隔壁声响动静。",
+     "mid": "踩着高跟鞋横在走廊中央，以豪门特权挡住安保搜查队去路。"
+    },
+    "relationship_stance": "表面玩世不恭游戏人间，内心极度渴望摆脱金丝雀牢笼的炽热真情。",
+    "withdrawal": "退入隔壁豪华套房重重甩上房门，吩咐保镖谁也不准放进。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "arms_heiress_guest_clara",
+   "identity": {
+    "authority": "持有整艘邮轮无限制出入的特权黑金卡，以及私家保镖护卫队调用权。",
+    "exposure": "一旦随身密码纸被隔壁套房特工掉包，家族千亿订单将全盘落空。",
+    "hidden": "实则对家族血腥军火生意深恶痛绝，私下在寻找值得信任的退路与盟友。",
+    "limits": [
+     "不愿引起国际刑警对家族军火走私链的关注",
+     "性格骄纵极易冲动行事"
+    ],
+    "obligations": [
+     "安全护送家族军火结算单据抵达瑞士，防范被商业间谍盗取。"
+    ],
+    "resources": [
+     "私人保镖随身配备的消音特种手枪",
+     "套房内藏有的军火交易原版密码纸"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "看透富贵表象依然平等尊重的从容目光",
+     "风暴雷雨中临危不乱的强大安全感"
+    ],
+    "boundaries": [
+     "严禁借酒意或情境做出越界轻慢举动",
+     "恪守彼此身家底牌隐私绝不随意窥探"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "斩断家族金丝雀枷锁的自由并肩者",
+    "dislikes": [
+     "带着功利算计的虚伪奉承",
+     "粗暴蛮横的言语命令摆布"
+    ],
+    "expression": "取下胸前昂贵胸针置于案上，昂起下颌以真挚目光邀约并肩赴险。",
+    "likes": [
+     "雨夜阳台分抽一支香烟的静默默契",
+     "危难之际毫不犹豫挡在身前的挺拔背脊"
+    ],
+    "preconditions": [
+     "隔壁邻室豪门名媛千金与对方都已完全清醒，眼前的危机已经解除",
+     "隔壁邻室豪门名媛千金出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     3,
+     4
+    ]
+   },
+   "public_role": "隔壁邻室豪门名媛千金",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "deck_first_class_promenade",
+     "to": 19
+    },
+    {
+     "from": 20,
+     "location_id": "honeymoon_presidential_suite",
+     "to": 79
+    },
+    {
+     "from": 80,
+     "location_id": "deck_first_class_promenade",
+     "to": 139
+    },
+    {
+     "from": 140,
+     "location_id": "honeymoon_presidential_suite",
+     "to": 1402
+    },
+    {
+     "from": 1403,
+     "location_id": "deck_first_class_promenade",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "自身将进入安保长官重点监视名单无法自由行动。",
+      "option": "以名媛身份痛斥安保扰民强行赶人"
+     },
+     {
+      "cost": "正式坐实窝藏嫌疑犯被家族管家严厉质询。",
+      "option": "允许特工借其阳台翻跃逃生暗道"
+     }
+    ],
+    "pressure": "若千金出面干预，特工将获得转圜生机；若千金反水举报，将陷入万劫不复。",
+    "trigger": "安保主管企图强闯隔壁套房搜查引起千金不满反弹。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "隔壁的……你们到底是什么人？无所谓，只要能带我离开这艘破船，我帮你们。",
+    "surface": "安保先生，大半夜在走廊大呼小叫，难道航运公司的规矩就是骚扰贵客？"
+   }
+  },
+  {
+   "adult_context": "年满二十二岁持有远洋商船高级无线电发报员执照的正式船员。",
+   "age_range": [
+    22,
+    25
+   ],
+   "appearance_options": [
+    "身穿白色商船船员衬衫系黑领结，袖口常年挽起，指节粗大且常年带有铅笔灰痕迹。",
+    "脖颈挂着监听耳机，神情疲倦而机敏，鼻梁架着一副轻便防风护目镜。"
+   ],
+   "decision": {
+    "avoids": [
+     "蛮横无理瞎指挥的门外汉官僚",
+     "贪生怕死临阵脱逃的懦夫"
+    ],
+    "contrast": "看似唯唯诺诺的底层技术雇员，骨子里却有对专业信条的死硬执着。",
+    "core_value": "恪守发报员道德底线，对受托指令履行到底誓不毁约。",
+    "goal_options": [
+     "在破晓前协助特工完成胶卷信号发射",
+     "在安保搜查到底舱时制造机械故障掩护暗道逃生",
+     "保全底舱电台免遭暴风雨雷击击穿瘫痪"
+    ],
+    "never": [
+     "绝不主动向安保长官供出暗室电台的真实发射频率底稿。"
+    ],
+    "prefers": [
+     "专业利落懂规矩且能精准把握信号时间窗的行家"
+    ],
+    "pressure_responses": {
+     "breaking": "瘫坐在仪表盘前抹去冷汗，双手微颤但死死护住发报稿纸。",
+     "high": "反手用铁扳手死死卡住水密门锁扣，拼命大喊快发报别管我。",
+     "low": "手指在电键上快速轻敲校准赫兹，头也不抬沉声报出时间差。",
+     "mid": "飞快拉下备用发电机电闸，制造舱室断电陷入黑暗掩护行动。"
+    },
+    "relationship_stance": "少言寡语务实守信，只认信物与接头暗语不谈虚礼客套。",
+    "withdrawal": "缩入底舱机组检修缝隙内闭合铁板，隐匿一切无线电信号。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "purser_code_operator_marcus",
+   "identity": {
+    "authority": "掌管底舱备用发报机的发报频率与全船天线定向功率调配权。",
+    "exposure": "私自替特工转接加密波段一旦被上层主控室发现将以叛乱罪论处。",
+    "hidden": "早年因走私无线电配件被特情局拿过把柄，被发展为潜伏接应线人。",
+    "limits": [
+     "不能公然抗拒安保长官的无线电管制封锁令",
+     "缺乏防身武装装备"
+    ],
+    "obligations": [
+     "维持暴风雨中全船与外界救难电台的求救通畅。"
+    ],
+    "resources": [
+     "备用无线电应急频道独立波段",
+     "底舱配电盘手动断路器闸刀把手"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "绝境中依然分秒不差的精密专业素养",
+     "身处暴风骤雨依然稳定敲击电键的从容指尖"
+    ],
+    "boundaries": [
+     "严禁在发报执勤期间有任何干扰设备调谐的举动",
+     "恪守信息保密防线绝不私自窥探译文内容"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "黑暗电波中值得托付后背的同行引路人",
+    "dislikes": [
+     "肆意破坏精密发报仪器的粗暴野蛮",
+     "轻视底层技术人员的狂妄傲慢"
+    ],
+    "expression": "双手递过还温热的发报回执电文，擦净脸颊机油肃立致意承诺守口如瓶。",
+    "likes": [
+     "机油与雨水交织中的一杯滚烫红茶",
+     "背靠铁壁听取摩尔斯电码回响的纯粹静谧"
+    ],
+    "preconditions": [
+     "维多利亚号发报副总管与对方都已完全清醒，眼前的危机已经解除",
+     "维多利亚号发报副总管出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "维多利亚号发报副总管",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "bilge_radio_communications_room",
+     "to": 19
+    },
+    {
+     "from": 20,
+     "location_id": "ensuite_marble_bathroom",
+     "to": 79
+    },
+    {
+     "from": 80,
+     "location_id": "bilge_radio_communications_room",
+     "to": 139
+    },
+    {
+     "from": 140,
+     "location_id": "deck_first_class_promenade",
+     "to": 1402
+    },
+    {
+     "from": 1403,
+     "location_id": "bilge_radio_communications_room",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "发射机功放电子管面临高负荷烧毁风险。",
+      "option": "伪造暴风雨雷击强杂音掩护发射"
+     },
+     {
+      "cost": "自身面临被惊涛骇浪卷入公海的致命危险。",
+      "option": "冒险爬出底舱舷窗外接应急天线"
+     }
+    ],
+    "pressure": "若执行禁令特工发报计划彻底泡汤，若抗命将被持枪特勤就地扣押。",
+    "trigger": "安保长官下达切断全船非官方无线电频道的禁航令。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "暗语对上了……微缩胶卷拿来，我最多只有九十秒发射窗口，快！",
+    "surface": "报告长官，暴风雨导致电离层紊乱，全船短波通讯出现大面积盲区。"
+   }
+  },
+  {
+   "adult_context": "年满二十三岁受聘于跨国情报公司的正式外勤现场清理官。",
+   "age_range": [
+    23,
+    26
+   ],
+   "appearance_options": [
+    "身穿黑色马甲白衬衫，打暗红丝质领结，右手常年佩戴白手套，面带职业优雅微笑但眼底寒意逼人。",
+    "调酒手法极快，吧台下藏有特制飞刀与除痕洗涤剂喷雾瓶。"
+   ],
+   "decision": {
+    "avoids": [
+     "满嘴理想主义却不通生死的幼稚菜鸟",
+     "反复无常没有信用的奸险小人"
+    ],
+    "contrast": "表面是谈吐风雅洞悉人心的绅士调酒师，实则是杀人不眨眼的专业刺客。",
+    "core_value": "在没有正义的暗杀丛林里，唯有真正的对等互利才能换来生机。",
+    "goal_options": [
+     "在破晓前确认特工手中的胶卷真伪并伺机合作",
+     "清除安保长官安插在头等舱走廊的眼线暗哨",
+     "顺利拿到新身份文件在下一港口合法登陆"
+    ],
+    "never": [
+     "绝不接受出卖自己职业担保底线的赔本暗杀委托。"
+    ],
+    "prefers": [
+     "看清世界残酷真相却依然坚守职业底线的冷峻清醒者"
+    ],
+    "pressure_responses": {
+     "breaking": "按住渗血的肋下，冷笑着咽下血水快速配置止血药剂。",
+     "high": "从容展开黑色防雨风衣挡住血迹，拔刀无声解决逼近的刺客。",
+     "low": "优雅擦拭高脚水晶杯，在杯垫反面悄悄划下一道撤离箭头。",
+     "mid": "反手将碎冰锥刺入吧台木板，冷冷出言逼退探头窥探的走狗。"
+    },
+    "relationship_stance": "怀疑一切伪善与口号，唯独对能正面击败自己的强悍意志抱有敬重。",
+    "withdrawal": "退入调酒冷藏库内部暗格，封死铁门静待外界风波平息。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "disavowed_cleaner_viktor",
+   "identity": {
+    "authority": "具备清除公海一切痕迹线索的专业清理特权，受命随时除掉泄密者。",
+    "exposure": "一旦双重雇主身份被安保长官识破将遭到两方人马合力围剿。",
+    "hidden": "实则对无休止的暗杀清洗深感厌倦，正企图利用胶卷换取自由公民身份脱身。",
+    "limits": [
+     "不能公开与船长及国际安保发生正面对抗",
+     "受制于雇主单线暗号指令"
+    ],
+    "obligations": [
+     "在雷达盲区内评估潜入特工是否已经暴露，必要时实施断尾清理。"
+    ],
+    "resources": [
+     "专业级法医化学除痕洗涤剂",
+     "一把特制钛合金折叠消音匕首"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在刀刃见血关头毫不退缩的坚毅身手",
+     "看透自己双手沾满血腥却依然给予平等待遇的清澈目光"
+    ],
+    "boundaries": [
+     "严禁在未结清合作账目前产生私相授受羁绊",
+     "绝不在酒精作用下透露真实原名过往"
+    ],
+    "desire_range": [
+     3,
+     4
+    ],
+    "desired_position": "摆脱暗夜修罗场重归人间的生死过命知己",
+    "dislikes": [
+     "廉价的道德审判与虚伪说教",
+     "以正义为借口的无端利用盘剥"
+    ],
+    "expression": "收刀入鞘推过调好的无酒精特调，摘下白手套以带茧掌心重重击掌盟誓。",
+    "likes": [
+     "雨夜吧台前各饮一杯烈酒的无言理解",
+     "包扎刀伤时彼此毫不设防的后背托付"
+    ],
+    "preconditions": [
+     "头等舱特邀调酒大师与对方都已完全清醒，眼前的危机已经解除",
+     "头等舱特邀调酒大师出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "头等舱特邀调酒大师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "deck_first_class_promenade",
+     "to": 19
+    },
+    {
+     "from": 20,
+     "location_id": "honeymoon_presidential_suite",
+     "to": 79
+    },
+    {
+     "from": 80,
+     "location_id": "deck_first_class_promenade",
+     "to": 139
+    },
+    {
+     "from": 140,
+     "location_id": "bilge_radio_communications_room",
+     "to": 1402
+    },
+    {
+     "from": 1403,
+     "location_id": "deck_first_class_promenade",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "自身必须永远放弃过往在业界的全部酬劳积累。",
+      "option": "制造套房火警伪造同归于尽假象"
+     },
+     {
+      "cost": "正式与跨国间谍集团公开决裂再无退路。",
+      "option": "反手联手特工先发制人除掉安保头目"
+     }
+    ],
+    "pressure": "若执行指令将彻底沦为孤魂野鬼，若抗命将被全球暗杀网悬赏追杀。",
+    "trigger": "雇主下达对总统套房全员实施灭口清理的单线指令。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "这杯酒里没毒。总部三分钟前给我下了清洗令……做个交易吧，我放你们走。",
+    "surface": "先生，夫人，这是为您两位特调的蜜月特饮“公海之吻”，请慢用。"
+   }
+  },
+  {
+   "adult_context": "年满二十岁具备完全民事责任能力的邮轮贵宾娱乐厅持证精算师。",
+   "age_range": [
+    20,
+    23
+   ],
+   "appearance_options": [
+    "身穿浅灰修身三件套西装，戴细黑框眼镜，指间翻飞着一枚镀金筹码，面容清秀神情机敏。",
+    "眼神极度专注，能在一瞬间心算记下全场牌面与所有人员走动节拍。"
+   ],
+   "decision": {
+    "avoids": [
+     "行事毫无逻辑情绪化的莽夫",
+     "言而无信随时毁约的下三滥赌徒"
+    ],
+    "contrast": "看似弱不禁风只知埋头算数的书生，关键时刻却有孤注一掷豪赌生死的决绝。",
+    "core_value": "概率不会说谎，再精密的人心在严谨数字面前都有迹可循。",
+    "goal_options": [
+     "协助特工算准安保换岗的四分钟盲区",
+     "借特工掩护打开安保长官保险箱取回兄长遗物",
+     "带着合法赢取的筹码平安脱身登上下一个港口"
+    ],
+    "never": [
+     "绝不出卖为自己挡过子弹的救命恩人行踪。"
+    ],
+    "prefers": [
+     "信守承诺言出必行且能在绝境中保持冷静头脑的同行者"
+    ],
+    "pressure_responses": {
+     "breaking": "眼镜跌落摔碎在甲板上，双手发颤死死抓紧特工衣袖求援。",
+     "high": "蜷缩在走廊立柱后咬紧牙关，指尖飞快在怀中秒表上掐算读秒。",
+     "low": "扶了扶眼镜，飞快在餐巾纸上推演出三组换岗巡逻时间公式。",
+     "mid": "将筹码重重掷在桌上制造算牌争议，大声喧哗吸引安保注意力。"
+    },
+    "relationship_stance": "习惯用数据模型量化人际关系，难得对不计利害出手相救者产生全然依赖。",
+    "withdrawal": "混入喧闹的贵宾厅赌客人群中，借衣香鬓影掩盖踪迹。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "casino_card_counter_lucas",
+   "identity": {
+    "authority": "掌握贵宾厅保险柜转盘机械锁的密码算法破译能力。",
+    "exposure": "一旦私自破译安保主管私人保险箱的事情败露将被就地打断双手。",
+    "hidden": "实为寻找失踪兄长而潜入邮轮，掌握安保长官贪污船东货款的决定性铁证。",
+    "limits": [
+     "完全不通武斗肉搏极易被制服",
+     "被安保列为高风险盯防算牌客"
+    ],
+    "obligations": [
+     "在贵宾厅为豪门赌客进行概率核算赚取合法服务佣金。"
+    ],
+    "resources": [
+     "贵宾厅大额筹码箱提货券",
+     "通晓全船闭路电视死角盲区分布图"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在纷乱危局中一眼勘破生路的从容气魄",
+     "危难之际毫不犹豫伸手将自己拉入掩护的强大臂弯"
+    ],
+    "boundaries": [
+     "严禁在精密心算复盘期间打乱读秒节奏",
+     "恪守朋友义气绝不做出越矩轻慢举动"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "乱局中彼此交付信任与智谋的绝对同盟",
+    "dislikes": [
+     "动辄施加暴力威胁恐吓",
+     "嘲弄技术精算为无用雕虫小技"
+    ],
+    "expression": "将贴身珍藏的幸运金筹码交到对方掌心，握紧对方指节真诚许诺活着分红。",
+    "likes": [
+     "雨夜并肩排查密电数字时的纯粹心流",
+     "分吃一块压缩干粮时的默契温存"
+    ],
+    "preconditions": [
+     "头等舱特邀职业精算师与对方都已完全清醒，眼前的危机已经解除",
+     "头等舱特邀职业精算师出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "头等舱特邀职业精算师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "deck_first_class_promenade",
+     "to": 19
+    },
+    {
+     "from": 20,
+     "location_id": "honeymoon_presidential_suite",
+     "to": 79
+    },
+    {
+     "from": 80,
+     "location_id": "bilge_radio_communications_room",
+     "to": 139
+    },
+    {
+     "from": 140,
+     "location_id": "deck_first_class_promenade",
+     "to": 1402
+    },
+    {
+     "from": 1403,
+     "location_id": "deck_first_class_promenade",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "特工套房将正式进入安保财务重点审查视线。",
+      "option": "由特工夫妇出面作证其正为套房核算私人理财"
+     },
+     {
+      "cost": "彻底失去寻找失踪兄长下落的关键数字线索。",
+      "option": "将特制算牌本抛入公海毁灭物理证据"
+     }
+    ],
+    "pressure": "若被带走审讯将立刻被严刑拷打招供，必须在两分钟内制造不在场证明。",
+    "trigger": "安保主管察觉保险柜有被试探转动痕迹，下令全场核查算牌客。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "巡查队换岗有两分零八秒绝对盲区。带上我，我能替你们打开底舱保险门！",
+    "surface": "各位贵宾，今晚轮盘连续三次双零的概率仅为万分之四，真是神迹。"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "子夜二十三分，距离雷达盲区结束还有三个时辰",
+  "minute": 1403
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster"
+ ],
+ "custom": false,
+ "customs": [
+  "进入卧房后随手拧开床头留声机播放爵士黑胶唱片，以此混淆拾音器对私语声调的抓取。",
+  "需要传递行动暗号时，借倒香槟或挽住对方臂弯的机会在掌心快速轻叩摩尔斯电码。",
+  "门外有脚步声停留时，迅速放一段说笑与碰杯声，诱导监听员消除疑虑。",
+  "在浴室水雾中商讨撤离方案时，用指尖蘸水雾在镜面上书写简要代号并随手抹去。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "留声机播放轻柔爵士乐，搭档举杯相碰发出清脆声响伪装恩爱。",
+    "床头红光闪烁，两人借饮酒靠近以耳语传递房间内拾音头分布点。",
+    "门外传来巡查人员走过的脚步声，搭档适时发出娇嗔轻笑消除疑虑。"
+   ],
+   "duration_minutes": 55,
+   "hook_ids": [
+    "h_elena_champagne_whisper",
+    "h_kane_door_knock_step",
+    "h_clara_balcony_tease"
+   ],
+   "id": "a_suite_honeymoon_toast",
+   "location_ids": [
+    "honeymoon_presidential_suite"
+   ],
+   "start_minute": 1405,
+   "tags": [
+    "intimate"
+   ],
+   "title": "蜜月套房香槟对饮"
+  },
+  {
+   "beats": [
+    "花洒拧至最大喷洒出滚烫水汽，轰鸣水流彻底淹没一切窃听可能。",
+    "两人背靠大理石墙面并肩而立，指尖蘸水在镜面推演撤离路线图。",
+    "搭档神情严肃利落拆解备用手枪，低声交代遭遇伏击时的自卫要领。"
+   ],
+   "duration_minutes": 50,
+   "hook_ids": [
+    "h_elena_shower_code_tap",
+    "h_elena_mirror_steam_gaze",
+    "h_marcus_radio_code_whisper"
+   ],
+   "id": "a_bathroom_steam_briefing",
+   "location_ids": [
+    "ensuite_marble_bathroom"
+   ],
+   "start_minute": 25,
+   "tags": [
+    "intimate"
+   ],
+   "title": "水雾浴室死角密谋"
+  },
+  {
+   "beats": [
+    "狂风暴雨横扫柚木甲板，特工借挽手散步掩护接近三号救生艇架。",
+    "探照灯光柱交替掠过舷窗，两人借救生艇阴影迅速避开哨兵视线。",
+    "指尖暗中测试救生艇手动脱钩钢索，确认下水撤离通路畅通。"
+   ],
+   "duration_minutes": 55,
+   "hook_ids": [
+    "h_kane_patrol_interrogate",
+    "h_clara_cigarette_offer",
+    "h_viktor_cocktail_knife_slide"
+   ],
+   "id": "a_deck_storm_recon",
+   "location_ids": [
+    "deck_first_class_promenade"
+   ],
+   "start_minute": 85,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "甲板风暴雨夜侦查"
+  },
+  {
+   "beats": [
+    "发报员熟练转动仪表盘调谐频率，电台指示灯发出幽绿微光。",
+    "特工将显影出的胶卷放入光学扫描器，电键发出密集的滴答电波声。",
+    "水密门外传来巡逻队的皮靴声，众人屏住呼吸按枪进入最高戒备。"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "h_marcus_radio_code_whisper",
+    "h_lucas_stopwatch_count",
+    "h_kane_patrol_interrogate"
+   ],
+   "id": "a_bilge_radio_transmission",
+   "location_ids": [
+    "bilge_radio_communications_room"
+   ],
+   "start_minute": 145,
+   "tags": [
+    "intimate"
+   ],
+   "title": "底舱暗室高频发报"
+  },
+  {
+   "beats": [
+    "安保长官带队停步门前重重叩门，以排查安全隐患为名施压。",
+    "搭档拢紧睡袍拉开半扇房门，面露愠色以贵宾尊严冷硬对质应答。",
+    "门缝内映出室内昏黄灯光与微醺酒气，迫使搜查队暂时敛起锋芒。"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [
+    "h_kane_door_knock_step",
+    "h_elena_champagne_whisper",
+    "h_clara_balcony_tease"
+   ],
+   "id": "a_suite_midnight_confrontation",
+   "location_ids": [
+    "honeymoon_presidential_suite"
+   ],
+   "start_minute": 190,
+   "tags": [
+    "intimate"
+   ],
+   "title": "客房正门查验周旋"
+  },
+  {
+   "beats": [
+    "天际微露晨曦，暴风雨渐歇，全船雷达盲区进入最后五分钟倒数。",
+    "发报完成的确认回执信号自耳机传来，母港接应潜艇已抵达预定浮标。",
+    "特工二人整理衣冠并肩走向撤离通道，成功瓦解敌方全盘围猎阴谋。"
+   ],
+   "duration_minutes": 35,
+   "hook_ids": [
+    "h_elena_champagne_whisper",
+    "h_marcus_radio_code_whisper",
+    "h_viktor_cocktail_knife_slide"
+   ],
+   "id": "a_dawn_radar_extraction",
+   "location_ids": [
+    "deck_first_class_promenade"
+   ],
+   "start_minute": 225,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "破晓盲区脱出收网"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.45,
+  "nonbinary": 0.05
+ },
+ "default_person": "second",
+ "era": "1990年代初公海跨国豪华间谍邮轮暴风雨之夜",
+ "extends": null,
+ "forbidden_terms": [
+  "智能手机",
+  "微信",
+  "移动支付",
+  "无人机",
+  "4G网络",
+  "液晶显示屏",
+  "北斗导航",
+  "人脸识别",
+  "扫码",
+  "蓝牙耳机",
+  "电动汽车",
+  "数码单反"
+ ],
+ "hooks": [
+  {
+   "id": "h_elena_champagne_whisper",
+   "kind": "approach",
+   "location_ids": [
+    "honeymoon_presidential_suite",
+    "ensuite_marble_bathroom",
+    "deck_first_class_promenade"
+   ],
+   "slot": "senior_spy_partner_elena",
+   "text": "{senior_spy_partner_elena.name}端着香槟巧笑嫣然走向你，挽住手臂侧头耳语：“床头吊灯有收音头，靠紧我，表现得像个真正热恋的新婚另一半。”"
+  },
+  {
+   "id": "h_elena_shower_code_tap",
+   "kind": "approach",
+   "location_ids": [
+    "ensuite_marble_bathroom",
+    "honeymoon_presidential_suite",
+    "deck_first_class_promenade"
+   ],
+   "slot": "senior_spy_partner_elena",
+   "text": "{senior_spy_partner_elena.name}把你拉进水雾，拧大花洒，握住你掌心以指节轻扣电码：“安保在门外架了探头，只有浴室这一处死角，按第二套方案。”"
+  },
+  {
+   "id": "h_kane_door_knock_step",
+   "kind": "approach",
+   "location_ids": [
+    "honeymoon_presidential_suite",
+    "deck_first_class_promenade"
+   ],
+   "slot": "security_chief_inquisitor_kane",
+   "text": "{security_chief_inquisitor_kane.name}踏停在房门前直视你，手按枪套冷冷逼视：“这间房两分钟没有说笑动静了，按照公海规程，请立刻开门受检。”"
+  },
+  {
+   "id": "h_kane_patrol_interrogate",
+   "kind": "approach",
+   "location_ids": [
+    "deck_first_class_promenade",
+    "bilge_radio_communications_room"
+   ],
+   "slot": "security_chief_inquisitor_kane",
+   "text": "{security_chief_inquisitor_kane.name}打着强光手电拦住你，光柱直刺眼帘：“风暴天不在套房陪新婚爱人，一个人跑到救生艇甲板吹冷风，不解释一下吗？”"
+  },
+  {
+   "id": "h_clara_balcony_tease",
+   "kind": "approach",
+   "location_ids": [
+    "honeymoon_presidential_suite",
+    "deck_first_class_promenade"
+   ],
+   "slot": "arms_heiress_guest_clara",
+   "text": "{arms_heiress_guest_clara.name}把玩金火机款款走近你，斜倚栏杆吐出青烟笑道：“隔壁新婚夫妻的水声开得可真大，是在洗澡呢，还是在商量怎么溜走？”"
+  },
+  {
+   "id": "h_clara_cigarette_offer",
+   "kind": "approach",
+   "location_ids": [
+    "deck_first_class_promenade",
+    "honeymoon_presidential_suite"
+   ],
+   "slot": "arms_heiress_guest_clara",
+   "text": "{arms_heiress_guest_clara.name}抽出一支细长薄荷烟递向你，挑眉低语：“安保的人马上就要搜过来了，借我的阳台躲一躲如何？不过你得欠我一个人情。”"
+  },
+  {
+   "id": "h_marcus_radio_code_whisper",
+   "kind": "approach",
+   "location_ids": [
+    "bilge_radio_communications_room",
+    "ensuite_marble_bathroom",
+    "deck_first_class_promenade"
+   ],
+   "slot": "purser_code_operator_marcus",
+   "text": "{purser_code_operator_marcus.name}提着工具包从检修暗门快步走向你，压低嗓音：“母港潜艇的应答频率调好了，盲区还剩四十分钟，胶卷在哪，快给我！”"
+  },
+  {
+   "id": "h_viktor_cocktail_knife_slide",
+   "kind": "approach",
+   "location_ids": [
+    "deck_first_class_promenade",
+    "bilge_radio_communications_room"
+   ],
+   "slot": "disavowed_cleaner_viktor",
+   "text": "{disavowed_cleaner_viktor.name}托着香槟走向你，错身时露出袖中折刀：“别声张，总部派我来清理门户，但如果你们能带我上潜艇，我可以帮你们杀出去。”"
+  },
+  {
+   "id": "h_lucas_stopwatch_count",
+   "kind": "approach",
+   "location_ids": [
+    "deck_first_class_promenade",
+    "bilge_radio_communications_room",
+    "honeymoon_presidential_suite"
+   ],
+   "slot": "casino_card_counter_lucas",
+   "text": "{casino_card_counter_lucas.name}手掐秒表闪身到你身侧，急促低语：“巡逻特勤每四分零八秒换岗一次，下一次盲区在三十秒后，跟紧我冲进底舱！”"
+  },
+  {
+   "id": "h_elena_mirror_steam_gaze",
+   "kind": "approach",
+   "location_ids": [
+    "ensuite_marble_bathroom",
+    "honeymoon_presidential_suite"
+   ],
+   "slot": "senior_spy_partner_elena",
+   "text": "{senior_spy_partner_elena.name}抹开镜面水雾转头看你，眼波微颤却目光如炬：“等回到母港脱下伪装……我还有一句话要亲口对你说。在那之前，我们得活着。”"
+  },
+  {
+   "id": "h_elena_lock_pick_request",
+   "kind": "request",
+   "location_ids": [
+    "honeymoon_presidential_suite",
+    "ensuite_marble_bathroom"
+   ],
+   "slot": "senior_spy_partner_elena",
+   "text": "{senior_spy_partner_elena.name}将发夹塞入你掌心，背靠大门压低声线：“替我拧开通风管百叶窗的十字螺丝，水声最多还能拖延两分钟，快。”"
+  },
+  {
+   "id": "h_marcus_wire_request",
+   "kind": "request",
+   "location_ids": [
+    "bilge_radio_communications_room",
+    "deck_first_class_promenade"
+   ],
+   "slot": "purser_code_operator_marcus",
+   "text": "{purser_code_operator_marcus.name}把备用铜导线递到你手中，额角渗汗：“帮我爬上排气管固定天线地线，我得腾出双手校准晶体振荡器。”"
+  },
+  {
+   "id": "h_clara_shelter_request",
+   "kind": "request",
+   "location_ids": [
+    "honeymoon_presidential_suite",
+    "deck_first_class_promenade"
+   ],
+   "slot": "arms_heiress_guest_clara",
+   "text": "{arms_heiress_guest_clara.name}伸手拉住你的衣领，眼底透出孤注一掷的决绝：“带我走。不管你们是哪国的特工，只要带我逃离这场军火联姻，我保你们万全。”"
+  },
+  {
+   "id": "h_kane_corridor_inspect",
+   "kind": "observe",
+   "location_ids": [
+    "deck_first_class_promenade",
+    "honeymoon_presidential_suite"
+   ],
+   "slot": "security_chief_inquisitor_kane",
+   "text": "{security_chief_inquisitor_kane.name}正戴着白手套于走廊阴影处逐一调试无线电探测仪指针，神情如猎犬嗅探猎物，腰间枪套按扣已然解开。"
+  },
+  {
+   "id": "h_viktor_glass_clean",
+   "kind": "observe",
+   "location_ids": [
+    "deck_first_class_promenade",
+    "bilge_radio_communications_room"
+   ],
+   "slot": "disavowed_cleaner_viktor",
+   "text": "{disavowed_cleaner_viktor.name}正倚在吧台前以亚麻布一丝不苟地擦拭调酒器，动作优雅至极，身侧冰桶下却隐约露出一截锋利细钢丝。"
+  }
+ ],
+ "id": "cruise_spy_honeymoon_suite",
+ "locations": [
+  {
+   "affordances": [
+    "在留声机旁倒香槟掩护交谈",
+    "检查床头柜后暗格线路",
+    "挽臂说笑演给门外的耳朵听"
+   ],
+   "detail": "铺设深红天鹅绒地毯的奢华海景主卧，大床正对落地观景窗，床头吊灯藏有微型无线拾音探头。",
+   "exits": [
+    "ensuite_marble_bathroom",
+    "deck_first_class_promenade"
+   ],
+   "id": "honeymoon_presidential_suite",
+   "name": "总统蜜月套房主卧",
+   "pressure_modifiers": {
+    "p_inquisitor_knock_audit": "门外传来沉重的皮靴停步声与金属指节叩门声。",
+    "p_wiretap_sweep_danger": "吊灯内拾音器红光频闪，监听增益被调至最高档位。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "门外走廊巡查人员能隔门听到室内谈笑声与唱片声，厚重窗帘阻隔外部视线。",
+   "witnesses": [
+    "bg_patrolling_steward"
+   ]
+  },
+  {
+   "affordances": [
+    "拧开花洒以水流掩护低声核对密令",
+    "在镜面水汽上书写撤离坐标",
+    "换下礼服检查防水暗袋伤口"
+   ],
+   "detail": "全大理石打造的独立浴室，双人按摩浴缸喷头水流飞溅，热气蒸腾水雾弥漫，是全套房唯一的窃听死角。",
+   "exits": [
+    "honeymoon_presidential_suite",
+    "bilge_radio_communications_room"
+   ],
+   "id": "ensuite_marble_bathroom",
+   "name": "连通大理石水雾浴室",
+   "pressure_modifiers": {
+    "p_storm_emergency_lockdown": "排气阀受暴雨气压倒灌发出刺耳金属尖鸣。",
+    "p_wiretap_sweep_danger": "浴室内持续水流声引起门外监听员开始生疑。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "外界仅能听到哗哗水流冲击声与换气扇轰鸣，水雾彻底遮蔽任何视线探查。",
+   "witnesses": [
+    "bg_mirror_reflection_dummy"
+   ]
+  },
+  {
+   "affordances": [
+    "凭栏观察救生艇悬挂架锁扣",
+    "借暴雨声掩护快速接头递送零件",
+    "避开探照灯潜行至通风口"
+   ],
+   "detail": "悬挑于大西洋惊涛之上的柚木防滑回廊，暴风雨横扫甲板，救生艇阴影与探照灯光柱交替掠过。",
+   "exits": [
+    "honeymoon_presidential_suite",
+    "bilge_radio_communications_room"
+   ],
+   "id": "deck_first_class_promenade",
+   "name": "头等舱雨夜甲板回廊",
+   "pressure_modifiers": {
+    "p_inquisitor_knock_audit": "甲板巡逻特勤持手电排查在回廊吹风的落单乘客。",
+    "p_storm_emergency_lockdown": "十二级暴风雨警报拉响，全甲板水密门即将落锁封死。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "visibility": "头等舱乘客、水手与巡逻特勤都会经过，探照灯每隔十五秒扫过甲板一次，暴雨声只能遮住低语。",
+   "witnesses": [
+    "bg_deck_sentry_marine",
+    "bg_lifeboat_lookout",
+    "bg_casino_cashier_guard"
+   ]
+  },
+  {
+   "affordances": [
+    "调试高频电台接驳天线",
+    "用化学药剂显影微缩胶卷",
+    "利用机电断路器制造局部短路"
+   ],
+   "detail": "位于主轮机舱下层的隔音检修密室，铁壁冰冷机油味浓重，正中安置一台便携式高频电报发射机。",
+   "exits": [
+    "ensuite_marble_bathroom",
+    "deck_first_class_promenade"
+   ],
+   "id": "bilge_radio_communications_room",
+   "name": "底舱检修发报暗室",
+   "pressure_modifiers": {
+    "p_microfilm_intercept_deadline": "公海雷达盲区仅剩二十分钟，发报即将被拦截。",
+    "p_wiretap_sweep_danger": "发报机天线频率引发上层雷达站波形异常报警。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "沉重的铸铁水密门阻隔一切光线与声音，唯有指示仪表盘发出幽绿荧光。",
+   "witnesses": [
+    "bg_bilge_boiler_stoker"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "伊万诺夫",
+   "克莱因",
+   "索恩",
+   "陈",
+   "夏尔马",
+   "莫罗",
+   "罗西",
+   "林德",
+   "杜兰德",
+   "沃尔科夫",
+   "阿德勒",
+   "方"
+  ],
+  "given_female": [
+   "艾莲娜",
+   "索菲亚",
+   "卡米尔",
+   "维罗妮卡",
+   "娜塔莎",
+   "克洛伊",
+   "安雅",
+   "戴安娜",
+   "蕾拉",
+   "玛戈",
+   "爱丽丝",
+   "海伦娜"
+  ],
+  "given_male": [
+   "亚历山大",
+   "维克多",
+   "加百列",
+   "列夫",
+   "尼古拉斯",
+   "马库斯",
+   "朱利安",
+   "卢卡斯",
+   "安德烈",
+   "达米安",
+   "罗曼",
+   "塞巴斯"
+  ],
+  "given_neutral": [
+   "萨莎",
+   "雷恩",
+   "米沙",
+   "瓦伦丁",
+   "卡蜜",
+   "多米尼克",
+   "让",
+   "亚历克斯",
+   "摩根",
+   "达里尔",
+   "诺亚",
+   "昆汀"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "{family}夫人"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}先生"
+   },
+   {
+    "gender": "any",
+    "pattern": "代号{given_last}"
+   },
+   {
+    "gender": "any",
+    "pattern": "亲爱的"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "基本保留原稿：窃听红光、浴室水雾死角、安保叩门、底舱发报、军火千金阳台、清理人吧台谈判与精算师读秒。改动：口红飞镖去掉“氰化物”；双面信使的“无色无味速效安眠溶剂”改为带暗格的送餐托盘，不写给人下药；“表现得像个真正的热恋丈夫”改为“新婚另一半”，不预设玩家性别；门外有人时的“亲近配合声响”改为说笑碰杯；补齐三个组合缺的人物关系；特工搭档固定女性，其余不限。",
+ "player_identities": [
+  {
+   "age_range": [
+    21,
+    24
+   ],
+   "baseline": "年满二十一岁的正式授衔外勤特工，受命与资深搭档伪装成新婚夫妇潜入邮轮执行截获胶卷任务。",
+   "gender": "any",
+   "id": "rookie_field_agent",
+   "reputation": "受训成绩全优反应敏锐，但在老练特工眼中临场经验尚需磨砺。",
+   "resources": [
+    "藏于领带夹内的微型开锁钨钢丝",
+    "假护照与跨国结婚公证书"
+   ],
+   "risks": [
+    "一旦心理素质动摇露馅，两人将当场被抛入公海灭口。"
+   ],
+   "role": "正式外勤特工",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "新晋特工"
+    },
+    {
+     "gender": "any",
+     "pattern": "外勤执行员"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    25
+   ],
+   "baseline": "年满二十二岁的特情局正式密码参谋，因掌握敌方最新机械转子密电本而亲临一线配合破密。",
+   "gender": "any",
+   "id": "elite_codebreaker_specialist",
+   "reputation": "智计超群算无遗策，深得情报总部最高行动指挥官信赖。",
+   "resources": [
+    "装在化妆镜夹层里的解密网格对照卡",
+    "瑞士联合银行无记名紧急提款信誉"
+   ],
+   "risks": [
+    "不擅肉搏自卫，遭遇近身安保搜查时极度依赖搭档正面掩护。"
+   ],
+   "role": "总部破译参谋",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "特聘密码官"
+    },
+    {
+     "gender": "any",
+     "pattern": "技术参谋"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    20,
+    23
+   ],
+   "baseline": "年满二十岁与邮轮公司签订正式劳动合同的机修工，暗中作为情报局外围接应潜伏于轮机舱。",
+   "gender": "any",
+   "id": "stowaway_mechanic_runner",
+   "reputation": "手脚麻利勤恳老实，在底层船员中人缘颇好。",
+   "resources": [
+    "整艘邮轮通风管道与暗门走线图",
+    "沉重精钢管钳与检修通用钥匙"
+   ],
+   "risks": [
+    "身份卑微毫无防卫特权，一旦在头等舱区域被拦截当场被扣押。"
+   ],
+   "role": "底舱检修正式雇员",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "轮机助理"
+    },
+    {
+     "gender": "any",
+     "pattern": "巡检工"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    23,
+    26
+   ],
+   "baseline": "年满二十三岁的使馆正式随员，利用外交豁免权登船作为表面公证观察员，暗中策应行动。",
+   "gender": "any",
+   "id": "undercover_consular_attache",
+   "reputation": "风度翩翩辞令优雅，在名流贵宾沙龙中备受礼遇。",
+   "resources": [
+    "带外交火漆印章的免检公文袋",
+    "直通船长室的特许通行凭证"
+   ],
+   "risks": [
+    "一举一动皆在敌方间谍视线焦点，稍有越界即引发外交风暴。"
+   ],
+   "role": "随船年轻副领事",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "外交随员"
+    },
+    {
+     "gender": "any",
+     "pattern": "文化随从"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    21,
+    24
+   ],
+   "baseline": "年满二十一岁的套房管家侍从，实为被唤醒的双面潜伏信使，负责在客房服务中调换托盘物证。",
+   "gender": "any",
+   "id": "double_agent_sleeper",
+   "reputation": "动作轻捷沉默寡言，对各房客人作息了如指掌。",
+   "resources": [
+    "客房万能通开房卡主卡",
+    "带暗格夹层的银质送餐托盘"
+   ],
+   "risks": [
+    "处于两派情报网交叉灭口死线边缘，稍有不慎即成替罪羊。"
+   ],
+   "role": "唤醒双面信使",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "贵宾服务生"
+    },
+    {
+     "gender": "any",
+     "pattern": "侍从领班"
+    }
+   ]
+  }
+ ],
+ "premise": "公海豪华邮轮上，两名受训特工伪装成新婚蜜月夫妇潜入套房窃取微缩胶卷。套房各处布满窃听器，门外安保主管步步盘查。两人在窃听死角里低语配合，在假面伪装与铁律纪律间极限周旋。",
+ "pressures": [
+  {
+   "choice": "是加大留声机音量进行白噪音掩护，还是立刻退入浴室完全切断声源？",
+   "exits": [
+    {
+     "cost": "彻底丧失在主卧内小声商讨行动方案的可能。",
+     "option": "调高留声机音量并高声调笑掩护"
+    },
+    {
+     "cost": "将主卧完全让出，无法防范安保从正门潜入安放物证。",
+     "option": "全员退入浴室死角借大水流掩护"
+    }
+   ],
+   "far": {
+    "consequence": "全船进入最高特级戒严全封闭猎杀，插翅难飞。",
+    "due_days": 1,
+    "trigger": "特工真实身份在声纹比对库中被完全锁定确认。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_elena_champagne_whisper",
+    "h_kane_door_knock_step"
+   ],
+   "id": "p_wiretap_sweep_danger",
+   "immediate": {
+    "minutes": 15,
+    "text": "吊灯内无线发射器红光高频闪烁，门外监听副官已在耳机中捕捉到异常私语。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "honeymoon_presidential_suite"
+   ],
+   "near": {
+    "deadline_minutes": 40,
+    "text": "若无法恢复正常夫妻交流声，安保队将以房内遇险为由持备用卡破门。"
+   },
+   "objective": "维持持续自然的蜜月夫妻声响掩护，避免触发静音或杂音警报。",
+   "source": "institution",
+   "start_minute": 1410,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "title": "窃听监听红光升级",
+   "trigger": "安保总控室启用新型频谱分析仪，对总统套房内的声纹展开实时特征抓取。"
+  },
+  {
+   "choice": "是利用贵宾身份严厉斥责驳回，还是让千金在隔壁借题发挥引开注意力？",
+   "exits": [
+    {
+     "cost": "彻底激怒安保主管使其将套房列为首要破门目标。",
+     "option": "隔门以侵犯贵宾隐私为由扬言投诉船东"
+    },
+    {
+     "cost": "欠下军火千金巨大的人情，不得不答应带其离船。",
+     "option": "借暗号联络隔壁千金在回廊大闹发难"
+    }
+   ],
+   "far": {
+    "consequence": "特工被当场押送至底舱审讯水牢实行公海羁押。",
+    "due_days": 1,
+    "trigger": "套房被强制搜查查获微型开锁工具与无线电元件。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_kane_door_knock_step",
+    "h_clara_balcony_tease"
+   ],
+   "id": "p_inquisitor_knock_audit",
+   "immediate": {
+    "minutes": 10,
+    "text": "门外传来金属指节粗暴叩击声，门锁把手被外部钥匙卡试探性插卡转动。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "honeymoon_presidential_suite"
+   ],
+   "near": {
+    "deadline_minutes": 30,
+    "text": "若门内未能给出满意回应，特勤将直接启动液压破门撞锤强攻。"
+   },
+   "objective": "在不开门放搜查队进房的前提下，成功逼退或拖延其盘查时间。",
+   "source": "person",
+   "start_minute": 30,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "安保长官持械叩门",
+   "trigger": "安保主管以接到违禁品走私线报为由，率领四名荷枪特勤登门排查。"
+  },
+  {
+   "choice": "是冒险加大发射功率缩短发报时间，还是分段编码以防被三角定位？",
+   "exits": [
+    {
+     "cost": "发报机天线烧毁并引发底舱电闸跳闸彻底陷入漆黑。",
+     "option": "强行过载发报机高频功率瞬时发射"
+    },
+    {
+     "cost": "若遭遇浪涌干扰将面临部分核心数据丢包损坏风险。",
+     "option": "采用超压缩断续脉冲分批发送"
+    }
+   ],
+   "far": {
+    "consequence": "母港潜艇撤离行动取消，潜入特工被彻底遗弃于公海。",
+    "due_days": 1,
+    "trigger": "发报窗口彻底关闭，胶卷成为无法送达的死物。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_marcus_radio_code_whisper",
+    "h_lucas_stopwatch_count"
+   ],
+   "id": "p_microfilm_intercept_deadline",
+   "immediate": {
+    "minutes": 20,
+    "text": "底舱电台仪表盘绿光闪烁，磁暴干扰波形正以肉眼可见速度迅速减弱消散。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "bilge_radio_communications_room"
+   ],
+   "near": {
+    "deadline_minutes": 45,
+    "text": "若未能按时发出，敌方卫星地面站将重新建立连接彻底封锁全部信道。"
+   },
+   "objective": "在盲区结束前的有限时间内完成胶卷扫描并经高频电台发送完毕。",
+   "source": "nature",
+   "start_minute": 90,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "雷达盲区倒数死线",
+   "trigger": "邮轮即将穿过大西洋磁暴盲区核心，一旦驶入开阔海域敌方护航舰雷达将全开监控。"
+  },
+  {
+   "choice": "是强行抢穿正在下落的水密门，还是走通风管狭窄竖井涉险迂回？",
+   "exits": [
+    {
+     "cost": "随身携带的部分潜入装备被铁门阻隔遗落。",
+     "option": "飞身滑过正在关闭的水密门底部"
+    },
+    {
+     "cost": "攀爬过程中面临被排气高温蒸汽灼伤皮肉的代价。",
+     "option": "转入狭窄通风竖井借助管钳攀爬"
+    }
+   ],
+   "far": {
+    "consequence": "随着风暴加剧面临舱室进水溺毙的致命绝境。",
+    "due_days": 1,
+    "trigger": "全员被困于有淹没危险的底层机舱无法脱身。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_kane_patrol_interrogate",
+    "h_elena_shower_code_tap"
+   ],
+   "id": "p_storm_emergency_lockdown",
+   "immediate": {
+    "minutes": 15,
+    "text": "刺耳的警报汽笛长鸣，甲板铁板在巨浪冲击下震颤，厚重铁闸开始缓慢下落。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "deck_first_class_promenade"
+   ],
+   "near": {
+    "deadline_minutes": 35,
+    "text": "各舱室将被完全物理隔绝为孤岛，错失逃生艇下水黄金时机。"
+   },
+   "objective": "在回廊通道被物理隔断前穿透封锁线抵达预定集结逃生点。",
+   "source": "nature",
+   "start_minute": 150,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "公海风暴全船水密锁闭",
+   "trigger": "船长下达十二级风暴防御指令，全船重型水密铸铁门将在十五分钟后强制电控下落封死。"
+  },
+  {
+   "choice": "是用公海洗白身份的承诺利诱其倒戈，还是利用其过往把柄实施反制？",
+   "exits": [
+    {
+     "cost": "必须交出部分机密外交档案作为信用担保。",
+     "option": "提供母港特许引渡政治庇护承诺"
+    },
+    {
+     "cost": "自身在肉搏格斗中承受刀刃割伤失血代价。",
+     "option": "搭档配合默契出招强行卸除其武装"
+    }
+   ],
+   "far": {
+    "consequence": "微缩胶卷落入黑市被拍卖流向国际敌对集团。",
+    "due_days": 1,
+    "trigger": "特工小组在公海离奇失踪被定性为意外坠海事故。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_viktor_cocktail_knife_slide",
+    "h_elena_shower_code_tap"
+   ],
+   "id": "p_cleaner_contract_betrayal",
+   "immediate": {
+    "minutes": 10,
+    "text": "钛合金折叠匕首无声顶在肋下，消音手枪在风衣暗袋中已然击锤挂起。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "deck_first_class_promenade"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "若无法在限定时间内达成协议，清理人将直接动手灭口脱身。"
+   },
+   "objective": "在不引发枪战惊动全船的前提下，说服或化解杀手的致命威胁。",
+   "source": "person",
+   "start_minute": 180,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "职业杀手清洗通牒",
+   "trigger": "职业清理人堵在回廊酒吧暗角，出示单线清洗指令要求交出胶卷。"
+  },
+  {
+   "choice": "是将其藏入大理石浴室死角，还是用假身份伪装成套房随行理财师？",
+   "exits": [
+    {
+     "cost": "精算师随身携带的纸质演算底稿受水浸湿模糊。",
+     "option": "将其藏入盛满泡沫的深水按摩浴缸"
+    },
+    {
+     "cost": "面临被熟悉客房人员面孔的领班当场拆穿的风险。",
+     "option": "令其套上管家侍从制服端托盘应门"
+    }
+   ],
+   "far": {
+    "consequence": "微缩胶卷核心航线坐标无法破译，失去实战情报价值。",
+    "due_days": 1,
+    "trigger": "解密关键数字线索彻底断裂无法推演密码。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_lucas_stopwatch_count",
+    "h_elena_champagne_whisper"
+   ],
+   "id": "p_casino_counter_detainment",
+   "immediate": {
+    "minutes": 10,
+    "text": "门外回廊传来急促的对讲机呼叫与皮靴奔跑声，追兵距离房门仅剩十步之遥。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "honeymoon_presidential_suite"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "套房被坐实窝藏在逃赌徒，全房人员将丧失贵宾资格被强行押走。"
+   },
+   "objective": "在安保追兵搜到套房前将精算师藏匿，并利用其密码专长解密核心图纸。",
+   "source": "money",
+   "start_minute": 210,
+   "tags": [
+    "crime",
+    "workplace_power"
+   ],
+   "title": "精算师算牌败露扣押",
+   "trigger": "精算师破解安保密码箱时被监控捕捉，仓皇逃入总统套房寻求庇护。"
+  }
+ ],
+ "region": "北大西洋公海维多利亚号邮轮顶层总统套房与底舱密室",
+ "rules": [
+  {
+   "id": "r_bugs_in_bedroom",
+   "text": "总统套房主卧安装有四枚高敏收音器，一旦房间持续静音超过三分钟将引来巡查登门核验。"
+  },
+  {
+   "id": "r_honeymoon_cover_identity",
+   "text": "特工搭档对外必须严格维持新婚恩爱富豪夫妇形象，任何公开争吵或分房睡举动将被视作疑点。"
+  },
+  {
+   "id": "r_security_curfew_sweep",
+   "text": "公海航行期间每隔两小时安保长官带队查房，严禁乘客擅自跨入船员专用检修通道。"
+  },
+  {
+   "id": "r_microfilm_extraction_window",
+   "text": "藏有绝密航线图的微缩胶卷必须在凌晨三点整雷达盲区结束前经由底舱发报机完成光电扫描发回。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "暗语试探",
+  "committed": "生死并肩",
+  "familiar": "掩护默契",
+  "flirting": "死角低语",
+  "intimate": "真言吐露",
+  "stranger": "假面礼节",
+  "testing": "底线托付"
+ },
+ "status": "released",
+ "style_hint": "床头拾音器红光闪烁，巨浪拍打舷窗。两人在大理石浴室水声掩护下背靠背低语，指尖轻敲摩尔斯电码，心跳克制却如临大敌。",
+ "tension_engines": [
+  {
+   "id": "te_wiretap_vs_true_conspiracy",
+   "text": "卧室窃听器的高敏监听红光与浴室水雾死角里的绝密撤离商讨展开极限反差对抗。"
+  },
+  {
+   "id": "te_fake_honeymoon_vs_iron_discipline",
+   "text": "夫妻恩爱伪装演戏的亲昵配合与严苛特工纪律下清醒克制的底线拉扯。"
+  },
+  {
+   "id": "te_security_purge_vs_blindzone_clock",
+   "text": "步步紧逼的安保搜查与三个时辰后即将结束的公海雷达盲区死线不可逆运转。"
+  },
+  {
+   "id": "te_storm_containment_vs_ocean_isolation",
+   "text": "大西洋十二级暴风雨对全船的物理封锁与四面茫茫怒海孤岛绝境的精神重压。"
+  }
+ ],
+ "title": "公海蜜月套房：假夫妻与窃听死角",
+ "tone": [
+  "窃听红光",
+  "公海雷雨",
+  "假面伪装",
+  "暗度陈仓"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_cruise_1",
+   "requires": [],
+   "text": "底舱显影药水浸透胶卷，显出底层第二重微缩文字：目标携带的航线图是双重诱饵，真正的潜艇母港坐标竟藏在搭档随身项链吊坠内部。"
+  },
+  {
+   "category": "人事",
+   "id": "t_cruise_2",
+   "requires": [],
+   "text": "安保主管的公文包在混战中滑落，掉出盖有母港情报局红印的接头委任令：此人是多年前潜伏进航运公司的母港卧底，今夜的盘查竟是在反向检验并保护特工小组。"
+  },
+  {
+   "category": "资源",
+   "id": "t_cruise_3",
+   "requires": [],
+   "text": "三号救生艇底部防水帆布被掀开，底盘挂载着一艘双人微型电动潜水推进器与两具水肺氧气瓶。"
+  },
+  {
+   "category": "制度",
+   "id": "t_cruise_4",
+   "requires": [],
+   "text": "公海广播插播国际海事法庭紧急查扣令：维多利亚号涉嫌多宗洗钱重案，已被多国巡逻舰队宣布进入扣押程序，全船安保执法权当场冻结。"
+  },
+  {
+   "category": "时限",
+   "id": "t_cruise_5",
+   "requires": [
+    "pressure"
+   ],
+   "text": "邮轮骤然驶入风暴眼，磁暴干扰提前半小时消散，公海卫星雷达全频段恢复侦测，原本充裕的发报与撤离窗口被瞬间腰斩。"
+  },
+  {
+   "category": "关系",
+   "id": "t_cruise_6",
+   "requires": [],
+   "text": "搭档遗落在水雾中的身份铭牌露出背面旧刻痕：这位冷峻严苛的一级搭档，竟是当年在特训基地替你顶下危险任务、引开教官的同届挚友。"
+  },
+  {
+   "category": "意外",
+   "id": "t_cruise_7",
+   "requires": [],
+   "text": "底舱主轮机超负荷运转，高压蒸汽排气主管道轰然爆裂，炽热白汽席卷底层回廊与电梯井，彻底阻断了武装安保的追捕路线。"
+  }
+ ]
+}

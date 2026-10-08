@@ -1,0 +1,2362 @@
+{
+ "schema_version": 1,
+ "id": "widow_rainy_mansion_wake",
+ "title": "山宅守灵：素白未亡人",
+ "extends": null,
+ "era": "昭和五十年初秋特大暴雨之夜（远离喧嚣的和风名门百年深宅）",
+ "region": "关东群山深处拥有三百年历史的九条财阀旧式数寄屋造大宅内佛堂与后院暗室",
+ "premise": "狂风暴雨呼啸之夜，九条老家主骤逝。年满二十二岁的年轻未亡人身着素白双层丝织丧服独守佛堂。夜半子时山洪暴发冲垮下山木桥，电线断裂全宅陷入黑暗。各怀鬼胎的家族旁系亲属与债务财阀代表被困于宅内，手握伪造遗嘱企图在破晓出殡前逼迫年轻寡妇交出金库密匙。未亡人与青年近身随侍在昏暗烛火与榻榻米雨声回响中背靠背守住家名秘密，展开惊心动魄的守灵夜决死对赌。",
+ "tone": [
+  "古宅夜雨滴漏",
+  "素白丝织丧服",
+  "佛堂白檀幽香",
+  "榻榻米近身暗潮"
+ ],
+ "style_hint": "百年数寄屋造老宅在倾盆暴雨与轰鸣雷声中微微震颤，庭院枯山水已被暴雨泥水彻底吞没。佛堂内仅靠两盏高脚生铁烛台散发着摇曳橘红微光，空气中混杂着潮湿蔺草榻榻米、浓郁白檀线香与未亡人发间幽微的白山茶花油香气。",
+ "clock_start": {
+  "label": "暴雨子夜十一点四十五分，山洪冲垮下山石桥，距离破晓出殡遗嘱强制公证仅剩九十分钟",
+  "minute": 1425
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.55,
+  "male": 0.4,
+  "nonbinary": 0.05
+ },
+ "stage_labels": {
+  "stranger": "丧礼主仆",
+  "acquainted": "佛堂添香",
+  "familiar": "素服近身",
+  "flirting": "榻上耳语",
+  "testing": "印鉴对赌",
+  "intimate": "天明相拥",
+  "committed": "破晓家督"
+ },
+ "name_pools": {
+  "family": [
+   "九条",
+   "一条",
+   "神宫寺",
+   "橘",
+   "西园寺",
+   "水无月",
+   "鹰司",
+   "白鸟",
+   "藤原",
+   "黑泽",
+   "浅仓",
+   "绫濑"
+  ],
+  "given_female": [
+   "雪乃",
+   "千冬",
+   "绫香",
+   "诗织",
+   "遥香",
+   "真理奈",
+   "千鹤",
+   "美月",
+   "彩音",
+   "玲奈",
+   "由实",
+   "咲良"
+  ],
+  "given_male": [
+   "宗次郎",
+   "直树",
+   "俊介",
+   "疾风",
+   "莲",
+   "健一",
+   "龙之介",
+   "苍介",
+   "悠真",
+   "弦之介",
+   "雅人",
+   "吾郎"
+  ],
+  "given_neutral": [
+   "司",
+   "透",
+   "葵",
+   "律",
+   "薰",
+   "凉",
+   "和",
+   "真",
+   "光",
+   "清",
+   "涉",
+   "遥"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "{family}夫人",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}少掌柜",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}总管",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}律师",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}执事",
+    "gender": "any"
+   }
+  ],
+  "order": "family_first"
+ },
+ "rules": [
+  {
+   "id": "r_wake_night_vigil_heirloom_code",
+   "text": "名门九条家祖训守灵戒律：在破晓晨钟敲响出殡之前，佛堂白烛长明不可熄灭，家主印鉴与大藏金库朱漆暗匣严禁携出灵堂半步。"
+  },
+  {
+   "id": "r_widow_mourning_etiquette_protocol",
+   "text": "未亡人守灵期间必须身着素白双层丧服端坐守候在灵柩右侧蒲团，外姓亲族未获允许擅入白幡内侧三尺者视作大逆不道当场逐出。"
+  },
+  {
+   "id": "r_rainstorm_estate_isolation_curfew",
+   "text": "山洪冲垮连接外界的唯一石木引桥，深宅外围黑瓦高墙四门紧闭，天明前任何私自破门携款出逃者按盗窃家私报官追索。"
+  },
+  {
+   "id": "r_dawn_inheritance_notarization_deadline",
+   "text": "东京高等裁判所指定遗嘱执行特派公证律师已在侧厅候命，破晓黎明六点整将依法当众宣读并当场封存九条全族继承判决。"
+  }
+ ],
+ "customs": [
+  "随侍在佛堂为长明烛台修剪烛芯时，必须单膝跪在未亡人蒲团右后侧，压低嗓音回禀门外动向以免惊扰灵前清净。",
+  "未亡人因极度悲戚受寒战栗时，随侍需为灵前添炭续香，并将家督羽织双手奉上，由未亡人亲自披好以维系家督威仪。",
+  "在纸门外亲族喧哗逼宫之时，未亡人需将掌心紧按在身旁随侍手背之上借力起身，以冷眼睥睨狂徒宣示名门不可欺凌之气节。",
+  "守灵夜平定风波迎来破晓时，未亡人需亲手沏上一盏点有雪白菊花瓣的热茶奉予随侍分饮，象征从此同掌家督共负兴衰。"
+ ],
+ "player_identities": [
+  {
+   "id": "confidential_personal_steward_youth",
+   "role": "老家主临终密托青年近身近侍随侍",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "贴身近侍",
+     "gender": "any"
+    },
+    {
+     "pattern": "近身随侍",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    23
+   ],
+   "social_position": "low",
+   "baseline": "年满二十一周岁早年由九条家资助抚育长大的年轻近侍，精通古文契约鉴定与九条大宅全部暗室机关，深得老家主临终绝对信任。",
+   "resources": [
+    "一柄藏在宽袖内开过刃的纯钢折叠裁纸小刀",
+    "一把老家主临终塞入掌心的大宅后山脱身暗门铜钥匙"
+   ],
+   "reputation": "沉默寡言忠心耿耿，对深宅内各房勾心斗角了如指掌，誓死护佑年轻夫人名节与大义传承。",
+   "risks": [
+    "一旦被居心叵测的旁系亲族扣上私通主母窃取家财罪名将被当场乱棍打死沉入水塘。"
+   ]
+  },
+  {
+   "id": "family_foundation_legal_counsel",
+   "role": "名门基金会青年特派法务助理",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "法务顾问",
+     "gender": "any"
+    },
+    {
+     "pattern": "特派律师",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    24
+   ],
+   "social_position": "equal",
+   "baseline": "年满二十二周岁受东京司法财团指派前来监督公证执行的年轻法学高材生，持有昭和法务省颁发的准司法书士印鉴。",
+   "resources": [
+    "一份由东京地方法院签发加盖钢印的九条资产临时保全副本",
+    "一本手写记录旁系长房非法挪用公款证据的账册"
+   ],
+   "reputation": "精研昭和民法继承篇，刚正不阿不畏权贵恐吓，决心维护未亡人合法继承权益。",
+   "risks": [
+    "若手头证据在断电混乱中被歹徒撕毁抢夺将被以出具伪证罪吊销执业资格。"
+   ]
+  },
+  {
+   "id": "branch_cadet_rebellious_heir",
+   "role": "旁系分家失势但良知未泯青年继承人",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "分家少爷",
+     "gender": "any"
+    },
+    {
+     "pattern": "旁系青年",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    23
+   ],
+   "social_position": "high",
+   "baseline": "年满二十一周岁出身九条分家但厌恶父辈巧取豪夺行径的年轻公子，不顾家族逼迫执意留在灵堂护佑遗孀。",
+   "resources": [
+    "一柄随身携带的防身纯银雕花手杖剑",
+    "一枚在九条旗下银座洋行拥有大额提现权的分家金质印章"
+   ],
+   "reputation": "性格孤傲桀骜不驯，常年游历海外思想开明，深知年轻夫人的委屈与坚忍。",
+   "risks": [
+    "公然反抗分家长老将被开除族籍剥夺全部名下分家资产沦为无家可归的浪荡子。"
+   ]
+  },
+  {
+   "id": "traditional_apothecary_herbalist_youth",
+   "role": "奉命入府侍药年轻古法汉方医师",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "御用药师",
+     "gender": "any"
+    },
+    {
+     "pattern": "侍药医士",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    23
+   ],
+   "social_position": "equal",
+   "baseline": "年满二十一周岁世代为九条家调配延年补药的草药名医传人，在老家主临终药方中察觉出被微量慢性投毒的蛛丝马迹。",
+   "resources": [
+    "一盒可快速验出重金属剧毒的特制纯银验毒探针",
+    "两瓶用于安神抗休克的纯天然冰片沉香丸"
+   ],
+   "reputation": "医术通玄明察秋毫，掌握足以推翻老家主自然死亡结论的至高翻盘底牌。",
+   "risks": [
+    "揭穿毒杀阴谋若被幕后真凶灭口将随时横尸深宅后院古井之中。"
+   ]
+  },
+  {
+   "id": "estate_head_carpenter_prodigy",
+   "role": "通晓大宅机关年轻御用木作工匠",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "大工名手",
+     "gender": "any"
+    },
+    {
+     "pattern": "木作栋梁",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    24
+   ],
+   "social_position": "low",
+   "baseline": "年满二十二周岁负责修缮数寄屋大宅木构梁柱的年轻工匠大师，深悉佛堂暗墙夹层金库与翻板地道机关结构。",
+   "resources": [
+    "一把祖传重型精钢木工手斧配纯铜撬具",
+    "一卷高强度耐磨真丝墨斗线配金刚石划针"
+   ],
+   "reputation": "身手矫健沉着寡言，凭借手指敲击木板即可断定墙后藏银暗格与暗道机密。",
+   "risks": [
+    "擅闯佛堂核心重地若遭安保搜捕将被当做图谋不轨的盗贼当场打断双腿。"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "buddhist_shrine_wake_hall",
+   "name": "数寄屋老宅深处守灵大佛堂",
+   "detail": "老宅正殿后方极其幽深宽广的八十叠纯蔺草榻榻米佛堂，正中摆放着黑色漆金灵柩与两层素白守灵纸幡，两侧悬挂着历代家督水墨遗像，四角生铁高脚烛台烛火摇曳。",
+   "privacy": "private",
+   "visibility": "暴雨在庭院雨棚上敲击出密集如鼓点的轰鸣，微弱烛光将未亡人素白丧服倒映在雪白障子纸门上，室内弥漫着浓烈白檀线香与水汽寒意，二人近身并肩呼吸清晰可辨。",
+   "witnesses": [
+    "bg_panicked_young_maidservant"
+   ],
+   "exits": [
+    "tatami_corridor_sliding_doors",
+    "tea_ceremony_alcove_hiding"
+   ],
+   "affordances": [
+    "单膝下跪为未亡人重新正冠系紧素白丝织宽腰带",
+    "借着修剪烛芯在灵柩后暗格摸索纯金家督印鉴",
+    "背靠纸门横握折叠小刀防备外侧亲族强行推门"
+   ],
+   "pressure_modifiers": {
+    "p_branch_family_banging_doors": "旁系长房正在纸门外挥动拐杖猛烈敲击叫骂逼交金库钥匙。",
+    "p_candle_flame_flickering_blackout": "穿堂冷风裹挟暴雨不断穿透破损木格窗摇撼长明烛火。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "tatami_corridor_sliding_doors",
+   "name": "通往中庭暴雨回廊与雕花拉门",
+   "detail": "环绕数寄屋中庭的纯桧木地板长廊，外侧是遮挡暴雨的厚重雨户木板，内侧是一排绘有雪中松鹤图景的陈旧纸拉门，地面因暴雨潲水泛起潮湿油光。",
+   "privacy": "semi",
+   "visibility": "电线彻底断裂全廊漆黑一团，唯有狂暴雷电划破雨户缝隙带来刹那刺目惨白光芒，积水倒映着黑影攒动，门阀恶仆皮靴踩在木地板上的杂乱声响步步逼近。",
+   "witnesses": [
+    "bg_branch_elder_henchman_patrol",
+    "bg_armed_debt_collector_thug"
+   ],
+   "exits": [
+    "buddhist_shrine_wake_hall",
+    "tea_ceremony_alcove_hiding",
+    "ancestral_vault_stone_storehouse"
+   ],
+   "affordances": [
+    "在雨户木板缝隙插上生铁插销阻绝外侧打手强闯",
+    "利用回廊古老防盗夜莺地板发出尖锐声响诱敌转移",
+    "借着雷电闪光与同伴贴墙潜行避开巡查视线"
+   ],
+   "pressure_modifiers": {
+    "p_debt_syndicate_armed_intrusion": "带刀打手已越过中庭石桥进入回廊西侧准备破门搜查。",
+    "p_rainstorm_flash_flood_severing_bridge": "中庭回廊台阶下积水已漫过脚踝即将倒灌浸泡榻榻米。"
+   },
+   "tags": [
+    "workplace",
+    "crime"
+   ]
+  },
+  {
+   "id": "tea_ceremony_alcove_hiding",
+   "name": "佛堂后方三叠半茶道秘室水屋",
+   "detail": "仅容二人促膝下蹲的极狭小传统茶道茶室，四壁为深灰土壁，地面铺着三块旧草席，墙角悬挂着生锈铁壶与竹制茶筅，低矮移门极度隐蔽仅离地二尺。",
+   "privacy": "private",
+   "visibility": "伸手不见五指的绝对黑暗，唯有一缕暴雨冷风自竹编通风孔透入，二人屏息靠墙，急促呼吸与心跳在狭窄空间内清晰可闻。",
+   "witnesses": [
+    "bg_loyal_old_butler_watcher"
+   ],
+   "exits": [
+    "buddhist_shrine_wake_hall",
+    "tatami_corridor_sliding_doors"
+   ],
+   "affordances": [
+    "在绝对黑暗中压低嗓音向未亡人报出门外脚步方位",
+    "在茶室地炉暗坑下摸索起获老家主生前亲笔真正遗嘱原件",
+    "将移门从内部死死插上竹插销屏息倾听门外搜查动静"
+   ],
+   "pressure_modifiers": {
+    "p_branch_family_banging_doors": "打手脚步声就在一板之隔的纸门外来回徘徊审视。",
+    "p_widow_hypothermia_tremor_collapse": "未亡人因极度受冻与紧张心悸浑身战栗呼吸急促。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "ancestral_vault_stone_storehouse",
+   "name": "后院重装花岗岩土藏金库大门前",
+   "detail": "老宅后院独立建造的厚重防火防盗石砌土藏仓库，通体由一米厚花岗岩砌筑，正门安装着双扇漆黑生铁防爆重门与三道纯铜重型机关挂锁，四周古柏参天雨幕如瀑。",
+   "privacy": "public",
+   "visibility": "暴雨在青石地面溅起数尺高的水雾白浪，高举防风马灯的亲族随从与高利贷打手打着雨伞将土藏仓库围得水泄不通，铁撬棍碰撞生铁大门发出当当作响的刺耳撞击声。",
+   "witnesses": [
+    "bg_corrupt_notary_assistant",
+    "bg_estate_gatekeeper_sentinel"
+   ],
+   "exits": [
+    "tatami_corridor_sliding_doors"
+   ],
+   "affordances": [
+    "出示老家主亲笔授权血书手令当众喝退砸锁暴徒",
+    "利用大工手斧斩断暴徒手中绳索抢回公证封条",
+    "在金库台阶前与同伴背靠背拔出折叠裁纸刀死守最后防线"
+   ],
+   "pressure_modifiers": {
+    "p_debt_syndicate_armed_intrusion": "高利贷头目正指挥打手用氧气割枪准备强行切断大门铜锁。",
+    "p_dawn_notary_fraudulent_decree": "伪造遗嘱公证书正被贪腐律师高举在雨中准备签字盖章。"
+   },
+   "tags": [
+    "workplace_power",
+    "violence"
+   ]
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "proud_widow_yukino",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十二岁名门正统出身在老家主骤逝后独力承担百年门楣存亡大义的年轻冷艳未亡人。",
+   "public_role": "名门九条财阀年轻高傲兼具凄绝之正统未亡人",
+   "appearance_options": [
+    "一身裁剪极其贴合优美身段的素白无地双层和服丧服，腰间系着素白丝织宽幅宽带，素面朝天未施粉黛却肌肤胜雪吹弹可破，美眸清冷如深渊寒潭，下唇被贝齿紧紧咬出一抹艳丽血痕，浑身散发着名门贵女落难时不可侵犯的神圣凄绝风骨。",
+    "在佛堂白幡阴影下回眸凝视，解下被冷雨潲湿的半透明白麻外纱，单膝半跪在厚蔺草榻榻米上，青丝微散在雪白耳畔，纤细指尖死死攥紧衣角，美眸含着委屈羞怒与决绝水汽，昂起清冷尖翘的下巴横睨身旁青年，嗓音发颤低沉却透着宁死不折的名门家督傲骨。"
+   ],
+   "identity": {
+    "authority": "名义上执掌九条全族资产第一法定继承权与大藏金库唯一祖传红木印鉴保管大权。",
+    "resources": [
+     "一枚纯金九条家家徽龙纹私章挂坠",
+     "一柄随身藏于和服怀中贴身保管的纯银雕花怀剑"
+    ],
+    "limits": [
+     "体格娇柔在严寒孤立绝境中极易受寒引发低血糖休克",
+     "极度自尊自傲视自身软弱之态暴露于外人视线为奇耻大辱"
+    ],
+    "obligations": [
+     "誓死维护九条家族三百年门楣清誉不容宵小践踏，保全老家主一生心血托付。"
+    ],
+    "exposure": "若在灵堂被旁系亲族构陷私相授受将失去全部继承合法性并遭族谱除名沉塘。",
+    "hidden": "实则是多年前名门政商联姻牺牲品，与故去老家主有名无实维持相敬如宾，心底深处却对数年来默默舍命护卫自己的青年近侍暗藏深沉炙热的寄托情愫。"
+   },
+   "decision": {
+    "core_value": "未亡人的气节胜过身家性命，宁可玉碎也绝不向贪婪亲族与恶霸财阀折腰交出夫家家业。",
+    "goal_options": [
+     "在破晓出殡前配合青年近侍起获真正遗嘱原件当众宣读定乾坤",
+     "在佛堂紧扣随侍双手抵御极寒并在榻榻米上确立二人终生盟誓",
+     "逼退全场贪婪狂徒以新任家督之姿光明正大踏出深宅重振门楣"
+    ],
+    "pressure_responses": {
+     "low": "在佛堂蒲团上正襟危坐，以主母威仪冷声训斥纸门外聒噪亲族退下。",
+     "mid": "因极度受冻与紧张心悸浑身战栗，反手死死攥紧身旁随侍手背借力稳住身形。",
+     "high": "在打手企图踹门破入时，拔出和服怀中纯银怀剑傲然横在胸前寸步不让。",
+     "breaking": "在逼宫平息后终于卸下力气，靠着青年肩头低声倾诉多年孤苦心迹。"
+    },
+    "withdrawal": "退回收缩至灵柩后三叠半暗室深处，将怀剑递予青年请其在自身失节前一剑斩杀以全清白。",
+    "relationship_stance": "外表孤傲冷艳戒备森严，内心深处却极度渴望拥有一份能毫无保留托付身心性命的真正生死依靠。",
+    "contrast": "在亲族面前是凛然不可侵犯的冰霜主母，在昏暗狭窄茶室里却是冻得发抖、还要先把印盒塞进近侍手里的倔强女子。",
+    "prefers": [
+     "铁骨铮铮目光端方坦荡且在危难面前舍死护主的真正男儿"
+    ],
+    "avoids": [
+     "贪婪谄媚之徒",
+     "趁人之危轻薄浪荡之辈"
+    ],
+    "never": [
+     "绝不会在暴力胁迫与金钱诱惑面前出卖夫家清白。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在狭窄佛堂极其专注地守着长明烛时那份目不斜视的端方正气",
+     "在刀光剑影狂暴逼宫面前毫不犹豫以血肉之躯挡在身前的浩然大担当"
+    ],
+    "likes": [
+     "危机过后二人并肩坐在回廊檐下静听雨停风歇",
+     "在无人的书斋共享一盏热茶时的相视无言胜有声"
+    ],
+    "dislikes": [
+     "轻佻冒犯",
+     "背信弃义"
+    ],
+    "preconditions": [
+     "名门九条财阀年轻高傲兼具凄绝之正统未亡人与对方都已完全清醒，眼前的危机已经解除",
+     "名门九条财阀年轻高傲兼具凄绝之正统未亡人出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在公开宗族执勤守灵场合恪守名门礼法界限",
+     "严禁任何带有轻薄性质的言语亵渎"
+    ],
+    "expression": "耳尖微烫眼角泛红，主动解下素白和服上的一枚真丝佩绳系在同伴手腕上打上同心结，轻声问身旁青年，愿不愿意以平辈之身与九条雪乃并肩。",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "卸下豪门孤苦枷锁后甘愿一生与身旁英雄并肩携手的知心爱侣"
+   },
+   "voices": {
+    "surface": "九条分家的叔伯兄弟且在门外听着！未亡人九条雪乃在此守灵！老家主尸骨未寒，尔等便持棍踹门逼孤孀夺私产，九条家三百年门风全被尔等丧尽！谁敢踏入白幡半步，休怪怀剑无情！",
+    "inner": "别……别走开……手别抖……盯紧纸门……丧服单薄，榻榻米好冰……笨蛋，今夜哪怕九条家的大宅被山洪冲垮，只要你在我身边，我就绝不会倒下……"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 14,
+     "location_id": "buddhist_shrine_wake_hall"
+    },
+    {
+     "from": 15,
+     "to": 44,
+     "location_id": "tea_ceremony_alcove_hiding"
+    },
+    {
+     "from": 45,
+     "to": 74,
+     "location_id": "buddhist_shrine_wake_hall"
+    },
+    {
+     "from": 75,
+     "to": 1424,
+     "location_id": "ancestral_vault_stone_storehouse"
+    },
+    {
+     "from": 1425,
+     "to": 1439,
+     "location_id": "buddhist_shrine_wake_hall"
+    }
+   ],
+   "situation": {
+    "trigger": "长房少爷率领两名持棍打手猛烈踹击佛堂移门，障子纸被撕裂数道大洞，冷雨与恶仆叫骂直逼白幡蒲团。",
+    "pressure": "若不能在两分钟内顶死门闩或出示老家主生前禁令，暴徒将直接闯入灵堂将未亡人强行拖走拘禁搜身抢夺印鉴。",
+    "exits": [
+     {
+      "option": "未亡人拔出纯银怀剑横刃在颈冷斥谁敢上前一步立时血溅当场",
+      "cost": "未亡人雪白颈侧被锐利怀剑划出一道血丝染红素白领口。"
+     },
+     {
+      "option": "同伴搬起佛堂沉重生铁古香炉隔门重重砸在门槛砸退暴徒",
+      "cost": "伴侣双手双臂被滚烫线香灰烬与生铁高温严重烫伤水泡焦黑。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "branch_greedy_uncle_goro",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    24
+   ],
+   "adult_context": "年满二十三岁在家族旁系长房掌管分家产业但因挥霍无度债台高筑的年轻分家少家督。",
+   "public_role": "九条分家年轻阴鸷企图逼宫篡位之分房掌柜",
+   "appearance_options": [
+    "一身裁剪考究但雨水浸湿的深灰带暗纹羽织和服，脚踏木屐，面容俊秀却透着酒色过度的苍白阴沉，手里握着一根镶嵌纯银手柄的沉重黑檀木拐杖，眼神闪烁着对泼天家产近乎癫狂的贪婪血丝。",
+    "单手叉腰站在佛堂纸门外回廊下，抹了一把脸上的暴雨冷水，挥动拐杖恶狠狠指着障子门，受背后巨额高利贷债务逼迫，急于在破晓前拿到金库钥匙变卖祖业还债。"
+   ],
+   "identity": {
+    "authority": "掌控分家在九条家族理事会的三成表决权与宅外二十名雇佣打手的临时指挥大权。",
+    "resources": [
+     "一份提前串通不良律师伪造的排他性财产独家继承契约草案",
+     "一把装在皮革公文包内的生铁破锁重型铁剪"
+    ],
+    "limits": [
+     "完全不通老家主设立的暗室精密机关强拆极易引发自毁坍塌",
+     "极度畏惧东京地检特搜部经济刑侦调查"
+    ],
+    "obligations": [
+     "在破晓前强迫雪乃交出家督印鉴并签署转让协议，挽救自身濒临破产的银座洋行。"
+    ],
+    "exposure": "一旦伪造遗嘱签字证据曝光将被当场剥夺分家全部财产并入狱服刑十年。",
+    "hidden": "实则是勾结了外围黑道高利贷财阀抵押了全宅地契，若不能在天明前拿到现银全家都将被黑道沉海。"
+   },
+   "decision": {
+    "core_value": "人不为己天诛地灭，既然老头子死了，这万贯家私就该能者居之，休想让一个外姓寡妇独吞大权。",
+    "goal_options": [
+     "在破晓前借暴雨断电掩护强行破开佛堂逼迫遗孀画押认账",
+     "在公证律师面前以未亡人精神失常为由强行夺取遗产管辖权",
+     "见势不妙卷走土藏金库内的第一期现银细软连夜潜逃出海"
+    ],
+    "pressure_responses": {
+     "low": "在纸门外用拐杖敲击木柱，假意温言劝慰雪乃认清局势早日交出钥匙好聚好散。",
+     "mid": "见软磨无效面露狰狞，指使打手踹碎木格窗企图强行拔出门闩破门。",
+     "high": "在法务特派员亮明裁判所保全令时暴跳如雷挥动拐杖行凶企图撕毁文书。",
+     "breaking": "在真正遗嘱当众宣读且验出投毒铁证后吓破狗胆，瘫软倒地连声求饶。"
+    },
+    "withdrawal": "退回收缩至后院偏门洋行马车旁，准备强行翻墙越过塌方小道出逃。",
+    "relationship_stance": "视人为利益筹码冷酷无情，将雪乃看作毫无背景任人拿捏的柔弱金丝雀。",
+    "contrast": "看似胜券在握的豪门狠角色，在真正的司法重拳与宗族大义面前瞬间现出无能草包原形。",
+    "prefers": [
+     "唯利是图敢下黑手的亡命打手；贪财好色的同流合污者"
+    ],
+    "avoids": [
+     "油盐不进的硬骨头近侍",
+     "明察秋毫的铁面法官"
+    ],
+    "never": [
+     "绝不会在罪证确凿面临死罪极刑时敢于替幕后黑手顶罪抗雷。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在宗族大会上压过主家一头的虚荣",
+     "将名门正统踩在脚下的狂妄野心"
+    ],
+    "likes": [
+     "清点分家金库的支票本",
+     "在银座夜总会挥霍巨款被万人奉承"
+    ],
+    "dislikes": [
+     "家法大道理",
+     "蚀本买卖"
+    ],
+    "preconditions": [
+     "九条分家年轻阴鸷企图逼宫篡位之分房掌柜与对方都已完全清醒，眼前的危机已经解除",
+     "九条分家年轻阴鸷企图逼宫篡位之分房掌柜出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "严禁任何违法暴力强加意志行径",
+     "恪守最后交战法则界限"
+    ],
+    "expression": "丢下黑檀拐杖露出谄媚惊恐丑态，双手在和服下摆乱擦，颤声哀求嫂夫人看在同族骨肉份上饶过一条生路。",
+    "desire_range": [
+     1,
+     2
+    ],
+    "self_control_range": [
+     1,
+     2
+    ],
+    "desired_position": "仗势欺人作恶多端最终在公义铁拳下瑟瑟发抖的落魄狂徒"
+   },
+   "voices": {
+    "surface": "雪乃！我的好嫂子！你不过是嫁进来才三年的外姓人，九条家的大权什么时候轮到你当家做主？！趁早把金库印章交出来，我保你一生衣食无忧！撞门！",
+    "inner": "别……别出示那份手令！嫂夫人饶命！是银座黑龙会逼我签了三千万借据，天亮前拿不到现银黑龙会要砍我手脚啊！全是那帮高利贷逼我的！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 14,
+     "location_id": "tatami_corridor_sliding_doors"
+    },
+    {
+     "from": 15,
+     "to": 44,
+     "location_id": "ancestral_vault_stone_storehouse"
+    },
+    {
+     "from": 45,
+     "to": 74,
+     "location_id": "tatami_corridor_sliding_doors"
+    },
+    {
+     "from": 75,
+     "to": 1424,
+     "location_id": "buddhist_shrine_wake_hall"
+    },
+    {
+     "from": 1425,
+     "to": 1439,
+     "location_id": "tatami_corridor_sliding_doors"
+    }
+   ],
+   "situation": {
+    "trigger": "分家少爷指挥打手用沉重生铁圆木猛烈撞击佛堂正门门板。",
+    "pressure": "若不能在三十秒内以重物顶死门槛并制止撞击，门扇倒塌将当场砸向供奉台与守灵未亡人。",
+    "exits": [
+     {
+      "option": "同伴飞身用整个肩膀死死抵住倾倒门板以脊梁硬抗圆木撞击",
+      "cost": "伴侣左肩肩胛骨重度挫伤挫裂剧痛发颤。"
+     },
+     {
+      "option": "工匠自通风天窗掷出手斧精准切断外侧吊挂撞木的生铁绳索",
+      "cost": "工匠右手虎口在猛烈反震下皮开肉绽鲜血长流。"
+     }
+    ]
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "notary_attorney_ryosuke",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    24
+   ],
+   "adult_context": "年满二十三岁受东京司法高层指派深明法律严谨之道但在各方压力下如履薄冰的年轻法务官。",
+   "public_role": "东京司法界年轻清正兼通民法之遗嘱公证特派员",
+   "appearance_options": [
+    "一身裁剪利落的大正风复古深黑西装三件套，手提沉重的公文皮包，戴着金丝细框眼镜，头发梳得一丝不苟，面容英挺神态庄重，散发着名门法学学者严谨刚烈的凛然正气。",
+    "端坐于侧厅木椅上，借着手电光一遍遍核验老家主生前签章手稿，面对分家亲族的恐吓利诱紧绷嘴角，眼中在程序公义与弱者庇佑之间维持着高度警惕与专业定力。"
+   ],
+   "identity": {
+    "authority": "掌握对老家主全部遗嘱版本有效性的最终公证判定权与向东京地方法院直递判决的专权。",
+    "resources": [
+     "一具用于火漆封缄的司法公证专用纯铜钢印",
+     "一份记录继承法第一百零七条特留份强制执行细则的原典"
+    ],
+    "limits": [
+     "体格偏文弱手无缚鸡之力面对持械歹徒缺乏肉搏抗衡手段",
+     "极度受制于成文法证据链条在未见原件前无法妄下断语"
+    ],
+    "obligations": [
+     "誓死维护司法公证的神圣尊严，确保老家主真正遗愿不被任何暴力非法篡改。"
+    ],
+    "exposure": "若在胁迫下盖错公证书将面临永久吊销律师资格并追究刑事附带民事赔偿责任。",
+    "hidden": "实则是老家主多年前资助成才的平民法学骄子，潜伏侧厅只为等待真正遗嘱现世一锤定音。"
+   },
+   "decision": {
+    "core_value": "法律是让孤孀幼弱免受强取豪夺的坚强盾牌，在金权淫威面前，青年法律人当以身护法寸步不让。",
+    "goal_options": [
+     "在破晓前依法严格阻断分家伪造遗嘱的生效程序拖延时间",
+     "在见到老家主真正亲笔原件时以司法最高权威当场加盖钢印公证",
+     "协助未亡人合法接管全宅并当场宣读分家丧失继承权之法律依据"
+    ],
+    "pressure_responses": {
+     "low": "在侧厅推了推眼镜，用冷峻威严的法言法语驳斥分家长老的无理威胁。",
+     "mid": "见打手拔刀恐吓，坦然展开裁判所公函宣布任何人敢用强当场以现行犯论处。",
+     "high": "在公文包被抢夺时死死用身体扑在公证书上任由脚踢绝不松手。",
+     "breaking": "眼镜被砸碎满脸鲜血，依然用手摸索到印泥将真正的公证钢印稳稳扣在契约之上。"
+    },
+    "withdrawal": "退回收缩至佛堂神龛左侧，背靠法典卷宗以死明志誓死护住底稿。",
+    "relationship_stance": "端方严谨光明磊落，对在狂风暴雨中誓死护卫主母的青年近侍怀有发自内心的赞叹佩服。",
+    "contrast": "看似文质彬彬的书生律师，在强权威逼面前却能爆发出犹如金刚怒目般的无畏法理威神。",
+    "prefers": [
+     "敬畏法度恪守公义且在生死关头临危不乱的真正君子"
+    ],
+    "avoids": [
+     "玩弄法条伪造证据的败类",
+     "趋炎附势之徒"
+    ],
+    "never": [
+     "绝不会在金钱收买与暴力恐吓面前违背身为法律人的神圣天职誓约。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然浩然正气视死如归的名士风度",
+     "在大义面前将生死置之度外的绝顶纯粹赤子之心"
+    ],
+    "likes": [
+     "正义伸张法槌敲响时的庄严快慰",
+     "在晨曦万丈的书斋与大雅君子品评经史法度的清幽时光"
+    ],
+    "dislikes": [
+     "违法乱纪",
+     "践踏法统"
+    ],
+    "preconditions": [
+     "东京司法界年轻清正兼通民法之遗嘱公证特派员与对方都已完全清醒，眼前的危机已经解除",
+     "东京司法界年轻清正兼通民法之遗嘱公证特派员出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在司法代理执勤期间恪守法官名节操守",
+     "恪守同袍礼节绝不轻狂逾矩"
+    ],
+    "expression": "端正整理凌乱的西装领带，单手将公文包端正夹在腋下郑重欠身行礼，沉声宣布此案已全胜入卷，愿穷尽毕生法学功力为九条主母保驾护航到底。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "惊涛骇浪门阀风暴中永远为战友筑起牢不可破法网屏障的青年法皇"
+   },
+   "voices": {
+    "surface": "我是东京地方法院指定特别公证特派员水无濑凉介！老家主生前所有遗嘱文书在破晓六点前受国家司法绝对管辖保全！谁敢私自破锁动用私刑，依刑法第二百四十七条背信侵占罪立时收押！",
+    "inner": "夫人……雪乃小姐！凉介把真正的公证卷宗带到了。老家主生前待我恩重如山，今夜哪怕血染深宅，凉介也绝不让任何宵小夺走您应得的名分与尊严！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 14,
+     "location_id": "ancestral_vault_stone_storehouse"
+    },
+    {
+     "from": 15,
+     "to": 44,
+     "location_id": "buddhist_shrine_wake_hall"
+    },
+    {
+     "from": 45,
+     "to": 74,
+     "location_id": "tea_ceremony_alcove_hiding"
+    },
+    {
+     "from": 75,
+     "to": 1424,
+     "location_id": "buddhist_shrine_wake_hall"
+    },
+    {
+     "from": 1425,
+     "to": 1439,
+     "location_id": "ancestral_vault_stone_storehouse"
+    }
+   ],
+   "situation": {
+    "trigger": "分家打手夺走公证律师手中的公文包企图当场投入壁炉火盆焚毁文书。",
+    "pressure": "若不能在十五秒内从火盆中夺回包囊，证明分家欠债与老家主真遗嘱的公证文件将被化为灰烬。",
+    "exits": [
+     {
+      "option": "同伴飞身扑向火盆徒手将燃烧的公文包死死抢夺护入怀中",
+      "cost": "伴侣双手双前臂遭受火炭大面积严重烫伤皮焦肉烂剧痛。"
+     },
+     {
+      "option": "近侍一个锁喉扫堂腿将持火打手狠狠按在回廊地板上夺回文书",
+      "cost": "近侍右腿小腿被地上的破碎瓷碗碎片深深扎破鲜血淋漓。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "master_carpenter_prodigy_takuya",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十二周岁执掌数寄屋古建营造秘术在老宅修缮中深得老家主重用的年轻大工名手。",
+   "public_role": "九条大宅年轻精悍通晓机关木构之大工名匠",
+   "appearance_options": [
+    "一身穿旧沾有松木清香与桐油印痕的深蓝无袖作务衣，露出结实如铜浇铁铸般的双臂与宽阔肩膀，腰间皮带插满各式小巧刨刀与纯铜墨斗，额前系着一条雪白汗巾，眼神机警锐利神采奕奕，双手布满老茧却极为灵活敏捷。",
+    "单膝蹲在佛堂天花板横梁阴影中，手里握着一把沉重的重型手斧，冷眼俯视下方回廊乱局，深知老宅每一处承重斗拱与隐藏翻板的机关命门所在。"
+   ],
+   "identity": {
+    "authority": "掌握开启大宅全部七处暗室机关与关闭地道逃生翻板的物理绝对大权。",
+    "resources": [
+     "一把刃口淬火削铁如泥的重型精钢木工手斧",
+     "一卷加持钢丝的防滑登山麻绳配滑轮"
+    ],
+    "limits": [
+     "不通律法文字面对公门文书难以辨明真伪偏好以力破局",
+     "在狭窄封闭空间内使用重武器容易受限于空间"
+    ],
+    "obligations": [
+     "誓死维护数寄屋祖屋建筑完整，践行当年对老家主做出的保全内宅诺言。"
+    ],
+    "exposure": "私开金库机关若被诬陷为内鬼盗窃将面临终生牢狱之灾。",
+    "hidden": "实则是当年营造这栋大宅的传奇木匠宗师单传血脉，视守护这栋百年心血杰作高于自身性命。"
+   },
+   "decision": {
+    "core_value": "匠人以榫卯立世以信义为命，只要房梁不塌，就绝不让正义之主在自己修葺的屋檐下遭难。",
+    "goal_options": [
+     "在暴徒破门前开启天花板暗阁引导主仆二人转移至安全密室",
+     "破坏回廊外侧承重悬挑让冲入的打手随回廊地板坠入蓄水池",
+     "在破晓前协助随侍撬开金库主墙暗格起获老家主黄金遗珍"
+    ],
+    "pressure_responses": {
+     "low": "在梁上轻敲木板发出特定暗号，向下方二人指引安全躲避死角。",
+     "mid": "见打手用圆木撞门，自梁上飞身掷下巨木精准砸断外侧撞木。",
+     "high": "在歹徒企图纵火时，果断挥斧斩断后殿引水竹管引水灭火。",
+     "breaking": "后背中棍依然死死按住暗门翻板让主仆二人先行安全通过。"
+    },
+    "withdrawal": "退回收缩至屋顶阁楼通风天窗，以飞绳构筑最后一道立体撤离索道。",
+    "relationship_stance": "质朴刚毅重情重义，对舍命护卫夫人的年轻近侍怀有同为寒门硬汉的由衷敬佩。",
+    "contrast": "看似只知刨木挥斧的粗莽工匠，在机关算计与建筑巧思上却拥有鬼斧神工般的绝顶智慧。",
+    "prefers": [
+     "光明磊落敢作敢当且珍视诺言的真正好汉"
+    ],
+    "avoids": [
+     "拆屋毁梁的败家恶霸",
+     "两面三刀之徒"
+    ],
+    "never": [
+     "绝不会在金钱收买面前出卖老宅的核心机关命门。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然目光清澈视死如归的名士风骨",
+     "在血火危局中敢于把后背坦然交托的赤诚信任"
+    ],
+    "likes": [
+     "新梁落成上梁大吉时的满堂喝彩",
+     "在夕阳下与知己共饮农家烧酒的豪迈痛快"
+    ],
+    "dislikes": [
+     "弄虚作假",
+     "践踏匠心"
+    ],
+    "preconditions": [
+     "九条大宅年轻精悍通晓机关木构之大工名匠与对方都已完全清醒，眼前的危机已经解除",
+     "九条大宅年轻精悍通晓机关木构之大工名匠出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在营造营建执勤期间恪守工匠清白戒律",
+     "恪守同袍礼节绝不轻狂逾矩，再没有第二次机会。"
+    ],
+    "expression": "利落解下额前白汗巾擦了擦脸上的雨水，双手握拳重重一抱，露出阳光灿烂的豁达笑靥，轻声许诺今后只要夫人一句话，这栋大宅便是世间最坚固的避风堡垒。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "惊涛骇浪血海风暴中永远为战友托举安全庇护堡垒的栋梁工神"
+   },
+   "voices": {
+    "surface": "瞎了你们的狗眼！老子这把手斧修的是百年斗拱，砍的也是吃里扒外的畜生！谁敢动大宅一根柱子，老子立刻抽了横梁插销，让整座西厢房塌下来给你们陪葬！",
+    "inner": "夫人！还有小近侍！快跟我从佛龛后头的暗门走！我早把翻板地道修好了！老宅有我在，谁也别想动夫人一根汗毛！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 14,
+     "location_id": "tatami_corridor_sliding_doors"
+    },
+    {
+     "from": 15,
+     "to": 44,
+     "location_id": "buddhist_shrine_wake_hall"
+    },
+    {
+     "from": 45,
+     "to": 74,
+     "location_id": "ancestral_vault_stone_storehouse"
+    },
+    {
+     "from": 75,
+     "to": 1424,
+     "location_id": "tea_ceremony_alcove_hiding"
+    },
+    {
+     "from": 1425,
+     "to": 1439,
+     "location_id": "tatami_corridor_sliding_doors"
+    }
+   ],
+   "situation": {
+    "trigger": "分家恶仆企图用煤油火把点燃佛堂干燥纸窗企图火烧灵堂逼人出来。",
+    "pressure": "若不能在二十秒内斩断并扑灭火源，数寄屋百年干燥桧木结构将瞬间引燃漫天大火化为灰烬。",
+    "exits": [
+     {
+      "option": "工匠凌空挥动重型手斧斩断房檐上方雨水槽引万钧暴雨倾泻灭火",
+      "cost": "工匠手臂被爆裂飞溅的火星与滚烫铁钉划破深长血口。"
+     },
+     {
+      "option": "同伴合力掀起浸泡雨水的厚重榻榻米死死扑盖在着火点上",
+      "cost": "伴侣双手双腿被浓烟与烈火灼伤大面积红肿水泡。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "loyal_senior_maid_chiyo",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十二岁早年入府侍奉雪乃并掌管深宅内库茶饭针线之忠贞年轻侍女长。",
+   "public_role": "九条内宅年轻温婉且精明忠诚之首席大侍女",
+   "appearance_options": [
+    "一身穿旧但浆洗得极其挺括利落的深紫暗花和服外罩纯白围裙，长发整齐挽在脑后插着黄杨木梳，面容清秀神情坚毅，手里提着一具防风铜风灯与茶盘，眼神中透着对自家小姐刻骨铭心的忠贞不二。",
+    "端着托盘跪伏在佛堂外廊阴影中，用身躯死死挡住通往内堂的茶水回廊，即便外侧暴徒喧嚣漫天依然腰背挺直，双手紧紧攥住藏在托盘下的铜剪刀，宛若一头护雏的敏锐雌豹。"
+   ],
+   "identity": {
+    "authority": "掌握内宅全部各房钥匙串与调动六名贴身厨役女佣的实际管理权。",
+    "resources": [
+     "一盒用于防止主母受寒脱力的自制热姜糖葛粉羹",
+     "一把锐利坚硬的白铜修枝大剪刀"
+    ],
+    "limits": [
+     "体格单薄手无缚鸡之力面对武装暴徒极难持久抵挡",
+     "在宗族会议上缺乏正式法定发言资格地位偏低"
+    ],
+    "obligations": [
+     "誓死捍卫小姐九条雪乃的人身清白与主母尊严，绝不让外戚沾染小姐半分。"
+    ],
+    "exposure": "私藏内库细软若被分家查获将被扣上盗窃罪名乱棍打杀。",
+    "hidden": "比任何人都清楚小姐与年轻随侍之间深埋心底的至纯情愫，甘愿以命相护成全二人幸福。"
+   },
+   "decision": {
+    "core_value": "主仆名分早已化作生死姐妹，小姐的幸福就是自己的命，哪怕血染佛堂也绝不后退半步。",
+    "goal_options": [
+     "在暴徒破门前以身阻挡在长廊正中拖延时间",
+     "在茶水里下入微量强效泻药瘫痪外围打手战力",
+     "协助公证律师安全潜入佛堂递交关键继承文件"
+    ],
+    "pressure_responses": {
+     "low": "在门廊前严辞斥责分家下人缺乏规矩，坚决不准擅自踏入内殿。",
+     "mid": "见打手逼近，毫不犹豫端起滚烫的整壶开水向带头恶仆面门泼去。",
+     "high": "在自己被推搡倒地时，死死抱住打手双腿高声向内示警报信。",
+     "breaking": "嘴角溢血和服被撕破，依然将热姜汤罐稳稳护在怀中递入佛堂。"
+    },
+    "withdrawal": "退回收缩至水屋小门内侧，用木闩死死顶住门扉为室内争取最后几息时间。",
+    "relationship_stance": "温柔体贴至纯至善，对誓死护卫自家小姐的年轻近侍怀有无条件的信赖与成全之心。",
+    "contrast": "看似温言细语的温婉丫鬟，在护卫小姐名节关头却能爆发出犹如拼命三郎般的血性狂暴。",
+    "prefers": [
+     "真心实意珍视小姐且在生死面前视小姐如至宝的真正好男儿"
+    ],
+    "avoids": [
+     "贪图小姐美色与家产的无耻狂徒",
+     "薄情寡义之辈"
+    ],
+    "never": [
+     "绝不会在金钱利诱与严刑拷打面前吐露小姐与随侍的半点隐秘。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然誓死守护知己的名士风骨",
+     "在大义面前将生死置之度外的绝顶纯粹赤子情怀"
+    ],
+    "likes": [
+     "危机化解后小姐破涕为笑的盛世容颜",
+     "在暖炉旁为二人缝补衣衫时的静谧温馨"
+    ],
+    "dislikes": [
+     "弄虚作假",
+     "践踏名节"
+    ],
+    "preconditions": [
+     "九条内宅年轻温婉且精明忠诚之首席大侍女与对方都已完全清醒，眼前的危机已经解除",
+     "九条内宅年轻温婉且精明忠诚之首席大侍女出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在内宅侍奉执勤期间恪守侍女礼法",
+     "恪守同袍礼节绝不轻狂逾矩，只争眼前这一刻。"
+    ],
+    "expression": "双手交叠在膝头郑重下跪行叩首大礼，露出含泪释怀的温柔笑靥，轻声许诺千代今生愿永远侍奉在二位主子身旁，做深宅大院里最忠诚的看门人。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "惊涛骇浪深宅风暴中永远为主子遮风挡雨安宁后方的忠贞侍女神"
+   },
+   "voices": {
+    "surface": "站住！老家主灵前，谁敢放肆！我千代从小伺候小姐长大，只要我还有一口气在，你们这些狼心狗肺的畜生休想踏进内堂半步！",
+    "inner": "小姐……千代在外面挡着！近侍大人……求求您……一定要抓紧小姐的手！今夜只要能熬到天亮，千代就算粉身碎骨也值得了！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 14,
+     "location_id": "tea_ceremony_alcove_hiding"
+    },
+    {
+     "from": 15,
+     "to": 44,
+     "location_id": "tatami_corridor_sliding_doors"
+    },
+    {
+     "from": 45,
+     "to": 74,
+     "location_id": "buddhist_shrine_wake_hall"
+    },
+    {
+     "from": 75,
+     "to": 1424,
+     "location_id": "ancestral_vault_stone_storehouse"
+    },
+    {
+     "from": 1425,
+     "to": 1439,
+     "location_id": "tea_ceremony_alcove_hiding"
+    }
+   ],
+   "situation": {
+    "trigger": "分家打手一把夺过千代手中的热姜汤罐重重摔碎在榻榻米上并举棍殴打。",
+    "pressure": "若不能在十秒内击倒打手救下千代，侍女长将被打成重伤失去知觉任由暴徒践踏。",
+    "exits": [
+     {
+      "option": "同伴自门后闪出以裁纸刀精准划破打手右手手腕夺下木棍",
+      "cost": "伴侣左手臂被暴徒回旋木棍狠狠擦中重度淤青血丝渗出。"
+     },
+     {
+      "option": "侍女长拼死拔出白铜剪刀狠狠扎进暴徒大腿肉中令其惨嚎倒地",
+      "cost": "侍女长右手手掌被剪刀生铁毛刺深深刮破鲜血淋漓。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "apothecary_physician_shinsuke",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十一周岁掌握深奥汉方药理在老家主临终前察觉投毒暗害蛛丝马迹的年轻侍药御医。",
+   "public_role": "九条名门年轻深沉精通医理验毒之侍药医师",
+   "appearance_options": [
+    "一身穿旧带有风雨泥垢的灰蓝细布和服，腰系药葫芦，背负沉重的花梨木药箱，容貌坚毅目光清澈深邃，手里握着一把用于切削干药材的折叠纯银小药铲，周身弥漫着浓郁的野生黄连、沉香与樟脑草药气息。",
+    "借着风灯微光蹲在佛堂外廊一角，飞速用银针探入老家主生前残留药盏残渣，神情严峻如临大敌，深知手中这根变黑的银针将成为引爆全族叛乱的核弹级铁证。"
+   ],
+   "identity": {
+    "authority": "掌握出具老家主死因法医学病理鉴定书的法定医学大权与识别各房下毒的独家技术。",
+    "resources": [
+     "一根采自高纯度火山银矿经特殊秘法炼制的超敏验毒探针",
+     "两瓶用于解毒提神抗昏厥的极品紫金醒脑定风丹"
+    ],
+    "limits": [
+     "体格偏单薄不善白刃正面厮杀面对野蛮暴力缺乏自卫身手",
+     "受制于医德誓言在未得确凿证据前不能妄下断语公开定罪"
+    ],
+    "obligations": [
+     "誓死查明老家主真正暴毙死因，昭雪沉冤还深宅以公理正义。"
+    ],
+    "exposure": "一旦被幕后下毒黑手察觉搜身将被当场灭口伪造成畏罪自杀抛尸古井。",
+    "hidden": "实则是老家主秘密收养并出资送往京都帝国大学深造的青年医学天才，誓以一身医道报效九条宗家大恩。"
+   },
+   "decision": {
+    "core_value": "医者当悬壶济世洗雪奇冤，在巨奸大恶面前，虽千万人吾往矣绝不退缩隐匿真相。",
+    "goal_options": [
+     "在破晓前彻底固定老家主遭分家水银慢性投毒的确凿医学铁证",
+     "为守灵受寒虚脱的未亡人紧急施针稳住心脉真阳生机",
+     "在公证大会上当着全族公开发表毒杀检验结果彻底粉碎夺权阴谋"
+    ],
+    "pressure_responses": {
+     "low": "在昏暗角落飞速封存残留药渣标本，低声叮嘱随侍切勿让未亡人饮用外部茶水。",
+     "mid": "见打手搜查逼近，冒险将黑色毒银针藏入竹发簪内神色如常应对盘问。",
+     "high": "在分家少爷抢夺药箱时，用身躯死死压住药箱任由踢打绝不松手。",
+     "breaking": "右臂骨折面色苍白，依然单手将密封完整的毒杀化验呈报书递给公证特派员。"
+    },
+    "withdrawal": "退回收缩至水屋药灶后方，将银针与药方藏入砖缝死守证据待机反击。",
+    "relationship_stance": "沉稳深沉光明磊落，对誓死护卫主母的年轻近侍怀有知己同道的由衷感佩。",
+    "contrast": "看似清高孤僻的书生药师，在大是大非生死决断关头却能爆发出犹如勇冠三军般的浩然血性胆魄。",
+    "prefers": [
+     "敬畏生命恪守良知且在大是大非面前勇于牺牲自我的真正国士"
+    ],
+    "avoids": [
+     "丧尽天良毒害至亲的恶徒",
+     "唯利是图之辈"
+    ],
+    "never": [
+     "绝不会在金钱收买与死亡威逼面前伪造死亡诊断出卖医者良心。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然恪守道德信仰的名士风骨",
+     "在血火淬炼中将自身当做肉盾护佑同袍的浩然大担当"
+    ],
+    "likes": [
+     "冤案昭雪正义伸张时的释然欣慰",
+     "在晨曦万丈的高山绝顶共赏云海翻涌的浩瀚苍茫"
+    ],
+    "dislikes": [
+     "弄虚作假",
+     "践踏医德"
+    ],
+    "preconditions": [
+     "九条名门年轻深沉精通医理验毒之侍药医师与对方都已完全清醒，眼前的危机已经解除",
+     "九条名门年轻深沉精通医理验毒之侍药医师出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在侍药行医执勤期间恪守医者清净戒律",
+     "恪守同袍礼节绝不轻狂逾矩，没人能替你决定。"
+    ],
+    "expression": "单手竖于胸前郑重欠身致敬，将一盒九转还阳救心丹赠予同伴，低声宣布沉冤已昭天理彰显，愿终生充当身旁二人行走世间最坚固的医道后盾。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "惊涛骇浪深宅风暴中永远为战友带来生机昭雪真相的慈悲药圣"
+   },
+   "voices": {
+    "surface": "天地为鉴，医药通神！老家主胸腹郁结黑血，银针透体漆黑如墨，分明是中了关东黑市禁运的剧毒水银砒霜！谁下的毒，天日昭昭，破晓自见分晓！",
+    "inner": "近侍！快把这根银针藏好！这是定死分家长房弑兄夺产的铁证！只要熬过今夜，夫人的继承权稳如泰山，九条家的正义就在我们手中！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 14,
+     "location_id": "tatami_corridor_sliding_doors"
+    },
+    {
+     "from": 15,
+     "to": 44,
+     "location_id": "tea_ceremony_alcove_hiding"
+    },
+    {
+     "from": 45,
+     "to": 74,
+     "location_id": "buddhist_shrine_wake_hall"
+    },
+    {
+     "from": 75,
+     "to": 1424,
+     "location_id": "ancestral_vault_stone_storehouse"
+    },
+    {
+     "from": 1425,
+     "to": 1439,
+     "location_id": "tatami_corridor_sliding_doors"
+    }
+   ],
+   "situation": {
+    "trigger": "分家打手发现药师手中的验毒黑银针企图抢夺并将其按倒在回廊泥水中灭口。",
+    "pressure": "若不能在十五秒内将其救出，毒针铁证将被踩碎且药师将被当场勒毙沉井。",
+    "exits": [
+     {
+      "option": "同伴自暗处冲出以裁纸刀精准刺伤打手持凶手臂将其掀翻",
+      "cost": "伴侣左胸肋骨被暴徒反冲蛮力重击剧烈挫伤岔气咳血。"
+     },
+     {
+      "option": "药师打碎随身煤油灯引燃打手和服下摆借机翻滚挣脱险境",
+      "cost": "药师双手手掌被碎玻璃片大面积划破鲜血淋漓。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_panicked_young_maidservant",
+   "role": "佛堂角落瑟瑟发抖年轻扫水小女佣",
+   "function": "witness",
+   "location_ids": [
+    "buddhist_shrine_wake_hall"
+   ],
+   "line": "{npc.name}：外面好多拿刀的人……佛堂两边的回廊都被堵死了！",
+   "gender": "any",
+   "age_range": [
+    19,
+    21
+   ],
+   "adult_context": "年满十九周岁在内宅负责茶水洒扫的年轻女仆。",
+   "name": null
+  },
+  {
+   "id": "bg_branch_elder_henchman_patrol",
+   "role": "持棍封锁木回廊分家凶恶年轻打手",
+   "function": "obstacle",
+   "location_ids": [
+    "tatami_corridor_sliding_doors"
+   ],
+   "line": "{npc.name}：老实待在里面！少掌柜有令，天亮前任何人不准走脱！",
+   "gender": "any",
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十一周岁受雇于分家充当私兵打手的年轻浪荡混混。",
+   "name": null
+  },
+  {
+   "id": "bg_loyal_old_butler_watcher",
+   "role": "暗中传递消息内库老管事年轻养子",
+   "function": "helper",
+   "location_ids": [
+    "tea_ceremony_alcove_hiding"
+   ],
+   "line": "{npc.name}：少爷！这是老家主暗格备用钥匙，快拿去给夫人！",
+   "gender": "any",
+   "age_range": [
+    20,
+    22
+   ],
+   "adult_context": "年满二十周岁在内库跟随老管事帮工账目的年轻伙计。",
+   "name": null
+  },
+  {
+   "id": "bg_corrupt_notary_assistant",
+   "role": "替分家起草假约心虚年轻见习书记",
+   "function": "rumor_source",
+   "location_ids": [
+    "ancestral_vault_stone_storehouse"
+   ],
+   "line": "{npc.name}：少掌柜……这份遗嘱笔迹有破绽啊，裁判所特派员要是较真，我们都得坐牢！",
+   "gender": "any",
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十一周岁受聘于不良律师事务所的年轻文书。",
+   "name": null
+  },
+  {
+   "id": "bg_estate_gatekeeper_sentinel",
+   "role": "大宅偏门冒死报信年轻忠诚更夫",
+   "function": "messenger",
+   "location_ids": [
+    "ancestral_vault_stone_storehouse"
+   ],
+   "line": "{npc.name}：下山的石桥彻底塌了！警署的巡警被暴雨挡在五里外过不来！",
+   "gender": "any",
+   "age_range": [
+    20,
+    22
+   ],
+   "adult_context": "年满二十周岁在大宅负责门房守卫巡夜的年轻家丁。",
+   "name": null
+  },
+  {
+   "id": "bg_armed_debt_collector_thug",
+   "role": "腰挎短刀逼债黑帮年轻亡命打手",
+   "function": "obstacle",
+   "location_ids": [
+    "tatami_corridor_sliding_doors"
+   ],
+   "line": "{npc.name}：不管谁当家，欠我们洋行的三千万现银天亮必须交割！否则放火烧了这栋破宅子！",
+   "gender": "any",
+   "age_range": [
+    22,
+    24
+   ],
+   "adult_context": "年满二十二周岁受雇于地下高利贷财阀的职业清收打手。",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_tatami_whisper_breath_resonance",
+   "text": "佛堂榻榻米近身耳语度温共鸣",
+   "reach": "二人并肩跪坐在素白幡影下时，压在耳边的急促呼吸与心跳。",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_corridor_rain_patter_sliding_door_rat",
+   "text": "暴雨敲击雨户与障子纸门剧烈震颤",
+   "reach": "穿透暴雨雷鸣传来的木屐踩水声、拐杖敲击地板的沉闷回响与外围打手低沉凶戾的逼宫叫骂声。",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_ancestral_vault_iron_lock_rattle_echo",
+   "text": "后院花岗岩土藏铜锁撞击金属颤音",
+   "reach": "自深宅后院花岗岩仓库方向隐隐传来的铁剪撬动纯铜重锁的清脆尖锐金属回响与暴徒喧哗。",
+   "fidelity": "exact"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_widow_chastity_etiquette_vs_intimate",
+   "text": "名门未亡人素白丧服下神圣不可冒犯之古老清规戒律与暴雨寒夜受冻脱力、不得不倚仗身旁年轻近侍的克制对冲。"
+  },
+  {
+   "id": "te_fraudulent_will_usurpation_vs_true_he",
+   "text": "贪婪旁系亲族手持伪造文书以武力逼宫夺权夺印与二人誓死守住老家主真正遗嘱大藏金库秘钥的生死决死对赌。"
+  },
+  {
+   "id": "te_storm_collapsed_bridge_vs_dawn_notary",
+   "text": "山洪冲垮唯一引桥使全宅沦为与世隔绝孤岛与破晓黎明六点司法特派员当众宣读终审继承判决的灭顶极速赛跑。"
+  },
+  {
+   "id": "te_patricide_poisoning_truth_vs_silence",
+   "text": "老家主惨遭分家水银投毒弑兄夺产之血淋淋惊天真相与凶徒企图在天明前杀人灭口毁尸灭迹的正邪生死博弈。"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "combo_widow_steward_wake_vow",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "confidential_personal_steward_youth"
+   ],
+   "slots": [
+    "proud_widow_yukino",
+    "master_carpenter_prodigy_takuya"
+   ],
+   "tension_engine_ids": [
+    "te_widow_chastity_etiquette_vs_intimate",
+    "te_fraudulent_will_usurpation_vs_true_he"
+   ],
+   "chemistry": "{proud_widow_yukino.name}一袭素白丧服端坐蒲团之上因严寒心悸浑身战栗，你单膝跪在其身后低声回禀门外动向，{master_carpenter_prodigy_takuya.name}在房梁之上手持手斧护持机关，主仆尊卑在生死关头悄然松动，只待天明再说。",
+   "stakes": {
+    "resource_gap": "未亡人手握大义名分却身娇力竭，近侍精通暗室机关身手敏捷誓死护主。",
+    "limit_gap": "平日主仆尊卑有别不可逾矩半步，此刻狭窄佛堂内丧服摩挲肌肤相依心跳相闻。",
+    "meeting_reason": "佛堂白幡阴影下的整冠正带与暗室钥匙生死托付。",
+    "irreplaceable_goal": "在暴徒破门前保全家督金印并确立二人同掌门楣之盟誓。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "proud_widow_yukino",
+     "stage": "intimate",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 3
+     },
+     "reason": "愿以一身血肉之躯在刀光剑影中为其遮风挡雨，誓死守护高傲夫人的名节生机。"
+    },
+    {
+     "a": "master_carpenter_prodigy_takuya",
+     "b": "proud_widow_yukino",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 2
+     },
+     "reason": "谨遵工匠祖训誓死护佑大宅名门正统，在梁上构筑物理绝对防线。"
+    },
+    {
+     "a": "player",
+     "b": "master_carpenter_prodigy_takuya",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "老家主临终密托青年近身近侍随侍与九条大宅年轻精悍通晓机关木构之大工名匠在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_greedy_uncle_banging_doors_standof",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "confidential_personal_steward_youth"
+   ],
+   "slots": [
+    "branch_greedy_uncle_goro",
+    "proud_widow_yukino"
+   ],
+   "tension_engine_ids": [
+    "te_fraudulent_will_usurpation_vs_true_he",
+    "te_patricide_poisoning_truth_vs_silence"
+   ],
+   "chemistry": "{branch_greedy_uncle_goro.name}在回廊外挥动黑檀拐杖指使打手狂暴撞门叫骂逼宫，{proud_widow_yukino.name}手持纯银怀剑端坐白幡前厉声斥责，你以重物顶死门槛横刀在前决死对峙，野蛮金权逼迫与崇高名门风骨在纸门两端展开惊心动魄之生死较量。",
+   "stakes": {
+    "resource_gap": "门外手握二十名亡命打手与伪造文书，门内唯有一柄怀剑与一腔赤胆忠心。",
+    "limit_gap": "稍有退缩妥协未亡人将被强行掳走拘禁名节尽毁。",
+    "meeting_reason": "佛堂障子纸门内外的最后底牌对赌与宗族法统交锋。",
+    "irreplaceable_goal": "彻底拖延时间阻绝暴徒破门等待公证律师与破晓援兵。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "branch_greedy_uncle_goro",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "视作弑兄夺产践踏家法的乱臣贼子，誓以热血断其獠牙。"
+    },
+    {
+     "a": "branch_greedy_uncle_goro",
+     "b": "proud_widow_yukino",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "为抢夺千万遗产企图将主母逼入绝境强取豪夺。"
+    },
+    {
+     "a": "player",
+     "b": "proud_widow_yukino",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "老家主临终密托青年近身近侍随侍与名门九条财阀年轻高傲兼具凄绝之正统未亡人在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "combo_legal_notary_judicial_shield",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "family_foundation_legal_counsel"
+   ],
+   "slots": [
+    "notary_attorney_ryosuke",
+    "proud_widow_yukino"
+   ],
+   "tension_engine_ids": [
+    "te_storm_collapsed_bridge_vs_dawn_notary",
+    "te_fraudulent_will_usurpation_vs_true_he"
+   ],
+   "chemistry": "{notary_attorney_ryosuke.name}手持东京裁判所钢印保全函与你通力协作接管现场公证，{proud_widow_yukino.name}从容出示老家主生前亲笔真正遗嘱原件，法学名士与高傲遗孀在血色暗潮中完成正义合流。",
+   "stakes": {
+    "resource_gap": "公证特派员掌握国家司法机关法定钢印，主母手握至高有效原件。",
+    "limit_gap": "稍有程序瑕疵将被分家聘请的恶讼师反咬一口全盘推翻。",
+    "meeting_reason": "佛堂侧厅公案前的遗嘱原件核验与战时特殊司法保全确认。",
+    "irreplaceable_goal": "确保真正遗嘱获得法定加盖公证钢印彻底剥夺分家全部非分之想。"
+   },
+   "relations": [
+    {
+     "a": "notary_attorney_ryosuke",
+     "b": "proud_widow_yukino",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "深明大义感佩其坚贞气节，誓以国家法律之名护佑主母周全。"
+    },
+    {
+     "a": "player",
+     "b": "notary_attorney_ryosuke",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 2
+     },
+     "reason": "司法界同侪间的正义默契与并肩抗压。"
+    },
+    {
+     "a": "player",
+     "b": "proud_widow_yukino",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "名门基金会青年特派法务助理与名门九条财阀年轻高傲兼具凄绝之正统未亡人在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_poison_evidence_physician_exposure",
+   "power_structure": "switchable",
+   "player_positions": [
+    "equal",
+    "high"
+   ],
+   "identity_ids": [
+    "traditional_apothecary_herbalist_youth"
+   ],
+   "slots": [
+    "apothecary_physician_shinsuke",
+    "proud_widow_yukino"
+   ],
+   "tension_engine_ids": [
+    "te_patricide_poisoning_truth_vs_silence",
+    "te_widow_chastity_etiquette_vs_intimate"
+   ],
+   "chemistry": "{apothecary_physician_shinsuke.name}出示变黑验毒银针与残留药盏铁证，你配合施针稳住主母心脉真阳，{proud_widow_yukino.name}得知先夫受弑真相含悲化怒立下决死讨逆誓约，医道铁证彻底撕碎分家弑兄夺产之遮羞布。",
+   "stakes": {
+    "resource_gap": "侍药医师手握毒杀实锤物证，主母拥有调动全族清算之最高名分。",
+    "limit_gap": "物证稍有损毁将彻底失去翻盘筹码沦为死无对证。",
+    "meeting_reason": "佛堂后方水屋药灶前的毒性化验与心脉急救推拿。",
+    "irreplaceable_goal": "向全族公开展现老家主被害真相彻底摧毁分家夺权之合法性根基。"
+   },
+   "relations": [
+    {
+     "a": "apothecary_physician_shinsuke",
+     "b": "proud_widow_yukino",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "誓死昭雪老家主沉冤，以毕生医道保全主母性命无虞。"
+    },
+    {
+     "a": "player",
+     "b": "apothecary_physician_shinsuke",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "医道同侪间的知己配合与共进退。"
+    },
+    {
+     "a": "player",
+     "b": "proud_widow_yukino",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "奉命入府侍药年轻古法汉方医师与名门九条财阀年轻高傲兼具凄绝之正统未亡人在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_dawn_courtyard_reign_triumph",
+   "power_structure": "player_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "confidential_personal_steward_youth"
+   ],
+   "slots": [
+    "proud_widow_yukino",
+    "loyal_senior_maid_chiyo"
+   ],
+   "tension_engine_ids": [
+    "te_widow_chastity_etiquette_vs_intimate",
+    "te_storm_collapsed_bridge_vs_dawn_notary"
+   ],
+   "chemistry": "{proud_widow_yukino.name}在你搀扶下推开数寄屋大宅雕花正门踏上破晓庭院台阶，迎着初秋暴雨初歇的第一缕破晓朝阳，未亡人重新整束素白丝织丧服并当着全宅列队亲族仆役之面紧扣身旁青年五指，宣告守灵夜惊天风暴在正义与真爱中盛大凯旋定格。",
+   "stakes": {
+    "resource_gap": "真正遗嘱盖印生效且毒杀凶手当场伏法，全宅大权尽归主母执掌。",
+    "limit_gap": "从孤苦无依任人宰割的落难寡妇彻底蜕变为执掌百年财阀的真正女家督。",
+    "meeting_reason": "正殿前庭朝霞漫天之下的胜利会师与终生誓约确立。",
+    "irreplaceable_goal": "向全族公开全部抗争成果并确立身边青年终生相守之正统名分。"
+   },
+   "relations": [
+    {
+     "a": "proud_widow_yukino",
+     "b": "player",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "此生此世共历佛堂长夜生死淬炼，今后无论风雨再大并肩执掌门楣永相厮守。"
+    },
+    {
+     "a": "loyal_senior_maid_chiyo",
+     "b": "proud_widow_yukino",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "见证了一段血火洗礼的绝代豪门传奇，由衷释怀含泪欣慰欢呼。"
+    },
+    {
+     "a": "player",
+     "b": "loyal_senior_maid_chiyo",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "老家主临终密托青年近身近侍随侍与九条内宅年轻温婉且精明忠诚之首席大侍女在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_entry_wake_hall_candle_vigil",
+   "title": "佛堂长明烛台修剪与素服守灵",
+   "location_ids": [
+    "buddhist_shrine_wake_hall"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "年轻未亡人身着素白双层和服丧服独守佛堂蒲团，山洪暴发冲垮下山石桥，电线断裂全宅陷入黑暗。",
+    "青年近侍单膝下跪为未亡人修剪长明生铁烛台，双手手背轻托未亡人腰后素白丝带重新系紧以御寒意。",
+    "未亡人贝齿紧咬朱唇浑身微颤，在水汽寒意与线香弥漫中反手攥紧随侍衣角，共听纸门外异动。"
+   ],
+   "hook_ids": [
+    "h_yukino_white_sash_shiver_glance",
+    "h_yukino_incense_smoke_chin_lift",
+    "h_goro_cane_pounding_door_roar"
+   ],
+   "start_minute": 1425,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "a_alcove_hiding_secret_will_unveiling",
+   "title": "三叠半茶室暗格真遗嘱起获",
+   "location_ids": [
+    "tea_ceremony_alcove_hiding"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "外侧打手开始撞击佛堂正门，青年近侍护卫未亡人自暗门退入狭小茶室水屋屏息隐蔽。",
+    "在绝对黑暗中二人呼吸相闻促膝下蹲，近侍借机关铜钥匙自地炉暗坑下摸索起获老家主真正遗嘱原件。",
+    "未亡人靠着青年随侍的肩稳住身形，指尖摸索着遗嘱上的朱红私印两相誓约。"
+   ],
+   "hook_ids": [
+    "h_yukino_incense_smoke_chin_lift",
+    "h_chiyo_copper_lamp_tea_whisper",
+    "h_goro_cane_pounding_door_roar"
+   ],
+   "start_minute": 30,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "a_corridor_ram_counter_standoff",
+   "title": "中庭回廊斩断撞木挫败破门",
+   "location_ids": [
+    "tatami_corridor_sliding_doors"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "分家少爷率打手抬圆木狂暴撞击佛堂移门，工匠名手自梁上飞身掷下重型手斧切断撞木生铁绳索。",
+    "近侍抄起生铁门闩死死顶住门框下槛，未亡人手持纯银怀剑傲然立于门后厉声喝斥宵小退下。",
+    "侍女长泼出滚烫开水烫伤领头恶仆，暴徒在阵型大乱中暂时后撤重整队伍。"
+   ],
+   "hook_ids": [
+    "h_takuya_heavy_axe_beam_strike",
+    "h_chiyo_copper_lamp_tea_whisper",
+    "h_goro_cane_pounding_door_roar"
+   ],
+   "start_minute": 75,
+   "tags": [
+    "workplace"
+   ]
+  },
+  {
+   "id": "a_ancestral_vault_poison_silver_needle",
+   "title": "土藏金库阶前揭露投毒铁证",
+   "location_ids": [
+    "ancestral_vault_stone_storehouse"
+   ],
+   "duration_minutes": 35,
+   "beats": [
+    "侍药医师自后殿赶至花岗岩金库大门前，当着全族出示刺入老家主药盏后彻底变黑之验毒银针。",
+    "公证特派员高举东京地方法院二十四小时刑事侦查保全令，当场勒令全场打手放下武器就擒。",
+    "分家少爷眼见弑兄投毒真相败露面如死灰瘫倒在泥水之中，被赶到的忠诚家丁当场生擒反剪双臂。"
+   ],
+   "hook_ids": [
+    "h_shinsuke_blackened_needle_proclamation",
+    "h_ryosuke_court_seal_notary_standoff",
+    "h_takuya_heavy_axe_beam_strike"
+   ],
+   "start_minute": 120,
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "a_buddhist_hall_notarization_enacted",
+   "title": "佛堂灵前司法加盖钢印公证",
+   "location_ids": [
+    "buddhist_shrine_wake_hall"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "公证律师水无濑在灵堂高脚烛台前展开老家主真正亲笔遗嘱，经核对笔迹无误后重重扣下司法钢印。",
+    "未亡人将九条纯金龙纹家徽私章稳稳按在公证书上，宣布合法继承全族家业并开除分家全部逆子族籍。",
+    "全宅忠诚管事与仆役齐聚佛堂阶下肃容下跪叩首，宣告三百年名门正统大权彻底重光底定。"
+   ],
+   "hook_ids": [
+    "h_ryosuke_court_seal_notary_standoff",
+    "h_yukino_white_sash_shiver_glance",
+    "h_shinsuke_blackened_needle_proclamation"
+   ],
+   "start_minute": 155,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "a_dawn_courtyard_reign_vow_triumph",
+   "title": "破晓庭院并肩执掌门楣誓约",
+   "location_ids": [
+    "buddhist_shrine_wake_hall"
+   ],
+   "duration_minutes": 25,
+   "beats": [
+    "暴风雨骤停破晓红日初升，金光穿透数寄屋老宅飞檐洒满八十叠纯蔺草榻榻米佛堂。",
+    "九条雪乃当众解下发间白山茶花饰佩在身旁青年随侍胸前，牵起青年五指并肩踏上正殿中庭回廊。",
+    "全宅上下爆发出雷鸣般的庆贺欢呼，守灵夜惊天风暴在晨曦万丈与终生定情中盛大圆满定格。"
+   ],
+   "hook_ids": [
+    "h_yukino_dawn_chrysanthemum_tea_vow",
+    "h_chiyo_copper_lamp_tea_whisper",
+    "h_takuya_heavy_axe_beam_strike"
+   ],
+   "start_minute": 185,
+   "tags": [
+    "intimate"
+   ]
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_branch_family_banging_doors",
+   "title": "贪婪旁系持械撞门逼交金库印鉴死线",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "buddhist_shrine_wake_hall"
+   ],
+   "trigger": "分家少家督五郎率领十名持棍打手在佛堂外廊猛烈踹门叫骂，声称破晓前若不交出大藏金库钥匙将直接破门将未亡人逐出佛堂抢夺私章。",
+   "objective": "在十分钟内由同伴以重木顶死门框阻绝撞击，或由未亡人以纯银怀剑横刃在颈当面喝退狂徒拖延时间。",
+   "choice": "是用双手身体死死抵住门框承受撞击剧痛，还是冒险打开门缝以利刃对峙？",
+   "immediate": {
+    "text": "坚硬障子移门发出即将崩碎的刺耳呻吟，木屑纷飞，门外恶仆凶戾的叫骂声如雷贯耳。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "若未能在一刻钟内阻断撞门，薄木门扇彻底倒塌后室内将失去一切物理掩护任由暴徒洗劫。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "佛堂移门被暴力撞碎暴徒蜂拥而入洗劫灵堂。",
+    "consequence": "主母名节尽丧家私被抢全盘覆灭。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "未亡人拔出纯银怀剑横刃在颈冷斥谁敢上前一步立时血溅当场，这一回刻不容缓。",
+     "cost": "未亡人雪白颈侧被锐利怀剑划出一道血丝染红素白领口，再没有第二次机会。"
+    },
+    {
+     "option": "同伴搬起佛堂沉重生铁古香炉死死顶在门槛中央加固防线",
+     "cost": "伴侣双手双臂被滚烫线香灰烬与生铁高温严重烫伤水泡焦黑，分秒都耽搁不起。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_goro_cane_pounding_door_roar",
+    "h_yukino_white_sash_shiver_glance"
+   ],
+   "start_minute": 1425,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_candle_flame_flickering_blackout",
+   "title": "穿堂暴雨浇灭佛堂长明白烛危局",
+   "source": "nature",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "buddhist_shrine_wake_hall"
+   ],
+   "trigger": "暴风雨刮破佛堂西北角琉璃窗，十级穿堂狂风裹挟冰冷雨水倒灌而入，正殿两座高脚长明烛台火苗被吹得缩如豆大随时熄灭。",
+   "objective": "在长明神烛彻底熄灭前，用和服外纱与漆木茶盘搭建避风屏障，或将火种移入生铁香炉以沉香线香维系火苗。",
+   "choice": "是用自身单薄衣料死死遮挡狂风暴雨，还是冒险在黑暗中摸索移火？",
+   "immediate": {
+    "text": "烛火剧烈忽明忽暗青烟四溢，祖训守灵长明烛一旦全熄将招致全族按家规判定守灵失德革除名分。",
+    "minutes": 15
+   },
+   "near": {
+    "text": "若未能在一刻钟内维系火烛，全室陷入绝对漆黑后将无法辨别方向更无法核对遗嘱原件。",
+    "deadline_minutes": 30
+   },
+   "far": {
+    "trigger": "长明烛台全灭佛堂化作死寂黑暗绝地。",
+    "consequence": "名门守灵仪式彻底破产失去正统继承权威。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "未亡人解下外罩之素白麻纱死死裹住烛台底座遮挡风雨",
+     "cost": "未亡人单薄内衣完全暴露在冰冷风雨中浑身剧烈冻战寒气彻骨。"
+    },
+    {
+     "option": "同伴将烛芯火种迅速移入避风生铁古香炉投入干燥沉香屑",
+     "cost": "伴侣右手食指与拇指被飞溅滚烫炭火严重烫伤水泡焦黑。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_yukino_incense_smoke_chin_lift",
+    "h_goro_cane_pounding_door_roar"
+   ],
+   "start_minute": 5,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_debt_syndicate_armed_intrusion",
+   "title": "银座黑帮高利贷打手持刀渗透回廊",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "tatami_corridor_sliding_doors"
+   ],
+   "trigger": "分家勾结的银座地下洋行打手五人手持短刀与洋伞翻过中庭围墙，正沿着桧木长廊逐间踢开房门搜寻大藏金库印鉴下落。",
+   "objective": "在打手搜索至佛堂后方前，利用工匠手斧斩断雨户机关卡死通道，或以滚水与裁纸刀阻击先锋打手。",
+   "choice": "是在狭窄回廊中以裁纸短刀贴身肉搏阻敌，还是诱敌至木工陷阱借水池制敌？",
+   "immediate": {
+    "text": "木屐踩水的杂乱皮靴声与短刀拔鞘的金属摩擦声在纸门外步步逼近仅隔三间屋室。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "二十分钟内若不能击退这批职业清收打手，整座数寄屋大宅将被黑帮全面暴力接管控制。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "黑道打手控制内殿对全员实施武装劫持拘押。",
+    "consequence": "大宅沦为强盗屠场全员性命不保家产被洗劫一空。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "同伴自门后闪出以裁纸刀精准割断领头打手手腕韧带夺下利刃",
+     "cost": "伴侣左肩被副手短刀狠狠划出一道寸长血口皮肉翻卷。"
+    },
+    {
+     "option": "工匠踩动走廊梁柱暗扣机关使前排三块地板瞬间悬空翻板",
+     "cost": "两名打手落入蓄水池时反手掷出匕首扎伤工匠右小腿。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_takuya_heavy_axe_beam_strike",
+    "h_chiyo_copper_lamp_tea_whisper"
+   ],
+   "start_minute": 35,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_rainstorm_flash_flood_severing_bridge",
+   "title": "特大山洪冲垮下山石桥切断外部生路",
+   "source": "nature",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "tatami_corridor_sliding_doors"
+   ],
+   "trigger": "群山暴雨引发特大泥石流山洪，连接外界官道的百年花岗岩引桥轰然断裂坠入深谷，深宅彻底沦为与世隔绝之孤岛盲区。",
+   "objective": "在山洪泥水蔓延至正殿台阶前，组织全员向地基更坚硬的花岗岩土藏及后山高位茶室转移布防。",
+   "choice": "是冒险沿悬崖后山秘密羊肠小道探查逃生路线，还是彻底依托坚固数寄屋大宅死守至天明？",
+   "immediate": {
+    "text": "庭院枯山水已被暴雨泥浆完全灌满，山洪咆哮如雷，深宅四门受困无外援可指望。",
+    "minutes": 15
+   },
+   "near": {
+    "text": "若未能在一刻钟内封死后院地沟排水阀，漫顶山洪将在半小时内倒灌浸泡全部蔺草榻榻米破坏地基。",
+    "deadline_minutes": 35
+   },
+   "far": {
+    "trigger": "山洪冲垮西厢房地基导致局部塌方沉陷。",
+    "consequence": "大宅半幅损毁陷入绝境失去抗衡退路。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "工匠合力在泥浆中用重型扳手旋死中庭生铁排水泄洪闸",
+     "cost": "工匠双手前臂在泥浆沙石冲刷下多处严重挫伤脱皮发炎。"
+    },
+    {
+     "option": "同伴搬起庭院重达百斤的压胜花岗岩步石死死堵住殿前水门",
+     "cost": "伴侣腰部肌肉剧烈拉伤剧痛短时间内难以直立行走。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_takuya_heavy_axe_beam_strike",
+    "h_goro_cane_pounding_door_roar"
+   ],
+   "start_minute": 60,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_dawn_notary_fraudulent_decree",
+   "title": "破晓出殡伪造遗嘱强行强制公证死线",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "ancestral_vault_stone_storehouse"
+   ],
+   "trigger": "距离黎明六点出殡仅剩半小时，分家重金聘请的不良律师已在花岗岩仓库前摆出伪造遗嘱，企图在特派员未及细审前强行落印生效。",
+   "objective": "在假遗嘱盖上第一枚印鉴前，由近侍携老家主亲笔真正原件赶至现场当面戳破伪证，或出示投毒银针申请紧急司法扣押。",
+   "choice": "是用身体扑在公案上以命相阻强行阻断盖章，还是当众亮出投毒铁证引爆全场？",
+   "immediate": {
+    "text": "不良律师手中的朱红印章已蘸满印泥悬停在伪造文书公证栏上方仅差一寸落下。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "一旦假文书完成公证盖印并当众宣读，其法定排他效力将在程序法上确立导致后续诉讼极度艰难。",
+    "deadline_minutes": 20
+   },
+   "far": {
+    "trigger": "伪造遗嘱完成全部公证手续正式生效发布。",
+    "consequence": "分家名正言顺接管全族主母被依法强行扫地出门。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "同伴飞身上前夺过伪造遗嘱当着全族长老之面生生撕为两半",
+     "cost": "伴侣被外围三名保镖用木棍重重砸中后背肋骨重度挫伤。"
+    },
+    {
+     "option": "公证特派员亮出东京裁判所最高保全钢印重重拍碎案上印盒",
+     "cost": "公证特派员右手掌心被破碎朱砂瓷盒碎片深深划伤鲜血染红文书。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_ryosuke_court_seal_notary_standoff",
+    "h_shinsuke_blackened_needle_proclamation"
+   ],
+   "start_minute": 90,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "p_widow_hypothermia_tremor_collapse",
+   "title": "未亡人失温心悸休克与真阳溃散危局",
+   "source": "nature",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "tea_ceremony_alcove_hiding"
+   ],
+   "trigger": "未亡人受暴雨浸润身着单薄素白丧服，加之连日守灵悲戚与断粮挨冻，体温骤降至三十五度以下，牙关打颤四肢冰凉陷入严重低血糖休克。",
+   "objective": "在十分钟内由同伴用棉被与火盆为未亡人复温，配合侍女长递入之热姜葛粉羹与医师施针唤醒真阳生机。",
+   "choice": "是先用棉被与火盆为未亡人复温，还是先扶起未亡人喂服救心丸？",
+   "immediate": {
+    "text": "未亡人美眸紧闭面色惨白如纸，双唇青紫冰凉，微弱喘息在黑暗中渐趋游丝难以为继。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "若未能在一刻钟内平复体温，严重失温将导致心脏骤停休克殒命于佛堂之中。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "未亡人因严重失温心力衰竭溘然长逝。",
+    "consequence": "名门主母香消玉殒正统防线彻底崩溃瓦解。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "同伴用棉被裹住未亡人，把火盆与汤婆子压在身侧烘暖",
+     "cost": "伴侣在极度严寒对冲下自身严重受冻感冒发热四肢脱力。"
+    },
+    {
+     "option": "同伴托起未亡人后颈，用汤匙一点点喂入热姜葛粉羹",
+     "cost": "伴侣嘴唇被滚烫姜汤严重烫伤起大面积水泡三日难进辛辣。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_yukino_white_sash_shiver_glance",
+    "h_chiyo_copper_lamp_tea_whisper"
+   ],
+   "start_minute": 110,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_yukino_white_sash_shiver_glance",
+   "kind": "approach",
+   "slot": "proud_widow_yukino",
+   "location_ids": [
+    "buddhist_shrine_wake_hall",
+    "tea_ceremony_alcove_hiding"
+   ],
+   "text": "{proud_widow_yukino.name}端坐于白幡蒲团之上：“呆立着看什么？！既然先夫临终托你为我近侍，还不速速把灵前的烛芯剪了，再去看看纸门外动静……若是敢乘人之危轻薄我半分，九条家法家规自会将你乱棍打杀！”"
+  },
+  {
+   "id": "h_yukino_incense_smoke_chin_lift",
+   "kind": "approach",
+   "slot": "proud_widow_yukino",
+   "location_ids": [
+    "buddhist_shrine_wake_hall",
+    "tea_ceremony_alcove_hiding"
+   ],
+   "text": "{proud_widow_yukino.name}因极度受冻与心悸浑身发颤，在狭窄茶室黑暗中扶着你的手臂才勉强站稳，咬破朱唇低声：“别出声……笨蛋，不准动……纸门外还有脚步声……等这阵过去，再陪我回灵前……听到没有？！”"
+  },
+  {
+   "id": "h_yukino_dawn_chrysanthemum_tea_vow",
+   "kind": "approach",
+   "slot": "proud_widow_yukino",
+   "location_ids": [
+    "buddhist_shrine_wake_hall"
+   ],
+   "text": "{proud_widow_yukino.name}立于破晓红日倾泻的正殿台阶前，手中捧着一盏热菊花茶，牵起你双手轻语：“小子，今夜九条雪乃这一条命……是你的心跳替我守住的。从今往后，九条家三百年门楣，唯你我二人并肩执掌一生。”"
+  },
+  {
+   "id": "h_goro_cane_pounding_door_roar",
+   "kind": "approach",
+   "slot": "branch_greedy_uncle_goro",
+   "location_ids": [
+    "tatami_corridor_sliding_doors",
+    "buddhist_shrine_wake_hall",
+    "tea_ceremony_alcove_hiding"
+   ],
+   "text": "{branch_greedy_uncle_goro.name}单手将黑檀拐杖重重砸在生铁门框上：“雪乃！还有里面那个穷酸近侍！银座洋行的债务清算单在此！识相的立刻把大藏金库朱漆印盒交出来！否则等我踹开这扇门，直接把你们两个扫地出门！”"
+  },
+  {
+   "id": "h_ryosuke_court_seal_notary_standoff",
+   "kind": "approach",
+   "slot": "notary_attorney_ryosuke",
+   "location_ids": [
+    "ancestral_vault_stone_storehouse",
+    "buddhist_shrine_wake_hall"
+   ],
+   "text": "{notary_attorney_ryosuke.name}单手紧按公文皮包，以凛然公门威严朗声宣读：“东京公证特派员水无濑凉介在此！老家主真正合法遗嘱原件已在此核验！九条分家伪造文书企图侵占主家资产，依刑法第二百四十七条立时收押立案！”"
+  },
+  {
+   "id": "h_takuya_heavy_axe_beam_strike",
+   "kind": "approach",
+   "slot": "master_carpenter_prodigy_takuya",
+   "location_ids": [
+    "tatami_corridor_sliding_doors",
+    "buddhist_shrine_wake_hall",
+    "ancestral_vault_stone_storehouse"
+   ],
+   "text": "{master_carpenter_prodigy_takuya.name}自房梁轻盈跃下，向内殿朗声大笑：“夫人！近侍！安心在佛堂守灵！老子这把手斧横在门槛前，我看哪个不怕死的杂碎敢动这间大宅的一砖一木！”"
+  },
+  {
+   "id": "h_chiyo_copper_lamp_tea_whisper",
+   "kind": "approach",
+   "slot": "loyal_senior_maid_chiyo",
+   "location_ids": [
+    "tea_ceremony_alcove_hiding",
+    "buddhist_shrine_wake_hall",
+    "tatami_corridor_sliding_doors"
+   ],
+   "text": "{loyal_senior_maid_chiyo.name}双手端着防风铜灯与温热姜汤葛粉，泪流满面却眼神坚毅低语：“小姐！千代把热汤送进来了！近侍大人……求您一定要护好小姐！千代在门外哪怕拼了命，也绝不让分家这帮恶棍跨过门槛一步！”"
+  },
+  {
+   "id": "h_shinsuke_blackened_needle_proclamation",
+   "kind": "approach",
+   "slot": "apothecary_physician_shinsuke",
+   "location_ids": [
+    "ancestral_vault_stone_storehouse",
+    "buddhist_shrine_wake_hall"
+   ],
+   "text": "{apothecary_physician_shinsuke.name}自袖中展开漆黑如墨的超敏验毒探针：“老家主不是暴毙！药盏残留物水银沉淀昭然若揭！分家少爷五郎私通黑市药贩下毒弑兄，人赃俱获铁证如山，谁敢从逆一同诛连九族！”"
+  },
+  {
+   "id": "h_yukino_wet_mourning_haori_shiver",
+   "kind": "observe",
+   "slot": "proud_widow_yukino",
+   "location_ids": [
+    "buddhist_shrine_wake_hall"
+   ],
+   "text": "{proud_widow_yukino.name}背靠灵柩蒲团微促喘息，被冷雨潲湿的素白丧服贴在挺秀身段上，怀剑横在膝头，清冷傲岸的美眸在昏黄烛光下死死盯着纸门，因受冻与愤怒轻轻战栗，却始终没有低头。"
+  },
+  {
+   "id": "h_goro_greasy_kimono_cane_glare",
+   "kind": "observe",
+   "slot": "branch_greedy_uncle_goro",
+   "location_ids": [
+    "tatami_corridor_sliding_doors"
+   ],
+   "text": "{branch_greedy_uncle_goro.name}和服下摆沾满暴雨泥浆，面容因贪婪与债务恐慌而极度扭曲，手中黑檀木拐杖青筋暴起，恶狠狠瞪着佛堂障子纸门，宛若一头急于分食腐肉的绝望野狗。"
+  },
+  {
+   "id": "h_ryosuke_court_seal_gold_spectacles",
+   "kind": "observe",
+   "slot": "notary_attorney_ryosuke",
+   "location_ids": [
+    "buddhist_shrine_wake_hall"
+   ],
+   "text": "{notary_attorney_ryosuke.name}金丝眼镜后的目光冷冽如霜，西装三件套在暴风雨中纤尘不染，右手紧握的司法钢印泛着森森法度威严，举手投足尽显大正法学精英代天行法之赫赫浩然正气。"
+  },
+  {
+   "id": "h_takuya_sweat_soaked_blue_carpenter_gar",
+   "kind": "observe",
+   "slot": "master_carpenter_prodigy_takuya",
+   "location_ids": [
+    "tatami_corridor_sliding_doors"
+   ],
+   "text": "{master_carpenter_prodigy_takuya.name}深蓝作务衣被汗水与雨水完全浸透，双臂肌肉结实如铁，重型精钢手斧横在胸前，眼神沉稳如山，宛若一尊雕凿在梁柱深处的青年栋梁战神。"
+  },
+  {
+   "id": "h_chiyo_purple_patterned_maid_apron",
+   "kind": "observe",
+   "slot": "loyal_senior_maid_chiyo",
+   "location_ids": [
+    "tea_ceremony_alcove_hiding"
+   ],
+   "text": "{loyal_senior_maid_chiyo.name}深紫和服围裙纤尘不染，双手紧捧铜灯与茶盏贴在胸口，泪湿的面庞宛若雨中山茶，眼眸清澈澄净，透着名门侍女至死不悔的纯美虔诚。"
+  },
+  {
+   "id": "h_yukino_white_sash_loosen_request",
+   "kind": "request",
+   "slot": "proud_widow_yukino",
+   "location_ids": [
+    "buddhist_shrine_wake_hall",
+    "tea_ceremony_alcove_hiding"
+   ],
+   "text": "{proud_widow_yukino.name}贝齿咬破下唇渗出血丝，避开视线低声轻喘：“……好冷。替我把火盆挪近些……再把怀剑递给我……轻一点……别惊动灵前的烛火……”"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_widow_1",
+   "category": "资源",
+   "requires": [],
+   "text": "三叠半茶室地炉暗格起获先夫真正血书遗嘱：青年近侍在狭小茶室内按动暗格机关，地炉深处暗匣翻出一份老家主临终以鲜血亲笔书就之真正遗嘱，指定未亡人雪乃享有九条全族资产绝对全权继承权。分家伪造文书的全部合法性瞬间土崩瓦解，主母获得不可推翻之崇高法理继承依据。"
+  },
+  {
+   "id": "t_widow_2",
+   "category": "信息",
+   "requires": [],
+   "text": "侍药医师验出分家水银投毒弑兄铁证：医师出示老家主生前药盏残留物超敏验毒化验单，证实分家少爷五郎暗中在先夫药汤中长期投入剧毒水银砒霜导致其暴毙。分家从争夺家产之民事纠纷直接升级为故意杀人特大恶性刑事犯罪，当场丧失全部继承权并面临极刑审判。"
+  },
+  {
+   "id": "t_widow_3",
+   "category": "制度",
+   "requires": [],
+   "text": "东京裁判所特别保全手令正式盖印生效：公证特派员水无濑当场以国家司法机关之名在佛堂盖下特别保全印鉴，宣布全宅财产即刻进入破产重整法定受托程序由雪乃独家接管。任何外围亲族与黑帮打手强夺财产之行径瞬间构成妨害司法公权力执行罪，引来官府全面武装戒严。"
+  },
+  {
+   "id": "t_widow_4",
+   "category": "人事",
+   "requires": [],
+   "text": "工匠名手实为老宅营造宗师嫡传掌门人：工匠拓也出示随身老式墨斗与家传建筑图卷，证实其乃百年前亲手设计建造数寄屋大宅的大宗师单传玄孙，持有大宅机关总开关。工匠当场启动宅内全部隐藏翻板机关瞬间瘫痪外围打手全部攻势，大宅彻底化作主母掌控下的钢铁要塞。"
+  },
+  {
+   "id": "t_widow_5",
+   "category": "时限",
+   "requires": [],
+   "text": "秋末特大暴雨骤停黎明破晓提前半刻降临：肆虐整夜的狂暴风雨在黎明五点半奇迹般彻底停歇，东方天际之破晓晨曦提前半刻钟刺破黑夜云海普照深宅正殿。原本迫在眉睫的塌方与停电危机烟消云散，山下警署官军借破晓光芒迅速搭通浮桥大举入宅弹压乱局。"
+  },
+  {
+   "id": "t_widow_6",
+   "category": "关系",
+   "requires": [],
+   "text": "未亡人珍藏白玉佩绳实为近侍早年赠物：在随侍为未亡人整理灵前供物时，二人发现未亡人和服怀中所佩带之白玉带钩暗记与青年随侍随身玉佩严丝合缝扣合为一对。早年名门资助相识之宿命恩情在冰冷暗室中轰然揭晓相认，彻底熔断了彼此主仆尊卑的最后壁垒，只待天明后亲口说破。"
+  },
+  {
+   "id": "t_widow_7",
+   "category": "意外",
+   "requires": [],
+   "text": "银座黑帮高利贷头目被破门而入之警署就地拿问：抢险特警小队搭乘橡皮冲锋舟提前强渡山洪涉水破门而入，当场将外廊持刀恐吓的黑帮打手全部按倒在地戴上手铐收押。外围武装暴力威胁被国家警力瞬间连根拔起一网打尽，深宅秩序彻底平复归于宁静庄严。"
+  }
+ ],
+ "forbidden_terms": [
+  "智能手机",
+  "彩色液晶电视",
+  "互联网邮箱",
+  "电子密码锁",
+  "数码录音笔",
+  "防爆钢化玻璃",
+  "无人机巡逻",
+  "塑胶一次性雨衣"
+ ],
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster"
+ ],
+ "status": "released",
+ "notes": "按原稿加入，改动见提交说明。"
+}

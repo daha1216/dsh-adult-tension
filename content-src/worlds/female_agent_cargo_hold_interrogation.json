@@ -1,0 +1,2442 @@
+{
+ "schema_version": 1,
+ "id": "female_agent_cargo_hold_interrogation",
+ "title": "货舱密审：女特工与冰海",
+ "extends": null,
+ "era": "2000年代初东海公海暴风雨夜（万吨间谍散货轮水下密闭隔舱）",
+ "region": "公海深处伪装为远洋散货轮的武装间谍母船水下三层压载水舱与通海管道夹层",
+ "premise": "热带风暴肆虐的公海黑夜，伪装为万吨散货轮的间谍母船遭多国海上特勤联合突击。年满二十二岁的对外情报局王牌青年女特工在截获微缩胶卷后撤退受挫，右脚踝被两寸厚合金重锁死死拷在水下三层压载隔舱龙骨铁柱旁，同行的年满二十一岁潜伏青年机要破译员同样被拘禁于相邻铁栅内。",
+ "tone": [
+  "公海惊涛",
+  "合金脚镣",
+  "通海水阀",
+  "背靠背相贴"
+ ],
+ "style_hint": "水下三层隔舱没有任何窗户，唯有厚重船壳钢板外深海巨浪猛烈拍击引发的轰鸣低频震颤。冰冷刺骨的海水顺着锈蚀通海阀汩汩喷涌，混杂着机油与铁锈的咸腥气味在封闭隔舱内弥漫。",
+ "clock_start": {
+  "label": "暴风雨夜凌晨两点整，距离通海阀全开压载舱彻底灭顶仅剩一个半时辰",
+  "minute": 1320
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.45,
+  "nonbinary": 0.05
+ },
+ "stage_labels": {
+  "stranger": "同僚防备",
+  "acquainted": "共锁囚笼",
+  "familiar": "解铐互助",
+  "flirting": "贴背取暖",
+  "testing": "电极对赌",
+  "intimate": "艇上相拥",
+  "committed": "公海破浪"
+ },
+ "name_pools": {
+  "family": [
+   "楚",
+   "沈",
+   "林",
+   "江",
+   "陆",
+   "顾",
+   "白",
+   "苏",
+   "秦",
+   "莫",
+   "韩",
+   "邵"
+  ],
+  "given_female": [
+   "若冰",
+   "清岚",
+   "宛如",
+   "语嫣",
+   "曼青",
+   "芷晴",
+   "书瑶",
+   "傲霜",
+   "素衣",
+   "雨桐",
+   "心怡",
+   "雪见"
+  ],
+  "given_male": [
+   "凌霄",
+   "云帆",
+   "子墨",
+   "景逸",
+   "晨安",
+   "廷宣",
+   "文彦",
+   "柏舟",
+   "修远",
+   "瀚海",
+   "知行",
+   "立恒"
+  ],
+  "given_neutral": [
+   "以安",
+   "清寒",
+   "默存",
+   "思齐",
+   "未央",
+   "知白",
+   "景行",
+   "乐成",
+   "言蹊",
+   "若愚",
+   "怀瑾",
+   "向南"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "{family}少校",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}长官",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}特派员",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}专员",
+    "gender": "any"
+   },
+   {
+    "pattern": "代号{family}",
+    "gender": "any"
+   }
+  ],
+  "order": "family_first"
+ },
+ "rules": [
+  {
+   "id": "r_bilge_water_intake_curfew",
+   "text": "间谍货轮开启通海泄水阀后压载水舱每二十分钟上涨三十厘米，九十分钟内水面将彻底淹没龙骨铁柱封死生路。"
+  },
+  {
+   "id": "r_alloy_shackle_double_lock_protocol",
+   "text": "固定女特工右脚踝的重型潜艇用合金脚镣具备机械自锁死结构，非原配纯铜双槽十字钥匙强行撬动将触发卡齿咬碎锁芯。"
+  },
+  {
+   "id": "r_deep_water_acoustic_surveillance",
+   "text": "水下隔舱舱壁安装有灵敏水听器侦测系统，隔舱内部若传出分贝高于六十的金属撞击声将自动向舰桥报警。"
+  },
+  {
+   "id": "r_watertight_compartment_isolation_lock",
+   "text": "水下三层沉重旋转式六角水密舱门一旦从外部被转动手轮锁死，内部必须依托液压手泵持续加压方能破开门闩。"
+  }
+ ],
+ "customs": [
+  "在被冰冷海水浸泡失温期间，两人必须每隔五分钟互相掐一下对方虎口、报一次军衔姓名，确认彼此意识清醒。",
+  "用摩斯密码传递突围时机时，必须用脚跟轻踏沉入水底的龙骨钢梁通过次声波震动完成暗号对接。",
+  "女特工被解下合金脚镣后，该枚浸透海水的合金镣铐由伴侣随身悬挂在战术腰带上作为今夜同生共死的过命见证。",
+  "在水下泅渡潜行通过狭窄管线前，两人必须先同步做三次深呼吸、对表闭气时长以确保节奏协同。"
+ ],
+ "player_identities": [
+  {
+   "id": "junior_cryptography_analyst",
+   "role": "潜伏机要破译组青年专员",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "机要参谋",
+     "gender": "any"
+    },
+    {
+     "pattern": "破译专员",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    23
+   ],
+   "social_position": "low",
+   "baseline": "年满二十一周岁国防科技大学密码工程专业青年特优毕业生，随队执行公海截获任务的新人密码分析官。",
+   "resources": [
+    "一根藏在战术靴后跟用于手工破解机械十字锁的钛合金开锁拨针",
+    "一枚刻有国家最高机密解密密钥的防水特种胶卷微型胶囊"
+   ],
+   "reputation": "心算神速临危不乱，对各种机械联动密码与摩斯声波频率有着近乎本能的敏锐听觉。",
+   "risks": [
+    "微缩胶卷一旦被搜缴或落入公海深渊，将被军事法庭追究泄密渎职叛国大罪。"
+   ]
+  },
+  {
+   "id": "combat_diver_vanguard",
+   "role": "潜水战术蛙人突击先锋",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "特战蛙人",
+     "gender": "any"
+    },
+    {
+     "pattern": "水下先锋",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    24
+   ],
+   "social_position": "equal",
+   "baseline": "年满二十二周岁海军特种突击大队退役转入外勤情报处的青年水下战术专家，肺活量过人体能充沛。",
+   "resources": [
+    "一柄高强度防磁钛合金潜水战术潜水刀",
+    "一只仅存十五分钟备用供气量的超微型水下咬嘴应急呼吸管"
+   ],
+   "reputation": "水性极佳格斗迅猛，在公海深潜爆破与封闭空间水下突击领域战功卓著。",
+   "risks": [
+    "在狭窄水下隔舱发生肺气压伤减压病休克将当场溺毙水底。"
+   ]
+  },
+  {
+   "id": "consulate_diplomatic_courier",
+   "role": "领事馆驻外机要青年随员",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "机要随员",
+     "gender": "any"
+    },
+    {
+     "pattern": "领馆特派",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    24
+   ],
+   "social_position": "high",
+   "baseline": "年满二十三周岁常驻公海周边沿海港口领事馆的青年外交官随员，具备国际海事法与紧急庇护交涉豁免权。",
+   "resources": [
+    "一份盖有领事馆钢印与国际海事法院豁免凭证的空白引渡文书",
+    "一部耐高压可在水下两米持续工作的激光定位遇险求救信标机"
+   ],
+   "reputation": "风度从容精通多国海事法律，在公海主权纠纷与情报谈判交涉中进退有据气度严整。",
+   "risks": [
+    "一旦被扣上武装间谍罪名将丧失一切外交豁免权沦为公海法外之徒受尽非人折磨。"
+   ]
+  },
+  {
+   "id": "stowaway_marine_electrician",
+   "role": "货轮机舱青年电气维修工",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "机舱技工",
+     "gender": "any"
+    },
+    {
+     "pattern": "电气工长",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    20,
+    22
+   ],
+   "social_position": "low",
+   "baseline": "年满二十周岁受雇于远洋轮机部门打工糊口的年轻机电维修工，熟悉间谍货轮水下全部电路与排水阀门逻辑。",
+   "resources": [
+    "一把耐一千伏高压的绝缘尖嘴钳配备用铜丝",
+    "一只涂满密封黄油的高亮度防水防爆潜水电筒"
+   ],
+   "reputation": "熟悉船体结构手脚麻利，能凭双耳倾听水泵异响判断通海阀门开合程度与电路虚接。",
+   "risks": [
+    "协助被捕特工逃脱若被船长捕获将被直接套上生铁沉入海底灭口。"
+   ]
+  },
+  {
+   "id": "double_agent_deck_cadet",
+   "role": "双重间谍潜伏见习甲板官",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "三副随员",
+     "gender": "any"
+    },
+    {
+     "pattern": "见习甲板官",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    23
+   ],
+   "social_position": "equal",
+   "baseline": "年满二十一周岁以商船三副身份潜伏在间谍货轮上的我方秘密耳目，掌握全船人员轮换与警卫布防盲区。",
+   "resources": [
+    "一枚可开启水下三层消防备用舱门的黄铜备用万能齿钥匙",
+    "一份标注公海巡逻舰最近接应雷达坐标的防水密电草图"
+   ],
+   "reputation": "沉稳内敛行事滴水不漏，在错综复杂的船员利益纷争中如游鱼般周旋自如。",
+   "risks": [
+    "双重身份一旦被敌对审讯官识破将被挑断脚筋吊死在货轮桅杆上示众。"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "flooded_cargo_bilge_cell",
+   "name": "水下三层压载水舱拘禁隔舱",
+   "detail": "位于散货轮水线以下六米深处的重型生铁压载隔舱，锈蚀的纵向龙骨钢梁横卧中央，冰冷混浊的海水已漫过脚踝，四周墙壁挂满生锈铁链与冷水冷凝管。",
+   "privacy": "private",
+   "visibility": "头顶一盏防爆红光应急灯在海水倒影中晃荡，女特工右脚踝合金锁链在水底泛着冰冷寒光，背靠龙骨被锁住脚踝的身姿尽显傲岸孤绝。",
+   "witnesses": [
+    "bg_panicked_apprentice_stoker"
+   ],
+   "exits": [
+    "submerged_pipe_maintenance_shaft",
+    "engine_auxiliary_boiler_room"
+   ],
+   "affordances": [
+    "用钛合金拨针潜入水底摸索解锁合金脚镣锁芯",
+    "背靠背相贴互相搓揉受冻双肩抵御失温寒战",
+    "合力扳动沉重生锈通海截止手轮减缓进水速度"
+   ],
+   "pressure_modifiers": {
+    "p_ballast_tank_flood_drowning_surge": "漫过小腿的冰冷海水正以每分钟两厘米速度急剧上涨。",
+    "p_interrogation_sodium_pentothal_inquest": "隔壁传讯室传来电击测谎仪的高频蜂鸣与皮鞭抽打声。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "submerged_pipe_maintenance_shaft",
+   "name": "水下通海管道检修纵向竖井",
+   "detail": "贯穿货轮水下三层至龙骨底部的狭窄圆柱形管道检修竖井，密布着高压消防管与冷却海水大管径阀门，仅容一人踩着湿滑铁梯直立通行，水雾蒸腾气压极低。",
+   "privacy": "semi",
+   "visibility": "透过竖井顶部铁格栅，能俯瞰巡逻雇佣兵战术皮靴踩在甲板铁板上的沉重脚步与手电光束扫射。",
+   "witnesses": [
+    "bg_armed_deck_patrol_mercenary",
+    "bg_ship_assistant_cook"
+   ],
+   "exits": [
+    "flooded_cargo_bilge_cell",
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "affordances": [
+    "手动拧紧通海阀紧急闭锁旁通旁路旋钮",
+    "踩着伴侣肩膀托举协助翻越竖井逃生天窗",
+    "利用竖井回音轻叩管壁发送遇险求救摩斯电码"
+   ],
+   "pressure_modifiers": {
+    "p_ballast_tank_flood_drowning_surge": "管道底部积水漫延已将竖井第一截铁梯彻底淹没。",
+    "p_cargo_hold_airlock_sealing_lockdown": "水密气密天窗自锁电磁阀门发出刺耳的通电锁死声响。"
+   },
+   "tags": [
+    "workplace",
+    "crime"
+   ]
+  },
+  {
+   "id": "engine_auxiliary_boiler_room",
+   "name": "辅机柴油发电机锅炉舱",
+   "detail": "散发着滚烫柴油废气与机油焦味的狭小机舱辅室，两台巨型柴油发电机正轰鸣过载运转，电缆桥架上火花偶尔噼啪炸响，满地湿滑油污与破布。",
+   "privacy": "semi",
+   "visibility": "昏黄工作灯被发电机高频震颤抖得虚晃，蒸汽管道冒出的滚烫白雾将两人潜行剪影遮蔽得若隐若现。",
+   "witnesses": [
+    "bg_crawling_bilge_pipe_fitter"
+   ],
+   "exits": [
+    "flooded_cargo_bilge_cell",
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "affordances": [
+    "强行拉下发电机紧急制动跳闸断路电闸制造全船断电",
+    "取用墙上挂载的石棉防火毯与隔热耐酸手套",
+    "在机器轰鸣声掩护下拉近距离急促低语商讨突围"
+   ],
+   "pressure_modifiers": {
+    "p_electrical_switchboard_spark_fire": "发电机配电柜主铜排因过载开始冒出呛人蓝黑毒烟。",
+    "p_interrogation_sodium_pentothal_inquest": "搜查武装小队正端枪沿锅炉舱走廊逐个舱房破门搜寻。"
+   },
+   "tags": [
+    "workplace",
+    "crime"
+   ]
+  },
+  {
+   "id": "upper_weather_deck_cargo_gangway",
+   "name": "露天甲板起重机走道废墟",
+   "detail": "暴风雨夜剧烈摇晃的散货轮主甲板，狂暴的海风卷起数米高咸涩海浪拍击船舷，断裂的集装箱锁具与吊索在狂风中疯狂甩动，夜空雷电交加照亮巨浪黑渊。",
+   "privacy": "public",
+   "visibility": "数具舰桥探照灯光柱在甲板积水中狂乱扫射，雨幕如瀑布般倾泻，荷枪实弹的甲板雇佣兵端枪严阵以待。",
+   "witnesses": [
+    "bg_signal_radio_operator_corporal",
+    "bg_renegade_arms_supercargo"
+   ],
+   "exits": [
+    "submerged_pipe_maintenance_shaft",
+    "engine_auxiliary_boiler_room"
+   ],
+   "affordances": [
+    "割断救生艇悬吊钢缆准备投入狂涛怒海",
+    "伏在集装箱阴影下精准测算跳海撤离时间窗口",
+    "点燃遇险橙色烟雾信号弹指引公海接应巡逻舰"
+   ],
+   "pressure_modifiers": {
+    "p_typhoon_hull_fracture_catastrophe": "三十米高黑浪狠狠砸在船头导致船体龙骨发出骇人扭曲脆响。",
+    "p_dawn_coast_guard_radar_intercept": "海平面远端巡逻舰的重型防暴探照灯光已隐约刺破雨幕。"
+   },
+   "tags": [
+    "workplace_power",
+    "violence"
+   ]
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "tsundere_elite_agent_ruobing",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十二周岁隶属于对外情报处特战外勤行动组军衔少校的在役年轻王牌女特工。",
+   "public_role": "对外情报局特战外勤少校特派特工",
+   "appearance_options": [
+    "一身紧绷贴身的深潜高分子防寒战术潜水服勾勒出修长曼妙的矫健身姿，右脚踝被两寸厚铸钢重锁死死拷在龙骨铁柱底座，尽管额前因轻伤发热渗出涔涔虚汗，那双清冷如寒星的美眸中依然翻涌着傲岸睥睨的决绝杀意与不可侵犯的凛然军威。",
+    "被解开脚镣后反手握紧钛合金潜水短刀，赤足踏在冰冷积水中，借由伴侣搀扶挺直腰杆，虽然因失温下唇微微颤抖发白，依然倔强咬唇抬起下巴，将微缩胶卷贴身封存，眼神中流露出唯有在生死火线中才会对身边战友绽放的炽烈柔情。"
+   ],
+   "identity": {
+    "authority": "具备战时现场最高军事指挥权与授权紧急自毁一切涉密资料的绝断大权，单兵格斗潜水技击登峰造极。",
+    "resources": [
+     "一卷贴身防水缝制在内衬中的绝密微缩胶卷",
+     "一枚装在臼齿假牙内的高纯度抗神经毒剂紧急解毒丸"
+    ],
+    "limits": [
+     "右脚踝被合金重锁扣在水底龙骨上行动受阻",
+     "受深海寒气与轻伤感染引发高热失温体能急剧下滑"
+    ],
+    "obligations": [
+     "誓死将微缩胶卷护送回国，哪怕身死公海也决不向外邦间谍透露半字国家机密。"
+    ],
+    "exposure": "身份一旦被公海海盗间谍船完全坐实将面临注射致幻剂摧残神经并公开伪造叛国录像。",
+    "hidden": "平日以铁血无情严苛训诫下属著称，实则内心深处早已对这位数次在危难中凭借智慧为自己护航的青年机要员情愫暗生至死不渝。"
+   },
+   "decision": {
+    "core_value": "忠诚高于生命，军人的尊严绝不允许在敌人面前弯下膝盖，即便流尽最后一滴血也要护送战友突围。",
+    "goal_options": [
+     "在海水漫过头顶前配合破译员解开右脚踝合金重锁",
+     "死守微缩胶卷绝不向审讯官吐露解密密钥半个字",
+     "在货轮倾覆前引爆辅机燃油舱全歼敌寇从容跳海"
+    ],
+    "pressure_responses": {
+     "low": "在水底别过脸去冷冷下令，以少校军衔威严呵斥同伴动作麻利点别磨磨蹭蹭。",
+     "mid": "因失温寒战剧烈颤抖，双手死死扣住龙骨，急促喘息着咬牙忍受海水刺骨严寒。",
+     "high": "在电击针头逼近瞬间，用身躯主动前倾挡在同伴身前，美眸迸发凶戾寒光直视审讯官唾沫冷斥。",
+     "breaking": "高热眩晕中整个人脱力靠在同伴怀中，将滚烫面颊贴在同伴颈侧，低声吐露若能活着回港愿换上常服相伴一生。"
+    },
+    "withdrawal": "退缩至龙骨钢梁阴影死角，将微缩胶卷塞入同伴掌心严令同伴独自弃船突围。",
+    "relationship_stance": "外表冷酷严苛如万年玄冰，内心却有着对挚爱战友愿以命换命的至高赤诚与偏执护短。",
+    "contrast": "在战备指挥所里是令人闻风丧胆的铁面冷血女指挥官，在水下隔舱冰水里却会在冻得发抖时，先把胶卷塞进同伴手里的倔强女人。",
+    "prefers": [
+     "意志坚如磐石冷静理智且恪守誓言的纯粹同行者"
+    ],
+    "avoids": [
+     "贪生怕死背叛誓言的软骨头",
+     "狂妄自大的轻浮之徒"
+    ],
+    "never": [
+     "绝不会在严刑逼供与灭顶危机面前出卖国家利益与身旁同袍。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "潜入冰水底部用极稳手指精准拨动脚镣锁齿时的沉着专注目光",
+     "在绝境失温中毫不犹豫把唯一的保温毯裹到自己身上的担当"
+    ],
+    "likes": [
+     "脱险后在快艇甲板上终于能好好说一句话的片刻",
+     "回港后在营区食堂对坐吃一碗热面的平常日子"
+    ],
+    "dislikes": [
+     "轻挑调侃严肃军纪",
+     "趁危挟持"
+    ],
+    "preconditions": [
+     "对外情报局特战外勤少校特派特工与对方都已完全清醒，眼前的危机已经解除",
+     "对外情报局特战外勤少校特派特工出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在战备潜伏期间恪守纪律分寸",
+     "严禁任何带有非分亵渎性质的轻佻冒犯"
+    ],
+    "expression": "清冷挑眉却眼眶微红，伸出未染血的手指轻抚同伴受冻发青的嘴唇，轻声宣布今夜过后同伴便是唯一的生死同袍与终身伴侣。",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "卸下少校戎装后甘愿与同伴并肩劈风斩浪的永恒守护者"
+   },
+   "voices": {
+    "surface": "门外的走狗听着！我是对外情报局楚少校！你们非法侵入公海并击沉民用货船，公海巡逻舰半小时内就位，立刻放下武器接受审判！",
+    "inner": "别……别把头探出水面……好冷……你的手怎么比我还凉……听着，胶卷你拿着，一会儿水满了你先走，这是军令！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 1319,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    },
+    {
+     "from": 1320,
+     "to": 1349,
+     "location_id": "flooded_cargo_bilge_cell"
+    },
+    {
+     "from": 1350,
+     "to": 1379,
+     "location_id": "flooded_cargo_bilge_cell"
+    },
+    {
+     "from": 1380,
+     "to": 1409,
+     "location_id": "submerged_pipe_maintenance_shaft"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    }
+   ],
+   "situation": {
+    "trigger": "合金脚镣由于长期浸泡海水机械锁芯发生严重生锈卡死，钛合金拨针仅差最后半圈旋转到位。",
+    "pressure": "若不能在两分钟内撬开锁舌，海水将彻底没过头顶导致二人双双肺部呛水溺毙水底。",
+    "exits": [
+     {
+      "option": "同伴潜入水底闭气两分钟用手指死抠锁齿强行转开",
+      "cost": "伴侣手指指甲当场翻开崩裂鲜血淋漓受海水盐分剧烈杀痛。"
+     },
+     {
+      "option": "用潜水刀合金刀柄猛烈敲击脚镣铰链销钉将其震断",
+      "cost": "女特工脚踝骨骼遭受钝击严重挫伤骨裂肿胀难行。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "interrogation_officer_viktor",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    24
+   ],
+   "adult_context": "年满二十三岁受雇于海外私人军事安保集团担任货轮保卫与情报审讯主管的年轻指挥官。",
+   "public_role": "间谍货轮安保情报主管审讯官",
+   "appearance_options": [
+    "一身裁剪利落的深灰战术防弹风衣，腰挂战术枪套与格洛克手枪，戴着黑色医用橡胶手套，手里把玩着一支注满黄色透明药液的高压注射器，眼神阴鸷冷静如鹰隼，透着职业情报拷问者的残忍麻木。",
+    "单脚踩在隔舱铁梯踏板上，居高临下俯瞰被困水底的两人，将电击测谎仪电极导线随手扔入积水中激起刺啦火花，嘴角挂着胜券在握的残酷冷笑。"
+   ],
+   "identity": {
+    "authority": "手握二十名重装雇佣兵与全船通海阀门液压主控权，拥有在公海随意处决嫌犯的生杀大权。",
+    "resources": [
+     "一整箱军工级高效硫喷妥钠中枢神经致幻吐真剂",
+     "一部直通海外私人情报总部的加密激光卫星对讲机"
+    ],
+    "limits": [
+     "受制于金主只要未损毁胶卷绝密原件不能直接开枪打烂目标的限制",
+     "必须在台风撕裂船体前取得口供"
+    ],
+    "obligations": [
+     "在货轮倾覆前从女特工口中挖出胶卷解密密匙与潜伏情报网络全套代号清单。"
+    ],
+    "exposure": "行动延误一旦被公海巡逻舰雷达合围抓获将被送上海事法庭判处终身监禁。",
+    "hidden": "实则是多年前从东欧特工培训营叛逃的黑市掮客，今夜劫掠胶卷只为在暗网黑市卖出天价换取逃生退休基金。"
+   },
+   "decision": {
+    "core_value": "情报没有信仰只有价格，在公海这片法外黑海之上，活下来的强者才能通吃一切筹码。",
+    "goal_options": [
+     "在水位淹没头顶前逼迫女特工交出胶卷解码密码",
+     "将两名特工捆绑固定在压载水舱当做货轮沉没的陪葬品",
+     "乘坐最后一艘带有双向卫星通信的机动救生艇逃离风暴"
+    ],
+    "pressure_responses": {
+     "low": "站在铁梯高处倒数计时，用高压水枪向两人头顶喷射冰冷海水加速失温。",
+     "mid": "命令手下将吐真剂针头抵在女特工纤细颈动脉处施加神经剧痛威逼。",
+     "high": "在水密门被反制锁死瞬间暴怒开枪扫射门板，企图用穿甲弹引爆水舱配电箱。",
+     "breaking": "被倒灌的海水狂潮卷翻摔入发电机齿轮箱，在电弧火花中凄厉惨嚎沉底。"
+    },
+    "withdrawal": "退回收缩至主甲板救生艇起吊机掩体后方，命令全员持枪死守逃生艇登艇通道。",
+    "relationship_stance": "冷血无情唯利是图，将所有人当做可供榨取剩余价值的阶下囚徒。",
+    "contrast": "外表是谈吐优雅的绅士审讯官，内里却是将人命视同草芥的嗜血毒蛇。",
+    "prefers": [
+     "利落残忍执行命令且对金钱有狂热渴望的亡命雇佣兵"
+    ],
+    "avoids": [
+     "油盐不进视死如归的硬骨头特工",
+     "随时准备背后捅刀的副官"
+    ],
+    "never": [
+     "绝不会在巨额金钱利益面前遵从任何国际海事条约道德法则。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "把对手逼进死角、看着密钥一位位吐出来的掌控感",
+     "巨额黑市美金到手带来的极度亢奋"
+    ],
+    "likes": [
+     "看着犯人在电极吐真剂下痛苦挣扎吐露机密",
+     "数着加密账户里的离岸资金跳动"
+    ],
+    "dislikes": [
+     "被蔑视挑衅",
+     "功亏一篑"
+    ],
+    "preconditions": [
+     "间谍货轮安保情报主管审讯官与对方都已完全清醒，眼前的危机已经解除",
+     "间谍货轮安保情报主管审讯官出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "严禁任何违法暴力强加意志行径",
+     "恪守最后交战法则界限"
+    ],
+    "expression": "收起空注射器露出狰狞狞笑，将弹夹退出展示空膛，宣告公海的黑夜属于贪婪的掠食者。",
+    "desire_range": [
+     1,
+     2
+    ],
+    "self_control_range": [
+     1,
+     3
+    ],
+    "desired_position": "掌控公海黑金情报流转的暗夜秩序主宰者"
+   },
+   "voices": {
+    "surface": "楚少校，我佩服你们东方特工的骨气。但看看现在的海水，已经涨到锁骨了吧？十秒钟，把密钥告诉我，否则通海阀全开，你们连全尸都留不下！",
+    "inner": "别白费力气了！这扇门是用高压液压锁死的！除了我手里的控制器，没有人能从外面打开这扇门！交出密钥，或许我还会考虑给你们扔一根通气管！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 1319,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    },
+    {
+     "from": 1320,
+     "to": 1349,
+     "location_id": "flooded_cargo_bilge_cell"
+    },
+    {
+     "from": 1350,
+     "to": 1379,
+     "location_id": "flooded_cargo_bilge_cell"
+    },
+    {
+     "from": 1380,
+     "to": 1409,
+     "location_id": "engine_auxiliary_boiler_room"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    }
+   ],
+   "situation": {
+    "trigger": "审讯官下令将通海阀手轮旋开至最大档位，浊浪如巨蟒般狂喷，水位瞬间没过胸膛。",
+    "pressure": "若不能在三分钟内手动闭锁进水旁路管，两人将被汹涌海流彻底顶死在隔舱天花板上窒息。",
+    "exits": [
+     {
+      "option": "同伴潜入狂暴激流中用生铁撬棍卡死阀门螺杆",
+      "cost": "伴侣胸口肋骨被回弹的铁撬棍重重撞击挫裂剧痛咳血。"
+     },
+     {
+      "option": "用尖嘴钳冒险刺穿阀门电动伺服继电器制造短路跳闸",
+      "cost": "强劲电弧在水中暴散导致伴侣双臂遭受电击麻痹痉挛。"
+     }
+    ]
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "undercover_ship_mechanic_leona",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十一周岁潜伏于间谍货轮轮机部门的我方代号海燕的年轻女特勤机械师。",
+   "public_role": "间谍货轮年轻轮机女机械师",
+   "appearance_options": [
+    "一身穿了洗得发白的重装蓝色工装连体裤，腰系工具带挂满管钳、重型活动扳手与黄油枪，满脸黑灰煤烟，扎着利落短发，眼神桀骜干练，手里捏着一枚通海阀旁路备用黄铜摇柄。",
+    "半蹲在通海管道检修竖井铁梯上，用扳手轻巧撬开隔音检修门，神情严肃警惕，透着身为工匠特工对整艘万吨轮机结构洞若观火的从容自信。"
+   ],
+   "identity": {
+    "authority": "掌握货轮全部海底门排水阀门手动旁路锁闭权与辅机电网紧急拉闸最高工程权限。",
+    "resources": [
+     "一瓶可瞬间软化锈蚀机械锁芯的高效润滑渗透松锈剂",
+     "一副军用双筒水下夜视护目镜配备用电池"
+    ],
+    "limits": [
+     "体能单薄缺乏重火力单兵交火装备",
+     "在机舱高压高温环境中患有突发性心动过速隐疾"
+    ],
+    "obligations": [
+     "誓死营救被捕少校特工，在货轮沉没前抢修排水管路开辟水下脱险通路。"
+    ],
+    "exposure": "私开水密门一旦被大副巡视抓获将被当场投掷进焚化炉烧成焦炭。",
+    "hidden": "实则是多年前受过楚少校暗中相救抚育的情报遗孤，此番潜伏上船全为誓死护送恩师长官平安归国。"
+   },
+   "decision": {
+    "core_value": "机器从不说谎，管道必有生路，只要轮机核心还在运转，就没有破不开的钢铁囚笼。",
+    "goal_options": [
+     "在破晓前排除通海阀故障关闭主进水管道阻止沉没",
+     "潜入配电舱切断货轮全部强光探照灯为甲板突围提供掩护",
+     "引导特工二人沿螺旋桨轴隧检修暗道安全潜出船体"
+    ],
+    "pressure_responses": {
+     "low": "在管道天窗上方用扳手敲出摩斯电码，向水下被困二人传递精准减压指令。",
+     "mid": "用重型管钳强行撬开备用空气阀门，将一股高压新鲜空气打入密闭隔舱。",
+     "high": "冒险拉下发电机主断路器手柄，引爆主变压器使整艘货轮瞬间陷入绝对黑暗。",
+     "breaking": "心动过速面色苍白滑下铁梯，依然紧咬牙关将逃生水肺呼吸器塞入少校手中。"
+    },
+    "withdrawal": "退回收缩至轴隧隔离密封舱，锁死防水水密门阻断敌方追兵。",
+    "relationship_stance": "重情重义知恩图报，对在绝境中誓死忠于信仰的长官与战友怀有近乎崇拜的赤诚忠贞。",
+    "contrast": "看似一身油污沉默寡言的小工匠，在生死抉择关头却能爆发出以身殉道般的决绝刚毅。",
+    "prefers": [
+     "遵守技术规律言出必行临危不乱的真英雄"
+    ],
+    "avoids": [
+     "贪生怕死背信弃义之辈",
+     "把弄权术的外行草包"
+    ],
+    "never": [
+     "绝不会在金钱利益与死亡恐吓面前背叛指引自己重生的长官信仰。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷冰水绝境依然眼神清澈誓死不屈的傲岸风骨",
+     "在生死一线间将背后托付给自己的真挚信赖"
+    ],
+    "likes": [
+     "危机化解后并肩坐在甲板迎着晨风喝上一口甘冽热咖啡的简单温暖",
+     "零件严丝合缝转动时的释怀安心"
+    ],
+    "dislikes": [
+     "背信弃义",
+     "傲慢欺凌"
+    ],
+    "preconditions": [
+     "间谍货轮年轻轮机女机械师与对方都已完全清醒，眼前的危机已经解除",
+     "间谍货轮年轻轮机女机械师出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在潜伏协作期间恪守分寸",
+     "严禁任何乘人之危亵渎轻佻举动"
+    ],
+    "expression": "用沾满机油的手背抹去额前汗珠灿然一笑，递过仅存的防水手电，轻声指引通往螺旋桨轴隧的逃生生门。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "汪洋黑夜狂涛深处永远最为坚不可摧的机械破障先锋"
+   },
+   "voices": {
+    "surface": "楚少校！坚持住！海燕就在你们头顶上！别听那个审讯官放屁，备用通海旁路已经被我锁死了！坚持两分钟，我这就下来接你们！",
+    "inner": "长官……若冰姐，十年前在边境你救了我一命，今天就算是把这条命沉在东海，海燕也一定要送你平平安安回家！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 1319,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    },
+    {
+     "from": 1320,
+     "to": 1349,
+     "location_id": "submerged_pipe_maintenance_shaft"
+    },
+    {
+     "from": 1350,
+     "to": 1379,
+     "location_id": "flooded_cargo_bilge_cell"
+    },
+    {
+     "from": 1380,
+     "to": 1409,
+     "location_id": "engine_auxiliary_boiler_room"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    }
+   ],
+   "situation": {
+    "trigger": "主进水截门手柄因高温高压变形卡死在全开档位，机动管钳在巨力下崩裂碎成两截。",
+    "pressure": "若不能在一分钟内用重锤砸碎副旁路连杆，海水将彻底倒灌压载舱引发船体单侧翻扣。",
+    "exits": [
+     {
+      "option": "机械师与伴侣合力轮番挥动生铁重锤砸断连杆",
+      "cost": "伴侣手腕软组织严重挫裂剧痛短时间内无法发力持械。"
+     },
+     {
+      "option": "从机修箱倒出高浓度蓄电池酸液泼向卡死锈蚀关节",
+      "cost": "酸雾蒸腾导致伴侣手掌前臂皮肤被强酸不同程度灼伤脱皮。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "rival_intelligence_analyst_marcus",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    24
+   ],
+   "adult_context": "年满二十四周岁随船暗中搜寻情报并兼具双重身份的西方老牌情报机构年轻特派督察官。",
+   "public_role": "西方老牌情报机构年轻特派专员",
+   "appearance_options": [
+    "一身笔挺考究的英伦三件套黑色防水毛呢风衣，内搭浅灰衬衫系深蓝真丝领带，戴着皮质战术半指手套，手持一支高精度红外夜视微型测距仪，神情优雅冷峻，目光如解剖刀般精准无情。",
+    "站在水下锅炉舱阴影深处，单手转动一支镀银万宝龙签字笔，冷眼旁观审讯冲突，衣领处别着一枚微型反窃听白噪音干扰针，透着玩弄国际地缘博弈的大师级冷血清醒。"
+   ],
+   "identity": {
+    "authority": "掌握海外北约多国公海潜艇通信密电网调用权，拥有随时单方面中止审讯引渡目标的最高否决权。",
+    "resources": [
+     "一台存有敌对情报网络全套伪装代号库的军用三防掌上电脑",
+     "一枚可开启救生艇水下快速脱钩挂锁的磁性安全钥匙卡"
+    ],
+    "limits": [
+     "严禁直接卷入暴力刑讯肉体冲突避免违反国际中立公约留存把柄",
+     "体能平平畏惧水下肉搏格斗"
+    ],
+    "obligations": [
+     "在货轮沉没前夺取微缩胶卷备份并安全送达公海巡弋的西方核潜艇交差。"
+    ],
+    "exposure": "秘密暗桩身份一旦被各方彻底坐实将引爆引发外交大地震被就地灭口。",
+    "hidden": "实则是多年来厌倦了西方情报机关卸磨杀驴冷血内耗的清醒者，此番登船暗中谋划携机密投诚换取真正自由生活。"
+   },
+   "decision": {
+    "core_value": "在国家机器的冰冷齿轮面前，个人只是随手可弃的零件，唯有洞悉人性的终极棋手才能绝地求生。",
+    "goal_options": [
+     "在审讯官痛下杀手前介入谈判以引渡名义救下女特工二人",
+     "与东方特工达成秘密交易共享微缩胶卷核心机密数据",
+     "借助公海巡逻舰迫近时机策反全船人员体面投诚"
+    ],
+    "pressure_responses": {
+     "low": "在铁梯阴影中轻咳一声，出示最高调查专员豁免红头文件打断审讯节奏。",
+     "mid": "拔出手枪击毙企图向水舱投掷高爆手雷的狂暴雇佣兵稳控局势。",
+     "high": "在配电箱起火断电瞬间，悄然切断水密门液压控制管路放二人脱险。",
+     "breaking": "被巨浪震翻跌入积水弄湿电脑终端，狼狈摘下湿透的真丝领带向特工苦笑求助。"
+    },
+    "withdrawal": "退回收缩至无线电报务室，向公海巡逻舰公开发送货轮遇险雷达信标代码。",
+    "relationship_stance": "崇尚严密智谋与对等博弈，对在极端绝境中不失体统气节的东方女特工怀有崇高钦佩敬意。",
+    "contrast": "看似高高在上玩弄权术的冷血情报官，骨子里却保留着对真正骑士精神与公理正义的最后敬畏。",
+    "prefers": [
+     "智勇双全深谋远虑且言出必践的卓越博弈对手"
+    ],
+    "avoids": [
+     "鲁莽愚蠢嗜杀成性的下三滥暴徒",
+     "不可理喻的狂热极端分子"
+    ],
+    "never": [
+     "绝不会在严峻法理道义面前自降身份沦为滥杀无辜的屠夫走狗。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷囹圄依然辞色从容气度严整的无上尊严",
+     "在风暴火海中互为棋逢对手的心灵共振"
+    ],
+    "likes": [
+     "在枪火停歇的拂晓甲板上从容点燃一支香烟互致敬意",
+     "智谋交锋后握手言和的豁达坦荡"
+    ],
+    "dislikes": [
+     "野蛮粗鄙毫无章法",
+     "言而无信背信弃义"
+    ],
+    "preconditions": [
+     "西方老牌情报机构年轻特派专员与对方都已完全清醒，眼前的危机已经解除",
+     "西方老牌情报机构年轻特派专员出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在公职情报交涉期间恪守中立公约",
+     "严禁任何带有侮辱人格色彩的逾矩言行"
+    ],
+    "expression": "收起手枪优雅欠身致意，从风衣口袋递出干净丝帕与救生艇脱钩磁卡，轻声祝愿彼此在广袤公海上终能重获新生。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "惊涛骇浪国际情报暗战棋局上最清醒超然的暗夜掌秤人"
+   },
+   "voices": {
+    "surface": "维克托先生，请立刻移开你的注射器！根据公海海事反酷刑特别公约，这位楚少校是受国际法保护的高级战俘，未经国际联合调查团审阅，任何人动少校一根手指就是向整个情报界宣战！",
+    "inner": "楚小姐，我是马库斯。那帮亡命徒已经疯了。想要活命，就把胶卷的引渡版权交给我代理。相信我，比起沉入这片冰冷海底喂鱼，我们有更体面的双赢结局。"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 1319,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    },
+    {
+     "from": 1320,
+     "to": 1349,
+     "location_id": "flooded_cargo_bilge_cell"
+    },
+    {
+     "from": 1350,
+     "to": 1379,
+     "location_id": "engine_auxiliary_boiler_room"
+    },
+    {
+     "from": 1380,
+     "to": 1409,
+     "location_id": "engine_auxiliary_boiler_room"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    }
+   ],
+   "situation": {
+    "trigger": "督察官发现雇佣兵匪首正准备在水舱外壁安装四枚穿甲聚能炸药强行破障碎尸。",
+    "pressure": "一旦爆破船底龙骨受损，整个水下三层隔舱将在五秒内被万吨海水连环撕裂彻底粉碎。",
+    "exits": [
+     {
+      "option": "督察官果断拔枪射断炸药电子雷管引线化解爆破",
+      "cost": "枪声引来数挺乌兹微冲疯狂扫射导致督察官右臂贯穿中弹重伤。"
+     },
+     {
+      "option": "手动砸碎走廊哈龙灭火系统释放白色浓烟遮蔽引信",
+      "cost": "走廊人员包括督察官全员遭受烈性窒息烟雾灼伤呼吸道。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "renegade_arms_heiress_clara",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十二周岁掌控该间谍货轮所属离岸军火航运船务公司的年轻女继承人兼总押运官。",
+   "public_role": "公海航运军火巨头年轻女掌舵人",
+   "appearance_options": [
+    "一身裁剪利落飒爽的黑色皮质机车防雨猎装夹克，内穿暗红高领羊绒衫，腰挎双枪套配伯莱塔双枪，金发在狂风暴雨中扎成单马尾，面容冷艳狂放，双腿蹬着防刺高筒马靴，手里把玩着主救生艇钥匙金属吊牌。",
+    "背靠甲板起重机铁架顶着瓢泼大雨大口灌下一口威士忌，嘴角噙着桀骜不驯的野性冷笑，眼神透着视法理规矩如无物的亡命狂徒本色。"
+   ],
+   "identity": {
+    "authority": "掌控货轮全船集装箱军火走私暗格提单与两艘高速柴油突击救生艇的唯一绝对控制权。",
+    "resources": [
+     "一艘加满航煤可在十级狂涛中狂飙两百海里的硬壳充气突击艇",
+     "两箱原厂未拆封的军工级特种高爆穿甲弹与铝热破门燃烧棒"
+    ],
+    "limits": [
+     "与船上雇佣兵处于雇佣契约边缘随时可能被黑吃黑火并反噬",
+     "在暴风雨剧烈颠簸中患有严重眩晕症"
+    ],
+    "obligations": [
+     "在货轮解体沉没前回收全部高价值军火账册，乘坐突击艇撤往中立公海岛礁脱身。"
+    ],
+    "exposure": "军火走私走私船案发一旦被国际刑警全球通缉将彻底丧失继承合法家族财团资格。",
+    "hidden": "实则是多年前被家族遗弃在公海黑道自生自灭的私生女，极度渴望用一次轰轰烈烈的反叛向老牌家族复仇洗牌。"
+   },
+   "decision": {
+    "core_value": "大洋之上狂浪滔天，唯有手中的枪与脚下的快艇才是真正信条，金钱与刺激胜过世间一切虚妄说教。",
+    "goal_options": [
+     "在货轮沉没前抢先夺下突击救生艇并索要微缩胶卷作为入伙投名状",
+     "开枪击毙图谋不轨的审讯官独吞全部黑金资产",
+     "接应东方特工二人登艇以高超水性冲破风暴重围脱险"
+    ],
+    "pressure_responses": {
+     "low": "在甲板起重机高处狂笑挑衅，将空酒瓶狠狠砸碎在匪徒脚下施加威慑。",
+     "mid": "拔出双枪连续精准速射击毙三名企图抢夺快艇的哗变雇佣兵稳控甲板。",
+     "high": "亲自切断货轮主货舱紧固钢缆，让重达几十吨的集装箱在倾斜甲板上横冲直撞砸烂追兵火力网。",
+     "breaking": "快艇吊索在狂风中意外卡死，浑身湿透站在暴雨中急切召唤特工协助割缆。"
+    },
+    "withdrawal": "退回收缩至船艉救生艇起吊台，用双枪封锁住通往艇库的唯一铁梯通道。",
+    "relationship_stance": "敢爱敢恨狂放不羁，对在绝境冰水中宁死不屈誓死护卫彼此的坚韧硬汉特工怀有发自肺腑的惺惺相惜。",
+    "contrast": "看似蛮横野性的黑道女枭雄，内心深处却极度渴望拥有一份无需利益权衡算计的生死托付之情。",
+    "prefers": [
+     "敢于提刀与天地风暴殊死一搏的纯爷们与烈性女子"
+    ],
+    "avoids": [
+     "唯唯诺诺耍阴谋诡计的伪君子",
+     "贪婪无能的窝囊废"
+    ],
+    "never": [
+     "绝不会在共同御敌共赴死生的盟友背后放冷枪做卑鄙小人。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在漫天枪火惊涛骇浪中依然神色冷冽身手矫健的野性魅力",
+     "将后背坦荡交托给彼此的无上信任"
+    ],
+    "likes": [
+     "在狂风暴雨中并肩立于船头向巨浪扣动扳机的豪迈快意",
+     "绝境脱险后大口对饮烈酒时眼神交织的狂野火花"
+    ],
+    "dislikes": [
+     "娘娘腔",
+     "临阵背叛"
+    ],
+    "preconditions": [
+     "公海航运军火巨头年轻女掌舵人与对方都已完全清醒，眼前的危机已经解除",
+     "公海航运军火巨头年轻女掌舵人出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在战术突击期间恪守盟友规矩",
+     "严禁任何居高临下的道德说教羁绊"
+    ],
+    "expression": "狂野甩开湿透金发朗声大笑，将插在皮套上的另一把伯莱塔手枪反手塞入同伴怀中，宣告从此公海茫茫天地任两人驰骋。",
+    "desire_range": [
+     3,
+     5
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "惊涛巨浪黑夜狂风中并肩狂飙破浪的公海自由之王"
+   },
+   "voices": {
+    "surface": "维克托你这个贪得无厌的杂种！老娘这条船值五千万美元，被你搞沉了！这艘快艇是老娘的私人物业，谁敢靠近半步，老娘一枪掀飞那人的头盖骨！",
+    "inner": "喂！那个东方特工！身手不错嘛！带着你的冷美人长官上我的艇！微缩胶卷我不稀罕，老娘只要你们欠我一条命，带我杀回岸上分一杯羹！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 1319,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    },
+    {
+     "from": 1320,
+     "to": 1349,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    },
+    {
+     "from": 1350,
+     "to": 1379,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    },
+    {
+     "from": 1380,
+     "to": 1409,
+     "location_id": "engine_auxiliary_boiler_room"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    }
+   ],
+   "situation": {
+    "trigger": "突击救生艇主起吊钢缆被暴风雨中甩落的重型集装箱死死压在龙门架导轨上动弹不得。",
+    "pressure": "若不能在一分钟内用气割枪切断受压钢缆，整艘救生艇将被倾覆的货轮顺势一同拖入深渊万劫不复。",
+    "exits": [
+     {
+      "option": "千金与伴侣在狂风中合力操持铝热枪切断合拢钢缆",
+      "cost": "伴侣手背被飞溅的千度铁水火星严重烫伤起大面积焦泡。"
+     },
+     {
+      "option": "冒死爬上摇晃导轨用撬棍借助船体倾斜惯性强行撬落钢缆",
+      "cost": "千金脚踝在湿滑铁架上严重扭伤脱位承受剧烈挫伤剧痛。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "veteran_quartermaster_hans",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    24
+   ],
+   "adult_context": "年满二十三岁在间谍货轮担任仓储军需与救生装备主管的年轻潜伏老资格军需士官。",
+   "public_role": "间谍货轮年轻装备军需士官",
+   "appearance_options": [
+    "一身穿旧的水洗迷彩作战服，外搭防刮多口袋战术背心，满手老茧，腰间挂着大串黄铜货舱钥匙与手电筒，神情沉毅沧桑，左颊有一道浅浅的弹片擦伤疤痕，左肩挎着一只沉重的军工级潜水装备包。",
+    "蹲在压载舱入口检修暗格内默默清点两套完好的水下闭路循环潜水呼吸器，眼神深沉如海，透着在无数次生死边缘磨砺出的钢铁定力与专业操守。"
+   ],
+   "identity": {
+    "authority": "掌握货轮底层全部备用潜水装具、防毒面罩与水下爆破炸药库房的唯一实物开锁发放权。",
+    "resources": [
+     "两套充满高压纯氧的军工级特战水下闭路循环潜水呼吸器与防寒干衣",
+     "一挺备弹两百发装有消音器的微型冲锋枪配备用弹匣"
+    ],
+    "limits": [
+     "体格魁梧行动迟缓难以钻过极端狭小的通风管道孔径",
+     "患有慢性创伤后应激障碍对密闭爆破声极端敏感"
+    ],
+    "obligations": [
+     "誓死维护货轮最后的人性道义底线，在黑船沉没前为受冤被戮者提供最后求生器械庇护。"
+    ],
+    "exposure": "私发军械一旦被大副坐实将被执行公海走跳板极刑活活喂鲨鱼。",
+    "hidden": "实则是多年前在公海战乱中痛失全家孤身苟活的退伍水兵，最看不惯强权暴徒对落难之人的残暴凌虐。"
+   },
+   "decision": {
+    "core_value": "大洋浩瀚容得下万顷波涛却容不下泯灭人性的罪恶，军人的职责是拯救生灵而非充当屠夫走狗。",
+    "goal_options": [
+     "在审讯官下死手前将潜水呼吸装具秘密递入水下隔舱救人",
+     "在发电机舱架设遥控爆破装置阻截雇佣兵追击脚步",
+     "掩护全员跳海后独自留守船尾引爆军火库与间谍黑船同归于尽"
+    ],
+    "pressure_responses": {
+     "low": "在舱门暗格处悄无声息滑下两根特种潜水呼吸管与松锈油壶提供策应。",
+     "mid": "用微冲短点射精准击毙两名在水密门外架设喷火器的凶残暴徒稳住防线。",
+     "high": "单手拔下炸药雷管引信以命相搏，厉声喝退企图洗劫逃生装备的哗变水手。",
+     "breaking": "身中数弹重伤倒在起吊台旁，依然用血手死死将快艇入水脱钩手柄拉下到底。"
+    },
+    "withdrawal": "退回收缩至主货舱弹药库防爆门内，架起重机枪建立最后阻击阵地。",
+    "relationship_stance": "沉稳厚重铁骨铮铮，对敢于在冰冷水牢中至死不离不弃的年轻特工怀有崇高的敬佩之心。",
+    "contrast": "看似麻木冷漠的底层管库兵，在生死考验面前却展现出惊天动地的崇高牺牲大义。",
+    "prefers": [
+     "铁骨铮铮重情重义且在绝境中不失气节的真汉子"
+    ],
+    "avoids": [
+     "欺软怕硬鱼肉同袍的恶棍",
+     "见利忘义之流"
+    ],
+    "never": [
+     "绝不会在良知拷问与生死关头违背身为正义水兵的终生誓言。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然脊梁如铁誓死抗争的英雄气概",
+     "视信仰重于生命的纯粹赤子之心"
+    ],
+    "likes": [
+     "看着年轻人平安穿戴好潜水装具泅渡脱险的欣慰释然",
+     "在风暴停歇的安宁破晓向大洋敬上军礼"
+    ],
+    "dislikes": [
+     "恃强凌弱",
+     "滥杀无辜"
+    ],
+    "preconditions": [
+     "间谍货轮年轻装备军需士官与对方都已完全清醒，眼前的危机已经解除",
+     "间谍货轮年轻装备军需士官出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在装备交接期间恪守公事原则",
+     "恪守军人名节绝不逾矩"
+    ],
+    "expression": "单手端正敬上军礼推开水下逃生暗舱门，将装具沉稳扣在同伴胸前，沉声叮嘱一定要活着游回祖国土地。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "汪洋狂暴巨浪中永远为落难英雄默默托举生还希望的钢铁砥柱"
+   },
+   "voices": {
+    "surface": "都给老子退后！这间库房归老子管！谁敢不穿救生衣就去动快艇，老子手里的微冲第一个送那人去见海龙王！",
+    "inner": "年轻少校……听得见吗？深呼吸，两套闭路潜水器就在门板后面！老汉这条命不值钱，你们还年轻，必须把那份关系千万人性命的胶卷带回去！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 1319,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    },
+    {
+     "from": 1320,
+     "to": 1349,
+     "location_id": "engine_auxiliary_boiler_room"
+    },
+    {
+     "from": 1350,
+     "to": 1379,
+     "location_id": "flooded_cargo_bilge_cell"
+    },
+    {
+     "from": 1380,
+     "to": 1409,
+     "location_id": "submerged_pipe_maintenance_shaft"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "upper_weather_deck_cargo_gangway"
+    }
+   ],
+   "situation": {
+    "trigger": "军需士官在搬运水肺呼吸器时被暴乱匪徒冷枪打断右腿，瘫倒在隔舱铁梯拐角血流如注。",
+    "pressure": "若不能在十分钟内为其止血并夺回装具包，两套救命呼吸器将被海水彻底冲入无底深渊。",
+    "exits": [
+     {
+      "option": "同伴冒险游入激流将重伤士官连同装具拖入隔舱",
+      "cost": "伴侣后背被水下铁梯锐角重重擦伤划破深长血口。"
+     },
+     {
+      "option": "在枪火压制下迅速使用战术止血带勒紧士官大腿根部",
+      "cost": "消耗掉全队仅存的一支军用高纯度强效止痛解痉针剂。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_panicked_apprentice_stoker",
+   "role": "水下压载舱值班见习司炉工",
+   "function": "witness",
+   "location_ids": [
+    "flooded_cargo_bilge_cell"
+   ],
+   "line": "{npc.name}：水……通海阀关不上了！龙骨在响，船要翻了啊！",
+   "gender": "any",
+   "age_range": [
+    19,
+    21
+   ],
+   "adult_context": "年满十九周岁受雇于黑航运公司司炉部门的年轻外籍见习工。",
+   "name": null
+  },
+  {
+   "id": "bg_armed_deck_patrol_mercenary",
+   "role": "手持霰弹枪甲板巡逻雇佣兵",
+   "function": "obstacle",
+   "location_ids": [
+    "submerged_pipe_maintenance_shaft"
+   ],
+   "line": "{npc.name}：盯着通气竖井！审讯官说了，连一只老鼠都不准放上来！",
+   "gender": "any",
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十一周岁充当海上安保打手的武装外籍雇佣枪手。",
+   "name": null
+  },
+  {
+   "id": "bg_crawling_bilge_pipe_fitter",
+   "role": "轴隧抢修管道青年维修帮工",
+   "function": "helper",
+   "location_ids": [
+    "engine_auxiliary_boiler_room"
+   ],
+   "line": "{npc.name}：备用潜水通海口螺栓被我拧松了！顺着水流可以直接滑出去！",
+   "gender": "any",
+   "age_range": [
+    20,
+    22
+   ],
+   "adult_context": "年满二十周岁轮机部门正式签约的年轻管系帮工技工。",
+   "name": null
+  },
+  {
+   "id": "bg_ship_assistant_cook",
+   "role": "货轮后厨兼职帮厨年轻姑娘",
+   "function": "rumor_source",
+   "location_ids": [
+    "submerged_pipe_maintenance_shaft"
+   ],
+   "line": "{npc.name}：我刚才偷听到大副在甲板上说，船尾炸药引信已经点着了……",
+   "gender": "any",
+   "age_range": [
+    19,
+    21
+   ],
+   "adult_context": "年满十九周岁在公海货轮兼职打工混口饭吃的年轻女服务员。",
+   "name": null
+  },
+  {
+   "id": "bg_signal_radio_operator_corporal",
+   "role": "大厦机要报务受劫持年轻话务员",
+   "function": "messenger",
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "line": "{npc.name}：少校！公海巡逻舰雷达回波距离我们只剩下最后两海里了！",
+   "gender": "any",
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十一周岁远洋商船通信室在籍年轻三等通信士。",
+   "name": null
+  },
+  {
+   "id": "bg_renegade_arms_supercargo",
+   "role": "军火押运货主跟船年轻理货员",
+   "function": "obstacle",
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "line": "{npc.name}：谁敢碰一号救生艇，我的双管猎枪可不长眼睛！",
+   "gender": "any",
+   "age_range": [
+    22,
+    24
+   ],
+   "adult_context": "年满二十二周岁走私军火商旗下受雇年轻押船账房伙计。",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_submerged_hull_acoustic_resonance",
+   "text": "通海水舱龙骨次声波耳语",
+   "reach": "并肩促膝背靠背紧贴在水下龙骨上时，贴在耳廓边几乎与海浪轰鸣合拍的温热微弱气声与剧烈心跳震动。",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_hydrophone_intercom_squawk_echo",
+   "text": "水听受话孔电流断续啸叫",
+   "reach": "隔着厚实水密隔壁传来的水听对讲器电磁高频啸叫声与合金水密闸门液压泵启动的沉闷沉重震荡。",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_pipe_shaft_wrench_tapping_morse",
+   "text": "通海铜管扳手敲击摩斯暗号",
+   "reach": "竖井金属通海管道中机械师用活动扳手有节奏敲击管壁传导而来的清脆金属摩斯密码回音。",
+   "fidelity": "exact"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_ballast_flood_vs_back_to_back_heartbe",
+   "text": "水下压载隔舱倒灌海水倒计时九十分钟灭顶绝境与两人背靠背死撑、近在咫尺却顾不上别的心跳对冲。"
+  },
+  {
+   "id": "te_shackle_locked_pride_vs_vulnerable_in",
+   "text": "王牌女特工往昔铁血孤高的凌冽军威尊严与右脚踝被合金重锁扣在水底动弹不得的致命脆弱撕扯。"
+  },
+  {
+   "id": "te_interrogation_truth_serum_vs_dawn_res",
+   "text": "敌方审讯官手持硫喷妥钠注射针头严刑逼供的毁灭读秒与破晓公海巡逻舰雷达接应的时限赛跑。"
+  },
+  {
+   "id": "te_arms_heiress_speedboat_gamble_vs_micr",
+   "text": "甲板军火商大小姐掌握唯一高速突击快艇生路的利益博弈与微缩绝密国家胶卷誓死捍卫的生死大义对决。"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "combo_agent_unlock_shackle_vow",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "junior_cryptography_analyst"
+   ],
+   "slots": [
+    "tsundere_elite_agent_ruobing",
+    "undercover_ship_mechanic_leona"
+   ],
+   "tension_engine_ids": [
+    "te_shackle_locked_pride_vs_vulnerable_in",
+    "te_ballast_flood_vs_back_to_back_heartbe"
+   ],
+   "chemistry": "{tsundere_elite_agent_ruobing.name}右脚踝被合金重锁扣在水底龙骨上紧咬朱唇承受失温发热，你潜入冰水潜心用拨针摸索开锁并在水面上与长官背靠背撑住取暖渡气，{undercover_ship_mechanic_leona.name}在管道竖井抢关通海旁路，军阶尊卑在漫顶狂涛中彻底颠覆转化为生死不负同袍誓言。",
+   "stakes": {
+    "resource_gap": "机要员掌握精细开锁与急救主动权，少校手握微缩胶卷与最高机密大义。",
+    "limit_gap": "平日尊卑严明逾矩即严惩，此刻冰水中肌肤相贴骨肉相依共分一口气。",
+    "meeting_reason": "水下三层压载隔舱内的绝境解镣与生命维持死线周旋。",
+    "irreplaceable_goal": "在海水漫顶前解除女特工脚镣束缚并稳住神志保全国家绝密微缩胶卷。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "tsundere_elite_agent_ruobing",
+     "stage": "intimate",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 3
+     },
+     "reason": "愿以一身血肉之躯在水底为其挡下灭顶冰流，誓死守护傲冷长官的性命尊严。"
+    },
+    {
+     "a": "undercover_ship_mechanic_leona",
+     "b": "player",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 1
+     },
+     "reason": "敬佩其临危不乱的端方品格，倾力相助抢通水下管道通路。"
+    },
+    {
+     "a": "tsundere_elite_agent_ruobing",
+     "b": "undercover_ship_mechanic_leona",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "对外情报局特战外勤少校特派特工与间谍货轮年轻轮机女机械师在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_interrogator_water_chamber_standof",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "junior_cryptography_analyst"
+   ],
+   "slots": [
+    "interrogation_officer_viktor",
+    "tsundere_elite_agent_ruobing"
+   ],
+   "tension_engine_ids": [
+    "te_interrogation_truth_serum_vs_dawn_res",
+    "te_shackle_locked_pride_vs_vulnerable_in"
+   ],
+   "chemistry": "{interrogation_officer_viktor.name}在铁梯上方手持注射器威逼倒数，{tsundere_elite_agent_ruobing.name}昂首挺立在水流中唾沫冷斥，你以机要保密条例与海事法为盾同敌方周旋拖延，残酷审讯与钢铁信仰在水漫胸口的密闭水牢内展开决死对赌。",
+   "stakes": {
+    "resource_gap": "门外拥有重武器与注射器致幻药，水底唯有冰冷镣铐与赤胆忠心。",
+    "limit_gap": "稍有软弱退缩全员将被注射毒药神经崩溃沦为泄密叛徒。",
+    "meeting_reason": "铁栅两端的最后底牌对赌与信仰交锋决战。",
+    "irreplaceable_goal": "彻底拖延审讯进度瓦解敌方心理防线等待海燕抢关水阀。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "interrogation_officer_viktor",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "视作泯灭人性的敌对走狗，誓以智谋粉碎其严刑逼供企图。"
+    },
+    {
+     "a": "tsundere_elite_agent_ruobing",
+     "b": "interrogation_officer_viktor",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "不共戴天的国家死敌，宁死不折。"
+    },
+    {
+     "a": "player",
+     "b": "tsundere_elite_agent_ruobing",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "潜伏机要破译组青年专员与对外情报局特战外勤少校特派特工在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "combo_marcus_diplomatic_parley_counter",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "consulate_diplomatic_courier"
+   ],
+   "slots": [
+    "rival_intelligence_analyst_marcus",
+    "tsundere_elite_agent_ruobing"
+   ],
+   "tension_engine_ids": [
+    "te_interrogation_truth_serum_vs_dawn_res",
+    "te_shackle_locked_pride_vs_vulnerable_in"
+   ],
+   "chemistry": "{rival_intelligence_analyst_marcus.name}在发电机舱阴影中亮出国际豁免令状介入博弈，你手持领事公印以海事法展开对等法律交涉，{tsundere_elite_agent_ruobing.name}在后方冷眼审视权衡利害，两大情报体系的青年精英在公海黑船之上达成微妙反向制衡默契。",
+   "stakes": {
+    "resource_gap": "西方机构拥有中立公约调停借口，东方特工握有现场实锤证据与反制底牌。",
+    "limit_gap": "博弈各怀鬼胎，一步踏错将演变为公海交火死局。",
+    "meeting_reason": "锅炉机舱水雾深处的暗夜谈判与战术妥协。",
+    "irreplaceable_goal": "迫使敌方放弃暴力私刑引渡转为体面停火交接。"
+   },
+   "relations": [
+    {
+     "a": "rival_intelligence_analyst_marcus",
+     "b": "tsundere_elite_agent_ruobing",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 2
+     },
+     "reason": "敬佩其浩然风骨，暗中愿助其一臂之力换取自身退路。"
+    },
+    {
+     "a": "player",
+     "b": "rival_intelligence_analyst_marcus",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 3,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 3,
+      "tension": 2
+     },
+     "reason": "外交情报对手间的职业敬意与默契共谋。"
+    },
+    {
+     "a": "player",
+     "b": "tsundere_elite_agent_ruobing",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "领事馆驻外机要青年随员与对外情报局特战外勤少校特派特工在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_clara_speedboat_surf_rampart",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "combat_diver_vanguard"
+   ],
+   "slots": [
+    "renegade_arms_heiress_clara",
+    "tsundere_elite_agent_ruobing"
+   ],
+   "tension_engine_ids": [
+    "te_arms_heiress_speedboat_gamble_vs_micr",
+    "te_shackle_locked_pride_vs_vulnerable_in"
+   ],
+   "chemistry": "{renegade_arms_heiress_clara.name}操持重机枪在倾斜主甲板狂飙扫射压制追兵，你护卫{tsundere_elite_agent_ruobing.name}翻越被海浪砸烂的甲板栏杆跳上高速突击救生艇，快艇迎着数米高惊涛怒海咆哮腾空冲破狂涛，野性黑道千金与热血特工在暴风雨中踏上狂野逃亡破浪之旅。",
+   "stakes": {
+    "resource_gap": "军火商快艇具备二百海里狂暴续航，提供了冲破公海围猎的核心载具。",
+    "limit_gap": "入水瞬间若遭流弹击穿油箱全员将粉身碎骨化作火海油柱。",
+    "meeting_reason": "狂暴主甲板起吊台前的最后斩缆登艇突破。",
+    "irreplaceable_goal": "确保全员安全登艇割断吊缆冲出货轮倾覆死亡涡流。"
+   },
+   "relations": [
+    {
+     "a": "renegade_arms_heiress_clara",
+     "b": "tsundere_elite_agent_ruobing",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 2
+     },
+     "reason": "惺惺相惜的大洋傲岸双姝，誓以快艇踏浪共渡绝境难关。"
+    },
+    {
+     "a": "player",
+     "b": "renegade_arms_heiress_clara",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 1
+     },
+     "reason": "战术协同盟友，并肩掌舵迎击滔天巨浪。"
+    },
+    {
+     "a": "player",
+     "b": "tsundere_elite_agent_ruobing",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "潜水战术蛙人突击先锋与对外情报局特战外勤少校特派特工在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_hans_scuba_underwater_inrush",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "stowaway_marine_electrician"
+   ],
+   "slots": [
+    "veteran_quartermaster_hans",
+    "tsundere_elite_agent_ruobing"
+   ],
+   "tension_engine_ids": [
+    "te_ballast_flood_vs_back_to_back_heartbe",
+    "te_shackle_locked_pride_vs_vulnerable_in"
+   ],
+   "chemistry": "{veteran_quartermaster_hans.name}强忍腿伤冒死将两具特战水下闭路潜水呼吸器护送至隔舱天窗，你接驳供气面罩并由少校将其稳稳佩戴在身前，{tsundere_elite_agent_ruobing.name}在水底潜行中将另一只咬嘴塞入同伴唇间，水下装备与赤胆忠心在水下三层构建起坚如磐石的深海生还结界。",
+   "stakes": {
+    "resource_gap": "老士官拥有正规特战水肺装具，特工拥有闭气泅渡潜泳体能。",
+    "limit_gap": "水肺咬嘴在水下脱落将导致瞬间呛水气管痉挛休克窒息。",
+    "meeting_reason": "压载隔舱水密天窗处的分发装具与水下潜行。",
+    "irreplaceable_goal": "顺利完成水下供气协同穿越受损螺旋桨轴隧滑出船体。"
+   },
+   "relations": [
+    {
+     "a": "veteran_quartermaster_hans",
+     "b": "tsundere_elite_agent_ruobing",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "视若军人至高风骨荣耀，拼上残躯也要保全英雄血脉平安归国。"
+    },
+    {
+     "a": "player",
+     "b": "veteran_quartermaster_hans",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "感念士官舍身大义，通力协助排除管路障碍。"
+    },
+    {
+     "a": "player",
+     "b": "tsundere_elite_agent_ruobing",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "货轮机舱青年电气维修工与对外情报局特战外勤少校特派特工在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "combo_dawn_cruiser_radar_rendezvous",
+   "power_structure": "switchable",
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "identity_ids": [
+    "junior_cryptography_analyst"
+   ],
+   "slots": [
+    "tsundere_elite_agent_ruobing",
+    "undercover_ship_mechanic_leona"
+   ],
+   "tension_engine_ids": [
+    "te_shackle_locked_pride_vs_vulnerable_in",
+    "te_interrogation_truth_serum_vs_dawn_res"
+   ],
+   "chemistry": "{tsundere_elite_agent_ruobing.name}在你与{undercover_ship_mechanic_leona.name}护卫下泅渡游出翻沉货轮漩涡，迎着公海破晓第一缕朝霞登上接应的万吨巡逻舰甲板，少校亲自敬礼将滴水未损的微缩胶卷交由军代表并向身旁青年宣布立下终身同袍契约，红日跃出深蓝海平线，惊心动魄的公海暗战在胜利凯歌中终局定格。",
+   "stakes": {
+    "resource_gap": "巡逻舰主炮射程覆盖全海域且胶卷完好无损，大获全胜。",
+    "limit_gap": "从水底锁链下的绝境囚徒彻底蜕变为凯旋受勋的无双英杰。",
+    "meeting_reason": "巡逻舰甲板晨光朝霞之下的胜利会师与庄严受勋。",
+    "irreplaceable_goal": "向祖国交出绝密胶卷并确立身边青年终身相伴之名分。"
+   },
+   "relations": [
+    {
+     "a": "tsundere_elite_agent_ruobing",
+     "b": "player",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "此生此世共经汪洋淬炼，无论风浪再大并肩执伞永不相弃。"
+    },
+    {
+     "a": "undercover_ship_mechanic_leona",
+     "b": "tsundere_elite_agent_ruobing",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "见证了一段公海冰火洗礼的伟大传奇，重归祖国怀抱。"
+    },
+    {
+     "a": "player",
+     "b": "undercover_ship_mechanic_leona",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "潜伏机要破译组青年专员与间谍货轮年轻轮机女机械师在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_entry_shackle_locked_interrogation_sta",
+   "title": "隔舱水下脚镣对峙",
+   "location_ids": [
+    "flooded_cargo_bilge_cell"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "少校女特工被合金脚镣固定在龙骨钢梁旁，冰冷海水已漫过脚踝，审讯官在铁梯上方手持注射器威逼立下通牒。",
+    "青年破译员被推入相邻铁栅，隔着铁条与长官目光交汇，两人隔栏背靠背以抵御失温寒流侵袭。",
+    "破译员从战术靴后跟取出藏匿的钛合金开锁拨针，潜入冰水深处贴着少校白皙脚踝探入锁孔摸索锁齿。"
+   ],
+   "hook_ids": [
+    "h_ruobing_shackle_locked_chin_lift",
+    "h_viktor_truth_serum_syringe_flick",
+    "h_leona_shaft_wrench_tapping_signal"
+   ],
+   "start_minute": 1320,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "a_hypothermia_back_to_back_embrace",
+   "title": "水漫锁骨贴背取暖",
+   "location_ids": [
+    "flooded_cargo_bilge_cell"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "通海阀全开导致海水飞速漫上腰际并向锁骨逼近，高热失温令少校浑身剧烈颤抖呼吸急促紊乱。",
+    "破译员将单薄干燥的内衬军便服反手裹在少校肩头，两人在水中转过身躯背靠背撑住，轮流搓热对方冻僵的手指。",
+    "少校后颈贴着同伴耳廓以微弱气声交代微缩胶卷解密密匙，彼此在刺骨寒水中倾听剧烈心跳交织共振。"
+   ],
+   "hook_ids": [
+    "h_ruobing_hypothermia_shiver_whisper",
+    "h_hans_scuba_pack_lower_hatch",
+    "h_viktor_electric_prod_water_arc"
+   ],
+   "start_minute": 1365,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "a_flood_intake_bypass_valve_sabotage",
+   "title": "通海截门手动破障",
+   "location_ids": [
+    "submerged_pipe_maintenance_shaft"
+   ],
+   "duration_minutes": 50,
+   "beats": [
+    "机械师海燕顺着竖井铁梯探身而下，递过专用润滑松锈剂与生铁重锤协助卡死进水阀连杆。",
+    "破译员潜入水底在少校脚力借力蹬踏下猛烈转动旁通手轮，滚滚激流喷涌冲击被成功压制半数流量。",
+    "脚镣最后一道卡齿伴随清脆机械脆响终于应声弹开，少校重获自由在水底与同伴十指紧扣浮出水面。"
+   ],
+   "hook_ids": [
+    "h_leona_shaft_wrench_tapping_signal",
+    "h_ruobing_knife_grip_barefoot_stand",
+    "h_viktor_electric_prod_water_arc"
+   ],
+   "start_minute": 1405,
+   "tags": [
+    "workplace"
+   ]
+  },
+  {
+   "id": "a_boiler_room_switchboard_blackout",
+   "title": "锅炉机舱拉闸断电",
+   "location_ids": [
+    "engine_auxiliary_boiler_room"
+   ],
+   "duration_minutes": 35,
+   "beats": [
+    "脱困二人翻越水密天窗潜入辅机锅炉舱，机器轰鸣声中热浪水汽蒸腾令人视线受阻。",
+    "敌对机构专员马库斯在转角拔枪逼退尾随雇佣兵，配合二人合力拉下高压主变压器紧急制动断路电闸。",
+    "全船探照灯与监控系统瞬间炸碎火花陷入绝对漆黑，暴风雨中唯有枪火如闪电般在走廊频频亮起。"
+   ],
+   "hook_ids": [
+    "h_marcus_diplomatic_briefcase_revolver",
+    "h_clara_whisky_bottle_smash_roar",
+    "h_ruobing_knife_grip_barefoot_stand"
+   ],
+   "start_minute": 15,
+   "tags": [
+    "workplace"
+   ]
+  },
+  {
+   "id": "a_deck_gangway_typhoon_firefight",
+   "title": "狂暴主甲板起吊交火",
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "冲上露天主甲板的特工二人直面数米高狂涛黑浪拍击，军火商千金克拉拉操持重机枪扫清艇库通道。",
+    "匪首维克托率领残余亡命徒在集装箱后疯狂扫射阻击，被少校甩出的钛合金短刀精准贯穿手腕击落枪械。",
+    "老士官汉斯用身体死死挡住卡死的脱钩缆绳，挥动军刀割断起吊缆绳将突击快艇猛烈砸入怒海波涛。"
+   ],
+   "hook_ids": [
+    "h_clara_whisky_bottle_smash_roar",
+    "h_hans_scuba_pack_lower_hatch",
+    "h_viktor_truth_serum_syringe_flick"
+   ],
+   "start_minute": 50,
+   "tags": [
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "a_dawn_speedboat_breakout_rendezvous",
+   "title": "晨曦怒涛登舰凯旋",
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "全员飞身纵跃跳入怒涛快艇，双发大马力柴油引擎爆发出万钧怒吼迎着十级巨浪破浪狂飙腾空。",
+    "翻沉中的万吨间谍货轮在身后爆炸断裂沉入千米海沟，巨型漩涡被快艇喷射推进器远远甩在身后。",
+    "初升旭日穿透公海铅云万丈霞光洒满大洋，突击艇平稳靠上我方万吨巡逻舰舷梯，少校昂首敬礼同袍相拥凯旋。"
+   ],
+   "hook_ids": [
+    "h_ruobing_deck_salute_dawn_smile",
+    "h_clara_whisky_bottle_smash_roar",
+    "h_marcus_diplomatic_briefcase_revolver"
+   ],
+   "start_minute": 90,
+   "tags": [
+    "workplace_power"
+   ]
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_ballast_tank_flood_drowning_surge",
+   "title": "压载隔舱通海注水灭顶死线",
+   "source": "nature",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "flooded_cargo_bilge_cell"
+   ],
+   "trigger": "水下三层通海泄水阀被敌方故意全开，冰冷浑浊的海水正以每十分钟三十厘米惊人速度急剧上涨濒临水漫隔舱顶板。",
+   "objective": "在九十分钟内利用钛合金拨针解开脚镣或手动闭锁通海旁路截门，防止全员溺毙灭顶。",
+   "choice": "是潜入水底闭气两分钟强行抠动锈蚀锁芯，还是冒险用潜水刀合金刀柄猛砸脚镣销钉？",
+   "immediate": {
+    "text": "冰冷刺骨的海水已越过小腹漫上胸膛，冰冷水流激荡撕扯着被锁住的躯体，呼吸空间被急剧压缩至一尺窄缝。",
+    "minutes": 15
+   },
+   "near": {
+    "text": "再过半小时水位将彻底没过下颚封死最后一寸游离空气，全员将因急性溺水肺水肿窒息身亡沉底。",
+    "deadline_minutes": 35
+   },
+   "far": {
+    "trigger": "压载水舱彻底注满万吨海水化作深海铁棺水牢。",
+    "consequence": "王牌特工与国家绝密微缩胶卷长眠海底万劫不复。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "同伴潜入水底憋气用拨针强抠锁齿解开合金脚镣",
+     "cost": "伴侣手指全部指甲脱落崩开鲜血被海水杀痛至休克。"
+    },
+    {
+     "option": "用潜水刀合金配重刀柄顶着水流猛烈砸断脚镣转轴",
+     "cost": "女特工脚踝骨骼遭受重度钝击骨裂肿胀短时间内无法行走。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_ruobing_shackle_locked_chin_lift",
+    "h_ruobing_hypothermia_shiver_whisper"
+   ],
+   "start_minute": 1325,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_interrogation_sodium_pentothal_inquest",
+   "title": "硫喷妥钠吐真剂毒针逼供",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "flooded_cargo_bilge_cell"
+   ],
+   "trigger": "审讯官手持注满中枢神经致幻吐真剂的高压注射器立于铁梯，下达最后十分钟交出胶卷解码密码的拷问通牒。",
+   "objective": "在针头刺入颈动脉之前，利用海事法理周旋拖延或引爆水舱电弧实施强行反制灭口。",
+   "choice": "是以机要条例公开抗辩拖延时限，还是故意短路天花板电线向铁梯导电实施触电反制？",
+   "immediate": {
+    "text": "黄色透明药液在针尖滴落发出刺鼻药味，电击测谎仪电极在水中滋滋泛起微弱电火花刺激皮肤刺痛。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "若未能在一刻钟内逼退审讯官，高纯度致幻剂注入将彻底瓦解脑神经中枢导致人格崩溃任由摆布。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "神经系统受致幻药液摧残彻底沦为情报傀儡废人。",
+    "consequence": "国家最高机密网络全盘泄露造成无法估量的地缘灾难。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "冒险将悬挂的防爆灯裸线拽入水中向铁梯释放电流",
+     "cost": "伴侣自身遭受强劲电流波及全身抽搐肌肉多处拉伤。"
+    },
+    {
+     "option": "编造一套合乎逻辑的假密钥算法暂时稳住审讯官",
+     "cost": "少校被审讯官抽了一记重重马鞭皮开肉绽鲜血直流。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_viktor_truth_serum_syringe_flick",
+    "h_viktor_electric_prod_water_arc"
+   ],
+   "start_minute": 1370,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_cargo_hold_airlock_sealing_lockdown",
+   "title": "水密气密天窗液压闭锁隔离",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "submerged_pipe_maintenance_shaft"
+   ],
+   "trigger": "货轮舰桥下达全船损管指令，通往甲板的全部纵向竖井六角重型水密天窗正被液压驱动机构全速下压锁死。",
+   "objective": "在沉重铁门彻底卡死封栓前，用撬棍别住门缝或爬入竖井顶部门闩机构完成紧急破坏。",
+   "choice": "是用双手死死托举住数十公斤重的防雹水密门板，还是用战术短刀别在门铰链缝隙？",
+   "immediate": {
+    "text": "头顶沉重的生铁天窗正伴随液压泵的轰鸣声以每秒五厘米速度缓缓闭合，最后一抹灯光即将湮灭。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "再过二十分钟外部机械自锁螺栓将彻底咬合，水下三层将彻底沦为与世隔绝的完全封闭死舱。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "水密天窗彻底焊死无法从内部凭借人力破开半分。",
+    "consequence": "全员被永久困死在水底暗舱缺氧失温窒息永绝生路。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "用钛合金潜水刀厚重刀背死死卡在水密门咬合缝隙",
+     "cost": "极品战术短刀当场崩裂报废伴侣掌心被反震震裂渗血。"
+    },
+    {
+     "option": "同伴用血肉肩膀死死顶住下压门板为少校争取翻越时间",
+     "cost": "伴侣左肩锁骨遭受万钧重压粉碎性骨折剧痛脱力。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_leona_shaft_wrench_tapping_signal",
+    "h_ruobing_knife_grip_barefoot_stand"
+   ],
+   "start_minute": 1410,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "p_typhoon_hull_fracture_catastrophe",
+   "title": "十级台风巨浪撕裂龙骨断裂",
+   "source": "nature",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "trigger": "公海三十米高黑水黑浪重重砸在货轮主货舱中央，因单侧压载舱注水失衡，货轮龙骨发出凄厉金属撕裂巨响即将断为两截。",
+   "objective": "在万吨货轮被拦腰折断沉没前，全员冲上主甲板起吊台登上唯一的高速突击救生艇。",
+   "choice": "是冒险穿过集装箱疯狂滑移撞击的主走道，还是沿外舷检修钢索攀爬至船尾艇库？",
+   "immediate": {
+    "text": "甲板地面以三十度斜角剧烈倾斜，重达数十吨的集装箱崩断锁链在狂风中如铁锤般疯狂翻滚滑行。",
+    "minutes": 15
+   },
+   "near": {
+    "text": "半小时内船体主断裂缝隙将彻底撕开，海水将以千钧之势吞没整个露天甲板形成巨大下沉漩涡。",
+    "deadline_minutes": 35
+   },
+   "far": {
+    "trigger": "货轮瞬间断成两截在震天轰鸣中沉入万米深海平原。",
+    "consequence": "甲板一切生灵连同万吨废铁全数被卷入海底死无全尸。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "伴侣搀扶少校在集装箱滑移间隙以极限战术翻滚穿越走道",
+     "cost": "伴侣后背被翻滚的铁皮边缘严重擦挂皮开肉绽鲜血淋漓。"
+    },
+    {
+     "option": "全员手拉手抓紧外舷湿滑钢索顶着狂风怒浪凌空攀爬",
+     "cost": "少校双臂手指受巨浪反复拍击严重挫伤脱皮几近脱手。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_clara_whisky_bottle_smash_roar",
+    "h_hans_scuba_pack_lower_hatch"
+   ],
+   "start_minute": 10,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_electrical_switchboard_spark_fire",
+   "title": "柴油机舱配电柜短路浓烟烈火",
+   "source": "accident",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "engine_auxiliary_boiler_room"
+   ],
+   "trigger": "发电机过载与渗水短路引发主配电盘发生大面积爆燃起火，高压电缆绝缘层在机舱内剧烈燃烧释放致命氰化物浓烟。",
+   "objective": "在剧毒浓烟充满机舱前，用石棉防火毯裹身扑灭火源并拉下主燃油切断紧急阀门。",
+   "choice": "是用手提式泡沫灭火器冲入浓烟深处喷洒，还是冒险徒手扳下被烈火烤得通红的手柄？",
+   "immediate": {
+    "text": "刺鼻刺眼的滚滚黑烟在狭窄锅炉舱内疯狂翻滚，吸入一口即引发气管痉挛剧烈呛咳灼痛。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "若未能在一刻钟内阻断火势，大火引燃邻近轻柴油日用油柜将引发全舱大爆炸毁灭一切生机。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "油柜殉爆将锅炉机舱彻底炸成冲天烈焰焦黑废墟。",
+    "consequence": "全员葬身火海粉身碎骨化作公海深渊焦炭灰烬。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "伴侣身披浸湿石棉防火毯扑向配电盘阻断氧气灭火",
+     "cost": "伴侣双手双臂被高温融胶严重烫伤起大面积红肿焦泡。"
+    },
+    {
+     "option": "少校用潜水服下摆包裹手掌冒险拧死滚烫燃油截止阀",
+     "cost": "少校掌心遭受高温金属二级烫伤脱皮钻心剧痛。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_marcus_diplomatic_briefcase_revolver",
+    "h_leona_shaft_wrench_tapping_signal"
+   ],
+   "start_minute": 45,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_dawn_coast_guard_radar_intercept",
+   "title": "公海巡逻舰雷达锁定最后火线",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "trigger": "我方万吨海警巡逻舰雷达编队已突破风暴外圈迫近至两海里处，敌方舰桥企图启动舰载鱼雷自毁全船湮灭罪证。",
+   "objective": "在舰桥引爆自毁装置前，全员冲上突击快艇离开船舷点燃橙色示位烟雾弹完成接应。",
+   "choice": "是乘坐快艇全速突破迎向巡逻舰航线，还是借助潜水装具潜入深海等待打捞？",
+   "immediate": {
+    "text": "破晓微光穿透海面风暴铅云，两海里外巡逻舰巍峨的舰艏防暴强光探照灯已如天神利剑般刺破黑夜。",
+    "minutes": 15
+   },
+   "near": {
+    "text": "若未能在一刻钟内脱离货轮千米杀伤半径，货轮自毁大爆炸的万吨水下冲击波将粉碎一切微小快艇。",
+    "deadline_minutes": 35
+   },
+   "far": {
+    "trigger": "自毁冲击波引爆公海巨浪彻底将快艇吞噬撕碎撕裂。",
+    "consequence": "胜利拂晓前夕全员功亏一篑喋血深海无一生还。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "驾驶突击快艇踩死油门以六十节极速迎着巨浪滑跃突围",
+     "cost": "快艇底壳遭受硬浪剧烈拍击震裂伴侣胸口内伤咳血。"
+    },
+    {
+     "option": "少校单手立于风浪颠簸艇头点燃高空橙色遇险示位火箭",
+     "cost": "火箭后坐力震伤少校受创脚踝导致二次骨折剧痛脱力。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_ruobing_deck_salute_dawn_smile",
+    "h_clara_whisky_bottle_smash_roar"
+   ],
+   "start_minute": 80,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_ruobing_shackle_locked_chin_lift",
+   "kind": "approach",
+   "slot": "tsundere_elite_agent_ruobing",
+   "location_ids": [
+    "flooded_cargo_bilge_cell"
+   ],
+   "text": "{tsundere_elite_agent_ruobing.name}右脚踝被厚重生铁脚镣死扣在龙骨上，垂眸凝视你低喝：“呆立着看什么？还不快拿起拨针替本少校开锁！若是敢借机触碰本官脚踝分毫，等活着回港，军法处有的是条令让你禁闭半年！”"
+  },
+  {
+   "id": "h_ruobing_hypothermia_shiver_whisper",
+   "kind": "approach",
+   "slot": "tsundere_elite_agent_ruobing",
+   "location_ids": [
+    "flooded_cargo_bilge_cell"
+   ],
+   "text": "{tsundere_elite_agent_ruobing.name}因失温剧烈战栗，与你背靠背抵住龙骨，急促哈出微弱白汽轻喃：“别转过身来……蠢材，盯着闸门……我数到六十你就下潜，锁芯还差半圈……听到没有？！”"
+  },
+  {
+   "id": "h_ruobing_knife_grip_barefoot_stand",
+   "kind": "approach",
+   "slot": "tsundere_elite_agent_ruobing",
+   "location_ids": [
+    "engine_auxiliary_boiler_room",
+    "submerged_pipe_maintenance_shaft"
+   ],
+   "text": "{tsundere_elite_agent_ruobing.name}脚镣方脱即反手拔出钛合金潜水短刀，虽然脚踝红肿带血，单手扶住你肩膀沉声令道：“跟紧我！三点钟方向配电室，敢在撤退中掉队的兵，本少校亲自拿枪押着你走！”"
+  },
+  {
+   "id": "h_ruobing_deck_salute_dawn_smile",
+   "kind": "approach",
+   "slot": "tsundere_elite_agent_ruobing",
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "text": "{tsundere_elite_agent_ruobing.name}在冲破风浪的高速快艇上迎着漫天破晓晨曦，唇角微扬低语：“小子，你的后背……比我想象的要可靠得多。等到了母港，本少校亲自为你向总部请功，兼做你的终身考核官。”"
+  },
+  {
+   "id": "h_viktor_truth_serum_syringe_flick",
+   "kind": "approach",
+   "slot": "interrogation_officer_viktor",
+   "location_ids": [
+    "flooded_cargo_bilge_cell",
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "text": "{interrogation_officer_viktor.name}单手弹了弹高压注射器针管：“楚少校，还有旁边那位机要小随员，海水已经漫过胸口了吧？交出微缩胶卷的三十六位动态密钥，否则这管硫喷妥钠会把你们的大脑烧成一滩烂泥！”"
+  },
+  {
+   "id": "h_viktor_electric_prod_water_arc",
+   "kind": "approach",
+   "slot": "interrogation_officer_viktor",
+   "location_ids": [
+    "flooded_cargo_bilge_cell",
+    "submerged_pipe_maintenance_shaft"
+   ],
+   "text": "{interrogation_officer_viktor.name}将电击警棍探入水面激起大片耀眼电弧火花：“有情有义啊！还互相撑着呢！不知道高压电流顺着海水打在两位身上时，你们那身骄傲的军服还能不能挡得住求饶的惨叫呢？！”"
+  },
+  {
+   "id": "h_leona_shaft_wrench_tapping_signal",
+   "kind": "approach",
+   "slot": "undercover_ship_mechanic_leona",
+   "location_ids": [
+    "submerged_pipe_maintenance_shaft",
+    "flooded_cargo_bilge_cell",
+    "engine_auxiliary_boiler_room"
+   ],
+   "text": "{undercover_ship_mechanic_leona.name}从顶棚狭窄检修天窗探出身子，满脸机油烟灰却眼如寒星，急促低语：“接住！长官别慌！水下通海旁路被我反锁了！趁焊枪还没烧穿主梁，我带你们从机舱轴隧溜出去！”"
+  },
+  {
+   "id": "h_marcus_diplomatic_briefcase_revolver",
+   "kind": "approach",
+   "slot": "rival_intelligence_analyst_marcus",
+   "location_ids": [
+    "engine_auxiliary_boiler_room",
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "text": "{rival_intelligence_analyst_marcus.name}在锅炉舱水雾阴影中缓步走出，向二人优雅欠身致意：“楚少校，别来无恙。比起给这艘破船陪葬，在下更愿意为两位在公海提供一份绅士体面的引渡通道。”"
+  },
+  {
+   "id": "h_clara_whisky_bottle_smash_roar",
+   "kind": "approach",
+   "slot": "renegade_arms_heiress_clara",
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway",
+    "engine_auxiliary_boiler_room"
+   ],
+   "text": "{renegade_arms_heiress_clara.name}将喝空的威士忌玻璃瓶狠狠砸碎在雇佣兵脚下：“维克托你个白痴！老娘的船都要沉了你还在要密码！东方来的朋友，快给老娘跳上快艇！今晚谁敢拦路，老娘一枪掀飞那人的天灵盖！”"
+  },
+  {
+   "id": "h_hans_scuba_pack_lower_hatch",
+   "kind": "approach",
+   "slot": "veteran_quartermaster_hans",
+   "location_ids": [
+    "flooded_cargo_bilge_cell",
+    "submerged_pipe_maintenance_shaft",
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "text": "{veteran_quartermaster_hans.name}顶着枪火从暗门滑下两套军用特战水下闭路呼吸装具与战术咬嘴，沉声低吼：“快戴上面罩！老汉在船尾埋了炸药，一分钟后炸开轴隧出水孔，咬紧呼吸管直接往外冲！”"
+  },
+  {
+   "id": "h_ruobing_wet_suit_gasp_glance",
+   "kind": "observe",
+   "slot": "tsundere_elite_agent_ruobing",
+   "location_ids": [
+    "flooded_cargo_bilge_cell"
+   ],
+   "text": "{tsundere_elite_agent_ruobing.name}背靠冰冷铁柱，浸透海水的潜水服紧贴着矫健身段，红光应急灯下，修长白皙的天鹅颈随急促呼吸起伏，那双傲岸美眸在失温痛苦中依然如寒夜孤狼般凶戾桀骜，死死盯着铁梯上的审讯官。"
+  },
+  {
+   "id": "h_viktor_syringe_air_bubble_glare",
+   "kind": "observe",
+   "slot": "interrogation_officer_viktor",
+   "location_ids": [
+    "flooded_cargo_bilge_cell"
+   ],
+   "text": "{interrogation_officer_viktor.name}单手将高压注射器倒置，针筒内的黄色致幻药液在水雾红光中泛着诡异磷光，其眼底深处跳动着残忍偏执的贪婪血芒，战术皮靴在铁踏板上碾磨发出令人毛骨悚然的吱呀摩擦声。"
+  },
+  {
+   "id": "h_marcus_gold_cufflink_glint",
+   "kind": "observe",
+   "slot": "rival_intelligence_analyst_marcus",
+   "location_ids": [
+    "engine_auxiliary_boiler_room"
+   ],
+   "text": "{rival_intelligence_analyst_marcus.name}从容立于蒸汽管道阴影中，袖口处的纯金双头鹰袖扣在昏黄工作灯下划过一道冰冷亮线，神色清冷超然，犹如一位在末日熔炉旁静候棋局收官的冷血裁判。"
+  },
+  {
+   "id": "h_clara_leather_jacket_rain_soak",
+   "kind": "observe",
+   "slot": "renegade_arms_heiress_clara",
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "text": "{renegade_arms_heiress_clara.name}任由狂暴海雨将一身黑皮猎装完全打透，湿漉漉的金发狂乱飞舞，双腿蹬住起吊机基座单手换弹，战术风雨中那张桀骜艳丽的狂野面庞在雷光电闪下呈现出惊心动魄的亡命野性。"
+  },
+  {
+   "id": "h_hans_shrapnel_scar_clench",
+   "kind": "observe",
+   "slot": "veteran_quartermaster_hans",
+   "location_ids": [
+    "upper_weather_deck_cargo_gangway"
+   ],
+   "text": "{veteran_quartermaster_hans.name}单手死死拽住快艇起吊钢缆，任由崩断的铁丝在满是弹片疤痕的面颊上划开血痕，魁梧如铁塔般的身躯巍然屹立在滔天巨浪之前，眼神透着视死如归的悲壮决绝。"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_female_1",
+   "category": "信息",
+   "requires": [],
+   "text": "轮机轴隧暗设水下逃生检修通道：机械师海燕出示机舱绝密隐蔽图纸，证实货轮螺旋桨主轴隧末端暗藏一处供潜水员水下排险的减压出水闸门。全员无需强行冲破被重火力封锁的露天主甲板走道，直接开辟了一条从水下无声泅渡脱险的绝对安全生命走廊。"
+  },
+  {
+   "id": "t_female_2",
+   "category": "人事",
+   "requires": [],
+   "text": "西方督察官携核潜艇密电当场反水策应：督察官马库斯当场出示北约绝密公海频段，下令切断对间谍货轮的全部卫星火力支援并公开宣布向我方特工提供战术掩护。匪首维克托彻底丧失外部雇佣军增援与撤退后路，船上防卫火力瞬间陷入各自为战的混乱瘫痪。"
+  },
+  {
+   "id": "t_female_3",
+   "category": "资源",
+   "requires": [],
+   "text": "货舱夹层起获军用高压潜航推进器：在撬开一处原本伪装为机修油箱的水下防潮箱时，意外发现里面整齐码放着两台带有水下电推进器的军用特战潜航推进手柄。水下泅渡体能消耗死线瞬间全盘化解，突围撤退速度提升三倍，足以瞬间脱离货轮沉没产生的巨大漩涡拉扯。"
+  },
+  {
+   "id": "t_female_4",
+   "category": "制度",
+   "requires": [],
+   "text": "公海反酷刑法案赋予临机自卫斩杀权：女特工借由解脱脚镣时机，依照国际公海反酷刑特别条令与战时情报处置规程，向全船雇佣兵正式宣告行使临机无限自卫反击权柄。反制一切外籍间谍的行动获得国际海事法与国内战备法双重大义背书，全员开枪反杀敌寇再无任何顾虑束缚。"
+  },
+  {
+   "id": "t_female_5",
+   "category": "时限",
+   "requires": [],
+   "text": "货轮突入风暴眼海浪平息半个时辰：万吨货轮在巨浪漂流中意外滑入台风风眼中心海域，漫天狂暴黑浪瞬间止歇，海面出现难得的三十米平静气象窗口。原本紧迫灭顶的龙骨撕裂死线获得宝贵的半小时延缓窗口，为起吊突击快艇全员登艇突围赢得了决定性战机。"
+  },
+  {
+   "id": "t_female_6",
+   "category": "关系",
+   "requires": [],
+   "text": "女少校实为机要员昔年特训营总教官宿缘：在少校脱险后清点装备时，机要员认出其潜水服内侧佩戴的一枚暗金军功章，赫然正是当年军校特训营神秘女总教官的信物。数年前无声护航的血脉宿缘在绝境冰水中轰然揭晓，彻底熔断了彼此最后的身份顾虑，升华为至死不渝的灵魂伴侣。"
+  },
+  {
+   "id": "t_female_7",
+   "category": "意外",
+   "requires": [],
+   "text": "货舱军火二次大殉爆彻底消灭追兵匪首：锅炉舱大火引燃了底层偷运的高爆鱼雷引信，引发货轮船艏发生天崩地裂般的连环大殉爆。万吨间谍母船化作冲天火球将匪首维克托及其残余雇佣兵全数吞噬海底，快艇借由冲击波顺势冲出漩涡飞向破晓旭日。"
+  }
+ ],
+ "forbidden_terms": [
+  "智能手机",
+  "无线局域网",
+  "人脸识别",
+  "平板电脑",
+  "移动支付",
+  "云端传输",
+  "微型无人机",
+  "卫星导航手表"
+ ],
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster"
+ ],
+ "status": "released",
+ "notes": "按原稿加入，改动见提交说明。"
+}

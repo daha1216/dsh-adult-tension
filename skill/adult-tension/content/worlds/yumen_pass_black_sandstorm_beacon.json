@@ -1,0 +1,2508 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "大唐羽林禁军军籍成年老士官。",
+   "age_range": [
+    36,
+    46
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_wounded_yulin_sergeant",
+   "line": "{npc.name}：“公主殿下，当年安西军打大食老子就在阵里，都尉绝不是叛徒，今夜老子这只残臂就是拼了，也得护长公主和都尉杀出去！”",
+   "location_ids": [
+    "beacon_rammed_earth_shelter"
+   ],
+   "name": null,
+   "role": "长公主护卫羽林卫断臂老队正"
+  },
+  {
+   "adult_context": "河西镇军在役成年骑兵伍长。",
+   "age_range": [
+    28,
+    38
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_mutinous_cavalry_corporal",
+   "line": "{npc.name}：“弟兄们跟着将军卖命不是为了当干尸！胡人答应给生路，谁敢去点烽火，老子先一刀剁了那人！”",
+   "location_ids": [
+    "beacon_middle_arsenal_hall"
+   ],
+   "name": null,
+   "role": "河西统兵将军心腹亲信骑卒"
+  },
+  {
+   "adult_context": "边防守烽军籍成年青年军士。",
+   "age_range": [
+    26,
+    32
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_beacon_runner_recruit",
+   "line": "{npc.name}：“烽帅！东面沙暴里隐约看到玉门关三号烽燧燃火了！他们见着咱们的烟了！玉门关有救了！”",
+   "location_ids": [
+    "beacon_rooftop_signal_platform"
+   ],
+   "name": null,
+   "role": "烽燧当值新晋成年传信旗牌军"
+  },
+  {
+   "adult_context": "商队长期雇佣之成年厨役伙计。",
+   "age_range": [
+    45,
+    55
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_sogdian_caravan_cook",
+   "line": "{npc.name}：“老爷，最后半囊葡萄烧全倒进炭盆了，青稞面饼烤得焦脆，吃饱了才有力气握刀杀贼！”",
+   "location_ids": [
+    "beacon_rammed_earth_shelter"
+   ],
+   "name": null,
+   "role": "商队波斯掌勺火工老伙计"
+  },
+  {
+   "adult_context": "河西斥候营成年游骑。",
+   "age_range": [
+    30,
+    40
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_whispering_straggler_scout",
+   "line": "{npc.name}：“外头都在传突厥可汗带了十万铁骑把整条河西走廊全截断了，玉门关早就成了空城，点烟也是白死……”",
+   "location_ids": [
+    "beacon_middle_arsenal_hall"
+   ],
+   "name": null,
+   "role": "突围退入烽燧之败退散兵斥候"
+  },
+  {
+   "adult_context": "退役残障军籍成年老兵守卫。",
+   "age_range": [
+    48,
+    58
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_cliff_crevice_lookout",
+   "line": "{npc.name}：“老汉这双眼虽瞎了，但耳朵灵得很，下头石缝爬上来的只要是铁蹄声，一杠子砸下去保准脑浆迸裂！”",
+   "location_ids": [
+    "cliff_secret_crevice_path"
+   ],
+   "name": null,
+   "role": "断崖暗道把守落石槽盲眼老兵"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "奉敕领兵的河西按察将军手握军中最高符节，居高临下监临防务。和亲长公主{imperial_peace_princess.name}视将军为冲破突厥死围的柱石倚靠；心怀鬼胎的中郎将{frontier_corrupt_patrol_general.name}则视将军为随时能取其人头的执法阎罗。将军既要护卫长公主、逼令守军死守烽燧，又要在暗流中雷霆弹压中郎将的降敌动摇，在呼啸沙暴中展开军令博弈。",
+   "id": "combo_1_player_high",
+   "identity_ids": [
+    "imperial_inspecting_cavalry_general"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "imperial_peace_princess",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "将军受天子重托护卫长公主出关，长公主亦在将军肃穆军姿中看到了大唐社稷的真正钢铁脊梁。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 1
+     },
+     "b": "frontier_corrupt_patrol_general",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 2
+     },
+     "reason": "将军当面斥责中郎将遇袭失职弃守阵地，中郎将皮笑肉不笑拿兵部后援不力进行狡辩抵赖。",
+     "stage": "testing"
+    },
+    {
+     "a": "imperial_peace_princess",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 1
+     },
+     "b": "frontier_corrupt_patrol_general",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 1
+     },
+     "reason": "长公主早已察觉中郎将暗中克扣使团药材行迹，双方在主帅大权归属上剑拔弩张。",
+     "stage": "stranger"
+    }
+   ],
+   "slots": [
+    "imperial_peace_princess",
+    "frontier_corrupt_patrol_general"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在黑风暴停歇前统一军令，斩决异心内奸，确保狼烟顺利升空告警关内。",
+    "limit_gap": "按察将军誓死捍卫大唐军威绝不容烽燧失守，长公主底线在保全边关情报不落敌手，中郎将谋求全军私利自保苟活性命。",
+    "meeting_reason": "按察将军带亲兵冒风沙斩杀敌骑突入烽燧底层，当堂升起帅旗召集中郎将与长公主商议决死防守策略。",
+    "resource_gap": "按察将军掌握节度使调兵虎符与全军决断大权，长公主握有天子密诏玉玺，中郎将掌管麾下实兵亲卫兵刃。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_imperial_diplomacy_vs_border_bloods",
+    "te_signal_duty_vs_individual_survival"
+   ]
+  },
+  {
+   "chemistry": "粟特大商队行首凭借车队雄厚资财、烈酒草药与突厥人脉，在长公主{imperial_peace_princess.name}与逃亡折冲都尉{renegade_fortress_commander.name}之间游刃有余。商贾地位灵活多变，既可凭救命物资成为双方争相拉拢的上宾，又需依靠都尉之悍勇刀法与长公主之政治特许求得活路。三人在昏暗暗室内就西域军防图与突围路线展开商业谈判与英雄相惜。",
+   "id": "combo_2_switchable_high_equal",
+   "identity_ids": [
+    "silk_road_sogdian_merchant_guide"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "imperial_peace_princess",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "行首倾囊献出全车队草药相救伤兵博得长公主好感，长公主承诺回朝后予以商帮崇高通商特权。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 4
+     },
+     "b": "renegade_fortress_commander",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "行首与都尉在瀚海大漠打交道三年深知彼此脾性信义，是互通有无过命的荒原老友。",
+     "stage": "familiar"
+    },
+    {
+     "a": "imperial_peace_princess",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 3
+     },
+     "b": "renegade_fortress_commander",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 4
+     },
+     "reason": "虽有逃亡通缉之公家嫌隙，但在暴雨沙暴与胡骑压境前展现出的傲岸风骨让二人暗生生死相惜之情。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "imperial_peace_princess",
+    "renegade_fortress_commander"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "达成军资换取军功特许的盟约，利用突厥军防图反制外围合围铁骑。",
+    "limit_gap": "行首求保全身家性命与商路垄断权，都尉誓死守台雪冤，长公主誓以身许国传出敌情。",
+    "meeting_reason": "商队护卫在沙暴中将受创车仗推入中层大厅，行首亲自端着珍藏烈酒进入暗室求见长公主与守台都尉。",
+    "resource_gap": "商队行首掌握绝境生存救命烈酒物资与西域军防图，都尉掌管烽燧实防机关，长公主掌握战后天下通商特许朱批。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_noble_grace_vs_frontier_desperation",
+    "te_renegade_loyalty_vs_traitor_rehabil"
+   ]
+  },
+  {
+   "chemistry": "身为逃亡重犯的折冲都尉处于绝对劣势，身负斩决通缉，面临长公主{imperial_peace_princess.name}的朝堂法度审视与宿敌中郎将{frontier_corrupt_patrol_general.name}的兵刃逼杀。都尉在断水断粮的烽燧暗室中，凭出神入化的守烽绝技与铁血傲骨，当面粉碎中郎将的诬陷阴谋，并在强敌攻门之际以肉身为长公主挡下致命飞箭，实现尊卑倒错的翻盘。",
+   "id": "combo_3_npc_high",
+   "identity_ids": [
+    "renegade_frontier_cavalry_officer"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 2
+     },
+     "b": "imperial_peace_princess",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 3
+     },
+     "reason": "都尉直斥长安贵人不知边关疾苦视将士如刍狗，长公主在都尉悲愤逼视下心神震动决意查明真相。",
+     "stage": "testing"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "frontier_corrupt_patrol_general",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "当年正是中郎将奉命在兵部公文上伪造签名构陷都尉叛逃，仇人相见分外眼红杀气滔天。",
+     "stage": "stranger"
+    },
+    {
+     "a": "imperial_peace_princess",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 2
+     },
+     "b": "frontier_corrupt_patrol_general",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 3
+     },
+     "reason": "长公主以皇室威仪威慑中郎将收刀入鞘，对中郎将迫不及待杀人灭口之举产生极度警惕怀疑。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "imperial_peace_princess",
+    "frontier_corrupt_patrol_general"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "当着长公主之面彻底揭露当年安西惨案与今夜伏击之全部黑幕。",
+    "limit_gap": "中郎将誓要当场将都尉斩首灭口掩盖通敌罪证，长公主严守法纪誓求真相，都尉誓死在战死前洗雪当年冤屈。",
+    "meeting_reason": "中郎将带亲兵下到底层暗室企图强行逮捕都尉就地正法，长公主亲临现场拔剑制止并当堂开启当面对质。",
+    "resource_gap": "长公主握有定夺生死之皇家玉玺，中郎将握有正规军兵符，都尉仅有一柄残破唐刀与大漠绝境生存技能。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_renegade_loyalty_vs_traitor_rehabil",
+    "te_noble_grace_vs_frontier_desperation"
+   ]
+  },
+  {
+   "chemistry": "世袭老烽帅与逃亡都尉{renegade_fortress_commander.name}及当值老烽帅{veteran_signal_fire_keeper.name}组成大漠绝壁烽火台的铁血基石。三位饱经沙暴风霜摧残的边关老卒，既有长达数年的生死袍泽深情，又在如何利用绝壁断崖暗道掩护长公主突围、以及谁留下来殿后引爆火药与突厥强敌同归于尽的问题上，展现出感天动地的慷慨赴死风骨与老兵浩气。",
+   "id": "combo_4_switchable_any",
+   "identity_ids": [
+    "veteran_beacon_signal_operator"
+   ],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "renegade_fortress_commander",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "患难相依三载的大漠兄弟，彼此多次从流沙陷坑与胡骑弯刀下救回对方性命。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 4
+     },
+     "b": "veteran_signal_fire_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "同在玉门关前线执役二十年的同袍老兵，通晓彼此一个眼神手势的全部军旅含义。",
+     "stage": "familiar"
+    },
+    {
+     "a": "renegade_fortress_commander",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "veteran_signal_fire_keeper",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "老烽帅待都尉如亲子侄暗中庇护三年，都尉视老烽帅为这冷血边塞唯存之人间长辈。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "sogdian_caravan_master",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "老烽帅与粟特商队在烽燧下做了十年清水买卖，彼此知根知底。",
+     "stage": "familiar"
+    },
+    {
+     "a": "renegade_fortress_commander",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 4
+     },
+     "b": "sogdian_caravan_master",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "三年来都尉的箭矢与伤药多半靠这支商队暗中接济。",
+     "stage": "familiar"
+    },
+    {
+     "a": "veteran_signal_fire_keeper",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "sogdian_caravan_master",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "老烽帅每年用狼粪油膏跟商队换盐巴，彼此只认信义不问来路。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "renegade_fortress_commander",
+    "veteran_signal_fire_keeper",
+    "sogdian_caravan_master"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在千斤闸门被破前完成三座火灶连环引燃，确保火光撕裂夜空告警关内。",
+    "limit_gap": "三人皆视点燃狼烟为至高天职，唯一的争执在于争抢必死之殿后留守牺牲名额。",
+    "meeting_reason": "沙暴巨风吹裂烽火台顶层石垛，三人冒箭雨在顶层灶台合力加固油脂包并商定决死部署。",
+    "resource_gap": "老烽帅掌握地下机关暗井与火油秘法，都尉拥有百步穿杨强弓近战刀法，当值守军掌握滚石擂木战位。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_signal_duty_vs_individual_survival",
+    "te_renegade_loyalty_vs_traitor_rehabil"
+   ]
+  },
+  {
+   "chemistry": "逃亡折冲都尉、和亲长公主{imperial_peace_princess.name}与随行司药女史{royal_female_physician_scribe.name}结成志同道合的铁三角。三位同为大唐精英，一武、一贵、一医，在风沙呼啸的夯土暗室中剥离门第虚名，借着一盏微弱油灯与一碗苦泉水，以彼此纯粹的风骨、智谋与仁心相互救赎，在大漠长夜中结下不可磨灭的宿命盟誓。",
+   "id": "combo_5_equal",
+   "identity_ids": [
+    "renegade_frontier_cavalry_officer"
+   ],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "imperial_peace_princess",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "都尉钦佩长公主舍弃荣华愿与边卒共死之孤勇，长公主在都尉横刀屹立身影前获得无上安全依托。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 4
+     },
+     "b": "royal_female_physician_scribe",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "女史以高超医道妙手救下都尉残命，都尉以身躯多次挡下飞石护佑女史周全。",
+     "stage": "familiar"
+    },
+    {
+     "a": "imperial_peace_princess",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "royal_female_physician_scribe",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "主仆情深多年患难与共，早已超越寻常宫闱上下尊卑，结为骨肉同胞。",
+     "stage": "committed"
+    }
+   ],
+   "slots": [
+    "imperial_peace_princess",
+    "royal_female_physician_scribe"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "稳定全军伤势，起草《瀚海血战申冤表》，护送长公主与狼烟铁证同归关内。",
+    "limit_gap": "三人在坚守大义、为边关万民死守烽燧之崇高目标上浑然一体，两难在于谁该在突围关头为全军甘当诱饵。",
+    "meeting_reason": "女史在暗室内为重伤都尉拔除剧毒箭头，长公主亲自执灯并以手绢擦拭都尉额前冷汗，三人目光在微光中交汇结契。",
+    "resource_gap": "都尉掌管防御斩敌实战武力，长公主执掌朝廷节旄玉印大权，司药女史掌管治伤救死续命神方。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_noble_grace_vs_frontier_desperation",
+    "te_renegade_loyalty_vs_traitor_rehabil"
+   ]
+  },
+  {
+   "chemistry": "随行司药掌书女史处于绝对弱势低位，面临跋扈的统兵中郎将{frontier_corrupt_patrol_general.name}的威权逼迫与灭口威胁，以及主帅长公主{imperial_peace_princess.name}的法度审视。女史必须在医药见底、将士垂死的绝境下，凭敏锐的毒理知识查实中郎将在药材中投毒的大罪，在长公主驾前冒死呈缴铁证，协助长公主夺回军权，在权力深渊边缘绝地逆伐。",
+   "id": "combo_6_npc_high",
+   "identity_ids": [
+    "royal_entourage_physician_scribe"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "imperial_peace_princess",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "女史是长公主入宫后在深宫伴读多年的知心臂膀，长公主对其品格医道拥有无条件信任。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "frontier_corrupt_patrol_general",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "中郎将多次以死相逼威胁女史销毁贪墨底账，女史视其为敲骨吸髓的军中巨蠹。",
+     "stage": "stranger"
+    },
+    {
+     "a": "imperial_peace_princess",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 1
+     },
+     "b": "frontier_corrupt_patrol_general",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 2
+     },
+     "reason": "长公主通过女史之密报已对中郎将彻底起疑，当堂降旨勒令其交出佩刀接受审查。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "imperial_peace_princess",
+    "frontier_corrupt_patrol_general"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在长公主面前当庭验明药酒毒素，一举剥夺中郎将兵权稳定防线。",
+    "limit_gap": "中郎将誓要抢夺参药并杀人灭口封死泄密，长公主誓守军纪不容部下枉死，女史誓死捍卫伤患生机与史笔公道。",
+    "meeting_reason": "中郎将带刀闯入伤兵暗室强行抢夺最后一瓶参附药酒，女史张开双臂死死护在榻前，长公主闻讯持剑驾临。",
+    "resource_gap": "中郎将握有生杀大权与刀兵亲卫，长公主掌握皇家最终裁决权，女史仅有一根银针与文书录状之笔墨。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_noble_grace_vs_frontier_desperation",
+    "te_signal_duty_vs_individual_survival"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_beacon_bronze_bell_alarms",
+   "reach": "烽燧顶层受八级大风撞击所悬巨型铜铎发出的急促鸣响，按撞击声长短传达警戒层级，全燧皆闻。",
+   "text": "烽火台悬顶铜铎急警钟声"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_cliff_rope_tension_knots",
+   "reach": "断崖隐秘暗道通过牵引垂落牛皮绳索三拉两顿传递敌情虚实，专供背风突围联络。",
+   "text": "绝壁下垂生牛皮悬索结绳令号"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_flue_sand_whistle_echoes",
+   "reach": "狂暴黑风暴顺着排烟火道倒灌产生如鬼哭般的凄厉异响，极易将暗室低语或甲胄摩擦声放大扭曲为敌袭惊悚异闻。",
+   "text": "夯土排烟地道风啸沙鸣回声"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "唐太宗宗室后裔长宁郡主，加封大唐和亲和硕长公主，自幼饱读兵书政论并经历长安宫廷惊涛骇浪，为具备完全政治决断力的成年尊贵和亲特使。",
+   "age_range": [
+    26,
+    33
+   ],
+   "appearance_options": [
+    "内穿深赤色云锦金丝绣凤长裙，外披一件被风沙撕裂染血的玄色防风羊毛大氅，青丝仅用一根淬金凤钗利落束起，面容明艳绝伦但眼神坚韧冷厉如霜",
+    "身着染满血迹泥沙的银白锁子轻甲，腰系金銙蹀躞带，手握一柄未出鞘的精制避邪短剑，身姿挺拔傲然立于残破烽燧前，风骨凛然不怒自威"
+   ],
+   "decision": {
+    "avoids": [
+     "贪生怕死、暗怀二心试图拿主帅性命向敌骑换取苟活的卑劣叛徒",
+     "满口之乎者也却在刀光血影面前尿流屁滚之懦夫俗吏"
+    ],
+    "contrast": "外表高不可攀尊贵如神女，私下却能平静单膝跪地为满面血污的老卒喂下最后一口清水。",
+    "core_value": "大唐宗女之血不可白流，宁着战袍埋骨瀚海，绝不苟活于胡骑膝下受辱。天下安危重于一人清白生死。",
+    "goal_options": [
+     "在黑风暴停歇前守住烽燧点燃三束狼烟，唤醒关内河西军全线警备",
+     "查出使团伏击内鬼，洗刷逃亡折冲都尉三年不白之冤结为生死同袍",
+     "突围返回玉门关，面斥长安弄权奸佞挫败西域割据阴谋"
+    ],
+    "never": [
+     "为了求生向围困烽燧的突厥胡骑折腰屈膝奉上和亲玉印"
+    ],
+    "prefers": [
+     "视死如归、言出必行、心中装有边关万民苍生而非升官发财之真正大唐军人"
+    ],
+    "pressure_responses": {
+     "breaking": "独自立于狂风呼啸的瞭望台一角，双手死死握住冰冷凤钗任凭狂风吹乱鬓发，眼含热泪低语长安故土。",
+     "high": "亲手抱起重伤士卒为其包扎断肢，长裙下摆被鲜血浸透依然面不改色指挥调度残军。",
+     "low": "微扬清秀下颌拂去锦袍上的漫天黄沙，以天朝上邦威仪冷冷驳斥投降怯懦之论。",
+     "mid": "亲自拔出腰间避邪短剑横于胸前，素手按在冰冷城垛上，誓与将士共存亡绝不退后半步。"
+    },
+    "relationship_stance": "对虚妄宫廷礼法与阿谀奉承之徒刻骨厌弃，唯独对大漠风沙中铁骨铮铮、以死践诺的真正边塞豪杰抱有倾心托付之崇敬。",
+    "withdrawal": "退入夯土暗室角落擦拭父兄遗留佩剑，闭目凝神默诵兵书拒见求降将领。"
+   },
+   "gender": "female",
+   "gender_reason": "和亲长公主是这个世界的标题人物与主线核心，身份本身决定为女性。",
+   "id": "imperial_peace_princess",
+   "identity": {
+    "authority": "代表大唐天子行使与西域诸国结盟定约之全权特使大权，持有天子钦赐和亲玉玺金印与节度使调兵节杖",
+    "exposure": "深知自身此次和亲乃长安权相铲除边将的一石二鸟之计，自己本就是一枚随时可被牺牲的弃子。",
+    "hidden": "袖中暗藏天子亲笔血诏密旨，命其在抵达西域藩王大帐当夜，以毒酒鸩杀怀有异心的西突厥可汗。",
+    "limits": [
+     "随行禁军护卫在戈壁伏击中死伤大半，缺乏在恶劣沙暴中独立野战生存之武力",
+     "身为帝室宗亲肩负天下和亲重任，绝不可公然违抗和亲盟约成为西域逃妇"
+    ],
+    "obligations": [
+     "保全大唐和亲节旄尊严，将突厥勾结叛军犯境之绝密情报在天明前送达玉门关。"
+    ],
+    "resources": [
+     "携有一匣由大唐内库直属密制的救命天王护心丹与解百毒秘药九转熊胆丸",
+     "熟知安西与北庭两大都护府全部将领门阀隐秘过往与利益盘根错节"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在满天风沙狂澜中用坚实后背为自己挡住致命重箭、双眸如狼般坚毅纯粹的铁血傲骨",
+     "在自己剥落金枝玉叶伪装后依然平视自己双眼、视彼此为并肩战友之至真灵魂"
+    ],
+    "boundaries": [
+     "不拿大唐边防安全与和亲大义作为儿女私情的赌注",
+     "恪守宗室贵胄的铁骨尊严底线"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "历经边塞生死洗礼后并肩纵马天涯的平等人间知己",
+    "dislikes": [
+     "将自己视作皇权玩物或换取战功筹码的贪婪目光",
+     "在生死危局面前不合时宜的轻佻调戏"
+    ],
+    "expression": "用素净温热的手指轻轻抚平对方眉间深锁的刀疤，轻声许下‘若能生还长安同醉’之誓言。",
+    "likes": [
+     "在暴风狂啸的狭小暗室内并肩围坐分饮一口灼喉烈酒时的滚烫相视",
+     "彼此卸下甲胄与戒备后那一瞬指尖相触抚摸对方伤痕时的无声战栗"
+    ],
+    "preconditions": [
+     "双方皆处于完全清醒、身心平等且生死托付的纯粹境地",
+     "绝无主从尊卑与权色交易的胁迫依附"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "大唐赴西域和亲正使长公主",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 105
+    },
+    {
+     "from": 106,
+     "location_id": "beacon_rooftop_signal_platform",
+     "to": 225
+    },
+    {
+     "from": 226,
+     "location_id": "cliff_secret_crevice_path",
+     "to": 1304
+    },
+    {
+     "from": 1305,
+     "location_id": "beacon_rammed_earth_shelter",
+     "to": 1425
+    },
+    {
+     "from": 1426,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "彻底断绝任何和平停战退路，引爆突厥全军不计代价之疯狂血腥强攻",
+      "option": "当众斩断金箭立斩动摇主簿，亲自登上烽火台张弓射杀突厥劝降特使"
+     },
+     {
+      "cost": "若商贾谈判破裂遭敌斩杀，烽燧残军士气将遭受毁灭性心理打击",
+      "option": "假意应承派遣粟特商贾出关谈判拖延辰光，暗中加紧抢修后崖脱身暗道"
+     }
+    ],
+    "pressure": "烽燧内部部分护从将士心生动摇，外围沙暴渐息敌军精锐骑兵已开始组装攻城云梯。",
+    "trigger": "突厥主将射来裹有金箭的投降劝降书，勒令交出逃亡折冲都尉并献出长公主，许诺放使团随行全员回关。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "长安深宫那些贵人只当本宫是一件送去胡地的丝绸玩物，今夜在这烽燧里，本宫偏要当一回执刀破敌的大唐将军！",
+    "surface": "“本宫身上流着太宗皇帝的血，这玉门关外的沙子可以埋本宫的骨，但突厥人的战马绝迈不过本宫守着的烽火台！”"
+   }
+  },
+  {
+   "adult_context": "天宝初年安西四镇鹰扬卫折冲都尉，精通唐代步骑兵阵法与长柄陌刀术，因违抗屠杀降卒军令被朝廷通缉流亡瀚海三年，为完全刑事与作战决断力之成年军官。",
+   "age_range": [
+    30,
+    38
+   ],
+   "appearance_options": [
+    "身披一套磨损严重但保养极佳的玄黑旧明光铠，腰挎百炼雁翎唐刀与六石桑木硬弓，面容刚毅削瘦宛如岩石雕凿，左颊留有一道被狼爪撕裂之陈旧深疤，眼神如荒原孤狼般锐利警惕",
+    "内穿粗麻窄袖战袍，外罩破旧狼皮翻领大氅，双手布满老茧与冻伤裂痕，握刀时指节沉稳如万钧山岳，身形挺拔如苍松巍然耸立"
+   ],
+   "decision": {
+    "avoids": [
+     "满口朝廷法度实则自私自利、动辄拿部下性命垫背的勋贵将校",
+     "两面三刀见风使舵的奸商与小人"
+    ],
+    "contrast": "外表冷酷凶悍如噬人孤狼，在为长公主用烈酒洗涤伤口时动作却极尽克制与轻缓。",
+    "core_value": "大唐军人的刀只为身后万民而拔，不为权贵作鹰犬屠夫。君子有所为有所不为，死生无愧于天地良心。",
+    "goal_options": [
+     "不惜一切代价在天明前引燃狼烟警报，保护玉门关内三十万黎民不遭铁蹄践踏",
+     "庇护和亲使团不受突厥蛮兵凌辱，在绝境中粉碎河西军内奸叛变夺门的阴谋",
+     "与长公主立下盟约，带血揭开安西冤案真相昭雪天下英魂"
+    ],
+    "never": [
+     "在敌人重兵压境面前丢下受托保护之妇孺与伤卒独自潜逃"
+    ],
+    "prefers": [
+     "身先士卒、言出如铁、在强敌绝境前敢于将后背托付给兄弟的真正豪杰"
+    ],
+    "pressure_responses": {
+     "breaking": "剧烈咳血半跪在风沙弥漫的石阶上，但单手仍死死握住引火铁钳绝不松手。",
+     "high": "独身一人扛起百斤石磨撞碎突厥攻城攀索，在箭雨中怒吼连射三箭毙杀敌将。",
+     "low": "靠在夯土墙角冷冷擦拭雁翎刀刃，对朝廷将军的威逼呵斥报以一声不屑长笑。",
+     "mid": "横刀跨步挡在暗室通道正中，浑身杀气如实质山峦涌动，逼得来犯叛兵寸步难移。"
+    },
+    "relationship_stance": "历经袍泽背叛对朝堂权贵充满骨子里的防备怀疑，唯独对真正敢在风沙前拔刀御敌、舍身忘死的大义之人报以生死托付之赤诚。",
+    "withdrawal": "独自隐入绝壁后山石缝暗道内倾听风声，擦拭箭矢平复翻涌内息。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "renegade_fortress_commander",
+   "identity": {
+    "authority": "饮马泉烽燧实际控制者与所有防御机关、蓄水井暗格及绝壁暗道的绝对掌控者",
+    "exposure": "当年下令构陷其叛逃罪名的主谋，正是此番护送长公主和亲的河西统兵大将。",
+    "hidden": "暗中掌握当年宰相暗通吐蕃出卖安西四镇军防布置的原始带血蜡丸密函副本。",
+    "limits": [
+     "身上背负朝廷兵部一品通缉斩决令，一旦现身朝廷正规军大营即面临被捕伏法",
+     "多年前受重创导致左肺留下暗伤，在剧烈风沙剧战中易引发剧烈咳喘"
+    ],
+    "obligations": [
+     "守住玉门关外这道最后的烽火预警防线，替当年战死冤杀的安西弟兄讨还公道。"
+    ],
+    "resources": [
+     "储存有三石足以射穿重铠的乌铁破甲重箭与两罐用于点燃狼烟的西域猛火油",
+     "在西域荒漠各胡商、马贼与流亡唐军老兵中拥有至高无上的号召力"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在绝境死地中展现出不逊于百战老卒的凌厉风骨与决绝眼神",
+     "在自己残破囚徒之身前剥落尊卑、以性命视彼此为知己同袍之至诚"
+    ],
+    "boundaries": [
+     "不拿烽燧全体守军生死与点燃烽火之大义作儿女情长赌注",
+     "恪守百战军人的刚烈骨气"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "沉冤昭雪后在天山明月下纵马驰骋的生死契阔知己",
+    "dislikes": [
+     "自视高人一等的居高临下施舍与虚伪怜悯",
+     "拿男女私情作为要挟军略大义的软弱做派"
+    ],
+    "expression": "默默将自己贴身佩戴的百炼精钢护心镜扯下塞入对方掌心，握紧对方指节沉声叮嘱‘活着回去’。",
+    "likes": [
+     "在狂风呼啸的暗室内借着一线油灯火光并肩磨刀对校军情的沉静默契",
+     "生死搏杀中彼此一个眼神便能心领神会的并肩掩护与呼吸共振"
+    ],
+    "preconditions": [
+     "双方皆处于彻底清醒、利害宿怨完全剖明的对等自愿状态",
+     "绝无主审与重犯之间的权位逼迫"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "饮马泉绝壁烽燧现任守将兼通缉重犯",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "cliff_secret_crevice_path",
+     "to": 105
+    },
+    {
+     "from": 106,
+     "location_id": "beacon_rooftop_signal_platform",
+     "to": 225
+    },
+    {
+     "from": 226,
+     "location_id": "beacon_rammed_earth_shelter",
+     "to": 1304
+    },
+    {
+     "from": 1305,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 1425
+    },
+    {
+     "from": 1426,
+     "location_id": "cliff_secret_crevice_path",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "直接激化河西军亲卫与烽燧老卒全面兵戎相见，面临腹背受敌极度凶险",
+      "option": "当堂拔刀逼退统兵将军挑明当年安西冤案真相，强行收缴全员兵权统一指挥"
+     },
+     {
+      "cost": "自身深陷以一敌十之绝杀境地，随时可能孤身血战力竭陨落于深渊",
+      "option": "隐忍不发将主防区全盘交予老烽帅，自己潜伏至断崖石缝阻击敌军夜袭尖刀队"
+     }
+    ],
+    "pressure": "外围突厥骑兵已架起云梯直扑烽火台，烽燧内守军若发生火并全员皆成鱼肉。",
+    "trigger": "河西统兵将军下达密令，要求趁黑风暴大乱在暗室背后下黑手诛杀都尉以除后患灭口。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "这娇滴滴的公主竟然能在刀口下挺着脊梁不落泪，老子这条残命今夜便是拼死在这绝壁上，也值了。",
+    "surface": "“三年前你们给老子按了个叛将的罪名，今日老子把守这烽燧，不是为了大明宫里的圣人，是为了这塞外三万无辜老卒与百姓！”"
+   }
+  },
+  {
+   "adult_context": "河西节度使麾下领兵从三品中郎将，深谙官场攀附与克扣军饷潜规则，此次护送使团身负幕后密令，为具备完全调兵实权的成年军政官僚。",
+   "age_range": [
+    38,
+    48
+   ],
+   "appearance_options": [
+    "身披一套金光闪闪但边缘略有刮痕的重甲明光铠，腰悬镶玉横刀与节度使调兵铜牌，面容红润长须修整整齐，眼神精明闪烁透着世故算计",
+    "外罩一件名贵紫罗防风大氅，双手保养得宜不见风霜痕迹，端坐于暗室主位时官威十足，举止透着勋贵将校的傲慢派头"
+   ],
+   "decision": {
+    "avoids": [
+     "认死理不知变通、视军纪国法高于上级私利的刺头硬汉",
+     "战功卓绝且在底层士卒中威望远超自己的宿将英雄"
+    ],
+    "contrast": "平日在大营颐指气使号令三军如神明，一旦陷入重围断粮断水便原形毕露怯懦如鼠。",
+    "core_value": "人不为己天诛地灭，世间荣华富贵皆是刀尖舐血挣来，替天子卖命不如保全自家宗族富贵与兵权。",
+    "goal_options": [
+     "在黑风暴期间寻找替罪羊顶下使团遇袭全责，将叛乱通敌罪名彻底扣死在逃亡都尉头上",
+     "私下与外围突厥将领达成默契，牺牲长公主与烽燧换取自身带部安全撤回玉门关",
+     "在混乱中销毁所有与突厥勾结之私信底单"
+    ],
+    "never": [
+     "在没有十成把握保全自身性命首级的前提下亲自提刀冲锋陷阵"
+    ],
+    "prefers": [
+     "知恩识趣、懂得奉承上峰、甘愿拿赏银替自己背黑锅顶罪的机灵兵卒"
+    ],
+    "pressure_responses": {
+     "breaking": "面如土色瘫坐在粮草堆旁瑟瑟发抖，语无伦次喃喃自语祈求突厥铁骑切莫破门。",
+     "high": "面露狰狞凶光拔刀出鞘，暗中指使心腹亲兵在暗道入口对异见者痛下杀手灭口。",
+     "low": "捋须端坐椅上品评茶汤，摆出上峰威严训斥底层军士不知轻重妄言军机。",
+     "mid": "按刀长身而起脸色铁青，厉声下令将敢于违抗帅令之人当场以军法军棍处置。"
+    },
+    "relationship_stance": "将所有人视作可以待价而沽的官场筹码，唯利是图毫无操守，但对真正不怕死的亡命狂徒心存至深忌惮恐惧。",
+    "withdrawal": "退入中层军械库后堂密室内，闭门召集心腹亲兵排演反咬构陷口径。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "frontier_corrupt_patrol_general",
+   "identity": {
+    "authority": "持有河西节度使调兵节符与使团仅存三十名重甲羽林亲兵的绝对军事指挥权",
+    "exposure": "使团行军路线正是其暗中派人泄露给突厥内应，企图借刀杀人制造边防冲突以向朝廷索要千万军饷。",
+    "hidden": "袖中藏有与突厥可汗往来的带血结盟私信，许诺以烽燧陷落换取自身全军体面撤回关内。",
+    "limits": [
+     "贪生怕死缺乏在孤绝死地近身肉搏死战之血性胆魄",
+     "身系使团遇袭之重罪，若长公主身亡将面临朝廷九族连坐惩处"
+    ],
+    "obligations": [
+     "保全使团名号，将长公主安全送抵或在必要时推诿战败罪责以保全自身官位。"
+    ],
+    "resources": [
+     "携有兵部签发的随军绝密军资银柜与两箱用于贿赂西域番王的精制白绫绢帛",
+     "掌握玉门关关令口令与换防守将的私人密信通道"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在自己滔天官威与生死要挟面前依然保持绝对清醒、能精准洞悉自己利害命门的绝顶智慧",
+     "身上带着自己早已丧失的纯粹军旅血性与不屈傲骨"
+    ],
+    "boundaries": [
+     "不拿自身顶戴花翎与宗族身家前程当私情赌注",
+     "恪守官场自保底线"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "朝堂权势风暴平息后互相握有对方死穴却又深度绑定的权力利益盟友",
+    "dislikes": [
+     "直斥其非的当众道德指责与羞辱",
+     "不受其金钱权位诱惑的油盐不进之态"
+    ],
+    "expression": "把黄金佩刀横放在案上刀柄朝向对方，难得不摆官威，只沉声问一句‘若我回头，你肯不肯信我一次’。",
+    "likes": [
+     "在密闭暗室内彼此摊开利害底线进行极限心理博弈的窒息快感",
+     "对方识破自己全盘盘算后仍肯坐下来与自己对弈的旗鼓相当"
+    ],
+    "preconditions": [
+     "双方皆处于神志清醒、利害筹码完全对等互换之境",
+     "绝非毫无退路的单向暴力胁迫"
+    ],
+    "self_control_range": [
+     2,
+     3
+    ]
+   },
+   "public_role": "护送使团正五品河西鹰扬统军中郎将",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "beacon_rammed_earth_shelter",
+     "to": 105
+    },
+    {
+     "from": 106,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 225
+    },
+    {
+     "from": 226,
+     "location_id": "cliff_secret_crevice_path",
+     "to": 1304
+    },
+    {
+     "from": 1305,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 1425
+    },
+    {
+     "from": 1426,
+     "location_id": "beacon_rammed_earth_shelter",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "公然背叛大唐沦为千夫所指之叛国汉奸，且面临烽燧守军与老卒决死绝杀反扑",
+      "option": "悍然发动武装叛乱，命死忠亲兵强杀长公主与都尉并献烽燧投降突厥"
+     },
+     {
+      "cost": "彻底丧失官位特权沦为前线炮灰，且回关后必将面临大唐三司会审之死罪",
+      "option": "交出兵符承认克扣军资之罪，换取戴罪立功领兵堵截底层破门敌骑"
+     }
+    ],
+    "pressure": "长公主当堂拔剑宣布夺其兵权，其麾下羽林亲兵出现剧烈阵营分裂。",
+    "trigger": "随军典药女史在伤兵水囊中检出其暗中投入的断肠草毒粉，证据确凿直指其企图毒杀不愿投降之将士。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "今晚要是让这女人和叛将活着把狼烟点燃，老子在玉门关私吞的三万匹战马军资可就全漏底了，必须让他们全死在这烽火台上！",
+    "surface": "“长公主殿下明鉴！末将此举乃是保全朝廷体统的老成谋国之计！这等叛将贼子的话岂可轻信？天明之后若不归降，三万胡骑屠城，殿下便是千古罪人！”"
+   }
+  },
+  {
+   "adult_context": "大唐玉门关镇西军老烽帅，世袭军籍把守大漠烽燧二十四载，熟谙边塞一切天象敌情与守御器械，为完全责任能力之成年军中长者。",
+   "age_range": [
+    44,
+    56
+   ],
+   "appearance_options": [
+    "身披粗制熟牛皮坎肩与洗得发白的羊皮袄，腰间悬挂一把磨损得近乎光秃的断刃短唐刀与火石皮囊，满面风霜如戈壁沟壑，眼神沉稳如古井微澜",
+    "头发花白用草绳紧紧扎在脑后，双腿常年忍受风湿微跛但步履踏地极沉，双手布满老茧与烧伤疤痕，声音沙哑如砂石摩擦"
+   ],
+   "decision": {
+    "avoids": [
+     "高高在上把老兵当草芥差使、临危退缩推部下送死的官僚将校",
+     "糟践粮食清水大漠天物的败家子"
+    ],
+    "contrast": "平日少言寡语木讷如榆木疙瘩，一旦关乎点燃烽火大事便雷霆万钧宛若怒目金刚。",
+    "core_value": "当兵吃饷守的就是身后父老乡亲，烽火台是边关将士的眼睛，眼睛瞎了大唐就亡了。信义重于泰山生死。",
+    "goal_options": [
+     "不惜一切代价在拂晓前点燃三束狼烟，哪怕粉身碎骨也要把敌情送回关内",
+     "用毕生守烽经验护住逃亡都尉与和亲公主脱险，为边军留下一粒清白火种",
+     "在烽燧失陷前点燃全部火药与突厥强敌同归于尽"
+    ],
+    "never": [
+     "在敌人刀锋逼近面前熄灭烽火台上的警戒狼烟"
+    ],
+    "prefers": [
+     "不畏生死、真心关爱士卒、手脚勤快尊重大漠规矩的军旅豪杰"
+    ],
+    "pressure_responses": {
+     "breaking": "半跪在战死年轻旗手遗体旁，颤抖着老手为后生合上双眼，老泪纵横无声捶打石垛。",
+     "high": "亲自抱起火油罐跃入火灶之中，用身躯挡住狂暴风沙以肉身烈焰引燃狼烟青烟。",
+     "low": "蹲在灶台旁默默咬碎半块生硬胡饼，用老旧火石嗒嗒敲击火星对将官争吵置若罔闻。",
+     "mid": "横起老旧断刀拦在通往顶层石梯口，双目圆睁厉声宣读大唐守烽军律寸步不让。"
+    },
+    "relationship_stance": "鄙视官老爷的权谋诡计，视所有真心杀敌守土之人为亲生子侄，愿以老骨头替年轻人挡刀。",
+    "withdrawal": "退入底层暗井旁默默检视水线刻度，擦拭供奉在石龛内的阵亡袍泽名木牌。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "veteran_signal_fire_keeper",
+   "identity": {
+    "authority": "饮马泉三座狼烟灶台点燃、熄灭与烽火密级号令的唯一合法执掌人与法定签字人",
+    "exposure": "私下收留并掩护逃亡折冲都尉在此隐匿三年未报兵部。",
+    "hidden": "暗中掌握烽燧底层直通三十里外玉门关下古地下暗河暗道的绝密出口机关地图。",
+    "limits": [
+     "军阶卑微仅为从九品烽帅，无法在将官朝堂博弈中拥有话语权",
+     "年迈体衰旧伤缠身，无法长时间进行正面披甲剧烈肉搏搏杀"
+    ],
+    "obligations": [
+     "人在烽台在，狼烟必燃！哪怕全员殉国，也绝不容敌骑无警入关。"
+    ],
+    "resources": [
+     "藏有三缸经过提炼风干的特制狼粪油脂柴块与两箱火绒硫磺引线",
+     "通晓烽燧百年来历代守将所刻防御手札与地下暗井水源暗脉"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "历经磨难百折不挠、身处泥潭依然保持赤子般军人傲骨的坚韧灵魂",
+     "愿意俯下身子同饮一勺苦水、尊重底层老卒性命之大德情义"
+    ],
+    "boundaries": [
+     "不拿烽燧守御职责与狼烟使命当私情筹码",
+     "恪守老兵的道义底线"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "瀚海风暴平息后能将自身残存兵法与大漠风沙记忆托付传承的忘年战友",
+    "dislikes": [
+     "花言巧语的许诺与居高临下的假仁假义",
+     "背弃袍泽誓言的背信弃义之徒"
+    ],
+    "expression": "用粗糙如树皮的大手将一柄磨砺得锋芒毕露的祖传剔骨防身猎刀交入对方手中，用力合拢对方指掌。",
+    "likes": [
+     "在沙暴呼啸的寒夜里并肩坐在炭火旁一口青稞烈酒一口风干肉的沉静温热",
+     "危急关头拍在肩膀上的那一下沉重信赖与生死相托"
+    ],
+    "preconditions": [
+     "双方皆处于彻底清醒、经过大漠生死与风沙洗礼的真挚自愿境地",
+     "绝无借权位尊卑强迫依附"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "饮马泉绝壁烽燧当值老烽帅",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "beacon_rammed_earth_shelter",
+     "to": 105
+    },
+    {
+     "from": 106,
+     "location_id": "beacon_rooftop_signal_platform",
+     "to": 225
+    },
+    {
+     "from": 226,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 1304
+    },
+    {
+     "from": 1305,
+     "location_id": "beacon_rooftop_signal_platform",
+     "to": 1425
+    },
+    {
+     "from": 1426,
+     "location_id": "beacon_rammed_earth_shelter",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "遭受严重肢体烧伤失去单手行动能力，面临极度创伤剧痛休克",
+      "option": "冒死脱去防寒羊皮袄强行扑盖翻倒火油，以肉身护住核心引信"
+     },
+     {
+      "cost": "下层浓烟将灌入中层军械穿堂，导致守军呼吸困难且射击视线大受影响",
+      "option": "放弃顶层受损第一火灶，全员退守第二封闭暗灶借排烟孔引燃下层狼烟"
+     }
+    ],
+    "pressure": "风向突变为顺风，火星极易引燃整座烽火台造成全员无路可退之绝境。",
+    "trigger": "突厥神射手趁风暴间隙射出鸣镝，精准贯穿守烽老兵肩胛，狼烟引火油脂罐被流矢击翻。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "都尉是个真正的大唐好汉，老汉便是拼上这把老骨头，今晚也得送都尉和公主活着冲出这片流沙坑。",
+    "surface": "“老汉在这台子上吹了二十四年的风，胡人的刀见得多了，官老爷的嘴脸也见得多了。老汉只认一条：这烽火只要见着了胡骑，就必须燃上天！”"
+   }
+  },
+  {
+   "adult_context": "西域粟特萨宝商团行首，持有大唐鸿胪寺通关文牒与西突厥特勤通商金牌，精通七国言语与大漠生存法则，为具备完全商贸外交裁量权之成年行首。",
+   "age_range": [
+    34,
+    44
+   ],
+   "appearance_options": [
+    "身穿深紫色波斯织锦窄袖翻领胡服，外披厚重狐皮防风大氅，深目高鼻蓄着修剪精巧的卷曲短须，腰间悬挂一柄镶嵌绿松石的阿拉伯精致短匕，眼神精明狡黠却透着坚毅",
+    "头戴圆顶胡帽，双手戴有多枚金银印章戒指，举止从容圆滑谈笑风生，但在风沙战阵前动作敏捷干练丝毫不显拖泥带水"
+   ],
+   "decision": {
+    "avoids": [
+     "过河拆桥翻脸不认人、动辄以朝廷名义行明抢之实的贪婪军阀",
+     "目光短浅不知变通的狂热亡命之徒"
+    ],
+    "contrast": "嘴上斤斤计较一勺苦泉水的价格，危急关头却能主动砸碎三坛价值连城的烈酒用于给伤兵清洗创口。",
+    "core_value": "大漠之中唯黄金与信义恒存，做生意讲究保本博大，但若没了骨气连牛羊都不如。真豪杰值得押上身家性命。",
+    "goal_options": [
+     "促成大唐与突厥阵前暂时休兵对质，为自己商队争取安全出关时间",
+     "在关键时刻将突厥军防皮卷图高价交予长公主，博取战后重开丝路特许大权",
+     "保全商队仅存的骆驼与水源储备"
+    ],
+    "never": [
+     "在没有任何自保防御条件下面向蛮兵彻底弃械投降沦为羔羊"
+    ],
+    "prefers": [
+     "讲信用、讲规矩、在刀剑面前不失信诺的大气英雄"
+    ],
+    "pressure_responses": {
+     "breaking": "跪倒在被风沙砸碎的瓷器丝绸碎片旁捶胸顿足，痛惜数十年积蓄毁于兵燹。",
+     "high": "亲自带领粟特刀手端起强弩对准反叛军卒，严词宣布商队全员加入唐军守城战线。",
+     "low": "晃动手中镶金琉璃酒盏哈哈大笑，用胡汉双语机智化解双方火并危机。",
+     "mid": "收起笑容眼神森冷，将绿松石匕首猛地插在案几之上，申明商帮不容冒犯之底线。"
+    },
+    "relationship_stance": "深信世间无不可交易之利害，但对超越金钱利益、为家国大义舍身搏杀的铁血人物怀有由衷崇敬。",
+    "withdrawal": "钻入骆驼车队围成的风暴死角车厢内，盘点金币暗账平息心跳。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "sogdian_caravan_master",
+   "identity": {
+    "authority": "随行二十名善战粟特护卫刀手的雇佣统领权与支配车队价值十万贯珍贵货物的绝对所有权",
+    "exposure": "商队夹带的货物暗格中，藏有大唐兵部官员私下倒卖给突厥的五十具百炼步兵强弩。",
+    "hidden": "暗中携有一份突厥各部联军进攻玉门关的兵力布防山川险隘全景皮卷图。",
+    "limits": [
+     "身为异族客商，极易被唐军怀疑为突厥通风报信之内奸间谍",
+     "护卫多为唯利是图的雇佣兵，在极端绝境下面临雇佣兵哗变溃散危险"
+    ],
+    "obligations": [
+     "保全商队货物与伙计性命，在此次大唐与突厥的风暴死斗中两面周旋押中赢家。"
+    ],
+    "resources": [
+     "携带三大坛高纯度西域烈酒、二十包止血干草药与生石灰粉",
+     "与围困烽燧之突厥突骑施部落主帅有着长达十年的马匹茶叶走私贸易私交"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在满天黄沙与刀光剑影中依然掌控全局、将自己从商贾升华为谋国策士的超凡眼界",
+     "清冷神色下毫不掩饰的坦荡赤诚与对等尊严"
+    ],
+    "boundaries": [
+     "不拿商队百口伙计生死当做私情的儿戏代价",
+     "恪守丝路大贾的信义底线"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "丝路烽烟平息后纵横万里商道的至死不渝合伙盟友",
+    "dislikes": [
+     "将胡商视作低劣番民的蔑视态度",
+     "单方面撕毁契约与承诺的背信行径"
+    ],
+    "expression": "解下腰间象征萨宝最高权威的绿松石匕首双手奉上，躬身抚胸立下‘商队全员唯君驱策’之誓言。",
+    "likes": [
+     "在狭窄车厢暗室内彼此以西域秘语算计天下大局时的智力交锋与气息相近",
+     "并肩直面胡骑刀锋时那份生死共进退的狂野冒险快感"
+    ],
+    "preconditions": [
+     "双方皆处于彻底清醒、商贸利害与大义盟约完全契合的自愿对等之境",
+     "绝无借刀兵相向的强行逼迫"
+    ],
+    "self_control_range": [
+     3,
+     4
+    ]
+   },
+   "public_role": "西域丝路商团粟特萨宝行首",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "cliff_secret_crevice_path",
+     "to": 105
+    },
+    {
+     "from": 106,
+     "location_id": "beacon_rammed_earth_shelter",
+     "to": 225
+    },
+    {
+     "from": 226,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 1304
+    },
+    {
+     "from": 1305,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 1425
+    },
+    {
+     "from": 1426,
+     "location_id": "cliff_secret_crevice_path",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "彻底激怒突厥全军，商队留在关外的全部辎重货物将被敌军屠戮焚毁殆尽",
+      "option": "当众将突厥劝降书投入炭盆焚毁，将所藏军防皮卷图亲呈长公主以明心志"
+     },
+     {
+      "cost": "自身深陷敌营虎穴命悬一线，随时面临被暴虐突厥斩首祭旗之厄运",
+      "option": "借谈判为名自绝壁石缝缒绳而下假意入敌营周旋，为烽燧争取半个时辰生机"
+     }
+    ],
+    "pressure": "唐军统兵将军正怀疑商队通敌，刀锋已架在商队掌柜脖颈之上。",
+    "trigger": "突厥主将识出商队旗帜，派使者射入书信勒令交出所藏军防图并从内部开启石门，许诺奉送黄金千两。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "这两个大唐人是世间少见的真硬骨头，把身家押在他们身上，胜过巴结十个贪婪的关内镇将！",
+    "surface": "“长公主殿下，都尉大人，大漠的规矩是活着的人才能数金币！突厥人的刀快，老贾的舌头也不慢，让老贾去城下走一遭，管教他们退兵三里！”"
+   }
+  },
+  {
+   "adult_context": "大唐尚药局正八品司药女官兼和亲使团随行主簿女史，精通唐代宫廷金创急救与军中文书录状，为具备完全法定职务责任能力之成年女史。",
+   "age_range": [
+    26,
+    34
+   ],
+   "appearance_options": [
+    "身穿素青色窄袖防沙短襦裙，外罩一件被血水渗透的粗布护肩围裙，三千青丝利落挽于脑后，面容清丽恬静但双眸沉毅坚定，指尖微带苍术药香与朱砂墨痕",
+    "内穿浅绛色交领行衣，随身携有一只磨损的红木针灸药匣与皮质文书囊，步履轻盈稳健，穿梭在伤兵群中救死扶伤不见丝毫怯乱"
+   ],
+   "decision": {
+    "avoids": [
+     "欺凌弱小、抢夺伤患救命药水与口粮的军中败类",
+     "自命清高临危畏缩之虚伪文士"
+    ],
+    "contrast": "外表温柔文弱言语轻细，在以烈火灼烧战创止血时下手精准狠辣连百战老兵亦自愧不如。",
+    "core_value": "医者仁心视死如生，笔下春秋不容玷污。战袍染血亦如盛装，誓以柔弱之躯护佑大唐风骨不灭。",
+    "goal_options": [
+     "在药材见底前挽救重伤都尉与守台老兵性命，维持守军最高战斗力",
+     "用朱砂将大理寺与河西军伏击内幕据实录入史册，确保英雄忠骨不被青史湮没",
+     "在必要时刻使用研磨剧毒与突入暗室之敌酋同归于尽"
+    ],
+    "never": [
+     "为了求生将手中救命伤药优先供给投敌叛变者"
+    ],
+    "prefers": [
+     "刚毅正直、珍视部下生命、即便大难临头依然不忘道义的真正仁者勇士"
+    ],
+    "pressure_responses": {
+     "breaking": "借擦洗血迹之机躲在药箱后无声抽泣片刻，随即用力抹干眼泪重新站起握紧金针。",
+     "high": "亲自端起烧沸的烈酒铜盏泼向攀爬窗洞的敌兵面门，救下昏厥的同伴。",
+     "low": "在昏暗油灯下专注手持银针挑破伤兵脓疮，对门外喊杀声神色如常波澜不惊。",
+     "mid": "长身而起横身挡在重伤士卒病榻前，手握铜剪冷声斥责夺药亲兵丧尽天良。"
+    },
+    "relationship_stance": "敬重所有默默流血牺牲的平凡将士，对草菅人命的权贵满怀悲愤，在风沙绝境中渴望一份纯粹相知的灵魂抚慰。",
+    "withdrawal": "退入底层暗井石台旁默默捣研最后半株干草药，整理凌乱医书避开冲突。"
+   },
+   "gender": "female",
+   "gender_reason": "唐代尚药局司药与和亲使团掌书女史都是宫中女官职位，因此固定为女性。",
+   "id": "royal_female_physician_scribe",
+   "identity": {
+    "authority": "随行使团所有伤病将士用药处方裁决权与使团官方起草《和亲起居注》大案定谳录状权",
+    "exposure": "知晓统兵将军在出发前曾强行扣留使团救命药材倒卖牟利之确凿证据。",
+    "hidden": "暗中掌握从阵亡突厥死士创口提取的独门孔雀胆剧毒配方，并已研制出独门中和解毒方剂。",
+    "limits": [
+     "文弱医官手无缚鸡之力，无法在阵前使用重兵刃近身斩将杀敌",
+     "面临金创药材耗尽与伤兵大量肢体溃烂化脓之严酷医学绝境"
+    ],
+    "obligations": [
+     "救治每一位浴血奋战的将士，完整记录真实战况留存青史，保护长公主性命无虞。"
+    ],
+    "resources": [
+     "携有一副传世金银针具、三瓶可令垂死之人续命三炷香的参附回阳汤原液",
+     "掌管使团随行官印朱砂泥与长公主全部行军手令誊抄文书"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在滔天杀戮中依然保持对无辜弱者之至深怜悯、刀锋下藏着浩瀚温柔的真正英雄气概",
+     "在自己疲惫绝望时默默递来的一只温热手掌与无声坚实守护"
+    ],
+    "boundaries": [
+     "不拿伤患生机与救死扶伤天职作私情交换",
+     "恪守医道士人之清白尊严"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "瀚海风暴洗尽铅华后相濡以沫、共修《边地千金药方》的宿命眷侣",
+    "dislikes": [
+     "将医者视为仆役差使的骄横跋扈之态",
+     "借伤势轻薄试探之粗鄙举止"
+    ],
+    "expression": "用微凉细嫩的指尖轻轻拭去对方唇角的干涸血迹，将最后一粒回阳丹轻轻放入口中送入对方舌底。",
+    "likes": [
+     "在满是药香的幽暗石室内借着一盏微光并肩包扎伤口时的呼吸相闻",
+     "彼此卸下心防后在生死未卜的长夜中低语倾诉心声的极度战栗温存"
+    ],
+    "preconditions": [
+     "双方皆处于神志清醒、生死托付且彼此尊重的真挚自愿之境",
+     "绝非弱女子在强权压迫下的寻求庇护"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "长公主和亲使团随行司药女官兼掌书女史",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 105
+    },
+    {
+     "from": 106,
+     "location_id": "beacon_rammed_earth_shelter",
+     "to": 225
+    },
+    {
+     "from": 226,
+     "location_id": "cliff_secret_crevice_path",
+     "to": 1304
+    },
+    {
+     "from": 1305,
+     "location_id": "beacon_rammed_earth_shelter",
+     "to": 1425
+    },
+    {
+     "from": 1426,
+     "location_id": "beacon_middle_arsenal_hall",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "直面将军拔刀斩杀之致命风险，且重伤将士彻底丧失续命神药",
+      "option": "毅然砸碎回阳汤药瓶以死相抗，当众揭露将军侵吞克扣全军药材之罪行"
+     },
+     {
+      "cost": "药效被大幅稀释无法完全遏制高热，且自身彻底沦为将军控制之文书软禁人质",
+      "option": "以自身性命为质换取将军允许将药汤平分稀释分予重伤士卒与都尉"
+     }
+    ],
+    "pressure": "统兵将军强行下令没收其私留的最后半瓶参附回阳汤独占自用。",
+    "trigger": "随军药匣内止血金创药全数用尽，而主将与三名重伤校尉因创口化脓陷入高热惊厥。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "看着都尉身上那些陈旧刀疤，真不知这三年在这荒漠绝壁里受了多少苦。今夜无论如何，我也要把人从鬼门关抢回来。",
+    "surface": "“都尉大人，您这条命不仅属于您自己，还属于关内等着您报讯的三万百姓。只要本官手中这根银针还在，您就休想倒在这石板上！”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "戌时末，黑风暴吞没了玉门关外",
+  "minute": 1305
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster"
+ ],
+ "custom": false,
+ "customs": [
+  "点燃狼烟前必先以烈酒洒入狼粪油脂三遍，面向长安方向横刀叩胸一拜以敬天子社稷。",
+  "烽燧守军换防交接烽火台时，双方需各取佩刀在夯土门楣上深刻一道刀痕以记军功生死。",
+  "绝壁围困时取用最后皮囊清水，必先滴三滴于战死袍泽冰冷唇间方准将士分饮。",
+  "和亲使团遇伏退守孤垒，长公主卸下金冠凤钗前必须由主将当面击响鼙鼓三次以示军礼。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "司药女史在跳跃炭盆前将短唐刀烧至焦红，都尉咬紧一根生牛皮带汗如雨下任其切开肩胛皮肉",
+    "长公主双膝跪地双手死死按住都尉颤抖的右臂，以素绢浸透西域烈酒擦拭涌出之乌黑污血",
+    "暗室外狂暴沙暴如万雷擂鼓，伴随清脆金石之音，一枚淬毒倒刺箭头被生生夹出落入铜盘"
+   ],
+   "duration_minutes": 85,
+   "hook_ids": [
+    "hk_princess_knife_approach",
+    "hk_renegade_blade_approach",
+    "hk_physician_scalpel_observe"
+   ],
+   "id": "act_arrowhead_excising_treatment",
+   "location_ids": [
+    "beacon_rammed_earth_shelter"
+   ],
+   "start_minute": 1320,
+   "tags": [
+    "intimate"
+   ],
+   "title": "夯土暗室借烈酒与火刃剜取倒刺箭头"
+  },
+  {
+   "beats": [
+    "突厥先锋死士抛掷百具生铁飞爪挂上射击石孔，数十柄淬毒弯刀迎着沙暴从悬崖裂隙涌出",
+    "逃亡都尉与老烽帅合力斩断飞爪生麻绳，长公主亲自弯弓搭箭连续射穿两名突入敌兵咽喉",
+    "两百斤重的落石擂木轰然砸下悬崖峭壁，碎骨与惨嚎声在漫天风沙呼啸中瞬间被暴风吞没"
+   ],
+   "duration_minutes": 70,
+   "hook_ids": [
+    "hk_renegade_bow_approach",
+    "hk_corrupt_general_parley_approach",
+    "hk_signal_fire_bell_request"
+   ],
+   "id": "act_middle_hall_cliff_repel",
+   "location_ids": [
+    "beacon_middle_arsenal_hall"
+   ],
+   "start_minute": 1425,
+   "tags": [
+    "workplace"
+   ],
+   "title": "中层穿堂架设滚石阻击攀岩突厥死士"
+  },
+  {
+   "beats": [
+    "八级黑风暴撕碎羊皮防风罩，老烽帅用身躯挡住怒号狂风，火石火星三次吹灭火绒受潮告急",
+    "长公主扯下名贵金丝大氅浸透西域猛火油抛入火灶，都尉挥臂将火把砸入灶膛引燃冲天烈焰",
+    "三股刺目深黑的狼烟在夜空暴风中笔直冲天而起，破空青烟化作大唐边防永不沉沦的求救神剑"
+   ],
+   "duration_minutes": 90,
+   "hook_ids": [
+    "hk_signal_keeper_torch_approach",
+    "hk_princess_beacon_request",
+    "hk_sogdian_wine_approach"
+   ],
+   "id": "act_rooftop_signal_triple_smoke",
+   "location_ids": [
+    "beacon_rooftop_signal_platform"
+   ],
+   "start_minute": 75,
+   "tags": [
+    "workplace"
+   ],
+   "title": "绝壁烽火台顶风引燃三束告警狼烟"
+  },
+  {
+   "beats": [
+    "都尉与长公主侧身贴紧覆满盐硝的冰冷绝壁，借着牛皮悬索试探下方深渊流沙坑分布走势",
+    "一道强风裹挟碎石砸落擦破脸颊，两人在不足半尺的立足石台上紧紧相拥以防坠入万丈深渊",
+    "下方荒漠隐约显露突厥伏击骑兵移动火把序列，两人屏息凝神借岩壁死角默记敌军包围空当"
+   ],
+   "duration_minutes": 65,
+   "hook_ids": [
+    "hk_renegade_blade_approach",
+    "hk_physician_herb_approach",
+    "hk_renegade_cliff_observe"
+   ],
+   "id": "act_cliff_secret_crevice_scouting",
+   "location_ids": [
+    "cliff_secret_crevice_path"
+   ],
+   "start_minute": 180,
+   "tags": [
+    "intimate"
+   ],
+   "title": "后山断崖风蚀石缝探寻突围暗道虚实"
+  },
+  {
+   "beats": [
+    "统兵中郎将纠集十余名亲兵拔刀围困千斤闸绞盘，妄图趁风暴斩断铁锁开门迎敌乞降求生",
+    "长公主出示天子和亲金印厉声宣布按大唐军律夺其军权，羽林老士卒纷纷倒戈横刀相向",
+    "都尉飞身跃下石梯一脚踹飞叛兵伍长，雁翎刀出鞘三寸寒芒毕现，当堂迫降全员收缴兵符"
+   ],
+   "duration_minutes": 75,
+   "hook_ids": [
+    "hk_corrupt_general_parley_approach",
+    "hk_princess_knife_approach",
+    "hk_signal_fire_bell_request"
+   ],
+   "id": "act_arsenal_hall_mutiny_clash",
+   "location_ids": [
+    "beacon_middle_arsenal_hall"
+   ],
+   "start_minute": 265,
+   "tags": [
+    "workplace"
+   ],
+   "title": "中层军械穿堂正堂夺门内讧生死大审"
+  },
+  {
+   "beats": [
+    "黑风暴渐息东方泛起惨白鱼肚白，玉门关方向隐隐传来三声沉闷如雷之迎敌报讯号炮轰鸣",
+    "长公主与都尉同时刺破手指将热血滴入烈酒海碗，全员一饮而尽摔碗为号誓师出征",
+    "生铁千斤闸门在绞盘铿锵声中缓缓升起，残存唐军上马拔刀，在破晓第一缕曙光中决死冲杀"
+   ],
+   "duration_minutes": 50,
+   "hook_ids": [
+    "hk_princess_knife_approach",
+    "hk_renegade_blade_approach",
+    "hk_signal_keeper_torch_approach"
+   ],
+   "id": "act_dawn_blood_charge_pact",
+   "location_ids": [
+    "beacon_rammed_earth_shelter"
+   ],
+   "start_minute": 355,
+   "tags": [
+    "intimate"
+   ],
+   "title": "烽燧底层血誓结契与拂晓绝死突围誓师"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.45,
+  "male": 0.5,
+  "nonbinary": 0.05
+ },
+ "default_person": "second",
+ "era": "盛唐开元天宝之交河西走廊与西域交界",
+ "extends": null,
+ "forbidden_terms": [
+  "手枪",
+  "冲锋枪",
+  "望远镜",
+  "军用雷达",
+  "卫星电话",
+  "无人机",
+  "防弹背心",
+  "塑料水壶",
+  "压缩饼干",
+  "吉普车",
+  "对讲机",
+  "迫击炮",
+  "狙击步枪",
+  "手雷",
+  "防毒面具"
+ ],
+ "hooks": [
+  {
+   "id": "hk_princess_knife_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_rammed_earth_shelter",
+    "beacon_middle_arsenal_hall"
+   ],
+   "slot": "imperial_peace_princess",
+   "text": "{imperial_peace_princess.name}身着金丝撕裂的染血大氅：“玉门关外三十里，今夜只有大唐战死的将士，没有跪伏求生的天朝宗女！都尉，当年朝廷负了你，但今夜大唐天下负不得这关外万民，这把刀，你拔是不拔？”"
+  },
+  {
+   "id": "hk_renegade_blade_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_middle_arsenal_hall",
+    "beacon_rammed_earth_shelter",
+    "cliff_secret_crevice_path"
+   ],
+   "slot": "renegade_fortress_commander",
+   "text": "{renegade_fortress_commander.name}雁翎刀出鞘半寸：“长公主殿下，当年兵部一张公文将老子打成叛将，老子在这烽燧里吃了三年沙子！今夜老子保你，不是为了大明宫的赏赐，是为了这城垛上老兵们流的血！”"
+  },
+  {
+   "id": "hk_corrupt_general_parley_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_middle_arsenal_hall",
+    "beacon_rammed_earth_shelter"
+   ],
+   "slot": "frontier_corrupt_patrol_general",
+   "text": "{frontier_corrupt_patrol_general.name}手按明光铠上金字调兵铜牌，眼中闪烁着狠厉精明，厉声呵斥道：“长公主殿下三思！突厥特使答应只要交出这个兵部通缉的叛将，使团全员即可体面撤回玉门关！”"
+  },
+  {
+   "id": "hk_signal_keeper_torch_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_rooftop_signal_platform",
+    "beacon_rammed_earth_shelter"
+   ],
+   "slot": "veteran_signal_fire_keeper",
+   "text": "{veteran_signal_fire_keeper.name}手持一支沾满刺鼻狼粪黑油的熊熊火把：“都尉！火油灶台的羊皮罩子被风吹跑了！老汉在这台子上吹了二十四年风，这狼烟要是今夜断了，老汉死后无颜去见安西战死的二十个老兄弟啊！”"
+  },
+  {
+   "id": "hk_sogdian_wine_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_rammed_earth_shelter",
+    "beacon_middle_arsenal_hall",
+    "beacon_rooftop_signal_platform"
+   ],
+   "slot": "sogdian_caravan_master",
+   "text": "{sogdian_caravan_master.name}解下狐皮大氅，压低声音急促道：“殿下！都尉！水井被贼人下了断肠散，这是商队最后三坛纯蒸葡萄烧！老贾把全部家底押在二位身上，只要能活着回关，老贾这条命就是大唐的！”"
+  },
+  {
+   "id": "hk_physician_herb_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_rammed_earth_shelter",
+    "cliff_secret_crevice_path"
+   ],
+   "slot": "royal_female_physician_scribe",
+   "text": "{royal_female_physician_scribe.name}挽起染满血污的素青短襦：“都尉切莫再用力拔刀！您肩胛的狼牙箭头上淬了孔雀胆剧毒，若再震裂心脉，纵是神仙也难救！先饮下这盏药汤，本官便是拼死也要替您剜出这毒刺！”"
+  },
+  {
+   "id": "hk_renegade_bow_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_rooftop_signal_platform",
+    "beacon_middle_arsenal_hall"
+   ],
+   "slot": "renegade_fortress_commander",
+   "text": "{renegade_fortress_commander.name}猛地拉开六石桑木角弓如满月，转头向你森然冷笑：“看清楚了！突厥射雕手的第一批重箭就要穿过女墙！趴下身子，把身后的滚石推过去，让这帮胡狗尝尝大唐百炼铁的滋味！”"
+  },
+  {
+   "id": "hk_princess_blood_pact_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_rammed_earth_shelter",
+    "cliff_secret_crevice_path"
+   ],
+   "slot": "imperial_peace_princess",
+   "text": "{imperial_peace_princess.name}将天子亲笔血诏从内衬中决然抽出，素手轻轻按在你带血的手背上，滚烫气息微拂：“这是长安弄权奸臣出卖边防的底单。今夜若能生还，本宫带你回朱雀大街，当着满朝文武的面为你正名雪冤！”"
+  },
+  {
+   "id": "hk_corrupt_general_threat_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_middle_arsenal_hall",
+    "cliff_secret_crevice_path"
+   ],
+   "slot": "frontier_corrupt_patrol_general",
+   "text": "{frontier_corrupt_patrol_general.name}脸色铁青拔出半截镶玉短刃，堵在后崖狭窄石门前，眼神阴鸷逼近：“女史，把你在暗室里誊写的那些起居注给老子烧了！老子保你一条命回长安当命妇。”"
+  },
+  {
+   "id": "hk_sogdian_map_reveal_approach",
+   "kind": "approach",
+   "location_ids": [
+    "beacon_rammed_earth_shelter",
+    "cliff_secret_crevice_path"
+   ],
+   "slot": "sogdian_caravan_master",
+   "text": "{sogdian_caravan_master.name}谨慎环视四周，猛地塞入你怀中，神情狂野而决绝：“这是突厥联军各部落在流沙坑外扎营的布防全图！老贾冒死从可汗大帐买来的！拿着它，从后崖石缝冲出去，直插他们粮台放一把火，这死局就解了！”"
+  },
+  {
+   "id": "hk_princess_beacon_request",
+   "kind": "request",
+   "location_ids": [
+    "beacon_rooftop_signal_platform",
+    "beacon_middle_arsenal_hall"
+   ],
+   "slot": "imperial_peace_princess",
+   "text": "{imperial_peace_princess.name}在狂暴风沙中单手死死拽住烽火台风暴缆绳，回首向你大声疾呼：“都尉！第三火灶的风门铁板被飞石卡死了！快合力搬开那块滚石，只要火道通了，这一束狼烟就能照亮整个河西！”"
+  },
+  {
+   "id": "hk_signal_fire_bell_request",
+   "kind": "request",
+   "location_ids": [
+    "beacon_middle_arsenal_hall",
+    "beacon_rooftop_signal_platform"
+   ],
+   "slot": "veteran_signal_fire_keeper",
+   "text": "{veteran_signal_fire_keeper.name}半边身子被鲜血浸透，双手青筋暴起死死拉住吊在回廊顶部的生铁铜铎绳索，转头嘶喊：“大人！快搭一把手！铜铎卡在梁上了，连撞三记！告诉全台弟兄胡人上崖了，准备近身白刃死战！”"
+  },
+  {
+   "id": "hk_physician_water_request",
+   "kind": "request",
+   "location_ids": [
+    "beacon_rammed_earth_shelter",
+    "cliff_secret_crevice_path"
+   ],
+   "slot": "royal_female_physician_scribe",
+   "text": "{royal_female_physician_scribe.name}双手捧着一只洗净的粗陶药碗：“都尉！水井剧毒未清，重伤员高热危在旦夕！求您带绳索下后山石缝取一皮囊岩壁冷凝雪水，只需一碗，老兵们就能撑到天明！”"
+  },
+  {
+   "id": "hk_physician_scalpel_observe",
+   "kind": "observe",
+   "location_ids": [
+    "beacon_rammed_earth_shelter",
+    "beacon_middle_arsenal_hall"
+   ],
+   "slot": "imperial_peace_princess",
+   "text": "昏暗夯土暗室内炭火红光微闪，{imperial_peace_princess.name}静静伫立于生铁闸门旁，原本华美名贵的云锦长裙已被血水泥沙浸透，青丝凌乱覆额，狂暴沙暴撞击外墙的沉闷轰鸣声中，其双眸清澈如雪不见丝毫贵胄娇气。"
+  },
+  {
+   "id": "hk_renegade_cliff_observe",
+   "kind": "observe",
+   "location_ids": [
+    "cliff_secret_crevice_path",
+    "beacon_rooftop_signal_platform"
+   ],
+   "slot": "renegade_fortress_commander",
+   "text": "一道惨白的闪电撕裂昏黄风暴，清晰可见{renegade_fortress_commander.name}正半蹲在绝壁不足一尺宽的风蚀石台上，玄黑战甲覆满白霜盐硝，右手紧紧握着六石桑木硬弓，狂风狂乱吹扯其狼皮大氅，身形宛若与绝壁万仞融为一体。"
+  }
+ ],
+ "id": "yumen_pass_black_sandstorm_beacon",
+ "locations": [
+  {
+   "affordances": [
+    "在炭火旁以烈酒和烧红匕首为同伴剜除深入肩胛之倒刺铁箭头",
+    "背倚冰冷粗糙的夯土墙低声对质天子和亲血诏背后削藩全盘部署",
+    "合力扳动生铁千斤闸绞盘检查底层水井盲井是否留有渗水湿土"
+   ],
+   "detail": "深入山体花岗岩下开凿的厚重夯土居室，墙壁厚达五尺以御严寒风沙。中央设有一眼干涸苦水井与生铁炭盆，暗红色炭火驱散彻骨严寒。四壁挂着皮盾、破损皮甲与长矛，狂暴黑风暴撞击在厚重外墙上发出如万兽咆哮之沉闷轰鸣，黄沙顺着门缝石缝如细雨般沙沙滑落。",
+   "exits": [
+    "beacon_middle_arsenal_hall"
+   ],
+   "id": "beacon_rammed_earth_shelter",
+   "name": "烽燧底层夯土防风暗室",
+   "pressure_modifiers": {
+    "p_storm_black_sand_burial": "黄沙已淹没底层气孔两尺，室内空气逐渐浑浊，油灯火苗跳跃微弱。",
+    "p_water_well_arsenic_poison": "底层苦水井传来刺鼻硫磺恶臭，最后两皮囊清水已见底。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "厚重生铁千斤闸门紧闭，室内仅有一盏青铜羊油灯忽明忽暗，沙暴呼啸声完全掩盖了室内的低语交谈。",
+   "witnesses": [
+    "bg_wounded_yulin_sergeant",
+    "bg_sogdian_caravan_cook"
+   ]
+  },
+  {
+   "affordances": [
+    "借胡杨木立柱掩护擦燃火石检视从突厥使者身上搜出的带血密信",
+    "合力将两百斤重的滚木石磨推至悬崖落石槽口严阵以待",
+    "迎着箭孔灌入的刺骨狂风握紧角弓搭箭逼退沿崖攀爬的偷袭敌骑"
+   ],
+   "detail": "连接烽火台瞭望顶层与底层暗室的环形回廊大厅，四面开有狭窄射击箭孔。地面散落着折断的长箭、翻倒的箭壶与生锈锁子甲。狂风自箭孔灌入发出凄厉呼啸，卷起阵阵黄沙扑面刺痛，外头突厥骑兵射入的羽箭深深钉入夯土立柱之中。",
+   "exits": [
+    "beacon_rammed_earth_shelter",
+    "beacon_rooftop_signal_platform",
+    "cliff_secret_crevice_path"
+   ],
+   "id": "beacon_middle_arsenal_hall",
+   "name": "烽燧中层军械甲仗穿堂",
+   "pressure_modifiers": {
+    "p_mutiny_surrender_plot": "两名军汉在回廊阴影中拔刀低声密谋夺取千斤闸开门降敌。",
+    "p_turkic_cavalry_cliff_assault": "射击孔外已能清晰听见突厥死士铁爪抓扣岩壁之刺耳金属摩擦声。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "回廊开阔通达，但各处箭孔光线昏暗，几根粗大胡杨木立柱后方存在多处暗角与视线死角。",
+   "witnesses": [
+    "bg_mutinous_cavalry_corporal",
+    "bg_whispering_straggler_scout"
+   ]
+  },
+  {
+   "affordances": [
+    "在八级黑风暴中用身躯遮挡狂风以火绒死命引燃第一束报警狼烟",
+    "手握六石角弓趴伏在石垛女墙边缘盲射下方攀岩而上的突厥夜袭死士",
+    "在天地倒悬的沙暴狂风中并肩拉紧救命缆绳相拥稳住身形不被吹落悬崖"
+   ],
+   "detail": "傲立于百丈风蚀残丘之巅的方形青石露天平台，正中筑有三座巨大的生铁狼烟烽火灶台。狂暴黑沙暴在头顶如黑色怒涛疯狂翻滚，视野不及十步，耳畔尽是鬼哭狼嚎般的狂风撕扯声。平台上积沙已深，三束备用狼粪油脂干柴被生羊皮死死捆扎在石垛边缘，旗杆在风暴中剧烈摇晃。",
+   "exits": [
+    "beacon_middle_arsenal_hall"
+   ],
+   "id": "beacon_rooftop_signal_platform",
+   "name": "绝壁烽火台露天狼烟瞭望顶",
+   "pressure_modifiers": {
+    "p_signal_fire_extinguish_crisis": "狂暴沙暴巨风连续三次吹灭火星，油脂包外层已受潮结冰。",
+    "p_turkic_cavalry_cliff_assault": "一支突厥重箭带着凄厉破空声洞穿石垛正中狼烟油锅。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "露天平台风势极大且沙尘弥漫视线严重受阻，只要避开烽火灶台正面的火光便极难被全员察觉。",
+   "witnesses": [
+    "bg_beacon_runner_recruit"
+   ]
+  },
+  {
+   "affordances": [
+    "侧身贴紧冰冷岩壁借牛皮绳索试探滑降探测崖底敌骑防线虚实",
+    "在不足半尺宽的狭窄石台上并肩站立交换彼此最后的保命佩刀与符节",
+    "合力搬动断崖石笋封堵裂隙入口阻断突厥轻骑攀爬死路"
+   ],
+   "detail": "隐藏在烽燧背风面千仞绝壁天然裂隙中的陡峭石径，仅容一人侧身通过。头顶怪石嶙峋如刀削斧劈，脚下是深不见底的万丈碎石流沙深渊。阴冷气流从深谷裂缝中呼啸涌上，石壁冰冷刺骨且覆盖着滑腻盐硝，唯有一根磨损严重的生牛皮粗绳垂落于崖底通往干涸河道。",
+   "exits": [
+    "beacon_middle_arsenal_hall"
+   ],
+   "id": "cliff_secret_crevice_path",
+   "name": "烽燧后山断崖风蚀石缝暗道",
+   "pressure_modifiers": {
+    "p_mutiny_surrender_plot": "叛兵已摸至暗道入口企图斩断唯一的逃生牛皮吊绳。",
+    "p_storm_black_sand_burial": "绝壁上方滚落的塌方碎石不断砸落，石缝正被流沙迅速填平。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "深处山体褶皱背风面，外界沙暴视线无法穿透绝壁，下方胡骑巡哨更无从仰视查探。",
+   "witnesses": [
+    "bg_cliff_crevice_lookout"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "李",
+   "郭",
+   "高",
+   "哥舒",
+   "封",
+   "王",
+   "浑",
+   "仆固",
+   "薛",
+   "张",
+   "尉迟",
+   "段"
+  ],
+  "given_female": [
+   "长乐",
+   "金城",
+   "明珠",
+   "玉英",
+   "兰芷",
+   "若兰",
+   "云韶",
+   "青青",
+   "素娥",
+   "飞燕",
+   "昭仪",
+   "含霜"
+  ],
+  "given_male": [
+   "守珪",
+   "光弼",
+   "抱玉",
+   "崇简",
+   "定远",
+   "破虏",
+   "瀚海",
+   "伏波",
+   "铁勒",
+   "威明",
+   "彦博",
+   "承恩"
+  ],
+  "given_neutral": [
+   "从善",
+   "安邦",
+   "平戎",
+   "定边",
+   "思齐",
+   "靖安",
+   "怀德",
+   "万里",
+   "秉节",
+   "守道",
+   "克己",
+   "孤烟"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "{family}都尉"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}将军"
+   },
+   {
+    "gender": "any",
+    "pattern": "长公主殿下"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}公"
+   },
+   {
+    "gender": "any",
+    "pattern": "烽帅"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "原稿基本合规，保留全部内容与边塞血战张力。改动：长公主、司药女史固定为女性；中郎将的亲密倾向去掉“权力交换、迫其承认支配”和“只要依我富贵任取”的交换暗示，改为宿敌式的对弈；两处“受尽屈辱”改为沦为人质；背景人物 id 去掉 boy；转换为项目格式。",
+ "player_identities": [
+  {
+   "age_range": [
+    29,
+    37
+   ],
+   "baseline": "曾任安西都护府鹰扬卫精锐折冲都尉，因不忍执行边将屠杀投降西域部落之密令被诬为叛将除籍，流亡瀚海绝地独自把守孤立烽燧三年。",
+   "gender": "any",
+   "id": "renegade_frontier_cavalry_officer",
+   "reputation": "安西边军老卒暗中敬佩的硬汉主将，但在朝廷邸报上是一颗悬赏三千贯的朝廷钦犯首级。",
+   "resources": [
+    "一手百步穿杨的六石桑木角弓重箭与出神入化的瀚海寻踪骑射绝技",
+    "熟悉大漠方圆五百里所有隐秘流沙坑道、野狼风道与古绿洲暗水脉"
+   ],
+   "risks": [
+    "朝廷公文通缉令尚未撤销，一旦和亲使团将官脱困返京，随时可执军律将其就地斩首割耳"
+   ],
+   "role": "兵部挂名斩决之蒙冤逃亡折冲都尉",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}都尉"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}兄"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    33,
+    42
+   ],
+   "baseline": "奉河西节度使之命领重甲铁骑百人护送长公主和亲，身负天子巡边佩剑与边防关隘符节，权柄直通节度使衙署大堂。",
+   "gender": "any",
+   "id": "imperial_inspecting_cavalry_general",
+   "reputation": "战功赫赫的关陇勋贵宿将，军纪森严冷酷，深得节度使信重。",
+   "resources": [
+    "节度使亲赐的金字调兵铜虎符与调遣河西二十四烽燧守军之最高将令",
+    "全套精钢锻造的大唐重甲明光铠与百炼斩马陌刀"
+   ],
+   "risks": [
+    "护送长公主中伏失职，若长公主死于烽燧之内，按唐律将被押赴长安西市腰斩弃市"
+   ],
+   "role": "河西节度使麾下领兵按察破虏将军",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}将军"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}使君"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    42,
+    54
+   ],
+   "baseline": "在大漠绝壁烽燧瞭望台吞饮风沙二十年，熟悉塞外各族号角狼烟规制与天象黑风暴走势，对边塞地理如数家珍。",
+   "gender": "any",
+   "id": "veteran_beacon_signal_operator",
+   "reputation": "沉默寡言的边塞老兵，深谙烽燧生存之道的活地图。",
+   "resources": [
+    "掌握烽燧地下隐秘暗道唯一的熟铁千斤顶扳手与祖传狼粪油膏提炼秘法",
+    "在突厥各大部落行商中拥有极高信义，通晓西域诸国番语与部族切口"
+   ],
+   "risks": [
+    "知晓朝廷历年克扣边军粮饷的机密军籍册，被军中硕鼠视作必欲除之的眼中钉"
+   ],
+   "role": "把守玉门烽燧二十载之世袭老烽帅",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "老{family}"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}烽帅"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    35,
+    45
+   ],
+   "baseline": "率领满载丝绸瓷器的商队在玉门关外遇袭，被逼将残存车马驼队撤入烽燧避难，精通商贾算计与西域局势博弈。",
+   "gender": "any",
+   "id": "silk_road_sogdian_merchant_guide",
+   "reputation": "狡黠精明但深明大义的粟特商人，以财富结交四方豪杰。",
+   "resources": [
+    "车队夹带的三大皮囊高烈度西域葡萄烧酒、二十包止血干草药与生石灰",
+    "通晓突厥各俟斤将领的私密脾性与利益软肋，可充作阵前和谈暗使"
+   ],
+   "risks": [
+    "一旦烽燧失守，所有货物财产将被胡骑劫掠一空，自身亦将被胡刀分尸"
+   ],
+   "role": "滞留烽燧之粟特西域大商队行首",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}行首"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}大贾"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    26,
+    33
+   ],
+   "baseline": "奉命随侍长公主远赴绝域，亲历伏击血战从死人堆里背出重伤侍卫，深知宫廷与边塞双重凶险。",
+   "gender": "any",
+   "id": "royal_entourage_physician_scribe",
+   "reputation": "沉静果敢、医术高明的宫中才女，在将士中极有威信。",
+   "resources": [
+    "一整套宫廷秘传治疗矢创伤刀的金创散、止血银针与烈火消毒铜盏",
+    "掌握长公主贴身密匣全部文书誊写笔迹与御印暗记"
+   ],
+   "risks": [
+    "掌握朝廷以假公主和亲的惊天宫闱秘闻，随时面临被护从将领灭口风险"
+   ],
+   "role": "长公主和亲内侍省成年女史兼随行典药",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}典药"
+    },
+    {
+     "gender": "any",
+     "pattern": "{family}女史"
+    }
+   ]
+  }
+ ],
+ "premise": "盛唐黑风暴肆虐之夜，奉旨远嫁西域的和亲长公仪仗在玉门关外三十里遭突厥铁骑伏击。残兵护送长公主退入绝壁之上的孤立烽燧。烽燧唯一守将，正是三年前因拒绝屠城被兵部构陷叛逃的前折冲都尉。外有胡骑死围，内有天子削藩血诏与断粮断水绝境。在沙暴封死退路的漫漫长夜，旧日仇隙与家国大义在刀光血影中激烈碰撞，唯有并肩搏杀方能为关内万民点燃烽火求生。",
+ "pressures": [
+  {
+   "choice": "是派老兵冒死冲上露天平台冒着坠崖风险清理风斗，还是强行凿通中层军械库厚重夯土隔墙？",
+   "exits": [
+    {
+     "cost": "清理作业极易遭遇强风卷入崖底深渊粉身碎骨，且人员遭受重度沙暴灼伤",
+     "option": "老烽帅带领辅兵系上生牛皮绳索冒沙暴攀上石顶疏通主排风风道"
+    },
+    {
+     "cost": "彻底破坏烽燧中层防御结构，使外围突厥攀爬死士极易顺裂缝突入暗室",
+     "option": "使用商队生铁撬棍合力拆毁中层通风隔墙排风"
+    }
+   ],
+   "far": {
+    "consequence": "全员活活闷死于夯土深窖之中，长公主使团全军覆没成为大漠黄沙无名白骨枯尸。",
+    "due_days": 1,
+    "trigger": "烽燧底层被流沙完全封死淤塞"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_princess_knife_approach",
+    "hk_signal_keeper_torch_approach"
+   ],
+   "id": "p_storm_black_sand_burial",
+   "immediate": {
+    "minutes": 15,
+    "text": "泥沙顺着门缝倾泻如注，伤员开始剧烈咳嗽出现缺氧紫绀。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "beacon_rammed_earth_shelter"
+   ],
+   "near": {
+    "deadline_minutes": 35,
+    "text": "若半柱香内无法通气，暗室内所有重伤员与将士将因窒息丧失全部反抗能力。"
+   },
+   "objective": "在暗室全员窒息昏厥前清理疏通排风道或打通中层紧急石门。",
+   "source": "nature",
+   "start_minute": 1335,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "百年黑风暴流沙活埋烽燧窒息死线",
+   "trigger": "黑风暴掀起十丈流沙巨浪席卷绝壁，底层所有排烟气孔已被黄沙堵死三分之二，室内空气急剧稀薄，羊油灯光跳跃即将熄灭。"
+  },
+  {
+   "choice": "是全力倾倒最后两桶滚沸火油焚烧悬梯，还是依托狭窄石梯展开近身白刃陌刀肉搏？",
+   "exits": [
+    {
+     "cost": "直面重甲弯刀肉搏，己方残存正规军卫士将付出半数以上阵亡流血代价",
+     "option": "都尉亲率唐军精锐挥舞斩马陌刀死守狭窄登梯口血战到底"
+    },
+    {
+     "cost": "彻底耗尽烽燧全部重型守城器械储备，面对后续攻势将再无阻击硬手段",
+     "option": "引燃军械库堆放之滚木擂石沿悬崖落石槽全数推下断崖封死山道"
+    }
+   ],
+   "far": {
+    "consequence": "烽燧全防崩溃，将士被尽数坑杀屠灭，长公主被俘押往金山大帐，沦为要挟大唐的人质。",
+    "due_days": 1,
+    "trigger": "中层穿堂被突厥死士彻底占领"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_renegade_bow_approach",
+    "hk_signal_fire_bell_request"
+   ],
+   "id": "p_turkic_cavalry_cliff_assault",
+   "immediate": {
+    "minutes": 15,
+    "text": "数十柄淬毒弯刀已探入射击孔，箭雨将夯土门板射得千疮百孔木屑纷飞。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "beacon_middle_arsenal_hall"
+   ],
+   "near": {
+    "deadline_minutes": 30,
+    "text": "一旦中层失守，敌军将居高临下倾倒毒烟毒杀底层暗室内长公主与伤患。"
+   },
+   "objective": "击退敌军首轮绝壁强攻，保全中层军械库要冲与生铁绞盘不被摧毁。",
+   "source": "person",
+   "start_minute": 1435,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "突厥两万骑兵携云梯强攻绝壁烽燧",
+   "trigger": "突厥主将见劝降不果，下达全军登崖屠灭令，五百名突厥精锐死士披重甲抛掷铁钩沿石壁强行登梯攀爬。"
+  },
+  {
+   "choice": "是动用粟特商队高价私藏之烈酒药酒稀释分发解渴，还是冒险缒绳下后崖采集风蚀岩壁渗水？",
+   "exits": [
+    {
+     "cost": "将士饮烈酒后痛觉麻痹但极易在严寒沙暴中体温散失，且商队财产损失殆尽",
+     "option": "行首砸碎全部珍藏西域葡萄烧酒，按军令由司药女官严格调配烈酒代水解渴"
+    },
+    {
+     "cost": "滑降路线暴露在突厥外围游骑视野内，采集者面临被万箭穿心射杀之极度凶险",
+     "option": "派年轻旗牌兵带皮囊自后山石缝冒险滑降下绝壁采集深谷渗水"
+    }
+   ],
+   "far": {
+    "consequence": "守军喉焦唇裂无法挽弓拔刀，不战自溃全员渴死于干涸烽燧之中。",
+    "due_days": 1,
+    "trigger": "全军彻底断水超过一日夜"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_sogdian_wine_approach",
+    "hk_physician_herb_approach"
+   ],
+   "id": "p_water_well_arsenic_poison",
+   "immediate": {
+    "minutes": 10,
+    "text": "不知情的一名辅兵饮水后七窍流血暴毙当场，全军陷入极度恐慌与断水骚乱。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "beacon_rammed_earth_shelter"
+   ],
+   "near": {
+    "deadline_minutes": 40,
+    "text": "在沙漠酷热高热烘烤下，脱水将使重伤员在两时辰内全员休克衰竭身亡。"
+   },
+   "objective": "查出投毒真凶并在此绝境下搜寻安全饮用水维持将士作战体力。",
+   "source": "accident",
+   "start_minute": 90,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "底层苦水井投毒断绝水源生机危机",
+   "trigger": "潜入烽燧之奸细将剧毒断肠散倒入底层苦水井，水井泛起腥臭黄沫，全燧储存清水仅余三皮囊。"
+  },
+  {
+   "choice": "是拆毁烽燧全部木质营房立柱作为引火干柴，还是投入长公主随行云锦嫁妆与车辆辎重？",
+   "exits": [
+    {
+     "cost": "彻底焚毁和亲结盟之物质凭证，长公主回朝后面临礼法弹劾与欺君之罪指控",
+     "option": "长公主亲自下令斩碎全部随行红木嫁妆车仗与金丝绸缎，尽数投入火灶助燃"
+    },
+    {
+     "cost": "老烽帅双手与胸部面临重度终身烧伤残疾，彻底丧失作战行动能力",
+     "option": "老烽帅以身相殉跳入风道用防风铁板肉身死死抗住风口护持微弱火苗"
+    }
+   ],
+   "far": {
+    "consequence": "突厥铁骑长驱直入杀入河西腹地屠城掳掠，数十万生灵涂炭惨遭血洗洗劫。",
+    "due_days": 1,
+    "trigger": "狼烟彻底断绝未达玉门关"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_princess_beacon_request",
+    "hk_signal_keeper_torch_approach"
+   ],
+   "id": "p_signal_fire_extinguish_crisis",
+   "immediate": {
+    "minutes": 15,
+    "text": "青烟骤然断绝，黑暗重新笼罩百里戈壁，关内驻防大军无法得知犯境准确兵力。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "beacon_rooftop_signal_platform"
+   ],
+   "near": {
+    "deadline_minutes": 45,
+    "text": "若黎明前玉门关未见烽火起，关内将按例关闭边关全城深闭，突围残军将被彻底拒于关门之外。"
+   },
+   "objective": "在天明拂晓前重新引燃主火灶并维持至少两刻钟浓黑狼烟不灭。",
+   "source": "nature",
+   "start_minute": 160,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "狂暴山风扑灭狼烟火种与关内失联死线",
+   "trigger": "狂暴逆风猛烈倒灌，烽火台顶层第二火灶狼粪油柴被暴雨沙尘强行扑灭，玉门关方向迟迟未见回火回应。"
+  },
+  {
+   "choice": "是长公主亲自出面宣读天子御诏震慑亲兵，还是都尉领兵以霹雳手段当场格杀叛变主将？",
+   "exits": [
+    {
+     "cost": "私斩朝廷朝命从三品将官按大唐军律当斩，战后必将面临河西节度使府严厉问罪",
+     "option": "都尉手起刀落当场在绞盘前斩杀叛乱中郎将首级示众震慑全军"
+    },
+    {
+     "cost": "以皇室威信替奸将背书承担巨额财政抚恤责任，且兵变主谋仍存暗害杀机",
+     "option": "长公主抛出天子金印赦免附从叛兵，并许诺回京后赐予阵亡将士双倍抚恤封赏"
+    }
+   ],
+   "far": {
+    "consequence": "大唐和亲长公主沦为人质、守军被屠杀殆尽，边关重镇沦入蛮夷之手。",
+    "due_days": 1,
+    "trigger": "生铁千斤闸门被叛军全面开启"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_corrupt_general_parley_approach",
+    "hk_renegade_blade_approach"
+   ],
+   "id": "p_mutiny_surrender_plot",
+   "immediate": {
+    "minutes": 10,
+    "text": "长廊内亲兵与羽林忠勇卫士拔刀对峙，兵刃撞击声与叫骂声响彻回廊。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "beacon_middle_arsenal_hall"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "绞盘一旦转动铁闸升起半尺，外围埋伏之突厥铁骑将如决堤洪水般涌入暗室。"
+   },
+   "objective": "在千斤闸门被强行绞起前扑灭武装兵变，生擒斩决叛乱首恶稳固门禁。",
+   "source": "institution",
+   "start_minute": 250,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "title": "中郎将暗通敌骑斩关献降兵变危机",
+   "trigger": "统兵中郎将暗中向亲兵分发突厥通关铜钱，拔刀逼向生铁千斤闸绞盘，图谋斩断铁锁开门绑缚长公主乞降投敌。"
+  },
+  {
+   "choice": "是当堂将黄金金箭折断射还敌营，还是虚与委蛇借谈判暗中调动兵力突袭敌军帅帐？",
+   "exits": [
+    {
+     "cost": "彻底激怒突厥可汗，引来突厥全军最为暴烈残酷的不留活口灭绝性总攻",
+     "option": "长公主拔剑亲手斩断金箭，挽起都尉手臂宣布都尉即为大唐使团副帅誓同生死"
+    },
+    {
+     "cost": "谈判商贾一旦被敌军识破缓兵之计，将被当场剥皮割鼻施以极刑酷刑处死",
+     "option": "由粟特商队行首出面假意收下黄金谈判，暗中为断崖潜行突围偷袭争取时间"
+    }
+   ],
+   "far": {
+    "consequence": "突厥得寸进尺当场悔约屠灭使团全员，长公主被押为人质，和亲盟约化作突厥南侵的借口。",
+    "due_days": 2,
+    "trigger": "妥协交出都尉求和乞生"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_princess_knife_approach",
+    "hk_sogdian_wine_approach"
+   ],
+   "id": "p_turkic_envoys_parley_bribe",
+   "immediate": {
+    "minutes": 15,
+    "text": "部分动摇军士目光频频扫向都尉脖颈，暗室内气氛压抑窒息至极。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "beacon_rammed_earth_shelter"
+   ],
+   "near": {
+    "deadline_minutes": 30,
+    "text": "若无法在两刻钟内统一全员意志，内部猜忌将彻底瓦解最后的抵抗意志。"
+   },
+   "objective": "在军心动摇之前彻底粉碎敌军离间攻心之计，重聚守军决死向心力。",
+   "source": "money",
+   "start_minute": 310,
+   "tags": [
+    "crime",
+    "workplace_power"
+   ],
+   "title": "突厥金箭诱降与牺牲都尉换生机陷阱",
+   "trigger": "突厥可汗特使射入黄金大箭与整箱西域宝玉，宣称只要长公主交出逃亡都尉人头与军防图，即可全员礼送出境安全回朝。"
+  }
+ ],
+ "region": "玉门关外三十里风蚀绝壁上的饮马泉烽燧",
+ "rules": [
+  {
+   "id": "r_beacon_fire_triple_smoke",
+   "text": "凡遇胡骑大队犯境，烽燧必须连燃三束青烟烽火并悬挂红毡帅旗，擅息烽火或弃台逃跑者按大唐军律立斩不赦。"
+  },
+  {
+   "id": "r_water_ration_iron_ladle",
+   "text": "烽燧受困期间蓄水井由烽帅专锁监管，全员无论尊卑每日仅发一铜勺苦泉水，私取水囊者断右臂。"
+  },
+  {
+   "id": "r_secret_imperial_edict_seal",
+   "text": "天子密赐和亲使团之黄麻御诏由内侍监贴身铅匣封存，非遇藩王兵变异动，擅启铅印者按谋大逆罪论诛九族。"
+  },
+  {
+   "id": "r_parley_white_flag_curfew",
+   "text": "阵前与突厥特使交涉临近暮鼓必须放下千斤闸门，入夜后擅自攀爬悬索出烽燧者，无论官民皆以通敌奸细论箭射杀。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "分饮烈酒的袍泽",
+  "committed": "黄沙共埋的血盟",
+  "familiar": "抵背裹伤的知己",
+  "flirting": "烽火映甲的凝视",
+  "intimate": "箭雨中性命相托",
+  "stranger": "拔刀相向的宿敌",
+  "testing": "血诏与万民之问"
+ },
+ "status": "released",
+ "style_hint": "边塞风沙的厚重质感：夯土墙簌簌落沙、明光甲叶沉闷相撞、苦井咸水与烈酒浇伤的刺鼻、狼烟焦黑的油脂青烟。对话雄浑苍凉、精炼如刀；尊卑礼制在生死一瞬剥落，克制的距离里燃着毫无保留的信任。",
+ "tension_engines": [
+  {
+   "id": "te_imperial_diplomacy_vs_border_bloods",
+   "text": "大唐和亲和硕安抚天下之宏大朝堂国策与边关血染黄沙白骨蔽野之残酷军事实况的激烈碰撞"
+  },
+  {
+   "id": "te_renegade_loyalty_vs_traitor_rehabil",
+   "text": "蒙冤将领背负叛国骂名依然舍命卫国之决绝傲骨与朝廷削藩灭口阴谋在狭小暗室中的殊死对质"
+  },
+  {
+   "id": "te_noble_grace_vs_frontier_desperation",
+   "text": "金枝玉叶宫廷礼法规训与瀚海绝境下生死无别、分饮苦水断肉之原始荷尔蒙与风骨共鸣"
+  },
+  {
+   "id": "te_signal_duty_vs_individual_survival",
+   "text": "点燃狼烟警报玉门全关之神圣军旅天职与个人突围偷生逃出生天之本能欲望的殊死拉锯"
+  }
+ ],
+ "title": "玉门关外黑风暴：和亲长公主与叛逃都尉",
+ "tone": [
+  "铁血边塞",
+  "悲壮苍凉",
+  "风沙绝境",
+  "傲骨峥嵘"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_yumen_1",
+   "requires": [],
+   "text": "司药女史在解开阵亡突厥死士贴身皮囊时，搜出一张由河西节度使衙署中军亲笔签署的通关金牌，证实此次使团路线外泄正是关内统兵元帅为了借胡人之手除掉和亲长公主与异见将领的惊天密谋。"
+  },
+  {
+   "category": "人事",
+   "id": "t_yumen_2",
+   "requires": [
+    "veteran_signal_fire_keeper"
+   ],
+   "text": "一直主张坚守开战的老烽帅{veteran_signal_fire_keeper.name}，其亲生独子突然被突厥骑兵捆绑推至烽燧绝壁之下作为肉盾人质，突厥主帅勒令老兵亲手熄灭烽火台以换取骨肉残命。"
+  },
+  {
+   "category": "资源",
+   "id": "t_yumen_3",
+   "requires": [],
+   "text": "用于引燃第三座绝命狼烟的核心储备‘特制干羊粪油脂块’，在方才的沙暴坍塌中被滚落的山石尽数砸入万丈深渊，顶层仅存可供燃烧不到一炷香的寻常胡杨枯枝。"
+  },
+  {
+   "category": "制度",
+   "id": "t_yumen_4",
+   "requires": [],
+   "text": "玉门关外游骑斥候冒死射入特急军令，宣布河西节度使已在半夜突发卒中暴毙，朝廷紧急诏令由保守派副使全权接管防务，全线边关即刻封闭三个月严禁任何人入关。"
+  },
+  {
+   "category": "时限",
+   "id": "t_yumen_5",
+   "requires": [
+    "pressure"
+   ],
+   "text": "沙暴骤然停止提前放晴，东方天际透出惨白破晓曙光，突厥两万铁骑已完成全合围阵列，三十架重型攻城抛石机已推至百步射程之内，留给唐军点火突围的时间仅剩一柱香！"
+  },
+  {
+   "category": "关系",
+   "id": "t_yumen_6",
+   "requires": [
+    "imperial_peace_princess"
+   ],
+   "text": "长公主{imperial_peace_princess.name}在绝境中当众吐露惊天宫闱秘密：当年在兵部签发斩决通缉令将都尉构陷为叛将之人，并非关陇权贵，而正是长公主已故的生父为了保全边军主力被迫亲笔所下的弃卒苦肉密令！"
+  },
+  {
+   "category": "意外",
+   "id": "t_yumen_7",
+   "requires": [],
+   "text": "百丈绝壁因山洪与狂暴沙暴双重冲击引发地脉大塌方，烽燧后半部山体轰然崩裂塌陷，连接中层与后山断崖的唯一救命石缝暗道瞬间被数十万斤巨石彻底砸断封死！"
+  }
+ ]
+}

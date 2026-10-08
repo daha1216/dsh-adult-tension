@@ -1,0 +1,2351 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "年满二十周岁受雇于邮轮餐饮部门的年轻帮厨。",
+   "age_range": [
+    20,
+    22
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_drowning_steward_casualty",
+   "line": "{npc.name}：水……水要漫过顶了！大小姐，求求您救救我……",
+   "location_ids": [
+    "ballast_tank_watertight_hold"
+   ],
+   "name": null,
+   "role": "负四层受困抱住通气管呼救年轻帮厨"
+  },
+  {
+   "adult_context": "年满二十周岁轮机舱在籍年轻外籍轮机水手。",
+   "age_range": [
+    20,
+    22
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_panicked_fleeing_mechanic",
+   "line": "{npc.name}：让开！别挡路！后面的水密门马上要自锁了，谁不走谁死！",
+   "location_ids": [
+    "vertical_pipe_escape_shaft"
+   ],
+   "name": null,
+   "role": "浑身机油拼死向外攀爬见习水手"
+  },
+  {
+   "adult_context": "年满二十一周岁充当海上劫掠打手的武装年轻雇佣枪手。",
+   "age_range": [
+    21,
+    23
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_armed_kidnapper_patrolman",
+   "line": "{npc.name}：队长！前头水里有动静！好像有人在撬泄压阀门！",
+   "location_ids": [
+    "flooded_bilge_pump_corridor"
+   ],
+   "name": null,
+   "role": "手持手电涉水巡查年轻绑匪巡哨"
+  },
+  {
+   "adult_context": "年满二十二周岁持有远洋适任二副证书的年轻值更驾驶员。",
+   "age_range": [
+    22,
+    24
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_chief_mate_launch_officer",
+   "line": "{npc.name}：这是最后一艘机动艇！引擎已经点火了！快跳过来！",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "name": null,
+   "role": "甲板持枪负责救生艇下水年轻二副"
+  },
+  {
+   "adult_context": "年满二十一周岁在邮轮报务室执勤的年轻三等通信士。",
+   "age_range": [
+    21,
+    23
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_radio_sos_operator_last_post",
+   "line": "{npc.name}：公海海警巡逻舰雷达回应了！巡逻舰正在全速靠拢！坚持住！",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "name": null,
+   "role": "报务室坚守岗位发出求救年轻报务员"
+  },
+  {
+   "adult_context": "年满二十周岁受雇于晚宴歌舞表演团的年轻随船舞蹈演员。",
+   "age_range": [
+    20,
+    22
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_trapped_ballroom_dancer",
+   "line": "{npc.name}：绑匪在船底安了炸药……那帮人根本就没打算放任何人活着下船！",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "name": null,
+   "role": "晚宴避难浑身湿透惊恐年轻舞蹈演员"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "{proud_heiress_mingyue.name}晚礼服撕裂、裙摆卡死在齐胸冰水中，你潜水用钛刀割断裙摆、把千金托上铁梯平台裹进毛毡，{cadet_salvage_engineer_tian.name}在竖井疏通管路；直到救生艇破浪而出、千金暖过来神志清明，才第一次攥住随侍的手不肯放开。",
+   "id": "combo_heiress_attendant_waterlock_vow",
+   "identity_ids": [
+    "personal_attendant_valet_youth",
+    "shipboard_security_patrol_guard"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "proud_heiress_mingyue",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 5
+     },
+     "reason": "愿以自身胸膛与生命为其挡下漫天狂涛，誓死守护高傲大小姐之尊严与生机。",
+     "stage": "intimate"
+    },
+    {
+     "a": "cadet_salvage_engineer_tian",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 5
+     },
+     "b": "proud_heiress_mingyue",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "感念千金家族资助恩德，在前沿管网拼死开辟生路。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "cadet_salvage_engineer_tian",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "豪门千金专属贴身青年执事侍从与邮轮底层轮机部年轻沉稳且精通管网之见习水手长在今夜前只打过照面。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "proud_heiress_mingyue",
+    "cadet_salvage_engineer_tian"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在海水完全淹没前割断卡死的裙摆，并带领千金安全攀上垂直检修竖井。",
+    "limit_gap": "平日主仆名分森严不可僭越，此刻冰冷海水中只隔一臂，呼吸相闻心跳共鸣。",
+    "meeting_reason": "负四层进水水密隔舱内的割裙脱困与托举复温。",
+    "resource_gap": "千金手握百亿集团大权却力竭受困，侍从精通潜水急救以身涉险誓死护卫主人性命。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_heiress_pride_vs_soaked_dress_warmth",
+    "te_shackle_sever_vs_tender_mouth_air_sha"
+   ]
+  },
+  {
+   "chemistry": "{ruthless_kidnapper_boss_scarface.name}手持铝热燃烧棒在门外疯狂熔锁威逼索要离岸密钥，{proud_heiress_mingyue.name}昂首立于水中用冰冷言辞痛斥其穷途末路，你以身躯死死顶住内闸二道地栓决死对峙，亡命强盗与名门风骨在水密门两端展开惊心动魄之生死较量。",
+   "id": "combo_kidnapper_boss_thermite_standoff",
+   "identity_ids": [
+    "personal_attendant_valet_youth",
+    "underwater_salvage_engineer_cadet",
+    "shipboard_security_patrol_guard"
+   ],
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "ruthless_kidnapper_boss_scarface",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "视作泯灭人性的亡命凶徒，誓以热血粉碎其绑架勒索企图。",
+     "stage": "stranger"
+    },
+    {
+     "a": "ruthless_kidnapper_boss_scarface",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 0
+     },
+     "b": "proud_heiress_mingyue",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 0
+     },
+     "reason": "为抢夺百亿赎金企图将千金逼入绝境强取豪夺。",
+     "stage": "stranger"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "proud_heiress_mingyue",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "跨国航运财阀第一继承人兼慈善基金会年轻理事长只听人提过豪门千金专属贴身青年执事侍从的名字，今夜才第一次对上眼。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "ship_surgeon_rescue_lin",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "邮轮医务室青年值班船医只听人提过豪门千金专属贴身青年执事侍从的名字，今夜才第一次对上眼。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "ruthless_kidnapper_boss_scarface",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "ship_surgeon_rescue_lin",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "邮轮医务室青年值班船医只听人提过跨国海上劫掠武装小队年轻凶戾首领的名字，今夜才第一次对上眼。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "proud_heiress_mingyue",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "ship_surgeon_rescue_lin",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "邮轮医务室青年值班船医只听人提过跨国航运财阀第一继承人兼慈善基金会年轻理事长的名字，今夜才第一次对上眼。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "ruthless_kidnapper_boss_scarface",
+    "proud_heiress_mingyue",
+    "ship_surgeon_rescue_lin"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "彻底拖延时间阻绝暴徒破门等待损管排水平息与救生艇撤离时机。",
+    "limit_gap": "门板一旦被熔穿绑匪冲入扫射人质将当场化为筛子死无全尸。",
+    "meeting_reason": "水密门内外的最后底牌对赌与密钥敲诈周旋。",
+    "resource_gap": "门外拥有重武器与铝热破门剂，门内唯有一柄小折刀与一腔赤胆忠心。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_kidnapper_hostage_parley_vs_lifeboat",
+    "te_ballast_inrush_vs_life_or_death_clock"
+   ]
+  },
+  {
+   "chemistry": "{rival_shipping_scion_haoran.name}手持手杖剑在风暴甲板守死救生艇脱钩扳手阻击追兵，{proud_heiress_mingyue.name}冲上甲板挽住其手杖完成名门合流，你配合割断卡死钢缆，豪门世家在海难灭顶面前彻底摒弃世仇达成共赴生天同盟。",
+   "id": "combo_rival_scion_lifeboat_pact",
+   "identity_ids": [
+    "underwater_salvage_engineer_cadet"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "rival_shipping_scion_haoran",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 5
+     },
+     "b": "proud_heiress_mingyue",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "深佩千金身处险境依然不折脊梁之豪门风骨，誓死以身断后。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "rival_shipping_scion_haoran",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "战术协同盟友，在狂风暴雨中并肩抢险。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "proud_heiress_mingyue",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "邮轮轮机部年轻救捞见习工程师和跨国航运财阀第一继承人兼慈善基金会年轻理事长各怀心事，被这场意外硬塞进同一个角落。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "rival_shipping_scion_haoran",
+    "proud_heiress_mingyue"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "确保全员安全登艇割断吊缆冲出货轮倾覆死亡涡流。",
+    "limit_gap": "脱钩早一秒救生艇平稳落水，迟一秒船体沉没卷入死亡漩涡。",
+    "meeting_reason": "右舷起吊平台狂风暴雨中的最后斩缆登艇突破。",
+    "resource_gap": "少东家掌握机动救生艇开启钥匙，千金拥有航线资源，损管掌控脱钩技术。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_kidnapper_hostage_parley_vs_lifeboat",
+    "te_heiress_pride_vs_soaked_dress_warmth"
+   ]
+  },
+  {
+   "chemistry": "{proud_heiress_mingyue.name}在你怀中登上脱困救生艇迎着破晓红日，千金亲手将断裂之南洋黑珍珠项链缠在青年侍从手腕系上死结，{rival_shipping_scion_haoran.name}在操舵位吹响得胜口哨，豪门大小姐当着全体生还者之面依偎在侍从胸膛，宣告破晓脱困并定下终身不负之盟誓。",
+   "id": "combo_dawn_rescue_pearl_vow_triumph",
+   "identity_ids": [
+    "undercover_maritime_marshal_agent",
+    "rival_shipping_heir_passenger"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "proud_heiress_mingyue",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "player",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "此生此世共历水牢灭顶生死长夜，今后无论风浪多大并肩执手一生永不分离。",
+     "stage": "committed"
+    },
+    {
+     "a": "rival_shipping_scion_haoran",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "proud_heiress_mingyue",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "见证了一段惊心动魄之豪门传奇，由衷含笑脱帽致敬祝愿良缘。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "rival_shipping_scion_haoran",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "跨国航运巨头家族年轻骄矜兼具傲骨之少当家对豪门千金专属贴身青年执事侍从本无交情，眼下却不得不互相照应。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "coast_guard_rescue_swimmer_jun",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "海警巡逻舰青年救援潜水员对豪门千金专属贴身青年执事侍从本无交情，眼下却不得不互相照应。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "proud_heiress_mingyue",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "coast_guard_rescue_swimmer_jun",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "海警巡逻舰青年救援潜水员对跨国航运财阀第一继承人兼慈善基金会年轻理事长本无交情，眼下却不得不互相照应。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "rival_shipping_scion_haoran",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "coast_guard_rescue_swimmer_jun",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "海警巡逻舰青年救援潜水员对跨国航运巨头家族年轻骄矜兼具傲骨之少当家本无交情，眼下却不得不互相照应。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "proud_heiress_mingyue",
+    "rival_shipping_scion_haoran",
+    "coast_guard_rescue_swimmer_jun"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "向全天下昭告千金生还并确立身边青年终身相守之无上名分。",
+    "limit_gap": "从被绑架拘禁面临灭顶之受难者蜕变为携手知己重掌家族大权之真正女王。",
+    "meeting_reason": "风浪渐歇大洋晨光下的救生艇庆贺与定情盟誓确立。",
+    "resource_gap": "救生艇成功发动脱离沉船漩涡，千金毫发无损且密钥完好保留。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_heiress_pride_vs_soaked_dress_warmth",
+    "te_shackle_sever_vs_tender_mouth_air_sha"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_submerged_bilge_breath_resonance",
+   "reach": "二人在齐胸冰冷浊浪中轮流贴近天花板换气时，压在耳边的急促喘息与心跳。",
+   "text": "进水压载隔舱耳畔极弱喘息"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_shipwreck_groan_water_intake_roar",
+   "reach": "穿透水密钢板传来的万吨海水喷涌轰鸣、龙骨受力变形发出的刺耳金属扭曲撕裂声与十级飓风咆哮。",
+   "text": "船体龙骨断裂低频呻吟与海水倒灌狂澜"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_wrench_steel_pipe_knocking_morse",
+   "reach": "垂直竖井内工程师用生铁管钳有节奏敲击水管传导而来的清脆金属回响密码与上方发动机轰鸣。",
+   "text": "通海钢管管钳敲击摩斯求救暗号"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "年满二十一周岁以绝对控股继承人身份掌管远洋航运集团之冷艳傲岸千金大小姐。",
+   "age_range": [
+    21,
+    22
+   ],
+   "appearance_options": [
+    "一袭墨黑真丝抹胸晚礼服，裙摆在齐胸海水中撕裂漂浮如黑蝶，一截拖尾死死卡在铁梯角钢缝里，名媛盘发被巨浪打散贴在面颊，绝美容颜苍白，那双清冷孤绝的美眸却如出鞘寒星般冷冽，昂起长颈紧咬贝齿，浑身散发着名门贵女誓死不屈的骄矜风骨。",
+    "脱险后在救生艇的晨光里裹着毛毡，湿发散在肩头，撕裂的晚礼服下摆被割成及膝的利落长度，眼眸泛着劫后余生的清泪，微仰下巴，低沉的嗓音透着唯有在生死之后才肯展露的深沉依恋。"
+   ],
+   "decision": {
+    "avoids": [
+     "趁火打劫图谋不轨的登徒子",
+     "贪生怕死的软骨头"
+    ],
+    "contrast": "在晚宴交际场上是高不可攀的女王，在沉船绝境的冰冷浊浪里却是冻得发抖、还要先把家族印鉴塞进随侍手里的倔强女子。",
+    "core_value": "千金的尊严高于生命，名门的血脉绝不在强盗与海难面前卑躬屈膝，要活便堂堂正正并肩杀出生天。",
+    "goal_options": [
+     "在海水彻底没顶前由青年随侍割断卡死的裙摆恢复自由行动",
+     "与同伴在狭窄空气缝隙中轮流换气、攀上垂直逃生竖井",
+     "在破晓登上救生艇向背叛者展开雷霆复仇夺回集团控制权"
+    ],
+    "never": [
+     "绝不会在死亡威胁面前交出家族印鉴背叛自己的随行保护者。"
+    ],
+    "prefers": [
+     "沉稳端方恪守底线且在生死绝境面前把主人安危置于自身之上的忠勇君子"
+    ],
+    "pressure_responses": {
+     "breaking": "在登上救生艇脱险瞬间扑入同伴怀中痛哭失声，将珍珠项链塞入同伴掌心低诉心迹。",
+     "high": "在巨浪拍击压载舱灭顶瞬间，反手拉开头顶通气口拉环，先把同伴推向那一尺空气。",
+     "low": "在冰水中挺拔昂首，以清冷嘲弄口吻命令身旁同伴动作快点把裙摆割断。",
+     "mid": "因极度受冻齿关剧烈打颤，被割断裙摆后仍死死攥住同伴袖口，不许自己往下沉。"
+    },
+    "relationship_stance": "外表孤高严苛如冰山，内心却对在漫天暴雨深渊中舍身相护的青年怀有至死不渝的炽烈深情。",
+    "withdrawal": "退回收缩至竖井铁梯最高踏步处，紧抿发紫双唇拒绝向任何人展现绝望。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "proud_heiress_mingyue",
+   "identity": {
+    "authority": "掌握全集团海外离岸信托基金唯一密钥与全权资产调配权，一句话即可决定无数船企存亡。",
+    "exposure": "一旦在受胁迫下签字转让航线将导致百年家族基业瞬间被吞并崩塌。",
+    "hidden": "平日习惯用颐指气使的冷漠训诫掩饰内心孤独，这三年来早已把这位在暴风骤雨中永远挡在自己身前的青年随侍，视作生命中唯一的坚实依靠。",
+    "limits": [
+     "体能偏弱不擅长距离水下屏气负重游泳",
+     "极度自傲视在属下面前展露狼狈软弱为毕生莫大耻辱"
+    ],
+    "obligations": [
+     "誓死保全家族海外航线控制权绝不向暴徒低头，带领随侍安然生还踏上陆地。"
+    ],
+    "resources": [
+     "一串贴身佩戴的南洋顶级黑珍珠项链",
+     "一枚刻有家族最高印鉴的纯铂金机械钥匙小挂坠"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在冰冷浊浪中专注割断卡死裙摆时那份目不斜视的端方正气",
+     "在万钧海水灭顶瞬间先把空气让给自己的大无畏担当"
+    ],
+    "boundaries": [
+     "在公众场合与家族元老面前维持名媛庄严仪态",
+     "严禁任何带有轻薄性质的言语亵渎"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "卸下千金重担后甘愿一生与身旁知己在广阔大洋并肩看尽朝暮之终身眷侣",
+    "dislikes": [
+     "轻佻冒犯",
+     "以恩人姿态居功自傲"
+    ],
+    "expression": "耳尖发烫亲手将贴身佩戴的南洋黑珍珠项链系在同伴手腕上，紧扣同伴十指，清泪微淌轻声宣告从此同生共死共负江山。",
+    "likes": [
+     "海浪平息后并肩裹在同一领救生毯下静听破晓心跳的清宁",
+     "在私下无外人时被直呼闺名而非疏离的‘大小姐’"
+    ],
+    "preconditions": [
+     "跨国航运财阀第一继承人兼慈善基金会年轻理事长与对方都已完全清醒，眼前的危机已经解除",
+     "跨国航运财阀第一继承人兼慈善基金会年轻理事长出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "跨国航运财阀第一继承人兼慈善基金会年轻理事长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "flooded_bilge_pump_corridor",
+     "to": 29
+    },
+    {
+     "from": 30,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1379
+    },
+    {
+     "from": 1380,
+     "location_id": "ballast_tank_watertight_hold",
+     "to": 1409
+    },
+    {
+     "from": 1410,
+     "location_id": "vertical_pipe_escape_shaft",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "侍从右手虎口在急促割绳中被角钢锐角划开两寸血口鲜血狂流。",
+      "option": "侍从潜入浑浊冰水中以合金折刀精准割断卡死的真丝裙摆"
+     },
+     {
+      "cost": "千金呛进一大口海水，剧烈咳嗽，肺部刺痛。",
+      "option": "千金在水位灭顶瞬间扯下珍珠项链卡住泄压拉环，替潜在水下的侍从拉开头顶通气口"
+     }
+    ],
+    "pressure": "若不能在十五秒内用短刀割断浸透海水的裙摆，水位没过头顶将导致千金当场溺毙。",
+    "trigger": "涌入压载舱的海水猛然漫过肩膀逼近下颚，头顶仅存十公分空气缝隙，而千金被卡死的真丝裙摆在冷水中吸水发胀，死死拽住铁栏角钢。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "……别叫大小姐了……直接叫我的名字。毯子很暖，海也平了……我现在很清醒。所以这句话你给我听清楚：坐过来，把手给我……不准松开……听到没有？！",
+    "surface": "门外的匪徒听着！本小姐家的万吨巨轮容不得你们放肆！就算把这艘船沉入大西洋，你们也休想拿到半个美分的赎金！"
+   }
+  },
+  {
+   "adult_context": "年满二十三岁受雇于海外洗钱财团策划邮轮绑架之亡命雇佣兵年轻头目。",
+   "age_range": [
+    22,
+    24
+   ],
+   "appearance_options": [
+    "一身穿旧沾满机油与咸涩海水的深灰特战战术背心，左脸横亘着一道贯穿面颊的狰狞弹伤伤疤，短发如针，眼神狂暴贪婪如海狼，手里端着一把折叠枪托短管冲锋枪，腰间挂着高爆手雷。",
+    "站在水密门外干燥台阶上，用枪托猛烈砸击厚重生铁观察窗，嘴角嚼着槟榔，在暴雨漏水声中发出刺耳冷笑，誓要在沉船前勒索出全套离岸密码。"
+   ],
+   "decision": {
+    "avoids": [
+     "视死如归敢以命换命的硬茬子",
+     "精通水战的海事特警"
+    ],
+    "contrast": "看似无法无天的公海恶霸，在面对大自然万吨巨浪灭顶天威时同样暴露出战栗恐惧的懦夫本质。",
+    "core_value": "公海之上唯有金钱与枪杆子说了算，只要拿到百亿赎金，沉几千人不过是海难意外事故。",
+    "goal_options": [
+     "在水位没顶前迫使千金隔着观察窗喊出离岸信托核心密钥",
+     "在水密门彻底锁死前炸开门栓将人质作为肉盾押往救生艇",
+     "见势不妙枪杀全员独吞珠宝箱乘坐最后快艇逃窜"
+    ],
+    "never": [
+     "绝不会在巨额金钱诱惑面前良心发现放弃抢劫。"
+    ],
+    "prefers": [
+     "一碰就交出密码的软骨头"
+    ],
+    "pressure_responses": {
+     "breaking": "被倒灌狂涛卷入断裂电缆触电翻滚，在惨叫中弃枪逃命。",
+     "high": "在海警警笛逼近时，疯狂朝水密门缝隙盲射子弹实施威吓。",
+     "low": "在门外用枪柄连续敲击钢板，大声倒数计时施加精神压迫。",
+     "mid": "见水势蔓延，点燃铝热剂燃烧棒企图强行融化门锁锁芯。"
+    },
+    "relationship_stance": "唯利是图泯灭人性，将千金与侍从视作随手可碾碎的摇钱树与替死鬼。",
+    "withdrawal": "退回收缩至主甲板逃生艇绞盘旁，劫持救生艇准备强行下水。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "ruthless_kidnapper_boss_scarface",
+   "identity": {
+    "authority": "掌控全船六名持枪暴徒与破坏水密门的炸药引爆器，对底层人质拥有生杀予夺大权。",
+    "exposure": "一旦行动失败落入海事法庭将被判处终身监禁不得假释。",
+    "hidden": "实则是被背后财团拖欠佣金逼上绝路的亡命之徒，若不能在破晓前拿到赎金全家都将被黑帮灭口。",
+    "limits": [
+     "完全不通邮轮底舱复杂的双层底管路结构极易迷失",
+     "畏惧船体倾覆沉没引发的巨大吸力漩涡"
+    ],
+    "obligations": [
+     "逼迫大小姐交出信托私章与海外密码，带着巨款搭乘快艇逃往中立港口。"
+    ],
+    "resources": [
+     "一具用于强行破门的特种铝热剂燃烧切割棒",
+     "两套专业快速脱钩潜水面镜配呼吸管"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "巨款到手带来的狂妄癫狂",
+     "被逼到绝路还敢隔着门跟自己对骂的硬骨头对手"
+    ],
+    "boundaries": [
+     "只谈钱，不谈别的"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "拿钱走人、在公海留下恶名的法外狂徒",
+    "dislikes": [
+     "被蔑视",
+     "到嘴的鸭子飞了"
+    ],
+    "expression": "扔掉打光子弹的空冲锋枪倒在泥泞甲板上举手投降，颤声求饶承认对手是一对惹不起的亡命阎罗。",
+    "likes": [
+     "看着离岸账户的数字一位位跳进自己口袋",
+     "在公海快艇上狂饮香槟庆祝得手"
+    ],
+    "preconditions": [
+     "跨国海上劫掠武装小队年轻凶戾首领与对方都已完全清醒，眼前的危机已经解除",
+     "跨国海上劫掠武装小队年轻凶戾首领出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     2,
+     3
+    ]
+   },
+   "public_role": "跨国海上劫掠武装小队年轻凶戾首领",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "vertical_pipe_escape_shaft",
+     "to": 29
+    },
+    {
+     "from": 30,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1379
+    },
+    {
+     "from": 1380,
+     "location_id": "flooded_bilge_pump_corridor",
+     "to": 1409
+    },
+    {
+     "from": 1410,
+     "location_id": "flooded_bilge_pump_corridor",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "侍从双手前臂被爆裂蒸发的高温蒸汽严重烫伤起大面积水泡。",
+      "option": "侍从合力捧起冰冷海水持续泼洒降温使铝热剂失效应激熄灭"
+     },
+     {
+      "cost": "千金右脚踝在剧烈蹬踏中遭受铁栓反震重度扭伤红肿渗血。",
+      "option": "千金忍着脚踝剧痛用双足猛力踹落内侧生铁二道安全落锁地栓"
+     }
+    ],
+    "pressure": "若不能在二十秒内引流海水喷淋门板降温并从内侧锁死机械二道防盗栓，门板崩塌瞬间绑匪将冲入实施乱枪扫射。",
+    "trigger": "绑匪头目点燃铝热剂燃烧棒对准水密门核心铰链实施暴击熔切，刺目光芒照亮隔舱，高温将门板烧得通红发白。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "别敬酒不吃吃罚酒！老子不管你老子是谁！今晚拿不到那串离岸密钥，谁也别想活着走出这个铁棺材！",
+    "surface": "大小姐！水已经漫到脖子了吧？！我的铝热棒能烧穿航母钢板！喊出密码，老子立刻开门拉你上来坐快艇！否则十分钟后，你就是大西洋底的一具冰尸！"
+   }
+  },
+  {
+   "adult_context": "年满二十一周岁海洋工程系见习兼任邮轮损管抢修组关键技术青年水手长。",
+   "age_range": [
+    21,
+    23
+   ],
+   "appearance_options": [
+    "一身穿旧泛白沾满黑色机油与黄油的连体防静电工装裤，头戴带有头灯的安全头盔，腰挂重型管钳与生铁撬棍，身材精瘦结实，面容坚毅目光明亮，在没腰深的海水中游刃有余犹如游鱼穿梭。",
+    "单手攀在垂直竖井铁梯上，用扳手熟练敲击泄压阀门，神情专注沉静，透着年轻理工学者对机械结构洞若观火的从容自信。"
+   ],
+   "decision": {
+    "avoids": [
+     "盲目慌乱乱动阀门者",
+     "自私自利抢夺救生装备之徒"
+    ],
+    "contrast": "看似一身油污不起眼的底层小工匠，在生死存亡关头却能爆发出犹如擎天博玉柱般的钢铁担当。",
+    "core_value": "损管的职责是守卫生命的航线，哪怕船体只剩最后一寸干燥钢板，也绝不放弃任何生还希望。",
+    "goal_options": [
+     "在水位淹没排风口前抢通垂直检修竖井上行逃生通道",
+     "手动旋紧旁通阀门延缓压载舱注水速度为二人脱身赢得时间",
+     "引导二人避开漏电走廊直达右舷机动救生艇起吊机"
+    ],
+    "never": [
+     "绝不会在还有同伴受困水牢时独自乘坐救生艇逃生。"
+    ],
+    "prefers": [
+     "尊重工程规律且在绝境中不失沉着理智之同行勇士"
+    ],
+    "pressure_responses": {
+     "breaking": "被坠落钢梁砸伤右腿依然死死拉住救生绳索拖拽千金登上干燥平台。",
+     "high": "在歹徒开枪封锁竖井时，冒险打开高压消防蒸汽阀门喷射白雾掩护突围。",
+     "low": "在管道上端用管钳敲击摩斯密码，向水牢内二人传递减压读数与逃生指引。",
+     "mid": "潜入浊水中用生铁撬棍强行别住卡死的泄压阀门手柄为水流泄压。"
+    },
+    "relationship_stance": "质朴诚恳重情重义，深佩千金之高傲傲骨与青年侍从之忠肝义胆。",
+    "withdrawal": "退回收缩至主机轴隧密封舱，用气动扳手锁死后门阻截追兵。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "cadet_salvage_engineer_tian",
+   "identity": {
+    "authority": "掌控全船压载水泵手动旁路开关与水密门备用机械泄压手柄操作权。",
+    "exposure": "私自开启紧急旁路若引发其他舱室失衡将被事故调查组追责吊销适任证书。",
+    "hidden": "实则是依靠千金家族奖学金完成学业的寒门出身，立誓要在海难中以毕生所学报答恩主大小姐。",
+    "limits": [
+     "体能因连续三小时深水排险消耗过半面临体力透支",
+     "手无寸铁缺乏正面击毙持枪歹徒之武力手段"
+    ],
+    "obligations": [
+     "誓死排查底层进水盲区维持船体最后漂浮浮力，拯救每一位受困舱底的同胞。"
+    ],
+    "resources": [
+     "一桶未拆封的高密度水下固化快速堵漏胶泥",
+     "一副军用双筒水下密封夜视潜水镜"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然脊梁如铁视死如归的豪门风骨",
+     "在血火海难中将背后坦然交托的赤诚信任"
+    ],
+    "boundaries": [
+     "在损管抢修期间恪守工匠清白准则",
+     "恪守同袍礼节绝不僭越"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "狂涛骇浪沉船深渊中永远为英雄同袍排险引路之钢铁龙骨",
+    "dislikes": [
+     "弄虚作假",
+     "践踏损管安全操典"
+    ],
+    "expression": "利落抹去护目镜上的海水向同伴竖起大拇指，将救生安全绳牢牢扣在千金腰间，朗声宣告通道已彻底凿通愿以身护航到底。",
+    "likes": [
+     "排水泵重新轰鸣抽水时抹去脸上油汗的踏实快慰",
+     "在破晓晨光中见证战友平安登艇的欣慰一笑"
+    ],
+    "preconditions": [
+     "邮轮底层轮机部年轻沉稳且精通管网之见习水手长与对方都已完全清醒，眼前的危机已经解除",
+     "邮轮底层轮机部年轻沉稳且精通管网之见习水手长出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "邮轮底层轮机部年轻沉稳且精通管网之见习水手长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "flooded_bilge_pump_corridor",
+     "to": 29
+    },
+    {
+     "from": 30,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1379
+    },
+    {
+     "from": 1380,
+     "location_id": "vertical_pipe_escape_shaft",
+     "to": 1409
+    },
+    {
+     "from": 1410,
+     "location_id": "ballast_tank_watertight_hold",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "工程师双臂在水中遭受二百二十伏交流电瞬间剧烈电击肌肉重度痉挛。",
+      "option": "工程师潜入水中徒手撕开电缆绝缘层在水中强行短接打火启泵"
+     },
+     {
+      "cost": "侍从胸口肋骨被猛烈回弹的生铁摇把重重撞中发生骨裂大口咳血。",
+      "option": "侍从在水下合力用重型生铁摇把强行机械摇动应急排污大口径阀门"
+     }
+    ],
+    "pressure": "若不能在两分钟内潜入水底徒手完成断缆短接重新启动水泵，整个负四层将在一百二十秒内彻底被浑水灌满。",
+    "trigger": "排水泵控制箱动力电缆在水下被漂浮重木扯断，巨型离心泵瞬间停转，进水速度当场翻倍狂飙。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "大小姐，当年老会长设立助学金供我念完大学，我这条命今天就是赔在这条船上，也必定保送您毫发无损回到岸上！",
+    "surface": "大小姐！兄弟！听得到吗？！水泵电路被我强行接通了！排风竖井的铁梯是畅通的！快顺着安全绳往上爬！龙骨快撑不住了！"
+   }
+  },
+  {
+   "adult_context": "年满二十一周岁掌控对立船业财团海上运力之青年豪门少主兼名门名流。",
+   "age_range": [
+    21,
+    23
+   ],
+   "appearance_options": [
+    "一身穿旧沾满海水污渍但依然笔挺的深黑高定燕尾服，内衬真丝马甲纽扣解开，佩戴金丝单片眼镜，头发被暴雨淋湿散乱在额前，手握一柄防身纯钛合金折叠手杖，眼神桀骜不驯，透着名门公子特有的凌厉与面对生死的大气豪情。",
+    "立于露天倾斜甲板栏杆旁，单手撑住起吊架顶住暴风雨，迎着漫天海浪狂笑，手中紧握救生艇主缆脱钩扳手，面对家族世仇千金却展现出绝不趁人之危的名门风骨。"
+   ],
+   "decision": {
+    "avoids": [
+     "贪生怕死忘恩负义之辈",
+     "偷鸡摸狗的盗匪"
+    ],
+    "contrast": "看似游戏人间的纨绔贵胄，在大是大非海难天威面前却展现出惊天动地的世家浩然担当。",
+    "core_value": "名门的竞争在商海公堂，趁火打劫落井下石是下三滥所为，要在巅峰堂堂正正赢下一切。",
+    "goal_options": [
+     "在救生艇起吊机旁坚守阵地阻击匪徒为千金突围争取最后时间",
+     "割断救生艇卡死的主缆确保全员顺利脱钩落海生还",
+     "在破晓脱困后向国际海事法庭共同指控幕后黑手的绑架罪行"
+    ],
+    "never": [
+     "绝不会在世仇落难时做出任何卑鄙下作之落井下石恶行。"
+    ],
+    "prefers": [
+     "风骨凛然敢作敢当且不甘屈居人下之绝代豪杰"
+    ],
+    "pressure_responses": {
+     "breaking": "右臂骨折鲜血淋漓依然单手挥剑将逼近的暴徒挑落风浪深渊。",
+     "high": "在巨浪拍击救生艇危急关头，以血肉之躯死死抱住起吊缆绳防止快艇侧翻。",
+     "low": "在甲板高处撑伞冷嘲热讽，以嘲弄口吻督促千金动作快点别丢了名门面子。",
+     "mid": "见匪徒持枪追来，毫不犹豫拔出手杖剑横在走廊口阻绝通道。"
+    },
+    "relationship_stance": "狂放孤傲恩怨分明，对敢于在冰水深渊中誓死护卫千金的青年随侍怀有由衷敬佩。",
+    "withdrawal": "退回收缩至救生艇艉机操舵位，拉响汽笛呼唤幸存人员登艇。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "rival_shipping_scion_haoran",
+   "identity": {
+    "authority": "掌握最后两艘机动救生艇的所有权凭证与调用海外远洋护航拖轮的大权。",
+    "exposure": "若被外界拍到弃船逃生丑闻将丧失争夺家族第一继承人之法定资格。",
+    "hidden": "多年来与千金在名流社交界齐名争锋，表面视其为商业死敌，内心深处却早被那份傲雪凌霜的风采折服。",
+    "limits": [
+     "体能因晕船与受冻有所衰减难以持久近战",
+     "受制于名门贵族做派不屑于粗野厮杀"
+    ],
+    "obligations": [
+     "誓死维护世家大族之风骨名节，在海难面前绝不当抛弃妇孺独自偷生的懦夫。"
+    ],
+    "resources": [
+     "一盒可在大暴雨中强行点燃的军工级镁铝遇险发烟筒",
+     "一柄镀金瑞士战术救援多功能钳"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "商场上从不让自己半步、落水后也不肯先开口求救的那股傲气",
+     "在生死淬炼中将自身当做肉盾护佑同袍的至纯大担当"
+    ],
+    "boundaries": [
+     "在豪门竞争场合恪守君子边界",
+     "恪守同侪礼节绝不轻浮失仪"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "惊涛骇浪商海风云中永远可与之一决高下亦可生死相托之宿命知己",
+    "dislikes": [
+     "弄虚作假",
+     "践踏名节"
+    ],
+    "expression": "利落收起手杖剑将干爽大衣扔在千金身上，向二人潇洒敬礼致意，朗声宣告今日大小姐欠自己一条命，商海重逢定要在公堂之上再决高下。",
+    "likes": [
+     "在滔天巨浪中并肩击碎狂徒阴谋的痛快豪情",
+     "破晓脱险后共同举杯相视大笑的释然快慰"
+    ],
+    "preconditions": [
+     "跨国航运巨头家族年轻骄矜兼具傲骨之少当家与对方都已完全清醒，眼前的危机已经解除",
+     "跨国航运巨头家族年轻骄矜兼具傲骨之少当家出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "跨国航运巨头家族年轻骄矜兼具傲骨之少当家",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "flooded_bilge_pump_corridor",
+     "to": 29
+    },
+    {
+     "from": 30,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1379
+    },
+    {
+     "from": 1380,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1409
+    },
+    {
+     "from": 1410,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "少东家右臂在剧烈摆荡中脱臼受创严重挫伤红肿脱力。",
+      "option": "少东家冒死攀上悬空起吊臂以精钢手杖剑奋力劈断卡死副缆"
+     },
+     {
+      "cost": "侍从双腿小腿被铁钩挂破两道深长血槽鲜血淋漓受海水盐分剧痛。",
+      "option": "侍从飞身跃上摇晃艇身用靴跟全力蹬开变形卡榫使快艇平稳落水"
+     }
+    ],
+    "pressure": "若不能在十五秒内用手杖剑切断受力副缆，救生艇将被彻底掀翻沉入大西洋底。",
+    "trigger": "救生艇副起吊滑轮在暴风雨中被扭曲变形的集装箱铁板卡死，救生艇单侧悬空三十米高空随时倾覆坠海摔得粉碎。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "随侍兄弟！护好你家大小姐！那位嘴碎脾气大，但骨子里比谁都硬！今天你能把人从水底下带上来，本少爷服你！快上艇！",
+    "surface": "大小姐！看在两家老爷子当年一起下过南洋的份上，本少爷今天把这艘救生艇留给你！快给本少爷爬上来！别死在这帮下三滥手里丢了我们航运世家的脸！"
+   }
+  },
+  {
+   "adult_context": "年满二十六岁持远洋船医资格的邮轮医务室青年主治医师。",
+   "age_range": [
+    25,
+    27
+   ],
+   "appearance_options": [
+    "白大褂外胡乱套着橙色救生衣，听诊器挂在脖子上，医药箱用尼龙带捆在背后，镜片上全是水雾，说话快而稳。",
+    "跪在倾斜过道的积水里给伤员包扎，一边数脉搏一边抬头喊下一个，手稳得像在手术台前。"
+   ],
+   "decision": {
+    "avoids": [
+     "抢药的人",
+     "在急救点大吵大闹的贵宾"
+    ],
+    "contrast": "嘴上冷得像在宣读病历，看到有人被从水里拖上来时却会第一个冲过去。",
+    "core_value": "先救能救的，再救最难救的，一个都不许落下。",
+    "goal_options": [
+     "在三层干燥过道搭起临时急救点",
+     "给失温最重的人优先裹上铝箔毯",
+     "守住急救箱直到最后一艘救生艇离船"
+    ],
+    "never": [
+     "绝不会扔下伤员先上救生艇。"
+    ],
+    "prefers": [
+     "听指挥、不添乱的帮手"
+    ],
+    "pressure_responses": {
+     "breaking": "被倾斜的船体甩到舱壁上，额头流血还在给伤员扎止血带。",
+     "high": "把最后一支肾上腺素塞进侍从手里，让侍从带下去救人。",
+     "low": "在过道里有条不紊地给伤员分诊编号。",
+     "mid": "冲着慌乱的人群吼一声，让所有人按顺序排队。"
+    },
+    "relationship_stance": "对谁都一样客气，也一样不客气；只敬重在混乱里还肯听指挥的人。",
+    "withdrawal": "退回过道尽头，抱着急救箱清点剩下的药品。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "ship_surgeon_rescue_lin",
+   "identity": {
+    "authority": "掌握全船急救药品与保温物资的调配，决定伤员登艇的先后顺序。",
+    "exposure": "若分诊出错导致重伤员被留在船上，将面临海事法庭追责。",
+    "hidden": "上船前刚在陆地医院被排挤出局，这趟航程本想当作散心，没想到成了职业生涯最长的一夜。",
+    "limits": [
+     "不会游泳，下不了压载舱",
+     "医务室已被淹，药品只剩随身这一箱"
+    ],
+    "obligations": [
+     "在弃船前把每一个伤员稳住、裹好、送上救生艇。"
+    ],
+    "resources": [
+     "一只防水急救箱，内有肾上腺素与止血带",
+     "两卷救生铝箔保温毯"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "浑身湿透还记得先问别人伤口的那份细心",
+     "在混乱里一句话就能让人安静下来的沉稳"
+    ],
+    "boundaries": [
+     "值班期间只谈病情"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "每次劫后余生时都会在场的那个人",
+    "dislikes": [
+     "逞强",
+     "不遵医嘱"
+    ],
+    "expression": "在救生艇上把最后一条干毛巾扔给对方，说回港后记得来复查。",
+    "likes": [
+     "下了班喝一杯不加糖的热咖啡"
+    ],
+    "preconditions": [
+     "邮轮医务室青年值班船医与对方都已完全清醒，眼前的危机已经解除",
+     "邮轮医务室青年值班船医出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "邮轮医务室青年值班船医",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 29
+    },
+    {
+     "from": 30,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1379
+    },
+    {
+     "from": 1380,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1409
+    },
+    {
+     "from": 1410,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "急救箱撞上舱壁，一半药瓶碎在水里。",
+      "option": "船医把急救箱绑上救生圈顺着倾斜过道滑过去"
+     },
+     {
+      "cost": "侍从膝盖撞上水下的铁箱，一瘸一拐好几天。",
+      "option": "侍从背起千金涉水冲到过道另一头的急救点"
+     }
+    ],
+    "pressure": "若不能在十分钟内把急救箱和铝箔毯送到千金身边，失温将引发心律失常。",
+    "trigger": "被托出压载舱的千金脉搏微弱、体温跌破三十五度，船医却被困在倾斜过道另一头。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "手别抖……再撑一会儿，救生艇就在上面。",
+    "surface": "所有伤员往这边靠！能走的扶着不能走的！保温毯一人一条，不许抢！"
+   }
+  },
+  {
+   "adult_context": "年满二十五岁的公海海警巡逻舰正式救援潜水员。",
+   "age_range": [
+    24,
+    26
+   ],
+   "appearance_options": [
+    "黑色干式潜水服外挂着救援吊带，面镜推在额头上，腰间挂着割绳刀与信号灯，从直升机吊索上一跃而下。",
+    "在救生艇旁的浪里踩水，一手攀住艇舷一手比出手势，声音被风浪撕碎也要喊清楚每一个指令。"
+   ],
+   "decision": {
+    "avoids": [
+     "抢先往吊索上爬的人"
+    ],
+    "contrast": "对讲机里冷静得像机器，把最后一个人吊上舰后却会蹲在甲板上大笑。",
+    "core_value": "浪再大也要把人捞回来，但不能把自己的队员搭进去。",
+    "goal_options": [
+     "在漩涡外侧接住救生艇",
+     "按伤情顺序转运伤员",
+     "最后一个离开海面"
+    ],
+    "never": [
+     "绝不会在还有一人留在海上时收队。"
+    ],
+    "prefers": [
+     "听指令、不乱跳船的生还者"
+    ],
+    "pressure_responses": {
+     "breaking": "被浪打得呛水，仍死死攥着牵引绳不放。",
+     "high": "顶着漩涡外缘把救生艇硬拖出来。",
+     "low": "在无线电里沉着报浪高与距离。",
+     "mid": "亲自下水游向救生艇系上牵引绳。"
+    },
+    "relationship_stance": "干脆利落，敬重每一个在海上没放弃的人。",
+    "withdrawal": "退回小艇艇艏，盯着海面一言不发。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "coast_guard_rescue_swimmer_jun",
+   "identity": {
+    "authority": "指挥海警小艇与吊索接驳，决定救生艇上的人按什么顺序转运。",
+    "exposure": "若冒进贴近沉船被漩涡吸走，救援小艇将全员遇险。",
+    "hidden": "第一次独立带队出海救援，出发前在甲板上吐了两回。",
+    "limits": [
+     "巡逻舰赶到时沉船漩涡尚未平息，小艇不敢贴近",
+     "吊索一次只能拉起一人"
+    ],
+    "obligations": [
+     "在破晓前把救生艇上每一个人平安转运上巡逻舰。"
+    ],
+    "resources": [
+     "一套救援吊带与割绳刀",
+     "一具防水强光信号灯"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在救生艇上把指令重复得一字不差的那份冷静",
+     "先把伤员推上吊索、自己最后上来的那份担当"
+    ],
+    "boundaries": [
+     "救援期间只谈正事"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "风浪里永远会准时出现的那盏信号灯",
+    "dislikes": [
+     "逞强",
+     "不听指令"
+    ],
+    "expression": "把一枚海警臂章塞进对方手里，说下次出海记得别再遇上这种天气。",
+    "likes": [
+     "任务结束后在甲板上晒太阳"
+    ],
+    "preconditions": [
+     "海警巡逻舰青年救援潜水员与对方都已完全清醒，眼前的危机已经解除",
+     "海警巡逻舰青年救援潜水员出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "海警巡逻舰青年救援潜水员",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 29
+    },
+    {
+     "from": 30,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1379
+    },
+    {
+     "from": 1380,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1409
+    },
+    {
+     "from": 1410,
+     "location_id": "upper_lifeboat_launch_platform",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "潜水员被浪拍上艇舷，肋骨撞得青紫。",
+      "option": "潜水员冒浪游过去把牵引绳系上救生艇艇艏"
+     },
+     {
+      "cost": "侍从手掌被发动机烫出一串水泡。",
+      "option": "侍从在颠簸中拆开发动机进气口清掉海草重新点火"
+     }
+    ],
+    "pressure": "若不能在十分钟内系上牵引绳，救生艇会被浪推回漩涡边缘。",
+    "trigger": "救生艇冲出沉船漩涡时发动机熄火，在三米浪里打横漂向沉船残骸。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "没事了……都没事了……人都在。",
+    "surface": "救生艇听着！别站起来！把绳子绑在艇艏！我数到三就拉！"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "暴风雨子夜一点整，货轮倾斜三十度，通海阀破裂，距离隔舱彻底灭顶仅剩八十分钟",
+  "minute": 1380
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster"
+ ],
+ "custom": false,
+ "customs": [
+  "在冰水中浸泡导致晚礼服吸水下坠阻碍呼吸时，侍从需以短刀割断被浸湿的裙摆拖尾，再为千金裹上一件防水防寒毛毡。",
+  "当水位逼近天花板寻找通气孔时，两人需在水面残留的一尺空气隙内轮流换气，一人吸气时另一人托住对方腰背浮在最高点。",
+  "在水流冲击险些冲散时，千金需扯断颈项间南洋白珠项链将其缠绕在同伴指节，以此宣告性命相托之豪门信诺。",
+  "登上救生艇破晓脱困时，千金需亲手将抢险救生毯裹于同伴身上，并当众宣布身旁青年从此为家族最高特许供奉。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "特大雷暴撕裂货轮外壳，海水倒灌负四层压载隔舱漫过膝盖，水密门自锁断绝退路。",
+    "千金的真丝裙摆被冲进铁梯角钢夹缝死死卡住，侍从潜入浑浊冰水中以合金折刀小心割断。",
+    "裙摆割断瞬间千金脱力下沉，侍从将其托上铁梯平台，裹上防水毛毡抵御刺骨寒潮。"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "h_mingyue_silk_dress_tied_chin_lift",
+    "h_scarface_thermite_torch_slam_shout",
+    "h_tian_pipe_wrench_tapping_morse"
+   ],
+   "id": "a_entry_ballast_tie_sever_crisis",
+   "location_ids": [
+    "ballast_tank_watertight_hold"
+   ],
+   "start_minute": 1380,
+   "tags": [
+    "intimate"
+   ],
+   "title": "负四层进水水密隔舱割裙脱困"
+  },
+  {
+   "beats": [
+    "进水水位暴涨至胸口逼近天花板，两人仰起下巴贴在天花板仅存十公分空气隙内艰难呼吸。",
+    "千金因失温剧烈打颤，侍从托住其腰背浮在最高点，两人轮流贴近通气口换气，一人吸气时另一人数着秒。",
+    "千金咬牙扯下颈项黑珍珠项链缠在侍从指尖，把家族印鉴托付出去，建立深海生死同盟。"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [
+    "h_mingyue_pearl_necklace_tear_whisper",
+    "h_scarface_thermite_torch_slam_shout",
+    "h_haoran_swordstick_railing_strike"
+   ],
+   "id": "a_air_pocket_mouth_breathing_huddle",
+   "location_ids": [
+    "ballast_tank_watertight_hold"
+   ],
+   "start_minute": 1425,
+   "tags": [
+    "intimate"
+   ],
+   "title": "最后空气隙轮流换气托举"
+  },
+  {
+   "beats": [
+    "工程师从上方敲开竖井检修天窗，抛下高浮力救生尼龙织带将二人腰身死死相连。",
+    "侍从在下方用肩膀托举千金双足对抗倒灌漩涡拉力，千金忍受脚踝剧痛一步步攀上湿滑铁梯。",
+    "绑匪在下方开枪射穿铁板，子弹擦着梯级飞过，全员合力翻入三层干燥过道反手锁死天窗。"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "h_tian_pipe_wrench_tapping_morse",
+    "h_mingyue_pearl_necklace_tear_whisper",
+    "h_scarface_thermite_torch_slam_shout"
+   ],
+   "id": "a_shaft_ladder_vertical_escape_climb",
+   "location_ids": [
+    "vertical_pipe_escape_shaft"
+   ],
+   "start_minute": 25,
+   "tags": [
+    "workplace"
+   ],
+   "title": "检修垂直竖井绳索攀爬突围"
+  },
+  {
+   "beats": [
+    "三层走廊积水漫过小腿，断裂电缆在水面上炸开蓝色高压电弧阻断通往甲板之通路。",
+    "工程师冒险用绝缘管钳挑开带电线缆，侍从扶着千金踩着漂浮木箱在电光闪烁间极限涉水穿行。",
+    "千金亲手拉下走廊防火分电闸阻断漏电源，为后方幸存人员开辟安全通道。"
+   ],
+   "duration_minutes": 35,
+   "hook_ids": [
+    "h_tian_pipe_wrench_tapping_morse",
+    "h_haoran_swordstick_railing_strike",
+    "h_mingyue_silk_dress_tied_chin_lift"
+   ],
+   "id": "a_corridor_live_wire_pump_sabotage",
+   "location_ids": [
+    "flooded_bilge_pump_corridor"
+   ],
+   "start_minute": 70,
+   "tags": [
+    "workplace"
+   ],
+   "title": "积水走廊避开漏电短接启泵"
+  },
+  {
+   "beats": [
+    "全员冲上倾斜三十五度的露天甲板，狂风暴雨怒号，少东家挥动手杖剑斩断卡死副缆。",
+    "绑匪头目持枪冲上甲板企图抢夺快艇，被千金掷出的生铁挂锁重重砸中面门跌入惊涛巨浪。",
+    "机动救生艇成功脱钩轰然砸入大海，推进器爆发怒吼顶着十级黑浪全速冲出沉船漩涡。"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [
+    "h_haoran_swordstick_railing_strike",
+    "h_mingyue_dawn_blanket_triumph_vow",
+    "h_tian_pipe_wrench_tapping_morse"
+   ],
+   "id": "a_upper_deck_storm_lifeboat_launch",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "start_minute": 105,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "露天甲板巨浪搏击斩缆下海"
+  },
+  {
+   "beats": [
+    "暴风雨骤停破晓红日跃出大洋海平线，晨曦金光洒满在海面平稳起伏的机动救生艇上。",
+    "大小姐亲手将救生防寒毯裹在青年侍从肩头，靠在同伴胸前紧扣其缠满黑珍珠之手掌。",
+    "远方海警巡逻舰鸣响悠长汽笛迎面驶来，公海海难惊天危机在朝霞与真情定格中胜利落幕。"
+   ],
+   "duration_minutes": 25,
+   "hook_ids": [
+    "h_mingyue_dawn_blanket_triumph_vow",
+    "h_haoran_swordstick_railing_strike",
+    "h_mingyue_pearl_necklace_tear_whisper"
+   ],
+   "id": "a_dawn_ocean_blanket_vow_triumph",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "start_minute": 135,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "破晓怒海同披毯相拥终身盟誓"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.45,
+  "nonbinary": 0.05
+ },
+ "default_person": "second",
+ "era": "当代公海特大雷暴雨之夜（豪华远洋邮轮底舱倾覆前夕）",
+ "extends": null,
+ "forbidden_terms": [
+  "智能手机卫星通讯",
+  "微型水下推进推进器",
+  "超轻充气救生救生囊",
+  "高能激光切割割刀",
+  "无线电求救呼叫手表",
+  "纳米防水防寒贴片"
+ ],
+ "hooks": [
+  {
+   "id": "h_mingyue_silk_dress_tied_chin_lift",
+   "kind": "approach",
+   "location_ids": [
+    "ballast_tank_watertight_hold",
+    "flooded_bilge_pump_corridor"
+   ],
+   "slot": "proud_heiress_mingyue",
+   "text": "{proud_heiress_mingyue.name}的晚礼服拖尾死死卡在浸没水中的铁梯角钢缝里，海水已漫到锁骨，微仰尖翘下巴，美眸含怒带煞凝视你低喝：“呆立着看什么？！既然是本小姐的贴身随侍，还不速速潜下去把这截裙摆割断！”"
+  },
+  {
+   "id": "h_mingyue_pearl_necklace_tear_whisper",
+   "kind": "approach",
+   "location_ids": [
+    "ballast_tank_watertight_hold",
+    "vertical_pipe_escape_shaft",
+    "upper_lifeboat_launch_platform"
+   ],
+   "slot": "proud_heiress_mingyue",
+   "text": "{proud_heiress_mingyue.name}在齐胸浊浪中扯断颈项间南洋黑珍珠项链，冻得发紫的唇凑近同伴耳边咬牙低语：“拿着……印鉴挂坠也在上面。听好了，要是我沉下去了，你就带着这串珠子上岸——但你最好别让我沉下去。听到没有？！”"
+  },
+  {
+   "id": "h_mingyue_dawn_blanket_triumph_vow",
+   "kind": "approach",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "slot": "proud_heiress_mingyue",
+   "text": "{proud_heiress_mingyue.name}在冲破狂涛的救生艇上迎着破晓晨曦：“小子，今夜本小姐这一条命与整个家族船业的天下……是你在冰水里一次次托上来的。从今往后，不管大洋风浪多大，唯你我二人并肩相守一生。”"
+  },
+  {
+   "id": "h_scarface_thermite_torch_slam_shout",
+   "kind": "approach",
+   "location_ids": [
+    "flooded_bilge_pump_corridor",
+    "ballast_tank_watertight_hold",
+    "vertical_pipe_escape_shaft",
+    "upper_lifeboat_launch_platform"
+   ],
+   "slot": "ruthless_kidnapper_boss_scarface",
+   "text": "{ruthless_kidnapper_boss_scarface.name}单手将高频铝热切割棒重重砸在水密门观察窗上激起大片炽白火星：“大小姐！海水漫到锁骨了吧？！老子的铝热棒马上融断门锁！喊出离岸密钥，老子立刻开门拉你上来！”"
+  },
+  {
+   "id": "h_tian_pipe_wrench_tapping_morse",
+   "kind": "approach",
+   "location_ids": [
+    "vertical_pipe_escape_shaft",
+    "ballast_tank_watertight_hold",
+    "flooded_bilge_pump_corridor",
+    "upper_lifeboat_launch_platform"
+   ],
+   "slot": "cadet_salvage_engineer_tian",
+   "text": "{cadet_salvage_engineer_tian.name}从顶棚狭窄检修天窗探出身子，满脸黑灰油污却眼神明亮，急切低语：“大小姐！兄弟！抓住这根带子！排水泵已经重新转起来了，竖井一路通到三层！一个一个上，别松手！”"
+  },
+  {
+   "id": "h_haoran_swordstick_railing_strike",
+   "kind": "approach",
+   "location_ids": [
+    "upper_lifeboat_launch_platform",
+    "ballast_tank_watertight_hold",
+    "flooded_bilge_pump_corridor"
+   ],
+   "slot": "rival_shipping_scion_haoran",
+   "text": "{rival_shipping_scion_haoran.name}单手将精钢手杖剑重重插在倾斜甲板防滑条上：“大小姐！两家老爷子当年的交情，今晚本少爷替两位老人家还了！这艘救生艇是你的——爬快点，航运世家的人可不能淹死在船底！”"
+  },
+  {
+   "id": "h_mingyue_wet_dress_shiver_glance",
+   "kind": "observe",
+   "location_ids": [
+    "ballast_tank_watertight_hold"
+   ],
+   "slot": "proud_heiress_mingyue",
+   "text": "{proud_heiress_mingyue.name}背靠铁梯扶手微促喘息，湿透的黑色真丝晚礼服下摆被割得参差，颈间珍珠项链已不见踪影，耳垂在昏暗红光下冻得通红，却依然高昂下巴盯着水密门，散发着名门贵女落难时不肯低头的冷艳风骨。"
+  },
+  {
+   "id": "h_scarface_grenade_pin_pull_glare",
+   "kind": "observe",
+   "location_ids": [
+    "flooded_bilge_pump_corridor"
+   ],
+   "slot": "ruthless_kidnapper_boss_scarface",
+   "text": "{ruthless_kidnapper_boss_scarface.name}单手扣住胸前破片手雷保险环，脸上刀疤在电弧闪烁中扭曲如恶鬼，战术皮靴踩在倒灌泥水中溅起浪花，眼神透着亡命之徒在巨额赎金诱惑下的贪婪与疯狂血芒。"
+  },
+  {
+   "id": "h_haoran_swordstick_poise_glance",
+   "kind": "observe",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "slot": "rival_shipping_scion_haoran",
+   "text": "{rival_shipping_scion_haoran.name}金丝单片眼镜后的目光冷冽如霜，西装燕尾在狂风暴雨中猎猎作响，右手紧握的手杖细剑纯钛剑刃泛着森森寒芒，凛然世家名门傲骨令人望而生畏。"
+  },
+  {
+   "id": "h_mingyue_tie_loosen_request",
+   "kind": "approach",
+   "location_ids": [
+    "ballast_tank_watertight_hold"
+   ],
+   "slot": "proud_heiress_mingyue",
+   "text": "{proud_heiress_mingyue.name}贝齿咬破下唇渗出血丝，避开视线低声道：“……好冷。裙子卡在下面拽着我往下沉……刀给你，潜下去……把那截拖尾割了……别割到我……”"
+  },
+  {
+   "id": "h_mingyue_mouth_air_request",
+   "kind": "approach",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "slot": "proud_heiress_mingyue",
+   "text": "{proud_heiress_mingyue.name}裹着毛毡坐在救生艇船舱里，指尖终于回了血色，将额头轻轻靠在你肩头，美眸微阖低声道：“……我不冷了，也很清醒。所以别以为本小姐是冻糊涂了——靠过来……就这样，别乱动……听到没有……”"
+  },
+  {
+   "id": "h_tian_cable_tighten_request",
+   "kind": "approach",
+   "location_ids": [
+    "vertical_pipe_escape_shaft"
+   ],
+   "slot": "cadet_salvage_engineer_tian",
+   "text": "{cadet_salvage_engineer_tian.name}单手顶着天窗铁板，头也不回大吼：“兄弟！把尼龙带在大小姐腰上系成双套结！快！下面的漩涡吸力越来越大了！我快拉不住安全绳了！快点！”"
+  },
+  {
+   "id": "h_haoran_cut_tackle_request",
+   "kind": "approach",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "slot": "rival_shipping_scion_haoran",
+   "text": "{rival_shipping_scion_haoran.name}单手死死拽住倾斜救生艇缆绳，大吼道：“随侍兄弟！把你靴筒里那把折刀扔给我！副缆被卡死了！快！我来切断钢丝，你们抱紧船首！”"
+  },
+  {
+   "id": "h_scarface_drop_weapon_observe",
+   "kind": "observe",
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "slot": "ruthless_kidnapper_boss_scarface",
+   "text": "{ruthless_kidnapper_boss_scarface.name}被生铁挂锁重重砸碎鼻梁满脸鲜血，手中冲锋枪脱手跌入怒海波涛，在狂风中狼狈翻滚向后跌倒，凶戾面庞上终于浮现出直面灭顶深渊的绝望惊骇。"
+  },
+  {
+   "id": "h_tian_wrench_sparks_observe",
+   "kind": "observe",
+   "location_ids": [
+    "flooded_bilge_pump_corridor"
+   ],
+   "slot": "cadet_salvage_engineer_tian",
+   "text": "{cadet_salvage_engineer_tian.name}浑身湿透站在齐腰浊浪中，手持生铁管钳猛烈敲击电缆支架阻断漏电，机油与汗水混杂在黝黑面庞上，眼神沉稳如山，宛若一尊守护底舱生还通道的年轻钢铁战神。"
+  }
+ ],
+ "id": "heiress_ballast_tank_submersion",
+ "locations": [
+  {
+   "affordances": [
+    "用折叠钛刀割断千金卡死在角钢缝里的真丝裙摆",
+    "把冻僵的同伴托上铁梯平台，用防水毛毡层层裹住复温",
+    "在水位没顶前深吸空气潜入水底摸索排水分流闸"
+   ],
+   "detail": "位于邮轮水线以下深处的重型生铁压载隔舱，纵向加强筋龙骨纵横交错，浑浊冰冷的海水已漫过腰际正不断翻滚上涨，四周是厚重防爆钢板与浸没在水中的逃生铁梯。",
+   "exits": [
+    "vertical_pipe_escape_shaft",
+    "flooded_bilge_pump_corridor"
+   ],
+   "id": "ballast_tank_watertight_hold",
+   "name": "负四层进水水密压载隔舱",
+   "pressure_modifiers": {
+    "p_ballast_inrush_water_level_surge": "破裂通海阀正以每五分钟二十厘米速度急速向上吞没空间。",
+    "p_hypothermia_freezing_sea_exhaustion": "冰冷深海水温已抽空四肢知觉引发剧烈寒颤与指尖麻木。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "天花板红光应急灯在翻滚的水面投下摇曳血色微芒，水雾蒸腾气压沉重，冰水拍击胸口的窒息感在幽闭空间内格外清晰。",
+   "witnesses": [
+    "bg_drowning_steward_casualty"
+   ]
+  },
+  {
+   "affordances": [
+    "用救生尼龙织带将二人腰身相连防止在水流中冲散",
+    "踩着同伴肩膀托举协助翻越上方卡死的生铁天窗",
+    "在狭窄梯级上紧扣彼此手腕大口喘息调整攀爬节奏"
+   ],
+   "detail": "连通负四层至上一层主甲板的圆形金属管道竖井，四壁布满生锈铁梯踏步与高压冷水管道，内部仅容一人侧身攀爬，下方倒灌的海水正形成致命回旋漩涡。",
+   "exits": [
+    "ballast_tank_watertight_hold",
+    "upper_lifeboat_launch_platform"
+   ],
+   "id": "vertical_pipe_escape_shaft",
+   "name": "贯通三层水密检修纵向垂直竖井",
+   "pressure_modifiers": {
+    "p_airlock_pneumatic_door_jam": "上方水密天窗受船体扭曲挤压产生严重机械卡死歪斜。",
+    "p_ballast_inrush_water_level_surge": "下方回旋漩涡正如同巨口般疯狂向上吞噬梯级。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "头顶检修天窗透下一缕惨淡的应急荧光，暴风雨巨浪轰击外壳发出犹如雷鸣般的震耳欲聋巨响，铁梯扶手湿滑结油，稍有踩空便会跌入下方水牢深渊。",
+   "witnesses": [
+    "bg_panicked_fleeing_mechanic"
+   ]
+  },
+  {
+   "affordances": [
+    "合力抱住离心泵旁路手轮旋动压降以减缓水势",
+    "借着水面漂浮木箱掩护避开漏电电缆游向出口",
+    "在水密门前用重型管钳撬动卡死的锁死齿轮机构"
+   ],
+   "detail": "横贯船底的沉重铸铁走廊，两侧排列着巨型离心排水泵与粗壮铜质阀门手轮，积水已深达齐胸，漂浮着破损木箱与救生圈，尽头是一扇紧闭的圆形防爆水密门。",
+   "exits": [
+    "ballast_tank_watertight_hold",
+    "upper_lifeboat_launch_platform"
+   ],
+   "id": "flooded_bilge_pump_corridor",
+   "name": "底层大口径排水泵过水走廊",
+   "pressure_modifiers": {
+    "p_kidnapper_armed_checkpoint_ambush": "绑匪打手正守在走廊铁门外准备截杀逃脱者抢夺账册。",
+    "p_short_circuit_live_wire_electrocution": "裸露高压电缆落入水中正将电弧顺着水流迅速传导蔓延。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "应急照明完全熄灭，唯有手电光柱在翻滚浊水中切出一道昏黄光道，倒挂的断裂电缆在水面上不时爆出蓝色高压电弧火花，杀机四伏。",
+   "witnesses": [
+    "bg_armed_kidnapper_patrolman"
+   ]
+  },
+  {
+   "affordances": [
+    "割断救生艇卡死的副保险钢缆准备脱钩入水",
+    "点燃手提防风遇险信号火炬指引巡航搜救船只",
+    "在倾斜甲板上扣紧同伴手腕抵御飓风冲刺登艇"
+   ],
+   "detail": "倾斜达三十五度的邮轮上层露天甲板，十级热带风暴卷起漫天狂暴暴雨，深海巨浪不断越过栏杆横扫地面，最后一艘硬壳机动救生艇悬挂在起吊臂架上剧烈摇荡。",
+   "exits": [
+    "vertical_pipe_escape_shaft",
+    "flooded_bilge_pump_corridor"
+   ],
+   "id": "upper_lifeboat_launch_platform",
+   "name": "露天右舷救生艇起吊机逃生平台",
+   "pressure_modifiers": {
+    "p_hull_keel_fracture_final_plunge": "万吨船体龙骨发出最后断裂哀鸣即将整体翻扣入海。",
+    "p_kidnapper_armed_checkpoint_ambush": "走投无路的匪首在暴风雨中举枪对准救生艇展开最后疯狂。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "visibility": "暴雨如注狂风呼啸，船艏探照灯在黑浪中忽明忽暗，人群已基本撤离殆尽，仅剩几具弃置的黄色求生衣在积水中漂浮，直面汪洋深渊生死一线。",
+   "witnesses": [
+    "bg_chief_mate_launch_officer",
+    "bg_radio_sos_operator_last_post",
+    "bg_trapped_ballroom_dancer"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "霍",
+   "陆",
+   "顾",
+   "温",
+   "盛",
+   "沈",
+   "贺",
+   "傅",
+   "季",
+   "程",
+   "裴",
+   "楚"
+  ],
+  "given_female": [
+   "明月",
+   "宛如",
+   "清漪",
+   "昭华",
+   "素影",
+   "若薇",
+   "知微",
+   "书瑶",
+   "心怡",
+   "语嫣",
+   "星澜",
+   "雪柔"
+  ],
+  "given_male": [
+   "景云",
+   "庭深",
+   "云舟",
+   "鹤川",
+   "承宇",
+   "言清",
+   "淮安",
+   "聿修",
+   "明哲",
+   "修远",
+   "致远",
+   "瀚海"
+  ],
+  "given_neutral": [
+   "以安",
+   "知白",
+   "未央",
+   "景行",
+   "子衿",
+   "怀瑾",
+   "乐成",
+   "清河",
+   "若愚",
+   "希夷",
+   "安澜",
+   "向阳"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "{family}大小姐"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}少爷"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}管家"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}大副"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}工程师"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "保留沉船压载舱、绑匪烧门、竖井攀爬与救生艇夺艇的主线。改动：千金被领带反绑改为真丝裙摆卡死在角钢里由侍从割断；缺氧时的“对唇渡气”改为轮流贴近通气口换气；失温时的“贴身复温”改为托上平台、毛毡与铝箔毯复温；亲密台词挪到救生艇脱险之后；绑匪头目欲望降为1–2并去掉“征服豪门明珠”的支配吸引；背景人物年龄提到二十岁以上并去掉“女孩”；补充船医与海警救援潜水员两个角色；写死的人名改为称谓。",
+ "player_identities": [
+  {
+   "age_range": [
+    20,
+    22
+   ],
+   "baseline": "年满二十周岁出身名门服务世家的年轻执事，受聘担任千金贴身随侍，精通航海急救与水下搜救技能。",
+   "gender": "any",
+   "id": "personal_attendant_valet_youth",
+   "reputation": "克己奉公沉默寡言，无论遭受何等苛待始终恪守主仆操守与救护职责。",
+   "resources": [
+    "一柄藏于领带夹内的特制纯钛合金锋利解绳小折刀",
+    "一卷高浮力轻便救生尼龙织带"
+   ],
+   "risks": [
+    "一旦千金出现任何生命闪失将被财阀法务团队控告以蓄意谋害全族清算。"
+   ],
+   "role": "豪门千金专属贴身青年执事侍从",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "贴身执事"
+    },
+    {
+     "gender": "any",
+     "pattern": "专职随侍"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    21,
+    23
+   ],
+   "baseline": "年满二十一周岁海洋大学轮机工程系见习生，熟悉邮轮双层底与压载水泵管路走向。",
+   "gender": "any",
+   "id": "underwater_salvage_engineer_cadet",
+   "reputation": "手艺精湛心细如发，总能在管网爆裂时精准找到紧急泄压旁通阀。",
+   "resources": [
+    "一套多功能重型生铁管钳配防滑绝缘胶套",
+    "一具带有高亮防水探照头灯的轻便水密面罩"
+   ],
+   "risks": [
+    "擅自逆向操作通海阀若引发隔舱气爆将被追究直接刑事毁船责任。"
+   ],
+   "role": "邮轮轮机部年轻救捞见习工程师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "轮机员"
+    },
+    {
+     "gender": "any",
+     "pattern": "损管技师"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    24
+   ],
+   "baseline": "年满二十二周岁受命登船调查跨国绑架团伙的年轻海事刑警，持有国际海事执法逮捕令。",
+   "gender": "any",
+   "id": "undercover_maritime_marshal_agent",
+   "reputation": "身手矫健正气凛然，誓死将作恶绑匪绳之以法保护平民不受侵害。",
+   "resources": [
+    "一柄防水特战匕首配陶瓷破窗锥",
+    "一枚带防风火柴的小型金属密封防水求生盒"
+   ],
+   "risks": [
+    "卧底身份若被绑匪当场识破将被作为肉盾绑在船艏推入海中处决。"
+   ],
+   "role": "公海海事安全保卫处卧底青年探员",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "海事特派员"
+    },
+    {
+     "gender": "any",
+     "pattern": "卧底警官"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    21,
+    23
+   ],
+   "baseline": "年满二十一周岁受邀参加慈善晚宴的航运世家少主，与千金家族在商业上维持着激烈的航线竞争。",
+   "gender": "any",
+   "id": "rival_shipping_heir_passenger",
+   "reputation": "风度翩翩桀骜不驯，表面嘲讽千金傲慢，骨子里却有着不屑于乘人之危的世家风骨。",
+   "resources": [
+    "一枚刻有家族最高救援信标频段的纯金怀表",
+    "一把头等舱专属机动救生艇开启钥匙"
+   ],
+   "risks": [
+    "若在此地与千金一同溺毙将导致两大家族开战引爆国际海运大地震。"
+   ],
+   "role": "对立航运巨头家族青年名门公子",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "航运少东"
+    },
+    {
+     "gender": "any",
+     "pattern": "头等舱贵宾"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    20,
+    22
+   ],
+   "baseline": "年满二十周岁受雇于邮轮安保公司的年轻防暴保安，在混乱撤离中留守底层寻找滞留游客。",
+   "gender": "any",
+   "id": "shipboard_security_patrol_guard",
+   "reputation": "恪尽职守本分忠厚，深知底层船员与贵宾在滔天海难面前皆为平等人命。",
+   "resources": [
+    "一根高压防暴电击甩棍配备用电池",
+    "一只军用特种求生高音哨配荧光棒"
+   ],
+   "risks": [
+    "擅闯封锁水密区若被安保主管发现将被当场扣发全部抚恤金并解雇。"
+   ],
+   "role": "邮轮甲板安保年轻巡视哨兵",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "安保队员"
+    },
+    {
+     "gender": "any",
+     "pattern": "巡逻卫兵"
+    }
+   ]
+  }
+ ],
+ "premise": "公海特大雷暴撕裂船体，奢华邮轮倾斜沉没。年满二十一岁的财阀冷傲千金在慈善晚宴遭遇持械绑架，与年满二十岁的随行青年侍从被锁入负四层水密压载隔舱。海水自破损通海阀倒灌漫过腰际，千金的真丝裙摆卡死在铁梯角钢里，备用气阀倒计时仅剩八十分钟。割裙、托举、攀井、夺艇，主仆名分要撑到破晓救生艇上才肯松动。",
+ "pressures": [
+  {
+   "choice": "是用折叠刀贴着千金脚踝割裙承受划伤之险，还是先潜下去撬松角钢再托举？",
+   "exits": [
+    {
+     "cost": "侍从右手虎口在急促割绳中被角钢锐角划开两寸血口鲜血狂流，这一回刻不容缓。",
+     "option": "侍从憋住一口气沉到角钢旁，摸着裙摆的走向一刀刀割开吸水的真丝"
+    },
+    {
+     "cost": "千金被灌进口鼻的海水呛得眼前发黑，肺里火辣辣地疼。",
+     "option": "千金咬牙扯断项链，用珍珠搭扣勾住头顶泄压阀拉环拼命往下拽"
+    }
+   ],
+   "far": {
+    "consequence": "千金与侍从双双溺毙深海百亿航运帝国大权旁落。",
+    "due_days": 1,
+    "trigger": "压载水舱彻底被深海海水注满形成真空铁棺。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_mingyue_silk_dress_tied_chin_lift",
+    "h_mingyue_pearl_necklace_tear_whisper"
+   ],
+   "id": "p_ballast_inrush_water_level_surge",
+   "immediate": {
+    "minutes": 10,
+    "text": "冰冷浊浪已漫过千金胸口逼近下颚，水压挤压肺部带来极度呼吸困难，四周钢板发出沉重呻吟。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "ballast_tank_watertight_hold"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "若未能在一刻钟内脱出水牢，最后一寸空气将被海水彻底吞没导致二人当场溺毙沉底。"
+   },
+   "objective": "在十分钟内由侍从割断千金卡死的裙摆并托其仰头贴近空气隙，配合工程师从上方开启通风天窗逃生。",
+   "source": "nature",
+   "start_minute": 1385,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "破裂通海阀海水疯狂倒灌灭顶死线",
+   "trigger": "巨浪撞碎船底通海阀外层法兰盘，高压冰冷海水正以每五分钟二十厘米速度急速上涨，隔舱内部空气仅剩头顶十公分狭窄缝隙即将彻底灭顶。"
+  },
+  {
+   "choice": "是先把千金托上平台裹毯复温，还是冒险在水中强行做心外按压？",
+   "exits": [
+    {
+     "cost": "侍从自己泡在冰水里托举太久，双腿冻得失去知觉，险些滑落。",
+     "option": "侍从将千金托上铁梯平台，用防水毛毡与救生铝箔毯层层裹住"
+    },
+    {
+     "cost": "强效药剂剧烈收缩血管导致千金大腿肌肉深层血肿剧痛发硬。",
+     "option": "侍从自急救盒取出备用肾上腺素针剂盲刺入千金大腿肌肉唤醒心跳"
+    }
+   ],
+   "far": {
+    "consequence": "豪门明珠殒命公海侍从独活亦将面临灭门连坐之灾。",
+    "due_days": 1,
+    "trigger": "重度失温引发心跳骤停香消玉殒于底舱深渊。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_mingyue_silk_dress_tied_chin_lift",
+    "h_tian_pipe_wrench_tapping_morse"
+   ],
+   "id": "p_hypothermia_freezing_sea_exhaustion",
+   "immediate": {
+    "minutes": 10,
+    "text": "千金双唇惨白泛紫，眼眸涣散无神，整个人脱力向水底滑落，呼吸渐趋微弱停止。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "ballast_tank_watertight_hold"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "若未能在一刻钟内提升核心体温，心室纤颤骤停将导致大脑不可逆缺氧死亡。"
+   },
+   "objective": "在十分钟内由侍从将千金托出水面架上铁梯平台，割掉吸水的裙摆拖尾，用防水毛毡与铝箔毯层层裹住复温。",
+   "source": "nature",
+   "start_minute": 1400,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "摄氏四度深海冰水重度失温休克危局",
+   "trigger": "公海深海海水温度低至摄氏四度，千金浸泡其中超过半小时，体温急速跌破三十五度临界点，四肢肌肉强直牙关打颤陷入严重失温性心律失常休克。"
+  },
+  {
+   "choice": "是用双手身体死死托举住数十公斤重的生铁门板，还是用短刀当撬棍别在铰链缝隙？",
+   "exits": [
+    {
+     "cost": "侍从右肩锁骨遭受生铁门板万钧重压粉碎性骨折剧痛脱力。",
+     "option": "侍从以血肉肩膀死死抗住下压门板为千金争取钻出天窗时机"
+    },
+    {
+     "cost": "工程师虎口被剧烈反震震裂鲜血染透管钳握柄双手剧烈发颤。",
+     "option": "工程师抡起生铁管钳连续十次疯狂砸击变形铰链将其强行砸断"
+    }
+   ],
+   "far": {
+    "consequence": "倒灌海水灌满竖井全员在井内绝望溺亡。",
+    "due_days": 1,
+    "trigger": "天窗彻底卡死无法开启全员被困死在垂直铁井中。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_tian_pipe_wrench_tapping_morse",
+    "h_scarface_thermite_torch_slam_shout"
+   ],
+   "id": "p_airlock_pneumatic_door_jam",
+   "immediate": {
+    "minutes": 10,
+    "text": "下方的海水漩涡发出巨响已漫过铁梯下半截，天窗生铁卡榫发出刺耳金属摩擦声卡在半开位置。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "vertical_pipe_escape_shaft"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "一刻钟内若不能彻底推开天窗，不断上涨的激流将把全员死死按在天窗铁板上活活挤死。"
+   },
+   "objective": "在十分钟内由工程师与侍从合力用重型生铁管钳撬开变形铰链，或由千金蹬开锁销推开天窗。",
+   "source": "accident",
+   "start_minute": 1435,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "垂直竖井水密天窗变形卡死困局",
+   "trigger": "船体龙骨因巨浪撞击扭曲变形，垂直检修竖井顶部的生铁水密天窗外框歪斜卡死，下方倒灌的海水正形成夺命漩涡疯狂向上吞噬。"
+  },
+  {
+   "choice": "是冒险涉水扑向配电箱拉下闸刀，还是搭设临时浮桥在摇晃船体中平衡前行？",
+   "exits": [
+    {
+     "cost": "强劲电弧反弹击穿胶套导致工程师双臂遭受严重电灼伤起大面积焦泡。",
+     "option": "工程师用绝缘管钳胶套包手冒险剪断水中带电动力电缆"
+    },
+    {
+     "cost": "侍从右脚滑落水中遭受瞬间电击肌肉剧烈抽搐撕裂伤。",
+     "option": "侍从将千金横抱在胸前踩着摇晃塑料栈板以高超平衡涉水飞跃"
+    }
+   ],
+   "far": {
+    "consequence": "全员在积水走廊遭受强电击化为焦尸惨绝人寰。",
+    "due_days": 1,
+    "trigger": "高压强电流顺水传导击穿全员神经系统致死。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_tian_pipe_wrench_tapping_morse",
+    "h_haoran_swordstick_railing_strike"
+   ],
+   "id": "p_short_circuit_live_wire_electrocution",
+   "immediate": {
+    "minutes": 10,
+    "text": "水面泛起诡异的幽蓝电火花，空气中散发着刺鼻的焦糊鱼腥味，脚下海水传来阵阵发麻触电刺痛。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "flooded_bilge_pump_corridor"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "若未能在一刻钟内切断漏电源，强电流顺着积水蔓延全区将瞬间引发全员心脏电击骤停休克身亡。"
+   },
+   "objective": "在十分钟内由工程师用绝缘手柄挑开电缆断开总闸，或全员踩着漂浮塑料栈板绝缘快速通过。",
+   "source": "accident",
+   "start_minute": 35,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "积水走廊悬挂电缆高压漏电危机",
+   "trigger": "水密走廊天花板断裂的三相四百四十伏动力电缆坠入积水中，高压电弧在浑浊海水中疯狂噼啪游走，前方通往甲板的唯一通道化为致死雷区。"
+  },
+  {
+   "choice": "是以手杖剑配合短刀近身肉搏反杀，还是引爆甲板灭火瓶制造浓烟强行夺艇？",
+   "exits": [
+    {
+     "cost": "千金左臂被匪徒反手子弹擦伤带出一道深长血口染红素白雪纺。",
+     "option": "千金将手中的重型生铁挂锁拼尽全力砸在匪首面门将其砸翻落海"
+    },
+    {
+     "cost": "侍从腹部遭受歹徒匕首刺伤留下一道三寸长血槽流血不止。",
+     "option": "侍从飞身扑倒持枪歹徒在湿滑甲板上与其肉搏将枪械踢入怒海"
+    }
+   ],
+   "far": {
+    "consequence": "千金与同伴被遗弃在即将沉没的空船上葬身汪洋。",
+    "due_days": 1,
+    "trigger": "救生艇被匪徒抢夺开走甲板生路全断。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_scarface_thermite_torch_slam_shout",
+    "h_haoran_swordstick_railing_strike"
+   ],
+   "id": "p_kidnapper_armed_checkpoint_ambush",
+   "immediate": {
+    "minutes": 10,
+    "text": "子弹打在舱门铁板上火花四溅，暴风雨撕扯着甲板，狂徒疯狂叫嚣限时十秒内放下抵挡投降。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "若未能在一刻钟内消灭或逼退这批歹徒，救生艇将被绑匪独自开走，剩余人员将被留在沉船上陪葬。"
+   },
+   "objective": "在十分钟内由少东家以手杖剑近身牵制，配合侍从以生铁重物反杀击退暴徒夺取救生艇控制权。",
+   "source": "person",
+   "start_minute": 75,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "绑匪残部甲板持枪封锁伏击死线",
+   "trigger": "绑匪头目率领三名残存亡命徒持冲锋枪守在最后一艘救生艇起吊机前，枪口直指舱门，威逼千金交出黑珍珠项链与钥匙方准登艇。"
+  },
+  {
+   "choice": "是用手杖剑冒死劈断悬空卡死钢缆，还是用双斧暴力砍砸起吊钩？",
+   "exits": [
+    {
+     "cost": "少东家右臂在剧烈摆荡中脱臼受创严重挫伤红肿脱力，只争眼前这一刻。",
+     "option": "少东家攀上起吊臂以精钢手杖剑奋力劈断卡死副缆"
+    },
+    {
+     "cost": "侍从虎口被斧柄震裂，回弹的钢缆在小臂上抽出一道血痕。",
+     "option": "侍从抄起消防斧连砍三下，把扭曲的起吊钩从艇艏吊环上硬生生劈开"
+    }
+   ],
+   "far": {
+    "consequence": "千金与生还者全数覆灭在北大西洋漆黑冰冷海沟。",
+    "due_days": 1,
+    "trigger": "沉船巨大涡流将救生艇连同全员吸入万米深渊。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_mingyue_dawn_blanket_triumph_vow",
+    "h_haoran_swordstick_railing_strike"
+   ],
+   "id": "p_hull_keel_fracture_final_plunge",
+   "immediate": {
+    "minutes": 10,
+    "text": "甲板倾斜角度已达四十五度几乎无法立足，海水如瀑布般从断裂处狂涌倾泻吞没一切设施。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "upper_lifeboat_launch_platform"
+   ],
+   "near": {
+    "deadline_minutes": 15,
+    "text": "十五分钟内若救生艇未能脱离船体，沉船产生的巨大水下真空负压漩涡将把救生艇生生吸入海底撕碎。"
+   },
+   "objective": "在巨轮完全沉没产生巨大吸力漩涡前，斩断救生艇卡死钢缆启动引擎全速驶离危险千米半径海域。",
+   "source": "nature",
+   "start_minute": 110,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "万吨船体龙骨彻底断裂终极翻扣死线",
+   "trigger": "邮轮主龙骨在三十米狂涛中发出天崩地裂般的最后断裂巨响，船尾高高翘起指向夜空，整艘万吨巨轮将在十五分钟内彻底翻扣沉入深海海沟。"
+  }
+ ],
+ "region": "北大西洋公海十级风暴中即将沉没的奢华邮轮负四层水密压载隔舱与受损管道夹层",
+ "rules": [
+  {
+   "id": "r_watertight_compartment_auto_lockout",
+   "text": "邮轮损管自动化协议规定：一旦负四层进水传感器触发超标阈值，水密隔舱门将在两分钟内自动降下生铁水密闸门锁死以保全主船体平衡。"
+  },
+  {
+   "id": "r_ballast_tank_hypothermia_ceiling",
+   "text": "公海深海海水温度逼近摄氏四度，受困者浸泡超过四十分钟四肢外周神经将因重度失温陷入肌肉强直失去游泳知觉。"
+  },
+  {
+   "id": "r_silk_tie_hand_binding_code",
+   "text": "千金的真丝晚礼服拖尾被倒灌水流冲进铁梯角钢与阀门夹缝死死卡住，吸水后非锋利金属刀刃割断不可脱身。"
+  },
+  {
+   "id": "r_dawn_lifeboat_launch_deadline",
+   "text": "船长广播下达最后通牒：邮轮整体龙骨将于清晨六点完全折断沉没，顶层右舷最后一艘机动救生艇将在五点三十分准时脱钩下海。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "沉船共困",
+  "committed": "破晓同舟",
+  "familiar": "割裙脱困",
+  "flirting": "同毯取暖",
+  "intimate": "舱底交心",
+  "stranger": "豪门尊卑",
+  "testing": "底牌对赌"
+ },
+ "status": "released",
+ "style_hint": "负四层压载隔舱在暴风雨中倾斜三十度，钢板在深海水压下呻吟，仅存一盏红色应急灯。千金的墨黑真丝晚礼服被海水浸透，裙摆卡在铁梯角钢里，依然高昂下巴，与身旁侍从在冰冷浊浪中死守尊严底线。",
+ "tension_engines": [
+  {
+   "id": "te_heiress_pride_vs_soaked_dress_warmth",
+   "text": "名门千金至高无上的冷艳尊严，与晚礼服湿透撕裂后不得不由青年侍从割裙托举、裹毯复温的羞涩对冲。"
+  },
+  {
+   "id": "te_ballast_inrush_vs_life_or_death_clock",
+   "text": "压载舱通海海水狂暴倒灌漫过口鼻之窒息灭顶死线与垂直检修竖井八十分钟自锁倒数极速时间赛跑。"
+  },
+  {
+   "id": "te_kidnapper_hostage_parley_vs_lifeboat",
+   "text": "门外持枪绑匪铝热剂烧门逼索百亿离岸密钥与破晓五点三十分救生艇准时脱钩下海的绝命生存赛跑。"
+  },
+  {
+   "id": "te_shackle_sever_vs_tender_mouth_air_sha",
+   "text": "主仆名分的最后枷锁，与破晓救生艇上同裹一领毛毡、心跳彻底失控的防线崩溃。"
+  }
+ ],
+ "title": "沉船压载舱：冷傲千金",
+ "tone": [
+  "公海沉船倒灌",
+  "晚礼服撕裂脱困",
+  "救生毯下的心跳",
+  "生铁水密门绝境"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_heiress_1",
+   "requires": [],
+   "text": "压载舱侧壁暗设直通逃生艇井的双层底检修秘道：工程师摸索开压载舱底部铭牌，证实船体设计时曾暗设一条专供轮机长快速脱险的双层底干燥管廊，直通右舷救生艇井底座。受困二人无需强行突破被匪徒重装火力架枪封锁的主走道，直接开辟了一条从船底龙骨夹层悄然潜行脱险的绝对安全生命走廊。"
+  },
+  {
+   "category": "人事",
+   "id": "t_heiress_2",
+   "requires": [],
+   "text": "海事警方提前突袭抓获幕后洗钱金主：卧底警官通过卫星信号接通公海海警指挥中心，证实买凶绑架的对立财团董事已在港口被捕并供出全部雇佣兵名单。门外绑匪头目当场丧失获取赎金退路陷入绝境，军心大乱分崩离析，失去有效指挥彻底溃败。"
+  },
+  {
+   "category": "资源",
+   "id": "t_heiress_3",
+   "requires": [],
+   "text": "水密夹层意外起获高级双人潜水自救呼吸胶囊：在撬开一处备用管阀工具铁箱时，意外发现里面整齐存放着两套高压纯氧微型潜水咬嘴与配套防寒潜水干衣。困扰全员长达数十分钟的灭顶窒息死线全盘化解，甚至获得了直接穿透沉船水流阻力的无敌潜水装备。"
+  },
+  {
+   "category": "制度",
+   "id": "t_heiress_4",
+   "requires": [],
+   "text": "国际海难特别公约紧急授予随侍最高代理船长权：由于全船高级船员失联，千金依法以船东绝对控股人身份当场签署任命书，授权青年侍从代行全权撤离统领大权。侍从指挥现场逃生获得国际海事法最高法定权威背书，全船所有水手与安保必须无条件服从指令。"
+  },
+  {
+   "category": "时限",
+   "id": "t_heiress_5",
+   "requires": [],
+   "text": "暴风雨风眼提前掠过巨浪平息半个时辰：十级狂暴台风在清晨五点整奇迹般移出该海域，海面风浪瞬间平息至二极微风，晨曦刺破铅云普照深蓝大洋。原本迫在眉睫的沉船巨大漩涡撕扯死线获得长达半小时的黄金衰减窗口，为救生艇平稳下海脱险创造了绝佳天候。"
+  },
+  {
+   "category": "关系",
+   "id": "t_heiress_6",
+   "requires": [],
+   "text": "千金黑珍珠项链实为侍从早年救难信物：在侍从将珍珠缠在手腕时，千金认出侍从贴身携带的一枚磨损银锁，赫然正是三年前自己在游艇落水、被这位随侍舍命救起后亲手赠予的信物。三年恩情在冰冷深海中轰然相认，主仆尊卑的最后隔阂开始熔断，只待破晓后亲口说破。"
+  },
+  {
+   "category": "意外",
+   "id": "t_heiress_7",
+   "requires": [],
+   "text": "底层余温蒸汽锅炉回火大爆炸覆灭追兵：倒灌海水接触到未完全冷却的主锅炉引发剧烈物理水蒸气大爆炸，高压白汽席卷走廊将追捕绑匪全部冲入海中。致命武装追捕威胁被大自然天威瞬间连根拔起一网打尽，救生艇借由爆炸冲击波顺利滑出滑轨飞向晨曦。"
+  }
+ ]
+}

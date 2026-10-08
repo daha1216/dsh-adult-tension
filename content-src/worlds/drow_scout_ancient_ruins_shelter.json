@@ -1,0 +1,2456 @@
+{
+  "schema_version": 1,
+  "id": "drow_scout_ancient_ruins_shelter",
+  "title": "遗迹石室：黑暗精灵斥候",
+  "extends": null,
+  "era": "魔法纪元末叶深渊裂隙爆发期（地下城最深层远古遗迹）",
+  "region": "地下大迷宫第十层未探明古代精灵遗迹石室与剧毒瘴气溶洞",
+  "premise": "地下大迷宫突发地脉震荡引发大面积塌方，远征队被阻断于十层禁区。年满二十一岁的黑暗精灵女斥候为掩护侧翼皮甲破损、魔力回路逆流过载。青年调查官与女斥候退入荧光苔藓避难石室，外有魔兽搜寻，内无火种。学者布下同调法阵，调查官隔着护手扣住女斥候的手腕把魔火引入基岩；等魔纹褪尽、神志清明，种族戒备与心跳防线才在破晓前真正交锋。",
+  "tone": [
+    "地下城塌方闭锁",
+    "破损皮甲法阵导魔",
+    "剧毒瘴气魔兽环伺",
+    "荧光苔藓微光心跳"
+  ],
+  "style_hint": "倾颓的远古精灵白石巨柱横卧幽暗溶洞，石缝里荧光苔藓泛着幽蓝冷光，洞外魔兽爪击与咆哮不绝。黑暗精灵女斥候皮甲残破、魔纹发烫，仍手按精金短刃，与身旁青年调查官在狭小石室里屏息守夜。",
+  "clock_start": {
+    "label": "大塌方子夜零点整，地脉魔力回路过载逆流爆发，距离前线突击队凿穿塌方石壁仅剩六小时",
+    "minute": 0
+  },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": {
+    "female": 0.5,
+    "male": 0.45,
+    "nonbinary": 0.05
+  },
+  "stage_labels": {
+    "stranger": "异族戒备",
+    "acquainted": "绝境避难",
+    "familiar": "法阵导魔",
+    "flirting": "肌肤相触",
+    "testing": "魔核共振",
+    "intimate": "暗夜血契",
+    "committed": "破晓同盟"
+  },
+  "name_pools": {
+    "family": [
+      "晨星",
+      "夜歌",
+      "暗影",
+      "逐日",
+      "幽月",
+      "银刃",
+      "霜语",
+      "黑荆",
+      "灰羽",
+      "裂石",
+      "风行",
+      "深渊"
+    ],
+    "given_female": [
+      "斥候",
+      "赛丽亚",
+      "艾尔菲雅",
+      "蕾娜",
+      "希尔薇",
+      "米拉",
+      "卡兰西尔",
+      "诺艾尔",
+      "奥菲莉亚",
+      "伊芙琳",
+      "尤菲米娅",
+      "蒂娜"
+    ],
+    "given_male": [
+      "罗兰",
+      "卡尔",
+      "加里克",
+      "凯尔",
+      "达里奥",
+      "雷恩",
+      "艾德里安",
+      "巴恩",
+      "维克多",
+      "卢西安",
+      "澈",
+      "格里芬"
+    ],
+    "given_neutral": [
+      "席恩",
+      "阿玛尔",
+      "雷文",
+      "伊利亚",
+      "尤利西斯",
+      "米卡",
+      "维尔",
+      "艾伦",
+      "凯兰",
+      "菲尼克斯",
+      "索尔",
+      "泽菲尔"
+    ],
+    "nickname_patterns": [
+      {
+        "pattern": "{family}斥候",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}法师",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}队长",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}游侠",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}工匠",
+        "gender": "any"
+      }
+    ],
+    "order": "family_first"
+  },
+  "rules": [
+    {
+      "id": "r_dungeon_collapse_shelter_curfew_rule",
+      "text": "地下城塌方避难行规：深层突发塌方期间，全体避难人员严禁点燃明火或大声喧哗，以防引来游荡之深渊盲目巨兽。"
+    },
+    {
+      "id": "r_mana_circuit_overload_contact_regulati",
+      "text": "魔力回路逆流急救操典：斥候体表回路魔力暴走时，须由魔导学者布下同调法阵，同伴只可戴护手扣住斥候手腕把魔流引入地脉，严禁其余身体接触以免魔火反噬。"
+    },
+    {
+      "id": "r_ancient_elven_sanctuary_wards_code",
+      "text": "古代精灵庇护石室戒律：石室铭文结界仅在符文石完好时阻绝魔气，严禁破坏室内中央承重符文立柱以防结界碎裂。"
+    },
+    {
+      "id": "r_dawn_pickaxe_rendezvous_decree",
+      "text": "破晓前线突击接引守则：搜救队将于晨曦六点以重型精钢镐由外向内凿通主坑道，受困者需以微光魔石在石缝敲击三长两短为信标。"
+    }
+  ],
+  "customs": [
+    "当硬皮甲破损卡死在伤口处时，副官需以锋利匕首小心挑开生锈铜扣，只卸下卡在伤口处的那片甲片，交由修女清创包扎。",
+    "采集荧光苔藓凝结的纯净岩露时，需先以双手掌心暖热石碗，再以布巾滤去浮尘，双手捧给发热脱水的女长官小口润喉。",
+    "当洞外魔兽撞击石壁引起剧烈震颤时，女斥候需将祖传精金短刃反握刀柄塞入同伴掌心，以此托付后背与生死相依之战地信诺。",
+    "迎来破晓岩层贯通时，女斥候需咬破指尖在同伴手背绘制永不背叛的暗夜同盟誓约血印，低语宣告从此跨越种族同生共死。"
+  ],
+  "player_identities": [
+    {
+      "id": "dungeon_expedition_special_investigator",
+      "role": "王立遗迹调查团青年先遣监察调查官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "调查官",
+          "gender": "any"
+        },
+        {
+          "pattern": "先遣监察",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "equal",
+      "baseline": "年满二十一周岁自王立学院特等毕业的年轻遗迹学者，兼具扎实的战地急救与魔力解析技能，受命担任前锋支队统筹官。",
+      "resources": [
+        "一柄配有秘银防滑握柄的多功能战术折叠刺剑",
+        "一卷高纯度附魔亚麻无菌绷带与应急止血粉"
+      ],
+      "reputation": "冷静缜密善于在绝境中洞察微小转机，深得不同种族探险队员的信赖。",
+      "risks": [
+        "一旦女斥候魔力失控化为魔人暴走将被迫在正当防卫与性命相搏中抉择。"
+      ]
+    },
+    {
+      "id": "heavy_vanguard_shield_bearer_youth",
+      "role": "破阵前锋青年重装塔盾卫士",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "重盾士",
+          "gender": "any"
+        },
+        {
+          "pattern": "前锋铁壁",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "low",
+      "baseline": "年满二十二周岁在前线军团服役三年的年轻坚毅盾战士，擅长以重盾构筑绝壁阻击魔兽冲击。",
+      "resources": [
+        "一面布满抓痕的精钢折叠小圆盾",
+        "一柄重达十二磅的精炼破甲锻锤"
+      ],
+      "reputation": "勇猛忠诚重情重义，只要战友未撤绝不后退半步。",
+      "risks": [
+        "若石室坍塌被万斤巨石压住盾牌将面临双臂骨碎折断之灾。"
+      ]
+    },
+    {
+      "id": "arcane_rune_artificer_adept",
+      "role": "地脉符文青年随队魔导工匠",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "符文工匠",
+          "gender": "any"
+        },
+        {
+          "pattern": "魔导技师",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "equal",
+      "baseline": "年满二十一周岁精通远古精灵结界铭文与魔石回路修复的年轻技术骨干，持有工匠行会高阶徽章。",
+      "resources": [
+        "一盒装有高纯度秘银刻刀与导魔金粉的精工工具箱",
+        "两枚充能完毕的纯净水属性储魔水晶"
+      ],
+      "reputation": "手艺神速心如发丝，总能在结界崩毁前十秒修补好致命回路漏洞。",
+      "risks": [
+        "引动地脉魔力时若遭遇反噬将被超高压奥术电弧瞬间灼穿经脉。"
+      ]
+    },
+    {
+      "id": "aristocratic_patron_scion_knight",
+      "role": "出资贵族名门青年随军见习骑士",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "随军骑士",
+          "gender": "any"
+        },
+        {
+          "pattern": "名门少主",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "high",
+      "baseline": "年满二十二周岁受家族派遣历练战阵的年轻名门子弟，随身携带皇室特许免责公文。",
+      "resources": [
+        "一柄加持破邪附魔的精工长剑配纯金剑鞘",
+        "一枚家族守护高阶防护符咒项链"
+      ],
+      "reputation": "恪守骑士八德重义轻利，在绝境面前视拯救落难战友为最高骑士荣耀。",
+      "risks": [
+        "若救援不力导致精锐斥候阵亡将被军法处追究连带指挥责任。"
+      ]
+    },
+    {
+      "id": "frontier_alchemist_apothecary_youth",
+      "role": "边境公会青年战地随军炼金药剂师",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "炼金术士",
+          "gender": "any"
+        },
+        {
+          "pattern": "战地药剂师",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        20,
+        22
+      ],
+      "social_position": "low",
+      "baseline": "年满二十周岁擅长从地底毒草中萃取解毒血清的年轻草药天才，精通各种生物神经毒素中和方术。",
+      "resources": [
+        "三管便携式抗魔毒高效中和活性血清",
+        "一具小巧青铜研钵配发光干苔藓粉末"
+      ],
+      "reputation": "胆大心细医术高明，哪怕只剩一口气也能以猛药吊住心脉。",
+      "risks": [
+        "血清一旦受外界高温变质将失去压制魔毒反噬的唯一关键底牌。"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "moss_ruins_sanctuary_chamber",
+      "name": "荧光苔藓断壁古代精灵避难石室",
+      "detail": "地下十层遗迹深处的封闭小石室，四周是雕刻有古老蔓草纹样的高耸白石巨柱断壁，石壁缝隙丛生散发幽蓝冷光的荧光苔藓，地面铺有破碎石板，中央是一座铭刻着防魔符文的古老残破祭台。",
+      "privacy": "private",
+      "visibility": "幽蓝微光在湿漉石壁上倒映出微弱光晕，空气寒凉湿润，仅容数人立足，石缝外侧不时传来魔兽腥臭粗重的喘息声，二人膝盖紧挨席地而坐，彼此急促呼吸在幽暗中纤毫毕现。",
+      "witnesses": [
+        "bg_panicked_apprentice_porter",
+        "bg_fanatic_cultist_infiltrator"
+      ],
+      "exits": [
+        "collapsed_tunnel_rubble_barrier",
+        "crystal_crevice_narrow_tunnel"
+      ],
+      "affordances": [
+        "在祭台同调法阵中戴护手扣住斥候手腕，把逆流魔力引入基岩",
+        "以纯净石碗采集苔藓凝结的清甜岩露润喉解毒",
+        "以精金短刃反握掌心彼此建立战地血契誓约"
+      ],
+      "pressure_modifiers": {
+        "p_mana_overload_circuit_meltdown": "石室内微弱地脉共鸣正加速斥候体内魔力逆流，皮肤赤红纹路每十分钟蔓延一寸。",
+        "p_beast_claw_battering_sanctuary_barrier": "石缝外侧狂暴巨兽不断以重爪拍击封门巨石发出惊心动魄巨响。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "collapsed_tunnel_rubble_barrier",
+      "name": "十层主坑道万斤巨石塌方阻绝断壁",
+      "detail": "主坑道被数十吨倾泻而下的坚硬花岗岩与钟乳石彻底封死的塌方堆，巨石之间交错咬合形成一道天然绝壁，缝隙中渗出浑浊地下暗河泥水，外侧不时传来前线救援队的闷闷敲击回音。",
+      "privacy": "semi",
+      "visibility": "尘烟弥漫视线昏暗，手电微光照在错落犬牙交错的巨石断面之上，地底冷风从碎石缝隙如尖啸般刮过，伴随着轻微余震随时有二次坍塌覆顶之险。",
+      "witnesses": [
+        "bg_injured_frontline_vanguard_soldier",
+        "bg_rescue_miner_team_messenger"
+      ],
+      "exits": [
+        "moss_ruins_sanctuary_chamber",
+        "subterranean_toxic_miasma_abyss"
+      ],
+      "affordances": [
+        "用折叠撬棍在石缝间寻找通气孔并以短剑敲击三长两短求救信标",
+        "搬移散落碎石堆砌小型防兽土垒加固内侧防线",
+        "以附魔绷带为被落石砸伤的同伴包扎止血"
+      ],
+      "pressure_modifiers": {
+        "p_secondary_cavein_ceiling_collapse": "山体地脉剧烈震动正导致上方重达数吨之巨大钟乳石产生裂纹松动。",
+        "p_beast_claw_battering_sanctuary_barrier": "碎石堆另一侧聚集的魔兽正试图扒开较小碎石钻入石室。"
+      },
+      "tags": [
+        "workplace",
+        "crime"
+      ]
+    },
+    {
+      "id": "crystal_crevice_narrow_tunnel",
+      "name": "紫晶矿脉陡峭夹缝与排风死角",
+      "detail": "石室后方极其狭窄的岩层裂隙，两侧石壁镶嵌着未经开采的天然紫水晶簇，在幽光下反射出璀璨紫色星芒，仅容一人侧身匍匐通过，深处是一处相对干燥平整的避风岩台。",
+      "privacy": "private",
+      "visibility": "紫晶折射出如梦似幻的瑰丽微光，四下死寂幽深隔绝了外界大部分咆哮，石台冰凉刺骨，但空气流通良好且无魔兽出没痕迹，是休养调理体温的绝佳避难密所。",
+      "witnesses": [
+        "bg_hidden_drow_infiltrator_watcher"
+      ],
+      "exits": [
+        "moss_ruins_sanctuary_chamber",
+        "subterranean_toxic_miasma_abyss"
+      ],
+      "affordances": [
+        "引导女斥候在紫晶石台上平躺，借紫晶辐射缓解魔毒蔓延",
+        "采集高纯度紫晶碎屑研磨成粉混合药膏敷在撕裂伤口之上",
+        "在狭窄岩隙中借同伴臂弯翻转身体避免伤口受压二次出血"
+      ],
+      "pressure_modifiers": {
+        "p_mana_overload_circuit_meltdown": "紫晶矿脉的高纯度魔力辐射正轻微缓解魔毒蔓延速度。",
+        "p_toxic_miasma_creeping_flood": "毒瘴气正沿着地裂缝隙向低洼岩台缓慢渗透蔓延。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "subterranean_toxic_miasma_abyss",
+      "name": "地底断裂深渊边缘与紫雾瘴气溶洞",
+      "detail": "避难所下方深不见底的漆黑大断崖，谷底翻滚着散发甜腻腐朽气息的紫红色重毒瘴气，断崖上方仅有一根被风化严重的石化古藤蔓相连，深渊深处隐隐闪烁着捕食魔兽的猩红复眼。",
+      "privacy": "public",
+      "visibility": "毒雾弥漫能见度不足五步，剧毒水珠在岩壁上凝结滴落发出滋滋腐蚀声，失足滑落断崖将瞬间被万丈深渊吞没粉身碎骨。",
+      "witnesses": [
+        "bg_lost_mercenary_scout_scavenger"
+      ],
+      "exits": [
+        "collapsed_tunnel_rubble_barrier",
+        "crystal_crevice_narrow_tunnel"
+      ],
+      "affordances": [
+        "以钩爪飞索锚定断崖对岸岩角构建应急逃生索道",
+        "用解毒药粉撒布风口中和倒灌石室的浓烈瘴气",
+        "引爆小型爆破晶石炸断石桥阻绝尾随而来的深渊巨狼群"
+      ],
+      "pressure_modifiers": {
+        "p_toxic_miasma_creeping_flood": "下沉气流正将深渊底部的剧毒紫雾迅速抬升压向石室通气孔。",
+        "p_beast_claw_battering_sanctuary_barrier": "断崖对岸的暴风魔狼正沿着石藤索桥悄无声息攀爬逼近。"
+      },
+      "tags": [
+        "workplace_power",
+        "violence"
+      ]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "proud_drow_scout_valeria",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        21,
+        22
+      ],
+      "adult_context": "年满二十一周岁以敏捷精准著称之黑暗精灵部族首席游侠兼先遣队尖刀女斥候。",
+      "public_role": "王立地下城远征联军第一先遣队冷傲精悍之黑暗精灵女斥候长",
+      "appearance_options": [
+        "一袭剪裁贴身却多处被利爪撕裂的深黑硬皮甲，胸甲铜扣崩脱两颗，及腰的纯白长发被冷汗凝成几缕贴在面颊，紫罗兰色美眸在幽光中宛如利刃，灰白体表魔纹赤红发烫，右手却依然死死反扣腰间精金短刃，散发着绝不向任何敌人低头的孤傲英姿。",
+        "魔纹褪尽后在幽蓝苔藓映照下解开肩甲残破束带，斜倚白石断壁，摘下一只被魔血浸透的皮指套，哈出一口白汽，美眸含煞带刺凝视身旁青年调查官，嗓音沙哑却透着不容冒犯的清绝威仪。"
+      ],
+      "identity": {
+        "authority": "掌握先遣队全部幽暗隐秘潜行通路图纸与暗夜精灵部族绝密探路秘法专权。",
+        "resources": [
+          "一柄由陨星精金锻造的传世破魔短刃",
+          "两枚刻有部族远古血契图腾的暗影护符"
+        ],
+        "limits": [
+          "体表魔力回路逆流灼烧处于失控边缘无法动用高阶暗影斗气",
+          "种族自尊心极强视在人类面前袒露虚弱残躯为生平奇耻大辱"
+        ],
+        "obligations": [
+          "誓死保全先遣队核心探险地盘图纸万无一失，为后方大部队扫除深渊盲点。"
+        ],
+        "exposure": "一旦魔力回路彻底暴走化为无意识深渊魔人将被联军军法当场格杀。",
+        "hidden": "实则是被地面部族放逐的纯血王脉末裔，历经无数白眼背叛，内心深处极度渴望在生死冰霜中找到一位不以异族视之、能真正生死托付灵魂的知心伴侣。"
+      },
+      "decision": {
+        "core_value": "暗夜之刃宁折不弯，战友后背重于身家性命，宁可战死在石室也绝不下跪乞怜苟且偷生。",
+        "goal_options": [
+          "在破晓前借学者法阵与调查官的手平息过载回路",
+          "在巨兽破门危急关头以残躯挺剑刺穿兽王首级护卫同伴安然撤离",
+          "在破晓大部队凿通石壁时以胜利者之姿挽着青年臂弯堂堂正正踏出深渊"
+        ],
+        "pressure_responses": {
+          "low": "在石壁前挺拔孤坐，以清冷嘲讽口吻命令青年调查官退至安全距离警戒。",
+          "mid": "回路逆流高热脱力时，咬牙伸出手腕任调查官隔着护手扣住、把魔火引进基岩，羞愤得别过脸去。",
+          "high": "在巨兽爪击撕裂石门危急关头，强忍经脉剧痛果断挥动精金短刃扑向裂隙阻击。",
+          "breaking": "在脱离生命危险迎来破晓时瘫软在青年怀中，将发烫面颊埋在青年肩头低声倾诉多年委屈与信任。"
+        },
+        "withdrawal": "退回收缩至紫晶裂隙最深处避风岩台，手握短刃抵住自己胸口死守尊严底线。",
+        "relationship_stance": "外表拒人千里防备如刺猬，内心却对在漫天绝境中不离不弃救治自己的青年怀有至深至诚的生死爱恋。",
+        "contrast": "在战场上是杀人不眨眼的暗夜死神，在逼仄石室里却是会把短刃塞进青年手心、别过脸不肯说谢谢的倔强女子。",
+        "prefers": [
+          "沉着稳重恪守诺言且在危难关头把战友安危置于种族之上的真正君子"
+        ],
+        "avoids": [
+          "轻浮狭隘之徒",
+          "贪生怕死背刺同伴的鼠辈"
+        ],
+        "never": [
+          "绝不会为了苟活出卖同路战友或向深渊魔物低头称臣。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在回路暴走命悬一线关头隔着护手稳稳扣住自己手腕、目不斜视引走魔火的克制担当",
+          "以石碗捧来甘甜纯净岩露、等自己小口喝完才退开的至柔至诚专注"
+        ],
+        "likes": [
+          "危机解除后二人并肩坐在石缝前静看破晓晨曦照破黑暗的安宁",
+          "在私下独处时被真诚呼唤本名而非冰冷的‘暗精斥候’"
+        ],
+        "dislikes": [
+          "轻佻僭越",
+          "虚伪逢迎"
+        ],
+        "preconditions": [
+          "王立地下城远征联军第一先遣队冷傲精悍之黑暗精灵女斥候长与对方都已完全清醒，眼前的危机已经解除",
+          "王立地下城远征联军第一先遣队冷傲精悍之黑暗精灵女斥候长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在公开联军执勤场合恪守精锐斥候威严法度",
+          "严禁任何带有轻薄亵渎性质的言语调戏"
+        ],
+        "expression": "耳尖染红解下发间纯白发带亲手缠在青年手腕上系上暗夜连心结，主动将发烫面颊靠在青年心口，低语立下暗夜精灵一生只认一人的永恒伴侣血誓。",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "卸下暗夜锋刃重担后甘愿一生与身旁同伴并肩看尽人间晨昏之倾心知己"
+      },
+      "voices": {
+        "surface": "都别乱动！保持静默！人类调查官，把刺剑收回鞘内！外面的深渊暴风狼嗅觉极其灵敏，任何金属碰撞回响都会引来群兽合围！听我号令，向内侧紫晶裂隙收拢！",
+        "inner": "调查官……别叫斥候长了……直接叫我的名字。魔纹退了，烧也退了……现在我比谁都清醒。所以听好——这回把手伸过来，不是为了导魔……坐近一点，靠紧一点……别松开……听着你的心跳，我才睡得着……"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "moss_ruins_sanctuary_chamber"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "crystal_crevice_narrow_tunnel"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "moss_ruins_sanctuary_chamber"
+        },
+        {
+          "from": 90,
+          "to": 1439,
+          "location_id": "collapsed_tunnel_rubble_barrier"
+        }
+      ],
+      "situation": {
+        "trigger": "一头体长三丈的深渊暴风魔狼循着血腥气猛烈撞击避难石室外侧石板，沉重巨爪已扣入石缝，石室顶端钟乳石受震剧烈晃动即将崩塌砸向二人头顶。",
+        "pressure": "若不能在十五秒内合力以精金短刃与战术刺剑刺入巨兽掌心逼退魔物并用立柱碎石加固缺口，石室彻底崩碎将使二人瞬间被乱石与狼吻撕裂化为齑粉。",
+        "exits": [
+          {
+            "option": "女斥候强运逆流残存魔力以短刃雷霆贯穿巨兽前掌血肉",
+            "cost": "女斥候右臂经脉魔纹再度崩裂大面积皮下渗血剧痛脱力。"
+          },
+          {
+            "option": "调查官挺身而出以自身脊背死死顶住倾倒白石巨柱化解砸落死线",
+            "cost": "调查官右肩背部遭受巨石棱角重重砸伤骨裂红肿大面积挫伤。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "veteran_mercenary_leader_garrick",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十三周岁常年出入地下城深层断壁兼通战阵排险之青年老练重步兵队长。",
+      "public_role": "王立联军前沿护卫支队年轻老练刚毅沉稳之副队长",
+      "appearance_options": [
+        "一身穿旧布满爪痕与烟熏焦黑的重装锁子甲与外罩厚鹿皮背心，下巴留有一道短须，眼神坚毅沉稳如石块，腰悬一把厚重大口径精铁阔剑，双手缠满防滑布条，满身散发着纯精钢护甲与地底岩尘硬汉气息。",
+        "单腿跪在塌方碎石堆旁，借着微弱魔石光芒熟练探查石壁承重应力点，满脸灰尘汗水却从容不迫，面对狂暴魔兽毫无惧色，堪称全队的钢铁磐石支柱。"
+      ],
+      "identity": {
+        "authority": "执掌前沿阵地物理防线布置权与全部近战重装战技调度权。",
+        "resources": [
+          "一柄历经百战依然未卷刃的精钢开山重剑",
+          "两枚装在生铁圆筒内的大威力破拆晶石爆弹"
+        ],
+        "limits": [
+          "体能因连续搬石排险消耗过半面临肌肉力竭",
+          "缺乏远距离高阶奥术防御手段"
+        ],
+        "obligations": [
+          "誓死维护幸存战友生命通道，在前线构筑坚固防线直至后方大部队突进贯通。"
+        ],
+        "exposure": "防线一旦失守魔兽冲入石室将导致全员丧命全军覆没。",
+        "hidden": "实则是被暗夜精灵斥候在早年迷宫伏击中救下一命的报恩义士，发誓要以性命护卫女斥候周全。"
+      },
+      "decision": {
+        "core_value": "战士的荣耀是守卫身后同袍，只要还有一口气握得动剑，就绝不让魔兽踏过门槛半步。",
+        "goal_options": [
+          "在破晓前阻截深渊兽潮轮番冲击守死石室外侧隘口",
+          "排查塌方碎石结构构筑逃生通气孔协助外部定位",
+          "协助调查官稳定女斥候伤情护佑全员安然突围"
+        ],
+        "pressure_responses": {
+          "low": "在隘口处从容布置尖刺拒马，沉声安抚动摇军心维持阵脚。",
+          "mid": "见巨兽扑击，果断挥动重剑顶在阵前以盾墙硬抗冲撞。",
+          "high": "在石壁坍塌危急关头，用肩膀死死扛住倾倒石板为同伴争取撤退空当。",
+          "breaking": "双臂肌肉严重撕裂鲜血染透甲胄依然单膝死顶大剑屹立不倒。"
+        },
+        "withdrawal": "退回收缩至石室狭窄咽喉处，横剑当胸死守最后死生防线。",
+        "relationship_stance": "朴实刚健重义轻生，对身处绝境依然傲骨凛然的黑暗精灵女斥候与青年调查官由衷敬重。",
+        "contrast": "看似粗粝不拘小节的佣兵汉子，在大义生死面前却能爆发出犹如骑士典范般的绝顶牺牲豪情。",
+        "prefers": [
+          "沉着勇武不耍滑头且在危难面前敢作敢当的硬派好汉"
+        ],
+        "avoids": [
+          "临阵脱逃之徒",
+          "贪生怕死背叛盟誓之辈"
+        ],
+        "never": [
+          "绝不会在还有战友滞留石室时抛下防线独自逃生。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "浩然正气视死如归之崇高战地风骨",
+          "在生死淬炼中将自身当做肉盾护佑同袍的纯粹大担当"
+        ],
+        "likes": [
+          "兽潮退去时与同袍并肩擦拭重剑血污的豪迈欣慰",
+          "在晨曦穿透岩层时痛饮甘泉的生死快意"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏同盟"
+        ],
+        "preconditions": [
+          "王立联军前沿护卫支队年轻老练刚毅沉稳之副队长与对方都已完全清醒，眼前的危机已经解除",
+          "王立联军前沿护卫支队年轻老练刚毅沉稳之副队长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在战备执勤期间恪守步兵清白纪律",
+          "恪守同袍礼节绝不轻狂逾矩"
+        ],
+        "expression": "解下随身佩戴的精钢战鹰徽章重重拍在调查官肩头，露出爽朗豪迈笑靥，朗声宣布此战过后身旁二位便是自己毕生最敬佩之生死兄弟。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "惊涛骇浪深渊地底中永远为战友撑起不灭钢铁防线之重装卫士"
+      },
+      "voices": {
+        "surface": "站稳脚跟！全体都有！这里是第一前锋！魔兽皮肉再硬也硬不过老子的精铁剑！谁敢退后一步我就拿靴子踢破那家伙的屁股！调查官，照顾好女斥候！",
+        "inner": "调查官兄弟！好样的！刚才斥候那丫头身上的魔纹都烧到脖子根了，要不是你稳稳扣住那只手腕把火毒引进地里，早就暴走了！护好斥候，那是个嘴硬心软的好姑娘！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "collapsed_tunnel_rubble_barrier"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "subterranean_toxic_miasma_abyss"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "collapsed_tunnel_rubble_barrier"
+        },
+        {
+          "from": 90,
+          "to": 1439,
+          "location_id": "moss_ruins_sanctuary_chamber"
+        }
+      ],
+      "situation": {
+        "trigger": "两头深渊锯齿掘地兽自塌方碎石底部破土钻出，锋利獠牙直扑避难石室防魔符文石柱，立柱一旦被咬碎全室结界将荡然无存。",
+        "pressure": "若不能在二十秒内以重剑斩断兽首将其击退，结界破灭后浓烈毒瘴倒灌石室将使全员在三分钟内窒息化血。",
+        "exits": [
+          {
+            "option": "队长挥动开山重剑运起千钧之力将掘地兽当头斩裂劈飞",
+            "cost": "队长虎口在剧烈反震下严重崩裂大口鲜血顺着剑柄流淌不止。"
+          },
+          {
+            "option": "调查官手持防暴折叠盾飞身上前狠狠撞开扑击的魔兽獠牙",
+            "cost": "调查官左小臂在猛烈冲撞下发生轻微骨裂红肿大面积挫伤。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "arcane_scholar_maiden_elise",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁在王家奥术学院精研远古结界与地脉导流之青年知性女魔导学者。",
+      "public_role": "前遣调查支队青年聪慧冷静精通结界共振之首席奥术顾问",
+      "appearance_options": [
+        "一身穿旧泛白带有烟灰痕迹的深天鹅绒法师长袍，腰系细牛皮法术卷轴带，金发编织成利落单侧发辫，鼻梁上挂着一副精巧黄铜单片奥术解析镜，神情专注而清澈，手中紧握一根镶嵌青金石的短法杖，周身散发着纯净羊皮纸墨香与淡雅奥术魔力微光。",
+        "单膝跪在残破祭台前，借着微弱法杖荧光全神贯注临摹石柱上残缺的精灵符文，神情沉着如止水，面对洞外怪嚎毫无动摇，总能在最绝望时刻推演算出微小的生还生门。"
+      ],
+      "identity": {
+        "authority": "掌握古代避难石室防魔结界重启权限与高精度魔力共振频率校准专权。",
+        "resources": [
+          "一根充盈星光魔力的纯净青金石短法杖",
+          "三张刻满古代防御结界的重型羊皮纸法术卷轴"
+        ],
+        "limits": [
+          "肉体体能单薄缺乏近身格斗力量在强震中极易摔伤",
+          "魔力储备有限经不起高阶法术持续挥霍消耗"
+        ],
+        "obligations": [
+          "誓死维系避难石室符文结界不灭，确保内部空气不被深渊毒瘴侵蚀。"
+        ],
+        "exposure": "符文石板若彻底断裂结界熄灭将失去唯一的魔抗避难所。",
+        "hidden": "实则是女斥候早年在王立学院游历时相识的同窗挚友，发誓要以奥术之理为异族姐妹在地面世界正名。"
+      },
+      "decision": {
+        "core_value": "知识的真谛是拯救生命，真理的微光永远照亮黑暗，绝不向野蛮与无序屈服低头。",
+        "goal_options": [
+          "在破晓前修复祭台破损符文石板重新激活古老庇护结界",
+          "推导计算出最安全之导魔共振频率协助调查官实施救治",
+          "在破晓迎接搜救队时以完整地脉图纸宣告探险全胜"
+        ],
+        "pressure_responses": {
+          "low": "在祭台前飞速翻阅法典，准确报出结界能量消耗与时间剩余参数。",
+          "mid": "见符文石板开裂，果断割破掌心以自身魔血充当导魔介质修补裂痕。",
+          "high": "在巨石砸落危急关头，强撑护盾法杖顶住头顶塌陷为同伴撑开安全三角区。",
+          "breaking": "魔力彻底透支四肢僵木依然咬牙吟唱完成最后一句护持咒文。"
+        },
+        "withdrawal": "退回收缩至祭台内侧核心盲点，手依法杖死守魔道底线。",
+        "relationship_stance": "聪慧理智内蕴深情，深佩女斥候之孤勇与青年调查官之赤子担当。",
+        "contrast": "看似弱不禁风的书生学者，在文明与野蛮生死交锋面前却能爆发出犹如高塔法圣般的坚毅气节。",
+        "prefers": [
+          "尊重知识且在未知面前保持敬畏探索之心的纯粹学者型同伴"
+        ],
+        "avoids": [
+          "鲁莽短视之徒",
+          "贪婪无知亵渎古代遗迹者"
+        ],
+        "never": [
+          "绝不会在危急关头抛弃同伴或毁坏珍贵历史真迹。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "浩然正气视死如归之高尚情操",
+          "在生死淬炼中将自身当做肉盾护佑同伴的纯粹大仁慈"
+        ],
+        "likes": [
+          "解开古老千年谜题那一刻的由衷狂喜",
+          "在晨曦万丈时并肩漫步书林花海的静谧"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏理性"
+        ],
+        "preconditions": [
+          "前遣调查支队青年聪慧冷静精通结界共振之首席奥术顾问与对方都已完全清醒，眼前的危机已经解除",
+          "前遣调查支队青年聪慧冷静精通结界共振之首席奥术顾问出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在法术研习期间恪守学者清白本分",
+          "恪守同袍礼节绝不轻浮失仪"
+        ],
+        "expression": "合上古老法典双手郑重抚胸行最高学院学者礼，向青年含笑致意，宣布此战二人所铸就之魔力奇迹足以载入王立编年史册，愿此情共青史长存。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "惊涛骇浪迷宫深渊中永远为求道同伴推演生机之奥术智者"
+      },
+      "voices": {
+        "surface": "别慌！能量波动在理论容差之内！不要触碰祭台边缘！保持静止！调查官，让斥候背朝祭台坐好，我来报出最优导魔频率！一、二、引下去！",
+        "inner": "调查官先生，谢谢你。斥候这一路走得太苦了，偏见和追杀几乎压垮了那双肩膀……但今晚，我在那双紫眸里重新看到了光。请把斥候从深渊的死局里拉回来，那个人值得拥有人间的阳光！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "moss_ruins_sanctuary_chamber"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "crystal_crevice_narrow_tunnel"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "moss_ruins_sanctuary_chamber"
+        },
+        {
+          "from": 90,
+          "to": 1439,
+          "location_id": "subterranean_toxic_miasma_abyss"
+        }
+      ],
+      "situation": {
+        "trigger": "残破祭台中央的古代结界核心符文石因余震产生一道贯穿裂隙，结界光幕剧烈闪烁即将彻底湮灭。",
+        "pressure": "若不能在十五秒内以高纯度导魔秘银粉填补裂隙并注入同调魔力，石室内外气压失衡将引发毒瘴大面积倒灌窒息。",
+        "exits": [
+          {
+            "option": "学者割破手腕将自身精纯奥术之血直接浇注在符文裂隙维持法阵",
+            "cost": "学者遭受严重魔力反噬失血过多脸色惨白几乎昏厥。"
+          },
+          {
+            "option": "调查官运起全部臂力以秘银刻刀死死嵌合裂缝充当人工导体桥梁",
+            "cost": "调查官右手掌心被狂暴导魔电流瞬间严重灼穿脱皮焦黑。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "dungeon_trapper_rogue_kyle",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十二周岁游走于地底黑市精通机关陷阱侦测与潜行暗杀之青年敏锐盗贼。",
+      "public_role": "前遣调查支队青年机变百出通晓机关陷阱之斥候副手",
+      "appearance_options": [
+        "一身穿旧泛着油光的深灰耐磨紧身皮甲，头戴带风帽的软兜帽，腰间挂满了细钢丝、飞爪、开锁针与微型机关发条匣，眼神机警如猫在黑暗中泛着精光，动作轻盈无声无息，整个人宛若一道融入石壁阴影之中的黑烟。",
+        "半蹲在洞壁裂口处，两指夹着极细的探针小心翼翼探查古代重力落石翻板陷阱，面带戏谑冷笑却细致入微，总能在团队踏入死地前三秒揪出暗藏的要命机关。"
+      ],
+      "identity": {
+        "authority": "掌握前沿未知区域全部暗藏机关破拆权限与危险陷阱反制专权。",
+        "resources": [
+          "一具配有高强度金刚石钻头的破锁器工具包",
+          "三卷淬有剧毒神经毒素的纯钢绊索飞刃"
+        ],
+        "limits": [
+          "正面抗击巨兽冲击力不足体格偏轻捷",
+          "行事偏剑走偏锋容易招致正规军将领猜忌"
+        ],
+        "obligations": [
+          "誓死维护退路机关处于受控状态，防范深渊潜行魔物自暗道偷袭包抄。"
+        ],
+        "exposure": "一旦误触远古连锁自毁机关将引发整层遗迹全面崩塌陷落。",
+        "hidden": "实则是多年前从地底角斗场逃出的死囚奴隶，受女斥候庇护方重获自由，视女长官为唯一誓死效忠的明主。"
+      },
+      "decision": {
+        "core_value": "盗亦有道，命可丢义不能断，在刀山火海里为恩人扫平前路哪怕粉身碎骨在所不惜。",
+        "goal_options": [
+          "在破晓前破拆石室外围古代绊索陷阱引爆阻绝尾随魔兽",
+          "在狭窄紫晶裂隙中架设多重警报机关构筑绝对安全预警网",
+          "协助调查官搜集荧光苔藓露水与纯净解毒草药"
+        ],
+        "pressure_responses": {
+          "low": "在阴影中飞速布置绊马索与倒钩，嘴里嚼着肉干低声汇报敌情。",
+          "mid": "见潜伏魔兽逼近，果断射出毒飞刃精准命中兽目吸引火力撤离。",
+          "high": "在机关自毁倒计时危急关头，徒手卡入飞速咬合的齿轮为战友争取生路。",
+          "breaking": "右手三根手指被机关咬断依然用左手单手挑开最后一道救命铁栓。"
+        },
+        "withdrawal": "退回收缩至岩壁通风口最高死角，手中扣紧暴雨梨花暗器死守退路。",
+        "relationship_stance": "玩世不恭外冷内热，对调查官能不计前嫌舍生忘死救治女斥候怀有至深敬佩。",
+        "contrast": "看似满嘴浑话的市井小贼，在生死大义面前却能爆发出犹如古代刺客豫让般的舍命绝杀风骨。",
+        "prefers": [
+          "光明磊落不搞门户偏见且敢把后背交给盗贼的正派汉子"
+        ],
+        "avoids": [
+          "道貌岸然伪君子",
+          "过河拆桥背信弃义者"
+        ],
+        "never": [
+          "绝不会在危难关头卷走战利品独自潜行溜号。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "浩然正气胸怀坦荡之绝顶胆气",
+          "在生死淬炼中将自身当做肉盾护佑同伴的纯粹大担当"
+        ],
+        "likes": [
+          "机关完美触发把强敌坑杀在陷阱里的痛快畅饮",
+          "在晨曦万丈时拍打尘土数金币的自在洒脱"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏义气"
+        ],
+        "preconditions": [
+          "前遣调查支队青年机变百出通晓机关陷阱之斥候副手与对方都已完全清醒，眼前的危机已经解除",
+          "前遣调查支队青年机变百出通晓机关陷阱之斥候副手出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在战阵执勤期间恪守斥候清白边界",
+          "恪守同袍礼节绝不轻浮僭越"
+        ],
+        "expression": "收起机关匣重重抱拳向调查官致敬，将随身珍藏的一枚远古幸运辟邪金币塞入同伴掌心，朗声宣告从此上刀山下油锅唯二位马首是瞻。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "惊涛骇浪迷宫阴影中永远为战友侦破死穴扫除暗箭之幽影飞贼"
+      },
+      "voices": {
+        "surface": "别出声！右上方三步远的地方有三窝毒蜥蜴！踩中那块方石大家就得被石化成雕像！跟着我的脚印走，一步都别踩偏！调查官，剑拿稳！",
+        "inner": "长官！算我求你！斥候那姑娘早年就没过过一天好日子……在族里被排挤，在外面被当成怪物看……可今晚把命押在你手上了！你要是条汉子，就必须把人活着带出去！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "crystal_crevice_narrow_tunnel"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "moss_ruins_sanctuary_chamber"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "subterranean_toxic_miasma_abyss"
+        },
+        {
+          "from": 90,
+          "to": 1439,
+          "location_id": "collapsed_tunnel_rubble_barrier"
+        }
+      ],
+      "situation": {
+        "trigger": "一队潜伏在暗处的深渊剧毒石化蜥蜴正悄然顺着通风岩缝向避难石室后方包抄，长达数寸的毒刺已对准昏睡的女斥候咽喉。",
+        "pressure": "若不能在十秒内启动岩缝中的古代淬火翻板陷阱将其全歼，毒刺一旦射出毒液入喉神仙难救。",
+        "exits": [
+          {
+            "option": "盗贼舍身扑出以飞索强行拉扯卡死生锈的翻板连杆砸落巨石",
+            "cost": "盗贼右小腿在机关反弹中被重达数百斤的铁闸砸断大面积骨折。"
+          },
+          {
+            "option": "调查官飞身扑在女斥候身前以刺剑如雨点般格飞全部破空毒刺",
+            "cost": "调查官左肩大面积被毒刺尾端擦破毒血横流皮肤麻木剧痛。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "frontier_cleric_maiden_aria",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁在边境圣堂修习战地神圣治愈与毒素净化之青年仁心女牧师。",
+      "public_role": "前遣调查支队青年温柔坚毅通晓神圣净化之随军医疗修士",
+      "appearance_options": [
+        "一身穿旧泛黄但洗得一尘不染的白底金边修女法袍，胸前佩戴一枚纯银晨曦圣徽，浅棕色短发柔顺地拢在耳后，双眸如晨星般澄澈柔和，腰间挂着装有圣水、银针与草药软膏的皮革急救包，周身散发着纯净乳香与草药微甘气息。",
+        "半跪在冰凉石板上，双手紧握纯银圣徽抵在胸口，虔诚默念神圣治愈经文，淡淡的金色温暖微光自指尖溢出轻柔笼罩在伤病员创口之上，动作轻柔而神圣，在绝望地底深渊中宛如一道自云端洒落的纯白破晓之光。"
+      ],
+      "identity": {
+        "authority": "掌握前沿战地神圣净化术施展权限与高阶救命圣水配额分配专权。",
+        "resources": [
+          "一瓶用晨曦之泪祝圣的纯银秘银圣水小瓶",
+          "一枚刻有十二天使守护符文的圣光加护十字项链"
+        ],
+        "limits": [
+          "受深渊地底暗影魔力压制神圣法术威力被大幅削弱五成",
+          "肉身单薄缺乏物理格斗自卫手段"
+        ],
+        "obligations": [
+          "誓死维护幸存战友生命体征平稳，阻截深渊魔毒侵入心室化为魔物。"
+        ],
+        "exposure": "圣水一旦耗尽将失去抵抗深度魔毒感染的最后屏障。",
+        "hidden": "实则是被圣堂高层派遣随军暗中监视异族动向之审查修女，但在见证女斥候舍生取义后毅然烧毁告密文书立誓同生共死。"
+      },
+      "decision": {
+        "core_value": "神之大爱无分种族，救死扶伤乃医者天职，在苦难深渊中哪怕燃尽自身微光也要点亮希望生机。",
+        "goal_options": [
+          "在破晓前以神圣净化术压制女斥候体内扩散的剧毒深渊魔毒",
+          "指导调查官以护手扣腕导魔，并配合圣水完成复苏操典",
+          "在破晓迎接搜救队时救治全部重伤同袍无一夭折"
+        ],
+        "pressure_responses": {
+          "low": "在门侧安静分发干粮与清水，温声细语抚慰战友恐惧心神。",
+          "mid": "见女斥候高热抽搐，果断倾尽圣水以神圣银针刺入周身大穴放血排毒。",
+          "high": "在魔兽爪击破墙危急关头，用肉身扑在伤员身上施展圣光护盾阻挡石雨。",
+          "breaking": "神圣法力彻底干涸神圣反噬咳血依然握紧银十字架为战友祈福诵念。"
+        },
+        "withdrawal": "退回收缩至白石断壁后方阴影处，双手护住圣水小瓶死守医德底线。",
+        "relationship_stance": "慈悲温婉大爱无私，深敬女斥候之傲骨与青年调查官之至情至性。",
+        "contrast": "看似弱不禁风的虔诚修女，在狂澜深渊面前却能爆发出犹如殉道圣徒般的绝顶坚毅大慈悲。",
+        "prefers": [
+          "敬畏生命心怀仁勇且在危机面前懂得互相关照同袍的纯善君子"
+        ],
+        "avoids": [
+          "滥杀无辜残害弱小者",
+          "自私自利抢夺救命物资之徒"
+        ],
+        "never": [
+          "绝不会在伤员危在旦夕时退缩或放弃任何一个生命。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "浩然正气视死如归之高洁操守",
+          "在生死淬炼中将自身当做肉盾护佑异族同袍的超越种族大爱"
+        ],
+        "likes": [
+          "伤员创口愈合平稳苏醒那一刻的由衷感恩落泪",
+          "在破晓晨曦中洗去血污并肩祈愿的静好"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏神圣大爱"
+        ],
+        "preconditions": [
+          "前遣调查支队青年温柔坚毅通晓神圣净化之随军医疗修士与对方都已完全清醒，眼前的危机已经解除",
+          "前遣调查支队青年温柔坚毅通晓神圣净化之随军医疗修士出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在神职执勤期间恪守修女清净戒律",
+          "恪守同袍礼节绝不轻浮僭越，分秒都耽搁不起。"
+        ],
+        "expression": "双手将一枚纯银晨曦圣徽项链双手奉上为同伴佩戴在颈间，含泪垂眸低首行祈福礼，轻声诵念晨曦祝词，愿光明永远护佑二位相依相随一生平安康泰。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "惊涛骇浪迷宫深渊中永远为受创灵魂拂去剧痛守护生机之圣光天使"
+      },
+      "voices": {
+        "surface": "各位战友，神圣之光未曾抛弃我们！请握紧彼此的双手！只要心中还有光明，深渊的毒霾就无法吞噬我们的灵魂！调查官，请扶稳斥候的双肩！",
+        "inner": "调查官先生……圣水只剩最后三滴了，光靠法术已经救不回来了！毛毡、热魔石，全拿过来——你托住斥候的头，我来滴圣水！把斥候从死亡的冰渊里拉回来！拜托了！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "moss_ruins_sanctuary_chamber"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "crystal_crevice_narrow_tunnel"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "moss_ruins_sanctuary_chamber"
+        },
+        {
+          "from": 90,
+          "to": 1439,
+          "location_id": "collapsed_tunnel_rubble_barrier"
+        }
+      ],
+      "situation": {
+        "trigger": "女斥候体内深渊魔毒冲破神圣压制直逼心室，四肢冰冷心跳微弱濒临骤停，体温跌破临界点陷入濒死休克。",
+        "pressure": "若不能在五分钟内用毛毡与烤热的魔石为女斥候复温，并用银匙把最后一滴高阶圣水滴入其舌下，心脏停跳后将无力回天。",
+        "exits": [
+          {
+            "option": "调查官解下自身斗篷与毛毡层层裹住女斥候，再把烤热的火属性魔石塞进毯边",
+            "cost": "调查官只剩单衣守在漏风的石缝口，冻得指尖发紫手脚麻木。"
+          },
+          {
+            "option": "调查官托起女斥候后颈，用银匙把最后一滴圣水稳稳滴入其舌下",
+            "cost": "调查官手背被女斥候无意识抓出几道血痕，魔毒顺着伤口渗入微微发黑。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "royal_sapper_captain_brenn",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        25,
+        27
+      ],
+      "adult_context": "年满二十六岁的王立工兵突击大队正式破拆队长。",
+      "public_role": "王立工兵突击大队青年破拆队长",
+      "appearance_options": [
+        "满身岩粉的皮质工兵围裙外挂着成排凿子与爆破晶石，护目镜推在额头上，传音法杖别在腰后，嗓门比凿岩声还大。",
+        "蹲在花岗岩断面前用指节一寸寸敲听回音，在羊皮图上画下下一镐该落在哪里。"
+      ],
+      "identity": {
+        "authority": "指挥工兵大队的凿岩与定向爆破，决定从哪一面岩壁打通坑道。",
+        "resources": [
+          "一组重型精钢凿岩镐",
+          "三枚定向爆破晶石"
+        ],
+        "limits": [
+          "塌方回音复杂，听不准受困者的确切方位",
+          "爆破稍有偏差就会引发二次塌方"
+        ],
+        "obligations": [
+          "在破晓前凿穿塌方堆，把受困的先遣队一个不少地接出来。"
+        ],
+        "exposure": "若误炸活埋受困者，将被军法处以渎职重罪论处。",
+        "hidden": "上一次塌方救援晚到了一刻钟，这次发誓要亲手敲开最后一块岩壁。"
+      },
+      "decision": {
+        "core_value": "宁可多凿一个时辰，也不拿受困者的命去赌一次爆破。",
+        "goal_options": [
+          "循着三长两短的敲击声定位石室",
+          "在最薄的岩层处凿出接应口",
+          "把伤员优先抬出坑道"
+        ],
+        "pressure_responses": {
+          "low": "在传音法杖里一遍遍报掘进的尺数。",
+          "mid": "亲自贴着岩壁听回音，叫停所有人的镐。",
+          "high": "顶着二次塌方的风险下令全速凿进。",
+          "breaking": "爆破晶石受潮失效时，抡起镐头一下一下亲手往里凿。"
+        },
+        "withdrawal": "退到坑道后方，盯着羊皮图一言不发地重新算方位。",
+        "relationship_stance": "干脆利落，只敬重在塌方底下还肯敲石头报信的人。",
+        "contrast": "吼起手下来像打雷，见到受困者爬出岩缝时却会背过身去抹一把脸。",
+        "prefers": [
+          "信号敲得清楚、不乱动的受困者"
+        ],
+        "avoids": [
+          "在坑道里乱放火光的人"
+        ],
+        "never": [
+          "绝不会在还有一人困在石室时收队。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "困在地底一整夜还能把信号敲得分毫不差的那份冷静",
+          "先把伤员推出岩缝、自己最后出来的那份担当"
+        ],
+        "likes": [
+          "收工后在坑道口喝一口烈酒"
+        ],
+        "dislikes": [
+          "逞强",
+          "不听调度"
+        ],
+        "preconditions": [
+          "王立工兵突击大队青年破拆队长与对方都已完全清醒，眼前的危机已经解除",
+          "王立工兵突击大队青年破拆队长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "救援作业期间只谈正事"
+        ],
+        "expression": "把一把磨亮的工兵凿塞进对方手里，说下次下地城记得先找工兵探路。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "塌方之后总会第一个凿开岩壁的那双手"
+      },
+      "voices": {
+        "surface": "里面的听着！再敲一次三长两短！我们离你们只剩两尺了！",
+        "inner": "听见了……是石室那边……都还活着。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "collapsed_tunnel_rubble_barrier"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "collapsed_tunnel_rubble_barrier"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "collapsed_tunnel_rubble_barrier"
+        },
+        {
+          "from": 90,
+          "to": 1439,
+          "location_id": "collapsed_tunnel_rubble_barrier"
+        }
+      ],
+      "situation": {
+        "trigger": "工兵大队凿到最后一层花岗岩时，镐尖碰出了暗河的渗水，再凿下去可能整面岩壁倒灌泥水。",
+        "pressure": "若不能在一刻钟内找到绕开暗河的新角度，接应口要推迟到天亮之后。",
+        "exits": [
+          {
+            "option": "破拆队长当场改道，斜着从上方凿出一条窄缝",
+            "cost": "窄缝只容一人侧身，伤员得被一个个拖出来。"
+          },
+          {
+            "option": "调查官在石室内侧用木桩撑住岩壁、挖沟导走渗水",
+            "cost": "调查官整夜泡在泥水里，双腿冻得发紫。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_panicked_apprentice_porter",
+      "role": "抱紧行李卷在石柱下发抖青年辎重挑夫",
+      "function": "witness",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "line": "{npc.name}：外面全是指甲挠石头的声音……塌方把路都堵死了，我们是不是要烂在地下城十层了？！",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁受雇于远征队搬运物资的年轻力工后生。",
+      "name": null
+    },
+    {
+      "id": "bg_injured_frontline_vanguard_soldier",
+      "role": "靠在石堆旁包扎断腿青年重装前锋伤卒",
+      "function": "helper",
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "line": "{npc.name}：我这只手还能拉动强弩！只要这帮畜生敢露头，老子临死前也得拉两个垫背的！",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁在前线冲锋负伤的青年坚毅步兵。",
+      "name": null
+    },
+    {
+      "id": "bg_hidden_drow_infiltrator_watcher",
+      "role": "潜伏在紫晶矿缝暗中观察青年部族暗杀者",
+      "function": "obstacle",
+      "location_ids": [
+        "crystal_crevice_narrow_tunnel"
+      ],
+      "line": "{npc.name}：叛徒斥候……竟然把神圣破魔短刃交给了地面的人类杂种……按族规当受万蛇噬心之刑！",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁奉暗夜部族死律追缉叛逆的年轻冷酷杀手。",
+      "name": null
+    },
+    {
+      "id": "bg_lost_mercenary_scout_scavenger",
+      "role": "在深渊断崖捡拾魔晶落魄青年佣兵斥候",
+      "function": "rumor_source",
+      "location_ids": [
+        "subterranean_toxic_miasma_abyss"
+      ],
+      "line": "{npc.name}：下面的深渊毒雾快满上来了！听说第十一层的深渊领主苏醒了，这片地脉全被污染了！",
+      "gender": "any",
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十二周岁常年在地底深渊冒险发死人财的年轻亡命徒。",
+      "name": null
+    },
+    {
+      "id": "bg_rescue_miner_team_messenger",
+      "role": "用传音法杖通报进度的搜救通信兵",
+      "function": "messenger",
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "line": "{npc.name}：呼叫被困第一前遣队！这里是第三破拆重装大队！我们正在凿穿第七号花岗岩屏障！坚持住！",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁在王立工兵突击队担任战地联络的年轻通信兵。",
+      "name": null
+    },
+    {
+      "id": "bg_fanatic_cultist_infiltrator",
+      "role": "潜伏在幸存者中企图献祭全员深渊邪教徒",
+      "function": "obstacle",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "line": "{npc.name}：深渊的伟大意志降临了……反抗是徒劳的，献出你们的血肉才能成为永恒新神的一部分！",
+      "gender": "any",
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十二周岁被深渊低语蛊惑精神癫狂的年轻潜伏邪教狂信徒。",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_moss_ruins_whisper_heartbeat_resonanc",
+      "text": "石室荧光微光下的呼吸心跳共振",
+      "reach": "二人在狭小避难石室并肩守夜时，压在耳边的急促喘息与魔纹共振引发的剧烈心跳震颤。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_subterranean_beast_scratch_rumble",
+      "text": "狂暴深渊魔兽爪击巨石沉重抓挠回响",
+      "reach": "穿透避难石室厚重石板传来的低沉咆哮、巨兽尖爪刮擦岩石令人牙酸的尖锐声响与地脉余震崩塌的沉闷轰鸣。",
+      "fidelity": "distorted"
+    },
+    {
+      "id": "ch_mithril_chisel_rock_knock_code",
+      "text": "秘银刻刀敲击石壁三长两短求救声波",
+      "reach": "自塌方碎石堆缝隙传来的精钢工具敲击岩石的清脆节律回响与远方工兵大队沉重重锤破拆岩壁之回声。",
+      "fidelity": "exact"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_drow_scout_pride_vs_contact_mana_warm",
+      "text": "冷傲黑暗精灵女斥候至高无上的异族戒备，与回路逆流时不得不把手腕交给身旁人类调查官、任其引走魔火的羞愤对冲。"
+    },
+    {
+      "id": "te_mana_circuit_burnout_vs_beast_swarm_s",
+      "text": "体内魔力回路即将彻底暴走化魔之致命生理死线与洞外狂暴深渊魔兽大军疯狂爪击破门合围的肉体极限生死决战对赌。"
+    },
+    {
+      "id": "te_collapse_oxygen_depletion_vs_dawn_pic",
+      "text": "主坑道彻底封死毒瘴漫溢窒息绝境与破晓晨曦六点重装工兵突击大队凿穿花岗岩岩层的绝命夺命倒计时极速时间赛跑。"
+    },
+    {
+      "id": "te_blood_runic_vow_vs_tender_kiss_breach",
+      "text": "陨星短刃握柄相托的战地后背信诺，与魔纹褪尽之后背靠背守夜、心跳失控的种族心防崩塌。"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_drow_scout_adjutant_contact_vow",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "dungeon_expedition_special_investigator",
+        "arcane_rune_artificer_adept"
+      ],
+      "slots": [
+        "proud_drow_scout_valeria",
+        "veteran_mercenary_leader_garrick"
+      ],
+      "tension_engine_ids": [
+        "te_drow_scout_pride_vs_contact_mana_warm",
+        "te_blood_runic_vow_vs_tender_kiss_breach"
+      ],
+      "chemistry": "{proud_drow_scout_valeria.name}皮甲破损魔纹发烫伏倒，你在学者法阵中隔着护手扣住其手腕、把逆流魔火一寸寸引入基岩，{veteran_mercenary_leader_garrick.name}在洞口横剑死守阻截兽潮；等魔纹褪尽、紫眸重新清明，女斥候才第一次没有甩开那只手。",
+      "stakes": {
+        "resource_gap": "女斥候精通迷宫暗道却身中魔毒面临回路暴走，调查官身正骨硬精通导魔誓死护卫长官生机与全图完好。",
+        "limit_gap": "平日异族戒备森严不可近身，此刻狭小石室里只隔一只护手，呼吸相闻心跳共振。",
+        "meeting_reason": "荧光苔藓避难石室内的法阵导魔与深渊地图全卷双人守备。",
+        "irreplaceable_goal": "在狂暴深渊夜中抵御魔毒守住暗道并在破晓前确立二人同生共死之契约。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "proud_drow_scout_valeria",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 3
+          },
+          "reason": "愿以自身胸膛与生命为其挡下漫天魔兽狂潮，誓死守护高傲女斥候之尊严与生机。"
+        },
+        {
+          "a": "veteran_mercenary_leader_garrick",
+          "b": "proud_drow_scout_valeria",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 2
+          },
+          "reason": "恪尽战士本分誓死保全先遣队战果，在前沿隘口构筑钢铁长城阻击兽潮。"
+        },
+        {
+          "a": "player",
+          "b": "veteran_mercenary_leader_garrick",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "王立遗迹调查团青年先遣监察调查官与王立联军前沿护卫支队年轻老练刚毅沉稳之副队长在今夜前只打过照面。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_circuit_burnout_counter_standoff",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "dungeon_expedition_special_investigator",
+        "arcane_rune_artificer_adept"
+      ],
+      "slots": [
+        "arcane_scholar_maiden_elise",
+        "proud_drow_scout_valeria"
+      ],
+      "tension_engine_ids": [
+        "te_mana_circuit_burnout_vs_beast_swarm_s",
+        "te_collapse_oxygen_depletion_vs_dawn_pic"
+      ],
+      "chemistry": "{arcane_scholar_maiden_elise.name}手持法杖在祭台前推演同调共振频率，{proud_drow_scout_valeria.name}在石壁前强忍剧痛指导暗道布防，你以身体充当活体导魔电桥分流狂暴魔力，奥术智慧与异族武骨在风暴绝境中联手构筑起坚不可摧之精神灯塔。",
+      "stakes": {
+        "resource_gap": "外界塌方封门魔兽环伺，全场仅存一座快要断电开裂的古老精灵祭台法阵。",
+        "limit_gap": "共振频率一旦偏差半度回路将瞬间原地自爆化为飞灰。",
+        "meeting_reason": "石室残破祭台前的紧急魔力频率校准与活体回路搭桥。",
+        "irreplaceable_goal": "确保女斥候体内紊乱暗影魔力安全平息归位重获战力。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "arcane_scholar_maiden_elise",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 2
+          },
+          "reason": "深佩女学者奥术推演之过硬本领，全力配合其施展共振阵法。"
+        },
+        {
+          "a": "arcane_scholar_maiden_elise",
+          "b": "proud_drow_scout_valeria",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 2
+          },
+          "reason": "敬佩其孤傲坚韧之大将风范，誓死为其守住奥术生机。"
+        },
+        {
+          "a": "player",
+          "b": "proud_drow_scout_valeria",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "王立地下城远征联军第一先遣队冷傲精悍之黑暗精灵女斥候长只听人提过王立遗迹调查团青年先遣监察调查官的名字，今夜才第一次对上眼。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_rubble_barrier_fortress_defense",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "heavy_vanguard_shield_bearer_youth",
+        "frontier_alchemist_apothecary_youth"
+      ],
+      "slots": [
+        "veteran_mercenary_leader_garrick",
+        "proud_drow_scout_valeria"
+      ],
+      "tension_engine_ids": [
+        "te_mana_circuit_burnout_vs_beast_swarm_s",
+        "te_drow_scout_pride_vs_contact_mana_warm"
+      ],
+      "chemistry": "{veteran_mercenary_leader_garrick.name}手持开山重剑在塌方隘口死战阻敌，你配合以重装塔盾卡死石缝死角化解狼群撕咬，{proud_drow_scout_valeria.name}在室内射出精准暗影飞刀点杀强敌，钢铁血性与异族箭术在漫天绝境中化作粉碎一切深渊之绝命战阵。",
+      "stakes": {
+        "resource_gap": "塌方巨石摇摇欲坠强敌如潮，阵前守军手握最后几把破损重剑与塔盾。",
+        "limit_gap": "坚守早一刻可保全石室无虞，退后半步兽群涌入全室死无全尸。",
+        "meeting_reason": "十层主坑道塌方堆隘口前线的绝命阻击与盾墙合拢。",
+        "irreplaceable_goal": "确保石室避难环境绝对封闭阻绝一切外部深渊魔兽冲入。"
+      },
+      "relations": [
+        {
+          "a": "veteran_mercenary_leader_garrick",
+          "b": "proud_drow_scout_valeria",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "深佩女斥候舍身探路之无双义举，誓死以身断后。"
+        },
+        {
+          "a": "player",
+          "b": "veteran_mercenary_leader_garrick",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "前线步兵同侪间托付生死的默契与热血。"
+        },
+        {
+          "a": "player",
+          "b": "proud_drow_scout_valeria",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "破阵前锋青年重装塔盾卫士和王立地下城远征联军第一先遣队冷傲精悍之黑暗精灵女斥候长各怀心事，被这场意外硬塞进同一个角落。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_sanctuary_healing_communion_vow",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "dungeon_expedition_special_investigator",
+        "arcane_rune_artificer_adept"
+      ],
+      "slots": [
+        "frontier_cleric_maiden_aria",
+        "proud_drow_scout_valeria"
+      ],
+      "tension_engine_ids": [
+        "te_drow_scout_pride_vs_contact_mana_warm",
+        "te_blood_runic_vow_vs_tender_kiss_breach"
+      ],
+      "chemistry": "{frontier_cleric_maiden_aria.name}在荧光苔藓旁以晨曦圣水擦拭女斥候背部创口，你用毛毡与烤热魔石为女长官复温、一匙一匙喂下岩露，{proud_drow_scout_valeria.name}在体温回升、神志清明之后卸下全部防备流露真情，绝境中的神圣慈悲与知己真爱融化冰冷芥蒂。",
+      "stakes": {
+        "resource_gap": "石室阴冷潮湿魔毒刺骨，女斥候面临严重魔力枯竭与心力衰竭休克。",
+        "limit_gap": "稍有差池体温持续跌破临界点将诱发心跳骤停香消玉殒。",
+        "meeting_reason": "荧光苔藓石室深处避风角落的毛毡复温监护与圣水喂服。",
+        "irreplaceable_goal": "确保女斥候平稳度过子夜最凶险之魔毒爆发期恢复生机。"
+      },
+      "relations": [
+        {
+          "a": "frontier_cleric_maiden_aria",
+          "b": "proud_drow_scout_valeria",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "感佩其多年异族颠沛流离之苦，立誓倾尽圣光为其保全生机与尊严。"
+        },
+        {
+          "a": "player",
+          "b": "frontier_cleric_maiden_aria",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "医疗护理过程中的紧密配合与同袍相濡以沫。"
+        },
+        {
+          "a": "player",
+          "b": "proud_drow_scout_valeria",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "王立地下城远征联军第一先遣队冷傲精悍之黑暗精灵女斥候长对王立遗迹调查团青年先遣监察调查官本无交情，眼下却不得不互相照应。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_dawn_breakthrough_triumph",
+      "power_structure": "switchable",
+      "player_positions": [
+        "equal",
+        "high"
+      ],
+      "identity_ids": [
+        "dungeon_expedition_special_investigator",
+        "arcane_rune_artificer_adept",
+        "aristocratic_patron_scion_knight"
+      ],
+      "slots": [
+        "proud_drow_scout_valeria",
+        "veteran_mercenary_leader_garrick",
+        "royal_sapper_captain_brenn"
+      ],
+      "tension_engine_ids": [
+        "te_collapse_oxygen_depletion_vs_dawn_pic",
+        "te_blood_runic_vow_vs_tender_kiss_breach"
+      ],
+      "chemistry": "{proud_drow_scout_valeria.name}迎着破晓晨曦凿开的耀眼天光挽着你臂弯踏出塌方石室，重装工兵大队发出震天动地之欢呼致敬，{veteran_mercenary_leader_garrick.name}高举重剑放声大笑，女斥候当众将染血暗夜白发带缠在青年手腕，宣告二人永结同盟跨越深渊凯旋定格。",
+      "stakes": {
+        "resource_gap": "坚守长夜六个小时任务圆满达成，搜救重装工兵准时破石贯通接引生还。",
+        "limit_gap": "从孤立无援濒临魔化受困者蜕变为征服深渊十层改写历史之神仙眷侣。",
+        "meeting_reason": "破晓晨光下主坑道贯通点的全军会师与白发带血契确立。",
+        "irreplaceable_goal": "向全天下昭示先遣队无暇战果并确立身边青年终生相伴之名分。"
+      },
+      "relations": [
+        {
+          "a": "proud_drow_scout_valeria",
+          "b": "player",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "此生此世共历荧光石室生死长夜，今后无论深渊人间风雨多大并肩同甘共苦永相厮守。"
+        },
+        {
+          "a": "veteran_mercenary_leader_garrick",
+          "b": "proud_drow_scout_valeria",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "见证了一段载入史册之深渊不朽传奇，由衷释怀含泪欢呼挥剑致敬。"
+        },
+        {
+          "a": "player",
+          "b": "veteran_mercenary_leader_garrick",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "困局逼着王立遗迹调查团青年先遣监察调查官与王立联军前沿护卫支队年轻老练刚毅沉稳之副队长彼此试探，谁也没把底交出来。"
+        },
+        {
+          "a": "player",
+          "b": "royal_sapper_captain_brenn",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "困局逼着王立遗迹调查团青年先遣监察调查官与王立工兵突击大队青年破拆队长彼此试探，谁也没把底交出来。"
+        },
+        {
+          "a": "proud_drow_scout_valeria",
+          "b": "royal_sapper_captain_brenn",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "困局逼着王立地下城远征联军第一先遣队冷傲精悍之黑暗精灵女斥候长与王立工兵突击大队青年破拆队长彼此试探，谁也没把底交出来。"
+        },
+        {
+          "a": "veteran_mercenary_leader_garrick",
+          "b": "royal_sapper_captain_brenn",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "困局逼着王立联军前沿护卫支队年轻老练刚毅沉稳之副队长与王立工兵突击大队青年破拆队长彼此试探，谁也没把底交出来。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_trapper_rogue_shadow_sentinel",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "aristocratic_patron_scion_knight"
+      ],
+      "slots": [
+        "dungeon_trapper_rogue_kyle",
+        "proud_drow_scout_valeria"
+      ],
+      "tension_engine_ids": [
+        "te_mana_circuit_burnout_vs_beast_swarm_s",
+        "te_blood_runic_vow_vs_tender_kiss_breach"
+      ],
+      "chemistry": "{dungeon_trapper_rogue_kyle.name}在紫晶裂隙外布置连环暗影绊索反杀潜行杀手，{proud_drow_scout_valeria.name}在内侧以毒针精准补刀，你统领全局协调攻防，游侠暗杀技艺与调查官战阵指挥交相辉映，彻底绞碎一切深渊宵小企图趁火打劫之痴心妄想。",
+      "stakes": {
+        "resource_gap": "暗影中暗藏部族死士与深渊毒蜥多面夹击，守军唯有几卷钢丝机关与两柄短刃。",
+        "limit_gap": "反制成功则保全石室退路通畅，失误一次毒刺入体全盘崩盘。",
+        "meeting_reason": "紫晶矿脉狭窄裂隙深处的机关布设与潜伏暗杀阻截。",
+        "irreplaceable_goal": "确保石室后方绝对静谧隔绝一切来自身后之致命背刺。"
+      },
+      "relations": [
+        {
+          "a": "dungeon_trapper_rogue_kyle",
+          "b": "proud_drow_scout_valeria",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "视女斥候为重获新生之再生父母，甘愿为其赴汤蹈火在所不辞。"
+        },
+        {
+          "a": "player",
+          "b": "dungeon_trapper_rogue_kyle",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "战阵排险中的默契呼应与生死互保。"
+        },
+        {
+          "a": "player",
+          "b": "proud_drow_scout_valeria",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "王立遗迹调查团青年先遣监察调查官记得王立地下城远征联军第一先遣队冷傲精悍之黑暗精灵女斥候长的脸，却想不起在哪见过。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "a_moss_chamber_armor_unbuckling_mana_flo",
+      "title": "荧光石室破损皮甲解扣与法阵导魔",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "大塌方巨响震荡地脉，避难石室被封死，幽蓝荧光苔藓冷光下，女斥候皮甲染血魔纹暴走发烫。",
+        "调查官小心割开卡死皮甲铜扣，学者在祭台布下同调法阵，调查官隔着护手扣住女斥候手腕把逆流魔火引入基岩。",
+        "魔纹渐褪、神志清明后，女斥候握紧同伴手腕，低声推演破晓生门，确立战地生死血契。"
+      ],
+      "hook_ids": [
+        "h_valeria_glowing_moss_breath_fever",
+        "h_valeria_adamantine_dagger_whisper",
+        "h_garrick_greatsword_stone_shout"
+      ],
+      "start_minute": 0,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_rubble_barrier_rock_clearing_reinforce",
+      "title": "塌方主坑道巨石裂缝通气孔排险加固",
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "余震导致巨石缝隙不断渗出浑浊泥流，重步兵队长手持破甲大剑斩断凸起棱角开辟稳固支撑点。",
+        "调查官以折叠撬棍在石缝间敲击三长两短求救信标，女斥候持短刃在旁敏锐倾听岩层回音变化。",
+        "碎石堆在木桩支撑下稳固成型，通风孔成功打通，前线突击队微弱回敲声隐隐穿透岩层传来。"
+      ],
+      "hook_ids": [
+        "h_garrick_greatsword_stone_shout",
+        "h_elise_star_staff_formula_shout",
+        "h_valeria_glowing_moss_breath_fever"
+      ],
+      "start_minute": 45,
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "a_crystal_crevice_trap_perimeter_defense",
+      "title": "紫晶裂隙机关绊索布设与潜伏杀手阻击",
+      "location_ids": [
+        "crystal_crevice_narrow_tunnel"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "盗贼在狭窄紫晶石缝中飞速布设纯钢绊马索与倒钩飞刃，构筑起阻绝深渊毒物的立体杀阵。",
+        "潜行杀手企图趁黑摸入，女斥候甩出暗影飞刀将其钉在岩壁，调查官飞身上前缴下凶器与密卷。",
+        "紫晶矿脉在法术激荡下折射出璀璨星芒，退路威胁被连根拔起宣告后方防线彻底稳如泰山。"
+      ],
+      "hook_ids": [
+        "h_kyle_wire_trap_spring_shout",
+        "h_valeria_adamantine_dagger_whisper",
+        "h_aria_silver_chalice_prayer_whisper"
+      ],
+      "start_minute": 85,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_altar_mana_resonance_purification_vow",
+      "title": "残破古祭台魔血修补与心跳同调盟誓",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "祭台符文石板破裂濒临熄灭，学者割破手腕以魔血搭桥，调查官全力灌注精神力稳固法阵中枢。",
+        "女斥候在纯净光幕笼罩下魔毒尽退，灰白肌肤恢复温润光泽，含泪反拥同伴脖颈倾诉多年孤寂。",
+        "女斥候咬破指尖在青年手背绘制暗夜血契图腾，立下破晓之后无论世俗目光一生相随之重誓。"
+      ],
+      "hook_ids": [
+        "h_valeria_adamantine_dagger_whisper",
+        "h_aria_silver_chalice_prayer_whisper",
+        "h_valeria_glowing_moss_breath_fever"
+      ],
+      "start_minute": 130,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_holy_water_fever_cooling_ritual",
+      "title": "晨曦圣水润喉降温与神圣祝祷定神",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "修女以银针导引最后一滴晨曦圣水，调查官以石碗采集甘甜纯净的苔藓岩露，捧到女斥候唇边由其小口饮下。",
+        "神圣温暖微光自额头轻柔抚平紧绷神经，全员伤痛大减神思清明，狂暴狼嚎在祷告声中渐息。",
+        "女斥候重新穿好硬皮甲佩好精金短刃，双眸恢复如刀锋般犀利，做好迎接破晓全胜突围准备。"
+      ],
+      "hook_ids": [
+        "h_aria_silver_chalice_prayer_whisper",
+        "h_valeria_glowing_moss_breath_fever",
+        "h_garrick_greatsword_stone_shout"
+      ],
+      "start_minute": 165,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_dawn_pickaxe_breakthrough_triumph",
+      "title": "破晓岩层贯通大军会师与白发带盟誓定格",
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "破晓晨曦六点整第一缕耀眼金色天光破开被重锤击穿的万斤花岗岩石壁照亮昏暗地下城十层。",
+        "后方王立重装工兵突击大队破石而入胜利贯通，满堂欢呼声中女斥候挽着调查官臂弯昂首踏出。",
+        "女斥候亲手将贴身纯白发带系在青年手腕宣告终生相守，十层迷宫全图献出铸就传奇凯旋丰碑。"
+      ],
+      "hook_ids": [
+        "h_valeria_dawn_ribbon_triumph_vow",
+        "h_garrick_greatsword_stone_shout",
+        "h_elise_star_staff_formula_shout"
+      ],
+      "start_minute": 195,
+      "tags": [
+        "workplace"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_mana_overload_circuit_meltdown",
+      "title": "暗夜斥候魔力回路逆流过载魔化暴走死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "trigger": "地脉紊乱与过度透支暗影斗气导致女斥候体表魔力回路发生特大逆流暴走，赤红发烫魔纹以每十分钟一寸的速度向心室与额头蔓延，一旦魔纹贯通心脉将彻底化为失去人性的深渊魔人。",
+      "objective": "在十分钟内由学者校准同调法阵，调查官隔着护手扣住女斥候手腕把逆流魔力引入基岩，配合注入抗魔毒血清压住魔纹蔓延。",
+      "choice": "是冒双掌被魔火灼伤之险扣腕引流，还是让女斥候自行把短刃扎进基岩、赌上一条手臂强行泄魔？",
+      "immediate": {
+        "text": "魔纹已攀爬至女斥候颈侧，皮肤散发焦糊高温，贝齿咬破下唇发出痛苦破碎的低吟。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内排空逆流魔力，经脉彻底崩解将诱发肉身自爆并波及石室内全部人员。",
+        "deadline_minutes": 25
+      },
+      "far": {
+        "trigger": "女斥候经脉寸断魔化暴走化为嗜血魔物。",
+        "consequence": "联军尖刀斥候殒落神魂俱灭全员痛失向导。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "调查官戴上秘银护手扣住女斥候双腕，借法阵把过载魔火一寸寸引入地脉",
+          "cost": "调查官双掌隔着护手仍被魔火灼伤，皮下大面积淤血起泡发烫。"
+        },
+        {
+          "option": "女斥候反手将精金短刃扎入身下基岩强行将逆流狂暴魔力导入大地",
+          "cost": "女斥候右手腕骨在魔爆反震中严重骨裂经脉剧痛短期无法握刀。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_valeria_glowing_moss_breath_fever",
+        "h_aria_silver_chalice_prayer_whisper"
+      ],
+      "start_minute": 0,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_beast_claw_battering_sanctuary_barrier",
+      "title": "深渊暴风魔狼群狂暴爪击石室封门屏障危局",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "trigger": "循着血腥气合围而来的数十头深渊暴风魔狼首领正疯狂以重爪撞击石室封门巨石，外层花岗岩已被抓出数寸深裂痕，利爪随时破门而入将室内撕碎。",
+      "objective": "在十分钟内由重步兵队长挥剑横守隘口，配合调查官以战术刺剑穿透石缝刺瞎狼王双目逼退群兽。",
+      "choice": "是用血肉肩膀顶住摇摇欲坠的挡门石板硬抗巨兽冲撞，还是冒险拉开石门短兵相接决死一搏？",
+      "immediate": {
+        "text": "巨石门板在狂暴撞击下发出震耳欲聋呻吟，腥臭热气穿透缝隙喷在守军脸上令人作呕。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "一刻钟内若不能击退兽群，门板碎裂群兽扑入狭小石室将引发惨绝人寰单方面屠杀。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "防线失守兽群涌入石室全员惨遭分尸吞噬。",
+        "consequence": "第一先遣队全军覆没十层探险全盘流产惨败。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "调查官冒着断腕之险将折叠刺剑自石缝闪电刺入狼王左眼眶逼退狼群",
+          "cost": "调查官右小臂被暴退之兽爪骨刺带出一道深可见骨血槽鲜血狂涌。"
+        },
+        {
+          "option": "队长将开山重剑死死当做钢楔砸入门缝咬合点用身体承受反震巨力",
+          "cost": "队长双臂肌肉撕脱性拉伤胸口肋骨被巨力反震轻度骨裂剧痛。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_garrick_greatsword_stone_shout",
+        "h_valeria_adamantine_dagger_whisper"
+      ],
+      "start_minute": 35,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_secondary_cavein_ceiling_collapse",
+      "title": "主坑道余震引发天顶万斤巨石二次塌方死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "trigger": "深层地脉发生剧烈二次余震，石室正上方重达数吨的倒悬钟乳石群与花岗岩穹顶产生连续开裂巨响，大块碎石如冰雹般砸落，穹顶随时整体塌陷。",
+      "objective": "在十分钟内由重盾卫士架起塔盾构筑防砸三角区，配合学者与调查官以秘银刻刀加固承重立柱稳定岩层。",
+      "choice": "是用肉身肩膀死死顶住倾倒木桩承受碎石轰砸，还是后撤至紫晶狭窄裂隙忍受空间窒息压迫？",
+      "immediate": {
+        "text": "数块数百斤重的岩石砸在石板上四分五裂，浓烈烟尘瞬间呛满石室遮蔽全部幽蓝荧光。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内加固主要承重节点，整个溶洞穹顶覆灭性下塌将把全室活埋于万丈地底。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "溶洞全面塌陷避难石室被彻底压成齑粉。",
+        "consequence": "全员被生埋地底化为深渊永恒化石无一生还。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "盾战士将精钢塔盾斜顶在头顶以脊背硬抗下落碎石护住身后战友",
+          "cost": "盾战士右肩胛骨遭受巨石砸击粉碎性骨折整条右臂脱力麻木。"
+        },
+        {
+          "option": "调查官冒着落石雨将三根重型生铁排钉拼死敲入横梁裂口锁死应力",
+          "cost": "调查官双手手指被飞溅尖锐碎石击中三枚指甲掀飞鲜血淋漓。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_garrick_greatsword_stone_shout",
+        "h_elise_star_staff_formula_shout"
+      ],
+      "start_minute": 70,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_toxic_miasma_creeping_flood",
+      "title": "断裂深渊剧毒紫雾倒灌石室窒息溶血危局",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "subterranean_toxic_miasma_abyss"
+      ],
+      "trigger": "地底断裂深渊底部气压骤升，散发甜腻腐朽气息的深渊紫红剧毒瘴气顺着通风岩缝大面积倒灌涌入避难石室，吸入者将在十分钟内肺部溶血窒息昏迷。",
+      "objective": "在十分钟内由盗贼以油布堵死低洼排气孔，配合修女与调查官点燃解毒草药粉末中和空气毒素。",
+      "choice": "是用自身衣服蘸取稀少饮用水充当湿毛巾捂住战友口鼻，还是冒险封死最后通风缝隙忍受缺氧？",
+      "immediate": {
+        "text": "石室边缘荧光苔藓接触毒雾瞬间枯萎焦黑，空气中充满刺鼻硫磺苦涩恶臭令人喉头充血。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内阻绝毒气渗透，石室内氧气将被剧毒瓦斯彻底排空导致全员窒息暴毙。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "剧毒瘴气彻底充满石室全员肺泡溶血坏死。",
+        "consequence": "无声无息全员化为脓血死绝惨绝人寰惨案铸成。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "调查官脱下外层厚实衬衫浸满水渍扑上石缝死死糊住毒气喷涌点",
+          "cost": "调查官双臂与胸口皮肤遭受强酸毒雾轻度化学灼伤大面积红斑水泡。"
+        },
+        {
+          "option": "修女倾尽随身全部晨曦辟邪圣香粉末在风口点燃强行中和毒瘴",
+          "cost": "修女呼吸道遭受浓烟与残余毒气刺激剧烈咳嗽咳出带血浓痰。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_aria_silver_chalice_prayer_whisper",
+        "h_kyle_wire_trap_spring_shout"
+      ],
+      "start_minute": 105,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_drow_infiltrator_assassination_plot",
+      "title": "暗夜死士潜入企图斩杀女斥候夺取破魔短刃",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "crystal_crevice_narrow_tunnel"
+      ],
+      "trigger": "部族保守派暗杀者利用紫晶裂隙阴影摸入石室，手持淬毒骨刃直刺因脱力昏睡的女斥候咽喉，企图清除部族王脉夺取圣刃献祭深渊。",
+      "objective": "在十分钟内由调查官以战术刺剑与格斗术将其反制按倒，配合盗贼用纯钢锁扣将其生擒收缴密信。",
+      "choice": "是在狭小石台上以肉身挡在女斥候身前承受淬毒骨刃突刺，还是以短刃相碰硬拼近战搏杀？",
+      "immediate": {
+        "text": "阴影中一道致命寒芒如毒蛇吐信直扑女斥候苍白面庞，利刃破空撕裂空气发出微不可闻尖啸。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内制伏刺客，圣物被夺女斥候殒命将使先遣队彻底丧失暗夜同盟法律信任。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "刺客得手女斥候被割喉殒命破魔圣刃失落。",
+        "consequence": "王脉断绝暗夜同盟破裂引发地面与地底特大战争。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "调查官飞身用裹有皮甲的小臂死死格开刺客骨刃顺势贴身将其轰然锁喉",
+          "cost": "调查官小臂被骨刃毒尖划破两寸血口伤口瞬间青紫剧痛难当。"
+        },
+        {
+          "option": "女斥候惊醒瞬间掷出破魔短刃精准击碎刺客手中骨刃将其震飞重伤",
+          "cost": "女斥候强行催动残存斗气导致刚刚平复之经脉再度大面积逆流咯血。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_valeria_adamantine_dagger_whisper",
+        "h_kyle_wire_trap_spring_shout"
+      ],
+      "start_minute": 140,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_dawn_pickaxe_rendezvous_missing_signal",
+      "title": "破晓重装突击队凿通石壁信标未点亮偏航危局",
+      "source": "institution",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "trigger": "破晓晨曦六点整后方工兵突击大队已推进至石壁仅隔数尺处，由于塌方回音复杂，若不能在五分钟内以高频魔光与短刃敲击三长两短明确方位，工兵偏航盲目爆破将引发二次塌方活埋石室。",
+      "objective": "在五分钟内由调查官爬上石堆最高缝隙，挥动高亮度荧光魔石并以秘银刻刀敲击石壁建立精准听觉与视觉信标引导。",
+      "choice": "是冒着被爆破气浪震聋之险贴在最薄弱石壁处拼死敲击，还是点燃高热信号棒暴露位置引来残余魔兽？",
+      "immediate": {
+        "text": "石壁另一侧传来重型精钢镐沉重有力的凿石闷响，碎石粉末如暴雨般从缝隙狂喷而出。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十分钟内若未能建立精准坐标，突击队装填的大威力黑晶爆破弹引爆将使石室在冲击波中彻底粉碎。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "突击队误判方位引发毁灭性定向爆破活埋生者。",
+        "consequence": "救援惨变特大误杀惨剧全员死于友军炮火无一生还。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "调查官徒手爬上锋利如刀的碎石顶端以秘银刻刀疯狂敲击三长两短律动",
+          "cost": "调查官双手十指表皮被锋利花岗岩棱角磨得血肉模糊鲜血淋漓。"
+        },
+        {
+          "option": "女斥候强忍剧痛爬至通气孔高举祖传破魔短刃反射赤红魔光引导方位",
+          "cost": "女斥候右肩伤口在攀爬中再度撕裂鲜血染透雪青色内衬发烫刺痛。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_valeria_dawn_ribbon_triumph_vow",
+        "h_garrick_greatsword_stone_shout"
+      ],
+      "start_minute": 175,
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "h_valeria_glowing_moss_breath_fever",
+      "kind": "approach",
+      "slot": "proud_drow_scout_valeria",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber",
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "text": "{proud_drow_scout_valeria.name}背靠泛着幽蓝冷光的荧光苔藓石壁，清冷紫眸横睨你微喘：“人类调查官……站得那么远做什么？！戴上护手，过来扣住我的手腕——学者的法阵已经布好了，把这股该死的火毒引进石头里去！”"
+    },
+    {
+      "id": "h_valeria_adamantine_dagger_whisper",
+      "kind": "approach",
+      "slot": "proud_drow_scout_valeria",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber",
+        "crystal_crevice_narrow_tunnel"
+      ],
+      "text": "{proud_drow_scout_valeria.name}反握祖传陨星精金短刃：“抓紧我的刀……洞外那些深渊魔兽在撞门了。这把刀是部族王脉仅存的信物……听好了，只要刀没有丢，本斥候的名字就永远和你系在一处，听到了没有？！”"
+    },
+    {
+      "id": "h_valeria_dawn_ribbon_triumph_vow",
+      "kind": "approach",
+      "slot": "proud_drow_scout_valeria",
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "text": "{proud_drow_scout_valeria.name}挽着你的臂弯踏上破晓天光照耀的塌方废墟，当着列队欢呼的全体工兵，美眸微红凝视轻语：“小子，今夜本斥候这一条命与满身骄傲……是你用那双手替我从死神手里夺回来的。”"
+    },
+    {
+      "id": "h_garrick_greatsword_stone_shout",
+      "kind": "approach",
+      "slot": "veteran_mercenary_leader_garrick",
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier",
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "text": "{veteran_mercenary_leader_garrick.name}单手将厚重开山重剑重重砸在花岗岩裂石上，抹了一把脸上的魔兽黑血，向石室内豪迈大吼：“调查官！斥候队长！外面的两头锯齿掘地兽已经被老子劈碎脑袋了！”"
+    },
+    {
+      "id": "h_elise_star_staff_formula_shout",
+      "kind": "approach",
+      "slot": "arcane_scholar_maiden_elise",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber",
+        "crystal_crevice_narrow_tunnel",
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "text": "{arcane_scholar_maiden_elise.name}扶了扶单片奥术解析镜：“调查官！斥候的魔力回路同调波长在四百二十赫兹！隔着护手扣住双腕，掌心朝下对准法阵！一、二、保持匀速引流！不要停下来，我来用古代咒文维持祭台平衡！”"
+    },
+    {
+      "id": "h_kyle_wire_trap_spring_shout",
+      "kind": "approach",
+      "slot": "dungeon_trapper_rogue_kyle",
+      "location_ids": [
+        "crystal_crevice_narrow_tunnel",
+        "moss_ruins_sanctuary_chamber",
+        "subterranean_toxic_miasma_abyss"
+      ],
+      "text": "{dungeon_trapper_rogue_kyle.name}从紫晶岩缝轻巧翻滚落地，向内殿嘿嘿低笑：“长官！放心吧！后方那条暗道我已经布下了三道飞刃陷阱，两个摸过来的暗夜刺客已经变成刺猬了！谁也别想打扰你们俩在里面运功疗伤！”"
+    },
+    {
+      "id": "h_aria_silver_chalice_prayer_whisper",
+      "kind": "approach",
+      "slot": "frontier_cleric_maiden_aria",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber",
+        "crystal_crevice_narrow_tunnel",
+        "subterranean_toxic_miasma_abyss"
+      ],
+      "text": "{frontier_cleric_maiden_aria.name}双手捧着泛着神圣金光的晨曦圣水小瓶，眼眸满含慈悲轻声叮嘱：“调查官先生，斥候姐姐体内寒热交冲。请把毛毡和烤热的魔石都拿过来，托住姐姐的后颈，我来施展神圣祝祷、滴下圣水……”"
+    },
+    {
+      "id": "h_valeria_torn_armor_shiver_observe",
+      "kind": "observe",
+      "slot": "proud_drow_scout_valeria",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "text": "{proud_drow_scout_valeria.name}背靠白石断壁剧烈喘息，撕裂的深黑硬皮甲上满是爪痕，银白长发被汗水粘在侧颊，右手却始终扣着精金短刃，紫眸死死盯着石缝外的动静，散发着暗夜战神重创落难时不肯低头的冷艳风骨。"
+    },
+    {
+      "id": "h_garrick_bleeding_hand_on_hilt_observe",
+      "kind": "observe",
+      "slot": "veteran_mercenary_leader_garrick",
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "text": "{veteran_mercenary_leader_garrick.name}沾满黑血与碎石粉末的大手死死握紧重剑剑柄，锁子甲破损处渗出鲜红血珠，眼神凶悍专注如老狼死盯石缝，宛若一尊雕凿在地底深渊里的不灭重步兵铁柱。"
+    },
+    {
+      "id": "h_valeria_dew_sip_request",
+      "kind": "approach",
+      "slot": "proud_drow_scout_valeria",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "text": "{proud_drow_scout_valeria.name}薄唇泛白干裂渗血，双手紧握石碗，避开视线低声轻颤：“……好渴。经脉在烧……石碗里的岩露好凉……你、你的手……伸过来一点……替我把石碗捂热……动作轻点……别惊动了外面的魔狼群……”"
+    },
+    {
+      "id": "h_valeria_whisper_back_embrace_request",
+      "kind": "approach",
+      "slot": "proud_drow_scout_valeria",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "text": "{proud_drow_scout_valeria.name}魔纹褪尽、烧也退了，将额头轻轻靠在你肩头，合上双眸低声道：“……我已经不烧了，也很清醒。所以别以为本斥候是烧糊涂了——就十分钟，别乱动……让我听着你的心跳。听到没有……”"
+    },
+    {
+      "id": "h_valeria_dagger_sheath_bind_request",
+      "kind": "approach",
+      "slot": "proud_drow_scout_valeria",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "text": "{proud_drow_scout_valeria.name}解下腿侧皮套上的备用纯银皮带，眼眸微红凝视低语：“替我把断裂的护肩绑紧……要是连你也在这场塌方里倒下了，这张十层迷宫全图谁来替我送回地面……这是本斥候的命令，听到了吗？！”"
+    },
+    {
+      "id": "h_garrick_crowbar_reinforce_request",
+      "kind": "approach",
+      "slot": "veteran_mercenary_leader_garrick",
+      "location_ids": [
+        "collapsed_tunnel_rubble_barrier"
+      ],
+      "text": "{veteran_mercenary_leader_garrick.name}单手顶着石柱，头也不回大吼：“调查官！找两根粗精铁木桩过来！快对准横梁的死角楔死！老子快顶不住这巨兽的冲撞力了！快点！”"
+    },
+    {
+      "id": "h_aria_bandage_tighten_request",
+      "kind": "approach",
+      "slot": "frontier_cleric_maiden_aria",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "text": "{frontier_cleric_maiden_aria.name}跪在石板边，将附魔亚麻绷带压入女斥候后背伤口缝隙，抬头轻声嘱咐：“调查官先生，请用双手按住绷带两端压紧，一点冷风都不能钻进伤口！”"
+    },
+    {
+      "id": "h_elise_mana_crystal_recharge_request",
+      "kind": "approach",
+      "slot": "arcane_scholar_maiden_elise",
+      "location_ids": [
+        "moss_ruins_sanctuary_chamber"
+      ],
+      "text": "{arcane_scholar_maiden_elise.name}单手按着发热水晶，抬头急切道：“调查官！把我右侧腰包里的水属性魔石递过来！快！祭台核心需要降温，我抽不开手，帮我塞进基座凹槽里！”"
+    }
+  ],
+  "twists": [
+    {
+      "id": "t_drow_1",
+      "category": "资源",
+      "requires": [],
+      "text": "石室祭台暗格起获远古精灵王脉纯净月神圣泉：调查官在协助固定祭台立柱时，意外触碰暗槽机关起获封存三千年的远古纯净月神圣泉一整水晶晶瓶。女斥候饮下圣泉后体内暴走魔毒瞬间被彻底净化涤荡，经脉魔力回路全面重塑升华，瞬间恢复全盛巅峰战力锁定破晓生机。"
+    },
+    {
+      "id": "t_drow_2",
+      "category": "信息",
+      "requires": [],
+      "text": "当场生擒暗杀者缴获深渊邪教勾结部族叛逆铁证：调查官生擒潜行杀手后自其怀中搜出深渊教团与部族伪王勾结策划本次塌方坑杀先遣队的亲笔密令契约。女斥候获得平反部族冤案清算伪王的绝杀合法铁证，彻底粉碎外部挑拨阴谋为两族永久和平奠定坚实法理基石。"
+    },
+    {
+      "id": "t_drow_3",
+      "category": "制度",
+      "requires": [],
+      "text": "远征联军最高统帅部特级不计代价破拆令发布：搜救工兵通过传音短杖接通联军最高统帅部，统帅部依战时第一宪章全权授予前线指挥官调动全部精锐魔导炮强行开山破石之特权。后方全部辎重连队全速支援破拆作业，岩壁贯通推进速度激增三倍，为破晓前准时脱困奠定绝对制度保障。"
+    },
+    {
+      "id": "t_drow_4",
+      "category": "人事",
+      "requires": [],
+      "text": "随军修女实为女斥候早年地面救护之平民遗孤：修女在施救时露出的颈间银币赫然带有女斥候早年的家族暗记，证实修女正是多年前被女斥候从魔兽爪下冒死救出的那户平民的遗孤。昔日救命浩荡恩情在绝境石室轰然揭晓相认，修女立誓舍命相报彻底瓦解异族隔阂凝聚万众一心之军心。"
+    },
+    {
+      "id": "t_drow_5",
+      "category": "时限",
+      "requires": [],
+      "text": "深渊狼群因地脉主火爆发溃散破晓窗口提前：深渊大断崖深处突发地热岩浆喷涌，围攻石室的暴风魔狼群受烈火惊吓哀鸣四散溃逃，外部兽潮威胁提前半小时荡然无存。工兵突击大队无需分心防备外侧伏击，提前二十分钟以重锤贯通最后一道花岗岩薄壁锁定凯旋大局。"
+    },
+    {
+      "id": "t_drow_6",
+      "category": "关系",
+      "requires": [],
+      "text": "女斥候祖传陨星短刃刀柄内藏有调查官家族信印：调查官在反握短刃抵御魔兽时，意外旋开中空刀柄，发现内里封存的正是祖父辈学者早年与暗夜精灵部族立下的世代通好血契铭文。数代相传之宿命羁绊在生死石室内彻底揭开融解，二人名位戒备轰然瓦解升华为矢志不渝之生死爱侣。"
+    },
+    {
+      "id": "t_drow_7",
+      "category": "意外",
+      "requires": [],
+      "text": "魔力回路同调意外激活古代石室反向通气排毒风门：在调查官扣腕引流、法阵全力导魔的瞬间，激荡的精纯魔力波顺着白石立柱注入地底，意外激活了古代精灵遗留的除毒排风暗闸。原本漫溢石室之浓烈深渊毒瘴在数十秒内被排风暗闸彻底抽空排尽，室内空气重归通透清冽化解全员窒息覆顶之灾。"
+    }
+  ],
+  "forbidden_terms": [
+    "卫星战术对讲机",
+    "全自动急救注射枪",
+    "纳米防弹战术背心",
+    "便携高能激光破拆器",
+    "外骨骼动力装甲",
+    "空间传送逃生卷轴"
+  ],
+  "content_tags": [
+    "intimate",
+    "workplace",
+    "workplace_power",
+    "violence",
+    "bodily_harm",
+    "crime",
+    "disaster"
+  ],
+  "status": "released",
+  "notes": "保留塌方石室、魔力暴走、兽潮围攻与异族戒备的主线。改动：魔力过载与高热时的“解甲贴胸导魔”“口对口渡圣水”改为学者法阵加护手扣腕引流、毛毡热魔石复温与银匙滴圣水；亲密台词挪到魔纹褪尽、神志清明之后；修女转折里的“幼童”改为平民遗孤；去掉“脆弱少女”“带把的爷们”等措辞；写死的人名改为称谓；请求类钩子改为主动接近。"
+}

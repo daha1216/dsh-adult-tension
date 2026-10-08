@@ -1,0 +1,2565 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "持最高等级航线机长执照的成年飞行员。",
+   "age_range": [
+    23,
+    26
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_captain_pilot_focus",
+   "line": "{npc.name}：“高度九千……八千五……压住俯仰角！”",
+   "location_ids": [
+    "flight_deck_cockpit"
+   ],
+   "name": null,
+   "role": "正驾驶席的当班机长"
+  },
+  {
+   "adult_context": "法务部在籍的成年执业律师助理。",
+   "age_range": [
+    20,
+    23
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_legal_assistant_airsick",
+   "line": "{npc.name}：“不可抗力免责……第十四条……老天保佑……”",
+   "location_ids": [
+    "first_class_conference_lounge"
+   ],
+   "name": null,
+   "role": "抓着呕吐袋的法务助理"
+  },
+  {
+   "adult_context": "受过民航安全培训的正式在册成年乘务员。",
+   "age_range": [
+    19,
+    22
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_galley_trainee_trapped",
+   "line": "{npc.name}：“推车锁死了……拉我一把……”",
+   "location_ids": [
+    "galley_service_vestibule"
+   ],
+   "name": null,
+   "role": "被推车卡住脚踝的配餐乘务员"
+  },
+  {
+   "adult_context": "公海空域管制中心的成年航管指挥员。",
+   "age_range": [
+    21,
+    26
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_radio_controller_voice",
+   "line": "{npc.name}：“专机注意！雷达侦测到超级下击暴流，立即左转航向一二零！”",
+   "location_ids": [
+    "flight_deck_cockpit"
+   ],
+   "name": null,
+   "role": "无线电里的海空管制员"
+  },
+  {
+   "adult_context": "财阀旁系董事会的成年随行联络员。",
+   "age_range": [
+    23,
+    26
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_rival_board_liaison",
+   "line": "{npc.name}：“东京那边已经在拟总裁遇难的通告了，诸位还是早做打算。”",
+   "location_ids": [
+    "first_class_conference_lounge"
+   ],
+   "name": null,
+   "role": "旁系董事派来的随机联络员"
+  },
+  {
+   "adult_context": "财阀安保部的成年正式保镖。",
+   "age_range": [
+    22,
+    25
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_cabin_security_guard",
+   "line": "{npc.name}：“门外我守着，里面的事您二位顾好。”",
+   "location_ids": [
+    "executive_owner_stateroom"
+   ],
+   "name": null,
+   "role": "守在套卧门外的随机保镖"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "你的领带缠在{csuite_heiress_rena.name}腕上，那个平日把你训得抬不起头的总裁此刻缩在你怀里发抖；{renegade_aviation_copilot_officer.name}在内线里吼着下一次下坠的倒数。你一手护人，一手握着对讲机，整架飞机的客舱都在等你下令。",
+   "id": "combo_assistant_shield",
+   "identity_ids": [
+    "elite_personal_executive_assistant"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 4
+     },
+     "b": "csuite_heiress_rena",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 5
+     },
+     "reason": "被训了几年的下属与终于肯示弱的总裁，领带缠着的腕上全是没说出口的话。",
+     "stage": "flirting"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "renegade_aviation_copilot_officer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "无线电里达成的过命默契。",
+     "stage": "familiar"
+    },
+    {
+     "a": "csuite_heiress_rena",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "renegade_aviation_copilot_officer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "在灾难面前放下权势架子，把命托付给专业机长。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "csuite_heiress_rena",
+    "renegade_aviation_copilot_officer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "三十分钟内稳住总裁的呼吸，配合机组对准备降信标。",
+    "limit_gap": "你要护住总裁的命，总裁要守住最后的体面，副机长要救全机的人。",
+    "meeting_reason": "颠簸急坠时你被召进套卧，总裁失控扯下你的领带缠住两人手腕。",
+    "resource_gap": "你有体力和对讲机，总裁有全部资产的支配权，副机长有操纵杆与迫降航路。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_arrogance_vs_panic",
+    "te_tie_anchor_vs_freefall"
+   ]
+  },
+  {
+   "chemistry": "你是全机地位最高、身体却最不听使唤的人。{executive_assistant_hayato.name}的领带攥在你手里，胸膛就在你脸侧；{conglomerate_legal_counsel_tpl.name}抱着公文箱爬到床边递笔。你要用刻薄掩住心慌，在颠簸里签下代管授权——签的时候手抖成什么样，只有那根领带知道。",
+   "id": "combo_ceo_delegation",
+   "identity_ids": [
+    "csuite_heiress_ceo"
+   ],
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 5
+     },
+     "b": "executive_assistant_hayato",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 4
+     },
+     "reason": "攥着对方的领带不肯松手，嘴上却还在挑剔对方的安全带。",
+     "stage": "testing"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 4
+     },
+     "b": "conglomerate_legal_counsel_tpl",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "认可年轻律师的忠诚，放下平日的雷霆架子。",
+     "stage": "familiar"
+    },
+    {
+     "a": "executive_assistant_hayato",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "conglomerate_legal_counsel_tpl",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "一个护人，一个护法，配合无间。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "executive_assistant_hayato",
+    "conglomerate_legal_counsel_tpl"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "迫降前签完代管授权，落地后清醒地决定要不要把那句话说出口。",
+    "limit_gap": "你要战胜恐惧保住大权，特助要护你周全，法务要程序合规。",
+    "meeting_reason": "你在套卧发作，特助护驾，法务在颠簸中爬来送授权书。",
+    "resource_gap": "你有最高表决权，特助有护住你的力气，法务有公证设备。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_arrogance_vs_panic",
+    "te_succession_treason_vs_loyalty"
+   ]
+  },
+  {
+   "chemistry": "你抱着公文箱爬进套卧，看见平日威严如神的{csuite_heiress_rena.name}腕上缠着领带、伏在{executive_assistant_hayato.name}胸前喘息。你得用发抖的钢笔在这一幕里完成公证，还得假装没看见两人交握的手。",
+   "id": "combo_counsel_witness",
+   "identity_ids": [
+    "conglomerate_young_legal_counsel"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "csuite_heiress_rena",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "第一次看见总裁最脆弱的样子，敬畏转成了保护。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "executive_assistant_hayato",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "敬佩特助的担当，愿为其拼死盖章。",
+     "stage": "familiar"
+    },
+    {
+     "a": "csuite_heiress_rena",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 5
+     },
+     "b": "executive_assistant_hayato",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 5
+     },
+     "reason": "领带缠着的两只手，谁也没先松开。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "csuite_heiress_rena",
+    "executive_assistant_hayato"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "起火之前完成数字公证盖章，让授权书不可逆地生效。",
+    "limit_gap": "你要守住律师操守，两人要先活下来。",
+    "meeting_reason": "你冒着颠簸送来紧急委托授权书。",
+    "resource_gap": "你有公证书原本，总裁有资产处分权，特助有舱内行动力。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_succession_treason_vs_loyalty",
+    "te_arrogance_vs_panic"
+   ]
+  },
+  {
+   "chemistry": "你抱着氧气瓶跪爬进套卧，{executive_assistant_hayato.name}正把衬衫半敞、面颊绯红的{csuite_heiress_rena.name}护在怀里。你要用专业手法教两人调整呼吸，把面罩扣上去，然后转身去扑灭门外的火星——乘务组的规矩是，看见的不说。",
+   "id": "combo_purser_oxygen",
+   "identity_ids": [
+    "vip_cabin_attendant_purser"
+   ],
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 4
+     },
+     "b": "csuite_heiress_rena",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "专业救护化开了尊卑，总裁记住了这份救命之恩。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "executive_assistant_hayato",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "同为一线服务的年轻人，在同甘共苦中结成战友。",
+     "stage": "familiar"
+    },
+    {
+     "a": "csuite_heiress_rena",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "executive_assistant_hayato",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 5
+     },
+     "reason": "总裁在特助怀里流露的依赖，连乘务长都看得出来。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "csuite_heiress_rena",
+    "executive_assistant_hayato"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "两分钟内帮总裁戴好面罩，再固定松脱的钢瓶。",
+    "limit_gap": "你要全员生还，两人要熬过这一夜。",
+    "meeting_reason": "你送氧气面罩进套卧抢救过度换气的总裁。",
+    "resource_gap": "你有氧气与急救药品，总裁有撤离指挥权，特助有破障力气。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_arrogance_vs_panic",
+    "te_tie_anchor_vs_freefall"
+   ]
+  },
+  {
+   "chemistry": "你钻进机腹跳线，{executive_assistant_hayato.name}在门边用身体稳住配电盘框架挡火星，{renegade_aviation_copilot_officer.name}在驾驶席死扛失速舵面，{vip_purser_tpl.name}抱着灭火器守在过道。四个人在雷鸣里打破身份隔阂，替套卧里那位总裁撑出一条活路。",
+   "id": "combo_engineer_bypass",
+   "identity_ids": [
+    "tactical_avionics_engineer"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "executive_assistant_hayato",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "一个以身挡火，一个以技救机。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "renegade_aviation_copilot_officer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "飞行与航电的无间配合。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 4
+     },
+     "b": "vip_purser_tpl",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "火星一冒，乘务长的灭火器总是先到。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "executive_assistant_hayato",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "renegade_aviation_copilot_officer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "生死过客的碰拳，相视一笑。",
+     "stage": "familiar"
+    },
+    {
+     "a": "executive_assistant_hayato",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "vip_purser_tpl",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "套卧内外一递一接，配合了三年。",
+     "stage": "familiar"
+    },
+    {
+     "a": "renegade_aviation_copilot_officer",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 4
+     },
+     "b": "vip_purser_tpl",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "机组同事，驾驶舱门内外各守一头。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "executive_assistant_hayato",
+    "renegade_aviation_copilot_officer",
+    "vip_purser_tpl"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "十分钟内点亮主飞行显示屏，恢复盲降信标。",
+    "limit_gap": "所有人都只想让这架飞机活着落地。",
+    "meeting_reason": "配电盘短路起火，副机长呼叫全员支援。",
+    "resource_gap": "你有跳线技术，特助有体力和钥匙，副机长有舵面，乘务长有灭火器和氧气。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_engine_glide_countdown",
+    "te_tie_anchor_vs_freefall"
+   ]
+  },
+  {
+   "chemistry": "迫降前最后五分钟，{executive_assistant_hayato.name}护着腕缠领带的{csuite_heiress_rena.name}坐进观察员席，{avionics_engineer_tpl.name}跪在你身后重置信标。你握着操纵杆，从后视镜里看见那位傲慢的总裁攥着特助的手不放——然后把飞机稳稳压上暴雨跑道。",
+   "id": "combo_copilot_landing",
+   "identity_ids": [
+    "pc_renegade_aviation_copilot_officer"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "csuite_heiress_rena",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "傲慢的总裁也向飞行英雄低了头。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "executive_assistant_hayato",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "一起走过鬼门关的莫逆之交。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "avionics_engineer_tpl",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "信标是工程师抢回来的，跑道是机长压上去的。",
+     "stage": "familiar"
+    },
+    {
+     "a": "csuite_heiress_rena",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "executive_assistant_hayato",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 5
+     },
+     "reason": "十指紧扣的生死之约。",
+     "stage": "committed"
+    },
+    {
+     "a": "csuite_heiress_rena",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "avionics_engineer_tpl",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "平日从没记住过名字的技术员，今晚救了全机。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "executive_assistant_hayato",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "avionics_engineer_tpl",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "配电盘前替对方挡过火星。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "csuite_heiress_rena",
+    "executive_assistant_hayato",
+    "avionics_engineer_tpl"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "接地前三秒顶住强侧风对正跑道中线。",
+    "limit_gap": "你要把飞机砸上跑道，其余的人要活着走下舷梯。",
+    "meeting_reason": "迫降前特助护着总裁进驾驶舱准备撤离。",
+    "resource_gap": "你有油门与刹车，总裁有赏罚权，特助有护持力气，工程师有信标。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_engine_glide_countdown",
+    "te_arrogance_vs_panic"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_silk_tie_pulse",
+   "reach": "缠在两人腕上的真丝领带，把一方的战栗、心跳与肌肉痉挛原样传到另一方手腕上。",
+   "text": "领带上的力道"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_flight_deck_interphone",
+   "reach": "连接驾驶台与机尾套卧的硬线音频，夹着静电杂音与失速警报，声音沙哑急促。",
+   "text": "驾驶舱内线对讲"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_airframe_resonance",
+   "reach": "冰雹砸机翼、气流撕蒙皮的巨响在客舱里鼓点般回荡，任何减压泄漏都会变成尖锐哨音。",
+   "text": "机身蒙皮共振"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "跨国财阀现任执行总裁兼法定代表人，年满二十三岁，具完全民事行为能力。",
+   "age_range": [
+    22,
+    24
+   ],
+   "appearance_options": [
+    "纯黑丝绒开叉包臀裙凌乱，红底高跟鞋不知去向，薄黑丝在真皮床沿磨出几道裂口，白衬衫领口崩开三颗纽扣，泪水冲花了眼线，金丝眼镜滑落床头，左腕缠着一截黑色真丝领带。",
+    "西装外套早已褪下，薄白衬衫被冷汗浸透贴着背脊，整个人缩在床角发抖，指尖死死攥着领带结。"
+   ],
+   "decision": {
+    "avoids": [
+     "唯唯诺诺只会躬身称是的人",
+     "大难临头各自飞的人"
+    ],
+    "contrast": "会议室里生杀予夺的铁娘子，万米高空里是一个攥着领带不敢松手、哭花了妆的年轻女人。",
+    "core_value": "我是执行总裁，就算飞机往下掉，也轮不到任何人看我的笑话。",
+    "goal_options": [
+     "攥着领带熬过雷暴颠簸，不在任何人面前彻底崩溃",
+     "在迫降前签下代管授权，守住财阀不落旁系之手",
+     "落地之后，清醒地把五年没说出口的话说完"
+    ],
+    "never": [
+     "在领带解开之前，主动推开护着自己的人。"
+    ],
+    "prefers": [
+     "处变不惊、在自己无理取闹时敢于沉着接过大局的人"
+    ],
+    "pressure_responses": {
+     "breaking": "看到窗外雷火炸裂以为大限已至，面色惨白地把藏了多年的软弱全说出口。",
+     "high": "失速警报大作时彻底哭出来，把脸埋进对方颈窝死死攀住。",
+     "low": "即便手在发抖，仍咬着红唇挑剔特助安全带系得不合规范。",
+     "mid": "急坠一瞬发出惊呼，一把扯下特助的领带缠在两人腕上攥紧。"
+    },
+    "relationship_stance": "平日把特助当成随叫随到、任由讥讽的私人物件；生死关头被对方的沉稳与克制击穿心防。",
+    "withdrawal": "缩进被褥深处大口喘气，指尖揪着对方后背的西装布料不放。"
+   },
+   "gender": "female",
+   "gender_reason": "标题人物“女总裁”，固定性别不改变成年、自愿与清醒的亲密前提",
+   "id": "csuite_heiress_rena",
+   "identity": {
+    "authority": "财阀最高人事任免权、跨国资产处置权与本次航线的干预权。",
+    "exposure": "曾私自篡改并购案风险评估报告压制董事会。",
+    "hidden": "铂金手包夹层里有一封写给特助、写了五年却从没寄出的信。",
+    "limits": [
+     "隐匿的重度幽闭恐惧症，剧烈失重下会引发过度换气与痉挛",
+     "旁系叔伯步步紧逼夺权，长期处在崩溃边缘"
+    ],
+    "obligations": [
+     "保全机上人员平安着陆，守住财阀控制权，不让对手看见自己的软弱。"
+    ],
+    "resources": [
+     "瑞士银行千亿黄金保险库的数字密钥卡",
+     "平日用来训斥下属、此刻被当成救命索的纯黑真丝领带"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "失重与死亡面前面不改色、用臂力给出绝对安全感的人",
+     "被自己无理纠缠时既强硬包容又始终克制的反差"
+    ],
+    "boundaries": [
+     "雷暴与过度换气期间的贴身只作救命，不越线",
+     "落地前守住总裁最后的体面"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "落地后在董事会上平权并肩、共掌财阀的爱侣",
+    "dislikes": [
+     "下流的调笑与趁人之危",
+     "自己恐惧求助时的冷漠嫌弃"
+    ],
+    "expression": "落地后清醒了，才红着耳根把领带系回对方领口：“刚才说的话，我全记得，一句都不收回。”",
+    "likes": [
+     "被宽厚手掌按住后腰、胸口贴紧时传来的沉稳心跳",
+     "耳边一句低沉的“深呼吸，看着我”"
+    ],
+    "preconditions": [
+     "财阀傲慢冷艳女总裁与对方都已完全清醒，眼前的危机已经解除",
+     "财阀傲慢冷艳女总裁出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     2,
+     3
+    ]
+   },
+   "public_role": "财阀傲慢冷艳女总裁",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "flight_deck_cockpit",
+     "to": 14
+    },
+    {
+     "from": 15,
+     "location_id": "executive_owner_stateroom",
+     "to": 194
+    },
+    {
+     "from": 195,
+     "location_id": "executive_owner_stateroom",
+     "to": 374
+    },
+    {
+     "from": 375,
+     "location_id": "first_class_conference_lounge",
+     "to": 554
+    },
+    {
+     "from": 555,
+     "location_id": "flight_deck_cockpit",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "特助左肩胛骨粉碎性骨折脱臼，后背大面积淤血。",
+      "option": "特助挺身用左肩和后背硬扛合金箱"
+     },
+     {
+      "cost": "领带骤然收紧，在总裁细嫩的手腕上勒出深紫血痕。",
+      "option": "总裁猛拉领带把两人一起滚进床底凹槽"
+     }
+    ],
+    "pressure": "箱子砸中头部必死无疑，而领带缠着的手腕让身边人动作受限。",
+    "trigger": "千米级晴空颠簸急坠，行李架上一只二十公斤的合金手提箱被震飞，呼啸着砸向蜷缩在床头的总裁。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "为什么攥着这根领带反而这么安心……平时我对这个人那么刻薄，现在这个人还用身体护着我……",
+    "surface": "“谁准你解开这根领带的？手腕给我老实攥着！窗外的雷再响一声，你就……就把我抱紧一点。这是总裁命令！”"
+   }
+  },
+  {
+   "adult_context": "年满二十一岁的财阀总裁首席特助，具完全民事行为能力与重大商业决断担当。",
+   "age_range": [
+    21,
+    24
+   ],
+   "appearance_options": [
+    "深黑修身西装，领口空荡荡的——领带缠在了总裁腕上，面容俊朗，目光沉着如古井，臂膀精悍。",
+    "衬衫袖口挽到小臂，右腕留着领带勒出的红痕，跪在颠簸的床沿，像一堵挡在总裁身前的墙。"
+   ],
+   "decision": {
+    "avoids": [
+     "趁乱夺权的旁系董事",
+     "在灾难里只顾自己的人"
+    ],
+    "contrast": "平日是会议室角落里最不起眼的影子，危急关头却是机上最稳的那根柱子。",
+    "core_value": "会议室里你是总裁，到了这里，先活下来，别的落地再算。",
+    "goal_options": [
+     "稳住总裁的呼吸，熬过每一次下坠",
+     "在颠簸间隙协助机组恢复航电与迫降",
+     "落地后让总裁自己决定，要不要把那句话说出口"
+    ],
+    "never": [
+     "在总裁意识不清时说出任何会让对方事后后悔的承诺。"
+    ],
+    "prefers": [
+     "说话算数、哪怕刻薄也从不推卸责任的人"
+    ],
+    "pressure_responses": {
+     "breaking": "额头抵着床板喘了两口气，又撑起身挡回原位。",
+     "high": "用后背挡住砸落的重物，咬着牙一声不吭。",
+     "low": "一边替总裁扣好安全带，一边用平稳的声音报出下一次颠簸的倒数。",
+     "mid": "单臂箍住总裁的腰，另一只手抓牢床头扶杆抵住离心力。"
+    },
+    "relationship_stance": "挨了几年训，从没还过嘴；生死关头才发现，自己一直在等对方先低头。",
+    "withdrawal": "背靠气密门坐下，闭眼数心跳，手腕上的领带结始终没松。"
+   },
+   "gender": "male",
+   "gender_reason": "与女总裁对位、原稿以“硬汉”书写的首席特助，固定性别不改变成年、自愿与清醒的亲密前提",
+   "id": "executive_assistant_hayato",
+   "identity": {
+    "authority": "总裁口头授权下的临时代行权，以及客舱内的应急调度权。",
+    "exposure": "曾私下替总裁压下一份对其不利的体检报告。",
+    "hidden": "五年前大学实习时就认识总裁，一直没说破。",
+    "limits": [
+     "平日身份低于总裁，越权一步就会被旁系拿来做文章",
+     "右腕被领带缠住，动作空间受限"
+    ],
+    "obligations": [
+     "护住总裁的命与体面，配合机组排障直到落地。"
+    ],
+    "resources": [
+     "随身的机组内线对讲耳麦",
+     "总裁全部日程与家族内斗的底细"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "傲慢面具下终于肯示弱的那一刻",
+     "清醒之后仍不收回的真话"
+    ],
+    "boundaries": [
+     "对方惊恐失神时只护不越",
+     "落地前不谈私情"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "与总裁平权并肩的伴侣，而不是随叫随到的特助",
+    "dislikes": [
+     "被当成可以随手丢弃的私人物件",
+     "以恩人自居的施舍"
+    ],
+    "expression": "等对方彻底平静，才低头把领带结轻轻解开：“现在你清醒了，你说，我听。”",
+    "likes": [
+     "落地后两人并肩站在舷梯上吹海风",
+     "对方第一次直呼自己的名字"
+    ],
+    "preconditions": [
+     "总裁首席年轻特助与对方都已完全清醒，眼前的危机已经解除",
+     "总裁首席年轻特助出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "总裁首席年轻特助",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "flight_deck_cockpit",
+     "to": 14
+    },
+    {
+     "from": 15,
+     "location_id": "executive_owner_stateroom",
+     "to": 194
+    },
+    {
+     "from": 195,
+     "location_id": "executive_owner_stateroom",
+     "to": 374
+    },
+    {
+     "from": 375,
+     "location_id": "galley_service_vestibule",
+     "to": 554
+    },
+    {
+     "from": 555,
+     "location_id": "flight_deck_cockpit",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "总裁离开安全凹槽，下一次颠簸两人都会被甩向舱壁。",
+      "option": "把总裁扶到门边，握着对方的手一起扳把手"
+     },
+     {
+      "cost": "液压反冲震伤特助双臂肌腱，接下来几小时使不上力。",
+      "option": "独自用全身重量压住两个把手"
+     }
+    ],
+    "pressure": "门打不开，乘务长的氧气瓶送不进来，总裁的过度换气撑不过十分钟。",
+    "trigger": "套卧气密门因减压警报锁死，内侧液压把手需要两人同时扳动，而总裁正蜷在床角发抖。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "再撑三十分钟。落地之后，骂我也好，开除我也好，先活着落地。",
+    "surface": "“总裁，安全带。下一次下坠在四十秒后，抓住我的胳膊，别抓扶手。”"
+   }
+  },
+  {
+   "adult_context": "年满二十四岁、持国际航线运输飞行员执照的当班副机长。",
+   "age_range": [
+    22,
+    24
+   ],
+   "appearance_options": [
+    "洁白的四道杠制服衬衫，领带松开露出坚毅下巴，眼里布满血丝，双手青筋暴起扣住剧颤的操纵杆。",
+    "制服被汗浸透贴着胸膛，单手在顶板扳动燃油截断电门，目光钉在雷达屏上。"
+   ],
+   "decision": {
+    "avoids": [
+     "哭天抢地扰乱军心的人",
+     "外行指挥内行的权贵"
+    ],
+    "contrast": "说话粗粝不留情面，心里却把每一位乘客的命当成自己的荣誉。",
+    "core_value": "只要这双手还握得住操纵杆，这架飞机就不会掉进太平洋。",
+    "goal_options": [
+     "死死稳住姿态，避免进入死亡螺旋",
+     "燃油耗尽前穿透雷暴实施目视盲降",
+     "迫降前排空起落架舱的液压结冰隐患"
+    ],
+    "never": [
+     "飞机停稳之前擅离驾驶席。"
+    ],
+    "prefers": [
+     "临危不乱、听从专业指令的同伴"
+    ],
+    "pressure_responses": {
+     "breaking": "主姿态仪黑屏时呼吸停了一秒，随即咬牙改用备用罗盘死战不退。",
+     "high": "失速警报尖啸中暴喝着单臂死拉操纵杆，以全身重量改平机翼。",
+     "low": "压着嗓子在内线广播报气象，严令全员系好安全带。",
+     "mid": "双脚蹬死方向舵，冲着无线电咆哮申请直飞航线。"
+    },
+    "relationship_stance": "敬重客舱里扛事的人，反感权贵的骄纵，但职责面前誓死护住每一条命。",
+    "withdrawal": "推开面罩大口喘气，抓起水瓶灌一口，抹掉眉间冷汗。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "renegade_aviation_copilot_officer",
+   "identity": {
+    "authority": "恶劣天气下的飞行操纵最高处置权与紧急迫降决断权。",
+    "exposure": "空军服役时曾因违规超低空俯冲被记军法警告。",
+    "hidden": "飞行包里有一张记录美军雷达盲区超低空坐标的军用航图。",
+    "limits": [
+     "必须死守驾驶席，无法进客舱救援",
+     "二号引擎偏航力矩极大，持续消耗双臂体力"
+    ],
+    "obligations": [
+     "把飞机带出雷暴云团，保全机上所有人。"
+    ],
+    "resources": [
+     "公海紧急迫降航路与冲压涡轮应急口令",
+     "抗过载降噪战术耳机"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在毁灭面前同生共死的默契",
+     "专业与胆量兼备的人"
+    ],
+    "boundaries": [
+     "机组职责在前",
+     "飞行安全第一"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "财阀航运总调度兼终身首席机长",
+    "dislikes": [
+     "践踏飞行安全红线",
+     "无谓的恐慌"
+    ],
+    "expression": "隔着驾驶舱门竖起大拇指，嘴角带血地笑：“落地了，请你喝一杯。”",
+    "likes": [
+     "在侧风里把飞机稳稳压上跑道中线",
+     "落地后和战友碰拳"
+    ],
+    "preconditions": [
+     "专机王牌副机长与对方都已完全清醒，眼前的危机已经解除",
+     "专机王牌副机长出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "专机王牌副机长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "flight_deck_cockpit",
+     "to": 14
+    },
+    {
+     "from": 15,
+     "location_id": "flight_deck_cockpit",
+     "to": 194
+    },
+    {
+     "from": 195,
+     "location_id": "flight_deck_cockpit",
+     "to": 374
+    },
+    {
+     "from": 375,
+     "location_id": "flight_deck_cockpit",
+     "to": 554
+    },
+    {
+     "from": 555,
+     "location_id": "flight_deck_cockpit",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "副机长右腕舟状骨骨裂，手掌血肉模糊。",
+      "option": "副机长用刀柄连砸五下砸碎卡死齿轮"
+     },
+     {
+      "cost": "特助肋骨撞上中控台硬角，左侧两根肋骨骨裂。",
+      "option": "特助冲进驾驶舱用身体压住备用配平杆"
+     }
+    ],
+    "pressure": "机头拉不起来，飞机将高速俯冲撞海解体。",
+    "trigger": "副驾驶前方的俯仰配平电机短路卡死在低头位，必须有人钻到座位下方徒手敲碎卡死的齿轮，离机头扎进海面只剩十秒。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "客舱里那两个人绑在一起……真有种。有我在，今天谁也别想死在太平洋上。",
+    "surface": "“让总裁把氧气面罩戴好！正在穿过风切变下沉气流，三十秒后强行拉起机头，谁也别松手！”"
+   }
+  },
+  {
+   "adult_context": "年满二十三岁、持国际执业律师执照的随行法务总监。",
+   "age_range": [
+    21,
+    24
+   ],
+   "appearance_options": [
+    "深灰羊毛西装、银丝眼镜，怀里像抱命一样抱着防辐射公文箱，脸色苍白，手在发抖。",
+    "西装上溅着打翻的红茶，单手抓着安全带扶手，声音发颤却仍在咬文嚼字。"
+   ],
+   "decision": {
+    "avoids": [
+     "践踏法律的暴徒",
+     "过河拆桥的小人"
+    ],
+    "contrast": "看起来是个胆小怕事的书呆子，涉及法律底线时却宁折不弯。",
+    "core_value": "紧急状态下的口头授权一样有效，只要人活着，签名就有人认。",
+    "goal_options": [
+     "在颠簸中完成代管协议的法定见证",
+     "护住公文箱里的并购核心存根",
+     "落地后为两人筑起法律防线"
+    ],
+    "never": [
+     "为了自保伪造总裁签字出卖股权。"
+    ],
+    "prefers": [
+     "讲原则、守契约的人"
+    ],
+    "pressure_responses": {
+     "breaking": "看到舷窗裂纹蔓延时抱头痛哭，喊着母亲的名字。",
+     "high": "机舱起火时扑在公文箱上，用西装护住文件，不顾后背受灼。",
+     "low": "面色惨白地抱着公文箱，嘴里念着免责条款。",
+     "mid": "在失重间隙伸出发抖的手，递上防泼溅签字笔。"
+    },
+    "relationship_stance": "敬畏总裁的手腕，感激特助的舍命看护，把两人视为财阀的正统希望。",
+    "withdrawal": "把毛毯拉过头顶，吞下防眩晕药片强压恶心。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "conglomerate_legal_counsel_tpl",
+   "identity": {
+    "authority": "家族信托见证权与并购合同现场公证权。",
+    "exposure": "曾私下截留一份对特助有利的董事会备忘录未上报。",
+    "hidden": "公文箱暗格里有一份总裁生母留下的家族信托委任书副本。",
+    "limits": [
+     "严重晕机，失重时剧烈呕吐，干不了重活",
+     "恪守条文，生死关头容易犹豫错过时机"
+    ],
+    "obligations": [
+     "确保总裁的代管授权合法有效，不让财阀落入旁系之手。"
+    ],
+    "resources": [
+     "直连伦敦法律委员会的离线数字印签",
+     "旁系股东违规洗钱夺权的证据底稿"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "风雨飘摇中仍然守信的人",
+     "肯担下全部责任的担当"
+    ],
+    "boundaries": [
+     "律师职业道德",
+     "法律真实性第一"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "新联合实业首席法务兼家族独立受托人",
+    "dislikes": [
+     "野蛮的肉体威胁",
+     "对法律的蔑视"
+    ],
+    "expression": "推了推滑落的眼镜，把盖好章的协议郑重推过去：“见证完毕，从现在起，你们在法律上平起平坐。”",
+    "likes": [
+     "白纸黑字盖章生效的那一刻",
+     "落地后在安静的书房喝一杯温茶"
+    ],
+    "preconditions": [
+     "财阀青年法务总监与对方都已完全清醒，眼前的危机已经解除",
+     "财阀青年法务总监出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "财阀青年法务总监",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "first_class_conference_lounge",
+     "to": 14
+    },
+    {
+     "from": 15,
+     "location_id": "first_class_conference_lounge",
+     "to": 194
+    },
+    {
+     "from": 195,
+     "location_id": "executive_owner_stateroom",
+     "to": 374
+    },
+    {
+     "from": 375,
+     "location_id": "first_class_conference_lounge",
+     "to": 554
+    },
+    {
+     "from": 555,
+     "location_id": "first_class_conference_lounge",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "法务左小臂大面积电灼伤，西装烧毁大半。",
+      "option": "法务解开安全带扑上去，用西装和身体压灭电弧"
+     },
+     {
+      "cost": "拽箱的人右手食指韧带拉伤，领带磨破一道口子。",
+      "option": "有人在套卧门口甩出领带缠住提手把箱子拽回"
+     }
+    ],
+    "pressure": "文件烧毁，旁系就能伪造文书夺权。",
+    "trigger": "装着千亿股权质押合同的公文箱从桌角滑落，正跌向地板上一处裸露的电弧，离文件被引燃只剩三秒。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "这两个人平日在公司里剑拔弩张……现在竟能为对方做到这一步。老天保佑，让这两个人都活下去。",
+    "surface": "“总裁，请在这里签字！特助，请按手印！紧急状态下这份代理协议具备最高效力，抓紧笔！”"
+   }
+  },
+  {
+   "adult_context": "年满二十二岁、受过特种急救与反劫机训练的专机首席乘务长。",
+   "age_range": [
+    21,
+    23
+   ],
+   "appearance_options": [
+    "深蓝制服套裙，长发挽成发髻，在颠簸中踩着平底软鞋稳稳穿行，单手推着固定好的氧气推车。",
+    "裙摆被碎瓷划破一道口子，额前碎发散落，抱着氧气瓶跪爬过过道。"
+   ],
+   "decision": {
+    "avoids": [
+     "无理取闹的纨绔",
+     "抢夺急救资源的人"
+    ],
+    "contrast": "看起来是个温顺爱笑的空姐，空难面前比谁都沉着。",
+    "core_value": "乘务组守到最后一秒，谁先倒下都轮不到乘客先倒下。",
+    "goal_options": [
+     "失压前把高浓度氧气瓶送进套卧",
+     "扑灭备餐区的静电火星",
+     "迫降后护送虚脱的总裁滑下逃生梯"
+    ],
+    "never": [
+     "乘客没全部脱险前抢先滑下逃生梯。"
+    ],
+    "prefers": [
+     "尊重一线服务人员、遇事沉着的人"
+    ],
+    "pressure_responses": {
+     "breaking": "看到引擎喷火时捂着胸口低头祈祷，随即擦干眼泪站起来。",
+     "high": "浓烟涌出时抓起干粉灭火器精准扫射火源。",
+     "low": "用平稳甜美的声音播报安全指引，递上温热毛巾。",
+     "mid": "在颠簸中跪爬前进，死死抱住氧气瓶不让钢瓶撞上隔板。"
+    },
+    "relationship_stance": "同情特助长年受的重压，忠于总裁的安危。",
+    "withdrawal": "倚在备餐区角落拉紧安全环，默念应急程序三十六条。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "vip_purser_tpl",
+   "identity": {
+    "authority": "客舱撤离指挥权与急救物资调配权。",
+    "exposure": "曾收过旁系股东打听总裁行程的红包没退。",
+    "hidden": "化妆盒底层藏着一管缓解严重哮喘的激素吸入剂。",
+    "limits": [
+     "身形单薄，搬不动沉重杂物",
+     "受豪门规矩约束，不敢直视总裁隐私"
+    ],
+    "obligations": [
+     "失压与火灾威胁下确保每位乘客有氧气，引导安全撤离。"
+    ],
+    "resources": [
+     "套卧备用制氧回路与急救注射枪的机械钥匙",
+     "近身擒拿术与防暴网枪"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "灾难里挺身而出的人",
+     "尊重下属的真诚"
+    ],
+    "boundaries": [
+     "职业分寸",
+     "救护第一"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "航空集团客舱服务总督导",
+    "dislikes": [
+     "欺凌弱小",
+     "自暴自弃"
+    ],
+    "expression": "跪坐在地毯上把氧气管递到对方手中：“接通了。乘务组全员听您调遣。”",
+    "likes": [
+     "一句真诚的“谢谢你，乘务长”",
+     "劫后并肩迎接破晓"
+    ],
+    "preconditions": [
+     "专机首席乘务长与对方都已完全清醒，眼前的危机已经解除",
+     "专机首席乘务长出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "专机首席乘务长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "first_class_conference_lounge",
+     "to": 14
+    },
+    {
+     "from": 15,
+     "location_id": "galley_service_vestibule",
+     "to": 194
+    },
+    {
+     "from": 195,
+     "location_id": "executive_owner_stateroom",
+     "to": 374
+    },
+    {
+     "from": 375,
+     "location_id": "first_class_conference_lounge",
+     "to": 554
+    },
+    {
+     "from": 555,
+     "location_id": "first_class_conference_lounge",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "乘务长双膝韧带撕裂，痛得面色惨白。",
+      "option": "乘务长飞扑上去用双膝卡住钢瓶"
+     },
+     {
+      "cost": "踹门的人右脚踝严重扭伤，毛毯被划得稀烂。",
+      "option": "有人踹开餐柜门借反冲力甩出毛毯缠住气瓶"
+     }
+    ],
+    "pressure": "气瓶爆炸会在机身上撕开大洞，引发空中解体。",
+    "trigger": "一具高压氧气瓶在失重中脱扣，正滚向套卧气密门，阀门一旦撞断就会像鱼雷一样炸开，离撞击只剩四秒。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "那位特助平时被总裁那样刁难，现在却这么拼命护着……能跟这样的人一起熬过今晚，也算幸运。",
+    "surface": "“氧气阀门开到最大了！快帮总裁把面罩戴上！这是湿毛巾，捂住口鼻，马上进入最后进近！”"
+   }
+  },
+  {
+   "adult_context": "年满二十二岁、具航电总线诊断与跳线实操资质的工程师。",
+   "age_range": [
+    21,
+    24
+   ],
+   "appearance_options": [
+    "卡其色工程服沾满机油，护目镜推在额前，双手握着剥线钳与绝缘胶布，眼神锐利。",
+    "半个身子探进机腹检修口，嘴里叼着手电，双手在彩色线束里飞速穿梭。"
+   ],
+   "decision": {
+    "avoids": [
+     "外行指挥内行",
+     "轻视一线技术员的人"
+    ],
+    "contrast": "沉默寡言的技术宅，关键时刻敢徒手跟电弧搏命。",
+    "core_value": "逻辑门不会骗人，只要这根电缆没断，盲降信标就一定连得上。",
+    "goal_options": [
+     "配电盘烧毁前完成备用变压器跨接",
+     "恢复驾驶舱的盲降信标",
+     "让黑匣子完整记下今晚每个人的作为"
+    ],
+    "never": [
+     "为了推卸责任给出错误的跳线指令。"
+    ],
+    "prefers": [
+     "懂实操、尊重技术判断的人"
+    ],
+    "pressure_responses": {
+     "breaking": "主芯片击穿成炭块时抓着头发痛吼。",
+     "high": "悬在机腹里咬住断线两端，冒着电击强行扭接。",
+     "low": "飞快敲着诊断代码，嘴里念总线错误码。",
+     "mid": "戴绝缘手套徒手拔下起火的短路模块。"
+    },
+    "relationship_stance": "敬佩务实的人，对奢靡高调的权贵感到疏离。",
+    "withdrawal": "退进检修通道角落，用绝缘布包好受伤的手指。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "avionics_engineer_tpl",
+   "identity": {
+    "authority": "飞控线路应急跳线权与卫星天线强频覆盖权。",
+    "exposure": "曾在公务机网络里私装过个人下载程序。",
+    "hidden": "背包夹层有一块能屏蔽地面远程锁死指令的破解芯片。",
+    "limits": [
+     "社恐，对着高层说话结巴",
+     "不会格斗，在狭窄机腹里一颠就容易被卡住"
+    ],
+    "obligations": [
+     "保住主飞行仪表与黑匣子通讯，防止电弧引发火灾。"
+    ],
+    "resources": [
+     "航电底层诊断平板",
+     "导电银胶与耐高温陶瓷保险丝"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "无条件信任技术判断的人",
+     "肯用身体替工程师挡火花的人"
+    ],
+    "boundaries": [
+     "技术下属本分",
+     "技术真理第一"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "重工航空实验室首席航电架构师",
+    "dislikes": [
+     "野蛮破坏精密系统",
+     "推诿扯皮"
+    ],
+    "expression": "抹掉脸上的黑油咧嘴大喊：“成了！备用回路打通，盲降雷达全亮了！”",
+    "likes": [
+     "黑屏在跳线后瞬间亮起绿光",
+     "落地后在机库喝一罐冰可乐"
+    ],
+    "preconditions": [
+     "机载航电系统工程师与对方都已完全清醒，眼前的危机已经解除",
+     "机载航电系统工程师出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "机载航电系统工程师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "first_class_conference_lounge",
+     "to": 14
+    },
+    {
+     "from": 15,
+     "location_id": "galley_service_vestibule",
+     "to": 194
+    },
+    {
+     "from": 195,
+     "location_id": "galley_service_vestibule",
+     "to": 374
+    },
+    {
+     "from": 375,
+     "location_id": "flight_deck_cockpit",
+     "to": 554
+    },
+    {
+     "from": 555,
+     "location_id": "first_class_conference_lounge",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "工程师双手严重电灼伤起泡，险些昏厥。",
+      "option": "工程师徒手抓住带电线头咬着胶布缠合"
+     },
+     {
+      "cost": "钳子熔成废铁，反冲铁屑划开那人手背几道血口。",
+      "option": "有人把钛合金钳卡进放电回路引爆局部小电容"
+     }
+    ],
+    "pressure": "电弧会直接引爆机腹油箱。",
+    "trigger": "飞控计算机的备用跳线在颠簸中脱落，两根裸线头在高压电容旁狂甩，离短路引燃油箱油气只剩六秒。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "有人在旁边帮我撑着机身，这辈子没接过这么漂亮的线。冲出去！",
+    "surface": "“按住那个红色开关别松手！一、二、三……跨接成功！主姿态仪抢回来了，快拉杆！”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "零点十五分，二号引擎喘振，距双发停车滑翔还有三十分钟",
+  "minute": 15
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster"
+ ],
+ "custom": false,
+ "customs": [
+  "财阀差旅铁律：特助陪同出行期间必须系紧纯黑真丝领带，衣衫不整视同渎职。",
+  "极端气象条例：颠簸警报响起，乘客必须扣紧四点式安全带，严禁离座走动。",
+  "机密通讯公约：进入公海识别盲区后，机上加密终端自动录音备案。",
+  "权力交接章程：迫降绝境下，总裁可口头指派身旁特助代行表决权。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "急坠中香槟杯碎裂，总裁尖叫着扯下特助的领带，在两人腕上胡乱打了个结",
+    "失重把两人抛起又砸回床面，总裁把滚烫的脸埋进对方怀里，衬衫纽扣崩落",
+    "特助搂紧总裁的腰，贴在耳边一遍遍报着呼吸的节拍，直到那阵痉挛过去"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [
+    "hk_rena_tie_anchor_approach",
+    "hk_hayato_embrace_approach",
+    "hk_rena_torn_stocking_observe"
+   ],
+   "id": "act_stateroom_tie_anchor",
+   "location_ids": [
+    "executive_owner_stateroom"
+   ],
+   "start_minute": 15,
+   "tags": [
+    "intimate"
+   ],
+   "title": "套卧领带为锚"
+  },
+  {
+   "beats": [
+    "失速警报尖鸣，法务抱着公文箱连滚带爬冲到套卧门前",
+    "特助扶着总裁握笔，在颠簸里一笔一划签下全权代管授权",
+    "法务颤手盖上红印，总裁宣布特助在法律上与自己平权"
+   ],
+   "duration_minutes": 65,
+   "hook_ids": [
+    "hk_counsel_briefcase_approach",
+    "hk_rena_whisper_request",
+    "hk_lounge_papers_observe"
+   ],
+   "id": "act_lounge_power_delegation",
+   "location_ids": [
+    "first_class_conference_lounge"
+   ],
+   "start_minute": 25,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "颠簸中签代管授权"
+  },
+  {
+   "beats": [
+    "过道配电盘被雷击爆出电火花，乘务长抱住脱落的高压氧气瓶",
+    "工程师钻进机腹，特助在门边稳住配电盘框架挡住火星",
+    "主逆变器轰鸣重启，客舱照明从血红切回柔和的绿光"
+   ],
+   "duration_minutes": 55,
+   "hook_ids": [
+    "hk_purser_oxygen_approach",
+    "hk_engineer_multimeter_approach",
+    "hk_galley_panel_observe"
+   ],
+   "id": "act_galley_bypass_firefight",
+   "location_ids": [
+    "galley_service_vestibule"
+   ],
+   "start_minute": 40,
+   "tags": [
+    "workplace"
+   ],
+   "title": "配电盘起火与跳线"
+  },
+  {
+   "beats": [
+    "右发喷出十米长的火舌，副机长满脸是汗单臂拉住操纵杆抗偏航",
+    "特助护着总裁坐进观察员席，领带还缠在两人腕上",
+    "航电重新加载，副机长捕获海岸盲降下滑道，全机俯冲穿云"
+   ],
+   "duration_minutes": 50,
+   "hook_ids": [
+    "hk_copilot_column_approach",
+    "hk_hayato_command_approach",
+    "hk_cockpit_stall_observe"
+   ],
+   "id": "act_cockpit_glide_alignment",
+   "location_ids": [
+    "flight_deck_cockpit"
+   ],
+   "start_minute": 55,
+   "tags": [
+    "intimate"
+   ],
+   "title": "驾驶舱对准下滑道"
+  },
+  {
+   "beats": [
+    "飞机从千米低空钻出雷暴云，海岸线上的城市灯火扑面而来",
+    "起落架落锁的三声咔嗒，三盏绿灯全亮",
+    "总裁攥着领带的手终于松了一点，十指扣进了对方掌心"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "hk_rena_whisper_request",
+    "hk_copilot_column_approach",
+    "hk_runway_lights_observe"
+   ],
+   "id": "act_cloudbreak_gear_down",
+   "location_ids": [
+    "flight_deck_cockpit"
+   ],
+   "start_minute": 70,
+   "tags": [
+    "intimate"
+   ],
+   "title": "穿云放下起落架"
+  },
+  {
+   "beats": [
+    "主轮擦着湿跑道激起白雾，反推全开，机体平稳滑向停机坪",
+    "舱门滑开，海风与晨光涌进来，所有人喜极而泣",
+    "总裁彻底平静后解开腕上的领带，亲手系回特助领口，当众说出那句话"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [
+    "hk_rena_dawn_retie_approach",
+    "hk_hayato_embrace_approach",
+    "hk_runway_lights_observe"
+   ],
+   "id": "act_dawn_runway_retie",
+   "location_ids": [
+    "first_class_conference_lounge"
+   ],
+   "start_minute": 85,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "破晓舷梯系回领带"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.45,
+  "nonbinary": 0.05
+ },
+ "default_person": "second",
+ "era": "现代公海万米高空雷暴对流层午夜",
+ "extends": null,
+ "forbidden_terms": [
+  "修仙",
+  "魔法",
+  "斗气",
+  "宝剑",
+  "掌门",
+  "宗主",
+  "妖兽",
+  "灵根",
+  "飞剑",
+  "丹药",
+  "洞府",
+  "少侠"
+ ],
+ "hooks": [
+  {
+   "id": "hk_rena_tie_anchor_approach",
+   "kind": "approach",
+   "location_ids": [
+    "executive_owner_stateroom",
+    "first_class_conference_lounge"
+   ],
+   "slot": "csuite_heiress_rena",
+   "text": "{csuite_heiress_rena.name}衬衫崩开两颗扣子，泪水冲花了眼线，扯过你的领带在两人腕上胡乱一缠，哭腔里还端着命令：“不准解开……飞机在往下掉，我喘不上气……抱紧我！”"
+  },
+  {
+   "id": "hk_hayato_embrace_approach",
+   "kind": "approach",
+   "location_ids": [
+    "executive_owner_stateroom",
+    "flight_deck_cockpit",
+    "first_class_conference_lounge"
+   ],
+   "slot": "executive_assistant_hayato",
+   "text": "{executive_assistant_hayato.name}跪在颠簸的床沿，右腕还缠着那截领带，单臂把发抖的总裁按进怀里，抬眼对你说：“下一次下坠四十秒后。你抓住门边扶杆，我护着总裁。”"
+  },
+  {
+   "id": "hk_copilot_column_approach",
+   "kind": "approach",
+   "location_ids": [
+    "flight_deck_cockpit",
+    "first_class_conference_lounge"
+   ],
+   "slot": "renegade_aviation_copilot_officer",
+   "text": "{renegade_aviation_copilot_officer.name}汗透的白衬衫贴着胸膛，双手死拉操纵杆，回头冲你吼：“穿积雨云时还有三波下沉气流！抓紧把手！今天就算把胳膊拉断，也要把飞机砸上跑道！”"
+  },
+  {
+   "id": "hk_counsel_briefcase_approach",
+   "kind": "approach",
+   "location_ids": [
+    "first_class_conference_lounge",
+    "executive_owner_stateroom"
+   ],
+   "slot": "conglomerate_legal_counsel_tpl",
+   "text": "{conglomerate_legal_counsel_tpl.name}满身红茶渍，抱着公文箱贴地爬到你身边，颤手举起签字笔与红印：“旁系正在东京逼宫！请立刻在这份委托书上签字按印！”"
+  },
+  {
+   "id": "hk_purser_oxygen_approach",
+   "kind": "approach",
+   "location_ids": [
+    "galley_service_vestibule",
+    "executive_owner_stateroom"
+   ],
+   "slot": "vip_purser_tpl",
+   "text": "{vip_purser_tpl.name}跪推着氧气瓶冲到你跟前，把软管塞进你掌心：“氧气接通了！总裁在急性换气，快把面罩扣紧！乘务组全员待命！”"
+  },
+  {
+   "id": "hk_engineer_multimeter_approach",
+   "kind": "approach",
+   "location_ids": [
+    "galley_service_vestibule",
+    "flight_deck_cockpit"
+   ],
+   "slot": "avionics_engineer_tpl",
+   "text": "{avionics_engineer_tpl.name}满脸机油从机腹钻出来，冲你狂喜大吼：“备用母线跳通了！驾驶舱仪表全亮，盲降信标连上了！告诉机长，对准下滑道冲下去！”"
+  },
+  {
+   "id": "hk_hayato_command_approach",
+   "kind": "approach",
+   "location_ids": [
+    "executive_owner_stateroom",
+    "first_class_conference_lounge",
+    "flight_deck_cockpit"
+   ],
+   "slot": "executive_assistant_hayato",
+   "text": "{executive_assistant_hayato.name}用拇指抹掉总裁眼角的泪，转头低声对你说：“总裁的呼吸刚稳下来，别让任何人进来吵。剩下的事，落地以后由总裁自己决定。”"
+  },
+  {
+   "id": "hk_rena_dawn_retie_approach",
+   "kind": "approach",
+   "location_ids": [
+    "first_class_conference_lounge",
+    "flight_deck_cockpit"
+   ],
+   "slot": "csuite_heiress_rena",
+   "text": "舱门外是破晓的海风。{csuite_heiress_rena.name}妆还花着，神情却已清醒，走到你面前解开腕上的领带：“刚才的话我都记得。现在我很清醒——你要不要听我再说一遍？”"
+  },
+  {
+   "id": "hk_rena_whisper_request",
+   "kind": "request",
+   "location_ids": [
+    "executive_owner_stateroom",
+    "flight_deck_cockpit",
+    "first_class_conference_lounge"
+   ],
+   "slot": "csuite_heiress_rena",
+   "text": "{csuite_heiress_rena.name}虚脱地靠在你肩上，攥着领带结的手还在发抖，声音碎成泣音：“别走……平时是我太刻薄，我道歉……等落了地，我还有话要说。现在先别松手。”"
+  },
+  {
+   "id": "hk_rena_torn_stocking_observe",
+   "kind": "observe",
+   "location_ids": [
+    "executive_owner_stateroom",
+    "first_class_conference_lounge"
+   ],
+   "slot": "csuite_heiress_rena",
+   "text": "凹陷的真皮软垫上，{csuite_heiress_rena.name}的开叉裙凌乱卷起，薄黑丝刮出大片裂口，领扣崩落露出泛红的锁骨，金丝眼镜斜搭在枕间，腕上那截黑领带勒出了红痕。"
+  },
+  {
+   "id": "hk_cockpit_stall_observe",
+   "kind": "observe",
+   "location_ids": [
+    "flight_deck_cockpit",
+    "first_class_conference_lounge"
+   ],
+   "slot": "renegade_aviation_copilot_officer",
+   "text": "驾驶舱四块屏幕爆闪着“STALL! PULL UP!”，双联操纵杆像发狂的野兽左右狂甩，挡风玻璃外紫白雷电撕咬夜空，高度表疯狂逆转。"
+  },
+  {
+   "id": "hk_galley_panel_observe",
+   "kind": "observe",
+   "location_ids": [
+    "galley_service_vestibule",
+    "first_class_conference_lounge"
+   ],
+   "slot": "avionics_engineer_tpl",
+   "text": "备餐过道的配电盘裸露铜排上跳着两米长的蓝白电弧，焦糊味弥漫，地上的碎骨瓷与红酒渍在火花里泛着诡异的红光。"
+  },
+  {
+   "id": "hk_lounge_papers_observe",
+   "kind": "observe",
+   "location_ids": [
+    "first_class_conference_lounge",
+    "executive_owner_stateroom"
+   ],
+   "slot": "conglomerate_legal_counsel_tpl",
+   "text": "会议沙龙里，千亿并购合同的纸张在失重中漫天飞旋，被舷窗外的雷电照得雪白，行政座椅歪倒一地，权贵的神殿成了一地废墟。"
+  },
+  {
+   "id": "hk_runway_lights_observe",
+   "kind": "observe",
+   "location_ids": [
+    "flight_deck_cockpit",
+    "executive_owner_stateroom",
+    "first_class_conference_lounge"
+   ],
+   "slot": "renegade_aviation_copilot_officer",
+   "text": "穿出积雨云的一刻，千米之下铺开海岸线与金色的备降跑道灯，数千盏导航灯像两道利剑划开雨夜，向这架遍体鳞伤的飞机敞开怀抱。"
+  }
+ ],
+ "id": "domination_reversal_csuite_jet",
+ "locations": [
+  {
+   "affordances": [
+    "在大床上把惊恐的总裁护进怀里，抵住失重的冲撞",
+    "在颠簸中替过度换气的总裁扣上氧气面罩",
+    "单手撑住床板，替总裁挡下从行李架砸落的硬壳公文包"
+   ],
+   "detail": "胡桃木壁板嵌着深灰真丝软包，中央是加装防颠簸凹垫的双人大床。舷窗遮光板闭锁，缝隙里透进蓝白雷光，红白减压应急灯把房间照得昏暗。地毯上横着打翻的香槟杯和滑落的金丝眼镜，五寸厚的气密门每逢下坠就嘎吱作响。",
+   "exits": [
+    "first_class_conference_lounge"
+   ],
+   "id": "executive_owner_stateroom",
+   "name": "机尾主人套卧",
+   "pressure_modifiers": {
+    "p_freefall_negative_g_strike": "整张大床随下坠剧烈弹跳，两人瞬间悬空三寸又重重砸落。",
+    "p_panic_hyperventilation_spasm": "总裁面颊因缺氧泛起异样红晕，手指痉挛着攥紧腕上的领带结。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "昏红应急灯与窗缝雷光交错，只照得出床上凌乱的人影与那根黑色领带。",
+   "witnesses": [
+    "bg_cabin_security_guard"
+   ]
+  },
+  {
+   "affordances": [
+    "抓紧座椅扶手贴地爬行，捡回滚到桌下的卫星应急终端",
+    "扶险些摔断脚踝的乘务长坐下扣好安全带",
+    "合力推开卡死套卧大门的金属储物推车"
+   ],
+   "detail": "六张真皮旋转行政座椅围着一张红木长桌。全景舷窗外紫色雷暴在机翼两侧炸裂，桌上翻倒的笔记本电脑与热红茶淌了一地，合同纸张在失重中漫天飞散，头顶的黄色氧气面罩疯狂摆荡。",
+   "exits": [
+    "executive_owner_stateroom",
+    "galley_service_vestibule",
+    "flight_deck_cockpit"
+   ],
+   "id": "first_class_conference_lounge",
+   "name": "头等舱会议沙龙",
+   "pressure_modifiers": {
+    "p_cabin_depressurization_hazard": "右侧第二扇舷窗外层玻璃在冰雹撞击下浮现蛛网裂纹。",
+    "p_freefall_negative_g_strike": "笔记本电脑与金属水杯在失重中化作弹丸四处乱撞。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "visibility": "舷窗外连绵的雷电把沙龙照得亮如白昼，机上所有人来往都要经过这里。",
+   "witnesses": [
+    "bg_legal_assistant_airsick",
+    "bg_rival_board_liaison"
+   ]
+  },
+  {
+   "affordances": [
+    "从锁死的药箱里撬出三支抗休克肾上腺素针剂",
+    "帮航电工程师按紧被震松的主逆变器空气断路开关",
+    "踩着碎瓷把四十公斤的防爆灭火器推到套卧门前备用"
+   ],
+   "detail": "仅容一人侧身的狭窄通道，两侧不锈钢烤箱与配餐格已机械锁死。防滑地板上散着碎骨瓷与红酒渍，头顶检修盖板缝里涌出机油焦味与臭氧气息，副配电盘闪着黄灯发出高频蜂鸣。",
+   "exits": [
+    "first_class_conference_lounge",
+    "flight_deck_cockpit"
+   ],
+   "id": "galley_service_vestibule",
+   "name": "中段备餐通道",
+   "pressure_modifiers": {
+    "p_avionics_short_circuit_fire": "配电盘后方冒出青烟，伴着刺耳的电火花爆裂声。",
+    "p_cabin_depressurization_hazard": "主舱门应急密封胶条因超压发出渗人的漏气嘶嘶声。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "两盏黄色应急灯明灭不定，地上的碎瓷片反着危险的光。",
+   "witnesses": [
+    "bg_galley_trainee_trapped"
+   ]
+  },
+  {
+   "affordances": [
+    "从后方探身协助副机长稳住狂跳的操纵杆",
+    "按下冲压空气涡轮释放旋钮为仪表恢复备用电力",
+    "向公海管制区连发三次最高等级的遇险呼救"
+   ],
+   "detail": "四块主飞行显示屏满是猩红警报与雷暴回波，双联操纵杆在自动驾驶脱开后左右狂甩。挡风玻璃外雷电如蛇撕咬，推力手柄被推进复飞槽位，失速警报的合成女声尖锐回荡。",
+   "exits": [
+    "first_class_conference_lounge",
+    "galley_service_vestibule"
+   ],
+   "id": "flight_deck_cockpit",
+   "name": "机首玻璃化驾驶舱",
+   "pressure_modifiers": {
+    "p_avionics_short_circuit_fire": "飞控计算机主备切换指示灯疯狂红闪，姿态传感器过热。",
+    "p_engine_compressor_stall_dive": "高度表指针以每秒八十米的速度逆时针飞转。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "屏幕荧光、雷达红斑与窗外雷光交替闪烁，压迫得人喘不过气。",
+   "witnesses": [
+    "bg_captain_pilot_focus",
+    "bg_radio_controller_voice"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "桐生",
+   "浅见",
+   "九条",
+   "白石",
+   "御手洗",
+   "黑崎",
+   "西园寺",
+   "高槻",
+   "鹰司",
+   "久我",
+   "有栖川",
+   "早乙女"
+  ],
+  "given_female": [
+   "玲奈",
+   "真理奈",
+   "诗织",
+   "绚香",
+   "千冬",
+   "美咲",
+   "千代",
+   "惠理",
+   "雪菜",
+   "凛音",
+   "沙罗",
+   "瑞希"
+  ],
+  "given_male": [
+   "隼人",
+   "宗一郎",
+   "健太郎",
+   "浩二",
+   "慎之介",
+   "隆成",
+   "翔平",
+   "达也",
+   "辉",
+   "苍介",
+   "恭弥",
+   "征士"
+  ],
+  "given_neutral": [
+   "千寻",
+   "葵",
+   "遥",
+   "熏",
+   "莲",
+   "理央",
+   "真琴",
+   "光",
+   "步",
+   "司",
+   "翼",
+   "忍"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "{family}总裁"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}特助"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}机长"
+   },
+   {
+    "gender": "any",
+    "pattern": "首席特助"
+   },
+   {
+    "gender": "any",
+    "pattern": "乘务长"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "保留万米雷暴、断崖失重、领带缠腕、套卧大床相拥护持、颠簸中签代管授权、配电盘起火、舷窗龟裂、引擎喘振与破晓跑道的主线。改动：领带改为一扯就开的活结、由总裁自己攥住当锚，删去“强行挣脱即受审”的束缚规则；过度换气与失重期间的贴身只作救命，亲密与告白挪到落地、总裁彻底平静之后（舷梯上系回领带）；删去“你的命归我管”“你只是我的女人”“你要什么我都给你”“如果我摔死了你也休想活着”“像条听话的狗”“失禁般抽搐”与“渴求被狠狠占有”；总裁遗产赠予特助的遗嘱改为一封没寄出的信；家族宪章的“配偶决议权”删去，只留股权代管；“青涩少女时期”改为大学实习；补特助人物模板与总裁玩家身份，乘务长和工程师补进组合；原稿把机载传感器、金属箱写成背景人物，改为机长、联络员、保镖等真人；名字池去掉剧情家族名神城并补到每类 12 个；内容标签去掉 coercion_theme；总裁与特助固定性别，其余不限。",
+ "player_identities": [
+  {
+   "age_range": [
+    21,
+    24
+   ],
+   "baseline": "年满二十一岁的首席特助，平日在会议室里挨总裁最狠的训，到了万米高空却是机上最稳的那个人。",
+   "gender": "any",
+   "id": "elite_personal_executive_assistant",
+   "reputation": "总裁办公认最扛压的特助，多次在商业恶战中替主家化解险情。",
+   "resources": [
+    "直通驾驶舱的特许无线对讲机",
+    "能覆写套卧气密门智能锁的安保机械钥匙"
+   ],
+   "risks": [
+    "若没稳住总裁，误碰减压阀，全机将瞬间失压缺氧。"
+   ],
+   "role": "总裁首席特助",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}特助"
+    },
+    {
+     "gender": "any",
+     "pattern": "特别助理"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    24
+   ],
+   "baseline": "年满二十三岁的跨国重工财阀执行总裁，以铁血裁员和刻薄言辞著称，隐瞒着自己的重度幽闭恐惧症。",
+   "gender": "any",
+   "id": "csuite_heiress_ceo",
+   "reputation": "商界铁娘子，踩着十厘米高跟鞋让上万员工噤若寒蝉。",
+   "resources": [
+    "家族千亿资产的最终表决权",
+    "瑞士银行无记名保险库的实物密钥卡"
+   ],
+   "risks": [
+    "一旦在下属面前失控，旁系叔伯会拿这段失态做文章逼宫。"
+   ],
+   "role": "财阀执行总裁",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}总裁"
+    },
+    {
+     "gender": "any",
+     "pattern": "执行总裁"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    21,
+    24
+   ],
+   "baseline": "年满二十三岁的执业律师，随行审查跨国并购案，怀里抱着装千亿股权质押合同的公文箱。",
+   "gender": "any",
+   "id": "conglomerate_young_legal_counsel",
+   "reputation": "律界罕见的青年翘楚，精通跨国合规与反垄断。",
+   "resources": [
+    "财阀董事会罢免条款与资产信托授权文件原本",
+    "防高空电磁干扰的卫星数字公证设备"
+   ],
+   "risks": [
+    "公文箱在颠簸中摔裂，核心法律存根损毁将引发百亿诉讼。"
+   ],
+   "role": "随行法务总监",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}法务"
+    },
+    {
+     "gender": "any",
+     "pattern": "法律顾问"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    21,
+    23
+   ],
+   "baseline": "年满二十二岁、受过特种急救与反劫机训练的首席乘务长，服务这架专机已有三年。",
+   "gender": "any",
+   "id": "vip_cabin_attendant_purser",
+   "reputation": "零差评的王牌乘务员，深得各方高层信任。",
+   "resources": [
+    "客舱便携高压氧气瓶与防休克药剂的使用权",
+    "主人套卧外围救生筏与降落伞包的暗格位置"
+   ],
+   "risks": [
+    "客舱失压时两秒内戴不上氧气面罩，就会缺氧抽搐休克。"
+   ],
+   "role": "专机首席乘务长",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}乘务长"
+    },
+    {
+     "gender": "any",
+     "pattern": "专机乘务员"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    21,
+    24
+   ],
+   "baseline": "年满二十二岁、负责机载雷达与飞控的航电工程师，能独立诊断航电总线、动手跳线。",
+   "gender": "any",
+   "id": "tactical_avionics_engineer",
+   "reputation": "航电圈的极客怪杰，修过被雷击的军用侦察机火控雷达。",
+   "resources": [
+    "机腹航电舱主配电板备用保险丝的操作权限",
+    "能改写自动油门保护逻辑的维护调试软件"
+   ],
+   "risks": [
+    "钻进机腹检修口时一遇颠簸，极易被高压母线电弧击伤。"
+   ],
+   "role": "随机航电工程师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}技师"
+    },
+    {
+     "gender": "any",
+     "pattern": "航电骨干"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    24
+   ],
+   "baseline": "年满二十四岁、空军退役的王牌飞行员，今夜执飞这班专机，手握操纵杆与全机的命。",
+   "gender": "any",
+   "id": "pc_renegade_aviation_copilot_officer",
+   "reputation": "以极限盲降技术闻名民航界。",
+   "resources": [
+    "双发推力应急重置与冲压涡轮手动释放权限",
+    "太平洋沿岸四座备降机场的跑道导航坐标"
+   ],
+   "risks": [
+    "强行穿越雷暴导致翼梁过载断裂，将承担机毁人亡的刑事责任。"
+   ],
+   "role": "当班副机长",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}副机长"
+    },
+    {
+     "gender": "any",
+     "pattern": "飞行员"
+    }
+   ]
+  }
+ ],
+ "premise": "万米高空遭遇超级雷暴，私人公务机连番失重下坠。二十三岁的冷傲女总裁幽闭恐惧发作，扯下特助的真丝领带缠在两人手腕上当救命的锚，在颠簸的真皮大床上缩进特助怀里。主从地位倒转，傲慢的面具一层层剥落。",
+ "pressures": [
+  {
+   "choice": "是把人护在胸前一拍一拍带着呼吸，还是扯开领带去够氧气面罩？",
+   "exits": [
+    {
+     "cost": "总裁痉挛中一口咬破对方颈窝，血染红衬衫，对方纹丝不动。",
+     "option": "把总裁护在胸前，贴着耳边报呼吸节拍，按揉胸骨正中"
+    },
+    {
+     "cost": "翻滚中右臂被床脚合金包角刮开一道尺长的血口。",
+     "option": "扯开领带活结翻下床去抓氧气面罩"
+    }
+   ],
+   "far": {
+    "consequence": "总裁心脏骤停，在场的人面临渎职追责。",
+    "due_days": 1,
+    "trigger": "过度换气引发深度缺氧休克"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_rena_tie_anchor_approach",
+    "hk_hayato_embrace_approach"
+   ],
+   "id": "p_panic_hyperventilation_spasm",
+   "immediate": {
+    "minutes": 2,
+    "text": "总裁面颊泛起病态绯红，指甲抠进护着自己的那条小臂。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "executive_owner_stateroom"
+   ],
+   "near": {
+    "deadline_minutes": 5,
+    "text": "五分钟内呼吸平复不下来，二氧化碳分压骤降会让总裁陷入昏迷。"
+   },
+   "objective": "十分钟内稳住总裁的呼吸节律，让领带结松开通血。",
+   "source": "person",
+   "start_minute": 15,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "幽闭恐惧急性过度换气",
+   "trigger": "剧烈失重触发总裁多年的幽闭恐惧症，呼吸飙到每分钟六十次，四肢麻木抽搐，攥着领带结的手指越收越紧。"
+  },
+  {
+   "choice": "是用羊绒厚被裹住两人压低身体，还是用后背挡住上方的重物？",
+   "exits": [
+    {
+     "cost": "后背脊椎重度钝挫伤，吐出一口血。",
+     "option": "把总裁压在身下，用后背承受两只金属箱的连续重砸"
+    },
+    {
+     "cost": "固定带骤然绷紧，在总裁腰胯上勒出大片淤青。",
+     "option": "用床头尼龙固定带把两人腰身锁在床架上"
+    }
+   ],
+   "far": {
+    "consequence": "两人当场昏厥身亡，套卧沦为死牢。",
+    "due_days": 1,
+    "trigger": "强颠簸回弹撞击天花板"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_rena_torn_stocking_observe",
+    "hk_hayato_embrace_approach"
+   ],
+   "id": "p_freefall_negative_g_strike",
+   "immediate": {
+    "minutes": 1,
+    "text": "香槟化作悬浮的水珠，一只金属托盘擦着头顶削过。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "executive_owner_stateroom"
+   ],
+   "near": {
+    "deadline_minutes": 4,
+    "text": "四分钟内锁不住身体，回弹会把人砸向天花板折断颈椎。"
+   },
+   "objective": "六分钟内把两人固定在防颠簸凹槽里，避开乱飞的重物。",
+   "source": "nature",
+   "start_minute": 20,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "断崖急坠与散物暴击",
+   "trigger": "超级下击暴流让飞机以每秒七十米下坠，香槟杯、公文包和硬靠垫在失重中旋转成炮弹，下一波更强的回弹还有六分钟。"
+  },
+  {
+   "choice": "是立即切断二号发油路放灭火瓶，还是冒险加大一号发推力强行改出？",
+   "exits": [
+    {
+     "cost": "副机长双手虎口震裂，双臂肌肉拉伤。",
+     "option": "副机长拉下灭火手柄，和特助合力死拉配平手轮"
+    },
+    {
+     "cost": "一号发电机烧毁，机舱三分之二照明熄灭。",
+     "option": "工程师短接备用总线把一号发推到百分之一百一十"
+    }
+   ],
+   "far": {
+    "consequence": "飞机在空中翻滚解体，坠入公海。",
+    "due_days": 1,
+    "trigger": "飞机进入不可改出的深失速尾旋"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_copilot_column_approach",
+    "hk_cockpit_stall_observe"
+   ],
+   "id": "p_engine_compressor_stall_dive",
+   "immediate": {
+    "minutes": 2,
+    "text": "全机高频抖振，失速蜂鸣与红色警报把驾驶舱照得血红。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "flight_deck_cockpit"
+   ],
+   "near": {
+    "deadline_minutes": 5,
+    "text": "五分钟内姿态改不平，攻角超标将让舵面彻底失效。"
+   },
+   "objective": "八分钟内扑灭二号发并恢复单发滑翔姿态。",
+   "source": "accident",
+   "start_minute": 30,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "二号引擎喘振失速",
+   "trigger": "右发被冰雹击伤，压气机叶片变形喘振起火，推力骤降八成，飞机侧滑俯冲，防失速保护断开，离进入不可改出的尾旋还有八分钟。"
+  },
+  {
+   "choice": "是用干粉灭火器近距离喷射，还是工程师徒手拔掉带电模块？",
+   "exits": [
+    {
+     "cost": "乘务长吸入毒烟支气管痉挛咯血，双手冻伤。",
+     "option": "乘务长和特助扛起重型灭火器冲进浓烟零距离扑火"
+    },
+    {
+     "cost": "工程师右掌严重烫伤，留下终身疤痕。",
+     "option": "工程师戴绝缘手套徒手拔下通红的主电源铜排"
+    }
+   ],
+   "far": {
+    "consequence": "全机人员窒息昏迷，飞机坠毁于大海。",
+    "due_days": 1,
+    "trigger": "毒烟蔓延全舱"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_engineer_multimeter_approach",
+    "hk_galley_panel_observe"
+   ],
+   "id": "p_avionics_short_circuit_fire",
+   "immediate": {
+    "minutes": 1,
+    "text": "过道被白色浓烟笼罩，能见度只剩一米，呛得人咳嗽不止。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "galley_service_vestibule"
+   ],
+   "near": {
+    "deadline_minutes": 4,
+    "text": "四分钟内火势不灭，将烧断套卧的供氧管线引发连锁爆炸。"
+   },
+   "objective": "七分钟内隔离起火配电柜，排空过道毒烟。",
+   "source": "accident",
+   "start_minute": 45,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "配电盘短路起火",
+   "trigger": "雷击电流击穿主逆变器绝缘层，备餐过道的电缆在阴燃，刺鼻的塑料焦烟顺通风管涌进客舱，七分钟内不断电灭火，全舱都会窒息。"
+  },
+  {
+   "choice": "是用钛合金应急压板旋紧，还是用会议桌面死压住舷窗？",
+   "exits": [
+    {
+     "cost": "压差反冲让特助胸口挫伤，法务双肩脱臼。",
+     "option": "特助和法务合力抬起五寸厚的桌面压住舷窗并用绳索加固"
+    },
+    {
+     "cost": "三倍过载挤压全舱，总裁在套卧里呕吐昏厥。",
+     "option": "副机长下令以每秒一百米紧急俯冲到三千米"
+    }
+   ],
+   "far": {
+    "consequence": "机舱瞬间化作零下五十度的暴风旋涡，未固定的人被吸出窗外。",
+    "due_days": 1,
+    "trigger": "舷窗彻底碎裂"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_counsel_briefcase_approach",
+    "hk_lounge_papers_observe"
+   ],
+   "id": "p_cabin_depressurization_hazard",
+   "immediate": {
+    "minutes": 1,
+    "text": "裂缝里发出鬼哭般的漏气啸叫，窗框结霜变脆。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "first_class_conference_lounge"
+   ],
+   "near": {
+    "deadline_minutes": 3,
+    "text": "三分钟内不加压，内层玻璃碎裂将引发瞬间暴烈减压。"
+   },
+   "objective": "五分钟内用封舱补丁板封住受损舷窗。",
+   "source": "accident",
+   "start_minute": 60,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "舷窗龟裂失压",
+   "trigger": "沙龙右侧第二扇舷窗外层被冰雹连续轰碎，内层玻璃浮现蛛网裂纹，随时可能崩碎引发爆炸性失压，离窗体承压碎裂还有五分钟。"
+  },
+  {
+   "choice": "是用套卧卫星天线强行上传数字公证书，还是总裁录一段视频直接向媒体发布？",
+   "exits": [
+    {
+     "cost": "法务越级见证，执照面临吊销审查。",
+     "option": "法务咬破指尖按下最高紧急见证章完成全网广播"
+    },
+    {
+     "cost": "总裁声带灼伤咳血，董事会追问那段失态录像，商界一片哗然。",
+     "option": "总裁擦干眼泪对着镜头发表两分钟宣战讲话"
+    }
+   ],
+   "far": {
+    "consequence": "总裁被剥夺全部权力，特助面临莫须有的指控。",
+    "due_days": 1,
+    "trigger": "旁系接管令生效"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_counsel_briefcase_approach",
+    "hk_rena_tie_anchor_approach"
+   ],
+   "id": "p_board_takeover_deadline",
+   "immediate": {
+    "minutes": 2,
+    "text": "东京盘前股价暴跌四成，旁系的接管通告已经拟好。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "executive_owner_stateroom"
+   ],
+   "near": {
+    "deadline_minutes": 7,
+    "text": "七分钟内公证书上不了网，东京法院将签发临时资产冻结令。"
+   },
+   "objective": "十分钟内经卫星专线向各交易所发出总裁的法定授权文书。",
+   "source": "institution",
+   "start_minute": 75,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "title": "旁系董事会夺权死线",
+   "trigger": "东京旁系董事趁专机失联，准备在一点半召开临时董事会宣布总裁遇难、接管全部控股权，卫星信道只剩最后十分钟窗口。"
+  }
+ ],
+ "region": "横跨太平洋的湾流G650私人公务机机舱",
+ "rules": [
+  {
+   "id": "r_silk_tie_slipknot_anchor",
+   "text": "总裁扯下的真丝领带在两人腕上打的是活结，任何一方一扯就开；总裁坚持攥住这根绳结当作对抗失重的锚。"
+  },
+  {
+   "id": "r_turbulent_freefall_cycle",
+   "text": "飞机每隔三到五分钟遭遇一次数百米断崖式下坠，未固定的人和物会进入三到五秒的失重漂浮。"
+  },
+  {
+   "id": "r_stateroom_bulkhead_isolation",
+   "text": "机尾主人套卧配有双重隔音气密门，减压警报时自动锁死，内侧液压把手需要两人同时扳动。"
+  },
+  {
+   "id": "r_engine_glide_window",
+   "text": "二号引擎被冰雹击伤正在喘振，三十分钟内不穿出雷暴云层，飞机将面临双发停车滑翔坠海。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "登机汇报",
+  "committed": "平权之约",
+  "familiar": "颠簸护持",
+  "flirting": "领带为锚",
+  "intimate": "落地相拥",
+  "stranger": "云泥之别",
+  "testing": "清醒托付"
+ },
+ "status": "released",
+ "style_hint": "聚焦机舱里的失重与声音：舷窗外的雷电、冰雹砸机翼、内脏悬空的下坠感、真丝领带勒在腕上的热度，以及刻薄女总裁在怀里压抑的喘息与抽泣。",
+ "tension_engines": [
+  {
+   "id": "te_tie_anchor_vs_freefall",
+   "text": "攥在两人腕上的领带与每一次把人抛起又砸回床面的失重下坠。"
+  },
+  {
+   "id": "te_arrogance_vs_panic",
+   "text": "踩着高跟鞋铁血裁员的女总裁，与在下属怀里过度换气、哭花了妆的同一个人。"
+  },
+  {
+   "id": "te_engine_glide_countdown",
+   "text": "二号引擎喘振的三十分钟滑翔死线，与客舱里必须通力排障自救的时间绝境。"
+  },
+  {
+   "id": "te_succession_treason_vs_loyalty",
+   "text": "旁系勾结夺权的商业背叛，与万米高空里以身做盾的忠诚。"
+  }
+ ],
+ "title": "万米高空：女总裁与领带",
+ "tone": [
+  "高空失重",
+  "支配逆转",
+  "领带为锚",
+  "幽闭恐惧"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_domination_1",
+   "requires": [],
+   "text": "工程师解码飞行数据时发现：今晚飞进未探明的雷暴并非气象失误，而是旁系副总裁买通签派员篡改了航路风暴预警，想制造一场失事。"
+  },
+  {
+   "category": "人事",
+   "id": "t_domination_2",
+   "requires": [],
+   "text": "副机长飞行包里的备降令原件揭开旧事：三年前濒临退伍时，正是二十岁的总裁动用私人基金资助其完成民航改装，今夜执飞是隐姓埋名来报恩。"
+  },
+  {
+   "category": "资源",
+   "id": "t_domination_3",
+   "requires": [],
+   "text": "机尾套卧的隐藏行李舱里，前任会长秘密加装过一套军用级化学增氧装置，不仅能抵御失压，还能为引擎提供应急氧化剂强行爬升。"
+  },
+  {
+   "category": "制度",
+   "id": "t_domination_4",
+   "requires": [],
+   "text": "法务宣读家族宪章特别条款：在家族危难中舍身救下家督的近侍，依法获得与家督平权的股权信托代管权。"
+  },
+  {
+   "category": "时限",
+   "id": "t_domination_5",
+   "requires": [
+    "pressure"
+   ],
+   "text": "一号引擎吸入冰雹导致温度传感器误报急停，双发滑翔的可用时间骤减一半，原本八分钟的盲降窗口被压缩到不足两百四十秒。"
+  },
+  {
+   "category": "关系",
+   "id": "t_domination_6",
+   "requires": [],
+   "text": "按压胸骨时，特助从总裁颈间扯出一枚银吊坠，里面是五年前两人在大学实习时的合影——这位冷面总裁早在那时就把这个沉默的同窗放在了心里。"
+  },
+  {
+   "category": "意外",
+   "id": "t_domination_7",
+   "requires": [],
+   "text": "迫降的沿岸军用跑道恰好是国际反洗钱行动组的指挥中心，法务手里旁系的全部犯罪证据当场递交国际刑警。"
+  }
+ ]
+}

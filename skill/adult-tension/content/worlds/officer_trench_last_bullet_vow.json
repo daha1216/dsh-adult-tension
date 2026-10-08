@@ -1,0 +1,2322 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "年满十九周岁刚从通信预备学校毕业分配至前沿的见习通信兵。",
+   "age_range": [
+    19,
+    21
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_panicked_young_radio_operator",
+   "line": "{npc.name}：外面全是指挥部的求救盲码……所有的中继站频道全黑了！",
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "name": null,
+   "role": "掩体角落双手颤抖年轻见习电报员"
+  },
+  {
+   "adult_context": "年满二十周岁在严寒战壕值守三个月的近卫步枪兵。",
+   "age_range": [
+    20,
+    22
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_trench_rifleman_sentry",
+   "line": "{npc.name}：少校！右翼铁丝网被工兵剪开了！敌人上来了！",
+   "location_ids": [
+    "trench_firing_step_parapet"
+   ],
+   "name": null,
+   "role": "战壕胸墙冒雪压弹年轻步枪哨兵"
+  },
+  {
+   "adult_context": "年满二十一周岁多次执行敌后侦察任务的滑雪侦察兵。",
+   "age_range": [
+    21,
+    23
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_recon_scout_courier",
+   "line": "{npc.name}：装甲列车的先头装甲斥候车已经在五公里外鸣笛了！只要撑到天亮！",
+   "location_ids": [
+    "communication_trench_choke_point"
+   ],
+   "name": null,
+   "role": "冒雪穿越封锁线前沿年轻侦察兵"
+  },
+  {
+   "adult_context": "年满二十一周岁负责前沿测距与炮火矫正的年轻观测士官。",
+   "age_range": [
+    21,
+    23
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_wounded_artillery_spotter",
+   "line": "{npc.name}：我这里还有两箱穿甲弹……快拿去给重机枪送过去！",
+   "location_ids": [
+    "ammo_depot_collapsed_cellar"
+   ],
+   "name": null,
+   "role": "弹药库内腿部负伤年轻炮兵观测员"
+  },
+  {
+   "adult_context": "年满二十周岁在突击工兵排担任布雷手的年轻士兵。",
+   "age_range": [
+    20,
+    22
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_engineer_demolition_sapper",
+   "line": "{npc.name}：班长！起爆线接好了！只要拉动发爆器，整座地窖立刻能定向殉爆！",
+   "location_ids": [
+    "ammo_depot_collapsed_cellar"
+   ],
+   "name": null,
+   "role": "正在埋设炸药包年轻抢险工兵"
+  },
+  {
+   "adult_context": "年满二十一周岁隶属敌军突击步兵大队的先锋尖兵。",
+   "age_range": [
+    21,
+    23
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_infiltrating_enemy_scout",
+   "line": "{npc.name}：帝国军的阵地快垮了！冲进去缴获那面军旗！",
+   "location_ids": [
+    "communication_trench_choke_point"
+   ],
+   "name": null,
+   "role": "摸入交通壕企图投弹年轻敌军尖兵"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "{valeria_major_commander.name}一袭将官大衣在防爆坑内因右肩剧痛与严寒战栗，你以左肩贴靠其背脊合盖大衣度温并双手紧握转轮配枪，{boris_heavy_gunner_sergeant.name}在胸墙处以狂暴火网扼守阵地，军衔尊卑在极寒生死相托中彻底消融升华为同生共死的战阵盟誓。",
+   "id": "combo_officer_loader_trench_vow",
+   "identity_ids": [
+    "machinegunner_loader_youth",
+    "pioneer_sapper_demolition_expert"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "valeria_major_commander",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 5
+     },
+     "reason": "愿以一身血肉之躯在弹雨中为其遮风挡雨，誓死捍卫高傲女长官的生命荣誉。",
+     "stage": "intimate"
+    },
+    {
+     "a": "boris_heavy_gunner_sergeant",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 5
+     },
+     "b": "valeria_major_commander",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "谨遵军人天职誓死护卫罗森伯格家族独女安全，以机枪构筑绝对火网。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "boris_heavy_gunner_sergeant",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "近卫装甲掷弹兵青年机枪副手与前沿重机枪射击阵地年轻剽悍泰山崩于前而色不变之机枪班长在今夜前只打过照面，被同一场危机推到一处。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "dietrich_sapper_pioneer",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "近卫装甲掷弹兵青年机枪副手与前沿交通壕年轻刚烈通晓战壕爆破之突击工兵班长在今夜前只打过照面，被同一场危机推到一处。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "valeria_major_commander",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "dietrich_sapper_pioneer",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "近卫装甲掷弹兵独立断后营青年孤傲兼备决死意志之女少校与前沿交通壕年轻刚烈通晓战壕爆破之突击工兵班长在今夜前只打过照面，被同一场危机推到一处。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "boris_heavy_gunner_sergeant",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "dietrich_sapper_pioneer",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "前沿重机枪射击阵地年轻剽悍泰山崩于前而色不变之机枪班长与前沿交通壕年轻刚烈通晓战壕爆破之突击工兵班长在今夜前只打过照面，被同一场危机推到一处。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "valeria_major_commander",
+    "boris_heavy_gunner_sergeant",
+    "dietrich_sapper_pioneer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在敌军突入前守住防爆钢门并确立二人同生共死之盟誓。",
+    "limit_gap": "平日军阶尊卑森严绝不可逾越半步，此刻极寒掩体内背靠背紧贴合盖军大衣心跳相闻。",
+    "meeting_reason": "防爆深坑手摇马灯下的配枪交托与右肩动脉压迫止血。",
+    "resource_gap": "女少校手握阵地至高指挥生杀大权却负伤体弱，青年副手身手沉稳精通重火器誓死护卫长官。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_noble_commander_pride_vs_intimate_sur",
+    "te_rearguard_standing_order_vs_last_bull"
+   ]
+  },
+  {
+   "chemistry": "{victor_commissar_captain.name}手持战地军法处严令要求全体战至最后一兵一卒严防退缩，{valeria_major_commander.name}拔出转轮配枪以阵地主官之威严决死对峙，你手握卡宾枪横亘中央调停，教条军纪与战阵血肉担当在掩体内激烈交锋。",
+   "id": "combo_commissar_order_vs_officer_standof",
+   "identity_ids": [
+    "machinegunner_loader_youth",
+    "combat_field_surgeon_assistant",
+    "pioneer_sapper_demolition_expert"
+   ],
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 2
+     },
+     "b": "victor_commissar_captain",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 2
+     },
+     "reason": "戒备其严苛教条之军法处分，誓死护卫少校不受军法官加害。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "victor_commissar_captain",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 4
+     },
+     "b": "valeria_major_commander",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 4
+     },
+     "reason": "深明同窗之谊但在公门条令前如履薄冰，暗中寻机为其保全生机。",
+     "stage": "testing"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "valeria_major_commander",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "近卫装甲掷弹兵青年机枪副手与近卫装甲掷弹兵独立断后营青年孤傲兼备决死意志之女少校在今夜前只打过照面，被同一场危机推到一处。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "victor_commissar_captain",
+    "valeria_major_commander"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "调停内部矛盾凝聚全部残存战力一致对外抵御敌军猛攻。",
+    "limit_gap": "稍有差池将被当做临阵叛乱引发阵地内部自相残杀。",
+    "meeting_reason": "地图桌前的突围时刻表核验与伤员处置交锋。",
+    "resource_gap": "督战官掌握最高军法处分生杀大权，少校拥有全营阵地战术指挥权。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_commissar_harsh_inquisition_vs_brothe",
+    "te_rearguard_standing_order_vs_last_bull"
+   ]
+  },
+  {
+   "chemistry": "{erena_field_medic_lieutenant.name}在弹片乱飞中沉稳施救完成动脉止血缝合，你配合施压结扎防休克，{valeria_major_commander.name}得知将士舍死相护含悲化怒立下决死反击誓约，战地医道在血火炼狱中筑起牢不可破之生命防线。",
+   "id": "combo_medic_surgeon_life_saving_trench",
+   "identity_ids": [
+    "combat_field_surgeon_assistant"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "erena_field_medic_lieutenant",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "valeria_major_commander",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "敬佩其刚烈军骨，誓死以精湛医术保其性命无虞。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "erena_field_medic_lieutenant",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "战地医道同侪间的默契配合与无间互信。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "valeria_major_commander",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "近卫野战救护所青年军医助理与近卫装甲掷弹兵独立断后营青年孤傲兼备决死意志之女少校在今夜前只打过照面，被同一场危机推到一处。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "erena_field_medic_lieutenant",
+    "valeria_major_commander"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "确保少校生命体征平稳恢复最低限度战阵指挥能力。",
+    "limit_gap": "急救操作稍有闪失将导致大出血当场休克殒命。",
+    "meeting_reason": "防爆深坑地角简易急救台前的动脉缝合与创伤包扎。",
+    "resource_gap": "女军医手握救命药品与缝合工具，少校身负全阵地安危。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_noble_commander_pride_vs_intimate_sur",
+    "te_rearguard_standing_order_vs_last_bull"
+   ]
+  },
+  {
+   "chemistry": "{charlotte_signal_officer.name}成功破译装甲列车接应波段并在破晓升起三联装红色高空信号弹，{valeria_major_commander.name}在你搀扶下并肩登上机枪胸墙，迎着东方破晓的第一缕金红朝阳，少校当着全体幸存官兵之面紧扣身旁青年五指，宣告死守十四号掩体任务全胜达成并踏上胜利归途。",
+   "id": "combo_dawn_counterattack_triumph",
+   "identity_ids": [
+    "machinegunner_loader_youth",
+    "pioneer_sapper_demolition_expert"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "valeria_major_commander",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "player",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "此生此世共历极寒血海生死考验，今后无论风霜雨雪并肩驰骋战阵永相厮守。",
+     "stage": "committed"
+    },
+    {
+     "a": "charlotte_signal_officer",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "valeria_major_commander",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "见证了一段血火淬炼的绝代战阵传奇，由衷敬佩含泪欢呼。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 2
+     },
+     "b": "charlotte_signal_officer",
+     "b_to_a": {
+      "tension": 3,
+      "trust": 2
+     },
+     "reason": "近卫装甲掷弹兵青年机枪副手与前沿指挥部青年孤注一掷誓死接通装甲列车之女通信官在今夜前只打过照面，被同一场危机推到一处。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "valeria_major_commander",
+    "charlotte_signal_officer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "向集团军全线展现断后阻击战果并确立身边青年终生相守之正统名分。",
+    "limit_gap": "从身陷绝境命悬一线的断后弃子彻底蜕变为名扬全军的英雄指挥官与生死爱侣。",
+    "meeting_reason": "战壕胸墙前朝霞漫天之下的胜利会师与终生誓约确立。",
+    "resource_gap": "装甲列车巨炮群开始轰击敌军纵深，全线合围彻底被击溃撕开通道。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_noble_commander_pride_vs_intimate_sur",
+    "te_blizzard_encirclement_vs_dawn_flare_c"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_greatcoat_breath_heartbeat_sync",
+   "reach": "二人背靠背合盖深蓝军大衣时，隔着厚重呢子传到背上的急促呼吸与心跳。",
+   "text": "军大衣内二人背靠背紧贴急促心跳共鸣"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_blizzard_artillery_concussion_echo",
+   "reach": "穿透两米厚冻土与防爆钢门传来的狂暴风雪呼啸、履带碾压冻土的低沉震颤与高爆炮弹在阵地前沿炸响的闷雷回声。",
+   "text": "极寒暴风雪与重炮轰鸣穿透混凝土震荡回响"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_revolver_hammer_cocking_click",
+   "reach": "在防爆深坑死寂黑暗中，少校将配枪递入同伴掌心时击锤拉开定位与铜弹巢合膛发出的清脆纯钢金属咬合颤音。",
+   "text": "纯钢转轮配枪击锤扳起与穿甲弹推入弹巢清脆金属脆响"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "年满二十二岁帝国顶级军功贵族罗森伯格家族独女在北境冻土前线以钢铁意志断后的青年女少校指挥官。",
+   "age_range": [
+    21,
+    23
+   ],
+   "appearance_options": [
+    "一身沾染硝烟与冰晶的深蓝将官双排扣厚呢大衣，肩章上纯金将星与近卫鹰徽闪烁冷光，白衬领口系紧黑丝领带，右肩缠绕厚重军用麻布绷带渗出殷红血迹，下唇被贝齿紧咬出一抹深红，浑身散发着帝国名门军官落难死战时不可侵犯的神圣凛然战阵风骨。",
+    "在防爆深坑手摇马灯微光下侧身回眸，解下沾血的防风鹿皮军官手套，单手紧握纯钢转轮配枪枪柄，修长身姿微倚在弹药箱旁，美眸含着自尊受挫的屈辱与近乎燃烧的炽热战意，微微仰起尖翘下巴横睨身旁青年装填手，嗓音沙哑微颤却透着百折不回的军官傲骨。"
+   ],
+   "decision": {
+    "avoids": [
+     "贪生怕死之徒",
+     "趁人之危轻薄浪荡之辈"
+    ],
+    "contrast": "在全连官兵面前是冷血残酷严谨如冰的钢铁女督军，在防爆深坑里却是冻得握不稳枪、还要咬牙把命令说完的倔强女人。",
+    "core_value": "近卫军官的荣誉胜过身家性命，宁可与掩体共存亡饮弹殉国，也绝不在强暴敌寇与投降屈辱面前放下战旗。",
+    "goal_options": [
+     "在破晓信号弹升起前死守十四号掩体消灭突入交通壕的全部敌军尖兵",
+     "在防爆深坑内将指挥官转轮配枪与阵地指挥权郑重交托给青年副手确立终生誓约",
+     "引爆地下预设反坦克爆破导索与敌军先头装甲突击集团同归于尽"
+    ],
+    "never": [
+     "绝不会在敌人威逼利诱与死亡威胁面前出卖阵地机密与军旗尊严。"
+    ],
+    "prefers": [
+     "战阵沉稳目光坦荡端方且在火网面前舍身护卫长官的真正铁血男儿"
+    ],
+    "pressure_responses": {
+     "breaking": "在阵地化险为夷后脱力瘫软在青年副手怀中，泪水浸透将官大衣领口低声倾诉多年家族重压心迹。",
+     "high": "在敌军突入观察孔时，用完好左手拔出转轮配枪抵住副手掌心共同扣扳机击毙敌军。",
+     "low": "在掩体地图桌前冷峻下达战壕分段阻击命令，以长官威仪严厉驳斥退缩动摇言论。",
+     "mid": "因右肩剧痛与失温战栗单膝跪地，反手死死攥紧身旁装填手粗呢大衣借力稳住身形。"
+    },
+    "relationship_stance": "外表孤傲凌厉戒备森严，内心深处却极度渴望在极寒血火风暴中拥有一具能毫无保留背靠背托付后背与性命的真正战友依靠。",
+    "withdrawal": "退回收缩至地下弹药库半坍塌地窖深处，手握最后一枚手雷导索请副手在自身受俘前代为拉发以全尊严。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "valeria_major_commander",
+   "identity": {
+    "authority": "名义上掌握第七突出部十四号掩体全部残存步骑兵部队之阵地战时最高生杀与战术裁决大权。",
+    "exposure": "一旦擅离职守后撤将被帝国战地军法处直接剥夺贵族爵位并押送要塞绞刑架处死。",
+    "hidden": "实则是家族政敌刻意将女少校所属部队推至突出部绝地充当弃子，心底深处却对自军校起便默默舍命充当贴身副手的青年装填手暗藏至死不渝的生死托付之情。",
+    "limits": [
+     "右肩贯穿创伤导致右臂暂时失去握枪射击功能极易在极寒中失血休克",
+     "极度自傲视自身软弱之态暴露于下属士兵视线为终生奇耻大辱"
+    ],
+    "obligations": [
+     "誓死执行统帅部断后指令掩护主力装甲军团安全撤退，坚守阵地至破晓最后一兵一卒。"
+    ],
+    "resources": [
+     "一柄帝国兵工总厂特制带有家族鹰徽的纯钢指挥官九毫米转轮配枪",
+     "一枚刻有近卫装甲师绝密通信波段与自毁密令的纯金怀表印鉴"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在纷飞弹雨中极其专注地用肩膀顶住防爆门为自己包扎创口时那份目不斜视的端方正气",
+     "在刺刀肉搏生死关头毫不犹豫以血肉之躯迎上敌刃挡在身前的浩然大担当"
+    ],
+    "boundaries": [
+     "在公开军阵指挥场合恪守军令纲纪底线",
+     "严禁任何带有轻薄怠慢性质的言语亵渎"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "卸下军令面具后甘愿一生与身旁英雄战友并肩携手同生共死的知心爱侣",
+    "dislikes": [
+     "怯懦逃避",
+     "背弃信义"
+    ],
+    "expression": "耳尖微烫眼角泛起一抹柔情，主动解下军大衣领口上的纯银近卫雄鹰领花佩戴在同伴胸前，轻声宣告今夜过后身边青年便是瓦莲京娜毕生唯一托付的灵魂伴侣。",
+    "likes": [
+     "炮火停歇间歇二人并肩坐在掩体踏板上共分半壶微温白兰地",
+     "突围之后在后方营地第一次以平辈身份同桌吃饭的时光"
+    ],
+    "preconditions": [
+     "近卫装甲掷弹兵独立断后营青年孤傲兼备决死意志之女少校与对方都已完全清醒，眼前的危机已经解除",
+     "近卫装甲掷弹兵独立断后营青年孤傲兼备决死意志之女少校出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "近卫装甲掷弹兵独立断后营青年孤傲兼备决死意志之女少校",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "ammo_depot_collapsed_cellar",
+     "to": 224
+    },
+    {
+     "from": 225,
+     "location_id": "bunker_core_blast_shelter",
+     "to": 254
+    },
+    {
+     "from": 255,
+     "location_id": "trench_firing_step_parapet",
+     "to": 284
+    },
+    {
+     "from": 285,
+     "location_id": "communication_trench_choke_point",
+     "to": 314
+    },
+    {
+     "from": 315,
+     "location_id": "ammo_depot_collapsed_cellar",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "少校右肩伤口在猛烈后坐力震荡下绷带彻底崩裂鲜血染红大衣胸口。",
+      "option": "少校以完好左手将转轮配枪递予副手掌心二人共同合力开火击毙敌兵"
+     },
+     {
+      "cost": "伴侣左小臂在赤红水冷套筒烫烙下大面积重度深度烧伤起泡焦黑。",
+      "option": "副手飞身上前用肩膀死死抵住发烫机枪套筒冒着弹雨倾泻弹雨封锁胸墙"
+     }
+    ],
+    "pressure": "若不能在二十秒内以精准交叉火力击毙投弹手，高爆手雷落入射击坑将瞬间炸毁重机枪并导致少校当场殉国。",
+    "trigger": "敌军装甲突击队用机枪打碎掩体观察孔防弹钢板，探照灯惨白强光直射射击台，两名敌军掷弹兵正逼近胸墙投弹。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "别……别回头……盯紧射孔……大衣裹紧一点，我还撑得住……笨蛋，听到了吗？今夜哪怕全连拼光，只要你还守在我背后，我就绝不会让十四号阵地陷落……",
+    "surface": "第七突出部全体官兵听令！我是指挥官瓦莲京娜少校！帝国总参谋部突围信号升起之前，阵地上没有后退两个字！谁敢丢弃武器后退一步，按战时军法立斩决不姑息！上刺刀！"
+   }
+  },
+  {
+   "adult_context": "年满二十三岁受战地军法处指派前沿督战深明纪律严明之道但在绝境血火前良知苏醒的青年督战上尉。",
+   "age_range": [
+    22,
+    24
+   ],
+   "appearance_options": [
+    "一身沾有雪尘但皮带马靴擦得锃亮的深黑近卫督察呢制军服，胸前佩戴战地执法银质盾徽，腰挎黑色皮套大号半自动手枪，面容坚毅线条冷峻，眼神如鹰隼般锐利机警，举手投足透着军法官不容置疑的威严与压迫感。",
+    "端坐在掩体通讯桌前，借着应急手电光一遍遍核验战地伤亡名单与撤退公文，面对少校的决死抗争神情严峻紧绷，在教条军法与战友生死之间承受着极度尖锐的精神拷问。"
+   ],
+   "decision": {
+    "avoids": [
+     "贪生怕死临阵脱逃之徒",
+     "弄虚作假背信弃义之辈"
+    ],
+    "contrast": "看似冷血无情的铁血执法官，在刺刀见红的关键时刻却能爆发出犹如勇冠三军般的壮烈担当。",
+    "core_value": "军法本为护国安民之盾，在将士舍死断后关头，青年军官当以战友情怀为重不负血肉良知。",
+    "goal_options": [
+     "在督战权限内全力支持少校战术部署并调配残存弹药加固核心防线",
+     "在敌军突破交通壕时拔枪带头反冲锋夺回被占阵地",
+     "在破晓撤退时签署特别豁免证明确保生还者免受临阵脱逃审查指控"
+    ],
+    "never": [
+     "绝不会在死亡威胁与敌人包围面前出卖战友将同袍推向深渊。"
+    ],
+    "prefers": [
+     "光明磊落军纪严明且在战火面前视死如归的真正军中好汉"
+    ],
+    "pressure_responses": {
+     "breaking": "军帽被打飞满面硝烟，依然紧握配枪将后撤士兵挡在身后自己扼守阵地。",
+     "high": "在喷火兵逼近交通壕时，抓起冲锋枪亲自带队扑向拐角压制敌军火力。",
+     "low": "在掩体前沿手持军法卷宗，用冷硬口吻宣读坚守命令稳定阵地浮躁人心。",
+     "mid": "见伤兵恐慌动摇，果断拔枪朝防爆天顶开火以铁血手段喝止混乱秩序。"
+    },
+    "relationship_stance": "严肃刚正不苟言笑，对在绝境中舍死相护的少校与装填手怀有发自内心的赞叹佩服。",
+    "withdrawal": "退回收缩至交通壕重机枪掩体死角，以手枪点射为后撤卫生员提供掩护。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "victor_commissar_captain",
+   "identity": {
+    "authority": "掌握向前沿连队官兵宣布战时军纪裁决与在危急关头接管阵地最高督战处置特权。",
+    "exposure": "私自销毁后撤官兵审查记录若遭督察本部追究将被以临阵渎职罪送上军事法庭。",
+    "hidden": "实则是瓦莲京娜少校军校时期的挚友同窗，受命督战只为在绝境中利用职权掩护其撤退突围。",
+    "limits": [
+     "体格偏文雅不善持久肉搏刺刀白刃冲杀",
+     "极度受制于上峰教条命令在未得正式撤退密电前不得擅自准许全营突围"
+    ],
+    "obligations": [
+     "誓死维护前沿部队作战纲纪，确保断后阵地坚守至主力军团通过危险峡口。"
+    ],
+    "resources": [
+     "一份由集团军野战军法长官亲笔签署的紧急处分授权公函",
+     "一柄配有两个满装备用弹匣的特制大口径半自动军法配枪"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然浩然正气誓死抗争的名士风度",
+     "在大义面前将个人生死置之度外的绝顶纯粹赤子忠诚"
+    ],
+    "boundaries": [
+     "在执法督战执勤期间恪守军法操守",
+     "恪守战友情节绝不轻狂逾矩"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "惊涛骇浪血海炼狱中永远为战友筑起坚强军纪与法理屏障的青年督军",
+    "dislikes": [
+     "弄虚作假",
+     "践踏军纪"
+    ],
+    "expression": "利落收枪入套抬手郑重敬礼，将随身携带的一壶未开封烈性伏特加塞给青年副手，沉声宣布此战全体断后官兵皆为帝国英雄，愿以军法官声誉保其全胜归建。",
+    "likes": [
+     "战阵胜利后与同袍碰杯痛饮的豪迈痛快",
+     "在硝烟散尽的黎明晨曦中向英勇战友郑重举手敬礼的庄严时刻"
+    ],
+    "preconditions": [
+     "北境战地督察处青年冷峻恪尽职守之督战上尉与对方都已完全清醒，眼前的危机已经解除",
+     "北境战地督察处青年冷峻恪尽职守之督战上尉出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "北境战地督察处青年冷峻恪尽职守之督战上尉",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "ammo_depot_collapsed_cellar",
+     "to": 224
+    },
+    {
+     "from": 225,
+     "location_id": "communication_trench_choke_point",
+     "to": 254
+    },
+    {
+     "from": 255,
+     "location_id": "bunker_core_blast_shelter",
+     "to": 284
+    },
+    {
+     "from": 285,
+     "location_id": "trench_firing_step_parapet",
+     "to": 314
+    },
+    {
+     "from": 315,
+     "location_id": "ammo_depot_collapsed_cellar",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "伴侣右肩被冰冷冻土凸起岩石重度撞击大面积挫伤剧痛发麻。",
+      "option": "副手一个飞身扑倒带头溃兵将其手中卡宾枪狠狠缴械按在冻土上"
+     },
+     {
+      "cost": "督战官右手食指被卡宾枪生铁防跳器反震击伤血流不止。",
+      "option": "督战官拔出手枪抵住带头溃兵钢盔以军法死罪严正喝令其归建操作机枪"
+     }
+    ],
+    "pressure": "若不能在十五秒内喝止溃逃并收拢人员，防爆门被打开将引来敌军探照灯直射扫射全员报销。",
+    "trigger": "两名溃散步兵企图夺走掩体防爆门钥匙逃往后方，与督战官在坑道拐角拔枪对峙。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "瓦莲京娜……少校。我不是来要你性命的。后方参谋部的撤退计划根本没把你们算在内！坚持到破晓，我私调的接应装甲车就在五公里外，听明白了吗？！",
+    "surface": "我是第十四督察分队维克托上尉！帝国近卫步兵条令第七条：临阵退缩、擅弃阵地者，督战官可行使现场极刑！把枪口对准敌人！回到射击台上去！"
+   }
+  },
+  {
+   "adult_context": "年满二十一周岁掌握精湛战地创伤外科技术在掩体地下救护所拼死抢救伤患的青年女军医中尉。",
+   "age_range": [
+    21,
+    23
+   ],
+   "appearance_options": [
+    "一身沾满暗红血迹但里衬浆洗利落的白色野战军医围裙，外罩深绿防寒短斗篷，金发编成利落的大辫盘在脑后，眼窝微陷带着连日手术的青黑疲态，双手戴着薄橡胶医用手套沾满凝固碘伏，神情专注沉稳，散发着战火炼狱中圣洁白衣医者的慈悲圣光。",
+    "单膝跪在防爆坑冰冷水泥地面上，手里握着纯银血管钳飞速止血，借着风灯微光专注缝合少校右肩伤口，面对近在咫尺的炮击震动双手宛若磐石般纹丝不动。"
+   ],
+   "decision": {
+    "avoids": [
+     "视人命如草芥的狂徒",
+     "临阵脱逃之辈"
+    ],
+    "contrast": "看似弱不禁风的温柔姑娘，在血肉模糊的修罗战场上却能展现出犹如钢铁战神般的惊人意志。",
+    "core_value": "医者眼里无尊卑唯有生命至上，只要心跳未停，纵使炮火连天也绝不放弃救治同袍。",
+    "goal_options": [
+     "在掩体防爆深坑内完成少校右肩动脉紧急缝合压迫止血稳住生命体征",
+     "在药品枯竭前利用防冻烈酒配制草药替代敷料为伤兵保暖",
+     "在阵地突围时以身掩护不能行走的重伤员转移至安全掩蔽所"
+    ],
+    "never": [
+     "绝不会在死亡威胁与敌人逼迫面前抛弃伤病员苟且偷生。"
+    ],
+    "prefers": [
+     "敬畏生命珍惜战友且在血火面前舍己为人的真正大义男儿"
+    ],
+    "pressure_responses": {
+     "breaking": "手术手套破损满手鲜血，依然咬紧牙关徒手按压动脉直到止血成功。",
+     "high": "在喷火兵威胁逼近时，沉着指挥轻伤员架起机枪建立最后救护所自卫防线。",
+     "low": "在昏暗角落飞速为伤兵包扎换药，用温柔坚定的嗓音安抚士兵恐慌情绪。",
+     "mid": "掩体遭重炮轰击灰尘塌落时，毫不犹豫扑在手术台伤员身上充当人肉盾牌。"
+    },
+    "relationship_stance": "温柔沉静重情重义，对在火海中舍死护卫长官的青年装填手怀有发自内心的赞叹佩服。",
+    "withdrawal": "退回收缩至地下弹药库坚固拐角，将仅存的止痛吗啡平均分给重伤官兵。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "erena_field_medic_lieutenant",
+   "identity": {
+    "authority": "掌握前沿阵地全体伤病员伤情等级判定与战地急救药品分配的绝对医学处置大权。",
+    "exposure": "私留管制麻醉药品若遭军纪审查将被处以革职军纪监禁处分。",
+    "hidden": "实则是帝国著名反战医学泰斗之女，奔赴前线只为从死神手中抢救每一个年轻宝贵的生命。",
+    "limits": [
+     "体格偏娇柔缺乏近战白刃格斗身手",
+     "在急救药品告罄绝境下极易陷入无药可用的绝望境地"
+    ],
+    "obligations": [
+     "誓死保全阵地伤患生机，坚决践行日内瓦红十字人道救死扶伤医者誓约。"
+    ],
+    "resources": [
+     "一具装有二十支高纯度野战止痛吗啡安瓿的纯钢加锁药箱",
+     "三卷含有抗菌银离子成分的特制加厚防冻敷料绷带"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然恪守道德信仰的名士风骨",
+     "在血火淬炼中将自身当做肉盾护佑同袍的浩然大担当"
+    ],
+    "boundaries": [
+     "在野战行医救护期间恪守医者清净戒律",
+     "恪守战友礼节绝不轻狂逾矩"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "惊涛骇浪血海炼狱中永远为战友带来生机与希望的慈悲白衣天使",
+    "dislikes": [
+     "弄虚作假",
+     "践踏医德"
+    ],
+    "expression": "解下染血的白围裙擦去额头汗水，双手交叠郑重向青年副手致敬，从药箱取出一枚精巧的纯银十字护身符塞入其掌心，轻声祈愿二人同生共死凯旋归还。",
+    "likes": [
+     "伤员苏醒脱离危险时的释然欣慰",
+     "在硝烟散尽的晨曦中与战友分食一块黑巧克力的甘美宁静"
+    ],
+    "preconditions": [
+     "前沿野战救护所青年敏锐兼具慈悲医德之女军医与对方都已完全清醒，眼前的危机已经解除",
+     "前沿野战救护所青年敏锐兼具慈悲医德之女军医出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "前沿野战救护所青年敏锐兼具慈悲医德之女军医",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "communication_trench_choke_point",
+     "to": 224
+    },
+    {
+     "from": 225,
+     "location_id": "bunker_core_blast_shelter",
+     "to": 254
+    },
+    {
+     "from": 255,
+     "location_id": "ammo_depot_collapsed_cellar",
+     "to": 284
+    },
+    {
+     "from": 285,
+     "location_id": "bunker_core_blast_shelter",
+     "to": 314
+    },
+    {
+     "from": 315,
+     "location_id": "communication_trench_choke_point",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "女军医双手被飞溅碎铁片深深划破三道血痕染红手指关节。",
+      "option": "女军医凭手指肌肉触感摸黑将纯银止血钳准确夹闭破裂动脉血管"
+     },
+     {
+      "cost": "伴侣左手手背在暴风雪极寒与火苗灼烤反复冰火刺激下严重开裂冻疮流血。",
+      "option": "副手擦燃防风打火机以赤裸掌心挡住风雪为手术提供微弱照明"
+     }
+    ],
+    "pressure": "若不能在二十秒内摸黑完成止血钳夹闭与止血带加压结扎，少校将在两分钟内失血性休克致死。",
+    "trigger": "一颗炮弹破片击中救护所防爆板，震碎手术油灯，少校右肩动脉再度破裂喷射鲜血。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "装填手……快用你的手按住少校的锁骨下动脉！别松手！少校是为了保护你才挨了这块弹片……我们必须把少校救回来，听到了吗？！",
+    "surface": "我是野战第一救护队埃列娜中尉！所有还能动的士兵听着：把止血带扎紧！阵地上只要还有一口气，我就决不让死神把你们拖走！"
+   }
+  },
+  {
+   "adult_context": "年满二十三岁在北境冻土前沿作战四年精通各型重机枪操作身经百战的年轻近卫机枪班长。",
+   "age_range": [
+    22,
+    24
+   ],
+   "appearance_options": [
+    "一身穿旧沾满黑灰色发黑机油与泥浆的厚实羊皮防寒作训服，头上扣着带防风护耳的钢盔，胡茬泛青，面容宽阔坚毅，双手布满老茧如铁铸，脖子上挂着一挂黄铜重机枪弹链，眼神豪迈狂放透着蔑视强敌的钢铁野性。",
+    "单膝跪在重机枪三脚架后，双手死死握住重机枪双握把，嘴里嚼着冻硬的黑面包，在敌军炮火狂轰滥炸下狂放大笑，精准以短点射撕碎敌军散兵线。"
+   ],
+   "decision": {
+    "avoids": [
+     "纸上谈兵的纨绔草包",
+     "临阵逃脱之辈"
+    ],
+    "contrast": "看似粗野鲁莽的机枪大汉，在拆装保养重火器与计算射击诸元上却有着绣花针般的绝顶精妙细致。",
+    "core_value": "机枪就是老兵的命根子，只要弹链没打光，就没有一个敌人能踩着老子的阵地过去。",
+    "goal_options": [
+     "以精准点射封锁敌军探照灯并压制敌装甲车射击孔",
+     "在枪管过热时指导青年副手完成盲操极限快速换枪管",
+     "在弹药耗尽关头抱起机枪发动刺刀决死冲锋掩护指挥所"
+    ],
+    "never": [
+     "绝不会在敌人逼近阵地面前丢下自己心爱的机枪举手投降。"
+    ],
+    "prefers": [
+     "血性阳刚敢打敢拼且在战火面前绝不尿裤子的真正好汉"
+    ],
+    "pressure_responses": {
+     "breaking": "胸部中弹满身鲜血，依然用尽最后力气按紧击发机直到打完最后一发子弹。",
+     "high": "在机枪套筒被打穿喷出蒸汽时，徒手抓起冰雪塞入套筒强行降温继续射击。",
+     "low": "在机枪掩体后哈哈大笑，用粗豪嗓音指点副手压好弹链别手抖。",
+     "mid": "见敌军照明弹升起，沉稳调整标尺一个精准长点射将探照灯打爆。"
+    },
+    "relationship_stance": "豪爽豁达义薄云天，对敢在枪林弹雨中扛起弹药箱冒死送弹的青年副手视若手足。",
+    "withdrawal": "退回收缩至掩体水泥大门后，用机枪三脚架卡死门扇作为最后防御据点。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "boris_heavy_gunner_sergeant",
+   "identity": {
+    "authority": "掌控前沿十四号掩体唯一一挺重型水冷机枪与四挺轻机枪的战术火力分配大权。",
+    "exposure": "私自截留重弹药若遭后勤官法办将面临降为列兵充当敢死队的处罚。",
+    "hidden": "多年前曾是少校父亲老将军麾下的警卫员，立誓以一身钢筋铁骨死保罗森伯格家族独女安全还乡。",
+    "limits": [
+     "脾气暴烈面对官僚瞎指挥极易抗命不遵",
+     "机枪水冷套筒一旦被敌军打穿漏水极易发生枪管过热卡壳"
+    ],
+    "obligations": [
+     "誓死压制敌军步兵散兵线，为掩体核心指挥所筑起不可逾越的死亡火网。"
+    ],
+    "resources": [
+     "一具配有备用重枪管与快速拆装扳手的全钢机枪工具箱",
+     "两箱密封干燥保存完好的二百五十发纯铜穿甲重弹链"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然浩然正气视死如归的名士风度",
+     "在大义面前将生死置之度外的绝顶纯粹赤子忠诚"
+    ],
+    "boundaries": [
+     "在战位值守期间恪守射击战备纲纪",
+     "恪守战友礼节绝不轻狂逾矩，分秒都耽搁不起。"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "惊涛骇浪血海炼狱中永远为战友喷吐炽烈火网撕碎一切强敌的钢铁火神",
+    "dislikes": [
+     "弄虚作假",
+     "践踏义气"
+    ],
+    "expression": "用沾满黑机油的大手重重拍在青年副手肩头，露出洁白牙齿豪迈大笑，从怀里掏出一枚从战场捡来的纯铜重弹壳做成的哨子送给对方，宣布从此二人便是共历生死的生死弟兄。",
+    "likes": [
+     "重机枪喷吐火舌将敌人压得抬不起头时的痛快淋漓",
+     "在战壕里和生死战友共抽一根劣质老旱烟的畅快时光"
+    ],
+    "preconditions": [
+     "前沿重机枪射击阵地年轻剽悍泰山崩于前而色不变之机枪班长与对方都已完全清醒，眼前的危机已经解除",
+     "前沿重机枪射击阵地年轻剽悍泰山崩于前而色不变之机枪班长出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "前沿重机枪射击阵地年轻剽悍泰山崩于前而色不变之机枪班长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "ammo_depot_collapsed_cellar",
+     "to": 224
+    },
+    {
+     "from": 225,
+     "location_id": "trench_firing_step_parapet",
+     "to": 254
+    },
+    {
+     "from": 255,
+     "location_id": "communication_trench_choke_point",
+     "to": 284
+    },
+    {
+     "from": 285,
+     "location_id": "trench_firing_step_parapet",
+     "to": 314
+    },
+    {
+     "from": 315,
+     "location_id": "ammo_depot_collapsed_cellar",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "老班长双手手心手背被高温热铁严重烫伤起巨大水泡皮肉烧焦。",
+      "option": "老班长戴上石棉手套徒手拧下通红发烫的枪管换上冰冷新枪管"
+     },
+     {
+      "cost": "伴侣双手十指在瞬间冰火暴冲对冲下深度冻伤皮肤大面积脱皮渗血。",
+      "option": "副手抓起大把结冰硬雪狠狠塞满破损水冷套筒以冰雪强行降温"
+     }
+    ],
+    "pressure": "若不能在十五秒内换上备用冷枪管，重机枪将彻底报废阵地火网将瞬间熄火任由敌军涌入。",
+    "trigger": "重机枪水冷套筒被敌军反器材狙击弹击穿，滚烫沸水喷涌而出，枪管在持续连发中烧得通红即将炸膛。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "装填手！好小子！刚才送弹链送得真够准！别怕！只要老子的机枪还在响，少校和你，老子一个都不会让敌人碰着！",
+    "surface": "我是机枪班长鲍里斯！小的们！把机枪弹链给老子压满！谁要是敢让机枪停上一秒钟，老子回头踹烂那人的屁股！给我狠狠打！"
+   }
+  },
+  {
+   "adult_context": "年满二十一周岁掌握深奥无线电密码破译与发报技术在掩体暗角死守电台的青年女少尉通信官。",
+   "age_range": [
+    21,
+    23
+   ],
+   "appearance_options": [
+    "一身利落紧凑的深蓝近卫通信兵呢制短上装，耳戴双耳式军用耳机，茶褐色卷发扎在耳后，戴着一副精巧的纯铜防风护目镜，面容清秀目光极为敏锐专注，双手手指修长，在莫尔斯电码发报电键上跳动如行云流水，周身弥漫着电子管发热的松香与臭氧气息。",
+    "蹲在掩体角落防爆桌前，单手飞速旋动无线电电容旋钮，在狂暴电磁干扰杂音中竭力捕捉友军装甲列车的微弱回波，神情坚毅如临大敌，深知指尖发出的每一串电码都决定着全营生死。"
+   ],
+   "decision": {
+    "avoids": [
+     "粗暴野蛮践踏知识的匹夫",
+     "浮夸轻薄之徒"
+    ],
+    "contrast": "看似文静娇柔的书生技术官，在维系全军命脉通信的关键时刻却能爆发出犹如拼命三郎般的血性狂暴。",
+    "core_value": "电波是穿透战争黑暗的生命航标，只要发报机还有一度电，就绝不让阵地沦为失联孤魂。",
+    "goal_options": [
+     "在掩体顶层冒死重接被炮火炸断的铜绞线无线电鞭状天线",
+     "在狂暴电磁杂波中成功捕获帝国主力装甲列车突破推进方位坐标",
+     "在电台被敌军截获前彻底销毁密码本并砸碎核心加密电子管"
+    ],
+    "never": [
+     "绝不会在敌人逼供面前交出战役密码本与加密跳频算法。"
+    ],
+    "prefers": [
+     "沉稳可靠言出必行且在危难面前懂得保护弱小的真正君子"
+    ],
+    "pressure_responses": {
+     "breaking": "耳膜被近距离炮弹震出血迹，依然死死捂住耳机用尽全力敲下呼救电码。",
+     "high": "在手摇发电机断轴时，冒险将手电电池强行串联跨接为发报机供电。",
+     "low": "在昏暗角落飞速抄录杂乱电码，用清脆急促的嗓音向少校汇报战况推演。",
+     "mid": "见电台天线折断，抓起备用铜丝毫不犹豫攀爬通气孔企图出仓抢修。"
+    },
+    "relationship_stance": "聪慧坚韧求真务实，对在枪林弹雨中以身躯挡住飞溅弹片护住电台的青年副手怀有至深感佩。",
+    "withdrawal": "退回收缩至掩体最隐蔽的水泥暗洞，用身体死死压住发报机与图纸。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "charlotte_signal_officer",
+   "identity": {
+    "authority": "掌控前沿十四号掩体与帝国集团军统帅部装甲列车通信指挥网的唯一密码通道。",
+    "exposure": "密码本一旦落入敌手将导致全线军团突围走廊彻底被敌军破译伏击。",
+    "hidden": "实则是帝国最高科学院电信研究所年轻天才学者，志愿奔赴死线测试新型加密跳频通信样机。",
+    "limits": [
+     "体格偏瘦弱缺乏步枪正面肉搏射击身手",
+     "掩体顶端天线一旦被敌军炮火炸断电台将彻底沦为哑巴盲人"
+    ],
+    "obligations": [
+     "誓死维系与后方装甲列车总指挥部的战术无线电联络，引导友军重炮实施精准还击。"
+    ],
+    "resources": [
+     "一具配有备用电子管与纯铜手摇发电机的军用背负式全波段电台",
+     "一本由战地统帅部每日更换的绝密战术密码本"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然浩然正气视死如归的名士风度，只争眼前这一刻。",
+     "在大义面前将生死置之度外的绝顶纯粹赤子忠诚，退路已经断了。"
+    ],
+    "boundaries": [
+     "在通信值守执勤期间恪守密码保密纲纪",
+     "恪守战友礼节绝不轻狂逾矩，这一回刻不容缓。"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "惊涛骇浪血海炼狱中永远为战友建立起连接希望与光明的青年信使神",
+    "dislikes": [
+     "弄虚作假",
+     "践踏科学"
+    ],
+    "expression": "利落摘下防风铜护目镜挂在胸前，露出纯净如山泉般的明媚笑靥，将一枚代表无线电近卫信使的纯铜齿轮徽章赠予青年副手，轻声许诺破晓之后愿一生为其指引航向。",
+    "likes": [
+     "无线电耳机中传回友军炮兵雄壮回应时的狂喜雀跃",
+     "在黎明晨曦中与战友共享微温红茶的静谧安宁"
+    ],
+    "preconditions": [
+     "前沿指挥部青年孤注一掷誓死接通装甲列车之女通信官与对方都已完全清醒，眼前的危机已经解除",
+     "前沿指挥部青年孤注一掷誓死接通装甲列车之女通信官出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "前沿指挥部青年孤注一掷誓死接通装甲列车之女通信官",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "trench_firing_step_parapet",
+     "to": 224
+    },
+    {
+     "from": 225,
+     "location_id": "bunker_core_blast_shelter",
+     "to": 254
+    },
+    {
+     "from": 255,
+     "location_id": "communication_trench_choke_point",
+     "to": 284
+    },
+    {
+     "from": 285,
+     "location_id": "bunker_core_blast_shelter",
+     "to": 314
+    },
+    {
+     "from": 315,
+     "location_id": "trench_firing_step_parapet",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "伴侣双手手指被冰冷纯铜线皮粘掉整层皮肉鲜血在极寒中瞬间冻结成冰。",
+      "option": "副手顶着狂暴机枪弹雨钻出通风孔徒手在零下三十度冻风中拧紧铜线"
+     },
+     {
+      "cost": "通信官在接线瞬间遭遇强烈高压电磁脉冲回冲右手前臂严重电灼伤水泡。",
+      "option": "通信官冒险将电台地线直接接入重机枪生铁三脚架利用战壕铁轨当天线"
+     }
+    ],
+    "pressure": "若不能在二十秒内爬出通气孔将备用铜绞线重新固定在混凝土避雷针上，阵地将彻底失联丧失友军装甲列车炮火掩护。",
+    "trigger": "一发迫击炮弹击碎掩体通气孔，将架设在顶部的无线电鞭状天线生生炸断成两截，电台信号骤降归零。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "装填手……抓住我的手摇发电机！快摇！少校需要装甲列车的炮火！还差最后三十次脉冲电码……加油！我们一定能把回信接回来！",
+    "surface": "我是近卫通信队夏洛特少尉！全体注意！无线电频道已切换至装甲列车紧急救援波段！正在发射三联发引导代码！把阵地坐标给我守住！"
+   }
+  },
+  {
+   "adult_context": "年满二十二周岁精通各类烈性炸药埋设与反坦克陷阱爆破在坑道前线屡立奇功的年轻工兵中士。",
+   "age_range": [
+    22,
+    24
+   ],
+   "appearance_options": [
+    "一身沾满冻土泥灰与硝石黄色印痕的重装帆布工兵防刺工作服，腰带上挂满了各类起爆雷管盒、纯铜发爆把手与导火索卷盘，后背斜背着一把开过刃的重型工兵纯钢十字镐，神情沉着冷峻目光如炬，双手长满老茧厚如皮革。",
+    "单膝半跪在交通壕暗坑深处，手里握着一把特制纯铜划线小刀，正在飞速调整一枚反坦克重型集束地雷的发火引信，面对近在咫尺的敌军履带轰鸣心跳沉稳如钟。"
+   ],
+   "decision": {
+    "avoids": [
+     "贪生怕死丢盔弃甲之徒",
+     "两面三刀之辈"
+    ],
+    "contrast": "看似只知挖坑炸石头的粗莽工兵，在爆破物理与定向爆破力学上却拥有鬼斧神工般的绝顶智慧。",
+    "core_value": "工兵挖下的战壕就是埋葬侵略者的铁棺材，只要导爆索在手，就绝不让敌人跨过界线半步。",
+    "goal_options": [
+     "在敌军装甲突入胸墙前精准起爆前沿埋设的反坦克集束炸药炸断其履带",
+     "在交通壕拐角布置定向破片雷歼灭敌军先锋掷弹兵小队",
+     "在主力突围后亲手拧动发爆器彻底炸毁十四号掩体掩护战友安全脱离"
+    ],
+    "never": [
+     "绝不会在金钱诱惑与敌人严刑拷打面前吐露地下坑道雷场的布置图纸。"
+    ],
+    "prefers": [
+     "沉稳胆大心细如发且在生死考验面前绝不慌乱的真正汉子"
+    ],
+    "pressure_responses": {
+     "breaking": "双腿被落下的水泥梁砸断，依然死死扣紧发爆器手柄直到战友全部突围。",
+     "high": "在掩体防爆门被重炮击穿时，迅速将备用炸药包堆在破口设立殉爆屏障。",
+     "low": "在坑道暗处沉稳压接雷管脚线，用沉闷嗓音警告新兵别碰导线引信。",
+     "mid": "见敌军坦克压上铁丝网，毫不犹豫跃出壕沟将磁性反坦克手雷贴上敌车侧裙。"
+    },
+    "relationship_stance": "质朴坚毅义薄云天，对敢在枪林弹雨中帮自己扛炸药箱的青年副手怀有由衷钦佩。",
+    "withdrawal": "退回收缩至地下弹药库炸药储藏坑道深处，手握最后两根拉火管死守起爆箱。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "dietrich_sapper_pioneer",
+   "identity": {
+    "authority": "掌控前沿十四号掩体全部外围反坦克地雷场与地下坑道自毁爆破网络的起爆总开关大权。",
+    "exposure": "私造改装大威力跳雷若炸伤友军将面临就地军法处决。",
+    "hidden": "实则是帝国末年最负盛名的地下矿工世家传人，对北境冻土每一寸土质承压与坍塌力学了如指掌。",
+    "limits": [
+     "性格刚烈偏执一旦认定死守决不轻易执行撤离妥协",
+     "在开阔地带缺乏对抗敌军机枪火网的快速突击掩护手段"
+    ],
+    "obligations": [
+     "誓死封锁敌军装甲突击集团推进咽喉，在最后时刻引爆工事与阵地共存亡。"
+    ],
+    "resources": [
+     "一具配有双芯屏蔽导线的二十门重型军用电火工品发爆器",
+     "四包用防潮黄油纸严密包裹的高威力特种季戊四醇四硝酸酯炸药块"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "身陷绝境受尽严寒摧残依然浩然正气视死如归的名士风度，再没有第二次机会。",
+     "在大义面前将生死置之度外的绝顶纯粹赤子忠诚，分秒都耽搁不起。"
+    ],
+    "boundaries": [
+     "在爆破战位执守期间恪守工兵安全条例",
+     "恪守战友同袍礼节绝不轻狂逾矩"
+    ],
+    "desire_range": [
+     2,
+     3
+    ],
+    "desired_position": "惊涛骇浪血海炼狱中永远为战友构筑起雷霆万钧毁灭防线的工兵死神",
+    "dislikes": [
+     "弄虚作假",
+     "践踏匠心"
+    ],
+    "expression": "用沾满黄色炸药粉末的粗糙大手用力拍在青年副手后背，豪迈大笑，将一把纯钢开刃的军用工兵多功能折叠钳送给对方，宣布从此二人便是共历生死的生死战友。",
+    "likes": [
+     "敌军装甲车在冲天爆炸火光中化为废铁时的豪迈痛快",
+     "在硝烟弥漫的坑道里和生死战友大口嚼肉罐头的粗犷舒畅"
+    ],
+    "preconditions": [
+     "前沿交通壕年轻刚烈通晓战壕爆破之突击工兵班长与对方都已完全清醒，眼前的危机已经解除",
+     "前沿交通壕年轻刚烈通晓战壕爆破之突击工兵班长出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "前沿交通壕年轻刚烈通晓战壕爆破之突击工兵班长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "bunker_core_blast_shelter",
+     "to": 224
+    },
+    {
+     "from": 225,
+     "location_id": "communication_trench_choke_point",
+     "to": 254
+    },
+    {
+     "from": 255,
+     "location_id": "ammo_depot_collapsed_cellar",
+     "to": 284
+    },
+    {
+     "from": 285,
+     "location_id": "trench_firing_step_parapet",
+     "to": 314
+    },
+    {
+     "from": 315,
+     "location_id": "bunker_core_blast_shelter",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "起爆瞬间强烈的冲天爆轰气浪将工兵掀飞撞在石壁上震得口鼻喷血。",
+      "option": "工兵中士用尽全身力气狠狠向下摇动纯铜发爆器手柄完成电起爆"
+     },
+     {
+      "cost": "伴侣左大腿被飞溅的高温钢铁弹片狠狠扎透一道深长创口鲜血淋漓。",
+      "option": "副手顶着车载机枪狂暴弹雨翻出掩体将重型反坦克集束手雷精准塞入履带"
+     }
+    ],
+    "pressure": "若不能在十五秒内引爆埋设在路基下的五百公斤反坦克集束炸药，装甲车撞入掩体大门将用喷火器将室内全员彻底化为焦炭。",
+    "trigger": "一辆敌军重型突击装甲车突破外围两道铁丝网，履带正碾碎交通壕木板向掩体大门直冲而来。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "装填手！抓住这根导火索！老子要是被机枪撂倒了，你就把这根拉火环拉到底！有我们在，这间掩体就是敌人的坟场！",
+    "surface": "我是工兵排长迪特里希！所有人捂住耳朵趴下！老子在这条路底下埋了半吨TNT！谁敢放敌人的铁王八过来，老子直接送那人坐土飞机上天！"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "极夜暴风雪凌晨三点四十五分，左右两翼全线失联，距破晓撤退总攻信号弹升起仅剩七十五",
+  "minute": 225
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster"
+ ],
+ "custom": false,
+ "customs": [
+  "战壕分弹核验礼节：在清点最后弹药箱时，副手需单膝跪地以左肩抵住少校肩窝传递弹夹，低声报数以确认彼此神志清醒与手指活动能力。",
+  "军大衣束带扶正礼节：少校因右肩受创失血失温战栗时，副手需自后方以双手为少校系紧军大衣纯钢武装带，将领口防风扣严密扣合。",
+  "转轮配枪合膛盟誓：交托转轮配枪时，双方掌心必须共同握持转轮护弓，由副手亲手将装满六发纯铜穿甲弹的弹巢推入卡槽发出清脆咬合脆响。",
+  "破晓残雪分饮誓言：战斗平息迎来晨曦破晓时，双方需以同一顶钢盔盛接冰层融水各饮一半，宣示结为同生共死之终生战阵挚友。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "年轻女少校身着深蓝呢大衣独坐掩体沙袋旁，零下三十度暴风雪呼啸，右肩弹片贯穿创口渗血战栗。",
+    "青年机枪副手单膝跪地以左肩贴靠少校背脊合盖大衣，双手手背轻托武装带重新扣紧以御严寒。",
+    "少校贝齿咬紧下唇微促喘息，在水汽寒意与硝烟弥漫中反手攥紧副手衣角，共听外侧敌军履带异动。"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "h_valeria_greatcoat_shiver_glance",
+    "h_valeria_revolver_cylinder_closure",
+    "h_victor_commissar_drawn_pistol"
+   ],
+   "id": "a_entry_blast_shelter_trench_vigil",
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "start_minute": 225,
+   "tags": [
+    "intimate"
+   ],
+   "title": "防爆坑长官呢大衣背靠背取暖合温"
+  },
+  {
+   "beats": [
+    "外侧敌军重迫击炮弹连番轰击掩体顶层，女少校在昏暗马灯下取出象征指挥大权的纯钢转轮配枪。",
+    "在死寂防爆坑内二人呼吸相闻掌心相叠，副手亲手将装满穿甲弹的铜弹巢推入卡槽发出清脆咬合响动。",
+    "少校靠着青年副手的肩稳住身形，指尖按在配枪握把上共同立下死守盟誓。"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [
+    "h_valeria_revolver_cylinder_closure",
+    "h_erena_medic_cross_whisper",
+    "h_victor_commissar_drawn_pistol"
+   ],
+   "id": "a_deep_bunker_sidearm_succession",
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "start_minute": 270,
+   "tags": [
+    "intimate"
+   ],
+   "title": "防爆深坑纯钢转轮配枪郑重交托"
+  },
+  {
+   "beats": [
+    "敌军先锋步兵借照明弹强光发起集团冲锋，机枪班长鲍里斯与装填手合力操纵重机枪喷吐暗红火舌。",
+    "副手以身躯死死压住跳动机枪三脚架，女少校拔出卡宾枪傲然立于门后精准点射带头敌兵。",
+    "敌军投弹手在密集火网覆盖下死伤惨重，攻势受阻暂时退回外围弹坑盲区。"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "h_boris_heavy_gunner_roar",
+    "h_erena_medic_cross_whisper",
+    "h_valeria_greatcoat_shiver_glance"
+   ],
+   "id": "a_parapet_heavy_machinegun_defense",
+   "location_ids": [
+    "trench_firing_step_parapet"
+   ],
+   "start_minute": 315,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "战壕胸墙重机枪短点射压制突击"
+  },
+  {
+   "beats": [
+    "敌军重型装甲车压碎铁丝网逼近交通壕，工兵中士迪特里希在冻土暗坑飞速连接发爆器导线。",
+    "副手冒着车载机枪火网将集束手雷精准塞入敌车履带，工兵按动发爆器瞬间引爆路基炸药将敌车炸成火球。",
+    "冲天烈焰照亮极寒夜空，敌军后续装甲步兵在熊熊火海前丧胆溃退。"
+   ],
+   "duration_minutes": 35,
+   "hook_ids": [
+    "h_dietrich_sapper_axe_strike",
+    "h_victor_commissar_drawn_pistol",
+    "h_boris_heavy_gunner_roar"
+   ],
+   "id": "a_choke_point_sapper_demolition",
+   "location_ids": [
+    "communication_trench_choke_point"
+   ],
+   "start_minute": 350,
+   "tags": [
+    "workplace"
+   ],
+   "title": "交通壕拐角反坦克雷场定向起爆"
+  },
+  {
+   "beats": [
+    "通信女少尉夏洛特在副手冒死抢修天线配合下，在狂暴电磁杂波中成功捕获帝国装甲列车接应波段。",
+    "装甲列车总指挥部确认第十四号掩体坐标，宣布重炮兵群已完成射击诸元诸准备即将提供徐进弹幕。",
+    "掩体全员群情振奋，原本绝望濒死的断后官兵爆发出视死如归的昂扬斗志。"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [
+    "h_charlotte_signal_code_flash",
+    "h_valeria_greatcoat_shiver_glance",
+    "h_erena_medic_cross_whisper"
+   ],
+   "id": "a_signal_radio_breakthrough_flare",
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "start_minute": 385,
+   "tags": [
+    "intimate"
+   ],
+   "title": "通气孔顶层重接天线接通主力装甲车"
+  },
+  {
+   "beats": [
+    "东方天际三联装红色高空信号弹冲天而起，破晓金红朝阳刺破北境暴风雪洒满十四号阵地。",
+    "瓦莲京娜少校在青年机枪副手搀扶下并肩登上机枪胸墙，牵起副手五指迎向赶来接应的友军先锋装甲车队。",
+    "全连幸存将士脱帽欢呼，极寒死线守灵夜在浩瀚朝霞与终生定情誓约中盛大圆满定格。"
+   ],
+   "duration_minutes": 25,
+   "hook_ids": [
+    "h_valeria_dawn_flask_toast_vow",
+    "h_erena_medic_cross_whisper",
+    "h_boris_heavy_gunner_roar"
+   ],
+   "id": "a_dawn_trench_counterattack_triumph",
+   "location_ids": [
+    "trench_firing_step_parapet"
+   ],
+   "start_minute": 415,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "破晓信号弹升起并肩登上胸墙凯旋"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.55,
+  "male": 0.4,
+  "nonbinary": 0.05
+ },
+ "default_person": "second",
+ "era": "架空帝国末年极寒冬夜前沿阵地（暴风雪零下三十度绝境冻土）",
+ "extends": null,
+ "forbidden_terms": [
+  "智能手机",
+  "无人机蜂群",
+  "卫星定位导航",
+  "热成像瞄准镜",
+  "现代防弹凯夫拉",
+  "电子侦察雷达",
+  "液晶战术屏",
+  "单兵外骨骼"
+ ],
+ "hooks": [
+  {
+   "id": "h_valeria_greatcoat_shiver_glance",
+   "kind": "approach",
+   "location_ids": [
+    "bunker_core_blast_shelter",
+    "trench_firing_step_parapet",
+    "communication_trench_choke_point"
+   ],
+   "slot": "valeria_major_commander",
+   "text": "{valeria_major_commander.name}斜倚在沙袋堆旁：“发什么呆？！既然军校起你就是我的贴身副手，还不速速上前替我扣紧防风武装带……若是敢乘人之危怠慢军规半分，近卫军法条令自会将你当场军法枪决！”"
+  },
+  {
+   "id": "h_valeria_revolver_cylinder_closure",
+   "kind": "approach",
+   "location_ids": [
+    "bunker_core_blast_shelter",
+    "trench_firing_step_parapet"
+   ],
+   "slot": "valeria_major_commander",
+   "text": "{valeria_major_commander.name}因右肩剧痛与失温战栗浑身发颤，咬牙低声：“握紧枪柄……笨蛋，不准松手……我的右手已经抬不起来了……听到没有？！六发穿甲弹都在里面，今夜你就是我的最后防线……”"
+  },
+  {
+   "id": "h_valeria_dawn_flask_toast_vow",
+   "kind": "approach",
+   "location_ids": [
+    "trench_firing_step_parapet",
+    "bunker_core_blast_shelter"
+   ],
+   "slot": "valeria_major_commander",
+   "text": "{valeria_major_commander.name}立于破晓红日倾泻的机枪胸墙前，牵起你双手轻语：“列兵，今夜瓦莲京娜这一条命……是你的心跳替我守住的。从今往后，罗森伯格家族军旗之下，唯你我二人并肩驰骋一生。”"
+  },
+  {
+   "id": "h_victor_commissar_drawn_pistol",
+   "kind": "approach",
+   "location_ids": [
+    "communication_trench_choke_point",
+    "bunker_core_blast_shelter"
+   ],
+   "slot": "victor_commissar_captain",
+   "text": "{victor_commissar_captain.name}单手将半自动手枪拍在指挥桌上，厉声宣布：“第十四督察分队维克托上尉在此！最高统帅部命令：突出部所有人员原地坚守至破晓！谁敢私自打开防爆门弃守阵地，按临阵叛逃罪立斩决不姑息！”"
+  },
+  {
+   "id": "h_erena_medic_cross_whisper",
+   "kind": "approach",
+   "location_ids": [
+    "bunker_core_blast_shelter",
+    "ammo_depot_collapsed_cellar",
+    "trench_firing_step_parapet"
+   ],
+   "slot": "erena_field_medic_lieutenant",
+   "text": "{erena_field_medic_lieutenant.name}双手捧着纯银止血钳与保温水壶：“装填手……快按住少校的止血带！埃列娜在这里！只要我还有一口气，就绝不让少校的血白流！你们两个……都必须活着看到明天的太阳！”"
+  },
+  {
+   "id": "h_boris_heavy_gunner_roar",
+   "kind": "approach",
+   "location_ids": [
+    "trench_firing_step_parapet",
+    "communication_trench_choke_point",
+    "ammo_depot_collapsed_cellar"
+   ],
+   "slot": "boris_heavy_gunner_sergeant",
+   "text": "{boris_heavy_gunner_sergeant.name}猛拉重机枪枪栓，黄铜弹链哗啦作响，向后方战壕豪迈大笑：“装填手！弹药箱送得真够及时！安心在防爆坑护着少校！只要老子这挺重机枪还在响，对面的杂碎一个也别想翻过胸墙！”"
+  },
+  {
+   "id": "h_charlotte_signal_code_flash",
+   "kind": "approach",
+   "location_ids": [
+    "bunker_core_blast_shelter",
+    "communication_trench_choke_point"
+   ],
+   "slot": "charlotte_signal_officer",
+   "text": "{charlotte_signal_officer.name}戴着耳机飞速敲击莫尔斯电键，摘下一侧耳机兴奋大喊：“装填手！接通了！装甲列车的密电回波接通了！三百毫米重炮连正在校准射界！我们死守成功了！”"
+  },
+  {
+   "id": "h_dietrich_sapper_axe_strike",
+   "kind": "approach",
+   "location_ids": [
+    "communication_trench_choke_point",
+    "ammo_depot_collapsed_cellar"
+   ],
+   "slot": "dietrich_sapper_pioneer",
+   "text": "{dietrich_sapper_pioneer.name}单膝跪地压接起爆雷管，向身旁同伴咧嘴一笑：“装填手！反坦克地雷全接好了！只要拉动发爆器，管叫对面的铁王八全变成废铁！掩护我三秒钟！”"
+  },
+  {
+   "id": "h_valeria_greatcoat_button_assist",
+   "kind": "approach",
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "slot": "valeria_major_commander",
+   "text": "{valeria_major_commander.name}单手艰难解开被冻结的双排扣大衣，修长玉颈在寒风中泛起微红，侧首横睨你低语：“手别抖……靠拢过来……替我把大衣领口扣紧……别碰疼了我的右肩创口……听到没有？”"
+  },
+  {
+   "id": "h_valeria_revolver_ammo_pass",
+   "kind": "approach",
+   "location_ids": [
+    "trench_firing_step_parapet",
+    "bunker_core_blast_shelter"
+   ],
+   "slot": "valeria_major_commander",
+   "text": "{valeria_major_commander.name}将最后六枚纯铜穿甲手枪弹一枚枚按入你手心，低声肃容道：“六发子弹，前五发留给冲上来的敌人……最后一发，留给破晓的信号。罗森伯格家族的人，要站着走出这条战壕。”"
+  },
+  {
+   "id": "h_valeria_bloodstained_greatcoat_observe",
+   "kind": "observe",
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "slot": "valeria_major_commander",
+   "text": "{valeria_major_commander.name}背靠水泥防爆坑微促喘息，深蓝呢大衣沾满硝烟白霜，肩章金星闪烁寒光，清冷绝美面庞在马灯光晕下宛若冰雕雪塑，贝齿咬紧下唇渗出血丝，散发着名门女军官浴血死守时令人窒息的庄严绝代战阵风骨。"
+  },
+  {
+   "id": "h_victor_commissar_black_tunic_observe",
+   "kind": "observe",
+   "location_ids": [
+    "communication_trench_choke_point"
+   ],
+   "slot": "victor_commissar_captain",
+   "text": "{victor_commissar_captain.name}深黑督察军服在暴风雪中傲然挺立，银质盾徽泛着冰冷光泽，手按枪柄目光冷冽如刀巡视战壕，举手投足散发着铁血军法官不可动摇之赫赫威严。"
+  },
+  {
+   "id": "h_erena_medic_white_apron_observe",
+   "kind": "observe",
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "slot": "erena_field_medic_lieutenant",
+   "text": "{erena_field_medic_lieutenant.name}白色医护围裙沾染殷红血斑，双手端着止血钳专注缝合，眼窝深陷却眼眸清澈圣洁，宛若绽放在修罗血海中的洁白雪莲。"
+  },
+  {
+   "id": "h_boris_heavy_gunner_fur_vest_observe",
+   "kind": "observe",
+   "location_ids": [
+    "trench_firing_step_parapet"
+   ],
+   "slot": "boris_heavy_gunner_sergeant",
+   "text": "{boris_heavy_gunner_sergeant.name}羊皮作训服油黑发亮，粗壮双臂死死压住水冷重机枪，胡茬泛霜双目如铜铃，宛若一尊雕凿在冻土前沿的钢铁战神。"
+  },
+  {
+   "id": "h_valeria_frozen_fingers_warm_request",
+   "kind": "request",
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "slot": "valeria_major_commander",
+   "text": "{valeria_major_commander.name}贝齿轻打冷颤，避开视线低声轻喘：“……手指快冻僵了，拉不开枪机……把野战炉推过来……替我把枪机拉开……别多想，只是为了能握稳手枪射击……听懂了吗？”"
+  }
+ ],
+ "id": "officer_trench_last_bullet_vow",
+ "locations": [
+  {
+   "affordances": [
+    "解下干燥粗麻绷带为少校右肩贯穿创口重新加压包扎止血",
+    "二人紧贴背靠背合盖深蓝军大衣汲取核心体温抵御零下三十度冻休克",
+    "自少校手中郑重接管纯钢转轮配枪将六发穿甲弹推入弹巢"
+   ],
+   "detail": "半埋式永备钢筋混凝土掩体最深处防爆坑，顶覆两米厚冻土与花岗岩碎石层，中央摆放着熄火的生铁野战暖炉与一张铺满作战地图的方桌，四角堆着沙袋与备用枪管。",
+   "exits": [
+    "trench_firing_step_parapet",
+    "communication_trench_choke_point",
+    "ammo_depot_collapsed_cellar"
+   ],
+   "id": "bunker_core_blast_shelter",
+   "name": "十四号混凝土掩体防爆深坑核心室",
+   "pressure_modifiers": {
+    "p_enemy_armor_searchlight_sweep": "敌军装甲车探照灯惨白强光正自射击死角规律扫过掩体观察狭缝。",
+    "p_generator_exhaust_hypothermia": "暖气锅炉彻底熄火室内气温已跌破零下二十五度金属刺骨发青。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "外界狂暴的风雪呼啸在排气铁管中发出尖锐哨音，昏暗的手摇马灯光晕中二人呼出的白雾在眉梢凝结成霜，室内充斥着硝烟、枪油与少校大衣内衬散发的清冽冷杉香气，二人背靠背紧贴合盖军大衣，体温与心跳在死寂中清晰共鸣。",
+   "witnesses": [
+    "bg_panicked_young_radio_operator"
+   ]
+  },
+  {
+   "affordances": [
+    "搬起金属备用弹链箱为重机枪供弹机快速压入二百五十发铜弹链",
+    "借敌军照明弹强光熄灭瞬间用反坦克手雷精准瘫痪敌军先头履带",
+    "在机枪副手位以身躯死死压住跳动的机枪三脚架压低射界弹道"
+   ],
+   "detail": "依托十四号掩体外侧水泥胸墙构筑的机枪发射阵地，架设着一挺带水冷套筒的纯钢水冷重机枪，胸墙外侧是连绵两道被炮火撕碎的带刺铁丝网与布满弹坑的积雪斜坡。",
+   "exits": [
+    "bunker_core_blast_shelter",
+    "communication_trench_choke_point",
+    "ammo_depot_collapsed_cellar"
+   ],
+   "id": "trench_firing_step_parapet",
+   "name": "前沿重机枪射击台与冻土胸墙",
+   "pressure_modifiers": {
+    "p_assault_pioneer_flamethrower_approach": "敌军喷火兵正借弹坑烟雾向胸墙死角推进至三十米投掷距离。",
+    "p_enemy_armor_searchlight_sweep": "敌军坦克高爆炮弹在胸墙前沿十米处接连炸起冲天冻土碎块。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "visibility": "狂风暴雨般的暴风雪卷着冰粒抽打面门，敌方照明弹在夜空中发出惨白强光，重机枪枪口喷吐着暗红火舌将弹壳成排倾泻在积雪中嘶嘶作响，敌军步兵散兵线正借雪雾交替跃进。",
+   "witnesses": [
+    "bg_trench_rifleman_sentry"
+   ]
+  },
+  {
+   "affordances": [
+    "在木质护壁拐角隐蔽处拉发两枚绊线防御手榴弹布置延时陷阱",
+    "与同伴肩并肩交替用冲锋枪点射压制突入壕沟的敌军尖兵小队",
+    "以刺刀撬开被冻结的交通壕暗门接应后撤的侦察兵归队"
+   ],
+   "detail": "深达两米的之字形防炮交通壕拐角，两侧支撑着粗糙松木护壁板，地面铺设防滑木质踏板，顶部架设铁丝网防止手榴弹直接投入，拐角处构筑有一处机枪交叉火力暗堡射孔。",
+   "exits": [
+    "bunker_core_blast_shelter",
+    "trench_firing_step_parapet",
+    "ammo_depot_collapsed_cellar"
+   ],
+   "id": "communication_trench_choke_point",
+   "name": "第七突出部曲折交通壕扼守拐角",
+   "pressure_modifiers": {
+    "p_assault_pioneer_flamethrower_approach": "敌军掷弹兵正向拐角后方盲区连续投掷发烟手雷封锁退路。",
+    "p_dawn_artillery_barrage_countdown": "敌军大口径迫击炮正以徐进弹幕沿交通壕向掩体核心延伸射击。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "暴风雪将壕沟底部积雪堆积过膝，寒风在狭窄弯道形成强对流漩涡，手电筒光晕穿透暴风雪照射在结冰的木壁上，拐角另一侧清晰传来工兵铁锹破冰与卡宾枪拉栓的金属脆响。",
+   "witnesses": [
+    "bg_recon_scout_courier",
+    "bg_infiltrating_enemy_scout"
+   ]
+  },
+  {
+   "affordances": [
+    "自倾斜预制板下艰难拖拽出最后一箱完好无损的穿甲重弹链",
+    "利用工兵纯铜发爆器连接炸药包导线准备在最后时刻彻底炸毁地窖",
+    "在摇摇欲坠的钢梁下合力用肩膀顶起断木抢救压在下方的战友"
+   ],
+   "detail": "掩体后方原本用于储备高爆炮弹的地窖，因数小时前重炮轰击导致西侧水泥预制板断裂倾斜四十五度，仅靠两根断裂工字钢勉强支撑，地面散落着开箱的炮弹引信与手雷箱。",
+   "exits": [
+    "bunker_core_blast_shelter",
+    "trench_firing_step_parapet",
+    "communication_trench_choke_point"
+   ],
+   "id": "ammo_depot_collapsed_cellar",
+   "name": "地下弹药库半坍塌储备地窖",
+   "pressure_modifiers": {
+    "p_generator_exhaust_hypothermia": "地窖通风孔彻底被冻结冰雪封死空气稀薄呼吸困难。",
+    "p_last_cartridge_magazine_depletion": "地窖内仅剩最后三个三十发备用步枪弹匣弹药告罄迫在眉睫。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "仅靠缝隙透入的雪光提供微弱照明，断裂钢筋在暴风雪重压下发出沉闷嘎吱呻吟，灰尘与冰晶不断自水泥缝隙簌簌落下，狭窄空间内仅容二人低头侧身穿行。",
+   "witnesses": [
+    "bg_wounded_artillery_spotter",
+    "bg_engineer_demolition_sapper"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "澈",
+   "珩",
+   "昀",
+   "舒尔茨",
+   "克莱因",
+   "瓦尔特",
+   "魏斯",
+   "鲍曼",
+   "里希特",
+   "施泰因",
+   "哈特曼",
+   "齐默曼"
+  ],
+  "given_female": [
+   "瓦莲京娜",
+   "埃列娜",
+   "夏洛特",
+   "奥尔加",
+   "索菲亚",
+   "卡特琳娜",
+   "维多利亚",
+   "玛格丽特",
+   "绫",
+   "艾尔莎",
+   "希尔达",
+   "克拉拉"
+  ],
+  "given_male": [
+   "维克托",
+   "鲍里斯",
+   "伊戈尔",
+   "阿列克谢",
+   "马克西姆",
+   "迪特里希",
+   "汉斯",
+   "沃尔夫冈",
+   "璃",
+   "卡尔",
+   "奥托",
+   "鲁道夫"
+  ],
+  "given_neutral": [
+   "亚历山大",
+   "尼古拉",
+   "尤里",
+   "米哈伊尔",
+   "霖",
+   "雷恩",
+   "瓦西里",
+   "曜",
+   "达尼尔",
+   "罗曼",
+   "格里高利",
+   "瓦连京"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "{family}少校"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}中尉"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}军医"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}班长"
+   },
+   {
+    "gender": "any",
+    "pattern": "{family}专员"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "按原稿加入，改动见提交说明。",
+ "player_identities": [
+  {
+   "age_range": [
+    21,
+    23
+   ],
+   "baseline": "年满二十一周岁出身帝国边疆行省的青年近卫掷弹兵，入伍两年来以冷静精准的弹链装填技术与过硬步兵战技深得少校信任。",
+   "gender": "any",
+   "id": "machinegunner_loader_youth",
+   "reputation": "沉默坚毅泰山崩于前而色不变，在狂暴火网中始终坚守在少校身侧半步不离。",
+   "resources": [
+    "一具配有备用枪管与压弹器的纯钢重机枪维护工具包",
+    "一卷加厚防水绝缘军用粗麻绷带配防冻油膏"
+   ],
+   "risks": [
+    "一旦机枪射击停顿导致防线失守将被敌军突击队以火焰喷射器直接碳化吞噬。"
+   ],
+   "role": "近卫装甲掷弹兵青年机枪副手",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "机枪副手"
+    },
+    {
+     "gender": "any",
+     "pattern": "装填手"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    24
+   ],
+   "baseline": "年满二十二周岁以最优等成绩毕业于帝国总参谋学院的青年见习官，受命下沉前沿阵地协助校核弹道诸元与撤退时刻表。",
+   "gender": "any",
+   "id": "military_academy_cadet_liaison",
+   "reputation": "精研战术运筹帷幄，在无线电中断绝境下能凭借星盘与地势准确推演友军装甲列车接应方位。",
+   "resources": [
+    "一份用油布严密包裹的第七突出部地下工事结构密图",
+    "一块带有荧光刻度防磁抗震的军官测距怀表"
+   ],
+   "risks": [
+    "随身绝密工事图纸若落入敌军之手将导致全线集团军撤退咽喉彻底暴露沦为炮灰。"
+   ],
+   "role": "前沿联络处青年见习参谋军官",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "见习参谋"
+    },
+    {
+     "gender": "any",
+     "pattern": "联络官"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    21,
+    23
+   ],
+   "baseline": "年满二十一周岁早年修习创伤外科学并自愿奔赴北境冻土前线的青年军医，精通冻伤防治与火器穿透伤野战缝合。",
+   "gender": "any",
+   "id": "combat_field_surgeon_assistant",
+   "reputation": "医术沉稳明察秋毫，在极寒血火炼狱中数次将重伤战友自死神手中强行夺回。",
+   "resources": [
+    "一套在防冻皮套内保温完整的纯银战地外科手术刀具",
+    "两支用于战地强心抗休克的精制纯天然肾上腺素安瓿"
+   ],
+   "risks": [
+    "若急救药品在严寒中全部冻裂结晶将无法挽救少校右肩动脉破裂引发的致命失血休克。"
+   ],
+   "role": "近卫野战救护所青年军医助理",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "军医助理"
+    },
+    {
+     "gender": "any",
+     "pattern": "救护兵"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    22,
+    24
+   ],
+   "baseline": "年满二十二周岁精通战壕爆破与冻土坑道坑道作业的青年工兵骨干，熟练掌握各类烈性炸药起爆引信改装。",
+   "gender": "any",
+   "id": "pioneer_sapper_demolition_expert",
+   "reputation": "性格刚烈沉着果断，凭借指尖触碰即可断定混凝土掩体承重抗爆极限。",
+   "resources": [
+    "两枚带有防潮发火管的特种重型反工事聚能破甲集束手雷",
+    "一具带有纯铜摇把的军用发爆器配双芯导线卷盘"
+   ],
+   "risks": [
+    "引爆炸药阻断坑道若引信过早延期将把自身与战友一同活埋在坍塌的永备掩体内。"
+   ],
+   "role": "突击工兵连青年爆破技术骨干",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "爆破工兵"
+    },
+    {
+     "gender": "any",
+     "pattern": "工兵班长"
+    }
+   ]
+  }
+ ],
+ "premise": "狂暴肆虐的极寒暴风雪呼啸冻土前线，敌军装甲突击集团突破左右两翼，将第七突出部彻底截断合围。年仅二十二岁的帝国近卫装甲掷弹兵青年女少校奉命率残部断后，掩护主力军团撤退。掩体内暖气锅炉熄火，无线电天线折断，仅剩最后少量弹药。女少校因右肩受弹片贯穿失血受冻浑身战栗，在零下三十度严寒与敌军探照灯扫射下，退守至掩体防爆深坑。",
+ "pressures": [
+  {
+   "choice": "是用身体压住机枪承受弹雨对射，还是冒险探出身躯以转轮配枪近距狙击？",
+   "exits": [
+    {
+     "cost": "少校右肩伤口在巨大后坐力冲击下再度开裂浸透半幅呢大衣。",
+     "option": "少校完好左手搭在副手肩头借力以转轮配枪精准击穿敌军后背燃料罐"
+    },
+    {
+     "cost": "伴侣左耳被流弹近距离划破耳垂鲜血直流耳鸣失聪数日。",
+     "option": "副手顶着横飞跳弹以重机枪持续长点射打爆喷火兵前胸防爆钢板"
+    }
+   ],
+   "far": {
+    "consequence": "射击阵地化为火海全员战殁全盘陷落。",
+    "due_days": 1,
+    "trigger": "喷火器烈焰灌入掩体工事引燃弹药殉爆。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_valeria_greatcoat_shiver_glance",
+    "h_boris_heavy_gunner_roar"
+   ],
+   "id": "p_assault_pioneer_flamethrower_approach",
+   "immediate": {
+    "minutes": 10,
+    "text": "喷火器引燃点火炬发出呼呼尖啸，刺鼻重油气味顺着暴风雪直扑射击台面门。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "trench_firing_step_parapet"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "若未能在一刻钟内引爆燃料罐，凝固汽油灌入射击台将把阵地表面全部人员彻底化为焦炭。"
+   },
+   "objective": "在十分钟内由副手以精准机枪短点射引爆敌军背后燃料罐，或由少校以穿甲转轮枪击毙喷火手。",
+   "source": "person",
+   "start_minute": 225,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "敌军喷火突击队逼近战壕死角死线",
+   "trigger": "敌军三名喷火兵在重机枪掩护下借风雪推进至胸墙前三十米，正准备向射击台喷射两千度凝固汽油烈焰。"
+  },
+  {
+   "choice": "是背靠背合盖大衣硬扛严寒，还是冒险摸黑搜寻易燃物资？",
+   "exits": [
+    {
+     "cost": "伴侣自身遭受极度寒气侵袭双手双脚严重冻伤红肿发黑。",
+     "option": "副手将自己的大衣也盖到少校身上，背靠背替少校挡住风口"
+    },
+    {
+     "cost": "伴侣双手十指在生铁锐利倒刺反复刮擦下多处皮开肉绽鲜血长流。",
+     "option": "同伴以刺刀劈碎受潮弹药箱倒入防冻烈酒引燃生铁野战炉取暖"
+    }
+   ],
+   "far": {
+    "consequence": "阵地在无抵抗状态下被敌军全员俘获冻毙。",
+    "due_days": 1,
+    "trigger": "掩体内全员遭受重度冻伤瘫痪失去战斗能力。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_valeria_greatcoat_shiver_glance",
+    "h_erena_medic_cross_whisper"
+   ],
+   "id": "p_generator_exhaust_hypothermia",
+   "immediate": {
+    "minutes": 15,
+    "text": "极寒使人员手指麻木指甲发紫，少校因失血过多体温跌破危险线开始陷入神志不清昏睡。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "near": {
+    "deadline_minutes": 35,
+    "text": "半小时内若不能建立体温互助防线，重伤少校将陷入不可逆深度失温休克心脏骤停。"
+   },
+   "objective": "在半小时内由同伴紧密背靠背合盖将官呢大衣汲取核心体温，并点燃废弃木质弹药箱维持微弱热源。",
+   "source": "nature",
+   "start_minute": 240,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "暖气锅炉停摆掩体失温冻伤危局",
+   "trigger": "柴油暖炉彻底耗尽最后一滴燃料熄火，室外零下三十度极寒冻气迅速灌入掩体，金属器械泛出惨白霜华。"
+  },
+  {
+   "choice": "是冒着水泥预制板坍塌风险爬入废墟抢弹，还是在胸墙准备上刺刀肉搏？",
+   "exits": [
+    {
+     "cost": "伴侣后背被坍塌掉落的水泥碎块重重砸中脊椎严重挫伤剧痛。",
+     "option": "副手冒险钻入摇摇欲坠水泥废墟徒手撬开角钢拖出重弹链箱"
+    },
+    {
+     "cost": "老班长右腿迎面骨被敌军迫击炮弹破片削去一块皮肉血流如注。",
+     "option": "老班长拔出工兵重刺刀咔哒上膛带领全员准备发动决死白刃反冲锋"
+    }
+   ],
+   "far": {
+    "consequence": "阵地全员被俘或被迫拉响手雷玉碎殉国。",
+    "due_days": 1,
+    "trigger": "掩体弹药彻底打光陷入弹尽粮绝绝境。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_boris_heavy_gunner_roar",
+    "h_dietrich_sapper_axe_strike"
+   ],
+   "id": "p_last_cartridge_magazine_depletion",
+   "immediate": {
+    "minutes": 10,
+    "text": "机枪弹链箱发出空仓摩擦空响，机枪射击被迫转为极慢单发点射威慑力骤降。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "ammo_depot_collapsed_cellar"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "二十分钟内若不能续接弹链，机枪一旦停火敌军散兵线将在三十秒内翻越胸墙屠戮阵地。"
+   },
+   "objective": "在弹药耗尽前由副手冒险潜入半坍塌弹药库地窖深处拖拽出最后一箱穿甲弹，或组织刺刀冲锋。",
+   "source": "accident",
+   "start_minute": 265,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "阵地穿甲重弹链即将彻底耗尽死线",
+   "trigger": "重机枪仅剩最后一条五十发残存弹链，敌军新一轮装甲步兵集团正跃出散兵坑逼近铁丝网。"
+  },
+  {
+   "choice": "是用步枪迎着刺目强光精确狙击，还是利用反坦克枪射击底盘？",
+   "exits": [
+    {
+     "cost": "伴侣双眼在极近弧光强光刺激下暂时性雪盲灼伤角膜红肿充血。",
+     "option": "副手迎着强光极速举枪三点一线单发狙击精准击碎探照灯厚玻璃"
+    },
+    {
+     "cost": "通信官左手手掌被发烟手雷外壳灼热喷气深度烫伤起大水泡。",
+     "option": "通信官将两枚发烟手雷掷出观察孔借浓烈白烟遮蔽敌军观测视线"
+    }
+   ],
+   "far": {
+    "consequence": "地下工事全盘被活埋全员壮烈牺牲。",
+    "due_days": 1,
+    "trigger": "掩体天顶被敌军重炮群直接贯穿轰塌。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_valeria_greatcoat_shiver_glance",
+    "h_victor_commissar_drawn_pistol"
+   ],
+   "id": "p_enemy_armor_searchlight_sweep",
+   "immediate": {
+    "minutes": 15,
+    "text": "惨白刺目强光使掩体内人员双眼剧痛流泪暂时失明，敌军测距弹已落在胸墙外五米处。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "bunker_core_blast_shelter"
+   ],
+   "near": {
+    "deadline_minutes": 30,
+    "text": "一刻钟内若不能打碎探照灯，下一轮齐射的一百五十毫米重炮将直接贯穿掩体天顶。"
+   },
+   "objective": "在敌军重炮校准完成前，利用高精度步枪或反器材转轮枪精准打碎敌车探照灯镜头粉碎测距。",
+   "source": "person",
+   "start_minute": 290,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "敌军装甲车探照灯扫射与重炮测距死线",
+   "trigger": "敌军两辆突击装甲车开启大功率碳精弧探照灯，强光直射掩体射击狭缝并引导重炮群进行徐进弹幕修正。"
+  },
+  {
+   "choice": "是全力维持电台引导友军炮火，还是在掩体防空洞组织全体隐蔽？",
+   "exits": [
+    {
+     "cost": "通信官双耳耳膜在巨炮对轰天地共鸣下震破流出丝丝殷红鲜血。",
+     "option": "通信官成功引导装甲列车三百毫米巨炮群实施跨射覆盖摧毁敌军炮兵"
+    },
+    {
+     "cost": "伴侣双手双臂在重型圆木挤压下肌肉严重挫伤剧烈发颤脱力。",
+     "option": "副手与工兵合力在轰炸前用工字钢与圆木加固防爆核心坑顶梁"
+    }
+   ],
+   "far": {
+    "consequence": "第七突出部被彻底抹平不留一草一木。",
+    "due_days": 1,
+    "trigger": "敌军重炮群完成无差别地毯式毁灭轰击。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_charlotte_signal_code_flash",
+    "h_dietrich_sapper_axe_strike"
+   ],
+   "id": "p_dawn_artillery_barrage_countdown",
+   "immediate": {
+    "minutes": 10,
+    "text": "大地在重炮群装填震动中发出闷雷般颤鸣，狂暴风雪也掩盖不住敌军炮兵阵地试射的尖啸。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "communication_trench_choke_point"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "二十分钟内若不能引导装甲列车开火，十四号掩体将在数百枚重炮轰击下化为一片焦黑碎石深坑。"
+   },
+   "objective": "在敌军总攻炮击发起前，彻底接通帝国装甲列车引导友军反炮兵巨炮群实施对等压制拦截。",
+   "source": "institution",
+   "start_minute": 315,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "title": "敌军破晓前夕毁灭性全线火力覆盖死线",
+   "trigger": "敌军炮兵兵团正在前沿集结最后五个重炮连，计划在破晓前五分钟发起毁灭性无差别地毯式轰炸。"
+  },
+  {
+   "choice": "是用枪口以军法强行威慑弹压，还是以真相电文唤醒荣誉士气？",
+   "exits": [
+    {
+     "cost": "少校强行直立导致右肩创口再度剧烈撕裂面色惨白摇摇欲坠。",
+     "option": "少校手持装甲列车亲笔明码电文傲然立于门后厉声宣布援军已至"
+    },
+    {
+     "cost": "伴侣左侧肋骨被造谣者步枪枪托重重顶中挫伤岔气咳血。",
+     "option": "副手一个利落枪托砸翻领头造谣者将其步枪夺下稳稳控制局势"
+    }
+   ],
+   "far": {
+    "consequence": "防线不攻自破被尾随敌军轻取全歼。",
+    "due_days": 1,
+    "trigger": "阵地发生武装哗变溃散自相残杀。"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "h_victor_commissar_drawn_pistol",
+    "h_valeria_greatcoat_shiver_glance"
+   ],
+   "id": "p_deserter_insurrection_panic",
+   "immediate": {
+    "minutes": 10,
+    "text": "战壕拐角拔枪叫骂推搡声不断，恐慌情绪如野火般在狭窄坑道内蔓延动摇防守意志。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "communication_trench_choke_point"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "十五分钟内若不能平息动摇，防爆门一旦被强行冲开将导致阵地内部防御体系瞬间瓦解。"
+   },
+   "objective": "在十分钟内由督战官与副手果断控制骚动，向全体官兵展现装甲列车接应明码电文稳定军心。",
+   "source": "rumor",
+   "start_minute": 340,
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "title": "后方轻伤步兵动摇溃逃冲击防爆门危局",
+   "trigger": "后方谣传主力部队已彻底放弃突出部撤走，四名惊慌失措的年轻士兵企图持械抢夺防爆门逃离工事。"
+  }
+ ],
+ "region": "帝国北境防线第七突出部第十四号半地下前沿混凝土掩体与散兵坑交通壕",
+ "rules": [
+  {
+   "id": "r_fortress_rearguard_standing_order",
+   "text": "帝国最高统帅部断后死守铁律：在破晓总退却信号弹升起之前，第七突出部十四号掩体所有官兵严禁后退半步，擅自离岗脱逃者就地军法处决。"
+  },
+  {
+   "id": "r_officer_sidearm_succession_code",
+   "text": "近卫装甲军官荣誉配枪承袭戒律：指挥官配属纯钢转轮手枪为阵地最高指挥权象征，若指挥官负伤濒死，仅可将配枪亲手交托给最信任之同袍代行军令。"
+  },
+  {
+   "id": "r_hypothermia_survival_body_warmth_proto",
+   "text": "极地暴风雪野战阵地防冻生存规程：暖气锅炉停摆失温危机下，掩体内战斗员必须轮流背靠背紧贴合盖军大衣以核心体温互助御寒防休克。"
+  },
+  {
+   "id": "r_dawn_flare_counterattack_signal",
+   "text": "破晓总撤退突围协同准则：东方天际升起三联发红色高空信号弹之时，即为主力装甲列车接应开火之刻，全体掩体生还者方可炸毁工事交替掩护突围。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "掩体分弹",
+  "committed": "破晓同生",
+  "familiar": "冻土共温",
+  "flirting": "配枪相托",
+  "intimate": "背靠背盟誓",
+  "stranger": "战时上下级",
+  "testing": "死守对赌"
+ },
+ "status": "released",
+ "style_hint": "零下三十度的狂暴风雪将半地下掩体防爆钢门冻上一层厚重白霜，外侧炮火连天弹片横飞，探照灯惨白的光柱不时划过结冰的观察射击孔。掩体内仅靠一盏昏暗的军用手摇应急马灯与熄火锅炉的余温维系生机。",
+ "tension_engines": [
+  {
+   "id": "te_noble_commander_pride_vs_intimate_sur",
+   "text": "帝国贵族女少校孤傲军规戒律与零下三十度严寒负伤、不得不与青年副手背靠背御寒之反差。"
+  },
+  {
+   "id": "te_rearguard_standing_order_vs_last_bull",
+   "text": "统帅部断后死守严令与将象征指挥大权的纯钢转轮配枪托付同袍之决死相托。"
+  },
+  {
+   "id": "te_blizzard_encirclement_vs_dawn_flare_c",
+   "text": "敌军装甲集群两翼合围绝境与破晓三联装信号弹突围死线之极速赛跑。"
+  },
+  {
+   "id": "te_commissar_harsh_inquisition_vs_brothe",
+   "text": "督战官严苛执行逃兵军法与战阵战友舍命互救之人性道义博弈。"
+  }
+ ],
+ "title": "雪夜战壕：女少校的最后一发",
+ "tone": [
+  "暴风雪极寒战壕",
+  "军官配枪决死交托",
+  "背靠背近身取暖",
+  "破晓信号弹绝地反击"
+ ],
+ "twists": [
+  {
+   "category": "资源",
+   "id": "t_officer_1",
+   "requires": [],
+   "text": "坍塌弹药库废墟深处起获最后两箱穿甲重弹链：青年机枪副手在半坍塌水泥地窖死角撬开防爆角钢，起获两箱保存完好未受潮的二百五十发穿甲重弹链与整箱卵形防御手榴弹。机枪阵地弹药枯竭危机彻底化解，重火力火网重新满负荷咆哮封死敌军突击道路。"
+  },
+  {
+   "category": "信息",
+   "id": "t_officer_2",
+   "requires": [],
+   "text": "通信官破译敌军合围装甲集群侧翼结合部重大漏洞：夏洛特少尉截获敌军装甲突击集团明码电文，查明敌军左翼步坦协同脱节出现三公里无步兵掩护的防御真空走廊。少校迅速调整突围方向，主力部队获知精确突破口使突围生还概率大幅提升。"
+  },
+  {
+   "category": "制度",
+   "id": "t_officer_3",
+   "requires": [],
+   "text": "督战官出具战地特别紧急全权代理授权令：维克托上尉当场以军法处之名签署全权免责授权书，宣布十四号掩体全体官兵战时行动享有最高战术豁免权不受教条约束。后方官僚教条审查威胁被彻底化解，全营放开手脚全力执行弹性阻击与机动突围。"
+  },
+  {
+   "category": "人事",
+   "id": "t_officer_4",
+   "requires": [],
+   "text": "驰援装甲列车集群指挥官实为女少校父亲老将军嫡系参谋：装甲列车无线电通信接通，对方长官表明身份为罗森伯格老将军当年一手提拔的铁血名将，奉死命不惜一切代价接应独女突围。援军作战决心提升至顶点，三百毫米重炮群不惜弹药倾泻狂暴火力压制敌军阵地。"
+  },
+  {
+   "category": "时限",
+   "id": "t_officer_5",
+   "requires": [],
+   "text": "极寒狂风风向骤转暴风雪提前破晓消散：狂暴肆虐整夜的暴风雪在凌晨五点骤然停歇，暴风风向逆转将弥漫战壕的浓烈烟雾全数吹向敌军进攻阵位。掩体观察射击条件彻底好转，敌军步兵在无遮掩雪原上彻底沦为重机枪精准猎物。"
+  },
+  {
+   "category": "关系",
+   "id": "t_officer_6",
+   "requires": [],
+   "text": "少校配枪枪号实为当年军校射击大赛优胜对枪：副手检视交托的纯钢转轮配枪枪号时，发现该枪与自己军校毕业时获得的优胜银质枪托编号严丝合缝配对为当年对枪。早年军校相知相惜之宿命羁绊在血海战阵中轰然揭晓，彻底融化了最后尊卑界限，只待破晓后亲口说破。"
+  },
+  {
+   "category": "意外",
+   "id": "t_officer_7",
+   "requires": [],
+   "text": "敌军先头重坦克遭反坦克雷场起爆引发大面积燃料殉爆：工兵埋设的集束地雷引爆敌军先头突击重坦克，飞溅引燃敌军伴随油罐卡车引发连环惊天大殉爆。敌军进攻梯队陷入漫天火海与混乱瘫痪，掩体正面进攻压力被瞬间连根拔起粉碎。"
+  }
+ ]
+}

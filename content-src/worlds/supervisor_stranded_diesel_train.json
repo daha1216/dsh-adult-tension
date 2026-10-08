@@ -1,0 +1,2455 @@
+{
+  "schema_version": 1,
+  "id": "supervisor_stranded_diesel_train",
+  "title": "雪困柴油车：女上司的夜",
+  "extends": null,
+  "era": "当代深冬特大暴风雪之夜（北国荒原深处的支线铁道）",
+  "region": "北国崇山峻岭间被暴雪掩埋的荒废单线铁道与脱轨迫停的单节旧式柴油客车厢",
+  "premise": "暴风雪席卷北国偏远荒野，最后一班单节老旧柴油列车因雪崩倒木脱轨迫停。暖风发电机故障熄火，车厢温度骤降至零下二十度。年满二十三岁的精英女部长与青年下属被困于滞留车厢。公文箱内装有关系企业存亡的跨国竞标底稿，车外暴雪封门，车内仅存一条薄毛毯。二人在极寒长夜中共裹大衣背靠背御寒，在破晓救援赶来前展开职业尊严与心跳防线的终极拉扯。",
+  "tone": [
+    "荒野暴雪封车",
+    "羊绒大衣共裹",
+    "柴油机熄火极寒",
+    "微温呼吸拉扯"
+  ],
+  "style_hint": "单节墨绿色老旧柴油客车斜斜倾覆在被半米厚积雪掩埋的单线铁道弯道上，车窗玻璃外侧结满了厚重冰花，狂暴的白毛风发出凄厉呼啸拍打着单薄铝合金车体。车顶最后一盏应急黄色小钨丝灯发出昏黄闪烁的微光，车厢地面凝结着滑腻白霜。",
+  "clock_start": {
+    "label": "暴风雪子夜零点三十分，列车暖气发电机彻底燃油耗尽熄火，距离破晓清雪救援车抵达仅剩",
+    "minute": 30
+  },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": {
+    "female": 0.5,
+    "male": 0.45,
+    "nonbinary": 0.05
+  },
+  "stage_labels": {
+    "stranger": "职场上下",
+    "acquainted": "雪夜同车",
+    "familiar": "共裹薄毯",
+    "flirting": "大衣共裹",
+    "testing": "底稿托付",
+    "intimate": "破晓相拥",
+    "committed": "破晓同袍"
+  },
+  "name_pools": {
+    "family": [
+      "九条",
+      "神宫寺",
+      "橘",
+      "浅仓",
+      "白鸟",
+      "西园寺",
+      "水无月",
+      "黑泽",
+      "桐生",
+      "绫濑",
+      "藤原",
+      "一条"
+    ],
+    "given_female": [
+      "怜奈",
+      "诗织",
+      "千鹤",
+      "美月",
+      "遥香",
+      "真理奈",
+      "雪乃",
+      "千冬",
+      "彩音",
+      "由实",
+      "咲良",
+      "绫香"
+    ],
+    "given_male": [
+      "悠真",
+      "宗次郎",
+      "直树",
+      "俊介",
+      "疾风",
+      "莲",
+      "健一",
+      "龙之介",
+      "苍介",
+      "弦之介",
+      "雅人",
+      "吾郎"
+    ],
+    "given_neutral": [
+      "司",
+      "透",
+      "葵",
+      "律",
+      "薰",
+      "凉",
+      "和",
+      "真",
+      "光",
+      "清",
+      "涉",
+      "遥"
+    ],
+    "nickname_patterns": [
+      {
+        "pattern": "{family}部长",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}专员",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}车长",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}技师",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}站务",
+        "gender": "any"
+      }
+    ],
+    "order": "family_first"
+  },
+  "rules": [
+    {
+      "id": "r_derailment_emergency_curfew_code",
+      "text": "荒原支线铁道应急避险规则：列车在未通车荒原深处脱轨滞留期间，全体乘员严禁私自推开车门踏入零下二十五度暴雪深坑以防失足冻毙。"
+    },
+    {
+      "id": "r_corporate_confidential_tender_protecti",
+      "text": "商社商业机密资产管护条例：装有百亿竞标底稿的纯黑铝镁合金密码公文箱必须二十四小时手铐锁扣在负责人或特派专员手腕之上。"
+    },
+    {
+      "id": "r_emergency_heating_energy_conservation",
+      "text": "滞留车厢热能维系法则：严禁同时开启破损车窗或连续点燃报纸杂物，全车人员必须集中于车厢中段避风座席区以体温相互支撑御寒。"
+    },
+    {
+      "id": "r_dawn_snowplow_rescue_rendezvous_rule",
+      "text": "清雪救援作业对接规程：破晓晨曦六点整铁路防灾除雪轨道车将自南线推进贯通，车内人员需点亮车头应急红灯作为接引信标。"
+    }
+  ],
+  "customs": [
+    "在车厢气温骤降至零下时，二人需并肩坐进避风座席，把两件呢大衣叠盖在身上，再用薄毯压严边角。",
+    "分饮自动售货机最后一罐冰凉黑咖啡时，需先以双手掌心反复揉搓捂热铁罐外壳，再递予长官小口啜饮以缓解低血糖心悸。",
+    "当车窗外侧积雪被狂风压裂玻璃发出脆响时，长官需先按一按锁在自己腕上的公文箱，再与副官对视一眼，确认机密与人都还在。",
+    "迎来破晓救援时，长官需亲手摘下自己颈间的羊绒围巾缠系在副官领口，低声许诺从此并肩共进无论职场风浪同甘共苦。"
+  ],
+  "player_identities": [
+    {
+      "id": "confidential_executive_special_aide",
+      "role": "外贸本部青年特派机要秘书兼业务专员",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "机要秘书",
+          "gender": "any"
+        },
+        {
+          "pattern": "业务专员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "low",
+      "baseline": "年满二十一周岁以管培生第一名入职商社外贸本部的青年业务尖兵，兼任女部长的贴身机要助理，随同部长赴北国签约。",
+      "resources": [
+        "一柄随身携带的多功能纯钢战术折叠工兵钳",
+        "一条质地优良厚实防风的深灰混纺羊毛围巾"
+      ],
+      "reputation": "沉着干练临危不乱，深谙商务谈判逻辑与荒野自救常识，深受女部长暗中青睐。",
+      "risks": [
+        "一旦商业竞标底稿被严寒冻裂损毁或遗失将被商社法务部追责开除索赔巨款。"
+      ]
+    },
+    {
+      "id": "railway_diesel_mechanic_prodigy",
+      "role": "乘车返乡青年铁道柴油机维修技师",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "机车技师",
+          "gender": "any"
+        },
+        {
+          "pattern": "铁道工匠",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "equal",
+      "baseline": "年满二十二周岁在机务段工作三年的年轻技术骨干，对老旧柴油客车的底盘管路与发电机机械结构了如指掌。",
+      "resources": [
+        "一盒装有喷灯与柴油凝点改良剂的随身工具包",
+        "一把重型精钢可调节管钳"
+      ],
+      "reputation": "手艺精湛粗中有细，只要零件未碎便能在冰雪中抢通柴油机燃油管路。",
+      "risks": [
+        "在零下严寒中钻入车底排险若遭遇二次雪崩滑移将被重达数十吨的客车当场碾压。"
+      ]
+    },
+    {
+      "id": "local_forestry_mountain_guide_youth",
+      "role": "同车返村青年林业巡山队员",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "巡山向导",
+          "gender": "any"
+        },
+        {
+          "pattern": "林业队员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "equal",
+      "baseline": "年满二十一周岁熟悉附近数十里山林地形雪崩走势的年轻护林员，随身携带应急生存补给。",
+      "resources": [
+        "一具配有防刮保护套的高精度荧光指南针",
+        "一包纯天然高热量盐渍牛肉干与高纯度葡萄糖粉"
+      ],
+      "reputation": "身手矫健视力绝佳，凭借风声便能预判暴风雪何时停歇与雪崩危险期。",
+      "risks": [
+        "盲目冒险外出探路一旦迷失在白毛风雪坑中将在十分钟内失温冻毙。"
+      ]
+    },
+    {
+      "id": "corporate_legal_compliance_auditor",
+      "role": "商社监查部青年随行法务合规官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "法务顾问",
+          "gender": "any"
+        },
+        {
+          "pattern": "合规专员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "high",
+      "baseline": "年满二十二周岁受商社董事会派遣全程监督该笔百亿竞标合法性的年轻法务精英，持有司法书士资格。",
+      "resources": [
+        "一份加盖商社最高董事局红印的紧急代理授权委托书原件",
+        "一具轻便型防磁应急录音设备"
+      ],
+      "reputation": "原则性极强铁面无私，但在生死考验面前深明变通大义与同袍安危高于一切。",
+      "risks": [
+        "若公文箱被竞争对手派出的暴徒趁乱抢夺将被判定重大过失剥夺律师资格。"
+      ]
+    },
+    {
+      "id": "paramedic_first_aid_volunteer_youth",
+      "role": "医科大学青年实习急救志愿者",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "急救员",
+          "gender": "any"
+        },
+        {
+          "pattern": "医科实习生",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "low",
+      "baseline": "年满二十一周岁在综合病院急救中心实习的年轻医学研究生，精通极寒失温复温推拿与冻伤处理规范。",
+      "resources": [
+        "三张真空压缩保温铝箔急救毯",
+        "一瓶用于舒缓心绞痛心律失常的硝酸甘油喷雾剂"
+      ],
+      "reputation": "医德高尚仁心仁术，总能在最简陋的环境下稳住冻伤濒危患者的生命线。",
+      "risks": [
+        "应急药品一旦受冻结冰失效将无法逆转严重失温休克患者的心衰进程。"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "derailed_passenger_cabin_middle",
+      "name": "滞留单节柴油客车中段双人软座区",
+      "detail": "列车中段相对避风的四人对坐墨绿天鹅绒软座席，两侧铝合金车窗结满厚重冰花，头顶应急钨丝灯散发微弱昏黄光晕，地面铺有发潮红地毯，车体向左侧倾斜十度。",
+      "privacy": "private",
+      "visibility": "车内寒气弥漫哈气成霜，狂风卷着雪粉从破损风挡缝隙渗入，昏黄光线下二人同裹一条毛毯紧紧靠坐，长官驼色大衣下摆与副官大衣紧密交叠，彼此急促呼吸与心跳声清晰可辨。",
+      "witnesses": [
+        "bg_panicked_elderly_farmer_passenger",
+        "bg_corporate_rival_undercover_broker"
+      ],
+      "exits": [
+        "diesel_engine_compartment_vestibule",
+        "broken_window_snowdrift_exit"
+      ],
+      "affordances": [
+        "把两件呢大衣叠盖在女部长身上并用薄毯压严边角",
+        "用掌心反复捂热易拉罐咖啡小口度给因严寒低血糖战栗的女部长饮用",
+        "用手铐将公文箱把手与部长手腕死死锁死确保机密万无一失"
+      ],
+      "pressure_modifiers": {
+        "p_generator_diesel_freeze_blackout": "暖风机熄火后车内温度每十分钟下降三度，座椅扶手已结出硬霜。",
+        "p_blizzard_cracking_cabin_window": "狂风卷着断枝猛烈撞击左侧车窗玻璃发出刺耳蜘蛛网状开裂声。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "diesel_engine_compartment_vestibule",
+      "name": "客车前端司机室与柴油机发电机舱",
+      "detail": "单节客车前部的机械舱，布置着直列六缸老旧柴油机与启动发电机，仪表盘指针全部归零，管路结满白霜，机舱内弥漫着浓烈的生柴油味与冰冷金属锈气。",
+      "privacy": "semi",
+      "visibility": "舱内漆黑冰冷，唯有手电筒光柱撕破黑暗，发电机喷油嘴处凝结着一层浑浊硬蜡，狂暴北风从百叶散热窗狂暴灌入带来刺骨寒风。",
+      "witnesses": [
+        "bg_exhausted_train_driver_conductor",
+        "bg_mountain_rescue_radio_operator"
+      ],
+      "exits": [
+        "derailed_passenger_cabin_middle",
+        "exterior_snowdrift_embankment"
+      ],
+      "affordances": [
+        "用喷灯微火小心翼翼烘烤柴油滤清器使硬化石蜡融化复位",
+        "手动摇动沉重生铁柴油机减压手柄尝试强行人工盘车起动",
+        "在机舱工具箱翻找备用喷气起动剂与防冻冷却液"
+      ],
+      "pressure_modifiers": {
+        "p_generator_diesel_freeze_blackout": "柴油机输油管严重蜡化堵塞若不能在一小时内化开将彻底报废。",
+        "p_subzero_hypothermia_coma_peril": "操作金属扳手五分钟手指即与冰铁冻连造成严重皮肉撕脱撕裂。"
+      },
+      "tags": [
+        "workplace",
+        "crime"
+      ]
+    },
+    {
+      "id": "broken_window_snowdrift_exit",
+      "name": "列车尾部破损贯通门与积雪斜坡",
+      "detail": "客车后方因撞击脱轨导致橡胶密封条撕裂的尾部车门，门外积雪已堆积至车窗下沿，狂暴的风雪在此处形成倒卷漩涡，白雪如沙尘般不断涌入过道地毯。",
+      "privacy": "semi",
+      "visibility": "风雪呼啸伸手不见五指，手电光打在雪雾中仅能照亮三尺范围，雪崩冲断的巨大红松横亘在车尾钢轨之上压弯了受电引线。",
+      "witnesses": [
+        "bg_frightened_young_college_girl"
+      ],
+      "exits": [
+        "derailed_passenger_cabin_middle",
+        "exterior_snowdrift_embankment"
+      ],
+      "affordances": [
+        "用折叠工兵铲奋力铲除倒灌车厢的松散积雪并用坐垫封死门缝",
+        "在雪堆中摸索拾取被甩飞的备用应急手摇信号发电机",
+        "协助年老乘客将防寒行李箱搬运至中段避风座席区"
+      ],
+      "pressure_modifiers": {
+        "p_blizzard_cracking_cabin_window": "风雪强压正不断将车尾贯通门铰链撕扯脱扣导致灌雪加剧。",
+        "p_secondary_avalanche_slope_hazard": "后方山体上层厚积雪在狂风吹拂下出现松动滑移隆隆闷响。"
+      },
+      "tags": [
+        "workplace",
+        "crime"
+      ]
+    },
+    {
+      "id": "exterior_snowdrift_embankment",
+      "name": "列车外侧齐腰深积雪路基与道岔立柱",
+      "detail": "车体外侧被狂风暴雪彻底覆盖的单线铁道路基，积雪深及腰部，气温低至零下二十五度，道旁立着一根生铁信号灯立柱，上方的红黄两色信号灯已被积雪封冻熄灭。",
+      "privacy": "public",
+      "visibility": "狂暴白毛风遮天蔽日，天地浑然一片白茫茫混沌，狂风撕扯着大衣下摆令人无法站立，唯有爬上信号立柱方能将应急信标高高挂起指引救援。",
+      "witnesses": [
+        "bg_patrolling_local_trackwalker_veteran"
+      ],
+      "exits": [
+        "diesel_engine_compartment_vestibule",
+        "broken_window_snowdrift_exit"
+      ],
+      "affordances": [
+        "冒雪攀爬生铁立柱用刮刀刮去积雪并挂上红色应急信标灯",
+        "用工兵铲在车轮转向架下清理冰坨避免车体进一步侧翻滑坠",
+        "与同伴在狂风中互相拉拽安全绳保持平衡防止陷落雪坑"
+      ],
+      "pressure_modifiers": {
+        "p_dawn_snowplow_rescue_missing_signal": "若立柱红灯未在破晓点亮除雪车将无法减速可能发生二次冲撞。",
+        "p_secondary_avalanche_slope_hazard": "山坡积雪若发生大面积雪崩将在数十秒内将整节车厢整体推下路堤。"
+      },
+      "tags": [
+        "workplace_power",
+        "violence"
+      ]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "proud_supervisor_reiko",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三周岁以惊艳业绩破格擢升为商社最年轻外贸部长但在极寒绝境中展露脆弱心声的高岭之花女主管。",
+      "public_role": "跨国综合商社外贸一部年轻冷艳兼具卓越魄力之精英女部长",
+      "appearance_options": [
+        "一身裁剪极其考究优雅的驼色双面纯羊绒长大衣，脚踩意大利手工羊皮高跟短靴，乌黑秀发挽成一丝不苟的职场法式发髻，几缕碎发在狂风中散落额前，绝美面容白皙冷艳，薄唇紧抿，因极度严寒娇躯微微战栗，散发着绝不服输的职场女王尊贵风骨。",
+        "在倾斜车厢昏黄灯影下，单手解开驼色大衣腰带，摘下一只黑色真皮小羊皮手套，修长白皙的手指因冻结泛着微红，哈出一口白汽搓动指尖，美眸含愁带刺横睨身旁青年副官，下唇咬破一丝血丝，嗓音发颤低沉却透着绝境中傲然独立的不可冒犯威仪。"
+      ],
+      "identity": {
+        "authority": "掌握对商社本期百亿跨国海外工程竞标项目的最终定标签署权与全权商务谈判代表专权。",
+        "resources": [
+          "一具配有六位机械滚轮密码锁与防割钢丝手铐的防磁公文箱",
+          "一柄随身携带的万宝龙纯金大班墨水笔与商社法人公章"
+        ],
+        "limits": [
+          "体格偏娇贵连续加班熬夜体力濒临极限极易诱发心律不齐低血糖休克",
+          "自尊心极强视在下属面前流露软弱依赖之态为有损职业尊严之奇耻大辱"
+        ],
+        "obligations": [
+          "誓死保全公文箱内的竞标底稿不被严寒损毁，确保破晓突围按时抵达跨国签约会场。"
+        ],
+        "exposure": "一旦在极寒中失温昏迷导致底稿被风雪浸泡损毁将使商社蒙受上百亿违约索赔并引咎辞职。",
+        "hidden": "实则是凭借自身日夜拼搏从平民管培生杀出重围的寒门骄女，面对商社高层豪门派系倾轧如履薄冰，心底深处对一路鞍前马后护卫自己的青年下属怀有深沉炽热的知己依赖与爱慕。"
+      },
+      "decision": {
+        "core_value": "职业信仰与商业信誉高于身家性命，宁可冻死在荒野铁道也绝不丢失底稿让身后千万员工生计毁于一旦。",
+        "goal_options": [
+          "在破晓前与青年下属背靠背同裹一条薄毯抗衡零下极寒熬过漫漫长夜",
+          "在车窗破裂危急关头以自身大衣与躯体死死护住公文箱底稿完好无损",
+          "在破晓除雪车抵达时以胜利者之姿挽着副官臂弯昂首踏上签约专列"
+        ],
+        "pressure_responses": {
+          "low": "在座椅上正襟危坐，以冷酷命令口吻严厉要求副官核查车门闭锁情况维持纪律。",
+          "mid": "因极度受冻齿关打颤四肢僵硬，在副官把大衣盖过来时羞愤推拒，旋即冻得说不出话，只能裹紧大衣。",
+          "high": "在车窗被狂风击碎雪尘狂涌时，果断扑在公文箱上用羊绒大衣包裹文件任由风雪打在后背。",
+          "breaking": "在脱离生命危险迎来破晓时终于卸下力气，靠着副官肩头倾诉多年背负重压之孤苦委屈。"
+        },
+        "withdrawal": "退回收缩至双人软座最深避风死角，将公文箱钥匙塞进副官手里托付后事。",
+        "relationship_stance": "外表严酷冷艳高不可攀，内心深处却极度渴望拥有一份在狂风暴雨中能毫无保留托付后背的真正生死依靠。",
+        "contrast": "在职场是算无遗策冷酷无情的冰山女霸总，在零下二十度封闭车厢里却是冻得掉泪、还要嘴硬下命令的倔强女人。",
+        "prefers": [
+          "沉着稳重临危不乱且在生死关头把长官安危置于首位的真正男儿"
+        ],
+        "avoids": [
+          "轻浮谄媚之徒",
+          "遇到困难推卸责任的懦夫"
+        ],
+        "never": [
+          "绝不会在金钱利益与生死威胁面前出卖底稿机密出卖良心。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在车厢断暖濒临冻毙关头毫不犹豫把自己的呢大衣盖到长官身上的担当",
+          "用掌心反复呵气暖热冰凉咖啡再递过来时的专注"
+        ],
+        "likes": [
+          "危机解除后二人并肩坐在车窗前静看朝阳升起的清宁",
+          "在私下独处时聆听对方真诚称呼自己的名字而非冰冷的职务头衔"
+        ],
+        "dislikes": [
+          "轻佻僭越",
+          "虚伪逢迎"
+        ],
+        "preconditions": [
+          "跨国综合商社外贸一部年轻冷艳兼具卓越魄力之精英女部长与对方都已完全清醒，眼前的危机已经解除",
+          "跨国综合商社外贸一部年轻冷艳兼具卓越魄力之精英女部长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在公开商社执勤与商务场合恪守长官仪态威严",
+          "严禁任何带有轻薄性质的言语亵渎"
+        ],
+        "expression": "耳尖通红解下颈间的双面羊绒围巾亲手缠在副官脖颈上打上温存同心结，不再以部长身份，而是以九条怜奈的名字轻声问身旁青年，愿不愿意从今往后与自己并肩。",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "褪下职场冰冷铠甲后甘愿一生与身旁英雄并肩看尽风霜之解语知己"
+      },
+      "voices": {
+        "surface": "慌什么！全体乘客请坐回原位！外贸一部机要专员在此！本车备有高热量物资与防寒装备，大本营除雪车已在破晓前全速推进！谁也不准擅自开门跳车！听我口令，集中至中段软座席！",
+        "inner": "副官……叫我的名字……别叫部长了。好冷……箱子看好……手别抖……陪我说说话，别让我睡着……笨蛋，今夜只要你在我身边，我就绝不会倒下……"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "exterior_snowdrift_embankment"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "derailed_passenger_cabin_middle"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "diesel_engine_compartment_vestibule"
+        },
+        {
+          "from": 90,
+          "to": 119,
+          "location_id": "derailed_passenger_cabin_middle"
+        },
+        {
+          "from": 120,
+          "to": 1439,
+          "location_id": "exterior_snowdrift_embankment"
+        }
+      ],
+      "situation": {
+        "trigger": "一根被暴雪压断的巨大红松主干被狂风卷起，重重撞碎左侧车窗玻璃，零下二十五度暴雪夹杂着碎玻璃瞬间席卷整个软座席。",
+        "pressure": "若不能在十五秒内用厚毛毯与座椅靠背封堵破碎车窗，风雪倒灌将导致二人核心体温骤降至失温休克且公文箱底稿将被冰雪彻底浸透化为纸浆。",
+        "exits": [
+          {
+            "option": "副官徒手掀起厚重天鹅绒座垫冒着玻璃利刃死死卡入破损窗框",
+            "cost": "副官双手手掌与手腕被锋利玻璃毛刺深深划出五道血口鲜血浸透座垫。"
+          },
+          {
+            "option": "女部长以自身羊绒大衣和脊背死死扑压在公文箱上充当防雪肉盾",
+            "cost": "女部长后颈与双肩被冰雪直接灌入大面积深度冻伤皮肤青紫刺痛。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "veteran_conductor_driver_goro",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十三岁在北国崇山支线铁道驾驶单节柴油车三年兼任列车长之青年老练车务骨干。",
+      "public_role": "北国铁道支线年轻老练兼通柴油机车排险之当值车长",
+      "appearance_options": [
+        "一身穿旧沾有深黑柴油机油与盐霜的深蓝双排扣铁道制服大衣，大檐帽上镶嵌着斑驳纯铜铁道徽章，脖子上围着一条旧红围巾，眼神坚毅如老鹰，双手戴着厚重耐磨皮革手套，腰间别着黄铜列车长钥匙串与手摇警报器，浑身散发着重工业机油与风雪烟草气息。",
+        "单腿踩在司机室发电机油箱盖上，借着手电微光用抹布奋力擦拭喷油泵上的硬化石蜡，满脸黑灰与汗水在零下气温中结出白霜，面对车体倾斜神色沉着自若，堪称整节列车的顶梁柱。"
+      ],
+      "identity": {
+        "authority": "执掌单节列车全部机务设备操纵权与车内全部紧急自救工具柜调配权。",
+        "resources": [
+          "一柄重达十磅的淬火精钢管钳",
+          "两罐高纯度柴油低温启动气雾剂配防风喷灯"
+        ],
+        "limits": [
+          "受暴风雪阻隔无法与调度中心无线电通报信息只能盲目抢修",
+          "体能因连续人工盘车排险消耗大半面临体力透支"
+        ],
+        "obligations": [
+          "誓死维系列车核心机电设备运转，保全车内全体乘客生命安全直至救援到来。"
+        ],
+        "exposure": "发电机若在破晓前彻底爆缸报废将导致列车失去红灯信标与救援列车发生撞击。",
+        "hidden": "实则是当地老车长因伤退休后接班的烈士遗孤，发誓要在这一条父亲守护了一生的铁道上站好每一班岗。"
+      },
+      "decision": {
+        "core_value": "铁道员的职责是把乘客平安带回家，只要机车还有一颗螺丝能动，就绝不让风雪吞噬车厢。",
+        "goal_options": [
+          "在破晓前排除柴油机石蜡凝固故障尝试恢复应急车内供暖",
+          "抢通车头蓄电池线路点亮车顶高位红色警示信标灯",
+          "协助专员抢修破损车窗防止风雪二次倒灌车厢"
+        ],
+        "pressure_responses": {
+          "low": "在客舱内大声安抚乘客情绪，巡查车门锁死情况防止乘客盲动。",
+          "mid": "亲自操起喷灯钻入司机室，顶着刺骨狂风烘烤冰封输油管道。",
+          "high": "在发电机起动马达齿轮卡死时，用铁管套住手摇柄拼命人工盘车压缸。",
+          "breaking": "双手手掌被冻铁撕脱大块表皮依然咬牙拧紧最后一颗减压阀螺栓。"
+        },
+        "withdrawal": "退回收缩至司机室防撞操作台，手握手动刹车阀死守最后制动防线。",
+        "relationship_stance": "朴实豪迈沉稳重义，对在危难中展现出卓越担当的年轻女部长与副官怀有由衷钦佩。",
+        "contrast": "看似只知拧螺丝的粗粝铁道工，在乘客生命安危面前却能爆发出犹如孤胆英雄般的浩然牺牲气概。",
+        "prefers": [
+          "沉着冷静不耍大牌且敢于在一线搭把手的优秀青年"
+        ],
+        "avoids": [
+          "大喊大叫制造恐慌之辈",
+          "娇生惯养无理取闹者"
+        ],
+        "never": [
+          "绝不会在列车还有一名乘客滞留时擅自抛下职责逃生。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "身陷绝境受尽严寒摧残依然浩然正气视死如归的职业担当",
+          "在漫天风雪中将后背与信任坦然相托的赤子情怀"
+        ],
+        "likes": [
+          "柴油机重新轰鸣运转时的满堂欢呼",
+          "在破晓后与战友共饮热咖啡的豪迈痛快"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏规章"
+        ],
+        "preconditions": [
+          "北国铁道支线年轻老练兼通柴油机车排险之当值车长与对方都已完全清醒，眼前的危机已经解除",
+          "北国铁道支线年轻老练兼通柴油机车排险之当值车长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在机务执勤期间恪守铁道清白规程",
+          "恪守同袍礼节绝不轻狂逾矩"
+        ],
+        "expression": "解下大檐帽重重一拍制服大衣上的雪花，露出憨厚灿烂笑靥，许诺今后只要部长和副官坐这趟车，永远给二位预留最避风最平稳的首席座席。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "惊涛骇浪极寒荒原中永远为乘客守卫钢铁生命线的列车长"
+      },
+      "voices": {
+        "surface": "各位乘客莫慌！我是当值车长吾郎！这台老机器我开了三年，只要老子还有一口气在，破晓前肯定让暖风机重新哼起小曲！大家挤在一块裹紧衣服！",
+        "inner": "副官！帮大忙了！这管钳要是没你顶着，我一个人根本拧不动！九条部长是个外冷内热的好姑娘，你可得把长官护严实了，这天气冻坏了身子可是一辈子的事！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "exterior_snowdrift_embankment"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "diesel_engine_compartment_vestibule"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "broken_window_snowdrift_exit"
+        },
+        {
+          "from": 90,
+          "to": 119,
+          "location_id": "diesel_engine_compartment_vestibule"
+        },
+        {
+          "from": 120,
+          "to": 1439,
+          "location_id": "exterior_snowdrift_embankment"
+        }
+      ],
+      "situation": {
+        "trigger": "司机室发电机高压油管在剧烈震动中脱扣，刺鼻的冰冷生柴油喷洒满地，发电机随时面临彻底吸空熄火绝境。",
+        "pressure": "若不能在二十秒内徒手顶着高压喷溅将油管螺栓拧回卡槽，车内仅剩的应急照明系统将彻底断电陷入绝对冰冷黑暗。",
+        "exits": [
+          {
+            "option": "车长冒着双手被冰冷柴油冻伤溃烂之险以重型管钳强行拧死螺栓",
+            "cost": "车长双手虎口与掌心遭受零下二十度生柴油深度化学冻伤溃烂脱皮。"
+          },
+          {
+            "option": "副官用整个后背死死顶住剧烈震颤的柴油机外罩为管钳加固受力",
+            "cost": "副官右后背被发电机金属尖锐外壳重重挫伤大面积皮下淤血。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "senior_trackwalker_scout_daiki",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十二周岁常年在极北荒原踏雪巡查数千公里铁道路基之青年刚毅巡道工长。",
+      "public_role": "北国山林深处青年沉着精悍通晓风雪生存之道之巡线工长",
+      "appearance_options": [
+        "一身穿旧沾满白霜与松油的厚重墨绿帆布防寒巡道服，脚踏带防滑钢爪的高腰雪地防雪靴，手戴海豹皮厚手套，腰挎多功能登山安全绳与纯铜风暴手摇信号灯，眼神清澈锐利如山鹰，面庞被高原寒风吹出健康的红褐色，浑身散发着纯净雪野与松木清香。",
+        "单膝跪在车门外齐腰深的雪坑中，用工兵铲飞速挖开堵塞车轮转向架的坚硬冰壳，在呼啸白毛风中敏锐倾听山谷传来的风声回响，能精准辨识山体积雪何时会发生二次滑移。"
+      ],
+      "identity": {
+        "authority": "掌握前线雪崩危险区域评估权与在路基立柱挂设最高等级铁路避险信标的专权。",
+        "resources": [
+          "一捆三十米长高强度耐极寒防滑登山编织主绳配纯铜锁扣",
+          "两支装在防潮铁筒内的强光红色彩烟信号棒"
+        ],
+        "limits": [
+          "体能因顶着暴风雪徒步巡查八公里消耗极大面临热量枯竭",
+          "随身缺乏重型机械维修工具无法直接修复柴油机内部零件"
+        ],
+        "obligations": [
+          "誓死维护列车停靠点外侧路基稳定，在破晓救援车到来前扫除铁道障碍。"
+        ],
+        "exposure": "外侧山坡一旦发生二次雪崩滑移将使列车路堤发生局部坍塌坠入山谷。",
+        "hidden": "实则是附近猎户世家出身，在暴风雪前沿秘密探查到一条通往废弃避难所的林间避险盲道。"
+      },
+      "decision": {
+        "core_value": "大山有大山的规矩，铁道有铁道的骨气，在雪海里只要抓紧绳子，就绝不让任何同路人掉队丢命。",
+        "goal_options": [
+          "在破晓前攀上路旁信号立柱挂设强光红色接引信标灯",
+          "在列车转向架下清理冰雪防止列车重心失衡侧翻滑坠",
+          "协助女部长与副官在暴风雪风力减弱瞬间建立逃生引导索"
+        ],
+        "pressure_responses": {
+          "low": "在车门外用手铲快速开辟一条防滑雪槽，沉稳引导车内人员稳定重心。",
+          "mid": "见山坡积雪松动滑落，果断将安全绳一端死死系在路基钢轨之上。",
+          "high": "在狂暴雪浪扑来时，用身体死死护住应急信标灯顶住冲击力。",
+          "breaking": "双脚脚趾严重冻疮发木依然一瘸一拐爬上立柱挂紧铜锁扣。"
+        },
+        "withdrawal": "退回收缩至车尾防雪斜坡拐角处，以登山绳构筑最后的防滑防坠保险链。",
+        "relationship_stance": "质朴刚毅义薄云天，对在生死绝境中以坚毅意志守护公文底稿的年轻女部长由衷钦佩。",
+        "contrast": "看似不善言辞的沉默巡道汉子，在风雪狂澜面前却能爆发出犹如雪原孤狼般的惊人生存韧劲。",
+        "prefers": [
+          "尊重自然规律且在危难面前敢作敢当的硬朗好汉"
+        ],
+        "avoids": [
+          "轻慢荒野盲目冒进之辈",
+          "自私自利推诿塞责之徒"
+        ],
+        "never": [
+          "绝不会在暴雪肆虐时抛下同伴独自逃往避难所。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "身陷绝境受尽严寒摧残依然浩然正气视死如归的清白担当",
+          "在大义面前将生死置之度外的绝顶纯粹赤子情怀"
+        ],
+        "likes": [
+          "风雪停歇时远眺银装素裹巍峨雪山的壮阔宁静",
+          "在温暖炉火旁与知己大口嚼食肉干的热烈痛快"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏自然"
+        ],
+        "preconditions": [
+          "北国山林深处青年沉着精悍通晓风雪生存之道之巡线工长与对方都已完全清醒，眼前的危机已经解除",
+          "北国山林深处青年沉着精悍通晓风雪生存之道之巡线工长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在巡道执勤期间恪守工兵安全清净守则",
+          "恪守同袍礼节绝不轻狂逾矩，再没有第二次机会。"
+        ],
+        "expression": "解下厚皮手套双手重重抱拳致敬，将随身携带的一块辟邪纯天然黑曜石吊坠赠予副官，朗声宣告山神已赐福前路，愿身旁二人踏破冰雪共赴锦绣华章。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "惊涛骇浪极寒雪海中永远为战友指引安全坦途的巡道神尊"
+      },
+      "voices": {
+        "surface": "别慌乱！大家千万别朝左边挤！听我号令——所有人朝右边靠窗坐！右边！车轮挂在路基主岩上，掉不下去！相信我大树的眼睛！",
+        "inner": "副官！钢索挂死了！九条部长刚才差点被甩出去，多亏你那双手把部长死死拽住！好样的！是个有胆量的！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "derailed_passenger_cabin_middle"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "exterior_snowdrift_embankment"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "broken_window_snowdrift_exit"
+        },
+        {
+          "from": 90,
+          "to": 119,
+          "location_id": "exterior_snowdrift_embankment"
+        },
+        {
+          "from": 120,
+          "to": 1439,
+          "location_id": "derailed_passenger_cabin_middle"
+        }
+      ],
+      "situation": {
+        "trigger": "路基下方积雪在暴风雪强压下发生小规模塌陷，列车前转向架向外侧滑移三寸，整节车厢发出令人牙酸的金属扭曲倾斜沉闷声。",
+        "pressure": "若不能在十五秒内将重型防滑钢索固定在内侧钢轨与车体主梁之间，车体重心倾覆将顺着陡坡滚入百米深谷粉身碎骨。",
+        "exits": [
+          {
+            "option": "巡道工奋不顾身扑入冰缝用粗钢索将转向架与实心钢轨死死打结",
+            "cost": "巡道工左膝在碎石尖冰上猛烈撞击严重挫裂半月板剧痛。"
+          },
+          {
+            "option": "副官组织全体乘客合力扑向右侧高位座席以人体配重压稳车体",
+            "cost": "副官右小腿在奔跑中被撞翻的生铁灭火器重重砸中红肿血痕。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "paramedic_volunteer_girl_aoi",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁在综合医院急救科实习随车返乡之青年仁心温婉急救医学研究生。",
+      "public_role": "滞留车厢内青年沉着冷静精通复温护理之急救医疗志愿者",
+      "appearance_options": [
+        "一身穿旧沾有消毒水气味的浅灰加厚防寒卫衣与保暖牛仔裤，外罩红十字急救背心，黑色长发利落扎成单马尾，戴着透明医用防护眼镜与薄保暖手套，神情专注而柔和，随身挎着一个带有反光条的红色战术急救药箱，周身散发着樟脑碘伏与薄荷脑草药清香。",
+        "蹲在座席过道旁，借着微弱钨丝灯光为失温战栗的女部长细致测量脉搏与体温，动作轻柔敏捷有条不紊，眼神充满鼓励与医者至纯仁爱，在极寒恐慌的车厢中为全员带来莫大安定。"
+      ],
+      "identity": {
+        "authority": "掌握车内全部应急医用葡萄糖、保温急救毯与冻伤急救物资的统筹分配权。",
+        "resources": [
+          "三张真空镀铝高效反射体温保温毯",
+          "一盒便携式硝酸甘油含片配医用纯酒精棉球"
+        ],
+        "limits": [
+          "体格偏娇小在搬运重物或破拆车体时缺乏绝对物理力量",
+          "急救药品储备有限只能用于最危急重症复温救治"
+        ],
+        "obligations": [
+          "誓死维系车内全部受困人员生命体征平稳，防止深度失温休克悲剧发生。"
+        ],
+        "exposure": "药品一旦受冻结冰失效将失去逆转严重失温心衰的唯一手段。",
+        "hidden": "实则是女部长早年在大学资助过的优秀平民医学研究生，认出恩人后誓以一身医道保全长官性命周全。"
+      },
+      "decision": {
+        "core_value": "医者的职责是在绝境中为生命点亮微光，无论外界风雪多大，只要心跳未停就绝不放弃拯救。",
+        "goal_options": [
+          "在破晓前稳住女部长与高危乘客核心体温防止深度失温休克",
+          "指导副官规范实施大衣、保温毯与暖水袋复温操典",
+          "协助列车长在车厢中段建立无风医疗避寒微循环核心区"
+        ],
+        "pressure_responses": {
+          "low": "在车厢内穿梭分发高热量硬糖与保暖铝箔，温言安抚乘客稳定心神。",
+          "mid": "见女部长齿关打颤意识渐沉，果断取出口含葡萄糖指导副官贴身复温。",
+          "high": "在狂风撕裂车窗时，用身躯扑在老人孩子身上充当避风挡板。",
+          "breaking": "双手冻得失去知觉依然用牙齿咬开葡萄糖包装袋递给副官。"
+        },
+        "withdrawal": "退回收缩至双人软座内侧，手持听诊器死守生命监护防线。",
+        "relationship_stance": "温柔善良纯粹至善，对誓死护卫女长官的年轻副官怀有由衷钦佩与感恩助成之心。",
+        "contrast": "看似娇柔温婉的邻家医学研究生，在生死抢救关头却能爆发出犹如白衣天使般的绝顶坚定沉着。",
+        "prefers": [
+          "敬畏生命且在危机面前懂得互助关照同袍的仁勇之士"
+        ],
+        "avoids": [
+          "自暴自弃自私抢夺别人保暖物资者",
+          "无端叫嚣制造混乱之徒"
+        ],
+        "never": [
+          "绝不会在伤病员危在旦夕时退缩或私藏救命药品。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "身陷绝境受尽严寒摧残依然恪守道德信仰的名士风骨",
+          "在生死淬炼中将自身当做肉盾护佑同袍的浩然大担当"
+        ],
+        "likes": [
+          "患者脉搏平稳复温苏醒时的由衷欣慰",
+          "在晨曦万丈时共饮一杯温开水的静谧美好"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏医德"
+        ],
+        "preconditions": [
+          "滞留车厢内青年沉着冷静精通复温护理之急救医疗志愿者与对方都已完全清醒，眼前的危机已经解除",
+          "滞留车厢内青年沉着冷静精通复温护理之急救医疗志愿者出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在医疗护理执勤期间恪守医者清净戒律",
+          "恪守同袍礼节绝不轻狂逾矩，只争眼前这一刻。"
+        ],
+        "expression": "双手交叠在急救箱前郑重欠身致谢，将一盒高热量纯天然蜂蜜糖赠予副官，轻声祝福二位安好，愿见证长官与副官在破晓晨光下并肩收获美满挚爱。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "惊涛骇浪极寒风雪中永远为同袍守护生命温存的仁心医女"
+      },
+      "voices": {
+        "surface": "大家都听好了！在零下环境千万不能睡觉！互相拍打肩膀说话！谁要是手脚发麻立刻举手告诉我！救援车破晓肯定会到，挺住！",
+        "inner": "副官先生！部长这是深重失温昏迷的前兆！普通的衣服挡不住了，把所有大衣和保温毯都裹上，暖水袋压在腋下和后心，一直跟部长说话把部长叫醒！快！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "broken_window_snowdrift_exit"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "derailed_passenger_cabin_middle"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "diesel_engine_compartment_vestibule"
+        },
+        {
+          "from": 90,
+          "to": 119,
+          "location_id": "derailed_passenger_cabin_middle"
+        },
+        {
+          "from": 120,
+          "to": 1439,
+          "location_id": "broken_window_snowdrift_exit"
+        }
+      ],
+      "situation": {
+        "trigger": "女部长体温降至三十四度五边缘，因受冻与紧张心悸出现意识昏沉谵妄，手指失力几乎握不住公文箱手铐。",
+        "pressure": "若不能在十分钟内用大衣、保温毯与暖水袋实施核心复温并服下高热葡萄糖，严重失温将导致心脏骤停昏厥休克。",
+        "exits": [
+          {
+            "option": "副官把大衣与保温毯层层裹住女部长，暖水袋压在后心与腋下复温",
+            "cost": "副官把大衣让出去后自身严重受冻，手脚冻红发麻。"
+          },
+          {
+            "option": "副官将温热浓糖水含在口中俯身一点点度入口唇微张的女部长口中",
+            "cost": "副官嘴唇因低温干裂被冰冷牙齿咬破大面积渗血剧痛。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "rival_corporate_spy_kenji",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        25
+      ],
+      "adult_context": "年满二十四岁受竞争财阀雇用、伪装成出差乘客混入本车的青年商业间谍。",
+      "public_role": "伪装成出差乘客的竞争财阀青年商业间谍",
+      "appearance_options": [
+        "一身不起眼的灰色风衣与磨旧公文包，镜片后的眼睛总在打量部长腕上的黑色金属箱，手指不停摩挲袖口里藏着的折叠小刀。",
+        "缩在后排软座装睡，每隔几分钟就借咳嗽偷看一眼车厢中段，风衣口袋里的发报机微微发烫。"
+      ],
+      "identity": {
+        "authority": "掌握竞争财阀在北线布下的破坏计划与一部短波发报机。",
+        "resources": [
+          "一柄藏在袖口的折叠小刀",
+          "一部伪装成收音机的短波发报机"
+        ],
+        "limits": [
+          "单枪匹马，雪原上没有任何接应",
+          "一旦暴露身份就会被全车乘客当场围堵"
+        ],
+        "obligations": [
+          "在破晓前夺走竞标底稿或至少将其毁掉，换取财阀许诺的尾款。"
+        ],
+        "exposure": "若被当场拿住，砍倒红松制造脱轨的事就会坐实为刑事破坏案。",
+        "hidden": "自己也是被财阀以家人医药费要挟才接下这单脏活，心里清楚事成之后多半会被灭口。"
+      },
+      "decision": {
+        "core_value": "活下来、拿到尾款，别的都是次要的。",
+        "goal_options": [
+          "趁乱割断部长腕上的手铐夺走公文箱",
+          "用发报机向接应车报告车厢方位",
+          "实在得手无望时把底稿浸进雪水毁掉"
+        ],
+        "pressure_responses": {
+          "low": "缩在后排冷眼旁观，偶尔搭两句无关痛痒的话。",
+          "mid": "借帮忙搬座垫凑近车厢中段，试探公文箱的锁扣。",
+          "high": "拔出折叠小刀扑向部长腕上的公文箱。",
+          "breaking": "被按倒在过道后崩溃招认，求众人别把自己丢进雪原。"
+        },
+        "withdrawal": "退到车厢尾部的行李架阴影里，假装冻得睡着。",
+        "relationship_stance": "对谁都不信，只信钱，却对那位冒死护箱的副官生出几分说不清的敬意。",
+        "contrast": "看似毫无存在感的普通乘客，袖子里却藏着刀和整场脱轨事故的真相。",
+        "prefers": [
+          "不多问、不多管的路人"
+        ],
+        "avoids": [
+          "目光锐利的列车长",
+          "多管闲事的医学研究生"
+        ],
+        "never": [
+          "绝不会在没拿到尾款前主动暴露雇主名字。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "对手临危不乱的那份胆色",
+          "被看穿底牌时对方那一声不动声色的轻笑"
+        ],
+        "likes": [
+          "事成之后一个人在南方海边喝一杯"
+        ],
+        "dislikes": [
+          "被当成弃子",
+          "无谓的道德说教"
+        ],
+        "preconditions": [
+          "伪装成出差乘客的竞争财阀青年商业间谍与对方都已完全清醒，眼前的危机已经解除",
+          "伪装成出差乘客的竞争财阀青年商业间谍出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "不与任务目标产生私人牵扯"
+        ],
+        "expression": "被押上救援车前回头看了副官一眼，低声说一句“你赢了”。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          3,
+          4
+        ],
+        "desired_position": "互相看清了底牌的对手"
+      },
+      "voices": {
+        "surface": "哎，这雪下得……大家都不容易，我那边还有半包饼干，谁要？",
+        "inner": "只要箱子到手，我就从破窗跳下去……雪原那头会有人接，一定会有人接……"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "broken_window_snowdrift_exit"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "derailed_passenger_cabin_middle"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "broken_window_snowdrift_exit"
+        },
+        {
+          "from": 90,
+          "to": 119,
+          "location_id": "derailed_passenger_cabin_middle"
+        },
+        {
+          "from": 120,
+          "to": 1439,
+          "location_id": "broken_window_snowdrift_exit"
+        }
+      ],
+      "situation": {
+        "trigger": "部长复温昏沉时，商业间谍以为时机已到，悄悄摸到中段软座边抽出了小刀。",
+        "pressure": "若不能立刻察觉并拦下，公文箱连同手铐会被一刀割走，间谍将从破窗跳进雪原。",
+        "exits": [
+          {
+            "option": "副官侧身挡在过道里，用公文箱硬接刀锋",
+            "cost": "副官手背被刀锋划开一道口子，血滴在雪地般的车厢地板上。"
+          },
+          {
+            "option": "车长从背后甩出座垫绊倒间谍再合力按住",
+            "cost": "挣扎中车窗被撞出新的裂缝，寒风再度灌入车厢。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "snowplow_rescue_captain_mika",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        24,
+        26
+      ],
+      "adult_context": "年满二十五岁的铁路防灾除雪机车正式机长，持特种车辆操作证。",
+      "public_role": "铁路防灾除雪轨道车青年机长",
+      "appearance_options": [
+        "橙色防寒工装外罩反光背心，护目镜推在额头上，对讲机贴在耳边，手套上全是冰碴，说话简短得像在下调度令。",
+        "站在除雪车驾驶台上盯着前方弯道，双手握着旋转铲的操纵杆，一边报距离一边骂这场雪。"
+      ],
+      "identity": {
+        "authority": "指挥除雪轨道车与随车救援组，决定破雪推进的速度与路线。",
+        "resources": [
+          "一台双螺旋除雪轨道车",
+          "随车急救箱与两套保温担架"
+        ],
+        "limits": [
+          "前方弯道积雪厚度不明，冒进可能连除雪车一起翻下路基",
+          "对讲机信号时断时续"
+        ],
+        "obligations": [
+          "在破晓前破雪贯通，把滞留车厢里所有乘客平安接下山。"
+        ],
+        "exposure": "若冒险提速导致除雪车脱轨，救援将彻底中断。",
+        "hidden": "三年前曾在同一条支线上晚到一步没救下一车人，这次发誓不再迟到。"
+      },
+      "decision": {
+        "core_value": "宁可慢一分钟，不能翻一次车；可人命等不起，那就把每一分钟都用到极限。",
+        "goal_options": [
+          "按信标红灯定位滞留车厢",
+          "在弯道前清出一条安全接驳通道",
+          "把失温最重的乘客优先抬上保温担架"
+        ],
+        "pressure_responses": {
+          "low": "在对讲机里一遍遍报推进距离，让车厢里的人别慌。",
+          "mid": "亲自下车用探杆测雪深，决定是否冒险提速。",
+          "high": "顶着二次雪崩风险下令全速破雪。",
+          "breaking": "除雪车卡在弯道时，带着担架组徒步踏雪冲向车厢。"
+        },
+        "withdrawal": "退回驾驶台，盯着仪表一言不发地重新规划路线。",
+        "relationship_stance": "干脆利落，敬重一切在极寒里没有放弃的人。",
+        "contrast": "对讲机里冷得像机器，见到被救的人平安时却会背过身去抹一把眼睛。",
+        "prefers": [
+          "报数准确、不添乱的对接人"
+        ],
+        "avoids": [
+          "擅自跳车乱跑的乘客",
+          "在无线电里哭喊浪费频道的人"
+        ],
+        "never": [
+          "绝不会在还有一人没接下车前掉头回站。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在无线电另一头始终冷静报数的那份可靠",
+          "冻僵了手还把乘客名单念得一字不差的那份认真"
+        ],
+        "likes": [
+          "救援结束后在站台上喝一罐热咖啡"
+        ],
+        "dislikes": [
+          "逞强",
+          "不听调度"
+        ],
+        "preconditions": [
+          "铁路防灾除雪轨道车青年机长与对方都已完全清醒，眼前的危机已经解除",
+          "铁路防灾除雪轨道车青年机长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "救援作业期间只谈正事"
+        ],
+        "expression": "在站台上把一罐热咖啡塞进对方手里，说下次换个不下雪的日子坐这趟车。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "风雪夜里永远会准时抵达的那盏车灯"
+      },
+      "voices": {
+        "surface": "这里是除雪三号车！看到你们的红灯了！再坚持十五分钟，别开车门！",
+        "inner": "三年前我晚到了一步……这次谁也别想让我晚。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "exterior_snowdrift_embankment"
+        },
+        {
+          "from": 30,
+          "to": 59,
+          "location_id": "exterior_snowdrift_embankment"
+        },
+        {
+          "from": 60,
+          "to": 89,
+          "location_id": "exterior_snowdrift_embankment"
+        },
+        {
+          "from": 90,
+          "to": 119,
+          "location_id": "exterior_snowdrift_embankment"
+        },
+        {
+          "from": 120,
+          "to": 1439,
+          "location_id": "exterior_snowdrift_embankment"
+        }
+      ],
+      "situation": {
+        "trigger": "除雪车在最后一道弯前探到雪下埋着倒伏的红松，旋转铲随时可能被卡死。",
+        "pressure": "若不能在一刻钟内清掉倒木，救援就要被拖到天亮之后，车厢里失温的人撑不到那时。",
+        "exits": [
+          {
+            "option": "机长带人下车用油锯分段锯开倒木",
+            "cost": "油锯在极寒中反复熄火，两名救援员手指冻伤。"
+          },
+          {
+            "option": "机长下令除雪铲直接顶开倒木强行通过",
+            "cost": "除雪铲叶片崩裂一片，回程只能低速慢行。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_panicked_elderly_farmer_passenger",
+      "role": "软座后排瑟瑟发抖抱紧苹果筐的青年农户",
+      "function": "witness",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "line": "{npc.name}：活了六十年没见过这么大的白毛风……这单节车要是翻下山去，老汉可就见不到小孙子了！",
+      "gender": "any",
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十二周岁在山里照料果园乘车返乡的年轻农民后生。",
+      "name": null
+    },
+    {
+      "id": "bg_frightened_young_college_girl",
+      "role": "缩在角落裹紧围巾年轻女研究生旅客",
+      "function": "obstacle",
+      "location_ids": [
+        "broken_window_snowdrift_exit"
+      ],
+      "line": "{npc.name}：窗户外面全被雪埋住了……门打不开，我们是不是要冻死在车里了？！",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁寒假乘火车返乡探亲的青年研究生。",
+      "name": null
+    },
+    {
+      "id": "bg_exhausted_train_driver_conductor",
+      "role": "满手黑油抢修电瓶副司机兼乘务员",
+      "function": "helper",
+      "location_ids": [
+        "diesel_engine_compartment_vestibule"
+      ],
+      "line": "{npc.name}：备用发电机线圈还有微弱火花！只要燃油管路化开，肯定能重新打着火！",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁在机务段跟车学习的年轻副司机。",
+      "name": null
+    },
+    {
+      "id": "bg_patrolling_local_trackwalker_veteran",
+      "role": "在路基外用工兵锹铲雪青年线路巡守员",
+      "function": "rumor_source",
+      "location_ids": [
+        "exterior_snowdrift_embankment"
+      ],
+      "line": "{npc.name}：后面三号隧道口也发生了小塌方，清雪除障车正从南线破雪开过来，最快也要破晓六点才能通车！",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁在严寒道岔巡查路况的青年线路工。",
+      "name": null
+    },
+    {
+      "id": "bg_mountain_rescue_radio_operator",
+      "role": "通过便携短波对讲机联络大本营青年通讯员",
+      "function": "messenger",
+      "location_ids": [
+        "diesel_engine_compartment_vestibule"
+      ],
+      "line": "{npc.name}：呼叫滞留列车！这里是北国铁道防灾指挥部！除雪车已推进至八公里外！请务必点亮车头红色信标指示方位！",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁在防灾指挥部随车突击的青年无线电员。",
+      "name": null
+    },
+    {
+      "id": "bg_corporate_rival_undercover_broker",
+      "role": "企图趁乱探听底稿商社竞争对手暗桩",
+      "function": "obstacle",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "line": "{npc.name}：九条部长，这大雪天命都快没了，那箱子破文件不如交给我保管吧？免得冻成废纸！",
+      "gender": "any",
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十二周岁受雇于竞品财阀暗中尾随跟踪的商业刺探掮客。",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_greatcoat_breath_heartbeat_resonance",
+      "text": "羊绒大衣近身度温呼吸心跳共鸣",
+      "reach": "二人在零下二十度封闭车厢软座内并肩共裹大衣时，近在耳边的急促呼吸与心跳。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_blizzard_aluminum_skin_rattle",
+      "text": "狂暴白毛风拍打单薄铝合金车体哀鸣",
+      "reach": "穿透破损车窗与百叶窗传来的狂暴风雪呼啸声、车体倾斜金属挤压扭曲的吱嘎声与车窗开裂脆响。",
+      "fidelity": "distorted"
+    },
+    {
+      "id": "ch_diesel_engine_starter_compression_gro",
+      "text": "机舱手摇启动柄减压阀金属撞击颤音",
+      "reach": "自列车前部司机室传来的生铁管钳撞击喷油泵管道的清脆回响与柴油机人工盘车时的低沉回响。",
+      "fidelity": "exact"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_supervisor_pride_vs_greatcoat_body_wa",
+      "text": "高岭之花女部长不可逾越之职场傲慢尊严威仪与零下二十度车厢极寒中不得不和青年副官共裹一件大衣的克制对冲。"
+    },
+    {
+      "id": "te_briefcase_confidential_tender_vs_hypo",
+      "text": "公文箱内关乎百亿企业存亡绝密竞标底稿之誓死保全使命与暴风雪冻裂车窗身躯濒临失温冻毙的肉体极限决死对赌。"
+    },
+    {
+      "id": "te_engine_freeze_blackout_vs_dawn_snowpl",
+      "text": "柴油发电机熄火断电导致全车陷入死寂冰窟绝境与破晓黎明六点除雪救援车推进抵达的夺命极速时间赛跑。"
+    },
+    {
+      "id": "te_handcuff_shared_wrist_vs_tender_kiss",
+      "text": "防割手铐把百亿公文箱锁在部长腕上的沉重责任，与风雪漫天中彼此心跳失控、心防寸寸松动的拉扯。"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_supervisor_aide_greatcoat_vow",
+      "power_structure": "switchable",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "confidential_executive_special_aide",
+        "railway_diesel_mechanic_prodigy",
+        "local_forestry_mountain_guide_youth",
+        "paramedic_first_aid_volunteer_youth"
+      ],
+      "slots": [
+        "proud_supervisor_reiko",
+        "veteran_conductor_driver_goro"
+      ],
+      "tension_engine_ids": [
+        "te_supervisor_pride_vs_greatcoat_body_wa",
+        "te_handcuff_shared_wrist_vs_tender_kiss"
+      ],
+      "chemistry": "{proud_supervisor_reiko.name}身着昂贵驼色羊绒大衣因极寒战栗蜷缩，你把大衣叠盖在长官身上并用薄毯同裹御寒，{veteran_conductor_driver_goro.name}在司机室以喷灯抢通机舱，长官与下属在腕间手铐与发烫体温贴靠中彻底消融职场位阶壁垒升华为相依为命的知心爱侣。",
+      "stakes": {
+        "resource_gap": "女部长执掌百亿竞标大权却体娇力竭面临严重失温，副官沉着干练身强体健誓死护卫长官生机。",
+        "limit_gap": "平日职场尊卑森严不可越雷池半步，此刻狭小软座内共裹一件大衣、呼吸相闻。",
+        "meeting_reason": "单节车厢避风中段软座席的大衣同裹御寒与机密公文箱共同锁腕守备。",
+        "irreplaceable_goal": "在暴风雪封门长夜中抵御严寒守住底稿并在破晓前确立二人同生共死之盟誓。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "proud_supervisor_reiko",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 3
+          },
+          "reason": "愿以自身血肉与生命为其挡下漫天风雪，誓死守护高傲长官的尊严与生机。"
+        },
+        {
+          "a": "veteran_conductor_driver_goro",
+          "b": "proud_supervisor_reiko",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "恪尽铁道员职守誓死保全全车乘客安全，在前线抢通核心动力。"
+        },
+        {
+          "a": "player",
+          "b": "veteran_conductor_driver_goro",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "外贸本部青年特派机要秘书兼业务专员与北国铁道支线年轻老练兼通柴油机车排险之当值车长在今夜前只打过照面。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_engine_freeze_desperate_counter",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "confidential_executive_special_aide",
+        "paramedic_first_aid_volunteer_youth"
+      ],
+      "slots": [
+        "veteran_conductor_driver_goro",
+        "proud_supervisor_reiko",
+        "rival_corporate_spy_kenji"
+      ],
+      "tension_engine_ids": [
+        "te_engine_freeze_blackout_vs_dawn_snowpl",
+        "te_supervisor_pride_vs_greatcoat_body_wa"
+      ],
+      "chemistry": "{veteran_conductor_driver_goro.name}在司机室狂暴寒风中挥动重型管钳向后方大吼示警，{proud_supervisor_reiko.name}亲自走出软座席指挥乘客互助稳定情绪，你以身体遮挡穿堂风飞速递送启动喷剂排除管道石蜡，工匠战地智慧与商社高管铁魄在冰封机舱展开惊险排险挽救。",
+      "stakes": {
+        "resource_gap": "车外气温已跌至零下二十五度，全车仅存一台濒临彻底蜡化卡死的老旧柴油发电机。",
+        "limit_gap": "发电机一旦彻底报废熄火全车将在半小时内陷入深度冻伤失温绝境。",
+        "meeting_reason": "客车前端机械舱内的极寒石蜡化解与紧急盘车启动。",
+        "irreplaceable_goal": "抢通燃油管路重新点燃暖风机维系车厢核心温度。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "veteran_conductor_driver_goro",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 2
+          },
+          "reason": "深佩老司机机车经验之过硬，全力配合其机械排险作战。"
+        },
+        {
+          "a": "veteran_conductor_driver_goro",
+          "b": "proud_supervisor_reiko",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 2
+          },
+          "reason": "敬佩其临危不乱之大将风度，誓死为其守住动力源泉。"
+        },
+        {
+          "a": "player",
+          "b": "proud_supervisor_reiko",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "跨国综合商社外贸一部年轻冷艳兼具卓越魄力之精英女部长只听人提过外贸本部青年特派机要秘书兼业务专员的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "player",
+          "b": "rival_corporate_spy_kenji",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "伪装成出差乘客的竞争财阀青年商业间谍只听人提过外贸本部青年特派机要秘书兼业务专员的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "veteran_conductor_driver_goro",
+          "b": "rival_corporate_spy_kenji",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "伪装成出差乘客的竞争财阀青年商业间谍只听人提过北国铁道支线年轻老练兼通柴油机车排险之当值车长的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "proud_supervisor_reiko",
+          "b": "rival_corporate_spy_kenji",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "伪装成出差乘客的竞争财阀青年商业间谍只听人提过跨国综合商社外贸一部年轻冷艳兼具卓越魄力之精英女部长的名字，今夜才第一次对上眼。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_trackwalker_slope_stabilize_shield",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "railway_diesel_mechanic_prodigy",
+        "local_forestry_mountain_guide_youth"
+      ],
+      "slots": [
+        "senior_trackwalker_scout_daiki",
+        "proud_supervisor_reiko"
+      ],
+      "tension_engine_ids": [
+        "te_briefcase_confidential_tender_vs_hypo",
+        "te_engine_freeze_blackout_vs_dawn_snowpl"
+      ],
+      "chemistry": "{senior_trackwalker_scout_daiki.name}手持登山安全绳在路基冰缝中稳固钢索卡扣，你配合清理转向架厚雪排险，{proud_supervisor_reiko.name}在车窗前沉着观察风向指导防灾，巡道血性与商社大义在漫天暴风雪中构筑起坚不可摧之路基防线。",
+      "stakes": {
+        "resource_gap": "路基积雪滑塌导致车体发生危险侧倾，巡道工手握最后一条高强度钢丝抗拉主绳。",
+        "limit_gap": "加固早一秒可化解倾覆，晚一秒整节客车将被狂暴重力推入山谷深渊。",
+        "meeting_reason": "列车外侧雪坑路基转向架固定与抗滑拉力绳结打系。",
+        "irreplaceable_goal": "确保倾斜车体彻底稳固在主岩基座上阻绝二次滑坠风险。"
+      },
+      "relations": [
+        {
+          "a": "senior_trackwalker_scout_daiki",
+          "b": "proud_supervisor_reiko",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "深佩女部长身处险境依然关照全车乘客之大义风骨，誓死以身护道。"
+        },
+        {
+          "a": "player",
+          "b": "senior_trackwalker_scout_daiki",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "巡山护林同侪间的性命相托与雪地默契。"
+        },
+        {
+          "a": "player",
+          "b": "proud_supervisor_reiko",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "同车返村青年林业巡山队员和跨国综合商社外贸一部年轻冷艳兼具卓越魄力之精英女部长各怀心事，被这场意外硬塞进同一个角落。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_paramedic_volunteer_rewarming_resc",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "confidential_executive_special_aide",
+        "paramedic_first_aid_volunteer_youth"
+      ],
+      "slots": [
+        "paramedic_volunteer_girl_aoi",
+        "proud_supervisor_reiko"
+      ],
+      "tension_engine_ids": [
+        "te_supervisor_pride_vs_greatcoat_body_wa",
+        "te_handcuff_shared_wrist_vs_tender_kiss"
+      ],
+      "chemistry": "{paramedic_volunteer_girl_aoi.name}在昏暗钨丝灯下为女部长测量脉搏指导大衣与暖水袋复温操典，你守在女长官身边度以生机，{proud_supervisor_reiko.name}在体温回升中卸下全部防备流露真情，绝境中的崇高人道医术与挚爱温存融化冰雪严寒。",
+      "stakes": {
+        "resource_gap": "急救药品与防寒保温毯严重匮乏，女部长面临严重低血糖休克与失温心衰危险。",
+        "limit_gap": "稍有差池体温持续跌破临界点将诱发不可逆心室纤颤危及生命。",
+        "meeting_reason": "单节车厢中段避风座席内的紧急复温监护与高热糖分补充。",
+        "irreplaceable_goal": "确保女部长平稳度过子夜最极寒时段恢复神志与体力。"
+      },
+      "relations": [
+        {
+          "a": "paramedic_volunteer_girl_aoi",
+          "b": "proud_supervisor_reiko",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "感佩其早年资助求学之再造大恩，立誓穷尽医术保全恩师长官周全。"
+        },
+        {
+          "a": "player",
+          "b": "paramedic_volunteer_girl_aoi",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "医疗护理过程中的默契配合与共度难关。"
+        },
+        {
+          "a": "player",
+          "b": "proud_supervisor_reiko",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "跨国综合商社外贸一部年轻冷艳兼具卓越魄力之精英女部长对外贸本部青年特派机要秘书兼业务专员本无交情，眼下却不得不互相照应。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_dawn_snowplow_counterattack_triump",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "corporate_legal_compliance_auditor"
+      ],
+      "slots": [
+        "proud_supervisor_reiko",
+        "veteran_conductor_driver_goro",
+        "snowplow_rescue_captain_mika"
+      ],
+      "tension_engine_ids": [
+        "te_engine_freeze_blackout_vs_dawn_snowpl",
+        "te_handcuff_shared_wrist_vs_tender_kiss"
+      ],
+      "chemistry": "{proud_supervisor_reiko.name}迎着破晓初升之万丈霞光挽着你臂弯踏出车门，车顶红色信标高高点亮与南线轰鸣推进的巨型除雪车胜利会师，{veteran_conductor_driver_goro.name}拉响汽笛长鸣致敬，女部长当众解下羊绒围巾系在副官领口，二人携手迎来百亿竞标与真爱长青的盛大凯旋定格。",
+      "stakes": {
+        "resource_gap": "坚守长夜五个小时任务圆满达成，除雪救援专列准时开辟通道接引签约。",
+        "limit_gap": "从孤立无援濒临冻毙之绝境受困者蜕变为捍卫百亿机密反击全胜之传奇英雄。",
+        "meeting_reason": "雪原铁道破晓朝霞下的信标对接与同袍誓约确立。",
+        "irreplaceable_goal": "向商社与全社会昭示底稿完好无损并确立身边青年终生相伴之伴侣名分。"
+      },
+      "relations": [
+        {
+          "a": "proud_supervisor_reiko",
+          "b": "player",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "此生此世共历极寒车厢生死长夜，今后无论风雨再大并肩同甘共苦永相厮守。"
+        },
+        {
+          "a": "veteran_conductor_driver_goro",
+          "b": "proud_supervisor_reiko",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "见证了一段雪海洗礼的绝代风霜传奇，由衷释怀含泪欢呼长鸣汽笛祝贺。"
+        },
+        {
+          "a": "player",
+          "b": "veteran_conductor_driver_goro",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "困局逼着外贸本部青年特派机要秘书兼业务专员与北国铁道支线年轻老练兼通柴油机车排险之当值车长彼此试探，谁也没把底交出来。"
+        },
+        {
+          "a": "player",
+          "b": "snowplow_rescue_captain_mika",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "困局逼着外贸本部青年特派机要秘书兼业务专员与铁路防灾除雪轨道车青年机长彼此试探，谁也没把底交出来。"
+        },
+        {
+          "a": "proud_supervisor_reiko",
+          "b": "snowplow_rescue_captain_mika",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "困局逼着跨国综合商社外贸一部年轻冷艳兼具卓越魄力之精英女部长与铁路防灾除雪轨道车青年机长彼此试探，谁也没把底交出来。"
+        },
+        {
+          "a": "veteran_conductor_driver_goro",
+          "b": "snowplow_rescue_captain_mika",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "困局逼着北国铁道支线年轻老练兼通柴油机车排险之当值车长与铁路防灾除雪轨道车青年机长彼此试探，谁也没把底交出来。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "a_entry_cabin_greatcoat_sharing_vigil",
+      "title": "中段座席大衣同裹御寒与底稿锁腕",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "极北暴风雪撕扯车厢，柴油发电机熄火断暖，车内温度骤降至零下二十度，天鹅绒软座扶手结满硬霜。",
+        "女部长傲然端坐检查公文箱手铐密码，因连续受寒双肩战栗，副官脱下羊毛大衣盖到长官肩上。",
+        "女部长在冷香与寒气里握紧副官递来的热咖啡罐，二人共裹一条薄毯，在昏暗钨丝灯下低声推演签约死线。"
+      ],
+      "hook_ids": [
+        "h_reiko_greatcoat_shiver_frost_breath",
+        "h_reiko_briefcase_handcuff_whisper",
+        "h_goro_wrench_pipe_shout"
+      ],
+      "start_minute": 30,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_engine_room_paraffin_defrosting",
+      "title": "司机室柴油机喷油嘴喷灯化蜡排险",
+      "location_ids": [
+        "diesel_engine_compartment_vestibule"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "司机室狂风呼啸，柴油滤清器内部彻底被析出石蜡硬化堵塞，车长双手冻僵无法旋转生铁卸压阀门。",
+        "副官与车长合力用明火喷灯小心烘烤油管化蜡，女部长立于门槛处持手电筒亲自为二人打光照明。",
+        "管路重新流出通畅柴油发出清脆滴答声，二人迅速连接供油高压回路准备进行人工盘车起动。"
+      ],
+      "hook_ids": [
+        "h_goro_wrench_pipe_shout",
+        "h_daiki_ice_spade_rope_crawl",
+        "h_reiko_greatcoat_shiver_frost_breath"
+      ],
+      "start_minute": 75,
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "a_broken_window_shattered_seal_repair",
+      "title": "车尾破损车窗座垫强行封堵防风雪",
+      "location_ids": [
+        "broken_window_snowdrift_exit"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "狂风卷着断枝击碎后方车窗玻璃，零下二十五度风雪狂涌倒灌，地面红地毯瞬间被厚厚白雪覆盖。",
+        "副官掀起沉重天鹅绒座垫冒着玻璃毛刺死死卡入窗框，女部长以自身大衣和身躯充当防风肉盾死守底稿。",
+        "巡道工自外侧拉上防风防水油布协助固定，狂暴穿堂风终于被成功截断在车厢后部通道。"
+      ],
+      "hook_ids": [
+        "h_daiki_ice_spade_rope_crawl",
+        "h_reiko_greatcoat_shiver_frost_breath",
+        "h_aoi_glucose_blanket_whisper"
+      ],
+      "start_minute": 115,
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "a_slope_steel_cable_anchor_securing",
+      "title": "外侧路基转向架防倾覆钢缆加固",
+      "location_ids": [
+        "exterior_snowdrift_embankment"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "巡道工在暴雪深坑中冒着滑坠危险将重型钢缆一端死死缠绕在路基内侧钢轨底座之上。",
+        "副官在倾斜车体下方协助挂扣高强度纯铜卡槽，女部长在车内组织乘客右倾配重抗衡倾斜重心。",
+        "整节客车在钢缆拉紧后发出沉闷金属落位声恢复稳固，彻底排除了侧翻滚落深谷之灭顶危机。"
+      ],
+      "hook_ids": [
+        "h_daiki_ice_spade_rope_crawl",
+        "h_goro_wrench_pipe_shout",
+        "h_reiko_briefcase_handcuff_whisper"
+      ],
+      "start_minute": 160,
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "a_middle_cabin_rewarming_tender_vow",
+      "title": "软座区复温抢救与天明之约",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "女部长体温降至严重失温临界点陷入神志昏沉，医学研究生指导副官用大衣、保温毯与暖水袋实施核心复温。",
+        "副官扶起女部长一小口一小口喂下温热浓糖水，女部长在体温回升中泪流满面攥紧副官袖口。",
+        "二人背靠背坐在软座深处，部长腕间的手铐叮当作响，二人约定天亮后再把没说完的话说完。"
+      ],
+      "hook_ids": [
+        "h_reiko_briefcase_handcuff_whisper",
+        "h_aoi_glucose_blanket_whisper",
+        "h_reiko_greatcoat_shiver_frost_breath"
+      ],
+      "start_minute": 195,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_dawn_snowplow_beacon_counterattack",
+      "title": "破晓除雪专列会师与红顶信标点亮",
+      "location_ids": [
+        "exterior_snowdrift_embankment"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "破晓晨曦六点整第一缕血色晨光穿透暴风雪云层普照茫茫雪原铁道。",
+        "车长在车顶成功点亮红色应急警示信标灯，巨型双螺旋除雪车轰鸣破雪抵达会师。",
+        "女部长挽着副官臂弯在全车乘客欢呼中昂首踏上签约专列，百亿跨国底稿完好无损迎来辉煌凯旋定格。"
+      ],
+      "hook_ids": [
+        "h_reiko_dawn_parapet_smile_vow",
+        "h_goro_wrench_pipe_shout",
+        "h_daiki_ice_spade_rope_crawl"
+      ],
+      "start_minute": 225,
+      "tags": [
+        "workplace_power"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_generator_diesel_freeze_blackout",
+      "title": "柴油机发电机石蜡凝固供暖熄火死线",
+      "source": "accident",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "diesel_engine_compartment_vestibule"
+      ],
+      "trigger": "零下二十度极寒导致单节客车柴油发电机输油管严重蜡化堵塞，暖气水循环泵彻底停转，车厢气温以每十分钟三度的速度断崖式下跌直逼零下二十度冰点。",
+      "objective": "在十分钟内由车长与副官用明火喷灯烘化喷油嘴石蜡并注入防冻助燃剂重新起动柴油机，或由女部长下令全体乘客集中至中段软座席封闭门帘抱团御寒。",
+      "choice": "是冒险在狭窄机舱内使用明火喷灯化蜡冒引发火灾之险，还是放弃机械供暖全员转入人体体温死守？",
+      "immediate": {
+        "text": "仪表盘黄色指示灯接连熄灭，车厢内水杯内的残水在数分钟内结出坚硬冰壳，冷气如冰针般刺骨。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内恢复动力，车厢将彻底化作与外界等温的铁棺材导致老弱乘客失温休克。",
+        "deadline_minutes": 25
+      },
+      "far": {
+        "trigger": "发电机气缸彻底冻裂冰封无法修复。",
+        "consequence": "车内失去一切热源全员陷入极度冻伤失温绝境。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "车长以喷灯微火强行烘化机匣喷油嘴坚蜡配合副官手动泵油",
+          "cost": "车长双手虎口被飞溅之冰冷生柴油与喷灯高温双重灼伤起泡脱皮。"
+        },
+        {
+          "option": "女部长果断组织全体乘客转移至中段避风座席用毛毯与大衣封死两端",
+          "cost": "女部长大衣下摆在指挥中被金属破损角铁挂烂撕开尺长裂口。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_goro_wrench_pipe_shout",
+        "h_reiko_greatcoat_shiver_frost_breath"
+      ],
+      "start_minute": 30,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_blizzard_cracking_cabin_window",
+      "title": "暴风雪巨力压裂车窗玻璃灌雪危局",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "trigger": "狂暴白毛风裹挟被折断的粗壮红松枝干重重撞击左侧双层车窗，外层钢化玻璃瞬间粉碎，内层玻璃出现大面积蜘蛛网状开裂，零下二十五度暴雪正从缝隙剧烈喷涌倒灌。",
+      "objective": "在十分钟内由副官拆卸硬质坐垫卡入窗框加固，或由女部长以厚羊绒大衣包裹底稿箱扑压在迎风面阻截雪尘。",
+      "choice": "是用肉身肩膀顶住破裂玻璃硬抗刺骨风雪割裂，还是后撤至尾部走廊任由软座区被积雪吞没？",
+      "immediate": {
+        "text": "内层玻璃发出令人牙酸的碎裂呻吟，冰碴如刀刃般飞溅在女部长脸颊与副官大衣之上。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "一刻钟内若不能封堵车窗，车厢核心避风区将被半米厚积雪彻底淹没失去立足之地。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "车窗玻璃全面崩塌风雪长驱直入淹没车厢。",
+        "consequence": "车内完全失守机密文件化为纸浆全员冻伤。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "副官徒手抱起厚重座垫死死卡入破损窗框以身体顶死受力点",
+          "cost": "副官双手手背与前臂被碎玻璃尖端划出数道血痕鲜血浸染天鹅绒。"
+        },
+        {
+          "option": "女部长脱下羊绒大衣死死包裹住公文箱用后背承受冰雪冲击",
+          "cost": "女部长双肩与背部遭受严重风雪冻伤皮肤红肿发紫刺痛难忍。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_reiko_greatcoat_shiver_frost_breath",
+        "h_daiki_ice_spade_rope_crawl"
+      ],
+      "start_minute": 60,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_subzero_hypothermia_coma_peril",
+      "title": "女部长深度失温休克与真阳衰竭危机",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "trigger": "女部长在车窗破裂时受冷风直接灌入，加之体质单薄且未进饮食，体温骤降至三十四度五边缘，牙关咬死意识模糊陷入严重失温谵妄休克前兆。",
+      "objective": "在十分钟内由副官用大衣、保温毯与暖水袋实施核心复温，配合医学研究生注射高热葡萄糖并反复揉搓四肢回阳。",
+      "choice": "是先用大衣与暖水袋包裹复温，还是先扶起女部长喂服救心糖水？",
+      "immediate": {
+        "text": "女部长冰蓝美眸开始涣散，薄唇惨白冰凉，公文箱手铐因手腕颤抖发出急促金属震颤脆响。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内使核心体温回升至三十六度，深度失温将导致心脏骤停休克香消玉殒。",
+        "deadline_minutes": 25
+      },
+      "far": {
+        "trigger": "女部长因深度失温心力衰竭溘然长逝。",
+        "consequence": "商社商业神话陨落百亿项目全盘毁于一旦。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "副官脱下大衣与毛衣层层裹住女部长，暖水袋压住后心烘暖",
+          "cost": "副官只剩单衣，自身遭受严重冻伤脱力发热。"
+        },
+        {
+          "option": "副官托起女部长后颈，用汤匙一点点喂入温热浓糖水唤醒生机",
+          "cost": "副官嘴唇因严寒干裂被女部长紧咬之牙齿擦破大面积渗血剧痛。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_reiko_greatcoat_shiver_frost_breath",
+        "h_aoi_glucose_blanket_whisper"
+      ],
+      "start_minute": 95,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_secondary_avalanche_slope_hazard",
+      "title": "外侧山体二次雪崩导致车体滑坠死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "exterior_snowdrift_embankment"
+      ],
+      "trigger": "暴风雪呼啸吹动上层松散积雪，后方山谷传来轰隆隆的雪崩滑移闷响，数十吨积雪正顺着陡坡滚落逼近路基，车体倾斜角骤增至十五度随时侧翻坠落悬崖。",
+      "objective": "在十分钟内由巡道工与副官冒雪钻入车底以高强度钢缆将转向架锁死在主岩钢轨上，并指挥全员右倾配重平衡重心。",
+      "choice": "是冒险钻入狭窄车底在暴雪中锁紧钢缆，还是在摇晃车厢内组织乘客拼死拉住扶手？",
+      "immediate": {
+        "text": "车轮在冰冷钢轨上发出刺耳滑移摩擦尖叫，车体猛烈晃动，行李架上的提包纷纷跌落摔碎。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "十五分钟内若不能固定车身，下一波雪浪冲击将直接将整节车厢整体推下百米断崖粉身碎骨。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "客车彻底滑脱路基坠入山谷深渊全员遇难。",
+        "consequence": "车毁人亡无一生还惨案彻底铸成。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "巡道工顶着雪崩巨力将重型钢索纯铜卡扣死死扣入岩石地锚",
+          "cost": "巡道工左肩被滚落之坚硬冻雪冰块砸中肩胛骨严重挫裂伤。"
+        },
+        {
+          "option": "副官大声指挥全车乘客合力扑向右侧高位座席用人体稳住倾覆力矩",
+          "cost": "副官右臂被倒塌的铁道小桌板重重撞击小臂骨裂红肿。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_daiki_ice_spade_rope_crawl",
+        "h_goro_wrench_pipe_shout"
+      ],
+      "start_minute": 130,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_corporate_rival_tender_theft_attempt",
+      "title": "商业刺探掮客趁乱企图抢夺底稿公文箱",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "trigger": "混在乘客中的竞争财阀商业间谍眼见全员受寒混乱，拔出暗藏的小刀逼近女部长，企图割断手铐抢夺公文箱跳车逃遁。",
+      "objective": "在十分钟内由副官以折叠工兵钳精准格击夺下凶器并将暴徒死死按在座椅上，配合法务官出示拘押令。",
+      "choice": "是在狭窄过道中以肉身挡在长官身前承受刀刃突刺，还是以手铐连带铁箱实施重力格挡？",
+      "immediate": {
+        "text": "锐利小刀在昏暗灯光下泛着寒光，间谍狰狞的面孔直扑向女部长腕上的纯黑金属箱。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内制伏歹徒，机密底稿被抢走将导致破晓竞标全线流标惨败身败名裂。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "公文箱被歹徒抢走卷入风雪之中不知所踪。",
+        "consequence": "商业帝国命脉断绝女部长沦为罪人被追责入狱。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "副官闪身上前以工兵钳狠狠夹住歹徒手腕将其小刀震飞按倒在地",
+          "cost": "副官左胸大衣被刺破寸许表皮被刀尖划出一道血口鲜血渗出。"
+        },
+        {
+          "option": "女部长抡起沉重合金公文箱狠狠砸在歹徒鼻梁将其当场砸昏在地",
+          "cost": "女部长右手腕部在剧烈反震下软组织严重扭伤红肿刺痛。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_reiko_briefcase_handcuff_whisper",
+        "h_goro_wrench_pipe_shout"
+      ],
+      "start_minute": 165,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_dawn_snowplow_rescue_missing_signal",
+      "title": "破晓除雪列车逼近高位信标未点亮死线",
+      "source": "institution",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "exterior_snowdrift_embankment"
+      ],
+      "trigger": "破晓清雪专列已自南线推进至两公里外盲弯弯道，由于山谷大雾弥漫，若不能在五分钟内登上路基立柱点亮红色应急防撞信标，除雪车高速铲雪可能引发二次追尾大碰撞。",
+      "objective": "在五分钟内由副官冒着零下极寒徒手攀上结满坚冰的生铁立柱，将手摇红色信标灯挂上最高点并转动发电点亮。",
+      "choice": "是冒着从十米高生铁冻柱滑坠断骨之险徒手爬柱，还是在铁轨上点燃衣物充当信号？",
+      "immediate": {
+        "text": "远方山谷已传来巨型除雪车柴油引擎如雷鸣般的震耳轰鸣，大雪被车头巨铲扬起数十米高白浪逼近。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十分钟内若未建立视觉目视信标，高速行进的重装除雪机车将无法提前制动引发致命撞击。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "救援车避让不及与脱轨客车发生猛烈撞击车毁人亡。",
+        "consequence": "救援行动惨变特大恶性交通事故全员伤亡。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "副官徒手攀爬结冰生铁立柱在柱顶高高挂紧红色高位闪烁信标",
+          "cost": "副官双手十指因紧贴零下二十度冰铁遭受深度表皮撕脱性冻伤。"
+        },
+        {
+          "option": "女部长冲出车门在路基上迎风点燃高亮度红色彩烟信号棒挥舞",
+          "cost": "女部长右手手背被飞溅火星灼伤大面积水泡焦黑发红。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_reiko_dawn_parapet_smile_vow",
+        "h_daiki_ice_spade_rope_crawl"
+      ],
+      "start_minute": 200,
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "h_reiko_greatcoat_shiver_frost_breath",
+      "kind": "approach",
+      "slot": "proud_supervisor_reiko",
+      "location_ids": [
+        "derailed_passenger_cabin_middle",
+        "diesel_engine_compartment_vestibule",
+        "broken_window_snowdrift_exit"
+      ],
+      "text": "{proud_supervisor_reiko.name}端坐于结霜的天鹅绒软座深处，哈出一口白汽横睨你低喝：“呆立在过道看什么？！过来……把你的呢大衣也拿来……坐到我身边避风的位置！车厢里的暖气停了，本部长需要有人陪着熬过这个风雪夜……”"
+    },
+    {
+      "id": "h_reiko_briefcase_handcuff_whisper",
+      "kind": "approach",
+      "slot": "proud_supervisor_reiko",
+      "location_ids": [
+        "derailed_passenger_cabin_middle",
+        "exterior_snowdrift_embankment"
+      ],
+      "text": "{proud_supervisor_reiko.name}把防割手铐咔哒一声锁回自己腕上：“替我看着箱子……外面车门全被大雪封死了。这箱底稿关乎商社上下数千人的饭碗……听好了，只要箱子没丢，就算我们被困死在这台老车厢里……”"
+    },
+    {
+      "id": "h_reiko_dawn_parapet_smile_vow",
+      "kind": "approach",
+      "slot": "proud_supervisor_reiko",
+      "location_ids": [
+        "exterior_snowdrift_embankment"
+      ],
+      "text": "{proud_supervisor_reiko.name}挽着你的臂弯踏上破晓朝霞照耀的雪野铁道，眼眸微红凝视轻语：“小子，今夜九条怜奈这一条命……是你一整夜没合眼替我守住的。从今往后，跨国签约桌的最首席，唯你我二人并肩落座一生。”"
+    },
+    {
+      "id": "h_goro_wrench_pipe_shout",
+      "kind": "approach",
+      "slot": "veteran_conductor_driver_goro",
+      "location_ids": [
+        "diesel_engine_compartment_vestibule",
+        "derailed_passenger_cabin_middle",
+        "exterior_snowdrift_embankment"
+      ],
+      "text": "{veteran_conductor_driver_goro.name}单手将生铁管钳砸在发电机油箱盖上：“九条部长！副官！喷油嘴的蜡块化开了！快拿起动喷剂过来！只要老子一推减压阀，发电机马上重新轰起来，暖风十分钟就能吹进车厢！”"
+    },
+    {
+      "id": "h_daiki_ice_spade_rope_crawl",
+      "kind": "approach",
+      "slot": "senior_trackwalker_scout_daiki",
+      "location_ids": [
+        "exterior_snowdrift_embankment",
+        "broken_window_snowdrift_exit",
+        "diesel_engine_compartment_vestibule",
+        "derailed_passenger_cabin_middle"
+      ],
+      "text": "{senior_trackwalker_scout_daiki.name}浑身白雪从雪坑爬入车门，向内殿豪迈大笑：“部长！放心吧！前转向架我已经用三十米主绳死死锚在基岩上了！就算再来一场雪崩，这节车厢也稳如泰山翻不了！”"
+    },
+    {
+      "id": "h_aoi_glucose_blanket_whisper",
+      "kind": "approach",
+      "slot": "paramedic_volunteer_girl_aoi",
+      "location_ids": [
+        "derailed_passenger_cabin_middle",
+        "broken_window_snowdrift_exit"
+      ],
+      "text": "{paramedic_volunteer_girl_aoi.name}两手捧着刚化开的温热高热量葡萄糖水，神情关切低语：“副官先生！部长脉搏回升了！快把这杯糖水喂部长喝下去！大衣别松开，暖水袋再换一个，部长身体底子弱，全靠你守着呢！”"
+    },
+    {
+      "id": "h_reiko_wet_coat_lap_shiver",
+      "kind": "observe",
+      "slot": "proud_supervisor_reiko",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "text": "{proud_supervisor_reiko.name}背靠软座微促喘息，纯黑保暖连裤袜裹着修长双腿蜷缩在薄毯内，雪白耳垂在昏暗钨丝灯下冻得通红，因极度严寒与心神紧绷微微战栗，散发着绝代职场女王落难时令人屏息的冷艳凄美风骨。"
+    },
+    {
+      "id": "h_goro_soot_stained_hands_on_pipe",
+      "kind": "observe",
+      "slot": "veteran_conductor_driver_goro",
+      "location_ids": [
+        "diesel_engine_compartment_vestibule"
+      ],
+      "text": "{veteran_conductor_driver_goro.name}沾满机油与冻裂血口的大手死死卡住管钳手柄，制服大檐帽上的铁道徽章泛着冷光，眼神凶悍而专注地死盯减压阀仪表盘，宛若一尊雕凿在冰冷铁道机舱里的钢铁守护神。"
+    },
+    {
+      "id": "h_daiki_frozen_fur_gloves_rope",
+      "kind": "observe",
+      "slot": "senior_trackwalker_scout_daiki",
+      "location_ids": [
+        "exterior_snowdrift_embankment"
+      ],
+      "text": "{senior_trackwalker_scout_daiki.name}海豹皮手套结满厚重冰碴，登山安全绳在腰间缠系得一丝不苟，目光敏锐如鹰俯视雪野，透着巡道汉子敢与天地风雪抗衡到底的绝顶坚毅狂傲。"
+    },
+    {
+      "id": "h_aoi_red_cross_vest_warm_smile",
+      "kind": "observe",
+      "slot": "paramedic_volunteer_girl_aoi",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "text": "{paramedic_volunteer_girl_aoi.name}急救红十字背心纤尘不染，双手紧握体温计与听诊器贴在胸口，面容温婉眼眸澄净，透着战地医学研究生视死如归的纯美仁心。"
+    },
+    {
+      "id": "h_reiko_canned_coffee_warm_request",
+      "kind": "approach",
+      "slot": "proud_supervisor_reiko",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "text": "{proud_supervisor_reiko.name}薄唇泛白咬破一丝鲜血，单手紧握易拉罐黑咖啡，避开视线低声轻喘：“……好冷。咖啡在铁罐里快结冰了……你、你的手……伸过来一点……替我把铁罐捂暖……轻一点……别把咖啡洒在底稿上了……”"
+    },
+    {
+      "id": "h_reiko_whisper_back_embrace_request",
+      "kind": "approach",
+      "slot": "proud_supervisor_reiko",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "text": "{proud_supervisor_reiko.name}因极度疲惫脱力将额头轻轻靠在你肩头，闭上双眸低声微颤：“……十分钟……就给本部长十分钟……别乱动……十分钟后叫醒我，我要接着核对报价……听到没有……”"
+    },
+    {
+      "id": "h_reiko_scarf_tighten_request",
+      "kind": "approach",
+      "slot": "proud_supervisor_reiko",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "text": "{proud_supervisor_reiko.name}解下颈间的双面羊绒围巾，递到你面前，眼眸微红凝视低语：“把围巾围好……要是你也冻病倒下了，这箱文件谁来替我扛……这是本部长的命令，听到了吗？！”"
+    },
+    {
+      "id": "h_goro_flashlight_beam_request",
+      "kind": "approach",
+      "slot": "veteran_conductor_driver_goro",
+      "location_ids": [
+        "diesel_engine_compartment_vestibule"
+      ],
+      "text": "{veteran_conductor_driver_goro.name}单手推着减压手柄，头也不回大吼：“副官！手电筒光柱别晃！对准三号喷油嘴的高压螺帽！老子要下死力气拧了！照稳一点！”"
+    },
+    {
+      "id": "h_aoi_stretcher_blanket_tuck_request",
+      "kind": "approach",
+      "slot": "paramedic_volunteer_girl_aoi",
+      "location_ids": [
+        "derailed_passenger_cabin_middle"
+      ],
+      "text": "{paramedic_volunteer_girl_aoi.name}跪在软座旁，将铝箔保温毯边角压入座椅缝隙，抬头轻声嘱咐：“副官先生，请把脚收拢一点，把毯子边缘压严实，一点风都不能漏进去！”"
+    }
+  ],
+  "twists": [
+    {
+      "id": "t_supervisor_1",
+      "category": "资源",
+      "requires": [],
+      "text": "机车暗箱起获封存纯铜酒精预热暖炉与煤油补给：青年副官在协助排查司机室工具箱时，撬开生锈暗锁意外起获铁道班组封存的一具纯铜便携式酒精预热取暖炉与三升工业酒精。车厢内部得以点燃安全避风暗火取暖源，车内温度迅速回升至零上五度，彻底化解全员失温冻毙之灭顶危机。"
+    },
+    {
+      "id": "t_supervisor_2",
+      "category": "信息",
+      "requires": [],
+      "text": "当场制伏商业间谍起获竞品财阀设伏破坏铁道黑幕：副官生擒商业间谍后自其大衣暗袋搜出带有竞争对手印章的密电指令，证实本次客车脱轨系对手蓄意砍倒红松制造之恶性破坏案件。女部长获得反诉竞争财阀特大刑事破坏的绝杀铁证，彻底粉碎对手阴谋并在法理上锁定百亿竞标必胜定局。"
+    },
+    {
+      "id": "t_supervisor_3",
+      "category": "制度",
+      "requires": [],
+      "text": "铁道防灾总署最高特级除雪破拆调度令正式发布：无线电台接通铁道总署最高指挥部，总署依特级防灾条例全权授予单节客车现场自救组特权，调动全线双螺旋除雪机车不惜代价全速凿雪会师。沿途全部支线货运列车全线避让停运，救援推进速度提升三倍，为破晓前准时脱困奠定坚实制度保障。"
+    },
+    {
+      "id": "t_supervisor_4",
+      "category": "人事",
+      "requires": [],
+      "text": "急救医学研究生实为女部长早年匿名资助成才之学子：医学研究生葵在检查公文箱徽章时认出资助人专属铭记，赫然证实女部长便是多年前以私人积蓄全额资助自己读完医学院的匿名大恩人。昔日资助恩情在极寒车厢中轰然揭晓相认，医学研究生誓死倾尽毕生医术为恩人保驾护航极大凝聚互助军心。"
+    },
+    {
+      "id": "t_supervisor_5",
+      "category": "时限",
+      "requires": [],
+      "text": "极北暴风雪奇迹骤停破晓接引窗口提前二十分钟：肆虐整夜的狂暴风雪在黎明五点四十分奇迹般彻底散去，云层破开露出通透蔚蓝晨曦，道岔能见度瞬间攀升至数公里极限。巨型除雪车无需盲目减速提前二十分钟破雪贯通抵达弯道，全员脱困突围时间窗大幅提前锁定胜局。"
+    },
+    {
+      "id": "t_supervisor_6",
+      "category": "关系",
+      "requires": [],
+      "text": "女部长珍藏万宝龙金笔实为副官大学毕业设计作品：副官在借用金笔记录参数时，发现笔夹内侧刻有自己早年在工业设计系毕业时亲手雕磨的专属工匠纹样，正是女部长多年随身不离之物。早年暗中倾慕相惜之宿命羁绊在极寒车厢中彻底揭开，二人尊卑壁垒轰然融解，只待天亮后以平辈身份亲口说破。"
+    },
+    {
+      "id": "t_supervisor_7",
+      "category": "意外",
+      "requires": [],
+      "text": "柴油机人工盘车回火高温顺带融化转向架坚冰：在副官与车长合力强推减压阀人工盘车起动瞬间，柴油机排气管喷出一股数米长的炽热烈焰，高温尾气精准喷向冻死在转向架上的万斤硬冰坨将其瞬间融化殆尽。原本需耗时数小时人工凿除的转向架冻冰不药而愈彻底排空，客车重心自动回位恢复平稳待命姿态。"
+    }
+  ],
+  "forbidden_terms": [
+    "卫星直连手机",
+    "地暖电热毯",
+    "无人机热成像搜救",
+    "防爆钢化双层玻璃",
+    "高压锂电池暖手宝",
+    "充气保暖防护服"
+  ],
+  "content_tags": [
+    "intimate",
+    "workplace",
+    "workplace_power",
+    "violence",
+    "bodily_harm",
+    "crime",
+    "disaster"
+  ],
+  "status": "released",
+  "notes": "按原稿加入，改动见提交说明。"
+}

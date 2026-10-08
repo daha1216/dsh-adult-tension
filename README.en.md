@@ -40,7 +40,7 @@ Every world is open. Pick one and play.
 Don't see what you want? Just say "custom world" (`自定义世界`), name the year and the place, and one is made for you on the spot.
 
 <details>
-<summary><b>See all 39 worlds at a glance (click to open)</b></summary>
+<summary><b>See all 78 worlds at a glance (click to open)</b></summary>
 <br>
 
 | World | In one line |
@@ -84,6 +84,45 @@ Don't see what you want? Just say "custom world" (`自定义世界`), name the y
 | Cathedral Confession Night (大圣堂告解夜) | A curse from the abyss war burns the saintess every night, and the only one who can chant the full seal is a scholar the church once cast out. |
 | Typhoon Blackout (台风断电夜) | The whole old street loses power; next door, your childhood friend keeps a signed divorce paper in a drawer, and tonight the choice is hers alone. |
 | The Black Dragon (黑龙丸) | Mutiny on a storm-tossed yacht; the yakuza heiress burns with fever from a gunshot wound, and only her bodyguard can be trusted until dawn. |
+| Abyssal Fortress Dungeon (深渊要塞地牢) | A demon brand burns at every midnight; the inquisitor questioning the captured knight-captain once fought beside her for seven years. |
+| Old Schoolhouse Cellar (旧校舍地窖) | The cellar door jams at a stormy dusk; the grad-council president wraps her ribbon round her palms to hold the breaker, ninety minutes before demolition. |
+| Forbidden Archive Alchemy Bench (禁书库炼药台) | The potion bursts and the head mage burns with fever behind a sealed gate; once it wears off, the person in her diary is standing right there. |
+| Chaebol Vault (财阀金库) | Robbers cut at the blast door; the heiress and her legal aide hole up in the vault with two hours of oxygen left. |
+| Chang'an Rain Inquest (长安暴雨洗冤局) | The chancellor's heir dies suddenly; the inspector quietly recalls a disgraced coroner to find proof before the fifth watch. |
+| Six-Tatami Roomshare (六叠合租) | The last train stops; your childhood friend is stranded in your tiny room, with one futon in the blackout. |
+| High-Seas Honeymoon Suite (公海蜜月套房) | Two agents pose as newlyweds, whispering in the blind spots of a bugged suite. |
+| Shrine of the Broken Barrier (破结界神社) | Demons ring the shrine; the poisoned head priestess hides with her swordsman, a bell at her waist that rings at every move. |
+| Kagura Hall Purge (神乐殿夜祓) | Miasma creeps into the demon slayer; back to back with a shrine keeper by a dying lamp, they draw out the poison before dawn. |
+| Thirty Thousand Feet (万米高空) | Storm drops rock the private jet; the CEO's arrogance peels away and the roles quietly reverse. |
+| Dungeon Night Pact (地牢夜盟) | The captured knight-captain stands knee-deep in a water cell, two hours from execution, plotting escape against the stone wall. |
+| Cargo Hold Interrogation (货舱密审) | On a storm-tossed sea, the ace agent is chained in the ballast hold; behind the next grate sits her codebreaker. |
+| Floating City Workshop (浮空城禁术工房) | The chief alchemist's dormant bloodline wakes in fever; she seals the workshop with herself and her guard captain inside. |
+| Forbidden City Snow Night (紫禁城大雪封禁夜) | The keeper of the seal holds the succession edict; the grand secretary storms in, and a decade of old feeling plays across the board. |
+| Ginza Storm Night (银座暴雨夜) | Before midnight liquidation, the auditor she fired storms into the CEO's locked dressing room with the fraud negatives. |
+| Ruined Castle Blizzard (断壁古堡暴雪夜) | The heir returns to find the head maid holds every key, and she presses him step by step in a dark dressing room. |
+| Midnight Hypnosis Clinic (午夜催眠诊室) | The suggestion rebounds on the researcher behind a locked door; when she wakes, two years of diary can't stay hidden. |
+| Autumn Villa in Fog (红叶别庄夜雾) | The bankrupt house head's creditor turns out to be the steward the family threw out three years ago. |
+| Rainy Mountain Temple (梅雨古刹) | The young widow leads the memorial; her adoptive brother-in-law comes back, and a flood-locked night tests the rules. |
+| Thin Wall Downtown (下町薄墙) | Debt collectors corner the newlywed next door; you two tap signals through the thin wall. |
+| Trench in the Snow (雪夜战壕) | The salient is encircled; the wounded major holds the rear until the dawn signal goes up. |
+| Paramount Boudoir (百乐门香闺) | In occupied Shanghai the bureau chief meets the man she's kept close for three months; the wire goes live at 12:30. |
+| Isolation Ward (隔离病栋) | A leak, a torn suit; the surgeon and a researcher are locked in a negative-pressure room with ninety minutes of air. |
+| Car Seven on the Permafrost Express (冻土快车七号车厢) | Snow stalls the train and a prisoner dies in car seven; the coroner and a suspended officer must find the cause first. |
+| Snowbound Diesel Train (雪困柴油车) | The railcar derails and goes cold; the director and her subordinate share a coat back to back until rescue. |
+| Timestop Lab (时停实验室) | Everyone freezes except two leads, with twelve minutes to restart the cooling loop. |
+| Special Unit Interrogation (特搜审讯室) | In a blackout the profiler wires up the ex-captain's wrist while a hit squad gathers outside. |
+| Versailles Dressing Room (凡尔赛更衣室) | On the eve of the mob, the duchess carries a secret edict and swears a pact with the guard captain. |
+| Acid-Rain Shelter (酸雨避难所) | The chief medic holds the last three serums when a dying scavenger captain staggers in with a nuclear cell. |
+| Mountain Manor Wake (山宅守灵) | Floods cut the bridge on the night of the wake; the widow and her attendant guard the vault key back to back. |
+| Storm Yacht Suite (暴风雨游艇) | The heir's wife knocks on the next suite's door; behind it is the counsel her in-laws framed. |
+| Snowbound Cabin (雪山木屋) | The boss's daughter is shot in the back; her bodyguard must dig out the shrapnel before the pursuers arrive. |
+| Tokyo Bay Casino (东京湾地下赌场) | The underboss cuffs the actuary to her own wrist in the vault, and slips the key into the actuary's pocket. |
+| Rainy Night Vigil (雨夜守灵) | The old chairman dies; his young widow keeps vigil as the underboss pushes for the gold seal. |
+| Yau Ma Tei Bonesetter (油麻地跌打医馆) | Typhoon Signal 8; a wounded enforcer bursts into the bonesetter's clinic, where she keeps the old boss's ledger. |
+| Black Storm at Yumen Pass (玉门关外黑风暴) | The marriage-bound princess retreats to a lone beacon, held by the officer who deserted three years ago. |
+| Typhoon Shogi Room (台风棋室) | A typhoon cuts the power on the night of the sealed move; the ninth-dan champion and the arbiter guard a brazier and a wax-sealed envelope until dawn. |
+| Ruins Shelter (遗迹石室) | A cave-in traps the expedition; the drow scout, her mana running wild, presses her dagger into the investigator's palm. |
+| Sinking Ballast Tank (沉船压载舱) | The night a liner goes down, a kidnapped heiress and her valet are locked in a flooding ballast tank. |
 
 </details>
 

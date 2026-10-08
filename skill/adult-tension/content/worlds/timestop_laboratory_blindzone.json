@@ -1,0 +1,2513 @@
+{
+ "background_cast": [
+  {
+   "adult_context": "重工武装安保部正式在册成年特勤哨兵。",
+   "age_range": [
+    28,
+    35
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_frozen_security_guard",
+   "line": "{npc.name}：“警报！量子阱磁场读数……（声音被时停切断）”",
+   "location_ids": [
+    "quantum_core_control_deck"
+   ],
+   "name": null,
+   "role": "在主控门前保持拔枪姿势面部凝固的安保哨兵"
+  },
+  {
+   "adult_context": "超弦核心实验室在籍成年助理研究员。",
+   "age_range": [
+    29,
+    36
+   ],
+   "function": "rumor_source",
+   "gender": "any",
+   "id": "bg_suspended_coffee_researcher",
+   "line": "{npc.name}：“糟糕，咖啡洒了……（身躯凝固在半空）”",
+   "location_ids": [
+    "quantum_core_control_deck"
+   ],
+   "name": null,
+   "role": "打翻咖啡杯定格在惊慌后仰姿态的研究员"
+  },
+  {
+   "adult_context": "重工外骨骼战术突击连队在籍成年特战老兵。",
+   "age_range": [
+    30,
+    38
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_corridor_firing_trooper",
+   "line": "{npc.name}：“目标锁定，开火……（枪火凝固成金球）”",
+   "location_ids": [
+    "superconducting_magnet_service_corridor"
+   ],
+   "name": null,
+   "role": "举枪射击、火舌定格在枪口前的突击队员"
+  },
+  {
+   "adult_context": "特种高空与极低温作业成年持证资深维修工。",
+   "age_range": [
+    34,
+    45
+   ],
+   "function": "obstacle",
+   "gender": "any",
+   "id": "bg_ladder_frozen_pipeman",
+   "line": "{npc.name}：“副阀门冻住了，扳手带不……（化作冰霜蜡像）”",
+   "location_ids": [
+    "cryogenic_liquid_nitrogen_service_well"
+   ],
+   "name": null,
+   "role": "悬在竖井爬梯半空被白霜包裹的检修工"
+  },
+  {
+   "adult_context": "超弦重工董事会特派执行董事级成年高层管理人员。",
+   "age_range": [
+    48,
+    58
+   ],
+   "function": "witness",
+   "gender": "any",
+   "id": "bg_fleeing_board_envoy",
+   "line": "{npc.name}：“快关舱门！别管那些人……（面目狰狞定格在门前）”",
+   "location_ids": [
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "name": null,
+   "role": "单脚跨入穿梭机舱门被定格的董事特使"
+  },
+  {
+   "adult_context": "地下基地总调度室成年资深通讯专员。",
+   "age_range": [
+    32,
+    42
+   ],
+   "function": "messenger",
+   "gender": "any",
+   "id": "bg_frozen_comms_dispatcher",
+   "line": "{npc.name}：“呼叫东京总部！我们被……（音节戛然而止）”",
+   "location_ids": [
+    "quantum_core_control_deck"
+   ],
+   "name": null,
+   "role": "抓起红色电话保持呼叫姿态的总调度员"
+  }
+ ],
+ "cast_combos": [
+  {
+   "chemistry": "玩家是手握校准仪与逃生竖井物理权限的首席工程师，在这十二分钟里掌握实操主导。面对黑丝破损、平日威严冷酷的女主管{renegade_chief_executive_scientist.name}，以及手持停堆令步步紧逼的监察官{renegade_board_inspection_specialist.name}。玩家以从容技术稳住女主管，卸下学术女皇伪装的女主管才真正靠进玩家怀里。",
+   "id": "combo_engineer_takes_command",
+   "identity_ids": [
+    "pc_lead_quantum_hardware_engineer"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 4
+     },
+     "b": "renegade_chief_executive_scientist",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 5
+     },
+     "reason": "时停孤岛中的相互扶持打破职场阶级防线，危机过后压抑多年的性张力与知己相惜一并爆发。",
+     "stage": "intimate"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "renegade_board_inspection_specialist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "赞许其揭露财阀黑幕之勇气，在技术抢险中达成战地默契。",
+     "stage": "familiar"
+    },
+    {
+     "a": "renegade_chief_executive_scientist",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 2
+     },
+     "b": "renegade_board_inspection_specialist",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 2
+     },
+     "reason": "警惕其对财阀的法律清算，但在生死面前被迫接受共同行动。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "renegade_chief_executive_scientist",
+    "renegade_board_inspection_specialist"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在十二分钟倒计时结束前携女主管抵达竖井底扳下液氮阀门并登上穿梭机。",
+    "limit_gap": "工程师誓要带领全员脱困，女主管誓要捍卫科研自尊弥补过错，监察官誓要查明真相定罪财阀。",
+    "meeting_reason": "工程师在时停爆发瞬间冲入主控台，与女主管因手环共振成为唯二活动者。",
+    "resource_gap": "工程师掌握物理逃生通道与液氮实操权限，女主管掌握核心超算口令，监察官掌握国际公法权威与黑匣子。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_ice_queen_pride_vs_fever",
+    "te_twelve_minutes_vs_slow_advance"
+   ]
+  },
+  {
+   "chemistry": "玩家是掌握核心密钥却被时停反噬的女主管，权力最高、身体最脆弱。面对平日沉默寡言此刻却霸道可靠的工程师{lead_quantum_hardware_engineer.name}与牢骚满腹的老物理学家{cynical_chief_cryogenic_physicist.name}。玩家在衣衫破损、双腿战栗的高热里，用严苛学术辞令维系自尊，再由自己决定要不要把这份依赖变成终身同盟。",
+   "id": "combo_director_breaks_ice",
+   "identity_ids": [
+    "pc_renegade_chief_executive_scientist"
+   ],
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "lead_quantum_hardware_engineer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "在生死相依中放下全盘防备，视其为无可替代之灵魂伴侣。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "cynical_chief_cryogenic_physicist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "感念老前辈之护短指导，放下当年学术分歧重归师徒之好。",
+     "stage": "familiar"
+    },
+    {
+     "a": "lead_quantum_hardware_engineer",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "cynical_chief_cryogenic_physicist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "工匠之间的绝对信任与技术传承，情同父子。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "lead_quantum_hardware_engineer",
+    "cynical_chief_cryogenic_physicist"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在倒计时归零前合力扳动加压转轮，脱险后亲口向工程师坦白心意。",
+    "limit_gap": "女主管谋求保全部属与学术清白，工程师谋求全员平安脱困，老物理学家谋求拯救毕生管线心血。",
+    "meeting_reason": "女主管在时停降临刹那拉住工程师手腕，触发手环量子纠缠共振。",
+    "resource_gap": "女主管掌握全所最高资产处置与AI密钥，工程师掌握实操工具与强健体魄，老物理学家掌握低温管路死穴。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_ice_queen_pride_vs_fever",
+    "te_tether_vs_skin_contact"
+   ]
+  },
+  {
+   "chemistry": "玩家是抱着笔记本敲补丁代码的算法研究员，技术核心却体魄最弱。面对威严冷艳却衬衫破损的女主管{renegade_chief_executive_scientist.name}与沉稳如山的工程师前辈{lead_quantum_hardware_engineer.name}。玩家要在强磁场头痛欲裂中争分夺秒写出延缓力场崩溃的代码，用代码替两人抢出逃生窗口。",
+   "id": "combo_analyst_races_code",
+   "identity_ids": [
+    "pc_subordinate_data_analyst_apprentice"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "renegade_chief_executive_scientist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "亲见主管舍身救人的柔情一面，消除了平日对女皇主管的畏惧。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "lead_quantum_hardware_engineer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "崇敬前辈的铁血担当，甘愿拼死敲代码提供支援。",
+     "stage": "familiar"
+    },
+    {
+     "a": "renegade_chief_executive_scientist",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "lead_quantum_hardware_engineer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "两位核心人物在患难中从针锋相对走到彼此托付。",
+     "stage": "committed"
+    }
+   ],
+   "slots": [
+    "renegade_chief_executive_scientist",
+    "lead_quantum_hardware_engineer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在笔记本电池耗尽前将延缓补丁注入量子阱，为二人破冰抢险延长三分钟时间。",
+    "limit_gap": "算法员谋求证明自身价值拯救大家，女主管与工程师谋求物理停堆逃出生天。",
+    "meeting_reason": "算法员在主控台工位被手环余波波及苏醒，协助二人分析力场数据。",
+    "resource_gap": "算法员掌握算法源码补丁，女主管掌握底层系统权限，工程师掌握物理抢险工具。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_twelve_minutes_vs_slow_advance",
+    "te_coverup_vs_truth"
+   ]
+  },
+  {
+   "chemistry": "手握停机令的监察官面对傲骨犹存的女主管{renegade_chief_executive_scientist.name}、护主的队长{elite_security_tactical_commander.name}与发抖的算法员{subordinate_data_analyst_apprentice.name}。可以逼女主管交出底账，也可以暂缓追责、联手攻克竖井。",
+   "id": "combo_inspector_law_vs_guard",
+   "identity_ids": [
+    "pc_renegade_board_inspection_specialist"
+   ],
+   "player_positions": [
+    "high",
+    "equal",
+    "low"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 3
+     },
+     "b": "renegade_chief_executive_scientist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 4
+     },
+     "reason": "在生死考验中确认其并非丧心病狂之徒，态度由严厉指控转为保护性督导。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 3
+     },
+     "b": "elite_security_tactical_commander",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "敬佩其忠勇铁骨，在回廊破拆中达成默契战术配合。",
+     "stage": "familiar"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 3
+     },
+     "b": "subordinate_data_analyst_apprentice",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "把那块记录真实衰变曲线的硬盘视为最关键的证物与救命稻草。",
+     "stage": "acquainted"
+    },
+    {
+     "a": "renegade_chief_executive_scientist",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "elite_security_tactical_commander",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "相伴多年的铁血护卫，情同手足生死与共。",
+     "stage": "committed"
+    },
+    {
+     "a": "renegade_chief_executive_scientist",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 3
+     },
+     "b": "subordinate_data_analyst_apprentice",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 3
+     },
+     "reason": "平日对其苛刻严厉，此刻才发现这名下属的代码是全所最后的希望。",
+     "stage": "familiar"
+    },
+    {
+     "a": "elite_security_tactical_commander",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 3
+     },
+     "b": "subordinate_data_analyst_apprentice",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 3
+     },
+     "reason": "把这个体弱的书呆子当成必须护送上车的高价值人员。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "renegade_chief_executive_scientist",
+    "elite_security_tactical_commander",
+    "subordinate_data_analyst_apprentice"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在穿梭机发射前完成数据镜像封存，并确保涉案人员活着离开接受公正裁决。",
+    "limit_gap": "监察官谋求查清真相封存证据，女主管谋求保全基地弥补过错，特战队长誓死保卫长官，算法员只想大家都活下来。",
+    "meeting_reason": "监察官在时停前突入主控大厅送达查封令，事故爆发后被迫共同涉险。",
+    "resource_gap": "监察官掌握国际公法与卫星通讯，女主管掌握核心实验控制权，特战队长掌握重型破障火力，算法员掌握力场真实衰变曲线。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_coverup_vs_truth",
+    "te_twelve_minutes_vs_slow_advance"
+   ]
+  },
+  {
+   "chemistry": "工程师、女主管{renegade_chief_executive_scientist.name}与老物理学家{cynical_chief_cryogenic_physicist.name}在零下三十度的加压竖井里展开三代人的大抢险。女主管强撑着靠在工程师胸口报出口令，老物理学家用铜冲子精准破冰，工程师以臂力扳动转轮。阀门轰鸣重启、失温退去之后，女主管握住工程师那只滚烫的手，第一次心甘情愿地沉下去。",
+   "id": "combo_three_generations_well",
+   "identity_ids": [
+    "pc_lead_quantum_hardware_engineer"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "renegade_chief_executive_scientist",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "极寒竖井里的生死扶持让爱意与欲念在脱险后炽热升华。",
+     "stage": "intimate"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "cynical_chief_cryogenic_physicist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "默契无间的工匠配合，共同完成工业奇迹。",
+     "stage": "familiar"
+    },
+    {
+     "a": "renegade_chief_executive_scientist",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "cynical_chief_cryogenic_physicist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "女主管低头向老工匠诚恳道歉致谢，冰山性格彻底融化。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "renegade_chief_executive_scientist",
+    "cynical_chief_cryogenic_physicist"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在倒计时最后一分钟打通液氮回路，使主磁环温度骤降恢复常态超导相。",
+    "limit_gap": "三人皆为阻止时空坍缩、拯救百名同僚与东京湾生灵而倾尽全力。",
+    "meeting_reason": "老物理学家通过管道敲击声引导二人深入竖井，在井底会合抢险。",
+    "resource_gap": "工程师掌握实操臂力与扳手，女主管掌握核心口令与手环电能，老物理学家掌握冰堵定位与阀门结构。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_twelve_minutes_vs_slow_advance",
+    "te_tether_vs_skin_contact"
+   ]
+  },
+  {
+   "chemistry": "玩家是身披外骨骼的特战队长，用破障刀为女主管{renegade_chief_executive_scientist.name}与工程师{lead_quantum_hardware_engineer.name}劈开一条血路。近距离护送中，玩家看着平日威严如神的女主管靠在工程师肩上咬牙前行，在极致的忠诚与复杂心绪里爆发全部潜能，撞碎坍塌巨石护送二人登上逃生列车。",
+   "id": "combo_commander_human_shield",
+   "identity_ids": [
+    "pc_elite_security_tactical_commander"
+   ],
+   "player_positions": [
+    "low"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 1,
+      "trust": 5
+     },
+     "b": "renegade_chief_executive_scientist",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 5
+     },
+     "reason": "视其为至高长官与守护对象，甘愿为其粉身碎骨。",
+     "stage": "committed"
+    },
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 2,
+      "trust": 4
+     },
+     "b": "lead_quantum_hardware_engineer",
+     "b_to_a": {
+      "tension": 1,
+      "trust": 4
+     },
+     "reason": "认可其为真正值得托付主管后背的技术专家。",
+     "stage": "familiar"
+    },
+    {
+     "a": "renegade_chief_executive_scientist",
+     "a_to_b": {
+      "tension": 3,
+      "trust": 5
+     },
+     "b": "lead_quantum_hardware_engineer",
+     "b_to_a": {
+      "tension": 2,
+      "trust": 5
+     },
+     "reason": "两位核心人物在患难中彼此托付，忠诚卫士看在眼里。",
+     "stage": "committed"
+    }
+   ],
+   "slots": [
+    "renegade_chief_executive_scientist",
+    "lead_quantum_hardware_engineer"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在八分钟内用破障刀劈开三道卡死的气密铅门，确保抢险队伍准时抵达竖井。",
+    "limit_gap": "特战队长誓死捍卫女主管与核心骨干生命，二人谋求彻底终结时空浩劫。",
+    "meeting_reason": "特战队长在回廊中察觉手环微弱蓝光，强行挣脱力场阻尼与二人汇合。",
+    "resource_gap": "特战队长掌握重型破障外骨骼与自卫武器，女主管与工程师掌握系统关闭密钥与逃生方案。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_ice_queen_pride_vs_fever",
+    "te_coverup_vs_truth"
+   ]
+  }
+ ],
+ "channels": [
+  {
+   "fidelity": "exact",
+   "id": "ch_bracelet_microcurrent",
+   "reach": "基于钛合金退相干手环建立之微弱生物电共振信道，无需言语即可将彼此的心率波动、体温变化与战栗实时传递至对方手腕皮肤，真实无欺。",
+   "text": "手环量子纠缠共振神经微电流直感信道"
+  },
+  {
+   "fidelity": "distorted",
+   "id": "ch_frozen_air_echo",
+   "reach": "声音在凝固的空气分子间发生严重相位偏折与晶格散射，正常对话被拉伸扭曲为断续诡异的低沉金属混响。",
+   "text": "时停力场凝固空气声学晶格折射回音"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_nitrogen_pipe_knocks",
+   "reach": "贯穿全基地地下竖井之粗大钢管物理声波传导，以扳手敲击管壁即可无视时停力场干扰传递绝对保真的摩尔斯电码。",
+   "text": "超导液氮不锈钢管道敲击传导声"
+  }
+ ],
+ "character_templates": [
+  {
+   "adult_context": "超弦重工首席技术执行官兼普罗米修斯计划总负责人，年满三十三岁具备完全法人治理决策权之成熟女性学术领袖。",
+   "age_range": [
+    33,
+    39
+   ],
+   "appearance_options": [
+    "一身剪裁凌厉贴身的高级定制纯黑羊毛西装套裙，丰腴美腿紧裹半透薄黑丝，右膝丝袜擦破一道细长裂痕，足蹬十厘米细跟黑漆皮高跟鞋，乌黑大波浪卷发凌乱垂落肩头，金丝半框眼镜斜搭在高挺鼻梁上，深邃丹凤眼惊恐交织却死死端着学术女皇的傲岸气场",
+    "卸下了破损西装外套，仅着半透明白衬衫与包臀黑裙，衬衫后背被冷汗浸透紧贴脊背，单手扶着主控台勉力站立，冷汗顺着下巴滴落"
+   ],
+   "decision": {
+    "avoids": [
+     "只会逢迎拍马见风使舵之学术掮客",
+     "在灾难面前手忙脚乱推卸责任之懦夫"
+    ],
+    "contrast": "白天是高高在上、言辞刻薄、令全所员工闻风丧胆的学术铁娘子；在这十二分钟时停孤岛里，是一个敏感脆弱、极度渴望被有力臂膀拥抱的孤傲女人。",
+    "core_value": "就算沦落到要你搀扶，我也是这座实验室的最高统帅。我的错我去法庭认，现在先活着走到井底。",
+    "goal_options": [
+     "在十二分钟相干期结束前与玩家合力抵达竖井手动重启超导冷却回路",
+     "在时停绝对孤立环境中守住身为顶级科学家的最后尊严与理性底线",
+     "危机平息后打破多年职场冷血伪装，向玩家坦白真实心意"
+    ],
+    "never": [
+     "为了自身苟活抛弃被困所内的上百名部属独自乘坐穿梭机逃生"
+    ],
+    "prefers": [
+     "技术过硬、遇事冷静果断、敢于直视自己眼眸且不畏强权之真正硬核技术人"
+    ],
+    "pressure_responses": {
+     "breaking": "看到凝固蜡像中年轻研究员惊恐的面庞时心防彻底瓦解，泪水夺眶而出扑在玩家怀中痛哭颤抖。",
+     "high": "在极寒竖井内因失温剧烈发抖几乎晕厥，把滚烫的额头抵在玩家颈窝急促喘息求助。",
+     "low": "勉力扶着操作台站直身姿，推了推金丝眼镜，以冰冷严苛的学术口吻命令玩家汇报技术参数。",
+     "mid": "在共振电流高频冲击下咬破红唇发出压抑的闷哼，单手死死攥紧玩家衣襟不肯松开。"
+    },
+    "relationship_stance": "平日视一线工程师为执行工具，视特派监察官为政敌走狗；在这场时停大难里被玩家临危不乱的专业与庇护击穿冰山心防，生出炽热迷恋。",
+    "withdrawal": "避开玩家视线侧过脸去，用颤抖的手指扣上白衬衫崩开的领扣，深呼吸平复泛红面颊。"
+   },
+   "gender": "female",
+   "gender_reason": "标题人物“冷艳主管”“学术女皇”，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "renegade_chief_executive_scientist",
+   "identity": {
+    "authority": "行使普罗米修斯计划全套底层超算权限、核心冷却阀门物理总密钥与财阀一级资产处置权",
+    "exposure": "曾私自篡改物理安全系数三倍以迎合董事会上市节点之绝密日志存根。",
+    "hidden": "衬衫贴身口袋里藏着一管能够瞬时阻断量子坍缩之高纯度反物质抑制稀释剂。",
+    "limits": [
+     "深陷董事会业绩逼迫违规超频之沉重舆论与法律责任枷锁",
+     "受力场反噬导致下肢神经严重痉挛，暂时无法剧烈奔跑"
+    ],
+    "obligations": [
+     "保全上百名被困科研人员生命安全，阻止量子阱时空激波外泄毁灭东京湾。"
+    ],
+    "resources": [
+     "重工财阀海外三处秘密离岸研发中心之全部加密数据密钥",
+     "象征首席科学家特权之纯钛高频量子共振手环"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在时空坍缩与死亡倒计时面前面不改色、以强悍体魄与精湛技术独挑大梁之掌控力",
+     "扶住自己战栗身躯时既强势果断又饱含克制尊重之霸道温柔"
+    ],
+    "boundaries": [
+     "不突破身为首席科学家之职业荣誉底线",
+     "恪守拯救全体生命原则"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "事故平息后在新建联合独立研究院中与玩家并肩执掌大局之平权终身学术爱侣",
+    "dislikes": [
+     "轻佻下流的言语调戏",
+     "趁人之危的暴力胁迫"
+    ],
+    "expression": "退热后摘下眼镜抵住你胸口：“例会上不敢抬头，现在敢看我了？手环骗不了人，我的心跳也是。别停。”",
+    "likes": [
+     "退热之后，被对方温热有力的大手托住腰身缓缓攀上爬梯",
+     "对方凑在耳畔用沉稳嗓音说‘深呼吸，抱紧我’"
+    ],
+    "preconditions": [
+     "高热与失温都已退去，双方彻底清醒、自主平权",
+     "绝无借助职务或险境的交易强迫"
+    ],
+    "self_control_range": [
+     3,
+     4
+    ]
+   },
+   "public_role": "超弦重工冷艳首席科研主管",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "quantum_core_control_deck",
+     "to": 179
+    },
+    {
+     "from": 180,
+     "location_id": "superconducting_magnet_service_corridor",
+     "to": 359
+    },
+    {
+     "from": 360,
+     "location_id": "cryogenic_liquid_nitrogen_service_well",
+     "to": 539
+    },
+    {
+     "from": 540,
+     "location_id": "subterranean_magnetic_monorail_slipway",
+     "to": 1438
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "激光校准仪被高压当场烧毁融化，反冲电弧将玩家右小臂严重电灼伤起泡",
+      "option": "玩家飞身扑上用激光校准仪的钛合金绝缘手柄挑飞高压线缆将其卡入绝缘死角"
+     },
+     {
+      "cost": "女主管右侧脚踝韧带撕裂，黑丝被灼热碎屑烧穿，小腿大片烫伤",
+      "option": "女主管忍住神经剧痛猛咬舌尖强行激发肾上腺素单手撑地翻滚躲开线缆坠落轨迹"
+     }
+    ],
+    "pressure": "高压线缆一旦落下，女主管将被瞬间电击身亡，共振手环炸毁也会让玩家同样陷入时停万劫不复。",
+    "trigger": "一根三相超导高压线缆在引力扰动下断裂，带着数万伏蓝白电弧悬停在女主管头顶十厘米处，力场阻尼正以每秒两厘米的速度衰减，只剩五秒。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "为什么共振电流会让我浑身发烫成这样……平日沉默寡言的工程师，手臂竟然这么有力……在这个人怀里，冰冷的实验室第一次不那么可怕了……",
+    "surface": "“工程师！把激光校准仪对准三号超导环！别用那种眼神看我，我还没虚弱到需要你怜悯！力场只剩最后七分钟，液氮阀门打不通，我们和整个东京湾都会变成宇宙尘埃！跟紧我，手环距离绝对不能超过五米！”"
+   }
+  },
+  {
+   "adult_context": "超弦重工特聘一级硬件总工程师，年满三十岁具备反应堆物理控制与安全生产独立决策权之核心技术骨干。",
+   "age_range": [
+    30,
+    36
+   ],
+   "appearance_options": [
+    "一身深灰防辐射战术工装，袖口挽到小臂露出精悍线条，单手握着钛合金激光校准仪，五官坚毅深邃，眼神冷静如极地冰川，腰间悬着特种工兵工具包",
+    "脱下工装大氅后只剩被汗水浸透的黑色紧身背心，胸膛起伏，右小臂缠着烧焦的绝缘胶布"
+   ],
+   "decision": {
+    "avoids": [
+     "拿人命冲业绩的财阀高层",
+     "只会甩锅的官僚"
+    ],
+    "contrast": "平日沉默寡言、在例会上从不抬头的执行者；危机里是霸道果决、一句话定全局的定海神针。",
+    "core_value": "十二分钟里，你的命由我负责。技术不会骗人，我也不会。",
+    "goal_options": [
+     "在倒计时归零前带女主管抵达竖井底扳下液氮阀门",
+     "护送所有清醒者登上逃生穿梭机",
+     "危机过后把藏了十年的话亲口说出来"
+    ],
+    "never": [
+     "在倒计时里丢下女主管独自逃生"
+    ],
+    "prefers": [
+     "有真才实学、敢于担责、在绝境中不推卸的同伴"
+    ],
+    "pressure_responses": {
+     "breaking": "在转轮纹丝不动时一拳砸在冰壳上，指节鲜血淋漓仍不肯松手。",
+     "high": "拉开工装大氅把失温的女主管整个裹进怀里，硬扛竖井的极寒冷风。",
+     "low": "一言不发地校准手环频率，把各项读数简短报给女主管。",
+     "mid": "单膝跪地扣住女主管手腕，压低嗓音命令其深呼吸跟上节奏。"
+    },
+    "relationship_stance": "多年来在一线默默仰望女主管，表面服从，内心早已认定要护其周全；敬重老物理学家如父，对监察官保持职业性戒备。",
+    "withdrawal": "背过身去整理工具包，用沉默掩饰发红的耳根。"
+   },
+   "gender": "male",
+   "gender_reason": "与女主管对位、转折里是其大学学弟的工程师，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "lead_quantum_hardware_engineer",
+   "identity": {
+    "authority": "行使地下三条逃生竖井与液氮阀门的物理绕过权限、现场抢险实操指挥权",
+    "exposure": "曾私下绕过安全联锁替一线工人抢修设备而被记过的违规记录。",
+    "hidden": "钱夹里夹着一张十年前大学辩论赛的旧照片，照片上那个折服全场的学姐正是如今的女主管。",
+    "limits": [
+     "没有核心超算口令，单凭物理权限打不开主阀门",
+     "必须与女主管保持五米共振半径，否则自己也会被凝固"
+    ],
+    "obligations": [
+     "带领全员在十二分钟内重启液氮回路，保住整座机组与上百名同僚。"
+    ],
+    "resources": [
+     "一张能让主控AI暂时放弃闭锁闸门的总工备份盘",
+     "钛合金多功能激光校准仪与特种工兵工具包"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "冷傲外壳下不肯认输的倔强",
+     "危机中依然把部属性命放在第一位的担当"
+    ],
+    "boundaries": [
+     "急救时只做急救",
+     "不拿救命之恩换任何东西"
+    ],
+    "desire_range": [
+     3,
+     4
+    ],
+    "desired_position": "与女主管并肩执掌新研究院的终身搭档与爱人",
+    "dislikes": [
+     "趁人之危",
+     "被当成可以随手丢弃的耗材"
+    ],
+    "expression": "在穿梭机舱里扣紧对方十指，低声说：“我等这一天十年了。你要是愿意，就吻我。”",
+    "likes": [
+     "女主管退热后摘下眼镜时卸下防备的眼神",
+     "穿梭机副驾上十指相扣的安静时刻"
+    ],
+    "preconditions": [
+     "对方高热与失温都已退去、彻底清醒",
+     "与职务、救命恩情无关，纯属两厢情愿"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "超弦重工首席硬件工程师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "quantum_core_control_deck",
+     "to": 179
+    },
+    {
+     "from": 180,
+     "location_id": "superconducting_magnet_service_corridor",
+     "to": 359
+    },
+    {
+     "from": 360,
+     "location_id": "cryogenic_liquid_nitrogen_service_well",
+     "to": 539
+    },
+    {
+     "from": 540,
+     "location_id": "subterranean_magnetic_monorail_slipway",
+     "to": 1438
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "工程师左膝韧带在超重力下拉伤，接下来每一级爬梯都钻心剧痛",
+      "option": "工程师松开梯框改用双腿勾住管线，双手把女主管整个拽上来"
+     },
+     {
+      "cost": "女主管掌心被冰壳撕下一层皮，十指冻得几乎失去知觉",
+      "option": "女主管咬牙自己甩出另一只手抓住结冰管线，借力翻回爬梯"
+     }
+    ],
+    "pressure": "手环搭扣正在受力变形，一旦脱扣，女主管将坠入零下四十度的竖井底并脱离共振半径。",
+    "trigger": "爬梯第七级踏板在超重力下断裂，女主管一脚踩空悬在半空，工程师单手抓着生铁梯框，另一只手只够拽住女主管的手环。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "voices": {
+    "inner": "十年了，那个在辩论台上光芒万丈的人，现在就在我怀里发抖……这一次，换我来护着。",
+    "surface": "“主管，别逞强，你的心跳已经一百六了，手环骗不了我。抓住我的肩膀，我们去竖井。”"
+   }
+  },
+  {
+   "adult_context": "国际量子核能安全理事会高级特派监察专员兼财阀内部合规官，年满三十二岁具备跨国安全取证与强制停机法权之高级官员。",
+   "age_range": [
+    32,
+    40
+   ],
+   "appearance_options": [
+    "防弹深黑西装外披一件羊绒风衣，单手提着铅封防辐射黑匣子，面容冷峻如刀削，金丝眼镜下是一双洞悉阴谋的冷冽黑眸，单手戴着黑皮手套，举止沉稳优雅",
+    "风衣被碎石割破一道口子，领带微松，单手拔出消音电磁枪戒备，眼神锐利逼视四周"
+   ],
+   "decision": {
+    "avoids": [
+     "为金钱出卖学术道德之无良科学家",
+     "草菅人命残暴不仁之财阀打手"
+    ],
+    "contrast": "表面上是冷酷无情、照章办事的官僚机器；内心怀揣守护人类免遭技术野心毁灭的圣徒般执着。",
+    "core_value": "这十二分钟不是恩赐，是对狂妄的审判。交出黑匣子，配合冷停堆，否则大家一起做标本。",
+    "goal_options": [
+     "在时停结束前获取全部实验黑匣子数据并带出基地向全世界公开",
+     "让女主管与工程师配合执行国际安全协议紧急冷停堆程序",
+     "在穿梭机启动时确保自身与关键证据安全撤离人工岛"
+    ],
+    "never": [
+     "为了保全自身性命与财阀妥协销毁证据黑匣子"
+    ],
+    "prefers": [
+     "坚守良知底线、敢于揭露体制黑幕且业务精湛之诚实工程人员"
+    ],
+    "pressure_responses": {
+     "breaking": "看到逃生轨道被落石砸断大半时神色惨白，喃喃自语陷入对体制崩塌之绝望。",
+     "high": "在特战队长意识复苏逼近时拔出电磁枪从容对峙，以言语瓦解其战斗意志。",
+     "low": "站在静止的人群旁冷冷取出录音笔，以平缓无情的法律辞令记录现场灾难参数。",
+     "mid": "在主控台前亮出联合国停机令，强行拔出黑匣子接口电缆实施数据物理镜像封存。"
+    },
+    "relationship_stance": "将女主管视为唯利是图的学术犯罪嫌疑人，但敬重其科研才华；将工程师视为可争取的正义力量，试图拉拢其成为指控财阀的证人。",
+    "withdrawal": "退入通风廊道阴影处，低头擦拭眼镜镜片，深吸一口气压抑胸中怒火。"
+   },
+   "gender": "male",
+   "gender_reason": "原稿以“脱帽致敬”的黑西装形象书写的监察官，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "renegade_board_inspection_specialist",
+   "identity": {
+    "authority": "行使国际核安全公约紧急接管权、重大技术犯罪证据封存权与现场直接停机令发布权",
+    "exposure": "曾越权动用军用卫星破解财阀防火墙获取核心技术参数之程序瑕疵。",
+    "hidden": "西装内侧暗袋配有一枚能够瘫痪一切电子安保网之高能微型EMP手雷。",
+    "limits": [
+     "在物理逃生与抢险实操上缺乏一线经验，极度依赖工程师配合",
+     "被财阀武装安保列为首要灭口目标"
+    ],
+    "obligations": [
+     "查明事故真相封存犯罪证据，捍卫国际核安全底线，救护平民免遭时空灾难。"
+    ],
+    "resources": [
+     "财阀高层十二处秘密海外账户走账与违规研发合同原本",
+     "可直接向联合国安理会发送三级灾难预警之高轨激光通讯器"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在毁灭面前恪守职业操守、赌上性命也要纠正错误之高贵灵魂",
+     "理性与正义交织之纯粹人格魅力"
+    ],
+    "boundaries": [
+     "恪守国际公职人员廉洁与荣誉原则",
+     "捍卫全人类安全底线原则"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "新成立之国际技术伦理联合监察署最高总长",
+    "dislikes": [
+     "虚伪的利益交换与道德绑架",
+     "软弱的妥协投降"
+    ],
+    "expression": "脱下风衣搭在女主管肩头：“别误会，保你的命是为了让你出庭说真话。这件能防辐射，披着，走。”",
+    "likes": [
+     "与志同道合者在绝境中坦诚相待共享最高机密",
+     "看到正义在废墟中重新确立"
+    ],
+    "preconditions": [
+     "在法律与良知层面上达成彻底清白之共识",
+     "完全排除利益胁迫"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "国际特派高级监察专员",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "quantum_core_control_deck",
+     "to": 179
+    },
+    {
+     "from": 180,
+     "location_id": "superconducting_magnet_service_corridor",
+     "to": 359
+    },
+    {
+     "from": 360,
+     "location_id": "cryogenic_liquid_nitrogen_service_well",
+     "to": 539
+    },
+    {
+     "from": 540,
+     "location_id": "subterranean_magnetic_monorail_slipway",
+     "to": 1438
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "监察官右手手掌被四百度高温铁皮烫得皮开肉绽，大面积三度烧伤",
+      "option": "监察官徒手探入喷涌电火花的主机插槽硬拔出滚烫通红的存储芯片塞入绝缘盒"
+     },
+     {
+      "cost": "急冻反震导致喷嘴炸裂，液氮溅落在玩家左腿上造成局部深度冻伤",
+      "option": "玩家用便携式液氮喷枪瞬间急冻主机压制火势，强行截获最后百分之一数据"
+     }
+    ],
+    "pressure": "主机一旦烧毁，财阀违规强推实验的所有铁证将彻底湮灭，且高温爆燃将引发局部火灾。",
+    "trigger": "黑匣子数据下载停在百分之九十九，主控台主机被时空微波灼烧冒出浓烟，七秒后彻底熔毁。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "那份惊恐是真的……背后一定有董事会更深的逼迫。拿到底层日志，不只为了定罪，也为了保住这两个人的命。",
+    "surface": "“国际核能安全公约第七修正案赋予我战时特许管辖权！从现在起，普罗米修斯设施由我全权接管！工程师，立刻切断主磁环电源，这是命令！”"
+   }
+  },
+  {
+   "adult_context": "重工武装安保部队第一战术突击队长，年满三十一岁具备反恐特战与要害设施防卫指挥权之成年军官。",
+   "age_range": [
+    31,
+    38
+   ],
+   "appearance_options": [
+    "一身漆黑重型战术外骨骼甲胄覆盖全身，液压关节在静止中依然发出微弱蜂鸣，单手平端八连发电磁霰弹枪，面罩滤网后呼出微弱白气，眼神凶悍如钢铁野兽，臂铠上配有折叠破障震荡刀",
+    "摘下防暴面罩露出粗犷战疤面庞，嘴角挂着干涸血迹，右手死死攥着一枚高爆手雷拉环"
+   ],
+   "decision": {
+    "avoids": [
+     "耍嘴皮子躲在后方的政客",
+     "背叛袍泽临阵脱逃的鼠辈"
+    ],
+    "contrast": "表面上是冷血残暴、唯命是从的杀戮机器；内心极其重情重义、视战友生命高于一切。",
+    "core_value": "老子的职责是保卫长官。外骨骼还能动，拼着这条命废掉也给你们撬开生路！",
+    "goal_options": [
+     "克服时停肌肉阻尼强行恢复行动力，护卫女主管脱困",
+     "以重型外骨骼破拆被碎石卡死的逃生通道大门",
+     "在穿梭机撤离时充当最后一道防线阻击突发坍塌"
+    ],
+    "never": [
+     "在敌人威胁面前丢下负伤的长官独自逃生"
+    ],
+    "prefers": [
+     "身先士卒、敢打敢拼、在绝境中不抛弃同伴之铁血汉子"
+    ],
+    "pressure_responses": {
+     "breaking": "看到全队弟兄全员石化毫无生机时仰天虎吼，双目滴血悲愤欲狂。",
+     "high": "在巨石砸向女主管的瞬间怒吼着飞身跃起以钛合金肩甲硬扛落石。",
+     "low": "在静止中竭力眨动双眼，通过喉震麦克风发出低沉沙哑之单音节通讯代号。",
+     "mid": "外骨骼关节爆发刺耳金属悲鸣，硬生生顶开定格的力场屏障向前迈出沉重一步。"
+    },
+    "relationship_stance": "对女主管怀有绝对的军事服从与崇拜，将工程师视作需要保护的技术专家，对国际监察官怀有本能的敌意戒备。",
+    "withdrawal": "倚在回廊防爆掩体后，大口喘着粗气注射兴奋剂平复暴走的心率。"
+   },
+   "gender": "male",
+   "gender_reason": "自称“老子”、以铁血汉子书写的特战队长，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "elite_security_tactical_commander",
+   "identity": {
+    "authority": "行使基地物理防暴戒严指挥权、自动防御哨戒机枪火控解锁权",
+    "exposure": "曾私自扣押抗议员工并在地下禁闭室实施强制镇静之违规执行记录。",
+    "hidden": "装甲腿部暗槽藏有一张直通地表码头之单兵自卫快艇钥匙卡。",
+    "limits": [
+     "受力场边缘效应压制神经，剧烈动作会引发全身肌肉撕裂剧痛",
+     "受财阀安保条令束缚，对非授权人员有条件反射式的开火本能"
+    ],
+    "obligations": [
+     "捍卫基地核心物理安全，保全高价值技术人员，执行最终撤离安保程序。"
+    ],
+    "resources": [
+     "整座地下通道全部防爆铅钢大门之千斤顶手动破拆权限",
+     "两管军用速效肾上腺素刺激剂与热成像夜视目镜"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在毁灭面前不惧牺牲、展现出坚韧不拔之女帅风采与智慧光芒",
+     "生死相托之钢铁战友情"
+    ],
+    "boundaries": [
+     "恪守下级军官与护卫之分寸",
+     "誓死守卫领袖原则"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "新联合研究院最高战略安全与特勤卫队总指挥官",
+    "dislikes": [
+     "政客式的权术阴谋",
+     "对一线战士的轻蔑贬低"
+    ],
+    "expression": "重重捶胸敬礼：“通道撞开了！你们去穿梭机，老子在这儿当肉盾，装甲没散架谁也别想过这条线！”",
+    "likes": [
+     "听到长官一句发自内心的肯定与嘉奖",
+     "在恶战胜利后与战友碰杯痛饮"
+    ],
+    "preconditions": [
+     "长官人身安全得到保障",
+     "恪守军人荣誉准则"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "基地外骨骼特战突击队长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "superconducting_magnet_service_corridor",
+     "to": 179
+    },
+    {
+     "from": 180,
+     "location_id": "superconducting_magnet_service_corridor",
+     "to": 359
+    },
+    {
+     "from": 360,
+     "location_id": "cryogenic_liquid_nitrogen_service_well",
+     "to": 539
+    },
+    {
+     "from": 540,
+     "location_id": "subterranean_magnetic_monorail_slipway",
+     "to": 1438
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "外骨骼双肩液压连杆崩碎，特战队长锁骨与肩胛骨粉碎性骨折吐血倒地",
+      "option": "特战队长启动外骨骼过载喷气飞扑而上以双手双肩硬生生托住下坠铅板"
+     },
+     {
+      "cost": "近距离声波爆鸣震裂玩家耳膜，双耳暂时性流血失聪失衡",
+      "option": "玩家掷出高能声波震荡手雷在半空引爆，将铅板震偏砸向空旷水泥地"
+     }
+    ],
+    "pressure": "半吨铅板砸下两人必死无疑，必须以绝对力量硬扛格挡。",
+    "trigger": "回廊顶端半吨重的铅合金护板脱落，正砸向扶持前进的女主管与工程师，离头顶只剩一米半、两秒。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "主管为了保全大家一直在硬撑……就算把这身骨头全拼碎了，也绝不能让主管死在这里！",
+    "surface": "“主管！别怕，突击队还在！我的外骨骼还能顶三分钟！工程师，带着主管从我身后过去！门外的落石由我的装甲来扛，快走！”"
+   }
+  },
+  {
+   "adult_context": "超低温超导冷却系统总设计师兼资深物理学家，具备极端环境工程抢险与重大设施责任能力之资深学者。",
+   "age_range": [
+    42,
+    52
+   ],
+   "appearance_options": [
+    "一身脏污陈旧的加厚防寒工程服，满头白发被汗水和冰霜结成一绺一绺，厚重黑眼圈下是一双疲惫却洞若观火的老辣眼神，手里常年拎着一把沉甸甸的纯铜管钳，咳嗽不断",
+    "戴着毛线帽与防冻护目镜，双手指关节粗大布满冻伤瘢痕，正在专注拆解液氮阀门控制电路"
+   ],
+   "decision": {
+    "avoids": [
+     "只会拿PPT在董事会骗取经费的学术小丑",
+     "狂妄自大践踏工程安全红线的权贵"
+    ],
+    "contrast": "表面上是脾气古怪、牢骚满腹、倚老卖老的邋遢老油条；内心热爱科学、视工程质量如生命且护短重情。",
+    "core_value": "超导磁环不是赛车引擎！物理定律不讲人情。可老头子还喘着气，这套管子绝不在我眼皮底下爆掉！",
+    "goal_options": [
+     "指导并协助玩家与女主管在倒计时结束前排空冷却井结冰障壁",
+     "证明自己设计的超导安全旁路理论具备无可替代之救命价值",
+     "活着走出地下研究所返回京都与家人团聚"
+    ],
+    "never": [
+     "为了推卸事故责任故意给出错误的阀门转向指令害死后辈"
+    ],
+    "prefers": [
+     "脚踏实地、精通实操、不盲信权威且虚心求教之年轻技术骨干"
+    ],
+    "pressure_responses": {
+     "breaking": "哮喘发作吸入器空仓倒地抽搐，颤抖的手指死死指向最后的备用阀门位置。",
+     "high": "在阀门卡死时用全部体重压在加力杆上，双手虎口震裂鲜血染红白霜依然死不松手。",
+     "low": "一边剧烈咳嗽一边狠狠灌了一口烈酒，骂骂咧咧地在图纸上用炭笔标出旁路捷径。",
+     "mid": "冒着严寒亲自爬上冰霜斑驳的管道，用管钳敲击管壁通过回声判断冰堵位置。"
+    },
+    "relationship_stance": "将女主管视为急功近利但天赋卓绝的晚辈，爱恨交织；将工程师视为自己衣钵的真正继承人，倾囊相助。",
+    "withdrawal": "坐在冰冷的设备木箱上大口喘气，用颤抖的手擦拭全家福照片上的冰霜。"
+   },
+   "gender": "male",
+   "gender_reason": "自称“老头子”、惦记京都家人的老物理学家，标题人物、外貌、台词与关系都按此性别书写，因此固定。",
+   "id": "cynical_chief_cryogenic_physicist",
+   "identity": {
+    "authority": "行使超导冷却管网阀门手动调节权、极低温流体流向应急分配权",
+    "exposure": "曾私自关闭次级报警哨位放任手下成年技工早退之管理失职档案。",
+    "hidden": "大衣内衬缝着一张全家福照片，背后写着在京都老家等待归期的家人名字。",
+    "limits": [
+     "年事已高患有老慢支与关节炎，体能无法承受高强度奔跑",
+     "曾因反对超频实验被削减经费，心底存着强烈的委屈与怨怼"
+    ],
+    "obligations": [
+     "阻止极低温液氮引发深层冻土大崩塌，保全自己毕生设计的管网设施。"
+    ],
+    "resources": [
+     "整套地下冷却管线原始工程图纸与备用旁路暗道口令",
+     "一壶高纯度烈性伏特加与军用高能发热袋"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在灾难中幡然悔悟、放低身段向一线工匠诚恳求教之清醒晚辈",
+     "传承自己一生绝技之同道知己"
+    ],
+    "boundaries": [
+     "恪守前辈之厚重尊严分寸",
+     "保全后辈生命原则"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "新联合研究院荣誉终身总顾问",
+    "dislikes": [
+     "学术霸凌与体制压迫",
+     "傲慢的官僚嘴脸"
+    ],
+    "expression": "拍着玩家肩膀递过酒壶，眼眶泛红：“干得漂亮！主管傲是傲了点，心眼不坏……带她平安出去！”",
+    "likes": [
+     "看到自己设计的机器在绝境中挽救生命",
+     "与后辈围坐炉火旁喝一杯温热烈酒"
+    ],
+    "preconditions": [
+     "学术诚意得到充分尊重",
+     "彻底摒弃虚伪功利"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "超低温冷却系统总设计师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "cryogenic_liquid_nitrogen_service_well",
+     "to": 179
+    },
+    {
+     "from": 180,
+     "location_id": "cryogenic_liquid_nitrogen_service_well",
+     "to": 359
+    },
+    {
+     "from": 360,
+     "location_id": "cryogenic_liquid_nitrogen_service_well",
+     "to": 539
+    },
+    {
+     "from": 540,
+     "location_id": "subterranean_magnetic_monorail_slipway",
+     "to": 1438
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "老物理学家双手手指重度冻伤发黑坏死，吸入极寒白雾引发急性哮喘咯血",
+      "option": "老物理学家摘下棉手套赤手按住冰冷刺骨的冲子挥锤猛击三次复位弹簧"
+     },
+     {
+      "cost": "撬棍猛然反弹抽在女主管肋下，左侧两根肋骨骨裂剧痛难忍",
+      "option": "女主管与玩家合力把重型生铁撬棍插入闸门缝隙，以两人全身重量撬开减压口"
+     }
+    ],
+    "pressure": "管道爆裂将喷出数百升零下一百九十六度液氮，把整个竖井化作极寒冰狱瞬间冻杀全员。",
+    "trigger": "液氮旁路减压阀弹簧在高压下变形卡阻，必须有人在极寒冰雾中用铜冲子连敲三次复位，管壁十秒后超压爆裂。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "主管为了在这个财阀里站稳脚跟，把自己逼得太狠了……老天爷，再给我这把老骨头五分钟，让我把两个后辈平安送出去！",
+    "surface": "“主管！别拿财阀总裁的架子吓唬我！今天没有老头子这道备用泄压阀，你早成光子碎片了！工程师，看准了，三号螺栓向左转两圈半，快动手！”"
+   }
+  },
+  {
+   "adult_context": "超弦核心算法组资深研究员，年满二十八岁具备核心数据解密与独立算法审计法权之成年高级知识分子。",
+   "age_range": [
+    28,
+    34
+   ],
+   "appearance_options": [
+    "一身整洁的防静电实验服，内衬深蓝衬衣，银边眼镜架在清秀而苍白的面庞上，十指修长骨节微突，眼神专注中带着对真理的无畏渴望",
+    "实验服下摆沾着黑色油污，怀中紧抱一台抗辐射加固笔记本电脑，满头大汗神色焦灼"
+   ],
+   "decision": {
+    "avoids": [
+     "只懂外行指导内行的官僚领导",
+     "掠夺下属学术成果的学阀"
+    ],
+    "contrast": "表面上是唯唯诺诺、手无缚鸡之力的书呆子小职员；在算法世界里有着天才般的狂傲执着。",
+    "core_value": "跑完这八百行脚本，力场还能多撑三分钟！别扔下我，算法组不是画图表的废物！",
+    "goal_options": [
+     "在主机彻底熔毁前将重构的稳定约束算法注入中央量子阱控制中枢",
+     "跟随玩家与女主管安全穿过回廊突入逃生穿梭机",
+     "战后以独立算法科学家身份重获新生"
+    ],
+    "never": [
+     "为了自身评职称篡改实验安全算法代码导致同事遇难"
+    ],
+    "prefers": [
+     "尊重专业算法价值、遇事勇于担当且平等待人之前辈"
+    ],
+    "pressure_responses": {
+     "breaking": "笔记本电池耗尽黑屏的瞬间抱头瘫软痛哭，陷入自我怀疑。",
+     "high": "终端屏幕被电弧击穿起火时，用身躯挡住飞溅火星护住加固硬盘不肯退缩半步。",
+     "low": "十指在键盘上飞速敲击，嘴里飞快念诵着复杂的张量微分方程参数。",
+     "mid": "在强磁场引发剧烈头痛呕吐时，用湿毛巾勒住额头咬牙继续输入代码。"
+    },
+    "relationship_stance": "极度崇拜女主管的学术造诣但畏惧其雷霆手段，敬佩工程师前辈的实操担当，视其为遮风挡雨的依靠。",
+    "withdrawal": "缩在服务器机柜与防火墙的狭小缝隙间，大口吞服止痛药平复偏头痛。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "subordinate_data_analyst_apprentice",
+   "identity": {
+    "authority": "行使量子算力集群底层资源重分配权、中央AI防御协议底层覆写口令输入权",
+    "exposure": "私自截留核心算法底层漏洞报告未按规程上报之违规记录。",
+    "hidden": "电脑私密分区存着自己为了给重病的妹妹筹医药费暗中编写的商业算法源码。",
+    "limits": [
+     "常年伏案体力极弱，在强重力场与低温环境下极易窒息休克",
+     "胆小谨慎，极度害怕违反财阀管理制度遭到解雇"
+    ],
+    "obligations": [
+     "确保算法模型真实无伪，防止时空湮灭灾难波及无辜大众，拯救同组战友。"
+    ],
+    "resources": [
+     "力场时空相干维持算法之核心源码与未加密补丁文件",
+     "两张最高等级之特许生物声纹解密密钥卡"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在现实物理世界中无所不能、敢于用身躯硬撼灾难拯救同伴之担当",
+     "温柔包容自己脆弱与怪癖之宽广胸怀"
+    ],
+    "boundaries": [
+     "恪守技术下属之分寸绝不添乱",
+     "保全集体学术成果原则"
+    ],
+    "desire_range": [
+     1,
+     2
+    ],
+    "desired_position": "新联合研究院量子算法研究所首席架构师",
+    "dislikes": [
+     "粗暴践踏自己代码心血的野蛮行径",
+     "职场冷暴力与孤立"
+    ],
+    "expression": "双手递上加固硬盘，眼眶泛红：“补丁注入成功了！倒计时被硬生生拉长了一百八十秒！我们做到了！”",
+    "likes": [
+     "听到前辈一句‘代码写得真漂亮，接下来交给我’",
+     "危机过后与大家平安分享一杯热咖啡"
+    ],
+    "preconditions": [
+     "算法贡献获得公正评价",
+     "生命尊严受到对等保护"
+    ],
+    "self_control_range": [
+     4,
+     5
+    ]
+   },
+   "public_role": "核心算法组资深算法工程师",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "quantum_core_control_deck",
+     "to": 179
+    },
+    {
+     "from": 180,
+     "location_id": "superconducting_magnet_service_corridor",
+     "to": 359
+    },
+    {
+     "from": 360,
+     "location_id": "cryogenic_liquid_nitrogen_service_well",
+     "to": 539
+    },
+    {
+     "from": 540,
+     "location_id": "subterranean_magnetic_monorail_slipway",
+     "to": 1438
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "算法工程师双手十指被电解液与高温严重烧灼起泡，剧痛钻心",
+      "option": "算法工程师用牙咬断起火的电池排线，徒手抠出滚烫的鼓包电池甩飞，借手环残余电流完成编译"
+     },
+     {
+      "cost": "并联瞬间电涌反冲震爆了玩家随身的激光检测仪，彻底失去检测工具",
+      "option": "玩家拔下工装上的备用高能电容并联跨接笔记本供电口保住电源"
+     }
+    ],
+    "pressure": "电池一旦爆燃笔记本报废，尚未注入的延缓补丁将彻底丢失，倒计时将提前归零。",
+    "trigger": "加固笔记本的锂电池在强磁场里剧烈鼓包冒烟，最后两行关键编译代码还没跑完，八秒后电芯爆燃。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "有前辈和主管在前面挡着……我绝不能拖后腿！这八百行代码是我这辈子写得最完美的程序。",
+    "surface": "“主管！别动那个主板！那是反相纠缠的自锁端！前辈，用手环接入我的从机端口！动态编译权限转给你，快，敲回车确认执行！”"
+   }
+  }
+ ],
+ "clock_start": {
+  "label": "午夜前一秒，时钟定格，十二分钟后湮灭",
+  "minute": 1439
+ },
+ "clock_style": "hm",
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster",
+  "explicit",
+  "death"
+ ],
+ "custom": false,
+ "customs": [
+  "普罗米修斯地下实验室铁律，凡进入超导粒子环形跑道者，必须时刻佩戴抗磁性钛合金共振手环，任何摘除行为视同间谍泄密。",
+  "财阀危机处置公约，一旦高能磁场失控进入不可逆湮灭倒计时，中央安保系统优先锁死全部物理闸门对事故区实施熔断隔离。",
+  "量子退相干共振协议，当两枚手环建立纠缠连接时，佩戴者之间任何一方的心率骤升都会通过微电流实时反馈至对方手腕皮肤。",
+  "核心机密检修规程，进入冷却井必须由两名以上持有一级物理权限之高级研究员同时按下面容与声纹确认锁。"
+ ],
+ "daily_activities": [
+  {
+   "beats": [
+    "时空力场骤然凝固，咖啡水珠定格半空，女主管瘫坐在地，金丝眼镜斜搭，黑丝破损处泛起电离微光",
+    "工程师上前托住女主管的手腕将其扶到座椅上，两枚钛合金手环相碰发出清脆的高频共鸣",
+    "女主管强忍高热与心率过载，喘息着命令工程师调出重力波衰变图，确认十二分钟生死死线"
+   ],
+   "duration_minutes": 60,
+   "hook_ids": [
+    "hk_director_glasses_approach",
+    "hk_engineer_calibrator_approach",
+    "hk_suspended_coffee_observe"
+   ],
+   "id": "act_core_deck_bracelet_sync",
+   "location_ids": [
+    "quantum_core_control_deck"
+   ],
+   "start_minute": 1439,
+   "tags": [
+    "intimate"
+   ],
+   "title": "主控大厅时停共振调谐"
+  },
+  {
+   "beats": [
+    "两人并肩穿行于静止在半空的子弹火舌与队员雕塑之间，每一次擦身都能感到高温等离子的炙烤",
+    "一号防爆门断电锁死，特战队长启动外骨骼破障刀迸出刺耳火花，强行割开半米宽的缝隙",
+    "工程师护着女主管侧身挤过门缝，衬衫被挂破一角，手环把彼此急促的心跳原样传了过去"
+   ],
+   "duration_minutes": 65,
+   "hook_ids": [
+    "hk_commander_exoskeleton_approach",
+    "hk_director_glasses_approach",
+    "hk_frozen_bullets_observe"
+   ],
+   "id": "act_corridor_frozen_gunfire",
+   "location_ids": [
+    "superconducting_magnet_service_corridor"
+   ],
+   "start_minute": 1,
+   "tags": [
+    "workplace_power"
+   ],
+   "title": "回廊穿越定格枪火"
+  },
+  {
+   "beats": [
+    "两人顺着垂直爬梯下潜到零下三十五度的冰雾深处，老物理学家用铜冲子敲出冰堵核心",
+    "女主管湿透的衣衫在极寒中迅速硬化浑身剧颤，工程师从身后把其整个裹进工装大氅里急救取暖",
+    "两人双手同时按上转轮冰壳，在倒计时读秒中齐声暴喝以全身重量扳动转轮，液氮回路轰鸣重启"
+   ],
+   "duration_minutes": 55,
+   "hook_ids": [
+    "hk_physicist_tongs_approach",
+    "hk_engineer_embrace_protect_approach",
+    "hk_frozen_nitrogen_cloud_observe"
+   ],
+   "id": "act_cryogenic_well_deicing",
+   "location_ids": [
+    "cryogenic_liquid_nitrogen_service_well"
+   ],
+   "start_minute": 3,
+   "tags": [
+    "intimate"
+   ],
+   "title": "极寒竖井破冰加压"
+  },
+  {
+   "beats": [
+    "监察官顶着四溅的电火花拔出特制线缆，强行镜像封存董事会篡改参数的原始黑匣子",
+    "女主管赶来出示首席私钥解除底层加密，宣布愿在战后作为主证人出庭指控财阀",
+    "监察官收起公文包向女主管郑重致意，两代知识分子在废墟中达成守护真理的同盟"
+   ],
+   "duration_minutes": 50,
+   "hook_ids": [
+    "hk_inspector_briefcase_approach",
+    "hk_analyst_laptop_approach",
+    "hk_blackbox_sparking_observe"
+   ],
+   "id": "act_blackbox_mirroring_showdown",
+   "location_ids": [
+    "quantum_core_control_deck"
+   ],
+   "start_minute": 5,
+   "tags": [
+    "intimate"
+   ],
+   "title": "黑匣子数据抢拔对峙"
+  },
+  {
+   "beats": [
+    "穿梭机在月台抱死，算法研究员抱着滚烫的笔记本飞速敲代码解锁电磁防爆程序",
+    "工程师冒着高压电弧把手环共振回路强行桥接进穿梭机应急启动手柄，打通最后的动力",
+    "双联电机发出低沉的蜂鸣，舱门自动滑开，绿色就绪指示灯刺破深邃黑暗"
+   ],
+   "duration_minutes": 45,
+   "hook_ids": [
+    "hk_analyst_laptop_approach",
+    "hk_engineer_calibrator_approach",
+    "hk_shuttle_green_light_observe"
+   ],
+   "id": "act_shuttle_power_bridge",
+   "location_ids": [
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "start_minute": 7,
+   "tags": [
+    "workplace"
+   ],
+   "title": "穿梭机应急电源飞线"
+  },
+  {
+   "beats": [
+    "最后三十秒，全员跃入狭窄座舱，特战队长重重拉下机械封闭闸门",
+    "热度早已退去的女主管在副驾驶席扣住工程师十指，两人合力把弹射推杆推到过载百分之一百二",
+    "穿梭机撕裂漆黑隧道冲出地表，身后基地湮灭为一片蓝光，舱内两人在晨曦海风中紧紧相拥，吻得忘了呼吸"
+   ],
+   "duration_minutes": 40,
+   "hook_ids": [
+    "hk_director_shuttle_confession_approach",
+    "hk_engineer_embrace_protect_approach",
+    "hk_tokyo_bay_sunrise_observe"
+   ],
+   "id": "act_dawn_catapult_escape",
+   "location_ids": [
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "start_minute": 9,
+   "tags": [
+    "workplace"
+   ],
+   "title": "弹射出港终破时停"
+  }
+ ],
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.45,
+  "nonbinary": 0.05
+ },
+ "default_person": "second",
+ "era": "近未来跨国重工财阀地下第三量子物理绝密深潜实验室午夜事故前夕",
+ "extends": null,
+ "forbidden_terms": [
+  "修仙",
+  "魔法",
+  "斗气",
+  "后宫男主",
+  "奉天承运",
+  "小师妹",
+  "洞府",
+  "少侠",
+  "太虚",
+  "青楼"
+ ],
+ "hooks": [
+  {
+   "id": "hk_director_glasses_approach",
+   "kind": "approach",
+   "location_ids": [
+    "quantum_core_control_deck",
+    "cryogenic_liquid_nitrogen_service_well",
+    "superconducting_magnet_service_corridor"
+   ],
+   "slot": "renegade_chief_executive_scientist",
+   "text": "{renegade_chief_executive_scientist.name}瘫坐在地，领扣崩开三颗，眼镜斜搭，喘息着冷声逼视你：“看首席出丑很解气？收起来。只剩七百秒，把手环靠过来，拉我起来！”"
+  },
+  {
+   "id": "hk_engineer_calibrator_approach",
+   "kind": "approach",
+   "location_ids": [
+    "quantum_core_control_deck",
+    "superconducting_magnet_service_corridor",
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "slot": "lead_quantum_hardware_engineer",
+   "text": "{lead_quantum_hardware_engineer.name}单膝落地扣住女主管发颤的手腕，手环相碰激起一串电火花：“心跳一百六了，手环骗不了我。这十二分钟，你的命归我管。抓住我的肩膀。”"
+  },
+  {
+   "id": "hk_inspector_briefcase_approach",
+   "kind": "approach",
+   "location_ids": [
+    "quantum_core_control_deck",
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "slot": "renegade_board_inspection_specialist",
+   "text": "{renegade_board_inspection_specialist.name}拎着铅封黑匣子走到主控台前，居高临下：“超频罪证已被我锁死。配合紧急冷停堆，算你们戴罪立功；否则逃出去也躲不过国际通缉。”"
+  },
+  {
+   "id": "hk_commander_exoskeleton_approach",
+   "kind": "approach",
+   "location_ids": [
+    "superconducting_magnet_service_corridor",
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "slot": "elite_security_tactical_commander",
+   "text": "{elite_security_tactical_commander.name}的外骨骼在时停阻尼里发出刺耳悲鸣，一步踏碎地砖横在长廊中央：“主管！突击队报到！前面的门老子劈开了，带上工程师跟紧我！”"
+  },
+  {
+   "id": "hk_physicist_tongs_approach",
+   "kind": "approach",
+   "location_ids": [
+    "cryogenic_liquid_nitrogen_service_well",
+    "quantum_core_control_deck"
+   ],
+   "slot": "cynical_chief_cryogenic_physicist",
+   "text": "{cynical_chief_cryogenic_physicist.name}拎着铜管钳从冰雾里蹒跚走出，咳着冷笑：“现在知道急了？主阀冻死三厘米，没我的铜冲子谁也拧不动！小子，拿上加力杆下来！”"
+  },
+  {
+   "id": "hk_analyst_laptop_approach",
+   "kind": "approach",
+   "location_ids": [
+    "subterranean_magnetic_monorail_slipway",
+    "quantum_core_control_deck"
+   ],
+   "slot": "subordinate_data_analyst_apprentice",
+   "text": "{subordinate_data_analyst_apprentice.name}抱着冒烟的笔记本从机柜后冲出来，眼镜滑到鼻尖：“我解出相干微扰方程了！打进中央终端能多撑一百八十秒！带上我，我给你们导航！”"
+  },
+  {
+   "id": "hk_director_shuttle_confession_approach",
+   "kind": "approach",
+   "location_ids": [
+    "subterranean_magnetic_monorail_slipway",
+    "quantum_core_control_deck"
+   ],
+   "slot": "renegade_chief_executive_scientist",
+   "text": "热度退尽、神志清明的{renegade_chief_executive_scientist.name}在舱里摘下眼镜，指尖勾住你的领口：“不是因为你救了我。三十年第一次想要一个人——你呢？”"
+  },
+  {
+   "id": "hk_engineer_embrace_protect_approach",
+   "kind": "approach",
+   "location_ids": [
+    "cryogenic_liquid_nitrogen_service_well",
+    "subterranean_magnetic_monorail_slipway",
+    "quantum_core_control_deck"
+   ],
+   "slot": "lead_quantum_hardware_engineer",
+   "text": "{lead_quantum_hardware_engineer.name}在零下三十度的冰雾里拉开大氅，把冻僵的女主管整个裹进怀里：“闭眼，贴紧我，先把体温找回来。踩稳我的脚背，这一关一起过。”"
+  },
+  {
+   "id": "hk_director_after_thaw_approach",
+   "kind": "approach",
+   "location_ids": [
+    "cryogenic_liquid_nitrogen_service_well",
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "slot": "renegade_chief_executive_scientist",
+   "text": "阀门轰鸣重启，体温回升的{renegade_chief_executive_scientist.name}没离开大氅，扣好领扣又解开一颗：“我现在很清醒。刚才的心跳，是我的，不是电流。”"
+  },
+  {
+   "id": "hk_suspended_coffee_observe",
+   "kind": "observe",
+   "location_ids": [
+    "quantum_core_control_deck",
+    "superconducting_magnet_service_corridor"
+   ],
+   "slot": "renegade_chief_executive_scientist",
+   "text": "悬浮咖啡水滴的倒影里，{renegade_chief_executive_scientist.name}破损的黑丝套裙绷出起伏曲线，高跟鞋歪在一旁，冷艳面容咬牙撑着不肯露怯。"
+  },
+  {
+   "id": "hk_frozen_bullets_observe",
+   "kind": "observe",
+   "location_ids": [
+    "superconducting_magnet_service_corridor",
+    "quantum_core_control_deck"
+   ],
+   "slot": "elite_security_tactical_commander",
+   "text": "防爆回廊里六名队员凝固在扣扳机的冲锋姿态，数十枚铜色子弹停在半空，枪口火舌像琥珀琉璃，闪着诡异而壮丽的杀戮美感。"
+  },
+  {
+   "id": "hk_frozen_nitrogen_cloud_observe",
+   "kind": "observe",
+   "location_ids": [
+    "cryogenic_liquid_nitrogen_service_well",
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "slot": "cynical_chief_cryogenic_physicist",
+   "text": "竖井里泄漏的液氮白雾被凝固成百米高的冰霜蘑菇云，无数六角冰晶悬在死寂虚空，在冷光灯下折射出冰冷致命的极光。"
+  },
+  {
+   "id": "hk_blackbox_sparking_observe",
+   "kind": "observe",
+   "location_ids": [
+    "quantum_core_control_deck",
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "slot": "renegade_board_inspection_specialist",
+   "text": "主控台插槽里，纯铅黑匣子疯狂闪着血红读取光斑，蓝色电弧在外壳上炸裂，把财阀数十年的违规参数以微秒速度烙印固化。"
+  },
+  {
+   "id": "hk_shuttle_green_light_observe",
+   "kind": "observe",
+   "location_ids": [
+    "subterranean_magnetic_monorail_slipway",
+    "cryogenic_liquid_nitrogen_service_well"
+   ],
+   "slot": "subordinate_data_analyst_apprentice",
+   "text": "倾斜单轨尽头，穿梭机的双联翠绿应急灯穿透水雾，滑轨激活时发出低沉的嗡鸣，像一柄挣脱时空锁链、静候出鞘的利刃。"
+  },
+  {
+   "id": "hk_second_hand_frozen_observe",
+   "kind": "observe",
+   "location_ids": [
+    "quantum_core_control_deck",
+    "cryogenic_liquid_nitrogen_service_well"
+   ],
+   "slot": "renegade_chief_executive_scientist",
+   "text": "大厅中央的巨幅时钟上，赤红秒针焊死在二十三点五十九分五十九秒，针尖微微颤抖，冷眼旁观这最后十二分钟。"
+  },
+  {
+   "id": "hk_tokyo_bay_sunrise_observe",
+   "kind": "observe",
+   "location_ids": [
+    "subterranean_magnetic_monorail_slipway",
+    "quantum_core_control_deck"
+   ],
+   "slot": "lead_quantum_hardware_engineer",
+   "text": "隧道出口外，东京湾破晓的第一缕金色朝阳穿透海雾，咸湿海风涌进舱内，把身后无声湮灭的蓝白尘埃吹散在晨光里。"
+  }
+ ],
+ "id": "timestop_laboratory_blindzone",
+ "locations": [
+  {
+   "affordances": [
+    "在悬浮的咖啡水珠旁俯身搀扶浑身高热的女主管并调试共振手环",
+    "在定格的主控台前合力输入工程特级覆盖口令以解除部分机械锁",
+    "在静止的离子光晕里并肩靠在操作椅死角，等共振电流的刺痛平复"
+   ],
+   "detail": "深埋地下核心之圆弧形巨型中央大厅。环形防爆铅玻璃外，庞大的强子对撞轨道锁死在绝对静止的光晕里，数道蓝白离子束定格半空如凝固的闪电。数十台超算屏幕的数据瀑布完全静止，红色‘CRITICAL FAILSAFE’警报光固定在最高亮度。跌落的咖啡杯悬浮在七十五厘米高处，溅出的液体化作晶莹的水晶珠串。没有一丝风，温度恒定十七度，两位幸存者每一次粗重的呼吸都在死寂中激起回响，像一座被时间遗忘的私密牢笼。",
+   "exits": [
+    "cryogenic_liquid_nitrogen_service_well",
+    "superconducting_magnet_service_corridor"
+   ],
+   "id": "quantum_core_control_deck",
+   "name": "地下三层中央量子对撞主控观测大厅",
+   "pressure_modifiers": {
+    "p_neural_feedback_fever": "两人手环之间的量子纠缠微电流发出高频滋滋声，空气弥漫着强烈的电离焦糊味。",
+    "p_twelve_minute_collapse": "主屏幕正上方的时间定格倒计时血红数字正在一秒一秒无情流逝。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "定格的高能粒子蓝光与固定应急红光交织，将室内投射出梦幻而压迫的深邃光影。",
+   "witnesses": [
+    "bg_frozen_security_guard",
+    "bg_suspended_coffee_researcher",
+    "bg_frozen_comms_dispatcher"
+   ]
+  },
+  {
+   "affordances": [
+    "在狭窄冰冷的爬梯上以单手环住女主管腰身协助其越过断裂踏板",
+    "在零下三十度的冰雾中把工装大氅裹在颤抖的女主管身上取暖",
+    "合力握住冰封的纯铜手动加压转轮以全身重量下压破冰启动阀门"
+   ],
+   "detail": "垂直贯穿地下三层至四层之狭窄圆柱形工业竖井。粗大的不锈钢超导冷却管线裹着厚厚白霜，温度低至零下三十五度。原本狂暴喷涌的液氮白雾在竖井中央定格成一朵巨大而凄美的冰霜蘑菇云，冰晶悬浮如一片静止的雪原。一架生铁检修爬梯直通底部的备用手动阀门，狭窄得仅容两人侧身擦肩，严寒与管线残余静电不断刺激神经末梢。",
+   "exits": [
+    "quantum_core_control_deck",
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "id": "cryogenic_liquid_nitrogen_service_well",
+   "name": "环形磁道超导液氮备用排气与加压竖井",
+   "pressure_modifiers": {
+    "p_nitrogen_valve_ice_jam": "转轮表面结有三厘米厚坚硬如铁的重度冰壳，冰晶不断吸收周围微弱热量。",
+    "p_soaked_suit_hypothermia": "女主管湿透的衬衫在极寒下迅速硬化，肌肤大面积泛起冻伤苍白。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "幽暗的冷光指示灯透过定格的冰雾折射出朦胧光晕，视线受限于两米之内。",
+   "witnesses": [
+    "bg_ladder_frozen_pipeman"
+   ]
+  },
+  {
+   "affordances": [
+    "侧身穿行在静止的子弹与火花空隙间小心避开高温等离子体区域",
+    "从定格队员的战术背心上取下一把高硬度合金破拆匕首备用",
+    "在防爆盾牌后让力竭的女主管靠墙坐下，为其揉开抽筋的小腿"
+   ],
+   "detail": "长达一百二十米之环形弧面金属通道。左侧为厚重的铅合金防辐射隔离墙，右侧每隔十米一处观察舷窗。走廊里每隔数米就有一具全副武装的安保队员化作的静止雕塑，有的举枪前冲，有的拉开防爆盾，子弹出膛的火舌定格在枪口三寸处凝成一朵朵金黄火花。金属地面因重力波扰动呈现微弱的波纹状冻结，空气里游离着高浓度静电荷，发丝与衣物都会紧紧吸附。",
+   "exits": [
+    "quantum_core_control_deck",
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "id": "superconducting_magnet_service_corridor",
+   "name": "超导粒子环形跑道外圈防爆环廊",
+   "pressure_modifiers": {
+    "p_static_flashover_storm": "回廊两侧金属扶手不时跳动着蓝紫色的高压静电火花，空气电位逼近击穿临界点。",
+    "p_twelve_minute_collapse": "走廊尽头的时空防护壁边缘开始浮现出微弱的彩色像素化撕裂噪点。"
+   },
+   "privacy": "public",
+   "tags": [
+    "workplace_power",
+    "violence"
+   ],
+   "visibility": "枪口定格的金黄火花提供了静止而诡异的光源，把整条回廊映照得如同现代战场蜡像馆。",
+   "witnesses": [
+    "bg_corridor_firing_trooper"
+   ]
+  },
+  {
+   "affordances": [
+    "利用手环共振电流强行桥接逃生穿梭机机舱之电磁备用启动手柄",
+    "在穿梭机狭窄的皮革副驾驶席上两人紧紧相拥抵御隧道灌入的海风",
+    "在倒计时最后十秒拉动紧急弹射把手将穿梭机弹射出时空坍缩核心区"
+   ],
+   "detail": "直通人工岛地表海湾码头之秘密单轨逃生站台。高强度超导单轨延伸没入漆黑的倾斜隧道，站台上停着一列流线型防辐射封闭逃生穿梭机，舱门半开固定在滑轨上。警报喇叭喷出的音波在空气中凝成微不可察的折射纹路，四周堆着装有绝密纸质档案的金属密封箱。这里是全基地唯一未受量子阱磁场直接覆盖的出口，但时停状态下，弹射轨道需从外部控制台手动注入应急电源方能解除抱死。",
+   "exits": [
+    "cryogenic_liquid_nitrogen_service_well",
+    "superconducting_magnet_service_corridor"
+   ],
+   "id": "subterranean_magnetic_monorail_slipway",
+   "name": "地下三层绝密磁悬浮紧急逃生滑轨站台",
+   "pressure_modifiers": {
+    "p_shuttle_catapult_lock": "电磁弹射卡爪死死咬在导轨上，身后的蓝色激波光芒越来越亮。",
+    "p_twelve_minute_collapse": "隧道口上方的承重岩层开始掉落碎石，时停边界正在剧烈动荡收缩。"
+   },
+   "privacy": "semi",
+   "tags": [
+    "workplace",
+    "crime"
+   ],
+   "visibility": "隧道深处漆黑一片，仅有逃生舱门上绿色的应急安全灯投下一圈幽暗荧光。",
+   "witnesses": [
+    "bg_fleeing_board_envoy"
+   ]
+  }
+ ],
+ "name_pools": {
+  "family": [
+   "橘川",
+   "神城",
+   "桐生",
+   "浅见",
+   "九条",
+   "白石",
+   "御手洗",
+   "黑崎",
+   "高槻",
+   "东堂",
+   "氷室",
+   "鹰野",
+   "久世"
+  ],
+  "given_female": [
+   "真理奈",
+   "诗织",
+   "绚香",
+   "冴子",
+   "由里香",
+   "千冬",
+   "惠理",
+   "美奈代",
+   "玲华",
+   "静香",
+   "早苗",
+   "响子"
+  ],
+  "given_male": [
+   "宗一郎",
+   "健太郎",
+   "浩二",
+   "慎之介",
+   "隆成",
+   "翔平",
+   "达也",
+   "正树",
+   "雷藏",
+   "恭介",
+   "征士",
+   "哲也"
+  ],
+  "given_neutral": [
+   "千寻",
+   "葵",
+   "遥",
+   "熏",
+   "莲",
+   "理央",
+   "瑞",
+   "晶",
+   "真琴",
+   "渚",
+   "光",
+   "翼"
+  ],
+  "nickname_patterns": [
+   {
+    "gender": "any",
+    "pattern": "女皇总监"
+   },
+   {
+    "gender": "any",
+    "pattern": "首席"
+   },
+   {
+    "gender": "any",
+    "pattern": "安保主管"
+   },
+   {
+    "gender": "any",
+    "pattern": "总工"
+   },
+   {
+    "gender": "any",
+    "pattern": "特派员"
+   }
+  ],
+  "order": "family_first"
+ },
+ "notes": "保留时停定格、悬浮水滴与凝固枪火、五米共振手环、断梯与高压断线、极寒竖井破冰、黑匣子火中拔芯、穿梭机弹射出港与十年前学弟的主线。改动：女主管、工程师、监察官、队长、老物理学家固定性别，算法员保持不限；原稿让肢体接触引发“高敏荷尔蒙共鸣”，改为灼麻刺痛与心跳直传；女主管高热、失温时的解扣、贴身复温都只作急救，亲密前提写明“高热与失温都已退去、彻底清醒”，撩拨与告白放到阀门重启、体温回升之后和穿梭机舱里；“只要能走出这里我什么都听你的”属以服从换活命，改为清醒后的主动告白；“层层掌控敏感身心、迫使其交出密钥”改为由女主管自己决定；“上身暴露羞耻万分”的代价改为工程师拉伤；工程师补为第六个人物模板，女主管补为玩家身份；去掉写死的人名橘川、真理奈、雷蒙；手枪改为电磁枪；钩子按长度上限精简；内容标签去掉 coercion_theme；转换为项目格式。",
+ "player_identities": [
+  {
+   "age_range": [
+    30,
+    36
+   ],
+   "baseline": "一身沉稳利落的深灰色防辐射工程战术工装，单手握着钛合金多功能激光校准仪，五官坚毅深邃，眼神在危机面前冷静如极地冰川，臂弯线条精悍有力，腰间悬挂着特种工兵工具包，散发着掌控复杂尖端工业机械之从容自信",
+   "gender": "any",
+   "id": "pc_lead_quantum_hardware_engineer",
+   "reputation": "实验室公认的技术定海神针，以严谨过硬的动手实操著称，多次在极端事故中挽救整座机组。",
+   "resources": [
+    "掌握地下实验室全部三条重力逃生竖井与液氮阀门物理绕过权限",
+    "持有可强行覆盖中央AI防爆闭锁之特级应急光盘"
+   ],
+   "risks": [
+    "若未能在十二分钟内重启液氮回路，将被时空湮灭激波蒸发为基本粒子"
+   ],
+   "role": "临危不乱的首席硬件工程师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}首席"
+    },
+    {
+     "gender": "any",
+     "pattern": "工程主管"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    33,
+    39
+   ],
+   "baseline": "高级定制黑西装套裙因超频冲击开裂，白丝衬衫领扣崩开，薄黑丝膝头擦破一道细痕，金丝半框眼镜斜搭在冷艳面庞上，下肢因力场残留电荷阵阵痉挛，却依然端着学术女皇的傲岸气场",
+   "gender": "any",
+   "id": "pc_renegade_chief_executive_scientist",
+   "reputation": "以铁血裁员与冷酷学术压制著称的“学术女皇”，全所员工闻风丧胆。",
+   "resources": [
+    "普罗米修斯计划全套底层超算权限与冷却阀门物理总密钥",
+    "象征首席特权之纯钛高频量子共振手环"
+   ],
+   "risks": [
+    "力场反噬引发高热痉挛，若共振中断将被重新凝固成蜡像"
+   ],
+   "role": "被时停反噬的冷艳首席主管",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}首席"
+    },
+    {
+     "gender": "any",
+     "pattern": "首席主管"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    32,
+    40
+   ],
+   "baseline": "一袭笔挺冷峻的定制防弹纤维黑西装，雪白衬衣配深蓝丝质领带，单手戴着黑色薄羊皮手套，胸前佩戴最高安全审计徽章，眼神锐利如鹰隼，公文包内藏着一支微型静音电磁枪",
+   "gender": "any",
+   "id": "pc_renegade_board_inspection_specialist",
+   "reputation": "铁面无私的“学术屠夫”，曾亲手关停三座跨国违规核聚变试验堆。",
+   "resources": [
+    "直连联合国核能理事会之高频抗干扰卫星加密黑匣子",
+    "财阀董事会私下篡改安全阈值强行超频之违法邮件存根"
+   ],
+   "risks": [
+    "一旦财阀安保系统恢复，将被当场作为非法入侵商业间谍灭口"
+   ],
+   "role": "潜入调查违规实验的特派监察官",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}特派员"
+    },
+    {
+     "gender": "any",
+     "pattern": "监察官"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    31,
+    38
+   ],
+   "baseline": "一身漆黑沉重的外骨骼重型战术防暴甲胄，单手持握大口径电磁霰弹枪，身躯魁梧如铁塔，战术面罩只露出一双布满血丝的坚毅虎目，虽被力场部分凝固，肌肉仍在以微秒频率抗争",
+   "gender": "any",
+   "id": "pc_elite_security_tactical_commander",
+   "reputation": "安保部队的绝对王牌，经历过油田反恐血战，对基地安全规程了如指掌。",
+   "resources": [
+    "整座地下三层重装军械库之机械锁密码",
+    "外层防爆密封闸门之单兵手动液压破拆千斤顶"
+   ],
+   "risks": [
+    "强行挣脱定格力场可能导致周身毛细血管破裂与永久性神经肌肉损伤"
+   ],
+   "role": "在定格中挣扎苏醒的特战队长",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}队长"
+    },
+    {
+     "gender": "any",
+     "pattern": "特勤指挥官"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    42,
+    52
+   ],
+   "baseline": "一身沾满白霜与冷冻机油的厚重防寒工兵大氅，花白头发凌乱散落，鼻梁上架着老式双光放大镜，单手紧攥纯铜测温计，眼神透着阅尽沧桑的疲惫与洞悉危机的冷峻",
+   "gender": "any",
+   "id": "pc_cynical_chief_cryogenic_physicist",
+   "reputation": "极低温领域的活化石，曾多次公开抗议超频实验却被高层强行压制。",
+   "resources": [
+    "冷却井液氮主管道唯一次级泄压回流旁路的物理位置",
+    "两支高效抗休克肾上腺素与军用高能发热贴"
+   ],
+   "risks": [
+    "患有慢性哮喘，在低温与缺氧环境下极易引发急性呼吸衰竭"
+   ],
+   "role": "深知实验缺陷的低温总工程师",
+   "social_position": "equal",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}工匠"
+    },
+    {
+     "gender": "any",
+     "pattern": "低温总监"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    28,
+    34
+   ],
+   "baseline": "一身整洁的白色防静电实验服，内衬深色针织衫，银丝边眼镜后双眼因连续四十八小时建模布满血丝，双手微微颤抖，十指敲击键盘依然精准如机械",
+   "gender": "any",
+   "id": "pc_subordinate_data_analyst_apprentice",
+   "reputation": "团队中的数据天才，为人温和谨小慎微，暗中同情一线技术工人的处境。",
+   "resources": [
+    "量子阱中央AI核心底层代码之紧急调试后门口令",
+    "记录力场真实衰变曲线的便携式加密固态硬盘"
+   ],
+   "risks": [
+    "在强磁场环境下容易产生剧烈眩晕与恶心反应"
+   ],
+   "role": "被卷入高层博弈的量子算法工程师",
+   "social_position": "low",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}研究员"
+    },
+    {
+     "gender": "any",
+     "pattern": "算法骨干"
+    }
+   ]
+  }
+ ],
+ "premise": "地下八十米绝密研究所突发时空定格事故，全员化为蜡像。三十三岁冷艳科研主管与工程主管因共振手环成为唯二清醒者。十二分钟倒计时后整座基地将被湮灭，唯有合力穿透停滞空间手动重启超导冷却回路。在绝对寂静与近距离搀扶的感官过载中，平日威严冰冷的女主管自尊一点点瓦解，危机平息后与玩家建立起超越时空的极致羁绊。",
+ "pressures": [
+  {
+   "choice": "是冒险走最近但充满高压电弧碎石的回廊，还是绕行极度寒冷结冰的维修竖井？",
+   "exits": [
+    {
+     "cost": "工程师后背被飞溅的滚烫混凝土碎块砸得皮开肉绽，女主管右踝严重挫伤",
+     "option": "工程师背起虚脱的女主管迎着坍塌落石全速穿过高压回廊抄近道直插竖井口"
+    },
+    {
+     "cost": "外围价值百亿之绝密高能实验设备全盘烧毁化为废铁，彻底断绝财阀翻盘可能",
+     "option": "监察官与算法员合力在控制台输入自毁旁路代码，牺牲外围实验室延缓力场坍缩两分钟"
+    }
+   ],
+   "far": {
+    "consequence": "时空曲率激波以光速向外爆发，整座人工岛化作海底巨大深坑，全员在微秒内分解蒸发。",
+    "due_days": 1,
+    "trigger": "十二分钟倒计时彻底归零"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_director_glasses_approach",
+    "hk_engineer_calibrator_approach"
+   ],
+   "id": "p_twelve_minute_collapse",
+   "immediate": {
+    "minutes": 2,
+    "text": "倒计时数字每跳动一秒，空气中便泛起一阵细微的蓝色电磁微光与耳鸣。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "quantum_core_control_deck"
+   ],
+   "near": {
+    "deadline_minutes": 6,
+    "text": "若六分钟内未抵达竖井，力场边缘收缩将导致回廊两端被空间剪切彻底封死。"
+   },
+   "objective": "在十二分钟倒计时归零前穿越受损区域完成液氮阀门手动重启。",
+   "source": "nature",
+   "start_minute": 1439,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "十二分钟终焉湮灭死线",
+   "trigger": "主控屏幕上的血红倒计时固定在七百二十秒，归零前若主磁环还没液氮冷停堆，整座基地及方圆三公里将被时空坍缩激波湮灭成夸克尘埃。"
+  },
+  {
+   "choice": "是解开女主管领扣用冷凝喷雾紧急排热，还是工程师以自身体魄硬生生将其背负前行？",
+   "exits": [
+    {
+     "cost": "工程师一路横抱前行，右臂肌肉严重拉伤，接下来扳转轮使不上全力",
+     "option": "工程师先征得点头，再解开女主管外套与领口，用冷凝气垫贴住其后颈强力排热"
+    },
+    {
+     "cost": "女主管左臂鲜血染红半边衬衫，失血让体力进一步衰竭几乎无法站立",
+     "option": "女主管咬破下唇用合金小刀划破自身左臂，以剧痛强行刺激中枢神经驱散高热昏厥"
+    }
+   ],
+   "far": {
+    "consequence": "女主管化作静止蜡像留在原地，工程师失去核心密码无法开启竖井阀门，双双殒命。",
+    "due_days": 1,
+    "trigger": "手环共振中断女主管凝固"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_director_glasses_approach",
+    "hk_engineer_embrace_protect_approach"
+   ],
+   "id": "p_neural_feedback_fever",
+   "immediate": {
+    "minutes": 1,
+    "text": "女主管面颊潮红，呼出的气息滚烫灼人，单手死死抓着工程师衣襟剧烈颤抖。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "quantum_core_control_deck"
+   ],
+   "near": {
+    "deadline_minutes": 4,
+    "text": "若四分钟内体温未降，高热惊厥将导致手环共振中断，女主管重新被时停力场凝固。"
+   },
+   "objective": "在保持五米共振半径的前提下为女主管实施降温并恢复行动力。",
+   "source": "person",
+   "start_minute": 0,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ],
+   "title": "共振手环高热痉挛",
+   "trigger": "纠缠手环把两人神经强行同步，体质虚弱的女主管在超重力下高热到三十九度、心率一百六，全身痉挛，三分钟内不降温就会热休克昏迷。"
+  },
+  {
+   "choice": "是用纯钢工具硬砸破冰，还是使用便携式电焊喷枪高温除冰？",
+   "exits": [
+    {
+     "cost": "飞溅碎冰在老物理学家脸上划开数道血口，工程师双手虎口震裂鲜血染红锤柄",
+     "option": "老物理学家与工程师轮流挥动十磅生铁大锤，不顾碎冰飞溅连续重击砸碎冰壳"
+    },
+    {
+     "cost": "喷枪反弹的高温蒸汽将女主管双手掌心大面积烫出水泡脱皮",
+     "option": "女主管双手握紧高热喷枪，直接抵在阀门中轴上零距离暴力解冻"
+    }
+   ],
+   "far": {
+    "consequence": "数千吨超导磁体化为奔涌的白炽金属熔浆，整个地下三层瞬间化作火海。",
+    "due_days": 1,
+    "trigger": "超导线圈热熔起火"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_physicist_tongs_approach",
+    "hk_director_glasses_approach"
+   ],
+   "id": "p_nitrogen_valve_ice_jam",
+   "immediate": {
+    "minutes": 1,
+    "text": "转轮轴承发出刺耳的金属冰裂异响，白霜不断顺着手柄向外蔓延。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "cryogenic_liquid_nitrogen_service_well"
+   ],
+   "near": {
+    "deadline_minutes": 3,
+    "text": "若三分钟内未转动转轮，主磁环温度将击穿绝缘层引发不可逆的链式起火。"
+   },
+   "objective": "在四分钟内彻底碎除阀门表面坚冰并强行扳动转轮加压。",
+   "source": "nature",
+   "start_minute": 2,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "竖井加压阀三厘米冰封",
+   "trigger": "竖井底部的纯铜紧急加压阀因先前液氮泄漏结了三厘米硬如铁的冰壳，转轮彻底冻死，主磁环线圈四分钟后干烧突破热熔阈值。"
+  },
+  {
+   "choice": "是用特战外骨骼充当移动避雷针硬抗，还是全员脱去一切金属随身物匍匐前行？",
+   "exits": [
+    {
+     "cost": "外骨骼电控系统彻底烧毁瘫痪，特战队长全身肌肉重度电击痉挛狂吐鲜血",
+     "option": "特战队长把外骨骼地线拖钩插死在铁轨上，挺身用钛合金装甲硬吃五道电弧掩护二人通过"
+    },
+    {
+     "cost": "女主管裙装在粗糙水泥地上磨破大片，双膝与手肘被碎石割得鲜血淋漓",
+     "option": "工程师与女主管卸下全部金属工具、皮带扣与手表，裹着绝缘橡胶毯贴地飞速爬过"
+    }
+   ],
+   "far": {
+    "consequence": "长廊内全员被高压当场电击碳化，所有电子设备与手环彻底报废。",
+    "due_days": 1,
+    "trigger": "回廊发生高压等离子闪爆"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_commander_exoskeleton_approach",
+    "hk_engineer_calibrator_approach"
+   ],
+   "id": "p_static_flashover_storm",
+   "immediate": {
+    "minutes": 2,
+    "text": "空气中充斥着刺鼻的臭氧焦味，两人的发丝受强静电影响全部倒竖悬浮。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "superconducting_magnet_service_corridor"
+   ],
+   "near": {
+    "deadline_minutes": 4,
+    "text": "若四分钟内未通过长廊，弧光放电将瞬间电离整条走廊的空气引发等离子闪爆。"
+   },
+   "objective": "在电弧风暴爆发前安全穿过一百二十米金属长廊。",
+   "source": "accident",
+   "start_minute": 4,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "回廊静电弧击穿风暴",
+   "trigger": "环廊接地线在震动中断裂，静电荷累积到十万伏击穿极限，墙面不断跳出两米长的蓝紫电火花，五分钟后整条走廊空气将被击穿。"
+  },
+  {
+   "choice": "是工程师脱去干燥毛衣贴身紧拥为其复温，还是点燃备用图纸产生明火？",
+   "exits": [
+    {
+     "cost": "工程师胸膛暴露在极寒冷风里，严重受寒引发剧烈咳嗽与急性肺炎高热",
+     "option": "工程师解开防寒工装，把女主管整个拉进大氅里，以自己滚烫的胸膛贴住其后背持续摩擦复温"
+    },
+    {
+     "cost": "老物理学家耗尽毕生心血绘制的唯一原始手绘图纸化为灰烬",
+     "option": "老物理学家点燃随身珍藏的一整卷绝密工程图纸，制造微弱火苗为女主管烘烤湿透的衣物"
+    }
+   ],
+   "far": {
+    "consequence": "女主管在工程师怀中彻底冰冷停止呼吸，手环共振随之湮灭，抢险宣告失败。",
+    "due_days": 1,
+    "trigger": "女主管失温心脏停搏"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_engineer_embrace_protect_approach",
+    "hk_physicist_tongs_approach"
+   ],
+   "id": "p_soaked_suit_hypothermia",
+   "immediate": {
+    "minutes": 2,
+    "text": "女主管牙齿剧烈打战磕碰发出咔咔声，双手僵硬无法握拢，眼神开始涣散。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "cryogenic_liquid_nitrogen_service_well"
+   ],
+   "near": {
+    "deadline_minutes": 4,
+    "text": "若四分钟内核心体温未回升，心室纤颤将导致不可逆的脑死亡。"
+   },
+   "objective": "在竖井狭窄空间内为女主管实施紧急体温复苏保住生命。",
+   "source": "nature",
+   "start_minute": 6,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "湿透套裙深度失温",
+   "trigger": "零下三十五度的竖井里，女主管被高热汗水浸透的衬衫和破损黑丝冻成冰甲，核心体温跌破三十五度，面唇乌青开始谵妄，五分钟内不复温就会室颤。"
+  },
+  {
+   "choice": "是用高能激光烧断钛合金卡爪，还是算法员手动短路穿梭机电容暴力强冲？",
+   "exits": [
+    {
+     "cost": "破拆钳过载断裂反弹击中特战队长左腿导致胫骨断裂，险些跌入悬崖",
+     "option": "特战队长与工程师跳下月台，合力挥动外骨骼液压破拆钳剪断卡死的钛合金抱死臂"
+    },
+    {
+     "cost": "电容过载爆炸引发控制台起火，算法员脸颊与双手被飞溅火星大面积烧伤",
+     "option": "算法员在驾驶台手动短路主电容，以瞬时三倍过载冲断机械卡爪强行弹射起步"
+    }
+   ],
+   "far": {
+    "consequence": "穿梭机连同全员化作蓝色光斑分解湮灭在深邃矿井之中，无一生还。",
+    "due_days": 1,
+    "trigger": "坍缩激波撞毁逃生穿梭机"
+   },
+   "flags": [
+    "timed"
+   ],
+   "hook_ids": [
+    "hk_analyst_laptop_approach",
+    "hk_commander_exoskeleton_approach"
+   ],
+   "id": "p_shuttle_catapult_lock",
+   "immediate": {
+    "minutes": 1,
+    "text": "身后隧道传来惊天动地的岩石粉碎巨响，蓝色光芒已映亮穿梭机后车窗。"
+   },
+   "leverage": null,
+   "location_ids": [
+    "subterranean_magnetic_monorail_slipway"
+   ],
+   "near": {
+    "deadline_minutes": 15,
+    "text": "若两分半钟内未能离轨，坍缩激波将直接撞碎穿梭机防护罩。（2.5分钟）"
+   },
+   "objective": "在激波吞噬月台前强行切断机械卡爪启动单轨弹射推杆。",
+   "source": "accident",
+   "start_minute": 8,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ],
+   "title": "穿梭机卡爪抱死断电",
+   "trigger": "全员登上穿梭机后，轨道主变压器跳闸，电磁弹射卡爪死死锁在导轨上，身后的坍缩激波如蓝色海啸冲破最后一道防爆门，三分钟后吞没月台。"
+  }
+ ],
+ "region": "近未来东京湾人工岛地下八十米量子物理绝密实验室",
+ "rules": [
+  {
+   "id": "r_twelve_minute_collapse",
+   "text": "局部时空相干定格力场存在严格的量子退相干半衰期，系统时钟固定在十二分钟（七百二十秒）倒计时，计时归零时时空曲率激波将引发绝对物质湮灭。"
+  },
+  {
+   "id": "r_displacement_neural_sting",
+   "text": "在时停力场中移动凝固物体需要克服数倍于常态的重力阻尼，与处于活动状态之人体发生触碰会激起一阵灼麻刺痛的神经电位共鸣，像静电贴着皮肤爬过。"
+  },
+  {
+   "id": "r_bracelet_five_meter_tether",
+   "text": "两名清醒幸存者必须保持在五米有效共振半径之内，若直线距离超出限制，脱离共振者将在三秒内被力场瞬间凝固成静止状态。"
+  },
+  {
+   "id": "r_vault_manual_reset_only",
+   "text": "中央主控量子阱的外层隔热液氮阀门一旦受高热熔毁，只能通过手动进入温度低至零下四十度的内层排气竖井实施机械复位。"
+  }
+ ],
+ "schema_version": 1,
+ "stage_labels": {
+  "acquainted": "手环共享心跳",
+  "committed": "终身科研盟约",
+  "familiar": "凝固中的搀扶",
+  "flirting": "退热后的耳语",
+  "intimate": "逆流微光相拥",
+  "stranger": "定格瞬间的戒备",
+  "testing": "湮灭前的托付"
+ },
+ "status": "released",
+ "style_hint": "放大绝对寂静里的微观感官：凝固水滴、半空火花、雷鸣般心跳、丝袜擦过冰冷地面的沙沙声。硬核量子工程感与高冷女强人失控后的反差羞愤并行。",
+ "tension_engines": [
+  {
+   "id": "te_twelve_minutes_vs_slow_advance",
+   "text": "时钟定格力场仅存十二分钟之绝对毁灭死线与幸存者在重力阻尼极寒空间中举步维艰之时间绝境拉扯"
+  },
+  {
+   "id": "te_ice_queen_pride_vs_fever",
+   "text": "三十三岁冷艳科研总监平日不可一世之学术傲岸与高热瘫软、不得不靠在工程师怀里前行之极致反差羞愤"
+  },
+  {
+   "id": "te_tether_vs_skin_contact",
+   "text": "手环五米不可脱离之强制贴身规则与每一次搀扶都把彼此心跳与体温直接传进对方皮肤之贴身张力"
+  },
+  {
+   "id": "te_coverup_vs_truth",
+   "text": "跨国财阀违规强推超频实验之资本黑幕与绝境中技术人员舍命救助上百蜡像部属之人性光辉撞击"
+  }
+ ],
+ "title": "时停实验室：冷艳主管与十二分钟",
+ "tone": [
+  "时间停止",
+  "密室绝境",
+  "反差女主管",
+  "感官共鸣"
+ ],
+ "twists": [
+  {
+   "category": "信息",
+   "id": "t_timestop_1",
+   "requires": [],
+   "text": "监察官解锁的底层日志揭晓：提出超频项目的根本不是女主管，而是财阀会长为了治疗自身晚期脑癌，以关停全组、开除全员为要挟逼迫女主管违规上马，女主管多年来一直在秘密调整代码试图化解隐患。"
+  },
+  {
+   "category": "人事",
+   "id": "t_timestop_2",
+   "requires": [],
+   "text": "定格在穿梭机门前的董事特使公文箱跌落摔开，里面是一份会长亲笔签署的《全基地人员事故清理执行令》：实验成功后，女主管与全体技术骨干将被伪造为触电事故就地灭口。"
+  },
+  {
+   "category": "资源",
+   "id": "t_timestop_3",
+   "requires": [],
+   "text": "竖井底部的备用液氮储气罐夹层里，老物理学家私下藏了三支军用微型常温反物质稳定核心，接入穿梭机引擎不仅能瞬间提供澎湃动力，更能在激波扫过时形成物质防护壁。"
+  },
+  {
+   "category": "制度",
+   "id": "t_timestop_4",
+   "requires": [],
+   "text": "联合国核安全理事会卫星专线突破电磁屏蔽播报：最高理事会已全票通过《极端科技犯罪紧急干预法案》，剥夺重工财阀在东京湾的一切资产特权，全权接管基地撤离人员。"
+  },
+  {
+   "category": "时限",
+   "id": "t_timestop_5",
+   "requires": [
+    "pressure"
+   ],
+   "text": "主磁环次级电容连锁击穿放电，力场退相干骤然提前四分钟爆发，原本还剩六分钟的倒计时被断崖式压缩到不足一百二十秒。"
+  },
+  {
+   "category": "关系",
+   "id": "t_timestop_6",
+   "requires": [],
+   "text": "工程师替女主管拾起掉落的钱夹，滑出一张泛黄的十年前东京大学物理系辩论赛合影：女主管当年在台上当众驳倒并折服的那个无名学弟，正是眼前这位隐姓埋名在一线维护设备的工程师。"
+  },
+  {
+   "category": "意外",
+   "id": "t_timestop_7",
+   "requires": [],
+   "text": "液氮阀门重启引发的反向超导激波不仅扑灭了磁环过载，更在轨道上方轰开一处二战遗留的废弃潜艇通海竖井，为众人直通地表海面逃生打开了一条生路。"
+  }
+ ]
+}

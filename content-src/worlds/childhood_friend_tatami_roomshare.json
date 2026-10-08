@@ -1,0 +1,2428 @@
+{
+ "schema_version": 1,
+ "id": "childhood_friend_tatami_roomshare",
+ "title": "六叠合租：青梅与末班车",
+ "extends": null,
+ "era": "2000年代初东京高円寺老旧木造公寓梅雨季深夜",
+ "region": "高円寺中央线铁道旁老旧木造公寓二楼西侧六叠榻榻米单间与公共狭小走廊",
+ "premise": "突发特大雷雨淹没中央线铁轨导致末班电车停运，年满二十岁的名门大学校花青梅竹马被迫滞留于同乡青年的六叠榻榻米狭小公寓。薄板纸门隔音极差，房东严查异性留宿，暴雨停电的黑暗中唯有一床单人被褥。多年的毒舌伪装与刻意维持的社交距离，在方寸密闭空间的呼吸声中寸寸瓦解。",
+ "tone": [
+  "雷雨轰鸣",
+  "单人薄被",
+  "纸门回音",
+  "心跳过载"
+ ],
+ "style_hint": "窗外暴雨狂暴抽打着老旧木框玻璃，中央线货运列车呼啸驶过震得榻榻米微微颤抖。六叠逼仄空间内仅亮着一盏微弱受潮的蜡烛，空气中弥漫着湿透帆布鞋与青涩柠檬洗发水的清香。",
+ "clock_start": {
+  "label": "暴雨深夜十一点半，末班车彻底停摆且公寓门禁查房在即",
+  "minute": 1410
+ },
+ "clock_style": "hm",
+ "default_person": "second",
+ "default_npc_gender_mix": {
+  "female": 0.5,
+  "male": 0.45,
+  "nonbinary": 0.05
+ },
+ "stage_labels": {
+  "stranger": "客套生疏",
+  "acquainted": "毒舌讥诮",
+  "familiar": "借宿分被",
+  "flirting": "指尖触碰",
+  "testing": "旧情试探",
+  "intimate": "暗夜相拥",
+  "committed": "并肩同诺"
+ },
+ "name_pools": {
+  "family": [
+   "浅井",
+   "水野",
+   "藤原",
+   "桐生",
+   "橘川",
+   "泽村",
+   "白石",
+   "佐佐木",
+   "小林",
+   "神崎",
+   "高桥",
+   "井上"
+  ],
+  "given_female": [
+   "真央",
+   "诗织",
+   "理惠",
+   "亚美",
+   "真由美",
+   "小春",
+   "结衣",
+   "奈绪",
+   "千寻",
+   "绘里奈",
+   "葵",
+   "凉子"
+  ],
+  "given_male": [
+   "悠真",
+   "健太",
+   "达也",
+   "莲",
+   "直树",
+   "亮平",
+   "拓哉",
+   "慎吾",
+   "一树",
+   "浩平",
+   "龙之介",
+   "大辅"
+  ],
+  "given_neutral": [
+   "澄",
+   "遥",
+   "熏",
+   "朔",
+   "真琴",
+   "光",
+   "凉",
+   "晴",
+   "步",
+   "司",
+   "翼",
+   "优"
+  ],
+  "nickname_patterns": [
+   {
+    "pattern": "{family}同学",
+    "gender": "any"
+   },
+   {
+    "pattern": "小{family}",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}前辈",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}学长",
+    "gender": "any"
+   },
+   {
+    "pattern": "{family}管理官",
+    "gender": "any"
+   }
+  ],
+  "order": "family_first"
+ },
+ "rules": [
+  {
+   "id": "r_thin_wall_acoustic_limit",
+   "text": "木造公寓隔墙仅为单层夹板石膏，室内交谈声音若超过耳语分贝即刻引发隔壁敲墙抗议。"
+  },
+  {
+   "id": "r_landlady_curfew_inspection",
+   "text": "公寓一层管理员房东每逢雨夜必手持手电筒突击巡查各户，严禁未登记异性通宵滞留。"
+  },
+  {
+   "id": "r_single_futon_confinement",
+   "text": "房内仅有一床单人垫褥与一条薄绒毯，地板潮气逼人无法直接卧地入睡。"
+  },
+  {
+   "id": "r_storm_power_cut_isolation",
+   "text": "高円寺区域因雷击全面拉闸断电，整栋公寓陷入黑暗且座机电话线路完全中断。"
+  }
+ ],
+ "customs": [
+  "在狭窄玄关脱下湿透衣物时，必须背对居室拉上一道布帘以示礼节防线。",
+  "为防房东在门外窥见室内烛光暗影，必须用厚报纸将玄关毛玻璃信箱口完全糊死。",
+  "雨夜合租室内若有动静，彼此以轻击木质茶几边缘三下作为外界有人靠近警示。",
+  "若遇邻居用力敲击隔墙，室内必须立刻同时陷入绝对静默并吹熄烛火。"
+ ],
+ "player_identities": [
+  {
+   "id": "struggling_college_prep_student",
+   "role": "半工半读大学备考生",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "租客学子",
+     "gender": "any"
+    },
+    {
+     "pattern": "备考同乡",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    20,
+    23
+   ],
+   "social_position": "equal",
+   "baseline": "年满二十周岁自乡下赴东京求学的重考生，在便利店通宵打工维系六叠榻榻米微薄房租。",
+   "resources": [
+    "一壶刚在煤气灶上烧开的温热大麦茶",
+    "一套干净干燥的大号灰色棉质运动服常服"
+   ],
+   "reputation": "老实本分沉默寡言，在乡邻长辈眼中是个规矩端方但略显木讷的踏实后生。",
+   "risks": [
+    "一旦被房东抓到留宿违规将被当场没收押金并勒令三日内搬离公寓。"
+   ]
+  },
+  {
+   "id": "freelance_indie_game_coder",
+   "role": "深夜独立程序兼职生",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "编程技术员",
+     "gender": "any"
+    },
+    {
+     "pattern": "夜班极客",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    24
+   ],
+   "social_position": "equal",
+   "baseline": "年满二十一周岁就读于工科大学的兼职软件工程师，在狭小单间内搭建旧式台式机承接外包。",
+   "resources": [
+    "一台蓄电池供电的便携应急日光灯",
+    "一条用于隔绝门缝漏风的加厚防尘隔音毛巾"
+   ],
+   "reputation": "昼伏夜出极少社交，对电路布线与微弱声学震动有着近乎强迫症的敏锐感知。",
+   "risks": [
+    "雷击导致未保存的外包核心代码彻底烧毁将承担高达数个月生活费赔偿。"
+   ]
+  },
+  {
+   "id": "junior_salaryman_freshman",
+   "role": "新晋商社试用期社畜",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "新人职员",
+     "gender": "any"
+    },
+    {
+     "pattern": "试用期后辈",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    22,
+    24
+   ],
+   "social_position": "high",
+   "baseline": "年满二十二岁刚入职涩谷贸易商社的新人推销员，整日穿廉价西装承受部长严酷训斥。",
+   "resources": [
+    "两把未拆封的全新抗风长柄透明雨伞",
+    "一包在便利店购买的速食咖喱与微波白米饭"
+   ],
+   "reputation": "待人接物小心翼翼如履薄冰，极度渴望在东京扎下根来赢得尊重。",
+   "risks": [
+    "若次日早晨因留宿风波迟到错过全员晨会将被直接取消试用期转正资格。"
+   ]
+  },
+  {
+   "id": "campus_orchestra_violinist",
+   "role": "音乐系贫困特优生",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "乐团小提琴手",
+     "gender": "any"
+    },
+    {
+     "pattern": "音乐系助教",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    21,
+    24
+   ],
+   "social_position": "low",
+   "baseline": "年满二十一周岁依靠全额奖学金在东京学琴的年轻演奏员，房间角落立着视若生命的琴盒。",
+   "resources": [
+    "一盒用于小提琴弓毛除湿的高级松香与鹿皮布",
+    "敏锐的分贝与音准辨析听力天赋"
+   ],
+   "reputation": "清高孤傲不苟言笑，对生活品质极端苛求却受窘于赤贫的物质现实。",
+   "risks": [
+    "暴雨潮气浸入名贵小提琴面板导致面板开裂将背负难以承受的修琴巨债。"
+   ]
+  },
+  {
+   "id": "convenience_store_night_clerk",
+   "role": "便利店深夜值班店员",
+   "gender": "any",
+   "title_patterns": [
+    {
+     "pattern": "便利店员",
+     "gender": "any"
+    },
+    {
+     "pattern": "夜巡伙计",
+     "gender": "any"
+    }
+   ],
+   "age_range": [
+    20,
+    23
+   ],
+   "social_position": "low",
+   "baseline": "年满二十周岁在公寓街角罗森便利店上大夜班的年轻打工仔，熟稔街区全部人事动态。",
+   "resources": [
+    "一只装满临期下架关东煮与饭团的保鲜保温盒",
+    "一套高円寺地下水管总阀扳手工具"
+   ],
+   "reputation": "热心仗义市井经验丰富，对老旧木造公寓的各种规矩漏洞了如指掌。",
+   "risks": [
+    "擅自脱岗被督导巡查抓现行将被扣发全月全勤奖金并通报开除。"
+   ]
+  }
+ ],
+ "locations": [
+  {
+   "id": "tatami_living_bedroom",
+   "name": "六叠榻榻米起居主室",
+   "detail": "不足十平米的老旧榻榻米单间，靠窗摆着矮脚小木茶几与书架，中央铺着一床单人浅灰被褥，泛黄纸拉门紧闭，空气中弥漫着旧草席与雨水潮气。",
+   "privacy": "private",
+   "visibility": "窗外暴雨闪电划过时将室内两道并肩倒影清晰投射在纸拉门上，烛火摇曳下昏黄而局促。",
+   "witnesses": [
+    "bg_nosy_neighbor_otaku"
+   ],
+   "exits": [
+    "narrow_entry_genkan",
+    "communal_exterior_balcony"
+   ],
+   "affordances": [
+    "在单人被褥边缘分坐避开肢体直接碰撞",
+    "借暴雨雷鸣掩盖压低嗓音的旧事坦白",
+    "吹熄蜡烛制造绝对黑暗避开窗外视线"
+   ],
+   "pressure_modifiers": {
+    "p_thunderstorm_blackout_confinement": "闪电强光频频穿透旧窗帘将室内剪影照得纤毫毕现。",
+    "p_thin_wall_whisper_leakage": "茶几上马克杯轻放桌面都会引来隔壁邻居敲壁警告。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "narrow_entry_genkan",
+   "name": "狭小水泥下沉玄关",
+   "detail": "宽仅一米的进门玄关，水泥地面湿滑泥泞，摆放着两双湿漉漉的湿透皮鞋与布鞋，薄木外门有一处带毛玻璃的投信口直通走廊。",
+   "privacy": "semi",
+   "visibility": "门外公用走廊感应灯偶尔闪烁，透过投信口缝隙能清晰窥见门外走动的人影皮靴。",
+   "witnesses": [
+    "bg_delivery_courier_runner"
+   ],
+   "exits": [
+    "tatami_living_bedroom",
+    "second_floor_wooden_corridor"
+   ],
+   "affordances": [
+    "挂起湿透外套并递送干燥毛巾",
+    "用报纸封死门框投信孔阻断外部窥视",
+    "按住门内防盗链严防门外推门查验"
+   ],
+   "pressure_modifiers": {
+    "p_landlady_doorstep_curfew_raid": "门外传来生铁钥匙串撞击与沉重巡查脚步声。",
+    "p_wet_clothes_hypothermia_chill": "湿衣服紧贴身躯正不断抽走体温引发剧烈打颤。"
+   },
+   "tags": [
+    "workplace",
+    "crime"
+   ]
+  },
+  {
+   "id": "second_floor_wooden_corridor",
+   "name": "二楼狭长木质走廊",
+   "detail": "常年泛潮散发霉味的木结构公用走廊，脚踩在木板上发出刺耳吱呀声，尽头设有一间简易公用卫生间与投币淋浴房。",
+   "privacy": "public",
+   "visibility": "走廊吊顶挂着昏暗的四十瓦裸灯泡，在过堂暴风雨中疯狂摇晃发出刺耳晃动声。",
+   "witnesses": [
+    "bg_strict_landlady_patrol",
+    "bg_drunk_salaryman_tenant",
+    "bg_part_time_college_girl"
+   ],
+   "exits": [
+    "narrow_entry_genkan",
+    "communal_exterior_balcony"
+   ],
+   "affordances": [
+    "排查各户房门紧闭状态与巡查盲区",
+    "从公用洗手池接取干净饮用水",
+    "借列车轰鸣掩盖脚步快步穿行"
+   ],
+   "pressure_modifiers": {
+    "p_landlady_doorstep_curfew_raid": "房东手电筒强光正顺着走廊木板一间间照向门缝。",
+    "p_thin_wall_whisper_leakage": "醉酒租客在走廊上骂骂咧咧踢打房门制造混乱。"
+   },
+   "tags": [
+    "workplace_power",
+    "violence"
+   ]
+  },
+  {
+   "id": "communal_exterior_balcony",
+   "name": "铁道旁外挂晾晒小阳台",
+   "detail": "连通起居室外侧的铁艺狭窄阳台，正对中央线铁路路基仅隔五米，暴雨如注狂风呼啸，栏杆挂满晾衣绳与遮雨油布。",
+   "privacy": "semi",
+   "visibility": "疾驰而过的电车车头大灯每隔十分钟将阳台瞬间照得通亮如白昼，狂风吹卷着雨帘。",
+   "witnesses": [
+    "bg_train_railway_conductor"
+   ],
+   "exits": [
+    "tatami_living_bedroom",
+    "second_floor_wooden_corridor"
+   ],
+   "affordances": [
+    "将湿衣服晾在避雨遮布下风干",
+    "凭栏观察铁道路基积水与通车复航信号",
+    "在暴风雨呼啸中大口呼吸平复紊乱心跳"
+   ],
+   "pressure_modifiers": {
+    "p_thunderstorm_blackout_confinement": "暴风雨直接将雨水潲进阳台推拉门轨道积水。",
+    "p_train_headlight_flash_exposure": "列车大灯雪白强光直射推拉门玻璃透进室内。"
+   },
+   "tags": [
+    "workplace",
+    "crime"
+   ]
+  }
+ ],
+ "character_templates": [
+  {
+   "id": "tsundere_campus_queen_mao",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    20,
+    22
+   ],
+   "adult_context": "年满二十周岁具有完全独立自主民事行为能力的名门早稻田大学法学部在读校花青梅竹马。",
+   "public_role": "早稻田大学法学部大二校花",
+   "appearance_options": [
+    "深蓝修身学院风呢子大衣已被暴雨打透大半，内穿雪白荷叶边衬衫贴在锁骨前，黑色长发湿成缕贴在精致白皙的面颊，眼睫挂着雨水，抱臂立于玄关咬着下唇强撑毒舌冷艳气场。",
+    "换上一套宽大松垮的灰色运动服蜷坐在榻榻米被褥一角，赤足蜷缩脚趾泛白，双手捧着温热马克杯，神情在昏黄烛光下透着无处躲藏的羞赧与青涩脆弱。"
+   ],
+   "identity": {
+    "authority": "名门大学法学会辩论队首席辩手，在同辈学子与追求者群中享有高不可攀的高岭之花声望。",
+    "resources": [
+     "一只装有研究生证与高额兼职家教报酬的普拉达皮质通勤包",
+     "一本自高中时期随身携带折角的早年旧相册手记"
+    ],
+    "limits": [
+     "自尊心极强绝不肯在发小面前露出半分示弱与贫困窘态",
+     "极度恐高且在剧烈雷电暴鸣中有重度早年创伤应激反应"
+    ],
+    "obligations": [
+     "维持品学兼优优雅体面的完美形象，绝不能让孤身留宿异性简陋公寓的丑闻传回老家引起流言蜚语。"
+    ],
+    "exposure": "一旦被大学同学拍到雨夜滞留廉价木造合租房并在异性房间留宿，将在校内圈子遭受恶意非议形象崩塌。",
+    "hidden": "今夜其实故意错过了两趟完全可以赶上的早班电车，内心深处一直渴望确认对方在考上东京后是否依然将自己放在心尖。"
+   },
+   "decision": {
+    "core_value": "独立与骄傲是立身之本，唯独在这间充满熟悉的同乡气味的六叠暗室里，不想再戴着面具活着。",
+    "goal_options": [
+     "在破晓首班电车恢复运行前安全避开房东查房脱身",
+     "在狭小逼仄的单人被褥空间里守住最后的矜持防线",
+     "彻底解开自高中毕业离乡以来横亘在两人生疏隔阂的心结"
+    ],
+    "pressure_responses": {
+     "low": "偏过头去整理湿透发丝，用刻意拉长的毒舌腔调挑剔房间狭小寒酸。",
+     "mid": "双手紧紧攥住宽大运动服衣角，低头盯着榻榻米草席纹理面颊飞红呼吸微促。",
+     "high": "炸雷轰响瞬间吓得惊呼一声扑入同伴怀中，十指死死抓紧同伴后背衣料颤抖不止。",
+     "breaking": "把整张滚烫通红的脸埋进同伴胸口，任凭泪水打湿同伴衣襟泣不成声宣泄多年委屈。"
+    },
+    "withdrawal": "退坐至被褥最里侧墙角，用单薄毛毯将整个人从头到脚严严实实裹成一团。",
+    "relationship_stance": "平日习惯用尖锐带刺的言语保护敏感自尊，唯独面对从小一起长大的同伴有着毫无保留的依恋深情。",
+    "contrast": "在大学社交圈是高不可攀谈吐优雅的法学系名门千金，在这间简陋六叠出租屋内却会因停电炸雷吓得攥紧被角、嘴还硬着不肯认。",
+    "prefers": [
+     "沉稳体贴嘴笨却能在关键时刻毫无保留撑起伞的可靠踏实人"
+    ],
+    "avoids": [
+     "满嘴油腔滑调自命不凡的花花公子",
+     "毫无界限感恶意打探隐私的长舌邻人"
+    ],
+    "never": [
+     "绝不会在金钱利益与虚荣攀比面前放弃两人十余年来纯净无瑕的青梅情谊。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "雨夜进门时毫不犹豫递过干燥毛巾并自觉侧过身去的端方君子风度",
+     "雷鸣炸响时伸过手臂紧紧捂住自己双耳的温厚宽阔手掌"
+    ],
+    "likes": [
+     "雷雨停歇后两人并肩坐在阳台屋檐下分食一盒热咖喱饭的静谧心动",
+     "在狭小被窝边缘彼此指尖微触时不约而同的屏息凝视"
+    ],
+    "dislikes": [
+     "带着戏谑意味的轻浮越界",
+     "居高临下的道德施舍"
+    ],
+    "preconditions": [
+     "早稻田大学法学部大二校花与对方都已完全清醒，眼前的危机已经解除",
+     "早稻田大学法学部大二校花出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在未正式确立名分与互通心意前严禁任何突破底线的放肆",
+     "相处期间恪守彼此自律尊严绝不践踏界限"
+    ],
+    "expression": "眼角挂着泪痕羞涩仰起脸庞，以柔软微颤的指尖抚平对方眉间褶皱，轻声吐露等了对方整整三年的真心。",
+    "desire_range": [
+     2,
+     4
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "卸下完美校花伪装后最真实纯粹的灵魂归宿"
+   },
+   "voices": {
+    "surface": "别误会了！我只是因为中央线停运才顺路借避一下雨，明早六点第一班电车我立刻就走！",
+    "inner": "大笨蛋……你真的要把被子全推给我自己去睡地板吗？地板那么潮……你、你稍微靠过来一点也没关系的……"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 29,
+     "location_id": "tatami_living_bedroom"
+    },
+    {
+     "from": 30,
+     "to": 59,
+     "location_id": "tatami_living_bedroom"
+    },
+    {
+     "from": 60,
+     "to": 1409,
+     "location_id": "communal_exterior_balcony"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "narrow_entry_genkan"
+    }
+   ],
+   "situation": {
+    "trigger": "房东在门外用钥匙重重敲门声称怀疑有未登记异性非法夜宿。",
+    "pressure": "若被强行推门查验，两人将被当场逐出公寓并通报老家社区失去居所。",
+    "exits": [
+     {
+      "option": "青梅迅速缩入被褥壁橱深处屏息隐蔽",
+      "cost": "在逼仄不透气的狭窄壁橱中承受半小时窒息极热与黑暗煎熬。"
+     },
+     {
+      "option": "摊开全套司法考试法条谎称借伞顺路避雨",
+      "cost": "同伴被房东罚款扣除半个月水电保证金作为深夜喧哗代价。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "strict_landlady_mrs_takahashi",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    23,
+    25
+   ],
+   "adult_context": "年满二十三岁继承家族老旧木造不动产正式登记执业的青年女房东。",
+   "public_role": "木造公寓严苛青年女房东",
+   "appearance_options": [
+    "一身深灰棉麻和风家居和服外披深蓝半缠，脚踩木屐，手提大号金属强光手电筒与大串黄铜钥匙，眼神精明严苛，嘴角总是紧绷着严肃弧度。",
+    "在走廊昏暗光线下来回巡视，木屐踩在老旧木板上发出规律而富有威慑力的嗒嗒声，对整栋楼每间房的开门闭户明察秋毫。"
+   ],
+   "identity": {
+    "authority": "掌控整栋公寓房间租约存废、押金扣除、公共水电总闸及即刻报警驱逐房客绝对威权。",
+    "resources": [
+     "一串拥有全楼每一扇木门备用主钥匙的通用铜环钥匙",
+     "一份记录全部住户登记身份档案的皮革账本"
+    ],
+    "limits": [
+     "不能在无正当违规证据前提下强闯租客私人居室",
+     "极度害怕公寓发生火灾事故或治安恶性事件牵连物业声誉"
+    ],
+    "obligations": [
+     "以铁腕规矩维护木造老公寓夜间秩序，严防男女混住引发治安风波与邻里纠纷。"
+    ],
+    "exposure": "私自收取高额违约金若遭消费者协会投诉将面临停业整顿民事赔偿。",
+    "hidden": "年轻守产面对复杂形色租客必须靠冷脸立威，内心深处其实对孤身在东京拼搏的年轻学子怀有一丝隐秘同情。"
+   },
+   "decision": {
+    "core_value": "无规矩不成方圆，老旧木房最怕火灾与混乱，严苛管理是为了让所有人平安活下去。",
+    "goal_options": [
+     "在破晓前彻底查清西侧六叠单间内是否有违规异性留宿",
+     "收取违约留宿罚金或勒令违纪人员即刻冒雨离场",
+     "确保整栋木楼在特大雷雨之夜平安度过无漏电走火"
+    ],
+    "pressure_responses": {
+     "low": "在门外停下木屐脚步，用手电筒光柱反复扫视门缝投信孔有无漏光。",
+     "mid": "用铁钥匙重重敲击木门三下，严厉报出房东姓名勒令开门接受安全例检。",
+     "high": "将备用钥匙插进锁孔转动半圈，严厉警告限时十秒内拉开门闩否则强行破门。",
+     "breaking": "发现走廊配电箱被雷击冒火，扔下手电筒慌张大喊求助寻找灭火器。"
+    },
+    "withdrawal": "退回一层值班管理室，在账本上重重记下一笔违约警告留待次日清算。",
+    "relationship_stance": "公私分明极重契约，对老实本分守规矩的青年怀有长姐般的隐秘呵护。",
+    "contrast": "外表是锱铢必较毫无情面的冷血恶房东，在灾害危险来临时却能展现出果断担当的坚强本色。",
+    "prefers": [
+     "守规蹈矩按时交租且言行端正诚恳的本分青年"
+    ],
+    "avoids": [
+     "聚众酗酒深更半夜喧闹的社会游民",
+     "满嘴谎言企图赖账的狡诈无赖"
+    ],
+    "never": [
+     "绝不会在狂风暴雨的雷电灾害中将生病垂危的年轻租客真正绝情赶入雨夜等死。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "在危难面前毫不推诿主动挺身相助扑灭火患的硬朗担当",
+     "面对刁难审视依然坦荡守礼的清澈目光"
+    ],
+    "likes": [
+     "雨过天晴后租客主动协助清扫走廊积水瓦砾的踏实勤快",
+     "喝下一碗温热解暑麦茶时的舒心释怀"
+    ],
+    "dislikes": [
+     "轻浮挑逗女房东",
+     "毫无担当的懦弱推脱"
+    ],
+    "preconditions": [
+     "木造公寓严苛青年女房东与对方都已完全清醒，眼前的危机已经解除",
+     "木造公寓严苛青年女房东出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "在房屋租赁管理期间恪守公职分寸",
+     "严禁任何带有权力寻租胁迫性质的私情干涉"
+    ],
+    "expression": "收起严厉面孔叹了口气，递过两盒蜡烛与干毛巾，假意冷哼警告仅此一次下不为例。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "冰冷东京都市丛林中可以遮风挡雨的安身立命之所"
+   },
+   "voices": {
+    "surface": "西侧二零二室！开门！我是高桥！听到里面有女人动静了，老实把门拉开！",
+    "inner": "小子，别以为我不知道你们乡下青梅竹马那点事……今晚雨大我不赶人，但要是敢弄出半点动静让邻居投诉，明早卷铺盖滚蛋！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 29,
+     "location_id": "narrow_entry_genkan"
+    },
+    {
+     "from": 30,
+     "to": 59,
+     "location_id": "second_floor_wooden_corridor"
+    },
+    {
+     "from": 60,
+     "to": 1409,
+     "location_id": "communal_exterior_balcony"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "second_floor_wooden_corridor"
+    }
+   ],
+   "situation": {
+    "trigger": "房东在玄关门外发现了一柄明显属于名门大学校花的高定印花折叠女伞。",
+    "pressure": "若不能给出一个合理解释，房东将在三十秒内动用万能钥匙拧开车锁当场抓现行。",
+    "exits": [
+     {
+      "option": "谎称是老家亲堂妹突发胃痛前来借宿避难",
+      "cost": "需在次日清晨向房东补交亲属户籍誊本证明并补缴三千日元管理费。"
+     },
+     {
+      "option": "主动承诺次日义务承包全楼排水沟清淤体力劳动",
+      "cost": "自身需在炎炎夏日连续劳作整整两天承受严重腰肌劳损代价。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "jealous_senior_crush_ken",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    22,
+    24
+   ],
+   "adult_context": "年满二十二岁名门大学四年级研究生会主席兼名门财阀子弟青年追求者。",
+   "public_role": "名门大学研究生会精英学长",
+   "appearance_options": [
+    "一身笔挺考究的阿玛尼定制防雨风衣，撑着昂贵黑色长柄雨伞，开着一辆深红保时捷停在公寓楼下，神情傲慢阴鸷，手里捏着疯狂拨打的诺基亚手机。",
+    "踩着擦得锃亮的纯黑意式皮鞋站在木造公寓楼梯转角，眼神充满轻蔑与难以置信的妒火，打量着脏乱破旧的合租回廊。"
+   ],
+   "identity": {
+    "authority": "背后拥有雄厚财团资本与大学社团评审大权，在校内对真央展开狂热追求与资源包揽。",
+    "resources": [
+     "一辆停在楼下随时可驶往五星级酒店行政套房的豪华轿车",
+     "一张存有数百万零花钱的无限透支黑金附卡"
+    ],
+    "limits": [
+     "忌惮引发名门家族丑闻不敢当街动粗闹上警署",
+     "受制于贵族教养面子不能公开大吵大闹破门"
+    ],
+    "obligations": [
+     "将心目中的完美女神从贫民窟廉价合租房接走据为己有。"
+    ],
+    "exposure": "深夜尾随女研究生行踪若遭拍照曝光将被剥夺研究生会主席职务并在家族中颜面扫地。",
+    "hidden": "实则早在高中时期便嫉妒青梅竹马与真央之间无法插足的默契，不惜一切代价要用金钱斩断羁绊。"
+   },
+   "decision": {
+    "core_value": "金钱与阶层能够买到一切，乡下穷小子根本不配与名门校花站在一起。",
+    "goal_options": [
+     "在破晓前迫使真央拉开房门坐上自己的保时捷离开",
+     "用金钱补偿或求职内定诱惑逼迫穷小子主动退出",
+     "抓住两人孤男寡女共处一室的把柄在校内制造舆论施压"
+    ],
+    "pressure_responses": {
+     "low": "在楼下不断按动豪车喇叭，疯狂拨打真央手机实施疲劳轰炸。",
+     "mid": "踏上木楼梯敲响房门，以彬彬有礼却居高临下的腔调喊话提出包揽全部费用接送。",
+     "high": "从钱包掏出一沓万元大钞摔在门前玄关，声称用这笔钱买下今晚所有体面。",
+     "breaking": "被真央拉开门当面冷冷呵斥并淋了一头冷水，在雷雨中狼狈败退跌坐车内。"
+    },
+    "withdrawal": "坐回车内猛力拍打方向盘，踩下油门在积水街道上狂飙离去。",
+    "relationship_stance": "把爱情物化为展示自身实力的战利品，对纯粹真挚的情感怀有病态的毁灭欲。",
+    "contrast": "表面是风度翩翩前途无量的校区天之骄子，在得不到的执念面前却暴露出极端狭隘自私的真面目。",
+    "prefers": [
+     "对自己百依百顺仰人鼻息的附庸崇拜者"
+    ],
+    "avoids": [
+     "视金钱如粪土且油盐不进的硬骨头",
+     "一眼看穿自己虚伪本质的清醒之人"
+    ],
+    "never": [
+     "绝不容许自己在公开社交场合被一个住廉价出租屋的底层重考生当面击败。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "高傲冷艳不染纤尘的校花神颜与独立风骨",
+     "在众人面前压过对手一头的成就感"
+    ],
+    "likes": [
+     "用名牌礼物砸碎对手自尊那一瞬间的优越感",
+     "在众人瞩目下挽起女神手臂的虚荣满足"
+    ],
+    "dislikes": [
+     "被当众冷落无视",
+     "被拿来与底层穷小子做比较"
+    ],
+    "preconditions": [
+     "名门大学研究生会精英学长与对方都已完全清醒，眼前的危机已经解除",
+     "名门大学研究生会精英学长出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "严禁任何违法强制违背妇女意愿举动",
+     "恪守最后名流社交体面界限"
+    ],
+    "expression": "收起轻蔑冷笑将雨伞扔给同伴，以阴沉沙哑的口吻撂下走着瞧的狠话转身步入雨幕。",
+    "desire_range": [
+     1,
+     2
+    ],
+    "self_control_range": [
+     2,
+     4
+    ],
+    "desired_position": "以绝对财富与权势构筑的高高在上主宰者王座"
+   },
+   "voices": {
+    "surface": "真央！我是健学长！我已经给五星级酒店订好了总统套房，你何必在这种老鼠窝里受罪？！出来！",
+    "inner": "小子，识相的拿上这笔钱自己去网吧过夜！真央不是你这种住在六叠烂草席上的人配肖想的！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 29,
+     "location_id": "narrow_entry_genkan"
+    },
+    {
+     "from": 30,
+     "to": 59,
+     "location_id": "second_floor_wooden_corridor"
+    },
+    {
+     "from": 60,
+     "to": 1409,
+     "location_id": "communal_exterior_balcony"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "second_floor_wooden_corridor"
+    }
+   ],
+   "situation": {
+    "trigger": "精英学长手持高额商社内定推荐信在门外开出条件要求立刻开门交人。",
+    "pressure": "若不能坚决回绝，真央的自尊心将遭受不可挽回的羞辱，两人关系也将蒙上污浊阴影。",
+    "exits": [
+     {
+      "option": "真央拉开门缝将雨伞当面掷回坚决宣告拒绝",
+      "cost": "彻底与研究生会及商社人脉决裂丧失下一年度全部校内推荐资源。"
+     },
+     {
+      "option": "吹熄蜡烛全员静默对其喊话完全置之不理",
+      "cost": "任由学长在楼下狂按喇叭遭受整栋楼住户的愤怒敲墙与白眼。"
+     }
+    ]
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "nosy_gamer_neighbor_daisuke",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十一周岁租住在东侧单间昼夜颠倒打游戏的职业电竞兼职青年租客。",
+   "public_role": "隔壁东侧单间通宵电竞租客",
+   "appearance_options": [
+    "深色连帽卫衣罩头，戴着大号头戴式铁三角降噪耳机挂在脖子上，黑眼圈浓重，手里捏着半罐冰红牛，面容苍白带着神经质的烦躁。",
+    "穿着大裤衩人字拖站在门口嚼口香糖，只要隔壁传出一丝杂音便会暴躁用拳头狠狠捶打隔断木墙板。"
+   ],
+   "identity": {
+    "authority": "掌控随时向房东投诉制造噪音、引发全楼联合驱逐投诉的核心主动权。",
+    "resources": [
+     "一整箱备用隔音耳塞与防噪发泡胶",
+     "一台连接高频分贝测试仪的旧式笔记本电脑"
+    ],
+    "limits": [
+     "体质极度虚弱缺乏正面肉搏冲突能力",
+     "极度害怕房东查房没收其大功率私拉电线设备"
+    ],
+    "obligations": [
+     "誓死捍卫自己深夜通宵打排位赛的绝对声学清净环境。"
+    ],
+    "exposure": "私拉乱接电线挖矿一旦被房东人赃并获将被勒令当场搬离。",
+    "hidden": "其实早已通过单薄墙板听出隔壁住进了一位声音极好听的年轻姑娘，出于酸溜溜的心思屡屡故意刁难。"
+   },
+   "decision": {
+    "core_value": "我的房间是我的王国，任何侵犯我安静空间的噪音制造者都是不可饶恕的死敌。",
+    "goal_options": [
+     "逼迫隔壁彻底保持绝对死寂不发出任何一丝人声",
+     "借敲墙抗议从隔壁敲诈两罐热咖啡或泡面作为封口补偿",
+     "在破晓前打完自己的天梯晋级赛不受任何干扰"
+    ],
+    "pressure_responses": {
+     "low": "在隔壁传出耳语时用手肘重重撞击墙壁发出咚咚两声闷响警告。",
+     "mid": "一把拉开房门在走廊上大声咳嗽踱步，踢翻门口空易拉罐制造震慑。",
+     "high": "直接冲到隔壁门前疯狂拍门声称分贝仪已爆表立刻下楼找房东。",
+     "breaking": "被隔壁递过的一盒名贵降噪耳塞与整箱红牛收买，挠着头嘟囔着缩回房间。"
+    },
+    "withdrawal": "戴上降噪耳机把游戏音量调到最大，不再理会隔壁动静。",
+    "relationship_stance": "沉浸在虚拟网络世界封闭自我，对现实生活中的人际交往充满戒备与偏执。",
+    "contrast": "看似暴躁乖戾不可理喻的死宅邻居，其实本质上只是个缺乏安全感与社交认可的孤独年轻人。",
+    "prefers": [
+     "懂得分寸主动示好且能提供游戏零食贿赂的识趣邻居"
+    ],
+    "avoids": [
+     "嗓门洪亮蛮不讲理的壮汉",
+     "随时把规矩挂在嘴边的苛刻管理者"
+    ],
+    "never": [
+     "绝不会在邻居真正遭遇生命安全危险时冷血袖手旁观任由出事。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "懂得尊重别人空间且待人谦和有礼的温和包容",
+     "在危机关头主动递过一罐热咖啡的平等待遇"
+    ],
+    "likes": [
+     "雨夜通宵打完游戏后在走廊分抽一支烟的静默无言",
+     "邻里之间心照不宣各不打扰的默契秩序"
+    ],
+    "dislikes": [
+     "颐指气使的傲慢命令",
+     "居高临下的鄙夷嘲笑"
+    ],
+    "preconditions": [
+     "隔壁东侧单间通宵电竞租客与对方都已完全清醒，眼前的危机已经解除",
+     "隔壁东侧单间通宵电竞租客出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "严禁任何侵入私人房间边界行为",
+     "恪守邻里声学公约绝不逾矩"
+    ],
+    "expression": "塞过两副未拆封的工业级降噪耳塞，抓了抓乱发嘟囔着让隔壁注意点动静关上房门。",
+    "desire_range": [
+     1,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "薄薄夹板墙另一侧互不侵扰却能守望相助的平静邻里"
+   },
+   "voices": {
+    "surface": "喂！二零二的！大半夜搞什么鬼？！喘气声都透过墙板传过来了，还让不让人打排位？！",
+    "inner": "算你们识相……红牛我收下了。今晚给我把嘴闭严实点，要是再让我听到一下，我直接叫房东带警察来抄家！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 29,
+     "location_id": "tatami_living_bedroom"
+    },
+    {
+     "from": 30,
+     "to": 59,
+     "location_id": "second_floor_wooden_corridor"
+    },
+    {
+     "from": 60,
+     "to": 1409,
+     "location_id": "narrow_entry_genkan"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "second_floor_wooden_corridor"
+    }
+   ],
+   "situation": {
+    "trigger": "茶几上蜡烛被打翻引来真央一声惊呼，隔壁邻居立刻暴怒抄起铁锤狂砸墙壁。",
+    "pressure": "若不能在三秒内平息噪音抗议，整栋楼住户将被全部惊醒围堵在门外讨伐。",
+    "exits": [
+     {
+      "option": "迅速拉开门缝塞过两罐进口高能红牛并诚恳致歉",
+      "cost": "同伴将白白损失自己打工整整一周舍不得喝的全部提神饮料。"
+     },
+     {
+      "option": "用全部换洗大衣死死堵住墙角缝隙吸收全部音浪",
+      "cost": "所有干净衣物全部被泥灰木屑严重污染面临重新清洗代价。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "childhood_mutual_friend_yuki",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    20,
+    22
+   ],
+   "adult_context": "年满二十周岁同乡赴东京就读女子短期大学的青梅竹马共同发小闺蜜。",
+   "public_role": "同乡发小兼短大兼职模特",
+   "appearance_options": [
+    "一身前卫涩谷辣妹系粉色防雨短夹克与百褶裙，撑着一把透明塑料伞，挑染栗色卷发，嚼着口香糖，眼神狡黠灵动，手里提着两袋从便利店买来的热关东煮。",
+    "踩着厚底防雨松糕鞋快步跃上木楼梯，神情带着看热闹不嫌事大的贼笑，一眼便识破了真央滞留六叠单间的隐秘心思。"
+   ],
+   "identity": {
+    "authority": "深知真央从小到大暗恋同伴的全部心事日记，掌握在老家亲友圈公开或保密的绝对话语权。",
+    "resources": [
+     "一部充满电量可作为应急手电筒的双屏翻盖手机",
+     "一整套完好的备用干燥洗漱用具与护肤乳液小样"
+    ],
+    "limits": [
+     "体能单薄爱八卦管不住嘴巴",
+     "受制于短大宿舍门禁必须在清晨赶回销假"
+    ],
+    "obligations": [
+     "以助攻红娘自居，竭尽所能撮合这两个别扭多年死鸭子嘴硬的青梅竹马戳破窗户纸。"
+    ],
+    "exposure": "私自替真央打掩护若被老家长辈戳穿将遭受连带严厉斥责。",
+    "hidden": "其实早已在老家父母面前替两人立下了同盟军保票，发誓今夜不把话说开绝不放真央回校。"
+   },
+   "decision": {
+    "core_value": "人生苦短青春只有一次，别扭和嘴硬只会留下终身遗憾，真爱就要勇敢迎头撞上去。",
+    "goal_options": [
+     "在门外巧妙打发走精英学长与巡查房东筑牢外部防线",
+     "逼迫真央直面内心真实感情不再用毒舌假面推开对方",
+     "促成两人在六叠狭小空间内彻底达成两情相悦"
+    ],
+    "pressure_responses": {
+     "low": "在门外挤眉弄眼打手势，借送关东煮之名悄悄将房门外锁反向锁死制造独处密室。",
+     "mid": "一把拽住企图逃跑的真央衣袖，低声耳语警告错过今夜将后悔一辈子。",
+     "high": "挺身挡在房东与学长面前舌灿莲花打太极，编造完美假证词成功掩护过关。",
+     "breaking": "鞋跟在湿滑楼梯上踩空崴了脚踝，坐在台阶上倒吸凉气依然笑着比出胜利手势。"
+    },
+    "withdrawal": "坐在走廊尽头台阶上吃关东煮，戴上耳机装作两耳不闻窗外事。",
+    "relationship_stance": "古灵精怪大智若愚，对真挚深厚的情感怀有最为纯粹的热忱支持与守护欲望。",
+    "contrast": "看似大大咧咧毫无心机的轻佻辣妹，实则是将所有人心理软肋与情感纠葛看得最透彻的灵魂导师。",
+    "prefers": [
+     "坦诚相待敢爱敢恨且不拖泥带水的热血行动派"
+    ],
+    "avoids": [
+     "优柔寡断死要面子活受罪的别扭狂",
+     "道貌岸然满嘴谎言的伪君子"
+    ],
+    "never": [
+     "绝不会在好闺蜜最需要支持的关键时刻出卖其隐秘真心。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "面对感情忠贞不二默默守护多年的坚韧纯粹",
+     "关键时刻敢作敢当护住同伴的担当"
+    ],
+    "likes": [
+     "雨夜走廊分吃一串热热的魔芋丝带来的市井温馨",
+     "看到天下有情人终成眷属那一刻的狂喜成就感"
+    ],
+    "dislikes": [
+     "虚伪做作",
+     "背信弃义的背叛"
+    ],
+    "preconditions": [
+     "同乡发小兼短大兼职模特与对方都已完全清醒，眼前的危机已经解除",
+     "同乡发小兼短大兼职模特出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "严禁任何越俎代庖干涉当事人核心抉择",
+     "恪守闺蜜界限绝不逾矩僭越"
+    ],
+    "expression": "眨了眨右眼比出大拇指，塞过一盒热牛奶转身下楼，轻笑宣布剩下的路交给两人自己走完。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "照亮青春迷茫岁月最温暖明媚的向阳花"
+   },
+   "voices": {
+    "surface": "哎呀房东太太！我刚才在楼下看见一只大黑猫打翻了垃圾桶，您快去看看吧，这边有我盯着呢！",
+    "inner": "真央，别装了！你包里那张从小存到现在的合影我都看见了！把门关好，今晚要是还不敢表白，明天回老家我直接告发你！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 29,
+     "location_id": "communal_exterior_balcony"
+    },
+    {
+     "from": 30,
+     "to": 59,
+     "location_id": "second_floor_wooden_corridor"
+    },
+    {
+     "from": 60,
+     "to": 1409,
+     "location_id": "narrow_entry_genkan"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "second_floor_wooden_corridor"
+    }
+   ],
+   "situation": {
+    "trigger": "学长带人企图强闯二楼，闺蜜必须在十秒内用身体卡住楼梯门闸掩护室内转移。",
+    "pressure": "若楼道失守，学长与房东将直接破门撞入目睹真央换衣场面。",
+    "exits": [
+     {
+      "option": "撑开全部雨伞连成屏障死死卡死狭窄楼梯口",
+      "cost": "自身全部昂贵定制透明长柄雨伞骨架被强行撞碎报废。"
+     },
+     {
+      "option": "当场假装脚踝严重骨折瘫倒在楼梯呼痛求救",
+      "cost": "自身膝盖在粗糙水泥台阶上重度擦伤出血承受真实剧痛。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "veteran_train_conductor_sato",
+   "gender": "any",
+   "gender_reason": null,
+   "age_range": [
+    23,
+    25
+   ],
+   "adult_context": "年满二十三岁受聘于东日本旅客铁道高円寺站区正式执勤的青年客运副值班员。",
+   "public_role": "中央线铁路值更调度员",
+   "appearance_options": [
+    "深青制式铁道反光雨衣湿透发亮，佩戴大檐反光巡道帽与防割手套，手持黄色巡检信号旗与便携信号灯，冒雨穿梭在铁路护栏路基边缘。",
+    "眼神沉着机警，胸前挂着电台与铁道授时秒表，在暴雨如注的铁道桥下反复确认路基排水沟水位。"
+   ],
+   "identity": {
+    "authority": "掌控高円寺区段铁道道口警报控制、夜间紧急复航调度与轨道断电检修第一手权威信息。",
+    "resources": [
+     "一部直通东日本铁道防灾调度指挥中心的专业无线对讲机",
+     "一只高亮度多频段铁路防暴手提探照灯"
+    ],
+    "limits": [
+     "不能擅离铁路巡道岗位跨越护栏干预居民区民事纠纷",
+     "受制于铁路安全法严苛作业规范指令"
+    ],
+    "obligations": [
+     "冒暴雨排查中央线铁道塌方险情，全力保障破晓首班复工列车准点安全发车。"
+    ],
+    "exposure": "违规泄露未公开停运恢复时间表若遭追究将被记录严重安全违纪处罚。",
+    "hidden": "也是同乡小镇走出来的老学长，深知年轻人孤身闯荡东京的酸甜苦辣，暗中乐于照应同乡晚辈。"
+   },
+   "decision": {
+    "core_value": "铁道是连接故乡与未来的纽带，风雨再大也总有电车重新鸣笛启程的黎明拂晓。",
+    "goal_options": [
+     "在破晓前排除铁道路基积水抢通中央线高円寺区间",
+     "向阳台借宿青年准确传递首班早车进站时间信号",
+     "确保铁路沿线民居在暴雨中不发生泥石流次生灾害"
+    ],
+    "pressure_responses": {
+     "low": "在铁道旁摇动黄色信号灯打出正常巡检信号，示意路基尚属安全。",
+     "mid": "用高音喇叭向沿线临近公寓阳台喊话提醒关好门窗严防暴风雨侵袭。",
+     "high": "冒险攀上路基手动扳动道岔排除卡石险情，大声向二楼挥手确认首班车即将恢复。",
+     "breaking": "反光帽被狂风吹落铁轨，顶着冰冷暴雨死死扶住护栏继续坚持执勤。"
+    },
+    "withdrawal": "退回铁路道口值班小亭，用电台向上级调度汇报线路抢通进度。",
+    "relationship_stance": "朴实沉稳富有兄长般的担当，对在暴风雨中守望相助的年轻男女怀有深沉祝福。",
+    "contrast": "看似严肃刻板的铁道公职技术人员，却在狂风暴雨的深夜散发着令人心安的坚实人间烟火气。",
+    "prefers": [
+     "遵守规章自立自强且对生活怀有敬畏之心的勤勉年轻人"
+    ],
+    "avoids": [
+     "无视安全警示翻越铁道护栏的莽撞赌徒",
+     "自命不凡践踏公共秩序的狂妄之徒"
+    ],
+    "never": [
+     "绝不会在列车安全调度岗位上有半点马虎敷衍导致乘客涉险。"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "风雨飘摇中不离不弃相互扶持的赤子深情",
+     "脱险后向平凡岗位劳动者郑重鞠躬的真挚教养"
+    ],
+    "likes": [
+     "首班绿皮列车划破晨雾进站时的长鸣笛声",
+     "雨过天晴后递过一听温热铁罐绿茶时的相视一笑"
+    ],
+    "dislikes": [
+     "轻蔑底层劳动者",
+     "自私自利不顾大局"
+    ],
+    "preconditions": [
+     "中央线铁路值更调度员与对方都已完全清醒，眼前的危机已经解除",
+     "中央线铁路值更调度员出于自愿与对等的敬意，不带任何交换或强求"
+    ],
+    "boundaries": [
+     "严禁在执勤期间脱岗违章",
+     "恪守铁道公职分寸绝无私相授受逾矩"
+    ],
+    "expression": "端正敬礼拉响一声短促汽笛，以洪亮嗓音宣告首班电车准点通车预祝前程似锦。",
+    "desire_range": [
+     2,
+     3
+    ],
+    "self_control_range": [
+     4,
+     5
+    ],
+    "desired_position": "连接故土与希望旅途上永远指引归途的坚实道标"
+   },
+   "voices": {
+    "surface": "二楼阳台的住户请注意！收回外挂金属杂物！中央线高円寺区间预计清晨五点准时通车！",
+    "inner": "小伙子，别慌！暴雨马上就要过去了，看好你屋里那位，天亮第一班车准保体体面面送回学校！"
+   },
+   "schedule": [
+    {
+     "from": 0,
+     "to": 29,
+     "location_id": "second_floor_wooden_corridor"
+    },
+    {
+     "from": 30,
+     "to": 59,
+     "location_id": "communal_exterior_balcony"
+    },
+    {
+     "from": 60,
+     "to": 1409,
+     "location_id": "tatami_living_bedroom"
+    },
+    {
+     "from": 1410,
+     "to": 1439,
+     "location_id": "communal_exterior_balcony"
+    }
+   ],
+   "situation": {
+    "trigger": "公寓外挂阳台遮雨铁皮被狂风掀翻砸在铁道接触网支架边缘引发短路火花。",
+    "pressure": "若不能在一分钟内拉回铁皮，接触网跳闸将导致中央线全线瘫痪数小时延误撤离。",
+    "exits": [
+     {
+      "option": "同伴冒雨攀上湿滑阳台栏杆徒手拽回铁皮",
+      "cost": "双手掌心被锋利铁皮生生割破数道深口鲜血淋漓。"
+     },
+     {
+      "option": "向巡道员疯狂挥舞黄色毛巾发出紧急人工断电",
+      "cost": "整段公寓走廊电源彻底熔断陷入完全绝对黑暗之中。"
+     }
+    ]
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  }
+ ],
+ "background_cast": [
+  {
+   "id": "bg_nosy_neighbor_otaku",
+   "role": "隔壁东室通宵敲墙租客",
+   "function": "obstacle",
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "line": "{npc.name}：喂！小点声！再叽叽歪歪我就报警说你们非法聚众！",
+   "gender": "any",
+   "age_range": [
+    21,
+    23
+   ],
+   "adult_context": "年满二十一周岁租住在东侧单间正式在册独立租客。",
+   "name": null
+  },
+  {
+   "id": "bg_strict_landlady_patrol",
+   "role": "执钥匙巡夜青年女房东",
+   "function": "obstacle",
+   "location_ids": [
+    "second_floor_wooden_corridor"
+   ],
+   "line": "{npc.name}：二楼每间房都听着，今晚严查私自留宿外人，查到一个罚款三千！",
+   "gender": "any",
+   "age_range": [
+    23,
+    25
+   ],
+   "adult_context": "年满二十三岁继承高円寺木造房产合法执业管理人。",
+   "name": null
+  },
+  {
+   "id": "bg_delivery_courier_runner",
+   "role": "夜送雨衣兼职跑腿小哥",
+   "function": "messenger",
+   "location_ids": [
+    "narrow_entry_genkan"
+   ],
+   "line": "{npc.name}：二零二室！有位姓藤原的先生给你们订了一盒感冒药和热便当放在门口了！",
+   "gender": "any",
+   "age_range": [
+    20,
+    22
+   ],
+   "adult_context": "年满二十周岁受雇于闪送平台夜班正规派送兼职员。",
+   "name": null
+  },
+  {
+   "id": "bg_drunk_salaryman_tenant",
+   "role": "走廊醉酒错撞房门房客",
+   "function": "rumor_source",
+   "location_ids": [
+    "second_floor_wooden_corridor"
+   ],
+   "line": "{npc.name}：嗝……开门啊老婆……让我进去……今天社长又骂我了……",
+   "gender": "any",
+   "age_range": [
+    23,
+    25
+   ],
+   "adult_context": "年满二十三岁入职第二年商社在编普通基层男职员。",
+   "name": null
+  },
+  {
+   "id": "bg_part_time_college_girl",
+   "role": "同层短大兼职通宵女生",
+   "function": "witness",
+   "location_ids": [
+    "second_floor_wooden_corridor"
+   ],
+   "line": "{npc.name}：隔壁好像真住了个大美女呢……刚才在公用洗手池看见名牌洗面奶了……",
+   "gender": "any",
+   "age_range": [
+    19,
+    21
+   ],
+   "adult_context": "年满十九周岁就读于杉并区短期大学二年生在租女生。",
+   "name": null
+  },
+  {
+   "id": "bg_train_railway_conductor",
+   "role": "铁道清障冒雨夜巡工长",
+   "function": "helper",
+   "location_ids": [
+    "communal_exterior_balcony"
+   ],
+   "line": "{npc.name}：积水已经排空了！大家安心歇息吧，首班五点零五分准点开出！",
+   "gender": "any",
+   "age_range": [
+    22,
+    24
+   ],
+   "adult_context": "年满二十二岁铁路设施检修工区正式在岗安全巡道员。",
+   "name": null
+  }
+ ],
+ "channels": [
+  {
+   "id": "ch_tatami_whisper_breath",
+   "text": "六叠被褥咫尺耳语",
+   "reach": "并排侧卧在单人被褥边缘促膝相对时，轻触在耳廓上的极轻微弱气声与紊乱呼吸共振。",
+   "fidelity": "exact"
+  },
+  {
+   "id": "ch_thin_wall_knock_rhythm",
+   "text": "隔断木板敲墙声浪",
+   "reach": "隔壁单间用拳头或木板敲击石膏夹板传来的沉闷震动与空洞失真回音。",
+   "fidelity": "distorted"
+  },
+  {
+   "id": "ch_train_whistle_storm_roar",
+   "text": "铁道电车汽笛与雷鸣",
+   "reach": "中央线列车呼啸穿行与暴雨狂风在阳台玻璃上混合激荡的巨大轰鸣声浪。",
+   "fidelity": "exact"
+  }
+ ],
+ "tension_engines": [
+  {
+   "id": "te_single_bed_vs_longing_distance",
+   "text": "狭小六叠空间内仅有一床单人被褥的逼仄肢体接触与多年来青梅竹马刻意维持的克制界限形成极致撕扯。"
+  },
+  {
+   "id": "te_thin_wall_leakage_vs_heartbeat_overlo",
+   "text": "隔壁邻居轻微动静即可引发敲墙投诉的隔音极寒与室内两人急促紊乱呼吸声心跳过载形成窒息对冲。"
+  },
+  {
+   "id": "te_landlady_curfew_vs_first_train_dawn",
+   "text": "门外巡夜房东随时推门查房逐客的步步紧逼与破晓五点首班电车站台发车仅剩两个时辰的时限飞逝。"
+  },
+  {
+   "id": "te_tsundere_mask_vs_childhood_confession",
+   "text": "平日用毒舌尖刺伪装的社交千金面具与昏暗烛火下回忆早年牵手往事的脆弱防线全面崩溃对决。"
+  }
+ ],
+ "cast_combos": [
+  {
+   "id": "combo_childhood_friend_bed_guard",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "struggling_college_prep_student"
+   ],
+   "slots": [
+    "tsundere_campus_queen_mao",
+    "strict_landlady_mrs_takahashi"
+   ],
+   "tension_engine_ids": [
+    "te_single_bed_vs_longing_distance",
+    "te_tsundere_mask_vs_childhood_confession"
+   ],
+   "chemistry": "你主动将仅有的薄绒毯大半让给浑身湿透的青梅，{tsundere_campus_queen_mao.name}蜷缩在被褥内侧咬着下唇用毒舌掩饰心跳狂乱，{strict_landlady_mrs_takahashi.name}在玄关门外敲门查房，年少同乡的纯粹守护与严苛规矩在方寸暗室内展开极限周旋。",
+   "stakes": {
+    "resource_gap": "备考生手握狭小居室主权与一壶热麦茶，校花背负大学名誉与单薄湿衣。",
+    "limit_gap": "多年未曾同塌而眠，咫尺之间呼吸相闻考验全部自律底线。",
+    "meeting_reason": "末班电车停运被迫避雨借宿引发的同居危机。",
+    "irreplaceable_goal": "在房东破门前安顿好校花休息并守住纯洁界限不越雷池半步。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "tsundere_campus_queen_mao",
+     "stage": "intimate",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 2
+     },
+     "reason": "早年珍视如珍宝的青梅女孩，纵千难万险誓死护其名誉尊严。"
+    },
+    {
+     "a": "strict_landlady_mrs_takahashi",
+     "b": "player",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 3,
+      "tension": 4
+     },
+     "b_to_a": {
+      "trust": 3,
+      "tension": 4
+     },
+     "reason": "按时交租的老实房客，但今晚必须核验有无窝藏闲杂人等。"
+    },
+    {
+     "a": "tsundere_campus_queen_mao",
+     "b": "strict_landlady_mrs_takahashi",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "早稻田大学法学部大二校花与木造公寓严苛青年女房东在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_senior_car_standoff_breach",
+   "power_structure": "player_high",
+   "player_positions": [
+    "high"
+   ],
+   "identity_ids": [
+    "junior_salaryman_freshman"
+   ],
+   "slots": [
+    "jealous_senior_crush_ken",
+    "tsundere_campus_queen_mao"
+   ],
+   "tension_engine_ids": [
+    "te_landlady_curfew_vs_first_train_dawn",
+    "te_tsundere_mask_vs_childhood_confession"
+   ],
+   "chemistry": "{jealous_senior_crush_ken.name}撑着昂贵雨伞站在楼道下挥舞支票威逼利诱，{tsundere_campus_queen_mao.name}拉拢大号运动服衣领站在门后冷言回绝，你手持雨伞横在玄关挡住门板，贫富阶层的傲慢长矛与青梅竹马的情感坚盾正面激烈碰撞。",
+   "stakes": {
+    "resource_gap": "学长有豪华轿车与五星酒店，租客仅有一把透明雨伞与六叠草席。",
+    "limit_gap": "学长步步紧逼企图带走真央，租客拼死守卫门禁尊严。",
+    "meeting_reason": "楼道门前爆发的情敌逼门与绝不妥协对峙。",
+    "irreplaceable_goal": "彻底击碎学长用金钱买断人心的狂妄企图让其狼狈退场。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "tsundere_campus_queen_mao",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 2
+     },
+     "reason": "愿以凡人之躯对抗名流权贵，誓死捍卫对方的自由选择权。"
+    },
+    {
+     "a": "jealous_senior_crush_ken",
+     "b": "player",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "视作不知天高地厚的卑微小虫，恨不得用钞票将其砸烂。"
+    },
+    {
+     "a": "tsundere_campus_queen_mao",
+     "b": "jealous_senior_crush_ken",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 5
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 5
+     },
+     "reason": "对优越感爆棚的虚伪追求者深恶痛绝，当面严辞拒绝。"
+    }
+   ],
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "combo_neighbor_thin_wall_bribe",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "convenience_store_night_clerk"
+   ],
+   "slots": [
+    "nosy_gamer_neighbor_daisuke",
+    "tsundere_campus_queen_mao"
+   ],
+   "tension_engine_ids": [
+    "te_thin_wall_leakage_vs_heartbeat_overlo",
+    "te_single_bed_vs_longing_distance"
+   ],
+   "chemistry": "{nosy_gamer_neighbor_daisuke.name}抓着铁锤暴躁狂捶隔断木墙威胁找房东，你熟练塞过两盒热便当与整箱红牛化解危机，{tsundere_campus_queen_mao.name}在被窝里死死捂住嘴巴屏息静坐，市井生活的智慧在薄如蝉翼的邻里墙缝间悄然化解千钧一发。",
+   "stakes": {
+    "resource_gap": "邻居拥有举报投诉权，便利店员手握丰富的夜宵与交际手腕。",
+    "limit_gap": "邻居随时可能下楼叫房东，安抚必须在半分钟内奏效。",
+    "meeting_reason": "隔壁墙板剧烈震动引发的声学危机公关。",
+    "irreplaceable_goal": "彻底堵住邻居的嘴确保下半夜不再发生任何敲墙干扰。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "nosy_gamer_neighbor_daisuke",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 3,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 3,
+      "tension": 2
+     },
+     "reason": "熟络的便利店常客关系，用物质利益迅速摆平摩擦。"
+    },
+    {
+     "a": "tsundere_campus_queen_mao",
+     "b": "nosy_gamer_neighbor_daisuke",
+     "stage": "stranger",
+     "a_to_b": {
+      "trust": 0,
+      "tension": 4
+     },
+     "b_to_a": {
+      "trust": 0,
+      "tension": 4
+     },
+     "reason": "心惊肉跳生怕自己的存在被隔壁邻居大声嚷嚷破门。"
+    },
+    {
+     "a": "player",
+     "b": "tsundere_campus_queen_mao",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 2
+     },
+     "reason": "打工青年对高贵青梅的赤诚守护，用市井烟火气替青梅挡风遮雨。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_friend_wingman_lockdown",
+   "power_structure": "equal",
+   "player_positions": [
+    "equal"
+   ],
+   "identity_ids": [
+    "freelance_indie_game_coder"
+   ],
+   "slots": [
+    "childhood_mutual_friend_yuki",
+    "tsundere_campus_queen_mao"
+   ],
+   "tension_engine_ids": [
+    "te_tsundere_mask_vs_childhood_confession",
+    "te_single_bed_vs_longing_distance"
+   ],
+   "chemistry": "{childhood_mutual_friend_yuki.name}在门外送入干毛巾与关东煮并故意反锁房门抽走钥匙，{tsundere_campus_queen_mao.name}拍打门板羞恼交加却无路可逃，你在茶几旁借微弱烛火递过热茶，鬼马闺蜜的助攻布局彻底粉碎了两人逃避真心的一切借口。",
+   "stakes": {
+    "resource_gap": "闺蜜掌握外门钥匙与助攻话语权，室内两人被困在六叠空间必须面对彼此。",
+    "limit_gap": "退路彻底被切断，唯有正视横亘多年的情感真心。",
+    "meeting_reason": "外送夜宵与蓄意促成表白的闺蜜神助攻。",
+    "irreplaceable_goal": "在蜡烛燃尽前逼迫真央亲口说出高中毕业典礼未完的心意。"
+   },
+   "relations": [
+    {
+     "a": "childhood_mutual_friend_yuki",
+     "b": "tsundere_campus_queen_mao",
+     "stage": "intimate",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "从小无话不谈的至交密友，甘愿当恶人推真央走向幸福。"
+    },
+    {
+     "a": "player",
+     "b": "childhood_mutual_friend_yuki",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 1
+     },
+     "reason": "心照不宣的情感同盟，感谢其在暗中扫清一切阻碍。"
+    },
+    {
+     "a": "tsundere_campus_queen_mao",
+     "b": "player",
+     "stage": "intimate",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 3
+     },
+     "reason": "在无可逃避的封闭暗室里，灵魂防线彻底向其敞开。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "combo_balcony_conductor_signal",
+   "power_structure": "npc_high",
+   "player_positions": [
+    "low"
+   ],
+   "identity_ids": [
+    "campus_orchestra_violinist"
+   ],
+   "slots": [
+    "veteran_train_conductor_sato",
+    "tsundere_campus_queen_mao"
+   ],
+   "tension_engine_ids": [
+    "te_landlady_curfew_vs_first_train_dawn",
+    "te_single_bed_vs_longing_distance"
+   ],
+   "chemistry": "{veteran_train_conductor_sato.name}在路基下挥动黄色信号旗高声传达抢通信号，你冒雨拉紧阳台遮雨铁皮并以小提琴琴音回应鸣笛，{tsundere_campus_queen_mao.name}凭栏远眺破晓晨曦，暴风雨在铁道轰鸣与音符共振中退场迎来崭新破晓。",
+   "stakes": {
+    "resource_gap": "巡道员掌握通车第一手情报，小提琴手拥有敏锐声学传导沟通本领。",
+    "limit_gap": "阳台距离铁路近在咫尺，沟通必须迅速隐秘避开巡逻视线。",
+    "meeting_reason": "破晓前夕铁路清障完成的信号对接确认。",
+    "irreplaceable_goal": "精准锁定清晨五点零五分首班车发车窗口护送校花体面归校。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "tsundere_campus_queen_mao",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 2
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 2
+     },
+     "reason": "艺术灵魂共鸣的纯粹守护，愿以毕生旋律伴其破晓。"
+    },
+    {
+     "a": "veteran_train_conductor_sato",
+     "b": "player",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 1
+     },
+     "reason": "敬佩穷研究生爱惜乐器的执着，乐于为其提供通车便利。"
+    },
+    {
+     "a": "tsundere_campus_queen_mao",
+     "b": "veteran_train_conductor_sato",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 4,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 4,
+      "tension": 1
+     },
+     "reason": "感激铁道巡道老学长的无私相助，向其庄重鞠躬致敬。"
+    }
+   ],
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ]
+  },
+  {
+   "id": "combo_dawn_station_triumphant_departure",
+   "power_structure": "switchable",
+   "player_positions": [
+    "equal",
+    "high"
+   ],
+   "identity_ids": [
+    "struggling_college_prep_student"
+   ],
+   "slots": [
+    "tsundere_campus_queen_mao",
+    "childhood_mutual_friend_yuki"
+   ],
+   "tension_engine_ids": [
+    "te_tsundere_mask_vs_childhood_confession",
+    "te_landlady_curfew_vs_first_train_dawn"
+   ],
+   "chemistry": "你撑开干燥长柄雨伞护送青梅步出公寓大门，{tsundere_campus_queen_mao.name}换回干燥衣服悄悄将手伸入同伴雨衣口袋紧扣掌心，{childhood_mutual_friend_yuki.name}在站台闸机前挥手欢呼目送，雨过天晴的东京清晨洗净了多年别扭与生疏结下并肩同诺。",
+   "stakes": {
+    "resource_gap": "首班列车已进站台，通往大学的早高峰即将开启新的一天。",
+    "limit_gap": "从秘密避雨的小心翼翼转变为堂堂正正牵手走向晨光。",
+    "meeting_reason": "高円寺站台首班电车前的并肩告别与立誓同行。",
+    "irreplaceable_goal": "在众目睽睽下确立彼此相随名分坦荡踏上归途。"
+   },
+   "relations": [
+    {
+     "a": "player",
+     "b": "tsundere_campus_queen_mao",
+     "stage": "committed",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "彻底定下终身不渝盟誓，无论前路贫富并肩同当。"
+    },
+    {
+     "a": "childhood_mutual_friend_yuki",
+     "b": "player",
+     "stage": "familiar",
+     "a_to_b": {
+      "trust": 5,
+      "tension": 1
+     },
+     "b_to_a": {
+      "trust": 5,
+      "tension": 1
+     },
+     "reason": "为青梅竹马终成眷属感到由衷骄傲与欣慰。"
+    },
+    {
+     "a": "tsundere_campus_queen_mao",
+     "b": "childhood_mutual_friend_yuki",
+     "stage": "acquainted",
+     "a_to_b": {
+      "trust": 2,
+      "tension": 3
+     },
+     "b_to_a": {
+      "trust": 2,
+      "tension": 3
+     },
+     "reason": "早稻田大学法学部大二校花与同乡发小兼短大兼职模特在今夜之前只打过几次照面，此刻被同一场危机推到一处，彼此还在掂量对方可信几分。"
+    }
+   ],
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  }
+ ],
+ "daily_activities": [
+  {
+   "id": "a_entry_drench_drying_etiquette",
+   "title": "玄关更衣避雨分巾",
+   "location_ids": [
+    "narrow_entry_genkan"
+   ],
+   "duration_minutes": 50,
+   "beats": [
+    "突发特大暴雨倾盆而下，青梅浑身湿透冲入公寓狭窄玄关收起断伞。",
+    "同伴背过身去拉上一道碎花布帘，将干燥大号运动服与热毛巾递过帘缝。",
+    "隔着薄帘听着悉悉索索的换衣声与雨水滴落水泥地声响，彼此面红心跳极力屏息。"
+   ],
+   "hook_ids": [
+    "h_mao_wet_hair_towel_shiver",
+    "h_yuki_lock_door_key_wink",
+    "h_takahashi_flashlight_peep_knock"
+   ],
+   "start_minute": 1415,
+   "tags": [
+    "workplace"
+   ]
+  },
+  {
+   "id": "a_tatami_candlelight_whisper",
+   "title": "六叠榻榻米烛光分被",
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "duration_minutes": 45,
+   "beats": [
+    "雷击导致全楼断电拉闸，同伴点燃矮茶几上一小截受潮蜡烛照亮昏暗起居室。",
+    "青梅捧着热麦茶侧坐在单人被褥一角，轻声挑剔房间逼仄寒酸掩饰内心局促。",
+    "两人促膝下蹲回忆起高中乡间放学骑车往事，早年默契在昏黄光晕中重现。"
+   ],
+   "hook_ids": [
+    "h_mao_mug_tea_sip_blush",
+    "h_daisuke_wall_hammer_shout",
+    "h_ken_car_horn_street_shout"
+   ],
+   "start_minute": 25,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "a_thunder_huddle_blanket_embrace",
+   "title": "惊雷暴鸣入怀相拥",
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "duration_minutes": 55,
+   "beats": [
+    "窗外近距离炸响一道惊天滚雷，闪电将整座六叠单间照得亮如白昼。",
+    "青梅失声尖叫本能扑入同伴怀中，十指死死扣紧同伴后背衣料浑身剧烈颤抖。",
+    "同伴轻拍其背脊低声温言安抚，在狭小被窝边缘感受彼此狂乱剧烈的心跳交缠。"
+   ],
+   "hook_ids": [
+    "h_mao_thunder_hug_tremble",
+    "h_daisuke_energy_drink_bargain",
+    "h_yuki_curry_box_pass_whisper"
+   ],
+   "start_minute": 70,
+   "tags": [
+    "intimate"
+   ]
+  },
+  {
+   "id": "a_doorstep_landlady_standoff",
+   "title": "玄关门内智对查房",
+   "location_ids": [
+    "narrow_entry_genkan"
+   ],
+   "duration_minutes": 40,
+   "beats": [
+    "严苛女房东手持大号手电筒敲门查房，要求核验室内是否有未登记异性通宵留宿。",
+    "同伴半掩房门用宽阔身躯挡住全部视线，拿出司法考试厚重法条据理力争应付。",
+    "青梅屏息躲在起居室拉门背后死死捂住嘴巴，直到房东被闺蜜引开方才长舒一口气。"
+   ],
+   "hook_ids": [
+    "h_takahashi_flashlight_peep_knock",
+    "h_ken_car_horn_street_shout",
+    "h_sato_balcony_whistle_call"
+   ],
+   "start_minute": 125,
+   "tags": [
+    "workplace"
+   ]
+  },
+  {
+   "id": "a_balcony_rain_fade_watch",
+   "title": "阳台推拉门候车听风",
+   "location_ids": [
+    "communal_exterior_balcony"
+   ],
+   "duration_minutes": 35,
+   "beats": [
+    "暴雨渐渐转为淅沥微雨，清凉夜风吹散了六叠单间内憋闷浓郁的燥热心跳气息。",
+    "两人披着同一件干爽外套并肩立于外挂阳台，俯瞰被清洗得一尘不染的中央线铁轨。",
+    "巡道工在路基下挥动黄旗吹响哨音，宣告首班通车倒计时进入最后两刻钟。"
+   ],
+   "hook_ids": [
+    "h_sato_balcony_whistle_call",
+    "h_mao_balcony_hand_pocket_touch",
+    "h_ken_cash_envelope_throw"
+   ],
+   "start_minute": 165,
+   "tags": [
+    "workplace"
+   ]
+  },
+  {
+   "id": "a_dawn_first_train_vow",
+   "title": "拂晓站台牵手同行",
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "duration_minutes": 30,
+   "beats": [
+    "晨曦微露天边泛起粉紫云彩，首班中央线绿皮电车鸣着清脆汽笛呼啸进站。",
+    "青梅在门边细心替同伴整理好微皱的衣领，眼眶微红却绽开多年未见的灿烂笑容。",
+    "两人撑开长柄雨伞并肩踏出公寓大门，迎着初升朝阳坚定踏上通往未来的站台。"
+   ],
+   "hook_ids": [
+    "h_mao_balcony_hand_pocket_touch",
+    "h_yuki_curry_box_pass_whisper",
+    "h_sato_balcony_whistle_call"
+   ],
+   "start_minute": 200,
+   "tags": [
+    "intimate"
+   ]
+  }
+ ],
+ "pressures": [
+  {
+   "id": "p_thunderstorm_blackout_confinement",
+   "title": "雷击全楼断电黑暗",
+   "source": "nature",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "trigger": "特大雷暴劈中街区变压器导致整栋木造公寓全面停电陷入黑暗，窗外闪电频频暴闪引发剧烈恐慌。",
+   "objective": "在完全失去照明的逼仄六叠空间内稳固心神，点燃备用烛火并安抚恐雷青梅情绪。",
+   "choice": "是用双手紧紧捂住青梅双耳为其筑起声学防线，还是冒雨摸黑寻找备用应急灯？",
+   "immediate": {
+    "text": "全屋照明瞬间熄灭陷入伸手不见五指的深黑，炸雷紧接着在头顶轰然炸开震碎玻璃窗纸。",
+    "minutes": 15
+   },
+   "near": {
+    "text": "若未能及时提供光源与安抚，青梅因早年雷电创伤失控尖叫将惊醒全楼住户引来围观。",
+    "deadline_minutes": 35
+   },
+   "far": {
+    "trigger": "剧烈惊恐引发急性精神崩溃哭喊惊动警视厅巡逻车。",
+    "consequence": "被作为深夜家庭治安异常事件带回警署录供形象彻底毁坏。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "跪坐在被褥旁用宽厚手掌死死捂住青梅耳朵",
+     "cost": "双臂肌肉长时间保持高度紧绷酸痛痉挛至失去知觉。"
+    },
+    {
+     "option": "在黑暗中擦亮受潮火柴点燃仅存的一截短蜡烛",
+     "cost": "手指被滚烫滴落的蜡油严重灼伤起泡承受刺痛代价。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_mao_thunder_hug_tremble",
+    "h_mao_mug_tea_sip_blush"
+   ],
+   "start_minute": 1420,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_landlady_doorstep_curfew_raid",
+   "title": "严苛女房东突击查房",
+   "source": "institution",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "narrow_entry_genkan"
+   ],
+   "trigger": "青年女房东怀疑西侧单间有未登记年轻异性通宵滞留，手持大号手电筒与铁钥匙重击房门下达开门通牒。",
+   "objective": "在房东强行动用备用钥匙破门前，妥善藏匿青梅行踪或出示天衣无缝的避雨证明化解危机。",
+   "choice": "是将青梅塞入被褥壁橱深处屏息隐蔽，还是由同伴半掩房门据理力争承担罚款？",
+   "immediate": {
+    "text": "铁钥匙重重砸在单薄木门上发出咚咚巨响，手电筒雪白光柱直直射穿门上投信口。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "若在一刻钟内未能平息盘查，房东将直接转动万能钥匙开门当场抓现行赶出公寓。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "被作为严重违反租约典型当场没收押金扫地出门。",
+    "consequence": "学子流落街头居所全毁且留宿风波被通报老家家族蒙羞。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "青梅蜷缩藏入堆满旧衣的被褥壁橱深处闭气",
+     "cost": "在狭小憋闷黑暗空间承受近半小时缺氧极热与恐慌煎熬。"
+    },
+    {
+     "option": "当场掏出五千日元打工血汗钱缴纳深夜喧哗保证金",
+     "cost": "自身下半月伙食费被全盘掏空只能靠白开水度日。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_takahashi_flashlight_peep_knock",
+    "h_yuki_lock_door_key_wink"
+   ],
+   "start_minute": 30,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ]
+  },
+  {
+   "id": "p_thin_wall_whisper_leakage",
+   "title": "单薄隔墙声学泄露",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "trigger": "隔壁电竞租客因听到轻微声响连续用铁锤砸墙抗议，威胁若再有动静立刻叫上全楼住户集体破门。",
+   "objective": "在隔壁邻居失去理智彻底引爆全楼冲突前，维持绝对静音或达成声学封口协议。",
+   "choice": "是用全部换洗衣物堵死墙壁缝隙吸收音浪，还是递送能量饮料实施贿赂封口？",
+   "immediate": {
+    "text": "隔断石膏板在重锤击打下扑簌掉落石灰粉末，隔壁暴怒的粗俗骂声隔着墙板清晰可闻。",
+    "minutes": 15
+   },
+   "near": {
+    "text": "若再有杯子碰翻或吸气声溢出，邻居将直接冲出走廊拉响火警警报制造混乱报复。",
+    "deadline_minutes": 35
+   },
+   "far": {
+    "trigger": "邻里群殴冲突升级惊动警察上门立案调解。",
+    "consequence": "留宿隐私被推上台面成为整栋楼住户公开耻笑的笑柄。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "开门递过两罐高能红牛与进口香烟达成声学停战",
+     "cost": "白白损失打工储备的贵重物资并欠下恶邻一个人情。"
+    },
+    {
+     "option": "两人双双咬住单人毛毯边缘强行压制全部呼吸声响",
+     "cost": "面部肌肉剧烈酸痛口干舌燥承受长达半小时极限窒息感。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_daisuke_wall_hammer_shout",
+    "h_daisuke_energy_drink_bargain"
+   ],
+   "start_minute": 80,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_wet_clothes_hypothermia_chill",
+   "title": "湿冷衣物失温高热",
+   "source": "accident",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "trigger": "青梅淋雨受凉导致体温急速下跌突发急性寒战与咳嗽，额头滚烫面色苍白濒临急性风寒高热。",
+   "objective": "在不开启电暖器引发跳闸的前提下，在房内配齐干燥保暖被褥并喂服温热姜茶回暖。",
+   "choice": "是将单人被褥整床裹紧并用体温隔空烘暖，还是冒雨前往二十四小时药店买药？",
+   "immediate": {
+    "text": "青梅牙关不受控制剧烈上下打颤，蜷缩在榻榻米被角嘴唇发青，额角冷汗涔涔。",
+    "minutes": 15
+   },
+   "near": {
+    "text": "若不能在一刻钟内稳固体温，高热昏迷将不得不呼叫救护车导致留宿事件全盘曝光。",
+    "deadline_minutes": 30
+   },
+   "far": {
+    "trigger": "急性肺炎发作导致昏迷重症住院休学延期。",
+    "consequence": "学业全面荒废并招致名门家长的雷霆震怒彻底断绝往来。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "隔着被褥将自身干燥大衣覆盖其上紧紧护住双足",
+     "cost": "自身在潮湿阴冷地板上挨冻受凉承受次日感冒发烧代价。"
+    },
+    {
+     "option": "在简易煤气灶上小火熬煮浓稠热姜茶趁热喂服",
+     "cost": "煤气罐燃料彻底耗尽面临次日无法做饭洗澡的窘境。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_mao_wet_hair_towel_shiver",
+    "h_mao_mug_tea_sip_blush"
+   ],
+   "start_minute": 130,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_train_headlight_flash_exposure",
+   "title": "电车强光剪影走光",
+   "source": "accident",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "communal_exterior_balcony"
+   ],
+   "trigger": "疾驰而过的铁道工程车探照大灯直射阳台推拉门，将室内单人被褥边缘两人并肩依靠的剪影投射在走廊纸拉门上。",
+   "objective": "在走廊过往租客与巡视人员看清剪影前，拉拢加厚遮光帘并扑灭烛火掩盖视线。",
+   "choice": "是用身体整个人扑在窗帘轨道死死压平布料，还是吹熄蜡烛卧倒在地？",
+   "immediate": {
+    "text": "雪白如昼的万伏探照灯光柱穿透旧玻璃，将室内两人亲昵依偎的影子清晰映在走廊纸门上。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "走廊醉酒租客正揉着眼睛走近，若未能在一分钟内消除剪影将被当场指认宣扬全楼。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "剪影同框被好事者拍照传上网作为黄色八卦谈资大肆流传。",
+    "consequence": "名门校花形象毁于一旦面临校规风纪处严厉约谈处分。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "两人同时扑倒卧平在榻榻米草席上避开光柱直射",
+     "cost": "手肘膝盖与硬草席猛烈摩擦破皮淤青承受钝痛代价。"
+    },
+    {
+     "option": "徒手扯下厚毛毯用图钉死死钉在木窗框上封死光线",
+     "cost": "拇指被图钉尖刺狠狠扎透鲜血淋漓承受钻心刺痛。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_mao_balcony_hand_pocket_touch",
+    "h_sato_balcony_whistle_call"
+   ],
+   "start_minute": 170,
+   "tags": [
+    "disaster",
+    "bodily_harm"
+   ]
+  },
+  {
+   "id": "p_jealous_senior_doorstep_siege",
+   "title": "豪车学长堵门逼迫",
+   "source": "person",
+   "flags": [
+    "timed"
+   ],
+   "location_ids": [
+    "second_floor_wooden_corridor"
+   ],
+   "trigger": "追求者学长驾驶豪车堵在公寓楼下，手持支票与推荐信上楼狂敲房门企图用金钱与权势接走真央。",
+   "objective": "在学长引来警察或房东引发不可收拾的事态前，堂堂正正正面回绝并迫使其体面撤退。",
+   "choice": "是由真央拉开门缝当面宣读断绝往来宣告，还是同伴挺身而出横刀挡在门前？",
+   "immediate": {
+    "text": "考究的风衣皮靴踩在木走廊上发出傲慢回响，学长的嘲讽冷笑声顺着门缝刺耳传入室内。",
+    "minutes": 10
+   },
+   "near": {
+    "text": "若未能及时阻断其叫嚣，其带来的保镖将试图用暴力踹门侵犯私人住宅底线。",
+    "deadline_minutes": 25
+   },
+   "far": {
+    "trigger": "豪门动用法律与权势对贫困备考生实施全面打压封杀。",
+    "consequence": "备考资格被恶意取消并在东京丧失一切求学兼职生路。",
+    "due_days": 1
+   },
+   "exits": [
+    {
+     "option": "当面重重甩上房门并反锁内扣表达坚决蔑视",
+     "cost": "彻底斩断名门财团校友会一切扶持资源背水一战。"
+    },
+    {
+     "option": "真央当面背诵侵入民宅与跟踪骚扰刑法条令施压",
+     "cost": "与学长背后势力公开结仇面临毕业考评被恶意打低分风险。"
+    }
+   ],
+   "leverage": null,
+   "hook_ids": [
+    "h_ken_car_horn_street_shout",
+    "h_ken_cash_envelope_throw"
+   ],
+   "start_minute": 190,
+   "tags": [
+    "violence",
+    "bodily_harm"
+   ]
+  }
+ ],
+ "hooks": [
+  {
+   "id": "h_mao_wet_hair_towel_shiver",
+   "kind": "approach",
+   "slot": "tsundere_campus_queen_mao",
+   "location_ids": [
+    "narrow_entry_genkan",
+    "tatami_living_bedroom"
+   ],
+   "text": "{tsundere_campus_queen_mao.name}抓着湿漉漉的大毛巾捂住胸口迎向你，抱紧双臂轻咬下唇羞恼道：“看什么看！要不是电车停运，本小姐才不会踏进你这种连电热毯都没有的破烂屋子……快把干燥衣服拿给我啦！”"
+  },
+  {
+   "id": "h_mao_mug_tea_sip_blush",
+   "kind": "approach",
+   "slot": "tsundere_campus_queen_mao",
+   "location_ids": [
+    "tatami_living_bedroom",
+    "narrow_entry_genkan"
+   ],
+   "text": "{tsundere_campus_queen_mao.name}双手捧着冒热气的粗陶马克杯小口啜饮热麦茶，垂着眼帘轻声道：“高中毕业那年……你在站台送我的那罐热咖啡，易拉罐拉环我其实一直系在钥匙扣上……今晚能收留我，真的很谢谢你。”"
+  },
+  {
+   "id": "h_mao_thunder_hug_tremble",
+   "kind": "approach",
+   "slot": "tsundere_campus_queen_mao",
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "text": "头顶窗外突发一道撕裂夜空的近距离惊雷暴鸣，{tsundere_campus_queen_mao.name}吓得短促惊呼一声失控扑入你怀中，十指死死攥紧后背衣料将滚烫面颊深埋进颈窝，整个人剧烈战栗不止久久不敢抬头。"
+  },
+  {
+   "id": "h_mao_balcony_hand_pocket_touch",
+   "kind": "approach",
+   "slot": "tsundere_campus_queen_mao",
+   "location_ids": [
+    "communal_exterior_balcony",
+    "tatami_living_bedroom"
+   ],
+   "text": "{tsundere_campus_queen_mao.name}与你并肩立在外挂阳台遮雨棚下俯瞰湿漉漉的铁道，微凉夜风吹拂发丝，与掌心十指轻轻相扣低语道：“别放手……至少在天亮前，就这样待一会儿。”"
+  },
+  {
+   "id": "h_takahashi_flashlight_peep_knock",
+   "kind": "approach",
+   "slot": "strict_landlady_mrs_takahashi",
+   "location_ids": [
+    "narrow_entry_genkan",
+    "second_floor_wooden_corridor"
+   ],
+   "text": "{strict_landlady_mrs_takahashi.name}手持大号金属手电筒将雪白光柱打在玄关门板投信孔上，隔门冷声喝道：“二零二室的！老实把防盗链挂上拉开一道缝！大半夜里面悉悉索索的，当本房东耳朵聋了吗？！”"
+  },
+  {
+   "id": "h_ken_car_horn_street_shout",
+   "kind": "approach",
+   "slot": "jealous_senior_crush_ken",
+   "location_ids": [
+    "second_floor_wooden_corridor",
+    "narrow_entry_genkan",
+    "tatami_living_bedroom"
+   ],
+   "text": "{jealous_senior_crush_ken.name}收起滴水的黑色定制雨伞踏上木造走廊台阶，冷笑叩响门环嘲讽道：“真央，在这种连像样卫生间都没有的破木盒子里窝着算什么体面？保时捷就在楼下，何必为了穷酸执念作践自己？”"
+  },
+  {
+   "id": "h_ken_cash_envelope_throw",
+   "kind": "approach",
+   "slot": "jealous_senior_crush_ken",
+   "location_ids": [
+    "narrow_entry_genkan",
+    "communal_exterior_balcony",
+    "second_floor_wooden_corridor"
+   ],
+   "text": "{jealous_senior_crush_ken.name}从皮质手包抽出一叠万元大钞重重拍在玄关鞋柜上，盯着你的眼睛傲慢宣告：“这里是三十万日元，够付整年房租。识相的拿着钱去外面网吧过夜，别不知好歹耽误真央的名声前程。”"
+  },
+  {
+   "id": "h_daisuke_wall_hammer_shout",
+   "kind": "approach",
+   "slot": "nosy_gamer_neighbor_daisuke",
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "text": "{nosy_gamer_neighbor_daisuke.name}在隔壁单间暴怒抄起铁锤猛砸石膏板夹墙，隔着震落泥灰的墙壁狂暴咆哮：“喂！二零二的两位！喘气声都透过插座孔传过来了！本大爷打晋级赛呢，再哼唧一声直接报警抄你们老巢！”"
+  },
+  {
+   "id": "h_daisuke_energy_drink_bargain",
+   "kind": "request",
+   "slot": "nosy_gamer_neighbor_daisuke",
+   "location_ids": [
+    "second_floor_wooden_corridor",
+    "narrow_entry_genkan",
+    "tatami_living_bedroom"
+   ],
+   "text": "{nosy_gamer_neighbor_daisuke.name}拉开一道门缝探出顶着黑眼圈的鸡窝头，咽了口唾沫低哼道：“算你们懂规矩……这两罐红牛我收了，下半夜把嘴巴缝上，要是再敢吵，天王老子来也保不住门牌！”"
+  },
+  {
+   "id": "h_yuki_lock_door_key_wink",
+   "kind": "approach",
+   "slot": "childhood_mutual_friend_yuki",
+   "location_ids": [
+    "narrow_entry_genkan",
+    "second_floor_wooden_corridor"
+   ],
+   "text": "{childhood_mutual_friend_yuki.name}在门外狡黠眨了眨右眼，将配好的干燥毛巾塞进门内，掩嘴窃笑道：“真央，钥匙本姑娘带走了！今晚要是不把高中没说完的告白讲清楚，明早谁也别想出门！”"
+  },
+  {
+   "id": "h_yuki_curry_box_pass_whisper",
+   "kind": "request",
+   "slot": "childhood_mutual_friend_yuki",
+   "location_ids": [
+    "second_floor_wooden_corridor",
+    "narrow_entry_genkan",
+    "tatami_living_bedroom"
+   ],
+   "text": "{childhood_mutual_friend_yuki.name}蹲在走廊门槛边借雨声掩护递过温热的咖喱便当与整包未开封暖宝宝，压低嗓音叮嘱你：“房东那边我先用假话拖住二十分钟，真央面薄嘴硬，今晚全看你够不够胆了，懂不懂？”"
+  },
+  {
+   "id": "h_sato_balcony_whistle_call",
+   "kind": "approach",
+   "slot": "veteran_train_conductor_sato",
+   "location_ids": [
+    "communal_exterior_balcony",
+    "narrow_entry_genkan",
+    "tatami_living_bedroom"
+   ],
+   "text": "{veteran_train_conductor_sato.name}在铁道路基护栏下摘下湿透巡道反光帽，迎着暴风雨洪亮高喊：“二楼的小年轻！中央线路基排空完毕！首班早班车清晨五点零五分准点进站，准备启程吧！”"
+  },
+  {
+   "id": "h_mao_closet_breath_peep",
+   "kind": "observe",
+   "slot": "tsundere_campus_queen_mao",
+   "location_ids": [
+    "tatami_living_bedroom"
+   ],
+   "text": "{tsundere_campus_queen_mao.name}屈膝缩在壁橱棉被堆阴影深处，双手紧紧捂住唇瓣，借着纸拉门微弱缝隙凝望你独自挡在玄关应对盘查的高大背影，眼眶泛起薄雾，胸口起伏不定尽显依赖深情。"
+  },
+  {
+   "id": "h_takahashi_corridor_key_clatter",
+   "kind": "observe",
+   "slot": "strict_landlady_mrs_takahashi",
+   "location_ids": [
+    "second_floor_wooden_corridor"
+   ],
+   "text": "{strict_landlady_mrs_takahashi.name}提着叮当乱响的黄铜钥匙串在走廊尽头配电箱前驻足，借着闪电惨白光亮严厉审视各户门前鞋履摆放，眉头紧锁自言自语排查异常踪迹。"
+  },
+  {
+   "id": "h_ken_watch_reflection_glare",
+   "kind": "observe",
+   "slot": "jealous_senior_crush_ken",
+   "location_ids": [
+    "second_floor_wooden_corridor"
+   ],
+   "text": "{jealous_senior_crush_ken.name}站在昏暗走廊拐角阴冷低头扫视百达翡丽机械腕表走针，面容在摇晃灯泡下阴晴不定，嘴角挂着胜券在握的残忍冷笑，仿佛正等待破晓降临好将一切撕得粉碎。"
+  },
+  {
+   "id": "h_sato_track_lamp_wave",
+   "kind": "observe",
+   "slot": "veteran_train_conductor_sato",
+   "location_ids": [
+    "communal_exterior_balcony"
+   ],
+   "text": "{veteran_train_conductor_sato.name}立在暴风雨交加的高架桥轨道枕木旁，任凭冷雨冲刷反光风衣，目光沉着坚定凝视远方绿皮列车车灯穿透夜幕长鸣汽笛，尽职守护通往黎明的钢铁动脉。"
+  }
+ ],
+ "twists": [
+  {
+   "id": "t_childhood_1",
+   "category": "信息",
+   "requires": [],
+   "text": "旧相册夹层未寄情书曝光：整理受潮书架时，青梅高中毕业典礼随身相册不慎滑落，一张夹在毕业合影后方泛黄褶皱的手写情书轻飘飘滑落在榻榻米中央。同伴捡起信纸赫然发现上面写满了青梅考入东京前夕整整三年的暗恋秘密，多年来所有毒舌刻薄伪装瞬间土崩瓦解化作无尽柔情。"
+  },
+  {
+   "id": "t_childhood_2",
+   "category": "人事",
+   "requires": [],
+   "text": "名门校花拒绝全部追求者真相：学长恼羞成怒当场宣泄恶毒攻击，闺蜜在走廊当众出示大学法学会退社申请书公之于众。真相揭晓真央早已在开学初便公开拒绝了财阀与学长的一切资助示好，宁可半工半读甚至放弃保研推荐也誓死不愿背叛早年初心。"
+  },
+  {
+   "id": "t_childhood_3",
+   "category": "资源",
+   "requires": [],
+   "text": "壁橱深处翻出备用煤油取暖炉：在摸黑整理堆叠旧物的壁橱最深处时，意外触碰到上一任退租老租客遗留的一台灌满燃料的小型煤油暖炉与引火器。幽蓝温暖的明火在六叠单间中央静谧升起，驱散了骨髓刺痛的潮冷湿气，提供了足够熬至破晓的安全热源与煮茶底火。"
+  },
+  {
+   "id": "t_childhood_4",
+   "category": "制度",
+   "requires": [],
+   "text": "房东管理账本特殊亲属条款：房东在核验租约户籍底单时，意外发现同伴的祖父与房东家族在昭和年间曾是同一个街区守望相助的挚友旧识。严苛女房东当场合上账本免除全部留宿罚款，甚至主动送来两条干燥防寒厚棉被，严厉警告仅限今晚破例下不为例。"
+  },
+  {
+   "id": "t_childhood_5",
+   "category": "时限",
+   "requires": [],
+   "text": "暴风雨骤停首班车提前鸣笛：中央线铁路防灾总台突发通告，高円寺区间塌方抢通作业提前半个时辰完成，首班空载试运行列车将在清晨四点半进站。原本紧迫窒息的避难倒计时瞬间提前缩短，逼迫两人必须在最后三十分钟内做出是否正视名分并肩踏上站台的关键抉择。"
+  },
+  {
+   "id": "t_childhood_6",
+   "category": "关系",
+   "requires": [],
+   "text": "老家父母雨夜联名传真家书：公寓公用传真机在恢复微弱供电后吐出一张纸，双方老家父母得知东京突发暴雨后联名发来确认两人是否平安在一处的叮嘱问候。两家长辈早已默许两情相悦的铁证摆在眼前，彻底击碎了世俗眼光与阶层隔阂的最后心理包袱，化作并肩相拥的巨大勇气。"
+  },
+  {
+   "id": "t_childhood_7",
+   "category": "意外",
+   "requires": [],
+   "text": "阳台排水槽暴裂倒灌内室：狂风卷落的断裂铁皮卡死外挂阳台主排水口，积水迅速漫过推拉门槛倒灌向室内榻榻米草席。单人垫褥被洪水浸泡大半逼得无处可坐，同伴毫不犹豫将青梅紧紧抱起安置在唯一的木茶几干燥台面上，以身筑墙涉水抢险排除积水。"
+  }
+ ],
+ "forbidden_terms": [
+  "智能手机",
+  "微信扫码",
+  "高清液晶屏",
+  "移动支付",
+  "高铁",
+  "短视频",
+  "平板电脑",
+  "降噪蓝牙耳机",
+  "4G网络"
+ ],
+ "content_tags": [
+  "intimate",
+  "workplace",
+  "workplace_power",
+  "violence",
+  "bodily_harm",
+  "crime",
+  "disaster"
+ ],
+ "status": "released",
+ "notes": "按原稿加入，改动见提交说明。"
+}
