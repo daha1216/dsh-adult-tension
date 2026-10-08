@@ -271,7 +271,7 @@ WORLD = S.Obj(
     {
         "schema_version": F(S.Int(1, 1)),
         "id": F(S.Id()),
-        "title": F(_str(1, 20)),
+        "title": F(_str(1, 40)),
         "extends": F(S.Nullable(S.Id()), required=False, default=None, desc="时代底包 ID，编译期展开；自定义世界不写"),
         "custom": F(S.Bool(), required=False, default=False, desc="自定义世界必须为 true"),
         "era": F(_str(1, 40), desc="具体的时代"),
@@ -886,17 +886,30 @@ def _bigrams(text):
 def near_duplicates(entries, threshold=NEAR_DUP_THRESHOLD, min_len=NEAR_DUP_MIN_LEN):
     """entries: list of (label, text). Returns pairs above the similarity threshold."""
     grams = [(label, text, _bigrams(text)) for label, text in entries if len(text) >= min_len]
-    found = []
-    for i in range(len(grams)):
-        for j in range(i + 1, len(grams)):
-            a, b = grams[i][2], grams[j][2]
-            union = len(a | b)
-            if not union:
-                continue
-            score = len(a & b) / union
+    # Prefix filtering: with bigrams sorted rarest first, two sets whose Jaccard
+    # score reaches the threshold must share a bigram within their first
+    # len - floor(threshold * len) + 1 entries, so only those pairs are scored.
+    # Same pairs and order as comparing every pair, without the quadratic cost.
+    freq = {}
+    for _, _, g in grams:
+        for gram in g:
+            freq[gram] = freq.get(gram, 0) + 1
+    index = {}
+    pairs = []
+    for j, (_, _, b) in enumerate(grams):
+        ordered = sorted(b, key=lambda gram: (freq[gram], gram))
+        candidates = set()
+        for gram in ordered[: len(ordered) - int(threshold * len(ordered)) + 1]:
+            bucket = index.setdefault(gram, [])
+            candidates.update(bucket)
+            bucket.append(j)
+        for i in candidates:
+            a = grams[i][2]
+            score = len(a & b) / len(a | b)
             if score >= threshold and grams[i][1] != grams[j][1]:
-                found.append((grams[i][0], grams[j][0], round(score, 3)))
-    return found
+                pairs.append((i, j, score))
+    pairs.sort()
+    return [(grams[i][0], grams[j][0], round(score, 3)) for i, j, score in pairs]
 
 
 def cross_checks(packs, generic_strings):
