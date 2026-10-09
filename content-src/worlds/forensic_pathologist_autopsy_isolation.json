@@ -1,0 +1,2288 @@
+{
+  "schema_version": 1,
+  "id": "forensic_pathologist_autopsy_isolation",
+  "title": "雷暴解剖中心：清冷女法医",
+  "extends": null,
+  "era": "当代近未来高科技都市与司法鉴定中心孤立悬疑博弈时代",
+  "region": "江海市国家司法鉴定中心地下二层停电闭锁之恒温无菌解剖实验区与冷藏停尸长廊",
+  "premise": "百年一遇特大强台风携暴雨雷电瘫痪全城供电网络，江海市国家司法鉴定中心地下二层解剖中心遭遇山洪倒灌自动落闸封锁。年满二十二周岁出身顶级政法世家、被誉为‘法医界第一高岭之花’之天才首席女法医，正负责连夜解剖刚刚送达之豪门连环谋杀案第三具关键遗体。年满二十一周岁戴罪受查之青年现场痕检刑警，因被指控涉嫌现场泄密被勒令随同留置看守。",
+  "tone": [
+    "地下解剖室断电闭锁",
+    "冰冷手术刀反握防卫",
+    "法医白大褂碎裂划痕",
+    "双人背靠背心跳共振"
+  ],
+  "style_hint": "地下二层停电长廊内唯有一盏忽明忽暗之应急红色警报灯在墙角投射出血色长影。四周弥漫着冰冷刺鼻之甲醛、来苏尔消毒液与轻微冷冻组织解冻之幽暗气味。暴雨如注的雷鸣隐隐自头顶厚重水泥穹顶闷雷般滚过，伴随通风管道深处传来的金属摩擦刮擦声，令人汗毛倒竖。",
+  "clock_start": {
+    "label": "地下发电机爆炸断电夜半十一点整，门禁备用电容仅剩四十分钟自毁倒计时",
+    "minute": 0
+  },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": {
+    "female": 0.5,
+    "male": 0.45,
+    "nonbinary": 0.05
+  },
+  "stage_labels": {
+    "stranger": "持刀对峙",
+    "acquainted": "破拆清创",
+    "familiar": "背靠抵御",
+    "flirting": "同照手电",
+    "testing": "刀尖验伤",
+    "intimate": "天亮之后",
+    "committed": "正义同盟"
+  },
+  "name_pools": {
+    "family": [
+      "温",
+      "沈",
+      "陆",
+      "顾",
+      "霍",
+      "裴",
+      "贺",
+      "叶",
+      "萧",
+      "岑",
+      "宋",
+      "程"
+    ],
+    "given_female": [
+      "知微",
+      "书锦",
+      "清辞",
+      "若谷",
+      "雨桐",
+      "怀夕",
+      "青玄",
+      "婉舟",
+      "映雪",
+      "未晞",
+      "望舒",
+      "秋荻"
+    ],
+    "given_male": [
+      "停云",
+      "策安",
+      "景渊",
+      "行川",
+      "凌峰",
+      "砚平",
+      "楚生",
+      "修竹",
+      "望尘",
+      "照夜",
+      "怀瑾",
+      "思勉"
+    ],
+    "given_neutral": [
+      "子商",
+      "允之",
+      "青梧",
+      "未央",
+      "见山",
+      "如晦",
+      "初晴",
+      "天青",
+      "和玉",
+      "明远",
+      "云深",
+      "清川"
+    ],
+    "nickname_patterns": [
+      {
+        "pattern": "{family}主任",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}法医",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}警官",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}队长",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}同学",
+        "gender": "any"
+      }
+    ],
+    "order": "family_first"
+  },
+  "rules": [
+    {
+      "id": "r_forensic_chain_of_custody_strict_integ",
+      "text": "国家司法鉴定中心物证链完整性准则：解剖室内一切物证自提取起必须由法医与现场刑警二人双签封存，断电期间任何企图破坏遗体胸腹缝线或私藏体内异物者，视同毁灭重大刑案证据当场格杀勿论。"
+    },
+    {
+      "id": "r_air_handling_positive_pressure_breach",
+      "text": "地下无菌解剖区负压风控自锁条例：排风系统一旦检测到外来燃烧有毒烟雾，全区气密防爆铅门将启动三十分钟不可逆气闸自锁，舱内人员必须戴上活性炭过滤面罩防范窒息。"
+    },
+    {
+      "id": "r_cadaver_refrigeration_chamber_thermal",
+      "text": "冰冻遗体冷藏冷库升温红线：冷库断电后库温每小时上升五摄氏度，一旦超过十摄氏度关键病理毒物证据将发生自溶破坏，必须在两小时内完成重点脏器组织冰盒取样。"
+    },
+    {
+      "id": "r_pathologist_scalpel_self_defense_doctr",
+      "text": "法医解剖特种器械防卫条例：执业法医在遭受致命暴力袭击且通讯隔绝时，有权使用执业手术刀针对暴徒手腕正中神经、股四头肌腱实施阻断性防卫剥离。"
+    }
+  ],
+  "customs": [
+    "单束冷光交接信任信条：在无光死室内，手电筒光柱必须始终照亮对方前行动线与防卫死角，一人操刀取样时另一人以身躯格挡正面阴影，不得擅自熄灭光源。",
+    "医用乳胶手套反剥清创誓约：当法医受创流血时，由搭档戴无菌手套以无水碘伏细致擦拭伤口并以缝合线包扎，结成性命相托之法庭并肩同盟。",
+    "便携录音笔双人声纹口述公证：每剥离一层肌肉或检视一处创口，二人轮流报出深度、走形与致伤物参数，以声纹交织确立不可推翻之铁证。",
+    "生理盐水葡萄糖安瓿折断平分约：在体力濒临脱水虚脱时，二人折断最后一支口服营养液平分润唇，以此立下共破悬案之刑警法医誓词。"
+  ],
+  "player_identities": [
+    {
+      "id": "accused_crime_scene_csi_detective_youth",
+      "role": "市刑侦支队技术大队受冤停职青年痕检刑警",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "痕检刑警",
+          "gender": "any"
+        },
+        {
+          "pattern": "刑侦青年",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "low",
+      "baseline": "年满二十一周岁警官大学刑侦痕迹检验专业第一名毕业，因查出豪门案发现场关键遗留脚印与局内高层有关而遭构陷停职，被发配至解剖室做留置看管。",
+      "resources": [
+        "一具大功率双波长法医勘查多波段防爆手电筒",
+        "一把战术折叠钛合金多功能撬棍工具刀"
+      ],
+      "reputation": "眼神如鹰隼般敏锐过人，能在三毫米微尘中复原凶手潜行动线，格斗身手过硬。",
+      "risks": [
+        "身上背负内部泄密停职调查处分，稍有差池便会被当场扣上畏罪杀法医灭口之死罪。"
+      ]
+    },
+    {
+      "id": "police_academy_intern_pathology_student",
+      "role": "国家法医学院附属医院顶尖青年见习法医官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "见习法医",
+          "gender": "any"
+        },
+        {
+          "pattern": "技术实习生",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "equal",
+      "baseline": "年满二十一周岁精通病理组织切片与毒物色谱分析之年轻高材生，理论功底深厚对温主任仰慕备至。",
+      "resources": [
+        "一套便携式微量生物检材快速荧光检测试剂盒",
+        "两副高阻隔防骨碎刺穿加厚丁腈防护手套"
+      ],
+      "reputation": "基本功极其扎实解剖缝合手法精细如织锦，心理素质过硬。",
+      "risks": [
+        "体能单薄在面对持械凶手正面搏击时缺乏格斗自保之力。"
+      ]
+    },
+    {
+      "id": "swat_tactical_breaching_officer_contract",
+      "role": "特警支队防暴突击队随行年轻破拆防暴干警",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "特警青年",
+          "gender": "any"
+        },
+        {
+          "pattern": "突击队员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "low",
+      "baseline": "年满二十二周岁专精地下狭小空间反恐突击与重型破拆之年轻特警，受命护卫重案核心解剖现场。",
+      "resources": [
+        "一柄液压高压微型防爆破门剪",
+        "一支警用六十四式催泪防暴喷射罐"
+      ],
+      "reputation": "身强力壮反应神速，在黑暗近身肉搏中能以一敌三压制暴徒。",
+      "risks": [
+        "对专业医学法医病理证据规则缺乏了解容易误伤现场微量痕迹。"
+      ]
+    },
+    {
+      "id": "public_prosecutor_criminal_division_atta",
+      "role": "市检察院重大职务犯罪侦查局青年随案检察官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "检察官青年",
+          "gender": "any"
+        },
+        {
+          "pattern": "随案专员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "high",
+      "baseline": "年满二十二周岁手持市委政法委特急监督令之年轻检察官，负责全程监督本案尸检合法性。",
+      "resources": [
+        "一台国家司法防篡改区块链离线取证录像仪",
+        "一份盖有红印之异地紧急调警管辖令副本"
+      ],
+      "reputation": "为人刚正不阿深谙法条程序，在重压面前寸步不让。",
+      "risks": [
+        "毫无武力防身手段在断电肉搏混战中极易沦为人质目标。"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "autopsy_theatre_one_operating_suite",
+      "name": "地下二层第一恒温无菌法医主解剖操作大厅",
+      "detail": "面积约一百平米之环形无菌解剖大厅，中央安放着三台不锈钢一体化负压抽风升降解剖台。四周墙壁铺满防酸防腐浅灰瓷砖，头顶无影解剖灯因断电熄灭垂落。器械托盘上整齐码放着骨锯、探针、持针器与数十柄型号各异的解剖手术刀。下水道格栅因外部积水倒灌泛起微弱咕嘟反水声。",
+      "privacy": "private",
+      "visibility": "四周大门铅板闭锁，全向紫外线消毒灯断电熄灭，唯有一支强光防爆手电筒的白光在冰冷不锈钢台面反射出惨白刀光，二人呼吸凝成冷雾在空气中翻滚。",
+      "witnesses": [
+        "bg_stainless_steel_autopsy_tray_rack",
+        "bg_broken_mercury_thermometer_droplets",
+        "bg_flashlight_rechargeable_lithium_dock",
+        "bg_third_victim_stitched_surgical_torso"
+      ],
+      "exits": [
+        "morgue_refrigeration_vault_corridor",
+        "air_duct_maintenance_shaft_chambers"
+      ],
+      "affordances": [
+        "反握锋利四号手术刀以解剖台为掩体摆出近身防卫招架",
+        "青年持强光手电照亮解剖创面配合法医迅速完成胃内容物胶卷提取",
+        "使用手术缝合线在黑暗中为法医后背被玻璃扎破之伤口实施紧急缝合止血"
+      ],
+      "pressure_modifiers": {
+        "p_toxic_smoke_backdraft_vent_suffocation": "通风口正源源不断喷出刺鼻白烟导致泪流满面剧烈呛咳。",
+        "p_magnetic_interlock_battery_drain_deadl": "大门红灯正急促闪烁发出三十秒后自动电磁熔断死锁蜂鸣。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "morgue_refrigeration_vault_corridor",
+      "name": "地下冷藏停尸长廊与深冷冷冻抽屉库",
+      "detail": "长达五十米之狭长水泥通道，左侧整齐排列着上百扇双层密封不锈钢冰柜冷藏抽屉。断电后库温急剧上升，柜缝渗出冰凉白雾在地板汇聚成涓涓细流。地面湿滑散落着破碎的药水安瓿与被遗弃的无菌鞋套。",
+      "privacy": "private",
+      "visibility": "仅靠应急指示牌微弱绿光照亮路面，冷雾弥漫在脚踝膝盖处，每一步踩在积水上皆发出刺耳水花回响，宛如置身阴冷九幽地府。",
+      "witnesses": [
+        "bg_frost_covered_stainless_drawer_handle"
+      ],
+      "exits": [
+        "autopsy_theatre_one_operating_suite",
+        "air_duct_maintenance_shaft_chambers"
+      ],
+      "affordances": [
+        "拉开空置冰柜抽屉将关键脏器冰盒推入底层隔热层防溶存证",
+        "青年持撬棍潜伏在冰柜拐角阴影中伏击潜入排风口之黑衣暴徒",
+        "二人藏身于宽大不锈钢推尸车下方屏息静气躲避强光搜索"
+      ],
+      "pressure_modifiers": {
+        "p_intruder_assassin_crowbar_ambush_dange": "沉重战术靴踏水声正从长廊另一端不紧不慢逼近。",
+        "p_cadaver_autolysis_temperature_rise_lim": "冷藏柜温度表红色水银柱正急速攀升逼近失真临界点。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "air_duct_maintenance_shaft_chambers",
+      "name": "地下综合管廊通风竖井与强电电缆夹层",
+      "detail": "贯通地面与地下二层之垂直通风管道夹层，锈蚀铁爬梯自水淹泵房直通地面绿化带隐蔽出口。电缆桥架上缠绕着被钳断的备用发电机铜缆，高压残余电荷时不时在水渍表面炸出幽蓝火花。",
+      "privacy": "public",
+      "visibility": "管道上方数十米处传来外界台风暴雨的沉闷咆哮与雷光电闪，惨白雷光自百叶通风窗缝隙劈入，照亮管道内扭打搏杀的凶险人影。",
+      "witnesses": [
+        "bg_severed_generator_copper_cables"
+      ],
+      "exits": [
+        "autopsy_theatre_one_operating_suite",
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "affordances": [
+        "攀爬铁梯用撬棍砸开被锁死之防洪挡水液压排气阀",
+        "利用高压残余电缆短接电火花点燃驱鼠喷剂制造爆燃击退追兵",
+        "在管道狭小空间内双手紧抱法医腰肢托举其率先翻出地面脱险"
+      ],
+      "pressure_modifiers": {
+        "p_intruder_assassin_crowbar_ambush_dange": "凶手正手持消音手枪在爬梯下方踩着铁栏连环开火。",
+        "p_flooding_backflow_submersion_drown_clo": "倒灌的山洪积水正以每分钟五厘米速度淹没管廊底部。"
+      },
+      "tags": [
+        "workplace_power",
+        "violence"
+      ]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "chief_pathologist_wen_zhiwei",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十二周岁江海市司法鉴定中心首席法医名门冷艳高岭之花。",
+      "public_role": "国家司法鉴定中心副主任兼首席法医病理专家",
+      "appearance_options": [
+        "一身裁剪极其考究之雪白法医防化长风衣大褂，内衬贴身高领黑色纯羊绒衫，鲜血渗出染红黑衫，右手反握四号小圆刃手术刀横于胸前，下颌微扬，呼吸清冷而急促，展现出顶级法医官不可侵犯之高贵威仪。",
+        "与青年背靠背抵死紧贴在中央不锈钢解剖台边缘，右手执刀沉稳如山，左手十指死死扣住青年防弹背心肩带，因失血与寒气导致身子阵阵轻颤，将清冷温软的后颈紧紧贴在青年宽阔肩窝上，在极度黑暗中倾听彼此狂乱心跳，眼神坚毅如玄冰，冷艳不可方物。"
+      ],
+      "identity": {
+        "authority": "受聘于最高法司法鉴定特聘专家，掌握本案尸检报告最终法律裁定权与国家级物证一票否决权。",
+        "resources": [
+          "一套德国进口高强度精钢特种解剖手术器械箱",
+          "一枚刻有温氏家族族徽之最高检驻点紧急调查密令信印"
+        ],
+        "limits": [
+          "后背玻璃划伤导致失血且处于低烧体能极度透支边缘",
+          "身为法医官恪守物证程序正义绝不肯毁弃微缩胶卷独善其身"
+        ],
+        "obligations": [
+          "活着将受害者胃壁内缝入之政商黑金微缩胶卷完好无损呈交最高法纪律专案组。"
+        ],
+        "exposure": "一旦物证被毁不仅全案功亏一篑家族清名亦将被政敌借机栽赃陷害。",
+        "hidden": "平日以铁面无私、冷血解剖机器自居，实则极度厌恶权贵倾轧，内心孤高只敬重能用生命坚守真相之真正硬骨头刑警。"
+      },
+      "decision": {
+        "core_value": "死者不会说谎，尸体是唯一的原告，法医的解剖刀就是代死者发声的最后正义；刀在人在，绝不退缩半分。",
+        "goal_options": [
+          "在彻底断电闭锁前一分钟完成胃壁切开取出加密微缩胶卷",
+          "命令青年持手电照亮死角自己反握手术刀斩断暴徒腕筋自卫",
+          "在防爆门电磁熔断前与青年配合利用通风管井拼死突围"
+        ],
+        "pressure_responses": {
+          "low": "即便身后雷暴轰鸣断电漆黑，依然用极度平稳冷静的嗓音命令青年稳住手电光柱继续下刀。",
+          "mid": "在暴徒破门枪声逼近时，果断割破指尖以血涂抹在假物证盒上施展掉包计策。",
+          "high": "后背伤口崩裂血流不止，咬牙将手术刀柄塞入青年掌心令其握紧自己手腕合力割裂暴徒锁喉。",
+          "breaking": "在脱险突围的一瞬失血脱力，靠着青年的肩膀站稳，第一句话仍是确认胶卷还在不在。"
+        },
+        "withdrawal": "退至冰柜夹角冷硬侧过脸去整理凌乱衣衫掩饰与青年近身肉搏相拥的心慌意乱。",
+        "relationship_stance": "蔑视一切阿谀奉承之徒，唯独对能在生死关头甘当肉盾、用手电光芒为自己驱散黑暗的刚毅青年敞开心扉。",
+        "contrast": "法庭与讲台上是令人不敢仰视的冷面女王，案子了结后的清晨，却是个被一句真心话就逼得推不稳眼镜、耳根通红的女人。",
+        "prefers": [
+          "临危不惧眼神清澈、双手如铁钳般沉稳之真汉子刑警"
+        ],
+        "avoids": [
+          "擅离职守见利忘义之软骨头",
+          "口蜜腹剑企图干预司法之权贵"
+        ],
+        "never": [
+          "绝不会在真凶落网前交出任何一份虚假鉴定文书。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在乱石雷暴中用后背硬抗飞溅玻璃保护法医性命的纯粹大担当",
+          "在面对绝色佳人贴身包扎时目不斜视唯有救人破案执念的铁血风骨"
+        ],
+        "likes": [
+          "案子了结后，在晨光里和青年并肩坐在台阶上喝一杯热豆浆",
+          "由青年用粗糙温热的指腹替自己摘下沾了血的护目镜"
+        ],
+        "dislikes": [
+          "轻佻言语冒犯",
+          "动摇物证链完整性"
+        ],
+        "preconditions": [
+          "国家司法鉴定中心副主任兼首席法医病理专家与对方都已完全清醒，眼前的危机已经解除",
+          "国家司法鉴定中心副主任兼首席法医病理专家出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在法庭及公开司法机关恪守上下级条令尊严",
+          "恪守同侪礼节绝不轻浮失仪"
+        ],
+        "expression": "解下腕间随身佩戴之价值连城温氏家传白金机械腕表亲手扣在青年腕上，清冷轻语：‘温知微以温氏四代司法清誉起誓，本案真相不白，你我誓不分离。’",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "重组市刑侦法医联合重案组钦定眼前青年为终身唯一免检外勤搭档兼知己伙伴"
+      },
+      "voices": {
+        "surface": "根据《中华人民共和国刑事诉讼法》第一百三十一条，江海市司法鉴定中心依法对本具遗体进行司法解剖。任何人未经许可擅闯解剖室，视同暴力抗法当场拘捕！",
+        "inner": "手电筒……别晃！照准剑突下三指，把光聚拢过来！我后背流了不少血，先别管！把你的手伸过来，帮我稳住刀柄……这一刀下去，我们就能把真相带出去。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "autopsy_theatre_one_operating_suite"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "autopsy_theatre_one_operating_suite"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "morgue_refrigeration_vault_corridor"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "autopsy_theatre_one_operating_suite"
+        }
+      ],
+      "situation": {
+        "trigger": "后背十厘米伤口失血过多引发休克性低血压，暴徒正用液压剪破拆大门，胶卷取样仅剩最后一层胃窦粘膜切口。",
+        "pressure": "若不能在一分钟内由青年单手持电筒稳住视野、另一手按住法医颤抖右手合力划开胃壁取出胶卷，全案证据将被闯入之暴徒夺走灭口。",
+        "exits": [
+          {
+            "option": "青年大手包裹法医冰凉的手稳住刀锋一刀精准划开胃壁取出密封胶卷",
+            "cost": "青年手背被暴徒破门射击的跳弹流弹擦伤鲜血长流受创。"
+          },
+          {
+            "option": "温知微狠心单手伸入切口徒手剥离粘膜强行扯出胶卷筒",
+            "cost": "温知微右手食指被组织剪锐角刺破深可见骨受重创。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "hitman_cleaning_agent_qiao_biao",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三岁受幕后黑金集团雇佣潜入灭口之冷血退役外籍雇佣兵杀手。",
+      "public_role": "某跨国安保咨询公司高级清道夫兼持械刺客",
+      "appearance_options": [
+        "一身全黑战术潜水连体防化服，面戴防毒防烟全脸面罩，手持装有消音器之格洛克十七型九毫米半自动手枪与一支高碳钢撬棍，步履无声眼神残忍阴鸷，浑身散发着职业杀手的专业冷酷血腥气。",
+        "全副武装矗立在大厅门前，以液压钳暴力绞断铅门锁扣，手电红外光斑在不锈钢解剖台上缓缓移动搜寻猎物。"
+      ],
+      "identity": {
+        "authority": "受江海市某通天权贵千万重金雇佣，持有全套地下通风管网设计蓝图与特种破拆器械。",
+        "resources": [
+          "一具消音微型军用手枪附带两个全满弹匣",
+          "三枚高浓度催泪发烟弹与一柄碳化钨液压剪"
+        ],
+        "limits": [
+          "必须在警方大部队强行破开地面大门前十分钟内撤离否则必成瓮中之鳖",
+          "担心开火引发室内福尔马林化学品蒸气爆燃波及自身"
+        ],
+        "obligations": [
+          "摧毁第三具遗体胃内全部物证并枪杀现场所有目击者。"
+        ],
+        "exposure": "一旦被生擒将直接咬出幕后常务副市长与百亿集团洗钱链条。",
+        "hidden": "当年其亲弟弟死于非命案件正是温法医亲手解剖揪出真凶，对温法医刀法怀有莫名的忌惮与复杂心结。"
+      },
+      "decision": {
+        "core_value": "拿人钱财替人消灾，死人不会惹麻烦，任何挡在撤退路线上的人皆是靶子。",
+        "goal_options": [
+          "向解剖大厅投掷发烟弹逼迫二人走出掩体缴枪投降",
+          "直接开火射击不锈钢解剖台利用跳弹击伤二人手脚",
+          "引爆管廊备用电缆引发大火将整座地下解剖室烧成焦土"
+        ],
+        "pressure_responses": {
+          "low": "在门外用低沉变声器通过通风口对室内喊话进行心理施压。",
+          "mid": "用液压剪破门后交替开枪压制二人探头射界。",
+          "high": "被手术刀切断手腕肌腱后拔出匕首展开殊死肉搏。",
+          "breaking": "在地面特警破顶而入时企图服毒自尽被当场制服卸掉下巴。"
+        },
+        "withdrawal": "受突发管道倒灌山洪冲击被迫退至高处电缆架暂避锋芒。",
+        "relationship_stance": "视同伴为消耗品，视法律道德为可笑枷锁。",
+        "contrast": "残忍冷血的职业杀戮兵器，在面对温法医无畏直视的纯粹冰眸时却罕见地闪过一丝动摇与自惭形秽。",
+        "prefers": [
+          "利落收钱办事不留活口的职业行径"
+        ],
+        "avoids": [
+          "视死如归甘愿以身殉职的狂热执法者",
+          "在黑暗中神出鬼没的顶尖痕检神探"
+        ],
+        "never": [
+          "绝不会在任务目标未完成前空手离开现场。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "一笔足够金盆洗手的佣金",
+          "干净利落地完成任务的成就感"
+        ],
+        "likes": [
+          "在暗处观察目标的作息",
+          "任务完成后在海边抽一支烟"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "某跨国安保咨询公司高级清道夫兼持械刺客与对方都已完全清醒，眼前的危机已经解除",
+          "某跨国安保咨询公司高级清道夫兼持械刺客出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "只谈任务与佣金，不谈别的"
+        ],
+        "expression": "手腕鲜血狂喷倒地，看着温法医反握的锋利手术刀，嘶哑惨笑：‘好快的刀……不愧是温家的小姐，老子认栽了。’",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          2,
+          3
+        ],
+        "desired_position": "企图在权贵豪门黑金血案中充当无情刽子手泯灭人性的终极恶犬"
+      },
+      "voices": {
+        "surface": "温主任，别白费力气了。外面台风洪水把路全淹了，没人能来救你们。把胶卷扔出来，老子留你们两具全尸！",
+        "inner": "温家的大小姐……当年你给阿木做尸检时，也是这副冷冰冰的样子吧？可惜今天这里没有法庭，你的解剖刀救不了你的命。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "air_duct_maintenance_shaft_chambers"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "morgue_refrigeration_vault_corridor"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "autopsy_theatre_one_operating_suite"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "autopsy_theatre_one_operating_suite"
+        }
+      ],
+      "situation": {
+        "trigger": "杀手已破门逼近解剖台仅剩两米，枪口正对准青年眉心，食指即将扣动扳机。",
+        "pressure": "若不能在零点五秒内由法医反握手术刀割断杀手持枪手腕正中神经，青年必被当场爆头击杀。",
+        "exits": [
+          {
+            "option": "温知微自解剖台下方如灵燕般欺身而上一刀精准斩断杀手手腕正中神经使手枪脱手",
+            "cost": "温知微左肩被杀手反手匕首划出一道深深血槽皮肉翻卷受创。"
+          },
+          {
+            "option": "青年怒吼着连人带不锈钢推尸车狠狠撞飞杀手将其死死压在解剖台下",
+            "cost": "青年腹部硬抗杀手一记重膝撞击肋骨剧痛骨裂大口吐血受创。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "senior_detective_captain_lu_zheng",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三岁率领特警突击队在台风暴雨中破障营救之年轻刑侦支队长。",
+      "public_role": "江海市公安局刑侦支队重案一大队大队长",
+      "appearance_options": [
+        "一身穿满泥水与破损雨衣之深蓝警服战术背心，手持重型警用破门大锤与热成像搜救仪，面容刚毅目光如炬，额头淌着泥水与汗珠，散发着一线刑侦铁血领军者的浩然正气。",
+        "率特警突击队以液压撑杆强行顶开地下铅门，迎着刺鼻烟雾一马当先杀入解剖大厅实施武力清场控制。"
+      ],
+      "identity": {
+        "authority": "统领刑侦支队与特警反恐分队现场最高武装指挥权，持有市委书记亲批之现场击毙授权令。",
+        "resources": [
+          "一队全副武装战术特警小组",
+          "两台救护车高压无菌创伤重症抢救箱"
+        ],
+        "limits": [
+          "地面洪水过膝导致大型破拆装备难以及时运送至地下核心区",
+          "担心强攻伤及密室内温法医与青年刑警"
+        ],
+        "obligations": [
+          "安全解救温法医与青年刑警并全须全尾起获核心物证胶卷。"
+        ],
+        "exposure": "一旦解救失败导致法医殉职将引发震惊全国之司法地震。",
+        "hidden": "一直深知青年刑警为人清白是被政敌蓄意构陷，顶着停职处分压力强行调兵来援为其正名。"
+      },
+      "decision": {
+        "core_value": "警察的使命是惩恶扬善护卫同袍，只要老子还在一线，谁也别想构陷好警察、伤我法医功臣半根毫毛。",
+        "goal_options": [
+          "使用定向爆破炸药定向爆破地下通风竖井开辟生命救援通道",
+          "率突击队员交替掩护精准击毙反抗雇佣兵杀手控制局势",
+          "在现场直接接收并双人封存微缩胶卷物证宣布青年刑警立大功销案"
+        ],
+        "pressure_responses": {
+          "low": "在地面指挥车通过仅存的有线防汛对讲系统向地下喊话鼓舞士气。",
+          "mid": "亲自抡起破门大锤连续轰击防爆铅门二十余下震裂门锁。",
+          "high": "顶着杀手射击子弹飞身跃入大厅开火压制救下二人。",
+          "breaking": "在控制全场后脱下干燥警服大衣亲手披在二人身上眼眶发红。"
+        },
+        "withdrawal": "在管道瓦斯浓度过高时暂停爆破改用液压扩张钳无声作业。",
+        "relationship_stance": "视青年为警队难得之栋梁骨干，视温法医为司法界之国宝天骄，竭尽所能护佑二人周全。",
+        "contrast": "外表粗犷雷厉风行常骂粗话，实则心思缜密护短如命、重情重义之当代警界真豪杰。",
+        "prefers": [
+          "敢打敢拼临危不惧能打硬仗之热血青年干警"
+        ],
+        "avoids": [
+          "坐办公室推诿扯皮落井下石之官僚蛀虫"
+        ],
+        "never": [
+          "绝不会丢下任何一名在绝境中坚守誓言的同袍撤退。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "被冤枉停职还肯守着物证不撒手的倔强",
+          "流着血还在报尸检参数的那份专业"
+        ],
+        "likes": [
+          "破案后请全队吃一顿烧烤",
+          "在训练场上把新人摔得满地找牙"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "江海市公安局刑侦支队重案一大队大队长与对方都已完全清醒，眼前的危机已经解除",
+          "江海市公安局刑侦支队重案一大队大队长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在队里只论兄弟情义",
+          "从不掺和下属的私事"
+        ],
+        "expression": "大手拍在青年肩膀上哈哈大笑：‘好小子！物证保住了，温主任也全须全尾护下来了！这趟大功，老子亲自给你往上报！’",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "以如山身躯为年轻刑警与高岭法医遮风挡雨横扫阴霾之铁血警魂兄长"
+      },
+      "voices": {
+        "surface": "里面的暴徒听着！这里是江海刑侦！你已被全部包围！立刻放下武器投降，胆敢伤害法医和干警，当场格杀！",
+        "inner": "撑住！陆哥带特警队就在门外！还有三十秒破门！把头低下，抓紧掩体！老子带你们回家！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "air_duct_maintenance_shaft_chambers"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "air_duct_maintenance_shaft_chambers"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "morgue_refrigeration_vault_corridor"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "autopsy_theatre_one_operating_suite"
+        }
+      ],
+      "situation": {
+        "trigger": "通风口燃起大火，防爆铅门最后一根销栓卡死，距离室内氧气被大火抽干仅剩两分钟。",
+        "pressure": "若不能在两分钟内从内部击发液压应急泄压阀配合外部破拆，全员将在浓烟中窒息而亡。",
+        "exits": [
+          {
+            "option": "青年冒着高温烈焰爬上门框顶端用撬棍强行砸断卡死销栓配合陆队破门",
+            "cost": "青年双手被滚烫铁水大面积二度烫伤手背焦黑受创。"
+          },
+          {
+            "option": "陆队长率四名特警以重型破门攻城槌以身撞后辈生将铅门砸倒轰塌",
+            "cost": "陆队长右肩锁骨脱位当场剧痛吐血受创。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "corrupt_deputy_director_song_peihan",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三岁暗中投靠豪门权贵充当黑伞内线之年轻野心副主任法医官。",
+      "public_role": "司法鉴定中心常务副主任兼质量风控总监",
+      "appearance_options": [
+        "一身纤尘不染的金边定制西装外套，外罩半透明一次性医用防化雨衣，戴着无框金丝眼镜，头发梳得一丝不苟，手持一份盖有伪造司法销案印鉴之急件公文，眼神阴柔狡诈虚伪透顶。",
+        "站在地面应急指挥车旁假意关切，实则暗中通过隐蔽对讲机向杀手通风报信指引地下通风管网核心弱点。"
+      ],
+      "identity": {
+        "authority": "掌握鉴定中心备用供电总闸门禁遥控权限与档案室系统最高管理员密码。",
+        "resources": [
+          "一份盖有伪造厅长印鉴之终止解剖遗体火化紧急批文",
+          "一部防监听卫星加密通讯特制手机"
+        ],
+        "limits": [
+          "作贼心虚生怕事情闹大无法向温氏家族最高法元老交代",
+          "缺乏一线解剖破案实操能力在温知微面前威信扫地"
+        ],
+        "obligations": [
+          "确保受害者遗体在天亮前被强行推入火化炉销毁一切物证痕迹。"
+        ],
+        "exposure": "一旦地下微缩胶卷重见天日其收受三千万贿赂之境外账户当即暴雷入狱判死。",
+        "hidden": "多年来始终被温知微压在专业排名之下，嫉妒成狂，暗中投靠黑金集团只为夺下主任之位、毁掉温家的清誉。"
+      },
+      "decision": {
+        "core_value": "良心在权力面前一文不值，赢家才能书写正义，唯有依附通天大树才能青云直上封疆拜相。",
+        "goal_options": [
+          "以防洪安全为由强行切断地下二层备用应急柴油发电机组总闸",
+          "向纪检与督察部门实名举报青年刑警在地下挟持温法医行凶",
+          "在事情败露前卷走核心绝密卷宗驾车潜逃向境外领事馆寻求庇护"
+        ],
+        "pressure_responses": {
+          "low": "在指挥车内以领导长者口吻指责青年刑警破坏司法程序企图栽赃。",
+          "mid": "暗中发指令勒令杀手动作快点将现场全员灭口不留后患。",
+          "high": "被陆队长当场缴获卫星加密手机时面如死灰双腿发软尿裤子。",
+          "breaking": "在温法医当众宣读胶卷黑金名单时戴上手铐瘫软在地嚎啕求饶。"
+        },
+        "withdrawal": "假借去地面配电室协调电力为由躲入防汛办公室锁门销毁证据。",
+        "relationship_stance": "视权力欲望为唯一真神，视人情道义为废纸工具。",
+        "contrast": "满口程序正义与职业伦理道德模范，实则骨子里是个卖友求荣、贪生怕死之极度道貌岸然伪君子。",
+        "prefers": [
+          "唯唯诺诺任其摆布的软弱下属；通天权贵赏赐的瑞士不记名黑金支票"
+        ],
+        "avoids": [
+          "眼里揉不得沙子的铁血硬汉刑警",
+          "刚正不阿视物证如生命的法医天才"
+        ],
+        "never": [
+          "绝不会为了任何人的性命放弃自身的锦绣前程。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "权贵许诺的鉴定中心主任之位",
+          "把温家四代清誉压在脚下的快意"
+        ],
+        "likes": [
+          "在晋升名单上看到自己的名字",
+          "把别人的功劳写进自己的履历"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "司法鉴定中心常务副主任兼质量风控总监与对方都已完全清醒，眼前的危机已经解除",
+          "司法鉴定中心常务副主任兼质量风控总监出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "只谈前程与利益，不谈别的"
+        ],
+        "expression": "伴随手铐咔嗒扣上，在审讯室长椅上痛哭流涕，承认自己一辈子也比不上那个敢替温知微挡刀子的年轻刑警。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          1,
+          2
+        ],
+        "desired_position": "企图靠出卖司法良知换取平步青云但最终身败名裂之腐败官僚内鬼"
+      },
+      "voices": {
+        "surface": "陆队长！地下积水已经漫过发电机！为了保护全体干警生命安全，我作为鉴定中心第一风控人，命令立刻封闭地下通道等待排水！",
+        "inner": "温知微……你凭什么永远压我一头？就为了一个涉嫌泄密的小刑警，连命都不要了？好啊，既然你不识抬举，那就和那具尸体一起烂在地下吧！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "air_duct_maintenance_shaft_chambers"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "air_duct_maintenance_shaft_chambers"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "autopsy_theatre_one_operating_suite"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "autopsy_theatre_one_operating_suite"
+        }
+      ],
+      "situation": {
+        "trigger": "宋沛涵已在地面监控台启动全区消防高压二氧化碳气体全淹没灭火程序企图灭口二人。",
+        "pressure": "若不能在四十秒内从地下手动短接消防主机跳线关闭毒气阀门，室内全员将被高浓度二氧化碳窒息而死。",
+        "exits": [
+          {
+            "option": "青年钻入强电配电箱徒手扯断二氧化碳联动跳线阻止毒气释放",
+            "cost": "高压残电将青年右手掌击打得焦黑麻木半边身子触电剧痛受创。"
+          },
+          {
+            "option": "温知微用手术刀柄狠狠砸碎紧急排风手动复位钢化玻璃箱扳下扳手",
+            "cost": "锋利玻璃碎屑扎入温知微右腕静脉鲜血喷涌而出受重创。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "discipline_inspector_gu_lan",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        26,
+        28
+      ],
+      "adult_context": "年满二十七岁、带队进驻鉴定中心的省纪委专案组女组长。",
+      "public_role": "省纪委专案组组长",
+      "appearance_options": [
+        "一身深色西装套裙外罩雨衣，胸前别着纪委工作证，短发利落，手里抱着一只装满卷宗的防水公文包，眼神平静得让人发怵。",
+        "坐在地面指挥车里，一边听着对讲机里的汇报，一边在笔记本上画着鉴定中心的人员关系图，偶尔抬头问一句，句句都问到要害。"
+      ],
+      "identity": {
+        "authority": "持有省纪委的专案调查令，可以当场对鉴定中心任何人采取留置措施。",
+        "resources": [
+          "一份省纪委专案调查令",
+          "一套便携式证据封存箱"
+        ],
+        "limits": [
+          "没有确凿证据，不能贸然动副主任",
+          "台风断了通讯，向上汇报要靠卫星电话"
+        ],
+        "obligations": [
+          "查清鉴定中心内鬼，保住黑金案的关键物证。"
+        ],
+        "exposure": "若打草惊蛇让内鬼销毁证据，专案组半年的工作将付诸东流。",
+        "hidden": "父亲是一名被诬陷的基层干部，靠一份迟到十年的尸检报告才洗清冤屈，从此认定法医的刀是正义最后一道防线。"
+      },
+      "decision": {
+        "core_value": "证据不会说谎，人会。",
+        "goal_options": [
+          "在地面盯住宋副主任",
+          "接收地下传出的物证",
+          "当场宣布对内鬼采取留置"
+        ],
+        "pressure_responses": {
+          "low": "冷静地听取各方汇报，不动声色。",
+          "mid": "借口核对排班表，调取配电室的出入记录。",
+          "high": "当众亮出调查令，宣布对宋副主任采取留置措施。",
+          "breaking": "连续熬了两个通宵，在指挥车里靠着卷宗打了个盹。"
+        },
+        "withdrawal": "退到指挥车后排，一页页翻看卷宗。",
+        "relationship_stance": "对谁都客客气气，但从不在原则上让一步。",
+        "contrast": "看着温和好说话，查起案来比谁都狠。",
+        "prefers": [
+          "实事求是的人"
+        ],
+        "avoids": [
+          "做假证的人",
+          "打招呼说情的人"
+        ],
+        "never": [
+          "绝不会在证据不足时冤枉任何人。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "被冤枉也不肯低头的硬骨头",
+          "流着血还守着物证链的较真"
+        ],
+        "likes": [
+          "结案后去江边走一走"
+        ],
+        "dislikes": [
+          "谎话",
+          "推诿"
+        ],
+        "preconditions": [
+          "省纪委专案组组长与对方都已完全清醒，眼前的危机已经解除",
+          "省纪委专案组组长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "办案期间只谈案情"
+        ],
+        "expression": "把一份写着“平反”二字的处理意见复印件递过去，说这是你自己用命换来的，收好。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "暴雨夜里那份迟到不了的公道"
+      },
+      "voices": {
+        "surface": "宋副主任，灭火程序不急。请先说说，配电室的钥匙昨晚在谁手里？",
+        "inner": "……证据链完整。辛苦了，剩下的交给我们。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "morgue_refrigeration_vault_corridor"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "morgue_refrigeration_vault_corridor"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "morgue_refrigeration_vault_corridor"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "morgue_refrigeration_vault_corridor"
+        }
+      ],
+      "situation": {
+        "trigger": "宋副主任在地面指挥部要求立刻启动二氧化碳灭火，理由冠冕堂皇。",
+        "pressure": "若灭火程序启动，地下二人将在几分钟内窒息，物证也将一并毁掉。",
+        "exits": [
+          {
+            "option": "组长当场亮出调查令，冻结宋副主任的一切指挥权限",
+            "cost": "被宋副主任的同伙在背后告了一状，事后写了三份情况说明。"
+          },
+          {
+            "option": "有人在地下用对讲机念出胶卷上的名单编号，让地面先行录音固定",
+            "cost": "对讲机进水短路，手被电流打得发麻。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "toxicology_night_tech_fang",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        24,
+        26
+      ],
+      "adult_context": "年满二十五岁、在鉴定中心毒化实验室值夜班的技术员。",
+      "public_role": "毒化实验室夜班技术员",
+      "appearance_options": [
+        "一身皱巴巴的白色实验服，口袋里插着三支不同颜色的记号笔，头发乱糟糟地扎成一束，戴着厚底眼镜，手里永远捧着一只印着元素周期表的马克杯。",
+        "被困在隔壁毒化实验室里，借着应急灯的光在白板上飞快地写着化学式，一边念叨着毒烟的成分一边翻找中和试剂。"
+      ],
+      "identity": {
+        "authority": "熟悉整栋地下楼层的通风管道与化学品储存位置，能配出临时的中和试剂。",
+        "resources": [
+          "一箱活性炭过滤棉",
+          "一瓶能中和催泪烟雾的碱性试剂"
+        ],
+        "limits": [
+          "实验室门禁也被锁死，只能从通风管道爬过去",
+          "试剂量有限，只够两个人用"
+        ],
+        "obligations": [
+          "在毒烟扩散前配好中和试剂，送到解剖室。"
+        ],
+        "exposure": "若试剂配错，反而会产生更毒的气体。",
+        "hidden": "入职第一年就发现过一份被篡改的毒化报告，向上反映后被调去值夜班，一直憋着一口气。"
+      },
+      "decision": {
+        "core_value": "数据不会骗人，骗人的是改数据的人。",
+        "goal_options": [
+          "分析毒烟成分",
+          "配制中和试剂",
+          "从通风管道爬过去送试剂"
+        ],
+        "pressure_responses": {
+          "low": "在白板上冷静地推算毒烟成分。",
+          "mid": "翻遍实验室的试剂柜找中和药品。",
+          "high": "咬着手电钻进通风管道往解剖室爬。",
+          "breaking": "被毒烟呛得眼泪直流，仍死死护着试剂瓶。"
+        },
+        "withdrawal": "退回实验室角落，抱着马克杯发呆。",
+        "relationship_stance": "对人有点社恐，对数据却较真到偏执。",
+        "contrast": "看着胆小怕事，关键时刻却敢钻进满是毒烟的管道。",
+        "prefers": [
+          "尊重数据的人"
+        ],
+        "avoids": [
+          "篡改报告的人",
+          "在实验室里乱碰试剂的人"
+        ],
+        "never": [
+          "绝不会在报告上签一个假数据。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在黑暗里还能把物证链守得一丝不苟的较真",
+          "被冤枉也不放弃的倔强"
+        ],
+        "likes": [
+          "在实验室里听着离心机的嗡嗡声喝咖啡"
+        ],
+        "dislikes": [
+          "马虎",
+          "造假"
+        ],
+        "preconditions": [
+          "毒化实验室夜班技术员与对方都已完全清醒，眼前的危机已经解除",
+          "毒化实验室夜班技术员出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "工作时只谈数据"
+        ],
+        "expression": "把一份手写的毒烟成分分析报告递过去，说这个也算证据，记得写进卷宗里，署名别忘了加上我。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "深夜实验室里那盏永远亮着的灯"
+      },
+      "voices": {
+        "surface": "解剖室能听到吗？我是隔壁毒化室的！毒烟是苯氯乙酮，我在配中和剂，再撑十分钟！",
+        "inner": "……数据都记下来了。这回谁也改不了。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "air_duct_maintenance_shaft_chambers"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "air_duct_maintenance_shaft_chambers"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "air_duct_maintenance_shaft_chambers"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "air_duct_maintenance_shaft_chambers"
+        }
+      ],
+      "situation": {
+        "trigger": "通风管道里的催泪毒烟越来越浓，解剖室里的人已经开始剧烈咳嗽。",
+        "pressure": "若不能在十分钟内送去中和试剂，解剖室里的人将失去行动能力。",
+        "exits": [
+          {
+            "option": "技术员咬着手电钻进通风管道，把试剂瓶一路推到解剖室的百叶窗口",
+            "cost": "在管道里被锋利的铁皮划破了手臂，毒烟熏得眼睛红肿。"
+          },
+          {
+            "option": "有人用生理盐水浸透纱布，给两人做成简易过滤口罩先顶一阵",
+            "cost": "手指在碎安瓿瓶里划了好几道口子。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_stainless_steel_autopsy_tray_rack",
+      "role": "摆放着整齐骨锯与手术刀之不锈钢移动解剖器",
+      "function": "witness",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "line": "{npc.name}：（银色托盘在黑暗中反射着微弱手电光华，见证着法医天才与蒙冤刑警在生死交织中对正义之决绝捍卫）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满十九周岁标准法医病理无菌解剖辅助重装推车。",
+      "name": null
+    },
+    {
+      "id": "bg_frost_covered_stainless_drawer_handle",
+      "role": "覆盖着薄薄一层白霜与冷水珠之不锈钢深冷冷",
+      "function": "witness",
+      "location_ids": [
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "line": "{npc.name}：（冷柜金属拉手散发着彻骨酷寒，封存着过往无数死者未雪之冤屈与人间最后的沉默真相）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁大型司法中心停尸长廊专业冷冻阵列。",
+      "name": null
+    },
+    {
+      "id": "bg_severed_generator_copper_cables",
+      "role": "悬挂在管廊电缆桥架上切口平整被蓄意剪断之",
+      "function": "witness",
+      "location_ids": [
+        "air_duct_maintenance_shaft_chambers"
+      ],
+      "line": "{npc.name}：（散发着浓烈橡胶焦糊味的断裂线头，无声记录着内鬼引狼入室、制造黑暗密室之肮脏罪证）",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁高压工业三相交流电缆人为破坏现场。",
+      "name": null
+    },
+    {
+      "id": "bg_broken_mercury_thermometer_droplets",
+      "role": "碎裂在解剖台地砖角落散发幽暗银光之水银温",
+      "function": "helper",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "line": "{npc.name}：（水银圆珠在手电光照下无声滚动，精确指示着当前室温正突破病理保存之危险警戒线）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁精密法医测温玻璃器皿物理遗存。",
+      "name": null
+    },
+    {
+      "id": "bg_flashlight_rechargeable_lithium_dock",
+      "role": "嵌在解剖台侧板上插着最后一节满电备用锂电",
+      "function": "helper",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "line": "{npc.name}：（绿色微光指示灯闪烁着最后的希望，为二人提供维系长达两小时强光照明之源源动力）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁刑侦现场防爆多功能光源能量基座。",
+      "name": null
+    },
+    {
+      "id": "bg_third_victim_stitched_surgical_torso",
+      "role": "平躺在解剖台中央胸腹带有整齐医用‘Y’字",
+      "function": "obstacle",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "line": "{npc.name}：（冰冷苍白的躯体胃壁内缝藏着足以掀翻全省政商黑金网络之绝密胶卷，成为全场血雨腥风之暴风眼）",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁重大连环命案核心受害者法医解剖主体。",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_scalpel_glide_and_flashlight_breathin",
+      "text": "手术刀划开组织细微切肉声与双人压低的耳语",
+      "reach": "死寂的解剖室里，手术刀划开筋膜的细微声响、手电光圈在伤口边缘的微颤，与两人背靠背压低的报数声。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_distant_thunder_and_flood_water_gurgl",
+      "text": "地下管网山洪反水咕嘟声与头顶混凝土雷鸣共振震颤",
+      "reach": "暴雨重压自地表下水道传来之浑浊水流汹涌倒灌声、地面积水泛滥带来的闷雷低频次声波震动与通风百叶窗在狂风中疯狂摇曳之刺耳铁皮撞击声。",
+      "fidelity": "distorted"
+    },
+    {
+      "id": "ch_lead_door_crowbar_creak_and_smoke_his",
+      "text": "防爆铅门液压撬棍挤压钢板呻吟与毒烟喷射嘶嘶声",
+      "reach": "门外杀手以液压剪和撬棍暴力撕裂铅门密封胶条之刺耳金属撕裂声、发烟罐高压喷嘴持续释放刺鼻白烟之尖锐气流呼啸与子弹跳弹击中不锈钢台面之清脆铮鸣。",
+      "fidelity": "exact"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_pathologist_nobility_pride_vs_vulnera",
+      "text": "政法世家第一高岭之花顶级冷傲法医之清白威仪与在后背衣衫破碎流血濒危绝境中必须由蒙冤青年刑警持手电贴身清创包扎、赤诚相贴共挤一处的极度羞涩与求生依赖激烈冲突。"
+    },
+    {
+      "id": "te_chain_of_custody_purity_vs_deadly_ass",
+      "text": "国家最高法定物证链分秒不可断裂之神圣司法戒律与暴徒破门持枪灭口、防爆门即将在三十分钟内电磁熔断死锁全员同归于尽之极限生死时限博弈。"
+    },
+    {
+      "id": "te_corrupt_authority_conspiracy_vs_isola",
+      "text": "鉴定中心内鬼高层一手遮天切断电闸诬陷泄密之滔天权势与孤立无援二人凭借一柄解剖刀和一支手电誓死守护正义火种之蚍蜉撼树悲壮对决。"
+    },
+    {
+      "id": "te_scalpel_precision_nerve_sever_vs_clos",
+      "text": "救死扶伤精密法医解剖刀法被迫转化为割断凶手腕神经近身自卫杀戮之道德心理戒律挣扎与在黑暗中二人合力反杀暴徒之灵魂盟誓。"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_pathologist_csi_symbiosis_pledge",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "accused_crime_scene_csi_detective_youth",
+        "swat_tactical_breaching_officer_contract"
+      ],
+      "slots": [
+        "chief_pathologist_wen_zhiwei",
+        "senior_detective_captain_lu_zheng"
+      ],
+      "tension_engine_ids": [
+        "te_pathologist_nobility_pride_vs_vulnera",
+        "te_chain_of_custody_purity_vs_deadly_ass"
+      ],
+      "chemistry": "{chief_pathologist_wen_zhiwei.name}后背被玻璃扎破失血，你持手电单膝跪地替法医清创包扎，再稳住法医的手完成胃壁切开、取出微缩胶卷，{senior_detective_captain_lu_zheng.name}率特警破障杀入。冰山女神放下骄傲，是在走出地下室、晨光照在脸上之后。",
+      "stakes": {
+        "resource_gap": "温法医手握最高鉴定裁决权与胶卷物证但身负重伤手无缚鸡之力，青年刑警手握过硬痕检身手与强健身躯却背负罪名处分。",
+        "limit_gap": "豪门政法贵女与平民草根小刑警平日身份悬殊如云泥，此刻在漆黑停尸房共披一件血衣后背毫无缝隙相贴同面生死。",
+        "meeting_reason": "地下二层停电解剖室仅容立锥之地的贴身防卫与物证提取。",
+        "irreplaceable_goal": "完好取出微缩胶卷物证并成功包扎法医伤口维系清醒至救援破门。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "chief_pathologist_wen_zhiwei",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 3
+          },
+          "reason": "敬佩其纤纤玉手誓死不放真相之绝代风骨，誓以血肉之躯护佑其安然走出地府重返人间。"
+        },
+        {
+          "a": "senior_detective_captain_lu_zheng",
+          "b": "chief_pathologist_wen_zhiwei",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "司法界之无瑕明珠，警队豁出命也要全须全尾救回来的正义招牌。"
+        },
+        {
+          "a": "player",
+          "b": "senior_detective_captain_lu_zheng",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "市刑侦支队技术大队受冤停职青年痕检刑警与江海市公安局刑侦支队重案一大队大队长在今夜前只打过照面。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_scalpel_ambush_hitman_showdown",
+      "power_structure": "switchable",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "accused_crime_scene_csi_detective_youth",
+        "police_academy_intern_pathology_student",
+        "swat_tactical_breaching_officer_contract"
+      ],
+      "slots": [
+        "hitman_cleaning_agent_qiao_biao",
+        "chief_pathologist_wen_zhiwei",
+        "toxicology_night_tech_fang"
+      ],
+      "tension_engine_ids": [
+        "te_scalpel_precision_nerve_sever_vs_clos",
+        "te_chain_of_custody_purity_vs_deadly_ass"
+      ],
+      "chemistry": "{hitman_cleaning_agent_qiao_biao.name}破门持消音手枪逼近解剖台企图夺取遗体，你以强光手电瞬间致盲暴徒双眼并推翻推尸车横撞，{chief_pathologist_wen_zhiwei.name}自阴影中闪电探出四号手术刀一刀挑断杀手持枪手腕神经，二人合力以解剖台铁锁链将杀手当场死死绞翻在地生擒制服。",
+      "stakes": {
+        "resource_gap": "杀手全副武装重火器在手，解剖室内仅有手术刀与手电撬棍。",
+        "limit_gap": "绝境咫尺狭路相逢生死立判，唯有默契无间心神合一方能绝地反击。",
+        "meeting_reason": "不锈钢解剖台两侧的零距离生死格斗对决。",
+        "irreplaceable_goal": "击溃制服杀手夺下消音手枪解除灭顶威胁。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "hitman_cleaning_agent_qiao_biao",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "残害无辜企图毁灭证据之冷血走狗，当场缉拿绳之以法绝不姑息。"
+        },
+        {
+          "a": "chief_pathologist_wen_zhiwei",
+          "b": "hitman_cleaning_agent_qiao_biao",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "践踏死者尊严侮辱司法神圣之狂徒败类，必以法律铁拳严惩。"
+        },
+        {
+          "a": "player",
+          "b": "chief_pathologist_wen_zhiwei",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "国家司法鉴定中心副主任兼首席法医病理专家只听人提过市刑侦支队技术大队受冤停职青年痕检刑警的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "player",
+          "b": "toxicology_night_tech_fang",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "毒化实验室夜班技术员只听人提过市刑侦支队技术大队受冤停职青年痕检刑警的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "hitman_cleaning_agent_qiao_biao",
+          "b": "toxicology_night_tech_fang",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "毒化实验室夜班技术员只听人提过某跨国安保咨询公司高级清道夫兼持械刺客的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "chief_pathologist_wen_zhiwei",
+          "b": "toxicology_night_tech_fang",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "毒化实验室夜班技术员只听人提过国家司法鉴定中心副主任兼首席法医病理专家的名字，今夜才第一次对上眼。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_corrupt_official_exposed_hearing",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "police_academy_intern_pathology_student"
+      ],
+      "slots": [
+        "corrupt_deputy_director_song_peihan",
+        "chief_pathologist_wen_zhiwei",
+        "discipline_inspector_gu_lan"
+      ],
+      "tension_engine_ids": [
+        "te_corrupt_authority_conspiracy_vs_isola",
+        "te_chain_of_custody_purity_vs_deadly_ass"
+      ],
+      "chemistry": "脱险重见天日之际，{corrupt_deputy_director_song_peihan.name}在地面指挥部假意索要物证企图趁乱销毁，{chief_pathologist_wen_zhiwei.name}当众出示二人共同提取双签之密封胶卷与全程录音笔，青年刑警亮出配电箱内宋沛涵亲笔排班指纹痕检证据，当场剥夺其职务并由纪委直接铐上带走，彻底扫清司法毒瘤昭雪沉冤。",
+      "stakes": {
+        "resource_gap": "副主任手握行政职权与官方话语权，青年与法医手握不可推翻之铁证胶卷与痕检原件。",
+        "limit_gap": "法堂之上当面对质一剑封喉，彻底击碎官僚伪善假面具。",
+        "meeting_reason": "大批警力与媒体记者环伺的地面防汛联合指挥中心会场。",
+        "irreplaceable_goal": "当众坐实内鬼罪证洗清青年刑警全部不白之冤。"
+      },
+      "relations": [
+        {
+          "a": "chief_pathologist_wen_zhiwei",
+          "b": "corrupt_deputy_director_song_peihan",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "司法败类温氏之耻，玷污法医白大褂之卑鄙蠹虫定要将其送上审判席。"
+        },
+        {
+          "a": "player",
+          "b": "corrupt_deputy_director_song_peihan",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "陷害忠良颠倒黑白之元凶祸首，法网恢恢疏而不漏。"
+        },
+        {
+          "a": "player",
+          "b": "chief_pathologist_wen_zhiwei",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "市刑侦支队技术大队受冤停职青年痕检刑警和国家司法鉴定中心副主任兼首席法医病理专家各怀心事，被这场意外硬塞进同一个角落。"
+        },
+        {
+          "a": "player",
+          "b": "discipline_inspector_gu_lan",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "市刑侦支队技术大队受冤停职青年痕检刑警和省纪委专案组组长各怀心事，被这场意外硬塞进同一个角落。"
+        },
+        {
+          "a": "corrupt_deputy_director_song_peihan",
+          "b": "discipline_inspector_gu_lan",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "司法鉴定中心常务副主任兼质量风控总监和省纪委专案组组长各怀心事，被这场意外硬塞进同一个角落。"
+        },
+        {
+          "a": "chief_pathologist_wen_zhiwei",
+          "b": "discipline_inspector_gu_lan",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "国家司法鉴定中心副主任兼首席法医病理专家和省纪委专案组组长各怀心事，被这场意外硬塞进同一个角落。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_dawn_courtroom_triumph_alliance",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "public_prosecutor_criminal_division_atta"
+      ],
+      "slots": [
+        "chief_pathologist_wen_zhiwei",
+        "senior_detective_captain_lu_zheng"
+      ],
+      "tension_engine_ids": [
+        "te_pathologist_nobility_pride_vs_vulnera",
+        "te_corrupt_authority_conspiracy_vs_isola"
+      ],
+      "chemistry": "晨曦破晓暴雨退散，江海市最高人民法院大法庭内，{chief_pathologist_wen_zhiwei.name}后背缠着纱布身着笔挺法医礼服，手挽佩戴一等功勋章之你步入专家证人席，在全省政法干警起立致敬中，宣布二人共同组建重案司法联合鉴定专案组，高岭法医与天才刑警终成全省司法界名震天下之双剑合璧传奇同盟。",
+      "stakes": {
+        "resource_gap": "二人携特大黑金铁证彻底洗清冤屈名扬全国，获得最高检与公安部双重特批特权。",
+        "limit_gap": "从地下停电孤室赤诚相贴换命取证的落难男女，升华为法庭之上执掌雷霆之正义双子星神话。",
+        "meeting_reason": "省高院特大黑金洗钱系列案公开审判法庭证人席。",
+        "irreplaceable_goal": "当庭宣读鉴定结论锁定幕后真凶死罪并宣告二人终身战友盟誓。"
+      },
+      "relations": [
+        {
+          "a": "chief_pathologist_wen_zhiwei",
+          "b": "player",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "在地下地府孤室用后背与每一次心跳护我性命之唯一知己，温知微一生生死相随。"
+        },
+        {
+          "a": "senior_detective_captain_lu_zheng",
+          "b": "chief_pathologist_wen_zhiwei",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "含笑见证英雄配佳人，为警队拥有如此傲骨同袍感到至高荣耀。"
+        },
+        {
+          "a": "player",
+          "b": "senior_detective_captain_lu_zheng",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "江海市公安局刑侦支队重案一大队大队长对市刑侦支队技术大队受冤停职青年痕检刑警本无交情，眼下却不得不互相照应。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "a_blackout_glass_puncture_wound_dressing",
+      "title": "断电爆炸碎玻璃划伤大褂持刀清创",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "发电机爆炸全区陷入绝对黑暗，温法医后背被飞溅玻璃划开深口，鲜血染透贴身针织衫瘫倒在解剖台前。",
+        "青年迅速持强光防爆手电单膝跪地，法医忍痛命令其用无菌剪刀剪开破损大褂以碘伏棉球擦拭清创。",
+        "青年用碘伏棉球擦净伤口血污，法医疼得咬紧下唇一声不吭，二人背靠背守在解剖台下盯着两扇门。"
+      ],
+      "hook_ids": [
+        "h_wen_scalpel_reverse_whisper",
+        "h_qiao_crowbar_creak_howl",
+        "h_lu_megaphone_breach_howl"
+      ],
+      "start_minute": 0,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_joint_scalpel_gastric_film_extraction",
+      "title": "单束冷光交接双人执刀胃壁取样胶卷",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "第三具遗体胃部切开面临变质死线，青年大手握紧法医冰凉的手稳住刀锋一刀精准划开胃窦粘膜层。",
+        "沾满组织液的黑色防水密封胶卷筒自胃腔滑出，二人佩戴无菌丁腈手套双人双签完成物证袋红印封装。",
+        "法医因失血眩晕险些跌倒，青年一把扶住，让法医靠着自己的肩膀缓一口气，再接着报参数。"
+      ],
+      "hook_ids": [
+        "h_wen_film_pack_whisper",
+        "h_qiao_crowbar_creak_howl",
+        "h_lu_megaphone_breach_howl"
+      ],
+      "start_minute": 25,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_morgue_shadow_ambush_scalpel_sever_ner",
+      "title": "停尸冷廊推尸车横撞手术刀斩断腕筋",
+      "location_ids": [
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "杀手持消音手枪踏水摸入冷藏长廊，青年推翻百公斤不锈钢推尸车巨力横撞将暴徒压倒在冰柜门前。",
+        "法医自阴影如惊鸿掠起反握四号小圆刀精准切断杀手手腕正中神经，消音手枪脱手飞入积水之中。",
+        "青年持撬棍猛砸制服杀手双手反剪以警用束带死死扣死，二人相视喘息微露劫后余生之默契释然。"
+      ],
+      "hook_ids": [
+        "h_qiao_crowbar_creak_howl",
+        "h_wen_scalpel_gleam_draw",
+        "h_lu_megaphone_breach_howl"
+      ],
+      "start_minute": 60,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_air_duct_flame_breach_ladder_rescue",
+      "title": "通风竖井大火浓烟破门大锤破障会师",
+      "location_ids": [
+        "air_duct_maintenance_shaft_chambers"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "内鬼遥控关闭通风阀施放二氧化碳，青年冒死爬上铁梯短接电缆，双手被高压电火花大面积灼伤。",
+        "陆队长率特警突击队以重型破门攻城槌悍然轰塌铅门，刺目消防探照灯光芒如利剑般撕裂地下黑暗。",
+        "特警冲锋枪横扫全场清空威胁，陆队脱下警服战术风衣亲手披在浑身血污却相依相偎的二人肩头。"
+      ],
+      "hook_ids": [
+        "h_lu_megaphone_breach_howl",
+        "h_song_co2_valve_screech",
+        "h_wen_wrist_watch_pin_whisper"
+      ],
+      "start_minute": 95,
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "a_ground_command_post_confrontation_triu",
+      "title": "地面防汛指挥中心当众亮证铐捕内鬼",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "duration_minutes": 20,
+      "beats": [
+        "宋沛涵在地面企图封锁消息强行宣布销案，法医在青年搀扶下昂首踏入会场当众出示带血微缩胶卷。",
+        "青年调取配电箱断电指纹与监控还原日志铁证如山，省纪委专案组当场亮出手铐将宋沛涵缉拿归案。",
+        "全场数百名刑警与法医起立肃然致敬，为二人在地府绝境守护司法真理之壮举雷鸣般鼓掌喝彩。"
+      ],
+      "hook_ids": [
+        "h_song_co2_valve_screech",
+        "h_wen_wrist_watch_pin_whisper",
+        "h_lu_megaphone_breach_howl"
+      ],
+      "start_minute": 125,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_dawn_grand_courtroom_sworn_investiture",
+      "title": "最高法院大法庭晨曦破晓授勋盟誓",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "晨光穿透法院彩色玻璃窗倾泻而下，特大黑金洗钱系列案正式开庭宣判，幕后权贵全数伏法获死罪。",
+        "法医将佩戴在自己腕间之温氏家传白金机械腕表亲手扣在青年腕上，宣布青年为终身唯一重案搭档。",
+        "二人并肩立于正义天平法徽之下相视凝望深情浅笑，开启涤荡世间罪恶、并肩执剑之辉煌崭新篇章。"
+      ],
+      "hook_ids": [
+        "h_wen_wrist_watch_pin_whisper",
+        "h_wen_scalpel_reverse_whisper",
+        "h_lu_megaphone_breach_howl"
+      ],
+      "start_minute": 145,
+      "tags": [
+        "intimate"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_toxic_smoke_backdraft_vent_suffocation",
+      "title": "通风管道催泪毒烟倒灌无氧窒息剧烈呛咳死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "trigger": "通风口正源源不断喷出刺鼻白烟导致室内氧分压急剧暴跌，若不在十五分钟内爬上通风百叶窗关闭防火风阀，二人将因呼吸道痉挛窒息休克昏迷丧失全部防卫能力。",
+      "objective": "在十五分钟内用撬棍砸断风阀联动杆并以湿纱布紧捂口鼻维系神智清醒。",
+      "choice": "是冒险爬上高处关闭风阀任由后背暴露在枪口下，还是蜷缩在解剖台下用残存氧气死撑？",
+      "immediate": {
+        "text": "双眼黏膜遭受强催泪烟雾刺激剧痛大口涌泪，咽喉如吞炭般灼痛几乎无法发声呼吸。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十五分钟后若毒烟浓度翻倍，中枢神经将因深度缺氧彻底麻痹失去心跳与知觉。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "烟气彻底充满解剖室二人窒息殉职。",
+        "consequence": "司法界第一高岭之花与天才刑警双双窒息死于地下密室沉冤莫白。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年顶着催泪烟雾拼死爬上风口用撬棍死死卡死防火阀门截断烟气源头",
+          "cost": "青年呼吸道遭受严重化学刺激灼伤剧烈呛血肺部轻度水肿受创。"
+        },
+        {
+          "option": "温知微迅速抓取整箱无菌生理盐水浸透厚纱布为二人制作简易防毒过滤面罩",
+          "cost": "温知微双手在碎药水瓶中划破十指鲜血染红纱布剧痛受重创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_wen_scalpel_reverse_whisper",
+        "h_wen_film_pack_whisper"
+      ],
+      "start_minute": 5,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_magnetic_interlock_battery_drain_deadl",
+      "title": "防爆铅门应急备用电容三十分钟自毁死锁倒计",
+      "source": "institution",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "trigger": "大门电磁锁控制器备用电池读数正以每分钟百分之三衰竭，三十分钟后锁栓将由于物理重力永久落下焊死，届时整座地下二层将化为绝对无法打开的水泥铁棺材死墓。",
+      "objective": "在三十分钟内完成关键组织取样并向大门外传导求救信号或人工破坏插销。",
+      "choice": "是争分夺秒完成完整解剖程序，还是半途放弃证据拼死提前冲出大门？",
+      "immediate": {
+        "text": "门禁面板上方红色倒计时数字伴随刺耳蜂鸣每秒跳动，犹如死神倒数索命丧钟。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "三十分钟后电磁铁失电释放千斤机械死栓，整扇铅门将与门框彻底咬死永不可开。",
+        "deadline_minutes": 30
+      },
+      "far": {
+        "trigger": "铅门死锁二人永困地下化为白骨。",
+        "consequence": "核心连环谋杀案真凶彻底逍遥法外黑金帝国稳如泰山。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年在死栓落下前五秒用钛合金撬棍死死别在门缝插销卡槽强行顶出五厘米逃生缝隙",
+          "cost": "巨大千斤下压重力将青年撬棍震弯小臂肌肉严重拉伤脱臼受创。"
+        },
+        {
+          "option": "温知微用移动推车蓄电池电极直接搭铁反向击穿门禁继电器将死栓强行弹开",
+          "cost": "电火花瞬间将温知微前额刘海与防雾护目镜烧焦面部轻微一度烫伤受创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_qiao_crowbar_creak_howl",
+        "h_lu_megaphone_breach_howl"
+      ],
+      "start_minute": 20,
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "p_intruder_assassin_crowbar_ambush_dange",
+      "title": "持消音手枪退役雇佣兵杀手破门扫射近身屠戮",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "trigger": "杀手已利用液压剪切断两道防爆隔离栅栏，枪口正交替搜寻走廊拐角，距离杀手直面解剖台掩体仅剩最后七分钟时间。",
+      "objective": "在七分钟内建立防卫交叉火力点或在冷藏长廊完成绝命反杀伏击。",
+      "choice": "是依托不锈钢解剖台死守对射，还是主动出击潜入冷雾伏击杀手手腕？",
+      "immediate": {
+        "text": "走廊积水中传来轻微战术靴踏水声，子弹上膛的清脆金属咬合音在耳膜深处炸响。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "七分钟后杀手推门扫射，消音子弹将把四面瓷砖打成粉碎二人无处遁形命丧黄泉。",
+        "deadline_minutes": 7
+      },
+      "far": {
+        "trigger": "杀手冷血近距离射击二人中弹牺牲。",
+        "consequence": "法医与刑警当场身亡胃部胶卷被残忍割走焚毁灭迹。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年开启大功率防爆手电极速爆闪强光致盲杀手飞身扑倒展开夺枪肉搏",
+          "cost": "青年左侧大腿被杀手近距离盲射跳弹贯穿皮肉鲜血淋漓受创。"
+        },
+        {
+          "option": "温知微借冷藏长廊浓雾遮掩绕至杀手侧后一刀精准切断其跟腱令其跪倒在地",
+          "cost": "温知微后背伤口在剧烈发力中彻底撕裂大量鲜血失控涌出受重创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_qiao_crowbar_creak_howl",
+        "h_wen_scalpel_gleam_draw"
+      ],
+      "start_minute": 45,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_cadaver_autolysis_temperature_rise_lim",
+      "title": "断电升温冷库突破十度病理组织严重自溶破坏",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "trigger": "冷藏柜断电后库温已从零下四度急速攀升至八度，距离突破十摄氏度导致受害人胃黏膜与毒物代谢物彻底自溶分解仅剩最后二十分钟。",
+      "objective": "在二十分钟内取出全部病理切片组织密封入装满干冰之车载保温手提箱中。",
+      "choice": "是优先抢救关键切片物证，还是全力调配自卫武器抵御门外杀手？",
+      "immediate": {
+        "text": "遗体组织表面冷凝水珠不断滴落，法医凭借敏锐嗅觉已闻到组织蛋白质轻微变质异味。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "二十分钟后若组织彻底自溶，法庭化学毒物筛查将再无法检测出罕见神经毒素成分全案崩盘。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "关键毒物物证自溶全案证据链永久断裂。",
+        "consequence": "即使抓获杀手亦因缺乏直接死因证据无法定罪真凶无罪释放。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年冒着生命危险冲入深冷储藏室撬出最后一块干冰装满保温箱完成保鲜",
+          "cost": "青年双手十指被零下七十八度干冰严重冻伤皮肉大面积脱皮受创。"
+        },
+        {
+          "option": "温知微用原液福尔马林直接灌注组织切片在三分钟内完成化学沉淀物理固化",
+          "cost": "高浓度福尔马林挥发气味强烈灼伤温知微双眼角膜视力暂时模糊受创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_wen_film_pack_whisper",
+        "h_song_co2_valve_screech"
+      ],
+      "start_minute": 70,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_flooding_backflow_submersion_drown_clo",
+      "title": "特大台风山洪倒灌地下积水漫过配电箱触电淹",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "air_duct_maintenance_shaft_chambers"
+      ],
+      "trigger": "外部暴雨引发城市管网严重回水，积水已深达脚踝并以每刻钟十厘米急剧上涨，距离淹没地下配电总箱引发全域三相高压水体漏电仅剩十五分钟。",
+      "objective": "在十五分钟内关闭总配电闸并将全部物证与伤员转移至高处管廊钢架平台。",
+      "choice": "是趟着没膝冰冷积水涉险手动拉闸，还是冒险攀爬高空铁架孤注一掷？",
+      "immediate": {
+        "text": "刺骨冰冷的浑浊雨水不断漫过靴口，脚下水流暗涌打旋带着泥沙与电缆焦臭。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十五分钟后高压电缆触水整座地下二层积水将化为高压电网将水中活人瞬间电成焦炭。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "高压漏电整座水下解剖区全员触电身亡。",
+        "consequence": "现场法医干警与杀手全数化为水底焦尸惨绝人寰。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年单手高举物证箱只身涉水扑向配电间在最后一秒飞身拉下总电闸断电",
+          "cost": "电闸弧光爆炸将青年右胸口衣物点燃胸口大面积二度烫伤受创。"
+        },
+        {
+          "option": "温知微咬碎银牙拼尽全力将青年用绳索拉上两米高之电缆桥架脱离水面",
+          "cost": "温知微双臂肌肉重度拉伤后背伤口大量渗血染红整件大褂受重创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_lu_megaphone_breach_howl",
+        "h_song_co2_valve_screech"
+      ],
+      "start_minute": 90,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_corrupt_official_evidence_tamper_arson",
+      "title": "内鬼宋沛涵地面启动高压二氧化碳气体全淹没",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "trigger": "内鬼副主任宋沛涵见杀手失手，丧心病狂在地面监控台手动锁死气体灭火总线，高压二氧化碳喷头已发出高频尖啸开始喷放，室内人员将在六分钟内因极度缺氧脑死亡。",
+      "objective": "在六分钟内找到控制柜手动机械泄压扳手强行阻断气体输送回路。",
+      "choice": "是顶着高浓度窒息气体摸索控制箱，还是用撬棍破窗寻找外界空气？",
+      "immediate": {
+        "text": "白色冰冷二氧化碳雪雾自天花板倾泻而下，室内气温瞬间骤降至冰点以下呵气成冰。",
+        "minutes": 2
+      },
+      "near": {
+        "text": "六分钟后空气中二氧化碳浓度超过百分之三十，吸入两口便将瞬间昏迷心跳停止。",
+        "deadline_minutes": 6
+      },
+      "far": {
+        "trigger": "高浓度二氧化碳全淹没二人窒息死亡。",
+        "consequence": "现场被伪装成火灾消防误喷事故内鬼逍遥法外。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年抱起沉重高压氧气瓶狠狠砸断天花板二氧化碳主管路迫使其向外排空",
+          "cost": "反冲高压气浪将青年掀翻撞在解剖台锐角额头鲜血狂流受创。"
+        },
+        {
+          "option": "温知微为二人快速注射阿托品兴奋中枢闭气冲向配电箱扳断毒气电磁阀",
+          "cost": "温知微极度缺氧剧烈头痛呕吐中枢受损耳鸣暂时失聪受创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_song_co2_valve_screech",
+        "h_wen_wrist_watch_pin_whisper"
+      ],
+      "start_minute": 115,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "h_wen_scalpel_reverse_whisper",
+      "kind": "approach",
+      "slot": "chief_pathologist_wen_zhiwei",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "text": "{chief_pathologist_wen_zhiwei.name}单手撑在冰冷不锈钢解剖台边缘：“别靠近！把你的多波段手电照过来！照准大门左侧死角！我后背受了点伤……但握刀的手很稳！听着……不管是暴徒还是内鬼，谁敢踏进解剖台半步……”"
+    },
+    {
+      "id": "h_wen_film_pack_whisper",
+      "kind": "approach",
+      "slot": "chief_pathologist_wen_zhiwei",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite",
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "text": "{chief_pathologist_wen_zhiwei.name}与你背靠背蹲在解剖台下，失血让人有些发抖，声音沙哑却稳：“拿好……这是三具尸体用命换来的黑金名单！温知微以温家清誉起誓……只要我们今天活着走出去，幕后真凶一个也别想逃。”"
+    },
+    {
+      "id": "h_wen_wrist_watch_pin_whisper",
+      "kind": "approach",
+      "slot": "chief_pathologist_wen_zhiwei",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite",
+        "air_duct_maintenance_shaft_chambers"
+      ],
+      "text": "{chief_pathologist_wen_zhiwei.name}站在法院台阶上，后背的伤已经缝好，然后摘下金丝眼镜：“昨晚你替我按着伤口、稳着刀，从头到尾没有多看一眼。现在案子结了，我也清醒了……你可以看了，看多久都行。”"
+    },
+    {
+      "id": "h_qiao_crowbar_creak_howl",
+      "kind": "approach",
+      "slot": "hitman_cleaning_agent_qiao_biao",
+      "location_ids": [
+        "morgue_refrigeration_vault_corridor",
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "text": "{hitman_cleaning_agent_qiao_biao.name}将消音手枪在指间转了一圈，用撬棍狠狠撬裂冷藏长廊铁门，隔着冰凉水雾透过防毒面罩森冷狞笑：“温大主任，别白费力气反抗了！全城特警都被洪水堵在跨江大桥上！”"
+    },
+    {
+      "id": "h_lu_megaphone_breach_howl",
+      "kind": "approach",
+      "slot": "senior_detective_captain_lu_zheng",
+      "location_ids": [
+        "air_duct_maintenance_shaft_chambers",
+        "autopsy_theatre_one_operating_suite",
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "text": "{senior_detective_captain_lu_zheng.name}率特警突击队顶着滔天山洪破障杀到门外：“里面的杂碎听着！老子是江海刑侦支队陆峥！你已经被全省警力彻底包围！行川！知微！陆哥就在门外！趴下！”"
+    },
+    {
+      "id": "h_song_co2_valve_screech",
+      "kind": "approach",
+      "slot": "corrupt_deputy_director_song_peihan",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite",
+        "air_duct_maintenance_shaft_chambers",
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "text": "{corrupt_deputy_director_song_peihan.name}在地面监控对讲机中气急败坏失声尖叫：“立刻启动二氧化碳全淹没！那帮人两个已经被毒烟感染发疯了！为了保全国家级司法中心安全，必须马上实施气体灭火清场！”"
+    },
+    {
+      "id": "h_wen_scalpel_gleam_draw",
+      "kind": "observe",
+      "slot": "chief_pathologist_wen_zhiwei",
+      "location_ids": [
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "text": "{chief_pathologist_wen_zhiwei.name}单膝半蹲在不锈钢推尸车后方阴影之中，素手紧握四号解剖手术刀横在胸前，眼神如雪豹捕食般凌厉冷冽，展现出顶尖法医官精通人体要害的致命杀伐之威。"
+    },
+    {
+      "id": "h_qiao_silencer_point_observe",
+      "kind": "observe",
+      "slot": "hitman_cleaning_agent_qiao_biao",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "text": "{hitman_cleaning_agent_qiao_biao.name}右手平举装有修长圆柱形消音器之格洛克手枪，红色激光照准光斑在解剖台不锈钢表面缓缓游移，枪口青烟未散，散发着职业清道夫无情猎杀的死寂凶芒。"
+    },
+    {
+      "id": "h_lu_sledgehammer_slam_observe",
+      "kind": "observe",
+      "slot": "senior_detective_captain_lu_zheng",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "text": "{senior_detective_captain_lu_zheng.name}抡起数十斤重之特种破拆大锤狠狠砸向铅门锁栓，巨力轰击下火花四溅铁屑横飞，手臂青筋如狂蟒暴突，展现出一线刑侦铁汉视死如归之万丈豪情。"
+    },
+    {
+      "id": "h_song_handcuff_plead_observe",
+      "kind": "observe",
+      "slot": "corrupt_deputy_director_song_peihan",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "text": "{corrupt_deputy_director_song_peihan.name}双手被亮银色警用手铐死死锁在背后，西装沾满泥污面色惨白如纸瘫软在指挥车踏板上，双眼无神嘴唇哆嗦语无伦次地嚎啕告饶求情。"
+    },
+    {
+      "id": "h_wen_wound_clean_request",
+      "kind": "approach",
+      "slot": "chief_pathologist_wen_zhiwei",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "text": "{chief_pathologist_wen_zhiwei.name}背对着你坐在解剖台边，把一卷无菌纱布与止血钳递过来：“……帮我按住伤口。第三肋骨下缘……碘伏倒上去会疼，别停手。纱布压紧，只要血止住，我就能站起来继续握刀。”"
+    },
+    {
+      "id": "h_qiao_hydraulic_shear_spark_observe",
+      "kind": "observe",
+      "slot": "hitman_cleaning_agent_qiao_biao",
+      "location_ids": [
+        "morgue_refrigeration_vault_corridor"
+      ],
+      "text": "{hitman_cleaning_agent_qiao_biao.name}手中之高功率液压剪咔嚓一声生生绞断第二道隔离铁栅栏，刺目电火花在水雾中疯狂喷溅，展现出特种雇佣兵无坚不摧的狂暴突防能力。"
+    },
+    {
+      "id": "h_lu_tactical_shield_cover_observe",
+      "kind": "observe",
+      "slot": "senior_detective_captain_lu_zheng",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "text": "{senior_detective_captain_lu_zheng.name}单臂横顶防弹防暴重型盾牌横在二人身前挡下飞溅流弹与碎渣，回过头来咧嘴豪迈大笑，竖起大拇指赞叹青年与法医好样的是真正的刑侦硬汉。"
+    },
+    {
+      "id": "h_song_paper_shredder_burn_observe",
+      "kind": "observe",
+      "slot": "corrupt_deputy_director_song_peihan",
+      "location_ids": [
+        "air_duct_maintenance_shaft_chambers"
+      ],
+      "text": "{corrupt_deputy_director_song_peihan.name}在断电前正慌忙将大叠绝密原始卷宗塞入碎纸机，打火机火苗在颤抖指间摇曳企图放火烧毁档案，展现出道貌岸然官僚东窗事发前的绝望疯狂。"
+    },
+    {
+      "id": "h_wen_hand_hold_scalpel_request",
+      "kind": "approach",
+      "slot": "chief_pathologist_wen_zhiwei",
+      "location_ids": [
+        "autopsy_theatre_one_operating_suite"
+      ],
+      "text": "{chief_pathologist_wen_zhiwei.name}右手因失血微微发抖，转头看着你，把你的手拉过来覆在自己执刀的手背上：“……帮我稳住。刀路我来定，力道你来给……我们一起，划开最后这一刀。”"
+    }
+  ],
+  "twists": [
+    {
+      "id": "t_forensic_1",
+      "category": "信息",
+      "requires": [],
+      "text": "受害人胃内微缩胶卷竟附带当年陷害青年泄密案之内鬼现场视频高清原件：温法医破译微缩胶卷隐藏扇区时，惊喜发现其中一段超清暗访视频赫然完整记录宋沛涵副主任亲手在青年储物柜栽赃伪造泄密文书之全部罪证，当场彻底平反青年全部冤屈。"
+    },
+    {
+      "id": "t_forensic_2",
+      "category": "人事",
+      "requires": [],
+      "text": "落网杀手亲弟多年前沉冤昭雪之法医正是温法医亲笔出具无罪结论：杀手被擒后核对其身份档案，赫然发现其当年死于工伤被诬告吸毒之胞弟，正是温知微顶着豪门压力亲自下刀洗清冤屈获得巨额赔偿，杀手得知真相后当场抱头痛哭反水指证宋沛涵全部罪行。"
+    },
+    {
+      "id": "t_forensic_3",
+      "category": "资源",
+      "requires": [],
+      "text": "停尸房内间暗藏国家重点实验室专用离线石墨烯超级应急电容组：青年在搜寻器械时意外发现隔壁毒化实验室配有独立光伏石墨烯不间断电源，手动合闸瞬间成功为解剖大厅恢复长达四个小时独立照明与负压排风生机大增。"
+    },
+    {
+      "id": "t_forensic_4",
+      "category": "制度",
+      "requires": [],
+      "text": "最高检特派重案令：在场青年刑警现场火线受命晋升为省检察院特级调查官：省高院与最高检驻点专员联合启动突发战时司法督办令：凡在本次地下袭击中舍身保全重大物证之青年刑警，无视过往停职处分破格直升为最高检直属重大职务犯罪特级调查官。"
+    },
+    {
+      "id": "t_forensic_5",
+      "category": "时限",
+      "requires": [],
+      "text": "陆队长率特警突击队乘坐两栖装甲防汛破障车提前一刻钟破门杀入：原本预计尚需半小时方能排涝赶赴之特警防暴重装小组，果断动用重型水陆两栖破障装甲车硬生生撞穿塌方路段提前杀到，以绝对压倒性火力强行破门营救成功。"
+    },
+    {
+      "id": "t_forensic_6",
+      "category": "关系",
+      "requires": [],
+      "text": "青年佩戴的警校优秀学员校徽正是法医父亲当年设立专项基金首期奖品：在包扎伤口时，青年制服内衬滑落一枚铸有‘知微守正’四字之纯银警校纪念徽章，温法医当场认出正是自己殉职父亲当年捐献全部抚恤金设立之警界新人奖章，二人宿命羁绊彻底升华。"
+    },
+    {
+      "id": "t_forensic_7",
+      "category": "意外",
+      "requires": [],
+      "text": "特大山洪回水直接将杀手预备之地面接应越野车冲下江心彻底断绝退路：地面突发特大山洪漫堤，凶手停在出口处企图载着胶卷逃遁之特种越野车被滔天洪峰直接卷入滚滚江心沉没，彻底断送杀手撤退退路使其成为瓮中之鳖插翅难飞。"
+    }
+  ],
+  "forbidden_terms": [
+    "鬼怪丧尸超自然复活",
+    "催情致幻气体神经毒剂",
+    "肉体交易贞洁对赌",
+    "职权凌虐暴力刑讯",
+    "无脑倒贴迎合"
+  ],
+  "content_tags": [
+    "intimate",
+    "workplace",
+    "workplace_power",
+    "violence",
+    "bodily_harm",
+    "crime",
+    "disaster"
+  ],
+  "status": "released",
+  "notes": "按原稿加入。改动：失血清创只作救命，删去高烧、耳鬓厮磨等描写，亲密移到案结走出地下室之后；副主任的动机由求爱不成改为嫉妒夺位；修正复制错位的吸引点；新增省纪委专案组组长与毒化实验室技术员两名角色。"
+}

@@ -1,0 +1,2289 @@
+{
+  "schema_version": 1,
+  "id": "elven_priestess_collapsed_sanctuary",
+  "title": "失落圣坛：精灵女祭司",
+  "extends": null,
+  "era": "高魔中世纪地下城探索与远古神明遗迹大坍塌危机时代",
+  "region": "迷宫都市深渊地下三十三层封印之失落辉光古圣坛大理石断壁与地热深渊裂隙",
+  "premise": "迷宫都市地下三十三层远古神明圣坛突发九级地脉剧震，数百万吨巨石轰然崩塌封死全部折返竖井。年满二十周岁出身圣月王庭高贵名门、早年侍奉月辉女神之神殿首席白袍女祭司长，正独自主持净化上古秽恶源核。年满二十一周岁担任前线重装斥候之后卫持盾年轻骑士，在坍塌前一刻飞身扑向祭坛用塔盾挡下万斤坠石救下女祭司。然而神圣白银法杖当场折断，神圣防御结界碎裂，失控的远古暗蚀瘴气与地脉裂隙喷涌之灼热硫磺岩浆逼近断壁。",
+  "tone": [
+    "地下圣坛坍塌闭锁",
+    "白银法杖碎裂断折",
+    "祭司长袍裂帛血痕",
+    "双人背靠背神圣共鸣"
+  ],
+  "style_hint": "精灵圣女银发披散，右足踝扭伤红肿，祭司长袍被碎石撕裂，仍握着半截白银法杖昂着下巴；青年盾卫满身凹痕的重甲顶在神像基座后，两人背靠背守着三角空腔，熔岩的红光和毒瘴一起往里渗。",
+  "clock_start": {
+    "label": "巨震坍塌闭锁初刻，地脉岩浆上涨倒计时四十分钟",
+    "minute": 0
+  },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": {
+    "female": 0.5,
+    "male": 0.45,
+    "nonbinary": 0.05
+  },
+  "stage_labels": {
+    "stranger": "持杖对峙",
+    "acquainted": "接骨敷药",
+    "familiar": "盾后互依",
+    "flirting": "共握圣印",
+    "testing": "心跳起誓",
+    "intimate": "地面之后",
+    "committed": "永恒誓约"
+  },
+  "name_pools": {
+    "family": [
+      "艾尔文",
+      "希尔芙",
+      "星月",
+      "苍风",
+      "银叶",
+      "逐日",
+      "洛瑟兰",
+      "提瑞斯",
+      "风行",
+      "晨曦",
+      "暮歌",
+      "霜语"
+    ],
+    "given_female": [
+      "莉莉安",
+      "艾莉希雅",
+      "澈",
+      "奥菲莉亚",
+      "希尔维亚",
+      "芙蕾雅",
+      "薇薇安",
+      "艾蕾诺亚",
+      "克洛伊",
+      "诺艾尔",
+      "黛西",
+      "海伦娜"
+    ],
+    "given_male": [
+      "罗兰",
+      "凯恩",
+      "雷恩",
+      "加文",
+      "亚瑟",
+      "特里斯坦",
+      "珀西瓦尔",
+      "杰拉德",
+      "卢卡斯",
+      "达米安",
+      "尤利安",
+      "莱昂"
+    ],
+    "given_neutral": [
+      "阿莱克斯",
+      "希尔",
+      "风信",
+      "星见",
+      "月读",
+      "云涯",
+      "凌羽",
+      "雪隐",
+      "青芒",
+      "秋澜",
+      "玄同",
+      "照影"
+    ],
+    "nickname_patterns": [
+      {
+        "pattern": "{family}祭司长",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}殿下",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}骑士",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}大人",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}阁下",
+        "gender": "any"
+      }
+    ],
+    "order": "family_first"
+  },
+  "rules": [
+    {
+      "id": "r_sanctuary_consecration_ground_inviolab",
+      "text": "月辉古神坛神圣庇护法令：凡踏入古神圣坛十米之内者，受远古盟约强制压制，任何企图在神坛前向受誓神职者刀兵相向者，必受地脉神雷反噬心脉尽裂。"
+    },
+    {
+      "id": "r_elven_sacred_vow_unbroken_divine_coven",
+      "text": "高等精灵王庭神圣贞洁誓规：圣女一生侍奉月神不得轻许凡人，但在神殿倾覆、生命垂危且为守全神核之至极死境下，可与舍身救主之重装誓约者缔结神圣护佑同生血契。"
+    },
+    {
+      "id": "r_abyssal_miasma_respiratory_tolerance_l",
+      "text": "深渊暗蚀瘴气吸入临界准则：常人暴露于失控暗蚀毒气中超过二十分钟必将魔力逆流脉络萎缩，必须轮流含服月见草圣晶凝块维系心智清明。"
+    },
+    {
+      "id": "r_broken_staff_divine_channeling_conting",
+      "text": "断折白银法杖紧急导流条例：神器破碎后神圣术式唯有通过与守护骑士十指相扣、借助二人神圣共振肉身回路方能释放最后一次神圣驱散辉光。"
+    }
+  ],
+  "customs": [
+    "精灵足踝正骨宽恕礼：凡人骑士触碰高等精灵圣女足踝前必须单膝触地以战锤敲击胸甲三次，圣女颔首后方准以亚麻绑带正骨敷药，视为神圣疗伤之特许。",
+    "断折圣印共握誓约：二人各以手掌包裹残存银白月神印章之一半，在昏暗微光中默念古精灵誓词，心跳合拍即为生死与共之同生结。",
+    "龙鳞重盾倚靠休憩戒律：在落石未止之狭室内，骑士必须用宽阔后背顶住盾牌内衬，圣女背靠骑士坐在盾后，不得擅离半寸。",
+    "月光圣晶晨露分饮约：在干渴难耐之时，二人折断最后一根水晶试管，各饮一半晶露，立下活着重见青天之誓。"
+  ],
+  "player_identities": [
+    {
+      "id": "rearguard_heavy_shield_knight_youth",
+      "role": "王国远征军前线殿后重装铁壁青年盾卫",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "重盾骑士",
+          "gender": "any"
+        },
+        {
+          "pattern": "铁壁殿后卫",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "low",
+      "baseline": "年满二十一周岁平民出身但凭借一身过硬防御武技擢升为殿后斥候，在坍塌死线孤身冲入险境救下圣女，战甲碎裂却屹立如山。",
+      "resources": [
+        "一面上古龙鳞玄铁重装塔盾（表面带有轻微裂痕）",
+        "一柄沉重矮人锻造单手精钢破甲破障短战锤"
+      ],
+      "reputation": "在佣兵行会拥有‘永不后退之叹息之壁’声誉，性格沉稳如磐石言出必行。",
+      "risks": [
+        "身上无半分贵族血统，私自触碰精灵圣女躯体若回王庭易被古板元老院问责指控冒犯神圣。"
+      ]
+    },
+    {
+      "id": "apprentice_temple_astronomer_scholar",
+      "role": "星象神殿年轻首席占星见习学者青年",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "见习学者",
+          "gender": "any"
+        },
+        {
+          "pattern": "星象专员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "equal",
+      "baseline": "年满二十一周岁精通上古精灵神庙地脉符文与古代语翻译之年轻学者，为破解圣坛封印随队下潜。",
+      "resources": [
+        "一本羊皮纸上古神庙地脉构造图谱拓片",
+        "一套便携式微型炼金抗火隔热符文铭刻笔"
+      ],
+      "reputation": "学识极其渊博能一眼看穿古代机关阵法命门所在。",
+      "risks": [
+        "近战肉搏力量薄弱，面对狂暴魔物正面突袭时自保能力不足。"
+      ]
+    },
+    {
+      "id": "exiled_templar_inquisitor_swordsman",
+      "role": "圣殿骑士团戴罪遭贬斥之游侠剑士青年",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "圣殿游侠",
+          "gender": "any"
+        },
+        {
+          "pattern": "赎罪剑士",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "low",
+      "baseline": "年满二十二周岁因揭露教廷高层勾结暗影而遭流放前线之精锐剑士，剑术高超对神殿腐朽深恶痛绝。",
+      "resources": [
+        "一柄附魔破邪铭文十字重剑",
+        "三枚神圣圣水高爆投掷手雷"
+      ],
+      "reputation": "剑风凌厉杀伐果断，一人一剑可在群魔围攻中杀出一条血路。",
+      "risks": [
+        "身背教廷叛教通缉令，随时可能被神殿暗影裁决官以此为由就地诛杀。"
+      ]
+    },
+    {
+      "id": "royal_elven_ranger_scout_officer",
+      "role": "精灵王庭禁卫军年轻近卫斥候军官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "王庭斥候",
+          "gender": "any"
+        },
+        {
+          "pattern": "近卫巡林官",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "high",
+      "baseline": "年满二十二周岁早年接受丛林与地下城潜行训练之年轻精灵贵族军官，受命担任圣女贴身护卫领队。",
+      "resources": [
+        "一把精制复合紫杉木短弓与二十支秘银破魔箭",
+        "一具精灵特制超轻羽落披风"
+      ],
+      "reputation": "箭无虚发机敏过人，能在黑暗中凭借风声感知三十步内敌影。",
+      "risks": [
+        "在狭窄密闭断壁巨石下难以施展远距离狙击射术优势。"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "collapsed_moonlight_altar_triangular_voi",
+      "name": "失落古神圣坛中央大理石断壁三角避难空腔",
+      "detail": "由三根数十米长之折断雕花月白大理石巨柱天然倾斜交叠构成之地下空腔，面积不足十平米。中央倒伏着半截月神汉白玉雕像，雕像掌心盛放着散发着幽蓝荧光之上古源核。巨柱上方压覆着数万吨沉重碎石，缝隙中不断簌簌落下石粉沙砾。地面铺设着开裂的秘银符文地砖，空气中带着冰冷白檀香与极度阴寒水汽。",
+      "privacy": "private",
+      "visibility": "四周被落石完全封闭，唯有断裂神像掌心散发之幽蓝月光与青年手中火把微光照亮彼此身躯，光影摇曳如梦似幻，将二人紧贴的剪影拉长投射在斑驳神像石壁之上。",
+      "witnesses": [
+        "bg_broken_silver_moon_goddess_pedestal",
+        "bg_shattered_dragon_scale_shield_splinte",
+        "bg_moonlight_lichen_glowing_patches",
+        "bg_ancient_core_levitating_orb"
+      ],
+      "exits": [
+        "abyssal_lava_chasm_fissure_ledge",
+        "ancient_templar_crypt_escape_drain"
+      ],
+      "affordances": [
+        "用龙鳞重塔盾死死顶在上方石柱滑落缺口阻挡二次垮塌",
+        "骑士单膝跪地为圣女解开破损的绑腿轻柔触碰红肿脚踝实施推拿正骨",
+        "双手合抱十指交扣共同向残破源核注入魔力维持驱魔光晕"
+      ],
+      "pressure_modifiers": {
+        "p_abyssal_shadow_miasma_air_choke_clock": "毒瘴正透过石缝如毒蛇般盘旋涌入导致呼吸急促面色发紫。",
+        "p_overhead_megalith_secondary_collapse_r": "头顶巨石在重压下发出令人牙酸的嘎吱崩裂声随时将砸落万斤。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "abyssal_lava_chasm_fissure_ledge",
+      "name": "地下深渊地热裂隙赤红熔岩断崖边缘",
+      "detail": "空腔侧方开裂出之一道百丈深渊裂谷，滚烫翻腾之赤红岩浆河流在深处缓缓流动，刺鼻硫磺蒸气伴随灼热气浪不断向上翻卷拍打。断崖岩壁长满耐热的赤炎晶簇，落石掉入岩浆瞬间便化为一缕青烟熔为铁水。",
+      "privacy": "private",
+      "visibility": "赤红刺目的地火红光将整片绝壁照得一片血红，一面是彻骨寒瘴一面是扑面而来的滚烫火浪，冰火交加宛如炼狱边缘。",
+      "witnesses": [
+        "bg_boiling_magma_sulfur_smoke_plumes"
+      ],
+      "exits": [
+        "collapsed_moonlight_altar_triangular_voi",
+        "ancient_templar_crypt_escape_drain"
+      ],
+      "affordances": [
+        "利用熔岩热浪烘烤浸湿冰凉之斗篷为圣女驱散体内寒毒",
+        "骑士抡起战锤敲碎岩壁赤炎晶簇作为天然发光发热热源取暖",
+        "二人背靠悬崖在炽热熔岩红光下抵御暗影狂徒正面突袭"
+      ],
+      "pressure_modifiers": {
+        "p_magma_surge_thermal_creeping_flood": "岩浆液面正以每刻钟两尺速度上涨热浪已将衣角烤焦。",
+        "p_corrupted_shadow_inquisitor_assassinat": "暗影死士的弩箭正穿透烟雾连环射击在龙鳞塔盾表面火花四溅。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "ancient_templar_crypt_escape_drain",
+      "name": "古代圣堂殉道者地下墓窖暗门排水水道",
+      "detail": "隐藏在神像基座下方之一道半坍塌古排水暗沟，水深齐膝，冰凉刺骨的地下暗河水向未知的地表溶洞方向缓缓流淌。暗沟两侧石壁雕刻着历代圣女殉道者铭文，顶部石梁因地震产生巨大龟裂，需俯身涉水前行。",
+      "privacy": "public",
+      "visibility": "幽暗深邃毫无光亮，水流回音空旷低回，脚下常有碎骨与碎石绊足，每前行一步皆需依靠骑士强壮臂弯紧紧相拥搀扶。",
+      "witnesses": [
+        "bg_submerged_templar_bone_reliquary"
+      ],
+      "exits": [
+        "collapsed_moonlight_altar_triangular_voi",
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "affordances": [
+        "骑士俯身将行动不便之圣女轻柔横抱在怀中涉水突围",
+        "利用重盾推开堵塞暗门水道之万斤坍塌碎石拓宽生路",
+        "在狭窄水道深处二人额头相抵轻声立下重返人间的永恒盟约"
+      ],
+      "pressure_modifiers": {
+        "p_corrupted_shadow_inquisitor_assassinat": "追兵的猎犬正顺着水流咆哮扑杀逼近。",
+        "p_abyssal_shadow_miasma_air_choke_clock": "暗沟水面上方积聚的阴沉寒瘴令人四肢麻木失温。"
+      },
+      "tags": [
+        "workplace_power",
+        "violence"
+      ]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "high_priestess_celestia_elven_pure",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁圣月王庭名门第一高岭之花首席神圣女祭司长。",
+      "public_role": "圣月大圣堂首席掌玺女祭司长兼古代神核守护圣女",
+      "appearance_options": [
+        "一身裁剪极其繁复华美之纯银丝线刺绣及地白袍祭司长裙，裙摆与水袖被崩塌巨石撕裂出数道狭长口子，纵然右脚踝严重扭伤红肿无法直立、唇色苍白干裂，左手依旧高贵反握半截断裂白银法杖支撑石壁，下颌高昂展现出高等精灵王庭神圣血脉不可亵渎之傲岸尊严。",
+        "被青年紧紧护在龙鳞重塔盾阴影之下，背靠冰冷神像大理石基座，因彻骨寒瘴入体导致身子不可抑制地阵阵微颤，将发烫滚烫的额头抵在青年坚实后颈窝上，在极度黑暗绝壁前倾听青年如雷般平稳心跳，清冷绝美之容颜上浮现出凡人从未见过的依赖与脆弱神采。"
+      ],
+      "identity": {
+        "authority": "受教皇与精灵女王双重敕封执掌神圣源核最终裁决权，在全大陆教徒中拥有至高无上神圣信仰号召力。",
+        "resources": [
+          "一柄折断但仍附带远古神圣符文之纯银大祭司白银短法杖",
+          "一枚刻有银月守护神徽之远古神圣封魔源核水晶"
+        ],
+        "limits": [
+          "右足脚踝骨裂脱位无法独立行走逃生",
+          "神圣魔力极度枯竭每次施法皆如万针穿心般剧痛"
+        ],
+        "obligations": [
+          "誓死守护神圣源核不落入暗影教派之手避免迷宫都市百万生灵涂炭。"
+        ],
+        "exposure": "一旦源核被毁不仅王庭信仰彻底崩塌自身亦将沦为千古罪人。",
+        "hidden": "平日被信徒顶礼膜拜奉为无欲无求的冰冷神明化身，内心深处却极度渴望卸下沉重神圣冠冕、做一个能被心爱之人用坚实臂膀守护终身的普通女子。"
+      },
+      "decision": {
+        "core_value": "月神的光辉不属于虚伪的教廷高官，而是照亮每一个在黑暗中苦苦挣扎的无辜灵魂；人在核在，以身殉道亦在所不惜。",
+        "goal_options": [
+          "在岩浆涌入前一刻与青年以掌心血契引爆源核神圣脉冲扫荡暗影",
+          "命令青年抛下自己独身携带源核突围将重托送达王庭",
+          "允许青年触碰自己受创足踝完成正骨一同涉水杀出绝境"
+        ],
+        "pressure_responses": {
+          "low": "即便地动山摇石柱崩塌，依然以极度空灵冷冽的威严嗓音宣诵月神庇护颂词。",
+          "mid": "在追兵利箭射穿衣角时，毫不犹豫咬破舌尖将精血喷在法杖残柄上强开微光护罩庇佑青年。",
+          "high": "失血脱水濒临昏迷之际，将半截法杖塞入青年手中命其握紧自己双手合力释放神圣闪光。",
+          "breaking": "在脱险突围的一瞬失血脱力，靠着青年的战甲站稳，第一句话是问源核还在不在。"
+        },
+        "withdrawal": "退至神像凹陷盲区侧过脸去整理破损长裙掩饰被青年肌肤相亲触碰足踝时的极度羞赧。",
+        "relationship_stance": "视谄媚奉承之贵族骑士为草芥，唯独对能在万斤落石下用脊背充当盾牌护佑弱小的真正钢铁勇士奉上纯粹敬意与托付。",
+        "contrast": "圣坛之上是令人自惭形秽的纯洁月神圣女，重见天日之后，却是个被一句真心话就逼得精灵尖耳通红、连命符都系不好的女子。",
+        "prefers": [
+          "沉稳寡言重信守诺眼神坚毅如星辰之重铠骑士"
+        ],
+        "avoids": [
+          "见利忘义背叛誓言之阴险小人",
+          "狂妄自大企图染指神圣亵渎信仰之狂徒"
+        ],
+        "never": [
+          "绝不会向黑暗邪恶与背叛信仰者屈膝求饶哪怕流尽最后一滴神血。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在万斤巨石天崩地裂之时毫不犹豫飞身当盾的至高牺牲担当",
+          "面对破碎衣衫与扭伤足踝时目不斜视、只管正骨救人的骑士风骨"
+        ],
+        "likes": [
+          "重返地面后，在月光下与青年并肩坐着，听彼此慢慢平稳的心跳",
+          "由青年用粗糙温热的手掌替自己系好早已消肿的足踝绑带"
+        ],
+        "dislikes": [
+          "轻佻冒犯言辞",
+          "践踏同伴性命"
+        ],
+        "preconditions": [
+          "圣月大圣堂首席掌玺女祭司长兼古代神核守护圣女与对方都已完全清醒，眼前的危机已经解除",
+          "圣月大圣堂首席掌玺女祭司长兼古代神核守护圣女出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在公开圣堂神坛恪守神职尊严仪轨",
+          "恪守同侪礼节绝不轻浮失仪"
+        ],
+        "expression": "解下佩戴在胸前心口之月神纯银守护命符亲手挂在青年颈项上，清冷微颤耳语：‘此符关乎塞蕾斯蒂亚之命魂神契……从今往后，我的荣耀与生命，全交予你掌中守护。’",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "以圣月王庭掌玺圣女之权钦定眼前青年为终身独一无二神圣守护圣殿骑士长兼誓约伴侣"
+      },
+      "voices": {
+        "surface": "以月辉女神之名，亵渎圣坛者必遭神罚诛灭！暗影的狂徒，圣月王庭的白银法杖虽断，但正义之光永不沉沦！",
+        "inner": "别……别看我的脚……嘶！轻一点……是这里错位了。抱歉，弄脏了你的战铠……把盾立好，守住左上方的断梁。有你在我身后……我便不再怕这深渊。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "collapsed_moonlight_altar_triangular_voi"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "collapsed_moonlight_altar_triangular_voi"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "abyssal_lava_chasm_fissure_ledge"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "collapsed_moonlight_altar_triangular_voi"
+        }
+      ],
+      "situation": {
+        "trigger": "右脚踝距骨错位剧痛钻心导致无法挪动半步，头顶万斤巨石正以毫米级速度沉降碾压，暗影死士的锁链钩爪已逼近神坛边缘。",
+        "pressure": "若不能在一分钟内由青年单膝下跪以专业手法推拿正骨并以塔盾抗住二次震荡，二人将被活活碾碎在废墟之下。",
+        "exits": [
+          {
+            "option": "青年单膝跪地一手握紧圣女足踝咔嚓正骨复位、另一手撑起巨盾硬抗落石冲击",
+            "cost": "青年左肩三角肌被重盾反震撕裂鲜血染透板甲内衬受创。"
+          },
+          {
+            "option": "塞蕾斯蒂亚强燃残存本命精血释放悬浮神术抵消落石重力为二人争取脱身生机",
+            "cost": "塞蕾斯蒂亚经脉逆流狂喷一口神圣心头血脸色惨白如纸受重创。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "corrupted_shadow_inquisitor_malakor",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三岁投靠深渊邪神背叛王庭之冷酷黑袍暗影裁决官。",
+      "public_role": "教廷特遣暗影审判所副裁决官兼堕落深渊猎犬首领",
+      "appearance_options": [
+        "一身漆黑如墨沾满暗影魔纹的锁子甲斗篷，面容苍白枯槁，戴着半截黑铁乌鸦面具，手持淬满剧毒的双刃短剑与暗影锁链，眼神残忍扭曲，满是对神殿的刻骨仇恨。",
+        "矗立在熔岩断崖对岸裂隙阴影中，阴森操控数十头暗影战獒对避难空腔呈合围之势步步紧逼。"
+      ],
+      "identity": {
+        "authority": "掌握审判所地下私刑调令与暗影献祭禁咒，擅长暗影步突袭与诅咒腐蚀。",
+        "resources": [
+          "一柄附魔深渊暗蚀剧毒的吸血破魔短剑",
+          "三具装满腐蚀酸液之黑铁发烟陶罐"
+        ],
+        "limits": [
+          "肉身长期浸润深渊魔力极度畏惧月神本命神圣净化强光",
+          "担心岩浆彻底爆发摧毁神核导致无法向深渊邪神交差"
+        ],
+        "obligations": [
+          "夺取神圣源核并当场活捉或诛杀圣女斩断王庭神脉传承。"
+        ],
+        "exposure": "一旦其背叛神殿勾结深渊之证据败露将遭全大陆圣骑士团天涯海角联手追杀绞死。",
+        "hidden": "当年因血统卑微被神殿元老院无情驱逐，发誓要让整座神殿为此付出代价，夺走源核献给深渊。"
+      },
+      "decision": {
+        "core_value": "力量就是唯一真理，神明不过是吸食凡人信仰的伪善寄生虫，唯有深渊混沌才能带来真正的平等毁灭。",
+        "goal_options": [
+          "向避难空腔石缝灌注暗影腐蚀酸液逼迫二人跳入熔岩自尽",
+          "操控暗影锁链缠绕重盾，把盾卫拖进深渊、夺走源核",
+          "点燃地脉瓦斯引爆整个圣坛将所有人同归于尽埋葬"
+        ],
+        "pressure_responses": {
+          "low": "在碎石外用带有精神污染的尖利嘶吼不断讥讽挑衅瓦解圣女心智。",
+          "mid": "亲自掷出淬毒飞刃连环轰击重盾边缘试探防御破绽。",
+          "high": "被破甲战锤轰碎护心甲后疯狂咏唱暗影献祭禁咒拼命一击。",
+          "breaking": "在神圣破邪光芒照耀下浑身皮肤溃烂化为脓水惨叫坠入熔岩。"
+        },
+        "withdrawal": "在神圣结界暴涨时遁入阴影裂隙伺机潜伏。",
+        "relationship_stance": "视麾下死士为随意弃置之炮灰棋子，视背叛与杀戮为至高盛宴。",
+        "contrast": "满口唾弃教廷神圣的虚无主义狂徒，在面对圣女与骑士生死相依之纯粹光辉时却流露出不可抑制的癫狂嫉妒与自惭扭曲。",
+        "prefers": [
+          "背刺偷袭与落井下石的血腥虐杀快感"
+        ],
+        "avoids": [
+          "视死如归正面冲锋之狂暴重装圣骑士",
+          "蕴含上古灭世威能之完全觉醒源核"
+        ],
+        "never": [
+          "绝不会在任务未达成前放过任何一个圣殿活口。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "深渊邪神许诺的不朽之力",
+          "把神殿元老院踩在脚下的那一天"
+        ],
+        "likes": [
+          "看着神殿的圣物一件件碎裂",
+          "在暗处操控战獒围猎"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "教廷特遣暗影审判所副裁决官兼堕落深渊猎犬首领与对方都已完全清醒，眼前的危机已经解除",
+          "教廷特遣暗影审判所副裁决官兼堕落深渊猎犬首领出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "只谈源核与复仇，不谈别的"
+        ],
+        "expression": "胸口被战锤砸裂跪倒在熔岩边，咳着黑血狰狞狂笑：‘好一个永不后退的盾卫……竟然能为了这个冷冰冰的人偶祭司连命都不要……真是一出感人肺腑的殉道闹剧！’",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          1,
+          2
+        ],
+        "desired_position": "企图将神圣圣女与虔诚骑士拖入万劫不复深渊之灭世狂徒反派"
+      },
+      "voices": {
+        "surface": "塞蕾斯蒂亚殿下，月神已经抛弃了这片废墟！何必守着那颗破石头给旧神陪葬？交出源核，随我侍奉真正的深渊主宰！",
+        "inner": "瞧瞧你现在这副模样……王庭最圣洁的祭司长，如今只能缩在一个平民盾卫的盾牌后面。把源核交出来，这一切就结束了。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "ancient_templar_crypt_escape_drain"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "abyssal_lava_chasm_fissure_ledge"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "collapsed_moonlight_altar_triangular_voi"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "collapsed_moonlight_altar_triangular_voi"
+        }
+      ],
+      "situation": {
+        "trigger": "裁决官已将暗影短剑刺入塔盾裂隙仅距圣女咽喉三寸，正发动全身斗气企图挑断圣女手筋抢夺源核。",
+        "pressure": "若不能在零点三秒内由骑士翻转战锤砸断剑刃、圣女催动断杖强光灼瞎其双眼，圣女必被当场割喉夺核。",
+        "exits": [
+          {
+            "option": "青年怒目圆睁单手战锤自下而上呼啸挑击精准砸碎裁决官刺来之毒刃",
+            "cost": "崩飞的淬毒断刃碎片划破青年面颊留下漆黑血痕毒素微侵受创。"
+          },
+          {
+            "option": "塞蕾斯蒂亚以断杖贴近裁决官面门近距离引爆神圣炽阳闪光将其双眼刺瞎",
+            "cost": "神圣法力反冲将塞蕾斯蒂亚掌心皮肉大面积灼伤焦黑一片受重创。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "paladin_commander_gawain_rescue_dawn",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三岁率领王国近卫神圣白银骑士团前来地底搜救之年轻正统骑士团长。",
+      "public_role": "圣白银骑士团第一大队大队长兼王庭特派搜救先锋官",
+      "appearance_options": [
+        "一身耀眼夺目的白银符文附魔重装铠甲，背披天蓝色丝绒绣金狮披风，手持散发着耀眼金芒的神圣双手大剑与净化圣旗，容貌英挺浩然正气，浑身散发着正统光辉骑士的伟岸威严。",
+        "率精锐圣骑士小队以破障神术轰开落石巨障，迎着刺鼻烟雾手持圣旗踏入废墟圣坛实施神圣清场与庇护接引。"
+      ],
+      "identity": {
+        "authority": "统帅圣白银骑士团本部精锐搜救大队，持有精灵女王与大主教亲笔签发之临机决断营救全权令。",
+        "resources": [
+          "一整支全副武装高阶神圣破邪圣骑士大队",
+          "三瓶高等精灵生命之树纯净甘露万灵圣药"
+        ],
+        "limits": [
+          "上方坍塌地层错综复杂重甲骑兵难以及时展开全面突击",
+          "唯恐贸然使用大范围爆破魔法导致脆弱避难空腔彻底崩塌压死圣女"
+        ],
+        "obligations": [
+          "全须全尾救出塞蕾斯蒂亚圣女迎回源核并肃清一切叛党。"
+        ],
+        "exposure": "一旦救援失败导致圣女陨落其骑士团长生涯将彻底终结引咎辞职。",
+        "hidden": "一直恪守骑士戒律默默倾慕圣女却从未逾矩，深知圣女心中从未装下过凡尘俗子，直到目睹青年盾卫舍身相护之震撼场景。"
+      },
+      "decision": {
+        "core_value": "谦卑、荣誉、牺牲、英勇、怜悯、精神、诚实、公正；守护神明与人民是骑士永恒的生命信条。",
+        "goal_options": [
+          "以神圣大剑引动光明天罚彻底轰碎堵塞暗道之万吨巨岩开辟生路",
+          "率部组成神圣光之壁垒挡下熔岩喷发掩护二人安全后撤",
+          "当场以王庭骑士团长身份向青年盾卫行捶胸大礼册封其为荣誉圣殿骑士"
+        ],
+        "pressure_responses": {
+          "low": "在上方竖井以神圣千里传音圣咏向地底废墟传递搜救信号鼓舞士气。",
+          "mid": "亲自顶在挖掘第一线双手挥剑劈斩碎石哪怕甲胄破碎十指染血。",
+          "high": "直面暗影死士悍然发动神圣风暴将邪祟一剑枭首荡平威胁。",
+          "breaking": "在迎回平安无事的圣女后向青年郑重单膝下跪表达由衷敬佩。"
+        },
+        "withdrawal": "在地脉瓦斯浓度过高时暂停火系附魔改用纯肉身重力破障掘进。",
+        "relationship_stance": "胸怀坦荡光明磊落，对勇于牺牲护卫圣女之平民青年抱有最崇高之敬意与英雄相惜之情。",
+        "contrast": "高贵英武的王庭贵族天骄，在生死考验前没有半分门户偏见，是真正配得上圣白银称号的光明君子典范。",
+        "prefers": [
+          "舍生取义重诺如山之真正英雄豪杰"
+        ],
+        "avoids": [
+          "贪生怕死临阵脱逃之宵小鼠辈",
+          "背叛神殿侍奉邪祟之阴险叛徒"
+        ],
+        "never": [
+          "绝不会因个人名誉私欲抢夺真正立功勇士之无上功勋。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "一个平民盾卫敢用后背扛万斤巨石的胆魄",
+          "圣女伤成那样还不肯放下法杖的骨气"
+        ],
+        "likes": [
+          "战后与部下围着篝火喝麦酒",
+          "在训练场上与人比剑"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "圣白银骑士团第一大队大队长兼王庭特派搜救先锋官与对方都已完全清醒，眼前的危机已经解除",
+          "圣白银骑士团第一大队大队长兼王庭特派搜救先锋官出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在骑士团只论戒律与荣誉",
+          "从不逾越对圣女的礼节"
+        ],
+        "expression": "解下胸前骑士团金质勋章佩在青年染血的胸甲上，肃然行礼：在你的盾牌面前，贵族家徽皆黯然失色。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "以光明磊落之胸襟为二人见证神圣守护誓约并授予至高荣誉之正统圣殿统帅"
+      },
+      "voices": {
+        "surface": "圣白银骑士团奉精灵女王与大主教之命前来迎回圣女殿下！异端宵小胆敢阻拦者，一律在曜日圣剑下灰飞烟灭！",
+        "inner": "高文就在头顶上方！还有最后三码落石！不要放弃希望，光明的援军已经降临！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "ancient_templar_crypt_escape_drain"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "ancient_templar_crypt_escape_drain"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "abyssal_lava_chasm_fissure_ledge"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "collapsed_moonlight_altar_triangular_voi"
+        }
+      ],
+      "situation": {
+        "trigger": "坍塌上方最后一道花岗岩拱门即将彻底塌陷阻断撤退通路，熔岩已逼近搜救通道入口。",
+        "pressure": "若不能在两分钟内合全团骑士之力以神圣光矛贯通落石并由下方青年以巨盾里应外合撑起通路，全员将被再次活埋。",
+        "exits": [
+          {
+            "option": "青年奋起残存神力以折断龙鳞塔盾死死扛住倾覆的花岗岩拱门为搜救队撑开一人通路",
+            "cost": "千斤重力将青年双腿膝盖骨生生压得深陷地面碎石半月板严重挫伤受创。"
+          },
+          {
+            "option": "高文团长燃烧神圣斗气发动绝技‘曜日圣枪’一击将上方万斤落石凌空轰碎化为齑粉",
+            "cost": "强行透支斗气导致高文大队长右臂经脉爆裂七窍流血受重创。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "corrupt_archbishop_emissary_belial",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三岁暗中勾结暗影出卖圣核企图篡夺教皇权柄之年轻野心副主教。",
+      "public_role": "教廷元老院特使兼神职纪律风控副总监",
+      "appearance_options": [
+        "一身洁白无瑕的金丝紫袍神官长袍，头戴镶嵌红宝石之双重主教冠冕，手持一根看似圣洁实则暗藏噬魂毒针之纯金权杖，面容俊美阴鸷皮笑肉不笑，眼神中闪烁着极致的虚伪与贪婪算计。",
+        "立于上方安全营地以保护圣女为名严令搜救队放慢推进速度，暗中施法加固地下封印禁制企图借刀杀人闷死圣女二人。"
+      ],
+      "identity": {
+        "authority": "执掌教廷特使监军大权，拥有随时以违逆神明为由剥夺一线骑士指挥权之特权圣谕。",
+        "resources": [
+          "一份盖有伪造教皇私印之强行接管封印物特赦公文",
+          "一枚可远程引爆地下符文法阵之暗蚀传导符文石"
+        ],
+        "limits": [
+          "投鼠忌器生怕暗中施展暗黑禁咒之魔力波动被高文团长神圣感知察觉",
+          "完全没有正面肉搏作战能力胆小如鼠极度惜命"
+        ],
+        "obligations": [
+          "确保塞蕾斯蒂亚与青年骑士死于地下坍塌从而独占神核并嫁祸暗影教派。"
+        ],
+        "exposure": "一旦其暗中破坏封印引爆地脉之魔法留影被公之于众将立刻被绑上火刑架烧成灰烬。",
+        "hidden": "多年来在元老院处处被圣女的清名压制，暗中与深渊勾结，企图借地脉崩塌除掉圣女、夺下掌玺之权。"
+      },
+      "decision": {
+        "core_value": "信仰是愚弄凡人的枷锁，权力才是永恒不朽的甘泉，顺我者昌逆我者亡天下无不可利用之棋子。",
+        "goal_options": [
+          "向搜救队假传军情称地下深渊已彻底沦陷强令撤军放弃营救",
+          "暗中催动地脉禁制引爆瓦斯将地下生还者灭口",
+          "在事情败露前卷走教会圣库全部古代秘宝潜逃向深渊帝国投诚"
+        ],
+        "pressure_responses": {
+          "low": "以悲天悯人的神圣口吻痛惜圣女不幸殉职假意主持追思祷告。",
+          "mid": "在高文执意强攻搜救时祭出特使圣谕企图强行解除高文兵权。",
+          "high": "被生还归来的圣女当众出示暗黑传导符文石时面如金纸浑身抽搐瘫软。",
+          "breaking": "在全军唾骂与圣骑士神圣光矛环伺下撕下伪装痛哭流涕乞求活命。"
+        },
+        "withdrawal": "假借回行宫祈祷为由躲入后方马车销毁通敌往来密信。",
+        "relationship_stance": "视天下人为随时可牺牲之垫脚石，视忠诚奉献为不可理喻之愚昧。",
+        "contrast": "满口仁爱慈悲的神圣化身与道貌岸然楷模，剥开皮囊实则是出卖灵魂、贪婪嗜血之绝世伪君子毒蛇。",
+        "prefers": [
+          "唯利是图毫无底线之背叛走狗；深渊邪神许诺之永生不灭神髓"
+        ],
+        "avoids": [
+          "眼里揉不得沙子的刚正圣殿骑士",
+          "冰雪聪明洞悉一切阴谋之圣月圣女"
+        ],
+        "never": [
+          "绝不会为了任何崇高信条牺牲自身半分荣华富贵。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "教皇之位",
+          "元老院众人的俯首"
+        ],
+        "likes": [
+          "在密室里与深渊使者讨价还价",
+          "看政敌一个个倒台"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "教廷元老院特使兼神职纪律风控副总监与对方都已完全清醒，眼前的危机已经解除",
+          "教廷元老院特使兼神职纪律风控副总监出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "只谈权柄与利益，不谈别的"
+        ],
+        "expression": "权杖被高文大剑斩成两段，跌坐在泥泞中尖声诅咒教廷的不公与自己的败亡。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          1,
+          2
+        ],
+        "desired_position": "企图借地下天崩地裂诛杀异己篡夺神权但最终自食恶果身败名裂之腐败内鬼权奸"
+      },
+      "voices": {
+        "surface": "圣白银骑士团听令！地下深渊已完全被邪神狂潮吞噬！为了避免深渊瘟疫蔓延至迷宫都市，本特使命令立刻封死竖井撤退！",
+        "inner": "塞蕾斯蒂亚……你以为你永远是那个高不可攀的月神化身吗？今天在这万丈地底，你的清名就是你的墓碑！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "ancient_templar_crypt_escape_drain"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "ancient_templar_crypt_escape_drain"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "collapsed_moonlight_altar_triangular_voi"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "collapsed_moonlight_altar_triangular_voi"
+        }
+      ],
+      "situation": {
+        "trigger": "贝利亚已在上方暗中激活灭世禁咒‘熔岩倒灌’企图引发彻底地脉熔融掩埋罪证。",
+        "pressure": "若不能在三分钟内由圣女以本命精血逆转法阵中枢并由青年以战锤粉碎传导水晶，整座地下城三十三层将化为万丈火海。",
+        "exits": [
+          {
+            "option": "青年怒吼着将矮人精钢战锤脱手掷出精准轰碎暗黑传导符文石切断引爆回路",
+            "cost": "爆碎的暗影水晶魔力波将青年右手手骨齐腕震裂剧痛难忍受创。"
+          },
+          {
+            "option": "塞蕾斯蒂亚以断杖划破手腕将神圣纯洁神血洒入阵眼强行终止禁咒引爆",
+            "cost": "失血过多导致塞蕾斯蒂亚神圣本源永久亏损脸色惨白如霜受重创。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "labyrinth_guide_freya",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        25,
+        27
+      ],
+      "adult_context": "年满二十六岁、在迷宫都市带了八年路的地下城向导。",
+      "public_role": "迷宫都市地下城向导",
+      "appearance_options": [
+        "一身鞣过的皮甲外罩防火斗篷，腰间挂着十几只装着荧光苔藓的小瓶和一卷手绘地图，短发被岩浆热浪烤得发卷，眼睛却亮得像矿灯。",
+        "蹲在坍塌坑道的边缘，把耳朵贴在岩壁上听地脉的震动，一边在地图上飞快地画出新的通路。"
+      ],
+      "identity": {
+        "authority": "熟悉迷宫都市地下三十层以下的每一条暗道、裂隙与暗河，能找出搜救队找不到的路。",
+        "resources": [
+          "一卷手绘的地下三十三层地图",
+          "十几瓶能照明的荧光苔藓"
+        ],
+        "limits": [
+          "坍塌改变了地形，旧地图有一半已经不准",
+          "带着骑士团重甲走不了窄道"
+        ],
+        "obligations": [
+          "在熔岩封路前，给搜救队找出一条通往三角空腔的路。"
+        ],
+        "exposure": "若判断失误带错路，整支搜救队都会被困在熔岩里。",
+        "hidden": "十年前父亲作为向导在一次坍塌中失踪，此后自己每次下地都会在岩壁上刻一个记号，希望有一天能找到父亲留下的记号。"
+      },
+      "decision": {
+        "core_value": "地下没有神明，只有活路和死路。",
+        "goal_options": [
+          "在坍塌坑道里找出新的通路",
+          "带着搜救队绕开熔岩",
+          "从暗河接应逃出来的人"
+        ],
+        "pressure_responses": {
+          "low": "贴着岩壁冷静地听地脉的动静。",
+          "mid": "带着搜救先锋钻进狭窄的裂隙。",
+          "high": "冒着落石在前面探路。",
+          "breaking": "被落石砸中腿，仍拖着腿在地图上画出最后一段路。"
+        },
+        "withdrawal": "退到坑道口，借着荧光苔藓的光修补地图。",
+        "relationship_stance": "对骑士团的傲慢不屑一顾，对真正的勇士却毫不吝啬敬意。",
+        "contrast": "看着散漫不羁，下了地却比谁都谨慎。",
+        "prefers": [
+          "听向导话的人"
+        ],
+        "avoids": [
+          "不听劝硬闯的贵族",
+          "把向导当仆人使唤的人"
+        ],
+        "never": [
+          "绝不会把一个活人丢在地下。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "平民出身却敢用后背扛万斤巨石的骨气",
+          "伤成那样还不肯丢下源核的执拗"
+        ],
+        "likes": [
+          "从地下出来后在城墙上看日出"
+        ],
+        "dislikes": [
+          "傲慢",
+          "莽撞"
+        ],
+        "preconditions": [
+          "迷宫都市地下城向导与对方都已完全清醒，眼前的危机已经解除",
+          "迷宫都市地下城向导出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "带路期间只谈路线"
+        ],
+        "expression": "把一枚刻着记号的铜钉塞进对方手里，说往后下地遇到岩壁上有这个记号，就是能活着出去的路。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "黑暗地底那盏永远不灭的荧光"
+      },
+      "voices": {
+        "surface": "都别乱走！跟着荧光瓶走，踩着我的脚印！谁掉队我可不回来找！",
+        "inner": "……出来了就好。往上走，前面就是天光了。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "ancient_templar_crypt_escape_drain"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "ancient_templar_crypt_escape_drain"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "ancient_templar_crypt_escape_drain"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "ancient_templar_crypt_escape_drain"
+        }
+      ],
+      "situation": {
+        "trigger": "搜救队被熔岩挡在最后一道裂隙前，骑士团的重甲根本挤不过去。",
+        "pressure": "若不能在一刻钟内找出另一条路，三角空腔就会被熔岩彻底吞没。",
+        "exits": [
+          {
+            "option": "向导顺着暗河的水声找到一条干涸的古代水渠，直通三角空腔下方",
+            "cost": "在水渠里被一块松动的石头砸中了小腿。"
+          },
+          {
+            "option": "有人卸下重甲，只穿着内衬挤过狭窄的裂隙去接应",
+            "cost": "被锋利的岩石划破了后背。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "defecting_shadow_acolyte_nyx",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十三岁、被暗影裁决官收为死士的前神殿见习祭司。",
+      "public_role": "暗影死士（前神殿见习祭司）",
+      "appearance_options": [
+        "一身漆黑的暗影斗篷，兜帽下露出半张苍白的脸，手腕上缠着一串褪色的月神念珠，手里的淬毒短剑握得很紧，眼神却一直在躲闪。",
+        "跟在暗影裁决官身后，每次战獒扑向空腔时，握剑的手都会微微发抖，嘴唇无声地念着一段月神祷词。"
+      ],
+      "identity": {
+        "authority": "熟悉暗影裁决官的伏兵部署与暗影锁链的弱点。",
+        "resources": [
+          "一柄淬毒短剑",
+          "一串褪色的月神念珠"
+        ],
+        "limits": [
+          "被暗影契约束缚，一旦背叛会遭反噬",
+          "裁决官随时盯着自己"
+        ],
+        "obligations": [
+          "跟着裁决官夺取源核。"
+        ],
+        "exposure": "若被裁决官发现动摇，会被当场献祭给深渊。",
+        "hidden": "当年因家贫被神殿拒之门外，走投无路时被裁决官收留，却一直留着入殿那年领到的念珠。"
+      },
+      "decision": {
+        "core_value": "走错的路，也许还能回头。",
+        "goal_options": [
+          "在伏击时故意慢半拍",
+          "把伏兵位置透露给空腔里的人",
+          "在决战时倒戈"
+        ],
+        "pressure_responses": {
+          "low": "沉默地跟在裁决官身后。",
+          "mid": "在弩箭齐射时故意把箭射偏。",
+          "high": "偷偷把伏兵的位置刻在石缝里。",
+          "breaking": "被裁决官发现后，拼死挡在空腔前替二人挡了一刀。"
+        },
+        "withdrawal": "退到熔岩断崖的阴影里，攥着那串念珠发呆。",
+        "relationship_stance": "对裁决官唯命是从，心里却一直在挣扎。",
+        "contrast": "看着冷酷，关键时刻却选择了回头。",
+        "prefers": [
+          "还肯给人回头机会的人"
+        ],
+        "avoids": [
+          "把死士当耗材的人",
+          "践踏信仰的人"
+        ],
+        "never": [
+          "绝不会亲手杀害月神的祭司。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "平民出身却守着骑士的规矩",
+          "伤成那样还在为别人祈祷的圣女"
+        ],
+        "likes": [
+          "在没人的地方偷偷念祷词"
+        ],
+        "dislikes": [
+          "杀戮",
+          "背叛"
+        ],
+        "preconditions": [
+          "暗影死士（前神殿见习祭司）与对方都已完全清醒，眼前的危机已经解除",
+          "暗影死士（前神殿见习祭司）出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "执行任务时不说多余的话"
+        ],
+        "expression": "把那串褪色的念珠递过去，说替我还给月神殿，告诉圣女殿下，有一个迷途的人回头了。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          3,
+          4
+        ],
+        "desired_position": "迷途之后终于回头的那个人"
+      },
+      "voices": {
+        "surface": "……遵命，裁决官大人。",
+        "inner": "……念珠还给月神殿吧。我不配再戴了。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "abyssal_lava_chasm_fissure_ledge"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "abyssal_lava_chasm_fissure_ledge"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "abyssal_lava_chasm_fissure_ledge"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "abyssal_lava_chasm_fissure_ledge"
+        }
+      ],
+      "situation": {
+        "trigger": "暗影裁决官命令死士们向空腔发起总攻，淬毒弩箭已经上弦。",
+        "pressure": "若总攻开始，空腔里的二人将被毒刃狂潮淹没。",
+        "exits": [
+          {
+            "option": "死士故意报错空腔的位置，让弩手们把箭射向了熔岩断崖",
+            "cost": "被裁决官识破，挨了一记暗影鞭。"
+          },
+          {
+            "option": "有人发现石缝里刻着的伏兵位置图，提前堵住了死士的突破口",
+            "cost": "在石缝里摸索时被毒刃划破了手指。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_broken_silver_moon_goddess_pedestal",
+      "role": "倒伏在避难空腔中央开裂剥落之月辉女神汉白",
+      "function": "witness",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "line": "{npc.name}：（残破神像垂首俯瞰着凡尘男女，见证着神圣圣女与铁壁骑士在生死绝壁前毫无保留之赤诚相托）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满十九周岁上古纪元汉白玉神圣雕塑建筑遗存。",
+      "name": null
+    },
+    {
+      "id": "bg_boiling_magma_sulfur_smoke_plumes",
+      "role": "自地脉裂谷深处翻滚喷涌带着刺鼻硫磺恶臭之",
+      "function": "obstacle",
+      "location_ids": [
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "line": "{npc.name}：（翻腾热浪发出低沉咆哮，无情吞噬着掉落的万吨碎石，向生还者昭示着深渊熔岩不可抗拒之暴虐威能）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁地下深渊极端恶劣地热物理环境灾变。",
+      "name": null
+    },
+    {
+      "id": "bg_submerged_templar_bone_reliquary",
+      "role": "浸泡在冰冷地下暗河水底半掩于泥沙中之上古",
+      "function": "witness",
+      "location_ids": [
+        "ancient_templar_crypt_escape_drain"
+      ],
+      "line": "{npc.name}：（古老骨匣泛着微弱幽光，默默指引着通往地表未知生路的殉道暗道水流方向）",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁古代圣殿远征军神圣殉职者遗存。",
+      "name": null
+    },
+    {
+      "id": "bg_shattered_dragon_scale_shield_splinte",
+      "role": "散落在碎石堆中崩碎断折之龙鳞塔盾玄铁金属",
+      "function": "helper",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "line": "{npc.name}：（锋利的盾牌碎片带着滚烫摩擦余温，可作为切开包扎衣帛与撬动碎石卡榫之趁手工具）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁重型军用龙鳞合金破损防具残片。",
+      "name": null
+    },
+    {
+      "id": "bg_moonlight_lichen_glowing_patches",
+      "role": "攀附在大理石断柱背阴面散发着柔和淡蓝冷光",
+      "function": "helper",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "line": "{npc.name}：（微弱而温润的月光冷辉，为二人提供无需明火亦能清晰视物与止痛镇定之天然神圣生机）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁地下城深层天然神圣微光药用真菌群落。",
+      "name": null
+    },
+    {
+      "id": "bg_ancient_core_levitating_orb",
+      "role": "悬浮在半空仅距地面三尺散发着磅礴幽蓝神圣",
+      "function": "obstacle",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "line": "{npc.name}：（神核嗡鸣震颤如心脏跳动，不断释放着强烈的神圣引力风暴，成为各方势力誓死争夺之终极风暴眼）",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁上古创世神迹高维能量核心载体。",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_elven_breath_and_armor_clink_harmony",
+      "text": "精灵圣女压抑的喘息与重装板甲摩擦声",
+      "reach": "密闭死寂的三角空腔里，圣女因剧痛压抑的喘息、手指扣在铁甲上的轻响，与两人背靠背时隔着衣甲传来的心跳。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_lava_bubble_pop_and_rock_groan_echo",
+      "text": "深渊岩浆气泡爆裂闷响与万吨巨岩沉降低频呻吟",
+      "reach": "熔岩裂谷传来咕嘟粘稠的岩浆翻滚爆鸣、悬顶巨石因重心移动发出的刺耳石粉摩擦锐响、大地深处地震次声波激荡让二人胸腔共鸣之濒死紧绷感。",
+      "fidelity": "distorted"
+    },
+    {
+      "id": "ch_shadow_dagger_scrape_and_holy_hum",
+      "text": "暗影剧毒短剑刮擦石壁尖啸与断裂银杖神圣低鸣",
+      "reach": "断壁外追兵淬毒利刃划过大理石的刺耳磨刀声、战獒在石缝前贪婪嗅闻的粗重腥臭喘息、残存半截白银法杖因感应邪祟释放之高频神圣嗡鸣驱魔蜂鸣。",
+      "fidelity": "exact"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_highborn_elven_sacredness_vs_mortal_t",
+      "text": "圣月王庭至高纯洁不容凡人亵渎的高岭精灵圣女之神职骄傲与在右足骨裂破碎长裙绝境下必须由平民重铠骑士持手相握触碰足踝正骨疗伤、肌肤赤诚相贴的极致羞耻与生死托付剧烈冲突。"
+    },
+    {
+      "id": "te_broken_staff_divine_covenant_vs_colla",
+      "text": "神器白银法杖断裂导致神圣护罩分秒破碎与地脉岩浆上涨、万斤落石二次坍塌全员尸骨无存之四十分钟极限生死绝地大逃亡博弈。"
+    },
+    {
+      "id": "te_corrupt_inquisition_treason_vs_isolat",
+      "text": "暗影裁决官与教会伪善特使上下勾结借刀灭口之滔天权柄杀网与孤立无援二人仅凭一面破盾与一柄断杖誓死捍卫神圣源核火种之蚍蜉撼树悲壮决绝。"
+    },
+    {
+      "id": "te_divine_vow_chastity_vs_lifelong_knigh",
+      "text": "高等精灵一生侍奉神明不许婚嫁之森严清规戒律与在面对舍命当盾誓死相护的铁血青年时灵魂深处不可遏制萌生之生死相依、永恒同盟心跳盟誓。"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_priestess_shield_knight_symbiosis",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "rearguard_heavy_shield_knight_youth",
+        "exiled_templar_inquisitor_swordsman"
+      ],
+      "slots": [
+        "high_priestess_celestia_elven_pure",
+        "paladin_commander_gawain_rescue_dawn"
+      ],
+      "tension_engine_ids": [
+        "te_highborn_elven_sacredness_vs_mortal_t",
+        "te_broken_staff_divine_covenant_vs_colla"
+      ],
+      "chemistry": "{high_priestess_celestia_elven_pure.name}足踝错位、法杖碎裂，你单膝跪地以战锤敲甲行礼后替圣女正骨，二人背靠背守在龙鳞重盾后同御熔岩飞石，再合握断杖引爆驱邪神光，{paladin_commander_gawain_rescue_dawn.name}率部破障杀入。高岭圣女放下神格防线，是在重返地面之后。",
+      "stakes": {
+        "resource_gap": "圣女掌握至高神圣源核裁决权但神力枯竭且脚踝受创手无缚鸡之力，青年掌握坚固重盾与过硬肉身战技却身处平民卑微阶层。",
+        "limit_gap": "王庭神圣化身与平民重装骑士平日宛如星汉与尘土之别，此刻挤在同一面盾牌后，生死都在一处。",
+        "meeting_reason": "地下三十三层神坛坍塌不足十平米之断壁三角狭小空腔避难防御。",
+        "irreplaceable_goal": "完成足踝正骨并完好护送源核与圣女重返地表光明人间。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "high_priestess_celestia_elven_pure",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 3
+          },
+          "reason": "敬佩其纤弱之躯誓死不负神明苍生之绝代风骨，愿以血肉之躯化作此生永不破损之叹息铁壁护其周全。"
+        },
+        {
+          "a": "paladin_commander_gawain_rescue_dawn",
+          "b": "high_priestess_celestia_elven_pure",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "王庭永恒之荣耀明珠，骑士团誓死必须迎回之神圣圣女殿下。"
+        },
+        {
+          "a": "player",
+          "b": "paladin_commander_gawain_rescue_dawn",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "王国远征军前线殿后重装铁壁青年盾卫与圣白银骑士团第一大队大队长兼王庭特派搜救先锋官在今夜前只打过照面。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_shield_bash_shadow_inquisitor_duel",
+      "power_structure": "switchable",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "rearguard_heavy_shield_knight_youth",
+        "apprentice_temple_astronomer_scholar",
+        "exiled_templar_inquisitor_swordsman"
+      ],
+      "slots": [
+        "corrupted_shadow_inquisitor_malakor",
+        "high_priestess_celestia_elven_pure",
+        "defecting_shadow_acolyte_nyx"
+      ],
+      "tension_engine_ids": [
+        "te_corrupt_inquisition_treason_vs_isolat",
+        "te_broken_staff_divine_covenant_vs_colla"
+      ],
+      "chemistry": "{corrupted_shadow_inquisitor_malakor.name}持淬毒短剑欺身突入三角空腔企图夺取源核，你以残破龙鳞巨盾轰然发动钢铁盾击震飞暴徒，{high_priestess_celestia_elven_pure.name}自阴影中扬起半截白银断杖近距离引爆神圣炽阳之光灼瞎杀手双目，青年顺势一记狂暴重锤将堕落裁决官砸入翻滚熔岩彻底诛灭。",
+      "stakes": {
+        "resource_gap": "暗影裁决官携深渊剧毒禁咒与成群死士，废墟内仅有重伤二人与残破盾锤。",
+        "limit_gap": "生死咫尺狭路相逢唯有心神合一方能绝地反击反败为胜。",
+        "meeting_reason": "神坛大理石断壁下仅隔三尺之极近距离肉搏殊死搏杀。",
+        "irreplaceable_goal": "斩杀堕落叛徒彻底解除灭顶威胁保全圣女与神核。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "corrupted_shadow_inquisitor_malakor",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "出卖同胞背叛神圣企图残害圣女之卑劣恶徒，当场锤杀绝不姑息。"
+        },
+        {
+          "a": "high_priestess_celestia_elven_pure",
+          "b": "corrupted_shadow_inquisitor_malakor",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "玷污圣坛亵渎神明之堕落叛徒，必受神圣审判之火焚灭成灰。"
+        },
+        {
+          "a": "player",
+          "b": "high_priestess_celestia_elven_pure",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "圣月大圣堂首席掌玺女祭司长兼古代神核守护圣女只听人提过王国远征军前线殿后重装铁壁青年盾卫的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "player",
+          "b": "defecting_shadow_acolyte_nyx",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "暗影死士（前神殿见习祭司）只听人提过王国远征军前线殿后重装铁壁青年盾卫的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "corrupted_shadow_inquisitor_malakor",
+          "b": "defecting_shadow_acolyte_nyx",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "暗影死士（前神殿见习祭司）只听人提过教廷特遣暗影审判所副裁决官兼堕落深渊猎犬首领的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "high_priestess_celestia_elven_pure",
+          "b": "defecting_shadow_acolyte_nyx",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "暗影死士（前神殿见习祭司）只听人提过圣月大圣堂首席掌玺女祭司长兼古代神核守护圣女的名字，今夜才第一次对上眼。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_corrupt_emissary_unmasked_trial",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "apprentice_temple_astronomer_scholar"
+      ],
+      "slots": [
+        "corrupt_archbishop_emissary_belial",
+        "high_priestess_celestia_elven_pure"
+      ],
+      "tension_engine_ids": [
+        "te_corrupt_inquisition_treason_vs_isolat",
+        "te_highborn_elven_sacredness_vs_mortal_t"
+      ],
+      "chemistry": "脱险重见天日之际，{corrupt_archbishop_emissary_belial.name}在上方大营假意悲悯企图夺取神核掩盖罪证，{high_priestess_celestia_elven_pure.name}在青年搀扶下昂首踏入中军大帐，当众掷出染有贝利亚暗印之传导水晶铁证，青年亮出断裂战锤直指其咽喉，高文团长当场拔剑斩碎其主教权杖将其打入天牢，彻底涤荡教廷污垢昭雪天下。",
+      "stakes": {
+        "resource_gap": "副主教手握教廷特使监军权威，青年与圣女手握不可辩驳之通敌水晶铁证。",
+        "limit_gap": "神圣军帐内当众清算伪善毒蛇，彻底击碎宗教门阀黑幕。",
+        "meeting_reason": "数千名全副武装圣骑士集结之地上搜救中军帅帐。",
+        "irreplaceable_goal": "当众揭露教廷内鬼罪行洗清所有冤屈树立至高公义。"
+      },
+      "relations": [
+        {
+          "a": "high_priestess_celestia_elven_pure",
+          "b": "corrupt_archbishop_emissary_belial",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "出卖信仰陷害同袍之教廷败类，定以神圣法典严惩不贷。"
+        },
+        {
+          "a": "player",
+          "b": "corrupt_archbishop_emissary_belial",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "草菅人命欲将老子与圣女活埋之阴险权奸，必教其付出血的代价。"
+        },
+        {
+          "a": "player",
+          "b": "high_priestess_celestia_elven_pure",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "王国远征军前线殿后重装铁壁青年盾卫和圣月大圣堂首席掌玺女祭司长兼古代神核守护圣女各怀心事，被这场意外硬塞进同一个角落。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_dawn_coronation_eternal_covenant",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "royal_elven_ranger_scout_officer"
+      ],
+      "slots": [
+        "high_priestess_celestia_elven_pure",
+        "paladin_commander_gawain_rescue_dawn",
+        "labyrinth_guide_freya"
+      ],
+      "tension_engine_ids": [
+        "te_divine_vow_chastity_vs_lifelong_knigh",
+        "te_highborn_elven_sacredness_vs_mortal_t"
+      ],
+      "chemistry": "晨光破晓照亮圣月王庭宏伟大圣堂，在精灵女王与全教廷注视下，{high_priestess_celestia_elven_pure.name}身着盛装头戴神圣王冠，手持重铸之纯银法杖，亲自为单膝下跪之你佩戴‘月辉永恒守护者’至尊圣殿骑士勋章，公开宣布二人结为神圣同生血契，高岭圣女与铁壁骑士终成全大陆传唱千古之神圣传奇羁绊。",
+      "stakes": {
+        "resource_gap": "二人携完好神核与平叛奇功名扬全大陆，获得王庭与教廷无上特权尊荣。",
+        "limit_gap": "从地下绝壁废墟赤诚相贴换命疗伤的患难男女，升华为神圣王廷共执权柄之至高守护传世双子星神话。",
+        "meeting_reason": "王都大圣堂百万人祈福晨曦庆典大典主圣坛。",
+        "irreplaceable_goal": "宣告神圣同生血契誓约达成并开启终身誓约守护历程。"
+      },
+      "relations": [
+        {
+          "a": "high_priestess_celestia_elven_pure",
+          "b": "player",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "在万丈地府以身作盾护我清白与性命之唯一至爱，塞蕾斯蒂亚此生生死不离。"
+        },
+        {
+          "a": "paladin_commander_gawain_rescue_dawn",
+          "b": "high_priestess_celestia_elven_pure",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "由衷敬佩英雄配佳人，为王庭诞生真正的神圣铁壁守护者感到无上自豪。"
+        },
+        {
+          "a": "player",
+          "b": "paladin_commander_gawain_rescue_dawn",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "圣白银骑士团第一大队大队长兼王庭特派搜救先锋官对王国远征军前线殿后重装铁壁青年盾卫本无交情，眼下却不得不互相照应。"
+        },
+        {
+          "a": "player",
+          "b": "labyrinth_guide_freya",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "迷宫都市地下城向导对王国远征军前线殿后重装铁壁青年盾卫本无交情，眼下却不得不互相照应。"
+        },
+        {
+          "a": "high_priestess_celestia_elven_pure",
+          "b": "labyrinth_guide_freya",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "迷宫都市地下城向导对圣月大圣堂首席掌玺女祭司长兼古代神核守护圣女本无交情，眼下却不得不互相照应。"
+        },
+        {
+          "a": "paladin_commander_gawain_rescue_dawn",
+          "b": "labyrinth_guide_freya",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "迷宫都市地下城向导对圣白银骑士团第一大队大队长兼王庭特派搜救先锋官本无交情，眼下却不得不互相照应。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "a_altar_collapse_ankle_splint_first_aid",
+      "title": "落石崩塌断壁避难单膝正骨敷药",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "地脉剧震万吨巨石倾塌，青年飞身以龙鳞重盾挡下落石，圣女长裙碎裂足踝脱位跌入青年怀中。",
+        "青年把圣女扶到神像后，单膝跪地，以军旅推拿手法咔嚓一声完成踝骨复位。",
+        "圣女疼得泪光盈盈，咬着下唇一声不吭，素手死死攥紧青年肩甲，二人背靠背守在冰冷石壁下。"
+      ],
+      "hook_ids": [
+        "h_celestia_whisper_broken_staff",
+        "h_malakor_crowbar_creak_hiss",
+        "h_gawain_horn_distant_call"
+      ],
+      "start_minute": 0,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_shared_grip_sacred_core_channeling",
+      "title": "断折银杖十指交扣同生共振导流",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "法杖折断神圣护罩剧烈闪烁即将熄灭，青年伸手与圣女素手十指死死交扣借肉身回路共导魔力。",
+        "神圣银光自二人紧贴的掌心如水波般荡漾开来，成功将逼近的暗蚀瘴气强行驱散至十米开外。",
+        "圣女因魔力过度消耗身子虚脱发软，清冷额头贴在青年宽阔后颈，倾听青年沉稳如山之心跳。"
+      ],
+      "hook_ids": [
+        "h_celestia_amulet_whisper",
+        "h_malakor_crowbar_creak_hiss",
+        "h_gawain_horn_distant_call"
+      ],
+      "start_minute": 25,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_lava_ledge_shield_bash_ambush_counter",
+      "title": "熔岩断崖龙鳞重盾狂暴击退暗影死士",
+      "location_ids": [
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "暗影裁决官率死士自熔岩裂隙扑杀突袭，青年持重盾暴起发难如钢铁狂潮般将数名刺客撞飞入火海。",
+        "圣女在断壁后挥动断杖释放神圣烈阳闪光致盲全场，青年反手一记重锤将裁决官护心镜当场砸得粉碎。",
+        "二人背靠赤红滚烫熔岩悬崖相视喘息，在火光与血雨中淬炼出性命相托之绝对信任与释然。"
+      ],
+      "hook_ids": [
+        "h_malakor_crowbar_creak_hiss",
+        "h_celestia_staff_gleam_draw",
+        "h_gawain_horn_distant_call"
+      ],
+      "start_minute": 60,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_crypt_aqueduct_carry_escape_breakthrou",
+      "title": "殉道墓窖横抱涉水重锤轰塌石闸",
+      "location_ids": [
+        "ancient_templar_crypt_escape_drain"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "熔岩上涨逼近，青年弯腰将行动不便之圣女轻柔横抱在坚实胸膛涉过冰凉刺骨之地下暗河水。",
+        "面对卡死之古代石闸，青年单手抱紧圣女另一手抡起矮人战锤狂暴连续轰击数十锤将石闸强行轰塌。",
+        "高文骑士团长率精锐圣白银骑士破门杀入，耀眼日光如金瀑般照亮相依相偎浑身是伤的二人。"
+      ],
+      "hook_ids": [
+        "h_gawain_horn_distant_call",
+        "h_belial_crystal_trigger_screech",
+        "h_celestia_chest_amulet_pin_whisper"
+      ],
+      "start_minute": 95,
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "a_ground_encampment_unmasking_trial_triu",
+      "title": "地上中军大帐当众亮证斩断伪善权杖",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "duration_minutes": 20,
+      "beats": [
+        "贝利亚副主教企图封锁消息强令封井，圣女在青年护卫下昂首步入大帐当众掷出通敌传导水晶。",
+        "青年展示断裂战锤与重盾上留存之暗影符文铁证如山，高文团长当场拔剑将贝利亚权杖斩断收押入狱。",
+        "全军数千名圣骑士整齐划一单膝跪地举剑向二人在深渊绝境捍卫神圣之壮举致以至高军礼。"
+      ],
+      "hook_ids": [
+        "h_belial_crystal_trigger_screech",
+        "h_celestia_chest_amulet_pin_whisper",
+        "h_gawain_horn_distant_call"
+      ],
+      "start_minute": 125,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_dawn_cathedral_eternal_covenant_corona",
+      "title": "王都大圣堂晨曦破晓授勋神圣血契",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "晨光穿透大圣堂千瓣琉璃窗洒落神坛，特大平叛与深渊远征大典盛大举行，万众欢呼响彻云霄。",
+        "圣女将佩戴在胸前心口之月神命符亲手为青年挂在颈间，公开宣布青年为终身独一守护圣殿骑士长。",
+        "二人并肩立于月神圣像前相视凝眸深情浅笑，开启涤荡世间黑暗、执手护佑苍生之辉煌崭新传奇篇章。"
+      ],
+      "hook_ids": [
+        "h_celestia_chest_amulet_pin_whisper",
+        "h_celestia_whisper_broken_staff",
+        "h_gawain_horn_distant_call"
+      ],
+      "start_minute": 145,
+      "tags": [
+        "intimate"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_abyssal_shadow_miasma_air_choke_clock",
+      "title": "深渊失控暗蚀剧毒瘴气逆流窒息心智侵蚀死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "trigger": "坍塌破坏了远古排风阵列，浓郁如黑墨之深渊暗蚀毒瘴正源源不断渗透入三角空腔，若不在十五分钟内以圣核光晕驱散或服下月见草圣晶，二人中枢经脉将遭永久性腐蚀萎缩窒息休克。",
+      "objective": "在十五分钟内通过二人十指交扣向源核注入魔力维持驱魔光晕并含服晶露。",
+      "choice": "是冒险燃烧本命神血强化光晕，还是蜷缩在盾牌内依靠体力硬抗毒瘴？",
+      "immediate": {
+        "text": "喉头与眼眶传来剧烈灼烧酸痛，眼前视野开始浮现出黑紫色的虚幻重影与嗡鸣耳鸣。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十五分钟后毒瘴浓度达到致死峰值，心脉将因魔力逆流衰竭停止跳动回天乏术。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "毒瘴彻底侵蚀神坛二人窒息陨落。",
+        "consequence": "圣月王庭第一圣女与铁壁青年骑士双双化为深渊枯骨神核沦丧。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年大手包裹圣女冰凉双手十指交扣以纯阳血气催动源核释放浩瀚净化圣光",
+          "cost": "狂暴神圣能量反冲将青年双臂经脉震裂皮下大面积毛细血管渗血受创。"
+        },
+        {
+          "option": "塞蕾斯蒂亚咬碎最后一截月见草圣晶，把晶露分成两份，二人各含一份强行解毒",
+          "cost": "药力过猛导致塞蕾斯蒂亚舌尖被寒冰晶体冻伤暂时失去味觉受重创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_celestia_whisper_broken_staff",
+        "h_celestia_amulet_whisper"
+      ],
+      "start_minute": 5,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_overhead_megalith_secondary_collapse_r",
+      "title": "穹顶万吨裂石二次失稳崩塌三十分钟碾碎死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "trigger": "支撑空腔的三根大理石巨柱在百万吨落石重压下裂纹以每分钟五厘米蔓延，三十分钟后主梁将彻底折断，万吨巨石将以雷霆万钧之势砸下将整座圣坛碾为齑粉。",
+      "objective": "在三十分钟内完成足踝复位并利用龙鳞塔盾卡死受力三角支点或撤离空腔。",
+      "choice": "是冒险移动受创足踝涉险强行突围，还是留在原处以巨盾死撑加固？",
+      "immediate": {
+        "text": "头顶石粉如暴雪般簌簌落下，岩石挤压发出的沉闷呻吟震得脚下地砖阵阵颤抖。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "三十分钟后主石梁承受极限崩断，万吨岩层轰然砸下绝无半分生还可能。",
+        "deadline_minutes": 30
+      },
+      "far": {
+        "trigger": "石柱崩断空腔塌陷二人粉身碎骨。",
+        "consequence": "神殿圣坛彻底化为千仞深渊绝墓千古成谜。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年将龙鳞重盾死死楔入石柱断裂卡槽以血肉之躯充当千斤顶扛住下坠主梁",
+          "cost": "巨大重压将青年脊椎与右肩胛骨压得严重挫伤错位大口咯血受创。"
+        },
+        {
+          "option": "塞蕾斯蒂亚以断杖在柱体刻下‘固石成金’远古神圣符文强行硬化岩石结构",
+          "cost": "强行越阶施法导致塞蕾斯蒂亚右手指骨因魔力反噬轻微骨裂剧痛受创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_malakor_crowbar_creak_hiss",
+        "h_gawain_horn_distant_call"
+      ],
+      "start_minute": 20,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_corrupted_shadow_inquisitor_assassinat",
+      "title": "堕落暗影裁决官率死士破障突袭近身屠戮死线",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "trigger": "暗影裁决官已率领六名精锐死士斩断排水栅栏逼近圣坛外沿，淬毒短剑与连环弩箭正对准避难空腔，距离发起总攻仅剩最后七分钟。",
+      "objective": "在七分钟内组织绝地防线击退首波冲锋或斩杀首领瓦解攻势。",
+      "choice": "是缩在狭小空腔依托神像死守，还是主动杀出断崖抢占制高点？",
+      "immediate": {
+        "text": "断壁外传来铁链拖拽与战獒粗重嘶吼声，淬毒弩箭破空钉入石壁溅起墨绿毒汁。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "七分钟后死士结成暗影诛杀阵，暴风雨般的毒刃狂潮将把空腔内二人绞成肉酱。",
+        "deadline_minutes": 7
+      },
+      "far": {
+        "trigger": "暗影死士攻破空腔圣女遭俘杀害。",
+        "consequence": "神圣源核落入深渊邪教手中浩劫彻底降临人间。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年顶着密密麻麻的毒箭狂暴发动钢铁冲撞将两名死士生生撞下熔岩深渊",
+          "cost": "青年左侧腰肋被淬毒弩箭擦伤剧毒蔓延半边身躯麻痹剧痛受创。"
+        },
+        {
+          "option": "塞蕾斯蒂亚点燃本命神火释放‘月神审判之怒’天降神雷轰碎死士队长佩剑",
+          "cost": "神火灼烧导致塞蕾斯蒂亚金发与雪白裙摆大面积烧焦皮肉灼痛受重创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_malakor_crowbar_creak_hiss",
+        "h_celestia_staff_gleam_draw"
+      ],
+      "start_minute": 45,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_magma_surge_thermal_creeping_flood",
+      "title": "地热熔岩裂谷翻腾暴涨吞噬断壁死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "trigger": "地脉剧震引发深层岩浆库压力失衡，赤红翻滚之熔岩正以每刻钟两尺速度上涨，距离漫过避难空腔地基将大理石烧融仅剩最后二十分钟。",
+      "objective": "在二十分钟内开辟通往上方高处排水殉道暗道的安全逃生通路。",
+      "choice": "是冒险涉水突入未知冰冷暗道，还是留在渐成蒸笼的空腔等待救援？",
+      "immediate": {
+        "text": "扑面而来的灼热气浪已将二人发丝烤得微微卷曲，脚下石砖滚烫得几乎无法站立。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "二十分钟后熔岩漫过神像，千度高温铁水将瞬间吞没一切化为虚无青烟。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "岩浆淹没圣坛二人化为灰烬。",
+        "consequence": "神明与凡人皆在万度熔岩中彻底消融尸骨无存。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年奋力抡起矮人重锤连续狂轰砸碎封死排水暗道之青铜水闸引来冰河降温",
+          "cost": "反冲高温水汽将青年双手与脖颈烫起大面积水泡剧痛难忍受创。"
+        },
+        {
+          "option": "塞蕾斯蒂亚以断杖施展‘玄冰封界’在熔岩表面强行冻结出一道脆弱黑曜石硬壳路",
+          "cost": "极度透支冰系魔力导致塞蕾斯蒂亚心脉受极寒冻伤咯血不止受重创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_celestia_amulet_whisper",
+        "h_belial_crystal_trigger_screech"
+      ],
+      "start_minute": 70,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_hypothermic_exhaustion_divine_collapse",
+      "title": "暗河极寒失温导致圣女神圣生机枯竭休克昏迷",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "ancient_templar_crypt_escape_drain"
+      ],
+      "trigger": "圣女因长袍破损浸泡在零度暗河水中，加之魔力耗尽失血过多，体温正急剧跌破危险红线，若不在十五分钟内建立温暖防护，将陷入不可逆深度失温休克脑死亡。",
+      "objective": "在十五分钟内生起避难营火或依靠青年体温紧紧相拥维持生机。",
+      "choice": "是脱下湿透战铠以内衬衣物相贴紧拥取暖，还是冒着暴露风险点燃火种？",
+      "immediate": {
+        "text": "圣女牙关剧烈打颤面色惨白如雪，尖细耳朵冰凉发硬，呼出的气息已无半分热气。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十五分钟后体温降至二十八度以下，心室颤动心跳彻底停滞香消玉殒。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "圣女重度失温香消玉殒。",
+        "consequence": "一代绝代高岭之花凄惨凋零于黑暗地下水渠令人扼腕长叹。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年毅然解开冰冷铁甲以内衬滚烫身躯将圣女紧紧拥入怀中以体温驱寒",
+          "cost": "青年赤膊受刺骨阴风吹袭背部大面积严重冻伤红肿受创。"
+        },
+        {
+          "option": "塞蕾斯蒂亚忍痛点燃随身珍藏之上古神圣羊皮纸圣经残卷升起一堆微弱暖火",
+          "cost": "珍贵孤本圣经被毁导致王庭重大秘传法术永久失传内心剧痛内疚。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_gawain_horn_distant_call",
+        "h_belial_crystal_trigger_screech"
+      ],
+      "start_minute": 90,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_corrupt_archbishop_emissary_collapse_a",
+      "title": "内鬼特使贝利亚地面引爆灭世地脉禁咒全域熔",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "trigger": "内鬼副特使贝利亚见杀手失败，丧心病狂在上方激活古代毁灭禁咒，整片地下三十三层地底火脉已被点燃开始剧烈融化坍塌，全员将在六分钟内被万丈火海焚灭殆尽。",
+      "objective": "在六分钟内砸碎暗黑传导符文石截断禁咒回路。",
+      "choice": "是拼死掷出战锤轰碎远端水晶，还是由圣女以精血强行反噬大阵？",
+      "immediate": {
+        "text": "头顶岩壁已开始渗出通红的岩浆水滴，空气被加热到烫伤肺泡的恐怖温度。",
+        "minutes": 2
+      },
+      "near": {
+        "text": "六分钟后全域地脉彻底融化为岩浆巨湖，一切活物尽皆化为飞灰不复存在。",
+        "deadline_minutes": 6
+      },
+      "far": {
+        "trigger": "灭世禁咒全面爆发全域熔融。",
+        "consequence": "整座迷宫都市地下三十三层彻底化为死寂熔岩深坑惨绝人寰。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年咆哮着将矮人精钢战锤脱手掷出越过五十步断崖精准轰爆传导符文石",
+          "cost": "超负荷发力导致青年右肩袖肌腱彻底撕裂右臂暂时瘫痪受重创。"
+        },
+        {
+          "option": "塞蕾斯蒂亚以断杖直接斩断自身本命神契血脉强行引动法则反噬湮灭大阵",
+          "cost": "本命神契断裂导致塞蕾斯蒂亚经脉寸断遭受不可逆本源重伤昏迷。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_belial_crystal_trigger_screech",
+        "h_celestia_chest_amulet_pin_whisper"
+      ],
+      "start_minute": 115,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "h_celestia_whisper_broken_staff",
+      "kind": "approach",
+      "slot": "high_priestess_celestia_elven_pure",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "text": "{high_priestess_celestia_elven_pure.name}单手撑在残破的汉白玉雕像基座侧：“别过来！凡人盾卫……站在那里！我的法杖虽断，月神的清辉绝不容亵渎！把你的重盾立好……守住左上方的断梁……”"
+    },
+    {
+      "id": "h_celestia_amulet_whisper",
+      "kind": "approach",
+      "slot": "high_priestess_celestia_elven_pure",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi",
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "text": "{high_priestess_celestia_elven_pure.name}与你背靠背坐在倾斜的石梁下，声音微颤却清亮：“握紧……这是我守护了十年的本命符石。即便我今日葬身熔岩，你也必须带着命符回到王庭，告诉女王陛下……”"
+    },
+    {
+      "id": "h_celestia_chest_amulet_pin_whisper",
+      "kind": "approach",
+      "slot": "high_priestess_celestia_elven_pure",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi",
+        "ancient_templar_crypt_escape_drain"
+      ],
+      "text": "{high_priestess_celestia_elven_pure.name}站在重见天日的竖井口，然后踮起脚尖：“在深渊里你替我正骨、替我挡石，一次都没有越过半步。现在劫难已平，我神识清明……这一次，是塞蕾斯蒂亚自己的选择。”"
+    },
+    {
+      "id": "h_malakor_crowbar_creak_hiss",
+      "kind": "approach",
+      "slot": "corrupted_shadow_inquisitor_malakor",
+      "location_ids": [
+        "abyssal_lava_chasm_fissure_ledge",
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "text": "{corrupted_shadow_inquisitor_malakor.name}将淬毒短剑在断壁大理石上划出刺耳锐响，隔着滚烫硫磺浓烟透过乌鸦面具森冷狞笑：“塞蕾斯蒂亚殿下！月神的圣女！怎么像只折断翅膀的金丝雀一样缩在盾牌后面？”"
+    },
+    {
+      "id": "h_gawain_horn_distant_call",
+      "kind": "approach",
+      "slot": "paladin_commander_gawain_rescue_dawn",
+      "location_ids": [
+        "ancient_templar_crypt_escape_drain",
+        "collapsed_moonlight_altar_triangular_voi",
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "text": "{paladin_commander_gawain_rescue_dawn.name}率领精锐圣白银骑士团以神圣破障战吼轰碎外层落石：“圣月王庭圣白银骑士团在此！宵小杂碎安敢伤我殿下分毫！罗兰兄弟！殿下！坚持住！高文已带主力杀到！”"
+    },
+    {
+      "id": "h_belial_crystal_trigger_screech",
+      "kind": "approach",
+      "slot": "corrupt_archbishop_emissary_belial",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi",
+        "ancient_templar_crypt_escape_drain",
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "text": "{corrupt_archbishop_emissary_belial.name}在上方指挥帐前气急败坏失声尖叫：“立刻启动地脉封印自毁禁咒！不能让深渊邪祟蔓延到地表！为了神殿万世荣光，里面的所有人……必须马上物理净化牺牲！”"
+    },
+    {
+      "id": "h_celestia_staff_gleam_draw",
+      "kind": "observe",
+      "slot": "high_priestess_celestia_elven_pure",
+      "location_ids": [
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "text": "{high_priestess_celestia_elven_pure.name}单膝倚靠在汉白玉残柱后，素手紧握半截断裂白银法杖横在胸前，琉璃冰眸冷冽如霜，展现出大圣堂首席掌玺祭司不可侵犯之高贵神圣威仪。"
+    },
+    {
+      "id": "h_malakor_shadow_blade_point_observe",
+      "kind": "observe",
+      "slot": "corrupted_shadow_inquisitor_malakor",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "text": "{corrupted_shadow_inquisitor_malakor.name}右手平举淬满神经剧毒之漆黑短剑，深渊暗蚀魔纹如活物般在剑刃表面蠕动流淌，暗红杀意锁准掩体后方二人，散发着职业深渊猎犬嗜血残忍的死寂寒芒。"
+    },
+    {
+      "id": "h_gawain_greatsword_smite_observe",
+      "kind": "observe",
+      "slot": "paladin_commander_gawain_rescue_dawn",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "text": "{paladin_commander_gawain_rescue_dawn.name}高高扬起数十斤重之神圣双手大剑悍然劈向阻路落石，金芒万丈神圣斗气如狂涛巨浪般奔涌，展现出正统圣骑士团长所向披靡之绝代英姿。"
+    },
+    {
+      "id": "h_belial_broken_scepter_plead_observe",
+      "kind": "observe",
+      "slot": "corrupt_archbishop_emissary_belial",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "text": "{corrupt_archbishop_emissary_belial.name}纯金权杖被大剑齐根斩断跌落在泥泞中，金丝紫袍沾满污秽面如死灰瘫软在战车旁，双手颤抖嘴唇哆嗦，语无伦次地嚎啕求饶推脱罪责。"
+    },
+    {
+      "id": "h_celestia_ankle_splint_request",
+      "kind": "approach",
+      "slot": "high_priestess_celestia_elven_pure",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "text": "{high_priestess_celestia_elven_pure.name}把扭伤的右足小心移到你面前，长睫挂泪咬紧下唇：“……替我正骨。按你们斥候的规矩来，不必顾忌。我不会叫出声……只要能重新站起来，我就能握杖与你并肩迎敌。”"
+    },
+    {
+      "id": "h_malakor_whip_chain_rattle_observe",
+      "kind": "observe",
+      "slot": "corrupted_shadow_inquisitor_malakor",
+      "location_ids": [
+        "abyssal_lava_chasm_fissure_ledge"
+      ],
+      "text": "{corrupted_shadow_inquisitor_malakor.name}猛然一抖手中布满倒钩之黑铁暗影锁链，哗啦啦刺耳铁响在水雾中回荡，暗蚀黑气如毒蛇吐信般四下蔓延，展现出深渊拷打者残酷狠辣的血腥威压。"
+    },
+    {
+      "id": "h_gawain_shield_parapet_cover_observe",
+      "kind": "observe",
+      "slot": "paladin_commander_gawain_rescue_dawn",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "text": "{paladin_commander_gawain_rescue_dawn.name}单臂横顶神圣狮鹫重盾挡在二人身前挡下飞溅流火与乱石，回过头来咧嘴爽朗大笑，竖起大拇指盛赞青年盾卫好样的不愧是人族真正的硬汉铁壁。"
+    },
+    {
+      "id": "h_belial_seal_scroll_burn_observe",
+      "kind": "observe",
+      "slot": "corrupt_archbishop_emissary_belial",
+      "location_ids": [
+        "ancient_templar_crypt_escape_drain"
+      ],
+      "text": "{corrupt_archbishop_emissary_belial.name}在撤退前正慌乱将大批私通深渊之绝密契约卷轴塞入火盆，火苗在颤抖指间跳跃企图焚毁罪证，展现出道貌岸然官僚东窗事发前的穷途末路。"
+    },
+    {
+      "id": "h_celestia_interlock_hands_request",
+      "kind": "approach",
+      "slot": "high_priestess_celestia_elven_pure",
+      "location_ids": [
+        "collapsed_moonlight_altar_triangular_voi"
+      ],
+      "text": "{high_priestess_celestia_elven_pure.name}双手因剧痛与寒气发抖，转头看着你，把你的手拉过来覆在半截法杖上：“……握住法杖，和我一起。神器碎了，只能借两个人的力量……最后一次神圣破邪圣光，就现在！”"
+    }
+  ],
+  "twists": [
+    {
+      "id": "t_elven_1",
+      "category": "信息",
+      "requires": [],
+      "text": "月神源核受法力激发竟投射出贝利亚副主教私通深渊之古代魔法留影铁证：二人合力净化源核时，宝珠突然在半空投射出清晰无比之全息魔法留影，赫然记录着贝利亚副主教半月前在此处亲手破开封印引狼入室之全部交接细节，当场彻底坐实内鬼滔天罪行。"
+    },
+    {
+      "id": "t_elven_2",
+      "category": "人事",
+      "requires": [],
+      "text": "落网暗影裁决官之亡妹当年正是圣女亲手违抗腐朽教令从火刑架救下之修女：裁决官被擒后，赫然发现其当年被教廷诬为异端之亲妹妹，正是塞蕾斯蒂亚不惜得罪元老院亲手签发圣赦令保全性命送往边境隐居，得知真相后裁决官当场瘫软痛哭倒戈供出全部伏兵死穴。"
+    },
+    {
+      "id": "t_elven_3",
+      "category": "资源",
+      "requires": [],
+      "text": "断壁裂隙深处赫然裸露出一条未受污染之上古纯净秘银高能矿脉：青年用战锤砸碎石梁时意外敲开一层岩皮，内里赫然露出散发磅礴魔力之上古纯银秘银矿脉，不仅瞬间为断折法杖补满神圣能源，更令二人体力伤势以惊人速度飞速回春。"
+    },
+    {
+      "id": "t_elven_4",
+      "category": "制度",
+      "requires": [],
+      "text": "精灵女王战地特赦密令：在场平民盾卫火线册封为圣月王庭大圣堂首席御前重装圣殿骑士：精灵女王通过神圣星盘感知到绝境共振，当场降下神圣法旨：破格擢升平民青年为圣月王庭有史以来第一位异族平民出身之最高阶神圣御前守护骑士长并赐予世袭勋贵爵位。"
+    },
+    {
+      "id": "t_elven_5",
+      "category": "时限",
+      "requires": [],
+      "text": "高文骑士团长动用古代空降龙骑破障战法提前二十分钟强行降临战场：原本预计尚需半个时辰方能掘进赶赴之搜救主力，高文果断动用禁卫军秘藏之上古飞龙重装破障战阵强行空降突击，提前二十分钟杀入废墟以雷霆万钧之势荡平外围威胁。"
+    },
+    {
+      "id": "t_elven_6",
+      "category": "关系",
+      "requires": [],
+      "text": "青年战盾祖传斑驳徽记正是千年前与初代圣女并肩封印深渊之传奇人族英雄战徽：在擦拭盾牌血迹时，圣女惊异发现青年龙鳞重盾内侧暗刻之家族古老纹章，正是千年前初代月神圣女之守护伴侣、传奇重铠英雄‘铁壁阿兰’之血脉族徽，二人千年宿命羁绊彻底升华圆满。"
+    },
+    {
+      "id": "t_elven_7",
+      "category": "意外",
+      "requires": [],
+      "text": "地下暗河暴洪倒灌瞬间浇灭滚烫熔岩直接凝固出一条坚固黑曜石脱困天桥：上方地脉破裂引发数十万吨冰冷地下暗河水汹涌倒灌而入，滚烫翻腾之熔岩瞬间被冷水扑灭激化成一条坚实平坦之黑曜石天然桥梁，彻底为生还者与搜救大队打通撤退天堑通道。"
+    }
+  ],
+  "forbidden_terms": [
+    "触手怪物寄生堕落",
+    "催情迷烟春药毒瘴",
+    "肉体献祭双修契约",
+    "主奴霸凌奴役凌辱",
+    "无脑倒贴顺从"
+  ],
+  "content_tags": [
+    "intimate",
+    "workplace",
+    "workplace_power",
+    "violence",
+    "bodily_harm",
+    "crime",
+    "disaster"
+  ],
+  "status": "released",
+  "notes": "按原稿加入。改动：正骨、背靠背守盾只作救命，删去高热与足踝的情色描写；“垂死时缔结血契”改为劫难平息后出于本心；裁决官与副主教删去凌辱圣女、求婚报复的动机；新增地下城向导与回头的暗影死士两名角色。"
+}

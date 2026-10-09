@@ -265,7 +265,7 @@ class NewGameCommandTest(unittest.TestCase):
                 self.assertNotIn(under_review, [w["id"] for w in service.list_worlds(ctx, {})["worlds"]])
                 listed = service.list_worlds(ctx, {"include_drafts": True})["worlds"]
                 self.assertEqual(len(listed), len(STORE.index()["worlds"]))
-                self.assertEqual(len(listed), 78)
+                self.assertEqual(len(listed), 90)
                 released = {w["id"] for w in STORE.index()["worlds"] if w["status"] == "released"} - {under_review}
                 for seed in range(1, 6):
                     try:

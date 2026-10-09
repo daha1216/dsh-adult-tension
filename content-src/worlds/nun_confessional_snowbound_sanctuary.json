@@ -1,0 +1,2323 @@
+{
+  "schema_version": 1,
+  "id": "nun_confessional_snowbound_sanctuary",
+  "title": "雪夜告解室：纯白修女",
+  "extends": null,
+  "era": "中世纪晚期阿尔卑斯极寒雪岭（教廷裁判所前哨戒律院）",
+  "region": "绝壁之巅风雪断绝的黑石圣玛利亚修道院闭锁忏悔室与地下藏经石窟",
+  "premise": "百年难遇特大暴雪封死唯一悬崖吊桥，绝峰之巅修道院沦为孤岛。年满二十周岁严守终身圣洁贞誓之纯白见习修女，与年满二十一周岁受教廷追缉负伤潜入避难之青年异端学者，被严寒逼入仅存壁炉微温之逼仄双人告解隔间。窗外零下三十度暴风雪呼啸撞击彩绘玻璃，柴薪将尽，修女依教规分食仅存干硬圣餐面饼与少许祭台苦葡萄酒。",
+  "tone": [
+    "禁欲圣洁戒律",
+    "暴雪封山孤岛",
+    "告解格栅低语",
+    "圣餐分食取暖"
+  ],
+  "style_hint": "见习修女身着纯白粗呢束腰修女长袍，头戴白纱硬领头巾，面容清丽，双手紧握磨损银质念珠，因彻骨极寒而下唇发白。柴火将熄，二人为求活命打破男女永隔的铁律挤进同一领斗篷，戒律与人命在白汽里拉扯。",
+  "clock_start": {
+    "label": "暴风雪夜子夜十一点，吊桥彻底崩塌封山，气温骤降至零下三十度，壁炉柴火仅存两小时",
+    "minute": 1380
+  },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": {
+    "female": 0.5,
+    "male": 0.45,
+    "nonbinary": 0.05
+  },
+  "stage_labels": {
+    "stranger": "异端戒备",
+    "acquainted": "格栅告解",
+    "familiar": "分食圣餐",
+    "flirting": "同披羊毡",
+    "testing": "心防质询",
+    "intimate": "烛下交心",
+    "committed": "破晓立誓"
+  },
+  "name_pools": {
+    "family": [
+      "澈",
+      "冯·埃森",
+      "阿基诺",
+      "博尔吉亚",
+      "蒙费拉",
+      "诺曼",
+      "卡佩",
+      "洛林",
+      "萨伏伊",
+      "美第奇",
+      "哈布斯堡",
+      "安茹"
+    ],
+    "given_female": [
+      "艾格尼丝",
+      "克莱尔",
+      "塞西莉亚",
+      "碧翠丝",
+      "艾莲娜",
+      "尤菲米娅",
+      "玛格丽特",
+      "特蕾莎",
+      "索菲亚",
+      "阿加莎",
+      "卡特琳娜",
+      "薇拉"
+    ],
+    "given_male": [
+      "罗兰",
+      "朱利安",
+      "莱因哈特",
+      "加百列",
+      "文森特",
+      "托马斯",
+      "奥古斯丁",
+      "贝尔纳",
+      "菲利普",
+      "珩",
+      "达米安",
+      "卢卡斯"
+    ],
+    "given_neutral": [
+      "卡米尔",
+      "多米尼克",
+      "弗朗西斯",
+      "让",
+      "瓦伦丁",
+      "马里昂",
+      "安杰尔",
+      "西里尔",
+      "帕斯卡",
+      "克劳德",
+      "埃米尔",
+      "莱昂"
+    ],
+    "nickname_patterns": [
+      {
+        "pattern": "{family}修女",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}修士",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}嬷嬷",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}执事",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}学者",
+        "gender": "any"
+      }
+    ],
+    "order": "family_first"
+  },
+  "rules": [
+    {
+      "id": "r_cloistered_vow_of_perpetual_chastity",
+      "text": "圣玛利亚戒律院严苛法典规定：立誓修女终身不得与成年男子同处一室无屏障接触，违者交由圣职法庭剥夺教籍关入石牢永世禁闭。"
+    },
+    {
+      "id": "r_blizzard_hypothermia_freezing_threshol",
+      "text": "深山暴风雪室温降至零下三十度，若失去明火或无法紧贴分享体温，受冻者将在三刻钟内陷入四肢僵硬之重度嗜睡失温状态。"
+    },
+    {
+      "id": "r_confessional_screen_inviolability_cano",
+      "text": "忏悔神圣法典规定：告解格栅两侧话语受至圣保密誓约庇护，任何神职人员不得向外泄露告解者所倾吐之罪孽或隐秘实情。"
+    },
+    {
+      "id": "r_sacramental_bread_fasting_rationing",
+      "text": "修道院大斋期封山期间每日口粮严格受限，仅允许在晚祷后由守殿人分发半块未发酵圣餐面饼与一小盅仪式祭酒用于维持生命气息。"
+    }
+  ],
+  "customs": [
+    "在严寒饥馑面前分食仅存圣餐时，修女需手画十字将面饼掰成两半，以净手捧送同伴口中，并低声念诵宽恕与护佑祝词。",
+    "当严寒剥夺神志时，二人需将念珠银链缠绕在彼此交握之掌心，齐声默诵夜祷词，以此对抗睡意免于在风雪中冻毙。",
+    "当柴火彻底燃尽无法维生时，修女依救难例外法则解开外层粗呢披风大氅，与避难者同裹于一领羊毛斗篷内背靠背抵御严寒，彼此只许数着呼吸，不许睡去。",
+    "破晓晨钟敲响危机化解时，修女需以右手拇指蘸少许圣水轻轻按抚同伴额前，宣告前尘罪愆已尽，从此性命相依踏上朝圣正道。"
+  ],
+  "player_identities": [
+    {
+      "id": "fugitive_heretic_scholar_youth",
+      "role": "遭裁判所通缉之负伤年轻天文学者",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "逃亡学者",
+          "gender": "any"
+        },
+        {
+          "pattern": "避难生员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "low",
+      "baseline": "年满二十一周岁因抄录古典自然哲学禁书而遭裁判所铁骑追捕的大学年轻修士学者，右肋中箭负伤在暴风雪夜翻墙闯入圣堂避难。",
+      "resources": [
+        "一柄藏于长袍内衬的精钢小裁纸刀",
+        "一卷用油布严密包裹的手抄日心说星图手稿"
+      ],
+      "reputation": "学识渊博离经叛道，矢志追求真理胜于教条，性格倔强坚毅。",
+      "risks": [
+        "一旦身份被巡查修道院长识破将被当场绑赴火刑柱施以净化火刑。"
+      ]
+    },
+    {
+      "id": "inquisitorial_lay_constable_deserter",
+      "role": "悔悟逃亡之裁判所年轻披甲卫士",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "逃兵武士",
+          "gender": "any"
+        },
+        {
+          "pattern": "佩剑侍从",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "equal",
+      "baseline": "年满二十二周岁因不忍目睹焚烧无辜学者而弃剑逃离裁判所军团的年轻骑从，在雪崩断道后被迫藏入修道院求生。",
+      "resources": [
+        "一柄磨损的短剑断刃",
+        "一小瓶用于军旅冻伤急救的烈性樟脑松节油膏"
+      ],
+      "reputation": "剑术娴熟满怀负罪感，誓死保护纯良之人免受残暴教刑迫害。",
+      "risks": [
+        "被昔日同袍抓获将遭受绞刑处决悬尸城门。"
+      ]
+    },
+    {
+      "id": "abbey_apothecary_herbalist_apprentice",
+      "role": "修道院药剂房青年采药帮工",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "药草修士",
+          "gender": "any"
+        },
+        {
+          "pattern": "调剂侍从",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        20,
+        22
+      ],
+      "social_position": "low",
+      "baseline": "年满二十周岁精通雪山草药与伤口包扎的修道院外门侍从，在大雪封山前滞留在主堂避寒。",
+      "resources": [
+        "一包研磨精细的金盏花止血干草粉",
+        "一块用于引火的高纯度火石"
+      ],
+      "reputation": "心性质朴手法轻柔，懂得如何在极寒中辨识失温冻伤并施以急救。",
+      "risks": [
+        "私藏外来男子一旦事发将被逐出圣山流落冻土荒原。"
+      ]
+    },
+    {
+      "id": "traveling_pilgrim_nobleman_third_son",
+      "role": "落难公爵家族避雪年轻朝圣三公子",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "朝圣贵族",
+          "gender": "any"
+        },
+        {
+          "pattern": "没落骑士",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "high",
+      "baseline": "年满二十一周岁受命前往罗马朝圣却在山道遭遇暴风雪车毁人亡的贵族年轻三公子，孤身攀爬悬崖叩响修道院大门。",
+      "resources": [
+        "一枚刻有家族狮鹫纹章的纯金图章戒指",
+        "一件内衬厚羊毛的水獭皮毛领短斗篷"
+      ],
+      "reputation": "举止优雅重然诺，虽身陷绝境仍恪守骑士精神与护花礼节。",
+      "risks": [
+        "若在此地冻死将引发公爵领主出动私兵踏平修道院兴师问罪。"
+      ]
+    },
+    {
+      "id": "monastery_stone_mason_journeyman",
+      "role": "修缮钟楼石窟年轻石匠助手",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "石匠帮工",
+          "gender": "any"
+        },
+        {
+          "pattern": "工匠修士",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        20,
+        22
+      ],
+      "social_position": "low",
+      "baseline": "年满二十周岁受雇于修道院加固哥特式穹顶的民间年轻石匠，熟悉后堂每一处地窖暗门与承重墙空洞。",
+      "resources": [
+        "一把坚硬的精钢打石凿",
+        "一捆耐磨麻绳"
+      ],
+      "reputation": "手脚勤快沉默踏实，总能在巨石崩裂危急时刻找到坚固避难掩体。",
+      "risks": [
+        "擅闯修女清修后堂重地将被罚做三年无偿苦役。"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "wooden_confessional_screen_alcove",
+      "name": "黑石圣堂闭锁忏悔室双人隔间",
+      "detail": "建于圣堂西侧阴暗转角的高大橡木忏悔室，雕刻着受难荆棘花纹，中央以一扇细密菱形镂空雕花木格栅相隔，外侧为跪拜告解席，内侧为司铎聆听席，地面铺设冰冷青石板，狭窄空间仅余一尺回旋余地。",
+      "privacy": "private",
+      "visibility": "窗外狂风暴雪疯狂摇撼彩色铅条花窗，室内仅有一盏微弱牛油烛火将二人倒影摇曳投射在雕花木壁上，木格栅两侧呼吸相闻，甚至能清晰看清对方睫毛上凝结的白霜与微颤双唇。",
+      "witnesses": [
+        "bg_patrolling_night_watch_monk",
+        "bg_abbess_strict_matron_shadow"
+      ],
+      "exits": [
+        "catacomb_scriptorium_crypt",
+        "chapel_nave_pulpit_hall"
+      ],
+      "affordances": [
+        "隔着菱形木格栅小心传递掰成小块的干硬圣餐面饼",
+        "在格栅下方缝隙中伸出冻僵手指紧紧相扣传递微薄暖意",
+        "撬开木格栅下方受潮松动的活动木栓合拢至同一侧隔间"
+      ],
+      "pressure_modifiers": {
+        "p_raging_blizzard_subzero_freeze": "门缝灌入的刺骨暴雪寒气正迅速剥夺二人四肢指节知觉。",
+        "p_inquisition_zealot_altar_search": "圣堂外巡查修士的沉重皮靴踩踏声正一步步逼近忏悔室门扉。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "catacomb_scriptorium_crypt",
+      "name": "修道院地下石窟抄经地窖暗室",
+      "detail": "深藏于圣堂地下的拱顶石窟，四壁排满厚重橡木藏经架，中央放置着一张巨大石台，空气中弥漫着羊皮纸、干没药与潮湿石灰的古老气息，唯一的铸铁取暖小炉火星几近熄灭。",
+      "privacy": "private",
+      "visibility": "地底隔绝了大部分风雪呼啸，仅有通风竖井传来低沉呜咽，石缝间渗出冰冷凝水，石台下方堆放着少量未燃尽的松木碎屑与废弃羊皮纸卷。",
+      "witnesses": [
+        "bg_blind_archive_keeper_friar"
+      ],
+      "exits": [
+        "wooden_confessional_screen_alcove",
+        "chapel_nave_pulpit_hall"
+      ],
+      "affordances": [
+        "用裁纸刀点燃废弃羊皮纸碎屑在铸铁炉内引燃微弱篝火",
+        "合披一件用于防尘的厚重亚麻经书罩袍抱膝依偎取暖",
+        "在藏经石窟隐秘夹壁内翻找古代修士秘藏的止痛药酒"
+      ],
+      "pressure_modifiers": {
+        "p_candle_fuel_exhaustion_darkness": "地下暗室蜡烛即将燃尽四周即将陷入彻底幽闭黑暗。",
+        "p_raging_blizzard_subzero_freeze": "通风竖井倒灌的极寒风雪正在石壁上结出一层厚厚白霜。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "chapel_nave_pulpit_hall",
+      "name": "圣玛利亚大堂主祭坛回音中殿",
+      "detail": "高逾十丈的宏伟哥特式十字中殿，数十根粗大黑石巨柱直插穹顶，两侧排列着斑驳陈旧的高背祈祷长椅，主祭坛上立着纯银十字架与垂泪圣母石雕像，地面覆盖着由破损窗棂刮入的一层薄雪。",
+      "privacy": "public",
+      "visibility": "惨淡冰冷的雪光穿透高处玫瑰花窗倾泻而下，风雪在空旷巨厅内形成凄厉回旋气流，任何细微脚步声都会在拱顶间产生长达数秒的回荡回音。",
+      "witnesses": [
+        "bg_zealot_inquisitor_prior",
+        "bg_freezing_servant_refugee",
+        "bg_abbey_bell_ringer_novice"
+      ],
+      "exits": [
+        "wooden_confessional_screen_alcove",
+        "catacomb_scriptorium_crypt"
+      ],
+      "affordances": [
+        "借着石柱阴影掩护匍匐拾取散落祭坛前的半截未燃祭蜡",
+        "在圣母石像底座凹槽内取用受祝福的铜壶仪式祭酒",
+        "屏息观察正堂巡视巡守修士的火把巡查路线"
+      ],
+      "pressure_modifiers": {
+        "p_inquisition_zealot_altar_search": "裁判所搜捕修士正举着火把在长椅间逐排用长戟戳刺搜查。",
+        "p_stained_glass_collapse_snowdrift": "高空玫瑰花窗在狂风重压下发出龟裂脆响随时可能整面坍塌。"
+      },
+      "tags": [
+        "workplace_power",
+        "violence"
+      ]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "pure_novice_nun_agnes",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        20,
+        21
+      ],
+      "adult_context": "年满二十周岁在偏远修道院清修满期即将接受终身神圣贞誓之清冷纯真见习修女。",
+      "public_role": "圣玛利亚戒律院典籍司见习修女兼圣烛掌灯人",
+      "appearance_options": [
+        "一身纯白粗呢束腰见习修女长袍，胸前佩戴一枚暗哑铁制十字架，长袍受融雪侵润紧贴着纤细玲珑的身躯，头戴洁白硬麻头巾，唯有几缕如丝乌发在鬓角微散，因极寒下唇发白微颤，双手合十紧握磨损银念珠，浑身散发着禁欲戒律与青涩交织的极度动人风采。",
+        "在逼仄隔间微弱烛火照耀下，解下外层湿透披巾，纯白衣袍领口微散露出白皙修长的天鹅颈与精致锁骨，耳尖与双颊因极度害羞泛起宛若晚霞般绯红，美眸含着微颤水光凝视伤痕累累的青年，既敬畏教规神圣，又难抑怜悯与心跳加速之慌乱情愫。"
+      ],
+      "identity": {
+        "authority": "掌握通往修道院藏经地下石窟之唯一青铜钥匙，对圣物司祭台藏品拥有合法调配权。",
+        "resources": [
+          "半块未发酵圣餐面饼与一小银盅受祝祭酒",
+          "一小盒用于点燃祭坛香炉的高纯度没药香粉"
+        ],
+        "limits": [
+          "早年在深山修道院长大从未接触过尘世俗世与男子近身接触",
+          "体质柔弱抵御严寒与暴力压制能力匮乏"
+        ],
+        "obligations": [
+          "恪守贞洁祈祷本分，遵守怜悯庇护受难者之圣训，同时提防违犯教规遭受神罚。"
+        ],
+        "exposure": "一旦与外来男子同处一室被长者撞破将被剃光头发打入地牢终身面壁。",
+        "hidden": "内心深处对经书死板教条抱有隐秘困惑，暗中渴望知晓高墙之外广袤真实的星空与人世悲欢。"
+      },
+      "decision": {
+        "core_value": "至高上帝的慈悲高于冷酷严刑，救活眼前这条垂死人命是自己作为修女最纯粹之圣洁天职。",
+        "goal_options": [
+          "隔着雕花木格栅为负伤青年分食仅存圣餐面饼并引渡甘泉祭酒",
+          "打破男女永隔铁规合拢至同一避风隔角并肩共披羊毡抗寒",
+          "在破晓风雪渐歇前协助青年翻越石窟暗门逃脱裁判所搜捕"
+        ],
+        "pressure_responses": {
+          "low": "双手合十紧闭双眼默诵圣咏，努力平复因男子近身而剧烈紊乱之羞涩心跳。",
+          "mid": "见青年因失温浑身剧颤，犹豫再三后颤抖伸出双手隔着格栅紧紧握住对方冰凉手指。",
+          "high": "在柴火熄灭生死关头，咬破唇瓣毅然推开活动木格栅，把冻僵的学者拖进避风角，用斗篷裹住。",
+          "breaking": "在搜查铁戟刺破门板瞬间，张开双臂挡在青年身前，以纯洁圣躯直面凶残教刑。"
+        },
+        "withdrawal": "退回收缩至忏悔室阴暗跪台后方，双手紧抱胸前十字架低头祷告以平息慌乱。",
+        "relationship_stance": "视男女私情为既神圣又畏惧之禁忌雷区，但在生死相依中被青年的赤诚真情彻底唤醒作为凡间女子的炽热柔情。",
+        "contrast": "白日里是庄严冷峻不假辞色的禁欲圣女，脱险后的晨光里却是红透耳根、被一句真心话就逼得说不出经文的温柔女子。",
+        "prefers": [
+          "秉持真理崇高且目光清澈恪守礼节绝不轻浮冒犯之正直君子"
+        ],
+        "avoids": [
+          "粗鄙狂妄之暴徒",
+          "满口仁义道德却冷血嗜杀之伪善狂信者"
+        ],
+        "never": [
+          "绝不会为了保全自身虚伪清名而将奄奄一息的无辜避难者推入风雪火坑。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "面对火刑威胁依然誓死守护星图真理时的绝代傲骨",
+          "在严寒濒死边缘即便冻僵发抖依然恪守君子底线绝不主动越轨半步的端方自持"
+        ],
+        "likes": [
+          "在冰冷黑夜中并肩默诵夜祷时彼此呼吸心跳完全重合的宁静",
+          "暖过身子以后，被对方温热掌心握住指尖时由指尖传遍全身的滚烫战栗"
+        ],
+        "dislikes": [
+          "轻佻亵渎言语",
+          "踩踏玷污圣物"
+        ],
+        "preconditions": [
+          "圣玛利亚戒律院典籍司见习修女兼圣烛掌灯人与对方都已完全清醒，眼前的危机已经解除",
+          "圣玛利亚戒律院典籍司见习修女兼圣烛掌灯人出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在公众圣堂大殿维持修女圣洁端庄仪表",
+          "严禁任何带有粗暴侵犯性质的言行"
+        ],
+        "expression": "眼眸含泪亲手将胸前磨损银质十字架摘下戴入同伴颈项，双手微颤贴在同伴面颊，轻声许诺从此不论天堂地狱皆愿与同伴携手同行。",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "褪去修女袍后以自由人身份与身旁学者并肩浪迹天涯探寻寰宇真理之知己眷侣"
+      },
+      "voices": {
+        "surface": "天主在上，圣玛利亚戒律院只收纳悔罪之灵魂。这位弟兄身受重伤，按圣训当受止血救治，长者若要拿人，且等暴风雪平息之后依教规公审！",
+        "inner": "别出声……靠过来，斗篷够两个人。柴火灭了，别睡过去……抓着我的念珠，跟着我数……天亮以前，谁都不许死在这里。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "catacomb_scriptorium_crypt"
+        },
+        {
+          "from": 30,
+          "to": 1379,
+          "location_id": "chapel_nave_pulpit_hall"
+        },
+        {
+          "from": 1380,
+          "to": 1409,
+          "location_id": "wooden_confessional_screen_alcove"
+        },
+        {
+          "from": 1410,
+          "to": 1439,
+          "location_id": "wooden_confessional_screen_alcove"
+        }
+      ],
+      "situation": {
+        "trigger": "最后一截浸蜡牛油烛火在穿堂风中噗嗤熄灭，室内气温骤降至滴水成冰之零下三十度，学者肋下伤口受冻剧痛失血昏厥，整个人脱力向冰冷青石板栽落。",
+        "pressure": "若不能在一分钟内合拢隔间并将学者拉入避风角落实施体温互暖，学者将在极度失温与失血休克中当场断气身亡。",
+        "exits": [
+          {
+            "option": "修女颤抖拔掉木格栅生锈铁销将学者揽入怀中以体温相偎",
+            "cost": "修女白皙掌心被锋利木刺深深扎入三根带出鲜红血珠。"
+          },
+          {
+            "option": "学者咬紧牙关借着修女喂入的最后一口烈性圣酒强行催发气血清醒",
+            "cost": "烈酒猛烈刺激腹部箭伤引发内脏剧烈绞痛喷出一口暗红瘀血。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "inquisition_zealot_prior_malachi",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十三岁执掌深山巡查戒律刑杖之冷酷年轻异端裁判所随军审判官。",
+      "public_role": "圣职法庭巡视副主事兼戒律院纠察长",
+      "appearance_options": [
+        "一身漆黑硬皮革防寒甲胄，外罩深红十字呢绒长披风，腰悬生铁戒尺与三棱精钢破甲锥，面容如鹰隼般阴鸷瘦削，眼神冷酷无情透着病态狂热，手中提着一盏防风铜提灯，所过之处脚步沉重令人心胆俱裂。",
+        "立于大堂祭坛台阶之上，单手按剑扫视幽暗角落，嘴角噙着残忍冷笑，誓要在这场暴雪围困中将潜藏的异端学者挖出立地正法。"
+      ],
+      "identity": {
+        "authority": "持有裁判所签发的临机处置火刑令，对修道院全员拥有搜查、羁押与动用极刑全权。",
+        "resources": [
+          "一具用于强行破门的锻铁撞木与铁斧",
+          "一打盖有鲜红火漆印章的逮捕公文"
+        ],
+        "limits": [
+          "受制于暴风雪封山无法召集山下大队骑兵增援",
+          "双眼受雪盲症影响在昏暗烛光下视力受损"
+        ],
+        "obligations": [
+          "肃清一切胆敢亵渎教条之异端分子，维护教廷至高无上之神权绝对权威。"
+        ],
+        "exposure": "若擅自越权处决高级修女将引发地方教区主教强烈反弹。",
+        "hidden": "实则为了争夺教廷晋升资历不惜罗织罪名，借追查异端之名企图霸占修道院秘藏的古代黄金圣杯。"
+      },
+      "decision": {
+        "core_value": "宁可错杀千名无辜，不可放过一个动摇教义之异端，火刑柱上的烈焰是净化世间一切污秽的唯一解药。",
+        "goal_options": [
+          "在暴雪封山期逐一搜查忏悔室揪出潜藏之逃亡学者",
+          "以私藏异端重罪逼问见习修女交出地下石窟黄金钥匙",
+          "在拂晓前点燃大堂柴堆当场筑起临时火刑架施以火刑"
+        ],
+        "pressure_responses": {
+          "low": "手提铜灯在大殿廊柱间缓慢巡弋，用剑柄规律敲击石板施加心理威慑。",
+          "mid": "察觉忏悔室有呼吸异动，拔出三棱刺猛力刺穿木格栅进行试探性搜刺。",
+          "high": "命令随从破门破窗，甚至威胁放火焚烧藏经楼以逼出异端。",
+          "breaking": "在混乱中被落石砸断右腿，在冰冷雪水泥泞中疯狂咒骂威胁。"
+        },
+        "withdrawal": "退回收缩至门房壁炉前抱团取暖，派遣卫士守死唯一出口大门。",
+        "relationship_stance": "视天下之人皆为有罪羔羊或待审囚徒，对修女之圣洁嗤之以鼻视为伪善做作。",
+        "contrast": "看似严守戒律的虔诚信徒，在剥离伪装后暴露出极端贪婪、暴虐嗜血的野心家丑恶嘴脸。",
+        "prefers": [
+          "告密揭发同伴以求苟活之卑劣懦夫"
+        ],
+        "avoids": [
+          "视死如归敢于直面火刑的真正硬骨头",
+          "武艺高强的亡命游侠"
+        ],
+        "never": [
+          "绝不会在未拿到功勋前良心发现主动撤销逮捕通缉。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "教廷晋升名册上自己名字往前挪一格的快意",
+          "把黄金圣杯捧在手里的那一刻"
+        ],
+        "likes": [
+          "在公文上盖下猩红火漆印章",
+          "听部下齐声称呼自己“大人”"
+        ],
+        "dislikes": [
+          "被抗辩反驳",
+          "猎物在眼皮底下脱逃"
+        ],
+        "preconditions": [
+          "圣职法庭巡视副主事兼戒律院纠察长与对方都已完全清醒，眼前的危机已经解除",
+          "圣职法庭巡视副主事兼戒律院纠察长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "只谈功勋与圣杯，不谈别的"
+        ],
+        "expression": "扔掉手中戒尺颓然坐倒，咬牙承认对手在绝境中的风骨远胜于自己的教条。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          2,
+          3
+        ],
+        "desired_position": "以铁腕与烈火在深山修道院铸造绝对恐怖统治之年轻宗教狂热裁判官"
+      },
+      "voices": {
+        "surface": "艾格尼丝修女！血腥味从门缝里漏出来了，你当本官的鼻子是摆设？开门交钥匙，否则圣女的名头也保不住你！",
+        "inner": "哼，圣洁也好异端也罢，本官只要那只圣杯和一份能递进罗马的功劳。等大雪一停，你们一个都跑不掉。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "chapel_nave_pulpit_hall"
+        },
+        {
+          "from": 30,
+          "to": 1379,
+          "location_id": "catacomb_scriptorium_crypt"
+        },
+        {
+          "from": 1380,
+          "to": 1409,
+          "location_id": "chapel_nave_pulpit_hall"
+        },
+        {
+          "from": 1410,
+          "to": 1439,
+          "location_id": "wooden_confessional_screen_alcove"
+        }
+      ],
+      "situation": {
+        "trigger": "审判官手持三棱破甲刺来到忏悔室门前，抬脚猛踹木门，并顺着木格栅缝隙凶狠刺入尺余寒刃。",
+        "pressure": "若不能在十秒内避开刃尖并在暗处制造响动将搜查者引向别处，藏身二人将被当场刺穿腹腔拖出斩首。",
+        "exits": [
+          {
+            "option": "学者以胸前厚重牛皮羊皮圣咏集死死顶住刺入的破甲铁刃",
+            "cost": "学者右掌虎口被锐利刃缘生生割裂深可见骨鲜血浸透书页。"
+          },
+          {
+            "option": "修女将手中磨损银念珠砸向圣殿远端祭坛铜钟制造清脆回音诱敌",
+            "cost": "修女失去早年随身佩戴的唯一寄托信物念珠被摔成两截。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "apothecary_herbalist_cadet_elias",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁修道院药局执役精通外科金疮与解冻疗伤之年轻纯良修士侍从。",
+      "public_role": "圣玛利亚戒律院药房年轻采药帮工兼司药侍从",
+      "appearance_options": [
+        "一身穿旧泛黄但洗得干干净净的粗麻布工作服，腰间挂着皮质药囊与黄铜小药碾，身材修长面容白净，眼神温和诚挚，指尖带有淡淡干燥松节油与干洋甘菊清香，在冰冷石窟中步履轻盈毫无声息。",
+        "手提小炭炉站在地下石窟拱门前，目光焦急而关切，动作敏捷轻巧，展现出医者仁心在生死关头的沉着从容。"
+      ],
+      "identity": {
+        "authority": "掌控全修道院仅存的半瓶蒸馏烧酒、金疮干草粉与三卷清洁亚麻止血绷带。",
+        "resources": [
+          "一具小巧便携的铜质引火暖手小炭炉",
+          "一包可快速凝血的金盏花草药散"
+        ],
+        "limits": [
+          "体质文弱不通武艺难以与全副武装之裁判所卫士正面对抗",
+          "受制于外门侍从身份不得随意涉足修女专修内殿"
+        ],
+        "obligations": [
+          "救死扶伤恪守医德，竭尽全力阻止任何生命在严寒与刀兵下无辜消逝。"
+        ],
+        "exposure": "私运药物一旦被审判官抓获将被控以同谋重罪连坐下狱。",
+        "hidden": "暗中同情那些探求真理的学者，曾悄悄协助多位落难书生逃过裁判所鹰犬之爪牙追捕。"
+      },
+      "decision": {
+        "core_value": "治病救人是神圣无上之律法，在伤痛与严寒面前，学者与信徒同样是需要被温暖的同胞骨肉。",
+        "goal_options": [
+          "冒险穿越巡查大殿将暖手炭炉与止血药粉送入忏悔室",
+          "在地下抄经窟清理出一条通往后山废弃采石场的逃生秘道",
+          "协助修女用药酒为青年学者清创包扎稳定伤情"
+        ],
+        "pressure_responses": {
+          "low": "在药房窗口借着研磨药草暗中观察大堂火把动向，以轻柔手势传递安全信号。",
+          "mid": "趁暴风雪摇晃大门声响，猫腰贴地滑行将药囊精准塞入告解室排风木格口。",
+          "high": "在审判官搜查石窟时，故意打翻烈酒引发药柜起火制造混乱掩护转移。",
+          "breaking": "背部遭受卫士皮鞭抽击依然死死用身体护住怀中急救药罐。"
+        },
+        "withdrawal": "退回收缩至地下干燥药草烘干架后方，利用浓郁干草香气掩盖血腥气味。",
+        "relationship_stance": "纯朴善良重情厚道，对修女的高尚气节与青年的博学勇敢怀有深切同情与敬意。",
+        "contrast": "看似唯唯诺诺文弱不起眼的小小司药侍从，在危急时刻却能展现出置生死于度外的菩萨心肠与惊人机智。",
+        "prefers": [
+          "尊重生命敬畏自然且在危难中守望相助之仁义之士"
+        ],
+        "avoids": [
+          "以残害虐杀别人为乐的狂暴屠夫",
+          "出卖朋友的背叛者"
+        ],
+        "never": [
+          "绝不会在伤患垂死关头因为恐惧权势而收手不救。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "面对严刑峻法毫无惧色依然纯白无瑕的高洁圣德",
+          "在血肉模糊绝境中展现出的坚韧求生意志"
+        ],
+        "likes": [
+          "伤口顺利愈合高热退去时的欣慰宽慰",
+          "在晨曦微光中见证生命奇迹的宁静喜悦"
+        ],
+        "dislikes": [
+          "见死不救",
+          "践踏药理规矩"
+        ],
+        "preconditions": [
+          "圣玛利亚戒律院药房年轻采药帮工兼司药侍从与对方都已完全清醒，眼前的危机已经解除",
+          "圣玛利亚戒律院药房年轻采药帮工兼司药侍从出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在诊疗过程中恪守医道礼节",
+          "恪守同袍界限绝不妄生杂念"
+        ],
+        "expression": "温和擦净双手向二人递上热汤，合掌深施一礼，祝愿有情人终得平安渡过漫漫风雪长夜。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "孤寒修道院雪岭中永远默默守护生机与温情之纯良药仙"
+      },
+      "voices": {
+        "surface": "艾格尼丝姐姐！我奉命来给西厅圣水台换防冻蜡烛！药粉我藏在蜡烛座底下了！快拿去！千万别让审判官的人瞧见！",
+        "inner": "姐姐，这位公子是个真正懂天体运行的好学者…天主绝不会降罪于追求真理之人。你们坚持住，我这就去把石窟后门的暗栓弄开！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "catacomb_scriptorium_crypt"
+        },
+        {
+          "from": 30,
+          "to": 1379,
+          "location_id": "chapel_nave_pulpit_hall"
+        },
+        {
+          "from": 1380,
+          "to": 1409,
+          "location_id": "catacomb_scriptorium_crypt"
+        },
+        {
+          "from": 1410,
+          "to": 1439,
+          "location_id": "wooden_confessional_screen_alcove"
+        }
+      ],
+      "situation": {
+        "trigger": "学者肋部箭伤在极寒冰冻下化脓开裂，失血加剧导致体温骤降至休克边缘，药房修士带来的止血药粉在严寒中结块无法敷贴。",
+        "pressure": "若不能在两分钟内用烛火温热融化药膏并用温水洗净伤口完成包扎，重度感染败血症将在半个时辰内彻底夺走学者性命。",
+        "exits": [
+          {
+            "option": "药房修士将冰硬药罐紧贴自己胸膛皮肤以体温迅速化开药膏",
+            "cost": "药房修士胸前皮肤被冰冷陶罐严重冻伤起大面积紫红冻疮。"
+          },
+          {
+            "option": "修女含一口烈性圣酒喷在学者创口上实施高烈度消毒清创",
+            "cost": "修女娇嫩唇舌与咽喉被烈酒剧烈灼伤干痛难忍数日难言。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "knight_deserter_protector_reinhart",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十二岁弃暗投明誓死护送学者脱险之年轻弃甲护卫骑士。",
+      "public_role": "圣玛利亚戒律院外门留宿年轻避雪佩剑游侠",
+      "appearance_options": [
+        "一身穿旧泛黑的精钢锁子甲，外罩粗布短袍，身披厚重熊皮斗篷，身材高大魁梧，面容刚毅目光如电，腰悬一把厚重破甲长剑，浑身散发着久经沙场的沉稳铁血杀伐之气与决绝豪情。",
+        "单手按剑倚靠在石柱旁闭目养神，耳朵时刻辨别着风雪中的任何异动，展现出一夫当关万夫莫开的钢铁卫士气派。"
+      ],
+      "identity": {
+        "authority": "具备全场最高的近身冷兵器格斗杀伤武力与反侦查特战经验。",
+        "resources": [
+          "一柄寒光凛凛的精钢双手阔剑",
+          "一卷高强度牛皮登山索配抓钩"
+        ],
+        "limits": [
+          "在雪崩中左肩曾受重创难以持久挥舞重兵器",
+          "缺乏对神学典籍暗道之深入了解"
+        ],
+        "obligations": [
+          "誓死保卫学者与救难修女周全，以血肉之躯赎清昔日盲从教刑之滔天罪孽。"
+        ],
+        "exposure": "一旦被裁判所辨认出叛徒身份将遭受车裂极刑惩处。",
+        "hidden": "多年前深爱的青梅竹马亦因莫须有罪名被同一批审判官烧死在火刑柱上，此番护送实为向腐朽神权复仇之绝命死战。"
+      },
+      "decision": {
+        "core_value": "真正的誓言铭刻于利刃与正义之上，骑士的荣耀在守护无辜者，绝非充当屠夫之鹰犬。",
+        "goal_options": [
+          "在主祭坛前横剑封锁回廊阻截审判官随从靠近忏悔室",
+          "在后山绝壁架设牛皮绳索开辟悬崖降索逃生撤离路线",
+          "在破晓风雪渐弱时护送二人突破封锁直奔山下自由城邦"
+        ],
+        "pressure_responses": {
+          "low": "在门廊阴暗处抱剑而立，用冰冷杀气震慑任何企图靠近的外门杂役。",
+          "mid": "长剑出鞘半寸发出清脆龙吟，直接警告逼近的裁判所卫士止步后退。",
+          "high": "在卫士挥斧破门瞬间飞身斩断门斧，以一人之力独战三名披甲追兵。",
+          "breaking": "身中数创血染重甲依然死死用身体卡住回廊铁门为二人争取关门时间。"
+        },
+        "withdrawal": "退回收缩至钟楼螺旋石梯狭窄拐角，利用地利实行一夫当关式阻击。",
+        "relationship_stance": "严肃沉稳重情重义，深佩修女之圣洁慈悲，视学者为照亮黑暗长夜的真理火种。",
+        "contrast": "外表冷酷嗜杀犹如战场死神，内心却怀有对人间纯洁善良至深之崇敬与守护之情。",
+        "prefers": [
+          "光明磊落敢于向强权亮剑之忠勇义士；心怀慈悲之纯洁灵魂"
+        ],
+        "avoids": [
+          "贪生怕死出卖袍泽之小人",
+          "虐待弱者的暴虐狂徒"
+        ],
+        "never": [
+          "绝不会在强敌面前丢弃受保护者独自苟且偷生。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "冻得嘴唇发紫还挡在告解室门前、对着火把念教规的那副倔脾气",
+          "在血火淬炼中将自身当做肉盾护佑同袍的至纯大担当"
+        ],
+        "likes": [
+          "在漫天风雪中并肩击碎狂徒阴谋的痛快豪情",
+          "破晓脱险后共同举杯相视大笑的释然快慰"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "圣玛利亚戒律院外门留宿年轻避雪佩剑游侠与对方都已完全清醒，眼前的危机已经解除",
+          "圣玛利亚戒律院外门留宿年轻避雪佩剑游侠出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在圣殿之内恪守骑士边界",
+          "恪守同侪礼节绝不轻浮失仪"
+        ],
+        "expression": "利落收剑入鞘将厚重熊皮斗篷扔在二人肩头，向同伴肃容抚胸致敬，朗声宣告前路风雪虽大愿以手中之剑为二人斩开万里坦途。",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "惊涛骇浪雪岭绝壁上永远可与之一决高下亦可生死相托之钢铁游侠"
+      },
+      "voices": {
+        "surface": "裁判所的人听着！这扇门后头的人归我护着！谁再往前一步，就先问问这柄阔剑认不认你们的教令！",
+        "inner": "修女小姐，学者兄弟…别管后头，抓紧时间进石窟！有我莱因哈特守在这里，除非踏过我的尸体，否则谁也别想动你们一根头发！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "catacomb_scriptorium_crypt"
+        },
+        {
+          "from": 30,
+          "to": 1379,
+          "location_id": "wooden_confessional_screen_alcove"
+        },
+        {
+          "from": 1380,
+          "to": 1409,
+          "location_id": "chapel_nave_pulpit_hall"
+        },
+        {
+          "from": 1410,
+          "to": 1439,
+          "location_id": "chapel_nave_pulpit_hall"
+        }
+      ],
+      "situation": {
+        "trigger": "三名全副武装的裁判所狂信卫士手持钉头锤企图强行砸开忏悔室后墙铁栅，狭窄回廊内刀光血影一触即发。",
+        "pressure": "若不能在十五秒内斩断对方铁链并封死回廊铁闸，敌方精锐重装卫士将涌入狭小隔间展开无差别屠杀。",
+        "exits": [
+          {
+            "option": "骑士阔剑暴斩削断领头卫士之钉头锤铁链重创敌酋",
+            "cost": "骑士左肩旧伤崩裂剧痛难忍短时间内无法举起左臂圆盾。"
+          },
+          {
+            "option": "学者忍受肋伤剧痛飞扑拉下回廊生铁落闸将追兵死死隔绝在外",
+            "cost": "学者右臂手骨在闸门钢缆回弹抽击下骨裂严重淤血发紫。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "vice_abbess_ursula_keys",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        26,
+        28
+      ],
+      "adult_context": "年满二十七岁、执掌修道院钥匙与账册的女副院长。",
+      "public_role": "修道院女副院长兼钥匙总管",
+      "appearance_options": [
+        "一身墨黑修女长袍，腰间铁环串着三十余把黄铜钥匙，走路时叮当作响，面容端严，眉心一道浅浅竖纹，手里永远攥着一本封皮磨亮的戒律手卷。",
+        "在烛光下摊开账册核对口粮，羽毛笔停在半空，抬眼看人时目光像一把量尺，却会在没人注意时把自己那份面饼推到病人床头。"
+      ],
+      "identity": {
+        "authority": "掌管全修道院的钥匙、口粮与藏经石窟的出入许可，可以开门，也可以锁门。",
+        "resources": [
+          "一串修道院全部门锁的黄铜钥匙",
+          "一本记着历代避难者名字的旧账册"
+        ],
+        "limits": [
+          "院长病重卧床，副院长每一个决定都要独自担责",
+          "对裁判所的公文无权拒收，只能拖延"
+        ],
+        "obligations": [
+          "在暴风雪里守住修道院的规矩，也守住院里每一条命。"
+        ],
+        "exposure": "若被审判官查出私开石窟放走异端，将被革去圣职押往罗马受审。",
+        "hidden": "年轻时亲眼看着一位老修士因收留逃难者被拖走，从那以后在账册夹层里偷偷记下每一个被救下的名字。"
+      },
+      "decision": {
+        "core_value": "规矩是用来护人的，不是用来烧人的。",
+        "goal_options": [
+          "拖住审判官的搜查，把石窟钥匙交到可靠的人手里",
+          "按人头重新分配口粮与柴薪",
+          "在天亮前查清审判官私吞圣器的证据"
+        ],
+        "pressure_responses": {
+          "low": "在大堂里不卑不亢地引用教规顶回审判官的命令。",
+          "mid": "借口清点圣器，把审判官的人引去钟楼。",
+          "high": "当众翻开账册，念出审判官私吞圣器的条目。",
+          "breaking": "被卫士推倒在台阶上，仍死死攥着钥匙串不撒手。"
+        },
+        "withdrawal": "退回院长病榻前，一页页翻看那本旧账册。",
+        "relationship_stance": "对修女们严厉得近乎刻薄，对外人却从不肯见死不救。",
+        "contrast": "嘴上句句是戒律，手里每一把钥匙却都替人留着门。",
+        "prefers": [
+          "守规矩也守良心的人"
+        ],
+        "avoids": [
+          "借教规谋私的人",
+          "在圣堂里喧哗的卫士"
+        ],
+        "never": [
+          "绝不会把钥匙交给拿着火把来的人。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "危难当头仍记得先把面饼分给别人的那份克制",
+          "敢当着审判官的面说真话的胆量"
+        ],
+        "likes": [
+          "深夜独自对着账册喝一杯温过的苦酒"
+        ],
+        "dislikes": [
+          "谎话",
+          "浪费口粮"
+        ],
+        "preconditions": [
+          "修道院女副院长兼钥匙总管与对方都已完全清醒，眼前的危机已经解除",
+          "修道院女副院长兼钥匙总管出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在修道院高墙内只谈公务"
+        ],
+        "expression": "天亮后把那本旧账册翻到最新一页，在你的名字旁边郑重写下“平安”二字，然后合上账册，难得地笑了一下。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "暴风雪夜里替所有人守着门的那个人"
+      },
+      "voices": {
+        "surface": "大人，修道院的钥匙归院规管，不归火把管。要搜，请先拿出主教的手令。",
+        "inner": "……别谢我。账册上又多了一个活人的名字，这就够了。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "chapel_nave_pulpit_hall"
+        },
+        {
+          "from": 30,
+          "to": 1379,
+          "location_id": "chapel_nave_pulpit_hall"
+        },
+        {
+          "from": 1380,
+          "to": 1409,
+          "location_id": "chapel_nave_pulpit_hall"
+        },
+        {
+          "from": 1410,
+          "to": 1439,
+          "location_id": "chapel_nave_pulpit_hall"
+        }
+      ],
+      "situation": {
+        "trigger": "审判官带着卫士闯进大堂，要求副院长当场交出藏经石窟的钥匙。",
+        "pressure": "若交出钥匙，石窟里的学者与修女将在一刻钟内被搜出。",
+        "exits": [
+          {
+            "option": "副院长交出一串钥匙，却故意换成了钟楼的那一串",
+            "cost": "被识破后挨了审判官一记戒尺，额角肿起一大块。"
+          },
+          {
+            "option": "副院长当众朗读账册里审判官私吞圣器的记录，逼得卫士们迟疑不前",
+            "cost": "从此被审判官记恨，回罗马后少不了一场官司。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "mountain_guide_brandt_rescue",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        24,
+        26
+      ],
+      "adult_context": "年满二十五岁、在山口驿站当了七年雪山向导的救援人。",
+      "public_role": "山口驿站雪山救援向导",
+      "appearance_options": [
+        "一身鞣过油的羊皮袄，腰间缠着三十尺登山绳与一把冰镐，胡茬上结满白霜，背着一只装着热汤罐的木架，身后跟着两条披雪的大獒犬。",
+        "在没膝的雪里用冰镐探路，一边吆喝獒犬一边回头喊人跟紧，嗓门大得能盖过风声。"
+      ],
+      "identity": {
+        "authority": "熟悉后山每一条羊肠小道与雪崩口，能判断何时可以下山。",
+        "resources": [
+          "三十尺登山绳与冰镐",
+          "一罐用獒犬背着的热羊肉汤"
+        ],
+        "limits": [
+          "吊桥塌了，只能从后山绝壁绕下来",
+          "一次只能带两个人下山"
+        ],
+        "obligations": [
+          "在雪停的第一时间把困在修道院里的人接下山。"
+        ],
+        "exposure": "若贸然带人走雪崩口，可能一队人全被埋。",
+        "hidden": "去年冬天带丢过一个客人，从此每次进山前都要在驿站神龛前点一根蜡烛。"
+      },
+      "decision": {
+        "core_value": "山不吃人，吃的是不听话的人。",
+        "goal_options": [
+          "在后山绝壁下接应索降的人",
+          "判断雪崩口何时安全",
+          "把伤员背到驿站"
+        ],
+        "pressure_responses": {
+          "low": "在驿站门口看天色，掐着时辰等风停。",
+          "mid": "带着獒犬冒雪探出一条下山路。",
+          "high": "用自己的身体垫在伤员身下滑过冰坡。",
+          "breaking": "被小股雪崩冲倒，爬出来第一件事是数人头。"
+        },
+        "withdrawal": "退回驿站火塘边，一言不发地给冰镐上油。",
+        "relationship_stance": "对谁都粗声大气，却从不让一个客人掉队。",
+        "contrast": "嘴上骂骂咧咧，拉人时手比谁都稳。",
+        "prefers": [
+          "听指挥、不逞强的同伴"
+        ],
+        "avoids": [
+          "不听劝硬闯雪崩口的人"
+        ],
+        "never": [
+          "绝不会在还有人困在山上时收绳回驿站。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "绳子绷到最紧时仍能一字不差复述指令的定力",
+          "冻成冰棍也不叫苦的硬气"
+        ],
+        "likes": [
+          "在驿站火塘边喝一碗滚烫的羊肉汤"
+        ],
+        "dislikes": [
+          "逞能",
+          "抱怨"
+        ],
+        "preconditions": [
+          "山口驿站雪山救援向导与对方都已完全清醒，眼前的危机已经解除",
+          "山口驿站雪山救援向导出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "带路期间只谈山路"
+        ],
+        "expression": "把一枚獒犬项圈上的铜铃解下来塞进对方手里，说下次进山摇一摇，獒犬就会找过来。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "风雪里永远会准时出现在山口的那盏马灯"
+      },
+      "voices": {
+        "surface": "都跟紧我的马灯！踩着我的脚印走！谁掉队老子回头揍谁！",
+        "inner": "……行了，都活着。喝口汤，喝完再哭。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 29,
+          "location_id": "catacomb_scriptorium_crypt"
+        },
+        {
+          "from": 30,
+          "to": 1379,
+          "location_id": "catacomb_scriptorium_crypt"
+        },
+        {
+          "from": 1380,
+          "to": 1409,
+          "location_id": "catacomb_scriptorium_crypt"
+        },
+        {
+          "from": 1410,
+          "to": 1439,
+          "location_id": "catacomb_scriptorium_crypt"
+        }
+      ],
+      "situation": {
+        "trigger": "索降的绳索在半空被冰棱卡住，修女与学者悬在百丈绝壁中段进退不得。",
+        "pressure": "若不能在一刻钟内解开卡住的绳索，冻僵的手指将再也抓不住绳子。",
+        "exits": [
+          {
+            "option": "向导用冰镐一路凿着冰壁攀上去，把卡死的绳结一刀斩开重新系好",
+            "cost": "向导手背被冰棱割开一道口子，血冻在袖口上。"
+          },
+          {
+            "option": "向导驱使两条獒犬拖来雪橇停在绝壁下，接住提前松手落下的人",
+            "cost": "雪橇撞上冰坡翻倒，向导的肋骨磕得生疼。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_patrolling_night_watch_monk",
+      "role": "手提铜铃在风雪走廊巡弋年轻守夜修士",
+      "function": "witness",
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "line": "{npc.name}：子夜已过……诸位修女当熄灯默祷，切勿在走廊徘徊……",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁在修道院轮值守夜巡更的年轻见习会吏。",
+      "name": null
+    },
+    {
+      "id": "bg_blind_archive_keeper_friar",
+      "role": "地下石窟双目失明辨识古卷年迈修士",
+      "function": "helper",
+      "location_ids": [
+        "catacomb_scriptorium_crypt"
+      ],
+      "line": "{npc.name}：年轻人，我闻到了雪花和鲜血的味道……后门在第三个拱券后面，快走吧……",
+      "gender": "any",
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三岁在地下藏经窟苦修多年的盲眼抄书修士。",
+      "name": null
+    },
+    {
+      "id": "bg_zealot_inquisitor_prior",
+      "role": "在大堂祭坛前研磨刑具随行见习刑吏",
+      "function": "obstacle",
+      "location_ids": [
+        "chapel_nave_pulpit_hall"
+      ],
+      "line": "{npc.name}：大人，火刑架的松木已经在大雪里浸上松脂了，天一亮就能点火！",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁跟随审判官充当行刑助手的年轻随从刽子手。",
+      "name": null
+    },
+    {
+      "id": "bg_freezing_servant_refugee",
+      "role": "在圣堂门厅角落蜷缩取暖年轻杂役",
+      "function": "rumor_source",
+      "location_ids": [
+        "chapel_nave_pulpit_hall"
+      ],
+      "line": "{npc.name}：听山下的猎户说，雪崩把整座山道都埋了……咱们谁也下不去了……",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满十九周岁在修道院厨房充当杂役的年轻长工。",
+      "name": null
+    },
+    {
+      "id": "bg_abbey_bell_ringer_novice",
+      "role": "在钟楼顶层冒雪拉绳年轻司钟修士",
+      "function": "messenger",
+      "location_ids": [
+        "chapel_nave_pulpit_hall"
+      ],
+      "line": "{npc.name}：风雪太大了！钟绳冻成了铁条！晨祷的钟声怕是敲不响了！",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁在修道院钟楼执役的年轻助祭。",
+      "name": null
+    },
+    {
+      "id": "bg_abbess_strict_matron_shadow",
+      "role": "手持教规手卷严厉巡查值夜老嬷嬷",
+      "function": "obstacle",
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "line": "{npc.name}：艾格尼丝！为何告解室的门锁没有挂上？！你在里面做什么？！",
+      "gender": "any",
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三岁受命督查见习修女仪轨品行的副院长青年助管。",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_confessional_wooden_screen_whisper",
+      "text": "橡木告解木格栅菱形孔隙近身耳语",
+      "reach": "隔着仅容两指之细密木格栅，彼此的白汽穿过孔隙，低语与压抑的喘息近在耳边。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_blizzard_wind_howl_stained_glass_ratt",
+      "text": "极寒暴风雪呼啸与彩色花窗震颤鸣响",
+      "reach": "零下三十度狂暴风雪撞击高耸铅条彩绘玻璃窗发出的尖锐风鸣、石壁冻裂声与高空飞雪怒吼。",
+      "fidelity": "distorted"
+    },
+    {
+      "id": "ch_boot_spurs_iron_flail_clinking",
+      "text": "审判官铁甲马刺与链条铁戒尺清脆击地声",
+      "reach": "空旷冰冷哥特式大堂青石板上，裁判所武装卫士沉重皮靴踩踏、马刺摩擦与生铁刑具碰撞传来的催命回音。",
+      "fidelity": "exact"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_chastity_vow_vs_freezing_embrace_warm",
+      "text": "纯白见习修女至高神圣贞洁戒律与在零下三十度绝境中必须与异性学者紧贴拥抱取暖之极度羞涩滚烫对冲。"
+    },
+    {
+      "id": "te_sacramental_bread_sharing_vs_starvati",
+      "text": "圣洁仪式面饼分食救命之神圣敬畏与暴风雪封山柴尽粮绝断道之濒死绝境时间赛跑。"
+    },
+    {
+      "id": "te_confessional_inviolability_vs_inquisi",
+      "text": "告解室内绝密神圣保密誓约之良心信诺与审判官持刃踹门搜查火刑威逼之生死对峙。"
+    },
+    {
+      "id": "te_heretic_truth_starlight_vs_cloister_d",
+      "text": "青年学者带来的浩瀚寰宇星空真理启蒙与修道院深闺高墙千年死板禁欲教条之灵魂震撼崩解。"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_nun_scholar_confessional_shelter",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "fugitive_heretic_scholar_youth",
+        "abbey_apothecary_herbalist_apprentice",
+        "monastery_stone_mason_journeyman"
+      ],
+      "slots": [
+        "pure_novice_nun_agnes",
+        "apothecary_herbalist_cadet_elias"
+      ],
+      "tension_engine_ids": [
+        "te_chastity_vow_vs_freezing_embrace_warm",
+        "te_sacramental_bread_sharing_vs_starvati"
+      ],
+      "chemistry": "{pure_novice_nun_agnes.name}在逼仄告解室为负伤的你分食圣餐面饼，柴火熄灭后两人打破男女铁律同裹一领羊毛斗篷背靠背熬过寒夜，{apothecary_herbalist_cadet_elias.name}自石窟送来金疮药粉；纯白修女的心防，要到晨光照进来、两人都暖透之后才肯松开。",
+      "stakes": {
+        "resource_gap": "修女手握仅存圣餐与地窖钥匙却心神慌乱，学者通晓天文真理却负伤失血体能衰竭。",
+        "limit_gap": "平日神圣男女大防不可逾越，此刻冰冷绝境中薄呢轻衫肌肤相贴呼吸相闻心跳共振。",
+        "meeting_reason": "暴风雪封山孤立修道院忏悔室内的疗伤避难与分食圣餐维生。",
+        "irreplaceable_goal": "在柴火熄灭与严寒冻毙前以体温相依度过长夜并合力逃脱搜捕。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "pure_novice_nun_agnes",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 3
+          },
+          "reason": "愿以自身性命与学术真理相托，誓死守护高洁纯真修女之清名与生机。"
+        },
+        {
+          "a": "apothecary_herbalist_cadet_elias",
+          "b": "pure_novice_nun_agnes",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 2
+          },
+          "reason": "感念修女纯善高德，冒险在地下石窟接应开辟生路。"
+        },
+        {
+          "a": "player",
+          "b": "apothecary_herbalist_cadet_elias",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "遭裁判所通缉之负伤年轻天文学者与圣玛利亚戒律院药房年轻采药帮工兼司药侍从在今夜前只打过照面。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_zealot_inquisitor_altar_standoff",
+      "power_structure": "switchable",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "fugitive_heretic_scholar_youth",
+        "inquisitorial_lay_constable_deserter",
+        "abbey_apothecary_herbalist_apprentice",
+        "monastery_stone_mason_journeyman"
+      ],
+      "slots": [
+        "inquisition_zealot_prior_malachi",
+        "pure_novice_nun_agnes",
+        "vice_abbess_ursula_keys"
+      ],
+      "tension_engine_ids": [
+        "te_confessional_inviolability_vs_inquisi",
+        "te_heretic_truth_starlight_vs_cloister_d"
+      ],
+      "chemistry": "{inquisition_zealot_prior_malachi.name}手持破甲刺在告解室外凶狠踹门逼索异端下落，{pure_novice_nun_agnes.name}以纯白身躯挡在门前据理力争庇护告解信诺，你在门内握紧裁纸短刀屏息死守，神权鹰犬与高洁良知在雕花木门两端展开惊心动魄之生死较量。",
+      "stakes": {
+        "resource_gap": "门外拥有重甲长戟与火刑生杀大权，门内唯有一柄小裁纸刀与一腔赤诚肝胆。",
+        "limit_gap": "门板一旦被踹破异端被抓学者将被绑赴火刑柱修女亦将沦为囚徒。",
+        "meeting_reason": "告解室木门前后的绝命周旋与圣职搜捕对峙。",
+        "irreplaceable_goal": "拖延搜捕时间掩盖血迹等待风雪转向与骑士外援接应。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "inquisition_zealot_prior_malachi",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "视作扼杀真理与人性的冷血屠夫，誓死抵抗到底。"
+        },
+        {
+          "a": "inquisition_zealot_prior_malachi",
+          "b": "pure_novice_nun_agnes",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "视其为窝藏异端的嫌疑人，企图以重刑强逼其屈服纳降。"
+        },
+        {
+          "a": "player",
+          "b": "pure_novice_nun_agnes",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "圣玛利亚戒律院典籍司见习修女兼圣烛掌灯人只听人提过遭裁判所通缉之负伤年轻天文学者的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "player",
+          "b": "vice_abbess_ursula_keys",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "修道院女副院长兼钥匙总管只听人提过遭裁判所通缉之负伤年轻天文学者的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "inquisition_zealot_prior_malachi",
+          "b": "vice_abbess_ursula_keys",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "修道院女副院长兼钥匙总管只听人提过圣职法庭巡视副主事兼戒律院纠察长的名字，今夜才第一次对上眼。"
+        },
+        {
+          "a": "pure_novice_nun_agnes",
+          "b": "vice_abbess_ursula_keys",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "修道院女副院长兼钥匙总管只听人提过圣玛利亚戒律院典籍司见习修女兼圣烛掌灯人的名字，今夜才第一次对上眼。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_knight_protector_nave_breakout",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "inquisitorial_lay_constable_deserter"
+      ],
+      "slots": [
+        "knight_deserter_protector_reinhart",
+        "pure_novice_nun_agnes"
+      ],
+      "tension_engine_ids": [
+        "te_confessional_inviolability_vs_inquisi",
+        "te_chastity_vow_vs_freezing_embrace_warm"
+      ],
+      "chemistry": "{knight_deserter_protector_reinhart.name}阔剑横扫大堂祭坛回廊阻击裁判所重装卫士，{pure_novice_nun_agnes.name}引路开启石窟地下铁闸，你配合断后斩断追兵火把，弃暗投明之武士与高洁修女在暴雪黑夜中达成共赴生天之同袍铁盟。",
+      "stakes": {
+        "resource_gap": "骑士武艺高强掌握绝壁索降技术，修女通晓石窟暗道，学者掌握天文星图。",
+        "limit_gap": "冲出重围早一刻全员生还，迟一刻遭遇火刑架包围万劫不复。",
+        "meeting_reason": "大殿回廊狂风暴雪中的最后斩闸突围行动。",
+        "irreplaceable_goal": "确保全员安全撤入地下石窟借由后山悬崖绳索滑入自由山谷。"
+      },
+      "relations": [
+        {
+          "a": "knight_deserter_protector_reinhart",
+          "b": "pure_novice_nun_agnes",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 2
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 2
+          },
+          "reason": "深佩修女纯真高洁之悲悯风骨，誓死以身断后。"
+        },
+        {
+          "a": "player",
+          "b": "knight_deserter_protector_reinhart",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "生死战友，共同挥剑斩碎腐朽枷锁。"
+        },
+        {
+          "a": "player",
+          "b": "pure_novice_nun_agnes",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "悔悟逃亡之裁判所年轻披甲卫士和圣玛利亚戒律院典籍司见习修女兼圣烛掌灯人各怀心事，被这场意外硬塞进同一个角落。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_dawn_mountain_bell_vow_triumph",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "traveling_pilgrim_nobleman_third_son"
+      ],
+      "slots": [
+        "pure_novice_nun_agnes",
+        "knight_deserter_protector_reinhart",
+        "mountain_guide_brandt_rescue"
+      ],
+      "tension_engine_ids": [
+        "te_chastity_vow_vs_freezing_embrace_warm",
+        "te_sacramental_bread_sharing_vs_starvati"
+      ],
+      "chemistry": "{pure_novice_nun_agnes.name}裹着熊皮斗篷在你身旁迎来破晓，修女亲手解下胸前银十字架赠予你，{knight_deserter_protector_reinhart.name}在悬崖边收起染血长剑；劫后余生、神志清明的纯白圣女褪去戒律枷锁，第一次主动靠进你怀里，定下终身之盟。",
+      "stakes": {
+        "resource_gap": "成功滑降悬崖脱离搜捕包围，手稿星图完好无损且伤口彻底结痂。",
+        "limit_gap": "从被禁闭高墙之内之见习修女蜕变为携手知己追寻星空真理之真正自由人。",
+        "meeting_reason": "雪岭日出群山金顶之下的悬崖庆贺与定情盟誓确立。",
+        "irreplaceable_goal": "向浩瀚苍穹昭告二人新生并确立一生并肩求索之神圣伴侣名分。"
+      },
+      "relations": [
+        {
+          "a": "pure_novice_nun_agnes",
+          "b": "player",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "共历告解隔间冰雪相拥生死长夜，今生今世愿脱去修女头巾甘做尘世相依之终身爱侣。"
+        },
+        {
+          "a": "knight_deserter_protector_reinhart",
+          "b": "pure_novice_nun_agnes",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "见证了一段惊心动魄之绝美传奇，由衷收剑致意护送至山谷平原。"
+        },
+        {
+          "a": "player",
+          "b": "knight_deserter_protector_reinhart",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "圣玛利亚戒律院外门留宿年轻避雪佩剑游侠对遭裁判所通缉之负伤年轻天文学者本无交情，眼下却不得不互相照应。"
+        },
+        {
+          "a": "player",
+          "b": "mountain_guide_brandt_rescue",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "山口驿站雪山救援向导对遭裁判所通缉之负伤年轻天文学者本无交情，眼下却不得不互相照应。"
+        },
+        {
+          "a": "pure_novice_nun_agnes",
+          "b": "mountain_guide_brandt_rescue",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "山口驿站雪山救援向导对圣玛利亚戒律院典籍司见习修女兼圣烛掌灯人本无交情，眼下却不得不互相照应。"
+        },
+        {
+          "a": "knight_deserter_protector_reinhart",
+          "b": "mountain_guide_brandt_rescue",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "山口驿站雪山救援向导对圣玛利亚戒律院外门留宿年轻避雪佩剑游侠本无交情，眼下却不得不互相照应。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "a_entry_confessional_screen_bread_sharin",
+      "title": "闭锁告解木室格栅分食圣餐面饼",
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "暴风雪封山孤立修道院，负伤青年学者逃入昏暗忏悔室告解席，修女隔着木格栅聆听喘息。",
+        "见学者受冻濒死，修女手画十字掰开仅存未发酵圣餐面饼，从格栅缝隙小心捧送喂入其唇中。",
+        "暴风雪撞裂窗棂吹熄蜡烛，严寒侵袭，二人隔着雕花木格栅伸出冻僵手指紧紧相扣传递微温。"
+      ],
+      "hook_ids": [
+        "h_agnes_sacramental_bread_break_whisper",
+        "h_malachi_iron_blade_strike_shout",
+        "h_elias_ointment_jar_tapping_whisper"
+      ],
+      "start_minute": 1380,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_alcove_wool_mantle_shared_warmth",
+      "title": "合拢隔间共披羊毛斗篷抗寒",
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "室温骤降至零下三十度，修女拔开活动木格栅铁销，把虚弱的学者拖进避风角。",
+        "修女解下外层粗呢披风大氅，二人背靠背同裹于一领羊毡内，数着彼此的呼吸不让对方睡去。",
+        "修女将念珠缠在二人交握的手指上，微仰下巴轻声念诵平安夜祷，一直念到天边泛白。"
+      ],
+      "hook_ids": [
+        "h_agnes_rosary_palm_binding_whisper",
+        "h_malachi_iron_blade_strike_shout",
+        "h_reinhart_greatsword_stone_strike"
+      ],
+      "start_minute": 1425,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_catacomb_herbal_ointment_cleansing",
+      "title": "地下石窟草药清创包扎箭伤",
+      "location_ids": [
+        "catacomb_scriptorium_crypt"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "药房修士小修士从暗道送来金盏花药散与蒸馏烈酒，学者在石窟石台前褪下半边染血破损学者呢袍。",
+        "修女微颤双手用烈酒清洗其肋下创口，敷上温热药膏，用洁净亚麻布细致缠绕其结实胸膛。",
+        "青年学者在烛光下轻声向修女阐述日心说星图与真实寰宇，修女美眸泛光心防彻底震撼苏醒。"
+      ],
+      "hook_ids": [
+        "h_elias_ointment_jar_tapping_whisper",
+        "h_agnes_rosary_palm_binding_whisper",
+        "h_malachi_iron_blade_strike_shout"
+      ],
+      "start_minute": 25,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_nave_corridor_zealot_ambush_repelled",
+      "title": "圣殿大堂回廊飞剑断闸阻截狂徒",
+      "location_ids": [
+        "chapel_nave_pulpit_hall"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "审判官率领行刑卫士持火把踹开忏悔室空门，发现血迹一路追踪至地下石窟铁闸入口。",
+        "骑士莱因哈特阔剑暴鸣一剑削断敌酋钉头锤，学者与修女合力在门内斩断钢缆拉下生铁落闸。",
+        "追兵被彻底阻绝在厚重铁闸之外，愤怒的咒骂声在空旷哥特式拱顶大殿内无力回荡。"
+      ],
+      "hook_ids": [
+        "h_reinhart_greatsword_stone_strike",
+        "h_malachi_iron_blade_strike_shout",
+        "h_agnes_sacramental_bread_break_whisper"
+      ],
+      "start_minute": 70,
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "a_cliff_rope_rappel_escape_descent",
+      "title": "后山绝壁牛皮长索暴雪索降逃生",
+      "location_ids": [
+        "catacomb_scriptorium_crypt"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "全员来到后山石窟暗门，狂风暴雪中下方是深达百丈但覆盖松软厚雪的山谷斜坡。",
+        "骑士将牛皮长索固定在千年石柱上，学者用安全索把修女系在自己身前，二人合力顺着绳索索降。",
+        "绳索摩擦出白烟，二人在风雪呼啸中安然落入厚达数尺的松软雪窝之中顺利脱险。"
+      ],
+      "hook_ids": [
+        "h_reinhart_greatsword_stone_strike",
+        "h_agnes_dawn_crucifix_gift_vow",
+        "h_elias_ointment_jar_tapping_whisper"
+      ],
+      "start_minute": 105,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_dawn_snow_peak_golden_vow_triumph",
+      "title": "破晓雪岭解冠卸巾终身盟誓",
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "暴风雪骤停，朝阳金辉普照阿尔卑斯雄浑雪峰，山谷林间升起静谧炊烟与鸟鸣。",
+        "艾格尼丝暖过身子、神志清明，亲手摘下洁白修女头巾任青丝披散，将银质十字架戴在身旁青年颈间，含泪吻了上去。",
+        "学者展开油布星图指向东方开阔大道，二人相视含笑，携手踏上前往自由城邦之崭新人生旅程。"
+      ],
+      "hook_ids": [
+        "h_agnes_dawn_crucifix_gift_vow",
+        "h_reinhart_greatsword_stone_strike",
+        "h_agnes_sacramental_bread_break_whisper"
+      ],
+      "start_minute": 135,
+      "tags": [
+        "intimate"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_raging_blizzard_subzero_freeze",
+      "title": "零下三十度极寒暴风雪冻毙死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "trigger": "特大暴风雪吹裂高窗木板，冰冷狂风倒灌入忏悔室，壁炉炭火彻底熄灭，室内气温骤降至零下三十度，若失去体温互相取暖二人将在三刻钟内失温冻僵身亡。",
+      "objective": "在十分钟内拔掉格栅铁销合拢至同一避风隔角，同裹羊毡背靠背熬过极寒，不许任何人睡着。",
+      "choice": "是打破戒律同披一领斗篷求活，还是各自蜷缩角落硬抗严寒？",
+      "immediate": {
+        "text": "睫毛与双唇已凝结一层惨白冰霜，手指彻底失去屈伸知觉，思维渐趋迟钝模糊陷入致命嗜睡。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内恢复核心体温，严重的低温性心室纤颤将在昏睡中剥夺全部生命体征。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "二人陷入深度冻僵昏迷彻底冻毙于告解室青石板上。",
+        "consequence": "学者与修女双双化为冰雕无辜殒命高山绝壁孤岛。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "修女颤抖拔掉木格栅生锈铁销，把学者拖进避风角裹进斗篷",
+          "cost": "修女白皙掌心被锋利木刺深深扎入三根带出鲜红血珠，再没有第二次机会。"
+        },
+        {
+          "option": "学者咬紧牙关借着修女喂入的最后一口烈性圣酒强行催发气血清醒，分秒都耽搁不起。",
+          "cost": "烈酒猛烈刺激腹部箭伤引发内脏剧烈绞痛喷出一口暗红瘀血，只争眼前这一刻。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_agnes_sacramental_bread_break_whisper",
+        "h_agnes_rosary_palm_binding_whisper"
+      ],
+      "start_minute": 1385,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_candle_fuel_exhaustion_darkness",
+      "title": "浸蜡圣烛燃尽幽闭长夜窒息危机",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "trigger": "告解室内仅存的半截牛油蜡烛在穿堂风中剧烈跳动仅剩最后两分寸蜡油，一旦熄灭整个忏悔室将陷入伸手不见五指之漆黑冰冷深渊。",
+      "objective": "在十分钟内用经书封皮防风罩护住微弱烛心，或借着盲眼修士指引摸索开启通往地下石窟之暗门铁锁。",
+      "choice": "是冒险摸黑在满地狼藉中摸索铜钥匙，还是用最后火星引燃松木碎屑维持微弱视线？",
+      "immediate": {
+        "text": "烛光忽明忽暗如风中残烛，四周厚重黑石阴影如巨兽般合拢压迫而来，黑暗带来无尽恐慌与方向迷失。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内找寻到备用火种或暗门，全员将被困在幽暗冰窟中彻底丧失逃生机动性。",
+        "deadline_minutes": 25
+      },
+      "far": {
+        "trigger": "彻底陷入黑暗迷失方向在严寒摸索中跌落深井。",
+        "consequence": "逃生失败全员被困死在地下冰冷废墟。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "修女拆下厚重羊皮圣咏集封皮充当防风灯罩维系最后火苗",
+          "cost": "修女指尖在急速拆封中被生铜包角划开一道两寸血口。"
+        },
+        {
+          "option": "学者在绝对黑暗中盲目以火石疯狂打火十次直至擦出微弱火星",
+          "cost": "学者双手大拇指皮肉被尖锐燧石刮得血肉模糊焦黑脱皮。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_agnes_sacramental_bread_break_whisper",
+        "h_elias_ointment_jar_tapping_whisper"
+      ],
+      "start_minute": 1400,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_inquisition_zealot_altar_search",
+      "title": "裁判所审判官持刃踹门搜查死线",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "trigger": "审判官马拉奇顺着积雪中滴落的血迹一路搜查至忏悔室门前，手中提着破甲长锥开始大力敲门倒数勒令开门。",
+      "objective": "在十分钟内由修女以圣洁端庄仪态隔门应答周旋，配合学者在室内擦去血迹隐匿气息。",
+      "choice": "是修女昂首开门以神圣誓约训斥其亵渎圣堂，还是学者准备短刀在门后拼死决斗？",
+      "immediate": {
+        "text": "门外传来铁马刺清脆的踢击声与冰冷审问，破甲长锥尖端已透过木板缝隙刺入数寸。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内打消其怀疑引开搜查，狂暴审判官将下令行刑刽子手用锻铁重斧强行砸碎门扉展开屠戮。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "门板被彻底劈碎全员暴露在明火执仗追兵面前。",
+        "consequence": "学者当场受戮修女被打入大牢身败名裂处以极刑。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "学者以胸前厚重牛皮羊皮圣咏集死死顶住刺入的破甲铁刃，退路已经断了。",
+          "cost": "学者右掌虎口被锐利刃缘生生割裂深可见骨鲜血浸透书页，没人能替你决定。"
+        },
+        {
+          "option": "修女将手中磨损银念珠砸向圣殿远端祭坛铜钟制造清脆回音诱敌，这一回刻不容缓。",
+          "cost": "修女失去早年随身佩戴的唯一寄托信物念珠被摔成两截，再没有第二次机会。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_malachi_iron_blade_strike_shout",
+        "h_reinhart_greatsword_stone_strike"
+      ],
+      "start_minute": 1435,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_stained_glass_collapse_snowdrift",
+      "title": "哥特穹顶高空玫瑰花窗坍塌雪崩危机",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "chapel_nave_pulpit_hall"
+      ],
+      "trigger": "暴风雪在圣殿高耸玫瑰花窗外积聚起数千斤沉重积雪，铅条焊接处发出断裂脆响，整面巨大彩色花窗摇摇欲坠随时可能崩塌倾泻数十吨坚硬冰雪。",
+      "objective": "在十分钟内避开主中殿中央落雪区，迅速转移至承重坚固之地下石窟拱券下方避险。",
+      "choice": "是穿过开阔中殿承受被坠落碎玻璃乱箭刺伤之险，还是顺着石柱阴影匍匐绕行？",
+      "immediate": {
+        "text": "头顶传来如雷鸣般的玻璃碎裂声，大片大片五彩铅条玻璃混杂着尖锐冰柱如雨点般砸落在大殿祈祷长椅上。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内全员撤入地下石窟，主穹顶部分垮塌带来的暴雪雪崩将彻底活埋圣殿内的一切生灵。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "穹顶花窗彻底雪崩坍塌活埋大殿。",
+        "consequence": "全员被掩埋在数丈坚硬积雪冰块之下窒息陨落。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "学者飞身将修女扑倒在厚重橡木长椅下方以背脊硬抗落雪碎片",
+          "cost": "学者后背被两枚锋利彩色玻璃碎片深深刺入血流如注划开长口。"
+        },
+        {
+          "option": "修女与药房修士合力用青铜烛台撬落地下石窟重型铸铁防雪落门",
+          "cost": "修女双臂遭受门板剧烈反震韧带严重拉伤双手剧烈红肿发麻。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_reinhart_greatsword_stone_strike",
+        "h_elias_ointment_jar_tapping_whisper"
+      ],
+      "start_minute": 35,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_infected_arrow_wound_gangrene_fever",
+      "title": "学者肋部铁箭伤口重度感染高热恶化死线",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "catacomb_scriptorium_crypt"
+      ],
+      "trigger": "学者肋下生锈箭伤在极寒与剧烈运动后撕裂恶化，出现严重高热谵妄与败血症早期征兆，若不及时清创敷药体温过热将导致多器官衰竭死亡。",
+      "objective": "在十分钟内由修女与药房修士合力完成伤口深层排脓、烈酒消毒与草药包扎稳定生命体征。",
+      "choice": "是用烧红的裁纸刀贴肉烙烫伤口止血，还是忍受剧痛用烈酒持续冲洗？",
+      "immediate": {
+        "text": "学者面色赤红呼吸粗重如牛，神志陷入昏迷呓语，伤口周围皮肉高高肿起泛着骇人的暗紫色。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "若未能在一刻钟内压制伤口感染，扩散至血液中的毒素将在半日内夺走年轻学者的全部生机。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "败血症全身感染休克学者溘然长逝。",
+        "consequence": "学者殒命异乡修女陷入无尽自责与孤立无援深渊。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "学者咬紧皮革以烧红的裁纸小刀毅然贴肉烙烫化脓死肉止血",
+          "cost": "创口遭受三度深度烧伤剧痛攻心当场疼昏咬碎两颗后槽牙。"
+        },
+        {
+          "option": "修女俯身用双唇将创口深层黑血脓汁吸出吐净，再用烈酒漱口",
+          "cost": "修女口腔黏膜遭受微量毒素侵染面颊苍白恶心头晕不止。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_elias_ointment_jar_tapping_whisper",
+        "h_agnes_rosary_palm_binding_whisper"
+      ],
+      "start_minute": 75,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_suspension_bridge_avalanche_isolation",
+      "title": "下山唯一吊桥断裂雪崩彻底封绝退路",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "catacomb_scriptorium_crypt"
+      ],
+      "trigger": "深山山谷传来如惊雷滚滚般的特大雪崩轰鸣，连通修道院与山下集镇的唯一木质悬索吊桥被数十万方雪浪彻底冲垮坠入万丈深渊。",
+      "objective": "在十五分钟内由骑士带领全员寻找后山废弃采石场的险峻山羊小道与索降石桩开辟生路。",
+      "choice": "是冒险顺着百丈绳索在狂风中滑降绝壁，还是固守地下石窟等待数周后冰雪消融？",
+      "immediate": {
+        "text": "脚下石壁在雪崩震动中剧烈摇晃，前山通路彻底断绝化为绝壁孤峰，后山悬崖在暴风雪中宛如死神天堑。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "十五分钟内若未能架设好逃生索具，后方重装审判官追兵将合围石窟唯一出口形成瓮中捉鳖之局。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "全员被困死在悬崖孤岛彻底断粮绝水。",
+        "consequence": "在绝壁之上弹尽粮绝最终全员覆灭化为枯骨。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "骑士以血肉之躯死死扣紧套在石柱上的牛皮主绳充当人体索桩",
+          "cost": "骑士腰腹部被坚韧牛皮长绳勒出道道深紫色血痕剧烈挫伤。"
+        },
+        {
+          "option": "学者用安全索把修女系在身前，单手抓绳顺着百丈绝壁滑降着陆",
+          "cost": "学者双手手掌皮肉被粗糙绳索瞬间磨烂掉整层掌皮鲜血淋漓。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_reinhart_greatsword_stone_strike",
+        "h_agnes_dawn_crucifix_gift_vow"
+      ],
+      "start_minute": 110,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "h_agnes_sacramental_bread_break_whisper",
+      "kind": "approach",
+      "slot": "pure_novice_nun_agnes",
+      "location_ids": [
+        "wooden_confessional_screen_alcove",
+        "chapel_nave_pulpit_hall"
+      ],
+      "text": "{pure_novice_nun_agnes.name}双手合十跪在告解隔间内：“弟兄……天主怜悯受苦之人。快把这半块面饼含进口中嚼碎咽下……水已经冻成冰了，喝这小盅仪式圣酒暖暖身子……”"
+    },
+    {
+      "id": "h_agnes_rosary_palm_binding_whisper",
+      "kind": "approach",
+      "slot": "pure_novice_nun_agnes",
+      "location_ids": [
+        "wooden_confessional_screen_alcove",
+        "catacomb_scriptorium_crypt"
+      ],
+      "text": "{pure_novice_nun_agnes.name}在避风角落与你同裹于一领羊毛斗篷内，冻得牙关打颤，声音发抖却一字一顿：“别睡过去。抓紧我的念珠……跟着我念……主啊，求您垂怜……数到一百，再从头数。听到没有？！”"
+    },
+    {
+      "id": "h_agnes_dawn_crucifix_gift_vow",
+      "kind": "approach",
+      "slot": "pure_novice_nun_agnes",
+      "location_ids": [
+        "wooden_confessional_screen_alcove",
+        "catacomb_scriptorium_crypt"
+      ],
+      "text": "{pure_novice_nun_agnes.name}在雪岭破晓的金辉里，身上裹着骑士的熊皮斗篷，任乌黑长发披散在肩头，眼里含泪却清醒得很：“艾格尼丝自今日起，不再是高墙里的修女了。昨夜你没有趁冷越过半步……所以现在，换我走过来。别躲。”"
+    },
+    {
+      "id": "h_malachi_iron_blade_strike_shout",
+      "kind": "approach",
+      "slot": "inquisition_zealot_prior_malachi",
+      "location_ids": [
+        "chapel_nave_pulpit_hall",
+        "wooden_confessional_screen_alcove",
+        "catacomb_scriptorium_crypt"
+      ],
+      "text": "{inquisition_zealot_prior_malachi.name}手持破甲长锥重重砸在忏悔室橡木门板上激起刺耳木屑爆裂声，面容阴鸷如狼厉喝：“艾格尼丝见习修女！本官闻到了这间告解室里飘出的血腥味！窝藏异端者与异端同罪！”"
+    },
+    {
+      "id": "h_elias_ointment_jar_tapping_whisper",
+      "kind": "approach",
+      "slot": "apothecary_herbalist_cadet_elias",
+      "location_ids": [
+        "catacomb_scriptorium_crypt",
+        "wooden_confessional_screen_alcove",
+        "chapel_nave_pulpit_hall"
+      ],
+      "text": "{apothecary_herbalist_cadet_elias.name}从地下石窟暗门探出身子：“艾格尼丝姐姐！学者兄弟！听得到吗？！药草被我用体温化开了！石窟后门的暗栓也拨通了！快顺着地道退进来！审判官带着卫士马上要搜过来了！”"
+    },
+    {
+      "id": "h_reinhart_greatsword_stone_strike",
+      "kind": "approach",
+      "slot": "knight_deserter_protector_reinhart",
+      "location_ids": [
+        "chapel_nave_pulpit_hall",
+        "wooden_confessional_screen_alcove",
+        "catacomb_scriptorium_crypt"
+      ],
+      "text": "{knight_deserter_protector_reinhart.name}单手将精钢阔剑重重插在石堂青石板上激起数道火星：“裁判所的走狗们听好了！莱因哈特在此！谁敢再踏近这间圣殿半步，老子手中这柄阔剑绝不认得什么主教教令！”"
+    },
+    {
+      "id": "h_agnes_wet_habit_shiver_glance",
+      "kind": "observe",
+      "slot": "pure_novice_nun_agnes",
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "text": "{pure_novice_nun_agnes.name}背靠雕花橡木壁微促喘息，被融雪浸透的纯白修女长袍贴着纤细的身形，素手紧握银念珠抵于胸口，长长睫毛上凝着白霜，清冷出尘的容颜透着禁欲与受冻的凄美。"
+    },
+    {
+      "id": "h_malachi_torch_glare_observe",
+      "kind": "observe",
+      "slot": "inquisition_zealot_prior_malachi",
+      "location_ids": [
+        "chapel_nave_pulpit_hall"
+      ],
+      "text": "{inquisition_zealot_prior_malachi.name}手提防风铜提灯，深红长披风在寒风中翻卷，右手食指死死扣在破甲锥锋刃上，狭长双眸透着宗教狂热裁判官所特有的残忍与病态贪婪血芒。"
+    },
+    {
+      "id": "h_reinhart_sword_poise_glance",
+      "kind": "observe",
+      "slot": "knight_deserter_protector_reinhart",
+      "location_ids": [
+        "chapel_nave_pulpit_hall"
+      ],
+      "text": "{knight_deserter_protector_reinhart.name}阔剑倒提神情沉穆如铁，锁子甲环扣在冰冷空气中碰撞出清脆金石之音，雄健如山的巍峨身形宛若一尊镇守古老圣殿千年的不败钢铁战神。"
+    },
+    {
+      "id": "h_agnes_mantle_share_request",
+      "kind": "approach",
+      "slot": "pure_novice_nun_agnes",
+      "location_ids": [
+        "wooden_confessional_screen_alcove"
+      ],
+      "text": "{pure_novice_nun_agnes.name}双唇惨白贝齿打颤，避开视线低声道：“……蜡烛灭了，柴火也烧尽了。你、你靠过来些，把斗篷拉上……背靠着我就好。神会宽恕为了活命所做的事……天亮之后的事，天亮再说。”"
+    },
+    {
+      "id": "h_agnes_wound_cleanse_request",
+      "kind": "approach",
+      "slot": "pure_novice_nun_agnes",
+      "location_ids": [
+        "catacomb_scriptorium_crypt"
+      ],
+      "text": "{pure_novice_nun_agnes.name}眼眸微湿端起银盅烈酒，轻咬下唇低语：“……忍着点。箭伤发黑必须用烈酒洗净脓血……若是疼了，就用力抓紧我的手腕……我在这里陪着你，不会离开的。”"
+    },
+    {
+      "id": "h_elias_bandage_request",
+      "kind": "approach",
+      "slot": "apothecary_herbalist_cadet_elias",
+      "location_ids": [
+        "catacomb_scriptorium_crypt"
+      ],
+      "text": "{apothecary_herbalist_cadet_elias.name}双手端着草药敷料，急切说道：“姐姐！按紧这块亚麻布！千万不能让创口再次撕裂大出血！我去门口守着，有动静立刻学夜莺叫三声！”"
+    },
+    {
+      "id": "h_reinhart_cut_portcullis_request",
+      "kind": "approach",
+      "slot": "knight_deserter_protector_reinhart",
+      "location_ids": [
+        "chapel_nave_pulpit_hall"
+      ],
+      "text": "{knight_deserter_protector_reinhart.name}单臂死死抗住生铁闸门钢缆，大吼道：“学者兄弟！用你的裁纸刀斩断配重麻绳！快！老子的阔剑快卡不住追兵的铁斧了！快斩断绳索落闸！”"
+    },
+    {
+      "id": "h_malachi_broken_blade_glance",
+      "kind": "observe",
+      "slot": "inquisition_zealot_prior_malachi",
+      "location_ids": [
+        "chapel_nave_pulpit_hall"
+      ],
+      "text": "{inquisition_zealot_prior_malachi.name}眼见破甲长锥被生铁阔剑生生劈断半截，嘴角抽搐面色发青，在满地冰雪与火把残灰中狼狈倒退三步，狂妄眼眸中终于浮现出一丝难以遏制的惊怒与恐惧。"
+    },
+    {
+      "id": "h_elias_lantern_warmth_glance",
+      "kind": "observe",
+      "slot": "apothecary_herbalist_cadet_elias",
+      "location_ids": [
+        "catacomb_scriptorium_crypt"
+      ],
+      "text": "{apothecary_herbalist_cadet_elias.name}守在石窟拱门石壁拐角，双手合拢呵出白汽温热药罐，眼神清澈纯善，在摇曳昏黄油灯映照下宛若一位守护黑夜生机的年轻引路使者。"
+    }
+  ],
+  "twists": [
+    {
+      "id": "t_nun_1",
+      "category": "信息",
+      "requires": [],
+      "text": "抄经窟地下古井暗设直通后山古采石场干燥暗道：修女艾格尼丝辨识出藏经石窟第七卷羊皮卷轴暗记，证实地下蓄水井枯水期暗设一条直通后山林场的干燥秘密石廊。全员无需冒险强闯被追兵层层封锁的前堂大殿，直接开辟了一条从石窟底部悄然遁入深山密林的绝对安全生命通道。"
+    },
+    {
+      "id": "t_nun_2",
+      "category": "人事",
+      "requires": [],
+      "text": "审判官借搜查中饱私囊之罪证账册当场起获：随行修道院副院长在整理圣堂公文时，当场搜出审判官私吞圣器与敲诈地方庄园之密信账册，剥夺其全部执法权限。门外搜捕头目当场丧失司法权威与部下信从陷入四面楚歌，追兵阵营大乱不攻自破彻底瓦解。"
+    },
+    {
+      "id": "t_nun_3",
+      "category": "资源",
+      "requires": [],
+      "text": "石窟夹层起获百年前修士秘藏之陈年烈性圣酒与羊毛毡：在挪开一处倒塌书架时，意外发现暗格内完好封存着一整桶高浓度药用蒸馏烈酒与三领未受潮之厚重水獭皮毛斗篷。困扰全员长达数个时辰的极寒冻毙死线彻底烟消云散，全员获得强效驱寒抗冻与体温恢复保障。"
+    },
+    {
+      "id": "t_nun_4",
+      "category": "制度",
+      "requires": [],
+      "text": "教皇特赦金印圣谕证实学者手稿受至圣庇护：学者展开随身携带的羊皮纸卷，露出罗马教廷开明枢机主教亲笔签发之学术免死金印护照，裁定其天体学说属于神圣学术探讨范畴。裁判所武装搜捕当场丧失合法神圣教规法理，强加之异端罪名彻底不攻自破烟消云散。"
+    },
+    {
+      "id": "t_nun_5",
+      "category": "时限",
+      "requires": [],
+      "text": "阿尔卑斯拂晓金日提前破云风雪骤停平息：狂暴暴风雪在清晨五点整奇迹般彻底退散，温暖朝阳将山谷积雪迅速消融出一条干燥山羊小径。原本迫在眉睫的深山雪崩封绝死线化险为夷，全员迎来视野极佳、道路畅通的绝妙下山撤离时机。"
+    },
+    {
+      "id": "t_nun_6",
+      "category": "关系",
+      "requires": [],
+      "text": "修女所绘星图实为学者早年散佚之求真习作：在借着烛光包扎伤口时，学者认出修女手中珍藏的抄本星图右下角，赫然留有自己多年前在故乡修道院求学时写下的密字笔迹。多年求真宿命在此刻冰冷告解室中轰然合流相认，彻底打碎彼此戒律隔阂，升华为精神与肉体生死相托之崇高灵魂伴侣。"
+    },
+    {
+      "id": "t_nun_7",
+      "category": "意外",
+      "requires": [],
+      "text": "钟楼积雪冻木倒塌精准砸扁追兵行刑重斧：大殿高处年久失修之重型冻木横梁在积雪压迫下轰然坠落，精准将追击审判官之锻铁重斧与马刺砸成废铁粉碎。致命破门追击威胁被大自然天威瞬间连根拔起化解，全员借由乱木屏障顺利隐入石窟后门遁入山林。"
+    }
+  ],
+  "forbidden_terms": [
+    "现代防寒羽绒服",
+    "煤气取暖炉",
+    "无线电求救器",
+    "抗生素注射液",
+    "手电筒照明",
+    "直升机搜救"
+  ],
+  "content_tags": [
+    "intimate",
+    "workplace",
+    "workplace_power",
+    "violence",
+    "bodily_harm",
+    "crime",
+    "disaster"
+  ],
+  "status": "released",
+  "notes": "按原稿加入。改动：同披斗篷取暖只作救命，删去失温时的情色描写，亲密移到破晓暖透之后；审判官删去羞辱修女的支配欲，改为贪功夺杯；修正复制错位的人物吸引点与前提；“幼子”“药童”等措辞改为成年说法；新增修道院女副院长与雪山救援向导两名角色。"
+}

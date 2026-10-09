@@ -29,7 +29,7 @@ Thousands of story materials ｜ Zero-drift SQLite state machine<br>
 
 <a id="worlds"></a>
 <p align="center">
-  <img src=".github/readme-lofi/world-library.svg" width="100%" alt="Built-in world library: standalone world frames across eras and over five thousand story materials. 78 worlds pinned to a corkboard in five columns: historical turmoil, urban undercurrents, everyday street life, apocalypse and steam, other realms; all open, ready to start. A cassette rack below lists over five thousand materials: 390+ places, 470+ NPCs, 400+ player identities, 500+ character pairings, 360+ tension engines, 490+ daily activities, 470+ pressure events, 1080+ opening hooks, 550+ mid-story turns, 680+ rules and customs.">
+  <img src=".github/readme-lofi/world-library.svg" width="100%" alt="Built-in world library: standalone world frames across eras and over six thousand story materials. 90 worlds pinned to a corkboard in five columns: historical turmoil, urban undercurrents, everyday street life, sci-fi and apocalypse, other realms; all open, ready to start. A cassette rack below lists over six thousand materials: 430+ places, 540+ NPCs, 450+ player identities, 550+ character pairings, 410+ tension engines, 560+ daily activities, 540+ pressure events, 1260+ opening hooks, 640+ mid-story turns, 780+ rules and customs.">
 </p>
 
 <br>
@@ -40,7 +40,7 @@ Every world is open. Pick one and play.
 Don't see what you want? Just say "custom world" (`自定义世界`), name the year and the place, and one is made for you on the spot.
 
 <details>
-<summary><b>See all 78 worlds at a glance (click to open)</b></summary>
+<summary><b>See all 90 worlds at a glance (click to open)</b></summary>
 <br>
 
 | World | In one line |
@@ -123,6 +123,18 @@ Don't see what you want? Just say "custom world" (`自定义世界`), name the y
 | Typhoon Shogi Room (台风棋室) | A typhoon cuts the power on the night of the sealed move; the ninth-dan champion and the arbiter guard a brazier and a wax-sealed envelope until dawn. |
 | Ruins Shelter (遗迹石室) | A cave-in traps the expedition; the drow scout, her mana running wild, presses her dagger into the investigator's palm. |
 | Sinking Ballast Tank (沉船压载舱) | The night a liner goes down, a kidnapped heiress and her valet are locked in a flooding ballast tank. |
+| Snowbound Confessional (雪夜告解室) | A snowbound abbey: a novice nun splits the last communion bread with a wounded heretic scholar, and one cloak has to last till dawn. |
+| Monsoon Temple (梅雨古庙) | A flood-cut ruined temple: a wounded assassin sheathes her blade and lets a fugitive physician dig the poisoned nail from her back. |
+| Magnet Lab (强磁实验室) | A superconducting quench seals level B7; the ice-cold physicist goes into cardiac arrest and the engineer has one defibrillator. |
+| Polar Sleeper Car (极地快车包厢) | Gendarmes check marriage papers car by car; the ace spy holsters her gun and asks a stranger to play her new husband. |
+| Demon Pagoda Depths (锁妖塔底) | Her bonded sword shattered and demon poison flooding in, the sword immortal asks an outer-sect disciple to clasp hands and draw it out. |
+| Hunter's Cabin (雪山猎屋) | On the night of the coup, a freezing, haughty princess orders an exiled ranger to cut away her iced corset; three logs must last till dawn. |
+| Orbital Wreckage (轨道残骸) | Four cubic metres, one oxygen mask, thirty minutes: an ace pilot and a disgraced mechanic drift cold through the debris field. |
+| Storm Morgue (雷暴解剖中心) | A typhoon blacks out the underground morgue; the wounded chief pathologist grips her scalpel and a suspended detective steadies the final cut. |
+| Fallen Sanctuary (失落圣坛) | The deep sanctuary collapses and her staff snaps; the elven high priestess lets a commoner shield knight kneel to set her ankle. |
+| Inquisition Cell (裁判所死牢) | Three hours before the pyre, a young jailer locks the cell from inside and picks the genius witch's anti-magic collar with a mithril needle. |
+| Storm Yacht Citadel (风暴游艇密室) | A typhoon on open sea, the security chief mutinies; the arms heiress and her bodyguard wait in the panic room for the torch to burn through. |
+| Blackout Server Hall (断电机房) | Halon floods a cold aisle under the polar night; the genius hacker and the duty engineer take turns on one gas mask. |
 
 </details>
 

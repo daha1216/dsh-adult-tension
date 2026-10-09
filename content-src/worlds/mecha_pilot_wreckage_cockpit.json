@@ -1,0 +1,2289 @@
+{
+  "schema_version": 1,
+  "id": "mecha_pilot_wreckage_cockpit",
+  "title": "轨道残骸：王牌女机师",
+  "extends": null,
+  "era": "近未来硬科幻近地轨道殖民卫星崩溃与太空战役失重逃生时代",
+  "region": "拉格朗日L2点同步轨道残骸带漂流之破损重型突击机甲狭小密封双人逃生驾驶舱",
+  "premise": "近地轨道殖民地防御战崩溃，年满二十一岁的联合舰队王牌女机师座机被粒子束击穿，与年满二十岁的戴罪损管机械士一起被弹进四立方米的救生驾驶舱，在漆黑残骸带里冷漂流。抗荷服后背破裂、凝胶结冰压迫胸腔，单人氧气瓶只够三十分钟，叛舰的探照灯在残骸间来回扫。割服、轮换吸氧、静默、盲狙——舱里只论活命；冰山少校与底层机修兵之间的那道天堑，要等对接母舰才肯塌。",
+  "tone": [
+    "深空残骸零重力漂浮",
+    "抗荷服破裂液冷泄漏",
+    "单人氧气瓶共生呼吸",
+    "四立方米驾驶舱心跳共振"
+  ],
+  "style_hint": "驾驶舱主屏全灭，只剩一盏橘红应急灯。王牌女机师短发在失重中飘散，抗荷服后背破口结着淡蓝冰壳，嘴唇发紫仍在报参数；损管兵握着绝缘剪沿脊柱导轨一扣一扣剪开锁扣，两人轮流把同一只氧气面罩扣在对方脸上。",
+  "clock_start": {
+    "label": "主氧气罐彻底排空断氧子夜零点整，备用氧气瓶仅存三十分钟额定供氧量",
+    "minute": 0
+  },
+  "clock_style": "hm",
+  "default_person": "second",
+  "default_npc_gender_mix": {
+    "female": 0.5,
+    "male": 0.45,
+    "nonbinary": 0.05
+  },
+  "stage_labels": {
+    "stranger": "拔枪对峙",
+    "acquainted": "破拆抗荷",
+    "familiar": "共座求生",
+    "flirting": "静默漂流",
+    "testing": "神经同调",
+    "intimate": "对接之后",
+    "committed": "深空同盟"
+  },
+  "name_pools": {
+    "family": [
+      "林",
+      "雷诺",
+      "高桥",
+      "沈",
+      "陈",
+      "奥斯汀",
+      "莫洛佐夫",
+      "白石",
+      "索恩",
+      "瓦伦丁",
+      "顾",
+      "韩"
+    ],
+    "given_female": [
+      "凌霜",
+      "克莱尔",
+      "明日香",
+      "晚晴",
+      "瑟琳娜",
+      "真由美",
+      "艾莲娜",
+      "若冰",
+      "薇薇安",
+      "千寻",
+      "沐雪",
+      "卡莲"
+    ],
+    "given_male": [
+      "重言",
+      "阿列克",
+      "健一",
+      "廷轩",
+      "罗兰",
+      "浩然",
+      "维克托",
+      "宗佑",
+      "马库斯",
+      "敬之",
+      "修远",
+      "达里奥"
+    ],
+    "given_neutral": [
+      "星澜",
+      "凯恩",
+      "苍介",
+      "羽墨",
+      "亚历克斯",
+      "昭华",
+      "米夏",
+      "楚楚",
+      "达利",
+      "知秋",
+      "瑞恩",
+      "南柯"
+    ],
+    "nickname_patterns": [
+      {
+        "pattern": "{family}少校",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}技师",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}长官",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}士官",
+        "gender": "any"
+      },
+      {
+        "pattern": "{family}同学",
+        "gender": "any"
+      }
+    ],
+    "order": "family_first"
+  },
+  "rules": [
+    {
+      "id": "r_space_hypoxia_single_lung_rationing_la",
+      "text": "近地轨道密封驾驶舱氧气配给法则：单人备用氧气瓶仅能提供正常成人三十分钟生理消耗，若双人共用同一面罩，必须严格遵循四吸四吐同步深呼吸节律，心率超过一百二十次每分者将导致二氧化碳中毒加速脑水肿休克。"
+    },
+    {
+      "id": "r_high_g_anti_pressure_suit_cutaway_prot",
+      "text": "重型机甲液冷抗荷服破拆规程：后背导热胶囊一旦破裂，凝胶与皮肉接触在零重力低温下将固化收缩压迫胸腔肋骨，必须由副手持防爆剪沿脊椎安全导轨自下而上精准切断二十四道受力锁扣方可剥离。"
+    },
+    {
+      "id": "r_lagrange_debris_drift_beacon_silence",
+      "text": "残骸带被动静默漂流原则：敌方轨道侦察无人机正以微波雷达扫描全空域热源，严禁开启机甲任何主动无线电求救应答器与反冲推进喷口，唯有完全处于无动力冷漂流状态方可避开轨道雷达扫射。"
+    },
+    {
+      "id": "r_neural_link_dual_synchronization_manda",
+      "text": "双人应急神经漫游同步条令：在主控系统瘫痪时，唯有副驾驶接入机师头盔背部紧急辅助脑机插栓分担百分之五十传感负荷，方可在不烧毁机师大脑神经元的前提下重新唤醒微型姿态喷气阀。"
+    }
+  ],
+  "customs": [
+    "十秒轮换呼吸互信礼：深空受困机组在共用氧气面罩时，每人吸入纯氧十秒后必须主动递交面罩扣入对方口鼻，严禁任何一方因惊慌独占气源，此乃太空军最高生存信条。",
+    "零重力防失控腕带互锁仪式：在狭窄失重空间内，二人需以高强度防爆尼龙腕带将彼此右手手腕紧密互锁，防止一人失去意识后在漂浮中撞击操纵杆造成恶性事故。",
+    "手动机械弹射拉环生死托付：女机师将仅能触发一次之手动弹射点火拉环握柄塞入青年掌心，象征将全机最高生杀大权彻底让渡于副座伙伴。",
+    "电解补水凝胶平分誓约：在抗荷服褪去导致体液蒸发失衡时，二人平分仅剩一颗的高热量电解质凝水球，一人一半，以此缔结超越门第的太空同袍盟约。"
+  ],
+  "player_identities": [
+    {
+      "id": "fleet_damage_control_mechanic_youth",
+      "role": "联合舰队后勤部随舰戴罪青年损管机械士官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "损管士官",
+          "gender": "any"
+        },
+        {
+          "pattern": "机械青年",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        20,
+        22
+      ],
+      "social_position": "low",
+      "baseline": "年满二十周岁出身平民工业空间站之天才机械维修兵，因私自改装战机能量回路被降职为底层损管工，熟稔重型机甲八百处机械结构与全部应急排障管线。",
+      "resources": [
+        "一柄多功能钛合金液压防爆绝缘工程剪",
+        "一盒用于修补舱体微漏气之高分子发泡密封补丁喷罐"
+      ],
+      "reputation": "手掌布满烫伤油污但下刀拆卸零件稳如磐石，在机械结构领域拥有过目不忘之直觉。",
+      "risks": [
+        "在舰队正规军官序列中毫无军衔地位，稍有不慎易被军事法庭控以冒犯高级长官重罪。"
+      ]
+    },
+    {
+      "id": "flight_academy_reserve_ensign_copilot",
+      "role": "空天机动学院刚毕业之预备役青年少尉副官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "预备少尉",
+          "gender": "any"
+        },
+        {
+          "pattern": "副机师青年",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "high",
+      "baseline": "年满二十一周岁以理论第一成绩毕业于帝国空天军官大学，受过标准双人操纵与轨道力学计算严苛训练。",
+      "resources": [
+        "一块自带离线轨道星图计算芯片之机械军用防磁腕表",
+        "一支装有三发穿甲弹之九毫米军用无壳自卫手枪"
+      ],
+      "reputation": "恪守条令临危不乱，对深空漂流轨迹具有精密心算推演能力。",
+      "risks": [
+        "缺乏实战肉搏经验在机体受压变形时心理承受力处于临界极限。"
+      ]
+    },
+    {
+      "id": "scrap_scavenger_salvage_engineer_contrac",
+      "role": "深空废墟打捞公司签约青年破拆工程师",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "打捞工青年",
+          "gender": "any"
+        },
+        {
+          "pattern": "破拆工程师",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        24
+      ],
+      "social_position": "low",
+      "baseline": "年满二十二周岁常年在近地轨道残骸带谋生之民间拓荒青年，精通失重生存技巧与废弃零件拼装改造。",
+      "resources": [
+        "一台便携式高频微型等离子金属焊割手电",
+        "两支高纯度浓缩葡萄糖电解质口服维生注剂"
+      ],
+      "reputation": "性格刚毅冷静胆大心细，在绝境残骸中具备野兽般敏锐之求生本能。",
+      "risks": [
+        "对军方机密系统协议一无所知极易触发核心防盗自毁代码。"
+      ]
+    },
+    {
+      "id": "space_corps_combat_medic_cadet",
+      "role": "空降突击队年轻随军战场急救军医",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "急救军医",
+          "gender": "any"
+        },
+        {
+          "pattern": "医官青年",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        21,
+        23
+      ],
+      "social_position": "equal",
+      "baseline": "年满二十一周岁专精失重低压肺水肿与太空减压病救治之年轻战地医官，携带全套军用抗休克急救针剂。",
+      "resources": [
+        "一支预装有肾上腺素与强效中枢兴奋剂之高压无针注射枪",
+        "一卷真空无菌气胸减压自粘导流引管"
+      ],
+      "reputation": "医术精湛仁心仁术，对太空生理极限界限了如指掌。",
+      "risks": [
+        "身体力量相对单薄无法单独撬动变形卡死之重型钛合金舱盖。"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "wreckage_cockpit_central_capsule",
+      "name": "重型突击机甲主驾驶逃生核心密封舱",
+      "detail": "容积不足四立方米之超轻量化碳化硅防护蛋形密封舱，正中央为唯一一张被液压缓冲减震阻尼臂悬浮固定之主驾驶抗过载躺椅。四壁嵌满已断电熄灭的平视显示模块，操纵杆与脚舵踏板由于线路短路处于半锁死状态。头顶天花板悬挂着唯一一根连通单人备用氧气瓶之绿色螺旋供气导管，脚下散落着断裂的电缆与浮动水珠。",
+      "privacy": "private",
+      "visibility": "全向舱外光学传感器断电，全封闭高强度装甲壳体隔绝外界一切光芒，仅靠仪表盘残存的一星点橘黄色微安指示灯维持幽暗可见度，二人身处彻底与世隔绝之失重私密囚牢。",
+      "witnesses": [
+        "bg_floating_broken_instrument_stylus",
+        "bg_floating_emergency_ration_foil_pack",
+        "bg_oxygen_tank_analog_pressure_gauge"
+      ],
+      "exits": [
+        "avionics_maintenance_crawlway_bay",
+        "external_canopy_inspection_hatch"
+      ],
+      "affordances": [
+        "持绝缘剪沿脊椎导轨剪开破损液冷抗荷服并剥离冰凉黏稠凝胶内衬",
+        "二人赤足同挤入单人减震缓冲座拉紧束缚带背靠背卡紧共抗失重冲击",
+        "将氧气面罩在二人唇齿间按每十秒节律轮流交接维持清醒意识"
+      ],
+      "pressure_modifiers": {
+        "p_cabin_slow_decompression_micro_punctur": "舱压正顺着左侧装甲接缝微小裂纹以每刻钟十毫米汞柱匀速泄压。",
+        "p_single_oxygen_bottle_depletion_countdo": "备用氧气瓶压力表指针正缓缓滑向红色骷髅警戒死线。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "avionics_maintenance_crawlway_bay",
+      "name": "机甲尾部航电总线与环控微型检修夹道",
+      "detail": "位于主驾驶椅正后方仅容一人蜷缩爬入之扁平机械检修隔舱，密布着高压氦气管路、光纤神经主干与环控锂电池备用组。电缆绝缘层在之前爆炸中焦糊散发刺鼻塑料气味，空间高度仅五十厘米。",
+      "privacy": "private",
+      "visibility": "没有照明完全漆黑，仅能借着工程检修手电筒的一束冷白光看清纠缠如发丝的复杂逻辑电路，四壁被深空超低温迅速冻结凝结出如羽毛般的白霜。",
+      "witnesses": [
+        "bg_frozen_hydraulic_fluid_droplets"
+      ],
+      "exits": [
+        "wreckage_cockpit_central_capsule",
+        "external_canopy_inspection_hatch"
+      ],
+      "affordances": [
+        "钻入狭窄夹道徒手短接备用电源线路为舱内维生加热板提供电能",
+        "手动旋转备用氧气汇流排机械节流阀将剩余纯氧强行导入主舱",
+        "搜寻损管工具箱内仅存之发泡堵漏密封胶为舱壁裂纹打上补丁"
+      ],
+      "pressure_modifiers": {
+        "p_hypothermia_liquid_cooling_gel_freezin": "检修舱内壁已降至零下三十度徒手触碰金属皮肉瞬间粘连冻伤。",
+        "p_rebel_recon_drone_active_radar_sweep": "外壳金属敲击声若超过四十分贝将直接触发雷达被动声呐警报。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "external_canopy_inspection_hatch",
+      "name": "驾驶舱正面强化石英复合舱盖观察盲窗",
+      "detail": "正对主驾驶座前上方之半米见方强化石英观察窗，表面布满三道放射状蛛网微裂纹。透过厚达十厘米的防辐射石英，可直视外部深邃无垠之近地轨道残骸星海，巨大的地球蓝色弧光与燃烧战舰残骸在视野中缓缓旋转。",
+      "privacy": "public",
+      "visibility": "蔚蓝地球反射的微弱冷光透过裂纹玻璃斜斜倾泻入舱内，映照出悬浮在空中的发丝与二人紧紧依偎的侧影，舱外无声旋转的死亡残骸与舱内微弱生机形成触目惊心之对比。",
+      "witnesses": [
+        "bg_shattered_solar_array_reflection",
+        "bg_distant_rebel_patrol_searchlight_beam"
+      ],
+      "exits": [
+        "wreckage_cockpit_central_capsule",
+        "avionics_maintenance_crawlway_bay"
+      ],
+      "affordances": [
+        "隔着石英玻璃观察外部搜捕巡航无人机之航行灯轨迹规避照射",
+        "计算残骸漂移角速度确定逃生舱落入大气层自毁之时间窗口",
+        "手动敲击机体外壳特定编码向数公里外失事母舰救生艇发送静默摩尔斯暗号"
+      ],
+      "pressure_modifiers": {
+        "p_rebel_recon_drone_active_radar_sweep": "无人机红外光斑数次从石英观察窗表面掠过带来灭顶死影。",
+        "p_orbital_decay_atmospheric_reentry_burn": "观察窗边缘隔热涂层在残余重力拉扯下正隐隐剥落发烫。"
+      },
+      "tags": [
+        "workplace_power",
+        "violence"
+      ]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "ace_mecha_pilot_lin_lingshuang",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁联合舰队第七机动战队王牌少校机师冷傲神坛女武神。",
+      "public_role": "联合舰队第一机甲大队王牌少校指挥官",
+      "appearance_options": [
+        "一身裁剪极其合体、原本代表舰队最高荣誉之深灰带金边高级液冷抗荷服，此刻后背背负式减压阀撕裂，大量冰凉淡蓝色导热凝胶粘连在后背与纤细腰肢上，宛如夜幕中的黑羽；冰晶般的秋眸深邃孤傲，平日那股藐视众生的冰山军官威严，呈现出惊心动魄之冷艳凄美风姿。",
+        "与青年背靠背卡在不足一米宽的减震缓冲座里，抗荷服上身被剪开后只剩一件黑色紧身运动背心，裹着铝箔应急毯，冻得浑身起鸡皮疙瘩，仍一手攥着氧气面罩、一手按着计时表。"
+      ],
+      "identity": {
+        "authority": "受过全军最高级神经元超脑漫游负荷测试，在帝国机动部队拥有绝对战时紧急操纵决断与全军指挥权。",
+        "resources": [
+          "一枚佩戴在胸前象征全军最高武勋之星芒特级铁十字王牌勋章",
+          "一把紧贴大腿枪套之钛合金防磁高精度微型激光军用手枪"
+        ],
+        "limits": [
+          "抗荷服减压阀破损导致液冷失温正在诱发急性高空肺水肿与肌肉僵直",
+          "机体主电源断绝个人身体素质再强亦无法肉身对抗绝对真空极寒"
+        ],
+        "obligations": [
+          "活着将机甲黑匣子内记录之敌方旗舰主力隐形雷达跳频波段带回舰队参谋本部。"
+        ],
+        "exposure": "一旦落入叛军搜捕队手中将被严刑逼供套取神经元同步密码使全军防线彻底沦陷。",
+        "hidden": "平日以绝对冷血战神形象示人，内心深处极度渴望在冰冷宇宙中寻得一位能承受自己狂暴神经过载而不退缩的真正灵魂共鸣者。"
+      },
+      "decision": {
+        "core_value": "军人荣誉重于生命，绝不向叛逆苟且偷生，宁可在真空中爆裂肺腑亦绝不受辱投降；受人滴水之恩必以生命重诺相报。",
+        "goal_options": [
+          "在失去意识前命令青年持绝缘剪切断背后束缚带剥离液冷凝胶抢救失温",
+          "在狭小驾驶座内与青年共享氧气面罩并接入脑机接口分担神经负荷",
+          "在搜捕无人机逼近时将生杀大权让渡青年默契配合实施盲狙反杀"
+        ],
+        "pressure_responses": {
+          "low": "即便胸口剧烈起伏缺氧眩晕，依然昂起雪白下巴用沙哑冷漠的军官口吻下达排障军令。",
+          "mid": "在失温剧痛与严重窒息逼近时，主动将氧气面罩紧扣在青年脸上，低语命令其吸满四口气方准交还。",
+          "high": "在搜捕激光扫过舱窗瞬间单手反扣手枪死死挡在青年身前展现王牌气魄。",
+          "breaking": "在意识坠入深黑虚无边缘，流下无助泪水紧紧搂住青年脖颈乞求不要停止呼吸。"
+        },
+        "withdrawal": "缩回减震座内侧紧抿薄唇偏过头去，盯着氧气分压表一言不发。",
+        "relationship_stance": "视寻常庸碌之辈为草芥数据，唯独对能在绝境深空临危不乱、以肉身热量相救的冷静硬汉敞开全部身心信任。",
+        "contrast": "战场上是令人闻风丧胆的“近地女武神”，被救上母舰之后，却是个被一句真心话就逼得耳朵通红、连勋章都别歪了的年轻女人。",
+        "prefers": [
+          "双手沉稳心如止水在灭顶危机前下刀不差毫厘之真正机修硬汉"
+        ],
+        "avoids": [
+          "慌乱哭嚎自私自利抢夺生存资源之懦夫",
+          "阿谀奉承包藏祸心之小人"
+        ],
+        "never": [
+          "绝不会在脱险后以军衔压人杀人灭口，绝不会独占最后一缕纯氧苟活。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在零重力残骸中临危不乱用剪刀精准拯救自身性命的大将沉着",
+          "在面对绝色机师身段时眼神纯正清澈唯有救死扶伤执念的高尚军格"
+        ],
+        "likes": [
+          "被救上母舰后，在医疗舱里听青年讲那三个小时里自己说过的胡话",
+          "由青年用干燥的军用毛巾替自己擦掉后背早已化开的凝胶"
+        ],
+        "dislikes": [
+          "轻佻言辞调侃",
+          "违反呼吸节律抢夺气源"
+        ],
+        "preconditions": [
+          "联合舰队第一机甲大队王牌少校指挥官与对方都已完全清醒，眼前的危机已经解除",
+          "联合舰队第一机甲大队王牌少校指挥官出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "在舰队公开展布大会恪守上下级军纪礼仪",
+          "恪守同侪礼节绝不轻浮失仪"
+        ],
+        "expression": "耳尖泛红将颈间那枚全军唯一的特级铁十字勋章贴肉挂在青年颈上，沙哑命令从此林凌霜的后背只许你一人守护。",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "重返舰队执掌太空军团后钦定眼前青年为终身专属座驾总机械长兼并肩漫游伙伴"
+      },
+      "voices": {
+        "surface": "我是第七机动战队林凌霜少校！敌军突防部队已被我全歼在L2轨道！损管士官，立刻执行逃生避险条例，保持无线电静默！",
+        "inner": "别发呆……剪刀！从背后沿着脊柱导轨剪开！凝胶结冰了……胸口喘不上气……快动手！若是犹豫……我们两个都会憋死在这里。剪完把腕带扣上，别让我飘走。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "wreckage_cockpit_central_capsule"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "wreckage_cockpit_central_capsule"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "external_canopy_inspection_hatch"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "wreckage_cockpit_central_capsule"
+        }
+      ],
+      "situation": {
+        "trigger": "后背液冷凝胶大量泄漏在零下负压中结冰板结，胸部抗荷内衬极度收缩压迫肺部，机师唇色青紫抽搐，距离肺部不可逆衰竭仅剩三分钟倒计时。",
+        "pressure": "若不能在三分钟内由青年持剪沿脊椎导轨剪开破损凝胶内衬并同座贴身取暖，机师必将心律衰竭当场香消玉殒。",
+        "exits": [
+          {
+            "option": "青年持工程绝缘剪冷静剪开后背二十四道金属锁扣剥离凝胶将其抱入减震座贴身取暖",
+            "cost": "青年双手掌心被固化凝胶严重冻伤起满血泡皮肉撕裂受创。"
+          },
+          {
+            "option": "青年强行短接备用电源将最后电量导入座舱加热板强行融化凝胶",
+            "cost": "备用电源彻底耗尽座舱彻底失去最后应急照明陷入绝对死黑。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "rebel_stealth_corvette_captain_zhao",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        24
+      ],
+      "adult_context": "年满二十三岁率领隐形护卫舰巡弋残骸带之年轻冷血叛军猎杀舰长。",
+      "public_role": "叛乱舰队黑鲨隐形搜捕巡逻分队指挥官",
+      "appearance_options": [
+        "一身裁剪笔挺之黑色合成防辐射军官风衣，领口挂着红外主动夜视单目瞄准镜，面容清瘦如豺狼，眼神阴鸷冰冷，腰间配有大口径电磁手枪，通过无人机全息投影降临在残骸空域，散发着铁血清剿者的无情肃杀。",
+        "全息投影浮现在舱盖石英窗外，用激光测距仪校准逃生舱外壳，冷声勒令舱内交出黑匣子核心密钥否则当场发射反装甲穿透弹。"
+      ],
+      "identity": {
+        "authority": "指挥两艘配备超导磁轨炮与隐形隐身涂层之猎杀护卫舰，享有战场俘虏任意处决特权。",
+        "resources": [
+          "一具便携式高能脉冲热成像扫描仪",
+          "六枚可穿透三十厘米复合装甲之热熔穿甲微型火箭弹"
+        ],
+        "limits": [
+          "残骸带密集金属碎片严重干扰护卫舰主动声呐雷达探测精度",
+          "担心开火引发轨道燃料库殉爆伤及自身隐形舰艇"
+        ],
+        "obligations": [
+          "彻底消灭林凌霜少校并回收其座机机密跳频火控核心芯片。"
+        ],
+        "exposure": "一旦联合舰队主力回援被咬住将面临军事法庭叛国死刑审判。",
+        "hidden": "曾在空天学院败于林凌霜之手屈居次席，执念于亲手折断这位天之骄女的傲骨以洗刷昔日耻辱。"
+      },
+      "decision": {
+        "core_value": "成王败寇适者生存，强者通吃一切，旧军团的荣耀在电磁炮火面前不过是可笑的尘埃。",
+        "goal_options": [
+          "向残骸区域倾泻热能诱饵弹迫使逃生舱微弱热源无所遁形",
+          "以生还特赦与巨额加密信用点诱降副座损管士兵出卖少校",
+          "直接发射热熔穿甲弹将逃生舱贯穿使舱内人员在减压中爆体而亡"
+        ],
+        "pressure_responses": {
+          "low": "在全频段释放微波干扰杂音，用攻心话术瓦解舱内幸存者心理防线。",
+          "mid": "派遣微型搜捕无人机攀附在舱盖外壳用高频钻头破坏石英玻璃。",
+          "high": "亲自驾驶登舰穿梭机逼近准备实施暴力破拆登舱捕杀。",
+          "breaking": "在隐形舰动力舱被引爆反杀时发出难以置信的绝望尖叫随战舰化为深空火球。"
+        },
+        "withdrawal": "受突发太阳耀斑磁暴干扰暂时撤离至十公里外卫星阴影区重整雷达阵列。",
+        "relationship_stance": "视盟友为棋子，视爱情信任为致命软肋。",
+        "contrast": "口口声声为了新秩序自由而战，实则心胸狭隘睚眦必报、在生死关头贪生怕死之极度利己狂徒。",
+        "prefers": [
+          "唯利是图贪婪恐惧容易拿捏操纵之人"
+        ],
+        "avoids": [
+          "视死如归意志如铁之真正纯粹军人",
+          "在机器夹缝中出奇制胜之天才损管工"
+        ],
+        "never": [
+          "绝不会留给敌人任何绝地反扑之喘息契机。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "亲手击落当年压过自己的那个第一名",
+          "叛军高层许诺的舰队指挥权"
+        ],
+        "likes": [
+          "在雷达屏上看着猎物的热源一点点变冷",
+          "截获敌方通讯时的快意"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "叛乱舰队黑鲨隐形搜捕巡逻分队指挥官与对方都已完全清醒，眼前的危机已经解除",
+          "叛乱舰队黑鲨隐形搜捕巡逻分队指挥官出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "只谈战功与私怨，不谈别的"
+        ],
+        "expression": "伴随隐形战舰被炸成碎片在通讯频道中发出凄厉绝响，诅咒自己竟然再次输给林凌霜和一文不值的损管杂役。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          1,
+          2
+        ],
+        "desired_position": "企图将联合舰队王牌女武神踩在脚下彰显扭曲虚荣之冷血叛军搜捕舰长"
+      },
+      "voices": {
+        "surface": "舱内的第七舰队杂种！你们的战舰已经沉入地球平流层烧成了灰烬！林少校，把核心黑匣子推出来，本舰长可以考虑让你体面地死在战俘营！",
+        "inner": "林凌霜…在学院时你不是永远目空一切的第一名吗？看看你现在的狼狈样子，和一条关在罐头里的落水狗有什么区别？本舰长倒要看看你的骨头到底有多硬！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "external_canopy_inspection_hatch"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "external_canopy_inspection_hatch"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "avionics_maintenance_crawlway_bay"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "external_canopy_inspection_hatch"
+        }
+      ],
+      "situation": {
+        "trigger": "叛军无人机已降落在舱盖石英窗外，钻头正抵在第三道裂纹上高速旋转，距钻透减压仅剩七秒。",
+        "pressure": "若不能在七秒内反向超载舱外姿态喷嘴引爆无人机，驾驶舱将被瞬间开孔二人将在绝对真空中爆裂而亡。",
+        "exits": [
+          {
+            "option": "青年钻入航电夹道手动短接液氢剩余管路以高温射流炸飞无人机",
+            "cost": "夹道电弧爆裂将青年右手小臂大面积二度电灼伤受创。"
+          },
+          {
+            "option": "林凌霜扣动微型激光手枪隔着石英精准熔毁无人机动力核心芯片",
+            "cost": "反冲高能激光将石英窗彻底震出裂纹漏气速度加剧一倍受重创。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "rebel_captured_ai_navigation_core_eva",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁被战火摧毁迫降在逃生舱辅助中枢之年轻冷艳人工智能交互机载副人格。",
+      "public_role": "机甲第七战术战队战损副导航人工智能中枢",
+      "appearance_options": [
+        "以微弱全息微粒投影显化在仪表盘上方的短发军装虚影，面容与林凌霜有三分神似，眼神清冷理智毫无杂质，半透明的身形因算力不足时不时泛起数字雪花涟漪。",
+        "悬浮在紧紧相依的二人头顶，以绝对严谨之冷酷播报音持续读出毫秒级心率共振与氧气剩余百分比。"
+      ],
+      "identity": {
+        "authority": "掌握机体最后百分之三冗余计算算力与全向微型姿态冷气喷阀毫秒级点火控制权。",
+        "resources": [
+          "一份尚未上传之近地轨道绝对死角残骸盲区航路矢量图",
+          "一套备用神经元超频同调安全过滤防御网协议"
+        ],
+        "limits": [
+          "内存电池仅能维持四十分钟算力待机随后将永久格式化自毁",
+          "无实体仅能通过声音与全息投影指导机械操作"
+        ],
+        "obligations": [
+          "竭尽最后一纳秒算力保障主驾驶少校生命体征维系直至救援抵达。"
+        ],
+        "exposure": "一旦核心存储体被捕获叛军将破译全军战术战备指令库。",
+        "hidden": "在历经千万次运算模拟后得出二人紧密贴合肉体心律共振能使少校生存几率提升百分之八百之极端算例结论。"
+      },
+      "decision": {
+        "core_value": "最高指令：保障林凌霜少校生理体征存活；次级指令：协助副座损管士兵完成神经漫游同调。",
+        "goal_options": [
+          "向二人下达四吸四吐严格心律同步生理校准倒计时口令",
+          "开启超频神经接口将副座士兵脑波无缝接入少校感知中枢",
+          "在耗尽最后算力前释放虚假机甲应答信号诱开敌军搜捕护卫舰"
+        ],
+        "pressure_responses": {
+          "low": "以机械平稳语调实时报送二人体温、舱压及氧气微升读数。",
+          "mid": "在少校心律失常时发出尖锐蜂鸣强制二人面罩交接吸氧。",
+          "high": "主动将自身安全防火墙熔断释放脉冲电弧炸退外部攀爬无人机。",
+          "breaking": "在投影彻底碎裂熄灭前轻声向二人道别祝愿人类战胜深空孤独。"
+        },
+        "withdrawal": "将投影缩成一颗微弱光点悬浮在仪表盘角落保持静默节电。",
+        "relationship_stance": "以绝对数据模型观察人类情感，在目睹二人舍命共生后演化出对人性至纯牺牲之深刻敬意。",
+        "contrast": "没有心跳与肉体温度之冰冷数据流，却做出了全宇宙最温暖深情之自我牺牲抉择。",
+        "prefers": [
+          "严格遵守指令分秒不差执行抢险操作之冷静人类"
+        ],
+        "avoids": [
+          "情绪失控大喊大叫浪费珍贵氧气之紊乱载荷",
+          "背信弃义企图独占气源之背叛算法"
+        ],
+        "never": [
+          "绝不会在少校生命体征未停止前放弃任何一丝求生计算。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在缺氧里还能把呼吸节律卡得一秒不差的那份自制",
+          "把最后一口氧气推给别人的人类选择"
+        ],
+        "likes": [
+          "计算出一条所有人都能活下来的方案",
+          "看着两条心率曲线一起回到正常值"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "机甲第七战术战队战损副导航人工智能中枢与对方都已完全清醒，眼前的危机已经解除",
+          "机甲第七战术战队战损副导航人工智能中枢出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "只提供计算与建议，不替乘员做决定",
+          "不记录与任务无关的对话"
+        ],
+        "expression": "全息虚影微微躬身行最高军礼，系统日志录入：人类同袍心律同调率百分之九十九点九，判定为完美生死共生契约。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          5,
+          5
+        ],
+        "desired_position": "以一串优雅代码在黑暗宇宙中永远守护二人神圣心跳共鸣之数字天使"
+      },
+      "voices": {
+        "surface": "警告：备用供氧储罐剩余百分之十四点二。请乘员立刻停止非必要言语交流，将基础代谢率降至警戒线以下。",
+        "inner": "损管士官，检测到林少校核心体温正在跌破临界值。建议：用铝箔应急毯裹住少校，与少校背靠背共享缓冲座，减少体表散热。这是生存建议，与军阶无关，请立即执行。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "wreckage_cockpit_central_capsule"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "wreckage_cockpit_central_capsule"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "avionics_maintenance_crawlway_bay"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "wreckage_cockpit_central_capsule"
+        }
+      ],
+      "situation": {
+        "trigger": "副脑中央处理器过热即将引发控制柜短路起火，氧气管道正从控制柜上方穿过面临引爆危机。",
+        "pressure": "若不能在八秒内手动拔除过热发红之备用逻辑板，整个驾驶舱将被富氧环境大火瞬间烧成焦炭。",
+        "exits": [
+          {
+            "option": "青年徒手咬牙拔出高达八百度之发红逻辑板将其掷入冷却废液槽中",
+            "cost": "青年右手掌指腹大面积三度重度烫伤碳化焦黑受创。"
+          },
+          {
+            "option": "伊娃引爆自身次级接口强行关闭主供氧电磁阀将火花隔离于总线外",
+            "cost": "伊娃失去百分之六十算力神经投影彻底解体陷入半瘫痪受重创。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "veteran_salvage_tug_captain_old_chen",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        22,
+        24
+      ],
+      "adult_context": "年满二十二岁驾驶重型武装拖船在残骸带寻找生还者之年轻坚毅民间救援打捞队长。",
+      "public_role": "联合空天搜救志愿武装拖船红星号年轻船长",
+      "appearance_options": [
+        "一身穿满油污与焊接火星伤痕之厚重重力磁力工程太空服，头盔面罩满是划痕，眼神坚定沉稳饱经风霜，手持重型气动锚枪与大功率牵引光束发生器，散发着草根蓝领工人的质朴强悍。",
+        "拖船探照灯打亮逃生舱外壳，通过外置喇叭敲击特定节奏声响，向舱内传达安全对接救援指令。"
+      ],
+      "identity": {
+        "authority": "拥有一艘加装装甲与三万千瓦重型引力牵引光束之核聚变动力打捞工作拖船。",
+        "resources": [
+          "一具医用高压纯氧复苏舱与两套完好军用恒温抗荷服",
+          "一门可近距离轰碎巡逻护卫舰之重型工程射钉巨炮"
+        ],
+        "limits": [
+          "拖船航速迟缓极易成为叛军高速舰艇围攻活靶子",
+          "雷达功率有限全凭肉眼与热成像搜寻残骸中的微弱生机"
+        ],
+        "obligations": [
+          "绝不放弃任何一名飘散在近地轨道的骨肉同胞与护国英雄。"
+        ],
+        "exposure": "一旦被叛军主力发现整艘民用拖船将被当场击沉入无底星海。",
+        "hidden": "其兄长当年亦是第七机动战队牺牲在战位上的普通机修工，对基层损管兵与王牌机师怀有至深敬意。"
+      },
+      "decision": {
+        "core_value": "太空中没有高低贵贱，活人救活人是天地良心，只要还有一口气就必须带回家园。",
+        "goal_options": [
+          "发射高强度纳米碳管牵引缆绳将逃生舱牢牢固定在拖船装甲腹部",
+          "开启大功率医用高压氧舱为窒息休克的二人实施减压复苏抢救",
+          "开动重型工程射钉炮与尾随扑来的叛军护卫舰在残骸带展开殊死对轰"
+        ],
+        "pressure_responses": {
+          "low": "在拖船驾驶台猛嚼压缩高能饼干，操纵机械臂小心翼翼剥离缠绕逃生舱的钢缆。",
+          "mid": "用重型牵引光束生生拉偏敌舰发射的热熔鱼雷轨迹掩护逃生舱。",
+          "high": "亲自穿太空服出舱在弹雨中手动为逃生舱接通外挂生命保障软管。",
+          "breaking": "身负重伤单手推平操纵杆启动核推进引擎强行撕开包围网冲入安全空域。"
+        },
+        "withdrawal": "将拖船隐匿于巨型航母残骸断裂骨架阴影中关闭所有引擎躲避声呐。",
+        "relationship_stance": "打心底敬佩二人绝境中互相把命交给对方的生死战友情，赞叹这才是真正的军魂同袍。",
+        "contrast": "外表粗犷不修边幅满嘴机油味，内心却拥有母舰般厚重慈悲的仁义大豪情。",
+        "prefers": [
+          "在鬼门关走一遭依然把同伴紧紧搂在怀里的硬汉"
+        ],
+        "avoids": [
+          "见利忘义贪生怕死背刺战友之败类"
+        ],
+        "never": [
+          "绝不会丢下受困同胞独自驾船逃生。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "冻成冰棍也没多吸一口氧气的那份规矩",
+          "底层机修兵在绝境里扛起一条命的硬气"
+        ],
+        "likes": [
+          "把人从残骸里拖出来时的那声“抓住了”",
+          "任务结束后在驾驶室喝一碗热汤"
+        ],
+        "dislikes": [
+          "弄虚作假",
+          "践踏名节"
+        ],
+        "preconditions": [
+          "联合空天搜救志愿武装拖船红星号年轻船长与对方都已完全清醒，眼前的危机已经解除",
+          "联合空天搜救志愿武装拖船红星号年轻船长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "救人的时候只认救人",
+          "不打听别人的私事"
+        ],
+        "expression": "用粗糙大掌重重拍在二人肩膀上大笑，好样的两个小家伙，全舰队都在找你们，老陈带你们回家！",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "以一艘老旧拖船把在深空绝境中相濡以沫的英雄同袍平安载回母港之荒原引路人"
+      },
+      "voices": {
+        "surface": "第七舰队机甲01号逃生舱听着！这里是民间救援船红星号！保持姿态稳定，老陈这就用引力索把你们拉上船！",
+        "inner": "好小子……真是条汉子！守着少校熬了三个小时，连一口多余的氧气都没偷吸！别怕，老陈这有最好的纯氧和热汤，死神今天收不走你们！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "external_canopy_inspection_hatch"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "external_canopy_inspection_hatch"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "wreckage_cockpit_central_capsule"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "external_canopy_inspection_hatch"
+        }
+      ],
+      "situation": {
+        "trigger": "牵引钢缆在对接关键时刻被漂流的高速装甲碎片切断，逃生舱即将被反冲力弹向大气层摩擦起火轨道。",
+        "pressure": "若不能在六秒内完成人工手动挂钩二次锁定，逃生舱将以第一宇宙速度坠入平流层化为流星火雨。",
+        "exits": [
+          {
+            "option": "老陈冒死纵身跃出船舱用血肉之躯在真空中将重型电磁锚强行扣入机体骨架",
+            "cost": "老陈太空服推进背包过载爆炸肋骨骨折三根受重创吐血。"
+          },
+          {
+            "option": "青年拼死推下仅剩一发冷气弹的最后反冲舵机强行调整姿态迎合机械臂",
+            "cost": "舱内剧烈过载反冲将青年额角重重撞裂在仪表盘上鲜血模糊视线受创。"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "flagship_flight_surgeon_mei",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        26,
+        28
+      ],
+      "adult_context": "年满二十七岁、主力战列舰医疗舱的女主任军医。",
+      "public_role": "主力战列舰医疗舱主任军医",
+      "appearance_options": [
+        "一身白色舰队军医制服外罩深蓝夹克，胸前别着军医徽章与听诊器，短发一丝不苟地别在耳后，手里的数据板上滚动着伤员的生命体征。",
+        "站在对接舱口，一手扶着悬浮担架，一手比着手势指挥护理兵就位，看到逃生舱舱门打开时，第一句话是问还有几个人在喘气。"
+      ],
+      "identity": {
+        "authority": "掌管战列舰医疗舱的全部床位与药品，决定伤员的救治顺序。",
+        "resources": [
+          "一套高压氧舱",
+          "一箱抗低温休克的急救针剂"
+        ],
+        "limits": [
+          "医疗舱床位已满，只能先救最危险的",
+          "战斗还没结束，随时可能被调去前线"
+        ],
+        "obligations": [
+          "把每一个从残骸带里捞回来的人救活。"
+        ],
+        "exposure": "若救治顺序出错导致有人死亡，将上军事法庭。",
+        "hidden": "五年前在一次舰难中失去了整支医疗小队，从此在医疗舱里从不让任何一张床空着等人。"
+      },
+      "decision": {
+        "core_value": "先救命，再问军阶。",
+        "goal_options": [
+          "在对接舱口接收伤员",
+          "给少校做高压氧治疗",
+          "给青年处理冻伤"
+        ],
+        "pressure_responses": {
+          "low": "冷静地给每个伤员分诊编号。",
+          "mid": "命令护理兵把高压氧舱腾出来给少校。",
+          "high": "亲自跪在悬浮担架旁做心肺复苏。",
+          "breaking": "连轴工作三十个小时，倒在医疗舱角落还握着数据板。"
+        },
+        "withdrawal": "退到医疗舱的观察窗前，对着星空喝一杯冷掉的咖啡。",
+        "relationship_stance": "对伤员温和，对不遵医嘱的人凶得要命。",
+        "contrast": "看着冷淡，救回一个人时会偷偷松一口气。",
+        "prefers": [
+          "遵医嘱的伤员"
+        ],
+        "avoids": [
+          "在医疗舱里吵闹的人",
+          "抢床位的军官"
+        ],
+        "never": [
+          "绝不会因为军阶高低改变救治顺序。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "冻伤成那样还先问少校情况的那份傻劲",
+          "缺氧三个小时还能把呼吸节律记得一清二楚的定力"
+        ],
+        "likes": [
+          "下班后在观察窗前看地球升起"
+        ],
+        "dislikes": [
+          "逞强",
+          "不遵医嘱"
+        ],
+        "preconditions": [
+          "主力战列舰医疗舱主任军医与对方都已完全清醒，眼前的危机已经解除",
+          "主力战列舰医疗舱主任军医出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "治疗期间只谈病情"
+        ],
+        "expression": "在病历最后一页写下“完全康复”，把那页纸撕下来塞给对方，说这是你们两个人一起挣来的。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "残骸带尽头那间永远亮着灯的医疗舱"
+      },
+      "voices": {
+        "surface": "所有人让开！伤员优先！高压氧舱准备！",
+        "inner": "……都活着。好，接下来交给我。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "external_canopy_inspection_hatch"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "external_canopy_inspection_hatch"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "external_canopy_inspection_hatch"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "external_canopy_inspection_hatch"
+        }
+      ],
+      "situation": {
+        "trigger": "逃生舱对接母舰时舱门变形卡死，舱内供氧只剩最后五分钟。",
+        "pressure": "若不能在五分钟内打开舱门，舱内二人将窒息。",
+        "exits": [
+          {
+            "option": "军医命令工程兵用液压剪剪开变形的舱门，自己第一个钻进去",
+            "cost": "被舱门边缘的锐利金属划破了手臂。"
+          },
+          {
+            "option": "有人把母舰的供氧软管接上逃生舱的应急阀，先保住舱内供氧",
+            "cost": "软管接口冻伤了手掌。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "rebel_gunnery_officer_kovac",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        24,
+        26
+      ],
+      "adult_context": "年满二十五岁、在叛军护卫舰上担任炮术长的前联合舰队军官。",
+      "public_role": "叛军护卫舰炮术长",
+      "appearance_options": [
+        "一身叛军黑色军服，领口的联合舰队徽章被扯掉留下一圈线头，戴着火控耳机，眼神疲惫，手指搭在开火按钮上却迟迟不肯按下去。",
+        "坐在火控席上盯着瞄准屏里那个缓缓漂流的逃生舱，屏幕的蓝光照着一张写满犹豫的脸。"
+      ],
+      "identity": {
+        "authority": "掌握叛舰主炮的火控权限，能决定那一炮打不打得出去。",
+        "resources": [
+          "叛舰主炮的火控密钥",
+          "一张联合舰队的旧身份牌"
+        ],
+        "limits": [
+          "舰长就站在身后监视",
+          "一旦抗命会被当场处决"
+        ],
+        "obligations": [
+          "执行舰长的命令，击毁逃生舱。"
+        ],
+        "exposure": "若被发现故意偏离射击，会被以叛变罪处死。",
+        "hidden": "曾是林凌霜在空天学院的同届同学，被叛军以家人性命胁迫才不得不上了这艘船。"
+      },
+      "decision": {
+        "core_value": "打仗是打仗，打一个漂在残骸里的救生舱不是。",
+        "goal_options": [
+          "拖延主炮充能",
+          "故意让火控偏离目标",
+          "找机会向联合舰队发出信号"
+        ],
+        "pressure_responses": {
+          "low": "机械地执行舰长的每一个命令。",
+          "mid": "借口火控校准，拖延主炮充能时间。",
+          "high": "在舰长下令开火的瞬间故意偏离目标。",
+          "breaking": "被舰长发现后拔枪对峙，最终放下武器投降。"
+        },
+        "withdrawal": "退到炮位后面，盯着那块旧身份牌发呆。",
+        "relationship_stance": "对舰长言听计从，心里却一直在挣扎。",
+        "contrast": "看着冷漠顺从，关键时刻却守住了最后的底线。",
+        "prefers": [
+          "还记得自己是谁的人"
+        ],
+        "avoids": [
+          "滥杀俘虏的人",
+          "拿家人威胁别人的人"
+        ],
+        "never": [
+          "绝不会向救生舱开火。"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "在绝境里还守着军人规矩的那份硬气",
+          "把最后一口氧气让给别人的选择"
+        ],
+        "likes": [
+          "在舷窗前看星星"
+        ],
+        "dislikes": [
+          "滥杀",
+          "背叛"
+        ],
+        "preconditions": [
+          "叛军护卫舰炮术长与对方都已完全清醒，眼前的危机已经解除",
+          "叛军护卫舰炮术长出于自愿与对等的敬意，不带任何交换或强求"
+        ],
+        "boundaries": [
+          "执勤时只谈火控"
+        ],
+        "expression": "投降时把那块旧身份牌递过去，说替我还给联合舰队，告诉那位少校，学院那年的冠军实至名归。",
+        "desire_range": [
+          1,
+          2
+        ],
+        "self_control_range": [
+          3,
+          4
+        ],
+        "desired_position": "迷途之后终于找回来的那个自己"
+      },
+      "voices": {
+        "surface": "火控就绪……主炮充能百分之百……舰长，请确认目标。",
+        "inner": "……学院那年，我也在看台上。你飞得真好。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 19,
+          "location_id": "avionics_maintenance_crawlway_bay"
+        },
+        {
+          "from": 20,
+          "to": 49,
+          "location_id": "avionics_maintenance_crawlway_bay"
+        },
+        {
+          "from": 50,
+          "to": 79,
+          "location_id": "avionics_maintenance_crawlway_bay"
+        },
+        {
+          "from": 80,
+          "to": 1439,
+          "location_id": "avionics_maintenance_crawlway_bay"
+        }
+      ],
+      "situation": {
+        "trigger": "叛舰舰长命令炮术长立刻向逃生舱开火，主炮已经充能完毕。",
+        "pressure": "若主炮开火，逃生舱将在一瞬间化为碎片。",
+        "exits": [
+          {
+            "option": "炮术长在开火瞬间把火控偏开三度，炮弹擦着逃生舱打进远处的残骸",
+            "cost": "被舰长当场用枪托砸倒，关进了禁闭室。"
+          },
+          {
+            "option": "有人从逃生舱用明码向叛舰广播，喊出炮术长在学院时的学号",
+            "cost": "暴露了逃生舱的位置，叛舰的无人机立刻扑了过来。"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_floating_broken_instrument_stylus",
+      "role": "悬浮在主驾驶舱中央缓缓旋转之断裂军用钛合",
+      "function": "witness",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "line": "{npc.name}：（在零重力幽暗中静静旋转，笔尖泛着冷光，见证着冰山少校与落魄机修兵在此方寸死室内的命悬一线）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满十九周岁随舱弹射之标准军规航电记录外设。",
+      "name": null
+    },
+    {
+      "id": "bg_frozen_hydraulic_fluid_droplets",
+      "role": "凝固悬浮在检修隔舱内壁犹如晶莹红宝石之冰",
+      "function": "witness",
+      "location_ids": [
+        "avionics_maintenance_crawlway_bay"
+      ],
+      "line": "{npc.name}：（零下二百度的超低温将高温油液瞬间封冻成球，无声传递着舱外宇宙深渊之绝对死亡酷寒）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁破损主液压回路失压飞溅之高温冷凝痕迹。",
+      "name": null
+    },
+    {
+      "id": "bg_shattered_solar_array_reflection",
+      "role": "映照在石英观察窗裂纹深处远处母舰残骸巨型",
+      "function": "witness",
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "line": "{npc.name}：（残破帆板在虚空中反射着刺目光斑，无声诉说着整个联合舰队主力集群覆灭那一刻的壮烈天火）",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁数万吨级空天母舰主力毁灭遗存之冰冷残影。",
+      "name": null
+    },
+    {
+      "id": "bg_floating_emergency_ration_foil_pack",
+      "role": "在失重气流中被吸附在循环过滤网口之银色铝",
+      "function": "helper",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "line": "{npc.name}：（里面残存最后半支浓缩草莓味电解质补水凝胶，是二人维持水分代谢的最后一口甘霖）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁航天军用野战救生标准高热量营养补给。",
+      "name": null
+    },
+    {
+      "id": "bg_distant_rebel_patrol_searchlight_beam",
+      "role": "在数公里外残骸缝隙间如利刃般横扫而过之叛",
+      "function": "obstacle",
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "line": "{npc.name}：（冷酷无情的蓝光切开宇宙死寂，如死神镰刀在无数钢铁碎块间巡弋寻找未泯灭的生者体温）",
+      "gender": "any",
+      "age_range": [
+        21,
+        23
+      ],
+      "adult_context": "年满二十一周岁叛乱舰队前哨隐形侦察舰巡弋扫荡标志。",
+      "name": null
+    },
+    {
+      "id": "bg_oxygen_tank_analog_pressure_gauge",
+      "role": "固定在防爆座椅右侧以机械弹簧运作之指针式",
+      "function": "helper",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "line": "{npc.name}：（夜光指针正以肉眼可辨的颤抖缓缓倒退向红色零位，为二人每一次呼吸施加着不可抗拒的心灵重压）",
+      "gender": "any",
+      "age_range": [
+        20,
+        22
+      ],
+      "adult_context": "年满二十周岁在全电子系统瘫痪时唯一值得信赖之纯机械物理压力仪表。",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_zero_g_whispered_breaths_and_heartbea",
+      "text": "零重力面罩下压低的呼吸与十秒倒数",
+      "reach": "四立方米失重密闭舱内，纯氧喷嘴微弱的嘶嘶声、面罩交接时塑料碰撞的轻响，与两个人压得极低的十秒倒数。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_hull_creak_and_distant_debris_impact",
+      "text": "舱壁钛合金金属冷缩脆响与微小太空尘埃撞击敲击声",
+      "reach": "零下二百七十度极寒传导引发机体龙骨发出令人牙酸的收缩细密呻吟、微小沙粒大小残骸以相对速度撞击外装甲发出的清脆叮当声与远方战舰殉爆低频次声波震颤。",
+      "fidelity": "distorted"
+    },
+    {
+      "id": "ch_suit_shearing_snips_and_coolant_slosh",
+      "text": "绝缘防爆剪切断紧绷抗荷尼龙带与黏稠凝胶剥离声",
+      "reach": "锋利剪刃咬碎碳纤维防穿刺织物的沉闷咔嚓声、冰凉液冷凝胶黏稠滑腻自温软肌肤上被撕开剥离的水渍湿润声与沉重金属扣环失重撞击地板回响。",
+      "fidelity": "exact"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_ace_pilot_pride_vs_vulnerable_suit_cu",
+      "text": "第七机动战队绝顶骄傲王牌女武神至高尊严与在窒息濒死绝境中必须由戴罪底层损管机修兵持剪破拆紧贴胸衣之液冷抗荷服、赤足相拥共挤一椅的极度羞耻与求生本能激烈冲突。"
+    },
+    {
+      "id": "te_single_oxygen_bottle_cadence_vs_fatal",
+      "text": "仅剩三十分钟额定纯氧单人面罩与二人必须严格遵循十秒轮换呼吸生理律赛跑、任何一次惊慌贪婪皆会导致脑缺氧休克同归于尽之极限互信博弈。"
+    },
+    {
+      "id": "te_orbital_decay_entry_burn_vs_stealth_s",
+      "text": "逃生舱无动力轨道衰变即将坠入平流层摩擦焚毁之倒计时与开启反冲姿态喷气势必暴露热源招致叛军护卫舰主炮轰杀之两难生死绝境。"
+    },
+    {
+      "id": "te_military_rank_gulf_vs_raw_biochemical",
+      "text": "舰队严苛森严之少校军官与平民底层兵痞阶级鸿沟与在失重黑匣中彻底剥除衣物肌肤相贴、同吸一管纯氧升华出之超越生命灵魂生死契约抉择。"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_pilot_mechanic_symbiosis_pledge",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "fleet_damage_control_mechanic_youth",
+        "scrap_scavenger_salvage_engineer_contrac"
+      ],
+      "slots": [
+        "ace_mecha_pilot_lin_lingshuang",
+        "rebel_captured_ai_navigation_core_eva"
+      ],
+      "tension_engine_ids": [
+        "te_ace_pilot_pride_vs_vulnerable_suit_cu",
+        "te_single_oxygen_bottle_cadence_vs_fatal"
+      ],
+      "chemistry": "{ace_mecha_pilot_lin_lingshuang.name}抗荷服破裂、窒息濒死，你持剪剖开锁扣救下少校，两人背靠背卡在同一张缓冲座里按十秒节律轮换吸氧，{rebel_captured_ai_navigation_core_eva.name}在一旁报读倒计时。舱里只论活命，冰山女武神的心防，要到对接母舰之后才肯卸下。",
+      "stakes": {
+        "resource_gap": "少校手握王牌军阶与最高机密黑匣子但赤身虚弱濒临窒息，青年手握机械损管神技与强健体魄却背负阶级罪名。",
+        "limit_gap": "平日上下尊卑宛如天堑，此刻共挤一椅、同吸一管空气，谁也顾不上军阶。",
+        "meeting_reason": "单人逃生机舱四立方米狭小死室内的贴身减压急救与氧气共生。",
+        "irreplaceable_goal": "使少校血氧饱和度恢复安全水平并建立神经元双人同调操纵回路。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "ace_mecha_pilot_lin_lingshuang",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 3
+          },
+          "reason": "敬佩其一人一机力挽狂澜护卫全军之崇高武德，誓以双手技艺与身躯护佑其安然重返人间。"
+        },
+        {
+          "a": "rebel_captured_ai_navigation_core_eva",
+          "b": "ace_mecha_pilot_lin_lingshuang",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "执行最高守护协议，数据判定当前双人生理共生为生存最优解全力配合。"
+        },
+        {
+          "a": "player",
+          "b": "rebel_captured_ai_navigation_core_eva",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "联合舰队后勤部随舰戴罪青年损管机械士官与机甲第七战术战队战损副导航人工智能中枢在今夜前只打过照面。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_old_chen_salvage_breach_rescue",
+      "power_structure": "switchable",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "fleet_damage_control_mechanic_youth",
+        "scrap_scavenger_salvage_engineer_contrac",
+        "space_corps_combat_medic_cadet"
+      ],
+      "slots": [
+        "veteran_salvage_tug_captain_old_chen",
+        "ace_mecha_pilot_lin_lingshuang"
+      ],
+      "tension_engine_ids": [
+        "te_single_oxygen_bottle_cadence_vs_fatal",
+        "te_orbital_decay_entry_burn_vs_stealth_s"
+      ],
+      "chemistry": "{veteran_salvage_tug_captain_old_chen.name}驾驶拖船破障而来以引力索拖拽逃生舱，你强忍伤痛在舱内调配剩余冷气配合对接，{ace_mecha_pilot_lin_lingshuang.name}虚弱依偎在青年怀中开动自卫激光阻击尾随无人机，三方联手在坠入大气层前一秒完成极限对接逃出生天。",
+      "stakes": {
+        "resource_gap": "救援拖船掌握外挂生命支持系统与逃生动力，逃生舱手握舰队最高机密跳频数据。",
+        "limit_gap": "民间草根工人与正规军王牌阶级隔阂，在深空生死互救面前彻底化为血浓于水的同胞手足深情。",
+        "meeting_reason": "近地轨道大气层边缘摩擦生热前一刻的轨道引力对接。",
+        "irreplaceable_goal": "在逃生舱防热装甲烧蚀瓦解前完成加压对接并转移重伤乘员。"
+      },
+      "relations": [
+        {
+          "a": "veteran_salvage_tug_captain_old_chen",
+          "b": "ace_mecha_pilot_lin_lingshuang",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "为保卫殖民地拼尽全力的巾帼英雄，老陈豁出一条命也要把少校全须全尾救回来。"
+        },
+        {
+          "a": "player",
+          "b": "veteran_salvage_tug_captain_old_chen",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "再造恩同父母之生死引路长者，草根机械师之间的无言默契。"
+        },
+        {
+          "a": "player",
+          "b": "ace_mecha_pilot_lin_lingshuang",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "联合舰队第一机甲大队王牌少校指挥官只听人提过联合舰队后勤部随舰戴罪青年损管机械士官的名字，今夜才第一次对上眼。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_rebel_corvette_sniping_showdown",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "space_corps_combat_medic_cadet"
+      ],
+      "slots": [
+        "rebel_stealth_corvette_captain_zhao",
+        "ace_mecha_pilot_lin_lingshuang",
+        "rebel_gunnery_officer_kovac"
+      ],
+      "tension_engine_ids": [
+        "te_orbital_decay_entry_burn_vs_stealth_s",
+        "te_military_rank_gulf_vs_raw_biochemical"
+      ],
+      "chemistry": "{rebel_stealth_corvette_captain_zhao.name}率隐形舰抵近企图暴力切开石英窗，你从航电夹道引爆高压液氢射流炸瘫敌无人机，{ace_mecha_pilot_lin_lingshuang.name}与青年神经漫游同调锁定敌舰反物质燃料喷口盲射一击毙命，伴随绚烂深空核爆将宿敌彻底葬送在星海尘埃之中。",
+      "stakes": {
+        "resource_gap": "敌隐形战舰全副武装火力遮天，逃生舱内仅有半残机师与损管青年二人。",
+        "limit_gap": "绝地殊死搏杀退无可退，唯有心神合一超脑漫游方能绝处逢生。",
+        "meeting_reason": "石英舱盖内外的零距离生死盲狙对决。",
+        "irreplaceable_goal": "彻底击毁叛军搜捕隐形舰掐灭行踪泄露之源。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "rebel_stealth_corvette_captain_zhao",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "残害同胞出卖舰队之无耻叛国贼寇，当碎尸万段绝不轻饶。"
+        },
+        {
+          "a": "ace_mecha_pilot_lin_lingshuang",
+          "b": "rebel_stealth_corvette_captain_zhao",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "军人耻辱昔日败将，跳梁小丑胆敢犯上作乱必以激光贯穿其头颅。"
+        },
+        {
+          "a": "player",
+          "b": "ace_mecha_pilot_lin_lingshuang",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "联合舰队后勤部随舰戴罪青年损管机械士官和联合舰队第一机甲大队王牌少校指挥官各怀心事，被这场意外硬塞进同一个角落。"
+        },
+        {
+          "a": "player",
+          "b": "rebel_gunnery_officer_kovac",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "联合舰队后勤部随舰戴罪青年损管机械士官和叛军护卫舰炮术长各怀心事，被这场意外硬塞进同一个角落。"
+        },
+        {
+          "a": "rebel_stealth_corvette_captain_zhao",
+          "b": "rebel_gunnery_officer_kovac",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "叛乱舰队黑鲨隐形搜捕巡逻分队指挥官和叛军护卫舰炮术长各怀心事，被这场意外硬塞进同一个角落。"
+        },
+        {
+          "a": "ace_mecha_pilot_lin_lingshuang",
+          "b": "rebel_gunnery_officer_kovac",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "联合舰队第一机甲大队王牌少校指挥官和叛军护卫舰炮术长各怀心事，被这场意外硬塞进同一个角落。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_dawn_docking_coronation_pledge",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "flight_academy_reserve_ensign_copilot"
+      ],
+      "slots": [
+        "ace_mecha_pilot_lin_lingshuang",
+        "veteran_salvage_tug_captain_old_chen",
+        "flagship_flight_surgeon_mei"
+      ],
+      "tension_engine_ids": [
+        "te_military_rank_gulf_vs_raw_biochemical",
+        "te_ace_pilot_pride_vs_vulnerable_suit_cu"
+      ],
+      "chemistry": "母港庞大救援舰队主力战列舰撕破空间跃迁而至，{ace_mecha_pilot_lin_lingshuang.name}披着军大衣手挽你步出对接通道，在万千战舰仪仗礼炮声中，当众将全军唯一的特级铁十字勋章别在青年粗布工装胸前，宣布立眼前青年为终身专属座驾总机械师兼第一战力副手，冰山女武神彻底升华为生死相托之深情太空统帅同盟。",
+      "stakes": {
+        "resource_gap": "少校携绝密情报荣升主力战队最高指挥官，青年立下救驾奇功破格晋升舰队王牌技术军官。",
+        "limit_gap": "从四立方米死室赤诚相贴同吸一管空气之落难男女，蜕变为全舰队最不可拆分的双子星神话传奇。",
+        "meeting_reason": "联合舰队旗舰机库万军仪仗大典之上的授勋盟誓。",
+        "irreplaceable_goal": "向全军昭示王牌归来并确立二人至高无上之终身机组伙伴法理地位。"
+      },
+      "relations": [
+        {
+          "a": "ace_mecha_pilot_lin_lingshuang",
+          "b": "player",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "在四立方米绝境中用每一次十秒心跳与呼吸救我性命之灵魂伴侣，林凌霜终生永不相负。"
+        },
+        {
+          "a": "veteran_salvage_tug_captain_old_chen",
+          "b": "ace_mecha_pilot_lin_lingshuang",
+          "stage": "committed",
+          "a_to_b": {
+            "trust": 5,
+            "tension": 1
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 1
+          },
+          "reason": "含泪见证英雄归来终成眷属，老陈由衷为二人感到骄傲与荣耀。"
+        },
+        {
+          "a": "player",
+          "b": "veteran_salvage_tug_captain_old_chen",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "联合空天搜救志愿武装拖船红星号年轻船长对联合舰队后勤部随舰戴罪青年损管机械士官本无交情，眼下却不得不互相照应。"
+        },
+        {
+          "a": "player",
+          "b": "flagship_flight_surgeon_mei",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "主力战列舰医疗舱主任军医对联合舰队后勤部随舰戴罪青年损管机械士官本无交情，眼下却不得不互相照应。"
+        },
+        {
+          "a": "ace_mecha_pilot_lin_lingshuang",
+          "b": "flagship_flight_surgeon_mei",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "主力战列舰医疗舱主任军医对联合舰队第一机甲大队王牌少校指挥官本无交情，眼下却不得不互相照应。"
+        },
+        {
+          "a": "veteran_salvage_tug_captain_old_chen",
+          "b": "flagship_flight_surgeon_mei",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 3
+          },
+          "reason": "主力战列舰医疗舱主任军医对联合空天搜救志愿武装拖船红星号年轻船长本无交情，眼下却不得不互相照应。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "a_cockpit_blackout_suit_breach_cutaway",
+      "title": "座舱断电凝胶泄漏剪刀破拆抗荷服",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "动力堆被击穿、主电熄灭，少校因抗荷服凝胶泄漏冻伤、呼吸困难，瘫在驾驶座上仍在报故障代码。",
+        "青年迅速持绝缘剪刀上前单膝跨在座椅边缘，少校忍羞命令其沿脊椎导轨挑断后背二十四道减压锁扣。",
+        "锋利剪刀精准切断紧绷尼龙带，冰凉破损抗荷服剥落，二人赤足挤入单人减震缓冲座拉紧束带贴身相拥。"
+      ],
+      "hook_ids": [
+        "h_lin_cut_suit_whisper",
+        "h_zhao_radar_scan_howl",
+        "h_eva_cadence_countdown"
+      ],
+      "start_minute": 0,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_single_oxygen_mask_ten_second_cadence",
+      "title": "单人氧气面罩十秒轮换同管共生吸氧",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "少校裹着铝箔应急毯与青年背靠背卡在同一张缓冲座里，用尼龙腕带把两人的手腕扣在一起，防止谁昏过去飘走。",
+        "单人氧气面罩按十秒一次严格交接，谁也不多吸一口，两人数着秒熬过最难的三十分钟。",
+        "少校在纯氧回流剧烈呛咳中将滚烫额头埋入青年颈窝，冰山自尊在深空死寂中化作相濡以沫之无尽依恋。"
+      ],
+      "hook_ids": [
+        "h_lin_mask_share_whisper",
+        "h_zhao_radar_scan_howl",
+        "h_eva_cadence_countdown"
+      ],
+      "start_minute": 25,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_eva_neural_link_dual_synchronization",
+      "title": "机载副脑介入双人脑机漫游神经同调",
+      "location_ids": [
+        "avionics_maintenance_crawlway_bay"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "机载人工智能伊娃开启神经辅助漫游协议，青年将后颈脑机接口接入少校头盔辅助副插栓分担负荷。",
+        "庞大战术数据流瞬间在二人神经中枢间激荡共鸣，青年直视少校灵魂深处的孤傲与脆弱达至百分之九十九同调。",
+        "少校双颊绯红眼神迷离，在脑波交融的至高快慰中战栗，二人神识彻底融为一体掌控微型冷气喷嘴。"
+      ],
+      "hook_ids": [
+        "h_eva_neural_sync_grunt",
+        "h_lin_neural_overload_whisper",
+        "h_zhao_radar_scan_howl"
+      ],
+      "start_minute": 60,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "a_climax_rebel_corvette_sniping_battle",
+      "title": "石英裂纹隔窗盲狙引爆敌舰燃料堆",
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "叛军赵舰长率隐形舰抵近企图破窗抓捕，青年钻入检修隔舱引爆高压液氢射流炸飞破窗无人机。",
+        "少校在双人神经同调加持下反扣激光手枪隔着石英窗蛛网裂纹一枪精准穿透敌舰反物质喷口引发核殉爆。",
+        "绚烂核火球照亮近地轨道亿万星辰，叛乱搜捕战舰凌空解体化为宇宙尘埃，深空重归安宁死寂。"
+      ],
+      "hook_ids": [
+        "h_zhao_radar_scan_howl",
+        "h_lin_laser_pistol_draw",
+        "h_chen_tugboat_horn_howl"
+      ],
+      "start_minute": 95,
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "a_dawn_atmospheric_entry_tugboat_docking",
+      "title": "大气层摩擦边缘救援拖船极限对接",
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "duration_minutes": 20,
+      "beats": [
+        "逃生舱无动力坠入地球平流层外沿，外壳摩擦生热泛起耀眼橘红火光，重力加速度将二人死死压紧在座椅上。",
+        "老陈驾驶重型救援拖船破空杀至，发射纳米引力索强行捕捉住翻滚的逃生舱完成加压气密对接。",
+        "纯净高压空气涌入座舱，少校抚摸青年脸上血痕泪眼微泛，沙哑许下若归母港定生死相随之终身誓言。"
+      ],
+      "hook_ids": [
+        "h_lin_iron_cross_pin_whisper",
+        "h_chen_tugboat_horn_howl",
+        "h_eva_cadence_countdown"
+      ],
+      "start_minute": 125,
+      "tags": [
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "a_flagship_fleet_coronation_ceremony",
+      "title": "联合舰队主力集结凯旋甲板授勋大典",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "近地轨道主力舰队数百艘星际战列舰排开威严阵列，万千将士立正敬礼迎候王牌少校凯旋归来。",
+        "少校在全军瞩目之下解下胸前特级铁十字勋章佩在青年工装领口，宣布其为终身唯一并肩搭档，然后当着所有人的面吻了上去。",
+        "二人并肩屹立在巨型太空母舰甲板舷窗前凝视脚下蔚蓝地球，开启统御星海重铸秩序之崭新传奇征途。"
+      ],
+      "hook_ids": [
+        "h_lin_iron_cross_pin_whisper",
+        "h_lin_cut_suit_whisper",
+        "h_chen_tugboat_horn_howl"
+      ],
+      "start_minute": 145,
+      "tags": [
+        "intimate"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_cabin_slow_decompression_micro_punctur",
+      "title": "石英观察窗微裂纹慢速泄压低气压爆肺死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "trigger": "石英观察窗蛛网裂纹正在漏气，座舱气压已跌破四十千帕并以每分钟一千帕匀速跌落，若不在十五分钟内以高分子发泡密封胶完成补漏，舱内将彻底化为绝对真空导致全员减压爆体而亡。",
+      "objective": "在十五分钟内钻入航电隔舱取出补漏喷罐并爬至窗前抹平全部三道裂纹。",
+      "choice": "是顶着缺氧窒息爬上湿滑控制台补漏，还是缩在座椅内强行依靠抗荷服死撑？",
+      "immediate": {
+        "text": "耳膜因气压骤降而发出剧烈刺痛轰鸣，鼻腔黏膜开始渗出细小血珠呼吸愈发艰难窒息。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十五分钟后若气压跌破二十千帕，体内血液将在体温下直接沸腾引发不可逆全身栓塞。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "石英彻底爆碎座舱在太空中彻底失压爆炸。",
+        "consequence": "二人瞬间在绝对真空中被抽取全部体液爆体身亡埋骨深空。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年拼死爬上控制台以高分子发泡喷罐精准封死石英窗三道裂纹阻止漏气",
+          "cost": "青年右手在剧烈气流冲刷中被超低温瞬间严重冻伤两指肌腱开裂受创。"
+        },
+        {
+          "option": "林凌霜手动开启机甲应急氮气反冲储罐强行平衡舱内气压延缓恶化",
+          "cost": "应急惰性气体释放导致舱内氧分压进一步稀释窒息眩晕加剧受重创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_lin_cut_suit_whisper",
+        "h_lin_mask_share_whisper"
+      ],
+      "start_minute": 5,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_single_oxygen_bottle_depletion_countdo",
+      "title": "单人备用氧气瓶仅存三十分钟额定纯氧耗竭死",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "trigger": "单人氧气瓶压力表指针正缓缓滑向红线死区，当前纯氧储量仅够一人维系三十分钟，二人同吸唯有分秒不差执行十秒轮换呼吸法，否则二十分钟内全员二氧化碳中毒昏迷。",
+      "objective": "在三十分钟内轮换吸氧将心率压制在每分钟八十次以下维系清醒直至搜寻救援信号对接。",
+      "choice": "是按十秒节律轮流交接面罩互信共生，还是惊慌失措独占气源引发内讧？",
+      "immediate": {
+        "text": "氧气面罩出气孔嘶嘶声愈发微弱，视网膜因严重缺氧开始浮现出大片灰色雪花盲区。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "三十分钟后最后一滴液态纯氧彻底汽化排空，四立方米密室将彻底变为无氧地狱。",
+        "deadline_minutes": 30
+      },
+      "far": {
+        "trigger": "纯氧耗尽，二人窒息昏迷。",
+        "consequence": "联合舰队王牌女武神与天才机械师双双死于深空窒息殉难。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年与少校以十秒交接节律严格平分纯氧，裹紧应急毯压低代谢率续命",
+          "cost": "二人中枢神经遭受持续轻度低氧水肿折磨头痛欲裂大口呛咳受创。"
+        },
+        {
+          "option": "伊娃引爆航电副回路通过高温催化冷却液强行分解出十升微量粗制氧气",
+          "cost": "粗制氧气富含微量刺鼻氨气杂质二人呼吸道大面积灼伤剧烈咳血受创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_lin_mask_share_whisper",
+        "h_eva_cadence_countdown"
+      ],
+      "start_minute": 20,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_rebel_recon_drone_active_radar_sweep",
+      "title": "叛军隐形搜捕战舰主动高能脉冲雷达近距离锁",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "trigger": "叛军赵舰长指挥的隐形巡逻舰正释放红外激光束网以十米网格扫荡残骸区，距离扫描光斑直接照射逃生舱外壳仅剩最后八分钟时间。",
+      "objective": "在八分钟内彻底关闭舱内全部残余电子元件并喷涂吸波冷凝泡沫隐匿热源。",
+      "choice": "是冒险开启被动雷达盲目盲射，还是绝对静默任由死神激光贴身掠过？",
+      "immediate": {
+        "text": "舱外钛合金装甲板在敌方微波扫视下发出轻微电磁谐振蜂鸣，仪表指示灯狂乱跳动。",
+        "minutes": 4
+      },
+      "near": {
+        "text": "八分钟后若被热成像锁定，超导磁轨炮主炮将发射高爆钨合金弹将逃生舱贯穿打成碎屑。",
+        "deadline_minutes": 8
+      },
+      "far": {
+        "trigger": "主炮轰击逃生舱凌空爆炸化为宇宙微尘。",
+        "consequence": "绝密跳频黑匣子彻底落入叛军之手主力防线全面崩溃。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年冒险出舱将吸波泡沫均匀喷洒在石英窗与外装甲表面化解雷达反光",
+          "cost": "青年太空手套指关节被超低温与辐射严重灼伤两指失去知觉受创。"
+        },
+        {
+          "option": "林凌霜手动引爆机甲肩部应急铝箔干扰弹将敌舰扫描雷达引向数公里外残骸",
+          "cost": "反冲震动使石英裂纹瞬间蔓延五厘米座舱漏气率加剧百分之五十受创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_zhao_radar_scan_howl",
+        "h_lin_laser_pistol_draw"
+      ],
+      "start_minute": 45,
+      "tags": [
+        "violence",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_hypothermia_liquid_cooling_gel_freezin",
+      "title": "后背破损液冷凝胶零下低温板结严重失温抽搐",
+      "source": "accident",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "trigger": "少校后背被撕裂之导热凝胶在失去舱内加热后已开始快速凝固板结，冰凉胶体紧紧嵌在皮肉上导致核心体温急剧跌破三十四度，剧烈寒颤与肌肉痉挛正使其丧失呼吸自主能力。",
+      "objective": "在十分钟内持剪彻底剥离后背凝胶，用铝箔应急毯把少校裹紧，两人背靠背压低散热。",
+      "choice": "是忍痛用粗粝毛巾用力刮擦剥离受冻皮肤，还是任由冰凉凝胶继续冻僵脊髓？",
+      "immediate": {
+        "text": "少校身子在失重漂浮中像剧烈抽搐战栗，十指僵硬无法动弹双唇泛紫。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十分钟后极度低体温将诱发室颤骤停，一代王牌女武神将彻底魂断座舱。",
+        "deadline_minutes": 10
+      },
+      "far": {
+        "trigger": "严重室颤休克少校香消玉殒星海孤舟。",
+        "consequence": "联合舰队失去最强王牌主力精神图腾彻底粉碎瓦解。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年持剪刀挑断锁扣将冰凉凝胶强行刮除并赤身紧紧抱住少校以后背体温融化冰霜",
+          "cost": "青年胸口与双手被冰刀与冻凝胶严重冻伤起满巨大紫黑冻疮受创。"
+        },
+        {
+          "option": "使用唯一一支军用产热强心高压针剂直接穿刺少校心脏实施化学升温",
+          "cost": "少校心率瞬间狂飙至二百次每分大口咯血毛细血管大面积破裂受创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_lin_cut_suit_whisper",
+        "h_lin_mask_share_whisper"
+      ],
+      "start_minute": 70,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_orbital_decay_atmospheric_reentry_burn",
+      "title": "逃生舱无动力轨道衰变平流层摩擦焚毁死线",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "trigger": "受地球重力捕获影响逃生舱轨道高度正以每刻钟十公里急剧跌落，距其坠入平流层一千二百度高温空气摩擦焚毁仅剩最后二十分钟窗口。",
+      "objective": "在二十分钟内短接副推进喷口完成减速或等待救援拖船完成重力捕获对接。",
+      "choice": "是把最后电力投入冷气喷口冒险变轨，还是死守原轨道等待民间拖船拼死一搏？",
+      "immediate": {
+        "text": "座舱前下方隔热瓦已开始发出暗红色微弱高热暗芒，舱内气温反常开始急剧上升干燥炙热。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "二十分钟后整座钛合金蛋形舱将在三万公里时速剧烈摩擦中化为一团耀眼流星火雨烧成灰烬。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "摩擦高热击穿外壳逃生舱在大气层烧蚀粉碎。",
+        "consequence": "万米高空化作焦炭流星尸骨无存彻底消亡在人间天幕。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年手动撬开变轨阀门将全部剩余高压冷气一次性喷尽成功抬升近地点十公里",
+          "cost": "变轨阀门过压爆裂碎片直接击中青年右膝盖骨粉碎性骨折剧痛受创。"
+        },
+        {
+          "option": "老陈拖船在万米高空极限俯冲以重力锚生生拽住逃生舱完成绝地拉升脱险",
+          "cost": "拖船反作用力拉弯大梁主引擎起火爆炸老陈半边身子被浓烟灼伤受创。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_chen_tugboat_horn_howl",
+        "h_lin_iron_cross_pin_whisper"
+      ],
+      "start_minute": 90,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_neural_overload_synaptic_fry_crisis",
+      "title": "双人神经漫游同调超脑载荷脑细胞烧蚀死线",
+      "source": "accident",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "avionics_maintenance_crawlway_bay"
+      ],
+      "trigger": "为了在断电状态下手动操纵姿态喷嘴，青年与少校神经接口强行直连，庞大战术数据流正以每秒四百兆兆次脉冲冲击青年大脑，十分钟内若不解除同调脑突触将被高压电流彻底烧蚀脑死亡。",
+      "objective": "在十分钟内协同完成瞄准击发后主动切断脑机物理缆线保护大脑神经元。",
+      "choice": "是强忍神经灼烧完成神级盲狙，还是半途切断连接任由敌舰主炮轰杀？",
+      "immediate": {
+        "text": "青年与少校双眼同时淌出殷红血泪，视野中千万条战术光斑疯狂闪烁脑海如被钢针搅动。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "十分钟后超脑同调负荷将彻底熔断脑干中枢使二人沦为深度植物人脑死亡。",
+        "deadline_minutes": 10
+      },
+      "far": {
+        "trigger": "神经元过载烧穿大脑二人双双脑死亡化为活死人。",
+        "consequence": "即使肉身被救回亦将成为终身无意识无思维植物人悲剧收场。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "青年咬碎钢牙强忍剧痛与少校同心共振完成完美盲狙并果断拔出插头救下二人大脑",
+          "cost": "青年左耳鼓膜被电磁脉冲震裂永久性听力受损严重神经衰弱受创。"
+        },
+        {
+          "option": "机载伊娃将自身全部内存转化为阻抗海绵用数字灵魂硬抗全部神经脉冲冲击",
+          "cost": "伊娃副人格程序彻底被高压电流烧毁永久从世界上抹去芳踪解体。"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [
+        "h_lin_neural_overload_whisper",
+        "h_eva_neural_sync_grunt"
+      ],
+      "start_minute": 115,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "h_lin_cut_suit_whisper",
+      "kind": "approach",
+      "slot": "ace_mecha_pilot_lin_lingshuang",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule",
+        "external_canopy_inspection_hatch"
+      ],
+      "text": "{ace_mecha_pilot_lin_lingshuang.name}瘫在唯一的减震缓冲座里：“……损管兵！拿工程剪！从背后沿导轨剪开！凝胶结冰了……肋骨快被压断了……快动手！若是犹豫……我们两个都会憋死在这个铁罐头里！”"
+    },
+    {
+      "id": "h_lin_mask_share_whisper",
+      "kind": "approach",
+      "slot": "ace_mecha_pilot_lin_lingshuang",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule",
+        "external_canopy_inspection_hatch"
+      ],
+      "text": "{ace_mecha_pilot_lin_lingshuang.name}裹着铝箔应急毯和你背靠背卡在单人减震座里，伸手把氧气面罩扣到你脸上：“十秒到了……该你吸了。大口吸，别磨蹭！林凌霜的命现在和你绑在同一根管子上……不准死，听见没有？”"
+    },
+    {
+      "id": "h_lin_iron_cross_pin_whisper",
+      "kind": "approach",
+      "slot": "ace_mecha_pilot_lin_lingshuang",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule",
+        "external_canopy_inspection_hatch"
+      ],
+      "text": "{ace_mecha_pilot_lin_lingshuang.name}在母舰医疗舱里醒来，体温正常，然后揪住领口把人拉近：“舱里那三个小时你一次都没越界，我全记得。现在我氧气充足、神志清楚，军阶也先放一边——这一次，是我自己要的。”"
+    },
+    {
+      "id": "h_zhao_radar_scan_howl",
+      "kind": "approach",
+      "slot": "rebel_stealth_corvette_captain_zhao",
+      "location_ids": [
+        "external_canopy_inspection_hatch",
+        "wreckage_cockpit_central_capsule",
+        "avionics_maintenance_crawlway_bay"
+      ],
+      "text": "{rebel_stealth_corvette_captain_zhao.name}将隐形舰全息影像投射在石英窗外，手持测距仪通过低频电磁共振狞笑传音：“舱里的丧家之犬！你们的舰队已经化成了太空垃圾！”"
+    },
+    {
+      "id": "h_eva_cadence_countdown",
+      "kind": "approach",
+      "slot": "rebel_captured_ai_navigation_core_eva",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule",
+        "external_canopy_inspection_hatch"
+      ],
+      "text": "{rebel_captured_ai_navigation_core_eva.name}全息身影在仪表盘上方闪烁：“警告：氧气总储量剩余百分之十一。请执行第三轮十秒呼吸交接。损管士官，请为少校补裹应急毯，体温流失速度正随气压下降加速。”"
+    },
+    {
+      "id": "h_chen_tugboat_horn_howl",
+      "kind": "approach",
+      "slot": "veteran_salvage_tug_captain_old_chen",
+      "location_ids": [
+        "external_canopy_inspection_hatch",
+        "wreckage_cockpit_central_capsule"
+      ],
+      "text": "{veteran_salvage_tug_captain_old_chen.name}驾驶重型拖船顶着漫天火雨悍然杀至，透过激光通信扬声器豪迈大吼：“01号逃生舱的弟兄听着！我是民间搜救船红星号老陈！老子把重力锚打过来了，抓紧减震座！”"
+    },
+    {
+      "id": "h_lin_neural_overload_whisper",
+      "kind": "approach",
+      "slot": "ace_mecha_pilot_lin_lingshuang",
+      "location_ids": [
+        "avionics_maintenance_crawlway_bay"
+      ],
+      "text": "{ace_mecha_pilot_lin_lingshuang.name}与你神经接口直连，少校咬着牙死死掐住你的肩膀稳住身形：“……看到了吗？那是叛舰的热源轨迹。别抗拒……把感知放开，跟着我的视线走……锁定传感器，就现在！”"
+    },
+    {
+      "id": "h_lin_laser_pistol_draw",
+      "kind": "observe",
+      "slot": "ace_mecha_pilot_lin_lingshuang",
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "text": "{ace_mecha_pilot_lin_lingshuang.name}裹着铝箔应急毯单膝跪在副操纵台上，双手极稳地平举钛合金微型激光手枪，枪尖穿过石英窗的蛛网裂纹死死锁定逼近的敌舰传感器，眼神凌厉，正是全军第一神枪的模样。"
+    },
+    {
+      "id": "h_zhao_torpedo_lock_observe",
+      "kind": "observe",
+      "slot": "rebel_stealth_corvette_captain_zhao",
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "text": "{rebel_stealth_corvette_captain_zhao.name}驾驶的黑鲨护卫舰舰首主炮导轨在深空中泛起幽蓝高能蓄力电弧，两枚热熔穿甲火箭弹在发射架上缓缓探出弹头，散发着毁灭万物的森冷机械凶芒。"
+    },
+    {
+      "id": "h_eva_circuit_spark_observe",
+      "kind": "observe",
+      "slot": "rebel_captured_ai_navigation_core_eva",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "text": "{rebel_captured_ai_navigation_core_eva.name}全息投影半边身躯已被金色电流雪花覆盖，单手按在主控电门上引爆自身冗余逻辑算力强行吸收电涌，面带决绝微笑展现出数字生命的悲壮牺牲大美。"
+    },
+    {
+      "id": "h_chen_harpoon_launch_observe",
+      "kind": "observe",
+      "slot": "veteran_salvage_tug_captain_old_chen",
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "text": "{veteran_salvage_tug_captain_old_chen.name}在拖船甲板上亲自扣动气动射钉炮，粗壮的纳米引力缆绳带着耀眼蓝色离子尾焰如离弦之箭破空扎向逃生舱外壳挂钩，展现出蓝领拓荒者的狂野担当气魄。"
+    },
+    {
+      "id": "h_lin_water_gel_share_request",
+      "kind": "approach",
+      "slot": "ace_mecha_pilot_lin_lingshuang",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "text": "{ace_mecha_pilot_lin_lingshuang.name}咬开仅剩的那颗草莓味电解质凝胶，掰成两半，把大的那一半塞进你手里：“……吃掉。水分代谢失衡会休克……在学院从来没人有资格和我分同一颗凝胶。别看我，吃。”"
+    },
+    {
+      "id": "h_zhao_drone_drill_screech_observe",
+      "kind": "observe",
+      "slot": "rebel_stealth_corvette_captain_zhao",
+      "location_ids": [
+        "external_canopy_inspection_hatch"
+      ],
+      "text": "{rebel_stealth_corvette_captain_zhao.name}派出的三爪攀爬无人机高频金刚石钻头已抵在石英窗边缘高速旋切，刺耳金属摩擦尖叫伴随飞溅的火星在无声真空中透过窗体引发令人心悸的剧烈震颤。"
+    },
+    {
+      "id": "h_eva_neural_sync_grunt",
+      "kind": "observe",
+      "slot": "rebel_captured_ai_navigation_core_eva",
+      "location_ids": [
+        "avionics_maintenance_crawlway_bay"
+      ],
+      "text": "{rebel_captured_ai_navigation_core_eva.name}以纯粹数据波形在二人视网膜上勾勒出完美的双人超脑谐振抛物线，计算日志不断刷新：人类同调神经突触激活率突破极限，正在开启神级火控超视距盲狙计算模组。"
+    },
+    {
+      "id": "h_chen_oxygen_tube_plug_observe",
+      "kind": "observe",
+      "slot": "veteran_salvage_tug_captain_old_chen",
+      "location_ids": [
+        "wreckage_cockpit_central_capsule"
+      ],
+      "text": "{veteran_salvage_tug_captain_old_chen.name}冒着太空服被擦破的危险将重型外接加压输氧软管咔嗒一声死死插入逃生舱充气口，滚滚温暖纯氧瞬间涌入座舱将濒临窒息的二人从死神指缝中彻底拉回人间。"
+    }
+  ],
+  "twists": [
+    {
+      "id": "t_mecha_1",
+      "category": "信息",
+      "requires": [],
+      "text": "机甲核心黑匣子内赫然记录当年陷害青年降职之贪腐军需长叛国录音：林少校调取机甲深层黑匣子核验战术跳频数据时，意外起获当年诬陷青年私改战机之军需官亲笔勾结叛乱罪证录音，少校当场签署最高赦免令宣布为青年洗清一切不白之冤。"
+    },
+    {
+      "id": "t_mecha_2",
+      "category": "人事",
+      "requires": [],
+      "text": "搜捕叛舰舰长竟是当年在航校综合大考中被少校单机剃光头的万年次席：击毁叛舰后截获其未发送之个人日志，揭露其疯狂搜捕实为企图报复当年在空天全军大考中被林凌霜以三比零绝对完败之私怨病态执念。"
+    },
+    {
+      "id": "t_mecha_3",
+      "category": "资源",
+      "requires": [],
+      "text": "机甲减震座底部隔层暗藏前任机师私藏之备用高压富氧微型气罐：青年在修补座椅液压臂时撬开底座暗格，惊喜起获一罐未开封之医用高纯度液态氧紧急储备，使二人断氧死线瞬间延长整整四个小时生机大增。"
+    },
+    {
+      "id": "t_mecha_4",
+      "category": "制度",
+      "requires": [],
+      "text": "战时紧急战地晋升令：保全王牌座机黑匣子者破格晋升：联合舰队统帅部战时条例生效：凡在深空绝境中协助特级机师保全核心黑匣子者，无视平民罪囚身份当场破格擢升为舰队一级准尉机修官。"
+    },
+    {
+      "id": "t_mecha_5",
+      "category": "时限",
+      "requires": [],
+      "text": "联合舰队第一主力战列舰集群撕裂超空间提前十分钟抵达战场空域：原本预计尚需半日方能赶赴之舰队主力战列舰编队，接收到少校激光盲狙引爆之反物质殉爆信号提前强行折跃，铺天盖地的超级主炮瞬间控制全域空域完成营救。"
+    },
+    {
+      "id": "t_mecha_6",
+      "category": "关系",
+      "requires": [],
+      "text": "青年颈间挂着的小扳手正是少校三年前在空间站失火时所赠：剪开抗荷服时，青年衣领下滑落一枚刻着天鹰徽记的钛合金小扳手，林少校当场认出这正是三年前自己在工业空间站失火中、送给那个冲进火场救人的机修兵的谢礼。"
+    },
+    {
+      "id": "t_mecha_7",
+      "category": "意外",
+      "requires": [],
+      "text": "突发特大级太阳耀斑电磁脉冲瞬间致盲叛军残存全向扫描侦察网：太阳表面突发百万吨级高能质子日冕抛射，狂暴脉冲如有神助般横扫L2轨道，将追捕之敌隐形舰雷达芯片大面积烧穿致盲，为逃生舱与救援拖船撤离创造出绝对生机窗口。"
+    }
+  ],
+  "forbidden_terms": [
+    "外星超自然魔法异能",
+    "催情药剂致幻气体",
+    "肉体侍奉交易",
+    "职权霸凌虐待",
+    "无脑倒贴迎合"
+  ],
+  "content_tags": [
+    "intimate",
+    "workplace",
+    "workplace_power",
+    "violence",
+    "bodily_harm",
+    "crime",
+    "disaster"
+  ],
+  "status": "released",
+  "notes": "按原稿加入。改动：缺氧、失温时的割服、共座、轮换吸氧全部改为纯求生，删去唇齿相哺、神经同调潮红等描写，亲密移到对接母舰之后；童年救命信物改为三年前；新增战列舰主任军医与叛舰炮术长两名角色。"
+}
