@@ -29,7 +29,7 @@ Thousands of story materials ｜ Zero-drift SQLite state machine<br>
 
 <a id="worlds"></a>
 <p align="center">
-  <img src=".github/readme-lofi/world-library.svg" width="100%" alt="Built-in world library: standalone world frames across eras and over a thousand story materials. Dozens of worlds pinned to a corkboard in five columns: historical turmoil, urban undercurrents, everyday street life, near future, other realms; all open, ready to start. A cassette rack below lists over two thousand materials: 160+ places, 300+ NPCs, 140+ player identities, 200+ character pairings, 150+ tension engines, 170+ daily activities, 150+ pressure events, 300+ opening hooks, 180+ mid-story turns, 250+ rules and customs.">
+  <img src=".github/readme-lofi/world-library.svg" width="100%" alt="Built-in world library: standalone world frames across eras and over five thousand story materials. 78 worlds pinned to a corkboard in five columns: historical turmoil, urban undercurrents, everyday street life, apocalypse and steam, other realms; all open, ready to start. A cassette rack below lists over five thousand materials: 390+ places, 470+ NPCs, 400+ player identities, 500+ character pairings, 360+ tension engines, 490+ daily activities, 470+ pressure events, 1080+ opening hooks, 550+ mid-story turns, 680+ rules and customs.">
 </p>
 
 <br>
