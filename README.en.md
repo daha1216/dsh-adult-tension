@@ -39,23 +39,21 @@ Thousands of story materials ｜ Zero-drift SQLite state machine<br>
 Every world is open. Pick one and play.  
 Don't see what you want? Just say "custom world" (`自定义世界`), name the year and the place, and one is made for you on the spot.
 
+<p align="center">
+  <img src=".github/readme-lofi/worlds.svg" width="100%" alt="The tape wall: 211 videotapes lying flat on the walnut shelves of a late-night rental store, spines out with the world names, in seventeen genre columns on four shelves, each shelf with a brass plaque: East and old times (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic), West and the decades (classical Europe, neighbours under one roof, trades and night shops, campus and study), the city's dark side (gangs and old money, office and law, spies and the front, stage and screen), fantasy and the edge (arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades); each column labelled with its world count, eight staff picks pulled halfway out under a small gold light; all open, ready to start.">
+</p>
+
 <br>
 
 <a id="support"></a>
 ### ☕ Support & Sponsor
 
-If Adult Tension brought you excitement, inspiration, or fun, feel free to buy the author a coffee. Thank you for your support!
+If Adult Tension brought you excitement, inspiration, or fun, feel free to buy the author a coffee. The author was laid off and income is currently unstable, thank you for your support!
 
 <p align="center">
   <img src="assets/alipay-qr.jpg" width="280" alt="Alipay Sponsor QR Code">
   <br>
   <sub>Scan with Alipay · Thank you for supporting open source creation</sub>
-</p>
-
-<br>
-
-<p align="center">
-  <img src=".github/readme-lofi/worlds.svg" width="100%" alt="The tape wall: 211 videotapes lying flat on the walnut shelves of a late-night rental store, spines out with the world names, in seventeen genre columns on four shelves, each shelf with a brass plaque: East and old times (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic), West and the decades (classical Europe, neighbours under one roof, trades and night shops, campus and study), the city's dark side (gangs and old money, office and law, spies and the front, stage and screen), fantasy and the edge (arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades); each column labelled with its world count, eight staff picks pulled halfway out under a small gold light; all open, ready to start.">
 </p>
 
 <br>
