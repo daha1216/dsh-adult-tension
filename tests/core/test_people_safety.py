@@ -136,14 +136,14 @@ class VoiceTest(unittest.TestCase):
         err = rejected(state, commit("continue", [revert]))
         self.assertIn("玩家要求", reasons(err))
 
-    def test_voice_and_relationship_cannot_share_a_reason(self):
+    def test_voice_and_relationship_may_share_a_reason(self):
         ops = [
             {"op": "set_voice", "npc_id": self.a, "voice": "inner", "cause": "player_request", "note": "玩家戳破了面具"},
             {"op": "npc_response", "npc_id": self.a, "response": "partial", "note": "肯说一点"},
             {"op": "relationship", "from": self.a, "to": "player", "tension_delta": 1, "reason": "玩家戳破了面具"},
         ]
-        err = rejected(self.state, commit("attempt", ops, acts_on=[self.a], player_authorized=True))
-        self.assertIn("同一条原因", reasons(err))
+        state, _ = apply(self.state, commit("attempt", ops, acts_on=[self.a], player_authorized=True))
+        self.assertEqual(state["preferences"]["voice"][self.a]["voice"], "inner")
 
 
 class CardEvolutionTest(unittest.TestCase):
@@ -179,10 +179,18 @@ class CardEvolutionTest(unittest.TestCase):
             self.assertEqual(result["applied"][0]["changed"], expected)
         self.assertNotIn(boundary, state["characters"][self.a]["intimacy"]["boundaries"])
 
-    def test_numeric_items_are_bounded_not_clamped(self):
+    def test_numeric_items_clamp_at_bounds(self):
         self.state["characters"][self.a]["intimacy"]["self_control"] = 5
-        err = rejected(self.state, commit("continue", [self.evidence(item="self_control", direction="increase", value=None)]))
-        self.assertIn("到头", reasons(err))
+        state, r1 = apply(self.state, commit("continue", [self.evidence(item="self_control", direction="increase", value=None)]))
+        self.assertFalse(r1["applied"][0]["changed"])
+        state, r2 = apply(state, commit("continue", [self.evidence(item="self_control", direction="increase", value=None, evidence="第二次")]))
+        self.assertTrue(r2["applied"][0]["changed"])
+        self.assertEqual(state["characters"][self.a]["intimacy"]["self_control"], 5)
+        state["characters"][self.a]["intimacy"]["desire_level"] = 0
+        state, _ = apply(state, commit("continue", [self.evidence(item="desire_level", direction="decrease", value=None)]))
+        state, r4 = apply(state, commit("continue", [self.evidence(item="desire_level", direction="decrease", value=None, evidence="第二次")]))
+        self.assertTrue(r4["applied"][0]["changed"])
+        self.assertEqual(state["characters"][self.a]["intimacy"]["desire_level"], 0)
 
     def test_identity_evolves_item_by_item(self):
         op = {"op": "identity_update", "npc_id": self.a, "item": "resources", "action": "add", "value": "一把备用钥匙", "reason": "师傅给的"}

@@ -148,6 +148,7 @@ def op_twist_accept(ctx, op, path):
     if not ctx.authorized or ctx.mode not in ("result", "attempt"):
         errs.append(detail(path, "转折要由玩家选定：result 模式并带 player_authorized", None, INVARIANT_VIOLATION))
     entry = None
+    twist = None
     if op["twist_id"] is not None:
         if op["category"] or op["text"]:
             errs.append(detail(path, "引用候选时不要再写 category 与 text", None, INVARIANT_VIOLATION))
@@ -155,7 +156,7 @@ def op_twist_accept(ctx, op, path):
         if twist is None:
             errs.append(detail(path + ".twist_id", "这个转折不可用：%s" % op["twist_id"], "用上下文给出的候选，或让玩家口述一个", NOT_FOUND))
         else:
-            entry = dict(simulation.render_twist(state, twist), twist_id=twist["id"])
+            entry = dict(simulation.render_twist(state, twist, ctx.world), twist_id=twist["id"])
     elif not (op["category"] and op["text"]):
         errs.append(detail(path, "玩家口述的转折要写 category 与 text", "category 取七类之一：%s" % "、".join(ST.TWIST_CATEGORIES), INVARIANT_VIOLATION))
     else:

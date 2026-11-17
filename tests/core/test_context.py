@@ -1,7 +1,7 @@
 """Context budget (DATA_CONTRACTS.md 7).
 
 Whatever a world puts on stage and however long the game runs, the full
-context stays within 20 KB and keeps every section the contract names: all
+context stays within 32 KB and keeps every section the contract names: all
 major and supporting NPCs (at least a summary), relationships with the
 player, the player's facts, world rules, the location list, the latest
 chapter, every pending event and active leverage, and a name pool.
@@ -218,6 +218,11 @@ class FullContextBudgetTest(unittest.TestCase):
             self.assertTrue(all("detail" not in c for c in full["characters"]))
             self.assertTrue(all("detail" in loc for loc in full["locations"]))
             self.assertTrue(all("name" in npc for npc in full["present_npcs"]))
+            self.assertTrue(full["world"].get("scene_ideas"))
+            self.assertTrue(full.get("standby_cast"))
+            compact = CX._card_compact(full["characters"][0])
+            self.assertIn("appearance", compact)
+            self.assertIn("voices", compact)
 
     def test_side_details_go_before_the_cards_on_stage_shrink(self):
         # Long cards on stage: nearby, sample lines and edges between NPCs go
@@ -243,20 +248,20 @@ class FullContextBudgetTest(unittest.TestCase):
             self.assertTrue(all(player in (e["from"], e["to"]) for e in full["relationships"]))
 
     def test_many_people_holding_much_leverage_still_fit(self):
-        # Found by fuzzing: 17 important people and 43 active leverage after 700
-        # turns came to 21 KB. The leverage touching someone on stage was listed
-        # twice (safety.leverage and leverage_all) and none of it ever shrank.
+        # Found by fuzzing: many important people and active leverage overflow the
+        # full-context budget. The leverage touching someone on stage stays and
+        # offstage leverage is trimmed last with leverage_omitted counted.
         with app() as ctx:
             game = Game(ctx, CASTS[0][0], CASTS[0][1])
             game.introduce(4, "major", True, 40, salt=8)
-            game.introduce(4, "major", False, 40, salt=9)
+            game.introduce(4, "major", False, 120, salt=9)
             state = game.state()["state"]
             player = state["player_id"]
             here = sorted(cid for cid in state["scene"]["present"] if cid != player)
             away = sorted(cid for cid in state["characters"] if cid not in state["scene"]["present"])
             # Like the game the fuzzer found: a dozen touching people on stage,
-            # the rest held between people elsewhere (two over each pair).
-            pairs = ([(a, b) for a in here for b in away][:12] + [(a, b) for a in away for b in away if a != b] * 2)[:60]
+            # the rest held between people elsewhere.
+            pairs = ([(a, b) for a in here for b in away][:12] + [(a, b) for a in away for b in away if a != b] * 10)[:280]
             for start in range(0, len(pairs), 12):
                 ops = [{"op": "leverage_set", "holder": a, "subject": b, "basis_text": "%s欠着一笔说不得的账" % fill(6, start + i), "origin": "账本"} for i, (a, b) in enumerate(pairs[start : start + 12])]
                 game.commit(ops + [{"op": "npc_action", "npc_id": here[0], "action": "翻了一页账本"}])

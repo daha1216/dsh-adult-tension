@@ -345,9 +345,6 @@ def commit_turn(state, content, commit, undo_snapshot=None):
     preview = _beat_checks(ctx)
     _mode_checks(ctx)
     _intimacy_checks(ctx)
-    shared = set(ctx.voice_reasons) & set(ctx.relationship_reasons)
-    if shared:
-        ctx.error("$.operations", "语态切换与关系变化用了同一条原因：%s" % "、".join(sorted(shared)), "语态只是说话方式，不是关系升级；两者分别写原因")
     for problem in OPS.check_safety_tags(work, commit["content_tags"]):
         ctx.errors.append(problem)
     if not ctx.errors:

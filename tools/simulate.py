@@ -389,7 +389,7 @@ def gates(run, turns):
         gate("%s: 撤销后重做随机结果相同" % route, stats["undo_redo_checks"] > 0 and not stats["undo_redo_mismatch"], {"checks": stats["undo_redo_checks"], "mismatch": stats["undo_redo_mismatch"]})
         gate("%s: 改写原子完成" % route, stats["replace_checks"] > 0 and not stats["replace_problems"], {"checks": stats["replace_checks"], "problems": stats["replace_problems"]})
         gate("%s: 简要上下文 ≤ 6 KB" % route, stats["brief_max"] <= CX.BRIEF_LIMIT, stats["brief_max"])
-        gate("%s: 完整上下文 ≤ 20 KB" % route, stats["full_max"] <= CX.FULL_LIMIT, stats["full_max"])
+        gate("%s: 完整上下文 ≤ 32 KB" % route, stats["full_max"] <= CX.FULL_LIMIT, stats["full_max"])
     gate("第 100/200/300 回合存读档后续跑，状态摘要一致", run["digest_straight"] == run["digest_save_load"] and len(run["save_load"]["saves"]) == len([t for t in SAVE_TURNS if t <= turns]), {"straight": run["digest_straight"][:16], "save_load": run["digest_save_load"][:16]})
     sizes = run["sizes"]
     if 10 in sizes and turns in sizes:

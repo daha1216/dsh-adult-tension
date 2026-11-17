@@ -10,6 +10,7 @@ from .. import schema as S
 from ..errors import INVARIANT_VIOLATION, NOT_FOUND, SAFETY_BLOCK, detail
 from . import clock as CL
 from . import facts as FA
+from . import opening
 from . import rng
 from . import settlement
 from . import simulation
@@ -111,8 +112,11 @@ class TurnContext:
 
 def _need_character(ctx, cid, path, errs, npc=False):
     if cid not in ctx.state["characters"]:
-        errs.append(detail(path, "角色不存在：%s" % cid, "用上下文里列出的角色 ID；新角色先 introduce_character", NOT_FOUND))
-        return False
+        if opening.instantiate_standby(ctx.state, ctx.world, cid, turn=ctx.turn, fact_coord=ctx.fact_coord) is not None:
+            ctx.new_characters.append(cid)
+        else:
+            errs.append(detail(path, "角色不存在：%s" % cid, "用上下文里列出的角色 ID；新角色先 introduce_character", NOT_FOUND))
+            return False
     if npc and cid == ctx.state["player_id"]:
         errs.append(detail(path, "这里需要 NPC，不能是玩家角色", None, INVARIANT_VIOLATION))
         return False
@@ -563,14 +567,11 @@ def op_relationship(ctx, op, path):
     tension = current["tension"] if current else 0
     stage = current["stage"] if current else "stranger"
     start = ctx.trust_start.setdefault(key, trust)
-    new_trust = trust + op["trust_delta"]
-    new_tension = tension + op["tension_delta"]
-    if not ST.TRUST_RANGE[0] <= new_trust <= ST.TRUST_RANGE[1]:
-        errs.append(detail(path + ".trust_delta", "信任将变成 %d，超出 -5..5" % new_trust, "不会自动截断，换一个幅度", INVARIANT_VIOLATION))
-    elif abs(new_trust - start) > ST.MAX_TRUST_DELTA:
+    raw_trust = trust + op["trust_delta"]
+    if abs(raw_trust - start) > ST.MAX_TRUST_DELTA:
         errs.append(detail(path + ".trust_delta", "一个回合里信任净变化不能超过 %d" % ST.MAX_TRUST_DELTA, None, INVARIANT_VIOLATION))
-    if not ST.TENSION_RANGE[0] <= new_tension <= ST.TENSION_RANGE[1]:
-        errs.append(detail(path + ".tension_delta", "张力将变成 %d，超出 0..5" % new_tension, "不会自动截断，换一个幅度", INVARIANT_VIOLATION))
+    new_trust = max(ST.TRUST_RANGE[0], min(ST.TRUST_RANGE[1], raw_trust))
+    new_tension = max(ST.TENSION_RANGE[0], min(ST.TENSION_RANGE[1], tension + op["tension_delta"]))
     pair = frozenset((a, b))
     new_stage = stage
     evidence = None

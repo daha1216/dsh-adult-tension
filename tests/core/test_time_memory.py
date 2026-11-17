@@ -234,6 +234,22 @@ class TwistTest(unittest.TestCase):
         state, result = apply(state, commit("result", [{"op": "twist_accept", "category": "意外", "text": "码头停电了"}], player_authorized=True, chapter_summary="又一天。"))
         self.assertEqual(result["twist"]["category"], "意外")
 
+    def test_twists_requiring_standby_templates_are_eligible_and_render_names(self):
+        from adult_tension.domain import opening
+
+        state, _ = new_state("pressure", seed=11)
+        world = content()["world"]
+        previews = opening.standby_previews(state, world)
+        self.assertTrue(previews)
+        standby_id, preview = next(iter(sorted(previews.items())))
+        synthetic = {"id": "tw_standby_test", "category": "人事", "requires": ["pressure", standby_id], "text": "{%s.name}突然带着封条闯进门外。" % standby_id}
+        world_with_tw = dict(world, twists=list(world["twists"]) + [synthetic])
+        found = simulation.eligible_twist(state, world_with_tw, "tw_standby_test")
+        self.assertIsNotNone(found)
+        rendered = simulation.render_twist(state, found, world_with_tw)
+        self.assertIn(preview["name"], rendered["text"])
+        self.assertNotIn("{%s.name}" % standby_id, rendered["text"])
+
 
 class ChapterTest(unittest.TestCase):
     def test_chapter_summary_is_required_when_asked_and_refused_otherwise(self):

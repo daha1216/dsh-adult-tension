@@ -6,6 +6,7 @@ as hooks. All randomness is derived from structured coordinates.
 
 from . import clock as CL
 from . import facts as FA
+from . import opening
 from . import rng
 from . import settlement
 from . import state as SS
@@ -144,15 +145,16 @@ def propagation(state, report, turn):
 # twists
 
 
-def _eligible(state, twist):
+def _eligible(state, twist, world=None):
     accepted = {t.get("twist_id") for t in state["counters"]["twists"]["accepted"]}
     if twist["id"] in accepted:
         return False
+    standby = {t["id"] for t in (world or {}).get("character_templates", [])}
     for token in twist["requires"]:
         if token in ("pressure", "daily"):
             if state["mode"] != token:
                 return False
-        elif token in state["characters"]:
+        elif token in state["characters"] or token in standby:
             continue
         elif state.get("pressure") and state["pressure"]["id"] == token:
             continue
@@ -161,15 +163,18 @@ def _eligible(state, twist):
     return True
 
 
-def render_twist(state, twist):
+def render_twist(state, twist, world=None):
     scopes = {cid: binding(char) for cid, char in state["characters"].items()}
+    if world:
+        for sid, preview in opening.standby_previews(state, world).items():
+            scopes.setdefault(sid, binding(preview))
     scopes["player"] = binding(state["characters"][state["player_id"]])
     return {"id": twist["id"], "category": twist["category"], "text": render(twist["text"], scopes)}
 
 
 def twist_candidates(state, world, purpose, *coords):
     """2-3 eligible twists from different categories, chosen deterministically."""
-    pool = [t for t in sorted(world.get("twists", []), key=lambda t: t["id"]) if _eligible(state, t)]
+    pool = [t for t in sorted(world.get("twists", []), key=lambda t: t["id"]) if _eligible(state, t, world)]
     shuffled = rng.shuffled(state["seed"], purpose, pool, *coords)
     chosen = []
     categories = set()
@@ -180,13 +185,13 @@ def twist_candidates(state, world, purpose, *coords):
         categories.add(twist["category"])
         if len(chosen) == 3:
             break
-    return [render_twist(state, t) for t in chosen]
+    return [render_twist(state, t, world) for t in chosen]
 
 
 def eligible_twist(state, world, twist_id):
     for twist in world.get("twists", []):
         if twist["id"] == twist_id:
-            return twist if _eligible(state, twist) else None
+            return twist if _eligible(state, twist, world) else None
     return None
 
 

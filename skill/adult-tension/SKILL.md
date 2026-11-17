@@ -74,7 +74,7 @@ AT_JSON
    - 模板里有 `chapter_summary`、`prologue` 才写（运行时要求的），照尖括号里的说明。
 5. 先记录时，按 `context` 和 `turns` 末项的 `applied`、`resolved_events`、`simulation` 写正文：掷骰、到期、离屏移动与传播由运行时决定。
 6. 页脚：`【时间】……｜【地点】……｜回合：N`。记录后用 `context.clock.label`、`context.scene.location`、`turn`；之间自己推算（回合号逐回合加一）。叙事助手开启时（`preferences.assistant`），末尾加“可以：① …… ② …… ③ ……”，只给提示，不替玩家决定。
-7. 返回的 `context` 就是之后的依据；信息不够时 `get-context` 带 `"depth": "full"`。
+7. 返回的 `context` 就是之后的依据；信息不够或对话压缩后先 `get-context` 带 `"depth": "full"`（无会话号先 `list-sessions`）。
 
 记录被拒：按 `error.details` 的 `path`、`hint` 改记录重交，最多 2 次，玩家看不到，不改已写的正文；仍失败就去掉出错的操作。只有 `SAFETY_BLOCK`（年龄、硬边界、暂停）用一句话告诉玩家。`STALE_REVISION`：按错误附带的 `context` **重新判断**再交，不能只换 revision。
 
@@ -97,13 +97,13 @@ AT_JSON
 
 - NPC 只根据**自己知道的事实**行动（`basis_fact_ids` 必须在其信息集里）；内心描写永远不成为任何人的知识（内心只用 `inner` 事实记录，不能传播）。
 - NPC 可以拒绝、讨价还价、表面答应、主动出手。多个 NPC 在场时，他们之间也有关系和目标。
-- `nearby` 的人要当面开口，先在同一回合里 `enter_scene`。
-- 表层 / 里层语态按上下文里的 `voice` 写。玩家说“别装了”“说点真心话”：同一回合用 `set_voice`（`cause: player_request`）切换；NPC 可以换语态说“不”。语态不是关系升级，和关系变化分开写原因。
+- `nearby` 或 `standby_cast` 的角色要出场，同一回合 `enter_scene`（勿 `introduce_character`）。
+- 表层 / 里层语态按上下文里的 `voice` 写。玩家说“别装了”“说点真心话”：同一回合用 `set_voice`（`cause: player_request`）切换；NPC 可以换语态说“不”。
 - 内心可见开启时（`preferences.inner_view`），可以单独成段写在场 NPC 没说出口的念头；玩家角色不知道这些。
 
 ## 亲密与张力（完整规则见 `references/narrative.md` §7）
 
-- 亲密场景：逐步推进，玩家要求到哪一步就停在哪一步；每一步都写出对方的反应（迎合、羞耻、强忍、半推半就或失守）；玩家明确要求写出的过程不强制淡出，没要求的不擅自展开；不复读。提交带 `intimate` 或 `explicit` 标签时写 `intimate_participants`（含玩家），每个 NPC 参与者本回合要有 `partial`（含半推半就、受迫妥协）/`genuine` 回应或主动行动。
+- 亲密场景：逐步推进，玩家要求到哪一步就停在哪一步；每一步写出对方反应（迎合、羞耻、强忍或失守）；明确要求的过程不强制淡出，没要求的不擅自展开；不复读。带 `intimate`/`explicit` 标签时写 `intimate_participants`（含玩家），每个 NPC 参与者本回合要有 `partial`（含半推半就、妥协）/`genuine` 回应或主动行动。
 - 词汇与情境开放：按时代、身份、情绪和文风，直白、粗俗或文学化的说法都能用，不限于：鸡巴、屌、肉棒、肉茎、穴、逼、洞、骚逼、蜜穴。险境、微醺、高热、药效、情趣器具控制、把柄交易与上下级压制均可进入亲密互动；台词用词服从语态。
 - 有人开始拿捏另一个人（把柄、债务、生计、私密控制器）时，记录时用 `leverage_set` 登记；把柄生效期间仍可发生交易、压制或半推半就的亲密互动。
 - “边界：不要 X”：`set-boundary`（`action: add`，`text` 是玩家原话，`tags` 映射到内容标签，映射不上留空）。写作时遵守全部边界；带冲突标签的记录会被拒（`SAFETY_BLOCK`）。

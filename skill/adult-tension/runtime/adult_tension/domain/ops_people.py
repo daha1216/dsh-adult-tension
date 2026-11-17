@@ -177,7 +177,7 @@ def op_spread_rumor(ctx, op, path):
         "trigger": F(S.Nullable(S.Enum("alone", "drunk", "breakdown", "exposed")), required=False, default=None),
         "note": F(S.Str(1, 80)),
     },
-    "切换 NPC 的表层/里层语态。玩家要求（player_request）优先；NPC 自主切入里层（npc_self）要写触发因素：alone 独处 / drunk 醉意 / breakdown 情绪崩溃 / exposed 被戳穿；revert 切回表层。语态只改变说话方式，不是关系升级，note 不能与同一回合里的关系变化共用原因",
+    "切换 NPC 的表层/里层语态。玩家要求（player_request）优先；NPC 自主切入里层（npc_self）要写触发因素：alone 独处 / drunk 醉意 / breakdown 情绪崩溃 / exposed 被戳穿；revert 切回表层",
 )
 def op_set_voice(ctx, op, path):
     errs = []
@@ -248,11 +248,7 @@ def op_intimacy_evidence(ctx, op, path):
     if direction in ("add", "remove", "set") and not value:
         errs.append(detail(path + ".value", "这个方向需要写明具体内容", None, INVARIANT_VIOLATION))
     if card and direction in allowed:
-        if item in C.INTIMACY_NUMERIC:
-            target = card[item] + (1 if direction == "increase" else -1)
-            if not 0 <= target <= 5:
-                errs.append(detail(path + ".direction", "%s 已经到头了" % item, "不会自动截断", INVARIANT_VIOLATION))
-        elif direction == "add" and value in card[item]:
+        if direction == "add" and value in card[item]:
             errs.append(detail(path + ".value", "这一项里已经有“%s”" % value, None, INVARIANT_VIOLATION))
         elif direction == "remove" and value not in card[item]:
             errs.append(detail(path + ".value", "这一项里没有“%s”" % value, "只能去掉卡片上已有的内容", INVARIANT_VIOLATION))
@@ -267,7 +263,7 @@ def op_intimacy_evidence(ctx, op, path):
     changed = len(turns) >= needed
     if changed:
         if item in C.INTIMACY_NUMERIC:
-            card[item] += 1 if direction == "increase" else -1
+            card[item] = max(0, min(5, card[item] + (1 if direction == "increase" else -1)))
         elif direction == "add":
             card[item].append(value)
         elif direction == "remove":

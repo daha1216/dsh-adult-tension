@@ -172,10 +172,18 @@ class RelationshipTest(unittest.TestCase):
         err = rejected(self.state, commit("continue", [self.rel(trust_delta=2), self.rel(trust_delta=1)]))
         self.assertIn("净变化", reasons(err))
 
-    def test_values_are_never_clamped(self):
-        self.state["relationships"]["%s>player" % self.npc]["trust"] = 5
-        err = rejected(self.state, commit("continue", [self.rel(trust_delta=1)]))
-        self.assertIn("超出", reasons(err))
+    def test_values_clamp_at_bounds(self):
+        edge = self.state["relationships"]["%s>player" % self.npc]
+        edge["trust"] = 5
+        edge["tension"] = 5
+        new, _ = apply(self.state, commit("continue", [self.rel(trust_delta=1, tension_delta=2)]))
+        self.assertEqual(new["relationships"]["%s>player" % self.npc]["trust"], 5)
+        self.assertEqual(new["relationships"]["%s>player" % self.npc]["tension"], 5)
+        edge["trust"] = -5
+        edge["tension"] = 0
+        low, _ = apply(self.state, commit("continue", [self.rel(trust_delta=-2, tension_delta=-2)]))
+        self.assertEqual(low["relationships"]["%s>player" % self.npc]["trust"], -5)
+        self.assertEqual(low["relationships"]["%s>player" % self.npc]["tension"], 0)
 
     def test_stage_advance_needs_both_sides(self):
         err = rejected(self.state, commit("continue", [self.rel(stage_advance=True)]))
@@ -352,6 +360,29 @@ class PlayerAndSceneTest(unittest.TestCase):
         newer, _ = apply(new, commit("continue", [{"op": "exit_scene", "character_id": absent}]))
         self.assertNotIn(absent, newer["scene"]["present"])
         rejected(self.state, commit("continue", [{"op": "exit_scene", "character_id": "player"}]))
+
+    def test_standby_template_auto_instantiates_on_enter_scene(self):
+        from adult_tension.domain import opening
+        from helpers.domain import content
+
+        world = content()["world"]
+        previews = opening.standby_previews(self.state, world)
+        self.assertTrue(previews)
+        standby_id, preview = next(iter(sorted(previews.items())))
+        self.assertNotIn(standby_id, self.state["characters"])
+        new, result = apply(
+            self.state,
+            commit("continue", [{"op": "enter_scene", "character_id": standby_id}, {"op": "npc_action", "npc_id": standby_id, "action": "推门进来"}]),
+        )
+        self.assertIn(standby_id, new["characters"])
+        self.assertIn(standby_id, new["scene"]["present"])
+        self.assertIn(standby_id, result["new_characters"])
+        char = new["characters"][standby_id]
+        self.assertEqual((char["name"], char["tier"], char["introduced_turn"]), (preview["name"], "major", new["turn"]))
+        self.assertTrue(char.get("identity") and char.get("decision") and char.get("intimacy") and char.get("voices"))
+        keys = {f["key"] for f in new["facts"].values()}
+        self.assertIn("%s.exposure" % standby_id, keys)
+        self.assertIn("%s.hidden" % standby_id, keys)
 
     def test_all_errors_are_reported_together_with_paths(self):
         bad = commit(

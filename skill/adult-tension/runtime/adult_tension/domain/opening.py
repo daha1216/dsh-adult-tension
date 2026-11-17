@@ -11,6 +11,7 @@ from .. import STATE_SCHEMA_VERSION
 from ..errors import NO_MATCH, SAFETY_BLOCK, AppError, detail
 from . import clock as CL
 from . import rng
+from . import state as SS
 from . import structure as ST
 from .text import binding, full_name, render, render_name_pattern, split_name
 
@@ -824,6 +825,162 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
 
 def build(pack, seed, conditions, content_version):
     return instantiate(pack, seed, conditions, plan(pack, seed, conditions), content_version)
+
+
+def _standby_schedule_loc(tpl, minute):
+    for slot in tpl.get("schedule") or []:
+        start, end = slot["from"], slot["to"]
+        if start <= end and start <= minute <= end:
+            return slot["location_id"]
+        if start > end and (minute >= start or minute <= end):
+            return slot["location_id"]
+    return None
+
+
+def standby_previews(state, world):
+    """Deterministic identity & location previews for world character_templates
+    that have not yet entered state['characters']."""
+    if not world or not world.get("character_templates"):
+        return {}
+    missing = [t for t in sorted(world["character_templates"], key=lambda t: t["id"]) if t["id"] not in state["characters"]]
+    if not missing:
+        return {}
+    seed = state["seed"]
+    player = state["characters"][state["player_id"]]
+    names = _Names(world, seed)
+    for cid, char in sorted(state["characters"].items()):
+        if char.get("family") and (cid == state["player_id"] or char.get("tier") in ("major", "supporting")):
+            names.reserve_family(char["family"])
+        if char.get("given"):
+            names.used_given.add(char["given"])
+    pref = npc_preference(state["preferences"]["npc_gender_preference"], player["gender"])
+    genders = _npc_genders(world, {"slots": [t["id"] for t in missing]}, seed, pref)
+    here = state["scene"]["location_id"]
+    other_locs = [loc["id"] for loc in world.get("locations", []) if loc["id"] != here] or [here]
+    minute = state["clock"]["minute"]
+    out = {}
+    for tpl in missing:
+        slot = tpl["id"]
+        g = genders[slot]
+        fam = names.next_family(allow_reuse=True)
+        giv = names.given(g, "standby." + slot)
+        name = full_name(world["name_pools"], fam, giv)
+        loc_id = _standby_schedule_loc(tpl, minute) or rng.pick(seed, "standby.loc", other_locs, slot)
+        out[slot] = {
+            "id": slot,
+            "template_id": slot,
+            "name": name,
+            "family": fam,
+            "given": giv,
+            "call": names.call(fam, giv, g, "standby." + slot),
+            "tier": "major",
+            "age": rng.randint(seed, "standby.age", tpl["age_range"][0], tpl["age_range"][1], slot),
+            "gender": g,
+            "adult_context": tpl["adult_context"],
+            "public_role": tpl["public_role"],
+            "location_id": loc_id,
+        }
+    return out
+
+
+def instantiate_standby(state, world, slot, location_id=None, turn=None, fact_coord=None):
+    """Materialize a standby world character_template into state['characters']
+    with its full major card and setup facts."""
+    if slot in state["characters"]:
+        return state["characters"][slot]
+    previews = standby_previews(state, world)
+    if slot not in previews:
+        return None
+    turn_no = state["turn"] if turn is None else turn
+    tpl = next(t for t in world["character_templates"] if t["id"] == slot)
+    preview = previews[slot]
+    seed = state["seed"]
+    scopes = {cid: binding(char) for cid, char in state["characters"].items()}
+    for sid, p in previews.items():
+        scopes.setdefault(sid, binding(p))
+    player = state["characters"][state["player_id"]]
+    scopes["player"] = dict(scopes[state["player_id"]], title=player.get("title") or player.get("call") or player["name"])
+    own = dict(scopes, npc=scopes[slot])
+    tendency = tpl["intimacy_tendency"]
+    npc = {
+        "id": slot,
+        "template_id": slot,
+        "name": preview["name"],
+        "family": preview["family"],
+        "given": preview["given"],
+        "call": preview["call"],
+        "tier": "major",
+        "age": preview["age"],
+        "gender": preview["gender"],
+        "adult_context": tpl["adult_context"],
+        "public_role": tpl["public_role"],
+        "introduced_turn": turn_no,
+        "appearance": render(rng.pick(seed, "standby.appearance", tpl["appearance_options"], slot), own),
+        "identity": _render_tree(
+            {
+                "authority": tpl["identity"]["authority"],
+                "resources": tpl["identity"]["resources"],
+                "limits": tpl["identity"]["limits"],
+                "obligations": tpl["identity"]["obligations"],
+                "exposure_risk": tpl["identity"]["exposure"],
+                "hidden_mismatch": tpl["identity"]["hidden"],
+            },
+            own,
+        ),
+        "situation": _render_tree(
+            {"trigger": tpl["situation"]["trigger"], "pressure": tpl["situation"]["pressure"], "deadline": None, "exits": tpl["situation"]["exits"]},
+            own,
+        ),
+        "decision": _render_tree(
+            {
+                "core_value": tpl["decision"]["core_value"],
+                "current_goal": rng.pick(seed, "standby.goal", tpl["decision"]["goal_options"], slot),
+                "goal_options": tpl["decision"]["goal_options"],
+                "pressure_responses": tpl["decision"]["pressure_responses"],
+                "withdrawal": tpl["decision"]["withdrawal"],
+                "relationship_stance": tpl["decision"]["relationship_stance"],
+                "contrast": tpl["decision"]["contrast"],
+                "prefers": tpl["decision"]["prefers"],
+                "avoids": tpl["decision"]["avoids"],
+                "never": tpl["decision"]["never"],
+            },
+            own,
+        ),
+        "intimacy": _render_tree(
+            {
+                "desire_level": rng.randint(seed, "standby.desire", tendency["desire_range"][0], tendency["desire_range"][1], slot),
+                "attraction_sources": tendency["attraction_sources"],
+                "likes": tendency["likes"],
+                "dislikes": tendency["dislikes"],
+                "preconditions": tendency["preconditions"],
+                "boundaries": tendency["boundaries"],
+                "expression": tendency["expression"],
+                "self_control": rng.randint(seed, "standby.control", tendency["self_control_range"][0], tendency["self_control_range"][1], slot),
+                "desired_position": tendency["desired_position"],
+            },
+            own,
+        ),
+        "voices": _render_tree(tpl["voices"], own),
+        "schedule": [dict(s) for s in tpl["schedule"]],
+        "status": {"location_id": location_id or preview["location_id"], "mood": None, "conditions": []},
+    }
+    state["characters"][slot] = npc
+    for idx, (suffix, text) in enumerate((("exposure", npc["identity"]["exposure_risk"]), ("hidden", npc["identity"]["hidden_mismatch"])), start=1):
+        fid = SS.next_id(state, "fact", "f")
+        state["facts"][fid] = {
+            "id": fid,
+            "key": "%s.%s" % (slot, suffix),
+            "text": "%s：%s" % (npc["name"], text),
+            "truth": True,
+            "known_by": [slot],
+            "believed_by": [],
+            "visibility": "private",
+            "origin": "setup",
+            "turn": turn_no,
+            "spreading": False,
+            "coord": fact_coord() if fact_coord else [turn_no, 900 + idx],
+        }
+    return npc
 
 
 # ---------------------------------------------------------------------------

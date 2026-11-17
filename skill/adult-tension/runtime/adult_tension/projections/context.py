@@ -1,7 +1,7 @@
 """Context projections for the model (DATA_CONTRACTS.md section 7).
 
 Pure functions of (state, content, save info). Lists are bounded so the
-brief context stays <= 6 KB and the full context <= 20 KB (UTF-8 JSON) no
+brief context stays <= 6 KB and the full context <= 32 KB (UTF-8 JSON) no
 matter how long the game runs or how many people a world puts on stage.
 The brief context trims lists in a fixed order. The full context degrades
 detail step by step (_full_steps), least relevant first, and never drops a
@@ -16,12 +16,14 @@ import json
 
 from ..domain import clock as CL
 from ..domain import facts as FA
+from ..domain import opening
 from ..domain import simulation
 from ..domain import state as SS
+from ..domain.text import binding, render
 from ..domain.turn import chapter_start
 
 BRIEF_LIMIT = 6 * 1024
-FULL_LIMIT = 20 * 1024
+FULL_LIMIT = 32 * 1024
 # size_bytes is added after fitting; its own bytes count toward the limit.
 SIZE_FIELD_RESERVE = 24
 LIMITS = {"due_soon": 10, "known_facts": 8, "recent": 3, "nearby": 5}
@@ -255,6 +257,23 @@ def full(state, content, save=None):
     }
     if world.get("stage_labels"):
         context["world"]["stage_labels"] = world["stage_labels"]
+    standby = opening.standby_previews(state, world)
+    if world.get("daily_activities"):
+        here_id = state["scene"]["location_id"]
+        private_ids = {loc["id"] for loc in world.get("locations", []) if loc.get("privacy") == "private"}
+        scopes = {cid: binding(c) for cid, c in state["characters"].items()}
+        for sid, p in standby.items():
+            scopes.setdefault(sid, binding(p))
+        scopes["player"] = dict(binding(pchar), title=pchar.get("title") or pchar.get("call") or pchar["name"])
+        acts = sorted(
+            world["daily_activities"],
+            key=lambda a: (here_id not in a.get("location_ids", []), not (set(a.get("location_ids", [])) & private_ids), a["id"]),
+        )
+        context["world"]["scene_ideas"] = [
+            "%s：%s" % (a["title"], render(a["beats"][0], scopes))
+            for a in acts[:6]
+            if a.get("beats")
+        ]
     context["locations"] = [
         {"id": loc["id"], "name": loc["name"], "privacy": loc["privacy"], "detail": loc["detail"], "affordances": loc["affordances"], "exits": loc["exits"]}
         for loc in world["locations"]
@@ -262,6 +281,11 @@ def full(state, content, save=None):
     majors = [c for c in state["characters"].values() if c["id"] != player and c["tier"] in ("major", "supporting")]
     majors.sort(key=lambda c: (c["id"] not in state["scene"]["present"], c["id"]))
     context["characters"] = [_card(state, world, c) for c in majors]
+    if standby:
+        context["standby_cast"] = [
+            {"id": sid, "name": p["name"], "age": p["age"], "gender": p["gender"], "role": p["public_role"], "location_id": p["location_id"]}
+            for sid, p in sorted(standby.items())
+        ]
     context["background"] = [
         {"id": c["id"], "name": c["name"], "role": c["public_role"], "line": c.get("line"), "location_id": c["status"]["location_id"]}
         for c in sorted(state["characters"].values(), key=lambda c: c["id"])
@@ -414,16 +438,15 @@ def _card_summary(card):
 
 
 def _card_compact(card):
-    """A present NPC under budget pressure: what the next beat needs (decision
-    with pressure responses, situation, intimacy numbers and boundaries), no
-    appearance or sample lines."""
-    out = {k: v for k, v in card.items() if k not in ("appearance", "voices")}
+    """A present NPC under budget pressure: keeps appearance and voices, plus
+    decision with pressure responses, situation, intimacy numbers and boundaries."""
+    out = dict(card)
     if "identity" in out:
-        out["identity"] = {k: v for k, v in out["identity"].items() if k in ("authority", "exposure_risk", "hidden_mismatch")}
+        out["identity"] = {k: v for k, v in out["identity"].items() if k in ("authority", "resources", "exposure_risk", "hidden_mismatch")}
     if "decision" in out:
-        out["decision"] = {k: v for k, v in out["decision"].items() if k not in ("prefers", "avoids", "contrast")}
+        out["decision"] = {k: v for k, v in out["decision"].items() if k not in ("prefers", "avoids", "contrast", "withdrawal")}
     if "intimacy" in out:
-        out["intimacy"] = {k: v for k, v in out["intimacy"].items() if k not in ("likes", "dislikes", "attraction_sources")}
+        out["intimacy"] = {k: v for k, v in out["intimacy"].items() if k not in ("dislikes", "attraction_sources")}
     out["detail"] = "compact"
     return out
 
@@ -589,9 +612,15 @@ def _full_steps(context, state):
     def shrink_cards(present, shrink):
         return [lambda cid=cid: _replace_card(context, cid, shrink) for cid in _card_order(context, state, present)]
 
+    def drop_standby_and_ideas():
+        context.get("world", {}).pop("scene_ideas", None)
+        context.pop("standby_cast", None)
+
     # Far from the scene.
+    yield pop_to("scene_ideas", 2, holder="world")
     yield background_lines
     yield far_locations({here} | nearby)
+    yield drop_standby_and_ideas
     yield from shrink_cards(False, _card_summary)
     yield background_elsewhere
     yield one_reason
