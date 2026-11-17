@@ -2,28 +2,28 @@
 
 # 世界列表
 
-内容版本：`2026.10.29`。只有 `released` 的世界参与随机开局、出现在 `list-worlds` 里。玩家问某类题材时用 `list-worlds` 带 `query`，点名开局用 `new-game` 的 `world_query`，都按标题、时代、地方和完整介绍匹配。“有超自然的”“不要灾难的”这类按内容标签浏览：`list-worlds` 带 `tags` / `exclude_tags`。
+内容版本：`2026.10.30`。只有 `released` 的世界参与随机开局、出现在 `list-worlds` 里。玩家问某类题材时用 `list-worlds` 带 `query`，点名开局用 `new-game` 的 `world_query`，都按标题、时代、地方和完整介绍匹配。“有超自然的”“不要灾难的”这类按内容标签浏览：`list-worlds` 带 `tags` / `exclude_tags`。
 
 | 内容标签 | ID | 已发布世界数 |
 |---|---|---|
 | 轻度暧昧 | `romance_light` | 32 |
 | 亲密 | `intimate` | 201 |
 | 直白的性描写 | `explicit` | 11 |
-| 暴力 | `violence` | 80 |
-| 胁迫 | `coercion_theme` | 61 |
-| 羞辱 | `humiliation` | 40 |
-| 身体伤害 | `bodily_harm` | 95 |
-| 酒精与药物 | `substance` | 44 |
+| 暴力 | `violence` | 77 |
+| 胁迫 | `coercion_theme` | 62 |
+| 羞辱 | `humiliation` | 39 |
+| 身体伤害 | `bodily_harm` | 96 |
+| 酒精与药物 | `substance` | 43 |
 | 怀孕 | `pregnancy` | 0 |
 | 死亡 | `death` | 39 |
-| 职场权力关系 | `workplace_power` | 130 |
+| 职场权力关系 | `workplace_power` | 131 |
 | 出轨 | `infidelity` | 2 |
-| 违法犯罪 | `crime` | 121 |
+| 违法犯罪 | `crime` | 122 |
 | 赌博 | `gambling` | 6 |
 | 职场 | `workplace` | 159 |
 | 夜生活 | `nightlife` | 11 |
 | 超自然 | `supernatural` | 28 |
-| 灾难 | `disaster` | 134 |
+| 灾难 | `disaster` | 132 |
 | 自定义 | `custom` | 0 |
 
 | 世界 | ID | 一句话 | 模式 | 状态 |
@@ -35,7 +35,7 @@
 | 被绑发带女会长 | `afterschool_cellar_president_confession` | 2002 年秋末，名门私立圣罗兰大学的百年西洋旧校舍即将拆除、改建新礼堂。 | 日常、有压力 | released |
 | 秘药高热女首席 | `alchemy_archive_potion_backlash` | 皇家魔导院地下的禁忌炼药暗室里，冷面首席魔导师带着后辈搭档复原一种古代共鸣秘药，已经熬了大半年：白天授课、审稿，夜里守着琉璃导管看药色。 | 日常、有压力 | released |
 | 禁触的雪线圣女 | `alpine_sanctuary_dagger_rescue` | 海拔四千米的雪线神殿一年只在夏秋开山，朝圣者踏着冰阶上来求一句降福。 | 日常、有压力 | released |
-| 流沙殿摸金女魁 | `ancient_tomb_gravity_sand_spill` | 军阀混战的年头，发丘摸金世家的女掌门受雇带队探一座前朝皇陵，督军府派了工兵团跟着，名为护送，实为盯梢。 | 日常、有压力 | released |
+| 流沙殿摸金女魁 | `ancient_tomb_gravity_sand_spill` | 民国十六年深秋，发丘世家受雇勘探前朝皇陵，北洋督军府派工兵团驻扎山脚盯梢。 | 日常、有压力 | released |
 | 防弹密室女军火商 | `arms_dealer_heiress_yacht_standoff` | 军工联合体家族的掌舵女继承人，带着贴身保镖队长、轮机部大管轮和随船医护官，乘六十米长的私人防暴游艇在南太平洋公海上洽谈防空算力核心的跨国交割，一走就是十天。 | 日常、有压力 | released |
 | 揭幕前的修复师 | `art_restorer_roller_piercing_jam` | 国家博物馆的宋画特展即将揭幕，首席古画修复师每天在悬空全景玻璃中庭里为国宝宋画做最后的展前全色与托裱核验，中庭技术总调度、修复副手与展柜技师在旁协同。 | 日常、有压力 | released |
 | 艺术季的酒局 | `art_season_studios` | 两周的艺术季，旧厂区里的工作室、排练厅、版画工作坊和一间开到凌晨的酒吧挤在一起；合作与竞争都发生在所有人都看得见的地方。 | 日常、有压力 | released |
@@ -56,7 +56,7 @@
 | 地下救护所女牧师 | `cleric_bunker_sanctuary_overload` | 边境前线一座钟楼半塌的村庄礼拜堂，地下墓室改成了野战救护所。 | 日常、有压力 | released |
 | 发条马戏的伶人 | `clockwork_circus` | 马戏团是一个家，也是一座笼子；第七夜拆帐篷的时候，谁跟着走，谁留下？ | 日常、有压力 | released |
 | 讲台急升的主席 | `cold_president_podium_harness_jam` | 顶尖学府的万人大礼堂里，迎新典礼即将开幕，台下坐满成年新生与校领导。 | 日常、有压力 | released |
-| 暗堡进水女报务 | `cold_war_bunker_cipher_incineration` | 冷战年代，华北要塞地下三十米的国防通信暗堡，首席女报务员在机要舱室里值了三年班；保密检查员、勘测技术员和炊事班长是这个月才调下来的。 | 日常、有压力 | released |
+| 暗堡进水女报务 | `cold_war_bunker_cipher_incineration` | 1969年冬，华北要塞地下三十米通信暗堡终年封闭。 | 日常、有压力 | released |
 | 战地救护女军医 | `combat_surgeon_bunker_cavein_vigil` | 前线后方的地下野战医院里，清冷寡言的外科女军医白天在帐篷里查房、分药、替伤员读家书，难得在停火的间隙煮一杯苦咖啡。 | 日常、有压力 | released |
 | 霞飞路暗房女谍 | `concession_darkroom` | 1940 年的法租界，霞飞路深处一座老洋房，楼上是名流、遗老、走私商与各方线人交错的画廊沙龙，楼下是弥漫定影液酸涩气息的狭窄暗房。 | 日常、有压力 | released |
 | 冷柜前夜班店员 | `convenience_clerk_cooler_tail_jam` | 杭州大学城商圈的通宵便利店，落地窗亮得像玻璃盒子，夜跑和吃宵夜的年轻人来来往往。 | 日常、有压力 | released |
@@ -92,7 +92,7 @@
 | 处决前两个时辰 | `fallen_knight_dungeon_pact` | 黑石要塞上月被征服军攻陷，圣王国第一近卫女骑士长断后力竭被俘，戴着秘银手枷关在地下三层的水牢。 | 日常、有压力 | released |
 | 压载舱的王牌女谍 | `female_agent_cargo_hold_interrogation` | 东海公海上有一艘伪装成万吨散货轮的间谍母船。 | 日常、有压力 | released |
 | 地下剑馆女冠军 | `fencing_hall_rehab_duel` | 省击剑训练中心地下二层的剑馆里，全国青年锦标赛连冠的女剑客伤愈复出。 | 日常、有压力 | released |
-| 裂鱼尾裙女影后 | `film_queen_awards_stage_vault_lock` | 国际电影节颁奖盛典彩排了两周，三金影后天天在侧台走位，灯光总设计天天为影后封后那一刻的追光调到深夜。 | 日常、有压力 | released |
+| 裂鱼尾裙女影后 | `film_queen_awards_stage_vault_lock` | 华语国际电影节闭幕盛典在国家级大剧院举行，剧组已彩排两周。 | 日常、有压力 | released |
 | 血脉觉醒的高热夜 | `floating_city_alchemist_isolation` | 三千米雷暴云海上的浮空城顶层实验室，帝国首席女炼金术士日夜解析一件禁物，贴身卫队长守在门外，多疑的总督每周来查一次进度。 | 日常、有压力 | released |
 | 雾夜马车俏贵妇 | `fog_bathhouse` | 雾里人人只是一个号码，号码和名字的对应只在一个人手里；那个人什么时候对、对给谁看？ | 日常、有压力 | released |
 | 仙山客栈老板娘 | `foothill_town` | 上不了山的人，在山下怎么活？ | 日常、有压力 | released |
@@ -197,7 +197,7 @@
 | 幕布后高定车模 | `supercar_model_chassis_ankle_cuff_jam` | 国际车展开幕前后的一周，清冷的顶流车模每天在中央大厅的概念超跑展台上换姿势、拍照，底盘工程师、展台调速操纵员和媒体督导都围着这台车转。 | 日常、有压力 | released |
 | 脱轨专列女上司 | `supervisor_stranded_diesel_train` | 北国荒原深处的支线铁道，一天只有一班单节老式柴油客车。 | 日常、有压力 | released |
 | 宗祠绣轩苏绣娘 | `suzhou_embroidery_cellar_flood` | 姑苏古镇的临水宗祠里，苏绣非遗传人守着一座挑空绣轩。 | 日常、有压力 | released |
-| 走火入魔女剑仙 | `sword_fairy_demon_pagoda_seal` | 昆仑绝顶之下的九幽锁妖塔，天衍宗首席女剑仙奉命驻守第七重，镇着一池血煞；外山经阁的守阁门人、天机峰的阵法推演士和戒律堂的行刑使轮流下塔协助。 | 日常、有压力 | released |
+| 走火入魔女剑仙 | `sword_fairy_demon_pagoda_seal` | 昆仑九幽锁妖塔第七重，天衍宗万剑峰代首座常年镇守血煞地泉。 | 日常、有压力 | released |
 | 守陵村的剑巫女 | `sword_shrine_maiden_submerged_crypt_gate` | 上古王陵前有一座守陵村，村里世代出守陵的剑巫女。 | 日常、有压力 | released |
 | 琴库里的首席 | `symphony_hall_cello_repair_deadline` | 十九世纪末的巴黎，大音乐厅为建团七十周年准备一场交响盛典，大提琴独奏首席每天在侧翼练到熄灯，古董琴存放在地下二十米刚通了电的恒温储琴金库。 | 日常、有压力 | released |
 | 花泳冠军与池底灯 | `synchronized_swimmer_pool_jam` | 国家跳水馆的地下十米深处是一口深潜减压井。 | 日常、有压力 | released |
