@@ -52,7 +52,7 @@
 | `npc_update` | 修改 NPC 的公开身份、外貌、当前目标、对关系的态度或处境（不含身份卡与倾向卡） |
 | `introduce_character` | 新角色登场：正文里第一次点名的人都要登场，只被提起、不在场的也算（present 写 false，location_id 写他所在的地点）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason |
 | `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给 |
-| `leverage_set` | 登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间，双方之间的亲密回合被拒 |
+| `leverage_set` | 登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间仍可结合处境发生博弈或亲密互动 |
 | `leverage_release` | 解除把柄（把柄被销毁、债务结清、秘密已经公开等），原因必填。同一回合里先解除再亲密不算解除 |
 | `offscreen_beat` | 离屏片段：不在场的重要 NPC 在这段时间里做了什么。只能写上下文 `offscreen_beat_candidates` 或时间推进要求的 NPC；子操作只能是这个 NPC 自己的行动、状态、移动，NPC 之间的关系与消息，以及不涉及玩家的事件与把柄 |
 | `twist_accept` | 接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result 模式并带 player_authorized；同一游戏日最多接受一次 |
@@ -534,7 +534,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `leverage_set`
 
-登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间，双方之间的亲密回合被拒
+登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间仍可结合处境发生博弈或亲密互动
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|

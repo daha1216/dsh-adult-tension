@@ -538,7 +538,7 @@ def op_promote_character(ctx, op, path):
         "basis_text": F(S.Nullable(S.Str(1, 120)), required=False, default=None),
         "origin": F(S.Str(1, 60)),
     },
-    "登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间，双方之间的亲密回合被拒",
+    "登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间仍可结合处境发生博弈或亲密互动",
 )
 def op_leverage_set(ctx, op, path):
     errs = []
