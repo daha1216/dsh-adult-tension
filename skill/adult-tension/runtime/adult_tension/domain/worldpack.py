@@ -120,7 +120,7 @@ TEMPLATE = S.Obj(
                     "desired_position": F(_str(1, 40), desc="想要的相处位置"),
                 }
             ),
-            desc="亲密倾向（不等于许可）",
+            desc="私密偏好、敏感防线与失守表现",
         ),
         "voices": F(S.Obj({"surface": F(_str(1, 120), desc="说出口的话"), "inner": F(_str(1, 120), desc="心里的话")}), desc="表层与里层语态的示例"),
         "schedule": F(
@@ -212,7 +212,7 @@ ACTIVITY = S.Obj(
         "title": F(_str(1, 20)),
         "location_ids": F(S.List(S.Id(), min_items=1, unique=True), desc="可以发生的地点"),
         "duration_minutes": F(S.Int(5, 600), desc="时长（分钟）"),
-        "beats": F(S.List(_str(1, 80), min_items=2), desc="活动里会发生的小事"),
+        "beats": F(S.List(_str(1, 80), min_items=2), desc="活动推进节拍（首条同时作为完整上下文 world.scene_ideas 的场景灵感）"),
         "hook_ids": F(S.List(S.Id(), unique=True), required=False, default=[], desc="偏好的钩子"),
         "start_minute": F(S.Nullable(S.Int(0, 1439)), required=False, default=None, desc="开局时刻（从零点起的分钟）；省略时用世界的起始时刻"),
         "tags": F(S.List(S.Id(), unique=True), required=False, default=[]),
@@ -250,7 +250,7 @@ PRESSURE = S.Obj(
 HOOK = S.Obj(
     {
         "id": F(S.Id()),
-        "kind": F(S.Enum(*ST.HOOK_KINDS), desc="approach 非交易性的靠近（优先）；observe；request；accident"),
+        "kind": F(S.Enum(*ST.HOOK_KINDS), desc="approach 主动近身试探（占优，停在贴身未决瞬间）；observe 暗中观察；request 开口相求；accident 突发擦碰"),
         "slot": F(S.Id(), desc="发出钩子的人物模板 ID"),
         "location_ids": F(S.List(S.Id(), unique=True), required=False, default=[], desc="只在这些地点；省略表示不限"),
         "text": F(_str(1, 120), desc="开局收尾的动作，用 {npc.name}"),
@@ -261,7 +261,7 @@ TWIST = S.Obj(
     {
         "id": F(S.Id()),
         "category": F(S.Enum(*ST.TWIST_CATEGORIES)),
-        "requires": F(S.List(S.Str(1, 40), unique=True), required=False, default=[], desc="前提：pressure 或 daily（只在该模式）、人物模板 ID（该人物在局）、压力 ID"),
+        "requires": F(S.List(S.Str(1, 40), unique=True), required=False, default=[], desc="前提：pressure 或 daily（限定模式）、人物模板 ID（绑定在场或 standby_cast 待命角色并解锁其占位符）、压力 ID"),
         "text": F(_str(1, 160)),
     },
     name="转折",
@@ -326,10 +326,10 @@ WORLD = S.Obj(
         "channels": F(S.List(CHANNEL), required=False, default=[], desc="消息传播的路径"),
         "tension_engines": F(S.List(ENGINE), required=False, default=[], desc="张力引擎"),
         "cast_combos": F(S.List(COMBO), required=False, default=[], desc="谁和谁同场"),
-        "daily_activities": F(S.List(ACTIVITY), required=False, default=[], desc="日常模式的开局活动"),
+        "daily_activities": F(S.List(ACTIVITY), required=False, default=[], desc="日常模式的开局活动（亦为完整上下文提供 scene_ideas 场景灵感）"),
         "pressures": F(S.List(PRESSURE), required=False, default=[], desc="压力模式的开局压力"),
         "hooks": F(S.List(HOOK), required=False, default=[], desc="开局收尾的钩子"),
-        "twists": F(S.List(TWIST), required=False, default=[], desc="转折候选"),
+        "twists": F(S.List(TWIST), required=False, default=[], desc="转折候选（可绑定 standby_cast 待命角色实现突袭入局）"),
         "forbidden_terms": F(S.List(_str(1, 20), unique=True), required=False, default=[], desc="本世界不该出现的词"),
         "content_tags": F(S.List(S.Id(), unique=True), required=False, default=[], desc="本世界涉及的内容标签"),
         "status": F(S.Enum("draft", "review", "released"), desc="自定义世界写 draft"),
@@ -340,7 +340,7 @@ WORLD = S.Obj(
 
 PLACEHOLDER_JUNK = {"—", "-", "--", "待补", "待定", "TODO", "TBD", "todo", "tbd", "...", "……", "无", "暂无", "占位", "xxx", "XXX", "N/A"}
 MINOR_TERMS = ("学生", "师生", "校园", "学徒", "徒弟", "门生", "弟子", "少年", "少女", "幼", "童")
-ADULT_MARKERS = ("成年", "成人", "研究生", "夜校", "驻留", "年满", "已婚", "正式工", "正式雇员", "持证")
+ADULT_MARKERS = ("成年", "成人", "大学", "本科", "研究生", "硕士", "博士", "夜校", "驻留", "年满", "已婚", "正式工", "正式雇员", "持证")
 
 
 SENTENCE_SPLIT = re.compile(r"[。！？；!?;\n]")
@@ -352,6 +352,8 @@ SHOWN_AS_WRITTEN = {
     "character_templates": ("adult_context", "public_role", "gender_reason"),
     "background_cast": ("adult_context", "role", "name"),
     "daily_activities": ("title",),
+    "pressures": ("title",),
+    "locations": ("name",),
 }
 
 
@@ -620,7 +622,7 @@ class _Checker:
                 self.add("$.channels", "关系渠道需要至少一个精确、一个走样", "fidelity 取 exact 与 distorted")
             approach = sum(1 for h in p["hooks"] if h["kind"] == "approach")
             if p["hooks"] and approach * 2 <= len(p["hooks"]):
-                self.add("$.hooks", "钩子应以 approach（非交易性的靠近）为主：%d/%d" % (approach, len(p["hooks"])), "增加 approach 类钩子")
+                self.add("$.hooks", "钩子应以 approach（主动近身试探）为主：%d/%d" % (approach, len(p["hooks"])), "增加 approach 类近身钩子，使占比过半")
 
     # -- identity, uniqueness, references -------------------------------------
 
@@ -887,7 +889,7 @@ class _Checker:
                 continue
             if scope not in allowed:
                 if path.startswith("$.twists[") and scope in self.templates:
-                    hint = "把 %s 写进这个转折的 requires，它只在这个人物在局时出现" % scope
+                    hint = "把 %s 写进这个转折的 requires，引擎才能为在场或待命（standby_cast）的该人物渲染占位" % scope
                 elif _shown_as_written(path):
                     hint = "这个字段原样显示，不做占位替换；直接写，不用代词"
                 else:
@@ -917,8 +919,7 @@ class _Checker:
         if group == "cast_combos":
             return {"player"} | set(item["slots"])
         if group == "twists":
-            # A twist is offered only when the characters in `requires` are in
-            # the game, so only those can be named in its text.
+            # Characters listed in requires resolve against active characters or deterministic standby_cast previews.
             return {"player"} | (set(item["requires"]) & set(self.templates))
         if group == "pressures":
             scopes = {"player"}

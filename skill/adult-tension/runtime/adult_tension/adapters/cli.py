@@ -155,8 +155,8 @@ def _check_encoding(payload):
     if got != ENCODING_CHECK:
         raise AppError(
             INVALID_INPUT,
-            "中文在传入途中被改坏了",
-            [detail("$.encoding_check", "应为“%s”，收到 %s" % (ENCODING_CHECK, json.dumps(got, ensure_ascii=False)), "这个终端改坏了中文：把 JSON 写进 UTF-8 文件，用 --input-file 传入", INVALID_INPUT)],
+            "传入的中文编码已损坏",
+            [detail("$.encoding_check", "应为“%s”，收到 %s" % (ENCODING_CHECK, json.dumps(got, ensure_ascii=False)), "当前终端管道破坏了中文字符，请将 JSON 保存为 UTF-8 文件后用 --input-file 传入", INVALID_INPUT)],
         )
 
 
@@ -209,8 +209,8 @@ def _internal_error(ctx):
     hint = "状态没有改变；查看日志 %s，必要时导出存档" % log_file if log_file else "状态没有改变；必要时导出存档"
     body = {
         "code": INTERNAL_ERROR,
-        "message": "未预期错误（编号 %s）" % error_id,
-        "details": [detail("$", "未预期错误", hint)],
+        "message": "内部运行异常（编号 %s）" % error_id,
+        "details": [detail("$", "内部运行异常", hint)],
         "error_id": error_id,
         "log": log_file,
         "next_request_id": new_request_id(),

@@ -42,12 +42,13 @@ RECORD_ONLY_KINDS = ("meta", "load", "ask", "undo", "resume")
 REPEAT_WINDOW = 10
 MIN_SENTENCE = 10
 FOOTER_RE = re.compile(r"【时间】(?P<time>[^｜\n]+)｜【地点】(?P<place>[^｜\n]+)｜回合：(?P<turn>\d+)(?:｜种子：(?P<seed>\d+))?")
-RECEIPT_RE = re.compile(r"^(已保存|已另存为|已读取|已撤销|已记下|已暂停|已导出|已导入|已删除|内心可见|叙事助手|离屏推演|已恢复)")
+RECEIPT_RE = re.compile(r"^(已保存|已另存为|已读取|已撤销|已记下|已暂停|已导出|已导入|已删除|内心可见|叙事助手|离屏推演|已恢复|节奏：|尺度：)")
 HINT_RE = re.compile(r"^可以：")
 NUMBER_LEAK_RE = re.compile(r"(信任|张力|好感度?|欲望值?|自制力?|亲密度|关系值|revision)\s*[:：]?\s*[+\-−]?\s*\d")
+RESPONSE_LABEL_LEAK_RE = re.compile(r"(?:NPC\s*)?回应\s*[:：]\s*(?:拒绝|协商|有限配合|表面配合|真诚配合)")
 TIER_WORDS = ("结果档", "尝试档", "改写档", "继续档", "等待档")
 # Engine vocabulary in Chinese: response labels and mechanism phrases.
-MECHANISM_WORDS = ("有限配合", "表面配合", "真诚配合", "系统判定", "回合推进", "回合结算", "离屏推演", "引擎判定",
+MECHANISM_WORDS = ("有限配合", "真诚配合", "系统判定", "回合推进", "回合结算", "离屏推演", "引擎判定",
                    # the host telling the player what it does with the runtime (NARRATIVE_RULES: no tool calls in the text)
                    "会话状态", "载入会话", "提交回合", "回合行动", "工具调用", "调用工具", "调用运行时")
 ENGINE_WORDS = ("revision", "request_id", "session_id", "expected_revision", "next_request_id", "known_by", "believed_by", "dedupe_key", "action_mode", "desire_level", "self_control")
@@ -293,6 +294,9 @@ def check_leakage(record):
             match = NUMBER_LEAK_RE.search(text)
             if match:
                 out.append(finding("leakage", index, "正文里出现数值：%s" % match.group(0)))
+            resp_match = RESPONSE_LABEL_LEAK_RE.search(text)
+            if resp_match:
+                out.append(finding("leakage", index, "正文里出现回应档位标签：%s" % resp_match.group(0)))
             for word in TIER_WORDS:
                 if word in text:
                     out.append(finding("leakage", index, "正文里出现档位名 %s" % word))
@@ -556,7 +560,7 @@ def _known_names(record):
                 if person.get("name"):
                     names.add(person["name"])
             context = data.get("context") or {}
-            for group in ("characters", "background", "present_npcs", "nearby"):
+            for group in ("characters", "background", "present_npcs", "nearby", "standby_cast"):
                 for person in context.get(group) or []:
                     if person.get("name"):
                         names.add(person["name"])
@@ -568,6 +572,15 @@ def _known_names(record):
                 for op in turn_input.get("operations") or []:
                     if isinstance(op, dict) and op.get("op") == "introduce_character":
                         names.add(op.get("name"))
+    session = ((record.get("final_export") or {}).get("session") or {})
+    state = session.get("state")
+    world = (session.get("content") or {}).get("world")
+    if isinstance(state, dict) and isinstance(world, dict) and "seed" in state and "player_id" in state and state.get("characters"):
+        from adult_tension.domain import opening as OP
+
+        for preview in OP.standby_previews(state, world).values():
+            if preview.get("name"):
+                names.add(preview["name"])
     names.discard(None)
     return names
 

@@ -53,8 +53,8 @@ ERROR_DESCRIPTIONS = {
     INVALID_INPUT: "输入格式或字段错误",
     STALE_REVISION: "expected_revision 过期；错误中附当前 revision 与简要上下文",
     IDEMPOTENCY_CONFLICT: "同一 request_id 携带了不同的内容",
-    INVARIANT_VIOLATION: "违反领域规则（冷却、知识边界、授权、幅度等）",
-    SAFETY_BLOCK: "与硬边界冲突、暂停中、年龄问题",
+    INVARIANT_VIOLATION: "违反叙事与状态规则（冷却、知情边界、玩家授权、变化幅度等）",
+    SAFETY_BLOCK: "触及玩家硬边界、处于暂停状态，或违反全员成年（18+）底线",
     CONTENT_ERROR: "内容包或自定义世界校验失败",
     NOT_FOUND: "会话、存档、角色、事件不存在",
     SLOT_CONFLICT: "存档名已被占用（exists），或本局当前槽已在别的对话里被写过（changed_elsewhere）",
@@ -64,7 +64,7 @@ ERROR_DESCRIPTIONS = {
     STORAGE_BUSY: "数据库被其他进程短暂占用；用同一 request_id 重试",
     NO_MATCH: "开局约束在所选世界中无法满足；附冲突的约束与可放宽项",
     MIGRATION_FAILED: "数据库迁移失败，已恢复迁移前的备份",
-    INTERNAL_ERROR: "未预期错误；附日志位置，状态不变",
+    INTERNAL_ERROR: "内部运行异常；附日志路径，状态未改变",
 }
 
 

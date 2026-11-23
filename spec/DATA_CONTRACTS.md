@@ -7,7 +7,7 @@
 - 所有交换数据为 UTF-8 JSON。
 - 所有对象都拒绝未知字段，错误中带 JSON 路径（例如 `$.operations[2].npc_id`）。
 - JSON 中的重复键也是错误（标准库 `json` 默认静默保留后一个值，必须显式拒绝）。
-- 数值不静默截断：超出范围就报错，不“帮忙”夹到边界。
+- 输入参数（如分钟数、概率、年龄）超出范围直接报错，不静默截断；但局内演化的关系信任（`-5..5`）、张力（`0..5`）与私密倾向数值（`0..5`）在增减触顶/触底时自动钳制在有效边界内。
 - 所有持久化格式都带 `schema_version`；内容包带 `content_version`；随机带 `rng_version`。
 - ID 是 ASCII 小写短标识（`[a-z0-9_]{1,40}`）；显示名是中文。ID 在会话内唯一，一经分配永不复用，角色升格也保留原 ID。
 - 时间用游戏内时钟：`{"day": 1, "minute": 1230}`，`minute` 为当天 0–1439。时间永不倒流。不使用公历日期，古代与幻想世界同样适用；世界包可以提供起始日的显示标签（如“庆应三年·霜月初七”），引擎只负责按天数递推。
@@ -67,7 +67,7 @@
 
 - `npc_gender_preference`：`any`、`mostly_female`、`mostly_male`、`female_only`、`male_only`、`mixed`。开局时，玩家设了偏好（`any`、`mixed` 以外）就按偏好；没设时，性别不限的开局 NPC 取玩家角色的异性，人物卡定了性别的照卡片，组合里至少要有一个能与玩家异性的人（这条只挑组合、定性别，不让任何世界因此开不了局）。玩家没给自己的性别时默认男性；世界没有男性可用的玩家身份时，取身份池的固定性别。背景人物不受这条约束。
 - `person`：称呼玩家角色的人称，`second`（默认）、`first` 或 `third`；NPC 始终用第三人称。开局时取世界包的 `default_person`，玩家可以改。
-- `pace`、`explicitness` 为 P1，P0 阶段固定为 `standard`，但字段从第一天存在。
+- `pace`、`explicitness` 默认为 `standard`，支持玩家通过 `set-preferences` 或开局偏好调整（`pace`：`slow`/`standard`/`direct`；`explicitness`：`subtle`/`standard`/`explicit`）。
 
 安全：
 
@@ -147,7 +147,7 @@
 - 字段写权限：`id`、`name`、`age`、`gender` 永不可改（玩家角色的姓名与称谓例外，经 `player_update`）；`intimacy` 与 `identity` 只能在升格时创建一次，之后只能逐项演化；其余字段可以通过对应操作修改。
 - 角色卡里的 `intimacy.boundaries` 是角色自己的界线，和玩家登记的硬边界（`safety.boundaries`）是两回事，命名上必须区分。
 - 玩家角色也是角色，但没有 `decision` 与 `intimacy`（模型不替玩家决定），额外有 `title`（称谓）、`social_position`、`resources`、`risks`。
-- `situation` 永远不是同意；校验器不以它为任何亲密变化的依据。
+- `situation` 给出角色当下的困局、压力与有代价的出路，可作为施压、条件交换或动摇防线的叙事支点。
 - `intimacy` 只能通过 `intimacy_evidence` 操作逐项演化（§6），不能整体替换。
 - `status.mood` 与 `condition` 由模型通过 `npc_state` 操作更新，引擎只校验格式。
 
@@ -231,7 +231,7 @@
 
 ### 5.3 把柄
 
-“一方握有另一方的把柄、债务或生计”必须有记录，供记忆、读档和模型判断“处境永远不是同意”（`NARRATIVE_RULES.md` §7.1）。
+“一方握有另一方的把柄、债务、生计或私密控制器”必须有结构化记录，供长线记忆、读档接续与围绕把柄的施压/交易博弈使用（`NARRATIVE_RULES.md` §7.1）。
 
 ```json
 {
@@ -250,7 +250,7 @@
 - 来源：开局时由带 `leverage` 标记的压力生成（§8.1）；局中由 `leverage_set` 登记，例如 NPC 发现了玩家的秘密并开始暗示。
 - `holder`、`subject` 是角色 ID，可以是玩家；`basis_fact_id` 指向构成把柄的事实，且 `holder` 知道这条事实。
 - `state` 只有 `active` → `released`；解除用 `leverage_release`，必须写原因（把柄被销毁、债务结清、秘密已经公开等）。
-- 生效期间，`holder` 与 `subject` 之间不写亲密场景，直到把柄在之前的回合解除。这由模型判断，引擎不拦（§6）。
+- 生效期间，`holder` 与 `subject` 之间可围绕把柄展开施压、条件交换或半推半就的亲密互动；引擎不因把柄阻断亲密记录。
 - 正文里一方开始拿捏另一方时，记录那一回合时必须登记。正文有要挟而状态里没有记录，是端到端评测的失败项（`ACCEPTANCE.md` §6）。
 
 ## 6. 回合提交
@@ -317,11 +317,12 @@
 
 - 每个参与者都是 `major` 且在场；
 - 当前不在暂停中，且标签不与硬边界冲突；
-- 每个 NPC 参与者在同一回合有 `npc_response`（`partial` 或 `genuine`）或主动的 `npc_action`。
+- 玩家在参与者中时，本回合须为 `result` 或 `attempt` 且 `player_authorized: true`；
+- 每个 NPC 参与者在同一回合有 `negotiate`、`partial`、`surface` 或 `genuine` 回应，或主动的 `npc_action`（仅纯 `refuse` 且无主动行动时拒绝对该角色标记亲密推进）。
 
-参与者成年由角色创建时的检查和每个回合的状态不变量保证（任何角色年龄缺失或小于 18，记录都被拒）。参与者是否清醒、彼此之间有没有生效中的把柄（§5.3），由模型按 `NARRATIVE_RULES.md` §7.1 判断，引擎不拦。
+参与者成年由角色创建时的检查和每个回合的状态不变量保证（任何角色年龄缺失或小于 18，记录都被拒）。微醺、高热、险境或生效中的把柄（§5.3）均不阻断亲密回合，由模型结合角色表里语态与倾向卡写出真实反应层次。
 
-这保证“反应持续可见”在结构上成立。这个检查只针对这一回合，不产生任何可以延续到之后回合的同意记录。
+这保证“反应持续可见”在结构上成立。这个检查只针对这一回合，不产生任何持久化“同意记录”。
 
 ### 6.1 操作表（P0 最小集合）
 
@@ -329,7 +330,7 @@
 |---|---|---|
 | `advance_time` | `minutes` 或 `until`（`morning`/`noon`/`evening`/`night`/`next_morning`）或 `days` | 不能倒流；触发推演分档与事件到期 |
 | `move` | 角色移动到地点 | 玩家移动需 `player_authorized`；地点必须在快照中 |
-| `enter_scene` / `exit_scene` | 角色登场 / 离场 | 角色必须存在 |
+| `enter_scene` / `exit_scene` | 角色登场 / 离场 | 角色已在会话中，或属于世界包未上场的 `standby_cast` 待命模板（引用时自动实例化为完整 `major` 角色卡并写入设定事实） |
 | `introduce_character` | 新角色 | 完整角色卡；年龄 ≥ 18；符合性别偏好或说明原因 |
 | `promote_character` | 升格 | 保留 ID，补齐字段 |
 | `npc_response` | 回应光谱 | `refuse`/`negotiate`/`partial`/`surface`/`genuine`；`basis_fact_ids` 必须在其信息集中；`surface` 必须同时 `add_fact` 记录真实意图 |
@@ -412,11 +413,11 @@
 }
 ```
 
-简要上下文的 `safety.leverage` 只列出涉及在场者的生效把柄。`save` 给出本局的当前槽（没有则为 `null`）和自上次存档以来的回合数，模型据此处理“再开一局”的确认（`RUNTIME_PROTOCOL.md` §4.2）。完整上下文额外包含：全部重要 NPC 的卡片摘要、关系及最近原因、玩家角色知道的事实、世界规则、地点列表、章节摘要、未决事件全集、全部生效把柄。
+简要上下文的 `safety.leverage` 只列出涉及在场者的生效把柄。`save` 给出本局的当前槽（没有则为 `null`）和自上次存档以来的回合数，模型据此处理“再开一局”的确认（`RUNTIME_PROTOCOL.md` §4.2）。完整上下文额外包含：全部已登场重要/次要 NPC 卡片、未登场人物模板的待命预览（`standby_cast`）、关系及最近原因、玩家角色知道的事实、世界规则与中后期场景桥段灵感（`world.scene_ideas`，提取自日常活动首拍）、地点列表、章节摘要、未决事件全集、生效把柄全集与未用名字池，并附 `commit_template`。
 
 体积要求：
 
-- 简要 ≤ 6 KB；完整 ≤ 20 KB。
+- 简要 ≤ 6 KB；完整 ≤ 32 KB。
 - 第 300 回合时的简要上下文体积不超过第 10 回合的 1.5 倍。
 - 简要上下文中的列表有上限（默认：近期事件 ≤ 10、玩家已知事实 ≤ 8、近期摘要 ≤ 3），超出部分按相关性与时间截取；需要更多时由引擎升级为完整上下文，而不是无限增长。
 - 状态本身也不能无限增长：已结束的事件与旧回合记录在章节摘要后归档，归档不进入上下文，但仍可在存档中查询。
@@ -594,9 +595,9 @@
 - **张力引擎**：独立于压力的、持续制造张力的结构（同一张值班表、同住一个院子、共同的秘密）。日常模式的张力主要来自这里。
 - **人物组合**：`power_structure` 取 `player_high`、`npc_high`、`equal`、`switchable`；`slots` 引用人物模板；必须至少引用一个张力引擎。
 - **压力五拍**：`trigger`（发生了什么）、`objective`（要在什么之前做到什么）、`choice`（真正的两难）、`immediate`（本场景内）、`near`（带 `deadline_minutes`）、`far`（`trigger` 与 `consequence`，开局时生成 `foreshadow` 事件）。`exits` 至少两条，每条都有代价。
-- **压力标记**：`flags` 可含 `timed`（有明确倒计时）与 `leverage`（一方握有另一方的把柄或生计）。带 `leverage` 的压力必须声明 `leverage: {"holder", "subject", "basis"}`：`holder`、`subject` 取人物组合的槽位或 `player`，`basis` 是构成把柄的一句事实。开局时引擎据此生成事实与把柄记录（§5.3）。把柄生效期间，双方之间的亲密回合被拒（`INVARIANT_VIOLATION`，提示“处境不是同意”），直到把柄被解除；这把 `NARRATIVE_RULES.md` §7.1 的“处境永远不是同意”落到结构上。
-- **钩子**：`kind` 取 `approach`（非交易性的靠近）、`observe`、`request`、`accident`。开局收尾优先用 `approach`。
-- **转折**：`category` 取七类之一（信息、人事、资源、制度、时限、关系、意外）；`requires` 可以限定只在压力模式或只在日常模式出现。
+- **压力标记**：`flags` 可含 `timed`（有明确倒计时）与 `leverage`（一方握有另一方的把柄、生计或私密控制器）。带 `leverage` 的压力必须声明 `leverage: {"holder", "subject", "basis"}`：`holder`、`subject` 取人物组合的槽位或 `player`，`basis` 是构成把柄的一句事实。开局时引擎据此生成事实与把柄记录（§5.3），供局中直接展开拿捏、条件交换与失守博弈。
+- **钩子**：`kind` 取 `approach`（近身试探或主动靠近，停在贴身未决瞬间）、`observe`、`request`、`accident`。开局收尾优先用 `approach`。
+- **转折**：`category` 取七类之一（信息、人事、资源、制度、时限、关系、意外）；`requires` 可以限定只在压力模式或只在日常模式出现，也可绑定特定人物模板 ID（在局或 `standby_cast` 待命状态均可渲染姓名触发；接受或引用时自动实例化完整角色卡）。
 - **禁用词表与状态**：`forbidden_terms` 是本世界不该出现的词，供跨世界扫描（`CONTENT_BIBLE.md` §6）；`status` 取 `draft`、`review`、`released`（`CONTENT_BIBLE.md` §7）。
 - **占位语法**：`{npc.name}`、`{npc.ta}`（他/她/TA 的渲染）、`{slot_id.name}`、`{family}` 等。未解析的占位、引用不存在的 ID，都是 `CONTENT_ERROR`。
 
@@ -604,7 +605,7 @@
 
 ### 8.2 自定义世界
 
-自定义世界使用同一个模式，但最低数量降低（`CONTENT_BIBLE.md` §5），并带 `"custom": true`。它只存在于会话快照中。
+自定义世界使用同一个模式，但最低数量降低（`CONTENT_BIBLE.md` §5），并带 `"custom": true`。默认保存在会话快照中；玩家说“保存世界 名字”时可另存至用户数据库 `my_worlds` 表供日后开局。
 
 ### 8.3 编译产物
 
@@ -643,8 +644,8 @@
 | `INVALID_INPUT` | 输入格式或字段错误 |
 | `STALE_REVISION` | `expected_revision` 过期；错误中附当前 revision 与简要上下文 |
 | `IDEMPOTENCY_CONFLICT` | 同一 `request_id` 携带了不同的内容 |
-| `INVARIANT_VIOLATION` | 违反领域规则（冷却、知识边界、授权、幅度等） |
-| `SAFETY_BLOCK` | 与硬边界冲突、暂停中、年龄问题 |
+| `INVARIANT_VIOLATION` | 违反叙事与状态规则（冷却、知情边界、玩家授权、变化幅度等） |
+| `SAFETY_BLOCK` | 触及玩家硬边界、处于暂停状态，或违反全员成年（18+）底线 |
 | `CONTENT_ERROR` | 内容包或自定义世界校验失败 |
 | `NOT_FOUND` | 会话、存档、角色、事件不存在 |
 | `SLOT_CONFLICT` | `reason: "exists"`：存档名已被占用；`reason: "changed_elsewhere"`：本局的当前槽已在别的对话里被写过，附 A/B/C 三个可选动作（`RUNTIME_PROTOCOL.md` §9.2） |
@@ -653,6 +654,6 @@
 | `DATA_DIR_UNAVAILABLE` | 数据目录不可写；附尝试过的路径与建议 |
 | `STORAGE_BUSY` | 数据库被其他进程短暂占用；用同一 `request_id` 重试 |
 | `NO_MATCH` | 开局约束（锁定、排除、性别偏好）在所选世界中无法满足；附哪条约束冲突与可放宽项 |
-| `INTERNAL_ERROR` | 未预期错误；附日志位置，状态不变 |
+| `INTERNAL_ERROR` | 内部运行异常；附日志路径，状态未改变 |
 
 同一 `request_id`、相同内容的重复提交返回第一次的结果，不报错。

@@ -22,7 +22,7 @@
 2. 环境变量 `ADULT_TENSION_HOME`；
 3. 平台默认：Windows `%LOCALAPPDATA%\adult-tension`；macOS `~/Library/Application Support/adult-tension`；Linux `$XDG_DATA_HOME/adult-tension`，未设置时 `~/.local/share/adult-tension`。
 
-目录内容：`adult_tension.db`（全部状态与存档）、`backups/`（迁移前的备份）、`exports/`（导出的存档）、`inputs/`（终端不能直接传输入时，宿主写给运行时的输入文件，含玩家这一回合的话；`doctor` 返回的 `input_dir`；开局、读档、导入时自动删掉一天以前的，也可随时删除）、`logs/`（运行日志，默认不记录玩家原文）、`cache/`（Python 字节码缓存，可随时删除）、`version.json`（`doctor` 的版本标记）。
+目录内容：`adult_tension.db`（全部状态与存档）、`backups/`（迁移前的备份）、`exports/`（导出的存档）、`inputs/`（即 `doctor` 返回的 `input_dir`，供不支持直接传参的终端存放临时请求 JSON；开局、读档、导入时自动清理超一日旧文件，亦可随时手动删除）、`logs/`（运行日志，默认不记录玩家原文）、`cache/`（Python 字节码缓存，可随时删除）、`version.json`（`doctor` 的版本标记）。
 
 数据目录永远不在 Skill 目录内部。升级 Skill = 替换 Skill 目录，数据目录不动；卸载 Skill = 删除 Skill 目录，数据目录保留。
 
@@ -36,7 +36,7 @@
 
 ## 存档冲突
 
-- 存档名已被占用（`SLOT_CONFLICT`，`reason: exists`）：问玩家“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重交。
+- 存档名已被占用（`SLOT_CONFLICT`，`reason: exists`）：问玩家“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重新提交。
 - 本局当前槽已在别的对话里被写过（`reason: changed_elsewhere`）：给玩家“A 读取最新 / B 另存为新名 / C 取消”。
 - 导入被拒：如实说文件损坏或版本太新，不猜内容。
 

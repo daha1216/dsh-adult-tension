@@ -379,7 +379,7 @@ def skip_template(state, spec, preview):
                 "op": "offscreen_beat",
                 "npc_id": cid,
                 "summary": "<这段离屏一句话，≤120 字>",
-                "operations": [{"op": "npc_action", "npc_id": cid, "action": "<按他的 goal 与 knows，他自己做了什么>"}],
+                "operations": [{"op": "npc_action", "npc_id": cid, "action": "<按该角色的 goal 与 knows 写行动>"}],
             }
         )
     present = [cid for cid in state["scene"]["present"] if cid != player]
@@ -393,7 +393,7 @@ def _template(state, body):
     turn once for each turn it has kept back."""
     turn = dict(body)
     turn["content_tags"] = []
-    turn["summary"] = "<第三方视角一两句>"
+    turn["summary"] = "<第三人称一两句>"
     turn["open_action"] = "<停在哪个未决动作>"
     turn["quotes"] = ["<本回合值得记住的原话，原样一句，≤80 字；没有就删掉这条>"]
     # what the engine asks of the first turn of the next record (the requests
@@ -401,7 +401,7 @@ def _template(state, body):
     if state["requests"].get("chapter_summary"):
         # the chapter closes where the request came, not where the model
         # gets round to writing it
-        turn["chapter_summary"] = "<第 %d–%d 回合的摘要，不含之后的事，第三方视角，≤300 字>" % (chapter_start(state), state["turn"])
+        turn["chapter_summary"] = "<第 %d–%d 回合的第三人称摘要，不含后续事件，≤300 字>" % (chapter_start(state), state["turn"])
     if state["requests"].get("prologue"):
         turn["prologue"] = "<完整上下文 prologue_merge 合并成的前情，≤300 字>"
     return {

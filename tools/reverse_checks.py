@@ -1,6 +1,6 @@
 """Reverse verification (ACCEPTANCE.md section 7): break things on purpose.
 
-    python tools/reverse_checks.py [--group age|time|all]
+    python tools/reverse_checks.py [--group age|time|cli|all]
 
 Works on a temporary copy of the repository, never on the working tree.
 Every check must FAIL the way the acceptance criteria describe; the tool

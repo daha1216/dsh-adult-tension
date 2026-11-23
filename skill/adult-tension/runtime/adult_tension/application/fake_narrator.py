@@ -217,7 +217,7 @@ class FakeNarrator:
                         {
                             "op": "event_create",
                             "kind": "chance",
-                            "title": "码头上的风声",
+                            "title": "外头的风声",
                             "participants": [npc],
                             "in_minutes": 60 + int(self._u(state, "skip.due") * 600),
                             "probability": 0.5,
@@ -235,10 +235,10 @@ class FakeNarrator:
                 commit["open_action"] = "%s的动作停在半空" % state["characters"][npc]["name"]
             else:
                 ops.append(
-                    {"op": "add_fact", "key": "sim.env.t%d" % turn, "text": "第%d回合远处传来一声汽笛" % turn, "known_by": [player], "visibility": "private", "origin": "observed"}
+                    {"op": "add_fact", "key": "sim.env.t%d" % turn, "text": "第%d回合门外传来一阵脚步声" % turn, "known_by": [player], "visibility": "private", "origin": "observed"}
                 )
-                commit["summary"] = "四周安静，远处传来汽笛。"
-                commit["open_action"] = "汽笛声还在回响"
+                commit["summary"] = "四周安静，门外掠过一阵脚步声。"
+                commit["open_action"] = "门外的声响刚歇"
         return self._finish(state, content, commit, turn)
 
     # -- time, offscreen beats and requested texts ---------------------------------

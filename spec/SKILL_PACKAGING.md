@@ -32,10 +32,12 @@ adult-tension/
 | 文件 | 内容 | 什么时候读 |
 |---|---|---|
 | `narrative.md` | `NARRATIVE_RULES.md` 的内容；措辞可以压缩，规则一条不能少，章节编号保持不变（`SKILL.md` 按编号引用） | 需要判断主权、NPC 回应、亲密写作、知识边界时 |
+| `flows.md` | 快进、转折、撤销改写与追溯、读档/继续上次/压缩恢复、风格偏好细则 | 触发快进、转折、压缩恢复或调整尺度节奏时 |
 | `operations.md` | 全部操作的字段参考，由校验器生成 | 组装提交时拿不准字段 |
 | `commands.md` | 全部命令的输入输出、错误码与退出码 | 出错时或用到少见命令时 |
-| `worlds.md` | 世界列表与一句话介绍，由内容编译生成 | 用户问有哪些世界时（也可以直接调用 `list-worlds`） |
-| `troubleshooting.md` | `doctor` 各项失败的含义与处理 | 环境出错时 |
+| `custom_world.md` | 自定义世界字段规格与完整示例，由校验器与示例生成 | 用户创建自定义世界时 |
+| `worlds.md` | 世界列表与一句话介绍，由内容编译生成 | 用户问有哪些世界或按标签筛选时（也可调 `list-worlds`） |
+| `troubleshooting.md` | `doctor` 各项失败、存档冲突、升级与卸载处理 | 环境或存档冲突出错时 |
 
 由代码生成的参考文件在构建时生成并提交，测试检查它与代码一致，避免文档漂移。
 
@@ -124,4 +126,4 @@ adult-tension/
 ## 12. 仓库卫生
 
 - `.gitattributes` 强制文本文件为 LF；编译产物与生成的参考文件是确定性的。
-- CI 至少在 Windows 与 Linux 上各跑一次核心测试、内容校验和 Skill 结构检查（`tools/validate_skill` 之类的脚本：frontmatter、体积、相对链接、禁止文件）。
+- CI 至少在 Windows 与 Linux 上各跑一次核心测试、内容校验和 Skill 结构检查（`tools/validate_skill.py` 之类的脚本：frontmatter、体积、相对链接、禁止文件）。

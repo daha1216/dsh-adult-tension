@@ -44,7 +44,7 @@ def commit_fields():
         "operations": F(S.List(OPS.op_spec(), max_items=40), desc="操作列表（可以为空数组）"),
         "content_tags": F(S.List(S.Id(), max_items=12, unique=True), desc="本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags"),
         "intimate_participants": F(S.List(S.Id(), max_items=6, unique=True), required=False, default=[], desc="content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家）"),
-        "summary": F(S.Str(1, 120), desc="本回合发生了什么，第三方视角，≤120 字"),
+        "summary": F(S.Str(1, 120), desc="本回合客观摘要（第三人称，≤120 字）"),
         "open_action": F(S.Str(1, 80), desc="回合停在哪里、谁在等谁，≤80 字"),
         "quotes": F(S.List(S.Str(1, 80), max_items=3), required=False, default=[], desc="≤3 条对后续有意义的原话，每条 ≤80 字"),
         "chapter_summary": F(S.Nullable(S.Str(1, 300)), required=False, default=None, desc="上下文 requests.chapter_summary 为 true 时在记录的第一项必填：上一章的摘要（模板写明回合范围：到上一次记录的最后一回合为止，不含这次记录的回合），≤300 字；没有要求时不写"),
@@ -232,12 +232,12 @@ def _intimacy_checks(ctx):
             if commit["action_mode"] not in ("result", "attempt") or not commit["player_authorized"]:
                 ctx.error(path, "玩家角色的同意只能来自玩家本人的指令（result/attempt + player_authorized）")
         else:
-            cooperative = [r for r in ctx.responses.get(cid, []) if r in ST.COOPERATIVE_RESPONSES]
-            if not cooperative and cid not in ctx.significant_actors():
+            engaged = [r for r in ctx.responses.get(cid, []) if r in ST.INTIMATE_RESPONSES]
+            if not engaged and cid not in ctx.significant_actors():
                 ctx.error(
                     path,
-                    "%s 在这一回合里没有 partial/genuine 回应或主动行动" % char["name"],
-                    "每一步都要有对方可见的回应；没有回应就不能继续",
+                    "%s 在本回合缺少可入账的互动回应（partial/genuine/surface/negotiate）或实际行动" % char["name"],
+                    "亲密场景须记录在场参与者的实际回应（npc_response）或行动（npc_action）；若对方彻底拒绝（refuse）且未失守，不应标为实质亲密",
                 )
 
 

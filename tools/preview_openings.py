@@ -58,6 +58,27 @@ def preview(pack, content_version, mode, seed):
     return out
 
 
+POS_CN = {"low": "下位", "equal": "对等", "high": "上位"}
+GENDER_CN = {"female": "女", "male": "男", "nonbinary": "非二元"}
+HOOK_CN = {"approach": "主动靠近", "observe": "暗中观察", "request": "提出请求", "accident": "突发状况"}
+
+
+def _humanize_tail(text, table):
+    for k, v in table.items():
+        suffix = "，%s）" % k
+        if text.endswith(suffix):
+            return text[: -len(suffix)] + ("，%s）" % v)
+    return text
+
+
+def _humanize_head(text, table):
+    for k, v in table.items():
+        prefix = "%s：" % k
+        if text.startswith(prefix):
+            return ("%s：" % v) + text[len(prefix) :]
+    return text
+
+
 def main(argv):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--world", required=True)
@@ -83,11 +104,11 @@ def main(argv):
     for row in rows:
         print("种子 %d  %s" % (row["seed"], row["signature"]))
         print("  地点：%s" % row["location"])
-        print("  玩家：%s" % row["player"])
-        print("  人物：%s" % "；".join(row["npcs"]))
+        print("  玩家：%s" % _humanize_tail(row["player"], POS_CN))
+        print("  人物：%s" % "；".join(_humanize_tail(n, GENDER_CN) for n in row["npcs"]))
         print("  %s：%s" % ("活动" if args.mode == "daily" else "压力", row.get("activity") or row.get("pressure")))
         print("  关系：%s" % row["chemistry"])
-        print("  钩子：%s" % row["hook"])
+        print("  钩子：%s" % _humanize_head(row["hook"], HOOK_CN))
     return 0
 
 

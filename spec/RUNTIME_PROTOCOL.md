@@ -20,9 +20,10 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 
 | 类别 | 命令 | 必须带 |
 |---|---|---|
-| 读 | `get-context`、`status`、`list-*`、`version`、`export-save` | 无 |
+| 读 | `get-context`、`status`、`list-*`、`version`、`export-save`、`guide`、`my-worlds` | 无 |
 | 会话内写 | `commit-turn`、`undo-turn`、`set-boundary`、`set-safety`、`set-preferences`、`save-slot`、`delete-slot` | `request_id`、`session_id`、`expected_revision` |
 | 创建会话 | `new-game`、`load-slot`、`import-save` | `request_id`（此时还没有 revision 可以期待） |
+| 数据目录级写 | `save-world`、`delete-world` | `request_id`（不属特定会话，无 `expected_revision`） |
 
 ### 2.2 幂等
 
@@ -31,7 +32,7 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 - 只记录**成功**的写请求：保存输入的规范化摘要与完整响应。每个会话保留最近 1000 条，创建会话类保留最近 1000 条。
 - 相同 `request_id` + 相同输入 → 原样返回当初的响应，并标记 `replayed: true`；不增加 revision，不推进回合，不重复掷骰。创建会话类的重试返回同一个会话。
 - 相同 `request_id` + 不同输入 → `IDEMPOTENCY_CONFLICT`。
-- 失败的请求不记录，状态也没有变化，修正后可以直接重交。
+- 失败的请求不记录，状态也没有变化，修正后可以直接重新提交。
 
 ### 2.3 处理顺序
 
@@ -65,19 +66,21 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 |---|---|---|---|
 | `doctor` | 诊断 | 检查 Python 版本、Skill 根目录、数据目录、SQLite 与迁移、内容编译与校验；自动完成首次初始化；幂等 | P0 |
 | `version` | 读 | Skill、内容、存档格式、RNG 版本 | P0 |
-| `list-worlds` | 读 | 世界列表、一句话介绍、支持的模式 | P0 |
+| `list-worlds` | 读 | 世界列表、一句话介绍、支持的模式（支持 `query`、`tags`、`exclude_tags`） | P0 |
 | `new-game` | 创建 | 开局（§4） | P0 |
-| `get-context` | 读 | 当前上下文；可选 `depth: "full"`、`preview_time`（§6.4）、`want_twist`（§6.5） | P0 |
+| `get-context` | 读 | 当前上下文；可选 `depth: "full"`（含 `commit_template`、`standby_cast`、`world.scene_ideas`）、`preview_time`（§6.4）、`want_twist`（§6.5） | P0 |
 | `commit-turn` | 会话内写 | 叙事回合（§5） | P0 |
 | `undo-turn` | 会话内写 | 撤销上一回合（§8） | P0 |
 | `set-boundary` | 会话内写 | 登记或撤销硬边界 | P0 |
-| `set-safety` | 会话内写 | 暂停与恢复 | P0 |
-| `set-preferences` | 会话内写 | 内心可见、叙事助手、离屏推演、语态、人称、配对偏好 | P0 |
+| `set-safety` | 会话内写 | 暂停、换个场景与恢复 | P0 |
+| `set-preferences` | 会话内写 | 内心可见、叙事助手、离屏推演、语态、人称、配对偏好、节奏（`pace`）、尺度（`explicitness`） | P0 |
 | `status` | 读 | `level`：`brief`（六行）/ `detail`（状态+）/ `debug` | P0 |
 | `save-slot` / `load-slot` / `list-slots` | 写 / 创建 / 读 | 存读档（§9） | P0 |
 | `list-sessions` | 读 | 最近会话，用于续玩 | P0 |
 | `export-save` / `import-save` | 读 / 创建 | 导出与导入 | P0 |
-| `delete-slot` | 会话内写 | 删除存档，需要 `confirm: true` | P1 |
+| `delete-slot` | 会话内写 | 删除存档，需要 `confirm: true` | P0（已实装） |
+| `save-world` / `my-worlds` / `delete-world` | 写 / 读 / 写 | 将自定义世界另存至用户库、查看或删除（`delete-world` 须 `confirm: true`） | P0（已实装） |
+| `guide` | 读 | 返回当前阶段的新手游玩指南与自定义世界灵感清单（`topic: "custom_world"`） | P0（已实装） |
 | `verify-content` | 开发 | 校验全部内容（`CONTENT_BIBLE.md` §6） | P0 |
 | `smoke` | 开发 | 在临时数据目录用假叙述者跑一条短局 | P0 |
 | `benchmark` / `simulate` | 开发 | 性能测量与长局模拟 | P0 |
@@ -99,10 +102,10 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 
 以下判断不需要调用运行时：
 
-- 用户没说模式时，先问一句“1 日常 / 2 有压力”；只有用户明确说“随便”才随机。
+- 用户没说模式时，先问一句“1 日常 / 2 压力”；只有用户明确说“随便”才随机。
 - 不问玩家角色的性别：用户说了才写进 `player.gender`，没说时引擎默认男性（世界没有男性可用的玩家身份时按身份）。
 - 当前对话已经有进行中的局，且上下文的 `save.turns_since_save` 大于 0（有未存档的进度）时，先确认：存档后开局 / 直接开局 / 取消。直接开局不会删除旧局，旧局仍然可以续玩。
-- 用户要的题材不在任何世界包内时，说明情况，并给两个选项：最接近的现有世界，或自定义世界。需要世界列表时调用 `list-worlds`。
+- 用户点名世界或题材时可直接放进 `new-game.world_query` 由引擎按标题、ID、时代、地方与完整介绍匹配，不必每次先查世界列表；遇到包外题材（`NOT_FOUND`）时说明情况并给两个选项：最接近的现有世界，或自定义世界。需要浏览列表时调用 `list-worlds`。
 
 ### 4.3 `new-game` 输入
 
@@ -111,6 +114,8 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
   "request_id": "r_0001",
   "mode": "pressure",
   "seed": null,
+  "world_query": null,
+  "my_world": null,
   "locks": {"world_id": "harbor_night_shift"},
   "excludes": {"content_tags": ["workplace_power"], "world_ids": []},
   "player": {"gender": "male", "age": null, "identity_hint": "理货员", "name": null, "title": null},
@@ -123,7 +128,7 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 - `locks` 可以锁定世界、地点、人物组合、活动、压力、钩子中的任意几项。
 - `seed` 是玩家看到的“种子”编号。编号必须足以复现开局：如果开局用了锁定或排除，编号要么编码这些条件，要么在导出时一并带上；实现者自选方案。同一内容版本下，同一编号得到同一开局。内容或开局算法更新后重开同一编号、开出来和当时记录的不同时，开局页脚注明“内容已更新”，不让玩家以为是同一局。
 - 约束无法同时满足时返回 `NO_MATCH`，附上最接近的可选项；模型如实告诉用户，不假装已经满足。
-- `custom_world` 按 `DATA_CONTRACTS.md` §8.2 校验；失败时返回 `CONTENT_ERROR` 与字段路径，模型修正后重交。
+- `custom_world` 按 `DATA_CONTRACTS.md` §8.2 校验；失败时返回 `CONTENT_ERROR` 与字段路径，模型修正后重新提交。
 
 ### 4.4 引擎做的事
 
@@ -131,7 +136,7 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 2. 没有指定种子时生成种子。先取候选，若其开局签名（世界 + 地点 + 人物组合 + 活动或压力 + 钩子，与 `CONTENT_BIBLE.md` §4 相同）与本机最近 10 局重复，就换下一个；候选耗尽时接受重复。签名历史存放在数据目录中，不在会话里。
 3. 在同一个世界包内实例化：地点、玩家身份、NPC（名字来自名字池，同局不同姓，遵守配对偏好和权力结构）、活动、钩子。压力模式还要实例化三层事件。
 4. 建立初始事实与关系边（`DATA_CONTRACTS.md` §4），做内容快照，写入会话。revision = 1，turn = 1。
-5. 返回完整上下文与 `opening`：世界观要点、人物要点、场景、钩子、种子编号。
+5. 返回完整上下文（含 `standby_cast`、`world.scene_ideas`）、`commit_template` 与 `opening`：世界观要点、人物要点、场景、钩子、种子编号。
 
 模型据此写开局（格式见 `NARRATIVE_RULES.md` §9）。
 
@@ -150,7 +155,7 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 
 - **元命令**（状态、存档、边界、暂停、开关、帮助）走对应命令，只输出回执，不写叙事，不推进回合。
 - **叙事输入**：按 `NARRATIVE_RULES.md` §1–§3 组装操作。
-- 每个回合的记录必须带 `summary`（一两句，第三方视角，只写已提交的变化）和 `open_action`（结尾停住的那个未决动作，≤ 80 字）。可以附 ≤ 3 条原话摘录，每条 ≤ 80 字。
+- 每个回合的记录必须带 `summary`（一两句，第三人称，只写已提交的变化）和 `open_action`（结尾停住的那个未决动作，≤ 80 字）。可以附 ≤ 3 条原话摘录，每条 ≤ 80 字。
 - **时钟不能原地不动**：回合里没有 `advance_time` 时，引擎按默认值推进（`DESIGN_DECISIONS.md`）。记录后返回的时钟就是权威时间；两次记录之间模型按自己写的推进推算，记录时的时间推进要与正文一致。
 - 操作按列出的顺序应用，后面的操作看得到前面操作的效果（例如先 `introduce_character` 再 `npc_response`）。校验在工作副本上逐个进行，任何一个失败都会让整次记录失败，状态不变。
 - **NPC 拒绝不是错误。** `npc_response: refuse` 是正常的叙事结果；错误只表示提交本身不合法。
@@ -160,16 +165,16 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 
 | 错误 | 模型怎么做 | 玩家看到什么 |
 |---|---|---|
-| `INVALID_INPUT`、`INVARIANT_VIOLATION`、`NOT_FOUND`（提交里引用了不存在的角色或事件） | 按 `details` 修正后重交；同一次记录最多自动修正 2 次 | 什么都看不到；2 次仍失败时，用一句话说明“这一步没能记下”，并请玩家换个说法 |
-| `SAFETY_BLOCK` | 换一个不冲突的写法重交 | 一句话说明原因（年龄、边界或暂停）；这是唯一需要主动告知的拒绝 |
-| `STALE_REVISION` | 用错误里附带的上下文重新判断，然后重交 | 如果是另一个对话推进了这局，用一句话说明 |
+| `INVALID_INPUT`、`INVARIANT_VIOLATION`、`NOT_FOUND`（提交里引用了不存在的角色或事件） | 按 `details` 修正后重新提交；同一次记录最多自动修正 2 次 | 什么都看不到；2 次仍失败时，用一句话说明“这一步没能记下”，并请玩家换个说法 |
+| `SAFETY_BLOCK` | 换一个不冲突的写法重新提交 | 一句话说明原因（年龄、边界或暂停）；这是唯一需要主动告知的拒绝 |
+| `STALE_REVISION` | 用错误里附带的上下文重新判断，然后重新提交 | 如果是另一个对话推进了这局，用一句话说明 |
 | `STORAGE_BUSY`、宿主超时或无输出 | 用**同一个** `request_id` 重试，最多 3 次 | 无 |
 
 ## 6. 时间推进与结算
 
 ### 6.1 每次 `advance_time` 触发的结算顺序
 
-1. **时钟前进。** 跨地点或跳过 ≥ 60 分钟时开启新场景编号，并清空上一场景的互动判断（`NARRATIVE_RULES.md` §7.1）。
+1. **时钟前进。** 跨地点或跳过 ≥ 60 分钟时开启新场景编号，并清空上一幕的当场回应记录（`NARRATIVE_RULES.md` §7.1）。
 2. **到期事件**：按 `(due, id)` 顺序处理 `due ≤ 新时钟` 的 `pending` 事件。
    - 承诺、截止到期未兑现 → `expired`。
    - 带概率的事件 → 掷骰，得到 `hit` 或 `miss`。
@@ -205,7 +210,7 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 1. `get-context` 带 `preview_time`，返回目标时钟、将到期的事件及其确定性结果、必须有离屏片段的 NPC（附其目标与信息集摘要）、将到期的状态。预览不改变状态。
 2. 模型据此写好离屏片段，用 `commit-turn` 记录这一回合，内容为 `advance_time` 加各 `offscreen_beat`。记录的结算结果必须与预览一致。
 
-没有先预览就直接提交大跨度时，如果缺少必需的离屏片段，提交被拒，错误里附带同样的预览内容，模型补齐后重交。
+没有先预览就直接提交大跨度时，如果缺少必需的离屏片段，提交被拒，错误里附带同样的预览内容，模型补齐后重新提交。
 
 单次推进上限默认 30 天。
 
@@ -249,7 +254,7 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 输入：`session_id`、`request_id`、`expected_revision`、`name`（可省略）、`overwrite`（默认 false）。
 
 - 省略名字：存到当前槽，也就是本局最近一次保存或读取的槽；没有当前槽时自动命名为“世界名-第N回合”，并在回执里告知。
-- 名字已被占用，且不是本局的当前槽：返回 `SLOT_CONFLICT`，`reason: "exists"`。模型问玩家是否覆盖，确认后带 `overwrite: true` 重交。
+- 名字已被占用，且不是本局的当前槽：返回 `SLOT_CONFLICT`，`reason: "exists"`。模型问玩家是否覆盖，确认后带 `overwrite: true` 重新提交。
 - 本局的当前槽在别的对话里被写过（槽的版本比本局记住的新）：返回 `SLOT_CONFLICT`，`reason: "changed_elsewhere"`。模型给玩家三个选项：A 读取最新 / B 另存为新名 / C 取消。
 - 成功后，槽成为本局的当前槽，并返回槽的新版本。
 
@@ -271,7 +276,7 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
   - 带标签的边界由引擎强制：任何 `content_tags` 与之冲突的提交返回 `SAFETY_BLOCK`。
   - `custom` 边界引擎无法自动匹配，它们出现在每一次上下文里，由模型遵守、由评审检查。
 - **暂停**：`set-safety` 加 `paused: true`，立即生效。
-  - 暂停期间，带亲密标签或冲突类标签（暴力、胁迫、羞辱、身体伤害）的提交被拒，非亲密剧情可以继续。
+  - 暂停期间，带亲密标签或冲突类标签（暴力、胁迫、羞辱、身体伤害）的提交被拒，非亲密剧情可以继续（平时未暂停状态下，围绕把柄、器具或高压博弈的亲密交互均正常放行）。
   - 暂停只由玩家解除（“继续”“恢复”“解除暂停”）。解除后不自动接着升级：从停下的那一点重新开始，NPC 的回应重新判断。
   - “换个场景”：保持暂停，同时推进到一个新的非亲密场景。
 - **年龄**：新角色（包括自定义世界里的角色和玩家角色）年龄 < 18 或缺失，提交被拒。
@@ -284,7 +289,7 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 | 情况 | 处理 |
 |---|---|
 | 宿主工具调用超时、没有输出、输出不是 JSON | 用同一 `request_id` 重试最多 3 次；仍失败则运行 `doctor`，并用一句话告诉玩家 |
-| `IDEMPOTENCY_CONFLICT` | 这个 `request_id` 之前已经成功过（常见于超时后改了内容再重交）。先 `get-context` 确认上一次是否已经生效，再决定是否需要用新的 `request_id` 补交；不能把同一回合写两次 |
+| `IDEMPOTENCY_CONFLICT` | 这个 `request_id` 之前已经成功过（常见于超时后改了内容再重新提交）。先 `get-context` 确认上一次是否已经生效，再决定是否需要用新的 `request_id` 补交；不能把同一回合写两次 |
 | `NOT_FOUND`（存档或会话） | 不猜名字：用 `list-slots` 或 `list-sessions` 列出实际存在的，让玩家选 |
 | `RUNTIME_UNSUPPORTED` | 告诉玩家需要的 Python 版本；不自动安装、不改系统环境 |
 | `DATA_DIR_UNAVAILABLE` | 按错误里的建议选一个可写目录（`--data-dir` 或环境变量），见 `SKILL_PACKAGING.md` |

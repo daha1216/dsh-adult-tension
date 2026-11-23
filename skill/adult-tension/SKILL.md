@@ -1,6 +1,6 @@
 ---
 name: adult-tension
-description: Run a Chinese interactive story for adults with a local engine that keeps characters, time, events, boundaries, and saves consistent. Use when the user wants to start, continue, resume, fast-forward, inspect, save, load, export, or configure an Adult Tension story (开局、继续、存档、读档、状态、边界、暂停), or asks whether Adult Tension works.
+description: Run engine-backed 18+ Chinese interactive fiction with persistent characters, clock, secrets, leverage, boundaries, and saves. Use to start, continue, resume, skip time, save/load, export, or configure an Adult Tension game (开局、继续、存档、读档、状态、边界、暂停).
 ---
 
 # Adult Tension
@@ -29,9 +29,9 @@ AT_JSON
 ```
 
 - `<python>`：依次试 `python3`、`python`、`py -3`，用第一个 3.10 及以上的。
-- 调用是游戏自己的存取，宿主“运行命令前先解释”的要求不适用：调用前后不写解说（中英文都不写），写了会原样显示给玩家；正文之后记录的，调用后不再写字。
+- 调用属内部存取，前后不写任何中英文解说（写了会直接暴露给玩家）；正文后记账的，调用完即停笔。
 - 每个输入都带 `"encoding_check": "汉字"`。**玩家的原话只在 JSON 里，永远不放进命令行参数。**
-- shell 报错、宿主拒绝这种写法（PowerShell、cmd），或因 `encoding_check` 被拒：本对话改用文件，输入写成 UTF-8 JSON 文件放进 `doctor` 的 `input_dir`（不放本 Skill 目录），用 `--input-file <文件>` 传入。JSON 写错（如字符串里有换行）只改 JSON 重交。
+- 终端不支持 heredoc（如 PowerShell、cmd）或报 `encoding_check`：把 UTF-8 JSON 写入 `doctor` 返回的 `input_dir`（勿放本 Skill 目录），用 `--input-file <文件>` 传入；JSON 语法错只改文件重新提交。
 - stdout 是一个 JSON：`{"ok", "data", "error"}`。
 - 会话内的命令都带 `session_id`。写操作带 `request_id`（上次返回的 `next_request_id`），会话内的写操作再带 `expected_revision`（上次返回的 `revision`）；读命令不带这两个。字段拿不准或被拒再查 `references/commands.md`，不用 `--help`，不读运行时源码与数据库。
 - 超时、没有输出、输出不是 JSON：用**同一个** `request_id` 重试，最多 3 次，仍失败就运行 `doctor`，一句话告诉玩家。
@@ -43,12 +43,12 @@ AT_JSON
 
 ## 开局
 
-1. 玩家没说日常还是压力：问一句“想选哪种氛围？1 日常（细水长流，慢慢相处）/ 2 压力（开局即危机，步步为营）（不挑可回“随便”，想自己设定说“自定义世界”）”。只有玩家说“随便”才用 `random`。不问玩家性别（没说就默认男性，玩家说了才写进 `player.gender`）。读档永远不问。
+1. 玩家未定模式时问：“想选哪种氛围？1 日常（暗流慢热，贴身试探）/ 2 压力（危局筹码，步步紧逼）（不挑回‘随便’，自设回‘自定义世界’）”。仅说“随便”才传 `random`。不问性别（未提默认男性，提了才写 `player.gender`）。读档不问。
 2. 本对话已开过局或读过档，且有没存的回合（`save.turns_since_save` > 0 或有攒着没记录的）：先问“存档后开局 / 直接开局 / 取消”。
 3. 玩家点名的世界或题材：名称或关键词放进 `world_query`，不用先查世界列表。`NO_MATCH` 带 `candidates`：列出标题和一句话让玩家选，选定后用 `locks.world_id`。`NOT_FOUND`：提议最接近的世界或自定义世界。
-   - 自定义世界：玩家没说要什么时，先 `guide` 带 `"topic": "custom_world"`，`text` 原样转述作灵感清单；玩家说了元素就照 `references/custom_world.md` 写世界包放进 `custom_world`，没说的按时代常识补齐。开局正文之后提一句“喜欢这局故事，可以说“保存世界 <你起的名字>”（例如：保存世界 弄堂旧事）存下来”。
+   - 自定义世界：玩家没说要什么时，先 `guide` 带 `"topic": "custom_world"`，`text` 原样转述作灵感清单；玩家说了元素就照 `references/custom_world.md` 写世界包放进 `custom_world`，没说的按时代常识补齐。开局正文后附一句：“喜欢这局可说‘保存世界 <名字>’（如：保存世界 弄堂旧事）存下来”。
    - “开局 我的世界 名字”：`my_world` 放名字，不写 `custom_world`；没给名字先 `my-worlds` 列出来让玩家选。
-4. 该问的都答了再调用 `new-game`（只答了一部分就再问其余的，不替玩家选）：`{"request_id", "mode": "daily|pressure|random", "world_query" 或 "locks": {"world_id"}, "excludes": {"content_tags", "world_ids"}, "player": {"gender", "age", "identity_hint", "name", "title"}, "npc_gender_preference"}`，只写玩家提到的部分（“不要职场”转成 `excludes` 的标签 ID，“轻松点”“不要灾难”是 `disaster`；“女性 NPC 为主”是 `mostly_female`）。“重开 N 号”：`{"request_id", "seed": N, "replay": true}`。`NO_MATCH`：停下，如实说哪条做不到、可以放宽什么，由玩家选，不替玩家放宽或改开自定义世界。
+4. 必问项齐备后再调 `new-game`（缺项先追问，不代选）：`{"request_id", "mode": "daily|pressure|random", "world_query" 或 "locks": {"world_id"}, "excludes": {"content_tags", "world_ids"}, "player": {"gender", "age", "identity_hint", "name", "title"}, "npc_gender_preference"}`，只传玩家提及项（如“不要职场”→`excludes` 标签，“轻松点/不要灾难”→`disaster`，“女性 NPC 为主”→`mostly_female`）。“重开 N 号”：`{"request_id", "seed": N, "replay": true}`。遇 `NO_MATCH` 如实告知冲突项与可放宽条件，由玩家定。
 5. 按返回的 `opening` 写开局：
 
         世界观：……（1–2 句，含 `rule_in_play` 这条规则在场景里起作用）
@@ -66,17 +66,16 @@ AT_JSON
    - `attempt`：意图、尝试，以及**任何作用于 NPC 身体、意志、财物的行动**（即使用了结果句式）→ 把这些 NPC 写进 `acts_on`，并各附一条 `npc_response`：`refuse` 拒绝 / `negotiate` 协商 / `partial` 有限配合 / `surface` 表面配合（写 `true_intent`）/ `genuine` 真诚配合。不作用于 NPC 的尝试写 `acts_on: []`。
    - `continue`：空输入、“继续”、“……”、“你决定” → 场景推进，至少一个可观察的变化（NPC 行动、状态变化、新事实、有人来去）；玩家角色不说有意义的话、不移动、不同意任何事。
    - `wait`：玩家选择不动 → 给 NPC 行动空间。
-3. **正文先行，攒着记录**：普通回合直接写正文，不调用运行时。攒满 10 个回合，在正文之后用一次 `commit-turn` 记录（`turns` 每回合一项，按顺序，≤ 12 项）。先记录（攒下的连同这一回合）再按返回写正文的情况：时间会到达或越过最早的待办事件（`due_soon` 第一项，或攒着的回合里登记的；记录前正文不越过它）或跨过午夜；一次推进 ≥ 60 分钟；要 `roll`；快进、接受转折、存档、读档、状态、导出、暂停、边界、偏好设置之前；玩家说先到这、下次再玩。
-4. 照最近返回的 `commit_template` 写，每个回合复制一份 `turns` 里那一项（尖括号处写内容，`a|b` 选一个，用不上的操作删掉）；没有模板时照 `references/operations.md` 写。
-   - `player_authorized: true` 只在玩家本人的话授权了玩家角色的移动、承诺、交易、同意、转折或设定修改时。
-   - 操作：`npc_response`、`npc_action`（重大的带 `significant: true`，看 `can_act`）、`npc_state`、`add_fact`、`relationship`、`advance_time`（默认 3 分钟）、`move`、`enter_scene`/`exit_scene`、`event_*`、`roll`、`player_update`、`reveal_fact`、`spread_rumor`、`set_voice`、`introduce_character`/`promote_character`（明确成年，名字取自 `name_pool`）、`intimacy_evidence`、`identity_update`、`npc_update`、`leverage_set`/`_release`、`offscreen_beat`、`twist_accept`。
-   - 正文里新写出、以后要用到的细节用 `add_fact` 记下；新点名的人即使不在场也要 `introduce_character`。开局写出的，在第一次记录里补上。
-   - 模板里有 `chapter_summary`、`prologue` 才写（运行时要求的），照尖括号里的说明。
-5. 先记录时，按 `context` 和 `turns` 末项的 `applied`、`resolved_events`、`simulation` 写正文：掷骰、到期、离屏移动与传播由运行时决定。
-6. 页脚：`【时间】……｜【地点】……｜回合：N`。记录后用 `context.clock.label`、`context.scene.location`、`turn`；之间自己推算（回合号逐回合加一）。叙事助手开启时（`preferences.assistant`），末尾加“可以：① …… ② …… ③ ……”，只给提示，不替玩家决定。
-7. 返回的 `context` 就是之后的依据；信息不够或对话压缩后先 `get-context` 带 `"depth": "full"`（无会话号先 `list-sessions`）。
+3. **正文先行，攒着记录**：普通回合直接写正文，攒满 10 回合在正文后一次 `commit-turn`（`turns` 按序每回合一项，≤ 12 项）。须先记账（连同攒下的回合）再按返回写正文的情形：将到达或越过最早待办事件（`due_soon` 首项或攒下回合新登事件；记账前正文不越过它）或跨午夜；单次推进 ≥ 60 分钟；需 `roll`；执行快进、转折、存读档、状态、导出、暂停、边界、偏好前；玩家说先到这。
+4. 照最近的 `commit_template` 填（每回合复制一项 `turns`，删掉未用操作）；无模板时查 `references/operations.md`。
+   - `player_authorized: true` 仅在玩家本人话语授权了移动、承诺、交易、同意、亲密参与、转折或改设定时置真。
+   - 要点：`npc_action` 重大行动带 `significant: true`（查 `can_act`）；缺省 `advance_time` 默认推进 3 分钟；新写出的关键细节用 `add_fact` 记下；首次点名的原创人物（不在场也算）用 `introduce_character`（明示成年，名字取自 `name_pool`）；开局写出的在首次记账补登。
+   - 仅在模板出现 `chapter_summary`、`prologue` 时按提示填写。
+5. 先记账时，严格按返回的 `context` 及末项 `applied`、`resolved_events`、`simulation` 写正文。
+6. 页脚：`【时间】……｜【地点】……｜回合：N`。记账后取 `context.clock.label`、`context.scene.location`、`turn`；未记账期间自行顺推（回合号每轮 +1）。`preferences.assistant` 开启时末尾加“可以：① …… ② …… ③ ……”，只给提示不代选。
+7. 已提交事实概以 `context` 为准；经历 `/compact` 压缩或信息不足时，严禁凭摘要盲写，先调 `get-context` 带 `"depth": "full"`（≤32KB，含完整人物卡、`standby_cast`、`world.scene_ideas` 与 `commit_template`；无会话号先 `list-sessions`），核对 `turn` 补记未入库回合后再续写；`world.scene_ideas` 可在 `continue` 或私密转场时自然化用。
 
-记录被拒：按 `error.details` 的 `path`、`hint` 改记录重交，最多 2 次，玩家看不到，不改已写的正文；仍失败就去掉出错的操作。只有 `SAFETY_BLOCK`（年龄、硬边界、暂停）用一句话告诉玩家。`STALE_REVISION`：按错误附带的 `context` **重新判断**再交，不能只换 revision。
+记录被拒：按 `error.details` 的 `path`、`hint` 修正后重新提交，最多 2 次，玩家看不到，不改已写正文；仍失败就去掉出错的操作。只有 `SAFETY_BLOCK`（年龄、硬边界、暂停）用一句话告诉玩家。`STALE_REVISION`：按错误附带的 `context` **重新判断**再提交，不能只换 revision。
 
 ## 玩家主权
 
@@ -97,15 +96,16 @@ AT_JSON
 
 - NPC 只根据**自己知道的事实**行动（`basis_fact_ids` 必须在其信息集里）；内心描写永远不成为任何人的知识（内心只用 `inner` 事实记录，不能传播）。
 - NPC 可以拒绝、讨价还价、表面答应、主动出手。多个 NPC 在场时，他们之间也有关系和目标。
-- `nearby` 或 `standby_cast` 的角色要出场，同一回合 `enter_scene`（勿 `introduce_character`）。
+- `nearby`、`background` 或完整上下文 `standby_cast` 中的预设角色出场，直接用其 ID 调 `enter_scene`（`standby_cast` 自动激活完整 `major` 卡，严禁用 `introduce_character`）。
 - 表层 / 里层语态按上下文里的 `voice` 写。玩家说“别装了”“说点真心话”：同一回合用 `set_voice`（`cause: player_request`）切换；NPC 可以换语态说“不”。
 - 内心可见开启时（`preferences.inner_view`），可以单独成段写在场 NPC 没说出口的念头；玩家角色不知道这些。
 
 ## 亲密与张力（完整规则见 `references/narrative.md` §7）
 
-- 亲密场景：逐步推进，玩家要求到哪一步就停在哪一步；每一步写出对方反应（迎合、羞耻、强忍或失守）；明确要求的过程不强制淡出，没要求的不擅自展开；不复读。带 `intimate`/`explicit` 标签时写 `intimate_participants`（含玩家），每个 NPC 参与者本回合要有 `partial`（含半推半就、妥协）/`genuine` 回应或主动行动。
-- 词汇与情境开放：按时代、身份、情绪和文风，直白、粗俗或文学化的说法都能用，不限于：鸡巴、屌、肉棒、肉茎、穴、逼、洞、骚逼、蜜穴。险境、微醺、高热、药效、情趣器具控制、把柄交易与上下级压制均可进入亲密互动；台词用词服从语态。
-- 有人开始拿捏另一个人（把柄、债务、生计、私密控制器）时，记录时用 `leverage_set` 登记；把柄生效期间仍可发生交易、压制或半推半就的亲密互动。
+- 亲密场景：按动作节拍推进，玩家要求到哪一拍就写透这一拍的感官与反应（迎合、羞耻、强忍或失守），明确要求的过程绝不强制淡出，也不越步跳到“事后”；NPC 可依人设主动撩拨或施压；不复读。带 `intimate`/`explicit` 标签时必填 `intimate_participants`（含玩家时须 `result`/`attempt` 且 `player_authorized: true`），每个在场成年 `major` NPC 参与者须有 `negotiate`/`partial`/`surface`/`genuine` 回应或 `npc_action`。
+- 词汇与情境开放：直白、粗俗或文学化用词皆可（如鸡巴、屌、肉棒、肉茎、穴、逼、洞、骚逼、蜜穴），台词服从表里语态。险境、微醺、高热、药效、情趣器具控制、把柄交易与上下级压制均可进入亲密互动。
+- 笔触与反差：把张力落在衣料摩擦、体温汗意、隔墙声响、器具震频与呼吸停顿上；越清冷高傲的角色失守越要写出“嘴上冷斥维持体面、身体却在羞耻与刺激下寸寸溃防”的口嫌体正直层次，严禁写成顺从木偶或堆砌脱离人设的油腻套话。
+- 一方开始拿捏另一方（把柄、债务、生计、私密控制器）时用 `leverage_set` 登记；把柄存续期可直接发生交易、压制或半推半就的亲密互动。
 - “边界：不要 X”：`set-boundary`（`action: add`，`text` 是玩家原话，`tags` 映射到内容标签，映射不上留空）。写作时遵守全部边界；带冲突标签的记录会被拒（`SAFETY_BLOCK`）。
 - “暂停”（安全词、pause）：`set-safety` `{"paused": true}`，立即停下，回到中性叙述。暂停期间不写亲密或冲突内容，别的剧情可以继续。“换个场景”：`{"paused": true, "change_scene": true}`，然后写一个新的非亲密场景。暂停中玩家说“继续”“解除暂停”：`{"paused": false}`，从停下处重新开始，对方的反应重新判断，不接着升级。
 - 不在正文里逐回合重复免责声明或安全提醒。
@@ -129,7 +129,6 @@ AT_JSON
 | 暂停、安全词、pause / 换个场景 | `set-safety` |
 | 内心可见 / 叙事助手 / 离屏推演 开关、语态 某人 表/里、人称、NPC 性别偏好、节奏、尺度 | `set-preferences`（`inner_view`、`assistant`、`offscreen_simulation`、`voice: {"npc_id", "voice"}`、`person`、`npc_gender_preference`、`pace`、`explicitness`） |
 | 撤销、刚才不算、其实……、快进到……、来点转折 | 见“时间、离屏、转折、撤销” |
-| 自定义世界 | 见开局第 3 步 |
 | 保存世界 名称 / 我的世界 / 删除世界 名称 | `save-world`（同名先问，确认后 `overwrite: true`）/ `my-worlds` / 问“确定删除世界「名称」吗？”，确认后 `delete-world` 带 `"confirm": true` |
 | 怎么玩、玩法、新手指南 | `guide`（开局后带 `session_id`），`text` 原样转述，不增删 |
 | 帮助、h、? | 列出上面的说法 |

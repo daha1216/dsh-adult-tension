@@ -35,7 +35,7 @@ class Ids:
 
 
 # Service tests are written against the harbor world; a seed alone would pick
-# any of the six. Tests about world choice call service.new_game themselves.
+# any released world. Tests about world choice call service.new_game themselves.
 REFERENCE_WORLD = "harbor_night_shift"
 
 

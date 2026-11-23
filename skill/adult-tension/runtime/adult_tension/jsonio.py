@@ -50,7 +50,7 @@ def decode_bytes(raw, source="input"):
         raise AppError(
             INVALID_INPUT,
             "%s 不是 UTF-8 编码" % source,
-            [detail("$", "第 %d 字节无法按 UTF-8 解码" % exc.start, "把输入保存为 UTF-8（可带 BOM）后重交")],
+            [detail("$", "第 %d 字节无法按 UTF-8 解码" % exc.start, "把输入保存为 UTF-8（可带 BOM）后重新提交")],
         )
 
 
@@ -72,7 +72,7 @@ def loads_strict(text, source="input"):
     except ValueError as exc:
         line = getattr(exc, "lineno", None)
         col = getattr(exc, "colno", None)
-        where = " (第 %s 行第 %s 列)" % (line, col) if line else ""
+        where = "（第 %s 行第 %s 列）" % (line, col) if line else ""
         raise AppError(
             INVALID_INPUT,
             "%s 不是合法的 JSON%s" % (source, where),

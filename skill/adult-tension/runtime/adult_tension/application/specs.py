@@ -47,8 +47,8 @@ EXCLUDES = S.Obj(
 PLAYER = S.Obj(
     {
         "gender": F(S.Nullable(S.Enum(*ST.GENDERS)), required=False, default=None),
-        "age": F(S.Nullable(S.Int(0, 120)), required=False, default=None),
-        "age_band": F(S.Nullable(S.List(S.Int(0, 120), 2, 2)), required=False, default=None),
+        "age": F(S.Nullable(S.Int(0, 120)), required=False, default=None, desc="玩家角色年龄（须 ≥ 18，低于 18 返回 SAFETY_BLOCK）"),
+        "age_band": F(S.Nullable(S.List(S.Int(0, 120), 2, 2)), required=False, default=None, desc="年龄区间 [下限, 上限]（下限须 ≥ 18）"),
         "identity_hint": F(S.Nullable(S.Str(1, 20)), required=False, default=None),
         "social_position": F(S.Nullable(S.Enum(*ST.SOCIAL_POSITIONS)), required=False, default=None),
         "name": F(S.Nullable(S.Str(1, 12)), required=False, default=None),
@@ -71,14 +71,14 @@ PREFERENCES = S.Obj(
 NEW_GAME = _obj(
     {
         "request_id": F(S.RequestId()),
-        "mode": F(S.Nullable(S.Enum("daily", "pressure", "random")), required=False, default=None, desc="daily 日常 / pressure 有压力 / random 玩家明确说“随便”时；replay 时可省略"),
+        "mode": F(S.Nullable(S.Enum("daily", "pressure", "random")), required=False, default=None, desc="daily 日常 / pressure 压力 / random 玩家明确说“随便”时；replay 时可省略"),
         "seed": F(S.Nullable(S.Int(1, 999999)), required=False, default=None),
         "replay": F(S.Bool(), required=False, default=False, desc="“重开 N 号”：按本机记录的该种子开局条件复现"),
         "world_query": F(
             S.Nullable(S.Str(1, 40)),
             required=False,
             default=None,
-            desc="玩家点名的世界名称或关键词（例如“港口夜班”“凡尔赛”），运行时按标题、时代、地方、一句话匹配；对得上一个就开局，对得上几个返回 NO_MATCH 附 candidates，对不上返回 NOT_FOUND。不与 locks.world_id、custom_world、replay 同用",
+            desc="玩家点名的世界名称或关键词（例如“港口夜班”“凡尔赛”），运行时按标题、ID、时代、地域与完整简介匹配；唯一命中即开局，多个匹配返回 NO_MATCH 附 candidates，无匹配返回 NOT_FOUND。不与 locks.world_id、custom_world、replay 同用",
         ),
         "locks": F(LOCKS, required=False, default={}),
         "excludes": F(EXCLUDES, required=False, default={}),
@@ -105,7 +105,7 @@ PREVIEW_TIME = S.Obj(
 GET_CONTEXT = _obj(
     {
         "session_id": F(SESSION_ID),
-        "depth": F(S.Enum("brief", "full"), required=False, default="brief"),
+        "depth": F(S.Enum("brief", "full"), required=False, default="brief", desc="brief 简要上下文（≤6 KB）/ full 完整上下文（≤32 KB，含人物完整卡、地点、standby_cast、world.scene_ideas 等）"),
         "preview_time": F(
             S.Nullable(PREVIEW_TIME),
             required=False,
@@ -182,10 +182,10 @@ LIST_WORLDS = _obj(
             S.Nullable(S.Str(1, 40)),
             required=False,
             default=None,
-            desc="玩家问某类题材、时代、地方时的关键词（例如“港口”“民国”），与 new-game 的 world_query 同一套匹配；只列出对得上的世界，最相关的在前，最多 20 个",
+            desc="玩家问某类题材、时代、地方时的关键词（例如“港口”“民国”），与 new-game 的 world_query 同一套匹配；只列出匹配的世界，最相关的在前，最多 20 个",
         ),
-        "tags": F(S.List(S.Id(), max_items=10, unique=True), required=False, default=[], desc="内容标签 ID（见返回的 tag_counts），只列出全都带的世界；“有超自然的”是 supernatural"),
-        "exclude_tags": F(S.List(S.Id(), max_items=20, unique=True), required=False, default=[], desc="内容标签 ID，只列出一个都不带的世界；“不要灾难”是 disaster"),
+        "tags": F(S.List(S.Id(), max_items=10, unique=True), required=False, default=[], desc="内容标签 ID（见返回的 tag_counts），只列出同时包含全部指定标签的世界；“有超自然的”是 supernatural"),
+        "exclude_tags": F(S.List(S.Id(), max_items=20, unique=True), required=False, default=[], desc="内容标签 ID，排除带有任一指定标签的世界；“不要灾难”是 disaster"),
     },
     "list-worlds",
 )

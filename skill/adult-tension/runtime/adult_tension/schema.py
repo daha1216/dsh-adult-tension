@@ -67,7 +67,7 @@ class Str(Spec):
             errors.append(detail(path, reason, None, INVALID_INPUT))
             return MISSING
         if self.max_len is not None and len(value) > self.max_len:
-            errors.append(detail(path, "长度 %d 超过上限 %d" % (len(value), self.max_len), "缩短到 %d 字以内" % self.max_len, INVALID_INPUT))
+            errors.append(detail(path, "长度 %d 超过上限 %d" % (len(value), self.max_len), "缩短到 %d 个字符以内" % self.max_len, INVALID_INPUT))
             return MISSING
         if self.pattern is not None and not self.pattern.fullmatch(value):
             errors.append(detail(path, "格式不合法：%s" % value[:60], self.pattern_hint, INVALID_INPUT))

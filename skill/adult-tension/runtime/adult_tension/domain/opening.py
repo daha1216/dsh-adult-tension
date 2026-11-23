@@ -16,8 +16,8 @@ from . import structure as ST
 from .text import binding, full_name, render, render_name_pattern, split_name
 
 LOCK_KEYS = ("world_id", "location_id", "combo_id", "activity_id", "pressure_id", "hook_id", "identity_id")
-# Most worlds trap two people in a disaster; random openings take turns
-# with the others so that one game after another does not feel the same.
+# Consecutive random openings penalize back-to-back `disaster`-tagged worlds
+# so high-peril setups do not cluster together.
 DISASTER = "disaster"
 HOOK_WEIGHT = {"approach": 4.0, "observe": 1.0, "request": 1.0, "accident": 1.0}
 

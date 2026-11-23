@@ -14,7 +14,7 @@ def check(state, before_clock=None):
     problems = []
 
     def bad(path, reason, code=INVARIANT_VIOLATION):
-        problems.append(detail(path, reason, "这是引擎的最后一道检查；请修正提交", code))
+        problems.append(detail(path, reason, "全局状态不变量校验未通过，请修正对应字段后重新提交", code))
 
     chars = state["characters"]
     player = state["player_id"]

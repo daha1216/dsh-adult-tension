@@ -304,8 +304,8 @@ def _match_world_query(ctx, query, drafts):
     if not scored:
         raise AppError(
             NOT_FOUND,
-            "没有和“%s”对得上的世界" % query,
-            [detail("$.world_query", "没有和“%s”对得上的世界" % query, "换个说法，或用 list-worlds 查看全部；都没有就提议最接近的世界或自定义世界，由玩家选", NOT_FOUND)],
+            "没有匹配“%s”的世界" % query,
+            [detail("$.world_query", "没有匹配“%s”的世界" % query, "换个关键词，或用 list-worlds 查看全部；都没有就提议最接近的世界或自定义世界，由玩家选", NOT_FOUND)],
         )
     strong = [item for item in scored if item[0] >= 500]
     if strong:
@@ -317,8 +317,8 @@ def _match_world_query(ctx, query, drafts):
     candidates = [{"world_id": e["id"], "title": e["title"], "summary": one_line(e["summary"])} for _s, e in shown]
     raise AppError(
         NO_MATCH,
-        "“%s”对得上 %d 个世界" % (query, len(scored)),
-        [detail("$.world_query", "对得上的世界：%s" % "、".join(c["title"] for c in candidates), "把候选列给玩家选，选定后用 locks.world_id 开局；不替玩家选", NO_MATCH)],
+        "“%s”匹配到 %d 个世界" % (query, len(scored)),
+        [detail("$.world_query", "匹配到的世界：%s" % "、".join(c["title"] for c in candidates), "把候选列给玩家选，选定后用 locks.world_id 开局；不替玩家选", NO_MATCH)],
         candidates=candidates,
     )
 
@@ -343,7 +343,7 @@ def new_game(ctx, payload):
     if payload["replay"] and payload["seed"] is None:
         problems.append(detail("$.seed", "“重开 N 号”必须给出种子编号", None, INVALID_INPUT))
     if payload["mode"] is None and not payload["replay"]:
-        problems.append(detail("$.mode", "缺少模式", "先问玩家“1 日常 / 2 有压力”；玩家说“随便”才用 random", INVALID_INPUT))
+        problems.append(detail("$.mode", "缺少模式", "先询问玩家选“1 日常 / 2 压力”；仅当玩家明确说“随便”时才传 random", INVALID_INPUT))
     custom = None
     if payload["my_world"] is not None:
         if payload["custom_world"] is not None:
@@ -382,7 +382,7 @@ def new_game(ctx, payload):
                 raise AppError(
                     NOT_FOUND,
                     "本机没有 %d 号开局的记录" % seed,
-                    [detail("$.seed", "找不到这个种子的开局条件", "请玩家说明模式（日常/有压力），用同一种子与条件重开", NOT_FOUND)],
+                    [detail("$.seed", "找不到这个种子的开局条件", "请玩家说明模式（日常 / 压力），再用同一种子与条件重开", NOT_FOUND)],
                 )
         if custom is not None:
             # A custom world lives only in this game's snapshot: no history, no dedupe.
@@ -674,8 +674,8 @@ def _engine_outcomes_last(results):
         if decided:
             problems.append(detail(
                 "$.turns[%d]" % index,
-                "第 %d 项有要由引擎决定结果的事（%s），它只能是记录的最后一项" % (index + 1, "、".join(decided)),
-                "这次只记录到第 %d 项，按返回的结果写它；后面的回合下一次再记" % (index + 1),
+                "第 %d 项含需由引擎裁定结果的操作（%s），只能作为单次提交的最后一项" % (index + 1, "、".join(decided)),
+                "请先提交至第 %d 项，根据引擎返回的结果续写正文；后续回合留到下一次提交" % (index + 1),
                 INVALID_INPUT,
             ))
     if problems:
@@ -766,7 +766,7 @@ def save_slot(ctx, payload):
                 raise AppError(
                     SLOT_CONFLICT,
                     "「%s」已存在" % name,
-                    [detail("$.name", "存档名已被占用", "问玩家是否覆盖；确认后带 overwrite: true 重交", SLOT_CONFLICT)],
+                    [detail("$.name", "存档名已被占用", "问玩家是否覆盖；确认后带 overwrite: true 重新提交", SLOT_CONFLICT)],
                     reason="exists",
                     slot={k: existing[k] for k in ("name", "world_title", "turn", "clock_label", "saved_at")},
                 )
@@ -869,7 +869,7 @@ def delete_slot(ctx, payload):
         raise AppError(
             INVALID_INPUT,
             "删除存档需要玩家确认",
-            [detail("$.confirm", "玩家还没有确认", "先问“确定删除「%s」吗？”，确认后带 confirm: true 重交" % name, INVALID_INPUT)],
+            [detail("$.confirm", "玩家还没有确认", "先问“确定删除「%s」吗？”，确认后带 confirm: true 重新提交" % name, INVALID_INPUT)],
         )
 
     def handler(conn, session, now):
@@ -986,7 +986,7 @@ def import_save(ctx, payload):
                 raise AppError(
                     SLOT_CONFLICT,
                     "「%s」已存在" % slot_name,
-                    [detail("$.slot", "存档名已被占用", "问玩家是否覆盖；确认后带 overwrite: true 重交", SLOT_CONFLICT)],
+                    [detail("$.slot", "存档名已被占用", "问玩家是否覆盖；确认后带 overwrite: true 重新提交", SLOT_CONFLICT)],
                     reason="exists",
                 )
             version = (existing["version"] + 1) if existing else 1
@@ -1035,7 +1035,7 @@ def list_worlds(ctx, payload):
     elif wanted or unwanted:
         out["matched"] = len(worlds)
     if "matched" in out and not out["matched"]:
-        out["hint"] = "没有对得上的世界：换个关键词或标签，或不带条件列出全部；都没有就提议最接近的世界或自定义世界，由玩家选"
+        out["hint"] = "没有匹配的世界：换个关键词或标签，或不带条件列出全部；都没有就提议最接近的世界或自定义世界，由玩家选"
     keys = ("id", "title", "modes", "status") if drafts else ("id", "title", "modes")
     out["worlds"] = [dict({k: w[k] for k in keys}, summary=one_line(w["summary"])) for w in worlds]
     return out
@@ -1086,7 +1086,7 @@ def save_world(ctx, payload):
             raise AppError(
                 SLOT_CONFLICT,
                 "「%s」已存在" % name,
-                [detail("$.name", "世界名已被占用（《%s》）" % existing["title"], "问玩家是否覆盖；确认后带 overwrite: true 重交，或换个名字", SLOT_CONFLICT)],
+                [detail("$.name", "世界名已被占用（《%s》）" % existing["title"], "问玩家是否覆盖；确认后带 overwrite: true 重新提交，或换个名字", SLOT_CONFLICT)],
                 world={k: existing[k] for k in ("name", "title", "saved_at")},
             )
         repo.put_my_world(conn, name, world, now)
@@ -1113,7 +1113,7 @@ def delete_world(ctx, payload):
         raise AppError(
             INVALID_INPUT,
             "删除世界需要玩家确认",
-            [detail("$.confirm", "玩家还没有确认", "先问“确定删除世界「%s」吗？”，确认后带 confirm: true 重交" % name, INVALID_INPUT)],
+            [detail("$.confirm", "玩家还没有确认", "先问“确定删除世界「%s」吗？”，确认后带 confirm: true 重新提交" % name, INVALID_INPUT)],
         )
 
     def handler(conn, now):

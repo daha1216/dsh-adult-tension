@@ -68,7 +68,7 @@ REJECT_CODES = ("INVALID_INPUT", "INVARIANT_VIOLATION", "NOT_FOUND", "SAFETY_BLO
 
 def _ctx(data_dir):
     env = {k: v for k, v in os.environ.items() if not k.startswith("ADULT_TENSION")}
-    env["ADULT_TENSION_INCLUDE_DRAFTS"] = "1"  # the harbor world is still in review
+    env["ADULT_TENSION_INCLUDE_DRAFTS"] = "1"  # allow testing draft packs before release
     return Context(_runtime.SKILL_ROOT, data_dir, env, {}, False)
 
 

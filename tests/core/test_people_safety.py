@@ -287,17 +287,25 @@ class LeverageAndIntimacyTest(unittest.TestCase):
         apply(self.state, self.intimate())
 
     def test_structural_checks_each_reject(self):
-        err = rejected(self.state, self.intimate(ops=[{"op": "npc_response", "npc_id": self.a, "response": "negotiate", "note": "先谈条件"}]))
-        self.assertIn("partial/genuine", reasons(err))
+        err = rejected(self.state, self.intimate(ops=[{"op": "npc_response", "npc_id": self.a, "response": "refuse", "note": "推开了"}]))
+        self.assertIn("缺少可入账的互动回应", reasons(err))
         err = rejected(self.state, self.intimate(participants=["player"]))
         self.assertIn("参与者", reasons(err))
         bg = next(c for c in self.state["characters"].values() if c["tier"] == "background")
         err = rejected(self.state, self.intimate(participants=["player", self.a, bg["id"]]))
         self.assertIn("不是重要角色", reasons(err))
 
+    def test_surface_and_negotiate_are_accepted_in_intimate_scenes(self):
+        for ops in (
+            [{"op": "npc_response", "npc_id": self.a, "response": "surface", "note": "嘴上冷斥，肩背却未躲开", "true_intent": "身体已经发软，只是不肯先服软"}],
+            [{"op": "npc_response", "npc_id": self.a, "response": "negotiate", "note": "压低声音开出封口筹码"}],
+        ):
+            state, _ = apply(self.state, self.intimate(ops=ops))
+            self.assertEqual(state["turn"], self.state["turn"] + 1)
+
     def test_lucidity_is_the_model_s_judgement_not_the_gate_s(self):
-        # DATA_CONTRACTS 6: the engine no longer checks drunk/asleep/unconscious
-        # participants; SKILL.md tells the model not to write such scenes.
+        # Drunk/injured conditions no longer block intimate scenes (v2.5);
+        # only fully unconscious states (asleep/unconscious) are marked incapacitating.
         self.state["characters"][self.a]["status"]["conditions"].append({"kind": "drunk", "text": "醉了", "until": None, "since_turn": 1})
         state, _ = apply(self.state, self.intimate())
         self.assertEqual(state["characters"][self.a]["status"]["conditions"][-1]["kind"], "drunk")
@@ -333,8 +341,8 @@ class LeverageAndIntimacyTest(unittest.TestCase):
         state, result = apply(self.state, commit("continue", [lever, {"op": "npc_action", "npc_id": self.a, "action": "意味深长地笑"}]))
         lid = result["applied"][0]["leverage_id"]
         self.assertEqual(state["leverage"][lid]["state"], "active")
-        # DATA_CONTRACTS 6: "a situation is never consent" is the model's rule
-        # now; the record stays and the engine does not refuse the step.
+        # Active leverage stays recorded while intimacy proceeds under pressure
+        # or trade; the engine does not block intimacy when leverage exists.
         after, _ = apply(state, self.intimate())
         self.assertEqual(after["leverage"][lid]["state"], "active")
         release = {"op": "leverage_release", "leverage_id": lid, "reason": "当着面把账本烧了"}
@@ -352,7 +360,7 @@ class LeverageAndIntimacyTest(unittest.TestCase):
     def test_no_consent_carries_over_to_the_next_commit(self):
         state, _ = apply(self.state, self.intimate())
         err = rejected(state, self.intimate(ops=[{"op": "npc_action", "npc_id": self.b, "action": "咳嗽"}]))
-        self.assertIn("没有 partial/genuine", reasons(err))
+        self.assertIn("缺少可入账的互动回应", reasons(err))
 
 
 class SafetyTest(unittest.TestCase):

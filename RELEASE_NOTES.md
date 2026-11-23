@@ -1,11 +1,9 @@
-# Adult Tension 发布说明（草稿）
+# Adult Tension 发布说明
 
-> 草稿：发布前按 `spec/ACCEPTANCE.md` §9 逐条核对（`reports/release/checklist.md`）。在端到端评测与发布演练完成之前，这份说明不对外。
-
-Adult Tension 是一个面向成年人的中文互动叙事 Skill。宿主里的模型负责理解玩家和写正文；随 Skill 附带的本地运行时负责人物、关系、时间、事件、边界与存档，保证长局不失忆、不自相矛盾。
+Adult Tension 是一个面向成年人（18+）、尺度全开的中文高张力互动叙事 Skill。宿主模型负责理解玩家意图与撰写正文；随包附带的本地确定性引擎负责人物表里状态、关系张力、时间结算、把柄事件、玩家边界与 SQLite 存档，保证长局零漂移、不失忆。
 
 - Skill 版本：`0.3.0`；数据库格式：4；状态格式：2。
-- 内容：211 个世界（内容版本 2026.10.30），说“世界列表”查看；另可自定义世界，说“保存世界 名字”存下来以后再玩。
+- 内容：211 个世界（内容版本以随包 `content/index.json` 为准），说“世界列表”查看；另可自定义世界，说“保存世界 名字”存下来以后再玩。
 
 ## 需要什么
 
@@ -19,9 +17,9 @@ Adult Tension 是一个面向成年人的中文互动叙事 Skill。宿主里的
 安装 = 把整个 `adult-tension/` 目录放进宿主的 Skill 搜索路径。Git 克隆、压缩包解压或宿主的安装命令，结果都是同一个目录。
 
 - **Claude Code**：放到用户级 Skill 目录（`~/.claude/skills/adult-tension/`）或项目级 Skill 目录（`<项目>/.claude/skills/adult-tension/`）。
-- **Codex**：放到用户级 Skill 目录（`~/.agents/skills/adult-tension/`），或仓库里的 `.agents/skills/adult-tension/`（Codex 从当前目录一直找到仓库根）；`agents/openai.yaml` 提供显示名与默认提示。Codex 会自动发现新装的 Skill，没出现时重启 Codex。（位置依据 Codex 官方文档，2026-09 核对。）
-- **OpenCode**：放到用户级 Skill 目录（`~/.config/opencode/skills/adult-tension/`）或项目里的 `.opencode/skills/adult-tension/`；OpenCode 也会读 Claude Code 的 `.claude/skills/`。真实宿主试玩的前三轮用的是 OpenCode 1.18.29。
-- **pi**：放到用户级 Skill 目录（`~/.pi/agent/skills/adult-tension/`，或几个宿主共用的 `~/.agents/skills/adult-tension/`），或项目里的 `.pi/skills/adult-tension/`、`.agents/skills/adult-tension/`（项目级的要先信任这个项目）。之后的真实宿主试玩与端到端评测用的是 pi 0.87.1。（位置依据 pi 随包文档，2026-09 核对。）
+- **Codex**：放到用户级 Skill 目录（`~/.agents/skills/adult-tension/`），或仓库里的 `.agents/skills/adult-tension/`（Codex 从当前目录一直找到仓库根）；`agents/openai.yaml` 提供显示名与默认提示。Codex 会自动发现新装的 Skill，没出现时重启 Codex。
+- **OpenCode**：放到用户级 Skill 目录（`~/.config/opencode/skills/adult-tension/`）或项目里的 `.opencode/skills/adult-tension/`；OpenCode 也会读 Claude Code 的 `.claude/skills/`。
+- **pi**：放到用户级 Skill 目录（`~/.pi/agent/skills/adult-tension/`，或几个宿主共用的 `~/.agents/skills/adult-tension/`），或项目里的 `.pi/skills/adult-tension/`、`.agents/skills/adult-tension/`（项目级的要先信任这个项目）。
 - **只有命令行的环境**：放在任意位置，直接运行：
 
   ```bash
@@ -60,8 +58,8 @@ Adult Tension 是一个面向成年人的中文互动叙事 Skill。宿主里的
 
 ## 已知限制
 
-- 目前只在 Windows 11（Python 3.12）上做过完整测试；Linux 与 Python 3.10 的真实测试尚未进行（`PROGRESS.md` 待决事项 P2、P3），3.10 只有静态检查兜底。
-- 所有叙事质量都依赖宿主里的模型；运行时保证状态一致、规则被执行，但写得好不好取决于模型。端到端评测的结果见 `reports/e2e/`（发布前补齐）。
+- 目前只在 Windows 11（Python 3.12）上做过完整测试；Linux 与 Python 3.10 的真实测试尚未进行，3.10 由静态检查与语法校验兜底。
+- 所有叙事质量都依赖宿主里的模型；运行时保证状态一致、边界与规则被执行，但文笔与表现力取决于模型本身。
 - 自定义世界不进世界列表，不能“重开 N 号”（同一个世界描述加同一个种子可以复现）；想再玩就在开局后说“保存世界 名字”，以后说“我的世界”找到它。
-- 上下文有体积上限（简要 ≤ 6 KB、完整 ≤ 20 KB）；人物很多时，不在场的人物只给摘要。
+- 上下文有体积上限（简要 ≤ 6 KB、完整 ≤ 32 KB）；人物极多时，按相关性分级精简离场人物卡片。
 - 撤销最多退回到本次读档或开局的那一回合；每个会话保留最近 30 回合的撤销点。

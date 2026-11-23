@@ -31,6 +31,7 @@ RESPONSE_LABELS = {
     "genuine": "真诚配合",
 }
 COOPERATIVE_RESPONSES = ("partial", "genuine")
+INTIMATE_RESPONSES = ("negotiate", "partial", "surface", "genuine")
 
 ACTION_MODES = ("result", "attempt", "rewrite", "continue", "wait")
 POWER_STRUCTURES = ("player_high", "npc_high", "equal", "switchable")
@@ -75,8 +76,8 @@ MANUAL_OUTCOMES = {
 }
 
 CONDITION_KINDS = ("drunk", "asleep", "unconscious", "injured", "away", "busy", "other")
-# Characters in these conditions never take part in intimate scenes.
-INCAPACITATING = ("drunk", "asleep", "unconscious")
+# Conditions where a character is fully unconscious until woken or expired.
+INCAPACITATING = ("asleep", "unconscious")
 
 # Clock anchors for advance_time.until (minutes of day)
 UNTIL_ANCHORS = {"morning": 7 * 60, "noon": 12 * 60, "evening": 18 * 60, "night": 21 * 60}
@@ -89,12 +90,13 @@ COOLDOWN_TURNS = 3
 MAX_FIX_ATTEMPTS = 2
 
 # Text ceilings, in characters without IDs and tags: a card or a pressure on
-# stage goes into every full context (20 KB), so a long one squeezes the
-# others (PROGRESS: 全部按建议执行（2026-10-16）).
+# stage goes into every full context (32 KB), so a long one squeezes the
+# others.
 TEMPLATE_TEXT_MAX = 1800
 PRESSURE_TEXT_MAX = 450
 
-# Content minimums (CONTENT_BIBLE.md sections 3 and 5)
+# Engine-level compatibility minimums (harbor_night_shift fixture & save imports);
+# stricter v2.5 authoring targets are documented in CONTENT_BIBLE.md section 3.1.
 FULL_MINIMUMS = {
     "rules": 4,
     "customs": 4,

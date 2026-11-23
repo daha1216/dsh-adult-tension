@@ -376,7 +376,7 @@ def ensure_schema(conn, backups_dir):
         raise AppError(
             MIGRATION_FAILED,
             "数据库从 schema %d 迁移到 %d 失败，已恢复迁移前的状态" % (report["from"], DB_SCHEMA_VERSION),
-            [detail("$.db", "%s: %s" % (type(exc).__name__, exc), "不会加载任何会话；换回可用版本的 Skill 或把错误报告给维护者")],
+            [detail("$.db", "%s: %s" % (type(exc).__name__, exc), "未加载任何会话，数据库已恢复备份；请换回兼容版本的 Skill 或向维护者反馈异常详情")],
             backup=backup_file,
             restored=restored,
         )

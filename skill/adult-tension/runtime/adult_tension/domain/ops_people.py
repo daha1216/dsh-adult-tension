@@ -44,7 +44,7 @@ def _card_budget(ctx, npc, path, errs):
         "to": F(S.List(S.Id(), 1, 12, unique=True)),
         "spread": F(S.Bool(), required=False, default=False),
     },
-    "把一条事实从知情人告诉别人。只能沿已有的关系边进行，当面告知时双方都要在场；内心事实永远不能传播。告诉某人真相时，若他正误信同键的假事实，引擎记录他的信息集变化",
+    "把一条事实从知情人告诉别人。只能沿已有的关系边进行，当面告知时双方都要在场；内心事实永远不能传播。告诉某人真相时，若对方正误信同键的假事实，引擎会同步修正其信息集",
 )
 def op_reveal_fact(ctx, op, path):
     errs = []
@@ -412,7 +412,7 @@ def _card_errors(tier, card, path, errs, allowed_missing=()):
         },
         **C.card_fields()
     ),
-    "新角色登场：正文里第一次点名的人都要登场，只被提起、不在场的也算（present 写 false，location_id 写他所在的地点）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason",
+    "新角色登场：正文里第一次点名的世界外新人物都要登场，只被提起、不在场的也算（present 写 false，location_id 写其所在地点；若已在世界 standby_cast 中，直接 enter_scene 激活，不用此操作）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason",
     branch=False,
 )
 def op_introduce_character(ctx, op, path):
@@ -534,7 +534,7 @@ def op_promote_character(ctx, op, path):
         "basis_text": F(S.Nullable(S.Str(1, 120)), required=False, default=None),
         "origin": F(S.Str(1, 60)),
     },
-    "登记把柄：一方开始拿捏另一方（把柄、债务、生计）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间仍可结合处境发生博弈或亲密互动",
+    "登记把柄：一方开始拿捏另一方（把柄、债务、生计、私密控制器）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间仍可结合处境发生博弈或亲密互动",
 )
 def op_leverage_set(ctx, op, path):
     errs = []
@@ -592,7 +592,7 @@ def op_leverage_set(ctx, op, path):
 @register(
     "leverage_release",
     {"leverage_id": F(S.Id()), "reason": F(S.Str(1, 80))},
-    "解除把柄（把柄被销毁、债务结清、秘密已经公开等），原因必填。同一回合里先解除再亲密不算解除",
+    "解除把柄（底片销毁、债务结清、秘密公开或条件兑现等），原因必填",
 )
 def op_leverage_release(ctx, op, path):
     errs = []

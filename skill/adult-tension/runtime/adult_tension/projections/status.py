@@ -41,10 +41,10 @@ def tension_words(value):
     if value <= 0:
         return None
     if value <= 2:
-        return "有点紧绷"
+        return "气氛微绷"
     if value <= 4:
-        return "绷得很紧"
-    return "一触即发"
+        return "张力紧绷"
+    return "气氛一触即发"
 
 
 def remaining(minutes):
@@ -103,7 +103,8 @@ def lines(state, content):
     if state["memory"]["open_action"]:
         options.append("眼下停在：%s" % state["memory"]["open_action"])
     if location:
-        options.append("这里可以%s" % "、".join(location["affordances"][:3]))
+        if location["affordances"]:
+            options.append("现场条件：%s" % "、".join(location["affordances"][:3]))
         exits = [SS.location(world, e)["name"] for e in location["exits"] if SS.location(world, e)]
         if exits:
             options.append("也可以去%s" % "、".join(exits))

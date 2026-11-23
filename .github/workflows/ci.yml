@@ -1,6 +1,5 @@
-# CI for Adult Tension (ACCEPTANCE.md section 1: the first 7 commands on
-# Windows and Linux). Not yet active: this repository is local-only until the
-# owner decides how Linux runs happen (see PROGRESS.md, pending decisions).
+# CI for Adult Tension (ACCEPTANCE.md section 1: core gates on Windows and Linux).
+# Actions execution on GitHub is toggled by repository settings (see PROGRESS.md P2).
 name: ci
 
 on:
@@ -9,6 +8,8 @@ on:
 
 jobs:
   core:
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
     strategy:
       fail-fast: false
       matrix:

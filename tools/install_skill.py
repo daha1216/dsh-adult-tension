@@ -22,7 +22,7 @@ def install(source, dest, replace=False):
     dest = os.path.abspath(dest)
     if os.path.exists(dest):
         if not replace:
-            raise SystemExit("destination exists (use --replace): %s" % dest)
+            raise SystemExit("目标目录已存在（覆盖请加 --replace）：%s" % dest)
         shutil.rmtree(dest)
     copied = 0
     for base, dirs, names in os.walk(source):
@@ -49,7 +49,7 @@ def main(argv):
         source = argv[argv.index("--from") + 1]
         args = [a for a in args if a != source]
     count = install(source, args[0], replace="--replace" in argv)
-    print("installed %d files into %s" % (count, os.path.abspath(args[0])))
+    print("已安装 %d 个文件到 %s" % (count, os.path.abspath(args[0])))
     return 0
 
 

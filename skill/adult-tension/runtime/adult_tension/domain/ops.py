@@ -259,7 +259,7 @@ def op_move(ctx, op, path):
     ctx.applied.append({"op": "move", "character_id": cid, "location_id": lid})
 
 
-@register("enter_scene", {"character_id": F(S.Id())}, "角色登场，加入当前场景")
+@register("enter_scene", {"character_id": F(S.Id())}, "角色登场，加入当前场景（已在世界 standby_cast 中的待命角色直接 enter_scene 即可自动激活完整人物卡，勿误调 introduce_character）")
 def op_enter_scene(ctx, op, path):
     errs = []
     cid = op["character_id"]
@@ -308,7 +308,7 @@ def op_exit_scene(ctx, op, path):
         "basis_fact_ids": F(S.List(S.Id(), max_items=8, unique=True), required=False, default=[]),
         "true_intent": F(S.Nullable(S.Str(1, 120)), required=False, default=None),
     },
-    "NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合 / surface 表面配合 / genuine 真诚配合。surface 必须写 true_intent（记为只有本人知道的事实）",
+    "NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（含口嫌体正直下的半推半就、身体失守） / surface 表面配合（虚与委蛇或口嫌体正直嘴硬未阻拦，不推进关系阶段；必须写 true_intent） / genuine 真诚配合",
 )
 def op_npc_response(ctx, op, path):
     errs = []
@@ -540,7 +540,7 @@ def op_add_fact(ctx, op, path):
         "stage_retreat_to": F(S.Nullable(S.Enum(*ST.STAGES)), required=False, default=None),
         "reason": F(S.Str(1, 80)),
     },
-    "有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需要同一回合里玩家的行动 + 对方的 partial/genuine 回应）或后退。原因必填",
+    "有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；口嫌体正直但身体半推半就失守应记为 partial）或后退。原因必填",
 )
 def op_relationship(ctx, op, path):
     errs = []
@@ -636,7 +636,7 @@ def _stage_evidence(ctx, a, b, path, errs):
                 detail(
                     path + ".stage_advance",
                     "亲近进程前进需要同一回合里 %s 的 partial 或 genuine 回应" % ctx.name(npc),
-                    "先写 npc_response；阶段是双方共同经历的历史，不是一方说了算",
+                    "先写 npc_response；若对方口头矜持抗拒但身体已半推半就配合，回应应记为 partial 而非纯敷衍的 surface",
                     INVARIANT_VIOLATION,
                 )
             )

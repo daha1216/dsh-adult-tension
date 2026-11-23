@@ -32,7 +32,7 @@ repo/
 ├─ skill/adult-tension/            # 可安装的 Skill，发布物就是这个目录
 │  ├─ SKILL.md
 │  ├─ agents/openai.yaml
-│  ├─ references/                  # 按需读取：操作字段参考、命令参考、错误码、退出码
+│  ├─ references/                  # 按需读取：叙事规则、进阶流程、操作参考、命令参考、自定义世界、世界列表、排查手册
 │  ├─ scripts/adult_tension.py     # 唯一入口，按自身路径定位 runtime/
 │  ├─ runtime/adult_tension/
 │  │  ├─ domain/
@@ -97,6 +97,7 @@ repo/
 | `archive` | 已结束事件、被章节摘要覆盖的旧回合记录；不进入上下文，导出时带上 |
 | `slots` | 槽名、来源 session_id、revision、turn、显示信息、快照、保存时间 |
 | `opening_history` | 最近开局签名，用于去重 |
+| `my_worlds` | 玩家保存的自定义世界名称、世界包 JSON、保存时间 |
 
 - 撤销用“回合开始前的快照”实现最简单，也最不容易错；快照被归档机制限制了体积，所以代价可控。实现者可以换成逆操作，但必须通过同样的撤销测试。
 - 快照体积必须有界：章节摘要后，旧回合记录与已结束事件移到 `archive`。基准报告中记录第 10、100、300 回合的快照体积。

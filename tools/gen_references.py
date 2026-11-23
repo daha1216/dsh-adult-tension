@@ -75,7 +75,7 @@ def render_commands():
     lines.append("- 输出是一个信封 `{\"ok\", \"data\", \"error\"}`，以 UTF-8 字节写到 stdout。成功与失败都附带 `next_request_id`（成功在 `data` 里，失败在 `error` 里），下一次写操作直接用它。\n")
     lines.append("- 全局参数：`--json`（输出 JSON，始终如此）、`--pretty`（缩进输出）、`--debug`、`--input-file PATH`、`--data-dir PATH`。\n")
     lines.append("- 写操作都带 `request_id`；会话内的写操作还带 `session_id` 与 `expected_revision`。同一 `request_id` + 同一输入重放时返回原响应并标记 `replayed: true`。\n")
-    lines.append("- 开局、读档、导入（`new-game`、`load-slot`、`import-save`）与带 `\"depth\": \"full\"` 的 `get-context` 另外返回 `commit_template`：会话号已填好的一次记录，`turns` 里是一个回合的样子（在场的人和最常用的操作），每个攒下的回合照它写一项；尖括号是要写的内容，`a|b` 表示选一个，用不上的操作删掉。带 `preview_time` 的 `get-context` 另外返回 `skip_template`：快进这一回合的记录，`advance_time` 与每条必需的 `offscreen_beat` 已排好（攒下的回合要先记录，再预览）。\n")
+    lines.append("- 开局、读档、导入（`new-game`、`load-slot`、`import-save`）与带 `\"depth\": \"full\"` 的 `get-context` 另外返回 `commit_template`：会话号已填好的一次记录，`turns` 内含单回合骨架（在场的人和最常用的操作），每个攒下的回合照它写一项；尖括号是要写的内容，`a|b` 表示选一个，用不上的操作删掉。带 `preview_time` 的 `get-context` 另外返回 `skip_template`：快进这一回合的记录，`advance_time` 与每条必需的 `offscreen_beat` 已排好（攒下的回合要先记录，再预览）。\n")
     lines.append("- 开发开关（环境变量，由测试环境设置，玩家不需要）：`ADULT_TENSION_HOME` 指定数据目录；`ADULT_TENSION_INCLUDE_DRAFTS=1` 让未发布的世界参与开局与世界列表；`ADULT_TENSION_TRACE=<文件>` 把每次调用（参数、输入、信封、耗时）追加到该文件，供端到端评测采集。\n\n")
     lines.append("## 命令一览\n\n| 命令 | 类别 | 输入 | 作用 | 专用参数 |\n|---|---|---|---|---|\n")
     input_names = {"none": "无", "optional": "可选", "required": "必填"}
@@ -97,16 +97,16 @@ def render_commands():
                 "\n**一次记录**：一次 `commit-turn` 记录 `turns` 里的回合（1–%d 项，按发生的顺序）。"
                 "引擎逐项应用，每项是一个回合，各自可以撤销；任何一项不合法，整次记录被拒、状态不变，错误路径以 `$.turns[i]` 开头。"
                 "只有第一项可以写 `replaces_turn`。上下文 `requests` 要求的章节摘要、前情写在第一项；记录中途引擎新提出的要求在记录结束时才出现，由下一次记录的第一项补上。"
-                "返回 `turns`（每项的 `turn`、`applied`、`resolved_events`、`simulation`）、时钟和下一回合的上下文（记了几个回合时是完整上下文）。\n" % specs.RECORD_MAX_TURNS
+                "返回 `turns`（每项的 `turn`、`applied`、`resolved_events`、`simulation`）、时钟和下一回合的上下文（单次提交多于 1 个回合时返回 full 完整上下文，单回合返回 brief）。\n" % specs.RECORD_MAX_TURNS
             )
     lines.append("\n## 错误码\n\n| 码 | 含义 | 退出码 |\n|---|---|---|\n")
     for code, text in errors.ERROR_DESCRIPTIONS.items():
         lines.append("| `%s` | %s | %d |\n" % (code, _escape(text), errors.exit_code_for(code)))
     lines.append("\n## 退出码\n\n| 退出码 | 类别 |\n|---|---|\n")
     lines.append("| %d | 成功 |\n" % errors.EXIT_OK)
-    lines.append("| %d | 输入与领域错误：按 `details` 修正后重交 |\n" % errors.EXIT_INPUT)
+    lines.append("| %d | 输入与领域错误：按 `details` 修正后重新提交 |\n" % errors.EXIT_INPUT)
     lines.append("| %d | 环境错误：Python、数据目录、存储占用、版本 |\n" % errors.EXIT_ENVIRONMENT)
-    lines.append("| %d | 内部错误：状态不变，附日志位置 |\n" % errors.EXIT_INTERNAL)
+    lines.append("| %d | 内部运行异常：状态未改变，附日志路径 |\n" % errors.EXIT_INTERNAL)
     return "".join(lines)
 
 
@@ -134,7 +134,10 @@ def render_operations():
     lines.append("- 回应光谱：%s\n" % "、".join("`%s` %s" % (k, v) for k, v in structure.RESPONSE_LABELS.items()))
     lines.append("- 关系阶段（世界可改名）：%s\n" % "、".join("`%s` %s" % (k, v) for k, v in structure.STAGE_LABELS.items()))
     lines.append("- 事件到期：%s；`chance` 由引擎掷骰得到 `hit` / `miss`\n" % "、".join("`%s` → `%s`" % (k, v) for k, v in structure.DUE_OUTCOME.items()))
-    lines.append("- 状况：%s（其中 %s 的角色不参与亲密场景）\n" % ("、".join("`%s`" % k for k in structure.CONDITION_KINDS), "、".join("`%s`" % k for k in structure.INCAPACITATING)))
+    lines.append(
+        "- 状况：%s（`drunk` 微醺/醉意、`injured` 负伤等均可正常进入亲密互动；仅 %s 处于完全无意识状态无法给出当面回应）\n"
+        % ("、".join("`%s`" % k for k in structure.CONDITION_KINDS), "、".join("`%s`" % k for k in structure.INCAPACITATING))
+    )
     return "".join(lines)
 
 
@@ -154,7 +157,7 @@ def render_worlds():
         lines.append("| %s | `%s` | %d |\n" % (tag["label"], tag["id"], sum(tag["id"] in w["content_tags"] for w in released)))
     lines.append("\n")
     lines.append("| 世界 | ID | 一句话 | 模式 | 状态 |\n|---|---|---|---|---|\n")
-    modes = {"daily": "日常", "pressure": "有压力"}
+    modes = {"daily": "日常", "pressure": "压力"}
     for world in index["worlds"]:
         lines.append(
             "| %s | `%s` | %s | %s | %s |\n"
@@ -181,10 +184,10 @@ def render_custom_world():
         "它存在这一局的存档里（玩家说“保存世界”才另存一份）：不进世界列表，不参与开局去重，也不能“重开 N 号”（用同一个世界包和同一个种子重新开局即可复现）。\n\n"
     )
     lines.append("## 提交与修正\n\n")
-    lines.append("1. 先和玩家确认：时代与地方、日常还是有压力、想见到的两三个人。玩家没说的，按时代常识补齐，不要追问细节。\n")
+    lines.append("1. 先和玩家确认：时代与地方、日常还是压力、想见到的两三个人。玩家没说的，按时代常识补齐，不要追问细节。\n")
     lines.append("2. 从文末的示例改起，写一个 JSON 对象：`\"custom\": true`，`id` 用 `custom_` 开头的小写字母、数字、下划线，不写 `extends`。\n")
     lines.append("3. 直接调用 `new-game`（不先用 `verify-content` 预检，它是开发工具），输入 `{\"request_id\", \"mode\", \"custom_world\": {...}}`；可带 `seed`、`player`、`npc_gender_preference`、`excludes.content_tags`，不带 `locks.world_id`、`excludes.world_ids`、`replay`。\n")
-    lines.append("4. 返回 `CONTENT_ERROR` 时，`details` 一次列出全部问题，路径以 `$.custom_world` 开头；逐条改好，换新的 `request_id` 重交。只有需要玩家补设定时才把问题讲给玩家。\n")
+    lines.append("4. 返回 `CONTENT_ERROR` 时，`details` 一次列出全部问题，路径以 `$.custom_world` 开头；逐条改好，换新的 `request_id` 重新提交。只有需要玩家补设定时才把问题讲给玩家。\n")
     lines.append("5. 开局后玩家说“保存世界 名字”：`save-world` 存下这一局的世界包；以后 `new-game` 带 `\"my_world\": \"名字\"`（不写 `custom_world`）再开，运行时按同样的规则重新校验。`my-worlds` 列出，`delete-world` 删除。\n\n")
     lines.append("## 数量下限\n\n| 项 | 下限 |\n|---|---|\n")
     rows = [
@@ -218,7 +221,8 @@ def render_custom_world():
     )
     lines.append(
         "- **占位的作用域**：人物模板与背景人物用 `npc`、`player`；钩子用 `npc`（即钩子的 `slot`）、`player`；人物组合用它的槽位与 `player`；"
-        "转折用人物模板 ID 与 `player`；压力只有 `player`（带 `leverage` 时加上把柄双方）；日常活动只有 `player`；世界层、规则、地点、玩家身份、张力引擎、关系渠道的文字不用占位（玩家身份的称呼模板除外）。\n"
+        "转折用人物模板 ID 与 `player`；压力只有 `player`（带 `leverage` 时加上把柄双方）；日常活动只有 `player`；世界层、规则、地点、玩家身份、张力引擎、关系渠道的文字不用占位（玩家身份的称呼模板除外）。"
+        "注意原样显示字段（人物模板的 `adult_context`/`public_role`/`gender_reason`、背景人物的 `adult_context`/`role`/`name`、日常活动与压力的 `title`、地点的 `name`）不做占位替换，严禁写 `{...}`。\n"
     )
     lines.append("- **引用按 ID**：地点出口、组合槽位与张力引擎、钩子槽位、活动与压力的地点都要能解析；ID 在包内唯一，`player` 是保留字。\n")
     lines.append("- **时代**：`forbidden_terms` 写本世界不该出现的词（器物、说法），校验器扫描全部文本。\n")
@@ -226,7 +230,7 @@ def render_custom_world():
         "- **有内容**：不写空串、“待补”“TODO”“—”或与字段名相同的文字；同一包内不写重复的整句。"
         "地点至少一个 `public`、一个 `semi` 或 `private`，任意两个地点的 `privacy`、`visibility`、`affordances` 不能完全相同。\n"
     )
-    lines.append("- **压力**：五拍齐全，`near.deadline_minutes` 大于 `immediate.minutes`，出路至少两条且各有代价；带 `leverage` 标记的压力写明 `leverage` 的双方与依据，双方要同在某个人物组合里。\n")
+    lines.append("- **压力**：五拍齐全，`near.deadline_minutes` 大于 `immediate.minutes`，出路至少两条且各有代价；带 `leverage` 标记的压力写明 `leverage` 的双方与依据，`holder` 与 `subject` 可为槽位或 `player`（双向均可拿捏），其中的非 `player` 槽位要同在某个人物组合里。\n")
     lines.append(
         "- **篇幅**：一个人物模板的全部文字合计 ≤ %d 字，一个压力 ≤ %d 字（不含 ID 与标签）——在场的人物卡与压力每回合都进上下文，太长会挤掉别人。\n"
         % (worldpack.ST.TEMPLATE_TEXT_MAX, worldpack.ST.PRESSURE_TEXT_MAX)
@@ -240,7 +244,7 @@ def render_custom_world():
         "- **人名**：人物的名字由引擎从名字池抽取，正文里不写名字池里的名字（两个字以上的名），用 `{npc.name}`、`{槽位.given}` 这类占位或身份称呼；"
         "名字池里也不放会在正文里当普通词用的名（秋水、斥候），也不放背景人物已经用掉的名。\n"
     )
-    tags =ContentStore(os.path.join(_runtime.SKILL_ROOT, "content")).tags()["tags"]
+    tags = ContentStore(os.path.join(_runtime.SKILL_ROOT, "content")).tags()["tags"]
     lines.append("- **标签**：`content_tags` 与各处 `tags` 只能用内容标签表里的 ID：%s。\n\n" % "、".join("`%s` %s" % (t["id"], t["label"]) for t in tags))
     lines.append("## 字段\n\n")
     lines.append(render_spec(worldpack.WORLD, 2))

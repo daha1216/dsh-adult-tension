@@ -48,7 +48,7 @@ def skeleton(world_id, title, era, region, premise=None, tone=None):
         "region": region,
         "premise": premise or "%s，%s。" % (era, region),
         "tone": tone or ["日常"],
-        "style_hint": "写%s的器物、声音与称呼，句子短，少写心理独白。" % era,
+        "style_hint": "贴合%s的器物、衣料触感与尊卑称谓，重呼吸停顿、肢体距离与表里反差，少写空泛心理总结。" % era,
         "clock_start": {"label": None, "minute": 1200},
         "clock_style": "hm",
         "default_person": "second",
@@ -56,7 +56,7 @@ def skeleton(world_id, title, era, region, premise=None, tone=None):
         "stage_labels": None,
         "name_pools": {"family": [], "given_female": [], "given_male": [], "given_neutral": [], "nickname_patterns": []},
         "status": "draft",
-        "notes": "由 new-world 生成的骨架；按 CONTENT_BIBLE.md 第 3 节补齐内容。",
+        "notes": "由 tools/new_world.py 生成的骨架；按 CONTENT_BIBLE.md 第 3 节补齐内容。",
     }
     for field in LIST_FIELDS:
         pack[field] = []

@@ -482,7 +482,9 @@ def plausible_op(rnd, state, content, fresh):
             op["to_location_id"] = pick(locations)
         return op
     if kind == "enter":
-        absent = [c for c in npcs if c not in state["scene"]["present"]]
+        from adult_tension.domain import opening as OP
+
+        absent = [c for c in npcs if c not in state["scene"]["present"]] + list(OP.standby_previews(state, content["world"]))
         return {"op": "enter_scene", "character_id": pick(absent) or who}
     if kind == "move":
         return {"op": "move", "character_id": pick([who, player]), "location_id": pick(locations)}
