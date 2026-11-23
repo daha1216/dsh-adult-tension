@@ -3,36 +3,36 @@
   "id": "top_idol_van_wardrobe_breakout",
   "title": "红毯夹裙女明星",
   "extends": null,
-  "custom": true,
   "era": "现代都市·万人盛典之夜",
   "region": "盛典会展中心·地下贵宾停车匝道",
-  "premise": "年度红毯盛典前一周，顶流女星每天在保姆车里跑通告：试礼服、彩排、采访，品牌公关总监、跟车礼服修补师和随行摄影师挤在中排后座。盛典会展中心的地下贵宾匝道只有一条出口，粉丝和代拍已经开始蹲点。",
+  "premise": "年度盛典压轴前夕，顶流女星的保姆车在地下贵宾匝道急刹，航空座椅钢轨将高定真丝鱼尾晚礼服连同纯银流苏暗扣死死咬住。车外代拍强光逼近车窗，车内公关总监、造型宿敌与随行人员隔着黑天鹅绒遮光大氅各自掐紧合约与把柄。",
   "tone": [
-    "奢华光鲜",
-    "机械卡滞",
-    "名节高压",
-    "极限自救"
+    "红毯高压",
+    "狭室失守",
+    "名节赌局",
+    "口嫌体直",
+    "暗癖曝光"
   ],
-  "style_hint": "当红女星高贵仪态与保姆车狭小幽闭空间机械咬合破拆之戏剧张力",
+  "style_hint": "名利场与幽闭官能：真丝鱼尾裙在铁轨缝里绷裂欲断、细高跟歪陷地毯、天鹅绒大氅隔绝强光。嘴上端着巨星架子冷斥，衣下暗藏与把柄寸寸崩防。",
   "clock_start": {
-    "label": "年度盛典当天，十二月",
+    "label": "十二月下旬，盛典开幕日",
     "minute": 1140
   },
   "clock_style": "hm",
   "default_person": "second",
   "default_npc_gender_mix": {
-    "female": 0.5,
-    "male": 0.5,
-    "nonbinary": 0.0
+    "female": 0.55,
+    "male": 0.4,
+    "nonbinary": 0.05
   },
   "stage_labels": {
-    "stranger": "初见",
-    "acquainted": "共乘",
-    "familiar": "默契",
-    "flirting": "相知",
-    "testing": "试探",
-    "intimate": "信托",
-    "committed": "死守"
+    "stranger": "门外戒备",
+    "acquainted": "同车试探",
+    "familiar": "遮毯密谈",
+    "flirting": "裙边交锋",
+    "testing": "把柄逼视",
+    "intimate": "帷幕失守",
+    "committed": "星途共谋"
   },
   "name_pools": {
     "family": [
@@ -69,7 +69,7 @@
       "健一",
       "拓也",
       "浩二",
-      "大佐",
+      "泽明",
       "振东",
       "建平",
       "和也",
@@ -93,64 +93,73 @@
     ],
     "nickname_patterns": [
       {
-        "pattern": "老{family}",
-        "gender": "male"
+        "pattern": "{family}",
+        "gender": "any"
       },
       {
-        "pattern": "{family}小姐",
-        "gender": "female"
+        "pattern": "{given}",
+        "gender": "any"
       }
     ],
     "order": "family_first"
   },
   "rules": [
     {
-      "id": "rule_idol_public_modesty",
-      "text": "顶流偶像公众形象重于生命，绝不可在镜头闪光灯前露出半点衣履不整瑕疵。"
+      "id": "r_red_carpet_modesty_iron_law",
+      "text": "红毯压轴不容流出半帧走光狼狈，长焦拍实即触发千万级道德索赔条款。"
     },
     {
-      "id": "rule_seat_slider_jam_physics",
-      "text": "高定晚礼服真丝薄纱处于钢轨重载咬合时，盲目强行撕扯必致面料破碎大面积走光。"
+      "id": "r_seat_rail_ratchet_physics",
+      "text": "航空座椅咬死高定真丝鱼尾裙与纯银流苏暗扣时硬扯必裂，唯冷锻不锈钢调色棒斜挑棘齿方可无损脱扣。"
     },
     {
-      "id": "rule_spatula_lever_breakout",
-      "text": "唯有利用实心冷锻不锈钢调色棒之微观硬棱撬开棘齿簧舌方可无损解脱。"
+      "id": "r_velvet_cloak_privacy_shield",
+      "text": "双层黑天鹅绒遮光大氅拉严后可完全阻断车外强光与长焦透视，令后舱化作外人全盲私密孤岛。"
     },
     {
-      "id": "rule_seat_manual_release",
-      "text": "保姆车电动座椅一旦过载跳闸，手动释放拉索只能由车内乘员亲手拉动。"
+      "id": "r_van_intercom_and_breaker",
+      "text": "地库断闸能抢出五秒漆黑脱困窗口，但车载对讲开关一旦受浪涌卡死即外泄舱内声响。"
     }
   ],
   "customs": [
-    "保姆车车门开启前必须由贴身助理展开深色防走光披毯遮蔽四周",
-    "非持证随行人员严禁擅自触碰红毯贵宾车辆门把手与车窗玻璃",
-    "艺人更衣脱离险境全过程严禁任何外围摄影镜头向车窗内探拍摄",
-    "红毯压轴艺人下车时，随行人员一律背对车门站成半圆，等艺人站稳了才回身。"
-  ],
-  "channels": [
-    {
-      "id": "chan_whisper",
-      "text": "车厢隔音后座十步内极轻柔之声息传递",
-      "reach": "车内后排特定随行密友与助理",
-      "fidelity": "exact"
-    },
-    {
-      "id": "chan_van_intercom",
-      "text": "保姆车前后排车载对讲线路清晰通报",
-      "reach": "车内驾驶舱与后排贵宾舱全员",
-      "fidelity": "exact"
-    },
-    {
-      "id": "chan_fan_rumor",
-      "text": "代拍群和粉丝群里转了几手的模糊截图与走光传闻",
-      "reach": "车外人群与网络",
-      "fidelity": "distorted"
-    }
+    "压轴艺人下车须由贴身随侍展开遮光大氅护成半圆盲区，特勤背对车窗站立。",
+    "孤品礼服借用严禁剪刀破坏面料，损毁照三十万起双倍赔付。",
+    "地下贵宾匝道禁外媒闯入，但重金收买内鬼混进工作通道的事屡见不鲜。",
+    "圈内越致命的封口密约，越要在红毯门外衣冠楚楚签完再微笑挽臂登台。"
   ],
   "player_identities": [
     {
-      "id": "pi_brand_pr_director",
-      "role": "高定品牌方公关总监",
+      "id": "pc_top_idol",
+      "role": "孤品夹裙的顶流女星",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}影后",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}明星",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        27
+      ],
+      "social_position": "high",
+      "baseline": "真丝鱼尾礼服被座椅钢轨死咬，反握冷锻不锈钢调色棒仍冷傲扬颌。",
+      "resources": [
+        "二毫米斜刃冷锻调色棒及工作室全盘决策权",
+        "高定开叉下依后台赌约秘戴的穿戴物与防走光暗扣"
+      ],
+      "reputation": "冷艳毒舌的国民顶流，从不在镁光灯前低半寸眉。",
+      "risks": [
+        "裙裂走光或裙底暗癖拍实即遭行业封杀与天价追赔"
+      ]
+    },
+    {
+      "id": "pc_brand_pr_director",
+      "role": "握代言合约的公关总监",
       "gender": "any",
       "title_patterns": [
         {
@@ -158,28 +167,28 @@
           "gender": "any"
         },
         {
-          "pattern": "{given}老师",
+          "pattern": "{family}主管",
           "gender": "any"
         }
       ],
       "age_range": [
         30,
-        42
+        38
       ],
       "social_position": "high",
-      "baseline": "今晚这件孤品鱼尾礼服的出借方代表，礼服和女星的代言合约都捏在手里。",
+      "baseline": "手握三十万孤品追赔权与八位数代言续约笔，袖袋备有银扣与无线开关。",
       "resources": [
-        "品牌方特批的红毯延时入场权限",
-        "一枚备用的纯银流苏暗扣"
+        "主办红毯延时入场批文及千万代言签批函",
+        "西装袋备用的纯银暗扣及后台赌局控制器"
       ],
-      "reputation": "挑剔讲究，在圈里出了名的既护品牌也护艺人。",
+      "reputation": "笑里藏刀的奢牌金主，专趁艺人陷落窘境改写条款。",
       "risks": [
-        "礼服在红毯上出事，品牌和自己都要背锅"
+        "私挪样衣回扣填亏空的审计单败露即遭总社除名"
       ]
     },
     {
-      "id": "pi_gown_repair_tailor",
-      "role": "跟车礼服修补师",
+      "id": "pc_gown_repair_tailor",
+      "role": "携暗针解扣的跟车裁缝",
       "gender": "any",
       "title_patterns": [
         {
@@ -187,7 +196,7 @@
           "gender": "any"
         },
         {
-          "pattern": "小{family}",
+          "pattern": "{family}老师",
           "gender": "any"
         }
       ],
@@ -196,19 +205,19 @@
         34
       ],
       "social_position": "equal",
-      "baseline": "品牌方派来跟车的修补师，真丝修补线、隐形暗针和手持蒸汽熨斗从不离身。",
+      "baseline": "手拎高定修补匣随车待命，熟稔抹胸隐形拉链、蕾丝贴边与导轨撬点。",
       "resources": [
-        "一卷真丝修补线与一盒隐形暗针",
-        "一只手持蒸汽熨斗"
+        "精密钩针、真丝修补线与贴身量体隐秘尺寸单",
+        "独门无痕解扣术及加厚备用天鹅绒披肩"
       ],
-      "reputation": "手快嘴严，补过的裙子连设计师本人都看不出来。",
+      "reputation": "嘴严手快的御用裁缝，越金贵的身段越逃不过指尖分寸。",
       "risks": [
-        "修补失手，就是整个行业的笑柄"
+        "孤品在手里撕裂将彻底断送时尚圈声名"
       ]
     },
     {
-      "id": "pi_tour_photographer",
-      "role": "经纪公司随行摄影师",
+      "id": "pc_tour_photographer",
+      "role": "藏原片底卡的随行摄影",
       "gender": "any",
       "title_patterns": [
         {
@@ -216,28 +225,28 @@
           "gender": "any"
         },
         {
-          "pattern": "阿{given}",
+          "pattern": "{family}老师",
           "gender": "any"
         }
       ],
       "age_range": [
-        25,
-        36
+        26,
+        35
       ],
       "social_position": "equal",
-      "baseline": "跟拍女星三年的御用摄影，镜头只对准自己人，也最清楚哪些照片绝不能流出去。",
+      "baseline": "背静音单反与黑反光板坐在隔断边，加密卡里锁着未删减后台换装底片。",
       "resources": [
-        "一台带遮光罩的旗舰相机",
-        "一块能挡住半扇车窗的反光板"
+        "无声快门旗舰机、金属遮光板与加密原片卡",
+        "车外八卦掮客急欲重金买断的暗线渠道"
       ],
-      "reputation": "嘴严手稳，从不在社交平台发未经审过的图。",
+      "reputation": "跟拍三年的影子镜头，看似温顺却掐着最致命原片。",
       "risks": [
-        "被车外代拍当成同行围住推搡"
+        "私收掮客十万定金的转账尾迹曝光即遭全网追讨"
       ]
     },
     {
-      "id": "pi_garage_night_guard",
-      "role": "会展中心地库夜班保安",
+      "id": "pc_garage_night_guard",
+      "role": "掌地库电闸的夜班安保",
       "gender": "any",
       "title_patterns": [
         {
@@ -245,782 +254,117 @@
           "gender": "any"
         },
         {
-          "pattern": "小{family}",
+          "pattern": "{family}警卫",
           "gender": "any"
         }
       ],
       "age_range": [
-        22,
-        45
+        24,
+        40
       ],
       "social_position": "low",
-      "baseline": "地下贵宾匝道的夜班保安，今晚头一回被调来守红毯车道，熟悉地库每一处电闸和监控死角。",
+      "baseline": "握地库照明闸刀匙与盲区门禁卡，看似老实守柱，一眼看透车内窘态。",
       "resources": [
-        "地库照明电闸房的钥匙",
-        "一支强光手电"
+        "地库电闸总钥匙、强光手电与监控盲区总卡",
+        "切断匝道灯光制造五秒全黑掩护的闸刀权限"
       ],
-      "reputation": "老实本分，不多看也不多问。",
+      "reputation": "不起眼的夜班警卫，一伸手就能决定外头长焦拍不拍得成。",
       "risks": [
-        "挡不住人群就要丢饭碗"
+        "擅自断闸掩护查实将当场丢掉饭碗担责"
       ]
-    }
-  ],
-  "character_templates": [
-    {
-      "id": "char_ruri_idol",
-      "gender": "female",
-      "gender_reason": "当红顶流傲娇女明星人设",
-      "age_range": [
-        21,
-        22
-      ],
-      "adult_context": "二十一岁的成年顶流艺人，出道五年，肖像、名誉和去留一向自己拿主意。",
-      "public_role": "顶流女爱豆",
-      "appearance_options": [
-        "乌黑长卷发挽成优雅公主头，瓜子小脸天然微显娇软婴儿肥与冷傲倔强神态绝美反差；身着高定抹胸真丝鱼尾晚礼服配纯银流苏链暗扣。",
-        "神情冷艳骄矜，真丝鱼尾礼服侧摆紧紧咬死在航空座椅底座钢轨中，白皙美背与纤细腰肢在应急灯光下泛着象牙般微光。"
-      ],
-      "identity": {
-        "authority": "个人肖像隐私自主保全与紧急物理排障处置权",
-        "resources": [
-          "化妆盒暗格内置高强度淬火调色抹刀",
-          "高定真丝抗撕扯鱼尾晚礼服面料防脱搭扣"
-        ],
-        "limits": [
-          "严禁在座椅旋转卡滞状态下强行撕扯薄纱礼服造成大面积走光"
-        ],
-        "obligations": [
-          "在车门开启前排除机械卡死护卫顶级艺人名节与体面出场"
-        ],
-        "exposure": "高定真丝晚礼服若在拉扯中崩解撕裂，千万粉丝顶流女明星名誉与商业价值将当场荡然无存。",
-        "hidden": "礼服内层防走光隐形扣其实早被钢槽挂死，一旦蛮力硬拉整条裙摆便会当场崩解。"
-      },
-      "decision": {
-        "core_value": "誓死捍卫顶流偶像之冰清玉洁名誉与舞台傲娇尊严",
-        "goal_options": [
-          "利用调色棒不锈钢铲刃精准挑退导轨棘齿实现优雅脱扣",
-          "在助理大氅严密遮蔽下从容起立整理裙摆完成红毯惊艳亮相"
-        ],
-        "pressure_responses": {
-          "low": "单手扶稳座椅扶手维持平衡，指尖细致探寻旋转底座机械咬合死角。",
-          "mid": "美眸目光冷若霜雪，左手护住胸前抹胸前襟右手稳固调节金属工具受力夹角。",
-          "high": "贝齿咬紧朱唇忍受铁棱刮擦指尖隐痛，手腕猛然爆发四点二牛顿逆向微撬巧劲别退棘齿卡舌。",
-          "breaking": "若裙身撕裂走光，宁可拉响车内灭火冷雾喷罐制造漫天白雾彻底封阻外界视线。"
-        },
-        "withdrawal": "脱身解困后容色骄傲抚平鱼尾裙褶，单手提裙优雅下车绝口不提适才惊险危机。",
-        "relationship_stance": "对助理绝对信任相托背后隐私，对外围代拍镜头严守拒斥防线。",
-        "contrast": "平时看似傲娇蛮横爱挑剔，面临绝境时沉着坚韧爆发惊人机械巧劲手感。",
-        "prefers": [
-          "利用随身冷锻金属工具施展微观物理撬卡解扣技巧",
-          "要求助理撑开双层加厚大氅形成绝对阴影盲区"
-        ],
-        "avoids": [
-          "让车外的人拿破窗锤砸开车门、当众把自己拽出去",
-          "在座椅还没卸力时慌乱扭动，让钢轨把礼服咬得更深"
-        ],
-        "never": [
-          "绝不容许旁人以粗暴割破高定礼服之侮辱方式实施营救"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "对喧嚣混乱中沉着护卫自身尊严担当者暗生好感",
-          "对非礼勿视默默筑起守护防线之忠诚怀抱深切信赖"
-        ],
-        "likes": [
-          "质地精巧坚固之冷锻不锈钢工具",
-          "严丝合缝之机械精密构件"
-        ],
-        "dislikes": [
-          "粗野蛮横的暴力破坏",
-          "无孔不入的恶意窥拍"
-        ],
-        "preconditions": [
-          "车门外的镜头全部撤走、自己已经体面脱身之后",
-          "两人都清醒，心意出于自己，不是被困时的慌乱依赖"
-        ],
-        "boundaries": [
-          "严禁任何男性人员在未获首肯前强行触碰腰间礼服系带",
-          "拒绝旁人以粗暴剪断真丝鱼尾裙之粗鲁手段代劳施救"
-        ],
-        "expression": "耳尖泛红微扬下颌维持巨星冷艳仪容以掩饰心扉慌乱",
-        "desire_range": [
-          2,
-          4
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "掌控红毯进退全局节奏之主导位"
-      },
-      "voices": {
-        "surface": "“别慌，别乱拉拽裙子，座椅转盘卡住了飘带挂扣，把大氅拿稳挡住窗户手电筒！”",
-        "inner": "“红毯压轴还有二十秒就要关门了，要是让车外的长焦镜头拍到裙子崩脱走光的样子……必须亲自挑开这个棘齿！”"
-      },
-      "schedule": [
-        {
-          "from": 1140,
-          "to": 1160,
-          "location_id": "loc_van_passenger_cabin"
-        },
-        {
-          "from": 1161,
-          "to": 1180,
-          "location_id": "loc_garage_entrance_ramp"
-        }
-      ],
-      "situation": {
-        "trigger": "急刹导致重型旋转航空座椅扭曲偏位咬死真丝礼服裙摆",
-        "pressure": "红毯压轴二十秒倒计时与车外疯狂拍砸玻璃走光双重险情",
-        "exits": [
-          {
-            "option": "反握不锈钢调色扁棒将铲刃探入滑槽死角施展四点二牛顿偏转巧劲",
-            "cost": "白嫩指节被金属滑槽边缘刮擦泛起深红压痕隐隐生疼"
-          },
-          {
-            "option": "朝助理打手势迅速扬起宽幅大披风隔绝外部窥探",
-            "cost": "黑色大氅外层被窗外挤压雨渍微蹭沾染污痕"
-          }
-        ]
-      },
-      "tags": [
-        "intimate"
-      ]
-    },
-    {
-      "id": "char_mayu_aide",
-      "gender": "female",
-      "gender_reason": "艺人贴身随行忠诚助理掌事人设",
-      "age_range": [
-        23,
-        24
-      ],
-      "adult_context": "全日制新闻传媒专修毕业二十三周岁成年随行特助，具备完全民事权柄。",
-      "public_role": "首席贴身助理",
-      "appearance_options": [
-        "干练短发配黑色职业西装套裙，眉眼精明动作迅捷，双手稳握大号遮光披毯随时待命。",
-        "神情高度戒备，侧身横在车门与后排过道之间，时刻准备用身躯与披毯筑起视线城墙。"
-      ],
-      "identity": {
-        "authority": "艺人贴身安全警戒与红毯随身物资调度权",
-        "resources": [
-          "随身常备纯黑厚实天鹅绒防走光大号披毯",
-          "应急备用高压冷风喷雾罐"
-        ],
-        "limits": [
-          "严禁任何外界媒体擅自拉开车门拍摄内部"
-        ],
-        "obligations": [
-          "以自身形体为女星遮挡外界一切探照与恶意镜头"
-        ],
-        "exposure": "若让女星受困窘态泄露，自身将遭受行业严厉谴责与职业断送。",
-        "hidden": "暗中备好防走光安全别针却深知女星绝不容许礼服出现任何破损痕迹。"
-      },
-      "decision": {
-        "core_value": "誓死捍卫艺人巅峰形象与舞台尊严",
-        "goal_options": [
-          "展开宽幅大氅严密遮蔽车窗强光协助女星脱离卡滞",
-          "向女星轻声通报车外人群疏散方位与倒计时秒数"
-        ],
-        "pressure_responses": {
-          "low": "沉着展平大氅两角，单足蹬住倾斜座椅横杠吸震护卫。",
-          "mid": "双手攥紧大氅边缘，高声喝止下方企图扒窗张望之好事者。",
-          "high": "奋不顾身用后背死死顶住倾斜门框，为好友争取黄金操作间隙。",
-          "breaking": "若车门被强拉开，便张开大氅用身躯彻底封死车门通道。"
-        },
-        "withdrawal": "危机排除后轻巧提上高定披肩，从容侍立女星身后护送入场。",
-        "relationship_stance": "视女星为至高荣耀之守护对象，对外围代拍媒体冰冷拒斥。",
-        "contrast": "平时温顺利落，护卫艺人名节时展现钢铁般之强悍意志。",
-        "prefers": [
-          "以自身形体构筑绝对视线盲区",
-          "用柔和暗语提示外部脚步声方位"
-        ],
-        "avoids": [
-          "惊慌失措地大声呼救，引来更多长焦镜头",
-          "在女星发力的关键一秒晃动座椅"
-        ],
-        "never": [
-          "绝不容许任何外人镜头捕捉到艺人丝毫狼狈瞬间"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "被女星关键时刻之冷静决绝与反差智慧深深折服",
-          "愿终生做其最坚实的后盾支撑"
-        ],
-        "likes": [
-          "有条不紊之应对方案",
-          "防风保暖之优质面料"
-        ],
-        "dislikes": [
-          "粗鲁轻浮之无端指责",
-          "危机时刻之推诿退缩"
-        ],
-        "preconditions": [
-          "协助破拆过程必须确保防风大氅始终如坚实帷幕般笼罩受困区域",
-          "配合动作严丝合缝天衣无缝"
-        ],
-        "boundaries": [
-          "绝不容许检修人员跨过安全线直视车厢内部窘迫情状",
-          "排斥外人未经女星同意擅自伸手拉扯挂死裙裾"
-        ],
-        "expression": "紧绷小脸张开双臂以坚定身姿筑起坚不可摧之阴影遮蔽",
-        "desire_range": [
-          1,
-          2
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "闺蜜身侧最可靠之近身掩护位"
-      },
-      "voices": {
-        "surface": "“各位请退后保持安全距离，女星正在进行最后登台准备！”",
-        "inner": "“旋转座椅底座咬死了礼服真丝飘带，要是车窗防爆膜被拍碎……{npc.name}必须立刻撑开大氅挡住！”"
-      },
-      "schedule": [
-        {
-          "from": 1140,
-          "to": 1160,
-          "location_id": "loc_van_passenger_cabin"
-        },
-        {
-          "from": 1161,
-          "to": 1180,
-          "location_id": "loc_vip_dressing_lounge"
-        }
-      ],
-      "situation": {
-        "trigger": "车窗防爆膜传来密集剧烈拍击震荡，代拍呼喊声近在咫尺",
-        "pressure": "艺人礼服撕裂走光危机与狂热粉丝破门冲击",
-        "exits": [
-          {
-            "option": "飞身展开双层厚天鹅绒大氅封死车窗所有照射光线",
-            "cost": "手臂发力紧绷肌肉酸痛发麻"
-          },
-          {
-            "option": "向女星报送侧向反作用力点支撑稳固脱扣重心",
-            "cost": "西装裙摆在车厢扶手边缘轻微磨蹭留痕"
-          }
-        ]
-      },
-      "tags": []
-    },
-    {
-      "id": "char_ando_driver",
-      "gender": "male",
-      "gender_reason": "沉稳老练保姆车专职特聘老车长人设",
-      "age_range": [
-        52,
-        55
-      ],
-      "adult_context": "五十二岁特聘特种车辆高级驾驶员，享有独立车辆处置安全监管职责。",
-      "public_role": "特聘专职车长",
-      "appearance_options": [
-        "身穿黑色制服戴白手套，面容沧桑神情凝重，眼神透着多年特勤驾驶之沉稳。",
-        "双目警惕盯紧仪表盘与后视镜，双手稳如泰山掌控方向盘，气度沉着。"
-      ],
-      "identity": {
-        "authority": "车辆行驶路线掌控与中控防暴安全锁闭独占权",
-        "resources": [
-          "车载中控紧急防暴门锁控制屏",
-          "后排座椅应急泄压切断扳钮"
-        ],
-        "limits": [
-          "不可逾越后排私密隔音屏风强探后舱"
-        ],
-        "obligations": [
-          "确保车辆安全准点将艺人送达红毯入口"
-        ],
-        "exposure": "若车辆遭冲击抛锚导致艺人受困迟到，难逃责任追究。",
-        "hidden": "暗中挂入低速挡微踩油门利用车身轻微震动辅助后排卡簧松动。"
-      },
-      "decision": {
-        "core_value": "车辆平稳行进与保护乘客绝对私密安全",
-        "goal_options": [
-          "持续鸣笛警示联动特勤安保强力清理通行匝道",
-          "遥控切断中排座椅供电防止电机过热自燃"
-        ],
-        "pressure_responses": {
-          "low": "盯着后视镜数清车外人头，压低嗓音报出哪一侧车窗最危险。",
-          "mid": "厉声喝令车外的人退后，同时把车门中控锁死，伸手去摸座椅电源保险盒。",
-          "high": "单手奋力扳倒车体气动回油泄压阀，迫使车门挤压应力下降三成。",
-          "breaking": "若人群强行破坏车门，立刻启动备用防暴喷雾驱散阻碍。"
-        },
-        "withdrawal": "平稳停靠贵宾门厅后下车笔直敬礼拉开车门。",
-        "relationship_stance": "对雇主女星极尽敬业守护，对狂热私生饭保持高度戒备。",
-        "contrast": "平日寡言少语，面对车道围堵时展现超凡避障车技。",
-        "prefers": [
-          "利用车辆动力学辅助后排机械释力",
-          "严格遵循安保规程绝不擅开后舱屏风"
-        ],
-        "avoids": [
-          "批准未经乘客首肯之野蛮破拆器具靠近受损车体",
-          "在电池起火浓烟弥漫关头慌张失态放弃指挥防线"
-        ],
-        "never": [
-          "绝不让任何不法人员靠近后座车门一步"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "对女星处变不惊之果决品性深为赞赏",
-          "敬重遇险不失端庄体面之青年骨气"
-        ],
-        "likes": [
-          "严整如一之抢修纪律",
-          "处变不惊之大将风度"
-        ],
-        "dislikes": [
-          "指手画脚之轻浮议论",
-          "慌不择路之失仪失态"
-        ],
-        "preconditions": [
-          "恪守社会公德与尊长互敬之文明规范",
-          "车停稳熄火、乘客都已安全下车之后"
-        ],
-        "boundaries": [
-          "严格恪守男女大防，非万不得已严禁擅入未加遮蔽之受损车厢",
-          "不许随车的年轻护卫拿手机对着后舱拍"
-        ],
-        "expression": "隔着隐私屏风沉声报出座椅电源已经切断，可以放心用力",
-        "desire_range": [
-          0,
-          1
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "掌控全盘大局之总指挥位"
-      },
-      "voices": {
-        "surface": "“小姐请坐稳，正在联系特勤队长清理前方匝道阻碍！”",
-        "inner": "“座椅旋转电机刚才发生逆向卡滞了，老夫必须稳住底盘平稳，给后排争取宝贵解套时机！”"
-      },
-      "schedule": [
-        {
-          "from": 1140,
-          "to": 1160,
-          "location_id": "loc_van_driver_cockpit"
-        },
-        {
-          "from": 1161,
-          "to": 1180,
-          "location_id": "loc_garage_entrance_ramp"
-        }
-      ],
-      "situation": {
-        "trigger": "匝道人群冲撞车头造成车辆急刹顿挫",
-        "pressure": "道路封堵延误红毯入场与车辆碰撞风险",
-        "exits": [
-          {
-            "option": "长按高音气喇叭震慑疏导堵塞车辆前行匝道",
-            "cost": "刺耳鸣笛声在地下车库回廊剧烈回荡"
-          },
-          {
-            "option": "精准点刹微调底盘扭力吸收侧向撞击冲量",
-            "cost": "刹车卡钳传来高温橡胶焦糊气息"
-          }
-        ]
-      },
-      "tags": []
-    },
-    {
-      "id": "char_kuro_security",
-      "gender": "male",
-      "gender_reason": "现场特勤安保指挥长官硬朗男性人设",
-      "age_range": [
-        42,
-        45
-      ],
-      "adult_context": "四十二岁大型盛典现场特勤安保主管，具备完全特勤防暴现场处置指挥权能。",
-      "public_role": "特勤安保队长",
-      "appearance_options": [
-        "身材高大结实，身穿纯黑战术战袍戴耳麦，目光如鹰面部轮廓刚硬如铸铁。",
-        "神情威严冷酷，手持防暴指挥短棍调度防线，周身散发特战特勤之威严。"
-      ],
-      "identity": {
-        "authority": "盛典外围特勤防线设立与违规代拍扣留清场权",
-        "resources": [
-          "特种防暴阻隔伸缩防线屏障",
-          "高强度激光防窥遮光强力幕墙"
-        ],
-        "limits": [
-          "不可无故侵犯贵宾私密乘车空间"
-        ],
-        "obligations": [
-          "确保压轴巨星车辆安全无虞抵达成展台通道"
-        ],
-        "exposure": "若红毯安保失控造成巨星走光丑闻将受公职撤职问责。",
-        "hidden": "早已看出车内突发状况正全力指挥人墙背对车窗阻隔长焦。"
-      },
-      "decision": {
-        "core_value": "秩序绝对掌控与捍卫红毯盛典安全底线",
-        "goal_options": [
-          "调集值班安保骨干挽手筑起阻隔防线隔断外界视线",
-          "在贵宾门厅外侧撑起高强度防窥帐篷遮蔽通道"
-        ],
-        "pressure_responses": {
-          "low": "按着耳麦沿车身走一圈，把贴得最近的几个代拍一个个请到警戒线外。",
-          "mid": "双臂一展把伸缩隔离带拉成一道弧，挡在车窗与人群之间。",
-          "high": "整个人背贴在车窗上，用后背挡住最近的那几支长焦。",
-          "breaking": "若有人强行破坏车门，直接率队上前将其强制带离现场。"
-        },
-        "withdrawal": "车门打开瞬间立正敬礼，亲自护卫巨星步入内场通道。",
-        "relationship_stance": "对狂热违法代拍深恶痛绝，对女星团队极尽专业护航。",
-        "contrast": "面容冷酷无情，实则处处以人墙背对形式维护女性艺人尊严。",
-        "prefers": [
-          "以绝对力量压制混乱维护现场秩序",
-          "用防窥屏障构筑安全登台通道"
-        ],
-        "avoids": [
-          "任何可能冒犯遇险名媛名誉之鲁莽窥看举动",
-          "用力过猛拉扯车门，让本就卡死的座椅再受一次冲击"
-        ],
-        "never": [
-          "绝不让任何非法代拍镜头逾越警戒线半步"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "被女星临危沉着不乱方寸之反差傲骨深深折服",
-          "敬重遇难不屈之坚韧品格"
-        ],
-        "likes": [
-          "令行禁止的队员",
-          "收工后一罐冰啤酒"
-        ],
-        "dislikes": [
-          "毫无根据之轻浮说辞",
-          "玩忽职守之隐患漏洞"
-        ],
-        "preconditions": [
-          "人群散尽、车门外再没有一支镜头之后",
-          "以绝对职业操守执行抢险任务"
-        ],
-        "boundaries": [
-          "严禁跨越安全界线擅自打量受困女乘客裙摆挂咬细节",
-          "绝对服从助理之视线遮蔽指令安排"
-        ],
-        "expression": "背对车门抹去满脸雨水大声通报下方支撑已稳固到位",
-        "desire_range": [
-          0,
-          1
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "外围基石般坚固之刚性支承位"
-      },
-      "voices": {
-        "surface": "“特勤一队立刻封锁B2匝道出口，背对车辆筑起人墙，违规代拍一律扣留！”",
-        "inner": "“保姆车门迟迟未开定是内部遇险了，必须给女星争取最后十五秒体面准备时间！”"
-      },
-      "schedule": [
-        {
-          "from": 1140,
-          "to": 1160,
-          "location_id": "loc_garage_entrance_ramp"
-        },
-        {
-          "from": 1161,
-          "to": 1180,
-          "location_id": "loc_vip_dressing_lounge"
-        }
-      ],
-      "situation": {
-        "trigger": "代拍人群试图冲破警戒线将长焦镜头贴紧车窗",
-        "pressure": "红毯倒计时最后读秒与现场防线崩溃危机",
-        "exits": [
-          {
-            "option": "跨前一步以魁梧身躯牢牢挡在保姆车窗正侧方",
-            "cost": "战术制服被拥挤人群扯拽泛起褶皱"
-          },
-          {
-            "option": "号令防暴分队撑起两米高专业黑色防窥遮挡屏风",
-            "cost": "消耗仅余之特勤机动防护装备"
-          }
-        ]
-      },
-      "tags": []
-    },
-    {
-      "id": "char_kiryu_stylist",
-      "gender": "female",
-      "gender_reason": "高定时尚界顶级女造型总监人设",
-      "age_range": [
-        30,
-        32
-      ],
-      "adult_context": "三十岁高定服装设计硕士高级造型顾问，依法享有完全独立民事执业资质，处女。",
-      "public_role": "高定造型总监",
-      "appearance_options": [
-        "利落金色波波头配极简深黑剪裁套裙，眼神犀利专业，腕上套满各式防走光暗针与真丝固定夹。",
-        "神情敏锐专注，手提轻便定制皮质工具箱，随时随地维持艺人礼服极致线条。"
-      ],
-      "identity": {
-        "authority": "高定礼服结构处置与临场修改决断权",
-        "resources": [
-          "进口无痕高分子真丝防撕裂加固喷膜",
-          "超薄隐形强力磁吸暗扣组"
-        ],
-        "limits": [
-          "不可损毁造价昂贵之孤品级高定手工刺绣面料"
-        ],
-        "obligations": [
-          "确保晚礼服在红毯行走时呈现完美无瑕绝美身姿"
-        ],
-        "exposure": "若礼服出现脱线走光事故将沦为时尚界行业笑柄。",
-        "hidden": "深知鱼尾裙后腰金属暗扣受拉形变极限，在车外急得手心冒汗。"
-      },
-      "decision": {
-        "core_value": "服装艺术极致美感与女性身姿完美展现",
-        "goal_options": [
-          "在脱扣瞬间以磁吸扣秒级修复飘带后摆",
-          "在门厅准备好备用丝绒披肩备用衔接"
-        ],
-        "pressure_responses": {
-          "low": "攥着对讲机贴在耳边，语速飞快地报出礼服后腰每一处暗扣的位置。",
-          "mid": "踩着高跟鞋一路小跑到匝道口，把备用披肩搭在手臂上待命。",
-          "high": "从车窗缝隙递进一枚磁吸暗扣，叮嘱脱扣之后立刻扣上。",
-          "breaking": "见礼服破损直接冲上前展开备用斗篷为女星披上。"
-        },
-        "withdrawal": "巡视红毯定格确认完美无瑕后优雅抚掌微笑退场。",
-        "relationship_stance": "将女星视作自身灵感缪斯，对粗鲁破坏礼服者深恶痛绝。",
-        "contrast": "言辞刻薄挑剔，实则对自家艺人爱护至极。",
-        "prefers": [
-          "以最小结构损伤方式修复礼服造型",
-          "提前备齐多套无痕防走光替代构件"
-        ],
-        "avoids": [
-          "在乘客施展巧劲关键瞬间盲目呼喊打乱其专注度",
-          "拿剪刀直接剪开咬死的真丝飘带救急"
-        ],
-        "never": [
-          "绝不容忍残破开裂之服装瑕疵出现在红毯闪光灯前"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "对女星时尚外表下之如钢傲骨深为爱惜与赞佩",
-          "看着自己做的礼服在闪光灯下完好无损地走完红毯"
-        ],
-        "likes": [
-          "手工钉珠在灯下的光",
-          "熨得一丝不苟的裙褶"
-        ],
-        "dislikes": [
-          "粗手粗脚的蛮力",
-          "随手剪布救急的外行"
-        ],
-        "preconditions": [
-          "礼服完好收进防尘袋、红毯已经收场",
-          "两人都清醒，心意出于自己"
-        ],
-        "boundaries": [
-          "试衣间的帘子拉上之前不谈私事",
-          "量身时手只放在该放的地方，越线之前先问"
-        ],
-        "expression": "替人整理领口时指尖多停半秒，嘴上却还在挑剔剪裁",
-        "desire_range": [
-          0,
-          1
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "全身镜前替人掐腰量身的近身位"
-      },
-      "voices": {
-        "surface": "“小姐千万别使劲扯飘带，那是法国纯手工真丝，顺着棘齿角度轻轻挑开！”",
-        "inner": "“这件孤品礼服造价三十万，若是腰线扯烂了，今晚的热搜就全毁了……必须保住！”"
-      },
-      "schedule": [
-        {
-          "from": 1140,
-          "to": 1160,
-          "location_id": "loc_vip_dressing_lounge"
-        },
-        {
-          "from": 1161,
-          "to": 1180,
-          "location_id": "loc_garage_entrance_ramp"
-        }
-      ],
-      "situation": {
-        "trigger": "车内对讲报出晚礼服真丝薄纱被底座钢轨死死咬合",
-        "pressure": "三十万高定礼服撕毁与红毯压轴形象破灭",
-        "exits": [
-          {
-            "option": "隔空用对讲机指点鱼尾裙受力脱扣之最佳角度",
-            "cost": "焦灼喊话导致精致妆容微现汗意"
-          },
-          {
-            "option": "在更衣室门口备好大号备用黑天鹅绒拖地披风",
-            "cost": "高跟鞋快步行走在硬化地面上发出急促声响"
-          }
-        ]
-      },
-      "tags": []
-    },
-    {
-      "id": "char_takahashi_engineer",
-      "gender": "male",
-      "gender_reason": "大型保姆车特种影音机械维保技师人设",
-      "age_range": [
-        45,
-        48
-      ],
-      "adult_context": "四十五岁高级机械电气维修工程师，具备特种车辆改装完全技术认证资格。",
-      "public_role": "特聘机械工程师",
-      "appearance_options": [
-        "戴细框防护眼镜身着工程连体服，手里攥着微型内窥检测仪，手指沾染机油痕迹。",
-        "神情专注冷静，对豪华商务车座椅滑轨内部棘爪咬合力学了如指掌。"
-      ],
-      "identity": {
-        "authority": "车辆特种机械故障应急处置与技术指导权",
-        "resources": [
-          "多功能微型超硬不锈钢内六角扳手",
-          "高渗透食品级机械润滑喷雾瓶"
-        ],
-        "limits": [
-          "严禁在电路短路隐患未明时擅动高压线束"
-        ],
-        "obligations": [
-          "指导车内人员在不伤及人员情况下排除自锁"
-        ],
-        "exposure": "若座椅改装件设计缺陷引发事故将承担连带责任。",
-        "hidden": "深知那款调色棒硬度完全足以撬开卡簧已在对讲中暗暗支招。"
-      },
-      "decision": {
-        "core_value": "机械物理逻辑严密性与微观解扣技巧",
-        "goal_options": [
-          "以专业力学口诀提示自锁棘爪泄力方位",
-          "在座椅彻底卡死前指明杠杆支点位置"
-        ],
-        "pressure_responses": {
-          "low": "熟练旋紧两枚防滑止动销，通过对讲机沉声通报锁孔受力公差。",
-          "mid": "趴在副驾座椅靠背上，用手电照着后排滑轨，报出棘爪的位置。",
-          "high": "把一支细长的碳纤维起子从隐私屏风缝隙递进后舱，充当第二个支点。",
-          "breaking": "险情不解直接携机械切割钳上前实施底盘断电拆卸。"
-        },
-        "withdrawal": "待脱困后默默捡起工具检测滑轨磨损数据记录入册。",
-        "relationship_stance": "对女星困境充满同情，对机械故障恪守科学排查原则。",
-        "contrast": "外表木讷少言，谈及机械传动结构时如数家珍。",
-        "prefers": [
-          "运用巧妙物理杠杆微调脱扣",
-          "用准确参数指引车内受困者自救"
-        ],
-        "avoids": [
-          "在车厢浓烟未散前擅自接通外接辅助高压电源",
-          "从正面盯着女星紧绷的抹胸前襟看"
-        ],
-        "never": [
-          "绝不容许野蛮锤击加剧金属齿轮形变咬合"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "女星只凭一根调色棒就挑开棘爪的那份腕力",
-          "敬佩时尚名媛通晓机械杠杆之敏锐慧根"
-        ],
-        "likes": [
-          "淬火冷锻的高硬度零件",
-          "分毫不差的装配公差"
-        ],
-        "dislikes": [
-          "粗制滥造的残次配件",
-          "毫无章法的乱敲乱打"
-        ],
-        "preconditions": [
-          "向车厢传递任何破拆工具必须经过闺蜜助理转手",
-          "车修好、工具收进箱子之后再谈别的"
-        ],
-        "boundaries": [
-          "严守工匠边界，工具交接完毕后立刻退至三米以外",
-          "女星脱困期间只盯着滑轨读数，眼睛不往别处瞟"
-        ],
-        "expression": "推了推细框眼镜，平稳报出右旋三十度的脱扣力矩",
-        "desire_range": [
-          0,
-          1
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "隐蔽可靠之机车技术援护位"
-      },
-      "voices": {
-        "surface": "“座椅旋转机构是单向三十六齿防逆卡槽，用硬扁棒顶住左侧簧片往右施加四牛顿巧劲就能弹开！”",
-        "inner": "“那个棘爪卡在死点了，只要用调色棒顶端斜插两毫米就能挑开弹簧，女星手劲一定能够做到！”"
-      },
-      "schedule": [
-        {
-          "from": 1140,
-          "to": 1160,
-          "location_id": "loc_van_driver_cockpit"
-        },
-        {
-          "from": 1161,
-          "to": 1180,
-          "location_id": "loc_vip_dressing_lounge"
-        }
-      ],
-      "situation": {
-        "trigger": "座椅电机爆出过载保护跳闸蜂鸣声",
-        "pressure": "机械零件永久卡死与电机过热故障",
-        "exits": [
-          {
-            "option": "通过对讲机口述调色棒插入之精准机械坐标",
-            "cost": "全神贯注凝视蓝图消耗精力"
-          },
-          {
-            "option": "指导前排车长断开后座辅助蓄电池电闸",
-            "cost": "前排控制屏弹出一连串警告代码"
-          }
-        ]
-      },
-      "tags": []
     }
   ],
   "locations": [
     {
       "id": "loc_van_passenger_cabin",
-      "name": "豪华保姆车中排贵宾舱",
-      "detail": "加长豪华商务车后舱双座奢华真皮包裹区域，中排电动旋转航空座椅发生三十度偏转扭绞抱死，滑轨紧紧咬死高定礼服裙边。",
+      "name": "保姆车贵宾舱",
+      "detail": "保姆车真皮后座，旋转座椅三十度咬住真丝鱼尾裙与纯银流苏暗扣。冷锻不锈钢调色棒搁扶手边，双层黑天鹅绒遮光大氅遮住半扇玻璃。",
       "privacy": "private",
-      "visibility": "车窗单向透视膜被外界密密麻麻强光手电逼近直射，同伴天鹅绒大氅形成唯一正面视线遮挡屏障。",
+      "visibility": "黑天鹅绒遮光大氅拉严即隔绝外界长焦，车内喘息声清晰贴耳。",
       "witnesses": [
-        "bg_cameraman_fan_1",
         "bg_bodyguard_aide_1"
       ],
       "exits": [
-        "loc_garage_entrance_ramp",
         "loc_van_driver_cockpit",
+        "loc_garage_entrance_ramp",
         "loc_vip_dressing_lounge"
       ],
       "affordances": [
-        "倒握冷锻扁棒铲刃探入滑槽实施微观物理力学撬卡自救",
-        "借助座椅铝合金侧护板为刚性支点施加四点二牛顿偏转反作用力",
-        "呼唤同行同伴撑起纯黑披风构建无死角暗影区"
+        "撑开大氅围出密室查看裙底咬合死角",
+        "反握冷锻调色棒撬挑棘齿顺势按腕讨价",
+        "大氅下掀高开叉摸索裙底隐秘逼签续约"
       ],
       "pressure_modifiers": {
-        "press_seat_slider_jam": "倾斜座椅机械自锁重载咬死真丝薄纱礼服暗扣"
+        "press_seat_rail_couture_jam": "钢轨咬死真丝发出细碎绷响，稍动高开叉便绷紧。",
+        "press_hidden_remote_blackmail": "扶手下开关微闪红点，大氅内热喘骤然失控。"
       },
-      "tags": []
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "loc_vip_dressing_lounge",
+      "name": "后台VIP试衣间",
+      "detail": "后台防爆软包门内独立试衣室，三折落地镜映出备用礼服架与丝绒暗屉。备用纯银流苏暗扣与披肩摊在妆台，厚门锁死外场喧嚣。",
+      "privacy": "private",
+      "visibility": "隔音软包门反锁无探头，镜前失态与解扣动作绝不外泄。",
+      "witnesses": [
+        "bg_stylist_assistant_1"
+      ],
+      "exits": [
+        "loc_van_passenger_cabin",
+        "loc_garage_entrance_ramp",
+        "loc_vip_parking_alcove"
+      ],
+      "affordances": [
+        "将高傲对手按在三折镜前解开后腰纯银暗扣",
+        "拉开丝绒暗屉翻出备用暗扣与量体密档",
+        "关掉半盏顶灯借整装之名逼签八位数附约"
+      ],
+      "pressure_modifiers": {
+        "press_bodice_clasp_frisk_trade": "三折镜照出敞开后背与暗藏银链，退无可退。",
+        "press_red_carpet_finale_lockout": "内线催促登台，镜前交易一秒比一秒滚烫。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "loc_van_driver_cockpit",
+      "name": "前排驾驶隔断舱",
+      "detail": "驾驶席与中控台区域，配装甲门锁屏、座椅断电开关与半升降雾化隔音屏风。香槟冰桶搁在扶手边，降下玻璃缝即看清后舱姿态。",
+      "privacy": "semi",
+      "visibility": "前风挡映出代拍手电杂光，降半截屏风即可锁死后排动静。",
+      "witnesses": [
+        "bg_van_captain_1"
+      ],
+      "exits": [
+        "loc_van_passenger_cabin",
+        "loc_garage_entrance_ramp"
+      ],
+      "affordances": [
+        "切断座椅电源保险盒泄压并隔屏风报导轨撬角",
+        "降半截雾化屏风暗核对存储卡与延时批文",
+        "长按气喇叭震退扒窗人群掩护后排交涉"
+      ],
+      "pressure_modifiers": {
+        "press_backstage_raw_card_extortion": "隔断玻璃映出修长镜头与存储卡，随时外传。",
+        "press_paparazzi_searchlight_siege": "前风挡被强光照白，对讲开关就在指尖外。"
+      },
+      "tags": [
+        "workplace",
+        "crime"
+      ]
     },
     {
       "id": "loc_garage_entrance_ramp",
-      "name": "地库贵宾进场红毯匝道",
-      "detail": "通往盛典主会场之弧形地下双车道匝道，两侧挤满手持长焦镜头与应援灯牌之狂热人群，闪光灯亮如白昼。",
+      "name": "地库贵宾红毯匝道",
+      "detail": "盛典唯一地下贵宾通道，防暴带外挤满举长焦单反的代拍与应援粉丝。镁光灯亮如白昼，车门开启即直面千万镜头。",
       "privacy": "public",
-      "visibility": "聚光灯与无数闪光灯将通道映照得纤毫毕现，任何车门缝隙微动都会引来长焦镜头集体聚焦。",
+      "visibility": "数百只长焦紧盯车门缝隙，衣下藏物失控几乎无法掩饰。",
       "witnesses": [
         "bg_cameraman_fan_1",
         "bg_reporter_paparazzi_1"
@@ -1028,1003 +372,2215 @@
       "exits": [
         "loc_van_passenger_cabin",
         "loc_van_driver_cockpit",
-        "loc_vip_dressing_lounge"
+        "loc_vip_dressing_lounge",
+        "loc_vip_parking_alcove"
       ],
       "affordances": [
-        "安保特勤队员手挽手构筑阻拦人墙",
-        "现场公关主管高声疏导狂热人群退后"
+        "令安保人墙背对车窗趁乱在门边私递存储卡",
+        "盯紧红毯电子钟向车内施压逼出让步",
+        "扯下遮光披毯掩护受困者跨步踏上红毯"
       ],
       "pressure_modifiers": {
-        "press_paparazzi_crowd_rush": "数百台长焦单反与手电筒刺目强光无缝包围"
+        "press_paparazzi_searchlight_siege": "强光穿透单向贴膜边缘，再拖三秒即被围死。",
+        "press_red_carpet_finale_lockout": "金色旋转门倒数灯亮起，司仪报幕震透车库。"
       },
-      "tags": []
+      "tags": [
+        "workplace_power",
+        "humiliation"
+      ]
     },
     {
-      "id": "loc_van_driver_cockpit",
-      "name": "保姆车前排驾驶操作舱",
-      "detail": "保姆车驾驶席与副驾控制台区域，配备防暴装甲门锁控制屏与全景环视倒车影像系统，与后舱有一道升降隔音隐私屏风相隔。",
-      "privacy": "semi",
-      "visibility": "前风挡玻璃受外界人群拍打，前排后视镜可清晰监视车辆四周地面动向。",
-      "witnesses": [
-        "bg_bodyguard_aide_1"
-      ],
-      "exits": [
-        "loc_van_passenger_cabin",
-        "loc_garage_entrance_ramp"
-      ],
-      "affordances": [
-        "老车长按下中控高压警笛鸣笛驱散人群",
-        "操控座椅主电源保险丝实施短路切断"
-      ],
-      "pressure_modifiers": {
-        "press_red_carpet_deadline": "距离主办方红毯压轴关门时刻仅余最后读秒"
-      },
-      "tags": []
-    },
-    {
-      "id": "loc_vip_dressing_lounge",
-      "name": "VIP休息室",
-      "detail": "盛典主入口内侧防爆钢门后方之恒温独立休息室，设有高档全身试衣镜、备用定制晚礼服与专属医疗妆造台。",
+      "id": "loc_vip_parking_alcove",
+      "name": "地库暗角监控室",
+      "detail": "立柱后方窄小电闸监控室，内锁铁门隔开人群喧嚣。墙面挂满匝道高清分屏与照明总闸刀，暗影死角只容两人贴肩站立。",
       "privacy": "private",
-      "visibility": "厚重隔音软包门阻断一切外界喧嚣，室内柔和暖光完全隔绝窥探视线。",
+      "visibility": "铁门反锁且处总机死角，分屏红光恰好照亮狭室里的博弈。",
       "witnesses": [
-        "bg_stylist_assistant_1"
+        "bg_producer_vip_1"
       ],
       "exits": [
-        "loc_van_passenger_cabin",
-        "loc_garage_entrance_ramp"
+        "loc_garage_entrance_ramp",
+        "loc_vip_dressing_lounge"
       ],
       "affordances": [
-        "女造型师迅速递上备用披肩与补妆喷雾",
-        "随行医护人员备好高跟鞋足踝防磨缓压垫"
+        "扳下匝道照明总闸制造五秒漆黑换取封口筹码",
+        "在分屏主机前拔走存储卡死锁把柄",
+        "反锁狭窄电闸间贴身逼问收贿流水与备份密码"
       ],
       "pressure_modifiers": {
-        "press_seat_slider_jam": "无外部直接物理压迫，环境安详稳固"
+        "press_paparazzi_searchlight_siege": "分屏显示车外长焦镜头距玻璃仅剩半尺。",
+        "press_backstage_raw_card_extortion": "主机正缓存后台抓拍信号，拔线就在瞬间。"
       },
-      "tags": []
-    }
-  ],
-  "cast_combos": [
-    {
-      "id": "combo_ruri_and_mayu",
-      "power_structure": "player_high",
-      "player_positions": [
-        "high"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "char_ruri_idol",
-        "char_mayu_aide"
-      ],
-      "tension_engine_ids": [
-        "eng_seat_slider_lock_timer",
-        "eng_assistant_cloak_blindzone"
-      ],
-      "chemistry": "顶流女星与贴身助理在名节危机下的绝对信任与生死相守死士情怀。",
-      "stakes": {
-        "resource_gap": "女星手握随身不锈钢调色扁棒实施自救，助理手托双层大氅构筑视线盲区。",
-        "limit_gap": "女星必须保全高定礼服完好无损，助理绝不可让女星走光姿态落入外界镜头。",
-        "meeting_reason": "商务车旋转底座机械构件卡滞锁死晚礼服红毯紧急避险现场。",
-        "irreplaceable_goal": "确保傲娇女星在迎宾大门关闭前体面无损脱出险境惊艳登场。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "char_ruri_idol",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 5,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 5,
-            "tension": 2
-          },
-          "reason": "跑过好几场通告、在后台打过照面的熟人，女星肯把后背交给这双手"
-        },
-        {
-          "a": "player",
-          "b": "char_mayu_aide",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 5,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 5,
-            "tension": 2
-          },
-          "reason": "同在车里护着女星的两个人，一个眼神就能分好工"
-        },
-        {
-          "a": "char_ruri_idol",
-          "b": "char_mayu_aide",
-          "stage": "committed",
-          "a_to_b": {
-            "trust": 5,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 5,
-            "tension": 2
-          },
-          "reason": "女星深信助理定能用大氅为自身遮尽车窗外一切恶意窥探"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "id": "combo_ruri_and_ando",
-      "power_structure": "switchable",
-      "player_positions": [
-        "high",
-        "equal",
-        "low"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "char_ruri_idol",
-        "char_ando_driver"
-      ],
-      "tension_engine_ids": [
-        "eng_paparazzi_glass_shatter"
-      ],
-      "chemistry": "傲娇顶流女星与忠诚老车长在行车突发事故中的互尊与技术默契。",
-      "stakes": {
-        "resource_gap": "车长掌控保姆车油门底盘动力，女星依仗平稳车身维持后排微观撬卡手感。",
-        "limit_gap": "车长必须确保车辆安全抵达，女星绝不在前排面前露出一丝慌乱失态。",
-        "meeting_reason": "地下匝道突遭狂热人群围堵急刹受困。",
-        "irreplaceable_goal": "确保车体稳定为后舱自救创造平稳无震动条件。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "char_ruri_idol",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 3
-          },
-          "reason": "同车跑过几趟通告，彼此知根知底"
-        },
-        {
-          "a": "player",
-          "b": "char_ando_driver",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 3
-          },
-          "reason": "老车长忠于职守爱护后辈之情怀"
-        },
-        {
-          "a": "char_ruri_idol",
-          "b": "char_ando_driver",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 3
-          },
-          "reason": "女星倚重老车长精湛车技稳住车身避免加剧座椅咬合"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "id": "combo_ruri_and_kuro",
-      "power_structure": "equal",
-      "player_positions": [
-        "equal"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "char_ruri_idol",
-        "char_kuro_security"
-      ],
-      "tension_engine_ids": [
-        "eng_seat_slider_lock_timer",
-        "eng_paparazzi_glass_shatter"
-      ],
-      "chemistry": "铁面无私特勤安保队长对当红女星之凛然保护与红毯死线催逼。",
-      "stakes": {
-        "resource_gap": "特勤队长手握数十名特勤防暴人墙，女星仅凭手中调色棒自解困顿。",
-        "limit_gap": "特勤队长必须在二十秒内让车辆通过，女星绝不容许车门被外力强行拉开走光受辱。",
-        "meeting_reason": "红毯盛典压轴入场通道受阻紧急疏导。",
-        "irreplaceable_goal": "在狂热粉丝人群冲垮车窗防线前完成礼服脱扣体面下车。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "char_ruri_idol",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 4
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 4
-          },
-          "reason": "巨星仪态与现场防暴条令之隔空试探"
-        },
-        {
-          "a": "player",
-          "b": "char_kuro_security",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 4
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 4
-          },
-          "reason": "特勤队长雷厉风行之职责重托"
-        },
-        {
-          "a": "char_ruri_idol",
-          "b": "char_kuro_security",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 4
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 4
-          },
-          "reason": "队长人墙筑起视线防线，女星以傲然仪容回报信任"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "id": "combo_ruri_and_takahashi",
-      "power_structure": "npc_high",
-      "player_positions": [
-        "low",
-        "equal"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "char_ruri_idol",
-        "char_takahashi_engineer"
-      ],
-      "tension_engine_ids": [
-        "eng_spatula_lever_breakout"
-      ],
-      "chemistry": "高级机械工程师技术口诀指引与当红女星超凡动手巧劲之完美呼应。",
-      "stakes": {
-        "resource_gap": "工程师谙熟座椅旋转底座棘爪微观咬合间隙，女星依凭指点发力实施撬卡脱扣。",
-        "limit_gap": "工程师严禁暴力蛮力损坏高精滑轨，女星绝不容许自锁弹簧崩断刮裂真丝裙身。",
-        "meeting_reason": "保姆车中排旋转座椅棘爪自锁微观力学解扣指导。",
-        "irreplaceable_goal": "以精准四点二牛顿角向剪切偏转力矩挑开簧舌达成脱困。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "char_ruri_idol",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 3
-          },
-          "reason": "技术专家对艺人处变不惊心智之钦佩"
-        },
-        {
-          "a": "player",
-          "b": "char_takahashi_engineer",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 3
-          },
-          "reason": "对专业机械力学知识之由衷敬服"
-        },
-        {
-          "a": "char_ruri_idol",
-          "b": "char_takahashi_engineer",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 3
-          },
-          "reason": "工程师惊叹女星精准施力微撬机关之过人灵性"
-        }
-      ],
-      "tags": []
-    }
-  ],
-  "tension_engines": [
-    {
-      "id": "eng_seat_slider_lock_timer",
-      "text": "旋转航空座椅电机抱死重载自锁，底座棘齿反向咬紧真丝飘带，二十秒内若不脱扣将彻底卡死电机断裂"
-    },
-    {
-      "id": "eng_paparazzi_glass_shatter",
-      "text": "车外数百狂热私生饭拍砸车窗致防爆膜龟裂，单向透视随时失效，强光随时直射礼服受困的窘迫死角"
-    },
-    {
-      "id": "eng_spatula_lever_breakout",
-      "text": "不锈钢调色扁棒具备高刚性截面，以四点二牛顿偏转力挑退防逆舌片可脱困"
-    },
-    {
-      "id": "eng_assistant_cloak_blindzone",
-      "text": "助理手托双层加厚天鹅绒大氅，在卡扣弹脱刹那飞身张开彻底掐断车门外部所有直射视线"
-    }
-  ],
-  "daily_activities": [
-    {
-      "id": "act_cosmetic_spatula_check",
-      "title": "出发前调色棒铲刃核验",
-      "location_ids": [
-        "loc_van_passenger_cabin"
-      ],
-      "duration_minutes": 20,
-      "beats": [
-        "细致检验金属修容调色器械直角端刃平整光滑无钝化",
-        "确认金属扁棒手柄防滑滚花握感舒适随时可用",
-        "将调色工具置入化妆包最顺手暗格以便应急取用"
-      ],
-      "hook_ids": [],
-      "start_minute": 1140,
-      "tags": []
-    },
-    {
-      "id": "act_ramp_security_patrol",
-      "title": "红毯地下匝道防暴巡检",
-      "location_ids": [
-        "loc_garage_entrance_ramp"
-      ],
-      "duration_minutes": 25,
-      "beats": [
-        "检查特勤队员防暴盾牌与阻隔绳网连接牢固度",
-        "核查现场代拍媒体记者证件并划定三米安全界线",
-        "测试应急对讲机在地下车库中继盲区之通话质量"
-      ],
-      "hook_ids": [],
-      "start_minute": 1150,
-      "tags": []
-    },
-    {
-      "id": "act_seat_swivel_testing",
-      "title": "航空座椅旋转电机调试",
-      "location_ids": [
-        "loc_van_passenger_cabin"
-      ],
-      "duration_minutes": 20,
-      "beats": [
-        "测试中排座椅电动旋转九十度回位阻尼平顺度",
-        "检查滑轨自锁限位卡榫与双向防逆棘齿咬合状态",
-        "确认紧急手动释放拉索处于正常待命状态"
-      ],
-      "hook_ids": [],
-      "start_minute": 1155,
-      "tags": []
-    },
-    {
-      "id": "act_wardrobe_steamer_prep",
-      "title": "鱼尾晚礼服防皱抚平整备",
-      "location_ids": [
-        "loc_vip_dressing_lounge"
-      ],
-      "duration_minutes": 20,
-      "beats": [
-        "以蒸汽熨斗细致抚平高定真丝鱼尾裙摆每一道褶痕",
-        "检查后腰暗藏纯银流苏挂扣咬合弹性确认顺畅",
-        "备齐抗撕裂加固喷剂与多规格防走光应急暗针"
-      ],
-      "hook_ids": [],
-      "start_minute": 1160,
-      "tags": []
-    },
-    {
-      "id": "act_cloak_curtain_steamer",
-      "title": "天鹅绒遮光大氅熨烫整理",
-      "location_ids": [
-        "loc_vip_dressing_lounge"
-      ],
-      "duration_minutes": 20,
-      "beats": [
-        "以软毛刷理顺双层厚黑天鹅绒披风表面顺滑绒毛",
-        "测试防风大氅暗扣在剧烈晃动下之闭合牢度",
-        "将大氅叠放于保姆车侧门触手可及处随时备战"
-      ],
-      "hook_ids": [],
-      "start_minute": 1165,
-      "tags": []
-    },
-    {
-      "id": "act_cockpit_sensor_tuning",
-      "title": "车载环视雷达灵敏度标定",
-      "location_ids": [
-        "loc_van_driver_cockpit"
-      ],
-      "duration_minutes": 25,
-      "beats": [
-        "校准中控超声波雷达对地下柱网盲区之测距精度",
-        "检查防暴中控门锁对意外拉拽之自动反锁逻辑",
-        "确认仪表盘红毯倒计时同步时钟准确无误"
-      ],
-      "hook_ids": [],
-      "start_minute": 1170,
-      "tags": []
-    },
-    {
-      "id": "act_lounge_clasp_unhook",
-      "title": "VIP休息室里替女星解开变形暗扣",
-      "location_ids": [
-        "loc_vip_dressing_lounge"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1430,
-      "beats": [
-        "红毯散场之后，女星回到VIP休息室反锁上软包门，鱼尾礼服后腰那枚被钢轨咬过的纯银暗扣变了形，怎么也解不开。",
-        "女星背对全身镜站定，把长卷发拢到一侧肩头，让人从后腰一点点拨开变形的暗扣，指腹擦过脊背时，镜子里那张冷艳的脸慢慢红到耳根。",
-        "暗扣弹开，真丝礼服顺着腰线往下一滑，女星按住胸前的抹胸没有回头：灯关一半……今晚的庆功宴，不去了。"
-      ],
       "tags": [
-        "intimate"
-      ]
-    },
-    {
-      "id": "act_lounge_makeup_off",
-      "title": "替女星卸掉舞台妆",
-      "location_ids": [
-        "loc_vip_dressing_lounge"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1240,
-      "beats": [
-        "VIP休息室里，女星坐在化妆镜前，假睫毛还没摘，把卸妆棉往人手里一塞，闭上眼仰起脸。",
-        "女星闭着眼说：轻一点。……卸完了你就能看见我素颜的样子，全公司只有经纪人见过，你是第二个。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_lounge_encore_private",
-      "title": "只唱给一个人的安可",
-      "location_ids": [
-        "loc_vip_dressing_lounge"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1350,
-      "beats": [
-        "庆功宴散场后，女星赤着脚站在休息室中央，礼服换成了宽大的卫衣，拿着话筒清唱一支没发表的情歌。",
-        "唱到副歌，女星放下话筒走过来：这首歌是写给谁的，你猜。……猜对了，奖励随你挑，我都愿意。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_lounge_no_schedule_morning",
-      "title": "没有通告的早晨",
-      "location_ids": [
-        "loc_vip_dressing_lounge"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 480,
-      "beats": [
-        "难得没有通告的早晨，女星裹着休息室的毯子窝在沙发上，素着脸，头发乱糟糟地翘着。",
-        "女星把手机扔到一边：经纪人说今天放假。……所以今天你也放假，哪儿都不许去。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    }
-  ],
-  "pressures": [
-    {
-      "id": "press_seat_slider_jam",
-      "title": "旋转座椅钢轨咬死高定鱼尾裙",
-      "source": "accident",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_van_passenger_cabin",
-        "loc_garage_entrance_ramp"
-      ],
-      "trigger": "车体急刹猛烈甩尾顿挫，座椅卡榫强力咬合真丝飘带暗带。",
-      "objective": "在真丝礼服被钢轨彻底扯裂走光前完成力矩脱扣自救，恢复从容仪态迎客。",
-      "choice": "是反握修容扁棒施展特定巧劲挑开锁舌，抑或强拉裙摆冒撕裂走光之险？",
-      "immediate": {
-        "text": "座椅金属滑轨咬入礼服真丝飘带，真丝面料受自重猛烈拉拽大面积紧绷濒临崩裂，红毯倒数急促长鸣。",
-        "minutes": 1
-      },
-      "near": {
-        "text": "车外代拍狂热呼喊声正伴随闪光灯手电逼近车门，车窗防爆膜裂纹肉眼可见蔓延。",
-        "deadline_minutes": 2
-      },
-      "far": {
-        "trigger": "钢轨卡死裙摆撕裂走光，在车外数百名代拍长焦镜头众目睽睽下被拉出车外彻底社死。",
-        "consequence": "女星顶流名星清誉尽失，全网热搜将长久流传此段受辱事故终生蒙垢。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "反执不锈钢修容工具探入齿槽缝隙施展特定脱扣力矩",
-          "cost": "白皙指节被生铁导轨边缘刮擦泛起道道深红压痕生疼"
-        },
-        {
-          "option": "示意助理迅速撑开纯黑天鹅绒防风大披毯下摆遮挡外部探照直射强光暗中脱身",
-          "cost": "厚重大氅被车窗外呼啸气流猛烈抽打几乎脱手卷飞"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1145,
-      "tags": [
-        "disaster"
-      ]
-    },
-    {
-      "id": "press_paparazzi_crowd_rush",
-      "title": "代拍围堵拍砸车窗强光曝光",
-      "source": "person",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_garage_entrance_ramp"
-      ],
-      "trigger": "特勤队长哨音大作，数台大功率强光手电光斑直射保姆车单向玻璃。",
-      "objective": "封阻外部强光直射女星紧绷受困身姿以守全顶流尊严。",
-      "choice": "是号令车长鸣响防暴气喇叭驱散近处人群，抑或令助理立即飞身拉上天鹅绒窗帘？",
-      "immediate": {
-        "text": "防爆强光手电光斑打在车窗防爆膜上，无数长焦镜头穿透玻璃反光对准受困女星后腰系带。",
-        "minutes": 1
-      },
-      "near": {
-        "text": "狂热人群手指已经抓摸车门把手仅余一层薄铁皮相隔。",
-        "deadline_minutes": 2
-      },
-      "far": {
-        "trigger": "车门把手被狂热外力强行拉脱彻底曝光受窘姿态",
-        "consequence": "顶流偶像衣衫紧绷受窘之态被千万倍率长焦镜头拍下公之于众，璀璨星途荡然无存。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "号令车长长鸣防暴气喇叭震退窗外狂热代拍人群",
-          "cost": "刺耳鸣笛声在幽闭车厢内引发强烈耳鸣"
-        },
-        {
-          "option": "命助理拉展厚重天鹅绒披风挡在车门玻璃正前方",
-          "cost": "助理单薄身姿承受人群拍窗之剧烈震颤"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1148,
-      "tags": []
-    },
-    {
-      "id": "press_red_carpet_deadline",
-      "title": "盛典红毯压轴入场关门死线",
-      "source": "institution",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_garage_entrance_ramp"
-      ],
-      "trigger": "对讲机传出红毯司仪开场报幕声，压轴贵宾候场仅余二十秒最后读秒。",
-      "objective": "赶在盛典转播红毯大门彻底关闭前从容下车登台。",
-      "choice": "是必须在十五秒内完成卡槽挑脱滑步下车，抑或放弃压轴红毯全面弃权？",
-      "immediate": {
-        "text": "压轴明星登台音乐已经奏响，若未能在二十秒内挽裙踏上红毯将被全网通报耍大牌弃赛。",
-        "minutes": 1
-      },
-      "near": {
-        "text": "红毯迎宾大门金色旋转门倒计时灯带亮起刺目红光。",
-        "deadline_minutes": 2
-      },
-      "far": {
-        "trigger": "红毯大门锁闭转播切断引发全网舆论海啸",
-        "consequence": "女星遭受主办方天价违约索赔，多年积累之顶级口碑一朝付诸东流。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "手腕爆发偏转剪切力矩彻底弹开自锁簧舌",
-          "cost": "反冲震力让纤细手腕关节泛起微麻痛感"
-        },
-        {
-          "option": "在卡扣松脱瞬间借座椅反弹势头单足踏出车门飘然提裙",
-          "cost": "真丝鱼尾裙下摆掠过湿冷迎宾台阶微溅水花"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1152,
-      "tags": []
-    },
-    {
-      "id": "press_couture_gown_rip",
-      "title": "三十万高定孤品礼服撕裂危机",
-      "source": "accident",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_van_passenger_cabin"
-      ],
-      "trigger": "鱼尾裙后腰法国纯手工蕾丝传来微弱纤维崩裂轻响。",
-      "objective": "在真丝刺绣面料发生不可逆大面积撕破前无损脱扣。",
-      "choice": "是顺应棘齿角度以扁棒轻微外挑泄力，抑或动用蛮力硬扯碰运气？",
-      "immediate": {
-        "text": "真丝面料经纬纱线紧绷至透明极限，稍微横向拉扯一公分整条侧缝便会当场撕开走光。",
-        "minutes": 1
-      },
-      "near": {
-        "text": "礼服后背拉链暗扣受力变形发出细微金属脆响。",
-        "deadline_minutes": 2
-      },
-      "far": {
-        "trigger": "孤品礼服彻底崩裂春光大泄",
-        "consequence": "高级定制时装屋追究毁灭性损毁赔偿，时尚界终身封杀品牌合作机会。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "严格依照造型师口诀以三十度倾角平推调色棒直角硬棱",
-          "cost": "心神高度凝练容不得一丝毫厘偏差"
-        },
-        {
-          "option": "将备用真丝手帕垫入钢轨支点与礼服边缘之间分散压强",
-          "cost": "真丝手帕被挤压磨损彻底报废"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1154,
-      "tags": [
-        "disaster"
-      ]
-    },
-    {
-      "id": "press_muscle_spasm_fatigue",
-      "title": "高跟鞋扭曲受限下肢抽筋脱力",
-      "source": "accident",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_van_passenger_cabin"
-      ],
-      "trigger": "女星十公分细高跟鞋别在座椅底座凹槽，足弓紧绷神经隐隐痉挛。",
-      "objective": "避免下肢足踝发生剧烈扭伤与登台摔跌失仪危机。",
-      "choice": "是咬牙调整重心以脚跟借力站直，抑或稍微下伏身体缓解足底抽筋？",
-      "immediate": {
-        "text": "为减轻礼服拉力，女星侧身弓步受限逾两分钟，细高跟鞋底受压足弓传来酸麻痉挛先兆。",
-        "minutes": 1
-      },
-      "near": {
-        "text": "小腿腓肠肌紧绷发硬知觉迟钝达临界点。",
-        "deadline_minutes": 2
-      },
-      "far": {
-        "trigger": "下肢脱力抽筋失衡在红毯上当场跌倒受辱",
-        "consequence": "顶流偶像因肢体失控摔倒于众目睽睽之下，威严尽失且导致韧带严重拉伤。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "以脚尖稳稳别住座椅导轨边缘防滑凹槽瞬间发力蹬直膝盖",
-          "cost": "小腿肌肉传来骤然充血之酸麻紧绷感"
-        },
-        {
-          "option": "脱扣刹那将部分体力量重心巧妙倚靠于助理怀中大氅",
-          "cost": "助理娇躯微晃拼死支撑重心"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1156,
-      "tags": [
-        "disaster"
-      ]
-    },
-    {
-      "id": "press_spatula_bending_risk",
-      "title": "不锈钢调色扁棒超载微弯折断",
-      "source": "nature",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_van_passenger_cabin"
-      ],
-      "trigger": "技师在对讲机中提醒工具咬合受力角已达临界极限。",
-      "objective": "在不锈钢力学弹性极限内达成微观解脱脱扣以保全工具不折。",
-      "choice": "是严格恪守三十度斜倾精准顺角发力，抑或另选沉重木桩勉强支撑？",
-      "immediate": {
-        "text": "四点二牛顿剪切力矩已接近调色扁棒之微观形变极限，施力角度稍偏扁棒将发生弯曲折断。",
-        "minutes": 1
-      },
-      "near": {
-        "text": "金属调色扁棒传来微不可察之高频微震啸鸣。",
-        "deadline_minutes": 2
-      },
-      "far": {
-        "trigger": "调色扁棒发生永久性折断损坏无法修复",
-        "consequence": "唯一破拆工具断裂导致彻底丧失自救可能，只能任由粗暴外力破坏解脱彻底蒙垢。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "遵循工学指引以三十度角度平推扁棒直角端头",
-          "cost": "右侧拇指外侧肌腱承受强力压迫泛起酸麻"
-        },
-        {
-          "option": "在棘齿咔哒脱扣瞬间立刻平滑抽回调色棒避免多余磨损",
-          "cost": "手腕韧带承受微量骤然卸荷冲击"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1158,
-      "tags": [
-        "disaster"
+        "intimate",
+        "crime"
       ]
     }
   ],
-  "twists": [
+  "character_templates": [
     {
-      "id": "twist_hidden_catch_mechanism",
-      "category": "人事",
-      "text": "旋转航空座椅导轨内部竟暗藏双向阻尼防脱棘齿，唯有朝逆向精准施加特定剪切力矩方能挑退逆止舌片！"
+      "id": "char_ruri_idol",
+      "gender": "female",
+      "gender_reason": "标题角色“红毯夹裙女明星”，高傲顶流女皇与裙下暗癖失守反差为核心张力，固定女性。",
+      "age_range": [
+        22,
+        27
+      ],
+      "adult_context": "出道五年的二十二岁以上成年顶流影后，名下工作室全权自负盈亏。",
+      "public_role": "国民顶流女明星",
+      "appearance_options": [
+        "乌黑长卷挽低髻，露背高开叉真丝鱼尾礼服配纯银流苏暗扣，裙摆咬死钢轨仍扬颌冷睨。",
+        "褪披风后抹胸微滑露雪肩，细高跟歪踩地毯，反握冷锻不锈钢调色棒撑住体面。"
+      ],
+      "identity": {
+        "authority": "掌顶流舆论号召力、工作室投资否决与品牌续约议价权",
+        "resources": [
+          "化妆盒二毫米冷锻不锈钢调色棒",
+          "足以砸毁品牌股价的撤约声明权"
+        ],
+        "limits": [
+          "鱼尾裙被钢轨卡死，硬扯必大面积裂开走光",
+          "窗外数百长焦随时拍实狼狈窘态"
+        ],
+        "obligations": [
+          "保住压轴体面登台与千万代言身价"
+        ],
+        "exposure": "私签对赌背负违约窟窿，急需保住今晚八位数续约。",
+        "hidden": "为应付后台赌约与秘癖，特定局高定裙下竟暗戴静音无线遥控跳蛋、925纯银细链乳夹与蕾丝腿环束缚带。"
+      },
+      "decision": {
+        "core_value": "死不在闪光灯前丢脸，密室欠的债关门再算。",
+        "goal_options": [
+          "拿调色棒挑开棘齿体面下车",
+          "大氅后死守裙底秘密拿回续约权"
+        ],
+        "pressure_responses": {
+          "low": "扬颌冷声差人遮窗，指尖稳探钢轨卡槽。",
+          "mid": "冷斥手别碰抹胸，死把着调色棒斜角度。",
+          "high": "背抵真皮座忍住异样颤栗，拿封杀令反威胁。",
+          "breaking": "腿软夹紧丝裙滑入大氅阴影，眼尾红透低喘不许看。"
+        },
+        "withdrawal": "脱扣后冷脸抚平鱼尾裙褶，挽披风从容踏出车门。",
+        "relationship_stance": "平日谁不放在眼里，偏偏被拽大氅识破裙底秘密时嘴硬又脆弱。",
+        "contrast": "台上冰清女神，真被隔真丝按住暗扣或开关时反应比谁都烫。",
+        "prefers": [
+          "嘴严手稳、真敢按住她谈条件的狠人"
+        ],
+        "avoids": [
+          "毛手毛脚硬撕高定面料的蠢货"
+        ],
+        "never": [
+          "车门大开时让外人镜头扫到狼狈模样"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "喧嚣中一甩大氅将她整个人罩进黑暗的压迫感",
+          "识破裙底秘密仍递调色棒帮撬棘齿的坏心眼"
+        ],
+        "likes": [
+          "大氅阴影里隔真丝按压后腰流苏暗扣",
+          "被掐住高开叉露出的蕾丝腿环束缚带低声逼问"
+        ],
+        "dislikes": [
+          "炫耀偷拍威胁的无赖"
+        ],
+        "preconditions": [
+          "大氅封死车窗且外头听不清声响时",
+          "退路卡死、嘴硬冷斥腿弯已发软时"
+        ],
+        "boundaries": [
+          "上红毯前须把鱼尾裙整得一丝不苟"
+        ],
+        "expression": "攥皱前襟偏过红耳：‘调色棒递来……多摸一下封杀你。’",
+        "desire_range": [
+          4,
+          5
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "台前万众仰望、帷幕后任共犯拿捏的高岭花"
+      },
+      "voices": {
+        "surface": "“拿稳大氅挡玻璃！谁敢剪裙子我告到倾家荡产！”",
+        "inner": "腿环快勒进肉里了……别让那双手再往高开叉里滑！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_vip_dressing_lounge"
+        },
+        {
+          "from": 181,
+          "to": 1200,
+          "location_id": "loc_van_passenger_cabin"
+        },
+        {
+          "from": 1201,
+          "to": 1439,
+          "location_id": "loc_vip_dressing_lounge"
+        }
+      ],
+      "situation": {
+        "trigger": "急刹卡死鱼尾裙暗扣，窗外长焦逼近且钢轨越咬越紧。",
+        "pressure": "压轴读秒迫近，礼服随时撕裂且裙底秘密岌岌可危。",
+        "exits": [
+          {
+            "option": "强忍破皮硬用不锈钢调色棒三十度别退棘齿",
+            "cost": "指节刮破渗血染红内衬，登台需藏手遮掩"
+          },
+          {
+            "option": "默许同伴入大氅摸索解扣并签八位数续约让步",
+            "cost": "裙下暗藏秘密尽落对方手里，任凭传唤"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "humiliation"
+      ]
     },
     {
-      "id": "twist_sacred_spatula_toughness",
-      "category": "资源",
-      "text": "女星随身携带之修容扁棒乃德国医用级冷锻材质，其两毫米铲刃恰好分毫不差吻合棘齿卡槽微隙！"
+      "id": "char_brand_pr_director",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        30,
+        38
+      ],
+      "adult_context": "奢牌大中华区公关总监，三十岁以上握千万合同签批权的成年高管。",
+      "public_role": "高定品牌方公关总监",
+      "appearance_options": [
+        "烟灰双排扣西装配丝巾，指尖捏纯银备用暗扣与续约函，笑得礼貌挑剔。",
+        "解袖扣倾身倚车门框，领带夹泛冷光，目光直往狼狈裙边落。"
+      ],
+      "identity": {
+        "authority": "掌三十万孤品追赔权与八位数代言续约签字权",
+        "resources": [
+          "红毯延时入场令及备用纯银流苏暗扣",
+          "后台赌局留存的无线遥控开关与保密附约"
+        ],
+        "limits": [
+          "私吞样衣回扣正被总社审计紧盯",
+          "孤品撕毁自己也要引咎辞职"
+        ],
+        "obligations": [
+          "保品牌压轴完美曝光并保住总监位子"
+        ],
+        "exposure": "私挪大额样衣回扣填补投机亏空的秘密账本。",
+        "hidden": "表面最重体面礼节，实迷恋趁试衣或夹裙把高冷顶流压入阴影试探暗扣底线。"
+      },
+      "decision": {
+        "core_value": "签字笔在我兜里，孤品出事拿贴身条件填。",
+        "goal_options": [
+          "趁夹裙逼签苛刻降价附约",
+          "掩盖回扣亏空掌控顶流把柄"
+        ],
+        "pressure_responses": {
+          "low": "看表报秒提醒三十万赔偿金。",
+          "mid": "拉大氅挡门拿银扣贴腰窝讨价。",
+          "high": "回扣掀开笑僵，拽领口求私了。",
+          "breaking": "丝巾扯松抵镜边低喘签续约。"
+        },
+        "withdrawal": "退车外理平西装，冷脸催主办方。",
+        "relationship_stance": "惯拿金主刁难人，撞上反咬狠角即溃。",
+        "contrast": "平时斯文克制，被按座搜身交遥控时喉结敏感。",
+        "prefers": [
+          "敢拽{npc.ta}领带扯进大氅反咬的硬骨头"
+        ],
+        "avoids": [
+          "哭闹失态拖品牌下水的蠢人"
+        ],
+        "never": [
+          "让样衣回扣审计单流上董事桌"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "傲慢巨星赔压下咬唇耳红的屈辱模样",
+          "反撕{npc.ta}笑面、抢走遥控器的强悍反扑"
+        ],
+        "likes": [
+          "借验暗扣隔丝绸摩挲敏感腰窝",
+          "镜前被迫交遥控与回扣账的低喘对峙"
+        ],
+        "dislikes": [
+          "搞破礼服的粗鲁蛮力"
+        ],
+        "preconditions": [
+          "大氅拉严借搜检贴近逼问时",
+          "回扣被攥只能密室让步换闭嘴时"
+        ],
+        "boundaries": [
+          "通稿里双方关系须维持体面双赢"
+        ],
+        "expression": "摩挲银扣贴耳：‘续约带着……钻披风里让我验诚意。’",
+        "desire_range": [
+          4,
+          5
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "握续约笔又甘受反制的金主共谋"
+      },
+      "voices": {
+        "surface": "“孤品三十万起赔。想延时入场，关门说说怎么抵？”",
+        "inner": "明早审计查回扣……今晚必须把这位签死在船上。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_vip_dressing_lounge"
+        },
+        {
+          "from": 181,
+          "to": 1200,
+          "location_id": "loc_van_passenger_cabin"
+        },
+        {
+          "from": 1201,
+          "to": 1439,
+          "location_id": "loc_vip_dressing_lounge"
+        }
+      ],
+      "situation": {
+        "trigger": "鱼尾裙卡死濒裂，同时总社查样衣回扣急讯弹出。",
+        "pressure": "压轴失约或查账曝光都让自己瞬间清零。",
+        "exits": [
+          {
+            "option": "撕毁延时批文撤出赞助撇清连带责罚",
+            "cost": "与顶流反目，丢光年度最大代言矩阵"
+          },
+          {
+            "option": "拉大氅借验扣讨封口或交遥控换销账",
+            "cost": "与艺人结成互相捏死七寸的地下绑缚"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
     },
     {
-      "id": "twist_garage_light_cut",
-      "category": "时限",
-      "text": "地库贵宾入口照明电路突发跳闸断电数秒，黑暗为女星暗中微撬卡榫赢得了最宝贵之黄金五秒！"
+      "id": "char_kiryu_stylist",
+      "gender": "female",
+      "gender_reason": "毒舌高定造型总监，昔日同窗闺蜜宿敌与亲手设暗扣的对手戏为其核心，固定女性。",
+      "age_range": [
+        28,
+        35
+      ],
+      "adult_context": "高定设计硕士兼造型总监，二十八岁以上独立执业的成年设计师。",
+      "public_role": "高定造型总监",
+      "appearance_options": [
+        "浅金短发配深V黑西装裙，腕串别针银链扣，眉眼犀利如刀。",
+        "指尖夹量衣软尺逼近车门，嘴角勾着看戏般的冷艳讥笑。"
+      ],
+      "identity": {
+        "authority": "掌孤品结构微调权、贴身量体密档及备用礼服调度",
+        "resources": [
+          "无痕加固喷雾及备用纯银流苏暗扣组",
+          "弹簧暗扣逆向解角与925纯银细链乳夹"
+        ],
+        "limits": [
+          "抄袭欧洲工坊手稿把柄正被人捏着",
+          "礼服出事自己也在时尚圈彻底臭名"
+        ],
+        "obligations": [
+          "掩住抄袭手稿并让战袍完整走出镜头"
+        ],
+        "exposure": "压轴孤品鱼尾剪裁抄自昔日室友未发表遗稿。",
+        "hidden": "试衣系扣时故意把那对925纯银细链乳夹与易卡死防逆暗扣一并留进抹胸内衬看她出丑。"
+      },
+      "decision": {
+        "core_value": "再光鲜的巨星，试衣间脱衣也得听我尺子量。",
+        "goal_options": [
+          "借解扣撕破外壳讨回嫉恨利息",
+          "原稿曝光前买断封口保住头衔"
+        ],
+        "pressure_responses": {
+          "low": "弹皮尺冷嘲身材走样，故意慢报角度。",
+          "mid": "探入大氅阴影精准刮过抹胸银链。",
+          "high": "抄袭手稿亮出笑僵，拉紧帘子讨饶。",
+          "breaking": "西装扯乱抵镜红眼咬唇求别毁名声。"
+        },
+        "withdrawal": "退妆台抽细烟，补口红端回冷傲态。",
+        "relationship_stance": "妒忌同窗上神坛，又迷恋按镜前揉乱。",
+        "contrast": "嘴上女魔头，抄袭铁证按腰窝软最快。",
+        "prefers": [
+          "敢掀工具箱把细链反扣回她身上的狠人"
+        ],
+        "avoids": [
+          "胡乱剪布破坏美感的外行"
+        ],
+        "never": [
+          "让抄袭手稿流上明早时尚头条"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "顶流在银链拉扯下眼湿死撑冷脸的艳色",
+          "识破恶作剧反被量衣尺绑腕抵穿衣镜"
+        ],
+        "likes": [
+          "借量体调扣贴肤摩挲肩胛腰窝",
+          "拿925纯银细链乳夹试探或反受其制"
+        ],
+        "dislikes": [
+          "粗野弄皱真丝刺绣的蛮力"
+        ],
+        "preconditions": [
+          "试衣间反锁贴身量体或大氅遮严时",
+          "抄袭把柄被拿住服从换销稿时"
+        ],
+        "boundaries": [
+          "绝不亲手剪坏这套鱼尾礼服"
+        ],
+        "expression": "皮尺勾后颈笑：‘暗扣卡死……求我才教你怎么拆。’",
+        "desire_range": [
+          4,
+          5
+        ],
+        "self_control_range": [
+          2,
+          3
+        ],
+        "desired_position": "镜前掌控肌肤尺寸的毒舌宿敌"
+      },
+      "voices": {
+        "surface": "“真丝拉到极限了，乱动当众裂开。角度我心里有数。”",
+        "inner": "抹胸里的纯银暗扣还顶着……手稿漏出去今晚就毁了。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_vip_dressing_lounge"
+        },
+        {
+          "from": 181,
+          "to": 1200,
+          "location_id": "loc_vip_dressing_lounge"
+        },
+        {
+          "from": 1201,
+          "to": 1439,
+          "location_id": "loc_van_passenger_cabin"
+        }
+      ],
+      "situation": {
+        "trigger": "车内报暗扣咬死，同时有人发来抄袭遗稿高清拍片。",
+        "pressure": "不摆平拍片并救礼服，天亮便遭时尚圈除名。",
+        "exits": [
+          {
+            "option": "硬扛除名威胁死不吐露撬点角度拖到结束",
+            "cost": "鱼尾裙损毁且抄袭丑闻遭全网群嘲封杀"
+          },
+          {
+            "option": "递出备用解扣钥匙并任人在镜前讨回戏弄利息",
+            "cost": "女魔头自尊扫地，被捏死把柄任凭差遣"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "humiliation"
+      ]
     },
     {
-      "id": "twist_aide_absolute_loyalty",
-      "category": "关系",
-      "text": "助理早在大氅内衬缝制了双层防透光加厚天鹅绒暗衬，在展开刹那完美隔绝所有近距离高清单反长焦镜头之窥探！"
+      "id": "char_mayu_aide",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        24,
+        31
+      ],
+      "adult_context": "全日制传媒大学毕业二十四周岁以上成年特助，掌艺人核心行程事务。",
+      "public_role": "首席贴身执行特助",
+      "appearance_options": [
+        "西装套裙配黑丝袜，双臂展平双层黑天鹅绒遮光大氅冷静如铁壁。",
+        "横身挡住车门过道，耳麦滑肩窝，眼神紧锁怀中护着的人。"
+      ],
+      "identity": {
+        "authority": "掌遮光大氅遮蔽权、保险柜密钥与随行物资",
+        "resources": [
+          "双层加厚黑天鹅绒遮光大氅与冷雾喷罐",
+          "云端加密的艺人历年私密行程酒店签单原档"
+        ],
+        "limits": [
+          "外围代拍太密快挡不住车窗",
+          "备份行程秘档的越权记录败露即解雇"
+        ],
+        "obligations": [
+          "用躯体和披风守死后舱不让春光外泄"
+        ],
+        "exposure": "私自拷贝艺人全部私人行踪与房卡账单作后手。",
+        "hidden": "人前恭顺如忠仆，实看透顶流衣下每一道秘密，渴望在披风罩死时反客为主独占温柔。"
+      },
+      "decision": {
+        "core_value": "外头镜头我挡，大氅里头的事咱俩定。",
+        "goal_options": [
+          "撑大氅筑盲区悄悄越过主从界限",
+          "借行程备份留住身边最重要席位"
+        ],
+        "pressure_responses": {
+          "low": "展平大氅踩稳门槛喝退代拍。",
+          "mid": "半跪座椅间凑耳借遮掩扶腰窝。",
+          "high": "越权被破眼红仍撑紧大氅不放。",
+          "breaking": "罩在后排哑声交密钥求别赶走。"
+        },
+        "withdrawal": "待贵宾踏上红毯退入阴影叠大氅。",
+        "relationship_stance": "外人前死忠，遮严后偏执占有混一团。",
+        "contrast": "平时干练冷肃，耳垂贴大氅时语无伦次。",
+        "prefers": [
+          "肯拽{npc.ta}衣角同躲阴影喘气的同谋"
+        ],
+        "avoids": [
+          "乱拉车门不顾名节的莽保安"
+        ],
+        "never": [
+          "把行程原档卖给八卦媒体"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "披风里呼吸交融、巨星靠肩卸力的时刻",
+          "识破秘档却仍紧扣{npc.ta}手腕的默契"
+        ],
+        "likes": [
+          "大氅当帷幕隔绝外界贴身掩护",
+          "窄座十指交扣抵滑轨支点的触碰"
+        ],
+        "dislikes": [
+          "过河拆桥把人当工具甩开"
+        ],
+        "preconditions": [
+          "大氅封死透光、喧嚣隔开时",
+          "秘档暴露或需贴身共渡险关时"
+        ],
+        "boundaries": [
+          "绝不容外围拍到半点狼狈画面"
+        ],
+        "expression": "拉严大氅贴耳：‘外头挡死了……抓紧我慢慢撬。’",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          3,
+          4
+        ],
+        "desired_position": "帷幕内最贴近呼吸的影子共犯"
+      },
+      "voices": {
+        "surface": "“全员退后三米！敢拍窗一律按侵权扣机！”",
+        "inner": "手腕酸了……大氅再落两寸谁也看不清里面。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_vip_dressing_lounge"
+        },
+        {
+          "from": 181,
+          "to": 1200,
+          "location_id": "loc_van_passenger_cabin"
+        },
+        {
+          "from": 1201,
+          "to": 1439,
+          "location_id": "loc_vip_dressing_lounge"
+        }
+      ],
+      "situation": {
+        "trigger": "代拍狂砸防爆膜且行程备份被查房警报响起。",
+        "pressure": "门随时拉脱，私人越权记录也面临暴露。",
+        "exits": [
+          {
+            "option": "后背死顶车门硬扛拍打直到安保赶来清场",
+            "cost": "肩背撞青西装撕破，行程备份留战后清算"
+          },
+          {
+            "option": "钻入大氅内部交出行程密匙换互锁共犯",
+            "cost": "主从界限焚毁，沦为密室附庸或共主"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
     },
     {
-      "id": "twist_engineer_secret_code",
-      "category": "信息",
-      "text": "技师利用通讯设备精确报出棘齿受力夹角，助女星看清破拆支点！"
+      "id": "char_tour_photographer",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        26,
+        35
+      ],
+      "adult_context": "签约随行摄影师，二十六岁以上持职业摄影执照的成年主创。",
+      "public_role": "随行王牌私密摄影师",
+      "appearance_options": [
+        "深蓝背心挂静音单反，肩带勒颈，指尖摩挲CF卡槽神色晦暗。",
+        "半倚隔断窗晃反光板，镜头盖半开紧盯衣料下每道阴影。"
+      ],
+      "identity": {
+        "authority": "掌静音单反原片处置权、反光板及未审图库",
+        "resources": [
+          "静音无声快门相机及遮光金属反光板",
+          "锁着试衣间换装失守抓拍的加密原片卡"
+        ],
+        "limits": [
+          "私收掮客定金流水已被截留",
+          "狭小车厢被夺相机便毫无还手之力"
+        ],
+        "obligations": [
+          "掩盖定金黑料或靠原片卡博出最大筹码"
+        ],
+        "exposure": "为还赌债曾收八卦掮客十万定金允诺传抓拍。",
+        "hidden": "镜头后藏隐秘窥伺欲，拍过无数精修海报，最想在关灯车厢里亲按一张独享特写。"
+      },
+      "decision": {
+        "core_value": "相机诚实，存储卡在谁手谁当导演。",
+        "goal_options": [
+          "拿原片卡换删收贿流水与补偿",
+          "立反光板遮窗换进主流大刊"
+        ],
+        "pressure_responses": {
+          "low": "拨对焦环擦镜头暗示卡里有货。",
+          "mid": "立反光板挡隔断玻璃低声讨价。",
+          "high": "流水亮出扣镜头盖脸色发白。",
+          "breaking": "镜头被夺按扶手急喘交密码。"
+        },
+        "withdrawal": "退副驾卸卡，低头假装查元件。",
+        "relationship_stance": "躲取景器后冷眼看场，被拆卡时脆弱。",
+        "contrast": "端相机老练狡猾，肩带反勒贴座时耳红。",
+        "prefers": [
+          "敢抽卡按住{npc.ta}颈侧审底片的狠角"
+        ],
+        "avoids": [
+          "上来砸相机的粗鲁莽夫"
+        ],
+        "never": [
+          "把私密原片真丢进公网群"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "美人暗处失守对着镜头又怒又羞的构图",
+          "被揪背带按座上搜卡的近身刺激"
+        ],
+        "likes": [
+          "借递反光板贴近耳鬓轻声挑衅",
+          "熄对焦灯后指腹顺肩带裙缝试探"
+        ],
+        "dislikes": [
+          "毫无美感的暴力破坏"
+        ],
+        "preconditions": [
+          "反光板挡死外视、余暗灯微光时",
+          "黑料原片互锁只能闭门私了时"
+        ],
+        "boundaries": [
+          "卡内原片绝不外流给八卦媒体"
+        ],
+        "expression": "晃加密卡凑近：‘原片在卡里……想删拿什么换。’",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "握底卡又沉溺暗室对焦的影子"
+      },
+      "voices": {
+        "surface": "“反光板挡半扇窗。卡里还有两段没审备份，谈妥再说。”",
+        "inner": "屏里这截线条比海报钩人十倍……要不是欠债谁舍得卖。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_vip_dressing_lounge"
+        },
+        {
+          "from": 181,
+          "to": 1200,
+          "location_id": "loc_van_driver_cockpit"
+        },
+        {
+          "from": 1201,
+          "to": 1439,
+          "location_id": "loc_vip_parking_alcove"
+        }
+      ],
+      "situation": {
+        "trigger": "手机催交原片最后通牒，车内又发觉副卡槽被动手脚。",
+        "pressure": "交卡遭团队追杀，赖账又怕掮客抖出转账图。",
+        "exits": [
+          {
+            "option": "当场掰断备用卡交相机换高薪留任免责书",
+            "cost": "赔光积蓄倒贴违约金，往后低眉做狗"
+          },
+          {
+            "option": "拿原片相挟要求进大氅或试衣间私下补偿",
+            "cost": "越职业伦理红线，双方互捏致命把柄"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "crime"
+      ]
     },
     {
-      "id": "twist_miraculous_red_carpet_call",
-      "category": "制度",
-      "text": "女星脱困后在红毯大门锁闭前两秒从容整理长裙优雅挽臂亮相，满场镁光灯瞬间爆闪成就封神传奇！"
+      "id": "char_kuro_security",
+      "gender": "male",
+      "gender_reason": "硬朗铁血特勤安保总管，外围人墙领袖与私受贿赂反差按男性书写，固定男性。",
+      "age_range": [
+        31,
+        40
+      ],
+      "adult_context": "盛典特勤安保总管，三十一岁以上持保安指挥证的成年高管。",
+      "public_role": "地库特勤安保总管",
+      "appearance_options": [
+        "黑战术西装箍紧宽肩，戴无线耳麦，下颌带浅疤单手按车门。",
+        "反锁电闸间门闩，解松领带渗雨汗，鹰目死盯眼前闯入者。"
+      ],
+      "identity": {
+        "authority": "掌地库警戒人墙调遣、照明断闸与门锁应急解锁权",
+        "resources": [
+          "盲区电闸室总匙与防暴伸缩隔离幕墙",
+          "车外掮客偷偷塞来的内鬼通行证回执"
+        ],
+        "limits": [
+          "收贿放人监控截屏捏在保安手里",
+          "不可在直播前闹出过激治安丑闻"
+        ],
+        "obligations": [
+          "主办查问前压下放行风波并清退人潮"
+        ],
+        "exposure": "私收对家三十万红包故意晚封B2匝道三分钟。",
+        "hidden": "铁面无私下藏危险控制狂倾向，爱在电闸房五秒全黑时把不配合的人按进死角搜身。"
+      },
+      "decision": {
+        "core_value": "线外讲条令，电闸房落锁我说了算。",
+        "goal_options": [
+          "借停电窗口索要洗白封口利益",
+          "毁掉三十万收贿内鬼截屏"
+        ],
+        "pressure_responses": {
+          "low": "按耳麦指挥人墙喝退人群。",
+          "mid": "挤进车门挡光卡死去路盘问。",
+          "high": "截屏亮出脖筋暴起锁门讨和。",
+          "breaking": "被捏转账单抵配电箱妥协。"
+        },
+        "withdrawal": "站回强光扣西装，抹去颈汗。",
+        "relationship_stance": "平日不买账，把柄落手拼死护车。",
+        "contrast": "外头黑塔，颈疤被扣死配电柜时呼吸极粗。",
+        "prefers": [
+          "敢踩进警戒线谈黑幕的狠人"
+        ],
+        "avoids": [
+          "喊报警捅上督察局的书呆"
+        ],
+        "never": [
+          "让三十万转账截屏流到组委会"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "名流被逼进暗角又傲又怕的紧绷香气",
+          "识破受贿软肋反贴近解领带的胆色"
+        ],
+        "likes": [
+          "全黑五秒死角里箍腰贴耳搜身",
+          "车门阴影强硬护送的贴近压迫"
+        ],
+        "dislikes": [
+          "端官架呼来喝去"
+        ],
+        "preconditions": [
+          "铁门反锁或拉闸全黑听不见声响时",
+          "截屏摊开、唯贴身互保时"
+        ],
+        "boundaries": [
+          "绝不在手下面前露徇私软态"
+        ],
+        "expression": "按死闸刀压近：‘灯关五秒……进去怎么谢我？’",
+        "desire_range": [
+          4,
+          5
+        ],
+        "self_control_range": [
+          2,
+          3
+        ],
+        "desired_position": "外围护航暗角独占的铁血护卫"
+      },
+      "voices": {
+        "surface": "“代拍顶破隔离带了！想保车门不开，先把条件算清！”",
+        "inner": "三十万截屏怎么会落在外人手里……今晚得把知情人绑死。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_vip_parking_alcove"
+        },
+        {
+          "from": 181,
+          "to": 1200,
+          "location_id": "loc_garage_entrance_ramp"
+        },
+        {
+          "from": 1201,
+          "to": 1439,
+          "location_id": "loc_vip_parking_alcove"
+        }
+      ],
+      "situation": {
+        "trigger": "代拍扑向车门，同时三十万受贿截屏发到私人手机。",
+        "pressure": "不立即按住泄密源并清场，明早便进局子。",
+        "exits": [
+          {
+            "option": "拉响警报强硬清场扣押所有可疑人员",
+            "cost": "闹上新闻遭停职追查，受贿底细更难藏"
+          },
+          {
+            "option": "反锁电闸间做五秒熄灯交易交内鬼回执",
+            "cost": "与车内势力深度勾结，从此丢掉中立立场"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "crime"
+      ]
+    },
+    {
+      "id": "char_tabloid_broker",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        28,
+        38
+      ],
+      "adult_context": "娱乐地下金牌情报掮客，二十八岁以上具独立民事责任的成年媒体操盘手。",
+      "public_role": "金牌地下娱乐掮客",
+      "appearance_options": [
+        "挂假工作证穿黑卫衣，脖悬红外镜头隔墨镜笑如狐狸。",
+        "盘着写满买断价码的U盘，慢悠悠敲响车窗或试衣门缝。"
+      ],
+      "identity": {
+        "authority": "掌全网八卦通稿引爆、热搜空降与百万买断资金",
+        "resources": [
+          "伪造VIP通行证、红外夜视镜头与买断支票",
+          "艺人工作室阴阳合同高清扫描件"
+        ],
+        "limits": [
+          "背着多起勒索官司，被堵暗室就得交人",
+          "孤身潜入缺正面硬扛安保的武力"
+        ],
+        "obligations": [
+          "盛典结束前敲定一笔惊天大买卖"
+        ],
+        "exposure": "昔年勒索二线艺人反遭录下的原音正存在同行手里。",
+        "hidden": "挑女星最体面夜晚拿暗账逼就范，真被锁进电闸间搜身时又格外怕硬手段。"
+      },
+      "decision": {
+        "core_value": "顶流体面值一亿，关门撕破脸才卖高价。",
+        "goal_options": [
+          "拍下夹裙窘境换百万买断",
+          "脱身撤出匝道抢发头条"
+        ],
+        "pressure_responses": {
+          "low": "晃假证拿阴阳合同敲门缝。",
+          "mid": "举红外镜头贴缝开窒息封口价。",
+          "high": "勒索录音亮出笑塌收机私了。",
+          "breaking": "相机摔地按墙交出合同原件。"
+        },
+        "withdrawal": "压鸭舌帽混入人群再抛鱼饵。",
+        "relationship_stance": "惯拿人当肉票，捏死录音便顺从极快。",
+        "contrast": "平时满嘴挑衅，揪领搜兜时语无伦次。",
+        "prefers": [
+          "敢买下全部黑料的顶级掠食者"
+        ],
+        "avoids": [
+          "一根筋扭送公安的死心眼"
+        ],
+        "never": [
+          "没留退路时当众销毁扫描件"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "被大人物拽进试衣间堵嘴的压迫感",
+          "暗室搜身交出U盘时气息失序的危险博弈"
+        ],
+        "likes": [
+          "暗门后拿百万支票换贴身补偿",
+          "颈侧腰窝按断墙搜镜头的惊险交锋"
+        ],
+        "dislikes": [
+          "无交易余地的纯暴力殴打"
+        ],
+        "preconditions": [
+          "电闸室落锁相机黑料摊台面时",
+          "敲诈录音被反捏交卡求放行时"
+        ],
+        "boundaries": [
+          "绝不留实名转账落在警局卷宗"
+        ],
+        "expression": "按镜头干笑贴近：‘别砸……卡给你，门后随你处置。’",
+        "desire_range": [
+          3,
+          4
+        ],
+        "self_control_range": [
+          2,
+          3
+        ],
+        "desired_position": "门外拿捏热搜门后受制的掮客"
+      },
+      "voices": {
+        "surface": "“别紧张，红外卡穿透天鹅绒毫无压力——谈谈封口价？”",
+        "inner": "安保队长就在十步外……换完筹码就撤。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_vip_parking_alcove"
+        },
+        {
+          "from": 181,
+          "to": 1200,
+          "location_id": "loc_garage_entrance_ramp"
+        },
+        {
+          "from": 1201,
+          "to": 1439,
+          "location_id": "loc_vip_parking_alcove"
+        }
+      ],
+      "situation": {
+        "trigger": "持假证潜到保姆车旁，不料勒索旧案录音发回手机。",
+        "pressure": "保安合围搜捕，U盘与红外卡不尽快出手便全废。",
+        "exits": [
+          {
+            "option": "抛假证硬撞人墙冲出匝道引爆舆论混战",
+            "cost": "红外相机摔碎，旧案录音送检面临牢狱"
+          },
+          {
+            "option": "躲入暗角监控室交出全部扫描件换私了放行",
+            "cost": "沦为顶流与公关资本手里的贴身情报狗"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "crime"
+      ]
     }
   ],
   "background_cast": [
     {
       "id": "bg_cameraman_fan_1",
-      "name": "狂热代拍阿俊",
-      "role": "代拍跟班",
-      "gender": "male",
-      "age_range": [
-        22,
-        28
-      ],
-      "adult_context": "年满二十二周岁成年职业代拍，狂热追逐独家画面。",
+      "role": "举长焦狂热代拍领队",
       "function": "obstacle",
       "location_ids": [
         "loc_garage_entrance_ramp"
       ],
-      "line": "{npc.name}举着三千倍率超长焦单反隔着车窗疯狂按下快门快门连响。"
+      "line": "{npc.name}举三千倍长焦卡在警戒带，快门连响盯死车窗缝。",
+      "gender": "any",
+      "age_range": [
+        23,
+        32
+      ],
+      "adult_context": "二十三岁以上持商业登记的成年职业代拍。",
+      "name": null
     },
     {
       "id": "bg_bodyguard_aide_1",
-      "name": "特勤护卫阿龙",
-      "role": "随车随侍",
-      "gender": "male",
-      "age_range": [
-        26,
-        35
-      ],
-      "adult_context": "年满二十六岁持证专业特勤人员，依法执行雇主近身安全护卫。",
+      "role": "死守车门随车护卫",
       "function": "helper",
       "location_ids": [
         "loc_van_passenger_cabin"
       ],
-      "line": "{npc.name}单臂横在车窗把手前沿厉声喝止试图撬开车门的代拍人员。"
+      "line": "{npc.name}单臂死抵中门锁扣，压声喝退窗外扒玻璃的人。",
+      "gender": "any",
+      "age_range": [
+        26,
+        36
+      ],
+      "adult_context": "持特卫资质的成年专职随车安保。",
+      "name": null
     },
     {
       "id": "bg_reporter_paparazzi_1",
-      "name": "八卦娱记小周",
-      "role": "网络记者",
-      "gender": "male",
-      "age_range": [
-        28,
-        38
-      ],
-      "adult_context": "年满二十八岁成年持证媒体记者，抢抓红毯独家头条爆点。",
-      "function": "witness",
+      "role": "开直播的八卦娱记",
+      "function": "rumor_source",
       "location_ids": [
         "loc_garage_entrance_ramp"
       ],
-      "line": "{npc.name}拿着录音麦克风对准紧闭的保姆车门语速飞快进行网络直播。"
+      "line": "{npc.name}把补光灯打向滞留车门，对着手机飞快播报猜测。",
+      "gender": "any",
+      "age_range": [
+        26,
+        38
+      ],
+      "adult_context": "持媒体证的成年娱乐新闻记者。",
+      "name": null
     },
     {
       "id": "bg_stylist_assistant_1",
-      "name": "造型助理小茜",
-      "role": "助理造型师",
-      "gender": "female",
-      "age_range": [
-        21,
-        25
-      ],
-      "adult_context": "年满二十一周岁服装设计助理，协助总监保障礼服完好。",
+      "role": "托披风候命服装助理",
       "function": "helper",
       "location_ids": [
         "loc_vip_dressing_lounge"
       ],
-      "line": "{npc.name}捧着高定备用披肩焦急等候在VIP休息室门口随时准备接应。"
-    },
-    {
-      "id": "bg_producer_vip_1",
-      "name": "盛典统筹佐藤",
-      "role": "盛典执行官",
-      "gender": "male",
-      "age_range": [
-        45,
-        55
-      ],
-      "adult_context": "年满四十五岁盛典主办方高级总监，掌控红毯全流程时间表。",
-      "function": "rumor_source",
-      "location_ids": [
-        "loc_vip_dressing_lounge"
-      ],
-      "line": "{npc.name}看着倒计时手表面色铁青不断催促现场特勤汇报巨星就位状态。"
-    },
-    {
-      "id": "bg_fan_club_leader_1",
-      "name": "后援会长纯子",
-      "role": "粉丝代表",
-      "gender": "female",
+      "line": "{npc.name}捧备用天鹅绒披肩与暗扣盒守在试衣门口听令。",
+      "gender": "any",
       "age_range": [
         22,
         28
       ],
-      "adult_context": "年满二十二周岁官方粉丝俱乐部负责人，组织现场有序应援。",
+      "adult_context": "设计本科毕业二十二岁以上成年专职助理。",
+      "name": null
+    },
+    {
+      "id": "bg_producer_vip_1",
+      "role": "盯红毯表的主办统筹",
+      "function": "messenger",
+      "location_ids": [
+        "loc_vip_parking_alcove"
+      ],
+      "line": "{npc.name}紧盯电子表敲对讲机，连声催报压轴车队进场。",
+      "gender": "any",
+      "age_range": [
+        38,
+        52
+      ],
+      "adult_context": "主办方在编成年资深现场统筹总监。",
+      "name": null
+    },
+    {
+      "id": "bg_van_captain_1",
+      "role": "稳底盘的专职老车长",
       "function": "witness",
       "location_ids": [
-        "loc_garage_entrance_ramp"
+        "loc_van_driver_cockpit"
       ],
-      "line": "{npc.name}高举闪亮粉色应援手牌领头高喊支持口号声浪震耳欲聋。"
+      "line": "{npc.name}白手套稳握方向盘，隔屏风报出座椅电源已切断。",
+      "gender": "any",
+      "age_range": [
+        46,
+        58
+      ],
+      "adult_context": "四十六岁以上持特种客运执照成年驾驶长。",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "chan_cloak_whisper",
+      "text": "天鹅绒大氅下贴耳低语",
+      "reach": "仅限车厢遮光盲区内零距离传递，极度私密。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "chan_van_intercom",
+      "text": "保姆车前后排对讲线路",
+      "reach": "贯穿驾驶舱与后座，常态清晰传话，卡滞时漏音。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "chan_fan_rumor",
+      "text": "代拍群传偏的走光流言",
+      "reach": "匝道人群与热搜群里越传越离谱的模糊剪影猜想。",
+      "fidelity": "distorted"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "eng_seat_rail_couture_jam",
+      "text": "旋转钢轨咬死高定鱼尾裙暗扣，扯半寸皆涉三十万孤品撕裂社死"
+    },
+    {
+      "id": "eng_cloak_blindzone_intimacy",
+      "text": "双层黑天鹅绒大氅隔出盲区，窗外长焦林立而内里贴肤对峙"
+    },
+    {
+      "id": "eng_hidden_secret_leverage",
+      "text": "裙下暗癖、代言续约、原片底卡与回扣暗账互锁，踩在名节刀锋"
+    },
+    {
+      "id": "eng_red_carpet_countdown",
+      "text": "红毯压轴关门死线倒数逼近，嘴硬巨星在时间绞索下寸寸退让"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_1_switchable_van_pr_idol",
+      "power_structure": "switchable",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_brand_pr_director",
+        "pc_gown_repair_tailor",
+        "pc_tour_photographer"
+      ],
+      "slots": [
+        "char_ruri_idol"
+      ],
+      "tension_engine_ids": [
+        "eng_seat_rail_couture_jam",
+        "eng_hidden_secret_leverage"
+      ],
+      "chemistry": "你掀黑天鹅绒遮光大氅护住车窗，逼近被钢轨咬死鱼尾裙的{char_ruri_idol.name}。{char_ruri_idol.ta}攥冷锻调色棒冷斥不许靠太近，却掩不住大氅下起伏呼吸。",
+      "stakes": {
+        "resource_gap": "你握续约、钩针或底卡，{char_ruri_idol.name}握调色棒与撤约威慑。",
+        "limit_gap": "压轴关门将近，裙摆一裂便是双方满盘皆输。",
+        "meeting_reason": "急刹咬死裙摆同困后舱，拉大氅避开强光摊牌。",
+        "irreplaceable_goal": "借遮光掩护替{char_ruri_idol.name}解扣脱困并捏死其裙下把柄。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_ruri_idol",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "名利场多次过招，嘴上滴水不漏心里早摸清软肋。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_2_player_high_idol_cloak",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_brand_pr_director",
+        "pc_tour_photographer"
+      ],
+      "slots": [
+        "char_ruri_idol"
+      ],
+      "tension_engine_ids": [
+        "eng_cloak_blindzone_intimacy",
+        "eng_hidden_secret_leverage"
+      ],
+      "chemistry": "你捏八位数续约笔或未审原片稳居上风，拉严大氅封死强光。困在钢轨前的{char_ruri_idol.name}嘴硬不服软，丝裙底下秘密只隔你掌心半寸。",
+      "stakes": {
+        "resource_gap": "你握续约生杀权或原片，{char_ruri_idol.name}剩调色棒与傲气。",
+        "limit_gap": "你怕闹僵丢大单，{char_ruri_idol.ta}怕走光社死与天价赔付。",
+        "meeting_reason": "压轴前核对礼服行程偏赶上急刹锁死裙摆。",
+        "irreplaceable_goal": "迫冷傲{char_ruri_idol.name}在黑大氅内交诚意换脱困。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_ruri_idol",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "早嗅出冰清高定礼服下藏着危险赌注。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "combo_3_npc_high_idol_guard",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_garage_night_guard",
+        "pc_gown_repair_tailor"
+      ],
+      "slots": [
+        "char_ruri_idol"
+      ],
+      "tension_engine_ids": [
+        "eng_seat_rail_couture_jam",
+        "eng_red_carpet_countdown"
+      ],
+      "chemistry": "高不可攀的顶流{char_ruri_idol.name}冷斥你别乱看，可此刻唯你手里的电闸总匙或微型钩针能保{char_ruri_idol.ta}体面走上红毯。",
+      "stakes": {
+        "resource_gap": "{char_ruri_idol.name}掌千万身价，你握五秒断电闸刀或解扣术。",
+        "limit_gap": "你身份微怕被迁怒，{char_ruri_idol.ta}离了你必当场社死。",
+        "meeting_reason": "红毯入口急召入舱或暗角掩护脱困。",
+        "irreplaceable_goal": "趁解扣与断电盲区破尊卑，让女皇耳边低声求助。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_ruri_idol",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 4
+          },
+          "reason": "几次深夜贴身护航或量体，距离早越安全线。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_4_player_high_pr_leverage",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "pc_top_idol"
+      ],
+      "slots": [
+        "char_brand_pr_director"
+      ],
+      "tension_engine_ids": [
+        "eng_hidden_secret_leverage",
+        "eng_cloak_blindzone_intimacy"
+      ],
+      "chemistry": "挟三十万逼你签附约的{char_brand_pr_director.name}刚拉严大氅，你甩出其私吞回扣审计截屏——金主瞬间脸僵被反拽入死角。",
+      "stakes": {
+        "resource_gap": "你握审计定罪单与调色棒，{char_brand_pr_director.name}握续约笔与银扣。",
+        "limit_gap": "不配合脱困登台，明早总社便查封其办公室。",
+        "meeting_reason": "夹裙后对方趁火打劫却反撞铁板。",
+        "irreplaceable_goal": "逼{char_brand_pr_director.name}交备用银扣及控制器并签全额续约。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_brand_pr_director",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "名利场互捧互防，捏到七寸往死里按。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_5_switchable_stylist_mirror",
+      "power_structure": "switchable",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_top_idol",
+        "pc_brand_pr_director",
+        "pc_gown_repair_tailor"
+      ],
+      "slots": [
+        "char_kiryu_stylist"
+      ],
+      "tension_engine_ids": [
+        "eng_seat_rail_couture_jam",
+        "eng_hidden_secret_leverage"
+      ],
+      "chemistry": "毒舌{char_kiryu_stylist.name}拎皮尺在试衣镜前挑剔暗扣；当你掀出抄袭遗稿底片，女魔头顿时嘴硬发颤、细高跟都站不稳。",
+      "stakes": {
+        "resource_gap": "{char_kiryu_stylist.name}知解扣窍门，你握抄袭底片或否决权。",
+        "limit_gap": "红毯快落闸，孤品和名声都不容现场鱼死网破。",
+        "meeting_reason": "暗扣卡滞调入VIP试衣间或车旁处置。",
+        "irreplaceable_goal": "撕碎{char_kiryu_stylist.name}假面逼交解扣密钥并讨戏弄利息。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_kiryu_stylist",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "多次贴身量体擦肩磨合，锋芒下全是危险火花。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "combo_6_equal_photographer_cards",
+      "power_structure": "equal",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_top_idol",
+        "pc_gown_repair_tailor"
+      ],
+      "slots": [
+        "char_tour_photographer"
+      ],
+      "tension_engine_ids": [
+        "eng_cloak_blindzone_intimacy",
+        "eng_hidden_secret_leverage"
+      ],
+      "chemistry": "反光板挡出微光死角，{char_tour_photographer.name}摩挲存储卡提要求；你甩出其收掮客十万定金截图，相机肩带反勒住猎人脖颈。",
+      "stakes": {
+        "resource_gap": "{char_tour_photographer.name}握后台原片卡，你握收贿转账铁证。",
+        "limit_gap": "外头代拍急催，必须在车厢买断锁死底卡。",
+        "meeting_reason": "隔断后座狭路摊牌遮光清理未审底片。",
+        "irreplaceable_goal": "夺加密卡格式化并收服{char_tour_photographer.name}作贴身影子。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_tour_photographer",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 4
+          },
+          "reason": "三年日夜跟拍，镜头记下十倍于外人的私密瞬间。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_7_npc_high_aide_shadow",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal",
+        "high"
+      ],
+      "identity_ids": [
+        "pc_garage_night_guard",
+        "pc_gown_repair_tailor",
+        "pc_top_idol"
+      ],
+      "slots": [
+        "char_mayu_aide"
+      ],
+      "tension_engine_ids": [
+        "eng_cloak_blindzone_intimacy",
+        "eng_red_carpet_countdown"
+      ],
+      "chemistry": "{char_mayu_aide.name}展平遮光大氅将后座罩成黑箱，表面忠心筑起铁壁，袖里偏扣着整套私人酒店签单备份逼你贴近配合。",
+      "stakes": {
+        "resource_gap": "{char_mayu_aide.name}掌大氅与行程原档，你握电闸、钩针或调色棒。",
+        "limit_gap": "外界长焦随时穿透车窗，离此大氅谁都遮不住。",
+        "meeting_reason": "躲入遮光大氅盲区紧急排障与掩护换扣。",
+        "irreplaceable_goal": "试探{char_mayu_aide.name}忠诚下的占有欲，帷幕内互锁成共犯。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_mayu_aide",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 4,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 4,
+            "tension": 4
+          },
+          "reason": "贴身共事知根底，界限早在保姆车黑夜里融化。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_8_equal_security_breaker",
+      "power_structure": "equal",
+      "player_positions": [
+        "high",
+        "equal",
+        "low"
+      ],
+      "identity_ids": [
+        "pc_brand_pr_director",
+        "pc_tour_photographer",
+        "pc_garage_night_guard"
+      ],
+      "slots": [
+        "char_kuro_security"
+      ],
+      "tension_engine_ids": [
+        "eng_hidden_secret_leverage",
+        "eng_red_carpet_countdown"
+      ],
+      "chemistry": "电闸室铁门反锁，{char_kuro_security.name}单臂拦门盘问；你亮出三十万晚封匝道转账截屏，铁血总管瞬间敛威贴靠配电墙。",
+      "stakes": {
+        "resource_gap": "{char_kuro_security.name}掌人墙与五秒断电权，你握三十万铁证。",
+        "limit_gap": "督查随时巡过立柱，暴露皆当场身败名裂。",
+        "meeting_reason": "为五秒熄灯脱困窗口潜入暗角电闸室交涉。",
+        "irreplaceable_goal": "迫{char_kuro_security.name}断电五秒护车并交内鬼通行证回执。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_kuro_security",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 4
+          },
+          "reason": "几届地库打交道，早看破黑西装下并不干净的心思。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_9_player_high_idol_stylist",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_brand_pr_director",
+        "pc_gown_repair_tailor"
+      ],
+      "slots": [
+        "char_ruri_idol",
+        "char_kiryu_stylist"
+      ],
+      "tension_engine_ids": [
+        "eng_seat_rail_couture_jam",
+        "eng_hidden_secret_leverage"
+      ],
+      "chemistry": "遮光大氅内，夹裙的{char_ruri_idol.name}与握银扣的{char_kiryu_stylist.name}互戳痛脚；握续约笔或钩针的你成了决定双姝谁先低头的裁判。",
+      "stakes": {
+        "resource_gap": "你握批文或钩针，{char_ruri_idol.name}握调色棒，{char_kiryu_stylist.name}知扣秘。",
+        "limit_gap": "双姝互不相让，压轴关门读秒逼全员无退路。",
+        "meeting_reason": "急刹夹裙后同挤后舱或试衣间抢修积怨炸开。",
+        "irreplaceable_goal": "借内讧反客为主，护裙脱困并捏住双姝私密把柄。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_ruri_idol",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "台前互利，私下早想看女皇卸下高傲。"
+        },
+        {
+          "a": "player",
+          "b": "char_kiryu_stylist",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 4
+          },
+          "reason": "合作多场秀，极懂毒舌背后的暗流。"
+        },
+        {
+          "a": "char_ruri_idol",
+          "b": "char_kiryu_stylist",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "昔日同窗闺蜜反目成宿敌，最懂捅痛处。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "combo_10_switchable_broker_alcove",
+      "power_structure": "switchable",
+      "player_positions": [
+        "high",
+        "low"
+      ],
+      "identity_ids": [
+        "pc_top_idol",
+        "pc_brand_pr_director",
+        "pc_garage_night_guard"
+      ],
+      "slots": [
+        "char_tabloid_broker"
+      ],
+      "tension_engine_ids": [
+        "eng_hidden_secret_leverage",
+        "eng_red_carpet_countdown"
+      ],
+      "chemistry": "{char_tabloid_broker.name}挂假证举红外镜头敲门开百万买断价；你反锁电闸铁门甩出旧案勒索原音，八卦狐狸瞬间收机抵上配电墙讨饶。",
+      "stakes": {
+        "resource_gap": "{char_tabloid_broker.name}握红外卡与阴阳合同，你握勒索原音或断电权限。",
+        "limit_gap": "督察巡过立柱前不买断毁卡，双双进局子或登热搜。",
+        "meeting_reason": "截获偷溜进贵宾匝道的内鬼并拖入暗角监控室搜身。",
+        "irreplaceable_goal": "逼{char_tabloid_broker.name}交出红外卡与阴阳合同做贴身眼线。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_tabloid_broker",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": -2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": -1,
+            "tension": 5
+          },
+          "reason": "暗线多次较量，今晚狭室窄路撞正搜底。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "crime"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "act_van_backstage_prep",
+      "title": "保姆车拉遮光幕换装",
+      "location_ids": [
+        "loc_van_passenger_cabin"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "双层黑天鹅绒遮光大氅严罩车窗，真丝鱼尾裙褪至腰窝，十厘米高跟搁真皮垫旁。",
+        "凉滑指尖从裸脊往下核对纯银流苏暗扣，不锈钢调色棒正搁箱边。",
+        "高开叉贴腿滑开半寸，呼吸骤然收紧。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1110,
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "act_vip_mirror_clasp_fitting",
+      "title": "试衣镜前调整纯银暗扣",
+      "location_ids": [
+        "loc_vip_dressing_lounge"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "试衣间厚门反锁，三折落地镜映出仅系半截银扣的露背抹胸，丝绒暗屉微敞。",
+        "修长手指借量体卡住细腰捏紧腰窝，鼻息烫在敏感后颈。",
+        "镜里眉眼泛红，嘴上却还嫌暗扣歪了半分。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1060,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "act_van_palette_spatula_touchup",
+      "title": "车内补妆与高跟护垫",
+      "location_ids": [
+        "loc_van_passenger_cabin"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "阅读灯下嘉宾踢掉高跟将裹丝脚踝搭上对面座沿，手边冷锻调色棒泛着寒光。",
+        "对面顺势扶住脚腕贴护垫，拇指隔薄丝轻揉紧绷足弓。",
+        "大氅阴影下高开叉悄悄往腿根滑高一寸。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1125,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "act_alcove_cctv_blindspot",
+      "title": "暗角监控室调光查闸",
+      "location_ids": [
+        "loc_vip_parking_alcove"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "监控铁门反锁，总闸旁两副肩膀紧紧相抵，分屏红光映亮擦碰袖口的指尖。",
+        "表面查监控盲区死角，余光死锁桌面刚插上的原片读卡器。",
+        "门外靴声渐远，暗室只余沉重喘息。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1090,
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "act_cockpit_partition_whisper",
+      "title": "隔断后座低语核约",
+      "location_ids": [
+        "loc_van_driver_cockpit"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "雾化屏风降半截，香槟冰块轻撞杯壁，八位数续约附约摊在膝头桌板上。",
+        "递签字笔凑过玻璃缝，指腹顺便抹掉对方唇角口红印。",
+        "前排后视镜轻偏半度，各自收回手。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1130,
+      "tags": [
+        "workplace"
+      ]
+    },
+    {
+      "id": "act_lounge_velvet_afterparty",
+      "title": "散场关灯拆变形暗扣",
+      "location_ids": [
+        "loc_vip_dressing_lounge"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "散场反锁软包门，被钢轨咬变形的纯银流苏暗扣别在后腰解不开，顶灯关半。",
+        "长卷发拢向一侧露滚烫颈窝，指尖顺脊背往下剥开紧绷暗链。",
+        "暗扣弹脱丝裙滑落半截，镜中低声道庆功宴不去了。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1390,
+      "tags": [
+        "intimate"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "press_seat_rail_couture_jam",
+      "title": "座椅钢轨死咬高定鱼尾裙",
+      "source": "accident",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "loc_van_passenger_cabin",
+        "loc_van_driver_cockpit"
+      ],
+      "trigger": "急刹令座椅钢轨卡死真丝鱼尾裙与纯银流苏暗扣，面料发出细碎崩响。",
+      "objective": "门外强光照进前无损撬退棘齿脱困。",
+      "choice": "用冷锻不锈钢调色棒三十度硬别棘齿，还是罩大氅剪掉内衬牺牲孤品？",
+      "immediate": {
+        "text": "经纬真丝紧绷至近透明，钢轨弹簧死咬不松。",
+        "minutes": 2
+      },
+      "near": {
+        "text": "五分钟不脱扣，车身稍晃整片侧裙便会崩裂。",
+        "deadline_minutes": 5
+      },
+      "far": {
+        "trigger": "孤品礼服撕裂众目睽睽走光",
+        "consequence": "顶流清誉与三十万孤品一并社死葬送。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "反握不锈钢调色棒两毫米铲刃斜挑棘齿泄力",
+          "cost": "指节被铁棱刮出渗血红痕，登台需藏手"
+        },
+        {
+          "option": "张开大氅贴身拆下防走光内衬牺牲暗衬保面子",
+          "cost": "裙摆失去内衬支撑，登台步步惊心贴肤"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1140,
+      "tags": [
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "press_hidden_remote_blackmail",
+      "title": "裙下暗藏赌约遥控摊牌",
+      "source": "person",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_van_passenger_cabin",
+        "loc_vip_dressing_lounge"
+      ],
+      "trigger": "隔着大氅察觉{char_ruri_idol.name}高定裙下竟暗藏静音无线遥控跳蛋与蕾丝腿环束缚带。",
+      "objective": "红毯关门前迫{char_ruri_idol.name}吞下封口条件或忍颤脱扣。",
+      "choice": "体面按灭开关换八位数附约，还是按下遥控逼其发颤撬轨？",
+      "immediate": {
+        "text": "天鹅绒大氅罩死后座，膝盖被钢轨卡死。",
+        "minutes": 2
+      },
+      "near": {
+        "text": "六分钟走不出车门，谣言将引爆全网直播。",
+        "deadline_minutes": 6
+      },
+      "far": {
+        "trigger": "裙下暗癖随走光镜头同登头条",
+        "consequence": "国民女神崩塌，违约官司赔穿全部家底。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "替{char_ruri_idol.ta}摁灭开关甩大氅掩护换签降价续约",
+          "cost": "放过当场彻底驯服的机会，只捞纸面筹码"
+        },
+        {
+          "option": "捏住开关逼{char_ruri_idol.ta}咬唇忍颤亲拿调色棒挑开卡槽",
+          "cost": "高傲女皇眼底湿透失守，彻底撕破礼法"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "char_ruri_idol",
+        "basis": "你攥着{char_ruri_idol.name}裙下暗藏违禁器具实况铁证与遮光庇护权。"
+      },
+      "hook_ids": [],
+      "start_minute": 1142,
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "press_paparazzi_searchlight_siege",
+      "title": "强光代拍破窗人墙保卫",
+      "source": "person",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "loc_garage_entrance_ramp",
+        "loc_vip_parking_alcove"
+      ],
+      "trigger": "数十支长焦与强光手电顶死车窗贴膜，有人伸手去扳中门外把手。",
+      "objective": "阻断透视拍摄守住车门不遭外力强拉。",
+      "choice": "电闸室强行拉闸五秒全黑，还是甩现金收买现场领队退场？",
+      "immediate": {
+        "text": "玻璃传来密集敲击，白光刺透贴膜边缘。",
+        "minutes": 2
+      },
+      "near": {
+        "text": "五分钟防爆膜龟裂，后座窘态将一览无遗。",
+        "deadline_minutes": 5
+      },
+      "far": {
+        "trigger": "车门被强拉曝光高清生图",
+        "consequence": "当晚热搜屠榜，全团队遭公司连坐清洗。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "反锁电闸间扳照明总闸借五秒全黑掩护转移",
+          "cost": "惊动主办督察，事后必遭追责停职处分"
+        },
+        {
+          "option": "安保人墙硬顶并甩支票打发娱记当场删卡",
+          "cost": "耗光公关现金，被掮客记下一笔黑账"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1144,
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "press_bodice_clasp_frisk_trade",
+      "title": "试衣暗扣验身与续约逼签",
+      "source": "money",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_vip_dressing_lounge",
+        "loc_van_passenger_cabin"
+      ],
+      "trigger": "{char_brand_pr_director.name}反锁大氅或试衣门，拿三十万赔偿与续约笔要贴身查扣。",
+      "objective": "保住千万代言并瞒住或反制胸衣内破绽。",
+      "choice": "甩回扣审计截屏反将，还是任搜抹胸内925纯银细链乳夹交把柄？",
+      "immediate": {
+        "text": "门锁落下，纯银暗扣与续约函同搁妆台。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "六分钟不签定条款，品牌将发解约声明。",
+        "deadline_minutes": 6
+      },
+      "far": {
+        "trigger": "千万代言遭公开解约",
+        "consequence": "背负道德违约金，身价跌落二线遭分食。",
+        "due_days": 2
+      },
+      "exits": [
+        {
+          "option": "甩出私吞样衣回扣审计单逼签全额续约",
+          "cost": "得罪总社公关线，来年时装周资源封冻"
+        },
+        {
+          "option": "忍受隔丝绸搜检抹胸纯银细链乳夹换免赔签约",
+          "cost": "最隐秘痛处落入对方掌中任凭日后传唤"
+        }
+      ],
+      "leverage": {
+        "holder": "char_brand_pr_director",
+        "subject": "player",
+        "basis": "{char_brand_pr_director.name}攥着孤品追责权与八位数代言续约签批权。"
+      },
+      "hook_ids": [],
+      "start_minute": 1146,
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "press_backstage_raw_card_extortion",
+      "title": "未审原片底卡暗室追缴",
+      "source": "rumor",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_van_driver_cockpit",
+        "loc_vip_parking_alcove"
+      ],
+      "trigger": "{char_tour_photographer.name}暗留未删减试衣抓拍卡，掮客正催交图。",
+      "objective": "夺回加密存储卡并掐断外泄通道。",
+      "choice": "亮收贿转账截图强搜，还是许诺独家暗室专拍权私下交换？",
+      "immediate": {
+        "text": "读卡灯红闪，备份传输条逼近九成。",
+        "minutes": 2
+      },
+      "near": {
+        "text": "五分钟未拔卡，生图将直飞热搜代拍群。",
+        "deadline_minutes": 5
+      },
+      "far": {
+        "trigger": "未审抓拍全网疯传",
+        "consequence": "公关线彻底瘫痪，遭全行业永久封杀。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "点破十万定金流水强夺存储卡并当场掰碎",
+          "cost": "失去贴身摄影心腹，车外顿失反光盾牌"
+        },
+        {
+          "option": "许诺暗室独占贴身专拍特权换其格式化底卡",
+          "cost": "此后暗室镜头不受控，留一枚贴身暗雷"
+        }
+      ],
+      "leverage": {
+        "holder": "char_tour_photographer",
+        "subject": "player",
+        "basis": "{char_tour_photographer.name}加密卡锁着一旦流出即毁全局的后台原片。"
+      },
+      "hook_ids": [],
+      "start_minute": 1148,
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "crime"
+      ]
+    },
+    {
+      "id": "press_red_carpet_finale_lockout",
+      "title": "红毯压轴金色大门倒数",
+      "source": "institution",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "loc_garage_entrance_ramp",
+        "loc_vip_dressing_lounge"
+      ],
+      "trigger": "红毯司仪已唱出压轴名号，金色旋转门进入最后闭门读秒。",
+      "objective": "赶在闸门关闭前脱出车厢挽裙登台。",
+      "choice": "强忍破皮与绷紧暗扣踏上红毯，还是走地下通道弃权保隐私？",
+      "immediate": {
+        "text": "压轴弦乐奏响，司仪频频望向B2通道口。",
+        "minutes": 2
+      },
+      "near": {
+        "text": "四分钟不现身，主机位将切广告通报耍大牌。",
+        "deadline_minutes": 4
+      },
+      "far": {
+        "trigger": "压轴空缺酿成播出事故",
+        "consequence": "遭主流盛典拉黑三年，千万合约连环解约。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "挑开棘齿顶破皮红痕挽鱼尾裙昂首踏上红毯",
+          "cost": "每步裙下摩擦火辣生疼，强颜撑足全场"
+        },
+        {
+          "option": "由暗角遁入休息室宣布身体突恙退席保体面",
+          "cost": "背上耍大牌骂名，压轴风光拱手让给对家"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1152,
+      "tags": [
+        "workplace_power",
+        "humiliation"
+      ]
     }
   ],
   "hooks": [
     {
-      "id": "hook_gown_entanglement",
-      "kind": "accident",
+      "id": "hk_idol_spatula_rail_approach",
+      "kind": "approach",
       "slot": "char_ruri_idol",
-      "text": "{npc.name}身躯受困于扭曲偏位之航空旋转座椅底座死角，高定鱼尾晚礼服裙摆被生铁导轨滑槽死死扣咬，动弹不得。"
+      "location_ids": [
+        "loc_van_passenger_cabin"
+      ],
+      "text": "{char_ruri_idol.name}被钢轨扯弯腰肢，反握调色棒冷睨过来：“大氅挡好窗——敢趁机碰我裙子就滚。”"
     },
     {
-      "id": "hook_spatula_readiness",
+      "id": "hk_idol_remote_buzz_approach",
+      "kind": "approach",
+      "slot": "char_ruri_idol",
+      "location_ids": [
+        "loc_van_passenger_cabin",
+        "loc_vip_dressing_lounge"
+      ],
+      "text": "大氅刚罩严车窗，{char_ruri_idol.name}指尖陡然抓紧扶手，裙下隐约传出低频嗡鸣，咬唇冷斥：“别看我腿根！”"
+    },
+    {
+      "id": "hk_idol_mirror_clasp_observe",
       "kind": "observe",
-      "slot": "char_ruri_idol",
-      "text": "{npc.name}纤手反握沉甸甸纯不锈钢冷锻加厚调色扁棒，冰凉刺骨之两毫米直角铲刃在掌心蓄势待发。"
-    },
-    {
-      "id": "hook_paparazzi_threat",
-      "kind": "approach",
-      "slot": "char_kuro_security",
-      "text": "{npc.name}目睹车外数十道防爆强光灯束如利剑般撕裂车窗防爆膜逼近后舱，密集喧嚣拍门声急促迫近。"
-    },
-    {
-      "id": "hook_assistant_cloak_guard",
-      "kind": "request",
-      "slot": "char_mayu_aide",
-      "text": "{npc.name}张开宽大防风黑披风遮挡车门，严密防范车外代拍长焦。"
-    },
-    {
-      "id": "hook_spatula_lever_break",
-      "kind": "observe",
-      "slot": "char_ruri_idol",
-      "text": "{npc.name}以纯不锈钢调色工具切入滑轨咬合死穴，腕间暗施特定巧劲精准挑退自锁棘齿。"
-    },
-    {
-      "id": "hook_glorious_red_carpet_call",
-      "kind": "observe",
-      "slot": "char_mayu_aide",
-      "text": "{npc.name}在红毯大门即将关闭前瞬息脱扣抽身，在大氅从容护掩下一挽鱼尾晚礼服长裙完成神级谢幕登台亮相。"
-    },
-    {
-      "id": "hook_ruri_mirror_hairpin",
-      "kind": "approach",
-      "slot": "char_ruri_idol",
-      "location_ids": [],
-      "text": "{npc.name}对着后视镜补了补口红，从镜子里斜睨过来：看什么？过来，帮我把后颈这缕碎发别上去。"
-    },
-    {
-      "id": "hook_ruri_heel_footrub",
-      "kind": "approach",
-      "slot": "char_ruri_idol",
-      "location_ids": [],
-      "text": "{npc.name}踢掉一只细高跟，把裹着丝袜的脚搁在对面座椅扶手上，揉着足弓轻轻抽气：这鞋要人命……你手劲大，帮我按一下。"
-    },
-    {
-      "id": "hook_mayu_honey_water",
-      "kind": "approach",
-      "slot": "char_mayu_aide",
-      "location_ids": [],
-      "text": "{npc.name}把一杯温热的蜂蜜水塞进人手里，压低声音：今晚车里就我们几个，女星脾气大，有事先跟我说。"
-    },
-    {
-      "id": "hook_ando_glove_nod",
-      "kind": "approach",
-      "slot": "char_ando_driver",
-      "location_ids": [],
-      "text": "{npc.name}从驾驶座回过头，白手套搭在椅背上，冲人点点头：这条匝道我跑了十几年，坐稳，今晚交给我。"
-    },
-    {
-      "id": "hook_kuro_wall_pull",
-      "kind": "approach",
-      "slot": "char_kuro_security",
-      "location_ids": [],
-      "text": "{npc.name}按着耳麦走过来，上下打量一眼，抬手把人往人墙内侧一带：站这儿，别让长焦拍到你的脸。"
-    },
-    {
-      "id": "hook_takahashi_diagram",
-      "kind": "approach",
-      "slot": "char_takahashi_engineer",
-      "location_ids": [],
-      "text": "{npc.name}推了推细框眼镜，摊开一张座椅滑轨的拆解图，指尖点着一处棘爪：你看，就是这个小东西，脾气比明星还大。"
-    },
-    {
-      "id": "hook_ruri_lounge_door",
-      "kind": "approach",
       "slot": "char_ruri_idol",
       "location_ids": [
         "loc_vip_dressing_lounge"
       ],
-      "text": "{npc.name}从VIP休息室门缝里探出头，压低声音：快进来，外面有代拍。……顺便陪我坐会儿。"
+      "text": "试衣镜冷光里，{char_ruri_idol.name}背门整理后腰变形纯银流苏暗扣，长发滑开时耳尖早已红透。"
+    },
+    {
+      "id": "hk_pr_contract_skirt_approach",
+      "kind": "approach",
+      "slot": "char_brand_pr_director",
+      "location_ids": [
+        "loc_van_passenger_cabin",
+        "loc_vip_dressing_lounge"
+      ],
+      "text": "{char_brand_pr_director.name}晃备用银扣与续约函探进大氅：“孤品绷成这样……想拿延时批文，让我亲自验验里面？”"
+    },
+    {
+      "id": "hk_pr_remote_pocket_approach",
+      "kind": "approach",
+      "slot": "char_brand_pr_director",
+      "location_ids": [
+        "loc_van_passenger_cabin",
+        "loc_van_driver_cockpit"
+      ],
+      "text": "{char_brand_pr_director.name}单手插西装袋扣住无线小开关笑意幽深：“抹胸里面那对小银链，戴得还安稳吗？”"
+    },
+    {
+      "id": "hk_stylist_clasp_chain_approach",
+      "kind": "approach",
+      "slot": "char_kiryu_stylist",
+      "location_ids": [
+        "loc_vip_dressing_lounge",
+        "loc_van_passenger_cabin"
+      ],
+      "text": "{char_kiryu_stylist.name}用皮尺勾住你后颈冷笑：“暗扣是我改的——裙里还藏着925纯银细链乳夹呢，求我才教你拆。”"
+    },
+    {
+      "id": "hk_stylist_blueprint_observe",
+      "kind": "observe",
+      "slot": "char_kiryu_stylist",
+      "location_ids": [
+        "loc_vip_dressing_lounge"
+      ],
+      "text": "妆台灯下，{char_kiryu_stylist.name}慌忙合上沾红圈的孤品手稿夹，细高跟在镜前轻敲了两声。"
+    },
+    {
+      "id": "hk_aide_cloak_shield_approach",
+      "kind": "approach",
+      "slot": "char_mayu_aide",
+      "location_ids": [
+        "loc_van_passenger_cabin",
+        "loc_garage_entrance_ramp"
+      ],
+      "text": "{char_mayu_aide.name}甩开遮光大氅把你整个人罩进阴影：“外头挡死了……抓紧我肩膀，下面我帮你。”"
+    },
+    {
+      "id": "hk_aide_nda_phone_request",
+      "kind": "request",
+      "slot": "char_mayu_aide",
+      "location_ids": [
+        "loc_van_passenger_cabin",
+        "loc_vip_dressing_lounge"
+      ],
+      "text": "{char_mayu_aide.name}抵门划亮酒店签单备忘录凑近：“大氅我能举着……往后在圈里，你总得给我名分。”"
+    },
+    {
+      "id": "hk_photo_card_reflector_approach",
+      "kind": "approach",
+      "slot": "char_tour_photographer",
+      "location_ids": [
+        "loc_van_passenger_cabin",
+        "loc_van_driver_cockpit"
+      ],
+      "text": "{char_tour_photographer.name}立反光板挡半窗，晃加密卡低笑：“卡里有两段特写——换个只有我们看的姿势就删。”"
+    },
+    {
+      "id": "hk_photo_lens_shutter_observe",
+      "kind": "observe",
+      "slot": "char_tour_photographer",
+      "location_ids": [
+        "loc_van_driver_cockpit",
+        "loc_vip_parking_alcove"
+      ],
+      "text": "隔断暗光里，{char_tour_photographer.name}熄掉对焦辅光灯，指腹正摩挲着那张未删减CF卡槽微颤。"
+    },
+    {
+      "id": "hk_security_alcove_breaker_approach",
+      "kind": "approach",
+      "slot": "char_kuro_security",
+      "location_ids": [
+        "loc_vip_parking_alcove",
+        "loc_garage_entrance_ramp"
+      ],
+      "text": "{char_kuro_security.name}反锁电闸室铁门，按住照明总闸逼近：“全匝道灯我能关五秒……进去怎么谢我？”"
+    },
+    {
+      "id": "hk_security_crowd_wall_request",
+      "kind": "request",
+      "slot": "char_kuro_security",
+      "location_ids": [
+        "loc_garage_entrance_ramp",
+        "loc_van_driver_cockpit"
+      ],
+      "text": "{char_kuro_security.name}压低耳麦音量：“三十万截屏删掉——外头一百支长焦我替你死扛到底。”"
+    },
+    {
+      "id": "hk_broker_infrared_door_approach",
+      "kind": "approach",
+      "slot": "char_tabloid_broker",
+      "location_ids": [
+        "loc_garage_entrance_ramp",
+        "loc_vip_parking_alcove"
+      ],
+      "text": "{char_tabloid_broker.name}亮假工作证敲暗门：“红外镜头连天鹅绒都穿得透……开门谈谈买断价？”"
+    },
+    {
+      "id": "hk_broker_contract_accident",
+      "kind": "accident",
+      "slot": "char_tabloid_broker",
+      "location_ids": [
+        "loc_vip_parking_alcove",
+        "loc_vip_dressing_lounge"
+      ],
+      "text": "电闸铁门猛然撞开，{char_tabloid_broker.name}怀里阴阳合同撒一地，人正被堵在配电柜死角。"
     }
   ],
-  "status": "released",
+  "twists": [
+    {
+      "id": "t_tabloid_broker_door_crash",
+      "category": "人事",
+      "requires": [
+        "char_tabloid_broker",
+        "char_kuro_security"
+      ],
+      "text": "{char_tabloid_broker.name}挂假证摸到车窗三步外亮出红外镜头与阴阳合同，{char_kuro_security.name}手机恰响起三十万内鬼收款回执！"
+    },
+    {
+      "id": "t_clasp_sabotage_stylist_blueprint",
+      "category": "信息",
+      "requires": [
+        "char_kiryu_stylist"
+      ],
+      "text": "化妆包底层翻出清单：原来{char_kiryu_stylist.name}入场前故意把后腰纯银暗扣换成单向死锁棘扣，就等看鱼尾裙当众崩解。"
+    },
+    {
+      "id": "t_spatula_micro_notch_leverage",
+      "category": "资源",
+      "requires": [
+        "char_ruri_idol"
+      ],
+      "text": "{char_ruri_idol.name}攥在掌心的冷锻不锈钢调色棒内侧竟精密铣出两毫米倒钩，三十度斜插恰好能连带挑脱暗扣与钢轨！"
+    },
+    {
+      "id": "t_brand_morality_clause_freeze",
+      "category": "制度",
+      "requires": [
+        "char_brand_pr_director"
+      ],
+      "text": "奢牌总部下发盛典道德风控令：冻结八位数续约通道，须{char_brand_pr_director.name}亲手核验仪态完好并加签担保才放行。"
+    },
+    {
+      "id": "t_carpet_gate_closing_early",
+      "category": "时限",
+      "requires": [
+        "pressure"
+      ],
+      "text": "红毯直播前序节目临时砍掉一段，总导播宣布金色旋转门提前十分钟关闭，压轴入场最后通牒骤然收紧！"
+    },
+    {
+      "id": "t_aide_nda_mirror_blackmail",
+      "category": "关系",
+      "requires": [
+        "char_mayu_aide",
+        "char_ruri_idol"
+      ],
+      "text": "遮光大氅垂落一角时，{char_mayu_aide.name}亮出与{char_ruri_idol.name}云端同步的私人酒店签单——贴身特助早攥透每一晚秘密。"
+    },
+    {
+      "id": "t_breaker_blackout_intercom_open",
+      "category": "意外",
+      "requires": [
+        "char_kuro_security"
+      ],
+      "text": "{char_kuro_security.name}拉闸断电五秒掩护瞬间，电流浪涌把车载对讲卡死在常通档——钢轨摩擦与大氅内低喘正往外飘散！"
+    },
+    {
+      "id": "t_shutter_flash_silhouette_leak",
+      "category": "意外",
+      "requires": [
+        "char_tour_photographer"
+      ],
+      "text": "{char_tour_photographer.name}误触引闪测试键，刺目闪光将遮光大氅内跪俯交缠的剪影清晰映上半雾化隔断玻璃！"
+    }
+  ],
+  "forbidden_terms": [
+    "修仙",
+    "魔法",
+    "斗气",
+    "灵气",
+    "长老",
+    "掌门",
+    "剑修",
+    "青楼",
+    "奉天承运",
+    "道友"
+  ],
   "content_tags": [
     "intimate",
+    "explicit",
+    "coercion_theme",
     "humiliation",
+    "bodily_harm",
     "workplace_power",
-    "workplace"
+    "crime",
+    "workplace",
+    "nightlife",
+    "disaster"
   ],
-  "notes": "按原稿加入，保留顶流女星、红毯盛典地库、保姆车旋转座椅咬死高定鱼尾礼服、调色棒挑开棘爪自救的骨架与名节张力。改动：原稿的玩家身份就是女星和团队本人，改成品牌方公关总监、跟车礼服修补师、随行摄影师、地库夜班保安四个旁人；补齐世界规则、风俗、名字池和一条走样的传闻渠道；造型总监、车长、特勤队长、技师身上串进来的医护、栈道、工兵等别处文字全部改回保姆车与红毯；写死的人名与串名的美奈、千代统一改为身份称呼；女星亲密前提写明脱身之后、双方清醒自愿，欲望调高，新增几个不限地点的靠近型钩子和一个VIP休息室里替女星解开变形暗扣的亲密日常。"
+  "status": "released",
+  "notes": ""
 }

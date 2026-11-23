@@ -299,7 +299,10 @@
       - 2026-11-18 清理此前已改 48 个世界的技术债：21 个有 9 条转折的世界各删去 1 条同类别冗余转折收口到 8 条；25 个世界 `notes`（及《C位星光的舞台》1 处压力代价）里的机械禁用词替换为中性表述。至此累计完成 v2 改造 52 个世界，内容版本升到 `2026.10.30` 并提交。
       - 2026-11-18 按用户决定松绑游玩规则：仅保留“全员成年（18+）”与玩家硬边界/暂停，去掉 `SKILL.md`、`references/narrative.md`、`references/flows.md` 及 `leverage_set` 说明中对“清醒自愿、把柄期间不进亲密、险情/口嫌体正直”的约束；同步确定约 70%~80% 世界配置情趣用品（按五种出场时机错开）并拆分为 3 个会话并行处理剩余 96 个 v1、62 个第一波 v2 与 52 个第二波 v2 世界。
       - 2026-11-18 完成世界包改造前的 3 处引擎打通与压缩恢复补强：① 单人开局未在场的 `character_templates` 作为待命阵容（`standby_cast`）暴露进完整上下文，操作引用时自动生成完整 `major` 卡片与设定事实，转折 `requires` 覆盖待命模板并确定性渲染姓名，消除单人组合转折饥饿；② 完整上下文预算从 20 KB 扩至 32 KB，`_card_compact` 保留外貌与表里语态，新增 `world.scene_ideas` 承接未抽中的日常桥段作中后期灵感；③ 信任（`-5..5`）、张力（`0..5`）与倾向卡数值（`0..5`）触顶/触底改为自动钳制，取消语态切换与关系变化不得同因的拦截；④ `SKILL.md` 补充宿主对话压缩后先调 `get-context --depth full` 恢复完整卡片与会话状态。
-      - 下一步：全部 210 个可改世界（96 个 v1、62 个第一波 v2、52 个第二波 v2）按新标准分三会话并行推进。
+      - 2026-11-24 全库 210 个世界包 v2.5 无限制版重构与全仓合流收官：
+        - 世界包与内容编译：双窗口并行完成全部 210 个可改世界（窗口 A 114 + 窗口 B 96，不动夹具 `harbor_night_shift` 零触碰）v2.5 无限制版翻修，严格保留全员明确成年与原设情趣器具原名；补全 `domain/worldpack.py:SHOWN_AS_WRITTEN`（`pressures.title`、`locations.name`），扩充 `content-src/tags.json` 5 条核心标签描述，内容版本 `2026.10.30` → `2026.11.24`，完成 211 世界跨包交叉校验、`compile_content.py` 全量编译与 `gen_references.py` 刷新（全库累计 15,753 项素材）。
+        - 全仓非世界包与规范同步：按 v2.5 无限制版决策同步修订 Skill 层（`SKILL.md` 控字节至 15,912 / 16,384 B、`agents/openai.yaml`、`references/*.md`、`examples/custom_world.json`）、Runtime 引擎层（放开 `turn.py` 对 `surface`/`negotiate` 亲密回应拦截、移出 `drunk` 失能列表、状态栏与新手指南去机械腔及术语统一）、`spec/` 顶层规范与门面文档（统一纯 LF）、E2E 评测体系（量表升级至版本 3、`machine_checks.py` 覆盖 `standby_cast`、剧本 06/08/14/15 校准及 `calibration/build.py` `flawed-4` 重写与 12 条校准记录重生成）。
+        - 视觉资产与仓库清理：刷新 `tools/readme_art/lofi_set.py` 十项素材计数（一万五千余项素材）与 `architecture.svg` 批量记账文案（`REGIONS` 211 项展板短名按 D91 维持与包内 `title` 一致，待后续统一联动改名），重绘 `.github/readme-lofi/*.svg`；经用户确认 `git rm` 清理 20 张零引用早期遗留静态 SVG（`assets/*.svg`、`.github/readme/*.svg`，保留 `assets/alipay-qr.jpg`），`ENVIRONMENT.md` 按原约定保持不动。
 
 ## 待决事项（需要用户决定）
 

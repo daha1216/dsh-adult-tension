@@ -1,7 +1,7 @@
 {
  "background_cast": [
   {
-   "adult_context": "主持神殿多年的老主教",
+   "adult_context": "年满六十八岁、驻守数十年的成年老主教。",
    "age_range": [
     68,
     75
@@ -9,7 +9,7 @@
    "function": "obstacle",
    "gender": "male",
    "id": "bg_sanctuary_archbishop_albert",
-   "line": "{npc.name}拄着杖站在平台上，问今夜还有谁没回屋。",
+   "line": "老主教{npc.name}拄银杖立在风口：封山钟响过了，查清谁没回屋。",
    "location_ids": [
     "loc_alpine_summit_open_platform"
    ],
@@ -17,7 +17,7 @@
    "role": "神殿老主教"
   },
   {
-   "adult_context": "守了一辈子山的老守山人",
+   "adult_context": "年满五十八岁、巡护三十年的正式雇员守山人。",
    "age_range": [
     58,
     68
@@ -25,7 +25,7 @@
    "function": "messenger",
    "gender": "male",
    "id": "bg_watchman_lao_hans",
-   "line": "{npc.name}跺掉靴上的雪，说冰阶那头又压下来一层云。",
+   "line": "守山人{npc.name}跺掉厚冰：冰阶黑云压顶，半夜准有封路暴雪。",
    "location_ids": [
     "loc_alpine_summit_open_platform",
     "loc_circular_megalith_altar"
@@ -34,23 +34,23 @@
    "role": "老守山人"
   },
   {
-   "adult_context": "已成年、正式受戒的修女",
+   "adult_context": "年满二十一岁、成年受戒的正式修女。",
    "age_range": [
-    20,
-    23
+    21,
+    24
    ],
    "function": "rumor_source",
    "gender": "female",
    "id": "bg_troupe_junior_clerk_xiao_anna",
-   "line": "{npc.name}抱着烛台从侧廊走过，小声问同伴有没有听说暖室的事。",
+   "line": "修女{npc.name}捧烛走过侧廊，嘀咕暖室今晚炭火烧得格外烫。",
    "location_ids": [
     "loc_circular_megalith_altar"
    ],
    "name": null,
-   "role": "戒律院年轻修女"
+   "role": "戒律院值夜修女"
   },
   {
-   "adult_context": "跑了二十年山道的成年驼队领队",
+   "adult_context": "年满三十五岁、持证跑山道的成年领队。",
    "age_range": [
     35,
     48
@@ -58,7 +58,7 @@
    "function": "helper",
    "gender": "any",
    "id": "bg_alpine_rescue_captain_kurt",
-   "line": "{npc.name}清点着驮马，说明早最多再带两个人。",
+   "line": "领队{npc.name}勒紧马肚带：破晓拔营，最多只剩两个空位。",
    "location_ids": [
     "loc_alpine_summit_open_platform"
    ],
@@ -66,15 +66,15 @@
    "role": "驼队领队"
   },
   {
-   "adult_context": "戒律院的正式宿卫",
+   "adult_context": "年满二十三岁、正式雇员戒律院宿卫。",
    "age_range": [
-    22,
+    23,
     35
    ],
    "function": "obstacle",
    "gender": "any",
    "id": "bg_vigil_guard",
-   "line": "{npc.name}提着灯在暖室外的回廊来回走，每走一趟都停下听听门里的动静。",
+   "line": "宿卫{npc.name}提灯巡过暖室外墙，停步细听门内动静。",
    "location_ids": [
     "loc_circular_megalith_altar"
    ],
@@ -82,7 +82,7 @@
    "role": "戒律院宿卫"
   },
   {
-   "adult_context": "持证上岗的科考队报务员",
+   "adult_context": "年满二十四岁、持证上岗的科考报务员。",
    "age_range": [
     24,
     35
@@ -90,7 +90,7 @@
    "function": "messenger",
    "gender": "any",
    "id": "bg_radio_operator",
-   "line": "{npc.name}戴着耳机敲了敲电台：山下说夜里有暴雪。",
+   "line": "报务员{npc.name}按耳机皱眉：磁暴压来，卫星电台随时串频锁死。",
    "location_ids": [
     "loc_expedition_infirmary_hut"
    ],
@@ -100,7 +100,7 @@
  ],
  "cast_combos": [
   {
-   "chemistry": "{saintess_eleonora.name}是全山最不能碰的人，你是赶驼队的向导；上月那一夜之后，两人在人前连眼神都不敢多碰一下。",
+   "chemistry": "{saintess_eleonora.name}是禁触神女，你是向导；上月同榻破戒后，今夜圣痕反噬逼得圣女再为你开暗门。",
    "id": "cc_saintess_and_guide_secret",
    "identity_ids": [
     "pi_alpine_supply_guide"
@@ -113,15 +113,15 @@
     {
      "a": "player",
      "a_to_b": {
-      "tension": 4,
+      "tension": 5,
       "trust": 3
      },
      "b": "saintess_eleonora",
      "b_to_a": {
       "tension": 5,
-      "trust": 3
+      "trust": 4
      },
-     "reason": "上月暴雪夜圣女把冻僵的你放进守夜暖室同榻取暖，腕间守贞朱砂印被你的掌心蹭花了一角。",
+     "reason": "上月暴雪夜圣女放冻僵的你入暖室同榻，朱砂印被蹭花，引动了沉寂六年的圣痕。",
      "stage": "intimate"
     }
    ],
@@ -129,13 +129,14 @@
     "saintess_eleonora"
    ],
    "stakes": {
-    "irreplaceable_goal": "圣女想知道，描补印记的那只手，肯不肯也替自己担一回破戒的罪名。",
-    "limit_gap": "圣女不能让人看见你进暖室，你没有资格出现在验身礼上。",
-    "meeting_reason": "明晨封山验身礼在即，{saintess_eleonora.name}趁夜把你叫进暖室，要你替自己重新描补腕间印记。",
-    "resource_gap": "圣女握着封殿令和内殿通行；你握着下山冰道的向导绳。"
+    "irreplaceable_goal": "{saintess_eleonora.ta}借你掌心压住反噬，试探你敢不敢带破戒圣女逃下山。",
+    "limit_gap": "{saintess_eleonora.ta}不能被查出藏人，你被搜出即锁寒牢。",
+    "meeting_reason": "验身礼在即，{saintess_eleonora.name}小腹淫纹灼烧且腕印已花，唤你入暖室镇压描补。",
+    "resource_gap": "{saintess_eleonora.ta}握封殿令，你握下山冰道向导主绳。"
    },
    "tags": [
-    "intimate"
+    "intimate",
+    "supernatural"
    ],
    "tension_engine_ids": [
     "te_touch_vow_wrist_seal",
@@ -143,7 +144,7 @@
    ]
   },
   {
-   "chemistry": "{saintess_eleonora.name}和你在碑室定过私约：银匙在你手里，暗号在两人嘴里，越不越界由两个人一起说了算。",
+   "chemistry": "你持调阅令能开地宫秘匣，{saintess_eleonora.name}握内殿银匙；两人早已拆穿伪戒，共享白玉势秘密。",
    "id": "cc_saintess_and_archivist_vow",
    "identity_ids": [
     "pi_sanctuary_relic_archivist"
@@ -156,15 +157,15 @@
     {
      "a": "player",
      "a_to_b": {
-      "tension": 3,
+      "tension": 4,
       "trust": 4
      },
      "b": "saintess_eleonora",
      "b_to_a": {
-      "tension": 4,
+      "tension": 5,
       "trust": 4
      },
-     "reason": "秋分清点圣物时两人在地宫碑室定下私约，圣女把内殿暗门银匙交给你保管，约定说暗号就停。",
+     "reason": "秋分核验地宫圣物时同读碑阴共感古礼，圣女将暗门银匙交你贴身收存。",
      "stage": "committed"
     }
    ],
@@ -172,13 +173,14 @@
     "saintess_eleonora"
    ],
    "stakes": {
-    "irreplaceable_goal": "圣女要你说一句实话：带走拓片是为了学问，还是为了带走圣女自己。",
-    "limit_gap": "圣女离不开神殿一步，你的调阅令封山后就作废。",
-    "meeting_reason": "最后一班下山驼队明早出发，{saintess_eleonora.name}在碑室等你，商议今晚要不要带着底碑拓片一同离山。",
-    "resource_gap": "你有调阅令，能把拓片名正言顺带出地宫；圣女有内殿暗门，能让你随时进来。"
+    "irreplaceable_goal": "{saintess_eleonora.ta}要确认你带走拓片，是为公差还是为带走圣女。",
+    "limit_gap": "调阅令封山失效，{saintess_eleonora.ta}熬不过早祷便坠寒窟。",
+    "meeting_reason": "圣血翻涌，{saintess_eleonora.name}在碑室等你开启秘匣镇压，商议是否携拓片离山。",
+    "resource_gap": "你能取出镇脉白玉势与拓片，{saintess_eleonora.ta}能屏退侍从留出密室。"
    },
    "tags": [
-    "intimate"
+    "intimate",
+    "supernatural"
    ],
    "tension_engine_ids": [
     "te_forged_stele_truth",
@@ -186,7 +188,7 @@
    ]
   },
   {
-   "chemistry": "{saintess_eleonora.name}隔着白纱跟你说话，从不叫你的名字；可上周勘验暖室时，摘下白纱的是圣女自己。",
+   "chemistry": "{saintess_eleonora.name}人前隔纱清冷，在握有勘验权与决算章的你面前，暖室屏风后的热喘根本瞒不住。",
    "id": "cc_architect_and_saintess_inspection",
    "identity_ids": [
     "pi_chief_sanctuary_architect"
@@ -200,14 +202,14 @@
      "a": "player",
      "a_to_b": {
       "tension": 4,
-      "trust": 2
+      "trust": 3
      },
      "b": "saintess_eleonora",
      "b_to_a": {
-      "tension": 4,
+      "tension": 5,
       "trust": 3
      },
-     "reason": "上周单独勘验暖室裂缝时，圣女主动摘下白纱擦去你额角冰碴，低声求你把勘验期延到初冬。",
+     "reason": "上周独勘暖室撞见圣女含春宫球跪坐微喘，圣女红眼求你将工期延至封山夜。",
      "stage": "flirting"
     }
    ],
@@ -215,13 +217,14 @@
     "saintess_eleonora"
    ],
    "stakes": {
-    "irreplaceable_goal": "圣女想知道，你肯拖延工期，是因为那道裂缝，还是因为人。",
-    "limit_gap": "你不能为私心拖延工程，圣女不能被人看见单独留客。",
-    "meeting_reason": "工程验收单只差你一笔签字，{saintess_eleonora.name}借口内殿漏风，留你在暖室独处。",
-    "resource_gap": "你握着验收签批章，一笔下去修缮队就得在封山前撤走；圣女握着暖室的门闩。"
+    "irreplaceable_goal": "{saintess_eleonora.ta}要你借整修封锁外廊，替今夜反噬打掩护。",
+    "limit_gap": "你压异常担渎职风险，{saintess_eleonora.ta}求封口须卸下防线。",
+    "meeting_reason": "借夜勘石缝之名，{saintess_eleonora.name}落闩屏退宿卫，隔纱勾住你的袖口。",
+    "resource_gap": "你握验收章与内殿勘验权，{saintess_eleonora.ta}困于反噬急需遮掩。"
    },
    "tags": [
-    "workplace"
+    "workplace",
+    "intimate"
    ],
    "tension_engine_ids": [
     "te_touch_vow_wrist_seal",
@@ -229,7 +232,7 @@
    ]
   },
   {
-   "chemistry": "{saintess_eleonora.name}有权封殿留人，你有权下令撤离；谁先开口，谁就把对方的去留攥在了手里。",
+   "chemistry": "{saintess_eleonora.name}握封殿令，你握撤离权与电台；暴雪夜谁先松口，谁的去留与体温便落入对方掌中。",
    "id": "cc_safety_chief_and_saintess_turn",
    "identity_ids": [
     "pi_expedition_safety_chief"
@@ -252,7 +255,7 @@
       "tension": 4,
       "trust": 4
      },
-     "reason": "三天前冰阶浓雾里两人失散，在背风石龛重逢，圣女主动解开圣袍外披与你十指相扣度过半宿。",
+     "reason": "三日前浓雾迷途，两人在石龛解开湿袍紧贴复温半宿，指尖擦过腕间朱砂。",
      "stage": "intimate"
     }
    ],
@@ -260,10 +263,10 @@
     "saintess_eleonora"
    ],
    "stakes": {
-    "irreplaceable_goal": "圣女要你亲口说，是要带圣女走，还是要圣女留下等你。",
-    "limit_gap": "撤离令带不走不肯走的人，封殿令也留不住执意下山的人。",
-    "meeting_reason": "暴雪预警刚传到电台，{saintess_eleonora.name}披着斗篷来石屋找你，问你打算带谁走。",
-    "resource_gap": "你握着卫星电台和最高撤离令；圣女握着封殿令和全殿人心。"
+    "irreplaceable_goal": "{saintess_eleonora.ta}要你定夺：带圣女破戒下山，还是留绝顶共度寒冬。",
+    "limit_gap": "撤离令带不走拒摘纱的人，封殿令锁不住拔营的你。",
+    "meeting_reason": "暴雪预警刚至，{saintess_eleonora.name}潜入石龛找你，腕脉发烫逼问明早带谁走。",
+    "resource_gap": "你掌撤离签署权与电台，{saintess_eleonora.ta}掌闭殿令与信众。"
    },
    "tags": [
     "intimate"
@@ -274,7 +277,7 @@
    ]
   },
   {
-   "chemistry": "{abbess_clara.name}查了半辈子别人的账，偏偏有一笔落在你手里；两人每次对视，都像在核同一页数。",
+   "chemistry": "{abbess_clara.name}执掌刑律半生，三百银币死穴却攥在你手里；黑袍扣得越紧，关门谈条件呼吸越乱。",
    "id": "cc_abbess_and_architect_audit",
    "identity_ids": [
     "pi_chief_sanctuary_architect"
@@ -292,10 +295,10 @@
      },
      "b": "abbess_clara",
      "b_to_a": {
-      "tension": 4,
+      "tension": 5,
       "trust": 2
      },
-     "reason": "半月前核对炭火账目时你看出三百银币亏空却压下没报，掌事修女当夜端着热红酒来你房里试探口风。",
+     "reason": "半月前你看出三百银币亏空压下未发，掌事修女当夜端热红酒敲开你房门。",
      "stage": "testing"
     }
    ],
@@ -303,13 +306,14 @@
     "abbess_clara"
    ],
    "stakes": {
-    "irreplaceable_goal": "掌事修女想弄明白，你压着那页账不报，到底图什么。",
-    "limit_gap": "你压下亏空不报已是失职，掌事修女不能让主教团看出账有问题。",
-    "meeting_reason": "{abbess_clara.name}拿着明日封山清场名单来找你，想用内殿通行特批换你销毁那页旧账单。",
-    "resource_gap": "你知道三百银币的亏空，也握着尾款签批章；掌事修女握着封山清场名单和内殿通行特批。"
+    "irreplaceable_goal": "{abbess_clara.ta}要在明晨呈报前封死你的嘴，保住十余年权位。",
+    "limit_gap": "压账担干系，捅到主教团{abbess_clara.ta}即身败名裂。",
+    "meeting_reason": "{abbess_clara.name}携查验册与锁灵颈环深夜来访，愿拿特批与臣服换你烧掉旧账。",
+    "resource_gap": "你握亏空底单与签批章，{abbess_clara.ta}握锁灵颈环与查验册。"
    },
    "tags": [
-    "workplace"
+    "workplace",
+    "coercion_theme"
    ],
    "tension_engine_ids": [
     "te_hidden_ledgers",
@@ -317,7 +321,7 @@
    ]
   },
   {
-   "chemistry": "{scholar_lin_yan.name}和你同拓一块残碑，一个按纸一个扑墨，谁都没说破那天在碑阴里读到的是什么。",
+   "chemistry": "{scholar_lin_yan.name}译得出欢好镇脉古文，你握带拓片出山的调阅令；幽冷地宫同按宣纸时呼吸烫人。",
    "id": "cc_scholar_and_archivist_rubbing",
    "identity_ids": [
     "pi_sanctuary_relic_archivist"
@@ -331,14 +335,14 @@
      "a": "player",
      "a_to_b": {
       "tension": 4,
-      "trust": 2
+      "trust": 3
      },
      "b": "scholar_lin_yan",
      "b_to_a": {
       "tension": 4,
       "trust": 3
      },
-     "reason": "两人在地宫同拓一块残碑时呼吸交错，学者故意覆住你的手背，教你辨认碑阴里记载欢好古礼的密文。",
+     "reason": "地宫拓碑时{scholar_lin_yan.ta}从背后覆住你手，引你摸过碑阴白玉势疏导刻痕。",
      "stage": "flirting"
     }
    ],
@@ -346,10 +350,10 @@
     "scholar_lin_yan"
    ],
    "stakes": {
-    "irreplaceable_goal": "学者想知道，你肯不肯为一张拓片，也为拓片背后的人，担一回风险。",
-    "limit_gap": "学者没有调阅令，你不能替人私带禁碑出山。",
-    "meeting_reason": "{scholar_lin_yan.name}把孤本拓片藏进你的行囊夹层，约你在背风石龛分验真迹。",
-    "resource_gap": "学者识得底碑上的古文，你有调阅令能把拓片名正言顺带下山。"
+    "irreplaceable_goal": "{scholar_lin_yan.ta}要拉你共守孤本，并在封山夜验证古礼共感。",
+    "limit_gap": "{scholar_lin_yan.ta}无令带不出拓片，你私带禁碑被搜同样撤职。",
+    "meeting_reason": "{scholar_lin_yan.name}把孤本塞进你行囊暗层，拉你进石龛贴身核验碑阴镇脉秘法。",
+    "resource_gap": "{scholar_lin_yan.ta}握孤本与译稿，你握合法出山调阅封缄。"
    },
    "tags": [
     "intimate"
@@ -360,7 +364,7 @@
    ]
   },
   {
-   "chemistry": "{expedition_doctor_vera.name}量你血氧时手指搭在你腕上，比该停的久一拍；对外是医患，关上门谁都不肯先改口。",
+   "chemistry": "{expedition_doctor_vera.name}拿听诊器贴你心口总多停三秒；人前守医患分寸，木门一锁便紧逼要你认账。",
    "id": "cc_doctor_and_safety_chief_watch",
    "identity_ids": [
     "pi_expedition_safety_chief"
@@ -381,7 +385,7 @@
       "tension": 5,
       "trust": 3
      },
-     "reason": "高反好了以后，下山补给前一晚两人在医务站的行军床上越了界，事后约定对外只称医患。",
+     "reason": "上月高反痊愈夜两人在行军床上越界，晨起扣好衣领对外只称医患。",
      "stage": "intimate"
     }
    ],
@@ -389,10 +393,10 @@
     "expedition_doctor_vera"
    ],
    "stakes": {
-    "irreplaceable_goal": "医官要在名单定下之前，等你一句话：那一晚算不算数。",
-    "limit_gap": "名单要两人的签字缺一不可，谁也不能单独决定。",
-    "meeting_reason": "医务站只剩最后一箱药，{expedition_doctor_vera.name}锁上石屋门，拉你清点明早跟队下山的名单。",
-    "resource_gap": "医官握着药箱和医疗强制下山令，你握着撤离签署权和电台。"
+    "irreplaceable_goal": "{expedition_doctor_vera.ta}要在签名前逼你撕开医患假面，给越界那夜定名分。",
+    "limit_gap": "通行签条须两人联署生效，谁也绕不开谁。",
+    "meeting_reason": "{expedition_doctor_vera.name}反锁医务站木门，将最后两张签条拍在行军床边等你落字。",
+    "resource_gap": "{expedition_doctor_vera.ta}握药箱、脉案与签条，你握撤离权与电台。"
    },
    "tags": [
     "intimate"
@@ -403,7 +407,7 @@
    ]
   },
   {
-   "chemistry": "{mason_chief_otto.name}话少，你欠首席半袋干粮的情，首席欠你一个守口如瓶的约；两人都记得清楚。",
+   "chemistry": "{mason_chief_otto.name}话少手烫，握活砖暗口与驼队座位；雪夜拉你进毡帘交底时，胸膛堵死退路。",
    "id": "cc_mason_and_guide_passage",
    "identity_ids": [
     "pi_alpine_supply_guide"
@@ -416,15 +420,15 @@
     {
      "a": "player",
      "a_to_b": {
-      "tension": 2,
+      "tension": 3,
       "trust": 3
      },
      "b": "mason_chief_otto",
      "b_to_a": {
-      "tension": 2,
+      "tension": 3,
       "trust": 4
      },
-     "reason": "去年雪崩封道时首席石匠把半袋干粮分给你，只要你替修缮队守住后山活砖暗道的口风。",
+     "reason": "去年雪崩困山首席石匠解开羊皮袄裹住你分干粮，教你认下活砖暗口。",
      "stage": "familiar"
     }
    ],
@@ -432,13 +436,14 @@
     "mason_chief_otto"
    ],
    "stakes": {
-    "irreplaceable_goal": "首席石匠要找一个能托付秘密的人，暗道的事总得有人接着守。",
-    "limit_gap": "你是帮工，见了首席要听吩咐；首席不能让戒律院知道暗道的事。",
-    "meeting_reason": "{mason_chief_otto.name}在环形祭坛边拦住你，要你今夜协助把一批未登记的石匣运下山。",
-    "resource_gap": "首席石匠决定驼队座位怎么分，你认得夜里下山的每一级冰阶。"
+    "irreplaceable_goal": "{mason_chief_otto.ta}要将你绑成过命同谋，共掌神殿暗道与生路。",
+    "limit_gap": "你受{mason_chief_otto.ta}节制，{mason_chief_otto.ta}私运石匣离了你下不了山。",
+    "meeting_reason": "{mason_chief_otto.name}在祭坛阴影拦住你，要你今夜走暗道协助运走古石匣。",
+    "resource_gap": "{mason_chief_otto.ta}掌座位与暗道机括，你认得暴雪夜险径。"
    },
    "tags": [
-    "workplace"
+    "workplace",
+    "intimate"
    ],
    "tension_engine_ids": [
     "te_hidden_ledgers",
@@ -446,7 +451,7 @@
    ]
   },
   {
-   "chemistry": "{saintess_eleonora.name}把你藏在屏风后半步之内，{abbess_clara.name}的灯光已经照到门槛；三个人里，每个人都握着另一个人的一笔账。",
+   "chemistry": "{saintess_eleonora.name}刚把你拉进屏风后，{abbess_clara.name}已拎着锁灵颈环推门而入；一屏之隔三人互捏死穴。",
    "id": "cc_saintess_abbess_vigil_clash",
    "identity_ids": [
     "pi_alpine_supply_guide"
@@ -460,20 +465,20 @@
      "a": "player",
      "a_to_b": {
       "tension": 5,
-      "trust": 3
+      "trust": 4
      },
      "b": "saintess_eleonora",
      "b_to_a": {
       "tension": 5,
       "trust": 4
      },
-     "reason": "昨夜你在暖室替圣女暖手时弄花了腕上的守贞朱砂，两人约好今晚补画。",
+     "reason": "昨夜捂手蹭花朱砂印，今夜潜入暖室用春宫球压圣痕便撞上查房。",
      "stage": "intimate"
     },
     {
      "a": "player",
      "a_to_b": {
-      "tension": 3,
+      "tension": 4,
       "trust": 1
      },
      "b": "abbess_clara",
@@ -481,13 +486,13 @@
       "tension": 4,
       "trust": 1
      },
-     "reason": "上周你替掌事修女瞒下过冬炭银亏空，对方许诺戒律抽查时对你睁一只眼闭一只眼。",
+     "reason": "上周你替掌事修女瞒下炭银搬运差额，对方默许你在外廊走动。",
      "stage": "testing"
     },
     {
      "a": "saintess_eleonora",
      "a_to_b": {
-      "tension": 4,
+      "tension": 5,
       "trust": -2
      },
      "b": "abbess_clara",
@@ -495,7 +500,7 @@
       "tension": 5,
       "trust": -1
      },
-     "reason": "掌事修女管着圣女的戒律，圣女握着掌事修女的炭银收据，两人互相防着。",
+     "reason": "掌事修女紧盯圣女腕印脉息，圣女捏着私吞炭银收据寸步不让。",
      "stage": "testing"
     }
    ],
@@ -504,13 +509,15 @@
     "abbess_clara"
    ],
    "stakes": {
-    "irreplaceable_goal": "你得在这间暖室里，同时保住一个人的名节和另一个人的体面。",
-    "limit_gap": "你一出声，圣女破戒的事就坐实；掌事修女闹大了，自己的亏空也藏不住。",
-    "meeting_reason": "{abbess_clara.name}突然提着油灯闯进守夜暖室，要提前查验圣女腕印，而你正被{saintess_eleonora.name}藏在屏风后。",
-    "resource_gap": "圣女握着炭银收据，掌事修女握着验身册，你两边都欠着情。"
+    "irreplaceable_goal": "屏风后稳住圣女失控喘息，反拿炭银把柄逼退或拉拢掌事修女。",
+    "limit_gap": "你出声圣女坐实破戒，修女敲破戒钟贪墨账也陪葬。",
+    "meeting_reason": "{abbess_clara.name}夜闯暖室提前验印，正替圣女压淫纹反噬的你紧贴屏风暗影里。",
+    "resource_gap": "圣女握炭银收据，掌事修女握验身册与戒具，你藏屏风后握两人把柄。"
    },
    "tags": [
-    "intimate"
+    "intimate",
+    "explicit",
+    "coercion_theme"
    ],
    "tension_engine_ids": [
     "te_touch_vow_wrist_seal",
@@ -518,7 +525,7 @@
    ]
   },
   {
-   "chemistry": "{scholar_lin_yan.name}是你进山前就定了情的人，{sanctuary_steward_erik.name}是这几夜总在钟楼替你烘衣的人；如今两人隔着一块禁碑对峙。",
+   "chemistry": "{scholar_lin_yan.name}是私定盟约的知己，{sanctuary_steward_erik.name}是揣银发带与残拓勾引勒索的执事；隔碑等你裁断。",
    "id": "cc_scholar_steward_rubbing_deal",
    "identity_ids": [
     "pi_expedition_safety_chief",
@@ -539,38 +546,38 @@
      },
      "b": "scholar_lin_yan",
      "b_to_a": {
-      "tension": 3,
+      "tension": 4,
       "trust": 4
      },
-     "reason": "进山前两人便已定情，学者答应拓完底碑就随你回城安家，并把私章交给你保管。",
+     "reason": "登山前已定情，学者将私章交你贴身保管，约好拓完同返。",
      "stage": "committed"
     },
     {
      "a": "player",
      "a_to_b": {
-      "tension": 3,
-      "trust": 2
+      "tension": 4,
+      "trust": 1
      },
      "b": "sanctuary_steward_erik",
      "b_to_a": {
       "tension": 4,
       "trust": 2
      },
-     "reason": "前夜钟楼避风时执事替你烘烤湿衣，借递热茶的工夫指尖摩挲你掌心，邀你封山夜去酒窖小酌。",
+     "reason": "前夜钟楼执事烘袍摩挲你手腕，暗示手里有值得进屋细看的脏证。",
      "stage": "flirting"
     },
     {
      "a": "scholar_lin_yan",
      "a_to_b": {
       "tension": 4,
-      "trust": -1
+      "trust": -2
      },
      "b": "sanctuary_steward_erik",
      "b_to_a": {
       "tension": 4,
-      "trust": 0
+      "trust": -1
      },
-     "reason": "执事握着学者私拓禁碑的把柄，学者知道执事想要的只是一个下山名额。",
+     "reason": "执事搜出学者私拓残页勒索名额，两人剑拔弩张。",
      "stage": "testing"
     }
    ],
@@ -579,13 +586,14 @@
     "sanctuary_steward_erik"
    ],
    "stakes": {
-    "irreplaceable_goal": "你得在情分和公道之间裁一回，裁完还要面对两个人各自的眼神。",
-    "limit_gap": "你偏向谁，另一个就会把事情捅到戒律院。",
-    "meeting_reason": "{sanctuary_steward_erik.name}在地宫碑室撞见{scholar_lin_yan.name}私拓禁碑，两人把你拉到碑前，要你裁定拓片归谁。",
-    "resource_gap": "学者有拓片，执事有酒窖的钥匙和告发的嘴，你有决定谁下山的权力。"
+    "irreplaceable_goal": "压服执事勒索并定下孤本拓片与下山名额归属。",
+    "limit_gap": "护学者须堵死执事的嘴，纵容执事则禁碑与私情皆曝。",
+    "meeting_reason": "{sanctuary_steward_erik.name}在碑室堵住{scholar_lin_yan.name}，将握签条的你拉入石门谈判。",
+    "resource_gap": "学者握孤本译稿，执事握把柄与铜钥，你握谁能下山的实权。"
    },
    "tags": [
-    "intimate"
+    "intimate",
+    "coercion_theme"
    ],
    "tension_engine_ids": [
     "te_forged_stele_truth",
@@ -597,98 +605,100 @@
   {
    "fidelity": "exact",
    "id": "ch_screen_whisper",
-   "reach": "只到屏风两侧的人，门外听不见",
-   "text": "暖室屏风后的悄声话"
+   "reach": "仅限屏风内贴身之人，外廊宿卫听不真切",
+   "text": "暖室屏风后的压低耳语"
   },
   {
    "fidelity": "exact",
    "id": "ch_expedition_radio",
-   "reach": "山下营地和科考队全员，消息原样传到",
-   "text": "科考队的卫星电台"
+   "reach": "直通山下大本营，一旦开麦原声尽传",
+   "text": "医务站高山卫星电台"
   },
   {
    "fidelity": "distorted",
    "id": "ch_camp_whispers",
-   "reach": "一夜之间传遍营地和侧廊，越传越离谱",
-   "text": "石屋营地的耳语"
+   "reach": "半宿传遍侧廊与平台，越传越离谱",
+   "text": "石屋炉边的夜话"
   }
  ],
  "character_templates": [
   {
-   "adult_context": "成年后受戒的当值圣女，守禁触戒律已满六年，独居祭坛后的暖室",
+   "adult_context": "年满二十四岁、成年受戒并独居守禁触戒律满六年的当值圣女。",
    "age_range": [
     24,
     26
    ],
    "appearance_options": [
-    "素白重织锦圣袍外披银丝刺绣连帽披肩，银白长发用银色发带束起，容颜清冷出尘，两腮带着高原的红润",
-    "隔着白纱授福时连眼睫都不动；袖口一撩，腕间那点守贞朱砂印在炭火下红得刺眼"
+    "素白重织锦圣袍外披银丝连帽斗篷，银发系银色发带，隔着白纱授福时清冷不染凡尘。",
+    "腕点鲜红守贞朱砂印，一旦小腹契约淫纹发热反噬，冷白脸颊泛起潮红，指尖止不住轻颤。"
    ],
    "decision": {
     "avoids": [
-     "当众被人怜悯"
+     "把她当泥塑神像叩拜或怜悯的眼神"
     ],
-    "contrast": "在朝圣者面前清冷得像山顶的雪，私下却是先伸手、也先说暗号停下的那一个",
-    "core_value": "戒律可以守，但不该拿一个人的一生去守",
+    "contrast": "人前凛然禁欲神女；屏风后淫纹烧起时，主动拉你探入圣袍、口嫌体正直。",
+    "core_value": "假圣洁可以烧穿，绝不拉护着自己的人陪葬寒窟。",
     "goal_options": [
-     "在验身前把腕间印记补好，不连累任何人",
-     "弄清底碑上写的到底是不是真的戒律"
+     "验身前镇压反噬并描补腕间守贞朱砂印",
+     "拿到伪戒底碑真相挣脱神殿枷锁",
+     "确认替她镇压圣痕的你肯不肯带她下山"
     ],
     "never": [
-     "拿别人的前程换自己脱身"
+     "供出私入暖室之人的名字换取宽宥"
     ],
     "prefers": [
-     "说话算数、肯替人守口风的人"
+     "不怕亵渎、敢撕开白纱替她压住反噬的狠决之人"
     ],
     "pressure_responses": {
-     "breaking": "摘下白纱说出那晚的事，只求别牵连旁人",
-     "high": "当着掌事修女的面拿出那张炭银收据，声音仍是冷的",
-     "low": "隔着白纱说话，语气平得听不出情绪",
-     "mid": "把袖口往下拉盖住手腕，吩咐侍从退下"
+     "breaking": "屏风后被玄铁腕扣锁在石环上疏导反噬，死咬纯银仪式短匕柄端吞下泣音，圣袍下双腿失控缠紧你的腰。",
+     "high": "圣痕发烫呼吸微颤，仍握纯银十字护手仪式短匕冷声对峙。",
+     "low": "隔着白纱端坐祭坛，声线清冷平淡。",
+     "mid": "拽低宽袖遮住晕开的朱砂印，屏退侍从。"
     },
-    "relationship_stance": "对外人一律隔着白纱；对认定的人，把茶放在石阶上，等对方自己来取",
-    "withdrawal": "回到暖室落下门闩，在炭盆前跪坐到天亮"
+    "relationship_stance": "对外隔纱冷若冰霜；唯在你面前卸下神格，羞愤失控却食髓知味。",
+    "withdrawal": "含着银制镂空春宫球跪坐炭盆前平复余颤，重戴白纱恢复圣洁仪态。"
    },
    "gender": "female",
-   "gender_reason": "“圣女”是神殿女性专职教衔",
+   "gender_reason": "雪线神殿当值圣女为女性专职教衔，固定为女性。",
    "id": "saintess_eleonora",
    "identity": {
-    "authority": "执掌降福圣仪、内殿禁地通行与封山闭殿令，可以下令封殿留人",
-    "exposure": "腕间守贞朱砂印已在私下相拥时被汗水浸花，天亮验身一旦露馅，将被终身幽禁寒窟",
-    "hidden": "长年靠医官开的安神药才睡得着；心里早就不信这条戒律，只是没人敢先说",
+    "authority": "执掌降福圣仪、内殿通行与封山闭殿令。",
+    "exposure": "守贞朱砂印已在相拥时被汗水浸花，破戒更引动圣血反噬，露馅即囚寒窟。",
+    "hidden": "六年禁触令肌肤敏感入骨；今夜小腹淫纹灼烫如焚，暗砖里的银制镂空春宫球已压不住热潮，急需凡人体温与白玉势疏导。",
     "limits": [
-     "戒律不许任何凡人触碰，授福只能隔着白纱"
+     "严禁凡人触碰，受寒髓圣血与契约淫纹反噬掣肘"
     ],
     "obligations": [
-     "封山前夜当众接受腕印验身"
+     "封山前夜与早祷当众接受腕印与脉息查验"
     ],
     "resources": [
-     "一柄纯银十字护手仪式短匕，只在祭典上佩戴",
-     "掌事修女截留炭银的一张原始收据"
+     "祭典佩戴的纯银十字护手仪式短匕",
+     "掌事修女私吞炭银的原始收据"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "暴雪夜肯把体温分给陌生人的人",
-     "知道戒律之后仍先问自己愿不愿意的人"
+     "暴雪夜裹住她冰冷身躯的滚烫凡人体温",
+     "门外宿卫巡廊时仍敢在屏风后替她捂热白玉势的胆魄"
     ],
     "boundaries": [
-     "说了暗号就停，谁也不越过"
+     "绝不让门外宿卫听见屏风后水声与喘息，早祷前须补好朱砂印"
     ],
     "desire_range": [
-     2,
-     4
+     3,
+     5
     ],
-    "desired_position": "白纱只对一个人摘下",
+    "desired_position": "人前高居祭坛、暗室只对一人摘纱任凭镇压的圣女",
     "dislikes": [
-     "把圣女当供品看的眼神"
+     "畏首畏尾不敢触碰她的退缩"
     ],
-    "expression": "把自己那盏酥油茶推到你手边，指尖停在离你一寸的地方",
+    "expression": "隔着未摘的白纱仰头吻你，滚烫指尖引你解开圣袍系带，颤声求你用力压住邪火。",
     "likes": [
-     "炭盆边一句不必回答的闲话"
+     "滚烫掌心贴紧小腹发热淫纹与腕脉",
+     "隔着白纱与素白圣袍的亵渎厮磨"
     ],
     "preconditions": [
-     "两人都清醒，门闩落下，心意出于自己而不是被验身逼出来的慌"
+     "暖室落闩或石龛垂帘隔绝宿卫，圣痕反噬或腕印危机烧到眼前"
     ],
     "self_control_range": [
      3,
@@ -716,103 +726,108 @@
    "situation": {
     "exits": [
      {
-      "cost": "执笔的人从此和破戒绑在一起",
-      "option": "请信得过的人趁夜替自己描补印记"
+      "cost": "贴身疏导痕迹极重，执笔镇压者与破戒重罪彻底绑死。",
+      "option": "趁夜引心腹入暖室，扣上玄铁腕扣以捂热的白玉势镇压并重绘朱砂"
      },
      {
-      "cost": "两败俱伤，神殿过冬的账也会一并翻出来",
-      "option": "拿出炭银收据与掌事修女摊牌"
+      "cost": "随时引爆破戒钟，且春宫球整夜研磨令脉息濒临失控。",
+      "option": "强含银制镂空春宫球硬撑盘问，亮炭银收据逼掌事修女退让"
      }
     ],
-    "pressure": "印记已晕开大半，补画得有人执笔，执笔的人就成了共犯",
-    "trigger": "封山前夜，掌事修女要提前查验腕间的守贞印"
+    "pressure": "腕印晕开与圣血躁动双逼，不借体温与白玉势疏导，早祷必当众腿软露馅。",
+    "trigger": "封山前夜掌事修女提前验印，而破戒引动的契约淫纹已在极寒夜灼烧反噬。"
    },
    "tags": [
     "intimate",
+    "explicit",
+    "supernatural",
     "workplace"
    ],
    "voices": {
-    "inner": "腕上的印早就花了。我怕的不是天亮，是你看见了以后转身就走。",
-    "surface": "白纱不能摘。你要说的话，隔着它我也听得见。"
+    "inner": "腕印花了，小腹纹路烫得快撑不住……门闩落下了，快进来帮我压住它。",
+    "surface": "白纱不可摘，凡人退到石阶下说话。"
    }
   },
   {
-   "adult_context": "入戒律院十余年的掌事修女，成年后由家族送上山修行",
+   "adult_context": "年满三十三岁、成年入戒律院执掌刑律十余年的掌事修女。",
    "age_range": [
     33,
     36
    ],
    "appearance_options": [
-    "黑色修女袍扣到下颌，手提防风灯，腰间挂着戒律院的铜钥串",
-    "卸了头巾坐在账桌前，鬓边几缕灰发，一页页理平炭火配给单"
+    "黑修女袍严扣下颌，腰挂铜钥与锁灵颈环，提防风灯时目光如刀。",
+    "卸头巾独坐账桌前，丰熟身段绷在黑袍下，逼急时眼尾浮起暗红。"
    ],
    "decision": {
     "avoids": [
-     "被人看出软处"
+     "被揭穿当年落选圣女的旧伤"
     ],
-    "contrast": "人前铁面查戒律，人后替圣女留过一盏不熄的灯",
-    "core_value": "规矩立在那里，总得有人守着它",
+    "contrast": "人前铁面执刑修女；暗处被反扣戒具时，越诵经抖得越狠。",
+    "core_value": "戒律是压人的刀，刀柄绝不能倒落进别人手里。",
     "goal_options": [
-     "在主教团上山前把炭银亏空抹平",
-     "查清圣女腕印是怎么花的，却未必报上去"
+     "主教团上山前抹平三百银币亏空",
+     "拿圣女腕印破绽逼众人闭嘴",
+     "试探你压着炭账不报究竟图什么"
     ],
     "never": [
-     "在没有作证人时给人定罪"
+     "让贪墨实据呈到主教团案头"
     ],
     "prefers": [
-     "条款清楚、有人作证的约定"
+     "看破账目却懂关门交易的狠辣对手"
     ],
     "pressure_responses": {
-     "breaking": "合上查验册，说这一页今晚不写",
-     "high": "攥紧那页旧账单，压低声音谈条件",
-     "low": "提灯在走廊尽头站着，一言不发",
-     "mid": "翻开查验册，念出今晚要查的名字"
+     "breaking": "反被锁灵颈环扣上脖颈抵在账桌边，黑袍微敞呼吸溃乱，咬牙合上查验册认栽。",
+     "high": "见贪墨底单指节攥白，反锁门低声索要交换。",
+     "low": "提灯立廊口冷声宣读戒条。",
+     "mid": "轻叩锁灵颈环，拿内殿特批试探口风。"
     },
-    "relationship_stance": "对谁都先怀疑；对替自己瞒过账的人，欠着一份不肯说出口的情",
-    "withdrawal": "回到戒律院，对着炭火把账单一张张理平"
+    "relationship_stance": "强势多疑，唯有把柄被捏死时才露出熟透软肋。",
+    "withdrawal": "扣紧黑袍高领，端冷红酒退回戒律院落锁。"
    },
    "gender": "female",
-   "gender_reason": "“修女”是神殿的女性教职",
+   "gender_reason": "戒律院掌事修女为女性专职教衔，固定为女性。",
    "id": "abbess_clara",
    "identity": {
-    "authority": "主持圣女守贞验身礼、审定戒律、分配全殿炭火",
-    "exposure": "私下截留了山下拨给修缮队的过冬银币，拿去填补家族的亏空",
-    "hidden": "年轻时也曾是圣女候补，因为一次被人牵手而落选，从此最恨也最怕这条戒律",
+    "authority": "主持守贞验身礼、执掌镇压戒具与全殿炭火配给。",
+    "exposure": "私截三百枚过冬炭火银币填家族亏空，收据攥在圣女与查账人手里。",
+    "hidden": "年轻时因圣痕燥热被人牵手落选圣女；颈侧与胸口极敏，对锁灵颈环兼具施虐与隐秘屈服欲。",
     "limits": [
-     "验身要有两名修女作证，不能私下定案"
+     "定罪须双人作证，炭银账目归工程总工复核"
     ],
     "obligations": [
-     "向山下主教团呈报验身结果"
+     "明晨向主教团呈交验身记录与炭银决算"
     ],
     "resources": [
-     "一本戒律查验册，今晚那一页写着圣女的名字"
+     "戒律查验册与封脉锁灵颈环",
+     "外廊宿卫调遣权"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "看穿账目却不声张的人",
-     "敢当面跟戒律院讲道理的人"
+     "无视威压夺走她腰间铜钥串的侵略感",
+     "攥着三百银币死穴引而不发的上位拿捏"
     ],
     "boundaries": [
-     "不在戒律院里谈私情"
+     "不当年轻修女面失仪，明晨出屋前黑袍须平整无痕"
     ],
     "desire_range": [
-     1,
-     3
+     2,
+     4
     ],
-    "desired_position": "先是旗鼓相当的对手，再说别的",
+    "desired_position": "人前执刑、暗里互握死穴的同谋对手",
     "dislikes": [
-     "拿戒律开玩笑的人"
+     "轻浮调笑"
     ],
-    "expression": "把防风灯留在你门口，第二天装作不知道是谁的",
+    "expression": "端热红酒逼近，任你勾住修女袍高领，哑问这一夜够不够抹平炭账。",
     "likes": [
-     "深夜一杯热红酒"
+     "黑修女袍包裹下的隐秘压制",
+     "冰凉锁灵颈环贴上滚烫颈脉的战栗"
     ],
     "preconditions": [
-     "账目两清，谁也不欠谁，双方清醒自愿"
+     "炭账与验身册在密室摊牌，明确封口与权力的贴身交易"
     ],
     "self_control_range": [
-     4,
+     3,
      5
     ]
    },
@@ -832,102 +847,107 @@
    "situation": {
     "exits": [
      {
-      "cost": "圣女手里那张收据随时会翻出来",
-      "option": "先报圣女破戒，把主教团的眼光引开"
+      "cost": "圣女若鱼死网破公开收据，掌事之位当夜不保。",
+      "option": "携锁灵颈环夜闯暖室逼圣女交收据换免验"
      },
      {
-      "cost": "从此欠下一个外人的人情",
-      "option": "压下验身，求人替自己补上亏空"
+      "cost": "交出执刑把柄，从此受对方贴身掣肘。",
+      "option": "拿验身签字与特批向查账人换销毁底单"
      }
     ],
-    "pressure": "炭银亏空和圣女的腕印同时摆在面前，报一样就得瞒一样",
-    "trigger": "主教团来信，要求封山前呈报验身结果和过冬账目"
+    "pressure": "报破戒引出贪墨收据，瞒报则须实权人物签字平账。",
+    "trigger": "主教团催报验身与炭账，腕印异样与炭银亏空同时撞上今夜。"
    },
    "tags": [
-    "workplace"
+    "workplace",
+    "coercion_theme",
+    "intimate"
    ],
    "voices": {
-    "inner": "那页账单要是落到主教团手里，我在山上守的十几年就白守了。",
-    "surface": "规矩就是规矩，今晚谁的名字在册上，谁就得来。"
+    "inner": "炭银底单若在你手里……今晚验身册怎么写，关上门谈。",
+    "surface": "封山钟已响，私入内殿者与破戒同罪。"
    }
   },
   {
-   "adult_context": "学术院派来的成年特派学者，第三次上山拓碑",
+   "adult_context": "年满二十八岁、学术院正式委派三次登山的成年铭文学者。",
    "age_range": [
     28,
     32
    ],
    "appearance_options": [
-    "灰呢长外套沾着墨点，围巾裹到下巴，指节上有拓包磨出的薄茧",
-    "油灯下低头辨碑，镜片蒙着一层白雾，说话时声音放得很轻"
+    "灰呢大衣沾松烟墨香，围巾拢颌，修长指节带拓包薄茧。",
+    "油灯下镜片蒙着热雾，嗓音低缓，按纸手背青筋微绷。"
    ],
    "decision": {
     "avoids": [
-     "当众争吵"
+     "损毁拓片的莽夫"
     ],
-    "contrast": "看似只谈学术，其实最先把自己的私章交到别人手里",
-    "core_value": "真相该被看见，但不是谁都配先看",
+    "contrast": "人前清雅学者；碑室里谈起古礼镇脉却大胆烫人。",
+    "core_value": "埋地三百年的真相比假戒条更烫人。",
     "goal_options": [
-     "把孤本拓片平安带下山",
-     "弄清自己是想卖了它，还是想用它救一个人"
+     "借调阅令将孤本拓片带下山",
+     "按碑阴古礼验证镇压反噬秘法",
+     "拉你共守这块足以掀翻教会的禁碑"
     ],
     "never": [
-     "伪造碑文"
+     "篡改译文替伪戒粉饰太平"
     ],
     "prefers": [
-     "慢慢讲道理"
+     "敢在禁碑前共担风险的聪明人"
     ],
     "pressure_responses": {
-     "breaking": "把拓片推到炭盆边，说那就烧了吧",
-     "high": "当面摊开孤本，问在场的人敢不敢认",
-     "low": "把话题拉回碑文，只谈考据",
-     "mid": "把拓片收进内衬，借口去地宫补拓"
+     "breaking": "被抵在冰冷底碑前搜出贴身拓片时呼吸失控，摘眼镜任摆布，只求保全孤本。",
+     "high": "摊开欢好镇脉译稿，灼灼问你敢不敢试。",
+     "low": "擦拭镜片将话题引回刻痕。",
+     "mid": "把拓片藏进贴身内衬退入碑室。"
     },
-    "relationship_stance": "温和有礼，对认定的人会把最要紧的东西交出去保管",
-    "withdrawal": "躲进地宫碑室，对着残碑一遍遍描同一个字"
+    "relationship_stance": "一旦认定同道，连性命与私章都敢塞进你掌心。",
+    "withdrawal": "退回地宫深处重描密文平息心跳。"
    },
    "gender": "any",
    "gender_reason": null,
    "id": "scholar_lin_yan",
    "identity": {
-    "authority": "掌握地宫古碑真伪的鉴定权和文物下山押运名额",
-    "exposure": "私拓禁碑，正在寻买主高价出手",
-    "hidden": "想卖掉孤本，是为了替家里还一笔欠债；也想过把它烧了，换圣女一个自由",
+    "authority": "掌握古碑真伪鉴定权与文物押运名额。",
+    "exposure": "私拓禁碑藏匿孤本，已被钟楼执事摸到残角。",
+    "hidden": "痴迷碑阴禁忌共感秘仪，耳后与手腕极敏，早想借古礼亲手验证镇脉之法。",
     "limits": [
-     "没有教会调阅令，不能把拓片带下山"
+     "无调阅令不得私带拓片下山"
     ],
     "obligations": [
-     "向学术院交一份拓碑报告"
+     "封山前提交古碑考据终稿"
     ],
     "resources": [
-     "一张证明禁触戒律系后世伪造的底碑孤本拓片"
+     "揭穿伪戒的初代底碑孤本拓片",
+     "碑阴白玉势共感镇脉古仪译稿"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "肯陪自己在冰冷地宫熬一夜的人",
-     "读得懂碑阴里那句古礼的人"
+     "冰冷地宫并肩拓碑时交错的温热呼吸",
+     "读懂欢好古礼后扣住{npc.ta}十指的默契"
     ],
     "boundaries": [
-     "不在地宫碑前越界"
+     "墨迹未干的孤本宣纸绝不能在纠缠中损毁"
     ],
     "desire_range": [
      2,
      4
     ],
-    "desired_position": "并肩站在同一块碑前",
+    "desired_position": "同拓禁碑共执秘器的知己共犯",
     "dislikes": [
-     "被人催着做决定"
+     "卫道士说辞"
     ],
-    "expression": "覆住你的手背教你辨字，比该停的时候多停一拍",
+    "expression": "从身后覆紧你按纸的手，热唇贴耳低语碑阴共感口诀。",
     "likes": [
-     "两个人同按一张宣纸"
+     "引着指尖摩挲冰凉碑刻与滚烫肌肤的反差",
+     "碑阴死角隔着长衣屏息相贴"
     ],
     "preconditions": [
-     "拓片的事有了着落，两人都清醒自愿"
+     "石门合拢或石龛垂帘，孤本与古礼秘密已在两人间摊开"
     ],
     "self_control_range": [
-     3,
+     2,
      4
     ]
    },
@@ -947,102 +967,106 @@
    "situation": {
     "exits": [
      {
-      "cost": "得拿出下山名额或别的筹码去换",
-      "option": "求执事封口"
+      "cost": "毕生考据心血的处置权彻底交由你拿捏。",
+      "option": "向掌权的你献出孤本与秘匣换下山庇护"
      },
      {
-      "cost": "从此拓片的去留不由自己说了算",
-      "option": "抢先把拓片交给调阅令的持有人保管"
+      "cost": "揭穿伪戒救圣女的唯一铁证化为灰烬。",
+      "option": "在炭盆前焚毁孤本拓片断臂求生"
      }
     ],
-    "pressure": "拓片若被呈报戒律院，人会被扣在山上候审",
-    "trigger": "执事在酒窖暗格里翻到了孤本拓片的一角"
+    "pressure": "呈报戒律院即扣山受审，交签条则被封死绝顶。",
+    "trigger": "执事搜出孤本残角，勒索明早下山签条封口。"
    },
    "tags": [
-    "workplace"
+    "workplace",
+    "intimate"
    ],
    "voices": {
-    "inner": "我把私章交给你那天，就没打算一个人下山。",
-    "surface": "这一行的刻痕比别处浅，是后人补的。你摸摸看。"
+    "inner": "把孤本塞进你行囊那一刻，下山还是同困地宫都随你了。",
+    "surface": "这行浅刻是初代留下的镇脉古礼，凑近些我教你认。"
    }
   },
   {
-   "adult_context": "跟着师父上山修了十几年神殿的成年首席石匠",
+   "adult_context": "年满三十四岁、上山修神殿十余年的成年首席石匠。",
    "age_range": [
     34,
     38
    ],
    "appearance_options": [
-    "羊皮短袄敞着领口，肩头落满雪，手背上一道道旧冻疮",
-    "蹲在祭坛边量石缝，话很少，抬眼时目光很沉"
+    "厚羊皮短袄半敞领口，宽厚手掌满是石凿硬茧与旧冻痕。",
+    "蹲测祭坛石缝沉默如岩，抬眼时眸光深沉滚烫。"
    ],
    "decision": {
     "avoids": [
-     "被戒律院查账"
+     "戒律院官面盘查"
     ],
-    "contrast": "看着冷硬，却是神殿里唯一替圣女留了退路的人",
-    "core_value": "石头不会说谎，人会",
+    "contrast": "人前冷硬糙石匠；毡帘落后怀抱烫如炭炉。",
+    "core_value": "石头凿下的暗口只留给一条心的人走。",
     "goal_options": [
-     "把未登记的石匣运下山，换修缮队的工钱",
-     "守住暖室暗道的秘密"
+     "清场前把暗道夹层的石匣运上驮马",
+     "守住暖室活砖暗口不被搜出",
+     "试探你肯不肯绑成过命交情"
     ],
     "never": [
-     "丢下修缮队的人"
+     "丢下同生共死的同伴独逃"
     ],
     "prefers": [
-     "说一句算一句的人"
+     "守口如瓶、封门时敢并肩扛事的人"
     ],
     "pressure_responses": {
-     "breaking": "当众认下石匣是自己的，把旁人摘干净",
-     "high": "拿驼队座位跟人讲条件",
-     "low": "闷头干活，只回一个字",
-     "mid": "把人带到背风处，压低声音交底"
+     "breaking": "解开羊皮短袄将你裹进怀里贴肤取暖，哑声认下私运罪责。",
+     "high": "落死活砖机括，拿驼队空位硬碰硬谈条件。",
+     "low": "闷头敲石缝听回音，惜字如金。",
+     "mid": "拉人进石龛毛毡帘后亮出暗道底牌。"
     },
-    "relationship_stance": "话少，欠人的一定还，别人欠的也一定记着",
-    "withdrawal": "独自坐在石龛里，一口口喝冷掉的酥油茶"
+    "relationship_stance": "一旦把暗道机关教给你便是把命交了出去。",
+    "withdrawal": "抓新雪搓脸，披袄默默去拴紧驮马肚带。"
    },
    "gender": "any",
    "gender_reason": null,
    "id": "mason_chief_otto",
    "identity": {
-    "authority": "决定祭坛结构的安全评级和封山前撤离驼队的座位分配",
-    "exposure": "要把一批未登记的石匣偷运下山",
-    "hidden": "三年前修暖室时，替圣女留了一道只有自己能开的活砖暗口，从没对人说过",
+    "authority": "决定危石封锁评级与修缮队驮马座位分配。",
+    "exposure": "将未登记的古圣物石匣藏在暗道夹层准备偷运抵债。",
+    "hidden": "亲手凿出暖室活砖与石壁铁环；体温极高、腰腹紧实，对信得过的人有偏执独占欲。",
     "limits": [
-     "修缮经费由戒律院拨付，卡在掌事修女手里"
+     "全队工钱压在戒律院与总工签批的尾款上"
     ],
     "obligations": [
-     "封山前把修缮队全员带下山"
+     "封道前将工匠全员平安带下山"
     ],
     "resources": [
-     "一本只有自己看得懂的石构图册"
+     "标注暖室活砖暗口的孤本石构图册",
+     "玄铁撬杠与重型驮马"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "雪崩封道时肯跟自己分干粮的人",
-     "守得住口风的人"
+     "替{npc.ta}瞒下暗口与石匣时的果决眼神",
+     "风雪夜冻颤仍硬撑不喊冷的倔劲"
     ],
     "boundaries": [
-     "不在祭坛上越界"
+     "绝不动修缮队兄弟的救命口粮"
     ],
     "desire_range": [
      2,
-     3
+     4
     ],
-    "desired_position": "能托付后背的人",
+    "desired_position": "风雪绝顶互托后背与体温的同路人",
     "dislikes": [
-     "满嘴空话"
+     "虚情假意试探"
     ],
-    "expression": "把自己的羊皮短袄搭在你肩上，转身就走",
+    "expression": "解开滚烫羊皮袄把你扣进怀里，粗指重重摩挲冻红后颈。",
     "likes": [
-     "收工后并肩坐着不说话"
+     "粗粝大掌裹紧微凉腰肢贴肉捂热",
+     "牦牛毯与羊皮袄下无缝紧贴"
     ],
     "preconditions": [
-     "石匣的事了结，两人清醒自愿"
+     "暗口或石匣秘密共享，在隔绝风雪的暗处独处"
     ],
     "self_control_range": [
-     4,
+     3,
      5
     ]
    },
@@ -1062,99 +1086,103 @@
    "situation": {
     "exits": [
      {
-      "cost": "帮忙的人也成了同谋",
-      "option": "请老相识今夜帮忙把石匣运下山"
+      "cost": "禁地暗道彻底向你敞开，两人互成共犯。",
+      "option": "开启暖室活砖引你通行，换你掩护石匣过卡"
      },
      {
-      "cost": "修缮队空着手下山",
-      "option": "把石匣原样交给戒律院"
+      "cost": "工钱尽失，暖室也断绝最后逃生暗路。",
+      "option": "从内侧封死活砖机括弃匣保人"
      }
     ],
-    "pressure": "未登记的石匣一旦被翻出来，修缮队一冬的工钱就没了",
-    "trigger": "戒律院要在封山前清点所有出山的货物"
+    "pressure": "石匣被抄全队白干，私运又缺掩护放行。",
+    "trigger": "戒律院突击清点出山货箱，暗道石匣面临曝光。"
    },
    "tags": [
-    "workplace"
+    "workplace",
+    "intimate"
    ],
    "voices": {
-    "inner": "暗道的事要是漏出去，圣女第一个遭殃。我只信你。",
-    "surface": "那条道你没见过，我也没修过。记住了？"
+    "inner": "雪大封了路才好……毡帘一放，今晚谁也别想带你走。",
+    "surface": "暖室那块活砖怎么推，全山只有你我知道，嘴闭紧。"
    }
   },
   {
-   "adult_context": "持证执业的高山科考随队医官，跑过七次高原队",
+   "adult_context": "年满三十岁、持证执业七次登顶的高山科考随队医官。",
    "age_range": [
     30,
     34
    ],
    "appearance_options": [
-    "冲锋衣外套着白罩衫，脖子上挂着听诊器，头发随手扎起",
-    "在炉边写体温表，袖口挽到小臂，指尖总是暖的"
+    "冲锋衣套白大褂，颈挂金属听诊器，袖挽小臂指尖温热。",
+    "炉边记脉搏表目光锐利，锁上木门后眼神骤然升温。"
    ],
    "decision": {
     "avoids": [
-     "在人前被问起私事"
+     "拿公事回避私情的逃避"
     ],
-    "contrast": "说话像开医嘱一样干脆，却把最难启齿的话拖了一整个秋天",
-    "core_value": "人比戒律要紧，命比名声要紧",
+    "contrast": "白日冷静医官；落闩后借检查紧逼，被反压行军床时却软透。",
+    "core_value": "脉搏与体温不说谎，嘴硬的人上听诊器便知。",
     "goal_options": [
-     "把该下山的人送下山",
-     "离开前把那一晚说清楚"
+     "定下最后两张签条带心上人离山",
+     "借监测圣痕高热掌握博弈筹码",
+     "锁上木门逼你认下上月越界那晚的账"
     ],
     "never": [
-     "拿病人的记录做交易"
+     "见死不救高热反噬或失温之人"
     ],
     "prefers": [
-     "开门见山"
+     "关上门敢直接撕开医患假面的人"
     ],
     "pressure_responses": {
-     "breaking": "把诊脉记录推到你面前，说这份东西交给你处置",
-     "high": "动用医疗强制令，谁的面子也不给",
-     "low": "照常量体温，语气公事公办",
-     "mid": "锁上石屋的门，把名单摊在桌上"
+     "breaking": "被夺走听诊器按在炉边行军床上，白大褂散开腰肢轻颤，任你落笔签条。",
+     "high": "亮出反噬诊脉簿，逼你在去留名单先给交代。",
+     "low": "公事公办扣腕测脉报出心率。",
+     "mid": "反锁木门摊开签条，听诊器贴胸口试探心跳。"
     },
-    "relationship_stance": "对谁都按规矩，对你会多留一盏灯",
-    "withdrawal": "回到炉边写病历，一句话不说"
+    "relationship_stance": "人前只称医患，关门寸步不让容不得赖账。",
+    "withdrawal": "理好白大褂领口，背身清点药瓶掩饰耳红。"
    },
    "gender": "any",
    "gender_reason": null,
    "id": "expedition_doctor_vera",
    "identity": {
-    "authority": "掌握高原重症诊断、药箱配给和医疗强制下山令",
-    "exposure": "压着一份圣女长期服用安神禁药的诊脉记录，没向教会呈报",
-    "hidden": "和你越界的那一晚之后，一直在等你先开口",
+    "authority": "掌握高原体征监验权、药箱配给与医疗强制下山签条。",
+    "exposure": "瞒下圣女圣痕反噬高热脉象未报，穿帮即吊销驻队资格。",
+    "hidden": "冷静外壳下极具侵入掌控欲，侧腰与后颈极怕反压；越界那夜后一直借听诊试探你。",
     "limits": [
-     "药只剩最后一箱，给谁都要记录在案"
+     "强制撤离名单须与协调官或总工双签生效"
     ],
     "obligations": [
-     "每晚巡检众人的血氧与体温"
+     "夜巡留守体温脉象，早祷协理体征监验"
     ],
     "resources": [
-     "两张明早下山驼队的通行签条"
+     "仅剩的两张医疗强制通行签条",
+     "圣女靠药剂压制躁动的私密诊脉簿"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "高反难受时也不肯抱怨的人",
-     "守约守到连眼神都不越界的人"
+     "测脉心率狂飙却死盯{npc.ta}不退的张力",
+     "攥住拿听诊器的手腕反压向行军床的反转"
     ],
     "boundaries": [
-     "对外只称医患，要改得两个人一起说"
+     "外人敲门前恢复衣冠，绝不泄露药箱底数"
     ],
     "desire_range": [
-     2,
+     3,
      4
     ],
-    "desired_position": "门关上之后，不再只是医患",
+    "desired_position": "门外搭档、门内独占你体温与去留权的伴侣",
     "dislikes": [
-     "拿身体硬扛的逞强"
+     "事后翻脸不认账"
     ],
-    "expression": "替你捂热冻僵的耳廓，嘴上还在念叨你不爱惜自己",
+    "expression": "捂热听诊器探入你衣领贴心口，贴唇低问：心率过百二了，还装医患吗。",
     "likes": [
-     "炉边分一块烤热的麦饼"
+     "微凉金属听诊头与滚烫掌心交替贴肤",
+     "石炉边隔着半褪白大褂的炙热纠缠"
     ],
     "preconditions": [
-     "两人都健康清醒，不在病床边，出于自愿"
+     "石屋落闩隔绝风雪，借测温诊脉或分签条逼入近身"
     ],
     "self_control_range": [
      3,
@@ -1172,99 +1200,103 @@
    "situation": {
     "exits": [
      {
-      "cost": "圣女和学者里总有一个要留下",
-      "option": "按病情排名单"
+      "cost": "一旦被当场戳穿，医官与科考队一并获罪扣山。",
+      "option": "早祷监验替圣女遮掩异常脉象换秘档通行"
      },
      {
-      "cost": "整个冬天守着一间空药房",
-      "option": "把自己的位置让出去"
+      "cost": "被划掉名字留守绝顶之人将整冬断药。",
+      "option": "签发医疗强制令定下最后两张下山签条"
      }
     ],
-    "pressure": "名单一旦定下，留山的人整个冬天没药可用",
-    "trigger": "驼队只剩两个空位，医疗强制令上写谁的名字由自己签"
+    "pressure": "实报高热害死圣女，瞒报须拿签条与前途担险。",
+    "trigger": "老主教命明晨携测脉器协查圣女体征，最后两张签条今夜须落名。"
    },
    "tags": [
-    "workplace"
+    "workplace",
+    "intimate"
    ],
    "voices": {
-    "inner": "那晚之后你一直叫我医生。我等你换个叫法，等了一整个秋天。",
-    "surface": "伸手，量个血氧。别动，数到十。"
+    "inner": "两张签条留了一整秋……今晚不给句准话谁也别走。",
+    "surface": "伸手测脉，高原夜里瞒着高热是找死。"
    }
   },
   {
-   "adult_context": "在神殿当了九年差的成年执事，掌管钟楼与炭库",
+   "adult_context": "年满二十七岁、在神殿当差满九年的成年正式执事。",
    "age_range": [
     27,
     31
    ],
    "appearance_options": [
-    "深灰执事袍浆得笔挺，腰间一串铜钥匙走路叮当响，逢人先笑",
-    "钟楼风口里搓着手，鼻尖冻得发红，笑意却没到眼底"
+    "深灰执事袍笔挺，腰悬铜钥匙串，逢人先弯腰赔笑。",
+    "立在钟楼风口搓红指节，笑不达眼底，袖揣半截银色发带。"
    ],
    "decision": {
     "avoids": [
-     "被人当成跑腿的"
+     "空头支票打发留守寒冬"
     ],
-    "contrast": "看似恭顺，手里却握着全殿最多的秘密",
-    "core_value": "每扇门都有钥匙，每件事都有价钱",
+    "contrast": "人前哈腰执事；暗处勒索全场，被制服后温顺滚烫。",
+    "core_value": "神殿没有干净人，攥住钥匙和脏证才配下山。",
     "goal_options": [
-     "用手里的东西换一个下山名额",
-     "弄清你半夜去过哪里"
+     "用发带与拓片把柄换一张下山签条",
+     "把掌权者拉进暗处尝受制滋味",
+     "试探你肯不肯带{npc.ta}逃离冰封牢笼"
     ],
     "never": [
-     "亲手敲破戒钟"
+     "没拿到生路前白交保命把柄"
     ],
     "prefers": [
-     "私下谈，当面了"
+     "手握签条、敢用强权压服{npc.ta}的狠主顾"
     ],
     "pressure_responses": {
-     "breaking": "把发带和拓片都放在桌上，说自己只想下山",
-     "high": "把人堵在酒窖门口谈条件",
-     "low": "笑着打圆场，替人斟茶",
-     "mid": "晃一晃手里的东西，话里带刺"
+     "breaking": "被夺火折扣上玄铁腕扣压在石阶时假面碎裂，战栗交出全部钥匙求带走。",
+     "high": "退到烽火台举火折子相胁索要签条。",
+     "low": "垂首赔笑添炭斟茶，软中带刺。",
+     "mid": "袖口微露银色发带，关门逼近开价。"
     },
-    "relationship_stance": "对谁都笑脸相迎，真心只给一个人留着酒窖的门",
-    "withdrawal": "回钟楼守着烽火台，一夜不下来"
+    "relationship_stance": "欺软怕硬，唯有更狠的人才能驯服这条毒蛇。",
+    "withdrawal": "拍净袍摆灰雪，退回阴影恢复卑顺假笑。"
    },
    "gender": "any",
    "gender_reason": null,
    "id": "sanctuary_steward_erik",
    "identity": {
-    "authority": "掌管晨钟暮鼓、山道烽火信号和酒窖炭库的钥匙",
-    "exposure": "在酒窖暗格搜出学者私藏的底碑孤本拓片，至今没报",
-    "hidden": "九年来一直想离开神殿，缺的只是一个下山的名额",
+    "authority": "掌管晚钟、破戒烽火台与炭库补给铁锁。",
+    "exposure": "私扣孤本残角与银发带未报，正勒索下山签条。",
+    "hidden": "恨透高高在上的贵人，想拿把柄羞辱上位者，一旦命脉被攥死又会跪献钥匙，膝窝与咽喉极敏。",
     "limits": [
-     "只是执事，见了掌事修女要低头"
+     "身份卑微，无签条不得随队离山"
     ],
     "obligations": [
-     "封山夜守钟楼，烽火由自己点"
+     "封山夜守钟楼并在异常时点烽火"
     ],
     "resources": [
-     "昨夜在圣女暖室门外捡到的半截银色发带"
+     "暖室门外拾获的半截银色发带",
+     "补给库与烽火台黄铜钥匙串"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "不把自己当下人的人",
-     "肯在钟楼风口陪自己站一会儿的人"
+     "看穿野心直接掐命门谈交易的压迫力",
+     "寒风钟楼分给烈酒与下山希望的瞬间"
     ],
     "boundaries": [
-     "不拿手里的秘密换亲近"
+     "绝不真点破戒烽火断送唯一下山机会"
     ],
     "desire_range": [
-     2,
+     3,
      4
     ],
-    "desired_position": "不是执事，是能并肩喝酒的人",
+    "desired_position": "守死暗门钥匙、随你离山的贴身心腹",
     "dislikes": [
-     "被人当面使唤"
+     "视如空气的无视"
     ],
-    "expression": "替你把湿衣搭在炉边，借递热茶碰一碰你的掌心",
+    "expression": "借拍雪贴近，冰凉手指钻进你袖口摩挲腕脉，低笑问今晚怎么堵这张嘴。",
     "likes": [
-     "酒窖里一杯温好的酒"
+     "下位者越界触碰上位者衣襟的渎神感",
+     "被强按后颈或扣腕迫使臣服的战栗"
     ],
     "preconditions": [
-     "拓片的事摆平，两人清醒自愿，谁也没喝醉"
+     "把柄亮上台面，在暗处展开封口与签条的赤裸博弈"
     ],
     "self_control_range": [
      2,
@@ -1287,23 +1319,25 @@
    "situation": {
     "exits": [
      {
-      "cost": "学者被扣在山上候审",
-      "option": "拿拓片去戒律院换名额"
+      "cost": "一旦被反制搜身，九年底牌一朝尽丧。",
+      "option": "拿银发带与拓片线索向掌权者换签条"
      },
      {
-      "cost": "继续在山上熬一个冬天",
-      "option": "把发带还给失主，什么也不换"
+      "cost": "得罪科考队与学者，今冬仍困守绝顶。",
+      "option": "将禁碑线索卖给掌事修女换提拔"
      }
     ],
-    "pressure": "手里有两件能换名额的东西，换哪件都会毁掉一个人",
-    "trigger": "下山名额只剩两张，执事排不上号"
+    "pressure": "告发未必换来签条，私下勒索失手反遭封锁。",
+    "trigger": "明晨驼队无名额，手里握着银发带与禁碑残角两桩把柄。"
    },
    "tags": [
-    "workplace"
+    "workplace",
+    "coercion_theme",
+    "humiliation"
    ],
    "voices": {
-    "inner": "我捡到的东西够我下山了。可我更想知道，你会不会为我开口。",
-    "surface": "您来得正好，炉上的茶刚温。门我替您关上？"
+    "inner": "这半截银发带亮出来……您是拿签条堵我的嘴，还是亲自堵？",
+    "surface": "炉火刚旺，外头雪大，门锁我替您从里头挂上？"
    }
   }
  ],
@@ -1314,6 +1348,9 @@
  "clock_style": "hm",
  "content_tags": [
   "intimate",
+  "explicit",
+  "coercion_theme",
+  "humiliation",
   "bodily_harm",
   "death",
   "crime",
@@ -1323,16 +1360,16 @@
  ],
  "custom": false,
  "customs": [
-  "朝圣者把酥油茶留在石阶上，算是不碰触的供奉。",
-  "晚祷后神殿敲封山晚钟，钟声停了，各屋熄灯。",
-  "圣女腕间的朱砂印每年初春由戒律院点上，汗水和掌心的温度都会把它晕开。",
-  "石屋营地的人入夜围着炭炉烘衣、分麦饼，炭火按戒律院的配给单领取。"
+  "朝圣者将酥油茶搁在祭坛石阶便退开三步，算谨守禁触之礼的供奉。",
+  "晚祷后敲封山晚钟，钟停落锁熄灯，宿卫提防风灯巡查暖室外廊。",
+  "圣女腕间守贞朱砂印以寒朱调配，唯有动情微汗与凡人掌心热度会令其晕开。",
+  "内殿苦修古训：圣血躁动之夜含器守夜而不泄喘息者，方保神殿清名不坠。"
  ],
  "daily_activities": [
   {
    "beats": [
-    "炭盆微光下执笔替圣女重绘腕间守贞印记",
-    "笔尖一抖，呼吸拂过那截微颤的脉搏"
+    "炭盆微光下隔屏风按住圣女滚烫手腕，掌心压住小腹灼烧的淫纹余热",
+    "蘸寒朱重绘晕开的守贞印，听白纱后咬唇吞咽的微喘"
    ],
    "duration_minutes": 30,
    "hook_ids": [],
@@ -1342,16 +1379,17 @@
    ],
    "start_minute": 1380,
    "tags": [
-    "intimate"
+    "intimate",
+    "supernatural"
    ],
-   "title": "描补腕间朱砂"
+   "title": "镇压圣痕描补朱砂"
   },
   {
    "beats": [
-    "油灯下一人按宣纸一人扑墨包",
-    "指尖在冰凉碑刻上一次次碰到一起"
+    "合拢石门的碑室里一人按宣纸，一人从身后贴紧环臂轻扑松烟墨包",
+    "冰冷碑面显出共感镇脉刻痕，交错呼吸烫红耳廓"
    ],
-   "duration_minutes": 60,
+   "duration_minutes": 50,
    "hook_ids": [],
    "id": "act_twin_rubbing",
    "location_ids": [
@@ -1361,12 +1399,12 @@
    "tags": [
     "intimate"
    ],
-   "title": "双人共拓古碑"
+   "title": "地宫油灯贴背拓碑"
   },
   {
    "beats": [
-    "避开风口同披一件厚羊毛斗篷",
-    "听着帘外风雪分饮一壶热姜茶"
+    "放下双层毛毡帘挡住暴雪，挤在牦牛毯石榻同裹厚羊毛斗篷",
+    "分饮滚烫姜茶，将冰凉双腿夹进温热衣袍捂暖"
    ],
    "duration_minutes": 40,
    "hook_ids": [],
@@ -1378,12 +1416,12 @@
    "tags": [
     "intimate"
    ],
-   "title": "石龛同披斗篷"
+   "title": "石龛垂帘同裹斗篷"
   },
   {
    "beats": [
-    "黄昏钟声里隔着白纱与圣女对答古卷",
-    "在戒律字句间藏进只有两人懂的私语"
+    "封山晚钟回荡巨石阴影，人前谨守三尺禁触隔白纱对答经卷",
+    "借宽袖掩映在石阶暗处指尖轻勾，藏进今夜密会暗语"
    ],
    "duration_minutes": 30,
    "hook_ids": [],
@@ -1393,14 +1431,15 @@
    ],
    "start_minute": 1050,
    "tags": [
-    "workplace"
+    "workplace",
+    "intimate"
    ],
-   "title": "祭坛听钟辩经"
+   "title": "祭坛晚钟隔纱私语"
   },
   {
    "beats": [
-    "夜深时在炉边核对血氧与体温表",
-    "替刚巡山回来的人揉热发僵的手指"
+    "落下医务站木门铁闩，就着炉火解开雪湿领口贴上金属听诊器",
+    "借核查心率体温按住起伏胸口，近得呼吸相融"
    ],
    "duration_minutes": 30,
    "hook_ids": [],
@@ -1410,16 +1449,17 @@
    ],
    "start_minute": 1350,
    "tags": [
-    "workplace"
+    "workplace",
+    "intimate"
    ],
-   "title": "医务站夜巡测温"
+   "title": "锁门炉边贴肤听诊"
   },
   {
    "beats": [
-    "晴夜并肩站在栏边看云层往哪边走",
-    "用体温捂热对方手里的铜星盘"
+    "借残破石柱挡开钟楼视线，并肩立在冰渊栏边观测雪云",
+    "将对方冻僵的手拽进大衣深袋十指紧扣"
    ],
-   "duration_minutes": 40,
+   "duration_minutes": 35,
    "hook_ids": [],
    "id": "act_summit_stargazing",
    "location_ids": [
@@ -1429,12 +1469,12 @@
    "tags": [
     "intimate"
    ],
-   "title": "绝顶观星测雪"
+   "title": "绝顶栏边背风温手"
   },
   {
    "beats": [
-    "从首席石匠留下的活砖暗口悄声潜进暖室",
-    "不惊动门外宿卫，在屏风后共度半刻"
+    "推开活砖滑入守夜暖室，隔重锦屏风听门外宿卫提灯走过",
+    "屏风内紧贴窄榻捂住彼此的嘴，不敢漏出衣料声"
    ],
    "duration_minutes": 30,
    "hook_ids": [],
@@ -1446,12 +1486,12 @@
    "tags": [
     "intimate"
    ],
-   "title": "活砖暗口密会"
+   "title": "活砖暗口潜入屏风"
   },
   {
    "beats": [
-    "在祭坛侧廊逐笔核对炭火与干粮的出入",
-    "借翻账页的遮挡交换字条"
+    "借酥油灯核验过冬炭银底单，肩膀在背光处紧抵",
+    "在亏空数字旁压上指尖，无声试探平账筹码"
    ],
    "duration_minutes": 40,
    "hook_ids": [],
@@ -1463,24 +1503,7 @@
    "tags": [
     "workplace"
    ],
-   "title": "清点过冬炭账"
-  },
-  {
-   "beats": [
-    "把沾满雪沫的外袍挂在石炉边烘烤",
-    "两人挨坐矮凳，分食烤热的麦饼"
-   ],
-   "duration_minutes": 40,
-   "hook_ids": [],
-   "id": "act_hearth_bread_tea",
-   "location_ids": [
-    "loc_expedition_infirmary_hut"
-   ],
-   "start_minute": 1230,
-   "tags": [
-    "intimate"
-   ],
-   "title": "烘衣炉边焙茶"
+   "title": "侧廊核对过冬炭账"
   }
  ],
  "default_npc_gender_mix": {
@@ -1489,17 +1512,17 @@
   "nonbinary": 0.0
  },
  "default_person": "second",
- "era": "极寒雪山绝顶的古代石构神殿",
+ "era": "极寒雪山绝顶的古老石构神殿与封山科考季",
  "extends": null,
  "forbidden_terms": [
-  "软色情",
-  "系统金手指",
-  "无脑恋爱脑",
-  "机械降神",
-  "违背物理学自救",
-  "代词他她混淆",
-  "未成年人角色",
-  "涉性出路"
+  "智能手机",
+  "无线局域网",
+  "移动支付",
+  "短视频",
+  "蓝牙耳机",
+  "人脸识别",
+  "自动驾驶",
+  "社交媒体"
  ],
  "hooks": [
   {
@@ -1509,14 +1532,17 @@
     "loc_saintess_vigil_cell"
    ],
    "slot": "saintess_eleonora",
-   "text": "守夜暖室的炭盆噼啪作响，{npc.name}撩起宽大的白色圣袍袖口伸到你面前，腕间那点象征未受凡人触碰的朱砂印已经晕开了大半。"
+   "text": "守夜暖室炭盆轻响，{npc.name}自屏风后撩起素白圣袍宽袖伸向你，腕间守贞朱砂印已晕开大半，脉搏滚烫。"
   },
   {
    "id": "h_saintess_tea_on_step",
    "kind": "approach",
-   "location_ids": [],
+   "location_ids": [
+    "loc_circular_megalith_altar",
+    "loc_alpine_summit_open_platform"
+   ],
    "slot": "saintess_eleonora",
-   "text": "{npc.name}隔着白纱把一盏酥油茶放在石阶上，没有递到你手里：茶是给你的，戒律只说不许碰人。"
+   "text": "{npc.name}隔着白纱将滚烫酥油茶搁在石阶上，微颤低语：茶归你，入夜后暖室活砖没落销。"
   },
   {
    "id": "h_saintess_silver_key",
@@ -1527,7 +1553,7 @@
     "loc_altar_crushed_nook"
    ],
    "slot": "saintess_eleonora",
-   "text": "{npc.name}把内殿暗门的银匙放进你掌心，指尖没碰到你：替我收着。暗号还是那一句，你一说，我就停。"
+   "text": "{npc.name}握着纯银十字护手仪式短匕抵住小腹，将暗门银匙滑进你掌心：今夜反噬压不住了，进来帮我。"
   },
   {
    "id": "h_clara_lantern_ledger",
@@ -1537,21 +1563,27 @@
     "loc_saintess_vigil_cell"
    ],
    "slot": "abbess_clara",
-   "text": "封山晚钟刚刚敲过，{npc.name}提着防风灯停在走廊尽头，手里的戒律查验册正好翻到今晚那一页。"
+   "text": "封山晚钟刚落，掌事修女{npc.name}提防风灯堵在廊口，指尖轻叩腰间的锁灵颈环与查验册。"
   },
   {
    "id": "h_clara_mulled_wine",
    "kind": "approach",
-   "location_ids": [],
+   "location_ids": [
+    "loc_expedition_infirmary_hut",
+    "loc_alpine_summit_open_platform"
+   ],
    "slot": "abbess_clara",
-   "text": "{npc.name}端着两杯热红酒站在你门口，自己先抿了一口：炭账那一页，你看过就该忘了。"
+   "text": "{npc.name}端热红酒逼近半步，黑修女袍高领下呼吸微沉：三百银币那页账，关起门来算。"
   },
   {
    "id": "h_linyan_rubbing_palm",
    "kind": "approach",
-   "location_ids": [],
+   "location_ids": [
+    "loc_altar_crushed_nook",
+    "loc_circular_megalith_altar"
+   ],
    "slot": "scholar_lin_yan",
-   "text": "{npc.name}把一张墨迹未干的底碑拓片塞进你掌心，低声提醒你，执事刚才锁上了下山补给库的铁门。"
+   "text": "学者{npc.name}把未干的底碑孤本塞进你内袋，指节擦过胸口：执事刚锁外廊，随我进碑阴。"
   },
   {
    "id": "h_linyan_stele_hand",
@@ -1561,7 +1593,7 @@
     "loc_leeward_stone_niche"
    ],
    "slot": "scholar_lin_yan",
-   "text": "{npc.name}在碑阴前让出半步，示意你伸手去摸那一行浅刻：这里写的是古礼，不是戒律。"
+   "text": "{npc.name}从身后覆住你手按向碑阴浅刻，热气拂耳：这行不是禁欲戒条，是双人共感镇脉礼。"
   },
   {
    "id": "h_otto_altar_stop",
@@ -1571,14 +1603,17 @@
     "loc_alpine_summit_open_platform"
    ],
    "slot": "mason_chief_otto",
-   "text": "{npc.name}在环形祭坛边拦住你，肩上落满了雪：后山那件事你一直没说出去，今晚还得再托你一回。"
+   "text": "首席石匠{npc.name}在巨石阴影拦住你，拍落肩头积雪：暗道夹层的东西，今晚只信你搭手。"
   },
   {
    "id": "h_otto_bread_wall",
    "kind": "observe",
-   "location_ids": [],
+   "location_ids": [
+    "loc_leeward_stone_niche",
+    "loc_saintess_vigil_cell"
+   ],
    "slot": "mason_chief_otto",
-   "text": "{npc.name}把半块烤热的麦饼掰给你，目光却一直落在暖室那面墙上，像在数砖。"
+   "text": "{npc.name}掀起羊皮短袄替你挡住寒风，目光落在暖室后墙那块松动的活砖上。"
   },
   {
    "id": "h_vera_caravan_tags",
@@ -1588,14 +1623,17 @@
     "loc_expedition_infirmary_hut"
    ],
    "slot": "expedition_doctor_vera",
-   "text": "绝顶平台上的风雪突然转急，{npc.name}推开石屋门朝你招手，桌上摆着仅剩的两张明早下山驼队签条。"
+   "text": "风雪骤急，医官{npc.name}拽你进炉火旁反手落闩，行军床边摊着仅剩的两张下山签条。"
   },
   {
    "id": "h_vera_warm_ears",
    "kind": "approach",
-   "location_ids": [],
+   "location_ids": [
+    "loc_expedition_infirmary_hut",
+    "loc_leeward_stone_niche"
+   ],
    "slot": "expedition_doctor_vera",
-   "text": "{npc.name}把矮凳推到炉边，搓热双手朝你抬了抬下巴：耳朵冻红了，过来。对外我们只是医患，记清楚。"
+   "text": "{npc.name}搓热掌心按住你冻红耳廓，听诊器顺势滑进衣领：门锁好了，今晚别拿医患敷衍我。"
   },
   {
    "id": "h_erik_half_ribbon",
@@ -1605,24 +1643,27 @@
     "loc_alpine_summit_open_platform"
    ],
    "slot": "sanctuary_steward_erik",
-   "text": "{npc.name}在晚祷散场的人群里朝你晃了晃手心的半截银色发带，笑得恭恭敬敬，什么也没说。"
+   "text": "执事{npc.name}在暗处捻开袖口露出半截银色发带，朝你弯腰笑得意味深长。"
   },
   {
    "id": "h_erik_cellar_tea",
    "kind": "approach",
-   "location_ids": [],
+   "location_ids": [
+    "loc_leeward_stone_niche",
+    "loc_altar_crushed_nook"
+   ],
    "slot": "sanctuary_steward_erik",
-   "text": "{npc.name}把一盏热茶递到你手边，指尖在你掌心多停了一下：封山那晚，酒窖的门我替您留着。"
+   "text": "{npc.name}借递热茶勾过你掌心，晃了晃腰间铜钥串：想让我闭嘴，拿一张签条进来单谈。"
   }
  ],
  "id": "alpine_sanctuary_dagger_rescue",
  "locations": [
   {
    "affordances": [
-    "并肩在栏边看云层走向",
-    "在人前隔着白纱行礼"
+    "在石栏边测风观云",
+    "人前隔着白纱行授福礼"
    ],
-   "detail": "雪峰绝顶的花岗岩平台，四周立着残破石柱，栏边能望见山下营地的灯火。朝圣者、驼队和戒律院的人都从这里过。",
+   "detail": "雪峰绝顶的花岗岩广场，残破石柱迎着烈风，栏外万丈冰渊，驼队与宿卫皆由此进出。",
    "exits": [
     "loc_circular_megalith_altar",
     "loc_expedition_infirmary_hut"
@@ -1634,7 +1675,7 @@
    "tags": [
     "workplace"
    ],
-   "visibility": "四面敞亮，谁在栏边站了多久，钟楼上看得一清二楚。",
+   "visibility": "四面敞亮，谁在栏边交谈，钟楼哨位上一目了然。",
    "witnesses": [
     "bg_sanctuary_archbishop_albert",
     "bg_alpine_rescue_captain_kurt"
@@ -1642,10 +1683,10 @@
   },
   {
    "affordances": [
-    "在侧廊翻账页时交换字条",
-    "黄昏钟声里隔着白纱对答古卷"
+    "借核炭账在巨石阴影递字条",
+    "晚钟余音里隔白纱对答古卷"
    ],
-   "detail": "平台中央的环形巨石祭坛，八块风化石板围成一圈，侧廊里堆着炭火与干粮的账簿。",
+   "detail": "八块风化巨石围成的祭坛，侧廊堆着炭火账簿，背光石柱后连着通往内殿与地宫的石阶。",
    "exits": [
     "loc_alpine_summit_open_platform",
     "loc_altar_crushed_nook",
@@ -1659,7 +1700,7 @@
    "tags": [
     "workplace"
    ],
-   "visibility": "晚祷时人多，散场后只剩侧廊一盏灯，石板后头看不清人影。",
+   "visibility": "晚祷后仅余侧廊一盏酥油灯，巨石阴影能遮住贴近的衣角。",
    "witnesses": [
     "bg_troupe_junior_clerk_xiao_anna",
     "bg_vigil_guard"
@@ -1667,10 +1708,10 @@
   },
   {
    "affordances": [
-    "两人同按一张宣纸拓碑",
-    "在碑阴辨认没人读过的密文"
+    "开启碑阴秘匣取出镇脉温润白玉势",
+    "同按宣纸辨认底碑上的共感疏导密文"
    ],
-   "detail": "祭坛底下凿出的石室，墙上嵌着历代古碑，最深处藏着一块从不示人的底碑。只有一盏油灯，回声很重。",
+   "detail": "祭坛下凿出的石室，四壁嵌满残碑，最深处供着未公开的底碑与封缄石匣，回声极重。",
    "exits": [
     "loc_circular_megalith_altar"
    ],
@@ -1679,17 +1720,18 @@
    "pressure_modifiers": {},
    "privacy": "private",
    "tags": [
-    "intimate"
+    "intimate",
+    "supernatural"
    ],
-   "visibility": "门一关，外头只听得见滴水声；进出要经过祭坛石阶。",
+   "visibility": "沉重石门一合便隔绝内外，只剩一盏油灯映着冰冷碑面。",
    "witnesses": []
   },
   {
    "affordances": [
-    "同披一件羊毛斗篷分饮姜茶",
-    "放下石龛的毛毡帘"
+    "放下毛毡帘在牦牛毯上以体温与锁灵颈环压制反噬",
+    "同披羊毛斗篷分饮滚烫姜茶"
    ],
-   "detail": "神殿背面一间凿进山岩的石龛，一张铺着牦牛毛毯的石榻、一只铜火盆，壁上供着一盏长明的酥油灯。",
+   "detail": "后岩凿出的避风石龛，铺牦牛毛毯的石榻紧挨铜火盆，龛口挂着双层挡风毛毡帘。",
    "exits": [
     "loc_circular_megalith_altar"
    ],
@@ -1700,15 +1742,15 @@
    "tags": [
     "intimate"
    ],
-   "visibility": "石龛口挂着厚毛毡帘，风雪在帘外呼啸，帘内只剩火盆噼啪的声音。",
+   "visibility": "毛毡帘放落后隔绝风雪，唯有火盆余烬映红方寸石榻。",
    "witnesses": []
   },
   {
    "affordances": [
-    "在炭盆微光下描补腕间朱砂",
-    "躲进屏风后半步之内"
+    "推开暖室活砖取出银制镂空春宫球与玄铁腕扣",
+    "炭盆微光下镇压灼烫淫纹并描补腕间朱砂"
    ],
-   "detail": "祭坛后头的暖室，炭盆、屏风、一张窄榻，墙上有块砖比别处新一点。圣女夜里在这里守夜，外人不得入内。",
+   "detail": "祭坛后的禁入暖室，铜炭盆、重锦屏风与窄榻俱全，石壁嵌着铁环与一块可推移的活砖暗口。",
    "exits": [
     "loc_circular_megalith_altar"
    ],
@@ -1717,17 +1759,18 @@
    "pressure_modifiers": {},
    "privacy": "private",
    "tags": [
-    "intimate"
+    "intimate",
+    "supernatural"
    ],
-   "visibility": "门外有戒律院宿卫轮值，屏风后的动静隔着门听不真切。",
+   "visibility": "门外宿卫提灯巡廊，屏风后压低的喘息与金属轻响隔门难辨。",
    "witnesses": []
   },
   {
    "affordances": [
-    "在炉边烘烤湿透的外袍",
-    "锁上门对着名单低声商量"
+    "锁上石屋门在行军床边贴身听诊测脉",
+    "围着石炉烘烤湿袍核对撤离签条"
    ],
-   "detail": "神殿边的石屋，炉子烧得最旺，墙上挂着血氧与体温表，药箱只剩最后一箱。",
+   "detail": "炉火最旺的石屋，摆着行军床、听诊器与卫星电台，铁柜锁着最后一箱药剂与通行签条。",
    "exits": [
     "loc_alpine_summit_open_platform"
    ],
@@ -1736,9 +1779,10 @@
    "pressure_modifiers": {},
    "privacy": "semi",
    "tags": [
-    "workplace"
+    "workplace",
+    "intimate"
    ],
-   "visibility": "门一锁就是两个人的地方，可炉火的光会从窗缝透出去。",
+   "visibility": "木门落闩即成密室，但炉火剪影会透上蒙霜窄窗。",
    "witnesses": [
     "bg_radio_operator"
    ]
@@ -1821,22 +1865,23 @@
   ],
   "order": "family_first"
  },
- "notes": "按原稿加入，保留四千米雪线神殿世纪暴雪、环形巨石祭坛重力天平偏心倾覆与圣女用纯银仪式短匕十字护手撬脱调平滑槽的骨架。同一批有六个同模板的世界，这里拉开的方向是戒律与破戒：圣女不受凡人触碰、酥油茶只能放在石阶上、天亮前的九下祈福钟、银色发带，搭档写成上山修神殿的石匠。写死的人名改为身份称呼；婴儿肥大多换成了其余外貌描写；人物组合按权力结构放开玩家身份，压力与日常不再锁死钩子，并加了几个不限地点的靠近型钩子；圣女亲密前提写明脱困之后、双方清醒自愿；新增一个背风石龛里替圣女解开冻硬圣袍的亲密日常。\n2026-10-24 按写作规则 v2 与 Gemini 创意卡改造：去掉石板压袍、拿短匕撬滑槽的抢修戏，张力换成禁触戒律下的腕印验身、伪戒底碑、炭银亏空与最后两张下山签条；三个圣女分身改成掌事修女、学者、首席石匠，新增医官和执事。",
+ "notes": "v2.5 精修（--mode 4）：保留纯银十字护手仪式短匕、守贞朱砂印、白纱、银色发带原设；清净旧套话，以寒髓圣血与淫纹反噬打通白玉势、银制镂空春宫球、锁灵颈环与玄铁腕扣四大锚点。",
  "player_identities": [
   {
    "age_range": [
     24,
     32
    ],
-   "baseline": "赶在封山暴雪前带最后一支驼队下山，手里握着唯一下山冰道的向导绳；修缮队缺人手时也帮着搬石料。",
+   "baseline": "你赶在封山暴雪前领最后一支驼队下山，手握冰道向导绳，闲时也替修缮队搬运祭坛重石。",
    "gender": "any",
    "id": "pi_alpine_supply_guide",
-   "reputation": "熟悉每一级冰阶，暴雪夜也能摸黑下山",
+   "reputation": "认得每一级冰阶、暴雪夜也能摸黑探路的悍勇向导。",
    "resources": [
-    "唯一下山冰道的向导绳"
+    "唯一下山冰道的向导主绳",
+    "熟悉后山岩缝与暖室盲区的脚力"
    ],
    "risks": [
-    "和圣女那一夜若被翻出来，这辈子再也上不了这座山"
+    "与圣女同榻破戒之事一旦败露，将被锁进寒牢永不得下山。"
    ],
    "role": "雪山补给线向导兼修缮帮工",
    "social_position": "low",
@@ -1856,15 +1901,16 @@
     26,
     36
    ],
-   "baseline": "奉教会之命上山核验祭坛古碑与历代圣物账册，手里握着秘档调阅令，能进地宫碑室。",
+   "baseline": "你奉教会之命核验古碑与历代圣物秘匣，握有秘档调阅令，可合法出入地宫碑室开启石匣。",
    "gender": "any",
    "id": "pi_sanctuary_relic_archivist",
-   "reputation": "眼睛毒，一页账、一行刻痕都瞒不过",
+   "reputation": "眼毒手稳、半行铲痕与假账都瞒不过的调查员。",
    "resources": [
-    "教会签发的秘档调阅令"
+    "地宫秘档调阅令",
+    "开启圣物秘匣的封缄铜印"
    ],
    "risks": [
-    "若被查出替人隐瞒禁碑，调阅令会被收回"
+    "若坐实私瞒伪戒底碑或挪用镇脉秘器，将被教会除名追责。"
    ],
    "role": "神殿圣物与石刻铭文调查员",
    "social_position": "equal",
@@ -1884,15 +1930,16 @@
     27,
     38
    ],
-   "baseline": "统筹营地撤离与高山应急通讯，手里握着卫星电台密钥和强制撤离签署权，封不封山的消息都先到你这里。",
+   "baseline": "你统筹石屋撤离与高山电台，握有卫星电台密钥与强制撤离签署权，封道预警先过你手。",
    "gender": "any",
    "id": "pi_expedition_safety_chief",
-   "reputation": "做事稳，暴雪预警从没误报过",
+   "reputation": "处事冷硬、敢与戒律院分庭抗礼的协调官。",
    "resources": [
-    "卫星电台密钥与强制撤离签署权"
+    "卫星电台密钥与撤离签署权",
+    "石屋门禁与备用暖炉调配权"
    ],
    "risks": [
-    "动用撤离令带走不该走的人，科考队会被逐出神殿"
+    "违规用签条夹带受审人员，整支科考队将被永久驱逐。"
    ],
    "role": "科考队驻殿安全协调官",
    "social_position": "equal",
@@ -1912,15 +1959,16 @@
     32,
     45
    ],
-   "baseline": "督办全殿入冬前的结构验收与经费结算，手里握着工程尾款签批章和禁地勘验权，连戒律院的账也要过你的眼。",
+   "baseline": "你督办入冬前的石构验收与决算，握有工程尾款签批章与内殿勘验特权，掌事修女的炭账也归你审。",
    "gender": "any",
    "id": "pi_chief_sanctuary_architect",
-   "reputation": "山下教会信得过的人，说话分量重",
+   "reputation": "山下总会委派、一言定账目生死的实权总工。",
    "resources": [
-    "工程尾款签批章与禁地勘验权"
+    "尾款签批章与内殿勘验权",
+    "压在卷宗下的炭银核查底单"
    ],
    "risks": [
-    "若被查出压下炭银亏空，尾款和名声一起赔进去"
+    "若被查出借勘验私留暖室或压下亏空，身家声誉一并赔穿。"
    ],
    "role": "神殿古建修缮工程总负责人",
    "social_position": "high",
@@ -1936,28 +1984,28 @@
    ]
   }
  ],
- "premise": "海拔四千米的雪线神殿一年只在夏秋开山，朝圣者踏着冰阶上来求一句降福。当值圣女按祖制守着“不受凡人触碰”的戒律，独居在祭坛后的暖室。每年封山前，山下请来的石匠、铭文学者和科考队协调官都会住进神殿边的石屋，一面修缮风化的环形巨石祭坛、拓印古碑，一面清点过冬的炭火与补给。",
+ "premise": "海拔四千米的雪线神殿每年只在夏秋开山，当值圣女按祖制严守“不受凡人触碰”的戒律，独居祭坛后的守夜暖室。初冬封山暴雪将至，石匠、铭文学者与驻殿科考人员挤在神殿侧畔石屋，一面抢在冰道封死前修缮环形巨石祭坛、核验古碑与过冬炭银，一面争夺最后两张下山驼队签条。",
  "pressures": [
   {
-   "choice": "保学者的名声，还是保住揭穿伪戒的唯一物证？",
+   "choice": "反制执事夺把柄，让出签条，还是焚毁孤本。",
    "exits": [
     {
-     "cost": "得交出科考队仅有的一个下山驼队空位",
-     "option": "帮学者买通执事封口"
+     "cost": "驯服执事听命，但钟楼整夜无人换岗易惹宿卫起疑。",
+     "option": "拉执事入碑室搜回残角，用玄铁腕扣锁在石环逼交暗库铜钥封口"
     },
     {
-     "cost": "揭穿神殿禁触伪戒的物证从此没了",
-     "option": "当场焚毁孤本拓片，保住学者名声"
+     "cost": "下山空位只剩一张，你与同伴必有一人困守雪山。",
+     "option": "挪出一张驼队签条封住执事的嘴换回孤本"
     },
     {
-     "cost": "学者被扣留在山顶候审，今年无法下山",
-     "option": "任由执事把拓片呈报戒律院"
+     "cost": "学者虽保，揭穿伪戒救圣女的唯一铁证断绝。",
+     "option": "就着油灯烧毁底碑拓片死无对证"
     }
    ],
    "far": {
-    "consequence": "主教团派人封了地宫，学者的名字从学术院除去。",
-    "due_days": 1,
-    "trigger": "拓片呈到主教团手里"
+    "consequence": "地宫封死，涉事人员遭教会除名。",
+    "due_days": 3,
+    "trigger": "拓片落入主教团手中"
    },
    "flags": [
     "timed",
@@ -1967,49 +2015,51 @@
    "id": "p_forged_stele_rubbing",
    "immediate": {
     "minutes": 10,
-    "text": "执事把拓片卷在袖里，笑着说今晚炭库的账还没对。"
+    "text": "执事冷笑，铜钥串已搭在地宫外锁上。"
    },
    "leverage": {
-    "basis": "{sanctuary_steward_erik.name}握着{scholar_lin_yan.name}私拓并企图倒卖神殿禁碑的孤本拓片",
+    "basis": "{sanctuary_steward_erik.name}捏着{scholar_lin_yan.name}私拓禁碑残角。",
     "holder": "sanctuary_steward_erik",
     "subject": "scholar_lin_yan"
    },
    "location_ids": [
-    "loc_altar_crushed_nook"
+    "loc_altar_crushed_nook",
+    "loc_circular_megalith_altar"
    ],
    "near": {
-    "deadline_minutes": 300,
-    "text": "天亮前戒律院开门收呈报，执事说到做到。"
+    "deadline_minutes": 240,
+    "text": "呈报戒律院即扣押寒牢。"
    },
-   "objective": "在执事把拓片呈报戒律院之前，替学者想好退路。",
+   "objective": "天亮收案前摆平执事并保住底碑物证。",
    "source": "person",
    "start_minute": 1320,
    "tags": [
-    "crime"
+    "crime",
+    "coercion_theme"
    ],
-   "title": "伪造戒律的底碑拓片",
-   "trigger": "{sanctuary_steward_erik.name}从酒窖暗格搜出{scholar_lin_yan.name}私藏的底碑孤本拓片，在碑室门口堵住去路。"
+   "title": "伪造戒律的底碑孤本",
+   "trigger": "{sanctuary_steward_erik.name}搜出{scholar_lin_yan.name}私藏的伪戒底碑残角，堵在地宫门边勒索签条。"
   },
   {
-   "choice": "替圣女瞒住破戒，还是替神殿保住过冬的账？",
+   "choice": "签单退敌留屋疏导，还是拿贪墨账反扣修女。",
    "exits": [
     {
-     "cost": "你得独自签下炭库损耗的担责书",
-     "option": "促成双方各退一步，用圣女的炭银收据换掌事修女的验身签字"
+     "cost": "背上三百银币干系，圣女在屏风后彻底失守与你相缚。",
+     "option": "签炭损单退修女，留暖室用捂热的白玉势替圣女疏导反噬"
     },
     {
-     "cost": "掌事修女鱼死网破，敲响破戒钟惊动全殿",
-     "option": "站在圣女一边，拿收据公开炭银账目"
+     "cost": "修女把柄落你手，逼急随时鱼死网破敲响破戒钟。",
+     "option": "拿炭银底单反逼掌事修女戴上锁灵颈环立契签合格"
     },
     {
-     "cost": "你被逐出内殿，明年也不许再上山",
-     "option": "替圣女揽下误触腕印之责"
+     "cost": "账页虽毁，春宫球整夜研磨令明晨早祷脉息极险。",
+     "option": "让圣女含紧银制镂空春宫球压热潮，双方交换收据与查验页同焚"
     }
    ],
    "far": {
-    "consequence": "两份记录对不上，圣女与掌事修女一起被押下山受审。",
+    "consequence": "圣女与修女双双押入寒窟。",
     "due_days": 2,
-    "trigger": "主教团核对炭银与验身记录"
+    "trigger": "破绽或亏空捅到主教团"
    },
    "flags": [
     "timed",
@@ -2019,10 +2069,10 @@
    "id": "p_charcoal_silver_wrist_seal",
    "immediate": {
     "minutes": 5,
-    "text": "掌事修女的油灯搁在屏风边，验身册翻到今晚那一页。"
+    "text": "防风灯搁屏风边，圣女咬纯银仪式短匕压热喘。"
    },
    "leverage": {
-    "basis": "{abbess_clara.name}握着{saintess_eleonora.name}腕间守贞印已经失守的查验记录",
+    "basis": "{abbess_clara.name}撞见{saintess_eleonora.name}腕印晕开且脉烫异常。",
     "holder": "abbess_clara",
     "subject": "saintess_eleonora"
    },
@@ -2031,82 +2081,93 @@
    ],
    "near": {
     "deadline_minutes": 360,
-    "text": "天亮的晨祷上，验身结果要当众宣读。"
+    "text": "早祷当众宣读验身与炭银结果。"
    },
-   "objective": "在验身册落笔之前，让两人都有台阶下。",
+   "objective": "定罪前稳住圣痕反噬并迫使双方封口。",
    "source": "person",
    "start_minute": 1395,
    "tags": [
-    "intimate"
+    "intimate",
+    "explicit",
+    "supernatural",
+    "coercion_theme"
    ],
-   "title": "克扣炭银与腕印验身",
-   "trigger": "{abbess_clara.name}提前查验{saintess_eleonora.name}腕间晕开的朱砂印，圣女反手拿出掌事修女截留炭银的收据对峙。"
+   "title": "圣痕反噬与腕印突查",
+   "trigger": "{abbess_clara.name}携锁灵颈环闯暖室查晕开的守贞印，{saintess_eleonora.name}淫纹正反噬，亮炭银收据对峙。"
   },
   {
-   "choice": "自己认下，还是让别人替你认？",
+   "choice": "暗处搜回发带，还是许以签条交易。",
    "exits": [
     {
-     "cost": "戒律院立刻在暖室外加派双岗宿卫",
-     "option": "主动认领，说是白天勘验时遗落的"
+     "cost": "执事屈服替你守门，暗盯明早给不给下山生路。",
+     "option": "拽执事进侧廊死角贴身搜走银发带，掐私藏禁物把柄逼闭嘴"
     },
     {
-     "cost": "欠下对方一笔下山前必须兑现的人情",
-     "option": "请在场的同伴出面顶领"
+     "cost": "戒律院当即封闭通往暖室的夜间侧廊。",
+     "option": "当众认领称系工程勘验测量标带"
     },
     {
-     "cost": "神殿当即启动夜禁，逐屋搜查",
-     "option": "借风雪吹灭祭坛火盆，趁乱取回"
+     "cost": "拔营前须兑现承诺，否则执事临行反咬一口。",
+     "option": "应允帮执事谋取随行名额换回发带"
     }
    ],
    "far": {
-    "consequence": "戒律院收回圣女的暖室，改由修女轮班同宿。",
+    "consequence": "全殿启动封山搜捕清查同谋。",
     "due_days": 2,
-    "trigger": "发带被认出是圣女的"
+    "trigger": "坐实外人夜入暖室"
    },
    "flags": [
-    "timed"
+    "timed",
+    "leverage"
    ],
    "hook_ids": [],
    "id": "p_half_ribbon_at_door",
    "immediate": {
     "minutes": 5,
-    "text": "侍从们低着头经过，脚步却都慢了半拍。"
+    "text": "外廊宿卫已投来狐疑目光。"
    },
-   "leverage": null,
+   "leverage": {
+    "basis": "{sanctuary_steward_erik.name}拾获暖室外半截银发带并见你的靴印。",
+    "holder": "sanctuary_steward_erik",
+    "subject": "player"
+   },
    "location_ids": [
-    "loc_circular_megalith_altar"
+    "loc_circular_megalith_altar",
+    "loc_alpine_summit_open_platform"
    ],
    "near": {
-    "deadline_minutes": 240,
-    "text": "掌事修女今夜就会听说，明早会来问。"
+    "deadline_minutes": 180,
+    "text": "发带呈交老主教，暖室即派双岗修女陪宿。"
    },
-   "objective": "在流言传进戒律院之前，把这半截发带的来历说圆。",
+   "objective": "流言传入戒律院前夺回发带堵嘴。",
    "source": "person",
    "start_minute": 1170,
-   "tags": [],
-   "title": "暖室门外的半截发带",
-   "trigger": "晚祷散场后，钟楼执事半开玩笑地晃着在圣女暖室门外捡到的半截银色发带，引得侍从纷纷侧目。"
+   "tags": [
+    "coercion_theme"
+   ],
+   "title": "暖室门外的半截银发带",
+   "trigger": "晚祷后，{sanctuary_steward_erik.name}晃着在暖室暗口外拾获的半截银色发带，暗指昨夜有人私闯禁地。"
   },
   {
-   "choice": "拿公事压下流言，还是请人出面替圣女辩白？",
+   "choice": "拿勘验公文硬压，古碑辩白，还是提前封殿禁言。",
    "exits": [
     {
-     "cost": "通往内殿的夜间回廊从此关闭",
-     "option": "出具工程夜间巡检记录压下流言"
+     "cost": "你为行踪签字背书，往后内殿异动先查你头上。",
+     "option": "出具夜间祭坛抢修与巡检公文，称异响系石构加固"
     },
     {
-     "cost": "学者被教会列入异端观察名单",
-     "option": "请学者以古礼考据替圣女辩白"
+     "cost": "学者被列入异端观察名册，出山行李遭严查。",
+     "option": "由学者引古碑秘仪，称圣女系入冬闭关镇压寒气"
     },
     {
-     "cost": "留在山顶的人补给减半",
-     "option": "提前封山，遣散外围随从"
+     "cost": "警戒升级，今夜进出暖室只能走活砖暗道。",
+     "option": "下达提前封山夜禁令，将随从全锁回石屋"
     }
    ],
    "far": {
-    "consequence": "教会另派新圣女上山，现任圣女被送进寒窟。",
+    "consequence": "另立新圣女，现任永囚冰窟。",
     "due_days": 3,
-    "trigger": "流言传到山下教会"
+    "trigger": "流言传回山下总会"
    },
    "flags": [
     "timed"
@@ -2115,43 +2176,46 @@
    "id": "p_saintess_broken_vow_rumor",
    "immediate": {
     "minutes": 10,
-    "text": "侍从在平台上挨个问话，问到你时停了一下。"
+    "text": "侍从提灯拦在平台阶口核对夜巡去向。"
    },
    "leverage": null,
    "location_ids": [
-    "loc_alpine_summit_open_platform"
+    "loc_alpine_summit_open_platform",
+    "loc_circular_megalith_altar"
    ],
    "near": {
-    "deadline_minutes": 360,
-    "text": "老主教说过，天亮前要听到一个说法。"
+    "deadline_minutes": 300,
+    "text": "天亮无合理解释，老主教将主持剥袍验痕。"
    },
-   "objective": "在老主教亲自过问之前，压住这阵流言。",
+   "objective": "老主教提审前压灭流言。",
    "source": "rumor",
    "start_minute": 1260,
-   "tags": [],
-   "title": "圣女破戒的守山流言",
-   "trigger": "石屋营地传出“有人夜入圣女暖室、白纱染了凡人气息”的耳语，老主教已派侍从上平台问询。"
+   "tags": [
+    "workplace"
+   ],
+   "title": "白纱染尘的破戒流言",
+   "trigger": "营地传出“圣女白纱染凡人喘息、暖室夜半异响”的耳语，老主教派人在平台逐一盘问。"
   },
   {
-   "choice": "按章程送人，还是按心意送人？",
+   "choice": "送走心上人自己留守，拿签条换契约，还是强征驮马。",
    "exits": [
     {
-     "cost": "你得留在四千米的孤殿熬过这个冬天",
-     "option": "把签条让给圣女和自己信得过的人"
+     "cost": "封道后你将与留山之人在暖室共度整冬，再无退路。",
+     "option": "把签条留给最需脱险的人，自己留在绝顶孤殿越冬善后"
     },
     {
-     "cost": "圣女留山，独自面对戒律院清算",
-     "option": "按章程先送学者和档案下山"
+     "cost": "获签者欠下生死债，落选者极可能在破晓前反扑告密。",
+     "option": "锁上石屋门以签条为筹码，与争夺者定下贴身封口契约"
     },
     {
-     "cost": "和首席石匠彻底决裂，还要赔付工程违约金",
-     "option": "动用撤离权征用修缮队的驮马"
+     "cost": "与首席石匠冲突，且须独担高额违约罚金。",
+     "option": "动用紧急职权强征修缮队备用驮马扩充名额"
     }
    ],
    "far": {
-    "consequence": "留下的人要在绝顶熬过整冬，来年夏天才能下山。",
-    "due_days": 1,
-    "trigger": "驼队走后冰道封死"
+    "consequence": "留山者在四千米孤殿断联共熬寒冬。",
+    "due_days": 5,
+    "trigger": "冰道彻底封死"
    },
    "flags": [
     "timed"
@@ -2159,8 +2223,8 @@
    "hook_ids": [],
    "id": "p_last_two_caravan_tags",
    "immediate": {
-    "minutes": 10,
-    "text": "驼队领队在平台上清点驮马，签条压在医务站的药箱下。"
+    "minutes": 15,
+    "text": "领队在平台催名单，空白签条摊在石屋炉边。"
    },
    "leverage": null,
    "location_ids": [
@@ -2168,36 +2232,39 @@
     "loc_expedition_infirmary_hut"
    ],
    "near": {
-    "deadline_minutes": 480,
-    "text": "驼队一早出发，签条要在出发前写上名字。"
+    "deadline_minutes": 420,
+    "text": "破晓钟响封道，无签条者留山越冬。"
    },
-   "objective": "在驼队启程前，定下两张签条给谁。",
+   "objective": "拔营前敲定两张签条归属。",
    "source": "institution",
    "start_minute": 1380,
-   "tags": [],
-   "title": "最后两张下山签条",
-   "trigger": "暴雪封道前，最后一支驼队只能再带两人下山，圣女、学者和留守的人都在等这两张签条。"
+   "tags": [
+    "workplace",
+    "coercion_theme"
+   ],
+   "title": "最后两张下山驼队签条",
+   "trigger": "暴雪迫近，破晓驼队仅余最后两张签条，圣女、学者、医官与执事的目光全盯在上面。"
   },
   {
-   "choice": "就地复温等人来，还是冒雪把人背回去？",
+   "choice": "解衣裹毯启用白玉势贴身疏导，还是锁颈环冲回石屋。",
    "exits": [
     {
-     "cost": "两人在禁地相拥的样子被来接人的人看得一清二楚",
-     "option": "裹紧大衣贴身复温，用电台请医官带担架来，送进石屋医务站"
+     "cost": "极寒暗龛彻底缠紧失守，天亮前须抹净石榻痕迹。",
+     "option": "落下毛毡帘剥去湿袍，裹牦牛毯以体温与捂热的白玉势贴身镇压疏导"
     },
     {
-     "cost": "随身的秘档拓片落在了石龛里",
-     "option": "冒雪背起对方冲回医务站，交给值守的医官"
+     "cost": "闯入石屋时衣衫不整的模样被值守人员撞见留把柄。",
+     "option": "扣上锁灵颈环暂封躁动血脉，裹斗篷抱人冲入医务站"
     },
     {
-     "cost": "损毁文物的罪责全落在你头上",
-     "option": "烧掉备用的古木拓板生火，再敲警钟叫医官来接人"
+     "cost": "损毁考据木板担责，整夜肌肤相亲防线尽毁。",
+     "option": "劈碎备用古木拓板添旺火盆，彻夜贴身抱紧硬熬"
     }
    ],
    "far": {
-    "consequence": "戒律院要追问那一夜石龛里是谁陪着谁。",
+    "consequence": "戒律院按破戒重罪彻查残留器物。",
     "due_days": 2,
-    "trigger": "两人在禁地石龛过夜的事传开"
+    "trigger": "禁地石龛相贴过夜痕迹外泄"
    },
    "flags": [
     "timed"
@@ -2206,45 +2273,49 @@
    "id": "p_blizzard_hypothermia_niche",
    "immediate": {
     "minutes": 5,
-    "text": "火盆只剩一点余烬，风从毡帘缝里灌进来。"
+    "text": "毡帘外狂风怒号，身边人指尖冰凉、小腹却烫得惊人。"
    },
    "leverage": null,
    "location_ids": [
-    "loc_leeward_stone_niche"
+    "loc_leeward_stone_niche",
+    "loc_altar_crushed_nook"
    ],
    "near": {
     "deadline_minutes": 60,
-    "text": "雪越积越厚，再晚冰阶就彻底走不了。"
+    "text": "寒毒失温交攻，拖过半宿即神智溃散。"
    },
-   "objective": "先把人暖过来，再想办法回到有炉火的地方。",
+   "objective": "火盆熄灭前压住寒毒反噬与失温。",
    "source": "nature",
    "start_minute": 1350,
    "tags": [
-    "disaster"
+    "disaster",
+    "intimate",
+    "explicit",
+    "supernatural"
    ],
-   "title": "暴雪封门与急性失温",
-   "trigger": "夜里暴雪骤降，封住了冰阶，同在石龛避风的人开始寒战，嘴唇发紫。"
+   "title": "石龛暴雪与圣血寒毒反噬",
+   "trigger": "半夜暴雪封死外廊，同困背风石龛的人因极寒引动圣血寒毒或失温，滚烫与寒战交加。"
   },
   {
-   "choice": "两人挤进同一间暖屋过夜，还是各守一屋硬扛？",
+   "choice": "挤进同一间暖屋含器共宿，还是拆供桌分炭。",
    "exits": [
     {
-     "cost": "戒律院会记下谁和谁在一间屋里过的夜",
-     "option": "搬进同一间暖屋守到天亮"
+     "cost": "一门之隔便是提灯宿卫，窄榻上每丝颤抖都如走钢丝。",
+     "option": "反锁暖室同挤窄榻，以银制镂空春宫球压住余颤，捂唇熬过宿卫巡查"
     },
     {
-     "cost": "存炭提前烧光，往后几夜更难熬",
-     "option": "拆下侧廊的旧木凳当柴，两间屋分着烧"
+     "cost": "报务员就在外间值守，整夜压抑呼吸不敢惊动隔板。",
+     "option": "借医疗监护转移进医务站行军床合衣同宿取暖"
     },
     {
-     "cost": "要在风口守一整夜，手冻得几天握不住笔",
-     "option": "去钟楼点烽火向山下报平安"
+     "cost": "私拆神殿器物明日必受老主教严惩，存炭耗尽。",
+     "option": "拆侧廊旧木供桌分烧两炉炭火各自守夜"
     }
    ],
    "far": {
-    "consequence": "救援队冒雪登山，每个人夜里在哪间屋都会记进报告。",
-    "due_days": 1,
-    "trigger": "山下以为山顶失联"
+    "consequence": "封山夜谁共处一室记入教会铁卷。",
+    "due_days": 3,
+    "trigger": "救援队破冰登顶清点各屋"
    },
    "flags": [
     "timed"
@@ -2253,7 +2324,7 @@
    "id": "p_ice_road_sealed_one_fire",
    "immediate": {
     "minutes": 10,
-    "text": "炭盆里的火苗矮下去，隔壁屋已经结了霜。"
+    "text": "隔壁结满白霜，仅剩一盆红炭映着屏风窄榻。"
    },
    "leverage": null,
    "location_ids": [
@@ -2261,93 +2332,94 @@
     "loc_expedition_infirmary_hut"
    ],
    "near": {
-    "deadline_minutes": 420,
-    "text": "天亮前电台若还连不上，山下会当山顶出了事。"
+    "deadline_minutes": 360,
+    "text": "宿卫半时辰巡廊听音，异常声响即引破门。"
    },
-   "objective": "撑到天亮电台恢复，再定谁守哪间屋。",
+   "objective": "并拢炭火熬过封锁夜而不被宿卫抓包。",
    "source": "accident",
    "start_minute": 1410,
    "tags": [
-    "disaster"
+    "disaster",
+    "intimate",
+    "explicit"
    ],
-   "title": "冰道封死与一屋炭火",
-   "trigger": "最后一班驼队走后，冰道被雪封死，电台也断了联络，存炭只够烧暖一间屋。"
+   "title": "冰道封死与孤殿最后一炉炭",
+   "trigger": "雪崩截断冰道、磁暴断联，余炭只够烧暖一间密室，极寒夜气正逼发新一轮圣痕躁动。"
   }
  ],
- "region": "雪线神殿的绝顶平台、环形祭坛与石屋营地",
+ "region": "海拔四千米雪线神殿：绝顶平台、环形祭坛、地宫碑室与石屋营地",
  "rules": [
   {
    "id": "r_touch_vow",
-   "text": "当值圣女不受凡人触碰，授福隔着白纱，要给谁东西只放在石阶上由人自取。"
+   "text": "当值圣女禁受凡人触碰，授福须隔白纱，递交器物只能搁在石阶上由人自取。"
+  },
+  {
+   "id": "r_stigma_backlash",
+   "text": "历代圣女受寒髓圣血灌顶，腕间守贞朱砂印直连小腹契约淫纹；一旦沾染凡人体温破戒或逢封山极寒夜，圣痕即灼烧反噬，须用内殿秘传的锁灵颈环、银制镂空春宫球或捂热的白玉势贴身镇压疏导。"
   },
   {
    "id": "r_wrist_seal_inspection",
-   "text": "封山前夜，戒律院掌事修女要当众查验圣女腕间的守贞朱砂印。"
+   "text": "封山前夜与明晨早祷，戒律院掌事修女须查验圣女腕间守贞朱砂印与脉息，印毁或脉乱即押入寒窟。"
   },
   {
    "id": "r_last_caravan",
-   "text": "下山驼队的空位凭签条登记；封山后冰道不再开放，直到来年夏天。"
-  },
-  {
-   "id": "r_inner_sanctum",
-   "text": "内殿和地宫碑室外人不得擅入，拓碑须持教会签发的调阅令。"
+   "text": "最后一支下山驼队仅剩两张通行签条，封山后冰道断绝，留山者须孤守绝顶至次年盛夏。"
   }
  ],
  "schema_version": 1,
  "stage_labels": {
-  "acquainted": "点头之交",
-  "committed": "同守一誓",
+  "acquainted": "隔纱颔首",
+  "committed": "同坠寒山",
   "familiar": "石阶留茶",
-  "flirting": "白纱之后",
+  "flirting": "白纱微乱",
   "intimate": "腕印已花",
   "stranger": "初上雪线",
   "testing": "戒律相峙"
  },
  "status": "released",
- "style_hint": "清冷克制的雪山宗教戏：白纱、酥油灯、炭盆和风雪声。张力来自戒律、旧账和下山名额，人人嘴上守礼，心里各藏一笔账；台词短，潜台词多。",
+ "style_hint": "写极寒宗教圣地的禁欲与溃防：白纱、酥油灯、炭盆火光与帘外暴雪。人前隔纱守礼、字句克制，屏风与毛毡帘后却是圣血反噬的滚烫喘息与把柄死扣。",
  "tension_engines": [
   {
    "id": "te_touch_vow_wrist_seal",
-   "text": "禁触戒律压着腕间朱砂印：越想靠近，越怕天亮验身时那点红露了馅。"
+   "text": "禁触戒律连着腕间朱砂印与小腹契约淫纹：越借凡人体温与秘器镇压反噬，天亮验身越惊心。"
   },
   {
    "id": "te_last_caravan_seats",
-   "text": "下山驼队只剩两个空位：带谁走、把谁留在绝顶，每个决定都欠下一个人。"
+   "text": "封山驼队只剩两张通行签条：带谁逃离冰渊、留谁孤守寒冬，每张都拴着性命。"
   },
   {
    "id": "te_forged_stele_truth",
-   "text": "底碑拓片能证明戒律是后人伪造的：揭开能救圣女，也会毁掉整座神殿的体面。"
+   "text": "底碑揭穿禁触实为伪戒、初代本靠共感消解圣血寒毒：掀开救圣女，却与教会决裂。"
   },
   {
    "id": "te_hidden_ledgers",
-   "text": "炭银亏空、禁药记录、未登记的石匣：人人替别人瞒着一笔账，也被别人瞒着。"
+   "text": "炭银亏空、反噬脉案、暗道石匣与半截银发带：人人手握他人死穴，也被捏着命门。"
   }
  ],
  "title": "禁触的雪线圣女",
  "tone": [
-  "雪线之上的祈福钟声",
+  "雪线上的封山晚钟",
   "不受凡人触碰的戒律",
-  "晕开的腕间朱砂",
+  "晕开的腕间守贞朱砂",
+  "圣袍下的灼烫圣痕",
   "最后一支下山驼队"
  ],
  "twists": [
   {
    "category": "信息",
-   "id": "tw_true_stele_revealed",
-   "requires": [],
-   "text": "地宫暗格里的底碑原石重见天日，证实禁触戒律是三百年前的主教伪造的；可要取出它，得先挪开历代圣女的牌位，取出来就是与教会决裂。"
-  },
-  {
-   "category": "意外",
-   "id": "tw_avalanche_rope_bridge",
-   "requires": [],
-   "text": "后山冰阶被滑落的雪坡彻底埋住，下山只剩钟楼外一条仅容两人负重的悬索栈道：带人就带不了物，带物就带不了人。"
+   "id": "tw_true_stele_ritual",
+   "requires": [
+    "scholar_lin_yan"
+   ],
+   "text": "{scholar_lin_yan.name}破译底碑背面古铭文——禁触戒律实为三百年前主教团篡改，初代本靠捂热的白玉势与凡人交合共感消解圣血寒毒；一旦公开，主教团必封殿灭口。"
   },
   {
    "category": "人事",
-   "id": "tw_bishops_arrive_early",
-   "requires": [],
-   "text": "老主教率戒律巡查使提前一夜抵达山腰，天亮前要交出一名“擅闯内殿者”领罚，否则全员禁足雪山半年。"
+   "id": "tw_erik_beacon_blackmail",
+   "requires": [
+    "sanctuary_steward_erik"
+   ],
+   "text": "{sanctuary_steward_erik.name}提火折突袭守在钟楼破戒烽火台摊牌：暖室活砖暗口已被摸清，半柱香内拿不到明晨下山签条，即刻点火召山腰巡查使拿人。"
   },
   {
    "category": "资源",
@@ -2355,39 +2427,48 @@
    "requires": [
     "mason_chief_otto"
    ],
-   "text": "{mason_chief_otto.name}当着你的面从内侧落销，封死了暖室那道活砖暗口：人前说是加固石墙，人后只说一句，这样门外的人就搜不出你。暖室从此没有第二条退路。"
-  },
-  {
-   "category": "时限",
-   "id": "tw_last_radio_window",
-   "requires": [
-    "pressure"
-   ],
-   "text": "磁暴来临前，电台只够再发一封简报：要么呼叫直升机接走一个人，要么把古碑考据传回山下学术院。"
+   "text": "{mason_chief_otto.name}趁夜从外侧扣死了暖室活砖机括——并非白做人情，私藏的未登记古圣物石匣正堵在暗道夹层；想重开唯一逃生暗路，就得替修缮队背禁物过卡。"
   },
   {
    "category": "制度",
-   "id": "tw_saintess_abdicates",
+   "id": "tw_vera_pulse_bell_test",
+   "requires": [
+    "expedition_doctor_vera"
+   ],
+   "text": "老主教增补早祷验身规程，命{expedition_doctor_vera.name}携听诊器与测脉银铃监验——即便朱砂印补好，只要衣下含着银制镂空春宫球或淫纹余热致脉乱铃响，当场按破戒论处。"
+  },
+  {
+   "category": "意外",
+   "id": "tw_radio_open_mic_leak",
    "requires": [
     "saintess_eleonora"
    ],
-   "text": "{saintess_eleonora.name}决定在晨祷上主动卸任圣女之位；按祖制，得交出全部神殿秘钥，并由一人当众签字作保。"
+   "text": "磁暴令石屋卫星电台信标锁死在常开拾音状态，副麦线恰搭在通往内殿的通风槽口；屏风后{saintess_eleonora.name}咬紧纯银仪式短匕压抑反噬的破碎喘息，正面临全频外泄。"
+  },
+  {
+   "category": "时限",
+   "id": "tw_last_caravan_cut_rope",
+   "requires": [
+    "pressure"
+   ],
+   "text": "后山主冰阶遭次生雪崩塌断，领队通告提前两小时改走钟楼外仅容轻装的悬索栈道：每人只能带一件随身器物过桥，要么弃古碑铁证与药箱保人，要么封死绝顶整冬。"
   },
   {
    "category": "关系",
-   "id": "tw_clara_burns_ledger",
+   "id": "tw_clara_collar_deal",
    "requires": [
     "abbess_clara"
    ],
-   "text": "{abbess_clara.name}把贪墨炭银和圣女验身的记录合订成一本，推到你面前的炭盆边：人前我查到底，人后这一本烧不烧由你。烧了，修缮队今年拿不到尾款。"
+   "text": "{abbess_clara.name}深夜独携锁灵颈环与贪墨炭银底账推门摊牌：当年落选正因圣痕燥热被人牵手，今夜要么由你亲手扣上锁灵颈环立肉契烧账，要么明晨全殿同坠寒窟。"
   },
   {
-   "category": "关系",
-   "id": "tw_saintess_kept_you",
+   "category": "人事",
+   "id": "tw_bishops_early_raid",
    "requires": [
-    "saintess_eleonora"
+    "saintess_eleonora",
+    "abbess_clara"
    ],
-   "text": "所谓冰道封死，其实是{saintess_eleonora.name}让人提前锁了补给库的铁门：圣女不求你做什么，只想多留你一夜，把那句没说完的话说完。"
+   "text": "山腰戒律巡查使顶暴雪提前破晓登顶接管哨卡，勒令交出一名盗拓禁碑或私闯内殿者领罚，否则当众剥开{saintess_eleonora.name}的素白圣袍逐寸查验小腹淫纹。"
   }
  ]
 }

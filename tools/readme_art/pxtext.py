@@ -1,4 +1,4 @@
-"""Dev-only helper: rasterise CJK text with SimSun glyphs drawn without anti-aliasing (Pillow) into SVG pixel runs."""
+"""Dev-only helper: rasterise 1-bit CJK pixel glyphs (msyhbd.ttc / simsun.ttc via Pillow) into merged SVG path runs."""
 from PIL import Image, ImageDraw, ImageFont
 
 

@@ -37,7 +37,7 @@
     "family": [
       "晨星",
       "苍银",
-      "铁壁",
+      "银盾",
       "霜歌",
       "灰烬",
       "黑曜",
@@ -118,6 +118,10 @@
     {
       "id": "r_rout_inquiry",
       "text": "溃败的远征队要过公会问询，溃退时谁先撤、谁断后，都会写进每个人的冒险者档案。"
+    },
+    {
+      "id": "r_abyss_miasma_suppression",
+      "text": "迷宫深渊魔毒与裂徽反噬每逢方尖碑转暗便会剧烈逆冲经脉；按远古镇魔规条，须借魔纹束缚带勒住乱窜魔力、纳入魔纹共感尾塞分流滞气，并扣上秘银锁魔腕扣压制共振，方免失控触动庇护雷击。"
     }
   ],
   "customs": [
@@ -311,7 +315,7 @@
       "affordances": [
         "拉上兽皮帘，核对那枚没上账的魔核",
         "听见脚步声时一起躲进箱缝屏住呼吸",
-        "翻出某人藏在毛毡里的旧信"
+        "翻出毛毡铁箱底层封存的魔纹束缚带与秘银锁魔腕扣匣"
       ],
       "pressure_modifiers": {},
       "tags": []
@@ -328,8 +332,8 @@
         "collapsed_supply_cache"
       ],
       "affordances": [
-        "卸下重甲泡进热水，让旧伤松开",
-        "替对方擦干湿发、换上干净绷带",
+        "卸下重甲泡进热水，用岩台上的魔纹共感尾塞导泄滞塞魔毒",
+        "替对方擦干湿发，顺手用魔纹束缚带勒紧躁动肩腕",
         "裹着同一条毛毯守到碑光转暗"
       ],
       "pressure_modifiers": {},
@@ -345,7 +349,7 @@
         32,
         54
       ],
-      "adult_context": "S级远征队兼帝国铁壁骑士团前任统领，身负重伤断指，行事极端现实残忍，一切以多数人生还与战术成果为唯一准绳",
+      "adult_context": "S级远征队兼帝国重甲骑士团前任统领，身负重伤断指，行事极端现实冷酷，一切以多数人生还与战术成果为唯一准绳",
       "public_role": "远征军残部统御长官",
       "appearance_options": [
         "身披布满爪痕与凹陷的暗灰秘银重型板甲，右臂护手已被暴力撕裂露出染血绷带，鬓角灰白硬如钢针，眼神如万年冰川般毫无温度",
@@ -358,7 +362,7 @@
           "功绩簿与守夜排班的签字权"
         ],
         "limits": [
-          "左肺旧伤，夜里咳得睡不着",
+          "左肺受深渊阴寒侵袭，每逢方尖碑转暗便胸腹滚烫、喘咳难止",
           "没有金主盖印，签的字送不出这一层"
         ],
         "obligations": [
@@ -375,10 +379,10 @@
           "争到金主续约，把剩下的人一个不少带回地表"
         ],
         "pressure_responses": {
-          "low": "把剑横在膝上，一条一条对功绩簿",
-          "mid": "当众点名，要对方把话说清楚",
-          "high": "下令封住石门，谁也不许单独离开主厅",
-          "breaking": "咳得单膝跪地，仍用剑撑着不肯让人扶"
+          "low": "把剑横在膝上冷冷点算功绩簿，音调平直得听不出半分起伏",
+          "mid": "当众厉声点名，按住胸甲下微微作痛的旧伤逼对方交实底",
+          "high": "冷着脸下令封死石门，谁都不许单独离开主厅，背过身呼吸却骤然粗重",
+          "breaking": "左肺寒毒翻涌咳得单膝跪地，仍死攥剑柄冷斥‘滚开’，眼底却红着抓紧你的披风不肯放"
         },
         "withdrawal": "独自坐在石门边的巨石上，闭眼握着剑柄调息",
         "relationship_stance": "把人当成要带回去的数字，嘴上从不承认记挂谁",
@@ -405,12 +409,13 @@
           "遇事推诿的人"
         ],
         "preconditions": [
-          "确定对方靠近不是为了功绩簿上的名字，双方都清醒、出于自愿"
+          "换班守夜靠进石门阴影或卸甲躲入暗渠温泉，确定周围没有耳目窥视",
+          "对方手里攥着撤退时刻底牌或敢硬扛自己冷颜"
         ],
         "boundaries": [
-          "不许旁人翻阵亡副官的家书"
+          "战功铭牌与阵亡副官遗书压在石匣下未收妥前绝不松口"
         ],
-        "expression": "把自己的战功铭牌塞进对方手心，第一次承认怕死",
+        "expression": "冷着脸将沉甸甸的战功铭牌塞进你手心，反手扣紧你腕脉哑声喝止别动。",
         "desire_range": [
           1,
           3
@@ -493,7 +498,7 @@
           "欠魔导院一笔研究经费，回去就得还"
         ],
         "exposure": "魔核账上少的那一枚，就缝在{npc.ta}法袍的衬里",
-        "hidden": "溃退那夜不是被魔物偷袭，是替一个队友挡下了团长没看见的那一爪"
+        "hidden": "溃退那夜是为替队友挡爪才染上深渊淫毒，每逢碑光转暗便浑身灼热难耐，全靠法袍下藏着的秘银锁魔腕扣与魔纹束缚带压住失守冲动"
       },
       "decision": {
         "core_value": "体面比命重要，但只在别人面前",
@@ -503,14 +508,14 @@
           "等对方自己问出那一爪是替谁挡的"
         ],
         "pressure_responses": {
-          "low": "抬着下巴挑剔对方手法太重",
-          "mid": "用学院腔一句句堵回去，手却攥紧了袖口",
-          "high": "当众拂袖离开主厅，独自躲进温泉室",
-          "breaking": "伤口疼得站不住，终于开口请对方别走"
+          "low": "高抬下巴挑剔对方换药手法太重，眼尾却掠过忍耐燥热的微红",
+          "mid": "用学院腔冷硬堵回去，苍白手指却死攥法袍领口掩住下腹颤栗",
+          "high": "当众拂袖甩袍退入温泉室，哑声喝令闲人退散，脊背却靠在岩壁细细打颤",
+          "breaking": "魔毒大潮逆冲失守，高傲精灵咬破下唇冷斥‘别碰’，双腿软跌水汽间却自己往魔纹共感尾塞处引你的手"
         },
         "withdrawal": "裹着法袍坐在泉边，背对所有人",
         "relationship_stance": "嘴上瞧不起所有人，只肯让一个人碰伤口",
-        "contrast": "白天倨傲刻薄，换药时安静得像在等一句夸奖",
+        "contrast": "白天倨傲刻薄，魔毒发作贴着热泉喘息时却在羞耻里死死拉住你衣襟",
         "prefers": [
           "隔着水汽说话，不必看对方的眼睛"
         ],
@@ -518,13 +523,13 @@
           "在主厅当众露出伤口"
         ],
         "never": [
-          "承认自己需要谁"
+          "在众人眼皮底下失掉精灵高阶施法者的骄傲"
         ]
       },
       "intimacy_tendency": {
         "attraction_sources": [
           "对方换药时手稳、不多问",
-          "对方看穿了倨傲底下的害怕，却不说破"
+          "对方看穿了倨傲底下的失控惧意，却肯亲自替自己系紧魔纹束缚带"
         ],
         "likes": [
           "水汽里有人替自己擦干头发"
@@ -533,12 +538,13 @@
           "被当成全队的工具"
         ],
         "preconditions": [
-          "伤口不疼、神志清楚的时候，双方都清醒、出于自愿"
+          "温泉室水汽弥漫或物资洞拉严兽皮帘，确认外部巡逻远去",
+          "深渊魔毒发作急需用魔纹共感尾塞分流滞气时，愿替自己兜住这桩体面丑闻"
         ],
         "boundaries": [
-          "魔毒发作时不做任何决定"
+          "发绳未散开、魔纹束缚带未扣上腕骨前，绝不许在外人看得见的碑光下胡来"
         ],
-        "expression": "把学院耳饰摘下来放进对方手心，说只是借的",
+        "expression": "傲慢地偏头咬紧银牙，将褪色学院耳饰按进你掌心，另一手却发颤扯松领口。",
         "desire_range": [
           2,
           4
@@ -571,16 +577,16 @@
         }
       ],
       "situation": {
-        "trigger": "典官对账时发现魔核少了一枚，要求所有人摊开行囊",
-        "pressure": "法袍衬里一翻就露，{npc.ta}只剩一晚想办法",
+        "trigger": "典官对账翻出魔核亏空，恰逢方尖碑转暗引爆{npc.ta}体内深渊淫毒反噬，衣下灼痛燥乱难压。",
+        "pressure": "法袍一翻便要露馅，若不躲进温泉室纳入魔纹共感尾塞并勒紧魔纹束缚带泄毒，便会当众失控发狂。",
         "exits": [
           {
-            "option": "请最信任的人替自己把魔核悄悄放回锁箱",
-            "cost": "把一个人拖进自己的秘密里"
+            "option": "请你掩护退进温泉室，借魔纹共感尾塞与魔纹束缚带引散毒热再暗中归还魔核",
+            "cost": "所有高傲伪装在你掌心寸寸碎裂，从此被捏死这辈子最耻辱的把柄"
           },
           {
-            "option": "当众交出魔核，说出欠魔导院的债",
-            "cost": "首席法师的体面全没了"
+            "option": "咬破舌尖强咽魔毒反噬，当众甩出魔核认下欠债",
+            "cost": "经脉受魔力反震裂伤，首席法师多年傲骨与前途当场毁尽"
           }
         ]
       },
@@ -626,10 +632,10 @@
           "岩层草图卖给出价最高的人，又舍不得卖"
         ],
         "pressure_responses": {
-          "low": "拍着酒壶讲笑话，把话题岔开",
-          "mid": "嗓门变大，拿族规挡在前面",
-          "high": "把酒壶往地上一摔，说这趟谁都别想好过",
-          "breaking": "背对众人蹲下，肩膀一抖一抖"
+          "low": "拍着酒壶哈哈大笑插科打诨，故意把话题往别处岔",
+          "mid": "嗓门骤然拔高，搬出黑铁山脉族规挡在嘴硬脸皮前面",
+          "high": "把半截酒壶狠摔在石案上冷喝散场，手指却死死攥住断臂绷带",
+          "breaking": "背对众人蹲在物资箱缝后，宽厚脊背剧烈发抖却嘶声不准别人靠近"
         },
         "withdrawal": "躲进后室的箱缝里抱着战斧打盹",
         "relationship_stance": "跟谁都称兄道弟，真心话一句不说",
@@ -638,7 +644,7 @@
           "用玩笑把难听的话说出口"
         ],
         "avoids": [
-          "清醒地谈溃退那夜"
+          "摘下酒壶直面溃退那夜"
         ],
         "never": [
           "拿同胞的战斧换钱"
@@ -650,18 +656,19 @@
           "对方敢当面戳穿自己的玩笑"
         ],
         "likes": [
-          "清醒的早上一起烤硬面包"
+          "天微亮时一起烤热乎的硬面包"
         ],
         "dislikes": [
           "被人可怜"
         ],
         "preconditions": [
-          "两人都清醒，酒壶放在够不着的地方"
+          "把酒壶丢出石洞外头且后室兽皮帘拉严，外边听不见箱缝动静",
+          "双方不再拿那夜谁没举盾的旧账互相装傻"
         ],
         "boundaries": [
-          "喝过酒就不碰任何人"
+          "三位同胞战斧与岩层图摆在面前未交割妥当前，绝不松口任人翻看"
         ],
-        "expression": "在岩层草图上最安全的那条路旁写上对方的名字",
+        "expression": "默不作声在岩层草图最安全的那条逃生路旁写上你的名字，反手攥住你小臂。",
         "desire_range": [
           2,
           4
@@ -736,8 +743,8 @@
         "obligations": [
           "把大主教的圣骨十字架送回王都"
         ],
-        "exposure": "圣徽裂了之后，{npc.ta}再也没听见过神的回应",
-        "hidden": "王都有人等着完婚，{npc.ta}却在每次守夜时数着和另一个人换班的时辰"
+        "exposure": "圣徽裂了之后，{npc.ta}再也没听见过神的回应，暗夜魔息更顺着裂缝往心口窜",
+        "hidden": "王都有人等着完婚，却只在黑暗中戴上秘银锁魔腕扣强压裂徽躁热，每次守夜都在数和你换班的时辰"
       },
       "decision": {
         "core_value": "誓言要守，心不该骗人",
@@ -747,14 +754,14 @@
           "让问询簿上的证词既公道，又不伤到在意的人"
         ],
         "pressure_responses": {
-          "low": "低头祈祷，把要说的话咽回去",
-          "mid": "用誓词一样的句子把对方挡开",
-          "high": "拔出断剑，说自己不需要任何人陪着守夜",
-          "breaking": "在黑暗里抓住对方的袖子不肯放"
+          "low": "垂眸轻声诵念祷词强撑端肃圣洁，把喉间滚烫的喘息硬生生咽回去",
+          "mid": "拿古板圣堂誓律挡在身前拒人千里，指节却紧按住发烫的圣徽裂口",
+          "high": "当众拔出半截断剑冷斥无需任何人同班，夜风一灭光亮肩背便止不住轻颤",
+          "breaking": "黑暗中圣徽裂纹灼痛暴走，死咬唇角羞耻抓紧你袖口嘶声求你用魔纹束缚带压住躁动"
         },
         "withdrawal": "跪在方尖碑下，背对所有人一跪就是半夜",
         "relationship_stance": "对谁都温和，对自己最苛刻",
-        "contrast": "人前最守规矩，独处时会问对方神是不是早就走了",
+        "contrast": "人前最守圣洁教条，暗影里却浑身滚烫颤抖地问你神是不是早就走了",
         "prefers": [
           "在光里说真话"
         ],
@@ -768,7 +775,7 @@
       "intimacy_tendency": {
         "attraction_sources": [
           "对方在黑暗里先伸出手",
-          "对方不把自己当圣徒，只当一个会怕的人"
+          "对方不把自己当圣徒，只当一个会怕黑、会发烫失控的人"
         ],
         "likes": [
           "守夜时听对方讲地面上的小事"
@@ -777,12 +784,13 @@
           "被人拿信仰嘲弄"
         ],
         "preconditions": [
-          "先给王都写一封说清心意的信，双方都清醒、出于自愿"
+          "避开大圣堂眼线躲入石门哨暗影或温泉室，再无其余队员巡视经过",
+          "裂徽灼痛泛起时愿意替自己遮住狼狈，不把守夜密事写进问询簿"
         ],
         "boundaries": [
-          "不在圣徽前越线"
+          "白银胸甲上那半枚碎裂圣徽没摘下来放好前，绝不许在外廊灯下越界"
         ],
-        "expression": "把守夜的灯往对方那边推一点",
+        "expression": "红着眼尾把守夜油灯往黑暗边缘推远半尺，颤抖着将滚烫指节勾进你掌心。",
         "desire_range": [
           1,
           3
@@ -815,16 +823,16 @@
         }
       ],
       "situation": {
-        "trigger": "王都来信，婚期提前，要{npc.ta}回地表后立刻完婚",
-        "pressure": "回信要交给下一趟传令斥候，{npc.ta}还没想好写什么",
+        "trigger": "王都催婚令刚到，裂徽却因碑光转暗爆发暗影躁热，袖下的秘银锁魔腕扣隔衣刮出沉闷铁响难压。",
+        "pressure": "不借魔纹束缚带或共感尾塞稳住脉象就会当场神思溃散，可向你求助又彻底坐实叛教丑闻。",
         "exits": [
           {
-            "option": "写信请求解除婚约",
-            "cost": "圣堂会收回{npc.ta}的骑士衔"
+            "option": "在温泉室借魔纹束缚带压稳暗潮，再连夜写信撕毁圣堂婚约",
+            "cost": "圣堂收回{npc.ta}的骑士衔，王都追缉令随时下达"
           },
           {
-            "option": "回信应下婚期",
-            "cost": "把守夜时说过的话全咽回去"
+            "option": "强抑灼痛回信应下婚期，独自啃噬裂徽蚀骨燥热",
+            "cost": "圣力彻底反噬溃散，把守夜时说过的话全数咽进肚里"
           }
         ]
       },
@@ -868,10 +876,10 @@
           "把那枚铜币还给当年的人，或者再要回来"
         ],
         "pressure_responses": {
-          "low": "转着铜币开玩笑，什么都不承认",
-          "mid": "突然靠得很近，压低声音说出对方的秘密",
-          "high": "消失一整夜，回来时什么都不解释",
-          "breaking": "把密令摊在对方面前，问要不要烧掉"
+          "low": "指尖转着旧铜币嗤笑几声，假装素不相识地敷衍过去",
+          "mid": "突然逼近半步贴耳说出你的旧癖，眼尾冷冽试探你的底线",
+          "high": "冷脸翻身消失整夜，回来时衣甲微乱却咬死一个字不肯交待",
+          "breaking": "把公会暗部密令狠拍在对方面前，哑声冷问到底烧不烧掉重来"
         },
         "withdrawal": "爬到石门上方的岩缝里，一个人待到换班",
         "relationship_stance": "跟谁都隔着一层，唯独对旧人装不像",
@@ -898,12 +906,13 @@
           "被人当成一把刀"
         ],
         "preconditions": [
-          "先说好暗号，一说就停，双方都清醒、出于自愿"
+          "避开主厅碑光躲进物资箱缝或守夜阴影，对上当年的旧暗号",
+          "敢拿住密令后果和自己一起扛，别演完戏又装陌生人"
         ],
         "boundaries": [
-          "密令没烧之前，不在主厅露出半点私情"
+          "公会密令还没销毁或换掉名字前，在主厅众人面前绝不许露半点交情"
         ],
-        "expression": "把铜币弹给对方，说是旧账的利息",
+        "expression": "将旧铜币贴着你掌纹重重一按，嘴角冷笑却任你反扣住手腕不抽回。",
         "desire_range": [
           3,
           5
@@ -989,10 +998,10 @@
           "在卖图远走和留在队里之间做个了断"
         ],
         "pressure_responses": {
-          "low": "低头描图，答话只用数字",
-          "mid": "把图卷起来抱在怀里，先开条件",
-          "high": "说要一个人走风道下去",
-          "breaking": "把图摊开推给对方，说你来决定"
+          "low": "垂眼用鹅毛笔描着风道刻度，答话只甩出冷硬数字",
+          "mid": "将未署名的复制图死死捂进怀里，抬眼先开出不容商量的价码",
+          "high": "冷着脸收拾测距环声称独走毒雾风道，呼吸却紧绷得不稳",
+          "breaking": "咬牙把藏图摊开推到你手边，别过脸冷声说你来决定卖给谁"
         },
         "withdrawal": "蹲在暗渠口借着荧光石一遍遍描同一段路",
         "relationship_stance": "人和路一样，走过两遍才算认识",
@@ -1019,12 +1028,13 @@
           "被当成会走路的地图"
         ],
         "preconditions": [
-          "生意上的事先说清，再谈别的，双方都清醒、出于自愿"
+          "风道图署名权和价码谈清了落到纸面上，外边没有金主眼线盯梢",
+          "敢陪自己真走进地下毒雾暗道并守住那张复制图"
         ],
         "boundaries": [
-          "谈价钱的同一晚不越线"
+          "谈妥价码落笔签押的当场不许偷拿怀里那枚旧指南针"
         ],
-        "expression": "在地图角落用小字标一个只有两个人知道的地名",
+        "expression": "面无表情在地图死角添上只有两人懂的记号，指尖却故意擦过你掌背停着不挪开。",
         "desire_range": [
           2,
           4
@@ -1212,7 +1222,11 @@
         "low",
         "equal"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "veteran_vanguard_scout",
+        "logistics_quartermaster",
+        "apostate_field_medic"
+      ],
       "slots": [
         "cold_blooded_crusade_commander"
       ],
@@ -1297,7 +1311,11 @@
         "equal",
         "low"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "veteran_vanguard_scout",
+        "logistics_quartermaster",
+        "apostate_field_medic"
+      ],
       "slots": [
         "arrogant_high_elf_arcanist"
       ],
@@ -1336,7 +1354,10 @@
       "player_positions": [
         "equal"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "veteran_vanguard_scout",
+        "apostate_field_medic"
+      ],
       "slots": [
         "cynical_dwarf_shieldbreaker"
       ],
@@ -1349,7 +1370,7 @@
         "resource_gap": "{cynical_dwarf_shieldbreaker.name}握着岩层草图，你握着那夜的真相。",
         "limit_gap": "{cynical_dwarf_shieldbreaker.name}不能让族人知道喝酒误事，你不能让功绩簿记错人。",
         "meeting_reason": "赏金分成单上，你们俩的名字挨在一起，只能留一个。",
-        "irreplaceable_goal": "让这张嘴硬的家伙清醒着说一次谢谢。"
+        "irreplaceable_goal": "让这张嘴硬的家伙卸下醉态正经说一次谢谢。"
       },
       "relations": [
         {
@@ -1376,7 +1397,11 @@
         "low",
         "equal"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "veteran_vanguard_scout",
+        "logistics_quartermaster",
+        "apostate_field_medic"
+      ],
       "slots": [
         "traumatized_holy_paladin"
       ],
@@ -1417,7 +1442,12 @@
         "equal",
         "high"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "veteran_vanguard_scout",
+        "logistics_quartermaster",
+        "noble_commission_sponsor",
+        "apostate_field_medic"
+      ],
       "slots": [
         "shadow_assassin_infiltrator"
       ],
@@ -1457,7 +1487,11 @@
         "high",
         "equal"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "noble_commission_sponsor",
+        "veteran_vanguard_scout",
+        "apostate_field_medic"
+      ],
       "slots": [
         "dungeon_cartographer"
       ],
@@ -1498,7 +1532,12 @@
         "equal",
         "high"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "veteran_vanguard_scout",
+        "logistics_quartermaster",
+        "noble_commission_sponsor",
+        "apostate_field_medic"
+      ],
       "slots": [
         "cold_blooded_crusade_commander",
         "shadow_assassin_infiltrator"
@@ -1602,8 +1641,8 @@
       ],
       "duration_minutes": 60,
       "beats": [
-        "卸下重甲泡进热水，旧伤一点点松开。",
-        "水汽里只看得清对方肩上的疤。"
+        "卸下湿透的护甲泡进温泉，深渊瘴气从皮肉往外渗，肩胛上的灼痕一碰就发烫。",
+        "雾气模糊了视线，只有彼此急促的喘息贴在石壁回声里，谁也没伸手推开。"
       ],
       "hook_ids": [],
       "start_minute": 1320,
@@ -1617,8 +1656,8 @@
       ],
       "duration_minutes": 40,
       "beats": [
-        "拉上兽皮帘，解开渗血的绷带。",
-        "药膏是凉的，手指是暖的，谁都没先开口。"
+        "拉紧兽皮帘，在箱笼后解开渗血的绷带，指尖替对方抹过锁骨下那圈发红的魔纹。",
+        "药膏冰凉，被触到的皮肤却烫得惊人，呼吸交缠着谁也没先移开眼神。"
       ],
       "hook_ids": [],
       "start_minute": 1290,
@@ -1787,36 +1826,38 @@
       "location_ids": [
         "collapsed_supply_cache"
       ],
-      "trigger": "两人正在后室说不能外传的话，帘外传来问询书记的声音：要进来找账本。",
-      "objective": "在书记翻完账本离开之前，不让人发现两人在一起。",
-      "choice": "一起躲进箱缝屏住呼吸，还是一个出去应付、把另一个留在暗处。",
+      "trigger": "瘴毒反噬突然窜上心脉，两人在后室不得不解开甲衣以魔纹束缚带绞腕镇压，帘外却传来书记翻找账册的脚步声。",
+      "objective": "在书记掀开兽皮帘前平息体内燥乱，并把湿透的衣甲与镇压器具藏妥。",
+      "choice": "硬咬牙挺过脉象冲撞去应付书记，还是立刻动用魔纹共感尾塞稳住心神再避进暗箱。",
       "immediate": {
-        "text": "兽皮帘被掀起一角，灯光照进来半尺，箱缝窄得只容两人贴着站。",
+        "text": "帘缝漏进一线灯光，你们贴躲在箱笼之间，暗红皮革魔纹束缚带还勒在彼此腕上发烫。",
         "minutes": 15
       },
       "near": {
-        "text": "书记说找不到账本就叫铁卫来搬箱子。",
+        "text": "书记找不到账本就要喊门口铁卫进来搬箱清点。",
         "deadline_minutes": 60
       },
       "far": {
-        "trigger": "书记在账本里发现多出的一行",
-        "consequence": "那一行会被问到底，牵出谁在后室待过。",
+        "trigger": "书记翻查物资箱发现异常",
+        "consequence": "后室藏匿镇压器具与瘴毒失控的实情会被记入呈报。",
         "due_days": 2
       },
       "exits": [
         {
-          "option": "一起躲进箱缝，等书记走",
-          "cost": "贴得太近，有些话再也装不回去"
+          "option": "共避箱缝，借魔纹共感尾塞硬压反噬",
+          "cost": "闷哼与喘息贴在耳畔忍到天明，往后见了面再难装作公事公办"
         },
         {
-          "option": "一个人出去拦住书记",
-          "cost": "得当面撒一个谎，书记会记住你的脸"
+          "option": "一人披衣出帘周旋，留另一人单独镇压",
+          "cost": "挡在帘外撒谎的每一瞬，都能听见身后布料摩擦的细响"
         }
       ],
       "leverage": null,
       "hook_ids": [],
       "start_minute": 1350,
-      "tags": []
+      "tags": [
+        "supernatural"
+      ]
     },
     {
       "id": "p_bounty_half",
@@ -1864,7 +1905,8 @@
       "title": "续约名单",
       "source": "institution",
       "flags": [
-        "timed"
+        "timed",
+        "leverage"
       ],
       "location_ids": [
         "sanctuary_obelisk_hall",
@@ -1896,7 +1938,11 @@
           "cost": "从此和对方分开两地，约定只能靠书信"
         }
       ],
-      "leverage": null,
+      "leverage": {
+        "holder": "cold_blooded_crusade_commander",
+        "subject": "player",
+        "basis": "续约名单还差最后一个签字名额，{cold_blooded_crusade_commander.name}手中压着你在后室借魔纹束缚带镇压瘴毒的记录"
+      },
       "hook_ids": [],
       "start_minute": 1200,
       "tags": [
@@ -1914,37 +1960,38 @@
         "drainage_hot_spring",
         "collapsed_supply_cache"
       ],
-      "trigger": "外廊又塌了一段，碎石封住了暗渠口，温泉室里只剩两个人和一盏快灭的荧光石。",
-      "objective": "在外面的人挖通之前，让两个人都不失温。",
-      "choice": "靠着泉水取暖，还是爬上岩台裹同一条毛毯，把干衣服让给伤更重的那个。",
+      "trigger": "外廊二次坍塌震碎了半扇碑光，阴寒瘴雾倒灌进温泉室，诱导宿主的魔纹潮热与失控躁动同时爆发。",
+      "objective": "在石门凿通前，利用池畔密匣里的秘银锁魔腕扣与魔纹共感尾塞引导魔脉泄压。",
+      "choice": "各自硬抗冷瘴导致魔力暴走失温，还是借魔纹束缚带绑住彼此并佩戴器具度过峰值。",
       "immediate": {
-        "text": "荧光石暗了一半，泉水的热气被碎石缝里的冷风一阵阵吹散。",
+        "text": "温泉蒸腾的水汽混着甜腻瘴雾翻涌，密匣弹开，秘银腕扣扣锁声随心跳一声紧过一声。",
         "minutes": 40
       },
       "near": {
-        "text": "铁卫隔着碎石喊话，说要挖到碑光转暗才能通。",
+        "text": "守卫隔着碎石喊话，至少要到换班后才能挖开通路。",
         "deadline_minutes": 420
       },
       "far": {
-        "trigger": "暗渠被挖通",
-        "consequence": "出来时谁和谁裹着同一条毛毯，全队都会看见。",
+        "trigger": "救援队伍掘通暗渠",
+        "consequence": "通道开启时若仍衣衫不整、束缚带未解，共处一室的秘密会立刻传遍全队。",
         "due_days": 1
       },
       "exits": [
         {
-          "option": "把干毛毯全给对方，自己守着泉眼",
-          "cost": "冻得发烧，第二天站不稳"
+          "option": "互系魔纹束缚带并扣上秘银锁魔腕扣镇压",
+          "cost": "在碎石隔绝的暗室里随锁扣收紧颤抖失守，天亮后得共同掩饰腕上勒痕"
         },
         {
-          "option": "两人裹着同一条毛毯熬过去",
-          "cost": "被困一夜说出的话，出来以后收不回去"
+          "option": "由一人以魔纹共感尾塞独揽过半瘴毒",
+          "cost": "浑身战栗着贴在对方怀里撑过寒潮，彻底露了虚弱底细再瞒不住"
         }
       ],
       "leverage": null,
       "hook_ids": [],
       "start_minute": 1320,
       "tags": [
-        "disaster"
+        "disaster",
+        "supernatural"
       ]
     }
   ],
@@ -1953,50 +2000,136 @@
       "id": "h_commander_flask",
       "kind": "approach",
       "slot": "cold_blooded_crusade_commander",
-      "location_ids": [],
+      "location_ids": [
+        "sanctuary_obelisk_hall",
+        "sealed_granite_gate"
+      ],
       "text": "{npc.name}把一只铁皮水壶放到你身边，壶身还烫着：“喝。别谢我，我只是不想再有人在我眼前倒下。”说完却没走，就站在你身侧。"
     },
     {
       "id": "h_commander_roster",
       "kind": "request",
       "slot": "cold_blooded_crusade_commander",
-      "location_ids": [],
+      "location_ids": [
+        "sanctuary_obelisk_hall"
+      ],
       "text": "{npc.name}在功绩簿上停了笔，用笔杆点了点你的名字：“溃退那夜的事，你打算怎么讲？今晚守夜，你跟我一班。”"
+    },
+    {
+      "id": "h_commander_silk_wrist",
+      "kind": "approach",
+      "slot": "cold_blooded_crusade_commander",
+      "location_ids": [
+        "collapsed_supply_cache",
+        "drainage_hot_spring"
+      ],
+      "text": "{npc.name}反手拉紧兽皮帘，把半截湿热的魔纹束缚带搁进你掌心，指节克制到发白：“今夜瘴毒压不住了，别出声……帮我扣紧。”"
     },
     {
       "id": "h_arcanist_bandage",
       "kind": "approach",
       "slot": "arrogant_high_elf_arcanist",
-      "location_ids": [],
+      "location_ids": [
+        "collapsed_supply_cache",
+        "sanctuary_obelisk_hall"
+      ],
       "text": "{npc.name}拎着一卷干净绷带站到你面前，下巴抬得老高：“今天你来。别人手太重。”袖口底下的手指在抖。"
+    },
+    {
+      "id": "h_arcanist_crest_heat",
+      "kind": "approach",
+      "slot": "arrogant_high_elf_arcanist",
+      "location_ids": [
+        "drainage_hot_spring",
+        "collapsed_supply_cache"
+      ],
+      "text": "{npc.name}屏息靠在温热石壁上，耳尖泛着遮不住的潮红，反手将密匣推向你：“魔流又乱了……别多问，把那枚魔纹共感尾塞递过来。”"
     },
     {
       "id": "h_dwarf_tea",
       "kind": "approach",
       "slot": "cynical_dwarf_shieldbreaker",
-      "location_ids": [],
-      "text": "{npc.name}一屁股坐到你旁边，把酒壶往身后一推，换了一杯热茶递过来：“今天不喝。有件事，想跟清醒的你说。”"
+      "location_ids": [
+        "sanctuary_obelisk_hall",
+        "sealed_granite_gate"
+      ],
+      "text": "{npc.name}一屁股坐到你旁边，把酒壶往身后一推，换了一杯热茶递过来：“今天不喝。有件事，想跟眼下还撑得住的你说。”"
+    },
+    {
+      "id": "h_dwarf_spring_armor",
+      "kind": "approach",
+      "slot": "cynical_dwarf_shieldbreaker",
+      "location_ids": [
+        "drainage_hot_spring"
+      ],
+      "text": "{npc.name}在雾气弥漫的池边卸下半副胸甲，指指石台边挂着的魔纹束缚带，嘴硬地别开脸：“瘴毒钻骨头缝了，帮个手把腕子绑住，少废话。”"
     },
     {
       "id": "h_paladin_lamp",
       "kind": "approach",
       "slot": "traumatized_holy_paladin",
-      "location_ids": [],
+      "location_ids": [
+        "sealed_granite_gate",
+        "sanctuary_obelisk_hall"
+      ],
       "text": "{npc.name}提着守夜的灯走到你面前，灯光晃了一下：“今晚我想和你一班。我……不想一个人待在暗处。”"
+    },
+    {
+      "id": "h_paladin_bell_tremor",
+      "kind": "approach",
+      "slot": "traumatized_holy_paladin",
+      "location_ids": [
+        "collapsed_supply_cache",
+        "drainage_hot_spring"
+      ],
+      "text": "{npc.name}退进阴影里，领口微敞处泛起灼热的微光，{npc.ta}咬住下唇把一对秘银锁魔腕扣放进你手心：“别让外头听见铁扣磕响。”"
     },
     {
       "id": "h_assassin_coin",
       "kind": "approach",
       "slot": "shadow_assassin_infiltrator",
-      "location_ids": [],
+      "location_ids": [
+        "sanctuary_obelisk_hall",
+        "sealed_granite_gate"
+      ],
       "text": "{npc.name}从你身后经过，一枚旧铜币落进你掌心，声音低得只有你听得见：“我们不认识。可这东西，你还记得吧？”"
+    },
+    {
+      "id": "h_assassin_curtain_blade",
+      "kind": "request",
+      "slot": "shadow_assassin_infiltrator",
+      "location_ids": [
+        "collapsed_supply_cache"
+      ],
+      "text": "{npc.name}借着箱笼阴影贴近你耳廓，短匕挑开密匣暗扣露出秘银锁魔腕扣与束缚带：“后半夜我瘴毒若发作，你敢不敢替我扣死这扇门？”"
     },
     {
       "id": "h_cartographer_scroll",
       "kind": "approach",
       "slot": "dungeon_cartographer",
-      "location_ids": [],
+      "location_ids": [
+        "sealed_granite_gate",
+        "drainage_hot_spring"
+      ],
       "text": "{npc.name}挨着你坐下，膝盖上摊着那卷风道图，指尖停在一个小小的地名上：“这个名字，是你那天随口说的。我一直没改。”"
+    },
+    {
+      "id": "h_cartographer_warm_rock",
+      "kind": "approach",
+      "slot": "dungeon_cartographer",
+      "location_ids": [
+        "drainage_hot_spring"
+      ],
+      "text": "{npc.name}坐在温泉热岩台边擦拭湿透的风道图，指腹顺着你腕骨滑上去：“石门堵着出不去，今晚这池水……够分两个人一半。”"
+    },
+    {
+      "id": "h_commander_gate_whisper",
+      "kind": "approach",
+      "slot": "cold_blooded_crusade_commander",
+      "location_ids": [
+        "sealed_granite_gate"
+      ],
+      "text": "{npc.name}靠在石门冰冷的门柱旁歇气，忽然伸手扯松自己紧勒的领扣，偏头睨着你：“别傻站着，过来替我挡一下风。”"
     }
   ],
   "twists": [
@@ -2006,7 +2139,7 @@
       "requires": [
         "cold_blooded_crusade_commander"
       ],
-      "text": "守夜排班表上的笔迹改过两次：是{cold_blooded_crusade_commander.name}故意把自己和你排进同一班，连排三晚，只为有机会单独把那夜的事说完。"
+      "text": "守夜排班表背面的血印另有主人：{cold_blooded_crusade_commander.name}故意将你连排三晚进瘴雾最浓的暗渠班次，只因你身上残留的镇压余温能压住{cold_blooded_crusade_commander.ta}失控的旧伤。"
     },
     {
       "id": "t_assassin_covers",
@@ -2014,7 +2147,7 @@
       "requires": [
         "shadow_assassin_infiltrator"
       ],
-      "text": "{shadow_assassin_infiltrator.name}当众说你的口供漏洞百出，背地里却在密令上替你改掉了一个时刻。"
+      "text": "{shadow_assassin_infiltrator.name}当众指认你口供有隙，私下却篡改了密令时刻——不是为了替你脱罪，而是把违令黑锅甩给团长，同时把原件当作拿捏你的筹码。"
     },
     {
       "id": "t_arcanist_core_reason",
@@ -2022,7 +2155,7 @@
       "requires": [
         "arrogant_high_elf_arcanist"
       ],
-      "text": "那枚没上账的魔核，{arrogant_high_elf_arcanist.name}一直没碰：那是留着给方尖碑撑最后一天的，好让全队都走得掉。"
+      "text": "那枚未入账的魔核根本不是备胎燃料，而是压制全室秘银锁魔腕扣共鸣的镇眼；{arrogant_high_elf_arcanist.name}一旦抽走一分魔力，所有带魔纹者都会立刻燥热失控。"
     },
     {
       "id": "t_cartographer_second_map",
@@ -2030,7 +2163,7 @@
       "requires": [
         "dungeon_cartographer"
       ],
-      "text": "{dungeon_cartographer.name}早就画好了第二份风道图。交给你保管的那一卷，只是每晚来找你的借口。"
+      "text": "{dungeon_cartographer.name}画出的第二份风道图直通金主的私密索道：上面开出的双倍悬赏只要活口带着完整远征印记上去，并非要救整支队伍。"
     },
     {
       "id": "t_dwarf_rubble",
@@ -2038,7 +2171,7 @@
       "requires": [
         "cynical_dwarf_shieldbreaker"
       ],
-      "text": "暗渠口那堆挡路的碎石，是{cynical_dwarf_shieldbreaker.name}故意推下来的：只想让你和自己困在同一边，把那晚没说完的话说完。"
+      "text": "暗渠碎石是{cynical_dwarf_shieldbreaker.name}借着换班引塌的：一边断了瘴脉反扑，一边故意把拿着魔纹共感尾塞的人困在自己这一侧，免得功绩簿被外面人抢走。"
     },
     {
       "id": "t_paladin_letter",
@@ -2046,7 +2179,7 @@
       "requires": [
         "traumatized_holy_paladin"
       ],
-      "text": "圣堂的回信写明：代订的婚约只要本人当面拒绝即可作废。这封信，{traumatized_holy_paladin.name}已经揣了三天。"
+      "text": "圣堂密函开出的取消婚约条件，是要求{traumatized_holy_paladin.name}具名作证队伍私藏魔纹束缚带行禁忌镇压之术，这封信已经被{traumatized_holy_paladin.ta}攥出了血印。"
     },
     {
       "id": "t_runner_delayed",
@@ -2054,7 +2187,16 @@
       "requires": [
         "pressure"
       ],
-      "text": "传令斥候被落石拦在升降井口，口信要晚一天才走，所有人多出一夜，也多出一夜要熬。"
+      "text": "传令斥候在升降井半途因魔纹共鸣反噬昏厥，地表根本不知道安全区正在泄压，救援窗口直接缩短了半天。"
+    },
+    {
+      "id": "t_obelisk_blood_bond",
+      "category": "关系",
+      "requires": [
+        "cold_blooded_crusade_commander",
+        "arrogant_high_elf_arcanist"
+      ],
+      "text": "方尖碑密匣里的魔导具本成一对：{cold_blooded_crusade_commander.name}与{arrogant_high_elf_arcanist.name}早年签过同感血契，只要一人瘴毒发作，另一人腕间也会泛起束缚带般的灼痕。"
     }
   ],
   "forbidden_terms": [
@@ -2087,5 +2229,5 @@
     "disaster"
   ],
   "status": "released",
-  "notes": "迷宫都市深层：坍塌安全区与溃灭的S级远征队完整纯正硬核异世界剑与魔法题材世界包。完全剥离现代都市与擦边媚俗套路，聚焦于残酷的地下城绝境求生、资源枯竭下的阶级倾轧、结界熄灭死线、高阶精灵法师魔毒逆流反噬，以及重剑团长冷酷的弃子放逐博弈。全维度严格遵循 DATA_CONTRACTS 与 CONTENT_BIBLE 规范：包含 4 个具备双向出入口的深渊地下城风格地点、6 位设定严密且无敏感词汇的成年角色模板、6 位背景人物、4 个核心绝境张力引擎、4 组全覆盖权力结构的组合配置、6 项日常互动与 6 项高压事件、10 个规范交互钩子与 7 类核心转折。内容标签全数遵循系统受控词表。2026-10-18 按写作规则 v2 改造：张力来源从结界熄灭、弃子放逐和抢修石门，换成溃退那夜的旧账、私藏魔核的秘密、赏金与续约的利益和守夜独处。"
+  "notes": "迷宫都市深层绝境求生与魔瘴镇压题材（v2.5 模式4）：全员成年且双向博弈，保留溃退旧账、私藏魔核与续约利益纠葛，接入魔纹束缚带、魔纹共感尾塞与秘银锁魔腕扣的体质反噬镇压路线，清除旧八股并打通地点、人物状况、压力与待命突袭转折。"
 }

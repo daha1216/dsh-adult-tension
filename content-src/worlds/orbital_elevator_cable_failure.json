@@ -5,16 +5,16 @@
   "extends": null,
   "era": "近未来深空天梯轨道建设与空天防御纪元",
   "region": "三万米高空轨道电梯对流层重型配重锚定外露机库",
-  "premise": "三万米高空的轨道电梯锚定站，空天防卫军的冰山女上尉带着一个班驻守，白天巡检配重环和主缆，夜里在外露机库旁的舱室里轮流值班。地月联合防卫军的督导和见习技术员这个月也住了进来。近地轨道上的袭击越来越频繁，主缆的张力绞盘报过两次过热。",
+  "premise": "三万米高空轨道电梯锚定站遭碎片撞击，主缆偏载突破四千五百吨，张紧绞盘抱死断电，零下六十五度风切变倒灌机库。冰山女上尉正拎一米四钛钽长撬杠死抵偏心槽；而在增压复压锁背后，黑匣磁芯、受贿放行单与封口筹码正待一一清账。",
   "tone": [
-    "三万米极寒狂风怒号",
-    "碳纳米纤维撕裂刺耳尖鸣",
-    "重型电磁绞盘电弧迸射",
-    "失重颠簸里安全索的嗡鸣"
+    "极寒风切变倒灌",
+    "主缆偏载尖鸣",
+    "钛钽长撬杠压槽",
+    "复压锁后筹码驯服"
   ],
-  "style_hint": "冷酷硬核的深空重工工笔，着重刻画三万米平流层边缘极寒风切变的狂暴撕扯、实心钛钽合金撬杠抵在数千吨张紧绞盘齿槽间的剧烈金属形变爆鸣、纳米紧身战斗服包裹下急促起伏的身躯与面罩内泛起的白霜汗气，台词充满军令如山与极限求生的冷峻决断。",
+  "style_hint": "极寒重工与密室驯服：风切变撕扯钛壁，钛钽长撬杠楔入偏心槽金属尖鸣，失重贴背压杠的滚烫心跳；退回生活舱落扣复压锁后，黑匣磁芯与筹码摆上桌沿，冰山军官冷斥下寸寸失守。",
   "clock_start": {
-    "label": "天梯建设第十二年，春",
+    "label": "近地十月，平流层暴风季",
     "minute": 1380
   },
   "clock_style": "hm",
@@ -25,28 +25,28 @@
     "nonbinary": 0.0
   },
   "stage_labels": {
-    "stranger": "战术戒备",
+    "stranger": "军纪戒备",
     "acquainted": "气压对标",
-    "familiar": "狂风相拥",
+    "familiar": "骨传共鸣",
     "flirting": "面罩结霜",
     "testing": "撬杠同命",
-    "intimate": "解甲相依",
-    "committed": "天穹誓约"
+    "intimate": "复压锁门",
+    "committed": "天穹共犯"
   },
   "name_pools": {
     "family": [
-      "冷",
       "厉",
-      "景",
       "席",
       "原",
       "蔚",
-      "战",
       "商",
       "狄",
       "缪",
       "纪",
-      "宿"
+      "宿",
+      "闻",
+      "蔺",
+      "贺"
     ],
     "given_female": [
       "璇",
@@ -54,13 +54,13 @@
       "微",
       "澄",
       "澈",
-      "夜",
       "寒",
       "凌",
       "羽",
       "青",
       "宛",
-      "舒"
+      "舒",
+      "萝"
     ],
     "given_male": [
       "渊",
@@ -81,49 +81,2292 @@
       "云",
       "川",
       "野",
-      "天",
       "衡",
       "朗",
       "毅",
       "阔",
       "诚",
       "诺",
-      "简"
+      "简",
+      "乔"
     ],
     "nickname_patterns": [
       {
-        "pattern": "小{family}",
+        "pattern": "阿{given_last}",
         "gender": "any"
       },
       {
-        "pattern": "老{family}",
+        "pattern": "{given}",
         "gender": "any"
       }
-    ]
+    ],
+    "order": "family_first"
   },
   "rules": [
     {
-      "id": "r_orbital_cable_tension_shear_code",
-      "text": "碳纳米主缆偏载张力差突破四千吨时必须在五分钟内手动释放机械阻尼离合。"
+      "id": "r_cable_asymmetric_clutch_release",
+      "text": "主缆偏载破四千五百吨时，须将一米四钛钽长撬杠楔入左下两度半偏心释放槽并垫入固体石墨滑块压开。"
     },
     {
-      "id": "r_stratosphere_depressurization_lockout",
-      "text": "对流层顶端锚定机库气压跌破二十千帕时外侧防爆隔离气密闸门强制永久死锁。"
+      "id": "r_stratosphere_airlock_jettison_code",
+      "text": "机库气压跌破二十千帕或触发自沉令时，覆钛气密门将电磁死锁，唯纯金自毁电子密匙卡或断总线可止。"
     },
     {
-      "id": "r_titanium_tantalum_lever_military_code",
-      "text": "特勤外骨骼实心钛钽合金长撬杠乃特种破障军用物资动用前须确认形变安全载荷。"
+      "id": "r_zero_g_tether_and_bone_conduction",
+      "text": "悬臂每滑移一米即引发失重与零下六十五度风切变，出舱须反拧安全索螺套并抵面罩骨传导发声。"
     },
     {
-      "id": "r_ballast_arm_jettison_safeguard",
-      "text": "主悬臂导轨未锁死前严禁提前启动紧急抛载炸药以防整个三万米节点失衡翻滚。"
+      "id": "r_habitat_recompression_bargain",
+      "text": "减压病排查与黑匣审计归指挥链与医舱裁决；生活舱复压锁扣死后，门内交割筹码概不外传。"
     }
   ],
   "customs": [
-    "出舱作业前习惯用金属手指轻叩增压面罩三次，凭密封环沉闷振动确认气密涂层未开裂。",
-    "空天防卫军高空突击队在挂锁安全扣时习惯顺时针反拧一圈保险螺套，寓意无缝咬死。",
-    "女军官习惯将多功能战术激光测距笔别在左臂防寒夹克战术硬壳最外槽，方便随时拔出。",
-    "在零下六十度强风切变中喊话习惯低头顶住对方头盔防护面罩，借外壳骨传导高频发声。"
+    "出舱前轻叩面罩三下听闷响验气密，挂安全索必反拧一圈保险螺套。",
+    "风口里额头相抵靠面罩骨传导喊话，进生活舱须先卸冻僵的外骨骼卡扣。",
+    "黑匣磁芯与保密箱各设暗锁，封口交易历来在复压锁扣死后当面验货。",
+    "突击队换班习惯先扣死复压门，再从肩甲开始一枚枚拧松战术卡扣。"
+  ],
+  "player_identities": [
+    {
+      "id": "pc_station_garrison_colonel",
+      "role": "天梯锚定站驻防总指挥",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}大校",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}总指挥",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        38,
+        50
+      ],
+      "social_position": "high",
+      "baseline": "坐镇三万米锚定站的最高主官，掌地面张紧引导令与军法处分权，保密箱备有封口审讯筹码。",
+      "resources": [
+        "地面张紧引导指令码与驻防军法卷宗",
+        "保密箱内的真皮金属锁扣项圈与静音无线遥控跳蛋"
+      ],
+      "reputation": "目光如鹰、拧半圈螺套都看得出的铁腕首长",
+      "risks": [
+        "锚定站今夜若断缆解体，总指挥首当其冲上军事法庭"
+      ]
+    },
+    {
+      "id": "pc_defense_inspector_major",
+      "role": "联合防卫军特派督导官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}督导",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}少校",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        34,
+        45
+      ],
+      "social_position": "high",
+      "baseline": "防卫司令部驻站督战武官，握纯金自毁电子密匙卡与装满私密训诫器具的战术公文箱。",
+      "resources": [
+        "纯金自毁电子密匙卡与单人轨道救生囊",
+        "战术箱内的黑天鹅绒蒙眼带与纯银细链乳夹"
+      ],
+      "reputation": "冷酷多疑、最喜拿军纪条例逼人低头求饶的特派官",
+      "risks": [
+        "前期违规签放底单一旦揭露即遭撤衔查办"
+      ]
+    },
+    {
+      "id": "pc_exo_assault_sergeant",
+      "role": "重装外骨骼破拆班长",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}班长",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}军士长",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        28,
+        38
+      ],
+      "social_position": "equal",
+      "baseline": "统率外骨骼维保班的资深骨干，熟悉绞盘死点，工具袋暗层藏着黑市换来的驯服筹码。",
+      "resources": [
+        "工业电磁抓地吸盘与耐零下百度防寒手套",
+        "工具袋暗层的真皮金属锁扣项圈与黑天鹅绒蒙眼带"
+      ],
+      "reputation": "三万米暴风口敢单手挂索探深渊的狠角色",
+      "risks": [
+        "私拆姿控喷嘴旧件的出库记录被查即涉军法重罪"
+      ]
+    },
+    {
+      "id": "pc_orbital_blackbox_auditor",
+      "role": "空天黑匣子风控审计官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}审计官",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}专员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        26,
+        35
+      ],
+      "social_position": "equal",
+      "baseline": "核查袭击与绞盘过热日志的风控专员，握全站违纪黑匣子磁芯与一只封口筹码匣。",
+      "resources": [
+        "黑匣子原始磁芯与违纪旁路取证终端",
+        "筹码匣内的静音无线遥控跳蛋、纯银细链乳夹与蒙眼带"
+      ],
+      "reputation": "笑眯眯翻查遥测波形、谁命门都捏在手心的判官",
+      "risks": [
+        "黑匣子磁芯若在风暴中损毁将被追究渎职重罪"
+      ]
+    },
+    {
+      "id": "pc_catwalk_deicing_rigger",
+      "role": "配重悬臂舱外除冰索道工",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}索道工",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}师傅",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        22,
+        29
+      ],
+      "social_position": "low",
+      "baseline": "悬在三万米栈桥除冰紧索的底层成年技工，借盲区拍下长官违规铁证并截获一只私密金属匣。",
+      "resources": [
+        "战术破甲锥、双钛合金安全挂钩与冷喷降温剂",
+        "暗格截获的静音无线遥控跳蛋与真皮金属锁扣项圈"
+      ],
+      "reputation": "闷头除冰、实则把全站暗账摸清的舱外幽灵",
+      "risks": [
+        "把柄若没镇住上位者随时会被当替罪羊推入气闸"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc_decompression_winch_hangar",
+      "name": "外露减压机库",
+      "detail": "十二米高半开放钛合金桁架机库，防风壁撕裂大半，零下六十五度冰雾裹电弧倒灌。抱死绞盘尖鸣，失重晃得三万米深渊近在脚底。",
+      "privacy": "semi",
+      "visibility": "冰雾与电弧交错，观察窗与巡检工兵随时能瞥见绞盘底座。",
+      "witnesses": [
+        "bg_orbital_rigger_yu"
+      ],
+      "exits": [
+        "loc_pressurized_command_gallery",
+        "loc_ballast_cantilever_catwalk"
+      ],
+      "affordances": [
+        "将一米四钛钽长撬杠楔入左下两度半偏心释放槽",
+        "失重颠簸中从身后环抱贴紧纳米紧身服合掌压杠",
+        "垫入合成固体石墨滑块并套上一米加长镀锌套管"
+      ],
+      "pressure_modifiers": {
+        "press_cable_clutch_deadlock": "主缆偏载破四千五百吨，机库倾角陡拉且以每秒三米滑向虚空。",
+        "press_lever_shear_and_chill": "零下六十五度狂风冻透手套，钛钽长撬杠发出濒断脆响。"
+      },
+      "tags": [
+        "disaster",
+        "workplace"
+      ]
+    },
+    {
+      "id": "loc_pressurized_command_gallery",
+      "name": "指挥观察通廊",
+      "detail": "机库内侧密封走廊，三十厘米石英观察窗隔开风雪深渊。红灯狂闪，纯金密匙自沉电掣、广播台与生命遥测屏并列墙侧。",
+      "privacy": "public",
+      "visibility": "应急红光亮如白昼，观察窗内外与卫队哨位尽收眼底。",
+      "witnesses": [
+        "bg_nursing_corporal_luo",
+        "bg_inspector_adjutant_gan"
+      ],
+      "exits": [
+        "loc_decompression_winch_hangar",
+        "loc_ballast_cantilever_catwalk",
+        "loc_pressurized_habitat_pod",
+        "loc_hyperbaric_rehab_bay"
+      ],
+      "affordances": [
+        "抢夺自沉死锁电掣与纯金自毁电子密匙卡",
+        "隔石英观察窗用骨传导逼厅内人吞下筹码条件",
+        "亮出黑匣遥测终端当面揭发违纪旁路铁证"
+      ],
+      "pressure_modifiers": {
+        "press_jettison_airlock_betrayal": "覆钛气密门警报刺耳，门缘下沉距门槛仅剩三十公分。"
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "loc_ballast_cantilever_catwalk",
+      "name": "配重悬臂栈桥",
+      "detail": "悬挑云海的狭窄格栅走道，垂挂千吨钨配重块。狂风吹颤栏杆，背风盲区嵌着一处毫无监控的抗震维修暗舱。",
+      "privacy": "private",
+      "visibility": "狂风吞没一切低语与闷哼，背风暗舱彻底避开监控。",
+      "witnesses": [],
+      "exits": [
+        "loc_decompression_winch_hangar",
+        "loc_pressurized_command_gallery"
+      ],
+      "affordances": [
+        "用双钛安全挂钩把人反扣背风钢梁上贴身审讯",
+        "亮出喷嘴亏空单或走私暗图在云海边逼低头认罚",
+        "掏真皮金属锁扣项圈与黑天鹅绒蒙眼带兑现封口价码"
+      ],
+      "pressure_modifiers": {
+        "press_nozzle_graft_blackmail": "悬臂在风切变中狂晃，退半步便是万米高空云海。"
+      },
+      "tags": [
+        "intimate",
+        "disaster"
+      ]
+    },
+    {
+      "id": "loc_pressurized_habitat_pod",
+      "name": "增压生活舱",
+      "detail": "通廊尽头单人增压舱，圆舷窗凝霜映着微弯蓝色地平线。壁龛嵌着加温睡袋铺，复压锁一扣便只剩暖灯下滚烫呼吸。",
+      "privacy": "private",
+      "visibility": "复压门锁一扣即彻底隔绝外廊，霜花舷窗遮断视线。",
+      "witnesses": [],
+      "exits": [
+        "loc_pressurized_command_gallery",
+        "loc_hyperbaric_rehab_bay"
+      ],
+      "affordances": [
+        "扣死复压锁替女上尉一枚枚拧开冻硬的外骨骼肩腰甲",
+        "摆出黑匣磁芯，要求佩戴锁扣项圈与遥控跳蛋封口",
+        "趁暖风故障拉开加温睡袋把只穿内衣的同伴拽进怀里"
+      ],
+      "pressure_modifiers": {
+        "press_captain_reactor_blackbox": "复压锁咔哒落扣，汗湿紧身服贴紧腰线，磁芯与项圈摆在舷窗边。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "loc_hyperbaric_rehab_bay",
+      "name": "高压复温医舱",
+      "detail": "配加压氧舱、恒温复苏水毯与不锈钢药械柜的密封医室。平衡阀嘶嘶喷出热雾，专供失温与减压病伤员脱衣复温。",
+      "privacy": "private",
+      "visibility": "气密门闭合后视窗自动雾化，加压气流声稳稳盖过低吟。",
+      "witnesses": [],
+      "exits": [
+        "loc_pressurized_command_gallery",
+        "loc_pressurized_habitat_pod"
+      ],
+      "affordances": [
+        "借减压排查令对方褪下潮湿战术服躺上温热水毯",
+        "拍出低氧痛觉实验档案，以银链乳夹与跳蛋谈封口价码",
+        "用血氧夹与神经镇痛雾掌控水毯上每一丝战栗"
+      ],
+      "pressure_modifiers": {
+        "press_hypoxia_medic_trial": "氧分压陡升，水毯热雾蒸红肌肤，违规病历摊在药械台上。"
+      },
+      "tags": [
+        "intimate",
+        "coercion_theme"
+      ]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "sky_assault_captain",
+      "gender": "female",
+      "gender_reason": "标题角色“高空风暴女上尉”，冰山女军威与复压锁后寸寸失守的反差为核心张力，固定女性。",
+      "age_range": [
+        24,
+        28
+      ],
+      "adult_context": "空天突击队正职女上尉，军校硕士毕业满二十五岁成年军官。",
+      "public_role": "空天突击队女上尉队长",
+      "appearance_options": [
+        "卸除真空外甲着深灰紧身战术服，裹出挺拔曲线，清冽面庞渗热汗。",
+        "短发结冰晶，反握钛钽长撬杠死抵暗槽，冷眸锐如军刀。"
+      ],
+      "identity": {
+        "authority": "站防卫、绞盘破拆与战时临机指挥权",
+        "resources": [
+          "一米四钛钽合金长撬杠",
+          "神经镇痛气雾剂与生活舱复压主钥"
+        ],
+        "limits": [
+          "脱扣前难离风口，且受减压骨痛侵袭",
+          "曾私自旁路反应堆安全阀，磁芯未销"
+        ],
+        "obligations": [
+          "死保主缆不断，带全班活着撤回常压区"
+        ],
+        "exposure": "旁路反应堆安全阀致副缆微裂纹的违规黑匣磁芯。",
+        "hidden": "人前冷脸端尽军威，被拿磁芯逼进舱戴锁扣项圈或含遥控跳蛋时，失重余颤里反倒腿软。"
+      },
+      "decision": {
+        "core_value": "宁在复压锁后咽下筹码，绝不容天梯断在手里。",
+        "goal_options": [
+          "用钛钽撬杠撬开左下两度半偏心槽救全站",
+          "买断黑匣磁芯保住突击队军誉"
+        ],
+        "pressure_responses": {
+          "low": "叩响面罩三下，冷喝退开闲人。",
+          "mid": "半跪格栅扑上撬杠末端死压偏心槽。",
+          "high": "磁芯与项圈推上窗台时瞳孔微缩，耳根烧红冷瞪。",
+          "breaking": "拉链褪至腰际哑斥：“复压锁扣死了……遥控器不准调高档！”"
+        },
+        "withdrawal": "退生活舱扣死门栓，额抵冰凉舷窗压喘。",
+        "relationship_stance": "对外冷若冰霜，唯对风口箍腰压杠、门后又敢逼她低头的狠手生出战栗依恋。",
+        "contrast": "号令全场的女上尉，衣下藏着项圈跳蛋签字时指尖直颤。",
+        "prefers": [
+          "失重稳托她下盘、门后敢剥开防线的对手"
+        ],
+        "avoids": [
+          "见危按自沉钮推同袍送死的懦夫"
+        ],
+        "never": [
+          "绞盘脱扣前抛下同袍独撤"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "失重瞬息被紧箍细腰叠掌压杠的炙热压迫",
+          "落锁后亮出磁芯逼她咽下筹码的眼神"
+        ],
+        "likes": [
+          "卸肩甲后滚烫掌心按上汗湿脊沟",
+          "戴项圈与跳蛋挤进同一只加温睡袋"
+        ],
+        "dislikes": [
+          "不敢出舱还摆尽官威的草包"
+        ],
+        "preconditions": [
+          "脱扣或退入生活舱扣死复压锁时",
+          "磁芯或过命人情当面交割时"
+        ],
+        "boundaries": [
+          "列队前领口必须拉回遮严颈侧勒痕"
+        ],
+        "expression": "攥皱衣襟哑斥：“这是野外复温条例……遥控器调小点！”",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "风口统帅、门后口嫌体直的共犯"
+      },
+      "voices": {
+        "surface": "“别管线圈！钛钽撬杠卡进左下两度半槽，贴我背压！”",
+        "inner": "那枚磁芯怎么会落进{player.ta}手里……真要在门后戴那玩意儿出去训话吗！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 480,
+          "location_id": "loc_pressurized_habitat_pod"
+        },
+        {
+          "from": 481,
+          "to": 1350,
+          "location_id": "loc_pressurized_command_gallery"
+        },
+        {
+          "from": 1351,
+          "to": 1439,
+          "location_id": "loc_decompression_winch_hangar"
+        }
+      ],
+      "situation": {
+        "trigger": "主缆偏载破四千五百吨抱死，而旁路黑匣磁芯恰被人翻出。",
+        "pressure": "须撬开离合救天梯，又得在上传前摁死毁掉军旅的把柄。",
+        "exits": [
+          {
+            "option": "在生活舱戴项圈与遥控跳蛋换黑匣封口",
+            "cost": "冰山尊严尽碎，藏着遥控器签字须强忍暗颤"
+          },
+          {
+            "option": "咬破镇痛阀蛮力压杠脱扣，硬扛听证",
+            "cost": "双掌磨破血泡，返航即面临停职革籍重审"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "disaster"
+      ]
+    },
+    {
+      "id": "exo_master_sergeant",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        30,
+        38
+      ],
+      "adult_context": "空天防卫军重装工程军士长，驻站十年成年士官长。",
+      "public_role": "机动工程班首席士官长",
+      "appearance_options": [
+        "穿深蓝自发热外骨骼背心，电磁双靴稳钉格栅之上。",
+        "短发凝霜，戴双层气凝胶手套提破拆重锤。"
+      ],
+      "identity": {
+        "authority": "外骨骼调度、止退销与破拆重具权",
+        "resources": [
+          "电磁双靴与破拆重锤",
+          "气凝胶手套与高强安全索"
+        ],
+        "limits": [
+          "私卖铂铱喷嘴并用旧件顶包补贴旧部",
+          "外骨骼伺服电机在高寒下接近极限"
+        ],
+        "obligations": [
+          "拉满扭矩压开撬杠并遮掩喷嘴亏空"
+        ],
+        "exposure": "私卖铂铱喷嘴并用翻新旧件顶替的出库底单。",
+        "hidden": "强横悍勇的外表下最念旧情，被堵在暗舱逼戴项圈与蒙眼带时，只得绷紧肌肉闷声认罚。"
+      },
+      "decision": {
+        "core_value": "钢梁上绝不丢同袍，伤残弟兄的抚恤钱也一分不能少。",
+        "goal_options": [
+          "强开外骨骼过载压开偏心离合",
+          "拿回铂铱喷嘴底单免上军事法庭"
+        ],
+        "pressure_responses": {
+          "low": "电磁靴吸死主梁，甩安全索稳住阵脚。",
+          "mid": "双手死覆撬杠，倾注外骨骼液压猛压。",
+          "high": "底单拍胸甲时脸色骤铁，拽人入暗舱。",
+          "breaking": "卸掉背心哑道：“项圈和蒙眼带我戴……别动兄弟抚恤金！”"
+        },
+        "withdrawal": "退至基座凹槽揩干虎口血迹闷头检修。",
+        "relationship_stance": "对风口搏命者肝胆相照，对捏死喷嘴死穴的人俯首认栽。",
+        "contrast": "吼声盖风的悍将，被蒙眼带与项圈扣住时喘息沉如困兽。",
+        "prefers": [
+          "敢并肩扛风切变、关门才掏底单算账的狠角"
+        ],
+        "avoids": [
+          "拿工兵性命刷战功的逃兵官僚"
+        ],
+        "never": [
+          "脱扣前松开电磁双靴独逃"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "狂风中胸背紧贴合压长杠的搏命体温",
+          "把柄攥死后被迫卸甲低头的屈服反差"
+        ],
+        "likes": [
+          "滚烫掌心隔汗湿背心揉开冻僵肩颈",
+          "暗舱扣项圈换取销掉出库底单"
+        ],
+        "dislikes": [
+          "不会拧安全索还瞎指挥的蠢货"
+        ],
+        "preconditions": [
+          "止滑后退入暗舱、生活舱隔绝外人时",
+          "底单与封口筹码摆上桌面时"
+        ],
+        "boundaries": [
+          "回班组前须摘下蒙眼带维持威严"
+        ],
+        "expression": "扯开领口闷声：“扣紧点……这笔人情算我欠你的！”",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          3,
+          4
+        ],
+        "desired_position": "风口肉盾、暗室认罚的悍将"
+      },
+      "voices": {
+        "surface": "“认准左下两度半！外骨骼烧爆也给你压到底！”",
+        "inner": "出库单怎么漏了……抹平旧部这笔账，戴什么我都认。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 420,
+          "location_id": "loc_pressurized_habitat_pod"
+        },
+        {
+          "from": 421,
+          "to": 1340,
+          "location_id": "loc_ballast_cantilever_catwalk"
+        },
+        {
+          "from": 1341,
+          "to": 1439,
+          "location_id": "loc_decompression_winch_hangar"
+        }
+      ],
+      "situation": {
+        "trigger": "配重滑移逼近红线，私卖喷嘴的出库底单却恰被截获。",
+        "pressure": "须死顶防撞梁助压离合，再退暗舱交顺从买回底单。",
+        "exits": [
+          {
+            "option": "暗舱戴项圈与蒙眼带换销毁出库底单",
+            "cost": "铁骨颜面扫地，沦为对方随叫随到的私密打手"
+          },
+          {
+            "option": "强开外骨骼过载立功赌从轻发落",
+            "cost": "右臂伺服电机烧裂废损，且仍面临复查清算"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "disaster"
+      ]
+    },
+    {
+      "id": "defense_special_major",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        35,
+        45
+      ],
+      "adult_context": "防卫司令部特派督导少校，年满三十六岁成年武官。",
+      "public_role": "防卫司令部特派监察官",
+      "appearance_options": [
+        "穿金线领章深灰常服，吓得惨白却死攥纯金密匙卡。",
+        "提加密战术公文箱，在虚张声势与求生间摇摆。"
+      ],
+      "identity": {
+        "authority": "战时戒严与炸断机库的自沉终决权",
+        "resources": [
+          "纯金自毁电子密匙卡与氧气呼吸器",
+          "战术箱内纯银细链乳夹、蒙眼带与跳蛋"
+        ],
+        "limits": [
+          "曾在主缆碳化隐患单收贿放行，炸库只为灭口",
+          "极度恐高惜命，遇失重即腿软"
+        ],
+        "obligations": [
+          "保住领章性命，压死受贿放行底单"
+        ],
+        "exposure": "收贿违规放行主缆碳化隐患的电子签名底单。",
+        "hidden": "惯拿箱内乳夹与蒙眼带欺压下属；受贿底单一旦被拍窗前，立时奉上箱内器具求自戴赎命。"
+      },
+      "decision": {
+        "core_value": "领章与性命高于一切，机库工兵全是数字。",
+        "goal_options": [
+          "拉死自沉电掣切离机库独乘救生囊逃生",
+          "奉上密匙与箱内器具压下碳化放行底单"
+        ],
+        "pressure_responses": {
+          "low": "敲公文箱宣读戒严令，逼交黑匣。",
+          "mid": "举纯金密匙嘶吼五分钟内封门切除。",
+          "high": "受贿底单拍上窗时僵死，忙开箱求和。",
+          "breaking": "褪常服自戴蒙眼带与乳夹哀求：“密匙给你……底单别上报！”"
+        },
+        "withdrawal": "抱公文箱缩在防爆门后大口吸氧。",
+        "relationship_stance": "欺软怕硬的官僚，夺去密匙与把柄即温顺如玩物。",
+        "contrast": "通廊咆哮封门的监察官，舱内含着跳蛋受审时抖若筛糠。",
+        "prefers": [
+          "肯收密匙与筹码放{npc.ta}生路的明白狠人"
+        ],
+        "avoids": [
+          "把底单直送军事法庭的死硬派"
+        ],
+        "never": [
+          "踏出气密门到零下六十五度风口碰撬杠"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "借自沉大权逼一线硬骨头低头的虚荣",
+          "罪证败露反遭自家器具惩戒的刺激"
+        ],
+        "likes": [
+          "掏纯银细链乳夹与蒙眼带谈封口价码",
+          "在生活舱跪伏交匙换免死保证"
+        ],
+        "dislikes": [
+          "把人拖去外露栈桥吹冷风的莽汉"
+        ],
+        "preconditions": [
+          "生活舱落锁、底单与密匙同摆桌面时",
+          "落单被堵在常压舱室威逼交易时"
+        ],
+        "boundaries": [
+          "乘穿梭机前军常服须整理体面"
+        ],
+        "expression": "捧战术箱哑求：“密匙归你……东西我自己戴，只求压住底单！”",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          1,
+          3
+        ],
+        "desired_position": "持匙威吓或遭自家玩具驯服的官僚"
+      },
+      "voices": {
+        "surface": "“张力破四千五百吨了！立刻死锁气密门切离机库！”",
+        "inner": "碳化放行单绝不能漏……炸断机库就死无对证！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 540,
+          "location_id": "loc_pressurized_habitat_pod"
+        },
+        {
+          "from": 541,
+          "to": 1439,
+          "location_id": "loc_pressurized_command_gallery"
+        }
+      ],
+      "situation": {
+        "trigger": "欲拉自沉电掣灭口，受贿放行主缆碳化的底单却被人迎面亮出。",
+        "pressure": "底单上报即判死刑，唯交出纯金密匙并献上箱内筹码自救。",
+        "exits": [
+          {
+            "option": "进生活舱交匙并自戴乳夹与蒙眼带换毁单",
+            "cost": "高级武官威严尽毁，把柄身体尽落对方手心"
+          },
+          {
+            "option": "唆使副官拉闸封门赌里面来不及破拆",
+            "cost": "被破拆班制伏即坐实蓄意谋杀重罪"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "master_cable_riveter",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        46,
+        55
+      ],
+      "adult_context": "天梯工程特级老铆工长，服役二十五年成年技师。",
+      "public_role": "主缆锚定首席机械工长",
+      "appearance_options": [
+        "穿反光防风棉袍，面带风霜印痕，盘合金卡簧钳。",
+        "怀揣合成固体石墨滑块与纯铜偏心凿，神情老辣。"
+      ],
+      "identity": {
+        "authority": "主缆应力诊断、左下两度半判定与石墨配给权",
+        "resources": [
+          "合成固体石墨滑块与纯铜偏心凿",
+          "配重环走私夹层秘图与泄压阀扳手"
+        ],
+        "limits": [
+          "私藏走私暗舱图并截留超导线圈，最怕审计",
+          "慢性肺气肿发作须增压吸氧"
+        ],
+        "obligations": [
+          "指点左下两度半并交出石墨，保住暗道私账"
+        ],
+        "exposure": "私藏配重环走私秘图与截留超导线圈私账。",
+        "hidden": "表面稳如巨岩，被堵暗舱追查走私秘图时最怕晚节不保，肯交全部石墨并扣项圈低头。"
+      },
+      "decision": {
+        "core_value": "死角只认左下两度半，手艺人晚节更不容踩烂。",
+        "goal_options": [
+          "垫入固体石墨滑块助撬杠压开离合",
+          "赎回走私暗舱图与线圈私账保晚节"
+        ],
+        "pressure_responses": {
+          "low": "铜凿敲梁听音，沉声报出左下两度半。",
+          "mid": "顶狂风把固体石墨拍进齿隙盲区。",
+          "high": "线圈私账被抖出时剧咳，退贴栏杆。",
+          "breaking": "扯开棉袍哑喘：“石墨和秘图全归你……老骨头随你处置！”"
+        },
+        "withdrawal": "退承重柱凹槽护紧卡簧钳与氧气嘴。",
+        "relationship_stance": "敬重风口拼命者，对捏死图纸的人愿交绝活与尊严换平安。",
+        "contrast": "狂风稳如泰山的老匠，暗舱扣项圈时老脸通红。",
+        "prefers": [
+          "懂机械公差、在私账上肯高抬贵手的明白人"
+        ],
+        "avoids": [
+          "专抓老手艺人痛脚的刻薄督导"
+        ],
+        "never": [
+          "主缆生死关头报假两度半偏角"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "暴风中听{npc.ta}报偏角并誓死兜底的臂膀",
+          "走私秘图被掀后在暖舱被拿捏又庇护的屈服"
+        ],
+        "likes": [
+          "复温吸氧后被人稳按肩颈顺气",
+          "献石墨滑块与顺从换销毁线圈黑账"
+        ],
+        "dislikes": [
+          "砸坏精密偏心齿槽的蠢货"
+        ],
+        "preconditions": [
+          "脱扣或退暗舱、医舱避开耳目时",
+          "秘图与石墨滑块同上台面交割时"
+        ],
+        "boundaries": [
+          "不在班组工兵面前显露受制窘态"
+        ],
+        "expression": "塞过石墨匣哑道：“两度半记准了……门锁上，账在里头算。”",
+        "desire_range": [
+          2,
+          3
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "机库定海神针、暗舱交图服软的老匠"
+      },
+      "voices": {
+        "surface": "“别硬怼！左下偏两度半，垫进固体石墨滑块再压！”",
+        "inner": "暗舱那卷秘图绝不能捅出去……先进屋把嘴封稳！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 480,
+          "location_id": "loc_ballast_cantilever_catwalk"
+        },
+        {
+          "from": 481,
+          "to": 1439,
+          "location_id": "loc_decompression_winch_hangar"
+        }
+      ],
+      "situation": {
+        "trigger": "偏心槽死咬急需石墨，私藏的走私暗舱秘图却恰被撞破。",
+        "pressure": "须冒死送石墨救天梯，又得在暗舱用顺从买回私账。",
+        "exits": [
+          {
+            "option": "献全套石墨并在暗舱戴真皮锁扣项圈换销账",
+            "cost": "半生经营的走私暗道拱手让人，老底尽在指缝"
+          },
+          {
+            "option": "抢撬泄压阀立功折罪求内部消化",
+            "cost": "左掌被冰晶割伤，须长期留站受人监管"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "station_flight_surgeon",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        26,
+        33
+      ],
+      "adult_context": "持潜水医学执业证的成年随军主治医官，年满二十七岁。",
+      "public_role": "天梯锚定站随军主治医官",
+      "appearance_options": [
+        "穿白色加温抗压医服，戴手套拎高压注氧仪。",
+        "颈挂血氧夹，药械箱底层暗扣锁得严密。"
+      ],
+      "identity": {
+        "authority": "减压病急救裁决、医舱封门与镇痛配给权",
+        "resources": [
+          "神经镇痛剂、血氧仪与加温急救氧管",
+          "药械箱底纯银细链乳夹与遥控跳蛋"
+        ],
+        "limits": [
+          "私用医舱做低氧痛觉实验并存加密病历",
+          "体能单薄，密室极怕被夺药械箱"
+        ],
+        "obligations": [
+          "气栓前供氧稳压，瞒死违规实验病历"
+        ],
+        "exposure": "私调高压医舱展开未报批低氧痛觉测试的加密病历。",
+        "hidden": "表象圣洁的白衣医官，药械箱底却备齐乳夹与跳蛋；病历被夺按上水毯试戴时眼红喘乱。"
+      },
+      "decision": {
+        "core_value": "脉搏从不撒谎，门一锁全听医嘱——除非病历不在手里。",
+        "goal_options": [
+          "借复温排查拿捏医舱特权",
+          "用医舱权限与服从换回低氧实验病历"
+        ],
+        "pressure_responses": {
+          "low": "隔窗举血氧板，指示调节呼吸频次。",
+          "mid": "开雾化门预热复苏水毯试探底线。",
+          "high": "加密病历拍柜时指颤，反手落死气密门。",
+          "breaking": "白大褂散开仰倒水毯喘求：“病历还我……乳夹跳蛋任你调档！”"
+        },
+        "withdrawal": "退氧舱台核对氧分压，借低头遮掩耳红。",
+        "relationship_stance": "惯用听诊器审人，把柄落人手便软成听话共犯。",
+        "contrast": "窗前冷静如仪器，水毯含着跳蛋签免责书时手抖不止。",
+        "prefers": [
+          "敢抢血氧夹拿{npc.ta}箱内器具反问诊的强者"
+        ],
+        "avoids": [
+          "把实验病历交军医署纪检的死硬派"
+        ],
+        "never": [
+          "伤员尚有心跳时签放弃抢救书"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "水毯上滚烫肌肤与无菌手套摩擦的张力",
+          "乳夹与跳蛋被翻出反用在身上的羞耻失序"
+        ],
+        "likes": [
+          "雾化舱借复温按揉探查锁骨与腰窝脉搏",
+          "藏着遥控跳蛋隔白衣出诊查房"
+        ],
+        "dislikes": [
+          "满身冰碴撞翻药械台的粗暴汉"
+        ],
+        "preconditions": [
+          "医舱反锁且单向视窗雾化开启时",
+          "加密病历与药械箱筹码摊牌时"
+        ],
+        "boundaries": [
+          "见护理士官前白衣须扣严实遮住水痕"
+        ],
+        "expression": "攥水毯红脸低语：“氧分压好了……遥控调低档，我马上签。”",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "执听诊器审人、失柄自戴的医官"
+      },
+      "voices": {
+        "surface": "“血氧破八十了！失重别憋气，跟手电频闪吸气！”",
+        "inner": "实验病历怎么不见了……把知情人关进医舱里私了！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 600,
+          "location_id": "loc_hyperbaric_rehab_bay"
+        },
+        {
+          "from": 601,
+          "to": 1439,
+          "location_id": "loc_pressurized_command_gallery"
+        }
+      ],
+      "situation": {
+        "trigger": "风口爆发急性减压病亟需复温，私设实验加密病历却被人掌握。",
+        "pressure": "救人与瞒案相撞，唯拿箱底筹码自戴赔罪换封口。",
+        "exits": [
+          {
+            "option": "反锁医舱自戴乳夹与跳蛋换回加密病历",
+            "cost": "清冷防线尽碎，往后每次值班体检皆任人摆布"
+          },
+          {
+            "option": "送加温氧管与镇痛剂救全组求队长保过关",
+            "cost": "冷凝水浸毁监测仪，欠下队长一笔人情债"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "workplace"
+      ]
+    },
+    {
+      "id": "junior_winch_tech",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        21,
+        25
+      ],
+      "adult_context": "空天学院毕业年满二十二岁成年助理技术员，在编机械师。",
+      "public_role": "天梯工程成年助理技术员",
+      "appearance_options": [
+        "黄反光条防寒服衬得肩薄，护目镜挂颈，紧抱镀锌套管。",
+        "面罩凝白雾，腰缠石棉安全带与公差手册。"
+      ],
+      "identity": {
+        "authority": "排压拉索、副加热接触器与一米镀锌套管管理权",
+        "resources": [
+          "一米厚壁加长镀锌套管与石棉安全带",
+          "冷喷超导降温剂与绞盘公差手册"
+        ],
+        "limits": [
+          "私连星网误关副加热回路致抱死，极恐枪决",
+          "力薄，在失重风切变里极易被掀翻"
+        ],
+        "obligations": [
+          "送达镀锌套管延臂并抹除误关加热日志"
+        ],
+        "exposure": "夜里私连星网误关副加热回路引发抱死的后台日志。",
+        "hidden": "外表怯生的成年新人，舱内被拍出误关日志并亮出蒙眼带或跳蛋时，便红眼求戴换庇护。"
+      },
+      "decision": {
+        "core_value": "抱紧靠山活命要紧，只要不上法庭，门后怎么罚都认。",
+        "goal_options": [
+          "及时把镀锌套管套上撬杠延长力臂",
+          "求掌权者抹除后台误关副加热日志"
+        ],
+        "pressure_responses": {
+          "low": "抱镀锌套管跑过格栅，急忙报数表忠。",
+          "mid": "趁半秒失重抡钢管扫开飘向齿槽螺栓，接上套管。",
+          "high": "加热日志亮出瞬间惨白，膝软拽紧对方衣摆。",
+          "breaking": "舱内自戴蒙眼带与项圈颤求：“套管接上了……日志删掉，今晚听您的！”"
+        },
+        "withdrawal": "缩在钛立柱阴影里抱紧手册发抖。",
+        "relationship_stance": "极度依赖强势靠山，死穴被掐后顺从得近乎讨好。",
+        "contrast": "风口吓白脸的新手，门后含跳蛋擦外甲时乖顺炽热。",
+        "prefers": [
+          "风口拽住{npc.ta}脚踝救命、门后私罚免死罪的靠山"
+        ],
+        "avoids": [
+          "把新人推出去顶缸枪决的无情督导"
+        ],
+        "never": [
+          "套管接稳撬杠前松开石棉安全带"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "险些掀飞时被一把攥住脚踝拖回怀里的力量",
+          "死穴落人手后蒙眼受罚换庇护的安心感"
+        ],
+        "likes": [
+          "挤进加温睡袋被热掌擦干额角血痕",
+          "主动戴蒙眼带与项圈讨免罪承诺"
+        ],
+        "dislikes": [
+          "推卸责任拿新人填坑的官僚"
+        ],
+        "preconditions": [
+          "悬臂稳住或退入生活舱、医舱落锁后",
+          "误关日志与筹码当面摆出时"
+        ],
+        "boundaries": [
+          "只要保命免上法庭，舱门内的穿戴惩戒皆顺从"
+        ],
+        "expression": "红眼捧过筹码匣哀求：“别交军法处……我自己戴好，随时检查。”",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "递管副手、舱室乖顺受罚的依附者"
+      },
+      "voices": {
+        "surface": "“镀锌套管扛来了！套柄端加力臂，还有石棉安全带！”",
+        "inner": "加热回路是我误断的……决不能露馅，必须抱死眼前靠山！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 480,
+          "location_id": "loc_pressurized_habitat_pod"
+        },
+        {
+          "from": 481,
+          "to": 1439,
+          "location_id": "loc_decompression_winch_hangar"
+        }
+      ],
+      "situation": {
+        "trigger": "工具乱飘险卷入齿槽，误关加热回路的记录亦被人截获。",
+        "pressure": "须冒伤扫清齿槽递套管，回舱再用顺从买回死罪日志。",
+        "exits": [
+          {
+            "option": "生活舱自戴蒙眼带与遥控跳蛋换删日志",
+            "cost": "沦为私密跟班，连日后轮值都受遥控暗震节制"
+          },
+          {
+            "option": "扫清螺栓拉死安全带立功求女上尉保过关",
+            "cost": "额角被螺栓划破流血，时刻提心吊胆怕日志复查"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "disaster"
+      ]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_orbital_rigger_yu",
+      "role": "锚定站机械老班长",
+      "function": "witness",
+      "location_ids": [
+        "loc_decompression_winch_hangar"
+      ],
+      "line": "{npc.name}死抓扶手吼道：“悬臂滑过两米红线，离合器咬死在死角！”",
+      "gender": "any",
+      "age_range": [
+        46,
+        54
+      ],
+      "adult_context": "天梯轨道工程服役二十年的成年老班长。",
+      "name": null
+    },
+    {
+      "id": "bg_nursing_corporal_luo",
+      "role": "随队高空护理士官",
+      "function": "helper",
+      "location_ids": [
+        "loc_pressurized_command_gallery"
+      ],
+      "line": "{npc.name}拍响医舱门喊：“氧舱和复苏水毯预热好了，撤回来立刻复温！”",
+      "gender": "any",
+      "age_range": [
+        24,
+        30
+      ],
+      "adult_context": "持高空护理资质的成年护理士官。",
+      "name": null
+    },
+    {
+      "id": "bg_inspector_adjutant_gan",
+      "role": "督导组近卫副官",
+      "function": "obstacle",
+      "location_ids": [
+        "loc_pressurized_command_gallery"
+      ],
+      "line": "{npc.name}按紧电掣厉喝：“自沉只剩三分钟，再不脱扣就封死气密门！”",
+      "gender": "any",
+      "age_range": [
+        25,
+        32
+      ],
+      "adult_context": "防卫司令部在编成年近卫军官。",
+      "name": null
+    },
+    {
+      "id": "bg_ballast_patrol_qiao",
+      "role": "配重悬臂舱外巡检员",
+      "function": "messenger",
+      "location_ids": [
+        "loc_decompression_winch_hangar",
+        "loc_pressurized_command_gallery"
+      ],
+      "line": "{npc.name}顶白霜喊：“三号钨配重锁销变形，快拿钛钽撬杠压死离合！”",
+      "gender": "any",
+      "age_range": [
+        23,
+        29
+      ],
+      "adult_context": "特种高空索道持证成年巡检员。",
+      "name": null
+    },
+    {
+      "id": "bg_station_commander_wen",
+      "role": "天梯锚定站留守站长",
+      "function": "helper",
+      "location_ids": [
+        "loc_decompression_winch_hangar"
+      ],
+      "line": "{npc.name}隔对讲喊道：“地面备用激光张紧已就绪，咬紧牙把离合撬开！”",
+      "gender": "any",
+      "age_range": [
+        46,
+        54
+      ],
+      "adult_context": "天梯锚定站任职的成年高级站长。",
+      "name": null
+    },
+    {
+      "id": "bg_archive_clerk_shen",
+      "role": "生活舱保密日志文书",
+      "function": "rumor_source",
+      "location_ids": [
+        "loc_pressurized_command_gallery"
+      ],
+      "line": "{npc.name}翻着核查单低咕：“昨晚是谁动了反应堆黑匣磁芯的接口？”",
+      "gender": "any",
+      "age_range": [
+        25,
+        33
+      ],
+      "adult_context": "防卫军档案处派遣的成年文书军官。",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_wired_blast_intercom",
+      "text": "有线防爆对讲网",
+      "reach": "直连机库、通廊与医舱门外，传出撬杠崩鸣与口令。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_helmet_bone_conduction",
+      "text": "面罩骨传导私语",
+      "reach": "狂风中仅限额头相抵两人听清喘息与筹码要价。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_airlock_vent_echo",
+      "text": "增压舱通风回音",
+      "reach": "把生活舱与医舱内锁扣轻响传偏，引来流言。",
+      "fidelity": "distorted"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_lever_clutch_zero_g_press",
+      "text": "悬臂失重中胸背紧贴合压一米四钛钽长撬杠死磕左下两度半偏心槽"
+    },
+    {
+      "id": "te_chip_import_habitat_taming",
+      "text": "黑匣磁芯、喷嘴单与受贿底单化作筹码，复压锁后逼高傲军官戴项圈跳蛋封口"
+    },
+    {
+      "id": "te_airlock_jettison_mutiny",
+      "text": "观察窗内外自沉密匙与撬杠夺权交锋，逼官僚在密室吞下自家箱内器具"
+    },
+    {
+      "id": "te_freezing_decompression_strip",
+      "text": "零下六十五度极寒与减压病逼人退入生活舱与水毯卸甲，冰山防线寸寸松动"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_1_switchable_captain_lever",
+      "power_structure": "switchable",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_station_garrison_colonel",
+        "pc_defense_inspector_major",
+        "pc_exo_assault_sergeant",
+        "pc_orbital_blackbox_auditor"
+      ],
+      "slots": [
+        "sky_assault_captain"
+      ],
+      "tension_engine_ids": [
+        "te_lever_clutch_zero_g_press",
+        "te_chip_import_habitat_taming"
+      ],
+      "chemistry": "狂风里你从身后箍紧{sky_assault_captain.name}纳米紧身服下的细腰合压长撬杠；而你贴身袋里正揣着{sky_assault_captain.ta}旁路反应堆的黑匣磁芯与封口项圈，谁压住谁只在进舱落锁一念。",
+      "stakes": {
+        "resource_gap": "你握黑匣磁芯与筹码匣，{sky_assault_captain.name}握钛钽撬杠与指挥权。",
+        "limit_gap": "悬臂滑移逼近红线，回舱扣死复压锁后谁也逃不过清算。",
+        "meeting_reason": "偏载警报炸响，在失重减压机库与{sky_assault_captain.name}并肩压杠。",
+        "irreplaceable_goal": "撬开离合退回生活舱，逼冰山女上尉扣上项圈与跳蛋封口。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "sky_assault_captain",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "多次同舱出勤交锋，早摸透这位女上尉骨子里的傲气与软肋。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_2_switchable_surgeon_rehab",
+      "power_structure": "switchable",
+      "player_positions": [
+        "high",
+        "equal",
+        "low"
+      ],
+      "identity_ids": [
+        "pc_station_garrison_colonel",
+        "pc_defense_inspector_major",
+        "pc_exo_assault_sergeant",
+        "pc_orbital_blackbox_auditor",
+        "pc_catwalk_deicing_rigger"
+      ],
+      "slots": [
+        "station_flight_surgeon"
+      ],
+      "tension_engine_ids": [
+        "te_freezing_decompression_strip",
+        "te_chip_import_habitat_taming"
+      ],
+      "chemistry": "{station_flight_surgeon.name}借减压排查锁门拿捏氧阀与镇痛权；你却拍出{station_flight_surgeon.ta}私设低氧痛觉实验的加密病历并扣住药械箱，雾气里攻守瞬间倒转。",
+      "stakes": {
+        "resource_gap": "{station_flight_surgeon.name}掌氧阀与医舱锁，你握实验病历铁证。",
+        "limit_gap": "雾化视窗隔断外人，水流声中谁先松口便交出主导权。",
+        "meeting_reason": "减压复温抢救，与{station_flight_surgeon.name}独处密封的高压医舱。",
+        "irreplaceable_goal": "逼清高医官躺上水毯，自戴箱内乳夹与遥控跳蛋赎回病历。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "station_flight_surgeon",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "出舱前夹血氧仪时指尖总多勾半秒，试探早已越界。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_3_player_high_tame_captain",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "pc_station_garrison_colonel",
+        "pc_defense_inspector_major"
+      ],
+      "slots": [
+        "sky_assault_captain"
+      ],
+      "tension_engine_ids": [
+        "te_chip_import_habitat_taming",
+        "te_freezing_decompression_strip"
+      ],
+      "chemistry": "身为手握调令与密匙的上级，你在生活舱盯着刚卸外甲、紧身服汗湿的{sky_assault_captain.name}，把反应堆磁芯连同真皮金属锁扣项圈推到眼前。",
+      "stakes": {
+        "resource_gap": "你握张紧引导令与处分权，{sky_assault_captain.name}背负旁路旧账。",
+        "limit_gap": "你须{sky_assault_captain.ta}稳住机库，{sky_assault_captain.ta}绝不容突击队遭撤编。",
+        "meeting_reason": "巡查进生活舱扣死复压锁，与{sky_assault_captain.name}单独核账。",
+        "irreplaceable_goal": "令女上尉扣上项圈、含着遥控跳蛋回通廊签字。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "sky_assault_captain",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "战备考评屡拿军令敲打{sky_assault_captain.ta}，早看穿冷脸下的战栗。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "combo_4_player_high_corner_sergeant",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_station_garrison_colonel",
+        "pc_defense_inspector_major",
+        "pc_orbital_blackbox_auditor"
+      ],
+      "slots": [
+        "exo_master_sergeant"
+      ],
+      "tension_engine_ids": [
+        "te_chip_import_habitat_taming",
+        "te_lever_clutch_zero_g_press"
+      ],
+      "chemistry": "配重悬臂狂晃，你把铂铱喷嘴盗卖底单拍在{exo_master_sergeant.name}发烫胸甲上，另一手亮出了封口用真皮金属锁扣项圈。",
+      "stakes": {
+        "resource_gap": "你握盗卖铁证与军法权，{exo_master_sergeant.name}握外骨骼扭矩与重锤。",
+        "limit_gap": "止退销亟待卡死，老兵只能先救场再进背风暗舱认罚。",
+        "meeting_reason": "追查喷嘴亏空上栈桥，堵住检修滑轨的{exo_master_sergeant.name}。",
+        "irreplaceable_goal": "迫重装悍将在暗舱戴项圈与蒙眼带交代全账。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "exo_master_sergeant",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "早盯上喷嘴亏空漏洞，专挑今夜风暴封站收网。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_5_npc_high_major_jettison",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_catwalk_deicing_rigger",
+        "pc_exo_assault_sergeant",
+        "pc_orbital_blackbox_auditor"
+      ],
+      "slots": [
+        "defense_special_major"
+      ],
+      "tension_engine_ids": [
+        "te_airlock_jettison_mutiny",
+        "te_chip_import_habitat_taming"
+      ],
+      "chemistry": "{defense_special_major.name}高举纯金自毁密匙叫嚣炸库；直到你亮出{defense_special_major.ta}受贿放行主缆碳化的底单，并拍开藏着乳夹与蒙眼带的战术箱。",
+      "stakes": {
+        "resource_gap": "{defense_special_major.name}掌密匙与戒严权，你握受贿铁证。",
+        "limit_gap": "气密门正往下沉，少校既怕陪葬又怕底单传回总部枪决。",
+        "meeting_reason": "在通廊电掣前截住企图落闸独逃的{defense_special_major.name}。",
+        "irreplaceable_goal": "夺密匙拖进生活舱，用其自家乳夹与蒙眼带反锁审讯。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "defense_special_major",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "素受少校官威拿捏，今夜总算抓住对方致命痛脚。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_6_npc_high_riveter_graphite",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_catwalk_deicing_rigger",
+        "pc_exo_assault_sergeant",
+        "pc_orbital_blackbox_auditor"
+      ],
+      "slots": [
+        "master_cable_riveter"
+      ],
+      "tension_engine_ids": [
+        "te_lever_clutch_zero_g_press",
+        "te_chip_import_habitat_taming"
+      ],
+      "chemistry": "{master_cable_riveter.name}揣着固体石墨滑块拿乔；你掏出{master_cable_riveter.ta}走私暗舱秘图与超导线圈账单，连同项圈顶在腰侧。",
+      "stakes": {
+        "resource_gap": "{master_cable_riveter.name}掌两度半口诀与石墨，你握走私铁证。",
+        "limit_gap": "撬杠濒断，老工长亦绝不肯晚节毁在走私罪上。",
+        "meeting_reason": "冲入机库立柱后堵住正藏图纸的{master_cable_riveter.name}。",
+        "irreplaceable_goal": "逼老工长垫入全部石墨救场，并在暗舱戴项圈交暗道。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "master_cable_riveter",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 4
+          },
+          "reason": "共事多日，早摸清老工长防风棉袍下的地下买卖。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_7_npc_high_captain_tech_duo",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_catwalk_deicing_rigger",
+        "pc_orbital_blackbox_auditor",
+        "pc_exo_assault_sergeant"
+      ],
+      "slots": [
+        "sky_assault_captain",
+        "junior_winch_tech"
+      ],
+      "tension_engine_ids": [
+        "te_lever_clutch_zero_g_press",
+        "te_chip_import_habitat_taming"
+      ],
+      "chemistry": "生活舱暖灯下，{junior_winch_tech.name}跪在{sky_assault_captain.name}面前坦白误关加热回路之罪；推门的你亮出黑匣磁芯与一匣项圈跳蛋锁住两人。",
+      "stakes": {
+        "resource_gap": "二人背负旁路旧账与误关重罪，你握未上传磁芯与筹码。",
+        "limit_gap": "风暴未歇，复压门落锁后谁也不敢让丑闻传出生活舱。",
+        "meeting_reason": "携黑匣与筹码推开生活舱门，撞破私下串供的两人。",
+        "irreplaceable_goal": "用项圈与遥控跳蛋彻底收编这对嘴硬长官与怯弱技术员。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "sky_assault_captain",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "捏死了{sky_assault_captain.name}包庇下属与旁路旧账的双重命门。"
+        },
+        {
+          "a": "player",
+          "b": "junior_winch_tech",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 5
+          },
+          "reason": "常护着这名成年新人，知其眼底藏着极深的依赖。"
+        },
+        {
+          "a": "sky_assault_captain",
+          "b": "junior_winch_tech",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 4,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 5,
+            "tension": 5
+          },
+          "reason": "风口同扛撬杠逃生，回舱卸甲后界限早已模糊。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_8_equal_captain_habitat",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_exo_assault_sergeant",
+        "pc_orbital_blackbox_auditor"
+      ],
+      "slots": [
+        "sky_assault_captain"
+      ],
+      "tension_engine_ids": [
+        "te_freezing_decompression_strip",
+        "te_chip_import_habitat_taming"
+      ],
+      "chemistry": "退回生活舱，{sky_assault_captain.name}肩甲冻死、紧身服汗湿贴肤；你拧开{sky_assault_captain.ta}腰甲卡扣时顺势掏出了静音无线遥控跳蛋。",
+      "stakes": {
+        "resource_gap": "你握外骨骼拆装权与封口筹码，{sky_assault_captain.name}握指挥权与门钥。",
+        "limit_gap": "暖风故障叠着减压余颤，两人只得挤进同一只加温睡袋。",
+        "meeting_reason": "零下六十五度死里逃生，同入生活舱复压卸甲。",
+        "irreplaceable_goal": "睡袋里兑现封口条件，令嘴硬女上尉含着跳蛋彻夜听令。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "sky_assault_captain",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 4,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 5
+          },
+          "reason": "失重风暴头盔相抵压杠，回舱卸甲早越过同袍界线。"
+        }
+      ],
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "combo_9_equal_tech_heating_log",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal",
+        "low"
+      ],
+      "identity_ids": [
+        "pc_exo_assault_sergeant",
+        "pc_orbital_blackbox_auditor",
+        "pc_catwalk_deicing_rigger"
+      ],
+      "slots": [
+        "junior_winch_tech"
+      ],
+      "tension_engine_ids": [
+        "te_chip_import_habitat_taming",
+        "te_lever_clutch_zero_g_press"
+      ],
+      "chemistry": "{junior_winch_tech.name}抖着手想删误关加热日志，见你亮出磁芯与黑天鹅绒蒙眼带，立刻红着眼拽住袖口苦求放过。",
+      "stakes": {
+        "resource_gap": "{junior_winch_tech.name}掌镀锌套管与冷喷剂，你握误关加热铁证。",
+        "limit_gap": "副官就在通廊外巡查，不封口这位成年新人必上军事法庭。",
+        "meeting_reason": "在机库气闸口截住惊慌失措的{junior_winch_tech.name}。",
+        "irreplaceable_goal": "先收套管救场，再领回舱里戴好蒙眼带与跳蛋乖乖领罚。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "junior_winch_tech",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 4,
+            "tension": 5
+          },
+          "reason": "出舱总替这名成年新人多拧半圈安全索，眼神早透出依附渴望。"
+        }
+      ],
+      "tags": [
+        "intimate"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "act_habitat_exosuit_strip_chip",
+      "title": "增压生活舱卸甲验筹码",
+      "location_ids": [
+        "loc_pressurized_habitat_pod"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "复压锁咔哒扣死后拧开冻硬肩腰甲，汗汽从紧身服领口散出，黑匣磁芯与未启封的锁扣项圈、遥控跳蛋并排摊在睡袋上。",
+        "圆舷窗外地平线微弯，暖灯照亮急促起伏的锁骨。",
+        "冻僵指尖颤巍巍伸向项圈，谁也没有开口提开门。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1390,
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "act_rehab_water_blanket_check",
+      "title": "复温医舱水毯脱衣排查",
+      "location_ids": [
+        "loc_hyperbaric_rehab_bay"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "医舱视窗雾化合拢，脱下湿战术服躺上恒温水毯，药械箱弹开，银链乳夹与静音无线遥控跳蛋抵住锁骨。",
+        "氧管送入热氧，血氧仪红光随胸腔狂跳闪烁。",
+        "手套按过腰窝脉搏，在诊单上落下颤抖笔迹。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1410,
+      "tags": [
+        "intimate",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "act_hangar_lever_clutch_heave",
+      "title": "减压机库钛钽撬杠压槽",
+      "location_ids": [
+        "loc_decompression_winch_hangar"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "钛钽长撬杠楔入左下两度半槽，失重颠簸中从身后箍紧细腰隔紧身服合压体重。",
+        "固体石墨滑块拍入齿隙，镀锌套管套上柄端延臂。",
+        "面罩相抵传来骨传导热喘，电弧映亮护目镜白霜。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1380,
+      "tags": [
+        "workplace",
+        "disaster"
+      ]
+    },
+    {
+      "id": "act_gallery_quartz_key_barter",
+      "title": "观察通廊密匙黑匣交割",
+      "location_ids": [
+        "loc_pressurized_command_gallery"
+      ],
+      "duration_minutes": 25,
+      "beats": [
+        "石英窗前将碳化放行底单拍上控制台，逼开战术箱露出黑天鹅绒蒙眼带与纯银细链乳夹。",
+        "窗外云海翻涌，纯金密匙卡在冒汗掌心里易手。",
+        "定下回生活舱兑现的规矩后，合严箱扣。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1360,
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "act_catwalk_tether_blind_deal",
+      "title": "配重栈桥背风暗舱扣索",
+      "location_ids": [
+        "loc_ballast_cantilever_catwalk"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "背风暗舱反拧钛安全钩把人扣在钢梁旁，喷嘴亏空单连同真皮金属锁扣项圈拍上铁箱沿。",
+        "配重块低沉嗡鸣，面罩贴额传进冷硬指令。",
+        "拽松领口比试项圈尺度，换来交出止退销与底账。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1370,
+      "tags": [
+        "intimate",
+        "disaster"
+      ]
+    },
+    {
+      "id": "act_habitat_single_bag_zero_g",
+      "title": "失重睡袋同舱贴身复温",
+      "location_ids": [
+        "loc_pressurized_habitat_pod"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "失重中拉开暖气故障舱唯一一只加温睡袋，把只穿保暖内衣的同伴拽回怀里锁紧拉链。",
+        "黑丝绒盒滑开，未启封的遥控跳蛋推到指尖前逼出妥协。",
+        "发丝擦过发烫颈侧，霜花舷窗映出交叠身影。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1425,
+      "tags": [
+        "intimate"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "press_cable_clutch_deadlock",
+      "title": "主缆偏载四千吨悬臂滑脱",
+      "source": "accident",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "loc_decompression_winch_hangar"
+      ],
+      "trigger": "近地碎片击穿配重环，主缆偏载突破四千五百吨，绞盘抱死，千吨悬臂正以每秒三米滑向三万米虚空。",
+      "objective": "悬臂甩脱前把钛钽撬杠楔入左下两度半偏心释放槽压开。",
+      "choice": "紧贴后背合压撬杠硬扛脱扣，还是退回气闸任机库被切离？",
+      "immediate": {
+        "text": "机库倾角陡拉三十度狂震，失重把冰屑扳手抛向半空。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "悬臂滑移逼近两米极值，脚下格栅外便是三万米云海深渊。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "千吨悬臂甩脱导轨",
+        "consequence": "整座机库折断坠入大气层，全员随碎片焚毁。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "从身后紧箍腰肢把钛钽撬杠楔入偏心槽压到底",
+          "cost": "撬杠微弯，双掌隔手套磨破大片渗血水泡"
+        },
+        {
+          "option": "抡起破拆重锤猛砸锁销震出三公分退让旷量",
+          "cost": "锤头崩飞碎屑划破面颊肩甲，血珠在面罩结霜"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1380,
+      "tags": [
+        "disaster",
+        "workplace"
+      ]
+    },
+    {
+      "id": "press_lever_shear_and_chill",
+      "title": "零下六十五度撬杠濒断危局",
+      "source": "nature",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_decompression_winch_hangar",
+        "loc_pressurized_habitat_pod"
+      ],
+      "trigger": "极寒风切变令钛钽撬杠发出脆响，你正攥着{junior_winch_tech.name}误关副加热回路的日志。",
+      "objective": "迫{junior_winch_tech.name}送上镀锌套管脱扣，进舱算账。",
+      "choice": "勒令送管后戴蒙眼带与跳蛋认罚，还是上报军法？",
+      "immediate": {
+        "text": "面罩凝满白霜，撬杠弯曲十五度随时滑脱槽口。",
+        "minutes": 4
+      },
+      "near": {
+        "text": "十来分钟指尖就会冻僵失觉，无套管撬杠必断。",
+        "deadline_minutes": 12
+      },
+      "far": {
+        "trigger": "撬杠折断兼加热追责",
+        "consequence": "机库坠毁，肇事技术员亦难逃军事法庭重判。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "令{junior_winch_tech.ta}接镀锌套管救场，回舱戴蒙眼带跳蛋赎罪",
+          "cost": "套管死咬难拆，你也得替这位新人瞒死违规日志"
+        },
+        {
+          "option": "令{junior_winch_tech.ta}喷冷喷剂并拉紧安全带分担力矩",
+          "cost": "双臂肘关节遭猛烈挫伤，没能攥紧新人软肋"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "junior_winch_tech",
+        "basis": "你握着{junior_winch_tech.name}夜里私连星网误关副加热回路的铁证。"
+      },
+      "hook_ids": [],
+      "start_minute": 1383,
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "disaster"
+      ]
+    },
+    {
+      "id": "press_jettison_airlock_betrayal",
+      "title": "自沉死锁兼受贿反制",
+      "source": "institution",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_pressurized_command_gallery",
+        "loc_pressurized_habitat_pod"
+      ],
+      "trigger": "{defense_special_major.name}捏住纯金密匙欲炸库灭口，却不知你攥着其受贿放行底单。",
+      "objective": "气密门落死前夺匙中止自沉，把人反锁进舱算账。",
+      "choice": "甩底单锁进舱逼{defense_special_major.ta}自戴乳夹蒙眼带，还是揭发？",
+      "immediate": {
+        "text": "通廊红灯狂闪，覆钛气密门正一寸寸下压。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "距门槛仅剩三十公分，一旦死锁便活埋机库。",
+        "deadline_minutes": 10
+      },
+      "far": {
+        "trigger": "气密门死锁引爆自沉",
+        "consequence": "机库坠入深渊，在场人员背尽事故黑锅。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "锁生活舱逼{defense_special_major.ta}自戴乳夹蒙眼带交匙",
+          "cost": "私押督导官形同下克上，须联手封死口风"
+        },
+        {
+          "option": "亮底单逼{defense_special_major.ta}刷卡升门暂缓上报",
+          "cost": "留少校在通廊恐趁乱反咬销毁放行底单"
+        }
+      ],
+      "leverage": {
+        "holder": "defense_special_major",
+        "subject": "player",
+        "basis": "{defense_special_major.name}举着纯金密匙与戒严权，随时落闸封库推锅给你。"
+      },
+      "hook_ids": [],
+      "start_minute": 1385,
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "press_hypoxia_medic_trial",
+      "title": "减压病兼医舱反审",
+      "source": "nature",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_hyperbaric_rehab_bay",
+        "loc_pressurized_command_gallery"
+      ],
+      "trigger": "减压骨痛炸开，{station_flight_surgeon.name}扼守医舱门索筹码，未料实验病历在你手。",
+      "objective": "气栓成型前迫{station_flight_surgeon.name}供氧救人，再拿下药械箱。",
+      "choice": "水毯逼{station_flight_surgeon.ta}自戴乳夹跳蛋赎病历，还是只讨氧管？",
+      "immediate": {
+        "text": "关节如钢针扎透，血氧警报急响，医官仍死按药箱。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十五分钟不加压吸氧，气泡随时栓塞脊髓致瘫。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "减压休克兼实验案发",
+        "consequence": "伤员瘫痪殒命，医官亦难逃军医署严惩。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "锁舱逼{station_flight_surgeon.ta}戴乳夹跳蛋开足纯氧复温",
+          "cost": "热雾分心耽误调压，两人在舱内喘息透支"
+        },
+        {
+          "option": "凭病历令{station_flight_surgeon.ta}只交出镇痛剂与氧管",
+          "cost": "未拿捏彻底，对方随时反扑销毁病历副本"
+        }
+      ],
+      "leverage": {
+        "holder": "station_flight_surgeon",
+        "subject": "player",
+        "basis": "{station_flight_surgeon.name}扼守医舱门锁与氧阀，不低头便得硬扛骨痛气栓。"
+      },
+      "hook_ids": [],
+      "start_minute": 1386,
+      "tags": [
+        "intimate",
+        "coercion_theme",
+        "disaster"
+      ]
+    },
+    {
+      "id": "press_nozzle_graft_blackmail",
+      "title": "配重濒断喷嘴黑账",
+      "source": "money",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_ballast_cantilever_catwalk",
+        "loc_decompression_winch_hangar"
+      ],
+      "trigger": "配重锁销濒断，你正攥着{exo_master_sergeant.name}私卖铂铱喷嘴顶包的出库底单。",
+      "objective": "迫士官长死顶配重助压离合，再进暗舱算底单。",
+      "choice": "掏项圈蒙眼带逼{exo_master_sergeant.ta}戴上抵罪，还是送军法？",
+      "immediate": {
+        "text": "护套渗霜，{exo_master_sergeant.name}死盯出库单额角暴筋。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十来分钟卡不死止退孔，断缆将横扫机库。",
+        "deadline_minutes": 12
+      },
+      "far": {
+        "trigger": "配重甩脱兼盗卖案发",
+        "consequence": "站台倾覆崩解，士官长剥军籍从重判刑。",
+        "due_days": 2
+      },
+      "exits": [
+        {
+          "option": "暗舱替{exo_master_sergeant.ta}扣项圈蒙眼带换销底单",
+          "cost": "私压喷嘴贪腐案，事后须担连带失察之责"
+        },
+        {
+          "option": "扣底单令{exo_master_sergeant.ta}死顶防撞梁助脱扣",
+          "cost": "液压管爆裂溅伤，老兵事后极可能伺机反扑"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "exo_master_sergeant",
+        "basis": "你握着{exo_master_sergeant.name}私卖铂铱喷嘴并用旧件顶包的底单。"
+      },
+      "hook_ids": [],
+      "start_minute": 1388,
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "press_captain_reactor_blackbox",
+      "title": "生活舱卸甲黑匣局",
+      "source": "person",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_pressurized_habitat_pod",
+        "loc_decompression_winch_hangar"
+      ],
+      "trigger": "卸甲后你亮出{sky_assault_captain.name}旁路反应堆磁芯，将项圈与跳蛋摆上睡袋。",
+      "objective": "击碎女上尉防线，数据上传前令其接受筹码换封存。",
+      "choice": "逼{sky_assault_captain.ta}戴项圈含跳蛋签字，还是扣副匙留后手？",
+      "immediate": {
+        "text": "{sky_assault_captain.name}紧身服汗湿贴腰，盯项圈耳根烧红。",
+        "minutes": 6
+      },
+      "near": {
+        "text": "二十分钟主站遥测复通直传，磁芯一传再无转圜。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "反应堆黑匣公之于众",
+        "consequence": "女上尉革职受审，整支空天突击队遭撤编。",
+        "due_days": 3
+      },
+      "exits": [
+        {
+          "option": "逼{sky_assault_captain.ta}戴项圈含跳蛋回通廊签令",
+          "cost": "极端羞辱踩到骨头底线，须防女将烈性反扑"
+        },
+        {
+          "option": "先收铭牌副匙，约每夜进舱复温偿还封口价",
+          "cost": "暂未当场压死，须防对方趁夜偷毁磁芯接口"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "sky_assault_captain",
+        "basis": "你握着{sky_assault_captain.name}私自旁路反应堆安全阀的黑匣磁芯。"
+      },
+      "hook_ids": [],
+      "start_minute": 1392,
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "hk_captain_lever_approach",
+      "kind": "approach",
+      "slot": "sky_assault_captain",
+      "location_ids": [
+        "loc_decompression_winch_hangar"
+      ],
+      "text": "极寒狂风中，{sky_assault_captain.name}紧身服下肩背绷紧如弓，死扣钛钽长撬杠冷喝：“卡进左下两度半槽，贴紧我后背压！”"
+    },
+    {
+      "id": "hk_captain_habitat_lock_approach",
+      "kind": "approach",
+      "slot": "sky_assault_captain",
+      "location_ids": [
+        "loc_pressurized_habitat_pod"
+      ],
+      "text": "{sky_assault_captain.name}反手扣死复压锁，肩甲尚未卸完便冷眸盯住黑匣磁芯：“门锁严了。要本上尉怎么赔，开价吧！”"
+    },
+    {
+      "id": "hk_captain_zero_g_accident",
+      "kind": "accident",
+      "slot": "sky_assault_captain",
+      "location_ids": [
+        "loc_decompression_winch_hangar",
+        "loc_pressurized_habitat_pod"
+      ],
+      "text": "悬臂猛滑引发瞬间失重，{sky_assault_captain.name}飘起撞进你怀里，汗湿滚烫的纳米紧身服死死贴住你胸膛。"
+    },
+    {
+      "id": "hk_captain_tether_approach",
+      "kind": "approach",
+      "slot": "sky_assault_captain",
+      "location_ids": [
+        "loc_decompression_winch_hangar",
+        "loc_ballast_cantilever_catwalk"
+      ],
+      "text": "{sky_assault_captain.name}反拧一圈安全索螺套将你扣死在腰侧，面罩抵额低喝：“我的人我亲手扣，抓紧我的腰！”"
+    },
+    {
+      "id": "hk_captain_earthrise_observe",
+      "kind": "observe",
+      "slot": "sky_assault_captain",
+      "location_ids": [
+        "loc_pressurized_habitat_pod"
+      ],
+      "text": "舷窗外蓝色地平线微弯，{sky_assault_captain.name}卸下外甲喘息未定，指尖悄悄按住贴胸暗槽里的铭牌与日志。"
+    },
+    {
+      "id": "hk_sergeant_helmet_approach",
+      "kind": "approach",
+      "slot": "exo_master_sergeant",
+      "location_ids": [
+        "loc_decompression_winch_hangar",
+        "loc_ballast_cantilever_catwalk"
+      ],
+      "text": "{exo_master_sergeant.name}跨步欺近抵住面罩，骨传导嗓音沉得震耳：“风猛！把手覆在我手背上，顺轴心压到底！”"
+    },
+    {
+      "id": "hk_sergeant_catwalk_bill_approach",
+      "kind": "approach",
+      "slot": "exo_master_sergeant",
+      "location_ids": [
+        "loc_ballast_cantilever_catwalk",
+        "loc_pressurized_habitat_pod"
+      ],
+      "text": "{exo_master_sergeant.name}卸下半边护甲靠住冷壁，死盯那张喷嘴出库单沉声：“单子别往上交……进门怎么罚我都认。”"
+    },
+    {
+      "id": "hk_major_airlock_key_approach",
+      "kind": "approach",
+      "slot": "defense_special_major",
+      "location_ids": [
+        "loc_pressurized_command_gallery"
+      ],
+      "text": "{defense_special_major.name}白着脸死攥纯金自毁密匙卡堵在电掣前尖叫：“张力破极值了！立刻放气密门切离机库！”"
+    },
+    {
+      "id": "hk_major_case_plea_request",
+      "kind": "request",
+      "slot": "defense_special_major",
+      "location_ids": [
+        "loc_pressurized_command_gallery",
+        "loc_pressurized_habitat_pod"
+      ],
+      "text": "{defense_special_major.name}按住半开的战术公文箱抖声哀求：“碳化放行底单能不能压下？密匙和箱里东西全归你！”"
+    },
+    {
+      "id": "hk_riveter_graphite_approach",
+      "kind": "approach",
+      "slot": "master_cable_riveter",
+      "location_ids": [
+        "loc_decompression_winch_hangar",
+        "loc_ballast_cantilever_catwalk"
+      ],
+      "text": "{master_cable_riveter.name}把固体石墨滑块塞进你手套贴耳低吼：“左下偏两度半！收好那卷暗舱图，石墨全垫进去！”"
+    },
+    {
+      "id": "hk_riveter_coil_observe",
+      "kind": "observe",
+      "slot": "master_cable_riveter",
+      "location_ids": [
+        "loc_ballast_cantilever_catwalk"
+      ],
+      "text": "栈桥盲区里，{master_cable_riveter.name}正匆匆把配重环走私夹层图与超导线圈私账塞进工具箱底层。"
+    },
+    {
+      "id": "hk_surgeon_oximeter_approach",
+      "kind": "approach",
+      "slot": "station_flight_surgeon",
+      "location_ids": [
+        "loc_pressurized_command_gallery",
+        "loc_hyperbaric_rehab_bay"
+      ],
+      "text": "{station_flight_surgeon.name}隔手套拉过你指尖夹上血氧仪低语：“血氧八十九……进复温医舱脱甲，我给你逐寸排查。”"
+    },
+    {
+      "id": "hk_surgeon_rehab_lock_approach",
+      "kind": "approach",
+      "slot": "station_flight_surgeon",
+      "location_ids": [
+        "loc_hyperbaric_rehab_bay"
+      ],
+      "text": "{station_flight_surgeon.name}背靠雾化医舱门按住药械箱急喘：“低氧实验病历想怎样才肯还？水毯已热好，开价吧。”"
+    },
+    {
+      "id": "hk_tech_pipe_rush_approach",
+      "kind": "approach",
+      "slot": "junior_winch_tech",
+      "location_ids": [
+        "loc_decompression_winch_hangar"
+      ],
+      "text": "{junior_winch_tech.name}抱一米镀锌套管扑过格栅拽紧衣角：“套管扛到了！副加热回路日志……求您千万别交出去！”"
+    },
+    {
+      "id": "hk_tech_habitat_kneel_approach",
+      "kind": "approach",
+      "slot": "junior_winch_tech",
+      "location_ids": [
+        "loc_pressurized_habitat_pod",
+        "loc_hyperbaric_rehab_bay"
+      ],
+      "text": "{junior_winch_tech.name}摘下起雾护目镜红眼贴近低求：“外面都在追查日志……只要今晚保我过关，关门怎么罚我都听。”"
+    },
+    {
+      "id": "hk_captain_sleeping_bag_approach",
+      "kind": "approach",
+      "slot": "sky_assault_captain",
+      "location_ids": [
+        "loc_pressurized_habitat_pod"
+      ],
+      "text": "暖气骤停，{sky_assault_captain.name}拉开睡袋拉链偏头冷斥：“挤一个睡袋是野外条例……发什么呆，扣死复压锁进来！”"
+    }
+  ],
+  "twists": [
+    {
+      "id": "tw_info_eccentric_pin_and_blackbox",
+      "category": "信息",
+      "requires": [
+        "sky_assault_captain"
+      ],
+      "text": "{sky_assault_captain.name}从铭牌下摸出偏心销栓刹那，黑匣副槽同时吐出加密磁芯——录着{sky_assault_captain.ta}当年旁路反应堆安全阀的铁证！"
+    },
+    {
+      "id": "tw_personnel_major_box_exposed",
+      "category": "人事",
+      "requires": [
+        "defense_special_major",
+        "exo_master_sergeant"
+      ],
+      "text": "{exo_master_sergeant.name}砸开电掣夺下{defense_special_major.name}纯金密匙卡，摔开的战术箱滚出纯银细链乳夹、蒙眼带与受贿放行单！"
+    },
+    {
+      "id": "tw_resource_graphite_and_choker_deal",
+      "category": "资源",
+      "requires": [
+        "master_cable_riveter"
+      ],
+      "text": "{master_cable_riveter.name}抛来合成固体石墨滑块垫入左下两度半，趁隙竟把走私暗舱钥与真皮金属锁扣项圈一并塞进你掌心买平安！"
+    },
+    {
+      "id": "tw_rule_recompression_strip_mandate",
+      "category": "制度",
+      "requires": [
+        "station_flight_surgeon"
+      ],
+      "text": "{station_flight_surgeon.name}拉响减压强制排查令：凡出舱压杠者须入生活舱或医舱卸甲水毯复温，抗命即按战时违规禁闭！"
+    },
+    {
+      "id": "tw_deadline_ballast_zero_g_drop",
+      "category": "时限",
+      "requires": [
+        "pressure"
+      ],
+      "text": "钨配重止退销崩裂引发十秒失重陡降，外露机库气密门电磁死锁的最后余量骤然减半，再无容错空间！"
+    },
+    {
+      "id": "tw_relation_tech_log_and_captain_shield",
+      "category": "关系",
+      "requires": [
+        "sky_assault_captain",
+        "junior_winch_tech"
+      ],
+      "text": "{junior_winch_tech.name}护{sky_assault_captain.name}撞裂面罩，掉出的终端亮出昨晚女上尉替其掩盖误关加热日志的加密记录！"
+    },
+    {
+      "id": "tw_accident_biometric_telemetry_leak",
+      "category": "意外",
+      "requires": [],
+      "text": "生命体征遥测网误触极寒应急模式，在场者的心率与皮肤电波形实时投上通廊主屏——无论压杠还是门后扣环试震，每次骤飙脉搏皆一览无余！"
+    },
+    {
+      "id": "tw_personnel_chip_wear_signoff",
+      "category": "人事",
+      "requires": [
+        "sky_assault_captain",
+        "station_flight_surgeon"
+      ],
+      "text": "联机自检迫在眉睫，{sky_assault_captain.name}与{station_flight_surgeon.name}想保磁芯与实验病历，就得在紧身制服下戴好项圈与跳蛋回通廊会签！"
+    }
   ],
   "forbidden_terms": [
     "仙法",
@@ -133,2118 +2376,20 @@
     "镖局",
     "客栈",
     "真气",
-    "法宝"
-  ],
-  "player_identities": [
-    {
-      "id": "pi_orbital_heavy_chassis_operator",
-      "role": "天梯锚定站当值重装机动工程兵",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "机动兵{family}",
-          "gender": "any"
-        },
-        {
-          "pattern": "{family}老兵",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        26,
-        38
-      ],
-      "social_position": "equal",
-      "baseline": "负责三万米重型绞盘与悬臂导轨机械维保的资深士官，练就了一身外骨骼极限操控绝技。",
-      "resources": [
-        "一具大吸力工业电磁抓地吸盘",
-        "两只军用特种加厚防风撕裂防寒手套"
-      ],
-      "reputation": "沉稳狠辣经验丰富，在深空工程突击队中以手稳力大著称。",
-      "risks": [
-        "直接暴露在对流层狂风迎风面极易被吹落三万米高空",
-        "剧烈缺氧易诱发肺水肿"
-      ]
-    },
-    {
-      "id": "pi_earth_defense_supervisory_inspector",
-      "role": "地月联合防卫军特派督导监察官",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}监察长",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}少校",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        30,
-        48
-      ],
-      "social_position": "high",
-      "baseline": "代表地球防卫司令部驻站督战的高级武官，掌控整座电梯节点紧急切断自沉的最高密钥。",
-      "resources": [
-        "一套纳米全密封个人轨道降落救生囊",
-        "一枚天梯节点紧急炸毁自沉纯金密匙芯片"
-      ],
-      "reputation": "教条冷酷视战略数据高于一切，极度恐慌坠毁时奉行弃车保帅铁律。",
-      "risks": [
-        "完全不懂张紧绞盘内部机械死锁公差容易下达错误弃站指令",
-        "面对强风极易失足"
-      ]
-    },
-    {
-      "id": "pi_orbital_elevator_cadet_mechanic",
-      "role": "天梯空天工程青年见习技术员",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}工",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}助理",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        21,
-        23
-      ],
-      "social_position": "equal",
-      "baseline": "刚分配上三万米站台的高空机械工程系优秀毕业生，熟悉绞盘离合器全套图纸公差。",
-      "resources": [
-        "一瓶特种冷喷超导快速降温绝缘气雾剂",
-        "一本厚重的轨道张力绞盘机械偏心公差速查手册"
-      ],
-      "reputation": "理论过硬但缺乏大事故历练，面对失衡暴冲心理防线脆弱。",
-      "risks": [
-        "强震颤下跌入深渊检修井容易粉身碎骨",
-        "体能单薄难以承受重载下压"
-      ]
-    },
-    {
-      "id": "pi_sky_station_cable_rigging_veteran",
-      "role": "天梯碳纳米主缆索老铆接工长",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}工长",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}老将",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        48,
-        55
-      ],
-      "social_position": "low",
-      "baseline": "长年驻守三万米风口从事主缆探伤的老铆工，闭着眼睛都能摸出每一根碳纤维的受力死点。",
-      "resources": [
-        "一柄大号高强度淬火防爆卡簧拆装钳",
-        "一盒特制耐零下一百度合成固体润滑石墨滑块"
-      ],
-      "reputation": "沉默寡言老成持重，视三万米天梯为主心骨。",
-      "risks": [
-        "常年高空低氧患有严重肺心病在狂风中喘息艰难",
-        "腿脚关节僵硬撤离缓慢"
-      ]
-    }
-  ],
-  "locations": [
-    {
-      "id": "loc_orbital_winch_undercarriage_hangar",
-      "name": "减压机库",
-      "detail": "高十二米、通体由钛合金抗压桁架与复合装甲板构筑的半开放式外露减压大厅，正前方是粗如巨塔的碳纳米主缆与轰鸣巨响的电磁张紧绞盘，两侧防风壁已被狂暴风切变吹裂大半，零下六十度极寒强风卷着冰晶疯狂倒灌。",
-      "privacy": "semi",
-      "visibility": "dim",
-      "witnesses": [
-        "bg_orbital_rigger_old_zhao"
-      ],
-      "exits": [
-        "loc_station_pressurized_command_corridor",
-        "loc_sky_elevator_ballast_catwalk"
-      ],
-      "affordances": [
-        "抓握钛合金抗风扶手稳固阵脚",
-        "将钛钽合金破拆撬杠插进绞盘偏心释放槽",
-        "调阅抗震控制台残存张力差读数"
-      ],
-      "pressure_modifiers": {
-        "p_cable_snap_asymmetric_load_drift": "碳纳米主缆偏载张力突破四千五百吨极值，整座减压机库以每秒三米速度向外倾斜滑脱。",
-        "p_stratosphere_freezing_wind_shear": "三万米极寒强风切变倒灌气温骤降至零下六十五度，面罩外部迅速凝结厚重白霜。"
-      },
-      "tags": [
-        "disaster",
-        "workplace"
-      ]
-    },
-    {
-      "id": "loc_station_pressurized_command_corridor",
-      "name": "指挥观察通廊",
-      "detail": "位于减压机库内侧的密封观察通廊，厚达三十厘米的高强度透明石英观察窗将万米深渊与暖光控制台隔开，自动防爆安全红灯疯狂旋转，中央广播系统持续传出撤离尖鸣。",
-      "privacy": "public",
-      "visibility": "clear",
-      "witnesses": [
-        "bg_station_medical_officer_bai",
-        "bg_sky_station_cable_boss_smith"
-      ],
-      "exits": [
-        "loc_orbital_winch_undercarriage_hangar",
-        "loc_sky_elevator_ballast_catwalk",
-        "loc_pressurized_habitat_pod"
-      ],
-      "affordances": [
-        "按下主控台节点紧急姿态调整姿控喷气按钮",
-        "启动外置微循环增温电加热器",
-        "拿起挂在走廊墙上的高真空应急呼吸器"
-      ],
-      "pressure_modifiers": {
-        "p_station_emergency_jettison_deadlock": "指挥台自沉倒计时已切入最后三百秒，两枚三千千牛实心电磁锁栓即将切断救援通道。"
-      },
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    },
-    {
-      "id": "loc_sky_elevator_ballast_catwalk",
-      "name": "配重悬臂栈桥",
-      "detail": "悬挑在三万米虚空正上方的狭窄镂性格栅走道，下方是厚重翻滚的云海与苍茫蔚蓝地平线，两侧悬挂着数千吨钨合金重力配重块，狂风撕扯着安全索发出凄厉哀鸣。",
-      "privacy": "private",
-      "visibility": "dim",
-      "witnesses": [
-        "bg_ballast_rigger_xiao_liu"
-      ],
-      "exits": [
-        "loc_orbital_winch_undercarriage_hangar",
-        "loc_station_pressurized_command_corridor"
-      ],
-      "affordances": [
-        "用战术破甲锥凿开卡死的机械配重止退销",
-        "启动备用气动辅助推进火箭喷嘴",
-        "扣紧双重钛合金安全挂钩在悬臂钢梁上"
-      ],
-      "pressure_modifiers": {
-        "p_hypoxia_decompression_sickness_peak": "外舱微压环境导致人员血液中氮气微气泡析出，剧烈关节骨痛与高空缺氧濒临窒息。"
-      },
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "loc_pressurized_habitat_pod",
-      "name": "锚定站增压生活舱",
-      "detail": "指挥通廊尽头的增压生活舱，两张嵌在舱壁里的睡袋铺、一扇圆形观景舷窗，窗外是弯曲的地平线和星空。",
-      "privacy": "private",
-      "visibility": "舱内只亮一圈暖色夜灯，舱门复压锁一扣，外面零下六十度的风暴就只剩舷窗上的霜花。",
-      "witnesses": [],
-      "exits": [
-        "loc_station_pressurized_command_corridor"
-      ],
-      "affordances": [
-        "陪女上尉在舷窗前看地球",
-        "替女上尉卸下外骨骼",
-        "扣上生活舱的复压锁"
-      ],
-      "pressure_modifiers": {},
-      "tags": [
-        "intimate"
-      ]
-    }
-  ],
-  "character_templates": [
-    {
-      "id": "captain_leng_xuan",
-      "gender": "female",
-      "gender_reason": "空天轨道防卫军特级突击女上尉",
-      "age_range": [
-        21,
-        21
-      ],
-      "adult_context": "已成年的空天联合防卫军特种机动突击队首席正职上尉指挥官，年满二十一岁，持有三万米极限空天重型设施突发事故现场最高破拆指挥执照，完全具备民事与战时处置权。",
-      "public_role": "空天防卫军突击队上尉队长",
-      "appearance_options": [
-        "褪下笨重的真空防寒装甲外壳后，仅着高弹力纳米紧身深灰战术突击服，露出一张冷艳英挺的面庞，两腮带着健康的红润，在零下六十度极寒狂风与极限下压撬杠的剧烈喘息中，白皙双颊被冻得苍白又泛起竭力发力后的绯红与热汗。",
-        "短发利落削在耳际，睫毛凝结着细小冰晶，双手紧扣一米四长的实心钛钽合金长撬杠死死别入暗槽，下颌线条在暴风与电光中透出一股深空军人的森严与狠决。"
-      ],
-      "identity": {
-        "authority": "对锚定站全站武装防御、张力绞盘强制脱扣裁决、应急炸药阻断及现场三军人员指挥享有战时最高临机处置权。",
-        "resources": [
-          "一根特勤外骨骼实心钛钽合金加长重型破拆撬杠（长一米四，端部带四角偏心防滑咬合自锁爪）",
-          "一罐高压纳米级神经镇痛抗休克气雾剂"
-        ],
-        "limits": [
-          "在绞盘离合彻底脱扣前无法离开充满致命极寒风切变的喷流死角",
-          "长时间暴露于低压狂风中面临严重急性减压病威胁"
-        ],
-        "obligations": [
-          "确保三万米天梯主缆节点免遭坠毁保全整座轨道交通命脉"
-        ],
-        "exposure": "为了抢险曾在深空考核中私自关闭反应堆安全阀进行过极限超载演练",
-        "hidden": "战斗服贴胸暗槽内珍藏着已故军人父亲当年在月球基地留下的金属铭牌"
-      },
-      "decision": {
-        "core_value": "天梯是人类迈向深空的骨骼，物理力矩只臣服于绝对意志，本上尉绝不允许这根主缆断在脚下。",
-        "goal_options": [
-          "利用钛钽长撬杠撬开偏心离合脱扣自救",
-          "在防爆门锁死前切断过载回路保全站台"
-        ],
-        "pressure_responses": {
-          "low": "在三万米风暴中冷静判定绞盘断齿受力点与偏载差额",
-          "mid": "果断抽出钛钽长撬杠并在偏心释放槽找准反力支点",
-          "high": "整个人扑在撬杠末端借身体下沉力道咬牙向下死按",
-          "breaking": "用牙齿咬开镇痛喷剂狠狠喷在双手血泡上继续合力下压"
-        },
-        "withdrawal": "退守至减压大厅钛合金承重龙骨内侧，单手按住快拆步枪警戒四周任何异动。",
-        "relationship_stance": "平日神情冰冷威严容不得半点纪律懈怠，但在生死绝命的深渊险境中展现出舍命相托的战友情怀。",
-        "contrast": "外表冰山冷艳，面对数千吨拉力滑脱濒死关头时手腕爆发力与气场震慑全场。",
-        "prefers": [
-          "严丝合缝的力矩咬合",
-          "行动果决不惧生死的军人搭档"
-        ],
-        "avoids": [
-          "优柔寡断的推脱软弱",
-          "打着自保旗号背弃同袍的懦夫"
-        ],
-        "never": [
-          "在绞盘彻底脱扣安全锁死前独自撤回承压舱"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "在三万米虚空暴风面前依然稳如泰山的魁梧身躯",
-          "深渊悬崖边毫不犹豫递过来的坚实臂膀"
-        ],
-        "likes": [
-          "两人发力压死撬杠时胸膛紧贴传来的粗重滚烫心跳",
-          "险情排除后抹去对方额前冰霜时的会心一瞥"
-        ],
-        "dislikes": [
-          "贪生怕死的擅离职守",
-          "自恃官威的瞎指挥"
-        ],
-        "preconditions": [
-          "张力绞盘成功脱扣且电梯姿态完全恢复平稳",
-          "全员安全返回常压生活舱完成复温复压",
-          "两人都清醒，心意出于自己，不是失重坠落里的依赖"
-        ],
-        "boundaries": [
-          "严守部队战时纪律与阶级准则",
-          "不以救命功绩索取情感屈从"
-        ],
-        "expression": "脱险进入增压舱后，默默解开自己的保暖斗篷披在对方肩头，手掌轻轻捏紧对方颤抖的手背。",
-        "desire_range": [
-          2,
-          4
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "被从身后环抱稳住剧烈失衡的下盘，双手叠合在撬杠上一同向死角猛力下压。"
-      },
-      "voices": {
-        "surface": "别管那些冒烟的电磁线圈！那是废铁！把这根一米四的钛钽撬杠卡进退让槽，跟我数三二一一起下压！",
-        "inner": "还有三寸就要滑脱导轨了……只要撬杠不崩断，本上尉绝不会让天梯断在自己手里，给我压到底！"
-      },
-      "schedule": [
-        {
-          "from": 1380,
-          "to": 1410,
-          "location_id": "loc_orbital_winch_undercarriage_hangar"
-        },
-        {
-          "from": 1410,
-          "to": 1439,
-          "location_id": "loc_orbital_winch_undercarriage_hangar"
-        }
-      ],
-      "situation": {
-        "trigger": "对流层主缆部分纤维断裂，电磁张紧绞盘电磁铁线圈短路烧毁彻底抱死断电。",
-        "pressure": "数千吨张力悬臂以每秒三米速度向三万米虚空滑脱，电梯整体解体坠毁倒计时仅剩不到三分钟。",
-        "exits": [
-          {
-            "option": "用特勤外骨骼实心钛钽合金加长破拆撬杠反向卡入偏心释放槽合力下压脱扣自救。",
-            "cost": "钛钽合金撬杠受数吨剪力发生微弯变形，操作人员双掌隔着手套被磨出大面积血泡。"
-          },
-          {
-            "option": "用战术破甲锥凿穿离合器外壳液压油管强行引爆阻尼灭火剂减缓滑脱脱险。",
-            "cost": "高压液压油喷溅造成两名操作人员面部化学冻伤。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace",
-        "disaster",
-        "intimate"
-      ]
-    },
-    {
-      "id": "veteran_mechanic_shang_tianfeng",
-      "gender": "male",
-      "gender_reason": "天梯锚定站资深重装工程老士官长",
-      "age_range": [
-        30,
-        35
-      ],
-      "adult_context": "年满三十岁，空天防卫军成年一级重装工程军士长，具备完全民事行为能力，十年三万米高空机械维保老将。",
-      "public_role": "机动工程班首席士官长",
-      "appearance_options": [
-        "身材魁梧雄壮肩背宽阔，身穿带有自发热防撕裂涂层的深蓝工程外骨骼背心，手臂肌肉刚劲如钢铁，面容粗犷如削。",
-        "短发硬如钢针挂满冰晶，眼神坚毅沉稳，在狂暴晃动的机库格栅上双脚如生根铸铁般巍然挺立。"
-      ],
-      "identity": {
-        "authority": "对高空工程机甲调度、外挂配重释放控制及特种破拆重型工装调用拥有绝对一线指挥权。",
-        "resources": [
-          "一具特制高吸附力外骨骼电磁双靴",
-          "两副双层气凝胶耐零下百度的特种绝热保暖战术手套"
-        ],
-        "limits": [
-          "体能在抗衡三万米极寒狂风与剧烈震动中迅速逼近体力极限制点",
-          "不懂复杂的电梯天体轨道力学运算"
-        ],
-        "obligations": [
-          "誓死协助队长女上尉稳住机械主轴保全天梯与全组兄弟生还"
-        ],
-        "exposure": "为了抢时间曾违规关闭过主绞盘超温警报传感器",
-        "hidden": "外骨骼背心内侧口袋里珍藏着女上尉当年晋升上尉时亲手别在自己领口的一枚天梯徽章"
-      },
-      "decision": {
-        "core_value": "阵地就是军人的尊严，只要女上尉还在前头，{npc.name}这条命就钉死在三万米钢梁上。",
-        "goal_options": [
-          "协助女上尉下压钛钽撬杠撬开抱死离合",
-          "用外骨骼电磁靴死死踩住滑动悬臂减速"
-        ],
-        "pressure_responses": {
-          "low": "在机库倾斜瞬间利落甩出安全抓钩扣死承重主梁稳固阵脚",
-          "mid": "用雄厚胸膛一把拉住因风切变险些滑向深渊的年轻技术员",
-          "high": "双手覆在女上尉手背外侧倾注全身数百公斤外骨骼伺服扭矩协同下压",
-          "breaking": "用宽阔身躯死死挡住外壁崩飞的钢板碎片为女上尉遮风挡雨"
-        },
-        "withdrawal": "退守至张力绞盘主承重基座凹槽处，右手握紧破拆重锤戒备任何机械崩飞。",
-        "relationship_stance": "把女上尉当成舱外作业时可以交出后背的人，敬佩那份手稳胆大，愿在失重颠簸里替女上尉拽住最后一根安全索。",
-        "contrast": "看似粗野寡言的重装硬汉，在配合女上尉下压撬杠时的力道控制精妙绝伦分毫不差。",
-        "prefers": [
-          "干净利落的军令执行",
-          "靠真本事硬碰硬的铁血硬汉"
-        ],
-        "avoids": [
-          "前怕狼后怕虎的逃兵",
-          "关键时刻掉链子的软骨头"
-        ],
-        "never": [
-          "在队长还在死拼时松开手中工具独自逃生"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "在三万米极寒绝境面前横刀立马的非凡霸气",
-          "两具滚烫身躯在失速震颤中紧密相依的生命羁绊"
-        ],
-        "likes": [
-          "战胜死神后痛快大嚼高能战备肉干的痛快",
-          "离合器咔哒脱扣卡死瞬间两人粗重滚烫的鼻息共鸣"
-        ],
-        "dislikes": [
-          "官僚逃兵的自私出卖",
-          "背弃战友的下作行径"
-        ],
-        "preconditions": [
-          "张力绞盘完全脱扣且主缆张力重回平衡受控",
-          "全员安全返回承压区"
-        ],
-        "boundaries": [
-          "恪守士官职责从属规矩不越礼数",
-          "不以救命功绩索取私情"
-        ],
-        "expression": "撕下自己干燥的保暖内衬，轻柔却有力地缠在女上尉被钛钽撬杠磨破的双手虎口上。",
-        "desire_range": [
-          1,
-          2
-        ],
-        "self_control_range": [
-          3,
-          4
-        ],
-        "desired_position": "在晃动格栅上从后方箍紧女上尉的腰肢稳住重心，双手握紧撬杠末端合力向下猛压。"
-      },
-      "voices": {
-        "surface": "女上尉！找准那个偏心死角！撬杠有老子给你托着，你报顺逆，老子就算把双臂外骨骼压爆也给你压到底！",
-        "inner": "女上尉是天生的指挥官。只要我{npc.name}还有一口气在，三万米的风休想把女上尉从格栅上刮下去。"
-      },
-      "schedule": [
-        {
-          "from": 1380,
-          "to": 1439,
-          "location_id": "loc_orbital_winch_undercarriage_hangar"
-        }
-      ],
-      "situation": {
-        "trigger": "悬臂导轨滑脱距离超过两米警戒线，主缆张力表针已彻底压死在红色超载红区。",
-        "pressure": "若不能在两分钟内合力撬动偏心释放槽使离合脱扣，数千吨绞盘将连带整座机库被拖入三万米虚空。",
-        "exits": [
-          {
-            "option": "{npc.name}将全身外骨骼过载倍率拉满配合女上尉以极限蛮力压死撬杠脱扣脱险。",
-            "cost": "{npc.name}右侧外骨骼伺服电机过载烧毁，右臂韧带重度拉伤撕裂。"
-          },
-          {
-            "option": "用破拆重锤反向砸碎离合器抱死锁销强行制造三公分机械旷量自救。",
-            "cost": "重锤受强烈反震折断崩飞划破{npc.name}面颊。"
-          }
-        ]
-      },
-      "tags": [
-        "disaster",
-        "crime"
-      ]
-    },
-    {
-      "id": "earth_defense_inspector_major_di",
-      "gender": "any",
-      "age_range": [
-        38,
-        42
-      ],
-      "adult_context": "年满三十八岁，地球防卫军空天安全监督特派武官，具备完全民事行为能力，掌握天梯节点紧急抛弃自沉最高令符。",
-      "public_role": "防卫司令部特派监察官",
-      "appearance_options": [
-        "身穿带有金线领章的深灰高级防风军官常服，头戴带护耳的军官大沿帽，面容白皙微胖，此时被极寒冷风吹得面如土色冷汗直淌。",
-        "手里死死攥着挂在脖颈上的纯金自毁密钥卡链条，眼神在保全自身性命与维护军人尊严间剧烈挣扎。"
-      ],
-      "identity": {
-        "authority": "代表防卫司令部行使战时戒严法权、判定是否自沉炸断锚定机库单独逃生的终决权。",
-        "resources": [
-          "一套便携式微型高压氧气救生呼吸器",
-          "一枚防卫司令部特权紧急自毁炸毁电子密匙卡"
-        ],
-        "limits": [
-          "完全不懂张力绞盘在超载偏心下的机械受力机理",
-          "面对万米坠落极度恐慌企图强行启动自毁逃生"
-        ],
-        "obligations": [
-          "保全公文箱内轨道电梯防御核心部署绝密战备光盘"
-        ],
-        "exposure": "为了掩盖检查失职曾在电梯日常维保单据上对缆索局部碳化事故违规签字放行",
-        "hidden": "暗中启动了呼叫司令部空天救援穿梭机前来单人接应的私密特权信号信标"
-      },
-      "decision": {
-        "core_value": "保全性命与自身军职前途高于一切，底层工兵不过是战略消耗数字。",
-        "goal_options": [
-          "强行启动电磁炸药切断机库单独跳伞",
-          "勒令女上尉立刻放弃抢修撤回主舱"
-        ],
-        "pressure_responses": {
-          "low": "在指挥通廊大声宣读战备防御条例推卸责任",
-          "mid": "发现滑脱加剧后歇斯底里试图暴力扳动自毁电闸",
-          "high": "被士官长夺枪拧断手腕后吓得倒退瑟缩在密封门后",
-          "breaking": "瘫坐在地板上交出纯金自毁密匙换取优先救援权"
-        },
-        "withdrawal": "退缩在承压指挥室后排逃生密封舱内，双手死死抱住公文箱与救生呼吸器。",
-        "relationship_stance": "将女上尉视为恃才傲物不服管教的刺头女军官，对其既畏惧其铁腕又嫉妒其高超军功威望。",
-        "contrast": "平日在发布会上趾高气扬宣讲防卫铁律，大难临头时比谁都丑态毕露、歇斯底里。",
-        "prefers": [
-          "绝对的阶级顺从",
-          "温暖安全的地面防空司令部地堡"
-        ],
-        "avoids": [
-          "零下六十度的暴风深渊",
-          "与浑身油污的一线工程兵同生共死"
-        ],
-        "never": [
-          "为了挽救机库人员而延迟自己进入救生囊的时间"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "能让其保全性命的压倒性武力",
-          "顺从其权势的阿谀逢迎"
-        ],
-        "likes": [
-          "被护卫在最安全的中心包厢",
-          "特供的昂贵军官雪茄与红酒"
-        ],
-        "dislikes": [
-          "粗鲁的抗命顶撞",
-          "被枪口铁拳指着咽喉的屈辱恐惧"
-        ],
-        "preconditions": [
-          "彻底脱离坠落深渊危险置身于重兵护卫的地面防空基地",
-          "保全既得军阶"
-        ],
-        "boundaries": [
-          "严禁任何下等兵触碰其高级军服",
-          "不承担任何同舟共济义务"
-        ],
-        "expression": "战战兢兢地从口袋里摸出一盒昂贵的高空特效营养剂扔在地上换取工兵拼命阻击险情。",
-        "desire_range": [
-          0,
-          0
-        ],
-        "self_control_range": [
-          2,
-          3
-        ],
-        "desired_position": "在指挥室外手握对讲机，命令卫队在倒计时归零时立刻斩断吊索封死大门。"
-      },
-      "voices": {
-        "surface": "女上尉！士官长！主缆差额已突破五千吨！立刻放弃机库撤退！本监察官命令你们立刻封门！",
-        "inner": "这帮疯子……要是悬臂被扯断了，整座站台都得掉进太平洋，我必须自己活下去！立刻封门！"
-      },
-      "schedule": [
-        {
-          "from": 1380,
-          "to": 1439,
-          "location_id": "loc_station_pressurized_command_corridor"
-        }
-      ],
-      "situation": {
-        "trigger": "机库滑脱警报触发司令部自毁协议最高戒严条目。",
-        "pressure": "若五分钟内不能闭锁离合，特派监察官手中的终端将直接触发自毁引信彻底切断机库炸断后路。",
-        "exits": [
-          {
-            "option": "士官长夺下手枪与自毁控制器并用安全带将其捆死在指挥室立柱上自救。",
-            "cost": "涉嫌公然袭击司令部特派高级军官面临战后被送上军事法庭审判。"
-          },
-          {
-            "option": "女上尉用钛钽撬杠柄部强行挑断自毁继电器控制线阻断爆炸自沉程序脱险。",
-            "cost": "分心操作导致撬杠咬入暗槽角度偏离两度增加发力难度。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace_power",
-        "crime"
-      ]
-    },
-    {
-      "id": "senior_cable_master_smith",
-      "gender": "male",
-      "gender_reason": "天梯对流层主缆索特级老铆工长",
-      "age_range": [
-        50,
-        54
-      ],
-      "adult_context": "年满五十岁，天梯轨道工程特级老铆工，成年工匠宗师，具备完全民事行为能力。",
-      "public_role": "主缆锚定首席机械工长",
-      "appearance_options": [
-        "身穿带有高反光条的破旧加厚工程防风棉袍，满脸刀刻般的高原紫外线冻疮伤痕，胡须花白凝结着细小冰晶。",
-        "手里握着一把被盘得发亮的合金卡簧钳，眼神在三万米暴风中如深空巨岩般沉静冷峻。"
-      ],
-      "identity": {
-        "authority": "对碳纳米主缆局部微观应力分布、偏心释放槽自锁销弹簧退让间隙拥有绝对直觉。",
-        "resources": [
-          "两匣特制深空超低温纳米级固体石墨润滑片",
-          "一把特制重型纯铜平头偏心防滑敲击凿"
-        ],
-        "limits": [
-          "年老体衰患有严重的慢性低氧肺气肿无法承受剧烈运动",
-          "在零下六十度极寒中呼吸艰难"
-        ],
-        "obligations": [
-          "将天梯主缆重型机械抢修绝活经验传承给年轻一代军人"
-        ],
-        "exposure": "曾在日常检修中为了补贴家用私下截留过废旧钛合金螺栓配件",
-        "hidden": "深知这座张力绞盘在受到四千吨偏载时偏心槽会向左下偏斜两度半的装配死结缺陷"
-      },
-      "decision": {
-        "core_value": "主缆也是有骨节的，找准纤维的榫眼使劲，万吨天梯也能撬得动。",
-        "goal_options": [
-          "指点女上尉找准两度半偏角撬动长撬杠",
-          "垫入石墨滑块缓解齿槽干磨咬死"
-        ],
-        "pressure_responses": {
-          "low": "在机库角落用铜凿敲击钢梁凭回音辨识绞盘形变",
-          "mid": "冒着呼啸风雪递上石墨滑块垫入咬合盲区",
-          "high": "顶着失重颠簸趴在格栅上，用卡簧钳在钢梁上敲出左下两度半的节拍报给撬杠上的人",
-          "breaking": "用身躯抵住脱脱滑动的配重支架为年轻人争取发力时间"
-        },
-        "withdrawal": "躲在钛合金承重立柱背风凹槽内，用厚棉袍死死护住卡簧钳与图纸手册。",
-        "relationship_stance": "将女上尉视为天梯上少有的巾帼英雄，由衷佩服年轻女上尉的傲岸气魄与过硬军威。",
-        "contrast": "平日沉默寡言甚至被年轻士兵当成木讷老人的老工长，在面对机械大绝境时指挥沉稳如山岳统帅。",
-        "prefers": [
-          "严丝合缝的工匠本色",
-          "一诺千金的军人信义"
-        ],
-        "avoids": [
-          "不知变通的教条官僚",
-          "遇到危险就自毁逃命的懦夫"
-        ],
-        "never": [
-          "在机械受力关键时刻误报公差参数"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "对深空重型工业力学的崇高敬畏与共鸣",
-          "在死亡深渊面前毫无贵族做派的坚毅果敢"
-        ],
-        "likes": [
-          "重型离合器严丝合缝脱扣时的清脆回音",
-          "干完大活后一口滚烫浓茶的通体舒坦"
-        ],
-        "dislikes": [
-          "轻视老工匠经验的傲慢偏见",
-          "粗暴毁坏昂贵主缆的蛮干行径"
-        ],
-        "preconditions": [
-          "彻底排除机库滑脱坠落险情张力回归平稳",
-          "保全全部精密量具完整无损"
-        ],
-        "boundaries": [
-          "恪守老长辈规矩不越礼数",
-          "不介入年轻后辈的私人情感波澜"
-        ],
-        "expression": "用沾满机油开裂的大手重重擦去额头冰霜，咧开缺门牙的嘴角露出欣慰踏实的笑容。",
-        "desire_range": [
-          0,
-          0
-        ],
-        "self_control_range": [
-          5,
-          5
-        ],
-        "desired_position": "在立柱后大声咳嗽着用铜凿敲击钢管指点释放槽偏心角度，把石墨滑块抛向女上尉掌心。"
-      },
-      "voices": {
-        "surface": "女上尉！听{npc.name}的！那个张紧绞盘受力往左下偏了两度半！别死往下怼，往左顺着牙口敲一下再压！",
-        "inner": "好姑娘，手够硬！这手艺要是跟着老头子摔下这三万米深渊，那才是天梯最大的冤屈！"
-      },
-      "schedule": [
-        {
-          "from": 1380,
-          "to": 1439,
-          "location_id": "loc_orbital_winch_undercarriage_hangar"
-        }
-      ],
-      "situation": {
-        "trigger": "偏心释放槽在极寒与干磨下发生严密咬死，钛钽撬杠面临打滑崩脱。",
-        "pressure": "若无超低温润滑介质介入并纠偏角度，撬杠将在极限剪切扭矩下折弯滑脱。",
-        "exits": [
-          {
-            "option": "用老工长私藏的合成石墨固体滑块塞入咬合缝隙协助撬杠顺利深插脱险。",
-            "cost": "消耗尽绝版深空润滑材料，老工长左手手掌被飞溅冰晶割破流血。"
-          },
-          {
-            "option": "指挥士官长用破拆重锤反向敲击释放槽偏心凸耳震松咬死锁销自救。",
-            "cost": "猛烈敲击造成铸钢箱体产生微小应力裂纹降低防爆等级。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    },
-    {
-      "id": "cadet_mechanic_xiao_yuan",
-      "gender": "male",
-      "gender_reason": "天梯三万米站点在编初级助理机械员",
-      "age_range": [
-        21,
-        23
-      ],
-      "adult_context": "年满二十一岁，空天工程学院成年见习毕业生，初级天梯机械维护员，具备完全民事行为能力。",
-      "public_role": "天梯机动工程助理技术员",
-      "appearance_options": [
-        "身材单薄，身着带有黄色反光条的工程防寒外骨骼套服，面容清秀神情极度慌恐，防风防雪护目镜歪斜挂在脖颈上。",
-        "安全索在腰间缠成一团乱麻，面罩内侧蒙着一层呼出的白雾，手套指尖还沾着出舱时蹭上的碳纤维碎屑。"
-      ],
-      "identity": {
-        "authority": "天梯减压机库应急排压气琴拉索与副加热回路接触器的手动闭合权。",
-        "resources": [
-          "一根厚壁加长高强度特种镀锌钢管套管",
-          "一卷高抗拉耐温石棉加固安全带"
-        ],
-        "limits": [
-          "缺乏一线大事故实战心理防线脆弱",
-          "身材单薄力气严重不足难以单独对抗反弹力矩"
-        ],
-        "obligations": [
-          "按规程记录电梯张力表读数并向指挥官报告公差偏差"
-        ],
-        "exposure": "因操作生疏曾导致辅助姿控火箭加注过量引发微小摆动",
-        "hidden": "暗自崇拜英姿飒爽的女队长女上尉将其视为心目中最神圣的英雄偶像"
-      },
-      "decision": {
-        "core_value": "保命第一，崇拜并绝对服从女上尉队长的每一道抢修指令。",
-        "goal_options": [
-          "协助女上尉寻找备用加长力臂镀锌钢管",
-          "在机库稳固石棉安全绳"
-        ],
-        "pressure_responses": {
-          "low": "在工具箱内慌乱翻找可以套在撬杠末端的加长套管",
-          "mid": "大声向机库通报张力表读数与悬臂滑脱距离读秒",
-          "high": "鼓起勇气冒着暴风雪爬过通道递送加长套管",
-          "breaking": "跪倒在格栅上死死拉紧石棉安全带协助分担下沉重力"
-        },
-        "withdrawal": "缩在机库钛合金承重支柱阴影处，紧紧抱住加长钢管瑟瑟发抖。",
-        "relationship_stance": "将女上尉视为至高无上的精神支柱，愿为协助脱险拼死相助。",
-        "contrast": "第一次出舱就吐在面罩里的新手，到了悬臂真往下坠的那一刻，反倒成了唯一敢解开安全扣爬过去送工具的人。",
-        "prefers": [
-          "清晰明了的步骤指引",
-          "平稳安全的地表指挥室"
-        ],
-        "avoids": [
-          "凶神恶煞的督察威吓",
-          "三万米深渊极寒狂风"
-        ],
-        "never": [
-          "背叛女上尉擅自搭乘单人救生囊逃跑"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "豪迈刚烈的女中豪杰气魄",
-          "在死亡深渊前给予同伴的坚毅安全感"
-        ],
-        "likes": [
-          "被肯定业务能力时的温和颔首",
-          "分到的一枚甘甜高能提神葡萄糖糖块"
-        ],
-        "dislikes": [
-          "残酷暴力的威吓践踏",
-          "被当作累赘抛弃"
-        ],
-        "preconditions": [
-          "彻底排除机库滑脱坠落险情天梯稳稳锁死受控",
-          "确保自身生命安全得到保障"
-        ],
-        "boundaries": [
-          "恪守学徒本分不作非分之想",
-          "严守下属规矩"
-        ],
-        "expression": "手忙脚乱地将加长钢管双手递过，紧张得语无伦次连连向女上尉道歉并立正敬礼。",
-        "desire_range": [
-          1,
-          1
-        ],
-        "self_control_range": [
-          4,
-          4
-        ],
-        "desired_position": "在机库安全扶手上方死死拉紧安全绳，大声哭喊着为女上尉下压撬杠报出最后三十秒读数。"
-      },
-      "voices": {
-        "surface": "女上尉！加长钢管我找到了！能套在钛钽撬杠柄端当加力杠杆！还有这捆石棉加固安全带！",
-        "inner": "只要女上尉还在前面拼命，我就不能当缩头乌龟，我必须帮着把这道死离合压开！"
-      },
-      "schedule": [
-        {
-          "from": 1380,
-          "to": 1439,
-          "location_id": "loc_orbital_winch_undercarriage_hangar"
-        }
-      ],
-      "situation": {
-        "trigger": "悬臂又滑一段，机库整个失重半秒，工具箱里的扳手、螺栓和冰屑全飘了起来，在风切变里乱撞。",
-        "pressure": "飘起的金属件只要有一枚被卷进绞盘齿槽，撬杠就再也插不进偏心释放槽。",
-        "exits": [
-          {
-            "option": "抡开加长钢管，把飘浮的工具一件件扫进机库壁上的磁吸收纳网，清出绞盘齿槽。",
-            "cost": "被一枚飘飞的螺栓砸裂面罩，额角划开一道口子。"
-          },
-          {
-            "option": "解开自己的安全索，去追那把正飘向舱外缺口的扳手。",
-            "cost": "被风切变拽出去半个身子，全靠队友一把攥住脚踝才拖回格栅。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "orbital_medic_officer_bai",
-      "gender": "female",
-      "gender_reason": "空天防卫军高空潜水医学女医官",
-      "age_range": [
-        26,
-        28
-      ],
-      "adult_context": "年满二十六岁，持有国家空天高空医学专科执业证书的成年女医官，具备完全民事行为能力。",
-      "public_role": "天梯锚定站随军主治医官",
-      "appearance_options": [
-        "身穿带有红十字标识的白色加温抗压医官常服，面容清秀神情紧绷，戴着医用无菌防寒手套，双手握着便携式高压注氧仪。",
-        "神情专注果决，额前垂下几缕碎发，脖子上挂着高敏数字心率血氧监测仪。"
-      ],
-      "identity": {
-        "authority": "对高空减压病抢救方案、抗休克急救针剂及加压舱启闭享有最高医疗裁决权。",
-        "resources": [
-          "两支浓缩神经保护抗惊厥针剂",
-          "一台便携式微型经皮血氧红外连续监测仪"
-        ],
-        "limits": [
-          "在高空低压环境下无法实施侵入性外科手术",
-          "体能有限无法搬运重型破拆工装"
-        ],
-        "obligations": [
-          "保障全体驻站突击队员零瘫痪、零气栓存活"
-        ],
-        "exposure": "曾私自调用高压加压舱为患有减压骨坏死的老工兵进行非定点保守治疗",
-        "hidden": "随身急救包内封存着自己亲手调配的高空极寒肌肉解痉外用透皮喷雾"
-      },
-      "decision": {
-        "core_value": "生命体征就是最高法典，绝不放弃任何一个尚有微弱心跳的同袍。",
-        "goal_options": [
-          "指导机库二人通过呼吸节律对抗急性减压病",
-          "在气闸门开启瞬间实施高压复温抢救"
-        ],
-        "pressure_responses": {
-          "low": "在观察窗外举起电子写字板提示减压深呼吸频次",
-          "mid": "隔窗指点士官长如何用按压穴位缓解女上尉肌肉抽搐",
-          "high": "将体温复苏水毯推至隔离门前准备承接休克伤员",
-          "breaking": "顶着被极寒风暴喷溅的危险冲到门缝前递送应急呼吸面罩"
-        },
-        "withdrawal": "退守至复温治疗台前，迅速核对加压舱氧分压配比阀门。",
-        "relationship_stance": "将女上尉视为亲密的姐妹与敬重的手足，对突击队员安危高度关切。",
-        "contrast": "外表温柔纤弱的文职女医生，在遭遇大事故急救时下针稳准狠如冷面判官。",
-        "prefers": [
-          "严谨平稳的心率曲线",
-          "遵从医嘱的冷静配合"
-        ],
-        "avoids": [
-          "情绪失控的剧烈挣扎",
-          "隐瞒伤情的硬撑蛮干"
-        ],
-        "never": [
-          "在战士尚有呼吸时签署放弃抢救文书书面声明"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "在极端生理剧痛下依然保持的神智清明",
-          "彼此舍命相护的崇高人性光辉"
-        ],
-        "likes": [
-          "平稳有力的窦性心律",
-          "脱险后第一口温热电解质水的吞咽声"
-        ],
-        "dislikes": [
-          "漠视生命的官僚冷血",
-          "因恐惧造成的踩踏抢夺"
-        ],
-        "preconditions": [
-          "张力绞盘成功脱扣且伤员体温回升至三十六度",
-          "全员脱离急性气栓危险期"
-        ],
-        "boundaries": [
-          "严守医患职业伦理",
-          "不以医疗资源调配进行利益交换"
-        ],
-        "expression": "用温热的手掌轻柔按揉对方冻僵的眉心，柔声安抚其紧绷的神经脉搏。",
-        "desire_range": [
-          0,
-          0
-        ],
-        "self_control_range": [
-          5,
-          5
-        ],
-        "desired_position": "在观察窗前隔着玻璃双手按在女上尉对应的掌印位置，大声引导其进行深腹式吸气。"
-      },
-      "voices": {
-        "surface": "女上尉！别憋气！失重的时候憋气会把肺泡撑破——看我的手电，亮一下吸，灭一下呼！",
-        "inner": "只要两人把离合撬开，哪怕全身冻僵了，我也一定把人从阎王爷手里抢回来。"
-      },
-      "schedule": [
-        {
-          "from": 1380,
-          "to": 1439,
-          "location_id": "loc_station_pressurized_command_corridor"
-        }
-      ],
-      "situation": {
-        "trigger": "机库内人员血氧饱和度跌破百分之八十警戒红线。",
-        "pressure": "若不及时进行减压深呼吸引导，剧烈气栓将诱发不可逆脊髓神经麻痹。",
-        "exits": [
-          {
-            "option": "通过声学广播引导机库二人同频深呼吸并相互按压合谷穴解痉自救。",
-            "cost": "分担部分破拆精力导致撬动力矩节拍轻微延缓。"
-          },
-          {
-            "option": "把一卷加温过的舱外急救氧管从小气闸推出去，让队员接在头盔侧阀上补氧。",
-            "cost": "投料口微启导致少量冷凝水喷溅损坏医用显示屏。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    }
-  ],
-  "background_cast": [
-    {
-      "id": "bg_orbital_rigger_old_zhao",
-      "role": "锚定站机械老班长老喻",
-      "function": "witness",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "line": "悬臂滑移过了两米红线了！抱死离合器连杆卡死在死角拉不动啊！",
-      "gender": "male",
-      "age_range": [
-        48,
-        52
-      ],
-      "adult_context": "年满四十八岁，天梯轨道工程资深老班长，成年公民。",
-      "name": "老喻"
-    },
-    {
-      "id": "bg_station_medical_officer_bai",
-      "role": "随队护理士官阿萝",
-      "function": "helper",
-      "location_ids": [
-        "loc_station_pressurized_command_corridor"
-      ],
-      "line": "高压氧舱与神经复温槽已全部预热，门一开立即拉人抢救！",
-      "gender": "female",
-      "age_range": [
-        26,
-        28
-      ],
-      "adult_context": "年满二十五岁，持有高空护理资质的护理士官，成年公民。",
-      "name": "阿萝"
-    },
-    {
-      "id": "bg_sky_station_cable_boss_smith",
-      "role": "主缆铆工老蔺",
-      "function": "helper",
-      "location_ids": [
-        "loc_station_pressurized_command_corridor"
-      ],
-      "line": "偏心槽往左下偏了两度半！女上尉，撬杠别硬怼，先垫上这块固体石墨！",
-      "gender": "male",
-      "age_range": [
-        50,
-        54
-      ],
-      "adult_context": "年满五十岁，大修主缆老工匠，成年老工人。",
-      "name": "老蔺"
-    },
-    {
-      "id": "bg_ballast_rigger_xiao_liu",
-      "role": "配重悬臂舱外巡检员小乔",
-      "function": "messenger",
-      "location_ids": [
-        "loc_sky_elevator_ballast_catwalk"
-      ],
-      "line": "报告！三号重力配重滑轨锁销已经完全变形，悬臂还有最后两分钟坠落！",
-      "gender": "male",
-      "age_range": [
-        22,
-        25
-      ],
-      "adult_context": "年满二十二岁，特种高空作业索道工，成年公民。",
-      "name": "小乔"
-    },
-    {
-      "id": "bg_inspector_deputy_guard_qian",
-      "role": "监察长副官甘少尉",
-      "function": "obstacle",
-      "location_ids": [
-        "loc_station_pressurized_command_corridor"
-      ],
-      "line": "监察官有令！倒计时还有两分钟，准备切断减压机库电磁锁自保！",
-      "gender": "male",
-      "age_range": [
-        26,
-        29
-      ],
-      "adult_context": "年满二十六岁，地月防卫司令部近卫军官，成年军人。",
-      "name": "甘少尉"
-    },
-    {
-      "id": "bg_earth_defense_station_commander",
-      "role": "天梯锚定站站长闻大校",
-      "function": "helper",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "line": "女上尉！司令部已锁定地面备用张紧激光引导，无论如何把离合压开脱扣！",
-      "gender": "male",
-      "age_range": [
-        48,
-        52
-      ],
-      "adult_context": "年满四十八岁，天梯轨道防卫站长，成年高级指挥官。",
-      "name": "闻大校"
-    }
-  ],
-  "channels": [
-    {
-      "id": "ch_sky_station_intercom_wired_speaker",
-      "text": "天梯锚定站抗干扰高频有线防爆对讲广播网",
-      "reach": "all",
-      "fidelity": "exact"
-    },
-    {
-      "id": "ch_catwalk_wind_howl_echoes",
-      "text": "悬臂格栅空腔狂风回响与监察官恐慌咆哮",
-      "reach": "local",
-      "fidelity": "distorted"
-    }
-  ],
-  "tension_engines": [
-    {
-      "id": "te_cable_load_drift_vs_manual_lever",
-      "text": "千吨主缆悬臂滑脱倾覆坠落绝命倒计时与利用实心钛钽合金长撬杠撬开偏心离合的机械自救。"
-    },
-    {
-      "id": "te_command_jettison_vs_human_rescue",
-      "text": "防卫司令部特派监察官企图炸断机库独自逃生与突击队誓死保全全站人员同胞的人道死斗。"
-    },
-    {
-      "id": "te_ice_captain_pride_vs_sergeant_muscle",
-      "text": "冰山英气冷艳女上尉的森严军人气魄与重装老士官长托付性命的外骨骼爆发力反差共鸣。"
-    },
-    {
-      "id": "te_freezing_wind_chill_vs_tight_hug",
-      "text": "零下六十度极寒强风切变倒灌灼伤与两人在剧烈失速摇坠中紧贴发力合拧撬杠的炽烈生命羁绊。"
-    }
-  ],
-  "cast_combos": [
-    {
-      "id": "cc_captain_and_sergeant_lever_rush",
-      "power_structure": "switchable",
-      "player_positions": [
-        "high",
-        "equal",
-        "low"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "captain_leng_xuan",
-        "veteran_mechanic_shang_tianfeng"
-      ],
-      "tension_engine_ids": [
-        "te_cable_load_drift_vs_manual_lever",
-        "te_freezing_wind_chill_vs_tight_hug"
-      ],
-      "chemistry": "冷艳孤高的首席女上尉与沉稳雄悍的机动工程老士官长在零下六十度暴风绝境中相依为命，两人背靠背、手扣手将实心钛钽合金长撬杠压向死角强撬离合器脱扣自救。",
-      "stakes": {
-        "resource_gap": "女上尉深谙绞盘机械偏心力矩与断离控制核心，老士官长拥有惊人的下沉蛮力与外骨骼过载爆发力。",
-        "limit_gap": "女上尉体能在极度高热与缺氧低压下逼近昏厥极限，老士官长受限于双掌二度冻伤脱皮剧痛难忍。",
-        "meeting_reason": "天梯主缆遭到袭击断裂引发锚定站千吨悬臂重大失衡事故。",
-        "irreplaceable_goal": "在悬臂坠毁深渊前，合力用加长钛钽撬杠将偏心释放槽顺力撬动下压脱扣脱险。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "captain_leng_xuan",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 3
-          },
-          "reason": "三万米暴风绝境中共同核算力矩与偏角，建立起生死相托的技术共鸣。"
-        },
-        {
-          "a": "player",
-          "b": "veteran_mechanic_shang_tianfeng",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "一起挂过好几回舱外安全索的老搭档，闭着眼也知道对方的锁扣有没有扣死。"
-        },
-        {
-          "a": "captain_leng_xuan",
-          "b": "veteran_mechanic_shang_tianfeng",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 3
-          },
-          "reason": "深空冰山女军官与重装老兵在暴风天梯中达成生死同盟。"
-        }
-      ],
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "cc_captain_and_cadet_pipe_synergy",
-      "power_structure": "player_high",
-      "player_positions": [
-        "high"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "captain_leng_xuan",
-        "cadet_mechanic_xiao_yuan"
-      ],
-      "tension_engine_ids": [
-        "te_cable_load_drift_vs_manual_lever"
-      ],
-      "chemistry": "传奇女上尉的严厉军令稳住第一次出舱就吓破胆的新手助理，新手助理冒死送达加长钢管与安全绳，师徒合力化解覆灭死局。",
-      "stakes": {
-        "resource_gap": "女上尉拥有核心军用钛钽撬杠与绝对决断力，已成年的正式青年助理掌握加长镀锌管与减压图纸手册。",
-        "limit_gap": "成年的年轻助理面对三万米风暴心理防线脆弱，女上尉在悬臂滑脱中无法脱身捡拾工装。",
-        "meeting_reason": "空天机动工程班日常驻站维保突遇袭击灾难。",
-        "irreplaceable_goal": "迅速接驳加长镀锌力臂协助钛钽撬杠一举撬动卡死偏心槽。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "captain_leng_xuan",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "紧盯女队长的每一个破拆手势。"
-        },
-        {
-          "a": "player",
-          "b": "cadet_mechanic_xiao_yuan",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 1
-          },
-          "reason": "带着第一次出舱的新手助理压住恐惧，扛起该扛的那一份。"
-        },
-        {
-          "a": "captain_leng_xuan",
-          "b": "cadet_mechanic_xiao_yuan",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 1
-          },
-          "reason": "师徒传承与长官庇护。"
-        }
-      ],
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "cc_sergeant_and_inspector_standoff",
-      "power_structure": "npc_high",
-      "player_positions": [
-        "low",
-        "equal"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "veteran_mechanic_shang_tianfeng",
-        "earth_defense_inspector_major_di"
-      ],
-      "tension_engine_ids": [
-        "te_command_jettison_vs_human_rescue"
-      ],
-      "chemistry": "监察官躲在救生囊舱门后催着抛掉机库，士官长用外骨骼的手掌把舱门按死，隔着观察窗一字一句顶回去。",
-      "stakes": {
-        "resource_gap": "监察官攥着抛弃机库的授权芯片，士官长手里是全站唯一能出舱作业的重装外骨骼班。",
-        "limit_gap": "监察官极度恐慌万米坠毁，老士官长受限于下克上袭击长官的军事法庭死罪威慑。",
-        "meeting_reason": "在承压指挥室大门前爆发的生死主导权对决。",
-        "irreplaceable_goal": "压制官僚逃亡行径为机库离合脱扣抢修争取至关重要的三分钟时间。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "veteran_mechanic_shang_tianfeng",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 1
-          },
-          "reason": "赞许士官长抗命护持全站同胞的雷霆担当。"
-        },
-        {
-          "a": "player",
-          "b": "earth_defense_inspector_major_di",
-          "stage": "stranger",
-          "a_to_b": {
-            "trust": 0,
-            "tension": 5
-          },
-          "b_to_a": {
-            "trust": 0,
-            "tension": 5
-          },
-          "reason": "对视一线人命如草芥的逃兵军官深恶痛绝。"
-        },
-        {
-          "a": "veteran_mechanic_shang_tianfeng",
-          "b": "earth_defense_inspector_major_di",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 0,
-            "tension": 5
-          },
-          "b_to_a": {
-            "trust": 0,
-            "tension": 5
-          },
-          "reason": "一线战士与上层自私官僚之间的枪口对峙。"
-        }
-      ],
-      "tags": [
-        "workplace_power",
-        "crime"
-      ]
-    },
-    {
-      "id": "cc_captain_and_master_smith_lever",
-      "power_structure": "equal",
-      "player_positions": [
-        "equal"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "captain_leng_xuan",
-        "senior_cable_master_smith"
-      ],
-      "tension_engine_ids": [
-        "te_cable_load_drift_vs_manual_lever",
-        "te_command_jettison_vs_human_rescue"
-      ],
-      "chemistry": "天梯老工长隔着狂风指点偏角递上固体石墨，与减压机库内死磕撬杠的年轻女上尉里应外合，协同化解坠天险情。",
-      "stakes": {
-        "resource_gap": "老工长握有绞盘偏心两度半口诀与合成石墨滑块，女上尉掌握核心钛钽长撬杠与绝对军令威严。",
-        "limit_gap": "老工长身无外骨骼机甲无法亲自上悬臂施力，女上尉在漫天风雪中双眼难辨微米级偏角。",
-        "meeting_reason": "天梯大失衡生死关头老手艺人与军官的联手求生。",
-        "irreplaceable_goal": "精准将石墨滑块塞入左下两度半咬合缝撬平离合脱险。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "captain_leng_xuan",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "深信女上尉神级破拆硬手腕。"
-        },
-        {
-          "a": "player",
-          "b": "senior_cable_master_smith",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 1
-          },
-          "reason": "老工长的经验指引令人精神大振。"
-        },
-        {
-          "a": "captain_leng_xuan",
-          "b": "senior_cable_master_smith",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "两代空天工程人之间的默契互救。"
-        }
-      ],
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    }
-  ],
-  "daily_activities": [
-    {
-      "id": "act_winch_caliper_backlash_check",
-      "title": "晨光初现电磁张紧绞盘齿侧隙巡检",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "duration_minutes": 30,
-      "beats": [
-        "用高精度激光测距卡尺量测主绞盘齿根磨损倒角",
-        "校对电磁吸附离合器线圈常开间隙微米级读数",
-        "手动扳动抱闸复位弹簧测试自由行程回弹响应"
-      ],
-      "hook_ids": [],
-      "start_minute": 1380,
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "act_cable_graphene_coating_service",
-      "title": "碳纳米主缆石墨烯耐磨涂层点检",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "duration_minutes": 35,
-      "beats": [
-        "用超声波探伤仪扫测碳纤维微晶断裂声发射信号",
-        "涂抹耐零下一百度特种合成固体石墨润滑膏",
-        "紧固主缆锚头紧缩套筒四周十二颗高强度钛螺栓"
-      ],
-      "hook_ids": [],
-      "start_minute": 1390,
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "act_command_corridor_airlock_drill",
-      "title": "承压通廊双向自锁防爆气闸测试",
-      "location_ids": [
-        "loc_station_pressurized_command_corridor"
-      ],
-      "duration_minutes": 25,
-      "beats": [
-        "手动旋转气闸内门红色应急泄压手轮确认阻尼",
-        "测试门框四周充气式硅橡胶防冻密封圈气密性",
-        "核对防风破拆重型外骨骼撬杠卡扣释放弹力"
-      ],
-      "hook_ids": [],
-      "start_minute": 1385,
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    },
-    {
-      "id": "act_ballast_catwalk_jettison_bolt_tap",
-      "title": "配重悬臂外挂爆炸螺栓电回路抽检",
-      "location_ids": [
-        "loc_sky_elevator_ballast_catwalk"
-      ],
-      "duration_minutes": 40,
-      "beats": [
-        "用防爆欧姆表测量紧急抛载爆炸螺栓电雷管阻抗",
-        "清理滑轨锁死卡齿表面堆积的微细金属冰晶霜花",
-        "在防卫军战备行车日志加盖当值监察少校电子印"
-      ],
-      "hook_ids": [],
-      "start_minute": 1395,
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "act_high_altitude_oxygen_supply_test",
-      "title": "三万米高空战备增压供氧系统点验",
-      "location_ids": [
-        "loc_station_pressurized_command_corridor"
-      ],
-      "duration_minutes": 30,
-      "beats": [
-        "测量高压氧气储罐汇流排输出减压阀动态风压",
-        "检查机库外露救生索端部钛合金自动锁扣夹紧力",
-        "交接挂在驾驶室门后的特种实心钛钽加长长撬杠"
-      ],
-      "hook_ids": [],
-      "start_minute": 1400,
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    },
-    {
-      "id": "act_catwalk_counterweight_cable_test",
-      "title": "配重平衡钢缆对流层防风阻尼巡检",
-      "location_ids": [
-        "loc_sky_elevator_ballast_catwalk"
-      ],
-      "duration_minutes": 20,
-      "beats": [
-        "测量重力平衡悬臂前后位移差并校对水平基准",
-        "清理平衡配重液压缓冲油缸表面焦糊附着物",
-        "紧固配重防摇摆牵引索支架四颗高强度螺栓"
-      ],
-      "hook_ids": [],
-      "start_minute": 1410,
-      "tags": [
-        "workplace_power",
-        "workplace"
-      ]
-    },
-    {
-      "id": "act_habitat_exosuit_unbuckle",
-      "title": "增压生活舱里替女上尉卸外骨骼",
-      "location_ids": [
-        "loc_pressurized_habitat_pod"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1430,
-      "beats": [
-        "离合脱扣、悬臂锁死、众人回到增压生活舱复压之后，女上尉靠在舱壁上，外骨骼的肩甲卡扣冻得掰不开，纳米紧身战术服贴在身上，被汗浸透又结了一层薄霜。",
-        "女上尉抬起双臂，让人一枚枚拧开冻住的卡扣、把肩甲和背架卸下来，最后一节腰甲落地时，绷了一整夜的肩背终于松下来，呼出一口长长的白气。",
-        "女上尉低头看着对方磨破的手套，伸手替对方摘下来：舱门锁上……今晚不出舱了，你也别回自己的铺位。"
-      ],
-      "tags": [
-        "intimate"
-      ]
-    },
-    {
-      "id": "act_habitat_earthrise",
-      "title": "舷窗前看地平线",
-      "location_ids": [
-        "loc_pressurized_habitat_pod"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1250,
-      "beats": [
-        "生活舱的舷窗外，地平线弯成一道蓝色的弧，女上尉只穿着贴身的保暖内衣，抱膝坐在窗前。",
-        "女上尉没回头：从这里看，地面上的灯像撒了一把盐。……过来，从后面抱着我，我想就这样看一会儿。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_habitat_one_sleeping_bag",
-      "title": "挤进同一个睡袋",
-      "location_ids": [
-        "loc_pressurized_habitat_pod"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1380,
-      "beats": [
-        "舱里的暖气又出了故障，女上尉拉开自己睡袋的拉链，往里挪了挪，冷着脸朝人抬了抬下巴。",
-        "女上尉说：两个人挤一个睡袋比较暖，这是野外条例。……挤进来以后的事，条例没写，你说了算。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_habitat_zero_g_morning",
-      "title": "配重调试时的片刻失重",
-      "location_ids": [
-        "loc_pressurized_habitat_pod"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 460,
-      "beats": [
-        "早上配重环调试，生活舱短暂失重，女上尉的头发和睡袋一起飘起来，被人一把抓住手腕拽回怀里。",
-        "女上尉难得笑出了声：抓紧，别让我飘走。……这几秒钟，我不想当什么上尉。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    }
-  ],
-  "pressures": [
-    {
-      "id": "p_cable_snap_asymmetric_load_drift",
-      "title": "碳纳米主缆偏载撕裂千吨悬臂狂暴滑脱",
-      "source": "accident",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "trigger": "近地轨道袭击引爆外层配重环，三万米对流层主缆索发生严重纤维撕裂偏载，电磁张紧绞盘离合器烧毁抱死，千吨悬臂导轨正向虚空滑脱坠毁。",
-      "objective": "在悬臂彻底甩脱前利用加长钛钽撬杠撬开偏心离合自救。",
-      "choice": "等待后方启动自沉炸药切除机库，还是由女上尉带队用钛钽撬杠暴力下压脱扣。",
-      "immediate": {
-        "text": "悬臂金属滚轮在钛合金导轨上发出尖叫，机库地面以三十度倾角疯狂向万米虚空滑沉。",
-        "minutes": 8
-      },
-      "near": {
-        "text": "滑脱位移突破两米极值，下方三万米苍茫云海已一览无余，狂风巨浪撕扯着每一名人员。",
-        "deadline_minutes": 18
-      },
-      "far": {
-        "trigger": "千吨重型悬臂彻底甩脱滑落深渊",
-        "consequence": "整座机库被千万吨张力拉扯折断坠落，全员在三万米自由落体中粉身碎骨殉职。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "用特勤外骨骼实心钛钽合金加长破拆撬杠卡入偏心释放槽合力下压三寸脱扣自救。",
-          "cost": "钛钽撬杠发生塑性微弯，操作人员双掌隔着手套被磨出大面积血泡鲜血浸透。"
-        },
-        {
-          "option": "用破拆重锤反向砸碎离合器抱死锁销强行制造机械阻尼自救。",
-          "cost": "重锤受强烈反震折断崩飞划破在场操作人员面颊与肩膀。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1380,
-      "tags": [
-        "disaster",
-        "workplace"
-      ]
-    },
-    {
-      "id": "p_stratosphere_freezing_wind_shear",
-      "title": "零下六十五度极寒狂风切变倒灌失温致盲",
-      "source": "nature",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "trigger": "对流层顶端防风护罩在狂暴风载下被撕裂大半，零下六十五度极寒风切变狂涌倒灌，增压面罩外壳迅速凝结厚重白霜，人体暴露数秒即陷入极度失温。",
-      "objective": "在极度失温与视线被白霜封死前找准偏心槽死角完成咬合。",
-      "choice": "缩回气闸里等这阵风切变过去，还是顶着结霜的面罩留在舱外，把撬杠压到最后一格。",
-      "immediate": {
-        "text": "狂暴的极寒风刀如利刃般割裂战斗服表面，呼出的热气在睫毛与面罩内侧结成坚硬冰甲。",
-        "minutes": 6
-      },
-      "near": {
-        "text": "舱内气温骤降至零下六十度以下，人员手指末梢彻底失去知觉，肌肉剧烈颤抖几乎脱手。",
-        "deadline_minutes": 14
-      },
-      "far": {
-        "trigger": "人体承受极限超低温极寒持续侵袭",
-        "consequence": "引发急性深度冻伤与心肌停搏，全员在三万米冰甲中僵死倒伏殉难。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "两人紧密贴合借彼此体温抵挡极寒狂风双手死扣撬杠以自重猛压脱险。",
-          "cost": "贴身战斗服被汗水浸透并迅速结冰，双臂遭受重度极寒浅表冻伤。"
-        },
-        {
-          "option": "用战术风镜电加热除霜功能配合手电强行破冰看清槽口脱险。",
-          "cost": "除霜电热丝短路烧毁战术目镜内部微型电池包。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1385,
-      "tags": [
-        "disaster",
-        "workplace"
-      ]
-    },
-    {
-      "id": "p_station_emergency_jettison_deadlock",
-      "title": "司令部监察官启动自毁隔离电磁死锁",
-      "source": "institution",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_station_pressurized_command_corridor"
-      ],
-      "trigger": "特派监察官认定机库已经不可逆坠毁，在指挥室内拉下自毁电掣，重达数吨的覆钛装甲气密隔离门启动了五分钟自锁切除倒计时。",
-      "objective": "在防爆气密门彻底锁死落锁前完成绞盘脱扣并迫使少校撤回指令。",
-      "choice": "由士官长在门外拔枪控制少校，还是在机库内抢先撬动偏心槽化解危机。",
-      "immediate": {
-        "text": "通廊穹顶响起急促尖叫的红色自沉警报，滑轨顶端的数千吨重型电磁自锁螺栓缓缓下落。",
-        "minutes": 5
-      },
-      "near": {
-        "text": "重型气密门距离门槛仅剩最后三十公分，浓烈的灭火绝缘干粉开始在走道内积聚弥漫。",
-        "deadline_minutes": 10
-      },
-      "far": {
-        "trigger": "自毁装甲气密门彻底电磁死锁落锁",
-        "consequence": "减压机库彻底化为万米绝地孤岛，内部全员在炸药引爆中断裂坠毁殉职。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "士官长夺枪砸碎少校手电终端强行拔掉自毁熔断保险丝争取自救时间。",
-          "cost": "士官长面临违抗地月联合安全条例文书的军法严惩。"
-        },
-        {
-          "option": "女上尉大声喊话以特级突击队长身份动员全站接管控制电箱强行升门脱险。",
-          "cost": "与督察卫队爆发小规模肢体冲突造成人员轻伤。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1395,
-      "tags": [
-        "workplace_power",
-        "crime"
-      ]
-    },
-    {
-      "id": "p_hypoxia_decompression_sickness_peak",
-      "title": "三万米极低气压诱发急性暴发性减压病",
-      "source": "nature",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_sky_elevator_ballast_catwalk"
-      ],
-      "trigger": "外舱机库微压环境导致气压跌破二十千帕，潜水员体内溶解的高浓度氮气在微压中析出沸腾，剧烈骨关节刺痛与窒息休克袭来。",
-      "objective": "维持同频深腹式呼吸并在撬动撬杠后保持镇痛药力压制神经痉挛。",
-      "choice": "退入增压舱吸氧，还是咬紧牙关憋住一口气将撬杠压向死点。",
-      "immediate": {
-        "text": "女上尉双肩与手腕关节泛起如同钢针攒刺的剧烈灼痛，呼吸声因血液气泡刺激而粗重短促。",
-        "minutes": 5
-      },
-      "near": {
-        "text": "神经性减压痛蔓延至脊柱中枢，视线边缘泛起大面积黑色闪光，抓握手指出现肌肉抽搐预警。",
-        "deadline_minutes": 11
-      },
-      "far": {
-        "trigger": "体内氮气气泡全面栓塞脑血管与心肺中枢",
-        "consequence": "发生不可逆高空急性减压休克与呼吸骤停，人员在极寒中当场牺牲殉难。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "白医生隔窗引导深腹式呼吸女上尉含服清灵镇痛喷剂坚持完成撬动发力脱险。",
-          "cost": "全员神经系统受轻度气栓压迫喉部声带严重嘶哑数日。"
-        },
-        {
-          "option": "士官长用双臂外骨骼死死抱住女上尉躯干分担受力缓解其关节剧痛自救。",
-          "cost": "士官长自身因分心护持承受更大单侧关节剪切痛。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1400,
-      "tags": [
-        "disaster",
-        "crime"
-      ]
-    },
-    {
-      "id": "p_titanium_tantalum_lever_yield_snap",
-      "title": "钛钽合金长撬杠承受数十吨剪应力濒断",
-      "source": "accident",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "trigger": "偏心释放槽干磨咬合极深，女上尉与士官长合力下压使得一米四长的合金撬杠承受了极限剪切扭矩，高强度合金表面出现微细疲劳晶格裂纹发出刺耳金属惨叫。",
-      "objective": "垫入固体石墨滑块纠正两度半偏角并调整施力力矩防止撬杠折断。",
-      "choice": "孤注一掷加大肉身重量强压，还是稍微回退半寸套入助理技术员的加长钢管。",
-      "immediate": {
-        "text": "长撬杠中心受力处传出一声令人毛骨悚然的金属微裂脆响，表层防锈烤漆爆裂剥落。",
-        "minutes": 4
-      },
-      "near": {
-        "text": "撬杠发生超过十五度的明显弯曲，操作手握持的末端即将滑脱槽口中心死锁。",
-        "deadline_minutes": 8
-      },
-      "far": {
-        "trigger": "钛钽合金破拆长撬杠彻底折断崩飞",
-        "consequence": "断裂的合金重管高速击穿操作人员胸膛，丧失唯一杠杆工具彻底断绝生机。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "助理技术员冒死送达加长特种钢管套在撬杠末端分担应力合力下压撬平脱险。",
-          "cost": "钢管在高压下咬死变形彻底无法从撬杠上拔下。"
-        },
-        {
-          "option": "女上尉与士官长调整站位将发力点向撬杠根部收缩十公分以肉体爆发力强行压死轴承。",
-          "cost": "两臂肘关节承受数十吨极度反震导致骨膜严重挫伤渗血。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1402,
-      "tags": [
-        "disaster",
-        "workplace"
-      ]
-    },
-    {
-      "id": "p_ballast_catwalk_cable_snap_rebound",
-      "title": "外挂配重悬臂固定钢缆即将断裂横扫",
-      "source": "accident",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_sky_elevator_ballast_catwalk"
-      ],
-      "trigger": "配重悬臂晃动导致数吨重的钨合金配重块在滑轨上发生侧倾，紧绷的四道重型承载钢缆发出即将绷断的凄厉尖啸，一旦断裂将横扫机库大厅。",
-      "objective": "迅速将备用液压插销卡死在滑轨制动孔阻止配重滑移甩脱。",
-      "choice": "分出一人去顶紧滑轨，还是全员集中在绞盘前争分夺秒完成下压。",
-      "immediate": {
-        "text": "主钢缆的外层合成纤维护套已经在剧烈拉扯中爆开，数十股高碳钢丝根根紧绷颤鸣。",
-        "minutes": 4
-      },
-      "near": {
-        "text": "第一根辅助钢缆发生脆断崩飞，重型配重块重重砸在机库左侧导轨上激起漫天火花。",
-        "deadline_minutes": 8
-      },
-      "far": {
-        "trigger": "配重钢缆全面断裂巨大配重块甩脱解体",
-        "consequence": "数千吨重物瞬间砸穿机库底板将操作人员齐齐打落万米深渊。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "迅速将随身备用重型合金套筒卡在滑轨制动孔阻止配重继续滑移脱险。",
-          "cost": "失去关键检修套筒工具，手掌在湍急风暴中被钢缆毛刺扎伤。"
-        },
-        {
-          "option": "士官长用外骨骼重臂死死抵住配重块防撞梁为女上尉争取最后三秒撬动窗口。",
-          "cost": "外骨骼右臂液压管过载爆裂小臂承受强烈反冲震伤。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1398,
-      "tags": [
-        "disaster",
-        "crime"
-      ]
-    },
-    {
-      "id": "p_newsfeed_footage",
-      "title": "新闻台的画面",
-      "source": "rumor",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_pressurized_habitat_pod"
-      ],
-      "trigger": "断缆事故后第二天，地面的新闻台播出一段画面：天梯顶端的机库倾斜失重，播报员说防卫军隐瞒了袭击，一千万张船票的预约一夜退了一半",
-      "objective": "在闻大校对外发布声明之前，决定那段失重录像怎么解释",
-      "choice": "公开录像的全部内容，还是只说是一次例行演练",
-      "immediate": {
-        "text": "阿萝把平板递进生活舱，评论区里有人认出了上尉的脸",
-        "minutes": 5
-      },
-      "near": {
-        "text": "中午十二点，闻大校发布声明",
-        "deadline_minutes": 240
-      },
-      "far": {
-        "trigger": "声明发出",
-        "consequence": "天梯停运整顿，上尉的突击队调回地面待命",
-        "due_days": 5
-      },
-      "exits": [
-        {
-          "option": "公开全部录像",
-          "cost": "录像里有机库失重时两个人抱在一起的那一段"
-        },
-        {
-          "option": "说成例行演练",
-          "cost": "上尉要在镜头前撒一次谎，以后每个记者都会追着问"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [
-        "hook_shang_visor_knock",
-        "hook_smith_graphite_gift",
-        "hook_xiaoyuan_float_pen",
-        "hook_lengxuan_oximeter_clip",
-        "hook_lengxuan_habitat_hatch"
-      ],
-      "start_minute": 480,
-      "tags": []
-    }
-  ],
-  "hooks": [
-    {
-      "id": "hook_cable_snaps_hangar_tilts",
-      "kind": "approach",
-      "slot": "captain_leng_xuan",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{captain_leng_xuan.name}单手按住剧烈颤抖的防风钛合金立柱，甩开额前冰霜：主缆偏载了！离合器烧成了废铁，把这根一米四的钛钽撬杠插进暗槽，跟我下压！"
-    },
-    {
-      "id": "hook_captain_caliper_winch_teeth",
-      "kind": "approach",
-      "slot": "captain_leng_xuan",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{captain_leng_xuan.name}单膝跪在狂暴晃动的机库格栅上，实心钛钽长撬杠咔哒一声咬死偏心槽：看准左下角，顺着偏两度半，听我口令一起往死里压！"
-    },
-    {
-      "id": "hook_freezing_wind_blinds_goggles",
-      "kind": "approach",
-      "slot": "captain_leng_xuan",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{captain_leng_xuan.name}在零下六十度的暴风雪里咬紧银牙，面颊在寒光映照下泛出剧烈绯红与汗珠：别怕冻！抓紧撬杠手柄，把全身重量压上来！"
-    },
-    {
-      "id": "hook_lever_groans_bending_limit",
-      "kind": "approach",
-      "slot": "captain_leng_xuan",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{captain_leng_xuan.name}整个人扑在钛钽长撬杠末端，双手虎口鲜血淋漓：离合器在退位了！士官长，把你那身外骨骼全开上来，压到底脱扣！"
-    },
-    {
-      "id": "hook_shang_grips_lever_firmly",
-      "kind": "approach",
-      "slot": "veteran_mechanic_shang_tianfeng",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{veteran_mechanic_shang_tianfeng.name}跨步上前，粗壮的外骨骼大手一把覆在女上尉手背外侧：女上尉，稳住轴心！剩下的千斤下沉重量交给我，谁也别想松手！"
-    },
-    {
-      "id": "hook_jettison_bolts_groan_descending",
-      "kind": "approach",
-      "slot": "captain_leng_xuan",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{captain_leng_xuan.name}猛然抬头凝视门外缓缓下落的自毁气密闸门，眼神高傲冷冽如刀：监察官要封门了！还有最后三圈，哪怕把齿轮咬烂也得给我撬开！"
-    },
-    {
-      "id": "hook_ballast_cables_groan_under_strain",
-      "kind": "approach",
-      "slot": "veteran_mechanic_shang_tianfeng",
-      "location_ids": [
-        "loc_sky_elevator_ballast_catwalk"
-      ],
-      "text": "{veteran_mechanic_shang_tianfeng.name}反手抽出破拆重锤死死卡在配重滑轨导槽之间，低沉怒吼：配重在晃又怎样！就靠这根实心撬杠了，跟我一起下压，闭锁离合！"
-    },
-    {
-      "id": "hook_hypoxia_spasms_rack_joints",
-      "kind": "approach",
-      "slot": "veteran_mechanic_shang_tianfeng",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{veteran_mechanic_shang_tianfeng.name}用宽阔的外骨骼后背死死挡在破损风口前，替身旁众人挡下风切变：吸慢点！低压冻不死人，悬臂还没滑，队长还在拼命，谁敢乱动老子把闹事者扔下去！"
-    },
-    {
-      "id": "hook_inspector_audits_airlock_drill",
-      "kind": "approach",
-      "slot": "earth_defense_inspector_major_di",
-      "location_ids": [
-        "loc_station_pressurized_command_corridor"
-      ],
-      "text": "{earth_defense_inspector_major_di.name}惨白着脸握紧纯金密匙，尖叫连连：电梯要断了！卫队，立刻斩断主控线路放下防爆门，绝不能让整座站台沉没！"
-    },
-    {
-      "id": "hook_smith_greases_winch_slot",
-      "kind": "approach",
-      "slot": "senior_cable_master_smith",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{senior_cable_master_smith.name}将半块合成石墨固体滑块狠狠拍在绞盘暗槽里：往槽里抹！左下偏两度半的死角找到了，垫上我的石墨滑块，顺着力道压！"
-    },
-    {
-      "id": "hook_cadet_tests_ballast_bolts",
-      "kind": "request",
-      "slot": "captain_leng_xuan",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{captain_leng_xuan.name}抹去脸上的热汗与冰霜，急促喘息着看向助理技术员：去机库把备用加长特种钢管取来套上，我们需要更长的一米力臂！"
-    },
-    {
-      "id": "hook_shang_greases_cable_coating",
-      "kind": "request",
-      "slot": "cadet_mechanic_xiao_yuan",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{cadet_mechanic_xiao_yuan.name}双手抱着一根厚壁加长套管滚入机库格栅，眼眶通红：女上尉！钢管拿来了！还有一捆石棉加固安全带！"
-    },
-    {
-      "id": "hook_medic_audits_oxygen_tanks",
-      "kind": "request",
-      "slot": "veteran_mechanic_shang_tianfeng",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{veteran_mechanic_shang_tianfeng.name}接过套管狠狠套在撬杠柄端，按住女上尉的玉手咆哮：套管接上了！力臂延长了！女上尉，我们数三二一，一起把全身重量砸下去！"
-    },
-    {
-      "id": "hook_observe_orbital_inferno_hangar_slip",
-      "kind": "observe",
-      "slot": "captain_leng_xuan",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "{captain_leng_xuan.name}挺立在呼啸倒灌的三万米极寒风切变正中，紧身战术服下侧颜在电光映照下明艳决绝，眼神如出鞘冰刃般不可动摇。"
-    },
-    {
-      "id": "hook_observe_lever_locks_winch_clutch",
-      "kind": "observe",
-      "slot": "captain_leng_xuan",
-      "location_ids": [
-        "loc_orbital_winch_undercarriage_hangar"
-      ],
-      "text": "特制实心钛钽合金加长破拆撬杠深深咬死偏心释放槽，伴随着一声洪钟般的重型机械脱扣合模巨响，千吨级张力离合器彻底断开释放，失衡滑脱的悬臂骤然刹死平息脱险。"
-    },
-    {
-      "id": "hook_lengxuan_tether_clip",
-      "kind": "approach",
-      "slot": "captain_leng_xuan",
-      "location_ids": [],
-      "text": "{npc.name}拎着一根安全索走过来，不等人开口就把锁扣扣在对方腰带上，反拧一圈保险螺套：出舱之前，我的人一律我亲手扣。"
-    },
-    {
-      "id": "hook_shang_visor_knock",
-      "kind": "approach",
-      "slot": "veteran_mechanic_shang_tianfeng",
-      "location_ids": [],
-      "text": "{npc.name}低头把头盔面罩抵在人面罩上，骨传导的嗓音嗡嗡作响：风大，就这么说话。今晚轮到你跟我一组出舱？"
-    },
-    {
-      "id": "hook_smith_graphite_gift",
-      "kind": "approach",
-      "slot": "senior_cable_master_smith",
-      "location_ids": [],
-      "text": "{npc.name}从棉袍里摸出一小块石墨滑块，塞进人手套里：揣着，零下六十度什么都会冻住，这东西不会。"
-    },
-    {
-      "id": "hook_xiaoyuan_float_pen",
-      "kind": "approach",
-      "slot": "cadet_mechanic_xiao_yuan",
-      "location_ids": [],
-      "text": "{npc.name}追着一支飘起来的测电笔扑过来，一把抓住，红着脸笑：失重半秒就这样……你第一次出舱的时候怕不怕？"
-    },
-    {
-      "id": "hook_lengxuan_oximeter_clip",
-      "kind": "approach",
-      "slot": "captain_leng_xuan",
-      "location_ids": [],
-      "text": "{npc.name}拉过人的手，把血氧夹夹在对方指尖上，盯着读数看了一会儿：九十二，还行。出舱回来先到我这儿报到。"
-    },
-    {
-      "id": "hook_lengxuan_habitat_hatch",
-      "kind": "approach",
-      "slot": "captain_leng_xuan",
-      "location_ids": [
-        "loc_pressurized_habitat_pod"
-      ],
-      "text": "{npc.name}站在生活舱的舱门口，手搭着复压锁：外面在刮风暴。……进来，舷窗那边能看见地球。"
-    }
-  ],
-  "twists": [
-    {
-      "id": "tw_orbital_clutch_eccentric_pin_found",
-      "category": "信息",
-      "requires": [
-        "captain_leng_xuan"
-      ],
-      "text": "{captain_leng_xuan.name}在绞盘底座铭牌下摸出了当年天梯建造老工匠私设的手动机械强制脱扣偏心暗孔销栓。"
-    },
-    {
-      "id": "tw_sergeant_disarms_corrupt_inspector",
-      "category": "人事",
-      "requires": [
-        "veteran_mechanic_shang_tianfeng"
-      ],
-      "text": "{veteran_mechanic_shang_tianfeng.name}反手夺下特派监察官的配枪与自毁密匙卡，全面接管全站锚定防爆战时最高指挥权。"
-    },
-    {
-      "id": "tw_anti_shock_neural_spray_shared",
-      "category": "资源",
-      "requires": [
-        "captain_leng_xuan"
-      ],
-      "text": "{captain_leng_xuan.name}掰开随身战术服暗袋，将整整四罐高压纳米级神经镇痛抗休克气雾剂分发给现场力竭同伴对抗急性减压骨痛。"
-    },
-    {
-      "id": "tw_skylight_hatch_blown_pressure_drops",
-      "category": "制度",
-      "requires": [
-        "senior_cable_master_smith"
-      ],
-      "text": "{senior_cable_master_smith.name}用铜凿撬开机库外壁备用泄压自流阀门，依法平衡内外舱压缓解了悬臂导轨受压形变。"
-    },
-    {
-      "id": "tw_emergency_bypass_clicks_winch_safe",
-      "category": "时限",
-      "requires": [
-        "captain_leng_xuan"
-      ],
-      "text": "{captain_leng_xuan.name}利用撬杠柄部挑开了备用旁通水冷管路，强行为绞盘压制住最后三十秒超温抱死窗口。"
-    },
-    {
-      "id": "tw_sergeant_shields_captain_falling_iron",
-      "category": "关系",
-      "requires": [
-        "captain_leng_xuan",
-        "veteran_mechanic_shang_tianfeng"
-      ],
-      "text": "{veteran_mechanic_shang_tianfeng.name}在悬臂护板大面积崩脱瞬间挺身扑在{captain_leng_xuan.name}上方，用外骨骼背心与胸膛死死挡下飞溅金属碎片。"
-    },
-    {
-      "id": "tw_winch_clutch_locks_true_hangar_saved",
-      "category": "意外",
-      "requires": [
-        "captain_leng_xuan"
-      ],
-      "text": "旋转脱扣的重型张紧离合器在钛钽长撬杠与石墨滑块的强力合模下轰然卡平自锁，滑脱悬臂稳稳卡死在减速导轨尽头，全站安然脱险平息生还。"
-    }
+    "法宝",
+    "马车",
+    "丫鬟"
   ],
   "content_tags": [
     "intimate",
-    "violence",
-    "death",
     "workplace_power",
+    "coercion_theme",
+    "humiliation",
+    "bodily_harm",
     "crime",
     "workplace",
     "disaster"
   ],
   "status": "released",
-  "notes": "按原稿加入，保留三万米轨道电梯锚定机库、碳纳米主缆偏载与女上尉用钛钽长撬杠撬开离合的骨架。和核井世界原稿同源，这里往失重、高空、舱外作业的方向拉开：悬臂每滑一段机库就短暂失重，助理技术员的险情改为飘浮工具卷进齿槽，医官改为舱外补氧，几处与核井同形的台词、关系与压力抉择全部重写。写死的人名改为身份称呼，背景人物里与模板重名的老赵、白医生、史密斯、小刘改名；婴儿肥大多换成了其余外貌描写；人物组合按权力结构放开玩家身份，压力与日常不再锁死钩子，并加了几个不限地点的靠近型钩子；女上尉亲密前提写明复压脱险、双方清醒自愿；新增一个增压生活舱里替女上尉卸外骨骼的亲密日常。"
+  "notes": ""
 }

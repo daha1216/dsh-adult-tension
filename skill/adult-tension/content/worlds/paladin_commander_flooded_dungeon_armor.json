@@ -1,109 +1,162 @@
 {
  "background_cast": [
   {
-   "adult_context": "跟着女统领驻防了几年的骑兵。",
+   "adult_context": "驻守河港三年的成年在编骑兵。",
    "age_range": [
     21,
     28
    ],
    "function": "helper",
-   "gender": "male",
+   "gender": "any",
    "id": "bg_young_trooper",
-   "line": "看守长！落闸手柄上的锈敲掉了！里面的人一扳就能落！",
+   "line": "{npc.name}抹把雨水大喊：“落闸手柄敲开了！卡住齿轮就喊一声！”",
    "location_ids": [
-    "loc_winch_emergency_drop_pin",
+    "loc_winch_emergency_pin",
     "loc_river_port_wharf"
    ],
-   "name": "骑兵汤米",
-   "role": "驻防营的年轻骑兵"
+   "name": null,
+   "role": "水门防卫年轻骑兵"
   },
   {
-   "adult_context": "在港口钟楼敲了几年钟的敲钟人。",
+   "adult_context": "港务所雇佣的成年钟楼值守员。",
    "age_range": [
-    22,
-    30
+    24,
+    35
    ],
    "function": "messenger",
-   "gender": "female",
+   "gender": "any",
    "id": "bg_bell_keeper",
-   "line": "警钟我一直敲着！听得见就往钟声那边喊！",
+   "line": "{npc.name}拽紧钟绳喊：“驳船断缆撞来了！水门里往高台靠！”",
    "location_ids": [
-    "loc_winch_emergency_drop_pin",
+    "loc_winch_emergency_pin",
     "loc_river_port_wharf"
    ],
-   "name": "敲钟人贝丝",
-   "role": "港口钟楼的敲钟人"
+   "name": null,
+   "role": "港口钟楼值守人"
   },
   {
-   "adult_context": "跟着总督来的差役。",
+   "adult_context": "总督府直辖护卫班成年差役。",
    "age_range": [
-    30,
-    45
+    28,
+    42
    ],
    "function": "obstacle",
-   "gender": "male",
+   "gender": "any",
    "id": "bg_governor_runner",
-   "line": "总督有令，水门没稳之前，谁也不许下机房！",
+   "line": "{npc.name}横刀拦在梯口喝道：“特使有令，大水没压住前不许开闸！”",
    "location_ids": [
-    "loc_winch_emergency_drop_pin"
+    "loc_winch_emergency_pin"
    ],
-   "name": "差役罗伯",
-   "role": "总督的差役"
+   "name": null,
+   "role": "总督差役头领"
   },
   {
-   "adult_context": "在码头上卖了几十年鱼的老妇人。",
+   "adult_context": "码头扛货十年的成年搬运领班。",
    "age_range": [
-    45,
-    62
-   ],
-   "function": "witness",
-   "gender": "female",
-   "id": "bg_fish_wife",
-   "line": "统领每回来买鱼都买两条，一条自己吃，一条说是给那个工程师的。",
-   "location_ids": [
-    "loc_river_port_wharf"
-   ],
-   "name": "卖鱼的老玛丽",
-   "role": "码头上卖鱼的"
-  },
-  {
-   "adult_context": "在码头上扛了十年货的搬运工。",
-   "age_range": [
-    25,
+    26,
     40
    ],
    "function": "witness",
-   "gender": "male",
+   "gender": "any",
    "id": "bg_dock_porter",
-   "line": "那个工程师在机房画图的时候，眼睛老往统领那边瞟。",
+   "line": "{npc.name}扛麻绳喘气嘀咕：“匠师和统领又在机房里吵了一宿。”",
    "location_ids": [
     "loc_river_port_wharf"
    ],
-   "name": "搬运工大个子",
-   "role": "码头上的搬运工"
+   "name": null,
+   "role": "码头搬运工领班"
   },
   {
-   "adult_context": "在税关记了几十年账的老书吏。",
+   "adult_context": "税关记账三十年的成年资深书吏。",
    "age_range": [
-    50,
-    65
+    48,
+    62
    ],
-   "function": "witness",
-   "gender": "male",
+   "function": "rumor_source",
+   "gender": "any",
    "id": "bg_toll_veteran",
-   "line": "统领这个汛期来税关的次数，比往年加起来都多，每回都顺路去机房。",
+   "line": "{npc.name}拨算盘喃喃：“怪了，去年批钢缆账目怎么少了几页？”",
    "location_ids": [
     "loc_river_port_wharf"
    ],
-   "name": "老书吏",
-   "role": "税关的老书吏"
+   "name": null,
+   "role": "税关值夜老账房"
+  },
+  {
+   "adult_context": "在河港码头酒馆帮工五年的成年女侍。",
+   "age_range": [
+    23,
+    32
+   ],
+   "function": "helper",
+   "gender": "any",
+   "id": "bg_tavern_ale_maid",
+   "line": "{npc.name}擦着铜酒杯喊：“热麦酒温好在灶上，水门一落闸就来喝！”",
+   "location_ids": [
+    "loc_river_port_wharf"
+   ],
+   "name": null,
+   "role": "码头酒馆热酒女侍"
   }
  ],
  "cast_combos": [
   {
-   "chemistry": "女统领与工程师在浑水里胸背相贴，四只手叠在剑柄上，一个喊号子一个跟着往下压。",
-   "id": "cc_commander_engineer_switch",
-   "identity_ids": [],
+   "chemistry": "浑水里你护住{paladin_commander.name}颤抖腰胯并四手紧叠剑柄楔齿；油布袋里恰揣着{paladin_commander.ta}去年签收生锈旧缆的批条副本。",
+   "id": "combo_1_switchable_paladin_gear",
+   "identity_ids": [
+    "pc_royal_water_governor",
+    "pc_frontier_marshall_inspector",
+    "pc_watergate_engineer",
+    "pc_toll_house_auditor"
+   ],
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 2
+     },
+     "b": "paladin_commander",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 2
+     },
+     "reason": "码头针锋相对吵过整季，早察觉彼此都藏着说不出口的底细。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "paladin_commander"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "割带落闸后回营房，在泥炭壁炉前迫冷傲女统领卸甲换取销账。",
+    "limit_gap": "浑水漫过锁骨剩两寸，回营房闩门后便是一对一清算。",
+    "meeting_reason": "主缆崩断，在绞盘齿轮死角与{paladin_commander.name}胸背相贴楔齿脱险。",
+    "resource_gap": "你握旧缆批条副本，{paladin_commander.name}握十字剑格佩剑与统领威权。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_gear_crossguard_body_press",
+    "te_cable_fraud_hearth_strip"
+   ]
+  },
+  {
+   "chemistry": "{watergate_engineer.name}借齿距企图独掌脱困，你却抽走了{watergate_engineer.ta}油布袋里虚报工期的私账底稿与背面画满素描的废图纸。",
+   "id": "combo_2_switchable_engineer_blueprint",
+   "identity_ids": [
+    "pc_royal_water_governor",
+    "pc_frontier_marshall_inspector",
+    "pc_toll_house_auditor",
+    "pc_boat_house_owner"
+   ],
    "player_positions": [
     "high",
     "equal",
@@ -114,140 +167,43 @@
     {
      "a": "player",
      "a_to_b": {
-      "tension": 3,
-      "trust": 3
-     },
-     "b": "cavalry_commander_gwendolyn",
-     "b_to_a": {
-      "tension": 3,
-      "trust": 3
-     },
-     "reason": "一起被困在机房里，彼此的命都攥在对方手里。",
-     "stage": "testing"
-    },
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
+      "tension": 4,
+      "trust": 2
      },
      "b": "watergate_engineer",
      "b_to_a": {
-      "tension": 2,
+      "tension": 5,
       "trust": 3
      },
-     "reason": "为水门的工期，吵了一整个汛期。",
-     "stage": "familiar"
-    },
-    {
-     "a": "cavalry_commander_gwendolyn",
-     "a_to_b": {
-      "tension": 3,
-      "trust": 3
-     },
-     "b": "watergate_engineer",
-     "b_to_a": {
-      "tension": 3,
-      "trust": 3
-     },
-     "reason": "一个嘴硬一个嘴笨，吵了一个汛期的架，谁都没说破。",
-     "stage": "testing"
+     "reason": "巡检总故意蹭过{watergate_engineer.ta}画图桌沿，对视时耳根早红。",
+     "stage": "flirting"
     }
    ],
    "slots": [
-    "cavalry_commander_gwendolyn",
     "watergate_engineer"
    ],
    "stakes": {
-    "irreplaceable_goal": "卡死齿轮，割甲脱困，扳下应急落闸。",
-    "limit_gap": "女统领的战甲被链轮咬住动弹不得，工程师的工具在钢缆崩断时被冲走了。",
-    "meeting_reason": "钢缆崩断前，女统领在机房里巡查，工程师在调绞盘。",
-    "resource_gap": "女统领有那柄佩剑和一身驻防练出来的狠劲，工程师有那本绞盘图纸和一把割缆绳的短刀。"
+    "irreplaceable_goal": "压得嘴笨匠师在壁炉前低头认账，交全部底图并听命补漏。",
+    "limit_gap": "机房油灯昏暗暗流汹涌，石柱后谁都不敢让秘密传出码头。",
+    "meeting_reason": "抢险挤进齿轮死角，撞破{watergate_engineer.name}夹带的图纸与私账。",
+    "resource_gap": "{watergate_engineer.name}握割缆短刀与齿距诀窍，你握工期底稿与隐私图纸。"
    },
    "tags": [
-    "workplace",
-    "disaster"
+    "intimate",
+    "workplace_power"
    ],
    "tension_engine_ids": [
-    "te_flood_to_chest",
-    "te_crossguard_chest_press"
+    "te_gear_crossguard_body_press",
+    "te_cable_fraud_hearth_strip"
    ]
   },
   {
-   "chemistry": "女统领与工程师在落闸手柄前四只手叠在一起，一边争该先落闸还是先救驳船，一边一下一下把链环别开。",
-   "id": "cc_commander_engineer_equal",
-   "identity_ids": [],
-   "player_positions": [
-    "equal"
+   "chemistry": "身为手握铜印或稽查令的上官，你闩死营房木门盯着胸甲解下半边的{paladin_commander.name}，把旧钢缆批条摊在壁炉旁。",
+   "id": "combo_3_player_high_tame_paladin",
+   "identity_ids": [
+    "pc_royal_water_governor",
+    "pc_frontier_marshall_inspector"
    ],
-   "power_structure": "equal",
-   "relations": [
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
-     },
-     "b": "cavalry_commander_gwendolyn",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 3
-     },
-     "reason": "为关不关水门争了一下午，谁都不肯先认输。",
-     "stage": "familiar"
-    },
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
-     },
-     "b": "watergate_engineer",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 3
-     },
-     "reason": "一个汛期里在码头酒馆对面坐过好多回。",
-     "stage": "familiar"
-    },
-    {
-     "a": "cavalry_commander_gwendolyn",
-     "a_to_b": {
-      "tension": 3,
-      "trust": 3
-     },
-     "b": "watergate_engineer",
-     "b_to_a": {
-      "tension": 3,
-      "trust": 3
-     },
-     "reason": "一个火爆一个木讷，谁都没说破。",
-     "stage": "testing"
-    }
-   ],
-   "slots": [
-    "cavalry_commander_gwendolyn",
-    "watergate_engineer"
-   ],
-   "stakes": {
-    "irreplaceable_goal": "先落闸截住倒灌的水，再救外面的驳船。",
-    "limit_gap": "女统领不懂齿轮，工程师不懂边境的大河有多凶。",
-    "meeting_reason": "两人为汛期该不该关水门，在码头上争了一下午，争到暴风雨来都没分出胜负。",
-    "resource_gap": "女统领知道河港每一处暗流，工程师知道这座绞盘每一颗齿轮。"
-   },
-   "tags": [
-    "workplace",
-    "crime"
-   ],
-   "tension_engine_ids": [
-    "te_chain_wheel_reverses",
-    "te_armor_hem_dragged"
-   ]
-  },
-  {
-   "chemistry": "河道总督在水门上等着消息，女统领和工程师一个压剑柄一个割甲带，谁也不肯在总督面前先喊疼。",
-   "id": "cc_commander_engineer_governor",
-   "identity_ids": [],
    "player_positions": [
     "high"
    ],
@@ -256,69 +212,92 @@
     {
      "a": "player",
      "a_to_b": {
-      "tension": 3,
-      "trust": 3
+      "tension": 5,
+      "trust": 1
      },
-     "b": "cavalry_commander_gwendolyn",
+     "b": "paladin_commander",
      "b_to_a": {
-      "tension": 3,
-      "trust": 3
+      "tension": 5,
+      "trust": 1
      },
-     "reason": "头一回在总督面前把命交出去。",
-     "stage": "testing"
-    },
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
-     },
-     "b": "watergate_engineer",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 3
-     },
-     "reason": "奉命来巡视河道，早听说这个女统领和那个工程师。",
-     "stage": "familiar"
-    },
-    {
-     "a": "cavalry_commander_gwendolyn",
-     "a_to_b": {
-      "tension": 3,
-      "trust": 3
-     },
-     "b": "watergate_engineer",
-     "b_to_a": {
-      "tension": 3,
-      "trust": 3
-     },
-     "reason": "在总督面前不敢多看一眼，可每一声号子都只喊给一个人听。",
-     "stage": "testing"
+     "reason": "校阅拿条例压{paladin_commander.ta}，早留心铠甲下紧绷的呼吸。",
+     "stage": "flirting"
     }
    ],
    "slots": [
-    "cavalry_commander_gwendolyn",
-    "watergate_engineer"
+    "paladin_commander"
    ],
    "stakes": {
-    "irreplaceable_goal": "让总督亲眼看见，驻防的人和修门的人能一起把命捡回来。",
-    "limit_gap": "女统领不肯在总督面前失了统领的威严，工程师不习惯被大人物盯着干活。",
-    "meeting_reason": "总督要亲眼看看水门的绞盘，女统领陪着下机房，工程师在旁边讲改造。",
-    "resource_gap": "女统领手里有佩剑和驻防的铁骑，工程师手里有图纸和短刀。"
+    "irreplaceable_goal": "逼傲娇女统领在炉火光里一片片卸尽湿甲，咬牙低头认账。",
+    "limit_gap": "你须{paladin_commander.ta}稳住汛情，{paladin_commander.ta}绝不能让签收案毁家族名誉。",
+    "meeting_reason": "脱险进营房清点损耗，当面掀开抽屉里的钢缆签收批条。",
+    "resource_gap": "你握调令与钢缆批条原件，{paladin_commander.name}唯有死扛到底的军威。"
    },
    "tags": [
-    "workplace",
-    "disaster"
+    "intimate",
+    "workplace_power",
+    "humiliation"
    ],
    "tension_engine_ids": [
-    "te_armor_hem_dragged",
-    "te_chain_wheel_reverses"
+    "te_pride_paladin_meltdown",
+    "te_cable_fraud_hearth_strip"
    ]
   },
   {
-   "chemistry": "女统领一边卡剑格一边冲新来的书吏吼着号子，工程师割着甲带，把三个人的力气拧成一股。",
-   "id": "cc_commander_engineer_clerk",
-   "identity_ids": [],
+   "chemistry": "断缆露锈迹，你把私吃三成回扣买退火旧缆的契书甩在{garrison_quartermaster.name}常服前襟，堵死库门。",
+   "id": "combo_4_player_high_corner_quartermaster",
+   "identity_ids": [
+    "pc_royal_water_governor",
+    "pc_frontier_marshall_inspector",
+    "pc_toll_house_auditor"
+   ],
+   "player_positions": [
+    "high",
+    "equal"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 2
+     },
+     "b": "garrison_quartermaster",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 1
+     },
+     "reason": "早察觉铁料成色发暗，专挑今晚暴风雨断缆收网。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "garrison_quartermaster"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "迫{garrison_quartermaster.ta}敞衣襟交出藏银、库匙与幕后名单。",
+    "limit_gap": "警钟震耳，精明军需官若不服软交底天亮就掉脑袋。",
+    "meeting_reason": "查回泊位旁库房，堵住想销毁契书的{garrison_quartermaster.name}。",
+    "resource_gap": "你握军法审讯权与回扣契，{garrison_quartermaster.name}握备用甲具与私银。"
+   },
+   "tags": [
+    "intimate",
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_cable_fraud_hearth_strip",
+    "te_gear_crossguard_body_press"
+   ]
+  },
+  {
+   "chemistry": "{royal_inspector_envoy.name}在高台仗副印威吓落闸；直到你亮出{royal_inspector_envoy.ta}漆木匣里收敌商重贿拖延泄洪令的火漆密信。",
+   "id": "combo_5_npc_high_envoy_bribe",
+   "identity_ids": [
+    "pc_boat_house_owner",
+    "pc_watergate_engineer",
+    "pc_toll_house_auditor"
+   ],
    "player_positions": [
     "low",
     "equal"
@@ -328,975 +307,1139 @@
     {
      "a": "player",
      "a_to_b": {
-      "tension": 3,
-      "trust": 3
+      "tension": 5,
+      "trust": 0
      },
-     "b": "cavalry_commander_gwendolyn",
+     "b": "royal_inspector_envoy",
      "b_to_a": {
-      "tension": 3,
-      "trust": 3
+      "tension": 5,
+      "trust": 0
      },
-     "reason": "女统领嫌书吏胆小，今晚却要把命交到这双手上。",
-     "stage": "testing"
+     "reason": "受尽这位监工刁难勒索，今夜终于逮住通敌把柄。",
+     "stage": "acquainted"
+    }
+   ],
+   "slots": [
+    "royal_inspector_envoy"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "夺副印与漆木匣，把王都大员按在羊毛毯上跪求赔罪。",
+    "limit_gap": "浑水逼近高台，大员既贪生怕死又恐密信曝光。",
+    "meeting_reason": "拦在石梯口与盛气凌人的{royal_inspector_envoy.name}对峙。",
+    "resource_gap": "{royal_inspector_envoy.name}掌差役铜印，你握足令满门抄斩的通敌密信。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power",
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_envoy_gate_betrayal",
+    "te_cable_fraud_hearth_strip"
+   ]
+  },
+  {
+   "chemistry": "{watergate_lockkeeper.name}拽粗麻绳摆老看守架子；你从湿石缝抽出了{watergate_lockkeeper.ta}夜放走私船收银的刻痕石板。",
+   "id": "combo_6_npc_high_lockkeeper_stone",
+   "identity_ids": [
+    "pc_boat_house_owner",
+    "pc_watergate_engineer"
+   ],
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 2
+     },
+     "b": "watergate_lockkeeper",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 2
+     },
+     "reason": "夜里打照面多了，早摸透老看守油布雨衣下的偏门营生。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "watergate_lockkeeper"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "迫老看守交全串铁匙救险，并交出偏门走私线。",
+    "limit_gap": "驳船撞门，老看守亦死怕晚节不保吃砍头官司。",
+    "meeting_reason": "下水门寻泄水口时搜出{watergate_lockkeeper.name}藏匿的记账石板。",
+    "resource_gap": "{watergate_lockkeeper.name}握全套铁匙与密图，你握走私受贿石板原物。"
+   },
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "tension_engine_ids": [
+    "te_gear_crossguard_body_press",
+    "te_cable_fraud_hearth_strip"
+   ]
+  },
+  {
+   "chemistry": "石柱后，刚割带脱险的{paladin_commander.name}湿袍半敞被{watergate_engineer.name}扶腰喘气，胸前滑出旧缆批条与工期底稿；提灯撞进的你一网兜收。",
+   "id": "combo_7_npc_high_paladin_engineer_duo",
+   "identity_ids": [
+    "pc_toll_house_auditor",
+    "pc_boat_house_owner"
+   ],
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 2
+     },
+     "b": "paladin_commander",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 2
+     },
+     "reason": "偏偏抓住了{paladin_commander.name}最难堪的钢缆签收死穴。",
+     "stage": "familiar"
     },
     {
      "a": "player",
      "a_to_b": {
-      "tension": 2,
+      "tension": 4,
       "trust": 3
      },
      "b": "watergate_engineer",
      "b_to_a": {
-      "tension": 2,
-      "trust": 3
+      "tension": 4,
+      "trust": 2
      },
-     "reason": "第一次下机房就遇上了钢缆崩断。",
+     "reason": "早就翻看过匠师虚报修门银钱底账，只等今晚收网。",
      "stage": "familiar"
     },
     {
-     "a": "cavalry_commander_gwendolyn",
+     "a": "paladin_commander",
      "a_to_b": {
-      "tension": 3,
-      "trust": 3
+      "tension": 5,
+      "trust": 4
      },
      "b": "watergate_engineer",
      "b_to_a": {
-      "tension": 3,
-      "trust": 3
+      "tension": 5,
+      "trust": 5
      },
-     "reason": "女统领和工程师一个眼神就知道对方要干什么，书吏都看在眼里。",
-     "stage": "testing"
+     "reason": "浑水胸背相抵同压剑柄，解甲后早已越过上下防线。",
+     "stage": "intimate"
     }
    ],
    "slots": [
-    "cavalry_commander_gwendolyn",
+    "paladin_commander",
     "watergate_engineer"
    ],
    "stakes": {
-    "irreplaceable_goal": "带着书吏一起平安出去，明天照常开税关。",
-    "limit_gap": "新来的书吏什么都不懂，女统领得一边自救一边教。",
-    "meeting_reason": "书吏第一次跟着下机房记账，工程师正在讲绞盘的构造。",
-    "resource_gap": "女统领有佩剑和驻防的经验，工程师有图纸和短刀。"
+    "irreplaceable_goal": "将吵架不断的骄傲女统领与木讷匠师双双收进掌心拿捏。",
+    "limit_gap": "暴风雨封路，营房壁炉前谁都不敢让丑闻流出。",
+    "meeting_reason": "提灯步入机房营房，撞见刚卸半截沉重锁甲贴靠喘息的两人。",
+    "resource_gap": "二人各怀批条与虚报私账，你捏公开揭发或关门私了之权。"
    },
    "tags": [
-    "workplace",
+    "intimate",
+    "workplace_power"
+   ],
+   "tension_engine_ids": [
+    "te_gear_crossguard_body_press",
+    "te_pride_paladin_meltdown"
+   ]
+  },
+  {
+   "chemistry": "爬回营房，{paladin_commander.name}锁甲勒得微颤、战袍滑下半肩；你替{paladin_commander.ta}解开冻硬革带的同时亮出废图纸与批条。",
+   "id": "combo_8_equal_paladin_hearth",
+   "identity_ids": [
+    "pc_watergate_engineer",
+    "pc_toll_house_auditor"
+   ],
+   "player_positions": [
+    "equal"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 4
+     },
+     "b": "paladin_commander",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 3
+     },
+     "reason": "浑水贴胸压剑共扛生死，关门卸甲早分不清谁先占便宜。",
+     "stage": "intimate"
+    }
+   ],
+   "slots": [
+    "paladin_commander"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "借壁炉暖意剥开女统领最后硬壳，讨回吵架救命利息。",
+    "limit_gap": "冰水刺骨且木门落闩，女统领既发抖又生怕批条走漏。",
+    "meeting_reason": "齿轮边生死相护后同退营房烘烤湿衣。",
+    "resource_gap": "你握割甲短刀、废图与批条，{paladin_commander.name}握兵权与营房木门匙。"
+   },
+   "tags": [
     "intimate"
    ],
    "tension_engine_ids": [
-    "te_flood_to_chest",
-    "te_chain_wheel_reverses"
+    "te_pride_paladin_meltdown",
+    "te_gear_crossguard_body_press"
+   ]
+  },
+  {
+   "chemistry": "{toll_house_auditor.name}正抖手把刮改税簿塞向炭盆，撞见你亮出副本木印，红着眼揪住你袖角求保一命。",
+   "id": "combo_9_equal_auditor_forged_book",
+   "identity_ids": [
+    "pc_watergate_engineer",
+    "pc_boat_house_owner"
+   ],
+   "player_positions": [
+    "equal",
+    "low"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 3
+     },
+     "b": "toll_house_auditor",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 4
+     },
+     "reason": "核对船货时总替{toll_house_auditor.ta}留余地，对方眼里早满是依附。",
+     "stage": "flirting"
+    }
+   ],
+   "slots": [
+    "toll_house_auditor"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "收木印与密账，让书记官进门乖乖听候差遣。",
+    "limit_gap": "差役步声迫近，不立刻平账这位成年书记官活不过明早。",
+    "meeting_reason": "在货棚与机房石梯转角截住毁证的{toll_house_auditor.name}。",
+    "resource_gap": "{toll_house_auditor.name}握别家密账与木印，你握其刮改砍头铁证。"
+   },
+   "tags": [
+    "intimate"
+   ],
+   "tension_engine_ids": [
+    "te_cable_fraud_hearth_strip",
+    "te_pride_paladin_meltdown"
    ]
   }
  ],
  "channels": [
   {
    "fidelity": "exact",
-   "id": "ch_winch_whisper",
-   "reach": "all",
-   "text": "浑水里贴着耳朵的喊声和喘息"
+   "id": "ch_flood_horn_bell",
+   "reach": "穿破雨幕笼罩码头与高台，催逼落闸倒数。",
+   "text": "钟楼铜钟号角"
+  },
+  {
+   "fidelity": "exact",
+   "id": "ch_gear_gap_whisper",
+   "reach": "限死角内胸背相贴两人听清剧喘与换价。",
+   "text": "齿缝浪涌耳语"
   },
   {
    "fidelity": "distorted",
-   "id": "ch_harbor_bell",
-   "reach": "local",
-   "text": "河港钟楼的警钟，一阵急一阵缓地报着外面的水情"
+   "id": "ch_tavern_dock_gossip",
+   "reach": "把营房亮着壁炉的深夜传走样，令女统领难自处。",
+   "text": "酒馆麦酒桌流言"
   }
  ],
  "character_templates": [
   {
-   "adult_context": "出身边境骑士家族，二十出头就带着一队铁骑驻防河港，管着水门、吊桥和税关，去留进退由本人拿主意。",
+   "adult_context": "出身骑士世家，年满二十五周岁正式佩授铁骑统领官印驻防河港，独掌军政裁决。",
    "age_range": [
     25,
-    30
+    29
    ],
    "appearance_options": [
-    "一头柔顺华贵的璨金长发微湿挽在脑后，身披修身银白精钢胸甲与暗金战袍，浑水浸透衣袍勾勒出青年女将挺拔健美、凹凸有致的身段，白皙英气的面庞轮廓分明，蔚蓝如海的清眸中透着从容无畏的坚毅神采，庄重典雅中流露出迷人的反差纯美。",
-    "金发微乱贴在湿透的面颊两侧，水珠顺着下颌滑落，双手紧握淬火指挥官佩剑，战甲虽被卷入齿轮仍临危不乱，毫无保留地将后背依靠在同伴胸前借力，英武中流露出将性命全然相托的柔韧温情。"
+    "璨金长发湿透挽在脑后，银白精钢胸甲与暗金战袍贴出健美身段，水珠沿冷艳下颌滑落。",
+    "蔚蓝清眸透傲岸威仪，紧握三公分厚淬火不锈钢十字剑格佩剑。"
    ],
    "decision": {
     "avoids": [
-     "偷工减料的人",
-     "临阵脱逃的人"
+     "丢下机房擅自跑去落闸的逃兵"
     ],
-    "contrast": "在码头上说一不二，骂起偷税的商船来能让整条栈桥安静下来；可被卡在齿轮边时，却是女统领第一个把佩剑递过去，说一句：我信你。",
-    "core_value": "铁骑守的是城，更是城里的人。",
+    "contrast": "马背说一不二的女将，浑水滑袍贴肩喊乱号子，营房卸甲时指尖碰上腰肋便发僵。",
+    "core_value": "死不退半步；可若旧缆批条与枕下废图落旁人手，骄傲统领宁愿关门私了。",
     "goal_options": [
-     "把佩剑十字剑格卡进齿轮死点，撬断死卡链环",
-     "割断甲带脱困，扳下应急落闸"
+     "将十字剑格死楔齿隙、割断甲带落闸截水",
+     "抢回旧钢缆批条并瞒住枕下废图秘密"
     ],
     "never": [
-     "丢下同伴自己逃"
+     "部下尚未撤稳前独自放弃水门"
     ],
     "prefers": [
-     "干活干脆、说到做到的人",
-     "肯下水的人"
+     "雨夜敢跳进齐胸浊水护住{npc.ta}、关门又寸步不让讨账的狠人"
     ],
     "pressure_responses": {
-     "breaking": "被拖得肋骨生疼也不松手，咬着牙喊着号子。",
-     "high": "让对方割断甲带，自己把全身重量压在剑柄上。",
-     "low": "先抱住承重石柱稳住身子，看清链轮往哪边转。",
-     "mid": "把佩剑拔出来，指给对方看齿轮的死点。"
+     "breaking": "泥炭炉前卸掉湿胸甲，亚麻衫贴胸微颤哑斥：‘木门闩上了……批条拿来，不准再提今晚水里的事！’",
+     "high": "退火钢缆批条或废图纸被掀瞬间咬紧银牙，耳根红透仍硬撑下颌。",
+     "low": "抱紧石柱冷眼扫过浪头，沉声喝令莫慌。",
+     "mid": "拔剑把十字剑格卡进齿隙，喝令同伴贴背压紧。"
     },
-    "relationship_stance": "工程师来河港这一个汛期，两人为工期吵了不下二十回；可哪天对方没来机房，女统领巡完水门总要多绕一圈。",
-    "withdrawal": "脱困后头一件事是冲上水门清点人数，确认机房外面的人都没事，才肯靠着石柱坐下，把湿透的金发拧干。"
+    "relationship_stance": "对外冷酷无情，偏对齐胸浑水里贴胸护她又捏着批条死穴的人又恼又躲不开。",
+    "withdrawal": "拧干滴水金发倚在壁炉石台，擦拭剑格齿痕掩饰心跳。"
    },
    "gender": "female",
-   "gender_reason": "边境铁骑女统领，按原稿写作女性。",
-   "id": "cavalry_commander_gwendolyn",
+   "gender_reason": "标题“河港水门的铁骑”核心女统领，边境铁骑女统领，固定女性。",
+   "id": "paladin_commander",
    "identity": {
-    "authority": "河港的水门开不开、吊桥放不放，女统领一句话就能定。",
-    "exposure": "战甲被链轮咬住，浑水漫到胸口，只能把后背整个交给对方借力。",
-    "hidden": "营房的抽屉里收着一张水门改造的图纸，是工程师随手画废的那一张，女统领捡回来压在了枕头底下。",
+    "authority": "水门开闭、吊桥驻防调度与税关护航裁决权",
+    "exposure": "去年签收退火生锈旧钢缆才酿成断缆的军需签收批条原件。",
+    "hidden": "抽屉锁着生锈钢缆批条，枕下悄悄藏着工程师画废的图纸；码头冷面训斥四方，真在齿隙或壁炉前贴胸拿批条逼卸铁甲时，耳尖烧透嘴里仍硬骂半句不服软。",
     "limits": [
-     "锁子甲的下摆被卷进链轮，动弹不得",
-     "浑水里重甲拖着人往下沉"
+     "锁子甲下摆被双联铸钢齿轮死咬，卡在齿缝难动",
+     "去年换缆签收了一批退火生锈旧钢缆，批条曝光即军法革职"
     ],
     "obligations": [
-     "守住水门，不让大河冲垮河港",
-     "把困在机房里的人都带出去"
+     "楔死齿轮脱困落闸，保住河港城与全队铁骑"
     ],
     "resources": [
-     "一柄特种淬火不锈钢指挥官佩剑，十字剑格厚三公分带直角挡块",
-     "一身精钢锁子甲",
-     "驻防铁骑上下的信任"
+     "三公分厚十字剑格指挥官佩剑",
+     "精钢锁子甲与水门营房厚木门铜钥"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "浑水里把自己的后背护住、一刀割断甲带的那双手",
-     "每天在机房里埋头画图的那道背影"
+     "齿隙边狭小到胸背相贴、四手叠剑柄的生死挤压感",
+     "脱去冷铁锁甲后在炉火暖光里被捏住批条无处可逃的羞赧"
     ],
     "boundaries": [
-     "人前守着统领的威严，心意只给认定的人",
-     "每一步都要先问过，对方迟疑就停"
+     "天亮巡城前精钢胸甲与披风须穿整齐"
     ],
     "desire_range": [
-     2,
-     4
+     3,
+     5
     ],
-    "desired_position": "壁炉边靠在对方肩上的近身位",
+    "desired_position": "水门冷面女将、壁炉前嘴硬卸甲的受制统领",
     "dislikes": [
-     "被人当众起哄",
-     "趁人之危的手"
+     "在众兵痞眼皮底下故意动手动脚"
     ],
-    "expression": "把那张画废的图纸从枕头底下抽出来扔到对方面前，脸红到耳根：这个你扔了，我捡的。……今晚别走了，行吗？",
+    "expression": "把废图纸砸人胸口红脸冷声：‘炉火生好了……门闩死，今晚敢走试试！’",
     "likes": [
-     "被人一片片卸下湿透的锁子甲",
-     "壁炉边被人用干布擦干金发",
-     "夜里听着河水声，被人从身后抱着"
+     "水声震耳时从身后稳稳揽住腰胯挡浪",
+     "回营房闩门被人卸甲并用热布巾擦过发红肩颈"
     ],
     "preconditions": [
-     "落闸截水、两人都脱困之后",
-     "两人都清醒，心意出于自己，不是浑水里的依赖"
+     "齿轮边脱困或营房木门落闩隔绝外界时",
+     "钢缆批条或救命恩情摊在羊毛毯算账时"
     ],
     "self_control_range": [
      3,
      5
     ]
    },
-   "public_role": "边境河港驻防铁骑女统领",
+   "public_role": "边境铁骑女统领",
    "schedule": [
     {
-     "from": 480,
-     "location_id": "loc_river_port_wharf",
-     "to": 1080
+     "from": 0,
+     "location_id": "loc_commander_quarters",
+     "to": 420
     },
     {
-     "from": 1080,
-     "location_id": "loc_commander_watergate_quarters",
-     "to": 1380
+     "from": 421,
+     "location_id": "loc_river_port_wharf",
+     "to": 1350
+    },
+    {
+     "from": 1351,
+     "location_id": "loc_winch_reverse_gear_gap",
+     "to": 1439
     }
    ],
    "situation": {
     "exits": [
      {
-      "cost": "剑格可能崩口，肋骨会被链轮拖伤",
-      "option": "把剑格卡进齿轮死点，和工程师合力撬断链环"
+      "cost": "剑格崩出缺口且傲气女将彻底受制于人",
+      "option": "合压剑格割带脱险，回营房卸甲交账私了批条"
      },
      {
-      "cost": "链轮不停，割了甲带人也会被拖进去",
-      "option": "让人先割甲带，自己挣出来"
+      "cost": "肋骨拖伤渗血且旧钢缆案随时曝光",
+      "option": "硬撑待看守砸开落闸销再脱身绝不服软"
      }
     ],
-    "pressure": "浑水越涨越高，链轮越拖越紧，必须在灭顶之前卡死齿轮、割甲脱困。",
-    "trigger": "钢缆崩断时，女统领正在机房里巡查绞盘，链轮一反转，锁子甲的下摆就被卷了进去。"
+    "pressure": "浑水漫胸，须楔断链环脱困，还得稳住捏批条的狠人。",
+    "trigger": "链轮反转卷入甲裙，同时去年违规签收旧缆的批条正被人攥住。"
    },
    "tags": [
-    "workplace",
-    "disaster",
-    "intimate"
+    "intimate",
+    "workplace_power",
+    "disaster"
    ],
    "voices": {
-    "inner": "肋骨被拖得生疼……背后这个人倒是稳。吵了一整个汛期，原来被这个人护着，是这种感觉。",
-    "surface": "别管我的甲，先卡死齿轮！剑格别进去——你压着我的手，听我的号子，压！"
+    "inner": "后背贴着好烫……连去年生锈钢缆批条都在他手里，回营房怎么算账！",
+    "surface": "“别管甲！把十字剑格楔进齿隙——贴紧我背脊一起下压！”"
    }
   },
   {
-   "adult_context": "六十岁，跟着三任统领驻防河港，女统领是这个人看着从小骑兵升上来的。",
-   "age_range": [
-    55,
-    70
-   ],
-   "appearance_options": [
-    "一身打着补丁的旧皮甲，花白的络腮胡，一条腿有点瘸，手里拄着一根橡木拐杖。",
-    "坐在营门口的木墩上，一边擦马鞍一边看码头上的人。"
-   ],
-   "decision": {
-    "avoids": [
-     "驻防营的老军士最烦临阵推诿"
-    ],
-    "contrast": "在总督面前一句软话不说，私下却给年轻骑兵们偷偷多发一壶麦酒。",
-    "core_value": "守河港的人，先得活着。",
-    "goal_options": [
-     "先把人救出来",
-     "驻防营的老军士再追究是谁的错"
-    ],
-    "never": [
-     "驻防营的老军士不会丢下困在里面的人"
-    ],
-    "prefers": [
-     "驻防营的老军士看重说到做到的人"
-    ],
-    "pressure_responses": {
-     "breaking": "驻防营的老军士嗓子喊哑了也不肯走",
-     "high": "驻防营的老军士顶着危险往里递东西",
-     "low": "驻防营的老军士先稳住身边的人",
-     "mid": "驻防营的老军士四处找能用的工具"
-    },
-    "relationship_stance": "早看出女统领和那个工程师之间有事，每回都故意把机房的夜巡排给两人。",
-    "withdrawal": "事情过去后，驻防营的老军士一个人躲开抽根烟"
-   },
-   "gender": "male",
-   "gender_reason": "按设定是驻防多年的老军士。",
-   "id": "old_garrison_sergeant",
-   "identity": {
-    "authority": "驻防营里谁站哪班岗、马匹怎么喂，老军士说了算。",
-    "exposure": "驻防营的老军士忙起来顾不上衣着体面",
-    "hidden": "做驻防营的老军士这些年，有件事没对旁人说过",
-    "limits": [
-     "驻防营的老军士不在死角里，只能在外面使劲"
-    ],
-    "obligations": [
-     "守住驻防营的老军士手上的那一摊事"
-    ],
-    "resources": [
-     "一张记着河港每一处暗流的旧地图",
-     "驻防营的老军士随身的一盏提灯"
-    ]
-   },
-   "intimacy_tendency": {
-    "attraction_sources": [
-     "驻防营的老军士欣赏做事干脆利落的人",
-     "驻防营的老军士记得危急时回头搭把手的人"
-    ],
-    "boundaries": [
-     "对方迟疑，驻防营的老军士就停"
-    ],
-    "desire_range": [
-     1,
-     3
-    ],
-    "desired_position": "和驻防营的老军士并肩站着",
-    "dislikes": [
-     "驻防营的老军士讨厌轻浮的手"
-    ],
-    "expression": "驻防营的老军士话不多，递东西时指尖会多停一下",
-    "likes": [
-     "驻防营的老军士收工后的一杯热饮"
-    ],
-    "preconditions": [
-     "驻防营的老军士要等危局过去、双方清醒自愿"
-    ],
-    "self_control_range": [
-     3,
-     5
-    ]
-   },
-   "public_role": "驻防营的老军士",
-   "schedule": [
-    {
-     "from": 420,
-     "location_id": "loc_river_port_wharf",
-     "to": 1260
-    }
-   ],
-   "situation": {
-    "exits": [
-     {
-      "cost": "驻防营的老军士未必赶得上",
-      "option": "驻防营的老军士在外面调度接应"
-     },
-     {
-      "cost": "可能把驻防营的老军士自己也搭进去",
-      "option": "驻防营的老军士硬闯进去"
-     }
-    ],
-    "pressure": "里面的人出不来，驻防营的老军士进不去",
-    "trigger": "警报传到驻防营的老军士那里"
-   },
-   "tags": [
-    "workplace"
-   ],
-   "voices": {
-    "inner": "看着这孩子长大的……今晚要是折在机房里，老头子没脸去见老统领。",
-    "surface": "统领！外面的缆绳我们拽着！你们先把那该死的齿轮卡住！"
-   }
-  },
-  {
-   "adult_context": "四十岁，在码头开了十五年酒馆，船工、商人、铁骑都在这里喝过酒。",
-   "age_range": [
-    34,
-    48
-   ],
-   "appearance_options": [
-    "一身深红色的围裙，袖子挽到手肘，栗色的头发盘在脑后，手腕上戴着一只铜镯。",
-    "站在酒馆的柜台后面，一边擦杯子一边听客人们吵架。"
-   ],
-   "decision": {
-    "avoids": [
-     "码头酒馆的老板娘最烦临阵推诿"
-    ],
-    "contrast": "对闹事的船工凶得很，对女统领却总多留一盘烤鱼。",
-    "core_value": "喝口热的，天大的事也能过去。",
-    "goal_options": [
-     "先把人救出来",
-     "码头酒馆的老板娘再追究是谁的错"
-    ],
-    "never": [
-     "码头酒馆的老板娘不会丢下困在里面的人"
-    ],
-    "prefers": [
-     "码头酒馆的老板娘看重说到做到的人"
-    ],
-    "pressure_responses": {
-     "breaking": "码头酒馆的老板娘嗓子喊哑了也不肯走",
-     "high": "码头酒馆的老板娘顶着危险往里递东西",
-     "low": "码头酒馆的老板娘先稳住身边的人",
-     "mid": "码头酒馆的老板娘四处找能用的工具"
-    },
-    "relationship_stance": "跟女统领是多年的酒友，私下里总问那个工程师到底怎么样。",
-    "withdrawal": "事情过去后，码头酒馆的老板娘一个人躲开抽根烟"
-   },
-   "gender": "female",
-   "gender_reason": "按设定是码头酒馆的老板娘。",
-   "id": "tavern_keeper",
-   "identity": {
-    "authority": "酒馆里谁赊账、谁打架该轰出去，老板娘说了算。",
-    "exposure": "码头酒馆的老板娘忙起来顾不上衣着体面",
-    "hidden": "做码头酒馆的老板娘这些年，有件事没对旁人说过",
-    "limits": [
-     "码头酒馆的老板娘不在死角里，只能在外面使劲"
-    ],
-    "obligations": [
-     "守住码头酒馆的老板娘手上的那一摊事"
-    ],
-    "resources": [
-     "一酒馆的麦酒和码头上的消息",
-     "码头酒馆的老板娘随身的一盏提灯"
-    ]
-   },
-   "intimacy_tendency": {
-    "attraction_sources": [
-     "码头酒馆的老板娘欣赏做事干脆利落的人",
-     "码头酒馆的老板娘记得危急时回头搭把手的人"
-    ],
-    "boundaries": [
-     "对方迟疑，码头酒馆的老板娘就停"
-    ],
-    "desire_range": [
-     1,
-     3
-    ],
-    "desired_position": "和码头酒馆的老板娘并肩站着",
-    "dislikes": [
-     "码头酒馆的老板娘讨厌轻浮的手"
-    ],
-    "expression": "码头酒馆的老板娘话不多，递东西时指尖会多停一下",
-    "likes": [
-     "码头酒馆的老板娘收工后的一杯热饮"
-    ],
-    "preconditions": [
-     "码头酒馆的老板娘要等危局过去、双方清醒自愿"
-    ],
-    "self_control_range": [
-     3,
-     5
-    ]
-   },
-   "public_role": "码头酒馆的老板娘",
-   "schedule": [
-    {
-     "from": 420,
-     "location_id": "loc_river_port_wharf",
-     "to": 1320
-    }
-   ],
-   "situation": {
-    "exits": [
-     {
-      "cost": "码头酒馆的老板娘未必赶得上",
-      "option": "码头酒馆的老板娘在外面调度接应"
-     },
-     {
-      "cost": "可能把码头酒馆的老板娘自己也搭进去",
-      "option": "码头酒馆的老板娘硬闯进去"
-     }
-    ],
-    "pressure": "里面的人出不来，码头酒馆的老板娘进不去",
-    "trigger": "警报传到码头酒馆的老板娘那里"
-   },
-   "tags": [
-    "workplace"
-   ],
-   "voices": {
-    "inner": "这傻丫头……嘴上吵了一个汛期，心里早就……今晚可千万要出来。",
-    "surface": "统领！热麦酒我温着呢！你们出来了就有得喝！"
-   }
-  },
-  {
-   "adult_context": "二十九岁，在王都的工匠学院修了十年水门和船闸，这一回被派到边境改造河港的老绞盘，去留进退由本人拿主意。",
+   "adult_context": "王都工匠学院毕业年满二十九周岁的成年水利工程师。",
    "age_range": [
     27,
     34
    ],
    "appearance_options": [
-    "一身深灰色的工装外套，袖口沾着机油，腰上挂着一只装满扳手和卡尺的皮囊，靴子上全是泥。",
-    "工装湿透了贴在身上，胸膛顶着女统领的后背，一只手攥着割甲带的短刀。"
+    "深灰防水工装沾机油湿贴肩背，腰挂皮囊短刀。",
+    "紧攥绞盘改造羊皮图纸与割缆快刀，眼神固执带一丝局促。"
    ],
    "decision": {
     "avoids": [
-     "偷工减料的人"
+     "要把工期底稿交给总督定奸细罪的死敌"
     ],
-    "contrast": "在工匠学院里能把一座船闸讲一下午，被女统领瞪一眼，就忘了自己要说什么。",
-    "core_value": "齿轮不会骗人，卡在哪里，就从哪里松。",
+    "contrast": "讲船闸能说一下午的匠师，在羊毛毯被按着质问画的是谁时手足无措。",
+    "core_value": "齿轮公差从不骗人；工期私账与图纸背面绝不能见光。",
     "goal_options": [
-     "用胸膛顶住女统领的后背，替女统领挡住水流",
-     "割断甲带，把全身重量压在剑柄上"
+     "贴背合压十字剑格、潜水一刀割开甲带",
+     "取回工期私账底稿并保住图纸背面秘密"
     ],
     "never": [
-     "让女统领一个人困在齿轮边"
+     "同伴还卡在死角时丢下短刀先逃上高台"
     ],
     "prefers": [
-     "说到做到的人"
+     "敢把性命交给自己、关门肯留活路擦掉私账的靠山"
     ],
     "pressure_responses": {
-     "breaking": "被链轮震得虎口裂开也不松，跟着女统领的号子压到最后一下。",
-     "high": "胸膛顶着女统领的后背，双手压在女统领的手上，和女统领一起压。",
-     "low": "一把抱住女统领的腰，用身体挡住冲过来的浑水。",
-     "mid": "摸着齿轮的齿距，报出死点的位置。"
+     "breaking": "湿衣滴水靠炉边低讨：‘私账都认……背面画了一整季，别送去总督府！’",
+     "high": "私账底稿连同图纸背面甩在眼前时瞬间僵住。",
+     "low": "摸准齿距大喊楔入角度，揽腰稳住对方重心。",
+     "mid": "潜入齐胸浊水摸甲带卡扣，任掌心被铁链擦破。"
     },
-    "relationship_stance": "每天在机房里改绞盘，改着改着，图纸背面画的就不只是齿轮了。",
-    "withdrawal": "确认女统领脱了困、落闸截住了水，才靠在石柱上，大口大口地喘气。"
+    "relationship_stance": "被瞪一眼就发窘，浑水里贴背扛浪被抓私账后反豁出去死贴到底。",
+    "withdrawal": "退到石柱后喘气擦泥水，攥紧短刀不敢抬头。"
    },
-   "gender": "male",
-   "gender_reason": "王国派来的水门工程师，按原稿写作男性。",
+   "gender": "any",
+   "gender_reason": null,
    "id": "watergate_engineer",
    "identity": {
-    "authority": "水门的绞盘怎么转、哪里能卡，工程师心里有数。",
-    "exposure": "湿透的工装贴着女统领的后背，两人在浑水里贴得严丝合缝。",
-    "hidden": "图纸的背面画着一个骑马的人，是第一天在码头上看见女统领时画的，一直没敢给人看。",
+    "authority": "水门双联绞盘齿距判定与工期技术裁定权",
+    "exposure": "与商会勾兑虚报水门工期、截留三成工程银钱的私账底稿。",
+    "hidden": "表面只会吵工期的木讷匠师，图纸背面却偷偷画满心上人眉眼；被翻出私账又掀开废图背面时，耳根通红连话都结巴。",
     "limits": [
-     "浑水里站不稳脚",
-     "工具在钢缆崩断时被冲走了"
+     "浑水站不稳，半箱重型扳手已被冲走",
+     "与商会勾兑虚报三成工期套利，底稿藏油布包内"
     ],
     "obligations": [
-     "割断甲带把女统领救出来",
-     "卡死齿轮，两人一起出去"
+     "找准齿轮死角割断甲带救人并掩盖工期私账"
     ],
     "resources": [
-     "一把割缆绳的短刀",
-     "一本水门绞盘的图纸",
-     "一只防水的油布包"
+     "割缆绳短刀与水门改造全套图纸",
+     "防水油布包内备用的铜制偏心楔块"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "女统领被卡在齿轮边还能喊得那么稳的那份胆气",
-     "女统领吵赢了以后偷偷翘起的嘴角"
+     "浊浪中胸膛紧抵湿热后背、叠掌压剑的滚烫触感",
+     "被拿工期私账与废图纸逼近审问时的压迫感"
     ],
     "boundaries": [
-     "女统领没开口就不越一步",
-     "人前不让女统领难做"
+     "天亮上码头修门前不在旁人前露半分怯态"
     ],
     "desire_range": [
-     2,
+     3,
      4
     ],
-    "desired_position": "壁炉边让女统领靠着肩膀的近身位",
+    "desired_position": "水门护腰割带、营房任由拿捏的匠师",
     "dislikes": [
-     "当众起哄",
-     "背后嚼舌根"
+     "外行拿官威乱改齿距还当众起哄的官僚"
     ],
-    "expression": "看着那张被捡回来的废图纸愣了很久，最后把图纸翻过来：背面这个人，我画了一整个汛期。",
+    "expression": "攥着油布包哑求：‘私账全归你处置……今晚别赶我走，行吗？’",
     "likes": [
-     "女统领难得叫一次自己的名字",
-     "被女统领揪着领子拉进营房"
+     "壁炉边脱去油泥外套替彼此擦洗血口",
+     "被揪着湿领子拽进营房木床边对账认错"
     ],
     "preconditions": [
-     "落闸截水、两人都安全清醒之后",
-     "女统领点了头，出于本心"
+     "落闸截水或独处狭小机房、营房时",
+     "工期私账与图纸背面被掀开讨价时"
     ],
     "self_control_range": [
      2,
      4
     ]
    },
-   "public_role": "改造河港水门的工程师",
+   "public_role": "河港水利改造工程师",
    "schedule": [
     {
-     "from": 480,
-     "location_id": "loc_watergate_winch_room",
-     "to": 1020
+     "from": 0,
+     "location_id": "loc_river_port_wharf",
+     "to": 480
     },
     {
-     "from": 1080,
-     "location_id": "loc_river_port_wharf",
-     "to": 1320
+     "from": 481,
+     "location_id": "loc_watergate_winch_room",
+     "to": 1350
+    },
+    {
+     "from": 1351,
+     "location_id": "loc_winch_reverse_gear_gap",
+     "to": 1439
     }
    ],
    "situation": {
     "exits": [
      {
-      "cost": "会被链轮震伤，手臂可能脱力",
-      "option": "用身体挡住水流，和女统领合力压下剑柄"
+      "cost": "手臂被铁链震伤且彻底交出工部实权",
+      "option": "舍命挡浪割带卡齿，回营房交出私账听凭发落"
      },
      {
-      "cost": "链轮不停，割了也拉不出来",
-      "option": "先潜下去割甲带"
+      "cost": "延误半息割带令同袍遭齿尖划破侧腰",
+      "option": "优先抢夺私账底稿再想办法敲保险销"
      }
     ],
-    "pressure": "水位越涨越高，再不卡死齿轮，女统领会被拖进齿缝。",
-    "trigger": "钢缆崩断时，工程师正在机房里调绞盘，回头就看见女统领的战甲被卷了进去。"
+    "pressure": "须贴身割带卡齿，又得求握私账者高抬贵手。",
+    "trigger": "绞盘咬住甲裙，同时虚报工期底稿亦被搜走。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power",
+    "disaster"
+   ],
+   "voices": {
+    "inner": "工期私账别被捅上去……浑水里靠太近了，可这一下必得楔准！",
+    "surface": "“别动！我顶着你的腰！卡准齿隙——数三短刀就下！”"
+   }
+  },
+  {
+   "adult_context": "驻防营在编成年一级军需主管官，持兵部签收文书。",
+   "age_range": [
+    32,
+    44
+   ],
+   "appearance_options": [
+    "深蓝军需服扣严实，耳夹炭笔紧攥军械总簿。",
+    "眼神精明焦灼，随身火漆筒藏着旧钢缆采买契。"
+   ],
+   "decision": {
+    "avoids": [
+     "要把锈蚀断口亮给总督看的死对头"
+    ],
+    "contrast": "算账针插不进的主管，湿透倚墙交代罪状时狼狈柔顺。",
+    "core_value": "账平命在；回扣查实军需官第一个挂吊车。",
+    "goal_options": [
+     "偷进机房换掉断口钢缆牌号掩盖出处",
+     "拿库房密匙与体面买断回扣契约"
+    ],
+    "never": [
+     "没找好替罪羊前承认吃过钢缆回扣"
+    ],
+    "prefers": [
+     "肯收私金替自己压住废缆顶包案的实权搭档"
+    ],
+    "pressure_responses": {
+     "breaking": "扯开湿领口哑求：‘私金和库匙全奉上……别送去总督对质！’",
+     "high": "回扣契拍出立刻腿软退贴湿石壁。",
+     "low": "翻账册推诿钢缆老化乃江水潮湿所致。",
+     "mid": "提干衣拦在石梯口打探断口风声。"
+    },
+    "relationship_stance": "惯拿粮草卡人脖子，黑账落人手立刻放低身段献殷勤。",
+    "withdrawal": "抱账簿缩进器材库暗影死抓炭笔发抖。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "garrison_quartermaster",
+   "identity": {
+    "authority": "全营甲具补给、粮草与旧钢缆采买核发权",
+    "exposure": "吃三成回扣将退火生锈旧钢缆充新入库装上水门的契约。",
+    "hidden": "平日领双铁手套都要盘问，被拍出回扣契时冷汗湿透深蓝领口，主动扯松衣扣献匙只求免死。",
+    "limits": [
+     "今夜断缆正是去年收三成回扣买进的退火废货",
+     "文职不谙水战，进机房深水便站脚不住"
+    ],
+    "obligations": [
+     "保住军需官职位并烧毁废缆采买契书"
+    ],
+    "resources": [
+     "库房新甲、热麦酒匙与保养滚油罐",
+     "劣质旧缆顶包回扣的私密契书副本"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "拿库房补给压榨他人换私利的暗室算计",
+     "罪证暴露后被扣脉逼迫脱衣搜查的屈从感"
+    ],
+    "boundaries": [
+     "白天面对骑兵队列常服须扣得丝毫不差"
+    ],
+    "desire_range": [
+     2,
+     4
+    ],
+    "desired_position": "幕后握匙或门后低头抵罪的军需官",
+    "dislikes": [
+     "不谈条件直接喊卫兵拿人的莽夫"
+    ],
+    "expression": "推过火漆筒与库匙低求：‘契书烧了吧……今晚我替您守夜。’",
+    "likes": [
+     "暖壁炉或僻静货棚凑近低声分赃庇护",
+     "交出库匙与账契后的乖顺服侍"
+    ],
+    "preconditions": [
+     "无人营房或库房石壁后隔绝耳目时",
+     "回扣契握在对方手里急需封口时"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "驻防营军需主管官",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "loc_commander_quarters",
+     "to": 540
+    },
+    {
+     "from": 541,
+     "location_id": "loc_river_port_wharf",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "军需财权与体面尽落对方掌中",
+      "option": "进营房献全部私金顺从换取销毁回扣契书"
+     },
+     {
+      "cost": "易引机房大火且随时被当场抓获",
+      "option": "泼火油伪造起火烧毁断缆锈迹物证"
+     }
+    ],
+    "pressure": "天亮查验断口前须压下此事，不惜付出一切封口。",
+    "trigger": "断缆露锈迹，吃回扣买次货的契书亦被人拎住。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power",
+    "crime"
+   ],
+   "voices": {
+    "inner": "断口让总督看见旧货就全完了……赶紧抢回契书烧了！",
+    "surface": "“钢缆按规矩上的油！这暴雨百年不遇怎能怪库房？”"
+   }
+  },
+  {
+   "adult_context": "总督府派遣巡视边境河道防务的成年特派监工官。",
+   "age_range": [
+    36,
+    46
+   ],
+   "appearance_options": [
+    "暗紫滚金防雨礼袍被风吹皱，腰悬总督副印铜牌。",
+    "死抱油布裹着的漆木文书匣，目光闪烁。"
+   ],
+   "decision": {
+    "avoids": [
+     "要把密信送回刑部的硬骨头铁骑"
+    ],
+    "contrast": "高台咆哮的大员，在营房火光下被按在羊毛毯时泪水涟涟。",
+    "core_value": "王都官途与满箱金票高于百姓性命，水淹机房正好销账。",
+    "goal_options": [
+     "逼差役强落闸闷死机房知情人",
+     "夺回敌商银票密信免遭满门抄斩"
+    ],
+    "never": [
+     "跳进齐胸浊水替下属扳卡死链轮"
+    ],
+    "prefers": [
+     "肯收金票副印放自己乘官船逃回王都的聪明人"
+    ],
+    "pressure_responses": {
+     "breaking": "金边礼袍滑肩跪求：‘银票副印全给你……密信快烧进壁炉！’",
+     "high": "敌商火漆密信拍脸时惨白失声连退三步。",
+     "low": "抖总督副印喝令驻防营莫插手工程。",
+     "mid": "闻水门生变令差役死守落闸台封石梯。"
+    },
+    "relationship_stance": "平日对边将颐指气使，密信被截立成最易拿捏的软脚虾。",
+    "withdrawal": "缩回税关木屋抱匣打颤，盯紧码头官船。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "royal_inspector_envoy",
+   "identity": {
+    "authority": "暂缓改建、强令落闸与奏报撤换统领的监工权",
+    "exposure": "收敌商银票压住防汛泄洪令、险淹河港的火漆密信。",
+    "hidden": "王都拿官印压人，实则外强中干；漆木匣被夺抖出通敌密信时当场跪倒剥去湿袍求饶。",
+    "limits": [
+     "收敌商重贿拖延防汛泄洪令，才使洪峰压垮水门",
+     "贪生怕死，闻机房轰鸣缩高台不敢下水"
+    ],
+    "obligations": [
+     "趁大水或烧毁密函掩盖通敌受贿事实"
+    ],
+    "resources": [
+     "总督府铜印调防令与差役调度权",
+     "漆木匣内私收的敌商银票与缓闸密信"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "拿调防权把骄傲边将逼得进退两难的支配虚荣",
+     "密信败露跪在强者脚边脱袍换生路的刺激"
+    ],
+    "boundaries": [
+     "乘官船离开前礼袍领口须恢复体面"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "高台威吓或暗室伏低赎命的监工",
+    "dislikes": [
+     "一剑刺穿官袍不给讲价的野蛮边兵"
+    ],
+    "expression": "抖手把副印银票塞进衣襟哭求：‘副印随你用……今晚让我留在你房里！’",
+    "likes": [
+     "用金票副印在暗室买断羞辱与庇护",
+     "湿冷身躯靠在暖炉旁任由处置"
+    ],
+    "preconditions": [
+     "避开差役反锁进营房或货棚暗间时",
+     "火漆密信与副印摆上火盆边缘时"
+    ],
+    "self_control_range": [
+     1,
+     3
+    ]
+   },
+   "public_role": "王都河道特派监工",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "loc_river_port_wharf",
+     "to": 540
+    },
+    {
+     "from": 541,
+     "location_id": "loc_winch_emergency_pin",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "王都监工声名身家尽入边地狠人掌控",
+      "option": "在营房交副印与全部银票低头服从换烧密信"
+     },
+     {
+      "cost": "被铁骑围捕当场即作叛逆格杀",
+      "option": "唆使差役放冷箭抢回漆木匣跳船逃走"
+     }
+    ],
+    "pressure": "通敌诛九族大罪，唯听命于握信者方能保命逃离。",
+    "trigger": "欲强令落闸灭口时通敌银票与密信已被截获。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power",
+    "coercion_theme"
+   ],
+   "voices": {
+    "inner": "对岸密信万一落女统领手里我就掉脑袋……先封死机房！",
+    "surface": "“本官奉总督铜印令先落闸保官道，谁敢下机房！”"
+   }
+  },
+  {
+   "adult_context": "守水门十五年的成年老看守长，持工匠行会执照。",
+   "age_range": [
+    45,
+    56
+   ],
+   "appearance_options": [
+    "穿厚油布雨衣，腰悬生锈铁门匙，满手粗厚老茧。",
+    "紧攥浸水粗麻缆绳与暗门手摇把，神情阴晴不定。"
+   ],
+   "decision": {
+    "avoids": [
+     "要把老看守押上码头斩首示众的酷吏"
+    ],
+    "contrast": "平日总督差役都敢撵的老看守，石板落人手立马交匙求全。",
+    "core_value": "水门能守便守，夜开偏闸私银账露了只能认栽听差遣。",
+    "goal_options": [
+     "守住落闸手柄等里面割断甲带后拉人",
+     "取回石缝走私记账石板免吃牢饭"
+    ],
+    "never": [
+     "自己人卡在齿缝时提前扳死落闸销"
+    ],
+    "prefers": [
+     "肯收暗利大头又留自己活路的明白人"
+    ],
+    "pressure_responses": {
+     "breaking": "扯开雨衣捧出整串钥匙低头：‘暗门和买路银全归您……饶这条老命！’",
+     "high": "记账石板被抽走时猛哑声退靠石柱。",
+     "low": "攥紧粗麻缆绳守在梯口高喊水势变化。",
+     "mid": "顶暴雨甩出撬棍与缆绳递向机房暗处。"
+    },
+    "relationship_stance": "对护门者留热心，对捏住石板死穴的强硬派服帖不敢顶嘴。",
+    "withdrawal": "缩钟楼石阶阴影搓冰凉腿骨沉默。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "watergate_lockkeeper",
+   "identity": {
+    "authority": "水门石梯暗门钥匙、落闸销扳杆与夜巡排班权",
+    "exposure": "私收船行暗银偷开偏闸放违禁铁器的刻痕记账石板。",
+    "hidden": "表面死板忠厚，背地石缝刻满走私暗码；被亮出记账石板追问时老脸通红不敢啃声，甘愿交出全套钥匙密图保命。",
+    "limits": [
+     "深夜私开偏门水闸替走私船放货收银，石板藏石缝",
+     "腿脚旧伤遇冰水久泡即剧痛僵硬"
+    ],
+    "obligations": [
+     "等里面割带脱困即刻拽出并掩住私放走私船之秘"
+    ],
+    "resources": [
+     "水门全套生铁钥匙与暗河水文密图",
+     "高台放缆粗麻绳与备用撬棍"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "暴雨夜顶住冲撞驳船不肯先逃的硬汉骨气",
+     "走私石板被破后在暖灯石室卸甲交匙的屈服"
+    ],
+    "boundaries": [
+     "在年轻骑兵面前绝不自掉老看守颜面"
+    ],
+    "desire_range": [
+     1,
+     3
+    ],
+    "desired_position": "高台拉缆老将、暗处交匙听调的守门人",
+    "dislikes": [
+     "瞎扯落闸销误害机房兄弟的蠢货"
+    ],
+    "expression": "塞过铁钥匙哑道：‘偏闸归你管了……石板砸碎吧！’",
+    "likes": [
+     "收工窝在火盆边烤干湿衣灌一口热麦酒",
+     "替掌控自己的上官递上全部水门暗门匙"
+    ],
+    "preconditions": [
+     "浑水退去且落闸完成后",
+     "记账石板与铁钥匙交割清楚时"
+    ],
+    "self_control_range": [
+     3,
+     5
+    ]
+   },
+   "public_role": "水门枢纽首席看守长",
+   "schedule": [
+    {
+     "from": 0,
+     "location_id": "loc_winch_emergency_pin",
+     "to": 540
+    },
+    {
+     "from": 541,
+     "location_id": "loc_watergate_winch_room",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "水门夜间走私抽成彻底转手他人",
+      "option": "献全套暗道密图与整串铁钥匙换销毁石板"
+     },
+     {
+      "cost": "腿伤泡僵且时刻提防持板人摊牌",
+      "option": "死拽断缆驳船立功再砸烂暗缝石板"
+     }
+    ],
+    "pressure": "须保落闸拉绳兼阻止走私账板外泄。",
+    "trigger": "驳船撞门震松暗石缝走私记账石板，恰被同在机房者拾获。"
    },
    "tags": [
     "workplace",
-    "disaster",
-    "intimate"
+    "crime"
    ],
    "voices": {
-    "inner": "女统领整个人靠在我怀里，甲带勒得死紧……别分神。修了十年水门，今晚得卡准这一下。",
-    "surface": "别动，我抱着你！剑格卡进去，我压着你的手——你喊号子，我跟。"
+    "inner": "石缝里记了三年的石板千万别让人摸走……丢了老命得交代在这儿！",
+    "surface": "“外头缆绳拽着！先拿剑格楔死齿轮，喊号再落闸！”"
    }
   },
   {
-   "adult_context": "四十岁，守了十五年水门，每一根缆绳的松紧都摸得出来。",
+   "adult_context": "财政署选派年满二十三周岁持正式木印资格的成年税关书记官。",
    "age_range": [
-    34,
-    48
+    22,
+    27
    ],
    "appearance_options": [
-    "一身油布雨衣，腰上挂着一大串水门的铁钥匙，满手老茧。",
-    "站在水门顶上，手里攥着一根粗缆绳。"
+    "深青官袍染墨与泥水，腰挂木印鹅毛笔筒，面色苍白。",
+    "死抱湿漉羊皮账册袋，指尖冻得发抖。"
    ],
    "decision": {
     "avoids": [
-     "水门的看守长最烦临阵推诿"
+     "公事公办要把偷税文官正法的冷血总督特使"
     ],
-    "contrast": "对偷闯水门的私船凶得很，对码头上的孩子却总揣着一把糖。",
-    "core_value": "水门守得住，人得出得来。",
+    "contrast": "查船装腔作势的文官，门闩落账页摊开便红眼发软任凭发落。",
+    "core_value": "抱紧靠山保命，只要不押菜市口砍头，账本和身家全听差遣。",
     "goal_options": [
-     "先把人救出来",
-     "水门的看守长再追究是谁的错"
+     "在灭顶前销毁或交托涂改过的税银原页",
+     "凭手中别家暗账作投名状拜入强者庇护"
     ],
     "never": [
-     "水门的看守长不会丢下困在里面的人"
+     "靠山还在抢修时独自携木印逃跑"
     ],
     "prefers": [
-     "水门的看守长看重说到做到的人"
+     "敢挡浪头、关门肯收涂改页替{npc.ta}遮掩活命的硬气靠山"
     ],
     "pressure_responses": {
-     "breaking": "水门的看守长嗓子喊哑了也不肯走",
-     "high": "水门的看守长顶着危险往里递东西",
-     "low": "水门的看守长先稳住身边的人",
-     "mid": "水门的看守长四处找能用的工具"
+     "breaking": "湿袍滑露发抖锁骨颤泣：‘税簿全交您……怎么审都听话，别去砍头！’",
+     "high": "刮改账页被揪出瞬间面无人色，跪抱对方手臂。",
+     "low": "抱账袋缩在角落报出商船吃水数。",
+     "mid": "提暗灯摸进水门找油罐想烧掉存底账页。"
     },
-    "relationship_stance": "嘴上嫌工程师乱改老绞盘，可女统领每回下机房，看守长都在顶上守着。",
-    "withdrawal": "事情过去后，水门的看守长一个人躲开抽根烟"
+    "relationship_stance": "极怕军法刀剑又渴求靠山，谁握{npc.ta}的涂改页便寸步不离依附谁。",
+    "withdrawal": "躲货垛后紧捂木印发抖，偷瞄握自己死穴之人。"
    },
-   "gender": "male",
-   "gender_reason": "按设定是守水门的看守长。",
-   "id": "watergate_keeper",
+   "gender": "any",
+   "gender_reason": null,
+   "id": "toll_house_auditor",
    "identity": {
-    "authority": "水门顶上谁能上、谁能下，看守长说了算。",
-    "exposure": "水门的看守长忙起来顾不上衣着体面",
-    "hidden": "做水门的看守长这些年，有件事没对旁人说过",
+    "authority": "商船吃水印鉴、货棚封条与防汛税银簿记掌管权",
+    "exposure": "私自刮改火油生丝税单、挪用税银填赌债的涂改原页账簿。",
+    "hidden": "表面怯弱算账文官，实偷偷记下半个河港高官暗账；偷烧原页被按进角落或营房时，红眼揪住救命靠山衣袖求饶‘怎么罚都认别斩头’。",
     "limits": [
-     "水门的看守长不在死角里，只能在外面使劲"
+     "为填赌债私改三船火油生丝税单，雨夜潜入机房烧存底被困",
+     "手无缚鸡之力，遇近身盘问即双腿打战"
     ],
     "obligations": [
-     "守住水门的看守长手上的那一摊事"
+     "保住涂改税簿不败露并保命逃出机房"
     ],
     "resources": [
-     "一队水门看守",
-     "水门的看守长随身的一盏提灯"
+     "税关木印、火漆封条与商船吃水清单",
+     "记有驻防与特使私货往来的底簿残页"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "水门的看守长欣赏做事干脆利落的人",
-     "水门的看守长记得危急时回头搭把手的人"
+     "强者挡在浪头前毫不退缩的安全感",
+     "涂改原页落人手后在暖营房靠紧听训的心安"
     ],
     "boundaries": [
-     "对方迟疑，水门的看守长就停"
+     "只要保命免斩首，营房内任何差遣盘问皆顺从"
     ],
     "desire_range": [
-     1,
-     3
+     2,
+     4
     ],
-    "desired_position": "和水门的看守长并肩站着",
+    "desired_position": "码头提灯报信、门后低头依附的文官",
     "dislikes": [
-     "水门的看守长讨厌轻浮的手"
+     "拔剑架脖不给求饶机会的杀神"
     ],
-    "expression": "水门的看守长话不多，递东西时指尖会多停一下",
+    "expression": "红眼捧出底页哑求：‘别家密账都在里头……保我一命，今后全听您的！’",
     "likes": [
-     "水门的看守长收工后的一杯热饮"
+     "缩羊毛毯角落被靠山用干布擦掉脸上雨水",
+     "交木印与别家暗账换靠山一句保命承诺"
     ],
     "preconditions": [
-     "水门的看守长要等危局过去、双方清醒自愿"
+     "退入无人货棚或水门营房闩上木门后",
+     "涂改死罪摊开亟需靠山平账时"
     ],
     "self_control_range": [
-     3,
-     5
+     2,
+     4
     ]
    },
-   "public_role": "水门的看守长",
+   "public_role": "河港税关成年书记官",
    "schedule": [
-    {
-     "from": 1080,
-     "location_id": "loc_winch_emergency_drop_pin",
-     "to": 1439
-    },
     {
      "from": 0,
-     "location_id": "loc_winch_emergency_drop_pin",
-     "to": 420
-    }
-   ],
-   "situation": {
-    "exits": [
-     {
-      "cost": "水门的看守长未必赶得上",
-      "option": "水门的看守长在外面调度接应"
-     },
-     {
-      "cost": "可能把水门的看守长自己也搭进去",
-      "option": "水门的看守长硬闯进去"
-     }
-    ],
-    "pressure": "里面的人出不来，水门的看守长进不去",
-    "trigger": "警报传到水门的看守长那里"
-   },
-   "tags": [
-    "workplace"
-   ],
-   "voices": {
-    "inner": "守了十五年水门，从没见河水这么凶……那两个人要是出不来，我这看守长也别干了。",
-    "surface": "缆绳我们拽着！你们落了闸就喊，我第一个下去拉人！"
-   }
-  },
-  {
-   "adult_context": "三十五岁，管着驻防营所有的粮草、马料和铠甲，女统领那身锁子甲就是从这里领的。",
-   "age_range": [
-    30,
-    45
-   ],
-   "appearance_options": [
-    "一身整洁的深蓝军服，栗色短发，耳朵上夹着一支炭笔，手里总拿着一本账册。",
-    "站在军需库门口，一边点数一边记账。"
-   ],
-   "decision": {
-    "avoids": [
-     "驻防营的军需官最烦临阵推诿"
-    ],
-    "contrast": "嘴上嫌工程师领工具不还，私下却给工程师多留了一件干净的工装。",
-    "core_value": "仗要打，饭也要吃。",
-    "goal_options": [
-     "先把人救出来",
-     "驻防营的军需官再追究是谁的错"
-    ],
-    "never": [
-     "驻防营的军需官不会丢下困在里面的人"
-    ],
-    "prefers": [
-     "驻防营的军需官看重说到做到的人"
-    ],
-    "pressure_responses": {
-     "breaking": "驻防营的军需官嗓子喊哑了也不肯走",
-     "high": "驻防营的军需官顶着危险往里递东西",
-     "low": "驻防营的军需官先稳住身边的人",
-     "mid": "驻防营的军需官四处找能用的工具"
-    },
-    "relationship_stance": "每回给女统领的锁子甲上油都格外仔细，说统领总往水里跑。",
-    "withdrawal": "事情过去后，驻防营的军需官一个人躲开抽根烟"
-   },
-   "gender": "female",
-   "gender_reason": "按设定是驻防营的女军需官。",
-   "id": "quartermaster",
-   "identity": {
-    "authority": "营里谁领什么、领多少，军需官心里有本账。",
-    "exposure": "驻防营的军需官忙起来顾不上衣着体面",
-    "hidden": "做驻防营的军需官这些年，有件事没对旁人说过",
-    "limits": [
-     "驻防营的军需官不在死角里，只能在外面使劲"
-    ],
-    "obligations": [
-     "守住驻防营的军需官手上的那一摊事"
-    ],
-    "resources": [
-     "一库房的粮草和铠甲",
-     "驻防营的军需官随身的一盏提灯"
-    ]
-   },
-   "intimacy_tendency": {
-    "attraction_sources": [
-     "驻防营的军需官欣赏做事干脆利落的人",
-     "驻防营的军需官记得危急时回头搭把手的人"
-    ],
-    "boundaries": [
-     "对方迟疑，驻防营的军需官就停"
-    ],
-    "desire_range": [
-     1,
-     3
-    ],
-    "desired_position": "和驻防营的军需官并肩站着",
-    "dislikes": [
-     "驻防营的军需官讨厌轻浮的手"
-    ],
-    "expression": "驻防营的军需官话不多，递东西时指尖会多停一下",
-    "likes": [
-     "驻防营的军需官收工后的一杯热饮"
-    ],
-    "preconditions": [
-     "驻防营的军需官要等危局过去、双方清醒自愿"
-    ],
-    "self_control_range": [
-     3,
-     5
-    ]
-   },
-   "public_role": "驻防营的军需官",
-   "schedule": [
-    {
-     "from": 420,
      "location_id": "loc_river_port_wharf",
-     "to": 1260
+     "to": 540
+    },
+    {
+     "from": 541,
+     "location_id": "loc_watergate_winch_room",
+     "to": 1439
     }
    ],
    "situation": {
     "exits": [
      {
-      "cost": "驻防营的军需官未必赶得上",
-      "option": "驻防营的军需官在外面调度接应"
+      "cost": "沦为对方私密线人，身家契印再不由己",
+      "option": "在营房壁炉前交税关木印及别家密账换遮掩涂改案"
      },
      {
-      "cost": "可能把驻防营的军需官自己也搭进去",
-      "option": "驻防营的军需官硬闯进去"
+      "cost": "失去全部账证且难逃后续对账严惩",
+      "option": "把涂改页连羊皮袋投进浑水暗流冲走"
      }
     ],
-    "pressure": "里面的人出不来，驻防营的军需官进不去",
-    "trigger": "警报传到驻防营的军需官那里"
+    "pressure": "洪水漫胸且砍头死罪被人攥住，唯交底账依附救命者。",
+    "trigger": "潜进机房烧税单时遇倒灌，涂改原页落入同困者手。"
    },
    "tags": [
-    "workplace"
+    "intimate",
+    "workplace_power",
+    "crime"
    ],
    "voices": {
-    "inner": "那身甲是我亲手上的油……可千万别拖着统领往下沉。",
-    "surface": "统领！新甲和干衣裳我都备好了！你们出来就换！"
+    "inner": "三页刮改税单被看见就完了……死抱紧眼前这位靠山！",
+    "surface": "“大人！火油账确实对不上……可闸口要塌了先别查好不好？”"
    }
   }
  ],
  "clock_start": {
-  "label": "河港的春汛季",
-  "minute": 10
+  "label": "边境春汛溃涌时",
+  "minute": 1380
  },
  "clock_style": "hm",
  "content_tags": [
   "intimate",
-  "bodily_harm",
   "workplace_power",
+  "coercion_theme",
+  "bodily_harm",
   "crime",
   "workplace",
   "disaster"
  ],
  "custom": false,
  "customs": [
-  "边境河港水门吊桥采用重型双动链轮机构控制，一旦制动棘爪断裂，绞盘会因重力失衡产生数吨反转拉力。",
-  "铁骑女统领佩戴的指挥官佩剑采用特种淬火不锈钢精锻，十字剑格厚达三公分带坚实直角挡块，具备极高抗剪切强度。",
-  "机房水流已漫过胸口，水下暗流冲击力极大，两人必须胸背相贴稳固立足姿态抵御水流冲刷。",
-  "绞盘机房侧壁设有应急重力落闸安全销，只要卡死主齿轮割开衣带脱身，即可合力搬动安全销截断倒灌水流。"
+  "铁骑统领下机房巡查必卸大披风并扣紧精钢胸甲与双层牛皮甲带，免得在石梯被狂风掀翻。",
+  "边境军士习惯以湿透革带与热麦酒论功过，谁先护住同袍脊背，回营房后门闩便为谁多留半寸。",
+  "王都水工匠师与税关官吏下码头多背防水油布袋，密契批条往往贴胸藏入内襟夹层。",
+  "入夜泥炭壁炉生旺后，脱下冰冷铁甲擦干水渍再关门对账，是河港驻军秘而不宣的私下规矩。"
  ],
  "daily_activities": [
   {
    "beats": [
-    "清晨的税关前排着长长的商船，女统领骑着马沿着栈桥走过去，一船一船地看货单，书吏们大气都不敢出。",
-    "女统领勒住马，回头冲人扬了扬下巴：那条船吃水不对，底下藏了东西。……你去看看，我在这儿等你。"
-   ],
-   "duration_minutes": 50,
-   "hook_ids": [],
-   "id": "act_toll_house_round",
-   "location_ids": [
-    "loc_river_port_wharf"
-   ],
-   "start_minute": 540,
-   "tags": [
-    "workplace"
-   ],
-   "title": "清晨跟女统领查商船货单"
-  },
-  {
-   "beats": [
-    "晌午的码头酒馆里人声鼎沸，女统领卸了头盔坐在靠窗的位置，面前一盘刚烤好的河鱼还冒着热气。",
-    "女统领把鱼往人面前推了推：老板娘多烤了一条。……别客气，吃完了下午接着吵。"
+    "橡木门落闩后站在泥炭壁炉前卸开湿冷胸甲与锁甲革带，用干热粗布擦过湿贴腰窝红痕。",
+    "旧钢缆批条与枕下废图纸摊在木床羊毛毯边缘。",
+    "嘴上仍在冷斥莫越矩，手指却死攥你腕骨不放。"
    ],
    "duration_minutes": 40,
    "hook_ids": [],
-   "id": "act_grilled_fish",
+   "id": "act_quarters_armor_unlace",
    "location_ids": [
-    "loc_river_port_wharf"
+    "loc_commander_quarters"
    ],
-   "start_minute": 750,
+   "start_minute": 1410,
    "tags": [
-    "workplace"
+    "intimate",
+    "workplace_power"
    ],
-   "title": "在码头酒馆吃烤鱼"
+   "title": "水门营房壁炉前卸甲擦身"
   },
   {
    "beats": [
-    "傍晚的吊桥上，夕阳把整条大河染成金红，女统领倚着铁链，金发被河风吹得飞扬。",
-    "女统领忽然开口：我小时候第一次骑马，就是从这座桥上跑过去的。……那时候觉得河的对岸，就是天边。"
+    "挤进双联铸钢齿轮窄缝，在及腰浊水里贴紧对方护袍，四掌叠覆三公分十字剑格比试寸劲。",
+    "油灯暗光晃过滑落肩头的战袍，热喘直扫耳廓。",
+    "贴耳拿换缆账目讨条件，换来掌心回握加重下压。"
    ],
    "duration_minutes": 30,
    "hook_ids": [],
-   "id": "act_drawbridge_sunset",
+   "id": "act_gear_gap_chest_wedge",
    "location_ids": [
-    "loc_river_port_wharf"
+    "loc_winch_reverse_gear_gap"
    ],
-   "start_minute": 1050,
+   "start_minute": 1380,
    "tags": [
-    "workplace"
+    "intimate",
+    "disaster"
    ],
-   "title": "在吊桥上看大河落日"
+   "title": "绞盘齿隙胸背相贴试剑"
   },
   {
    "beats": [
-    "夜里的绞盘机房，女统领提着铁网油灯一路照过去，工程师跟在后面，一边走一边讲哪颗齿轮该换了。",
-    "女统领停下来看着那座老链轮：你说的那些，我听不懂。……可我信你说的，这座门撑不过这个汛期。"
+    "浊浪拍打石柱，避开高台视线按住销毁物证的嫌疑人，摸出贴胸藏着的回扣契与涂改税单。",
+    "铁链轰鸣吞没讨饶声，水光映出对方发白鼻尖。",
+    "订下回营房闩门清账的价码，把原件折进袖袋。"
    ],
-   "duration_minutes": 40,
+   "duration_minutes": 35,
    "hook_ids": [],
-   "id": "act_winch_inspection",
+   "id": "act_winch_room_pillar_barter",
    "location_ids": [
     "loc_watergate_winch_room"
    ],
-   "start_minute": 1200,
+   "start_minute": 1390,
    "tags": [
-    "workplace"
+    "workplace_power",
+    "crime"
    ],
-   "title": "陪女统领巡查绞盘机房"
+   "title": "机房石柱暗处浑水盘账"
   },
   {
    "beats": [
-    "清晨的河滩上，女统领领着一队铁骑冲锋，马蹄踏起一片水花，佩剑在晨光里一闪一闪。",
-    "收队时，女统领勒马停在人面前，挑眉笑：看呆了？……要不要上来，我带你跑一圈。"
+    "风灯下沿栈桥核对商船驳船吃水线，把私改火油单攥袖口，将心虚同僚逼进货棚暗影对质。",
+    "酒馆飘出热麦酒与烤鱼味，雨水打湿半张船契。",
+    "用半壶温酒与底单换来对方交付夜巡偏门匙。"
    ],
-   "duration_minutes": 50,
+   "duration_minutes": 35,
    "hook_ids": [],
-   "id": "act_cavalry_drill",
+   "id": "act_wharf_barge_cargo_check",
    "location_ids": [
     "loc_river_port_wharf"
    ],
-   "start_minute": 420,
+   "start_minute": 1340,
    "tags": [
-    "workplace"
+    "workplace",
+    "crime"
    ],
-   "title": "看女统领操练铁骑"
+   "title": "河港码头借查货单施压"
   },
   {
    "beats": [
-    "营房的窗边，女统领把锁子甲摊在木桌上，一环一环地上油，阳光照得铁环闪闪发亮。",
-    "女统领把油布扔过来：那半边归你。……别偷懒，这身甲是要跟着我下水的。"
+    "警钟急敲声里并肩守在铜制落闸手柄旁，迎暴雨拽紧粗麻安全绳盯紧底下火把与水光。",
+    "总督副印若隐若现，手指在冷硬铜销悄然碰擦。",
+    "低声盘算先保驳船还是借落闸把机房内人逼服。"
    ],
-   "duration_minutes": 30,
+   "duration_minutes": 25,
    "hook_ids": [],
-   "id": "act_armor_oiling",
+   "id": "act_high_pin_bell_watch",
    "location_ids": [
-    "loc_commander_watergate_quarters"
+    "loc_winch_emergency_pin"
    ],
-   "start_minute": 960,
+   "start_minute": 1365,
    "tags": [
-    "workplace"
+    "workplace",
+    "disaster"
    ],
-   "title": "陪女统领给锁子甲上油"
+   "title": "水闸高台顶风抓缆值守"
   },
   {
    "beats": [
-    "应急闸落下、浑水退去、港口的警钟停了之后，女统领回到营房，锁子甲的下摆被齿轮啃得稀烂，金发还在滴水。",
-    "壁炉边，女统领背过身，让人一片片卸下湿透的锁子甲，再解开勒出红痕的里衣，热毛巾擦过肋下的淤青时，女统领轻轻吸了口气，往后靠了过来。",
-    "女统领转过身，第一次没用命令的口气：今晚……我不想一个人守着壁炉。你愿意留下吗？"
+    "换宽松亚麻长衫盘坐壁炉旁厚羊毛毯，共饮热麦酒并把废绞盘图纸与真账摊在膝间逐行翻看。",
+    "门外风雨敲窗，烤干的发丝滑落肩颈泛出暖意。",
+    "嘴硬追问背面画了几回，指尖却先按灭床头油灯。"
    ],
    "duration_minutes": 30,
    "hook_ids": [],
-   "id": "act_quarters_mail_unlaced",
+   "id": "act_quarters_hearth_ale_stay",
    "location_ids": [
-    "loc_commander_watergate_quarters"
+    "loc_commander_quarters"
    ],
    "start_minute": 1430,
    "tags": [
     "intimate"
    ],
-   "title": "营房里替女统领卸下锁子甲"
-  },
-  {
-   "beats": [
-    "营房的壁炉烧着泥炭，女统领只穿着一件宽松的亚麻衬衫，赤脚盘坐在羊毛毯上，手里捧着一杯热麦酒。",
-    "女统领拍了拍身边的毯子：坐过来。……今晚不吵工期，说说你在王都的事。"
-   ],
-   "duration_minutes": 30,
-   "hook_ids": [],
-   "id": "act_quarters_mulled_ale",
-   "location_ids": [
-    "loc_commander_watergate_quarters"
-   ],
-   "start_minute": 1240,
-   "tags": [
-    "intimate"
-   ],
-   "title": "壁炉边一起喝热麦酒"
-  },
-  {
-   "beats": [
-    "汛期结束、新绞盘装好的那一夜，女统领站在营房的窗前，看着平静下来的大河，手里攥着那张画废的图纸。",
-    "女统领没回头：工程修完了，你就要回王都了。……今晚你要是留下，我就去跟总督要人。你说好，我才转身。"
-   ],
-   "duration_minutes": 30,
-   "hook_ids": [],
-   "id": "act_quarters_flood_end",
-   "location_ids": [
-    "loc_commander_watergate_quarters"
-   ],
-   "start_minute": 1370,
-   "tags": [
-    "intimate"
-   ],
-   "title": "汛期结束的那一夜"
-  },
-  {
-   "beats": [
-    "天快亮的时候，窗外的大河泛起一层薄雾，女统领在羊毛毯里醒来，金发铺了满枕，整个人缠在人身上。",
-    "女统领把脸埋进人颈窝，闷声说：早巡……晚一刻再去。这是统领的命令。"
-   ],
-   "duration_minutes": 30,
-   "hook_ids": [],
-   "id": "act_quarters_dawn_river",
-   "location_ids": [
-    "loc_commander_watergate_quarters"
-   ],
-   "start_minute": 450,
-   "tags": [
-    "intimate"
-   ],
-   "title": "河水声里醒来"
+   "title": "泥炭壁炉共饮热麦酒对图"
   }
  ],
  "default_npc_gender_mix": {
@@ -1308,200 +1451,189 @@
  "era": "古典奇幻边境河港驻防与大型水利机械防御枢纽时代",
  "extends": null,
  "forbidden_terms": [
-  "软色情",
-  "系统金手指",
-  "无脑恋爱脑",
-  "机械降神",
-  "违背物理学自救",
-  "代词他她混淆",
-  "未成年人角色",
-  "涉性出路"
+  "智能手机",
+  "蓝牙",
+  "二维码",
+  "WIFI",
+  "无人机",
+  "监控摄像头",
+  "红外线",
+  "激光",
+  "航天",
+  "反应堆"
  ],
  "hooks": [
   {
-   "id": "hk_uv_warning_thunder",
+   "id": "hk_paladin_crossguard_approach",
    "kind": "approach",
+   "location_ids": [
+    "loc_winch_reverse_gear_gap",
+    "loc_watergate_winch_room"
+   ],
+   "slot": "paladin_commander",
+   "text": "齐胸浑水里，{paladin_commander.name}抓紧石柱拔出三公分十字剑格佩剑冷喝：“别管我的甲！先卡死齿轮，手叠上来压！”"
+  },
+  {
+   "id": "hk_paladin_gear_chest_approach",
+   "kind": "approach",
+   "location_ids": [
+    "loc_winch_reverse_gear_gap"
+   ],
+   "slot": "paladin_commander",
+   "text": "齿轮边窄得转不开身，{paladin_commander.name}战袍滑肩脊背紧贴你胸膛，耳根烧红喝道：“往我这边顶……顺甲带割！”"
+  },
+  {
+   "id": "hk_paladin_quarters_hearth_approach",
+   "kind": "approach",
+   "location_ids": [
+    "loc_commander_quarters"
+   ],
+   "slot": "paladin_commander",
+   "text": "{paladin_commander.name}反手闩上水门营房厚木门，盯住钢缆批条冷笑：“壁炉生好了。进都进来了……这笔账你想怎么算？”"
+  },
+  {
+   "id": "hk_paladin_draft_observe",
+   "kind": "observe",
+   "location_ids": [
+    "loc_commander_quarters"
+   ],
+   "slot": "paladin_commander",
+   "text": "木床边，{paladin_commander.name}背身解胸甲侧扣，飞快把枕下那张画废的绞盘图纸往床单深处按回去。"
+  },
+  {
+   "id": "hk_paladin_wave_accident",
+   "kind": "accident",
+   "location_ids": [
+    "loc_watergate_winch_room",
+    "loc_winch_reverse_gear_gap"
+   ],
+   "slot": "paladin_commander",
+   "text": "倒灌浊浪猛拍进机房，{paladin_commander.name}脚滑撞进你怀里，湿透亚麻衬衣贴着滚烫肩颈剧烈喘息。"
+  },
+  {
+   "id": "hk_engineer_cut_strap_approach",
+   "kind": "approach",
+   "location_ids": [
+    "loc_winch_reverse_gear_gap",
+    "loc_watergate_winch_room"
+   ],
+   "slot": "watergate_engineer",
+   "text": "{watergate_engineer.name}从身后揽紧腰胯，握短刀凑在耳边低哑：“别晃……摸准齿隙了，压着我一起把剑格压死！”"
+  },
+  {
+   "id": "hk_engineer_blueprint_approach",
+   "kind": "approach",
+   "location_ids": [
+    "loc_commander_quarters",
+    "loc_river_port_wharf"
+   ],
+   "slot": "watergate_engineer",
+   "text": "{watergate_engineer.name}把图纸翻过去藏进袖口，瞥见工期底稿喉结发紧：“私账好商量……背面那张画别当众拆穿！”"
+  },
+  {
+   "id": "hk_quartermaster_ledger_approach",
+   "kind": "approach",
+   "location_ids": [
+    "loc_river_port_wharf",
+    "loc_commander_quarters"
+   ],
+   "slot": "garrison_quartermaster",
+   "text": "{garrison_quartermaster.name}抱干衣堵在门影压低嗓音：“断缆没往总督船送风声吧？库匙和私房账契我都带来了。”"
+  },
+  {
+   "id": "hk_quartermaster_oil_observe",
+   "kind": "observe",
+   "location_ids": [
+    "loc_river_port_wharf"
+   ],
+   "slot": "garrison_quartermaster",
+   "text": "暴雨夜货棚下，{garrison_quartermaster.name}提着半桶火油与大剪刀，贼眉鼠眼往旧钢缆残骸边摸过去。"
+  },
+  {
+   "id": "hk_envoy_pin_approach",
+   "kind": "approach",
+   "location_ids": [
+    "loc_winch_emergency_pin",
+    "loc_river_port_wharf"
+   ],
+   "slot": "royal_inspector_envoy",
+   "text": "{royal_inspector_envoy.name}高举铜印挡在手柄前尖喝：“本官令此刻落闸！底下死活军法担着，谁敢拦官印！”"
+  },
+  {
+   "id": "hk_envoy_bribe_request",
+   "kind": "request",
+   "location_ids": [
+    "loc_commander_quarters",
+    "loc_winch_emergency_pin"
+   ],
+   "slot": "royal_inspector_envoy",
+   "text": "{royal_inspector_envoy.name}抓你袖口抖得语不成调：“那封敌商密信能不能放壁炉烧了？副印和这匣银票全归你！”"
+  },
+  {
+   "id": "hk_lockkeeper_rope_approach",
+   "kind": "approach",
+   "location_ids": [
+    "loc_watergate_winch_room",
+    "loc_winch_emergency_pin"
+   ],
+   "slot": "watergate_lockkeeper",
+   "text": "{watergate_lockkeeper.name}甩粗麻绳拦住石梯沉声：“把手柄攥着呢！暗石板还我，夜里偏门匙全听你调。”"
+  },
+  {
+   "id": "hk_lockkeeper_slab_observe",
+   "kind": "observe",
    "location_ids": [
     "loc_watergate_winch_room"
    ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{cavalry_commander_gwendolyn.name}银白精钢胸甲被水流冲刷，带着莹润的光泽的英气面容上水珠滑落，神色沉着将佩剑十字剑格递向齿隙。"
+   "slot": "watergate_lockkeeper",
+   "text": "油灯晃过湿壁时，{watergate_lockkeeper.name}正慌张往石柱暗缝塞回刻满船名与银钱记号的青石板。"
   },
   {
-   "id": "hk_crypt_uv_roaring_rush",
+   "id": "hk_auditor_forged_approach",
    "kind": "approach",
    "location_ids": [
-    "loc_watergate_winch_room"
+    "loc_watergate_winch_room",
+    "loc_river_port_wharf"
    ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{cavalry_commander_gwendolyn.name}在冰冷急流中站稳身形，璀璨金发微散，侧过脸庞果断告知绞盘机械的传动死点。"
+   "slot": "toll_house_auditor",
+   "text": "{toll_house_auditor.name}抱账袋扑跪湿阶红眼哀求：“三页税单是补赌债才改的，别家密账全给您，保我一命！”"
   },
   {
-   "id": "hk_crypt_breaker_groan_deadlock",
-   "kind": "approach",
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "slot": "watergate_engineer",
-   "text": "{watergate_engineer.name}用手臂揽住女统领纤腰抵抗水流冲击，用坚实身躯筑起阻隔激流的屏障。"
-  },
-  {
-   "id": "hk_breaker_deformation_scrape",
-   "kind": "approach",
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "slot": "watergate_engineer",
-   "text": "{watergate_engineer.name}握紧女统领微凉的手掌，合力将十字剑格狠狠楔入飞旋齿轮咬合间隙的最深处。"
-  },
-  {
-   "id": "hk_tight_breath_ear_brush",
-   "kind": "approach",
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{cavalry_commander_gwendolyn.name}带着淡淡的红晕的颊边因紧咬银牙泛起淡淡红晕，温热呼吸拂过同伴耳根，冷静数出链轮行程的停顿节点。"
-  },
-  {
-   "id": "hk_lace_corset_heat_exchange",
-   "kind": "approach",
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{cavalry_commander_gwendolyn.name}身躯紧靠在同伴怀中，在浑水涌上锁骨之际，沉稳引导短刀刀尖切向锁甲系带卡扣。"
-  },
-  {
-   "id": "hk_scepter_flange_notch_align",
-   "kind": "approach",
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{cavalry_commander_gwendolyn.name}展现出边境统帅的从容魄力，借着齿轮骤停的反冲惯性，清亮低呼发出全力割带号令。"
-  },
-  {
-   "id": "hk_rubber_hammer_chock_in",
-   "kind": "approach",
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "slot": "watergate_engineer",
-   "text": "{watergate_engineer.name}在巨浪扑来的危急瞬间死死顶住女统领双肩，两副年轻躯体在激流中严丝合缝同生共死。"
-  },
-  {
-   "id": "hk_satin_ribbon_bind_grip",
-   "kind": "approach",
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{cavalry_commander_gwendolyn.name}将温软娇躯毫无保留倚向同伴，以同频呼吸化解冰冷，将周身重压通过剑身压向死锁核心。"
-  },
-  {
-   "id": "hk_atrium_air_pressure_drop",
-   "kind": "approach",
-   "location_ids": [
-    "loc_watergate_winch_room"
-   ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{cavalry_commander_gwendolyn.name}细听水下齿轮受力咬死的金铁沉鸣，在锁带彻底断开的刹那敏捷抽出修长身姿。"
-  },
-  {
-   "id": "hk_synchronized_grunt_heave",
-   "kind": "approach",
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "slot": "watergate_engineer",
-   "text": "{watergate_engineer.name}与女统领一同在齐胸急流中奋力发力，成功将佩剑卡死在传动箱，齿轮戛然而止。"
-  },
-  {
-   "id": "hk_spring_latch_pop_rebound",
-   "kind": "approach",
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{cavalry_commander_gwendolyn.name}在摆脱战甲束缚的瞬间扑入同伴怀中，稳住重心，双手紧紧握住同伴的手掌。"
-  },
-  {
-   "id": "hook_gwendolyn_extra_fish",
+   "id": "hk_paladin_tavern_fish_approach",
    "kind": "approach",
    "location_ids": [
     "loc_river_port_wharf"
    ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{npc.name}把一条烤鱼推到人面前，头也不抬：多点了一条。……不吃就喂码头的猫。"
+   "slot": "paladin_commander",
+   "text": "{paladin_commander.name}勒马把一包烤河鱼塞进你怀里冷哼：“多买了一条，不吃喂野猫——晚上跟我下机房查缆！”"
   },
   {
-   "id": "hook_gwendolyn_where_engineer",
+   "id": "hk_paladin_hearth_ale_approach",
    "kind": "approach",
    "location_ids": [
-    "loc_river_port_wharf"
+    "loc_commander_quarters"
    ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{npc.name}在码头上勒住马张望了一圈，嘴硬地问：那个工程师呢？……没什么，问问工期。"
-  },
-  {
-   "id": "hook_gwendolyn_ride_offer",
-   "kind": "approach",
-   "location_ids": [
-    "loc_river_port_wharf",
-    "loc_commander_watergate_quarters"
-   ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{npc.name}拍了拍马背，挑眉看人：上来。今天带你去看看大河上游。"
-  },
-  {
-   "id": "hook_gwendolyn_quarters_door",
-   "kind": "approach",
-   "location_ids": [
-    "loc_commander_watergate_quarters"
-   ],
-   "slot": "cavalry_commander_gwendolyn",
-   "text": "{npc.name}倚在营房门边，金发松松挽着：壁炉生好了。……进来，替我擦剑。"
-  },
-  {
-   "id": "hook_engineer_drawing_back",
-   "kind": "approach",
-   "location_ids": [
-    "loc_river_port_wharf",
-    "loc_commander_watergate_quarters"
-   ],
-   "slot": "watergate_engineer",
-   "text": "{npc.name}把图纸翻过来又翻回去：背面……没画什么。"
-  },
-  {
-   "id": "hook_engineer_drop_pin_note",
-   "kind": "approach",
-   "location_ids": [
-    "loc_river_port_wharf",
-    "loc_watergate_winch_room"
-   ],
-   "slot": "watergate_engineer",
-   "text": "{npc.name}指着图纸上一处：应急落闸的手柄在这里。……万一出事，你记住先扳这个。"
+   "slot": "paladin_commander",
+   "text": "壁炉火苗舔锅沿，{paladin_commander.name}着宽松亚麻衫赤脚盘坐羊毛毯抬下巴：“热麦酒温好了……闩门把批条拿来。”"
   }
  ],
  "id": "paladin_commander_flooded_dungeon_armor",
  "locations": [
   {
    "affordances": [
-    "在湍急浑水中抓住机房承重石柱稳住身体重心",
-    "潜入刺骨浑水中探摸战甲下摆被链轮卡死的咬合死点",
-    "迎着倒灌浪涌紧贴链轮基座调整发力支撑角度"
+    "抓紧承重石柱在齐胸急流里贴身稳住重心",
+    "潜入浑水探摸被链条拖扯的战甲护裙与革带",
+    "贴靠后背分担浪涌并低声逼问旧账批条"
    ],
-   "detail": "位于大河水门下方的开阔水工枢纽机房，大河浑水不断破门倒灌，水位已漫过胸口，高速反转的巨大起闭链轮发出剧烈轰鸣。",
+   "detail": "大河水门下方石砌暗黑水工枢纽，浊浪倒灌漫过胸口，铁网油灯摇晃投影，铁链抽打水柱轰鸣。",
    "exits": [
     "loc_winch_reverse_gear_gap",
-    "loc_winch_emergency_drop_pin"
+    "loc_winch_emergency_pin"
    ],
    "id": "loc_watergate_winch_room",
    "name": "水门链轮机房",
    "pressure_modifiers": {
-    "p_chain_wheel_reverses": "链轮又反转了半圈，铁链抽在石柱上火星四溅。",
-    "p_flood_to_chest": "水位又涨了一指，浑水拍到胸口上。"
+    "press_flood_chest_surge": "浊水涨过锁骨，暗流拍得两人贴死在石柱上。"
    },
    "privacy": "private",
    "tags": [
@@ -1509,53 +1641,77 @@
     "disaster",
     "intimate"
    ],
-   "visibility": "铁网油灯的光在浑水上晃，看得清对方湿透的脸，看不清水下的暗流。",
+   "visibility": "浊水轰鸣吞没话音，油灯仅照亮身前三尺湿透的脸。",
    "witnesses": []
   },
   {
    "affordances": [
-    "将淬火不锈钢佩剑十字剑格硬质直角凸缘死死楔入齿隙",
-    "两人合力下压剑身迫使齿轮反转行程彻底卡滞停摆"
+    "胸背严丝合缝相贴、四手叠剑柄猛压十字剑格楔齿",
+    "挥短刀贴腰胯切开勒死呼吸的锁甲革带与战袍",
+    "凑近耳畔亮出批条底账迫高傲统领低头"
    ],
-   "detail": "巨大的双联铸钢传动齿轮正在反转拉扯，精钢锁子甲下摆被紧紧卷入两齿啮合之间形成致命自锁死角。",
+   "detail": "双联铸钢传动齿轮反转啃咬精钢锁子甲下摆的窄缝，窄得转不开身，三公分十字剑格死楔齿尖。",
    "exits": [
     "loc_watergate_winch_room"
    ],
    "id": "loc_winch_reverse_gear_gap",
-   "name": "绞盘齿轮缝",
+   "name": "绞盘齿轮死角",
    "pressure_modifiers": {
-    "p_crossguard_chest_press": "女统领背贴在工程师胸前，四只手叠在剑柄上，湿透的战袍贴着对方的衣衫。",
-    "p_crossguard_chipping": "十字剑格的直角凸缘被齿尖啃出一道缺口，再硬别可能整块崩掉。"
+    "press_gear_chest_crush": "暗金战袍滑下半肩，两人胸背相抵在齿隙前剧喘。"
    },
    "privacy": "private",
    "tags": [
-    "workplace",
-    "intimate"
+    "intimate",
+    "disaster",
+    "workplace"
    ],
-   "visibility": "双联铸钢齿轮正在反转，锁子甲的下摆卷在两齿之间，剑格卡进去时迸出一串火星。",
+   "visibility": "齿轮箱夹出仅容胸背紧贴的死角，水声震耳外人绝无可能挤进。",
    "witnesses": []
   },
   {
    "affordances": [
-    "在割断战甲系带脱困后迅速合力扳动应急手柄",
-    "感受沉重铁闸落下截断倒灌水流、水位迅速回落的震动"
+    "闩死木门在壁炉前一片片卸下湿冷胸甲与锁子甲",
+    "翻出枕下废图纸或抽屉旧钢缆批条讨要交代",
+    "用干热布巾擦拭金发与肋下淤青逼傲气女将服软"
    ],
-   "detail": "位于齿轮箱上方的铜制应急制动手柄，承受着截断暗河水流的关键自锁重力锤。",
+   "detail": "驻防营石砌营房，厚羊毛毯木床、泥炭暖壁炉与铁甲架；枕下藏废图纸，抽屉锁换缆旧批条。",
+   "exits": [
+    "loc_river_port_wharf"
+   ],
+   "id": "loc_commander_quarters",
+   "name": "统领水门营房",
+   "pressure_modifiers": {
+    "press_quarter_cable_fraud": "炉火映红湿贴亚麻衫，木门与钢缆批条就在眼前。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "visibility": "厚橡木门一闩即隔绝雨夜马嘶号子，只余炉火噼啪。",
+   "witnesses": []
+  },
+  {
+   "affordances": [
+    "割带脱困后合力搬下铜制应急重力落闸销截水",
+    "抢夺差役或看守手中扳杆主钥控制落闸时机"
+   ],
+   "detail": "齿轮箱上方铜制应急重力落闸手柄高台，紧连港口钟楼与吊桥石台，暴风雨夜警钟急敲。",
    "exits": [
     "loc_watergate_winch_room",
     "loc_river_port_wharf"
    ],
-   "id": "loc_winch_emergency_drop_pin",
-   "name": "水闸落销",
+   "id": "loc_winch_emergency_pin",
+   "name": "水闸落销高台",
    "pressure_modifiers": {
-    "p_barges_ram_watergate": "上游冲下来的驳船一下下撞着水门，外面的人在拼命拉缆绳。"
+    "press_envoy_gate_betrayal": "铜制重力落闸销震颤欲落，高台石屑扑簌往下掉。"
    },
    "privacy": "public",
    "tags": [
     "workplace",
     "disaster"
    ],
-   "visibility": "应急落闸手柄就在齿轮箱上方，港口警钟的声音从水门上面传下来，一阵比一阵急。",
+   "visibility": "风灯火把映彻高台，看守与总督差役伸颈往下盯。",
    "witnesses": [
     "bg_young_trooper",
     "bg_bell_keeper",
@@ -1564,49 +1720,29 @@
   },
   {
    "affordances": [
-    "陪女统领巡一趟税关",
-    "在码头酒馆吃一盘烤鱼",
-    "站在吊桥上看大河落日"
+    "借查商船吃水清单将嫌疑人逼入货棚暗影盘问",
+    "拎热麦酒与烤河鱼趁雨夜敲开水门营房厚木门"
    ],
-   "detail": "边境大河上的河港码头，石砌的栈桥伸进河里，商船、驳船挤满了泊位，税关的木屋前排着长队，码头边的酒馆从早到晚飘着麦酒和烤鱼的味道。",
+   "detail": "河港石砌栈桥码头，税关木屋、停满商船驳船的泊位与飘麦酒烤鱼香的酒馆沿河排开。",
    "exits": [
-    "loc_commander_watergate_quarters",
-    "loc_winch_emergency_drop_pin"
+    "loc_commander_quarters",
+    "loc_winch_emergency_pin"
    ],
    "id": "loc_river_port_wharf",
-   "name": "河港码头",
-   "pressure_modifiers": {},
-   "privacy": "public",
+   "name": "河港石砌码头",
+   "pressure_modifiers": {
+    "press_smuggle_ledger_leak": "泊位驳船互相碰撞，税关暗账风波已压不住。"
+   },
+   "privacy": "semi",
    "tags": [
-    "workplace"
+    "workplace",
+    "crime"
    ],
-   "visibility": "船工、商人、税关的书吏、驻防的铁骑都在码头上来往，女统领跟谁多站一会儿，第二天整个河港都知道。",
+   "visibility": "日间熙攘，雨夜风灯摇曳，货棚后可短暂避人耳目。",
    "witnesses": [
-    "bg_young_trooper",
-    "bg_bell_keeper",
-    "bg_fish_wife",
-    "bg_governor_runner"
+    "bg_dock_porter",
+    "bg_toll_veteran"
    ]
-  },
-  {
-   "affordances": [
-    "坐在壁炉边陪女统领擦佩剑",
-    "替女统领卸下锁子甲",
-    "把营房的木门闩上"
-   ],
-   "detail": "水门旁驻防营里一间石砌的营房，一张铺着厚羊毛毯的木床、一座烧着泥炭的壁炉，墙上挂着锁子甲和那柄指挥官佩剑，窗外就是水门和整条大河。",
-   "exits": [
-    "loc_river_port_wharf"
-   ],
-   "id": "loc_commander_watergate_quarters",
-   "name": "女统领的水门营房",
-   "pressure_modifiers": {},
-   "privacy": "private",
-   "tags": [
-    "intimate"
-   ],
-   "visibility": "厚木门一闩，营里的马嘶和码头的号子就远了，只剩壁炉的噼啪声和窗外的河水声。",
-   "witnesses": []
   }
  ],
  "name_pools": {
@@ -1622,12 +1758,9 @@
    "莱恩",
    "莫顿",
    "诺斯",
-   "彭德尔",
-   "斯通",
-   "温特"
+   "斯通"
   ],
   "given_female": [
-   "格温多琳",
    "伊索尔德",
    "罗薇娜",
    "艾格尼丝",
@@ -1639,11 +1772,9 @@
    "卡桑德拉",
    "芙蕾雅",
    "海尔加",
-   "莉安娜",
-   "西比尔"
+   "莉安娜"
   ],
   "given_male": [
-   "艾伦",
    "伯纳德",
    "康拉德",
    "德里克",
@@ -1651,7 +1782,6 @@
    "弗雷德",
    "吉尔伯特",
    "休伯特",
-   "伊沃",
    "杰弗里",
    "兰斯洛",
    "莫里斯",
@@ -1670,9 +1800,7 @@
    "闸",
    "浪",
    "湾",
-   "埠",
-   "津",
-   "滩"
+   "埠"
   ],
   "nickname_patterns": [
    {
@@ -1686,156 +1814,181 @@
   ],
   "order": "family_first"
  },
- "notes": "按原稿加入。原稿除标题、简介、基调、女统领外貌、世界规则风俗、三处脱困地点与转折外，人物、压力、日常与钩子大多照抄了吸血鬼地宫那一篇，这里按边境河港的题材整篇重写，并按查重时的建议把场景从要塞挪到边境河港城：女统领带着一队铁骑驻防河港，管着水门、吊桥和税关，水门工程师是王国派来改造水门绞盘的，白天在码头、税关、营房之间来往，夜里是暴风雨里水门钢缆崩断、链轮反转、战甲下摆被卷进齿缝。标题里的要塞换成了河港。新增河港码头与女统领的水门营房两处日常地点；婴儿肥换成了其余外貌描写；亲密前提写明脱困之后、双方清醒自愿；新增营房里的四个亲密日常。",
+ "notes": "",
  "player_identities": [
   {
    "age_range": [
-    21,
-    26
+    36,
+    50
    ],
-   "baseline": "刚被派到河港税关的书吏，第一次见识边境的大河，第一次跟铁骑打交道，什么都要问。",
+   "baseline": "巡视边境大河的总督大员，掌水门改造裁决与防汛调令，暗握换缆批条与军需回扣底档。",
    "gender": "any",
-   "id": "pi_new_toll_clerk",
-   "reputation": "税关里最年轻的书吏。",
+   "id": "pc_royal_water_governor",
+   "reputation": "令整座河港屏息迎候、一言定驻军去留的显贵",
    "resources": [
-    "一本税册",
-    "一支鹅毛笔",
-    "一枚税关的木印"
+    "河道总督铜印信与铁骑调令底稿",
+    "防水夹层内的劣质钢缆签收批条副本"
    ],
    "risks": [
-    "税册上少记一船货，就要被赶回王都。"
+    "巡视期间若水门溃决淹城回王都必遭渎职严惩"
    ],
-   "role": "刚到任的税关书吏",
-   "social_position": "low",
+   "role": "王国河道总督",
+   "social_position": "high",
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}总督"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{given}大人"
     }
    ]
   },
   {
    "age_range": [
-    28,
-    45
+    30,
+    42
    ],
-   "baseline": "在河港开了十年船行的老板，码头上一半的驳船都从这里租出去。",
+   "baseline": "兵部密派核查河港军械损耗的特使，捏着全营军需验收入库单与往来秘函，专敲打桀骜边将。",
    "gender": "any",
-   "id": "pi_boat_house_owner",
-   "reputation": "码头上消息最灵通的人之一。",
+   "id": "pc_frontier_marshall_inspector",
+   "reputation": "冷面查账、连马鞍铁扣都敢拆开秤重的特使",
    "resources": [
-    "一家船行",
-    "十几条驳船",
-    "一肚子码头上的消息"
+    "兵部火漆稽查令与边境驿站兵符",
+    "密封军需验收异常批注原件"
    ],
    "risks": [
-    "水门出了事，船行的驳船就全砸了。"
+    "激怒边境骄兵恐在暴雨夜遭暗算留于机房"
    ],
-   "role": "码头船行的老板",
+   "role": "边境铁骑军务特使",
+   "social_position": "high",
+   "title_patterns": [
+    {
+     "gender": "any",
+     "pattern": "{family}特使"
+    },
+    {
+     "gender": "any",
+     "pattern": "{given}长官"
+    }
+   ]
+  },
+  {
+   "age_range": [
+    27,
+    34
+   ],
+   "baseline": "王都工匠学院毕业年满二十八周岁的成年水利工程师，与女统领吵了整季，熟知绞盘齿距与对方甲带系扣。",
+   "gender": "any",
+   "id": "pc_watergate_engineer",
+   "reputation": "嘴笨手稳、画图时眼角总往女统领身上瞥的匠师",
+   "resources": [
+    "割缆绳快刀与水门绞盘改造图纸",
+    "油布袋里暗藏的暗流与旧料检修底稿"
+   ],
+   "risks": [
+    "水门出事易被流言当成对岸奸细押送王都"
+   ],
+   "role": "王都特派水门工程师",
    "social_position": "equal",
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}匠师"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{given}工程师"
     }
    ]
   },
   {
    "age_range": [
     25,
-    38
+    36
    ],
-   "baseline": "替河港商会管账的账房，水门改造的每一枚金币都要从这本账上过。",
+   "baseline": "核封商船吃水清单的税关稽核官，把驻防营私放走私驳船与虚报修门银钱的账记得丝毫不差。",
    "gender": "any",
-   "id": "pi_guild_accountant",
-   "reputation": "以算账精明出名的账房。",
+   "id": "pc_toll_house_auditor",
+   "reputation": "算盘一拨就知道谁口袋进了金币的笑面文官",
    "resources": [
-    "一本商会的账簿",
-    "一枚商会的印章",
-    "一张进出水门的通行令"
+    "税关木印、吃水总簿与火漆封条",
+    "夜泊走私船行密账抄本"
    ],
    "risks": [
-    "账目出了错，商会就不肯再出钱修水门。"
+    "私账未备副本，若在浑水湿透或被夺即满盘皆输"
    ],
-   "role": "河港商会的账房",
+   "role": "河港税关总账稽核",
    "social_position": "equal",
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}主簿"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{given}稽核"
     }
    ]
   },
   {
    "age_range": [
-    35,
-    52
+    28,
+    44
    ],
-   "baseline": "王国派来巡视边境河道的总督，水门改不改、驻防的铁骑留不留，最后都落在这个人的一句话上。",
+   "baseline": "经营十几条驳船的成年船行老板，位卑却通吃码头三教九流，握着水门夜开偏闸放私船的口供契书。",
    "gender": "any",
-   "id": "pi_river_governor",
-   "reputation": "整个河港都知道这位总督的分量。",
+   "id": "pc_boat_house_owner",
+   "reputation": "表面哈腰缴税、暗地把全港风声捂在怀里的地头蛇",
    "resources": [
-    "一枚河道总督的印信",
-    "一份河港驻防的调令底稿",
-    "随时能叫停工程的权限"
+    "十余条抢险驳船、粗麻缆绳与油布篷",
+    "夜开水门收银走私的画押契书"
    ],
    "risks": [
-    "巡视期间水门出了事，总督在王都也难交代。"
+    "若水门未及时落闸，半数驳船将在急流撞毁破产"
    ],
-   "role": "王国派来的河道总督",
-   "social_position": "high",
+   "role": "码头驳船行成年东家",
+   "social_position": "low",
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}老板"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{given}船主"
     }
    ]
   }
  ],
- "premise": "边境大河上的河港城，水门、吊桥和税关都归驻防的铁骑女统领管。王国派来一位水门工程师改造老绞盘，两人为工期吵了一个汛期；税关书吏、船行老板和商会账房每天都来打听开闸的日子。春汛要来了，吊桥的主承重钢缆锈得厉害。",
+ "premise": "春汛暴涨夜，边境河港水门钢缆骤断，双联铸钢传动齿轮失控反转，浑水漫过胸口；驻防铁骑女统领的精钢锁子甲下摆被死死卷入齿隙，手边只剩三公分厚十字剑格佩剑与半截湿透战袍，而上面应急落闸的警钟正一寸寸催命。",
  "pressures": [
   {
-   "choice": "是趁浪头退下去的间隙下撬，还是先抱住石柱稳住身子？",
+   "choice": "紧贴后背趁退浪硬楔齿隙，还是先抱死石柱缓口气？",
    "exits": [
     {
-     "cost": "撬到一半浪头又来，可能前功尽弃",
-     "option": "趁浪头退下去合力下撬"
+     "cost": "浪涌反打双膝撞青且浑身冰水刺骨",
+     "option": "胸背贴死趁退浪合压十字剑格楔断链环"
     },
     {
-     "cost": "水只会越涨越高",
-     "option": "先抱住石柱稳住身子"
+     "cost": "耽搁发力令水位又涨上一指深",
+     "option": "拽紧石柱拉稳彼此腰带避主浪再下撬"
     }
    ],
    "far": {
-    "consequence": "两人被淹在机房里，等不到外面的人。",
+    "consequence": "困在齿轮边的人员尽数溺毙于冰冷机房。",
     "due_days": 1,
-    "trigger": "浑水灭顶"
+    "trigger": "浑水淹没机房拱顶"
    },
    "flags": [
     "timed"
    ],
    "hook_ids": [],
-   "id": "p_flood_to_chest",
+   "id": "press_flood_chest_surge",
    "immediate": {
-    "minutes": 2,
-    "text": "一个浪头拍过来，女统领被冲得整个人撞进工程师怀里，佩剑差点脱手。"
+    "minutes": 3,
+    "text": "浊浪扑来，湿透精钢胸甲猛撞入你怀里震得生疼。"
    },
    "leverage": null,
    "location_ids": [
@@ -1843,400 +1996,397 @@
     "loc_winch_reverse_gear_gap"
    ],
    "near": {
-    "deadline_minutes": 4,
-    "text": "水位又涨了一指，两人只能仰着头喘气。"
+    "deadline_minutes": 15,
+    "text": "十五分钟水位漫过咽喉，油灯灭再难看清齿缝。"
    },
-   "objective": "在浑水灭顶之前卡死齿轮、割甲脱困。",
+   "objective": "趁浪头间隙胸背紧贴稳重心，合压十字剑格卡停齿轮。",
    "source": "nature",
-   "start_minute": 10,
+   "start_minute": 1380,
    "tags": [
-    "workplace",
-    "disaster"
-   ],
-   "title": "浑水倒灌漫到胸口",
-   "trigger": "大河的浑水破门倒灌，一寸寸往上漫，从腰际漫到胸口，暗流冲得人站不稳。"
-  },
-  {
-   "choice": "是先用剑格卡死齿轮，还是先割断甲带让女统领脱身？",
-   "exits": [
-    {
-     "cost": "链轮不停，割了也可能被拖进去",
-     "option": "先割甲带"
-    },
-    {
-     "cost": "卡偏了剑格会被齿尖啃碎",
-     "option": "先用剑格卡死齿轮"
-    }
-   ],
-   "far": {
-    "consequence": "女统领被链轮卷进齿缝，工程师再也拉不出来。",
-    "due_days": 1,
-    "trigger": "人被拖进齿缝"
-   },
-   "flags": [
-    "timed"
-   ],
-   "hook_ids": [],
-   "id": "p_chain_wheel_reverses",
-   "immediate": {
-    "minutes": 2,
-    "text": "链轮又转了半圈，锁子甲的下摆被扯得咯吱作响，女统领疼得咬住嘴唇。"
-   },
-   "leverage": null,
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "near": {
-    "deadline_minutes": 4,
-    "text": "铁链抽在石柱上火星四溅，齿缝离女统领的腰只剩一掌宽。"
-   },
-   "objective": "在链轮把人拖进齿缝之前卡死死点。",
-   "source": "accident",
-   "start_minute": 10,
-   "tags": [
-    "workplace",
-    "disaster"
-   ],
-   "title": "链轮反转拖拽战甲",
-   "trigger": "起闭绞盘的链轮还在反转，铁链一下下抽打着石壁，每转半圈都把战甲往齿缝里拖一寸。"
-  },
-  {
-   "choice": "是一刀割断主甲带，还是一根根挑开小扣？",
-   "exits": [
-    {
-     "cost": "刀可能划伤女统领",
-     "option": "一刀割断主甲带"
-    },
-    {
-     "cost": "挑扣要耗掉宝贵的时间",
-     "option": "一根根挑开小扣"
-    }
-   ],
-   "far": {
-    "consequence": "女统领被甲带勒伤，再也使不上力气。",
-    "due_days": 1,
-    "trigger": "甲带勒断肋骨"
-   },
-   "flags": [
-    "timed"
-   ],
-   "hook_ids": [],
-   "id": "p_armor_hem_dragged",
-   "immediate": {
-    "minutes": 2,
-    "text": "短刀割进甲带，浑水里冒出一串气泡，甲带只断了一半。"
-   },
-   "leverage": null,
-   "location_ids": [
-    "loc_winch_reverse_gear_gap"
-   ],
-   "near": {
-    "deadline_minutes": 4,
-    "text": "甲带勒得更紧了，女统领的脸色发白。"
-   },
-   "objective": "在甲带勒伤人之前割断。",
-   "source": "person",
-   "start_minute": 10,
-   "tags": [
+    "disaster",
     "workplace"
    ],
-   "title": "甲带勒得喘不上气",
-   "trigger": "精钢锁子甲的下摆被死死咬在两齿之间，甲带勒得女统领喘不上气。"
+   "title": "浑水漫胸倒灌灭顶险局",
+   "trigger": "大河浊浪冲破水门底缝倒灌进机房，冰冷浑水漫过胸口，暗流扯得两人几乎被冲离链轮石柱。"
   },
   {
-   "choice": "是为了统领的威严拉开半寸距离，还是干脆贴紧了一起发力？",
+   "choice": "令{watergate_engineer.ta}贴身割开甲带并回营房赔罪，还是逐枚挑扣？",
    "exits": [
     {
-     "cost": "这一夜之后，女统领再也不是只瞪着对方看了",
-     "option": "放下威严贴紧对方，四只手一起压在剑柄上"
+     "cost": "短刀险划破里衣侧腰，匠师彻底受节制",
+     "option": "抵齿隙令{watergate_engineer.ta}割革带，回营房交私账听罚"
     },
     {
-     "cost": "力气使不到一处，卡不住齿轮",
-     "option": "各自侧身单手发力"
+     "cost": "挑扣耗时，胸甲险被铁链再拽半寸",
+     "option": "令{watergate_engineer.ta}拿铜尺挑小扣伺机抽身"
     }
    ],
    "far": {
-    "consequence": "剑格从齿轮死点里滑出去，错过最后的卡死窗口。",
+    "consequence": "人沉底碾伤，匠师亦遭按奸细斩首。",
     "due_days": 1,
-    "trigger": "分心导致剑格滑脱"
+    "trigger": "战甲绞齿轮兼工期案发"
    },
    "flags": [
-    "timed"
+    "timed",
+    "leverage"
    ],
    "hook_ids": [],
-   "id": "p_crossguard_chest_press",
+   "id": "press_gear_chest_crush",
    "immediate": {
-    "minutes": 2,
-    "text": "女统领被勒得娇喘吁吁，割开的甲带垂在水里，暗金战袍滑下半边肩头，酥胸半露着贴在对方手臂上，金发散在两人之间。"
+    "minutes": 3,
+    "text": "甲带勒进里衣，{watergate_engineer.name}见私账脸色微变。"
    },
-   "leverage": null,
+   "leverage": {
+    "basis": "你握着{watergate_engineer.name}虚报工期私账底稿与废图纸秘密。",
+    "holder": "player",
+    "subject": "watergate_engineer"
+   },
    "location_ids": [
-    "loc_watergate_winch_room",
-    "loc_winch_reverse_gear_gap"
+    "loc_winch_reverse_gear_gap",
+    "loc_commander_quarters"
    ],
    "near": {
-    "deadline_minutes": 4,
-    "text": "两人的心跳撞在一起，女统领的号子第一次喊乱了，谁都分不清是冷，还是别的什么。"
+    "deadline_minutes": 10,
+    "text": "十分钟甲衣拽进齿尖，肋骨肩胛难保完整。"
    },
-   "objective": "贴得这么近的时候，还得把心思放在剑格的角度和号子上。",
-   "source": "nature",
-   "start_minute": 10,
+   "objective": "令{watergate_engineer.name}割带稳齿隙，回营房算清私账。",
+   "source": "accident",
+   "start_minute": 1382,
    "tags": [
-    "workplace",
-    "disaster"
+    "intimate",
+    "disaster",
+    "workplace_power"
    ],
-   "title": "齿轮边胸背相贴",
-   "trigger": "齿轮边窄得转不开身，女统领只能背贴在工程师胸前，四只手叠在剑柄上一起往下压。"
+   "title": "链轮勒甲兼割带贴身局",
+   "trigger": "齿轮把锁甲往齿缝拽深一寸，呼吸窒息；同时你袖里压着{watergate_engineer.name}工期私账。"
   },
   {
-   "choice": "是继续加力赌一把，还是退出来换个角度重新卡？",
+   "choice": "摔出密信押送刑部，还是锁进营房剥官袍逼交副印银票换烧信？",
    "exits": [
     {
-     "cost": "甲带会被磨断",
-     "option": "用割下的甲带缠住剑格再压"
+     "cost": "私放受贿大员须承担包庇敌商密信风险",
+     "option": "逼{royal_inspector_envoy.ta}喊停落闸拽进营房交副印银票抵烧信"
     },
     {
-     "cost": "换角度要重新找死点，浑水可能等不及",
-     "option": "退出来换个角度"
+     "cost": "撕破脸恐招王都总督府反咬驻军抗命",
+     "option": "亮密信夺差役兵刃暂押高台听候发落"
     }
    ],
    "far": {
-    "consequence": "崩碎的剑格再也卡不住齿轮，两人失去唯一的撬具。",
+    "consequence": "驳船碎裂机房水淹，监工难逃王都凌迟刑。",
     "due_days": 1,
-    "trigger": "剑格崩碎"
+    "trigger": "违令落闸兼密信走漏"
    },
    "flags": [
-    "timed"
+    "timed",
+    "leverage"
    ],
    "hook_ids": [],
-   "id": "p_crossguard_chipping",
+   "id": "press_envoy_gate_betrayal",
    "immediate": {
-    "minutes": 2,
-    "text": "剑格发出一声刺耳的崩响，握剑柄的虎口被震得裂开。"
+    "minutes": 4,
+    "text": "落闸销吱呀震颤，{royal_inspector_envoy.name}盯着火漆密信发抖。"
    },
-   "leverage": null,
+   "leverage": {
+    "basis": "你握着{royal_inspector_envoy.name}收敌商重贿拖延防汛泄洪令的火漆密信。",
+    "holder": "player",
+    "subject": "royal_inspector_envoy"
+   },
    "location_ids": [
-    "loc_winch_reverse_gear_gap"
+    "loc_winch_emergency_pin",
+    "loc_commander_quarters"
    ],
    "near": {
-    "deadline_minutes": 4,
-    "text": "缺口越来越深，剑身也开始微微发弯。"
+    "deadline_minutes": 15,
+    "text": "十五分钟后差役砸落铁闸，机房泊船同遭横祸。"
    },
-   "objective": "得在剑格崩掉之前找准最后一个受力点。",
-   "source": "nature",
-   "start_minute": 10,
+   "objective": "压服{royal_inspector_envoy.name}叫停落闸，押回营房吐出银票与总督副印。",
+   "source": "institution",
+   "start_minute": 1384,
    "tags": [
-    "workplace",
-    "disaster"
+    "intimate",
+    "workplace_power",
+    "coercion_theme"
    ],
-   "title": "十字剑格被齿尖啃缺",
-   "trigger": "佩剑的十字剑格卡在齿轮死点里，直角凸缘已经被齿尖啃出一道缺口，再硬别可能整块崩掉。"
+   "title": "强令落闸兼通敌密信局",
+   "trigger": "{royal_inspector_envoy.name}唆使差役扳落闸闷死人证，你恰截获漆木匣内通敌受贿火漆密信。"
   },
   {
-   "choice": "是先落闸截水，还是先冲上面喊话让人别拉缆？",
+   "choice": "带回壁炉旁逼{toll_house_auditor.ta}交印依附换活命，还是押交税关刑狱？",
    "exits": [
     {
-     "cost": "喊话更耗力气",
-     "option": "先冲上面喊话"
+     "cost": "平掉税银漏洞须自担隐匿督察之责",
+     "option": "拽入壁炉旁迫{toll_house_auditor.ta}交税关木印与暗账作贴身线人"
     },
     {
-     "cost": "外面的人可能先被驳船撞伤",
-     "option": "先落闸截水"
+     "cost": "未缴木印，书记官日后仍可趁夜逃走",
+     "option": "暂扣残页令{toll_house_auditor.ta}冒雨调火油与驳船绳救场"
     }
    ],
    "far": {
-    "consequence": "水门塌进机房，整座河港被大河淹没。",
-    "due_days": 1,
-    "trigger": "水门被撞垮"
+    "consequence": "贪墨书记官菜市口斩首，牵出半数码头暗线。",
+    "due_days": 2,
+    "trigger": "刮改税簿案送交刑部"
    },
    "flags": [
-    "timed"
+    "timed",
+    "leverage"
    ],
    "hook_ids": [],
-   "id": "p_barges_ram_watergate",
-   "immediate": {
-    "minutes": 2,
-    "text": "又一条驳船撞上水门，整座机房都震了一下，石屑哗哗往下掉。"
-   },
-   "leverage": null,
-   "location_ids": [
-    "loc_watergate_winch_room",
-    "loc_winch_reverse_gear_gap"
-   ],
-   "near": {
-    "deadline_minutes": 4,
-    "text": "驳船越撞越凶，水门的铰链开始变形。"
-   },
-   "objective": "落闸截水，让外面的人知道里面的人还活着。",
-   "source": "nature",
-   "start_minute": 10,
-   "tags": [
-    "workplace",
-    "disaster"
-   ],
-   "title": "断缆驳船撞击水门",
-   "trigger": "上游冲下来的驳船挣断了缆绳，一下下撞着水门，外面的人在拼命拉缆，港口的警钟敲个不停。"
-  },
-  {
-   "choice": "女统领出面担保工程师，还是让工程师去码头当众把断口给人看",
-   "exits": [
-    {
-     "cost": "以后工程师出了任何事，女统领都要一起担",
-     "option": "女统领出面担保"
-    },
-    {
-     "cost": "断口证明是钢缆老化，那批旧料是女统领亲手批的",
-     "option": "当众把断口给人看"
-    }
-   ],
-   "far": {
-    "consequence": "水门改造半途而废，女统领也要被问为什么把奸细留在身边一个汛期",
-    "due_days": 5,
-    "trigger": "工程师被押去王都受审"
-   },
-   "flags": [
-    "timed"
-   ],
-   "hook_ids": [
-    "hook_gwendolyn_ride_offer",
-    "hook_gwendolyn_quarters_door",
-    "hook_engineer_drawing_back"
-   ],
-   "id": "p_engineer_spy_rumor",
+   "id": "press_smuggle_ledger_leak",
    "immediate": {
     "minutes": 5,
-    "text": "骑兵汤米敲开营房的门，说码头上有人拿着绳子在等"
+    "text": "{toll_house_auditor.name}抱残破账袋双膝发软，墨渍沾污下颌。"
    },
-   "leverage": null,
+   "leverage": {
+    "basis": "你握着{toll_house_auditor.name}填赌债私改三船火油生丝税单的残簿。",
+    "holder": "player",
+    "subject": "toll_house_auditor"
+   },
    "location_ids": [
-    "loc_commander_watergate_quarters"
+    "loc_river_port_wharf",
+    "loc_watergate_winch_room"
    ],
    "near": {
-    "deadline_minutes": 240,
-    "text": "中午，驻防营的老军士要来带人"
+    "deadline_minutes": 20,
+    "text": "二十分钟后老书吏核对吃水清册，刮改即败露。"
    },
-   "objective": "在骑兵们把工程师押去审问之前，让码头上的人知道钢缆是怎么断的",
-   "source": "rumor",
-   "start_minute": 480,
-   "tags": [],
-   "title": "奸细的传言",
-   "trigger": "暴风雨过后第二天，码头酒馆里传开了：水门的主钢缆是王都来的工程师故意锯断的，那人是对岸派来的奸细"
+   "objective": "迫这位成年书记官截船保水门，门后吐出全部别家密账与木印。",
+   "source": "money",
+   "start_minute": 1386,
+   "tags": [
+    "intimate",
+    "workplace_power",
+    "crime"
+   ],
+   "title": "税关刮改火油簿追责局",
+   "trigger": "查封货棚时拎住{toll_house_auditor.name}偷烧刮改火油税簿残页及三船赌债漏税实证。"
+  },
+  {
+   "choice": "拿契书逼{garrison_quartermaster.ta}交库匙认罚，还是送官船？",
+   "exits": [
+    {
+     "cost": "私压回扣重罪令你与库房共绑一船",
+     "option": "回房按住{garrison_quartermaster.ta}收库匙私金与共犯底细"
+    },
+    {
+     "cost": "放虎归山恐被反咬诬告抢库",
+     "option": "暂扣契书令{garrison_quartermaster.ta}开库抬新索抢修水门"
+    }
+   ],
+   "far": {
+    "consequence": "军需官斩首抄家，全营将士遭清洗。",
+    "due_days": 2,
+    "trigger": "军械顶包断缆案发"
+   },
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "hook_ids": [],
+   "id": "press_quartermaster_cable_graft",
+   "immediate": {
+    "minutes": 5,
+    "text": "{garrison_quartermaster.name}盯契书冷汗湿领，手指发颤。"
+   },
+   "leverage": {
+    "basis": "你握着{garrison_quartermaster.name}吃回扣买旧钢缆充数的私契。",
+    "holder": "player",
+    "subject": "garrison_quartermaster"
+   },
+   "location_ids": [
+    "loc_river_port_wharf",
+    "loc_commander_quarters"
+   ],
+   "near": {
+    "deadline_minutes": 20,
+    "text": "二十分钟差役封库房，人赃并获难转圜。"
+   },
+   "objective": "令{garrison_quartermaster.name}调备用索救水门并回房清吐赃银。",
+   "source": "money",
+   "start_minute": 1388,
+   "tags": [
+    "intimate",
+    "workplace_power",
+    "coercion_theme"
+   ],
+   "title": "断缆锈迹兼军需回扣局",
+   "trigger": "断缆露锈丝，你正捏着{garrison_quartermaster.name}吃回扣买废缆的契约。"
+  },
+  {
+   "choice": "晃着批条逼{paladin_commander.ta}脱净冷甲贴身认账赔罪，还是拿批条要挟防权？",
+   "exits": [
+    {
+     "cost": "激怒烈性女将恐遭反扑夺剑压在羊毛毯",
+     "option": "闩死木门逼{paladin_commander.ta}解余甲靠炉边羊毛毯认账换烧毁批条"
+    },
+    {
+     "cost": "暂未彻查签收详情，须防女将另藏后手",
+     "option": "收批条废图只讨一句留下过夜之诺，天亮再算"
+    }
+   ],
+   "far": {
+    "consequence": "骑士家族蒙羞削爵，骄傲女统领夺兵权调离河港。",
+    "due_days": 3,
+    "trigger": "生锈旧缆签收批条呈交兵部"
+   },
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "hook_ids": [],
+   "id": "press_quarter_cable_fraud",
+   "immediate": {
+    "minutes": 6,
+    "text": "{paladin_commander.name}金发滴水耳根绯红，咬唇按住滑肩亚麻衫。"
+   },
+   "leverage": {
+    "basis": "你握着{paladin_commander.name}去年为省经费画押放行退火旧钢缆的批条原件。",
+    "holder": "player",
+    "subject": "paladin_commander"
+   },
+   "location_ids": [
+    "loc_commander_quarters",
+    "loc_winch_reverse_gear_gap"
+   ],
+   "near": {
+    "deadline_minutes": 25,
+    "text": "二十五分钟天亮骑兵进院请示开闸，再无独处之机。"
+   },
+   "objective": "击穿女统领嘴硬伪装，令其在湿衫与暖炉光里低头交付真心与实权。",
+   "source": "person",
+   "start_minute": 1395,
+   "tags": [
+    "intimate",
+    "workplace_power",
+    "coercion_theme"
+   ],
+   "title": "营房卸甲兼旧批条清算",
+   "trigger": "壁炉前解开湿冷锁子甲，你抽出{paladin_commander.name}抽屉里的退火旧钢缆批条与枕下废图纸。"
   }
  ],
  "region": "边境大河河港城水门吊桥重型链条绞盘机房与急流泄水导轨",
  "rules": [
   {
-   "id": "r_river_port_rules",
-   "text": "河港的规矩：水门、吊桥、税关都归驻防统领管，夜里开不开水门要统领点头。"
+   "id": "r_river_port_jurisdiction",
+   "text": "河港水门启闭、吊桥升降与税关放行归驻防铁骑统领管辖，唯河道总督巡视铜印可暂扣印信。"
   },
   {
-   "id": "r_crossguard_release",
-   "text": "高速链轮咬死重型战甲下摆，必须借实心不锈钢十字剑格卡死齿轮间隙，合力施压撬断死卡链环割带脱身。"
+   "id": "r_crossguard_gear_lock",
+   "text": "双联铸钢传动齿轮反转咬甲时，须以三公分厚淬火不锈钢十字剑格死楔齿隙，借胸背贴紧体重下压并拿短刀割带。"
   },
   {
-   "id": "r_flood_watch_season",
-   "text": "汛期守夜：大河涨水的那几十天里，统领每夜都要亲自巡一遍水门机房。"
+   "id": "r_no_open_flame_in_winch",
+   "text": "机房油脂遍地严禁明火，只悬一盏铁网暗光油灯，水面浑浊暗流全凭贴身摸索辨位。"
   },
   {
-   "id": "r_no_lantern_in_winch",
-   "text": "绞盘机房里不许点明火，怕引着了齿轮上的油脂，只能用罩着铁网的油灯。"
+   "id": "r_emergency_drop_gate_cost",
+   "text": "高台应急重力落闸销一扳下即截断暗河水流，同时也将泊位外滞留商船与走私驳船一并冲垮。"
   }
  ],
  "schema_version": 1,
  "stage_labels": {
-  "acquainted": "并肩巡防",
-  "committed": "脱困升门",
-  "familiar": "浊流相扶",
-  "flirting": "贴身卸甲",
-  "intimate": "同命下撬",
+  "acquainted": "栈桥试探",
+  "committed": "水门共犯",
+  "familiar": "浊流相抵",
+  "flirting": "湿甲贴胸",
+  "intimate": "壁炉卸甲",
   "stranger": "军纪戒备",
-  "testing": "共持剑格"
+  "testing": "共楔剑格"
  },
  "status": "released",
- "style_hint": "边境河港的粗粝笔法：白天写码头上卸货的号子、税关前排队的商船、驻防营里马匹的响鼻；夜里写浑水一寸寸漫上来的冷、链轮反转时铁链抽打石壁的轰鸣。女统领干脆利落，张力藏在被卡在齿轮边动弹不得、只能把后背交给那个吵了一整个汛期的人的那一刻。",
+ "style_hint": "边境河港工笔：写浑水漫胸、铸钢链轮绞甲火星爆鸣与胸背贴紧下压十字剑格的炽热喘息，再写脱困回水门营房闩门后，壁炉前卸甲并用旧钢缆批条撬开女统领防线的口嫌体直张力。",
  "tension_engines": [
   {
-   "id": "te_flood_to_chest",
-   "text": "浑水一寸寸往上漫，从腰际漫到胸口，暗流冲得人站不稳。"
+   "id": "te_gear_crossguard_body_press",
+   "text": "齐胸浊水与反转链轮咬甲，两人胸背相抵合压十字剑格割带求生"
   },
   {
-   "id": "te_chain_wheel_reverses",
-   "text": "反转的链轮死死咬着战甲下摆，往齿缝里一寸寸拖。"
+   "id": "te_cable_fraud_hearth_strip",
+   "text": "旧钢缆批条、回扣契与涂改税单作筹码，壁炉旁卸甲低头认账"
   },
   {
-   "id": "te_crossguard_chest_press",
-   "text": "齿轮边窄得转不开身，两人只能胸背相贴，顶住水流一起发力。"
+   "id": "te_envoy_gate_betrayal",
+   "text": "高台强令落闸灭口与通敌银票密信对峙，揭穿特使伪善嘴脸"
   },
   {
-   "id": "te_armor_hem_dragged",
-   "text": "铁链抽打着石壁，随时可能抽到人身上。"
+   "id": "te_pride_paladin_meltdown",
+   "text": "冷艳女统领湿袍滑肩微颤，在木门落闩与炉火余温里嘴硬寸崩"
   }
  ],
  "title": "河港水门的铁骑",
  "tone": [
-  "急流倒灌机房",
-  "重型链轮卷入",
-  "佩剑十字剑格",
-  "并肩涉水除障"
+  "浊浪倒灌淹没胸口",
+  "铸钢链轮反转咬甲",
+  "十字剑格死楔齿隙",
+  "壁炉卸甲批条换价"
  ],
  "twists": [
   {
    "category": "信息",
-   "id": "tw_door_burst_inward",
+   "id": "tw_info_rust_cable_voucher",
    "requires": [
-    "cavalry_commander_gwendolyn"
+    "paladin_commander"
    ],
-   "text": "急流冲走了学者腰间的备用扳手，女统领随身佩戴的指挥官佩剑成为机房阻断反转绞盘的唯一坚实卡具。"
+   "text": "铁箱被链轮挤裂，掉出去年换缆清单——签字放行退火生锈旧缆的竟是{paladin_commander.name}亲笔批条！"
   },
   {
    "category": "人事",
-   "id": "tw_feet_swept_current",
+   "id": "tw_personnel_envoy_bribe_spill",
    "requires": [
-    "cavalry_commander_gwendolyn"
+    "royal_inspector_envoy",
+    "watergate_lockkeeper"
    ],
-   "text": "急流中水草缠绕导致女统领脚下打滑，学者果断伸臂揽住女统领稳稳扣在石柱边，两人借力扎稳马步。"
+   "text": "{watergate_lockkeeper.name}拦住推手柄的{royal_inspector_envoy.name}，摔破漆木匣当场撒出敌商银票与缓闸密信！"
   },
   {
    "category": "资源",
-   "id": "tw_water_on_cheek",
+   "id": "tw_resource_knife_and_seal_barter",
    "requires": [
-    "watergate_engineer"
+    "watergate_engineer",
+    "toll_house_auditor"
    ],
-   "text": "女统领长睫上的浑水滑落过略带面颊，在昏暗机房光影下更显英姿飒爽与纯真动人的反差。"
+   "text": "{toll_house_auditor.name}抛下火油罐与密账，连同{watergate_engineer.name}的割缆快刀凑齐撬带与稳缆最后物件！"
   },
   {
    "category": "制度",
-   "id": "tw_bodies_on_sword",
+   "id": "tw_rule_hearth_audit_mandate",
    "requires": [
-    "cavalry_commander_gwendolyn",
-    "watergate_engineer"
+    "paladin_commander",
+    "garrison_quartermaster"
    ],
-   "text": "重型绞盘反转力道极大，单人力量绝难抗衡，女统领与学者必须胸背相贴融汇二人体重死死压制剑柄。"
+   "text": "钟楼传下军令：涉旧缆与水灾者天亮前尽数入营房卸甲验批条，抗令不解甲者以通敌论！"
   },
   {
    "category": "时限",
-   "id": "tw_water_last_inch",
+   "id": "tw_deadline_barge_ram_crack",
    "requires": [
-    "cavalry_commander_gwendolyn"
+    "pressure"
    ],
-   "text": "急流水位已漫至咽喉仅剩最后几公分生存空间，若不能在一分钟内断带，两人将同遭水门反转卷入窒息。"
+   "text": "三艘失控驳船连环撞击水门底梁，石墙裂开新缝，浊浪上涨速度骤翻倍！"
   },
   {
    "category": "关系",
-   "id": "tw_back_to_pillar",
+   "id": "tw_relation_draft_back_confession",
    "requires": [
-    "cavalry_commander_gwendolyn",
+    "paladin_commander",
     "watergate_engineer"
    ],
-   "text": "学者以后背顶住齿轮箱壁充当杠杆支座，女统领借势下顿，十字剑格终于将咬死的合金链环彻底别断。"
+   "text": "{watergate_engineer.name}护{paladin_commander.name}时油布包散开——废图正是女将枕下少一角那张，背面画满骑马侧影！"
   },
   {
    "category": "意外",
-   "id": "tw_chain_link_snaps",
+   "id": "tw_accident_crossguard_wedge_unlace",
+   "requires": [],
+   "text": "铸钢齿轮啃缺剑格的同时死锁刹停，急流冲断残带迫使众人摸黑退回壁炉温暖的营房抢剥冰冷湿衣！"
+  },
+  {
+   "category": "人事",
+   "id": "tw_personnel_quartermaster_oil_raid",
    "requires": [
-    "cavalry_commander_gwendolyn"
+    "garrison_quartermaster"
    ],
-   "text": "系带割断战甲脱落，齿轮彻底刹停，两人合力搬下应急阻水落销截断浑水倒灌，成功自救脱险。"
+   "text": "{garrison_quartermaster.name}提火油大剪摸黑潜入机房企图烧毁旧缆锈迹，正撞进满屋对账人群的视野！"
   }
  ]
 }

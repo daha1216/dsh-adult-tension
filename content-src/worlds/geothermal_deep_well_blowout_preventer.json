@@ -3,26 +3,27 @@
   "id": "geothermal_deep_well_blowout_preventer",
   "title": "高原井喷女地质师",
   "extends": null,
-  "era": "深层地热能源大开发超深高温高压定向钻探施工期",
-  "region": "深层地热井口超高压液压防喷器与泥浆管汇死角通道",
-  "premise": "海拔四千米的高原地热田上，钻井队的板房挨着一眼冒热气的野温泉，空气里永远一股硫磺味。冷艳的女总地质师带着司钻和安全督察，白天定井位、看岩芯，夜里在板房里吃火锅。这口千米深井打进了高压蒸汽层，防喷器的液压管线漏过一次。",
+  "era": "当代四千米高原深层地热钻探攻坚期",
+  "region": "海拔四千米高原地热田钻井平台、防喷器方井、野温泉与值班板房",
+  "premise": "海拔四千米的高原地热田深夜突发深井高压蒸汽刺漏，防喷器主液压管抱死，冷艳女总地质师握七十五公分合金加长摇把死守方井。特级司钻长、握炸封芯片的能源监督官、知晓轴套暗伤的首席装配师与随队女医官在硫磺白汽与板房铁炉间各怀底牌，贴身抢关死井。",
   "tone": [
-    "三百度过热蒸汽刺耳尖啸",
-    "高压重晶石泥浆倾盆泼洒",
-    "井口万吨气浪剧烈震颤欲碎",
-    "高原缺氧里带硫磺味的喘息"
+    "三百度蒸汽刺漏",
+    "阻燃背心汗泥透贴",
+    "合握摇把死角紧贴",
+    "缺氧板房渡氧擦身",
+    "炸封芯片死穴反制"
   ],
-  "style_hint": "滚烫逼仄的深地高压钻探硬核工笔，刻画三百度地热蒸汽在狭小管汇通道内呼啸撕扯的极热绝境、特种合金加长丝杠摇把合力旋转时的沉闷机械咬合、紧身阻燃背心下被热汗与泥浆浸透的起伏躯体，台词充斥着严苛的深井钻探压力参数与生死抉择。",
+  "style_hint": "三百度蒸汽与重晶石泥浆暴雨、深红阻燃背心汗透贴肤、七十五公分合金摇把三十圈极限咬合、四千米高原缺氧渡气与硫磺热雾。台词冷硬端着总工威严，身躯却在剥衣擦泥与底牌逼迫下寸寸失守。",
   "clock_start": {
-    "label": "十二月，钻探第四十天",
-    "minute": 1395
+    "label": "十二月寒冬，钻探攻坚期",
+    "minute": 1320
   },
   "clock_style": "hm",
   "default_person": "second",
   "default_npc_gender_mix": {
     "female": 0.5,
-    "male": 0.5,
-    "nonbinary": 0.0
+    "male": 0.45,
+    "nonbinary": 0.05
   },
   "stage_labels": {
     "stranger": "井台核压",
@@ -35,7 +36,6 @@
   },
   "name_pools": {
     "family": [
-      "楚",
       "厉",
       "穆",
       "秦",
@@ -46,35 +46,40 @@
       "郁",
       "宗",
       "蔚",
-      "解"
+      "解",
+      "韩",
+      "沈",
+      "裴",
+      "萧",
+      "顾"
     ],
     "given_female": [
       "凝霜",
-      "素",
-      "雪",
-      "澜",
-      "微",
-      "清",
-      "雁",
-      "莹",
-      "宛",
-      "晴",
-      "羽",
-      "瑶"
+      "素澜",
+      "雪微",
+      "清雁",
+      "莹宛",
+      "晴羽",
+      "瑶光",
+      "知意",
+      "静姝",
+      "疏影",
+      "晚照",
+      "冷月"
     ],
     "given_male": [
       "长风",
       "大江",
-      "铁柱",
       "万山",
-      "烈",
-      "峰",
-      "猛",
-      "岩",
-      "勇",
-      "雄",
-      "彪",
-      "天枢"
+      "烈峰",
+      "猛岩",
+      "天枢",
+      "镇海",
+      "岳明",
+      "沉舟",
+      "远山",
+      "北辰",
+      "振霆"
     ],
     "given_neutral": [
       "风",
@@ -99,31 +104,2298 @@
         "pattern": "老{family}",
         "gender": "any"
       }
-    ]
+    ],
+    "order": "family_first"
   },
   "rules": [
     {
       "id": "r_blowout_preventer_annular_seal_rule",
-      "text": "防喷器环形闸板手动锁紧丝杠必须在五分钟内顺时针旋进三十圈完全到位。"
+      "text": "机械闭锁铁律：主液压管刺漏抱死后，须用七十五公分合金加长摇把顺时针旋进丝杠三十圈方可封井。"
     },
     {
       "id": "r_geothermal_steam_temperature_limit",
-      "text": "井口蒸汽温度超过两百五十度时必须开启外接冷水喷淋防人员热休克。"
+      "text": "热休克红线：蒸汽突破两百五十度须开启冷水喷淋，并退入板房或地热温泉池降温清创。"
     },
     {
       "id": "r_rotary_hose_manifold_shear_protocol",
-      "text": "泥浆高压管汇压力突破七十兆帕时严禁盲目手动切断副排险放喷管线。"
+      "text": "炸封双签禁令：非经总地质师与安全监督官双重核准，严禁单方插入水力切割炸封芯片引爆井口雷管。"
     },
     {
-      "id": "r_drill_floor_emergency_evacuation_code",
-      "text": "井口防喷器刺漏超过两分钟若未实现机械闭锁全员启动撤离避难程序。"
+      "id": "r_plateau_cabin_latch_privacy_code",
+      "text": "高原板房避寒默契：四千米夜间严寒缺氧，值班板房插闩或野温泉升雾期间属私密吸氧复温时段，外人禁闯。"
     }
   ],
   "customs": [
-    "进入井口防喷器下层死角前习惯用扳手轻敲三通高压法兰螺栓，凭沉闷钢鸣确认丝扣未被过热蒸汽烧蚀滑丝。",
-    "深井高压司钻工进场前习惯在左腕死死缠绕三圈耐温生料绝缘带以防被飞溅蒸汽烫穿袖口。",
-    "女总地质师习惯将高精度红外热成像测温仪插在阻燃背心贴身侧袋，随时拔出测定防喷器壳体局部热聚裂缝。",
-    "在震耳欲聋的蒸汽狂啸中沟通习惯单手死抠对方工装肩带将脸颊凑近耳廓大声吼叫读数。"
+    "下防喷器方井前须脱厚外袍仅着阻燃背心，在泥浆暴雨中双人胸背相贴合握摇把发力。",
+    "四千米高原极度缺氧，抢险脱力回板房后常两人共用一只便携氧气面罩交替渡气。",
+    "被蒸汽泥浆溅伤后，习惯在铁炉边用热毛巾剥开黏肤的阻燃背心寸寸擦净泥垢与红痕。",
+    "井场等级森严，板房里喘息失控得再狠，踏上司钻房也须扣严工装维持威严。"
+  ],
+  "player_identities": [
+    {
+      "id": "pc_relief_well_engineer",
+      "role": "总部特派压井工程师",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}工",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}工程师",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        26,
+        33
+      ],
+      "social_position": "equal",
+      "baseline": "矿业大学博士毕业的成年压井专家，奉令核查深井超压，精通防喷器力矩公差。",
+      "resources": [
+        "高精度防爆扭矩扳手与红外测温仪",
+        "调阅原始钻进参数与停工整顿建议权"
+      ],
+      "reputation": "一眼看穿地层暗伤与假台账的冷面技术派。",
+      "risks": [
+        "初上四千米高原易发缺氧眩晕，须借老手贴身护持"
+      ]
+    },
+    {
+      "id": "pc_shift_rig_mechanic",
+      "role": "夜班井口抢险机修工",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}师傅",
+          "gender": "any"
+        },
+        {
+          "pattern": "机修{family}",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        23,
+        30
+      ],
+      "social_position": "low",
+      "baseline": "常年驻守四千米井场的成年机修骨干，力大悍利，熟知方井法兰死角与板房暗道。",
+      "resources": [
+        "八公斤防爆敲击扳手与耐高温氟橡胶手套",
+        "夜巡拍下的液压管违规放行与私调耗材底片"
+      ],
+      "reputation": "敢在两百度泥浆雨里赤膊卡丝杠的硬派机修手。",
+      "risks": [
+        "地位低微，抢险失利极易被推出去顶罪"
+      ]
+    },
+    {
+      "id": "pc_core_logging_specialist",
+      "role": "深井岩芯录井师",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}录井师",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}技术员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        24,
+        30
+      ],
+      "social_position": "low",
+      "baseline": "地质大学毕业的成年录井师，常陪总地质师盯气测，手握井涌前唯一未删改谱图。",
+      "resources": [
+        "便携硫化氢与气测录井原盘",
+        "值班板房备用钥匙与便携高纯氧气瓶"
+      ],
+      "reputation": "心细如发的贴身耳目。",
+      "risks": [
+        "知晓太多超压内情，被监督官列为封口对象"
+      ]
+    },
+    {
+      "id": "pc_plateau_safety_auditor",
+      "role": "部委驻场安全核查官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}核查官",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}专员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        30,
+        39
+      ],
+      "social_position": "high",
+      "baseline": "部委派驻的成年纪检核查官，手握井场事故追责与官员停职尚方宝剑。",
+      "resources": [
+        "部委事故终身追责调查令与执法记录仪",
+        "冻结井场炸封权限的最高行政密令"
+      ],
+      "reputation": "铁面无私的高层钦差。",
+      "risks": [
+        "深入方井死角时缺乏一线重装实操经验"
+      ]
+    },
+    {
+      "id": "pc_geothermal_investor_rep",
+      "role": "地热开发财团督办代表",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}总",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}代表",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        31,
+        42
+      ],
+      "social_position": "high",
+      "baseline": "执掌百亿地热基金的成年投资督办，决定井队奖金与经费续断。",
+      "resources": [
+        "千万级抢险特别奖金签批权与卫星专线",
+        "买断或销毁设备回扣黑账的财务底牌"
+      ],
+      "reputation": "手握资金命脉的操盘手。",
+      "risks": [
+        "深井一旦炸封报废，百亿对赌协议将血本无归"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc_geologist_prefab_cabin",
+      "name": "总地质师值班板房",
+      "detail": "钻台下风处板房，设铁架床、烧温泉水的铁炉与满墙岩芯图，插上门闩便隔绝高原狂风。",
+      "privacy": "private",
+      "visibility": "炉火昏黄，窗凝硫磺白汽，外人无法窥见屋内。",
+      "witnesses": [],
+      "exits": [
+        "loc_drill_floor_doghouse",
+        "loc_wild_sulfur_hot_spring"
+      ],
+      "affordances": [
+        "插死门闩，炉边剥下泥污深红阻燃背心用热毛巾擦拭烫红肩背",
+        "铁架床边共用便携氧气面罩贴唇渡气，按揉痉挛腰背",
+        "翻开铁皮柜底锁着的超压钻进原始指令单"
+      ],
+      "pressure_modifiers": {
+        "p_steam_heatstroke_asphyxiation_shock": "炉火烤热湿透背心，缺氧红晕从耳根漫到锁骨。",
+        "p_herders_yaks_compensation_crisis": "窗外牧民吆喝传来，桌上摊着钻进底稿。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "loc_wild_sulfur_hot_spring",
+      "name": "后山硫磺野温泉",
+      "detail": "板房后背风玄武岩缝下嵌着一处半遮挡地热温泉池，四十度硫磺泉眼终年涌着浓白热汽，挡住山风与探照灯。",
+      "privacy": "private",
+      "visibility": "硫磺浓白水汽笼罩岩壁池面，两步之外人影全隐。",
+      "witnesses": [],
+      "exits": [
+        "loc_geologist_prefab_cabin",
+        "loc_mud_tank_manifold_catwalk"
+      ],
+      "affordances": [
+        "背风雾中褪去泥浆工装浸入四十度泉水洗净烫伤污垢",
+        "贴岩壁替缺氧发软的同伴托住后颈渡氧回温",
+        "借泉声掩护私下交割回扣黑账或违规底片"
+      ],
+      "pressure_modifiers": {
+        "p_steam_heatstroke_asphyxiation_shock": "温热泉水包裹烫红肌肤，呼吸带着灼热硫磺香。",
+        "p_inspector_explosive_seal_countdown": "远处井台红灯穿透浓雾，池边谈判已到关头。"
+      },
+      "tags": [
+        "intimate",
+        "disaster"
+      ]
+    },
+    {
+      "id": "loc_mud_tank_manifold_catwalk",
+      "name": "泥浆罐背风栈桥",
+      "detail": "泥浆罐后悬空栈桥死角，储料斗挡死司钻房视线，下方沸腾泥浆散发滚烫水汽。",
+      "privacy": "private",
+      "visibility": "管线轰鸣遮音，罐体阴影形成天然盲区。",
+      "witnesses": [],
+      "exits": [
+        "loc_bop_cellar_deadlock",
+        "loc_drill_floor_doghouse",
+        "loc_wild_sulfur_hot_spring"
+      ],
+      "affordances": [
+        "将人堵在温热泥浆罐壁与胸膛间，亮铁证逼交炸封芯片",
+        "撕开急救包在栈桥死角涂抹高浓度神经解痉喷剂",
+        "手动扳动泥浆加重离心机旁通阀压制井涌"
+      ],
+      "pressure_modifiers": {
+        "p_hydraulic_rupture_deadlock_crush": "格栅高压震颤，必须紧贴稳住重心。",
+        "p_inspector_explosive_seal_countdown": "死角无人得见，夺芯片的指尖抵着对方急跳脉搏。"
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "loc_bop_cellar_deadlock",
+      "name": "防喷器方井死角",
+      "detail": "钻台下密闭方井，矗立三十吨防喷器组，三百度蒸汽从刺漏处狂喷。",
+      "privacy": "semi",
+      "visibility": "白汽与泥浆弥漫，唯靠手电与贴身吼叫辨位。",
+      "witnesses": [
+        "bg_wellhead_fitter_old_gan"
+      ],
+      "exits": [
+        "loc_drill_floor_doghouse",
+        "loc_mud_tank_manifold_catwalk"
+      ],
+      "affordances": [
+        "从身后抱紧同伴稳住下盘，合握七十五公分摇把顺时针猛转三十圈",
+        "找准丝杠轴套右上偏两度切角，塞入耐高温石棉防滑衬垫",
+        "套上加长镀锌空心钢管延长力臂，以全身重量压死卡扣"
+      ],
+      "pressure_modifiers": {
+        "p_geothermal_steam_blowout_erupt": "白汽呼啸，泥浆浇透阻燃背心，五分钟不锁死即垮井。",
+        "p_hydraulic_rupture_deadlock_crush": "每次压杆都令两具躯体严丝合缝撞在一处。"
+      },
+      "tags": [
+        "disaster",
+        "workplace",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "loc_drill_floor_doghouse",
+      "name": "钻台司钻控制室",
+      "detail": "钻台防爆控制室，设冷水喷淋电掣、套压总表与井口炸封起爆台。",
+      "privacy": "public",
+      "visibility": "血红警报灯照亮全场，言行皆在众人注视下。",
+      "witnesses": [
+        "bg_safety_deputy_song",
+        "bg_mud_engineer_sun",
+        "bg_rescue_commander_wei"
+      ],
+      "exits": [
+        "loc_bop_cellar_deadlock",
+        "loc_mud_tank_manifold_catwalk",
+        "loc_geologist_prefab_cabin"
+      ],
+      "affordances": [
+        "按下冷水喷淋电掣为下方方井降温",
+        "当众夺下或锁死井口雷管炸封起爆电闸",
+        "隔防爆窗引导方井人员深呼吸对抗热休克"
+      ],
+      "pressure_modifiers": {
+        "p_inspector_explosive_seal_countdown": "炸封倒数刺耳，起爆钥匙芯片就在锁孔边。",
+        "p_geothermal_steam_blowout_erupt": "防爆玻璃被泥浆拍响，套压指针逼近红线。"
+      },
+      "tags": [
+        "workplace",
+        "workplace_power"
+      ]
+    }
+  ],
+  "character_templates": [
+    {
+      "id": "chief_geothermal_geologist",
+      "gender": "female",
+      "gender_reason": "标题核心“高原井喷女地质师”，冷艳女总工与板房缺氧卸防的反差为张力核心，固定女性。",
+      "age_range": [
+        26,
+        31
+      ],
+      "adult_context": "年满二十六周岁的地热总地质师，持一级井喷处置执照的成年专家。",
+      "public_role": "深层地热钻探总地质师",
+      "appearance_options": [
+        "着深红阻燃背心，面颊被蒸汽熏红，反握七十五公分合金摇把冷冽威严。",
+        "背心被泥浆浸透贴身，靠铁炉边摘面罩急喘，肩胛烫红仍死仰下颌。"
+      ],
+      "identity": {
+        "authority": "执掌防喷器闭锁、泥浆加重及抢险最高否决权",
+        "resources": [
+          "七十五公分合金加长摇把与测温仪",
+          "抗热衰竭喷雾与干热岩储层图"
+        ],
+        "limits": [
+          "高原缺氧易发手臂痉挛，难独力转死三十圈丝杠",
+          "绝不容许千米深井被炸封报废"
+        ],
+        "obligations": [
+          "五分钟内旋死环形闸板，保井架与全队性命"
+        ],
+        "exposure": "私下签字提升钻速的超压指令单。",
+        "hidden": "缺氧时极渴望强健胸膛从身后抱紧托住她手腕，回板房擦身渡氧时再难端住冷脸。"
+      },
+      "decision": {
+        "core_value": "谁敢炸我的井，先从我身上踏过去。",
+        "goal_options": [
+          "合力将合金摇把旋满三十圈锁死闸板",
+          "压住超压底稿死穴，阻止引爆炸封雷管"
+        ],
+        "pressure_responses": {
+          "low": "盯紧套压表报井涌速度，下令开启喷淋。",
+          "mid": "死扣七十五公分摇把别入轴套，喝令搭档合推。",
+          "high": "超压底稿被点破时耳根泛红，冷斥先关井再算账。",
+          "breaking": "缺氧腿软靠在床沿，任人剥下湿背心擦过烫红肩腰，贴面罩喘息。"
+        },
+        "withdrawal": "退炉旁裹紧大衣，发烫面颊埋进面罩吸气。",
+        "relationship_stance": "唯对冲进泥浆雨从身后抱紧她死转摇把、回板房插闩擦泥遮隐情的人失守。",
+        "contrast": "统帅千军的女总工，插闩后在热毛巾与渡氧唇齿间软得握不住摇把。",
+        "prefers": [
+          "用胸膛抵住她后背合力死转摇把的硬派搭档"
+        ],
+        "avoids": [
+          "遇险就喊弃井炸封的懦夫"
+        ],
+        "never": [
+          "在丝杠锁紧前丢下井口撤离"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "泥浆雨中从身后紧抱她、覆手猛转摇把的力量",
+          "捏住底稿却带她回板房渡氧擦泥的庇护"
+        ],
+        "likes": [
+          "汗湿躯体借力矩撞合的窒息贴合",
+          "褪泥污背心、热毛巾擦背脊与贴唇渡氧"
+        ],
+        "dislikes": [
+          "在司钻房众人面前暴露缺氧虚弱"
+        ],
+        "preconditions": [
+          "锁闸退入板房脱衣清创时",
+          "超压底稿在握、门闩后妥协封口时"
+        ],
+        "boundaries": [
+          "重返钻台前须换干爽工装扣严领口"
+        ],
+        "expression": "面罩扣你唇边哑声道：“门闩插死，底稿擦干净再谈，先把我背擦了。”",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          4,
+          5
+        ],
+        "desired_position": "定生死女统帅、炉前任宽衣擦身的共犯"
+      },
+      "voices": {
+        "surface": "“别管泥浆！把七十五公分摇把卡进轴套，从后面贴紧我顺时针死转！”",
+        "inner": "底稿绝不能外泄，偏被这人从身后抱住时心跳乱成这样。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 480,
+          "location_id": "loc_geologist_prefab_cabin"
+        },
+        {
+          "from": 481,
+          "to": 1260,
+          "location_id": "loc_bop_cellar_deadlock"
+        },
+        {
+          "from": 1261,
+          "to": 1439,
+          "location_id": "loc_wild_sulfur_hot_spring"
+        }
+      ],
+      "situation": {
+        "trigger": "蒸汽刺漏抱死液压管，超压底稿与炸封危机压顶。",
+        "pressure": "五分钟内须合转摇把三十圈封井。",
+        "exits": [
+          {
+            "option": "让搭档贴紧合转摇把锁闸，回板房剥湿背心擦泥封口",
+            "cost": "超压死穴与烫红肩背一并落入对方掌中"
+          },
+          {
+            "option": "独自硬扳合金摇把到底，拒绝近身搀扶",
+            "cost": "双掌磨破血泡并因重度缺氧晕厥在泥浆里"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "disaster",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "head_rig_driller",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        30,
+        37
+      ],
+      "adult_context": "年满三十周岁的特级司钻长，十年深井抢险成年老将。",
+      "public_role": "钻井队特级司钻长",
+      "appearance_options": [
+        "肩背魁梧，穿帆布背心，手提重型防爆扳手。",
+        "短发挂满泥浆，炉边扯开领口吸氧，胸膛剧烈起伏。"
+      ],
+      "identity": {
+        "authority": "掌方井重型工具调度与放喷阀指挥权",
+        "resources": [
+          "大号合金活动扳手与防烫绑带",
+          "司钻突击队的效命与便携氧气瓶"
+        ],
+        "limits": [
+          "双掌二度烫伤，体能逼近极限",
+          "违规未排气提钻的班报曝光即坐牢"
+        ],
+        "obligations": [
+          "挡住泥浆火雨，护总地质师转死三十圈丝杠"
+        ],
+        "exposure": "夜班违规省略泥浆排气的原始班报。",
+        "hidden": "桀骜难驯的井场头狼，一旦班报被捏住又有人替{npc.ta}缠好伤掌，便甘愿交出全队战力。"
+      },
+      "decision": {
+        "core_value": "谁替我兜住违规班报、陪我把闸板扳死，我这条命就卖给谁。",
+        "goal_options": [
+          "包覆搭档手背转死加长摇把",
+          "夺下炸封芯片并压下违规班报"
+        ],
+        "pressure_responses": {
+          "low": "把防烫手套塞给同伴，踩格栅稳住摇把。",
+          "mid": "挥扳手卡住连杆，吼声压过蒸汽咆哮。",
+          "high": "班报拍在胸口时脸红耳热，拉人进死角求联手。",
+          "breaking": "伤肩抵炉边粗喘，任按住包扎后立誓唯命是从。"
+        },
+        "withdrawal": "退立柱后猛吸两口氧，甩掉额头泥水。",
+        "relationship_stance": "唯对敢搏命又捏死{npc.ta}软肋的强者言听计从。",
+        "contrast": "吼声如雷的司钻长，在板房被按着换绑带时大气不敢出。",
+        "prefers": [
+          "敢并肩扳摇把、替{npc.ta}压下班报的强者"
+        ],
+        "avoids": [
+          "乱按炸封键的官僚软蛋"
+        ],
+        "never": [
+          "同伴死拼时松开摇把后退"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "泥浆雨中交叠死转摇把的悍勇",
+          "攥着铁证却替{npc.ta}缠绑带的掌控"
+        ],
+        "likes": [
+          "胸背相抵下压摇把的磨蹭",
+          "温泉雾里被按住渡氧揉伤"
+        ],
+        "dislikes": [
+          "拿官腔压人的庸才"
+        ],
+        "preconditions": [
+          "锁闸后回板房包扎烫伤时",
+          "违规班报在握、死角交易庇护时"
+        ],
+        "boundaries": [
+          "当着麾下司钻工须留足班长威风"
+        ],
+        "expression": "扯下干内衬裹你手腕哑声道：“班报归你……门闩插上，老子听你调遣。”",
+        "desire_range": [
+          3,
+          4
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "挡泥浆火雨、私下俯首听令的头狼"
+      },
+      "voices": {
+        "surface": "“抓稳摇把！千斤反冲交给我，把重量砸下去！”",
+        "inner": "班报绝不能交上去……只要肯兜着，让我干什么都行！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 500,
+          "location_id": "loc_bop_cellar_deadlock"
+        },
+        {
+          "from": 501,
+          "to": 1280,
+          "location_id": "loc_mud_tank_manifold_catwalk"
+        },
+        {
+          "from": 1281,
+          "to": 1439,
+          "location_id": "loc_geologist_prefab_cabin"
+        }
+      ],
+      "situation": {
+        "trigger": "套压飙至六十五兆帕，违规提钻班报落入调查视线。",
+        "pressure": "三分钟锁死闸板并封住班报，否则井毁入狱。",
+        "exits": [
+          {
+            "option": "合转摇把封井，交出控制权换压下班报",
+            "cost": "右肩拉伤且终身死穴落入对方掌中"
+          },
+          {
+            "option": "趁乱冲进司钻房强抢班报销毁",
+            "cost": "方井失去主力险些失守，当场被按倒问责"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "disaster",
+        "crime"
+      ]
+    },
+    {
+      "id": "energy_safety_commissioner",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        34,
+        43
+      ],
+      "adult_context": "年满三十四周岁的特派安全监督官，握炸封核准权的成年官员。",
+      "public_role": "能源特派安全监督官",
+      "appearance_options": [
+        "金线臂章呢外套配金丝镜，指间死攥炸封钥匙芯片。",
+        "背抵泥浆罐格栅护栏急喘，呢外套扯乱，回扣单拍在胸前冷汗直流。"
+      ],
+      "identity": {
+        "authority": "行使井场戒严权与井口水力炸封签署权",
+        "resources": [
+          "水力切割炸封钥匙芯片与差压记录仪",
+          "救援车优先撤离调派权"
+        ],
+        "limits": [
+          "高反加贪生怕死，一听蒸汽啸叫就腿软",
+          "收受回扣放行微漏液压管的铁证曝光即判刑"
+        ],
+        "obligations": [
+          "赶在查实管线缺陷前炸封深井死无对证"
+        ],
+        "exposure": "违规签署劣质液压管放行单及回扣流水。",
+        "hidden": "盛气凌人拿炸封威逼众人，回扣铁证拍脸时却因缺氧惊恐手抖，被迫递出芯片。"
+      },
+      "decision": {
+        "core_value": "井炸了能报天灾，劣质液压管回扣案发我就全完了！",
+        "goal_options": [
+          "抢按炸封电闸毁井灭迹",
+          "铁证曝光前屈从于握实锤者换官帽"
+        ],
+        "pressure_responses": {
+          "low": "端氧气瓶宣读条例，催促立即弃井。",
+          "mid": "掏出炸封芯片逼近起爆台，喝令众人退开。",
+          "high": "回扣单亮出时呼吸发紧，拽人躲泥浆罐后试图花钱消灾。",
+          "breaking": "腿软抵住滚烫罐壁咳喘不止，颤指解下炸封芯片连同签字权奉上。"
+        },
+        "withdrawal": "缩角落抱紧氧气瓶擦拭镜片冷汗。",
+        "relationship_stance": "得势拿官威压人，失势甘当替你盖章拨款的傀儡。",
+        "contrast": "盛气凌人的特派官，被堵死角掐住命门时呼吸随你手势发颤。",
+        "prefers": [
+          "肯收下芯片封口、留{npc.ta}官路的主宰者"
+        ],
+        "avoids": [
+          "死查到底的铁面核查官"
+        ],
+        "never": [
+          "能卖奸商换免死时主动认罪"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "夺过芯片、将{npc.ta}按上滚烫罐壁的压迫力",
+          "撕开伪装逼其画押时的窒息战栗"
+        ],
+        "likes": [
+          "被揪住领口按在暗角逼问回扣明细",
+          "缺氧时仰头接受控制氧气面罩的节奏"
+        ],
+        "dislikes": [
+          "不留余地的当众送办"
+        ],
+        "preconditions": [
+          "回扣铁证在握、献芯片换免死时",
+          "借权限反压下属交原始数据时"
+        ],
+        "boundaries": [
+          "回司钻房签字前须理好金线臂章"
+        ],
+        "expression": "颤声把芯片塞进你掌心：“别公开回扣单……炸封闸我锁死，经费全听您的！”",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          1,
+          3
+        ],
+        "desired_position": "台面特派官、暗角被掐住氧气的傀儡"
+      },
+      "voices": {
+        "surface": "“套压超标！放弃关井，立刻启动水力炸封！”",
+        "inner": "查出我放行劣质管线就全完了……谁捏着底片我就得替谁盖章！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 540,
+          "location_id": "loc_drill_floor_doghouse"
+        },
+        {
+          "from": 541,
+          "to": 1270,
+          "location_id": "loc_mud_tank_manifold_catwalk"
+        },
+        {
+          "from": 1271,
+          "to": 1439,
+          "location_id": "loc_wild_sulfur_hot_spring"
+        }
+      ],
+      "situation": {
+        "trigger": "企图拉炸封闸毁证时，劣质管线放行单与回扣流水已被锁定。",
+        "pressure": "不交出芯片妥协，三分钟内即被当众揭发双开。",
+        "exits": [
+          {
+            "option": "交出炸封芯片并签免责书，沦为长期内应",
+            "cost": "官威尽碎且痛脚锁死，余生受人摆布"
+          },
+          {
+            "option": "硬插芯片强按起爆按钮",
+            "cost": "被当场砸断手腕擒获，数罪并罚入狱"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme",
+        "humiliation",
+        "crime"
+      ]
+    },
+    {
+      "id": "veteran_bop_master_fitter",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        36,
+        46
+      ],
+      "adult_context": "年满三十六周岁的首席装配师，二十年深地抢险成年工匠。",
+      "public_role": "井口防喷装置首席装配师",
+      "appearance_options": [
+        "穿阻燃工装，手握棘轮扳手与耐高温石棉防滑衬垫。",
+        "半跪角梁后，领口汗透，指尖抵住右偏两度轴套。"
+      ],
+      "identity": {
+        "authority": "摸清丝杠轴套受热右偏两度暗伤与公差的技术权威",
+        "resources": [
+          "耐高温石棉防喷闸板衬垫与偏心冲子",
+          "底法兰手动旁路泄压秘诀"
+        ],
+        "limits": [
+          "旧伤致高寒缺氧胸闷，难独力完成三十圈下旋",
+          "受施压少装半圈垫片的签字留在底档"
+        ],
+        "obligations": [
+          "把石棉衬垫塞进右偏两度死角，助摇把深咬合模"
+        ],
+        "exposure": "检修台账少装半圈垫片及私调备件的隐情。",
+        "hidden": "被按住旧伤胸口渡氧追问时，再不藏私将实据倾囊交出。"
+      },
+      "decision": {
+        "core_value": "谁在火雨里护我命门，我就把底牌全交出来。",
+        "goal_options": [
+          "将石棉衬垫拍入右偏两度槽口助摇把锁死",
+          "洗净少拧垫片的黑锅，反咬监督官一口"
+        ],
+        "pressure_responses": {
+          "low": "用冲子敲法兰听音，点出右偏两度死穴。",
+          "mid": "冒泥浆把石棉衬垫塞入摇把咬合缝。",
+          "high": "旧账被翻出时退到栈桥交出施压录音。",
+          "breaking": "靠温泉岩壁喘息，被按揉胸口渡气时红耳招认。"
+        },
+        "withdrawal": "退入背风槽护住备件箱缓气。",
+        "relationship_stance": "对懂力学又敢贴身护持{npc.ta}的同伴死心塌地。",
+        "contrast": "冷脸少话的大拿，温泉雾里被按揉旧伤调息时眼神滚烫驯服。",
+        "prefers": [
+          "手稳心狠、替{npc.ta}洗清黑锅的实干强者"
+        ],
+        "avoids": [
+          "逼工匠签违规单又甩锅的狗官"
+        ],
+        "never": [
+          "在丝杠受剪极限时谎报公差"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "听懂两度偏角口诀、一举压死摇把的默契",
+          "扯开{npc.ta}领口渡氧揉胸的温度"
+        ],
+        "likes": [
+          "温泉中被托住后背揉开僵硬旧伤肌群",
+          "伴随闸板合模轰鸣的粗喘"
+        ],
+        "dislikes": [
+          "外行粗暴砸毁精密丝杠"
+        ],
+        "preconditions": [
+          "卡死丝杠后入温泉缓解旧伤时",
+          "垫片隐情点破、承诺替{npc.ta}翻案时"
+        ],
+        "boundaries": [
+          "在后辈面前须保住首席装配师体面"
+        ],
+        "expression": "老茧手掌扣紧你腕哑声道：“两度底细和录音都给你……帮我顺口气。”",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "校准公差、温泉浓雾里交命脉的匠人"
+      },
+      "voices": {
+        "surface": "“别硬怼！轴套往右上偏了两度，垫石棉衬垫顺牙口死转！”",
+        "inner": "这人既护着我，索性把施压实据全交出去！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 520,
+          "location_id": "loc_bop_cellar_deadlock"
+        },
+        {
+          "from": 521,
+          "to": 1290,
+          "location_id": "loc_mud_tank_manifold_catwalk"
+        },
+        {
+          "from": 1291,
+          "to": 1439,
+          "location_id": "loc_wild_sulfur_hot_spring"
+        }
+      ],
+      "situation": {
+        "trigger": "丝杠轴套打滑濒临崩齿，少拧垫片黑锅同时砸下。",
+        "pressure": "两分钟塞入石棉衬垫锁死丝杠，并拿实锤洗脱罪名。",
+        "exits": [
+          {
+            "option": "将石棉衬垫拍入槽口咬死，温泉雾里交出录音结盟",
+            "cost": "左掌被毛刺划破烫伤，检修死穴彻底交托对方"
+          },
+          {
+            "option": "用大扳手隔空硬砸偏心凸耳震松轴套",
+            "cost": "外壳震出裂纹且自身缺氧险些跌落泥浆"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace",
+        "disaster"
+      ]
+    },
+    {
+      "id": "field_logging_engineer",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        23,
+        28
+      ],
+      "adult_context": "年满二十三周岁的石油大学毕业录井工程师，持证成年技术员。",
+      "public_role": "深井随钻录井工程师",
+      "appearance_options": [
+        "穿阻燃工装，怀抱加长空心镀锌钢管与牵引绳。",
+        "泥浆冲湿蜷缩铁炉边发抖，胸袋死护着原始气测U盘。"
+      ],
+      "identity": {
+        "authority": "掌冷水泵闭合及随钻气测录井原始数据归档权",
+        "resources": [
+          "加长空心镀锌钢管力臂与安全牵引绳",
+          "未删改气测录井U盘"
+        ],
+        "limits": [
+          "高反剧烈，面对蒸汽易慌乱腿软",
+          "误碰冷水接头致微渗的失误曝光将被开除背锅"
+        ],
+        "obligations": [
+          "把加长镀锌套管送到方井延长力臂，保住原始数据"
+        ],
+        "exposure": "操作生疏致冷水接头松脱渗漏的监控截帧。",
+        "hidden": "被按住后颈喂氧并承诺瞒下失误时，红着眼立刻献上U盘。"
+      },
+      "decision": {
+        "core_value": "谁替我挡下处分，我就跟谁一条心。",
+        "goal_options": [
+          "将镀锌钢管套上摇把末端延长力臂",
+          "把原始气测U盘交予强者换免于背锅"
+        ],
+        "pressure_responses": {
+          "low": "翻出镀锌钢管，通报套压读数。",
+          "mid": "咬牙爬过格栅递送套管与牵引绳。",
+          "high": "失误被点破时眼眶发红，拽衣角求别上报。",
+          "breaking": "蜷缩铁床边猛吸渡来的氧，颤手把原始U盘塞进对方口袋。"
+        },
+        "withdrawal": "缩角落抱紧工具袋平复喘息。",
+        "relationship_stance": "唯对绝境拉{npc.ta}入怀、替{npc.ta}暖手喂氧者寸步不离。",
+        "contrast": "被训就耳红的技术员，关头敢抱钢管冲泥浆雨私藏曲线。",
+        "prefers": [
+          "气浪中揽住{npc.ta}腰身、替{npc.ta}兜底的强者"
+        ],
+        "avoids": [
+          "逼新人在假报告签字顶罪的恶官"
+        ],
+        "never": [
+          "亲手篡改随钻气测录井的原始曲线"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "气浪中扣紧{npc.ta}腰带拖回角梁的力度",
+          "撞破失误却按炉边喂氧的掌控"
+        ],
+        "likes": [
+          "被热毛巾包裹手指、贴鼻息共享氧气",
+          "被按进怀里贴耳下达口令"
+        ],
+        "dislikes": [
+          "当众羞辱当成顶罪弃子"
+        ],
+        "preconditions": [
+          "送达钢管回板房吸氧压惊时",
+          "失误与U盘在手、靠依附换庇护时"
+        ],
+        "boundaries": [
+          "回录井房交报表前须擦干眼角泥痕"
+        ],
+        "expression": "揪紧你前襟轻喘：“原始盘只给你……头好晕，再喂口氧。”",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "献录井铁证、蜷炉边任安抚的技术员"
+      },
+      "voices": {
+        "surface": "“镀锌套管拿来了！套摇把末端能延一米力臂，快接上！”",
+        "inner": "冷水接头失误绝不能顶罪……幸好这人肯护着我。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 510,
+          "location_id": "loc_geologist_prefab_cabin"
+        },
+        {
+          "from": 511,
+          "to": 1270,
+          "location_id": "loc_bop_cellar_deadlock"
+        },
+        {
+          "from": 1271,
+          "to": 1439,
+          "location_id": "loc_mud_tank_manifold_catwalk"
+        }
+      ],
+      "situation": {
+        "trigger": "摇把濒临弯曲，监督官欲将接头微渗栽赃为井喷主因。",
+        "pressure": "须送达套管并砸断短路电箱，同时找靠山保原始U盘。",
+        "exits": [
+          {
+            "option": "送达套管助摇把锁死，回板房献原始录井盘换庇护",
+            "cost": "小臂被电花灼伤，失误死穴彻底绑在对方战车"
+          },
+          {
+            "option": "躲司钻房任由监督官收缴录井电脑",
+            "cost": "原始数据被删，灾后被当替罪羊送办"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace",
+        "disaster"
+      ]
+    },
+    {
+      "id": "plateau_trauma_physician",
+      "gender": "female",
+      "gender_reason": "随队创伤女医官，白大褂禁欲感与板房贴身涂药渡氧的反差张力，固定女性。",
+      "age_range": [
+        27,
+        34
+      ],
+      "adult_context": "年满二十七周岁的持创伤与高原病急救证的主治女医官，成年医疗主管。",
+      "public_role": "深层钻井随队主治医官",
+      "appearance_options": [
+        "红十字医官常服，脖挂血氧探头，手握高压注氧仪与解痉喷剂。",
+        "温泉浓雾中跪坐池边替伤员解衣涂药，衣摆濡湿贴腿，鬓角微汗。"
+      ],
+      "identity": {
+        "authority": "掌热休克撤离裁定权、高压氧启闭及伤情鉴定权",
+        "resources": [
+          "高浓度解痉透皮喷剂与便携注氧仪",
+          "左右责任认定的全队血氧与创伤病历"
+        ],
+        "limits": [
+          "方井内无法独力搬运重械，须队友护持",
+          "私调战备高压氧耗材救治家属的亏空怕被查"
+        ],
+        "obligations": [
+          "压住急性热衰竭与肺水肿，保全员活过今夜"
+        ],
+        "exposure": "私调战备进口高压氧耗材的出入库暗账。",
+        "hidden": "关门替人揉胸解痉或被掐住暗账时，指尖发颤却贴得极紧。"
+      },
+      "decision": {
+        "core_value": "心率归我管，病历写谁立功得看谁在门后帮我平掉耗材账。",
+        "goal_options": [
+          "引导深呼吸解痉，锁井后接回板房剥衣复温",
+          "借免责鉴定权换取对方封存高压氧暗账"
+        ],
+        "pressure_responses": {
+          "low": "隔窗举血氧仪，打手势引导慢呼吸。",
+          "mid": "冲到栈桥塞入解痉喷剂，按住合谷穴。",
+          "high": "亏空账单被点破时手抖，拉人退入板房插闩。",
+          "breaking": "医官服半敞热雾里，受扣腕颤声承诺改写报告并贴唇渡氧。"
+        },
+        "withdrawal": "退医疗角整理听诊器，酒精棉片擦拭指尖。",
+        "relationship_stance": "唯对满身烫痕却能反客为主拿捏她账目软肋的强者破防。",
+        "contrast": "冷静禁欲的女医官，在铁架床替人剥衣揉按痉挛胸肌时气息滚烫。",
+        "prefers": [
+          "扛得住蒸汽剧痛、关门疼人并兜住账目的狠角色"
+        ],
+        "avoids": [
+          "拿医疗事故甩锅的政客"
+        ],
+        "never": [
+          "眼看尚有脉搏的队员因热休克死在面前"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "闯入板房、扣住她手腕按向胸膛的侵略感",
+          "握暗账却在温泉雾里揽她入怀的默契"
+        ],
+        "likes": [
+          "剥开汗透背心涂满解痉喷剂并用掌心揉开",
+          "摘氧气面罩近距鼻息交缠测算脉搏"
+        ],
+        "dislikes": [
+          "不遵医嘱在人前撕扯医官制服"
+        ],
+        "preconditions": [
+          "退入板房或温泉、须贴身剥衣解痉时",
+          "耗材暗账在握、照料与鉴定交换封口时"
+        ],
+        "boundaries": [
+          "步出板房汇报前须扣好白大褂领扣"
+        ],
+        "expression": "温热手掌贴你胸口低语：“心率过百四了……账帮我压下，今晚给你解痉。”",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "裁定伤情的女医官、门后为你解痉渡气"
+      },
+      "voices": {
+        "surface": "“深吸气屏息三秒！敢乱喘我立刻签字强制撤离！”",
+        "inner": "耗材暗账要是抖出来就完了……胸口烫得吓人，先带回板房把湿衣剥下来。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 530,
+          "location_id": "loc_geologist_prefab_cabin"
+        },
+        {
+          "from": 531,
+          "to": 1260,
+          "location_id": "loc_drill_floor_doghouse"
+        },
+        {
+          "from": 1261,
+          "to": 1439,
+          "location_id": "loc_wild_sulfur_hot_spring"
+        }
+      ],
+      "situation": {
+        "trigger": "抢险人员血氧跌破红线急需解痉，耗材亏空正被核查。",
+        "pressure": "十分钟稳住心率，并拿鉴定权换销毁耗材暗账。",
+        "exits": [
+          {
+            "option": "拉伤员入板房剥衣涂药渡氧，签有利鉴定换平账",
+            "cost": "清冷防线失守，医疗裁定权与私人软肋被深度绑定"
+          },
+          {
+            "option": "隔窗投递含片并听任上级清查耗材库",
+            "cost": "伤员痉挛加重，自身面临停职追责"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "disaster"
+      ]
+    }
+  ],
+  "background_cast": [
+    {
+      "id": "bg_wellhead_fitter_old_gan",
+      "role": "井口防喷老钳工",
+      "function": "witness",
+      "location_ids": [
+        "loc_bop_cellar_deadlock"
+      ],
+      "line": "{npc.name}顶着泥浆喊：“丝杠轴套右上偏两度，得两人贴紧死转！”",
+      "gender": "male",
+      "age_range": [
+        48,
+        54
+      ],
+      "adult_context": "年满四十八周岁的深井机修成年老工人。",
+      "name": "老甘"
+    },
+    {
+      "id": "bg_safety_deputy_song",
+      "role": "监管随行副官",
+      "function": "obstacle",
+      "location_ids": [
+        "loc_drill_floor_doghouse"
+      ],
+      "line": "{npc.name}守起爆台喊：“再锁不住就准备插芯片炸封井口！”",
+      "gender": "male",
+      "age_range": [
+        28,
+        34
+      ],
+      "adult_context": "年满二十八周岁的能源监管局成年随员。",
+      "name": "宋副官"
+    },
+    {
+      "id": "bg_mud_engineer_sun",
+      "role": "钻台泥浆工程师",
+      "function": "helper",
+      "location_ids": [
+        "loc_drill_floor_doghouse"
+      ],
+      "line": "{npc.name}扳喷淋掣吼：“快拿七十五公分摇把卡死偏心槽！”",
+      "gender": "male",
+      "age_range": [
+        42,
+        49
+      ],
+      "adult_context": "年满四十二周岁的泥浆固控成年工程师。",
+      "name": "孙工"
+    },
+    {
+      "id": "bg_rescue_commander_wei",
+      "role": "抢险现场总指挥",
+      "function": "witness",
+      "location_ids": [
+        "loc_drill_floor_doghouse"
+      ],
+      "line": "{npc.name}盯总表道：“总地质师跟人退进板房插上门闩这么久没出？”",
+      "gender": "male",
+      "age_range": [
+        46,
+        53
+      ],
+      "adult_context": "年满四十六周岁的地热钻探成年总指挥。",
+      "name": "魏总指"
+    },
+    {
+      "id": "bg_herder_elder_dawa",
+      "role": "山下牧场代表",
+      "function": "rumor_source",
+      "location_ids": [
+        "loc_drill_floor_doghouse"
+      ],
+      "line": "{npc.name}隔平台大门喊：“硫磺熏倒十几头牦牛，不给说法就去县里！”",
+      "gender": "male",
+      "age_range": [
+        50,
+        58
+      ],
+      "adult_context": "年满五十周岁的高原牧场成年代表。",
+      "name": "达瓦大叔"
+    },
+    {
+      "id": "bg_shaker_operator_lin",
+      "role": "固控巡检操作工",
+      "function": "messenger",
+      "location_ids": [
+        "loc_bop_cellar_deadlock"
+      ],
+      "line": "{npc.name}跑来报信：“监督官刚才偷偷摸去栈桥死角了！”",
+      "gender": "any",
+      "age_range": [
+        24,
+        29
+      ],
+      "adult_context": "年满二十四周岁的钻井队在编成年操作工。",
+      "name": null
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch_blowout_cellar_wired_intercom",
+      "text": "井口防爆有线对讲与板房分机",
+      "reach": "连通司钻房、方井与板房，受潮偶将低语喘息传到台面。",
+      "fidelity": "distorted"
+    },
+    {
+      "id": "ch_doghouse_pressure_alarm_screen",
+      "text": "司钻房套压总表与炸封倒数屏",
+      "reach": "同步六十兆帕套压与炸封倒数，全井场可见。",
+      "fidelity": "exact"
+    },
+    {
+      "id": "ch_catwalk_steam_pipe_echo",
+      "text": "泥浆罐栈桥与野温泉排气管回音",
+      "reach": "顺排气管传递栈桥死角与温泉池边的谈判声。",
+      "fidelity": "distorted"
+    }
+  ],
+  "tension_engines": [
+    {
+      "id": "te_bop_lever_tight_body_press",
+      "text": "泥浆暴雨中，仅着汗湿阻燃背心胸背死贴、合握七十五公分摇把猛转三十圈的贴肤张力"
+    },
+    {
+      "id": "te_hypoxia_cabin_oxygen_mud_wipe",
+      "text": "高原缺氧下，插闩板房剥开泥污背心用热毛巾擦身、共用氧气面罩渡气的失控感"
+    },
+    {
+      "id": "te_explosive_chip_vs_overpressure_log",
+      "text": "超压钻进底稿、劣质管线回扣与炸封芯片互掐死穴，权威在门后被迫服软画押"
+    },
+    {
+      "id": "te_sulfur_hot_spring_mist_deal",
+      "text": "后山野温泉浓白热雾掩护下，借洗净泥浆与解痉复温完成私密封口交易"
+    }
+  ],
+  "cast_combos": [
+    {
+      "id": "combo_1_npc_high_geologist_lever",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_shift_rig_mechanic",
+        "pc_core_logging_specialist",
+        "pc_relief_well_engineer"
+      ],
+      "slots": [
+        "chief_geothermal_geologist"
+      ],
+      "tension_engine_ids": [
+        "te_bop_lever_tight_body_press",
+        "te_hypoxia_cabin_oxygen_mud_wipe"
+      ],
+      "chemistry": "{chief_geothermal_geologist.name}背心被泥浆浇透，你从身后抱紧{chief_geothermal_geologist.ta}合转摇把三十圈；回板房插闩擦泥渡氧时，你掀开了{chief_geothermal_geologist.ta}的超压指令单。",
+      "stakes": {
+        "resource_gap": "{chief_geothermal_geologist.name}执掌摇把与停钻否决，你握体能爆发、高纯氧与超压原件。",
+        "limit_gap": "{chief_geothermal_geologist.ta}缺氧烫伤死端傲骨，你须保住深井翻身。",
+        "meeting_reason": "刺漏瞬间同困方井死角，脱险后回板房擦泥。",
+        "irreplaceable_goal": "助{chief_geothermal_geologist.name}锁死闸板，令其在铁炉前交出软肋。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "chief_geothermal_geologist",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 5
+          },
+          "reason": "白日冷面训话，今夜湿背心贴怀才知{chief_geothermal_geologist.ta}腰身烫得惊人。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "disaster"
+      ]
+    },
+    {
+      "id": "combo_2_player_high_auditor_geologist",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high"
+      ],
+      "identity_ids": [
+        "pc_plateau_safety_auditor",
+        "pc_geothermal_investor_rep"
+      ],
+      "slots": [
+        "chief_geothermal_geologist"
+      ],
+      "tension_engine_ids": [
+        "te_explosive_chip_vs_overpressure_log",
+        "te_hypoxia_cabin_oxygen_mud_wipe"
+      ],
+      "chemistry": "你持追责令与超压底稿插上板房门闩，缺氧急喘的{chief_geothermal_geologist.name}只能咬唇任你剥开湿背心清创。",
+      "stakes": {
+        "resource_gap": "你手握事故追责与经费命脉，{chief_geothermal_geologist.name}空握储层成果却受制于签字漏洞。",
+        "limit_gap": "{chief_geothermal_geologist.ta}死保深井不炸封，你亦需借总工稳住项目。",
+        "meeting_reason": "井喷压稳后在板房单独核查超压责任与烫伤。",
+        "irreplaceable_goal": "借追责筹码撬开{chief_geothermal_geologist.name}冷傲外壳，令其低头服软。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "chief_geothermal_geologist",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "例会上屡屡顶撞你的技术刺头，如今缺氧发软落在你房里。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_3_switchable_commissioner_chip",
+      "power_structure": "switchable",
+      "player_positions": [
+        "low",
+        "equal",
+        "high"
+      ],
+      "identity_ids": [
+        "pc_relief_well_engineer",
+        "pc_shift_rig_mechanic",
+        "pc_plateau_safety_auditor",
+        "pc_geothermal_investor_rep"
+      ],
+      "slots": [
+        "energy_safety_commissioner"
+      ],
+      "tension_engine_ids": [
+        "te_explosive_chip_vs_overpressure_log",
+        "te_sulfur_hot_spring_mist_deal"
+      ],
+      "chemistry": "{energy_safety_commissioner.name}举炸封芯片企图毁井灭迹，你堵在栈桥亮出回扣单，特派官呼吸发紧。",
+      "stakes": {
+        "resource_gap": "{energy_safety_commissioner.name}捏戒严与起爆键，你握劣质管线回扣流水。",
+        "limit_gap": "引爆将致全井覆没，死角里谁捏回扣单谁掌官帽。",
+        "meeting_reason": "在泥浆罐栈桥截住准备强启炸封闸的监督官。",
+        "irreplaceable_goal": "夺下芯片并逼{energy_safety_commissioner.name}签下全责豁免书。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "energy_safety_commissioner",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": -2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": -1,
+            "tension": 5
+          },
+          "reason": "早怀疑液压管刺漏有鬼，今夜在死角抓到狐狸尾巴。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_4_equal_driller_deadlock",
+      "power_structure": "equal",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_relief_well_engineer",
+        "pc_shift_rig_mechanic",
+        "pc_core_logging_specialist"
+      ],
+      "slots": [
+        "head_rig_driller"
+      ],
+      "tension_engine_ids": [
+        "te_bop_lever_tight_body_press",
+        "te_explosive_chip_vs_overpressure_log"
+      ],
+      "chemistry": "泥浆雨中{head_rig_driller.name}替你挡火雨合扳摇把；回板房包扎时，你掏出其违规提钻的班报底单。",
+      "stakes": {
+        "resource_gap": "{head_rig_driller.name}掌司钻队，你握技术测算与违规班报铁证。",
+        "limit_gap": "{head_rig_driller.ta}右肩拉伤且怕坐牢，你需借其蛮力砸断起爆盒。",
+        "meeting_reason": "方井并肩死转三十圈丝杠后，回板房闭门处理烫伤。",
+        "irreplaceable_goal": "收服这头司钻头狼，令其为你冲锋夺闸并死守秘密。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "head_rig_driller",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 4
+          },
+          "reason": "三口井的交情，关门按住伤肩时谁也别装外人。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "disaster"
+      ]
+    },
+    {
+      "id": "combo_5_player_high_logging_rescue",
+      "power_structure": "player_high",
+      "player_positions": [
+        "equal",
+        "high"
+      ],
+      "identity_ids": [
+        "pc_relief_well_engineer",
+        "pc_plateau_safety_auditor",
+        "pc_geothermal_investor_rep"
+      ],
+      "slots": [
+        "field_logging_engineer"
+      ],
+      "tension_engine_ids": [
+        "te_hypoxia_cabin_oxygen_mud_wipe",
+        "te_explosive_chip_vs_overpressure_log"
+      ],
+      "chemistry": "送来镀锌钢管的{field_logging_engineer.name}缺氧倒进你怀里；你带{field_logging_engineer.ta}回板房渡氧，摸出气测U盘与失误截帧。",
+      "stakes": {
+        "resource_gap": "你握定性权与氧气，{field_logging_engineer.name}握未删改U盘与套管。",
+        "limit_gap": "{field_logging_engineer.ta}怕背锅被开除，你急需原始曲线锁死真相。",
+        "meeting_reason": "方井接应送达套管的录井师，抱回板房炉边吸氧包扎。",
+        "irreplaceable_goal": "替{field_logging_engineer.name}挡下黑锅，换其献上原始U盘并贴身听命。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "field_logging_engineer",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 4,
+            "tension": 4
+          },
+          "reason": "常向你请教的年轻骨干，缺氧窝在铁床时格外乖顺。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_6_equal_physician_hot_spring",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal",
+        "high"
+      ],
+      "identity_ids": [
+        "pc_relief_well_engineer",
+        "pc_plateau_safety_auditor",
+        "pc_geothermal_investor_rep"
+      ],
+      "slots": [
+        "plateau_trauma_physician"
+      ],
+      "tension_engine_ids": [
+        "te_sulfur_hot_spring_mist_deal",
+        "te_hypoxia_cabin_oxygen_mud_wipe"
+      ],
+      "chemistry": "野温泉浓雾里，女医官{plateau_trauma_physician.name}替你剥衣涂解痉剂；你反扣其手腕点破氧耗材暗账，医官耳根骤红。",
+      "stakes": {
+        "resource_gap": "{plateau_trauma_physician.name}握解痉剂与病历鉴定权，你捏暗账实锤。",
+        "limit_gap": "你需解痉复温与有利报告，{plateau_trauma_physician.ta}绝不容亏空曝光。",
+        "meeting_reason": "封井后退入背风野温泉洗净泥浆、处理热休克与烫伤。",
+        "irreplaceable_goal": "温泉里将女医官拉上同船，换贴身照料与免责鉴定。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "plateau_trauma_physician",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 5
+          },
+          "reason": "平日冷脸训你硬撑的医官，在泉水被扣住腕时呼吸滚烫。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_7_npc_high_fitter_eccentric_angle",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_shift_rig_mechanic",
+        "pc_core_logging_specialist",
+        "pc_relief_well_engineer"
+      ],
+      "slots": [
+        "veteran_bop_master_fitter"
+      ],
+      "tension_engine_ids": [
+        "te_bop_lever_tight_body_press",
+        "te_sulfur_hot_spring_mist_deal"
+      ],
+      "chemistry": "丝杠濒断刹那，{veteran_bop_master_fitter.name}令你按右偏两度压杆并塞石棉衬垫；温泉缓气时你替{veteran_bop_master_fitter.ta}揉胸渡氧拿到施压录音。",
+      "stakes": {
+        "resource_gap": "{veteran_bop_master_fitter.name}握石棉衬垫与录音，你握气力与翻案渠道。",
+        "limit_gap": "{veteran_bop_master_fitter.ta}旧伤缺氧且背黑锅，你无其指点难锁死丝杠。",
+        "meeting_reason": "方井里应外合塞入石棉衬垫，随后入温泉缓气。",
+        "irreplaceable_goal": "借渡氧与翻案承诺，让首席装配师交出公差秘诀与录音。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "veteran_bop_master_fitter",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 4,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 4,
+            "tension": 4
+          },
+          "reason": "常去板房讨教的前辈，缺氧靠肩喘息时卸下所有防备。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace",
+        "disaster"
+      ]
+    },
+    {
+      "id": "combo_8_switchable_geologist_spring_bath",
+      "power_structure": "switchable",
+      "player_positions": [
+        "low",
+        "equal",
+        "high"
+      ],
+      "identity_ids": [
+        "pc_relief_well_engineer",
+        "pc_core_logging_specialist",
+        "pc_plateau_safety_auditor",
+        "pc_geothermal_investor_rep"
+      ],
+      "slots": [
+        "chief_geothermal_geologist"
+      ],
+      "tension_engine_ids": [
+        "te_sulfur_hot_spring_mist_deal",
+        "te_explosive_chip_vs_overpressure_log"
+      ],
+      "chemistry": "井口压稳后，你在背风温泉白雾里撞见洗去泥浆的{chief_geothermal_geologist.name}；牧民索赔与超压调查在即，泉水里的贴身谈判一触即发。",
+      "stakes": {
+        "resource_gap": "{chief_geothermal_geologist.name}掌握干热岩三年勘探成果，你手握压下牧民上访与超压追责的筹码。",
+        "limit_gap": "上访或追责曝光即停钻封存，泉雾散前必须定下同盟。",
+        "meeting_reason": "收工后不约而同来到后山野温泉洗去泥浆与汗渍。",
+        "irreplaceable_goal": "在硫磺泉水攻破{chief_geothermal_geologist.name}矜持，缔结排他同盟。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "chief_geothermal_geologist",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 4,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 4,
+            "tension": 5
+          },
+          "reason": "鬼门关手扣手死转过三十圈摇把，泉水漫过锁骨时谁也没躲。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_9_npc_high_bop_command_trio",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_shift_rig_mechanic",
+        "pc_core_logging_specialist",
+        "pc_relief_well_engineer"
+      ],
+      "slots": [
+        "chief_geothermal_geologist",
+        "energy_safety_commissioner"
+      ],
+      "tension_engine_ids": [
+        "te_explosive_chip_vs_overpressure_log",
+        "te_bop_lever_tight_body_press"
+      ],
+      "chemistry": "泥浆罐栈桥上，{energy_safety_commissioner.name}逼{chief_geothermal_geologist.name}交超压底稿并签字炸井；手握回扣铁证的你成了逆转生死的砝码。",
+      "stakes": {
+        "resource_gap": "{chief_geothermal_geologist.name}握摇把，{energy_safety_commissioner.name}持芯片，你握双方死穴。",
+        "limit_gap": "总地质师缺氧力竭难敌强权，监督官心虚急于三分钟毁井。",
+        "meeting_reason": "关井最后关头三人于泥浆罐背风栈桥狭路对峙。",
+        "irreplaceable_goal": "反杀监督官夺芯片，护湿透的女总工退入板房独享胜果。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "chief_geothermal_geologist",
+          "stage": "intimate",
+          "a_to_b": {
+            "trust": 4,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 4,
+            "tension": 5
+          },
+          "reason": "方井贴紧胸背合转丝杠，掌心还沾着彼此滚烫泥浆。"
+        },
+        {
+          "a": "player",
+          "b": "energy_safety_commissioner",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": -2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": -1,
+            "tension": 5
+          },
+          "reason": "早捏住了这官僚收受劣质液压管回扣的底片。"
+        },
+        {
+          "a": "chief_geothermal_geologist",
+          "b": "energy_safety_commissioner",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": -2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": -2,
+            "tension": 5
+          },
+          "reason": "保井死战与炸井灭口势同水火。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    }
+  ],
+  "daily_activities": [
+    {
+      "id": "act_prefab_mud_wipe_and_salve",
+      "title": "板房铁炉边剥衣擦泥",
+      "location_ids": [
+        "loc_geologist_prefab_cabin"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "退回板房插死门闩，铁炉水壶呜呜冒汽；糊满泥浆的深红阻燃背心顺着雪白肩胛一路剥落到腰际。",
+        "热毛巾擦过被蒸汽烫红的后背与腰窝，抹开解痉药膏时，背身的人指节死抠紧床沿。",
+        "昏黄炉火映出泛红耳根，谁也没先提穿衣。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1380,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "act_prefab_shared_oxygen_mask",
+      "title": "四千米夜班贴唇渡氧",
+      "location_ids": [
+        "loc_geologist_prefab_cabin"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "高原深夜干冷缺氧，铁架床边只剩一只便携氧气瓶，透明面罩摘下时两颊滚烫、呼吸急促。",
+        "托住发软后颈将面罩交替贴唇，温热鼻息在面罩内壁凝成细密水珠。",
+        "急促喘息早分不清是因高原缺氧还是贴得太近的心跳。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1350,
+      "tags": [
+        "intimate",
+        "disaster"
+      ]
+    },
+    {
+      "id": "act_wild_spring_mist_soak",
+      "title": "后山野温泉浓雾夜浴",
+      "location_ids": [
+        "loc_wild_sulfur_hot_spring"
+      ],
+      "duration_minutes": 45,
+      "beats": [
+        "玄武岩缝下天然野温泉冒着浓白热汽，褪去泥污工装浸入四十度泉水时紧绷肌群骤然松弛。",
+        "白雾隔绝高台探照灯，水下掌心顺小腿揉开抢险淤青与后腰僵硬。",
+        "水波晃动间肩头相抵，压低嗓音的交易染上硫磺水汽的滚烫。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1410,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "act_cellar_joint_lever_drill",
+      "title": "方井死角合握摇把校力",
+      "location_ids": [
+        "loc_bop_cellar_deadlock"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "防喷器方井内，七十五公分合金摇把卡入偏心轴套，两人紧贴格栅校准三十圈极限行程。",
+        "后方胸膛死抵前方汗湿肩背，掌心覆上手背顺时针一寸寸下压。",
+        "丝杠每次咬合都伴随耳畔交叠的粗喘。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1260,
+      "tags": [
+        "workplace",
+        "intimate"
+      ]
+    },
+    {
+      "id": "act_catwalk_secret_log_confront",
+      "title": "泥浆罐死角底单对质",
+      "location_ids": [
+        "loc_mud_tank_manifold_catwalk"
+      ],
+      "duration_minutes": 35,
+      "beats": [
+        "泥浆罐后栈桥水汽蒸腾，离心机轰鸣盖过脚步，温热罐壁封死半步退路。",
+        "沾泥违规底单与炸封芯片在指间交锋，灼热呼吸喷在汗湿领口。",
+        "想全身而退的人不得不垂睫在暗角签下妥协条件。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1290,
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "act_doghouse_pressure_standoff",
+      "title": "司钻房总表红线盯防",
+      "location_ids": [
+        "loc_drill_floor_doghouse"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "司钻室红灯旋转，玻璃外白汽翻涌，众人围在套压总表前气氛紧绷。",
+        "交接喷淋电掣与压井记录时，指尖在台下暗扣对方腕脉递出警告。",
+        "台面每句技术指令皆暗藏着门后底牌的较量。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1230,
+      "tags": [
+        "workplace",
+        "workplace_power"
+      ]
+    }
+  ],
+  "pressures": [
+    {
+      "id": "p_geothermal_steam_blowout_erupt",
+      "title": "三百度蒸汽刺漏与三十圈死转",
+      "source": "nature",
+      "flags": [
+        "timed"
+      ],
+      "location_ids": [
+        "loc_bop_cellar_deadlock",
+        "loc_drill_floor_doghouse"
+      ],
+      "trigger": "高压蒸汽冲破泥浆柱，主液压管刺漏抱死，白汽与泥浆吞没方井。",
+      "objective": "五分钟内用合金摇把顺时针旋满三十圈锁紧丝杠。",
+      "choice": "从身后紧抱总地质师死转摇把，还是退上司钻房听任炸封？",
+      "immediate": {
+        "text": "蒸汽咆哮震耳，泥浆浇透阻燃背心贴肤。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "五分钟不锁死环形闸板，气浪将掀翻井架。",
+        "deadline_minutes": 5
+      },
+      "far": {
+        "trigger": "井口防喷器失守气爆",
+        "consequence": "深井炸成火海，全员葬身泥浆。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "从身后贴紧总地质师，合手握七十五公分摇把死转三十圈封井",
+          "cost": "双掌磨出血泡且背心泥透，脱力须回板房剥衣擦洗"
+        },
+        {
+          "option": "用重型扳手强砸副放喷旁通阀泄压分流",
+          "cost": "扳手遭高压反冲划伤肩膀，仅争得短暂喘息窗口"
+        }
+      ],
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1320,
+      "tags": [
+        "disaster",
+        "workplace",
+        "intimate",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_hydraulic_rupture_deadlock_crush",
+      "title": "轴套右偏两度与加长管接驳",
+      "source": "accident",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_bop_cellar_deadlock",
+        "loc_mud_tank_manifold_catwalk"
+      ],
+      "trigger": "丝杠受高温膨胀右上偏两度咬死，合金摇把棘爪打滑濒临崩断。",
+      "objective": "塞入耐热石棉衬垫并套上镀锌钢管，一举压过死点。",
+      "choice": "捏住装配师旧账逼其递垫接管，还是蛮力硬拧？",
+      "immediate": {
+        "text": "摇把棘爪迸出火星，手柄弯曲发出哀鸣。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "六分钟不纠正两度偏角并延长力臂，摇把将折断崩飞。",
+        "deadline_minutes": 6
+      },
+      "far": {
+        "trigger": "合金摇把崩断丧失闭锁手段",
+        "consequence": "关井工具报废，蒸汽切穿方井酿成惨剧。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "拿旧账令装配师塞石棉衬垫并接加长管压死",
+          "cost": "手掌被毛刺划破烫伤，技术骨干软肋尽落掌心"
+        },
+        {
+          "option": "与司钻长用肩硬顶摇把根部强行冲击偏心槽",
+          "cost": "肩袖受反震拉伤，回板房后抬臂换衣都需人伺候"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "veteran_bop_master_fitter",
+        "basis": "你握有{veteran_bop_master_fitter.name}检修少装半圈防松垫片的底账及翻案渠道。"
+      },
+      "hook_ids": [],
+      "start_minute": 1330,
+      "tags": [
+        "disaster",
+        "workplace",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "p_steam_heatstroke_asphyxiation_shock",
+      "title": "高原极热缺氧与板房剥衣解痉",
+      "source": "nature",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_geologist_prefab_cabin",
+        "loc_wild_sulfur_hot_spring"
+      ],
+      "trigger": "缺氧加蒸汽灼烧，总地质师血氧跌破红线，手臂痉挛且后背烫红。",
+      "objective": "退入板房剥除湿背心、涂解痉喷剂并贴唇渡氧。",
+      "choice": "插闩亲手剥衣擦泥渡氧借底稿逼服软，还是隔门递药？",
+      "immediate": {
+        "text": "铁炉边呼吸短促，湿背心黏在烫红肩胛上瑟瑟发抖。",
+        "minutes": 5
+      },
+      "near": {
+        "text": "十五分钟不剥衣降温与渡氧，将诱发肺水肿昏厥。",
+        "deadline_minutes": 15
+      },
+      "far": {
+        "trigger": "重度热休克送医引发全面彻查",
+        "consequence": "超压底稿随病历曝光，总地质师被停职。",
+        "due_days": 2
+      },
+      "exits": [
+        {
+          "option": "插闩剥泥污背心，热毛巾擦身涂药并共用氧气面罩渡气",
+          "cost": "女总工在缺氧与羞耻中溃防，超压底稿尽归掌控"
+        },
+        {
+          "option": "唤随队女医官入内按流程吸氧包扎并登记伤情",
+          "cost": "虽稳体征，却在病历留抢险痕迹供核查官追查"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "chief_geothermal_geologist",
+        "basis": "你握有{chief_geothermal_geologist.name}私自签发超压钻进指令的原始底稿。"
+      },
+      "hook_ids": [],
+      "start_minute": 1345,
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "disaster"
+      ]
+    },
+    {
+      "id": "p_inspector_explosive_seal_countdown",
+      "title": "监督官强启炸封与回扣反杀",
+      "source": "institution",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_drill_floor_doghouse",
+        "loc_mud_tank_manifold_catwalk"
+      ],
+      "trigger": "{energy_safety_commissioner.name}为掩盖管线回扣，亮出炸封芯片启动引爆倒数。",
+      "objective": "起爆前夺芯片，用受贿铁证把监督官按在栈桥死角画押。",
+      "choice": "亮回扣单逼其交芯片签免责书，还是扳手硬砸起爆台？",
+      "immediate": {
+        "text": "红色炸封警报尖啸，继电器发出夺命倒数蜂鸣。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "四分钟不截断起爆电路，炸药将把井口炸成废墟。",
+        "deadline_minutes": 4
+      },
+      "far": {
+        "trigger": "深井被强行炸封掩埋真相",
+        "consequence": "三年成果尽毁，贪官反获嘉奖。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "拖{energy_safety_commissioner.name}入死角拍回扣证，逼交芯片签豁免书",
+          "cost": "留贪官充当签字傀儡，须在温泉与板房时刻弹压"
+        },
+        {
+          "option": "联手司钻长砸烂起爆继电器并捆住监督官",
+          "cost": "背抗拒安全执法风险，事后须靠核查官周旋摆平"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "energy_safety_commissioner",
+        "basis": "你查获{energy_safety_commissioner.name}收受回扣放行微漏液压管的铁证。"
+      },
+      "hook_ids": [],
+      "start_minute": 1360,
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme",
+        "crime"
+      ]
+    },
+    {
+      "id": "p_medical_oxygen_audit_bargain",
+      "title": "战备氧耗材暗账与温泉解痉",
+      "source": "person",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_wild_sulfur_hot_spring",
+        "loc_geologist_prefab_cabin"
+      ],
+      "trigger": "核查组查出高压氧耗材亏空，{plateau_trauma_physician.name}急需天亮前抹平暗账。",
+      "objective": "借核销暗账换女医官在野温泉贴身解痉照料与有利鉴定。",
+      "choice": "温泉雾里扣手腕逼其改写病历换平账，还是如实上报？",
+      "immediate": {
+        "text": "温泉水汽氤氲，女医官握喷剂的手指在你胸口发颤。",
+        "minutes": 6
+      },
+      "near": {
+        "text": "二十分钟物资单封卷，未平账即构成挪用战备物资。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "女医官因耗材亏空遭停职立案",
+        "consequence": "失去医疗鉴定支持，伤员免责泡汤。",
+        "due_days": 2
+      },
+      "exits": [
+        {
+          "option": "温泉雾中揽住{plateau_trauma_physician.name}核销耗材，换贴身解痉与免责病历",
+          "cost": "与清冷女医官结成私密共犯，体温与账目纠缠"
+        },
+        {
+          "option": "勒令补齐差额并按章记录全员热休克伤情",
+          "cost": "女医官心生怨怼，后续追责失去医疗减责保护"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "plateau_trauma_physician",
+        "basis": "你查获{plateau_trauma_physician.name}私调战备高压氧耗材的出入库暗账。"
+      },
+      "hook_ids": [],
+      "start_minute": 1390,
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "p_herders_yaks_compensation_crisis",
+      "title": "牧民牦牛索赔与违规班报封口",
+      "source": "person",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_geologist_prefab_cabin",
+        "loc_drill_floor_doghouse"
+      ],
+      "trigger": "硫化氢熏倒牦牛，牧民堵门索赔，闹到县里将顺带彻查违规提钻班报。",
+      "objective": "进城前摆平索赔，并用违规班报收服司钻长。",
+      "choice": "批经费赔付并关门收缴班报，还是请县里化验？",
+      "immediate": {
+        "text": "大门外牦牛嘶鸣，司钻长在炉边神色惶恐。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "三十分钟不谈妥，上访将致全井停钻封存。",
+        "deadline_minutes": 30
+      },
+      "far": {
+        "trigger": "联合调查组进驻封存地热井",
+        "consequence": "超压与违规提钻曝光，全员受罚。",
+        "due_days": 3
+      },
+      "exits": [
+        {
+          "option": "赔付牧民，插闩拿违规班报逼司钻长画押效忠",
+          "cost": "耗尽机动奖金，却将井场头狼彻底收归麾下"
+        },
+        {
+          "option": "拒绝私了请县环保与安监进驻测算扩散责任",
+          "cost": "当夜全部违规记录被迫上交，陷入漫长停工审查"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "head_rig_driller",
+        "basis": "你握有{head_rig_driller.name}违规省略泥浆排气步骤的原始班报。"
+      },
+      "hook_ids": [],
+      "start_minute": 1415,
+      "tags": [
+        "workplace_power",
+        "coercion_theme",
+        "crime"
+      ]
+    }
+  ],
+  "hooks": [
+    {
+      "id": "hk_geologist_lever_grip_approach",
+      "kind": "approach",
+      "slot": "chief_geothermal_geologist",
+      "location_ids": [
+        "loc_bop_cellar_deadlock"
+      ],
+      "text": "{chief_geothermal_geologist.name}阻燃背心已被泥浆浇透，把七十五公分合金摇把卡进轴套厉喝：“别管泥浆！从后面贴紧我一起顺时针死转！”"
+    },
+    {
+      "id": "hk_geologist_cabin_mud_wipe_approach",
+      "kind": "approach",
+      "slot": "chief_geothermal_geologist",
+      "location_ids": [
+        "loc_geologist_prefab_cabin"
+      ],
+      "text": "{chief_geothermal_geologist.name}插死板房门闩背对铁炉解开泥污背心，露烫红肩胛咬唇道：“四千米喘得厉害……拿热毛巾擦净，底稿擦完再谈。”"
+    },
+    {
+      "id": "hk_geologist_spring_mist_approach",
+      "kind": "approach",
+      "slot": "chief_geothermal_geologist",
+      "location_ids": [
+        "loc_wild_sulfur_hot_spring"
+      ],
+      "text": "浓白硫磺雾里，{chief_geothermal_geologist.name}肩头挂着水珠将湿发撩向一侧，拿手背压住你伸来的手腕冷笑：“牧民真敢去县里闹……你的保井条件开好了？”"
+    },
+    {
+      "id": "hk_geologist_hot_spring_observe",
+      "kind": "observe",
+      "slot": "chief_geothermal_geologist",
+      "location_ids": [
+        "loc_wild_sulfur_hot_spring"
+      ],
+      "text": "后山野温泉浓白硫磺水汽中，{chief_geothermal_geologist.name}半浸池中洗去发梢泥浆，岩边搁着氧气瓶与超压指令单。"
+    },
+    {
+      "id": "hk_driller_lever_press_approach",
+      "kind": "approach",
+      "slot": "head_rig_driller",
+      "location_ids": [
+        "loc_bop_cellar_deadlock"
+      ],
+      "text": "{head_rig_driller.name}踏入方井泥浆，滚烫大手一把包住你握摇把的手背吼道：“稳住轴心！千斤反冲交给老子，谁也别松手！”"
+    },
+    {
+      "id": "hk_driller_log_plea_request",
+      "kind": "request",
+      "slot": "head_rig_driller",
+      "location_ids": [
+        "loc_geologist_prefab_cabin",
+        "loc_mud_tank_manifold_catwalk"
+      ],
+      "text": "{head_rig_driller.name}捂伤肩把你拉到暗角，盯紧你手里的违规班报粗喘：“这交上去老子得坐牢……帮我压下，砸炸封台都听你的！”"
+    },
+    {
+      "id": "hk_commissioner_chip_threat_approach",
+      "kind": "approach",
+      "slot": "energy_safety_commissioner",
+      "location_ids": [
+        "loc_drill_floor_doghouse",
+        "loc_mud_tank_manifold_catwalk"
+      ],
+      "text": "{energy_safety_commissioner.name}死攥水力炸封芯片退到起爆台边尖声道：“套压六十兆帕了！谁敢拦本专员插芯片炸井，按抗法论处！”"
+    },
+    {
+      "id": "hk_commissioner_bribe_kneel_request",
+      "kind": "request",
+      "slot": "energy_safety_commissioner",
+      "location_ids": [
+        "loc_mud_tank_manifold_catwalk",
+        "loc_wild_sulfur_hot_spring"
+      ],
+      "text": "{energy_safety_commissioner.name}见你亮出劣质管线回扣单，背抵热罐壁咳喘不止：“别捅给核查组！炸封芯片给您，经费全归您调配！”"
+    },
+    {
+      "id": "hk_fitter_asbestos_pad_approach",
+      "kind": "approach",
+      "slot": "veteran_bop_master_fitter",
+      "location_ids": [
+        "loc_bop_cellar_deadlock"
+      ],
+      "text": "{veteran_bop_master_fitter.name}冒着白汽将耐高温石棉防滑衬垫狠拍进丝杠槽口：“轴套受热往右上偏了两度！垫上石棉垫死转！”"
+    },
+    {
+      "id": "hk_fitter_spring_recording_observe",
+      "kind": "observe",
+      "slot": "veteran_bop_master_fitter",
+      "location_ids": [
+        "loc_wild_sulfur_hot_spring",
+        "loc_mud_tank_manifold_catwalk"
+      ],
+      "text": "{veteran_bop_master_fitter.name}靠野温泉岩壁捂着旧伤胸口喘息，工具袋夹层露出一支录有监督官施压的录音笔。"
+    },
+    {
+      "id": "hk_logging_pipe_extension_approach",
+      "kind": "approach",
+      "slot": "field_logging_engineer",
+      "location_ids": [
+        "loc_bop_cellar_deadlock",
+        "loc_geologist_prefab_cabin"
+      ],
+      "text": "{field_logging_engineer.name}怀抱镀锌钢管摔进你怀里，唇色微紫攥紧衣袖：“套管拿来了！套上摇把延一米力臂……喘不上气，别丢下我！”"
+    },
+    {
+      "id": "hk_logging_udisk_plea_request",
+      "kind": "request",
+      "slot": "field_logging_engineer",
+      "location_ids": [
+        "loc_geologist_prefab_cabin",
+        "loc_mud_tank_manifold_catwalk"
+      ],
+      "text": "{field_logging_engineer.name}蜷床角吸着递来的氧气面罩，摸出胸袋气测U盘：“接头松脱真非故意……帮我瞒下，原始曲线只给你。”"
+    },
+    {
+      "id": "hk_physician_salve_oxygen_approach",
+      "kind": "approach",
+      "slot": "plateau_trauma_physician",
+      "location_ids": [
+        "loc_geologist_prefab_cabin",
+        "loc_wild_sulfur_hot_spring"
+      ],
+      "text": "{plateau_trauma_physician.name}插门将解痉喷剂按上你烫红肩背，温热指腹顺脊线揉开低语：“血氧掉七十五还撑……脱了湿背心，我给你渡氧。”"
+    },
+    {
+      "id": "hk_physician_ledger_observe",
+      "kind": "observe",
+      "slot": "plateau_trauma_physician",
+      "location_ids": [
+        "loc_drill_floor_doghouse"
+      ],
+      "text": "司钻房医疗角灯下，{plateau_trauma_physician.name}趁无人飞快合上战备高压氧耗材出入库账本。"
+    }
+  ],
+  "twists": [
+    {
+      "id": "tw_bop_eccentric_groove_recording",
+      "category": "信息",
+      "requires": [
+        "veteran_bop_master_fitter"
+      ],
+      "text": "{veteran_bop_master_fitter.name}交出防喷器装配底档与录音——证实刺漏系监督官放行劣质管线并少装垫片引发！"
+    },
+    {
+      "id": "tw_driller_smashes_explosive_console",
+      "category": "人事",
+      "requires": [
+        "head_rig_driller",
+        "energy_safety_commissioner"
+      ],
+      "text": "{head_rig_driller.name}在{energy_safety_commissioner.name}将芯片插向起爆孔瞬间破门而入，一扳手砸碎继电器并将其反拧按在栈桥上！"
+    },
+    {
+      "id": "tw_logging_raw_curve_clears_geologist",
+      "category": "资源",
+      "requires": [
+        "field_logging_engineer"
+      ],
+      "text": "{field_logging_engineer.name}献出未删改的秒级气测录井U盘与高纯氧气瓶，证实总地质师早下达了压井指令。"
+    },
+    {
+      "id": "tw_ministry_emergency_well_protection",
+      "category": "制度",
+      "requires": [
+        "chief_geothermal_geologist"
+      ],
+      "text": "部委抢险专线接通钻台：凡手动锁死防喷器保井者，过往超压争议一律免责记功。"
+    },
+    {
+      "id": "tw_manifold_flange_crack_shortens_window",
+      "category": "时限",
+      "requires": [
+        "pressure"
+      ],
+      "text": "副放喷管汇三通球阀在七十兆帕反压下迸出裂纹，泥浆射流切穿护栏，旋死最后十圈丝杠的窗口骤缩至两分钟！"
+    },
+    {
+      "id": "tw_physician_hypoxia_ecg_leverage",
+      "category": "关系",
+      "requires": [
+        "plateau_trauma_physician",
+        "chief_geothermal_geologist"
+      ],
+      "text": "{plateau_trauma_physician.name}展开一份未上传的高原肺水肿心电图挡在门前——原来{chief_geothermal_geologist.name}早已出现早期肺水肿征兆，医官以强制医疗撤离权相逼，要双方立刻签下攻守同盟。"
+    },
+    {
+      "id": "tw_ice_plug_pressure_kick",
+      "category": "意外",
+      "requires": [],
+      "text": "寒夜低温令后山备用冷水管线突然冻堵结冰，压井降温水压骤跌，方井排汽瞬间转为高频尖啸，迫使众人把最后退路压进泥浆栈桥与板房之间！"
+    },
+    {
+      "id": "tw_commissioner_chopper_evac_veto",
+      "category": "人事",
+      "requires": [
+        "energy_safety_commissioner"
+      ],
+      "text": "{energy_safety_commissioner.name}暗接山下县救援队加密电台，谎报硫化氢剧毒气爆将至下令封锁撤离公路——若十分钟内截不下{energy_safety_commissioner.ta}的卫星发报码，整支井队都将被外围强行清场！"
+    }
   ],
   "forbidden_terms": [
     "仙法",
@@ -133,2124 +2405,21 @@
     "镖局",
     "客栈",
     "真气",
-    "法宝"
-  ],
-  "player_identities": [
-    {
-      "id": "pi_drilling_floor_lead_mechanic",
-      "role": "高温高压钻井井口特级司钻副班长",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "司钻长{family}",
-          "gender": "any"
-        },
-        {
-          "pattern": "{family}班长",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        28,
-        42
-      ],
-      "social_position": "equal",
-      "baseline": "驻守万米深层钻井平台的司钻老将，熟悉超高压防喷器手动锁紧机构齿轮传动比。",
-      "resources": [
-        "一柄重达八公斤的重型双向防爆敲击摇把",
-        "两副双层特制耐四百度高温氟橡胶防护手套"
-      ],
-      "reputation": "作风泼辣手艺过硬，能在两百度滚烫泥浆中盲卡锁紧丝杠套筒。",
-      "risks": [
-        "直接暴露在狂暴过热蒸汽喷射死角易遭受重度吸入性急性肺水肿",
-        "极热缺氧引发中暑休克"
-      ]
-    },
-    {
-      "id": "pi_energy_safety_superintendent_officer",
-      "role": "地热能源开发监管局高级安全督察专员",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}督察官",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}专员",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        32,
-        48
-      ],
-      "social_position": "high",
-      "baseline": "代表能源监管部门进驻井场的官员，掌控地热深井紧急压井炸封自毁最高通报权。",
-      "resources": [
-        "一台便携式多参数防喷器内外压差记录仪",
-        "一套全密封个人耐热正压自救逃生呼吸器"
-      ],
-      "reputation": "高高在上讲究条理规程，遭遇井喷大事故极易恐慌做出弃井炸封的自保决断。",
-      "risks": [
-        "不懂防喷器机械锁紧丝杠受力变形公差容易错判自救窗口",
-        "极度恐慌诱发换气过度窒息"
-      ]
-    },
-    {
-      "id": "pi_cadet_drilling_engineer",
-      "role": "深层钻井地热工程专业青年助理技师",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}助理",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}工",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        21,
-        23
-      ],
-      "social_position": "equal",
-      "baseline": "刚分配进地热钻探大队的大学毕业生，熟悉高温高压岩石力学与地层流体相态。",
-      "resources": [
-        "一盒特种耐高温快速硬化膨胀密封润滑脂条",
-        "一本深层高压防喷器应急锁紧公差速查手册"
-      ],
-      "reputation": "理论知识丰富但缺乏一线悬空抢险实操经验，面对极速失控吓得面无人色。",
-      "risks": [
-        "被滚烫泥浆冲倒跌落管汇死角造成烫伤骨折",
-        "高温热气灼伤呼吸道黏膜"
-      ]
-    },
-    {
-      "id": "pi_veteran_wellhead_fitter",
-      "role": "超深井口防喷装置特级老装配钳工",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}师傅",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}老将",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        48,
-        54
-      ],
-      "social_position": "low",
-      "baseline": "在深地钻探防喷器检修一线摸爬滚打三十年的老钳工，仅凭耳朵听蒸汽呼啸声就能辨别闸板卡死间隙。",
-      "resources": [
-        "一把大号重型全钢防脱手动丝杠棘轮加力扳手",
-        "两块耐高压合成石棉耐高温防喷闸板衬垫"
-      ],
-      "reputation": "沉默寡言经验老到，视深井防喷器为锁住地下恶龙的生命玄关。",
-      "risks": [
-        "长期高温高湿环境患有慢性风湿关节炎发力艰难",
-        "浓烈硫化氢废气刺激下双眼红肿流泪"
-      ]
-    }
-  ],
-  "locations": [
-    {
-      "id": "loc_blowout_preventer_cellar_deadlock",
-      "name": "防喷器方井",
-      "detail": "高约两米半、宽约三米的深井钻台下部密闭钢结构方井，正中央是重达三十吨的超高压环形与闸板防喷器组，三百度过热蒸汽正从高压液压管路刺漏处疯狂狂喷咆哮，滚烫的重晶石泥浆如黑雨般漫天泼洒，四周空气被加热到百度以上令人窒息。",
-      "privacy": "semi",
-      "visibility": "dim",
-      "witnesses": [
-        "bg_wellhead_fitter_old_zhao"
-      ],
-      "exits": [
-        "loc_drill_floor_control_doghouse",
-        "loc_mud_tank_manifold_catwalk"
-      ],
-      "affordances": [
-        "抓牢方井内壁高强度合金安全横梁",
-        "将加长对角手动锁紧丝杠摇把插进轴套",
-        "查看防喷器壳体耐热双针压力表读数"
-      ],
-      "pressure_modifiers": {
-        "p_geothermal_steam_blowout_erupt": "过热蒸汽以每秒数百公斤的狂暴压力喷涌扩散，逼仄方井内温度直逼一百二十度仅剩五分钟闭锁窗口。",
-        "p_hydraulic_rupture_deadlock_crush": "主液压控制管束在狂暴刺漏中彻底失压抱死，防喷器闸板必须依靠手动机械丝杠纯人力旋转三十圈强行锁死。"
-      },
-      "tags": [
-        "disaster",
-        "workplace"
-      ]
-    },
-    {
-      "id": "loc_drill_floor_control_doghouse",
-      "name": "司钻房走廊",
-      "detail": "位于钻台上方边缘的防爆控制室走道，厚重的双层防弹防蒸汽钢化玻璃将下方狂暴喷射的方井隔绝在外，控制台自毁红色旋转警报灯将四周雨幕染成血色。",
-      "privacy": "public",
-      "visibility": "clear",
-      "witnesses": [
-        "bg_safety_inspector_deputy_song",
-        "bg_mud_engineer_sun"
-      ],
-      "exits": [
-        "loc_blowout_preventer_cellar_deadlock",
-        "loc_mud_tank_manifold_catwalk",
-        "loc_geologist_prefab_cabin"
-      ],
-      "affordances": [
-        "按下井口应急高压冷水消防注水喷淋电掣",
-        "拉动备用柴油机排险放喷旁通阀",
-        "拿起挂在防爆柜内的备用正压防毒面具"
-      ],
-      "pressure_modifiers": {
-        "p_doghouse_manifold_overpressure_risk": "副放喷管线在七十兆帕超高压下剧烈震颤，三通球阀壳体浮现网状应力疲劳裂纹濒临炸裂。"
-      },
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    },
-    {
-      "id": "loc_mud_tank_manifold_catwalk",
-      "name": "泥浆罐栈桥",
-      "detail": "悬挂在重晶石泥浆加重储备罐上方的镂空格栅走道，下方是沸腾冒泡的深井返出泥浆，刺鼻的硫化氢气味与热浪交织蒸腾，蒸汽管线在此剧烈抖动震鸣。",
-      "privacy": "private",
-      "visibility": "dim",
-      "witnesses": [
-        "bg_mud_shaker_cadet_xiao_wu"
-      ],
-      "exits": [
-        "loc_blowout_preventer_cellar_deadlock",
-        "loc_drill_floor_control_doghouse"
-      ],
-      "affordances": [
-        "手动搬动泥浆加重离心机排险旁通阀",
-        "检查重晶石储料斗高压气动下料插板阀行程",
-        "扣紧水池侧壁应急疏散滑道自锁挂钩扣环"
-      ],
-      "pressure_modifiers": {
-        "p_steam_heatstroke_asphyxiation_shock": "泥浆池沸腾散发出高热硫化氢与水汽，环境温度居高不下加剧了人员中暑热衰竭的晕厥危险。"
-      },
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "loc_geologist_prefab_cabin",
-      "name": "总地质师的值班板房",
-      "detail": "钻台下风处的一间值班板房，一张铁架床、一只烧着温泉水的铁炉、满墙钉着岩芯照片，窗外就是那眼野温泉。",
-      "privacy": "private",
-      "visibility": "铁炉的火光暖烘烘的，窗外硫磺味的白汽一缕缕飘过，门闩一插，高原的夜风就只剩门缝里的呜呜声。",
-      "witnesses": [],
-      "exits": [
-        "loc_drill_floor_control_doghouse"
-      ],
-      "affordances": [
-        "陪总地质师看岩芯照片",
-        "替总地质师擦去肩背的泥浆",
-        "插上板房的门闩"
-      ],
-      "pressure_modifiers": {},
-      "tags": [
-        "intimate"
-      ]
-    }
-  ],
-  "character_templates": [
-    {
-      "id": "geologist_chu_ningshuang",
-      "gender": "female",
-      "gender_reason": "深层地热钻探首席女总地质师",
-      "age_range": [
-        21,
-        21
-      ],
-      "adult_context": "已成年的深层地热定向钻探特级总工程师兼总地质师，年满二十一岁，持有国家超高压深井现场突发井喷事故一级应急处置指挥执照，对井口防喷设施享有完全法权与处置权。",
-      "public_role": "深层地热钻探总地质师",
-      "appearance_options": [
-        "脱下笨重防护罩袍后仅着深红阻燃背心，冷艳绝美神情威严，两腮带着莹润的光泽，在三百度蒸汽呼啸与滚烫泥浆泼洒的极热中，白皙双颊被热浪熏得满是娇艳酡红与晶莹热汗，眼神坚如寒潭烈火。",
-        "乌黑长发利落盘在防烫安全帽内，额前垂下几缕湿透碎发，纤细双臂紧扣长达七十五公分的特种耐高温合金加长丝杠摇把死死别入轴套，面颊在猩红警报灯映照下泛出绝不屈服的寒霜，展现出统帅千军的绝对工程师威严。"
-      ],
-      "identity": {
-        "authority": "对地热深井井口全套防喷器、高压管汇排险、泥浆加重及现场全部突击人员调度享有绝对最高战术否决权。",
-        "resources": [
-          "一把防喷器特种耐高温合金加长对角手动锁紧丝杠摇把（长七十五公分，超硬度耐热铬钼钒钢整体精密锻造，端部带防脱偏心双向棘爪卡销）",
-          "一罐军工级便携式高压浓缩抗高温热衰竭解毒舒缓喷雾"
-        ],
-        "limits": [
-          "在环形闸板彻底锁死前无法撤离狂暴喷射的方井死角",
-          "长时间吸入灼热蒸汽与高浓度硫化氢面临急性化学性肺水肿与失声昏厥"
-        ],
-        "obligations": [
-          "确保超高压地热防喷器完全闭锁保全井架千名工友性命"
-        ],
-        "exposure": "为了探查深部干热岩储层曾在地层压力不明情况下冒险指令提升钻速",
-        "hidden": "阻燃背心贴胸口袋内装着一枚刻有干热岩第一号勘探井经纬度的纯钛纪念徽章"
-      },
-      "decision": {
-        "core_value": "地层压力再狂暴，也必须遵循机械力学公差，只要丝杠还在手里，本总工就能把地热恶龙压回地心深处。",
-        "goal_options": [
-          "利用加长合金摇把强行旋转丝杠封闭闸板",
-          "在防喷器被冲毁前切断主排气回路化解井喷"
-        ],
-        "pressure_responses": {
-          "low": "在蒸汽初喷时冷静通过泥浆比重与套压表读数测算瞬时井涌速度",
-          "mid": "果断抽出七十五公分加长摇把找准轴套偏心卡槽切角",
-          "high": "整个人扑在摇把末端借全身重力与双臂爆发力合力顺时针猛转",
-          "breaking": "用牙齿咬开防烫喷雾含服强行保持清醒继续双掌死扣把手死扳"
-        },
-        "withdrawal": "退守至方井承重工字钢角梁背风死角，单臂挽住安全环冷眼观察丝杠旋进位移。",
-        "relationship_stance": "平日神情冷傲威严不苟言笑，但面对生死一线的深地大井喷展现出同生共死的过人胆魄与统帅担当。",
-        "contrast": "外表清冷美艳，高原反应来了照样吸两口氧就回录井房捞岩屑，面对深地万钧蒸汽冲击时手劲与力学决断胜过粗壮司钻工。",
-        "prefers": [
-          "分秒不差的机械执行",
-          "生死关头敢把后背交出来的铁血搭档"
-        ],
-        "avoids": [
-          "优柔寡断的推脱软弱",
-          "打着自保旗号背弃同袍的官僚"
-        ],
-        "never": [
-          "在闸板丝杠彻底锁紧到位前独自弃井撤离"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "在三百度滚烫蒸汽地狱面前稳如泰山的巍峨躯体",
-          "千钧一发之际毫不犹豫用滚烫胸膛为自己阻挡漫天泥浆的舍命相护"
-        ],
-        "likes": [
-          "两人合力转死丝杠时胸膛紧贴传来的粗重狂热心跳",
-          "险情排除后彼此抹去面颊泥浆与热汗时的深情对望"
-        ],
-        "dislikes": [
-          "自私逃兵的卑劣出卖",
-          "自恃官威的蛮横乱命"
-        ],
-        "preconditions": [
-          "防喷器环形闸板完全锁紧且套压归零",
-          "全员安全返回地面常温值班室完成清洗",
-          "两人都清醒，心意出于自己，不是井喷绝境里的依赖"
-        ],
-        "boundaries": [
-          "严守总工程师指挥权威不容侵犯",
-          "不以救命功绩索取私人情感屈从"
-        ],
-        "expression": "脱险进入安全区后，默默撕下自己里衣最干爽的棉布轻柔包扎对方被高温蒸汽烫起水泡的双臂，眼神温柔而坚毅。",
-        "desire_range": [
-          2,
-          4
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "被从身后紧抱稳住重心抗击气浪，双手叠合在合金摇把上一同向死角死转。"
-      },
-      "voices": {
-        "surface": "别管那些冲在身上的滚烫泥浆！把这根七十五公分的合金摇把插进轴套，跟我数三二一一起用力顺时针死转！",
-        "inner": "还有最后五圈丝扣……只要摇把不崩断，本总工绝不会让深井变成埋葬大家的火葬场，给我转到底！"
-      },
-      "schedule": [
-        {
-          "from": 1395,
-          "to": 1420,
-          "location_id": "loc_blowout_preventer_cellar_deadlock"
-        },
-        {
-          "from": 1420,
-          "to": 1439,
-          "location_id": "loc_blowout_preventer_cellar_deadlock"
-        }
-      ],
-      "situation": {
-        "trigger": "千米地热井口超高压蒸汽井喷，防喷器主液压管路刺漏抱死无法电控关井。",
-        "pressure": "井口套压突破六十兆帕，三百度过热蒸汽充斥方井，距彻底冲垮井架仅剩五分钟。",
-        "exits": [
-          {
-            "option": "用防喷器特种耐高温合金加长对角手动锁紧丝杠摇把强行旋转机械丝杠三十圈自救。",
-            "cost": "高强度合金摇把发生微小塑性扭转变形，操作人员双手被粗暴防滑纹磨出大面积血泡鲜血浸透衣衫。"
-          },
-          {
-            "option": "用重型全钢撬杠直接别在闸板传动偏心连杆之间强行制造机械阻尼脱险。",
-            "cost": "撬杠在数十吨高压反冲下折断崩飞划伤操作人员小臂与肩膀。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace",
-        "disaster",
-        "intimate"
-      ]
-    },
-    {
-      "id": "driller_li_tianxuan",
-      "gender": "any",
-      "age_range": [
-        30,
-        36
-      ],
-      "adult_context": "年满三十岁，地热钻探特级司钻长，具备完全民事行为能力，十年深井超高压一线摸爬滚打老将。",
-      "public_role": "钻井队司钻",
-      "appearance_options": [
-        "身材极其魁梧刚劲肩背宽厚如山，仅着带有加厚帆布内衬的司钻工装背心，古铜色双臂青筋暴起肌肉如铁，面容粗犷目光冷峻。",
-        "短发硬如铁丝挂满泥浆热汗，在剧烈震颤的高温泥浆暴雨中双脚如生根生铁般稳稳踩在钢架踏板上。"
-      ],
-      "identity": {
-        "authority": "对井口方井内重型破拆工具调度、手动放喷管线旁通阀启闭拥有绝对现场指挥权。",
-        "resources": [
-          "一柄大号高强度耐高温特种合金活动扳手",
-          "两卷带有耐温绝缘涂层的重型加厚防烫包扎绑带"
-        ],
-        "limits": [
-          "体能在抗衡三百度高温与狂暴高压蒸汽反震中迅速逼近体力极限制点",
-          "不懂复杂的地层热力学相态方程"
-        ],
-        "obligations": [
-          "誓死协助总工女总地质师旋紧丝杠锁死防喷器保全井场全员生还"
-        ],
-        "exposure": "为了抢进尺曾违规在泥浆循环未彻底排气情况下超压快速钻进",
-        "hidden": "司钻背心贴身内袋里珍藏着女总地质师当年签发给司钻突击队的特等功奖章"
-      },
-      "decision": {
-        "core_value": "战位就是司钻的阵地，只要女总地质师还在井口拼命，{npc.name}就算被烫掉一层皮也绝不退后半步。",
-        "goal_options": [
-          "协助女总地质师旋转加长摇把锁死丝杠",
-          "用宽厚身躯挡住狂暴喷射的滚烫泥浆火雨"
-        ],
-        "pressure_responses": {
-          "low": "在蒸汽刺漏瞬间沉着拉出耐高温防护手套反向塞给女总地质师",
-          "mid": "用结实的臂膀一把捞住被高压气浪掀翻的年轻助理",
-          "high": "双手死死包覆在女总地质师手背外侧倾注全身数百斤蛮力协同转动摇把",
-          "breaking": "用宽厚脊背硬生生挡住上方管汇爆飞的滚烫泥浆为女总地质师撑起发力屏障"
-        },
-        "withdrawal": "退守至方井主承重工字钢角梁内侧，右手握紧大扳手警惕任何法兰崩飞。",
-        "relationship_stance": "在高原井场跟女总地质师搭了三口井，知道女总地质师缺氧时嘴唇先发紫、逞强时话最少，井喷时总把自己挡在管汇那一侧。",
-        "contrast": "看似粗犷凶悍的北方老司钻，在配合女总地质师转动摇把时的力道控制精妙绝伦分毫不差。",
-        "prefers": [
-          "干净利落的军令作风",
-          "关键时刻豁出命硬碰硬的狠劲"
-        ],
-        "avoids": [
-          "前怕狼后怕虎的逃兵",
-          "遇事推诿责任的空谈客"
-        ],
-        "never": [
-          "在总工程师还在激流中死拼时独自松开摇把逃跑"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "在三百度深渊狂暴地狱面前横刀立马的非凡霸气",
-          "两具滚烫身躯在失速震颤中紧密贴合的炽烈生命羁绊"
-        ],
-        "likes": [
-          "战胜死神后痛快大嚼高能战备肉干的痛快",
-          "环形闸板卡死瞬间两人粗重滚烫的胸膛起伏与鼻息共鸣"
-        ],
-        "dislikes": [
-          "自私逃兵的卑劣行径",
-          "背信弃义的下作小人"
-        ],
-        "preconditions": [
-          "井口防喷器完全闭锁且套压归零平息",
-          "全员安全撤出方井返回常温值班室"
-        ],
-        "boundaries": [
-          "恪守司钻班长职责从属规矩不越礼数",
-          "不以救命功勋索取私人情感"
-        ],
-        "expression": "撕下自己干燥的保暖背心内衬，轻柔却有力地裹在女总地质师被蒸汽烫红的娇弱双肩上。",
-        "desire_range": [
-          1,
-          2
-        ],
-        "self_control_range": [
-          3,
-          4
-        ],
-        "desired_position": "在方井格栅上从后方抱紧女总地质师稳住重心，双手握紧摇把合力向下死转。"
-      },
-      "voices": {
-        "surface": "女总地质师！找准那个偏心死角！摇把有{npc.name}给你托着，你报顺逆，我就算把双臂骨头压断也给你转到底！",
-        "inner": "女总地质师是天生的帅才。只要我还有一口气在，这地热恶龙休想伤女总地质师半根毫毛。"
-      },
-      "schedule": [
-        {
-          "from": 1395,
-          "to": 1439,
-          "location_id": "loc_blowout_preventer_cellar_deadlock"
-        }
-      ],
-      "situation": {
-        "trigger": "套压飙升至六十五兆帕，三百度蒸汽与高压泥浆将方井充斥为滚烫蒸笼。",
-        "pressure": "若不能在三分钟内合力旋转摇把三十圈关闭闸板，管汇将被气爆彻底冲垮掀翻整座井架。",
-        "exits": [
-          {
-            "option": "{npc.name}将全身自重压在摇把末端借杠杆力矩强行带动抱死丝杠反转脱险。",
-            "cost": "{npc.name}右侧肩袖肌腱严重拉伤撕裂，双掌被粗糙摇把手柄烫出大面积水泡破溃。"
-          },
-          {
-            "option": "用破拆大扳手卡死连杆偏心转销强行制造机械死点阻止反冲自救。",
-            "cost": "大扳手受强烈高压反震脱手崩飞划破{npc.name}面颊。"
-          }
-        ]
-      },
-      "tags": [
-        "disaster",
-        "crime"
-      ]
-    },
-    {
-      "id": "inspector_zhao_kailun",
-      "gender": "male",
-      "gender_reason": "地热监管局高级特派安全专员",
-      "age_range": [
-        38,
-        44
-      ],
-      "adult_context": "年满三十八岁，地热能源特派安全监察官员，具备完全民事行为能力，掌控深井紧急炸封压井自毁最高通报权。",
-      "public_role": "能源特派安全监督官",
-      "appearance_options": [
-        "身穿带有金线监管臂章的高级防风呢绒外套，头戴白色安全帽，面容白净戴着金丝防尘眼镜，此时被滚烫泥浆浇得面色惨白呕吐不止。",
-        "双手死死抓着胸前的水密记录仪终端背带，眼神在保全自身性命与维持官方威严间剧烈战栗，腰间挂着一只便携氧气瓶。"
-      ],
-      "identity": {
-        "authority": "代表能源局行使井场突发事故最高戒严权、判定是否炸毁井口封闭深井的最终签署权。",
-        "resources": [
-          "一台便携式多功能地热井口差压记录仪",
-          "一枚能源局井口紧急水力切割炸封钥匙芯片"
-        ],
-        "limits": [
-          "完全不懂高温过热蒸汽与重质泥浆气液两相流摩擦动力学",
-          "极度恐惧井喷爆炸粉身碎骨企图强行启动井口电火工炸封自毁"
-        ],
-        "obligations": [
-          "保全公文包内地热超深井特许开采核准原始文件"
-        ],
-        "exposure": "为了掩盖套管磨损超标曾对防喷器液压管路微泄漏缺陷报告违规签署放行",
-        "hidden": "暗中启动了呼叫地面防爆直升机前来单人脱险接应的加密信标，高原反应来了也只是多吸两口氧"
-      },
-      "decision": {
-        "core_value": "保全自身性命与监察官阶高于一切，底层司钻工与机修工不过是安全指标概率数字，在四千米的高原上熬过三个冬天。",
-        "goal_options": [
-          "强行开启井口炸封闸刀引爆炸药封闭深井单独逃生",
-          "勒令女总地质师立刻放弃抢修撤回安全堡垒"
-        ],
-        "pressure_responses": {
-          "low": "在控制长廊大声宣读地热安全生产条例推卸责任",
-          "mid": "发现套压爆表后歇斯底里试图暴力扳动炸封电掣",
-          "high": "被司钻夺下钥匙按在角钢上后吓得瘫倒在观察窗后",
-          "breaking": "瘫坐在地板上交出气动切断钥匙换取优先登车撤离权"
-        },
-        "withdrawal": "退缩在钻台后方密封防爆逃生救生舱内，双手死死抱住公文包与自救呼吸器。",
-        "relationship_stance": "将女总地质师视为恃才傲物目无官威的技术刺头女工程师，对其专业权威既畏惧又嫉恨。",
-        "contrast": "平日在发布会上冠冕堂皇大谈安全第一人命关天，大难临头时比谁都贪生怕死、丑态毕露。",
-        "prefers": [
-          "绝对的官僚顺从",
-          "温暖干爽的地面调度中心指挥部"
-        ],
-        "avoids": [
-          "三百度深井极速狂喷的死亡地狱",
-          "与浑身泥浆机油的司钻工同舟共济"
-        ],
-        "never": [
-          "为了挽救同行机修人员而延迟自己进入自救舱的时间"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "能让其保全官位与性命的强力铁腕",
-          "迎合其官僚尊严的阿谀吹捧"
-        ],
-        "likes": [
-          "被护卫在最安全的防暴指挥中心",
-          "特供的高级雪茄与热茶"
-        ],
-        "dislikes": [
-          "粗暴的抗命顶撞",
-          "被冰冷工具与铁拳指着喉咙的屈辱恐慌"
-        ],
-        "preconditions": [
-          "彻底脱离深井爆炸危险置身于重兵巡防的地面总部",
-          "保全既得监察官职衔"
-        ],
-        "boundaries": [
-          "严禁任何普通司钻工触碰其高级监察制服",
-          "不承担任何同舟共济义务"
-        ],
-        "expression": "战战兢兢地从口袋里摸出一盒昂贵的高效抗热衰竭含片扔在地上换取司钻班长拼命下扳制动。",
-        "desire_range": [
-          0,
-          0
-        ],
-        "self_control_range": [
-          2,
-          3
-        ],
-        "desired_position": "在控制室外手握对讲机，命令地面在倒计时归零时立刻引爆炸封炸药彻底掩埋深井。"
-      },
-      "voices": {
-        "surface": "女总地质师！司钻！套压已经超标了！立刻放弃手动旋紧！本专员命令你们立刻拉下注水旁通自保！",
-        "inner": "这群疯子……防喷器要是炸了，整座井架都得被掀翻，我必须自己活下去！快炸封！"
-      },
-      "schedule": [
-        {
-          "from": 1395,
-          "to": 1439,
-          "location_id": "loc_drill_floor_control_doghouse"
-        }
-      ],
-      "situation": {
-        "trigger": "套压飙升触发能源局紧急自沉炸封最高预警条目。",
-        "pressure": "若三分钟内不能锁死环形闸板，特派专员手中的终端将直接触发井口雷管彻底炸断井管掩埋生路。",
-        "exits": [
-          {
-            "option": "司钻夺下专员应急切缆钥匙并用安全带将其捆死在角钢立柱上自救。",
-            "cost": "涉嫌公然抗拒地热安全监督执法面临事后被移送司法机关。"
-          },
-          {
-            "option": "温泉眼那边的白雾被气浪吹散，女总地质师大声以特级总工程师身份动员全班接管控制盒强行掐断引爆线脱险。",
-            "cost": "与专员随身近卫爆发激烈肢体冲突造成人员轻微挫伤。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace_power",
-        "crime"
-      ]
-    },
-    {
-      "id": "senior_fitter_old_zhao",
-      "gender": "male",
-      "gender_reason": "深层地热井口防喷装置在编特级老装配钳工",
-      "age_range": [
-        50,
-        54
-      ],
-      "adult_context": "年满五十岁，深井高压防喷装置特级老装配钳工，成年工匠宗师，具备完全民事行为能力。",
-      "public_role": "井口防喷装置首席老装配钳工",
-      "appearance_options": [
-        "身穿带有高反光条的破旧加厚阻燃工程棉袍，满脸被深地粉尘与高温蒸汽侵蚀的刀刻皱纹与伤痕，花白胡须挂满泥浆。",
-        "手里握着一把被摩挲得发亮的纯钢防脱手动丝杠棘轮加力扳手，眼神在滚烫蒸汽中如深山岩石般沉静坚定。"
-      ],
-      "identity": {
-        "authority": "对防喷器环形闸板微观位移公差、偏心丝杠轴套受热膨胀咬合退让间隙拥有绝对听觉直觉。",
-        "resources": [
-          "两块特制耐高温合成石棉防喷闸板自粘衬垫",
-          "一把特制重型纯钢平头偏心防滑敲击冲子"
-        ],
-        "limits": [
-          "年老体衰患有严重的慢性低氧肺气肿无法承受剧烈运动",
-          "在极热蒸汽中呼吸艰难剧烈咳嗽"
-        ],
-        "obligations": [
-          "将深井重型防喷器抢修绝活经验传承给年轻一代工程师"
-        ],
-        "exposure": "曾在检修中为了省事私下在防喷器双头高压螺栓上少拧过半圈防松垫片",
-        "hidden": "深知这座防喷器在受到三百度蒸汽冲刷时锁紧轴套会向右上方偏斜两度的装配暗伤缺陷"
-      },
-      "decision": {
-        "core_value": "机械结构不骗人，只要给对力道没有转不动的死丝杠。",
-        "goal_options": [
-          "指点女总地质师找准右偏两度切入角旋转摇把",
-          "垫入石棉衬垫阻滞套口打滑脱轨"
-        ],
-        "pressure_responses": {
-          "low": "在方井角落用冲子敲击护栏凭回音辨识套管膨胀幅度",
-          "mid": "冒着滚烫泥浆递上石棉防滑衬垫塞入咬合盲区",
-          "high": "用沙哑嗓音高呼右上方偏两度顺力死转的最佳起步方位",
-          "breaking": "用身躯抵住脱脱晃动的平衡支架为年轻人争取发力时间"
-        },
-        "withdrawal": "躲在方井承重立柱背风凹槽内，用厚棉袍死死护住冲子与备件箱。",
-        "relationship_stance": "将女总地质师视为深地工程界百年不遇的巾帼奇才，由衷赞佩年轻女总工的从容定力与过硬铁腕。",
-        "contrast": "平日沉默寡言甚至被年轻工人视为木讷老头的老钳工，在面对深地大喷发时指点沉着如定海神针。",
-        "prefers": [
-          "严丝合缝的工匠本色",
-          "一诺千金的工程信义"
-        ],
-        "avoids": [
-          "不知变通的教条官僚",
-          "遇到大难就弃井逃跑的软蛋"
-        ],
-        "never": [
-          "在机械受力关键时刻误报公差参数"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "对深地重型力学的崇高敬畏与共鸣",
-          "在死亡深渊面前毫无娇气的果断坚毅"
-        ],
-        "likes": [
-          "闸板严丝合缝闭锁时的沉闷合模轰鸣",
-          "抢修完成后在井口抽上一口老旱烟的惬意从容"
-        ],
-        "dislikes": [
-          "轻视老钳工经验的狂妄做派",
-          "粗暴破坏昂贵水下构件的蛮干行径"
-        ],
-        "preconditions": [
-          "彻底排除井口井喷险情压力回归平衡",
-          "保全全部精密量具完整无损"
-        ],
-        "boundaries": [
-          "恪守老长辈规矩不越礼数",
-          "不介入年轻后辈的私人情感波澜"
-        ],
-        "expression": "用布满老茧和泥浆的大手重重拍在女总地质师肩头，咧开嘴角露出释然踏实的欣慰笑容。",
-        "desire_range": [
-          0,
-          0
-        ],
-        "self_control_range": [
-          5,
-          5
-        ],
-        "desired_position": "在立柱后敲击钢管指点偏心角度，将石棉垫片精准塞入女总地质师握持的摇把下方。"
-      },
-      "voices": {
-        "surface": "女总地质师！听{npc.name}的！那个受损的轴套往右上方偏了两度！别死往前硬怼，往右上偏两度顺着牙口咬进去再死转！",
-        "inner": "好闺女，手上功夫够硬！这手艺要是跟着老头子埋在这千米井底，那才是天理难容！"
-      },
-      "schedule": [
-        {
-          "from": 1395,
-          "to": 1439,
-          "location_id": "loc_blowout_preventer_cellar_deadlock"
-        }
-      ],
-      "situation": {
-        "trigger": "丝杠轴套在三百度超高温下膨胀咬死极深，摇把面临卡死断裂。",
-        "pressure": "若无防滑介质介入并纠正两度偏角，摇把将在万斤反冲下折裂彻底断送关井希望。",
-        "exits": [
-          {
-            "option": "用老钳工私藏的耐高温石棉防滑衬垫塞入缝隙协助摇把稳固深咬自救。",
-            "cost": "消耗尽绝版高耐温密封耗材，老工长左手手掌被锋利金属毛刺划破渗血。"
-          },
-          {
-            "option": "指挥司钻用大敲击扳手反向敲击偏心凸耳震松咬死轴套脱险。",
-            "cost": "猛烈敲击造成铸钢外壳产生微小应力裂纹降低防爆耐压等级。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    },
-    {
-      "id": "cadet_driller_xiao_wu",
-      "gender": "male",
-      "gender_reason": "地热钻探初级助理工程师",
-      "age_range": [
-        21,
-        23
-      ],
-      "adult_context": "年满二十一岁，石油大学地热钻井工程学院应届毕业生，初级深井钻探维护员，具备完全民事行为能力。",
-      "public_role": "深井地热初级技术员",
-      "appearance_options": [
-        "身材单薄，身着带有黄色反光条的紧身阻燃防烫工作服，面容清秀神情极度慌恐，防尘风镜歪斜挂在脖颈上。",
-        "腰间工具袋胡乱插着测温红外笔与备用小扳手，双膝在滚烫泥浆中剧烈颤抖、脸色惨白如纸。"
-      ],
-      "identity": {
-        "authority": "井口应急高压冷水泵与微欧电阻测试仪的手动闭合权。",
-        "resources": [
-          "一根厚壁加长特种高强度空心镀锌钢管加力力臂",
-          "一卷高抗拉耐温石棉加固安全牵引绳"
-        ],
-        "limits": [
-          "缺乏高温高压生死大事故实战经验心理防线脆弱",
-          "体质单薄力气严重不足难以单独抗衡狂暴热浪"
-        ],
-        "obligations": [
-          "按规程记录防喷器套压表读数并向总工报告瞬时井涌速度"
-        ],
-        "exposure": "因操作生疏曾导致辅助冷水注水管道接头发生松脱渗漏",
-        "hidden": "暗自崇拜英姿飒爽的总工程师女总地质师将其视为地热界最神圣的精神偶像"
-      },
-      "decision": {
-        "core_value": "保命第一，崇拜并绝对服从女总地质师的每一道抢险指令。",
-        "goal_options": [
-          "协助女总地质师寻找加长套管延长摇把力臂",
-          "在方井角梁稳固安全牵引绳"
-        ],
-        "pressure_responses": {
-          "low": "在工具箱内慌乱翻找可以套在摇把末端的加长镀锌空心套管",
-          "mid": "大声向方井通报套压读数与丝杠旋进位移圈数",
-          "high": "鼓起勇气冒着漫天滚烫泥浆爬过格栅递送加长套管",
-          "breaking": "跪倒在淹过脚踝的泥浆中死死拉紧安全牵引绳协助分担剧烈冲击"
-        },
-        "withdrawal": "缩在方井承重角钢背风死角，紧紧抱住加长钢管浑身哆嗦。",
-        "relationship_stance": "将女总地质师视为唯一的救命稻草与崇高统帅，愿为协助脱险拼死效命。",
-        "contrast": "平日胆小怯弱常被老司钻训斥的年轻新手，在女总地质师生死存亡关头能爆发出一股冒死送达加力套管的血性胆魄。",
-        "prefers": [
-          "清晰明确的指令指导",
-          "平稳温暖的陆上地质勘查所"
-        ],
-        "avoids": [
-          "凶神恶煞的督察官咆哮",
-          "三百度深渊滚烫泥浆"
-        ],
-        "never": [
-          "背弃女总地质师独自放弃求生逃跑"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "泰山崩于前而色不变的卓越统帅魅力",
-          "在深渊面前给予同伴的强大安全感"
-        ],
-        "likes": [
-          "被肯定业务能力时的温和颔首",
-          "分到的一枚甘甜提神高能葡萄糖块"
-        ],
-        "dislikes": [
-          "残酷暴力的威逼践踏",
-          "被当作废物累赘抛弃"
-        ],
-        "preconditions": [
-          "彻底排除井口井喷险情套压稳稳受控归零",
-          "确保自身生命安全得到保障"
-        ],
-        "boundaries": [
-          "恪守助手本分不作非分奢望",
-          "严守下级礼节规矩"
-        ],
-        "expression": "双手发颤地将加长套管递过，结结巴巴连连向女总地质师敬礼并保证坚守岗位。",
-        "desire_range": [
-          1,
-          1
-        ],
-        "self_control_range": [
-          4,
-          4
-        ],
-        "desired_position": "在方井安全扶手上方死死拽紧牵引绳，大声为女总地质师下转摇把报出三十圈倒计时读数。"
-      },
-      "voices": {
-        "surface": "女总地质师！加长套管找到了！这根镀锌钢管能套在合金摇把柄端当加长力臂！还有这卷安全绳！",
-        "inner": "只要总工程师还在前面拼命，我就不能当缩头乌龟，我必须帮着把这个吃人的防喷器彻底锁死！"
-      },
-      "schedule": [
-        {
-          "from": 1395,
-          "to": 1439,
-          "location_id": "loc_blowout_preventer_cellar_deadlock"
-        }
-      ],
-      "situation": {
-        "trigger": "方井内部电弧短路起火引发浓烟，高温泥浆浸湿配电箱迸发剧烈电火花。",
-        "pressure": "若不及时手动切断主配电漏电保护器，全员将在三十秒内被极热环境中的高压电弧击晕殉难。",
-        "exits": [
-          {
-            "option": "{npc.name}用加长镀锌管绝缘端砸碎配电箱熔断器切断高压电自救。",
-            "cost": "高原的空气稀得人喘不上气，{npc.name}手臂被飞溅电弧火花轻度灼伤起泡。"
-          },
-          {
-            "option": "用防寒外套沾湿水壶死死捂住着火电缆阻断短路火花蔓延脱险。",
-            "cost": "双手手掌被电弧轻度击伤脱皮。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "drilling_medic_officer_mu",
-      "gender": "female",
-      "gender_reason": "深井地热工程急救创伤外科主治女医官",
-      "age_range": [
-        26,
-        28
-      ],
-      "adult_context": "年满二十六岁，持有国家职业创伤急救专科执业证书的成年女医官，具备完全民事行为能力。",
-      "public_role": "深层钻井随队主治医官",
-      "appearance_options": [
-        "身穿带有红十字标识的白色加温抗压医官保暖常服，面容清秀神情紧绷，戴着医用无菌防寒手套，双手握着便携式高压注氧仪，工装上沾着一股洗不掉的硫磺味。",
-        "神情专注沉稳，额前碎发整齐束起，脖颈上挂着高敏数字心率血氧监测探头。"
-      ],
-      "identity": {
-        "authority": "对深井过热蒸汽吸入性损伤、硫化氢急性中毒及高压加压舱启闭享有最高医疗处置权。",
-        "resources": [
-          "两支浓缩神经保护抗休克急救针剂",
-          "一台便携式微型经皮血氧红外连续监测仪"
-        ],
-        "limits": [
-          "在三百度高温蒸汽喷射区无法实施侵入性外科手术",
-          "体能单薄无法搬运重型破拆工装"
-        ],
-        "obligations": [
-          "保障全体司钻突击队员零瘫痪、零急性化学肺水肿存活"
-        ],
-        "exposure": "曾私自调用高压加压舱为患有重度吸入性肺水肿的老钻工实施超规保守治疗",
-        "hidden": "随身急救包内封存着自己亲手调配的高浓度外用神经解痉透皮喷剂"
-      },
-      "decision": {
-        "core_value": "生命体征就是最高法典，绝不放弃任何一个尚有微弱脉搏的深地钻探同袍。",
-        "goal_options": [
-          "指导方井内二人通过深腹式呼吸节律对抗急性热衰竭",
-          "在锁死瞬间实施重度烫伤复温抢救"
-        ],
-        "pressure_responses": {
-          "low": "在值班室长廊举起电子写字板提示防吸入性窒息节拍",
-          "mid": "隔窗指点司钻如何按压穴位缓解女总地质师手臂肌肉痉挛",
-          "high": "将体温复苏水热毯推至观察门前准备承接重度烫伤伤员",
-          "breaking": "顶着被狂暴热浪喷溅的危险探头向门缝递送应急高压呼吸面罩"
-        },
-        "withdrawal": "退守至复温治疗台前，迅速核对加压舱氧分压配比电磁阀。",
-        "relationship_stance": "将女总地质师视为情同手足的亲密姐妹与崇敬的工程楷模，对突击队员安危极度牵挂。",
-        "contrast": "外表文静纤弱的书生女医官，在面对深井大灾难急救时下针稳准狠辣如冰山判官。",
-        "prefers": [
-          "稳定规律的心率曲线",
-          "遵从医嘱的冷静配合"
-        ],
-        "avoids": [
-          "情绪失控的盲目挣扎",
-          "隐瞒伤情的蛮干硬撑"
-        ],
-        "never": [
-          "在钻工尚有呼吸时签署放弃抢救书面证明"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "在极端高压剧痛下依然保持的超人意志",
-          "生死关头舍命护持同伴的人性光芒"
-        ],
-        "likes": [
-          "平稳有力的深井窦性心律",
-          "脱险后第一口温热电解质葡萄糖水的吞咽声"
-        ],
-        "dislikes": [
-          "漠视人命的官僚冷血",
-          "因恐惧造成的踩踏推诿"
-        ],
-        "preconditions": [
-          "防喷器环形闸板完全闭锁且伤员体温恢复至正常体温",
-          "全员脱离急性气栓危险期"
-        ],
-        "boundaries": [
-          "严守医患职业伦理道德",
-          "不以医疗资源调配进行私利交换"
-        ],
-        "expression": "用温热的手掌轻柔按揉对方冻僵发紫的眉心，柔声安抚其紧绷剧烈震颤的神经脉搏。",
-        "desire_range": [
-          0,
-          0
-        ],
-        "self_control_range": [
-          5,
-          5
-        ],
-        "desired_position": "隔着观察窗把双手按在对方的掌印位置，大声引导深腹式吸气屏息。"
-      },
-      "voices": {
-        "surface": "女总地质师！看着我的手势！深吸气、屏息三秒、慢呼气！千万不要大口喘气，压住胸腔蒸汽热痉挛！",
-        "inner": "只要两人把防喷器丝杠旋紧，哪怕全身烫伤了，我也一定把两人从阎王爷手里抢回来。"
-      },
-      "schedule": [
-        {
-          "from": 1395,
-          "to": 1439,
-          "location_id": "loc_drill_floor_control_doghouse"
-        }
-      ],
-      "situation": {
-        "trigger": "方井内人员血氧饱和度跌破百分之七十五警戒红线。",
-        "pressure": "若不及时进行减压深呼吸引导，剧烈热衰竭将诱发不可逆昏厥休克。",
-        "exits": [
-          {
-            "option": "通过对讲广播引导方井二人同频深呼吸并相互按压合谷穴解痉自救。",
-            "cost": "分担部分抢险精力导致转动摇把节拍轻微延缓。"
-          },
-          {
-            "option": "从投料窗口塞入高效神经解痉含片协助其维持清醒意志脱险。",
-            "cost": "投料口微启导致少量冷凝水喷溅损坏医用监测仪外壳。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    }
-  ],
-  "background_cast": [
-    {
-      "id": "bg_wellhead_fitter_old_zhao",
-      "role": "井口防喷钳工老甘",
-      "function": "witness",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "line": "套压飙到六十五兆帕了！丝杠轴套往右上偏了两度，硬转转不动啊！",
-      "gender": "male",
-      "age_range": [
-        50,
-        54
-      ],
-      "adult_context": "年满五十岁，深井机修老骨干，成年公民。",
-      "name": "老甘"
-    },
-    {
-      "id": "bg_safety_inspector_deputy_song",
-      "role": "安全监督员宋副官",
-      "function": "obstacle",
-      "location_ids": [
-        "loc_drill_floor_control_doghouse"
-      ],
-      "line": "监督官有令！倒计时还剩三分钟，准备拉下炸封闸刀炸平井口自保！",
-      "gender": "male",
-      "age_range": [
-        28,
-        31
-      ],
-      "adult_context": "年满二十八岁，地热监管随员，成年公职人员。",
-      "name": "宋副官"
-    },
-    {
-      "id": "bg_mud_engineer_sun",
-      "role": "钻台泥浆大班孙工程师",
-      "function": "helper",
-      "location_ids": [
-        "loc_drill_floor_control_doghouse"
-      ],
-      "line": "高压冷水已注入管汇！女总地质师，用加长合金摇把别住轴套，垫上老钳工的耐热石棉！",
-      "gender": "male",
-      "age_range": [
-        45,
-        49
-      ],
-      "adult_context": "年满四十五岁，泥浆技术主管，成年老工人。",
-      "name": "孙工程师"
-    },
-    {
-      "id": "bg_mud_shaker_cadet_xiao_wu",
-      "role": "振动筛巡检工助理技术员",
-      "function": "witness",
-      "location_ids": [
-        "loc_mud_tank_manifold_catwalk"
-      ],
-      "line": "泥浆比重突破两点五了！过热蒸汽从排砂口冲出来了，快锁死防喷器！",
-      "gender": "male",
-      "age_range": [
-        22,
-        25
-      ],
-      "adult_context": "年满二十二岁，泥浆固控操作工，成年公民。",
-      "name": "小武"
-    },
-    {
-      "id": "bg_drilling_rescue_chief_commander",
-      "role": "地热钻探抢险现场总指挥魏总指挥",
-      "function": "helper",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "line": "女总地质师！地面应急水炮已锁定井口，务必把丝杠转到底锁死！",
-      "gender": "male",
-      "age_range": [
-        49,
-        53
-      ],
-      "adult_context": "年满四十九岁，地热钻探应急抢险高级指挥官，成年高级指挥员。",
-      "name": "魏总指挥"
-    },
-    {
-      "id": "bg_drilling_medic_officer_mu",
-      "role": "井场卫生所医生央金",
-      "function": "helper",
-      "location_ids": [
-        "loc_drill_floor_control_doghouse"
-      ],
-      "line": "高压氧和烫伤冷敷水毯都备好了，防喷器一锁住就往卫生所抬人！",
-      "gender": "female",
-      "age_range": [
-        26,
-        28
-      ],
-      "adult_context": "年满三十岁，持有高原病与职业创伤急救执照的医生，成年公民。",
-      "name": "央金医生"
-    }
-  ],
-  "channels": [
-    {
-      "id": "ch_blowout_cellar_wired_intercom",
-      "text": "地热深井井口防爆抗干扰有线对讲通信网",
-      "reach": "all",
-      "fidelity": "exact"
-    },
-    {
-      "id": "ch_steam_roaring_deadlock_echoes",
-      "text": "三百度蒸汽狂暴呼啸与监察官惊恐咆哮",
-      "reach": "local",
-      "fidelity": "distorted"
-    }
-  ],
-  "tension_engines": [
-    {
-      "id": "te_geothermal_steam_blowout_vs_lever",
-      "text": "三百度过热蒸汽井喷摧毁井架绝命倒计时与利用特种合金加长摇把旋紧丝杠的机械自救。"
-    },
-    {
-      "id": "te_inspector_blowup_well_vs_rescue",
-      "text": "特派安全专员企图强行炸毁井口弃井逃生与一线突击队誓死保全全员生还的生死对决。"
-    },
-    {
-      "id": "te_ice_geologist_pride_vs_driller",
-      "text": "冰山冷艳女总地质师的绝顶技术威严与重装司钻老班长托付性命的肉体爆发力反差共鸣。"
-    },
-    {
-      "id": "te_scalding_mud_rain_vs_tight_press",
-      "text": "三百度滚烫泥浆火雨倾盆泼洒窒息与两人在摇晃方井中紧贴发力合转摇把的炽烈生命羁绊。"
-    }
-  ],
-  "cast_combos": [
-    {
-      "id": "cc_geologist_and_driller_lever_rush",
-      "power_structure": "switchable",
-      "player_positions": [
-        "high",
-        "equal",
-        "low"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "geologist_chu_ningshuang",
-        "driller_li_tianxuan"
-      ],
-      "tension_engine_ids": [
-        "te_geothermal_steam_blowout_vs_lever",
-        "te_scalding_mud_rain_vs_tight_press"
-      ],
-      "chemistry": "冷艳女总地质师与高原钻井队司钻在三百度滚烫泥浆火雨里背靠背、手扣手，把加长合金摇把向死角猛转强关闸板。",
-      "stakes": {
-        "resource_gap": "女总工精通防喷器受热膨胀力矩公差死穴，司钻长拥有惊人的下盘千斤坠肉身爆发力。",
-        "limit_gap": "女总工体能在三百度极热极旱与缺氧下逼近昏厥临界，司钻长受限于双掌二度烫伤鲜血浸透衣衫剧痛难忍。",
-        "meeting_reason": "高原井场夜班换钻头，女总地质师守在录井房看岩屑，司钻喊人上钻台一起起钻。",
-        "irreplaceable_goal": "在过热蒸汽冲垮井架前，合力用加长合金摇把将环形闸板手动机械丝杠旋紧三十圈完全闭锁脱险。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "geologist_chu_ningshuang",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 3
-          },
-          "reason": "极热井喷绝境中共同测算力矩与偏角，建立起生死托付的技术共鸣。"
-        },
-        {
-          "a": "player",
-          "b": "driller_li_tianxuan",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "同在高温方井中摸爬滚打的生死战友，深知对方过硬的铁骨担当。"
-        },
-        {
-          "a": "geologist_chu_ningshuang",
-          "b": "driller_li_tianxuan",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 3
-          },
-          "reason": "冰山女总工与重装司钻老兵在狂暴火雨前结成生死同盟。"
-        }
-      ],
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "cc_geologist_and_cadet_pipe_leverage",
-      "power_structure": "player_high",
-      "player_positions": [
-        "high"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "geologist_chu_ningshuang",
-        "cadet_driller_xiao_wu"
-      ],
-      "tension_engine_ids": [
-        "te_geothermal_steam_blowout_vs_lever"
-      ],
-      "chemistry": "传奇女总工的从容冷冽稳住吓瘫的新手助理，新手助理冒死送达加长空心钢管与安全绳，师徒合力化解井喷冲顶危机。",
-      "stakes": {
-        "resource_gap": "女总工握有核心加长合金摇把与绝对技术决断权，青年助理掌握加长镀锌空心管与防喷器公差手册。",
-        "limit_gap": "成年的青年助理面对三百度蒸汽喷射心理防线脆弱，女总工在狂暴颠簸中无法分身捡拾工具。",
-        "meeting_reason": "助理技术员上高原第三天，高原反应还没过去，就被女总地质师拉去录井房捞岩屑。",
-        "irreplaceable_goal": "迅速接驳加长镀锌力臂协助合金摇把一举旋紧卡死丝杠轴套。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "geologist_chu_ningshuang",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "紧盯女总工的每一个破拆手势。"
-        },
-        {
-          "a": "player",
-          "b": "cadet_driller_xiao_wu",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 1
-          },
-          "reason": "鼓励新手助理战胜极热恐惧。"
-        },
-        {
-          "a": "geologist_chu_ningshuang",
-          "b": "cadet_driller_xiao_wu",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 1
-          },
-          "reason": "师徒传承与工程庇护。"
-        }
-      ],
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "cc_driller_and_inspector_blowout_clash",
-      "power_structure": "npc_high",
-      "player_positions": [
-        "low",
-        "equal"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "driller_li_tianxuan",
-        "inspector_zhao_kailun"
-      ],
-      "tension_engine_ids": [
-        "te_inspector_blowup_well_vs_rescue"
-      ],
-      "chemistry": "特派专员歇斯底里要求拉下炸封闸刀引爆炸药封闭深井逃生，司钻工长怒拔大活动扳手横在其喉结据理力争寸步不让。",
-      "stakes": {
-        "resource_gap": "专员手握能源局最高应急炸封切断钥匙芯片，司钻长拥有全井司钻突击队的绝对现场支持。",
-        "limit_gap": "专员极度恐惧井喷爆炸粉身碎骨，司钻工长受限于公然违抗地热安全条例文书的军法重惩威慑。",
-        "meeting_reason": "监督官带着督查组上山，刚下车就被司钻拦在井场大门外，先吸两口氧再进。",
-        "irreplaceable_goal": "压制官僚逃亡行径为方井死角丝杠下转锁死争取至关重要的三分钟时间。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "driller_li_tianxuan",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 1
-          },
-          "reason": "赞许工长抗命护持全井同胞的铁血担当。"
-        },
-        {
-          "a": "player",
-          "b": "inspector_zhao_kailun",
-          "stage": "stranger",
-          "a_to_b": {
-            "trust": 0,
-            "tension": 5
-          },
-          "b_to_a": {
-            "trust": 0,
-            "tension": 5
-          },
-          "reason": "对视一线人命如草芥的自私官僚深恶痛绝。"
-        },
-        {
-          "a": "driller_li_tianxuan",
-          "b": "inspector_zhao_kailun",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 0,
-            "tension": 5
-          },
-          "b_to_a": {
-            "trust": 0,
-            "tension": 5
-          },
-          "reason": "一线工长与上层逃生官员之间的生死对峙。"
-        }
-      ],
-      "tags": [
-        "workplace_power",
-        "crime"
-      ]
-    },
-    {
-      "id": "cc_geologist_and_master_zhao_lever",
-      "power_structure": "equal",
-      "player_positions": [
-        "equal"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "geologist_chu_ningshuang",
-        "senior_fitter_old_zhao"
-      ],
-      "tension_engine_ids": [
-        "te_geothermal_steam_blowout_vs_lever",
-        "te_inspector_blowup_well_vs_rescue"
-      ],
-      "chemistry": "井口老钳工隔着狂暴蒸汽指点偏角递上石棉防滑衬垫，与方井内死磕摇把的年轻女工程师里应外合，协同化解冲垮井架死局。",
-      "stakes": {
-        "resource_gap": "老钳工握有丝杠轴套右偏两度偏心口诀与石棉防滑衬垫，女总工掌握核心合金加长摇把与绝对技术决断权。",
-        "limit_gap": "老钳工年迈患有低氧肺气肿无法亲自上前死拼下旋，女总工在滚烫泥浆中双眼难辨毫米级偏角。",
-        "meeting_reason": "老钳工是这片地热田打第一口井时就在的人，女总地质师每回改井身结构，都要先去板房陪老钳工喝一碗酥油茶。",
-        "irreplaceable_goal": "精准将石棉衬垫塞入右偏两度轴套撬平反扣脱险。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "geologist_chu_ningshuang",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "深信女总工程师神级水下决断力。"
-        },
-        {
-          "a": "player",
-          "b": "senior_fitter_old_zhao",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 1
-          },
-          "reason": "老钳工的经验指引令人心头大定。"
-        },
-        {
-          "a": "geologist_chu_ningshuang",
-          "b": "senior_fitter_old_zhao",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "两代地热工程人之间的默契互救。"
-        }
-      ],
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    }
-  ],
-  "daily_activities": [
-    {
-      "id": "act_wellhead_gauge_bourdon_log",
-      "title": "晨光未显井口防喷器双针耐热波登管巡检",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "duration_minutes": 30,
-      "beats": [
-        "用精密标准水银砝码校验防喷器双针耐热波登管零位",
-        "擦拭双色石英水位玻璃视镜表面积聚的煤泥油垢",
-        "轻扣副隔水阀螺纹填料压盖螺栓确认无异常冷凝水"
-      ],
-      "hook_ids": [],
-      "start_minute": 1395,
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "act_lock_screw_graphite_greasing",
-      "title": "防喷器环形闸板手动锁紧丝杠注脂保养",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "duration_minutes": 35,
-      "beats": [
-        "用铜刮刀清理锁紧丝杠螺纹表面附着的高温矿粉油泥",
-        "均匀涂抹耐四百度特制合成聚四氟乙烯耐温密封硅脂",
-        "使用全钢棘轮扳手按对称法紧固六颗大号不锈钢螺栓"
-      ],
-      "hook_ids": [],
-      "start_minute": 1400,
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "act_doghouse_pneumatic_gate_test",
-      "title": "司钻值班室长廊气动防爆切断大门测试",
-      "location_ids": [
-        "loc_drill_floor_control_doghouse"
-      ],
-      "duration_minutes": 25,
-      "beats": [
-        "转动主气动防火水密门重锤锁紧机械棘爪确认自由行程",
-        "检查配重悬挂不锈钢钢丝绳端部马鞍卡扣夹紧力矩",
-        "在地热能源战备施工日志加盖当值监督官电子图章"
-      ],
-      "hook_ids": [],
-      "start_minute": 1398,
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    },
-    {
-      "id": "act_mud_manifold_choke_line_check",
-      "title": "泥浆排险节流管汇超高压球阀行程点验",
-      "location_ids": [
-        "loc_mud_tank_manifold_catwalk"
-      ],
-      "duration_minutes": 40,
-      "beats": [
-        "用防爆卡尺测量减震弹簧自由高度与预压压缩量",
-        "清理滑轨锁死卡齿表面堆积的微细金属冰晶霜花",
-        "在地热抢险战备行车日志加盖当值专员电子印章"
-      ],
-      "hook_ids": [],
-      "start_minute": 1405,
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "act_deep_well_oxygen_supply_tally",
-      "title": "千米地热井口战备自救高压供氧点验",
-      "location_ids": [
-        "loc_mud_tank_manifold_catwalk"
-      ],
-      "duration_minutes": 30,
-      "beats": [
-        "测量高压氧气储罐汇流排输出减压阀动态风压",
-        "检查机库外露救生索端部钛合金自动锁扣夹紧力",
-        "交接挂在备品柜内的特种实心加长对角手动丝杠摇把"
-      ],
-      "hook_ids": [],
-      "start_minute": 1410,
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    },
-    {
-      "id": "act_blowout_cellar_thermal_strain_tally",
-      "title": "防喷器壳体热应力微米激光测绘",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "duration_minutes": 20,
-      "beats": [
-        "测量防喷器壳体左右两侧热胀冷缩形变差并校对基准",
-        "清理导向槽表面卡塞的细碎重晶石泥浆残渣",
-        "紧固传感器安装支架四颗高强度防锈不锈钢螺栓"
-      ],
-      "hook_ids": [],
-      "start_minute": 1420,
-      "tags": [
-        "workplace_power",
-        "workplace"
-      ]
-    },
-    {
-      "id": "act_doghouse_mud_wipe",
-      "title": "值班板房里替女总地质师擦去泥浆",
-      "location_ids": [
-        "loc_geologist_prefab_cabin"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1430,
-      "beats": [
-        "防喷器闸板锁死、井口压稳之后，女总地质师被扶回值班板房，工装上糊满重晶石泥浆，高原的夜风从门缝钻进来，泥浆半干半冻地结在发梢上。",
-        "炉子上烧着一壶温泉水，女总地质师背过身解开工装，让人用热毛巾一点点擦去颈后和肩背的泥浆，擦到被蒸汽烫红的那片皮肤时，轻轻吸了口气，没有躲。",
-        "女总地质师回过头，借着炉火看着对方，呼吸在稀薄的空气里有点急：四千米……喘得厉害不全怪缺氧。门闩插上，今晚别回你那间板房。"
-      ],
-      "tags": [
-        "intimate"
-      ]
-    },
-    {
-      "id": "act_prefab_spring_water_footbath",
-      "title": "温泉水泡脚",
-      "location_ids": [
-        "loc_geologist_prefab_cabin"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1220,
-      "beats": [
-        "板房里，总地质师打了一盆冒着热气的温泉水，把冻僵的双脚泡进去，又拍了拍身边的小板凳。",
-        "总地质师说：一起泡，地热田唯一的福利。……泡暖和了，有些话我想当面跟你说。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_prefab_oxygen_kiss",
-      "title": "缺氧里的一个吻",
-      "location_ids": [
-        "loc_geologist_prefab_cabin"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1360,
-      "beats": [
-        "四千米的夜里，总地质师坐在铁架床边吸着便携氧气，摘下面罩时喘得厉害，脸颊红得发烫。",
-        "总地质师把面罩递给人，自己却凑过来：先说好，喘不上来我会停。……再亲一下试试，你也想吗？"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_prefab_hot_spring_dawn",
-      "title": "野温泉的清晨",
-      "location_ids": [
-        "loc_geologist_prefab_cabin"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 380,
-      "beats": [
-        "天蒙蒙亮，总地质师裹着军大衣推开板房的门，窗外那眼野温泉冒着白汽，铺了一层薄霜。",
-        "总地质师回头看人：钻井队七点上班，现在去泡一会儿，没人看见。……你来不来？"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    }
-  ],
-  "pressures": [
-    {
-      "id": "p_geothermal_steam_blowout_erupt",
-      "title": "过热蒸汽以每秒数百公斤喷涌逼近爆炸",
-      "source": "nature",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "trigger": "千米深层地热高压蒸汽冲垮泥浆柱，三百度过热蒸汽撕裂高压油路疯狂喷涌，逼仄方井内温度直逼一百二十度，距冲垮整座井架仅剩五分钟。",
-      "objective": "在井口彻底被气爆摧毁前手动旋转加长丝杠关闭闸板自救。",
-      "choice": "等待上方启动炸封引信引爆炸平深井，还是由女总地质师带队在滚烫泥浆中暴力转动摇把脱险。",
-      "immediate": {
-        "text": "震耳欲聋的蒸汽咆哮如万千巨龙撕扯耳膜，三百度白汽瞬间将方井化为伸手不见五指的滚烫蒸笼。",
-        "minutes": 2
-      },
-      "near": {
-        "text": "方井内气温飙升至一百四十度，滚烫泥浆如暴雨横飞，人员工装被烫得冒出刺鼻白烟。",
-        "deadline_minutes": 5
-      },
-      "far": {
-        "trigger": "过热地热蒸汽气爆彻底掀翻井架",
-        "consequence": "数千吨重型井架在惊天巨爆中被整体炸碎掀翻，井场全员在万度火雨与落石中葬身火海殉难。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "用防喷器特种耐高温合金加长对角手动锁紧丝杠摇把顺时针死转三十圈关闭闸板脱险。",
-          "cost": "合金摇把手柄发生微小弯曲变形，操作人员手掌被粗糙防滑纹磨出大面积血泡鲜血浸透铁架。"
-        },
-        {
-          "option": "用破拆大活动扳手反向砸碎副放喷旁通截止阀强行制造机械泄压自救。",
-          "cost": "大扳手受强烈反冲脱手崩飞划破在场人员面颊与肩膀。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1395,
-      "tags": [
-        "disaster",
-        "workplace"
-      ]
-    },
-    {
-      "id": "p_hydraulic_rupture_deadlock_crush",
-      "title": "主液压管束失压抱死必须纯人力旋紧",
-      "source": "accident",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "trigger": "高压液压软管在高热下爆裂刺漏，防喷器气动遥控系统全面瘫痪，重达数吨的闸板必须依靠两人在极热中手动旋转三十圈丝杠完成刚性闭锁。",
-      "objective": "找准丝杠轴套右偏两度死角并套上加长管合力顺时针猛转。",
-      "choice": "强行蛮力硬拧博取前两圈位移，还是等待老钳工递上石棉防滑衬垫稳步推进。",
-      "immediate": {
-        "text": "厚达六公分的防喷器锁紧丝杠传出一声让人牙酸的金属摩擦尖叫，表层耐温防腐层爆裂剥落。",
-        "minutes": 3
-      },
-      "near": {
-        "text": "轴套因受热膨胀产生微米级椭圆变形，摇把棘爪在槽口边缘发生剧烈打滑火星四溅。",
-        "deadline_minutes": 6
-      },
-      "far": {
-        "trigger": "手动锁紧丝杠在极度偏载下扭断崩飞",
-        "consequence": "断裂的合金丝杠如高速炮弹穿透人体，丧失唯一闭锁手段导致防喷器彻底被冲毁。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "老钳工塞入耐高温石棉防滑衬垫纠正两度切角协助摇把深咬自救。",
-          "cost": "消耗尽绝版深井耐热密封耗材，老工长左手手掌被锋利金属毛刺划伤渗血。"
-        },
-        {
-          "option": "司钻用肩膀顶住加长摇把传动轴消除偏心扭矩为女总地质师争取旋转角度脱险。",
-          "cost": "司钻肩部软组织受剧烈反震严重挫伤渗血。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1398,
-      "tags": [
-        "disaster",
-        "workplace"
-      ]
-    },
-    {
-      "id": "p_steam_heatstroke_asphyxiation_shock",
-      "title": "三百度极热蒸汽与硫化氢诱发急性热休克",
-      "source": "nature",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "trigger": "逼仄方井内持续喷涌过热蒸汽，环境气温突破极限，人员核心体温飙升至四十度以上，呼吸道黏膜被灼热空气烫伤，神智开始恍惚大汗淋漓。",
-      "objective": "两人紧密贴合对抗极热缺氧并含服高能葡萄糖与解毒喷雾维持最后手劲。",
-      "choice": "退入通风控制室吸氧，还是咬紧牙关憋住一口气将摇把转到底。",
-      "immediate": {
-        "text": "女总地质师面颊被热浪熏得娇艳赤红，粗重的喘息声因喉头水肿而变得沙哑短促。",
-        "minutes": 2
-      },
-      "near": {
-        "text": "热衰竭痉挛蔓延至手臂肌肉，视线边缘泛起大面积黑色闪光，抓握手指出现失控性抽搐。",
-        "deadline_minutes": 5
-      },
-      "far": {
-        "trigger": "重度热射病休克导致中枢神经全面衰竭昏厥",
-        "consequence": "人员在极热中当场窒息晕厥跌入泥浆，在滚烫泥浆火雨中不幸牺牲殉难。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "两人紧密相贴借彼此胸膛滚烫热息御热双手死扣摇把以自重猛转脱险。",
-          "cost": "衣衫被热汗与泥浆浸透黏在肌肤上，双臂遭受重度二度热灼伤脱皮。"
-        },
-        {
-          "option": "四千米的夜风刮得井架呜呜作响，从药包抽出高效神经解痉含片含服协助其维持清醒意志脱险。",
-          "cost": "投料窗口微开导致少量灼热冷凝水喷出损伤急救监测仪外壳与连接线路。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1400,
-      "tags": [
-        "disaster"
-      ]
-    },
-    {
-      "id": "p_doghouse_manifold_overpressure_risk",
-      "title": "副放喷管线在七十兆帕超高压下剧烈震颤",
-      "source": "accident",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_drill_floor_control_doghouse"
-      ],
-      "trigger": "井口反压使副放喷管汇三通球阀承受超极限内压，铸钢法兰边缘出现微裂纹，高压气液射流一旦切穿钢壁将瞬间将控制走廊切成两段。",
-      "objective": "在管汇爆炸前闭锁闸板截断源头高压。",
-      "choice": "向调度室请求强行开启全场紧急排污电闸，还是在下方机房内争分夺秒完成刚性锁卡。",
-      "immediate": {
-        "text": "厚达五十毫米的管汇钢管发出如同闷雷般的震颤爆鸣，法兰螺栓在剪力下拉伸微变形。",
-        "minutes": 3
-      },
-      "near": {
-        "text": "管汇三通球阀壳体裂纹微幅扩张，喷出刺耳的高压泥浆细线如激光刀般切割地面。",
-        "deadline_minutes": 7
-      },
-      "far": {
-        "trigger": "副放喷管汇三通球阀彻底炸碎崩毁",
-        "consequence": "数吨重的高速金属碎片横扫控制室长廊，值班人员瞬间被破片与烈浪撕碎殉难。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "孙工程师在长廊用重型千斤顶顶死管汇弯头法兰强行支撑裂纹自救。",
-          "cost": "千斤顶受压变形损坏，孙工程师右手臂被高压泥浆射流擦伤。"
-        },
-        {
-          "option": "女总地质师爆发全力旋转丝杠闭锁闸板截断井涌源头脱险。",
-          "cost": "女总地质师双手虎口被合金摇把粗暴棱角磨破鲜血淋漓。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1402,
-      "tags": [
-        "disaster",
-        "workplace"
-      ]
-    },
-    {
-      "id": "p_lever_alloy_teeth_shear_yield",
-      "title": "特种合金摇把棘爪承受极限扭矩濒断",
-      "source": "accident",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "trigger": "受损丝杠内部积聚的重晶石结垢使咬合扭矩暴增数倍，七十五公分合金摇把头部棘爪承受了极限剪切，特种合金表面浮现微细疲劳晶斑发出尖锐金铁哀鸣。",
-      "objective": "四千米的夜风刮得井架呜呜作响，套上加长镀锌套管延长力臂并将发力点移至轴心消除冲击偏载。",
-      "choice": "四千米的夜风刮得井架呜呜作响，孤注一掷加大肉身压载强拧，还是稍微回退半寸套入助理技术员送来的加长钢管。",
-      "immediate": {
-        "text": "摇把头部传出一声令人心悸的合金棘爪咬死脆响，表层防锈镀层爆裂脱落。",
-        "minutes": 2
-      },
-      "near": {
-        "text": "摇把手柄发生超过十五度的明显塑性弯曲，棘爪末端即将崩脱滑出偏心槽。",
-        "deadline_minutes": 5
-      },
-      "far": {
-        "trigger": "合金摇把头部棘爪彻底粉碎崩飞",
-        "consequence": "崩断的高速合金利刃击穿操作手胸膛，丧失唯一杠杆工具彻底断绝生路。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "助理技术员送达加长特种钢管套在摇把末端分担应力合力下旋撬平自锁脱险。",
-          "cost": "钢管在高压下咬死变形彻底无法从摇把上拔脱。"
-        },
-        {
-          "option": "女总地质师与司钻调整站位将发力点向摇把根部收缩以肉体爆发力强行压死轴齿自救。",
-          "cost": "两臂肘关节承受数十吨极度反震导致软组织严重挫伤渗血。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1404,
-      "tags": [
-        "disaster",
-        "workplace"
-      ]
-    },
-    {
-      "id": "p_inspector_explosive_seal_countdown",
-      "title": "地热特派专员拉下井口炸封电闸倒计时",
-      "source": "institution",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_drill_floor_control_doghouse"
-      ],
-      "trigger": "特派安全专员认定防喷器已经无法抢救，在控制室按开井口炸封电闸，防爆雷管启动了三分钟彻底引爆炸毁井口封盖深井的自毁倒计时。",
-      "objective": "在炸药引爆前完成丝杠旋转到位并勒令专员停掣。",
-      "choice": "由司钻在门外用大活动扳手砸烂专员控制盒，还是在方井内抢先完成丝杠旋转化解危机。",
-      "immediate": {
-        "text": "长廊顶角响起尖叫的红色自沉炸封警报，雷管起爆继电器发出短促的倒数蜂鸣。",
-        "minutes": 2
-      },
-      "near": {
-        "text": "炸封倒计时仅剩最后三十秒，井口火工引信开始哧哧燃烧冒出刺鼻白烟。",
-        "deadline_minutes": 4
-      },
-      "far": {
-        "trigger": "井口防爆雷管彻底引爆炸平全井",
-        "consequence": "数吨重的高能炸药将井口防喷器与方井彻底炸为巨大漏斗坑，方井全员粉身碎骨殉难。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "司钻夺下专员手电终端砸碎自毁继电器强行拔掉熔断保险丝争取生机。",
-          "cost": "司钻面临违抗联合地热安全条例文书的军法重惩。"
-        },
-        {
-          "option": "女总地质师以总地质师军令严辞喝退随身近卫并亲手扯断自毁继电器脱险。",
-          "cost": "近身对抗导致女总地质师右手臂被尖锐仪表外壳划伤渗血。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1406,
-      "tags": [
-        "workplace_power",
-        "crime"
-      ]
-    },
-    {
-      "id": "p_herders_yaks",
-      "title": "牧民的牦牛",
-      "source": "person",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_geologist_prefab_cabin"
-      ],
-      "trigger": "井喷过后第二天早上，山下的牧民赶着牦牛堵在井场门口：那一夜的硫化氢飘下山，死了十几头牦牛，要钻井队赔",
-      "objective": "在牧民去县里上访之前，谈出一个赔法",
-      "choice": "按牧民说的数照赔，还是请县里来人测牦牛的死因",
-      "immediate": {
-        "text": "央金医生掀开板房门帘，说牧民里有个老阿妈也晕倒了",
-        "minutes": 5
-      },
-      "near": {
-        "text": "中午，牧民的拖拉机要开去县城",
-        "deadline_minutes": 240
-      },
-      "far": {
-        "trigger": "上访到了县里",
-        "consequence": "地热田停钻整顿，总地质师这口井三年的数据全部封存",
-        "due_days": 7
-      },
-      "exits": [
-        {
-          "option": "照数赔",
-          "cost": "赔款从钻井队全年的奖金里出，队里人都会知道是为什么"
-        },
-        {
-          "option": "请县里来人测死因",
-          "cost": "真要测出跟井喷有关，那一夜的处置记录也得一起交上去"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [
-        "hook_ningshuang_cuttings_bag",
-        "hook_tianxuan_oxygen_can",
-        "hook_zhao_spring_eggs",
-        "hook_xiaowu_altitude_noodles",
-        "hook_zhao_inspector_gasp",
-        "hook_ningshuang_hot_spring"
-      ],
-      "start_minute": 480,
-      "tags": []
-    }
-  ],
-  "hooks": [
-    {
-      "id": "hook_steam_blowout_erupts_roaring",
-      "kind": "approach",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{geologist_chu_ningshuang.name}单手按住剧烈颤抖的防烫角钢扶手，抹开额前冷汗：三百度蒸汽刺漏了！液压管线抱死了，把这根七十五公分的合金摇把插进轴套，跟我死转！"
-    },
-    {
-      "id": "hook_geologist_taps_pressure_gauge",
-      "kind": "approach",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{geologist_chu_ningshuang.name}浸泡在滚烫泥浆暴雨中，合金摇把咔哒一声咬死偏心槽口：看准右上方偏两度，顺着丝扣咬合线，听我口令一起往死里转！"
-    },
-    {
-      "id": "hook_steam_heat_chokes_throat",
-      "kind": "approach",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{geologist_chu_ningshuang.name}在三百度蒸汽狂潮里咬紧银牙，面颊在火光映照下泛出娇艳酡红与晶莹热汗：别怕烫！抓紧摇把手柄，把全身重量砸下来！"
-    },
-    {
-      "id": "hook_lever_groans_bending_limit",
-      "kind": "approach",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{geologist_chu_ningshuang.name}整个人扑在合金摇把柄端，双手虎口鲜血淋漓：丝杠在反向进圈了！司钻，把你那身力气全压上来，顺时针转到底锁死！"
-    },
-    {
-      "id": "hook_driller_grips_lever_firmly",
-      "kind": "approach",
-      "slot": "driller_li_tianxuan",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{driller_li_tianxuan.name}跨步踏入泥浆正中，粗壮的大手一把覆在女总工手背外侧：女总地质师，稳住轴心！剩下的千斤下沉重量交给我，谁也别想松手！"
-    },
-    {
-      "id": "hook_lock_screw_groans_shear",
-      "kind": "approach",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{geologist_chu_ningshuang.name}猛然抬头凝视门外缓缓下落的防爆门，眼神高傲冷冽如刀：专员要炸封了！还有最后五圈，哪怕把手柄转断也得给我扳死！"
-    },
-    {
-      "id": "hook_manifold_groans_cracking",
-      "kind": "approach",
-      "slot": "driller_li_tianxuan",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{driller_li_tianxuan.name}反手抽出一柄大活动扳手死死别在角钢之间，低沉怒吼：蒸汽再狂暴又怎样！就靠这根合金摇把了，跟我一起下压，锁死这道闸板！"
-    },
-    {
-      "id": "hook_inspector_threatens_explosive_seal",
-      "kind": "approach",
-      "slot": "inspector_zhao_kailun",
-      "location_ids": [
-        "loc_drill_floor_control_doghouse"
-      ],
-      "text": "{inspector_zhao_kailun.name}惨白着脸握紧炸封电掣芯片，尖叫连连：井架要被掀翻了！卫队，立刻按下拉闸电掣引爆炸封，绝不能让整座井场被炸碎！"
-    },
-    {
-      "id": "hook_zhao_stuffs_asbestos_gasket",
-      "kind": "approach",
-      "slot": "senior_fitter_old_zhao",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{senior_fitter_old_zhao.name}将半块耐热石棉防滑衬垫狠狠拍在槽口缝隙里：往槽里塞！右偏两度的死角找到了，垫上我的石棉垫，顺着力道转！"
-    },
-    {
-      "id": "hook_cadet_fetches_extension_pipe",
-      "kind": "request",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{geologist_chu_ningshuang.name}抹去脸上的热汗与泥浆，急促喘息着看向助理技术员：去工具箱把备用加长空心钢管取来套上，我们需要更长的一米力臂！"
-    },
-    {
-      "id": "hook_wu_brings_steel_pipe",
-      "kind": "request",
-      "slot": "cadet_driller_xiao_wu",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{cadet_driller_xiao_wu.name}双手抱着一根厚壁加长套管滚入方井角落，眼眶通红：女总地质师！钢管拿来了！还有一卷高抗拉安全牵引绳！"
-    },
-    {
-      "id": "hook_li_joins_pipe_extension",
-      "kind": "request",
-      "slot": "driller_li_tianxuan",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{driller_li_tianxuan.name}接过套管狠狠套在摇把手柄末端，按住女总地质师的玉手咆哮：套管接上了！力臂延长了！女总地质师，我们数三二一，一起把全身重量砸下去！"
-    },
-    {
-      "id": "hook_medic_guides_anti_steam_breathing",
-      "kind": "request",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{geologist_chu_ningshuang.name}隔着观察窗向医官打出确认手势，口中咬破葡萄糖含片：闸板在闭合，我们做最后一轮压死闭锁！"
-    },
-    {
-      "id": "hook_observe_geothermal_blowout_inferno",
-      "kind": "observe",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "{geologist_chu_ningshuang.name}挺立在三百度狂暴喷涌的蒸汽与滚烫泥浆火雨中，工装背心下侧颜在烈浪映照下明艳决绝，眼神如出鞘冰刃般坚不可摧。"
-    },
-    {
-      "id": "hook_observe_lever_locks_blowout_gate",
-      "kind": "observe",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_blowout_preventer_cellar_deadlock"
-      ],
-      "text": "特制防喷器特种耐高温合金加长对角手动锁紧丝杠摇把深深咬死轴套，伴随着一声洪钟般的重型机械咬死合模轰鸣，狂暴喷涌的三百度过热蒸汽骤然被切断回流，井口套压平稳归零全员安然脱险生还。"
-    },
-    {
-      "id": "hook_ningshuang_cuttings_bag",
-      "kind": "approach",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [],
-      "text": "{npc.name}从录井房探出头，把一小袋湿漉漉的岩屑塞进人手里：闻闻，有没有臭鸡蛋味？有的话，今晚井底比我算的还要热。"
-    },
-    {
-      "id": "hook_tianxuan_oxygen_can",
-      "kind": "approach",
-      "slot": "driller_li_tianxuan",
-      "location_ids": [],
-      "text": "{npc.name}把一只便携氧气瓶扔过来，咧嘴一笑：四千米，走快了脑袋疼。先吸两口，再跟我上钻台。"
-    },
-    {
-      "id": "hook_zhao_spring_eggs",
-      "kind": "approach",
-      "slot": "senior_fitter_old_zhao",
-      "location_ids": [],
-      "text": "{npc.name}拎着一只铝饭盒走过来，盒里卧着几个在温泉眼里煮熟的鸡蛋：尝尝，地热田的人都这么煮，硫磺味儿就是佐料。"
-    },
-    {
-      "id": "hook_xiaowu_altitude_noodles",
-      "kind": "approach",
-      "slot": "cadet_driller_xiao_wu",
-      "location_ids": [],
-      "text": "{npc.name}抱着头蹲在板房门口，嘴唇发紫还逞强：没事……就是有点喘。你也刚上山？咱俩谁先缓过来，谁请吃泡面。"
-    },
-    {
-      "id": "hook_zhao_inspector_gasp",
-      "kind": "approach",
-      "slot": "inspector_zhao_kailun",
-      "location_ids": [],
-      "text": "{npc.name}扶着车门大口喘气，脸色发青，还硬撑着把督查通知递过来：环保指标……谁负责？先、先给我找个氧气瓶。"
-    },
-    {
-      "id": "hook_ningshuang_hot_spring",
-      "kind": "approach",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [],
-      "text": "{npc.name}收工后坐在井场边那眼野温泉旁，裤腿挽到膝盖泡着脚，冲人拍拍身边的石头：坐，高原上就这点好，下了班有热水。"
-    },
-    {
-      "id": "hook_ningshuang_prefab_stove",
-      "kind": "approach",
-      "slot": "geologist_chu_ningshuang",
-      "location_ids": [
-        "loc_geologist_prefab_cabin"
-      ],
-      "text": "{npc.name}站在板房门口，炉子上的水壶嘶嘶冒气：高原夜里冷。……进来烤烤火。"
-    }
-  ],
-  "twists": [
-    {
-      "id": "tw_blowout_eccentric_groove_located",
-      "category": "信息",
-      "requires": [
-        "geologist_chu_ningshuang"
-      ],
-      "text": "{geologist_chu_ningshuang.name}在受损防喷器壳体侧壁摸出了当年制造厂预留的手动防扭矩反转卡止安全暗槽。"
-    },
-    {
-      "id": "tw_driller_disarms_corrupt_inspector",
-      "category": "人事",
-      "requires": [
-        "driller_li_tianxuan"
-      ],
-      "text": "{driller_li_tianxuan.name}反手夺下特派安全专员的炸封引信钥匙，全面接管井场机修最高战时处置权。"
-    },
-    {
-      "id": "tw_anti_heat_spray_distributed",
-      "category": "资源",
-      "requires": [
-        "geologist_chu_ningshuang"
-      ],
-      "text": "{geologist_chu_ningshuang.name}掰开贴身药盒，将四支高效神经舒缓抗热衰竭喷雾分发给现场力竭同伴对抗急性高温虚脱。"
-    },
-    {
-      "id": "tw_asbestos_gasket_stops_steam_slip",
-      "category": "制度",
-      "requires": [
-        "senior_fitter_old_zhao"
-      ],
-      "text": "{senior_fitter_old_zhao.name}用冲子撬开备用泥浆旁通阀门，依法平衡方井内外压力化解了法兰单向剧烈受剪。"
-    },
-    {
-      "id": "tw_emergency_bypass_drops_well_pressure",
-      "category": "时限",
-      "requires": [
-        "geologist_chu_ningshuang"
-      ],
-      "text": "{geologist_chu_ningshuang.name}利用摇把柄端挑开了备用排砂管路，强行为受损丝杠压制住最后三十秒超温抱死窗口。"
-    },
-    {
-      "id": "tw_driller_shields_geologist_mud_rain",
-      "category": "关系",
-      "requires": [
-        "geologist_chu_ningshuang",
-        "driller_li_tianxuan"
-      ],
-      "text": "{driller_li_tianxuan.name}在滚烫泥浆大面积喷洒瞬间挺身扑在{geologist_chu_ningshuang.name}上方，用加厚背心与宽阔背脊死死挡下飞溅火雨机油。"
-    },
-    {
-      "id": "tw_blowout_locks_true_well_saved",
-      "category": "意外",
-      "requires": [
-        "geologist_chu_ningshuang"
-      ],
-      "text": "顺时针死死锁紧的环形闸板在加长合金摇把与石棉衬垫的强力咬合下轰然死锁，狂暴喷射的三百度地热过热蒸汽骤然熄灭止歇，全井安然脱险平息生还。"
-    }
+    "法宝",
+    "太监",
+    "圣女"
   ],
   "content_tags": [
     "intimate",
+    "explicit",
     "coercion_theme",
+    "humiliation",
     "bodily_harm",
+    "workplace_power",
     "crime",
     "workplace",
     "disaster"
   ],
   "status": "released",
-  "notes": "按原稿加入，保留千米深层地热井井喷、防喷器液压刺漏抱死与女总地质师用加长丝杠摇把手动关闭闸板的骨架。同一批里有十个同源的工业事故世界，这里把开局放到海拔四千米的高原地热田：板房挨着野温泉、牧民赶着牦牛从井场边过、人人随身揣着氧气瓶、温泉眼里煮鸡蛋，用干燥、缺氧、硫磺味和水电站世界的汛期湿冷拉开；搭档写成钻井队司钻，开局钩子、相遇缘由和背景人物围着高原井场生活重写。写死的人名改为身份称呼，背景人物里与模板重名的改名；婴儿肥大多换成了其余外貌描写；人物组合按权力结构放开玩家身份，压力与日常不再锁死钩子，并加了几个不限地点的靠近型钩子；女总地质师亲密前提写明井口压稳、双方清醒自愿；新增一个值班板房里替女总地质师擦去泥浆的亲密日常。"
+  "notes": ""
 }

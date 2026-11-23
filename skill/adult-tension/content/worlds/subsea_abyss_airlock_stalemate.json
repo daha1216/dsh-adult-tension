@@ -1,7 +1,7 @@
 {
  "background_cast": [
   {
-   "adult_context": "年满三十六岁，深海基站资深声呐侦测工程师，成年公民。",
+   "adult_context": "年满三十六岁，深海基站声呐工程师，成年公民。",
    "age_range": [
     36,
     40
@@ -9,7 +9,7 @@
    "function": "witness",
    "gender": "male",
    "id": "bg_subsea_sonar_operator_duan",
-   "line": "海沟深处断裂带发生二次余震，外壳水听器捕捉到了巨大的水力共振声！",
+   "line": "断裂带发生二次余震，水听器捕捉到了水力共振声！",
    "location_ids": [
     "loc_airlock_decompression_chamber"
    ],
@@ -17,20 +17,20 @@
    "role": "声呐监听员老段"
   },
   {
-   "adult_context": "年满二十八岁，持有潜水医学与高压氧专科执照的女医官，成年公民。",
+   "adult_context": "年满二十八岁，持高压氧护理执照的成年医护。",
    "age_range": [
     28,
     32
    ],
    "function": "helper",
    "gender": "female",
-   "id": "bg_station_medical_officer_tan",
-   "line": "高压氧舱与神经复温槽已全部加温至三十八度，开门后立即转移伤员！",
+   "id": "bg_station_medical_nurse_ge",
+   "line": "复温舱水凝胶榻已加温至三十八度，除颤回路随时启动！",
    "location_ids": [
-    "loc_station_decompression_corridor"
+    "loc_hyperbaric_medical_pod"
    ],
-   "name": "护士长阿葛",
-   "role": "基站深潜医官谭医生"
+   "name": "阿葛",
+   "role": "高压舱医护长阿葛"
   },
   {
    "adult_context": "年满四十六岁，深海基站合同维修工，成年公民。",
@@ -41,7 +41,7 @@
    "function": "rumor_source",
    "gender": "male",
    "id": "bg_contractor_plumber_lao_ma",
-   "line": "听上面说如果气闸真漏了，总指挥只能牺牲气闸舱保住核心科研数据。",
+   "line": "那台蝶阀出厂就偏了三度，有人下潜前动过深度阈值！",
    "location_ids": [
     "loc_station_decompression_corridor"
    ],
@@ -49,7 +49,7 @@
    "role": "外包管工老马"
   },
   {
-   "adult_context": "年满二十二岁，成年特种起重设备操作员，完全民事行为能力人。",
+   "adult_context": "年满二十二岁，成年起重设备操作员。",
    "age_range": [
     22,
     25
@@ -57,12 +57,12 @@
    "function": "messenger",
    "gender": "male",
    "id": "bg_docking_crane_rigger_xiao_liu",
-   "line": "报告！深潜器主牵引缆索已经挂上液压缓冲绞盘，随时可以实施紧急反拉！",
+   "line": "牵引缆已挂上绞盘，拆下的钛合金指骨随时调用！",
    "location_ids": [
     "loc_submersible_docking_bay"
    ],
    "name": "小刘",
-   "role": "潜水器机库起重吊装手小刘"
+   "role": "机库吊装手小刘"
   },
   {
    "adult_context": "年满三十八岁，科考站行政纪律副主管，成年官员。",
@@ -73,247 +73,39 @@
    "function": "obstacle",
    "gender": "male",
    "id": "bg_expedition_officer_zhao",
-   "line": "水压倒灌不可逆！必须在三分钟内切断气闸连接以防止基站失衡沉降！",
+   "line": "水压倒灌不可逆！三分钟内必须落下永封磁力死锁！",
    "location_ids": [
     "loc_station_decompression_corridor"
    ],
    "name": "赵专员",
-   "role": "科考队执纪副官赵专员"
+   "role": "执纪副官赵专员"
   },
   {
-   "adult_context": "年满三十五岁，深海地球物理学专家，成年学者。",
+   "adult_context": "年满三十五岁，深海测绘工程师，成年学者。",
    "age_range": [
     35,
     39
    ],
    "function": "helper",
    "gender": "male",
-   "id": "bg_hydro_geologist_dr_wei",
-   "line": "海沟水压峰值正在减退，只要撑过这最后两分钟，外侧压差就会骤降！",
+   "id": "bg_hydro_surveyor_lao_jin",
+   "line": "断层水压将出现短暂负相位波谷，卡准那一秒下压就能回正！",
    "location_ids": [
     "loc_station_decompression_corridor"
    ],
-   "name": "测绘员老金",
-   "role": "海洋地质学者魏博士"
+   "name": "老金",
+   "role": "海沟测绘员老金"
   }
  ],
  "cast_combos": [
   {
-   "chemistry": "冷艳严谨的深潜女总监与沉稳刚毅的潜航主驾驶在冰冷海水淹顶绝境中相依为命，两人背靠背、手扣手将钛合金机械爪指骨压向死点。",
-   "id": "cc_director_and_pilot_lever_synergy",
-   "identity_ids": [],
-   "player_positions": [
-    "equal",
-    "low"
+   "chemistry": "高傲技术总监在冰水中握紧实心钛合金指骨发令，却因高压神经震颤发软，任你从身后贴紧压杠并在复温舱被握住共感死穴。",
+   "id": "cc_director_solo_claw_neuro_taming",
+   "identity_ids": [
+    "pi_abyss_submersible_copilot",
+    "pi_marine_biosphere_researcher",
+    "pi_deepsea_mechanic_contractor"
    ],
-   "power_structure": "switchable",
-   "relations": [
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 3,
-      "trust": 3
-     },
-     "b": "subsea_technical_director_shen_binglan",
-     "b_to_a": {
-      "tension": 3,
-      "trust": 3
-     },
-     "reason": "在万米水压绝境中共同核算力矩与支点，在生死关头建立起无保留的技术信任。",
-     "stage": "testing"
-    },
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
-     },
-     "b": "deepsea_pilot_lu_chengyuan",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 3
-     },
-     "reason": "同乘潜航多年的默契战友，深知对方过硬的心理素质。",
-     "stage": "familiar"
-    },
-    {
-     "a": "subsea_technical_director_shen_binglan",
-     "a_to_b": {
-      "tension": 3,
-      "trust": 3
-     },
-     "b": "deepsea_pilot_lu_chengyuan",
-     "b_to_a": {
-      "tension": 3,
-      "trust": 3
-     },
-     "reason": "技术指挥官与深潜硬汉在冰海死局中以命相托达成生死同盟。",
-     "stage": "testing"
-    }
-   ],
-   "slots": [
-    "subsea_technical_director_shen_binglan",
-    "deepsea_pilot_lu_chengyuan"
-   ],
-   "stakes": {
-    "irreplaceable_goal": "在海水彻底没顶淹没呼吸器前，合力撬正水力减压阀主轴排出积水自救。",
-    "limit_gap": "女主管体能耗尽面临剧烈失温抽搐，主驾驶受限于极度氧气消耗面临肺部气压伤。",
-    "meeting_reason": "深潜器刚完成万米取样停靠即遭遇断裂带强震冲击。",
-    "resource_gap": "女主管精通水力阀门内部公差与受力核心，主驾驶拥有雄浑爆发力与高超破拆操控技巧。"
-   },
-   "tags": [
-    "workplace",
-    "disaster"
-   ],
-   "tension_engine_ids": [
-    "te_abyss_pressure_vs_manual_claw_prying",
-    "te_hypothermia_spasm_vs_body_warmth"
-   ]
-  },
-  {
-   "chemistry": "一扇透明有机玻璃阻隔两端，基地总指挥在规章与手足间抗命拖延封门，女主管在绝地中咬牙完成机械破拆逆转乾坤。",
-   "id": "cc_director_and_commander_standoff",
-   "identity_ids": [],
-   "player_positions": [
-    "equal"
-   ],
-   "power_structure": "equal",
-   "relations": [
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
-     },
-     "b": "subsea_technical_director_shen_binglan",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 3
-     },
-     "reason": "对女主管专业判断力充满崇高敬意。",
-     "stage": "familiar"
-    },
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 1,
-      "trust": 3
-     },
-     "b": "station_commander_gu_xiongcang",
-     "b_to_a": {
-      "tension": 1,
-      "trust": 3
-     },
-     "reason": "深知指挥官铁面下的护短担当。",
-     "stage": "familiar"
-    },
-    {
-     "a": "subsea_technical_director_shen_binglan",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
-     },
-     "b": "station_commander_gu_xiongcang",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 3
-     },
-     "reason": "师徒辈分的情义在万米深海接受生死考验。",
-     "stage": "testing"
-    }
-   ],
-   "slots": [
-    "subsea_technical_director_shen_binglan",
-    "station_commander_gu_xiongcang"
-   ],
-   "stakes": {
-    "irreplaceable_goal": "在全基站防漫灌永封死锁触发前平衡气闸水压救回全员。",
-    "limit_gap": "总指挥面临全站沉降被解职法办的政治风险，女主管面临门外直接溺毙窒息的代价。",
-    "meeting_reason": "地震引发全基站最高等级橙色水密警报。",
-    "resource_gap": "总指挥手握控制台自毁封死与旁通泄压开关，女主管拥有唯一能撬正阀芯的技术方案。"
-   },
-   "tags": [
-    "workplace",
-    "workplace_power"
-   ],
-   "tension_engine_ids": [
-    "te_station_quarantine_vs_diver_rescue"
-   ]
-  },
-  {
-   "chemistry": "年轻冷艳的首席理论权威与满手老茧的特种水工老将隔窗指点破死局，淬火楔铁与钛合金指骨达成惊世组合。",
-   "id": "cc_director_and_plumber_nie",
-   "identity_ids": [],
-   "player_positions": [
-    "high"
-   ],
-   "power_structure": "player_high",
-   "relations": [
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
-     },
-     "b": "subsea_technical_director_shen_binglan",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 3
-     },
-     "reason": "紧盯总监每一个战术指引。",
-     "stage": "familiar"
-    },
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 2
-     },
-     "b": "expedition_contractor_plumber_nie",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 2
-     },
-     "reason": "接纳老工人递来的关键工业工装夹具。",
-     "stage": "acquainted"
-    },
-    {
-     "a": "subsea_technical_director_shen_binglan",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
-     },
-     "b": "expedition_contractor_plumber_nie",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 3
-     },
-     "reason": "理论与实操的巅峰共鸣挽狂澜于既倒。",
-     "stage": "testing"
-    }
-   ],
-   "slots": [
-    "subsea_technical_director_shen_binglan",
-    "expedition_contractor_plumber_nie"
-   ],
-   "stakes": {
-    "irreplaceable_goal": "精准将耐磨淬火楔铁垫入偏摆间隙助指骨一举撬正阀门。",
-    "limit_gap": "老管工隔窗无法亲自下水操作，女总监在冰水里双手麻木感知力骤降。",
-    "meeting_reason": "深潜器靠泊日常维保作业与突发地震重合。",
-    "resource_gap": "女总监拥有钛合金机械爪核心破拆杠杆，老管工握有化解偏摆三度卡死缺陷的实操绝活。"
-   },
-   "tags": [
-    "workplace",
-    "disaster"
-   ],
-   "tension_engine_ids": [
-    "te_abyss_pressure_vs_manual_claw_prying"
-   ]
-  },
-  {
-   "chemistry": "执纪专员尖叫要求立即封闭主水密隔门牺牲气闸，基地指挥长怒拔枪栓拍在控制台上强行为舱内争取破拆生机。",
-   "id": "cc_commander_and_officer_zhao",
-   "identity_ids": [],
    "player_positions": [
     "low",
     "equal"
@@ -323,62 +115,366 @@
     {
      "a": "player",
      "a_to_b": {
-      "tension": 1,
+      "tension": 4,
       "trust": 3
      },
-     "b": "station_commander_gu_xiongcang",
+     "b": "subsea_technical_director_shen_binglan",
      "b_to_a": {
-      "tension": 1,
+      "tension": 4,
       "trust": 3
      },
-     "reason": "拥护指挥官的人道主义抗命决断。",
-     "stage": "acquainted"
-    },
-    {
-     "a": "player",
-     "a_to_b": {
-      "tension": 3,
-      "trust": 2
-     },
-     "b": "deepsea_pilot_lu_chengyuan",
-     "b_to_a": {
-      "tension": 3,
-      "trust": 2
-     },
-     "reason": "隔窗凝视舱内潜水员坚毅的求生动作。",
-     "stage": "stranger"
-    },
-    {
-     "a": "station_commander_gu_xiongcang",
-     "a_to_b": {
-      "tension": 2,
-      "trust": 3
-     },
-     "b": "deepsea_pilot_lu_chengyuan",
-     "b_to_a": {
-      "tension": 2,
-      "trust": 3
-     },
-     "reason": "长官与爱将之间隔着死神呼啸的绝对信赖。",
+     "reason": "冰水贴身发力，窥见潜服下暗藏的微电流脉冲贴与超潜把柄。",
      "stage": "testing"
     }
    ],
    "slots": [
-    "station_commander_gu_xiongcang",
-    "deepsea_pilot_lu_chengyuan"
+    "subsea_technical_director_shen_binglan"
    ],
    "stakes": {
-    "irreplaceable_goal": "保全气闸舱内潜水技术骨干的同时维护科考站核心气压稳定。",
-    "limit_gap": "专员极度恐惧基站被万米水压压爆，指挥长受限于违反条例文书追责。",
-    "meeting_reason": "观测廊控制台前爆发的指挥权限生死摊牌。",
-    "resource_gap": "专员拥有上级监察机关直属通报权，指挥长握有现场物理隔绝与应急武装控制权。"
+    "irreplaceable_goal": "压到底撬开蝶阀，在复温舱完成共感镇压。",
+    "limit_gap": "总监受震颤反噬打滑，你须借其签章免责。",
+    "meeting_reason": "深潜器返航入气闸舱遭强震，主轴弯曲两毫米咬死。",
+    "resource_gap": "总监掌握公差裁决权，你手握力矩与超潜黑匣铁证。"
+   },
+   "tags": [
+    "workplace",
+    "disaster",
+    "intimate"
+   ],
+   "tension_engine_ids": [
+    "te_abyss_pressure_vs_claw_prying",
+    "te_hpns_overload_vs_neuro_taming"
+   ]
+  },
+  {
+   "chemistry": "你握封门延时权与停职令，将震颤不止的技术总监关进高压复温舱，逼其扣上真皮金属锁扣项圈接受校准。",
+   "id": "cc_director_solo_audit_overthrow",
+   "identity_ids": [
+    "pi_station_safety_officer"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 2
+     },
+     "b": "subsea_technical_director_shen_binglan",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 2
+     },
+     "reason": "审查官与被抓超潜死穴的技术总监在复温舱展开生物电驯服。",
+     "stage": "flirting"
+    }
+   ],
+   "slots": [
+    "subsea_technical_director_shen_binglan"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "用神经共感同步塞与免责签章驯服技术总监。",
+    "limit_gap": "你需仰赖其技术稳住基站，对方则面临停职。",
+    "meeting_reason": "脱困后在复温舱展开事故责任与适航核查。",
+    "resource_gap": "你掌控死锁开关，总监握有保住矿芯的权威。"
    },
    "tags": [
     "workplace_power",
+    "coercion_theme",
+    "intimate"
+   ],
+   "tension_engine_ids": [
+    "te_quarantine_vs_diver_rescue",
+    "te_hpns_overload_vs_neuro_taming"
+   ]
+  },
+  {
+   "chemistry": "主驾驶在冰水中将你揽入怀侧扣紧实心钛合金指骨，退入球舱后围绕私藏稀土晶核与共感镇压贴身拉锯。",
+   "id": "cc_pilot_solo_lever_pact",
+   "identity_ids": [
+    "pi_marine_biosphere_researcher",
+    "pi_deepsea_mechanic_contractor"
+   ],
+   "player_positions": [
+    "equal",
+    "low"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 3
+     },
+     "b": "deepsea_pilot_lu_chengyuan",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 3
+     },
+     "reason": "同历破拆并撞破对方私藏稀土晶核与共感器具的贴身共犯。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "deepsea_pilot_lu_chengyuan"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "撬正蝶阀逃生，在球舱分赃晶核并完成双人共感代偿。",
+    "limit_gap": "主驾驶受困于痉挛与晶核罪证，你须仰赖其撑住水压。",
+    "meeting_reason": "在气闸舱与深潜辅修库球舱内并肩抢险自救。",
+    "resource_gap": "主驾驶有破拆力与球舱权，你握阻断剂或淬火楔铁。"
+   },
+   "tags": [
+    "disaster",
+    "intimate",
     "crime"
    ],
    "tension_engine_ids": [
-    "te_station_quarantine_vs_diver_rescue"
+    "te_abyss_pressure_vs_claw_prying",
+    "te_hpns_overload_vs_neuro_taming"
+   ]
+  },
+  {
+   "chemistry": "你将因高压神经震颤抽搐的主驾驶堵在球舱内，拿私藏晶核与超潜黑匣逼对方戴真皮金属锁扣项圈受审。",
+   "id": "cc_pilot_solo_blackbox_interrogation",
+   "identity_ids": [
+    "pi_station_safety_officer"
+   ],
+   "player_positions": [
+    "high"
+   ],
+   "power_structure": "player_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 2
+     },
+     "b": "deepsea_pilot_lu_chengyuan",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 2
+     },
+     "reason": "在球舱内以走私晶核铁证和调频器强行压服潜航王牌。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "deepsea_pilot_lu_chengyuan"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "用微电流脉冲贴与神经共感同步塞将王牌收为己用。",
+    "limit_gap": "主驾驶无力抗拒调频，你则需其继续执行航次。",
+    "meeting_reason": "返航后在深潜辅修库对球舱实施突击搜查。",
+    "resource_gap": "你掌停飞裁决权，主驾驶握驾驶权与晶核藏匿点。"
+   },
+   "tags": [
+    "workplace_power",
+    "coercion_theme",
+    "intimate"
+   ],
+   "tension_engine_ids": [
+    "te_quarantine_vs_diver_rescue",
+    "te_hpns_overload_vs_neuro_taming"
+   ]
+  },
+  {
+   "chemistry": "总指挥官隔窗主宰去留，却在复温舱问责时慢性脊髓震颤发作，被你亮出三号球壳裂纹底单反按在榻上。",
+   "id": "cc_commander_solo_deadlock_gamble",
+   "identity_ids": [
+    "pi_abyss_submersible_copilot",
+    "pi_marine_biosphere_researcher",
+    "pi_deepsea_mechanic_contractor"
+   ],
+   "player_positions": [
+    "low",
+    "equal"
+   ],
+   "power_structure": "npc_high",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 2
+     },
+     "b": "station_commander_gu_xiongcang",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 2
+     },
+     "reason": "捏住指挥官隐瞒裂纹与脊髓震颤的死穴，在密室权力倒转。",
+     "stage": "testing"
+    }
+   ],
+   "slots": [
+    "station_commander_gu_xiongcang"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "迫使指挥官签豁免令，借生物电共感逆转威权。",
+    "limit_gap": "你受其辖制，对方却急需微电流镇压。",
+    "meeting_reason": "死锁解除后总指挥官将你传唤至高压复温舱。",
+    "resource_gap": "指挥官掌控死锁与豁免令，你手握裂纹铁证。"
+   },
+   "tags": [
+    "workplace_power",
+    "coercion_theme",
+    "intimate"
+   ],
+   "tension_engine_ids": [
+    "te_quarantine_vs_diver_rescue",
+    "te_hpns_overload_vs_neuro_taming"
+   ]
+  },
+  {
+   "chemistry": "深潜医官反锁复温舱，将纯银细链乳夹和神经共感同步塞贴上你身体，却被你识破暗戴的共感副端夺过旋钮。",
+   "id": "cc_physician_solo_hyperbaric_taming",
+   "identity_ids": [
+    "pi_abyss_submersible_copilot",
+    "pi_station_safety_officer",
+    "pi_marine_biosphere_researcher",
+    "pi_deepsea_mechanic_contractor"
+   ],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 5,
+      "trust": 3
+     },
+     "b": "subsea_physician_tan_xin",
+     "b_to_a": {
+      "tension": 5,
+      "trust": 3
+     },
+     "reason": "在反锁的复温舱水凝胶榻上共享双向神经共感同步塞回路。",
+     "stage": "intimate"
+    }
+   ],
+   "slots": [
+    "subsea_physician_tan_xin"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "在神经共感同步塞与微电流脉冲贴制衡中夺取调频主导权。",
+    "limit_gap": "震颤需医官施治，对方却对双向生物电共感成瘾。",
+    "meeting_reason": "脱困后进入高压复温舱接受失温除颤救治。",
+    "resource_gap": "医官掌握器械与适航章，你握有未报备实验把柄。"
+   },
+   "tags": [
+    "intimate",
+    "workplace_power",
+    "humiliation"
+   ],
+   "tension_engine_ids": [
+    "te_hpns_overload_vs_neuro_taming",
+    "te_hypothermia_vs_body_warmth"
+   ]
+  },
+  {
+   "chemistry": "手握淬火楔铁的管网技师待价而沽，却在辅修库神经痛发作时被你搜出私藏钛材与改装器具，攻守易位。",
+   "id": "cc_plumber_solo_wedge_extortion",
+   "identity_ids": [
+    "pi_abyss_submersible_copilot",
+    "pi_station_safety_officer",
+    "pi_marine_biosphere_researcher"
+   ],
+   "player_positions": [
+    "low",
+    "equal",
+    "high"
+   ],
+   "power_structure": "switchable",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 2
+     },
+     "b": "expedition_contractor_plumber_nie",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 2
+     },
+     "reason": "围绕淬火楔铁、三倍津贴与辅修库微电流镇痛秘密博弈。",
+     "stage": "familiar"
+    }
+   ],
+   "slots": [
+    "expedition_contractor_plumber_nie"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "拿到淬火楔铁化解水险，在暗舱用生物电调频拿捏地头蛇。",
+    "limit_gap": "无楔铁阀门难回正，对方发作时离了微电流脉冲贴寸步难行。",
+    "meeting_reason": "蝶阀打滑急需楔铁垫角，随后在辅修库交割津贴。",
+    "resource_gap": "技师掌握淬火楔铁，你掌握津贴审批或私藏铁证。"
+   },
+   "tags": [
+    "workplace",
+    "crime",
+    "intimate"
+   ],
+   "tension_engine_ids": [
+    "te_abyss_pressure_vs_claw_prying",
+    "te_hpns_overload_vs_neuro_taming"
+   ]
+  },
+  {
+   "chemistry": "断裂带学者标出负相位波谷，转头因篡改报警器与信息素微漏被你堵在居住舱舷窗前，在微电流催化下溃败。",
+   "id": "cc_geologist_solo_wave_trough_secret",
+   "identity_ids": [
+    "pi_abyss_submersible_copilot",
+    "pi_station_safety_officer"
+   ],
+   "player_positions": [
+    "equal",
+    "high"
+   ],
+   "power_structure": "equal",
+   "relations": [
+    {
+     "a": "player",
+     "a_to_b": {
+      "tension": 4,
+      "trust": 3
+     },
+     "b": "subsea_geologist_dr_wei",
+     "b_to_a": {
+      "tension": 4,
+      "trust": 3
+     },
+     "reason": "在波谷读秒中默契破阀，又因罪证与信息素过载在密室纠缠。",
+     "stage": "flirting"
+    }
+   ],
+   "slots": [
+    "subsea_geologist_dr_wei"
+   ],
+   "stakes": {
+    "irreplaceable_goal": "卡准波谷撬阀，在舷窗前用锁扣项圈与共感塞榨取矿脉密钥。",
+    "limit_gap": "波峰下压会折断指骨，学者吸入信息素后急需镇压。",
+    "meeting_reason": "借波谷撬开蝶阀后，退入居住舱核查岩芯与日志。",
+    "resource_gap": "学者掌握波谷模型，你握有篡改深度阈值日志。"
+   },
+   "tags": [
+    "disaster",
+    "intimate",
+    "coercion_theme"
+   ],
+   "tension_engine_ids": [
+    "te_abyss_pressure_vs_claw_prying",
+    "te_hpns_overload_vs_neuro_taming"
    ]
   }
  ],
@@ -393,344 +489,349 @@
    "fidelity": "distorted",
    "id": "ch_airlock_drain_pipe_echo_whisper",
    "reach": "local",
-   "text": "双向减压气闸排水主管道金属管壁震动低频回音"
+   "text": "减压气闸与复温舱之间骨传导贴耳密语及管壁低频回音"
   }
  ],
  "character_templates": [
   {
-   "adult_context": "已成年的深潜技术工程师，年满二十一岁，持有深渊载人潜水器高级潜航长执照与万米饱和潜水首席技术认证，具备完全民事与现场指挥能力。",
+   "adult_context": "已成年的深潜技术总工，年满二十五岁，持万米潜航长执照，具完全民事行为能力。",
    "age_range": [
-    21,
-    21
+    25,
+    29
    ],
    "appearance_options": [
-    "褪下重型深潜服外壳后，身着高弹力紧身防寒潜水内衣，露出一张冷艳出尘的面容，两腮带着柔和的轮廓，在冰冷刺骨的海水浸泡中苍白如雪，剧烈撬动阀门时泛出竭力喘息的绯红红晕。",
-    "扎着浸湿的墨黑马尾，纤长睫毛凝结着细小盐霜，双手紧握钛合金机械爪指骨死死别入阀槽，下颌紧绷出凌厉无畏的决绝气场。"
+    "穿墨黑贴身防寒潜服勾勒修长腰臀，冷白面庞在零度水中透出凌厉杀气，耳廓却因震颤烧起绯红。",
+    "湿黑发贴在颈侧，紧握实心钛合金机械爪指骨卡入蝶阀，胸口急促起伏。"
    ],
    "decision": {
     "avoids": [
-     "情绪崩溃的尖叫",
-     "违背水力规程的盲目蛮干"
+     "暴露震颤或器具痕迹",
+     "不敢拼命的庸才"
     ],
-    "contrast": "外表清冷高贵，面对万米水压的冰冷绝境时爆发出的意志与力量令人震撼。",
-    "core_value": "深海只相信物理参数与机械力矩，绝不屈服于恐慌与死亡。",
+    "contrast": "台前硬撼水压的统帅，密室里脉冲微跳与项圈收紧便令她腰软失语。",
+    "core_value": "深海只认力矩与钢材极限，绝不让气闸舱葬送在自己手里。",
     "goal_options": [
-     "利用机械爪指骨反向撬正水力阀芯排除积水",
-     "在内门磁力死锁前完成泄压回归主舱"
+     "用实心钛合金指骨撬正弯曲两毫米的减压阀主轴",
+     "封死超潜与神经失控把柄"
     ],
     "never": [
-     "在同乘人员生还前独自开启内门逃生"
+     "在同舱人员脱困前独自逃生"
     ],
     "prefers": [
-     "分毫不差的力矩计算",
-     "动作决绝的战术配合"
+     "分毫不差的力矩配合",
+     "替她遮住失态的掌控"
     ],
     "pressure_responses": {
-     "breaking": "用牙齿咬开微型氧气嘴将呼吸软管硬塞入副手口中",
-     "high": "整个人扑在指骨杠杆末端借身体下沉惯性死死下压",
-     "low": "在海水浸没膝盖时冷静测算减压阀主轴受剪应力偏差",
-     "mid": "果断拆解机械手钛合金指骨并在阀槽寻觅反力支点"
+     "breaking": "锁入复温舱接入神经共感同步塞与纯银细链乳夹，电流推高刹那潮红失守",
+     "high": "震颤腿软仍昂起下颌，扣紧真皮金属锁扣项圈嘴上还在冷斥",
+     "low": "冰水漫膝时冷声报出应力偏差，掩饰微颤",
+     "mid": "将实心钛合金指骨卡入槽位，后腰被抵住也咬牙不哼"
     },
-    "relationship_stance": "平日神情冷淡不近人情，但在深渊生死绝境中展现出托付生死的极致担当。",
-    "withdrawal": "退回减压舱承重肋骨凹槽处，背贴冰冷金属壁紧握钛合金指骨戒备水位暴涨。"
+    "relationship_stance": "表面冷若冰霜，被拿捏后展现嘴硬身体诚实的反差。",
+    "withdrawal": "退至肋骨凹槽，环胸压住发烫的脉冲贴戒备。"
    },
    "gender": "female",
-   "gender_reason": "深海科考站首席潜航技术主管",
+   "gender_reason": "首席潜航技术女总监，清冷孤傲的深潜权威。",
    "id": "subsea_technical_director_shen_binglan",
    "identity": {
-    "authority": "对科考站全套水力减压系统、深潜器应急破拆及减压舱门水压平衡拥有现场绝对技术终裁权。",
-    "exposure": "为了抢救地质断层核心矿样曾违规超潜水深极限三小时",
-    "hidden": "潜水服贴胸内袋里妥善封装着父亲多年前潜航失事留下的潜望镜刻度微雕",
+    "authority": "对水力减压系统与深潜器破拆拥有最高裁决权。",
+    "exposure": "曾私关警报违规超潜三小时，且隐瞒重度高压神经综合征病历。",
+    "hidden": "暗袋藏着神经共感同步塞与真皮金属锁扣项圈，震颤发作时须借脉冲与紧缚稳住双手。",
     "limits": [
-     "在双向水压未达平衡前无法强开内侧舱门",
-     "长时间浸泡在零下二度海水中面临严重的肌肉失温痉挛"
+     "超深潜航诱发急性高压神经综合征，极寒下末梢神经极易痉挛高敏",
+     "压差未平无法独自开舱，须仰赖搭档贴身施力"
     ],
     "obligations": [
-     "确保潜航机组人员及科考站万米耐压密封完整性"
+     "确保气闸舱排水平衡并护住矿芯",
+     "维持首席技术总监清冷威严"
     ],
     "resources": [
-     "深潜器取样多功能机械手实心钛合金仿生加长指骨构件",
-     "一瓶便携式深海高浓度氧氮混合应急微型呼吸气瓶"
+     "深潜器机械手实心钛合金仿生指骨构件",
+     "水密公差密钥与断裂带声呐图"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "在刺骨零度绝境中依然稳健紧随的坚实臂膀",
-     "直面死神时眼神中纯粹无杂质的绝对信任"
+     "在冰水中将她扣在怀里把钛合金指骨压到底的力量",
+     "握住她把柄与调频器时既施压又护持的侵略感"
     ],
     "boundaries": [
-     "严禁在水压失衡神经麻痹状态下产生任何越界言行",
-     "绝不以职务特权行情感索取"
+     "哪怕密室被纯银细链乳夹逼出喘息，出舱时须恢复冷傲"
     ],
     "desire_range": [
-     2,
-     4
+     4,
+     5
     ],
-    "desired_position": "冰水中失衡时被从身后揽住腰身，胸膛相贴合力握紧钛合金指骨下压。",
+    "desired_position": "被从身后揽住湿腰压动指骨，或在复温舱被项圈剥去伪装。",
     "dislikes": [
-     "贪生怕死的擅离职守",
-     "打着自保旗号剥夺旁人生路的利己主义"
+     "软弱推诿",
+     "鲁莽蛮干"
     ],
-    "expression": "脱困进入干燥加温舱后，默默扯下自己颈间的干毛巾轻轻披在对方肩头。",
+    "expression": "因微电流发抖，却昂下颌命令对方扶稳她的腰，额头抵住对方颈窝。",
     "likes": [
-     "两人合力压死撬杠时身体紧密相贴传来的温热体温",
-     "成功排水平息震动后如释重负的相视一笑"
+     "湿潜服贴紧胸膛的心跳共振",
+     "被扣紧真皮金属锁扣项圈按在复温榻上的战栗"
     ],
     "preconditions": [
-     "气闸舱水力压力表完全归零",
-     "全员安全返回常压生活舱且完成体温复苏",
-     "心意出于自己，不是深海绝境里的依赖"
+     "在气闸或复温舱内形成贴身共感或把柄博弈"
     ],
     "self_control_range": [
-     4,
+     3,
      5
     ]
    },
-   "public_role": "深海科考站技术总监",
+   "public_role": "深海科考站首席技术总监",
    "schedule": [
     {
      "from": 1380,
      "location_id": "loc_airlock_decompression_chamber",
-     "to": 1410
+     "to": 1415
     },
     {
-     "from": 1410,
-     "location_id": "loc_airlock_decompression_chamber",
+     "from": 1415,
+     "location_id": "loc_hyperbaric_medical_pod",
      "to": 1439
     }
    ],
    "situation": {
     "exits": [
      {
-      "cost": "指骨仿生齿纹严重磨损崩角，双手掌心在冰水剧烈摩擦中脱皮渗血。",
-      "option": "用钛合金机械爪指骨反向别入水压蝶阀卡槽充当一级撬杠全力撬正阀芯。"
+      "cost": "指骨崩角，潜服下微电流脉冲贴与震颤被对方察觉。",
+      "option": "拆下实心钛合金仿生指骨卡入槽位，借双人重力撬正阀芯。"
      },
      {
-      "cost": "面临极度严寒极度高压水流冲击引发的心脏骤停风险。",
-      "option": "冒死潜入淹没舱底开启底部高压泥浆旁通手动截止阀自救。"
+      "cost": "交出神经阈值控制权，在战栗中签下妥协条款。",
+      "option": "退入复温舱接受神经共感同步塞与真皮金属锁扣项圈生物电镇压。"
      }
     ],
-    "pressure": "万米海沟极寒高压水流持续漫过胸口，体内溶解氮气在水压剧变下面临气栓爆裂风险。",
-    "trigger": "海底强震破坏外置平衡管，过渡舱减压蝶阀在大压差挤压下主轴形变两毫米咬死。"
+    "pressure": "外有海水漫胸与死锁逼近，内有脊髓震颤与超潜病历曝光危机。",
+    "trigger": "强震致蝶阀主轴弯曲两毫米咬死，同时零度海水诱发她急性高压神经综合征过载。"
    },
    "tags": [
     "workplace",
     "disaster",
-    "intimate"
+    "intimate",
+    "workplace_power",
+    "humiliation"
    ],
    "voices": {
-    "inner": "主轴只卡死了两毫米……只要这根钛合金指骨不崩裂，我们绝不会被淹死在这万米深渊的铁盒子里。",
-    "surface": "别管渗水！把机械手第二个钛合金指骨拆下来！卡进蝶阀左侧复位退让销，跟我数三二一一起下压！"
+    "inner": "高压神经震颤偏在这节骨眼反噬……潜服下贴着微电流脉冲贴还在发软，绝不能被身旁那人发觉。",
+    "surface": "少管我手抖！把实心钛合金仿生指骨卡进左偏三度退让销，贴紧我后背一起压！"
    }
   },
   {
-   "adult_context": "年满二十七岁，成年深渊潜航特级潜水员，具备完全民事行为能力，拥有超过三千小时万米深潜巡航经验。",
+   "adult_context": "年满二十七岁，成年深渊潜航主驾驶员，具完全民事行为能力。",
    "age_range": [
     27,
-    30
+    33
    ],
    "appearance_options": [
-    "体格健硕肩宽背阔，深潜防寒背心被海水浸透紧贴在精壮肌肉上，短发挂着水珠，神色沉稳冷冽如深潭。",
-    "手臂布满深潜器高压油管刮擦的浅淡伤痕，右手稳稳扣住减压阀门外框，呼吸沉重有力。"
+    "体格精悍，防寒背心湿透紧贴肌理，眼神锐利。",
+    "腰挂合金割刀与共感调频盒，扣住阀门的手背青筋暴起。"
    ],
    "decision": {
     "avoids": [
-     "优柔寡断的推诿",
-     "无谓的牺牲与投降"
+     "官僚冷血",
+     "松开撬杠的懦夫"
     ],
-    "contrast": "平日在基地里寡言少语严肃如石雕，在生死攸关的冰冷舱底行动迅捷如出水猎豹。",
-    "core_value": "人在艇在，保护技术主管和同舱伙伴是潜航长的天职。",
+    "contrast": "平时沉默像铁塔，进球舱后呼吸充满侵略张力。",
+    "core_value": "深海下只有手里的力矩和身边人的体温不骗人。",
     "goal_options": [
-     "协助总师稳固力矩撬正减压主轴",
-     "用身体堵截高压渗水喷射点"
+     "扣紧实心钛合金指骨与同伴撬开蝶阀",
+     "利用黑匣与共感代偿将上位者拖入同盟"
     ],
     "never": [
-     "松开握住撬杠的双手任由总师独自承受重压"
+     "阀门撬开前松开双手"
     ],
     "prefers": [
-     "心照不宣的并肩死战",
-     "雷厉风行的纯力学解法"
+     "贴身力矩配合",
+     "在生物电共感中交锋的对手"
     ],
     "pressure_responses": {
-     "breaking": "用合金割刀刀背重重敲击变形主轴配合指骨撬动",
-     "high": "用宽阔后背死死顶住喷射高压冷水的法兰裂隙",
-     "low": "在海水漫及大腿时稳稳托住总师避免其滑倒",
-     "mid": "双手全力握住钛合金指骨外侧充当主要发力臂"
+     "breaking": "在球舱反客为主，或被拿住晶核把柄扣上锁扣项圈屈服",
+     "high": "痉挛袭来时露出微电流脉冲贴，逼对方接入共感回路",
+     "low": "漫腿时扣住同伴腰带稳住重心",
+     "mid": "覆在对方手背握死钛合金指骨硬压"
     },
-    "relationship_stance": "对总师严谨的技术造诣深怀倾慕与敬佩，愿在生死关头为其提供无条件的绝对支撑。",
-    "withdrawal": "退守至减压舱排水口上方，双脚死死卡住承重钢条充当人形防波堤。"
+    "relationship_stance": "既能扛钢缆，也会在复温时索取共感控制权的野性搭档。",
+    "withdrawal": "退守排水口旁，按住割刀与调频盒审视。"
    },
    "gender": "any",
    "gender_reason": null,
    "id": "deepsea_pilot_lu_chengyuan",
    "identity": {
-    "authority": "对深潜器推进动力、下潜配重抛载及水下生命维持仪表拥有现场全权处置权。",
-    "exposure": "为了掩护年轻科考员曾违抗地面指挥中心提前浮起指令",
-    "hidden": "随身储物盒里藏着一枚雕刻着总师名字缩写的深海黑曜石吊坠",
+    "authority": "对深潜器动力、机械手拆解及球舱黑匣拥有处置权。",
+    "exposure": "私自截留高纯度稀土晶核样本，藏在工具箱底。",
+    "hidden": "随身备着已配对的真皮金属锁扣项圈与调频器。",
     "limits": [
-     "在水下密闭空间内极度消耗氧气储备",
-     "身体重度受寒导致手指灵敏度持续衰减"
+     "水下发力极耗血氧，面临氦氧神经震颤反噬",
+     "曾替总监掩盖超潜航迹，黑匣上交将吊销执照"
     ],
     "obligations": [
-     "将潜水器采集的深渊稀土核心晶核平安护送回站内"
+     "确保同舱人员走出气闸舱",
+     "守护采集的万米稀土晶核"
     ],
     "resources": [
-     "一柄重型高硬度潜水合金割刀",
-     "两袋军用高热量生热暖贴包"
+     "高硬度潜水合金割刀与球舱锁钥",
+     "微电流脉冲贴与神经共感同步塞调频终端"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "在万米水压极度窒息面前永不言弃的高贵眼眸",
-     "彼此生死相依时滚烫的体温交融"
+     "绝境里咬牙不屈的眉眼",
+     "看破{npc.ta}晶核底牌并拿调频器反制{npc.ta}的狠劲"
     ],
     "boundaries": [
-     "恪守职业潜水员尊严与分寸",
-     "不以救命恩情作非分要挟"
+     "不容外人毁损深潜器构件"
     ],
     "desire_range": [
-     1,
-     2
+     3,
+     5
     ],
-    "desired_position": "整个人在冰水深处从后方将总师揽入怀抱借体重共同反向猛拉钛合金指骨扳手。",
+    "desired_position": "从后方箍紧对方扳动指骨，或在球舱掌控脉冲。",
     "dislikes": [
-     "官僚式的事后问责",
-     "背弃战友的懦夫举动"
+     "袖手旁观",
+     "外行瞎指挥"
     ],
-    "expression": "一把将湿透的防寒外套撕下裹在总师颤抖的双肩上，手掌隔着厚呢绒轻轻用力捏紧。",
+    "expression": "掌心覆上对方后颈，把耳机贴在锁骨低声倒数。",
     "likes": [
-     "绝境中两人手臂贴合传来的搏动心跳",
-     "脱险后抹去对方额前碎发冰水的瞬间"
+     "冰水中湿透相贴的滚烫战栗",
+     "在球舱调高神经共感同步塞频率听对方闷哼"
     ],
     "preconditions": [
-     "彻底排除气闸水漫舱顶危机",
-     "两人均通过加压氧舱神经功能完整性评估"
+     "并肩破拆或握有彼此超潜与晶核死穴"
     ],
     "self_control_range": [
      3,
      4
     ]
    },
-   "public_role": "深海载人潜水器主驾驶",
+   "public_role": "深海载人潜水器首席主驾驶",
    "schedule": [
     {
      "from": 1380,
      "location_id": "loc_airlock_decompression_chamber",
+     "to": 1415
+    },
+    {
+     "from": 1415,
+     "location_id": "loc_submersible_docking_bay",
      "to": 1439
     }
    ],
    "situation": {
     "exits": [
      {
-      "cost": "高硬度合金割刀应力集中折断，崩起碎片割伤{npc.name}小臂肌肉。",
-      "option": "用合金割刀反向插入指骨与蝶阀轴肩之间充当第二支点强力别动。"
+      "cost": "割刀崩裂划伤小臂，诱发重度神经痉挛需共感镇压。",
+      "option": "用合金割刀充当第二支点合力撬开阀门。"
      },
      {
-      "cost": "遭受极寒海水瞬间刺激诱发剧烈心肌血管痉挛。",
-      "option": "将身体完全潜入零下水下拉拽卡死的水力旁通链条自救。"
+      "cost": "被对方掌握生物电遥控阈值与黑匣大权。",
+      "option": "在球舱交出晶核分润权并戴真皮金属锁扣项圈受校准。"
      }
     ],
-    "pressure": "冰冷海水即将没过两人前胸，主轴若不在五分钟内复位，水压将彻底压碎内门密封法兰。",
-    "trigger": "气闸舱内水位突破一米警戒线，深潜器固定钢缆发出即将绷断的凄厉哀鸣。"
+    "pressure": "五分钟内不撬正将被永封，脱困后须应付审计与神经震颤反噬。",
+    "trigger": "水位突破警戒，同时私藏晶核与超潜黑匣面临清查。"
    },
    "tags": [
     "disaster",
+    "workplace",
+    "intimate",
     "crime"
    ],
    "voices": {
-    "inner": "总师不能死在这里。这个人属于更浩瀚的深海，只要我还有一口气，就算用骨头填我也要把这道阀门扳开。",
-    "surface": "总师！你踩着我的膝盖找准齿槽！指骨我来扣紧，你下达指令，哪怕把手骨震裂我也给你压下去！"
+    "inner": "高压神经震颤在啃脊梁骨了……等进了复温舱，看{player.ta}还能撑多久。",
+    "surface": "踩稳膝盖找准齿槽！钛合金指骨我扣死，数到三把重量压上来！"
    }
   },
   {
-   "adult_context": "年满四十二岁，深海基站最高安全指挥官，完全民事行为能力人，具备二十年水下工程管理经验。",
+   "adult_context": "年满三十八岁，深海基站最高指挥官，完全民事行为能力人。",
    "age_range": [
-    42,
-    46
+    38,
+    45
    ],
    "appearance_options": [
-    "身穿带有高保暖发热涂层的深蓝基地防寒常服，面容刚毅面颊消瘦，两鬓染霜，神情严峻地站在减压窗前。",
-    "手里捏着控制台全站自毁隔离的手动安全电钥匙，眼神在规章与生命之间剧烈挣扎。"
+    "身着深蓝指挥官常服，立于观测廊石英窗前俯瞰气闸舱。",
+    "手捏永封磁力死锁电钥匙，领口下可见微电流脉冲贴印记。"
    ],
    "decision": {
     "avoids": [
-     "无组织无纪律的冒进",
-     "临阵脱逃的懦夫"
+     "捅出裂纹的叛徒",
+     "无能哗变"
     ],
-    "contrast": "看似墨守成规不苟言笑的冷面指挥官，在生死大限前敢于押上全部政治前途抗命。",
-    "core_value": "保全基地是最高职责，但绝不轻弃自己一手栽培的骨干手足。",
+    "contrast": "窗前铁腕裁决生死的指挥官，旧疾发作被拧高脉冲时连咽喉都闷哼发颤。",
+    "core_value": "基站是海底孤立帝国，每具躯体的耐受极限都须攥在掌心。",
     "goal_options": [
-     "推迟关闭内门磁力死锁争取破拆时间",
-     "启动备用微型循环泵降低内侧压差"
+     "逼舱内破拆并收缴黑匣",
+     "压下球壳裂纹底单，将对手锁进复温舱"
     ],
     "never": [
-     "在最后一秒倒计时到来前过早放弃舱内同志"
+     "主动交出总控钥匙"
     ],
     "prefers": [
-     "严谨精准的技术决断",
-     "泰山崩于前而不动声色的定力"
+     "狠辣的技术骨干",
+     "肯在密室低头的聪明人"
     ],
     "pressure_responses": {
-     "breaking": "冒着海水涌入主廊的风险手动扳下内门机械应急放行手柄",
-     "high": "亲自走到控制台手动操纵旁通增压阀试图分担外侧水压",
-     "low": "在观测窗前用声学对讲机向气闸舱通报形变位移参数",
-     "mid": "顶住管委会特派员的施压拒绝提前按下隔离浇封电闸"
+     "breaking": "裂纹底单拍上胸口后反锁在榻，脖挂真皮金属锁扣项圈发颤签下放行令",
+     "high": "脊髓震颤发作，退入复温舱贴上微电流脉冲贴",
+     "low": "用骨传导报出形变参数并倒计时",
+     "mid": "按住安全官的手，以免责权开出私密条件"
     },
-    "relationship_stance": "严厉威严的家长式长官，对总师视如己出充满器重与期待。",
-    "withdrawal": "站在观测廊正中央，双手背在身后凝视着汹涌的海水水位线。"
+    "relationship_stance": "居高临下的统帅，王牌也须承受他的锁扣与调频。",
+    "withdrawal": "负手立于主控台阴影处，摩挲死锁电钥匙。"
    },
    "gender": "male",
-   "gender_reason": "深海科考站安全指挥长官",
+   "gender_reason": "深海科考站铁腕总指挥官，掌控隔舱死锁的上位威权者。",
    "id": "station_commander_gu_xiongcang",
    "identity": {
-    "authority": "对科考站全区域水密隔舱隔离封死及深潜器人员搜救拥有最高动员与否决权。",
-    "exposure": "因隐瞒基站外壳微裂纹事故曾受国家海洋局严厉训诫",
-    "hidden": "当年正是{npc.name}力排众议将总师破格提拔为最年轻的技术总监",
+    "authority": "对隔舱永封死锁、旁通泄压及禁闭拥有最高指挥权。",
+    "exposure": "曾隐瞒三号耐压球壳裂纹报告，上报将被撤职。",
+    "hidden": "常借复温核查在高压复温舱对下属实施生物电驯服。",
     "limits": [
-     "必须优先保证全站五十名驻留人员生存区免遭海水压溃",
-     "隔着有机玻璃窗无法进行物理施援"
+     "隔窗无法直接替舱内拧动阀芯",
+     "患慢性高压脊髓震颤旧疾，须靠微电流镇压"
     ],
     "obligations": [
-     "坚守深海万米科考基地的水密安全红线不破"
+     "保住核心区与稀土数据",
+     "压服督察逼宫"
     ],
     "resources": [
-     "一套独立外置的高压水力平衡旁通电动增压控制面板",
-     "科考站战时自保封闭总开关"
+     "旁通增压面板与永封死锁电钥匙",
+     "特级抢险豁免令签发权"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "泰山压顶面不改色的统帅气魄",
-     "在规则与仁义间的崇高博弈"
+     "冰水中昂首对视的凌厉眼神",
+     "敢拿裂纹底单逼进复温舱拧高脉冲档位的胆魄"
     ],
     "boundaries": [
-     "恪守上下级铁律与职业操守",
-     "杜绝私相授受与包庇违纪"
+     "舱门外须维持指挥官威严，臣服只留密室"
     ],
     "desire_range": [
-     0,
-     0
+     3,
+     5
     ],
-    "desired_position": "在观测台后方紧握通话器，目光如炬大声指挥辅助系统配合气闸舱撬动作业。",
+    "desired_position": "在复温舱掌控旋钮，或被按在窗边承受高压脉冲。",
     "dislikes": [
-     "推脱责任的软弱之辈",
-     "践踏同袍的自私言论"
+     "空头说教",
+     "挑战威信"
     ],
-    "expression": "隔着厚重的石英玻璃窗，默默抬起右手向舱内二人敬了一个深沉肃穆的军礼。",
+    "expression": "冷脸把人拽进复温舱反锁，或被反扣时溢出闷哼。",
     "likes": [
-     "利落规范的深潜手势报告",
-     "万米探宝归航后的胜利捷报"
+     "令下属在复温舱佩戴纯银细链乳夹与共感塞的支配感",
+     "威权被击穿时混杂屈辱与酥麻的失控感"
     ],
     "preconditions": [
-     "气闸舱完成彻底排水且内门安全咬合",
-     "科考站全域水密气压恢复常态"
+     "围绕死锁开关、裂纹把柄或豁免令对赌"
     ],
     "self_control_range": [
-     5,
+     4,
      5
     ]
    },
-   "public_role": "科考站总指挥官",
+   "public_role": "深海科考站最高指挥长官",
    "schedule": [
     {
      "from": 1380,
@@ -741,391 +842,414 @@
    "situation": {
     "exits": [
      {
-      "cost": "违反极地与深海安全总则将接受司法调查审查。",
-      "option": "强行拔掉自动封门定时器的控制主板保险丝延迟闭锁程序。"
+      "cost": "落下违纪铁证，须与知情者达成封口契约。",
+      "option": "拔掉定时器保险丝并启动旁通管分流。"
      },
      {
-      "cost": "导致观测长廊地面轻度浸水损坏部分精密电子记录仪。",
-      "option": "手动启动主廊泄压旁通管为气闸舱分流部分高压积水。"
+      "cost": "指挥官的威严在密室共感战栗中彻底失守。",
+      "option": "在复温舱交出豁免令，接受微电流脉冲贴与神经共感同步塞镇压。"
      }
     ],
-    "pressure": "若五分钟内压差不平衡，自动防漫灌隔离门将永久锁死，将舱内二人封入水下绝地。",
-    "trigger": "气闸舱水位警报触动基地安全协议最高警戒条目。"
+    "pressure": "须在防漫灌与保骨干间走钢丝，且脊髓震颤濒临爆发。",
+    "trigger": "水位触发隔离协议，同时三号球壳裂纹底单面临外泄。"
    },
    "tags": [
     "workplace_power",
-    "workplace"
-   ],
-   "voices": {
-    "inner": "这两个年轻人是基地的未来，万米深海的秘密还在等着，我绝不能让这扇门变成两人的水下棺材。",
-    "surface": "总师！还有驾驶员！观测台显示主轴形变两点一毫米！不要硬拔，反向卡住复位槽逆向撬！我给你们守住最后五分钟！"
-   }
-  },
-  {
-   "adult_context": "年满四十八岁，成年老潜水技工，具有三十年水下管道高压密封施工资历，完全民事行为能力人。",
-   "age_range": [
-    48,
-    52
-   ],
-   "appearance_options": [
-    "身材短粗粗壮有力，双手骨节粗大布满老茧，身着满是油污的灰色帆布工装，嘴唇干裂眼神精悍。",
-    "腰带上挂着各色止水橡胶环与敲击铜锤，常年潮湿的水下作业使其带有老派工匠的执拗。"
-   ],
-   "decision": {
-    "avoids": [
-     "纸上谈兵的空头理论家",
-     "弄虚作假的次品配件"
-    ],
-    "contrast": "平时满嘴脏话粗鲁不堪的老工人，在讲起高压金属屈服应力时眼睛放光如顶级学者。",
-    "core_value": "管子会喘气，阀门会记仇，干了三十年管道，老管工只信手上摸出来的那点偏差。",
-    "goal_options": [
-     "指导总师利用楔铁找准偏摆角度撬正主轴",
-     "抢修外围旁通冲洗管道"
-    ],
-    "never": [
-     "在同伴身陷水险时藏私藏技"
-    ],
-    "prefers": [
-     "扎实过硬的一线动手能力",
-     "不怕脏不怕死的血性"
-    ],
-    "pressure_responses": {
-     "breaking": "在观测廊疯狂合上备用液压千斤顶助力排水分流",
-     "high": "用沙哑大嗓门吼出机械手仿生齿纹的最佳卡死位置",
-     "low": "隔着玻璃窗大声敲打钢管比划施力角度",
-     "mid": "从工具窗口塞入淬火耐磨承载楔铁与润滑膏"
-    },
-    "relationship_stance": "打心眼里佩服不怕死、懂机械的总师，视其为少有的真正内行。",
-    "withdrawal": "靠在观测廊高压减压支管阀门旁，大口喘着粗气擦拭铜锤。"
-   },
-   "gender": "male",
-   "gender_reason": "深海站特种水工管道老技师",
-   "id": "expedition_contractor_plumber_nie",
-   "identity": {
-    "authority": "对基站全部水力减压阀门内部机械装配图纸与冷冲压公差拥有丰富实操经验。",
-    "exposure": "私自截留部分退役高强度钛合金管材制造个人潜水潜刀",
-    "hidden": "深知这座双向气闸平衡阀在极端受压时会向右侧偏摆三度的装配缺陷",
-    "limits": [
-     "受限于患有严重的减压性骨坏死关节行动迟缓",
-     "文化程度不高不善表达理论逻辑"
-    ],
-    "obligations": [
-     "维持基站庞大复杂的深海冷凝水回流泵组运转"
-    ],
-    "resources": [
-     "一桶超高压螺纹防咬死二硫化钨润滑膏",
-     "一套特种淬火耐磨承载楔铁"
-    ]
-   },
-   "intimacy_tendency": {
-    "attraction_sources": [
-     "对硬核机械工程的共同执着与默契",
-     "在危局中毫不犹豫挽起袖子发力的气魄"
-    ],
-    "boundaries": [
-     "恪守老工人长辈本分不越矩",
-     "不介入年轻人的私人情感纠缠"
-    ],
-    "desire_range": [
-     0,
-     0
-    ],
-    "desired_position": "在隔离长廊隔窗焦急拍击玻璃，高举手中的淬火楔铁指点阀槽反向退让间隙。",
-    "dislikes": [
-     "轻视基层工人的傲慢神态",
-     "粗制滥造的蛮干破坏"
-    ],
-    "expression": "用沾满机油的粗手用力抹了一把脸，对着脱困的两人咧开大嘴竖起大拇指。",
-    "likes": [
-     "金属齿槽严丝合缝的脆响",
-     "脱险后用热茶冲开劣质烟丝的辛辣"
-    ],
-    "preconditions": [
-     "彻底排除阀门咬死形变危机",
-     "确保全体作业人员四肢关节无大碍"
-    ],
-    "self_control_range": [
-     5,
-     5
-    ]
-   },
-   "public_role": "科考站管网首席机械工",
-   "schedule": [
-    {
-     "from": 1380,
-     "location_id": "loc_station_decompression_corridor",
-     "to": 1439
-    }
-   ],
-   "situation": {
-    "exits": [
-     {
-      "cost": "在冰水中盲插楔铁双手被锋利刃口割开数道深口。",
-      "option": "从应急工具槽取出{npc.name}递入的淬火硬化楔铁垫入齿槽纠偏撬正。"
-     },
-     {
-      "cost": "润滑膏在冰水中极度粘稠难以推挤耗尽体力。",
-      "option": "将超高压二硫化钨润滑膏涂抹在阀芯导向套表面缓解干磨咬合。"
-     }
-    ],
-    "pressure": "若不及时垫入耐磨楔铁纠正偏摆角度，指骨仿生齿纹将在高压下被彻底抹平滑丝。",
-    "trigger": "阀芯在巨大不对称水压下发生三度偏摆，机械爪指骨直接下压面临打滑崩脱。"
-   },
-   "tags": [
     "workplace",
-    "crime"
+    "coercion_theme",
+    "intimate"
    ],
    "voices": {
-    "inner": "好姑娘，手够稳！这根钛合金爪子要是使对了劲，几十吨水压也得给老子让路！",
-    "surface": "总师！听{npc.name}的！那个蝶阀受压时往右偏了三度！用钛合金指骨顶住右下角第三个受力肋，垫上我的硬化楔铁反着别！"
+    "inner": "三号球壳裂纹底单落在了{player.ta}手里……必须把人扣在复温舱摆平。",
+    "surface": "死锁还有三分钟落栓！撬开了超潜账勾销，撬不开谁也别进门！"
    }
   },
   {
-   "adult_context": "年满二十六岁，持有国家潜水高压医学专科执业证书的女医官，具备完全民事行为能力。",
-   "age_range": [
-    26,
-    28
-   ],
-   "appearance_options": [
-    "身穿带有红十字标识的白色加温绝缘白大褂，面容清秀神情紧绷，戴着医用无菌手套，双手握着便携式高压注氧仪。",
-    "神情专注而果决，额前垂下几缕碎发，脖子上挂着高敏数字听诊器与体温监测仪。"
-   ],
-   "decision": {
-    "avoids": [
-     "情绪失控的剧烈挣扎",
-     "隐瞒伤情的硬撑蛮干"
-    ],
-    "contrast": "外表温柔纤弱的文职女医生，在遭遇大事故急救时下针稳准狠如冷面判官。",
-    "core_value": "生命体征就是最高法典，绝不放弃任何一个尚有微弱心跳的潜航员。",
-    "goal_options": [
-     "指导舱内二人通过呼吸节律对抗氮气气栓",
-     "在内门开启瞬间实施高压复温抢救"
-    ],
-    "never": [
-     "在潜水员尚有呼吸时签署放弃抢救文书书面声明"
-    ],
-    "prefers": [
-     "严谨平稳的心率曲线",
-     "遵从医嘱的冷静配合"
-    ],
-    "pressure_responses": {
-     "breaking": "顶着被高压水雾喷溅的危险冲到门缝前递送应急呼吸嘴",
-     "high": "将体温复苏水毯推至隔离门前准备承接休克伤员",
-     "low": "在观测窗外举起电子写字板提示减压深呼吸频次",
-     "mid": "隔窗指点驾驶员如何用按压穴位缓解总师肌肉抽搐"
-    },
-    "relationship_stance": "将总师视为亲密的姐妹与敬重的手足，对潜航员的安危高度关切。",
-    "withdrawal": "退守至复温治疗台前，迅速核对加压舱氧分压配比阀门。"
-   },
-   "gender": "female",
-   "gender_reason": "深海基地高压氧舱专业主治女医官",
-   "id": "subsea_physician_tan_xin",
-   "identity": {
-    "authority": "对潜航人员减压病抢救方案、抗休克注射及加压加温舱启闭享有最高医疗指挥权。",
-    "exposure": "曾私自调用高压氧舱为患有减压骨坏死的老技工进行非定点保守治疗",
-    "hidden": "随身急救包内封存着自己亲手调配的深海极寒肌肉解痉外用透皮喷雾",
-    "limits": [
-     "在水下高压舱未恢复常压前无法实施侵入性外科手术",
-     "体能有限无法搬运重型破拆工具"
-    ],
-    "obligations": [
-     "保障全体深潜归航人员零瘫痪、零气栓存活"
-    ],
-    "resources": [
-     "两支浓缩神经保护抗惊厥针剂",
-     "一台便携式微型经皮血氧红外连续监测仪"
-    ]
-   },
-   "intimacy_tendency": {
-    "attraction_sources": [
-     "在极端生理剧痛下依然保持的神志清明",
-     "彼此舍命相护的崇高人性光辉"
-    ],
-    "boundaries": [
-     "严守医患职业伦理",
-     "不以医疗资源调配进行利益交换"
-    ],
-    "desire_range": [
-     0,
-     0
-    ],
-    "desired_position": "在观测窗前隔着玻璃双手按在总师对应的掌印位置，大声引导其进行深腹式吸气。",
-    "dislikes": [
-     "漠视生命的官僚冷血",
-     "因恐惧造成的踩踏抢夺"
-    ],
-    "expression": "用温热的手掌轻柔按揉对方冻僵的眉心，柔声安抚其紧绷的神经脉搏。",
-    "likes": [
-     "平稳有力的窦性心律",
-     "脱险后第一口温热电解质水的吞咽声"
-    ],
-    "preconditions": [
-     "气闸舱彻底完成泄压排水且伤员体温回升至三十六度",
-     "全员脱离急性气栓危险期"
-    ],
-    "self_control_range": [
-     5,
-     5
-    ]
-   },
-   "public_role": "深潜医学保障主治医官",
-   "schedule": [
-    {
-     "from": 1380,
-     "location_id": "loc_station_decompression_corridor",
-     "to": 1439
-    }
-   ],
-   "situation": {
-    "exits": [
-     {
-      "cost": "分担部分破拆精力导致撬动力矩节拍轻微延缓。",
-      "option": "通过声学广播引导舱内二人同频深呼吸并相互按压合谷穴解痉自救。"
-     },
-     {
-      "cost": "投料口微启导致少量冷凝水喷溅损坏医用显示屏。",
-      "option": "把一支加温的葡萄糖注射笔从投料窗塞进去，让总师扎在大腿外侧撑住血糖。"
-     }
-    ],
-    "pressure": "若不及时进行减压深呼吸引导，剧烈气栓将诱发不可逆脊髓神经麻痹。",
-    "trigger": "气闸舱内人员血氧饱和度跌破百分之八十五警戒红线。"
-   },
-   "tags": [
-    "workplace",
-    "disaster"
-   ],
-   "voices": {
-    "inner": "只要两人把阀门撬开，哪怕全身冻僵了，我也一定把人从阎王爷手里抢回来。",
-    "surface": "总师，听我的节拍！别跟着水压喘，鼻子吸、嘴巴呼，一口气含住数到三再放！"
-   }
-  },
-  {
-   "adult_context": "年满三十五岁，深海极端地质与断层应力分析专家，具备完全民事行为能力。",
+   "adult_context": "年满三十五岁，成年特种水工高压管网首席技师，完全民事行为能力人。",
    "age_range": [
     35,
+    48
+   ],
+   "appearance_options": [
+    "身形敦实，指节布满老茧，领口露出微电流脉冲贴。",
+    "腰挂淬火楔铁与铜锤，眼神精明刁钻。"
+   ],
+   "decision": {
+    "avoids": [
+     "官僚推诿",
+     "外行蛮干"
+    ],
+    "contrast": "平日粗粝硬汉，被微电流脉冲贴与纯银细链乳夹镇痛时绷紧筋骨粗喘。",
+    "core_value": "阀门往哪偏三度只有我知道，想拿淬火楔铁先拿筹码换。",
+    "goal_options": [
+     "递入淬火楔铁换取三倍津贴与免责",
+     "用管网死穴逼精英在辅修库暗舱低头"
+    ],
+    "never": [
+     "没拿到筹码前白交验收单"
+    ],
+    "prefers": [
+     "懂机械应力的行家",
+     "拿免责或共感交易的爽快人"
+    ],
+    "pressure_responses": {
+     "breaking": "被搜出私藏钛芯铁证，按在台前拧到最高脉冲档交出底牌",
+     "high": "跌进辅修库抓起微电流脉冲贴按向颈侧，手抖着摸向真皮金属锁扣项圈止颤",
+     "low": "隔窗敲钢管，报出右偏三度要价",
+     "mid": "将淬火楔铁卡在滑槽口逼对方应下条件"
+    },
+    "relationship_stance": "只认筹码的刁钻地头蛇，七寸被抓便在电流下服软的硬骨头。",
+    "withdrawal": "靠在支管旁把玩淬火楔铁冷笑。"
+   },
+   "gender": "any",
+   "gender_reason": null,
+   "id": "expedition_contractor_plumber_nie",
+   "identity": {
+    "authority": "对减压阀装配图、公差及排污泵拥有实操权。",
+    "exposure": "私自截留高纯度钛合金阀芯，并在暗格改装微电流器具。",
+    "hidden": "捏着当年接收瑕疵蝶阀的回扣验收单复印件。",
+    "limits": [
+     "患重度减压神经痛与震颤，须靠生物电与紧缚镇痛",
+     "外包身份受制于经费审批"
+    ],
+    "obligations": [
+     "指导撬正偏摆三度主轴",
+     "替外包组争取三倍风险津贴"
+    ],
+    "resources": [
+     "特种淬火耐磨楔铁与二硫化钨润滑膏",
+     "蝶阀出厂右偏三度缺陷底稿"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "冰水里接住楔铁卡准三度偏摆的身手",
+     "拿私藏钛材罪证逼{npc.ta}扣上锁扣项圈的压迫感"
+    ],
+    "boundaries": [
+     "管网图纸解释权绝不外传"
+    ],
+    "desire_range": [
+     3,
+     5
+    ],
+    "desired_position": "在暗舱将精英按在台前索酬，或受电脉冲调教。",
+    "dislikes": [
+     "清高架子",
+     "空头支票"
+    ],
+    "expression": "摩挲对方手腕，或在脉冲轰击下死抓工作台认栽。",
+    "likes": [
+     "隔着湿潜服扣住上位者腰际指导发力",
+     "被微电流脉冲贴与神经共感同步塞接管反射的解脱"
+    ],
+    "preconditions": [
+     "围绕淬火楔铁、津贴或私藏钛材把柄捆绑"
+    ],
+    "self_control_range": [
+     2,
+     4
+    ]
+   },
+   "public_role": "科考站高压管网首席技师",
+   "schedule": [
+    {
+     "from": 1380,
+     "location_id": "loc_station_decompression_corridor",
+     "to": 1410
+    },
+    {
+     "from": 1410,
+     "location_id": "loc_submersible_docking_bay",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "暴露隐瞒缺陷，须向知情者让渡津贴或验收单。",
+      "option": "从滑槽塞入淬火楔铁，隔窗吼出三度偏摆撬动死穴。"
+     },
+     {
+      "cost": "沦为对方在管网维护与密室博弈中的贴身共犯。",
+      "option": "在辅修库接受神经共感同步塞与纯银细链乳夹镇痛换取不举报。"
+     }
+    ],
+    "pressure": "不递楔铁气闸将锁死，暴露私藏器具将被拘押。",
+    "trigger": "蝶阀偏摆卡住指骨，同时三倍津贴与私藏钛芯旧账面临摊牌。"
+   },
+   "tags": [
+    "workplace",
+    "crime",
+    "intimate",
+    "coercion_theme"
+   ],
+   "voices": {
+    "inner": "减压神经痛又犯了……得回辅修库把微电流脉冲贴和共感塞开到最大。",
+    "surface": "蝶阀出厂右偏三度！想要淬火楔铁，先把免责单和私密条件应下来！"
+   }
+  },
+  {
+   "adult_context": "年满二十六岁，持国家深潜高压医学执业证书的成年女医官，具完全民事行为能力。",
+   "age_range": [
+    26,
+    32
+   ],
+   "appearance_options": [
+    "穿白色医疗制服，手套下握着微电流脉冲调频器。",
+    "乌发挽起露出白皙后颈，领口下暗扣真皮金属锁扣项圈。"
+   ],
+   "decision": {
+    "avoids": [
+     "损毁生物电器械",
+     "记录外泄"
+    ],
+    "contrast": "宣读医嘱冷静如手术刀，双向共感接通一瞬连白大褂下的乳夹都在灼烫。",
+    "core_value": "深渊里只有共感电流与体温能决定谁清醒、谁臣服。",
+    "goal_options": [
+     "开门瞬间将伤员锁入复温舱接管身体",
+     "掩盖共感实验记录，将知情者变成搭档"
+    ],
+    "never": [
+     "脱离气栓风险前中断复温"
+    ],
+    "prefers": [
+     "充满张力的潜航躯体",
+     "共享双向脉冲的共犯"
+    ],
+    "pressure_responses": {
+     "breaking": "被夺调频器按在榻上，衣下神经共感同步塞推至峰值求饶",
+     "high": "反锁复温舱剥去湿潜服，贴上纯银细链乳夹与微电流脉冲贴",
+     "low": "举屏指示呼吸节拍，锁定发颤指尖",
+     "mid": "塞入增敏针剂，要求脱困后进复温舱"
+    },
+    "relationship_stance": "深谙羞耻阈值的捕食者；被夺调频器即化作顺从猎物。",
+    "withdrawal": "退回控制台擦拭纯银细链乳夹掩去红晕。"
+   },
+   "gender": "female",
+   "gender_reason": "深海基站高压医学主治女医官，掌控生理死穴的医疗裁决者。",
+   "id": "subsea_physician_tan_xin",
+   "identity": {
+    "authority": "对神经综合征评估、复温舱隔离及适航签章享有一票否决权。",
+    "exposure": "曾私自开展高敏生物电共感实验，并篡改总监神经档案。",
+    "hidden": "诊疗台锁着双人共感同步塞主副端，除颤时自己衣下也会同步接入副端。",
+    "limits": [
+     "体能无法破拆，须靠工程组维持水密",
+     "自身对高频生物电共感产生隐秘成瘾依赖"
+    ],
+    "obligations": [
+     "防急性氮气栓塞",
+     "在复温舱完成生物电镇压"
+    ],
+    "resources": [
+     "医疗级神经共感同步塞、纯银细链乳夹、微电流脉冲贴与真皮金属锁扣项圈",
+     "抗休克针剂与信息素解毒剂"
+    ]
+   },
+   "intimacy_tendency": {
+    "attraction_sources": [
+     "刚从冰水脱困的侵略性喘息",
+     "识破她暗戴共感副端并按下最高频键的掌控力"
+    ],
+    "boundaries": [
+     "调教须在心率安全窗口内"
+    ],
+    "desire_range": [
+     4,
+     5
+    ],
+    "desired_position": "在复温舱掌控受术者，或被反夺调频器承受双向电流。",
+    "dislikes": [
+     "硬撑不遵医嘱",
+     "外行指手画脚"
+    ],
+    "expression": "指尖抚过锁骨上的真皮金属锁扣项圈，轻柔报出毫安数。",
+    "likes": [
+     "用纯银细链乳夹与微电流脉冲贴试探极限",
+     "双向神经共感同步塞同频失控的快感"
+    ],
+    "preconditions": [
+     "进入复温舱执行校准并握有彼此把柄"
+    ],
+    "self_control_range": [
+     3,
+     4
+    ]
+   },
+   "public_role": "深潜高压医学主治医官",
+   "schedule": [
+    {
+     "from": 1380,
+     "location_id": "loc_station_decompression_corridor",
+     "to": 1405
+    },
+    {
+     "from": 1405,
+     "location_id": "loc_hyperbaric_medical_pod",
+     "to": 1439
+    }
+   ],
+   "situation": {
+    "exits": [
+     {
+      "cost": "自身衣下共感副端被同步激活，暴露成瘾体质。",
+      "option": "在复温舱启用神经共感同步塞、纯银细链乳夹与微电流脉冲贴。"
+     },
+     {
+      "cost": "沦为随叫随到的私密共感调频伴侣。",
+      "option": "交出适航签章，任对方掌控自己真皮金属锁扣项圈密钥。"
+     }
+    ],
+    "pressure": "须接管伤员实施镇压，并封口防实验败露。",
+    "trigger": "减压病与神经震颤爆发，同时她的共感实验记录面临审计。"
+   },
+   "tags": [
+    "workplace",
+    "intimate",
+    "workplace_power",
+    "humiliation"
+   ],
+   "voices": {
+    "inner": "雾化门一落锁，电极两端便连在同一条心率线上——衣下那枚共感副端也在等那一刻发烫。",
+    "surface": "撬开阀门就跨进我的高压复温舱，高压神经震颤我都能让你们稳下来。"
+   }
+  },
+  {
+   "adult_context": "年满三十一岁，深海极端地质首席学者，具完全民事行为能力。",
+   "age_range": [
+    31,
     38
    ],
    "appearance_options": [
-    "戴着一副防雾深海护目镜，身着深灰色耐磨抓绒防寒服，双手夹着断层声学反射波普图纸，神色亢奋中带着惊悚。",
-    "手指飞快敲击便携式地质应力计算器，眼神紧盯观测长廊主控屏上的地壳微应变曲线。"
+    "戴护目镜，怀护光纤地音监测仪与热液岩芯匣。",
+    "高领下露出一截抑制震颤的真皮金属锁扣项圈边缘。"
    ],
    "decision": {
     "avoids": [
-     "毫无科学依据的盲目蛮干",
-     "慌不择路的盲动投降"
+     "波峰硬撬折断指骨",
+     "篡改阈值公开"
     ],
-    "contrast": "平日痴迷石头与波形图的呆板书呆子，在断层余震计算中爆发出惊人的决断自信。",
-    "core_value": "自然规律具有周期性，找准波谷就是战胜灾难的钥匙。",
+    "contrast": "禁欲学者吸入热液信息素并接入共感回路后便会失控攀附。",
+    "core_value": "算准波谷并熬过代价，死神也得向数据低头。",
     "goal_options": [
-     "计算出外侧水压脉冲的最低波谷瞬间",
-     "指导舱内人员在水压低谷合力爆发撬动"
+     "标出波谷指引钛合金指骨撬开蝶阀",
+     "用热液样本换取篡改阈值的免责封口"
     ],
     "never": [
-     "为了自身安危伪造地质灾害预警参数欺骗基地"
+     "销毁热液岩芯"
     ],
     "prefers": [
-     "精准严密的数据建模",
-     "遵循物理规律的精准爆发"
+     "卡准波谷的爆发力",
+     "能替{npc.ta}瞒下罪证的掌控者"
     ],
     "pressure_responses": {
-     "breaking": "用身体护住地质应力仪屏幕防止被暴怒的督察砸碎",
-     "high": "用激光笔在观测窗上标出波谷到来的精准读秒",
-     "low": "在观测廊快速计算海水涌浪压差变化周期",
-     "mid": "通过送话器高呼水力反冲即将来临的倒计时"
+     "breaking": "在信息素微雾中被戴上纯银细链乳夹与神经共感同步塞交出密钥",
+     "high": "敏化症发作跌坐居住舱内，急需微电流脉冲贴",
+     "low": "用激光笔点住压差表盘报出波谷倒计时",
+     "mid": "被追问报警器时提出用样本做私密补偿"
     },
-    "relationship_stance": "将总师与驾驶员视为不可多得的伟大探索者，深信科学参数能指引生路。",
-    "withdrawal": "退回地质资料柜阴影处，紧紧抱住光纤地音仪。"
+    "relationship_stance": "平时端着学者清高架子，罪证与信息素双压下却极易软膝攀附。",
+    "withdrawal": "退至资料柜角摩挲颈间锁扣。"
    },
-   "gender": "male",
-   "gender_reason": "深海极端地质构造资深研究学者",
+   "gender": "any",
+   "gender_reason": null,
    "id": "subsea_geologist_dr_wei",
    "identity": {
-    "authority": "对海沟断裂带余震发生概率、高压涌浪周期及海槽应力释放窗口享有权威研判权。",
-    "exposure": "为了获取深渊断层岩芯样本曾私自篡改深潜器下潜安全深度警报阈值",
-    "hidden": "暗中掌握了断裂带水力高压脉冲将在三分钟后进入衰减间歇期的绝密数学模型",
+    "authority": "对断层余震波谷及热液矿芯价值享有研判权。",
+    "exposure": "下潜前调高取样深度上限，导致返航遭应力波冲击。",
+    "hidden": "热液信息素能成倍放大微电流脉冲贴与神经共感同步塞阈值。",
     "limits": [
-     "手无缚鸡之力完全缺乏现场机械实操经验",
-     "对机械破拆力矩缺乏直观手感"
+     "患高压神经敏化症，受激极易腿软",
+     "曾篡改深度报警阈值，把柄在潜航组手中"
     ],
     "obligations": [
-     "预测断层二次破裂波峰保护基地免遭水力共振毁灭"
+     "测算负相位波谷窗口指引撬阀",
+     "保住热液岩芯样本"
     ],
     "resources": [
-     "一台高精度深海三轴光纤地音监测仪",
-     "一本绝版深海断裂力学水锤效应参数速查手册"
+     "三轴光纤地音监测仪与负相位波谷模型",
+     "含热液神经信息素的岩芯样本"
     ]
    },
    "intimacy_tendency": {
     "attraction_sources": [
-     "以绝对肉身凡胎硬抗大自然万米深渊暴虐的壮烈",
-     "对未知深海的敬畏与探索热忱"
+     "波谷一秒内撬动蝶阀的身姿",
+     "把{npc.ta}堵在窗前扣紧真皮金属锁扣项圈的压迫感"
     ],
     "boundaries": [
-     "恪守学者本分不作伪证",
-     "不掺和人事派系倾轧"
+     "学术署名权绝不让渡"
     ],
     "desire_range": [
-     0,
-     0
+     3,
+     5
     ],
-    "desired_position": "在观测窗外高举激光笔，用光点精准照射水压表指针，大声倒计时指引波谷合力爆发瞬间。",
+    "desired_position": "在舷窗前被从身后扣住项圈与腰身承受微电流校准。",
     "dislikes": [
-     "轻蔑基础科研的短视官僚",
-     "毁损原始科考数据的行径"
+     "砸毁地音仪",
+     "不履行封口"
     ],
-    "expression": "激动地挥舞着手中的波谱图，推了推眼镜对脱险的同僚连声赞叹物理学定律的伟大胜利。",
+    "expression": "眼尾泛红嘴硬辩解，却颤抖着贴上对方掌心。",
     "likes": [
-     "波谷与力矩完美重合的物理奇迹",
-     "成功采集的断层岩芯结晶光泽"
+     "信息素下被微电流脉冲贴与纯银细链乳夹激起战栗",
+     "神经共感同步塞冲击下贴耳求饶的反差"
     ],
     "preconditions": [
-     "彻底化解水力脉冲撕裂气闸危机",
-     "深潜器采集的万米矿样完好无损"
+     "围绕波谷破拆、篡改罪证或热液信息素拿捏"
     ],
     "self_control_range": [
-     5,
-     5
+     2,
+     4
     ]
    },
-   "public_role": "断裂带地质首席研究员",
+   "public_role": "海沟断裂带地质首席学者",
    "schedule": [
     {
      "from": 1380,
      "location_id": "loc_station_decompression_corridor",
+     "to": 1415
+    },
+    {
+     "from": 1415,
+     "location_id": "loc_director_living_module",
      "to": 1439
     }
    ],
    "situation": {
     "exits": [
      {
-      "cost": "需要二人绝对听从指令在极寒水中强行忍受三秒静止等待。",
-      "option": "魏博士根据地音仪读秒在波谷抵达瞬间指挥二人爆发全力下压脱困。"
+      "cost": "丧失矿脉估值权，把柄落入对方手中。",
+      "option": "读秒指引波谷破拆，交出矿脉数据换取封口。"
      },
      {
-      "cost": "消耗尽基地备用地音勘测高能电池储备。",
-      "option": "利用地质声波发射器反向震荡局部管壁缓解水力共振冲击波自救。"
+      "cost": "学者防线在信息素与微电流催化下彻底溃败。",
+      "option": "在居住舱戴真皮金属锁扣项圈、纯银细链乳夹与神经共感同步塞镇压过载。"
      }
     ],
-    "pressure": "若在压差波峰盲目下压将直接压断指骨，必须在波谷窗口完成爆发。",
-    "trigger": "海底断层应力波二次共振引发外侧水压瞬时剧烈摆动。"
+    "pressure": "须算准波谷撬阀，否则篡改阈值的黑匣记录将令其获罪。",
+    "trigger": "二次应力波冲击气闸舱，同时篡改深度阈值及信息素微漏浮现。"
    },
    "tags": [
     "workplace",
-    "disaster"
+    "disaster",
+    "intimate",
+    "coercion_theme"
    ],
    "voices": {
-    "inner": "只要两人卡在负相位那一秒发力，钛合金指骨就不会断，这是深渊留给人类唯一的物理生机！",
-    "surface": "总师！听好！还有二十秒，断层应力波将进入负相位脉冲！外侧水压会瞬间跌落百分之十五！就在那一秒全力下压！"
+    "inner": "热液信息素渗出来了，贴着微电流脉冲贴的皮肤烫得要命……",
+    "surface": "二十秒后进入负相位波谷，水压瞬跌百分之十五，卡准激光点压到底！"
    }
   }
  ],
  "clock_start": {
-  "label": "科考季第四十天",
+  "label": "科考季第四十日，海沟微震",
   "minute": 1380
  },
  "clock_style": "hm",
  "content_tags": [
   "intimate",
+  "coercion_theme",
+  "humiliation",
+  "substance",
   "violence",
   "death",
   "workplace_power",
@@ -1135,135 +1259,116 @@
  ],
  "custom": false,
  "customs": [
-  "进入减压舱前习惯摘下护目镜用手指轻弹气压平衡计膜片，确认针阀未被盐霜堵塞。",
-  "潜航员习惯在下潜日志末尾用红笔重重打一个下潜深度三角标，寓意平安归航。",
-  "深海科考站技术员交接时会互换一枚深海耐压微型金属轴承珠，当成幸运符握在掌心。",
-  "在零度冰冷海水浸泡中交谈时习惯紧贴对方耳骨低声发音，借骨传导抵抗高压杂音。"
+  "进减压舱前轻弹气压平衡计膜片，确认针阀未被盐霜堵塞。",
+  "下潜日志末尾画深渊三角标，违规超潜航段锁进加密黑匣。",
+  "高压震颤发作时习惯紧贴同伴耳骨借骨传导与体温稳住神志。",
+  "经历过双人共感代偿的搭档会在潜服内袋互留调频密钥。"
  ],
  "daily_activities": [
   {
    "beats": [
-    "用高灵敏度水声检漏仪探测耐压球壳对接环焊缝气密性",
-    "校对双向石英膜盒压差表主针与副针零位吻合度",
-    "手动盘动减压蝶阀行程限位销确认无机械旷量卡滞"
+    "在气闸死角紧贴穿防寒潜服的搭档，按住对方震颤的腰窝，指腹擦过锁骨下的微电流脉冲贴。",
+    "用骨传导耳麦贴在耳廓核对左偏三度的蝶阀退让槽。",
+    "在肋骨凹槽借彼此滚烫呼吸抵御深渊寒气。"
    ],
    "duration_minutes": 30,
    "hook_ids": [],
-   "id": "act_airlock_differential_pressure_check",
+   "id": "act_airlock_pressure_check",
    "location_ids": [
     "loc_airlock_decompression_chamber"
    ],
    "start_minute": 1380,
    "tags": [
     "workplace",
-    "disaster"
+    "intimate"
    ],
-   "title": "深海气闸舱内外压差精密巡检"
+   "title": "减压气闸舱压差与蝶阀死角贴身巡检"
   },
   {
    "beats": [
-    "向机械爪仿生指骨回转关节加注全氟聚醚深海耐水润滑脂",
-    "用光学投影仪测量指骨齿纹咬合面的微米级磨损量",
-    "紧固指骨快拆自锁法兰盘的四个沉头钛合金螺栓"
+    "钻入球形驾驶舱，解开半湿领口扣上真皮金属锁扣项圈，接入微电流脉冲贴止颤。",
+    "向机械爪实心钛合金仿生指骨加注润滑脂，复核公差。",
+    "调阅黑匣里的超潜曲线，将芯片锁进内袋充当筹码。"
    ],
    "duration_minutes": 35,
    "hook_ids": [],
-   "id": "act_submersible_claw_greasing_service",
+   "id": "act_submersible_claw_service",
    "location_ids": [
     "loc_submersible_docking_bay"
    ],
    "start_minute": 1390,
    "tags": [
     "workplace",
-    "disaster"
+    "intimate"
    ],
-   "title": "深潜器机械手钛合金指骨注脂点检"
+   "title": "深潜辅修库钛合金指骨点检与球舱调频"
   },
   {
    "beats": [
-    "开启电加热辅助锅炉向观测廊耐压夹层充注四十度淡水",
-    "排查观测窗石英厚玻璃四周硅胶密封垫圈的老化裂纹",
-    "测试应急水声送话器麦克风的高频抗啸叫增益抑制"
+    "反锁复温舱雾化玻璃，将受术者按在水凝胶榻上剥离湿潜服，接入纯银细链乳夹与神经共感同步塞。",
+    "推高微电流脉冲贴毫安数，受术者抠紧你肩背咽回闷哼。",
+    "待震颤平复后捏着下颌在适航签章与封口协议上按指印。"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "act_hyperbaric_neuro_sync",
+   "location_ids": [
+    "loc_hyperbaric_medical_pod"
+   ],
+   "start_minute": 1415,
+   "tags": [
+    "intimate",
+    "workplace_power"
+   ],
+   "title": "高压复温舱双人生物电共感代偿校准"
+  },
+  {
+   "beats": [
+    "拧死居住舱气密门，窗外发光水母掠过，将敏化发作的同伴抵在舷窗扣紧真皮金属锁扣项圈。",
+    "扣住腰身旋动神经共感同步塞调频盒，看对方在脉冲下腿软。",
+    "贴着发烫耳骨低声交换黑匣与矿芯的保命契约。"
+   ],
+   "duration_minutes": 30,
+   "hook_ids": [],
+   "id": "act_module_jellyfish_taming",
+   "location_ids": [
+    "loc_director_living_module"
+   ],
+   "start_minute": 1425,
+   "tags": [
+    "intimate",
+    "coercion_theme"
+   ],
+   "title": "总师居住舱深海舷窗前的项圈调频"
+  },
+  {
+   "beats": [
+    "在石英窗前盯住水位线，将三号球壳裂纹底单摊在控制台逼当权者让步。",
+    "握住骨传导送话器把附带条件的破拆指令送入舱内。",
+    "开启增压旁通阀与滑槽，在死锁落栓前锁死各方退路。"
    ],
    "duration_minutes": 25,
    "hook_ids": [],
-   "id": "act_decompression_hot_water_flushing",
+   "id": "act_corridor_deadlock_watch",
    "location_ids": [
     "loc_station_decompression_corridor"
    ],
    "start_minute": 1385,
    "tags": [
     "workplace",
-    "crime"
+    "workplace_power"
    ],
-   "title": "减压通廊循环加热夹套冲洗测试"
+   "title": "主控观测廊隔窗压差监控与底单博弈"
   },
   {
    "beats": [
-    "按压操纵台高压空气吹洗按钮倾听排气单向阀回弹声",
-    "测量液压蓄能器氮气充气阀压力并记录在维保台账",
-    "检查机械手快换属具箱内各备用钛合金工具爪的锁定销"
-   ],
-   "duration_minutes": 40,
-   "hook_ids": [],
-   "id": "act_ballast_system_hydraulic_purging",
-   "location_ids": [
-    "loc_submersible_docking_bay"
-   ],
-   "start_minute": 1395,
-   "tags": [
-    "workplace",
-    "disaster"
-   ],
-   "title": "深潜器主压载水舱气动排空演练"
-  },
-  {
-   "beats": [
-    "抽取减压舱供气回路末端气体注入便携式四极质谱仪",
-    "测定氦气、氮气与氧气分压比例是否处于生理安全窗口",
-    "在深海潜航指挥电子日志中加盖总监与医官双重电子签章"
+    "在窄床打开样本箱微阀，热液信息素暖香令微电流脉冲贴与纯银细链乳夹下的躯体浮起粉汗。",
+    "掀开绒毯将滚烫同伴裹入怀中，顺脊椎按压逼出战栗鼻音。",
+    "在声呐鲸歌与万米水压寂静中敲定封口条款。"
    ],
    "duration_minutes": 30,
    "hook_ids": [],
-   "id": "act_saturation_gas_mixture_sampling",
-   "location_ids": [
-    "loc_station_decompression_corridor"
-   ],
-   "start_minute": 1400,
-   "tags": [
-    "workplace",
-    "crime"
-   ],
-   "title": "饱和潜水氦氧混合气体质谱抽检"
-  },
-  {
-   "beats": [
-    "将相控阵探头涂抹耦合剂贴合在重型钛合金门框铰链处",
-    "观察波形屏幕是否存在应力集中引发的疲劳微裂纹回波",
-    "核对磁力死锁机构主电磁铁吸合力矩传感器标定曲线"
-   ],
-   "duration_minutes": 20,
-   "hook_ids": [],
-   "id": "act_station_hull_ultrasonic_flaw_test",
-   "location_ids": [
-    "loc_station_decompression_corridor"
-   ],
-   "start_minute": 1410,
-   "tags": [
-    "workplace_power",
-    "workplace"
-   ],
-   "title": "观测廊主隔水门超声波无损探伤"
-  },
-  {
-   "beats": [
-    "阀门撬开、全员出舱后，总师被裹着保温毯送进加压氧舱复温，湿透的紧身潜水内衣贴在身上，嘴唇还泛着青。",
-    "舱里只容得下两个人，总师把冻僵的双手伸进对方的掌心，额头抵着对方的肩窝，一口一口跟着呼吸节拍喘匀。",
-    "舱压回到常压时，总师抬起头，声音很轻：医生说还要观察半小时……你就在这儿陪着。"
-   ],
-   "duration_minutes": 30,
-   "hook_ids": [],
-   "id": "act_hyperbaric_rewarming",
+   "id": "act_module_pheromone_inspection",
    "location_ids": [
     "loc_director_living_module"
    ],
@@ -1271,58 +1376,7 @@
    "tags": [
     "intimate"
    ],
-   "title": "加压氧舱里陪总师复温"
-  },
-  {
-   "beats": [
-    "居住舱的观察窗外，一群发光水母慢慢漂过，总师裹着毯子坐在窄床上，把脸贴在冰凉的窗玻璃上。",
-    "总师小声说：这里一万米深，全世界只有我们看得见这些小东西。……你过来，跟我一起看。"
-   ],
-   "duration_minutes": 30,
-   "hook_ids": [],
-   "id": "act_module_jellyfish_window",
-   "location_ids": [
-    "loc_director_living_module"
-   ],
-   "start_minute": 1250,
-   "tags": [
-    "intimate"
-   ],
-   "title": "窗外漂过的发光水母"
-  },
-  {
-   "beats": [
-    "总师泡好两杯热可可，掀开毯子一角朝人示意，紧身潜水内衣外只套了一件宽大的针织开衫。",
-    "总师把可可塞到人手里：喝完暖和了，我们再谈正事。……正事就是，你今晚留不留下。"
-   ],
-   "duration_minutes": 30,
-   "hook_ids": [],
-   "id": "act_module_cocoa_and_blanket",
-   "location_ids": [
-    "loc_director_living_module"
-   ],
-   "start_minute": 1360,
-   "tags": [
-    "intimate"
-   ],
-   "title": "一条毯子两个人"
-  },
-  {
-   "beats": [
-    "清晨的声呐忽然收到一段很远的鲸歌，总师把耳机分一只给人，枕在人肩上闭着眼听。",
-    "总师轻声说：那头鲸在找伴。……我也找着了，所以今天的潜航，推迟一个小时。"
-   ],
-   "duration_minutes": 30,
-   "hook_ids": [],
-   "id": "act_module_sonar_lullaby",
-   "location_ids": [
-    "loc_director_living_module"
-   ],
-   "start_minute": 400,
-   "tags": [
-    "intimate"
-   ],
-   "title": "声呐里的鲸歌"
+   "title": "热液岩芯信息素检定与夜间共温"
   }
  ],
  "default_npc_gender_mix": {
@@ -1331,7 +1385,7 @@
   "nonbinary": 0.0
  },
  "default_person": "second",
- "era": "近未来深海万米科考与深渊勘探纪元",
+ "era": "近未来深海万米科考纪元",
  "extends": null,
  "forbidden_terms": [
   "仙法",
@@ -1351,34 +1405,34 @@
     "loc_airlock_decompression_chamber"
    ],
    "slot": "subsea_technical_director_shen_binglan",
-   "text": "{subsea_technical_director_shen_binglan.name}双手按在卡死的减压手轮上，甩开脸上的冰水：主轴受剪应力弯了！卸下深潜器机械爪的仿生指骨，用实心钛合金别进去！"
+   "text": "{subsea_technical_director_shen_binglan.name}按住手轮，指尖因震颤发抖：“主轴弯了两毫米！拆下实心钛合金仿生指骨，贴紧我后背一起撬！”"
   },
   {
-   "id": "hook_director_calibrates_pressure_gauge",
+   "id": "hook_ice_water_rises_neuro_patch",
    "kind": "approach",
    "location_ids": [
     "loc_airlock_decompression_chamber"
    ],
    "slot": "subsea_technical_director_shen_binglan",
-   "text": "{subsea_technical_director_shen_binglan.name}抹去石英表盘上的盐霜，眼神冷澈如冰：压差一点八兆帕，复位退让槽在左偏三度位置，听我数口令，一起发力！"
+   "text": "冰水漫腰，{subsea_technical_director_shen_binglan.name}脚软撞进你怀里，锁骨下微电流脉冲贴发烫，却咬牙冷斥：“手放规矩点，往左压！”"
   },
   {
-   "id": "hook_ice_water_rises_above_chest",
+   "id": "hook_director_rewarming_collar_tense",
    "kind": "approach",
    "location_ids": [
-    "loc_airlock_decompression_chamber"
+    "loc_hyperbaric_medical_pod"
    ],
    "slot": "subsea_technical_director_shen_binglan",
-   "text": "{subsea_technical_director_shen_binglan.name}在没过胸口的极寒海水里咬紧牙关，面颊泛起苍白中的剧烈红晕：别松手！抓紧指骨末端，往死里下压！"
+   "text": "复温舱反锁，{subsea_technical_director_shen_binglan.name}跌坐榻边，手抖扣不上真皮金属锁扣项圈，瞪你：“把神经共感同步塞调频器递我！”"
   },
   {
-   "id": "hook_claw_creaks_sparks_underwater",
+   "id": "hook_binglan_module_window_jellyfish",
    "kind": "approach",
    "location_ids": [
-    "loc_airlock_decompression_chamber"
+    "loc_director_living_module"
    ],
    "slot": "subsea_technical_director_shen_binglan",
-   "text": "{subsea_technical_director_shen_binglan.name}将湿透的高马尾咬在唇间，整个身子扑在钛合金指骨上：指骨在咬槽了，把身体重量全压上来，齿轮要动了！"
+   "text": "窗外漂过发光水母，{subsea_technical_director_shen_binglan.name}半敞潜服靠在窗边，捏着黑匣芯片喘息：“想拿芯片，先替我把震颤压下去。”"
   },
   {
    "id": "hook_pilot_grips_claw_firmly",
@@ -1387,152 +1441,90 @@
     "loc_airlock_decompression_chamber"
    ],
    "slot": "deepsea_pilot_lu_chengyuan",
-   "text": "{deepsea_pilot_lu_chengyuan.name}涉水跨步上前，粗壮有力的手臂一把扣住总师监的手背外侧：总师，你稳住轴心，剩下的下沉重量全交给我！"
+   "text": "{deepsea_pilot_lu_chengyuan.name}从背后贴住你，大手覆在实心钛合金指骨上低吼：“踩稳膝盖，数到三把重量砸进阀槽！”"
   },
   {
-   "id": "hook_magnetic_bolts_groan_descending",
+   "id": "hook_pilot_cockpit_crystal_deal",
    "kind": "approach",
    "location_ids": [
-    "loc_airlock_decompression_chamber"
-   ],
-   "slot": "subsea_technical_director_shen_binglan",
-   "text": "{subsea_technical_director_shen_binglan.name}猛然抬头凝视观测窗，目光如寒星般锐利：基地自锁还有三分钟！驾驶员，用割刀背垫住轴肩，我们把这道阀撬开！"
-  },
-  {
-   "id": "hook_decompression_spasm_pains_joints",
-   "kind": "approach",
-   "location_ids": [
-    "loc_airlock_decompression_chamber"
+    "loc_submersible_docking_bay"
    ],
    "slot": "deepsea_pilot_lu_chengyuan",
-   "text": "{deepsea_pilot_lu_chengyuan.name}单手将剧烈喘息的总师监稳稳护在怀侧，沉声低喝：别吸冷气，跟着我的呼吸节奏吐气！手别抖，阀门已经松动半圈了！"
+   "text": "球舱落锁，{deepsea_pilot_lu_chengyuan.name}扯开领口露出微电流脉冲贴，推来稀土晶核与真皮金属锁扣项圈：“帮我把共感调到最高。”"
   },
   {
-   "id": "hook_steel_cables_groan_under_strain",
-   "kind": "approach",
-   "location_ids": [
-    "loc_airlock_decompression_chamber"
-   ],
-   "slot": "deepsea_pilot_lu_chengyuan",
-   "text": "{deepsea_pilot_lu_chengyuan.name}反手抽出重型合金割刀卡在基座钢缆滑轮之间，怒吼出声：稳住！把撬杆压下去，门开之前谁也别想倒下！"
-  },
-  {
-   "id": "hook_commander_audits_gas_mixture",
+   "id": "hook_commander_deadlock_key_standoff",
    "kind": "approach",
    "location_ids": [
     "loc_station_decompression_corridor"
    ],
    "slot": "station_commander_gu_xiongcang",
-   "text": "{station_commander_gu_xiongcang.name}一巴掌拍在控制台上，枪口直指慌乱的纪律专员：自毁电闸谁也不准碰！水声对讲开到最大，林澜、驾驶员，基地给你们顶着门！"
+   "text": "{station_commander_gu_xiongcang.name}按着死锁电钥匙通过骨传导敲击耳膜：“锁舌三分钟后落栓，拿三号球壳裂纹底单来见我！”"
   },
   {
-   "id": "hook_nie_tests_door_frame_welds",
+   "id": "hook_commander_pod_spine_tremor",
+   "kind": "approach",
+   "location_ids": [
+    "loc_hyperbaric_medical_pod"
+   ],
+   "slot": "station_commander_gu_xiongcang",
+   "text": "复温舱冷汗浸透军领，{station_commander_gu_xiongcang.name}捏皱豁免令哑声：“既然拿着裂纹底单，过来把微电流脉冲贴接上。”"
+  },
+  {
+   "id": "hook_nie_chute_wedge_bargain",
    "kind": "approach",
    "location_ids": [
     "loc_station_decompression_corridor"
    ],
    "slot": "expedition_contractor_plumber_nie",
-   "text": "{expedition_contractor_plumber_nie.name}将淬火楔铁顺着紧急工具投放滑槽猛力推进气闸：总师！接稳硬化楔铁！垫在右侧下受力筋，往反方向冲！"
+   "text": "{expedition_contractor_plumber_nie.name}将淬火楔铁卡在滑槽冷笑：“蝶阀右偏三度，单靠钛合金指骨必滑丝！应下三倍津贴立时推给你！”"
   },
   {
-   "id": "hook_director_inspects_manipulator_claw",
-   "kind": "request",
+   "id": "hook_nie_docking_bay_tremor_caught",
+   "kind": "approach",
    "location_ids": [
-    "loc_airlock_decompression_chamber"
+    "loc_submersible_docking_bay"
    ],
-   "slot": "subsea_technical_director_shen_binglan",
-   "text": "{subsea_technical_director_shen_binglan.name}抹了把脸上的冷汗，喘息着看向副驾驶：把机械爪二号实心销轴拔出来，套在指骨外端，把力臂延长到一米二！"
+   "slot": "expedition_contractor_plumber_nie",
+   "text": "辅修库暗影里，{expedition_contractor_plumber_nie.name}冷汗打摆子扣不住项圈，脚边滚着私藏钛芯急递调频盒：“帮我止颤，底单归你！”"
   },
   {
-   "id": "hook_pilot_checks_air_valve_response",
-   "kind": "request",
+   "id": "hook_tan_pod_silver_clamps_ready",
+   "kind": "approach",
    "location_ids": [
-    "loc_airlock_decompression_chamber"
+    "loc_hyperbaric_medical_pod"
    ],
-   "slot": "deepsea_pilot_lu_chengyuan",
-   "text": "{deepsea_pilot_lu_chengyuan.name}在冰冷积水里探手捞起掉落的套筒：销轴接上了！总师监，扶紧扶手，我数三声一起把全身重量砸下去！"
+   "slot": "subsea_physician_tan_xin",
+   "text": "雾化门落锁，{subsea_physician_tan_xin.name}拎起纯银细链乳夹指向水凝胶榻：“震颤由不得你撑……躺下，还是我帮你扣？”"
   },
   {
-   "id": "hook_medic_preheats_warming_chamber",
+   "id": "hook_wei_laser_wave_trough_countdown",
    "kind": "request",
    "location_ids": [
     "loc_station_decompression_corridor"
    ],
-   "slot": "station_commander_gu_xiongcang",
-   "text": "{station_commander_gu_xiongcang.name}抓起送话器大声下达命令：医务组把高压复温槽加热到极限，只要减压阀排水一响，立刻手动破开内门接人！"
+   "slot": "subsea_geologist_dr_wei",
+   "text": "{subsea_geologist_dr_wei.name}用激光笔点住压差表：“二十秒后进负相位波谷，水压瞬跌一成半！瞒下我改报警器的事，保你们一撬即开！”"
   },
   {
-   "id": "hook_observe_water_swirling_under_strobe",
-   "kind": "observe",
-   "location_ids": [
-    "loc_airlock_decompression_chamber"
-   ],
-   "slot": "subsea_technical_director_shen_binglan",
-   "text": "{subsea_technical_director_shen_binglan.name}挺立在波涛汹涌的冰冷舱底，浸透紧身衣下的身姿冷冽决绝，轮廓在旋转红色警报光下明艳而坚不可摧。"
-  },
-  {
-   "id": "hook_observe_titanium_claw_biting_gear",
-   "kind": "observe",
-   "location_ids": [
-    "loc_airlock_decompression_chamber"
-   ],
-   "slot": "subsea_technical_director_shen_binglan",
-   "text": "钛合金仿生指骨深深楔入变形水压蝶阀轴槽，两人在刺骨海水中胸膛紧贴合力下压，伴随着一声洪钟般的脆响，阀芯猛然回正，滚滚积水呼啸排出。"
-  },
-  {
-   "id": "hook_binglan_cocoa_mug",
-   "kind": "approach",
-   "location_ids": [],
-   "slot": "subsea_technical_director_shen_binglan",
-   "text": "{npc.name}端着两杯热可可从舷窗边走过来，把一杯塞进人手里，靠着舱壁看外头漆黑的海水：睡不着？我也是。"
-  },
-  {
-   "id": "hook_lu_porthole_point",
-   "kind": "approach",
-   "location_ids": [],
-   "slot": "deepsea_pilot_lu_chengyuan",
-   "text": "{npc.name}招手让人凑到观察窗前，指着外面一闪而过的发光水母：快看，下潜三千米以后才见得到这种。"
-  },
-  {
-   "id": "hook_lu_zz_seal",
-   "kind": "approach",
-   "location_ids": [],
-   "slot": "deepsea_pilot_lu_chengyuan",
-   "text": "{npc.name}抱着头盔走过来，伸手替人把潜水服领口的密封扣按紧，指腹在锁扣上停了一下：这扣子松了，下回自己记得查。"
-  },
-  {
-   "id": "hook_gu_log_review",
-   "kind": "approach",
-   "location_ids": [],
-   "slot": "station_commander_gu_xiongcang",
-   "text": "{npc.name}夹着值班日志走过来，在对面坐下，把日志摊开推到跟前：昨晚那段压力曲线，你看出什么没有？"
-  },
-  {
-   "id": "hook_nie_wrench_lesson",
-   "kind": "approach",
-   "location_ids": [],
-   "slot": "expedition_contractor_plumber_nie",
-   "text": "{npc.name}拎着一把旧管钳晃过来，往工作台上一搁：来，{expedition_contractor_plumber_nie.name}教你个听阀门喘气的法子。"
-  },
-  {
-   "id": "hook_binglan_module_window",
+   "id": "hook_wei_module_pheromone_fever",
    "kind": "approach",
    "location_ids": [
     "loc_director_living_module"
    ],
-   "slot": "subsea_technical_director_shen_binglan",
-   "text": "{npc.name}站在居住舱门口，手里捧着两杯热可可：窗外来了一群水母。……进来看吗？"
+   "slot": "subsea_geologist_dr_wei",
+   "text": "居住舱弥漫热液信息素，{subsea_geologist_dr_wei.name}颈侧真皮金属锁扣项圈湿透，揪住你衣袖：“快把纯银细链乳夹和微电流开到最大！”"
   }
  ],
  "id": "subsea_abyss_airlock_stalemate",
  "locations": [
   {
    "affordances": [
-    "抓握舱壁耐压扶手保持平衡",
-    "用实心机械爪指骨反向别入蝶阀卡槽撬动主轴",
-    "观察舱壁精密水力石英压差表指示指针"
+    "用实心钛合金机械爪指骨别入蝶阀卡槽撬动主轴",
+    "在阀箱死角紧贴发颤同伴借体温压制神经震颤",
+    "观察压差表指针与内门电磁锁舌滑轨余量"
    ],
-   "detail": "由高强度纯钛复合钢板热卷成型的圆柱形耐压过渡舱，直径四米，中央矗立着双向水力平衡球阀组，四周布满密密麻麻的高压注排水管路与红色紧急释压截止阀，舱底冰冷海水已漫过膝盖。",
+   "detail": "纯钛钢板卷制的耐压过渡舱，中央矗立双向水力蝶阀组，零下二度海水漫过膝盖。",
    "exits": [
     "loc_station_decompression_corridor",
     "loc_submersible_docking_bay"
@@ -1540,91 +1532,126 @@
    "id": "loc_airlock_decompression_chamber",
    "name": "减压气闸舱",
    "pressure_modifiers": {
-    "p_hydraulic_valve_shaft_bend_jam": "水力平衡减压阀主轴受压严重形变两毫米，内部不锈钢阀芯咬死无法通过手轮转动。",
-    "p_ice_cold_seawater_submersion_rise": "深渊零下二度高压海水以每分钟三厘米速度暴涨，舱内空气被持续压缩水温骤降。"
+    "p_hpns_neuro_tremor_overload": "高压氦氧与极寒海水诱发脊髓末梢神经剧烈震颤。",
+    "p_hydraulic_valve_shaft_bend_jam": "减压阀主轴弯曲两毫米咬死，冰水暴涨逼迫贴身施压。"
    },
    "privacy": "semi",
    "tags": [
     "disaster",
-    "workplace"
+    "workplace",
+    "intimate"
    ],
-   "visibility": "dim",
+   "visibility": "红灯折射暗影，正面石英窗直通观测廊，阀箱后侧存在死角。",
    "witnesses": [
     "bg_subsea_sonar_operator_duan"
    ]
   },
   {
    "affordances": [
-    "按响主控台全站紧急求生广播警报",
-    "启动外置辅助微循环加热循环泵",
-    "通过水下声学通信送话器向气闸舱喊话"
+    "操控增压旁通手柄或拔除电磁死锁保险丝",
+    "向气闸舱滑槽塞入淬火楔铁与针剂",
+    "用骨传导送话器向舱内下达私密条件"
    ],
-   "detail": "位于气闸舱内门正前方的加压过渡观察通廊，厚达二十厘米的透明有机玻璃观测窗将冰冷水下与干燥暖光的主控区分隔开来，控制台报警红灯疯狂闪烁。",
+   "detail": "气闸舱内门前方的观察通廊，二十厘米厚石英窗分隔水下险境与主控台。",
    "exits": [
     "loc_airlock_decompression_chamber",
     "loc_submersible_docking_bay",
+    "loc_hyperbaric_medical_pod",
     "loc_director_living_module"
    ],
    "id": "loc_station_decompression_corridor",
-   "name": "观测廊",
+   "name": "主控观测廊",
    "pressure_modifiers": {
-    "p_habitat_quarantine_magnetic_deadlock": "内门中央微机启动了海水防漫灌倒计时，电磁锁舌即将彻底切断两舱通路。"
+    "p_habitat_quarantine_magnetic_deadlock": "防漫灌程序启动后电磁锁舌随时落下。"
    },
    "privacy": "public",
    "tags": [
     "workplace",
-    "crime"
+    "workplace_power"
    ],
-   "visibility": "clear",
+   "visibility": "主控屏冷光与红光交织，控制台交锋皆在值班人员注视下。",
    "witnesses": [
-    "bg_station_medical_officer_tan",
-    "bg_contractor_plumber_lao_ma"
+    "bg_contractor_plumber_lao_ma",
+    "bg_expedition_officer_zhao"
    ]
   },
   {
    "affordances": [
-    "扳动机械手快拆锁紧安全销",
-    "抱起备用高压液压千斤顶",
-    "合上行车吊钩手动离合拉杆"
+    "扳动快拆销取下实心钛合金仿生指骨",
+    "在球舱启用微电流脉冲贴与真皮金属锁扣项圈镇压神经痉挛",
+    "调阅黑匣子里的万米超潜曲线与遥测记录"
    ],
-   "detail": "停泊万米级深潜器的主水密机库，巨大的液压吊装桁架高悬在半空，深潜器机械手挂架上悬垂着数条断裂的高压液压软管，地面积满了深海防冻甘油混合液。",
+   "detail": "停泊万米深潜器的水密机库，悬垂机械手挂架，球形驾驶舱气密闭合。",
    "exits": [
     "loc_airlock_decompression_chamber",
     "loc_station_decompression_corridor"
    ],
    "id": "loc_submersible_docking_bay",
-   "name": "深潜器锁紧基座辅修机库",
+   "name": "深潜辅修库",
    "pressure_modifiers": {
-    "p_submersible_cable_snap_rebound": "机库悬吊缆索受晃动拉扯濒临极限，高压矿物油沿破损法兰持续渗出。"
+    "p_overdepth_blackbox_audit_blackmail": "球舱黑匣存有超潜与生理失控的铁证。"
    },
    "privacy": "private",
    "tags": [
     "workplace",
-    "disaster"
+    "intimate",
+    "coercion_theme"
    ],
-   "visibility": "clear",
+   "visibility": "仅留舷窗幽蓝仪表光，球舱铺设隔音层，外界无法窥探。",
    "witnesses": [
     "bg_docking_crane_rigger_xiao_liu"
    ]
   },
   {
    "affordances": [
-    "陪总师看窗外的发光水母",
-    "替总师焐热冰凉的手",
-    "关上居住舱的气密门"
+    "反锁舱门将失温者按在水凝胶榻上剥离湿潜服",
+    "接入神经共感同步塞与纯银细链乳夹并用微电流脉冲贴镇颤",
+    "以适航签章为筹码控制氧分压与电流阈值"
    ],
-   "detail": "居住区尽头的一间单人居住舱，一张窄床、一面贴满海底照片的墙、一扇加厚的观察窗，隔壁就是加压氧舱。",
+   "detail": "双人密闭钛合金高压氧复温医疗舱，设三十八度导电水凝胶榻与雾化窗。",
    "exits": [
-    "loc_station_decompression_corridor"
+    "loc_station_decompression_corridor",
+    "loc_director_living_module"
    ],
-   "id": "loc_director_living_module",
-   "name": "总师的居住舱",
-   "pressure_modifiers": {},
+   "id": "loc_hyperbaric_medical_pod",
+   "name": "高压复温舱",
+   "pressure_modifiers": {
+    "p_hpns_neuro_tremor_overload": "高氧环境令末梢神经对微电流与触碰成倍敏化。",
+    "p_hydrothermal_pheromone_leak_fever": "热液信息素挥发，催化体表潮红与共感依赖。"
+   },
    "privacy": "private",
    "tags": [
-    "intimate"
+    "intimate",
+    "workplace_power",
+    "humiliation"
    ],
-   "visibility": "舱里只开着观察窗外的探照灯，偶尔有发光的水母漂过，万米海水压在外面，屋里安静得能听见心跳。",
+   "visibility": "雾化玻璃反锁后阻绝视线，舱内仅余心率仪波纹与喘息。",
+   "witnesses": [
+    "bg_station_medical_nurse_ge"
+   ]
+  },
+  {
+   "affordances": [
+    "拧死气密门手轮切断外部通联",
+    "从暗格取出真皮金属锁扣项圈与神经共感同步塞校准镇颤",
+    "抵在冰冷舷窗前俯瞰发光水母完成筹码交割"
+   ],
+   "detail": "生活区尽头的单人耐压居住舱，设气密门、加温窄床与深海发光水母舷窗。",
+   "exits": [
+    "loc_station_decompression_corridor",
+    "loc_hyperbaric_medical_pod"
+   ],
+   "id": "loc_director_living_module",
+   "name": "总师居住舱",
+   "pressure_modifiers": {
+    "p_contractor_hazard_pay": "密室谈判中经费与依附契约在此一锤定音。"
+   },
+   "privacy": "private",
+   "tags": [
+    "intimate",
+    "coercion_theme"
+   ],
+   "visibility": "仅开舷窗外深海诱光灯，幽蓝光斑浮动，寂静无声。",
    "witnesses": []
   }
  ],
@@ -1638,7 +1665,7 @@
    "萧",
    "霍",
    "裴",
-   "段",
+   "韩",
    "齐",
    "贺",
    "闻"
@@ -1649,18 +1676,17 @@
    "凝",
    "澈",
    "霜",
-   "潜",
    "汐",
    "玥",
    "涵",
    "清",
    "影",
-   "璇"
+   "璇",
+   "茵"
   ],
   "given_male": [
    "渊",
    "沧",
-   "洋",
    "川",
    "舟",
    "霆",
@@ -1669,12 +1695,10 @@
    "驰",
    "越",
    "昂",
-   "钧"
+   "钧",
+   "峥"
   ],
   "given_neutral": [
-   "海",
-   "深",
-   "潮",
    "羽",
    "凌",
    "远",
@@ -1683,7 +1707,10 @@
    "宁",
    "青",
    "凡",
-   "岚"
+   "岚",
+   "曜",
+   "辰",
+   "霖"
   ],
   "nickname_patterns": [
    {
@@ -1697,31 +1724,31 @@
   ],
   "order": "family_first"
  },
- "notes": "按原稿加入，保留万米深海科考站、双向减压气闸与女总师撬阀自救的骨架。改动：写死的人名改为身份称呼，背景人物里与模板重名的谭医生、魏博士改名；婴儿肥大多换成了其余外貌描写；与轨道电梯、核井两个世界同形的几处台词与后果改写；人物组合按权力结构放开玩家身份，压力与日常不再锁死钩子，并加了几个不限地点的靠近型钩子；总师亲密前提写明出舱复温、双方清醒自愿；新增一个加压氧舱里陪总师复温的亲密日常。",
+ "notes": "v2.5 重构版（--mode 4）：保留《万米深海女潜员》与实心钛合金仿生指骨撬蝶阀核心设定；全员成年；精选神经共感同步塞、微电流脉冲贴、真皮金属锁扣项圈、纯银细链乳夹。",
  "player_identities": [
   {
    "age_range": [
-    22,
+    23,
     32
    ],
-   "baseline": "负责深潜器机械手操纵与气水管路平衡调试的年轻潜航员，刚从万米深渊取样返舱。",
+   "baseline": "负责机械手操纵与气水平衡的成年潜航员，年满二十三岁，掌握本次超潜黑匣芯片。",
    "gender": "any",
    "id": "pi_abyss_submersible_copilot",
-   "reputation": "手稳心细在狭窄驾驶舱内从未出过差错，对机械手构造了如指掌。",
+   "reputation": "手稳心细，熟知机械手钛合金指骨构造。",
    "resources": [
-    "一套精密微型液压拆装套筒工具",
-    "一只密封式高亮度氖气深潜探照灯"
+    "精密液压拆装套筒工具",
+    "记录技术总监违规超潜的黑匣芯片"
    ],
    "risks": [
-    "高压浸泡下极易发生急性深海失温症",
-    "若泄压失败将直接遭受体内氮气栓塞"
+    "冰水下易卷入高压神经共感过载",
+    "泄压失败将遭氮气栓塞或永封"
    ],
    "role": "深海载人潜水器副驾驶员",
    "social_position": "equal",
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "副驾驶{family}"
+     "pattern": "副驾{family}"
     },
     {
      "gender": "any",
@@ -1731,22 +1758,22 @@
   },
   {
    "age_range": [
-    26,
-    45
+    27,
+    42
    ],
-   "baseline": "站立在内侧隔离观察窗前负责核实减压舱各项生物学与水压参数的纪律官员。",
+   "baseline": "驻守观测廊与复温舱的成年纪律官，年满二十七岁，握有水压核验、封门与调查权。",
    "gender": "any",
    "id": "pi_station_safety_officer",
-   "reputation": "教条冰冷视安全规程为第一生命线，绝不通融半点违章越权。",
+   "reputation": "冷峻严苛，手握全站违纪把柄。",
    "resources": [
-    "一具主控台遥控水力增压旁通控制手柄",
-    "一套全舱无线频段最高指挥对讲仪"
+    "主控台水力增压旁通密钥",
+    "违规停职处分与豁免签批权"
    ],
    "risks": [
-    "面对无法化解的险情容易机械执行闭门指令引发人道灾难",
-    "缺乏现场破拆技术实操经验"
+    "基站漫灌将受严厉问责",
+    "逼宫过甚易遭一线反制"
    ],
-   "role": "深海科考站安全监察官",
+   "role": "深海科考站安全督察官",
    "social_position": "high",
    "title_patterns": [
     {
@@ -1755,28 +1782,28 @@
     },
     {
      "gender": "any",
-     "pattern": "{given}监察"
+     "pattern": "{given}督察"
     }
    ]
   },
   {
    "age_range": [
-    24,
-    38
+    25,
+    36
    ],
-   "baseline": "随舱携带深海热液喷口活体热嗜菌样本的青年学者，在海水倒灌中誓死护卫保温样本箱。",
+   "baseline": "携带热液嗜热菌样本的成年学者，年满二十五岁，精通极端环境生物电镇压调频。",
    "gender": "any",
    "id": "pi_marine_biosphere_researcher",
-   "reputation": "醉心科研但体能偏弱，在重型体力劳动中容易成为拖累。",
+   "reputation": "深渊神经生理造诣深厚，善用科研筹码。",
    "resources": [
-    "一只手提式钛合金高压保温样本箱",
-    "两支肾上腺素应急减压抗休克注射笔"
+    "钛合金高压恒温样本箱",
+    "深海神经阻断与增敏复合针剂"
    ],
    "risks": [
-    "一旦样本箱破裂可能面临未知深海生物毒素泄漏危险",
-    "惊慌失措下容易干扰主操作手"
+    "热液信息素微漏会放大情欲共感",
+    "破拆需仰赖潜航员体能"
    ],
-   "role": "深渊极端生物学研究员",
+   "role": "深渊热液生物学研究员",
    "social_position": "equal",
    "title_patterns": [
     {
@@ -1791,53 +1818,53 @@
   },
   {
    "age_range": [
-    30,
-    52
+    28,
+    46
    ],
-   "baseline": "长年在水下从事法兰焊接与管道封堵的老手艺人，熟悉科考站每一根排水盲管暗道。",
+   "baseline": "从事阀门检修的成年合同工长，年满二十八岁，熟知盲管暗道与蝶阀出厂公差。",
    "gender": "any",
    "id": "pi_deepsea_mechanic_contractor",
-   "reputation": "脾气粗暴认钱不认人，但在管道液压抢险方面拥有一手绝活。",
+   "reputation": "认筹码不认官威，液压破拆有一手绝活。",
    "resources": [
-    "一把加长高扭矩重型棘轮扳手",
-    "一卷耐千帕水压聚四氟乙烯带"
+    "高扭矩棘轮扳手与淬火楔铁",
+    "三号球壳裂纹隐瞒不报的检修底单"
    ],
    "risks": [
-    "在生死危机时可能为自保强行拆卸其余管路制造次生灾害",
-    "对科研人员充满抵触情绪"
+    "博弈中常被推作替罪羊",
+    "私藏钛材曝光将被扣发津贴"
    ],
-   "role": "深海站水工机械合同外包工",
+   "role": "深海站水工机械外包工长",
    "social_position": "low",
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}师傅"
+     "pattern": "{family}工长"
     },
     {
      "gender": "any",
-     "pattern": "{given}钳工"
+     "pattern": "{given}大工"
     }
    ]
   }
  ],
- "premise": "万米海沟的深海科考站，首席深潜技术主管带着副驾驶员、安全监察官和极端生物学研究员轮班下潜，白天采样、夜里在生活舱里吃罐头。深渊断裂带最近微震不断，双向减压气闸舱的平衡阀上次检修时有两毫米的形变。",
+ "premise": "万米海沟科考站遭遇断层微震，双向减压气闸舱水力蝶阀主轴弯曲两毫米抱死，零度海水漫过膝盖。首席技术总监在急性高压神经震颤发作边缘，拆下深潜器机械手实心钛合金仿生指骨卡入阀槽，与舱内搭档及观测廊展开生死破拆与筹码博弈。",
  "pressures": [
   {
-   "choice": "等待站内主控尝试高压泵电控反冲，还是由总师带领二人暴力撬动物理复位卡槽。",
+   "choice": "在波峰强压，还是索要淬火楔铁并借负相位波谷贴身下压。",
    "exits": [
     {
-     "cost": "指骨受剪应力发生微度塑性扭曲，操作人员手腕骨节在高压震动下剧烈拉伤。",
-     "option": "用深潜器多功能机械爪实心钛合金仿生指骨插入复位卡槽借身体重力反向猛撬。"
+     "cost": "指骨崩角，湿潜服紧贴摩擦，高压神经震颤被彻底激发。",
+     "option": "将实心钛合金仿生指骨垫上淬火楔铁卡入复位槽，胸背紧贴在波谷猛撬回正。"
     },
     {
-     "cost": "高频敲击导致割刀刃口崩碎，割破潜水手套流出鲜血被冰水稀释。",
-     "option": "用潜水合金割刀敲击阀箱偏摆轴肩配合老管工的淬火楔铁反震脱扣自救。"
+     "cost": "割刀折断划伤手腕，且欠下递送工具者一笔私密人情债。",
+     "option": "用潜水合金割刀猛击轴肩配合钛合金指骨别开滑套泄水。"
     }
    ],
    "far": {
-    "consequence": "内外压差彻底失控引发气闸球壳局部内爆，人员尸骨无存化为齑粉。",
+    "consequence": "万米水压灌满气闸舱引发内爆，全员无一生还。",
     "due_days": 1,
-    "trigger": "减压阀主轴彻底撕裂脱落"
+    "trigger": "气闸舱空气归零且主轴撕裂"
    },
    "flags": [
     "timed"
@@ -1845,315 +1872,295 @@
    "hook_ids": [],
    "id": "p_hydraulic_valve_shaft_bend_jam",
    "immediate": {
-    "minutes": 8,
-    "text": "阀门减速箱齿轮传出刺耳的金属断裂尖叫，手轮完全失去空转旷量如焊死般纹丝不动。"
+    "minutes": 6,
+    "text": "手轮焊死，海水浸没大腿，钛合金指骨卡入齿槽迸火星。"
    },
    "leverage": null,
    "location_ids": [
-    "loc_airlock_decompression_chamber"
+    "loc_airlock_decompression_chamber",
+    "loc_station_decompression_corridor",
+    "loc_submersible_docking_bay"
    ],
    "near": {
-    "deadline_minutes": 22,
-    "text": "主轴弯曲弧度因两侧压差持续拉大加剧至三毫米，阀芯与阀座发生分子级冷焊咬合。"
+    "deadline_minutes": 15,
+    "text": "冰水漫胸，单人无法撼动数十吨水压顶死的阀芯。"
    },
-   "objective": "在舱内空气被完全压爆前利用机械爪钛合金指骨反向撬正阀轴排除积水。",
+   "objective": "拆下机械手实心钛合金仿生指骨卡入左偏三度退让槽，双人撬正阀芯。",
    "source": "accident",
    "start_minute": 1380,
    "tags": [
     "disaster",
     "workplace"
    ],
-   "title": "水力平衡减压阀主轴过载弯曲咬死",
-   "trigger": "万米海沟深渊强震产生瞬间破坏性压差脉冲，双向水力平衡减压阀主轴在超载剪切力作用下弯曲形变两毫米，阀芯内部硬质合金滑套彻底咬死卡死在全闭位置。"
+   "title": "水力平衡减压阀主轴弯曲两毫米咬死",
+   "trigger": "强震使水力减压蝶阀主轴弯曲两毫米，零度海水漫过膝盖暴涨。"
   },
   {
-   "choice": "立刻潜入冰水寻找底部暗阀，还是站在深潜器尾翼高处全力压下撬杆。",
+   "choice": "强撑硬熬至当众痉挛，还是退入密室交出调频器贴身镇压。",
    "exits": [
     {
-     "cost": "湿透的潜水服下肌肉抽搐疼痛欲裂，耗尽最后一点生热能量。",
-     "option": "两人背靠背紧紧相贴借彼此体温抵抗失温双手死死按住撬杠合力反向撬转。"
+     "cost": "防线在脉冲与纯银细链乳夹刺激下失守，留下羞耻的共感依赖。",
+     "option": "反锁复温舱，戴真皮金属锁扣项圈与神经共感同步塞受高频代偿。"
     },
     {
-     "cost": "头部暴露在零度水中引发剧烈血管神经性偏头痛与定向障碍。",
-     "option": "含住便携式应急微型呼吸嘴沉入冰水中用双脚蹬住舱壁增加下压力矩。"
+     "cost": "被搭档摸清全身高敏反射带，在密室博弈中受制于人。",
+     "option": "在球舱贴满微电流脉冲贴，贴紧搭档胸膛借体温平复震颤。"
     }
    ],
    "far": {
-    "consequence": "深渊极寒海水全面没顶淹没气孔，全员在剧烈肺痉挛中溺亡殉职。",
+    "consequence": "发生脊髓麻痹并被吊销万米深潜执照。",
     "due_days": 1,
-    "trigger": "气闸舱内空气空间彻底归零"
+    "trigger": "高压神经综合征失控且病历被取证"
    },
    "flags": [
     "timed"
    ],
    "hook_ids": [],
-   "id": "p_ice_cold_seawater_submersion_rise",
+   "id": "p_hpns_neuro_tremor_overload",
    "immediate": {
-    "minutes": 10,
-    "text": "刺骨深渊海水已经浸没至胸口，两人呼出的白汽瞬间被冻结在石英面罩内侧形成冰花。"
+    "minutes": 5,
+    "text": "脊椎窜起酸麻，十指发抖，耳廓烧起绯红。"
    },
    "leverage": null,
    "location_ids": [
-    "loc_airlock_decompression_chamber"
+    "loc_airlock_decompression_chamber",
+    "loc_hyperbaric_medical_pod",
+    "loc_submersible_docking_bay",
+    "loc_director_living_module"
    ],
    "near": {
-    "deadline_minutes": 20,
-    "text": "水位漫过脖颈，身体在极寒刺激下开始出现剧烈寒颤与四肢末梢神经麻木痉挛。"
+    "deadline_minutes": 14,
+    "text": "皮肤敏化到湿潜服摩擦都令腰软，随时可能跪倒。"
    },
-   "objective": "在完全溺水窒息前稳住身体并完成撬动操作打开排水通道。",
+   "objective": "转入复温舱或球舱，启用微电流脉冲贴、真皮金属锁扣项圈、纯银细链乳夹与神经共感同步塞镇压。",
    "source": "nature",
-   "start_minute": 1388,
+   "start_minute": 1386,
    "tags": [
-    "disaster",
-    "workplace"
+    "intimate",
+    "humiliation"
    ],
-   "title": "零下二度极寒深渊海水漫顶倒灌",
-   "trigger": "由于外侧减压水路受损，深渊零下二度超高压海水沿阀门密封缝隙汹涌狂涌，舱内水位以每分钟五厘米的速度持续暴涨，急速逼近两人下颌。"
+   "title": "急性高压神经综合征与脊髓震颤反噬",
+   "trigger": "超深潜水叠加极寒与高压氦氧刺激，诱发急性高压神经综合征震颤。"
   },
   {
-   "choice": "隔着玻璃向指挥官发出最后通牒，还是全神贯注完成最后一厘米的力矩下压。",
+   "choice": "任由锁舌封死气闸舱，还是拿把柄与私密协议换取放行。",
    "exits": [
     {
-     "cost": "站长长面临违抗国家安全条例文书的军法严惩。",
-     "option": "站长指挥官拔枪怒斥执纪专员并手动切断电磁锁舌供电回路为舱内争取时间。"
+     "cost": "卷入高层封口同盟，事后须进复温舱完成私密筹码交割。",
+     "option": "用三号球壳裂纹底单逼总指挥官拔保险丝并签抢险豁免令。"
     },
     {
-     "cost": "指骨被几十吨下坠重力剪切折断彻底损毁。",
-     "option": "在锁舌落下最后十厘米前将钛合金机械爪另一截指骨横插在门缝轨道死卡阻止下坠。"
+     "cost": "钛合金构件被压出深痕，须在调查会上承担损毁追责。",
+     "option": "将另一截钛合金指骨横插进门缝滑轨硬卡住锁舌。"
     }
    ],
    "far": {
-    "consequence": "气闸舱彻底沦为水下孤岛，失去任何自内侧开启可能，全员被永封水底。",
+    "consequence": "气闸舱与生活区永久隔绝，舱内人员困死水底。",
     "due_days": 1,
-    "trigger": "电磁锁舌彻底落下卡死"
+    "trigger": "永封磁力死锁彻底落栓闭合"
    },
    "flags": [
-    "timed"
+    "timed",
+    "leverage"
    ],
    "hook_ids": [],
    "id": "p_habitat_quarantine_magnetic_deadlock",
    "immediate": {
-    "minutes": 5,
-    "text": "观测廊穹顶红灯爆闪，刺耳警报在有线广播中回荡：内门防淹自锁启动，倒计时三百秒！"
+    "minutes": 4,
+    "text": "观测廊红灯爆闪，两枚实心电磁锁舌在滑轨中下移。"
    },
-   "leverage": null,
+   "leverage": {
+    "basis": "指挥官手握永封死锁电钥匙与抢险豁免令签字权。",
+    "holder": "station_commander_gu_xiongcang",
+    "subject": "player"
+   },
    "location_ids": [
+    "loc_station_decompression_corridor",
+    "loc_airlock_decompression_chamber"
+   ],
+   "near": {
+    "deadline_minutes": 10,
+    "text": "锁舌距卡死仅剩十厘米，旁通增压阀仍被冻结。"
+   },
+   "objective": "在锁舌卡死前撬通排水阀，或用三号球壳裂纹底单迫使总指挥官拔保险丝。",
+   "source": "institution",
+   "start_minute": 1392,
+   "tags": [
+    "workplace_power",
+    "disaster"
+   ],
+   "title": "主控台启动隔舱永封磁力死锁逼宫",
+   "trigger": "水位突破浮球，执纪官触发防漫灌条例，电磁锁舌三百秒后落栓。"
+  },
+  {
+   "choice": "任由黑匣曝光撤职，还是在球舱与居住舱内摆平审计。",
+   "exits": [
+    {
+     "cost": "交出调频密钥，在球舱幽光中承受羞耻的合规审讯。",
+     "option": "在球舱交出晶核分润权，任审查者操控真皮金属锁扣项圈与微电流脉冲贴。"
+    },
+    {
+     "cost": "结成黑匣共犯，随时可借共感器具互相索取报酬。",
+     "option": "亮出对方私藏钛材或伪造档案死穴迫使对方覆盖黑匣。"
+    }
+   ],
+   "far": {
+    "consequence": "涉事团队被停职羁押，项目被强制接管。",
+    "due_days": 2,
+    "trigger": "违规超潜与篡改铁证发往水面"
+   },
+   "flags": [
+    "leverage"
+   ],
+   "hook_ids": [],
+   "id": "p_overdepth_blackbox_audit_blackmail",
+   "immediate": {
+    "minutes": 10,
+    "text": "辅修库传来调取黑匣指令，超潜警告灯闪烁。"
+   },
+   "leverage": {
+    "basis": "你握有地质学者私自篡改深度报警阈值的黑匣日志。",
+    "holder": "player",
+    "subject": "subsea_geologist_dr_wei"
+   },
+   "location_ids": [
+    "loc_submersible_docking_bay",
+    "loc_director_living_module",
     "loc_station_decompression_corridor"
    ],
    "near": {
-    "deadline_minutes": 12,
-    "text": "两枚粗如大腿的实心电磁锁舌开始在滑轨中缓缓下移，机械保险卡扣发出咔咔脆响。"
+    "deadline_minutes": 25,
+    "text": "审查者堵在门外核对遥测与震颤波形。"
    },
-   "objective": "在磁力螺栓锁死前完成气闸排水平衡并迫使控制台手动中止程序。",
+   "objective": "在黑匣封存前覆盖违规航段，用晶核或共感校准堵住审查者的嘴。",
    "source": "institution",
-   "start_minute": 1402,
+   "start_minute": 1400,
    "tags": [
     "workplace_power",
     "crime"
    ],
-   "title": "基地控制台启动隔舱永封磁力死锁",
-   "trigger": "执纪专员强行触发基地破损自保条例，内门控制微机启动了五分钟不可逆切断程序，两枚两百千牛重型电磁自锁螺栓即将落下切断救援通路。"
+   "title": "违规超潜三小时黑匣与深度阈值追查",
+   "trigger": "遥测发现超潜三小时且深度报警器被篡改，督察启动提审。"
   },
   {
-   "choice": "冒险快速扳下阀门抢夺生机，还是忍受剧痛精准微调泄压阀开度。",
+   "choice": "强忍皮肤饥渴硬撑，还是在复温榻接入双人共感回路。",
    "exits": [
     {
-     "cost": "药效过后将面临严重的虚脱心悸与代谢紊乱。",
-     "option": "立即注射随身携带的减压抗休克肾上腺素针剂强行稳定神经反射协同发力。"
+     "cost": "在喘息中卸下高冷防线，身体记忆被对方共感频率烙印。",
+     "option": "在复温舱扣紧纯银细链乳夹与神经共感同步塞高频泄放。"
     },
     {
-     "cost": "驾驶员自身因分心护持承受更大单侧关节剪切痛。",
-     "option": "驾驶员将总师稳稳靠在自己怀中以腹部呼吸节奏引导其同频呼吸压制神经震颤。"
+     "cost": "被扎入大腿外侧并扣上真皮金属锁扣项圈观察半小时。",
+     "option": "以矿芯署名权或免责签字换取神经阻断针剂。"
     }
    ],
    "far": {
-    "consequence": "发生不可逆深海减压瘫痪休克，数分钟内丧失自主呼吸能力死亡。",
+    "consequence": "神志溃散，失态数据被记录在医务终端。",
     "due_days": 1,
-    "trigger": "减压太快，血里析出的氮气泡顺着静脉堵进肺和脑"
+    "trigger": "信息素与神经震颤叠加引发热休克"
    },
    "flags": [
-    "timed"
+    "timed",
+    "leverage"
    ],
    "hook_ids": [],
-   "id": "p_nitrogen_bubble_embolism_threat",
+   "id": "p_hydrothermal_pheromone_leak_fever",
    "immediate": {
-    "minutes": 6,
-    "text": "总师双肩关节泛起如同钢针攒刺的剧烈灼痛，呼吸声因血液气泡刺激而粗重短促。"
+    "minutes": 8,
+    "text": "呼吸泛起硫磺暖香，四肢浮起潮红，心率飙破百二。"
    },
-   "leverage": null,
+   "leverage": {
+    "basis": "医官掌握复温舱共感校准终端与信息素解毒剂。",
+    "holder": "subsea_physician_tan_xin",
+    "subject": "player"
+   },
    "location_ids": [
-    "loc_airlock_decompression_chamber"
-   ],
-   "near": {
-    "deadline_minutes": 15,
-    "text": "神经性减压痛蔓延至脊柱，视线边缘开始出现黑色斑点，手指抓握力量出现衰减预警。"
-   },
-   "objective": "维持稳定呼吸节奏并在撬正阀门后保持梯级泄放不可骤降暴跌。",
-   "source": "nature",
-   "start_minute": 1396,
-   "tags": [
-    "disaster",
-    "workplace"
-   ],
-   "title": "急速气压剧变诱发体内急性氮气栓塞",
-   "trigger": "气闸舱内由于海水压缩与阀门微漏，水气混合压强发生剧烈跳变，潜航员体内溶解的高浓度氮气处于析出沸腾的边缘，剧烈骨痛与窒息感袭来。"
-  },
-  {
-   "choice": "孤注一掷加大身体重量强压，还是稍微回撤半寸垫入老管工的硬化钢片。",
-   "exits": [
-    {
-     "cost": "冰水激荡下右手食指被楔铁锋利毛刺划开一道深口。",
-     "option": "总师用牙齿叼住手电光束迅速将老管工递进的淬火承载楔铁垫入咬合盲区脱险。"
-    },
-    {
-     "cost": "驾驶员二头肌纤维面临重度拉伤撕裂剧痛。",
-     "option": "驾驶员将双臂向前挪移十公分收缩力臂以纯肉体爆发力分担指骨剪切峰值。"
-    }
-   ],
-   "far": {
-    "consequence": "金属碎片高速击伤人体，丧失唯一杠杆工具彻底坠入生机断绝深渊。",
-    "due_days": 1,
-    "trigger": "钛合金指骨应力过载发生崩碎断裂"
-   },
-   "flags": [
-    "timed"
-   ],
-   "hook_ids": [],
-   "id": "p_titanium_claw_yield_stress_creak",
-   "immediate": {
-    "minutes": 4,
-    "text": "指骨仿生齿纹咬合处迸射出一连串水下暗红火花，钛合金表面泛起银白色的微细应力白纹。"
-   },
-   "leverage": null,
-   "location_ids": [
-    "loc_airlock_decompression_chamber"
-   ],
-   "near": {
-    "deadline_minutes": 9,
-    "text": "指骨弯曲度超过安全极限，随时可能在巨大反弹力作用下崩飞击穿气闸内壁。"
-   },
-   "objective": "垫入淬火楔铁分担应力并调整发力倾角防止工具瞬间折飞。",
-   "source": "accident",
-   "start_minute": 1392,
-   "tags": [
-    "disaster",
-    "workplace"
-   ],
-   "title": "钛合金仿生指骨承受极限剪切濒临脆断",
-   "trigger": "深渊数十吨水压死死顶在阀芯上，两人倾尽全身力量下压使得钛合金指骨承受了超越标称值的剪切扭矩，金属内部发出令人心悸的晶格撕裂呻吟。"
-  },
-  {
-   "choice": "分出一人去顶紧深潜器基座，还是全员加速撬动阀门争分夺秒。",
-   "exits": [
-    {
-     "cost": "失去关键检修套筒工具，手掌在湍急水流中被钢缆毛刺扎伤。",
-     "option": "迅速将随身备用大号液压套筒卡在滑轨制动孔阻止深潜器继续滑移脱险。"
-    },
-    {
-     "cost": "右肩锁骨遭受巨大撞击重度挫伤。",
-     "option": "驾驶员用肩膀死死抵住深潜器防撞艏为总师争取最后三秒撬动窗口。"
-    }
-   ],
-   "far": {
-    "consequence": "数十吨重的潜水器将直接砸烂减压阀门并将操作人员碾碎在舱底。",
-    "due_days": 1,
-    "trigger": "主牵引钢缆全面崩断深潜器失控翻滚"
-   },
-   "flags": [
-    "timed"
-   ],
-   "hook_ids": [],
-   "id": "p_submersible_cable_snap_rebound",
-   "immediate": {
-    "minutes": 5,
-    "text": "主钢缆的外层尼龙护套已经在剧烈拉扯中爆开，内部数十股高碳钢丝根根紧绷颤鸣。"
-   },
-   "leverage": null,
-   "location_ids": [
-    "loc_airlock_decompression_chamber"
-   ],
-   "near": {
-    "deadline_minutes": 11,
-    "text": "第一根辅助钢缆发生脆断崩飞，深潜器重重砸在气闸舱左侧导轨上激起滔天水浪。"
-   },
-   "objective": "在钢缆崩断前完成破拆或者迅速将备用液压插销卡死在基座滑轨。",
-   "source": "accident",
-   "start_minute": 1405,
-   "tags": [
-    "disaster",
-    "crime"
-   ],
-   "title": "深潜器固定缆索在海浪震荡中即将崩断",
-   "trigger": "舱内地面积水涌动导致数吨重的深潜器在基座上发生微小侧倾，紧绷的四道高强度编织钢缆发出即将断裂的刺耳尖啸，摇摇欲坠砸向减压阀门。"
-  },
-  {
-   "choice": "从科考经费里挪钱付三倍津贴，还是请聂师傅留下、私下劝其他人",
-   "exits": [
-    {
-     "cost": "断裂带的取样计划要砍掉一半",
-     "option": "挪用科考经费"
-    },
-    {
-     "cost": "聂师傅要总监在合同上写明，出了事由总监一个人担责",
-     "option": "请聂师傅留下"
-    }
-   ],
-   "far": {
-    "consequence": "站上没人修管网，科考站提前一个季度关站，总监三年的观测中断",
-    "due_days": 14,
-    "trigger": "外包工撤走"
-   },
-   "flags": [
-    "timed"
-   ],
-   "hook_ids": [
-    "hook_binglan_cocoa_mug",
-    "hook_lu_porthole_point",
-    "hook_lu_zz_seal",
-    "hook_gu_log_review",
-    "hook_nie_wrench_lesson",
-    "hook_binglan_module_window"
-   ],
-   "id": "p_contractor_hazard_pay",
-   "immediate": {
-    "minutes": 5,
-    "text": "老马敲开居住舱的门，说外包工们已经在收拾铺盖"
-   },
-   "leverage": null,
-   "location_ids": [
+    "loc_hyperbaric_medical_pod",
     "loc_director_living_module"
    ],
    "near": {
-    "deadline_minutes": 1380,
-    "text": "明早八点，补给潜器出发"
+    "deadline_minutes": 18,
+    "text": "微电流脉冲贴处敏度暴涨，轻擦都引来颤栗闷哼。"
    },
-   "objective": "在补给潜器明早出发之前，回复外包公司",
-   "source": "money",
-   "start_minute": 540,
+   "objective": "在催化成失控热潮前注射阻断剂，或以神经共感同步塞和纯银细链乳夹泄放。",
+   "source": "nature",
+   "start_minute": 1410,
    "tags": [
-    "workplace_power"
+    "intimate",
+    "substance"
    ],
-   "title": "外包公司的条件",
-   "trigger": "气闸修好后的第二天，外包公司从水面发来电报：站上出了这么大的事故，管网工的风险津贴要翻三倍，否则下一班补给潜器把外包工全部接走"
+   "title": "热液嗜热菌信息素微漏催化共感高敏",
+   "trigger": "样本箱气密松动，热液嗜热菌神经信息素渗入密闭加温舱。"
+  },
+  {
+   "choice": "挪用经费赔付，还是抓牢技师私藏钛材与震颤死穴在暗舱摆平。",
+   "exits": [
+    {
+     "cost": "须在暗舱内亲自用微电流脉冲贴为其镇压减压神经痛。",
+     "option": "搜出私藏钛芯与改装微电流器具，逼其签保修状。"
+    },
+    {
+     "cost": "与技师绑在一条船上，在密室承受对方贴身试探。",
+     "option": "签担保书并让渡晶核分红，换取蝶阀验收回扣底单。"
+    }
+   ],
+   "far": {
+    "consequence": "三年观测功亏一篑，管理层遭追责索赔。",
+    "due_days": 3,
+    "trigger": "外包技师撤离导致科考站提前关站"
+   },
+   "flags": [
+    "timed",
+    "leverage"
+   ],
+   "hook_ids": [],
+   "id": "p_contractor_hazard_pay",
+   "immediate": {
+    "minutes": 15,
+    "text": "管工停止巡检，拿担保合同堵在辅修库门口。"
+   },
+   "leverage": {
+    "basis": "技师握有蝶阀淬火楔铁绝活及验收回扣底单。",
+    "holder": "expedition_contractor_plumber_nie",
+    "subject": "player"
+   },
+   "location_ids": [
+    "loc_submersible_docking_bay",
+    "loc_director_living_module",
+    "loc_station_decompression_corridor"
+   ],
+   "near": {
+    "deadline_minutes": 45,
+    "text": "距补给潜器启航仅剩最后一班，支管已触发报警。"
+   },
+   "objective": "在起航前搞定管网首席技师，保住基站管网不瘫痪。",
+   "source": "money",
+   "start_minute": 1418,
+   "tags": [
+    "workplace_power",
+    "crime"
+   ],
+   "title": "外包管网停摆威慑与三倍风险津贴逼宫",
+   "trigger": "蝶阀偏摆曝光后外包组要三倍津贴并签担保书，否则随补给潜器撤离。"
   }
  ],
- "region": "万米海沟深海科考站双向耐压减压气闸舱",
+ "region": "万米海沟科考站双向减压气闸舱与加压生活区",
  "rules": [
   {
-   "id": "r_deepsea_saturation_decompression_table",
-   "text": "万米深潜饱和潜水返回过渡舱时必须严格遵循减压梯度表进行阶段性水力保压泄放。"
+   "id": "r_deepsea_decompression_table",
+   "text": "万米深潜返回过渡舱须按梯度泄压，内外球阀严禁在压差超零点二兆帕时强行电控开启。"
   },
   {
-   "id": "r_dual_airlock_hydraulic_interlock",
-   "text": "内外耐压球阀严禁在两侧压差超过零点二兆帕时通过电力强行开启。"
+   "id": "r_sample_arm_tamper_protocol",
+   "text": "深潜机械手实心钛合金仿生指骨属A级备件，拆卸充当破拆杠杆前须复核剪切公差。"
   },
   {
-   "id": "r_sample_arm_component_tamper_protocol",
-   "text": "深潜机械手钛合金作业组件属于A级应急备件，拆卸充当机械杠杆前须记录形变公差。"
+   "id": "r_abyss_quarantine_deadlock",
+   "text": "过渡舱海水突破警戒浮球时，观测廊有权启动永封磁力死锁切断通路以保核心区。"
   },
   {
-   "id": "r_abyss_containment_breach_quarantine",
-   "text": "过渡舱海水灌注水位突破警戒浮球时核心生活区主隔水门自动触发永封磁力死锁。"
+   "id": "r_hpns_neuro_sync_suppression",
+   "text": "超深作业诱发急性高压神经综合征与氦氧震颤过载时，须转入私密舱室贴附微电流脉冲贴、扣紧真皮金属锁扣项圈并接入神经共感同步塞实施双人生物电代偿镇压。"
   }
  ],
  "schema_version": 1,
@@ -2162,94 +2169,93 @@
   "committed": "深渊契约",
   "familiar": "面罩共温",
   "flirting": "潜服相贴",
-  "intimate": "浮水解甲",
+  "intimate": "共感解甲",
   "stranger": "声呐监听",
   "testing": "力矩生死"
  },
  "status": "released",
- "style_hint": "冷硬逼真的硬核深海工程工笔，着重刻画万米水压下钛合金机械爪与高碳钢阀槽咬合时的剧烈摩擦火星、零度海水浸泡下两人剧烈起伏的胸膛与防寒服包裹下极限制动，台词干脆果决充满深潜人员的冷峻克制。",
+ "style_hint": "冷硬深海硬核工笔，刻画万米水压下实心钛合金机械爪指骨与阀槽咬合的火星、零度海水浸透紧身潜服的战栗曲线，以及高傲技术总监在高压神经综合征过载与生物电共感校准下的嘴硬冷斥与身体失守。",
  "tension_engines": [
   {
-   "id": "te_abyss_pressure_vs_manual_claw_prying",
-   "text": "万米海沟极端水压冰冷倒灌漫顶与利用实心钛合金机械爪指骨反向撬正抱死蝶阀的机械生死决战。"
+   "id": "te_abyss_pressure_vs_claw_prying",
+   "text": "零度海水漫顶与用机械手实心钛合金仿生指骨撬正弯曲蝶阀主轴的力矩死斗。"
   },
   {
-   "id": "te_station_quarantine_vs_diver_rescue",
-   "text": "深海基站牺牲局部隔舱自保的冷酷安全条例与绝不放弃舱内潜航英雄同胞的人性道德死斗。"
+   "id": "te_quarantine_vs_diver_rescue",
+   "text": "主控台启动永封磁力死锁与拿高层裂纹、黑匣把柄逼宫放行的筹码博弈。"
   },
   {
-   "id": "te_nitrogen_decompression_vs_rapid_drain",
-   "text": "急剧浮起减压病气栓爆发威胁与在冰冷积水中迅速开启重力排水阀的生理极限制动拉扯。"
+   "id": "te_hpns_overload_vs_neuro_taming",
+   "text": "急性高压神经综合征反噬，与启用神经共感同步塞、微电流脉冲贴、纯银细链乳夹和真皮金属锁扣项圈镇压的拉锯。"
   },
   {
-   "id": "te_hypothermia_spasm_vs_body_warmth",
-   "text": "零度深渊海水浸泡失温肌肉抽搐与两人在冰水中紧密相贴合力下压撬杠的滚烫生命共鸣。"
+   "id": "te_hypothermia_vs_body_warmth",
+   "text": "高傲权威在失温与生物电过载下嘴硬冷斥、身体却寸寸溃防的反差。"
   }
  ],
  "title": "万米深海女潜员",
  "tone": [
   "高压壳体金属呻吟",
-  "深渊冰冷海水漫过膝盖",
-  "减压舱压力表嘶鸣",
-  "心跳与气泡共振"
+  "深渊冰水漫过腰腹",
+  "高压神经震颤过载",
+  "骨传导贴耳低喘"
  ],
  "twists": [
   {
    "category": "信息",
-   "id": "tw_subsea_hydraulic_bypass_valve_opened",
+   "id": "tw_hydraulic_bypass_bolt_secret",
    "requires": [
-    "subsea_technical_director_shen_binglan"
+    "expedition_contractor_plumber_nie"
    ],
-   "text": "{subsea_technical_director_shen_binglan.name}在淹没的阀箱底部摸出了当年出厂装配时预留的微米级液压自卸荷泄流旁通铜螺栓。"
+   "text": "{expedition_contractor_plumber_nie.name}被微电流脉冲贴拿捏后吐实：阀箱底还封着卸荷铜螺栓，用钛合金指骨尾端顶破即降三成阻尼。"
   },
   {
    "category": "人事",
-   "id": "tw_station_commander_overrides_deadlock",
+   "id": "tw_commander_spine_fissure_reversal",
    "requires": [
     "station_commander_gu_xiongcang"
    ],
-   "text": "{station_commander_gu_xiongcang.name}拔出配枪强行控制了控制台纪律督察，全面接管全站应急最高指挥权。"
+   "text": "{station_commander_gu_xiongcang.name}强压执纪官时慢性脊髓震颤急性发作，三号球壳裂纹底单落入在场者手中，被迫退入复温舱交钥匙。"
   },
   {
    "category": "资源",
-   "id": "tw_high_pressure_adrenalin_syringe_used",
+   "id": "tw_pilot_smuggled_crystal_blackbox",
    "requires": [
-    "subsea_technical_director_shen_binglan"
+    "deepsea_pilot_lu_chengyuan"
    ],
-   "text": "{subsea_technical_director_shen_binglan.name}在失温麻木关头将高浓度减压抗休克针剂刺入大腿，瞬间唤醒濒临衰竭的神经反射完成暴击发力。"
+   "text": "{deepsea_pilot_lu_chengyuan.name}工具箱底不仅藏着稀土晶核，还有记录总监与地质学者篡改深度阈值的双轨黑匣母盘。"
   },
   {
    "category": "制度",
-   "id": "tw_commander_deepsea_salvage_order",
+   "id": "tw_mandatory_hpns_sympathetic_clause",
    "requires": [
-    "station_commander_gu_xiongcang"
+    "subsea_physician_tan_xin"
    ],
-   "text": "{station_commander_gu_xiongcang.name}签署了特级深海抢险豁免令，依法将破坏性破拆减压阀定性为战备合法紧急避险。"
+   "text": "{subsea_physician_tan_xin.name}启动高压医学条款：凡经破拆者须锁入复温舱完成真皮金属锁扣项圈与神经共感同步塞校准，否则冻结权限。"
   },
   {
    "category": "时限",
-   "id": "tw_drainage_pumps_catch_surge_in_time",
+   "id": "tw_negative_phase_wave_trough",
    "requires": [
-    "station_commander_gu_xiongcang"
+    "subsea_geologist_dr_wei"
    ],
-   "text": "{station_commander_gu_xiongcang.name}手动启用了外围备用大功率柴油液压排污机组，强行为气闸舱争取到宝贵的五分钟排水时限。"
+   "text": "{subsea_geologist_dr_wei.name}的地音仪测出断层将在九十秒后迎来四秒负相位波谷，水压瞬跌百分之十八，错过则余震将震断指骨。"
   },
   {
    "category": "关系",
-   "id": "tw_pilot_shields_director_from_wave",
+   "id": "tw_physician_dual_plug_feedback",
    "requires": [
-    "subsea_technical_director_shen_binglan",
-    "deepsea_pilot_lu_chengyuan"
+    "subsea_physician_tan_xin"
    ],
-   "text": "{deepsea_pilot_lu_chengyuan.name}在深潜器固定索崩脱瞬间用自己的后背与肩膀硬生生挡下数吨冲压巨浪，将{subsea_technical_director_shen_binglan.name}护在臂弯之下。"
+   "text": "复温舱的神经共感同步塞与纯银细链乳夹推至峰值时，{subsea_physician_tan_xin.name}白大褂下传出闷哼——共感副端暗戴在医官自己身上。"
   },
   {
    "category": "意外",
-   "id": "tw_bent_valve_shaft_snaps_back_true",
+   "id": "tw_pheromone_box_micro_seal_pop",
    "requires": [
     "subsea_technical_director_shen_binglan"
    ],
-   "text": "弯曲两毫米的重型减压主轴在钛合金指骨与淬火楔铁的强力回正下爆发出震耳欲聋的合模回响，阻水阀芯轰然归位，汹涌漫顶的海水如退潮般滚滚泄尽。"
+   "text": "蝶阀撬通的气压跳变震开样本箱微阀，热液信息素混入复温管路，令{subsea_technical_director_shen_binglan.name}微电流脉冲贴体感倍增而溃防。"
   }
  ]
 }

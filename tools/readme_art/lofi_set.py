@@ -770,9 +770,9 @@ def worlds():
 
 
 # ================================================================ cassette shelf
-ITEMS = [("970+", "地点"), ("1270+", "NPC 角色"), ("940+", "玩家身份"), ("1120+", "人物组合"), ("910+", "张力引擎"),
-         ("1770+", "日常活动"), ("1270+", "压力事件"), ("3330+", "开场钩子"), ("1460+", "中期转折"), ("1740+", "规矩与风俗")]
-MATERIAL = "一万四千余项素材"
+ITEMS = [("1090+", "地点"), ("1320+", "NPC 角色"), ("1020+", "玩家身份"), ("2050+", "人物组合"), ("890+", "张力引擎"),
+         ("1530+", "日常活动"), ("1320+", "压力事件"), ("3090+", "开场钩子"), ("1650+", "中期转折"), ("1750+", "规矩与风俗")]
+MATERIAL = "一万五千余项素材"
 INV_DESC = f"一排磁带架上的十盒磁带，标签写着素材数量：{'、'.join(f'{n} {l}' for n, l in ITEMS)}。"
 TAPES = ["#8e5f78", "#4f6f80", "#8a7550", "#6a6290", "#87574f", "#5d7258", "#82607e", "#55628a", "#8a6a58", "#56786f"]
 
@@ -1213,11 +1213,11 @@ def architecture():
     cv.rect(NX1 - 4, NY1 - 4, NX1, NY1, "#e6cf80")
     cv.rect(256, NY0 - 1, 259, NY0 + 2, "#ff6fae")
     cv.put(256, NY0 - 1, "#ffd6e8")
-    for k, line in enumerate(["一回合 = 一次事务", "重试不会重复推进", "同一种子，同一结果"]):
+    for k, line in enumerate(["一次记录 = 原子事务", "重试不会重复推进", "同一种子，同一结果"]):
         over.append(text((NX0 + 5) * C, (NY0 + 13 + k * 9) * C, line, 17, "#5a3a20", 800, "start", 1))
     wire(57, 57, 79, 57)
     wire(221, 57, 182, 57)
-    over.append(text(201 * C, 54 * C, "每回合加载", 14, "#bfb2c8", 700, "middle", 1))
+    over.append(text(201 * C, 54 * C, "按需读取", 14, "#bfb2c8", 700, "middle", 1))
     wire(120, 65, 120, 93)
     wire(140, 93, 140, 66)
     over.append(text(117 * C, 81 * C, "JSON 调用", 15, "#d9d2e2", 700, "end", 1))
@@ -1241,14 +1241,14 @@ def architecture():
     body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}</g>
     <g shape-rendering="crispEdges">{"".join(packets)}</g>
     {"".join(over)}
-    {neon(600, 82, "SKILL架构", 52, "middle", "#a29dab", "#ecebef", flicker=True)}
-    {text(600, 122, "无需理会，当正常SKILL使用就行", 21, SUBT, 600, "middle", 2)}
+    {neon(600, 82, "SKILL 架构", 52, "middle", "#a29dab", "#ecebef", flicker=True)}
+    {text(600, 122, "无需理会，当正常 SKILL 使用就行", 21, SUBT, 600, "middle", 2)}
     {dotline(GW * C, 0, 2.4)}'''
-    doc("architecture.svg", GW * C, GH * C, "SKILL架构",
+    doc("architecture.svg", GW * C, GH * C, "SKILL 架构",
         "玩家对 Agent 宿主说话，宿主按 SKILL.md 的规则写正文，用 JSON 调用本地运行时并拿回结果和下一回合上下文。"
 
         "运行时只用 Python 标准库，分 adapters/cli、application、content、projections、persistence、domain 六层：application 是唯一写入口，"
-        "domain 只放纯函数，persistence 把每一回合写成一次 SQLite 事务，存进用户数据目录。世界源文件由 tools 编译成只读世界包，开局时读取。", "", body)
+        "domain 只放纯函数，persistence 把每次记录写成单个 SQLite 原子事务，存进用户数据目录。世界源文件由 tools 编译成只读世界包，开局时读取。", "", body)
 
 
 architecture()

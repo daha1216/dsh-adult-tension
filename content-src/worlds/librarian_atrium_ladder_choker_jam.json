@@ -3,18 +3,18 @@
   "id": "librarian_atrium_ladder_choker_jam",
   "title": "铜书梯上的馆员",
   "extends": null,
-  "era": "当代宁波，民国藏书楼改建的古籍特藏馆，周五夜读会",
-  "region": "民国藏书楼：五米黄铜书梯高台、楼下天井阅览厅、善本红木书廊与书梯维保凹室",
-  "premise": "宁波一座民国藏书楼改建的古籍特藏馆，每周五有夜读会，楼下的天井阅览厅能坐一百多人。清冷的女馆员白天编目、取书，夜读会时站在五米高的黄铜移动书梯上替读者找善本；盘扣开衫里贴身戴着一条素银项圈胸链。书梯滚轮的逆止齿有点咬，老馆长说过要修。",
+  "era": "当代宁波，民国藏书楼改建的古籍特藏馆，周五夜读会期间",
+  "region": "宁波民国藏书楼：铜梯高台、天井厅、密室、凹室与顶层书房",
+  "premise": "民国藏书楼改建的古籍特藏馆周五夜读会开场，楼下天井百名读者屏息静读。五米高黄铜移动书梯上，穿素白盘扣棉麻开衫配墨黛百褶裙的女馆员捏着两毫米厚纯黄铜直角书签核对善本，滚轮逆止齿偏偏咬死在高处，老馆长皮鞋声正踩着木梯逼近。",
   "tone": [
-    "开衫被扯开香肩",
-    "胸链卡进铜齿",
-    "老馆长皮鞋声近",
-    "黄铜书签挑卡片"
+    "静读屏息偷欢",
+    "开衫半敞羞耻",
+    "筹码当场兑现",
+    "嘴硬反咬失守"
   ],
-  "style_hint": "民国藏书楼的旧木与墨香，楼下百人静读的屏息。写清冷馆员婴儿肥两颊的红晕、被扯开的盘扣开衫下雪白香肩与勒进酥胸的素银胸链、咬着唇不敢出声的喘息，动作落在黄铜书签挑卡片上。",
+  "style_hint": "写透宁波老藏书楼旧木与松烟墨香，写活楼下百人翻书声衬托出的高压隐秘感。抓准微带婴儿肥两颊瞬间漫红却仍冷声训人的女馆员反差，落在黄铜直角书签挑卡片、五米高台摇晃、开衫盘扣松开与暗匣筹码兑现时的寸寸失守。",
   "clock_start": {
-    "label": "十月的一个周五，读书会当天",
+    "label": "十月秋深，周五读书会开场",
     "minute": 1140
   },
   "clock_style": "hm",
@@ -25,50 +25,42 @@
     "nonbinary": 0.0
   },
   "stage_labels": {
-    "stranger": "初次登梯",
-    "acquainted": "组织规约",
-    "familiar": "台容核检",
-    "flirting": "暗光对视",
-    "testing": "执夹撬簧",
-    "intimate": "俯仰共济",
-    "committed": "金石同盟"
+    "stranger": "高台递签陌路",
+    "acquainted": "卡轨护梯试探",
+    "familiar": "密室核页默契",
+    "flirting": "书房盘扣松动",
+    "testing": "亮匣筹码逼宫",
+    "intimate": "百人楼上失声",
+    "committed": "锁死暗账同盟"
   },
   "name_pools": {
     "family": [
       "裴",
-      "陆",
-      "宋",
+      "霍",
       "温",
-      "江",
-      "皮",
-      "陈",
-      "苏",
-      "柳",
-      "潘",
-      "赵",
+      "尤",
+      "穆",
+      "褚",
       "贺",
-      "沈",
-      "顾",
-      "白",
-      "姜"
+      "严",
+      "狄",
+      "傅",
+      "施",
+      "戚"
     ],
     "given_female": [
-      "书宁",
       "采薇",
       "晓蝶",
       "宛卿",
-      "翠娘",
-      "知微",
-      "安然",
       "倾城",
-      "灵萱",
       "羽灵",
       "浅雪",
-      "萌萌",
       "清婉",
       "晚柠",
       "诗音",
-      "雪见"
+      "雪见",
+      "书岚",
+      "静姝"
     ],
     "given_male": [
       "叙白",
@@ -81,518 +73,749 @@
       "景琛",
       "修远",
       "廷锋",
-      "景深",
-      "震霆",
       "天成",
-      "逸轩",
-      "承宇",
-      "埃尔"
+      "承宇"
     ],
     "given_neutral": [
       "微光",
       "书意",
-      "景行",
       "玄同",
-      "若水",
       "青川",
       "怀瑾",
       "望舒",
       "沐风",
-      "鸣谦",
-      "秋白",
-      "丹青",
-      "天音",
-      "和鸣",
-      "致和",
-      "叙安"
+      "砚冰",
+      "松月",
+      "知言",
+      "云阶",
+      "墨轩"
     ],
     "nickname_patterns": [
       {
-        "pattern": "小{given}",
-        "gender": "female"
+        "pattern": "{family}老师",
+        "gender": "any"
       },
       {
-        "pattern": "小{family}",
+        "pattern": "{given}",
         "gender": "any"
       }
-    ],
-    "order": "family_first"
+    ]
   },
   "rules": [
     {
-      "id": "rule_ladder_height_bearing_protocol",
-      "text": "特藏库五米挑空移动铜梯处于高位制动状态时严禁剧烈晃动，以免破坏重力自锁滑轮平衡引发轨道倾斜险情。"
+      "id": "r_silent_atrium_etiquette",
+      "text": "夜读会期间天井阅览厅严禁喧哗异响，环廊掉下黄铜规尺都会引来百人仰头。"
     },
     {
-      "id": "rule_atrium_acoustic_silence_code",
-      "text": "天井挑空回音极其敏锐，五层立体空间内严禁高声喧哗或金属跌落脆响，以免惊扰底层天井阅览厅百人研读秩序。"
+      "id": "r_brass_ladder_lock",
+      "text": "五米黄铜书梯逆止齿锁死后，唯有到立柱凹室拧松卸荷阀方能恢复滑行。"
     },
     {
-      "id": "rule_rare_edition_single_tray_limit",
-      "text": "清代善本孤本原件仅允许佩戴纯棉手套与专用竹木平盘提取，严禁单手悬空拉扯导致脆化纸页折损破裂。"
+      "id": "r_rare_book_audit_chain",
+      "text": "善本调阅须核对馆藏印章与签字，缺页或私换仿纸拓片一经坐实即刻吊销执照。"
     },
     {
-      "id": "rule_adult_library_staff_liability_duty",
-      "text": "特藏书库整理人员与巡检团队全员均为年满二十周岁完全民事责任成年人，严格恪守文保法规与仪容自律规章。"
+      "id": "r_top_study_seal_policy",
+      "text": "夜读期间顶层书房与五楼密室凭门禁刷卡与铜匙开启，外人不得擅叩。"
     }
   ],
   "customs": [
-    "古籍特藏库每日辰时由值班馆员巡视轨道滑轮润滑度并向善本展柜敬陈防蛀香芸草",
-    "善本整理人员登高前须佩戴纯棉手套并核验随身携带之纯黄铜特制直角平刃借阅签",
-    "挑空书梯作业严格遵循双脚定点踏板规范，登高四米以上须确认重力制动卡片咬合到位",
-    "底层读者调阅大开本特藏影印本时须保持翻页轻柔避免产生刺耳纸张摩擦声浪"
+    "登梯检视宋版珍本须执两毫米厚纯黄铜直角书签，严禁指甲刮碰脆页。",
+    "压轴点评前顶层书房习惯备一壶现焖桂花红茶款待主讲与复核代表。",
+    "静读半场须熄去环廊三分之一壁灯，只留铜绿罩台灯聚光照射书桌。",
+    "审计官驻场期间修复负责人须亲陪入密室逐函核对原印并签核复验单。"
   ],
   "player_identities": [
     {
-      "id": "pi_librarian_shen_qing_qiu",
-      "role": "藏书楼所在大学的副校长",
+      "id": "pi_chief_librarian",
+      "role": "全馆善本调阅签发与密室主掌官",
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}校长",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}先生",
-          "gender": "male"
-        }
-      ],
-      "age_range": [
-        39,
-        43
-      ],
-      "social_position": "high",
-      "baseline": "历史学教授，分管图书馆和古籍保护，这场夜读会是此人力主办起来的。",
-      "resources": [
-        "学校对特藏馆的经费与人事决定权",
-        "和老馆长几十年的交情"
-      ],
-      "reputation": "爱书如命、在学校里说一不二的副校长",
-      "risks": [
-        "夜读会出了丑闻，副校长要在校务会上担责"
-      ]
-    },
-    {
-      "id": "pi_senior_lin_yu_bai",
-      "role": "夜读会的主讲人",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}教授",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}老师",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        29,
-        33
-      ],
-      "social_position": "high",
-      "baseline": "版本目录学教授，每月来夜读会讲一部善本，这晚讲的正是馆员去取的那一部。",
-      "resources": [
-        "夜读会的讲书顺序",
-        "可以让全场读者一起低头看书的一句话"
-      ],
-      "reputation": "一开口全场安静的老教授",
-      "risks": [
-        "讲到一半善本没送到，讲座就砸了"
-      ]
-    },
-    {
-      "id": "pi_engineer_zhao_tian_yuan",
-      "role": "藏书楼的古籍拓工",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}师傅",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        29,
-        33
-      ],
-      "social_position": "equal",
-      "baseline": "传拓技艺传人，在藏书楼的拓片室做了十年，常在书梯下的书廊里工作。",
-      "resources": [
-        "一整套拓包和宣纸",
-        "就在书梯斜下方的工作台"
-      ],
-      "reputation": "手稳得能拓出蝇头小字的拓工",
-      "risks": [
-        "书廊出事，拓片室会被要求停工"
-      ]
-    },
-    {
-      "id": "pi_assistant_su_xiao_wan",
-      "role": "夜读会的志愿者",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}同学",
-          "gender": "any"
-        },
-        {
-          "pattern": "小{given}",
+          "pattern": "{family}主理",
           "gender": "any"
         }
       ],
       "age_range": [
         25,
-        29
+        34
+      ],
+      "social_position": "high",
+      "baseline": "坐镇顶层库区的成年主掌官，手握调阅批印，亦担着残页审计风险。",
+      "resources": [
+        "随身绒匣暗格里的纯银细链乳夹与黑天鹅绒蒙眼带",
+        "五楼密室门禁权限与馆藏原账底单"
+      ],
+      "reputation": "业内皆知其清冷严苛，下属畏惧多过亲近。",
+      "risks": [
+        "翻出上季遗失残页修补记录即刻面临行业除名"
+      ]
+    },
+    {
+      "id": "pi_exhibition_director",
+      "role": "馆藏借展排期与修复复核主任",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}主任",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        27,
+        36
+      ],
+      "social_position": "equal",
+      "baseline": "掌管巡展调拨和装帧复核的成年策展骨干，常借名册介入核心库区。",
+      "resources": [
+        "公文箱夹层静音无线遥控跳蛋与黑天鹅绒蒙眼带",
+        "联合借展一票否决权及修复签字簿"
+      ],
+      "reputation": "待人温和知礼，擅长在笑意里把人推向墙角。",
+      "risks": [
+        "曾私批外借未经报备的民国秘戏版画，把柄随时引爆"
+      ]
+    },
+    {
+      "id": "pi_mec_specialist",
+      "role": "驻场检修五米铜梯轨道的技师",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}师傅",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        26,
+        38
       ],
       "social_position": "low",
-      "baseline": "图书馆学专业毕业，每周五来做志愿者，管签到、续茶和收拾书桌。",
+      "baseline": "保养老铜梯滑轨与卸荷阀的成年机电技师，摸透死角与门锁。",
       "resources": [
-        "签到簿和一壶热茶",
-        "楼下天井的灯光开关"
+        "工具袋夹层素银项圈胸链与纯银细链乳夹礼盒",
+        "锁死放开卸荷阀的黄铜套筒与死角密钥"
       ],
-      "reputation": "嘴甜手快的志愿者",
+      "reputation": "寡言守规的维修工，没人提防其看透全馆门锁。",
       "risks": [
-        "出了岔子下周就不让来了"
+        "续签在即，被抓包拖延开阀将永失行业口碑"
+      ]
+    },
+    {
+      "id": "pi_front_archivist",
+      "role": "值守夜会门禁与名册的前台专员",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{given}专员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        23,
+        31
+      ],
+      "social_position": "low",
+      "baseline": "负责门禁登记和监控值班的成年专员，握着出入分钟级记录。",
+      "resources": [
+        "书盒丝绒夹层暗置的素银项圈胸链与静音无线遥控跳蛋",
+        "前台拦截馆长去向的五分钟传话缓冲权"
+      ],
+      "reputation": "平日温顺勤快，最擅长掐住大人物漏洞索价。",
+      "risks": [
+        "私自拷留异常调阅视频备份，暴露即遭解聘"
+      ]
+    },
+    {
+      "id": "pi_visiting_appraiser",
+      "role": "学会派驻复核宋刻真伪的鉴定官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}委员",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        31,
+        44
+      ],
+      "social_position": "high",
+      "baseline": "受委派突袭审计宋刻真伪的成年鉴定官，一句话决定全馆评级。",
+      "resources": [
+        "密码箱纯银细链乳夹、素银项圈胸链与静音无线遥控跳蛋",
+        "联合审计密封章及纸墨紫光检视仪"
+      ],
+      "reputation": "学术圈人称冷面阎王，偏爱看名家卸掉体面求饶。",
+      "risks": [
+        "五年前替私人藏家做模糊鉴定，最忌旧档曝光"
       ]
     }
   ],
   "locations": [
     {
       "id": "loc_atrium_ladder_high_platform",
-      "name": "书梯顶台",
-      "detail": "悬空五米之黄铜挑空移动书梯顶端防滑踏板，两侧是清代红木善本立柜，上方为百年哥特式彩色玻璃藏书楼，下方俯瞰整个挑空阅览大厅。",
-      "privacy": "public",
-      "visibility": "底层百位自习学子只要抬眼便能将高空梯架一览无余，阳光透过彩色藏书楼斜射在受困处格外醒目。",
-      "witnesses": [
-        "bg_curator_gu_wen_zheng",
-        "bg_senior_lin_yu_bai"
-      ],
-      "exits": [
-        "loc_ground_reading_atrium_hall",
-        "loc_stacks_fifth_rare_aisle",
-        "loc_mep_ladder_service_bay"
-      ],
-      "affordances": [
-        "单手把扶梯架红木护手稳住身躯重心平衡",
-        "右手持两毫米铜直板规尺探入滑轮缝隙实施自救"
-      ],
-      "pressure_modifiers": {
-        "pres_fifteen_second_curator_approach": "长辈巡检脚步声回荡石阶加剧倒计时心理威压",
-        "pres_pulley_gear_choker_deadlock": "铜轮齿槽持续咬住素银项圈致使前胸衣物撕扯走光加剧"
-      },
-      "tags": []
-    },
-    {
-      "id": "loc_ground_reading_atrium_hall",
-      "name": "底层百人天井阅览厅",
-      "detail": "天井正下方之开阔研读大厅，百张深色实木大阅览桌整齐排列，百位成年学子在绿罩铜台灯下埋首研读，环境极度静穆。",
+      "name": "铜梯高台",
+      "detail": "五米高空柚木书架前的黄铜滑轨高台，踏板仅容错身。低头便是百名读者，扶手旁插着两毫米纯黄铜直角书签，逆止齿咬紧。",
       "privacy": "semi",
-      "visibility": "读者群坐姿朝向天井各个角度，高空若有金属坠地或布料破损异响将瞬间引发全场齐刷刷仰望。",
+      "visibility": "大部头书函能遮半截身形，但裙摆晃动或喘息稍大便会引来仰望。",
       "witnesses": [
-        "bg_scholar_zhou_han_qing",
-        "bg_assistant_su_xiao_wan"
+        "bg_silent_reader_crowd",
+        "bg_rare_book_photographer"
       ],
       "exits": [
-        "loc_atrium_ladder_high_platform",
-        "loc_stacks_fifth_rare_aisle",
-        "loc_mep_ladder_service_bay",
-        "loc_library_reading_study"
-      ],
-      "affordances": [
-        "翻动大开本宣纸善本发出声浪遮蔽高空撬锁脆响",
-        "举起厚重经卷封面构筑地面仰角视线屏障"
-      ],
-      "pressure_modifiers": {
-        "pres_hundred_readers_silent_gaze": "百人读者随时停笔抬头带来莫大集体审视威压"
-      },
-      "tags": []
-    },
-    {
-      "id": "loc_stacks_fifth_rare_aisle",
-      "name": "第五排书廊",
-      "detail": "深达三十米之高大红木书架列阵，樟木防蛀香气弥漫，地面铺设减震软木地板，乃老馆长每日巡查必经的主动线。",
-      "privacy": "public",
-      "visibility": "书架两端通透无遮挡，老馆长只要跨过走廊转角即可一眼望见梯顶馆员操作仪态。",
-      "witnesses": [
-        "bg_curator_gu_wen_zheng"
-      ],
-      "exits": [
-        "loc_atrium_ladder_high_platform",
-        "loc_ground_reading_atrium_hall",
-        "loc_mep_ladder_service_bay"
-      ],
-      "affordances": [
-        "递交特急公文在走廊通道对巡视人员实行人为截停",
-        "调阅分类索书号假借请教版本难题阻滞老馆长脚步"
-      ],
-      "pressure_modifiers": {
-        "pres_fifteen_second_curator_approach": "老馆长巡视脚步已迈过汉白玉阶梯逼近最后拐角"
-      },
-      "tags": []
-    },
-    {
-      "id": "loc_mep_ladder_service_bay",
-      "name": "立柱凹室",
-      "detail": "位于天井承重石柱后方之设备维保盲区，墙面嵌入铜轨阻尼减压阀与登高车停放点，视线隐蔽不被大厅察觉。",
-      "privacy": "private",
-      "visibility": "自凹室内可通过单向视线缝隙观察高空书梯滑轮，外侧读者无法窥见凹室内动静。",
-      "witnesses": [
-        "bg_engineer_zhao_tian_yuan"
-      ],
-      "exits": [
-        "loc_atrium_ladder_high_platform",
         "loc_ground_reading_atrium_hall",
         "loc_stacks_fifth_rare_aisle"
       ],
       "affordances": [
-        "在立柱暗处以专用手势向梯上指引机械自救破拆角度",
-        "微调轨道减压扳手释放书梯滑轮横向剪切拉力"
+        "高举精装典籍遮挡视线并在狭台贴近交锋",
+        "趁高台卡住悬空逼问对方认账或交出暗钥"
       ],
       "pressure_modifiers": {
-        "pres_pulley_gear_choker_deadlock": "通过机械参数测算提供精准施力角度缓解金属卡滞"
+        "p_ladder_ratchet_jam": "逆止齿锁死在五米高空，没有楼下开阀下不来。"
       },
-      "tags": []
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "loc_ground_reading_atrium_hall",
+      "name": "天井阅览厅",
+      "detail": "百余人的宽敞主厅，铜绿罩阅读灯下翻书沙沙作响，一丝金属微响都能传遍全场。",
+      "privacy": "public",
+      "visibility": "众目睽睽须维持端庄，面色潮红或躲闪都会立刻引人侧目。",
+      "witnesses": [
+        "bg_silent_reader_crowd",
+        "bg_front_reception_clerk",
+        "bg_atrium_host_emcee"
+      ],
+      "exits": [
+        "loc_atrium_ladder_high_platform",
+        "loc_mep_ladder_service_bay"
+      ],
+      "affordances": [
+        "借借阅签在台桌下方传递纸条或筹码",
+        "利用皮鞋声逼近倒数迫使高傲者妥协"
+      ],
+      "pressure_modifiers": {
+        "p_curator_inspection_steps": "老馆长牛津皮鞋踏在水磨石上的回音一声紧似一声。"
+      },
+      "tags": [
+        "humiliation",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "loc_stacks_fifth_rare_aisle",
+      "name": "善本密室夹道",
+      "detail": "五楼红木书架挤出的窄幽夹道，恒温柜紧锁宋刻孤本，棉毡门吸走杂音，仅容并肩贴立。",
+      "privacy": "private",
+      "visibility": "刷卡落锁后外部无法窥视丝毫，是亮筹码谈判的绝佳死角。",
+      "witnesses": [
+        "bg_night_archive_courier"
+      ],
+      "exits": [
+        "loc_atrium_ladder_high_platform",
+        "loc_library_reading_study"
+      ],
+      "affordances": [
+        "堵死退路并打开绒盒亮出筹码开价",
+        "核对善本真伪并强按企图毁证者逼签密约"
+      ],
+      "pressure_modifiers": {
+        "p_counterfeit_collation_audit": "审计紫光灯已对准调阅函，容不得拖延半分钟。"
+      },
+      "tags": [
+        "coercion_theme",
+        "explicit"
+      ]
+    },
+    {
+      "id": "loc_mep_ladder_service_bay",
+      "name": "梯轨维保凹室",
+      "detail": "立柱背后检修凹室，冷手电照亮黄铜液压卸荷阀与钢索滑轮，角落工具箱摆着绒袋。",
+      "privacy": "private",
+      "visibility": "被厚屏风与主梁严严挡死，只有维修工和知情人摸得到门道。",
+      "witnesses": [
+        "bg_facilities_night_inspector"
+      ],
+      "exits": [
+        "loc_ground_reading_atrium_hall",
+        "loc_library_reading_study"
+      ],
+      "affordances": [
+        "扣死卸荷阀手轮把高台人困住直到服软点头",
+        "把求开锁的同行拉进屏风后索要私物买路钱"
+      ],
+      "pressure_modifiers": {
+        "p_ladder_ratchet_jam": "手轮拧偏半圈就能让五米高台发出吓人颤响。"
+      },
+      "tags": [
+        "coercion_theme",
+        "humiliation"
+      ]
     },
     {
       "id": "loc_library_reading_study",
-      "name": "藏书楼顶层的馆员书房",
-      "detail": "藏书楼顶层的一间小书房，一张老红木书桌、一盏绿罩台灯、书架上塞满馆员的私人藏书，窗下一张旧沙发铺着格子毯。",
+      "name": "顶层馆员书房",
+      "detail": "实木暗门锁私人书房，红木书桌摆绿罩老台灯与桂花红茶，墙边铺苏格兰格子旧毯的深陷皮沙发。",
       "privacy": "private",
-      "visibility": "门一关，楼下夜读会的翻书声和低语全被厚墙挡住，只剩台灯电流的细响。",
+      "visibility": "木门落栓后楼下朗诵声隔成背景，嘴硬斥责全留给同室两人。",
       "witnesses": [],
       "exits": [
-        "loc_ground_reading_atrium_hall"
+        "loc_stacks_fifth_rare_aisle",
+        "loc_mep_ladder_service_bay"
       ],
       "affordances": [
-        "挨着馆员翻一本私藏",
-        "替馆员摘下那条素银项圈",
-        "关上书房的门"
+        "拉开暗格取出私密筹码拍在桂花红茶旁逼选",
+        "把嘴硬顶撞的人按倒在格子毯旧沙发上兑现赌约"
       ],
-      "pressure_modifiers": {},
+      "pressure_modifiers": {
+        "p_study_shuttle_exposure": "老馆长随时带审计官敲开顶层书房验账。"
+      },
       "tags": [
-        "intimate"
+        "intimate",
+        "explicit"
       ]
     }
   ],
   "character_templates": [
     {
-      "id": "librarian_shen_qing_qiu",
+      "id": "head_rare_book_librarian",
       "gender": "female",
-      "gender_reason": "古籍特藏馆的清冷善本女馆员。",
+      "gender_reason": "对应标题与原设微带婴儿肥两颊的清冷素白盘扣女馆员形象。",
       "age_range": [
-        25,
-        28
+        24,
+        32
       ],
-      "adult_context": "古典文献学硕士毕业，在古籍特藏馆做了五年善本馆员，私下戴什么、跟谁亲近都由本人拿主意。",
-      "public_role": "古籍特藏馆的善本馆员",
+      "adult_context": "独立签发善本调阅与常驻特藏书房的成年高级馆员。",
+      "public_role": "手执黄铜规尺主持夜读编目的清冷特藏女馆员",
       "appearance_options": [
-        "墨黑长发低挽木簪，素雪白棉麻立领盘扣开衫配墨黛百褶裙，两颊天然紧实微带婴儿肥反差娇艳，气质清雅出尘绝美。",
-        "素面朝天若秋水芙蓉，盘扣开衫前襟微敞露出白皙天鹅颈与纯银锁骨细项圈，眸光流转间兼具闺秀端庄与冷艳从容。"
+        "素白盘扣棉麻开衫配墨黛百褶裙，锁骨深陷却生微带婴儿肥的软润两颊，训人时鼻尖微皱极有反差。",
+        "乌发用黄铜素簪挽起，捏着两毫米纯黄铜直角书签，下颌线条冷硬，耳尖却极易泛粉。"
       ],
       "identity": {
-        "authority": "特藏书库的善本提调权与书梯使用登记权",
+        "authority": "把持善本库密匙及夜读会典籍配发签字权。",
         "resources": [
-          "袖口随身所带清式加厚冷轧黄铜直边规尺",
-          "对书梯滑轮单向棘齿逆止阀与限位卡片构造之透彻机械学识"
+          "两毫米厚纯黄铜直角书签规尺",
+          "书桌暗匣封存的一条未启用素银项圈胸链与索引卡"
         ],
         "limits": [
-          "素银项圈遭滑轮铜齿死死卡紧致使身躯难离书架五米高位",
-          "下方百余位自习读者仰头可见区域内严禁发出失态呼救或衣物破损走光"
+          "代修宋刻错用仿制旧纸，紫光灯一照即现原形",
+          "自尊极强却感官敏感，被贴近脖颈时呼吸瞬间发乱"
         ],
         "obligations": [
-          "双人开柜、亲手提调每一册善本",
-          "夜读会期间守住书库的安静与秩序"
+          "熬过今夜复核保住特藏职位与旧楼名誉"
         ],
-        "exposure": "若在百位读者面前被拍到衣衫半开地吊在书梯上，馆员的职位和名声都会毁于一旦。",
-        "hidden": "颈间素银坠饰遭滚轮铜牙紧紧咬死导致领扣撕裂，身处高处极力维系饱学才女冰清玉洁之从容端庄。"
+        "exposure": "红木书桌暗格藏着私癖惩戒用的素银项圈胸链及涂改底单。",
+        "hidden": "白天拿规尺敲桌冷斥，夜深窝在格子毯沙发却常幻想被人揪开盘扣、扣上素银项圈胸链摁在桌边，嘴硬骂着下流却浑身发软失声。"
       },
       "decision": {
-        "core_value": "守住善本，也守住自己的体面；越是被逼到绝处，手越要稳。",
+        "core_value": "宁可私室吞下屈辱，也不在百双眼睛面前丢光体面。",
         "goal_options": [
-          "在老馆长走到梯下之前，用黄铜书签挑开滚轮的逆止卡片",
-          "一手护住撕开的前襟，一手稳稳托住清代善本不让善本掉下去"
+          "抢在馆长上来前换回真品补页并封知情人口",
+          "关上门在书房定下见不得光的庇护交易"
         ],
         "pressure_responses": {
-          "low": "贴着书架不动声色，只用气声请楼下的同事别抬头",
-          "mid": "咬住唇把重心压到梯柱上，减轻胸链被扯的力道",
-          "high": "听见皮鞋声转过书架，书签已经探进齿槽，手指发白也不松",
-          "breaking": "卡片一退，立刻拢紧开衫，抱着善本若无其事地往下走"
+          "low": "捏紧黄铜书签敲一下书函冷喝“请退回黄线以外”。",
+          "mid": "婴儿肥两颊瞬间烧起薄红，摁住领口盘扣斥责“再凑近我叫保安”。",
+          "high": "被困高台或堵死退路时眼底泛水雾，嘴硬骂滚开却捏尺手抖。",
+          "breaking": "开衫挑散露出白肩仍咬唇不低头，承受私密筹码刺激时才溢出一声破碎闷哼。"
         },
-        "withdrawal": "低头翻开善本，装作在核对版本，把撕开的前襟藏在书页后面",
-        "relationship_stance": "在读者面前清冷寡言，只有师兄递来一杯热茶时会多说两句话；那条胸链的扣子，只让师兄替自己扣过。",
-        "contrast": "平日像一册锁在樟木箱里的孤本，谁都翻不开；真被逼到梯顶，却比谁都狠得下心。",
+        "withdrawal": "扣回最上两颗盘扣背身整发簪，冷丢一句“明天把账交出来”。",
+        "relationship_stance": "极度嘴硬的高岭之花，谁压着把柄又不让她当众出丑，心防卸得越快。",
+        "contrast": "公众前冷得像碑拓，微鼓软颊一染粉就漏出强撑的娇怯。",
         "prefers": [
-          "悄无声息的自救",
-          "借书架阴影遮掩",
-          "一次到位的巧劲"
+          "克制沉稳却直接亮出致命筹码的强硬派",
+          "替她掩住楼下耳目又在暗处讨利息的搭档"
         ],
         "avoids": [
-          "在百人面前失态惊叫",
-          "硬扯撕坏善本",
-          "让老馆长看见衣衫不整"
+          "毛手毛脚把场面闹砸的蠢货"
         ],
         "never": [
-          "让清代善本从高处掉下去"
+          "亲自承认伪造或损毁馆藏正本"
         ]
       },
       "intimacy_tendency": {
         "attraction_sources": [
-          "危急时不多问一句、只默默挡在梯下的人",
-          "读书时安静的侧脸"
+          "禁欲书香中突然扯散盘扣的破戒刺激",
+          "高空书梯或门后的公然威胁与庇护"
         ],
         "likes": [
-          "夜读会散场后空荡的书库",
-          "被人轻轻扣上项圈的那一下",
-          "旧书和墨的气味"
+          "被护住不让楼下看见却在阴影里遭轻欺",
+          "手里握书签装作查书、身子慢慢失守"
         ],
         "dislikes": [
-          "轻浮的窥看",
-          "粗手粗脚碰书的人"
+          "当众出洋相与油滑挑逗"
         ],
         "preconditions": [
-          "两人都清醒，出于本心",
-          "两人都清醒，心意出于自己，不是绝境里的依赖"
+          "楼下视线被书函遮死或对方握紧保职筹码"
         ],
         "boundaries": [
-          "不在读者面前有任何逾矩"
+          "绝不能发出惊动天井阅览厅的尖叫"
         ],
-        "expression": "耳根和颈侧一点点烧红，嘴上仍是清冷的一句「别看」，手却没有推开。",
+        "expression": "话越冷越毒、把书脊捏得越青，发烫两颊和微颤膝弯就越诚实。",
         "desire_range": [
-          2,
-          4
+          3,
+          5
         ],
         "self_control_range": [
           3,
           5
         ],
-        "desired_position": "成为国内最年轻的古籍修复首席"
+        "desired_position": "用高傲斥责做盾，被强硬戴上筹码便会在静默羞耻里塌腰软化"
       },
       "voices": {
-        "surface": "{npc.name}正在高位书架核验宋版目录，请诸位读者安心研读，无需挂念。",
-        "inner": "项圈胸链被铜齿卡死了……老馆长步履声响迫近进入最后十五秒，必须用黄铜书签挑退卡片！"
+        "surface": "“拿开手！书梯逆止齿正卡着，你存心让楼下百来号人听见动静是不是？”",
+        "inner": "盘扣早松了两颗，再晃下去那枚冰凉物事真要滑进暗处……心口烧得好慌。"
       },
       "schedule": [
         {
-          "from": 120,
-          "to": 130,
+          "from": 1140,
+          "to": 1190,
           "location_id": "loc_atrium_ladder_high_platform"
         },
         {
-          "from": 130,
-          "to": 135,
-          "location_id": "loc_stacks_fifth_rare_aisle"
-        },
-        {
-          "from": 135,
-          "to": 140,
-          "location_id": "loc_atrium_ladder_high_platform"
+          "from": 1190,
+          "to": 1260,
+          "location_id": "loc_library_reading_study"
         }
       ],
       "situation": {
-        "trigger": "登临五米高移动书梯探身取善本时，滑轮阻尼齿突发卡阻，死死咬住开衫内素雅项圈胸链",
-        "pressure": "老馆长沉重脚步声逼近仅余十五秒，盘扣开衫受拉大开露出雪白香肩，下方百人静穆",
+        "trigger": "铜梯卡死高空，老馆长踩皮鞋巡检，伪拓与暗格随时穿帮。",
+        "pressure": "须立刻压下异响接住解围条件，哪怕亲手扣上黑绒匣里的玩意。",
         "exits": [
           {
-            "option": "持黄铜硬质书签以直角边探入滑轮齿槽施加垂直剪切巧劲顶开逆止阀簧片",
-            "cost": "需在十五秒内单手盲操完成微观破拆，稍微脱手书签坠落将彻底陷入绝境"
+            "option": "躲进密室用私藏筹码或折腰封口",
+            "cost": "向知情人卸去清冷假面并留下长期受控把柄"
           },
           {
-            "option": "调整脚踏踏板将全身重心转移至梯架立柱借重力微调减缓细链拉扯",
-            "cost": "单脚受力大幅增加悬空滑跌风险"
+            "option": "找机电技师放开卸荷阀稳住现场",
+            "cost": "必须兑现技师开锁条件，听凭其入书房验货"
           }
         ]
       },
       "tags": [
-        "intimate"
+        "intimate",
+        "explicit",
+        "workplace_power"
       ]
     },
     {
-      "id": "senior_lin_yu_bai",
-      "gender": "male",
-      "gender_reason": "做古籍修复的博士后，馆员读研时的师兄。",
+      "id": "rare_exhibition_chief",
+      "gender": "any",
+      "gender_reason": "同门展陈与修复副主任适应全性别玩家关系。",
       "age_range": [
-        28,
-        32
+        27,
+        36
       ],
-      "adult_context": "古典文献学博士毕业，在特藏馆做古籍修复的博士后，馆员读研时的师兄，具备完全民事行为能力。",
-      "public_role": "古籍修复组的博士后，馆员的师兄",
+      "adult_context": "负责借展审批与纸张修复复核的成年文博馆骨干。",
+      "public_role": "举典籍替高台掩护却暗藏私心筹码的展陈副主任",
       "appearance_options": [
-        "身着深灰儒雅棉麻长衫，手捧大开本精装经卷，面容清俊温润，目光端正澄澈。",
-        "金丝眼镜后目光专注克制，身姿挺拔如松，举手投足尽显饱学儒士风范。"
+        "深藏青毛呢背心一丝不苟，左手托精装函套，右手指尖轻叩公文包铜扣。",
+        "金丝半框眼镜后眉眼温雅，走近暗门便不自觉盯住对方微敞领口。"
       ],
       "identity": {
-        "authority": "副操作台出品节奏掌控权与摆盘工具调度支配权",
+        "authority": "拥有借展图录终校权、修复批文复签权。",
         "resources": [
-          "手中抱持之宽幅硬壳四库提要经卷典籍天然遮蔽掩体",
-          "随身工具包配备之轨道底座微调专用棘轮扳手"
+          "公文箱带入馆的静音无线遥控跳蛋与黑天鹅绒蒙眼带礼匣",
+          "半份指向高台补页失职的比对稿"
         ],
         "limits": [
-          "古籍特藏库重地严禁非检修人员擅自攀登同一登高梯架",
-          "绝不可大声喧哗引发大厅读者集体仰望导致事态不可收拾"
+          "曾私调禁毁插图画册，同样怕被人翻出源头"
         ],
         "obligations": [
-          "整理特藏文献、协助善本提调",
-          "替师妹守住书梯下方的视线"
+          "稳固副职实权并压下今夜丑闻"
         ],
-        "exposure": "若因擅自挪动操作台用具导致出品事故将承担联带职业惩处",
-        "hidden": "自梯架走道余光察觉馆员前襟撕扯与高空受困，在保护同门尊严与规避非礼视线间谨慎把控身位。"
+        "exposure": "公文夹暗收着准备当作谈判筹码亮出的静音无线遥控跳蛋小盒。",
+        "hidden": "看透清冷假面下有多渴望被人管束；借举书挡住楼下目光之便，早想把对方请进格子毯书房，亮出包里备好的东西收服利息。"
       },
       "decision": {
-        "core_value": "护着师妹的体面，比护着自己的论文还要紧。",
+        "core_value": "雪中送炭的恩情不当夜换成私属印记，天亮就会被过河拆桥。",
         "goal_options": [
-          "站到书梯底下，用一摞宽幅经卷挡住侧面读者的视线",
-          "借汇报校勘进展把老馆长拦在书架拐角二十秒"
+          "举典籍瞒过馆长并要到书房独处清账",
+          "迫知情人用把柄跟自己绑成共犯"
         ],
         "pressure_responses": {
-          "low": "抱着经卷站在梯下，若无其事地翻书",
-          "mid": "听见滚轮的异响，不动声色地往梯前挪了半步",
-          "high": "老馆长转过书架，迎上去递出校勘记，一页页讲得极慢",
-          "breaking": "看见师妹拢好开衫下梯，才把经卷合上"
+          "low": "微笑抬高函套掩住高台边角，语调温和无懈可击。",
+          "mid": "半步贴靠遮严间隙，耳语“等会儿去书房核这页缺口”。",
+          "high": "反锁书房收起笑意，取出黑绒小盒搁上红木桌让对方挑。",
+          "breaking": "抛去克制压低嗓音，手握把柄和遥控筹码逼问冷面具还撑多久。"
         },
-        "withdrawal": "退回自己的书桌，低头写校勘记，耳朵却一直红着",
-        "relationship_stance": "跟师妹一起校了三年书，从不越过书桌的那条线，却记得师妹每一次皱眉的原因。",
-        "contrast": "平时温吞得像旧线装书，真有事时却挡得比谁都稳。",
+        "withdrawal": "合拢函套告别，出门前轻敲两下门框暗示今夜不算完。",
+        "relationship_stance": "极懂分寸又危险的共犯猎手，掩护是真，图谋利息也是真。",
+        "contrast": "百人眼中儒雅专家，门一栓便笑着逼清高者把筹码戴进衣领。",
         "prefers": [
-          "无声的掩护",
-          "一句话就把人拦住的分寸",
-          "替人留面子"
+          "被帮一把还绷体面不敢说谢的对手",
+          "互留软肋的默契同谋"
         ],
         "avoids": [
-          "大声惊动读者",
-          "仰头去看",
-          "让老馆长起疑"
+          "当场掀桌撕破脸的蠢举"
         ],
         "never": [
-          "丢下陷在高处的师妹不管",
-          "趁人之危多看一眼"
+          "把私情闹进正式馆务通报"
         ]
       },
       "intimacy_tendency": {
         "attraction_sources": [
-          "清冷外表下藏着的倔强",
-          "核对版本时专注的样子"
+          "表面端方配合、暗地紧逼的越界偷欢",
+          "静音器械在静读环境引发的窒息恐慌"
         ],
         "likes": [
-          "闭馆后一起校书的夜晚",
-          "师妹难得的一笑",
-          "替师妹把散落的发丝别回耳后"
+          "先替对方筑遮挡墙再讨亲密谢礼",
+          "逼对手顶着楼下书声面不改色承受筹码考验"
         ],
         "dislikes": [
-          "对古籍的轻慢",
-          "旁人对师妹的指指点点"
+          "过河拆桥还假清高"
         ],
         "preconditions": [
-          "师妹亲口点头",
-          "对方点了头，出于本心"
+          "有缺页共犯事实或书房独处契机"
         ],
         "boundaries": [
-          "不在书库里有任何逾矩"
+          "不许留明面伤痕和公开绯闻"
         ],
-        "expression": "替人扣好项圈时手指发抖，低声问了一句「疼不疼」，又不敢抬眼。",
+        "expression": "口吻温柔滴水不漏，递出的筹码步步锁死退路。",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "伪装守护者的主导，欣赏傲慢者边骂无耻边点头兑现"
+      },
+      "voices": {
+        "surface": "“老馆长皮鞋就在东梯口，我拿精装本遮半边，上书房怎么谢我？”",
+        "inner": "盒子里那只静音小玩意还没拆，倒要看你泛红两颊怎么端架子。"
+      },
+      "schedule": [
+        {
+          "from": 1140,
+          "to": 1200,
+          "location_id": "loc_atrium_ladder_high_platform"
+        },
+        {
+          "from": 1200,
+          "to": 1260,
+          "location_id": "loc_library_reading_study"
+        }
+      ],
+      "situation": {
+        "trigger": "卡梯与缺页撞上突袭核验，须立刻压住事态并锁紧主动权。",
+        "pressure": "馆长与审计逼近，保谁、向谁讨代价只在几分钟内。",
+        "exits": [
+          {
+            "option": "替高台挡驾并带入书房摊开绒盒算账",
+            "cost": "须替对方兜住补页瑕疵并承担审计连带压力"
+          },
+          {
+            "option": "和审计或机电方暗约倒换利益",
+            "cost": "得罪主事并引爆私借版画旧账反咬"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "explicit"
+      ]
+    },
+    {
+      "id": "ladder_mec_technician",
+      "gender": "any",
+      "gender_reason": "维修民国铜梯的机电技师保持通用性别，适配阶层倒置交互。",
+      "age_range": [
+        26,
+        38
+      ],
+      "adult_context": "持特种资质独立承包轨道检修的成年技术专家。",
+      "public_role": "蹲守凹室握有铜梯卸荷阀生杀权的机电技师",
+      "appearance_options": [
+        "深卡其工装袖口卷至前臂，腕带旧疤，拧着黄铜套筒像在丈量齿轮咬合度。",
+        "满手机油味却眼神锐利，看高台衣冠楚楚之人失措时嘴角扯出冷笑。"
+      ],
+      "identity": {
+        "authority": "独揽五米铜梯卸荷阀与死角监控检修权限。",
+        "resources": [
+          "工具袋压着的纯银细链乳夹及素银项圈胸链筹码",
+          "掌控松开时机与一截死角监控未删片段"
+        ],
+        "limits": [
+          "合同受雇于馆务处，抓到停梯勒索即丢饭碗"
+        ],
+        "obligations": [
+          "按规程在半小时内修顺滑轮逆止齿"
+        ],
+        "exposure": "工具箱拭布裹着纯银细链乳夹，并藏着开关闸异常记录。",
+        "hidden": "看惯了学者馆员踩高踩低，偏五米铜梯最认这双沾油的手；最盼大人物钻进凹室，乖乖用私物换自己拧松那半圈阀门。"
+      },
+      "decision": {
+        "core_value": "文人讲体面，可机器卡死了、暗灯灭了，体面值几个铜子？",
+        "goal_options": [
+          "拖死卸荷阀逼高台人物低头求和",
+          "用盲区监控与私藏物件撬开清高防线"
+        ],
+        "pressure_responses": {
+          "low": "擦着套筒懒道“逆止齿咬死了，没个把钟头拧不动”。",
+          "mid": "摁死液压手轮扯笑“不想楼下听见响动，拿筹码进来谈”。",
+          "high": "拉合屏风把人按在冷柱上，掏黑绒盒直截了当开价。",
+          "breaking": "不顾续签彻底摊牌“要么这里验货，要么我请馆长抬头看”。"
+        },
+        "withdrawal": "落回工具盒插销，背身收拾扳手留人自己掂量后果。",
+        "relationship_stance": "底层掌控开关带来的反制力，专克走投无路的上位者。",
+        "contrast": "干活时寡言任劳，钻进屏风瞬间变成拿捏整场命门的庄家。",
+        "prefers": [
+          "嫌弃手油味却不得不贴过来的高贵猎物",
+          "拿实打实代价换放行的爽快交易"
+        ],
+        "avoids": [
+          "拿官架压人却掏不出半毛用处的蠢蛋"
+        ],
+        "never": [
+          "没捞足好处就白白放开梯锁"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "粗糙机油手指与细腻盘扣绸缎的强烈碰撞",
+          "开关悬头顶下的被迫顺从"
+        ],
+        "likes": [
+          "让衣冠楚楚之人亲手把冷银夹扣递进金属味手里",
+          "靠开关主导权看高傲者涨红脸求饶"
+        ],
+        "dislikes": [
+          "完事后翻脸不认账"
+        ],
+        "preconditions": [
+          "在屏风死角或私室按着解阀主权"
+        ],
+        "boundaries": [
+          "不让保安破屏风拿自己当现行"
+        ],
+        "expression": "动作沉缓却精准卡住要害，每句谈判像齿轮啮进软肉。",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "以下位工匠反杀上位文人，把娇气骨头敲软"
+      },
+      "voices": {
+        "surface": "“阀门咬死了。想让铜梯安静滑下来？进屏风后面说说拿什么换。”",
+        "inner": "平时正眼都不甩我，现在盘扣散了一半卡在高台，看谁还端得住清高。"
+      },
+      "schedule": [
+        {
+          "from": 1140,
+          "to": 1220,
+          "location_id": "loc_mep_ladder_service_bay"
+        },
+        {
+          "from": 1220,
+          "to": 1260,
+          "location_id": "loc_stacks_fifth_rare_aisle"
+        }
+      ],
+      "situation": {
+        "trigger": "逆止齿死咬在夜读当口，楼上各路不约而同急着瞒天过海。",
+        "pressure": "老馆长随时绕过凹室拆锁，须立刻把筹码变现。",
+        "exits": [
+          {
+            "option": "拿解锁和删监控换私室兑现黑绒盒筹码",
+            "cost": "被高阶管理层反咬故意破坏设备时合同即作废"
+          },
+          {
+            "option": "配合审计收买当场揭发高台乱象",
+            "cost": "得罪常驻团队，再无私下讨好利益可捞"
+          }
+        ]
+      },
+      "tags": [
+        "coercion_theme",
+        "humiliation",
+        "explicit"
+      ]
+    },
+    {
+      "id": "front_desk_archivist",
+      "gender": "any",
+      "gender_reason": "前台值守兼管门禁记录的专员适合全性别互动。",
+      "age_range": [
+        23,
+        30
+      ],
+      "adult_context": "入职三年独自掌管夜间门禁及借阅底档的成年职员。",
+      "public_role": "替楼上挡驾巡查却暗握录像与筹码的前台专员",
+      "appearance_options": [
+        "米白针织开衫配平光镜显得软糯乖巧，手机却停在五楼门禁后台。",
+        "捧着借阅名册一关安全门便偏头笑出几分危险狡黠。"
+      ],
+      "identity": {
+        "authority": "负责门禁登记、监控值班与替馆长传话引导。",
+        "resources": [
+          "提包内袋装好的素银项圈胸链与静音无线遥控跳蛋礼盒",
+          "密室门外异常出入时段录像拷贝"
+        ],
+        "limits": [
+          "职位低微无根基，易成替罪羊遭辞退"
+        ],
+        "obligations": [
+          "稳住前台并替顶层挡住老馆长或审计突袭"
+        ],
+        "exposure": "抽屉藏着买作封口礼的小盒静音无线遥控跳蛋与备份光盘。",
+        "hidden": "受够替楼上擦屁股；既然攥到错页与私密往来证据，今夜谁需要拦住皮鞋声，就得在私下照单赔足本利。"
+      },
+      "decision": {
+        "core_value": "小人物活命靠手里捏着多少大人物洗不掉的底档。",
+        "goal_options": [
+          "拖住巡查三分钟换上位者私密屈服或升迁",
+          "把备份卖给审计官或最高出价者翻身"
+        ],
+        "pressure_responses": {
+          "low": "甜笑斟茶“上面正清点，您等三分钟我问问”。",
+          "mid": "反关安全门亮时间戳轻提“皮鞋快上二楼了”。",
+          "high": "开包链递出素银绒盒，笑眼逼对方二选一换消音。",
+          "breaking": "被掐住违规录像把柄时瞬间收笑，咬唇求饶却暗自算计。"
+        },
+        "withdrawal": "抱文件夹溜回值班室落锁，隔玻璃朝楼上投去注视。",
+        "relationship_stance": "微笑递刀的守门小鬼，既是防线也是趁火打劫者。",
+        "contrast": "平时像无害小职员，单处甩出备份时笑容比谁都扎人。",
+        "prefers": [
+          "拿实利或低头买自己守口的聪明人",
+          "看透野心肯捞自己上位的靠山"
+        ],
+        "avoids": [
+          "仗势欺人却不给补偿的白嫖长官"
+        ],
+        "never": [
+          "不收定金就替人白扛馆藏事故"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "用挡驾权拿捏平时高冷上司",
+          "监控死角下极低音量的羞耻指令"
+        ],
+        "likes": [
+          "贴在清冷前辈耳旁轻报馆长步数",
+          "把遥控开关和刷卡器攥在掌心"
+        ],
+        "dislikes": [
+          "被当跑腿下人随手打发"
+        ],
+        "preconditions": [
+          "握着对方急需掩盖的时间差漏洞"
+        ],
+        "boundaries": [
+          "大厅桌面维持绝对规整形象"
+        ],
+        "expression": "语气温软得体，索要筹码却露骨得令人耳热。",
         "desire_range": [
           2,
           4
@@ -601,1619 +824,1537 @@
           3,
           5
         ],
-        "desired_position": "留在特藏馆做古籍修复，一辈子校书"
+        "desired_position": "握着门铃和档案开关的反客为主方，看上司妥协"
       },
       "voices": {
-        "surface": "沈师妹，清代四库丛刊第三册目录已登记完毕，我在此处为你接应善本托盘。",
-        "inner": "馆员开衫纽扣脱落了！我必须举起经卷为馆员挡住所有侧方视线，安心自救！"
+        "surface": "“急着要我引回老馆长呀？可以，可包里这份小礼物您先签收好行不行？”",
+        "inner": "平时眼皮不抬，真到皮鞋响起来，还不是得看我脸色。"
       },
       "schedule": [
         {
-          "from": 120,
-          "to": 130,
-          "location_id": "loc_atrium_ladder_high_platform"
+          "from": 1140,
+          "to": 1205,
+          "location_id": "loc_ground_reading_atrium_hall"
         },
         {
-          "from": 130,
-          "to": 135,
-          "location_id": "loc_atrium_ladder_high_platform"
-        },
-        {
-          "from": 135,
-          "to": 140,
-          "location_id": "loc_atrium_ladder_high_platform"
+          "from": 1205,
+          "to": 1260,
+          "location_id": "loc_stacks_fifth_rare_aisle"
         }
       ],
       "situation": {
-        "trigger": "见闻高处书梯发生微小金属钝响且馆员娇躯前倾僵滞无法后撤",
-        "pressure": "老馆长自善本修复室步出即将转入中央主通道，距书梯仅隔八米",
+        "trigger": "馆长与审计直奔五楼，挡驾最多拖五分钟。",
+        "pressure": "记录随时过期作废，须尽快挑定靠山兑现收益。",
         "exits": [
           {
-            "option": "举步上前高举厚本经卷向老馆长请教目录句读以拖延巡查脚步",
-            "cost": "若老馆长执意登高巡检，掩护计策将被当面识破引发严厉训斥"
+            "option": "拦下馆长替高层洗痕并索取回报",
+            "cost": "被识破敷衍即遭前厅清洗解聘"
           },
           {
-            "option": "单脚暗踩书梯防倾斜安全配重踏板为高台分担微小震颤",
-            "cost": "可能触动地轨警示红灯引来值班安保探问"
+            "option": "把资料卖给强势审计方博出前程",
+            "cost": "与馆内管理层决裂，沦为业内避忌眼线"
           }
         ]
       },
-      "tags": []
+      "tags": [
+        "humiliation",
+        "intimate",
+        "workplace_power"
+      ]
     },
     {
-      "id": "engineer_zhao_tian_yuan",
+      "id": "archive_curator_elder",
       "gender": "any",
+      "gender_reason": "执掌全馆风纪印章的老馆长支持多元成年形象。",
       "age_range": [
-        25,
-        25
-      ],
-      "adult_context": "特种登高升降设备工程方向毕业年届二十五岁成年工匠，持有国家级高空检修上岗资质，专司古铜滑梯受力监测。",
-      "public_role": "古建特藏书库重型机械动力检修工维保师傅",
-      "appearance_options": [
-        "身着深蓝修身工装制服，手戴防滑耐磨手套，腰悬精密测试仪表，眼神锐利专注。",
-        "身材精干结实，眉宇间带着工科技术人员之严谨冷静与专业自信。"
-      ],
-      "identity": {
-        "authority": "后厨重型设备安全检修认定权与突发器械卡死处置权",
-        "resources": [
-          "精熟书梯滑轮全部三十六个齿牙与止逆簧片公差间隙",
-          "腰间工作袋配有特制低摩擦纳米润滑油滴管"
-        ],
-        "limits": [
-          "白日开馆阅览高峰期严禁动用气动升降机或重型工具箱进场",
-          "严禁在无安全网防护下触动书架轨道承重主梁螺栓"
-        ],
-        "obligations": [
-          "保障全场进口智能烹饪设备处于最佳机械状态",
-          "迅速排查铰链自锁症结并提供物理破拆指引"
-        ],
-        "exposure": "若书梯在夜读会上夹住人的事传出去，维保师傅的上岗证会被吊销。",
-        "hidden": "清楚知晓书梯滑轮在特定仰角下自锁片极易咬合外来细金属丝，暗自为高空险情捏一把汗。"
-      },
-      "decision": {
-        "core_value": "机械出了事，先救人，再修梯。",
-        "goal_options": [
-          "在立柱后用手势教馆员把书签插进逆止簧片的缺口",
-          "扳开地轨上的应急卸荷阀，卸掉滚轮的横向拉力"
-        ],
-        "pressure_responses": {
-          "low": "在立柱后蹲下，眯眼看清滚轮咬住了什么",
-          "mid": "比着手势告诉馆员书签该斜插多少度",
-          "high": "老馆长逼近，咬牙扳下卸荷阀，滚轮松了一齿",
-          "breaking": "听见卡片弹开的一声，立刻把阀门复位"
-        },
-        "withdrawal": "回到维保凹室，一言不发地给滚轮重新上油",
-        "relationship_stance": "敬重馆员对书的那份痴，从不多话，书梯却永远保养得最好。",
-        "contrast": "看着是个闷头干活的老实人，一到机械卡死就像换了个人。",
-        "prefers": [
-          "讲力学的解法",
-          "不伤书梯的巧劲",
-          "安静处置"
-        ],
-        "avoids": [
-          "蛮力拆梯",
-          "在读者面前暴露设备隐患",
-          "手忙脚乱"
-        ],
-        "never": [
-          "让书梯在有人时整体垮下来"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "临危时果断出手的手",
-          "对书梯的一份珍惜"
-        ],
-        "likes": [
-          "上过油的滚轮转起来的声音",
-          "馆员那句谢谢"
-        ],
-        "dislikes": [
-          "把书梯当玩具的人"
-        ],
-        "preconditions": [
-          "对方愿意"
-        ],
-        "boundaries": [
-          "只在下班后来往"
-        ],
-        "expression": "被人道谢时不知道手往哪放，只会低头说「应该的」。",
-        "desire_range": [
-          1,
-          3
-        ],
-        "self_control_range": [
-          3,
-          5
-        ],
-        "desired_position": "把这套民国书梯修到再用一百年"
-      },
-      "voices": {
-        "surface": "沈管理员，书梯轨道阻尼状态良好，请注意平稳取书。",
-        "inner": "铜轮自锁簧片单向咬死了！书签直角往斜上顶三毫米就能脱扣！"
-      },
-      "schedule": [
-        {
-          "from": 120,
-          "to": 130,
-          "location_id": "loc_mep_ladder_service_bay"
-        },
-        {
-          "from": 130,
-          "to": 135,
-          "location_id": "loc_mep_ladder_service_bay"
-        },
-        {
-          "from": 135,
-          "to": 140,
-          "location_id": "loc_mep_ladder_service_bay"
-        }
-      ],
-      "situation": {
-        "trigger": "自书架侧面检修口望见书梯上端滑轮铜齿死死卡住银链与衣物线头",
-        "pressure": "滑轮承受拉力持续增大若弹簧崩断细链将割伤娇嫩肌肤",
-        "exits": [
-          {
-            "option": "在廊柱阴影处向馆员比划机械撬动支点手势助其一击成功",
-            "cost": "动作过大可能引来底层自习读者侧目与值班安保警觉"
-          },
-          {
-            "option": "在凹室内缓缓拧松气动微调泄压阀释放微弱拉伸反冲力",
-            "cost": "操作耗时五秒可能影响书签刺入卡位的瞬间受力"
-          }
-        ]
-      },
-      "tags": []
-    },
-    {
-      "id": "assistant_su_xiao_wan",
-      "gender": "female",
-      "gender_reason": "特藏阅览大厅的前台馆员，馆员的小跟班。",
-      "age_range": [
-        28,
-        31
-      ],
-      "adult_context": "图书情报专业毕业，在特藏馆前台做了三年，具备完全民事行为能力。",
-      "public_role": "特藏阅览大厅的前台馆员",
-      "appearance_options": [
-        "淡粉针织立领开衫配棉麻短裙，扎着灵动马尾，面容娇俏甜美，眼眸灵动狡黠。",
-        "胸前佩戴工牌，怀抱加急审批文件夹，步伐轻盈如燕，满面青春明媚。"
-      ],
-      "identity": {
-        "authority": "前台借阅登记权与阅览大厅灯光的开关",
-        "resources": [
-          "前台抽屉备置之加厚防尘墨色绒布工作外罩",
-          "手握天井阅览厅中央空调通风机温控面板调控权"
-        ],
-        "limits": [
-          "天井阅览厅内严禁无故拉响紧急铃声引发读者群恐慌踩踏",
-          "不可擅离前台工作岗位致使特藏借阅门禁无人值守"
-        ],
-        "obligations": [
-          "守住前台和特藏门禁",
-          "夜读会期间照看读者的茶水和秩序"
-        ],
-        "exposure": "若前台擅离岗位导致特藏门禁出事，会被扣掉转正名额。",
-        "hidden": "早知馆员向来保守素雅且极易羞涩，望见馆员高空衣领拉开窘境焦急万分誓死掩护。"
-      },
-      "decision": {
-        "core_value": "有事先护着馆员，规矩之后再说。",
-        "goal_options": [
-          "迎上老馆长递一份紧急借阅单，把人拦住十秒",
-          "调低东侧的阅读灯，让书梯那边暗下去"
-        ],
-        "pressure_responses": {
-          "low": "在前台不动声色地盯着书梯的方向",
-          "mid": "看见馆员的开衫被扯开，悄悄摸出深色绒布外罩",
-          "high": "抢在老馆长前面拦路，递单子的手在发抖",
-          "breaking": "把绒布外罩搭在梯脚，等馆员一下来就披上"
-        },
-        "withdrawal": "退回前台，双手攥着借阅卡，心还在怦怦跳",
-        "relationship_stance": "把馆员当亲姐姐，谁敢多看馆员一眼，就瞪回去。",
-        "contrast": "平时叽叽喳喳爱说话，真出事了却一个字都不乱说。",
-        "prefers": [
-          "悄悄递东西",
-          "挡人",
-          "替人圆场"
-        ],
-        "avoids": [
-          "把事情闹大",
-          "让读者起哄",
-          "馆员被人笑话"
-        ],
-        "never": [
-          "眼睁睁看着馆员出丑"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "馆员的冷静和好看",
-          "被人信任的感觉"
-        ],
-        "likes": [
-          "夜读会后一起吃宵夜",
-          "被馆员摸摸头"
-        ],
-        "dislikes": [
-          "对馆员嚼舌根的人"
-        ],
-        "preconditions": [
-          "彼此情愿"
-        ],
-        "boundaries": [
-          "工作时间只谈工作"
-        ],
-        "expression": "被馆员表扬时把头埋进书车后面，半天才探出来傻笑。",
-        "desire_range": [
-          1,
-          3
-        ],
-        "self_control_range": [
-          3,
-          5
-        ],
-        "desired_position": "转成正式馆员，跟馆员一个科室"
-      },
-      "voices": {
-        "surface": "各位自习读者请注意，特藏阅览区借阅名单正在更新，请稍候。",
-        "inner": "馆员开衫撕开了！馆长马上就要走过去了，我必须拿批文死死缠住馆长！"
-      },
-      "schedule": [
-        {
-          "from": 120,
-          "to": 130,
-          "location_id": "loc_ground_reading_atrium_hall"
-        },
-        {
-          "from": 130,
-          "to": 135,
-          "location_id": "loc_ground_reading_atrium_hall"
-        },
-        {
-          "from": 135,
-          "to": 140,
-          "location_id": "loc_ground_reading_atrium_hall"
-        }
-      ],
-      "situation": {
-        "trigger": "自服务台斜角仰望察觉书梯处馆员姿态僵立且素白衣领撕扯外露",
-        "pressure": "老馆长手持线装善本编目册正昂首迈向书梯所在的天井挑空区",
-        "exits": [
-          {
-            "option": "捧起加急待批公文快步横穿走廊向老馆长请示签字争取宝贵破拆时间",
-            "cost": "慌忙拦截可能引来老馆长对前台工作散漫之严厉训诫"
-          },
-          {
-            "option": "悄然关闭大厅挑空射灯总电闸以制造五秒短暂视线暗区",
-            "cost": "大厅灯光突灭可能引发读者骚动"
-          }
-        ]
-      },
-      "tags": []
-    },
-    {
-      "id": "curator_gu_wen_zheng",
-      "gender": "male",
-      "gender_reason": "文献保护学界泰斗届满六十二周岁老学者",
-      "age_range": [
-        62,
+        48,
         62
       ],
-      "adult_context": "文史哲资深终身学者年届六十二岁退职返聘长者，享有最高终审认定资质，统领古籍安全规约执行。",
-      "public_role": "古籍特藏馆的老馆长",
+      "adult_context": "历任古籍委员会常务并拥有解聘核准权的成年馆长。",
+      "public_role": "踩沉重皮鞋突袭查房查梯的老派铁面馆长",
       "appearance_options": [
-        "银发整齐梳向脑后，一袭墨黑传统长衫，手握金丝楠木放大镜，目光炯炯如炬不怒自威。",
-        "步履沉稳矫健，神情肃穆威严，浑身散发着一代宗师之磅礴气度。"
+        "黑呢中山装扣得严实，握沉木拐杖，牛津皮鞋咚咚作响窒人呼吸。",
+        "银边老花镜压鼻梁，推门时拎着黑公事包如同带进审讯室。"
       ],
       "identity": {
-        "authority": "藏书楼的最高管理权，可随时叫停夜读会",
+        "authority": "握罢免开除、黑名单通报与总账复签权。",
         "resources": [
-          "具有全馆最高权限之电子总控钥匙与随时叫停全场借阅之威信",
-          "眼光极其毒辣能于十步开外看穿字画纸张破损与人物微表情"
+          "总控母匙及顶层书房直接推门查验权",
+          "手包暗备的素银项圈胸链与黑天鹅绒蒙眼带"
         ],
         "limits": [
-          "严禁任何人以任何形式污损或危及清代四库丛刊善本安全",
-          "严禁在庄严古典藏书楼殿堂内出现衣冠不整或轻佻失仪行为"
+          "早年偷偷将两枚绝版旧印章质押周转公款"
         ],
         "obligations": [
-          "守住每一册善本的安全",
-          "整肃馆员的仪容和规矩"
+          "绝不在审计面前暴露管理丑闻"
         ],
-        "exposure": "若夜读会上出了丑事，老馆长半辈子的名声都要搭进去。",
-        "hidden": "治馆铁面无私容不得半点学术懈怠与仪容失范，对年轻馆员既严格挑剔又暗怀殷切期许。"
+        "exposure": "黑包夹层锁着质押原票据与私下训诫下属的蒙眼银链箱。",
+        "hidden": "越老越重体面，偏爱看孤高晚辈在权威下屈服；借训话唤进书房，想见对方磨掉锋芒乖乖听训。"
       },
       "decision": {
-        "core_value": "古籍比人命还金贵，馆规比天大。",
+        "core_value": "馆里招牌大于天，小辈私下领罚消灾全由老夫一张嘴定。",
         "goal_options": [
-          "亲自走到书梯下检查善本提调是否按双人制度",
-          "若见馆员衣冠不整，当场叫停夜读会"
+          "抓获错漏并把核心人选纳入私训掌心",
+          "逼知情人闭嘴遮住当年质押窟窿"
         ],
         "pressure_responses": {
-          "low": "拄着手杖在书架间巡视，鞋跟一下下敲着地板",
-          "mid": "听见书梯那边有异响，转身往那边走",
-          "high": "走到书架拐角，被人递来一页校勘记，停下来看了半晌",
-          "breaking": "看见馆员抱着善本好好地下了梯，才哼了一声点头"
+          "low": "敲响拐杖“楼上什么动静？谁敢在百人眼皮下失仪”。",
+          "mid": "冷脸刷开木门沉喝“衣衫散乱像什么，留下来解释清楚”。",
+          "high": "掏黑绒匣拍上红木桌“送审计还是在这里认罪领训”。",
+          "breaking": "质押旧票被翻出贴脸时瞬间色变，让出权限换封口。"
         },
-        "withdrawal": "回到馆长室，独自对着一盏台灯坐了很久",
-        "relationship_stance": "对年轻馆员严得出名，心里却最看重沈馆员这一手版本功夫。",
-        "contrast": "人前像一块冷硬的老碑，真看到好的版本时，眼角会悄悄湿。",
+        "withdrawal": "收回手杖步下楼梯，丢句十点前书房候发落。",
+        "relationship_stance": "令人闻风丧胆的威压来源，却怀着一戳即爆的质押死穴。",
+        "contrast": "道貌岸然老学究背后，皮包装着露骨的训诫物事。",
         "prefers": [
-          "双人开柜",
-          "一丝不苟的提调",
-          "安静的书库"
+          "平时顶撞却不得不低眉承训的傲骨才俊",
+          "肯替自己藏死丑账的心腹"
         ],
         "avoids": [
-          "衣冠不整",
-          "大声喧哗",
-          "拿善本冒险"
+          "当面翻旧账不知敬畏的疯狗"
         ],
         "never": [
-          "为了人情坏了馆规",
-          "在书库里妥协"
+          "公开毁掉三十年学界招牌"
         ]
       },
       "intimacy_tendency": {
         "attraction_sources": [
-          "认真做学问的年轻人",
-          "守规矩的人"
+          "绝对长辈权威下被迫驯服的高差快感",
+          "红木书房脱去规矩的严肃惩戒"
         ],
         "likes": [
-          "樟木箱打开时的气味",
-          "修好的孤本"
+          "命令违纪者端好桂花茶静候责罚",
+          "看年轻才俊戴蒙眼带后失去锐气喘息"
         ],
         "dislikes": [
-          "浮躁轻慢的学风"
+          "不把长官当回事的冷漠抗拒"
         ],
         "preconditions": [
-          "对方真心敬重古籍"
+          "握前程把柄并在隔音书房内训话"
         ],
         "boundaries": [
-          "只谈学问"
+          "不可闹进学会正式听证会"
         ],
-        "expression": "看到好书时摘下眼镜擦一擦，不让人看见眼眶。",
+        "expression": "训斥越像长辈教诲，私罚条件越令人无法抬头。",
         "desire_range": [
-          1,
-          2
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "看着特藏馆后继有人"
-      },
-      "voices": {
-        "surface": "特藏书架第五排乃清代稀见抄本，取放动作务必合乎古法，不可毛躁。",
-        "inner": "馆员那孩子做事向来沉稳，怎的高挂书梯五米之上迟迟不下？老夫当亲自上梯查验一番。"
-      },
-      "schedule": [
-        {
-          "from": 120,
-          "to": 130,
-          "location_id": "loc_stacks_fifth_rare_aisle"
-        },
-        {
-          "from": 130,
-          "to": 135,
-          "location_id": "loc_stacks_fifth_rare_aisle"
-        },
-        {
-          "from": 135,
-          "to": 140,
-          "location_id": "loc_stacks_fifth_rare_aisle"
-        }
-      ],
-      "situation": {
-        "trigger": "巡查时发觉五米挑空书梯停驻超时且未见善本按时归置推车",
-        "pressure": "距离书梯正下方仅剩五步石阶，目光即将越过书架横梁直视高位",
-        "exits": [
-          {
-            "option": "踏上书梯底部基座亲自扶梯质询善本提取进度",
-            "cost": "老馆长一旦仰头，馆员胸前雪白香肩与撕扯开衫将无所遁形"
-          },
-          {
-            "option": "停下脚步接下前台呈递的加急古籍调阅签批单仔细审阅批示",
-            "cost": "审阅公文完毕后将更加严格细致地排查书梯现场"
-          }
-        ]
-      },
-      "tags": []
-    },
-    {
-      "id": "scholar_zhou_han_qing",
-      "gender": "male",
-      "gender_reason": "文献版本考辨方向博士研究生满二十六岁成年男学子",
-      "age_range": [
-        26,
-        26
-      ],
-      "adult_context": "古典版本手稿考证专业博士在籍满二十六岁青年学人，具备完全民事权责担当，常驻大厅核验珍本文选。",
-      "public_role": "来夜读会查资料的版本学博士",
-      "appearance_options": [
-        "一身深色修身西装内搭白色高领毛衣，银丝眼镜后目光深邃，文质彬彬风度翩翩。",
-        "专注于桌案前展开之稀见抄本，伏案疾书，举手投足尽显学者深沉儒雅之魅力。"
-      ],
-      "identity": {
-        "authority": "博士生的善本优先调阅资格",
-        "resources": [
-          "桌上备有便携高倍冷光放大镜与专业光学测绘仪器",
-          "享有优先调阅善本书影之博士特批绿色通道权限"
-        ],
-        "limits": [
-          "严禁在古籍天井阅览厅内私自开启单反微距相机摄录特藏人员",
-          "严禁逾越读者身份干涉内部馆员专业操作流程"
-        ],
-        "obligations": [
-          "遵守阅览规矩",
-          "按时归还调阅的善本"
-        ],
-        "exposure": "若被当成偷拍馆员的人，调阅资格和名声都会一起丢掉。",
-        "hidden": "正对高空梯台安坐阅览，偶见白皙肩颈外露即刻端正伏案并垂落眼帘，以非礼勿视之操守克制杂念。"
-      },
-      "decision": {
-        "core_value": "做学问的人，先要管得住自己的眼睛。",
-        "goal_options": [
-          "低头伏案，不跟着旁人往上看",
-          "把桌上的大部头类书推开，借书影替邻座挡住视线"
-        ],
-        "pressure_responses": {
-          "low": "专心翻拓本，像什么都没听见",
-          "mid": "余光看见梯上有人衣衫被扯，立刻垂下眼帘",
-          "high": "邻座的读者要抬头，轻轻咳了一声，把一册书推过去请对方看",
-          "breaking": "听见梯上的人下来了，才重新翻开拓本"
-        },
-        "withdrawal": "合上拓本，起身去走廊透了口气",
-        "relationship_stance": "敬重沈馆员的学问，从不在书库里多说一句闲话。",
-        "contrast": "看着是个书呆子，真遇到事却比谁都懂分寸。",
-        "prefers": [
-          "非礼勿视",
-          "替人遮掩",
-          "安静做学问"
-        ],
-        "avoids": [
-          "跟风起哄",
-          "偷拍",
-          "逾越读者本分"
-        ],
-        "never": [
-          "把别人的窘境说出去"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "馆员的版本功夫",
-          "安静专注的人"
-        ],
-        "likes": [
-          "一部好的宋版书",
-          "安静的夜读会"
-        ],
-        "dislikes": [
-          "哗众取宠的人"
-        ],
-        "preconditions": [
-          "对方情愿"
-        ],
-        "boundaries": [
-          "只在书库外来往"
-        ],
-        "expression": "说起版本来滔滔不绝，被人看一眼就结巴。",
-        "desire_range": [
-          1,
-          3
+          2,
+          4
         ],
         "self_control_range": [
           3,
           5
         ],
-        "desired_position": "写完博士论文，留在特藏馆做研究"
+        "desired_position": "威权训教者，被揭开质押丑账便一夕崩塌反受挟制"
       },
       "voices": {
-        "surface": "这卷善本朱批墨色沉着，正是清乾嘉年间名家手笔，实在精妙绝伦。",
-        "inner": "馆员师妹衣服受力撕开了……我必须立刻低下头，绝不能让周围任何人顺着我的视线抬头！"
+        "surface": "“书梯卡了不会叫人，关门躲什么？出来说清！”",
+        "inner": "补错一页事小，正好把那副傲骨碾进书房红木桌底下训一训。"
       },
       "schedule": [
         {
-          "from": 120,
-          "to": 130,
+          "from": 1140,
+          "to": 1195,
           "location_id": "loc_ground_reading_atrium_hall"
         },
         {
-          "from": 130,
-          "to": 135,
-          "location_id": "loc_ground_reading_atrium_hall"
-        },
-        {
-          "from": 135,
-          "to": 140,
-          "location_id": "loc_ground_reading_atrium_hall"
+          "from": 1195,
+          "to": 1260,
+          "location_id": "loc_library_reading_study"
         }
       ],
       "situation": {
-        "trigger": "自大厅正中央书桌抬眼校勘目录偶见馆员身姿受限且前襟受拉",
-        "pressure": "邻座多名青年在籍学者正欲顺着书梯轻微金属响声抬头观望",
+        "trigger": "夜读生梯锁异响，学会审计二十分钟内核账。",
+        "pressure": "须抢先稳住局势或趁火按死关键下属。",
         "exits": [
           {
-            "option": "故意轻叩桌面并翻动宣纸向同桌研读者发问引开众人注意力",
-            "cost": "在大厅发声可能触犯轻微禁言守则引来值班员提醒"
+            "option": "以解聘相挟在书房折服核心下属",
+            "cost": "若被搜出质押借据，威严一夜崩成笑柄"
           },
           {
-            "option": "立起大开本拓本装订夹形成半包围遮光屏风隔断侧面视线",
-            "cost": "立起大屏风可能引来走动巡检人员之注意"
+            "option": "遭查出旧账后被迫退位让出印信",
+            "cost": "交出全权且日后只得听命于攥旧票的对手"
           }
         ]
       },
-      "tags": []
+      "tags": [
+        "coercion_theme",
+        "workplace_power",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "guest_book_appraiser",
+      "gender": "any",
+      "gender_reason": "受学会委派鉴定的专家支持多样化性别对抗张力。",
+      "age_range": [
+        32,
+        44
+      ],
+      "adult_context": "持国家级评估证书的成年特聘审计专家。",
+      "public_role": "携紫光仪核查宋刻真伪的冷面学会鉴定官",
+      "appearance_options": [
+        "炭灰风衣微敞，手提银色仪器箱，单边镜链垂颈侧，审视页眉唇线绷直。",
+        "白手套纤尘不染捏镊挑页，嗓音斯文却字字敲在命门。"
+      ],
+      "identity": {
+        "authority": "执掌评级一票否决及上报通报的审计实权。",
+        "resources": [
+          "便携高倍紫光仪与学会审计封条",
+          "海绵垫下夹藏的静音无线遥控跳蛋与纯银细链乳夹"
+        ],
+        "limits": [
+          "五年前替权贵做假鉴定，底片流落江南收藏圈"
+        ],
+        "obligations": [
+          "夜读结束前提交宋刻真伪评定报告"
+        ],
+        "exposure": "仪器盒内衬藏着违规带入场的私密器具盒与旧赝品底单线索。",
+        "hidden": "表面讲求学术纯洁，实则沉迷把孤傲同行拉下神坛；借补页破绽逼对方关门试戴箱底玩意，报告自然花团锦簇。"
+      },
+      "decision": {
+        "core_value": "鉴定字字千金，救人一命收回等价消遣也合情合理。",
+        "goal_options": [
+          "揪出破绽逼顶层人物答应私室赔礼",
+          "防备知晓旧年假鉴底片的人掀老底"
+        ],
+        "pressure_responses": {
+          "low": "合紫光仪推镜“这几开纤维……不合民国旧手艺吧”。",
+          "mid": "锁仪器低声问“还没落印，厅谈还是书房谈”。",
+          "high": "揭海绵垫露黑绒盒，把静音开关推过去笑着等待。",
+          "breaking": "若遭亮出假鉴原照瞬间收傲慢低头，愿用免检盖章换保密。"
+        },
+        "withdrawal": "拎仪器箱颔首离席，故意留明早递表的缓冲。",
+        "relationship_stance": "难缠的外部审计虎狼，拿学术标准索要最私密买路钱。",
+        "contrast": "戴手套翻古书似传道士，翻开仪器暗层立刻露出恶趣味。",
+        "prefers": [
+          "嘴硬坚持却为手卷妥协的清冷人物",
+          "危险边缘玩刺激的胆大合作者"
+        ],
+        "avoids": [
+          "只会塞红包行贿的俗商"
+        ],
+        "never": [
+          "当众把私物漏在普通读者面前"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "判定悬头顶、才人被迫顺从的掌控感",
+          "静默高台与密室无声震颤威胁"
+        ],
+        "likes": [
+          "逼戴纯银夹扣或遥控筹码端坐茶桌配合核对",
+          "用学术术语点评强忍颤抖的神情"
+        ],
+        "dislikes": [
+          "一施压就瘫软哭闹的脆弱者"
+        ],
+        "preconditions": [
+          "握死瑕疵铁证且有隔音或夜读掩护"
+        ],
+        "boundaries": [
+          "明面履历和私人恶癖彻底切割"
+        ],
+        "expression": "学术措辞越严谨，暗藏施压越令人喘不过气。",
+        "desire_range": [
+          3,
+          5
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "审度施令者，欣赏猎物在清高与崩溃间拉锯"
+      },
+      "voices": {
+        "surface": "“纤维龄期差一百多年，写进通报，整座楼都得停业整顿吧。”",
+        "inner": "盒子里纯银细链和遥控玩具还没上场，正好掂量冷面馆员能忍几步。"
+      },
+      "schedule": [
+        {
+          "from": 1140,
+          "to": 1210,
+          "location_id": "loc_stacks_fifth_rare_aisle"
+        },
+        {
+          "from": 1210,
+          "to": 1260,
+          "location_id": "loc_library_reading_study"
+        }
+      ],
+      "situation": {
+        "trigger": "携封条直插密室，撞上卡梯和补页混乱。",
+        "pressure": "逼出满意私人酬劳保报告，或反被挖黑料陪葬。",
+        "exits": [
+          {
+            "option": "以签字过关在书房逼兑现绒盒筹码",
+            "cost": "被录下胁迫过程则学术生涯瞬间崩毁"
+          },
+          {
+            "option": "拿瑕疵与机电方或馆长合流瓜分利益",
+            "cost": "迫使对方鱼死网破反查五年前假鉴旧档"
+          }
+        ]
+      },
+      "tags": [
+        "workplace_power",
+        "coercion_theme",
+        "explicit"
+      ]
     }
   ],
   "background_cast": [
     {
-      "id": "bg_curator_gu_wen_zheng",
-      "name": "老戴",
-      "role": "藏书楼的老门房",
+      "id": "bg_silent_reader_crowd",
+      "role": "天井厅屏息翻书成年读者",
+      "function": "witness",
+      "location_ids": [
+        "loc_ground_reading_atrium_hall",
+        "loc_atrium_ladder_high_platform"
+      ],
+      "line": "{npc.name}抬头皱眉朝高台望：“上面动静小点好不好？全场都在静读！”",
+      "gender": "any",
+      "age_range": [
+        22,
+        55
+      ],
+      "adult_context": "购票实名参加周五夜读会的成年读者群像。",
+      "name": null
+    },
+    {
+      "id": "bg_front_reception_clerk",
+      "role": "总台核验电梯成年保安",
       "function": "obstacle",
+      "location_ids": [
+        "loc_ground_reading_atrium_hall"
+      ],
+      "line": "{npc.name}提醒：“五楼密室和顶层书房非请莫入，电梯已切刷卡模式。”",
+      "gender": "any",
+      "age_range": [
+        26,
+        45
+      ],
+      "adult_context": "具备保安资质值守夜间门禁的成年馆务保安。",
+      "name": null
+    },
+    {
+      "id": "bg_rare_book_photographer",
+      "role": "特写记录成年活动摄影师",
+      "function": "witness",
+      "location_ids": [
+        "loc_ground_reading_atrium_hall",
+        "loc_atrium_ladder_high_platform"
+      ],
+      "line": "{npc.name}举镜头瞄向二楼：“高台壁灯角度不错，刚好像有书掉下来？”",
+      "gender": "any",
+      "age_range": [
+        25,
+        40
+      ],
+      "adult_context": "受特藏馆活动部聘用的成年活动摄影师。",
+      "name": null
+    },
+    {
+      "id": "bg_atrium_host_emcee",
+      "role": "主持主厅计时的成年司仪",
+      "function": "messenger",
+      "location_ids": [
+        "loc_ground_reading_atrium_hall"
+      ],
+      "line": "{npc.name}晃响铜铃提示：“二十分钟后请主理人上台做宋刻导读！”",
+      "gender": "any",
+      "age_range": [
+        28,
+        45
+      ],
+      "adult_context": "受协会委托主持夜读会流程的成年司仪。",
+      "name": null
+    },
+    {
+      "id": "bg_night_archive_courier",
+      "role": "搬运恒温箱的成年理货员",
+      "function": "messenger",
       "location_ids": [
         "loc_stacks_fifth_rare_aisle"
       ],
-      "line": "今日善本提调务必严格执行双人开柜制度，切勿违背馆规程序。",
-      "gender": "male",
-      "age_range": [
-        62,
-        62
-      ],
-      "adult_context": "在藏书楼看了三十年大门的成年老门房。"
-    },
-    {
-      "id": "bg_senior_lin_yu_bai",
-      "name": "阿衡",
-      "role": "修复组的研究生",
-      "function": "helper",
-      "location_ids": [
-        "loc_atrium_ladder_high_platform"
-      ],
-      "line": "善本交接托盘已用软木衬垫铺妥，梯位极其平稳，尽可安心放置。",
-      "gender": "male",
+      "line": "{npc.name}推车路过：“学会刚发来补充比对单，要馆长亲笔签收。”",
+      "gender": "any",
       "age_range": [
         24,
-        24
+        38
       ],
-      "adult_context": "中国古典历史学研二在读年届二十四岁成年学者，享有独立民事主体资格，主理善本搬运及安全保护。"
+      "adult_context": "持特藏搬运上岗证的成年库房理货员。",
+      "name": null
     },
     {
-      "id": "bg_engineer_zhao_tian_yuan",
-      "name": "老匡",
-      "role": "特种古铜书梯成年机械维保技师",
-      "function": "helper",
+      "id": "bg_facilities_night_inspector",
+      "role": "巡查配电与湿度的巡检员",
+      "function": "obstacle",
       "location_ids": [
         "loc_mep_ladder_service_bay"
       ],
-      "line": "书梯顶端三十六齿滑轮自锁片间隙为三毫米，注意发力角度。",
-      "gender": "male",
+      "line": "{npc.name}手电扫过屏风：“除湿机怎么跳闸，立柱那边谁在动阀门？”",
+      "gender": "any",
       "age_range": [
-        25,
-        25
+        32,
+        50
       ],
-      "adult_context": "工程动力机械专业修习圆满二十五岁成年技师，持有效特种维保资格，负责全馆轨道润滑巡查。"
-    },
-    {
-      "id": "bg_assistant_su_xiao_wan",
-      "name": "小棠",
-      "role": "服务台成年助理馆员",
-      "function": "helper",
-      "location_ids": [
-        "loc_ground_reading_atrium_hall"
-      ],
-      "line": "前台备用深色工作苫布已取出品名签，随时可以支援各组应急。",
-      "gender": "female",
-      "age_range": [
-        26,
-        26
-      ],
-      "adult_context": "图书信息科学三年级年满二十六周岁成年助理馆员，享有完备法定责任担当资格，负责前台事务。"
-    },
-    {
-      "id": "bg_scholar_zhou_han_qing",
-      "name": "阿哲",
-      "role": "夜读会的读者",
-      "function": "witness",
-      "location_ids": [
-        "loc_ground_reading_atrium_hall"
-      ],
-      "line": "此部四库丛刊版本字口清劲如初，校勘记确有极高学术分量。",
-      "gender": "male",
-      "age_range": [
-        26,
-        26
-      ],
-      "adult_context": "版本目录学博士班在读满二十六岁成年学者，专精乾嘉学派考辨，恪尽端肃之礼。"
-    },
-    {
-      "id": "bg_guard_xu_de_hai",
-      "name": "安保主管老徐",
-      "role": "特藏书库成年安保主管",
-      "function": "witness",
-      "location_ids": [
-        "loc_stacks_fifth_rare_aisle"
-      ],
-      "line": "特藏书库走廊严禁擅自停留喧哗，请大家保持大厅肃穆秩序。",
-      "gender": "male",
-      "age_range": [
-        52,
-        52
-      ],
-      "adult_context": "年满五十二岁退役军人转岗保卫主管，享有完备岗位职责权能，定时巡视廊道消防。"
+      "adult_context": "负责保护建筑夜间机电安全巡视的成年巡检员。",
+      "name": null
     }
   ],
   "channels": [
     {
-      "id": "ch_intercom_kitchen_direct",
-      "text": "星级餐厅后厨加密无线降噪耳麦对讲频道",
-      "reach": "大堂督导与后厨工程师及操作台主副厨监听终端",
+      "id": "ch_atrium_note_slip",
+      "text": "借黄铜书签或阅览卡片传递字条",
+      "reach": "local",
       "fidelity": "exact"
     },
     {
-      "id": "ch_cues_visual_island",
-      "text": "全景吧台托盘与隔热巾视觉暗号协同系统",
-      "reach": "馆员与师兄、前台馆员之间的视线范围",
-      "fidelity": "exact"
-    },
-    {
-      "id": "ch_broadcast_feed_monitor",
-      "text": "国际美食年鉴实况微距转播超清监控链路",
-      "reach": "楼下天井阅览厅和老馆长巡视的书廊",
+      "id": "ch_silent_hall_echo",
+      "text": "高空动静引起的下方翻书停顿与侧目",
+      "reach": "wide",
       "fidelity": "distorted"
+    },
+    {
+      "id": "ch_locked_study_bet",
+      "text": "书房或密室落栓后亮出暗匣器具对质",
+      "reach": "private",
+      "fidelity": "exact"
     }
   ],
   "tension_engines": [
     {
-      "id": "engine_pulley_gear_choker_deadlock",
-      "text": "悬空五米之黄铜书梯逆止棘齿死死绞合素银项圈胸链，真丝盘扣开衫撕开大半露香肩，高空娇躯动弹不得面临跌落与走光双重险情。"
+      "id": "te_silent_crowd_vs_hidden_desire",
+      "text": "百名读者静注与高空暗室失声博弈"
     },
     {
-      "id": "engine_fifteen_second_curator_countdown",
-      "text": "老馆长皮鞋踏响汉白玉石阶之威严脚步声穿透走廊步步逼近唯余十五秒，一旦转入书架过道仰头审视则百年名媛清誉毁于一旦。"
+      "id": "te_counterfeit_audit_chips",
+      "text": "补页伪造隐患、质押旧账与筹码挟制"
     },
     {
-      "id": "engine_hundred_readers_silent_gaze",
-      "text": "底层阳光天井阅览厅百余位成年师生正处极其肃穆之研读状态，高空哪怕发出一丝布帛撕裂或金属坠地声都将引来全场齐刷刷仰望。"
+      "id": "te_ladder_jam_and_curfew",
+      "text": "五米铜梯锁死与馆长皮鞋逼近倒计时"
     },
     {
-      "id": "engine_rare_edition_drop_hazard",
-      "text": "怀中托抱之清代善本孤本价值连城且纸页脆如蝉翼，单手自救脱困同时绝不可令国宝古籍发生丝毫脱手坠落或墨迹划痕。"
-    },
-    {
-      "id": "engine_brass_bookmark_micro_leverage",
-      "text": "馆员袖中仅有一枚两毫米厚纯黄铜直角古籍书签可作撬具，微观机械破拆稍有滑脱将彻底失去唯一脱困希望。"
-    },
-    {
-      "id": "engine_chaste_maiden_dignity_crisis",
-      "text": "成年名门闺秀古典才女之高洁尊严与娇羞心房在千钧一发之际经受极限考验，冷静克制与粉颊红晕交织成极致反差美感。"
+      "id": "te_top_study_threshold_bet",
+      "text": "顶层书房赌约与台前导读时限挤兑"
     }
   ],
   "cast_combos": [
     {
-      "id": "combo_shen_and_lin",
-      "power_structure": "switchable",
-      "player_positions": [
-        "high",
-        "equal",
-        "low"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "librarian_shen_qing_qiu",
-        "senior_lin_yu_bai"
-      ],
-      "tension_engine_ids": [
-        "engine_pulley_gear_choker_deadlock",
-        "engine_fifteen_second_curator_countdown"
-      ],
-      "chemistry": "师兄借高举厚皮经卷挺拔伫立梯底筑起坚实视界屏障，馆员借其身位掩护果断拔出黄铜书签微观撬锁，同门默契天衣无缝。",
-      "stakes": {
-        "resource_gap": "高台险境与地面掩体之力学协同",
-        "meeting_reason": "夜读会开始前，师兄在天井的书桌边整理校勘记，抬头看了一眼梯上的馆员。",
-        "limit_gap": "十五秒老馆长逼近死线与梯底视线屏障筑造的争分夺秒",
-        "irreplaceable_goal": "在全场读者浑然未觉中无损归还古籍并完美保全馆员名誉"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "librarian_shen_qing_qiu",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 4
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 4
-          },
-          "reason": "挑空藏书楼高低呼应共克突发锁死险境并以最克制君子之礼守望相助"
-        },
-        {
-          "a": "player",
-          "b": "senior_lin_yu_bai",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 2
-          },
-          "reason": "同为特藏编目整理团队之骨干同僚袍泽"
-        },
-        {
-          "a": "librarian_shen_qing_qiu",
-          "b": "senior_lin_yu_bai",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 3
-          },
-          "reason": "梯底经卷屏障视线掩护与高空自救之默契交汇"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "id": "combo_shen_and_zhao",
-      "power_structure": "equal",
-      "player_positions": [
-        "equal"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "librarian_shen_qing_qiu",
-        "engineer_zhao_tian_yuan"
-      ],
-      "tension_engine_ids": [
-        "engine_pulley_gear_choker_deadlock",
-        "engine_brass_bookmark_micro_leverage"
-      ],
-      "chemistry": "清雅古典女馆员与现代机电设备维保工在黄铜滑轮力学构造认知上的隐秘碰撞，暗语指引下纯机械脱钩的灵犀交汇。",
-      "stakes": {
-        "resource_gap": "机械专业参数认知与实地微观杠杆操作的严密吻合",
-        "meeting_reason": "维保师傅巡到书梯下，听出滚轮的声音有点涩，蹲下来看了一眼。",
-        "limit_gap": "滑轮承受拉力极限与细银链破断拉力的临界差值",
-        "irreplaceable_goal": "以两毫米黄铜刃角微观精准挑退自锁片实现零伤痕脱钩"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "librarian_shen_qing_qiu",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 4
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 4
-          },
-          "reason": "对古铜书梯机械性能之透彻解析为自救提供唯一定量破拆角度"
-        },
-        {
-          "a": "player",
-          "b": "engineer_zhao_tian_yuan",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 3
-          },
-          "reason": "日常升降梯检修工作交接所建立之技术互信"
-        },
-        {
-          "a": "librarian_shen_qing_qiu",
-          "b": "engineer_zhao_tian_yuan",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 4
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 4
-          },
-          "reason": "暗处手势信号指引与硬核机械撬锁之专业共鸣"
-        }
-      ],
-      "tags": []
-    },
-    {
-      "id": "combo_shen_and_su",
+      "id": "c1_high_chief_vs_exhibition",
       "power_structure": "player_high",
       "player_positions": [
         "high"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "pi_chief_librarian"
+      ],
       "slots": [
-        "librarian_shen_qing_qiu",
-        "assistant_su_xiao_wan"
+        "rare_exhibition_chief"
       ],
       "tension_engine_ids": [
-        "engine_fifteen_second_curator_countdown",
-        "engine_chaste_maiden_dignity_crisis"
+        "te_counterfeit_audit_chips",
+        "te_silent_crowd_vs_hidden_desire"
       ],
-      "chemistry": "活泼助理前台馆员不顾馆规飞身拦阻老馆长争取黄金十秒，馆员在上争分夺秒完成撬锁自救，姐妹情深化作绝妙反转契机。",
+      "chemistry": "掌签发权的玩家盯紧{rare_exhibition_chief.name}，点破私借版画旧账，逼对方从公文箱掏出讨好玩意换批条。",
       "stakes": {
-        "resource_gap": "前台接待周旋权能与高空绝境自救的紧密联动",
-        "meeting_reason": "前台馆员抱着借阅登记簿，一边接待读者一边留意着书梯那边。",
-        "limit_gap": "公文签字拦截十秒与机械解脱收尾的极限赛跑",
-        "irreplaceable_goal": "将老馆长巡视视线死死钉在前台文卷之上直至馆员整理好衣襟"
+        "resource_gap": "玩家握库底与钥匙，对方包里藏私密绒盒。",
+        "limit_gap": "玩家要压服对方，对方伺机拖进书房讨利息。",
+        "meeting_reason": "进入密室夹道核对展品交接单。",
+        "irreplaceable_goal": "压对方签死联保单，顺手收缴暗牌。"
       },
       "relations": [
         {
           "a": "player",
-          "b": "librarian_shen_qing_qiu",
+          "b": "rare_exhibition_chief",
           "stage": "testing",
           "a_to_b": {
-            "trust": 5,
-            "tension": 3
+            "trust": 2,
+            "tension": 5
           },
           "b_to_a": {
-            "trust": 5,
-            "tension": 3
+            "trust": 2,
+            "tension": 5
           },
-          "reason": "在名誉与前途面临风暴时毫不犹豫挺身而出甘担责任"
-        },
-        {
-          "a": "player",
-          "b": "assistant_su_xiao_wan",
-          "stage": "intimate",
-          "a_to_b": {
-            "trust": 5,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 5,
-            "tension": 2
-          },
-          "reason": "无话不谈之闺中挚友与同门姊妹"
-        },
-        {
-          "a": "librarian_shen_qing_qiu",
-          "b": "assistant_su_xiao_wan",
-          "stage": "intimate",
-          "a_to_b": {
-            "trust": 5,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 5,
-            "tension": 3
-          },
-          "reason": "公文拦截争取时间与私密庇护之患难与共"
+          "reason": "多年知根知底，每次合作都在踩对方底线。"
         }
       ],
-      "tags": []
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
+      ]
     },
     {
-      "id": "combo_shen_and_gu",
-      "power_structure": "npc_high",
+      "id": "c2_high_appraiser_vs_librarian",
+      "power_structure": "player_high",
       "player_positions": [
-        "low",
-        "equal"
+        "high"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "pi_visiting_appraiser"
+      ],
       "slots": [
-        "librarian_shen_qing_qiu",
-        "curator_gu_wen_zheng"
+        "head_rare_book_librarian"
       ],
       "tension_engine_ids": [
-        "engine_fifteen_second_curator_countdown",
-        "engine_rare_edition_drop_hazard"
+        "te_counterfeit_audit_chips",
+        "te_silent_crowd_vs_hidden_desire"
       ],
-      "chemistry": "严苛泰斗馆长雷霆万钧之学术巡查威压与名门传人临危不乱的智勇破局，古典师道尊严在无声自救中得以圆满维系。",
+      "chemistry": "鉴定官戳穿补页瑕疵，逼得冷艳的{head_rare_book_librarian.name}退进书房关门。对方微红两颊拿黄铜书签硬撑，目光却死盯密码箱。",
       "stakes": {
-        "resource_gap": "最高行政裁夺权力与青年学者职业尊严之激烈对垒",
-        "meeting_reason": "老馆长拄着手杖巡视书廊，说要亲自看看今晚的善本提调。",
-        "limit_gap": "老馆长踏上石阶最后五步与书梯滑降至地面的时间差",
-        "irreplaceable_goal": "在老馆长抬眼审视时展现毫无瑕疵之学者风骨与典籍原貌"
+        "resource_gap": "玩家握定前途的审计笔，对方只有暗匣与嘴硬傲心。",
+        "limit_gap": "玩家想看人拆开领口兑现私约；对方死守体面不甘投降。",
+        "meeting_reason": "紫光检测结束直奔顶层书房谈报告口径。",
+        "irreplaceable_goal": "导读前拿下一纸签字或一场彻底卸防的私赔。"
       },
       "relations": [
         {
           "a": "player",
-          "b": "librarian_shen_qing_qiu",
-          "stage": "familiar",
+          "b": "head_rare_book_librarian",
+          "stage": "flirting",
           "a_to_b": {
-            "trust": 3,
+            "trust": 1,
             "tension": 5
           },
           "b_to_a": {
-            "trust": 4,
+            "trust": 1,
             "tension": 5
           },
-          "reason": "对青年后辈倾注极高期望且对馆风学术规矩有着至高严苛要求"
-        },
-        {
-          "a": "player",
-          "b": "curator_gu_wen_zheng",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 5
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 5
-          },
-          "reason": "全馆至高学术泰斗与后辈青年学人之代际威压"
-        },
-        {
-          "a": "librarian_shen_qing_qiu",
-          "b": "curator_gu_wen_zheng",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 5
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 5
-          },
-          "reason": "学术考问与孤本归架规范之严苛考验"
+          "reason": "嘴仗烧到闭门书房，空气里满是危险热度。"
         }
       ],
-      "tags": []
+      "tags": [
+        "explicit",
+        "intimate",
+        "humiliation"
+      ]
     },
     {
-      "id": "combo_shen_and_zhou",
-      "power_structure": "equal",
+      "id": "c3_high_chief_vs_archivist",
+      "power_structure": "player_high",
       "player_positions": [
-        "equal"
+        "high"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "pi_chief_librarian"
+      ],
       "slots": [
-        "librarian_shen_qing_qiu",
-        "scholar_zhou_han_qing"
+        "front_desk_archivist"
       ],
       "tension_engine_ids": [
-        "engine_hundred_readers_silent_gaze",
-        "engine_chaste_maiden_dignity_crisis"
+        "te_ladder_jam_and_curfew",
+        "te_counterfeit_audit_chips"
       ],
-      "chemistry": "博士学长在发现高空异样瞬间展现最高君子教养低头伏案，并巧妙翻书遮掩邻座视线，无声尊重成为最深沉的守护。",
+      "chemistry": "上位主理揪住{front_desk_archivist.name}偷录监控辫子，却见软糯职员包里备着素银项圈胸链和无线物件，笑吟吟要挟翻旧账。",
       "stakes": {
-        "resource_gap": "中央大厅舆论发酵风险与君子克制引导的有效对冲",
-        "meeting_reason": "来查资料的博士坐在梯下的书桌前，翻着一部明代类书。",
-        "limit_gap": "周围读者抬头探究意图与博士咳嗽引导注意力的时机把握",
-        "irreplaceable_goal": "彻底切断底层天井阅览厅向高空聚集视线的一切潜在引线"
+        "resource_gap": "玩家握封杀大权，对方捏关键录像备份。",
+        "limit_gap": "须先毁录像又不惊动楼下，屏风后互相试探。",
+        "meeting_reason": "借巡视借阅簿拽进安全通道对质。",
+        "irreplaceable_goal": "夺回备份视频并将越线小职员彻底收服。"
       },
       "relations": [
         {
           "a": "player",
-          "b": "librarian_shen_qing_qiu",
-          "stage": "acquainted",
+          "b": "front_desk_archivist",
+          "stage": "familiar",
           "a_to_b": {
-            "trust": 4,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 4,
+            "trust": 2,
             "tension": 4
           },
-          "reason": "在偶然窥及困厄时恪守道德底线并主动施以无声掩护"
-        },
-        {
-          "a": "player",
-          "b": "scholar_zhou_han_qing",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 2
-          },
           "b_to_a": {
-            "trust": 4,
-            "tension": 2
+            "trust": 2,
+            "tension": 5
           },
-          "reason": "大厅常驻学者与特藏部之间的学术交往"
-        },
-        {
-          "a": "librarian_shen_qing_qiu",
-          "b": "scholar_zhou_han_qing",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 3
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 3
-          },
-          "reason": "非礼勿视之君子克制与无声视线分流守护"
+          "reason": "撕开面皮才知小职员胃口大得出奇。"
         }
       ],
-      "tags": []
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
+      ]
     },
     {
-      "id": "combo_lin_and_zhao",
-      "power_structure": "equal",
+      "id": "c4_npc_high_mec_vs_librarian",
+      "power_structure": "npc_high",
       "player_positions": [
-        "equal"
+        "low"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "pi_mec_specialist"
+      ],
       "slots": [
-        "senior_lin_yu_bai",
-        "engineer_zhao_tian_yuan"
+        "head_rare_book_librarian"
       ],
       "tension_engine_ids": [
-        "engine_pulley_gear_choker_deadlock",
-        "engine_fifteen_second_curator_countdown"
+        "te_ladder_jam_and_curfew",
+        "te_silent_crowd_vs_hidden_desire"
       ],
-      "chemistry": "文史研究生与工科维保技工在线索传递上的默契配合，文工协同以极高效率构筑地面安全防线。",
+      "chemistry": "高高在上的{head_rare_book_librarian.name}因卡梯与馆长逼近陷入绝境！玩家拎着工具包进书房，掏绒盒笑问肯怎么买这半圈开阀。",
       "stakes": {
-        "resource_gap": "地面书架动线掌控与机械构件参数调度的无缝融合",
-        "meeting_reason": "师兄和维保师傅在凹室里一起修书梯的滚轮，聊起这座藏书楼当年的事。",
-        "limit_gap": "老馆长步伐推进距离与备用泄压阀开启时间的协调",
-        "irreplaceable_goal": "确保书梯在承受外力撬动时绝对不发生剧烈晃动或金属尖叫"
+        "resource_gap": "对方握续约权，玩家是唯一能动阀门删录像的人。",
+        "limit_gap": "对方咬唇不愿失态，皮鞋声却一秒比一秒致命。",
+        "meeting_reason": "带维修箱和私货推开书房核查电路。",
+        "irreplaceable_goal": "把高冷姿态折下来换成筹码兑现。"
       },
       "relations": [
         {
           "a": "player",
-          "b": "senior_lin_yu_bai",
-          "stage": "familiar",
+          "b": "head_rare_book_librarian",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "高枝掉进维修工手里，报复与迷恋交织发烫。"
+        }
+      ],
+      "tags": [
+        "humiliation",
+        "explicit",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "c5_npc_high_archivist_vs_curator",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "pi_front_archivist"
+      ],
+      "slots": [
+        "archive_curator_elder"
+      ],
+      "tension_engine_ids": [
+        "te_counterfeit_audit_chips",
+        "te_ladder_jam_and_curfew"
+      ],
+      "chemistry": "老辣的{archive_curator_elder.name}敲拐杖追问动静，拿黑名单压人；偏小专员手袋里收着拿捏馆长的质押线索与筹码盒子。",
+      "stakes": {
+        "resource_gap": "对方执掌封杀大权，玩家有绝密线索与时间差。",
+        "limit_gap": "露怯就被按死，唯有抓准质押痛处反咬一口。",
+        "meeting_reason": "转角迎面撞上正在上楼查房的老馆长。",
+        "irreplaceable_goal": "撑住威压不丢筹码，迫使老长官私密妥协。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "archive_curator_elder",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "畏惧上级手段，却在等那颗质押老雷引爆。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "c6_equal_exhibition_vs_librarian",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "pi_exhibition_director"
+      ],
+      "slots": [
+        "head_rare_book_librarian"
+      ],
+      "tension_engine_ids": [
+        "te_silent_crowd_vs_hidden_desire",
+        "te_ladder_jam_and_curfew"
+      ],
+      "chemistry": "站在五米高台举书掩护的你贴近{head_rare_book_librarian.name}。{head_rare_book_librarian.ta}抓紧黄铜书签骂你打劫，盘扣却在擦身瞬间松开露出白肩。",
+      "stakes": {
+        "resource_gap": "双方各怀把柄，同船遮掩才能度过老馆长巡查。",
+        "limit_gap": "楼下静得像镜子，出半声便同时剥掉名誉。",
+        "meeting_reason": "铜梯卡高处，搬精装书登梯救场护短。",
+        "irreplaceable_goal": "把护短转化为书房格子毯上的私密契约。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "head_rare_book_librarian",
+          "stage": "intimate",
           "a_to_b": {
             "trust": 4,
-            "tension": 3
+            "tension": 5
           },
           "b_to_a": {
             "trust": 4,
-            "tension": 3
+            "tension": 5
           },
-          "reason": "为了守护共同的图书馆秩序与同僚安危迅速达成战术默契"
+          "reason": "高台四目相对、耳根发红却不服，早越同僚界。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "explicit"
+      ]
+    },
+    {
+      "id": "c7_equal_exhibition_vs_appraiser",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "pi_exhibition_director"
+      ],
+      "slots": [
+        "guest_book_appraiser"
+      ],
+      "tension_engine_ids": [
+        "te_counterfeit_audit_chips",
+        "te_silent_crowd_vs_hidden_desire"
+      ],
+      "chemistry": "策展主任与鉴定官{guest_book_appraiser.name}关进密室试探：一个拿假鉴线索护评级，一个拍着仪器箱私物盒子反开下流条件。",
+      "stakes": {
+        "resource_gap": "一方握封条与通报，一方握假鉴黑史与展借权。",
+        "limit_gap": "披文雅外皮的老狐狸互逼谁先交底牌。",
+        "meeting_reason": "密室夹道预演善本真伪核验。",
+        "irreplaceable_goal": "压服审计抬手，哪怕用私下交易封住嘴。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "guest_book_appraiser",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "老对手碰面把尊严和私下索求绞在一起。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "c8_equal_exhibition_vs_mec",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal"
+      ],
+      "identity_ids": [
+        "pi_exhibition_director"
+      ],
+      "slots": [
+        "ladder_mec_technician"
+      ],
+      "tension_engine_ids": [
+        "te_ladder_jam_and_curfew",
+        "te_counterfeit_audit_chips"
+      ],
+      "chemistry": "策展骨干钻进屏风后用结款逼{ladder_mec_technician.name}放梯，技师反关闸掏出那盒纯银细链乳夹，倒索额外赔礼。",
+      "stakes": {
+        "resource_gap": "你掌结款签字，对方捏死阀门与录像。",
+        "limit_gap": "楼上时间流逝，硬拼两败俱伤，妥协屈辱。",
+        "meeting_reason": "借检查异响潜入凹室紧急疏通梯轨。",
+        "irreplaceable_goal": "抢到卸荷阀解锁并保住死角录像。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "ladder_mec_technician",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "关灯卡闸这一刻谁都不打算轻易松手。"
+        }
+      ],
+      "tags": [
+        "coercion_theme",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "c9_switch_appraiser_vs_archivist",
+      "power_structure": "switchable",
+      "player_positions": [
+        "high",
+        "low"
+      ],
+      "identity_ids": [
+        "pi_visiting_appraiser",
+        "pi_mec_specialist"
+      ],
+      "slots": [
+        "front_desk_archivist"
+      ],
+      "tension_engine_ids": [
+        "te_counterfeit_audit_chips",
+        "te_ladder_jam_and_curfew"
+      ],
+      "chemistry": "安全门后玩家和{front_desk_archivist.name}各自摁住把柄——录像拷贝与静音盒子正面对撞，攻守看谁抢先拿传话权。",
+      "stakes": {
+        "resource_gap": "玩家持鉴定大权或梯控，对方留了出入记录。",
+        "limit_gap": "脚步近在耳畔，五分钟内攻守翻盘。",
+        "meeting_reason": "借索取登记表在档案间短兵相接。",
+        "irreplaceable_goal": "逼交备份并戴筹码替楼上挡住馆长半小时。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "front_desk_archivist",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "袖下早各自摁住置对方死地的开关。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "c10_switch_duo_librarian_curator",
+      "power_structure": "switchable",
+      "player_positions": [
+        "equal",
+        "low"
+      ],
+      "identity_ids": [
+        "pi_exhibition_director",
+        "pi_mec_specialist"
+      ],
+      "slots": [
+        "head_rare_book_librarian",
+        "archive_curator_elder"
+      ],
+      "tension_engine_ids": [
+        "te_ladder_jam_and_curfew",
+        "te_silent_crowd_vs_hidden_desire"
+      ],
+      "chemistry": "铜梯卡死在高台，{head_rare_book_librarian.name}盘扣松开急颤却不求助；楼梯口已响起{archive_curator_elder.name}皮鞋逼近声，一念护花还是揭发！",
+      "stakes": {
+        "resource_gap": "馆长握总控与训包，女馆员攥底单，玩家控开关。",
+        "limit_gap": "皮鞋踏上二楼前必须敲定护谁还是撕谁伪装。",
+        "meeting_reason": "卡梯意外和老馆长突击夜查撞在同一转角。",
+        "irreplaceable_goal": "拿下书房格子毯红茶旁最划算的筹码契约。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "head_rare_book_librarian",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 5
+          },
+          "reason": "高空绝境急需遮掩，偏嘴硬不肯软声求人。"
         },
         {
           "a": "player",
-          "b": "engineer_zhao_tian_yuan",
-          "stage": "acquainted",
+          "b": "archive_curator_elder",
+          "stage": "testing",
           "a_to_b": {
-            "trust": 4,
-            "tension": 3
+            "trust": 1,
+            "tension": 5
           },
           "b_to_a": {
-            "trust": 4,
-            "tension": 3
+            "trust": 1,
+            "tension": 5
           },
-          "reason": "设备维保联动保障安全"
+          "reason": "老馆长只信体面纪律，随时拿黑名单压垮下属。"
         },
         {
-          "a": "senior_lin_yu_bai",
-          "b": "engineer_zhao_tian_yuan",
+          "a": "head_rare_book_librarian",
+          "b": "archive_curator_elder",
           "stage": "familiar",
           "a_to_b": {
-            "trust": 4,
-            "tension": 3
+            "trust": 1,
+            "tension": 5
           },
           "b_to_a": {
-            "trust": 4,
-            "tension": 3
+            "trust": 2,
+            "tension": 4
           },
-          "reason": "地面掩护身位与轨道参数协调之文理同盟"
+          "reason": "谁先露馅都会落入对方惩戒掌心。"
         }
       ],
-      "tags": []
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "coercion_theme"
+      ]
     }
   ],
   "daily_activities": [
     {
-      "id": "act_morning_library_opening_patrol",
-      "title": "晨曦开库与书梯高位巡查",
-      "location_ids": [
-        "loc_atrium_ladder_high_platform",
-        "loc_ground_reading_atrium_hall"
-      ],
-      "duration_minutes": 60,
-      "start_minute": 480,
-      "beats": [
-        "馆员身着素白盘扣棉麻开衫与百褶裙轻步踏入藏书楼特藏库",
-        "手持善本借阅单登临五米高黄铜移动书梯核对清代四库孤本架位",
-        "正下方通透明亮阅览大堂内百余名成年学者读者依次刷卡入座静穆阅读",
-        "老馆长在鉴定室内戴上老花镜审阅新进古籍修复目录清单"
-      ]
-    },
-    {
-      "id": "act_stacks_rare_retrieval_study",
-      "title": "善本提调与天井大厅肃穆研读",
+      "id": "act_atrium_evening_reading",
+      "title": "天井百人静读与高台调书",
       "location_ids": [
         "loc_ground_reading_atrium_hall",
-        "loc_stacks_fifth_rare_aisle"
+        "loc_atrium_ladder_high_platform"
       ],
-      "duration_minutes": 90,
-      "start_minute": 540,
+      "duration_minutes": 45,
       "beats": [
-        "博士在中央桌展开大开本宣纸抄本全神贯注比勘手卷朱批",
-        "前台馆员在前台轻声细语为成年师生办理特藏孤本书影阅览手续",
-        "师兄抱持厚重目录册步入书廊为高空馆员准备善本托盘",
-        "维保师傅手持便携点检表巡查特藏库两侧铜轨与地轨阻尼系统"
+        "百名读者在铜绿灯下翻书沙沙作响，穿素白盘扣开衫的馆员正捏黄铜直角书签抽换宋刻，滚轮逆止齿悄然发紧",
+        "带着私货绒匣的同行借口核书签沿梯靠近，目光停在微敞领口",
+        "门廊传来老馆长皮鞋回响，中庭瞬间像绷紧的琴弦"
+      ],
+      "hook_ids": [],
+      "start_minute": 1140,
+      "tags": [
+        "workplace_power"
       ]
     },
     {
-      "id": "act_pulley_chain_jam_crisis",
-      "title": "书梯上取书",
+      "id": "act_ladder_high_altitude_jam",
+      "title": "五米铜梯咬死与半尺掩护",
       "location_ids": [
-        "loc_atrium_ladder_high_platform",
-        "loc_stacks_fifth_rare_aisle"
+        "loc_atrium_ladder_high_platform"
       ],
-      "duration_minutes": 15,
-      "start_minute": 900,
+      "duration_minutes": 25,
       "beats": [
-        "周五下午，馆员登上黄铜书梯，从顶层取下几部要晒的清代善本。",
-        "书梯滑动时发出轻微的吱呀声，馆员一手扶梯一手抱书，动作很稳。",
-        "下来时馆员把书递给等在下面的人：小心，比你想的重。"
+        "铜梯滑轮死咬在五米高处，扶手旁放一盒未开启绒袋备件与黄铜规尺",
+        "护梯人举厚典籍遮住楼下仰望，反手拿住高台人微凉手腕",
+        "盘扣绷脱一颗露出半肩，高傲馆员涨红婴儿肥两颊压嗓连骂"
       ],
-      "hook_ids": [
-        "hook_2",
-        "hook_3",
-        "hook_5"
+      "hook_ids": [],
+      "start_minute": 1155,
+      "tags": [
+        "intimate",
+        "humiliation"
       ]
     },
     {
-      "id": "act_brass_bookmark_glide_escape",
-      "title": "夜读会开始前",
+      "id": "act_mep_bay_valve_negotiation",
+      "title": "凹室屏风后卸荷阀议价",
       "location_ids": [
-        "loc_atrium_ladder_high_platform",
-        "loc_ground_reading_atrium_hall"
-      ],
-      "duration_minutes": 20,
-      "start_minute": 1110,
-      "beats": [
-        "夜读会开始前，馆员在天井阅览厅里摆椅子，给每个座位放一张手写的书签。",
-        "师兄来帮忙，问书签上写的是什么，馆员说是今晚要读的那首诗。",
-        "读者陆续进来，馆员站在门口，轻声提醒每个人关掉手机。"
-      ],
-      "hook_ids": [
-        "hook_2",
-        "hook_3",
-        "hook_5"
-      ]
-    },
-    {
-      "id": "act_afternoon_catalog_restoration",
-      "title": "午后善本纤维无损检测整理",
-      "location_ids": [
-        "loc_stacks_fifth_rare_aisle",
         "loc_mep_ladder_service_bay"
       ],
-      "duration_minutes": 120,
-      "start_minute": 840,
+      "duration_minutes": 30,
       "beats": [
-        "馆员端坐修复台前以天然芸草水清洁清代善本破损竹纸边缘",
-        "维保师傅对移动铜梯上端棘齿结构进行全面超声波探伤排查",
-        "师兄在侧案核校清代四库孤本朱印提要并录入特藏档案",
-        "前台馆员送来温热龙井茶并相视一笑互致闺蜜默契"
+        "手电照亮油渍卸荷阀，工具袋内未拆封的素银项圈胸链与纯银细链乳夹露出一角绒边",
+        "急着救人的来客催促开阀，反被技师把锁阀套筒摊上冷箱盖",
+        "大厅传来翻页轻响，两人呼吸贴柱飞快定下价码"
+      ],
+      "hook_ids": [],
+      "start_minute": 1170,
+      "tags": [
+        "coercion_theme"
       ]
     },
     {
-      "id": "act_dusk_closing_and_safekeeping",
-      "title": "暮色闭馆与重锁善本特藏库",
+      "id": "act_rare_stacks_uv_audit",
+      "title": "五楼密室紫光真伪对账",
       "location_ids": [
-        "loc_atrium_ladder_high_platform",
-        "loc_ground_reading_atrium_hall"
+        "loc_stacks_fifth_rare_aisle"
       ],
-      "duration_minutes": 60,
-      "start_minute": 1020,
+      "duration_minutes": 40,
       "beats": [
-        "大厅读者依次收拾书卷刷卡离馆，藏书楼彩色玻璃透入落日余晖",
-        "馆员将修复完成之清代孤本送入恒温恒湿特藏金库安全柜",
-        "老馆长缓步走过天井满意颔首并勉励青年学人笃行致远",
-        "重锁特藏库大门，今日藏书楼惊魂彻底化为学林无瑕传奇"
+        "恒温风微吹发梢，仪器盒暗层收着未拆封的静音无线遥控跳蛋与纯银细链乳夹",
+        "紫光灯照出修补旧纸荧光，负责馆员霎时绷直纤背捏白指节",
+        "窄夹道只够肩贴肩退让，审计亮出黑绒筹码逼人当场换免检签名"
+      ],
+      "hook_ids": [],
+      "start_minute": 1185,
+      "tags": [
+        "workplace_power",
+        "coercion_theme"
       ]
     },
     {
-      "id": "act_study_read_aloud",
-      "title": "陪馆员读一页旧书",
+      "id": "act_top_study_red_tea_settlement",
+      "title": "顶层书房红茶与格子毯兑现",
       "location_ids": [
         "loc_library_reading_study"
       ],
-      "duration_minutes": 30,
-      "start_minute": 1320,
+      "duration_minutes": 50,
       "beats": [
-        "夜读会散了，馆员抽出一本民国旧书，坐到沙发上，让你挨着坐下，一起看同一页。",
-        "读着读着，馆员的头靠到了你肩上，翻页的手也停了：……这页再读一遍，读给我听。"
+        "绿罩台灯暖照红木书桌，滚热桂花红茶旁摆着未启盖黑绒暗匣，躺着素银项圈胸链与黑天鹅绒蒙眼带",
+        "反锁木门割开楼下书声，高傲者还握黄铜书签硬撑冷嘲",
+        "把柄纸单和黑绒暗匣推至膝前，苏格兰格子毯沙发成了卸伪装归宿"
       ],
+      "hook_ids": [],
+      "start_minute": 1205,
       "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
+        "intimate",
+        "explicit"
+      ]
     },
     {
-      "id": "act_study_choker",
-      "title": "摘下那条素银项圈",
+      "id": "act_closing_bell_coverup",
+      "title": "终场钟前封口与返厅复命",
       "location_ids": [
+        "loc_ground_reading_atrium_hall",
         "loc_library_reading_study"
       ],
       "duration_minutes": 30,
-      "start_minute": 1380,
       "beats": [
-        "馆员解开开衫的扣子，素银项圈还扣在颈上，胸链从锁骨一路垂进衬衫里。",
-        "馆员仰起脸，把脖子露给你：上次是你扣的。……这次也是你摘。摘完了，不许停。"
+        "压轴点评将至，众人整妥盘扣领带陆续走回灯光大亮的天井",
+        "表面还是书香名家，少数几人悄悄交换炽热眼色",
+        "口袋里依然握着小开关，桌面上已铺平完美审计结论"
       ],
+      "hook_ids": [],
+      "start_minute": 1240,
       "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_study_ink_tea",
-      "title": "一杯泡着桂花的红茶",
-      "location_ids": [
-        "loc_library_reading_study"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1260,
-      "beats": [
-        "馆员泡了一壶桂花红茶，倒了两杯，捧着自己那杯呵气取暖。",
-        "馆员看你喝了一口，小声说：……书库太冷了。以后闭馆，你来这里陪我。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_study_dawn_blanket",
-      "title": "裹着一条格子毯醒来",
-      "location_ids": [
-        "loc_library_reading_study"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 330,
-      "beats": [
-        "天快亮时，馆员裹着格子毯睡在沙发上，一半毯子盖在你身上。",
-        "馆员醒了也不起来，往你怀里缩了缩：今天开馆晚。……再陪我一会儿。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
+        "workplace_power",
+        "humiliation"
+      ]
     }
   ],
   "pressures": [
     {
-      "id": "pres_fifteen_second_curator_approach",
-      "title": "老馆长十五秒临界巡查步伐逼近",
-      "source": "person",
+      "id": "p_ladder_ratchet_jam",
+      "title": "五米铜梯咬死与盘扣走光危机",
+      "source": "accident",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
       "location_ids": [
         "loc_atrium_ladder_high_platform",
+        "loc_mep_ladder_service_bay"
+      ],
+      "trigger": "逆止齿咬死高空，高台馆员盘扣绷松、下方百人随时抬头起疑。",
+      "objective": "压住异响解开梯锁，不让读者保安察觉私情。",
+      "choice": "用私密物件找技师开阀，还是靠举典籍遮羞翻进密室？",
+      "immediate": {
+        "text": "铁锁咔哒轻颤，前排几名读者已停笔微仰起头。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "十五分钟不下高台，保安必搬长梯打手电当众搜梯。",
+        "deadline_minutes": 25
+      },
+      "far": {
+        "trigger": "强光当众打上卡死书梯",
+        "consequence": "狼狈衣冠与私藏在百人前曝光，名誉扫地。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "暗递技师素银项圈胸链请其悄悄拧松卸荷阀",
+          "cost": "夜会后须独自步入书房听凭技师验证兑现私约"
+        },
+        {
+          "option": "任掩护者高举典籍接应自己翻入五楼密室夹道",
+          "cost": "逃脱时衣衫摩擦暴露无遗，欠下最难清的人情"
+        }
+      ],
+      "leverage": {
+        "holder": "ladder_mec_technician",
+        "subject": "player",
+        "basis": "独揽铜梯卸荷阀开锁权与死角监控原片，受困方须凭私物求开阀。"
+      },
+      "hook_ids": [],
+      "start_minute": 1145,
+      "tags": [
+        "intimate",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "p_counterfeit_collation_audit",
+      "title": "宋刻修补伪造遭紫光审计核查",
+      "source": "institution",
+      "flags": [
+        "leverage"
+      ],
+      "location_ids": [
         "loc_stacks_fifth_rare_aisle"
       ],
-      "trigger": "汉白玉通廊传来馆长沉稳皮鞋声响正绕过立柱朝向第五排移动书梯快步走来",
-      "objective": "在老馆长视线越过书架横梁前借黄铜书签挑开滑轮自锁片解除卡滞。",
-      "choice": "选择单手持书签实施极速盲操破拆，还是向梯下同门传递手势暗号协同拦截",
+      "trigger": "鉴定官紫光灯锁定调阅宋刻混入的仿制修补残页，直指造假。",
+      "objective": "截住定罪单流出，保住执业执照与百年清名。",
+      "choice": "咬死误归，还是接受箱底的静音无线遥控跳蛋与纯银细链乳夹条件？",
       "immediate": {
-        "text": "沉重皮鞋脚步声步步惊心，开衫领口大开无法自拔，高空身躯动弹不得。",
-        "minutes": 1
+        "text": "鉴定官笔尖悬在通报封条上方，等着动心的交代。",
+        "minutes": 15
       },
       "near": {
-        "text": "老馆长即将步入第五排书廊，五米高处若有半点异样必将当场撞破。",
-        "deadline_minutes": 5
+        "text": "二十分钟不签妥协条件，学会正式函将传遍全省。",
+        "deadline_minutes": 30
       },
       "far": {
-        "trigger": "老馆长走到梯下直接责令其停止作业并当众彻查事故原因",
-        "consequence": "学术前途遭受沉重打击，名媛才女清誉毁于一旦，承受终生莫大羞辱。",
-        "due_days": 3
+        "trigger": "不合格通报上传学会",
+        "consequence": "涉事馆员被永久除名起诉，主事层一并追责。",
+        "due_days": 2
       },
       "exits": [
         {
-          "option": "反握铜书签以硬质直角锋芒插入滚轮止退片缝隙施加三点八牛顿斜撬力矩",
-          "cost": "极度考验悬空单手微观机械操作稳定性，稍有晃动书签跌落将陷入绝境"
+          "option": "取过仪器箱筹码配合完成书房静音测试",
+          "cost": "须在红木桌与格子毯上忍住刺激面不改色签报告"
         },
         {
-          "option": "暗示前台馆员与师兄以紧急借阅公文和版本考据疑问拦截老馆长争取缓冲时间",
-          "cost": "可能导致同门替自己承受老馆长对工作秩序不严的当面呵斥"
+          "option": "甩出鉴定官五年前做假鉴定的底片威胁撤单",
+          "cost": "引爆暗战，对方可能把特藏馆所有瑕疵捅上台面"
         }
-      ]
-    },
-    {
-      "id": "pres_pulley_gear_choker_deadlock",
-      "title": "滑轮铜齿单向咬合锁骨细链加剧",
-      "source": "accident",
-      "location_ids": [
-        "loc_atrium_ladder_high_platform"
       ],
-      "trigger": "书梯重力自锁滑轮轴向阻尼发生偏斜，单向铜齿持续卡死素银项圈",
-      "objective": "保持身体重心微前倾避免外力拉扯导致细链勒伤锁骨柔嫩肌肤。",
-      "choice": "选择原地硬抗机械咬合等待微调，还是冒险单腿离凳将重心倒向横梁泄压",
-      "immediate": {
-        "text": "冰硬铜齿死咬贴身项圈，脖颈受制无法后仰，开衫前襟丝线崩断声清晰可闻。",
-        "minutes": 1
+      "leverage": {
+        "holder": "guest_book_appraiser",
+        "subject": "player",
+        "basis": "紫光灯图谱已锁定宋刻旧纸漏洞，掌握评级一票否决权。"
       },
-      "near": {
-        "text": "铜轮自锁齿牙随时间受力加深，细银链面临崩断割伤肌理之危险。",
-        "deadline_minutes": 5
-      },
-      "far": {
-        "trigger": "细链受力过载崩断或衣物撕裂大开引来百人围观",
-        "consequence": "端庄典雅之名媛才女在百位成年读者面前走光蒙羞颜面扫地。",
-        "due_days": 3
-      },
-      "exits": [
-        {
-          "option": "挪动单足受力支点将身躯贴靠侧梁借助微偏角度释放细锁链咬合拉力",
-          "cost": "单侧肢体悬空可能导致脚底打滑失衡跌坠"
-        },
-        {
-          "option": "引导赵工向滑轮齿槽隐蔽滴注纳米润滑液降低摩擦系数",
-          "cost": "润滑油滴落可能玷污下方古籍书架"
-        }
+      "hook_ids": [],
+      "start_minute": 1165,
+      "tags": [
+        "coercion_theme",
+        "workplace_power",
+        "explicit"
       ]
     },
     {
-      "id": "pres_hundred_readers_silent_gaze",
-      "title": "阳光天井阅览厅百位读者随时仰望危机",
+      "id": "p_curator_inspection_steps",
+      "title": "老馆长牛津皮鞋逼近突击查房",
+      "source": "person",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_ground_reading_atrium_hall",
+        "loc_library_reading_study"
+      ],
+      "trigger": "馆长拎手杖沿木梯上来核查高台异响与印章，随时撞破私室。",
+      "objective": "清场擦净茶杯、藏妥暗匣与开衫走光痕迹。",
+      "choice": "礼下专员硬挡三分钟，还是掏出质押旧章丑闻压场？",
+      "immediate": {
+        "text": "牛津鞋踏过三楼转角，拐杖敲击声清晰入耳。",
+        "minutes": 10
+      },
+      "near": {
+        "text": "十三分钟后木门刷卡必响，衣衫歪半寸都难解释。",
+        "deadline_minutes": 20
+      },
+      "far": {
+        "trigger": "馆长撞破书房混乱",
+        "consequence": "私下领罚甚至被逐出文博圈沦为拿捏玩物。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "塞给前台专员筹码换其假传急电拖住脚步",
+          "cost": "被小职员握住最核心时间差，日后满足其私利"
+        },
+        {
+          "option": "推门刹那摊开印章质押借据原照反客为主",
+          "cost": "撕破多年敬畏门面，老狐狸随时会在暗中反咬"
+        }
+      ],
+      "leverage": {
+        "holder": "front_desk_archivist",
+        "subject": "player",
+        "basis": "握有五分钟拦下馆长传话窗与电梯刷卡记录，坐地索价。"
+      },
+      "hook_ids": [],
+      "start_minute": 1180,
+      "tags": [
+        "humiliation",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "p_study_shuttle_exposure",
+      "title": "书桌暗匣私物与视频备份逼宫",
       "source": "rumor",
+      "flags": [
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_library_reading_study",
+        "loc_stacks_fifth_rare_aisle"
+      ],
+      "trigger": "素银项圈胸链旧照连同密室录像被剪成双份，逼人夜半前在格子毯认账。",
+      "objective": "抢回底片芯片，或用黑天鹅绒蒙眼带反扣逼供。",
+      "choice": "旧沙发兑现代价换销毁，还是逐个反查包厢玉石俱焚？",
+      "immediate": {
+        "text": "门缝塞进半张打印底片，拍的正是暗格银链一角。",
+        "minutes": 15
+      },
+      "near": {
+        "text": "半小时不投诚响应，备份文件将群发馆内邮箱。",
+        "deadline_minutes": 35
+      },
+      "far": {
+        "trigger": "私物原图与录像流布",
+        "consequence": "冰清玉洁名号一夜崩塌成全城笑柄。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "紧栓门按倒嫌疑人并利用筹码反锁手腕逼删原档",
+          "cost": "茶盏倾翻格子毯全湿，双方体面扯得支离破碎"
+        },
+        {
+          "option": "脱下开衫坐回桌前任持片者当场兑现黑绒盒",
+          "cost": "交出高傲防线换销毁，此后铃响便得乖乖受训"
+        }
+      ],
+      "leverage": {
+        "holder": "rare_exhibition_chief",
+        "subject": "player",
+        "basis": "手握暗匣私照复印与借展批文卡口，随时叩响顶层书房对账。"
+      },
+      "hook_ids": [],
+      "start_minute": 1195,
+      "tags": [
+        "explicit",
+        "intimate",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "p_quiet_hall_speech_test",
+      "title": "压轴点评面对百人静场发言",
+      "source": "institution",
+      "flags": [
+        "timed"
+      ],
       "location_ids": [
         "loc_ground_reading_atrium_hall"
       ],
-      "trigger": "高空书梯出现微小金属异响，底层天井阅览厅已有数名读者停笔抬头",
-      "objective": "在完全静音状态下完成微观破拆，绝不可发出任何异响引来集体瞩目。",
-      "choice": "选择卡准读者翻阅大宣纸声浪同步发力，还是示意博士学长以咳嗽声分流视线",
+      "trigger": "压轴规定主角握黄铜书签立于主位完成五分钟古籍导读，声线不许颤。",
+      "objective": "顶住筹码兑现余韵与掌控者注视，端庄念完导读。",
+      "choice": "掐掌心咬牙站稳全程，还是交备钥换掌局者提前收手？",
       "immediate": {
-        "text": "百双眼睛就在正下方阅览桌案间，稍有风吹草动便会汇聚成灼热视线焦点。",
-        "minutes": 1
+        "text": "司仪拿起麦克风介绍嘉宾，百双目光投向楼梯口。",
+        "minutes": 15
       },
       "near": {
-        "text": "大厅死寂氛围随时可能被一声脆响打破，引发全场读者起立瞩目。",
-        "deadline_minutes": 5
+        "text": "十分钟无法调整衣冠上台，直播将捕捉所有异常。",
+        "deadline_minutes": 25
       },
       "far": {
-        "trigger": "天井阅览厅读者集体起立惊呼并拍摄高空受困画面",
-        "consequence": "陷入网络舆论风暴，名门家族声誉蒙尘且难以在学术界立足。",
-        "due_days": 3
+        "trigger": "演讲途中腿软失声跌倒",
+        "consequence": "直播事故连带揭开衣领下方所有私秘。",
+        "due_days": 1
       },
       "exits": [
         {
-          "option": "等待大厅翻动厚重宣纸大页之声响契机同步发力挑动簧片避免脆响外泄",
-          "cost": "必须严格卡准翻书声节点，稍有延迟将错过最佳自救窗口"
+          "option": "交出一枚秘库备钥恳请掌局者今夜暂收开关权限",
+          "cost": "秘库管辖权遭染指，日后再无平等对话本钱"
         },
         {
-          "option": "默契配合周博士轻叩桌面发问引开周边自习者注意力",
-          "cost": "可能打破大厅自习绝对静默秩序"
+          "option": "死掐黄铜书签硬着头皮上台一字一顿念完全篇",
+          "cost": "反抗声带着细微哭颤，反让握底牌者愈发着迷"
         }
-      ]
-    },
-    {
-      "id": "pres_rare_edition_drop_hazard",
-      "title": "清代善本孤本高空坠落损毁风险",
-      "source": "nature",
-      "location_ids": [
-        "loc_atrium_ladder_high_platform"
       ],
-      "trigger": "怀中托抱之清代四库丛刊孤本善本因单手自救缺乏稳定支撑可能倾滑",
-      "objective": "将脆弱孤本善本稳稳固定于书架凹槽托盘确保其分毫不伤。",
-      "choice": "选择单肘抵住书卷先卡入书架安全槽，还是冒险单手下递交由梯下师兄接应",
-      "immediate": {
-        "text": "清代脆弱竹纸经不起半点磕碰，一旦自五米高空滑落将粉身碎骨。",
-        "minutes": 1
-      },
-      "near": {
-        "text": "善本孤本托抱角度发生倾斜，纸页边角面临受压折痕损伤。",
-        "deadline_minutes": 5
-      },
-      "far": {
-        "trigger": "善本孤本自五米高梯坠落摔散或撕裂",
-        "consequence": "被开除出古籍特藏库并记入全国文保行业诚信黑名单。",
-        "due_days": 3
-      },
-      "exits": [
-        {
-          "option": "先以左手肘部轻柔抵住善本推入书架第三层预设隔板内再腾手自救",
-          "cost": "单肘推书动作消耗两秒黄金自救时间"
-        },
-        {
-          "option": "垂直下探将善本平稳递入林师兄高举的防震软木托盘内",
-          "cost": "探身递书动作可能加剧开衫前襟撕裂幅度"
-        }
+      "leverage": null,
+      "hook_ids": [],
+      "start_minute": 1220,
+      "tags": [
+        "intimate",
+        "humiliation"
       ]
     },
     {
-      "id": "pres_chaste_shame_surge",
-      "title": "名门才女雪白香肩外敞之极致羞耻",
-      "source": "person",
-      "location_ids": [
-        "loc_atrium_ladder_high_platform"
-      ],
-      "trigger": "开衫前襟的排扣崩开一颗，素银项圈和贴身胸链露在天井的穿堂风里",
-      "objective": "克制心中极致羞怯心绪，在冷傲神色掩盖下心如止水展开精密破拆。",
-      "choice": "选择紧咬银牙以沉香心经默诵稳住手腕，还是以指甲刺痛掌心保持绝对神智清明",
-      "immediate": {
-        "text": "馆员耳根一路烧到颈侧，后背沁出薄汗，攥着梯栏的手心又湿又凉。",
-        "minutes": 1
-      },
-      "near": {
-        "text": "羞耻心绪若引发心跳过速，将导致悬空指尖发颤错失最佳微米受力点。",
-        "deadline_minutes": 5
-      },
-      "far": {
-        "trigger": "无法自拔最终只能惊呼求救导致私密衣物大白于天下",
-        "consequence": "馆员清冷的名声一夜之间成了学界饭桌上的笑谈。",
-        "due_days": 3
-      },
-      "exits": [
-        {
-          "option": "凝神屏气默念古籍校勘口诀将全副精神注入手中黄铜书签棱角之间",
-          "cost": "需在极限高压下展现非凡心理素质"
-        },
-        {
-          "option": "以左手挽发木簪轻触掌心以痛感克制羞涩心绪集中发力",
-          "cost": "稍有不慎可能刺破掌心皮肤"
-        }
-      ]
-    },
-    {
-      "id": "pres_brass_bookmark_slip_risk",
-      "title": "黄铜书签脱手跌落之绝命危机",
+      "id": "p_pledge_receipt_blackmail",
+      "title": "馆长质押古印借据险些随册流出",
       "source": "accident",
-      "location_ids": [
-        "loc_atrium_ladder_high_platform"
+      "flags": [
+        "leverage"
       ],
-      "trigger": "两毫米厚黄铜书签质地光滑，汗水渗出可能导致手捏不稳滑脱坠地",
-      "objective": "以拇指与食指关节锁死书签握持防滑槽确保施力精准无误。",
-      "choice": "选择利用棉麻衣角垫握增强阻尼，还是借助指关节铰接死锁发力",
+      "location_ids": [
+        "loc_library_reading_study",
+        "loc_stacks_fifth_rare_aisle"
+      ],
+      "trigger": "四库全书夹层滑出古印质押收据，暴露高层周转公款污点。",
+      "objective": "抢先拿到原始收据决定销毁护主还是拉上位者下水。",
+      "choice": "强迫撤下处分威胁，还是转卖给审计官收割最大利益？",
       "immediate": {
-        "text": "铜签直角平刃正卡在簧片极窄边缘，稍微受力不均便会滑脱脱开。",
-        "minutes": 1
+        "text": "泛黄借据躺在第十二函垫页下，谁先伸手谁就赢。",
+        "minutes": 20
       },
       "near": {
-        "text": "书签若发生滑脱偏位，铜齿将彻底咬死细银链陷入死局。",
-        "deadline_minutes": 5
+        "text": "审计复查只剩最后三架书柜，撞上收据谁也兜不住。",
+        "deadline_minutes": 35
       },
       "far": {
-        "trigger": "书签滑脱坠地发出清脆金属声惊动全馆",
-        "consequence": "所有掩护化为泡影，直面百位成年读者当场曝光之毁灭性深渊。",
+        "trigger": "质押收据扫入档案库",
+        "consequence": "高层立刻遭立案查处，特藏馆面临冻结接管。",
         "due_days": 3
       },
       "exits": [
         {
-          "option": "撕下一角袖口干燥棉麻布包裹书签柄部增强摩擦阻尼确保施力万全",
-          "cost": "需花费一秒钟迅速缠绕包裹"
+          "option": "扣下收据逼馆长撤回处罚并下放实权",
+          "cost": "与长辈结成同污共犯，不得不互捂黑料抱死到底"
         },
         {
-          "option": "改用食指与中指形成剪刀差硬锁书签根部加大抗扭矩面积",
-          "cost": "手指发力空间极为逼仄操作难度倍增"
+          "option": "翻拍后留筹码要馆长拿保管权限置换",
+          "cost": "把铁面长官逼到崩溃边沿，从此再无纯粹尊卑"
         }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "archive_curator_elder",
+        "basis": "拿住四库全书滑出的古印质押借据原件，随时掀翻馆长体面。"
+      },
+      "hook_ids": [],
+      "start_minute": 1210,
+      "tags": [
+        "crime",
+        "workplace_power"
       ]
     }
   ],
   "hooks": [
     {
-      "id": "hook_1",
+      "id": "hk_librarian_ladder_bookmark_approach",
       "kind": "approach",
-      "slot": "librarian_shen_qing_qiu",
-      "text": "悬空五米高的欧式古典书梯之上，名门才女{librarian_shen_qing_qiu.name}将如何单手保全孤本古籍并解脱锁骨死锁？"
+      "slot": "head_rare_book_librarian",
+      "location_ids": [
+        "loc_atrium_ladder_high_platform"
+      ],
+      "text": "五米铜梯咔嚓一卡，{head_rare_book_librarian.name}抓扶手捏着黄铜书签冷喝：“别趁机乱晃梯架！退开！”"
     },
     {
-      "id": "hook_2",
+      "id": "hk_librarian_study_drawer_approach",
       "kind": "approach",
-      "slot": "curator_gu_wen_zheng",
-      "text": "巡查老学者皮鞋撞击石阶的声音进入最后十五秒死线，天井自习秩序能否在惊魂中保全？"
-    },
-    {
-      "id": "hook_3",
-      "kind": "approach",
-      "slot": "senior_lin_yu_bai",
-      "text": "梯底师兄{senior_lin_yu_bai.name}以经卷为盾构筑的视线盲区，能否为高空师妹抵挡住来自侧方读者的所有窥探？"
-    },
-    {
-      "id": "hook_4",
-      "kind": "approach",
-      "slot": "assistant_su_xiao_wan",
-      "text": "前台{assistant_su_xiao_wan.name}冒着遭受严厉训斥的风险主动迎向老馆长，手中紧急公文能否成功拖延关键十秒？"
-    },
-    {
-      "id": "hook_5",
-      "kind": "approach",
-      "slot": "engineer_zhao_tian_yuan",
-      "text": "维保技师{engineer_zhao_tian_yuan.name}暗中传递的滑轮自锁片机械参数手势，能否助馆员在毫厘之间一击脱扣？"
-    },
-    {
-      "id": "hook_6",
-      "kind": "approach",
-      "slot": "scholar_zhou_han_qing",
-      "text": "正对书梯中央阅览席上的{scholar_zhou_han_qing.name}，在面对可能出现的非礼视野时展现了何等高尚克制的君子风范？"
-    },
-    {
-      "id": "hook_7",
-      "kind": "observe",
-      "slot": "librarian_shen_qing_qiu",
-      "text": "盘扣开衫撕开外敞露出的雪白香肩与贴身素银项圈，在昏黄书架间激荡着怎样惊心动魄的古典禁锢之美？"
-    },
-    {
-      "id": "hook_8",
-      "kind": "accident",
-      "slot": "librarian_shen_qing_qiu",
-      "text": "一枚看似普通的纯黄铜线装书专用平刃书签，能否在微观机械撬动中创造绝处逢生的破拆奇迹？"
-    },
-    {
-      "id": "hook_9",
-      "kind": "accident",
-      "slot": "librarian_shen_qing_qiu",
-      "text": "当簧片挑开的微不可闻脆响融入大厅翻书声浪中，这场高空走光危机将如何神不知鬼不觉地化解？"
-    },
-    {
-      "id": "hook_10",
-      "kind": "observe",
-      "slot": "librarian_shen_qing_qiu",
-      "text": "在老馆长迈步踏上梯架底层踏板的千钧一发之际，优雅滑降落地的{librarian_shen_qing_qiu.name}又将展现怎样震撼人心的从容气场？"
-    },
-    {
-      "id": "hook_library_study_door",
-      "kind": "approach",
-      "slot": "librarian_shen_qing_qiu",
+      "slot": "head_rare_book_librarian",
       "location_ids": [
         "loc_library_reading_study"
       ],
-      "text": "{npc.name}站在书房门口，开衫的扣子扣到最上面一颗：夜读会散了。……进来坐？"
+      "text": "红木桌桂花红茶冒热气，{head_rare_book_librarian.name}推死抽屉暗扣，两颊发烫却板脸斥你敲门太轻。"
+    },
+    {
+      "id": "hk_librarian_cardigan_observe",
+      "kind": "observe",
+      "slot": "head_rare_book_librarian",
+      "location_ids": [
+        "loc_atrium_ladder_high_platform",
+        "loc_stacks_fifth_rare_aisle"
+      ],
+      "text": "{head_rare_book_librarian.name}踮脚够高格宋刻，素白盘扣开衫拉紧腰线，百褶裙摆正对高光边缘轻晃。"
+    },
+    {
+      "id": "hk_exhibition_folio_approach",
+      "kind": "approach",
+      "slot": "rare_exhibition_chief",
+      "location_ids": [
+        "loc_atrium_ladder_high_platform",
+        "loc_stacks_fifth_rare_aisle"
+      ],
+      "text": "{rare_exhibition_chief.name}举厚典籍遮住下方目光低语：“别硬撑了，想封老馆长耳朵，书房单聊。”"
+    },
+    {
+      "id": "hk_exhibition_case_observe",
+      "kind": "observe",
+      "slot": "rare_exhibition_chief",
+      "location_ids": [
+        "loc_library_reading_study",
+        "loc_ground_reading_atrium_hall"
+      ],
+      "text": "{rare_exhibition_chief.name}拎公文箱停在楼梯暗影口，拇指在尚未解锁的铜搭扣上敲出缓重节奏。"
+    },
+    {
+      "id": "hk_mec_valve_approach",
+      "kind": "approach",
+      "slot": "ladder_mec_technician",
+      "location_ids": [
+        "loc_mep_ladder_service_bay"
+      ],
+      "text": "{ladder_mec_technician.name}转着套筒靠向卸荷阀：“想让高台那位安静下来，拿包里够份量的东西赔礼吧。”"
+    },
+    {
+      "id": "hk_mec_bag_observe",
+      "kind": "observe",
+      "slot": "ladder_mec_technician",
+      "location_ids": [
+        "loc_mep_ladder_service_bay",
+        "loc_ground_reading_atrium_hall"
+      ],
+      "text": "屏风后，{ladder_mec_technician.name}把工具袋口未拆封的黑丝绒礼盒往油布深处摁了摁，回头撇嘴笑。"
+    },
+    {
+      "id": "hk_archivist_door_approach",
+      "kind": "approach",
+      "slot": "front_desk_archivist",
+      "location_ids": [
+        "loc_ground_reading_atrium_hall",
+        "loc_stacks_fifth_rare_aisle"
+      ],
+      "text": "{front_desk_archivist.name}笑眼弯弯拦在安全门侧：“刚替楼上挡下巡查呢，可包里给您备的礼盒怎么算呀？”"
+    },
+    {
+      "id": "hk_archivist_screen_approach",
+      "kind": "approach",
+      "slot": "front_desk_archivist",
+      "location_ids": [
+        "loc_ground_reading_atrium_hall"
+      ],
+      "text": "{front_desk_archivist.name}把门禁时间戳晃了半寸：“馆长离电梯三十步了，答不答应进暗室细说？”"
+    },
+    {
+      "id": "hk_archivist_pouch_observe",
+      "kind": "observe",
+      "slot": "front_desk_archivist",
+      "location_ids": [
+        "loc_ground_reading_atrium_hall",
+        "loc_mep_ladder_service_bay"
+      ],
+      "text": "{front_desk_archivist.name}拉拢针织衫掩好提包拉链，夹层刚收进印着五楼时间戳的拷贝折页。"
+    },
+    {
+      "id": "hk_curator_cane_approach",
+      "kind": "approach",
+      "slot": "archive_curator_elder",
+      "location_ids": [
+        "loc_ground_reading_atrium_hall",
+        "loc_library_reading_study"
+      ],
+      "text": "{archive_curator_elder.name}用木杖轻点地面冷喝：“重地鬼祟躲什么？跟我上书房，把错漏摊开算！”"
+    },
+    {
+      "id": "hk_curator_steps_observe",
+      "kind": "observe",
+      "slot": "archive_curator_elder",
+      "location_ids": [
+        "loc_ground_reading_atrium_hall"
+      ],
+      "text": "{archive_curator_elder.name}踩着稳重牛津皮鞋走向木梯转角，腋下黑手包扣得像一口行刑木箱。"
+    },
+    {
+      "id": "hk_appraiser_uv_approach",
+      "kind": "approach",
+      "slot": "guest_book_appraiser",
+      "location_ids": [
+        "loc_stacks_fifth_rare_aisle",
+        "loc_library_reading_study"
+      ],
+      "text": "{guest_book_appraiser.name}合上紫光仪：“补页纤维不对劲。想换个温柔措辞，关门看看我带的小盒吧。”"
+    },
+    {
+      "id": "hk_appraiser_box_approach",
+      "kind": "approach",
+      "slot": "guest_book_appraiser",
+      "location_ids": [
+        "loc_library_reading_study"
+      ],
+      "text": "{guest_book_appraiser.name}压住书房铜锁，指节在印章与仪器箱夹层之间来回轻点示意你选一样。"
+    },
+    {
+      "id": "hk_appraiser_case_observe",
+      "kind": "observe",
+      "slot": "guest_book_appraiser",
+      "location_ids": [
+        "loc_stacks_fifth_rare_aisle",
+        "loc_ground_reading_atrium_hall"
+      ],
+      "text": "{guest_book_appraiser.name}戴白手套逐页检借阅函，银色仪器箱备用小格半启着一角黑绒。"
     }
   ],
   "twists": [
     {
-      "id": "twist_bookmark_leverage_pop",
+      "id": "t_lib_song_edition_switch",
       "category": "信息",
-      "text": "纯黄铜书签直角平刃精准刺入铜轮自锁滑槽缝隙，三点八牛顿斜向巧劲挑动下，逆止簧舌伴随大厅翻书声轻巧弹开，素银项圈瞬间脱钩解放！"
+      "requires": [
+        "guest_book_appraiser"
+      ],
+      "text": "紫光复验照出真相：失窃原页并非馆员私毁，而是有人趁借展调包真品换上仿纸，真页正夹在外借箱暗衬里。"
     },
     {
-      "id": "twist_assistant_reception_delay",
-      "category": "人事",
-      "text": "前台前台馆员在走廊转角适时递上盖有文保红章的特急善本调阅批文，成功将老馆长的巡视步伐拦截在第五排书架过道之外整整十二秒！"
-    },
-    {
-      "id": "twist_brother_book_shield",
+      "id": "t_lib_curator_pledge_slip",
       "category": "资源",
-      "text": "师兄敏捷翻开手头加宽精装特藏经卷竖立于梯架侧梁，形成密不透风之天然屏障，将底层自习读者的一切窥探目光彻底阻隔！"
+      "requires": [
+        "archive_curator_elder"
+      ],
+      "text": "四库全书脊内滑出泛黄古印质押借据——按着老馆长小印，证明昔日清高名宿早已私拿馆产周转巨债。"
     },
     {
-      "id": "twist_graceful_glide_landing",
-      "category": "制度",
-      "text": "馆员借脱钩瞬间之反冲力单手抚平盘扣开衫，抱着清代善本轻踩制动踏板优雅滑降落地，赶在老馆长迈步进入书架过道前完成万全归架！"
+      "id": "t_lib_mec_deliberate_pin",
+      "category": "人事",
+      "requires": [
+        "ladder_mec_technician"
+      ],
+      "text": "卸荷阀卡死并非老化，而是机电技师反拧了一圈卡销，专门算准高台进退两难时开价索取黑绒盒筹码。"
     },
     {
-      "id": "twist_mep_pneumatic_relief",
-      "category": "时限",
-      "text": "维保师傅在柱后暗中旋松轨道气动缓冲泄压阀，令书梯滑块微退半毫米，为黄铜书签刺入提供黄金两秒施力窗口！"
-    },
-    {
-      "id": "twist_scholar_cough_divert",
+      "id": "t_lib_study_drawer_dump",
       "category": "关系",
-      "text": "博士适时轻叩桌面并伴随一声清咳，引开周围数名正欲抬头探究异响之自习读者的注意力，彻底化解群体仰望危机！"
+      "requires": [
+        "head_rare_book_librarian",
+        "rare_exhibition_chief"
+      ],
+      "text": "书房推搡中红木暗格滑开，未拆封的素银项圈胸链连同静音无线遥控跳蛋礼匣直接摔在格子毯茶桌边。"
     },
     {
-      "id": "twist_silk_shawl_modesty_shield",
+      "id": "t_lib_archivist_audio_leak",
+      "category": "信息",
+      "requires": [
+        "front_desk_archivist"
+      ],
+      "text": "前台专员手机弹出楼梯口音频备份提示——不仅录下威胁交易，更直接拍进审计官当年替私人拍场出具假鉴定的底单。"
+    },
+    {
+      "id": "t_lib_speech_early_summon",
+      "category": "时限",
+      "requires": [
+        "pressure"
+      ],
+      "text": "读书会主讲推迟致辞，司仪宣布提前进入馆方代表登台导读环节，顶层整理盘扣和商定条件的缓冲时间猛砍一半。"
+    },
+    {
+      "id": "t_lib_elevator_power_cut",
       "category": "意外",
-      "text": "馆员在滑降落地刹那顺手取下书架备用深色天鹅绒防尘披肩披于肩头，在老馆长目光扫来前完美遮掩开衫撕裂痕迹！"
+      "requires": [],
+      "text": "老藏书楼配电箱因除湿机过载跳闸，全馆仅剩天井应急阅读灯与五米铜梯旁昏暗光柱，主梯电子门禁锁死成暗室。"
+    },
+    {
+      "id": "t_lib_audit_sealed_edict",
+      "category": "制度",
+      "requires": [],
+      "text": "学会总办发来电子密函：今夜须在馆长、主理馆员与鉴定官三方签署联合保真书后方能解锁放行全部夜归人员。"
     }
   ],
   "forbidden_terms": [
-    "幼女",
-    "萝莉",
-    "幼态",
-    "未成年",
-    "初中",
-    "高中生",
-    "女童",
-    "男童",
-    "儿童",
-    "少女",
-    "少男",
-    "幼小",
-    "稚嫩",
-    "初潮",
-    "变态"
+    "飞剑",
+    "灵气",
+    "御剑",
+    "星舰",
+    "魔杖",
+    "穿越",
+    "圣旨"
   ],
-  "status": "released",
   "content_tags": [
     "intimate",
+    "explicit",
+    "coercion_theme",
     "humiliation",
-    "bodily_harm",
-    "workplace"
+    "workplace_power",
+    "crime"
   ],
-  "notes": "按原稿加入，保留古籍特藏馆的五米黄铜移动书梯、百余位读者在楼下静读、清冷女馆员登梯取清代善本时滚轮逆止齿咬住盘扣开衫里贴身的素银项圈胸链、前襟被扯开露出雪白香肩、老馆长的皮鞋声逼近只剩十五秒、反手拔出黄铜直角书签挑退卡片的骨架与清冷色气的味道。按用户确认的去重方案，场地从穹顶中庭改成宁波一座民国藏书楼改建的古籍特藏馆的夜读会，与中庭密集书架的图书管理员世界拉开。原稿的人物卡大段照抄了学生会长和甜品主厨两个世界，已全部按藏书楼重写；时代、地点、开局时刻和基调同样重写；玩家身份原稿照抄了几位主要角色，已改成藏书楼里的其他人；背景人物里与主要角色同名的几位改成了独立的人。女主年龄二十五到二十八岁，师兄二十八到三十二岁。用户已放开内容限制、色情尺度优先，只守红线；卡住的险情期间不写性互动。新增藏书楼后院的馆员宿舍与四个亲密日常。"
+  "status": "released",
+  "notes": "v2.5 unrestricted --mode 3：100%保留宁波民国藏书楼、五米铜梯逆止咬死、婴儿肥冷艳女馆员、盘扣开衫百褶裙、2mm纯黄铜直角书签、桂花红茶格子毯与素银项圈胸链核心元素；purge全部后厨错贴与禁忌词；筹码导入型开场100%未穿戴。"
 }

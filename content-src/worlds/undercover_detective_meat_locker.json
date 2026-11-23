@@ -3,172 +3,171 @@
   "id": "undercover_detective_meat_locker",
   "title": "冷库里的女刑警",
   "extends": null,
-  "era": "现代都市保税港区经侦交锋期",
-  "region": "滨海万吨肉联厂大型零下25℃排管冷库主通道",
-  "premise": "滨海保税港区的万吨肉联厂，经侦支队的卧底女警化名在冷链部门当夜班记录员，白天睡觉，夜里在零下二十五度的冷库里清点货箱编码。装卸工、海关专员和调度长里，总有人在帮走私集团把芯片藏进冻肉柜。冷库的铸铁转轮锁只能从外面开。",
+  "era": "当代滨海保税港冷链仓储区深夜",
+  "region": "零下二十五度远洋冻肉冷库及夜班暖风更衣室",
+  "premise": "暴雨夜袭保税港，零下二十五度冻肉冷库重型铸铁转轮门突然死锁，液氨排管微漏且钢板隔绝信号。失温逼众人抢开防寒服贴胸捂暖，偏卧底女刑警内衬缝死金属警徽与微距记录器，脱衣验温便彻底露底。",
   "tone": [
-    "极寒白雾",
-    "氨气刺鼻",
-    "冷硬警徽",
-    "心跳反差"
+    "零下困斗",
+    "贴胸捂热",
+    "藏徽露馅",
+    "嘴硬失守",
+    "暖室反攻"
   ],
-  "style_hint": "冰冷压抑的现代刑侦写实工笔，着重刻画零下二十五度呼气成霜的细白冰晶、防暴手电钨钢攻击头啃咬铸铁合页的刺耳刮擦声，台词克制利落、字字如刀。",
+  "style_hint": "聚焦零下二十五度白雾结霜、拉链摩擦与暖风更衣室烘干蒸汽灼热反差；刻画贴胸藏徽步步惊心与把柄互锁下的寸寸溃防。",
   "clock_start": {
-    "label": "七月，盛夏",
-    "minute": 1380
+    "label": "港区冷链封库巡检，十二月",
+    "minute": 1360
   },
   "clock_style": "hm",
   "default_person": "second",
   "default_npc_gender_mix": {
     "female": 0.5,
-    "male": 0.5,
-    "nonbinary": 0.0
+    "male": 0.45,
+    "nonbinary": 0.05
   },
   "stage_labels": {
-    "stranger": "暗哨设防",
-    "acquainted": "验码探底",
-    "familiar": "寒气互探",
-    "flirting": "白雾抵肩",
-    "testing": "警匪亮牌",
-    "intimate": "生死破拆",
-    "committed": "铁证盟约"
+    "stranger": "冷眼戒备",
+    "acquainted": "暗兜试探",
+    "familiar": "贴肩递茶",
+    "flirting": "解衣捂热",
+    "testing": "扣腕验底",
+    "intimate": "暖雾失守",
+    "committed": "死契共犯"
   },
   "name_pools": {
     "family": [
-      "林",
-      "赵",
-      "钱",
-      "苏",
-      "马",
-      "刘",
+      "周",
+      "吴",
+      "郑",
+      "冯",
+      "陈",
+      "褚",
+      "卫",
+      "蒋",
       "韩",
-      "魏",
-      "陆",
-      "高",
-      "严",
-      "程"
+      "杨",
+      "朱",
+      "尤",
+      "许",
+      "何"
     ],
     "given_female": [
-      "汐",
-      "蔓",
-      "微",
-      "岚",
-      "彤",
-      "清",
-      "雪",
-      "宁",
-      "璐",
-      "雅",
-      "晴",
-      "雯"
+      "语嫣",
+      "婉清",
+      "梦琪",
+      "诗涵",
+      "书瑶",
+      "思琪",
+      "佳琪",
+      "依晨",
+      "芷若",
+      "静雯",
+      "心怡",
+      "雅静",
+      "安琪",
+      "若涵"
     ],
     "given_male": [
-      "坤",
-      "卫国",
-      "鹏",
-      "强",
-      "刚",
-      "勇",
-      "峰",
-      "健",
-      "凯",
-      "诚",
-      "毅",
-      "豪"
+      "文博",
+      "子轩",
+      "俊杰",
+      "浩宇",
+      "天佑",
+      "宇航",
+      "梓豪",
+      "泽宇",
+      "致远",
+      "博远",
+      "修齐",
+      "明轩",
+      "景澄",
+      "弘毅"
     ],
     "given_neutral": [
-      "晨",
-      "希",
-      "凡",
-      "远",
-      "安",
-      "扬",
-      "航",
-      "诺",
-      "羽",
-      "越",
-      "景",
-      "帆"
+      "知遥",
+      "清晏",
+      "亦安",
+      "予怀",
+      "望舒",
+      "青川",
+      "怀瑾",
+      "少煊",
+      "景明",
+      "若谷",
+      "凌霄",
+      "嘉言",
+      "霁风",
+      "照庭"
     ],
     "nickname_patterns": [
       {
-        "pattern": "小{family}",
+        "pattern": "{family}",
         "gender": "any"
       },
       {
-        "pattern": "老{family}",
+        "pattern": "{given}",
         "gender": "any"
       }
-    ]
+    ],
+    "order": "family_first"
   },
   "rules": [
     {
-      "id": "r_freezer_double_lock_code",
-      "text": "冷库大门采用外部双重重型铸铁转轮机械锁，闭合后内部无开门旋钮必须由外向内顺向卸压。"
+      "id": "rule_frozen_wheel_signal_isolation",
+      "text": "重型铸铁转轮防爆外门卡死兼聚氨酯夹芯钢板彻底屏蔽信号，未撬断排气百叶窗锈轴前外界绝无察觉。"
     },
     {
-      "id": "r_ammonia_vent_failsafe_rule",
-      "text": "氨气排管控制箱与全库紧急排风百叶窗联动，一旦检测到氨浓度超标将自动断电自锁风阀。"
+      "id": "rule_ammonia_hypothermia_heat_need",
+      "text": "零下二十五度寒流叠加液氨渗漏迅速夺走体温，防失温必须紧抱捂热或逃入暖风更衣室脱衣烘干。"
     },
     {
-      "id": "r_extreme_cold_limit_regulation",
-      "text": "零下二十五度无保温防护作业极限生理耐受为三十五分钟，超时将引发不可逆运动神经迟滞。"
+      "id": "rule_bonded_port_no_bugs_code",
+      "text": "保税冷链私仓严禁私携警用记录设备入库，内鬼一旦翻搜出硬证不是买断闭嘴便当场撕破脸下狠手。"
     },
     {
-      "id": "r_customs_bonded_seal_law",
-      "text": "海关监管保税肉类集装箱拆封必须持有加盖红章的双联核销单，擅自开柜视为走私现行。"
+      "id": "rule_full_adult_capacity_verified",
+      "text": "全员为年满二十四岁以上具有完全民事行为能力的在编警务人员、保税港职员及商业主体。"
     }
   ],
   "customs": [
-    "冷库夜班工人进库前习惯将防爆手电的挂绳在手腕处死死缠绕三圈，防止手套冻硬打滑脱落。",
-    "交接班查验时互相查看对方鼻尖与耳垂是否发白，以白霜厚度判断冻伤程度。",
-    "老库管进门前必先用扳手重击三次主氨气排管外壳，凭空腔震颤回音辨别管壁结霜薄厚。",
-    "更衣室内始终备着一壶熬得浓黑的姜红糖水，出库后无论上下级必须先干一大瓷碗驱寒。"
-  ],
-  "forbidden_terms": [
-    "魔法",
-    "内力",
-    "掌门",
-    "轿子",
-    "飞剑",
-    "灵符",
-    "银票",
-    "修仙"
+    "冷库深夜老规矩以保温壶浓姜红糖茶镇寒气，谁攥紧热茶与重型钨钢手电谁就占尽先机。",
+    "高架冻牛腩板箱夹道彻底挡死探头视线，历来是查货摸底与逼问私账的首选暗角。",
+    "从冰仓滚进夜班暖风更衣室落锁后须尽快褪下冰透外衣，否则雪水融贴肌肤寒热交替最耗神志。",
+    "港区地下交易讲究当面交出真实把柄作投名状，口头推诿只换来更猛烈的贴身搜查。"
   ],
   "player_identities": [
     {
-      "id": "pi_rookie_cold_chain_driver",
-      "role": "冷链夜班装卸工",
+      "id": "pc_temp_coldstore_loader",
+      "role": "记暗箱号的夜班理货工",
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "夜班装卸工{family}",
+          "pattern": "{family}理货",
           "gender": "any"
         },
         {
-          "pattern": "小{family}",
+          "pattern": "{family}协管",
           "gender": "any"
         }
       ],
       "age_range": [
-        21,
-        35
+        24,
+        30
       ],
       "social_position": "low",
-      "baseline": "刚入职三天的冷链夜班装卸司机，因熟悉叉车液压构造而被卷入走私货柜争端。",
+      "baseline": "年满二十四岁持特种作业证成年理货协管，揣着防暴战术手电与暗厢批号偷窥冷美人衣领。",
       "resources": [
-        "一把随身防磁多功能开口扳手",
-        "一副沾满工业黄油的加厚防寒劳保手套"
+        "重型钨钢攻击头防暴战术手电一柄",
+        "私自记下的加密芯片冻箱转运批号抄件"
       ],
-      "reputation": "踏实肯干但话不多，在码头工友眼里是个只想多挣计件工资的老实后生。",
+      "reputation": "装作憨直干粗活的底层工，眼尖记死每个可疑货箱去向。",
       "risks": [
-        "容易被走私团伙当成顶包弃子",
-        "在极寒低温下体力消耗远超常人"
+        "曾受贿替货主篡改两箱走私冻肉入库编号"
       ]
     },
     {
-      "id": "pi_customs_supervision_officer",
-      "role": "港区海关监管专员",
+      "id": "pc_undercover_taskforce_liaison",
+      "role": "微服暗访的专案联络员",
       "gender": "any",
       "title_patterns": [
         {
@@ -176,137 +175,213 @@
           "gender": "any"
         },
         {
-          "pattern": "{given}督察",
-          "gender": "any"
-        }
-      ],
-      "age_range": [
-        23,
-        40
-      ],
-      "social_position": "equal",
-      "baseline": "负责保税港区夜间抽检的年轻海关专员，手握冷库海关监管系统离线权限。",
-      "resources": [
-        "海关手持便携核销终端",
-        "一枚合法切断保税仓外电的紧急巡查令"
-      ],
-      "reputation": "秉公执法不徇私情，令走私团伙又恨又怕的铁面巡检。",
-      "risks": [
-        "在没有武警护卫的冷库易遭暴力灭口",
-        "手持终端在零下二十五度易电池断电"
-      ]
-    },
-    {
-      "id": "pi_meat_packing_shift_manager",
-      "role": "肉联厂夜班调度长",
-      "gender": "any",
-      "title_patterns": [
-        {
-          "pattern": "{family}调度",
-          "gender": "any"
-        },
-        {
-          "pattern": "{given}经理",
+          "pattern": "{family}联络",
           "gender": "any"
         }
       ],
       "age_range": [
         26,
-        45
+        33
       ],
       "social_position": "equal",
-      "baseline": "掌控整座冷库排风与电力系统调度台的核心管事，暗中对走私内幕有所察觉。",
+      "baseline": "政法毕业二十六岁以上成年专案外勤干员，借调度临时卡潜入冷库搜查地下洗钱网与内鬼。",
       "resources": [
-        "中控室总配电箱机械主钥匙",
-        "冷库风机变频器操作面板参数手册"
+        "硬质冷钢折叠撬棍与内衬隐蔽微距录音钮",
+        "专案组密调的多张港区人员离岸受贿截屏"
       ],
-      "reputation": "做事圆滑两头下注，在厂长与走私头目之间竭力维持表面平衡。",
+      "reputation": "外貌像精明中介掮客，真亮底牌时出手极其凶狠。",
       "risks": [
-        "一旦出事双方都会首先要求调度长担责",
-        "知晓太多秘密面临灭口风险"
+        "擅自孤身深入信号盲区，遭搜身暴露即刻陷绝境"
       ]
     },
     {
-      "id": "pi_syndicate_internal_auditor",
-      "role": "跨国走私集团查账专员",
+      "id": "pc_refrigeration_night_dispatch",
+      "role": "管排氨总阀的值班技工",
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}专员",
+          "pattern": "{family}技工",
           "gender": "any"
         },
         {
-          "pattern": "{given}特派员",
+          "pattern": "{family}师傅",
           "gender": "any"
         }
       ],
       "age_range": [
-        28,
-        50
+        25,
+        32
+      ],
+      "social_position": "low",
+      "baseline": "二十五岁以上持高压制冷证成年机房技工，熟记液氨泄压阀死角与百叶窗合页撬点。",
+      "resources": [
+        "冷钢折叠撬棍、防氨密封胶带与机房备钥",
+        "中控暗格里保存的外门门磁报警关闭日志"
+      ],
+      "reputation": "寡言手熟的技术工，躲在冷排后算清每个人底细。",
+      "risks": [
+        "收黑包擅自屏蔽今夜冷库门磁报警信号"
+      ]
+    },
+    {
+      "id": "pc_port_customs_audit_chief",
+      "role": "夜查封库的港口督察官",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}科长",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}督察",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        29,
+        36
       ],
       "social_position": "high",
-      "baseline": "代表境外货主突击清点高价值夹藏芯片的资深代表，掌握暗账资金密码。",
+      "baseline": "二十九岁以上在编成年口岸稽查科长，着厚呢大衣握全仓立即封停与免检撤销权。",
       "resources": [
-        "防弹风衣内衬里的卫星加密通话机",
-        "调动境外离岸账户支付逃亡定金的密保卡"
+        "电子查封令授权器与钨钢攻击头战术手电",
+        "远洋冻肉报关单异常加急放行比对清单"
       ],
-      "reputation": "心狠手辣见利忘义，手下打手对其唯命是从。",
+      "reputation": "港务大楼著名的铁面冷官，最爱关门翻死底账。",
       "risks": [
-        "已被经侦总队列为红通抓捕第一顺位",
-        "对机械破拆一窍不通在死锁冷库极其被动"
+        "陈年失查批件遗留的把柄正被码头黑手盯梢"
+      ]
+    },
+    {
+      "id": "pc_coldchain_asset_receiver",
+      "role": "收账清盘的资产托管人",
+      "gender": "any",
+      "title_patterns": [
+        {
+          "pattern": "{family}托管",
+          "gender": "any"
+        },
+        {
+          "pattern": "{family}顾问",
+          "gender": "any"
+        }
+      ],
+      "age_range": [
+        30,
+        38
+      ],
+      "social_position": "high",
+      "baseline": "三十岁以上持牌成年清盘顾问，手握冷库查封拍卖令与热姜茶壶，专拿债券逼宫。",
+      "resources": [
+        "资产抵押裁定书与保温热姜红糖浓茶一壶",
+        "离岸托管行泄出的冷库秘密佣金流向回单"
+      ],
+      "reputation": "笑脸温雅的冷血资本家，越绝境越爱加码压榨。",
+      "risks": [
+        "隐瞒抵押评估虚高三成强推不良债权违规入库"
       ]
     }
   ],
   "locations": [
     {
-      "id": "loc_meat_locker_main_aisle",
-      "name": "万吨冷库排管主通道",
-      "detail": "开阔挑高八米的重型排管冷库主通道，数十排冻得如钢铁般坚硬的猪牛肉整齐吊挂，零下二十五度冷雾蒸腾，高耸的排气百叶窗铁架高挂在通道顶端。",
-      "privacy": "semi",
-      "visibility": "dim",
-      "witnesses": [
-        "bg_night_patrol_guard_sun"
-      ],
+      "id": "loc_freezing_meat_vault",
+      "name": "零下冻肉主库区",
+      "detail": "零下二十五度核心冻库，钢架堆满冻牛腩箱。外侧铸铁转轮门咬死，唯排气百叶窗微透风。",
+      "privacy": "private",
+      "visibility": "聚氨酯钢板断绝信号且无探头，高架箱体遮半数视界。",
+      "witnesses": [],
       "exits": [
-        "loc_cold_chain_sorting_platform",
-        "loc_refrigeration_pump_hub"
+        "loc_ammonia_valve_alcove",
+        "loc_loading_dock_airlock"
       ],
       "affordances": [
-        "攀爬防滑肉架铁管",
-        "用手电光束穿透浓重白雾测距",
-        "借挂肉铁钩撬动卡扣"
+        "用钨钢手电配冷钢撬棍击断锈蚀百叶窗轴",
+        "在冻箱后掀防寒服共享体温并暗摸内衬",
+        "递热姜茶壶暂压冷颤趁机试探口风"
       ],
       "pressure_modifiers": {
-        "p_freezer_cast_iron_wheel_deadlock": "通道底部零下二十五度冷气下沉，失温速率随时间呈指数倍递增。",
-        "p_ammonia_pipe_frost_rupture_alarm": "悬空排气管道破裂处持续喷涌白色刺激性冷雾，限制人员停留。"
+        "p_frozen_wheel_ammonia_leak": "白雾结冰，指节渐麻且氨味刺喉。",
+        "p_undercover_badge_strip_search": "极寒贴抱藏不住内衬缝藏的硬物轮廓。"
       },
       "tags": [
-        "disaster",
-        "workplace"
+        "intimate",
+        "disaster"
       ]
     },
     {
-      "id": "loc_cold_chain_sorting_platform",
-      "name": "恒温装卸分拣大平台",
-      "detail": "面积超千平米的恒温装卸穿堂，连接冷库大铁门与外侧重卡货台，散落着液压托盘车、打封工具箱与被撕毁的双联报关货单。",
-      "privacy": "public",
-      "visibility": "clear",
-      "witnesses": [
-        "bg_customs_seal_clerk_chen",
-        "bg_frozen_pork_handler_da_liu"
-      ],
+      "id": "loc_ammonia_valve_alcove",
+      "name": "排氨阀组盲角间",
+      "detail": "紧贴冷排管路的狭仄死角，氨气白雾喷涌，叠箱筑出只容两人挤紧换气的盲区。",
+      "privacy": "private",
+      "visibility": "堆箱遮死外侧目光，唯防氨湿布掩住交错呼吸。",
+      "witnesses": [],
       "exits": [
-        "loc_meat_locker_main_aisle",
-        "loc_refrigeration_pump_hub",
-        "loc_night_shift_locker_room"
+        "loc_freezing_meat_vault",
+        "loc_night_duty_heater_locker_room"
       ],
       "affordances": [
-        "借装卸台工具箱搜寻备用扳手",
-        "使用工业对讲座机呼叫总台",
-        "检查集装箱铅封编码"
+        "借堵氨漏扣紧对手手腕摸探胸肋衬里",
+        "共蒙防氨湿布交换芯片点与黑账底细",
+        "将失衡发抖的人抵死冷壁迫问真身份"
       ],
       "pressure_modifiers": {
-        "p_customs_inspection_convoy_arrival": "外围警灯大作与货车引擎轰鸣，走私打手随时可能强行突围冲卡。"
+        "p_frozen_wheel_ammonia_leak": "氨味飙升迫使两人同掩一块湿布换气。",
+        "p_black_market_bribe_rumor": "密码盒与分红本随时滑落冰面。"
+      },
+      "tags": [
+        "intimate",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "loc_night_duty_heater_locker_room",
+      "name": "夜班暖风更衣室",
+      "detail": "紧挨气闸的铁门值班室，暖风机轰鸣喷热浪，结霜镜面雾重，褪下湿衣便蒸灼人水雾。",
+      "privacy": "private",
+      "visibility": "反插铁栓隔绝风雨声，暖风盖住窒息对话。",
+      "witnesses": [],
+      "exits": [
+        "loc_ammonia_valve_alcove",
+        "loc_loading_dock_airlock"
+      ],
+      "affordances": [
+        "暖风机前逐层褪湿衣搜检内衬暗袋",
+        "撕自发热敷贴按热透湿腰背顺势逼降",
+        "抵雾镜扣腕摊牌离岸汇票或记录器"
+      ],
+      "pressure_modifiers": {
+        "p_heater_room_lockout_heat": "室温飙升湿衣贴肤，失温溃防剧烈发颤。",
+        "p_offshore_chip_audit_raid": "烘衣台摊满离岸汇票与公章密钥。"
+      },
+      "tags": [
+        "intimate",
+        "humiliation",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "loc_loading_dock_airlock",
+      "name": "冻库气闸装卸台",
+      "detail": "接驳月台与铸铁大门的冷铁缓冲廊，黑冰铺地，防撞铁墩后隐匿重卡绞盘与牵引索。",
+      "privacy": "semi",
+      "visibility": "暴雨声掩住低语，月台探照灯随时掠过。",
+      "witnesses": [
+        "bg_port_security_guard_1",
+        "bg_ship_first_mate_1"
+      ],
+      "exits": [
+        "loc_freezing_meat_vault",
+        "loc_night_duty_heater_locker_room",
+        "loc_port_dispatch_checkpost"
+      ],
+      "affordances": [
+        "接住冰滑高傲人物揽腰顺摸暗袋证件",
+        "挂牵引绞盘钢索暴拉铸铁门转轮",
+        "铁墩阴影里拦住空降特使摊牌清账"
+      ],
+      "pressure_modifiers": {
+        "p_offshore_chip_audit_raid": "探照灯扫过气闸门帘催促清点货物。",
+        "p_cold_chain_mortgage_default": "大副鸣笛催船，违约赔款倒算启动。"
       },
       "tags": [
         "workplace",
@@ -314,1886 +389,2213 @@
       ]
     },
     {
-      "id": "loc_refrigeration_pump_hub",
-      "name": "液氨制冷压缩机主泵房",
-      "detail": "轰鸣震耳的工业制冷核心区，巨大的双螺杆液氨压缩机喷吐着灼热气流，总配电柜红绿信号灯交替闪烁，管路总截门就安在防爆操作台正中。",
-      "privacy": "private",
-      "visibility": "clear",
+      "id": "loc_port_dispatch_checkpost",
+      "name": "仓储调度值班岗",
+      "detail": "保税仓外端值班亭，电茶台冒白烟，桌摊进出库刷卡簿、门磁控制盒及监控分屏。",
+      "privacy": "public",
+      "visibility": "亭外见风雨，茶柜盲区可暗递本匙。",
       "witnesses": [
-        "bg_police_dispatch_wang"
+        "bg_port_security_guard_1",
+        "bg_dock_clerk_witness_1"
       ],
       "exits": [
-        "loc_cold_chain_sorting_platform",
-        "loc_meat_locker_main_aisle"
+        "loc_loading_dock_airlock"
       ],
       "affordances": [
-        "切断冷库液氨输送主电磁阀",
-        "启动备用事故强排风机",
-        "调取中控日志打印纸带"
+        "翻刷卡簿与门磁记录揪出放行内鬼",
+        "端走电热浓姜茶捏住库内救命筹码",
+        "借验卡逼仓管或车手交出备胎暗匙"
       ],
       "pressure_modifiers": {
-        "p_ventilation_shaft_shutter_hinge_snap": "主压缩机剧烈机械震动通过排风管道传导至冷库顶端百叶窗合页。"
-      },
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "loc_night_shift_locker_room",
-      "name": "分拣台后的夜班更衣室",
-      "detail": "分拣大平台后面的一间夜班更衣室，一排铁皮储物柜、一张长条木凳、一台嗡嗡响的暖风机，墙上贴着排班表。",
-      "privacy": "private",
-      "visibility": "暖风机吹着热风，玻璃上蒙着一层雾，门一反锁，外面叉车的倒车提示音就隔得很远。",
-      "witnesses": [],
-      "exits": [
-        "loc_cold_chain_sorting_platform"
-      ],
-      "affordances": [
-        "陪女警在暖风机前烤手",
-        "替女警解开冻硬的扣子",
-        "反锁更衣室的门"
-      ],
-      "pressure_modifiers": {},
-      "tags": [
-        "intimate"
-      ]
-    }
-  ],
-  "character_templates": [
-    {
-      "id": "undercover_detective_lin_xi",
-      "gender": "female",
-      "gender_reason": "经侦支队卧底女警，潜伏报关员",
-      "age_range": [
-        21,
-        21
-      ],
-      "adult_context": "已成年的正式在编人民警察，二十一岁警校优秀毕业生，持证授衔卧底，完全具备民事与刑事执法行为能力。",
-      "public_role": "冷链保税报关员",
-      "appearance_options": [
-        "一头乌黑齐耳短发利落压在防寒毛线帽下，身着藏青色耐磨冲锋衣，面容清冷素净，两腮带着莹润的光泽，在零下二十五度白雾里泛起剧烈运动后的诱人绯红。",
-        "冷库白霜凝结在长长睫毛上，咬唇发力时下颌线条绷出倔强弧度，防暴手电光束映照出笔挺鼻梁与极度冷静的坚毅双眸。"
-      ],
-      "identity": {
-        "authority": "经侦支队带编警官，具备现场勘验、取证与紧急状态下征用工业设施自救的法定权力。",
-        "resources": [
-          "一把特种钛合金高硬度防爆战术手电（头部带深度破拆攻击齿纹）",
-          "微型暗藏录音笔与走私集装箱假封签拓印底片"
-        ],
-        "limits": [
-          "在支援警力到达前严禁暴露卧底身份",
-          "极寒环境下体温下降会导致手指僵硬难以开锁"
-        ],
-        "obligations": [
-          "誓死保全走私犯罪链条完整的核心账目证据"
-        ],
-        "exposure": "被同困库内的走私头目搜出随身藏匿的微型执法记录器",
-        "hidden": "警服与警徽就贴身缝在保暖防寒内胆左胸内侧口袋"
-      },
-      "decision": {
-        "core_value": "执法必严保全同胞，绝不向黑恶势力妥协半步。",
-        "goal_options": [
-          "别断百叶窗合页保全全案证据",
-          "制伏走私头目换取外围强行开门机会"
-        ],
-        "pressure_responses": {
-          "low": "冷静检查手电电量与氨气结霜点",
-          "mid": "指挥同伴背靠背取暖并调整撬动支点",
-          "high": "咬紧牙关用全身重力猛压手电手柄",
-          "breaking": "将录音笔与证据塞入同伴怀中誓死掩护撤离"
-        },
-        "withdrawal": "退至两排挂肉架死角，反握手电合金攻击头对准进逼者咽喉。",
-        "relationship_stance": "生死关头可以临时合作，但法律底线与警徽尊严绝不退让分毫。",
-        "contrast": "外表文静柔弱，动起手来擒拿破拆狠厉决绝。",
-        "prefers": [
-          "精准的力学杠杆原理",
-          "克制冷静的指令"
-        ],
-        "avoids": [
-          "无意义的惊慌尖叫",
-          "破坏关键罪证"
-        ],
-        "never": [
-          "向走私犯罪分子求饶或交出办案记录"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "在生死危机面前展现出的沉着决断",
-          "毫不犹豫将仅存热量分给同伴的担当"
-        ],
-        "likes": [
-          "彼此间绝对坦诚的信任眼神",
-          "握紧工具时掌心传递的微热"
-        ],
-        "dislikes": [
-          "趁火打劫的贪婪嘴脸",
-          "背地里耍花样的背叛"
-        ],
-        "preconditions": [
-          "双方均神智清醒、体温回暖，彻底脱离生命危险",
-          "心意出于自己，不是生死关头的依赖"
-        ],
-        "boundaries": [
-          "绝不以身体温存作为利益交换的筹码",
-          "执法期间严禁违背人民警察纪律条令"
-        ],
-        "expression": "脱困后紧抿嘴唇，用戴着厚手套的指尖默默为对方掸掉肩头落霜。",
-        "desire_range": [
-          2,
-          4
-        ],
-        "self_control_range": [
-          4,
-          5
-        ],
-        "desired_position": "背靠背哈气取暖，手把手稳住手电攻击头猛别百叶窗合页。"
-      },
-      "voices": {
-        "surface": "别乱动，这排氨气管壁已经挂白霜了，一撞就会渗漏！把手套借我一只垫在手电尾部！",
-        "inner": "手电攻击头卡进去了……只要能别断这根销钉，大家都能活着出去，警徽绝不能蒙羞。"
-      },
-      "schedule": [
-        {
-          "from": 1380,
-          "to": 1410,
-          "location_id": "loc_meat_locker_main_aisle"
-        },
-        {
-          "from": 1410,
-          "to": 1439,
-          "location_id": "loc_meat_locker_main_aisle"
-        }
-      ],
-      "situation": {
-        "trigger": "冷库铸铁重型转轮锁被反锁，液氨微量外泄，失温与窒息双重逼近。",
-        "pressure": "三十五分钟生理耐受极限不断倒数，手指关节已开始冻得麻木刺痛。",
-        "exits": [
-          {
-            "option": "借手电头部钨钢攻击头别断百叶窗疲劳合页爬入通风管道逃生。",
-            "cost": "手指局部轻微冻伤，战术手电外壳严重划痕磨损。"
-          },
-          {
-            "option": "用身体与撬棍猛撞冷库观察窗钢化夹层引来外围值班人员注意。",
-            "cost": "极寒震动导致液氨支管受损加剧泄漏风险。"
-          }
-        ]
-      },
-      "tags": [
-        "workplace",
-        "crime",
-        "intimate"
-      ]
-    },
-    {
-      "id": "smuggling_enforcer_zhao_kun",
-      "gender": "male",
-      "gender_reason": "走私集团现场押运头目",
-      "age_range": [
-        32,
-        35
-      ],
-      "adult_context": "年满三十二岁，成年惯犯，具有完整民事与刑事责任能力，走私团伙现场骨干。",
-      "public_role": "冷链物流车队队长",
-      "appearance_options": [
-        "身材魁梧高大，身穿油渍斑斑的军绿色翻毛大衣，右颊带着一道旧划痕，眼神鹰隼般扫视四周。",
-        "胡茬沾满白霜，双手戴着皮毛一体旧手套，腰间死死别着一根重型冷钢折叠撬棍。"
-      ],
-      "identity": {
-        "authority": "车队十余名货车司机的直接管事人，掌握货柜暗格开合钥匙。",
-        "resources": [
-          "一柄重型冷钢多功能折叠撬棍",
-          "一盒尚有余温的防风打火机"
-        ],
-        "limits": [
-          "被困冷库无法联络境外上线",
-          "畏惧重罪暴露面临无期徒刑"
-        ],
-        "obligations": [
-          "确保这批价值上亿的特种芯片天亮前装船出海"
-        ],
-        "exposure": "被查出大衣内侧私藏的伪造报关印章",
-        "hidden": "打算在拿到这笔酬金后立即抛弃所有手下偷渡出境"
-      },
-      "decision": {
-        "core_value": "保命第一，只要能活着出去什么规矩都能扔掉。",
-        "goal_options": [
-          "夺门逃出生天",
-          "把罪责推给当值报关员"
-        ],
-        "pressure_responses": {
-          "low": "大声咒骂看守并用力摇晃大门把手",
-          "mid": "拔出撬棍威胁身边的人交出防寒装备",
-          "high": "被冻得跪地发抖开始主动交出走私底单",
-          "breaking": "瘫软在冻肉堆旁哀求对方带自己活着出去"
-        },
-        "withdrawal": "退回重型挂肉排架阴影深处，死死攥着撬棍不敢直视强光手电。",
-        "relationship_stance": "平时视底层员工为草芥，生死关头为了活命愿意装孙子配合求生。",
-        "contrast": "看似五大三粗不可一世的黑道打手，被冻透之后比谁都贪生怕死。",
-        "prefers": [
-          "直接的暴力压制",
-          "现金与逃生通道"
-        ],
-        "avoids": [
-          "警察与警报声",
-          "在零下二十五度长时间受冻"
-        ],
-        "never": [
-          "为了所谓的江湖义气主动替幕后老板顶罪"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "在走投无路时展现出的绝对掌控力",
-          "冷静到令人窒息的求生技术"
-        ],
-        "likes": [
-          "能带来活命希望的任何手段",
-          "分到一口热气"
-        ],
-        "dislikes": [
-          "被当面拆穿底细",
-          "被用枪口或手电光直射双眼"
-        ],
-        "preconditions": [
-          "脱险之后、双方都清醒的时候",
-          "对方先松口，绝不是趁人之危"
-        ],
-        "boundaries": [
-          "绝不愿在戴上手铐前主动承认全部罪状",
-          "不接受无条件的彻底投降"
-        ],
-        "expression": "哆嗦着将仅剩的半盒防风火柴递过去，眼神复杂地避开对视。",
-        "desire_range": [
-          0,
-          1
-        ],
-        "self_control_range": [
-          1,
-          2
-        ],
-        "desired_position": "抢夺防寒棉服时身体冲撞，被手电光晃眼后狼狈后退。"
-      },
-      "voices": {
-        "surface": "门外那帮蠢货怎么把重闸推到底了！报关员，你的手电借我敲两下门轴试试！",
-        "inner": "这小妞拿手电的手稳得像个老刑警……只要能开这扇窗，出去之后老子立刻灭口！"
-      },
-      "schedule": [
-        {
-          "from": 1380,
-          "to": 1439,
-          "location_id": "loc_meat_locker_main_aisle"
-        }
-      ],
-      "situation": {
-        "trigger": "冻库铁门死锁，怀里暗格芯片一旦被查出就是死刑。",
-        "pressure": "刺骨寒气侵入骨髓，四肢逐渐失去知觉，极度恐惧被冻死在肉库深处。",
-        "exits": [
-          {
-            "option": "交出随身冷钢撬棍协助女警撬动百叶窗换取生路。",
-            "cost": "失去全部自卫凶器，走私罪行完全暴露。"
-          },
-          {
-            "option": "发疯般用撬棍砸击冷库液氨控制阀威胁同归于尽。",
-            "cost": "极易引发氨气大喷射瞬间窒息身亡。"
-          }
-        ]
-      },
-      "tags": [
-        "crime",
-        "violence"
-      ]
-    },
-    {
-      "id": "customs_veteran_lao_qian",
-      "gender": "male",
-      "gender_reason": "港区老海关值班人员",
-      "age_range": [
-        48,
-        52
-      ],
-      "adult_context": "年满四十八岁，在岗三十年的老海关三级督办，完全民事行为能力人。",
-      "public_role": "海关现场查验科老科员",
-      "appearance_options": [
-        "身穿笔挺深蓝海关制服套着厚呢子风衣，头发斑白，戴着金属细框老花镜。",
-        "面容威严风霜尽显，胸前佩戴着海关执法监督仪，手里始终拿着铅封核销登记册。"
-      ],
-      "identity": {
-        "authority": "保税港区现场货物依法查封、复核与紧急通报权。",
-        "resources": [
-          "海关全套专业查验铅封钳",
-          "港口武警中队直接连通专线号码"
-        ],
-        "limits": [
-          "患有老慢支在粉尘低温环境中呼吸困难",
-          "行动受海关执法条例严格制约"
-        ],
-        "obligations": [
-          "守护国家关税红线，查处每一起夹藏违禁品"
-        ],
-        "exposure": "被发现暗中在调查冷链物流偷逃税款",
-        "hidden": "早已掌握该车队伪造检验检疫章的关键证据"
-      },
-      "decision": {
-        "core_value": "国门卫士职责重于泰山。",
-        "goal_options": [
-          "保护被困青年干警安全脱险",
-          "将走私犯罪网络人赃并获"
-        ],
-        "pressure_responses": {
-          "low": "在门外持续核对冷库安防联动日志",
-          "mid": "敲击排气主管用特定节奏敲击传递内部方位",
-          "high": "直接拨通武警中队长专线要求特种破拆",
-          "breaking": "顶着寒风亲自操起消防斧劈砍大门电磁锁"
-        },
-        "withdrawal": "退回监控立柱后方，一手按着胸口速效救心丸一手沉稳举起对讲机。",
-        "relationship_stance": "将年轻干警视如己出，言语虽然刻板严厉但关键时刻甘当护盾。",
-        "contrast": "平日里是个锱铢必较被嫌繁琐的老头，枪响那一刻站得比任何人都要笔挺。",
-        "prefers": [
-          "合法合规的执法流程",
-          "经验丰富的直觉研判"
-        ],
-        "avoids": [
-          "越权滥用枪械",
-          "无证据的草率定性"
-        ],
-        "never": [
-          "在违法走私分子面前后退妥协半步"
-        ]
-      },
-      "intimacy_tendency": {
-        "attraction_sources": [
-          "年轻一代身上继承的铁血执法风骨",
-          "身处绝境依然坚守底线的纯粹"
-        ],
-        "likes": [
-          "年轻人充满干劲的敬礼",
-          "寒冬里一杯温热的浓茶"
-        ],
-        "dislikes": [
-          "油腔滑调的官僚作风",
-          "利欲熏心的同僚背叛"
-        ],
-        "preconditions": [
-          "现场危险彻底排除无涉案人员伤亡",
-          "依法依规完成全部笔录手续"
-        ],
-        "boundaries": [
-          "严守上下级执法纪律界限",
-          "不搞任何江湖义气私相授受"
-        ],
-        "expression": "解救成功后亲手给年轻干警披上海关大衣，重重拍了拍对方结霜的肩膀。",
-        "desire_range": [
-          0,
-          0
-        ],
-        "self_control_range": [
-          5,
-          5
-        ],
-        "desired_position": "在控制室门外焦急核对门禁日志，隔着厚铁门大声指点内部通风管结构。"
-      },
-      "voices": {
-        "surface": "这单冻牛肉的报关申报要素对不上，必须开箱复核！报关员，听到敲管子就往西北角排风口靠！",
-        "inner": "那孩子身上有当年老搭档那股倔劲，老搭档走得早，我拼了这条老命也得把这姑娘毫发无损带出来。"
-      },
-      "schedule": [
-        {
-          "from": 1380,
-          "to": 1439,
-          "location_id": "loc_cold_chain_sorting_platform"
-        }
-      ],
-      "situation": {
-        "trigger": "察觉冷库大门被反锁且内部有人被困。",
-        "pressure": "走私集团爪牙正在外围集结销毁证据，被困人员失温时间所剩无几。",
-        "exits": [
-          {
-            "option": "直接动用海关特别执法权调集武警铲车强行撞开库门。",
-            "cost": "冲撞可能造成库内悬挂排管坍塌压伤被困人员。"
-          },
-          {
-            "option": "指引内部人员精准攻破百叶窗疲劳合页自救脱困。",
-            "cost": "需要为内部争取至少二十分钟的极限破拆时间。"
-          }
-        ]
+        "p_black_market_bribe_rumor": "签字簿涂改印迹一照便现原形。",
+        "p_cold_chain_mortgage_default": "清盘封条贴柜侧，罚金按刻叠加。"
       },
       "tags": [
         "workplace",
         "workplace_power"
       ]
-    },
+    }
+  ],
+  "character_templates": [
     {
-      "id": "logistics_accountant_su_man",
+      "id": "char_undercover_detective",
       "gender": "female",
-      "gender_reason": "物流公司财务出纳",
+      "gender_reason": "标题“冷库里的女刑警”核心人物，孤身卧底冻库面对失温搜身与冷撑反差，固定女性。",
       "age_range": [
-        22,
-        22
+        24,
+        28
       ],
-      "adult_context": "年满二十二岁的成年大学毕业生，冷链物流公司正式入职全职出纳，具备完全民事行为能力。",
-      "public_role": "冷链物流夜班结算出纳",
+      "adult_context": "警校本科毕业年满二十四岁在编成年女刑警。",
+      "public_role": "冷链质检员（卧底刑警）",
       "appearance_options": [
-        "身着米白色长款羽绒服，戴着防蓝光黑框眼镜，手里紧紧抱着用牛皮纸袋包裹的进出库流水台账。",
-        "冻得通红的指尖捏着财务章，眼神慌乱地在门禁与值班经理办公室之间逡巡。"
+        "藏青防寒服结霜，冷眉紧绷攥钨钢手电不软分毫。",
+        "冻得唇白仍仰颌硬撑，内衬左胸缝死金属警徽。"
       ],
       "identity": {
-        "authority": "夜间冷链提单结算敲章与出库密码签发权。",
+        "authority": "卧底掌洗钱证据链，明面掌冻肉抽检签字权",
         "resources": [
-          "公司财务系统最高查账U盾",
-          "藏在棉鞋垫底下的境外走私洗钱对账单"
+          "钨钢攻击头手电与战术钳",
+          "内衬紧缝警徽与微距执法记录器"
         ],
         "limits": [
-          "涉世未深极度恐惧黑恶势力报复",
-          "被逼在多份虚假报关单上签过字"
+          "失温濒极限却不敢当众脱衣",
+          "暴露卧底身份即遭围杀灭口"
         ],
         "obligations": [
-          "按时核算夜班工人的计件工资表"
+          "砸断百叶轴脱险并死保警徽"
         ],
-        "exposure": "被主管发现私下用手机翻拍真实出货账目",
-        "hidden": "一直在暗中收集证据准备向经侦支队实名举报自首"
+        "exposure": "左胸内衬紧缝刑警徽与微距录音器。",
+        "hidden": "冻颤仍嘴硬冷斥别碰，被摸透硬徽轮廓反剪按进暖风机前剥衣盘问时咬唇泛红极惹人。"
       },
       "decision": {
-        "core_value": "洗脱罪名保全清白，不想一辈子背着走私犯污名。",
+        "core_value": "宁可冻僵在库，绝不让卧底账本与警徽折贼手。",
         "goal_options": [
-          "把加密对账单交给真正的办案人员",
-          "趁乱从码头侧门逃跑"
+          "手电砸断百叶窗合页脱身",
+          "抓敌受贿铁证反制封口"
         ],
         "pressure_responses": {
-          "low": "在分拣台假装核对单据掩盖颤抖的双手",
-          "mid": "趁无人注意将配电箱钥匙偷偷塞在饮水机后面",
-          "high": "被盘问时咬死账本在冷库内部没有拿出来",
-          "breaking": "哭着将鞋垫下的真实账目U盾递给海关老科长"
+          "low": "冷敲手电喝令退半步。",
+          "mid": "冷颤死捂胸前拉链拒探。",
+          "high": "硬徽被碰骤停呼吸反制。",
+          "breaking": "失温卸力抵暖风壁红眼硬撑。"
         },
-        "withdrawal": "躲在热水桶保温毛毡后面，用长羽绒服帽子遮住整张惨白的脸。",
-        "relationship_stance": "渴望获得正义力量的庇护，在看清卧底女警身份后视其为唯一救命稻草。",
-        "contrast": "胆小怯弱爱哭鼻子，却用笨办法用手机翻拍下了走私集团近三年全部暗账。",
+        "withdrawal": "靠回冻架扣死领口掩住泛红眼角。",
+        "relationship_stance": "极度冷防，唯对按住秘密共谋的狠主溃防。",
+        "contrast": "酷飒冷傲女刑警，烘干湿衫时锁骨发抖灼烫。",
         "prefers": [
-          "受法律保护的自首立功途径",
-          "温暖有光亮的安全环境"
+          "看透警徽却替她遮瞒、只许私下讨账的狠手"
         ],
         "avoids": [
-          "涉黑头目的凶狠注视",
-          "卷入流血打斗"
+          "趁火打劫揩油的软脚蠢货"
         ],
         "never": [
-          "将证明自己清白的原始底账当面销毁"
+          "交出存同伴线索加密卡"
         ]
       },
       "intimacy_tendency": {
         "attraction_sources": [
-          "能驱散绝望恐惧的坚定威严",
-          "身处危难依然沉着冷静的强大气场"
+          "死局并肩撬窗传来的滚烫胸膛温度",
+          "识破警徽后独占护短的霸道气场"
         ],
         "likes": [
-          "被当成受害者得到保护的尊重",
-          "温和有力的保证"
+          "失温里隔湿衣相贴捂暖",
+          "暖风室落锁强硬解衣擦热后颈"
         ],
         "dislikes": [
-          "粗鲁的推搡与搜身威胁",
-          "不分青红皂白的当场定罪"
+          "当众遭群匪剥衣羞辱"
         ],
         "preconditions": [
-          "黑恶势力被全面肃清解除人身威胁",
-          "取得检察机关书面的立功宽大承诺"
+          "氨雾失温两人贴胸抢热时",
+          "警徽露底关门算私账时"
         ],
         "boundaries": [
-          "严守个人隐私与人格尊严底线",
-          "不接受任何胁迫性言行"
+          "记录器证词绝不当作筹码销毁"
         ],
-        "expression": "双手紧紧握着热茶杯，鼓起勇气走到警徽前主动坦白全部经手账目。",
+        "expression": "冷睨发颤：‘别按胸口……漏出去先弄死你。’",
         "desire_range": [
-          1,
-          2
+          3,
+          5
         ],
         "self_control_range": [
           3,
-          4
+          5
         ],
-        "desired_position": "在分拣台角落与调查人员低语核对账目，紧张得手指微颤。"
+        "desired_position": "宁折不屈却被死敌护怀算账的卧底"
       },
       "voices": {
-        "surface": "这三车冷冻柜的运费走的是境外私人账户，没有入账……冷库门锁的钥匙在调度长抽屉里！",
-        "inner": "如果今晚不把U盾交出去，明天就会被那帮人做成冷库事故灭口，我必须信这个报关员一次。"
+        "surface": "“别装好心贴过来，手电照死百叶窗锈合页！”",
+        "inner": "指节麻了……对方刚才绝对摸到了衬里警徽棱角。"
       },
       "schedule": [
         {
-          "from": 1380,
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_night_duty_heater_locker_room"
+        },
+        {
+          "from": 181,
+          "to": 1400,
+          "location_id": "loc_freezing_meat_vault"
+        },
+        {
+          "from": 1401,
           "to": 1439,
-          "location_id": "loc_cold_chain_sorting_platform"
+          "location_id": "loc_night_duty_heater_locker_room"
         }
       ],
       "situation": {
-        "trigger": "走私账目被要求在天亮前彻底粉碎。",
-        "pressure": "犯罪头目即将派人强行搜缴其随身包袋，冷库内又生死未卜。",
+        "trigger": "外门卡死且有人借取暖逼近胸口内衬摸查。",
+        "pressure": "氨雾寒气再拖即昏厥或当众露徽遭灭口。",
         "exits": [
           {
-            "option": "将藏匿的配电箱主备用钥匙悄悄投递给机修冷机班长。",
-            "cost": "一旦被外围打手发现将面临严重暴力殴打。"
+            "option": "硬扛酷寒拼手电砸断锈死百叶窗合页",
+            "cost": "指骨冻裂渗血，失温昏沉跌倒风险极高"
           },
           {
-            "option": "直接向老海关高声喊出冷库备用换气通道密码。",
-            "cost": "彻底暴露反水意图，失去退路。"
+            "option": "贴胸周旋反扣腕骨抢出对方黑账互锁过关",
+            "cost": "贴磨间必蹭明警徽轮廓，把身命押入险局"
           }
         ]
       },
       "tags": [
-        "workplace",
-        "crime"
+        "intimate",
+        "crime",
+        "coercion_theme"
       ]
     },
     {
-      "id": "corrupt_inspector_ma",
-      "gender": "male",
-      "gender_reason": "受贿检疫值班员",
+      "id": "char_smuggler_dock_boss",
+      "gender": "any",
+      "gender_reason": null,
       "age_range": [
-        42,
-        45
+        31,
+        38
       ],
-      "adult_context": "年满四十二岁，港口动植物检疫所成年公职人员，具备完全民事行为能力。",
-      "public_role": "港区动植检值班主任",
+      "adult_context": "年满三十一岁执掌港区冷链贸易的成年地下把头。",
+      "public_role": "冷链承运地下把头",
       "appearance_options": [
-        "微胖身材，穿着白大褂套棉背心，嘴角叼着未点燃的香烟，眼神游移不定。",
-        "双手插在白大褂口袋里紧紧攥着车钥匙，额头冷汗直冒频频看表。"
+        "狼领羽绒大氅敞着，露指手套盘点冻箱编号，阴鸷冷睨。",
+        "呵白雾堵窄道，拎冷钢撬棍审视瑟缩猎物。"
       ],
       "identity": {
-        "authority": "进境冻肉现场检疫放行公章的实际持有人。",
+        "authority": "掌外线拖车接应与加密芯片走私暗网",
         "resources": [
-          "一批免检绿色放行条",
-          "走私集团预支的一箱高档洋酒与现金卡"
+          "冷钢折叠撬棍与自发热敷贴",
+          "冻箱暗格加密芯片走私明细单"
         ],
         "limits": [
-          "害怕东窗事发被纪检部门开除公职收监",
-          "在老海关面前做贼心虚"
+          "失窃两盒芯片遭船东追责",
+          "警徽录音活出冷库必坐牢"
         ],
         "obligations": [
-          "为走私货柜出具虚假的无害化检疫证明"
+          "查清内鬼底细并护芯片装船"
         ],
-        "exposure": "被现场抓获盖有空白日期的检疫合格单证",
-        "hidden": "在境外开立了匿名加密账户准备随时出逃"
+        "exposure": "借冻肉箱夹带军工加密芯片洗钱。",
+        "hidden": "多疑凶狠外壳下嗜好驯服刺头，抓可疑者就想按进暖风室剥净外衣算账。"
       },
       "decision": {
-        "core_value": "贪图暴利且心存侥幸。",
+        "core_value": "进自家冷库就是案上冻肉，谁藏刀先摸清再说。",
         "goal_options": [
-          "掩盖受贿放行痕迹",
-          "在闹出人命前脱身逃跑"
+          "借共衣取暖彻查嫌疑人衬里",
+          "芯片分红收编高手联手封口"
         ],
         "pressure_responses": {
-          "low": "打哈哈试图劝退前来较真的老海关",
-          "mid": "发现冷库死锁后慌乱尝试用备用电闸开门",
-          "high": "被老海关厉声逼问时吓得烟头掉落烫穿裤脚",
-          "breaking": "瘫软在地主动交代受贿窝案全部下线名单"
+          "low": "掂撬棍冷笑数算失温耗时。",
+          "mid": "甩大氅逼人钻怀捂热并摸腰。",
+          "high": "明细外泄瞬间眼寒封门。",
+          "breaking": "录音落手沉喘低声换活路。"
         },
-        "withdrawal": "躲在压缩机房操作台背后假装巡检，偷偷将受贿银行卡塞进废油桶。",
-        "relationship_stance": "面对强势走私头目时唯唯诺诺，面对年轻员工时颐指气使摆官架子。",
-        "contrast": "平时人模狗样满嘴政策法规，真到了生死关头心理防线一触即溃。",
+        "withdrawal": "退货箱影抹掉嘴角冰碴伺机而动。",
+        "relationship_stance": "极慕烈马，敢顶嘴的刺头绝舍不得立刻弄死。",
+        "contrast": "横行狠把头，反被揪暗账按铁柜时呼吸滚烫。",
         "prefers": [
-          "暗度陈仓的灰色收入",
-          "没有人过问的夜班通关"
+          "被疑卧底仍敢拿撬棍反指咽喉谈分赃的狠主"
         ],
         "avoids": [
-          "联合突击检查",
-          "发生人员伤亡特大安全事故"
+          "一吓就跪哭告密的脓包"
         ],
         "never": [
-          "亲自动手参与杀人灭口等恶性暴力犯罪"
+          "把暗箱藏点亲口交待给专案组"
         ]
       },
       "intimacy_tendency": {
         "attraction_sources": [
-          "能为其提供庇护的权力大伞",
-          "金钱带来的虚幻安全感"
+          "冷美人冻到唇青还硬顶挑衅的傲骨",
+          "贴身取暖摸穿内衬硬物的狂飙心跳"
         ],
         "likes": [
-          "被尊称为{npc.name}时的奉承",
-          "毫无风险的红包收入"
+          "宽大氅连人裹进怀里逐寸摸索校验",
+          "暖风室解扣剥下湿衣审清全部秘密"
         ],
         "dislikes": [
-          "不识趣的死板原则",
-          "纪委与检察机关的传唤函"
+          "乱喊大叫招惹外线警卫"
         ],
         "preconditions": [
-          "彻底洗清刑事指控规避牢狱之灾",
-          "保全非法所得资金安全"
+          "货箱遮挡或铁栓插死无外视时",
+          "双方秘密正面对撞戳破时"
         ],
         "boundaries": [
-          "严禁将祸水引向其直系家属",
-          "不承担主犯定性责任"
+          "绝不留第三者手机影像流外"
         ],
-        "expression": "擦着满头虚汗，低声下气地将配电箱密码写在烟盒内侧递出。",
+        "expression": "掀大氅笑近：‘撑着给谁看？进来捂暖顺道验兜。’",
         "desire_range": [
-          0,
-          1
+          4,
+          5
         ],
         "self_control_range": [
-          1,
-          2
+          2,
+          4
         ],
-        "desired_position": "在制冷机房门外团团转，手握钥匙哆嗦着不敢上前。"
+        "desired_position": "专驯带刺卧底并肩疯魔的枭雄"
       },
       "voices": {
-        "surface": "这批肉是特批保供的，手续稍后补齐就行！冷库门怎么关死了？里面还有两个人啊！",
-        "inner": "车队队长那疯子是想把报关员活活冻死！我只是收了点钱，我可不想背上故意杀人的重罪！"
+        "surface": "“别撑着冻伤，钻大衣捂暖顺道查你胸前藏啥。”",
+        "inner": "眼神不对……今晚必须摸明那人内衬是不是警徽。"
       },
       "schedule": [
         {
-          "from": 1380,
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_loading_dock_airlock"
+        },
+        {
+          "from": 181,
+          "to": 1400,
+          "location_id": "loc_freezing_meat_vault"
+        },
+        {
+          "from": 1401,
           "to": 1439,
-          "location_id": "loc_refrigeration_pump_hub"
+          "location_id": "loc_night_duty_heater_locker_room"
         }
       ],
       "situation": {
-        "trigger": "冷库出人命的风险压垮心理防线。",
-        "pressure": "一旦库内人员冻死，单纯的受贿罪将直接升级为共同故意杀人公诉。",
+        "trigger": "外锁咬死且暗格芯片少两盒，视线冷死盯在同伴紧扣领口。",
+        "pressure": "揪不出内鬼并开窗逃脱，明早港口清仓全盘完蛋。",
         "exits": [
           {
-            "option": "主动切断主冷机变频电源迫使全库升温融霜自救。",
-            "cost": "私自断电直接坐实受贿擅离职守违纪行为。"
+            "option": "抡折叠撬棍硬劈排风框并销毁纸面明细",
+            "cost": "掌虎口震伤裂口，卧底走脱必遭大追捕"
           },
           {
-            "option": "将装有免检伪造印章的公文包交给海关自首。",
-            "cost": "当场丧失公职与全部灰色收益。"
+            "option": "强拉人进大氅名义捂热趁机锁腕掏摸暗兜",
+            "cost": "贴身纠缠当即撕破脸陷入死斗"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "crime",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "char_cold_chain_supervisor",
+      "gender": "male",
+      "gender_reason": "熟谙港区潜规则的中年仓管油子，端姜茶笑嘻嘻调和却暗藏私账怯懦求饶，固定男性。",
+      "age_range": [
+        34,
+        42
+      ],
+      "adult_context": "三十四岁以上任职保税仓十年的成年在编主任。",
+      "public_role": "冷链夜班老仓管主任",
+      "appearance_options": [
+        "旧棉装捂保温壶，微弓背搓手笑得油滑。",
+        "缩暖风机旁抹汗，捂裤袋账本指节发白。"
+      ],
+      "identity": {
+        "authority": "掌温控密码、备品柜匙及茶水配给权",
+        "resources": [
+          "滚烫浓姜红糖茶与应急开锁图",
+          "裤袋藏夜班私放黑箱手写分红账"
+        ],
+        "limits": [
+          "风湿打不过猛人全靠装傻保命",
+          "分红本曝光立马判刑"
+        ],
+        "obligations": [
+          "瞒住分红账保命并靠热茶换退路"
+        ],
+        "exposure": "长期借主任权限收黑钱腾暗箱藏走私物。",
+        "hidden": "老好人底下怯懦贪生，摸出分红本立刻腿软求绕只求新主庇护。"
+      },
+      "decision": {
+        "core_value": "钱到位谁都叫兄弟，刀抵脖立刻跪卖旧主。",
+        "goal_options": [
+          "用热姜茶与老图换放过私账",
+          "把卡门事故推给除霜跳闸"
+        ],
+        "pressure_responses": {
+          "low": "递姜茶劝大家各退半步歇气。",
+          "mid": "推脱钥匙在外偷偷瞄人开价。",
+          "high": "账本露出瞬间抖手拽袖讨饶。",
+          "breaking": "瘫靠暖壁招出全仓暗号上家。"
+        },
+        "withdrawal": "抱壶缩角落装怯撇清干系。",
+        "relationship_stance": "见风使舵极快，捏住七寸立刻唯命是从。",
+        "contrast": "白日训工端官腔，暗处挨搜时求饶无比顺从。",
+        "prefers": [
+          "收下把柄保他平安并顺手压驯他的狠金主"
+        ],
+        "avoids": [
+          "非送他进监牢的铁面执法者"
+        ],
+        "never": [
+          "拿老命替外头头目扛刑事大罪"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "狠角揪领压迫带来的安全依赖感",
+          "绝境兜底赦免他罪责的掌控气息"
+        ],
+        "likes": [
+          "暖风蒸汽里凑近递茶迎合新靠山",
+          "被捏把柄按腕时低头喘着顺从"
+        ],
+        "dislikes": [
+          "亮冰冷手铐不留情面"
+        ],
+        "preconditions": [
+          "分红本露光无路可逃乞庇护时",
+          "暖风机声盖过室内私语时"
+        ],
+        "boundaries": [
+          "不许牵连家里老小住址"
+        ],
+        "expression": "捧壶颤笑：‘别翻兜……茶先饮，全仓暗号全听你。’",
+        "desire_range": [
+          2,
+          4
+        ],
+        "self_control_range": [
+          3,
+          5
+        ],
+        "desired_position": "献账求安的顺从旧账线人"
+      },
+      "voices": {
+        "surface": "“先喝热姜茶！老图定能寻出百叶窗轴眼！”",
+        "inner": "分红账绝不能漏……谁看穿我便趁早拜山头求生。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_port_dispatch_checkpost"
+        },
+        {
+          "from": 181,
+          "to": 1400,
+          "location_id": "loc_freezing_meat_vault"
+        },
+        {
+          "from": 1401,
+          "to": 1439,
+          "location_id": "loc_night_duty_heater_locker_room"
+        }
+      ],
+      "situation": {
+        "trigger": "主阀跳闸，裤袋里私放黑箱分红本的一角悄然滑出冰面。",
+        "pressure": "毁账逃脱两难，谁拾走这本账单便是自己主子。",
+        "exits": [
+          {
+            "option": "抢捡账单塞嘴咬碎强拉旁通应急阀门",
+            "cost": "老腕扭伤兼剧咳泄底引来众人怀疑"
+          },
+          {
+            "option": "上交滚烫姜茶、库房全匙与黑线密语保平安",
+            "cost": "完全沦为握把柄新主最听话的白手套"
           }
         ]
       },
       "tags": [
         "workplace_power",
-        "crime"
+        "crime",
+        "coercion_theme"
       ]
     },
     {
-      "id": "mechanic_liu_gong",
-      "gender": "male",
-      "gender_reason": "冷链压缩机专职检修工",
+      "id": "char_customs_corrupt_inspector",
+      "gender": "female",
+      "gender_reason": "着制式大衣突检的冷艳女稽查官，威严破功湿衫微颤极富反差，固定女性。",
       "age_range": [
-        38,
-        40
+        27,
+        34
       ],
-      "adult_context": "年满三十八岁，持特种作业操作证的高级制冷机修工，成年完全民事行为能力人。",
-      "public_role": "肉联厂首席冷机班长",
+      "adult_context": "二十七岁以上公考入编成年口岸女稽查官。",
+      "public_role": "口岸冷艳女动植检官",
       "appearance_options": [
-        "身着深灰防静电工装，腰间挂着厚重铜质工具袋，双手长满老茧，眼神专注沉稳。",
-        "安全帽下眼神锐利，工装上沾染着冷冻机油与金属磨屑，随身携带防爆测振仪。"
+        "深青呢大衣配高靴，捏审验板傲睨全场。",
+        "摘帽散发冻红指尖，仍绷紧冷艳官威硬压。"
       ],
       "identity": {
-        "authority": "全厂制冷管路、氨气应急泄压阀与排风风门的工程维保权。",
+        "authority": "掌远洋冻肉查封与绿色免检公章权",
         "resources": [
-          "一套高硬度铬钒钢内六角与重型管钳",
-          "制冷系统地下排风管网全套蓝图"
+          "破封钳与官方通行执照",
+          "暗层藏三张境外离岸转款回执"
         ],
         "limits": [
-          "只服从安全规程不参与任何团伙争斗",
-          "对走私内情一无所知只在乎管路安全"
+          "高靴在冰面防滑极差步步险跌",
+          "离岸汇票露光立刻双开坐牢"
         ],
         "obligations": [
-          "确保万吨液氨储罐不发生超压泄漏事故"
+          "出库并死按住免检漏洞单据"
         ],
-        "exposure": "被发现私下保留了已被封堵的旧排风通道检修口",
-        "hidden": "深知主通道顶端排气百叶窗合页曾因受潮发生轻度疲劳裂纹"
+        "exposure": "私受船东重贿签发无证货柜绿灯免检。",
+        "hidden": "拿条文训人冷血高傲，汇票被夺按进暖风室剥落大衣审问时颤抖求保体面极动人。"
       },
       "decision": {
-        "core_value": "管路安全与人命至上。",
+        "core_value": "官场靠体面与封口，见过暗账的人不买断就闭嘴。",
         "goal_options": [
-          "阻止液氨管网超压爆炸",
-          "配合外围人员打开救援通道"
+          "官威压退试探顺手烧毁汇票",
+          "锁住狠共犯私换免检绿灯保平安"
         ],
         "pressure_responses": {
-          "low": "按规定流程检查中冷器油位与吸排气压差",
-          "mid": "发现异常氨气泄漏时迅速转动应急旁通球阀",
-          "high": "隔着通风管大声吼出百叶窗受力最薄弱的铰支点",
-          "breaking": "顶着氨气白雾亲自扛着扳手爬上管桥切断主进液阀"
+          "low": "敲板夹冷喝夜查罚则。",
+          "mid": "打滑撞怀强端架子掩窘。",
+          "high": "汇票露角脸色刷白反闩门求和。",
+          "breaking": "大衣落地跪暖风机旁交密印。"
         },
-        "withdrawal": "退至泵房防爆隔离观察窗内，双手搭在紧急停机蘑菇头按钮上。",
-        "relationship_stance": "只跟懂设备规矩的人打交道，对胡乱蛮干的走私犯充满鄙夷。",
-        "contrast": "满手油污不善言辞的朴实蓝领，却有着精准如精密仪器的力学直觉。",
+        "withdrawal": "退角落扣紧大衣领口抚顺湿发。",
+        "relationship_stance": "极度慕强，唯掀开官威肯暗保体面的狠人驯得住她。",
+        "contrast": "日间铁腕审案冷面官，深夜暖风室扯松毛衫讨饶。",
         "prefers": [
-          "严谨的工规参数与标准操作法",
-          "高强度耐磨合金工具"
+          "扯出暗账直接抄腰按镜算账的强硬狼主"
         ],
         "avoids": [
-          "带电盲目强拆",
-          "暴力砸击压力容器"
+          "把贪腐单据直送督察箱的愣头青"
         ],
         "never": [
-          "在已知有人员被困的情况下按下全库制冷全功率加荷开关"
+          "让境外汇票落入同科副手手里"
         ]
       },
       "intimacy_tendency": {
         "attraction_sources": [
-          "在危险面前沉着冷静的专业素养",
-          "对机械力学结构心领神会的灵性"
+          "踩冰失衡猛遭揽腰贴胸的掌控力",
+          "暖风里逐颗解开大衣排扣的羞耻感"
         ],
         "likes": [
-          "工具被物尽其用的纯粹",
-          "化险为夷后的沉稳相视一笑"
+          "烘湿羊毛衫隔薄料摩挲腰侧",
+          "锁门交换免检绿灯批印的暗夜共谋"
         ],
         "dislikes": [
-          "指手画脚的外行领导",
-          "轻视特种作业安全的狂妄"
+          "当众嚷嚷羞辱她女官身份"
         ],
         "preconditions": [
-          "全系统压力回落至安全常压范围",
-          "现场完成排险断气闭环处置"
+          "更衣室反锁外头绝声时",
+          "离岸单在手掀起高傲假面时"
         ],
         "boundaries": [
-          "恪守职业技术工人的操守与底线",
-          "严禁违规违章违纪操作"
+          "黎明出岗必须保光鲜体面"
         ],
-        "expression": "用干净棉纱擦净扳手，默默将一套备用高强度合金工具箱留在最显眼处。",
+        "expression": "松领仰颈微红：‘回执还来……绿灯印随你用。’",
         "desire_range": [
-          0,
-          1
-        ],
-        "self_control_range": [
           4,
           5
         ],
-        "desired_position": "在排气管道检修口递送工具，沉声指点手电攻击头的受力杠杆支点。"
+        "self_control_range": [
+          2,
+          3
+        ],
+        "desired_position": "明端官架暗递咽喉的体面共谋"
       },
       "voices": {
-        "surface": "千万别砸门中央的泄压管！用钛合金手电头别百叶窗最靠左的合页，那里的销钉有裂纹！",
-        "inner": "门里那个姑娘手上力道很刁钻，完全懂力矩原理，只要撑过这几分钟，管子就爆不了。"
+        "surface": "“依夜检令全都退后！板夹严禁触碰！”",
+        "inner": "鞋底太滑……三张离岸单千万别滑出半寸。"
       },
       "schedule": [
         {
-          "from": 1380,
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_port_dispatch_checkpost"
+        },
+        {
+          "from": 181,
+          "to": 1390,
+          "location_id": "loc_loading_dock_airlock"
+        },
+        {
+          "from": 1391,
           "to": 1439,
-          "location_id": "loc_refrigeration_pump_hub"
+          "location_id": "loc_night_duty_heater_locker_room"
         }
       ],
       "situation": {
-        "trigger": "冷库主风道百叶窗闭锁，内部氨气浓度轻微上升。",
-        "pressure": "排气风机过载警报尖叫，若五分钟内不泄压将触发全厂防爆联锁停机。",
+        "trigger": "进闸踏冰险滑倒，袋内离岸回执恰巧滑出半角露出银行后缀。",
+        "pressure": "寒湿兼把柄外漏，不出面封口便双双彻底毁于一旦。",
         "exits": [
           {
-            "option": "手动强行开启旁通洗涤塔抽吸冷库内多余氨气与极寒空气。",
-            "cost": "旁通阀长期未检修存在填料涵轻微渗液风险。"
+            "option": "狠踹铁箱硬抢回执文件冲向月台",
+            "cost": "扭伤脚踝且账号已入人眼随时遭追报"
           },
           {
-            "option": "从机房管沟爬入排气竖井用液压剪切断百叶窗下定位螺栓。",
-            "cost": "高空作业在寒风中极易滑脱坠落摔伤。"
+            "option": "退进暖风间交出绿灯公章与热体温换保平安",
+            "cost": "变成大鳄手心随时调用的官方白手套"
           }
         ]
       },
       "tags": [
-        "workplace",
-        "disaster"
+        "intimate",
+        "workplace_power",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "char_refrigeration_chief_tech",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        26,
+        33
+      ],
+      "adult_context": "二十六岁以上制冷本科毕业成年总工程师。",
+      "public_role": "冷链制冷系统总工",
+      "appearance_options": [
+        "银丝防雾眼镜配灰工服，手拎滤罐扳手冷清。",
+        "摘霜手拭镜片，斯文白皙藏心虚盘算。"
+      ],
+      "identity": {
+        "authority": "掌液氨关停、泄压旁通与风机图",
+        "resources": [
+          "防氨胶带、套筒组与滤毒口罩",
+          "暗号盒藏氨泄警报阈值篡改固件"
+        ],
+        "limits": [
+          "单薄拧不动大轮全靠人搭力",
+          "篡改警报阈值罪名极重"
+        ],
+        "obligations": [
+          "先堵漏脱身并抹净固件记录"
+        ],
+        "exposure": "私将氨泄警报上限偷偷调高十倍。",
+        "hidden": "戴眼镜满口公式，被抵后颈把固件晃面前便声颤体软乖乖听从。"
+      },
+      "decision": {
+        "core_value": "算准热力方程，把柄落手便任由强者定条款。",
+        "goal_options": [
+          "用堵漏手艺换放过固件罪证",
+          "趁混战抢回篡改芯片卡片灭迹"
+        ],
+        "pressure_responses": {
+          "low": "推雾镜框冷报液氨极限。",
+          "mid": "缠半截探声打听私了价。",
+          "high": "固件被抽手抖拽袖求救。",
+          "breaking": "镜碎跪箱旁招出全库密码。"
+        },
+        "withdrawal": "蹲管影抱紧工具箱喘息。",
+        "relationship_stance": "嘴强内怯，遇狠腕保命便死心顺从。",
+        "contrast": "端清冷范，解领核查时声音颤得极急。",
+        "prefers": [
+          "抓稳固件仍肯揽肩兜底的沉稳强手"
+        ],
+        "avoids": [
+          "把固件直接抄送安监的死心眼"
+        ],
+        "never": [
+          "亲手签名认领偷改固件事故"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "窄阀缝稳臂撑腰担力矩的安心感",
+          "摘下雾镜逼近耳垂讨账的眩晕"
+        ],
+        "likes": [
+          "寒夜被圈进单衣捂热发抖手心",
+          "交全部密匙换贴身安抚庇护"
+        ],
+        "dislikes": [
+          "乱敲精密阀门导致爆管受伤"
+        ],
+        "preconditions": [
+          "狭阀氨逼共用湿布时",
+          "固件落手无路乞庇护时"
+        ],
+        "boundaries": [
+          "绝不引爆总罐波及全港居民区"
+        ],
+        "expression": "歪镜急喘：‘我堵管……卡别交出去，都听你。’",
+        "desire_range": [
+          3,
+          4
+        ],
+        "self_control_range": [
+          3,
+          4
+        ],
+        "desired_position": "交密匙换庇护的斯文技术共犯"
+      },
+      "voices": {
+        "surface": "“氨气冲限了！按住裂口缠胶带再去顶窗口！”",
+        "inner": "完蛋……盒崩出篡改固件卡片，绝不能叫旁人捡去！"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_ammonia_valve_alcove"
+        },
+        {
+          "from": 181,
+          "to": 1400,
+          "location_id": "loc_freezing_meat_vault"
+        },
+        {
+          "from": 1401,
+          "to": 1439,
+          "location_id": "loc_ammonia_valve_alcove"
+        }
+      ],
+      "situation": {
+        "trigger": "排氨细管喷雾结冰弹开密码盒，篡改警报固件掉入冰霜缝隙。",
+        "pressure": "氨中毒兼重罪败露，唯靠强腕遮盖才有一线活命。",
+        "exits": [
+          {
+            "option": "徒手按住漏氨冻管硬缠密封并毁卡",
+            "cost": "掌心严重低温灼伤起泡，固件隐患难清净"
+          },
+          {
+            "option": "主动献固件与全库阀控图求铁血保护伞遮挡",
+            "cost": "职业底线与余生前途全归保护人支配"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "workplace_power",
+        "bodily_harm"
+      ]
+    },
+    {
+      "id": "char_freight_driver_courier",
+      "gender": "any",
+      "gender_reason": null,
+      "age_range": [
+        25,
+        32
+      ],
+      "adult_context": "二十五岁以上持牵引照的成年冷链专车押运手。",
+      "public_role": "重卡冷链特种押运手",
+      "appearance_options": [
+        "防风服敞半截拉链扛冷钢撬棍，眼神贪狠邪笑。",
+        "踢雪斜倚气闸，暗自算计冷美人腰身。"
+      ],
+      "identity": {
+        "authority": "掌重卡绞盘动力钩与暗格匙",
+        "resources": [
+          "冷钢折叠撬棍与液压顶杆",
+          "备胎暗格藏两盒高价加密芯片"
+        ],
+        "limits": [
+          "截货遭把头拆穿当场遭劈",
+          "入库缺厚内胆急需热源"
+        ],
+        "obligations": [
+          "顶开外锁兼趁夜销赃私吞芯片"
+        ],
+        "exposure": "黑吃黑偷截把头两盒加密芯片私卖。",
+        "hidden": "混不吝外表下贪狠好色，冻极借取暖贴靠讨肉偿；被捉现行倒也爽快靠门喘气认输。"
+      },
+      "decision": {
+        "core_value": "价码暖窝给足我就挂绞盘拽开冷库大门。",
+        "goal_options": [
+          "牵引绞盘扯开门索双倍尾款",
+          "栽赃转移两盒私藏芯片视线"
+        ],
+        "pressure_responses": {
+          "low": "掂撬棍吹哨开价遮口辛苦费。",
+          "mid": "坏笑靠拢发冷高手贴紧借暖。",
+          "high": "芯片亮红点骤眯眼摸冷钢棍。",
+          "breaking": "按铁框咽唾沫交备胎暗匙。"
+        },
+        "withdrawal": "缩回气闸备胎旁盘算分赃。",
+        "relationship_stance": "见钱眼开只服狠主，谁按得住撬棍便贴谁。",
+        "contrast": "狂如野狼，暗格翻车按墙时喘着认服张力极足。",
+        "prefers": [
+          "敢接黑吃黑大单在暖风里互抵分赃的狂徒"
+        ],
+        "avoids": [
+          "光训话不给现利和体温的穷酸"
+        ],
+        "never": [
+          "白交备胎芯片替人顶缸"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "高傲人物冻颤踹脚仍靠来借暖的刺激",
+          "分赃落定喘气扯开防风衣的野性快意"
+        ],
+        "likes": [
+          "扯松拉链直撞热气捂出热汗",
+          "暗门后强取又肯平分黑金的契约"
+        ],
+        "dislikes": [
+          "事后端圣人架子翻脸白嫖"
+        ],
+        "preconditions": [
+          "暴雪堵门重卡孤立气闸时",
+          "备胎账破非结死契不可时"
+        ],
+        "boundaries": [
+          "绝不准把暗格线报去海关"
+        ],
+        "expression": "坏笑靠拢：‘抖成这样？抱紧捂暖再分芯片。’",
+        "desire_range": [
+          4,
+          5
+        ],
+        "self_control_range": [
+          2,
+          3
+        ],
+        "desired_position": "敢啃硬骨头并分赃滚暖的狂徒"
+      },
+      "voices": {
+        "surface": "“撬棍卡进百叶窗了！外绞盘挂不挂先报实在价！”",
+        "inner": "两盒芯片锁死备胎暗格，挡财路者顺手做了。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_loading_dock_airlock"
+        },
+        {
+          "from": 181,
+          "to": 1400,
+          "location_id": "loc_port_dispatch_checkpost"
+        },
+        {
+          "from": 1401,
+          "to": 1439,
+          "location_id": "loc_night_duty_heater_locker_room"
+        }
+      ],
+      "situation": {
+        "trigger": "月台绞盘挂钩险脱落，同刻备胎暗格两盒芯片防盗灯微弱闪红。",
+        "pressure": "不切断红光拔锁灭迹，遭地下把头与卧底双面撕碎。",
+        "exits": [
+          {
+            "option": "猛拉绞盘强行断绳将备胎抛进冰海毁迹",
+            "cost": "左臂肌腱撕拉剧痛兼巨额私款全部泡汤"
+          },
+          {
+            "option": "献两盒芯片密钥与冷库核心人物秘密结盟灭口知情者",
+            "cost": "与魔鬼死绑卖身，从今后性命握他人手里"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "crime",
+        "gambling"
+      ]
+    },
+    {
+      "id": "char_offshore_syndicate_envoy",
+      "gender": "female",
+      "gender_reason": "空降港口清查内鬼的境外船东高冷女特使，奢华风衣坠入热雾求全极具反差，固定女性。",
+      "age_range": [
+        28,
+        35
+      ],
+      "adult_context": "二十八岁以上受聘境外航运财团的成年女督察特使。",
+      "public_role": "远洋船东驻港女特使",
+      "appearance_options": [
+        "白狐领风衣配短靴，手套捏密令冷冽傲然。",
+        "热雾中掀松毛领露白颈，眸如寒鹰俯视室人。"
+      ],
+      "identity": {
+        "authority": "掌远洋货主赏金生杀令与外保封锁权",
+        "resources": [
+          "清理门户密令及外保暗号手台",
+          "手包暗格藏境外洗钱总股东真实名录"
+        ],
+        "limits": [
+          "不熟库内冷排机关孤身闯月台",
+          "名录外落必惹跨国绝杀追捕"
+        ],
+        "obligations": [
+          "清仓前收回芯片并灭口港仓内鬼"
+        ],
+        "exposure": "奉命清查之余暗截两成离岸洗钱佣金进私袋。",
+        "hidden": "高雅尊贵看似冷血，偏畏寒又迷恋高压反转，反锁暖风室被剥风衣掐住名录时软腰低喘格外动人。"
+      },
+      "decision": {
+        "core_value": "拿老板令收人头，除非你刀更先架我脖子上。",
+        "goal_options": [
+          "调外保封锁码头逐个搜出内鬼",
+          "找回芯片顺手吞净两成私抽佣金"
+        ],
+        "pressure_responses": {
+          "low": "敲密令傲笑限众人十分跪交赃。",
+          "mid": "寒湿打颤仍抬颌抬高赏格硬撑。",
+          "high": "名录被夺脸色骤白拢领改口谈分账。",
+          "breaking": "风衣跌地扶暖柜颤交外线暗令密码。"
+        },
+        "withdrawal": "裹回狐领退入雾廊抹去薄汗保排面。",
+        "relationship_stance": "目空一切，唯碾碎手包的狠主配接她腰带。",
+        "contrast": "清场如冰山女帝，门闩反锁暖室喘着谈和时粉霞染耳。",
+        "prefers": [
+          "直面密令反手夺包扣手审讯的狂徒或探员"
+        ],
+        "avoids": [
+          "跪在雪里推罪哭穷的软骨废人"
+        ],
+        "never": [
+          "向专案组交出境外大股东真实名录"
+        ]
+      },
+      "intimacy_tendency": {
+        "attraction_sources": [
+          "降维清场反被瞬间夺包易主的惊心动魄",
+          "湿雾中被按镜算账剥落风衣的羞愤快意"
+        ],
+        "likes": [
+          "暖风雾下反拧腕骨贴柜低声开出封口价",
+          "共杯烫茶指缠间博弈主导权"
+        ],
+        "dislikes": [
+          "泥雪污糟她高价羊绒长衣"
+        ],
+        "preconditions": [
+          "外保断联铁门栓死私密相见时",
+          "私抽单与股东名录同握人手时"
+        ],
+        "boundaries": [
+          "天亮离港必须保住特使完整排面"
+        ],
+        "expression": "扯松毛领喘笑：‘撒手……两成佣金和密令听你。’",
+        "desire_range": [
+          4,
+          5
+        ],
+        "self_control_range": [
+          2,
+          4
+        ],
+        "desired_position": "本拟清理门户却陷热室受驯的高贵人质"
+      },
+      "voices": {
+        "surface": "“外保架满岗了，拿芯片的自己脱衣站出来！”",
+        "inner": "冰窖冻死……那人死盯我手包的狠劲像要连我一并生吞。"
+      },
+      "schedule": [
+        {
+          "from": 0,
+          "to": 180,
+          "location_id": "loc_port_dispatch_checkpost"
+        },
+        {
+          "from": 181,
+          "to": 1390,
+          "location_id": "loc_loading_dock_airlock"
+        },
+        {
+          "from": 1391,
+          "to": 1439,
+          "location_id": "loc_night_duty_heater_locker_room"
+        }
+      ],
+      "situation": {
+        "trigger": "顶暴雪空降月台查仓，撞进更衣室反被室内杀意缴了手包名录。",
+        "pressure": "外保失去联络兼私吞回扣单曝露，生死翻盘就在一念间。",
+        "exits": [
+          {
+            "option": "强抓电台嘶喊外线暗保放火堵死全库鱼死网破",
+            "cost": "名录流出必引大股东跨国绝杀，九死一生"
+          },
+          {
+            "option": "在暖风室交付股东总名录密匙与自身筹码认新共主",
+            "cost": "彻底叛离远洋船东，荣辱命脉全系眼前人掌心"
+          }
+        ]
+      },
+      "tags": [
+        "intimate",
+        "crime",
+        "workplace_power"
       ]
     }
   ],
   "background_cast": [
     {
-      "id": "bg_night_patrol_guard_sun",
-      "role": "夜班巡逻保安老孙",
-      "function": "witness",
-      "location_ids": [
-        "loc_cold_chain_sorting_platform"
-      ],
-      "line": "刚才好像看见车队队长在冷库转轮锁上挂了个铁链子。",
-      "gender": "male",
-      "age_range": [
-        55,
-        60
-      ],
-      "adult_context": "年满五十五岁，退伍老兵，港口在册保安。",
-      "name": "老孙"
-    },
-    {
-      "id": "bg_customs_seal_clerk_chen",
-      "role": "海关打封员小陈",
-      "function": "messenger",
-      "location_ids": [
-        "loc_cold_chain_sorting_platform"
-      ],
-      "line": "老科长，分局缉私支队的突击检查车队已经开进保税区闸口了！",
-      "gender": "female",
-      "age_range": [
-        23,
-        25
-      ],
-      "adult_context": "年满二十三岁，海关在编聘用制打封员。",
-      "name": "小陈"
-    },
-    {
-      "id": "bg_frozen_pork_handler_da_liu",
-      "role": "装卸工大刘",
-      "function": "helper",
-      "location_ids": [
-        "loc_cold_chain_sorting_platform"
-      ],
-      "line": "俺这里有一捆加厚的石棉保温毛毡，能先堵在门缝上挡挡寒风！",
-      "gender": "male",
-      "age_range": [
-        28,
-        35
-      ],
-      "adult_context": "年满二十八岁，码头注册装卸工人。",
-      "name": "大刘"
-    },
-    {
-      "id": "bg_syndicate_driver_ah_fei",
-      "role": "走私货车司机阿飞",
+      "id": "bg_port_security_guard_1",
+      "role": "守主大门的夜班保税保安",
       "function": "obstacle",
       "location_ids": [
-        "loc_cold_chain_sorting_platform"
+        "loc_loading_dock_airlock",
+        "loc_port_dispatch_checkpost"
       ],
-      "line": "队长没出来前，谁也别想动这台开往公海码头的冷藏集装箱车！",
-      "gender": "male",
+      "line": "{npc.name}晃着强光手电跺雪道：“风雪封路外门已落总锁，黎明前没人放行！”",
+      "gender": "any",
       "age_range": [
-        26,
-        30
+        30,
+        46
       ],
-      "adult_context": "年满二十六岁，货车驾驶员。",
-      "name": "阿飞"
+      "adult_context": "年满三十岁保税港区在编成年值班安保员。",
+      "name": null
     },
     {
-      "id": "bg_dock_canteen_aunt_zhang",
-      "role": "码头食堂张阿姨",
-      "function": "rumor_source",
+      "id": "bg_ship_first_mate_1",
+      "role": "泊位催装货的货轮夜班大副",
+      "function": "messenger",
       "location_ids": [
-        "loc_cold_chain_sorting_platform"
+        "loc_loading_dock_airlock"
       ],
-      "line": "听说后半夜这批肉每斤多给五毛装卸费，保准里面夹带了见不得光的东西。",
-      "gender": "female",
+      "line": "{npc.name}隔暴雨大吼：“船潮不等货！再缺两盒芯片老子立刻喊水手上岸翻库！”",
+      "gender": "any",
       "age_range": [
-        50,
-        55
+        32,
+        45
       ],
-      "adult_context": "年满五十岁，港区后勤职工。",
-      "name": "张阿姨"
+      "adult_context": "年满三十二岁持远洋适任证的成年货轮大副。",
+      "name": null
     },
     {
-      "id": "bg_police_dispatch_wang",
-      "role": "经侦指挥中心调度员",
+      "id": "bg_dock_clerk_witness_1",
+      "role": "岗亭登记夜间放行的值班记录员",
+      "function": "witness",
+      "location_ids": [
+        "loc_port_dispatch_checkpost"
+      ],
+      "line": "{npc.name}揉着眼皮翻单据嘟囔：“刚才那两辆重卡怎么没按规程刷门禁卡？”",
+      "gender": "any",
+      "age_range": [
+        24,
+        34
+      ],
+      "adult_context": "年满二十四岁大专毕业在编成年仓区单证员。",
+      "name": null
+    },
+    {
+      "id": "bg_cold_warehouse_dispatcher_1",
+      "role": "遥控除霜阀的值班中控调度",
       "function": "helper",
       "location_ids": [
-        "loc_refrigeration_pump_hub"
+        "loc_port_dispatch_checkpost"
       ],
-      "line": "呼叫零二号，外围武警狙击组已就位，请务必确认人质与证据安全！",
-      "gender": "male",
+      "line": "{npc.name}拍着对讲杂音喊：“备电油箱快见底啦，里头百叶窗能撬赶紧往外挤！”",
+      "gender": "any",
       "age_range": [
-        27,
-        30
+        28,
+        40
       ],
-      "adult_context": "年满二十七岁，在编公安警官。",
-      "name": "王警官"
+      "adult_context": "年满二十八岁持配电证成年夜间调度员。",
+      "name": null
+    },
+    {
+      "id": "bg_customs_patrol_driver_1",
+      "role": "码头巡逻停车的港警协勤",
+      "function": "rumor_source",
+      "location_ids": [
+        "loc_loading_dock_airlock"
+      ],
+      "line": "{npc.name}摇下车窗低声道：“听说今晚有个查大案的特使悄悄进港摸底了！”",
+      "gender": "any",
+      "age_range": [
+        25,
+        35
+      ],
+      "adult_context": "年满二十五岁退伍入编成年港区治安协勤。",
+      "name": null
+    },
+    {
+      "id": "bg_truck_loader_helper_1",
+      "role": "避雪蹲棚下的冻肉搬运领班",
+      "function": "rumor_source",
+      "location_ids": [
+        "loc_port_dispatch_checkpost"
+      ],
+      "line": "{npc.name}哈着白雾嘀咕：“冷库今天氨味冲得很，谁在里面翻箱倒柜呢？”",
+      "gender": "any",
+      "age_range": [
+        34,
+        48
+      ],
+      "adult_context": "年满三十四岁签订正式劳务合同的成年搬运领班。",
+      "name": null
     }
   ],
   "channels": [
     {
-      "id": "ch_explosion_proof_walkie_talkie",
-      "text": "冷链厂区防爆400兆赫公用对讲机频道",
-      "reach": "all",
+      "id": "ch_port_dispatch_radio",
+      "text": "气闸调度有线对讲信道",
+      "reach": "穿破聚氨酯冷板隔断直连调度亭与装卸台在场人员，主库内断绝接收。",
       "fidelity": "exact"
     },
     {
-      "id": "ch_dock_forklift_crew_whispers",
-      "text": "叉车司机更衣室与茶水炉私下耳语转述",
-      "reach": "local",
+      "id": "ch_louver_seam_whisper",
+      "text": "排气百叶窗缝与冷排传声",
+      "reach": "敲撬百叶窗铁轴时的金属响动与喘气低声透到气闸铁廊。",
+      "fidelity": "distorted"
+    },
+    {
+      "id": "ch_wharf_night_gossip",
+      "text": "码头夜班搬运工茶室耳语",
+      "reach": "哪间冷库暖风更衣室彻夜反锁亮灯、谁少了几盒货早晚传进泊位。",
       "fidelity": "distorted"
     }
   ],
   "tension_engines": [
     {
-      "id": "te_hypothermia_vs_deadlock",
-      "text": "零下二十五度人体极寒失温致命倒计时与外部铸铁转轮机械死锁之间的生死赛跑。"
+      "id": "eng_subzero_wheel_hypothermia",
+      "text": "零下二十五度死锁与液氨渗漏逼迫众人解衣贴胸抢暖兼冒死砸撬百叶窗"
     },
     {
-      "id": "te_evidence_vs_exposure",
-      "text": "锁定走私货柜特种芯片完整物证与面对穷凶极恶嫌犯暴露卧底警察身份之间的暗流博弈。"
+      "id": "eng_sewn_badge_frisk_peril",
+      "text": "内衬缝死金属警徽与微型记录器在借体温搜身触摸中濒临暴露的反杀危机"
     },
     {
-      "id": "te_ammonia_risk_vs_prying",
-      "text": "脆弱氨气管路渗漏窒息危险与利用战术手电合金齿纹暴力撬脱百叶窗合页之间的微操拿捏。"
+      "id": "eng_heater_room_steam_flip",
+      "text": "冰库脱困滚入热风更衣室反锁烘干湿衫，蒸汽灼热撕破高傲冷美人防线"
     },
     {
-      "id": "te_distrust_vs_warmth",
-      "text": "犯罪头目孤注一掷的杀意试探与极寒绝境下背靠背呼气取暖合作求生之间的撕扯反差。"
+      "id": "eng_chip_bribe_blackmail_web",
+      "text": "失窃加密芯片、离岸汇票、分红本与篡改警报固件在闭门盲区互锁咽喉"
     }
   ],
   "cast_combos": [
     {
-      "id": "cc_detective_and_smuggler_standoff",
+      "id": "combo_1_switchable_detective_vault",
       "power_structure": "switchable",
       "player_positions": [
         "high",
         "equal",
         "low"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "pc_temp_coldstore_loader",
+        "pc_refrigeration_night_dispatch",
+        "pc_port_customs_audit_chief",
+        "pc_coldchain_asset_receiver"
+      ],
       "slots": [
-        "undercover_detective_lin_xi",
-        "smuggling_enforcer_zhao_kun"
+        "char_undercover_detective"
       ],
       "tension_engine_ids": [
-        "te_hypothermia_vs_deadlock",
-        "te_distrust_vs_warmth"
+        "eng_sewn_badge_frisk_peril",
+        "eng_subzero_wheel_hypothermia"
       ],
-      "chemistry": "卧底女警手持战术手电冷静压制走私头目的躁动，极寒白雾中两人因失温不得不贴身借力发力，傲慢与警威激烈对撞。",
+      "chemistry": "零下冻库外锁咬死，藏青防寒服的{char_undercover_detective.name}攥手电冷斥别靠近；失温逼近时你隔衣一掌压上{char_undercover_detective.ta}左胸硬角，攻守瞬间掀翻。",
       "stakes": {
-        "resource_gap": "女警掌握专业破拆攻击头与执法记录器，走私头目手握重型冷钢撬棍与走私芯片密码。",
-        "limit_gap": "女警受限于零下二十五度失温手指发僵，走私犯受限于大门死锁插翅难飞。",
-        "meeting_reason": "被突发自锁的万吨冷库铁门共同封死在主通道排管冰道之下。",
-        "irreplaceable_goal": "在核心体温彻底崩溃前攻破百叶窗合页生还，同时决出芯片物证最终归属。"
+        "resource_gap": "{char_undercover_detective.name}握手电与隐藏警徽，你握撬棍、姜茶或封库令。",
+        "limit_gap": "失温兼氨味逼命，防寒服一解警徽即刻露光。",
+        "meeting_reason": "同困主库，必须合力撬百叶窗并扛过失温。",
+        "irreplaceable_goal": "扯破或护住{char_undercover_detective.name}内衬警徽并在暖室算完私账。"
       },
       "relations": [
         {
           "a": "player",
-          "b": "undercover_detective_lin_xi",
+          "b": "char_undercover_detective",
           "stage": "testing",
           "a_to_b": {
             "trust": 2,
-            "tension": 3
+            "tension": 5
           },
           "b_to_a": {
             "trust": 2,
-            "tension": 3
-          },
-          "reason": "极寒环境中共同寻找杠杆支点破拆，在试探中建立起生死托付的防线。"
-        },
-        {
-          "a": "player",
-          "b": "smuggling_enforcer_zhao_kun",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 0,
             "tension": 5
           },
-          "b_to_a": {
-            "trust": 0,
-            "tension": 5
-          },
-          "reason": "走私头目对任何在场人员抱有高度敌意与灭口冲动。"
-        },
-        {
-          "a": "undercover_detective_lin_xi",
-          "b": "smuggling_enforcer_zhao_kun",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 1,
-            "tension": 4
-          },
-          "b_to_a": {
-            "trust": 1,
-            "tension": 4
-          },
-          "reason": "警匪双方为了在三十五分钟内活命不得不暂时维持脆弱的破拆同盟。"
+          "reason": "仓区冷视多日，死锁才把防备逼至寸步不退。"
         }
       ],
       "tags": [
-        "workplace",
+        "intimate",
         "crime"
       ]
     },
     {
-      "id": "cc_detective_and_customs_mentor",
-      "power_structure": "equal",
-      "player_positions": [
-        "equal"
-      ],
-      "identity_ids": [],
-      "slots": [
-        "undercover_detective_lin_xi",
-        "customs_veteran_lao_qian"
-      ],
-      "tension_engine_ids": [
-        "te_evidence_vs_exposure"
-      ],
-      "chemistry": "一门之隔的默契呼应，老海关凭敲管声指点迷津，年轻女警在绝境中誓死捍卫法纪尊严。",
-      "stakes": {
-        "resource_gap": "老海关拥有调动外围武警破拆特权的对讲机，女警手握定案核心物证。",
-        "limit_gap": "门外被走私同伙阻挠无法直接动用爆破，门内失温进入危险读秒。",
-        "meeting_reason": "保税港区夜间联合执法抽查与突发反锁事件。",
-        "irreplaceable_goal": "打通内外声波通信连线，在不惊动幕后黑手的前提下救出受困卧底。"
-      },
-      "relations": [
-        {
-          "a": "player",
-          "b": "undercover_detective_lin_xi",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "紧密配合传递管网结构参数。"
-        },
-        {
-          "a": "player",
-          "b": "customs_veteran_lao_qian",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 1
-          },
-          "reason": "老海关的沉稳经验给予场内人员极大的心理支撑。"
-        },
-        {
-          "a": "undercover_detective_lin_xi",
-          "b": "customs_veteran_lao_qian",
-          "stage": "testing",
-          "a_to_b": {
-            "trust": 4,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 4,
-            "tension": 2
-          },
-          "reason": "代际执法者的薪火相传与责任担当。"
-        }
-      ],
-      "tags": [
-        "workplace",
-        "workplace_power"
-      ]
-    },
-    {
-      "id": "cc_detective_and_mechanic_prying",
+      "id": "combo_2_player_high_detective_heater",
       "power_structure": "player_high",
       "player_positions": [
         "high"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "pc_port_customs_audit_chief",
+        "pc_coldchain_asset_receiver"
+      ],
       "slots": [
-        "undercover_detective_lin_xi",
-        "mechanic_liu_gong"
+        "char_undercover_detective"
       ],
       "tension_engine_ids": [
-        "te_ammonia_risk_vs_prying"
+        "eng_heater_room_steam_flip",
+        "eng_sewn_badge_frisk_peril"
       ],
-      "chemistry": "机械师的理论参数与女警精准利落的手部发力完美嵌合，手电齿纹与合页轴销激烈啃咬。",
+      "chemistry": "你把冻颤死咬不招的{char_undercover_detective.name}反锁进轰鸣暖风更衣室，拿热姜茶与左胸硬徽做筹码：想保记录器先脱透湿外衣按镜前听审。",
       "stakes": {
-        "resource_gap": "机械工掌握全厂液氨回油阀控制权，女警拥有特种战术工具。",
-        "limit_gap": "机械工无法肉身进入封闭冷库，女警面对复杂的管路受力不知内部焊缝走向。",
-        "meeting_reason": "通过防爆对讲机与排气管道空腔形成声波连线。",
-        "irreplaceable_goal": "确保暴力破拆百叶窗的过程中不引发主氨气管路破裂爆燃。"
+        "resource_gap": "你掌封查大权或债权，{char_undercover_detective.name}握绝密证词。",
+        "limit_gap": "氨气与冻伤耗尽体能，嘴硬撑不了几回。",
+        "meeting_reason": "冰仓撤进更衣室烘干冻僵身体。",
+        "irreplaceable_goal": "令{char_undercover_detective.name}在暖雾下软了腰肢交出真心或筹码。"
       },
       "relations": [
         {
           "a": "player",
-          "b": "undercover_detective_lin_xi",
-          "stage": "familiar",
+          "b": "char_undercover_detective",
+          "stage": "flirting",
           "a_to_b": {
-            "trust": 3,
-            "tension": 2
+            "trust": 2,
+            "tension": 5
           },
           "b_to_a": {
-            "trust": 3,
-            "tension": 2
+            "trust": 1,
+            "tension": 5
           },
-          "reason": "共同手持工具施加杠杆力矩。"
-        },
-        {
-          "a": "player",
-          "b": "mechanic_liu_gong",
-          "stage": "familiar",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 1
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 1
-          },
-          "reason": "听从机修专家的技术指令。"
-        },
-        {
-          "a": "undercover_detective_lin_xi",
-          "b": "mechanic_liu_gong",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 3,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 3,
-            "tension": 2
-          },
-          "reason": "靠谱的技术指导是生存的关键基石。"
+          "reason": "明面盘查威压，早想亲手翻看{char_undercover_detective.ta}衬里鼓凸。"
         }
       ],
       "tags": [
-        "workplace",
-        "disaster"
+        "intimate",
+        "coercion_theme",
+        "humiliation"
       ]
     },
     {
-      "id": "cc_accountant_and_corrupt_inspector",
+      "id": "combo_3_npc_high_detective_alcove",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low"
+      ],
+      "identity_ids": [
+        "pc_temp_coldstore_loader",
+        "pc_refrigeration_night_dispatch"
+      ],
+      "slots": [
+        "char_undercover_detective"
+      ],
+      "tension_engine_ids": [
+        "eng_sewn_badge_frisk_peril",
+        "eng_chip_bribe_blackmail_web"
+      ],
+      "chemistry": "排氨盲角里{char_undercover_detective.name}亮出你改单或关门磁的黑底拿手电抵住你下颌；唯{char_undercover_detective.ta}左胸微敞半寸恰露警徽反光。",
+      "stakes": {
+        "resource_gap": "{char_undercover_detective.name}扼死你违法改单七寸，你熟撬轴并撞破{char_undercover_detective.ta}正牌。",
+        "limit_gap": "谁先翻脸喊破，两人都得当晚送命或进局。",
+        "meeting_reason": "蹲点堵氨漏正面对上冷厉女质检。",
+        "irreplaceable_goal": "贴紧反挟{char_undercover_detective.name}警徽秘密逆转劣势。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_undercover_detective",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 4
+          },
+          "reason": "底工与冷官上下悬殊，偏在盲角彻底扯平。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_4_npc_high_boss_coat",
       "power_structure": "npc_high",
       "player_positions": [
         "low",
         "equal"
       ],
-      "identity_ids": [],
+      "identity_ids": [
+        "pc_temp_coldstore_loader",
+        "pc_undercover_taskforce_liaison",
+        "pc_refrigeration_night_dispatch"
+      ],
       "slots": [
-        "logistics_accountant_su_man",
-        "corrupt_inspector_ma"
+        "char_smuggler_dock_boss"
       ],
       "tension_engine_ids": [
-        "te_evidence_vs_exposure"
+        "eng_subzero_wheel_hypothermia",
+        "eng_chip_bribe_blackmail_web"
       ],
-      "chemistry": "受贿检疫员步步紧逼索要销毁账单，胆怯女出纳死守U盾暗中寻找转交警方的生机。",
+      "chemistry": "狼领大氅敞开的{char_smuggler_dock_boss.name}强把冷颤的你裹入怀里暖热，露指手套直接按实腰缝试探：要么验明没藏录音，要么拿图替{char_smuggler_dock_boss.ta}找回芯片。",
       "stakes": {
-        "resource_gap": "受贿检疫员持有动植检放行公章，出纳掌握跨国洗钱暗账U盾。",
-        "limit_gap": "检疫员害怕命案上身心理防线脆弱，出纳缺乏自保能力惧怕报复。",
-        "meeting_reason": "在恒温分拣台茶水间角落进行账目交接。",
-        "irreplaceable_goal": "围绕是否彻底销毁涉案单证展开暗无声息的心理较量。"
+        "resource_gap": "{char_smuggler_dock_boss.name}握生杀暗权与暖大氅，你握暗证或管路图。",
+        "limit_gap": "库门未破兼特使随时翻仓查账。",
+        "meeting_reason": "失窃芯片当夜恰与把头同困冻肉仓内。",
+        "irreplaceable_goal": "扛住{char_smuggler_dock_boss.name}搜检并反扣走私主账。"
       },
       "relations": [
         {
           "a": "player",
-          "b": "logistics_accountant_su_man",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 2,
-            "tension": 2
-          },
-          "b_to_a": {
-            "trust": 2,
-            "tension": 2
-          },
-          "reason": "察觉到年轻出纳身上的反常惊恐。"
-        },
-        {
-          "a": "player",
-          "b": "corrupt_inspector_ma",
-          "stage": "acquainted",
-          "a_to_b": {
-            "trust": 0,
-            "tension": 4
-          },
-          "b_to_a": {
-            "trust": 0,
-            "tension": 4
-          },
-          "reason": "对心怀鬼胎的值班主任保持防范。"
-        },
-        {
-          "a": "logistics_accountant_su_man",
-          "b": "corrupt_inspector_ma",
+          "b": "char_smuggler_dock_boss",
           "stage": "testing",
           "a_to_b": {
             "trust": 1,
-            "tension": 4
+            "tension": 5
           },
           "b_to_a": {
-            "trust": 1,
-            "tension": 4
+            "trust": 2,
+            "tension": 5
           },
-          "reason": "利益捆绑与背叛自首的生死博弈。"
+          "reason": "把头疑心重却迷恋刺头在怀不肯服软的狠劲。"
         }
       ],
       "tags": [
+        "intimate",
         "crime",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_5_player_high_inspector_bribe",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_undercover_taskforce_liaison",
+        "pc_coldchain_asset_receiver"
+      ],
+      "slots": [
+        "char_customs_corrupt_inspector"
+      ],
+      "tension_engine_ids": [
+        "eng_chip_bribe_blackmail_web",
+        "eng_heater_room_steam_flip"
+      ],
+      "chemistry": "高冷的{char_customs_corrupt_inspector.name}踏冰滑撞进你怀里，你抢过牛皮袋抽出三张离岸回执拍上柜面：想明日继续戴帽做官，先脱湿大衣谈免检怎么签。",
+      "stakes": {
+        "resource_gap": "你掐着{char_customs_corrupt_inspector.name}离岸汇票，{char_customs_corrupt_inspector.ta}握绿色通道公章。",
+        "limit_gap": "船东特使与联合清查黎明前同降。",
+        "meeting_reason": "踩滑露馅后被迫退入暖风室谈封口。",
+        "irreplaceable_goal": "碾碎{char_customs_corrupt_inspector.name}傲骨收作贴身白手套。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_customs_corrupt_inspector",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 1,
+            "tension": 5
+          },
+          "reason": "白日端官架训人，摔出贪腐立刻攻防倒悬。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "humiliation",
         "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_6_equal_tech_firmware",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal",
+        "high",
+        "low"
+      ],
+      "identity_ids": [
+        "pc_temp_coldstore_loader",
+        "pc_undercover_taskforce_liaison",
+        "pc_port_customs_audit_chief",
+        "pc_coldchain_asset_receiver"
+      ],
+      "slots": [
+        "char_refrigeration_chief_tech"
+      ],
+      "tension_engine_ids": [
+        "eng_subzero_wheel_hypothermia",
+        "eng_chip_bribe_blackmail_web"
+      ],
+      "chemistry": "阀组夹缝中，{char_refrigeration_chief_tech.name}冻红鼻尖慌手藏起篡改固件卡；你一臂按入大衣捂暖顺势握死这块定生死的铁片。",
+      "stakes": {
+        "resource_gap": "你握庇护与力量，{char_refrigeration_chief_tech.name}懂氨排死穴与全部密匙。",
+        "limit_gap": "排管喷氨兼篡改大罪同时压顶。",
+        "meeting_reason": "并肩堵漏时篡改固件弹落面前。",
+        "irreplaceable_goal": "把怯懦斯文的{char_refrigeration_chief_tech.name}拉成绝不背叛的技术牌。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_refrigeration_chief_tech",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 4
+          },
+          "reason": "抢修生出依附感，把柄落地更显顺从。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "combo_7_player_high_supervisor_tea",
+      "power_structure": "player_high",
+      "player_positions": [
+        "high",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_undercover_taskforce_liaison",
+        "pc_port_customs_audit_chief",
+        "pc_coldchain_asset_receiver"
+      ],
+      "slots": [
+        "char_cold_chain_supervisor"
+      ],
+      "tension_engine_ids": [
+        "eng_chip_bribe_blackmail_web",
+        "eng_subzero_wheel_hypothermia"
+      ],
+      "chemistry": "一直捧壶装老实的{char_cold_chain_supervisor.name}刚滑落手写分红黑账，就被你踩死纸角按进暖风壁间，抖着手把热姜茶和暗门全匙一并奉上。",
+      "stakes": {
+        "resource_gap": "你掌执法或债权，{char_cold_chain_supervisor.name}掌热茶、老图与上家线。",
+        "limit_gap": "分红本一旦外漏立刻进去蹲大牢。",
+        "meeting_reason": "递茶间隙分红账滑出掀翻平庸伪装。",
+        "irreplaceable_goal": "令{char_cold_chain_supervisor.name}交清全库暗门与黑线密语保平安。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_cold_chain_supervisor",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 3
+          },
+          "b_to_a": {
+            "trust": 3,
+            "tension": 4
+          },
+          "reason": "平时巴结留余地，事发立刻拜新山头。"
+        }
+      ],
+      "tags": [
+        "workplace_power",
+        "crime"
+      ]
+    },
+    {
+      "id": "combo_8_equal_driver_chips",
+      "power_structure": "equal",
+      "player_positions": [
+        "equal",
+        "low",
+        "high"
+      ],
+      "identity_ids": [
+        "pc_undercover_taskforce_liaison",
+        "pc_refrigeration_night_dispatch",
+        "pc_port_customs_audit_chief",
+        "pc_coldchain_asset_receiver"
+      ],
+      "slots": [
+        "char_freight_driver_courier"
+      ],
+      "tension_engine_ids": [
+        "eng_chip_bribe_blackmail_web",
+        "eng_heater_room_steam_flip"
+      ],
+      "chemistry": "扛撬棍的{char_freight_driver_courier.name}备胎里两盒黑吃黑芯片微闪红点；你们在冷铁气闸肩抵肩开价，谁先撕防风服裹暖交底便一起平分百万赃物。",
+      "stakes": {
+        "resource_gap": "{char_freight_driver_courier.name}握绞盘钩与藏赃暗匙，你握免检批印或遮掩力。",
+        "limit_gap": "把头与特使随时追至气闸杀穿两人。",
+        "meeting_reason": "挂索脱逃之际刚好撞破偷藏失踪芯片。",
+        "irreplaceable_goal": "把野狼式的{char_freight_driver_courier.name}绑上同一条分赃死船。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_freight_driver_courier",
+          "stage": "flirting",
+          "a_to_b": {
+            "trust": 2,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "黑道同路扯着防风衣撕咬，冷热相撞极易结死契。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "crime",
+        "gambling"
+      ]
+    },
+    {
+      "id": "combo_9_npc_high_envoy_storm",
+      "power_structure": "npc_high",
+      "player_positions": [
+        "low",
+        "equal"
+      ],
+      "identity_ids": [
+        "pc_temp_coldstore_loader",
+        "pc_undercover_taskforce_liaison",
+        "pc_refrigeration_night_dispatch"
+      ],
+      "slots": [
+        "char_offshore_syndicate_envoy"
+      ],
+      "tension_engine_ids": [
+        "eng_heater_room_steam_flip",
+        "eng_chip_bribe_blackmail_web"
+      ],
+      "chemistry": "带船东密令空降的{char_offshore_syndicate_envoy.name}踏进暖风室却被你插栓反锁，手包里境外洗钱总名录直接落入手心——高傲特使狐领滑落只能喘息讲和。",
+      "stakes": {
+        "resource_gap": "{char_offshore_syndicate_envoy.name}调外保队，你扼死{char_offshore_syndicate_envoy.ta}的洗钱总表与私抽单。",
+        "limit_gap": "信号断联叫不到援手，风雪逼散尊严。",
+        "meeting_reason": "带暗保令追查缺货偏独身闯入反锁暖室。",
+        "irreplaceable_goal": "拿住{char_offshore_syndicate_envoy.name}洗钱名录变成全场最强翻盘底牌。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_offshore_syndicate_envoy",
+          "stage": "testing",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "杀伐特使撞地头狠蛇，门闩一扣谁跪还说不准。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "crime",
+        "coercion_theme"
+      ]
+    },
+    {
+      "id": "combo_10_switchable_vault_double",
+      "power_structure": "switchable",
+      "player_positions": [
+        "high",
+        "equal",
+        "low"
+      ],
+      "identity_ids": [
+        "pc_temp_coldstore_loader",
+        "pc_refrigeration_night_dispatch",
+        "pc_port_customs_audit_chief",
+        "pc_coldchain_asset_receiver"
+      ],
+      "slots": [
+        "char_undercover_detective",
+        "char_smuggler_dock_boss"
+      ],
+      "tension_engine_ids": [
+        "eng_sewn_badge_frisk_peril",
+        "eng_subzero_wheel_hypothermia"
+      ],
+      "chemistry": "零下库区，{char_smuggler_dock_boss.name}甩大氅逼{char_undercover_detective.name}敞领验温；你捏两人生死七寸，决定护住女警警徽反杀，或一同审问这姑娘。",
+      "stakes": {
+        "resource_gap": "女刑警握证据兼手电，把头握撬棍兼芯片，你握阀锁与站边权重。",
+        "limit_gap": "任一方露底便在死门铁盒内爆血战。",
+        "meeting_reason": "暴雨封库令死敌与卧底正面顶头。",
+        "irreplaceable_goal": "周旋{char_undercover_detective.name}与{char_smuggler_dock_boss.name}间独吞最大筹码。"
+      },
+      "relations": [
+        {
+          "a": "player",
+          "b": "char_undercover_detective",
+          "stage": "familiar",
+          "a_to_b": {
+            "trust": 3,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 5
+          },
+          "reason": "暗觉{char_undercover_detective.ta}非寻常质检，逼绝境反成救星。"
+        },
+        {
+          "a": "player",
+          "b": "char_smuggler_dock_boss",
+          "stage": "acquainted",
+          "a_to_b": {
+            "trust": 1,
+            "tension": 4
+          },
+          "b_to_a": {
+            "trust": 2,
+            "tension": 4
+          },
+          "reason": "互相利用又防备只等见风压边。"
+        },
+        {
+          "a": "char_undercover_detective",
+          "b": "char_smuggler_dock_boss",
+          "stage": "stranger",
+          "a_to_b": {
+            "trust": 0,
+            "tension": 5
+          },
+          "b_to_a": {
+            "trust": 0,
+            "tension": 5
+          },
+          "reason": "卧底直面走私头目，每次对视都在掂刀。"
+        }
+      ],
+      "tags": [
+        "intimate",
+        "crime",
+        "coercion_theme"
       ]
     }
   ],
   "daily_activities": [
     {
-      "id": "act_ammonia_pipe_frost_patrol",
-      "title": "凌晨四点冷库排管巡检验霜",
+      "id": "act_thaw_hands_ginger_tea",
+      "title": "霜雾捧壶喝浓姜茶暖手",
       "location_ids": [
-        "loc_meat_locker_main_aisle"
+        "loc_freezing_meat_vault",
+        "loc_ammonia_valve_alcove"
       ],
       "duration_minutes": 30,
       "beats": [
-        "踩着薄冰巡视悬挂排管表面结霜厚度",
-        "拿木槌轻敲弯头听回声判断氨液流动",
-        "在防爆巡更卡上打卡签注现场温度"
+        "零下白雾翻涌，冻麻指骨裹上烫不锈钢壶剧颤，热气擦鼻尖划过。",
+        "指腹借接壶压实微红手背试探微脉，嘴上仍端客套。",
+        "热流压下发抖膝窝，暗兜硬物却险顶开领扣。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1350,
+      "tags": [
+        "intimate"
+      ]
+    },
+    {
+      "id": "act_pry_louver_hinge_together",
+      "title": "合手踩箱撬百叶窗锈轴",
+      "location_ids": [
+        "loc_freezing_meat_vault"
+      ],
+      "duration_minutes": 40,
+      "beats": [
+        "两人贴背踩上冻牛腩板箱，一握钨钢手电照锈轴、一并抓冷钢撬棍发力。",
+        "发力瞬间厚防寒服胸背紧擦，内衬暗兜硬棱全露了底。",
+        "锈渣掉进领口融化发痒，没人肯先松开护腰的手。"
+      ],
+      "hook_ids": [],
+      "start_minute": 1370,
+      "tags": [
+        "intimate",
+        "workplace_power"
+      ]
+    },
+    {
+      "id": "act_alcove_ammonia_frisk_search",
+      "title": "排氨夹缝借查冻摸衬里",
+      "location_ids": [
+        "loc_ammonia_valve_alcove"
+      ],
+      "duration_minutes": 30,
+      "beats": [
+        "氨雾逼人挤进窄箱夹缝，表面掸雪查脸颊，指尖却顺拉链缓缓向下按探。",
+        "碰及心口暗缝时呼吸骤滞，腕骨瞬间被人扣死冷壁。",
+        "窄巷不敢作响，贴耳低声算起各自罪证。"
       ],
       "hook_ids": [],
       "start_minute": 1380,
       "tags": [
-        "workplace",
-        "disaster"
+        "intimate",
+        "coercion_theme"
       ]
     },
     {
-      "id": "act_customs_seal_verification",
-      "title": "保税货柜海关铅封复核过磅",
+      "id": "act_heater_room_dry_damp_clothes",
+      "title": "暖风机前褪湿大衣烘暖",
       "location_ids": [
-        "loc_cold_chain_sorting_platform"
+        "loc_night_duty_heater_locker_room"
       ],
-      "duration_minutes": 40,
+      "duration_minutes": 45,
       "beats": [
-        "核对重卡拖头悬挂的报关箱号与封条钢印",
-        "用强光手电检查货柜锁杆是否有切割焊接暗痕",
-        "在过磅电子磅单上加盖现场复核红印章"
-      ],
-      "hook_ids": [],
-      "start_minute": 1390,
-      "tags": [
-        "workplace",
-        "crime"
-      ]
-    },
-    {
-      "id": "act_cast_iron_wheel_lock_maintenance",
-      "title": "冷库进出重型转轮锁手动点检",
-      "location_ids": [
-        "loc_cold_chain_sorting_platform"
-      ],
-      "duration_minutes": 25,
-      "beats": [
-        "向双向重型转轮丝杠加注低温二硫化钼润滑脂",
-        "测试外部紧急卸压把手的机械回弹空行程",
-        "清理转轮导向槽内堆积的碎冰与冷凝水"
-      ],
-      "hook_ids": [],
-      "start_minute": 1395,
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "act_heavy_parka_and_torch_handover",
-      "title": "零下25度棉服与防爆手电交接",
-      "location_ids": [
-        "loc_cold_chain_sorting_platform"
-      ],
-      "duration_minutes": 20,
-      "beats": [
-        "清点公用防寒毛皮大衣与防冻橡胶长靴",
-        "测试高亮度LED防爆手电的电池荷电指示灯",
-        "在装备交接表上草签夜班当值姓名"
-      ],
-      "hook_ids": [],
-      "start_minute": 1385,
-      "tags": [
-        "workplace",
-        "disaster"
-      ]
-    },
-    {
-      "id": "act_compressor_pressure_gauge_log",
-      "title": "制冷机房液氨压力差定时抄表",
-      "location_ids": [
-        "loc_refrigeration_pump_hub"
-      ],
-      "duration_minutes": 35,
-      "beats": [
-        "记录高低压双级活塞压缩机的级间排气压力",
-        "检查中间冷却器液位指示计的气泡状态",
-        "对比润滑油压差继电器的安全动作整定值"
+        "反栓锁死后暖风机狂吹热浪，冰透外衣落肩腾起白雾，透湿打底紧勾呼吸。",
+        "白雾镜前解领炙烤，寒意退尽后脸侧绯红再难掩饰。",
+        "口袋滑出的汇票或警徽正好映在镜面正中。"
       ],
       "hook_ids": [],
       "start_minute": 1400,
       "tags": [
-        "workplace",
-        "disaster"
+        "intimate",
+        "humiliation"
       ]
     },
     {
-      "id": "act_breakroom_ginger_tea_warmup",
-      "title": "分拣台更衣室热姜茶驱寒交接",
+      "id": "act_airlock_ice_slip_audit",
+      "title": "气闸踩冰抢扶交接暗单",
       "location_ids": [
-        "loc_cold_chain_sorting_platform"
+        "loc_loading_dock_airlock"
       ],
       "duration_minutes": 25,
       "beats": [
-        "从大不锈钢保温桶接满冒热气的浓黑姜汤",
-        "揉搓被冻得僵硬红肿的指关节与耳根",
-        "交流下半夜各货柜出库批次与码头靠泊船期"
+        "暴雨拍打缓冲门，黑冰滑倒瞬间铁臂兜腰稳住并顺势摸走随身皮夹。",
+        "探照灯扫过月台外沿，两人贴铁墩借暗影互验代码。",
+        "谁嘴更硬、手里筹码更真立见分晓。"
       ],
       "hook_ids": [],
-      "start_minute": 1410,
+      "start_minute": 1340,
       "tags": [
+        "crime",
         "workplace"
       ]
     },
     {
-      "id": "act_locker_room_hand_warming",
-      "title": "更衣室里替女警暖手",
+      "id": "act_checkpost_ledger_bargain",
+      "title": "调度值班亭核查放行簿",
       "location_ids": [
-        "loc_night_shift_locker_room"
+        "loc_port_dispatch_checkpost"
       ],
       "duration_minutes": 30,
-      "start_minute": 1430,
       "beats": [
-        "缉私队接手现场后，女警被裹着军大衣送进分拣台旁的更衣室，十根手指冻得发白，连警服扣子都解不开。",
-        "女警没说话，只把双手伸过来，让人捂在掌心里慢慢搓，又低头抵着对方胸口，借一点体温。",
-        "指尖终于有了血色，女警抬眼笑了一下：报告还没写……再捂一会儿，就一会儿。"
+        "岗亭电壶作响，泛潮刷卡簿红笔圈出的加急放行恰指同一经手人。",
+        "茶柜盲区逼紧去路，袖口滑落的手写分红本正待价而沽。",
+        "雪花翻飞下安静签定第一份封口默契。"
       ],
+      "hook_ids": [],
+      "start_minute": 1320,
       "tags": [
-        "intimate"
+        "workplace_power",
+        "crime"
       ]
-    },
-    {
-      "id": "act_locker_room_cover_story",
-      "title": "对一遍卧底口供",
-      "location_ids": [
-        "loc_night_shift_locker_room"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1230,
-      "beats": [
-        "更衣室的暖风机嗡嗡响，女警坐在长凳上，报关员的制服外套搭在膝头，压低声音和人对卧底的口供。",
-        "对到一半，女警忽然笑了：按口供，我们俩是一对。……要演得像一点的话，你得先让我练习一下。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_locker_room_steam_shower",
-      "title": "热水澡后的长凳",
-      "location_ids": [
-        "loc_night_shift_locker_room"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 1370,
-      "beats": [
-        "女警冲完热水澡出来，头发还在滴水，只裹着一条毛巾坐在长凳上，肩头被热气蒸得泛红。",
-        "女警伸手拽住人的衣角：冷库里冻了一整夜，现在只想要暖和的东西。……你肯的话，就坐过来。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
-    },
-    {
-      "id": "act_locker_room_dawn_handover",
-      "title": "交班前的早餐",
-      "location_ids": [
-        "loc_night_shift_locker_room"
-      ],
-      "duration_minutes": 30,
-      "start_minute": 420,
-      "beats": [
-        "天快亮，夜班要交班了，女警从储物柜里翻出两个包子，掰开一个，热气扑了满脸。",
-        "女警把大的那半塞给人：收网之后，我请你吃顿正经的。……现在先凑合，吃完陪我打个盹。"
-      ],
-      "tags": [
-        "intimate"
-      ],
-      "hook_ids": []
     }
   ],
   "pressures": [
     {
-      "id": "p_freezer_cast_iron_wheel_deadlock",
-      "title": "冻库铸铁转轮锁被外部人为锁死",
-      "source": "person",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_meat_locker_main_aisle"
-      ],
-      "trigger": "外部走私同伙察觉到警车闪烁，仓惶推下冷库门防盗锁并转动重型铸铁转轮至死点，将通道彻底物理锁死。",
-      "objective": "在冷库温度彻底耗尽体温前找到可供成年人体通行的机械逃生缺口。",
-      "choice": "继续用身体硬撞数吨重的厚钢门，还是借工具攀上挑空排风道寻找百叶窗薄弱合页。",
-      "immediate": {
-        "text": "沉重的锁舌撞击声在冰冷通道内炸响，外部把手彻底脱开空转。",
-        "minutes": 15
-      },
-      "near": {
-        "text": "手脚指尖开始麻木刺痛，呼出的热气在睫毛与领口迅速凝结成硬冰碴。",
-        "deadline_minutes": 35
-      },
-      "far": {
-        "trigger": "核心体温降至临界失温线",
-        "consequence": "意识陷入模糊休克，全员丧失自主破拆能力导致冻亡。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "用战术手电头部硬质合金攻击头反向卡死合页猛别撬开百叶窗",
-          "cost": "手电筒身承受极限剪切载荷，外壳严重刮花磨损。"
-        },
-        {
-          "option": "用随身长柄挂肉铁钩撬动门轴铰链插销分担闭合受力",
-          "cost": "挂钩受力弯折造成虎口剧烈震痛，手指冻伤脱皮。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1380,
-      "tags": [
-        "disaster",
-        "crime"
-      ]
-    },
-    {
-      "id": "p_ammonia_pipe_frost_rupture_alarm",
-      "title": "悬空氨气排管焊缝开裂渗漏白雾",
+      "id": "p_frozen_wheel_ammonia_leak",
+      "title": "铸铁门死锁与氨漏失温逼命",
       "source": "accident",
       "flags": [
         "timed"
       ],
       "location_ids": [
-        "loc_meat_locker_main_aisle"
+        "loc_freezing_meat_vault",
+        "loc_ammonia_valve_alcove"
       ],
-      "trigger": "冷库主排气机震颤导致一截陈旧氨气弯管承重吊架脱落，焊缝处嗤嗤喷吐出刺鼻强刺激白雾。",
-      "objective": "避开高浓度氨气下沉区域并设法封堵微量漏点。",
-      "choice": "冒险靠近喷气管用保温布缠绕，还是顶着刺鼻气味加速攀爬通风架。",
+      "trigger": "外侧重型铸铁转轮防爆门齿轮卡死兼排氨管嘶嘶微漏，信号彻底屏蔽。",
+      "objective": "砸断锈蚀排气百叶窗合页或抢退入暖风室前扛住失温兼堵氨漏。",
+      "choice": "硬抓冻铁拼命砸撬，还是掀开大氅贴胸抱团分享余温苟命？",
       "immediate": {
-        "text": "辛辣呛鼻的刺痛感瞬间直冲眼鼻，眼角不受控制地狂流眼泪。",
-        "minutes": 10
+        "text": "白雾化作细冰，关节迅速僵木而氨气味开始刺痛咽喉。",
+        "minutes": 3
       },
       "near": {
-        "text": "白雾沿通道地面缓缓蔓延，低洼处空气已无法正常呼吸。",
-        "deadline_minutes": 25
+        "text": "七分钟再不开窗泄氨并取暖，低体温昏厥与低温灼伤迫近。",
+        "deadline_minutes": 7
       },
       "far": {
-        "trigger": "氨气浓度超过自锁安全阈值",
-        "consequence": "引发化学性肺水肿与机械性窒息，丧失逃生体力。",
+        "trigger": "冷库失温兼液氨窒息全面爆发",
+        "consequence": "全体受困人员陷入深度冻伤昏迷惨死库中。",
         "due_days": 1
       },
       "exits": [
         {
-          "option": "用毛毡缠裹手电柄封堵细小缝隙并攀上通风高位避难",
-          "cost": "吸入少量微刺激性气体引发强烈呛咳与咽喉刺痛。"
+          "option": "硬攥钨钢战术手电配折叠撬棍暴力砸断锈百叶轴",
+          "cost": "手骨剧震裂血兼严重冻伤，冷热乱窜极耗体力"
         },
         {
-          "option": "通过防爆对讲机呼叫机修工远程关闭液氨主供液旁通阀",
-          "cost": "管网失压导致冷库局部制冷中断加速化霜返潮。"
+          "option": "躲进夹道贴胸裹入厚大衣共同捂暖兼分喝热姜茶",
+          "cost": "贴胸磨擦随时暴露内衬里缝藏的硬徽与密账"
         }
       ],
       "leverage": null,
       "hook_ids": [],
-      "start_minute": 1390,
+      "start_minute": 1360,
       "tags": [
         "disaster",
-        "workplace"
+        "bodily_harm"
       ]
     },
     {
-      "id": "p_syndicate_enforcer_body_search_raid",
-      "title": "走私头目突击搜身排查内部卧底",
+      "id": "p_undercover_badge_strip_search",
+      "title": "胸口警徽暗袋搜身露馅危局",
       "source": "person",
       "flags": [
-        "timed"
+        "timed",
+        "leverage"
       ],
       "location_ids": [
-        "loc_meat_locker_main_aisle"
+        "loc_freezing_meat_vault",
+        "loc_night_duty_heater_locker_room"
       ],
-      "trigger": "走私头目车队队长在极寒恐慌中起疑，突然拔出撬棍逼近女警，要求检查冲锋衣内胆里暗藏的物件。",
-      "objective": "在不拔枪暴露的前提下制伏对方或巧妙化解搜身危机。",
-      "choice": "正面动手夺下撬棍制伏嫌犯，还是借破拆合作之名转移其注意力。",
+      "trigger": "怀疑同困者携警徽及微型执法记录器，借防失温查冻名义逼迫脱衣验明内衬。",
+      "objective": "死保卧底身份或借抓对方暗兜脏物互锁达成私了闭嘴。",
+      "choice": "抽撬棍拼死拒搜搏命，还是按镜前任其验出秘密反亮对方黑账？",
       "immediate": {
-        "text": "沉重的撬棍横在两人之间，车队队长满是血丝的眼睛死死盯着女警胸口。",
-        "minutes": 5
+        "text": "拉链微落半寸，胸前硬质轮廓在寒冷对视里已呼之欲出。",
+        "minutes": 3
       },
       "near": {
-        "text": "对方伸手撕扯外套防风拉链，藏匿的执法记录器外壳即将露馅。",
-        "deadline_minutes": 15
+        "text": "五分钟交不出合理说辞，贴身搜检彻底撕开防寒服衬里。",
+        "deadline_minutes": 5
       },
       "far": {
-        "trigger": "警察身份彻底在极寒冷库内曝光",
-        "consequence": "引发你死我活的近身肉搏，导致破拆工具损坏双双冻死。",
+        "trigger": "警徽记录器在凶犯前当场露底",
+        "consequence": "卧底遭库内死敌合围灭口，或黑道全部走私洗钱大案立即爆破。",
         "due_days": 1
       },
       "exits": [
         {
-          "option": "亮出手电攻击头的致命杀伤力威慑对方并以破拆生路为主导",
-          "cost": "迫使犯罪头目暂时后退但彻底失去了表面信任。"
+          "option": "反手扣腕抡钨钢手电死砸出一条血路突围",
+          "cost": "在冰面打滑受重伤，反被多方夺物捆压控制"
         },
         {
-          "option": "借由对讲机里传来的警笛声施加心理战术迫使其交出凶器",
-          "cost": "提前亮出部分底牌增加了后半程被反扑的风险。"
+          "option": "在暖风室闭门验明身份同步亮出对手走私铁证私扣换停火",
+          "cost": "卧底把柄彻底落死在敌手掌心，步步遭牵制共犯"
         }
       ],
-      "leverage": null,
+      "leverage": {
+        "holder": "char_smuggler_dock_boss",
+        "subject": "char_undercover_detective",
+        "basis": "{char_smuggler_dock_boss.name}紧盯{char_undercover_detective.name}防寒服左胸凸起硬物逼其解衣。"
+      },
       "hook_ids": [],
-      "start_minute": 1395,
+      "start_minute": 1364,
       "tags": [
+        "intimate",
         "crime",
-        "violence"
+        "coercion_theme"
       ]
     },
     {
-      "id": "p_hypothermia_loss_of_motor_control",
-      "title": "零下25度四肢僵硬与手电脱手危机",
-      "source": "nature",
-      "flags": [
-        "timed"
-      ],
-      "location_ids": [
-        "loc_meat_locker_main_aisle"
-      ],
-      "trigger": "作业时间突破三十分钟，女警十指关节已冻得青紫发白，高强度的手电撬动发力引发指屈肌强烈痉挛。",
-      "objective": "克服极寒痉挛稳住破拆工具并恢复手指末梢血流。",
-      "choice": "将冻僵双手贴在同伴胸前借体温融化冰霜，还是强行咬牙继续生拉硬别。",
-      "immediate": {
-        "text": "坚硬的钛合金手电手柄脱手滑开半寸，险些跌落进深不见底的肉架缝隙。",
-        "minutes": 8
-      },
-      "near": {
-        "text": "脸颊冻得通红发紫，牙齿不受控制地剧烈打战。",
-        "deadline_minutes": 20
-      },
-      "far": {
-        "trigger": "双手肌肉发生冻结性麻痹",
-        "consequence": "手指末梢深度冻伤坏死失去自主活动能力，破拆彻底停摆。",
-        "due_days": 1
-      },
-      "exits": [
-        {
-          "option": "两人靠拢互相哈气搓手并将手电挂绳死死套在腕关节上合力下压",
-          "cost": "贴身急救取暖造成呼吸急促，脸颊泛红发烫消耗有限体力。"
-        },
-        {
-          "option": "将手电放入内胆衣兜靠残存体温回暖五分钟后再行发力",
-          "cost": "延误宝贵的破拆窗口期，冷库温度进一步骤降。"
-        }
-      ],
-      "leverage": null,
-      "hook_ids": [],
-      "start_minute": 1400,
-      "tags": [
-        "disaster"
-      ]
-    },
-    {
-      "id": "p_customs_inspection_convoy_arrival",
-      "title": "海关缉私突击查验车队逼近鸣笛",
+      "id": "p_offshore_chip_audit_raid",
+      "title": "口岸联合夜查与失窃芯片清账",
       "source": "institution",
       "flags": [
-        "timed"
+        "timed",
+        "leverage"
       ],
       "location_ids": [
-        "loc_cold_chain_sorting_platform"
+        "loc_loading_dock_airlock",
+        "loc_night_duty_heater_locker_room"
       ],
-      "trigger": "保税港区外围警报拉响，数辆涂装警徽的重型查验执法车冲入装卸货台，警灯撕破夜幕。",
-      "objective": "在走私分子狗急跳墙纵火或倾倒液氨前迅速引导执法力量精准破门。",
-      "choice": "从外部用铲车撞碎冷库铁门，还是由机修工从机房切断联锁电磁铁。",
+      "trigger": "港区联查突临兼丢失两盒加密芯片，船东特使带暗保封库索要缺账人头。",
+      "objective": "赶在港务联检抄库前抢出芯片批号或压下离岸受贿汇票。",
+      "choice": "假装失查报失硬扛过关，还是拉高冷女官与特使入室交印抵账？",
       "immediate": {
-        "text": "高音警笛穿透厚重的库墙传来，外围走私打手瞬间乱作一团弃车逃窜。",
-        "minutes": 10
+        "text": "气闸灯柱闪烁，缺失两箱的电子编码单正被调出大屏。",
+        "minutes": 4
       },
       "near": {
-        "text": "门外传来嘈杂的呵斥声与破拆工具撞击厚钢板的沉闷回音。",
-        "deadline_minutes": 30
+        "text": "六分钟不交免检绿灯补平台账，黎明联合抓捕直封全港区。",
+        "deadline_minutes": 6
       },
       "far": {
-        "trigger": "外围冲突波及冷库总动力线缆",
-        "consequence": "主变电柜跳闸引发全库黑暗，救援难度成倍剧增。",
+        "trigger": "芯片失踪案并免检受贿罪齐发",
+        "consequence": "涉贿女官与走私集团全线落网或遭船东跨海血洗。",
         "due_days": 1
       },
       "exits": [
         {
-          "option": "通过风道射出强光手电频闪信号指示安全切入点引导破门",
-          "cost": "暴露内部人员精确坐标可能引来穷寇流弹射击。"
+          "option": "按规矩递交受损货单任由稽查封仓清查全区",
+          "cost": "所有私密账目连根拔起，在场共谋无人幸免"
         },
         {
-          "option": "由分拣台老海关指挥武警突击组使用液压撑杆平稳顶开大门",
-          "cost": "液压撑杆展开需要十分钟准备，库内失温风险加剧。"
+          "option": "暖室强扣女官及特使交出公章与股东总名录重分赃",
+          "cost": "彻底沦入洗钱黑网核心，终生受握表人要挟"
         }
       ],
-      "leverage": null,
+      "leverage": {
+        "holder": "player",
+        "subject": "char_customs_corrupt_inspector",
+        "basis": "你攥着{char_customs_corrupt_inspector.name}踩冰摔落的境外离岸汇票。"
+      },
       "hook_ids": [],
-      "start_minute": 1410,
+      "start_minute": 1368,
+      "tags": [
+        "crime",
+        "workplace_power",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "p_heater_room_lockout_heat",
+      "title": "暖风蒸汽反锁与剥衣逼供灼热",
+      "source": "nature",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_night_duty_heater_locker_room"
+      ],
+      "trigger": "暖风除湿热雾升腾后外门水汽再次倒灌冻死插销，室内湿衫滚烫贴肤令人昏沉失守。",
+      "objective": "扛住高热融雪贴身摩擦并借烘衣脱掉壳层查明彼此真正底牌。",
+      "choice": "咬牙披回冰重湿衣硬撞铁门，还是脱个坦白在雾镜前算私账？",
+      "immediate": {
+        "text": "滚热蒸汽吞没白镜，冻硬外衣滴水粘住打底衣物轮廓毕现。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "六分钟插销不化兼高温憋闷，身体本能发软根本握不稳撬具。",
+        "deadline_minutes": 6
+      },
+      "far": {
+        "trigger": "高温缺水虚脱及衣物卸尽曝光",
+        "consequence": "所有高冷身份卸妆见底，秘密连同体温彻底交由室友主宰。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "顶着高热湿衣死裹领口拼脚狠踹结冰插销门缝",
+          "cost": "鞋滑撞青脚踝兼冷热急冲几乎虚脱晕倒"
+        },
+        {
+          "option": "在暖风机旁解开外衣烘干借滚热气氛摊明所有密藏并结盟",
+          "cost": "褪尽高傲假面，往后生死秘密全靠对方一句照看"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "char_undercover_detective",
+        "basis": "你堵住暖风更衣室反锁门栓，逼湿衣贴身的{char_undercover_detective.name}交底。"
+      },
+      "hook_ids": [],
+      "start_minute": 1375,
+      "tags": [
+        "intimate",
+        "humiliation"
+      ]
+    },
+    {
+      "id": "p_black_market_bribe_rumor",
+      "title": "篡改固件与分红本猜忌反水",
+      "source": "rumor",
+      "flags": [
+        "timed",
+        "leverage"
+      ],
+      "location_ids": [
+        "loc_ammonia_valve_alcove",
+        "loc_port_dispatch_checkpost"
+      ],
+      "trigger": "库内谣传有人篡改氨泄报警兼偷留黑箱分红账，同伴相互搜兜准备推出替死鬼。",
+      "objective": "抢先拿到篡改固件卡和手写分红本迫使技术员与老仓管站边效忠。",
+      "choice": "抖破内幕闹至同归于尽，还是收拢两份铁证单线拿捏做内应？",
+      "immediate": {
+        "text": "手电光晃过衣兜露出半页纸角，嫌疑者指尖瞬间发青抖颤。",
+        "minutes": 3
+      },
+      "near": {
+        "text": "五分钟不抢收暗证封口，谣言滚大极易当场打碎茶壶灭灯内讧。",
+        "deadline_minutes": 5
+      },
+      "far": {
+        "trigger": "冷库猜忌火拼彻底暴发",
+        "consequence": "照明器材砸坏，众人互相扭打在氨气盲区冻毙。",
+        "due_days": 1
+      },
+      "exits": [
+        {
+          "option": "当场撕出全部贪污渎职实据交给巡逻安保查封",
+          "cost": "惊动凶狠货主暴起反扑，自己率先陷入孤立险境"
+        },
+        {
+          "option": "悄悄扣下固件卡与分红本按壁逼二人签密匙降书",
+          "cost": "坐实包庇违法渎职罪责，一旦败露一起受罚"
+        }
+      ],
+      "leverage": {
+        "holder": "player",
+        "subject": "char_refrigeration_chief_tech",
+        "basis": "你捏紧{char_refrigeration_chief_tech.name}滑落的氨气警报阈值篡改固件卡。"
+      },
+      "hook_ids": [],
+      "start_minute": 1370,
       "tags": [
         "crime",
         "workplace_power"
       ]
     },
     {
-      "id": "p_ventilation_shaft_shutter_hinge_snap",
-      "title": "排气百叶窗合页锈死变形阻断脱身",
-      "source": "accident",
+      "id": "p_cold_chain_mortgage_default",
+      "title": "冻仓天价违约与黑钱清盘裁定",
+      "source": "money",
       "flags": [
-        "timed"
+        "timed",
+        "leverage"
       ],
       "location_ids": [
-        "loc_meat_locker_main_aisle"
+        "loc_port_dispatch_checkpost",
+        "loc_loading_dock_airlock"
       ],
-      "trigger": "排风口铸铁合页长期受潮冷凝锈蚀，手电攻击头卡入后受力不均，合页弯角处出现粗糙塑性变形卡死在导轨中。",
-      "objective": "调整力矩方向彻底崩断锈死合页的固定销钉。",
-      "choice": "冒险使用全身自重悬空挂在手电筒身上猛压，还是寻找备用垫铁作为第二支点。",
+      "trigger": "夜航大副鸣笛催装货，天价违约金与洗钱截胡款亏损即将到期强行扣仓清盘。",
+      "objective": "用芯片密匙或股权折让买断违约封条并在天亮前放行冻柜。",
+      "choice": "死扛正统合同坐看封库破产，还是交出暗格赃款和身家密匙抵债？",
       "immediate": {
-        "text": "刺耳的金属扭曲尖叫声在头顶响起，合页铁片凹折成九十度死死卡入框边。",
-        "minutes": 6
+        "text": "裁定封条就捏在清盘人或把头手上，船潮时间一分一秒划过。",
+        "minutes": 4
       },
       "near": {
-        "text": "百叶窗只敞开一道拳头宽的冷气风口，不足以容纳成年人钻出。",
-        "deadline_minutes": 18
+        "text": "六分钟敲不拢平账协议，违约清算兼码头水手强闯仓区同时爆出。",
+        "deadline_minutes": 6
       },
       "far": {
-        "trigger": "销钉扭曲咬死在混凝土预埋槽内",
-        "consequence": "合页彻底焊死在钢框内造成结构闭锁，排气窗逃生通道废弃。",
+        "trigger": "冻库强制查封兼黑道清门户",
+        "consequence": "资产清零破产入狱，失窃芯片涉案人遭跨港追杀绝无活口。",
         "due_days": 1
       },
       "exits": [
         {
-          "option": "借手电尾部硬质挂绳穿过销钉反向拧成绞盘强行别断卡轴",
-          "cost": "高强度伞绳勒破防寒手套造成手腕大面积擦伤勒痕。"
+          "option": "照常规流程冻结全区资产等天亮联合清查赔钱",
+          "cost": "直接面临巨额破产追偿及评估违规刑事问责"
         },
         {
-          "option": "用冷钢撬棍垫在手电头部下方构成二级双杠杆同步下压",
-          "cost": "两名作业人员手臂肌肉极度酸痛脱力。"
+          "option": "密室里签署资产免检折让单并用私有筹码填补两成私抽亏空",
+          "cost": "往后身家利益与个人自由全归新东家捏死"
         }
       ],
-      "leverage": null,
+      "leverage": {
+        "holder": "char_offshore_syndicate_envoy",
+        "subject": "player",
+        "basis": "{char_offshore_syndicate_envoy.name}手握远洋船东冻结港仓黑金命脉与处决权。"
+      },
       "hook_ids": [],
-      "start_minute": 1405,
+      "start_minute": 1372,
       "tags": [
-        "disaster",
-        "workplace"
+        "crime",
+        "workplace_power"
       ]
     }
   ],
   "hooks": [
     {
-      "id": "hook_door_slams_wheel_lock_spins",
+      "id": "hk_detective_coat_share_approach",
       "kind": "approach",
-      "slot": "undercover_detective_lin_xi",
+      "slot": "char_undercover_detective",
       "location_ids": [
-        "loc_meat_locker_main_aisle"
+        "loc_freezing_meat_vault",
+        "loc_ammonia_valve_alcove"
       ],
-      "text": "{undercover_detective_lin_xi.name}快步退至通道正中，手电光打在死锁的转轮上：转轮已被从外向内拧死了，先屏住呼吸，跟我往高处看。"
+      "text": "白雾里你掀衣裹住发颤的{char_undercover_detective.name}，掌心却隔布恰好按实{char_undercover_detective.ta}左胸硬角：“心口里头是什么硬家伙？”"
     },
     {
-      "id": "hook_detective_check_frost_pipe",
+      "id": "hk_detective_heater_peel_approach",
       "kind": "approach",
-      "slot": "undercover_detective_lin_xi",
+      "slot": "char_undercover_detective",
       "location_ids": [
-        "loc_meat_locker_main_aisle"
+        "loc_night_duty_heater_locker_room"
       ],
-      "text": "{undercover_detective_lin_xi.name}指尖轻抹排管白霜，仰头凝视百叶窗：手电攻击头是高硬度齿纹，只要垫平支点就能把合页挑断。"
+      "text": "反插死暖风室门闩，你扯松{char_undercover_detective.name}领口拉链：“不把里面湿衬脱开烘干，这身警徽我先替你收好？”"
     },
     {
-      "id": "hook_ammonia_hiss_fumes_spread",
-      "kind": "approach",
-      "slot": "undercover_detective_lin_xi",
-      "location_ids": [
-        "loc_meat_locker_main_aisle"
-      ],
-      "text": "{undercover_detective_lin_xi.name}拉紧冲锋衣领口掩住口鼻：排管接头在漏氨气，必须在十分钟内别开通风窗，靠过来踩着我的肩膀！"
-    },
-    {
-      "id": "hook_enforcer_demands_pocket_inspection",
-      "kind": "approach",
-      "slot": "smuggling_enforcer_zhao_kun",
-      "location_ids": [
-        "loc_meat_locker_main_aisle"
-      ],
-      "text": "{smuggling_enforcer_zhao_kun.name}握着铁撬棍大步跨近，哈着白气逼问：把衣兜里的手电交出来，别逼在这零下二十五度的地方动粗！"
-    },
-    {
-      "id": "hook_numb_fingers_slip_on_metal",
-      "kind": "approach",
-      "slot": "undercover_detective_lin_xi",
-      "location_ids": [
-        "loc_meat_locker_main_aisle"
-      ],
-      "text": "{undercover_detective_lin_xi.name}咬紧泛白的唇瓣，脸颊泛着急促红晕：手指冻僵了……过来，手把手帮我按住手电尾部！"
-    },
-    {
-      "id": "hook_sirens_echo_through_freezer_walls",
-      "kind": "approach",
-      "slot": "undercover_detective_lin_xi",
-      "location_ids": [
-        "loc_meat_locker_main_aisle"
-      ],
-      "text": "{undercover_detective_lin_xi.name}侧耳聆听墙外隐约的警笛，眼神坚定如刀：支援已经封锁码头，这是最后的机会，全力往下拉！"
-    },
-    {
-      "id": "hook_hinge_groans_metal_distorts",
-      "kind": "approach",
-      "slot": "undercover_detective_lin_xi",
-      "location_ids": [
-        "loc_meat_locker_main_aisle"
-      ],
-      "text": "{undercover_detective_lin_xi.name}将手电头部死死抵入合页裂隙：借体重下压，听我口令，三、二、一，压到底！"
-    },
-    {
-      "id": "hook_detective_adjust_torch_strap",
-      "kind": "approach",
-      "slot": "undercover_detective_lin_xi",
-      "location_ids": [
-        "loc_meat_locker_main_aisle"
-      ],
-      "text": "{undercover_detective_lin_xi.name}把手电伞绳紧紧系在腕骨上：防滑绳扣死了，就算手脱力工具也不会掉，扶稳身旁的肉架横梁。"
-    },
-    {
-      "id": "hook_customs_check_seal_lock",
-      "kind": "approach",
-      "slot": "customs_veteran_lao_qian",
-      "location_ids": [
-        "loc_cold_chain_sorting_platform"
-      ],
-      "text": "{customs_veteran_lao_qian.name}敲击着紧闭的冷库铁门，隔着厚钢板高喊：里面的同志听着，排气百叶窗左侧有检修踏板，顺着风声爬！"
-    },
-    {
-      "id": "hook_wheel_lock_grease_inspection",
-      "kind": "approach",
-      "slot": "mechanic_liu_gong",
-      "location_ids": [
-        "loc_refrigeration_pump_hub"
-      ],
-      "text": "{mechanic_liu_gong.name}手提重型管钳冲出机房：已手动切断氨气高压供液泵，库里压力在降，千万别拿铁器蛮砸承重管！"
-    },
-    {
-      "id": "hook_accountant_offer_ginger_tea",
-      "kind": "request",
-      "slot": "logistics_accountant_su_man",
-      "location_ids": [
-        "loc_cold_chain_sorting_platform"
-      ],
-      "text": "{logistics_accountant_su_man.name}捧着发烫的茶杯递向装卸工人，声线微抖：求求快想想办法开门，报关单的底联还在里面……"
-    },
-    {
-      "id": "hook_mechanic_check_gauge_reading",
-      "kind": "request",
-      "slot": "mechanic_liu_gong",
-      "location_ids": [
-        "loc_refrigeration_pump_hub"
-      ],
-      "text": "{mechanic_liu_gong.name}紧盯压缩机油压表高声呼叫：调度长，立刻把二号风机转速打到峰值，替主通道抽出冷气！"
-    },
-    {
-      "id": "hook_enforcer_drops_crowbar_shivers",
-      "kind": "request",
-      "slot": "smuggling_enforcer_zhao_kun",
-      "location_ids": [
-        "loc_meat_locker_main_aisle"
-      ],
-      "text": "{smuggling_enforcer_zhao_kun.name}冻得上下牙关乱撞，将撬棍递上前：女警官……认栽，撬棍给你，带爬出去自首！"
-    },
-    {
-      "id": "hook_observe_frost_forming_on_brows",
+      "id": "hk_detective_louver_pry_observe",
       "kind": "observe",
-      "slot": "undercover_detective_lin_xi",
+      "slot": "char_undercover_detective",
       "location_ids": [
-        "loc_meat_locker_main_aisle"
+        "loc_freezing_meat_vault"
       ],
-      "text": "{undercover_detective_lin_xi.name}立在白雾弥漫的冷库高架上，眉梢挂着碎冰，面颊在电筒冷光下显出惊人的刚毅与从容。"
+      "text": "{char_undercover_detective.name}抡钨钢手电猛砸百叶窗锈轴，震开一寸内缝后微弱红点竟在布袋底闪了一下。"
     },
     {
-      "id": "hook_observe_ammonia_cloud_creeping",
+      "id": "hk_boss_coat_envelop_approach",
+      "kind": "approach",
+      "slot": "char_smuggler_dock_boss",
+      "location_ids": [
+        "loc_freezing_meat_vault",
+        "loc_ammonia_valve_alcove"
+      ],
+      "text": "{char_smuggler_dock_boss.name}甩开狼领大氅逼近，露指手套直接按实你腰际试探：“冷库规矩，先抱紧捂暖顺便敞兜过手。”"
+    },
+    {
+      "id": "hk_boss_chip_ledger_request",
+      "kind": "request",
+      "slot": "char_smuggler_dock_boss",
+      "location_ids": [
+        "loc_loading_dock_airlock",
+        "loc_night_duty_heater_locker_room"
+      ],
+      "text": "{char_smuggler_dock_boss.name}拎冷钢撬棍低笑：“暖气和拖车有我份，替我盯死藏硬物的刺头，账随你分。”"
+    },
+    {
+      "id": "hk_inspector_ice_catch_approach",
+      "kind": "approach",
+      "slot": "char_customs_corrupt_inspector",
+      "location_ids": [
+        "loc_loading_dock_airlock",
+        "loc_freezing_meat_vault"
+      ],
+      "text": "踩滑瞬间你兜腰捞住{char_customs_corrupt_inspector.name}，顺手摸走袋底三张汇票：“口岸冷官脚滑，回执倒先替你接稳了。”"
+    },
+    {
+      "id": "hk_inspector_mirror_coat_approach",
+      "kind": "approach",
+      "slot": "char_customs_corrupt_inspector",
+      "location_ids": [
+        "loc_night_duty_heater_locker_room"
+      ],
+      "text": "暖风机轰鸣中你把失了官威的{char_customs_corrupt_inspector.name}抵向雾镜，解开排扣：“拿回境外汇票前，先脱大衣聊免检。”"
+    },
+    {
+      "id": "hk_tech_valve_shoulder_approach",
+      "kind": "approach",
+      "slot": "char_refrigeration_chief_tech",
+      "location_ids": [
+        "loc_ammonia_valve_alcove",
+        "loc_freezing_meat_vault"
+      ],
+      "text": "{char_refrigeration_chief_tech.name}贴氨阀架喘着递来湿布，雾镜滑落：“快挤进来共用湿布……别叫旁人看见我包里篡改固件。”"
+    },
+    {
+      "id": "hk_tech_firmware_plea_request",
+      "kind": "request",
+      "slot": "char_refrigeration_chief_tech",
+      "location_ids": [
+        "loc_ammonia_valve_alcove",
+        "loc_night_duty_heater_locker_room"
+      ],
+      "text": "{char_refrigeration_chief_tech.name}拽住袖角讨好：“阀控密码都写手里了……帮我压死那块阈值卡，条件任开。”"
+    },
+    {
+      "id": "hk_supervisor_ginger_tea_approach",
+      "kind": "approach",
+      "slot": "char_cold_chain_supervisor",
+      "location_ids": [
+        "loc_freezing_meat_vault",
+        "loc_port_dispatch_checkpost"
+      ],
+      "text": "借接热姜茶你反攥住{char_cold_chain_supervisor.name}裤袋：“热茶够烫——里头那本夜班私分黑账顺便交出来？”"
+    },
+    {
+      "id": "hk_supervisor_ledger_slip_observe",
       "kind": "observe",
-      "slot": "undercover_detective_lin_xi",
+      "slot": "char_cold_chain_supervisor",
       "location_ids": [
-        "loc_meat_locker_main_aisle"
+        "loc_port_dispatch_checkpost",
+        "loc_freezing_meat_vault"
       ],
-      "text": "零下二十五度的冷风从百叶窗裂口狂涌而入，悬挂在半空的排管霜花飞溅，映照着两人咬牙合力破拆的挺拔身影。"
+      "text": "茶柜昏光下{char_cold_chain_supervisor.name}哈腰弯腿时，裤袋露出半角印着暗箱私分单的手写旧本。"
     },
     {
-      "id": "hook_linxi_glove_share",
+      "id": "hk_driver_crowbar_heat_approach",
       "kind": "approach",
-      "slot": "undercover_detective_lin_xi",
-      "location_ids": [],
-      "text": "{npc.name}摘下一只厚手套递过来，自己把冻红的手指揣进冲锋衣袖口：戴上，你的手比我还凉。"
-    },
-    {
-      "id": "hook_qian_tea_flask",
-      "kind": "approach",
-      "slot": "customs_veteran_lao_qian",
-      "location_ids": [],
-      "text": "{npc.name}拧开一只旧军用水壶，倒出半杯冒热气的浓茶推过来：喝一口，夜还长着呢。"
-    },
-    {
-      "id": "hook_liu_gauge_explain",
-      "kind": "approach",
-      "slot": "mechanic_liu_gong",
-      "location_ids": [],
-      "text": "{npc.name}拎着管钳走过来，用钳尖点了点墙上的压力表：看这根针，往右偏一格，这库里就要出事。"
-    },
-    {
-      "id": "hook_suman_ledger_whisper",
-      "kind": "approach",
-      "slot": "logistics_accountant_su_man",
-      "location_ids": [],
-      "text": "{npc.name}抱着账夹凑到旁边，假装核对单据，声音压得极低：有件事……我只敢跟你一个人说。"
-    },
-    {
-      "id": "hook_ma_cigarette_offer",
-      "kind": "approach",
-      "slot": "corrupt_inspector_ma",
-      "location_ids": [],
-      "text": "{npc.name}搓着手凑过来，抖出一支烟递到跟前，赔着笑脸：天冷，抽一根？今晚的事，咱们好商量。"
-    },
-    {
-      "id": "hook_linxi_locker_room",
-      "kind": "approach",
-      "slot": "undercover_detective_lin_xi",
+      "slot": "char_freight_driver_courier",
       "location_ids": [
-        "loc_night_shift_locker_room"
+        "loc_loading_dock_airlock",
+        "loc_night_duty_heater_locker_room"
       ],
-      "text": "{npc.name}拉开更衣室的门，朝人偏了偏头：暖风机修好了。……进来，顺便把口供对一遍。"
+      "text": "{char_freight_driver_courier.name}扛撬棍敞领笑近：“抖啥？蹭近分口热气，把外头那两盒芯片尾款一齐算清。”"
+    },
+    {
+      "id": "hk_driver_chip_ping_observe",
+      "kind": "observe",
+      "slot": "char_freight_driver_courier",
+      "location_ids": [
+        "loc_loading_dock_airlock",
+        "loc_port_dispatch_checkpost"
+      ],
+      "text": "{char_freight_driver_courier.name}重卡备胎暗格闪出两道防盗红点，正对得上冷库少掉的两盒芯片编号。"
+    },
+    {
+      "id": "hk_envoy_bag_snatch_approach",
+      "kind": "approach",
+      "slot": "char_offshore_syndicate_envoy",
+      "location_ids": [
+        "loc_night_duty_heater_locker_room",
+        "loc_loading_dock_airlock"
+      ],
+      "text": "门栓锁死后你夺走{char_offshore_syndicate_envoy.name}手包，反拧{char_offshore_syndicate_envoy.ta}白皙手腕压向暖风柜：“特使外援断了，脱了湿狐领聊聊两成回扣账？”"
+    },
+    {
+      "id": "hk_envoy_tea_offer_approach",
+      "kind": "approach",
+      "slot": "char_offshore_syndicate_envoy",
+      "location_ids": [
+        "loc_night_duty_heater_locker_room"
+      ],
+      "text": "把沸滚热茶抵到高冷的{char_offshore_syndicate_envoy.name}唇边：“想拿回洗钱总名录，拿船东暗令换这口暖意。”"
     }
   ],
   "twists": [
     {
-      "id": "tw_frozen_chip_manifest_found",
-      "category": "信息",
-      "requires": [
-        "undercover_detective_lin_xi"
-      ],
-      "text": "{undercover_detective_lin_xi.name}在百叶窗框架深处摸出了被走私头目藏匿的微型芯片离线加密储存器。"
-    },
-    {
-      "id": "tw_customs_swat_surrounds_dock",
-      "category": "人事",
-      "requires": [
-        "customs_veteran_lao_qian"
-      ],
-      "text": "{customs_veteran_lao_qian.name}引带全副武装的海关特警突击组破开分拣台卷帘门，彻底封死外围逃窜路线。"
-    },
-    {
-      "id": "tw_backup_oxygen_pack_unsealed",
-      "category": "资源",
-      "requires": [
-        "mechanic_liu_gong"
-      ],
-      "text": "{mechanic_liu_gong.name}从机房备用安全柜中翻出了两套未开封的自给式正压空气呼吸器，架在通风口递入。"
-    },
-    {
-      "id": "tw_port_emergency_lockdown_enforced",
-      "category": "制度",
-      "requires": [
-        "customs_veteran_lao_qian"
-      ],
-      "text": "{customs_veteran_lao_qian.name}签署了保税港区一级反恐与缉私联合封港令，全区一切船只与冷藏车严禁出卡。"
-    },
-    {
-      "id": "tw_ammonia_safety_valve_timer_ticks",
-      "category": "时限",
-      "requires": [
-        "mechanic_liu_gong"
-      ],
-      "text": "{mechanic_liu_gong.name}拉响了机房泄压倒计时警报，宣布八分钟后必须强行对整条主管路注水清洗。"
-    },
-    {
-      "id": "tw_smuggler_confesses_under_hypothermia",
-      "category": "关系",
-      "requires": [
-        "undercover_detective_lin_xi",
-        "smuggling_enforcer_zhao_kun"
-      ],
-      "text": "{smuggling_enforcer_zhao_kun.name}在失温崩溃边缘跪倒在冻肉旁，主动交出境外上线联系方式并恳求{undercover_detective_lin_xi.name}带其爬出风口。"
-    },
-    {
-      "id": "tw_exhaust_shutter_frame_collapses_free",
+      "id": "t_ammonia_pipe_burst_mist",
       "category": "意外",
       "requires": [
-        "undercover_detective_lin_xi"
+        "char_refrigeration_chief_tech"
       ],
-      "text": "百叶窗生锈的重型固定合页在手电攻击头的强大反向杠杆力矩下轰然崩断，整幅铸铁风口彻底洞开露出生路。"
+      "text": "撬窗撞击震破主冷排弯头，刺鼻氨气瞬间吞没死角，逼迫{char_refrigeration_chief_tech.name}与身边人挤进一叠纸箱下共蒙一块防氨湿布贴胸换气。"
+    },
+    {
+      "id": "t_lining_seam_split_badge",
+      "category": "信息",
+      "requires": [
+        "char_undercover_detective"
+      ],
+      "text": "高强度顶撬动作扯裂{char_undercover_detective.name}防寒服左胸两寸缝线，金属警徽角连同微距记录器微光在众人眼前倏然闪露。"
+    },
+    {
+      "id": "t_tea_thermos_and_spare_crowbar",
+      "category": "资源",
+      "requires": [
+        "char_cold_chain_supervisor"
+      ],
+      "text": "{char_cold_chain_supervisor.name}被迫开启的值班冷柜夹层竟坠出滚烫热姜茶、未开封军用热敷贴与全库应急备撬棍，彻底扭转寒热话语权。"
+    },
+    {
+      "id": "t_inspector_offshore_green_channel",
+      "category": "制度",
+      "requires": [
+        "char_customs_corrupt_inspector"
+      ],
+      "text": "港务对讲突传三秒杂音公告：全区冻结查封电子令即时生效，唯有拿到{char_customs_corrupt_inspector.name}加盖的绿色免检密印方能开闸放柜。"
+    },
+    {
+      "id": "t_diesel_backup_power_cut",
+      "category": "时限",
+      "requires": [
+        "pressure"
+      ],
+      "text": "值班室备电柴油告急触发主库紧急降光红闪，冷库风机停转将即刻引发温度暴跌断绝生路，必须立即撤出主库抢进暖风室！"
+    },
+    {
+      "id": "t_envoy_offshore_storm_arrival",
+      "category": "人事",
+      "requires": [
+        "char_offshore_syndicate_envoy"
+      ],
+      "text": "风雪声中短靴重踏逼近气闸，{char_offshore_syndicate_envoy.name}裹狐领大衣手持远洋船东清账暗令孤身闯入，一举颠覆场内原本互斗格局。"
+    },
+    {
+      "id": "t_driver_missing_chips_ping",
+      "category": "关系",
+      "requires": [
+        "char_smuggler_dock_boss",
+        "char_freight_driver_courier"
+      ],
+      "text": "{char_freight_driver_courier.name}备胎暗格两盒芯片突响防盗低鸣，撞破黑吃黑铁证的{char_smuggler_dock_boss.name}瞬间暴怒压腕翻脸改写联盟。"
+    },
+    {
+      "id": "t_heater_melt_lock_freeze_jam",
+      "category": "意外",
+      "requires": [
+        "pressure"
+      ],
+      "text": "滚入夜班暖风更衣室剥脱湿衣之际，倒灌暴雪水汽将铁门外栓二次冻死锁牢，轰鸣暖风里两方褪衣过半彻底困死孤室。"
     }
+  ],
+  "forbidden_terms": [
+    "修仙",
+    "魔法",
+    "斗气",
+    "剑修",
+    "太虚",
+    "青楼",
+    "奉天承运",
+    "掌门",
+    "灵气",
+    "仙丹"
   ],
   "content_tags": [
     "intimate",
-    "violence",
-    "bodily_harm",
     "crime",
-    "workplace",
-    "disaster"
+    "coercion_theme",
+    "workplace_power",
+    "humiliation",
+    "bodily_harm"
   ],
   "status": "released",
-  "notes": "按原稿加入，保留现代滨海保税港区、零下二十五度肉联厂冷库与卧底女警的骨架。改动：写死的人名改为身份称呼；婴儿肥大多换成了其余外貌描写，不再写进险情与钩子；走私头目对女警的亲密前提原稿写成对方失去反抗能力，改为脱险后双方清醒；人物组合按权力结构放开玩家身份，加了四个不限地点的靠近型钩子；新增一个脱险后更衣室里替女警暖手的亲密日常。"
+  "notes": ""
 }
