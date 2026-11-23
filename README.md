@@ -26,7 +26,7 @@
 
 <a id="世界"></a>
 <p align="center">
-  <img src=".github/readme-lofi/world-library.svg?v=223" width="100%" alt="内置世界库：跨时代独立世界框架和一万五千余项素材。世界分类展示：17 盒录像带封面朝外排成两排，一类一盒：宫廷与江湖、仙侠与志怪、和风与神社、清末民国、欧陆古典、邻里与屋檐下、百工与夜铺、学府与书斋、黑道与豪门、职场与律政、谍战与战地、舞台与镜头、赛场与博弈、绝境与重工、科幻与末世、圣堂与魔裔、王都与剑魔；每盒顶上写着这一类有几个世界，封面是这一类的小夜景，底下贴着分类名；全部 211 个世界已开放，整面录像带墙就在下方。下方磁带架写着一万五千余项素材：1090+ 地点、1320+ NPC 角色、1020+ 玩家身份、2050+ 人物组合、890+ 张力引擎、1530+ 日常活动、1320+ 压力事件、3090+ 开场钩子、1650+ 中期转折、1750+ 规矩与风俗。">
+  <img src=".github/readme-lofi/world-library.svg?v=225" width="100%" alt="内置世界库：跨时代独立世界框架，开局即入戏。世界分类展示：17 盒录像带封面朝外排成两排，一类一盒：宫廷与江湖、仙侠与志怪、和风与神社、清末民国、欧陆古典、邻里与屋檐下、百工与夜铺、学府与书斋、黑道与豪门、职场与律政、谍战与战地、舞台与镜头、赛场与博弈、绝境与重工、科幻与末世、圣堂与魔裔、王都与剑魔；全部 211 个世界已开放，整面录像带墙就在下方。下方紧凑数据面板展示 15,753 项独立叙事素材并按数量降序排列分段像素条：3090+ 开场钩子、2050+ 人物组合、1750+ 规矩与风俗、1650+ 中期转折、1530+ 日常活动、1320+ NPC 角色、1320+ 压力事件、1090+ 地点、1020+ 玩家身份、890+ 张力引擎。">
 </p>
 
 <br>
@@ -37,7 +37,7 @@
 图里没有想要的？直接喊“自定义世界”，说你想去哪年哪地，当场给你现造一个。
 
 <p align="center">
-  <img src=".github/readme-lofi/worlds.svg?v=224" width="100%" alt="录像带墙：211 盒录像带平放叠在一家深夜租碟店的胡桃木货架上，侧脊朝外印着世界名，按题材分为 17 栏，排成四层货架，每层一枚铜铭牌：东方与古典（宫廷与江湖、仙侠与志怪、和风与神社、清末民国），西式与年代（欧陆古典、邻里与屋檐下、百工与夜铺、学府与书斋），都市与暗线（黑道与豪门、职场与律政、谍战与战地、舞台与镜头），幻想与绝境（赛场与博弈、绝境与重工、科幻与末世、圣堂与魔裔、王都与剑魔）；每栏标着世界数，八盒推荐片被抽出半截、亮着金色小灯，全部已开放，可直接开局。">
+  <img src=".github/readme-lofi/worlds.svg?v=225" width="100%" alt="录像带墙：211 盒录像带平放叠在一家深夜租碟店的胡桃木货架上，侧脊朝外印着世界名，按题材分为 17 栏，排成四层货架，每层一枚铜铭牌：东方与古典（宫廷与江湖、仙侠与志怪、和风与神社、清末民国），西式与年代（欧陆古典、邻里与屋檐下、百工与夜铺、学府与书斋），都市与暗线（黑道与豪门、职场与律政、谍战与战地、舞台与镜头），幻想与绝境（赛场与博弈、绝境与重工、科幻与末世、圣堂与魔裔、王都与剑魔）；每栏标着世界数，八盒推荐片被抽出半截、亮着金色小灯，全部已开放，可直接开局。">
 </p>
 
 <br>
@@ -57,7 +57,7 @@
 
 <a id="实录"></a>
 <p align="center">
-  <img src=".github/readme-lofi/section-proof.svg" width="100%" alt="体验切片：真实会话交付实录">
+  <img src=".github/readme-lofi/section-proof.svg?v=225" width="100%" alt="体验切片：真实会话交付实录">
 </p>
 
 **幕末京都 · 压力模式。** 你是寄食道场的剑士，旧通行手形刚被番屋扣下，离上报奉行所只剩十一分钟；偏偏你刚撞破冷峻女师范代**石田初音**衣袖下私藏的比试战帖与肋下旧伤。柜台旁，脱藩女浪人**秋山琴音**抱臂看戏。
@@ -106,7 +106,7 @@
 <br>
 
 <p align="center">
-  <img src=".github/readme-lofi/section-why.svg" width="100%" alt="为什么不会崩盘：模型写故事，本地引擎守事实">
+  <img src=".github/readme-lofi/section-why.svg?v=225" width="100%" alt="为什么不会崩盘：模型写故事，本地引擎守事实">
 </p>
 
 | | 普通 AI 常见表现 | Adult Tension |
@@ -123,7 +123,7 @@
 
 <a id="开始"></a>
 <p align="center">
-  <img src=".github/readme-lofi/section-start.svg" width="100%" alt="怎么开始：不用记语法，直接说大白话">
+  <img src=".github/readme-lofi/section-start.svg?v=225" width="100%" alt="怎么开始：不用记语法，直接说大白话">
 </p>
 
 **开一局**
@@ -172,7 +172,7 @@
 
 <a id="安装"></a>
 <p align="center">
-  <img src=".github/readme-lofi/section-install.svg" width="100%" alt="安装：只需交给 AI 操作，原生 SKILL">
+  <img src=".github/readme-lofi/section-install.svg?v=225" width="100%" alt="安装：只需交给 AI 操作，原生 SKILL">
 </p>
 
 不需要 `pip install`，不需要设环境变量，也不需要任何 API Key。
@@ -260,7 +260,7 @@ python tools/validate_skill.py skill/adult-tension
 <br>
 
 <p align="center">
-  <img src=".github/readme-lofi/architecture.svg?v=223" width="100%" alt="SKILL 架构：无需理会，当正常 SKILL 使用就行。玩家对 Agent 宿主说话，宿主按 SKILL.md 用 JSON 调用本地运行时；运行时分 adapters/cli、application、content、projections、persistence、domain 六层，存档写进用户数据目录里的 SQLite；世界源文件由 tools 编译成只读世界包。">
+  <img src=".github/readme-lofi/architecture.svg?v=225" width="100%" alt="SKILL 架构：无需理会，当正常 SKILL 使用就行。玩家对 Agent 宿主说话，宿主按 SKILL.md 用 JSON 调用本地运行时；运行时分 adapters/cli、application、content、projections、persistence、domain 六层，存档写进用户数据目录里的 SQLite；世界源文件由 tools 编译成只读世界包。">
 </p>
 
 <br>

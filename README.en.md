@@ -30,7 +30,7 @@ Supports Claude Code · Codex · OpenCode · DSH &amp; more<br>
 
 <a id="worlds"></a>
 <p align="center">
-  <img src=".github/readme-lofi/world-library.svg?v=223" width="100%" alt="Built-in world library: standalone world frames across eras and over fifteen thousand story materials. The genres: seventeen videotapes face-out in two rows, one per genre (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic, classical Europe, neighbours under one roof, trades and night shops, campus and study, gangs and old money, office and law, spies and the front, stage and screen, arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades), each with its world count on top, a small night scene for the genre and the genre name below; all 211 worlds are open, and the whole tape wall is just below. A cassette rack below lists over fifteen thousand materials: 1090+ places, 1320+ NPCs, 1020+ player identities, 2050+ character pairings, 890+ tension engines, 1530+ daily activities, 1320+ pressure events, 3090+ opening hooks, 1650+ mid-story turns, 1750+ rules and customs.">
+  <img src=".github/readme-lofi/world-library.svg?v=225" width="100%" alt="Built-in world library: standalone world frames across eras, ready to drop in. The genres: seventeen videotapes face-out in two rows, one per genre (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic, classical Europe, neighbours under one roof, trades and night shops, campus and study, gangs and old money, office and law, spies and the front, stage and screen, arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades); all 211 worlds are open, and the full tape wall sits right below. A compact stat panel underneath highlights 15,753 narrative building blocks with descending segmented pixel bars: 3090+ opening hooks, 2050+ character pairings, 1750+ rules and customs, 1650+ mid-story turns, 1530+ daily activities, 1320+ NPCs, 1320+ pressure events, 1090+ places, 1020+ player identities, 890+ tension engines.">
 </p>
 
 <br>
@@ -41,7 +41,7 @@ Every world is open. Pick one and play.
 Don't see what you want? Just say "custom world" (`自定义世界`), name the year and the place, and one is made for you on the spot.
 
 <p align="center">
-  <img src=".github/readme-lofi/worlds.svg?v=224" width="100%" alt="The tape wall: 211 videotapes lying flat on the walnut shelves of a late-night rental store, spines out with the world names, in seventeen genre columns on four shelves, each shelf with a brass plaque: East and old times (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic), West and the decades (classical Europe, neighbours under one roof, trades and night shops, campus and study), the city's dark side (gangs and old money, office and law, spies and the front, stage and screen), fantasy and the edge (arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades); each column labelled with its world count, eight staff picks pulled halfway out under a small gold light; all open, ready to start.">
+  <img src=".github/readme-lofi/worlds.svg?v=225" width="100%" alt="The tape wall: 211 videotapes lying flat on the walnut shelves of a late-night rental store, spines out with the world names, in seventeen genre columns on four shelves, each shelf with a brass plaque: East and old times (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic), West and the decades (classical Europe, neighbours under one roof, trades and night shops, campus and study), the city's dark side (gangs and old money, office and law, spies and the front, stage and screen), fantasy and the edge (arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades); each column labelled with its world count, eight staff picks pulled halfway out under a small gold light; all open, ready to start.">
 </p>
 
 <br>
@@ -61,7 +61,7 @@ If Adult Tension brought you excitement, inspiration, or a memorable run, consid
 
 <a id="proof"></a>
 <p align="center">
-  <img src=".github/readme-lofi/section-proof.svg" width="100%" alt="A slice of play: a record of a real session">
+  <img src=".github/readme-lofi/section-proof.svg?v=225" width="100%" alt="A slice of play: a record of a real session">
 </p>
 
 **Bakumatsu Kyoto · Pressure mode.** You're a live-in swordsman at a Kyoto dojo. Your old travel pass was just confiscated at the guardhouse with eleven minutes before it goes to the magistrate—and you've just spotted the secret duel challenge and hidden rib wound under the stern 39-year-old acting head instructor **Ishida Hatsune**'s sleeve. By the counter, rogue ronin **Akiyama Kotone** watches with arms folded.
@@ -110,7 +110,7 @@ If Adult Tension brought you excitement, inspiration, or a memorable run, consid
 <br>
 
 <p align="center">
-  <img src=".github/readme-lofi/section-why.svg" width="100%" alt="Why it won't fall apart: the model writes the story, the local engine keeps the facts">
+  <img src=".github/readme-lofi/section-why.svg?v=225" width="100%" alt="Why it won't fall apart: the model writes the story, the local engine keeps the facts">
 </p>
 
 | | What a typical AI does | Adult Tension |
@@ -127,7 +127,7 @@ Three more details: names fit the era and region, so nothing breaks immersion; n
 
 <a id="start"></a>
 <p align="center">
-  <img src=".github/readme-lofi/section-start.svg" width="100%" alt="How to start: no syntax to learn, just talk plainly">
+  <img src=".github/readme-lofi/section-start.svg?v=225" width="100%" alt="How to start: no syntax to learn, just talk plainly">
 </p>
 
 **Start a game**
@@ -178,7 +178,7 @@ If another window changed the same save, you're asked whether to load the latest
 
 <a id="install"></a>
 <p align="center">
-  <img src=".github/readme-lofi/section-install.svg" width="100%" alt="Install: just hand it to the AI, native SKILL">
+  <img src=".github/readme-lofi/section-install.svg?v=225" width="100%" alt="Install: just hand it to the AI, native SKILL">
 </p>
 
 No `pip install`, no environment variables, no API key.
@@ -266,7 +266,7 @@ Adding a world: following `spec/CONTENT_BIBLE.md`, draft it with `tools/new_worl
 <br>
 
 <p align="center">
-  <img src=".github/readme-lofi/architecture.svg?v=223" width="100%" alt="Skill architecture: nothing to manage, just use it like any other skill. The player talks to the Agent host, which calls the local runtime with JSON as SKILL.md describes; the runtime has six layers (adapters/cli, application, content, projections, persistence, domain), saves go to SQLite in the user's data folder, and world sources are compiled by tools into read-only world packs.">
+  <img src=".github/readme-lofi/architecture.svg?v=225" width="100%" alt="Skill architecture: nothing to manage, just use it like any other skill. The player talks to the Agent host, which calls the local runtime with JSON as SKILL.md describes; the runtime has six layers (adapters/cli, application, content, projections, persistence, domain), saves go to SQLite in the user's data folder, and world sources are compiled by tools into read-only world packs.">
 </p>
 
 <br>
