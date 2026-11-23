@@ -302,7 +302,8 @@
       - 2026-11-24 全库 210 个世界包 v2.5 无限制版重构与全仓合流收官：
         - 世界包与内容编译：双窗口并行完成全部 210 个可改世界（窗口 A 114 + 窗口 B 96，不动夹具 `harbor_night_shift` 零触碰）v2.5 无限制版翻修，严格保留全员明确成年与原设情趣器具原名；补全 `domain/worldpack.py:SHOWN_AS_WRITTEN`（`pressures.title`、`locations.name`），扩充 `content-src/tags.json` 5 条核心标签描述，内容版本 `2026.10.30` → `2026.11.24`，完成 211 世界跨包交叉校验、`compile_content.py` 全量编译与 `gen_references.py` 刷新（全库累计 15,753 项素材）。
         - 全仓非世界包与规范同步：按 v2.5 无限制版决策同步修订 Skill 层（`SKILL.md` 控字节至 15,912 / 16,384 B、`agents/openai.yaml`、`references/*.md`、`examples/custom_world.json`）、Runtime 引擎层（放开 `turn.py` 对 `surface`/`negotiate` 亲密回应拦截、移出 `drunk` 失能列表、状态栏与新手指南去机械腔及术语统一）、`spec/` 顶层规范与门面文档（统一纯 LF）、E2E 评测体系（量表升级至版本 3、`machine_checks.py` 覆盖 `standby_cast`、剧本 06/08/14/15 校准及 `calibration/build.py` `flawed-4` 重写与 12 条校准记录重生成）。
-        - 视觉资产与仓库清理：刷新 `tools/readme_art/lofi_set.py` 十项素材计数（一万五千余项素材）与 `architecture.svg` 批量记账文案（`REGIONS` 211 项展板短名按 D91 维持与包内 `title` 一致，待后续统一联动改名），重绘 `.github/readme-lofi/*.svg`；经用户确认 `git rm` 清理 20 张零引用早期遗留静态 SVG（`assets/*.svg`、`.github/readme/*.svg`，保留 `assets/alipay-qr.jpg`），`ENVIRONMENT.md` 按原约定保持不动。
+        - 视觉资产与仓库清理：刷新 `tools/readme_art/lofi_set.py` 十项素材计数（一万五千余项素材）与 `architecture.svg` 批量记账文案，重绘 `.github/readme-lofi/*.svg`；经用户确认 `git rm` 清理 20 张零引用早期遗留静态 SVG（`assets/*.svg`、`.github/readme/*.svg`，保留 `assets/alipay-qr.jpg`），`ENVIRONMENT.md` 按原约定保持不动。
+        - 标题联动去机械化（内容版本 `2026.11.24` → `2026.11.24.1`）：对 12 个标题残留已废除 v1 机械/读秒意象、与 v2.5 设定脱节的世界执行“世界包 `title`（含 2 处 `gender_reason`）+ 24 个 `tests/e2e/playtests/` 首句 + `lofi_set.py:REGIONS`/`STARS` + `worlds.svg`”同步改名，保持展板名与包内标题 100% 一致（D91）：`被绑发带女会长`→`旧校地窖女会长`、`金库氧气倒计时`→`地下金库财阀千金`、`讲台急升的主席`→`礼堂侧幕的主席`、`悬在舷外的女警官`→`远海接舷女警官`、`千米滑坠缆车`→`酸雨天轨缆车`、`坠机边缘女总裁`→`雷暴专机女总裁`、`升降台下女指挥`→`金色大厅女指挥`、`悬停电梯的室友`→`退租夜的室友`、`华盖倾坠伏魔殿`→`神乐夜的伏魔殿`、`处决前两个时辰`→`黑石水牢女骑士`、`泵房爆裂夜`→`雪夜地热泵房`、`脱轨专列女上司`→`雪困专列女上司`。
 
 ## 待决事项（需要用户决定）
 
