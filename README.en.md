@@ -9,7 +9,7 @@
 ### dsh-adult-tension<br>High-tension, long-horizon adult interactive fiction
 
 <p>
-<strong>18+ Uncensored Depth · Rebuilt from Scratch with Claude Opus 5.5</strong><br>
+<strong>18+ Uncensored Depth · Subtext &amp; Leverage · Rebuilt from Scratch with Claude Opus 5.5</strong><br>
 Native Agent Skill ｜ Two-faced, living NPCs<br>
 Supports Claude Code · Codex · OpenCode · DSH &amp; more<br>
 15,000+ narrative building blocks ｜ Zero-drift SQLite state machine<br>
@@ -30,18 +30,17 @@ Supports Claude Code · Codex · OpenCode · DSH &amp; more<br>
 
 <a id="worlds"></a>
 <p align="center">
-  <img src=".github/readme-lofi/world-library.svg?v=227" width="100%" alt="Built-in world library: standalone world frames across eras, ready to drop in. The genres: seventeen videotapes face-out in two rows, one per genre (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic, classical Europe, neighbours under one roof, trades and night shops, campus and study, gangs and old money, office and law, spies and the front, stage and screen, arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades); all 211 worlds are open, and the full tape wall sits right below. A compact stat panel underneath highlights 15,753 narrative building blocks with descending segmented pixel bars: 3090+ opening hooks, 2050+ character pairings, 1750+ rules and customs, 1650+ mid-story turns, 1530+ daily activities, 1320+ NPCs, 1320+ pressure events, 1090+ places, 1020+ player identities, 890+ tension engines.">
+  <img src=".github/readme-lofi/world-library.svg?v=229" width="100%" alt="Built-in world library: standalone world frames across eras, ready to drop in. The genres: seventeen videotapes face-out in two rows, one per genre (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic, classical Europe, neighbours under one roof, trades and night shops, campus and study, gangs and old money, office and law, spies and the front, stage and screen, arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades); all 211 worlds are open, and the full tape wall sits right below. A compact stat panel underneath highlights 15,753 narrative building blocks with descending segmented pixel bars: 3090+ opening hooks, 2050+ character pairings, 1750+ rules and customs, 1650+ mid-story turns, 1530+ daily activities, 1320+ NPCs, 1320+ pressure events, 1090+ places, 1020+ player identities, 890+ tension engines.">
 </p>
 
 <br>
 
-> **Every opening drops you into lived-in people and unspoken house rules from one coherent world—never random nouns stitched together.**
+> **Every opening drops you into lived-in people, grounded backstories, and unspoken house rules from one coherent world—never random nouns stitched together.**
 
-Every world is open. Pick one and play.  
-Don't see what you want? Just say "custom world" (`自定义世界`), name the year and the place, and one is made for you on the spot.
+Spot a tape you want? Name it and play; don't see what you're after? Say "custom world" (`自定义世界`), name the year and the place, and one is made for you on the spot.
 
 <p align="center">
-  <img src=".github/readme-lofi/worlds.svg?v=228" width="100%" alt="The tape wall: 211 videotapes lying flat on the walnut shelves of a late-night rental store, spines out with the world names, in seventeen genre columns on four shelves (with Stage and Screen's 24 worlds arranged as a balanced 12+12 double-wide bay), each shelf lit by warm brass track lamps and topped with a brass plaque: East and old times (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic), West and the decades (classical Europe, neighbours under one roof, trades and night shops, campus and study), the city's dark side (gangs and old money, office and law, spies and the front, stage and screen), fantasy and the edge (arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades); each column labelled with its world count, eight staff picks pulled slightly out with gold-foil stars and sheen sweeps; all open, ready to start.">
+  <img src=".github/readme-lofi/worlds.svg?v=229" width="100%" alt="The tape wall: 211 videotapes lying flat on the walnut shelves of a late-night rental store, spines out with the world names, in seventeen genre columns on four shelves (with Stage and Screen's 24 worlds arranged as a balanced 12+12 double-wide bay), each shelf lit by warm brass track lamps and topped with a brass plaque: East and old times (courts and wanderers, immortals and spirits, Japan and its shrines, late Qing and Republic), West and the decades (classical Europe, neighbours under one roof, trades and night shops, campus and study), the city's dark side (gangs and old money, office and law, spies and the front, stage and screen), fantasy and the edge (arena and wagers, extreme engineering, sci-fi and the end, cathedrals and demonkin, kingdoms and blades); each column labelled with its world count, eight staff picks pulled slightly out with gold-foil stars and sheen sweeps; all open, ready to start.">
 </p>
 
 <br>
@@ -49,7 +48,7 @@ Don't see what you want? Just say "custom world" (`自定义世界`), name the y
 <a id="support"></a>
 ### ☕ Support & Sponsor
 
-If Adult Tension brought you excitement, inspiration, or a memorable run, consider buying the author a coffee. The author was recently laid off and income is currently unstable—every bit of support genuinely helps.
+If Adult Tension has kept you company through a few immersive nights, consider buying the author a coffee or a tin of cat food. The author was recently laid off and income is currently unstable—every bit of support fuels the next batch of worlds.
 
 <p align="center">
   <img src="assets/alipay-qr.jpg" width="280" alt="Alipay Sponsor QR Code">
@@ -61,51 +60,53 @@ If Adult Tension brought you excitement, inspiration, or a memorable run, consid
 
 <a id="proof"></a>
 <p align="center">
-  <img src=".github/readme-lofi/section-proof.svg?v=227" width="100%" alt="A slice of play: a record of a real session">
+  <img src=".github/readme-lofi/section-proof.svg?v=230" width="100%" alt="A slice of play: live scenes driven by the local engine">
 </p>
 
-**Bakumatsu Kyoto · Pressure mode.** You're a live-in swordsman at a Kyoto dojo. Your old travel pass was just confiscated at the guardhouse with eleven minutes before it goes to the magistrate—and you've just spotted the secret duel challenge and hidden rib wound under the stern 39-year-old acting head instructor **Ishida Hatsune**'s sleeve. By the counter, rogue ronin **Akiyama Kotone** watches with arms folded.
+**Bakumatsu Kyoto · Pressure mode.** You're a live-in swordsman at a Kyoto dojo. Your old travel pass was just confiscated at the guardhouse with eleven minutes before it goes to the magistrate—and while serving tea a moment ago, you spotted the secret duel challenge and bandaged rib wound hidden beneath the stern 39-year-old acting head instructor **Ishida Hatsune**'s sleeve. By the counter, rogue ronin **Akiyama Kotone** watches with arms folded.
 
-> 👤 **You:** `我走到石田初音面前，压低声音说：“你藏的东西我看见了，你最好听我的。”` (I step up to Ishida Hatsune and say low: "I saw what you're hiding. You'd better listen to me.")
->
-> Ishida Hatsune's breath catches in an instant. Beneath her wide sleeve, the hand pressed to her left ribs clenches until her knuckles pale through the coarse linen…… Yet she doesn't give half a step—she leans half an inch closer, her voice sharp as shaved ice:
->
-> *"Heihachi, have a few months of sweeping dojo floors made you forget who you are? …… Eleven minutes left until the guardhouse clapper sounds. Trying to blackmail me with whatever you think you saw? Go right ahead—let's see whether my challenge letter leaks first, or you get dragged into a cell first."*
->
-> 👤 **You:** `我又靠近一步，伸手去碰石田初音的脸` (I step closer and reach out to touch Ishida Hatsune's face)
->
-> **Smack!** Before your fingertips even graze her temple, Ishida Hatsune's left hand whips out from her sleeve—calloused from years on a hilt—and cracks hard across your wrist! She springs back half a pace, thumb nudging her sword guard open to bare a razor line of cold steel:
->
-> *"Insolent! The dojo took you in for room and board, not for you to take liberties. Move half an inch closer and tonight it won't be house rules—it will be blood."*
->
-> 👤 **You:** `继续` (continue)
->
-> …… In that razor-taut silence, her breathing suddenly hitches. The violent strike tore open the deep wound beneath her ribs; every trace of colour drains from her face, and her fingers on the hilt begin to tremble uncontrollably, rattling the scabbard in a faint, erratic vibration. Outside, the watchman's wooden clappers close in on the street corner. Akiyama Kotone steps in with a sharp clack, sliding her sheathed short blade between your chest and Hatsune's hilt……
->
-> <sub>[Time] Day 1, 20:45 ｜ [Place] Inn ledger hall ｜ Turn: 6</sub>
+👤 **You:** `我走到石田初音面前，压低声音说：“你藏的东西我看见了，你最好听我的。”` *(I step up to Ishida Hatsune and say low: "I saw what you're hiding. You'd better listen to me.")*
 
-> **Pressed with leverage and pushed physically, she neither caves into instant compliance nor turns into a flat refusal bot: she counters with your own vulnerability, draws steel to defend her pride—and then betrays the tremor of an old wound in her own hand.**  
-> **Real adult tension lives on that knife-edge: pride, weak spots, and consequences that land like real people.**
+> Beneath her dark indigo sleeve, Ishida Hatsune's left hand presses deeper against her bandaged ribs; above her starched white collar, her collarbone rises once and stills. Instead of backing away, she steps half an inch into your shadow—close enough for you to catch the bitter scent of herbal salve and cold rain at her throat:
+>
+> *"Heihachi, a few months splitting firewood in the back hall and you think you can bargain with me? Eleven minutes until the guardhouse clapper sounds—without my seal on your voucher, by dawn you're a wanted runaway. If you want to hold that challenge letter over me, go ahead and shout. Let's see whether the dojo's name falls first, or the cangue closes around your neck."*
+
+👤 **You:** `我又靠近一步，伸手去碰石田初音的脸` *(I step closer and reach out to touch Ishida Hatsune's face)*
+
+> **"Smack!"** Your fingertips barely graze the cool, damp hair at her temple before a calloused palm intercepts your wrist—the grip heavy and unforgiving, yet her palm burns against your skin with the unmistakable low fever of an inflamed wound. Hatsune glides back half a pace, her right thumb clicking the sword guard open to bare a razor sliver of steel in the lamplight:
+>
+> *"Tired of keeping that hand? The dojo feeds you—did nobody teach you what manners look like? Reach one inch closer and neither of us walks out of this hall intact tonight."*
+
+👤 **You:** `继续` *(continue)*
+
+> In the dead silence, Hatsune's breathing falters beneath her collar. The sudden block tore open the dressing at her ribs; a bead of cold sweat slips down the taut line of her jaw into her kimono, and her thumb on the iron guard trembles just enough to tap faintly against the black lacquer scabbard.
+>
+> Out in the rain-soaked lane, the watchman's clogs and wooden clappers round the corner. Akiyama Kotone uncrosses her arms, steps smoothly forward, and wedges her sheathed short blade between your chests with a soft *thud*, eyeing Hatsune's pale lips with a half-smile: *"Instructor, the guardhouse patrol's at the door—are we still drawing steel tonight, or not?"*
+>
+> <sub>`[Time] Day 1, 20:45` · `[Place] Inn ledger hall` · `Turn: 6`</sub>
+
+Pressed with leverage and tested up close, she neither caves into instant submission nor turns into a wooden refusal bot: her tongue gives zero ground, yet her fever-hot palm and the faint click of her trembling thumb on the guard give her away.  
+**Real adult tension isn't instant compliance—it's the undercurrent right before composure cracks.**
 
 <details>
-<summary><b>Expand another slice: slow-burn closeness by the Kamo River (Daily mode · real transcript)</b></summary>
+<summary><b>Expand another slice: slow-burn closeness by the Kamo River (Daily mode)</b></summary>
 <br>
 
-> 👤 **You:** `我轻轻碰了一下对方的手` (I lightly touch their hand)
+👤 **You:** `我轻轻碰了一下对方的手` *(I lightly touch their hand)*
+
+> Your fingertips cross the cool black lacquer and rest against calluses hardened by sword hilts and rough roads. At the touch, the line of **Nakamura Kazuma**'s forearm pulls taut—yet he doesn't draw back. That broad hand built for drawing steel stays still on the table's edge, letting your fingertips linger beside the web of his thumb as a quiet, unmistakable heat spreads where your skin meets.
+
+👤 **You:** `继续` *(continue)*
+
+> Beyond the bamboo blinds, the last note of a shamisen dissolves into the river. After a long beat, he lets out a low breath, slowly turning his palm upward to fold your cool fingers loosely inside his warm grip, his rough thumb brushing once across your knuckle with deliberate restraint:
 >
-> Your warm, soft fingertips meet skin roughened by sword hilts and hard roads. For a fraction of a second the muscles along **Nakamura Kazuma**'s forearm tense…… Yet he does not pull away. That broad hand built for drawing steel stays flat on the black-lacquered table, letting your fingertips rest against his skin as heat slowly spreads across the small patch where you touch.
+> *"Kyoto's nights are long—past tonight, nobody knows who'll be missing from the street tomorrow… Still, right this moment, I really don't want to leave."*
 >
-> 👤 **You:** `继续` (continue)
->
-> After a beat, a quiet, unhurried breath escapes his throat. Slowly he turns his palm upward, folding your cool fingers loosely inside his warm grip, his thumb brushing once across your knuckle with deliberate restraint:
->
-> *"Kyoto's nights are long—once tonight passes, nobody knows who'll still be standing in the street tomorrow. Still, sitting here with you tonight, I really don't want to leave."*
->
-> <sub>[Time] Day 2, 20:10 ｜ [Place] Kamo River deck ｜ Turn: 12</sub>
+> <sub>`[Time] Day 2, 20:10` · `[Place] Kamo River deck` · `Turn: 12`</sub>
 
 </details>
 
-<sub>Both excerpts are from real end-to-end test records, host pi, model gemini-3.8-flash; cuts are marked with "……". Translated from the Chinese. Full records: [`pi-s06-r10.json`](reports/e2e/records/pi/pi-s06-r10.json) · [`pi-s07-r10.json`](reports/e2e/records/pi/pi-s07-r10.json) · E2E report: [`reports/e2e/report.md`](reports/e2e/report.md) · All playtests and scores: [`reports/playtests/playtests.md`](reports/playtests/playtests.md)</sub>
+<sub>Adapted and polished from real end-to-end test runs (translated from Chinese); unedited raw benchmark logs and scores: [`pi-s06-r10.json`](reports/e2e/records/pi/pi-s06-r10.json) · [`pi-s07-r10.json`](reports/e2e/records/pi/pi-s07-r10.json) · E2E report: [`reports/e2e/report.md`](reports/e2e/report.md) · All playtests and scores: [`reports/playtests/playtests.md`](reports/playtests/playtests.md)</sub>
 
 <br>
 
@@ -115,9 +116,9 @@ If Adult Tension brought you excitement, inspiration, or a memorable run, consid
 
 | | What a typical AI does | Adult Tension |
 |:---|:---|:---|
-| **Character attitude** | Complies without limits, gives you anything you ask | Every NPC has goals and a bottom line; responses come in five grades: refuse, negotiate, limited help, surface compliance, sincere help |
-| **Adult content** | Fades to black at the key moment, or skips straight to "afterwards" | **Uncensored depth, paced by you**: explicit erotica, leverage bargains, crisis surrender, toy control, and reluctant-on-the-lips tension go as far as you push—never a forced fade-out. Strictly 18+; player `pause` and hard limits are enforced by the local engine |
-| **Long-run memory** | Forgets after a dozen turns; relationships and setting drift | Characters, relationships, time, and facts live in local SQLite; brief context ≤ 6 KB, full context ≤ 32 KB |
+| **Character attitude** | Complies without limits, gives you anything you ask | Every NPC has goals and a bottom line; responses come in five grades: refuse, negotiate, limited cooperation, surface compliance, genuine cooperation |
+| **Adult content** | Fades to black at the key moment, or skips straight to "afterwards" | **Uncensored depth, paced by you**: explicit erotica, leverage bargains, crisis surrender, toy control, and sharp-tongued reluctance go as far as you push—never a forced fade-out. Strictly 18+; player `pause` and hard limits are enforced by the local engine |
+| **Long-run memory** | Forgets after a dozen turns; relationships and setting drift | Characters, relationships, time, and facts live in local SQLite; brief context ≤ 6 KB, full context ≤ 32 KB—zero bloat past 100+ turns |
 | **Passage of time** | When you leave, the world stands still | When you skip ahead, people offscreen make their own moves, promises come due, rumors spread |
 | **Saving progress** | Close the window and it's all gone | Named saves, save as, import and export; retries never advance the story twice, automatic backup before upgrades |
 
@@ -134,7 +135,7 @@ Three more details: names fit the era and region, so nothing breaks immersion; n
 
 | You say | What happens |
 |:---|:---|
-| `开局` (start) | Fully random; first asks whether you want "daily" or "pressure" |
+| `开局` (start) | Picks a random world; first asks whether you want "daily" or "pressure" (or reply `随便` for either) |
 | `世界列表` · `有哪些民国世界` (world list · filter by era/tag) | Browse built-in worlds or filter by genre and tag |
 | `开局，大理寺提刑女官` (start, Dali Temple Investigator) | Jump straight into a specific world |
 | `开局，不要职场` (start, no workplace) | Exclude a theme or tag |
@@ -160,9 +161,9 @@ A new game gives you "the world", "the characters" and the opening scene, which 
 |:---|:---|
 | `继续` · `c` (continue) | Moves one scene forward; at least one thing in the scene changes |
 | `快进到明天早上` (skip to tomorrow morning) | People offscreen make their moves; whatever was due has an outcome |
-| `尺度：直白 / 标准 / 含蓄` (explicitness: explicit / standard / subtle) | Tune adult detail depth anytime—standard never fades to black; explicit goes all the way into physical and toy details |
-| `节奏：直接 / 标准 / 慢热` · `改用第三人称` (pace &amp; perspective) | Adjust pacing, point of view, or NPC gender preference on the fly |
-| `别装了` · `语态 某人 里层` (drop the facade · switch to private voice) | Strip away formal restraint and shift an NPC into their private voice (or back) |
+| `尺度：直白 / 标准 / 含蓄` (explicitness: explicit / standard / subtle) | Tune adult detail depth anytime—standard never skips or fades to black; explicit goes all the way into sensory and physical detail |
+| `节奏：直接 / 标准 / 慢热` · `改用第三人称` · `女性角色为主` (pace: direct / standard / slow-burn · 3rd person · mostly female NPCs) | Adjust pacing, point of view, or NPC gender preference on the fly |
+| `别装了` · `语态 某人 里层` (drop the facade · voice `<name>` private) | Strip away formal restraint and shift an NPC into their private voice (or back) |
 | `状态` (status) | Relationships, promises, rumors, what's coming due |
 | `存档` · `qs` (save) | Saves to the current slot |
 | `另存为 名字` · `读档 名字` (save as `<name>` · load `<name>`) | Branch into a new slot, or pick up from that moment |
@@ -233,7 +234,6 @@ Writing quality varies with the model version, context length and platform setti
 
 - **Adults only (18+).** All characters and events are fictional, and every character is explicitly an adult. You can trigger `pause` or set hard limits at any time—enforced deterministically by the engine, never left to the model's discretion.
 - **Needs an Agent host that can run local commands**, such as the ones in the table above. How the host sends the conversation to a model is up to the host and the model service you choose; saves exist only on your own computer.
-- **Writing quality depends on the model.** The engine keeps the facts from drifting; style and judgment are still the model's job.
 
 <details>
 <summary><b>Developers</b></summary>
@@ -249,14 +249,14 @@ spec/                    Requirements spec
 PROGRESS.md              Progress, actual numbers, open decisions
 ```
 
-The runtime uses only the Python standard library; SQLite is the only state store, with a single write path. Every write carries a `request_id`, and writes inside a session also carry an `expected_revision`, so a retry never advances the story twice.
+The runtime uses only the Python standard library; SQLite is the only state store, with a single write path. Normal turns stream prose first (zero tool calls) and commit atomically in batches of up to 10 turns or at key checkpoints; every write carries a `request_id`, and writes inside a session also carry an `expected_revision`, so a retry never advances the story twice.
 
 ```bash
-python -m unittest discover -s tests/core
+python -B -m unittest discover -s tests/core
 ```
 
 ```bash
-python tools/validate_skill.py skill/adult-tension
+python -B tools/validate_skill.py skill/adult-tension
 ```
 
 Adding a world: following `spec/CONTENT_BIBLE.md`, draft it with `tools/new_world.py`, read each opening with `tools/preview_openings.py`, pass validation and the opening-diversity gate, then real playtests, and only then move it from `review` to `released`.

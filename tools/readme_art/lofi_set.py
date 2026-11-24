@@ -507,8 +507,8 @@ REGIONS = [
 BANDS = [("Ⅰ 东方与古典", 4), ("Ⅱ 西式与年代", 4), ("Ⅲ 都市与暗线", 4), ("Ⅳ 幻想与绝境", 5)]   # rows of the board, left to right
 STARS = {"大理寺提刑女官", "紫禁封宫夜", "薄墙那头的主妇", "递辞呈的女仆长", "雷暴专机女总裁", "握黑账的女社长", "禁触的雪线圣女", "同居魔族女勇者"}   # gold-pinned picks, two a row
 NWORLDS = sum(len(w) for _, _, w in REGIONS)
-WALL_DESC = (f"{NWORLDS} 盒录像带平放叠在一家深夜租碟店的胡桃木货架上，侧脊朝外印着世界名，按题材分为{'、'.join(r for r, _, _ in REGIONS)}共 {len(REGIONS)} 栏，排成四层（{'、'.join(b[2:] for b, _ in BANDS)}），每层一块货架、一枚铜铭牌，几盒推荐片被抽出半截，"
-             "每栏标着世界数，全部已开放，可直接开局。")
+WALL_DESC = (f"{NWORLDS} 盒录像带平放叠在一家深夜租碟店的胡桃木货架上，侧脊朝外印着世界名，按题材分为{'、'.join(r for r, _, _ in REGIONS)}共 {len(REGIONS)} 栏，排成四层（{'、'.join(b[2:] for b, _ in BANDS)}；第三层「舞台与镜头」以双列并排展示），"
+             f"每层配暖光射灯与铜铭牌，每栏标着世界数，{len(STARS)} 盒店长推荐片抽出亮金带扫光，全部已开放，可直接开局。")
 
 
 def _tint_hex(hx, amt=0.28):
@@ -1070,7 +1070,8 @@ EXACT = {
 }
 TOTAL_EXACT = sum(EXACT.values())
 MATERIAL = "一万五千余项素材"
-INV_DESC = f"紧凑复古数据面板展示 {TOTAL_EXACT:,} 项独立叙事素材，右侧按数量降序排列分段像素条：{'、'.join(f'{n} {l}' for n, l in ITEMS)}。"
+_ITEMS_BY_LABEL = {lbl: num for num, lbl in ITEMS}
+INV_DESC = f"紧凑复古数据面板展示 {TOTAL_EXACT:,} 项独立叙事素材，右侧按数量降序排列分段像素条：{'、'.join(f'{_ITEMS_BY_LABEL[l]} {l}' for l, _ in sorted(EXACT.items(), key=lambda kv: -kv[1]))}。"
 BAR_ACCENTS = [
     "#ffd98e", "#ff9bc2", "#ff6fae", "#ef72ca", "#d877e6",
     "#c27af5", "#ac7eff", "#967cf8", "#8477ea", "#746fdc",
@@ -1420,7 +1421,7 @@ def genres():
     PARTS["genres.svg:lib"] = (GW * C, 126 * C, "", sleeves_body)
 
 
-banner("section-proof.svg", "体验切片", "真实会话交付实录", 1, (1180, 222, 1490, 352), v_proof)          # the monitor
+banner("section-proof.svg", "体验切片", "真实机制驱动下的对局现场", 1, (1180, 222, 1490, 352), v_proof)      # the monitor
 banner("section-why.svg", "为什么不会崩盘", "模型写故事，本地引擎守事实", 2, (70, 300, 470, 468), v_why)       # clock and desk
 banner("section-worlds.svg", "内置世界库", "跨时代独立世界框架，开局即入戏", 3, (990, 0, 1430, 168), v_worlds)   # the city outside
 banner("section-start.svg", "怎么开始", "不用记语法，直接说大白话", 4, (610, 190, 1050, 375), v_start)          # the guitar
