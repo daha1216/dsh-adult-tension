@@ -511,276 +511,555 @@ WALL_DESC = (f"{NWORLDS} 盒录像带平放叠在一家深夜租碟店的胡桃�
              "每栏标着世界数，全部已开放，可直接开局。")
 
 
+def _tint_hex(hx, amt=0.28):
+    r, g, b = int(hx[1:3], 16), int(hx[3:5], 16), int(hx[5:7], 16)
+    r = min(255, int(r + (255 - r) * amt))
+    g = min(255, int(g + (255 - g) * amt))
+    b = min(255, int(b + (255 - b) * amt))
+    return f"#{r:02x}{g:02x}{b:02x}"
+
+
+def _shade_hex(hx, factor=0.55):
+    r, g, b = int(hx[1:3], 16), int(hx[3:5], 16), int(hx[5:7], 16)
+    return f"#{int(r * factor):02x}{int(g * factor):02x}{int(b * factor):02x}"
+
+
 def worlds():
-    STEP = 12                                                     # tapes lie flat, spine out, stacked one on another
-    HEAD = 24                                                     # plaque and section sign above each shelf
-    EGGS = [None, ("poster", 40), ("standee", 34), ("card", 16)]  # something propped on the shortest stack of shelves II-IV
+    STEP = 12                                                     # 48px per VHS tape, spine out
+    HEAD = 28                                                     # brass plaque + genre sign + track lamp headroom
     bands, k = [], 0
     for _, n in BANDS:
         bands.append(REGIONS[k:k + n])
         k += n
     assert k == len(REGIONS)
-    tops, slots, shelves, y = [], [], [], 54
+
+    # Shelf III splits the 24-world "舞台与镜头" into a double-wide 12+12 twin bay (slashes 336px of dead wall!)
+    def shelf_row_max(b, band):
+        mx = 0
+        for region, _, wl in band:
+            mx = max(mx, (len(wl) + 1) // 2 if (b == 2 and len(wl) >= 20) else len(wl))
+        return mx
+
+    tops, shelves, y = [], [], 60
     for b, band in enumerate(bands):
         tops.append(y)
-        rows = max(len(w) for _, _, w in band)
-        sc = min(range(len(band)), key=lambda i: len(band[i][2]))
-        slots.append(sc)
-        if EGGS[b]:
-            rows = max(rows, len(band[sc][2]) + (EGGS[b][1] + 4) / STEP)
-        shelves.append(y + HEAD + int(rows * STEP + 0.999) + 2)
-        y = shelves[-1] + 12
-    BY1 = y - 4
-    GW, GH = 300, BY1 + 12
+        rows = shelf_row_max(b, band)
+        shelves.append(y + HEAD + rows * STEP + 3)
+        y = shelves[-1] + 15                                      # roomy gap for shelf board, brackets & next ceiling lamps
+    BY1 = shelves[-1] + 8                                         # solid walnut base plinth bottom
+    GW, GH = 300, BY1 + 16                                        # generous bottom margin clear of rx=16 glass frame
     rnd = random.Random(31)
     cv = pk.Canvas(GW, GH)
-    BX0, BY0 = 8, 48
+    BX0, BY0 = 8, 52
     BX1 = 292
-    cv.rect(BX0 - 3, BY0 - 3, BX1 + 3, BY1 + 3, "#140c10")         # the cabinet's outer edge
-    cv.rect(BX0 - 3, BY0 - 3, BX1 + 3, BY0 - 2, "#5a3a2c")
-    cv.rect(BX0, BY0, BX1, BY1, "#2c1d1a")                          # walnut back panel
-    for x in range(BX0 + 23, BX1, 24):                              # plank seams
-        cv.rect(x, BY0, x + 1, BY1, "#22161a")
-    for _ in range(int(1800 * (BY1 - BY0) / 480)):                  # grain
-        x, y = rnd.randrange(BX0, BX1), rnd.randrange(BY0, BY1)
-        cv.put(x, y, rnd.choice(["#33221e", "#281a18", "#3a2722"]))
-    cv.rect(BX0, BY0, BX1, BY0 + 2, "#1a1012")
-    over = []
-    lights = []
-    glow = []
-    for k, x in enumerate(range(BX0 + 6, BX1 - 4, 9)):              # a string of fairy lights along the cabinet top
-        if abs(x - (BX0 + BX1) / 2) < 30:
-            continue
-        col = ["#ff6fae", "#ffcf6a", "#7fe6f0"][k % 3]
-        cv.put(x, BY0 + 3 + (k % 2), col)
-        glow.append(f'<circle cx="{(x + 0.5) * C}" cy="{(BY0 + 3.5 + k % 2) * C}" r="7" fill="{col}" fill-opacity="0.6" filter="url(#g6)">'
-                    f'<animate attributeName="fill-opacity" values="0.7;0.2;0.7" dur="{2 + k % 3 * 0.7:.1f}s" begin="-{k * 0.3:.1f}s" repeatCount="indefinite"/></circle>')
-    colw = (BX1 - BX0 - 8) / 5                                    # one width for every shelf, so every spine gets the same type size
-    TAPE, LABEL = "#1c1820", "#efe6d2"
+
+    # --- Walnut cabinet architecture: crown molding, beveled pilasters, wood planks & solid base plinth --------------
+    cv.rect(BX0 - 4, BY0 - 6, BX1 + 4, BY0 - 4, "#12090d")        # outer top shadow
+    cv.rect(BX0 - 4, BY0 - 5, BX1 + 4, BY0 - 2, "#5c3b29")        # walnut crown molding
+    cv.rect(BX0 - 4, BY0 - 5, BX1 + 4, BY0 - 4, "#8a5d40")        # crown top catchlight
+    cv.rect(BX0 - 3, BY0 - 2, BX1 + 3, BY0 - 1, "#9c7448")        # slim antique brass inlay trim
+    cv.rect(BX0 - 3, BY0 - 1, BX1 + 3, BY1 + 3, "#140b0f")        # outer cabinet carcass shadow
+    cv.rect(BX0 - 2, BY0, BX0, BY1, "#4e3224")                    # left walnut pilaster
+    cv.rect(BX0 - 2, BY0, BX0 - 1, BY1, "#704934")                # left pilaster highlight
+    cv.rect(BX1, BY0, BX1 + 2, BY1, "#4a2f22")                    # right walnut pilaster
+    cv.rect(BX1 + 1, BY0, BX1 + 2, BY1, "#2a1914")                # right pilaster shade
+    cv.rect(BX0, BY0, BX1, BY1, "#2a1b19")                        # warm dark walnut back panel
+    for x in range(BX0 + 23, BX1, 24):                            # subtle plank seams
+        cv.rect(x, BY0, x + 1, BY1, "#211516")
+    for _ in range(int(1750 * (BY1 - BY0) / 480)):                # organic wood grain
+        gx, gy = rnd.randrange(BX0, BX1), rnd.randrange(BY0, BY1)
+        cv.put(gx, gy, rnd.choice(["#32211d", "#261816", "#392621"]))
+    cv.rect(BX0, BY0, BX1, BY0 + 2, "#190f11")                    # under-crown recess shadow
+    cv.rect(BX0, BY0, BX0 + 1, BY1, "#1c1214")                    # left interior ambient occlusion
+    cv.rect(BX1 - 1, BY0, BX1, BY1, "#1c1214")                    # right interior ambient occlusion
+
+    over, glow, sheen_defs, sheen_fx = [], [], [], []
+    colw = (BX1 - BX0 - 8) / 5                                    # 55.2 cells (220.8px) per bay column
+    TAPE = "#1c1722"
+    PAPERS = ["#f2e9d6", "#ece1cc", "#f5eddd", "#e8ddc7"]
+
+    # --- True catenary-draped pixel fairy lights cleanly clear of OPEN chains & symmetric on both sides -------------
+    PW = 62
+    plaque_x0 = (BX0 + BX1) // 2 - PW // 2
+    fairy_pal = ["#ffd98e", "#ff7eb8", "#c9a2ff"]
+    for side_idx, (fx0, fx1) in enumerate([(BX0 + 28, plaque_x0 - 5), (plaque_x0 + PW + 5, BX1 - 31)]):
+        span = fx1 - fx0
+        cv.rect(fx0 - 1, BY0 + 1, fx0 + 1, BY0 + 3, "#c9a24a")    # brass hook
+        cv.rect(fx1 - 1, BY0 + 1, fx1 + 1, BY0 + 3, "#c9a24a")
+        for x in range(fx0, fx1 + 1):
+            t = (x - fx0) / max(1, span)
+            wy = BY0 + 2 + round(4.0 * 4 * t * (1 - t))
+            cv.put(x, wy, "#150c10")
+            if x % 2 == 0:
+                cv.put(x, wy - 1, "#2f2026")
+        n_bulbs = 7
+        for bi in range(1, n_bulbs):
+            t = bi / n_bulbs
+            bx_ = round(fx0 + t * span)
+            by_ = BY0 + 2 + round(4.0 * 4 * t * (1 - t)) + 1
+            col = fairy_pal[(bi + side_idx) % 3]
+            cv.put(bx_, by_, col)
+            glow.append(
+                f'<circle cx="{(bx_ + 0.5) * C}" cy="{(by_ + 0.5) * C}" r="8" fill="{col}" fill-opacity="0.58" filter="url(#g6)">'
+                f'<animate attributeName="fill-opacity" values="0.68;0.24;0.68" dur="{2.4 + (bi % 3) * 0.6:.1f}s" begin="-{(bi + side_idx * 3) * 0.35:.2f}s" repeatCount="indefinite"/></circle>'
+            )
+
+    star_idx = 0
     for b, band in enumerate(bands):
         TY, SY = tops[b], shelves[b]
-        x_off = (5 - len(band)) * colw / 2                          # shelves of four sit centred
-        cv.rect(BX0, SY, BX1, SY + 4, "#6a4430")                    # the shelf board
-        cv.rect(BX0, SY, BX1, SY + 1, "#9a6a48")
-        cv.rect(BX0, SY + 5, BX1, SY + 6, "#140c10")
-        for bx in (BX0 + 18, (BX0 + BX1) // 2, BX1 - 22):           # iron brackets under the board
-            cv.poly([(bx, SY + 5), (bx + 7, SY + 5), (bx, SY + 12)], "#3a3440")
-            cv.rect(bx, SY + 5, bx + 1, SY + 12, "#5a5464")
-            cv.put(bx + 2, SY + 6, "#8a8094")
-        for i in range(len(band)):                                  # a price tag clipped to the shelf edge under each stack
-            tx = int(BX0 + 4 + x_off + i * colw + colw / 2) - 6
-            cv.rect(tx, SY + 1, tx + 12, SY + 4, "#f6eedd")
-            cv.rect(tx, SY + 1, tx + 1, SY + 4, "#d0304a")
-            over.append(text((tx + 6.5) * C, (SY + 3.6) * C, "¥3 / 夜", 10, "#5a2a2a", 800, "middle", 0, SANS))
-        glow.append(f'<ellipse cx="{(BX0 + BX1) / 2 * C}" cy="{(TY + 12) * C}" rx="{(BX1 - BX0) * C * 0.55}" ry="{(SY - TY) * C * 0.45}" '
-                    f'fill="#ffcf8a" fill-opacity="0.07" filter="url(#g15)"/>')   # warm light from the lamp over each shelf
-        PW = 48                                                     # brass section plaque
+        # Build slot layout: each item is (region, rc, world_list, col_start, col_span)
+        slots = []
+        if b == 2:
+            c = 0
+            for region, rc, wl in band:
+                if len(wl) >= 20:
+                    slots.append((region, rc, wl, c, 2))
+                    c += 2
+                else:
+                    slots.append((region, rc, wl, c, 1))
+                    c += 1
+            total_cols = c
+        else:
+            for i, (region, rc, wl) in enumerate(band):
+                slots.append((region, rc, wl, i, 1))
+            total_cols = len(band)
+        x_off = (5 - total_cols) * colw / 2
+
+        # Subtle vertical recessed cubby lines between columns
+        for ci in range(1, total_cols):
+            # Skip internal divider between the two halves of double-wide 舞台与镜头
+            if b == 2 and ci == 4:
+                continue
+            dx = int(BX0 + 4 + x_off + ci * colw)
+            cv.rect(dx, TY + 13, dx + 1, SY, "#221515")
+
+        # Canopy brass track spotlights + soft Gaussian-feathered warm tungsten cones (zero razor triangle lines!)
+        if b == 0:
+            glow.append(
+                f'<ellipse cx="{(BX0 + BX1) / 2 * C}" cy="{(TY + 20) * C}" rx="420" ry="130" fill="#ffcf8a" fill-opacity="0.09" filter="url(#g30)"/>'
+            )
+        else:
+            lamp_y = TY - 5
+            for lx in (BX0 + 74, BX1 - 74):
+                cv.rect(lx - 3, lamp_y, lx + 3, lamp_y + 2, "#8a6630")
+                cv.rect(lx - 2, lamp_y + 2, lx + 2, lamp_y + 3, "#ffd98e")
+                glow.append(
+                    f'<polygon points="{(lx - 4) * C},{(lamp_y + 3) * C} {(lx + 4) * C},{(lamp_y + 3) * C} '
+                    f'{(lx + 72) * C},{(SY - 4) * C} {(lx - 72) * C},{(SY - 4) * C}" fill="url(#lampcone)" filter="url(#g15)"/>'
+                )
+
+        # Shelf board (Shelves I-III) OR Solid Walnut Base Plinth (Shelf IV — zero protruding brackets!)
+        if b < 3:
+            cv.rect(BX0, SY, BX1, SY + 4, "#6e4732")
+            cv.rect(BX0, SY, BX1, SY + 1, "#a67450")
+            cv.rect(BX0, SY + 3, BX1, SY + 4, "#4b2e1f")
+            cv.rect(BX0, SY + 4, BX1, SY + 6, "#160c10")          # crisp contact cast shadow
+            # Place mirror-symmetric iron brackets strictly in inter-column gaps (never colliding with price tags or lamps!)
+            if total_cols == 4:
+                br_xs = [BX0 + 18, (BX0 + BX1) // 2 - 2, BX1 - 24]
+            else:
+                br_xs = [BX0 + 10, int(BX0 + 4 + 2 * colw) - 3, int(BX0 + 4 + 3 * colw) - 3, BX1 - 16]
+            for bx in br_xs:
+                cv.poly([(bx, SY + 5), (bx + 6, SY + 5), (bx, SY + 11)], "#3a3342")
+                cv.rect(bx, SY + 5, bx + 1, SY + 11, "#5c5368")
+                cv.put(bx + 2, SY + 6, "#8c829a")
+        else:
+            # Solid walnut base apron + recessed kick panel + brass-shod feet (100% inside cabinet bounds!)
+            cv.rect(BX0 - 2, SY, BX1 + 2, SY + 4, "#6e4732")
+            cv.rect(BX0 - 2, SY, BX1 + 2, SY + 1, "#a67450")
+            cv.rect(BX0 - 2, SY + 4, BX1 + 2, SY + 8, "#472c1e")
+            cv.rect(BX0, SY + 5, BX1, SY + 7, "#362016")
+            for fx in (BX0 + 8, BX1 - 18):
+                cv.rect(fx, SY + 7, fx + 10, SY + 9, "#2a1812")
+                cv.rect(fx, SY + 8, fx + 10, SY + 9, "#9c7448")   # brass foot shoe
+
+        # Readable vintage brass-clipped shelf price tags ("¥3/夜", 12.5px legible at GitHub 894px!)
+        for region, rc, wl, c0, cspan in slots:
+            cx_mid = BX0 + 4 + x_off + (c0 + cspan / 2) * colw
+            tx = int(cx_mid) - 7
+            cv.rect(tx + 1, SY + 1, tx + 15, SY + 5, "#2b1912")   # subtle shadow
+            cv.rect(tx, SY, tx + 14, SY + 4, "#f4ead4")
+            cv.rect(tx, SY, tx + 2, SY + 4, _tint_hex(rc, 0.10))  # color-keyed stub matching column genre!
+            over.append(text((tx + 8.0) * C, (SY + 3.0) * C, "¥3/夜", 12.5, "#3a1e24", 800, "middle", 0, SANS))
+
+        # Brass section plaque (aligned with genres.svg: PW=62, brighter gold, strictly symmetric rivets, 17px centered!)
         px0 = (BX0 + BX1) // 2 - PW // 2
-        cv.rect(px0 + 1, TY - 2, px0 + PW + 1, TY + 7, "#0e080a")
-        cv.rect(px0, TY - 3, px0 + PW, TY + 6, "#c9a24a")
-        cv.rect(px0, TY - 3, px0 + PW, TY - 2, "#f0d488")
-        cv.rect(px0, TY + 6, px0 + PW, TY + 7, "#8a6a28")
-        for sx in (px0 + 2, px0 + PW - 2):
-            cv.put(sx, TY + 1, "#7a5a20")
-        over.append(text((px0 + PW / 2) * C, (TY + 3.8) * C, BANDS[b][0], 15, "#4a3410", 900, "middle", 2, SANS))
-        LY = TY + 10
-        for i, (region, rc, worlds_) in enumerate(band):
-            cx0 = BX0 + 4 + x_off + i * colw
-            tx0, tx1 = int(cx0 + 2), int(cx0 + colw - 2)
-            cv.rect(tx0 + 1, LY + 1, tx1 + 1, LY + 9, "#0e080a")       # genre sign
-            cv.rect(tx0, LY, tx1, LY + 8, rc)
-            cv.rect(tx0, LY, tx1, LY + 1, "#ffffff")
-            cv.rect(tx0, LY + 8, tx1, LY + 9, "#2a1a24")
-            over.append(text((tx0 + tx1) / 2 * C, (LY + 6.4) * C, f"{region} {len(worlds_)}", 16, "#ffffff", 800, "middle", 1, SANS, 'stroke="#2a1a24" stroke-width="3" paint-order="stroke"'))
-            n = len(worlds_)
-            for j, name in enumerate(worlds_):                       # first title on top, the stack resting on the shelf
-                star = name in STARS
-                y0 = SY - (n - j) * STEP
-                x0 = int(cx0 + 3 + rnd.choice([-1, 0, 0, 1])) + (5 if star else 0)
-                x1 = x0 + int(colw) - 6
-                y1 = y0 + STEP - 1
-                if star:                                            # pulled half out: the sleeve art shows behind the spine
-                    cv.vgrad(x0 - 5, y0 + 1, x0, y1 - 1, ["#ff6fae", "#a2477e", "#3a2a66"])
-                cv.rect(x0, y0, x1, y1, TAPE)
-                cv.rect(x0, y0, x1, y0 + 1, "#3a3440")
-                cv.rect(x0 + 2, y0 + 2, x1 - 3, y1 - 2, "#ffe0bc" if star else LABEL)
-                cv.rect(x0 + 2, y0 + 2, x0 + 4, y1 - 2, rc)            # genre colour band on the label
-                cv.rect(x1 - 2, y0 + 3, x1 - 1, y1 - 3, "#3a3440")      # the tape window edge
-                if not star and rnd.random() < 0.2:                  # a store sticker on the spine
-                    cv.rect(x1 - 7, y0 + 3, x1 - 5, y0 + 5, rnd.choice(["#e0402f", "#ffcf6a", "#6fbf7a", "#7fb0f0"]))
-                size = min(14.5, (x1 - x0 - 10) * C / len(name))
-                over.append(text((x0 + 6) * C, (y0 + 7.3) * C, name, round(size, 1), "#221a24", 800, "start", 0))
-                if star:
-                    cv.rect(x1 - 6, y0 + 1, x1 - 4, y0 + 3, "#ffc94a")
-                    lights.append((x1 - 5, y0 + 2))
-        if len(band) < 5:                                           # store clutter in the side gaps of the shelves of four
-            L0, R0 = BX0 + 5, int(BX0 + 4 + x_off + len(band) * colw) + 2
-            FT = TY + HEAD + 2                                      # top of the free wall space
-            if b == 0:                                              # a CRT on a VCR, and an OPEN sign
-                cv.rect(L0 + 1, SY - 5, L0 + 24, SY - 1, "#2a2630")
-                cv.rect(L0 + 1, SY - 5, L0 + 24, SY - 4, "#4a4454")
-                cv.rect(L0 + 4, SY - 3, L0 + 14, SY - 2, "#0e0a10")
-                cv.put(L0 + 20, SY - 3, "#6fe07a")
-                cv.rect(L0 + 2, SY - 23, L0 + 23, SY - 6, "#3a3038")
-                cv.rect(L0 + 2, SY - 23, L0 + 23, SY - 22, "#5a4c58")
-                cv.rect(L0 + 4, SY - 21, L0 + 18, SY - 8, lambda x, y: rnd.choice(["#8a9aa8", "#c8d4dc", "#5a6a78", "#dfe8ee"]))
-                for ky in (SY - 18, SY - 14):
-                    cv.put(L0 + 20, ky, "#c9a24a")
-                cv.line(L0 + 8, SY - 23, L0 + 4, SY - 31, "#8a8094")
-                cv.line(L0 + 14, SY - 23, L0 + 19, SY - 30, "#8a8094")
-                glow.append(f'<rect x="{(L0 + 4) * C}" y="{(SY - 21) * C}" width="{15 * C}" height="{14 * C}" fill="#e8f4ff" opacity="0">'
-                            '<animate attributeName="opacity" values="0;0.3;0.05;0.25;0" dur="0.8s" repeatCount="indefinite"/></rect>'
-                            f'<ellipse cx="{(L0 + 11) * C}" cy="{(SY - 14) * C}" rx="70" ry="50" fill="#9fd8ff" fill-opacity="0.18" filter="url(#g15)"/>'
-                            f'<circle cx="{(L0 + 20.5) * C}" cy="{(SY - 2.5) * C}" r="6" fill="#6fe07a" fill-opacity="0.6" filter="url(#g6)"/>')
-                cv.rect(R0, FT + 4, R0 + 25, FT + 16, "#140c14")
-                cv.rect(R0, FT + 4, R0 + 25, FT + 5, "#3a2a40")
-                cv.line(R0 + 4, FT, R0 + 4, FT + 4, "#8a8094")
-                cv.line(R0 + 21, FT, R0 + 21, FT + 4, "#8a8094")
-                cv.text("OPEN", R0 + 1, FT + 7, "#ff6fae")
-                glow.append(f'<ellipse cx="{(R0 + 12.5) * C}" cy="{(FT + 10) * C}" rx="70" ry="40" fill="#ff6fae" fill-opacity="0.35" filter="url(#g15)">'
-                            '<animate attributeName="fill-opacity" values="0.35;0.35;0.1;0.35;0.3" dur="3.2s" repeatCount="indefinite"/></ellipse>')
-                for k in range(3):                                  # loose returns lying on the shelf
-                    cv.rect(R0 + 2 + k, SY - 4 - k * 4, R0 + 22 + k, SY - 1 - k * 4, TAPE)
-                    cv.rect(R0 + 4 + k, SY - 3 - k * 4, R0 + 18 + k, SY - 2 - k * 4, ["#d85a8e", "#efe6d2", "#7fb0f0"][k])
-            elif b == 1:                                            # a plant, a mug, house rules and the return box
-                plant(cv, L0 + 7, SY - 1)
-                mug(cv, L0 + 15, SY - 1)
-                cv.rect(L0 + 1, FT + 2, L0 + 24, FT + 16, "#3a2418")
-                cv.rect(L0 + 2, FT + 3, L0 + 23, FT + 15, "#f6ecd6")
-                cv.rect(L0 + 4, FT + 9, L0 + 21, FT + 10, "#d0304a")
-                for k in range(2):
-                    cv.rect(L0 + 4, FT + 11 + k * 2, L0 + 19 - k * 5, FT + 12 + k * 2, "#a89880")
-                over.append(text((L0 + 12.5) * C, (FT + 7.6) * C, "会员须知", 12, "#3a2418", 900, "middle", 1, SANS))
-                cv.rect(R0 + 1, SY - 20, R0 + 24, SY - 1, "#4a3058")
-                cv.rect(R0 + 1, SY - 20, R0 + 24, SY - 19, "#6a4a7a")
-                cv.rect(R0 + 6, SY - 25, R0 + 20, SY - 15, TAPE)          # a tape half pushed into the slot, reels showing
-                cv.rect(R0 + 7, SY - 24, R0 + 19, SY - 23, LABEL)
-                cv.rect(R0 + 8, SY - 21, R0 + 18, SY - 17, "#4a4454")
-                for rx in (R0 + 10, R0 + 15):
-                    cv.ellipse(rx + 0.5, SY - 19, 1.6, 1.6, "#d8d0c4")
-                    cv.put(rx, SY - 19, "#4a4454")
-                cv.rect(R0 + 4, SY - 15, R0 + 22, SY - 13, "#0e0a10")
-                cv.rect(R0 + 4, SY - 13, R0 + 22, SY - 12, "#6a4a7a")
-                cv.rect(R0 + 3, SY - 9, R0 + 22, SY - 8, "#6a4a7a")
-                over.append(text((R0 + 12.5) * C, (SY - 5.5) * C, "还片处", 14, "#ffd6e8", 900, "middle", 2, SANS))
-            elif b == 2:                                            # popcorn and a rewinder, a clock and new cases leaning
-                cv.rect(L0 + 3, SY - 12, L0 + 12, SY - 1, lambda x, y: "#e0402f" if (x // 2) % 2 else "#f6eedd")
-                for (px_, py_) in [(L0 + 5, SY - 13), (L0 + 8, SY - 14), (L0 + 11, SY - 13), (L0 + 7, SY - 12)]:
-                    cv.ellipse(px_, py_, 1.6, 1.4, "#fff3c8")
-                cv.rect(L0 + 14, SY - 7, L0 + 25, SY - 3, "#d0304a")      # a toy-car rewinder
-                cv.rect(L0 + 14, SY - 7, L0 + 25, SY - 6, "#f06a7a")
-                cv.rect(L0 + 16, SY - 10, L0 + 22, SY - 7, "#a02038")
-                cv.rect(L0 + 17, SY - 9, L0 + 21, SY - 7, "#9fd8ff")
-                cv.put(L0 + 24, SY - 5, "#ffe9a8")
-                for wx in (L0 + 16, L0 + 22):
-                    cv.ellipse(wx + 0.5, SY - 2.5, 1.6, 1.6, "#1a1418")
-                for (px_, py_) in [(L0 + 2, SY - 1), (L0 + 13, SY - 1), (L0 + 26, SY - 1)]:   # spilt kernels
-                    cv.put(px_, py_, "#fff3c8")
-                cv.ellipse(R0 + 12, FT + 9, 6, 6, "#3a2418")
-                cv.ellipse(R0 + 12, FT + 9, 5, 5, "#f6ecd6")
-                cv.line(R0 + 12, FT + 9, R0 + 12, FT + 5, "#221a24")
-                cv.line(R0 + 12, FT + 9, R0 + 15, FT + 10, "#221a24")
-                for k in range(3):                                  # sleeves leaning on the side wall
-                    sx = R0 + 3 + k * 7
-                    cv.poly([(sx, SY - 1), (sx + 5, SY - 1), (sx + 9, SY - 20), (sx + 4, SY - 20)], ["#3a2a66", "#6a3778", "#a2477e"][k])
-                    cv.poly([(sx + 1, SY - 4), (sx + 4, SY - 4), (sx + 7, SY - 17), (sx + 4, SY - 17)], ["#ff6fae", "#ffcf6a", "#7fe6f0"][k])
-                over.append(text((R0 + 12.5) * C, (SY - 23) * C, "新到", 13, "#ffcf6a", 900, "middle", 2, SANS))
-                MX = int(BX0 + 4 + x_off + 1.5 * colw)                 # a midnight-show poster on the bare wall above the short stacks
-                MX0, MY0 = MX - 36, FT + 8
-                cv.rect(MX0 + 1, MY0 + 1, MX0 + 73, MY0 + 45, "#0e080a")
-                cv.rect(MX0, MY0, MX0 + 72, MY0 + 44, "#e8dcc4")
-                cv.vgrad(MX0 + 2, MY0 + 2, MX0 + 70, MY0 + 36, ["#0e1030", "#1d2350", "#3a2a66", "#6a3778"])
-                for _ in range(26):
-                    cv.put(rnd.randrange(MX0 + 3, MX0 + 69), rnd.randrange(MY0 + 3, MY0 + 22), rnd.choice(["#c8d4ff", "#8a90c8"]))
-                cv.ellipse(MX0 + 56, MY0 + 11, 5, 5, "#fff3c8")
-                cv.ellipse(MX0 + 58, MY0 + 9, 4, 4, "#1d2350")
-                cv.poly([(MX0 + 2, MY0 + 32), (MX0 + 14, MY0 + 25), (MX0 + 26, MY0 + 30), (MX0 + 40, MY0 + 22), (MX0 + 54, MY0 + 29), (MX0 + 70, MY0 + 24), (MX0 + 70, MY0 + 36), (MX0 + 2, MY0 + 36)], "#140c22")
-                cv.rect(MX0 + 2, MY0 + 36, MX0 + 70, MY0 + 42, "#1a1418")              # a film strip along the foot
-                for fx in range(MX0 + 4, MX0 + 69, 4):
-                    cv.rect(fx, MY0 + 37, fx + 2, MY0 + 38, "#e8dcc4")
-                    cv.rect(fx, MY0 + 40, fx + 2, MY0 + 41, "#e8dcc4")
-                for (kx, ky) in [(MX0 - 1, MY0 - 1), (MX0 + 67, MY0 - 1)]:            # masking tape on the corners
-                    cv.rect(kx, ky, kx + 7, ky + 3, "#f6e6b0")
-                over.append(text(MX * C, (MY0 + 19) * C, "午夜场", 30, "#ff6fae", 900, "middle", 6, SANS,
-                                 'stroke="#140c22" stroke-width="4" paint-order="stroke"'))
-                over.append(text(MX * C, (MY0 + 29.5) * C, "每晚 23:00 · 两片连映", 13, "#ffd6e8", 800, "middle", 2, SANS))
-                glow.append(f'<ellipse cx="{MX * C}" cy="{(MY0 + 16) * C}" rx="120" ry="50" fill="#ff6fae" fill-opacity="0.12" filter="url(#g15)"/>')
-        else:                                                       # the store cat asleep-ish on the 圣堂与魔裔 stack
-            cx = int(BX0 + 4 + 3 * colw + colw / 2) + 6
-            top = SY - len(band[3][2]) * STEP
-            CAT = ["..x.......x....",
-                   ".xp.......px...",
-                   ".xxx.....xxx...",
-                   ".xxxxxxxxxxx...",
-                   "xxxxxxxxxxxxx..",
-                   "xxeexxxxxeexx..",
-                   "xxxxxxnxxxxxx..",
-                   ".xxxxxxxxxxx...",
-                   "..xxxxxxxxx....",
-                   "..xxxxxxxxx....",
-                   ".xxxxxxxxxxx...",
-                   ".xxxxxxxxxxx..x",
-                   "xxxxxxxxxxxxx.x",
-                   "xxxxxxxxxxxxxxx",
-                   "xxxxxxxxxxxxxx.",
-                   ".xxx.xxx.xxx..."]
-            cx0, cy0 = cx - 6, top - len(CAT)
+        cv.rect(px0 + 1, TY - 1, px0 + PW + 1, TY + 9, "#0e080a")
+        cv.rect(px0, TY - 2, px0 + PW, TY + 8, "#cfa850")
+        cv.rect(px0, TY - 2, px0 + PW, TY - 1, "#f5dc94")
+        cv.rect(px0, TY + 7, px0 + PW, TY + 8, "#8a6a28")
+        for sx in (px0 + 2, px0 + PW - 3):                        # strictly symmetric 2-cell inset rivets!
+            cv.put(sx, TY + 3, "#7a5a20")
+        over.append(text((px0 + PW / 2) * C, (TY + 4.9) * C, BANDS[b][0], 17, "#452e0c", 900, "middle", 2, SANS))
+
+        # Genre sign bars + VHS tape stacks
+        LY = TY + 12
+        for region, rc, wl, c0, cspan in slots:
+            bx_l = BX0 + 4 + x_off + c0 * colw
+            bx_r = bx_l + cspan * colw
+            tx0, tx1 = int(bx_l + 2), int(bx_r - 2)
+            # Genre header sign: tinted top highlight (NO harsh pure #ffffff!), proper bottom shadow, gold count!
+            cv.rect(tx0 + 1, LY + 1, tx1 + 1, LY + 10, "#0e080a")
+            cv.rect(tx0, LY, tx1, LY + 9, rc)
+            cv.rect(tx0, LY, tx1, LY + 1, _tint_hex(rc, 0.34))
+            cv.rect(tx0, LY + 8, tx1, LY + 9, _shade_hex(rc, 0.55))
+            cnt_col = "#ffe6a0" if len(wl) >= 14 else "#f2e6ff"
+            over.append(
+                f'<text x="{(tx0 + tx1) / 2 * C:.1f}" y="{(LY + 6.1) * C:.1f}" font-family="{SANS}" font-size="16" '
+                f'font-weight="800" fill="#fff9fc" text-anchor="middle" letter-spacing="1" '
+                f'stroke="#1e1224" stroke-width="3" paint-order="stroke">{esc(region)} '
+                f'<tspan font-family="{MONO}" font-size="15" fill="{cnt_col}">{len(wl)}</tspan></text>'
+            )
+
+            # Distribute worlds across cspan sub-columns (1 normally; 2 balanced halves for 舞台与镜头 12+12)
+            if cspan == 2:
+                half = (len(wl) + 1) // 2
+                sub_cols = [(0, wl[:half]), (1, wl[half:])]
+            else:
+                sub_cols = [(0, wl)]
+
+            for sc_i, sub_w in sub_cols:
+                cx0 = bx_l + sc_i * colw
+                n = len(sub_w)
+                for j, name in enumerate(sub_w):
+                    star = name in STARS
+                    y0 = SY - (n - j) * STEP
+                    y1 = y0 + STEP - 1
+                    if star:
+                        # Zero-collision pulled-out pick: cover sleeve peeks 4 cells left, spine shifts only +1.4 cells right (23px safe gutter!)
+                        cov_x0 = int(cx0 + 1)
+                        x0 = cov_x0 + 4
+                        x1 = x0 + 47
+                        cv.vgrad(cov_x0, y0 + 1, x0, y1 - 1, [_tint_hex(rc, 0.28), "#ff6fae", _shade_hex(rc, 0.65)])
+                        cv.rect(x0 - 1, y0 + 1, x0, y1 - 1, "#ffd98e")   # crisp gold foil spine crease
+                    else:
+                        jitter = rnd.choice([-1, 0, 0, 1])
+                        x0 = int(cx0 + 3.5 + jitter)
+                        x1 = x0 + 48
+                    # Tape casing + 1-cell bottom contact shadow
+                    cv.rect(x0, y1, x1, y1 + 1, "#120c14")
+                    cv.rect(x0, y0, x1, y1, TAPE)
+                    cv.rect(x0, y0, x1, y0 + 1, "#3b3248")
+                    # Vintage paper tone variation
+                    paper = "#ffecd4" if star else PAPERS[(sum(map(ord, name)) + j) % len(PAPERS)]
+                    cv.rect(x0 + 2, y0 + 2, x1 - 3, y1 - 2, paper)
+                    cv.rect(x0 + 2, y0 + 2, x0 + 4, y1 - 2, "#ff6fae" if star else rc)
+                    # Subtle embossed VHS reel notch on right shell edge (no confusing random colored dots!)
+                    cv.rect(x1 - 2, y0 + 3, x1 - 1, y1 - 3, "#342b40")
+                    if star:
+                        # Tiny crisp champagne-gold star emblem at right end of label + slow diagonal gold sheen sweep!
+                        sx_, sy_ = x1 - 6, y0 + 5
+                        cv.put(sx_, sy_ - 1, "#d48a28")
+                        cv.put(sx_, sy_ + 1, "#d48a28")
+                        cv.put(sx_ - 1, sy_, "#d48a28")
+                        cv.put(sx_ + 1, sy_, "#d48a28")
+                        cv.put(sx_, sy_, "#ffd96a")
+                        cid = f"stclip{star_idx}"
+                        lx0_px, ly0_px = (x0 + 2) * C, (y0 + 2) * C
+                        lw_px, lh_px = (x1 - x0 - 5) * C, (y1 - y0 - 4) * C
+                        sheen_defs.append(f'<clipPath id="{cid}"><rect x="{lx0_px}" y="{ly0_px}" width="{lw_px}" height="{lh_px}"/></clipPath>')
+                        beg = star_idx * 0.72
+                        sheen_fx.append(
+                            f'<g clip-path="url(#{cid})"><rect x="{lx0_px - 44}" y="{ly0_px}" width="44" height="{lh_px}" fill="url(#goldsheen)">'
+                            f'<animate attributeName="x" values="{lx0_px - 44};{lx0_px + lw_px + 20};{lx0_px + lw_px + 20}" keyTimes="0;0.24;1" dur="6.4s" begin="{beg:.2f}s" repeatCount="indefinite"/></rect></g>'
+                            f'<circle cx="{(sx_ + 0.5) * C}" cy="{(sy_ + 0.5) * C}" r="9" fill="#ffd98e" fill-opacity="0.45" filter="url(#g4)">'
+                            f'<animate attributeName="fill-opacity" values="0.58;0.18;0.58" dur="3.0s" begin="-{beg:.2f}s" repeatCount="indefinite"/></circle>'
+                        )
+                        star_idx += 1
+                    usable_px = (x1 - x0 - (11 if star else 8)) * C
+                    size = min(15.5, usable_px / len(name))
+                    over.append(text((x0 + 5.5) * C, (y0 + 7.2) * C, name, round(size, 1), "#1f1622", 800, "start", 0))
+
+        # --- Curated Midnight Store Props & Wall Accents (Zero Floating / Zero Glitches / 23:00 Easter Egg!) ---------
+        L0 = BX0 + 4
+        R0 = int(BX0 + 4 + x_off + total_cols * colw) + 2
+        FT = LY + 10                                              # safely below genre signs
+
+        if b == 0:
+            # 1) Shelf I Left: Lo-fi CRT TV on VCR with calm 3.6s amber-violet PLAY scanline (NO 0.8s white seizure flash!)
+            cv.rect(L0 + 1, SY - 5, L0 + 24, SY, "#2a2432")
+            cv.rect(L0 + 1, SY - 5, L0 + 24, SY - 4, "#4b4158")
+            cv.rect(L0 + 4, SY - 3, L0 + 14, SY - 2, "#0d0912")
+            cv.put(L0 + 20, SY - 3, "#ff6fae")                    # soft pink REC/PLAY power dot
+            cv.rect(L0 + 2, SY - 23, L0 + 23, SY - 5, "#362c3a")
+            cv.rect(L0 + 2, SY - 23, L0 + 23, SY - 22, "#594a60")
+            cv.vgrad(L0 + 4, SY - 21, L0 + 18, SY - 7, ["#1c1538", "#342254", "#5c3368"])
+            for sy_ in range(SY - 20, SY - 7, 2):                 # subtle CRT scanlines
+                cv.rect(L0 + 4, sy_, L0 + 18, sy_ + 1, "#251a42")
+            # Tiny pixel PLAY triangle on screen
+            cv.poly([(L0 + 9, SY - 16), (L0 + 9, SY - 11), (L0 + 14, SY - 13.5)], "#ffd98e")
+            for ky in (SY - 18, SY - 14):
+                cv.put(L0 + 20, ky, "#cfa850")
+            cv.line(L0 + 8, SY - 23, L0 + 4, SY - 30, "#8a8098")
+            cv.line(L0 + 14, SY - 23, L0 + 19, SY - 29, "#8a8098")
+            glow.append(
+                f'<rect x="{(L0 + 4) * C}" y="{(SY - 21) * C}" width="{14 * C}" height="{2 * C}" fill="#ffd6ee" opacity="0.22">'
+                f'<animate attributeName="y" values="{(SY - 21) * C};{(SY - 9) * C}" dur="3.6s" repeatCount="indefinite"/></rect>'
+                f'<ellipse cx="{(L0 + 11) * C}" cy="{(SY - 14) * C}" rx="64" ry="44" fill="#c48aff" fill-opacity="0.16" filter="url(#g15)">'
+                '<animate attributeName="fill-opacity" values="0.12;0.22;0.12" dur="4.2s" repeatCount="indefinite"/></ellipse>'
+                f'<circle cx="{(L0 + 20.5) * C}" cy="{(SY - 2.5) * C}" r="5" fill="#ff6fae" fill-opacity="0.65" filter="url(#g4)"/>'
+            )
+
+            # 2) Shelf I Right Top: Properly hung OPEN neon sign (chains anchored to cabinet ceiling + roomy frame!)
+            ox0, oy0, ox1, oy1 = R0 - 1, FT + 4, R0 + 27, FT + 17
+            cv.line(ox0 + 4, BY0 + 2, ox0 + 4, oy0, "#6e6478")    # anchored all the way up to ceiling!
+            cv.line(ox1 - 5, BY0 + 2, ox1 - 5, oy0, "#6e6478")
+            cv.rect(ox0 + 1, oy0 + 1, ox1 + 1, oy1 + 1, "#0c060c")
+            cv.rect(ox0, oy0, ox1, oy1, "#160c1c")
+            cv.rect(ox0, oy0, ox1, oy0 + 1, "#5c3d68")
+            cv.rect(ox0, oy1 - 1, ox1, oy1, "#3b2345")
+            cv.text("OPEN", ox0 + 3, oy0 + 3, "#ff74b5")
+            glow.append(
+                f'<ellipse cx="{(ox0 + ox1) / 2 * C}" cy="{(oy0 + oy1) / 2 * C}" rx="68" ry="38" fill="#ff6fae" fill-opacity="0.30" filter="url(#g15)">'
+                '<animate attributeName="fill-opacity" values="0.32;0.32;0.12;0.32;0.28" dur="4.6s" repeatCount="indefinite"/></ellipse>'
+            )
+
+            # 3) Shelf I Right Bottom: 3 Loose returns stacked FLUSH (zero 4px air gap!)
+            for k in range(3):
+                ly_ = SY - 3 - k * 3
+                cv.rect(R0 + 2 + k, ly_, R0 + 22 + k, ly_ + 3, TAPE)
+                cv.rect(R0 + 2 + k, ly_, R0 + 22 + k, ly_ + 1, "#3a3246")
+                cv.rect(R0 + 4 + k, ly_ + 1, R0 + 18 + k, ly_ + 2, ["#ff6fae", "#f2e9d6", "#b88cff"][k])
+
+            # 4) Shelf I Short-Stack Wall Accent above 仙侠与志怪 5: wall-mounted featured cover sleeve (fills 240px void!)
+            col1_cx = int(BX0 + 4 + x_off + 1.5 * colw)
+            col1_top = SY - len(band[1][2]) * STEP
+            fx0, fy0 = col1_cx - 13, LY + 14
+            fx1, fy1 = col1_cx + 13, col1_top - 6
+            if fy1 - fy0 >= 28:
+                fy0 = (LY + 11 + col1_top - 3) // 2 - 17
+                fy1 = fy0 + 34
+                cv.rect(fx0 + 1, fy0 + 1, fx1 + 1, fy1 + 1, "#0d070c")
+                cv.rect(fx0, fy0, fx1, fy1, "#1c1722")
+                cv.rect(fx0, fy0, fx1, fy0 + 1, "#584c68")
+                cv.rect(fx0 + 1, fy0 + 1, fx1 - 1, fy0 + 5, "#768a9e")
+                cover_art(cv, "仙侠与志怪", fx0 + 1, fy0 + 5, fx1 - 1, fy1 - 7, rnd, glow)
+                cv.rect(fx0 + 1, fy1 - 7, fx1 - 1, fy1 - 1, "#f2e9d6")
+                cv.put((fx0 + fx1) // 2, fy0 - 1, "#cfa850")      # tiny brass wall pin
+                over.append(text((fx0 + fx1) / 2 * C, (fy1 - 2.3) * C, "本周特展", 13.5, "#24192a", 800, "middle", 0.4, SANS))
+
+        elif b == 1:
+            # 1) Shelf II Left Top: Pinned wooden-framed 会员须知 (bumped to 13.5px legible!)
+            cv.rect(L0 + 1, FT + 2, L0 + 26, FT + 20, "#0e080a")
+            cv.rect(L0, FT + 1, L0 + 25, FT + 19, "#4a2f20")
+            cv.rect(L0 + 1, FT + 2, L0 + 24, FT + 18, "#f5ecd8")
+            cv.put(L0 + 12, FT + 1, "#cfa850")                    # brass pin
+            cv.rect(L0 + 3, FT + 9, L0 + 22, FT + 10, "#c83a54")
+            for k in range(3):
+                cv.rect(L0 + 3, FT + 11 + k * 2, L0 + 20 - k * 3, FT + 12 + k * 2, "#9a8a74")
+            over.append(text((L0 + 12.5) * C, (FT + 7.4) * C, "会员须知", 13.5, "#3a2218", 900, "middle", 0.6, SANS))
+
+            # 2) Shelf II Left Bottom: Plant + Steaming Mug (animated rising steam!)
+            plant(cv, L0 + 7, SY)
+            mug(cv, L0 + 15, SY)
+            glow.append(f'<g shape-rendering="crispEdges">{steam(L0 + 16, SY - 8)}</g>')
+
+            # 3) Shelf II Right Bottom: Clean Angled Return Drop Box (NO "two-eyed purple robot face"!)
+            cv.rect(R0 + 1, SY - 20, R0 + 25, SY, "#3e264c")
+            cv.rect(R0 + 1, SY - 20, R0 + 25, SY - 19, "#6a4980")
+            cv.rect(R0 + 1, SY - 1, R0 + 25, SY, "#1e1226")
+            # Beveled drop slot + a single slanted VHS tape edge sliding into the chute
+            cv.rect(R0 + 4, SY - 16, R0 + 22, SY - 13, "#120916")
+            cv.rect(R0 + 4, SY - 13, R0 + 22, SY - 12, "#74548a")
+            cv.poly([(R0 + 7, SY - 15), (R0 + 19, SY - 15), (R0 + 21, SY - 22), (R0 + 9, SY - 22)], TAPE)
+            cv.poly([(R0 + 8, SY - 16), (R0 + 18, SY - 16), (R0 + 20, SY - 21), (R0 + 10, SY - 21)], "#f2e9d6")
+            cv.line(R0 + 9, SY - 21, R0 + 19, SY - 21, "#ff6fae")
+            # Crisp brass-rimmed nameplate
+            cv.rect(R0 + 4, SY - 10, R0 + 22, SY - 3, "#241530")
+            cv.rect(R0 + 4, SY - 10, R0 + 22, SY - 9, "#cfa850")
+            over.append(text((R0 + 13) * C, (SY - 5.2) * C, "还片处", 14.5, "#ffe9b8", 900, "middle", 1.5, SANS))
+
+            # 4) Shelf II Above Col 0 (欧陆古典 7): 新片到货 poster seated FLUSH on top tape!
+            ex0 = int(BX0 + 4 + x_off)
+            top0 = SY - len(band[0][2]) * STEP
+            PX0, PY0 = ex0 + int(colw / 2) - 17, top0 - 36        # PY0 + 36 == top0 -> 100% FLUSH!
+            cv.rect(PX0 + 1, PY0 + 1, PX0 + 35, top0, "#0e080a")
+            cv.rect(PX0, PY0, PX0 + 34, top0, "#f5ecd8")
+            cv.rect(PX0 + 14, PY0 - 1, PX0 + 20, PY0 + 1, "#f2dfb0")   # top masking tape
+            cv.vgrad(PX0 + 3, PY0 + 12, PX0 + 31, PY0 + 33, ["#1d2350", "#3a2a66", "#6a3778", "#a2477e"])
+            for kk in range(4):
+                lx, ly = PX0 + 7 + kk * 7, PY0 + 18 - kk * 0.5
+                cv.rect(lx, PY0 + 12, lx + 1, int(ly), "#2a1e38")      # real lantern cord
+                cv.ellipse(lx, ly + 3, 2.4, 3, lambda x, y, lx=lx: "#ffcf6a" if x == int(lx) else "#e0402f")
+            cv.poly([(PX0 + 3, PY0 + 30), (PX0 + 10, PY0 + 26), (PX0 + 17, PY0 + 29), (PX0 + 24, PY0 + 25), (PX0 + 31, PY0 + 29), (PX0 + 31, PY0 + 33), (PX0 + 3, PY0 + 33)], "#1a1228")
+            over.append(text((PX0 + 17) * C, (PY0 + 9.0) * C, "新片到货", 17, "#c8324a", 900, "middle", 2, SANS))
+
+        elif b == 2:
+            # Shelf III has 5 bays [17, 11, 13, 12, 12] -> every prop seats cleanly in the natural niches above short stacks!
+            # 1) Above Col 1 (职场与律政 11): 想租的片 Standee seated FLUSH + centered typography + gold highlight!
+            ex1 = int(BX0 + 4 + colw)
+            top1 = SY - len(band[1][2]) * STEP
+            NX0, NY0 = ex1 + 3, top1 - 30                         # NY0 + 30 == top1 -> FLUSH & clear of Col 0!
+            NW_ = int(colw) - 6
+            cv.rect(NX0 + 1, NY0 + 1, NX0 + NW_ + 1, top1, "#0d070c")
+            cv.rect(NX0, NY0, NX0 + NW_, top1, "#221730")
+            cv.rect(NX0, NY0, NX0 + NW_, NY0 + 1, "#ff6fae")
+            cv.rect(NX0, top1 - 1, NX0 + NW_, top1, "#cfa850")
+            cv.rect(NX0, NY0 + 1, NX0 + 1, top1 - 1, "#4a3662")
+            cv.rect(NX0 + NW_ - 1, NY0 + 1, NX0 + NW_, top1 - 1, "#4a3662")
+            ncx = (NX0 + NW_ / 2) * C
+            over.append(text(ncx, (NY0 + 8.5) * C, "想租的片不在架上？", 14.5, "#f0e4ff", 800, "middle", 0.4, SANS))
+            over.append(text(ncx, (NY0 + 16.5) * C, "直接说", 14.5, "#dfd2f0", 700, "middle", 1, SANS))
+            over.append(text(ncx, (NY0 + 24.5) * C, "“自定义世界”", 16.5, "#ffd98e", 900, "middle", 1, SANS))
+
+            # 2) Above Col 2 (谍战与战地 13): Striped Popcorn Bucket + 3 Leaning 新到 Sleeves braced by brass L-bookend!
+            ex2 = int(BX0 + 4 + 2 * colw)
+            top2 = SY - len(band[2][2]) * STEP
+            pbx = ex2 + 6
+            cv.rect(pbx, top2 - 11, pbx + 10, top2, lambda x, y: "#d03c4e" if (x // 2) % 2 else "#f5ecd8")
+            for (px_, py_) in [(pbx + 2, top2 - 12), (pbx + 5, top2 - 13), (pbx + 8, top2 - 12), (pbx + 4, top2 - 11)]:
+                cv.ellipse(px_, py_, 1.6, 1.4, "#fff2c6")
+            for k in range(3):
+                sx = ex2 + 21 + k * 7
+                cv.poly([(sx, top2), (sx + 5, top2), (sx + 9, top2 - 19), (sx + 4, top2 - 19)], ["#3b2966", "#6a3478", "#9e4478"][k])
+                cv.poly([(sx + 1, top2 - 3), (sx + 4, top2 - 3), (sx + 7, top2 - 16), (sx + 4, top2 - 16)], ["#ff74b5", "#ffd98e", "#c9a2ff"][k])
+            # Crisp brass L-bookend bracing the right side of the leaning sleeves (physically grounded!)
+            cv.rect(ex2 + 44, top2 - 15, ex2 + 46, top2, "#cfa850")
+            cv.rect(ex2 + 44, top2 - 15, ex2 + 45, top2, "#f5dc94")
+            cv.rect(ex2 + 40, top2 - 2, ex2 + 46, top2, "#8a6a28")
+            # Pinned brass/plum 新到 mini plaque above the leaning sleeves
+            cv.rect(ex2 + 23, top2 - 28, ex2 + 45, top2 - 21, "#221630")
+            cv.rect(ex2 + 23, top2 - 28, ex2 + 45, top2 - 27, "#cfa850")
+            cv.put(ex2 + 34, top2 - 29, "#cfa850")                # brass wall pin
+            over.append(text((ex2 + 34) * C, (top2 - 22.8) * C, "新 到", 13.5, "#ffd98e", 900, "middle", 1, SANS))
+
+            # 3) Above Double-Wide Bay Col 3+4 (舞台与镜头 12+12, 5 rows = 60 cells free across 110-cell span!):
+            #    Centered 午夜场 cinema poster + 23:00 Easter-egg wall clock right beside it!
+            bay_l = int(BX0 + 4 + 3 * colw)
+            bay_r = int(BX0 + 4 + 5 * colw)
+            top34 = SY - 12 * STEP
+            MX0 = bay_l + 6
+            MY0 = LY + 15
+            # Symmetric masking tape (1-cell overhang on BOTH left and right!)
+            cv.rect(MX0 + 1, MY0 + 1, MX0 + 73, MY0 + 45, "#0d070c")
+            cv.rect(MX0, MY0, MX0 + 72, MY0 + 44, "#ebe0ca")
+            cv.vgrad(MX0 + 2, MY0 + 2, MX0 + 70, MY0 + 36, ["#0e1030", "#1d2350", "#3a2a66", "#6a3778"])
+            for _ in range(26):
+                cv.put(rnd.randrange(MX0 + 3, MX0 + 69), rnd.randrange(MY0 + 3, MY0 + 22), rnd.choice(["#d4dcff", "#949ad0"]))
+            # Clean mathematically masked crescent moon (ZERO flat-color dither patch artifact!)
+            mcx, mcy = MX0 + 56, MY0 + 11
+            for my_ in range(mcy - 6, mcy + 6):
+                for mx_ in range(mcx - 6, mcx + 6):
+                    if math.hypot(mx_ - mcx, my_ - mcy) <= 5.0 and math.hypot(mx_ - (mcx + 2.2), my_ - (mcy - 1.4)) > 4.2:
+                        cv.put(mx_, my_, "#fff2c6")
+            cv.poly([(MX0 + 2, MY0 + 32), (MX0 + 14, MY0 + 25), (MX0 + 26, MY0 + 30), (MX0 + 40, MY0 + 22), (MX0 + 54, MY0 + 29), (MX0 + 70, MY0 + 24), (MX0 + 70, MY0 + 36), (MX0 + 2, MY0 + 36)], "#140c22")
+            cv.rect(MX0 + 2, MY0 + 36, MX0 + 70, MY0 + 42, "#1a1418")
+            for fx in range(MX0 + 4, MX0 + 69, 4):
+                cv.rect(fx, MY0 + 37, fx + 2, MY0 + 38, "#ebe0ca")
+                cv.rect(fx, MY0 + 40, fx + 2, MY0 + 41, "#ebe0ca")
+            cv.rect(MX0 - 1, MY0 - 1, MX0 + 6, MY0 + 2, "#f6e6b0")          # left tape: 1-cell overhang
+            cv.rect(MX0 + 66, MY0 - 1, MX0 + 73, MY0 + 2, "#f6e6b0")        # right tape: exact 1-cell overhang!
+            over.append(text((MX0 + 36) * C, (MY0 + 19) * C, "午夜场", 30, "#ff74b5", 900, "middle", 6, SANS,
+                             'stroke="#140c22" stroke-width="4" paint-order="stroke"'))
+            over.append(text((MX0 + 36) * C, (MY0 + 30.0) * C, "每晚 23:00 · 两片连映", 14, "#ffe0ef", 800, "middle", 1.2, SANS))
+            glow.append(f'<ellipse cx="{(MX0 + 36) * C}" cy="{(MY0 + 16) * C}" rx="120" ry="48" fill="#ff6fae" fill-opacity="0.12" filter="url(#g15)"/>')
+
+            # Wall clock set precisely to 23:00 (Easter egg matching "每晚 23:00"!) right of the poster
+            clk_x, clk_y = bay_r - 17, MY0 + 18
+            cv.ellipse(clk_x + 1, clk_y + 1, 8, 8, "#0d070c")
+            cv.ellipse(clk_x, clk_y, 8, 8, "#cfa850")             # brass bezel
+            cv.ellipse(clk_x, clk_y, 6.6, 6.6, "#f5ecd8")         # cream dial
+            for px_, py_ in [(clk_x, clk_y - 5), (clk_x + 5, clk_y), (clk_x, clk_y + 5), (clk_x - 5, clk_y)]:
+                cv.put(px_, py_, "#6e4e2a")                       # 12/3/6/9 cardinal ticks
+            cv.line(clk_x, clk_y, clk_x, clk_y - 5, "#1f1622")    # minute hand straight up at 12 (:00)
+            cv.line(clk_x, clk_y, clk_x - 3, clk_y - 3, "#c83a54")  # distinct 11-o'clock hour hand (23:00!)
+            cv.put(clk_x, clk_y, "#cfa850")                       # center brass pin
+            over.append(text(clk_x * C, (clk_y + 12.8) * C, "23:00", 13.5, "#e6d8f5", 800, "middle", 1.0, MONO))
+
+        else:
+            # Shelf IV (5 cols):
+            # 1) Above Col 0 (赛场与博弈 7): Flush-seated Velvet-Plum & Champagne-Gold VIP Card + Wall Featured Sleeve!
+            ex0 = int(BX0 + 4)
+            top0 = SY - len(band[0][2]) * STEP
+            TX0, TY0 = ex0 + int(colw / 2) - 21, top0 - 12        # TY0 + 12 == top0 -> 100% FLUSH!
+            cv.rect(TX0 + 1, TY0 + 1, TX0 + 43, top0, "#0d070c")
+            cv.rect(TX0, TY0, TX0 + 42, top0, "#4a1e44")
+            cv.rect(TX0, TY0, TX0 + 42, TY0 + 1, "#cfa850")
+            cv.rect(TX0, top0 - 1, TX0 + 42, top0, "#240e24")
+            cv.rect(TX0 + 32, TY0 + 3, TX0 + 39, TY0 + 8, "#ffd98e")   # gold chip
+            cv.rect(TX0 + 34, TY0 + 5, TX0 + 37, TY0 + 6, "#a67428")
+            cv.text("CLUB", TX0 + 3, TY0 + 3, "#ffe9c4")
+            # Animated metallic sheen across the VIP card
+            sheen_defs.append(f'<clipPath id="vipclip"><rect x="{TX0 * C}" y="{TY0 * C}" width="{42 * C}" height="{12 * C}"/></clipPath>')
+            sheen_fx.append(
+                f'<g clip-path="url(#vipclip)"><rect x="{(TX0 - 12) * C}" y="{TY0 * C}" width="{12 * C}" height="{12 * C}" fill="url(#goldsheen)">'
+                f'<animate attributeName="x" values="{(TX0 - 12) * C};{(TX0 + 48) * C};{(TX0 + 48) * C}" keyTimes="0;0.25;1" dur="5.8s" repeatCount="indefinite"/></rect></g>'
+            )
+            # Wall-mounted featured cover sleeve above the VIP card to balance the tall left wall niche!
+            fx0, fy0 = ex0 + int(colw / 2) - 13, LY + 22
+            fx1, fy1 = fx0 + 26, fy0 + 36
+            cv.rect(fx0 + 1, fy0 + 1, fx1 + 1, fy1 + 1, "#0d070c")
+            cv.rect(fx0, fy0, fx1, fy1, "#1c1722")
+            cv.rect(fx0, fy0, fx1, fy0 + 1, "#584c68")
+            cv.rect(fx0 + 1, fy0 + 1, fx1 - 1, fy0 + 5, "#8a7068")
+            cover_art(cv, "赛场与博弈", fx0 + 1, fy0 + 5, fx1 - 1, fy1 - 7, rnd, glow)
+            cv.rect(fx0 + 1, fy1 - 7, fx1 - 1, fy1 - 1, "#f2e9d6")
+            cv.put((fx0 + fx1) // 2, fy0 - 1, "#cfa850")
+            over.append(text((fx0 + fx1) / 2 * C, (fy1 - 2.3) * C, "深夜必看", 13.5, "#24192a", 800, "middle", 0.4, SANS))
+
+            # 2) Above Col 3 (圣堂与魔裔 13): Redesigned Loafed Black Cat (2 tucked paws, side tail, tight gold pupils!)
+            cx = int(BX0 + 4 + 3 * colw + colw / 2) + 2
+            top3 = SY - len(band[3][2]) * STEP
+            CAT = [
+                "..x.......x.....",
+                ".xp.......px....",
+                ".xxx.....xxx....",
+                ".xxxxxxxxxxx....",
+                "xxxxxxxxxxxxx...",
+                "xxeexxxxxeexx...",
+                "xxxxxxnxxxxxx...",
+                ".xxxxxxxxxxx....",
+                "..xxxxxxxxx.....",
+                ".xxxxxxxxxxx....",
+                ".xxxxxxxxxxxx.x.",
+                "xxxxxxxxxxxxxx.x",
+                "xxxxxxxxxxxxxxx.",
+                "xxxxxxxxxxxxxx..",
+                ".xxxx...xxxx....",
+            ]
+            cx0, cy0 = cx - 8, top3 - len(CAT)                    # bottom row sits FLUSH on top3!
             for r, row in enumerate(CAT):
                 for q, ch in enumerate(row):
                     if ch == ".":
                         continue
                     edge = q == 0 or row[q - 1] == "." or r == 0 or CAT[r - 1][q] == "."
-                    cv.put(cx0 + q, cy0 + r, {"e": "#ffd84a", "n": "#d0607a", "p": "#7a3a58"}.get(ch, "#4a3a60" if edge else "#1e1626"))
-            glow.append(f'<ellipse cx="{(cx0 + 6.5) * C}" cy="{(cy0 + 5.5) * C}" rx="34" ry="12" fill="#ffd84a" fill-opacity="0.3" filter="url(#g6)"/>'
-                        + ''.join(f'<rect x="{ex * C}" y="{(cy0 + 5) * C}" width="{2 * C}" height="{C}" fill="#1e1626" opacity="0">'   # a slow blink
-                                  '<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.9;0.93;0.96;1" dur="5s" repeatCount="indefinite"/></rect>'
-                                  for ex in (cx0 + 2, cx0 + 9)))
-        if not EGGS[b]:
-            continue
-        kind, h = EGGS[b]
-        sc = slots[b]
-        ex = int(BX0 + 4 + x_off + sc * colw)
-        top = SY - len(band[sc][2]) * STEP                           # it leans on top of the short stack
-        if kind == "poster":                                        # a hand-drawn new-arrivals poster
-            PX0, PY0 = ex + int(colw / 2) - 17, top - 38
-            cv.rect(PX0 + 1, PY0 + 1, PX0 + 35, PY0 + 37, "#0e080a")
-            cv.rect(PX0, PY0, PX0 + 34, PY0 + 36, "#f6ecd6")
-            cv.vgrad(PX0 + 3, PY0 + 12, PX0 + 31, PY0 + 33, ["#1d2350", "#3a2a66", "#6a3778", "#a2477e"])
-            for kk in range(4):
-                lx, ly = PX0 + 7 + kk * 7, PY0 + 18 - kk * 0.5
-                cv.ellipse(lx, ly + 3, 2.4, 3, lambda x, y, lx=lx: "#ffcf6a" if x == int(lx) else "#e0402f")
-            cv.poly([(PX0 + 3, PY0 + 30), (PX0 + 10, PY0 + 26), (PX0 + 17, PY0 + 29), (PX0 + 24, PY0 + 25), (PX0 + 31, PY0 + 29), (PX0 + 31, PY0 + 33), (PX0 + 3, PY0 + 33)], "#1a1228")
-            over.append(text((PX0 + 17) * C, (PY0 + 9) * C, "新片到货", 17, "#d0304a", 900, "middle", 2, SANS))
-        elif kind == "standee":                                     # a little counter sign
-            NX0, NY0 = ex + 2, top - 32
-            cv.rect(NX0 + 1, NY0 + 1, NX0 + int(colw) - 3, NY0 + 31, "#0e080a")
-            cv.rect(NX0, NY0, NX0 + int(colw) - 4, NY0 + 30, "#241a2e")
-            cv.rect(NX0, NY0, NX0 + int(colw) - 4, NY0 + 1, "#ff6fae")
-            cv.rect(NX0, NY0 + 30, NX0 + int(colw) - 4, NY0 + 31, "#ff6fae")
-            for kk, line in enumerate(["想租的片", "不在架上？", "说“自定义世界”"]):
-                over.append(text((NX0 + 4) * C, (NY0 + 10 + kk * 7) * C, line, 16, "#ffd6e8", 800, "start", 1, SANS))
-        else:                                                       # a member card
-            TX0, TY0 = ex + int(colw / 2) - 21, top - 14
-            cv.rect(TX0 + 1, TY0 + 1, TX0 + 43, TY0 + 13, "#0e080a")
-            cv.rect(TX0, TY0, TX0 + 42, TY0 + 12, "#d85a8e")
-            cv.rect(TX0 + 32, TY0 + 3, TX0 + 39, TY0 + 8, "#ffcf6a")     # chip
-            cv.text("CLUB", TX0 + 3, TY0 + 3, "#ffe3f0")
-    pin_glow = "".join(f'<circle cx="{(px + 0.5) * C}" cy="{(py + 0.5) * C}" r="14" fill="#ffc94a" fill-opacity="0.7" filter="url(#g6)">'
-                       f'<animate attributeName="fill-opacity" values="0.8;0.3;0.8" dur="2.4s" begin="-{rnd.uniform(0, 2):.1f}s" repeatCount="indefinite"/></circle>'
-                       for px, py in lights)
-    # legend pins
-    cv.rect(124, 37, 127, 40, "#ff6fae")
-    cv.put(124, 37, "#ffd6e8")
+                    cv.put(cx0 + q, cy0 + r, {"e": "#ffd96a", "n": "#e07494", "p": "#824064"}.get(ch, "#4c3c64" if edge else "#1d1526"))
+            # Tight per-eye golden glint (ZERO muddy forehead fog!) + slow 5s blink
+            for ex in (cx0 + 2, cx0 + 9):
+                glow.append(
+                    f'<circle cx="{(ex + 1) * C}" cy="{(cy0 + 5.5) * C}" r="5.5" fill="#ffd96a" fill-opacity="0.38" filter="url(#g4)"/>'
+                    f'<rect x="{ex * C}" y="{(cy0 + 5) * C}" width="{2 * C}" height="{C}" fill="#1d1526" opacity="0">'
+                    '<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.90;0.93;0.96;1" dur="5.2s" repeatCount="indefinite"/></rect>'
+                )
+
+    # --- Header title + crisp rental-store legend (replaces orphan pink square!) -------------------------------------
+    # Tiny crisp pixel gold star in legend at left of legend copy
+    l_star = (
+        '<g fill="#ffd98e" shape-rendering="crispEdges">'
+        '<rect x="332" y="153" width="4" height="12"/><rect x="328" y="157" width="12" height="4"/>'
+        '<rect x="332" y="157" width="4" height="4" fill="#fff7dc"/></g>'
+    )
+    title_block = (
+        f'<g>{text(600 + 3, 82 + 3, f"{NWORLDS} 个世界", 52, "#12061c", 800, "middle", 3, SANS)}'
+        f'{text(600, 82, f"{NWORLDS} 个世界", 52, GLOW, 800, "middle", 3, SANS, "filter=\"url(#g4)\" opacity=\"0.85\"")}'
+        f'{text(600, 82, f"{NWORLDS} 个世界", 52, CORE, 800, "middle", 3, SANS, "stroke=\"#c48aff\" stroke-width=\"1.2\" paint-order=\"stroke\"")}</g>'
+    )
     body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}</g>
     {"".join(glow)}
-    {pin_glow}
     {"".join(over)}
-    {neon(600, 82, f"{NWORLDS} 个世界", 52, "middle", GLOW, CORE, flicker=True)}
-    {text(600, 122, "选一个直接开局，或者说“自定义世界”当场写一个", 21, SUBT, 600, "middle", 2)}
-    {text(520, 159, "全部已开放，可直接开局", 16, "#ffd6e8", 700, "start", 1)}
-    {text(BX1 * C, (BY1 + 9.5) * C, "名单会继续变长", 16, "#bfb2c8", 700, "end", 2)}'''
-    doc("worlds.svg", GW * C, GH * C, f"{NWORLDS} 个世界", WALL_DESC, "", body)
-
+    {"".join(sheen_fx)}
+    {title_block}
+    {text(600, 122, "选一个直接开局，或者说“自定义世界”当场写一个", 20.5, SUBT, 600, "middle", 1.8)}
+    {l_star}
+    {text(350, 165, f"抽出亮金 = 店长推荐（{len(STARS)} 部）  ·  全部 {NWORLDS} 部已开放，喊出片名直接开局", 15.5, "#ebdcf8", 700, "start", 0.8)}
+    {text(600, (BY1 + 10.5) * C, f"· 全部 {NWORLDS} 个世界已开放 · 名单会继续变长 ·", 16.5, "#cfc3df", 600, "middle", 1.6)}'''
+    worlds_defs = (
+        '<filter id="g4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5"/></filter>'
+        '<linearGradient id="lampcone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd894" stop-opacity="0.18"/><stop offset="0.55" stop-color="#ffcf8a" stop-opacity="0.05"/><stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/></linearGradient>'
+        '<linearGradient id="goldsheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff4d6" stop-opacity="0"/><stop offset="0.5" stop-color="#fff4d6" stop-opacity="0.45"/><stop offset="1" stop-color="#fff4d6" stop-opacity="0"/></linearGradient>'
+        + "".join(sheen_defs)
+    )
+    doc("worlds.svg", GW * C, GH * C, f"{NWORLDS} 个世界", WALL_DESC, worlds_defs, body)
 
 # ================================================================ compact inventory stat panel
 ITEMS = [("1090+", "地点"), ("1320+", "NPC 角色"), ("1020+", "玩家身份"), ("2050+", "人物组合"), ("890+", "张力引擎"),
