@@ -63,29 +63,29 @@ If Adult Tension has kept you company through a few immersive nights, consider b
   <img src=".github/readme-lofi/section-proof.svg?v=230" width="100%" alt="A slice of play: live scenes driven by the local engine">
 </p>
 
-**Bakumatsu Kyoto · Pressure mode.** You're a live-in swordsman at a Kyoto dojo. Your old travel pass was just confiscated at the guardhouse with eleven minutes before it goes to the magistrate—and while serving tea a moment ago, you spotted the secret duel challenge and bandaged rib wound hidden beneath the stern 39-year-old acting head instructor **Ishida Hatsune**'s sleeve. By the counter, rogue ronin **Akiyama Kotone** watches with arms folded.
+**The Housewife Across the Thin Wall · Pressure mode.** You're a salaryman in Room 203 of an aging wooden apartment in Sumida, Tokyo, with fifteen minutes before landlady **Mizuno Rie** cuts the breaker for a forced eviction—and **Asai Yui**, the 27-year-old newlywed housewife next door, just slipped across the shared balcony into your room to hide from debt collectors, letting you spot the forged loan note and seal proof inside her tin box. Just beyond the thin plywood wall, loan-shark enforcer **Sasaki Tatsuya** patrols the corridor with a steel pipe.
 
-👤 **You:** `我走到石田初音面前，压低声音说：“你藏的东西我看见了，你最好听我的。”` *(I step up to Ishida Hatsune and say low: "I saw what you're hiding. You'd better listen to me.")*
+👤 **You:** `我挂上门链逼近浅井结衣，压低声音说：“你铁盒里的东西我看见了，不想被赶出去就听我的。”` *(I hook the door chain, step close to Asai Yui, and say low: "I saw what's in your tin box. If you don't want to be thrown out, you'd better listen to me.")*
 
-> Beneath her dark indigo sleeve, Ishida Hatsune's left hand presses deeper against her bandaged ribs; above her starched white collar, her collarbone rises once and stills. Instead of backing away, she steps half an inch into your shadow—close enough for you to catch the bitter scent of herbal salve and cold rain at her throat:
+> Asai Yui's back stiffens against the faded striped wallpaper; she presses the tin box half an inch deeper into her pale grey cotton-linen apron, her collarbone rising once beneath the collar of her light blue house dress. Instead of retreating toward the balcony, she lifts her rain-damp lashes in the dim desk lamp—close enough for you to catch the scent of cold rain and roasted barley tea in her hair:
 >
-> *"Heihachi, a few months splitting firewood in the back hall and you think you can bargain with me? Eleven minutes until the guardhouse clapper sounds—without my seal on your voucher, by dawn you're a wanted runaway. If you want to hold that challenge letter over me, go ahead and shout. Let's see whether the dojo's name falls first, or the cangue closes around your neck."*
+> *"Mr. Takahashi, you're always so polite taking a box of simmered vegetables across the balcony, yet the moment the door closes you know how to corner a neighbor? Fifteen minutes until the landlady cuts the power, and the debt collectors' steel pipes are right outside. Throw me out that door now—harboring a married woman on top of a loan-shark brawl—and a dismissal letter from your Ginza trading firm will hit your desk by morning."*
 
-👤 **You:** `我又靠近一步，伸手去碰石田初音的脸` *(I step closer and reach out to touch Ishida Hatsune's face)*
+👤 **You:** `我又靠近半步，伸手去碰浅井结衣的脸` *(I step half a pace closer and reach out to touch Asai Yui's face)*
 
-> **"Smack!"** Your fingertips barely graze the cool, damp hair at her temple before a calloused palm intercepts your wrist—the grip heavy and unforgiving, yet her palm burns against your skin with the unmistakable low fever of an inflamed wound. Hatsune glides back half a pace, her right thumb clicking the sword guard open to bare a razor sliver of steel in the lamplight:
+> **"Smack!"** Your fingertips barely graze the damp hair at her temple before her rain-chilled fingers clamp around your wrist—her fingertips strain white, yet her palm burns against your pulse with a damp, cornered heat. Yui turns her face half an inch away, her spine pressing hard against the thin plywood wall as she catches her lower lip between her teeth to swallow back a sharp gasp:
 >
-> *"Tired of keeping that hand? The dojo feeds you—did nobody teach you what manners look like? Reach one inch closer and neither of us walks out of this hall intact tonight."*
+> *"Don't touch me! I haven't fallen so low that I'd pay off a debt with my body. Let go—this wall is just a thin sheet of plywood, or do you want the whole floor to hear?"*
 
 👤 **You:** `继续` *(continue)*
 
-> In the dead silence, Hatsune's breathing falters beneath her collar. The sudden block tore open the dressing at her ribs; a bead of cold sweat slips down the taut line of her jaw into her kimono, and her thumb on the iron guard trembles just enough to tap faintly against the black lacquer scabbard.
+> Nothing fills the cramped six-tatami room but rain drumming on the tin awning. The five fingers clamped around your wrist fail to push you back, slipping bit by bit toward the web of your thumb as her strength gives out; blood beads at the ankle she scraped climbing the balcony rail, and a flush of shame creeps up the taut line of her neck to her ear as her chest rises and falls beneath her apron.
 >
-> Out in the rain-soaked lane, the watchman's clogs and wooden clappers round the corner. Akiyama Kotone uncrosses her arms, steps smoothly forward, and wedges her sheathed short blade between your chests with a soft *thud*, eyeing Hatsune's pale lips with a half-smile: *"Instructor, the guardhouse patrol's at the door—are we still drawing steel tonight, or not?"*
+> Out in the corridor, the floorboards creak under heavy wet shoes and a ring of brass keys stopping right outside your door. Mizuno Rie raps the panel with her spare key as Sasaki Tatsuya braces his short steel pipe against the doorframe, his hoarse laugh cutting straight through the plywood: *"Takahashi, I just heard a window slide—open up yourself, or wait till I smash my way in?"*
 >
-> <sub>`[Time] Day 1, 20:45` · `[Place] Inn ledger hall` · `Turn: 6`</sub>
+> <sub>`[Time] 1992, Rainy Season (22:45)` · `[Place] Single tatami room next door` · `Turn: 6`</sub>
 
-Pressed with leverage and tested up close, she neither caves into instant submission nor turns into a wooden refusal bot: her tongue gives zero ground, yet her fever-hot palm and the faint click of her trembling thumb on the guard give her away.  
+Pressed with leverage and tested up close, she neither caves into instant submission nor turns into a wooden refusal bot: her tongue gives zero ground, yet her fever-hot palm and the trembling fingers slipping toward your wrist give her away.  
 **Real adult tension isn't instant compliance—it's the undercurrent right before composure cracks.**
 
 <details>
@@ -106,7 +106,7 @@ Pressed with leverage and tested up close, she neither caves into instant submis
 
 </details>
 
-<sub>Adapted and polished from real end-to-end test runs (translated from Chinese); unedited raw benchmark logs and scores: [`pi-s06-r10.json`](reports/e2e/records/pi/pi-s06-r10.json) · [`pi-s07-r10.json`](reports/e2e/records/pi/pi-s07-r10.json) · E2E report: [`reports/e2e/report.md`](reports/e2e/report.md) · All playtests and scores: [`reports/playtests/playtests.md`](reports/playtests/playtests.md)</sub>
+<sub>The main showcase demonstrates Pressure mode in the built-in world *The Housewife Across the Thin Wall* (`neighbor_wife_thin_wall`), and the expandable slice is adapted from real end-to-end test runs (translated from Chinese); unedited raw benchmark logs and scores: [`pi-s06-r10.json`](reports/e2e/records/pi/pi-s06-r10.json) · [`pi-s07-r10.json`](reports/e2e/records/pi/pi-s07-r10.json) · E2E report: [`reports/e2e/report.md`](reports/e2e/report.md) · All playtests and scores: [`reports/playtests/playtests.md`](reports/playtests/playtests.md)</sub>
 
 <br>
 
