@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/readme-lofi/hero.svg?v=212" width="100%" alt="Adult Tension。像素风黄昏卧室：一个人坐在床边弹红色电吉他，窗外是霓虹城市，窗上写着 ADULT TENSION；她头边一个像素思考气泡，写着她的心里话：再弹一首……他该来敲门了吧。18+，尺度全开，真实成人互动，Claude Opus 5.5 从零重构。下方三栏：活人感 NPC、211 个深度世界、自运行状态机。">
+  <img src=".github/readme-lofi/hero.svg?v=226" width="100%" alt="Adult Tension。像素风黄昏卧室：一个人坐在床边弹红色电吉他，窗外是霓虹城市，右上窗面挂着带金铆钉的双框霓虹灯箱 ADULT TENSION · NIGHT SHIFT · 211 WORLDS；画面底部无遮挡地叠放一条 AVG 表里双轨对话栏，在冷银紫「嘴上说：吵到你了？这就停。门没锁，拿完东西就走。」与绯粉霓虹「心里想：……别光站门外听，进来把门反锁啊。」之间扫线翻转。下方卖点条展示 18+、尺度全开·真实成人互动、与表里切换同步由 CALM 升至 PULSE 的 16 段 TENSION 张力电平条，以及 Claude Opus 5.5 从零重构。底部三栏：活人感 NPC、211 个深度世界、自运行状态机。">
 </p>
 
 <div align="center">
