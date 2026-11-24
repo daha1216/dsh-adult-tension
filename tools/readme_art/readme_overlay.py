@@ -90,7 +90,7 @@ def px_icon(rows, pal, x, y, px=5):
 # FRAMED NEON ROOFTOP MARQUEE SIGNBOARD
 # ==============================================================================
 def marquee_title():
-    x0, y0, x1, y1 = 682, 8, 1004, 120
+    x0, y0, x1, y1 = 682, 11, 1004, 122
     cx = (x0 + x1) / 2
     frame = (
         f'<ellipse cx="{cx}" cy="{(y0 + y1) / 2}" rx="185" ry="62" fill="#ff5fa8" fill-opacity="0.14" filter="url(#g18)">'
@@ -122,11 +122,11 @@ def marquee_title():
         )
         return sh + gl + core
 
-    sub = f'<text x="{cx}" y="106" font-family="{MONO}" font-size="10.5" font-weight="700" fill="#e8c68a" text-anchor="middle" letter-spacing="2.4">NIGHT SHIFT · {NWORLDS} WORLDS</text>'
+    sub = f'<text x="{cx}" y="108" font-family="{MONO}" font-size="11.5" font-weight="700" fill="#edd098" text-anchor="middle" letter-spacing="2.2">NIGHT SHIFT · {NWORLDS} WORLDS</text>'
     return (
         frame
-        + marquee_word("ADULT", 48, "#ff6fae", "#ff96c8", 6, buzz_idx=3)
-        + marquee_word("TENSION", 85, "#c48aff", "#d4a8ff", 4, buzz_idx=4)
+        + marquee_word("ADULT", 50, "#ff6fae", "#ff96c8", 6, buzz_idx=3)
+        + marquee_word("TENSION", 87, "#c48aff", "#d4a8ff", 4, buzz_idx=4)
         + sub
     )
 
@@ -135,15 +135,15 @@ def marquee_title():
 # BOTTOM AVG SURFACE <-> INNER DIALOGUE RAIL (UNOBSTRUCTED BEDROOM COMPOSITION)
 # ==============================================================================
 def avg_dialogue_rail():
-    x0, y0 = 216, 412
-    bw, bh = 848, 72
+    x0, y0 = 264, 412
+    bw, bh = 752, 72
     x1, y1 = x0 + bw, y0 + bh
 
     surf_text = "「吵到你了？这就停。门没锁，拿完东西就走。」"
     inner_text = "「……别光站门外听，进来把门反锁啊。」"
 
-    surf_vis = fx.blink(T, [(0, 1), (7.2, 0), (19.2, 1)])
-    inner_vis = fx.blink(T, [(0, 0), (7.2, 1), (19.2, 0)])
+    surf_vis = fx.blink(T, [(0, 1), (7.20, 0), (19.48, 1)])
+    inner_vis = fx.blink(T, [(0, 0), (7.20, 1), (19.48, 0)])
 
     def px_chevron(cx, cy, col):
         return (
@@ -160,13 +160,13 @@ def avg_dialogue_rail():
         f'<g opacity="1">{surf_vis}'
         + '<g shape-rendering="crispEdges">'
         + pxborder(x0, y0, x1, y1, "#120820", "#9c8ac8", cut=4, t=2, fill_op="0.86")
-        + f'<rect x="{x0 + 14}" y="{y0 + 14}" width="84" height="44" fill="#251842"/>'
-        + f'<rect x="{x0 + 14}" y="{y0 + 14}" width="4" height="44" fill="#a894e0"/>'
+        + f'<rect x="{x0 + 14}" y="{y0 + 13}" width="92" height="46" fill="#251842"/>'
+        + f'<rect x="{x0 + 14}" y="{y0 + 13}" width="4" height="46" fill="#a894e0"/>'
         + "</g>"
-        + f'<text x="{x0 + 58}" y="{y0 + 36}" font-family="{SANS}" font-size="14" font-weight="800" fill="#e2d9fa" text-anchor="middle" letter-spacing="1">嘴上说</text>'
-        + f'<text x="{x0 + 58}" y="{y0 + 51}" font-family="{MONO}" font-size="9.5" fill="#9a8ac2" text-anchor="middle" letter-spacing="1">SURFACE</text>'
-        + f'<text x="{x0 + 120}" y="{y0 + 44}" font-family="{SANS}" font-size="23" font-weight="700" fill="#efe9fb" letter-spacing="1.5">{esc(surf_text)}</text>'
-        + px_chevron(x1 - 32, y0 + 36, "#b49eff")
+        + f'<text x="{x0 + 62}" y="{y0 + 35}" font-family="{SANS}" font-size="15" font-weight="800" fill="#e6defc" text-anchor="middle" letter-spacing="1">嘴上说</text>'
+        + f'<text x="{x0 + 62}" y="{y0 + 52}" font-family="{MONO}" font-size="11" font-weight="700" fill="#a999d0" text-anchor="middle" letter-spacing="1.2">SURFACE</text>'
+        + f'<text x="{x0 + 124}" y="{y0 + 44.5}" font-family="{SANS}" font-size="23.5" font-weight="700" fill="#efe9fb" letter-spacing="1.3">{esc(surf_text)}</text>'
+        + px_chevron(x1 - 30, y0 + 35, "#b49eff")
         + "</g>"
     )
 
@@ -176,23 +176,25 @@ def avg_dialogue_rail():
         + '<animate attributeName="opacity" values="0.42;0.74;0.42" dur="1.6s" repeatCount="indefinite"/></rect>'
         + '<g shape-rendering="crispEdges">'
         + pxborder(x0, y0, x1, y1, "#1f0824", "#ff6fae", cut=4, t=2, fill_op="0.90")
-        + f'<rect x="{x0 + 14}" y="{y0 + 14}" width="84" height="44" fill="#4f1535"/>'
-        + f'<rect x="{x0 + 14}" y="{y0 + 14}" width="4" height="44" fill="#ff6fae"/>'
+        + f'<rect x="{x0 + 14}" y="{y0 + 13}" width="92" height="46" fill="#4f1535"/>'
+        + f'<rect x="{x0 + 14}" y="{y0 + 13}" width="4" height="46" fill="#ff6fae"/>'
         + "</g>"
-        + f'<text x="{x0 + 58}" y="{y0 + 36}" font-family="{SANS}" font-size="14" font-weight="800" fill="#ffe6f2" text-anchor="middle" letter-spacing="1">心里想</text>'
-        + f'<text x="{x0 + 58}" y="{y0 + 51}" font-family="{MONO}" font-size="9.5" font-weight="700" fill="#ff9cc8" text-anchor="middle" letter-spacing="1">INNER</text>'
+        + f'<text x="{x0 + 62}" y="{y0 + 35}" font-family="{SANS}" font-size="15" font-weight="800" fill="#ffe6f2" text-anchor="middle" letter-spacing="1">心里想</text>'
+        + f'<text x="{x0 + 62}" y="{y0 + 52}" font-family="{MONO}" font-size="11" font-weight="700" fill="#ffa8d0" text-anchor="middle" letter-spacing="1.2">INNER</text>'
         + '<g clip-path="url(#avgReveal)">'
-        + neon_crisp(x0 + 120, y0 + 44, inner_text, 23, "#ff6fae", "#fff4fa", "start", 1.5, 800, "#1c0514", "g4")
+        + neon_crisp(x0 + 124, y0 + 44.5, inner_text, 23.5, "#ff6fae", "#fff4fa", "start", 1.3, 800, "#1c0514", "g4")
         + "</g>"
-        + px_chevron(x1 - 32, y0 + 36, "#ff74b5")
+        + px_chevron(x1 - 30, y0 + 35, "#ff74b5")
         + "</g>"
     )
 
     scan = (
-        f'<rect x="{x0 + 2}" y="{y0 + 2}" width="18" height="{bh - 4}" fill="#ff74b5" opacity="0" shape-rendering="crispEdges">'
-        f'<animate attributeName="opacity" values="0;0;0.75;0.75;0;0;0.65;0.65;0;0" keyTimes="0;0.355;0.358;0.375;0.378;0.955;0.958;0.975;0.978;1" dur="{T}s" repeatCount="indefinite"/>'
-        f'<animate attributeName="x" values="{x0 + 2};{x0 + 2};{x1 - 20};{x0 + 2};{x1 - 20};{x1 - 20}" keyTimes="0;0.356;0.376;0.956;0.976;1" dur="{T}s" repeatCount="indefinite"/>'
-        f'</rect>'
+        f'<g opacity="0">'
+        f'<animate attributeName="opacity" values="0;0;0.95;0.95;0;0;0.88;0.88;0;0" keyTimes="0;0.359;0.360;0.388;0.390;0.959;0.960;0.974;0.976;1" dur="{T}s" repeatCount="indefinite"/>'
+        f'<animateTransform attributeName="transform" type="translate" values="382 0;382 0;892 0;892 0;382 0;382 0" keyTimes="0;0.360;0.388;0.960;0.974;1" dur="{T}s" repeatCount="indefinite"/>'
+        f'<rect x="-6" y="{y0 + 6}" width="16" height="{bh - 12}" fill="#ff5fa8" filter="url(#g4)" opacity="0.75"/>'
+        f'<rect x="0" y="{y0 + 4}" width="4" height="{bh - 8}" fill="#fff0f8" shape-rendering="crispEdges"/>'
+        f'</g>'
     )
     return surf_g + inner_g + scan
 
@@ -221,13 +223,14 @@ def selling_strip():
         + neon_crisp(340, H + 55, "真实成人互动", 32, "#c08cff", "#fff7fc", "start", 2, 800)
     )
 
-    mx0 = 588
+    mx0 = 601
     mid_parts = [
-        f'<text x="{mx0}" y="{H + 32}" font-family="{MONO}" font-size="11" font-weight="700" fill="#a290c2" letter-spacing="2.5">TENSION</text>',
-        f'<text x="{mx0 + 278}" y="{H + 32}" font-family="{MONO}" font-size="11" font-weight="700" fill="#b4a2d8" text-anchor="end" letter-spacing="1.5" opacity="1">'
-        f'{fx.blink(T, [(0, 1), (7.2, 0), (19.2, 1)])}CALM</text>',
-        f'<text x="{mx0 + 278}" y="{H + 32}" font-family="{MONO}" font-size="11" font-weight="700" fill="#ff74b5" text-anchor="end" letter-spacing="1.5" opacity="0">'
-        f'{fx.blink(T, [(0, 0), (7.2, 1), (19.2, 0)])}PULSE</text>',
+        dots_v(562, H + 18, H + 68, "#6a5488"),
+        f'<text x="{mx0}" y="{H + 31}" font-family="{MONO}" font-size="12.5" font-weight="700" fill="#b6a4d8" letter-spacing="2.2">TENSION</text>',
+        f'<text x="{mx0 + 274.5}" y="{H + 31}" font-family="{MONO}" font-size="12.5" font-weight="700" fill="#c4b3e6" text-anchor="end" letter-spacing="1.4" opacity="1">'
+        f'{fx.blink(T, [(0, 1), (7.20, 0), (19.48, 1)])}CALM</text>',
+        f'<text x="{mx0 + 274.5}" y="{H + 31}" font-family="{MONO}" font-size="12.5" font-weight="700" fill="#ff80bc" text-anchor="end" letter-spacing="1.4" opacity="0">'
+        f'{fx.blink(T, [(0, 0), (7.20, 1), (19.48, 0)])}PULSE</text>',
     ]
     colors = [
         "#7a58c8", "#845dd0", "#8e62d8", "#9868df", "#a46ee5", "#b272e8", "#c274e6", "#d274df",
@@ -431,7 +434,7 @@ defs = f'''<filter id="g3" x="-50%" y="-50%" width="200%" height="200%"><feGauss
     <radialGradient id="roomvig" cx="0.48" cy="0.46" r="0.72"><stop offset="0.58" stop-color="#090312" stop-opacity="0"/><stop offset="1" stop-color="#090312" stop-opacity="0.46"/></radialGradient>
     <linearGradient id="botfade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c0d30" stop-opacity="0"/><stop offset="1" stop-color="#1c0d30" stop-opacity="0.72"/></linearGradient>
     <clipPath id="winclip"><rect x="386" y="0" width="122" height="142"/><rect x="616" y="0" width="400" height="138"/></clipPath>
-    <clipPath id="avgReveal"><rect x="328" y="412" width="0" height="72"><animate attributeName="width" values="0;0;700;700;0;0" keyTimes="0;0.362;0.425;0.960;0.962;1" dur="{T}s" repeatCount="indefinite"/></rect></clipPath>'''
+    <clipPath id="avgReveal"><rect x="382" y="412" width="0" height="72"><animate attributeName="width" values="0;0;510;510;0;0" keyTimes="0;0.360;0.388;0.960;0.974;1" dur="{T}s" repeatCount="indefinite"/></rect></clipPath>'''
 
 svg = pk.svg_doc(
     W, H2, "Adult Tension",

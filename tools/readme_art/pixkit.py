@@ -176,10 +176,12 @@ def svg_doc(W, H, title, desc, defs, body):
   <desc id="d">{desc}</desc>
   <defs>
     {defs}
+    <linearGradient id="frameBdr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2d0ff" stop-opacity="0.22"/><stop offset="0.55" stop-color="#b894ff" stop-opacity="0.14"/><stop offset="1" stop-color="#cca4ff" stop-opacity="0.20"/></linearGradient>
     <clipPath id="frame"><rect width="{W}" height="{H}" rx="16"/></clipPath>
   </defs>
   <g clip-path="url(#frame)">
 {body}
+    <rect x="0.75" y="0.75" width="{W - 1.5}" height="{H - 1.5}" rx="15.25" fill="none" stroke="url(#frameBdr)" stroke-width="1.5"/>
   </g>
 </svg>
 '''

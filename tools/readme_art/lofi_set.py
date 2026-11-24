@@ -54,8 +54,8 @@ DEFS = '''<pattern id="wallp" width="48" height="8" patternUnits="userSpaceOnUse
     <radialGradient id="vig" cx="0.5" cy="0.5" r="0.8"><stop offset="0.62" stop-color="#05020a" stop-opacity="0"/><stop offset="1" stop-color="#05020a" stop-opacity="0.48"/></radialGradient>'''
 
 
-def crop(box, x, y, w, h, fade=None):
-    """A losslessly re-encoded crop of the user's picture placed at (x, y, w, h); fade=(id, start) melts its right edge."""
+def crop(box, x, y, w, h, fade=None, vfade=False):
+    """A losslessly re-encoded crop of the user's picture placed at (x, y, w, h); fade melts its right edge; vfade melts its bottom edge."""
     buf = io.BytesIO()
     PIC.crop(box).save(buf, "WEBP", lossless=True)
     href = "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
@@ -63,11 +63,20 @@ def crop(box, x, y, w, h, fade=None):
     if not fade:
         return img
     fid, t = fade
-    mid = round((t + 1.0) / 2, 2)
-    return (f'<defs><linearGradient id="{fid}g" x1="{x}" y1="0" x2="{x + w}" y2="0" gradientUnits="userSpaceOnUse">'
-            f'<stop offset="0" stop-color="#fff"/><stop offset="{t}" stop-color="#fff"/><stop offset="{mid}" stop-color="#888"/><stop offset="1" stop-color="#000"/></linearGradient>'
-            f'<mask id="{fid}"><rect x="{x}" y="{y}" width="{w}" height="{h}" fill="url(#{fid}g)"/></mask></defs>'
-            f'<g mask="url(#{fid})" opacity="0.88">{img}</g>')
+    if not vfade:
+        mid = round((t + 1.0) / 2, 2)
+        return (f'<defs><linearGradient id="{fid}g" x1="{x}" y1="0" x2="{x + w}" y2="0" gradientUnits="userSpaceOnUse">'
+                f'<stop offset="0" stop-color="#fff"/><stop offset="{t}" stop-color="#fff"/><stop offset="{mid}" stop-color="#888"/><stop offset="1" stop-color="#000"/></linearGradient>'
+                f'<mask id="{fid}"><rect x="{x}" y="{y}" width="{w}" height="{h}" fill="url(#{fid}g)"/></mask></defs>'
+                f'<g mask="url(#{fid})" opacity="0.88">{img}</g>')
+    return (f'<defs>'
+            f'<linearGradient id="{fid}hg" x1="{x}" y1="0" x2="{x + w}" y2="0" gradientUnits="userSpaceOnUse">'
+            f'<stop offset="0" stop-color="#fff"/><stop offset="{t}" stop-color="#fff"/><stop offset="0.68" stop-color="#888"/><stop offset="0.93" stop-color="#000"/><stop offset="1" stop-color="#000"/></linearGradient>'
+            f'<linearGradient id="{fid}vg" x1="0" y1="{y}" x2="0" y2="{y + h}" gradientUnits="userSpaceOnUse">'
+            f'<stop offset="0" stop-color="#fff"/><stop offset="0.48" stop-color="#fff"/><stop offset="0.72" stop-color="#8c8c8c"/><stop offset="0.88" stop-color="#262626"/><stop offset="0.96" stop-color="#000"/><stop offset="1" stop-color="#000"/></linearGradient>'
+            f'<mask id="{fid}h"><rect x="{x}" y="{y}" width="{w}" height="{h}" fill="url(#{fid}hg)"/></mask>'
+            f'<mask id="{fid}v"><rect x="{x}" y="{y}" width="{w}" height="{h}" fill="url(#{fid}vg)"/></mask></defs>'
+            f'<g mask="url(#{fid}h)" opacity="0.88"><g mask="url(#{fid}v)">{img}</g></g>')
 
 
 def dotline(W, y, begin=0.0):
@@ -89,7 +98,7 @@ def webp_href(img):
     return "data:image/webp;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
-DUSK = [(17, 13, 34), (24, 17, 48), (33, 21, 60), (44, 25, 70), (57, 28, 76), (70, 30, 78), (84, 33, 80)]
+DUSK = [(17, 13, 34), (24, 17, 48), (33, 21, 60), (44, 25, 70), (55, 27, 73), (63, 27, 72), (72, 29, 75)]
 
 
 def background(name, W, H):
@@ -291,14 +300,16 @@ def banner(name, title, sub, seed, box, vig):
     vc.rect(0, DESK + 2, 78, DESK + 3, "#140c10")
     for bx in (6, 68):
         vc.poly([(bx, DESK + 2), (bx + 4, DESK + 2), (bx, DESK + 6)], "#3a3440")
-    body = f'''    {crop(box, 0, 0, 480, BH * C, ("fade", 0.38))}
-    <ellipse cx="{BW * C - 280}" cy="98" rx="290" ry="70" fill="{GLOW}" fill-opacity="0.16" filter="url(#g30)"/>
+    core_layers = f'''    <ellipse cx="{BW * C - 280}" cy="98" rx="290" ry="70" fill="{GLOW}" fill-opacity="0.16" filter="url(#g30)"/>
     <g shape-rendering="crispEdges">{cv.emit(C)}</g>
     <g transform="translate({VX * C} 0)"><g shape-rendering="crispEdges">{vc.emit(C)}</g>{extra}</g>
     {neon(BW * C - 46, 96, title, 48, "end", GLOW, CORE, flicker=True)}
-    {text(BW * C - 48, 138, sub, 20, SUBT, 600, "end", 1.8)}
+    {text(BW * C - 48, 138, sub, 20, SUBT, 600, "end", 1.8)}'''
+    body = f'''    {crop(box, 0, 0, 480, BH * C, ("fade", 0.38))}
+{core_layers}
     {dotline(BW * C, 0, seed * 0.9)}'''
     doc(name, BW * C, BH * C, title, sub, "", body)
+    PARTS[name + ":lib"] = (BW * C, BH * C, "", f"    {crop(box, 0, 0, 480, BH * C, ('libfade', 0.36), vfade=True)}\n{core_layers}")
 
 
 def v_proof(cv, rnd):        # the monitor with the chat
@@ -781,53 +792,67 @@ EXACT = {
 TOTAL_EXACT = sum(EXACT.values())
 MATERIAL = "一万五千余项素材"
 INV_DESC = f"紧凑复古数据面板展示 {TOTAL_EXACT:,} 项独立叙事素材，右侧按数量降序排列分段像素条：{'、'.join(f'{n} {l}' for n, l in ITEMS)}。"
-BAR_ACCENTS = ["#ff8fc4", "#84e2f5", "#ffd685", "#b98cff", "#ff9e7d", "#82d9a8", "#e59cff", "#7cb4ff", "#ffb884", "#78dfd0"]
+BAR_ACCENTS = [
+    "#ffd98e", "#ff9bc2", "#ff6fae", "#ef72ca", "#d877e6",
+    "#c27af5", "#ac7eff", "#967cf8", "#8477ea", "#746fdc",
+]
 
 
 def inventory():
     GW, GH = 300, 62
     cv = pk.Canvas(GW, GH)
-    over, fx = [], []
+    over, fx, tips = [], [], []
     item_map = {lbl: num for num, lbl in ITEMS}
 
-    # Outer sleek framed panel aligned strictly with genres sleeves (10..290)
-    CX0, CY0, CX1, CY1 = 10, 4, 290, GH - 6
+    # Outer sleek 4-side framed console aligned strictly with genres sleeves (10..290)
+    CX0, CY0, CX1, CY1 = 10, 5, 290, GH - 5
     cv.rect(CX0 + 2, CY0 + 2, CX1 + 2, CY1 + 2, "#09050d")
     cv.rect(CX0, CY0, CX1, CY1, "#1c1428")
-    cv.rect(CX0, CY0, CX1, CY0 + 1, "#5a4874")
-    cv.rect(CX0, CY1 - 1, CX1, CY1, "#100918")
     SX = 98
     cv.rect(CX0 + 1, CY0 + 1, SX, CY1 - 1, "#231932")
+    cv.rect(CX0, CY0, CX1, CY0 + 1, "#634f80")
+    cv.rect(CX0, CY1 - 1, CX1, CY1, "#100918")
+    cv.rect(CX0, CY0 + 1, CX0 + 1, CY1 - 1, "#4c3b66")
+    cv.rect(CX1 - 1, CY0 + 1, CX1, CY1 - 1, "#3b2c52")
     cv.rect(SX, CY0 + 4, SX + 1, CY1 - 4, "#473760")
 
-    # Left hero total card
-    fx.append(f'<ellipse cx="{(CX0 + SX) / 2 * C}" cy="{(CY0 + 22) * C}" rx="120" ry="48" fill="#b985ff" fill-opacity="0.18" filter="url(#g30)"/>')
-    over.append(text((CX0 + SX) / 2 * C, (CY0 + 11.5) * C, "NARRATIVE BUILDING BLOCKS", 11.5, "#b8a9cc", 700, "middle", 1.8, MONO))
-    over.append(neon((CX0 + SX) / 2 * C, (CY0 + 25.5) * C, f"{TOTAL_EXACT:,}", 46, "middle", GLOW, CORE, flicker=True))
-    over.append(text((CX0 + SX) / 2 * C, (CY0 + 34.5) * C, "项 独 立 叙 事 素 材", 17.5, "#ffe49e", 800, "middle", 2, SANS))
-    over.append(text((CX0 + SX) / 2 * C, (CY0 + 43.2) * C, "同世界精准组合 · 绝不随机拼凑", 13.5, "#c5b9d6", 600, "middle", 0.8, SANS))
+    # Left hero total card (optically balanced top/bottom padding)
+    fx.append(f'<ellipse cx="{(CX0 + SX) / 2 * C}" cy="{(CY0 + 21) * C}" rx="120" ry="48" fill="#b985ff" fill-opacity="0.18" filter="url(#g30)"/>')
+    over.append(text((CX0 + SX) / 2 * C, (CY0 + 9.2) * C, "NARRATIVE BUILDING BLOCKS", 11.5, "#b8a9cc", 700, "middle", 1.8, MONO))
+    over.append(neon((CX0 + SX) / 2 * C, (CY0 + 22.4) * C, f"{TOTAL_EXACT:,}", 46, "middle", GLOW, CORE, flicker=True))
+    over.append(text((CX0 + SX) / 2 * C, (CY0 + 31.2) * C, "项 独 立 叙 事 素 材", 17.5, "#ffe49e", 800, "middle", 2, SANS))
+    over.append(text((CX0 + SX) / 2 * C, (CY0 + 38.8) * C, "同世界精准组合 · 绝不随机拼凑", 13.5, "#ccc0dc", 600, "middle", 0.8, SANS))
     for idx, dc in enumerate(["#a874ff", "#ff6fae", "#ffe49e"]):
-        cv.rect(CX0 + 38 + idx * 5, CY1 - 5, CX0 + 40 + idx * 5, CY1 - 3, dc)
+        cv.rect(CX0 + 38 + idx * 5, CY1 - 7, CX0 + 40 + idx * 5, CY1 - 5, dc)
 
-    # Right 2 cols x 5 rows sorted descending by real count
+    # Right 2 cols x 5 rows sorted descending by real count + visible unlit grid + uniform 8px live tip pulse
     sorted_items = sorted(EXACT.items(), key=lambda kv: -kv[1])
     max_val = sorted_items[0][1]
     col_x = [SX + 8, SX + 100]
-    row_y0, row_step = CY0 + 7, 9
+    row_y0, row_step = CY0 + 5, 9
     for idx, (label, val) in enumerate(sorted_items):
         rx = col_x[idx // 5]
         ry = row_y0 + (idx % 5) * row_step
         acc = BAR_ACCENTS[idx]
-        num_col = "#ffe6a0" if val >= 2000 else "#ffffff"
-        over.append(text(rx * C, (ry + 3.2) * C, label, 15, "#e6ddf0", 700, "start", 0.5, SANS))
+        num_col = "#ffe6a0" if val >= 2000 else "#f6f0ff"
+        over.append(text(rx * C, (ry + 3.2) * C, label, 15, "#ebe2f5", 700, "start", 0.5, SANS))
         over.append(text((rx + 84) * C, (ry + 3.2) * C, item_map[label], 16, num_col, 900, "end", 0.5, MONO))
         by = ry + 5
-        cv.rect(rx, by, rx + 84, by + 2, "#120c1b")
-        fill_w = max(8, round(84 * val / max_val))
-        for sx in range(rx, rx + fill_w, 3):
-            cv.rect(sx, by, sx + min(2, rx + fill_w - sx), by + 2, acc)
+        for sx in range(rx, rx + 84, 3):
+            cv.rect(sx, by, sx + 2, by + 2, "#2b1f3d")
+        fill_w = max(9, round(84 * val / max_val / 3) * 3)
+        segs = list(range(rx, rx + fill_w, 3))
+        for sx in segs[:-1]:
+            cv.rect(sx, by, sx + 2, by + 2, acc)
+        last_sx = segs[-1]
+        dur = 2.4 + (idx % 5) * 0.35
+        beg = idx * 0.27
+        tips.append(
+            f'<rect x="{last_sx * C}" y="{by * C}" width="{2 * C}" height="{2 * C}" fill="{acc}">'
+            f'<animate attributeName="opacity" values="0.52;1;0.52" dur="{dur:.2f}s" begin="-{beg:.2f}s" repeatCount="indefinite"/></rect>'
+        )
 
-    body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}</g>
+    body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}{"".join(tips)}</g>
     {"".join(fx)}
     {"".join(over)}'''
     doc("inventory.svg", GW * C, GH * C, MATERIAL, INV_DESC, "", body)
@@ -838,7 +863,7 @@ COVERS = {   # cover art per genre: sky ramp top to bottom, motif
     "仙侠与志怪": (["#101a2a", "#24405a", "#5a8a9a"], "immortal"),
     "和风与神社": (["#1a0e22", "#3a1a3a", "#8a3a4a"], "torii"),
     "清末民国": (["#1a1428", "#4a3a50", "#a07a5a"], "clocktower"),
-    "欧陆古典": (["#1a1438", "#3a2a66", "#8a5a8a"], "castle"),
+    "欧陆古典": (["#1d1742", "#48357c", "#9c669c"], "castle"),
     "邻里与屋檐下": (["#141a30", "#2a3050", "#4a4060"], "flats"),
     "百工与夜铺": (["#0e0b1a", "#22183a", "#4a2a4a"], "shop"),
     "学府与书斋": (["#101428", "#24305a", "#4a5a8a"], "study"),
@@ -849,7 +874,7 @@ COVERS = {   # cover art per genre: sky ramp top to bottom, motif
     "赛场与博弈": (["#0a1020", "#142a3a", "#1a3c34"], "arena"),
     "绝境与重工": (["#160d10", "#4a2218", "#b25824"], "plant"),
     "科幻与末世": (["#06061a", "#141a3a", "#2a1a5a"], "planet"),
-    "圣堂与魔裔": (["#120a1e", "#2a1440", "#5a2a6a"], "cathedral"),
+    "圣堂与魔裔": (["#170e2a", "#3a1e58", "#743884"], "cathedral"),
     "王都与剑魔": (["#1a0e22", "#4a1e3a", "#a2477e"], "sword"),
 }
 INK = "#100a18"
@@ -908,15 +933,18 @@ def cover_art(cv, genre, ax0, at, ax1, ab, rnd, glow):
         cv.rect(ax1 - 6, ab - 15, ax1 - 3, ab - 14, "#ffcf6a")
         halo(cx + 0.5, at + 10, 10, "#ffe9a8", 0.7)
         halo(ax1 - 4.5, ab - 14.5, 12, "#ffcf6a", 0.6)
-    elif motif == "castle":                                         # towers with one lit window
+    elif motif == "castle":                                         # towers with moonlight rim and warm windows
         stars()
         for tx, th in [(ax0 + 3, 16), (cx - 3, 20), (ax1 - 8, 14)]:
             cv.rect(tx, ab - th, tx + 6, ab, INK)
+            cv.rect(tx, ab - th, tx + 1, ab - 8, "#7e6aa8")
             cv.poly([(tx - 1, ab - th), (tx + 3, ab - th - 5), (tx + 7, ab - th)], INK)
+            cv.line(tx - 1, ab - th, tx + 3, ab - th - 5, "#9c88c8")
         cv.rect(ax0 + 1, ab - 8, ax1 - 1, ab, INK)
         cv.rect(cx - 1, ab - 15, cx + 1, ab - 12, "#ffd88a")
+        cv.rect(ax0 + 5, ab - 12, ax0 + 7, ab - 10, "#ffcf8a")
         moon(ax0 + 6, at + 5)
-        halo(cx, ab - 13.5, 12, "#ffd88a")
+        halo(cx, ab - 13.5, 13, "#ffd88a")
     elif motif == "flats":                                          # an apartment block, one pink window
         stars()
         cv.rect(ax0 + 2, ab - 18, ax1 - 2, ab, INK)
@@ -1031,16 +1059,19 @@ def cover_art(cv, genre, ax0, at, ax1, ab, rnd, glow):
         cv.rect(ax1 - 6, ab - 6, ax1 - 3, ab - 4, "#ffcf6a")
         halo(ax1 - 4.5, ab - 4, 12, "#ff9a4a", 0.8)
         cv.rect(ax0, ab - 2, ax1, ab, INK)
-    elif motif == "cathedral":                                      # a gothic church with a glowing rose window
+    elif motif == "cathedral":                                      # a gothic church with moonlight rims & stained glass
         stars(4)
         cv.rect(cx - 6, ab - 16, cx + 6, ab, INK)
         cv.poly([(cx - 7, ab - 16), (cx, ab - 23), (cx + 7, ab - 16)], INK)
+        cv.line(cx - 7, ab - 16, cx, ab - 23, "#8a62b0")
         for sx in (ax0 + 1, ax1 - 5):
             cv.rect(sx, ab - 20, sx + 4, ab, INK)
             cv.poly([(sx, ab - 20), (sx + 2, ab - 25), (sx + 4, ab - 20)], INK)
+            cv.line(sx, ab - 20, sx + 2, ab - 25, "#8a62b0")
+            cv.rect(sx + 2, ab - 14, sx + 3, ab - 9, "#c9a2ff")
         cv.ellipse(cx + 0.5, ab - 13, 3, 3, lambda x, y: "#ff6fae" if (x + y) % 2 else "#a874ff")
         cv.rect(cx - 1, ab - 6, cx + 2, ab, "#ffcf6a")
-        halo(cx + 0.5, ab - 13, 14, "#c874ff", 0.7)
+        halo(cx + 0.5, ab - 13, 15, "#d080ff", 0.75)
     else:                                                           # a sword in the ground under a red moon
         moon(ax0 + 7, at + 6, 3.5, "#ff6f7f")
         cv.poly([(ax0, ab), (ax0, ab - 4), (cx, ab - 7), (ax1, ab - 3), (ax1, ab)], INK)
@@ -1076,7 +1107,7 @@ def genres():
     cv.rect(px0, 13, px0 + PW, 14, "#8a6a28")
     for sx in (px0 + 2, px0 + PW - 3):
         cv.put(sx, 9, "#7a5a20")
-    over.append(text((px0 + PW / 2) * C, 11.6 * C, f"世界分类 · {len(REGIONS)} 类", 17, "#452e0c", 900, "middle", 2, SANS))
+    over.append(text((px0 + PW / 2) * C, 10.9 * C, f"世界分类 · {len(REGIONS)} 类", 17, "#452e0c", 900, "middle", 2, SANS))
     pitch = (X1 - X0) / max(len(r) for r in rows)
     base_size = min(16, (pitch - 8) * C / 5)                        # balanced size for 4-5 char labels
     TOP, SLEEVE, GAP = 20, 48, 5                                    # two rows of sleeves straight on the wall, no frame between them
@@ -1099,13 +1130,15 @@ def genres():
             cnt_col = "#ffe6a0" if len(worlds_) >= 17 else "#ffffff"
             over.append(text((x0 + x1) / 2 * C, (y0 + 5.6) * C, f"{len(worlds_)} 个世界", 13.5, cnt_col, 800, "middle", 0.8, SANS,
                              'stroke="#241420" stroke-width="2.6" paint-order="stroke"'))
-            lbl_size = 13.8 if len(genre) >= 6 else round(base_size, 1)
-            over.append(text((x0 + x1 + 2) / 2 * C, (y0 + 41.0) * C, genre, lbl_size, "#201724", 900, "middle", 0, SANS))
-    body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}</g>
+            lbl_size = 14.5 if len(genre) >= 6 else round(base_size, 1)
+            lbl_sp = -0.3 if len(genre) >= 6 else 0
+            over.append(text((x0 + x1 + 2) / 2 * C, (y0 + 41.0) * C, genre, lbl_size, "#201724", 900, "middle", lbl_sp, SANS))
+    sleeves_body = f'''    <g shape-rendering="crispEdges">{cv.emit(C)}</g>
     {"".join(glow)}
-    {"".join(over)}
-    {text(GW * C / 2, (BOT + 10.2) * C, f"· 全部 {NWORLDS} 个世界已开放，下方就是整面录像带墙 ·", 17.5, "#d8cde4", 600, "middle", 1.5)}'''
+    {"".join(over)}'''
+    body = sleeves_body + f'\n    {text(GW * C / 2, (BOT + 10.2) * C, f"· 全部 {NWORLDS} 个世界已开放，下方就是整面录像带墙 ·", 17.5, "#d8cde4", 600, "middle", 1.5)}'
     doc("genres.svg", GW * C, GH * C, "世界分类", GENRES_DESC.format(len(REGIONS), "、".join(r for r, _, _ in REGIONS)), "", body)
+    PARTS["genres.svg:lib"] = (GW * C, 126 * C, "", sleeves_body)
 
 
 banner("section-proof.svg", "体验切片", "真实会话交付实录", 1, (1180, 222, 1490, 352), v_proof)          # the monitor
@@ -1119,21 +1152,17 @@ inventory()
 
 
 def library():
-    """The world-library banner, the genre shelves and the compact inventory panel stacked into one seamless picture:
-    one wall, one frame, one vignette; the banner's picture crop also melts into the wall at its bottom edge."""
-    names = ["section-worlds.svg", "genres.svg", "inventory.svg"]
+    """The world-library banner, the genre sleeves, the compact inventory console, and the bottom tape-wall pointer
+    stacked into one seamless picture (1200x976): 2D crop fade protects the globe shelf with zero duplicate-wall hack."""
+    names = ["section-worlds.svg:lib", "genres.svg:lib", "inventory.svg"]
     W = PARTS[names[0]][0]
-    H = sum(PARTS[n][1] for n in names)
-    BHPX = PARTS[names[0]][1]
-    defs = "".join(PARTS[n][2] for n in names) + (
-        f'<linearGradient id="seamg" x1="0" y1="{BHPX - 72}" x2="0" y2="{BHPX}" gradientUnits="userSpaceOnUse">'
-        f'<stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>'
-        f'<mask id="seam"><rect width="480" height="{BHPX}" fill="url(#seamg)"/></mask>')
+    H = 976
+    defs = "".join(PARTS[n][2] for n in names)
     y, parts = 0, []
     for n in names:
         parts.append(f'    <g transform="translate(0 {y})">{PARTS[n][3]}</g>')
         y += PARTS[n][1]
-    parts.insert(1, f'    <g mask="url(#seam)">{background("world-library.svg", W, H)}</g>')
+    parts.append(f'    {text(W / 2, 952, f"· 全部 {NWORLDS} 个世界已开放，下方就是整面录像带墙 ·", 17.5, "#dfd4ec", 600, "middle", 1.5)}')
     doc("world-library.svg", W, H, "内置世界库",
         f"内置世界库：跨时代独立世界框架，开局即入戏。{GENRES_DESC.format(len(REGIONS), '、'.join(r for r, _, _ in REGIONS))}{INV_DESC}",
         defs, "\n".join(parts))
