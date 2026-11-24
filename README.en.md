@@ -89,24 +89,30 @@ Pressed with leverage and tested up close, she neither caves into instant submis
 **Real adult tension isn't instant compliance—it's the undercurrent right before composure cracks.**
 
 <details>
-<summary><b>Expand another slice: slow-burn closeness by the Kamo River (Daily mode)</b></summary>
+<summary><b>Expand another slice: slow-burn closeness on the rainy balcony (Daily mode)</b></summary>
 <br>
 
-👤 **You:** `我轻轻碰了一下对方的手` *(I lightly touch their hand)*
+👤 **You:** `接过漆盒时，我轻轻碰了一下浅井结衣的手指` *(As I take the lacquer box, I lightly brush Asai Yui's fingers)*
 
-> Your fingertips cross the cool black lacquer and rest against calluses hardened by sword hilts and rough roads. At the touch, the line of **Nakamura Kazuma**'s forearm pulls taut—yet he doesn't draw back. That broad hand built for drawing steel stays still on the table's edge, letting your fingertips linger beside the web of his thumb as a quiet, unmistakable heat spreads where your skin meets.
+> Night rain drums dully on the tin awning. Across the thin sheet-metal windbreak that splits the rusted balcony rail, the simmered vegetables in the lacquer box are still steaming; as your fingertips graze the knuckles cradling its base, **Asai Yui** doesn't pull away—her rain-damp fingers simply rest on the box's rim, letting the warmth of your hand seep in.
+>
+> *"I made too much tonight. Eat it while it's warm."*
+>
+> Only after saying it, eyes lowered, does she tuck her hand back into her apron pocket, adding quietly: *"The carrots are cooked soft. Don't go eating it with beer again, Mr. Takahashi."*
 
 👤 **You:** `继续` *(continue)*
 
-> Beyond the bamboo blinds, the last note of a shamisen dissolves into the river. After a long beat, he lets out a low breath, slowly turning his palm upward to fold your cool fingers loosely inside his warm grip, his rough thumb brushing once across your knuckle with deliberate restraint:
+> She slips back inside and sets a bowl of leftover miso soup on the windowsill too, but doesn't go back in—she leans against the cold, wet rail on her side of the windbreak. The streetlight at the mouth of the alley traces both your silhouettes along the rusted bars; as talk drifts to the shared utility bill going up at month's end, her hand on the railing inches closer until her trembling palm settles over the back of yours—and stays there.
 >
-> *"Kyoto's nights are long—past tonight, nobody knows who'll be missing from the street tomorrow… Still, right this moment, I really don't want to leave."*
+> *"The walls in this building are so thin I can hear you turn over at night. He's not coming home again tonight. Knowing someone's on the other side of the wall is the only way I can sleep."*
 >
-> <sub>`[Time] Day 2, 20:10` · `[Place] Kamo River deck` · `Turn: 12`</sub>
+> She watches the lamplight wobble in the puddles below, her voice lower than the rain: *"Whoever wakes first tomorrow, knock on the wall."*
+>
+> <sub>`[Time] 1992, Rainy Season (23:06)` · `[Place] Shared balcony between the rooms` · `Turn: 12`</sub>
 
 </details>
 
-<sub>The main showcase demonstrates Pressure mode in the built-in world *The Housewife Across the Thin Wall* (`neighbor_wife_thin_wall`), and the expandable slice is adapted from real end-to-end test runs (translated from Chinese); unedited raw benchmark logs and scores: [`pi-s06-r10.json`](reports/e2e/records/pi/pi-s06-r10.json) · [`pi-s07-r10.json`](reports/e2e/records/pi/pi-s07-r10.json) · E2E report: [`reports/e2e/report.md`](reports/e2e/report.md) · All playtests and scores: [`reports/playtests/playtests.md`](reports/playtests/playtests.md)</sub>
+<sub>Both slices above demonstrate Pressure and Daily mode in the built-in world *The Housewife Across the Thin Wall* (`neighbor_wife_thin_wall`), polished for readability (translated from Chinese); unedited raw end-to-end benchmark logs and scores: [`pi-s06-r10.json`](reports/e2e/records/pi/pi-s06-r10.json) · [`pi-s07-r10.json`](reports/e2e/records/pi/pi-s07-r10.json) · E2E report: [`reports/e2e/report.md`](reports/e2e/report.md) · All playtests and scores: [`reports/playtests/playtests.md`](reports/playtests/playtests.md)</sub>
 
 <br>
 
