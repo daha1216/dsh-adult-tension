@@ -150,7 +150,7 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "小{family}",
           "gender": "any"
         },
         {
@@ -179,11 +179,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}监理",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}工",
           "gender": "any"
         }
       ],
@@ -208,11 +208,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}建筑师",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}总",
           "gender": "any"
         }
       ],
@@ -238,11 +238,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}督导",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}主管",
           "gender": "any"
         }
       ],
@@ -583,7 +583,7 @@
         "desired_position": "谈判桌对面平起平坐的位置"
       },
       "voices": {
-        "surface": "{npc.name}用红笔点着墙角：“这一块，八百，少一分都不行。”",
+        "surface": "{npc.name}用红笔点着墙角：“{player.title}，这一块八百，少一分都不行。”",
         "inner": "要是这个月再凑不上，我连自己的房子都保不住。"
       },
       "schedule": [
@@ -937,7 +937,7 @@
         "desired_position": "替你挑好房子、住在隔壁的位置"
       },
       "voices": {
-        "surface": "{npc.name}笑着晃手机：“见面礼，你肯定用得上。”",
+        "surface": "{npc.name}笑着晃手机：“{player.title}，这份见面礼你肯定用得上。”",
         "inner": "我想要的不是佣金，是你肯留在这栋楼。"
       },
       "schedule": [
@@ -958,7 +958,7 @@
         "exits": [
           {
             "option": "把截图交给租客维权",
-            "cost": "和二房东彻底撕破脸。"
+            "cost": "和掌管房源的二房东彻底撕破脸。"
           },
           {
             "option": "私下压着截图谈条件",
@@ -1075,11 +1075,11 @@
         "exits": [
           {
             "option": "把画面交给你处理",
-            "cost": "要担私传监控的处分。"
+            "cost": "要背上私自外传地库监控的处分。"
           },
           {
             "option": "照章上报公司",
-            "cost": "返聘的事多半要黄。"
+            "cost": "年底续签返聘合同的事多半要黄。"
           }
         ]
       },
@@ -2091,7 +2091,7 @@
         },
         {
           "option": "让室友签退租交接书，先搬进酒店暂住",
-          "cost": "三年的同居就此中断。"
+          "cost": "三年朝夕相处的同居日子就此中断。"
         }
       ],
       "leverage": null,
@@ -2240,7 +2240,7 @@
       "location_ids": [
         "loc_elevator_lobby_corridor"
       ],
-      "text": "{npc.name}在候梯连廊拦住你，把一张手写的扣款单按在你胸口，压低声音说有件事只跟你一个人谈。"
+      "text": "{npc.name}在候梯连廊拦住你，把一张手写的扣款单按在你胸口压低声音：“{player.title}，这笔账我只跟你单独谈。”"
     },
     {
       "id": "hook_zhou_jewelry",
@@ -2385,6 +2385,7 @@
   ],
   "content_tags": [
     "intimate",
+    "explicit",
     "crime",
     "disaster"
   ],

@@ -3,7 +3,7 @@
   "id": "abyssal_dungeon_knightess_crest",
   "title": "受审的高傲女骑士",
   "extends": null,
-  "era": "中世纪低魔黑暗帝国边境（黑曜石要塞断罪地牢）",
+  "era": "黑暗帝国北境·黑曜石断罪要塞",
   "region": "低魔黑暗帝国北境黑曜石要塞地下三层断罪地牢",
   "premise": "低魔黑暗帝国北境的黑曜石要塞。圣殿女骑士长兵败受审，锁骨上烙着一道每逢子夜就灼痛的深渊魔纹，押在地下三层的断罪地牢；主审是曾与骑士长并肩七年的前廷大审判官。狂热的军团长想以“异端”之名把人送上火刑柱，好借机夺权；地牢的看守长、潜进来的异端药剂师、混入守军的副官，各有各的打算。",
   "tone": [
@@ -479,7 +479,7 @@
         "desired_position": "与弑神同谋平起平坐的战团统帅"
       },
       "voices": {
-        "surface": "“项圈勒再紧也没用。要我的血还是认罪书？拿刀来换——看你敢不敢接。”",
+        "surface": "“项圈勒再紧也没用。{player.title}想要我的血还是认罪书？拿刀来换——看你敢不敢接。”",
         "inner": "该死的血月香膏……撑住，绝不在这双眼睛前软了膝盖。"
       },
       "schedule": [
@@ -789,7 +789,7 @@
         }
       ],
       "situation": {
-        "trigger": "军团长拎斧逼近刑具厅，嗅见门缝飘出的秘银催情香膏与血气，挥手要撞门。",
+        "trigger": "军团长拎斧逼近刑具厅，嗅见门缝飘出的雪莲药雾与铁锈血气，挥手要撞门。",
         "pressure": "攻城撞木已经抬起，撞破门锁即刻败露私解锁链。",
         "exits": [
           {
@@ -1112,7 +1112,7 @@
           "违令潜入也要把骑士长活着接回第一分队。"
         ],
         "exposure": "擅离营地违抗撤退令。",
-        "hidden": "护手夹层藏冲锋信号烟花引线与半瓶秘银催情香膏缓释剂。"
+        "hidden": "护手夹层藏冲锋信号烟花引线与半瓶极夜雪莲凝血剂。"
       },
       "decision": {
         "core_value": "第一分队只认一个统帅，抗命领鞭今夜也要接您回家。",
@@ -1124,7 +1124,7 @@
         "pressure_responses": {
           "low": "压帽混在兵卒里暗记巡哨换班时点。",
           "mid": "假传调令支开东廊狂信徒，暗换火把岗。",
-          "high": "看清统帅颈间锁灵淫纹颈环时双目赤红，指节捏得刀柄咯吱作响。",
+          "high": "看清统帅锁骨赤红魔纹与腕上重枷时双目赤红，指节捏得刀柄咯吱作响。",
           "breaking": "见人脱力仍硬撑脊梁时咬破舌尖，扯下外袍猛地包住统帅肩头。"
         },
         "withdrawal": "伏进绝壁积雪暗台紧攥银哨待命。",
@@ -1174,7 +1174,7 @@
         "desired_position": "新军驰骋在主帅马侧的头号副官"
       },
       "voices": {
-        "surface": "“统帅，八百骑就在山谷下。违令是我——要打要罚，先摘了脖子上鬼项圈出去再算！”",
+        "surface": "“统帅，八百骑就在山谷下。违令是我——要打要罚，先劈断这身禁魔铁枷出去再算！”",
         "inner": "瘦成这样还硬扛……今夜拼光最后一口气也要把人带回西山谷。"
       },
       "schedule": [
@@ -2292,8 +2292,7 @@
       "kind": "approach",
       "slot": "templar_knight_commander",
       "location_ids": [
-        "inner_sanctum_vault",
-        "outer_torture_antechamber"
+        "inner_sanctum_vault"
       ],
       "text": "{templar_knight_commander.name}靠坐在石台边，锁骨间魔纹随呼吸明灭，仰头看你：“钟响了。刻刀在你手里——我信你下刀的分寸。”"
     },
@@ -2316,7 +2315,7 @@
         "outer_torture_antechamber",
         "inner_sanctum_vault"
       ],
-      "text": "{zealot_garrison_commander.name}一脚踹在石门窥孔上，黄褐眼珠透过铁栏死盯着你们：“提审记录交出来！子夜前我要见到骑士长，否则连你一起押上火刑台！”"
+      "text": "{zealot_garrison_commander.name}一脚踹在石门窥孔上，黄褐眼珠透过铁栏死盯着里面：“{player.title}，把提审记录交出来！子夜前见不到骑士长，连你一起押上火刑台！”"
     },
     {
       "id": "hk_apothecary_acid_approach",
@@ -2328,7 +2327,7 @@
         "magma_drainage_channel",
         "outer_torture_antechamber"
       ],
-      "text": "{heretic_apothecary.name}从通风暗门翻身跃入，一手雪莲晶露一手冒泡的酸瓶：“骑士长的魔纹要我的药，你们的锁链要我的酸——带我出去，三滴圣血做报酬，干不干？”"
+      "text": "{heretic_apothecary.name}从通风暗门翻身跃入，一手雪莲晶露一手冒泡酸瓶：“魔纹要我的药，锁链要我的酸——带我出去，三滴圣血做报酬，{player.title}干不干？”"
     },
     {
       "id": "hk_jailer_key_approach",
@@ -2339,7 +2338,7 @@
         "inner_sanctum_vault",
         "magma_drainage_channel"
       ],
-      "text": "{disgraced_squire_jailer.name}从外面锁死暗栓，单膝跪在你面前，双手托起一把白银断剑：“侍从向您死罪归队！这是暗渠耳门的钥匙，请握剑下令！”"
+      "text": "{disgraced_squire_jailer.name}趁巡哨换岗掩上厚石门，单膝跪在你面前双手托起白银断剑：“侍从向您死罪归队！这是暗渠耳门的钥匙，请握剑下令！”"
     },
     {
       "id": "hk_knight_whisper_request",
@@ -2347,7 +2346,6 @@
       "slot": "templar_knight_commander",
       "location_ids": [
         "inner_sanctum_vault",
-        "outer_torture_antechamber",
         "apothecary_lab_nook"
       ],
       "text": "魔纹热浪稍退、铁链滑落肩头，{templar_knight_commander.name}湿热的手指勾住你后颈贴耳厮磨：“剑递过来。冲出这石门，不论弑神还是堕入深渊，我都算你账上。”"
@@ -2358,10 +2356,9 @@
       "slot": "renegade_grand_inquisitor",
       "location_ids": [
         "inner_sanctum_vault",
-        "outer_torture_antechamber",
         "apothecary_lab_nook"
       ],
-      "text": "门外撞木闷响时，{renegade_grand_inquisitor.name}把你护进石台内侧，背对着门：“别出声。只要我还站着，没人能把你带走。”"
+      "text": "外廊铁靴重响逼近门外时，{renegade_grand_inquisitor.name}把你护进石台内侧，背对石门低语：“别出声。只要我还站着，没人能把你带走。”"
     },
     {
       "id": "hk_apothecary_panic_request",

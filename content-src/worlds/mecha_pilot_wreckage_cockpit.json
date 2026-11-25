@@ -3,17 +3,17 @@
   "id": "mecha_pilot_wreckage_cockpit",
   "title": "救生舱的王牌机师",
   "extends": null,
-  "era": "近未来硬科幻轨道殖民崩溃与太空逃生时代",
+  "era": "近未来近地轨道残骸带封锁期",
   "region": "L2拉格朗日残骸带破损双人逃生驾驶舱",
-  "premise": "近地轨道防御战打到第九天，联合舰队王牌少校机师的突击机甲在残骸带重创解体，四立方米逃生舱电源全灭，唯余橘红应急灯明灭。破损液冷抗荷服在真空极寒中结冰勒紧胸腔，单人备用氧气瓶迫使受困者十秒轮换面罩；叛舰红外光斑在窗外横扫，救生舱内的军阶壁垒与战前秘密随之撕开。",
+  "premise": "近地轨道战役进入残骸封锁期，联合舰队王牌少校机师所乘双人救生舱漂泊于拉格朗日暗区，外有叛舰巡逻光束与打捞拖船觊觎，内有军法特派官追索黑匣。四立方米失重密室里，军阶壁垒、平反原轨、违禁医嘱与战前私密赌约在幽暗红光下一触即发。",
   "tone": [
     "近未来深空囚牢",
-    "抗荷服破拆失温",
-    "十秒共用氧气罩",
+    "抗荷服贴身拆扣",
+    "失重同椅共息",
     "口嫌体直失守",
     "战前赌约暗藏"
   ],
-  "style_hint": "橘红应急灯映亮四立方米失重密室：液冷凝胶冻出淡蓝冰壳，防爆工程剪沿脊柱逐扣剪开抗荷服，十秒轮换氧罩喷嘴嘶嘶作响。台词端足王牌军威，紧身内衬下暗藏的刺激随脑机电流导通时，冷傲机师寸寸战栗失守。",
+  "style_hint": "橘红应急灯映亮四立方米失重密室：液冷抗荷服勾勒紧绷腰脊，防爆工程剪贴着脊椎导轨游走，气闸恒温巾拭过滚烫颈窝。台词端足王牌少校军威，紧身内衬下暗藏的刺激随电流导通时，冷傲机师寸寸战栗失守。",
   "clock_start": {
     "label": "殖民历四十二年，深空围城季",
     "minute": 1350
@@ -106,7 +106,7 @@
   "rules": [
     {
       "id": "r_oxygen_ten_second_ration",
-      "text": "十秒轮氧铁律：密封舱唯余单人备用纯氧瓶，双人须十秒轮吸，心率飙过百二即加速缺氧昏厥。"
+      "text": "双人共生铁律：独立救生舱储备纯氧与电力严苛受限，同舱人员须贴座共用维生回路并压稳心率，剧烈喘息即触发低氧告警。"
     },
     {
       "id": "r_coolant_suit_cutaway",
@@ -494,7 +494,7 @@
         "desired_position": "战场冷血女武神、暗舱衣下失守的共犯"
       },
       "voices": {
-        "surface": "“拿防爆绝缘剪沿脊柱导轨剪开！愣着等死吗，快动手！”",
+        "surface": "“{player.title}，拿防爆绝缘剪沿脊柱导轨拆扣——动作利索点，不许乱看！”",
         "inner": "绝缘剪顺脊柱下来了……再往下三寸就是脉冲贴和共感塞！要是脑机一接通，这张王牌脸往哪儿搁？"
       },
       "schedule": [
@@ -994,7 +994,7 @@
         "desired_position": "掌军法暗档、反溺审讯的酷吏"
       },
       "voices": {
-        "surface": "“军法处回收黑匣！脱甲配合违禁品搜检！”",
+        "surface": "“奉联合军法处令接管黑匣，{player.title}请配合气闸贴身核验。”",
         "inner": "箱底销毁通敌日志可不能漏……那套测试电路竟真在少校身上起反应！"
       },
       "schedule": [
@@ -1931,15 +1931,15 @@
   "daily_activities": [
     {
       "id": "act_cockpit_oxygen_cadence",
-      "title": "失重舱十秒轮流吸氧",
+      "title": "失重舱同座维生调息",
       "location_ids": [
         "loc_wreckage_cockpit_capsule"
       ],
       "duration_minutes": 60,
       "beats": [
-        "暗舱橘红灯明灭，双腕锁紧尼龙带，纯氧罩每隔十秒按上发凉唇角。",
-        "铝箔恒温毯下共挤唯一减震座，破口抗荷服摩挲出汗热雾气。",
-        "氧气指针滑向红区，腕间尼龙带悄悄收紧了一寸。"
+        "暗舱橘红微光浮沉，防撞尼龙带扣住彼此手腕，备用呼吸罩贴近温热唇角。",
+        "铝箔恒温毯下共挤唯一减震主座，紧身抗荷服摩挲出微热喘息。",
+        "失重漂移间膝弯相抵，腕间尼龙带悄然收紧了一寸。"
       ],
       "hook_ids": [],
       "start_minute": 1280,
@@ -2015,7 +2015,7 @@
       "beats": [
         "强光扫过外挂锚点，扣牢引力缆的频道随即飘来核芯黑账低喝。",
         "隔面罩对望泛红眼眸，手势敲击铁壳传递暗室价码。",
-        "引力锁咔嗒咬死，两艘船身贴靠摩擦出低沉轰响。"
+        "引力锚扣咔嗒落锁，两舱外壁贴靠摩擦出低沉震颤。"
       ],
       "hook_ids": [],
       "start_minute": 1370,
@@ -2351,7 +2351,7 @@
         "loc_wreckage_cockpit_capsule",
         "loc_docking_airlock_tunnel"
       ],
-      "text": "{ace_mecha_pilot.name}抗荷服冻硬勒肩仍冷斥：“发什么呆！沿脊柱剪开——眼睛不准往内衬下瞥！”"
+      "text": "{ace_mecha_pilot.name}抗荷服背扣紧绷勒肩，回眸冷斥：“发什么呆，{player.title}！沿脊柱导轨拆开——眼睛不准往内衬下瞥！”"
     },
     {
       "id": "hk_ace_pulse_leak_approach",
@@ -2371,7 +2371,7 @@
         "loc_wreckage_cockpit_capsule",
         "loc_canopy_quartz_hatch"
       ],
-      "text": "{ace_mecha_pilot.name}把纯氧罩按上你口鼻，腕带拉紧：“十秒到了……吸饱递回来，谁都不许先死在这儿！”"
+      "text": "{ace_mecha_pilot.name}把纯氧罩按上你口鼻，防撞腕带拉紧：“呼吸放稳……在这座舱里，谁都不许先乱了阵脚！”"
     },
     {
       "id": "hk_mechanic_shears_approach",
@@ -2397,8 +2397,7 @@
       "kind": "approach",
       "slot": "rebel_corvette_captain",
       "location_ids": [
-        "loc_canopy_quartz_hatch",
-        "loc_docking_airlock_tunnel"
+        "loc_canopy_quartz_hatch"
       ],
       "text": "{rebel_corvette_captain.name}隔窗晃动旧遥控器狞笑：“开气闸吧——猜我现在按下去，里面哪位大人物先腿软？”"
     },
@@ -2410,7 +2409,7 @@
         "loc_docking_airlock_tunnel",
         "loc_debris_tether_hull"
       ],
-      "text": "{rebel_corvette_captain.name}闪进气闸反扣内门喘息垂枪：“倒戈报文是你截的？开价吧……只要别传回黑鲨舰。”"
+      "text": "{rebel_corvette_captain.name}贴靠舱门阴影垂下脉冲枪低喘：“倒戈报文是你截的？背着外人开价吧……只要别传回黑鲨舰。”"
     },
     {
       "id": "hk_gunnery_tags_request",
@@ -2439,7 +2438,7 @@
         "loc_docking_airlock_tunnel",
         "loc_wreckage_cockpit_capsule"
       ],
-      "text": "{flight_academy_intelligence_officer.name}锁死气闸托起黑天鹅绒蒙眼带与校准器：“交黑匣，并验明身上的违禁贴片。”"
+      "text": "{flight_academy_intelligence_officer.name}扣死舱门安全栓，托起黑天鹅绒蒙眼带与校准器：“交出黑匣，并验明身上的违禁贴片。”"
     },
     {
       "id": "hk_provost_box_approach",
@@ -2478,7 +2477,7 @@
         "loc_docking_airlock_tunnel",
         "loc_wreckage_cockpit_capsule"
       ],
-      "text": "{flagship_flight_surgeon.name}反锁隔离门执剪探向领下脉冲贴：“宪兵五分即到……快脱干净拆下！”"
+      "text": "{flagship_flight_surgeon.name}落下舱门安全栓，执剪探向领下微电流脉冲贴低语：“趁宪兵还没巡过来……快把内衬解开拆掉！”"
     },
     {
       "id": "hk_surgeon_prescription_observe",

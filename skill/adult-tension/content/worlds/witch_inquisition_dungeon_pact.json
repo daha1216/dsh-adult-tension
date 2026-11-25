@@ -1,7 +1,7 @@
 {
  "background_cast": [
   {
-   "adult_context": "修锻死牢锁具及刑铁的成年老铁匠。",
+   "adult_context": "修锻锁具的成年老铁匠。",
    "age_range": [
     38,
     46
@@ -9,7 +9,7 @@
    "function": "obstacle",
    "gender": "male",
    "id": "bg_torture_smith",
-   "line": "{npc.name}抡锤敲环：‘齿槽刚淬过火，谁敢瞎动紫檀匣立喊兵！’",
+   "line": "{npc.name}抡锤敲环：‘齿槽刚淬火，谁敢瞎碰紫檀匣立喊兵！’",
    "location_ids": [
     "loc_cross_corridor",
     "loc_inquisition_vault"
@@ -18,7 +18,7 @@
    "role": "锻铁刑具老匠"
   },
   {
-   "adult_context": "钟楼常驻守夜敲钟的成年老修士。",
+   "adult_context": "常驻守夜成年老修士。",
    "age_range": [
     44,
     52
@@ -26,7 +26,7 @@
    "function": "rumor_source",
    "gender": "male",
    "id": "bg_bell_ringer",
-   "line": "{npc.name}搓手缩脖：‘广场堆满浇油松脂柴喽，第一缕天光即敲钟！’",
+   "line": "{npc.name}搓手缩脖：‘外院又运来几车松脂柴，风声越来越紧喽！’",
    "location_ids": [
     "loc_archive_scriptorium"
    ],
@@ -34,7 +34,7 @@
    "role": "钟楼守时修士"
   },
   {
-   "adult_context": "专洗染血囚袍的成年全职女修。",
+   "adult_context": "浆洗囚袍的成年女修。",
    "age_range": [
     32,
     39
@@ -42,7 +42,7 @@
    "function": "witness",
    "gender": "female",
    "id": "bg_laundry_nun",
-   "line": "{npc.name}翻着木盆叹气：‘暗紫绒裙扯惨了，衬里似乎还缝着硬羊皮。’",
+   "line": "{npc.name}翻木盆叹气：‘暗紫绒裙裂惨了，衬里似还缝着硬羊皮。’",
    "location_ids": [
     "loc_cross_corridor",
     "loc_cell_eight"
@@ -51,7 +51,7 @@
    "role": "浆洗缝补修女"
   },
   {
-   "adult_context": "驻守橡木铁包门的成年全职重装戟兵。",
+   "adult_context": "驻守铁门的成年重装戟兵。",
    "age_range": [
     26,
     33
@@ -59,7 +59,7 @@
    "function": "obstacle",
    "gender": "male",
    "id": "bg_gate_halberdier",
-   "line": "{npc.name}横戟挡路：‘过子时！无黄铜双簧主钥匙及口令休近囚门！’",
+   "line": "{npc.name}横戟挡路：‘宵禁已落！无双簧主钥匙及口令休近囚门！’",
    "location_ids": [
     "loc_cross_corridor"
    ],
@@ -67,7 +67,7 @@
    "role": "铁门戟手哨长"
   },
   {
-   "adult_context": "地底酒窖与暗道搬运酒桶的成年力夫。",
+   "adult_context": "搬运酒桶的成年力夫。",
    "age_range": [
     28,
     35
@@ -75,7 +75,7 @@
    "function": "helper",
    "gender": "male",
    "id": "bg_cellar_porter",
-   "line": "{npc.name}拽紧麻绳：‘罗马古渠后半夜水急，过瀑潭务扣死涂蜡飞爪！’",
+   "line": "{npc.name}拽紧麻绳：‘罗马古渠夜里水急，过瀑潭务扣牢飞爪！’",
    "location_ids": [
     "loc_sewer_tunnel"
    ],
@@ -83,7 +83,7 @@
    "role": "地下酒窖搬运工"
   },
   {
-   "adult_context": "教廷驿站与圣山秘阁传书的成年驿使书记。",
+   "adult_context": "传书的成年驿使书记。",
    "age_range": [
     22,
     26
@@ -91,7 +91,7 @@
    "function": "messenger",
    "gender": "any",
    "id": "bg_messenger_novice",
-   "line": "{npc.name}疾步过门：‘驿马刚送密函入阁，听说罗马要掀北方黑账呢。’",
+   "line": "{npc.name}疾步过门：‘急件刚入秘阁，听说罗马要彻查北方黑账。’",
    "location_ids": [
     "loc_archive_scriptorium"
    ],
@@ -198,14 +198,18 @@
    ]
   },
   {
-   "chemistry": "你分半块黑麦面包给{witch_vivian_starlight_scholar.name}同披羊毛斗篷研究泥地星图，一个专心拔锁一个贴耳轻报刻度。",
-   "id": "combo_solo_witch_equal",
+   "chemistry": "{jailer_scribe_lucian.name}缩在书架暗影里指尖微颤，却死护怀中古罗马暗渠原图与贪墨黑账拓本，压低气音探问来意。",
+   "id": "combo_solo_scribe_equal",
    "identity_ids": [
-    "pi_dungeon_archivist",
-    "pi_underground_alchemist"
+    "pi_roman_tribunal_auditor",
+    "pi_inquisition_night_captain",
+    "pi_underground_alchemist",
+    "pi_penitent_warden_orderly"
    ],
    "player_positions": [
-    "equal"
+    "high",
+    "equal",
+    "low"
    ],
    "power_structure": "equal",
    "relations": [
@@ -213,32 +217,32 @@
      "a": "player",
      "a_to_b": {
       "tension": 4,
-      "trust": 4
+      "trust": 3
      },
-     "b": "witch_vivian_starlight_scholar",
+     "b": "jailer_scribe_lucian",
      "b_to_a": {
       "tension": 4,
-      "trust": 4
+      "trust": 3
      },
-     "reason": "分食冷麦饼、共划泥图的过命依偎。",
-     "stage": "familiar"
+     "reason": "烛火边互验底牌、押上性命求一线生路的同谋。",
+     "stage": "testing"
     }
    ],
    "slots": [
-    "witch_vivian_starlight_scholar"
+    "jailer_scribe_lucian"
    ],
    "stakes": {
-    "irreplaceable_goal": "同披斗篷破关共带出全本星图。",
-    "limit_gap": "换岗哨靴逼近，不可久留囚室。",
-    "meeting_reason": "暗盟接应趁宵禁最深点进牢汇合。",
-    "resource_gap": "你握草膏王水与古渠图，{witch_vivian_starlight_scholar.name}握城邦密哨。"
+    "irreplaceable_goal": "护住受惊文书换取二号水闸无兵秘道与贪墨死证。",
+    "limit_gap": "巡哨铁靴逼近秘阁，文书一旦落单即遭灭口。",
+    "meeting_reason": "趁宵禁潜入秘阁调阅水道卷宗时迎面撞破。",
+    "resource_gap": "{jailer_scribe_lucian.name}握煤灰井水道原图与排期册，你握脱身武力或特权。"
    },
    "tags": [
-    "romance_light",
-    "bodily_harm"
+    "crime",
+    "coercion_theme"
    ],
    "tension_engine_ids": [
-    "ten_collar_needle_breath",
+    "ten_vault_ledger_blackmail",
     "ten_dawn_pyre_countdown"
    ]
   },
@@ -290,7 +294,7 @@
    ]
   },
   {
-   "chemistry": "密室暗门落栓，暴虐{grand_inquisitor_julian.name}猛见红漆贪墨簿与禁具拓本正握在你掌心，铁青面具裂出躁红。",
+   "chemistry": "密室暗门落栓，暴虐{grand_inquisitor_julian.name}猛见红漆贪墨簿与黑账拓本正握在你掌心，铁青面具裂出躁红。",
    "id": "combo_solo_inquisitor_switch",
    "identity_ids": [
     "pi_roman_tribunal_auditor",
@@ -326,8 +330,8 @@
    ],
    "stakes": {
     "irreplaceable_goal": "逼恶官交出主钥匙并放水偷渡出牢。",
-    "limit_gap": "破晓翻账在即，翻脸即同毁。",
-    "meeting_reason": "携黑账与禁具实据梯口拦截毁证判官。",
+    "limit_gap": "审计清账在即，翻脸即同毁。",
+    "meeting_reason": "携黑账与拓本在梯口拦截毁证判官。",
     "resource_gap": "{grand_inquisitor_julian.name}握兵刃，你握送{grand_inquisitor_julian.ta}上绞架的死证。"
    },
    "tags": [
@@ -651,8 +655,8 @@
      "针尖沉稳毫不手抖的接应者"
     ],
     "pressure_responses": {
-     "breaking": "贴身铃穗与裙衬星图掀露瞬间眼红，却仍紧拽斗篷角。",
-     "high": "银圈烫红颈脉，咬唇压喘报出一格格齿槽角。",
+     "breaking": "贴身合欢铃与裙衬星图掀露瞬间耳根烧透，嘴上颤声斥骂放肆，指尖却死勾紧你斗篷角。",
+     "high": "火刑颈圈灼红颈脉，死咬下唇压住急喘，逐格低报齿槽角。",
      "low": "冷笑嘲讽庸人手艺，拿泥指静划北极星位。",
      "mid": "背烫僵紧仍厉喝先横剑膝头再碰衣领。"
     },
@@ -738,8 +742,8 @@
     "bodily_harm"
    ],
    "voices": {
-    "inner": "火刑颈圈烧得呼吸全乱，偏偏{player.name}靠得这么近……",
-    "surface": "“拿稳探针别发抖。卡在第三齿槽再不往左拨半分，天亮只剩骨灰。”"
+    "inner": "火刑颈圈烧得呼吸全乱，偏偏{player.title}靠得这么近……",
+    "surface": "“拿稳探针别发抖，{player.title}若拨偏第三齿槽半毫，休想问出半颗星位。”"
    }
   },
   {
@@ -770,8 +774,8 @@
      "不把鱼死网破捅到罗马的实利派"
     ],
     "pressure_responses": {
-     "breaking": "见红漆账簿被拍上脸前瞬间收凶相谈分利。",
-     "high": "退开哨兵反锁库门，图靠腕扣与武力威逼封口。",
+     "breaking": "红漆贪墨簿拍上胸前瞬间凶相皲裂，额渗冷汗按桌哑声求谈分赃。",
+     "high": "屏退哨兵反锁库门，攥紧皮鞭与银腕扣威逼封口。",
      "low": "拉长阴冷声调盘查夜闯者的口令来历。",
      "mid": "发觉紫檀匣被翻立刻提鞭封库搜查。"
     },
@@ -857,7 +861,7 @@
    ],
    "voices": {
     "inner": "红漆账簿若落进{player.name}袖中，黎明前我非先沉尸灭口不可！",
-    "surface": "“圣血救赎口令岂容鼠辈混进密室？手腕想试这副银腕扣？”"
+    "surface": "“无圣血救赎口令岂容擅闯密室？{player.title}莫非想试试这副银腕扣？”"
    }
   },
   {
@@ -902,7 +906,7 @@
    "identity": {
     "authority": "以疫病检疫或验伤保口供名义进八号室的特权",
     "exposure": "药箱底猪油罐与龟息散若被搜出立遭酷刑处死。",
-    "hidden": "底格暗藏秘银细针胚与扣下的黑呢蒙眼带和假死龟息药散，倘若实在破不开死枷便让女囚假死抬出城救醒。",
+    "hidden": "药箱底格暗藏秘银细针胚与假死龟息药散，倘若实在卸不开封魔死枷便让女囚假死抬出城救醒。",
     "limits": [
      "年迈体衰，扛不住重甲戟兵硬撞"
     ],
@@ -1019,7 +1023,7 @@
    "identity": {
     "authority": "掌崖外接应哨号，背负防古谱落敌之绝密格杀令",
     "exposure": "内领绣同盟铁棘徽记，遭搜身当场格杀勿论。",
-    "hidden": "早先袭库败走时曾顺走带齿银胚及半副纯银细雕腕扣物证，对穿裁判所靴服之人天然抱有深重怀疑与杀气。",
+    "hidden": "早先袭库撤离时顺走半枚副主审私铸金库铅封与买凶密契，对穿裁判所靴服之人抱有深重戒心。",
     "limits": [
      "孤身潜渠且左肋带旧伤随时撕裂，受死令束缚"
     ],
@@ -1122,7 +1126,7 @@
      "守得住中枢秘闻的高明共犯"
     ],
     "pressure_responses": {
-     "breaking": "若密谕意外遭掀出把柄，罕见敛威靠桌重新谈价。",
+     "breaking": "私留女巫密谕被当面掀穿时眸色骤沉，敛去威压倚桌低声重谈分成。",
      "high": "冷哂翻过密室赃账估价几条命值多少功绩。",
      "low": "漫不经心旋转双鹰戒试探来人底牌。",
      "mid": "撞破有人偷查古渠图时挑眉反手扣门审问。"
@@ -1226,11 +1230,11 @@
     "avoids": [
      "冷血逼供并过河拆桥的恶霸"
     ],
-    "contrast": "见官发抖似雀鸟，下决心突围时连死罪造册原底都敢掏。",
+    "contrast": "见官发抖似雀鸟，下决心突围时连死罪黑账原拓都敢掏。",
     "core_value": "小吏只想守点残良活命，逼急也敢掏死证拼命。",
     "goal_options": [
-     "献出完整古暗渠原图与禁具拓本求可靠队伍带走",
-     "偷改红印泥延后八号室提押日期拖命"
+     "献出完整古暗渠原图与黑账拓本求可靠队伍带走",
+     "偷改红印泥延后八号室提押排期拖命"
     ],
     "never": [
      "出卖落难学者去换半枚奖赏"
@@ -1240,7 +1244,7 @@
      "懂得善用文书漏洞的智者"
     ],
     "pressure_responses": {
-     "breaking": "若无路可遁便抢先烧毁抄本，绝不供出好人。",
+     "breaking": "退无可退时抢先引烛火烧毁排期册，咬唇发抖也绝不供出同党。",
      "high": "判官临门一瞬把完整暗渠原图塞入靠谱人怀里。",
      "low": "低头抄经拿墨瓶严严遮住紧要图角。",
      "mid": "闻响指颤却死按胸口保命拓本不漏。"
@@ -1253,13 +1257,13 @@
    "id": "jailer_scribe_lucian",
    "identity": {
     "authority": "掌死囚排期名册改动权及古暗渠建图保管权",
-    "exposure": "衣袍暗藏纯银腕扣与合欢铃造册拓本一旦搜出必死。",
-    "hidden": "半月前被迫手录紫檀禁具清册时骇怕不已，偷多拓一份藏在贴身衣袋里，专等救星到来献上扳倒暴虐上司。",
+    "exposure": "衣袍暗藏五万金币火刑罚没款私分拓本一旦搜出必死。",
+    "hidden": "半月前被迫誊抄副主审贪墨红漆账时骇怕不已，偷多拓一份关键页藏在贴身内袋，专等强援到来献上扳倒暴虐上司。",
     "limits": [
      "胆小怕重甲哨兵及副主审阴冷鞭刑"
     ],
     "obligations": [
-     "封存刑讯记档与密室交接清册"
+     "封存刑讯记档与秘阁交接清册"
     ],
     "resources": [
      "标明后厨煤灰井直通二号水闸后背的古罗马原图"
@@ -1298,11 +1302,11 @@
     {
      "from": 0,
      "location_id": "loc_archive_scriptorium",
-     "to": 180
+     "to": 360
     },
     {
-     "from": 181,
-     "location_id": "loc_inquisition_vault",
+     "from": 361,
+     "location_id": "loc_cross_corridor",
      "to": 1439
     }
    ],
@@ -1310,7 +1314,7 @@
     "exits": [
      {
       "cost": "弃绝稳妥文书前程随队四海亡命",
-      "option": "献全套暗渠图与禁具拓本入伙连夜跑路"
+      "option": "献全套暗渠图与黑账拓本入伙连夜跑路"
      },
      {
       "cost": "独留魔窟单押特使是否真会保全自己",
@@ -1318,15 +1322,15 @@
      }
     ],
     "pressure": "天明清账在即，改期之事绝对瞒不过双眼。",
-    "trigger": "夜返秘阁欲毁危险造册拓本时撞进越狱交锋。"
+    "trigger": "夜返秘阁欲转移危险黑账拓本时撞进暗流交锋。"
    },
    "tags": [
     "crime",
     "coercion_theme"
    ],
    "voices": {
-    "inner": "把纯银腕扣与合欢铃造册拓本也交{player.name}吧，留下来必死。",
-    "surface": "“别喊我名……水闸后连着厨房煤灰井，全画背面了！”"
+    "inner": "把贪墨红漆账拓本也交给{player.title}吧，独留死牢迟早被灭口。",
+    "surface": "“别高声……水闸后连着厨房煤灰井，全画背面了！”"
    }
   },
   {
@@ -1454,7 +1458,9 @@
  "clock_style": "hm",
  "content_tags": [
   "intimate",
+  "explicit",
   "violence",
+  "coercion_theme",
   "bodily_harm",
   "death",
   "workplace_power",
@@ -1560,8 +1566,8 @@
   },
   {
    "beats": [
-    "老药师涉冰水将浓缩王水与生猪油涂上水闸锈栓，瀑流盖住金属响动。",
-    "三十米涂蜡麻绳飞爪卡死高砖缝，单待最后人马跃潭脱逃。"
+    "涉过冰凉暗渠溪流摸至铸铁水栅前，将生猪油与药液抹入陈旧铁栓试探松紧。",
+    "瀑流轰鸣掩去金属轻响，三十米涂蜡麻绳悄悄盘入高处砖槽留作退路。"
    ],
    "duration_minutes": 25,
    "hook_ids": [],
@@ -1571,9 +1577,10 @@
    ],
    "start_minute": 120,
    "tags": [
-    "disaster"
+    "crime",
+    "intimate"
    ],
-   "title": "排污暗渠水闸浇油破锈准备"
+   "title": "古暗渠水栅探路与涂油养护"
   }
  ],
  "default_npc_gender_mix": {
@@ -1582,7 +1589,7 @@
   "nonbinary": 0.25
  },
  "default_person": "second",
- "era": "一五一二年秋，中世纪宗教裁判与奥术交锋时代",
+ "era": "十六世纪宗教裁判地牢时期",
  "extends": null,
  "forbidden_terms": [
   "跨时代工业名词",
@@ -1626,7 +1633,7 @@
     "loc_cross_corridor"
    ],
    "slot": "grand_inquisitor_julian",
-   "text": "{grand_inquisitor_julian.name}按住装满纯银细雕腕扣与黑呢蒙眼带的紫檀密匣挡住梯口，黄铜主钥匙叮当冷问深夜缘何近库。"
+   "text": "{grand_inquisitor_julian.name}按住装满纯银细雕腕扣与黑呢蒙眼带的紫檀密匣拦在阶前，黄铜主钥匙叮当冷问{player.title}深夜缘何擅行。"
   },
   {
    "id": "hook_inquisitor_red_ledger",
@@ -1673,17 +1680,16 @@
     "loc_cell_eight"
    ],
    "slot": "rebel_envoy_celine",
-   "text": "甩紧涂蜡飞爪麻绳时左肋旧创突然裂开渗红，{rebel_envoy_celine.name}咬牙闷哼险滑黑水，反手死死扣紧你探来借力的前臂。"
+   "text": "自暗渠口攀上湿冷石阶时左肋旧创骤然裂开渗红，{rebel_envoy_celine.name}咬牙闷哼身形微晃，反手死死扣紧{player.title}探来的前臂。"
   },
   {
    "id": "hook_envoy_wax_seal",
    "kind": "approach",
    "location_ids": [
-    "loc_archive_scriptorium",
-    "loc_cross_corridor"
+    "loc_archive_scriptorium"
    ],
    "slot": "papal_envoy_ottavia",
-   "text": "{papal_envoy_ottavia.name}指扣秘阁黄铜星盘，双鹰戒压死豁免诏卷一角，笑问夜探暗渠图的你究竟拿什么换命。"
+   "text": "{papal_envoy_ottavia.name}指扣秘阁黄铜星盘，双鹰戒压死豁免诏卷一角，笑问夜探暗渠图的{player.title}究竟拿什么换命。"
   },
   {
    "id": "hook_envoy_secret_order",
@@ -1692,7 +1698,7 @@
     "loc_archive_scriptorium"
    ],
    "slot": "papal_envoy_ottavia",
-   "text": "{papal_envoy_ottavia.name}拢衣起身时袖口滑下半角红衣主教极密印令，白纸写明务留活口押往罗马献图而非烧杀。"
+   "text": "{papal_envoy_ottavia.name}拢衣起身时袖口滑下半角红衣主教密印手谕，白纸写明务留活口押往罗马献图而非烧杀。"
   },
   {
    "id": "hook_envoy_audit_leverage",
@@ -1702,17 +1708,16 @@
     "loc_cross_corridor"
    ],
    "slot": "papal_envoy_ottavia",
-   "text": "{papal_envoy_ottavia.name}按住案桌一叠圣山亏空审计单斜睨过来，低声问这手握线索的人是否愿跟枢密院搭一条暗线。"
+   "text": "{papal_envoy_ottavia.name}拢住袖中一叠圣山亏空审计单斜睨过来，低声问手握线索的{player.title}是否愿跟枢密院搭条暗线。"
   },
   {
    "id": "hook_inquisitor_vault_ambush",
    "kind": "approach",
    "location_ids": [
-    "loc_inquisition_vault",
-    "loc_cross_corridor"
+    "loc_inquisition_vault"
    ],
    "slot": "grand_inquisitor_julian",
-   "text": "{grand_inquisitor_julian.name}突然反身挡住刑具密室暗石门框，冷冷打量你袖笼纸页，手指缓缓搭上腰间双簧主钥匙。"
+   "text": "{grand_inquisitor_julian.name}突然反身挡住刑具密室暗石门框，冷冷打量{player.title}袖笼纸页，手指缓缓搭上腰间双簧主钥匙。"
   },
   {
    "id": "hook_kitchen_soup_basket",
@@ -1731,17 +1736,26 @@
     "loc_cross_corridor"
    ],
    "slot": "kitchen_steward_greta",
-   "text": "后厨猛传大铁锅翻地巨响与泼骂，十字回廊大半板甲兵急奔查火，替八号室门口让出宝贵空隙。"
+   "text": "后厨猛传大铁锅翻地巨响与泼骂，回廊大半板甲兵急奔查火，替八号囚门外让出空隙。"
   },
   {
-   "id": "hook_dawn_pyre_smoke",
-   "kind": "observe",
+   "id": "hook_scribe_canal_blueprint",
+   "kind": "approach",
    "location_ids": [
-    "loc_cross_corridor",
-    "loc_cell_eight"
+    "loc_archive_scriptorium"
    ],
-   "slot": "witch_vivian_starlight_scholar",
-   "text": "头顶气孔灌下第一缕呛人松脂桐油烟气，警示地底众人广场百尺之上火刑柴架正准备点火。"
+   "slot": "jailer_scribe_lucian",
+   "text": "{jailer_scribe_lucian.name}从羊皮卷架后探出半张苍白面孔，拽住{player.title}衣袖悄声掀开古罗马暗渠原图一角。"
+  },
+  {
+   "id": "hook_scribe_ledger_rubbing",
+   "kind": "request",
+   "location_ids": [
+    "loc_archive_scriptorium",
+    "loc_cross_corridor"
+   ],
+   "slot": "jailer_scribe_lucian",
+   "text": "{jailer_scribe_lucian.name}抱紧案卷缩在廊柱阴影里耳尖发颤，低声求{player.title}收下贴身黑账拓本并带{jailer_scribe_lucian.ta}离山。"
   }
  ],
  "id": "witch_inquisition_dungeon_pact",
@@ -1801,7 +1815,7 @@
     "甩挂三十米涂蜡高强度麻绳飞爪借绝壁瀑潭潜遁",
     "冰水急流中紧拥护住体温及珍贵羊皮古谱"
    ],
-   "detail": "三百年前罗马古石暗道，冰水激流奔涌，尽头铸铁水栅死锈卡住，栅外直落圣山绝壁瀑布深潭。",
+   "detail": "三百年前古罗马石砌暗道，冰冷溪流奔涌回荡，尽头设沉重铸铁水栅与铁栓，栅外直落圣山绝壁瀑布深潭。",
    "exits": [
     "loc_cell_eight"
    ],
@@ -1832,6 +1846,7 @@
    "id": "loc_archive_scriptorium",
    "name": "档案秘阁",
    "pressure_modifiers": {
+    "press_dawn_pyre_execution": "行刑排期红册摊在案头，天明前不改印便即刻提押。",
     "press_roman_audit_leak": "密谕蜡封一旦撬动，圣座特使立时封锁出口。"
    },
    "privacy": "semi",
@@ -1941,7 +1956,7 @@
   ],
   "order": "given_first"
  },
- "notes": "v2.5--mode 1重构：开场暗藏颈圈/腕扣/合欢铃/蒙眼带，全员成年。",
+ "notes": "",
  "player_identities": [
   {
    "age_range": [
@@ -2069,7 +2084,7 @@
    ]
   }
  ],
- "premise": "北方圣山异端裁判所地底八号囚室里，星语遗族奥术学者被黑铁枷锁扣在潮草间，暗紫天鹅绒长裙早被刑鞭抽裂。教廷名义指控巫术，实则垂涎裙衬缝藏的《天象古谱》地脉星图；如今广场松脂柴堆已泼透桐油，趁夜推开牢门之人究竟想趁危夺图，还是接应破晓共遁罗马古暗渠，全在今宵。",
+ "premise": "北方圣山异端裁判所地底八号囚室里，星语遗族奥术学者被沉重铁枷困于潮草间，暗紫天鹅绒长裙留着审讯裂痕。教廷借巫术之名连夜提审，实则垂涎裙衬缝藏的《天象古谱》星图；秘阁贪墨黑账、回廊宵禁密令与古罗马暗渠暗流交织，趁夜推开牢门者究竟意在逼图索命，还是暗中接应筹谋脱身，皆在孤灯下见分晓。",
  "pressures": [
   {
    "choice": "近身贴颈盲挑解锁，还是冒酸雾风险用浓缩王水硬蚀银圈。",
@@ -2144,7 +2159,8 @@
    "leverage": null,
    "location_ids": [
     "loc_cross_corridor",
-    "loc_cell_eight"
+    "loc_cell_eight",
+    "loc_archive_scriptorium"
    ],
    "near": {
     "deadline_minutes": 15,
@@ -2359,19 +2375,19 @@
  "rules": [
   {
    "id": "r_inquisition_dungeon_curfew",
-   "text": "宵禁：子正后持黄铜双簧主钥匙并对出圣血救赎方可进八号室。"
+   "text": "地牢宵禁：子时后须持黄铜双簧主钥匙并对出圣血救赎口令，方可提审八号囚室。"
   },
   {
    "id": "r_anti_magic_collar_threshold",
-   "text": "禁制：死枷遇三阶奥术即烫喉，须用秘银细针刺入第三齿槽拆解。"
+   "text": "禁魔铁律：封魔锁具遇三阶奥术即灼烫收紧，须用秘银细针刺入第三齿槽方可拆解。"
   },
   {
    "id": "r_star_chart_codex_oath",
-   "text": "古谱戒律：《天象古谱》宁随骨化灰，绝不交予伪善教廷。"
+   "text": "古谱戒律：《天象古谱》宁随骨化灰，遗族学者绝不将其交予伪善教廷。"
   },
   {
    "id": "r_dawn_pyre_execution",
-   "text": "火刑法典：晨钟敲响即燃松脂柴堆，囚徒踏出回廊便无生机。"
+   "text": "裁判法典：重犯一经签发火刑排期便锁入深井水牢，私通递物或篡改案卷者同罪论处。"
   }
  ],
  "schema_version": 1,
@@ -2410,7 +2426,7 @@
   "银枷炽痛",
   "口嫌体直",
   "黑账反制",
-  "破晓死线"
+  "暗夜密契"
  ],
  "twists": [
   {
@@ -2420,7 +2436,7 @@
     "witch_vivian_starlight_scholar",
     "press_anti_magic_collar_thermal"
    ],
-   "text": "反魔秘银颈圈第三齿槽内藏反向逆拧保险销，唯在{witch_vivian_starlight_scholar.name}稳紧贴胸压平心跳时往回倒半圈，死枷方才脱落。"
+   "text": "反魔秘银颈圈第三齿槽藏反向保险销，唯{witch_vivian_starlight_scholar.name}贴胸压平心跳往回倒半圈，死枷方才脱落。"
   },
   {
    "category": "资源",
@@ -2429,7 +2445,7 @@
     "jailer_scribe_lucian",
     "press_sewer_sluice_jam"
    ],
-   "text": "怯弱案卷文书忽然掏出完整三百年罗马建筑原底——清晰画着后厨煤灰井直绕二号水闸后背的无兵秘道。"
+   "text": "{jailer_scribe_lucian.name}掏出三百年罗马水道原底——清晰标着后厨煤灰井绕过二号水闸的无兵秘道。"
   },
   {
    "category": "制度",
@@ -2438,7 +2454,7 @@
     "grand_inquisitor_julian",
     "press_inquisitor_vault_contraband"
    ],
-   "text": "遭捏死黑账的副主审竟图谋半夜烧草人伪造八号室早已病毙焚尸假案，强拉你一起替{grand_inquisitor_julian.ta}兜住亏空大洞。"
+   "text": "被捏死黑账的{grand_inquisitor_julian.name}图谋烧草人伪造病毙假案，强拉你共兜五万金币亏空。"
   },
   {
    "category": "信息",
@@ -2447,7 +2463,7 @@
     "papal_envoy_ottavia",
     "press_roman_audit_leak"
    ],
-   "text": "圣座特使根本非来平反冤狱——罗马早想独吞《天象古谱》秘术，密诏正是戴黑呢蒙眼带强锁女巫回宫占星。"
+   "text": "{papal_envoy_ottavia.name}并非平反冤狱——罗马欲独吞《天象古谱》，密诏正是戴黑呢蒙眼带锁女巫回宫占星。"
   },
   {
    "category": "关系",
@@ -2456,7 +2472,7 @@
     "rebel_envoy_celine",
     "witch_vivian_starlight_scholar"
    ],
-   "text": "原本奉死令救不出即灭口的孤狼队长，亲眼见你死护重伤学者硬抗铁甲一瞬，咬牙悄悄移开了淬毒短弩准星。"
+   "text": "奉死令救不出即灭口的{rebel_envoy_celine.name}，见你死护学者硬抗铁甲一瞬，悄悄移开了短弩准星。"
   },
   {
    "category": "人事",
@@ -2465,7 +2481,7 @@
     "kitchen_steward_greta",
     "press_dawn_pyre_execution"
    ],
-   "text": "送面包的管事妇突然拦门揭露亲妹冤死火柱之仇——今夜既送猪油斗篷，更要亲眼看这批仇家恶狗沉渊。"
+   "text": "{kitchen_steward_greta.name}拦门道出亲妹冤死火柱深仇——今夜既送猪油斗篷，更要看仇家恶官沉渊。"
   },
   {
    "category": "时限",
@@ -2474,7 +2490,7 @@
     "witch_vivian_starlight_scholar",
     "press_sewer_sluice_jam"
    ],
-   "text": "今宵朔月潮汐暗合星位，暗渠洪水涨至绝顶——卸枷引星火反可借洪暴冲溃外山铁闸。"
+   "text": "朔月潮汐暗合星位，暗渠洪水涨至绝顶——卸枷引星火反可借洪暴冲溃外山铁闸。"
   },
   {
    "category": "信息",
@@ -2483,7 +2499,7 @@
     "elder_apothecary_alois",
     "press_witch_codex_secret"
    ],
-   "text": "裂裙夹层羊皮星图只是掩体，真正解算核心地脉交角的秘字早微刻进贴颈火刑颈圈内圈。"
+   "text": "裂裙夹层羊皮星图只是掩体，解算核心地脉交角的秘字早微刻在贴颈火刑颈圈内圈。"
   }
  ]
 }

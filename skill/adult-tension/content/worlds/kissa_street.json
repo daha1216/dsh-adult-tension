@@ -649,7 +649,7 @@
    "tags": [],
    "voices": {
     "inner": "“十四个杯子我一个都放不下，可我也想走。”",
-    "surface": "“你的还在。咖啡还是老样子？”"
+    "surface": "“{player.call}，你的还在。咖啡老样子？”"
    }
   },
   {
@@ -888,7 +888,7 @@
    "tags": [],
    "voices": {
     "inner": "“我拍了三年空座位，其实是在等一个人坐回来。”",
-    "surface": "“别动，就这样坐着……算了，你还是让开吧，我拍的是空位子。”"
+    "surface": "“别动，就这么坐着……算了还是让开吧，我拍空位子。”"
    }
   },
   {
@@ -1132,7 +1132,7 @@
    "tags": [],
    "voices": {
     "inner": "“我回来，是想看看这条街还记不记得我。”",
-    "surface": "“只是来看看，价钱好商量。”"
+    "surface": "“{player.title}，只是看看，价钱好商量。”"
    }
   },
   {
@@ -1412,7 +1412,7 @@
   "nonbinary": 0.0
  },
  "default_person": "second",
- "era": "1987 年（昭和六十二年）",
+ "era": "昭和六十二年·东京私铁商店街",
  "extends": null,
  "forbidden_terms": [
   "手机",
@@ -1543,7 +1543,7 @@
     "yotaka"
    ],
    "slot": "night_waiter",
-   "text": "{npc.name}把一杯咖啡放在你面前：“末班车后的第一杯，店里请。”"
+   "text": "{npc.name}把热咖啡放在你面前：“{player.call}，末班车后第一杯，店里请。”"
   },
   {
    "id": "h_hum_song",
@@ -1562,7 +1562,7 @@
     "upstairs"
    ],
    "slot": "second_owner",
-   "text": "雨漏敲打六叠间的玻璃，{npc.name}拧旺煤油炉扯过屋里仅剩的一条旧毛毯披上你湿透的肩，人也贴进了毯子里"
+   "text": "雨漏敲打六叠间玻璃，{npc.name}拧旺煤油炉扯过仅剩的旧毛毯披上你湿肩，人也贴进毯子里"
   },
   {
    "id": "h_steam_towel",
@@ -1571,7 +1571,7 @@
     "sento"
    ],
    "slot": "bandai_keeper",
-   "text": "打烊后的池边水雾尚未散尽，{npc.name}从番台走下来把拧干的滚烫毛巾按上你肩颈，站得极近没有马上收手"
+   "text": "打烊后池边水雾未散，{npc.name}走下番台把拧干的滚烫毛巾按上你肩颈，站得极近没有收手"
   },
   {
    "id": "h_cellar_whiskey",
@@ -2174,7 +2174,7 @@
    "trigger": "白桦和蓝调合用了十年的欠账簿要清账，{second_owner.name}手里的原件记着{jazz_owner.name}挪用振兴会贴息填店租的每一笔"
   },
   {
-   "choice": "冒雨走回去，还是留在白桦二楼烘干衣服等天亮",
+   "choice": "冒雨蹚水走回去，还是留在店里烘衣等天亮",
    "exits": [
     {
      "cost": "两个人裹着一条毯子熬到天亮，什么话都藏不住",
@@ -2202,7 +2202,8 @@
    "leverage": null,
    "location_ids": [
     "station",
-    "upstairs"
+    "upstairs",
+    "basement_jazz"
    ],
    "near": {
     "deadline_minutes": 120,
@@ -2213,7 +2214,7 @@
    "start_minute": 1400,
    "tags": [],
    "title": "梅雨停驶夜",
-   "trigger": "梅雨季的特大暴雨冲断了私铁道口，末班车停驶，整条商店街积水断电，浑身湿透的人只能退回白桦二楼"
+   "trigger": "梅雨季特大暴雨冲断私铁道口，末班车停驶，整条街积水断电，湿透的人只能退回白桦二楼或地下蓝调避雨"
   },
   {
    "choice": "去查，还是先把门擦干净",

@@ -3,7 +3,7 @@
   "id": "estate_vault_lockout_tea_scoop_rescue",
   "title": "开库日的少夫人",
   "extends": null,
-  "era": "当代江南，太湖畔百年老宅的开库晒画日",
+  "era": "当代江南，太湖老宅开库晒画日",
   "region": "沈氏老宅：宗祠检视大堂、中庭水榭茶寮与地下字画大库",
   "premise": "太湖之畔的百年深宅，每年六月初六启地库晒画。青砖地上积着散不去的梅雨潮气，茶烟里坐满各怀心思的沈氏族人。当家少夫人独掌地下书画大库与开库铜匙，核对历代宗谱卷轴；中庭茶寮琴声未断，族老、海外归来的堂兄和拍卖行的估价顾问早已按捺不住，都在等开库这一天把分家的话说出口。",
   "tone": [
@@ -149,11 +149,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "小{family}",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}师傅",
           "gender": "any"
         }
       ],
@@ -178,11 +178,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}副掌事",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "小{family}",
           "gender": "any"
         }
       ],
@@ -207,11 +207,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}监理",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}老师",
           "gender": "any"
         }
       ],
@@ -236,11 +236,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}主任",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}督造",
           "gender": "any"
         }
       ],
@@ -829,7 +829,7 @@
         "desired_position": "一张只坐两个懂行人的茶席"
       },
       "voices": {
-        "surface": "这个估值，已经是行里最体面的数字了。",
+        "surface": "{player.title}，这个估值，已经是行里最体面的数字了。",
         "inner": "我想要的那样东西，八千万买不来。"
       },
       "schedule": [
@@ -1084,7 +1084,7 @@
         "exits": [
           {
             "option": "拒绝公证，自己去申报旧账",
-            "cost": "执照可能被暂停。"
+            "cost": "执业牌照将被停牌并记入档案。"
           },
           {
             "option": "拖延到天亮，等省里的封存令",
@@ -2277,7 +2277,7 @@
       "location_ids": [
         "loc_grand_atrium_foyer"
       ],
-      "text": "{npc.name}把你请进大堂侧厢，亲手推来一盏茶：“你是明白人，少夫人夜里在修哪一卷画？”"
+      "text": "{npc.name}把你请进大堂侧厢，亲手推来一盏茶：“{player.title}是明白人，少夫人夜里在修哪一卷画？”"
     },
     {
       "id": "hook_hong_ledger_glance",
@@ -2367,7 +2367,7 @@
       "location_ids": [
         "loc_grand_atrium_foyer"
       ],
-      "text": "{npc.name}捧着密封公证书走到你身侧，推了推眼镜：“有句话，我想在议事开始前先问你。”"
+      "text": "{npc.name}捧着密封公证书走到你身侧，推了推眼镜：“{player.title}，有句话，我想在议事开始前先问你。”"
     },
     {
       "id": "hook_han_umbrella",

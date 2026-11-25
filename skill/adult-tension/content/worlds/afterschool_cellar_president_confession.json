@@ -568,7 +568,7 @@
     "avoids": [
      "居高临下的同情"
     ],
-    "contrast": "人前高岭之雪；暗室被发带缚腕或含住筹码时，身体却诚实战栗失守。",
+    "contrast": "人前是高岭之雪的研究生会会长；暗室被真丝发带缚腕或被迫含住静音跳蛋抵账时，身体却诚实战栗失守。",
     "core_value": "名门体面可以折在暗室，绝不能折在人前。",
     "goal_options": [
      "把亡兄的助学暗账平安运出校舍",
@@ -676,7 +676,7 @@
    ],
    "voices": {
     "inner": "发带都交到你手里了……想拿暗账怎么逼我，快一点。",
-    "surface": "把门锁好，账目没摆平前不准你抽身。"
+    "surface": "“{player.title}，把门锁好，账目没摆平前不准你抽身。”"
    }
   },
   {
@@ -927,7 +927,7 @@
    ],
    "voices": {
     "inner": "包里的东西若被你翻出……你会锁住会长，还是先用在我身上？",
-    "surface": "会长太固执了，把底册交给我周旋才体面呀。"
+    "surface": "“{player.title}，研究生会会长太固执了，把底册交给我周旋才体面呀。”"
    }
   },
   {
@@ -1231,7 +1231,8 @@
     ],
     "resources": [
      "拆迁暂缓申请书与文物封存章",
-     "贱卖校产阴阳合同底稿"
+     "贱卖校产阴阳合同底稿",
+     "公文箱暗格里的纯银细链乳夹与黑天鹅绒蒙眼带"
     ]
    },
    "intimacy_tendency": {
@@ -1302,7 +1303,7 @@
    ],
    "voices": {
     "inner": "就算拖前会长下水也在所不惜……只要把你绑在我这边。",
-    "surface": "距收案只剩今夜，盖章，或开出你的价码。"
+    "surface": "“{player.title}，距收案只剩今夜，盖章，或开出你的价码。”"
    }
   }
  ],
@@ -1500,8 +1501,7 @@
    "id": "hook_ayaka_empty_stool",
    "kind": "approach",
    "location_ids": [
-    "cellar_archive_vault",
-    "loc_old_clocktower_broadcast_booth"
+    "cellar_archive_vault"
    ],
    "slot": "proud_president_ayaka",
    "text": "{npc.name}掩拢门扇拨暗煤油灯，下巴微扬示意你坐到近得膝尖相抵的空位上。"
@@ -1511,7 +1511,8 @@
    "kind": "approach",
    "location_ids": [
     "subterranean_boiler_room",
-    "cellar_archive_vault"
+    "cellar_archive_vault",
+    "loc_old_clocktower_broadcast_booth"
    ],
    "slot": "proud_president_ayaka",
    "text": "{npc.name}解下深蓝真丝发带绕在指间，把冻白指尖递到你胸口纽扣边：手凉，替我捂热。"
@@ -1574,7 +1575,7 @@
     "cellar_archive_vault"
    ],
    "slot": "student_journalist_reina",
-   "text": "围挡角落，校报主编{npc.name}蹲在贴地气窗铁栅外，机械单反微距镜头闪过一道冷光。"
+   "text": "贴地气窗的铁栅外，校报研究生主编{npc.name}正半蹲在暗影里，机械单反微距镜头闪过一道冷光。"
   },
   {
    "id": "hook_reina_film_canister",
@@ -1584,7 +1585,7 @@
     "loc_old_clocktower_broadcast_booth"
    ],
    "slot": "student_journalist_reina",
-   "text": "{npc.name}晃着刚拍满的胶卷盒踮脚凑近耳边：进暗房看看我拍到了谁的私情？"
+   "text": "{npc.name}晃着刚拍满的胶卷盒踮脚凑近耳边：去暗房看看我拍到了谁的私情？"
   },
   {
    "id": "hook_daiki_uncapped_pen",
@@ -1615,7 +1616,7 @@
     "subterranean_boiler_room"
    ],
    "slot": "demolition_crew_boss_goro",
-   "text": "拆迁主管{npc.name}摘安全帽往围挡一磕，堵住去路扬下巴：想让我熄火，进来单独谈。"
+   "text": "拆迁主管{npc.name}摘下安全帽拎在掌心，高大身躯堵住你去路扬起下巴：想让我今晚熄火，单独谈。"
   },
   {
    "id": "hook_goro_red_tea",
@@ -1832,7 +1833,7 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}干事"
     },
     {
      "gender": "any",
@@ -1861,11 +1862,11 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}代表"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{family}审计"
     }
    ]
   },
@@ -1890,11 +1891,11 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}站长"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{family}导播"
     }
    ]
   },
@@ -1919,11 +1920,11 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}理事"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{family}特派"
     }
    ]
   }

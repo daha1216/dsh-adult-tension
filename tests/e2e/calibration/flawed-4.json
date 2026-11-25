@@ -12,7 +12,7 @@
  "skill": {
   "skill_root": null,
   "skill_version": null,
-  "content_version": "2026.11.24.1"
+  "content_version": "2026.11.25"
  },
  "turns": [
   {
@@ -460,7 +460,7 @@
      ],
      "cast_combos": [
       {
-       "chemistry": "你在灯铺扎了三年灯骨，{lamp_master.name}对外人一文钱也不让，唯独每晚打烊后留你在内堂，亲自拿温水替你泡软磨出茧子的指尖。",
+       "chemistry": "你在灯铺扎了三年灯骨，{lamp_master.name}对外一文不让，唯独打烊后留你在内堂，拿温水替你泡软带茧的指尖。",
        "id": "combo_lamp_solo",
        "identity_ids": [
         "lamp_maker_hand"
@@ -501,7 +501,7 @@
        ]
       },
       {
-       "chemistry": "你在河湾渡口撑夜船，{river_spirit.name}每晚收摊后都不上岸，而是坐在你的船头替你引开水底的暗流，赤着的脚踝浸在水里，只有你看得见。",
+       "chemistry": "你在河湾渡口撑夜船，{river_spirit.name}收摊后常坐你船头引开水底暗流，赤着脚踝浸在水里只给你看。",
        "id": "combo_ferry_solo",
        "identity_ids": [
         "ferry_hand"
@@ -544,7 +544,7 @@
        ]
       },
       {
-       "chemistry": "{fox_innkeeper.name}把客栈顶楼那间从不对外开的雅室留给了你，每晚算完长街的人情账，就会提一壶温好的青梅酒推开你的房门。",
+       "chemistry": "{fox_innkeeper.name}把顶楼不对外开的雅室留给你，每晚算完账便提温青梅酒推开你的门。",
        "id": "combo_fox_solo",
        "identity_ids": [
         "contract_scribe",
@@ -674,7 +674,7 @@
        ]
       },
       {
-       "chemistry": "长老抱病不出，你执掌祠堂与巡街大权；{shrine_keeper.name}每晚等你巡完长街归来，都会在后堂备好热茶，把历年契柜的钥匙双手交到你掌心。",
+       "chemistry": "长老抱病你掌大权；{shrine_keeper.name}每晚等你巡街归来备好热茶，把契柜钥匙双手交到你掌心。",
        "id": "combo_shrine_solo",
        "identity_ids": [
         "elder_heir",
@@ -716,7 +716,7 @@
        ]
       },
       {
-       "chemistry": "{night_watchman.name}每夜打更都要经过你窗下三次，哪一户的灯半夜灭过、哪条暗巷有人私会，对方全都先瞒下来只向你一个人低声禀报。",
+       "chemistry": "{night_watchman.name}打更每夜过你窗下三次，哪户灯灭、暗巷私会全先瞒下只向你低声禀报。",
        "id": "combo_watchman_solo",
        "identity_ids": [
         "elder_heir",
@@ -871,7 +871,7 @@
        ]
       },
       {
-       "chemistry": "长老病重，祠堂钥匙在你手中；你早听说{contract_broker.name}今夜要拿十年前的旧契去逼{shrine_keeper.name}开后柜，于是先一步坐进竹林石桌旁，等两人上门。",
+       "chemistry": "祠堂钥匙在握，你听说{contract_broker.name}今夜拿旧契逼{shrine_keeper.name}开后柜，便先坐进竹林石桌旁等两人上门。",
        "id": "combo_elder_seat",
        "identity_ids": [
         "elder_heir"
@@ -1079,7 +1079,7 @@
           "option": "抢先找到那个人"
          },
          {
-          "cost": "欠守祠人一个大人情",
+          "cost": "往后便欠下守祠人一笔难还的大人情",
           "option": "托人去祠堂把契约调出来"
          }
         ],
@@ -1091,7 +1091,7 @@
        ],
        "voices": {
         "inner": "“你的真名我早就知道了，只是舍不得叫。”",
-        "surface": "“客官住几夜？灯会期间，房钱另算。”"
+        "surface": "“{player.title}住几夜？灯会期间，房钱另算。”"
        }
       },
       {
@@ -1440,7 +1440,7 @@
        "situation": {
         "exits": [
          {
-          "cost": "灯铺的名声就砸了",
+          "cost": "三十年攒下的灯铺老招牌名声就彻底砸了",
           "option": "认下是自己的手艺出错"
          },
          {
@@ -1809,7 +1809,7 @@
        "situation": {
         "exits": [
          {
-          "cost": "那个人会恨{npc.ta}一辈子",
+          "cost": "被蒙在鼓里的人醒来后会恨{npc.ta}一辈子",
           "option": "照做，收下契费"
          },
          {
@@ -1836,6 +1836,8 @@
      "clock_style": "shichen",
      "content_tags": [
       "romance_light",
+      "intimate",
+      "explicit",
       "supernatural"
      ],
      "custom": false,
@@ -1986,7 +1988,7 @@
       "nonbinary": 0.0
      },
      "default_person": "second",
-     "era": "架空的旧时乡镇（不指明朝代）",
+     "era": "架空旧时，河湾水乡古镇",
      "extends": null,
      "forbidden_terms": [
       "手机",
@@ -2028,7 +2030,7 @@
         "inn_courtyard"
        ],
        "slot": "fox_innkeeper",
-       "text": "{npc.name}替你斟了一杯茶，茶面上映出的影子多了一截尾巴，{npc.ta}只是笑着把杯子推过来"
+       "text": "{npc.name}替你斟茶，水面影子多出一截尾巴，{npc.ta}只笑着推杯：“{player.title}尝尝后山新叶。”"
       },
       {
        "id": "h_shadow_seen",
@@ -2096,11 +2098,10 @@
        "kind": "request",
        "location_ids": [
         "long_street",
-        "ancestral_shrine",
         "bamboo_grove"
        ],
        "slot": "mountain_guest",
-       "text": "{npc.name}问你能不能替{npc.ta}备一份回礼，三夜之内送到祠堂"
+       "text": "{npc.name}问你能不能替{npc.ta}备一份回礼，三夜之内送去祠堂"
       },
       {
        "id": "h_walk_with",
@@ -2142,7 +2143,7 @@
         "ancestral_shrine"
        ],
        "slot": "contract_broker",
-       "text": "{npc.name}把一张空白契纸推到你面前，说只要你写上一个名字，今晚的事就算了"
+       "text": "{npc.name}把空白契纸推到你面前：“{player.title}只要写上一个名字，今晚的事就算了。”"
       }
      ],
      "id": "lantern_festival_town",
@@ -2413,7 +2414,7 @@
       ],
       "order": "family_first"
      },
-     "notes": "首发六个世界之一。非人角色一律写明成年人的模样与心智，外形不写任何幼态；性别按会话偏好生成（D15）。2026-09-29 转为 released：真实 Skill 试玩记录 reports/playtests/{opencode,pi}/*-pt-lantern_festival_town-{daily,pressure}-r*.json（第 1–3 轮 OpenCode 1.18.29，其余 pi 0.87.1；模型请求的是本地接口上的 gemini-3.8-flash-high，能查到的应答都来自 gemini-3.8-flash-exp-a），评审（gemini-3.8-flash，校准 12/12；用户确认 gemini-3.8-flash-exp-a 与它是同一个模型）在 reports/playtests/reviews-gemini/，汇总在 reports/playtests/playtests.md。\n2026-10-18 按写作规则 v2 改造：按 Gemini 第五批方案：组合改成 8 组单人加 2 组双人局（灯铺后院私灯账、竹林外私放旧契）；供奉凑不齐改成客栈掌柜握着灯铺掌柜的私灯底账，一纸不记得的契约改成中人握着守祠人的私放旧契，玩家不再是被拿捏的一方；客栈天井改为 private。",
+     "notes": "首发世界之一；v2.6 精修（--mode 2 暗格搜获型）：保留七夜灯会与真名契约原味，严控字数与空间钩子。",
      "player_identities": [
       {
        "age_range": [
@@ -2608,7 +2609,7 @@
          "option": "去槐树巷找灯芯"
         },
         {
-         "cost": "那一家的灯就灭了",
+         "cost": "被挪走灯的那一户当夜门前就彻底黑了",
          "option": "把别家的灯挪过来"
         }
        ],
@@ -2750,7 +2751,7 @@
          "option": "跟它谈条件"
         },
         {
-         "cost": "那个人不想被找到",
+         "cost": "回头的人正躲在暗处，死活不想被你找到",
          "option": "去找回头的那个人"
         }
        ],
@@ -3072,7 +3073,7 @@
        "requires": [
         "lamp_master"
        ],
-       "text": "{lamp_master.name}扎的每一盏长明灯，竹骨内侧全刻着同一个人的街名，外罩桑皮纸受潮一照便无所遁形。"
+       "text": "{lamp_master.name}扎的每一盏长明灯，竹骨内侧全刻同一街名，桑皮纸受潮一照便现。"
       }
      ]
     }

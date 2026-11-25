@@ -3,9 +3,9 @@
   "id": "shanghai_bank_vault_trap",
   "title": "督军千金下金库",
   "extends": null,
-  "era": "民国二十五年上海外滩金融租界风云期",
+  "era": "民国二十五年上海外滩金融租界",
   "region": "外滩泰丰银行地下八米防爆金库及饭店顶层套房",
-  "premise": "民国二十五年的上海外滩，督军府千金每月都要踩着高跟鞋下泰丰银行地下金库，在军饷提存单上盖私印，且每回都点名那位留洋归来的安防总工程师陪着下库。近来乱军逼近租界、洋行买办暗吞军饷，随着炮火震断金库落闸电源与消防管爆裂漫水，湿透旗袍下的把柄与外滩套房的婚约暗算一并被逼到台面。",
+  "premise": "民国二十五年的上海外滩，督军府千金每月都要踩着高跟鞋下泰丰银行地下金库，在军饷提存单上盖私印，且每回都点名留洋归来的安防总工程师陪同验锁。乱军逼近租界、洋行买办暗吞军饷，地下八米防爆库门与外滩饭店顶层套房之间，军饷假账与联姻暗算一触即发。",
   "tone": [
     "民国十里洋场",
     "上位失守",
@@ -114,7 +114,7 @@
   "rules": [
     {
       "id": "r_bank_vault_gravity_shutter",
-      "text": "泰丰银行重力落闸断电三秒内锁死基坑，唯靠手枪高碳钢弹匣底板或暗沟闸阀方能破局。"
+      "text": "泰丰银行地下防爆金库设双道锰钢栅门与断电重力落闸，出入须安防总工与金库主钥同场核验，落闸封坑后唯夹层暗阀可泄压启封。"
     },
     {
       "id": "r_warlord_interest_embezzle",
@@ -472,7 +472,7 @@
         "relationship_stance": "在舞池里眼高于顶，偏对敢顶撞自己还拿命护她周全的人动情。",
         "contrast": "平日颐指气使，冷水漫腰时比谁都狠，到了套房解扣却娇喘低软。",
         "prefers": [
-          "不看门第脸色、在死水与婚约前直接把她搂进怀里的硬汉"
+          "不看门第脸色、在险境与婚约前直接把她搂进怀里的狠角色"
         ],
         "avoids": [
           "趋炎附势的洋行奴才与拿婚书压人的死板家丁"
@@ -513,7 +513,7 @@
       },
       "voices": {
         "surface": "“本小姐这硬钢弹匣底板结实得很！拿去给我把锁舌别断！”",
-        "inner": "水快漫过腰了……只要他在身后抱紧，明日逼婚我也敢掀翻。"
+        "inner": "水快漫过腰了……只要{player.ta}在身后抱紧，明日逼婚我也敢掀翻。"
       },
       "schedule": [
         {
@@ -890,7 +890,7 @@
         "desired_position": "平时作威作福、失势奉钞求庇的大班"
       },
       "voices": {
-        "surface": "“锰钢大门砸坏了要按英镑赔的！万万动不得啊！”",
+        "surface": "“{player.title}，锰钢大门砸坏了要按英镑赔的！万万动不得啊！”",
         "inner": "叛军分赃单万不能进水……谁救我出去，汇票全归谁！"
       },
       "schedule": [
@@ -1143,7 +1143,7 @@
       },
       "voices": {
         "surface": "“锁孔塞满油泥煤灰！先用我这把德国小刮刀挑干净！”",
-        "inner": "那张存单捅出去就完了……只要他肯护着我，什么都听他的。"
+        "inner": "那张存单捅出去就完了……只要{player.ta}肯护着我，什么都听{player.ta}的。"
       },
       "schedule": [
         {
@@ -2254,7 +2254,7 @@
         "loc_shanghai_bank_rotunda",
         "loc_security_grille_gate"
       ],
-      "text": "{heiress_bai_chuchu.name}扶住石柱，湿透月白旗袍贴死腰臀冷斥：“水没腰了！别管账本，卸我这硬钢弹匣底板去别锁！”"
+      "text": "{heiress_bai_chuchu.name}扶住湿冷石柱，微潮月白旗袍贴紧腰臀冷斥：“少盯我账袋看！拿我这硬钢弹匣底板去试偏心锁槽！”"
     },
     {
       "id": "hook_heiress_suite_buttons_approach",
@@ -2263,7 +2263,7 @@
       "location_ids": [
         "loc_bund_hotel_suite"
       ],
-      "text": "{heiress_bai_chuchu.name}赤足立留声机旁拉丝绒窗帘，扬颌眼尾泛红：“明天礼车八点到。本小姐盘扣解不开，你过来？”"
+      "text": "{heiress_bai_chuchu.name}赤足立留声机旁拉丝绒窗帘，扬颌眼尾泛红：“明天礼车八点到。{player.title}，本小姐盘扣解不开，你过来？”"
     },
     {
       "id": "hook_heiress_photo_flush_observe",
@@ -2283,15 +2283,14 @@
         "loc_security_grille_gate",
         "loc_shanghai_bank_rotunda"
       ],
-      "text": "{engineer_shen_zhendong.name}涉过冷水从身后托住纤腰贴紧胸膛，声音滚烫：“抓紧，右偏三厘——用体重把锁舌压断！”"
+      "text": "{engineer_shen_zhendong.name}踏过地面积水从身后托住腰侧贴紧胸膛，声音滚烫：“扶稳，右偏三厘——借体重把偏心锁舌压开！”"
     },
     {
       "id": "hook_engineer_steam_parley_approach",
       "kind": "approach",
       "slot": "engineer_shen_zhendong",
       "location_ids": [
-        "loc_pipe_mezzanine_chamber",
-        "loc_bund_hotel_suite"
+        "loc_pipe_mezzanine_chamber"
       ],
       "text": "{engineer_shen_zhendong.name}扯松湿领带靠热雾门框，目光锁住领口：“门栓落好了。现在还拿银行门第吓唬我？”"
     },
@@ -2333,7 +2332,7 @@
         "loc_shanghai_bank_rotunda",
         "loc_security_grille_gate"
       ],
-      "text": "暗水波光里，{comprador_edward_tang.name}假装哭嚎腿软，黑缎马褂袖口却悄悄攥紧能启副锁的黄铜钥匙链。"
+      "text": "库底冷光阴影里，{comprador_edward_tang.name}假装心慌擦汗，黑缎马褂袖口却悄悄攥紧能启副锁的黄铜钥匙链。"
     },
     {
       "id": "hook_inspector_sandbag_gate_approach",
@@ -2350,7 +2349,6 @@
       "kind": "request",
       "slot": "concession_inspector_chen",
       "location_ids": [
-        "loc_bund_hotel_suite",
         "loc_security_grille_gate"
       ],
       "text": "{concession_inspector_chen.name}见小黄鱼底单后脸色煞白揪紧袖口：“别递领事馆！铜牌案卷都放这，我去搬沙袋！”"
@@ -2373,7 +2371,7 @@
         "loc_shanghai_bank_rotunda",
         "loc_pipe_mezzanine_chamber"
       ],
-      "text": "水浪猛冲，{vault_teller_peiyu.name}摔进怀里，票据盒弹开，买办假账与外汇存单正漂在脚边！"
+      "text": "湿滑石阶上脚下一崴，{vault_teller_peiyu.name}惊呼撞进你怀里，铁皮票据盒摔开，买办假账与外汇存单正散在脚边！"
     },
     {
       "id": "hook_heiress_waltz_approach",
@@ -2392,7 +2390,7 @@
         "loc_dance_hall_lounge",
         "loc_bund_hotel_suite"
       ],
-      "text": "{engineer_shen_zhendong.name}理旧西装领带扣紧门框：“若带您出得去这外滩，明早八点的礼车还坐不坐？”"
+      "text": "{engineer_shen_zhendong.name}理旧西装领带扣紧门框：“{player.title}，若带您出得去这外滩，明早八点的礼车还坐不坐？”"
     }
   ],
   "twists": [

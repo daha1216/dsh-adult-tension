@@ -12,7 +12,7 @@
  "skill": {
   "skill_root": null,
   "skill_version": null,
-  "content_version": "2026.11.24.1"
+  "content_version": "2026.11.25"
  },
  "turns": [
   {
@@ -1173,7 +1173,7 @@
        ],
        "voices": {
         "inner": "“你改的那个字，比原来的好。”",
-        "surface": "“第三版，十分钟，再晚就不等了。”"
+        "surface": "“{player.title}，第三版只剩十分钟，再晚就不等了。”"
        }
       },
       {
@@ -1772,7 +1772,7 @@
        "situation": {
         "exits": [
          {
-          "cost": "欠下的人情变成了仇",
+          "cost": "往日欠下的人情从此彻底翻脸结成了仇",
           "option": "照章程带人"
          },
          {
@@ -1918,7 +1918,8 @@
      "clock_style": "hm",
      "content_tags": [
       "romance_light",
-      "workplace"
+      "workplace",
+      "explicit"
      ],
      "custom": false,
      "customs": [
@@ -2066,7 +2067,7 @@
       "nonbinary": 0.0
      },
      "default_person": "second",
-     "era": "1920 年代（民国十五年）",
+     "era": "民国十五年江南梅雨季",
      "extends": null,
      "forbidden_terms": [
       "手机",
@@ -2176,7 +2177,7 @@
         "composing_room"
        ],
        "slot": "column_writer",
-       "text": "{npc.name}把刚写完的一页稿纸递给你，说这一段只写给你一个人看"
+       "text": "{npc.name}把刚写完的一页稿纸递给你，低声道：“{player.title}，这一段只写给你一个人看。”"
       },
       {
        "id": "h_hidden_photo",
@@ -2207,7 +2208,7 @@
         "back_alley"
        ],
        "slot": "column_writer",
-       "text": "{npc.name}拉住你的袖子，求你今晚替{npc.ta}誊一份稿子，天亮前送到报馆"
+       "text": "{npc.name}拉住你的袖子，低声求道：“{player.title}，今晚替我誊一份稿子，天亮前送到报馆。”"
       },
       {
        "id": "h_spilled_type",
@@ -2787,11 +2788,11 @@
        "choice": "拿手艺换钱，还是拿别人的秘密换钱",
        "exits": [
         {
-         "cost": "当期一到就赎不回来",
+         "cost": "当期一到这批家当就彻底成死当赎不回来",
          "option": "把铺子里最值钱的东西拿去当"
         },
         {
-         "cost": "评理会上要当众认欠",
+         "cost": "街坊评理会上要当众低头认下这笔旧欠",
          "option": "去求行会宽限"
         },
         {

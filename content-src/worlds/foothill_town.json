@@ -922,7 +922,7 @@
         "desired_position": "摘下圆滑算盘面具后不再盘算腰间帖子的交心伴侣"
       },
       "voices": {
-        "surface": "“满了满了——哎，你等等，你腰上那是什么？”",
+        "surface": "“满了满了——哎，{player.title}等等，你腰上那是什么？”",
         "inner": "“我卖了几百张帖子，就是想有一张能把那个人带下山。”"
       },
       "schedule": [
@@ -1072,7 +1072,7 @@
         "exits": [
           {
             "option": "先去把剑拿走",
-            "cost": "修理铺的掌柜认得{npc.ta}"
+            "cost": "法器修理铺的掌柜当场认出{npc.ta}的来历"
           },
           {
             "option": "由它去",
@@ -2195,15 +2195,14 @@
         "back_stream",
         "repair_shop"
       ],
-      "text": "{npc.name}贴近半步避开水声，在你耳畔极轻吐出一个字：“这是我被山门抹去的道号，今夜我只对你说这一次。”"
+      "text": "{npc.name}贴近半步避开外人耳目，在你耳畔极轻吐出一个字：“这是我被山门抹去的道号，今夜我只对你说这一次。”"
     },
     {
       "id": "h_beast_lean",
       "kind": "approach",
       "slot": "exiled_one",
       "location_ids": [
-        "beast_yard",
-        "back_stream"
+        "beast_yard"
       ],
       "text": "那头暴躁灵兽竟温顺把头搁上你的肩窝，{npc.name}倚在兽栏阴影里挑眉笑了：“它从来不认生人，偏偏认得你。”"
     },
@@ -2235,15 +2234,14 @@
         "inn",
         "main_street"
       ],
-      "text": "{npc.name}趁大堂喧闹把一枚黄铜房钥塞入你袖口：“二楼最里那间留给你了，不要灵石，也不要山门帖子。”"
+      "text": "{npc.name}趁四下人声喧闹把一枚黄铜房钥塞入你袖口：“{player.title}，留仙居二楼最里那间留给你了，不要灵石，也不要山门帖子。”"
     },
     {
       "id": "h_ask_relative",
       "kind": "request",
       "slot": "inn_keeper",
       "location_ids": [
-        "inn",
-        "mountain_steps"
+        "inn"
       ],
       "text": "{npc.name}在楼梯转角一把拉住你的衣袖，眼底微湿：“大典那日你若真上了山，顺路替我问一句——那人可还记得山脚下的家。”"
     },
@@ -2277,7 +2275,7 @@
         "inn",
         "back_stream"
       ],
-      "text": "{npc.name}从布袋抽出一张写着你真名的红纸条，当着你的面凑上灯焰化作飞灰，贴耳笑问：“现在这份人情，打算怎么还？”"
+      "text": "{npc.name}从布袋抽出一张写着你真名的红纸条，当着你的面凑上灯焰化作飞灰，贴耳笑问：“{player.title}，现在这份人情，打算怎么还？”"
     },
     {
       "id": "h_stray_spell",
@@ -2302,8 +2300,7 @@
       "kind": "approach",
       "slot": "exiled_one",
       "location_ids": [
-        "back_stream",
-        "beast_yard"
+        "back_stream"
       ],
       "text": "{npc.name}蹲在溪石边按住一角松动的青苔岩板，回头挑衅似地冲你抬下颌：“里面封着内门见不得光的镇灵物件——真敢跟来，就搭把手撬开。”"
     }
@@ -2394,7 +2391,8 @@
     "intimate",
     "violence",
     "supernatural",
-    "coercion_theme"
+    "coercion_theme",
+    "explicit"
   ],
   "status": "released",
   "notes": "2026-11-23 v2.5精修（--mode 2 暗格搜获型）：仙侠集镇语境，开场零穿戴，精选白玉势、双修合欢金铃、缚仙红绫、催情软烟，打通私密locations.affordances+identity.hidden+daily_activities.beats[0]+exits；洗净旧套话与4处截断cost，补齐8处空hooks.location_ids并扩至14钩，8转折7类全激活standby_cast。"

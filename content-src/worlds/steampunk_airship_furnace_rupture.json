@@ -3,7 +3,7 @@
   "id": "steampunk_airship_furnace_rupture",
   "title": "皇家飞艇泄压",
   "extends": null,
-  "era": "维多利亚蒸汽重工与皇家浮空战舰纪元",
+  "era": "维多利亚蒸汽浮空战舰纪元",
   "region": "无畏级浮空战舰轮机舱、龙骨走道与军官密舱",
   "premise": "无畏级浮空战舰在边境雷云巡航。帝国最年轻的首席女动力总监锁守超压锅炉舱，防烫束腰下暗藏越级试压手稿；督战武官握着封舱死令与船厂回扣账步步逼近，一墙之隔的更衣密室里，滚烫白雾正把所有人锁成一团。",
   "tone": [
@@ -99,7 +99,8 @@
         "pattern": "{given}",
         "gender": "any"
       }
-    ]
+    ],
+    "order": "given_first"
   },
   "rules": [
     {
@@ -445,7 +446,7 @@
           "保主炉免炸膛护三千官兵"
         ],
         "exposure": "私调副炉弹簧实测超压，私室暗屉收银链乳夹、丝绒蒙眼带、小牛皮腕扣与纯银春宫球。",
-        "hidden": "连轴绷紧时爱锁门借暗格银器泄压——开场时匣子仍严锁在暗屉里。"
+        "hidden": "连轴紧绷时爱反锁舱门借紫檀暗格里的春宫球与丝绒蒙眼带泄压——开场时木匣仍严锁在暗屉里。"
       },
       "decision": {
         "core_value": "体面是最后甲；除非捏死我七寸，谁休想听我低半个字。",
@@ -505,7 +506,7 @@
         "desired_position": "抵在雾镜或床沿，嘴硬间任挑松束腰系带。"
       },
       "voices": {
-        "surface": "断轮算什么！卡偏心槽跟我压死，松手踢进灰斗！",
+        "surface": "断轮算什么！{player.title}，卡稳偏心槽跟我压下去，松手就踢进灰斗！",
         "inner": "暗格锁松半寸……绝不能让蠢官先看见里面银货！"
       },
       "schedule": [
@@ -2242,7 +2243,7 @@
       "location_ids": [
         "loc_officer_brass_cabin"
       ],
-      "text": "炮浪再震，{chief_mechanic_eleanor.name}慌忙按住床旁震松半寸的紫檀暗格，一角红丝绒蒙眼带连纯银春宫球却仍露外缝晃着冷光。"
+      "text": "炮浪再震，{chief_mechanic_eleanor.name}慌忙按住床旁震松半寸的紫檀暗匣，一角深红丝绒衬垫连细银链却仍露在缝外晃着冷光。"
     },
     {
       "id": "hk_arthur_glove_handover_approach",
@@ -2260,7 +2261,7 @@
       "location_ids": [
         "loc_steam_locker_alcove"
       ],
-      "text": "{stoker_foreman_arthur.name}用宽肩卡紧更衣室铁栓，眼风斜进半敞壁柜暗屉轻哂：“卖命十年……屉里那副小牛皮腕扣借我验验成色？”"
+      "text": "{stoker_foreman_arthur.name}用宽肩抵住更衣室铁栓，眼风斜进半敞壁柜暗屉轻哂：“{player.title}，卖命十年……屉里锁着的那副私藏皮具借我掌掌眼？”"
     },
     {
       "id": "hk_alger_key_ultimatum_approach",
@@ -2269,7 +2270,7 @@
       "location_ids": [
         "loc_keel_catwalk"
       ],
-      "text": "{naval_inspector_alger.name}白手套尖转着纯金电钥，居高冷笑逼近门栏：“五分钟砸锁。现在乖乖开私舱认罪，许还买来半张逃命票。”"
+      "text": "{naval_inspector_alger.name}白手套尖转着纯金电钥，居高冷笑逼近门栏：“夜巡点验。现在乖乖开私舱交出超压手稿，还能留半分体面。”"
     },
     {
       "id": "hk_alger_cabin_raid_approach",
@@ -2278,7 +2279,7 @@
       "location_ids": [
         "loc_officer_brass_cabin"
       ],
-      "text": "{naval_inspector_alger.name}拿银杖挑翻紫檀暗格盖板，单片镜渗出贪恶冷嘲：“装冰山圣女……戴上丝绒蒙眼带签认罪状，还是全舰看戏？”"
+      "text": "{naval_inspector_alger.name}拿银杖敲响紫檀暗格盖板，单片镜渗出冷嘲：“{player.title}来评评理——交出匣底违禁银器签认罪状，还是全舰看戏？”"
     },
     {
       "id": "hk_clara_tape_swap_approach",
@@ -2296,7 +2297,7 @@
       "location_ids": [
         "loc_steam_locker_alcove"
       ],
-      "text": "{difference_analyst_clara.name}攥着偷配铜副钥缩进镜侧泛红耳尖哀求：“千万别上报……银链乳夹半指没碰过，替我瞒这遭好不好？”"
+      "text": "{difference_analyst_clara.name}攥着偷配铜副钥缩进穿衣镜侧，耳尖泛红向你哀求：“{player.title}千万别上报……暗屉里的银匣我半指没碰过，替我瞒这遭好不好？”"
     },
     {
       "id": "hk_george_rope_toll_approach",
@@ -2305,7 +2306,7 @@
       "location_ids": [
         "loc_keel_catwalk"
       ],
-      "text": "{airship_rigger_george.name}横拎重斧抵住闸门轨，甩绳往你腰上一套轻拽：“天窗劈开了！要踩我这根救生梯逃，腰上总该留点定钱吧？”"
+      "text": "{airship_rigger_george.name}横拎工兵斧倚住栏杆，甩绳往你腰上一套轻拽：“想走龙骨暗梯避开督战官耳目，腰上总该留点定钱吧？”"
     },
     {
       "id": "hk_george_window_trade_approach",
@@ -2341,7 +2342,7 @@
       "location_ids": [
         "loc_steam_locker_alcove"
       ],
-      "text": "水雾里，{chief_mechanic_eleanor.name}咬唇将镜台散开的小牛皮腕扣连银链乳夹扫入暗袋，偏漏半截细银链晃在皮扣外边。"
+      "text": "水雾漫过穿衣镜，{chief_mechanic_eleanor.name}咬唇将壁柜暗屉里滑出的丝绒小匣重新锁紧，铜钥贴回滚烫胸衣内侧。"
     },
     {
       "id": "hk_eleanor_bed_bargain_approach",
@@ -2424,6 +2425,7 @@
   ],
   "content_tags": [
     "intimate",
+    "explicit",
     "violence",
     "coercion_theme",
     "humiliation",

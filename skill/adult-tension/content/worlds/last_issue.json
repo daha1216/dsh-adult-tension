@@ -898,7 +898,7 @@
    "situation": {
     "exits": [
      {
-      "cost": "总编会觉得被侮辱",
+      "cost": "总编觉得受辱而当场掀翻谈判桌",
       "option": "加价"
      },
      {
@@ -1145,7 +1145,7 @@
       "option": "报警"
      },
      {
-      "cost": "照片会一直在那里",
+      "cost": "原片留在暗档里随时可能外流曝光",
       "option": "什么都不做"
      }
     ],
@@ -1290,7 +1290,8 @@
   "intimate",
   "coercion_theme",
   "workplace_power",
-  "workplace"
+  "workplace",
+  "explicit"
  ],
  "custom": false,
  "customs": [
@@ -1439,7 +1440,7 @@
   "nonbinary": 0.0
  },
  "default_person": "second",
- "era": "当代",
+ "era": "当代纸媒寒冬停刊前夜",
  "extends": null,
  "forbidden_terms": [
   "铜钱",
@@ -1517,8 +1518,7 @@
    "id": "h_stay_late",
    "kind": "approach",
    "location_ids": [
-    "chief_office",
-    "newsroom"
+    "chief_office"
    ],
    "slot": "editor_in_chief",
    "text": "{npc.name}关了总编室的灯，没走，坐在黑里问你还走不走"
@@ -1531,7 +1531,7 @@
     "archive_room"
    ],
    "slot": "fact_checker",
-   "text": "{npc.name}把一张便利贴贴在你手背上：“帮我核一个名字。”"
+   "text": "{npc.name}把一张便利贴贴在你手背上：“{player.title}，帮我核一个名字。”"
   },
   {
    "id": "h_source_ask",
@@ -1541,7 +1541,7 @@
     "night_diner"
    ],
    "slot": "star_reporter",
-   "text": "{npc.name}压低声音：“我还差一个证人，你认识一个人。”"
+   "text": "{npc.name}压低声音：“{player.title}，我还差一个证人，你认识一个人。”"
   },
   {
    "id": "h_suit_glance",
@@ -1579,14 +1579,13 @@
     "night_diner"
    ],
    "slot": "pr_rep",
-   "text": "{pr_rep.name}合上收购合同推到一边，从公文包里摸出一只黑绒小盒摆在桌心，露出里面的纯银细链乳夹与黑天鹅绒蒙眼带：“签不签字不急，先看看你敢不敢赌这一局。”"
+   "text": "{pr_rep.name}合上收购合同推到一边，从公文包里摸出一只黑绒小盒摆在桌心，露出里面的纯银细链乳夹与黑天鹅绒蒙眼带：“{player.title}，签不签字不急，先看看你敢不敢赌这一局。”"
   },
   {
    "id": "h_reporter_toy_bet",
    "kind": "approach",
    "location_ids": [
-    "stairwell_smoke",
-    "archive_room"
+    "stairwell_smoke"
    ],
    "slot": "star_reporter",
    "text": "{star_reporter.name}靠在消防楼梯栏杆上，指间把玩着一只未拆封的静音无线遥控跳蛋挑眉冷笑：“头版敢不敢留真话？敢的话，今晚这赌注你先收好。”"
@@ -2034,7 +2033,7 @@
    "choice": "去找当年的经手人，还是只信录音",
    "exits": [
     {
-     "cost": "违反资料室的规矩",
+     "cost": "破坏资料室行规并留下私拷把柄",
      "option": "把录音拷一份"
     },
     {

@@ -3,7 +3,7 @@
   "id": "beach_volleyball_anchor_vibe_trap",
   "title": "救球扑地女主攻",
   "extends": null,
-  "era": "当代三亚，海滨国际沙排公开赛女子决赛日",
+  "era": "当代三亚国际沙排公开赛决赛日",
   "region": "三亚海滨沙排中央球场：网前沙区、环形看台、遮阳棚、理疗室与运动员小木屋",
   "premise": "三亚海滨国际沙排公开赛进入女子决赛日。国家队的王牌主攻和副攻搭档每天在中央球场扣杀、拦网，组委会竞赛主任、国际排联技术代表、司线员和随队防护师在场边各司其职。海风裹着热浪吹过金色沙滩与环形看台，赛后就要公布新一届奥运周期的国家队双人组合名单。",
   "tone": [
@@ -491,7 +491,7 @@
         "desired_position": "木屋床沿替她擦头发的那个位置"
       },
       "voices": {
-        "surface": "这一局我来扣，你只管看着。",
+        "surface": "这一局我来扣，{player.title}只管在场边看着。",
         "inner": "合同签了又怎样，我偏要和她一起站上领奖台。"
       },
       "schedule": [
@@ -753,7 +753,7 @@
         "desired_position": "露台上递雪茄给你的那个距离"
       },
       "voices": {
-        "surface": "规矩就是规矩，签字就行。",
+        "surface": "{player.title}，规矩就是规矩，签字就行。",
         "inner": "拆不了组，我在赞助商那边就交不了差。"
       },
       "schedule": [
@@ -1150,7 +1150,7 @@
           },
           {
             "option": "拿签单逼主裁表态",
-            "cost": "赛后被指干扰执裁。"
+            "cost": "赛后被组委会通报干扰执裁并停发内场证件。"
           }
         ]
       },
@@ -2326,7 +2326,6 @@
       "kind": "approach",
       "slot": "partner_duan_ling_fei",
       "location_ids": [
-        "loc_beach_player_cabin",
         "loc_beach_center_net_anchor",
         "loc_players_bench_shaded_canopy"
       ],
@@ -2375,7 +2374,7 @@
       "location_ids": [
         "loc_beach_volleyball_grandstand"
       ],
-      "text": "{npc.name}摘下墨镜坐在看台背阴处，把一杯清茶推到身边的空位上。"
+      "text": "{npc.name}摘下墨镜坐在看台背阴处，把一杯清茶推向空位：“{player.title}，坐下聊聊今天的判罚尺度？”"
     },
     {
       "id": "hook_yan_whistle",
@@ -2504,6 +2503,7 @@
   "status": "released",
   "content_tags": [
     "intimate",
+    "explicit",
     "workplace"
   ],
   "notes": "2026-11 v2.5 精修（--mode 1 开场暗藏型）：完整保留三亚沙排决赛、防水跳蛋原名与蕾丝腿环束缚带/真皮锁扣项圈锚点（严禁入 premise）；彻底清除旧禁欲与险情回避套话，清空 daily_activities 与 pressures 的 hook_ids，重写木屋反锁告白与摄像师暗中删母带两处老套转折。"

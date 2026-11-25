@@ -3,7 +3,7 @@
   "id": "stage_mic_pack_clip_ratchet_release",
   "title": "湿透舞台女团C位",
   "extends": null,
-  "era": "当代广电传媒中心的跨年晚会联排季",
+  "era": "当代广电中心跨年晚会联排季",
   "region": "广电传媒中心一号演播大厅：水幕舞台、侧幕暗廊与总控室",
   "premise": "十二月的一号演播大厅，女团正为跨年晚会的回归舞台带妆联排。挑高舞台下堆着粉丝提前送来的应援灯牌，C位每晚都在水幕灯架下练到最晚；队长、声乐总监、执行经纪人和技术团队在后台与总控室之间来回奔忙，要定下直播夜最终的声光方案和站位。",
   "tone": [
@@ -148,11 +148,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}副导",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}导",
           "gender": "any"
         }
       ],
@@ -177,11 +177,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}总监",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}调度",
           "gender": "any"
         }
       ],
@@ -206,11 +206,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}主管",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}工",
           "gender": "any"
         }
       ],
@@ -235,11 +235,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}领班",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "小{family}",
           "gender": "any"
         }
       ],
@@ -821,7 +821,7 @@
         "desired_position": "后台楼梯间里没人知道的那一级台阶"
       },
       "voices": {
-        "surface": "节目单今晚就要报，谁都别给我出岔子。",
+        "surface": "节目单今晚就要报，{player.title}，谁都别给我出岔子。",
         "inner": "要是有人能叫停我，就好了。"
       },
       "schedule": [
@@ -1064,7 +1064,7 @@
         "desired_position": "导播台旁边那把只留给对方的椅子"
       },
       "voices": {
-        "surface": "这段要不要，你说一声。",
+        "surface": "{player.title}，这段要不要，你说一声。",
         "inner": "这段我早就想给你看了。"
       },
       "schedule": [
@@ -2199,16 +2199,17 @@
       "kind": "approach",
       "slot": "vocal_coach_lin_shu",
       "location_ids": [
-        "loc_broadcast_master_control_room"
+        "loc_broadcast_master_control_room",
+        "loc_grand_auditorium_stage",
+        "loc_center_private_lounge"
       ],
-      "text": "{npc.name}摘下颈上的监听耳机，不由分说扣到你头上：“你自己听，第三小节后面那口气，是谁的。”"
+      "text": "{npc.name}摘下颈上的监听耳机，不由分说扣到你头上：“{player.title}，你自己听，第三小节后面那口气，是谁的。”"
     },
     {
       "id": "hook_chen_running_order",
       "kind": "observe",
       "slot": "manager_chen_man",
       "location_ids": [
-        "loc_center_private_lounge",
         "loc_grand_auditorium_stage"
       ],
       "text": "执行经纪人{npc.name}拿着刚打印出来的跨年节目走位表快步走进后台，队长跟在后面，目光落向主舞台正中央的升降点位。"

@@ -12,7 +12,7 @@
  "skill": {
   "skill_root": null,
   "skill_version": null,
-  "content_version": "2026.11.24.1"
+  "content_version": "2026.11.25"
  },
  "turns": [
   {
@@ -1013,7 +1013,7 @@
           "option": "照着改"
          },
          {
-          "cost": "驻留合同就算违约",
+          "cost": "驻留合同当场判定违约并被收回厂区画室钥匙",
           "option": "拒绝，撤展"
          }
         ],
@@ -1262,11 +1262,11 @@
        "situation": {
         "exits": [
          {
-          "cost": "合伙人会觉得被出卖",
+          "cost": "多年搭档的合伙人会彻底认定自己遭你背叛出卖",
           "option": "先签了再说"
          },
          {
-          "cost": "画廊可能撤回报价",
+          "cost": "签约画廊极可能借机压价甚至直接撤回收藏报价",
           "option": "把事情摊开"
          }
         ],
@@ -1402,7 +1402,7 @@
        "tags": [],
        "voices": {
         "inner": "“我在你的画前面站了四十分钟，一个字也没写下来。”",
-        "surface": "“作品我看过了，评审期间不便多说。”"
+        "surface": "“作品我看过了，{player.title}，评审期间不便多说。”"
        }
       },
       {
@@ -1528,7 +1528,7 @@
        ],
        "voices": {
         "inner": "“你每回坐的那个位子，我都擦得最干净。”",
-        "surface": "“最后一杯，喝完回去睡。”"
+        "surface": "“最后一杯了，{player.call}，喝完早点回去睡。”"
        }
       },
       {
@@ -1786,6 +1786,8 @@
      },
      "clock_style": "hm",
      "content_tags": [
+      "intimate",
+      "explicit",
       "romance_light",
       "workplace",
       "nightlife"
@@ -1938,12 +1940,12 @@
       "nonbinary": 0.0
      },
      "default_person": "second",
-     "era": "当代（艺术季的两周）",
+     "era": "当代都市·旧厂区秋季艺术季",
      "extends": null,
      "forbidden_terms": [
       "魔法",
       "妖怪",
-      "修仙",
+      "仙门",
       "灵力",
       "衙门",
       "巡捕房",
@@ -2076,7 +2078,7 @@
         "night_bar"
        ],
        "slot": "print_partner",
-       "text": "{npc.name}把一份合同推到你面前，求你以见证人的身份签个字"
+       "text": "{npc.name}把一份未公开的联名合同推到你面前：“{player.title}，求你以见证人的身份替我签个字。”"
       },
       {
        "id": "h_power_cut",
@@ -2631,7 +2633,7 @@
        "choice": "站出来说话，还是先保住自己",
        "exits": [
         {
-         "cost": "你会被一起翻出来",
+         "cost": "当年的合作旧账连你也会被一并翻出来示众",
          "option": "站出来替那个人说话"
         },
         {
@@ -2765,7 +2767,7 @@
          "option": "让{resident_painter.name}答应{critic.name}的条件"
         },
         {
-         "cost": "整季的名声都要重算",
+         "cost": "整届艺术季攒下的名声与画廊邀约都要推倒重算",
          "option": "劝{resident_painter.name}抢先公开代笔"
         }
        ],

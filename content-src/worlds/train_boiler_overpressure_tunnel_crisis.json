@@ -3,9 +3,9 @@
   "id": "train_boiler_overpressure_tunnel_crisis",
   "title": "失控列车女司机",
   "extends": null,
-  "era": "重工业干线提速与高原重载蒸汽列车时代",
+  "era": "重工业高原重载蒸汽列车时代",
   "region": "高原特长单线隧道与万吨重载蒸汽机车",
-  "premise": "高原干线提速寒夜，全段首位女正司机驾驶万吨重联蒸汽列车闯入特长隧道，调速汽阀拉杆突断抱死，过热白汽狂喷，前方更压着塌方落石。车内挤满攥着私焊铅封秘辛的老司炉长、扣押摘钩钥的特派员、暗藏假验收单的工务总工与守车护运密箱的冷艳专员，生死读秒间各怀把柄贴身相逼。",
+  "premise": "高原干线提速的寒冬夜班，全段首位女正司机执掌万吨重联蒸汽列车穿行群山隧道。驾驶舱炉火滚烫、煤灰扑面，同行老司炉长攥着旧焊封底细，安全监察扣着调度铜钥，工务总工与押运专员各怀假账与密箱在卧车和守车之间暗中角力。",
   "tone": [
     "暴冲白汽",
     "嘴硬失守",
@@ -126,7 +126,7 @@
     },
     {
       "id": "r_siding_switch_dual_code",
-      "text": "前方塌方区唯右侧避险短道可活命，须凭工务转辙令与机车正驾口令合力抢道。"
+      "text": "特长隧道群设有右侧避险短道，遇险变道须凭工务转辙令与机车正驾口令双人核准方可扳道。"
     }
   ],
   "customs": [
@@ -640,7 +640,7 @@
         "desired_position": "门外端官架、门内沉沦的共犯"
       },
       "voices": {
-        "surface": "“封条就在皮箱里！暗袋藏了什么，自己脱还是我摸？”",
+        "surface": "“{player.title}，封条就在皮箱里！暗袋藏了什么，自己脱还是我摸？”",
         "inner": "该死……矿主回扣电报千万别翻出来，不然连裤子都保不住……"
       },
       "schedule": [
@@ -2039,7 +2039,7 @@
       "duration_minutes": 55,
       "beats": [
         "后窗结满冰花映出退去冷轨，脱湿鞋裹羊毛毯并肩窝窄榻分饮高粱烈酒。",
-        "黄铜门栓卡死槽里，酒劲上脸时指尖悄然探进解开的领口。"
+        "黄铜门栓落进槽里，酒劲上脸时指尖悄然探进解开的领口。"
       ],
       "hook_ids": [],
       "start_minute": 1410,
@@ -2362,8 +2362,7 @@
       "kind": "approach",
       "slot": "chief_female_driver",
       "location_ids": [
-        "loc_inspector_sleeper_car",
-        "loc_boiler_side_catwalk"
+        "loc_inspector_sleeper_car"
       ],
       "text": "{chief_female_driver.name}退抵皮榻边，大氅滑下半边湿肩仍死咬红唇冷笑：“拿张破焊封单就想叫老娘低头？有本事过来搜！”"
     },
@@ -2390,10 +2389,9 @@
       "kind": "approach",
       "slot": "bureau_safety_commissioner",
       "location_ids": [
-        "loc_coal_tender_deck",
-        "loc_caboose_stove_cabin"
+        "loc_coal_tender_deck"
       ],
-      "text": "{bureau_safety_commissioner.name}转着摘钩铜钥逼到水柜阴暗处，贴耳警告：“交出违章纸带，今晚这枚钥匙便收进我怀里。”"
+      "text": "{bureau_safety_commissioner.name}转着摘钩铜钥逼到水柜阴暗处，贴耳警告：“{player.title}，交出违章纸带，今晚这枚钥匙便收进我怀里。”"
     },
     {
       "id": "hk_stoker_hug_waist_approach",
@@ -2410,7 +2408,6 @@
       "kind": "request",
       "slot": "veteran_lead_stoker",
       "location_ids": [
-        "loc_caboose_stove_cabin",
         "loc_steam_driver_cab"
       ],
       "text": "{veteran_lead_stoker.name}摊开烫泡满布的手掌露出旧焊封残片靠近：“替你扛了三年黑锅，今晚进守车给我包扎不过分吧？”"
@@ -2448,10 +2445,9 @@
       "kind": "approach",
       "slot": "locomotive_deputy_mechanist",
       "location_ids": [
-        "loc_coal_tender_deck",
-        "loc_inspector_sleeper_car"
+        "loc_coal_tender_deck"
       ],
-      "text": "{locomotive_deputy_mechanist.name}按住你湿肩低声试探：“原页给我抽出来烧掉……调任让给你，今晚卧车听你摆布。”"
+      "text": "{locomotive_deputy_mechanist.name}按住你湿肩低声试探：“{player.title}把原页抽出来烧掉……调任让给你，今晚卧车听你摆布。”"
     },
     {
       "id": "hk_envoy_gun_stove_approach",

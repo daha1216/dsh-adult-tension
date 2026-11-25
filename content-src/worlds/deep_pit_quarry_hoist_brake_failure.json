@@ -142,11 +142,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}工长",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "老{family}",
           "gender": "any"
         }
       ],
@@ -171,11 +171,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}技术员",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "小{family}",
           "gender": "any"
         }
       ],
@@ -200,11 +200,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}技师",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}师傅",
           "gender": "any"
         }
       ],
@@ -229,11 +229,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}组长",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}特派员",
           "gender": "any"
         }
       ],
@@ -474,7 +474,7 @@
         "exits": [
           {
             "option": "压着验收单，先把遣散钱落实",
-            "cost": "和副矿长彻底撕破脸。"
+            "cost": "在矿部会议上和副矿长彻底决裂。"
           },
           {
             "option": "拿自己的积蓄先垫一部分",
@@ -593,7 +593,7 @@
           },
           {
             "option": "先带老弱升井，自己留下谈",
-            "cost": "弟兄们会说他软了。"
+            "cost": "井下八十号弟兄会骂他软了骨头。"
           }
         ]
       },
@@ -1063,7 +1063,7 @@
         "desired_position": "矿部办公室隔着茶几对坐的位置"
       },
       "voices": {
-        "surface": "大局为重，封井是上面的意思。",
+        "surface": "{player.title}，大局为重，封井是上面的意思。",
         "inner": "那份报告要是翻出来，我这半辈子就白熬了。"
       },
       "schedule": [
@@ -1089,7 +1089,7 @@
         "exits": [
           {
             "option": "答应先发遣散钱再封井",
-            "cost": "年终考核注定不达标。"
+            "cost": "集团年终封井考核注定无法达标。"
           },
           {
             "option": "申请上级强制封井",
@@ -1928,7 +1928,7 @@
         },
         {
           "option": "联合总工扣下磅房里的三辆重卡作财产保全",
-          "cost": "车队堵死卸料通廊。"
+          "cost": "货主重卡车队当场堵死卸料通廊。"
         },
         {
           "option": "请{journalist_bai_shu.name}把报道改成冶炼行业的专刊",
@@ -2280,7 +2280,7 @@
       "location_ids": [
         "loc_shaft_bottom_station"
       ],
-      "text": "{npc.name}一见你从吊笼里出来，就把对讲机往立柱上一挂，拉你到木箱边坐下：“集团的话，我只听你说。”"
+      "text": "{npc.name}一见你从吊笼里出来，就把对讲机往立柱上一挂，拉你到木箱边坐下：“{player.title}，集团的话，我只听你说。”"
     },
     {
       "id": "hook_tie_cold_hands",
@@ -2361,7 +2361,7 @@
       "location_ids": [
         "loc_lamproom_back_room"
       ],
-      "text": "{npc.name}把封井审批单推到你面前，压低声音说只要你帮着劝劝总工，年终考核少不了你的。"
+      "text": "{npc.name}把封井审批单推到你面前，压低声音说：“{player.title}，只要你帮着劝劝总工，年终考核少不了你的。”"
     },
     {
       "id": "hook_lu_glasses",

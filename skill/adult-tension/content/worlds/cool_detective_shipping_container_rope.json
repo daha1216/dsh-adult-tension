@@ -737,7 +737,7 @@
    ],
    "voices": {
     "inner": "要是我回不来，这半张舱单只能交给你。",
-    "surface": "跟紧我。过索道的时候别回头。"
+    "surface": "{player.title}，跟紧我。过索道的时候别回头。"
    }
   },
   {
@@ -849,7 +849,7 @@
    ],
    "voices": {
     "inner": "要是这回真冲我来，我认。可别拿这帮年轻人的命来算。",
-    "surface": "风圈半径你看清楚。我这条船不是给人拿来赌的。"
+    "surface": "{player.title}，风圈半径你看清楚。我这条船不是给人拿来赌的。"
    }
   },
   {
@@ -893,7 +893,7 @@
    "identity": {
     "authority": "握着医疗舱急救处置、伤病员强制撤离的签字权和管制镇痛药柜钥匙。",
     "exposure": "她压着突击组长的体检底单迟迟不报，事后追责她也脱不了干系。",
-    "hidden": "她知道组长为什么拼命，心里一半是医生的规矩，一半是不忍。",
+    "hidden": "她知道组长为什么拼命，心里一半是规矩一半是不忍；远海高压值守下，白大褂内衬底下暗扣着一条蕾丝腿环束缚带，只敢在拉严布帘后借紧束感喘口气。",
     "limits": [
      "停职单递上去，突击组就少一员主力"
     ],
@@ -950,11 +950,11 @@
    "situation": {
     "exits": [
      {
-      "cost": "组长会恨她多管闲事。",
+      "cost": "突击组长会记恨她临阵多管闲事。",
       "option": "把体检单交给信得过的人一起拿主意"
      },
      {
-      "cost": "突击组会怪她临阵拆台。",
+      "cost": "整支突击组都会怪她临阵拆台折损主力。",
       "option": "自己签下停职单"
      }
     ],
@@ -1072,7 +1072,7 @@
       "option": "找人私下一起锁定发报终端"
      },
      {
-      "cost": "全船都会知道出了内鬼。",
+      "cost": "全船上下立刻都会知道内部出了内鬼。",
       "option": "直接把记录交给船长"
      }
     ],
@@ -1186,7 +1186,7 @@
    "situation": {
     "exits": [
      {
-      "cost": "头功和晋升名额都没了。",
+      "cost": "争了三年的头功和岸基晋升名额全没了。",
       "option": "主动交代伤情，改去后甲板掩护"
      },
      {
@@ -1509,7 +1509,7 @@
  "era": "现代远海海关缉私",
  "extends": null,
  "forbidden_terms": [
-  "修仙功法",
+  "修道功法",
   "古代朝堂",
   "魔法结界",
   "灵异鬼怪",
@@ -1544,7 +1544,7 @@
     "loc_boarding_ropeway"
    ],
    "slot": "customs_officer_qinghan",
-   "text": "接舷甲板的风里，{npc.name}扣好自己的安全索，朝你伸出手：“替我看一眼卡扣。”"
+   "text": "接舷甲板的风里，{npc.name}扣好自己的安全索，朝你伸出手：“{player.title}，替我看一眼卡扣。”"
   },
   {
    "id": "hook_q_cold_hands",
@@ -1896,11 +1896,7 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
-    },
-    {
-     "gender": "any",
-     "pattern": "{given}"
+     "pattern": "小{family}"
     }
    ]
   },
@@ -1925,11 +1921,7 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
-    },
-    {
-     "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{family}报务长"
     }
    ]
   },
@@ -1954,11 +1946,7 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
-    },
-    {
-     "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{family}督察"
     }
    ]
   },
@@ -1983,11 +1971,7 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
-    },
-    {
-     "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{family}副局"
     }
    ]
   }
@@ -2054,7 +2038,7 @@
      "option": "改派组长去后甲板掩护，先让军医固定右肩"
     },
     {
-     "cost": "你要在免责单上联署。",
+     "cost": "你必须在医疗免责单上签字联署担责。",
      "option": "让军医打封闭针，跟二梯队登船"
     },
     {

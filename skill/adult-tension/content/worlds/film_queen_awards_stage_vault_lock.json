@@ -872,7 +872,7 @@
    ],
    "voices": {
     "inner": "我调了一百遍的光，不想最后照在一场并列假局上。",
-    "surface": "这路内线只有这台手持调光器能听见，离开奖还有十二分钟，你听完再定。"
+    "surface": "这路内线只有手持调光器能听见，{player.title}听完再定。"
    }
   },
   {
@@ -1396,12 +1396,13 @@
   "workplace_power",
   "workplace",
   "crime",
-  "bodily_harm"
+  "bodily_harm",
+  "explicit"
  ],
  "custom": false,
  "customs": [
-  "影后登台前常由造型师用医用安全别针加固礼服内衬，并贴身佩戴护身细链。",
-  "现场总导演在导播台总摇着老山檀雕花折扇压阵，不到切出垫播胶片不离席。",
+  "影后登台前常由造型师用安全别针加固礼服内衬，贴身佩戴护身细链。",
+  "现场总导演在导播台总摇着檀木折扇压阵，不到切出垫播胶片不离席。",
   "灯光组从不当面夸人，只在走位时留一道照亮脚尖的暖侧光。",
   "通廊里女星再暗中较劲，门外闪光灯一亮也得维持体面寒暄。"
  ],
@@ -1593,7 +1594,7 @@
     "loc_backstage_lighting_control_gallery"
    ],
    "slot": "stage_machinery_director_lu",
-   "text": "控台室暗光里，{npc.name}把手持调光器推到台面，耳机传出评委争执：“这路内线只有这台机器能听见，离开奖还有十二分钟。”"
+   "text": "控台室暗光里，{npc.name}把手持调光器推到台面，耳机传出评委争执：“这路内线只有这台机器能听见，听完你再定夺。”"
   },
   {
    "id": "hook_lu_dimmer_check",
@@ -1631,7 +1632,7 @@
     "loc_awards_green_room_vip_tunnel"
    ],
    "slot": "security_commander_wei_zhen",
-   "text": "{npc.name}立在隔音钢闸前整了整战术腰带，腕间露出红星绳：“通道马上清场，你的口风还稳吗？”"
+   "text": "{npc.name}立在隔音钢闸前整了整战术腰带：“通道马上清场，{player.title}的口风还稳吗？”"
   },
   {
    "id": "hook_wei_cold_fire_note",
@@ -1650,7 +1651,7 @@
     "loc_backstage_lighting_control_gallery"
    ],
    "slot": "veteran_director_feng_kexin",
-   "text": "{npc.name}合拢老山檀雕花折扇点在导播台面，身旁搁着救心丸：“资方非要双黄蛋，你站台前还是站我这边？”"
+   "text": "{npc.name}合拢檀木折扇点在导播台面：“资方非要双黄蛋，{player.title}站台前还是站我这边？”"
   },
   {
    "id": "hook_feng_contract_walk",
@@ -1666,8 +1667,7 @@
    "id": "hook_feng_script_observe",
    "kind": "observe",
    "location_ids": [
-    "loc_backstage_lighting_control_gallery",
-    "loc_awards_green_room_vip_tunnel"
+    "loc_backstage_lighting_control_gallery"
    ],
    "slot": "veteran_director_feng_kexin",
    "text": "控台暗处，{npc.name}盯着两张备选致辞卡片与新片合约，眉峰微蹙迟迟未签。"
@@ -1679,7 +1679,7 @@
     "loc_awards_green_room_vip_tunnel"
    ],
    "slot": "rival_best_actress_tang_wan",
-   "text": "通廊帷幕后，{npc.name}合上纯钢折叠随身微型补妆小镜子晃了晃存储卡：“要是品牌方看见礼服别着安全别针，明天头条写谁？”"
+   "text": "通廊帷幕后，{npc.name}合上纯钢随身补妆镜晃了晃存储卡：“要是品牌方看见礼服别着安全别针，明天头条写谁？”"
   },
   {
    "id": "hook_tang_velvet_whisper",
@@ -1881,7 +1881,7 @@
     28,
     42
    ],
-   "baseline": "你是电影节执行总制片人，掌管直播签批、底票封存与赞助席位，后台都在看你今晚站哪一边。",
+   "baseline": "你是电影节执行总制片人，掌管直播签批、底票封存与赞助席位，后台都在看你站哪边。",
    "gender": "any",
    "id": "pi_film_festival_executive_producer",
    "reputation": "手腕稳准，资方与导演组都忌惮你三分。",
@@ -1910,7 +1910,7 @@
     27,
     38
    ],
-   "baseline": "你是评奖办派驻大剧院的底票督察专员，核验终审封票与开奖信封交接，既压不住大腕，也能一纸报告掀翻黑幕。",
+   "baseline": "你是派驻大剧院的底票督察专员，核验封票与开奖信封交接，一纸报告便能掀翻黑幕。",
    "gender": "any",
    "id": "pi_awards_jury_auditor",
    "reputation": "只认蜡封与原始票根，最难被公关收买。",
@@ -2281,19 +2281,19 @@
  "rules": [
   {
    "id": "rule_awards_ballot_vault_seal",
-   "text": "最佳女主角底票与开奖信封一经封存，开奖前变更或增设并列须评委会与总制片双签备案。"
+   "text": "影后底票与开奖信封一经封存，变更或增设并列须评委会与总制片双签备案。"
   },
   {
    "id": "rule_couture_indemnity_protocol",
-   "text": "借调全球孤品礼服若开线或污损，须由造型团队按原价赔付，严禁擅自裁剪毁损。"
+   "text": "借调孤品礼服若开线或污损，须由造型团队按原价赔付，严禁擅自裁剪。"
   },
   {
    "id": "rule_control_gallery_audio_log",
-   "text": "二层追光控台室内线音频与调光母带实时同步备份，私自删改或外传将吊销执业资格。"
+   "text": "追光控台室内线音频与调光母带实时备份，私自删改或外传将吊销资格。"
   },
   {
    "id": "rule_backstage_access_lockdown",
-   "text": "通廊外围冲撞触发隔音钢闸落锁时，须由安保总指挥核验工牌放行，闲人不得滞留侧幕。"
+   "text": "通廊冲撞触发隔音钢闸落锁时，须由安保核验工牌放行，闲人不得滞留。"
   }
  ],
  "schema_version": 1,
@@ -2307,7 +2307,7 @@
   "testing": "底票对峙"
  },
  "status": "released",
- "style_hint": "当代电影节群像戏：主舞台追光、控台内线与暗室试探。写真丝鱼尾礼服、发簪、别针与体温，少写设备参数。",
+ "style_hint": "当代电影节群像戏：主舞台追光、控台内线与暗室试探。写真丝鱼尾裙、发簪与体温，少写参数。",
  "tension_engines": [
   {
    "id": "te_couture_split_indemnity",

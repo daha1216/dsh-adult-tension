@@ -1037,7 +1037,7 @@
    "tags": [],
    "voices": {
     "inner": "“我卖了几百张帖子，就是想有一张能把那个人带下山。”",
-    "surface": "“满了满了——哎，你等等，你腰上那是什么？”"
+    "surface": "“满了满了——哎，{player.title}等等，你腰上那是什么？”"
    }
   },
   {
@@ -1147,7 +1147,7 @@
    "situation": {
     "exits": [
      {
-      "cost": "修理铺的掌柜认得{npc.ta}",
+      "cost": "法器修理铺的掌柜当场认出{npc.ta}的来历",
       "option": "先去把剑拿走"
      },
      {
@@ -1299,7 +1299,8 @@
   "intimate",
   "violence",
   "supernatural",
-  "coercion_theme"
+  "coercion_theme",
+  "explicit"
  ],
  "custom": false,
  "customs": [
@@ -1490,14 +1491,13 @@
     "repair_shop"
    ],
    "slot": "exiled_one",
-   "text": "{npc.name}贴近半步避开水声，在你耳畔极轻吐出一个字：“这是我被山门抹去的道号，今夜我只对你说这一次。”"
+   "text": "{npc.name}贴近半步避开外人耳目，在你耳畔极轻吐出一个字：“这是我被山门抹去的道号，今夜我只对你说这一次。”"
   },
   {
    "id": "h_beast_lean",
    "kind": "approach",
    "location_ids": [
-    "beast_yard",
-    "back_stream"
+    "beast_yard"
    ],
    "slot": "exiled_one",
    "text": "那头暴躁灵兽竟温顺把头搁上你的肩窝，{npc.name}倚在兽栏阴影里挑眉笑了：“它从来不认生人，偏偏认得你。”"
@@ -1530,14 +1530,13 @@
     "main_street"
    ],
    "slot": "inn_keeper",
-   "text": "{npc.name}趁大堂喧闹把一枚黄铜房钥塞入你袖口：“二楼最里那间留给你了，不要灵石，也不要山门帖子。”"
+   "text": "{npc.name}趁四下人声喧闹把一枚黄铜房钥塞入你袖口：“{player.title}，留仙居二楼最里那间留给你了，不要灵石，也不要山门帖子。”"
   },
   {
    "id": "h_ask_relative",
    "kind": "request",
    "location_ids": [
-    "inn",
-    "mountain_steps"
+    "inn"
    ],
    "slot": "inn_keeper",
    "text": "{npc.name}在楼梯转角一把拉住你的衣袖，眼底微湿：“大典那日你若真上了山，顺路替我问一句——那人可还记得山脚下的家。”"
@@ -1572,7 +1571,7 @@
     "back_stream"
    ],
    "slot": "name_broker",
-   "text": "{npc.name}从布袋抽出一张写着你真名的红纸条，当着你的面凑上灯焰化作飞灰，贴耳笑问：“现在这份人情，打算怎么还？”"
+   "text": "{npc.name}从布袋抽出一张写着你真名的红纸条，当着你的面凑上灯焰化作飞灰，贴耳笑问：“{player.title}，现在这份人情，打算怎么还？”"
   },
   {
    "id": "h_stray_spell",
@@ -1596,8 +1595,7 @@
    "id": "h_stream_smoke_pouch",
    "kind": "approach",
    "location_ids": [
-    "back_stream",
-    "beast_yard"
+    "back_stream"
    ],
    "slot": "exiled_one",
    "text": "{npc.name}蹲在溪石边按住一角松动的青苔岩板，回头挑衅似地冲你抬下颌：“里面封着内门见不得光的镇灵物件——真敢跟来，就搭把手撬开。”"

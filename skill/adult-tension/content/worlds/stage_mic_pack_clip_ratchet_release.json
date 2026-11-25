@@ -1111,7 +1111,7 @@
    ],
    "voices": {
     "inner": "要是有人能叫停我，就好了。",
-    "surface": "节目单今晚就要报，谁都别给我出岔子。"
+    "surface": "节目单今晚就要报，{player.title}，谁都别给我出岔子。"
    }
   },
   {
@@ -1354,7 +1354,7 @@
    ],
    "voices": {
     "inner": "这段我早就想给你看了。",
-    "surface": "这段要不要，你说一声。"
+    "surface": "{player.title}，这段要不要，你说一声。"
    }
   }
  ],
@@ -1520,7 +1520,7 @@
   "nonbinary": 0.0
  },
  "default_person": "second",
- "era": "当代广电传媒中心的跨年晚会联排季",
+ "era": "当代广电中心跨年晚会联排季",
  "extends": null,
  "forbidden_terms": [
   "幼态",
@@ -1572,16 +1572,17 @@
    "id": "hook_lin_earphone",
    "kind": "approach",
    "location_ids": [
-    "loc_broadcast_master_control_room"
+    "loc_broadcast_master_control_room",
+    "loc_grand_auditorium_stage",
+    "loc_center_private_lounge"
    ],
    "slot": "vocal_coach_lin_shu",
-   "text": "{npc.name}摘下颈上的监听耳机，不由分说扣到你头上：“你自己听，第三小节后面那口气，是谁的。”"
+   "text": "{npc.name}摘下颈上的监听耳机，不由分说扣到你头上：“{player.title}，你自己听，第三小节后面那口气，是谁的。”"
   },
   {
    "id": "hook_chen_running_order",
    "kind": "observe",
    "location_ids": [
-    "loc_center_private_lounge",
     "loc_grand_auditorium_stage"
    ],
    "slot": "manager_chen_man",
@@ -1846,11 +1847,11 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}副导"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{family}导"
     }
    ]
   },
@@ -1875,11 +1876,11 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}总监"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{family}调度"
     }
    ]
   },
@@ -1904,11 +1905,11 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}主管"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "{family}工"
     }
    ]
   },
@@ -1933,11 +1934,11 @@
    "title_patterns": [
     {
      "gender": "any",
-     "pattern": "{family}"
+     "pattern": "{family}领班"
     },
     {
      "gender": "any",
-     "pattern": "{given}"
+     "pattern": "小{family}"
     }
    ]
   }

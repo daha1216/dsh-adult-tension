@@ -142,11 +142,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "小{family}",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}护具师",
           "gender": "any"
         }
       ],
@@ -171,11 +171,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}主控",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}老师",
           "gender": "any"
         }
       ],
@@ -200,11 +200,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}总监",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}设计",
           "gender": "any"
         }
       ],
@@ -229,11 +229,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}主审",
           "gender": "any"
         },
         {
-          "pattern": "{given}",
+          "pattern": "{family}督导",
           "gender": "any"
         }
       ],
@@ -385,8 +385,8 @@
       "adult_context": "年满二十三岁、已独立经营机甲工坊的同人圈Coser。",
       "public_role": "同人圈顶流千金Coser兼机甲工坊主理人",
       "appearance_options": [
-        "一身高弹的玄色演出连体服，勾勒出玲珑曼妙的身段，容貌冷艳骄傲，两腮被射灯烤得泛起一点酡红，眼神满是不服输的执拗。",
-        "一头染成淡银紫色的长发高高束起，发梢沾着汗珠，真丝内衬外只扣了半副胸甲，锁骨上一层薄汗，神情骄矜，手上的分寸一点不乱。"
+        "玄色高弹演出连体服勾勒出曼妙身段，冷艳面颊被射灯烤出浅浅酡红，眼底满是不服输的执拗。",
+        "淡银紫长发高束，发梢沾汗，真丝内衬外半扣胸甲，锁骨沁着薄汗，神情骄矜而手上分寸不乱。"
       ],
       "identity": {
         "authority": "握着自研翼甲的穿戴拆解权、压轴秀的高空动作编排和工坊团队的去留。",
@@ -447,7 +447,7 @@
           "外帐还有媒体镜头和家族代表走动时，真丝内衬外必须扣死半副胸甲",
           "碰丝带前先拿冰毛巾擦净掌心汗渍，威亚副索扣稳前不准分神"
         ],
-        "expression": "登台后红着脸把一张亲笔签名的限定贵宾卡塞进对方手里，扭过头说：散场后来帐篷找我，不来也随你。",
+        "expression": "红着耳根把亲笔签名的贵宾卡塞进你掌心，别过脸轻哼：散场后来帐篷找我，不来随你。",
         "desire_range": [
           3,
           5
@@ -835,7 +835,7 @@
         "desired_position": "主审身边能说上话的位置"
       },
       "voices": {
-        "surface": "规程就是规程。",
+        "surface": "“{player.title}，规程就是规程。”",
         "inner": "我也不想砍这个节目。"
       },
       "schedule": [
@@ -959,7 +959,7 @@
         "desired_position": "帐篷外帐里替你留着的一张椅子"
       },
       "voices": {
-        "surface": "这里我盯着，你进去。",
+        "surface": "“{player.title}，外帐我盯着，你进去。”",
         "inner": "我替她挡了这么多年，谁来替我挡一次。"
       },
       "schedule": [
@@ -989,7 +989,7 @@
           },
           {
             "option": "交出改装单换千金一条退路",
-            "cost": "千金会知道是她交的。"
+            "cost": "千金迟早会知道改装单是她亲手交出去的。"
           }
         ]
       },
@@ -1108,7 +1108,7 @@
           },
           {
             "option": "下调低音替高空让出余量",
-            "cost": "开场鼓点气势大减。"
+            "cost": "压轴曲开场鼓点的现场气势会大打折扣。"
           }
         ]
       },
@@ -1529,7 +1529,7 @@
       "stakes": {
         "resource_gap": "主审的签章在你手里；对方握着高空节目的一票否决权和主舞台切闸权。",
         "limit_gap": "你越权放行要担事故责任；对方硬砍节目，迟早要解释那张检测单是谁授意的。",
-        "meeting_reason": "{marshal_sun_jian.name}在爬梯井口拦住你，晃着一张声压超标的检测单，试探你肯不肯顺水推舟把高空空降改成平地走秀。",
+        "meeting_reason": "{marshal_sun_jian.name}在爬梯井口晃着声压超标检测单拦住你，试探你肯不肯顺水推舟把空降改成平地秀。",
         "irreplaceable_goal": "对方想摸清你和千金家族有没有私交，以及你会不会护着这场高空秀。"
       },
       "tags": [
@@ -1612,7 +1612,7 @@
         "te_family_ultimatum",
         "te_release_ring"
       ],
-      "chemistry": "{cosplayer_mu_yunli.name}骄傲，{assistant_shen_ruoxuan.name}护短，两人一个眼神就能互相打掩护；你被挑进帐篷那天起，就成了第三个知道内情的人。",
+      "chemistry": "{cosplayer_mu_yunli.name}骄矜，{assistant_shen_ruoxuan.name}护短，两人一个眼神就能打掩护，而你是帐篷里唯一知情的第三人。",
       "stakes": {
         "resource_gap": "千金握着翼甲穿戴权，助理握着门禁和备用服饰箱钥匙；你只有内衬快拆扣。",
         "limit_gap": "家族的返程机票压在化妆箱底；三人里谁走漏一句，今晚的高空就会被叫停。",
@@ -1688,7 +1688,7 @@
         "te_cad_leak",
         "te_release_ring"
       ],
-      "chemistry": "{designer_chu_zimo.name}斯文，{mechanic_lu_yang.name}寡言，两人在平台上一个算参数一个挂钢索，谁也不提图纸，都在等你开口。",
+      "chemistry": "{designer_chu_zimo.name}斯文，{mechanic_lu_yang.name}寡言，两人在平台上各忙参数与钢索，绝口不提图纸，只等你拍板。",
       "stakes": {
         "resource_gap": "结构总监握着三维母盘和碳纤连杆秘钥，威亚师握着钢索挂点；你握着放不放行的那一句话。",
         "limit_gap": "图纸外泄瞒不过今晚；释放环没报备，一换结构就更难瞒住组委会。",
@@ -2041,7 +2041,7 @@
         },
         {
           "option": "请音频师播放压轴秀的倒数预热音效，把媒体引回主舞台",
-          "cost": "正式登台时间被迫提前。"
+          "cost": "压轴秀的正式登台时间被迫提前十分钟。"
         }
       ],
       "leverage": null,
@@ -2229,7 +2229,7 @@
         },
         {
           "option": "先扶入幕后医疗位吸氧补液，指标稳住后替对方分担一半配重登台",
-          "cost": "放弃高空旋转的加分项。"
+          "cost": "不得不放弃高空旋转动作的评委加分项。"
         }
       ],
       "leverage": null,
@@ -2248,7 +2248,7 @@
       "location_ids": [
         "loc_backstage_dressing_tent"
       ],
-      "text": "后台私人更衣帐篷的化妆镜前，千金Coser{npc.name}正穿着贴身真丝机甲内衬调试腕部展翼拉环，脚边的航空箱里放着四十斤重的钛铝合金翼甲。"
+      "text": "私人更衣帐篷化妆镜前，千金Coser{npc.name}身着贴身真丝内衬调试腕部展翼拉环，脚边航空箱里躺着钛铝合金翼甲。"
     },
     {
       "id": "hook_mu_waist_seal",
@@ -2275,7 +2275,7 @@
       "location_ids": [
         "loc_catwalk_above_mainstage"
       ],
-      "text": "主舞台上方十二米的悬空马道边，威亚机械师{npc.name}正低头检查双点威亚钢索上的手动释放环，台下十万观众的预热声浪阵阵传来。"
+      "text": "十二米悬空马道边，威亚师{npc.name}正低头检查双点钢索上的手动释放环，台下十万观众的声浪阵阵涌来。"
     },
     {
       "id": "hook_lu_spare_descender",
@@ -2347,7 +2347,7 @@
       "location_ids": [
         "loc_backstage_vertical_ladder_well"
       ],
-      "text": "侧翼登高爬梯井入口处，安全总监{npc.name}正捏着一份高空节目叫停通知单，主舞台音控导播间的音频师透过玻璃窗向后台比出了监听手势。"
+      "text": "侧翼爬梯井入口处，安全总监{npc.name}捏着高空节目叫停单，远端导播间里的音频师隔窗朝后台比出监听手势。"
     },
     {
       "id": "hook_sun_test_sheet",
@@ -2356,7 +2356,7 @@
       "location_ids": [
         "loc_backstage_vertical_ladder_well"
       ],
-      "text": "{npc.name}在梯井口伸手拦下你，把那张声压超标的检测单递过来：你先看一眼，再决定今晚站哪一边。"
+      "text": "{npc.name}在梯井口拦下你，递过声压超标检测单：“{player.title}先看一眼，再定今晚站哪边。”"
     },
     {
       "id": "hook_he_playback",

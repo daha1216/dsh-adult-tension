@@ -3,7 +3,7 @@
   "id": "last_issue",
   "title": "停刊号的天窗",
   "extends": null,
-  "era": "当代",
+  "era": "当代纸媒寒冬停刊前夜",
   "region": "一座中等城市的地方报社，停刊前最后两周",
   "premise": "最后一期该写什么：城里人都想看的那件事，还是能让所有人体面离开的那篇稿子？",
   "tone": [
@@ -801,7 +801,7 @@
         "exits": [
           {
             "option": "加价",
-            "cost": "总编会觉得被侮辱"
+            "cost": "总编觉得受辱而当场掀翻谈判桌"
           },
           {
             "option": "去找核查编辑私下谈",
@@ -1048,7 +1048,7 @@
           },
           {
             "option": "什么都不做",
-            "cost": "照片会一直在那里"
+            "cost": "原片留在暗档里随时可能外流曝光"
           }
         ]
       },
@@ -1954,7 +1954,7 @@
       "exits": [
         {
           "option": "把录音拷一份",
-          "cost": "违反资料室的规矩"
+          "cost": "破坏资料室行规并留下私拷把柄"
         },
         {
           "option": "去找当年的经手人",
@@ -2220,8 +2220,7 @@
       "kind": "approach",
       "slot": "editor_in_chief",
       "location_ids": [
-        "chief_office",
-        "newsroom"
+        "chief_office"
       ],
       "text": "{npc.name}关了总编室的灯，没走，坐在黑里问你还走不走"
     },
@@ -2233,7 +2232,7 @@
         "newsroom",
         "archive_room"
       ],
-      "text": "{npc.name}把一张便利贴贴在你手背上：“帮我核一个名字。”"
+      "text": "{npc.name}把一张便利贴贴在你手背上：“{player.title}，帮我核一个名字。”"
     },
     {
       "id": "h_source_ask",
@@ -2243,7 +2242,7 @@
         "stairwell_smoke",
         "night_diner"
       ],
-      "text": "{npc.name}压低声音：“我还差一个证人，你认识一个人。”"
+      "text": "{npc.name}压低声音：“{player.title}，我还差一个证人，你认识一个人。”"
     },
     {
       "id": "h_suit_glance",
@@ -2281,15 +2280,14 @@
         "chief_office",
         "night_diner"
       ],
-      "text": "{pr_rep.name}合上收购合同推到一边，从公文包里摸出一只黑绒小盒摆在桌心，露出里面的纯银细链乳夹与黑天鹅绒蒙眼带：“签不签字不急，先看看你敢不敢赌这一局。”"
+      "text": "{pr_rep.name}合上收购合同推到一边，从公文包里摸出一只黑绒小盒摆在桌心，露出里面的纯银细链乳夹与黑天鹅绒蒙眼带：“{player.title}，签不签字不急，先看看你敢不敢赌这一局。”"
     },
     {
       "id": "h_reporter_toy_bet",
       "kind": "approach",
       "slot": "star_reporter",
       "location_ids": [
-        "stairwell_smoke",
-        "archive_room"
+        "stairwell_smoke"
       ],
       "text": "{star_reporter.name}靠在消防楼梯栏杆上，指间把玩着一只未拆封的静音无线遥控跳蛋挑眉冷笑：“头版敢不敢留真话？敢的话，今晚这赌注你先收好。”"
     }
@@ -2377,7 +2375,8 @@
     "intimate",
     "coercion_theme",
     "workplace_power",
-    "workplace"
+    "workplace",
+    "explicit"
   ],
   "status": "released",
   "notes": "2026-10-18 按写作规则 v2 改造：8 单人加 1 核稿与公关三方局。\nv2.5 --mode 3 精修：洗净全部旧八股与停电套路，补齐 6 处空白钩子地点，强化 6 人溃防层次；精选静音无线遥控跳蛋、纯银细链乳夹、黑天鹅绒蒙眼带三件当代报社谈判筹码，开场 100% 未穿戴，打通 resources、exits、14 钩子与 8 转折 standby_cast。"

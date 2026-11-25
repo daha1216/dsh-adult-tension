@@ -432,7 +432,7 @@
    ]
   },
   {
-   "chemistry": "{er_porter_sun_tie_jun.name}堵在凹槽口不肯让，{pure_nurse_bai_zhi_lin.name}站在你身后半步，指尖攥着你的衣角，三个人谁都不先开口。",
+   "chemistry": "{er_porter_sun_tie_jun.name}堵在凹槽口不肯让，{pure_nurse_bai_zhi_lin.name}退在你身后攥紧衣角，三人僵持无声。",
    "id": "combo_nurse_porter_headnurse_trap",
    "identity_ids": [
     "pi_pharmacy_dispenser_liaison"
@@ -492,7 +492,7 @@
    "stakes": {
     "irreplaceable_goal": "护士想保住留院，也想看清你敢不敢替自己站出来。",
     "limit_gap": "勤务组长怕闹到院办，护士怕被停职，你没转正，也不敢声张。",
-    "meeting_reason": "{er_porter_sun_tie_jun.name}攥着从休息室垃圾桶翻出的断裂吊袜带扣和空安瓿，堵在备品凹槽口，向{pure_nurse_bai_zhi_lin.name}和你要封口的好处。",
+    "meeting_reason": "{er_porter_sun_tie_jun.name}攥着翻出的断吊袜带扣与空安瓿堵在凹槽口，向{pure_nurse_bai_zhi_lin.name}和你要封口的好处。",
     "resource_gap": "{er_porter_sun_tie_jun.name}握着搭扣和空安瓿，你握着回收箱钥匙，{pure_nurse_bai_zhi_lin.name}什么都没有。"
    },
    "tags": [],
@@ -565,7 +565,7 @@
    "stakes": {
     "irreplaceable_goal": "两人都想听你说一句，自己才是你要护着的人。",
     "limit_gap": "你站谁，另一个人的事就会摊在专家组面前。",
-    "meeting_reason": "{head_nurse_yan_min.name}拿着没平账的毒麻药单据闯进药房内库，{er_pharmacist_qian_xiao_tao.name}反手调出护士长亲戚顶替名额的后台记录，两人同时要你表态。",
+    "meeting_reason": "{head_nurse_yan_min.name}持未平账毒麻单闯入内库，{er_pharmacist_qian_xiao_tao.name}反手调出护士长亲戚顶替名额的后台记录，两人同时要你表态。",
     "resource_gap": "{er_pharmacist_qian_xiao_tao.name}握着改分的证据，{head_nurse_yan_min.name}握着临期药的记录，你握着两个人的私事。"
    },
    "tags": [],
@@ -712,7 +712,7 @@
    ],
    "voices": {
     "inner": "空安瓿还在我口袋里，只要你点一下头，我就知道该怎么说。",
-    "surface": "专家组好，抢救车药品已经全部核对，台账在这儿。"
+    "surface": "{player.title}，抢救车药品全部核对完了，台账在这儿。"
    }
   },
   {
@@ -956,7 +956,7 @@
    "tags": [],
    "voices": {
     "inner": "你要是也站到我对面，我在这科里就真没人了。",
-    "surface": "台账交上来，一个字都不许错。"
+    "surface": "{player.title}，台账交上来，一个字都不许错。"
    }
   },
   {
@@ -1177,7 +1177,7 @@
    "situation": {
     "exits": [
      {
-      "cost": "会寒了整个急诊的心。",
+      "cost": "当众重罚只会寒了整个急诊夜班医护的心。",
       "option": "当众处罚签字人立威"
      },
      {
@@ -1477,7 +1477,7 @@
   "nonbinary": 0.0
  },
  "default_person": "second",
- "era": "当代上海，三甲医院急诊大楼的周一清晨",
+ "era": "当代上海三甲急诊交班夜",
  "extends": null,
  "forbidden_terms": [
   "幼态",
@@ -1492,8 +1492,7 @@
    "id": "hook_bai_lace_slip",
    "kind": "approach",
    "location_ids": [
-    "loc_er_central_nurse_station",
-    "loc_er_crash_cart_alcove"
+    "loc_er_central_nurse_station"
    ],
    "slot": "pure_nurse_bai_zhi_lin",
    "text": "{npc.name}站在玻璃护士站环岛内侧，不动声色地往备品凹槽退了半步，裙摆下一截松开的白色蕾丝带正贴着小腿滑落。"
@@ -1563,8 +1562,7 @@
    "id": "hook_qian_vault_wave",
    "kind": "approach",
    "location_ids": [
-    "loc_high_risk_pharmacy_vault",
-    "loc_er_crash_cart_alcove"
+    "loc_high_risk_pharmacy_vault"
    ],
    "slot": "er_pharmacist_qian_xiao_tao",
    "text": "{npc.name}从高危药房内库探出半个身子朝你打了个手势，身后的电子屏上，一支芬太尼还闪着未核销的红灯。"
@@ -1597,7 +1595,7 @@
     "loc_high_risk_pharmacy_vault"
    ],
    "slot": "dean_qin_tian_lin",
-   "text": "{npc.name}停在你面前，把钢笔递过来，指尖多停了一瞬：原始单据，现在给我。"
+   "text": "{npc.name}停在你面前递来钢笔，指尖多停一瞬：{player.title}，原始单据现在给我。"
   },
   {
    "id": "hook_sun_cart",
@@ -1951,7 +1949,7 @@
    ]
   }
  ],
- "premise": "上海三甲医院的急诊大楼昼夜通明，规培满一年的年轻护士每天在全透明的玻璃护士站环岛核对医嘱、清点抢救车备品，忙起来连口温水都顾不上喝。当班住院总、护士长与药房调剂师每晚围绕急诊交接连轴运转。每周一清晨交班前，分管医疗的副院长都会带专家组巡查急诊大通道，当场抽查台账并敲定规培留院名额。",
+ "premise": "上海三甲医院急诊楼昼夜通明，规培满一年的年轻护士在玻璃护士站核对医嘱、清点抢救车。住院总、护士长与药师每晚围着交接连轴转；周一清晨交班前，分管副院长必带专家组巡查台账并敲定留院名额。",
  "pressures": [
   {
    "choice": "拿对方的短处反制，还是自己出面担下一笔账。",

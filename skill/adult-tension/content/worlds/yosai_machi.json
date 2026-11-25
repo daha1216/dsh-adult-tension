@@ -655,7 +655,7 @@
    "tags": [],
    "voices": {
     "inner": "“尺寸簿上的数我改了一个，那个人到今天都不知道。”",
-    "surface": "“铺面上还有客人。能请你帮我把这一颗扣上吗？”"
+    "surface": "“{player.title}，铺面上还有客人。能请你帮我把这一颗扣上吗？”"
    }
   },
   {
@@ -1011,7 +1011,7 @@
    "situation": {
     "exits": [
      {
-      "cost": "大家会猜到{npc.ta}眼睛的事",
+      "cost": "译书所上下都会猜出{npc.ta}眼疾恶化的实情。",
       "option": "请人代读"
      },
      {
@@ -1135,7 +1135,7 @@
    "situation": {
     "exits": [
      {
-      "cost": "吴服店会说{npc.ta}吃里扒外",
+      "cost": "越前屋掌柜会当众指责{npc.ta}吃里扒外坏了行规。",
       "option": "赶在撤走前把订单给千鹤屋"
      },
      {
@@ -1259,11 +1259,11 @@
    "situation": {
     "exits": [
      {
-      "cost": "店主会知道{npc.ta}的秘密",
+      "cost": "裁缝店主会当场看穿{npc.ta}私改礼服尺寸的秘密。",
       "option": "让洋裁店照纸条做"
      },
      {
-      "cost": "{npc.ta}要辜负另一个人",
+      "cost": "{npc.ta}今夜注定要辜负在关外苦等的那个人。",
       "option": "按家眷的尺寸做"
      }
     ],
@@ -1284,7 +1284,8 @@
  "clock_style": "hm",
  "content_tags": [
   "romance_light",
-  "intimate"
+  "intimate",
+  "explicit"
  ],
  "custom": false,
  "customs": [
@@ -1432,7 +1433,7 @@
   "nonbinary": 0.0
  },
  "default_person": "second",
- "era": "明治十四年",
+ "era": "明治十四年横滨开港街町",
  "extends": null,
  "forbidden_terms": [
   "手机",
@@ -1452,11 +1453,10 @@
    "id": "h_button",
    "kind": "approach",
    "location_ids": [
-    "fitting_room",
-    "tailor_shop"
+    "fitting_room"
    ],
    "slot": "tailor_owner",
-   "text": "{npc.name}从帘后探出半张脸：“能请你帮我把这一颗扣上吗？”"
+   "text": "{npc.name}从帘后探出半张脸：“{player.title}，能请你帮我把这一颗扣上吗？”"
   },
   {
    "id": "h_measure_you",
@@ -1544,8 +1544,7 @@
    "id": "h_window_ball",
    "kind": "approach",
    "location_ids": [
-    "settlement_gate",
-    "machi_street"
+    "settlement_gate"
    ],
    "slot": "comprador",
    "text": "{npc.name}拉着你走到关门边：“今晚居留地有舞会，我带你在窗外看一眼。”"
@@ -1571,7 +1570,7 @@
     "gofuku_shop"
    ],
    "slot": "official_client",
-   "text": "{npc.name}把一张写着尺寸的纸条塞进你手里：“这件事，我只托你。”"
+   "text": "{npc.name}把一张写着尺寸的纸条塞进你手里：“{player.title}，这件事，我只托你。”"
   },
   {
    "id": "h_carriage_rain",
@@ -1588,8 +1587,7 @@
    "id": "h_proof_alley_draft",
    "kind": "approach",
    "location_ids": [
-    "machi_street",
-    "translation_office"
+    "machi_street"
    ],
    "slot": "proofreader",
    "text": "雾色刚起，{npc.name}快步追到煤气灯影下扯住你袖角，把带体温的一页夹诗译稿塞进你掌心：“别让译书所的人看见，先替我收一夜。”"
@@ -1598,8 +1596,7 @@
    "id": "h_tailor_harbor_crate",
    "kind": "approach",
    "location_ids": [
-    "harbor",
-    "tailor_shop"
+    "harbor"
    ],
    "slot": "tailor_owner",
    "text": "海风吹起披肩一角，{npc.name}悄声把一只刚下邮船的红木针线盒递进你怀里：“这是给华族礼服留的秘件，先别在街口拆。”"
