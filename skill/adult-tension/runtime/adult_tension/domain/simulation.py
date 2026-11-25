@@ -20,6 +20,7 @@ MAX_CANDIDATES = 3
 CHAPTER_EVERY = 20
 CHAPTER_CAP = 10
 PROLOGUE_MERGE = 5
+SCHEDULE_BLOCKING_CONDITIONS = frozenset(("away", "asleep", "unconscious"))
 
 
 def frozen(state):
@@ -86,6 +87,8 @@ def offscreen(state, report, turn):
         char = state["characters"][cid]
         if cid == state["player_id"] or cid in present or char["tier"] == "background":
             continue
+        if any(c["kind"] in SCHEDULE_BLOCKING_CONDITIONS for c in char["status"]["conditions"]):
+            continue
         target = schedule_location(char, state["clock"]["minute"])
         if target and target != char["status"]["location_id"]:
             char["status"]["location_id"] = target
@@ -116,21 +119,34 @@ def propagation(state, report, turn):
     """Step 5: spreading facts travel exactly along relationship edges."""
     if frozen(state):
         return {"frozen": True, "spread": []}
-    tier = report["tier"]
-    hops = {"routine": 0, "brief": 1}.get(tier, 3 if report["minutes"] >= ST.MINUTES_PER_DAY else 2)
+    minutes = report["minutes"]
+    if minutes >= ST.MINUTES_PER_DAY:
+        hops = 3
+    elif minutes >= ST.SCENE_BREAK_MINUTES:
+        hops = 2
+    elif minutes >= 16:
+        hops = 1
+    else:
+        hops = 0
     spread = []
     for hop in range(hops):
         for fact in FA.of(state).spreading():
             fact = FA.edit(state, fact["id"])
             knowers = _npc_knowers(state, fact)
-            reached = []
-            for knower in sorted(knowers):
-                for neighbor in _neighbors(state, knower):
-                    if neighbor in fact["known_by"] or neighbor in fact["believed_by"] or neighbor in reached:
-                        continue
-                    coord = fact.get("coord") or [fact["turn"], fact["id"]]
-                    if rng.unit(state["seed"], "spread", coord[0], coord[1], neighbor, turn, hop) < SPREAD_CHANCE:
-                        reached.append(neighbor)
+            candidates = sorted(
+                {
+                    neighbor
+                    for knower in knowers
+                    for neighbor in _neighbors(state, knower)
+                    if neighbor not in fact["known_by"] and neighbor not in fact["believed_by"]
+                }
+            )
+            coord = fact.get("coord") or [fact["turn"], fact["id"]]
+            reached = [
+                neighbor
+                for neighbor in candidates
+                if rng.unit(state["seed"], "spread", coord[0], coord[1], neighbor, turn, hop) < SPREAD_CHANCE
+            ]
             target = fact["known_by"] if fact["truth"] else fact["believed_by"]
             target.extend(reached)
             if reached:

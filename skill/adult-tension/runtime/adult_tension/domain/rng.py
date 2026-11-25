@@ -7,6 +7,7 @@ written by the model never enters the derivation, so rewording cannot reroll.
 
 import hashlib
 import json
+import math
 
 from .. import RNG_VERSION
 
@@ -15,7 +16,8 @@ def unit(seed, purpose, *coords, version=RNG_VERSION):
     """A uniform number in [0, 1) derived from the coordinates."""
     material = json.dumps([version, seed, purpose] + list(coords), ensure_ascii=True, separators=(",", ":"))
     digest = hashlib.sha256(material.encode("ascii")).digest()
-    return int.from_bytes(digest[:8], "big") / 18446744073709551616.0
+    v = int.from_bytes(digest[:8], "big") / 18446744073709551616.0
+    return v if v < 1.0 else math.nextafter(1.0, 0.0)
 
 
 def randint(seed, purpose, lo, hi, *coords):

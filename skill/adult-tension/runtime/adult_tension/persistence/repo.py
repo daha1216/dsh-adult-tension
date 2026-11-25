@@ -8,7 +8,9 @@ A session is stored as a per-turn state blob *without* its facts, plus one
 row per fact (domain/facts.py explains why). A loaded session's
 state["facts"] is a FactSource that reads rows on demand. Each commit writes
 only the facts it changed and journals their previous versions by turn, so
-undo and rewrite can put them back. Slots and exports hold complete states.
+undo and rewrite can put them back. Since DB schema v3, slots use the same
+split layout (per-turn blob in slots, facts in slot_facts, archive in
+slot_archive); only exports hold a single complete state dict.
 """
 
 import json
@@ -318,7 +320,14 @@ def mark_turn_undone(conn, session_id, turn):
     conn.execute("UPDATE turn_log SET undone=1 WHERE session_id=? AND turn=? AND kind='commit' AND undone=0", (session_id, turn))
 
 
+SESSION_TABLES = frozenset(
+    {"sessions", "turn_log", "undo_points", "archive", "slots", "facts", "fact_journal", "commit_failures"}
+)
+
+
 def count_rows(conn, table, session_id):
+    if table not in SESSION_TABLES:
+        raise ValueError("unsupported table for count_rows: %r" % (table,))
     return conn.execute("SELECT COUNT(*) FROM %s WHERE session_id=?" % table, (session_id,)).fetchone()[0]
 
 
@@ -397,6 +406,8 @@ def idem_get(conn, scope, request_id):
 
 
 def idem_put(conn, scope, request_id, digest, response, now):
+    # Note: idempotency.response is declared TEXT in v1 DDL, but SQLite dynamic
+    # typing stores zlib-compressed UTF-8 JSON bytes via pack()/unpack().
     conn.execute(
         "INSERT INTO idempotency(scope, request_id, digest, response, created_at) VALUES(?,?,?,?,?)",
         (scope, request_id, digest, pack(response), now),
@@ -438,12 +449,24 @@ def get_slot(conn, name, with_blobs=False):
 
 def put_slot(conn, name, session_id, clock_label, open_action, version, now):
     """Copy the session as it is stored now into the slot `name`."""
+    if not session_exists(conn, session_id):
+        raise AppError(
+            NOT_FOUND,
+            "会话不存在：%s" % session_id,
+            [detail("$.session_id", "会话不存在：%s" % session_id, "用 list-sessions 列出实际存在的会话", NOT_FOUND)],
+        )
     _drop_slot_rows(conn, name)
-    conn.execute(
+    cursor = conn.execute(
         "INSERT INTO slots(name, session_id, revision, turn, world_id, world_title, clock_label, open_action, version, state, content, archive, saved_at) "
         "SELECT ?, session_id, revision, turn, world_id, world_title, ?, ?, ?, state, content, ?, ? FROM sessions WHERE session_id=?",
         (name, clock_label, open_action, version, pack([]), now, session_id),
     )
+    if cursor.rowcount != 1:
+        raise AppError(
+            NOT_FOUND,
+            "会话不存在：%s" % session_id,
+            [detail("$.session_id", "会话不存在：%s" % session_id, "用 list-sessions 列出实际存在的会话", NOT_FOUND)],
+        )
     conn.execute(
         "INSERT INTO slot_facts(slot, {0}) SELECT ?, {0} FROM facts WHERE session_id=?".format(FACT_COLUMNS),
         (name, session_id),

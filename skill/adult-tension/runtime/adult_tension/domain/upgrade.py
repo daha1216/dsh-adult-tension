@@ -19,19 +19,28 @@ def _number(item_id):
 
 def _to_2(state):
     # Stable random coordinates [turn, creation index] for facts and events.
+    # Pre-scan existing coords to avoid collisions in mixed states, and match
+    # opening.py (0-based on turn 1) and ops.py (1-based on turn > 1).
     for kind, turn_key in (("facts", "turn"), ("events", "created_turn")):
         bucket = state.get(kind)
         if not isinstance(bucket, dict):
             continue  # a stored per-turn blob keeps facts as rows
         seen = {}
         items = [x for x in bucket.values() if isinstance(x, dict)]
+        for item in items:
+            coord = item.get("coord")
+            if isinstance(coord, list) and len(coord) == 2 and type(coord[0]) is int and type(coord[1]) is int:
+                t, idx = coord
+                seen[t] = max(seen.get(t, -1), idx)
         for item in sorted(items, key=lambda x: _number(x.get("id"))):
             if "coord" not in item:
                 turn = item.get(turn_key)
                 if type(turn) is not int:
                     continue
-                seen[turn] = seen.get(turn, 0) + 1
-                item["coord"] = [turn, seen[turn]]
+                default_last = -1 if turn == 1 else 0
+                next_idx = seen.get(turn, default_last) + 1
+                seen[turn] = next_idx
+                item["coord"] = [turn, next_idx]
     # Dedupe keys already used, including the "#n" repeats.
     keys = {}
     events = state.get("events")
@@ -39,8 +48,12 @@ def _to_2(state):
         for event in events.values():
             if not isinstance(event, dict) or not isinstance(event.get("dedupe_key"), str):
                 continue
-            base, _sep, suffix = event["dedupe_key"].partition("#")
-            used = int(suffix) if suffix.isdigit() else 1
+            key = event["dedupe_key"]
+            head, sep, suffix = key.rpartition("#")
+            if sep and head and suffix.isascii() and suffix.isdigit() and int(suffix) >= 1:
+                base, used = head, int(suffix)
+            else:
+                base, used = key, 1
             keys[base] = max(keys.get(base, 0), used)
     counters = state.get("counters")
     if isinstance(counters, dict):

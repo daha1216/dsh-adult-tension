@@ -42,13 +42,19 @@ def resolve(arg_value=None, environ=None, platform=None, home=None):
 
 
 def data_dir_arg(argv):
-    """Find the value of --data-dir in raw argv without full parsing."""
-    for index, item in enumerate(argv):
+    """Find the last value of --data-dir in raw argv without full parsing."""
+    found = None
+    index = 0
+    while index < len(argv):
+        item = argv[index]
         if item == "--data-dir" and index + 1 < len(argv):
-            return argv[index + 1]
+            found = argv[index + 1]
+            index += 2
+            continue
         if item.startswith("--data-dir="):
-            return item.split("=", 1)[1]
-    return None
+            found = item.split("=", 1)[1]
+        index += 1
+    return found
 
 
 def is_inside(path, root):

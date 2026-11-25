@@ -642,5 +642,141 @@ class RegressionP0P1Test(unittest.TestCase):
         self.assertEqual(res["twist"]["twist_id"], chosen["id"])
 
 
+class RegressionP2DomainTest(unittest.TestCase):
+    def test_state_check_each_preserves_original_index_and_invariants_prefix(self):
+        from adult_tension.domain import invariants, state_check
+        from adult_tension.jsonio import copy
+        from helpers.domain import content
+
+        state, _ = new_state("daily", seed=11)
+        world = content()["world"]
+        npc = npcs(state)[0]
+        # c.each keeps original index even when earlier item fails shape validation
+        bad = copy(state)
+        bad["characters"][npc]["status"]["conditions"] = [
+            "not-a-dict",
+            {"kind": "bogus_kind", "text": "怪状况", "until": None},
+        ]
+        bad["scene"]["responses"] = [
+            "not-a-dict",
+            {"turn": 1, "npc_id": npc, "response": "bogus_resp", "note": "怪回应"},
+        ]
+        bad["characters"][npc]["schedule"] = [
+            "not-a-dict",
+            {"from": 0, "to": 1500, "location_id": "no_loc"},
+        ]
+        paths = {e["path"] for e in state_check.check_state(bad, world)}
+        self.assertIn("$.characters.%s.status.conditions[1].kind" % npc, paths)
+        self.assertIn("$.scene.responses[1].response", paths)
+        self.assertIn("$.characters.%s.schedule[1].to" % npc, paths)
+        # state_check calls invariants with prefix="$" (no double $.state prefix)
+        underage = copy(state)
+        underage["characters"][npc]["age"] = 16
+        inv_default = {e["path"] for e in invariants.check(underage)}
+        inv_root = {e["path"] for e in invariants.check(underage, prefix="$")}
+        chk = {e["path"] for e in state_check.check_state(underage, world)}
+        self.assertIn("$.state.characters.%s.age" % npc, inv_default)
+        self.assertIn("$.characters.%s.age" % npc, inv_root)
+        self.assertIn("$.characters.%s.age" % npc, chk)
+        self.assertFalse(any(p.startswith("$.state.") for p in chk))
+        # counters.next equal to max used ID reports "小于或等于"
+        eq_next = copy(state)
+        max_fid = max(int(fid[1:]) for fid in eq_next["facts"])
+        eq_next["counters"]["next"]["fact"] = max_fid
+        errs = state_check.check_state(eq_next, world)
+        self.assertTrue(any(e["path"] == "$.counters.next.fact" and "小于或等于" in e["reason"] for e in errs), errs)
+
+    def test_continue_wait_reject_nonempty_acts_on_and_rewrite_hint_includes_offscreen_beat(self):
+        from adult_tension.domain import turn as T
+
+        state, _ = new_state("daily", seed=11)
+        npc = npcs(state)[0]
+        for mode in ("continue", "wait"):
+            err = rejected(state, commit(mode, [{"op": "npc_action", "npc_id": npc, "action": "看表"}], acts_on=[npc]))
+            self.assertIn("$.acts_on", [d["path"] for d in err.details])
+            apply(state, commit(mode, [{"op": "npc_action", "npc_id": npc, "action": "看表"}], acts_on=[]))
+        # rewrite disallowed op hint lists offscreen_beat
+        err = rejected(
+            state,
+            commit("rewrite", [{"op": "relationship", "from": npc, "to": "player", "trust_delta": 1, "reason": "r"}], player_authorized=True),
+        )
+        self.assertIn("offscreen_beat", err.details[0]["hint"])
+        # M16 wording alignment
+        self.assertIn("含玩家时须填入 player", T.commit_fields()["intimate_participants"].desc)
+        err = rejected(state, commit("result", [], player_authorized=True, tags=["intimate"], intimate_participants=["player"]))
+        self.assertIn("含玩家时须填入 player", reasons(err))
+
+    def test_dedupe_key_forbids_hash_archived_wording_and_ops_descriptions(self):
+        from adult_tension import schema
+        from adult_tension.domain import ops, ops_time, turn
+        from helpers.domain import COMMIT
+
+        state, _ = new_state("pressure", seed=13)
+        npc = npcs(state)[0]
+        raw = {
+            "action_mode": "continue",
+            "player_input": "",
+            "operations": [{"op": "event_create", "kind": "opportunity", "title": "绕过去重", "participants": [npc], "in_minutes": 60, "dedupe_key": "t.dup#2"}],
+            "content_tags": [],
+            "summary": "s",
+            "open_action": "o",
+        }
+        _out, errors = schema.validate(COMMIT, raw)
+        self.assertIn("$.operations[0].dedupe_key", [e["path"] for e in errors])
+        # Undone event ID reports "已归档或已撤销"
+        after, res = apply(state, commit("continue", [{"op": "event_create", "kind": "opportunity", "title": "短机会", "participants": [npc], "in_minutes": 60, "dedupe_key": "t.undo_ev"}]))
+        eid = res["applied"][0]["event_id"]
+        undone, _ = turn.undo(after, state)
+        err = rejected(undone, commit("continue", [{"op": "event_cancel", "event_id": eid, "reason": "取消"}]))
+        self.assertIn("已归档或已撤销", reasons(err))
+        # No dead attributes on TurnContext
+        from helpers.domain import content
+
+        ctx = ops.TurnContext(state, content()["world"], commit("continue", []))
+        self.assertFalse(hasattr(ctx, "relationship_reasons"))
+        self.assertFalse(hasattr(ctx, "voice_reasons"))
+        # Descriptions updated
+        self.assertIn("覆盖旧记录", ops.DESCRIPTIONS["npc_state"])
+        self.assertIn("双向", ops.DESCRIPTIONS["relationship"])
+        self.assertIn("两名 NPC", ops.DESCRIPTIONS["relationship"])
+        beat_desc = ops.DESCRIPTIONS["offscreen_beat"]
+        self.assertNotIn("`", beat_desc)
+        self.assertIn("requests.offscreen_beat_candidates", beat_desc)
+        self.assertIn("advance_time 之后", beat_desc)
+        for allowed_op in ops_time.BEAT_OPS:
+            self.assertIn(allowed_op, beat_desc)
+
+    def test_rng_clock_facts_and_dead_code_cleanup(self):
+        import math
+        from unittest import mock
+
+        from adult_tension.domain import facts as FA
+        from adult_tension.domain import state as SS
+        from adult_tension.domain import structure as ST
+
+        # rng.unit clamps 1.0 rounding edge case to nextafter(1.0, 0.0)
+        fake_hash = mock.Mock()
+        fake_hash.digest.return_value = b"\xff" * 32
+        with mock.patch("adult_tension.domain.rng.hashlib.sha256", return_value=fake_hash):
+            val = rng.unit(1, "edge")
+        self.assertLess(val, 1.0)
+        self.assertEqual(val, math.nextafter(1.0, 0.0))
+        # clock.cn_number handles 0..99, >=100, and rejects negative
+        self.assertEqual(CL.cn_number(0), "零")
+        self.assertEqual(CL.cn_number(99), "九十九")
+        self.assertEqual(CL.cn_number(100), "100")
+        with self.assertRaises(ValueError):
+            CL.cn_number(-1)
+        # facts.player_ranked with limit=0 returns [] for both DictSource and FactView
+        state, _ = new_state("daily", seed=5)
+        ds = FA.DictSource(state["facts"])
+        fv = FA.FactView(state["facts"])
+        self.assertEqual(ds.player_ranked("player", ["player"], [], 1, limit=0), [])
+        self.assertEqual(fv.player_ranked("player", ["player"], [], 1, limit=0), [])
+        # Dead symbols removed
+        self.assertFalse(hasattr(ST, "MAX_FIX_ATTEMPTS"))
+        self.assertFalse(hasattr(SS, "info_set"))
+
+
 if __name__ == "__main__":
     unittest.main()

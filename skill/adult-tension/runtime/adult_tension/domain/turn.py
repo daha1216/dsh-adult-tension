@@ -43,7 +43,7 @@ def commit_fields():
         "acts_on": F(S.Nullable(S.List(S.Id(), max_items=8, unique=True)), required=False, default=None, desc="玩家行动作用到的 NPC（身体、意志、财物）；attempt 不作用于任何 NPC 时写 []"),
         "operations": F(S.List(OPS.op_spec(), max_items=40), desc="操作列表（可以为空数组）"),
         "content_tags": F(S.List(S.Id(), max_items=12, unique=True), desc="本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags"),
-        "intimate_participants": F(S.List(S.Id(), max_items=6, unique=True), required=False, default=[], desc="content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家）"),
+        "intimate_participants": F(S.List(S.Id(), max_items=6, unique=True), required=False, default=[], desc="content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家时须填入 player）"),
         "summary": F(S.Str(1, 120), desc="本回合客观摘要（第三人称，≤120 字）"),
         "open_action": F(S.Str(1, 80), desc="回合停在哪里、谁在等谁，≤80 字"),
         "quotes": F(S.List(S.Str(1, 80), max_items=3), required=False, default=[], desc="≤3 条对后续有意义的原话，每条 ≤80 字"),
@@ -172,6 +172,8 @@ def _mode_checks(ctx):
     if mode in ("continue", "wait"):
         if commit["player_authorized"]:
             ctx.error("$.player_authorized", "继续/等待回合里玩家没有做决定，不能带 player_authorized", "去掉它")
+        if npcs:
+            ctx.error("$.acts_on", "继续/等待回合里玩家没有行动，acts_on 不能填 NPC", "留空或写 []")
         if not ctx.observable and not ctx.op_failed:
             ctx.error("$.operations", "继续/等待回合至少要有一个可观察的变化", "让 NPC 行动、状态变化、新事实或有人来去（npc_action、npc_state、add_fact、enter_scene 等）")
     if mode == "rewrite":
@@ -214,7 +216,7 @@ def _intimacy_checks(ctx):
             ctx.error("$.intimate_participants", "只有带 intimate 或 explicit 标签的提交才写亲密参与者", None, INVALID_INPUT)
         return
     if len(participants) < 2:
-        ctx.error("$.intimate_participants", "亲密场景的提交必须写明参与者（角色 ID 数组，含玩家）", None, INVALID_INPUT)
+        ctx.error("$.intimate_participants", "亲密场景的提交必须写明参与者（角色 ID 数组，含玩家时须填入 player）", None, INVALID_INPUT)
         return
     state = ctx.state
     player = state["player_id"]
@@ -326,7 +328,7 @@ def commit_turn(state, content, commit, undo_snapshot=None):
             ctx.error(
                 path + ".op",
                 "“其实……”回合不能用 %s" % op["op"],
-                "只允许追溯事实（add_fact，origin: retcon）、player_update，以及 NPC 的反应（npc_action、npc_state、enter_scene、exit_scene）与时间推进",
+                "只允许追溯事实（add_fact，origin: retcon）、player_update，以及 NPC 的反应（npc_action、npc_state、enter_scene、exit_scene）、时间推进（advance_time）与离屏片段（offscreen_beat）",
             )
             continue
         OPS.apply_op(ctx, op, path)

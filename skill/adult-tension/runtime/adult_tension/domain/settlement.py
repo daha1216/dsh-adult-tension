@@ -50,7 +50,7 @@ def settle_events(state, until_clock, turn):
         for e in state["events"].values()
         if e["state"] == "pending" and CL.to_abs(e["due"]) <= CL.to_abs(until_clock)
     ]
-    due.sort(key=lambda e: (CL.to_abs(e["due"]), e["id"]))
+    due.sort(key=lambda e: (CL.to_abs(e["due"]), int(e["id"][1:])))
     resolved = []
     for event in due:
         if event["kind"] == "chance":

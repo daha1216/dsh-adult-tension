@@ -83,6 +83,16 @@ class Str(Spec):
         return "，".join(parts)
 
 
+def _bounds(lo, hi, lo_open=False, hi_open=False):
+    if lo is not None and hi is not None:
+        return "%s%s, %s%s" % ("(" if lo_open else "[", lo, hi, ")" if hi_open else "]")
+    if lo is not None:
+        return "%s%s" % (">" if lo_open else "≥", lo)
+    if hi is not None:
+        return "%s%s" % ("<" if hi_open else "≤", hi)
+    return ""
+
+
 class Int(Spec):
     def __init__(self, lo=None, hi=None):
         self.lo = lo
@@ -92,12 +102,15 @@ class Int(Spec):
         if isinstance(value, bool) or not isinstance(value, int):
             return self._type_error(value, path, errors, "整数")
         if (self.lo is not None and value < self.lo) or (self.hi is not None and value > self.hi):
-            errors.append(detail(path, "数值 %d 超出范围 [%s, %s]" % (value, self.lo, self.hi), "不会自动截断，请给出范围内的值", INVALID_INPUT))
+            errors.append(detail(path, "数值 %d 超出范围 %s" % (value, _bounds(self.lo, self.hi)), "不会自动截断，请给出范围内的值", INVALID_INPUT))
             return MISSING
         return value
 
     def doc(self):
-        return "整数 %s..%s" % ("" if self.lo is None else self.lo, "" if self.hi is None else self.hi)
+        if self.lo is not None and self.hi is not None:
+            return "整数 %s..%s" % (self.lo, self.hi)
+        bounds = _bounds(self.lo, self.hi)
+        return ("整数 %s" % bounds) if bounds else "整数"
 
 
 class Num(Spec):
@@ -115,12 +128,13 @@ class Num(Spec):
         if self.hi is not None:
             bad = bad or (value >= self.hi if self.hi_open else value > self.hi)
         if bad:
-            errors.append(detail(path, "数值 %s 超出范围 %s%s, %s%s" % (value, "(" if self.lo_open else "[", self.lo, self.hi, ")" if self.hi_open else "]"), "不会自动截断", INVALID_INPUT))
+            errors.append(detail(path, "数值 %s 超出范围 %s" % (value, _bounds(self.lo, self.hi, self.lo_open, self.hi_open)), "不会自动截断", INVALID_INPUT))
             return MISSING
         return float(value)
 
     def doc(self):
-        return "数值 %s%s, %s%s" % ("(" if self.lo_open else "[", self.lo, self.hi, ")" if self.hi_open else "]")
+        bounds = _bounds(self.lo, self.hi, self.lo_open, self.hi_open)
+        return ("数值 %s" % bounds) if bounds else "数值"
 
 
 class Bool(Spec):
@@ -225,7 +239,8 @@ class Obj(Spec):
         bad = False
         for key in value:
             if key not in self.fields:
-                errors.append(detail("%s.%s" % (path, key), "未知字段：%s" % key, "可用字段：%s" % "、".join(self.fields), INVALID_INPUT))
+                hint = ("可用字段：%s" % "、".join(self.fields)) if self.fields else (self.desc or "不接受字段")
+                errors.append(detail("%s.%s" % (path, key), "未知字段：%s" % key, hint, INVALID_INPUT))
                 bad = True
         for key, field in self.fields.items():
             if key not in value:

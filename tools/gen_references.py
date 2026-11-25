@@ -49,17 +49,18 @@ def field_table(obj_spec, nested=None):
     return "".join(lines), nested
 
 
-def render_spec(obj_spec, heading_level=3):
+def render_spec(obj_spec, heading_level=3, skip_nested=()):
     text, nested = field_table(obj_spec)
     out = [text]
-    seen = set()
+    seen = set(skip_nested)
     while nested:
         name, spec = nested.pop(0)
         if name in seen:
             continue
         seen.add(name)
         sub, more = field_table(spec)
-        out.append("\n%s `%s` 的字段\n\n%s" % ("#" * (heading_level + 1), name, sub))
+        note = "%s\n\n" % spec.desc if spec.desc else ""
+        out.append("\n%s `%s` 的字段\n\n%s%s" % ("#" * (heading_level + 1), name, note, sub))
         nested.extend(more)
     return "".join(out)
 
@@ -73,7 +74,7 @@ def render_commands():
     lines.append("- 输入是一个 JSON 对象，来自 `--input-file`（UTF-8，可带 BOM）。需要输入的命令在没有 `--input-file` 且 stdin 不是终端时读取 stdin；可选输入只从 `--input-file` 读取（`--input-file -` 表示 stdin）。\n")
     lines.append("- 任何输入都可以带 `\"encoding_check\": \"汉字\"`。值不对说明中文在传入途中被终端改坏（例如 PowerShell 5.1 的管道把中文变成 `?`），命令被拒（`INVALID_INPUT`，路径 `$.encoding_check`），改用 `--input-file` 传 UTF-8 文件。这个字段在命令处理之前去掉。\n")
     lines.append("- 输出是一个信封 `{\"ok\", \"data\", \"error\"}`，以 UTF-8 字节写到 stdout。成功与失败都附带 `next_request_id`（成功在 `data` 里，失败在 `error` 里），下一次写操作直接用它。\n")
-    lines.append("- 全局参数：`--json`（输出 JSON，始终如此）、`--pretty`（缩进输出）、`--debug`、`--input-file PATH`、`--data-dir PATH`。\n")
+    lines.append("- 全局参数：`--json`（输出 JSON，默认行为，保留兼容）、`--pretty`（缩进输出）、`--debug`、`--input-file PATH`、`--data-dir PATH`。\n")
     lines.append("- 写操作都带 `request_id`；会话内的写操作还带 `session_id` 与 `expected_revision`。同一 `request_id` + 同一输入重放时返回原响应并标记 `replayed: true`。\n")
     lines.append("- 开局、读档、导入（`new-game`、`load-slot`、`import-save`）与带 `\"depth\": \"full\"` 的 `get-context` 另外返回 `commit_template`：会话号已填好的一次记录，`turns` 内含单回合骨架（在场的人和最常用的操作），每个攒下的回合照它写一项；尖括号是要写的内容，`a|b` 表示选一个，用不上的操作删掉。带 `preview_time` 的 `get-context` 另外返回 `skip_template`：快进这一回合的记录，`advance_time` 与每条必需的 `offscreen_beat` 已排好（攒下的回合要先记录，再预览）。\n")
     lines.append("- 开发开关（环境变量，由测试环境设置，玩家不需要）：`ADULT_TENSION_HOME` 指定数据目录；`ADULT_TENSION_INCLUDE_DRAFTS=1` 让未发布的世界参与开局与世界列表；`ADULT_TENSION_TRACE=<文件>` 把每次调用（参数、输入、信封、耗时）追加到该文件，供端到端评测采集。\n\n")
@@ -125,9 +126,16 @@ def render_operations():
     lines.append("\n## 操作一览\n\n| op | 作用 |\n|---|---|\n")
     for name in ops.SPECS:
         lines.append("| `%s` | %s |\n" % (name, _escape(ops.DESCRIPTIONS[name])))
+    shared_card_nested = ("identity", "decision", "intimacy", "voices", "situation", "schedule[]")
     for name, spec in ops.SPECS.items():
         lines.append("\n## `%s`\n\n%s\n\n" % (name, ops.DESCRIPTIONS[name]))
-        lines.append(render_spec(spec))
+        if name == "promote_character":
+            lines.append(render_spec(spec, skip_nested=shared_card_nested))
+            lines.append(
+                "\n`identity`、`decision`、`intimacy`、`voices`、`situation`、`schedule`（含 `pressure_responses`、`exits[]`）的子字段见上文 [`introduce_character`](#introduce_character)。\n"
+            )
+        else:
+            lines.append(render_spec(spec))
         branch = ops.HANDLERS[name][1]
         if not branch:
             lines.append("\n不能出现在 `roll` 的分支里。\n")
@@ -188,7 +196,7 @@ def render_custom_world():
     )
     lines.append("## 提交与修正\n\n")
     lines.append("1. 先和玩家确认：时代与地方、日常还是压力、想见到的两三个人。玩家没说的，按时代常识补齐，不要追问细节。\n")
-    lines.append("2. 从文末的示例改起，写一个 JSON 对象：`\"custom\": true`，`id` 用 `custom_` 开头的小写字母、数字、下划线，不写 `extends`。\n")
+    lines.append("2. 从文末的示例改起，写一个 JSON 对象：`\"custom\": true`，`id` 建议以 `custom_` 开头的小写字母、数字、下划线，避免与内置世界重名，不写 `extends`。\n")
     lines.append("3. 直接调用 `new-game`（不先用 `verify-content` 预检，它是开发工具），输入 `{\"request_id\", \"mode\", \"custom_world\": {...}}`；可带 `seed`、`player`、`npc_gender_preference`、`preferences`、`excludes.content_tags`，不带 `world_query`、`my_world`、`locks.world_id`、`excludes.world_ids`、`replay`。\n")
     lines.append("4. 返回 `CONTENT_ERROR` 时，`details` 一次列出全部问题，路径以 `$.custom_world` 开头；逐条改好，换新的 `request_id` 重新提交。只有需要玩家补设定时才把问题讲给玩家。\n")
     lines.append("5. 开局后玩家说“保存世界 名字”：`save-world` 存下这一局的世界包；以后 `new-game` 带 `\"my_world\": \"名字\"`（不写 `custom_world`）再开，运行时按同样的规则重新校验。`my-worlds` 列出，`delete-world` 删除。\n\n")

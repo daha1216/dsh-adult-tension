@@ -23,22 +23,23 @@ class ContentStore:
 
     def _read(self, rel):
         path = os.path.join(self.content_dir, rel)
+        display = rel.replace(os.sep, "/")
         try:
             with open(path, "rb") as handle:
                 raw = handle.read()
         except OSError as exc:
             raise AppError(
                 CONTENT_ERROR,
-                "内容文件缺失或不可读：content/%s" % rel,
-                [detail("content/%s" % rel, str(exc.strerror or exc), "重新安装 Skill 目录")],
+                "内容文件缺失或不可读：content/%s" % display,
+                [detail("content/%s" % display, str(exc.strerror or exc), "重新安装 Skill 目录", CONTENT_ERROR)],
             )
         try:
-            return loads_strict(decode_bytes(raw, "content/%s" % rel), "content/%s" % rel)
+            return loads_strict(decode_bytes(raw, "content/%s" % display), "content/%s" % display)
         except AppError as err:
             raise AppError(
                 CONTENT_ERROR,
-                "内容文件损坏：content/%s" % rel,
-                [dict(d, path="content/%s %s" % (rel, d["path"])) for d in err.details],
+                "内容文件损坏：content/%s" % display,
+                [dict(d, path="content/%s %s" % (display, d["path"])) for d in err.details],
             )
 
     def index(self):

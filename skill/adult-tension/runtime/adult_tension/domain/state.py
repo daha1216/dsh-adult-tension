@@ -52,11 +52,6 @@ def has_edge_either(state, a, b):
     return edge_key(a, b) in state["relationships"] or edge_key(b, a) in state["relationships"]
 
 
-def info_set(state, cid):
-    """Fact ids the character knows or (mis)believes."""
-    return {fact["id"] for fact in FA.of(state).known_to(cid)}
-
-
 def knows(state, cid, fid):
     fact = state["facts"].get(fid)
     return fact is not None and (cid in fact["known_by"] or cid in fact["believed_by"])

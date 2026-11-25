@@ -122,8 +122,16 @@ def _verify_file(payload, tag_ids, problems):
     path = payload["file"]
     if not os.path.isfile(path):
         raise AppError(CONTENT_ERROR, "文件不存在：%s" % path, [detail("$.file", "文件不存在", None, CONTENT_ERROR)])
-    with open(path, "rb") as handle:
-        raw = loads_strict(decode_bytes(handle.read(), path), path)
+    try:
+        with open(path, "rb") as handle:
+            data = handle.read()
+    except OSError as exc:
+        raise AppError(
+            CONTENT_ERROR,
+            "无法读取文件：%s" % path,
+            [detail("$.file", str(exc.strerror or exc), "确认文件存在且可读", CONTENT_ERROR)],
+        )
+    raw = loads_strict(decode_bytes(data, path), path)
     label = raw.get("id") if isinstance(raw, dict) and isinstance(raw.get("id"), str) else os.path.basename(path)
     if isinstance(raw, dict) and raw.get("extends"):
         problems.append(dict(detail("$.extends", "带 extends 的源文件要先编译（tools/compile_content.py）再校验", None, CONTENT_ERROR), world=label))

@@ -155,6 +155,106 @@ class SchemaTest(unittest.TestCase):
             self.assertEqual(len(errs), 1)
             self.assertEqual((errs[0]["path"], errs[0]["code"]), ("$.op", "INVALID_INPUT"))
 
+    def test_empty_object_unknown_field_hint_never_trails_empty(self):
+        _out, errs = schema.validate(schema.EMPTY, {"extra": 1})
+        self.assertEqual(errs[0]["hint"], schema.EMPTY.desc)
+        self.assertNotIn("可用字段：", errs[0]["hint"])
+        _out, errs2 = schema.validate(schema.Obj({}), {"extra": 1})
+        self.assertEqual(errs2[0]["hint"], "不接受字段")
+
+    def test_one_sided_and_unbounded_int_and_num_never_render_none(self):
+        cases = [
+            (schema.Int(lo=0), -1, "≥0", "整数 ≥0"),
+            (schema.Int(hi=5), 6, "≤5", "整数 ≤5"),
+            (schema.Int(), None, None, "整数"),
+            (schema.Num(lo=0), -0.5, "≥0", "数值 ≥0"),
+            (schema.Num(lo=0, lo_open=True), 0, ">0", "数值 >0"),
+            (schema.Num(hi=1), 1.5, "≤1", "数值 ≤1"),
+            (schema.Num(hi=1, hi_open=True), 1, "<1", "数值 <1"),
+            (schema.Num(), None, None, "数值"),
+        ]
+        for spec, bad_val, bound_text, expected_doc in cases:
+            self.assertEqual(spec.doc(), expected_doc)
+            self.assertNotIn("None", spec.doc())
+            if bad_val is not None:
+                _out, errs = schema.validate(spec, bad_val)
+                self.assertEqual(len(errs), 1)
+                self.assertIn(bound_text, errs[0]["reason"])
+                self.assertNotIn("None", errs[0]["reason"])
+        # Two-sided bounds keep their existing formatting.
+        self.assertEqual(schema.Int(0, 5).doc(), "整数 0..5")
+        self.assertEqual(schema.Num(0, 1, lo_open=True, hi_open=True).doc(), "数值 (0, 1)")
+
+
+class LauncherAndPathsTest(unittest.TestCase):
+    def test_data_dir_arg_takes_last_value_matching_cli(self):
+        from adult_tension import paths
+        from adult_tension.adapters import cli
+
+        for argv, expected in (
+            (["doctor", "--data-dir", "/first", "--data-dir", "/second"], "/second"),
+            (["doctor", "--data-dir=/first", "--data-dir", "/second"], "/second"),
+            (["doctor", "--data-dir", "/first", "--data-dir=/second"], "/second"),
+            (["doctor", "--data-dir=/first", "--data-dir=/second"], "/second"),
+            (["doctor", "--data-dir", "--data-dir=/weird"], "--data-dir=/weird"),
+        ):
+            self.assertEqual(paths.data_dir_arg(argv), expected, argv)
+            _cmd, options, _flags = cli.parse_argv(argv)
+            self.assertEqual(options.get("data_dir"), expected, argv)
+
+    def test_launcher_respects_explicit_no_bytecode_flags(self):
+        from adult_tension import paths
+        from helpers.cli import SKILL_ROOT
+        from helpers.fs import temp_dir
+
+        runtime_dir = os.path.join(SKILL_ROOT, "runtime")
+        with temp_dir() as tmp:
+            # 1. python -B preserves sys.dont_write_bytecode=True and writes no pycache
+            d1 = os.path.join(tmp, "d1")
+            snippet = (
+                "import sys\n"
+                "sys.dont_write_bytecode = True\n"
+                "sys.path.insert(0, %r)\n"
+                "from adult_tension import launcher\n"
+                "rc = launcher.launch(['version', '--json', '--data-dir', %r], %r)\n"
+                "assert rc == 0 and sys.dont_write_bytecode is %s\n"
+            )
+            env_no_var = clean_env()
+            env_no_var.pop("PYTHONDONTWRITEBYTECODE", None)
+            proc_b = subprocess.run(
+                [sys.executable, "-B", "-c", snippet % (runtime_dir, d1, SKILL_ROOT, "True")],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=env_no_var,
+                timeout=60,
+            )
+            self.assertEqual(proc_b.returncode, 0, proc_b.stderr.decode("utf-8", "replace"))
+            self.assertFalse(os.path.exists(paths.pycache_dir(d1)))
+
+            # 2. PYTHONDONTWRITEBYTECODE=1 also preserves sys.dont_write_bytecode=True
+            d2 = os.path.join(tmp, "d2")
+            env_with_var = clean_env(PYTHONDONTWRITEBYTECODE="1")
+            proc_env = subprocess.run(
+                [sys.executable, "-c", snippet % (runtime_dir, d2, SKILL_ROOT, "True")],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=env_with_var,
+                timeout=60,
+            )
+            self.assertEqual(proc_env.returncode, 0, proc_env.stderr.decode("utf-8", "replace"))
+            self.assertFalse(os.path.exists(paths.pycache_dir(d2)))
+
+            # 3. Without -B or PYTHONDONTWRITEBYTECODE, launcher redirects pycache to data_dir and enables it
+            d3 = os.path.join(tmp, "d3")
+            proc_normal = subprocess.run(
+                [sys.executable, "-c", snippet % (runtime_dir, d3, SKILL_ROOT, "False")],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=env_no_var,
+                timeout=60,
+            )
+            self.assertEqual(proc_normal.returncode, 0, proc_normal.stderr.decode("utf-8", "replace"))
+
 
 class CliParseArgvTest(unittest.TestCase):
     def test_invalid_int_flag_points_to_its_own_argv_index(self):

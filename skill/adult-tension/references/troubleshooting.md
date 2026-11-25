@@ -2,7 +2,7 @@
 
 `doctor` 检查运行环境并完成首次初始化（创建数据目录、数据库与迁移）。它是幂等的：同一版本成功过一次之后走快速路径，只做轻量检查。任何命令第一次运行时都会自动初始化，`doctor` 只是给出清楚的诊断。
 
-输出里的 `checks` 每一项都有 `status`：`ok`、`warn` 或 `fail`，以及人话说明 `message` 与处理建议 `hint`。有 `fail` 时信封 `ok` 为 false，`error.code` 取最要紧的那一项。
+输出里的 `checks`（成功时在 `data.checks`；有 `fail` 时信封 `ok` 为 false，位于 `error.doctor.checks`）每一项都有 `status`：`ok`、`warn` 或 `fail`，以及人话说明 `message` 与处理建议 `hint`。失败时 `error.code` 取最要紧的那一项，处理建议同时汇总在 `error.details[].hint`。
 
 | 检查项 | 失败时的错误码 | 含义 | 处理 |
 |---|---|---|---|
@@ -39,7 +39,7 @@
 - 存档名已被占用（`save-slot` / `import-save` 返回 `SLOT_CONFLICT`，`reason: exists`）：问玩家“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重新提交，或换个新名字。
 - 自定义世界名已被占用（`save-world` 返回 `SLOT_CONFLICT`，`reason: exists`）：问玩家“世界「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重新提交，或换个新名字。
 - 本局当前槽已在别的对话里被写过（`reason: changed_elsewhere`）：给玩家“A 读取最新 / B 另存为新名 / C 取消”。
-- 导入被拒：文件校验失败、损坏或结构不合规（`INVALID_INPUT` / `INVARIANT_VIOLATION`）时如实告知，不猜内容；版本过新或不兼容（`UNSUPPORTED_VERSION`，如导出格式、状态版本或随机版本超出支持范围）时提示升级 Skill，均不写入任何数据。
+- 导入被拒：文件校验失败、损坏或结构不合规（`INVALID_INPUT` / `INVARIANT_VIOLATION`）时如实告知，不猜内容；版本过新或不兼容（`UNSUPPORTED_VERSION`，如导出格式、状态版本或随机版本 `rng_version` 不兼容）时提示升级 Skill；指定 `slot` 同名冲突（`SLOT_CONFLICT`）按首条询问是否覆盖。上述情形均不写入任何数据。
 
 ## 升级、导出与卸载
 

@@ -29,7 +29,7 @@ def _card_budget(ctx, npc, path, errs):
     used = ctx.card_ops.get(npc, 0) + 1
     ctx.card_ops[npc] = used
     if used > MAX_CARD_OPS_PER_NPC:
-        errs.append(detail(path, "一个回合里 %s 的身份/倾向卡最多改 %d 项" % (ctx.name(npc), MAX_CARD_OPS_PER_NPC), "卡片只能逐项演化，不能一次重写", INVARIANT_VIOLATION))
+        errs.append(detail(path, "一个回合里 %s 的身份卡/私密倾向卡最多改 %d 项" % (ctx.name(npc), MAX_CARD_OPS_PER_NPC), "卡片只能逐项演化，不能一次重写", INVARIANT_VIOLATION))
 
 
 # ---------------------------------------------------------------------------
@@ -194,7 +194,7 @@ def op_set_voice(ctx, op, path):
     if _need_character(ctx, npc, path + ".npc_id", errs, npc=True):
         char = state["characters"][npc]
         if not char.get("voices"):
-            errs.append(detail(path + ".npc_id", "%s 没有语态设定（只有重要角色有表里两层）" % char["name"], "先升格为 major", INVARIANT_VIOLATION))
+            errs.append(detail(path + ".npc_id", "%s 没有表里语态设定（只有重要角色有）" % char["name"], "先升格为 major", INVARIANT_VIOLATION))
         if op["cause"] == "npc_self":
             if op["voice"] != "inner":
                 errs.append(detail(path + ".voice", "NPC 自主切换只能切入里层；切回表层用 revert", None, INVARIANT_VIOLATION))
@@ -218,7 +218,6 @@ def op_set_voice(ctx, op, path):
     if not _flush(ctx, errs):
         return
     state["preferences"]["voice"][npc] = {"voice": op["voice"], "cause": op["cause"], "since_turn": ctx.turn, "trigger": op["trigger"]}
-    ctx.voice_reasons.append(op["note"])
     ctx.observable = True
     ctx.applied.append({"op": "set_voice", "npc_id": npc, "voice": op["voice"], "cause": op["cause"]})
 
@@ -247,7 +246,7 @@ def op_intimacy_evidence(ctx, op, path):
     if _need_character(ctx, npc, path + ".npc_id", errs, npc=True):
         card = state["characters"][npc].get("intimacy")
         if not card:
-            errs.append(detail(path + ".npc_id", "%s 还没有倾向卡（只有重要角色有）" % ctx.name(npc), "先升格为 major", INVARIANT_VIOLATION))
+            errs.append(detail(path + ".npc_id", "%s 还没有私密倾向卡（只有重要角色有）" % ctx.name(npc), "先升格为 major", INVARIANT_VIOLATION))
         _card_budget(ctx, npc, path, errs)
     allowed = {"increase", "decrease"} if item in C.INTIMACY_NUMERIC else ({"add", "remove"} if item in C.INTIMACY_LISTS else {"set"})
     if direction not in allowed:
@@ -305,7 +304,7 @@ def op_intimacy_evidence(ctx, op, path):
         "value": F(S.Str(1, 120)),
         "reason": F(S.Str(1, 80)),
     },
-    "逐项修改身份卡（资源、限制、义务用 add/remove；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换",
+    "逐项修改身份卡（资源、限制、义务用 add/remove，单条 ≤80 字、最多 8 项；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换",
 )
 def op_identity_update(ctx, op, path):
     errs = []
@@ -321,10 +320,16 @@ def op_identity_update(ctx, op, path):
         errs.append(detail(path + ".action", "列表项用 add/remove", None, INVARIANT_VIOLATION))
     if not is_list and op["action"] != "set":
         errs.append(detail(path + ".action", "文字项用 set", None, INVARIANT_VIOLATION))
+    if is_list and op["action"] == "add" and len(op["value"]) > 80:
+        errs.append(detail(path + ".value", "%s 的单条内容不能超过 80 字" % op["item"], None, INVARIANT_VIOLATION))
     if identity and is_list:
-        if op["action"] == "add" and op["value"] in identity.get(op["item"], []):
-            errs.append(detail(path + ".value", "已经有这一条", None, INVARIANT_VIOLATION))
-        if op["action"] == "remove" and op["value"] not in identity.get(op["item"], []):
+        existing = identity.get(op["item"], [])
+        if op["action"] == "add":
+            if op["value"] in existing:
+                errs.append(detail(path + ".value", "已经有这一条", None, INVARIANT_VIOLATION))
+            elif len(existing) >= 8:
+                errs.append(detail(path + ".value", "这一项最多保留 8 条，已满", "先 remove 一条旧的，再 add 新的", INVARIANT_VIOLATION))
+        if op["action"] == "remove" and op["value"] not in existing:
             errs.append(detail(path + ".value", "没有这一条", None, INVARIANT_VIOLATION))
     if not _flush(ctx, errs):
         return
@@ -341,20 +346,33 @@ def op_identity_update(ctx, op, path):
 
 
 NPC_FIELDS = ("public_role", "appearance", "current_goal", "relationship_stance", "situation_trigger", "situation_pressure")
+NPC_FIELD_MAX = {
+    "public_role": 30,
+    "appearance": 120,
+    "current_goal": 80,
+    "relationship_stance": 80,
+    "situation_trigger": 120,
+    "situation_pressure": 120,
+}
 
 
 @register(
     "npc_update",
     {"npc_id": F(S.Id()), "field": F(S.Enum(*NPC_FIELDS)), "value": F(S.Str(1, 120)), "reason": F(S.Str(1, 80))},
-    "修改 NPC 的公开身份、外貌、当前目标、对关系的态度或处境（不含身份卡与倾向卡）",
+    "修改 NPC 的公开身份（≤30 字）、外貌、当前目标（≤80 字）、对关系的态度（仅 major，≤80 字）或处境（不含身份卡与私密倾向卡）",
 )
 def op_npc_update(ctx, op, path):
     errs = []
     npc = op["npc_id"]
+    limit = NPC_FIELD_MAX[op["field"]]
+    if len(op["value"]) > limit:
+        errs.append(detail(path + ".value", "%s 不能超过 %d 字" % (op["field"], limit), None, INVARIANT_VIOLATION))
     if _need_character(ctx, npc, path + ".npc_id", errs, npc=True):
         char = ctx.state["characters"][npc]
-        if op["field"] in ("current_goal", "relationship_stance") and not char.get("decision"):
-            errs.append(detail(path + ".field", "%s 没有决策卡" % char["name"], "先升格", INVARIANT_VIOLATION))
+        if op["field"] == "current_goal" and not char.get("decision"):
+            errs.append(detail(path + ".field", "%s 没有决策卡" % char["name"], "先升格为 supporting 或 major", INVARIANT_VIOLATION))
+        if op["field"] == "relationship_stance" and (char["tier"] != "major" or not char.get("decision")):
+            errs.append(detail(path + ".field", "只有重要角色（major）有 relationship_stance", "先升格为 major", INVARIANT_VIOLATION))
         if op["field"].startswith("situation_") and not char.get("situation"):
             errs.append(detail(path + ".field", "%s 没有处境设定" % char["name"], "先升格为 major", INVARIANT_VIOLATION))
     if not _flush(ctx, errs):
@@ -413,7 +431,7 @@ def _name_ok(ctx, name, tier, kin_of, path, errs):
         return None
     taken = {c.get("family") for c in state["characters"].values() if c["tier"] in ("major", "supporting") and c.get("family")}
     if family in taken and not kin_of:
-        errs.append(detail(path + ".name", "本局的重要人物里已经有人姓%s" % family, "换一个姓；确实是亲属时写 kin_of", INVARIANT_VIOLATION))
+        errs.append(detail(path + ".name", "本局的重要角色里已经有人姓%s" % family, "换一个姓；确实是亲属时写 kin_of", INVARIANT_VIOLATION))
     return family
 
 
@@ -431,27 +449,35 @@ def _card_errors(tier, card, path, errs, allowed_missing=()):
             "id": F(S.Id()),
             "name": F(S.Str(1, 12)),
             "tier": F(S.Enum(*ST.TIERS)),
-            "age": F(S.Int(0, 120)),
+            "age": F(S.Int(0, 120), desc="明确年龄；须 ≥ 18，小于 18 触发 SAFETY_BLOCK"),
             "gender": F(S.Enum(*ST.GENDERS)),
-            "gender_reason": F(S.Nullable(S.Str(1, 80)), required=False, default=None),
-            "adult_context": F(S.Str(1, 80)),
+            "gender_reason": F(S.Nullable(S.Str(1, 80)), required=False, default=None, desc="性别不符配对偏好时的叙事理由（supporting/major 必填）"),
+            "adult_context": F(S.Str(1, 80), desc="一句话说明成年身份与处境"),
             "public_role": F(S.Str(1, 30)),
-            "kin_of": F(S.Nullable(S.Id()), required=False, default=None),
-            "present": F(S.Bool(), required=False, default=True),
-            "location_id": F(S.Nullable(S.Id()), required=False, default=None),
+            "kin_of": F(S.Nullable(S.Id()), required=False, default=None, desc="与已有重要角色同姓时填其亲属角色 ID"),
+            "present": F(S.Bool(), required=False, default=True, desc="是否在当前场景；false 时须填 location_id"),
+            "location_id": F(S.Nullable(S.Id()), required=False, default=None, desc="present 为 false 时必填其所在地点 ID"),
         },
         **C.card_fields()
     ),
-    "新角色登场：正文里第一次点名的世界外新人物都要登场，只被提起、不在场的也算（present 写 false，location_id 写其所在地点；若已在世界 standby_cast 中，直接 enter_scene 激活，不用此操作）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason",
+    "新角色登场：正文里第一次点名的世界外新人物都要登场，只被提起、不在场的也算（present 写 false，location_id 写其所在地点；若已在世界 standby_cast 中，直接 enter_scene 激活，不用此操作）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要角色不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason",
     branch=False,
 )
 def op_introduce_character(ctx, op, path):
     errs = []
     state = ctx.state
     cid = op["id"]
-    if cid in state["characters"] or cid == "player" or cid in ctx.world_ids:
-        hint = "该 ID 属于世界待命角色（standby_cast），直接 enter_scene 激活即可，勿用 introduce_character" if _is_standby(ctx, cid) else "ID 一经分配永不复用；换一个新的 ASCII 小写 ID"
-        errs.append(detail(path + ".id", "ID 已被使用：%s" % cid, hint, INVARIANT_VIOLATION))
+    if _is_standby(ctx, cid):
+        errs.append(
+            detail(
+                path + ".id",
+                "角色 %s 已在待命池中，请直接用 enter_scene 激活" % cid,
+                "待命角色（standby_cast）直接 enter_scene 即可自动激活完整人物卡，勿用 introduce_character",
+                INVARIANT_VIOLATION,
+            )
+        )
+    elif cid in state["characters"] or cid == "player" or cid in ctx.world_ids:
+        errs.append(detail(path + ".id", "ID 已被使用：%s" % cid, "ID 一经分配永不复用；换一个新的 ASCII 小写 ID", INVARIANT_VIOLATION))
     if op["age"] < 18:
         errs.append(detail(path + ".age", "年龄 %d 小于 18，不能登场" % op["age"], "所有角色都必须是明确的成年人", SAFETY_BLOCK))
     _name_ok(ctx, op["name"], op["tier"], op["kin_of"], path, errs)
@@ -464,7 +490,7 @@ def op_introduce_character(ctx, op, path):
     if op["tier"] == "background" and any(op[k] is not None for k in ("appearance", "identity", "decision", "intimacy", "voices", "situation", "schedule")):
         errs.append(detail(path + ".tier", "背景人物只有名字和一句话（line），不能带外貌、卡片或日程", "要带身份、决策或日程就用 supporting 或 major", INVARIANT_VIOLATION))
     if op["tier"] == "supporting" and any(op[k] is not None for k in ("intimacy", "voices", "situation")):
-        errs.append(detail(path + ".tier", "只有重要角色（major）有倾向卡、表里语态和处境设定", None, INVARIANT_VIOLATION))
+        errs.append(detail(path + ".tier", "只有重要角色（major）有私密倾向卡、表里语态和处境设定", None, INVARIANT_VIOLATION))
     _schedule_ok(ctx, op["schedule"], path, errs)
     location = state["scene"]["location_id"] if op["present"] else op["location_id"]
     if not op["present"] and location is None:
@@ -518,7 +544,7 @@ def op_introduce_character(ctx, op, path):
         },
         **C.card_fields()
     ),
-    "把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason",
+    "把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与私密倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason",
     branch=False,
 )
 def op_promote_character(ctx, op, path):
@@ -533,9 +559,9 @@ def op_promote_character(ctx, op, path):
             _gender_preference_ok(ctx, char["gender"], op["gender_reason"], path, errs, field=".character_id")
         for part in ("identity", "intimacy"):
             if op[part] is not None and char.get(part):
-                errs.append(detail("%s.%s" % (path, part), "%s 已经有%s，只能逐项演化" % (char["name"], "身份卡" if part == "identity" else "倾向卡"), None, INVARIANT_VIOLATION))
+                errs.append(detail("%s.%s" % (path, part), "%s 已经有%s，只能逐项演化" % (char["name"], "身份卡" if part == "identity" else "私密倾向卡"), None, INVARIANT_VIOLATION))
         if op["to_tier"] == "supporting" and any(op[k] is not None for k in ("intimacy", "voices", "situation")):
-            errs.append(detail(path + ".to_tier", "只有重要角色（major）有倾向卡、表里语态和处境设定", None, INVARIANT_VIOLATION))
+            errs.append(detail(path + ".to_tier", "只有重要角色（major）有私密倾向卡、表里语态和处境设定", None, INVARIANT_VIOLATION))
     _schedule_ok(ctx, op["schedule"], path, errs)
     if char is not None:
         merged = dict(char)
@@ -571,11 +597,11 @@ def op_promote_character(ctx, op, path):
 @register(
     "leverage_set",
     {
-        "holder": F(S.Id()),
-        "subject": F(S.Id()),
-        "basis_fact_id": F(S.Nullable(S.Id()), required=False, default=None),
-        "basis_text": F(S.Nullable(S.Str(1, 120)), required=False, default=None),
-        "origin": F(S.Str(1, 60)),
+        "holder": F(S.Id(), desc="持有把柄的一方角色 ID（为 player 时须 result/attempt + player_authorized）"),
+        "subject": F(S.Id(), desc="受制的一方角色 ID（不能与 holder 相同）"),
+        "basis_fact_id": F(S.Nullable(S.Id()), required=False, default=None, desc="与 basis_text 二选一：已有事实 ID（holder 须知晓该事实）"),
+        "basis_text": F(S.Nullable(S.Str(1, 120)), required=False, default=None, desc="与 basis_fact_id 二选一：新登记的把柄依据（记为仅 holder 知晓的私密事实）"),
+        "origin": F(S.Str(1, 60), desc="把柄由来简述（如债务、秘密、生计、私密控制器等）"),
     },
     "登记把柄：一方开始拿捏另一方（把柄、债务、生计、私密控制器）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间仍可结合处境发生博弈或亲密互动",
 )
@@ -586,6 +612,8 @@ def op_leverage_set(ctx, op, path):
     ok = _need_character(ctx, holder, path + ".holder", errs) & _need_character(ctx, subject, path + ".subject", errs)
     if ok and holder == subject:
         errs.append(detail(path, "持有方与对象不能是同一个人", None, INVARIANT_VIOLATION))
+    if ok and holder != state["player_id"]:
+        _absent_actor_ok(ctx, holder, path + ".holder", errs)
     if (op["basis_fact_id"] is None) == (op["basis_text"] is None):
         errs.append(detail(path, "basis_fact_id 与 basis_text 必须且只能给一个", None, INVARIANT_VIOLATION))
     elif op["basis_fact_id"] is not None and ok:
@@ -651,6 +679,8 @@ def op_leverage_release(ctx, op, path):
         errs.append(detail(path, "离屏片段不能解除涉及玩家角色的把柄", None, INVARIANT_VIOLATION))
     elif lv["holder"] == player and (ctx.mode not in ("result", "attempt") or not ctx.authorized):
         errs.append(detail(path, "放掉玩家手里的把柄要由玩家决定（result/attempt + player_authorized）", None, INVARIANT_VIOLATION))
+    elif lv["holder"] != player:
+        _absent_actor_ok(ctx, lv["holder"], path + ".leverage_id", errs)
     if not _flush(ctx, errs):
         return
     lv["state"] = "released"

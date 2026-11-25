@@ -95,6 +95,8 @@ BOUNDARY = ({"id": STR, "text": STR, "tags": LIST, "created_turn": INT}, {})
 MEMORY = ({"turns": LIST, "chapters": LIST, "prologue": "str?", "open_action": "str?", "last_quotes": LIST}, {})
 MEMORY_TURN = ({"turn": INT, "day": INT, "mode": STR, "summary": STR, "open_action": STR, "quotes": LIST}, {"offscreen": LIST})
 CHAPTER = ({"index": INT, "from_turn": INT, "to_turn": INT, "day": INT, "summary": STR}, {})
+# chapter_requested_at is initialized to None in opening.py and unused at runtime;
+# kept here for legacy snapshot and export compatibility.
 COUNTERS = (
     {
         "next": DICT, "major_action_turn": DICT, "event_keys": DICT, "intimacy_evidence": DICT, "twists": DICT,
@@ -144,7 +146,7 @@ class _Checker:
         for index, item in enumerate(items):
             checked = self.shape(item, spec, "%s[%d]" % (path, index))
             if checked is not None:
-                out.append(checked)
+                out.append((index, checked))
         return out
 
     def ids(self, values, known, path, what="角色"):
@@ -197,21 +199,15 @@ def check_state(state, world=None):
         if status is not None:
             if locations is not None and status["location_id"] is not None and status["location_id"] not in locations:
                 c.bad(path + ".status.location_id", "地点不在内容快照中：%s" % status["location_id"])
-            for index, raw_cond in enumerate(status["conditions"]):
+            for index, cond in c.each(status["conditions"], CONDITION, path + ".status.conditions"):
                 cpath = "%s.status.conditions[%d]" % (path, index)
-                cond = c.shape(raw_cond, CONDITION, cpath)
-                if cond is None:
-                    continue
                 if cond["kind"] not in ST.CONDITION_KINDS:
                     c.bad(cpath + ".kind", "状况类型非法")
                 if cond["until"] is not None:
                     c.clock(cond["until"], cpath + ".until")
         if char.get("schedule") is not None:
-            for index, raw_slot in enumerate(char["schedule"]):
+            for index, slot in c.each(char["schedule"], SCHEDULE_SLOT, path + ".schedule"):
                 spath = "%s.schedule[%d]" % (path, index)
-                slot = c.shape(raw_slot, SCHEDULE_SLOT, spath)
-                if slot is None:
-                    continue
                 if not (0 <= slot["from"] < ST.MINUTES_PER_DAY):
                     c.bad(spath + ".from", "日程开始分钟越界")
                 if not (0 <= slot["to"] < ST.MINUTES_PER_DAY):
@@ -229,11 +225,9 @@ def check_state(state, world=None):
         c.clock(scene["since"], "$.scene.since")
         if locations is not None and scene["location_id"] not in locations:
             c.bad("$.scene.location_id", "地点不在内容快照中：%s" % scene["location_id"])
-        for index, raw_response in enumerate(scene["responses"]):
-            rpath = "$.scene.responses[%d]" % index
-            response = c.shape(raw_response, RESPONSE, rpath)
-            if response is not None and response["response"] not in ST.RESPONSES:
-                c.bad(rpath + ".response", "回应类型非法")
+        for index, response in c.each(scene["responses"], RESPONSE, "$.scene.responses"):
+            if response["response"] not in ST.RESPONSES:
+                c.bad("$.scene.responses[%d].response" % index, "回应类型非法")
 
     facts = state.get("facts") if isinstance(state.get("facts"), dict) else {}
     for fid, fact in facts.items():
@@ -358,7 +352,7 @@ def check_state(state, world=None):
         c.ids(requests["offscreen_beat_candidates"], known, "$.requests.offscreen_beat_candidates")
     if not c.problems:
         # the global invariants read everything above; only run them on a sound shape
-        for problem in invariants.check(state):
+        for problem in invariants.check(state, prefix="$"):
             c.problems.append(problem)
         now = CL.to_abs(state["clock"])
         if CL.to_abs(state["scene"]["since"]) > now:

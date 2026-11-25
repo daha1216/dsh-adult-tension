@@ -40,17 +40,26 @@ def connect(path):
     return conn
 
 
+def _is_busy(exc):
+    msg = str(exc).lower()
+    return "locked" in msg or "busy" in msg
+
+
+def _busy_error(exc):
+    return AppError(
+        STORAGE_BUSY,
+        "数据库正被其他进程占用",
+        [detail("$", str(exc), "稍后用同一个 request_id 重试", STORAGE_BUSY)],
+    )
+
+
 def begin_write(conn):
     """Start a write transaction or report STORAGE_BUSY."""
     try:
         conn.execute("BEGIN IMMEDIATE")
     except sqlite3.OperationalError as exc:
-        if "locked" in str(exc) or "busy" in str(exc):
-            raise AppError(
-                STORAGE_BUSY,
-                "数据库正被其他进程占用",
-                [detail("$", str(exc), "稍后用同一个 request_id 重试")],
-            )
+        if _is_busy(exc):
+            raise _busy_error(exc)
         raise
 
 
@@ -354,8 +363,8 @@ def _fault(name):
 def _unsupported_schema(current):
     return AppError(
         UNSUPPORTED_VERSION,
-        "数据库来自更新版本的 Skill（schema %d，本版本支持 %d）" % (current, DB_SCHEMA_VERSION),
-        [detail("$.db.schema_version", "schema %d > %d" % (current, DB_SCHEMA_VERSION), "升级 Skill 到更新的版本；数据库未被修改")],
+        "数据库来自更新版本的 Skill（数据库格式 %d > %d）" % (current, DB_SCHEMA_VERSION),
+        [detail("$.db.schema_version", "数据库格式 %d 比当前支持的 %d 新" % (current, DB_SCHEMA_VERSION), "升级 Skill 到更新的版本；数据库未被修改", UNSUPPORTED_VERSION)],
         found=current,
         supported=DB_SCHEMA_VERSION,
     )
@@ -371,7 +380,12 @@ def ensure_schema(conn, backups_dir):
         return report
     backup_file = None
     if current == 0:
-        conn.execute("PRAGMA journal_mode=WAL")
+        try:
+            conn.execute("PRAGMA journal_mode=WAL")
+        except sqlite3.OperationalError as exc:
+            if _is_busy(exc):
+                raise _busy_error(exc)
+            raise
     begin_write(conn)
     try:
         # Re-read inside the write lock: another process may have migrated.
@@ -409,10 +423,19 @@ def ensure_schema(conn, backups_dir):
         if backup_file is not None:
             restore(conn, backup_file)
             restored = True
+        if restored:
+            msg = "数据库从格式 %d 迁移到 %d 失败，已恢复迁移前的备份" % (report["from"], DB_SCHEMA_VERSION)
+            hint = "未加载任何会话，数据库已恢复备份；请换回兼容版本的 Skill 或向维护者反馈异常详情"
+        elif report["from"] == 0:
+            msg = "数据库初始化（数据库格式 0 → %d）失败，已回滚未写入任何改动" % DB_SCHEMA_VERSION
+            hint = "未加载任何会话，本次建库事务已回滚；请检查目录权限与磁盘状态后重试，或向维护者反馈异常详情"
+        else:
+            msg = "数据库从格式 %d 迁移到 %d 失败（备份前已回滚，原数据库未被修改）" % (report["from"], DB_SCHEMA_VERSION)
+            hint = "未加载任何会话，迁移事务已回滚且尚未生成备份；请检查目录权限与磁盘状态后重试，或向维护者反馈异常详情"
         raise AppError(
             MIGRATION_FAILED,
-            "数据库从 schema %d 迁移到 %d 失败，已恢复迁移前的状态" % (report["from"], DB_SCHEMA_VERSION),
-            [detail("$.db", "%s: %s" % (type(exc).__name__, exc), "未加载任何会话，数据库已恢复备份；请换回兼容版本的 Skill 或向维护者反馈异常详情")],
+            msg,
+            [detail("$.db", "%s: %s" % (type(exc).__name__, exc), hint, MIGRATION_FAILED)],
             backup=backup_file,
             restored=restored,
         )

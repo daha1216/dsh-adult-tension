@@ -74,7 +74,7 @@ class SettlementOrderTest(unittest.TestCase):
         # 2 due events settle in (due, id) order, each exactly once
         due = sorted(
             (e for e in state["events"].values() if e["state"] == "pending" and CL.to_abs(e["due"]) <= CL.to_abs(work["clock"])),
-            key=lambda e: (CL.to_abs(e["due"]), e["id"]),
+            key=lambda e: (CL.to_abs(e["due"]), int(e["id"][1:])),
         )
         self.assertTrue(due)
         self.assertEqual([r["event_id"] for r in report["resolved_events"]], [e["id"] for e in due])
@@ -563,6 +563,88 @@ class ServiceTimeTest(unittest.TestCase):
         rows = conn.execute("SELECT id, before FROM fact_journal WHERE session_id=? AND turn=?", (self.sid, done["turn"])).fetchall()
         self.assertEqual(len(rows), 1)
         self.assertIsNone(rows[0][1])
+
+
+class SettlementAndSimulationP2Test(unittest.TestCase):
+    def test_same_minute_events_settle_in_numeric_id_order(self):
+        state, _ = new_state("daily", seed=11)
+        a = npcs(state)[0]
+        due = CL.add_minutes(state["clock"], 30)
+        for eid in ("e10", "e2"):
+            state["events"][eid] = {
+                "id": eid,
+                "kind": "opportunity",
+                "tier": "immediate",
+                "title": "事件" + eid,
+                "text": None,
+                "participants": [a],
+                "due": dict(due),
+                "probability": None,
+                "dedupe_key": "t." + eid,
+                "state": "pending",
+                "outcome": None,
+                "created_turn": 1,
+                "resolved_turn": None,
+                "note": None,
+                "coord": [1, int(eid[1:])],
+            }
+        state["counters"]["next"]["event"] = 11
+        resolved = settlement.settle_events(state, due, 2)
+        self.assertEqual([r["event_id"] for r in resolved], ["e2", "e10"])
+
+    def test_offscreen_schedule_skips_away_asleep_and_unconscious(self):
+        state, _a, b = with_absent_major(mode="daily", seed=11, spreading=False, drunk=False)
+        locs = [loc["id"] for loc in content()["world"]["locations"]]
+        start_loc = state["characters"][b]["status"]["location_id"]
+        dest_loc = next(lid for lid in locs if lid != start_loc)
+        state["characters"][b]["schedule"] = [{"from": 0, "to": 1439, "location_id": dest_loc}]
+        for cond_kind in ("away", "asleep", "unconscious"):
+            work = FA.working_copy(state)
+            work["characters"][b]["status"]["conditions"] = [{"kind": cond_kind, "text": cond_kind, "until": None, "since_turn": 1}]
+            report = settlement.advance(work, 30, work["turn"] + 1, simulation.hooks(work["turn"] + 1))
+            self.assertEqual(work["characters"][b]["status"]["location_id"], start_loc, cond_kind)
+            self.assertFalse(any(m["character_id"] == b for m in report["offscreen"]["moved"]), cond_kind)
+        # Without blocking condition (e.g. busy), schedule movement still runs
+        work = FA.working_copy(state)
+        work["characters"][b]["status"]["conditions"] = [{"kind": "busy", "text": "忙", "until": None, "since_turn": 1}]
+        report = settlement.advance(work, 30, work["turn"] + 1, simulation.hooks(work["turn"] + 1))
+        self.assertEqual(work["characters"][b]["status"]["location_id"], dest_loc)
+        self.assertIn({"character_id": b, "location_id": dest_loc}, report["offscreen"]["moved"])
+
+    def test_midnight_short_skip_hops_scale_by_minutes_and_candidates_dedupe(self):
+        from unittest import mock
+
+        from adult_tension.domain import rng
+
+        state, a, b = with_absent_major(mode="daily", seed=11, spreading=True, drunk=False)
+        # 3-minute midnight crossing: tier="full" & crossed_day=True, but hops=0
+        late = FA.working_copy(state)
+        late["clock"] = {"day": 1, "minute": ST.MINUTES_PER_DAY - 2}
+        _w, rep3 = skip(late, 3)
+        self.assertEqual((rep3["tier"], rep3["crossed_day"], rep3["propagation"]["hops"]), ("full", True, 0))
+        # 30-minute midnight crossing: hops=1
+        late30 = FA.working_copy(state)
+        late30["clock"] = {"day": 1, "minute": ST.MINUTES_PER_DAY - 10}
+        _w, rep30 = skip(late30, 30)
+        self.assertEqual((rep30["tier"], rep30["crossed_day"], rep30["propagation"]["hops"]), ("full", True, 1))
+        # Propagation deduplicates candidate neighbors when two knowers share an edge to target
+        other = next(c for c in state["characters"] if c not in ("player", a, b))
+        work = FA.working_copy(state)
+        for src in (a, b):
+            work["relationships"]["%s>%s" % (src, other)] = {"from": src, "to": other, "trust": 0, "tension": 0, "stage": "acquainted", "history": []}
+        gossip = FA.of(work).by_key("t.gossip")[0]
+        FA.edit(work, gossip["id"])["known_by"] = [a, b]
+        calls = []
+        orig_unit = rng.unit
+
+        def spy_unit(*args, **kwargs):
+            calls.append(args)
+            return orig_unit(*args, **kwargs)
+
+        with mock.patch("adult_tension.domain.simulation.rng.unit", side_effect=spy_unit):
+            settlement.advance(work, 30, work["turn"] + 1, simulation.hooks(work["turn"] + 1))
+        spread_other = [c for c in calls if len(c) >= 5 and c[1] == "spread" and c[4] == other]
+        self.assertEqual(len(spread_other), 1)
 
 
 if __name__ == "__main__":

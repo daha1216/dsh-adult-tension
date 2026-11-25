@@ -11,7 +11,7 @@ import time
 
 from ..domain import invariants
 from ..domain import state as SS
-from ..errors import AppError
+from ..errors import INTERNAL_ERROR, STALE_REVISION, AppError
 from ..persistence import repo
 from . import service, specs
 from .context import Context
@@ -55,7 +55,8 @@ def play(ctx, seed, turns, mode="pressure"):
         steps.append({"step": "commit", "turn": result["turn"], "mode": commit["action_mode"], "applied": len(result["turns"][0]["applied"])})
         if not replay_checked:
             again = service.commit_turn(ctx, payload)
-            assert again["replayed"] is True and again["revision"] == revision, "replay changed state"
+            if not (again["replayed"] is True and again["revision"] == revision):
+                raise AssertionError("replay changed state")
             replay_checked = True
             steps.append({"step": "replay", "replayed": True})
         if not stale_checked:
@@ -63,9 +64,10 @@ def play(ctx, seed, turns, mode="pressure"):
                 service.commit_turn(ctx, dict(payload, request_id=ids.next("stale"), expected_revision=revision - 1))
                 raise AssertionError("stale revision accepted")
             except AppError as err:
-                assert err.code == "STALE_REVISION", err.code
+                if err.code != STALE_REVISION:
+                    raise AssertionError(err.code)
             stale_checked = True
-            steps.append({"step": "stale", "code": "STALE_REVISION"})
+            steps.append({"step": "stale", "code": STALE_REVISION})
         if not reject_checked:
             state, content = _state(ctx, session_id)
             bad = narrator.invalid_commit(state, content, 0)
@@ -74,20 +76,23 @@ def play(ctx, seed, turns, mode="pressure"):
                 raise AssertionError("invalid commit accepted")
             except AppError as err:
                 after, _content = _state(ctx, session_id)
-                assert SS.digest(after) == SS.digest(state), "rejected commit changed state"
+                if SS.digest(after) != SS.digest(state):
+                    raise AssertionError("rejected commit changed state")
                 steps.append({"step": "reject", "code": err.code})
             reject_checked = True
         if index + 1 == half:
             saved = service.save_slot(ctx, {"session_id": session_id, "request_id": ids.next("save"), "expected_revision": revision, "name": "smoke-" + mode})
             steps.append({"step": "save", "receipt": saved["receipt"]})
             loaded = service.load_slot(ctx, {"request_id": ids.next("load"), "name": "smoke-" + mode})
-            assert loaded["turn"] == saved["turn"], "load returned another turn"
+            if loaded["turn"] != saved["turn"]:
+                raise AssertionError("load returned another turn")
             session_id = loaded["session_id"]
             revision = loaded["revision"]
             steps.append({"step": "load", "receipt": loaded["receipt"], "session_id": session_id})
     state, _content = _state(ctx, session_id)
     problems = invariants.check(state)
-    assert not problems, problems
+    if problems:
+        raise AssertionError(problems)
     return {
         "seed": opened["seed"],
         "mode": mode,
@@ -107,7 +112,7 @@ def run(ctx, payload):
     try:
         reports = [play(sub, payload["seed"], payload["turns"], mode) for mode in ("daily", "pressure")]
     except AssertionError as exc:
-        raise AppError("INTERNAL_ERROR", "冒烟测试失败：%s" % exc, [])
+        raise AppError(INTERNAL_ERROR, "冒烟测试失败：%s" % exc, [])
     finally:
         sub.close()
         shutil.rmtree(temp, ignore_errors=True)

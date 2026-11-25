@@ -62,7 +62,7 @@ ERROR_DESCRIPTIONS = {
     RUNTIME_UNSUPPORTED: "Python 版本过低或缺少 SQLite 等必要能力",
     DATA_DIR_UNAVAILABLE: "数据目录不可写；附尝试过的路径与建议",
     STORAGE_BUSY: "数据库被其他进程短暂占用；用同一 request_id 重试",
-    NO_MATCH: "开局约束在所选世界中无法满足；附冲突的约束与可放宽项",
+    NO_MATCH: "开局约束在所选世界中无法满足（附冲突的约束与可放宽项），或 world_query 命中多个世界（附 candidates）",
     MIGRATION_FAILED: "数据库迁移失败，已恢复迁移前的备份",
     INTERNAL_ERROR: "内部运行异常；附日志路径，状态未改变",
 }

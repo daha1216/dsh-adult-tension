@@ -316,6 +316,20 @@ class FullContextBudgetTest(unittest.TestCase):
             self.assertEqual(full["preferences"]["npc_gender_preference"], "mixed")
             self.assertLessEqual(CX.size_of(full), CX.FULL_LIMIT)
 
+    def test_dead_drop_goal_removed_and_brief_fit_trims_lists_cleanly(self):
+        self.assertFalse(hasattr(CX, "_drop_goal"))
+        sample = {
+            "known_facts": [{"id": "f%d" % i, "text": fill(30, i)} for i in range(6)],
+            "recent": [fill(30, i) for i in range(4)],
+            "keep": {"a": 1},
+        }
+        limit = 220
+        CX._fit(sample, limit, ("known_facts", "recent"))
+        self.assertLessEqual(CX.size_of(sample), limit)
+        self.assertEqual(sample["size_bytes"], CX.size_of({k: v for k, v in sample.items() if k != "size_bytes"}))
+        self.assertEqual(sample["keep"], {"a": 1})
+        self.assertEqual(sample["known_facts"], [])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -28,22 +28,22 @@ IDENTITY = S.Obj(
         "exposure_risk": F(S.Str(1, 120)),
         "hidden_mismatch": F(S.Str(1, 120)),
     },
-    name="身份",
+    name="身份卡",
 )
 
 PRESSURE_RESPONSES = S.Obj({level: F(S.Str(1, 120)) for level in ("low", "mid", "high", "breaking")}, name="压力反应四档")
 
 DECISION = S.Obj(
     {
-        "core_value": F(S.Str(1, 60), required=False),
-        "current_goal": F(S.Str(1, 80), required=False),
-        "pressure_responses": F(PRESSURE_RESPONSES, required=False),
-        "withdrawal": F(S.Str(1, 120), required=False),
-        "relationship_stance": F(S.Str(1, 80), required=False),
-        "contrast": F(S.Str(1, 80), required=False),
-        "prefers": F(_texts(), required=False),
-        "avoids": F(_texts(), required=False),
-        "never": F(_texts(), required=False),
+        "core_value": F(S.Str(1, 60), required=False, desc="supporting/major 必填"),
+        "current_goal": F(S.Str(1, 80), required=False, desc="supporting/major 必填"),
+        "pressure_responses": F(PRESSURE_RESPONSES, required=False, desc="major 必填"),
+        "withdrawal": F(S.Str(1, 120), required=False, desc="major 必填"),
+        "relationship_stance": F(S.Str(1, 80), required=False, desc="major 必填"),
+        "contrast": F(S.Str(1, 80), required=False, desc="major 必填"),
+        "prefers": F(_texts(), required=False, desc="major 必填"),
+        "avoids": F(_texts(), required=False, desc="major 必填"),
+        "never": F(_texts(), required=False, desc="major 必填"),
     },
     name="决策卡",
 )
@@ -78,7 +78,7 @@ INTIMACY_NUMERIC = ("desire_level", "self_control")
 INTIMACY_LISTS = ("attraction_sources", "likes", "dislikes", "preconditions", "boundaries")
 INTIMACY_TEXT = ("expression", "desired_position")
 
-VOICES = S.Obj({"surface": F(S.Str(1, 120)), "inner": F(S.Str(1, 120))}, name="语态")
+VOICES = S.Obj({"surface": F(S.Str(1, 120)), "inner": F(S.Str(1, 120))}, name="表里语态")
 SITUATION = S.Obj(
     {
         "trigger": F(S.Str(1, 120)),
@@ -98,14 +98,14 @@ TIER_ORDER = {tier: index for index, tier in enumerate(ST.TIERS)}
 def card_fields():
     """Optional card parts, shared by introduce_character and promote_character."""
     return {
-        "appearance": F(S.Nullable(S.Str(1, 120)), required=False, default=None),
-        "line": F(S.Nullable(S.Str(1, 120)), required=False, default=None),
-        "identity": F(S.Nullable(IDENTITY), required=False, default=None),
-        "decision": F(S.Nullable(DECISION), required=False, default=None),
-        "intimacy": F(S.Nullable(INTIMACY), required=False, default=None),
-        "voices": F(S.Nullable(VOICES), required=False, default=None),
-        "situation": F(S.Nullable(SITUATION), required=False, default=None),
-        "schedule": F(S.Nullable(SCHEDULE), required=False, default=None),
+        "appearance": F(S.Nullable(S.Str(1, 120)), required=False, default=None, desc="supporting/major 必填：外貌特征"),
+        "line": F(S.Nullable(S.Str(1, 120)), required=False, default=None, desc="background 必填：一句话人物勾勒"),
+        "identity": F(S.Nullable(IDENTITY), required=False, default=None, desc="supporting/major 必填：身份卡（仅创建一次，之后用 identity_update 逐项演化）"),
+        "decision": F(S.Nullable(DECISION), required=False, default=None, desc="按层级必填：supporting 填 core_value 与 current_goal；major 填完整 9 项"),
+        "intimacy": F(S.Nullable(INTIMACY), required=False, default=None, desc="major 必填：私密倾向卡（仅创建一次，之后用 intimacy_evidence 逐项演化）"),
+        "voices": F(S.Nullable(VOICES), required=False, default=None, desc="major 必填：表里语态（surface 与 inner）"),
+        "situation": F(S.Nullable(SITUATION), required=False, default=None, desc="major 必填：当下处境（trigger、pressure、exits）"),
+        "schedule": F(S.Nullable(SCHEDULE), required=False, default=None, desc="supporting/major 可选：离屏日程时段列表"),
     }
 
 

@@ -18,7 +18,7 @@
 | `acts_on` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–8 项） 或 null | 否，默认 `null` | 玩家行动作用到的 NPC（身体、意志、财物）；attempt 不作用于任何 NPC 时写 [] |
 | `operations` | 数组（操作对象（按 `op` 区分），0–40 项） | 是 | 操作列表（可以为空数组） |
 | `content_tags` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–12 项） | 是 | 本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags |
-| `intimate_participants` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–6 项） | 否，默认 `[]` | content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家） |
+| `intimate_participants` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–6 项） | 否，默认 `[]` | content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家时须填入 player） |
 | `summary` | 字符串，≤120 字 | 是 | 本回合客观摘要（第三人称，≤120 字） |
 | `open_action` | 字符串，≤80 字 | 是 | 回合停在哪里、谁在等谁，≤80 字 |
 | `quotes` | 数组（字符串，≤80 字，0–3 项） | 否，默认 `[]` | ≤3 条对后续有意义的原话，每条 ≤80 字 |
@@ -34,11 +34,11 @@
 | `move` | 角色移动到地点。玩家移动需要 result/attempt 模式并带 player_authorized；玩家换地点即换场景 |
 | `enter_scene` | 角色登场，加入当前场景（已在世界 standby_cast 中的待命角色直接 enter_scene 即可自动激活完整人物卡，勿误调 introduce_character） |
 | `exit_scene` | 角色离场；可写去向地点。玩家角色用 move |
-| `npc_response` | NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进关系阶段） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进关系阶段；必须写 true_intent） / genuine 真诚配合 |
+| `npc_response` | NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进亲近进程） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进亲近进程；必须写 true_intent） / genuine 真诚配合 |
 | `npc_action` | NPC 自主行动。significant: true 的重大行动（主动接近、揭发、交易、离开、表白、挑衅等）受冷却限制；依据事实必须在其信息集中 |
-| `npc_state` | 更新 NPC 的情绪与状况（醉意、睡眠、受伤、外出等）；minutes 表示多久后自动消退 |
+| `npc_state` | 更新 NPC 的情绪与状况（醉意、睡眠、受伤、外出等）；同 kind 状况会覆盖旧记录；minutes 表示多久后自动消退 |
 | `add_fact` | 记录一条事实。public 在场者自动知道；private 只有 known_by；inner 是内心，只属于一个 NPC 且永不传播。误信用 truth: false + believed_by。正文里新写出、之后要继承的细节都要用它记下 |
-| `relationship` | 有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；半推半就、身体失守或受制达成实质妥协应记为 partial）或后退。原因必填 |
+| `relationship` | 有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段或后退（阶段变化会自动同步到双向关系边）。涉及玩家时，前进需同回合玩家行动（result/attempt）+ 对方 partial/genuine 回应（半推半就、身体失守或受制达成实质妥协应记为 partial）；两名 NPC 之间前进需双方本回合均有行动或回应。原因必填 |
 | `event_create` | 创建事件（约定、截止、风声、机会、伏笔、概率事件）。due 与 in_minutes 二选一且必须晚于现在；chance 必须带 probability，到期由引擎掷骰；涉及玩家的承诺需要 player_authorized；dedupe_key 与未结束事件不能重复 |
 | `event_resolve` | 在到期前结束事件：约定、截止、机会用 fulfilled（兑现）；伏笔、风声用 surfaced（提前浮出）。概率事件只能由引擎到期掷骰 |
 | `event_cancel` | 因剧情取消未结束的事件（outcome: cancelled_by_story） |
@@ -48,13 +48,13 @@
 | `spread_rumor` | 传出一条走样的传闻：生成新的假事实（来源为传闻），原事实不变。不经渠道时沿关系边、双方在场；经世界里的走样渠道时可以传到没有关系边的人 |
 | `set_voice` | 切换 NPC 的表层/里层语态。玩家要求（player_request）优先；NPC 自主切入里层（npc_self）要写触发因素：alone 独处 / drunk 醉意 / breakdown 情绪崩溃 / exposed 被戳穿；revert 切回表层 |
 | `intimacy_evidence` | 为私密倾向卡的某一项记一条证据。同一项同一方向需要至少 2 条来自不同回合的证据才会改动（界线项的放宽 remove 需要 3 条）；数值项用 increase/decrease，列表项用 add/remove，文字项用 set |
-| `identity_update` | 逐项修改身份卡（资源、限制、义务用 add/remove；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换 |
-| `npc_update` | 修改 NPC 的公开身份、外貌、当前目标、对关系的态度或处境（不含身份卡与倾向卡） |
-| `introduce_character` | 新角色登场：正文里第一次点名的世界外新人物都要登场，只被提起、不在场的也算（present 写 false，location_id 写其所在地点；若已在世界 standby_cast 中，直接 enter_scene 激活，不用此操作）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason |
-| `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason |
+| `identity_update` | 逐项修改身份卡（资源、限制、义务用 add/remove，单条 ≤80 字、最多 8 项；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换 |
+| `npc_update` | 修改 NPC 的公开身份（≤30 字）、外貌、当前目标（≤80 字）、对关系的态度（仅 major，≤80 字）或处境（不含身份卡与私密倾向卡） |
+| `introduce_character` | 新角色登场：正文里第一次点名的世界外新人物都要登场，只被提起、不在场的也算（present 写 false，location_id 写其所在地点；若已在世界 standby_cast 中，直接 enter_scene 激活，不用此操作）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要角色不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason |
+| `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与私密倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason |
 | `leverage_set` | 登记把柄：一方开始拿捏另一方（把柄、债务、生计、私密控制器）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间仍可结合处境发生博弈或亲密互动 |
 | `leverage_release` | 解除把柄（底片销毁、债务结清、秘密公开或条件兑现等），原因必填 |
-| `offscreen_beat` | 离屏片段：不在场的重要 NPC 在这段时间里做了什么。只能写上下文 `offscreen_beat_candidates` 或时间推进要求的 NPC；子操作只能是这个 NPC 自己的行动、状态、移动，NPC 之间的关系与消息，以及不涉及玩家的事件与把柄 |
+| `offscreen_beat` | 离屏片段：不在场的重要角色在这段时间里做了什么。只能写上下文 requests.offscreen_beat_candidates 或时间推进要求的 NPC；因 advance_time 触发的离屏片段须排在 advance_time 之后；子操作只允许 npc_state、npc_action、move、add_fact、relationship、reveal_fact、spread_rumor、event_create、event_resolve、event_cancel、leverage_set、leverage_release，且须由该 NPC 发起或与其相关、不得牵涉玩家角色 |
 | `twist_accept` | 接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result/attempt 模式并带 player_authorized；同一游戏日最多接受一次 |
 
 ## `advance_time`
@@ -101,7 +101,7 @@
 
 ## `npc_response`
 
-NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进关系阶段） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进关系阶段；必须写 true_intent） / genuine 真诚配合
+NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进亲近进程） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进亲近进程；必须写 true_intent） / genuine 真诚配合
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -128,7 +128,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `npc_state`
 
-更新 NPC 的情绪与状况（醉意、睡眠、受伤、外出等）；minutes 表示多久后自动消退
+更新 NPC 的情绪与状况（醉意、睡眠、受伤、外出等）；同 kind 状况会覆盖旧记录；minutes 表示多久后自动消退
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -164,7 +164,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `relationship`
 
-有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；半推半就、身体失守或受制达成实质妥协应记为 partial）或后退。原因必填
+有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段或后退（阶段变化会自动同步到双向关系边）。涉及玩家时，前进需同回合玩家行动（result/attempt）+ 对方 partial/genuine 回应（半推半就、身体失守或受制达成实质妥协应记为 partial）；两名 NPC 之间前进需双方本回合均有行动或回应。原因必填
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -192,7 +192,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `due` | 对象（游戏时钟） | 否 |  |
 | `in_minutes` | 整数 1..576000 | 否 |  |
 | `probability` | 数值 (0, 1) 或 null | 否，默认 `null` |  |
-| `dedupe_key` | 字符串，≤80 字，点分的 ASCII 小写键，例如 lin_wan.secret.press | 是 |  |
+| `dedupe_key` | 字符串，≤80 字，点分的 ASCII 小写键（不含 #），例如 harbor.shift.handover | 是 |  |
 | `repeat` | 布尔 | 否，默认 `false` |  |
 
 #### `due` 的字段
@@ -304,7 +304,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `identity_update`
 
-逐项修改身份卡（资源、限制、义务用 add/remove；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换
+逐项修改身份卡（资源、限制、义务用 add/remove，单条 ≤80 字、最多 8 项；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -317,7 +317,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `npc_update`
 
-修改 NPC 的公开身份、外貌、当前目标、对关系的态度或处境（不含身份卡与倾向卡）
+修改 NPC 的公开身份（≤30 字）、外貌、当前目标（≤80 字）、对关系的态度（仅 major，≤80 字）或处境（不含身份卡与私密倾向卡）
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -329,7 +329,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `introduce_character`
 
-新角色登场：正文里第一次点名的世界外新人物都要登场，只被提起、不在场的也算（present 写 false，location_id 写其所在地点；若已在世界 standby_cast 中，直接 enter_scene 激活，不用此操作）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason
+新角色登场：正文里第一次点名的世界外新人物都要登场，只被提起、不在场的也算（present 写 false，location_id 写其所在地点；若已在世界 standby_cast 中，直接 enter_scene 激活，不用此操作）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要角色不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -337,22 +337,22 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
 | `name` | 字符串，≤12 字 | 是 |  |
 | `tier` | 枚举：`background` / `supporting` / `major` | 是 |  |
-| `age` | 整数 0..120 | 是 |  |
+| `age` | 整数 0..120 | 是 | 明确年龄；须 ≥ 18，小于 18 触发 SAFETY_BLOCK |
 | `gender` | 枚举：`female` / `male` / `nonbinary` | 是 |  |
-| `gender_reason` | 字符串，≤80 字 或 null | 否，默认 `null` |  |
-| `adult_context` | 字符串，≤80 字 | 是 |  |
+| `gender_reason` | 字符串，≤80 字 或 null | 否，默认 `null` | 性别不符配对偏好时的叙事理由（supporting/major 必填） |
+| `adult_context` | 字符串，≤80 字 | 是 | 一句话说明成年身份与处境 |
 | `public_role` | 字符串，≤30 字 | 是 |  |
-| `kin_of` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
-| `present` | 布尔 | 否，默认 `true` |  |
-| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
-| `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
-| `line` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
-| `identity` | 对象（身份） 或 null | 否，默认 `null` |  |
-| `decision` | 对象（决策卡） 或 null | 否，默认 `null` |  |
-| `intimacy` | 对象（私密倾向卡） 或 null | 否，默认 `null` |  |
-| `voices` | 对象（语态） 或 null | 否，默认 `null` |  |
-| `situation` | 对象（处境） 或 null | 否，默认 `null` |  |
-| `schedule` | 数组（对象，0–6 项） 或 null | 否，默认 `null` |  |
+| `kin_of` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` | 与已有重要角色同姓时填其亲属角色 ID |
+| `present` | 布尔 | 否，默认 `true` | 是否在当前场景；false 时须填 location_id |
+| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` | present 为 false 时必填其所在地点 ID |
+| `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` | supporting/major 必填：外貌特征 |
+| `line` | 字符串，≤120 字 或 null | 否，默认 `null` | background 必填：一句话人物勾勒 |
+| `identity` | 对象（身份卡） 或 null | 否，默认 `null` | supporting/major 必填：身份卡（仅创建一次，之后用 identity_update 逐项演化） |
+| `decision` | 对象（决策卡） 或 null | 否，默认 `null` | 按层级必填：supporting 填 core_value 与 current_goal；major 填完整 9 项 |
+| `intimacy` | 对象（私密倾向卡） 或 null | 否，默认 `null` | major 必填：私密倾向卡（仅创建一次，之后用 intimacy_evidence 逐项演化） |
+| `voices` | 对象（表里语态） 或 null | 否，默认 `null` | major 必填：表里语态（surface 与 inner） |
+| `situation` | 对象（处境） 或 null | 否，默认 `null` | major 必填：当下处境（trigger、pressure、exits） |
+| `schedule` | 数组（对象，0–6 项） 或 null | 否，默认 `null` | supporting/major 可选：离屏日程时段列表 |
 
 #### `identity` 的字段
 
@@ -369,15 +369,15 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
-| `core_value` | 字符串，≤60 字 | 否 |  |
-| `current_goal` | 字符串，≤80 字 | 否 |  |
-| `pressure_responses` | 对象（压力反应四档） | 否 |  |
-| `withdrawal` | 字符串，≤120 字 | 否 |  |
-| `relationship_stance` | 字符串，≤80 字 | 否 |  |
-| `contrast` | 字符串，≤80 字 | 否 |  |
-| `prefers` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
-| `avoids` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
-| `never` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
+| `core_value` | 字符串，≤60 字 | 否 | supporting/major 必填 |
+| `current_goal` | 字符串，≤80 字 | 否 | supporting/major 必填 |
+| `pressure_responses` | 对象（压力反应四档） | 否 | major 必填 |
+| `withdrawal` | 字符串，≤120 字 | 否 | major 必填 |
+| `relationship_stance` | 字符串，≤80 字 | 否 | major 必填 |
+| `contrast` | 字符串，≤80 字 | 否 | major 必填 |
+| `prefers` | 数组（字符串，≤80 字，1–8 项） | 否 | major 必填 |
+| `avoids` | 数组（字符串，≤80 字，1–8 项） | 否 | major 必填 |
+| `never` | 数组（字符串，≤80 字，1–8 项） | 否 | major 必填 |
 
 #### `intimacy` 的字段
 
@@ -436,7 +436,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `promote_character`
 
-把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason
+把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与私密倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -444,92 +444,16 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `character_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
 | `to_tier` | 枚举：`supporting` / `major` | 是 |  |
 | `gender_reason` | 字符串，≤80 字 或 null | 否，默认 `null` |  |
-| `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
-| `line` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
-| `identity` | 对象（身份） 或 null | 否，默认 `null` |  |
-| `decision` | 对象（决策卡） 或 null | 否，默认 `null` |  |
-| `intimacy` | 对象（私密倾向卡） 或 null | 否，默认 `null` |  |
-| `voices` | 对象（语态） 或 null | 否，默认 `null` |  |
-| `situation` | 对象（处境） 或 null | 否，默认 `null` |  |
-| `schedule` | 数组（对象，0–6 项） 或 null | 否，默认 `null` |  |
+| `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` | supporting/major 必填：外貌特征 |
+| `line` | 字符串，≤120 字 或 null | 否，默认 `null` | background 必填：一句话人物勾勒 |
+| `identity` | 对象（身份卡） 或 null | 否，默认 `null` | supporting/major 必填：身份卡（仅创建一次，之后用 identity_update 逐项演化） |
+| `decision` | 对象（决策卡） 或 null | 否，默认 `null` | 按层级必填：supporting 填 core_value 与 current_goal；major 填完整 9 项 |
+| `intimacy` | 对象（私密倾向卡） 或 null | 否，默认 `null` | major 必填：私密倾向卡（仅创建一次，之后用 intimacy_evidence 逐项演化） |
+| `voices` | 对象（表里语态） 或 null | 否，默认 `null` | major 必填：表里语态（surface 与 inner） |
+| `situation` | 对象（处境） 或 null | 否，默认 `null` | major 必填：当下处境（trigger、pressure、exits） |
+| `schedule` | 数组（对象，0–6 项） 或 null | 否，默认 `null` | supporting/major 可选：离屏日程时段列表 |
 
-#### `identity` 的字段
-
-| 字段 | 类型 | 必填 | 说明 |
-|---|---|---|---|
-| `authority` | 字符串，≤120 字 | 是 |  |
-| `resources` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
-| `limits` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
-| `obligations` | 数组（字符串，≤80 字，0–8 项） | 否，默认 `[]` |  |
-| `exposure_risk` | 字符串，≤120 字 | 是 |  |
-| `hidden_mismatch` | 字符串，≤120 字 | 是 |  |
-
-#### `decision` 的字段
-
-| 字段 | 类型 | 必填 | 说明 |
-|---|---|---|---|
-| `core_value` | 字符串，≤60 字 | 否 |  |
-| `current_goal` | 字符串，≤80 字 | 否 |  |
-| `pressure_responses` | 对象（压力反应四档） | 否 |  |
-| `withdrawal` | 字符串，≤120 字 | 否 |  |
-| `relationship_stance` | 字符串，≤80 字 | 否 |  |
-| `contrast` | 字符串，≤80 字 | 否 |  |
-| `prefers` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
-| `avoids` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
-| `never` | 数组（字符串，≤80 字，1–8 项） | 否 |  |
-
-#### `intimacy` 的字段
-
-| 字段 | 类型 | 必填 | 说明 |
-|---|---|---|---|
-| `desire_level` | 整数 0..5 | 是 |  |
-| `attraction_sources` | 数组（字符串，≤80 字，2–8 项） | 是 |  |
-| `likes` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
-| `dislikes` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
-| `preconditions` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
-| `boundaries` | 数组（字符串，≤80 字，1–8 项） | 是 |  |
-| `expression` | 字符串，≤80 字 | 是 |  |
-| `self_control` | 整数 0..5 | 是 |  |
-| `desired_position` | 字符串，≤40 字 | 是 |  |
-
-#### `voices` 的字段
-
-| 字段 | 类型 | 必填 | 说明 |
-|---|---|---|---|
-| `surface` | 字符串，≤120 字 | 是 |  |
-| `inner` | 字符串，≤120 字 | 是 |  |
-
-#### `situation` 的字段
-
-| 字段 | 类型 | 必填 | 说明 |
-|---|---|---|---|
-| `trigger` | 字符串，≤120 字 | 是 |  |
-| `pressure` | 字符串，≤120 字 | 是 |  |
-| `exits` | 数组（对象，2–4 项） | 是 |  |
-
-#### `schedule[]` 的字段
-
-| 字段 | 类型 | 必填 | 说明 |
-|---|---|---|---|
-| `from` | 整数 0..1439 | 是 |  |
-| `to` | 整数 0..1439 | 是 |  |
-| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-
-#### `pressure_responses` 的字段
-
-| 字段 | 类型 | 必填 | 说明 |
-|---|---|---|---|
-| `low` | 字符串，≤120 字 | 是 |  |
-| `mid` | 字符串，≤120 字 | 是 |  |
-| `high` | 字符串，≤120 字 | 是 |  |
-| `breaking` | 字符串，≤120 字 | 是 |  |
-
-#### `exits[]` 的字段
-
-| 字段 | 类型 | 必填 | 说明 |
-|---|---|---|---|
-| `option` | 字符串，≤80 字 | 是 |  |
-| `cost` | 字符串，≤120 字 | 是 |  |
+`identity`、`decision`、`intimacy`、`voices`、`situation`、`schedule`（含 `pressure_responses`、`exits[]`）的子字段见上文 [`introduce_character`](#introduce_character)。
 
 不能出现在 `roll` 的分支里。
 
@@ -540,11 +464,11 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`leverage_set` | 是 |  |
-| `holder` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-| `subject` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-| `basis_fact_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
-| `basis_text` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
-| `origin` | 字符串，≤60 字 | 是 |  |
+| `holder` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 | 持有把柄的一方角色 ID（为 player 时须 result/attempt + player_authorized） |
+| `subject` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 | 受制的一方角色 ID（不能与 holder 相同） |
+| `basis_fact_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` | 与 basis_text 二选一：已有事实 ID（holder 须知晓该事实） |
+| `basis_text` | 字符串，≤120 字 或 null | 否，默认 `null` | 与 basis_fact_id 二选一：新登记的把柄依据（记为仅 holder 知晓的私密事实） |
+| `origin` | 字符串，≤60 字 | 是 | 把柄由来简述（如债务、秘密、生计、私密控制器等） |
 
 ## `leverage_release`
 
@@ -558,7 +482,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `offscreen_beat`
 
-离屏片段：不在场的重要 NPC 在这段时间里做了什么。只能写上下文 `offscreen_beat_candidates` 或时间推进要求的 NPC；子操作只能是这个 NPC 自己的行动、状态、移动，NPC 之间的关系与消息，以及不涉及玩家的事件与把柄
+离屏片段：不在场的重要角色在这段时间里做了什么。只能写上下文 requests.offscreen_beat_candidates 或时间推进要求的 NPC；因 advance_time 触发的离屏片段须排在 advance_time 之后；子操作只允许 npc_state、npc_action、move、add_fact、relationship、reveal_fact、spread_rumor、event_create、event_resolve、event_cancel、leverage_set、leverage_release，且须由该 NPC 发起或与其相关、不得牵涉玩家角色
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|

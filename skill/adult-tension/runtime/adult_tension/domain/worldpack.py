@@ -2,7 +2,7 @@
 
 validate_world() checks one compiled pack (or a custom world) and returns the
 normalized pack plus a list of problems. Each problem names the JSON path, the
-reason and a hint. verify_packs() adds the cross-pack checks.
+reason and a hint. cross_checks() adds the cross-pack checks.
 """
 
 import re
@@ -10,7 +10,7 @@ import re
 from .. import schema as S
 from ..errors import CONTENT_ERROR, detail
 from . import structure as ST
-from .text import FEMALE_ADDRESS, MALE_ADDRESS, NEUTRAL_ADDRESS, address_gender, gendered_pronoun_positions, placeholders, stray_braces
+from .text import ATTRS, FEMALE_ADDRESS, MALE_ADDRESS, NEUTRAL_ADDRESS, address_gender, gendered_pronoun_positions, placeholders, stray_braces
 
 F = S.Field
 
@@ -110,8 +110,8 @@ TEMPLATE = S.Obj(
             S.Obj(
                 {
                     "attraction_sources": F(S.List(_str(1, 80), min_items=2), desc="被什么吸引"),
-                    "likes": F(_texts(1, 60)),
-                    "dislikes": F(_texts(1, 60)),
+                    "likes": F(_texts(1, 60), desc="喜欢的亲近方式或细节"),
+                    "dislikes": F(_texts(1, 60), desc="反感的亲近方式或举动"),
                     "preconditions": F(_texts(1, 80), desc="靠近之前需要的条件"),
                     "boundaries": F(_texts(1, 80), desc="不越过的线"),
                     "expression": F(_str(1, 80), desc="好感怎么表现出来"),
@@ -417,6 +417,7 @@ def walk_texts(pack):
         "location_id",
         "player_positions",
         "identity_ids",
+        "order",
     }
 
     found = []
@@ -449,14 +450,55 @@ def walk_texts(pack):
     return found
 
 
+_TEXT_CHARS_SKIP = {
+    "id",
+    "tags",
+    "content_tags",
+    "gender",
+    "source",
+    "flags",
+    "holder",
+    "subject",
+    "privacy",
+    "fidelity",
+    "function",
+    "kind",
+    "category",
+    "power_structure",
+    "social_position",
+    "slot",
+    "slots",
+    "stage",
+    "a",
+    "b",
+    "requires",
+    "witnesses",
+    "player_positions",
+    "clock_style",
+    "default_person",
+    "order",
+    "status",
+    "extends",
+    "notes",
+    "forbidden_terms",
+}
+
+
 def text_chars(node):
-    """Characters of text in an item, IDs and tags left out."""
+    """Characters of text in an item, IDs, tags and enums left out."""
     if isinstance(node, str):
         return len(node)
     if isinstance(node, list):
         return sum(text_chars(v) for v in node)
     if isinstance(node, dict):
-        return sum(text_chars(v) for k, v in node.items() if k not in ("id", "tags") and not k.endswith(("_id", "_ids")))
+        total = 0
+        for k, v in node.items():
+            if k in _TEXT_CHARS_SKIP or k.endswith(("_id", "_ids")):
+                continue
+            if k == "exits" and isinstance(v, list) and v and isinstance(v[0], str):
+                continue
+            total += text_chars(v)
+        return total
     return 0
 
 
@@ -921,8 +963,6 @@ class _Checker:
         return self._texts
 
     def text_checks(self):
-        p = self.pack
-        template_gender = {t["id"]: t["gender"] for t in p["character_templates"]}
         seen_sentences = {}
         for path, text in self.texts():
             stripped = text.strip()
@@ -931,8 +971,8 @@ class _Checker:
                 self.add(path, "占位式内容：%r" % text, "写成真正可以进入回合的内容")
             if "{" in text:
                 self._placeholder_checks(path, text)
-            if gendered_pronoun_positions(text) and self._pronoun_checked(path, template_gender):
-                self.add(path, "可变性别的文本里写死了“他/她”：%s" % text[:40], "用 {npc.ta} 或 {槽位.ta} 代替，或直接写名字")
+            if gendered_pronoun_positions(text) and self._pronoun_checked(path):
+                self.add(path, "可变性别的文本里写死了“他/她”：%s" % text[:40], self._pronoun_hint(path))
             if path.endswith(".pattern"):
                 continue
             for sentence in SENTENCE_SPLIT.split(text):
@@ -941,6 +981,21 @@ class _Checker:
                     if sentence in seen_sentences and seen_sentences[sentence] != path:
                         self.add(path, "与 %s 重复整句：%s" % (seen_sentences[sentence], sentence[:30]), "同一包内不写重复的句子")
                     seen_sentences.setdefault(sentence, path)
+
+    def _pronoun_hint(self, path):
+        allowed = self._scopes_for(path)
+        slots = sorted(allowed - {"npc", "player"})
+        if "npc" in allowed:
+            if slots:
+                return "用 {npc.ta} 或 {槽位.ta} 代替，或改用身份称呼"
+            return "用 {npc.ta}（或 {player.ta}）代替，或改用身份称呼"
+        if slots:
+            return "用 {槽位.ta}（可用：%s）代替，或改用身份称呼" % "、".join(sorted(allowed))
+        if "player" in allowed:
+            if path.startswith("$.twists["):
+                return "这里可用 {player.ta}；若指人物模板，先写进 requires 再用 {模板ID.ta}，否则改用身份称呼"
+            return "这里只能用 {player.ta}（不支持 {npc.ta}），或改用身份称呼/泛称"
+        return "这里不支持占位符，请改用身份称呼、职务或“对方”等中性写法"
 
     def _placeholder_checks(self, path, text):
         """Only texts with a brace can hold a placeholder or a stray one."""
@@ -960,7 +1015,7 @@ class _Checker:
                 else:
                     hint = "这里可用的作用域：%s" % ("、".join(sorted(allowed)) or "无")
                 self.add(path, "占位 {%s.%s} 在这里无法解析" % (scope, attr), hint)
-            elif attr not in ("name", "ta", "family", "given", "call", "role", "title", "称呼"):
+            elif attr not in ATTRS:
                 self.add(path, "未知占位属性：%s" % attr, "可用：name、ta、family、given、call、role、title")
 
     def _scopes_for(self, path):
@@ -995,7 +1050,7 @@ class _Checker:
             return {"player"}
         return set()
 
-    def _pronoun_checked(self, path, template_gender):
+    def _pronoun_checked(self, path):
         match = ITEM_PATH_RE.match(path)
         if match and match.group(1) in ("character_templates", "background_cast"):
             item = self.pack[match.group(1)][int(match.group(2))]
@@ -1068,6 +1123,8 @@ def _validate_world(raw, custom, tag_ids):
         custom = pack["custom"]
     if custom and not pack["custom"]:
         problems.append(_problem("$.custom", "自定义世界必须带 custom: true", None))
+    elif not custom and pack["custom"]:
+        problems.append(_problem("$.custom", "正式世界包不能带 custom: true", "去掉 custom 字段或设为 false"))
     checker = _Checker(pack, custom)
     checker.counts()
     checker.uniqueness()
@@ -1112,6 +1169,11 @@ def near_duplicates(entries, threshold=NEAR_DUP_THRESHOLD, min_len=NEAR_DUP_MIN_
         for i in candidates:
             a = grams[i][2]
             score = len(a & b) / len(a | b)
+            # Exclude exact-equal strings from cross-pack near-duplicate checks:
+            # intra-pack duplicate sentences are caught by _Checker.text_checks(),
+            # while across the 211 released packs short shared idioms (len >= 16,
+            # e.g. exit cost phrasing in cellist_hall_tailpin_lock_jam vs
+            # convenience_clerk_cooler_tail_jam) can legitimately coincide.
             if score >= threshold and grams[i][1] != grams[j][1]:
                 pairs.append((i, j, score))
     pairs.sort()
@@ -1161,7 +1223,7 @@ def world_stats(pack):
                 "twists",
             )
         },
-        "names": {key: len(value) for key, value in pack["name_pools"].items()},
+        "names": {key: len(value) for key, value in pack["name_pools"].items() if isinstance(value, list)},
         "power_structures": dict(Counter(c["power_structure"] for c in pack["cast_combos"])),
         "twist_categories": dict(Counter(t["category"] for t in pack["twists"])),
         "hook_kinds": dict(Counter(h["kind"] for h in pack["hooks"])),

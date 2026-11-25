@@ -7,7 +7,7 @@
 - 输入是一个 JSON 对象，来自 `--input-file`（UTF-8，可带 BOM）。需要输入的命令在没有 `--input-file` 且 stdin 不是终端时读取 stdin；可选输入只从 `--input-file` 读取（`--input-file -` 表示 stdin）。
 - 任何输入都可以带 `"encoding_check": "汉字"`。值不对说明中文在传入途中被终端改坏（例如 PowerShell 5.1 的管道把中文变成 `?`），命令被拒（`INVALID_INPUT`，路径 `$.encoding_check`），改用 `--input-file` 传 UTF-8 文件。这个字段在命令处理之前去掉。
 - 输出是一个信封 `{"ok", "data", "error"}`，以 UTF-8 字节写到 stdout。成功与失败都附带 `next_request_id`（成功在 `data` 里，失败在 `error` 里），下一次写操作直接用它。
-- 全局参数：`--json`（输出 JSON，始终如此）、`--pretty`（缩进输出）、`--debug`、`--input-file PATH`、`--data-dir PATH`。
+- 全局参数：`--json`（输出 JSON，默认行为，保留兼容）、`--pretty`（缩进输出）、`--debug`、`--input-file PATH`、`--data-dir PATH`。
 - 写操作都带 `request_id`；会话内的写操作还带 `session_id` 与 `expected_revision`。同一 `request_id` + 同一输入重放时返回原响应并标记 `replayed: true`。
 - 开局、读档、导入（`new-game`、`load-slot`、`import-save`）与带 `"depth": "full"` 的 `get-context` 另外返回 `commit_template`：会话号已填好的一次记录，`turns` 内含单回合骨架（在场的人和最常用的操作），每个攒下的回合照它写一项；尖括号是要写的内容，`a|b` 表示选一个，用不上的操作删掉。带 `preview_time` 的 `get-context` 另外返回 `skip_template`：快进这一回合的记录，`advance_time` 与每条必需的 `offscreen_beat` 已排好（攒下的回合要先记录，再预览）。
 - 开发开关（环境变量，由测试环境设置，玩家不需要）：`ADULT_TENSION_HOME` 指定数据目录；`ADULT_TENSION_INCLUDE_DRAFTS=1` 让未发布的世界参与开局与世界列表；`ADULT_TENSION_TRACE=<文件>` 把每次调用（参数、输入、信封、耗时）追加到该文件，供端到端评测采集。
@@ -64,7 +64,7 @@
 | `acts_on` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–8 项） 或 null | 否，默认 `null` | 玩家行动作用到的 NPC（身体、意志、财物）；attempt 不作用于任何 NPC 时写 [] |
 | `operations` | 数组（操作对象（按 `op` 区分），0–40 项） | 是 | 操作列表（可以为空数组） |
 | `content_tags` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–12 项） | 是 | 本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags |
-| `intimate_participants` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–6 项） | 否，默认 `[]` | content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家） |
+| `intimate_participants` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–6 项） | 否，默认 `[]` | content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家时须填入 player） |
 | `summary` | 字符串，≤120 字 | 是 | 本回合客观摘要（第三人称，≤120 字） |
 | `open_action` | 字符串，≤80 字 | 是 | 回合停在哪里、谁在等谁，≤80 字 |
 | `quotes` | 数组（字符串，≤80 字，0–3 项） | 否，默认 `[]` | ≤3 条对后续有意义的原话，每条 ≤80 字 |
@@ -96,8 +96,8 @@
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
-| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d 或 null | 否，默认 `null` | 导出这个会话的当前状态 |
-| `slot` | 字符串，≤60 字 或 null | 否，默认 `null` | 或导出这个存档 |
+| `session_id` | 字符串，≤40 字，会话 ID，形如 s_1a2b3c4d 或 null | 否，默认 `null` | 导出这个会话的当前状态（与 slot 二选一，必填其一） |
+| `slot` | 字符串，≤60 字 或 null | 否，默认 `null` | 导出这个存档（与 session_id 二选一，必填其一） |
 | `path` | 字符串，≤400 字 或 null | 否，默认 `null` | 玩家明确给出的绝对路径（.json）；不给时写到数据目录的 exports/ |
 | `overwrite` | 布尔 | 否，默认 `false` |  |
 
@@ -111,6 +111,8 @@
 | `want_twist` | 布尔 | 否，默认 `false` | 玩家说“来点转折”时为 true：返回 2–3 个类别不同的转折候选 |
 
 #### `preview_time` 的字段
+
+与 advance_time 相同：minutes / until / days 三选一
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -130,8 +132,8 @@
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
-| `path` | 字符串，≤400 字 或 null | 否，默认 `null` | 导出文件的路径 |
-| `data` | 导出的 JSON 对象 或 null | 否，默认 `null` | 或玩家粘贴的导出内容（整个 JSON 对象） |
+| `path` | 字符串，≤400 字 或 null | 否，默认 `null` | 导出文件的路径（与 data 二选一，必填其一） |
+| `data` | 导出的 JSON 对象 或 null | 否，默认 `null` | 玩家粘贴的导出内容（整个 JSON 对象；与 path 二选一，必填其一） |
 | `slot` | 字符串，≤60 字 或 null | 否，默认 `null` | 同时写入这个存档槽（可省略） |
 | `overwrite` | 布尔 | 否，默认 `false` | 存档名已被占用时，玩家确认覆盖 |
 
@@ -215,8 +217,8 @@
 | `assistant` | 布尔 | 否 |  |
 | `offscreen_simulation` | 布尔 | 否 |  |
 | `person` | 枚举：`second` / `first` / `third` | 否 |  |
-| `pace` | 枚举：`slow` / `standard` / `direct` | 否 | 节奏：slow 慢热 / standard 标准 / direct 直接；只影响写法 |
-| `explicitness` | 枚举：`subtle` / `standard` / `explicit` | 否 | 尺度：subtle 含蓄 / standard 标准 / explicit 直白；只影响写法 |
+| `pace` | 枚举：`slow` / `standard` / `direct` | 否 | 节奏：slow 慢热 / standard 标准 / direct 直接；只影响写法，不影响规则 |
+| `explicitness` | 枚举：`subtle` / `standard` / `explicit` | 否 | 尺度：subtle 含蓄 / standard 标准 / explicit 直白；只影响写法，不影响规则 |
 
 ### `save-slot`
 
@@ -246,9 +248,9 @@
 | `request_id` | 字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id | 是 |  |
 | `expected_revision` | 整数 1..1000000000 | 是 | 上一次返回的 revision |
 | `action` | 枚举：`add` / `remove` | 是 | add 登记 / remove 撤销 |
-| `text` | 字符串，≤80 字 或 null | 否，默认 `null` | 玩家的原话，例如“不要涉及怀孕” |
+| `text` | 字符串，≤80 字 或 null | 否，默认 `null` | 玩家的原话，例如“不要涉及怀孕”（action 为 add 时必填；remove 时与 boundary_id 至少填一个） |
 | `tags` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–6 项） | 否，默认 `[]` | 映射到的内容标签；映射不上就留空（记为 custom，由你自己遵守） |
-| `boundary_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` | 撤销时可用边界 ID |
+| `boundary_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` | 撤销时可用边界 ID（action 为 remove 时与 text 至少填一个） |
 
 ### `set-preferences`
 
@@ -312,7 +314,7 @@
 | `world` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
 | `stats` | 布尔 | 否，默认 `false` |  |
 | `skip_diversity` | 布尔 | 否，默认 `false` |  |
-| `file` | 字符串，≤400 字 或 null | 否，默认 `null` | 只校验这一个世界包文件（写作中的源文件或 new-world 骨架） |
+| `file` | 字符串，≤400 字 或 null | 否，默认 `null` | 只校验这一个世界包文件（写作中的源文件或 tools/new_world.py 骨架） |
 
 ## 错误码
 
@@ -330,7 +332,7 @@
 | `RUNTIME_UNSUPPORTED` | Python 版本过低或缺少 SQLite 等必要能力 | 20 |
 | `DATA_DIR_UNAVAILABLE` | 数据目录不可写；附尝试过的路径与建议 | 20 |
 | `STORAGE_BUSY` | 数据库被其他进程短暂占用；用同一 request_id 重试 | 20 |
-| `NO_MATCH` | 开局约束在所选世界中无法满足；附冲突的约束与可放宽项 | 10 |
+| `NO_MATCH` | 开局约束在所选世界中无法满足（附冲突的约束与可放宽项），或 world_query 命中多个世界（附 candidates） | 10 |
 | `MIGRATION_FAILED` | 数据库迁移失败，已恢复迁移前的备份 | 20 |
 | `INTERNAL_ERROR` | 内部运行异常；附日志路径，状态未改变 | 30 |
 

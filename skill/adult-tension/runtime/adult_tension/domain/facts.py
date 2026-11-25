@@ -103,7 +103,7 @@ class DictSource(FactsAPI):
     def player_ranked(self, player, present_ids, present_names, recent_turn, limit=None, exclude=()):
         found = [f for f in self.facts.values() if knows(f, player) and f["id"] not in exclude]
         found.sort(key=rank_key(present_ids, present_names, recent_turn))
-        return found[:limit] if limit else found
+        return found[:limit] if limit is not None else found
 
 
 def of(state):
@@ -172,7 +172,7 @@ class FactView(FactsAPI):
         found = self.source.player_ranked(player, present_ids, present_names, recent_turn, wanted, tuple(sorted(skip)))
         found += [f for fid, f in self.changed.items() if knows(f, player) and fid not in exclude]
         found.sort(key=rank_key(present_ids, present_names, recent_turn))
-        return found[:limit] if limit else found
+        return found[:limit] if limit is not None else found
 
     def changed_facts(self):
         return [self.changed[fid] for fid in sorted(self.changed, key=lambda i: int(i[1:]))]

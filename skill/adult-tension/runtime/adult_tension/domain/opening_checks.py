@@ -7,15 +7,17 @@ the CONTENT_BIBLE.md section 4 metrics.
 """
 
 from collections import Counter
+import math
 
 from ..errors import AppError
 from . import invariants
 from . import opening
 from . import rng
 from . import structure as ST
+from . import text as TX
 
 
-def check_opening(state, pack):
+def check_opening(state, pack, opening_payload=None):
     """Problems (strings) with one generated opening."""
     problems = []
     world_ids = {"player"}
@@ -39,9 +41,13 @@ def check_opening(state, pack):
     for key, edge in state["relationships"].items():
         if not edge["history"] or not edge["history"][0]["reason"]:
             problems.append("关系 %s 缺少原因" % key)
-    families = [c["family"] for c in state["characters"].values() if c["tier"] == "major" and c["family"]]
+    majors = [c for c in state["characters"].values() if c["tier"] == "major"]
+    families = [c["family"] for c in majors if c.get("family")]
     if len(families) != len(set(families)):
-        problems.append("同一局的重要人物重名同姓")
+        problems.append("同一局的重要人物同姓")
+    names = [c["name"] for c in majors if c.get("name")]
+    if len(names) != len(set(names)):
+        problems.append("同一局的重要人物重名")
     events = list(state["events"].values())
     if state["mode"] == "pressure":
         tiers = {e["tier"] for e in events}
@@ -52,11 +58,17 @@ def check_opening(state, pack):
     else:
         if any(e["kind"] in ("deadline", "chance") for e in events):
             problems.append("日常模式开局出现了倒计时或概率事件")
-        if events:
-            problems.append("日常模式开局不应有到期事件")
-    for text in _strings(state):
-        if "{" in text and "}" in text:
-            problems.append("未渲染的占位：%s" % text[:40])
+        elif events:
+            problems.append("日常模式开局不应有预设事件")
+    sources = (state, opening_payload) if opening_payload is not None else (state,)
+    found_brace = False
+    for source in sources:
+        for value in _strings(source):
+            if TX.PLACEHOLDER_RE.search(value) or TX.ANY_BRACE_RE.search(value):
+                problems.append("未渲染的占位：%s" % value[:40])
+                found_brace = True
+                break
+        if found_brace:
             break
     problems.extend(p["reason"] for p in invariants.check(state))
     return problems
@@ -83,6 +95,8 @@ def seed_stream(base):
 
 def diversity(pack, mode, base=1, count=20):
     """Simulate `count` consecutive random openings for one world and mode."""
+    if type(count) is not int or count <= 0:
+        raise ValueError("count 必须是正整数：%r" % (count,))
     conditions = opening.normalize_conditions({"mode": mode, "locks": {"world_id": pack["id"]}})
     history = []
     stream = seed_stream(base * 1000 + (1 if mode == "daily" else 2))
@@ -101,10 +115,12 @@ def diversity(pack, mode, base=1, count=20):
     hooks = Counter(r["hook_kind"] for r in results)
     approach_share = hooks.get("approach", 0) / float(count)
     min_structure = min(structures.get(s, 0) for s in ST.POWER_STRUCTURES) / float(count)
+    sig_need = max(1, math.ceil(0.6 * count))
+    id_need = min(3, count)
     checks = {
-        "signatures": {"value": len(signatures), "need": ">= 12", "pass": len(signatures) >= 12},
+        "signatures": {"value": len(signatures), "need": ">= %d" % sig_need, "pass": len(signatures) >= sig_need},
         "min_power_structure_share": {"value": round(min_structure, 3), "need": ">= 0.15", "pass": min_structure >= 0.15},
-        "identities": {"value": len(identities), "need": ">= 3", "pass": len(identities) >= 3},
+        "identities": {"value": len(identities), "need": ">= %d" % id_need, "pass": len(identities) >= id_need},
         "approach_hook_share": {"value": round(approach_share, 3), "need": ">= 0.60", "pass": approach_share >= 0.60},
     }
     return {
@@ -132,12 +148,12 @@ def fixed_seed_openings(pack, seeds=range(1, 11)):
         for seed in seeds:
             conditions = opening.normalize_conditions({"mode": mode, "locks": {"world_id": pack["id"]}})
             try:
-                state, _opening = opening.build(pack, seed, conditions, "check")
+                state, payload = opening.build(pack, seed, conditions, "check")
             except AppError as err:
                 failures.append({"mode": mode, "seed": seed, "problems": [err.message]})
                 continue
             count += 1
-            problems = check_opening(state, pack)
+            problems = check_opening(state, pack, payload)
             if problems:
                 failures.append({"mode": mode, "seed": seed, "problems": problems})
     return count, failures

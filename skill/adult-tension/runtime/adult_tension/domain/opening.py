@@ -230,10 +230,9 @@ def plan_candidates(pack, mode, conditions):
     conditions = with_player_gender(pack, conditions)
     excluded = set(conditions["excludes"]["content_tags"])
     locks = conditions["locks"]
-    preference = npc_preference(conditions["npc_gender_preference"], conditions["player"].get("gender"))
     reasons = []
     if _excluded(pack["content_tags"], excluded):
-        return [], ["世界 %s 带有被排除的标签：%s" % (pack["id"], "、".join(sorted(set(pack["content_tags"]) & excluded)))]
+        return [], ["世界 %s 带有被排除的标签：%s" % (pack["title"], "、".join(sorted(set(pack["content_tags"]) & excluded)))]
     excluded_locations = set(conditions["excludes"]["location_ids"])
     locations = [
         loc["id"]
@@ -247,7 +246,14 @@ def plan_candidates(pack, mode, conditions):
     identities = _identity_candidates(pack, conditions)
     custom_identity = None if (identities or locks.get("identity_id")) else _custom_identity(conditions)
     if not identities and custom_identity is None:
-        reasons.append("没有符合玩家设定（身份、性别、年龄）的玩家身份")
+        reasons.append("没有符合玩家设定（身份、性别、社会位置）的玩家身份")
+    effective_gender = conditions["player"].get("gender")
+    if not effective_gender and identities:
+        id_genders = {i["gender"] for i in identities}
+        if len(id_genders) == 1:
+            only = next(iter(id_genders))
+            effective_gender = only if only != "any" else "male"
+    preference = npc_preference(conditions["npc_gender_preference"], effective_gender)
     combos = []
     for combo in sorted(pack["cast_combos"], key=lambda c: c["id"]):
         if locks.get("combo_id") and combo["id"] != locks["combo_id"]:
@@ -386,8 +392,8 @@ def no_match(reasons, world_id, conditions):
         relax.append("减少排除条件")
     if conditions["npc_gender_preference"] not in ("any", "mixed"):
         relax.append("把配对偏好改成“不限”")
-    if conditions["player"]:
-        relax.append("放宽玩家设定（身份、年龄、性别）")
+    if any(conditions["player"].get(k) for k in ("identity_hint", "gender", "social_position")):
+        relax.append("放宽玩家设定（身份、性别、社会位置）")
     return AppError(
         NO_MATCH,
         "开局条件在%s中无法同时满足" % (("世界 " + world_id) if world_id else "现有世界"),
@@ -741,6 +747,7 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
     events = {}
     leverage = {}
     pressure_block = None
+    pr = None
     if mode == "pressure":
         pr = _render_tree(item, scopes)
         pressure_block = {
@@ -780,7 +787,7 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
             }
         if pr["leverage"]:
             lv = pr["leverage"]
-            basis = add_fact("leverage.%s" % pr["id"], render(lv["basis"], scopes), [lv["holder"], lv["subject"]])
+            basis = add_fact("leverage.%s" % pr["id"], lv["basis"], [lv["holder"], lv["subject"]])
             leverage["lv1"] = {
                 "id": "lv1",
                 "holder": lv["holder"],
@@ -911,7 +918,7 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
             "choice": pressure_block["choice"],
             "immediate": events["e1"]["text"],
             "near": {"text": events["e2"]["text"], "due_label": CL.label(events["e2"]["due"], pack.get("clock_style", "hm"))},
-            "foreshadow": render(item["far"]["trigger"], scopes),
+            "foreshadow": pr["far"]["trigger"],
             "location_modifier": pressure_block["location_modifier"],
         }
     opening["footer"] = "【时间】%s｜【地点】%s｜回合：1｜种子：%d" % (CL.label(now, pack.get("clock_style", "hm")), location["name"], seed)

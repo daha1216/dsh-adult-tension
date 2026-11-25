@@ -367,6 +367,39 @@ class ExportImportTest(unittest.TestCase):
             self.assertEqual(backed_up["session"]["state"]["schema_version"], 1)
             self.assertEqual(transfer.checksum(backed_up), backed_up["checksum"])
 
+    def test_transfer_oserror_handling_temp_cleanup_and_path_hint(self):
+        from unittest import mock
+
+        with self.assertRaises(AppError) as caught:
+            self.export(path="relative.json")
+        hint = caught.exception.details[0]["hint"]
+        self.assertIn("D:\\备份\\港口.json", hint)
+        self.assertNotIn("D:\\\\备份\\\\港口.json", hint)
+
+        target = os.path.join(self.tmp, "fail_replace.json")
+        with mock.patch("adult_tension.application.transfer.os.replace", side_effect=PermissionError(13, "denied")):
+            with self.assertRaises(AppError) as caught:
+                transfer.write_file(target, {"ok": True})
+        self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.path"))
+        self.assertFalse([n for n in os.listdir(self.tmp) if ".tmp-" in n])
+
+        with mock.patch("builtins.open", side_effect=OSError(28, "No space left on device")):
+            with self.assertRaises(AppError) as caught:
+                transfer.write_file(target, {"ok": True})
+        self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.path"))
+
+        unreadable = os.path.join(self.tmp, "unreadable.json")
+        with open(unreadable, "w", encoding="utf-8") as handle:
+            handle.write("{}")
+        with mock.patch("builtins.open", side_effect=PermissionError(13, "denied")):
+            with self.assertRaises(AppError) as caught:
+                transfer.read_source({"path": unreadable, "data": None})
+        self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.path"))
+        with mock.patch("adult_tension.application.transfer.os.path.getsize", side_effect=OSError(5, "io error")):
+            with self.assertRaises(AppError) as caught:
+                transfer.read_source({"path": unreadable, "data": None})
+        self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.path"))
+
 
 if __name__ == "__main__":
     unittest.main()

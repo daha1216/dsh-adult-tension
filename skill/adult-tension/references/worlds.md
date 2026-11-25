@@ -2,7 +2,7 @@
 
 # 世界列表
 
-内容版本：`2026.11.26`。只有 `released` 的世界参与随机开局、出现在 `list-worlds` 里。玩家问某类题材时用 `list-worlds` 带 `query`，点名开局用 `new-game` 的 `world_query`，都按标题、时代、地方和完整介绍匹配。“有超自然的”“不要灾难的”这类按内容标签浏览：`list-worlds` 带 `tags` / `exclude_tags`。
+内容版本：`2026.11.26.1`。只有 `released` 的世界参与随机开局、出现在 `list-worlds` 里。玩家问某类题材时用 `list-worlds` 带 `query`，点名开局用 `new-game` 的 `world_query`，都按标题、时代、地方和完整介绍匹配。“有超自然的”“不要灾难的”这类按内容标签浏览：`list-worlds` 带 `tags` / `exclude_tags`。
 
 | 内容标签 | ID | 已发布世界数 |
 |---|---|---|
@@ -29,9 +29,9 @@
 |---|---|---|---|---|
 | 魔石灯下的远征队 | `abyss_collapsed_refuge` | 迷宫都市第七层，一处外廊塌了一半的古代安全区。 | 日常、压力 | released |
 | 九十九层的吊篮 | `abyss_dungeon_exiled_saintess` | 深渊九十九层的钟乳石大溶洞终年不见天日，只有连接上层矿道的悬空吊篮定时升降。 | 日常、压力 | released |
-| 受审的高傲女骑士 | `abyssal_dungeon_knightess_crest` | 低魔黑暗帝国北境的黑曜石要塞。 | 日常、压力 | released |
+| 受审的高傲女骑士 | `abyssal_dungeon_knightess_crest` | 低魔黑暗帝国北境的黑曜石要塞里，圣殿女骑士长兵败受审，锁骨上烙着一道每逢子夜就灼痛的深渊魔纹，押在地下三层的断罪地牢；主审是曾与骑士长并肩七年的前廷大审判官。 | 日常、压力 | released |
 | 不肯签字的女飞官 | `aerospace_simulator_pod_gauge_release` | 商业航天测控基地的总装大厅里，悬空的全动模拟飞行球舱日夜运转。 | 日常、压力 | released |
-| 旧校地窖女会长 | `afterschool_cellar_president_confession` | 2002 年秋末，私立圣罗兰大学的百年西洋旧校舍即将拆除改建。 | 日常、压力 | released |
+| 旧校地窖女会长 | `afterschool_cellar_president_confession` | 2002年秋末，私立圣罗兰大学的百年西洋旧校舍即将拆除改建。 | 日常、压力 | released |
 | 秘药高热女首席 | `alchemy_archive_potion_backlash` | 皇家魔导院地下的禁忌炼药暗室里，冷面首席魔导师带着后辈搭档秘密复原古代共鸣秘药，已熬了大半年：白日授课审稿，入夜便隔着三重结界守在琉璃导管旁试药。 | 日常、压力 | released |
 | 禁触的雪线圣女 | `alpine_sanctuary_dagger_rescue` | 海拔四千米的雪线神殿逢初冬封山，当值圣女按祖制严守禁触戒律，独居祭坛后的守夜暖室。 | 日常、压力 | released |
 | 流沙殿摸金女魁 | `ancient_tomb_gravity_sand_spill` | 民国十六年深秋，发丘世家受雇勘探前朝皇陵，北洋督军府派工兵团驻扎山脚盯梢。 | 日常、压力 | released |
@@ -49,7 +49,7 @@
 | 暗渠里的女董事长 | `chaebol_chairwoman_submerged_maybach` | 老董事长猝逝，长女接掌千亿财阀，叔叔一派在董事会里虎视眈眈，只等新任董事长出一次错。 | 日常、压力 | released |
 | 地下金库财阀千金 | `chaebol_heiress_vault_hostage` | 跨国控股权交割前夜，财阀长女带人下到双子塔负五层钛合金金库核对最后一批信托底单。 | 日常、压力 | released |
 | 大理寺提刑女官 | `chang_an_rainy_dali_temple_inquest` | 唐末长安，宰相嫡长子暴毙平康坊，案落大理寺。 | 日常、压力 | released |
-| 天池采参女把头 | `changbai_ginseng_blizzard_crevasse` | 宣统二年九月，长白山已落初雪。 | 日常、压力 | released |
+| 天池采参女把头 | `changbai_ginseng_blizzard_crevasse` | 宣统二年九月，长白山初雪已落，采参世家的新任女把头接下差事，领着关东地质考察队与奉天参行掌柜进老林子上天池，一边寻祖传参脉，一边勘火山岩层。 | 日常、压力 | released |
 | 风雪古刹借宿夜 | `changming_temple_snowbound` | 明末天启年间，太行绝顶半废石寺是官道唯一落脚处。 | 日常、压力 | released |
 | 六叠合租俏青梅 | `childhood_friend_tatami_roomshare` | 同乡的青梅竹马考进了东京的名门大学，常来高円寺这间六叠榻榻米的老公寓蹭饭、借书，嘴上毒舌，从不留宿。 | 日常、压力 | released |
 | 地下救护所女牧师 | `cleric_bunker_sanctuary_overload` | 边境前线一座钟楼半塌的村庄礼拜堂，地下墓室改成了野战救护所。 | 日常、压力 | released |
@@ -95,7 +95,7 @@
 | 血脉觉醒的高热夜 | `floating_city_alchemist_isolation` | 三千米雷暴云海上的浮空城顶层实验室，帝国首席女炼金术士日夜解析一件禁物，贴身卫队长守在门外，多疑的总督每周来查一次进度。 | 日常、压力 | released |
 | 雾夜马车俏贵妇 | `fog_bathhouse` | 架空维多利亚雾都的港务街蒸汽浴场，进门交衣冠领铜号，场内只认号码不问姓名。 | 日常、压力 | released |
 | 仙山客栈老板娘 | `foothill_town` | 仙侠世家收徒大典前三天，仙山脚下集镇住满求仙者与被逐下山的失意人。 | 日常、压力 | released |
-| 紫禁封宫夜 | `forbidden_city_snowbound_cabinet_secret` | 架空皇朝的紫禁深宫，太上皇久病卧榻。 | 日常、压力 | released |
+| 紫禁封宫夜 | `forbidden_city_snowbound_cabinet_secret` | 架空皇朝的紫禁深宫，太上皇久病卧榻；司礼监女尚仪掌着天子六玺与一只朱批传位密匣，当朝首辅是昔年太学旧识，也是储位之争里最难缠的对手。 | 日常、压力 | released |
 | 台风夜解剖室 | `forensic_pathologist_autopsy_isolation` | 江海市司法鉴定中心地下二层在强台风夜骤然断电闭锁，政法世家出身的首席女法医正守着胃壁藏有离线微缩胶卷的第三具遗体，防数据遭远程抹除。 | 日常、压力 | released |
 | 退队的重甲统领 | `frontier_tavern_exiled_paladin` | 极北黑曜石边境要塞迎来暴风雪封山季，退队的圣殿重甲女统领率旧部借道入堡避寒，与领主派驻的铁腕督军、攻城器械师及随军医官同处一城。 | 日常、压力 | released |
 | 破冰底舱女缉私 | `frozen_border_river_contraband_hold` | 极北界河封冻航季，万吨破冰船顶着浮冰驶近国境关卡。 | 日常、压力 | released |
@@ -126,7 +126,7 @@
 | 水银殿的女审判长 | `inquisition_dungeon_pact_reversal` | 欧式古典圣殿裁判所的哥特阶梯大殿内，前首席女审判长遭罗织“纵放异端”罪名面临复审夜讯。 | 日常、压力 | released |
 | 破产名门女家督 | `izu_autumn_villa_debt_contract` | 昭和初年，名门九条家因丝绢期货亏空面临清算，新任女家督退居伊豆断崖红叶山庄，欲以祖传古砚抵押。 | 日常、压力 | released |
 | 太鼓下的女主将 | `kendo_captain_scoreboard_bell_trap` | 西湖畔百年桧木武道馆迎来全国剑道女子团体决赛。 | 日常、压力 | released |
-| 喫茶街的熟客账 | `kissa_street` | 常客的习惯比招牌活得久。 | 日常、压力 | released |
+| 喫茶街的熟客账 | `kissa_street` | 常客的习惯比招牌活得久；可店要转让了，店主与熟客寄存在这条街上的东西和心事，谁来认领？ | 日常、压力 | released |
 | 昆曲闺门旦 | `kunqu_water_stage_mist_arm_trap` | 姑苏古典园林夜游专场正上演《牡丹亭》水景大戏，四百余位中外贵宾隔池观礼。 | 日常、压力 | released |
 | 百日祭的新寡当主 | `kyoto_monastery_widow_forbidden` | 大正末年梅雨肆虐，一条家前代当主的百日大祭在孤刹紫云院进入尾声。 | 日常、压力 | released |
 | 未摘狐面的妖女 | `lantern_festival_town` | 灯会七夜，人与非人共用一条长街；规矩写在契约与称谓里，叫错一个名字就是大事。 | 日常、压力 | released |
@@ -150,10 +150,10 @@
 | 弹尽粮绝女少校 | `officer_trench_last_bullet_vow` | 架空帝国末年北境冻土，零下三十度暴雪围困第七突出部十四号混凝土掩体。 | 日常、压力 | released |
 | 台风夜的月池 | `offshore_oil_platform_diverter` | 超强台风锁死海空航线，末班直升机离场后，超深水半潜式钻井平台化作孤悬狂浪的钢铁孤岛。 | 日常、压力 | released |
 | 斗轮机女总指挥 | `open_pit_coal_excavator_fire` | 零下三十度白毛风席卷草原露天煤矿，六十米高的万吨轮斗挖掘机夜班迎风运转。 | 日常、压力 | released |
-| 失态的首席舞姬 | `opera_house_understage_mechanism` | 1889 年的巴黎大歌剧院，水晶枝形吊灯照亮环形镜廊与天鹅绒包厢，名流贵胄齐聚，观赏演出季开幕首演《天鹅湖》。 | 日常、压力 | released |
+| 失态的首席舞姬 | `opera_house_understage_mechanism` | 1889年的巴黎大歌剧院，水晶枝形吊灯照亮环形镜廊与天鹅绒包厢，名流贵胄齐聚，观赏演出季开幕首演《天鹅湖》。 | 日常、压力 | released |
 | 高空风暴女上尉 | `orbital_elevator_cable_failure` | 三万米高空的轨道电梯锚定站悬于平流层之上，冷峻的空天突击队女上尉率工程班与锚定工长常驻外露机库校准主缆张力。 | 日常、压力 | released |
 | 河港水门的铁骑 | `paladin_commander_flooded_dungeon_armor` | 春汛雨季的边境河港城，双联铸钢水门与重型链轮机房扼守整条大河的漕运命脉。 | 日常、压力 | released |
-| 76号冷艳女处长 | `paramount_shanghai_secret_agent` | 1941 年深秋，上海成了孤岛，静安寺路上的百乐门照旧夜夜笙歌。 | 日常、压力 | released |
+| 76号冷艳女处长 | `paramount_shanghai_secret_agent` | 1941年深秋，上海成了孤岛，静安寺路上的百乐门照旧夜夜笙歌。 | 日常、压力 | released |
 | 港交所敲钟日 | `partner_boardroom_arm_lace_jam` | 香港中环，独角兽上市前的闭门路演进入最后一周。 | 日常、压力 | released |
 | 评委前的甜品主厨 | `pastry_chef_oven_hinge_corset_jam` | 外滩米其林三星法餐厅迎来年度复评之夜，冷艳甜品女主厨坐镇全景玻璃岛台，直面苛刻主评委与满席长焦镜头。 | 日常、压力 | released |
 | 冰山女物理学家 | `physics_professor_magnetic_containment` | 暴雨季的深地科研中心负七层，二十特斯拉托卡马克正值闭环调试。 | 日常、压力 | released |
@@ -171,7 +171,7 @@
 | 防护服裂女主刀 | `quarantine_ward_scalpel_isolation` | 北方海岛的私人神经与感染医学疗养院，冷面女外科主任执掌地下负压隔离病区。 | 日常、压力 | released |
 | 开播前的电台主持 | `radio_host_studio_mic_chain_trap` | 上海街角的临街落地玻璃电台直播间，收听率常居榜首的深夜治愈主持每夜坐镇孤台，窗外数十支长焦彻夜蹲守。 | 日常、压力 | released |
 | 抢救孤本掌卷女 | `rainy_archive_manuscript_authentication` | 梅雨连绵的江南古镇，冰山女掌卷独守文渊藏书楼宋版孤本五年。 | 日常、压力 | released |
-| 藏离婚书的人妻 | `rainy_night_childhood_neighbor_wife` | 1998 年夏末的东京郊外，老木造公寓枫叶庄里住着一对在同一条老街长大的青梅竹马。 | 日常、压力 | released |
+| 藏离婚书的人妻 | `rainy_night_childhood_neighbor_wife` | 1998年夏末的东京郊外，老木造公寓枫叶庄里住着一对在同一条老街长大的青梅竹马。 | 日常、压力 | released |
 | 风暴天桥女合伙人 | `red_circle_lawyer_storm_skybridge` | 陆家嘴双子塔三百米高空的六十二层玻璃天桥，是百亿跨境并购午夜交割的主席台。 | 日常、压力 | released |
 | 加氢塔下的检修季 | `refinery_hydrocrack_pressure_seal` | 化工城大检修季，装置区搭满脚手架，三千名外协工驻扎厂外板房村，每张特级动火作业票须集齐七人签字。 | 日常、压力 | released |
 | 偏厅受审除籍女 | `registry_city` | 契约一登记就自动执行，真名读出来就生效；在这座城里，谁握着你的真名，谁就握着你的命。 | 日常、压力 | released |
@@ -189,8 +189,8 @@
 | 封山私汤若女将 | `snowbound_onsen` | 深山峡谷里的老派秘汤别馆，每到深冬就只剩几位长住的客人：信贷会社的审查员、潜逃私奔的婚纱设计师、冒名顶替的周刊撰稿人。 | 日常、压力 | released |
 | 宪兵查证假新婚 | `spy_express_sleeper_compartment` | 1956年极寒冬夜，横贯欧亚的极地快车封锁车门驰向边境。 | 日常、压力 | released |
 | 湿透舞台女团C位 | `stage_mic_pack_clip_ratchet_release` | 十二月的一号演播大厅，女团正为跨年晚会的回归舞台带妆联排。 | 日常、压力 | released |
-| 敢死第零番队 | `steam_mech_fortress_zero` | 主力撤往关内后，阿尔卑斯绝壁要塞‘黑鸦之臼’仅剩敢死第零番队断后。 | 日常、压力 | released |
-| 皇家飞艇泄压 | `steampunk_airship_furnace_rupture` | 无畏级浮空战舰在边境雷云巡航。 | 日常、压力 | released |
+| 敢死第零番队 | `steam_mech_fortress_zero` | 主力撤往关内后，阿尔卑斯绝壁要塞“黑鸦之臼”仅剩敢死第零番队断后。 | 日常、压力 | released |
+| 皇家飞艇泄压 | `steampunk_airship_furnace_rupture` | 无畏级浮空战舰在边境雷云巡航，帝国最年轻的首席女动力总监锁守超压锅炉舱，防烫束腰下暗藏越级试压手稿；督战武官握着封舱死令与船厂回扣账步步逼近。 | 日常、压力 | released |
 | 夺冠后的女主播 | `streamer_arena_headphone_bell_jam` | 上海万人电竞馆总决赛夺冠之夜，千万粉丝成年顶流女主播身着露肩水手服短裙坐镇中央隔音玻璃房，雪白脖颈系着坠有纯银铃铛的丝绒颈饰。 | 日常、压力 | released |
 | 万米深海女潜员 | `subsea_abyss_airlock_stalemate` | 万米海沟底部的深海科考站常年承压运转，清冷首席技术女总监执掌载人深潜器与减压气闸调度。 | 日常、压力 | released |
 | 幕布后高定车模 | `supercar_model_chassis_ankle_cuff_jam` | 上海国际车展中央大厅，清冷孤傲的首席高定女车模立于半亿概念超跑旋转展台聚光灯下，台下两百支长焦镜头严阵以待。 | 日常、压力 | released |
@@ -202,7 +202,7 @@
 | 花泳冠军与池底灯 | `synchronized_swimmer_pool_jam` | 国家跳水馆备战大赛封闭集训期间，冷艳的花样游泳双人女冠军每晚留馆加练水下芭蕾并巡检十米深池灯光。 | 日常、压力 | released |
 | 华族洋馆清算夜 | `taisho_mansion_insolvency_night` | 大正十四年台风暴雨夜，债台高筑的九条伯爵洋馆迎来破产清算前夕。 | 日常、压力 | released |
 | 茶室里的准家元 | `tea_ceremony_iemoto_succession_duel` | 京都岚山秋雨连绵，八重流茶道本宗在临湖水榭筹备传位大典。 | 日常、压力 | released |
-| 点茶的若夫人 | `tea_mistress_water_piercing_pump_jam` | 江南非遗博览会闭幕前夜，云栖宗家准女家元若夫人在镜面水台演练宋代点茶，水雾漫过月白真丝旗袍与侧腰秘传纯金穿孔细链。 | 日常、压力 | released |
+| 点茶的若夫人 | `tea_mistress_water_piercing_pump_jam` | 江南非遗博览会闭幕前夜，云栖宗家准女家元若夫人在镜面水台演练宋代点茶，水雾漫过月白真丝旗袍。 | 日常、压力 | released |
 | 名册除名落魄女 | `the_register` | 名字写在册上，你才在这座城里存在；划掉它的那支笔，握在一个人手里。 | 日常、压力 | released |
 | 第七任中之人 | `the_seventh` | 屏幕上的那张脸已经换过六个人；第七任想知道，粉丝爱的到底是谁，自己能不能把名字留下。 | 日常、压力 | released |
 | 三楼暗室的绳结 | `third_floor` | 这两行都把边界写在规矩里，一卷一约，铃响即止；规矩管得住快门和绳结，管不住人心。 | 日常、压力 | released |
@@ -234,7 +234,7 @@
 | 雪屋取弹黑道女 | `yakuza_daughter_hideout_ointment` | 关东最大的极道组织内讧已持续三个月，组长的独生继承人被送往箱根深山一间旧猎人木屋避风头。 | 日常、压力 | released |
 | 暴雨游艇极道女 | `yakuza_princess_stormy_yacht` | 龙神会第四代继承人九条大小姐携保镖、秘书与老舵手乘黑龙丸巡视公海半月，日间议事、入夜甲板小酌。 | 日常、压力 | released |
 | 铐精算师女若头 | `yakuza_vault_handcuff_pact` | 泡沫经济崩塌前夜的东京湾，品川码头地下的黑市赌场攥着百亿洗钱暗账。 | 日常、压力 | released |
-| 佛堂守灵少夫人 | `yakuza_widow_rainy_wake` | 1990 年代初，关东旧派极道黑龙组的九条老会长突然过世。 | 日常、压力 | released |
+| 佛堂守灵少夫人 | `yakuza_widow_rainy_wake` | 1990年代初，关东旧派极道黑龙组的九条老会长突然过世。 | 日常、压力 | released |
 | 风球夜跌打医馆 | `yaumatei_bonesetter_typhoon_pact` | 八十年代末香港油麻地庙街尽头的保和堂跌打医馆，冷艳女掌柜坐堂正骨，手里锁存着义安堂老龙头临终托付的各堂分红册与秘药。 | 日常、压力 | released |
 | 横滨量体华族妻 | `yosai_machi` | 新衣料和旧礼法对撞的时候，替人量身体的那双手，知道的比谁都多。 | 日常、压力 | released |
 | 孤烽燧的和亲公主 | `yumen_pass_black_sandstorm_beacon` | 天宝初春黄沙蔽日，赴西域和亲的长公主仪仗避风驻跸玉门关外饮马泉烽燧，与蒙冤守台的前折冲都尉、怀异心的护送中郎将及粟特商团同宿孤垒。 | 日常、压力 | released |

@@ -37,8 +37,9 @@ def _check(check_id, status, message, hint=None, code=None, details=None):
 
 def _python_check():
     version = platform.python_version()
+    need = "%d.%d" % MIN_PYTHON
     if tuple(sys.version_info[:2]) < MIN_PYTHON:
-        return _check("python", "fail", "Python %s 低于 %d.%d" % ((version,) + MIN_PYTHON), "换用 Python 3.10+", RUNTIME_UNSUPPORTED)
+        return _check("python", "fail", "Python %s 低于 %s" % (version, need), "换用 Python %s+" % need, RUNTIME_UNSUPPORTED)
     return _check("python", "ok", "Python %s（%s）" % (version, sys.executable))
 
 
@@ -60,7 +61,7 @@ def _sqlite_check():
     try:
         import sqlite3
     except ImportError as exc:
-        return _check("sqlite", "fail", "Python 缺少 sqlite3 模块：%s" % exc, "换用带 sqlite3 的 Python 3.10+", RUNTIME_UNSUPPORTED)
+        return _check("sqlite", "fail", "Python 缺少 sqlite3 模块：%s" % exc, "换用带 sqlite3 的 Python %d.%d+" % MIN_PYTHON, RUNTIME_UNSUPPORTED)
     if tuple(sqlite3.sqlite_version_info) < MIN_SQLITE:
         return _check(
             "sqlite",

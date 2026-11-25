@@ -84,7 +84,6 @@ DEFAULT_ADVANCE_MINUTES = 3
 SCENE_BREAK_MINUTES = 60
 
 COOLDOWN_TURNS = 3
-MAX_FIX_ATTEMPTS = 2
 
 # Text ceilings, in characters without IDs and tags: a card or a pressure on
 # stage goes into every full context (32 KB), so a long one squeezes the

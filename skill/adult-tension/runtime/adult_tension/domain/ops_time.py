@@ -85,7 +85,9 @@ def _actor_ok(ctx, npc, op):
         "summary": F(S.Str(1, 120)),
         "operations": F(S.List(S.Any("离屏操作"), max_items=6), required=False, default=[]),
     },
-    "离屏片段：不在场的重要 NPC 在这段时间里做了什么。只能写上下文 `offscreen_beat_candidates` 或时间推进要求的 NPC；子操作只能是这个 NPC 自己的行动、状态、移动，NPC 之间的关系与消息，以及不涉及玩家的事件与把柄",
+    "离屏片段：不在场的重要角色在这段时间里做了什么。只能写上下文 requests.offscreen_beat_candidates 或时间推进要求的 NPC；因 advance_time 触发的离屏片段须排在 advance_time 之后；子操作只允许 "
+    + "、".join(BEAT_OPS)
+    + "，且须由该 NPC 发起或与其相关、不得牵涉玩家角色",
     branch=False,
 )
 def op_offscreen_beat(ctx, op, path):

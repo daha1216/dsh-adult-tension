@@ -1,4 +1,4 @@
-# 少用的流程
+# 扩展流程与风格偏好
 
 `SKILL.md` 只放触发条件和要点；用到下面这些流程时再读对应一节。
 
@@ -12,9 +12,8 @@
 
 ## 2. 转折
 
-- 触发：上下文出现 `requests.twist_offer`，或玩家说“来点转折”（`get-context` 带 `"want_twist": true`）。
-- 正文之后用一句话列出候选：“① …… ② ……，或说你想要的”。
-- 玩家选定后记录 `twist_accept`：给 `twist_id`，或玩家口述的 `category` + `text`；`result` 模式带 `player_authorized`。若选定的转折带入原本不在场的角色（含 `standby_cast` 待命角色），同一回合用 `enter_scene` 让其入场，勿用 `introduce_character`。
+- 触发与展示：上下文出现 `requests.twist_offer` 时，在正文之后用一句话列出候选：“① …… ② ……，或说你想要的”；玩家主动说“来点转折”（`get-context` 带 `"want_twist": true`）时，直接用一句话列出候选（不写正文；若返回候选为空，按 `twist_note` 如实告知）。
+- 玩家选定后记录 `twist_accept`：给 `twist_id`，或玩家口述的 `category` + `text`；`result`/`attempt` 模式带 `player_authorized: true`。若选定的转折带入原本不在场的角色（含 `standby_cast` 待命角色），同一回合用 `enter_scene` 让其入场，勿用 `introduce_character`。
 - 每个游戏日最多一次；玩家不理会就照常继续。
 
 ## 3. 撤销、改写、追溯
@@ -30,7 +29,7 @@
 - 删除存档：先问“确定删除「名称」吗？”，确认后 `delete-slot` 带 `"confirm": true`（属会话内写操作，须在当前会话上下文中执行，带 `session_id` 与 `expected_revision`）。
 - 导出：`export-save`，把返回的文件路径告诉玩家。导入：`import-save`（路径或玩家粘贴的内容），回执后写两三句前情接续。
 - 存档冲突（`SLOT_CONFLICT`）、导入被拒：照 `troubleshooting.md` 的“存档冲突”处理。
-- 对话压缩（`/compact`）后恢复：严禁凭压缩摘要猜测人设、边界或 `revision`。先用 `list-sessions` 找回 `session_id`（若已丢失），再调 `get-context` 带 `"depth": "full"` 拉取 ≤32KB 完整快照与 `commit_template`。对比返回的 `turn` 与上文可见的最后页脚回合号：若有压缩前攒下未交且上文仍可见的回合，先按序 `commit-turn` 补齐；若早先细节已被压缩隐去，则直接以引擎 `context` 当前回合与事实为准往下接续，绝不凭印象补造未记录的承诺、亲密或事实。
+- 对话压缩（如 `/compact`）后恢复：严禁凭压缩摘要猜测人设、边界或 `revision`。先用 `list-sessions` 找回 `session_id`（若已丢失），再调 `get-context` 带 `"depth": "full"` 拉取 ≤ 32 KB 完整快照与 `commit_template`。对比返回的 `turn` 与上文可见的最后页脚回合号：若有压缩前攒下未交且上文仍可见的回合，先按序 `commit-turn` 补齐；若早先细节已被压缩隐去，则直接以引擎 `context` 当前回合与事实为准往下接续，绝不凭印象补造未记录的承诺、亲密或事实。
 
 ## 5. 风格偏好
 

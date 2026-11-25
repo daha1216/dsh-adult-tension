@@ -507,12 +507,6 @@ def _card_order(context, state, present):
     return [c["id"] for c in sorted(context["characters"], key=key) if bool(c.get("present")) == present]
 
 
-def _drop_goal(context, cid):
-    for npc in context.get("present_npcs", []):
-        if npc["id"] == cid:
-            npc.pop("goal", None)
-
-
 def _replace_card(context, cid, shrink):
     context["characters"] = [shrink(c) if c["id"] == cid else c for c in context["characters"]]
 
@@ -650,12 +644,9 @@ def _full_steps(context, state):
     for shrink in (_card_summary, _roster_line):
         for cid in crowd:
             yield lambda cid=cid, shrink=shrink: _replace_card(context, cid, shrink)
-    # Still too big (long world texts and many important people): goals of
-    # the crowd go, then detail.
-    # The people on stage keep what the next beat needs: decision with
-    # pressure responses, boundaries, and their stance and mood.
-    for cid in crowd:
-        yield lambda cid=cid: _drop_goal(context, cid)
+    # Still too big (long world texts and many important people): the remaining
+    # person on stage drops to a core card — decision with pressure responses,
+    # boundaries, and their stance and mood.
     for cid in _card_order(context, state, True):
         yield lambda cid=cid: _replace_card(context, cid, _card_core)
     # A crowd of long cards in a world of long texts: roster lines keep only
@@ -685,14 +676,9 @@ def _fit(context, limit, order):
         context["size_bytes"] = size_of(context)
         return
     for key in order:
-        holder = context
-        if key == "customs":
-            holder = context.get("world", {})
-        value = holder.get(key)
-        if isinstance(value, dict):
-            holder[key] = {}
-        while isinstance(holder.get(key), list) and holder[key] and size_of(context) > limit:
-            holder[key].pop()
+        items = context.get(key)
+        while isinstance(items, list) and items and size_of(context) > limit:
+            items.pop()
         if size_of(context) <= limit:
             break
     context["size_bytes"] = size_of(context)

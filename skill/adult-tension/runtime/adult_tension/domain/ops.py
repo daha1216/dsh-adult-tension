@@ -20,6 +20,7 @@ from .text import split_name
 
 F = S.Field
 FACT_KEY = S.Str(1, 80, r"[a-z0-9_]+(\.[a-z0-9_#]+){0,5}", "点分的 ASCII 小写键，例如 lin_wan.secret.press")
+DEDUPE_KEY = S.Str(1, 80, r"[a-z0-9_]+(\.[a-z0-9_]+){0,5}", "点分的 ASCII 小写键（不含 #），例如 harbor.shift.handover")
 CLOCK = S.Obj({"day": F(S.Int(1, 100000)), "minute": F(S.Int(0, 1439))}, name="游戏时钟")
 CONDITION = S.Obj(
     {
@@ -78,8 +79,6 @@ class TurnContext:
         self.hooks = hooks or {}
         self.in_beat = None
         self.moved = {}
-        self.relationship_reasons = []
-        self.voice_reasons = []
         self.card_ops = {}
         self.fact_index = 0
         self.event_index = 0
@@ -328,7 +327,7 @@ def op_exit_scene(ctx, op, path):
         "basis_fact_ids": F(S.List(S.Id(), max_items=8, unique=True), required=False, default=[]),
         "true_intent": F(S.Nullable(S.Str(1, 120)), required=False, default=None),
     },
-    "NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进关系阶段） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进关系阶段；必须写 true_intent） / genuine 真诚配合",
+    "NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进亲近进程） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进亲近进程；必须写 true_intent） / genuine 真诚配合",
 )
 def op_npc_response(ctx, op, path):
     errs = []
@@ -416,7 +415,7 @@ def op_npc_action(ctx, op, path):
         "add_conditions": F(S.List(CONDITION, max_items=4), required=False, default=[]),
         "remove_conditions": F(S.List(S.Enum(*ST.CONDITION_KINDS), max_items=7, unique=True), required=False, default=[]),
     },
-    "更新 NPC 的情绪与状况（醉意、睡眠、受伤、外出等）；minutes 表示多久后自动消退",
+    "更新 NPC 的情绪与状况（醉意、睡眠、受伤、外出等）；同 kind 状况会覆盖旧记录；minutes 表示多久后自动消退",
 )
 def op_npc_state(ctx, op, path):
     errs = []
@@ -588,7 +587,7 @@ def op_add_fact(ctx, op, path):
         "stage_retreat_to": F(S.Nullable(S.Enum(*ST.STAGES)), required=False, default=None),
         "reason": F(S.Str(1, 80)),
     },
-    "有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；半推半就、身体失守或受制达成实质妥协应记为 partial）或后退。原因必填",
+    "有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段或后退（阶段变化会自动同步到双向关系边）。涉及玩家时，前进需同回合玩家行动（result/attempt）+ 对方 partial/genuine 回应（半推半就、身体失守或受制达成实质妥协应记为 partial）；两名 NPC 之间前进需双方本回合均有行动或回应。原因必填",
 )
 def op_relationship(ctx, op, path):
     errs = []
@@ -668,7 +667,6 @@ def op_relationship(ctx, op, path):
     current["history"].append(record)
     del current["history"][:-12]
     ctx.observable = True
-    ctx.relationship_reasons.append(op["reason"])
     ctx.applied.append({"op": "relationship", "from": a, "to": b, "trust": current["trust"], "tension": current["tension"], "stage": current["stage"]})
 
 
@@ -692,7 +690,7 @@ def _stage_evidence(ctx, a, b, path, errs):
             return None
         return {"player_action_turn": ctx.turn, "npc_response": cooperative[-1]}
     if a not in ctx.actors or b not in ctx.actors:
-        errs.append(detail(path + ".stage_advance", "两名 NPC 之间的阶段前进需要双方本回合都有行动或回应", None, INVARIANT_VIOLATION))
+        errs.append(detail(path + ".stage_advance", "两名 NPC 之间的亲近进程前进需要双方本回合都有行动或回应", None, INVARIANT_VIOLATION))
         return None
     return {"npc_actions_turn": ctx.turn}
 
@@ -712,7 +710,7 @@ def _stage_evidence(ctx, a, b, path, errs):
         "due": F(CLOCK, required=False),
         "in_minutes": F(S.Int(1, 400 * ST.MINUTES_PER_DAY), required=False),
         "probability": F(S.Nullable(S.Num(0, 1, lo_open=True, hi_open=True)), required=False, default=None),
-        "dedupe_key": F(FACT_KEY),
+        "dedupe_key": F(DEDUPE_KEY),
         "repeat": F(S.Bool(), required=False, default=False),
     },
     "创建事件（约定、截止、风声、机会、伏笔、概率事件）。due 与 in_minutes 二选一且必须晚于现在；chance 必须带 probability，到期由引擎掷骰；涉及玩家的承诺需要 player_authorized；dedupe_key 与未结束事件不能重复",
@@ -783,7 +781,7 @@ def _pending_event(ctx, eid, path, errs):
     event = ctx.state["events"].get(eid)
     if event is None:
         if _archived(ctx.state, eid):
-            errs.append(detail(path, "事件 %s 早已结束并随章节归档，终态不可修改" % eid, None, INVARIANT_VIOLATION))
+            errs.append(detail(path, "事件 %s 已归档或已撤销，不可再修改" % eid, None, INVARIANT_VIOLATION))
         else:
             errs.append(detail(path, "事件不存在：%s" % eid, None, NOT_FOUND))
         return None
@@ -794,7 +792,7 @@ def _pending_event(ctx, eid, path, errs):
 
 
 def _archived(state, eid):
-    """Event ids are never reused: a past id missing from the state was archived."""
+    """Event ids are never reused: a past id missing from the state was archived or undone."""
     number = eid[1:] if eid.startswith("e") else ""
     return number.isdigit() and 0 < int(number) < state["counters"]["next"]["event"]
 

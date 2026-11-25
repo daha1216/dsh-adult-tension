@@ -56,14 +56,16 @@ PLAYER = S.Obj(
     },
     name="玩家设定",
 )
+PACE_DESC = "节奏：slow 慢热 / standard 标准 / direct 直接；只影响写法，不影响规则"
+EXPLICITNESS_DESC = "尺度：subtle 含蓄 / standard 标准 / explicit 直白；只影响写法，不影响规则"
 PREFERENCES = S.Obj(
     {
         "inner_view": F(S.Bool(), required=False),
         "assistant": F(S.Bool(), required=False),
         "offscreen_simulation": F(S.Bool(), required=False),
         "person": F(S.Enum(*ST.PERSONS), required=False),
-        "pace": F(S.Enum(*ST.PACES), required=False, desc="节奏：slow 慢热 / standard 标准 / direct 直接；只影响写法"),
-        "explicitness": F(S.Enum(*ST.EXPLICITNESS), required=False, desc="尺度：subtle 含蓄 / standard 标准 / explicit 直白；只影响写法"),
+        "pace": F(S.Enum(*ST.PACES), required=False, desc=PACE_DESC),
+        "explicitness": F(S.Enum(*ST.EXPLICITNESS), required=False, desc=EXPLICITNESS_DESC),
     },
     name="偏好",
 )
@@ -158,8 +160,8 @@ DELETE_WORLD = _obj(
 LIST_SESSIONS = _obj({"limit": F(S.Int(1, 20), required=False, default=10)}, "list-sessions")
 EXPORT_SAVE = _obj(
     {
-        "session_id": F(S.Nullable(SESSION_ID), required=False, default=None, desc="导出这个会话的当前状态"),
-        "slot": F(S.Nullable(S.Str(1, 60)), required=False, default=None, desc="或导出这个存档"),
+        "session_id": F(S.Nullable(SESSION_ID), required=False, default=None, desc="导出这个会话的当前状态（与 slot 二选一，必填其一）"),
+        "slot": F(S.Nullable(S.Str(1, 60)), required=False, default=None, desc="导出这个存档（与 session_id 二选一，必填其一）"),
         "path": F(S.Nullable(S.Str(1, 400)), required=False, default=None, desc="玩家明确给出的绝对路径（.json）；不给时写到数据目录的 exports/"),
         "overwrite": F(S.Bool(), required=False, default=False),
     },
@@ -168,8 +170,8 @@ EXPORT_SAVE = _obj(
 IMPORT_SAVE = _obj(
     {
         "request_id": F(S.RequestId()),
-        "path": F(S.Nullable(S.Str(1, 400)), required=False, default=None, desc="导出文件的路径"),
-        "data": F(S.Nullable(S.Any("导出的 JSON 对象")), required=False, default=None, desc="或玩家粘贴的导出内容（整个 JSON 对象）"),
+        "path": F(S.Nullable(S.Str(1, 400)), required=False, default=None, desc="导出文件的路径（与 data 二选一，必填其一）"),
+        "data": F(S.Nullable(S.Any("导出的 JSON 对象")), required=False, default=None, desc="玩家粘贴的导出内容（整个 JSON 对象；与 path 二选一，必填其一）"),
         "slot": F(S.Nullable(S.Str(1, 60)), required=False, default=None, desc="同时写入这个存档槽（可省略）"),
         "overwrite": F(S.Bool(), required=False, default=False, desc="存档名已被占用时，玩家确认覆盖"),
     },
@@ -202,7 +204,7 @@ VERIFY_CONTENT = _obj(
         "world": F(S.Nullable(S.Id()), required=False, default=None),
         "stats": F(S.Bool(), required=False, default=False),
         "skip_diversity": F(S.Bool(), required=False, default=False),
-        "file": F(S.Nullable(S.Str(1, 400)), required=False, default=None, desc="只校验这一个世界包文件（写作中的源文件或 new-world 骨架）"),
+        "file": F(S.Nullable(S.Str(1, 400)), required=False, default=None, desc="只校验这一个世界包文件（写作中的源文件或 tools/new_world.py 骨架）"),
     },
     "verify-content",
 )
@@ -211,9 +213,9 @@ SET_BOUNDARY = _obj(
     dict(
         session_write_fields(),
         action=F(S.Enum("add", "remove"), desc="add 登记 / remove 撤销"),
-        text=F(S.Nullable(S.Str(1, 80)), required=False, default=None, desc="玩家的原话，例如“不要涉及怀孕”"),
+        text=F(S.Nullable(S.Str(1, 80)), required=False, default=None, desc="玩家的原话，例如“不要涉及怀孕”（action 为 add 时必填；remove 时与 boundary_id 至少填一个）"),
         tags=F(S.List(S.Id(), max_items=6, unique=True), required=False, default=[], desc="映射到的内容标签；映射不上就留空（记为 custom，由你自己遵守）"),
-        boundary_id=F(S.Nullable(S.Id()), required=False, default=None, desc="撤销时可用边界 ID"),
+        boundary_id=F(S.Nullable(S.Id()), required=False, default=None, desc="撤销时可用边界 ID（action 为 remove 时与 text 至少填一个）"),
     ),
     "set-boundary",
 )
@@ -236,8 +238,8 @@ SET_PREFERENCES = _obj(
         offscreen_simulation=F(S.Bool(), required=False),
         person=F(S.Enum(*ST.PERSONS), required=False),
         npc_gender_preference=F(S.Enum(*ST.NPC_GENDER_PREFERENCES), required=False),
-        pace=F(S.Enum(*ST.PACES), required=False, desc="节奏：slow 慢热 / standard 标准 / direct 直接；只影响写法，不影响规则"),
-        explicitness=F(S.Enum(*ST.EXPLICITNESS), required=False, desc="尺度：subtle 含蓄 / standard 标准 / explicit 直白；只影响写法，不影响规则"),
+        pace=F(S.Enum(*ST.PACES), required=False, desc=PACE_DESC),
+        explicitness=F(S.Enum(*ST.EXPLICITNESS), required=False, desc=EXPLICITNESS_DESC),
         voice=F(VOICE_CHANGE, required=False),
     ),
     "set-preferences",

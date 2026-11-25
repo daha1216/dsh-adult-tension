@@ -540,6 +540,161 @@ class StoreUpgradeDbTest(unittest.TestCase):
             finally:
                 conn.close()
 
+    def test_worldpack_p2_cleanup_checks(self):
+        pack = copy.deepcopy(STORE.world("harbor_night_shift"))
+        # walk_texts skips name_pools.order; world_stats skips non-list keys.
+        walked_paths = {path for path, _txt in worldpack.walk_texts(pack)}
+        self.assertNotIn("$.name_pools.order", walked_paths)
+        stats = worldpack.world_stats(pack)
+        self.assertNotIn("order", stats["names"])
+        # intimacy_tendency likes/dislikes have descriptions for doc generation.
+        tendency_fields = worldpack.TEMPLATE.fields["intimacy_tendency"].spec.fields
+        self.assertTrue(tendency_fields["likes"].desc)
+        self.assertTrue(tendency_fields["dislikes"].desc)
+        # text_chars excludes enum/ID fields (gender, source, flags, holder, subject, location exits).
+        pr = copy.deepcopy(pack["pressures"][0])
+        base_chars = worldpack.text_chars(pr)
+        pr["source"] = "organization"
+        pr["flags"] = ["timed", "leverage"]
+        pr["leverage"] = {"holder": "very_long_template_id", "subject": "another_long_id", "basis": ""}
+        self.assertEqual(worldpack.text_chars(pr), base_chars)
+        tpl = copy.deepcopy(pack["character_templates"][0])
+        tpl_chars = worldpack.text_chars(tpl)
+        tpl["gender"] = "nonbinary"
+        self.assertEqual(worldpack.text_chars(tpl), tpl_chars)
+        loc = copy.deepcopy(pack["locations"][0])
+        loc_chars = worldpack.text_chars(loc)
+        loc["exits"] = ["very_long_exit_location_id_1", "very_long_exit_location_id_2"]
+        self.assertEqual(worldpack.text_chars(loc), loc_chars)
+        # validate_world(..., custom=False) symmetrically rejects custom: true.
+        pack["custom"] = True
+        _p, problems = worldpack.validate_world(pack, custom=False, tag_ids=TAG_IDS)
+        self.assertTrue(any(p["path"] == "$.custom" for p in problems), problems)
+        # Pronoun hint adapts to allowed scopes of the field.
+        w = example()
+        w["premise"] = "他站在礁石上等船。"
+        w["character_templates"][0]["voices"]["inner"] = "“她真麻烦。”"
+        w["daily_activities"][0]["beats"][0] = "她递来一杯姜茶。"
+        w["cast_combos"][0]["chemistry"] = "他和谁都不对付。"
+        _p, problems = worldpack.validate_world(w, custom=True, tag_ids=TAG_IDS)
+        hints = {p["path"]: p["hint"] for p in problems if "写死了" in p["reason"]}
+        self.assertIn("不支持占位符", hints["$.premise"])
+        self.assertIn("{npc.ta}", hints["$.character_templates[0].voices.inner"])
+        self.assertIn("{player.ta}", hints["$.daily_activities[0].beats[0]"])
+        self.assertIn("{槽位.ta}", hints["$.cast_combos[0].chemistry"])
+
+    def test_upgrade_coord_prescan_and_rpartition_dedupe_keys(self):
+        from adult_tension.domain.upgrade import upgrade
+
+        state = {
+            "schema_version": 1,
+            "facts": {
+                "f1": {"id": "f1", "turn": 1, "coord": [1, 0]},
+                "f2": {"id": "f2", "turn": 1},
+                "f3": {"id": "f3", "turn": 2, "coord": [2, 1]},
+                "f4": {"id": "f4", "turn": 2},
+                "f5": {"id": "f5", "turn": 3},
+            },
+            "events": {
+                "e1": {"id": "e1", "created_turn": 1, "dedupe_key": "room#3#2"},
+                "e2": {"id": "e2", "created_turn": 1, "dedupe_key": "room#bar"},
+                "e3": {"id": "e3", "created_turn": 1, "dedupe_key": "plain"},
+                "e4": {"id": "e4", "created_turn": 1, "dedupe_key": "123"},
+            },
+            "counters": {},
+            "memory": {"chapters": []},
+            "requests": {},
+        }
+        upgraded = upgrade(state)
+        self.assertEqual(upgraded["facts"]["f1"]["coord"], [1, 0])
+        self.assertEqual(upgraded["facts"]["f2"]["coord"], [1, 1])
+        self.assertEqual(upgraded["facts"]["f3"]["coord"], [2, 1])
+        self.assertEqual(upgraded["facts"]["f4"]["coord"], [2, 2])
+        self.assertEqual(upgraded["facts"]["f5"]["coord"], [3, 1])
+        # Turn 1 events without existing coords start at 0 (matching opening.py).
+        self.assertEqual(upgraded["events"]["e1"]["coord"], [1, 0])
+        self.assertEqual(upgraded["events"]["e2"]["coord"], [1, 1])
+        self.assertEqual(
+            upgraded["counters"]["event_keys"],
+            {"room#3": 2, "room#bar": 1, "plain": 1, "123": 1},
+        )
+
+    def test_store_slash_normalization_db_busy_and_repo_guards(self):
+        import sqlite3
+        from unittest import mock
+
+        from adult_tension import DB_SCHEMA_VERSION
+        from adult_tension.content.store import ContentStore
+        from adult_tension.errors import NOT_FOUND, STORAGE_BUSY, UNSUPPORTED_VERSION
+        from adult_tension.persistence import db
+        from helpers.fs import temp_dir
+
+        with temp_dir() as tmp:
+            store = ContentStore(tmp)
+            with self.assertRaises(AppError) as caught:
+                store.world_raw("no_such_world")
+            self.assertIn("content/worlds/no_such_world.json", caught.exception.message)
+            self.assertNotIn("\\", caught.exception.message)
+            self.assertEqual(caught.exception.details[0]["path"], "content/worlds/no_such_world.json")
+
+            # db.py: case-insensitive busy/locked + WAL pragma wrapped to STORAGE_BUSY
+            class FakeConn:
+                in_transaction = False
+
+                def __init__(self, err):
+                    self.err = err
+
+                def execute(self, sql, *args):
+                    if "PRAGMA journal_mode=WAL" in sql or "BEGIN IMMEDIATE" in sql:
+                        raise sqlite3.OperationalError(self.err)
+                    return mock.MagicMock(fetchone=lambda: None)
+
+            with self.assertRaises(AppError) as caught:
+                db.begin_write(FakeConn("DATABASE IS LOCKED"))
+            self.assertEqual(caught.exception.code, STORAGE_BUSY)
+            self.assertEqual(caught.exception.details[0]["code"], STORAGE_BUSY)
+            with self.assertRaises(AppError) as caught:
+                db.ensure_schema(FakeConn("Database is BUSY"), os.path.join(tmp, "backups"))
+            self.assertEqual(caught.exception.code, STORAGE_BUSY)
+            self.assertEqual(caught.exception.details[0]["code"], STORAGE_BUSY)
+
+            # db.py: _unsupported_schema code and wording
+            err = db._unsupported_schema(DB_SCHEMA_VERSION + 1)
+            self.assertEqual(err.code, UNSUPPORTED_VERSION)
+            self.assertEqual(err.details[0]["code"], UNSUPPORTED_VERSION)
+            self.assertIn("数据库格式", err.message)
+
+            # db.py: schema 0 failure does not falsely claim backup restoration
+            conn = db.connect(os.path.join(tmp, "fresh.db"))
+            try:
+                with mock.patch.dict(os.environ, {"ADULT_TENSION_FAULT": "migration_fail"}):
+                    with self.assertRaises(AppError) as caught:
+                        db.ensure_schema(conn, os.path.join(tmp, "backups2"))
+                self.assertEqual(caught.exception.code, "MIGRATION_FAILED")
+                self.assertFalse(caught.exception.extra["restored"])
+                self.assertIsNone(caught.exception.extra["backup"])
+                self.assertNotIn("已恢复备份", caught.exception.message)
+                self.assertNotIn("已恢复备份", caught.exception.details[0]["hint"])
+            finally:
+                conn.close()
+
+        # repo.py: count_rows whitelist & put_slot missing session preserves existing slot
+        with app() as ctx:
+            ids = Ids()
+            sid = open_game(ctx, ids)["session_id"]
+            self.assertGreaterEqual(repo.count_rows(ctx.db(), "turn_log", sid), 0)
+            with self.assertRaises(ValueError):
+                repo.count_rows(ctx.db(), "sqlite_master", sid)
+            with self.assertRaises(ValueError):
+                repo.count_rows(ctx.db(), "turn_log; DROP TABLE sessions", sid)
+            state = session(ctx, sid)["state"]
+            service.save_slot(ctx, {"session_id": sid, "request_id": ids(), "expected_revision": state["revision"], "name": "保留档"})
+            with self.assertRaises(AppError) as caught:
+                repo.put_slot(ctx.db(), "保留档", "nonexistent_session", "标签", None, 2, "2026-01-01T00:00:00Z")
+            self.assertEqual(caught.exception.code, NOT_FOUND)
+            # Existing slot was NOT wiped.
+            self.assertIsNotNone(repo.get_slot(ctx.db(), "保留档"))
+
 
 if __name__ == "__main__":
     unittest.main()

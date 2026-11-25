@@ -36,7 +36,7 @@ class DeterminismTest(unittest.TestCase):
         for mode in ("daily", "pressure"):
             for seed in range(1, 11):
                 state, payload = build(mode, seed)
-                self.assertEqual(check_opening(state, PACK), [], (mode, seed))
+                self.assertEqual(check_opening(state, PACK, payload), [], (mode, seed))
                 self.assertTrue(payload["footer"].endswith("种子：%d" % seed))
 
 
@@ -303,6 +303,124 @@ class StateShapeTest(unittest.TestCase):
         state, _ = new_state("pressure", seed=3)
         self.assertEqual((state["revision"], state["turn"]), (1, 1))
         self.assertEqual(state["counters"]["next"]["fact"], len(state["facts"]) + 1)
+
+
+class P2OpeningTextChecksTest(unittest.TestCase):
+    def test_single_gender_identity_world_applies_effective_gender_in_plan_candidates(self):
+        pack = copy.deepcopy(PACK)
+        for ident in pack["player_identities"]:
+            ident["gender"] = "female"
+        # Fix all character templates to female: effective player gender is female ->
+        # default npc_preference is other_male, so no combo should pass plan_candidates.
+        for tpl in pack["character_templates"]:
+            tpl["gender"] = "female"
+        conditions = opening.normalize_conditions({"mode": "daily", "locks": {"world_id": WORLD}})
+        tuples, reasons = opening.plan_candidates(pack, "daily", conditions)
+        self.assertEqual(tuples, [])
+        self.assertTrue(reasons)
+        # Allow one template to be male: only combos including it pass plan_candidates.
+        male_slot = pack["cast_combos"][0]["slots"][0]
+        for tpl in pack["character_templates"]:
+            if tpl["id"] == male_slot:
+                tpl["gender"] = "male"
+        tuples, _reasons = opening.plan_candidates(pack, "daily", conditions)
+        self.assertTrue(tuples)
+        self.assertTrue(all(male_slot in t[0]["slots"] for t in tuples))
+
+    def test_no_match_uses_world_title_and_omits_misleading_age(self):
+        conditions = opening.normalize_conditions({"mode": "daily", "excludes": {"content_tags": ["workplace"]}})
+        tuples, reasons = opening.plan_candidates(PACK, "daily", conditions)
+        self.assertEqual(tuples, [])
+        self.assertIn(PACK["title"], reasons[0])
+        self.assertNotIn(PACK["id"], reasons[0])
+        # Identity mismatch reason and relax hint never mention age.
+        pack = copy.deepcopy(PACK)
+        for ident in pack["player_identities"]:
+            ident["gender"] = "male"
+        cond = opening.normalize_conditions({"mode": "daily", "player": {"gender": "female"}})
+        tuples, reasons = opening.plan_candidates(pack, "daily", cond)
+        self.assertEqual(tuples, [])
+        self.assertTrue(any("身份、性别" in r and "年龄" not in r for r in reasons), reasons)
+        err = opening.no_match(reasons, WORLD, cond)
+        self.assertTrue(any("放宽玩家设定" in r and "年龄" not in r for r in err.extra["relax"]), err.extra["relax"])
+        # Non-filtering player fields (e.g. age only) do not trigger a player relaxation hint.
+        err_age = opening.no_match(["无匹配"], WORLD, opening.normalize_conditions({"player": {"age": 25}}))
+        self.assertFalse(any("放宽玩家设定" in r for r in err_age.extra["relax"]), err_age.extra["relax"])
+
+    def test_pressure_leverage_and_foreshadow_are_not_double_rendered(self):
+        # A player name containing placeholder syntax must stay verbatim after single render.
+        state, payload = build("pressure", 2, locks={"pressure_id": "p_owner_men"}, player={"name": "甲{player.role}乙", "title": "甲{player.role}乙"})
+        (lv,) = state["leverage"].values()
+        basis = state["facts"][lv["basis_fact_id"]]["text"]
+        if "甲" in basis:
+            self.assertIn("甲{player.role}乙", basis)
+        if "甲" in payload["pressure"]["foreshadow"]:
+            self.assertIn("甲{player.role}乙", payload["pressure"]["foreshadow"])
+
+    def test_opening_checks_family_name_events_braces_and_diversity(self):
+        from adult_tension.domain import opening_checks
+
+        state, payload = build("daily", 1)
+        # Same family, different full names -> only "同姓" reported, not "重名".
+        s_fam = copy.deepcopy(state)
+        npc_id = next(c for c in s_fam["scene"]["present"] if c != "player")
+        s_fam["characters"][npc_id]["family"] = s_fam["characters"]["player"]["family"]
+        probs = opening_checks.check_opening(s_fam, PACK, payload)
+        self.assertIn("同一局的重要人物同姓", probs)
+        self.assertNotIn("同一局的重要人物重名", probs)
+        # Duplicate full name with empty family -> "重名" reported.
+        s_dup = copy.deepcopy(state)
+        s_dup["characters"]["player"]["family"] = ""
+        s_dup["characters"][npc_id]["family"] = ""
+        s_dup["characters"][npc_id]["name"] = s_dup["characters"]["player"]["name"]
+        probs = opening_checks.check_opening(s_dup, PACK, payload)
+        self.assertIn("同一局的重要人物重名", probs)
+        self.assertNotIn("同一局的重要人物同姓", probs)
+        # Daily mode event check does not double-report deadline/chance events.
+        s_ev = copy.deepcopy(state)
+        s_ev["events"]["e1"] = {
+            "id": "e1", "kind": "deadline", "tier": "immediate", "title": "t", "text": "x",
+            "participants": ["player"], "due": {"day": 1, "minute": 1400}, "probability": None,
+            "dedupe_key": "k", "state": "pending", "outcome": None, "created_turn": 1,
+            "resolved_turn": None, "note": None, "coord": [1, 0],
+        }
+        ev_probs = [p for p in opening_checks.check_opening(s_ev, PACK, payload) if "日常模式开局" in p]
+        self.assertEqual(ev_probs, ["日常模式开局出现了倒计时或概率事件"])
+        s_ev["events"]["e1"]["kind"] = "foreshadow"
+        ev_probs = [p for p in opening_checks.check_opening(s_ev, PACK, payload) if "日常模式开局" in p]
+        self.assertEqual(ev_probs, ["日常模式开局不应有预设事件"])
+        # Unrendered placeholders in opening_payload are caught; reversed "} ... {" is ignored.
+        bad_payload = copy.deepcopy(payload)
+        bad_payload["hook"]["text"] = "{npc.name}递过来一杯热茶"
+        self.assertTrue(any("未渲染的占位" in p for p in opening_checks.check_opening(state, PACK, bad_payload)))
+        rev_payload = copy.deepcopy(payload)
+        rev_payload["hook"]["text"] = "右括}在左括{前"
+        self.assertEqual(opening_checks.check_opening(state, PACK, rev_payload), [])
+        # diversity() guards non-positive count and scales thresholds cleanly.
+        for bad in (0, -3, False):
+            with self.assertRaises(ValueError):
+                opening_checks.diversity(PACK, "daily", base=1, count=bad)
+        res10 = opening_checks.diversity(PACK, "daily", base=1, count=10)
+        self.assertEqual(res10["checks"]["signatures"]["need"], ">= 6")
+        self.assertEqual(res10["checks"]["identities"]["need"], ">= 3")
+
+    def test_text_binding_none_fallback_and_given_first_full_name(self):
+        from adult_tension.domain import text as TX
+
+        scope = TX.binding({"name": None, "family": None, "given": None, "call": None, "public_role": None, "role": None, "title": None, "gender": None})
+        self.assertEqual(scope["name"], "")
+        self.assertEqual(scope["family"], "")
+        self.assertEqual(scope["given"], "")
+        self.assertEqual(scope["call"], "")
+        self.assertEqual(scope["title"], "")
+        self.assertEqual(scope["role"], "")
+        self.assertEqual(TX.render("{npc.name}-{npc.family}-{npc.given}-{npc.ta}", {"npc": scope}), "---TA")
+        gf = {"order": "given_first"}
+        self.assertEqual(TX.full_name(gf, "米勒", "艾达"), "艾达·米勒")
+        self.assertEqual(TX.full_name(gf, "", "艾达"), "艾达")
+        self.assertEqual(TX.full_name(gf, "米勒", ""), "米勒")
+        self.assertEqual(TX.full_name(gf, None, "艾达"), "艾达")
+        self.assertEqual(TX.full_name(gf, "", ""), "")
 
 
 if __name__ == "__main__":

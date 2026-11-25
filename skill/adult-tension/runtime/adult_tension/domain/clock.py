@@ -32,7 +32,9 @@ def until_target(clock, anchor):
 
 
 def cn_number(value):
-    """Chinese numerals for day counts (1..9999)."""
+    """Chinese numerals for 0..99 (day counts 1..99); >= 100 falls back to Arabic digits."""
+    if value < 0:
+        raise ValueError("cn_number requires a non-negative integer: %r" % (value,))
     if value < 10:
         return CN_DIGITS[value]
     if value < 20:

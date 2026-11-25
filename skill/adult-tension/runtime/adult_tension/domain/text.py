@@ -66,14 +66,14 @@ def stray_braces(text):
 def binding(character):
     """The attribute map a placeholder scope resolves to."""
     return {
-        "name": character.get("name", ""),
+        "name": character.get("name") or "",
         "ta": pronoun(character.get("gender")),
-        "family": character.get("family", ""),
-        "given": character.get("given", ""),
-        "call": character.get("call") or character.get("name", ""),
-        "称呼": character.get("call") or character.get("name", ""),
-        "role": character.get("public_role") or character.get("role", ""),
-        "title": character.get("title") or character.get("call") or character.get("name", ""),
+        "family": character.get("family") or "",
+        "given": character.get("given") or "",
+        "call": character.get("call") or character.get("name") or "",
+        "称呼": character.get("call") or character.get("name") or "",
+        "role": character.get("public_role") or character.get("role") or "",
+        "title": character.get("title") or character.get("call") or character.get("name") or "",
     }
 
 
@@ -100,8 +100,8 @@ def render_name_pattern(pattern, family, given):
 def full_name(pools, family, given):
     """A full name in the world's name order (name_pools.order)."""
     if pools.get("order") == "given_first":
-        return given + "·" + family
-    return family + given
+        return "·".join(p for p in (given, family) if p)
+    return (family or "") + (given or "")
 
 
 def split_name(pools, name):

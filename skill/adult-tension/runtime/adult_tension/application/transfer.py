@@ -77,7 +77,7 @@ def export_target(ctx, path, stem, overwrite):
     if ".." in parts:
         problems.append(detail("$.path", "路径里不能有 ..", "给出完整的绝对路径", INVALID_INPUT))
     if not os.path.isabs(path):
-        problems.append(detail("$.path", "导出路径必须是绝对路径", "例如 D:\\\\备份\\\\港口.json；不给路径时写到数据目录的 exports/", INVALID_INPUT))
+        problems.append(detail("$.path", "导出路径必须是绝对路径", "例如 D:\\备份\\港口.json；不给路径时写到数据目录的 exports/", INVALID_INPUT))
     if not path.lower().endswith(".json"):
         problems.append(detail("$.path", "导出文件要以 .json 结尾", None, INVALID_INPUT))
     if problems:
@@ -97,11 +97,18 @@ def export_target(ctx, path, stem, overwrite):
 def write_file(target, doc):
     data = dumps(doc).encode("utf-8")
     temp = "%s.tmp-%d" % (target, os.getpid())
-    with open(temp, "wb") as handle:
-        handle.write(data)
-        handle.flush()
-        os.fsync(handle.fileno())
-    os.replace(temp, target)
+    try:
+        with open(temp, "wb") as handle:
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temp, target)
+    except OSError as exc:
+        try:
+            os.remove(temp)
+        except OSError:
+            pass
+        fail([detail("$.path", "无法写入导出文件：%s（%s）" % (target, exc.strerror or exc), "确认目录可写、磁盘空间充足且文件未被占用", INVALID_INPUT)])
     return len(data)
 
 
@@ -115,10 +122,13 @@ def read_source(payload):
         path = payload["path"]
         if not os.path.isfile(path):
             fail([detail("$.path", "文件不存在：%s" % path, "确认路径；或让玩家直接粘贴导出的 JSON", INVALID_INPUT)])
-        if os.path.getsize(path) > MAX_IMPORT_BYTES:
-            fail([detail("$.path", "文件太大（上限 %d MB）" % (MAX_IMPORT_BYTES // 1024 // 1024), None, INVALID_INPUT)])
-        with open(path, "rb") as handle:
-            raw = handle.read()
+        try:
+            if os.path.getsize(path) > MAX_IMPORT_BYTES:
+                fail([detail("$.path", "文件太大（上限 %d MB）" % (MAX_IMPORT_BYTES // 1024 // 1024), None, INVALID_INPUT)])
+            with open(path, "rb") as handle:
+                raw = handle.read()
+        except OSError as exc:
+            fail([detail("$.path", "无法读取导入文件：%s（%s）" % (path, exc.strerror or exc), "确认文件可读；或让玩家直接粘贴导出的 JSON", INVALID_INPUT)])
         try:
             return loads_strict(decode_bytes(raw, "导入文件"), "导入文件"), raw
         except AppError as err:

@@ -474,7 +474,7 @@ class SafetyTest(unittest.TestCase):
 
     def test_boundaries_block_matching_tags(self):
         state, result = meta.set_boundary(self.state, self.content, "add", "不要涉及怀孕", ["pregnancy"])
-        self.assertEqual(result["receipt"], "已记下：不会出现涉及怀孕")
+        self.assertEqual(result["receipt"], "已记下：不会出现怀孕")
         err = rejected(state, commit("continue", [{"op": "npc_action", "npc_id": self.a, "action": "提起孩子"}], tags=["pregnancy"]))
         self.assertEqual(err.code, "SAFETY_BLOCK")
         apply(state, commit("continue", [{"op": "npc_action", "npc_id": self.a, "action": "聊天气"}]))
@@ -505,17 +505,113 @@ class SafetyTest(unittest.TestCase):
         apply(state, commit("continue", [{"op": "npc_action", "npc_id": self.a, "action": "收拾桌子"}]))
 
     def test_change_scene_keeps_pause_and_resume_clears_judgments(self):
-        state, _ = apply(self.state, commit("attempt", [{"op": "npc_response", "npc_id": self.a, "response": "partial", "note": "只肯一半"}], acts_on=[self.a], player_authorized=True))
-        paused, _ = meta.set_safety(state, True)
+        state, _ = apply(self.state, commit("attempt", [{"op": "npc_response", "npc_id": self.a, "response": "partial", "note": "只肯一半"}], acts_on=[self.a], player_authorized=True, quotes=["别碰我"]))
+        self.assertTrue(state["memory"]["open_action"])
+        self.assertEqual(state["memory"]["last_quotes"], ["别碰我"])
+        paused, paused_res = meta.set_safety(state, True)
         moved, result = meta.set_safety(paused, True, change_scene=True)
         self.assertTrue(moved["safety"]["paused"])
         self.assertNotEqual(moved["scene"]["id"], paused["scene"]["id"])
         self.assertEqual(moved["scene"]["responses"], [])
-        resumed, _ = meta.set_safety(paused, False)
+        self.assertIsNone(moved["memory"]["open_action"])
+        self.assertEqual(moved["memory"]["last_quotes"], [])
+        self.assertFalse(result["receipt"].endswith("。"))
+        resumed, resumed_res = meta.set_safety(paused, False)
         self.assertFalse(resumed["safety"]["paused"])
         self.assertEqual(resumed["scene"]["responses"], [])
+        self.assertFalse(resumed_res["receipt"].endswith("。"))
+        self.assertFalse(paused_res["receipt"].endswith("。"))
         again, result = meta.set_safety(paused, True)
         self.assertIsNone(again)
+
+    def test_boundary_subject_prefixes_remove_conflict_and_noop_preferences(self):
+        from adult_tension.errors import AppError
+
+        for raw, expected in (
+            ("不喜欢暴力", "已记下：不会出现暴力"),
+            ("不要写死亡", "已记下：不会出现死亡"),
+            ("不要涉及怀孕", "已记下：不会出现怀孕"),
+            ("不要写到有人受重伤", "已记下：不会出现有人受重伤"),
+            ("拒绝出现血腥", "已记下：不会出现血腥"),
+            ("禁止涉及背叛", "已记下：不会出现背叛"),
+            ("不想看羞辱", "已记下：不会出现羞辱"),
+            ("不要", "已记下：不会出现不要"),
+        ):
+            _s, res = meta.set_boundary(self.state, self.content, "add", raw, [])
+            self.assertEqual(res["receipt"], expected, raw)
+        # remove with conflicting boundary_id & text fails explicitly
+        s1, r1 = meta.set_boundary(self.state, self.content, "add", "不喜欢暴力", ["violence"])
+        s2, r2 = meta.set_boundary(s1, self.content, "add", "不要写死亡", ["death"])
+        with self.assertRaises(AppError) as caught:
+            meta.set_boundary(s2, self.content, "remove", text=r2["boundary"]["text"], boundary_id=r1["boundary"]["id"])
+        self.assertEqual(caught.exception.code, "INVALID_INPUT")
+        # remove with nonexistent boundary_id does not silently remove by text
+        with self.assertRaises(AppError) as caught:
+            meta.set_boundary(s2, self.content, "remove", text=r2["boundary"]["text"], boundary_id="b999")
+        self.assertEqual(caught.exception.code, "NOT_FOUND")
+        # remove prefers exact boundary_id when text does not match another boundary
+        s3, r3 = meta.set_boundary(s2, self.content, "remove", text="略有不同的措辞", boundary_id=r1["boundary"]["id"])
+        self.assertEqual(r3["boundary"]["id"], r1["boundary"]["id"])
+        self.assertEqual([b["id"] for b in s3["safety"]["boundaries"]], [r2["boundary"]["id"]])
+        # set_preferences with unchanged values does not bump revision
+        unchanged_state, unchanged_res = meta.set_preferences(
+            self.state,
+            self.content,
+            {"inner_view": self.state["preferences"]["inner_view"], "pace": self.state["preferences"]["pace"]},
+        )
+        self.assertIsNone(unchanged_state)
+        self.assertFalse(unchanged_res["changed"])
+        changed_state, changed_res = meta.set_preferences(self.state, self.content, {"voice": {"npc_id": self.a, "voice": "inner"}})
+        self.assertTrue(changed_res["changed"])
+        self.assertEqual(changed_state["revision"], self.state["revision"] + 1)
+        repeat_voice_state, repeat_voice_res = meta.set_preferences(changed_state, self.content, {"voice": {"npc_id": self.a, "voice": "inner"}})
+        self.assertIsNone(repeat_voice_state)
+        self.assertFalse(repeat_voice_res["changed"])
+
+    def test_p2_card_limits_standby_hint_and_frozen_leverage(self):
+        from adult_tension.domain import cards as C
+        from adult_tension.domain import opening, ops
+
+        # cards / ops_people field descriptions & unified terms
+        self.assertEqual(C.IDENTITY.name, "身份卡")
+        self.assertEqual(C.VOICES.name, "表里语态")
+        self.assertIn("SAFETY_BLOCK", ops.SPECS["introduce_character"].fields["age"].desc)
+        self.assertIn("supporting", ops.SPECS["introduce_character"].fields["decision"].desc)
+        for field in ("holder", "subject", "basis_fact_id", "basis_text", "origin"):
+            self.assertTrue(ops.SPECS["leverage_set"].fields[field].desc, field)
+        # identity_update enforces <=80 chars and <=8 items for list fields
+        err = rejected(self.state, commit("continue", [{"op": "identity_update", "npc_id": self.a, "item": "resources", "action": "add", "value": "字" * 81, "reason": "过长"}]))
+        self.assertIn("80 字", reasons(err))
+        full_res = dict(self.state, characters=dict(self.state["characters"]))
+        full_res["characters"][self.a] = dict(self.state["characters"][self.a], identity=dict(self.state["characters"][self.a]["identity"], resources=["项%d" % i for i in range(8)]))
+        err = rejected(full_res, commit("continue", [{"op": "identity_update", "npc_id": self.a, "item": "resources", "action": "add", "value": "第九条", "reason": "已满"}]))
+        self.assertIn("最多保留 8 条", reasons(err))
+        # npc_update enforces public_role<=30, current_goal<=80, relationship_stance<=80, and forbids supporting relationship_stance
+        for field, length, limit_text in (("public_role", 31, "30 字"), ("current_goal", 81, "80 字"), ("relationship_stance", 81, "80 字")):
+            err = rejected(self.state, commit("continue", [{"op": "npc_update", "npc_id": self.a, "field": field, "value": "字" * length, "reason": "超长"}]))
+            self.assertIn(limit_text, reasons(err))
+        card = major_card(cid="sup_npc", tier="supporting")
+        for k in ("intimacy", "voices", "situation"):
+            del card[k]
+        card["decision"] = {"core_value": "稳", "current_goal": "守住岗"}
+        sup_state, _ = apply(self.state, commit("continue", [card]))
+        err = rejected(sup_state, commit("continue", [{"op": "npc_update", "npc_id": "sup_npc", "field": "relationship_stance", "value": "防备", "reason": "配角不该有"}]))
+        self.assertIn("major", reasons(err))
+        # introduce_character hitting standby template ID explicitly guides to enter_scene
+        standby_id = sorted(opening.standby_previews(self.state, self.content["world"]))[0]
+        err = rejected(self.state, commit("continue", [major_card(cid=standby_id)]))
+        self.assertIn("待命池", reasons(err))
+        self.assertIn("enter_scene", reasons(err))
+        # leverage_set / leverage_release reject absent NPC holder when offscreen is frozen
+        absent = next(c for c in self.state["characters"] if c not in self.state["scene"]["present"] and c != "player")
+        frozen = dict(self.state, preferences=dict(self.state["preferences"], offscreen_simulation=False))
+        err = rejected(frozen, commit("continue", [{"op": "leverage_set", "holder": absent, "subject": self.a, "basis_text": "暗中扣下凭证", "origin": "扣押"}]))
+        self.assertIn("冻结", reasons(err))
+        live, res = apply(self.state, commit("continue", [{"op": "leverage_set", "holder": absent, "subject": self.a, "basis_text": "暗中扣下凭证", "origin": "扣押"}]))
+        lid = res["applied"][0]["leverage_id"]
+        frozen_live = dict(live, preferences=dict(live["preferences"], offscreen_simulation=False))
+        err = rejected(frozen_live, commit("continue", [{"op": "leverage_release", "leverage_id": lid, "reason": "离屏私放"}]))
+        self.assertIn("冻结", reasons(err))
 
     def test_preferences_and_player_requested_voice(self):
         state, result = meta.set_preferences(self.state, self.content, {"inner_view": True, "person": "third", "voice": {"npc_id": self.a, "voice": "inner"}})

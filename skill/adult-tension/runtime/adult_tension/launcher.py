@@ -14,7 +14,8 @@ def launch(argv, skill_root):
     data_dir, _source = paths.resolve(paths.data_dir_arg(argv))
     if not paths.is_inside(data_dir, skill_root):
         sys.pycache_prefix = paths.pycache_dir(data_dir)
-        sys.dont_write_bytecode = False
+        if not sys.flags.dont_write_bytecode:
+            sys.dont_write_bytecode = False
     from .adapters.cli import run
 
     return run(argv, skill_root)

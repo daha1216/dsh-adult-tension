@@ -296,7 +296,7 @@ class MetaCommandTest(unittest.TestCase):
             payload = {"session_id": sid, "request_id": rid, "expected_revision": 1, "action": "add", "text": "不要涉及怀孕", "tags": ["pregnancy"]}
             first = service.set_boundary(ctx, payload)
             self.assertEqual((first["revision"], first["turn"]), (2, 1))
-            self.assertEqual(first["receipt"], "已记下：不会出现涉及怀孕")
+            self.assertEqual(first["receipt"], "已记下：不会出现怀孕")
             self.assertEqual(first["context"]["safety"]["boundaries"], ["不要涉及怀孕"])
             again = service.set_boundary(ctx, payload)
             self.assertTrue(again["replayed"])
@@ -834,6 +834,95 @@ class RuntimeAppFixesTest(unittest.TestCase):
         my_world_desc = specs.NEW_GAME.fields["my_world"].desc
         for token in ("custom_world", "locks.world_id", "excludes.world_ids", "replay", "world_query"):
             self.assertIn(token, my_world_desc)
+
+    def test_p2_verify_guide_doctor_smoke_specs_and_errors(self):
+        import ast
+        import subprocess
+        import sys
+        from unittest import mock
+
+        from adult_tension import errors as E
+        from adult_tension.application import doctor, guide, smoke, specs, verify
+        from helpers.cli import SKILL_ROOT
+
+        # 1. verify._verify_file converts OSError into CONTENT_ERROR
+        with temp_dir() as tmp:
+            sample = os.path.join(tmp, "unreadable.json")
+            with open(sample, "w", encoding="utf-8") as handle:
+                handle.write("{}")
+            with mock.patch("builtins.open", side_effect=PermissionError(13, "denied")):
+                with self.assertRaises(AppError) as caught:
+                    verify._verify_file({"file": sample, "stats": False}, set(), [])
+            self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), (E.CONTENT_ERROR, "$.file"))
+
+        # 2. guide includes standard tier and plain Chinese save-world phrase without <>
+        with app() as ctx:
+            ids = Ids()
+            sid = open_game(ctx, ids, mode="daily", seed=15)["session_id"]
+            playing = guide.run(ctx, {"session_id": sid})
+            self.assertIn("节奏 慢热 / 标准 / 直接，尺度 含蓄 / 标准 / 直白", playing["text"])
+            custom = guide.run(ctx, {"topic": "custom_world"})
+            self.assertIn("保存世界 名字", custom["text"])
+            self.assertNotIn("<", custom["text"])
+            self.assertNotIn(">", custom["text"])
+
+        # 3. doctor formats MIN_PYTHON dynamically
+        with mock.patch.object(doctor, "MIN_PYTHON", (3, 99)):
+            py_res = doctor._python_check()
+            self.assertEqual((py_res["status"], py_res["code"]), ("fail", E.RUNTIME_UNSUPPORTED))
+            self.assertIn("3.99+", py_res["hint"])
+            with mock.patch.dict(sys.modules, {"sqlite3": None}):
+                sq_res = doctor._sqlite_check()
+            self.assertEqual((sq_res["status"], sq_res["code"]), ("fail", E.RUNTIME_UNSUPPORTED))
+            self.assertIn("3.99+", sq_res["hint"])
+
+        # 4. smoke has zero assert statements and enforces checks even under python -O
+        with open(smoke.__file__, encoding="utf-8") as handle:
+            tree = ast.parse(handle.read())
+        self.assertEqual([n for n in ast.walk(tree) if isinstance(n, ast.Assert)], [])
+        runtime_dir = os.path.join(SKILL_ROOT, "runtime")
+        check_o = (
+            "import sys\n"
+            "sys.path.insert(0, %r)\n"
+            "from adult_tension import errors\n"
+            "from adult_tension.application import smoke\n"
+            "from adult_tension.application.context import Context\n"
+            "from adult_tension.domain import invariants\n"
+            "orig_check = invariants.check\n"
+            "invariants.check = lambda state, before_clock=None: ['broken'] if before_clock is None else orig_check(state, before_clock)\n"
+            "ctx = Context(%r, None, {}, {}, False)\n"
+            "try:\n"
+            "    smoke.run(ctx, {'seed': 7, 'turns': 2})\n"
+            "    raise SystemExit(2)\n"
+            "except errors.AppError as err:\n"
+            "    if err.code != errors.INTERNAL_ERROR:\n"
+            "        raise SystemExit(3)\n"
+            "finally:\n"
+            "    ctx.close()\n"
+        ) % (runtime_dir, SKILL_ROOT)
+        proc = subprocess.run(
+            [sys.executable, "-B", "-O", "-c", check_o],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            env=clean_env(PYTHONDONTWRITEBYTECODE="1"),
+            timeout=60,
+        )
+        self.assertEqual(proc.returncode, 0, proc.stderr.decode("utf-8", "replace"))
+
+        # 5. specs & errors P2 descriptions
+        self.assertIn("二选一", specs.EXPORT_SAVE.fields["session_id"].desc)
+        self.assertIn("二选一", specs.EXPORT_SAVE.fields["slot"].desc)
+        self.assertIn("二选一", specs.IMPORT_SAVE.fields["path"].desc)
+        self.assertIn("二选一", specs.IMPORT_SAVE.fields["data"].desc)
+        self.assertIn("add", specs.SET_BOUNDARY.fields["text"].desc)
+        self.assertIn("remove", specs.SET_BOUNDARY.fields["text"].desc)
+        self.assertIn("remove", specs.SET_BOUNDARY.fields["boundary_id"].desc)
+        self.assertIn("tools/new_world.py", specs.VERIFY_CONTENT.fields["file"].desc)
+        self.assertNotIn("new-world", specs.VERIFY_CONTENT.fields["file"].desc)
+        self.assertEqual(specs.PREFERENCES.fields["pace"].desc, specs.SET_PREFERENCES.fields["pace"].desc)
+        self.assertEqual(specs.PREFERENCES.fields["explicitness"].desc, specs.SET_PREFERENCES.fields["explicitness"].desc)
+        self.assertIn("world_query", E.ERROR_DESCRIPTIONS[E.NO_MATCH])
+        self.assertIn("candidates", E.ERROR_DESCRIPTIONS[E.NO_MATCH])
 
 
 if __name__ == "__main__":
