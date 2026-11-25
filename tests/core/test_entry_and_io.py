@@ -147,6 +147,57 @@ class SchemaTest(unittest.TestCase):
         _out, errs = schema.validate(self.SPEC, {"name": "", "count": -1, "kind": "z", "nope": 1})
         self.assertEqual(len(errs), 4)
 
+    def test_tagged_unhashable_and_non_string_tag_is_input_error(self):
+        spec = schema.Tagged("op", {"ok": schema.Obj({"op": schema.Field(schema.Str())})})
+        for bad in ([], {}, 123, None):
+            out, errs = schema.validate(spec, {"op": bad})
+            self.assertIsNone(out)
+            self.assertEqual(len(errs), 1)
+            self.assertEqual((errs[0]["path"], errs[0]["code"]), ("$.op", "INVALID_INPUT"))
+
+
+class CliParseArgvTest(unittest.TestCase):
+    def test_invalid_int_flag_points_to_its_own_argv_index(self):
+        from adult_tension.adapters import cli
+
+        for argv, expected_path in (
+            (["smoke", "--turns", "abc"], "$.argv[1]"),
+            (["smoke", "--turns=abc"], "$.argv[1]"),
+            (["smoke", "--seed", "1", "--turns", "xyz"], "$.argv[3]"),
+        ):
+            with self.assertRaises(AppError, msg=argv) as caught:
+                cli.parse_argv(argv)
+            self.assertEqual(caught.exception.code, "INVALID_INPUT")
+            self.assertEqual(caught.exception.details[0]["path"], expected_path)
+
+    def test_unhashable_op_returns_invalid_input_not_internal_error(self):
+        import io
+
+        from adult_tension.adapters import cli
+        from helpers.cli import SKILL_ROOT
+
+        body = json.dumps(
+            {
+                "session_id": "s_12345678",
+                "request_id": "req_unhashable_op",
+                "expected_revision": 1,
+                "turns": [
+                    {
+                        "action_mode": "continue",
+                        "player_input": "继续",
+                        "operations": [{"op": []}],
+                        "content_tags": [],
+                        "summary": "测试",
+                        "open_action": "停住",
+                    }
+                ],
+            },
+            ensure_ascii=False,
+        ).encode("utf-8")
+        envelope, code, _options, _text, _payload = cli.execute(["commit-turn", "--json", "--input-file", "-"], SKILL_ROOT, io.BytesIO(body), clean_env())
+        self.assertEqual((code, envelope["error"]["code"]), (10, "INVALID_INPUT"))
+        self.assertEqual(envelope["error"]["details"][0]["path"], "$.turns[0].operations[0].op")
+
 
 if __name__ == "__main__":
     unittest.main()

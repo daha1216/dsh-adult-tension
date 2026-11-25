@@ -415,6 +415,232 @@ class InvariantNetTest(unittest.TestCase):
         err = rejected(state, commit("continue", [{"op": "npc_action", "npc_id": npc, "action": "抬头"}]))
         self.assertEqual(err.code, "INVARIANT_VIOLATION")
 
+    def test_bool_age_and_non_str_adult_context_are_rejected(self):
+        from adult_tension.domain import invariants, state_check
+        from helpers.domain import content
+
+        state, _ = new_state("daily", seed=2)
+        npc = npcs(state)[0]
+        state["characters"][npc]["age"] = True
+        state["characters"][npc]["adult_context"] = 123
+        inv_paths = {d["path"] for d in invariants.check(state)}
+        self.assertIn("$.state.characters.%s.age" % npc, inv_paths)
+        self.assertIn("$.state.characters.%s.adult_context" % npc, inv_paths)
+        chk_paths = {d["path"] for d in state_check.check_state(state, content()["world"])}
+        self.assertIn("$.characters.%s.age" % npc, chk_paths)
+        self.assertIn("$.characters.%s.adult_context" % npc, chk_paths)
+
+
+class RegressionP0P1Test(unittest.TestCase):
+    def test_offscreen_beat_cannot_resolve_player_event_release_player_leverage_or_add_public_fact(self):
+        from helpers.domain import content
+
+        state, _ = new_state("pressure", seed=11)
+        majors = sorted(c for c in npcs(state) if state["characters"][c]["tier"] == "major")
+        a, b = majors[:2]
+        here = state["scene"]["location_id"]
+        elsewhere = next(loc["id"] for loc in content()["world"]["locations"] if loc["id"] != here)
+        state, result = apply(
+            state,
+            commit(
+                "result",
+                [
+                    {"op": "event_create", "kind": "opportunity", "title": "带玩家的机会", "participants": ["player", b], "in_minutes": 600, "dedupe_key": "t.p_opp"},
+                    {"op": "leverage_set", "holder": "player", "subject": b, "basis_text": "玩家握着对方的把柄", "origin": "扣下凭证"},
+                    {"op": "exit_scene", "character_id": b, "to_location_id": elsewhere},
+                ],
+                player_authorized=True,
+            ),
+        )
+        eid = result["applied"][0]["event_id"]
+        lid = result["applied"][1]["leverage_id"]
+        skip90 = {"op": "advance_time", "minutes": 90}
+        act_a = {"op": "npc_action", "npc_id": a, "action": "看表"}
+        for sub in (
+            {"op": "event_resolve", "event_id": eid, "outcome": "fulfilled", "note": "离屏私自了结"},
+            {"op": "event_cancel", "event_id": eid, "reason": "离屏私自取消"},
+            {"op": "leverage_release", "leverage_id": lid, "reason": "离屏私自解除"},
+        ):
+            beat = {"op": "offscreen_beat", "npc_id": b, "summary": "私下动作", "operations": [sub]}
+            err = rejected(state, commit("continue", [skip90, beat, act_a]))
+            self.assertIn("玩家角色", reasons(err))
+        # P0-5: offscreen add_fact forbids visibility="public"
+        pub_fact = {"op": "add_fact", "key": "b.secret", "text": "离屏密谋", "known_by": [b], "visibility": "public", "origin": "observed"}
+        err = rejected(state, commit("continue", [skip90, {"op": "offscreen_beat", "npc_id": b, "summary": "密谋", "operations": [pub_fact]}, act_a]))
+        self.assertIn("public", reasons(err))
+        # P1: offscreen move to player's location must not pull NPC into scene["present"]
+        move_sub = {"op": "move", "character_id": b, "location_id": here}
+        after, _ = apply(state, commit("continue", [skip90, {"op": "offscreen_beat", "npc_id": b, "summary": "悄悄靠近", "operations": [move_sub]}, act_a]))
+        self.assertNotIn(b, after["scene"]["present"])
+        self.assertEqual(after["characters"][b]["status"]["location_id"], here)
+
+    def test_false_fact_forbids_public_and_overlap(self):
+        state, _ = new_state("daily", seed=5)
+        a = npcs(state)[0]
+        err = rejected(state, commit("continue", [{"op": "add_fact", "key": "f.pub", "text": "假消息", "truth": False, "believed_by": [a], "visibility": "public", "origin": "told"}]))
+        self.assertIn("public", reasons(err))
+        err = rejected(state, commit("continue", [{"op": "add_fact", "key": "f.ov", "text": "假消息", "truth": False, "known_by": [a], "believed_by": [a], "visibility": "private", "origin": "told"}]))
+        self.assertIn("同时在 known_by 与 believed_by", reasons(err))
+
+    def test_state_check_catches_bad_ids_chance_prob_prefs_leverage_schedule_and_counters(self):
+        from adult_tension.domain import state_check
+        from adult_tension.jsonio import copy
+        from helpers.domain import content
+
+        state, _ = new_state("pressure", seed=11)
+        world = content()["world"]
+        self.assertEqual(state_check.check_state(state, world), [])
+        # Bad fact id does not raise ValueError
+        bad_id = copy(state)
+        bad_id["facts"]["bad_id"] = dict(next(iter(bad_id["facts"].values())), id="bad_id")
+        errs = state_check.check_state(bad_id, world)
+        self.assertIn("$.facts.bad_id", {e["path"] for e in errs})
+        # Bad chance probability, preferences, leverage, schedule, counters.next
+        broken = copy(state)
+        broken["events"]["e99"] = {
+            "id": "e99",
+            "kind": "chance",
+            "tier": "near",
+            "title": "坏概率",
+            "text": None,
+            "participants": ["player"],
+            "due": CL.add_minutes(broken["clock"], 60),
+            "probability": None,
+            "dedupe_key": "bad.chance",
+            "state": "pending",
+            "outcome": None,
+            "created_turn": 1,
+            "resolved_turn": None,
+            "note": None,
+            "coord": [1, 99],
+        }
+        broken["preferences"]["person"] = "fourth"
+        broken["preferences"]["pace"] = "turbo"
+        broken["preferences"]["explicitness"] = "wild"
+        broken["preferences"]["npc_gender_preference"] = "aliens"
+        fid = next(iter(broken["facts"]))
+        npc = npcs(broken)[0]
+        broken["leverage"]["lv1"] = {
+            "id": "lv_wrong",
+            "holder": "player",
+            "subject": npc,
+            "basis_fact_id": fid,
+            "origin": "x",
+            "state": "broken",
+            "created_turn": 1,
+            "released_turn": None,
+            "release_reason": None,
+        }
+        broken["characters"][npc]["schedule"] = [{"from": 0, "to": 1500, "location_id": "no_such_loc"}]
+        broken["counters"]["next"]["scene"] = 0
+        paths = {e["path"] for e in state_check.check_state(broken, world)}
+        for expected in (
+            "$.events.e99.probability",
+            "$.preferences.person",
+            "$.preferences.pace",
+            "$.preferences.explicitness",
+            "$.preferences.npc_gender_preference",
+            "$.leverage.lv1.id",
+            "$.leverage.lv1.state",
+            "$.characters.%s.schedule[0].to" % npc,
+            "$.characters.%s.schedule[0].location_id" % npc,
+            "$.counters.next.scene",
+        ):
+            self.assertIn(expected, paths)
+
+    def test_standby_not_instantiated_on_pure_reference_or_error(self):
+        from adult_tension.domain import opening
+        from helpers.domain import content
+
+        state, _ = new_state("daily", seed=17)
+        npc = npcs(state)[0]
+        standby_id = sorted(opening.standby_previews(state, content()["world"]))[0]
+        err = rejected(state, commit("continue", [{"op": "npc_action", "npc_id": npc, "action": "提起某人", "target_id": standby_id}]))
+        self.assertEqual(err.code, "NOT_FOUND")
+        self.assertNotIn(standby_id, state["characters"])
+
+    def test_exit_scene_clears_moved_on_same_turn_bounce(self):
+        state, _ = new_state("daily", seed=17)
+        npc = npcs(state)[0]
+        here = state["scene"]["location_id"]
+        target = next(loc for loc in _world_locations() if loc["id"] == here)["exits"][0]
+        ops = [
+            {"op": "move", "character_id": npc, "location_id": target},
+            {"op": "move", "character_id": "player", "location_id": target},
+            {"op": "exit_scene", "character_id": npc},
+            {"op": "move", "character_id": "player", "location_id": here},
+            {"op": "move", "character_id": "player", "location_id": target},
+        ]
+        new, _ = apply(state, commit("result", ops, player_authorized=True))
+        self.assertNotIn(npc, new["scene"]["present"])
+
+    def test_player_update_splits_name_and_checks_duplicate(self):
+        from helpers.domain import content
+
+        state, _ = new_state("daily", seed=17)
+        npc = npcs(state)[0]
+        err = rejected(state, commit("result", [{"op": "player_update", "name": state["characters"][npc]["name"]}], player_authorized=True))
+        self.assertIn("已经有人叫", reasons(err))
+        fam = content()["world"]["name_pools"]["family"][0]
+        new, _ = apply(state, commit("result", [{"op": "player_update", "name": fam + "明远"}], player_authorized=True))
+        self.assertEqual((new["characters"]["player"]["family"], new["characters"]["player"]["given"]), (fam, "明远"))
+
+    def test_relationship_uses_reverse_edge_contact_and_inherits_stage(self):
+        state, _ = new_state("daily", seed=9)
+        npc = npcs(state)[0]
+        state, _ = apply(state, commit("continue", [{"op": "exit_scene", "character_id": npc}]))
+        del state["relationships"]["player>%s" % npc]
+        state["relationships"]["%s>player" % npc]["stage"] = "familiar"
+        new, _ = apply(state, commit("result", [{"op": "relationship", "from": "player", "to": npc, "trust_delta": 1, "reason": "回想起来觉得可靠"}], player_authorized=True))
+        self.assertEqual(new["relationships"]["player>%s" % npc]["stage"], "familiar")
+
+    def test_restore_drops_meta_voice_for_undone_newcomer(self):
+        from adult_tension.domain import meta, state_check, turn
+        from helpers.domain import content
+        from test_people_safety import major_card
+
+        before, _ = new_state("daily", seed=53)
+        after, _ = apply(before, commit("continue", [major_card(cid="temp_vip")]))
+        after, _ = meta.set_preferences(after, content(), {"voice": {"npc_id": "temp_vip", "voice": "inner"}})
+        undone, _ = turn.undo(after, before)
+        self.assertNotIn("temp_vip", undone["preferences"]["voice"])
+        self.assertEqual(state_check.check_state(undone, content()["world"]), [])
+
+    def test_offscreen_truth_propagation_corrects_misbelief(self):
+        from adult_tension.domain import facts as FA
+        from adult_tension.domain import settlement, simulation
+
+        state, _ = new_state("pressure", seed=11)
+        a, b = sorted(c for c in npcs(state) if state["characters"][c]["tier"] == "major")[:2]
+        ops = [
+            {"op": "add_fact", "key": "cargo.real", "text": "货箱里是假货", "truth": False, "believed_by": [b], "visibility": "private", "origin": "told"},
+            {"op": "add_fact", "key": "cargo.real", "text": "货箱里是真货", "truth": True, "known_by": [a], "visibility": "private", "origin": "observed", "spread": True},
+        ]
+        state, result = apply(state, commit("continue", ops))
+        false_id, true_id = result["applied"][0]["fact_id"], result["applied"][1]["fact_id"]
+        # Advance repeatedly until true fact propagates to b (deterministic seed)
+        work = FA.working_copy(state)
+        for step in range(1, 10):
+            settlement.advance(work, 1440, work["turn"] + step, simulation.hooks(work["turn"] + step))
+            if b in work["facts"][true_id]["known_by"]:
+                break
+            FA.edit(work, true_id)["spreading"] = True
+            FA.edit(work, true_id)["spread_hops"] = 0
+        self.assertIn(b, work["facts"][true_id]["known_by"])
+        self.assertNotIn(b, work["facts"][false_id]["believed_by"])
+        self.assertIn(b, work["facts"][false_id]["known_by"])
+
+    def test_twist_accept_allows_attempt_mode(self):
+        state, _ = new_state("pressure", seed=11)
+        a = sorted(c for c in npcs(state) if state["characters"][c]["tier"] == "major")[0]
+        state, _ = apply(state, commit("continue", [{"op": "advance_time", "until": "next_morning"}, {"op": "npc_action", "npc_id": a, "action": "看表"}]))
+        chosen = state["requests"]["twist_offer"][0]
+        new, res = apply(
+            state,
+            commit("attempt", [{"op": "twist_accept", "twist_id": chosen["id"]}], acts_on=[], player_authorized=True, chapter_summary="第一夜。"),
+        )
+        self.assertEqual(res["twist"]["twist_id"], chosen["id"])
+
 
 if __name__ == "__main__":
     unittest.main()

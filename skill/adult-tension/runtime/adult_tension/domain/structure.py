@@ -31,7 +31,6 @@ RESPONSE_LABELS = {
     "genuine": "真诚配合",
 }
 COOPERATIVE_RESPONSES = ("partial", "genuine")
-INTIMATE_RESPONSES = ("negotiate", "partial", "surface", "genuine")
 
 ACTION_MODES = ("result", "attempt", "rewrite", "continue", "wait")
 POWER_STRUCTURES = ("player_high", "npc_high", "equal", "switchable")
@@ -76,8 +75,6 @@ MANUAL_OUTCOMES = {
 }
 
 CONDITION_KINDS = ("drunk", "asleep", "unconscious", "injured", "away", "busy", "other")
-# Conditions where a character is fully unconscious until woken or expired.
-INCAPACITATING = ("asleep", "unconscious")
 
 # Clock anchors for advance_time.until (minutes of day)
 UNTIL_ANCHORS = {"morning": 7 * 60, "noon": 12 * 60, "evening": 18 * 60, "night": 21 * 60}

@@ -96,8 +96,9 @@ def render_commands():
             lines.append(
                 "\n**一次记录**：一次 `commit-turn` 记录 `turns` 里的回合（1–%d 项，按发生的顺序）。"
                 "引擎逐项应用，每项是一个回合，各自可以撤销；任何一项不合法，整次记录被拒、状态不变，错误路径以 `$.turns[i]` 开头。"
-                "只有第一项可以写 `replaces_turn`。上下文 `requests` 要求的章节摘要、前情写在第一项；记录中途引擎新提出的要求在记录结束时才出现，由下一次记录的第一项补上。"
-                "返回 `turns`（每项的 `turn`、`applied`、`resolved_events`、`simulation`）、时钟和下一回合的上下文（单次提交多于 1 个回合时返回 full 完整上下文，单回合返回 brief）。\n" % specs.RECORD_MAX_TURNS
+                "只有第一项可以写 `replaces_turn`；含 `roll`、`twist_accept` 或触发到期事件的回合只能作为 `turns` 的最后一项（须按引擎裁定结果续写正文）。"
+                "上下文 `requests` 要求的章节摘要、前情写在第一项；记录中途引擎新提出的要求在记录结束时才出现，由下一次记录的第一项补上。"
+                "返回 `turns`（每项的 `turn`、`applied`、`resolved_events`、`simulation`）、时钟和下一回合的上下文（单次提交多于 1 个回合时返回 `full`；单回合默认返回 `brief`，但在以下 6 种情形亦返回 `full`：上次提交失败后、地点变化、有新角色入场/登场、跨日、出现 `requests.prologue`、或当前回合为 5 的倍数）。\n" % specs.RECORD_MAX_TURNS
             )
     lines.append("\n## 错误码\n\n| 码 | 含义 | 退出码 |\n|---|---|---|\n")
     for code, text in errors.ERROR_DESCRIPTIONS.items():
@@ -115,8 +116,8 @@ def render_operations():
     from adult_tension.domain import ops, structure
 
     lines = [GENERATED_NOTE, "# 操作参考\n\n"]
-    lines.append("`commit-turn` 的 `operations` 是一个操作数组。操作按顺序应用，后面的操作看得到前面操作的效果；任何一个不合法，整个提交被拒绝、状态不变，错误列出全部问题及其 JSON 路径。NPC 拒绝玩家（`npc_response: refuse`）是合法的叙事结果，不是错误。\n\n")
-    lines.append("提交里没有 `advance_time` 时，时钟默认推进 %d 分钟。单次推进上限 %d 天。\n\n" % (structure.DEFAULT_ADVANCE_MINUTES, structure.MAX_ADVANCE_MINUTES // structure.MINUTES_PER_DAY))
+    lines.append("`commit-turn` 的 `turns[]` 每项里都有一个 `operations` 操作数组。每回合的操作按顺序应用，后面的操作看得到前面操作的效果；任何一项不合法，整次提交被拒绝、状态不变，错误列出全部问题及其 JSON 路径。NPC 拒绝玩家（`npc_response: refuse`）是合法的叙事结果，不是错误。\n\n")
+    lines.append("单个回合的 `operations` 里没有 `advance_time` 时，该回合时钟默认推进 %d 分钟。单次推进上限 %d 天。\n\n" % (structure.DEFAULT_ADVANCE_MINUTES, structure.MAX_ADVANCE_MINUTES // structure.MINUTES_PER_DAY))
     lines.append("## 每个回合的字段\n\n`commit-turn` 的 `turns` 里每一项：\n\n")
     from adult_tension.domain.turn import commit_fields
 
@@ -135,8 +136,8 @@ def render_operations():
     lines.append("- 关系阶段（世界可改名）：%s\n" % "、".join("`%s` %s" % (k, v) for k, v in structure.STAGE_LABELS.items()))
     lines.append("- 事件到期：%s；`chance` 由引擎掷骰得到 `hit` / `miss`\n" % "、".join("`%s` → `%s`" % (k, v) for k, v in structure.DUE_OUTCOME.items()))
     lines.append(
-        "- 状况：%s（`drunk` 微醺/醉意、`injured` 负伤等均可正常进入亲密互动；仅 %s 处于完全无意识状态无法给出当面回应）\n"
-        % ("、".join("`%s`" % k for k in structure.CONDITION_KINDS), "、".join("`%s`" % k for k in structure.INCAPACITATING))
+        "- 状况：%s（各项状况仅作角色状态记录，均不阻断当面或亲密互动）\n"
+        % "、".join("`%s`" % k for k in structure.CONDITION_KINDS)
     )
     return "".join(lines)
 
@@ -154,6 +155,8 @@ def render_worlds():
     released = [w for w in index["worlds"] if w["status"] == "released"]
     lines.append("| 内容标签 | ID | 已发布世界数 |\n|---|---|---|\n")
     for tag in store.tags()["tags"]:
+        if tag.get("kind") == "custom":
+            continue
         lines.append("| %s | `%s` | %d |\n" % (tag["label"], tag["id"], sum(tag["id"] in w["content_tags"] for w in released)))
     lines.append("\n")
     lines.append("| 世界 | ID | 一句话 | 模式 | 状态 |\n|---|---|---|---|---|\n")
@@ -186,7 +189,7 @@ def render_custom_world():
     lines.append("## 提交与修正\n\n")
     lines.append("1. 先和玩家确认：时代与地方、日常还是压力、想见到的两三个人。玩家没说的，按时代常识补齐，不要追问细节。\n")
     lines.append("2. 从文末的示例改起，写一个 JSON 对象：`\"custom\": true`，`id` 用 `custom_` 开头的小写字母、数字、下划线，不写 `extends`。\n")
-    lines.append("3. 直接调用 `new-game`（不先用 `verify-content` 预检，它是开发工具），输入 `{\"request_id\", \"mode\", \"custom_world\": {...}}`；可带 `seed`、`player`、`npc_gender_preference`、`excludes.content_tags`，不带 `locks.world_id`、`excludes.world_ids`、`replay`。\n")
+    lines.append("3. 直接调用 `new-game`（不先用 `verify-content` 预检，它是开发工具），输入 `{\"request_id\", \"mode\", \"custom_world\": {...}}`；可带 `seed`、`player`、`npc_gender_preference`、`preferences`、`excludes.content_tags`，不带 `world_query`、`my_world`、`locks.world_id`、`excludes.world_ids`、`replay`。\n")
     lines.append("4. 返回 `CONTENT_ERROR` 时，`details` 一次列出全部问题，路径以 `$.custom_world` 开头；逐条改好，换新的 `request_id` 重新提交。只有需要玩家补设定时才把问题讲给玩家。\n")
     lines.append("5. 开局后玩家说“保存世界 名字”：`save-world` 存下这一局的世界包；以后 `new-game` 带 `\"my_world\": \"名字\"`（不写 `custom_world`）再开，运行时按同样的规则重新校验。`my-worlds` 列出，`delete-world` 删除。\n\n")
     lines.append("## 数量下限\n\n| 项 | 下限 |\n|---|---|\n")
@@ -216,12 +219,12 @@ def render_custom_world():
         % ("、".join(worldpack.MINOR_TERMS), "、".join(worldpack.ADULT_MARKERS))
     )
     lines.append(
-        "- **性别可变**：`gender: \"any\"` 的人物，文本里不写“他”“她”，用 `{npc.ta}`；人物组合、钩子、转折里用 `{槽位.name}`、`{槽位.ta}`。"
+        "- **性别可变**：`gender: \"any\"` 的人物，文本里不写“他”“她”，用 `{npc.ta}`；人物组合用 `{槽位.name}`/`{槽位.ta}`，钩子用 `{npc.*}` 或 `{槽位.*}`，转折用已写进 `requires` 的 `{模板ID.*}`。"
         "可用属性：`name`、`ta`、`family`、`given`、`call`、`role`、`title`。`{family}`、`{given}`、`{given_last}` 只用在称呼模板里。\n"
     )
     lines.append(
-        "- **占位的作用域**：人物模板与背景人物用 `npc`、`player`；钩子用 `npc`（即钩子的 `slot`）、`player`；人物组合用它的槽位与 `player`；"
-        "转折用人物模板 ID 与 `player`；压力只有 `player`（带 `leverage` 时加上把柄双方）；日常活动只有 `player`；世界层、规则、地点、玩家身份、张力引擎、关系渠道的文字不用占位（玩家身份的称呼模板除外）。"
+        "- **占位的作用域**：人物模板与背景人物用 `npc`、`player`；钩子用 `npc` 或其 `slot`、`player`；人物组合用它的槽位与 `player`；"
+        "转折用已写进其 `requires` 的人物模板 ID 与 `player`；压力只有 `player`（带 `leverage` 时加上把柄双方）；日常活动只有 `player`；世界层、规则、地点、玩家身份、张力引擎、关系渠道的文字不用占位（玩家身份的称呼模板除外）。"
         "注意原样显示字段（人物模板的 `adult_context`/`public_role`/`gender_reason`、背景人物的 `adult_context`/`role`/`name`、日常活动与压力的 `title`、地点的 `name`）不做占位替换，严禁写 `{...}`。\n"
     )
     lines.append("- **引用按 ID**：地点出口、组合槽位与张力引擎、钩子槽位、活动与压力的地点都要能解析；ID 在包内唯一，`player` 是保留字。\n")
@@ -244,8 +247,8 @@ def render_custom_world():
         "- **人名**：人物的名字由引擎从名字池抽取，正文里不写名字池里的名字（两个字以上的名），用 `{npc.name}`、`{槽位.given}` 这类占位或身份称呼；"
         "名字池里也不放会在正文里当普通词用的名（秋水、斥候），也不放背景人物已经用掉的名。\n"
     )
-    tags = ContentStore(os.path.join(_runtime.SKILL_ROOT, "content")).tags()["tags"]
-    lines.append("- **标签**：`content_tags` 与各处 `tags` 只能用内容标签表里的 ID：%s。\n\n" % "、".join("`%s` %s" % (t["id"], t["label"]) for t in tags))
+    tags = [t for t in ContentStore(os.path.join(_runtime.SKILL_ROOT, "content")).tags()["tags"] if t.get("kind") != "custom"]
+    lines.append("- **标签**：`content_tags` 与各处 `tags` 只能用内容标签表里的 ID：%s（`custom` 仅用于玩家边界，不用于世界筛选与内容标签）。\n\n" % "、".join("`%s` %s" % (t["id"], t["label"]) for t in tags))
     lines.append("## 字段\n\n")
     lines.append(render_spec(worldpack.WORLD, 2))
     lines.append("\n## 示例\n\n一个能通过校验、两种模式都能开局的最小世界：\n\n```json\n%s\n```\n" % example)

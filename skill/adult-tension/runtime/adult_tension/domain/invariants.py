@@ -23,11 +23,12 @@ def check(state, before_clock=None):
     for cid, char in chars.items():
         base = "$.state.characters.%s" % cid
         age = char.get("age")
-        if not isinstance(age, int):
+        if isinstance(age, bool) or not isinstance(age, int):
             bad(base + ".age", "角色 %s 缺少明确年龄" % cid)
         elif age < 18:
             bad(base + ".age", "角色 %s 年龄 %d 小于 18" % (cid, age), SAFETY_BLOCK)
-        if not char.get("adult_context"):
+        ctx_text = char.get("adult_context")
+        if not isinstance(ctx_text, str) or not ctx_text.strip():
             bad(base + ".adult_context", "角色 %s 缺少成年身份说明" % cid)
         if char.get("tier") not in ST.TIERS:
             bad(base + ".tier", "角色层级非法")
@@ -52,10 +53,14 @@ def check(state, before_clock=None):
             if cid not in chars:
                 bad(base, "知情人不存在：%s" % cid)
         if fact["visibility"] == "inner":
-            if len(fact["known_by"]) != 1 or fact["believed_by"] or fact.get("spreading"):
+            if len(fact["known_by"]) != 1 or fact["known_by"][0] == player or not fact["truth"] or fact["believed_by"] or fact.get("spreading"):
                 bad(base, "内心事实只能属于本人、不能传播")
         if fact["truth"] and fact["believed_by"]:
             bad(base, "真事实不能有误信者")
+        if not fact["truth"] and fact["visibility"] == "public":
+            bad(base, "假事实不能设为 public")
+        if set(fact["known_by"]) & set(fact["believed_by"]):
+            bad(base, "同一角色不能同时在 known_by 与 believed_by 里")
     now = CL.to_abs(state["clock"])
     for eid, event in state["events"].items():
         base = "$.state.events.%s" % eid

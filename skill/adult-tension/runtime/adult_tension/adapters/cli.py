@@ -81,6 +81,7 @@ def parse_argv(argv):
             target[key] = True
             index += 1
             continue
+        arg_idx = index
         if value is None:
             if index + 1 >= len(argv):
                 problems.append(detail("$.argv[%d]" % index, "%s 缺少取值" % item, None))
@@ -93,7 +94,7 @@ def parse_argv(argv):
             try:
                 target[key] = int(value)
             except ValueError:
-                problems.append(detail("$.argv[%d]" % index, "%s 需要整数，收到 %r" % (item, value), None))
+                problems.append(detail("$.argv[%d]" % arg_idx, "%s 需要整数，收到 %r" % (item, value), None))
         else:
             target[key] = value
     if problems:

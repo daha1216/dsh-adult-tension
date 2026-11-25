@@ -288,6 +288,34 @@ class FullContextBudgetTest(unittest.TestCase):
             self.assertEqual(full["player_facts"][: len(brief["known_facts"])], brief["known_facts"])
             self.assertEqual(full["events"][: len(brief["due_soon"])], brief["due_soon"])
 
+    def test_preferences_include_npc_gender_preference(self):
+        with app() as ctx:
+            ids = Ids()
+            opened = service.new_game(
+                ctx,
+                {
+                    "request_id": ids(),
+                    "mode": "daily",
+                    "seed": 3,
+                    "include_drafts": True,
+                    "locks": {"world_id": "harbor_night_shift"},
+                    "npc_gender_preference": "mostly_female",
+                },
+            )
+            sid = opened["session_id"]
+            self.assertEqual(opened["context"]["preferences"]["npc_gender_preference"], "mostly_female")
+            brief = service.get_context(ctx, {"session_id": sid, "depth": "brief"})["context"]
+            self.assertEqual(brief["preferences"]["npc_gender_preference"], "mostly_female")
+            self.assertLessEqual(CX.size_of(brief), CX.BRIEF_LIMIT)
+            updated = service.set_preferences(
+                ctx,
+                {"session_id": sid, "request_id": ids(), "expected_revision": opened["revision"], "npc_gender_preference": "mixed"},
+            )
+            self.assertEqual(updated["context"]["preferences"]["npc_gender_preference"], "mixed")
+            full = service.get_context(ctx, {"session_id": sid, "depth": "full"})["context"]
+            self.assertEqual(full["preferences"]["npc_gender_preference"], "mixed")
+            self.assertLessEqual(CX.size_of(full), CX.FULL_LIMIT)
+
 
 if __name__ == "__main__":
     unittest.main()

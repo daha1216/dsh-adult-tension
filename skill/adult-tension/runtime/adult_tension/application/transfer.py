@@ -11,6 +11,7 @@ content snapshot and the archive in full. An older export is copied to
 backups/ and upgraded in memory.
 """
 
+import copy
 import hashlib
 import os
 import re
@@ -158,10 +159,11 @@ def check(doc):
             "这个导出文件来自更新版本的 Skill（格式 %d > %d）" % (version, STATE_SCHEMA_VERSION),
             [detail("$.schema_version", "格式 %d 比当前支持的 %d 新" % (version, STATE_SCHEMA_VERSION), "升级 Skill 后再导入；没有写入任何数据", UNSUPPORTED_VERSION)],
         )
-    if doc["rng_version"] != RNG_VERSION:
+    rng_version = doc["rng_version"]
+    if isinstance(rng_version, bool) or rng_version != RNG_VERSION:
         raise AppError(
             UNSUPPORTED_VERSION,
-            "随机算法版本不同（%s，本版本 %d），导入后无法复现同样的结果" % (doc["rng_version"], RNG_VERSION),
+            "随机算法版本不同（%s，本版本 %d），导入后无法复现同样的结果" % (rng_version, RNG_VERSION),
             [detail("$.rng_version", "随机算法版本不受支持", "用相同版本的 Skill 导入", UNSUPPORTED_VERSION)],
         )
     if doc["checksum"] != checksum(doc):
@@ -173,7 +175,9 @@ def check(doc):
     if not _keys(content, CONTENT_KEYS, "$.session.content", problems):
         fail(problems)
     upgraded = False
-    if isinstance(state, dict) and isinstance(state.get("schema_version"), int) and state["schema_version"] < STATE_SCHEMA_VERSION:
+    sv = state.get("schema_version") if isinstance(state, dict) else None
+    if isinstance(sv, int) and not isinstance(sv, bool) and 1 <= sv < STATE_SCHEMA_VERSION:
+        state = copy.deepcopy(state)
         upgrade(state)
         upgraded = True
     world = content["world"] if isinstance(content["world"], dict) else None
@@ -209,7 +213,14 @@ def backup_import(ctx, doc, raw):
     """Keep the original of an older export before it is upgraded."""
     directory = os.path.join(ctx.data_dir, "backups")
     os.makedirs(directory, exist_ok=True)
-    target = os.path.join(directory, "import-format%s-%s.json" % (doc["schema_version"], time.strftime("%Y%m%dT%H%M%S")))
-    with open(target, "wb") as handle:
-        handle.write(raw if raw is not None else dumps(doc).encode("utf-8"))
-    return target
+    base = os.path.join(directory, "import-format%s-%s" % (doc["schema_version"], time.strftime("%Y%m%dT%H%M%S")))
+    data = raw if raw is not None else dumps(doc).encode("utf-8")
+    counter = 1
+    while True:
+        target = base + ".json" if counter == 1 else "%s-%d.json" % (base, counter)
+        try:
+            with open(target, "xb") as handle:
+                handle.write(data)
+            return target
+        except FileExistsError:
+            counter += 1

@@ -8,7 +8,7 @@
 
 1. 先和玩家确认：时代与地方、日常还是压力、想见到的两三个人。玩家没说的，按时代常识补齐，不要追问细节。
 2. 从文末的示例改起，写一个 JSON 对象：`"custom": true`，`id` 用 `custom_` 开头的小写字母、数字、下划线，不写 `extends`。
-3. 直接调用 `new-game`（不先用 `verify-content` 预检，它是开发工具），输入 `{"request_id", "mode", "custom_world": {...}}`；可带 `seed`、`player`、`npc_gender_preference`、`excludes.content_tags`，不带 `locks.world_id`、`excludes.world_ids`、`replay`。
+3. 直接调用 `new-game`（不先用 `verify-content` 预检，它是开发工具），输入 `{"request_id", "mode", "custom_world": {...}}`；可带 `seed`、`player`、`npc_gender_preference`、`preferences`、`excludes.content_tags`，不带 `world_query`、`my_world`、`locks.world_id`、`excludes.world_ids`、`replay`。
 4. 返回 `CONTENT_ERROR` 时，`details` 一次列出全部问题，路径以 `$.custom_world` 开头；逐条改好，换新的 `request_id` 重新提交。只有需要玩家补设定时才把问题讲给玩家。
 5. 开局后玩家说“保存世界 名字”：`save-world` 存下这一局的世界包；以后 `new-game` 带 `"my_world": "名字"`（不写 `custom_world`）再开，运行时按同样的规则重新校验。`my-worlds` 列出，`delete-world` 删除。
 
@@ -33,8 +33,8 @@
 
 - **成年**：人物模板、背景人物、玩家身份的 `age_range` 下限 ≥ 18；人物模板与背景人物写明 `adult_context`（成年身份与处境）。
 - **校园与师徒意象**：学生、师生、校园、学徒、徒弟、门生、弟子、少年、少女、幼、童 这类词只能出现在明示成年的语境里——同一条文字（或该人物的 `adult_context`）里要有 成年、成人、大学、本科、研究生、硕士、博士、夜校、驻留、年满、已婚、正式工、正式雇员、持证 之类的词。
-- **性别可变**：`gender: "any"` 的人物，文本里不写“他”“她”，用 `{npc.ta}`；人物组合、钩子、转折里用 `{槽位.name}`、`{槽位.ta}`。可用属性：`name`、`ta`、`family`、`given`、`call`、`role`、`title`。`{family}`、`{given}`、`{given_last}` 只用在称呼模板里。
-- **占位的作用域**：人物模板与背景人物用 `npc`、`player`；钩子用 `npc`（即钩子的 `slot`）、`player`；人物组合用它的槽位与 `player`；转折用人物模板 ID 与 `player`；压力只有 `player`（带 `leverage` 时加上把柄双方）；日常活动只有 `player`；世界层、规则、地点、玩家身份、张力引擎、关系渠道的文字不用占位（玩家身份的称呼模板除外）。注意原样显示字段（人物模板的 `adult_context`/`public_role`/`gender_reason`、背景人物的 `adult_context`/`role`/`name`、日常活动与压力的 `title`、地点的 `name`）不做占位替换，严禁写 `{...}`。
+- **性别可变**：`gender: "any"` 的人物，文本里不写“他”“她”，用 `{npc.ta}`；人物组合用 `{槽位.name}`/`{槽位.ta}`，钩子用 `{npc.*}` 或 `{槽位.*}`，转折用已写进 `requires` 的 `{模板ID.*}`。可用属性：`name`、`ta`、`family`、`given`、`call`、`role`、`title`。`{family}`、`{given}`、`{given_last}` 只用在称呼模板里。
+- **占位的作用域**：人物模板与背景人物用 `npc`、`player`；钩子用 `npc` 或其 `slot`、`player`；人物组合用它的槽位与 `player`；转折用已写进其 `requires` 的人物模板 ID 与 `player`；压力只有 `player`（带 `leverage` 时加上把柄双方）；日常活动只有 `player`；世界层、规则、地点、玩家身份、张力引擎、关系渠道的文字不用占位（玩家身份的称呼模板除外）。注意原样显示字段（人物模板的 `adult_context`/`public_role`/`gender_reason`、背景人物的 `adult_context`/`role`/`name`、日常活动与压力的 `title`、地点的 `name`）不做占位替换，严禁写 `{...}`。
 - **引用按 ID**：地点出口、组合槽位与张力引擎、钩子槽位、活动与压力的地点都要能解析；ID 在包内唯一，`player` 是保留字。
 - **时代**：`forbidden_terms` 写本世界不该出现的词（器物、说法），校验器扫描全部文本。
 - **有内容**：不写空串、“待补”“TODO”“—”或与字段名相同的文字；同一包内不写重复的整句。地点至少一个 `public`、一个 `semi` 或 `private`，任意两个地点的 `privacy`、`visibility`、`affordances` 不能完全相同。
@@ -42,7 +42,7 @@
 - **篇幅**：一个人物模板的全部文字合计 ≤ 1800 字，一个压力 ≤ 450 字（不含 ID 与标签）——在场的人物卡与压力每回合都进上下文，太长会挤掉别人。
 - **称呼**：带性别的称呼（先生、小姐、少爷、哥、姐……）只给性别已定的人：这样的称呼与绰号模板要标上 `male` 或 `female`；不限性别的玩家身份要同时有给男、女玩家的称呼；正文里不写“{player.name}先生”，用 `{player.title}` 或 `{player.call}`。绰号模板会抽给本世界任何同性别的人，所以只写人人适用的叫法（小{family}、阿{given_last}、{given}），不写职务头衔。
 - **人名**：人物的名字由引擎从名字池抽取，正文里不写名字池里的名字（两个字以上的名），用 `{npc.name}`、`{槽位.given}` 这类占位或身份称呼；名字池里也不放会在正文里当普通词用的名（秋水、斥候），也不放背景人物已经用掉的名。
-- **标签**：`content_tags` 与各处 `tags` 只能用内容标签表里的 ID：`romance_light` 轻度暧昧、`intimate` 亲密、`explicit` 直白的性描写、`violence` 暴力、`coercion_theme` 胁迫、`humiliation` 羞辱、`bodily_harm` 身体伤害、`substance` 酒精与药物、`pregnancy` 怀孕、`death` 死亡、`workplace_power` 职场权力关系、`infidelity` 出轨、`crime` 违法犯罪、`gambling` 赌博、`workplace` 职场、`nightlife` 夜生活、`supernatural` 超自然、`disaster` 灾难、`custom` 自定义。
+- **标签**：`content_tags` 与各处 `tags` 只能用内容标签表里的 ID：`romance_light` 轻度暧昧、`intimate` 亲密、`explicit` 直白的性描写、`violence` 暴力、`coercion_theme` 胁迫、`humiliation` 羞辱、`bodily_harm` 身体伤害、`substance` 酒精与药物、`pregnancy` 怀孕、`death` 死亡、`workplace_power` 职场权力关系、`infidelity` 出轨、`crime` 违法犯罪、`gambling` 赌博、`workplace` 职场、`nightlife` 夜生活、`supernatural` 超自然、`disaster` 灾难（`custom` 仅用于玩家边界，不用于世界筛选与内容标签）。
 
 ## 字段
 
@@ -162,7 +162,7 @@
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-| `gender` | 枚举：`any` / `female` / `male` / `nonbinary` | 是 | any 表示由会话的性别偏好决定，文本全部用占位 |
+| `gender` | 枚举：`any` / `female` / `male` / `nonbinary` | 是 | any 表示由会话的配对偏好决定，文本全部用占位 |
 | `gender_reason` | 字符串，≤120 字 或 null | 否，默认 `null` | 性别写死时的叙事理由 |
 | `age_range` | 数组（整数 0..120，2–2 项） | 是 | 年龄范围，下限 ≥ 18 |
 | `adult_context` | 字符串，≤80 字 | 是 | 明示成年身份与处境的一句话 |

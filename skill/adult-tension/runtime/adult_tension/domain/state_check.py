@@ -5,11 +5,24 @@ right type; unknown fields are refused; every reference must resolve; the
 global invariants must hold. Returns every problem with its JSON path.
 """
 
+import re
+
 from .. import STATE_SCHEMA_VERSION
 from ..errors import INVALID_INPUT, detail
 from . import clock as CL
 from . import invariants
 from . import structure as ST
+
+ID_PATTERNS = {
+    "fact": (re.compile(r"^f\d+$", re.ASCII), "f"),
+    "event": (re.compile(r"^e\d+$", re.ASCII), "e"),
+    "leverage": (re.compile(r"^lv\d+$", re.ASCII), "lv"),
+}
+
+
+def _valid_id(value, kind):
+    pattern, prefix = ID_PATTERNS[kind]
+    return isinstance(value, str) and bool(pattern.match(value)) and int(value[len(prefix) :]) >= 1
 
 # field -> type check; required keys first, optional keys second
 INT, STR, BOOL, LIST, DICT = "int", "str", "bool", "list", "dict"
@@ -43,7 +56,7 @@ CLOCK = ({"day": INT, "minute": INT}, {})
 SCENE = ({"id": STR, "location_id": STR, "present": LIST, "since": DICT, "responses": LIST}, {})
 RESPONSE = ({"turn": INT, "npc_id": STR, "response": STR, "note": STR}, {})
 CHARACTER = (
-    {"id": STR, "name": STR, "age": "any", "gender": STR, "tier": STR, "adult_context": "any", "public_role": STR, "status": DICT},
+    {"id": STR, "name": STR, "age": INT, "gender": STR, "tier": STR, "adult_context": STR, "public_role": STR, "status": DICT},
     {
         "family": "str?", "given": "str?", "call": "str?", "title": "str?", "appearance": "any", "background": "any",
         "baseline": "any", "decision": "dict?", "function": "any", "identity": "dict?", "identity_id": "str?",
@@ -52,6 +65,7 @@ CHARACTER = (
         "introduced_turn": "int?", "promoted_turn": "int?",
     },
 )
+SCHEDULE_SLOT = ({"from": INT, "to": INT, "location_id": STR}, {})
 STATUS = ({"location_id": "str?", "mood": "str?", "conditions": LIST}, {})
 CONDITION = ({"kind": STR, "text": STR, "until": "dict?"}, {"since_turn": "int?"})
 FACT = (
@@ -183,11 +197,27 @@ def check_state(state, world=None):
         if status is not None:
             if locations is not None and status["location_id"] is not None and status["location_id"] not in locations:
                 c.bad(path + ".status.location_id", "地点不在内容快照中：%s" % status["location_id"])
-            for index, cond in enumerate(c.each(status["conditions"], CONDITION, path + ".status.conditions")):
+            for index, raw_cond in enumerate(status["conditions"]):
+                cpath = "%s.status.conditions[%d]" % (path, index)
+                cond = c.shape(raw_cond, CONDITION, cpath)
+                if cond is None:
+                    continue
                 if cond["kind"] not in ST.CONDITION_KINDS:
-                    c.bad("%s.status.conditions[%d].kind" % (path, index), "状况类型非法")
+                    c.bad(cpath + ".kind", "状况类型非法")
                 if cond["until"] is not None:
-                    c.clock(cond["until"], "%s.status.conditions[%d].until" % (path, index))
+                    c.clock(cond["until"], cpath + ".until")
+        if char.get("schedule") is not None:
+            for index, raw_slot in enumerate(char["schedule"]):
+                spath = "%s.schedule[%d]" % (path, index)
+                slot = c.shape(raw_slot, SCHEDULE_SLOT, spath)
+                if slot is None:
+                    continue
+                if not (0 <= slot["from"] < ST.MINUTES_PER_DAY):
+                    c.bad(spath + ".from", "日程开始分钟越界")
+                if not (0 <= slot["to"] < ST.MINUTES_PER_DAY):
+                    c.bad(spath + ".to", "日程结束分钟越界")
+                if locations is not None and slot["location_id"] not in locations:
+                    c.bad(spath + ".location_id", "地点不在内容快照中：%s" % slot["location_id"])
         if "kin_of" in char and char["kin_of"] is not None and char["kin_of"] not in known:
             c.bad(path + ".kin_of", "角色不存在：%s" % char["kin_of"])
     if state.get("player_id") not in known:
@@ -199,13 +229,17 @@ def check_state(state, world=None):
         c.clock(scene["since"], "$.scene.since")
         if locations is not None and scene["location_id"] not in locations:
             c.bad("$.scene.location_id", "地点不在内容快照中：%s" % scene["location_id"])
-        for index, response in enumerate(c.each(scene["responses"], RESPONSE, "$.scene.responses")):
-            if response["response"] not in ST.RESPONSES:
-                c.bad("$.scene.responses[%d].response" % index, "回应类型非法")
+        for index, raw_response in enumerate(scene["responses"]):
+            rpath = "$.scene.responses[%d]" % index
+            response = c.shape(raw_response, RESPONSE, rpath)
+            if response is not None and response["response"] not in ST.RESPONSES:
+                c.bad(rpath + ".response", "回应类型非法")
 
     facts = state.get("facts") if isinstance(state.get("facts"), dict) else {}
     for fid, fact in facts.items():
         path = "$.facts.%s" % fid
+        if not _valid_id(fid, "fact"):
+            c.bad(path, "事实 ID 格式非法，应为 f<正整数>")
         fact = c.shape(fact, FACT, path)
         if fact is None:
             continue
@@ -223,6 +257,8 @@ def check_state(state, world=None):
     events = state.get("events") if isinstance(state.get("events"), dict) else {}
     for eid, event in events.items():
         path = "$.events.%s" % eid
+        if not _valid_id(eid, "event"):
+            c.bad(path, "事件 ID 格式非法，应为 e<正整数>")
         event = c.shape(event, EVENT, path)
         if event is None:
             continue
@@ -230,8 +266,16 @@ def check_state(state, world=None):
             c.bad(path + ".id", "ID 与键不一致")
         if event["kind"] not in ST.EVENT_KINDS:
             c.bad(path + ".kind", "事件类型非法")
+        if event["tier"] not in ST.EVENT_TIERS:
+            c.bad(path + ".tier", "事件层级非法")
         if event["state"] not in ST.EVENT_STATES:
             c.bad(path + ".state", "事件状态非法")
+        if event["kind"] == "chance":
+            prob = event["probability"]
+            if prob is None or not (0 < prob < 1):
+                c.bad(path + ".probability", "概率事件的 probability 必须在 (0, 1) 之间")
+        elif event["probability"] is not None:
+            c.bad(path + ".probability", "只有 chance 事件带 probability")
         c.ids(event["participants"], known, path + ".participants")
         c.clock(event["due"], path + ".due")
 
@@ -251,19 +295,41 @@ def check_state(state, world=None):
     leverage = state.get("leverage") if isinstance(state.get("leverage"), dict) else {}
     for lid, lv in leverage.items():
         path = "$.leverage.%s" % lid
+        if not _valid_id(lid, "leverage"):
+            c.bad(path, "把柄 ID 格式非法，应为 lv<正整数>")
         lv = c.shape(lv, LEVERAGE, path)
         if lv is None:
             continue
+        if lv["id"] != lid:
+            c.bad(path + ".id", "ID 与键不一致")
+        if lv["state"] not in ("active", "released"):
+            c.bad(path + ".state", "把柄状态非法")
         c.ids([lv["holder"], lv["subject"]], known, path + ".parties")
         if lv["basis_fact_id"] not in facts:
             c.bad(path + ".basis_fact_id", "事实不存在：%s" % lv["basis_fact_id"])
 
     prefs = c.shape(state.get("preferences"), PREFERENCES, "$.preferences")
     if prefs is not None:
+        if prefs["person"] not in ST.PERSONS:
+            c.bad("$.preferences.person", "人称设置非法")
+        if prefs["pace"] not in ST.PACES:
+            c.bad("$.preferences.pace", "节奏设置非法")
+        if prefs["explicitness"] not in ST.EXPLICITNESS:
+            c.bad("$.preferences.explicitness", "尺度设置非法")
+        if prefs["npc_gender_preference"] not in ST.NPC_GENDER_PREFERENCES:
+            c.bad("$.preferences.npc_gender_preference", "配对偏好非法")
         for npc, entry in prefs["voice"].items():
+            vpath = "$.preferences.voice.%s" % npc
             if npc not in known:
-                c.bad("$.preferences.voice.%s" % npc, "角色不存在：%s" % npc)
-            c.shape(entry, VOICE, "$.preferences.voice.%s" % npc)
+                c.bad(vpath, "角色不存在：%s" % npc)
+            ventry = c.shape(entry, VOICE, vpath)
+            if ventry is not None:
+                if ventry["voice"] not in ("surface", "inner"):
+                    c.bad(vpath + ".voice", "语态非法")
+                if ventry["cause"] not in ("player_request", "npc_self", "revert"):
+                    c.bad(vpath + ".cause", "语态切换原因非法")
+                if ventry["trigger"] is not None and ventry["trigger"] not in ("alone", "drunk", "breakdown", "exposed"):
+                    c.bad(vpath + ".trigger", "语态触发因素非法")
     safety = c.shape(state.get("safety"), SAFETY, "$.safety")
     if safety is not None:
         c.each(safety["boundaries"], BOUNDARY, "$.safety.boundaries")
@@ -276,10 +342,17 @@ def check_state(state, world=None):
         nxt = c.shape(counters["next"], NEXT, "$.counters.next")
         c.shape(counters["twists"], TWISTS, "$.counters.twists")
         if nxt is not None:
+            for kind in NEXT[0]:
+                if nxt[kind] < 1:
+                    c.bad("$.counters.next.%s" % kind, "ID 计数必须 ≥ 1")
             for kind, prefix, table in (("fact", "f", facts), ("event", "e", events), ("leverage", "lv", leverage)):
-                used = [int(i[len(prefix):]) for i in table if i[len(prefix):].isdigit()]
+                used = [
+                    int(i[len(prefix) :])
+                    for i in table
+                    if isinstance(i, str) and i.startswith(prefix) and i[len(prefix) :].isascii() and i[len(prefix) :].isdigit()
+                ]
                 if used and max(used) >= nxt[kind]:
-                    c.bad("$.counters.next.%s" % kind, "ID 计数小于已用的 ID")
+                    c.bad("$.counters.next.%s" % kind, "ID 计数小于或等于已用的 ID")
     requests = c.shape(state.get("requests"), REQUESTS, "$.requests")
     if requests is not None:
         c.ids(requests["offscreen_beat_candidates"], known, "$.requests.offscreen_beat_candidates")

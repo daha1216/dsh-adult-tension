@@ -2,9 +2,9 @@
 
 # 操作参考
 
-`commit-turn` 的 `operations` 是一个操作数组。操作按顺序应用，后面的操作看得到前面操作的效果；任何一个不合法，整个提交被拒绝、状态不变，错误列出全部问题及其 JSON 路径。NPC 拒绝玩家（`npc_response: refuse`）是合法的叙事结果，不是错误。
+`commit-turn` 的 `turns[]` 每项里都有一个 `operations` 操作数组。每回合的操作按顺序应用，后面的操作看得到前面操作的效果；任何一项不合法，整次提交被拒绝、状态不变，错误列出全部问题及其 JSON 路径。NPC 拒绝玩家（`npc_response: refuse`）是合法的叙事结果，不是错误。
 
-提交里没有 `advance_time` 时，时钟默认推进 3 分钟。单次推进上限 30 天。
+单个回合的 `operations` 里没有 `advance_time` 时，该回合时钟默认推进 3 分钟。单次推进上限 30 天。
 
 ## 每个回合的字段
 
@@ -34,15 +34,15 @@
 | `move` | 角色移动到地点。玩家移动需要 result/attempt 模式并带 player_authorized；玩家换地点即换场景 |
 | `enter_scene` | 角色登场，加入当前场景（已在世界 standby_cast 中的待命角色直接 enter_scene 即可自动激活完整人物卡，勿误调 introduce_character） |
 | `exit_scene` | 角色离场；可写去向地点。玩家角色用 move |
-| `npc_response` | NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（含口嫌体正直下的半推半就、身体失守） / surface 表面配合（虚与委蛇或口嫌体正直嘴硬未阻拦，不推进关系阶段；必须写 true_intent） / genuine 真诚配合 |
+| `npc_response` | NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进关系阶段） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进关系阶段；必须写 true_intent） / genuine 真诚配合 |
 | `npc_action` | NPC 自主行动。significant: true 的重大行动（主动接近、揭发、交易、离开、表白、挑衅等）受冷却限制；依据事实必须在其信息集中 |
 | `npc_state` | 更新 NPC 的情绪与状况（醉意、睡眠、受伤、外出等）；minutes 表示多久后自动消退 |
 | `add_fact` | 记录一条事实。public 在场者自动知道；private 只有 known_by；inner 是内心，只属于一个 NPC 且永不传播。误信用 truth: false + believed_by。正文里新写出、之后要继承的细节都要用它记下 |
-| `relationship` | 有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；口嫌体正直但身体半推半就失守应记为 partial）或后退。原因必填 |
+| `relationship` | 有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；半推半就、身体失守或受制达成实质妥协应记为 partial）或后退。原因必填 |
 | `event_create` | 创建事件（约定、截止、风声、机会、伏笔、概率事件）。due 与 in_minutes 二选一且必须晚于现在；chance 必须带 probability，到期由引擎掷骰；涉及玩家的承诺需要 player_authorized；dedupe_key 与未结束事件不能重复 |
 | `event_resolve` | 在到期前结束事件：约定、截止、机会用 fulfilled（兑现）；伏笔、风声用 surfaced（提前浮出）。概率事件只能由引擎到期掷骰 |
 | `event_cancel` | 因剧情取消未结束的事件（outcome: cancelled_by_story） |
-| `roll` | 即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能再嵌套 roll，也不能推进时间）。结果以返回的 applied 为准 |
+| `roll` | 即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能出现 roll、advance_time、introduce_character、promote_character、offscreen_beat、twist_accept）。结果以返回的 applied 为准 |
 | `player_update` | 玩家角色的姓名、称谓、背景、资源与风险。只能在 result 或 rewrite（“其实……”）模式、并带 player_authorized |
 | `reveal_fact` | 把一条事实从知情人告诉别人。只能沿已有的关系边进行，当面告知时双方都要在场；内心事实永远不能传播。告诉某人真相时，若对方正误信同键的假事实，引擎会同步修正其信息集 |
 | `spread_rumor` | 传出一条走样的传闻：生成新的假事实（来源为传闻），原事实不变。不经渠道时沿关系边、双方在场；经世界里的走样渠道时可以传到没有关系边的人 |
@@ -51,11 +51,11 @@
 | `identity_update` | 逐项修改身份卡（资源、限制、义务用 add/remove；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换 |
 | `npc_update` | 修改 NPC 的公开身份、外貌、当前目标、对关系的态度或处境（不含身份卡与倾向卡） |
 | `introduce_character` | 新角色登场：正文里第一次点名的世界外新人物都要登场，只被提起、不在场的也算（present 写 false，location_id 写其所在地点；若已在世界 standby_cast 中，直接 enter_scene 激活，不用此操作）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要人物不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason |
-| `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给 |
+| `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason |
 | `leverage_set` | 登记把柄：一方开始拿捏另一方（把柄、债务、生计、私密控制器）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间仍可结合处境发生博弈或亲密互动 |
 | `leverage_release` | 解除把柄（底片销毁、债务结清、秘密公开或条件兑现等），原因必填 |
 | `offscreen_beat` | 离屏片段：不在场的重要 NPC 在这段时间里做了什么。只能写上下文 `offscreen_beat_candidates` 或时间推进要求的 NPC；子操作只能是这个 NPC 自己的行动、状态、移动，NPC 之间的关系与消息，以及不涉及玩家的事件与把柄 |
-| `twist_accept` | 接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result 模式并带 player_authorized；同一游戏日最多接受一次 |
+| `twist_accept` | 接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result/attempt 模式并带 player_authorized；同一游戏日最多接受一次 |
 
 ## `advance_time`
 
@@ -101,7 +101,7 @@
 
 ## `npc_response`
 
-NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（含口嫌体正直下的半推半就、身体失守） / surface 表面配合（虚与委蛇或口嫌体正直嘴硬未阻拦，不推进关系阶段；必须写 true_intent） / genuine 真诚配合
+NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进关系阶段） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进关系阶段；必须写 true_intent） / genuine 真诚配合
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -164,7 +164,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `relationship`
 
-有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；口嫌体正直但身体半推半就失守应记为 partial）或后退。原因必填
+有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；半推半就、身体失守或受制达成实质妥协应记为 partial）或后退。原因必填
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -225,7 +225,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `roll`
 
-即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能再嵌套 roll，也不能推进时间）。结果以返回的 applied 为准
+即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能出现 roll、advance_time、introduce_character、promote_character、offscreen_beat、twist_accept）。结果以返回的 applied 为准
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -436,13 +436,14 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `promote_character`
 
-把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给
+把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`promote_character` | 是 |  |
 | `character_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
 | `to_tier` | 枚举：`supporting` / `major` | 是 |  |
+| `gender_reason` | 字符串，≤80 字 或 null | 否，默认 `null` |  |
 | `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
 | `line` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
 | `identity` | 对象（身份） 或 null | 否，默认 `null` |  |
@@ -570,7 +571,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `twist_accept`
 
-接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result 模式并带 player_authorized；同一游戏日最多接受一次
+接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result/attempt 模式并带 player_authorized；同一游戏日最多接受一次
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -586,4 +587,4 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 - 回应光谱：`refuse` 拒绝、`negotiate` 协商、`partial` 有限配合、`surface` 表面配合、`genuine` 真诚配合
 - 关系阶段（世界可改名）：`stranger` 陌生、`acquainted` 认识、`familiar` 熟络、`flirting` 暧昧、`testing` 试探、`intimate` 亲密、`committed` 稳定
 - 事件到期：`promise` → `expired`、`deadline` → `expired`、`opportunity` → `expired`、`foreshadow` → `surfaced`、`rumor` → `surfaced`；`chance` 由引擎掷骰得到 `hit` / `miss`
-- 状况：`drunk`、`asleep`、`unconscious`、`injured`、`away`、`busy`、`other`（`drunk` 微醺/醉意、`injured` 负伤等均可正常进入亲密互动；仅 `asleep`、`unconscious` 处于完全无意识状态无法给出当面回应）
+- 状况：`drunk`、`asleep`、`unconscious`、`injured`、`away`、`busy`、`other`（各项状况仅作角色状态记录，均不阻断当面或亲密互动）

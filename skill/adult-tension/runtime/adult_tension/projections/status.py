@@ -91,6 +91,8 @@ def lines(state, content):
     now = CL.to_abs(state["clock"])
     todo = ["%s（%s）" % (e["title"], remaining(CL.to_abs(e["due"]) - now)) for e in _player_events(state)[:3]]
     for lv in SS.active_leverage(state):
+        if not SS.knows(state, player, lv["basis_fact_id"]):
+            continue
         if lv["subject"] == player:
             todo.append("%s手里有你的把柄" % _name(state, lv["holder"]))
         elif lv["holder"] == player:
@@ -134,7 +136,7 @@ def detail_sections(state, content):
     for char in sorted(state["characters"].values(), key=lambda c: (c["id"] not in state["scene"]["present"], c["id"])):
         if char["id"] == player or char["tier"] == "background":
             continue
-        if not SS.edge(state, player, char["id"]) and char["id"] not in state["scene"]["present"]:
+        if not SS.has_edge_either(state, player, char["id"]) and char["id"] not in state["scene"]["present"]:
             continue
         text = "%s，%d 岁，%s" % (char["name"], char["age"], char["public_role"])
         if char.get("appearance"):
@@ -144,14 +146,25 @@ def detail_sections(state, content):
     movers = [char["name"] for cid, char in sorted(state["characters"].items()) if cid in state["scene"]["present"] and cid != player and char["tier"] != "background" and SS.can_act(state, cid)]
     sections.append({"title": "谁可能主动出手", "items": movers or ["眼下没有人会主动出手"]})
     prefs = state["preferences"]
-    sections.append(
-        {
-            "title": "设置",
-            "items": ["%s：%s" % (label, "开" if prefs[key] else "关") for key, label in PREFERENCE_WORDS.items()]
-            + ["人称：%s" % {"second": "第二人称", "first": "第一人称", "third": "第三人称"}[prefs["person"]]]
-            + ["节奏：%s" % meta.PACE_LABELS[prefs["pace"]], "尺度：%s" % meta.EXPLICITNESS_LABELS[prefs["explicitness"]]],
-        }
+    settings = (
+        ["%s：%s" % (label, "开" if prefs[key] else "关") for key, label in PREFERENCE_WORDS.items()]
+        + ["人称：%s" % {"second": "第二人称", "first": "第一人称", "third": "第三人称"}[prefs["person"]]]
+        + [
+            "配对偏好：%s" % meta.PREFERENCE_LABELS[prefs["npc_gender_preference"]],
+            "节奏：%s" % meta.PACE_LABELS[prefs["pace"]],
+            "尺度：%s" % meta.EXPLICITNESS_LABELS[prefs["explicitness"]],
+        ]
     )
+    voices = []
+    for cid, entry in sorted(prefs.get("voice", {}).items()):
+        if cid not in state["characters"]:
+            continue
+        voice = entry.get("voice", "surface") if isinstance(entry, dict) else (entry or "surface")
+        if voice != "surface":
+            voices.append("%s（%s）" % (_name(state, cid), "里层语态" if voice == "inner" else voice))
+    if voices:
+        settings.append("角色语态：%s" % "、".join(voices))
+    sections.append({"title": "设置", "items": settings})
     return sections
 
 

@@ -614,5 +614,227 @@ class NewGameCommandTest(unittest.TestCase):
             self.assertEqual(len(set(signatures)), 10)
 
 
+class RuntimeAppFixesTest(unittest.TestCase):
+    def test_auto_slot_name_sanitizes_and_truncates_any_world_title(self):
+        from helpers.cli import REPO_ROOT
+
+        long_title = "甲乙丙丁戊己庚辛壬癸" * 4
+        for title, turn in (
+            (long_title, 1),
+            (long_title, 1234),
+            ('东京:雨夜/秘密*"<>|?\x07', 3),
+            ("CON.夜班", 2),
+            (":::/???", 1),
+        ):
+            name = service._auto_slot_name(title, turn)
+            self.assertLessEqual(len(name), 40, (title, name))
+            self.assertEqual(service.normalize_slot_name(name), name)
+            self.assertTrue(name.endswith("-第%d回合" % turn), name)
+        with open(os.path.join(REPO_ROOT, "content-src", "examples", "custom_world.json"), encoding="utf-8") as handle:
+            world = json.load(handle)
+        world["title"] = "雨夜:民宿/长标题" + "一二三四五六七八九十" * 3
+        self.assertLessEqual(len(world["title"]), 40)
+        with app() as ctx:
+            ids = Ids()
+            opened = service.new_game(ctx, {"request_id": ids(), "mode": "daily", "seed": 7, "custom_world": world})
+            saved = service.save_slot(ctx, {"session_id": opened["session_id"], "request_id": ids(), "expected_revision": opened["revision"]})
+            self.assertTrue(saved["auto_named"])
+            self.assertLessEqual(len(saved["slot"]["name"]), 40)
+            self.assertTrue(saved["slot"]["name"].endswith("-第1回合"))
+
+    def test_status_detail_shows_one_way_edge_preferences_and_voice_and_hides_unknown_leverage(self):
+        from adult_tension.domain.text import full_name
+
+        with app() as ctx:
+            ids = Ids()
+            opened = open_game(ctx, ids, mode="daily", seed=31)
+            sid = opened["session_id"]
+            info = session(ctx, sid)
+            state, world = info["state"], info["content"]["world"]
+            npc = next(c for c in state["scene"]["present"] if c != "player" and state["characters"][c]["tier"] == "major")
+            npc_name = state["characters"][npc]["name"]
+            taken = {c.get("family") for c in state["characters"].values()}
+            family = next(f for f in world["name_pools"]["family"] if f not in taken)
+            away = next(loc["id"] for loc in world["locations"] if loc["id"] != state["scene"]["location_id"])
+            guest_name = full_name(world["name_pools"], family, "客安")
+            intro = continue_turn(
+                npc,
+                operations=[
+                    {
+                        "op": "introduce_character",
+                        "id": "one_way_guest",
+                        "name": guest_name,
+                        "tier": "supporting",
+                        "age": 31,
+                        "gender": "female",
+                        "adult_context": "码头常来的成年货运代理",
+                        "public_role": "货运代理",
+                        "present": True,
+                        "appearance": "穿深色风衣",
+                        "identity": {
+                            "authority": "负责货单交接",
+                            "resources": ["货单副本"],
+                            "limits": ["不能进调度室"],
+                            "obligations": ["按点验货"],
+                            "exposure_risk": "怕货单对不上",
+                            "hidden_mismatch": "表面客气，实则计较得失",
+                        },
+                        "decision": {"core_value": "稳妥", "current_goal": "尽快核完货单"},
+                    },
+                    {"op": "relationship", "from": "one_way_guest", "to": "player", "trust_delta": 1, "reason": "你递了手电"},
+                    {"op": "exit_scene", "character_id": "one_way_guest", "to_location_id": away},
+                    {"op": "add_fact", "key": "secret.hidden_leverage", "text": "暗中握着你的违章记录", "truth": True, "known_by": [npc], "visibility": "private", "origin": "observed"},
+                ],
+            )
+            r1 = service.commit_turn(ctx, record(sid, ids(), info["revision"], intro))
+            hidden_fid = next(a["fact_id"] for a in r1["turns"][0]["applied"] if a["op"] == "add_fact")
+            r2 = service.commit_turn(
+                ctx,
+                record(
+                    sid,
+                    ids(),
+                    r1["revision"],
+                    continue_turn(
+                        npc,
+                        operations=[{"op": "leverage_set", "holder": npc, "subject": "player", "basis_fact_id": hidden_fid, "origin": "私下查档"}],
+                    ),
+                ),
+            )
+            # Unknown leverage against the player must not spoil in brief status.
+            brief_hidden = service.status(ctx, {"session_id": sid, "level": "brief"})
+            self.assertEqual(len(brief_hidden["lines"]), 6)
+            self.assertNotIn("手里有你的把柄", brief_hidden["lines"][3])
+            # Once revealed to the player, the leverage appears in brief status.
+            r3 = service.commit_turn(
+                ctx,
+                record(
+                    sid,
+                    ids(),
+                    r2["revision"],
+                    continue_turn(npc, operations=[{"op": "reveal_fact", "from": npc, "to": ["player"], "fact_id": hidden_fid}]),
+                ),
+            )
+            brief_known = service.status(ctx, {"session_id": sid, "level": "brief"})
+            self.assertIn("%s手里有你的把柄" % npc_name, brief_known["lines"][3])
+            for word in ("trust", "tension", "revision", "stage", "npc_", "_id"):
+                self.assertNotIn(word, "".join(brief_known["lines"]))
+            # Detail status shows offstage NPC with only npc>player edge, plus preference & non-default voice.
+            r4 = service.set_preferences(
+                ctx,
+                {
+                    "session_id": sid,
+                    "request_id": ids(),
+                    "expected_revision": r3["revision"],
+                    "npc_gender_preference": "female_only",
+                    "voice": {"npc_id": npc, "voice": "inner"},
+                },
+            )
+            self.assertEqual(r4["revision"], r3["revision"] + 1)
+            detail_view = service.status(ctx, {"session_id": sid, "level": "detail"})
+            by_title = {s["title"]: s["items"] for s in detail_view["sections"]}
+            self.assertTrue(any(guest_name in item for item in by_title["人物"]), by_title["人物"])
+            self.assertIn("配对偏好：只要女性", by_title["设置"])
+            self.assertIn("角色语态：%s（里层语态）" % npc_name, by_title["设置"])
+
+    def test_corrupted_doctor_marker_falls_back_to_full_check(self):
+        from adult_tension.application import doctor
+        from helpers.cli import SKILL_ROOT
+
+        with temp_dir() as tmp:
+            data_dir = os.path.join(tmp, "data")
+
+            def run_doctor():
+                ctx = Context(SKILL_ROOT, data_dir, clean_env(), {}, False)
+                try:
+                    return doctor.run(ctx, {})
+                finally:
+                    ctx.close()
+
+            first = run_doctor()
+            self.assertFalse(first["fast_path"])
+            marker_file = paths.marker_path(data_dir)
+            with open(marker_file, encoding="utf-8") as handle:
+                valid_marker = json.load(handle)
+            for corrupted in ([], "not-a-dict", dict(valid_marker, content_check=["broken"])):
+                with open(marker_file, "w", encoding="utf-8") as handle:
+                    json.dump(corrupted, handle, ensure_ascii=False)
+                repaired = run_doctor()
+                self.assertFalse(repaired["fast_path"], corrupted)
+                self.assertIn(repaired["status"], ("ok", "warn"))
+                ids = [c["id"] for c in repaired["checks"]]
+                self.assertEqual(len(ids), len(set(ids)))
+                fast = run_doctor()
+                self.assertTrue(fast["fast_path"], corrupted)
+
+    def test_world_query_exact_match_beats_substring_matches(self):
+        with temp_dir() as tmp:
+            skill = copy_skill(tmp)
+            index_path = os.path.join(skill, "content", "index.json")
+            with open(index_path, encoding="utf-8") as handle:
+                index = json.load(handle)
+            index["worlds"].append(
+                {
+                    "id": "harbor",
+                    "title": "夜班",
+                    "era": "当代",
+                    "region": "港区",
+                    "summary": "一场独立的夜班故事。",
+                    "modes": ["daily"],
+                    "content_tags": [],
+                    "status": "released",
+                }
+            )
+            with open(index_path, "w", encoding="utf-8") as handle:
+                json.dump(index, handle, ensure_ascii=False)
+            ctx = Context(skill, os.path.join(tmp, "data"), clean_env(), {}, False)
+            try:
+                self.assertEqual(service._match_world_query(ctx, "夜班", drafts=True), "harbor")
+                self.assertEqual(service._match_world_query(ctx, "harbor", drafts=True), "harbor")
+            finally:
+                ctx.close()
+
+    def test_my_world_exclusions_save_world_conflict_and_specs_errors(self):
+        from adult_tension import errors as E
+        from adult_tension.application import specs
+        from helpers.cli import REPO_ROOT
+
+        with app() as ctx:
+            ids = Ids()
+            # Mutual exclusions run before DB lookup for my_world and distinguish my_world vs custom_world.
+            with self.assertRaises(AppError) as caught:
+                service.new_game(ctx, {"request_id": ids(), "mode": "daily", "my_world": "不存在", "replay": True, "seed": 3})
+            self.assertEqual(caught.exception.code, "INVALID_INPUT")
+            self.assertIn("my_world", caught.exception.details[0]["hint"])
+            self.assertNotIn("custom_world", caught.exception.details[0]["hint"])
+            with self.assertRaises(AppError) as caught:
+                service.new_game(ctx, {"request_id": ids(), "mode": "daily", "my_world": "不存在", "world_query": "港口"})
+            self.assertEqual(caught.exception.code, "INVALID_INPUT")
+            self.assertIn("my_world", caught.exception.details[0]["reason"])
+            self.assertNotIn("custom_world", caught.exception.details[0]["reason"])
+            with self.assertRaises(AppError) as caught:
+                service.new_game(ctx, {"request_id": ids(), "mode": "daily", "my_world": "不存在", "locks": {"world_id": "harbor_night_shift"}})
+            self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.locks.world_id"))
+            with self.assertRaises(AppError) as caught:
+                service.new_game(ctx, {"request_id": ids(), "mode": "daily", "my_world": "不存在", "excludes": {"world_ids": ["harbor_night_shift"]}})
+            self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.excludes.world_ids"))
+            # save-world conflict includes reason="exists".
+            with open(os.path.join(REPO_ROOT, "content-src", "examples", "custom_world.json"), encoding="utf-8") as handle:
+                world = json.load(handle)
+            sid = service.new_game(ctx, {"request_id": ids(), "mode": "daily", "seed": 5, "custom_world": world})["session_id"]
+            service.save_world(ctx, {"request_id": ids(), "session_id": sid, "name": "重名世界"})
+            with self.assertRaises(AppError) as caught:
+                service.save_world(ctx, {"request_id": ids(), "session_id": sid, "name": "重名世界"})
+            self.assertEqual((caught.exception.code, caught.exception.extra["reason"]), ("SLOT_CONFLICT", "exists"))
+            self.assertEqual(caught.exception.extra["world"]["name"], "重名世界")
+        self.assertIn("自定义世界名", E.ERROR_DESCRIPTIONS[E.SLOT_CONFLICT])
+        age_band_desc = specs.PLAYER.fields["age_band"].desc
+        self.assertIn("SAFETY_BLOCK", age_band_desc)
+        self.assertIn("INVALID_INPUT", age_band_desc)
+        self.assertIn("my_world", specs.NEW_GAME.fields["world_query"].desc)
+        my_world_desc = specs.NEW_GAME.fields["my_world"].desc
+        for token in ("custom_world", "locks.world_id", "excludes.world_ids", "replay", "world_query"):
+            self.assertIn(token, my_world_desc)
+
+
 if __name__ == "__main__":
     unittest.main()

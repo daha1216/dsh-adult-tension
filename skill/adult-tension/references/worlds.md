@@ -2,12 +2,12 @@
 
 # 世界列表
 
-内容版本：`2026.11.25`。只有 `released` 的世界参与随机开局、出现在 `list-worlds` 里。玩家问某类题材时用 `list-worlds` 带 `query`，点名开局用 `new-game` 的 `world_query`，都按标题、时代、地方和完整介绍匹配。“有超自然的”“不要灾难的”这类按内容标签浏览：`list-worlds` 带 `tags` / `exclude_tags`。
+内容版本：`2026.11.26`。只有 `released` 的世界参与随机开局、出现在 `list-worlds` 里。玩家问某类题材时用 `list-worlds` 带 `query`，点名开局用 `new-game` 的 `world_query`，都按标题、时代、地方和完整介绍匹配。“有超自然的”“不要灾难的”这类按内容标签浏览：`list-worlds` 带 `tags` / `exclude_tags`。
 
 | 内容标签 | ID | 已发布世界数 |
 |---|---|---|
 | 轻度暧昧 | `romance_light` | 33 |
-| 亲密 | `intimate` | 206 |
+| 亲密 | `intimate` | 210 |
 | 直白的性描写 | `explicit` | 178 |
 | 暴力 | `violence` | 64 |
 | 胁迫 | `coercion_theme` | 144 |
@@ -15,16 +15,15 @@
 | 身体伤害 | `bodily_harm` | 83 |
 | 酒精与药物 | `substance` | 37 |
 | 怀孕 | `pregnancy` | 0 |
-| 死亡 | `death` | 23 |
+| 死亡 | `death` | 24 |
 | 职场权力关系 | `workplace_power` | 163 |
-| 出轨 | `infidelity` | 3 |
+| 出轨 | `infidelity` | 5 |
 | 违法犯罪 | `crime` | 144 |
 | 赌博 | `gambling` | 19 |
 | 职场 | `workplace` | 155 |
 | 夜生活 | `nightlife` | 20 |
-| 超自然 | `supernatural` | 30 |
+| 超自然 | `supernatural` | 34 |
 | 灾难 | `disaster` | 143 |
-| 自定义 | `custom` | 0 |
 
 | 世界 | ID | 一句话 | 模式 | 状态 |
 |---|---|---|---|---|

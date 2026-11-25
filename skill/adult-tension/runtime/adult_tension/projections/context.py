@@ -173,6 +173,7 @@ def brief(state, content, save=None):
             "assistant": state["preferences"]["assistant"],
             "offscreen_simulation": state["preferences"]["offscreen_simulation"],
             "person": state["preferences"]["person"],
+            "npc_gender_preference": state["preferences"]["npc_gender_preference"],
         },
         "save": save or {"current_slot": None, "turns_since_save": 0},
         "requests": dict(state["requests"]),

@@ -302,8 +302,70 @@ class ExportImportTest(unittest.TestCase):
         with self.assertRaises(AppError) as caught:
             self.importing(path=out["path"], slot="占用")
         self.assertEqual((caught.exception.code, caught.exception.extra["reason"]), ("SLOT_CONFLICT", "exists"))
+        self.assertEqual(set(caught.exception.extra["slot"]), {"name", "world_title", "turn", "clock_label", "saved_at"})
+        self.assertEqual(caught.exception.extra["slot"]["name"], "占用")
         done = self.importing(path=out["path"], slot="占用", overwrite=True)
         self.assertEqual(done["slot"]["version"], 2)
+
+    def _v1_export_doc(self):
+        conn = sqlite3.connect("file:%s?immutable=1" % V1_FIXTURE.replace("\\", "/"), uri=True)
+        try:
+            state_blob, content_blob, archive_blob = conn.execute("SELECT state, content, archive FROM slots").fetchone()
+        finally:
+            conn.close()
+        state = json.loads(zlib.decompress(state_blob))
+        doc = {
+            "format": "adult-tension-save",
+            "schema_version": 1,
+            "content_version": state["content_version"],
+            "rng_version": state["rng_version"],
+            "skill_version": "0.1.0",
+            "exported_at": "2026-09-01T00:00:00+08:00",
+            "source": {"kind": "slot", "name": "旧版本的存档", "version": 1},
+            "session": {"state": state, "content": json.loads(zlib.decompress(content_blob)), "archive": json.loads(zlib.decompress(archive_blob))},
+        }
+        doc["checksum"] = transfer.checksum(doc)
+        return doc
+
+    def test_import_rejects_bool_rng_version_and_invalid_state_schema_version(self):
+        out = self.export()
+        with open(out["path"], encoding="utf-8") as handle:
+            doc = json.load(handle)
+        bad_rng = json.loads(json.dumps(doc))
+        bad_rng["rng_version"] = True
+        bad_rng["checksum"] = transfer.checksum(bad_rng)
+        err = self.rejected("UNSUPPORTED_VERSION", data=bad_rng)
+        self.assertEqual(err.details[0]["path"], "$.rng_version")
+        for bad_sv in (0, False):
+            bad = json.loads(json.dumps(doc))
+            bad["schema_version"] = 1
+            bad["session"]["state"]["schema_version"] = bad_sv
+            bad["checksum"] = transfer.checksum(bad)
+            err = self.rejected("INVALID_INPUT", data=bad)
+            self.assertIn("$.session.state.schema_version", [d["path"] for d in err.details])
+
+    def test_inline_older_import_backup_preserves_original_and_avoids_orphans(self):
+        self.game.save("冲突槽")
+        doc = self._v1_export_doc()
+        backups_dir = os.path.join(self.ctx.data_dir, "backups")
+        before_backups = os.listdir(backups_dir) if os.path.isdir(backups_dir) else []
+        with self.assertRaises(AppError) as caught:
+            self.importing(data=doc, slot="冲突槽")
+        self.assertEqual((caught.exception.code, caught.exception.extra["reason"]), ("SLOT_CONFLICT", "exists"))
+        self.assertEqual(caught.exception.extra["slot"]["name"], "冲突槽")
+        after_conflict_backups = os.listdir(backups_dir) if os.path.isdir(backups_dir) else []
+        self.assertEqual(after_conflict_backups, before_backups)
+        self.assertEqual(doc["session"]["state"]["schema_version"], 1)
+        first = self.importing(data=doc)
+        second = self.importing(data=doc)
+        self.assertEqual(doc["session"]["state"]["schema_version"], 1)
+        self.assertNotEqual(first["backup"], second["backup"])
+        for backup_path in (first["backup"], second["backup"]):
+            self.assertTrue(os.path.isfile(backup_path))
+            with open(backup_path, encoding="utf-8") as handle:
+                backed_up = json.load(handle)
+            self.assertEqual(backed_up["session"]["state"]["schema_version"], 1)
+            self.assertEqual(transfer.checksum(backed_up), backed_up["checksum"])
 
 
 if __name__ == "__main__":

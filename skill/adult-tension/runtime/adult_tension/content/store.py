@@ -61,14 +61,22 @@ class ContentStore:
 
             rel = "worlds/%s.json" % world_id
             raw = self._read(os.path.join("worlds", world_id + ".json"))
-            _pack, problems = validate_world(raw, custom=False, tag_ids=[t["id"] for t in self.tags()["tags"]])
+            tags_doc = self.tags()
+            tags_list = tags_doc.get("tags") if isinstance(tags_doc, dict) else None
+            if not isinstance(tags_list, list) or not tags_list or not all(isinstance(t, dict) and isinstance(t.get("id"), str) and t["id"] for t in tags_list):
+                raise AppError(
+                    CONTENT_ERROR,
+                    "内容文件损坏：content/tags.json",
+                    [detail("content/tags.json $.tags", "标签列表缺失或格式无效", "重新安装 Skill 目录", CONTENT_ERROR)],
+                )
+            _pack, problems = validate_world(raw, custom=False, tag_ids=[t["id"] for t in tags_list])
             if problems:
                 raise AppError(
                     CONTENT_ERROR,
                     "内容文件校验失败：content/%s" % rel,
                     [dict(p, path="content/%s %s" % (rel, p["path"]), hint=p.get("hint") or "重新安装 Skill 目录") for p in problems],
                 )
-            self._worlds[world_id] = raw
+            self._worlds[world_id] = _pack
         return self._worlds[world_id]
 
     def world_digest(self, world_id):

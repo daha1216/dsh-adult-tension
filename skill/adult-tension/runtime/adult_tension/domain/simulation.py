@@ -134,6 +134,16 @@ def propagation(state, report, turn):
             target = fact["known_by"] if fact["truth"] else fact["believed_by"]
             target.extend(reached)
             if reached:
+                if fact["truth"]:
+                    for other in FA.of(state).by_key(fact["key"]):
+                        if not other["truth"]:
+                            misbelievers = [cid for cid in reached if cid in other["believed_by"]]
+                            if misbelievers:
+                                other = FA.edit(state, other["id"])
+                                for cid in misbelievers:
+                                    other["believed_by"].remove(cid)
+                                    if cid not in other["known_by"]:
+                                        other["known_by"].append(cid)
                 spread.append({"fact_id": fact["id"], "to": reached, "hop": hop + 1})
             fact["spread_hops"] = fact.get("spread_hops", 0) + 1
             if fact["spread_hops"] >= MAX_SPREAD_HOPS:

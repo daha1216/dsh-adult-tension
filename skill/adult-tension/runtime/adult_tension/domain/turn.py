@@ -19,7 +19,7 @@ engine asks of the next record (DATA_CONTRACTS 6.3).
 """
 
 from .. import schema as S
-from ..errors import INVARIANT_VIOLATION, INVALID_INPUT, AppError, detail, top_code
+from ..errors import INVARIANT_VIOLATION, INVALID_INPUT, NOT_FOUND, AppError, detail, top_code
 from ..jsonio import copy
 from . import clock as CL
 from . import facts as FA
@@ -82,7 +82,7 @@ def restore(snapshot, current):
     prefs = copy(current["preferences"])
     voice = dict(state["preferences"]["voice"])
     for npc, entry in current["preferences"]["voice"].items():
-        if isinstance(entry, dict) and entry.get("via") == "meta" and entry.get("since_turn", 0) > snapshot["turn"]:
+        if npc in state["characters"] and isinstance(entry, dict) and entry.get("via") == "meta" and entry.get("since_turn", 0) > snapshot["turn"]:
             voice[npc] = copy(entry)
     prefs["voice"] = voice
     state["preferences"] = prefs
@@ -149,7 +149,7 @@ def _mode_checks(ctx):
     if acts_on:
         for index, cid in enumerate(acts_on):
             if cid not in ctx.state["characters"]:
-                ctx.error("$.acts_on[%d]" % index, "角色不存在：%s" % cid, None, "NOT_FOUND")
+                ctx.error("$.acts_on[%d]" % index, "角色不存在：%s" % cid, None, NOT_FOUND)
             elif cid == player:
                 ctx.error("$.acts_on[%d]" % index, "acts_on 只写玩家行动作用到的 NPC", None, INVALID_INPUT)
     npcs = [c for c in (acts_on or []) if c != player and c in ctx.state["characters"]]
@@ -222,7 +222,7 @@ def _intimacy_checks(ctx):
         path = "$.intimate_participants[%d]" % index
         char = state["characters"].get(cid)
         if char is None:
-            ctx.error(path, "角色不存在：%s" % cid, None, "NOT_FOUND")
+            ctx.error(path, "角色不存在：%s" % cid, None, NOT_FOUND)
             continue
         if char["tier"] != "major":
             ctx.error(path, "%s 不是重要角色，不能参与亲密场景" % char["name"], "先 promote_character 升格为 major")
@@ -231,14 +231,6 @@ def _intimacy_checks(ctx):
         if cid == player:
             if commit["action_mode"] not in ("result", "attempt") or not commit["player_authorized"]:
                 ctx.error(path, "玩家角色的同意只能来自玩家本人的指令（result/attempt + player_authorized）")
-        else:
-            engaged = [r for r in ctx.responses.get(cid, []) if r in ST.INTIMATE_RESPONSES]
-            if not engaged and cid not in ctx.significant_actors():
-                ctx.error(
-                    path,
-                    "%s 在本回合缺少可入账的互动回应（partial/genuine/surface/negotiate）或实际行动" % char["name"],
-                    "亲密场景须记录在场参与者的实际回应（npc_response）或行动（npc_action）；若对方彻底拒绝（refuse）且未失守，不应标为实质亲密",
-                )
 
 
 # ---------------------------------------------------------------------------
@@ -322,7 +314,6 @@ def commit_turn(state, content, commit, undo_snapshot=None):
     base = _replace_base(state, replaced, undo_snapshot) if replaced is not None else state
     work = FA.working_copy(base)
     ctx = OPS.TurnContext(work, world, commit, simulation.hooks(work["turn"] + 1))
-    ctx.significant_actors = lambda: {a["npc_id"] for a in ctx.applied if a["op"] == "npc_action"}
     before_clock = dict(work["clock"])
     tag_ids = {tag["id"] for tag in content["tags"]}
     for index, tag in enumerate(commit["content_tags"]):

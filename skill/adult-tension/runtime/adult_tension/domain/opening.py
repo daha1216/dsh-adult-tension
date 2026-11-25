@@ -8,7 +8,7 @@ same opening. All combinations happen inside one world pack (D7).
 import math
 
 from .. import STATE_SCHEMA_VERSION
-from ..errors import NO_MATCH, SAFETY_BLOCK, AppError, detail
+from ..errors import INVALID_INPUT, NO_MATCH, SAFETY_BLOCK, AppError, detail
 from . import clock as CL
 from . import rng
 from . import state as SS
@@ -53,6 +53,81 @@ def _excluded(tags, excluded):
     return bool(set(tags or ()) & excluded)
 
 
+_COMPOUND_SURNAMES = (
+    "欧阳", "司马", "上官", "诸葛", "东方", "皇甫", "慕容", "宇文", "长孙", "司徒",
+    "司空", "独孤", "南宫", "夏侯", "公孙", "太史", "端木", "百里", "东郭", "呼延",
+    "尉迟", "公羊", "赫连", "澹台", "宗政", "濮阳", "公冶", "太叔", "申屠", "仲孙",
+    "轩辕", "令狐", "钟离", "闾丘", "鲜于", "闻人", "西门", "完颜", "拓跋", "纳兰",
+)
+
+
+def _split_player_name(pools, full):
+    family, given = split_name(pools, full)
+    if family and given:
+        return family, given
+    if pools.get("order") == "given_first":
+        given, sep, family = full.rpartition("·")
+        if sep and given.strip() and family.strip():
+            return family.strip(), given.strip()
+        return "", full
+    if all("\u4e00" <= ch <= "\u9fff" for ch in full):
+        for surname in _COMPOUND_SURNAMES:
+            if full.startswith(surname):
+                if len(full) > len(surname):
+                    return surname, full[len(surname) :]
+                return "", full
+        if 2 <= len(full) <= 3:
+            return full[0], full[1:]
+    return "", full
+
+
+def _check_adult_age(age):
+    if age < 18:
+        raise AppError(
+            SAFETY_BLOCK,
+            "玩家角色必须是成年人",
+            [detail("$.player.age", "年龄 %d 小于 18" % age, "所有角色都必须年满 18 岁", SAFETY_BLOCK)],
+        )
+
+
+def _validate_player_age(player_req):
+    age = player_req.get("age")
+    if age is not None:
+        if type(age) is not int:
+            raise AppError(
+                INVALID_INPUT,
+                "玩家角色年龄格式错误",
+                [detail("$.player.age", "年龄必须是整数", "填写 ≥ 18 的整数", INVALID_INPUT)],
+            )
+        _check_adult_age(age)
+    band = player_req.get("age_band")
+    if band is not None:
+        if (
+            not isinstance(band, (list, tuple))
+            or len(band) != 2
+            or type(band[0]) is not int
+            or type(band[1]) is not int
+        ):
+            raise AppError(
+                INVALID_INPUT,
+                "玩家角色年龄区间格式错误",
+                [detail("$.player.age_band", "年龄区间必须是两个整数 [下限, 上限]", "请按 [下限, 上限] 填写，且下限 ≥ 18", INVALID_INPUT)],
+            )
+        band_lo, band_hi = band
+        if band_lo > band_hi:
+            raise AppError(
+                INVALID_INPUT,
+                "玩家角色年龄区间倒置",
+                [detail("$.player.age_band", "年龄区间倒置：%d > %d" % (band_lo, band_hi), "请按 [下限, 上限] 填写，且下限 ≥ 18", INVALID_INPUT)],
+            )
+        if band_lo < 18:
+            raise AppError(
+                SAFETY_BLOCK,
+                "玩家角色必须是成年人",
+                [detail("$.player.age_band", "年龄区间下限 %d 小于 18" % band_lo, "所有角色都必须年满 18 岁", SAFETY_BLOCK)],
+            )
+
+
 def _identity_candidates(pack, conditions):
     player = conditions["player"]
     locks = conditions["locks"]
@@ -65,6 +140,9 @@ def _identity_candidates(pack, conditions):
             continue
         gender = player.get("gender")
         if gender and identity["gender"] not in ("any", gender):
+            continue
+        position = player.get("social_position")
+        if position and identity["social_position"] != position:
             continue
         out.append(identity)
     return out
@@ -79,7 +157,7 @@ def _custom_identity(conditions):
         "id": "custom_identity",
         "role": hint[:20],
         "gender": "any",
-        "title_patterns": [{"pattern": "{family}" + ("" if len(hint) > 6 else hint[:6]), "gender": "any"}],
+        "title_patterns": [] if len(hint) > 6 else [{"pattern": "{family}" + hint, "gender": "any"}],
         "age_range": [18, 80],
         "social_position": player.get("social_position", "equal"),
         "baseline": "",
@@ -117,7 +195,7 @@ def npc_preference(preference, player_gender):
     ("other_female" / "other_male"): an NPC whose gender the world leaves open
     takes it, a card with a fixed gender keeps its own, and a combo needs
     someone who can be of the other gender."""
-    if preference not in ("any", "mixed") or player_gender not in OPPOSITE:
+    if preference != "any" or player_gender not in OPPOSITE:
         return preference
     return "other_" + OPPOSITE[player_gender]
 
@@ -167,7 +245,7 @@ def plan_candidates(pack, mode, conditions):
     if not locations:
         reasons.append("没有满足条件的地点")
     identities = _identity_candidates(pack, conditions)
-    custom_identity = None if identities else _custom_identity(conditions)
+    custom_identity = None if (identities or locks.get("identity_id")) else _custom_identity(conditions)
     if not identities and custom_identity is None:
         reasons.append("没有符合玩家设定（身份、性别、年龄）的玩家身份")
     combos = []
@@ -182,9 +260,12 @@ def plan_candidates(pack, mode, conditions):
             continue
         if identities and not any(_identity_fits(i, combo) for i in identities):
             continue
+        if not identities and custom_identity is not None and conditions["player"].get("social_position"):
+            if custom_identity["social_position"] not in combo["player_positions"]:
+                continue
         combos.append(combo)
     if not combos:
-        reasons.append("没有满足锁定、排除、性别偏好（没设偏好时与玩家角色异性）与玩家身份的人物组合")
+        reasons.append("没有满足锁定、排除、配对偏好（没设偏好时与玩家角色异性）与玩家身份的人物组合")
     if mode == "daily":
         items = [a for a in pack["daily_activities"] if not _excluded(a["tags"], excluded)]
         key = "activity_id"
@@ -258,9 +339,19 @@ def resolve_mode(seed, mode):
 
 def plan(pack, seed, conditions):
     """Choose the opening skeleton; raise NO_MATCH when constraints cannot be met."""
+    _validate_player_age(conditions["player"])
     conditions = with_player_gender(pack, conditions)
     mode = resolve_mode(seed, conditions["mode"])
     tuples, reasons = plan_candidates(pack, mode, conditions)
+    if not tuples and conditions["mode"] == "random":
+        other = "pressure" if mode == "daily" else "daily"
+        alt_tuples, alt_reasons = plan_candidates(pack, other, conditions)
+        if alt_tuples:
+            mode, tuples, reasons = other, alt_tuples, alt_reasons
+        else:
+            for reason in alt_reasons:
+                if reason not in reasons:
+                    reasons.append(reason)
     if not tuples:
         raise no_match(reasons, pack["id"], conditions)
     combo, item, location_id, hook = _choose(seed, tuples, mode)
@@ -269,7 +360,8 @@ def plan(pack, seed, conditions):
         identity = rng.pick(seed, "opening.identity", identities)
     else:
         identity = dict(_custom_identity(conditions))
-        identity["social_position"] = combo["player_positions"][0]
+        if not conditions["player"].get("social_position"):
+            identity["social_position"] = combo["player_positions"][0]
     result = {
         "world_id": pack["id"],
         "mode": mode,
@@ -293,7 +385,7 @@ def no_match(reasons, world_id, conditions):
     if conditions["excludes"]["content_tags"] or conditions["excludes"]["world_ids"] or conditions["excludes"]["location_ids"]:
         relax.append("减少排除条件")
     if conditions["npc_gender_preference"] not in ("any", "mixed"):
-        relax.append("把 NPC 性别偏好改成“不限”")
+        relax.append("把配对偏好改成“不限”")
     if conditions["player"]:
         relax.append("放宽玩家设定（身份、年龄、性别）")
     return AppError(
@@ -420,6 +512,7 @@ def _render_tree(node, scopes):
 
 def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
     """Build the initial session state (without session_id) and the opening payload."""
+    _validate_player_age(conditions["player"])
     conditions = with_player_gender(pack, conditions)
     result, combo, item, hook, identity = planned
     mode = result["mode"]
@@ -441,22 +534,24 @@ def instantiate(pack, seed, conditions, planned, content_version, tag_ids=None):
             if lo > hi:
                 lo, hi = player_req["age_band"]
         age = rng.randint(seed, "player.age", lo, hi)
-    if age < 18:
-        raise AppError(SAFETY_BLOCK, "玩家角色必须是成年人", [detail("$.player.age", "年龄 %d 小于 18" % age, "所有角色都必须年满 18 岁", SAFETY_BLOCK)])
+    _check_adult_age(age)
     if player_req.get("name"):
         full = player_req["name"]
-        family, given = split_name(pack["name_pools"], full)
-        if family is None or not given:
-            family, given = "", full
-        names.reserve_family(family)
+        family, given = _split_player_name(pack["name_pools"], full)
+        if family:
+            names.reserve_family(family)
     else:
         family = names.next_family(allow_reuse=True)
         given = names.given(gender, "player")
         full = full_name(pack["name_pools"], family, given)
     title = player_req.get("title")
     if not title:
-        patterns = [p["pattern"] for p in identity["title_patterns"] if p["gender"] in ("any", gender)] or [identity["title_patterns"][0]["pattern"]]
-        title = render_name_pattern(rng.pick(seed, "player.title", patterns), family, given or full)
+        patterns = [p["pattern"] for p in identity["title_patterns"] if p["gender"] in ("any", gender)]
+        if not family:
+            patterns = [p for p in patterns if "{family}" not in p]
+        if patterns:
+            title = render_name_pattern(rng.pick(seed, "player.title", patterns), family, given or full)
+        title = title or full
     player = {
         "id": "player",
         "name": full,
@@ -842,29 +937,50 @@ def standby_previews(state, world):
     that have not yet entered state['characters']."""
     if not world or not world.get("character_templates"):
         return {}
-    missing = [t for t in sorted(world["character_templates"], key=lambda t: t["id"]) if t["id"] not in state["characters"]]
-    if not missing:
+    templates = sorted(world["character_templates"], key=lambda t: t["id"])
+    combo_id = (state.get("opening") or {}).get("combo_id")
+    combo = next((c for c in world.get("cast_combos", []) if c["id"] == combo_id), None)
+    if combo is not None:
+        opening_slots = set(combo["slots"])
+    else:
+        opening_slots = {
+            t["id"]
+            for t in templates
+            if t["id"] in state["characters"] and state["characters"][t["id"]].get("introduced_turn") is None
+        }
+    initial_standby = [t for t in templates if t["id"] not in opening_slots]
+    missing_ids = {t["id"] for t in initial_standby if t["id"] not in state["characters"]}
+    if not missing_ids:
         return {}
     seed = state["seed"]
-    player = state["characters"][state["player_id"]]
+    player_id = state["player_id"]
+    player = state["characters"][player_id]
     names = _Names(world, seed)
-    for cid, char in sorted(state["characters"].items()):
-        if char.get("family") and (cid == state["player_id"] or char.get("tier") in ("major", "supporting")):
+    bg_ids = {b["id"] for b in world.get("background_cast", [])}
+    initial_ids = {player_id} | opening_slots | bg_ids
+    for cid in sorted(initial_ids):
+        char = state["characters"].get(cid)
+        if not char:
+            continue
+        if char.get("family") and (cid == player_id or cid in opening_slots):
             names.reserve_family(char["family"])
         if char.get("given"):
             names.used_given.add(char["given"])
     pref = npc_preference(state["preferences"]["npc_gender_preference"], player["gender"])
-    genders = _npc_genders(world, {"slots": [t["id"] for t in missing]}, seed, pref)
+    genders = _npc_genders(world, {"slots": [t["id"] for t in initial_standby]}, seed, pref)
     here = state["scene"]["location_id"]
     other_locs = [loc["id"] for loc in world.get("locations", []) if loc["id"] != here] or [here]
     minute = state["clock"]["minute"]
     out = {}
-    for tpl in missing:
+    for tpl in initial_standby:
         slot = tpl["id"]
         g = genders[slot]
         fam = names.next_family(allow_reuse=True)
         giv = names.given(g, "standby." + slot)
         name = full_name(world["name_pools"], fam, giv)
+        call = names.call(fam, giv, g, "standby." + slot)
+        if slot not in missing_ids:
+            continue
         loc_id = _standby_schedule_loc(tpl, minute) or rng.pick(seed, "standby.loc", other_locs, slot)
         out[slot] = {
             "id": slot,
@@ -872,7 +988,7 @@ def standby_previews(state, world):
             "name": name,
             "family": fam,
             "given": giv,
-            "call": names.call(fam, giv, g, "standby." + slot),
+            "call": call,
             "tier": "major",
             "age": rng.randint(seed, "standby.age", tpl["age_range"][0], tpl["age_range"][1], slot),
             "gender": g,

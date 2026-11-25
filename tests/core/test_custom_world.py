@@ -234,6 +234,57 @@ class ValidationTest(unittest.TestCase):
         world["player_identities"][0]["title_patterns"] = [{"pattern": "{family}先生", "gender": "any"}]
         _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
         self.assertEqual(problems, [])
+        # Neutral address compounds (e.g. 郎中) are not falsely flagged as gendered.
+        world["player_identities"][0]["gender"] = "any"
+        world["player_identities"][0]["title_patterns"] = [{"pattern": "{family}老师", "gender": "any"}]
+        world["hooks"][0]["text"] = "{npc.name}递给{player.name}郎中一包草药"
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        self.assertEqual(problems, [])
+        # Opposite-gender title or nickname patterns are refused; female + 先生 (评弹女先生) is exempted.
+        world["hooks"][0]["text"] = "{npc.name}朝{player.title}点了点头"
+        world["name_pools"]["nickname_patterns"].append({"pattern": "{family}小姐", "gender": "male"})
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        self.assertTrue(any("nickname_patterns[2].gender" in p["path"] for p in problems), problems)
+        world["name_pools"]["nickname_patterns"][-1] = {"pattern": "{family}先生", "gender": "female"}
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        self.assertEqual(problems, [])
+        # Fixed-gender identity still rejects opposite-gender title patterns.
+        world["player_identities"][0]["gender"] = "male"
+        world["player_identities"][0]["title_patterns"] = [{"pattern": "{family}小姐", "gender": "any"}]
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        self.assertTrue(any("player_identities[0].title_patterns[0]" in p["path"] for p in problems), problems)
+        # Mixed-gender wording does not count as covering both male and female players.
+        world["player_identities"][0]["gender"] = "any"
+        world["player_identities"][0]["title_patterns"] = [{"pattern": "{family}女伯爵", "gender": "any"}]
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        self.assertTrue(any(p["path"] == "$.player_identities[0].title_patterns" for p in problems), problems)
+
+    def test_explicit_requires_intimate_and_custom_tag_is_refused(self):
+        world = example()
+        world["content_tags"] = ["explicit"]
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        hits = [p for p in problems if p["path"] == "$.content_tags"]
+        self.assertTrue(hits and "explicit" in hits[0]["reason"] and "intimate" in hits[0]["reason"], problems)
+        world["content_tags"] = ["intimate", "explicit"]
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        self.assertEqual(problems, [])
+        world["content_tags"] = ["intimate", "custom"]
+        world["locations"][0]["tags"] = ["custom"]
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        self.assertTrue({"$.content_tags[1]", "$.locations[0].tags[0]"} <= {p["path"] for p in problems}, problems)
+
+    def test_custom_world_checks_identity_fit_and_hook_location_intersection(self):
+        world = example()
+        world["cast_combos"][0]["player_positions"] = ["high"]
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        self.assertTrue(any(p["path"] == "$.cast_combos[0].player_positions" for p in problems), problems)
+        world = example()
+        for hook in world["hooks"]:
+            hook["location_ids"] = ["terrace"]
+        for act in world["daily_activities"]:
+            act["location_ids"] = ["living_room"]
+        _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
+        self.assertTrue(any(p["path"] == "$.cast_combos[0]" for p in problems), problems)
 
     def test_a_text_may_not_name_someone_with_a_pool_name(self):
         # The runtime draws each character's name, so a pool name written
@@ -403,6 +454,91 @@ class MyWorldsTest(unittest.TestCase):
             self.assertEqual(out["stage"], "custom_world")
             self.assertIn("保存世界", out["text"])
             self.assertIn("自定义世界", "\n".join(guide.run(ctx, {})["lines"]))
+
+
+class StoreUpgradeDbTest(unittest.TestCase):
+    """Regression coverage for ContentStore, verify_installed, upgrade, and db.ensure_schema."""
+
+    def test_store_caches_normalized_world_and_verify_checks_tags_and_index_shape(self):
+        from adult_tension.content.store import ContentStore
+        from adult_tension.content.verify import verify_installed
+        from helpers.fs import temp_dir
+
+        with temp_dir() as tmp:
+            worlds_dir = os.path.join(tmp, "worlds")
+            os.makedirs(worlds_dir)
+            raw = copy.deepcopy(STORE.world_raw("harbor_night_shift"))
+            raw.pop("clock_style", None)
+            raw.pop("default_person", None)
+            raw["hooks"][0].pop("location_ids", None)
+            with open(os.path.join(worlds_dir, "harbor_night_shift.json"), "w", encoding="utf-8") as handle:
+                json.dump(raw, handle, ensure_ascii=False)
+            with open(os.path.join(tmp, "tags.json"), "w", encoding="utf-8") as handle:
+                json.dump(STORE.tags(), handle, ensure_ascii=False)
+            with open(os.path.join(tmp, "index.json"), "w", encoding="utf-8") as handle:
+                json.dump({"content_version": "test", "worlds": [{"id": "harbor_night_shift", "status": "draft"}]}, handle, ensure_ascii=False)
+            store = ContentStore(tmp)
+            loaded = store.world("harbor_night_shift")
+            self.assertEqual(loaded["clock_style"], "hm")
+            self.assertEqual(loaded["default_person"], "second")
+            self.assertEqual(loaded["hooks"][0]["location_ids"], [])
+            self.assertIs(store.world("harbor_night_shift"), loaded)
+            # Non-dict index.json and bad/missing tags.json are reported as CONTENT_ERROR.
+            with open(os.path.join(tmp, "index.json"), "w", encoding="utf-8") as handle:
+                json.dump(["not-a-dict"], handle)
+            with open(os.path.join(tmp, "tags.json"), "w", encoding="utf-8") as handle:
+                json.dump({"tags": []}, handle)
+            problems, _summary = verify_installed(ContentStore(tmp))
+            self.assertTrue(any("index.json" in p["path"] and p.get("code") == "CONTENT_ERROR" for p in problems), problems)
+            self.assertTrue(any("tags.json" in p["path"] and p.get("code") == "CONTENT_ERROR" for p in problems), problems)
+            self.assertTrue(all("重新编译内容" not in (p.get("hint") or "") for p in problems), problems)
+            os.remove(os.path.join(tmp, "tags.json"))
+            problems, _summary = verify_installed(ContentStore(tmp))
+            self.assertTrue(any("tags.json" in p["path"] for p in problems), problems)
+
+    def test_upgrade_rejects_bad_schema_version_and_handles_missing_keys(self):
+        from adult_tension.domain.upgrade import upgrade
+
+        for bad in (0, -1, False, True, "1", None):
+            with self.assertRaises(AppError) as caught:
+                upgrade({"schema_version": bad})
+            self.assertEqual(caught.exception.code, "INVALID_INPUT", bad)
+        malformed = {"schema_version": 1, "facts": {"f1": "bad"}, "events": {"e1": {}}, "counters": {}, "memory": None, "requests": "bad"}
+        upgraded = upgrade(malformed)
+        self.assertEqual(upgraded["schema_version"], 2)
+        minimal = upgrade({"schema_version": 1})
+        self.assertEqual(minimal["schema_version"], 2)
+
+    def test_db_ensure_schema_rechecks_version_inside_write_lock(self):
+        import sqlite3
+        from unittest import mock
+
+        from adult_tension import DB_SCHEMA_VERSION
+        from adult_tension.persistence import db
+        from helpers.fs import temp_dir
+
+        with temp_dir() as tmp:
+            db_file = os.path.join(tmp, "test.db")
+            backups_dir = os.path.join(tmp, "backups")
+            conn = db.connect(db_file)
+            try:
+                # Simulate another process upgrading to a newer version before we acquire the lock.
+                with mock.patch.object(db, "read_schema_version", side_effect=[1, DB_SCHEMA_VERSION + 1]):
+                    with self.assertRaises(AppError) as caught:
+                        db.ensure_schema(conn, backups_dir)
+                self.assertEqual(caught.exception.code, "UNSUPPORTED_VERSION")
+                self.assertFalse(conn.in_transaction)
+                self.assertFalse(os.path.exists(backups_dir))
+                # Simulate another process finishing migration to DB_SCHEMA_VERSION before we acquire the lock.
+                with mock.patch.object(db, "read_schema_version", side_effect=[1, DB_SCHEMA_VERSION]):
+                    report = db.ensure_schema(conn, backups_dir)
+                self.assertFalse(report["migrated"])
+                self.assertIsNone(report["backup"])
+                self.assertEqual(report["from"], DB_SCHEMA_VERSION)
+                self.assertFalse(conn.in_transaction)
+                self.assertFalse(os.path.exists(backups_dir))
+            finally:
+                conn.close()
 
 
 if __name__ == "__main__":

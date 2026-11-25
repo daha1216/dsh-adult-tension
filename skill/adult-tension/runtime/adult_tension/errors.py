@@ -57,7 +57,7 @@ ERROR_DESCRIPTIONS = {
     SAFETY_BLOCK: "触及玩家硬边界、处于暂停状态，或违反全员成年（18+）底线",
     CONTENT_ERROR: "内容包或自定义世界校验失败",
     NOT_FOUND: "会话、存档、角色、事件不存在",
-    SLOT_CONFLICT: "存档名已被占用（exists），或本局当前槽已在别的对话里被写过（changed_elsewhere）",
+    SLOT_CONFLICT: "存档名或自定义世界名已被占用（exists），或本局当前槽已在别的对话里被写过（changed_elsewhere）",
     UNSUPPORTED_VERSION: "存档、数据库或内容版本不受支持",
     RUNTIME_UNSUPPORTED: "Python 版本过低或缺少 SQLite 等必要能力",
     DATA_DIR_UNAVAILABLE: "数据目录不可写；附尝试过的路径与建议",

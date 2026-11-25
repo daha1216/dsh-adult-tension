@@ -11,7 +11,7 @@ from . import cards as C
 from . import facts as FA
 from . import state as SS
 from . import structure as ST
-from .ops import FACT_KEY, _flush, _need_character, register
+from .ops import FACT_KEY, _absent_actor_ok, _flush, _is_standby, _need_character, register
 from .text import split_name
 
 F = S.Field
@@ -55,10 +55,13 @@ def op_reveal_fact(ctx, op, path):
         errs.append(detail(path + ".fact_id", "事实不存在：%s" % op["fact_id"], None, NOT_FOUND))
     elif fact["visibility"] == "inner":
         errs.append(detail(path + ".fact_id", "内心事实永远不能被传播", "内心只属于本人；需要让别人知道，要本人在正文里说出来并记一条新事实", INVARIANT_VIOLATION))
-    if _need_character(ctx, source, path + ".from", errs) and fact is not None:
-        if not SS.knows(state, source, fact["id"]):
-            errs.append(detail(path + ".from", "%s 并不知道这件事，没法告诉别人" % ctx.name(source), None, INVARIANT_VIOLATION))
-        _present_or_beat(ctx, source, path + ".from", errs, "当面告知")
+    if _need_character(ctx, source, path + ".from", errs):
+        if source == state["player_id"] and ctx.mode not in ("result", "attempt"):
+            errs.append(detail(path + ".from", "玩家角色把消息告诉别人只能在 result 或 attempt 模式进行", "继续/等待/追溯回合里不替玩家角色主动泄密", INVARIANT_VIOLATION))
+        if fact is not None:
+            if not SS.knows(state, source, fact["id"]):
+                errs.append(detail(path + ".from", "%s 并不知道这件事，没法告诉别人" % ctx.name(source), None, INVARIANT_VIOLATION))
+            _present_or_beat(ctx, source, path + ".from", errs, "当面告知")
     for index, target in enumerate(op["to"]):
         tpath = "%s.to[%d]" % (path, index)
         if not _need_character(ctx, target, tpath, errs) or fact is None:
@@ -120,8 +123,12 @@ def op_spread_rumor(ctx, op, path):
         elif channel["fidelity"] != "distorted":
             errs.append(detail(path + ".channel_id", "精确渠道不会让消息走样", "走样的传闻要走 distorted 渠道；精确转告用 reveal_fact", INVARIANT_VIOLATION))
     if _need_character(ctx, source, path + ".from", errs):
-        if channel is None:
+        if source == state["player_id"] and ctx.mode not in ("result", "attempt"):
+            errs.append(detail(path + ".from", "玩家角色传出传闻只能在 result 或 attempt 模式进行", "继续/等待/追溯回合里不替玩家角色主动造谣", INVARIANT_VIOLATION))
+        if op["channel_id"] is None:
             _present_or_beat(ctx, source, path + ".from", errs, "传话")
+        elif source != state["player_id"]:
+            _absent_actor_ok(ctx, source, path + ".from", errs)
         if op["source_fact_id"] is not None:
             fact = state["facts"].get(op["source_fact_id"])
             if fact is None:
@@ -136,7 +143,7 @@ def op_spread_rumor(ctx, op, path):
             continue
         if target == source:
             errs.append(detail(tpath, "传话的人不必再相信自己的传闻", None, INVARIANT_VIOLATION))
-        elif channel is None:
+        elif op["channel_id"] is None:
             if not SS.has_edge_either(state, source, target):
                 errs.append(detail(tpath, "%s 与 %s 之间没有关系边" % (ctx.name(source), ctx.name(target)), "经走样渠道传播时带 channel_id", INVARIANT_VIOLATION))
             _present_or_beat(ctx, target, tpath, errs, "听到传闻")
@@ -245,25 +252,39 @@ def op_intimacy_evidence(ctx, op, path):
     allowed = {"increase", "decrease"} if item in C.INTIMACY_NUMERIC else ({"add", "remove"} if item in C.INTIMACY_LISTS else {"set"})
     if direction not in allowed:
         errs.append(detail(path + ".direction", "%s 只能用 %s" % (item, "/".join(sorted(allowed))), None, INVARIANT_VIOLATION))
+    if direction in ("increase", "decrease") and value is not None:
+        errs.append(detail(path + ".value", "数值项的 increase/decrease 不能传 value", None, INVARIANT_VIOLATION))
     if direction in ("add", "remove", "set") and not value:
         errs.append(detail(path + ".value", "这个方向需要写明具体内容", None, INVARIANT_VIOLATION))
+    if item == "desired_position" and value and len(value) > 40:
+        errs.append(detail(path + ".value", "desired_position 不能超过 40 字", None, INVARIANT_VIOLATION))
     if card and direction in allowed:
-        if direction == "add" and value in card[item]:
-            errs.append(detail(path + ".value", "这一项里已经有“%s”" % value, None, INVARIANT_VIOLATION))
+        if direction == "add":
+            if value in card[item]:
+                errs.append(detail(path + ".value", "这一项里已经有“%s”" % value, None, INVARIANT_VIOLATION))
+            elif len(card[item]) >= 8:
+                errs.append(detail(path + ".value", "这一项最多保留 8 条，已满", "先 remove 一条旧的，再 add 新的", INVARIANT_VIOLATION))
         elif direction == "remove" and value not in card[item]:
             errs.append(detail(path + ".value", "这一项里没有“%s”" % value, "只能去掉卡片上已有的内容", INVARIANT_VIOLATION))
+        elif direction == "set" and value == card[item]:
+            errs.append(detail(path + ".value", "这一项当前已经是“%s”" % value, None, INVARIANT_VIOLATION))
     if not _flush(ctx, errs):
         return
     bucket = state["counters"]["intimacy_evidence"].setdefault(npc, {})
-    key = "%s|%s|%s" % (item, direction, value or "")
+    bucket_val = "" if item in C.INTIMACY_NUMERIC else (value or "")
+    key = "%s|%s|%s" % (item, direction, bucket_val)
     turns = bucket.setdefault(key, [])
     if ctx.turn not in turns:
         turns.append(ctx.turn)
     needed = BOUNDARY_RELAX_NEEDED if (item == "boundaries" and direction == "remove") else EVIDENCE_NEEDED
-    changed = len(turns) >= needed
-    if changed:
+    reached = len(turns) >= needed
+    changed = reached
+    if reached:
         if item in C.INTIMACY_NUMERIC:
-            card[item] = max(0, min(5, card[item] + (1 if direction == "increase" else -1)))
+            old = card[item]
+            new = max(0, min(5, old + (1 if direction == "increase" else -1)))
+            card[item] = new
+            changed = new != old
         elif direction == "add":
             card[item].append(value)
         elif direction == "remove":
@@ -354,18 +375,27 @@ def op_npc_update(ctx, op, path):
 # new characters and promotion
 
 
-def _gender_preference_ok(ctx, gender, reason, path, errs):
+def _gender_preference_ok(ctx, gender, reason, path, errs, field=".gender"):
     preference = ctx.state["preferences"]["npc_gender_preference"]
     others = [c["gender"] for c in ctx.state["characters"].values() if c["id"] != ctx.state["player_id"] and c["tier"] != "background"]
     if preference in ("female_only", "male_only"):
         want = "female" if preference == "female_only" else "male"
         if gender != want and not reason:
-            errs.append(detail(path + ".gender", "玩家的配对偏好是只要%s NPC" % ("女性" if want == "female" else "男性"), "换成符合偏好的性别，或在 gender_reason 里写明叙事理由", INVARIANT_VIOLATION))
+            errs.append(detail(path + field, "玩家的配对偏好是只要%s NPC" % ("女性" if want == "female" else "男性"), "换成符合偏好的性别，或在 gender_reason 里写明叙事理由", INVARIANT_VIOLATION))
     elif preference in ("mostly_female", "mostly_male"):
         want = "female" if preference == "mostly_female" else "male"
         after = others + [gender]
         if gender != want and after.count(want) * 2 <= len(after) and not reason:
-            errs.append(detail(path + ".gender", "加上这个角色后，%s NPC 不再占多数" % ("女性" if want == "female" else "男性"), "换成符合偏好的性别，或在 gender_reason 里写明叙事理由", INVARIANT_VIOLATION))
+            errs.append(detail(path + field, "加上这个角色后，%s NPC 不再占多数" % ("女性" if want == "female" else "男性"), "换成符合偏好的性别，或在 gender_reason 里写明叙事理由", INVARIANT_VIOLATION))
+
+
+def _schedule_ok(ctx, schedule, path, errs):
+    if not schedule:
+        return
+    for index, slot in enumerate(schedule):
+        lid = slot["location_id"]
+        if SS.location(ctx.world, lid) is None:
+            errs.append(detail("%s.schedule[%d].location_id" % (path, index), "地点不在本局快照中：%s" % lid, "用上下文地点列表里的 ID", NOT_FOUND))
 
 
 def _name_ok(ctx, name, tier, kin_of, path, errs):
@@ -420,19 +450,22 @@ def op_introduce_character(ctx, op, path):
     state = ctx.state
     cid = op["id"]
     if cid in state["characters"] or cid == "player" or cid in ctx.world_ids:
-        errs.append(detail(path + ".id", "ID 已被使用：%s" % cid, "ID 一经分配永不复用；换一个新的 ASCII 小写 ID", INVARIANT_VIOLATION))
+        hint = "该 ID 属于世界待命角色（standby_cast），直接 enter_scene 激活即可，勿用 introduce_character" if _is_standby(ctx, cid) else "ID 一经分配永不复用；换一个新的 ASCII 小写 ID"
+        errs.append(detail(path + ".id", "ID 已被使用：%s" % cid, hint, INVARIANT_VIOLATION))
     if op["age"] < 18:
         errs.append(detail(path + ".age", "年龄 %d 小于 18，不能登场" % op["age"], "所有角色都必须是明确的成年人", SAFETY_BLOCK))
     _name_ok(ctx, op["name"], op["tier"], op["kin_of"], path, errs)
     if op["kin_of"] is not None:
         _need_character(ctx, op["kin_of"], path + ".kin_of", errs)
-    _gender_preference_ok(ctx, op["gender"], op["gender_reason"], path, errs)
+    if op["tier"] != "background":
+        _gender_preference_ok(ctx, op["gender"], op["gender_reason"], path, errs)
     card = {k: op[k] for k in ("appearance", "line", "identity", "decision", "intimacy", "voices", "situation")}
     _card_errors(op["tier"], card, path, errs)
-    if op["tier"] == "background" and any(op[k] for k in ("identity", "intimacy", "voices", "situation")):
-        errs.append(detail(path + ".tier", "背景人物只有名字和一句话", "要带身份或倾向卡就用 supporting 或 major", INVARIANT_VIOLATION))
-    if op["tier"] == "supporting" and (op["intimacy"] or op["voices"]):
-        errs.append(detail(path + ".tier", "只有重要角色（major）有倾向卡和表里语态", None, INVARIANT_VIOLATION))
+    if op["tier"] == "background" and any(op[k] is not None for k in ("appearance", "identity", "decision", "intimacy", "voices", "situation", "schedule")):
+        errs.append(detail(path + ".tier", "背景人物只有名字和一句话（line），不能带外貌、卡片或日程", "要带身份、决策或日程就用 supporting 或 major", INVARIANT_VIOLATION))
+    if op["tier"] == "supporting" and any(op[k] is not None for k in ("intimacy", "voices", "situation")):
+        errs.append(detail(path + ".tier", "只有重要角色（major）有倾向卡、表里语态和处境设定", None, INVARIANT_VIOLATION))
+    _schedule_ok(ctx, op["schedule"], path, errs)
     location = state["scene"]["location_id"] if op["present"] else op["location_id"]
     if not op["present"] and location is None:
         errs.append(detail(path + ".location_id", "不在场的新角色要写所在地点", None, INVARIANT_VIOLATION))
@@ -477,8 +510,15 @@ def op_introduce_character(ctx, op, path):
 
 @register(
     "promote_character",
-    dict({"character_id": F(S.Id()), "to_tier": F(S.Enum("supporting", "major"))}, **C.card_fields()),
-    "把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给",
+    dict(
+        {
+            "character_id": F(S.Id()),
+            "to_tier": F(S.Enum("supporting", "major")),
+            "gender_reason": F(S.Nullable(S.Str(1, 80)), required=False, default=None),
+        },
+        **C.card_fields()
+    ),
+    "把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason",
     branch=False,
 )
 def op_promote_character(ctx, op, path):
@@ -489,11 +529,14 @@ def op_promote_character(ctx, op, path):
         char = ctx.state["characters"][cid]
         if C.TIER_ORDER[op["to_tier"]] <= C.TIER_ORDER[char["tier"]]:
             errs.append(detail(path + ".to_tier", "层级只升不降：%s 已经是 %s" % (char["name"], char["tier"]), None, INVARIANT_VIOLATION))
+        if char["tier"] == "background":
+            _gender_preference_ok(ctx, char["gender"], op["gender_reason"], path, errs, field=".character_id")
         for part in ("identity", "intimacy"):
             if op[part] is not None and char.get(part):
                 errs.append(detail("%s.%s" % (path, part), "%s 已经有%s，只能逐项演化" % (char["name"], "身份卡" if part == "identity" else "倾向卡"), None, INVARIANT_VIOLATION))
-        if op["to_tier"] == "supporting" and (op["intimacy"] or op["voices"]):
-            errs.append(detail(path + ".to_tier", "只有重要角色（major）有倾向卡和表里语态", None, INVARIANT_VIOLATION))
+        if op["to_tier"] == "supporting" and any(op[k] is not None for k in ("intimacy", "voices", "situation")):
+            errs.append(detail(path + ".to_tier", "只有重要角色（major）有倾向卡、表里语态和处境设定", None, INVARIANT_VIOLATION))
+    _schedule_ok(ctx, op["schedule"], path, errs)
     if char is not None:
         merged = dict(char)
         for key in ("appearance", "line", "identity", "intimacy", "voices", "situation"):
@@ -551,6 +594,8 @@ def op_leverage_set(ctx, op, path):
             errs.append(detail(path + ".basis_fact_id", "事实不存在：%s" % op["basis_fact_id"], None, NOT_FOUND))
         elif not SS.knows(state, holder, fact["id"]):
             errs.append(detail(path + ".basis_fact_id", "%s 不知道这件事，拿不住对方" % ctx.name(holder), None, INVARIANT_VIOLATION))
+    if ok and ctx.in_beat is not None and state["player_id"] in (holder, subject):
+        errs.append(detail(path, "离屏片段不能登记涉及玩家角色的把柄", None, INVARIANT_VIOLATION))
     if ok and holder == state["player_id"] and ctx.in_beat is None and (ctx.mode not in ("result", "attempt") or not ctx.authorized):
         errs.append(detail(path + ".holder", "玩家角色拿捏别人要出自玩家本人的指令（result/attempt + player_authorized）", None, INVARIANT_VIOLATION))
     if ok and any(lv["holder"] == holder and lv["subject"] == subject and lv["state"] == "active" and lv["basis_fact_id"] == op["basis_fact_id"] for lv in state["leverage"].values() if op["basis_fact_id"]):
@@ -596,12 +641,15 @@ def op_leverage_set(ctx, op, path):
 )
 def op_leverage_release(ctx, op, path):
     errs = []
+    player = ctx.state["player_id"]
     lv = ctx.state["leverage"].get(op["leverage_id"])
     if lv is None:
         errs.append(detail(path + ".leverage_id", "把柄不存在：%s" % op["leverage_id"], None, NOT_FOUND))
     elif lv["state"] != "active":
         errs.append(detail(path + ".leverage_id", "把柄已经解除", None, INVARIANT_VIOLATION))
-    elif lv["holder"] == ctx.state["player_id"] and (ctx.mode not in ("result", "attempt") or not ctx.authorized):
+    elif ctx.in_beat is not None and player in (lv["holder"], lv["subject"]):
+        errs.append(detail(path, "离屏片段不能解除涉及玩家角色的把柄", None, INVARIANT_VIOLATION))
+    elif lv["holder"] == player and (ctx.mode not in ("result", "attempt") or not ctx.authorized):
         errs.append(detail(path, "放掉玩家手里的把柄要由玩家决定（result/attempt + player_authorized）", None, INVARIANT_VIOLATION))
     if not _flush(ctx, errs):
         return

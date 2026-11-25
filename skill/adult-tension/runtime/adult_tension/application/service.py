@@ -307,6 +307,9 @@ def _match_world_query(ctx, query, drafts):
             "没有匹配“%s”的世界" % query,
             [detail("$.world_query", "没有匹配“%s”的世界" % query, "换个关键词，或用 list-worlds 查看全部；都没有就提议最接近的世界或自定义世界，由玩家选", NOT_FOUND)],
         )
+    exact = [item for item in scored if item[0] == 1000]
+    if len(exact) == 1:
+        return exact[0][1]["id"]
     strong = [item for item in scored if item[0] >= 500]
     if strong:
         scored = strong
@@ -345,19 +348,32 @@ def new_game(ctx, payload):
     if payload["mode"] is None and not payload["replay"]:
         problems.append(detail("$.mode", "缺少模式", "先询问玩家选“1 日常 / 2 压力”；仅当玩家明确说“随便”时才传 random", INVALID_INPUT))
     custom = None
-    if payload["my_world"] is not None:
-        if payload["custom_world"] is not None:
-            problems.append(detail("$.my_world", "my_world 不和 custom_world 同用", "开保存过的世界只给 my_world", INVALID_INPUT))
-        else:
-            payload["custom_world"] = _my_world_pack(ctx, payload["my_world"])
-    if payload["custom_world"] is not None:
+    has_my_world = payload["my_world"] is not None
+    has_custom_world = payload["custom_world"] is not None
+    if has_my_world and has_custom_world:
+        problems.append(detail("$.my_world", "my_world 不和 custom_world 同用", "开保存过的世界只给 my_world", INVALID_INPUT))
+    if has_my_world or has_custom_world:
         if payload["replay"]:
-            problems.append(detail("$.replay", "自定义世界没有开局记录，不能“重开 N 号”", "带同一个 custom_world 与 seed 重新开局即可复现", INVALID_INPUT))
+            if has_my_world and not has_custom_world:
+                problems.append(detail("$.replay", "保存的自定义世界没有开局记录，不能“重开 N 号”", "带同一个 my_world 与 seed 重新开局即可复现", INVALID_INPUT))
+            else:
+                problems.append(detail("$.replay", "自定义世界没有开局记录，不能“重开 N 号”", "带同一个 custom_world 与 seed 重新开局即可复现", INVALID_INPUT))
         if payload["locks"].get("world_id") or payload["excludes"].get("world_ids"):
-            problems.append(detail("$.locks.world_id", "自定义世界不和现有世界一起锁定或排除", "去掉 world_id 的锁定与排除", INVALID_INPUT))
+            path = "$.locks.world_id" if payload["locks"].get("world_id") else "$.excludes.world_ids"
+            label = "保存的自定义世界" if (has_my_world and not has_custom_world) else "自定义世界"
+            problems.append(detail(path, "%s不和现有世界一起锁定或排除" % label, "去掉 world_id 的锁定与排除", INVALID_INPUT))
     problems.extend(_unknown_excluded_tags(ctx, payload["excludes"].get("content_tags") or []))
     if payload["world_query"] is not None:
-        clash = [name for name, given in (("locks.world_id", payload["locks"].get("world_id")), ("custom_world / my_world", payload["custom_world"] is not None), ("replay", payload["replay"])) if given]
+        clash = [
+            name
+            for name, given in (
+                ("locks.world_id", payload["locks"].get("world_id")),
+                ("custom_world", has_custom_world),
+                ("my_world", has_my_world),
+                ("replay", payload["replay"]),
+            )
+            if given
+        ]
         if clash:
             problems.append(detail("$.world_query", "world_query 不和 %s 同用" % "、".join(clash), "已知世界 ID 时只用 locks.world_id", INVALID_INPUT))
     if problems:
@@ -367,8 +383,9 @@ def new_game(ctx, payload):
         world_id = _match_world_query(ctx, payload["world_query"], include_drafts(ctx, payload))
         payload["locks"] = dict(payload["locks"], world_id=world_id)
     conditions = opening.normalize_conditions(payload)
-    if payload["custom_world"] is not None:
-        custom = _custom_world(ctx, payload["custom_world"], conditions)
+    custom_raw = _my_world_pack(ctx, payload["my_world"]) if has_my_world else payload["custom_world"]
+    if custom_raw is not None:
+        custom = _custom_world(ctx, custom_raw, conditions)
 
     def handler(conn, now):
         seed = payload["seed"]
@@ -747,6 +764,21 @@ def normalize_slot_name(raw, path="$.name", label="存档名"):
     return name
 
 
+def _auto_slot_name(world_title, turn):
+    suffix = "-第%d回合" % turn
+    cleaned = "".join("-" if ord(ch) < 32 or ord(ch) == 127 else ch for ch in (world_title or ""))
+    cleaned = re.sub(r'[\\/:*?"<>|\s]+', "-", cleaned).strip("-.")
+    if cleaned.split(".")[0].lower() in RESERVED_SLOT_NAMES:
+        cleaned = cleaned.replace(".", "-")
+    max_prefix = 40 - len(suffix)
+    if max_prefix >= 1:
+        prefix = cleaned[:max_prefix].rstrip("-.") or "存档"[:max_prefix]
+        raw = prefix + suffix
+    else:
+        raw = ("第%d回合" % turn)[:40]
+    return normalize_slot_name(raw)
+
+
 def save_slot(ctx, payload):
     payload = validate(specs.SAVE_SLOT, payload)
 
@@ -758,7 +790,7 @@ def save_slot(ctx, payload):
         elif session["current_slot"]:
             name = session["current_slot"]
         else:
-            name = normalize_slot_name("%s-第%d回合" % (state["world_title"], state["turn"]))
+            name = _auto_slot_name(state["world_title"], state["turn"])
             auto = True
         existing = repo.get_slot(conn, name)
         if existing is not None and not payload["overwrite"]:
@@ -972,6 +1004,17 @@ def import_save(ctx, payload):
     def handler(conn, now):
         from ..domain import state as SS
 
+        existing = None
+        if slot_name is not None:
+            existing = repo.get_slot(conn, slot_name)
+            if existing is not None and not payload["overwrite"]:
+                raise AppError(
+                    SLOT_CONFLICT,
+                    "「%s」已存在" % slot_name,
+                    [detail("$.slot", "存档名已被占用", "问玩家是否覆盖；确认后带 overwrite: true 重新提交", SLOT_CONFLICT)],
+                    reason="exists",
+                    slot={k: existing[k] for k in ("name", "world_title", "turn", "clock_label", "saved_at")},
+                )
         backup = transfer.backup_import(ctx, doc, raw) if upgraded else None
         state["session_id"] = new_session_id(conn)
         state["undo_floor"] = state["turn"]
@@ -981,14 +1024,6 @@ def import_save(ctx, payload):
         slot = None
         save = {"current_slot": None, "turns_since_save": 0}
         if slot_name is not None:
-            existing = repo.get_slot(conn, slot_name)
-            if existing is not None and not payload["overwrite"]:
-                raise AppError(
-                    SLOT_CONFLICT,
-                    "「%s」已存在" % slot_name,
-                    [detail("$.slot", "存档名已被占用", "问玩家是否覆盖；确认后带 overwrite: true 重新提交", SLOT_CONFLICT)],
-                    reason="exists",
-                )
             version = (existing["version"] + 1) if existing else 1
             label = SS.clock_label(state, content["world"])
             repo.put_slot(conn, slot_name, state["session_id"], label, state["memory"]["open_action"], version, now)
@@ -1087,6 +1122,7 @@ def save_world(ctx, payload):
                 SLOT_CONFLICT,
                 "「%s」已存在" % name,
                 [detail("$.name", "世界名已被占用（《%s》）" % existing["title"], "问玩家是否覆盖；确认后带 overwrite: true 重新提交，或换个名字", SLOT_CONFLICT)],
+                reason="exists",
                 world={k: existing[k] for k in ("name", "title", "saved_at")},
             )
         repo.put_my_world(conn, name, world, now)

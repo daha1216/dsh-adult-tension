@@ -35,10 +35,19 @@ def beat_spec():
     return S.List(S.Tagged("op", {name: SPECS[name] for name in BEAT_OPS}, "离屏操作"), max_items=6)
 
 
-def _mentions(op, cid):
+def _mentions(state, op, cid):
     for field in ID_FIELDS:
         value = op.get(field)
         if value == cid or (isinstance(value, list) and cid in value):
+            return True
+    kind = op.get("op")
+    if kind in ("event_resolve", "event_cancel"):
+        event = state["events"].get(op.get("event_id"))
+        if event is not None and cid in event["participants"]:
+            return True
+    elif kind == "leverage_release":
+        lv = state["leverage"].get(op.get("leverage_id"))
+        if lv is not None and cid in (lv["holder"], lv["subject"]):
             return True
     return False
 
@@ -103,7 +112,7 @@ def op_offscreen_beat(ctx, op, path):
         player = state["player_id"]
         for index, sub in enumerate(subs):
             sub_path = "%s.operations[%d]" % (path, index)
-            if _mentions(sub, player):
+            if _mentions(state, sub, player):
                 errs.append(detail(sub_path, "离屏片段不能改变或牵涉玩家角色", "玩家角色只在台前行动", INVARIANT_VIOLATION))
             elif not _actor_ok(ctx, npc, sub):
                 errs.append(detail(sub_path, "离屏片段里的操作必须是 %s 自己做的、自己知道的或与自己有关的" % ctx.name(npc), None, INVARIANT_VIOLATION))
@@ -135,7 +144,7 @@ def op_offscreen_beat(ctx, op, path):
         "category": F(S.Nullable(S.Enum(*ST.TWIST_CATEGORIES)), required=False, default=None),
         "text": F(S.Nullable(S.Str(1, 160)), required=False, default=None),
     },
-    "接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result 模式并带 player_authorized；同一游戏日最多接受一次",
+    "接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result/attempt 模式并带 player_authorized；同一游戏日最多接受一次",
     branch=False,
 )
 def op_twist_accept(ctx, op, path):
@@ -146,7 +155,7 @@ def op_twist_accept(ctx, op, path):
     if day in twists["accepted_days"]:
         errs.append(detail(path, "今天已经接受过一个转折了", "同一游戏日最多一次；等到下一天", INVARIANT_VIOLATION))
     if not ctx.authorized or ctx.mode not in ("result", "attempt"):
-        errs.append(detail(path, "转折要由玩家选定：result 模式并带 player_authorized", None, INVARIANT_VIOLATION))
+        errs.append(detail(path, "转折要由玩家选定：result/attempt 模式并带 player_authorized", None, INVARIANT_VIOLATION))
     entry = None
     twist = None
     if op["twist_id"] is not None:

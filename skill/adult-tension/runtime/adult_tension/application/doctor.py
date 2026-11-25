@@ -99,7 +99,8 @@ def _content_check(ctx):
 def _read_marker(data_dir):
     try:
         with open(paths.marker_path(data_dir), "rb") as handle:
-            return json.loads(handle.read().decode("utf-8"))
+            data = json.loads(handle.read().decode("utf-8"))
+        return data if isinstance(data, dict) else None
     except (OSError, ValueError):
         return None
 
@@ -148,7 +149,7 @@ def run(ctx, payload):
     if data_dir_error is None:
         expected = _expected_marker(ctx)
         marker = _read_marker(ctx.data_dir)
-        if marker is not None and {k: marker.get(k) for k in expected} == expected:
+        if isinstance(marker, dict) and {k: marker.get(k) for k in expected} == expected:
             fast_path = _fast_checks(ctx, checks, marker)
         if not fast_path:
             _full_checks(ctx, checks)
@@ -186,6 +187,10 @@ def run(ctx, payload):
 
 def _fast_checks(ctx, checks, marker):
     """Lightweight checks; return False to fall back to the full path."""
+    raw_content = marker.get("content_check")
+    if raw_content is not None and not isinstance(raw_content, dict):
+        return False
+    content = raw_content or {}
     try:
         conn = ctx.db()
         conn.execute("SELECT 1").fetchone()
@@ -196,7 +201,6 @@ def _fast_checks(ctx, checks, marker):
     checks.append(_check("sqlite", "ok", "SQLite 可用（快速检查）"))
     checks.append(_check("migrations", "ok", "数据库 schema %d（快速检查）" % DB_SCHEMA_VERSION))
     checks.append(_check("skill_files", "ok", "Skill 根目录：%s（快速检查）" % ctx.skill_root))
-    content = marker.get("content_check") or {}
     checks.append(_check("content", content.get("status", "ok"), "%s（快速检查：内容文件未变化）" % content.get("message", "内容可用"), content.get("hint")))
     return True
 

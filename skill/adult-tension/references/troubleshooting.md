@@ -22,7 +22,7 @@
 2. 环境变量 `ADULT_TENSION_HOME`；
 3. 平台默认：Windows `%LOCALAPPDATA%\adult-tension`；macOS `~/Library/Application Support/adult-tension`；Linux `$XDG_DATA_HOME/adult-tension`，未设置时 `~/.local/share/adult-tension`。
 
-目录内容：`adult_tension.db`（全部状态与存档）、`backups/`（迁移前的备份）、`exports/`（导出的存档）、`inputs/`（即 `doctor` 返回的 `input_dir`，供不支持直接传参的终端存放临时请求 JSON；开局、读档、导入时自动清理超一日旧文件，亦可随时手动删除）、`logs/`（运行日志，默认不记录玩家原文）、`cache/`（Python 字节码缓存，可随时删除）、`version.json`（`doctor` 的版本标记）。
+目录内容：`adult_tension.db`（全部状态与存档）、`backups/`（迁移前及旧版导入升级前的备份）、`exports/`（导出的存档）、`inputs/`（即 `doctor` 返回的 `input_dir`，供不支持 heredoc 或管道中文编码异常的终端存放临时请求 JSON；开局、读档、导入时自动清理超一日旧文件，亦可随时手动删除）、`logs/`（运行日志，默认不记录玩家原文）、`cache/`（Python 字节码缓存，可随时删除）、`version.json`（`doctor` 的版本标记）。
 
 数据目录永远不在 Skill 目录内部。升级 Skill = 替换 Skill 目录，数据目录不动；卸载 Skill = 删除 Skill 目录，数据目录保留。
 
@@ -30,15 +30,16 @@
 
 | 情况 | 处理 |
 |---|---|
-| 宿主调用超时、没有输出、输出不是 JSON | 重试最多 3 次；仍失败则运行 `doctor`，用一句话告诉玩家 |
+| 宿主调用超时、没有输出、输出不是 JSON | 写操作用**同一个 `request_id`** 重试最多 3 次（读操作直接重试）；仍失败则运行 `doctor`，用一句话告诉玩家 |
 | `STORAGE_BUSY` | 数据库被另一个进程短暂占用；用同一个 `request_id` 重试 |
 | `INTERNAL_ERROR` | 状态没有改变；`error.log` 给出日志位置，`error.error_id` 是日志里的编号 |
 
 ## 存档冲突
 
-- 存档名已被占用（`SLOT_CONFLICT`，`reason: exists`）：问玩家“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重新提交。
+- 存档名已被占用（`save-slot` / `import-save` 返回 `SLOT_CONFLICT`，`reason: exists`）：问玩家“「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重新提交，或换个新名字。
+- 自定义世界名已被占用（`save-world` 返回 `SLOT_CONFLICT`，`reason: exists`）：问玩家“世界「名称」已存在，要覆盖吗？”，确认后带 `"overwrite": true` 重新提交，或换个新名字。
 - 本局当前槽已在别的对话里被写过（`reason: changed_elsewhere`）：给玩家“A 读取最新 / B 另存为新名 / C 取消”。
-- 导入被拒：如实说文件损坏或版本太新，不猜内容。
+- 导入被拒：文件校验失败、损坏或结构不合规（`INVALID_INPUT` / `INVARIANT_VIOLATION`）时如实告知，不猜内容；版本过新或不兼容（`UNSUPPORTED_VERSION`，如导出格式、状态版本或随机版本超出支持范围）时提示升级 Skill，均不写入任何数据。
 
 ## 升级、导出与卸载
 

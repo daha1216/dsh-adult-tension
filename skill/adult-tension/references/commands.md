@@ -72,7 +72,7 @@
 | `prologue` | 字符串，≤300 字 或 null | 否，默认 `null` | 上下文 requests.prologue 为 true 时在记录的第一项必填：把完整上下文 prologue_merge 里的旧前情与最早几章合并成一段前情，≤300 字；没有要求时不写 |
 | `replaces_turn` | 整数 1..1000000 或 null | 否，默认 `null` | “刚才不算，改成……”：填当前最后一个回合的回合号，只能写在记录的第一项，引擎在同一事务里撤销它再应用这次记录 |
 
-**一次记录**：一次 `commit-turn` 记录 `turns` 里的回合（1–12 项，按发生的顺序）。引擎逐项应用，每项是一个回合，各自可以撤销；任何一项不合法，整次记录被拒、状态不变，错误路径以 `$.turns[i]` 开头。只有第一项可以写 `replaces_turn`。上下文 `requests` 要求的章节摘要、前情写在第一项；记录中途引擎新提出的要求在记录结束时才出现，由下一次记录的第一项补上。返回 `turns`（每项的 `turn`、`applied`、`resolved_events`、`simulation`）、时钟和下一回合的上下文（单次提交多于 1 个回合时返回 full 完整上下文，单回合返回 brief）。
+**一次记录**：一次 `commit-turn` 记录 `turns` 里的回合（1–12 项，按发生的顺序）。引擎逐项应用，每项是一个回合，各自可以撤销；任何一项不合法，整次记录被拒、状态不变，错误路径以 `$.turns[i]` 开头。只有第一项可以写 `replaces_turn`；含 `roll`、`twist_accept` 或触发到期事件的回合只能作为 `turns` 的最后一项（须按引擎裁定结果续写正文）。上下文 `requests` 要求的章节摘要、前情写在第一项；记录中途引擎新提出的要求在记录结束时才出现，由下一次记录的第一项补上。返回 `turns`（每项的 `turn`、`applied`、`resolved_events`、`simulation`）、时钟和下一回合的上下文（单次提交多于 1 个回合时返回 `full`；单回合默认返回 `brief`，但在以下 6 种情形亦返回 `full`：上次提交失败后、地点变化、有新角色入场/登场、跨日、出现 `requests.prologue`、或当前回合为 5 的倍数）。
 
 ### `delete-slot`
 
@@ -165,13 +165,13 @@
 | `mode` | 枚举：`daily` / `pressure` / `random` 或 null | 否，默认 `null` | daily 日常 / pressure 压力 / random 玩家明确说“随便”时；replay 时可省略 |
 | `seed` | 整数 1..999999 或 null | 否，默认 `null` |  |
 | `replay` | 布尔 | 否，默认 `false` | “重开 N 号”：按本机记录的该种子开局条件复现 |
-| `world_query` | 字符串，≤40 字 或 null | 否，默认 `null` | 玩家点名的世界名称或关键词（例如“港口夜班”“凡尔赛”），运行时按标题、ID、时代、地域与完整简介匹配；唯一命中即开局，多个匹配返回 NO_MATCH 附 candidates，无匹配返回 NOT_FOUND。不与 locks.world_id、custom_world、replay 同用 |
+| `world_query` | 字符串，≤40 字 或 null | 否，默认 `null` | 玩家点名的世界名称或关键词（例如“港口夜班”“凡尔赛”），运行时按标题、ID、时代、地域与完整简介匹配；唯一命中即开局，多个匹配返回 NO_MATCH 附 candidates，无匹配返回 NOT_FOUND。不与 locks.world_id、custom_world、my_world、replay 同用 |
 | `locks` | 对象（锁定） | 否，默认 `{}` |  |
 | `excludes` | 对象（排除） | 否，默认 `{}` |  |
 | `player` | 对象（玩家设定） | 否，默认 `{}` |  |
 | `npc_gender_preference` | 枚举：`any` / `mostly_female` / `mostly_male` / `female_only` / `male_only` / `mixed` | 否，默认 `"any"` |  |
-| `custom_world` | 自定义世界包 或 null | 否，默认 `null` |  |
-| `my_world` | 字符串，≤60 字 或 null | 否，默认 `null` | 玩家保存过的世界名（my-worlds 列出），不与 custom_world 同用 |
+| `custom_world` | 自定义世界包 或 null | 否，默认 `null` | 自定义世界包；不与 my_world、locks.world_id、excludes.world_ids、replay、world_query 同用 |
+| `my_world` | 字符串，≤60 字 或 null | 否，默认 `null` | 玩家保存过的世界名（my-worlds 列出），不与 custom_world、locks.world_id、excludes.world_ids、replay、world_query 同用 |
 | `preferences` | 对象（偏好） | 否，默认 `{}` |  |
 | `include_drafts` | 布尔 | 否，默认 `false` |  |
 
@@ -201,7 +201,7 @@
 |---|---|---|---|
 | `gender` | 枚举：`female` / `male` / `nonbinary` 或 null | 否，默认 `null` |  |
 | `age` | 整数 0..120 或 null | 否，默认 `null` | 玩家角色年龄（须 ≥ 18，低于 18 返回 SAFETY_BLOCK） |
-| `age_band` | 数组（整数 0..120，2–2 项） 或 null | 否，默认 `null` | 年龄区间 [下限, 上限]（下限须 ≥ 18） |
+| `age_band` | 数组（整数 0..120，2–2 项） 或 null | 否，默认 `null` | 年龄区间 [下限, 上限]（下限须 ≥ 18，低于 18 返回 SAFETY_BLOCK；下限 > 上限返回 INVALID_INPUT） |
 | `identity_hint` | 字符串，≤20 字 或 null | 否，默认 `null` |  |
 | `social_position` | 枚举：`low` / `equal` / `high` 或 null | 否，默认 `null` |  |
 | `name` | 字符串，≤12 字 或 null | 否，默认 `null` |  |
@@ -325,7 +325,7 @@
 | `SAFETY_BLOCK` | 触及玩家硬边界、处于暂停状态，或违反全员成年（18+）底线 | 10 |
 | `CONTENT_ERROR` | 内容包或自定义世界校验失败 | 10 |
 | `NOT_FOUND` | 会话、存档、角色、事件不存在 | 10 |
-| `SLOT_CONFLICT` | 存档名已被占用（exists），或本局当前槽已在别的对话里被写过（changed_elsewhere） | 10 |
+| `SLOT_CONFLICT` | 存档名或自定义世界名已被占用（exists），或本局当前槽已在别的对话里被写过（changed_elsewhere） | 10 |
 | `UNSUPPORTED_VERSION` | 存档、数据库或内容版本不受支持 | 20 |
 | `RUNTIME_UNSUPPORTED` | Python 版本过低或缺少 SQLite 等必要能力 | 20 |
 | `DATA_DIR_UNAVAILABLE` | 数据目录不可写；附尝试过的路径与建议 | 20 |

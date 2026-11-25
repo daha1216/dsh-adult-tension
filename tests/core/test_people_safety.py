@@ -110,6 +110,25 @@ class KnowledgeTravelTest(unittest.TestCase):
         err = rejected(self.state, commit("continue", [dict(op, channel_id=None)]))
         self.assertIn("关系边", reasons(err))
 
+    def test_player_reveal_and_rumor_require_player_mode_and_channel_checks(self):
+        player_fact = next(f for f in self.state["facts"].values() if "player" in f["known_by"] and self.a not in f["known_by"] and f["visibility"] != "inner")
+        reveal = {"op": "reveal_fact", "fact_id": player_fact["id"], "from": "player", "to": [self.a]}
+        err = rejected(self.state, commit("continue", [reveal]))
+        self.assertIn("result 或 attempt", reasons(err))
+        apply(self.state, commit("result", [reveal], player_authorized=True))
+        rumor = {"op": "spread_rumor", "from": "player", "key": "rumor.player", "text": "玩家随口传出的话", "believed_by": [self.a]}
+        err = rejected(self.state, commit("wait", [rumor]))
+        self.assertIn("result 或 attempt", reasons(err))
+        apply(self.state, commit("result", [rumor], player_authorized=True))
+        absent = next(c for c in self.state["characters"] if c not in self.state["scene"]["present"])
+        # Unknown channel_id should not cascade into absent/no-edge false errors
+        err = rejected(self.state, commit("continue", [{"op": "spread_rumor", "from": self.a, "key": "rumor.typo", "text": "风声", "believed_by": [absent], "channel_id": "ch_typo"}]))
+        self.assertEqual([d["path"] for d in err.details], ["$.operations[0].channel_id"])
+        # Absent NPC spreading via channel is blocked when offscreen is frozen
+        frozen = dict(self.state, preferences=dict(self.state["preferences"], offscreen_simulation=False))
+        err = rejected(frozen, commit("continue", [{"op": "spread_rumor", "from": absent, "key": "rumor.frozen", "text": "冻结传闻", "believed_by": [self.a], "channel_id": "ch_teahouse"}]))
+        self.assertIn("冻结", reasons(err))
+
 
 class VoiceTest(unittest.TestCase):
     def setUp(self):
@@ -184,13 +203,25 @@ class CardEvolutionTest(unittest.TestCase):
         state, r1 = apply(self.state, commit("continue", [self.evidence(item="self_control", direction="increase", value=None)]))
         self.assertFalse(r1["applied"][0]["changed"])
         state, r2 = apply(state, commit("continue", [self.evidence(item="self_control", direction="increase", value=None, evidence="第二次")]))
-        self.assertTrue(r2["applied"][0]["changed"])
+        self.assertFalse(r2["applied"][0]["changed"])
         self.assertEqual(state["characters"][self.a]["intimacy"]["self_control"], 5)
         state["characters"][self.a]["intimacy"]["desire_level"] = 0
         state, _ = apply(state, commit("continue", [self.evidence(item="desire_level", direction="decrease", value=None)]))
         state, r4 = apply(state, commit("continue", [self.evidence(item="desire_level", direction="decrease", value=None, evidence="第二次")]))
-        self.assertTrue(r4["applied"][0]["changed"])
+        self.assertFalse(r4["applied"][0]["changed"])
         self.assertEqual(state["characters"][self.a]["intimacy"]["desire_level"], 0)
+
+    def test_intimacy_evidence_rejects_numeric_value_long_position_full_list_and_same_text(self):
+        err = rejected(self.state, commit("continue", [self.evidence(item="desire_level", direction="increase", value="一点点")]))
+        self.assertIn("不能传 value", reasons(err))
+        err = rejected(self.state, commit("continue", [self.evidence(item="desired_position", direction="set", value="很" * 41)]))
+        self.assertIn("40 字", reasons(err))
+        current_pos = self.state["characters"][self.a]["intimacy"]["desired_position"]
+        err = rejected(self.state, commit("continue", [self.evidence(item="desired_position", direction="set", value=current_pos)]))
+        self.assertIn("已经是", reasons(err))
+        self.state["characters"][self.a]["intimacy"]["likes"] = ["项%d" % i for i in range(8)]
+        err = rejected(self.state, commit("continue", [self.evidence(item="likes", direction="add", value="第九项")]))
+        self.assertIn("最多保留 8 条", reasons(err))
 
     def test_identity_evolves_item_by_item(self):
         op = {"op": "identity_update", "npc_id": self.a, "item": "resources", "action": "add", "value": "一把备用钥匙", "reason": "师傅给的"}
@@ -273,6 +304,57 @@ class NewCharacterTest(unittest.TestCase):
         err = rejected(self.state, commit("continue", [promo]))
         self.assertIn("只能逐项演化", reasons(err))
 
+    def test_tier_forbidden_fields_schedule_locations_and_promotion_gender_preference(self):
+        # background ignores gender preference, but forbids appearance/decision/schedule
+        state, _ = new_state("daily", seed=53, npc_gender_preference="female_only")
+        bg_ok = {
+            "op": "introduce_character",
+            "id": "bg_porter",
+            "name": "老李",
+            "tier": "background",
+            "age": 42,
+            "gender": "male",
+            "adult_context": "码头常驻成年搬运工",
+            "public_role": "搬运工",
+            "line": "扛着货箱从廊下走过。",
+        }
+        new_bg, _ = apply(state, commit("continue", [bg_ok]))
+        self.assertIn("bg_porter", new_bg["characters"])
+        for extra in (
+            {"appearance": "晒得黝黑"},
+            {"decision": {"core_value": "省事", "current_goal": "早收工"}},
+            {"schedule": [{"from": 0, "to": 60, "location_id": state["scene"]["location_id"]}]},
+        ):
+            err = rejected(state, commit("continue", [dict(bg_ok, **extra)]))
+            self.assertIn("背景人物只有名字和一句话", reasons(err))
+        # supporting forbids situation on introduce & promote
+        card = major_card(cid="sup_one", tier="supporting")
+        for k in ("intimacy", "voices"):
+            del card[k]
+        err = rejected(self.state, commit("continue", [card]))
+        self.assertIn("处境设定", reasons(err))
+        # schedule location validation on introduce & promote
+        bad_sched = major_card(schedule=[{"from": 0, "to": 120, "location_id": "no_such_place"}])
+        err = rejected(self.state, commit("continue", [bad_sched]))
+        self.assertIn("$.operations[0].schedule[0].location_id", [d["path"] for d in err.details])
+        # promoting background to supporting enforces gender preference and forbids situation
+        sup_promo = {
+            "op": "promote_character",
+            "character_id": "bg_porter",
+            "to_tier": "supporting",
+            "appearance": "手臂结实",
+            "identity": card["identity"],
+            "decision": {"core_value": "讲义气", "current_goal": "护住工友"},
+        }
+        err = rejected(new_bg, commit("continue", [sup_promo]))
+        self.assertIn("配对偏好", reasons(err))
+        err = rejected(new_bg, commit("continue", [dict(sup_promo, gender_reason="老工友戏份加重", situation=card["situation"])]))
+        self.assertIn("处境设定", reasons(err))
+        err = rejected(new_bg, commit("continue", [dict(sup_promo, gender_reason="老工友戏份加重", schedule=[{"from": 0, "to": 60, "location_id": "bad_loc"}])]))
+        self.assertIn("$.operations[0].schedule[0].location_id", [d["path"] for d in err.details])
+        promoted, _ = apply(new_bg, commit("continue", [dict(sup_promo, gender_reason="老工友戏份加重")]))
+        self.assertEqual(promoted["characters"]["bg_porter"]["tier"], "supporting")
+
 
 class LeverageAndIntimacyTest(unittest.TestCase):
     def setUp(self):
@@ -287,8 +369,6 @@ class LeverageAndIntimacyTest(unittest.TestCase):
         apply(self.state, self.intimate())
 
     def test_structural_checks_each_reject(self):
-        err = rejected(self.state, self.intimate(ops=[{"op": "npc_response", "npc_id": self.a, "response": "refuse", "note": "推开了"}]))
-        self.assertIn("缺少可入账的互动回应", reasons(err))
         err = rejected(self.state, self.intimate(participants=["player"]))
         self.assertIn("参与者", reasons(err))
         bg = next(c for c in self.state["characters"].values() if c["tier"] == "background")
@@ -303,9 +383,32 @@ class LeverageAndIntimacyTest(unittest.TestCase):
             state, _ = apply(self.state, self.intimate(ops=ops))
             self.assertEqual(state["turn"], self.state["turn"] + 1)
 
+    def test_incapacitated_passive_and_refuse_are_accepted_in_intimate_scenes(self):
+        from adult_tension.domain import structure as ST
+
+        self.assertFalse(hasattr(ST, "INCAPACITATING"))
+        # refuse (coerced / resisted) is accepted directly with intimate + explicit tags
+        state, _ = apply(
+            self.state,
+            self.intimate(
+                ops=[{"op": "npc_response", "npc_id": self.a, "response": "refuse", "note": "拼命推拒仍挣不开"}],
+                tags=("intimate", "explicit"),
+            ),
+        )
+        self.assertEqual(state["turn"], self.state["turn"] + 1)
+        # asleep / unconscious with no npc_response and no npc_action are accepted directly
+        for cond_kind, text in (("asleep", "沉睡未醒"), ("unconscious", "彻底昏迷")):
+            copy_state, _ = new_state("daily", seed=59)
+            copy_state["characters"][self.a]["status"]["conditions"].append({"kind": cond_kind, "text": text, "until": None, "since_turn": 1})
+            c_res = commit("result", [], player_authorized=True, tags=["intimate", "explicit"], intimate_participants=["player", self.a])
+            after, _ = apply(copy_state, c_res)
+            self.assertEqual(after["turn"], copy_state["turn"] + 1)
+            c_att = commit("attempt", [], acts_on=[], player_authorized=True, tags=["intimate"], intimate_participants=["player", self.a])
+            after2, _ = apply(copy_state, c_att)
+            self.assertEqual(after2["turn"], copy_state["turn"] + 1)
+
     def test_lucidity_is_the_model_s_judgement_not_the_gate_s(self):
-        # Drunk/injured conditions no longer block intimate scenes (v2.5);
-        # only fully unconscious states (asleep/unconscious) are marked incapacitating.
+        # Drunk/injured/asleep/unconscious conditions do not block intimate scenes.
         self.state["characters"][self.a]["status"]["conditions"].append({"kind": "drunk", "text": "醉了", "until": None, "since_turn": 1})
         state, _ = apply(self.state, self.intimate())
         self.assertEqual(state["characters"][self.a]["status"]["conditions"][-1]["kind"], "drunk")
@@ -359,8 +462,8 @@ class LeverageAndIntimacyTest(unittest.TestCase):
 
     def test_no_consent_carries_over_to_the_next_commit(self):
         state, _ = apply(self.state, self.intimate())
-        err = rejected(state, self.intimate(ops=[{"op": "npc_action", "npc_id": self.b, "action": "咳嗽"}]))
-        self.assertIn("缺少可入账的互动回应", reasons(err))
+        err = rejected(state, commit("continue", [{"op": "npc_action", "npc_id": self.a, "action": "凑近"}], tags=["intimate"], intimate_participants=["player", self.a]))
+        self.assertIn("玩家角色的同意", reasons(err))
 
 
 class SafetyTest(unittest.TestCase):

@@ -10,7 +10,7 @@ import re
 from .. import schema as S
 from ..errors import CONTENT_ERROR, detail
 from . import structure as ST
-from .text import FEMALE_ADDRESS, MALE_ADDRESS, address_gender, gendered_pronoun_positions, placeholders, stray_braces
+from .text import FEMALE_ADDRESS, MALE_ADDRESS, NEUTRAL_ADDRESS, address_gender, gendered_pronoun_positions, placeholders, stray_braces
 
 F = S.Field
 
@@ -68,7 +68,7 @@ LOCATION = S.Obj(
 TEMPLATE = S.Obj(
     {
         "id": F(S.Id()),
-        "gender": F(S.Enum(*ST.TEMPLATE_GENDERS), desc="any 表示由会话的性别偏好决定，文本全部用占位"),
+        "gender": F(S.Enum(*ST.TEMPLATE_GENDERS), desc="any 表示由会话的配对偏好决定，文本全部用占位"),
         "gender_reason": F(S.Nullable(_str(1, 120)), required=False, default=None, desc="性别写死时的叙事理由"),
         "age_range": F(_range(0, 120), desc="年龄范围，下限 ≥ 18"),
         "adult_context": F(_str(1, 80), desc="明示成年身份与处境的一句话"),
@@ -461,7 +461,16 @@ def text_chars(node):
 
 
 GENDER_LABELS = {"male": "男性", "female": "女性"}
-PLAYER_ADDRESSED = re.compile(r"\{player\.[a-z_]+\}(%s)" % "|".join(sorted(MALE_ADDRESS + FEMALE_ADDRESS, key=len, reverse=True)))
+_NEUTRAL_PREFIX = "(?!%s)" % "|".join(map(re.escape, sorted(NEUTRAL_ADDRESS, key=len, reverse=True))) if NEUTRAL_ADDRESS else ""
+PLAYER_ADDRESSED = re.compile(r"\{player\.[a-z_]+\}%s(%s)" % (_NEUTRAL_PREFIX, "|".join(sorted(MALE_ADDRESS + FEMALE_ADDRESS, key=len, reverse=True))))
+
+
+def _pattern_address_gender(text, declared_gender):
+    """Gender implied by an address pattern, allowing traditional female '先生' (e.g. 评弹女先生)
+    when explicitly marked female."""
+    if declared_gender == "female":
+        text = text.replace("先生", "")
+    return address_gender(text)
 
 
 def address_problems(pack, texts):
@@ -471,14 +480,30 @@ def address_problems(pack, texts):
     text puts such a term right after a player placeholder."""
     problems = []
 
-    def pattern(path, item):
-        if item["gender"] == "any" and address_gender(item["pattern"]):
-            problems.append(_problem(path + ".gender", "称呼“%s”带性别，却标为 any" % item["pattern"], "按称呼标上 male 或 female；不限性别的人另给一个不带性别的称呼"))
+    def pattern(path, item, fixed_gender=None):
+        gender = item["gender"]
+        if fixed_gender is not None:
+            if gender not in ("any", fixed_gender):
+                problems.append(_problem(path + ".gender", "固定性别（%s）的玩家身份中，称呼性别标为 %s" % (fixed_gender, gender), "改为 %s 或 any" % fixed_gender))
+                return
+            said = _pattern_address_gender(item["pattern"], fixed_gender)
+            if said is not None and said != fixed_gender:
+                problems.append(_problem(path, "称呼“%s”与固定性别 %s 冲突" % (item["pattern"], fixed_gender), "改用符合 %s 或中性的称呼" % fixed_gender))
+            return
+        if gender == "any":
+            if address_gender(item["pattern"]):
+                problems.append(_problem(path + ".gender", "称呼“%s”带性别，却标为 any" % item["pattern"], "按称呼标上 male 或 female；不限性别的人另给一个不带性别的称呼"))
+        else:
+            said = _pattern_address_gender(item["pattern"], gender)
+            if said is not None and said != gender:
+                problems.append(_problem(path + ".gender", "称呼“%s”与性别标记 %s 冲突" % (item["pattern"], gender), "改用与 %s 一致的称呼，或调整 gender 标记" % gender))
 
     for i, item in enumerate(pack["name_pools"]["nickname_patterns"]):
         pattern("$.name_pools.nickname_patterns[%d]" % i, item)
     for i, ident in enumerate(pack["player_identities"]):
         if ident["gender"] != "any":
+            for j, item in enumerate(ident["title_patterns"]):
+                pattern("$.player_identities[%d].title_patterns[%d]" % (i, j), item, fixed_gender=ident["gender"])
             continue
         for j, item in enumerate(ident["title_patterns"]):
             pattern("$.player_identities[%d].title_patterns[%d]" % (i, j), item)
@@ -486,7 +511,10 @@ def address_problems(pack, texts):
         covered = set()
         for item in ident["title_patterns"]:
             said = item["gender"] if item["gender"] != "any" else address_gender(item["pattern"])
-            covered.update(GENDER_LABELS if said in (None, "mixed") else (said,))
+            if said is None:
+                covered.update(GENDER_LABELS)
+            elif said in GENDER_LABELS:
+                covered.add(said)
         missing = [GENDER_LABELS[g] for g in GENDER_LABELS if g not in covered]
         if missing:
             problems.append(_problem("$.player_identities[%d].title_patterns" % i, "不限性别的身份没有给%s玩家的称呼" % "、".join(missing), "加一个不带性别的称呼（例如 {family}老师），或给这个身份标上性别"))
@@ -695,7 +723,7 @@ class _Checker:
                     self.add("%s.identity_ids[%d]" % (base, j), "玩家身份不存在：%s" % ident, None)
                 elif identities[ident]["social_position"] not in combo["player_positions"]:
                     self.add("%s.identity_ids[%d]" % (base, j), "身份 %s 的社会位置不在 player_positions 里" % ident, None)
-            if not self.custom and not [
+            if not [
                 i for i in p["player_identities"]
                 if i["social_position"] in combo["player_positions"] and (not combo["identity_ids"] or i["id"] in combo["identity_ids"])
             ]:
@@ -823,30 +851,67 @@ class _Checker:
             if key in signatures:
                 self.add("$.locations[%d]" % i, "与 %s 的 privacy、visibility、affordances 完全相同" % signatures[key], "让每个地点有自己的用法")
             signatures[key] = loc["id"]
+        if "explicit" in p["content_tags"] and "intimate" not in p["content_tags"]:
+            self.add(
+                "$.content_tags",
+                "content_tags 包含 explicit 时必须同时包含 intimate",
+                "在 content_tags 中补齐 intimate，避免玩家排除 intimate 时穿透放行含直白性描写的世界",
+            )
         self._openability()
 
     def _openability(self):
         """Every combo must be able to open in the modes the pack offers."""
         p = self.pack
+
+        def hook_matches(item, hooks, check_locations):
+            item_locs = set(item["location_ids"])
+            return any(
+                (not item["hook_ids"] or h["id"] in item["hook_ids"])
+                and (not check_locations or not h["location_ids"] or bool(set(h["location_ids"]) & item_locs))
+                for h in hooks
+            )
+
+        world_daily_open = False
+        world_pressure_open = False
         for i, combo in enumerate(p["cast_combos"]):
             slots = set(combo["slots"])
             hooks = [h for h in p["hooks"] if h["slot"] in slots]
             if not hooks:
                 self.add("$.cast_combos[%d]" % i, "没有任何钩子属于这个组合的槽位", "为组合里的人物写至少一个钩子")
                 continue
-            if p["daily_activities"] and not any(
-                not act["hook_ids"] or any(h["id"] in act["hook_ids"] for h in hooks) for act in p["daily_activities"]
-            ):
-                self.add("$.cast_combos[%d]" % i, "日常模式下没有能与这个组合配上的活动与钩子", None)
+            if p["daily_activities"]:
+                if any(hook_matches(act, hooks, True) for act in p["daily_activities"]):
+                    world_daily_open = True
+                if not any(hook_matches(act, hooks, self.custom) for act in p["daily_activities"]):
+                    self.add(
+                        "$.cast_combos[%d]" % i,
+                        "日常模式下没有能与这个组合配上的活动、地点与钩子" if self.custom else "日常模式下没有能与这个组合配上的活动与钩子",
+                        None,
+                    )
             if p["pressures"]:
+                if any(
+                    (not pr["leverage"] or ({pr["leverage"]["holder"], pr["leverage"]["subject"]} - {"player"}) <= slots)
+                    and hook_matches(pr, hooks, True)
+                    for pr in p["pressures"]
+                ):
+                    world_pressure_open = True
                 usable = [
                     pr
                     for pr in p["pressures"]
                     if (not pr["leverage"] or ({pr["leverage"]["holder"], pr["leverage"]["subject"]} - {"player"}) <= slots)
-                    and (not pr["hook_ids"] or any(h["id"] in pr["hook_ids"] for h in hooks))
+                    and hook_matches(pr, hooks, self.custom)
                 ]
                 if not usable:
-                    self.add("$.cast_combos[%d]" % i, "压力模式下没有能与这个组合配上的压力与钩子", None)
+                    self.add(
+                        "$.cast_combos[%d]" % i,
+                        "压力模式下没有能与这个组合配上的压力、地点与钩子" if self.custom else "压力模式下没有能与这个组合配上的压力与钩子",
+                        None,
+                    )
+        if not self.custom and p["cast_combos"]:
+            if p["daily_activities"] and not world_daily_open:
+                self.add("$.daily_activities", "日常模式下全包没有任何人物组合、活动、地点与钩子能互相配上", None)
+            if p["pressures"] and not world_pressure_open:
+                self.add("$.pressures", "压力模式下全包没有任何人物组合、压力、地点与钩子能互相配上", None)
 
     # -- text ------------------------------------------------------------------
 
@@ -959,13 +1024,16 @@ class _Checker:
 
 
 def _tag_checks(pack, tag_ids):
+    allowed = {t for t in tag_ids if t != "custom"}
     problems = []
     refs = [("$.content_tags[%d]" % i, t) for i, t in enumerate(pack["content_tags"])]
     for group in ("locations", "character_templates", "cast_combos", "daily_activities", "pressures"):
         for i, item in enumerate(pack[group]):
             refs.extend(("$.%s[%d].tags[%d]" % (group, i, j), t) for j, t in enumerate(item.get("tags", [])))
     for path, tag in refs:
-        if tag not in tag_ids:
+        if tag == "custom":
+            problems.append(_problem(path, "内容标签不能使用 custom", "custom 仅用于玩家自定义边界，不用于世界内容标签"))
+        elif tag not in allowed:
             problems.append(_problem(path, "未知内容标签：%s" % tag, "只能用标签表里的 ID"))
     return problems
 

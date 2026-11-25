@@ -293,7 +293,7 @@ class Tagged(Spec):
         if not isinstance(value, dict):
             return self._type_error(value, path, errors, "对象")
         tag = value.get(self.key)
-        if tag not in self.variants:
+        if not isinstance(tag, str) or tag not in self.variants:
             errors.append(
                 detail("%s.%s" % (path, self.key), "未知%s：%r" % (self.name, tag), "可用：%s" % "、".join(self.variants), INVALID_INPUT)
             )

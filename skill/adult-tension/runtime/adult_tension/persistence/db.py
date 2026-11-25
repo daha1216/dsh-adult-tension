@@ -304,6 +304,13 @@ def _now_stamp():
     return time.strftime("%Y%m%dT%H%M%S", time.localtime())
 
 
+def _db_path(conn):
+    for _seq, name, path in conn.execute("PRAGMA database_list").fetchall():
+        if name == "main":
+            return path
+    return ""
+
+
 def backup(conn, backups_dir, label):
     """Copy the live database to backups/ using SQLite's online backup API."""
     os.makedirs(backups_dir, exist_ok=True)
@@ -314,9 +321,20 @@ def backup(conn, backups_dir, label):
         suffix += 1
         target = base[:-3] + "-%d.db" % suffix
     dest = sqlite3.connect(target)
+    src = None
     try:
-        conn.backup(dest)
+        if conn.in_transaction:
+            db_path = _db_path(conn)
+            if db_path:
+                src = sqlite3.connect(db_path, timeout=BUSY_TIMEOUT_MS / 1000.0)
+                src.backup(dest)
+            else:
+                conn.backup(dest)
+        else:
+            conn.backup(dest)
     finally:
+        if src is not None:
+            src.close()
         dest.close()
     return target
 
@@ -333,30 +351,47 @@ def _fault(name):
     return os.environ.get("ADULT_TENSION_FAULT") == name
 
 
+def _unsupported_schema(current):
+    return AppError(
+        UNSUPPORTED_VERSION,
+        "数据库来自更新版本的 Skill（schema %d，本版本支持 %d）" % (current, DB_SCHEMA_VERSION),
+        [detail("$.db.schema_version", "schema %d > %d" % (current, DB_SCHEMA_VERSION), "升级 Skill 到更新的版本；数据库未被修改")],
+        found=current,
+        supported=DB_SCHEMA_VERSION,
+    )
+
+
 def ensure_schema(conn, backups_dir):
     """Bring the database to DB_SCHEMA_VERSION. Returns a report dict."""
     current = read_schema_version(conn)
     report = {"from": current, "to": DB_SCHEMA_VERSION, "backup": None, "migrated": False}
     if current > DB_SCHEMA_VERSION:
-        raise AppError(
-            UNSUPPORTED_VERSION,
-            "数据库来自更新版本的 Skill（schema %d，本版本支持 %d）" % (current, DB_SCHEMA_VERSION),
-            [detail("$.db.schema_version", "schema %d > %d" % (current, DB_SCHEMA_VERSION), "升级 Skill 到更新的版本；数据库未被修改")],
-            found=current,
-            supported=DB_SCHEMA_VERSION,
-        )
+        raise _unsupported_schema(current)
     if current == DB_SCHEMA_VERSION:
         return report
     backup_file = None
     if current == 0:
         conn.execute("PRAGMA journal_mode=WAL")
-    if current > 0:
-        backup_file = backup(conn, backups_dir, "schema%d" % current)
-        report["backup"] = backup_file
     begin_write(conn)
     try:
         # Re-read inside the write lock: another process may have migrated.
         current = read_schema_version(conn)
+        report["from"] = current
+        if current > DB_SCHEMA_VERSION:
+            raise _unsupported_schema(current)
+        if current == DB_SCHEMA_VERSION:
+            conn.execute("COMMIT")
+            return report
+        if current > 0:
+            if not _db_path(conn):
+                # In-memory databases have no cross-process contention and cannot
+                # call conn.backup() while a write transaction is open on conn.
+                conn.execute("ROLLBACK")
+                backup_file = backup(conn, backups_dir, "schema%d" % current)
+                begin_write(conn)
+            else:
+                backup_file = backup(conn, backups_dir, "schema%d" % current)
+            report["backup"] = backup_file
         for target in range(current + 1, DB_SCHEMA_VERSION + 1):
             MIGRATIONS[target](conn)
             if _fault("migration_fail"):
@@ -364,7 +399,8 @@ def ensure_schema(conn, backups_dir):
             conn.execute("INSERT OR REPLACE INTO meta(key, value) VALUES('schema_version', ?)", (str(target),))
         conn.execute("COMMIT")
     except AppError:
-        conn.execute("ROLLBACK")
+        if conn.in_transaction:
+            conn.execute("ROLLBACK")
         raise
     except Exception as exc:
         if conn.in_transaction:

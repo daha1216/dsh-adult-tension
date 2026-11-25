@@ -16,6 +16,7 @@ from . import settlement
 from . import simulation
 from . import state as SS
 from . import structure as ST
+from .text import split_name
 
 F = S.Field
 FACT_KEY = S.Str(1, 80, r"[a-z0-9_]+(\.[a-z0-9_#]+){0,5}", "点分的 ASCII 小写键，例如 lin_wan.secret.press")
@@ -110,10 +111,25 @@ class TurnContext:
         return not self.state["preferences"]["offscreen_simulation"]
 
 
-def _need_character(ctx, cid, path, errs, npc=False):
+def _is_standby(ctx, cid):
+    return cid not in ctx.state["characters"] and any(t["id"] == cid for t in ctx.world.get("character_templates", []))
+
+
+def _activate_standby(ctx, cid):
     if cid not in ctx.state["characters"]:
         if opening.instantiate_standby(ctx.state, ctx.world, cid, turn=ctx.turn, fact_coord=ctx.fact_coord) is not None:
             ctx.new_characters.append(cid)
+            return True
+    return False
+
+
+def _need_character(ctx, cid, path, errs, npc=False, allow_standby=False):
+    if cid not in ctx.state["characters"]:
+        if allow_standby and _is_standby(ctx, cid):
+            pass
+        elif _is_standby(ctx, cid):
+            errs.append(detail(path, "角色尚未登场激活：%s" % cid, "该角色在待命阵容 standby_cast 中，请先用 enter_scene 让其登场激活", NOT_FOUND))
+            return False
         else:
             errs.append(detail(path, "角色不存在：%s" % cid, "用上下文里列出的角色 ID；新角色先 introduce_character", NOT_FOUND))
             return False
@@ -248,14 +264,15 @@ def op_move(ctx, op, path):
         settlement.new_scene(ctx.state, "location")
         ctx.player_moved = True
     else:
-        ctx.moved[cid] = lid
+        if ctx.in_beat is None:
+            ctx.moved[cid] = lid
+            if lid == scene["location_id"]:
+                if cid not in scene["present"]:
+                    scene["present"].append(cid)
+            elif cid in scene["present"]:
+                scene["present"].remove(cid)
         ctx.actors.add(cid)
         ctx.observable = True
-        if lid == scene["location_id"]:
-            if cid not in scene["present"]:
-                scene["present"].append(cid)
-        elif cid in scene["present"]:
-            scene["present"].remove(cid)
     ctx.applied.append({"op": "move", "character_id": cid, "location_id": lid})
 
 
@@ -263,12 +280,14 @@ def op_move(ctx, op, path):
 def op_enter_scene(ctx, op, path):
     errs = []
     cid = op["character_id"]
-    if _need_character(ctx, cid, path + ".character_id", errs, npc=True) and SS.is_present(ctx.state, cid):
+    if _need_character(ctx, cid, path + ".character_id", errs, npc=True, allow_standby=True) and SS.is_present(ctx.state, cid):
         errs.append(detail(path + ".character_id", "%s 已经在场" % ctx.name(cid), None, INVARIANT_VIOLATION))
     if not _flush(ctx, errs):
         return
+    _activate_standby(ctx, cid)
     ctx.state["scene"]["present"].append(cid)
     ctx.state["characters"][cid]["status"]["location_id"] = ctx.state["scene"]["location_id"]
+    ctx.moved.pop(cid, None)
     ctx.observable = True
     ctx.applied.append({"op": "enter_scene", "character_id": cid})
 
@@ -291,6 +310,7 @@ def op_exit_scene(ctx, op, path):
     ctx.state["scene"]["present"].remove(cid)
     if target is not None:
         ctx.state["characters"][cid]["status"]["location_id"] = target
+    ctx.moved.pop(cid, None)
     ctx.observable = True
     ctx.applied.append({"op": "exit_scene", "character_id": cid, "to_location_id": target})
 
@@ -308,7 +328,7 @@ def op_exit_scene(ctx, op, path):
         "basis_fact_ids": F(S.List(S.Id(), max_items=8, unique=True), required=False, default=[]),
         "true_intent": F(S.Nullable(S.Str(1, 120)), required=False, default=None),
     },
-    "NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（含口嫌体正直下的半推半就、身体失守） / surface 表面配合（虚与委蛇或口嫌体正直嘴硬未阻拦，不推进关系阶段；必须写 true_intent） / genuine 真诚配合",
+    "NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进关系阶段） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进关系阶段；必须写 true_intent） / genuine 真诚配合",
 )
 def op_npc_response(ctx, op, path):
     errs = []
@@ -453,10 +473,38 @@ def op_add_fact(ctx, op, path):
                             INVARIANT_VIOLATION,
                         )
                     )
+    if ctx.in_beat is not None and op["visibility"] == "public":
+        errs.append(
+            detail(
+                path + ".visibility",
+                "离屏片段不能登记 public 事实（public 会自动归入台前在场者）",
+                "离屏片段用 visibility: private（写明 known_by / believed_by）或 inner",
+                INVARIANT_VIOLATION,
+            )
+        )
     if op["truth"] and op["believed_by"]:
         errs.append(detail(path + ".believed_by", "真事实用 known_by；believed_by 只用于 truth: false 的误信", None, INVARIANT_VIOLATION))
     if not op["truth"] and not op["believed_by"]:
         errs.append(detail(path + ".believed_by", "假事实（误信）必须写明谁相信它", None, INVARIANT_VIOLATION))
+    if not op["truth"] and op["visibility"] == "public":
+        errs.append(
+            detail(
+                path + ".visibility",
+                "假事实（误信）不能用 public，只能用 private",
+                "假事实用 visibility: private，在 believed_by 写明误信者、known_by 写明知情者（可留空）",
+                INVARIANT_VIOLATION,
+            )
+        )
+    overlap = [cid for cid in op["believed_by"] if cid in op["known_by"]]
+    if overlap:
+        errs.append(
+            detail(
+                path + ".believed_by",
+                "%s 不能同时在 known_by 与 believed_by 里" % "、".join(ctx.name(cid) for cid in overlap),
+                "知道这是假消息的人写进 known_by，误信它的人写进 believed_by，两者不能重叠",
+                INVARIANT_VIOLATION,
+            )
+        )
     if op["visibility"] == "inner":
         knowers = op["known_by"]
         if len(knowers) != 1 or knowers[0] == state["player_id"] or not op["truth"] or op["believed_by"] or op["spread"]:
@@ -503,7 +551,7 @@ def op_add_fact(ctx, op, path):
     if not _flush(ctx, errs):
         return
     known = list(op["known_by"])
-    if op["visibility"] == "public":
+    if op["visibility"] == "public" and ctx.in_beat is None:
         for cid in state["scene"]["present"]:
             if cid not in known:
                 known.append(cid)
@@ -540,7 +588,7 @@ def op_add_fact(ctx, op, path):
         "stage_retreat_to": F(S.Nullable(S.Enum(*ST.STAGES)), required=False, default=None),
         "reason": F(S.Str(1, 80)),
     },
-    "有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；口嫌体正直但身体半推半就失守应记为 partial）或后退。原因必填",
+    "有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段（需同回合玩家行动 + 对方 partial/genuine 回应；半推半就、身体失守或受制达成实质妥协应记为 partial）或后退。原因必填",
 )
 def op_relationship(ctx, op, path):
     errs = []
@@ -554,7 +602,8 @@ def op_relationship(ctx, op, path):
         return _flush(ctx, errs)
     key = SS.edge_key(a, b)
     current = state["relationships"].get(key)
-    if current is None and not (SS.is_present(state, a) and SS.is_present(state, b)) and ctx.in_beat is None:
+    reverse = state["relationships"].get(SS.edge_key(b, a))
+    if not SS.has_edge_either(state, a, b) and not (SS.is_present(state, a) and SS.is_present(state, b)) and ctx.in_beat is None:
         errs.append(detail(path, "%s 与 %s 还没有实际接触过，关系要在两人同场时建立" % (ctx.name(a), ctx.name(b)), None, INVARIANT_VIOLATION))
     if op["trust_delta"] == 0 and op["tension_delta"] == 0 and not op["stage_advance"] and op["stage_retreat_to"] is None:
         errs.append(detail(path, "关系没有任何变化", None, INVARIANT_VIOLATION))
@@ -565,7 +614,7 @@ def op_relationship(ctx, op, path):
         errs.append(detail(path, "玩家角色对别人的态度只随玩家自己的行动变化", "不替玩家下情绪结论", INVARIANT_VIOLATION))
     trust = current["trust"] if current else 0
     tension = current["tension"] if current else 0
-    stage = current["stage"] if current else "stranger"
+    stage = current["stage"] if current else (reverse["stage"] if reverse else "stranger")
     start = ctx.trust_start.setdefault(key, trust)
     raw_trust = trust + op["trust_delta"]
     if abs(raw_trust - start) > ST.MAX_TRUST_DELTA:
@@ -636,7 +685,7 @@ def _stage_evidence(ctx, a, b, path, errs):
                 detail(
                     path + ".stage_advance",
                     "亲近进程前进需要同一回合里 %s 的 partial 或 genuine 回应" % ctx.name(npc),
-                    "先写 npc_response；若对方口头矜持抗拒但身体已半推半就配合，回应应记为 partial 而非纯敷衍的 surface",
+                    "先写 npc_response；若对方已半推半就、身体失守或受制达成实质妥协，回应应记为 partial；仅口头敷衍或嘴硬未真阻拦且不进阶时记 surface",
                     INVARIANT_VIOLATION,
                 )
             )
@@ -752,11 +801,12 @@ def _archived(state, eid):
 
 def _player_deal_guard(ctx, event, path, errs):
     player = ctx.state["player_id"]
-    if event["kind"] == "promise" and player in event["participants"]:
-        if ctx.in_beat is not None:
-            errs.append(detail(path, "离屏片段不能兑现或取消涉及玩家角色的事件", None, INVARIANT_VIOLATION))
-        elif ctx.mode not in ("result", "attempt") or not ctx.authorized:
-            errs.append(detail(path, "涉及玩家角色的承诺，其兑现与取消要由玩家本人决定（result/attempt + player_authorized）", None, INVARIANT_VIOLATION))
+    if player not in event["participants"]:
+        return
+    if ctx.in_beat is not None:
+        errs.append(detail(path, "离屏片段不能兑现或取消涉及玩家角色的事件", None, INVARIANT_VIOLATION))
+    elif event["kind"] == "promise" and (ctx.mode not in ("result", "attempt") or not ctx.authorized):
+        errs.append(detail(path, "涉及玩家角色的承诺，其兑现与取消要由玩家本人决定（result/attempt + player_authorized）", None, INVARIANT_VIOLATION))
 
 
 @register(
@@ -818,7 +868,7 @@ def branch_spec():
         "on_success": F(S.List(S.Any("分支操作"), max_items=8), required=False, default=[]),
         "on_failure": F(S.List(S.Any("分支操作"), max_items=8), required=False, default=[]),
     },
-    "即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能再嵌套 roll，也不能推进时间）。结果以返回的 applied 为准",
+    "即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能出现 roll、advance_time、introduce_character、promote_character、offscreen_beat、twist_accept）。结果以返回的 applied 为准",
     branch=False,
 )
 def op_roll(ctx, op, path):
@@ -862,13 +912,19 @@ def op_player_update(ctx, op, path):
         errs.append(detail(path, "玩家角色设定只能按玩家本人的话修改（result/rewrite + player_authorized）", None, INVARIANT_VIOLATION))
     if not any([op["name"], op["title"], op["add_background"], op["add_resources"], op["add_risks"]]):
         errs.append(detail(path, "没有任何变化", None, INVARIANT_VIOLATION))
+    if op["name"]:
+        player_id = ctx.state["player_id"]
+        if any(cid != player_id and c["name"] == op["name"] for cid, c in ctx.state["characters"].items()):
+            errs.append(detail(path + ".name", "本局已经有人叫“%s”" % op["name"], "换一个名字", INVARIANT_VIOLATION))
     if not _flush(ctx, errs):
         return
     player = ctx.state["characters"][ctx.state["player_id"]]
     if op["name"]:
+        family, given = split_name(ctx.world["name_pools"], op["name"])
+        family = family or ""
         player["name"] = op["name"]
-        player["family"] = ""
-        player["given"] = op["name"]
+        player["family"] = family
+        player["given"] = given if family else op["name"]
     if op["title"]:
         player["title"] = op["title"]
         player["call"] = op["title"]
