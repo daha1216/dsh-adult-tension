@@ -100,15 +100,11 @@
     ],
     "nickname_patterns": [
       {
-        "pattern": "{family}先生",
-        "gender": "male"
-      },
-      {
-        "pattern": "{family}小姐",
-        "gender": "female"
-      },
-      {
         "pattern": "阿{given_last}",
+        "gender": "any"
+      },
+      {
+        "pattern": "小{family}",
         "gender": "any"
       },
       {
@@ -1180,7 +1176,7 @@
         "pressure_responses": {
           "low": "换回本地口音打个哈哈，用两句洋泾浜玩笑搪塞。",
           "mid": "按住大衣内袋的过桥通行证，不紧不慢地讲条件。",
-          "high": "刻意摆出巡捕房冷硬章程腔调警告对方，领带却已被扯松半寸，喉结在紧逼下微微滚动。",
+          "high": "刻意摆出巡捕房冷硬章程腔调警告对方，领带却已被扯松半寸，呼吸在紧逼下微微发滞。",
           "breaking": "一把拉灭岗亭煤气灯把人推进桥洞暗影，低声道这通行条给你、明天我陪你一并过桥。"
         },
         "withdrawal": "整晚待在桥头的岗亭里，对谁都只说洋文",
@@ -2383,7 +2379,7 @@
       },
       "near": {
         "text": "半小时后潮水漫过桥墩，两岸直到明早才能通行",
-        "deadline_minutes": 360
+        "deadline_minutes": 30
       },
       "far": {
         "trigger": "连阴雨持续三天",
@@ -2733,7 +2729,8 @@
     "romance_light",
     "intimate",
     "explicit",
-    "workplace"
+    "workplace",
+    "substance"
   ],
   "status": "released",
   "notes": "1926民国手艺街与江声晚报馆。\n2026-10-18 按 v2 改造：8 单人 + 2 双人局、死当票与暗房底片把柄。\n2026-11-23 按 v2.5 无限制版精修（--mode 2 暗格搜获型）：开场 100% 未穿戴，清零旧八股与平淡高档反应，精选 1926 民国器具（镂空银制缅铃、丝绒蒙眼带、小牛皮腕扣、催情香膏）打通私密 locations.affordances + identity.hidden + daily_activities.beats[0] + exits/twists，清零 hook_ids 并补齐全钩子地点绑定与待命角色转折。"

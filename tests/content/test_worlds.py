@@ -12,10 +12,14 @@ from helpers.domain import STORE
 from helpers.fs import copy_skill, temp_dir
 
 TAG_IDS = {t["id"] for t in STORE.tags()["tags"]}
+_WORLDS = None
 
 
 def worlds():
-    return [STORE.world(entry["id"]) for entry in STORE.index()["worlds"]]
+    global _WORLDS
+    if _WORLDS is None:
+        _WORLDS = [STORE.world(entry["id"]) for entry in STORE.index()["worlds"]]
+    return _WORLDS
 
 
 class WorldPackTest(unittest.TestCase):
@@ -118,22 +122,32 @@ class WorldPackTest(unittest.TestCase):
                     self.assertTrue(result["pass"], json.dumps(result, ensure_ascii=False))
 
     def test_verify_content_command_passes(self):
+        # Full 211-world diversity is already verified by test_diversity_gate above;
+        # exercise the CLI across all packs (--skip-diversity) plus one pack with diversity+stats.
         with temp_dir() as tmp:
-            code, env, _raw = run_cli(["verify-content"], os.path.join(tmp, "d"))
+            code, env, _raw = run_cli(["verify-content", "--skip-diversity"], os.path.join(tmp, "d1"))
             self.assertEqual(code, 0, json.dumps(env, ensure_ascii=False)[:2000])
             self.assertTrue(env["data"]["ok"])
+            code2, env2, _raw2 = run_cli(["verify-content", "--world", "harbor_night_shift", "--stats"], os.path.join(tmp, "d2"))
+            self.assertEqual(code2, 0, json.dumps(env2, ensure_ascii=False)[:2000])
+            self.assertTrue(env2["data"]["ok"])
+            self.assertIn("diversity", env2["data"]["worlds"][0])
+            self.assertIn("stats", env2["data"]["worlds"][0])
 
 
 class CrossWorldTest(unittest.TestCase):
     """CONTENT_BIBLE 6: near duplicates across packs, the generic layer against every list."""
 
-    def packs(self):
+    def packs(self, only=None):
         import copy
 
-        return {w["id"]: copy.deepcopy(w) for w in worlds()}
+        if only is not None:
+            wanted = set(only)
+            return {w["id"]: copy.deepcopy(w) for w in worlds() if w["id"] in wanted}
+        return {w["id"]: w for w in worlds()}
 
     def test_a_near_copy_in_another_world_is_reported_at_the_copy(self):
-        packs = self.packs()
+        packs = self.packs(("harbor_night_shift", "winter_shelter"))
         source = packs["harbor_night_shift"]["rules"][0]["text"]
         copy_text = source[:-1] + ("了" if source[-1] != "了" else "的")
         packs["winter_shelter"]["rules"][2]["text"] = copy_text
@@ -153,7 +167,7 @@ class CrossWorldTest(unittest.TestCase):
     def test_a_forbidden_term_in_the_generic_layer_is_reported(self):
         from adult_tension.domain import structure as ST
 
-        packs = self.packs()
+        packs = self.packs(("bakumatsu_machiya",))
         packs["bakumatsu_machiya"]["forbidden_terms"].append("试探")
         problems = worldpack.cross_checks(packs, ST.generic_strings())
         hits = [p for p in problems if p["world"] == "generic"]
@@ -162,21 +176,25 @@ class CrossWorldTest(unittest.TestCase):
 
 
 class CompilerTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.compiled, cls.problems = compile_content.compile_all()
+
     def test_compiled_files_are_current_and_deterministic(self):
-        first, problems = compile_content.compile_all()
-        self.assertEqual(problems, [])
+        self.assertEqual(self.problems, [])
         second, _ = compile_content.compile_all()
-        self.assertEqual(first, second)
-        for rel, data in first.items():
+        self.assertEqual(self.compiled, second)
+        for rel, data in self.compiled.items():
             with open(os.path.join(compile_content.OUT, rel), "rb") as handle:
                 self.assertEqual(handle.read(), data, rel)
         # and the version they carry is the one locked to what they give
-        version = json.loads(first["index.json"].decode("utf-8"))["content_version"]
-        self.assertEqual(compile_content.version_check(version, first), (None, None))
+        version = json.loads(self.compiled["index.json"].decode("utf-8"))["content_version"]
+        self.assertEqual(compile_content.version_check(version, self.compiled), (None, None))
 
     def test_changed_content_needs_a_new_version(self):
         # DESIGN_DECISIONS D10: same content version + same seed -> same opening
-        files, _ = compile_content.compile_all()
+        self.assertEqual(self.problems, [])
+        files = dict(self.compiled)
         version = json.loads(files["index.json"].decode("utf-8"))["content_version"]
         rel = "worlds/harbor_night_shift.json"
         pack = json.loads(files[rel].decode("utf-8"))
@@ -202,15 +220,15 @@ class ReverseVerificationTest(unittest.TestCase):
         with open(path, "w", encoding="utf-8") as handle:
             json.dump(pack, handle, ensure_ascii=False)
 
-    def verify(self, skill_dir, tmp):
+    def verify(self, skill_dir, tmp, world_id):
         entry = os.path.join(skill_dir, "scripts", "adult_tension.py")
-        return run_cli(["verify-content", "--skip-diversity"], os.path.join(tmp, "d"), entry=entry, env=clean_env())
+        return run_cli(["verify-content", "--skip-diversity", "--world", world_id], os.path.join(tmp, "d"), entry=entry, env=clean_env())
 
     def test_deleting_a_referenced_location_fails_with_its_location(self):
         with temp_dir() as tmp:
             skill = copy_skill(tmp)
             self.tamper(skill, "harbor_night_shift", lambda p: p.update(locations=[loc for loc in p["locations"] if loc["id"] != "tool_shed"]))
-            code, env, _raw = self.verify(skill, tmp)
+            code, env, _raw = self.verify(skill, tmp, "harbor_night_shift")
             self.assertEqual((code, env["error"]["code"]), (10, "CONTENT_ERROR"))
             hits = [d for d in env["error"]["details"] if "tool_shed" in d["reason"]]
             self.assertTrue(hits)
@@ -230,7 +248,7 @@ class ReverseVerificationTest(unittest.TestCase):
                 pack["locations"][0]["name"] = "扫码取件点"
 
             self.tamper(skill, "harbor_night_shift", mutate)
-            code, env, _raw = self.verify(skill, tmp)
+            code, env, _raw = self.verify(skill, tmp, "harbor_night_shift")
             self.assertEqual(code, 10)
             hits = [d for d in env["error"]["details"] if "禁用词" in d["reason"]]
             self.assertEqual(hits[0]["path"], "$.locations[0].name")

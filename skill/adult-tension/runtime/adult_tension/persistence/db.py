@@ -308,6 +308,43 @@ def _migrate_to_4(conn):
 
 MIGRATIONS = {1: _migrate_to_1, 2: _migrate_to_2, 3: _migrate_to_3, 4: _migrate_to_4}
 
+EXTRA_INDEXES = (
+    ("facts_session_n", "facts", "CREATE INDEX IF NOT EXISTS facts_session_n ON facts(session_id, n)"),
+    ("facts_turn_order", "facts", "CREATE INDEX IF NOT EXISTS facts_turn_order ON facts(session_id, turn DESC, n)"),
+    ("archive_turn", "archive", "CREATE INDEX IF NOT EXISTS archive_turn ON archive(session_id, turn)"),
+    ("sessions_current_slot", "sessions", "CREATE INDEX IF NOT EXISTS sessions_current_slot ON sessions(current_slot) WHERE current_slot IS NOT NULL"),
+    ("opening_history_seed", "opening_history", "CREATE INDEX IF NOT EXISTS opening_history_seed ON opening_history(seed, id DESC)"),
+    ("opening_history_lookup", "opening_history", "CREATE INDEX IF NOT EXISTS opening_history_lookup ON opening_history(world_id, mode, seed)"),
+)
+
+
+def _ensure_indexes(conn):
+    """Add backward-compatible v4 secondary indexes when missing (no schema bump)."""
+    rows = conn.execute("SELECT type, name FROM sqlite_master WHERE type IN ('table', 'index')").fetchall()
+    tables = {name for kind, name in rows if kind == "table"}
+    indexes = {name for kind, name in rows if kind == "index"}
+    missing = [sql for name, table, sql in EXTRA_INDEXES if table in tables and name not in indexes]
+    if not missing:
+        return
+    if conn.in_transaction:
+        for sql in missing:
+            conn.execute(sql)
+        return
+    try:
+        conn.execute("BEGIN IMMEDIATE")
+    except sqlite3.OperationalError as exc:
+        if _is_busy(exc):
+            return
+        raise
+    try:
+        for sql in missing:
+            conn.execute(sql)
+        conn.execute("COMMIT")
+    except BaseException:
+        if conn.in_transaction:
+            conn.execute("ROLLBACK")
+        raise
+
 
 def _now_stamp():
     return time.strftime("%Y%m%dT%H%M%S", time.localtime())
@@ -377,6 +414,7 @@ def ensure_schema(conn, backups_dir):
     if current > DB_SCHEMA_VERSION:
         raise _unsupported_schema(current)
     if current == DB_SCHEMA_VERSION:
+        _ensure_indexes(conn)
         return report
     backup_file = None
     if current == 0:
@@ -394,6 +432,7 @@ def ensure_schema(conn, backups_dir):
         if current > DB_SCHEMA_VERSION:
             raise _unsupported_schema(current)
         if current == DB_SCHEMA_VERSION:
+            _ensure_indexes(conn)
             conn.execute("COMMIT")
             return report
         if current > 0:
@@ -411,6 +450,7 @@ def ensure_schema(conn, backups_dir):
             if _fault("migration_fail"):
                 raise RuntimeError("injected migration failure")
             conn.execute("INSERT OR REPLACE INTO meta(key, value) VALUES('schema_version', ?)", (str(target),))
+        _ensure_indexes(conn)
         conn.execute("COMMIT")
     except AppError:
         if conn.in_transaction:
@@ -424,14 +464,14 @@ def ensure_schema(conn, backups_dir):
             restore(conn, backup_file)
             restored = True
         if restored:
-            msg = "数据库从格式 %d 迁移到 %d 失败，已恢复迁移前的备份" % (report["from"], DB_SCHEMA_VERSION)
-            hint = "未加载任何会话，数据库已恢复备份；请换回兼容版本的 Skill 或向维护者反馈异常详情"
+            msg = "存档库从第 %d 版升级到第 %d 版失败，已恢复升级前的备份" % (report["from"], DB_SCHEMA_VERSION)
+            hint = "之前的游玩进度未受改动，已自动恢复备份；请换回兼容版本的 Skill 或向维护者反馈异常详情"
         elif report["from"] == 0:
-            msg = "数据库初始化（数据库格式 0 → %d）失败，已回滚未写入任何改动" % DB_SCHEMA_VERSION
-            hint = "未加载任何会话，本次建库事务已回滚；请检查目录权限与磁盘状态后重试，或向维护者反馈异常详情"
+            msg = "存档库初始化（第 %d 版）失败，未写入任何改动" % DB_SCHEMA_VERSION
+            hint = "本次初始化未生效，没有改动任何已有进度；请检查目录权限与磁盘空间后重试，或向维护者反馈异常详情"
         else:
-            msg = "数据库从格式 %d 迁移到 %d 失败（备份前已回滚，原数据库未被修改）" % (report["from"], DB_SCHEMA_VERSION)
-            hint = "未加载任何会话，迁移事务已回滚且尚未生成备份；请检查目录权限与磁盘状态后重试，或向维护者反馈异常详情"
+            msg = "存档库从第 %d 版升级到第 %d 版失败，原存档库未被修改" % (report["from"], DB_SCHEMA_VERSION)
+            hint = "升级在备份前已中止，之前的游玩进度未受改动；请检查目录权限与磁盘空间后重试，或向维护者反馈异常详情"
         raise AppError(
             MIGRATION_FAILED,
             msg,

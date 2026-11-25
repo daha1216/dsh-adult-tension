@@ -143,22 +143,9 @@ def patch_checks(patches):
 
 
 def _cli(args, data_dir, payload=None, entry=None):
-    argv = [sys.executable, entry or _runtime.ENTRY_SCRIPT] + list(args) + ["--json", "--data-dir", data_dir]
-    temp = None
-    if payload is not None:
-        handle = tempfile.NamedTemporaryFile("wb", suffix=".json", delete=False)
-        handle.write(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
-        handle.close()
-        temp = handle.name
-        argv += ["--input-file", temp]
-    env = {k: v for k, v in os.environ.items() if not k.startswith("ADULT_TENSION") and k != "PYTHONPYCACHEPREFIX"}
-    env["ADULT_TENSION_INCLUDE_DRAFTS"] = "1"
-    try:
-        proc = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.DEVNULL, env=env, timeout=300)
-    finally:
-        if temp:
-            os.remove(temp)
-    return proc.returncode, json.loads(proc.stdout.decode("utf-8"))
+    env = _runtime.clean_tool_env({"ADULT_TENSION_INCLUDE_DRAFTS": "1"})
+    code, envelope, _proc = _runtime.run_entry(args, data_dir=data_dir, payload=payload, env=env, entry=entry, timeout=300)
+    return code, envelope
 
 
 def _outcome(label, code, envelope, expected_code, located):
@@ -235,7 +222,9 @@ def cli_checks():
 def main(argv):
     group = "all"
     if "--group" in argv:
-        group = argv[argv.index("--group") + 1]
+        group = _runtime.opt_value(argv, "--group")
+    if group not in ("all", "cli") and group not in GROUPS:
+        raise SystemExit("error: unknown --group %r (expected age, time, cli or all)" % group)
     os.makedirs(OUT, exist_ok=True)
     all_ok = True
     if group in ("all", "cli"):

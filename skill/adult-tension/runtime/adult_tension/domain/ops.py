@@ -189,12 +189,25 @@ def op_advance_time(ctx, op, path):
     ctx.time_ops += 1
     if ctx.time_ops > 1:
         errs.append(detail(path, "一个回合最多一个 advance_time", "把两段时间合并成一次推进", INVARIANT_VIOLATION))
+    if not errs:
+        minutes = settlement.minutes_for(ctx.state["clock"], op)
+        target_abs = CL.to_abs(CL.add_minutes(ctx.state["clock"], minutes))
+        for ev in ctx.state["events"].values():
+            if ev["state"] == "pending" and ev["created_turn"] == ctx.turn and CL.to_abs(ev["due"]) <= target_abs:
+                errs.append(
+                    detail(
+                        path,
+                        "本回合新建的事件 %s（%s）不能在同一回合的时间推进中直接过期" % (ev["id"], ev["title"]),
+                        "把 advance_time 放在 event_create 之前，或延长事件的到期时间",
+                        INVARIANT_VIOLATION,
+                    )
+                )
     if not _flush(ctx, errs):
         return
-    advance(ctx, settlement.minutes_for(ctx.state["clock"], op), path)
+    advance(ctx, minutes)
 
 
-def advance(ctx, minutes, path, default=False):
+def advance(ctx, minutes, default=False):
     report = settlement.advance(ctx.state, minutes, ctx.turn, ctx.hooks)
     report["default"] = default
     offscreen = report.get("offscreen") or {}
@@ -254,8 +267,10 @@ def op_move(ctx, op, path):
     if not _flush(ctx, errs):
         return
     char = ctx.state["characters"][cid]
+    was_loc = char["status"]["location_id"]
     char["status"]["location_id"] = lid
     scene = ctx.state["scene"]
+    was_present = cid in scene["present"]
     if is_player:
         scene["location_id"] = lid
         # NPCs who went ahead to the same place earlier in this commit are there.
@@ -271,7 +286,8 @@ def op_move(ctx, op, path):
             elif cid in scene["present"]:
                 scene["present"].remove(cid)
         ctx.actors.add(cid)
-        ctx.observable = True
+        if lid != was_loc or (cid in scene["present"]) != was_present:
+            ctx.observable = True
     ctx.applied.append({"op": "move", "character_id": cid, "location_id": lid})
 
 
@@ -344,10 +360,13 @@ def op_npc_response(ctx, op, path):
         return
     entry = {"op": "npc_response", "npc_id": npc, "response": op["response"]}
     if op["response"] == "surface":
+        coord = ctx.fact_coord()
+        base_key = "%s.intent.t%d" % (npc, ctx.turn)
+        key = base_key if SS.true_fact_by_key(ctx.state, base_key) is None else "%s_%d" % (base_key, coord[1])
         fid = SS.next_id(ctx.state, "fact", "f")
         ctx.state["facts"][fid] = {
             "id": fid,
-            "key": "%s.intent.t%d" % (npc, ctx.turn),
+            "key": key,
             "text": "%s的真实打算：%s" % (ctx.name(npc), op["true_intent"]),
             "truth": True,
             "known_by": [npc],
@@ -356,7 +375,7 @@ def op_npc_response(ctx, op, path):
             "origin": "offscreen" if ctx.in_beat else "observed",
             "turn": ctx.turn,
             "spreading": False,
-            "coord": ctx.fact_coord(),
+            "coord": coord,
         }
         entry["intent_fact_id"] = fid
     ctx.responses.setdefault(npc, []).append(op["response"])
@@ -427,6 +446,8 @@ def op_npc_state(ctx, op, path):
     if not _flush(ctx, errs):
         return
     status = ctx.state["characters"][npc]["status"]
+    old_mood = status["mood"]
+    old_conditions = list(status["conditions"])
     if op["mood"] is not None:
         status["mood"] = op["mood"]
     removed = set(op["remove_conditions"])
@@ -435,7 +456,8 @@ def op_npc_state(ctx, op, path):
         until = CL.add_minutes(ctx.state["clock"], cond["minutes"]) if cond["minutes"] else None
         status["conditions"] = [c for c in status["conditions"] if c["kind"] != cond["kind"]]
         status["conditions"].append({"kind": cond["kind"], "text": cond["text"], "until": until, "since_turn": ctx.turn})
-    ctx.observable = True
+    if status["mood"] != old_mood or status["conditions"] != old_conditions:
+        ctx.observable = True
     ctx.applied.append({"op": "npc_state", "npc_id": npc, "mood": status["mood"], "conditions": [c["kind"] for c in status["conditions"]]})
 
 
@@ -469,6 +491,15 @@ def op_add_fact(ctx, op, path):
                             "%s.%s[%d]" % (path, field, index),
                             "%s 不在场，不能在这一幕里得知这件事" % ctx.name(cid),
                             "消息要传到不在场的人，等离屏推演或以后当面告知",
+                            INVARIANT_VIOLATION,
+                        )
+                    )
+                elif ctx.in_beat is not None and SS.is_present(state, cid):
+                    errs.append(
+                        detail(
+                            "%s.%s[%d]" % (path, field, index),
+                            "%s 当前在台前场景中，离屏片段不能直接向其写入事实" % ctx.name(cid),
+                            "在场角色只能通过台前互动或后续离屏扩散得知消息",
                             INVARIANT_VIOLATION,
                         )
                     )
@@ -604,6 +635,11 @@ def op_relationship(ctx, op, path):
     reverse = state["relationships"].get(SS.edge_key(b, a))
     if not SS.has_edge_either(state, a, b) and not (SS.is_present(state, a) and SS.is_present(state, b)) and ctx.in_beat is None:
         errs.append(detail(path, "%s 与 %s 还没有实际接触过，关系要在两人同场时建立" % (ctx.name(a), ctx.name(b)), None, INVARIANT_VIOLATION))
+    if ctx.in_beat is not None:
+        if SS.is_present(state, a):
+            errs.append(detail(path + ".from", "%s 当前在台前场景中，离屏片段不能改写其对别人的态度" % ctx.name(a), "离屏片段只能记录离屏角色自己的态度变化", INVARIANT_VIOLATION))
+        if (op["stage_advance"] or op["stage_retreat_to"] is not None) and (SS.is_present(state, a) or SS.is_present(state, b)):
+            errs.append(detail(path, "离屏片段不能与台前在场角色变更亲近阶段", "亲近阶段变化需要双方在同一场景互动", INVARIANT_VIOLATION))
     if op["trust_delta"] == 0 and op["tension_delta"] == 0 and not op["stage_advance"] and op["stage_retreat_to"] is None:
         errs.append(detail(path, "关系没有任何变化", None, INVARIANT_VIOLATION))
     if op["stage_advance"] and op["stage_retreat_to"] is not None:
@@ -689,6 +725,9 @@ def _stage_evidence(ctx, a, b, path, errs):
             )
             return None
         return {"player_action_turn": ctx.turn, "npc_response": cooperative[-1]}
+    if SS.is_present(ctx.state, a) != SS.is_present(ctx.state, b):
+        errs.append(detail(path + ".stage_advance", "两名 NPC 一人在场一人不在场，不能跨场景推进亲近进程", "亲近进程前进需要双方同在台前或同在离屏", INVARIANT_VIOLATION))
+        return None
     if a not in ctx.actors or b not in ctx.actors:
         errs.append(detail(path + ".stage_advance", "两名 NPC 之间的亲近进程前进需要双方本回合都有行动或回应", None, INVARIANT_VIOLATION))
         return None
@@ -728,6 +767,19 @@ def op_event_create(ctx, op, path):
         due = op["due"] if "due" in op else CL.add_minutes(state["clock"], op["in_minutes"])
         if CL.to_abs(due) <= CL.to_abs(state["clock"]):
             errs.append(detail(path + ".due", "到期时间必须晚于现在（%s）" % SS.clock_label(state, ctx.world), None, INVARIANT_VIOLATION))
+        elif ctx.time_ops == 0 and not any(isinstance(o, dict) and o.get("op") == "advance_time" for o in ctx.commit["operations"]):
+            settled_clock = CL.add_minutes(state["clock"], ST.DEFAULT_ADVANCE_MINUTES)
+            if CL.to_abs(due) <= CL.to_abs(settled_clock):
+                field_suffix = ".due" if "due" in op else ".in_minutes"
+                errs.append(
+                    detail(
+                        path + field_suffix,
+                        "到期时间必须晚于本回合默认推进 %d 分钟后的时间（%s），否则当回合即过期"
+                        % (ST.DEFAULT_ADVANCE_MINUTES, CL.label(settled_clock, ctx.world.get("clock_style", "hm"))),
+                        "把时限设在 %d 分钟以上，或显式写出更短的 advance_time" % ST.DEFAULT_ADVANCE_MINUTES,
+                        INVARIANT_VIOLATION,
+                    )
+                )
     if op["kind"] == "chance" and op["probability"] is None:
         errs.append(detail(path + ".probability", "概率事件必须带 probability", "结果由引擎在到期时掷骰", INVARIANT_VIOLATION))
     if op["kind"] != "chance" and op["probability"] is not None:
@@ -912,8 +964,11 @@ def op_player_update(ctx, op, path):
         errs.append(detail(path, "没有任何变化", None, INVARIANT_VIOLATION))
     if op["name"]:
         player_id = ctx.state["player_id"]
+        standby = opening.standby_previews(ctx.state, ctx.world)
         if any(cid != player_id and c["name"] == op["name"] for cid, c in ctx.state["characters"].items()):
             errs.append(detail(path + ".name", "本局已经有人叫“%s”" % op["name"], "换一个名字", INVARIANT_VIOLATION))
+        elif any(p["name"] == op["name"] for p in standby.values()):
+            errs.append(detail(path + ".name", "本局待命角色里已经有人叫“%s”" % op["name"], "换一个名字", INVARIANT_VIOLATION))
     if not _flush(ctx, errs):
         return
     player = ctx.state["characters"][ctx.state["player_id"]]

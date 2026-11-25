@@ -19,6 +19,7 @@ class ContentStore:
         self.content_dir = content_dir
         self._index = None
         self._tags = None
+        self._raw_worlds = {}
         self._worlds = {}
 
     def _read(self, rel):
@@ -54,14 +55,20 @@ class ContentStore:
 
     def world_raw(self, world_id):
         """The compiled file as parsed, without validation (verify-content validates it itself)."""
-        return self._read(os.path.join("worlds", world_id + ".json"))
+        if world_id in self._worlds:
+            return self._worlds[world_id]
+        if world_id not in self._raw_worlds:
+            self._raw_worlds[world_id] = self._read(os.path.join("worlds", world_id + ".json"))
+        return self._raw_worlds[world_id]
 
     def world(self, world_id):
         if world_id not in self._worlds:
             from ..domain.worldpack import validate_world
 
             rel = "worlds/%s.json" % world_id
-            raw = self._read(os.path.join("worlds", world_id + ".json"))
+            raw = self._raw_worlds.pop(world_id, None)
+            if raw is None:
+                raw = self._read(os.path.join("worlds", world_id + ".json"))
             tags_doc = self.tags()
             tags_list = tags_doc.get("tags") if isinstance(tags_doc, dict) else None
             if not isinstance(tags_list, list) or not tags_list or not all(isinstance(t, dict) and isinstance(t.get("id"), str) and t["id"] for t in tags_list):

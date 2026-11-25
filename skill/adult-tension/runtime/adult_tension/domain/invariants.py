@@ -80,9 +80,11 @@ def check(state, before_clock=None, prefix="$.state"):
             bad(base, "阶段非法")
         if edge["from"] not in chars or edge["to"] not in chars:
             bad(base, "关系端点不存在")
+    check_all_facts = not isinstance(facts, FA.FactView)
     for lid, lv in state["leverage"].items():
         if lv["holder"] not in chars or lv["subject"] not in chars:
             bad("%s.leverage.%s" % (prefix, lid), "把柄双方必须存在")
-        if lv["basis_fact_id"] not in state["facts"]:
-            bad("%s.leverage.%s" % (prefix, lid), "把柄依据的事实不存在")
+        if check_all_facts or lv["basis_fact_id"] in facts.changed or lv.get("created_turn", 0) > state["turn"]:
+            if lv["basis_fact_id"] not in facts:
+                bad("%s.leverage.%s" % (prefix, lid), "把柄依据的事实不存在")
     return problems

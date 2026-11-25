@@ -113,7 +113,13 @@
   "decision": {
     "core_value": "护住自己人",
     "current_goal": "拖过今晚",
-    "pressure_response": "表面顺从，暗中转移",
+    "pressure_responses": {
+      "low": "装没听见",
+      "mid": "表面顺从，暗中转移",
+      "high": "拉同伴分摊风险",
+      "breaking": "当面摊牌"
+    },
+    "withdrawal": "躲回字架后一言不发",
     "relationship_stance": "先观察，再决定信不信",
     "contrast": "嘴硬，但对弱者心软",
     "prefers": ["用手艺换人情"],
@@ -135,7 +141,7 @@
     "surface": "简短、客气、带点刺",
     "inner": "低声、直接、会笑"
   },
-  "status": {"location_id": "type_room", "mood": "绷着", "condition": []}
+  "status": {"location_id": "type_room", "mood": "绷着", "conditions": []}
 }
 ```
 
@@ -149,7 +155,7 @@
 - 玩家角色也是角色，但没有 `decision` 与 `intimacy`（模型不替玩家决定），额外有 `title`（称谓）、`social_position`、`resources`、`risks`。
 - `situation` 给出角色当下的困局、压力与有代价的出路，可作为施压、条件交换或动摇防线的叙事支点。
 - `intimacy` 只能通过 `intimacy_evidence` 操作逐项演化（§6），不能整体替换。
-- `status.mood` 与 `condition` 由模型通过 `npc_state` 操作更新，引擎只校验格式。
+- `status.mood` 与 `conditions` 由模型通过 `npc_state` 操作更新，引擎只校验格式。
 
 ## 4. 关系
 
@@ -161,7 +167,7 @@
   "to": "player",
   "trust": 1,
   "tension": 2,
-  "intimacy_stage": "acquainted",
+  "stage": "acquainted",
   "history": [
     {"turn": 2, "change": "trust+1", "reason": "他没有追问名单的事"},
     {"turn": 4, "change": "tension+2", "reason": "他看见了她藏起来的校样"},
@@ -170,7 +176,7 @@
 }
 ```
 
-- `trust`：-5..5；`tension`：0..5；`intimacy_stage`：世界包定义的有序阶段表中的一项（默认 `stranger`、`acquainted`、`familiar`、`flirting`、`testing`、`intimate`、`committed`）。
+- `trust`：-5..5；`tension`：0..5；`stage`：世界包定义的有序阶段表中的一项（默认 `stranger`、`acquainted`、`familiar`、`flirting`、`testing`、`intimate`、`committed`）。
 - 每次变化必须带 `reason` 与 `turn`；阶段前进必须带 `evidence`。
 - 阶段可以后退（关系破裂），后退不需要双方证据，但需要原因。
 - 阶段是历史，不是许可。校验器不因为阶段足够高就放行任何行为。
@@ -221,7 +227,7 @@
 - `kind`：`promise`、`deadline`、`rumor`、`opportunity`、`foreshadow`、`chance`。
 - `tier`：`immediate`、`near`、`far`（仅压力模式开局必须三层齐全）。
 - `state`：`pending` → `resolved` 或 `cancelled`。只有这三种。终态事件不可再修改。
-- `outcome`：`fulfilled`（在到期前被兑现）、`expired`（到期未兑现，由引擎判定）、`hit` / `miss`（概率事件）、`cancelled_by_story`。“到期”与“兑现”必须区分。
+- `outcome`：`fulfilled`（约定、截止、机会在到期前被兑现）、`surfaced`（伏笔、风声到期或提前浮出）、`expired`（到期未兑现，由引擎判定）、`hit` / `miss`（概率事件）、`cancelled_by_story`。“到期”与“兑现”必须区分。
 - `id`、`kind`、`dedupe_key`、`created_turn` 不可变。`pending` 事件的 `due` 必须晚于当前时钟。
 - `dedupe_key` 相同的 `pending` 事件不能同时存在；已结束事件的键要复用，必须显式声明为重复发生（例如带序号）。
 - 带 `probability` 的事件到期时由引擎掷骰（种子来自会话种子派生，见 `DESIGN_DECISIONS.md` D10），结果写入 `outcome`，模型只负责描写。同一事件同一回合最多掷一次。
@@ -317,12 +323,11 @@
 
 - 每个参与者都是 `major` 且在场；
 - 当前不在暂停中，且标签不与硬边界冲突；
-- 玩家在参与者中时，本回合须为 `result` 或 `attempt` 且 `player_authorized: true`；
-- 每个 NPC 参与者在同一回合有 `negotiate`、`partial`、`surface` 或 `genuine` 回应，或主动的 `npc_action`（仅纯 `refuse` 且无主动行动时拒绝对该角色标记亲密推进）。
+- 玩家在参与者中时，本回合须为 `result` 或 `attempt` 且 `player_authorized: true`。
 
-参与者成年由角色创建时的检查和每个回合的状态不变量保证（任何角色年龄缺失或小于 18，记录都被拒）。微醺、高热、险境或生效中的把柄（§5.3）均不阻断亲密回合，由模型结合角色表里语态与倾向卡写出真实反应层次。
+参与者成年由角色创建时的检查和每个回合的状态不变量保证（任何角色年龄缺失或小于 18，记录都被拒）。微醺、高热、险境、生效中的把柄（§5.3）、昏迷/睡死（无回应无行动）或彻底拒绝（`refuse`）/强迫情形均不阻断亲密回合，由模型结合角色表里语态、处境与倾向卡写出真实反应层次。
 
-这保证“反应持续可见”在结构上成立。这个检查只针对这一回合，不产生任何持久化“同意记录”。
+这个检查只针对这一回合，不产生任何持久化“同意记录”。
 
 ### 6.1 操作表（P0 最小集合）
 
@@ -331,7 +336,7 @@
 | `advance_time` | `minutes` 或 `until`（`morning`/`noon`/`evening`/`night`/`next_morning`）或 `days` | 不能倒流；触发推演分档与事件到期 |
 | `move` | 角色移动到地点 | 玩家移动需 `player_authorized`；地点必须在快照中 |
 | `enter_scene` / `exit_scene` | 角色登场 / 离场 | 角色已在会话中，或属于世界包未上场的 `standby_cast` 待命模板（引用时自动实例化为完整 `major` 角色卡并写入设定事实） |
-| `introduce_character` | 新角色 | 完整角色卡；年龄 ≥ 18；符合性别偏好或说明原因 |
+| `introduce_character` | 新角色 | 完整角色卡；年龄 ≥ 18；符合配对偏好或说明原因 |
 | `promote_character` | 升格 | 保留 ID，补齐字段 |
 | `npc_response` | 回应光谱 | `refuse`/`negotiate`/`partial`/`surface`/`genuine`；`basis_fact_ids` 必须在其信息集中；`surface` 必须同时 `add_fact` 记录真实意图 |
 | `npc_action` | NPC 自主行动 | `significant: true` 时检查冷却；依据事实同上；离屏冻结时仅限在场者 |
@@ -587,9 +592,9 @@
 
 - **世界层**：`era`、`region` 必填且具体；`style_hint` 一句，写给模型的文风提示；`clock_start.label` 是起始日的显示标签，可省略；`customs` 是可以直接写进正文的风俗与礼节；`rules` 是影响剧情的世界规则。
 - **`extends`**：可以引用一个时代底包（D16），编译期展开，运行时不可见。
-- **玩家身份池**：`social_position` 取 `low`、`equal`、`high`（相对于世界里的主要人物）；开局未指定玩家设定时，从这里抽取并按玩家的性别偏好渲染称谓。
+- **玩家身份池**：`social_position` 取 `low`、`equal`、`high`（相对于世界里的主要人物）；开局未指定玩家设定时，从这里抽取并按玩家角色的性别渲染称谓。
 - **地点档案**：`privacy` 取 `public`、`semi`、`private`；`visibility` 说明谁能看见这里；`witnesses` 引用背景人物；`exits` 引用其他地点 ID；`affordances` 是这个地点能让人做什么；`pressure_modifiers` 说明某个压力在这里有什么不同。亲密场景的描写受 `privacy` 与在场者约束，这由模型遵守、评审检查，引擎只在上下文里提供这些信息。
-- **人物模板**：形状与 §3 的角色卡对应，运行时字段（`status`、具体年龄、具体姓名）在开局时生成。`gender: "any"` 表示由会话的性别偏好决定，此时模板内所有指代都必须用占位（D15）。`decision.pressure_responses` 必须有四档；`withdrawal` 是角色退缩时的具体表现。`schedule` 供离屏推演决定角色不在场时在哪里。
+- **人物模板**：形状与 §3 的角色卡对应，运行时字段（`status`、具体年龄、具体姓名）在开局时生成。`gender: "any"` 表示由会话的配对偏好决定，此时模板内所有指代都必须用占位（D15）。`decision.pressure_responses` 必须有四档；`withdrawal` 是角色退缩时的具体表现。`schedule` 供离屏推演决定角色不在场时在哪里。
 - **背景人物**：只有角色与功能（`witness`、`messenger`、`obstacle`、`rumor_source`、`helper`），可以被升格。
 - **关系渠道**：消息传播的路径。`fidelity: "distorted"` 的渠道传出的消息用 `spread_rumor` 生成走样事实。
 - **张力引擎**：独立于压力的、持续制造张力的结构（同一张值班表、同住一个院子、共同的秘密）。日常模式的张力主要来自这里。
@@ -625,11 +630,14 @@
 ```json
 {
   "format": "adult-tension-save",
-  "schema_version": 1,
-  "content_version": "2026.10.0",
+  "schema_version": 2,
+  "content_version": "2026.11.26.1",
   "rng_version": 1,
+  "skill_version": "0.3.0",
   "exported_at": "2026-10-01T12:00:00+08:00",
-  "session": {}
+  "source": {"kind": "session", "session_id": "s_7f3a", "current_slot": null},
+  "session": {"state": {}, "content": {}, "archive": []},
+  "checksum": "sha256:..."
 }
 ```
 
@@ -653,7 +661,7 @@
 | `RUNTIME_UNSUPPORTED` | Python 版本过低或缺少 SQLite 等必要能力 |
 | `DATA_DIR_UNAVAILABLE` | 数据目录不可写；附尝试过的路径与建议 |
 | `STORAGE_BUSY` | 数据库被其他进程短暂占用；用同一 `request_id` 重试 |
-| `NO_MATCH` | 开局约束（锁定、排除、性别偏好）在所选世界中无法满足；附哪条约束冲突与可放宽项 |
+| `NO_MATCH` | 开局约束（锁定、排除、配对偏好）在所选世界中无法满足；附哪条约束冲突与可放宽项 |
 | `INTERNAL_ERROR` | 内部运行异常；附日志路径，状态未改变 |
 
 同一 `request_id`、相同内容的重复提交返回第一次的结果，不报错。

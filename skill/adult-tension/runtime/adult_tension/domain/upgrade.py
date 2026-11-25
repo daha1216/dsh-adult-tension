@@ -61,7 +61,11 @@ def _to_2(state):
         memory = state.get("memory")
         chapters = memory.get("chapters") if isinstance(memory, dict) else None
         if isinstance(chapters, list):
-            counters.setdefault("chapter_count", len(chapters))
+            max_idx = max(
+                (c["index"] for c in chapters if isinstance(c, dict) and type(c.get("index")) is int),
+                default=1 if type(counters.get("last_chapter_turn")) is int and counters["last_chapter_turn"] > 1 else 0,
+            )
+            counters.setdefault("chapter_count", max_idx)
     requests = state.get("requests")
     if isinstance(requests, dict):
         requests.setdefault("prologue", False)

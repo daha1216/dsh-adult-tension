@@ -5,6 +5,7 @@ normalized pack plus a list of problems. Each problem names the JSON path, the
 reason and a hint. cross_checks() adds the cross-pack checks.
 """
 
+import heapq
 import re
 
 from .. import schema as S
@@ -13,6 +14,25 @@ from . import structure as ST
 from .text import ATTRS, FEMALE_ADDRESS, MALE_ADDRESS, NEUTRAL_ADDRESS, address_gender, gendered_pronoun_positions, placeholders, stray_braces
 
 F = S.Field
+TAG_TABLE = S.Obj(
+    {
+        "schema_version": F(S.Int(1, 1)),
+        "tags": F(
+            S.List(
+                S.Obj(
+                    {
+                        "id": F(S.Id()),
+                        "label": F(S.Str(1, 20)),
+                        "kind": F(S.Enum("intimacy", "conflict", "theme", "setting", "custom")),
+                        "description": F(S.Str(1, 120)),
+                    }
+                ),
+                min_items=1,
+            )
+        ),
+    },
+    name="内容标签表",
+)
 
 
 def _str(lo=1, hi=200):
@@ -68,7 +88,7 @@ LOCATION = S.Obj(
 TEMPLATE = S.Obj(
     {
         "id": F(S.Id()),
-        "gender": F(S.Enum(*ST.TEMPLATE_GENDERS), desc="any 表示由会话的配对偏好决定，文本全部用占位"),
+        "gender": F(S.Enum(*ST.TEMPLATE_GENDERS), desc="any 表示由本局的配对偏好决定，文本全部用占位"),
         "gender_reason": F(S.Nullable(_str(1, 120)), required=False, default=None, desc="性别写死时的叙事理由"),
         "age_range": F(_range(0, 120), desc="年龄范围，下限 ≥ 18"),
         "adult_context": F(_str(1, 80), desc="明示成年身份与处境的一句话"),
@@ -504,7 +524,7 @@ def text_chars(node):
 
 GENDER_LABELS = {"male": "男性", "female": "女性"}
 _NEUTRAL_PREFIX = "(?!%s)" % "|".join(map(re.escape, sorted(NEUTRAL_ADDRESS, key=len, reverse=True))) if NEUTRAL_ADDRESS else ""
-PLAYER_ADDRESSED = re.compile(r"\{player\.[a-z_]+\}%s(%s)" % (_NEUTRAL_PREFIX, "|".join(sorted(MALE_ADDRESS + FEMALE_ADDRESS, key=len, reverse=True))))
+PLAYER_ADDRESSED = re.compile(r"\{player\.[a-z0-9_\u4e00-\u9fff]+\}%s(%s)" % (_NEUTRAL_PREFIX, "|".join(sorted(MALE_ADDRESS + FEMALE_ADDRESS, key=len, reverse=True))))
 
 
 def _pattern_address_gender(text, declared_gender):
@@ -666,6 +686,13 @@ class _Checker:
         for path, have, need, label in checks:
             if have < need:
                 self.add(path, "%s数量不足：%d < %d" % (label, have, need), "补到至少 %d 条（下限是地板，不是目标）" % need)
+        max_combo = max((len(c["slots"]) for c in p["cast_combos"]), default=0)
+        if len(pools["family"]) >= m["family"] and len(pools["family"]) < 1 + max_combo:
+            self.add(
+                "$.name_pools.family",
+                "姓数量不足以覆盖最大同场组合：%d < %d（玩家 + %d 个槽位）" % (len(pools["family"]), 1 + max_combo, max_combo),
+                "至少提供 %d 个姓，避免同一局重要人物同姓" % (1 + max_combo),
+            )
         if self.custom:
             total = len(pools["given_female"]) + len(pools["given_male"]) + len(pools["given_neutral"])
             if total < m["given_total"]:
@@ -722,8 +749,13 @@ class _Checker:
                 else:
                     seen[item["id"]] = path
         pools = self.pack["name_pools"]
-        names = pools["given_female"] + pools["given_male"] + pools["given_neutral"]
-        dup = {n for n in names if names.count(n) > 1}
+        seen_names = set()
+        dup = set()
+        for name in pools["given_female"] + pools["given_male"] + pools["given_neutral"]:
+            if name in seen_names:
+                dup.add(name)
+            else:
+                seen_names.add(name)
         for name in sorted(dup):
             self.add("$.name_pools", "名字在多个名池里重复：%s" % name, "每个名只放进一个名池")
 
@@ -880,9 +912,9 @@ class _Checker:
         if abs(total - 1.0) > 0.01:
             self.add("$.default_npc_gender_mix", "性别分布之和应为 1，实际 %.2f" % total, None)
         if p["stage_labels"]:
-            labels = list(p["stage_labels"].values())
+            labels = [p["stage_labels"].get(s) or ST.STAGE_LABELS[s] for s in ST.STAGES]
             if len(set(labels)) != len(labels):
-                self.add("$.stage_labels", "阶段名称重复", None)
+                self.add("$.stage_labels", "阶段名称重复", "确保 7 个阶段各自使用不同的名称（含未改名的默认阶段）")
         locs = p["locations"]
         privacies = {loc["privacy"] for loc in locs}
         if locs and ("public" not in privacies or not privacies & {"semi", "private"}):
@@ -924,29 +956,25 @@ class _Checker:
             if p["daily_activities"]:
                 if any(hook_matches(act, hooks, True) for act in p["daily_activities"]):
                     world_daily_open = True
-                if not any(hook_matches(act, hooks, self.custom) for act in p["daily_activities"]):
+                else:
                     self.add(
                         "$.cast_combos[%d]" % i,
-                        "日常模式下没有能与这个组合配上的活动、地点与钩子" if self.custom else "日常模式下没有能与这个组合配上的活动与钩子",
+                        "日常模式下没有能与这个组合配上的活动、地点与钩子",
                         None,
                     )
             if p["pressures"]:
-                if any(
-                    (not pr["leverage"] or ({pr["leverage"]["holder"], pr["leverage"]["subject"]} - {"player"}) <= slots)
-                    and hook_matches(pr, hooks, True)
-                    for pr in p["pressures"]
-                ):
-                    world_pressure_open = True
                 usable = [
                     pr
                     for pr in p["pressures"]
                     if (not pr["leverage"] or ({pr["leverage"]["holder"], pr["leverage"]["subject"]} - {"player"}) <= slots)
-                    and hook_matches(pr, hooks, self.custom)
+                    and hook_matches(pr, hooks, True)
                 ]
-                if not usable:
+                if usable:
+                    world_pressure_open = True
+                else:
                     self.add(
                         "$.cast_combos[%d]" % i,
-                        "压力模式下没有能与这个组合配上的压力、地点与钩子" if self.custom else "压力模式下没有能与这个组合配上的压力与钩子",
+                        "压力模式下没有能与这个组合配上的压力、地点与钩子",
                         None,
                     )
         if not self.custom and p["cast_combos"]:
@@ -1152,29 +1180,41 @@ def near_duplicates(entries, threshold=NEAR_DUP_THRESHOLD, min_len=NEAR_DUP_MIN_
     # Prefix filtering: with bigrams sorted rarest first, two sets whose Jaccard
     # score reaches the threshold must share a bigram within their first
     # len - floor(threshold * len) + 1 entries, so only those pairs are scored.
-    # Same pairs and order as comparing every pair, without the quadratic cost.
+    # Length bounds (la >= lb * threshold and la <= lb / threshold) prune pairs
+    # whose sizes make reaching the threshold mathematically impossible.
     freq = {}
     for _, _, g in grams:
         for gram in g:
             freq[gram] = freq.get(gram, 0) + 1
     index = {}
     pairs = []
-    for j, (_, _, b) in enumerate(grams):
-        ordered = sorted(b, key=lambda gram: (freq[gram], gram))
+    for j, (_, txt_b, b) in enumerate(grams):
+        lb = len(b)
+        min_la = lb * threshold
+        max_la = lb / threshold
+        prefix_k = lb - int(threshold * lb) + 1
+        probe = heapq.nsmallest(prefix_k, b, key=lambda gram: (freq[gram], gram))
         candidates = set()
-        for gram in ordered[: len(ordered) - int(threshold * len(ordered)) + 1]:
-            bucket = index.setdefault(gram, [])
-            candidates.update(bucket)
-            bucket.append(j)
+        for gram in probe:
+            bucket = index.get(gram)
+            if bucket is not None:
+                candidates.update(bucket)
+                bucket.append(j)
+            else:
+                index[gram] = [j]
         for i in candidates:
             a = grams[i][2]
-            score = len(a & b) / len(a | b)
+            la = len(a)
             # Exclude exact-equal strings from cross-pack near-duplicate checks:
             # intra-pack duplicate sentences are caught by _Checker.text_checks(),
             # while across the 211 released packs short shared idioms (len >= 16,
             # e.g. exit cost phrasing in cellist_hall_tailpin_lock_jam vs
             # convenience_clerk_cooler_tail_jam) can legitimately coincide.
-            if score >= threshold and grams[i][1] != grams[j][1]:
+            if la < min_la or la > max_la or grams[i][1] == txt_b:
+                continue
+            inter = len(a & b)
+            score = inter / (la + lb - inter)
+            if score >= threshold:
                 pairs.append((i, j, score))
     pairs.sort()
     return [(grams[i][0], grams[j][0], round(score, 3)) for i, j, score in pairs]

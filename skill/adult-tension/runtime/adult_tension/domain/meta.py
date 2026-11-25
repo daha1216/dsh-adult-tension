@@ -19,24 +19,39 @@ PREFERENCE_LABELS = {
 PACE_LABELS = {"slow": "慢热", "standard": "标准", "direct": "直接"}
 EXPLICITNESS_LABELS = {"subtle": "含蓄", "standard": "标准", "explicit": "直白"}
 SHOWN_PREFERENCES = ("inner_view", "assistant", "offscreen_simulation", "person", "npc_gender_preference", "pace", "explicitness")
+BOUNDARY_LEADINS = ("麻烦", "请", "希望你", "希望", "我个人", "我")
 BOUNDARY_PREFIXES = (
     "不想看到",
     "不想看",
     "不想要",
     "不喜欢",
+    "不接受",
+    "不能接受",
+    "不能看到",
+    "不能看",
+    "不能有",
+    "不能",
+    "不要再",
+    "不要让",
     "不要写到",
     "不要写",
     "不要出现",
     "不要涉及",
+    "不要有",
     "不要",
+    "不看",
     "拒绝",
+    "别让",
+    "别再",
     "别写到",
     "别写",
+    "别有",
     "别",
     "不许",
     "禁止",
 )
-BOUNDARY_VERBS = ("写到", "写", "出现", "涉及")
+BOUNDARY_VERBS = ("写到", "写", "出现", "涉及", "看到", "看")
+BARE_BOUNDARY_MODALS = ("不要", "不能", "别", "不许", "禁止", "拒绝", "不想", "不接受", "不能接受", "不要再", "别再")
 
 
 def _bump(state):
@@ -46,28 +61,48 @@ def _bump(state):
 
 
 def _boundary_subject(text):
-    body = text.strip()
+    raw = text.strip()
+    cand = raw
+    # Strip chained polite/first-person lead-ins only when followed by a negation prefix.
+    while True:
+        matched_lead = False
+        for lead in BOUNDARY_LEADINS:
+            if cand.startswith(lead):
+                after = cand[len(lead) :].strip()
+                if after:
+                    cand = after
+                    matched_lead = True
+                    break
+        if not matched_lead:
+            break
+    body = cand if any(cand.startswith(p) for p in BOUNDARY_PREFIXES) else raw
     stripped = False
+    matched_prefix = None
     for prefix in BOUNDARY_PREFIXES:
         if body.startswith(prefix):
             rest = body[len(prefix) :].strip()
+            if prefix.endswith("有") and rest.startswith("人"):
+                continue
             if rest:
                 body = rest
                 stripped = True
-            break
-    if stripped:
+                matched_prefix = prefix
+                break
+    if stripped and matched_prefix in BARE_BOUNDARY_MODALS:
         for verb in BOUNDARY_VERBS:
             if body.startswith(verb):
                 rest = body[len(verb) :].strip()
                 if rest:
                     body = rest
                 break
-    return body or text
+    return (body if stripped else raw) or raw
 
 
 def set_boundary(state, content, action, text=None, tags=None, boundary_id=None):
     work = FA.working_copy(state)
     boundaries = work["safety"]["boundaries"]
+    if text is not None:
+        text = text.strip()
     if action == "add":
         valid = {t["id"] for t in content["tags"]}
         problems = [
@@ -86,6 +121,8 @@ def set_boundary(state, content, action, text=None, tags=None, boundary_id=None)
         boundary = {"id": bid, "text": text, "tags": list(tags) if tags else ["custom"], "created_turn": work["turn"]}
         boundaries.append(boundary)
         return _bump(work), {"boundary": boundary, "receipt": "已记下：不会出现%s" % _boundary_subject(text), "changed": True}
+    if not boundary_id and not text:
+        raise AppError(INVALID_INPUT, "撤销边界要给 boundary_id 或原话", [detail("$.text", "缺少要撤销的边界", None, INVALID_INPUT)])
     by_id = next((b for b in boundaries if b["id"] == boundary_id), None) if boundary_id else None
     by_text = next((b for b in boundaries if b["text"] == text), None) if text else None
     if boundary_id and text and by_id is not None and by_text is not None and by_id["id"] != by_text["id"]:
@@ -129,9 +166,10 @@ def set_safety(state, paused, change_scene=False):
     return _bump(work), {"paused": False, "receipt": "已恢复。从停下的地方重新开始，对方的反应重新判断", "changed": True}
 
 
-def set_preferences(state, content, changes):
-    # `content` is kept for uniform meta handler signature compatibility.
-    _ = content
+def set_preferences(state, content=None, changes=None):
+    if changes is None and isinstance(content, dict) and "world" not in content:
+        changes = content
+    changes = changes or {}
     work = FA.working_copy(state)
     prefs = work["preferences"]
     receipts = []

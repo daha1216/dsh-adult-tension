@@ -68,7 +68,7 @@ AT_JSON
    - `wait`：玩家选择不动 → 给 NPC 行动空间。
 3. **正文先行，攒着记录**：普通回合直接写正文，攒满 10 回合在正文后一次 `commit-turn`（`turns` 按序每回合一项，≤ 12 项）。须先记录（连同攒下回合）再按返回写正文的情形：将到达或越过最早待办事件（`due_soon` / `events` 首项或攒下回合新登事件；记录前正文不越过它）或跨午夜；单次推进 ≥ 60 分钟；需 `roll`。执行快进、转折、存读档、状态、导出、暂停、边界、偏好或玩家说先到这前，也先结清攒下回合（纯元命令只输出回执）。
 4. 照最近 `commit_template` 填（每回合复制一项 `turns`，删未用操作）；无模板查 `references/operations.md`。
-   - `player_authorized: true` 仅在玩家本人话语授权了移动、承诺、交易、同意、亲密参与、转折或改设定时置真。
+   - `player_authorized: true` 仅在玩家本人话语授权了移动、承诺、交易、同意、亲密参与、持/放把柄、转折或改设定时置真。
    - 要点：`npc_action` 重大行动带 `significant: true`（查 `can_act`）；缺省 `advance_time` 默认推进 3 分钟；新写关键细节用 `add_fact`；首提原创人物（不在场亦算）用 `introduce_character`（明示成年，名取自 `name_pool`）；开局写出的首次记录补登。
    - 仅模板出现 `chapter_summary`、`prologue` 时按提示填写。
 5. 先记录时，严格按返回的 `context` 及末项 `applied`、`resolved_events`、`simulation` 写正文。
@@ -86,7 +86,7 @@ AT_JSON
 
 ## 时间、离屏、转折、撤销（细节见 `references/flows.md` §1–§3）
 
-- 快进只在玩家要求时：`get-context` 带 `preview_time` 预览一次，照返回的 `skip_template` 记录；不代玩家决定做什么、见谁。
+- 快进只在玩家要求时：先结清攒下回合，再 `get-context` 带 `preview_time` 预览一次，照返回的 `skip_template` 记录；不代玩家决定做什么、见谁。
 - `offscreen_beat` 只写不在场 NPC 自己的行动与去向（依其 `goal`、`knows`），不碰玩家；离屏推演关闭时不写。
 - 转折：`requests.twist_offer` 出现时放正文后一句话列候选；玩家主动说“来点转折”（`get-context` 带 `"want_twist": true`）直接一句话列候选（为空按 `twist_note` 告知），选定后记 `twist_accept`。
 - “撤销 / 刚才不算（改成 Y）”：未记录的直接改写正文；已记录的用 `undo-turn`，或立即记录、首项带 `replaces_turn`。

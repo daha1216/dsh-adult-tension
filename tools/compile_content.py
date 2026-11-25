@@ -26,6 +26,7 @@ import _runtime  # noqa: E402
 _runtime.use_runtime()
 
 from adult_tension import schema as S  # noqa: E402
+from adult_tension.content.verify import TAG_TABLE as TAGS_SPEC  # noqa: E402
 from adult_tension.domain import structure as ST  # noqa: E402
 from adult_tension.domain import opening, worldpack  # noqa: E402
 from adult_tension.errors import AppError  # noqa: E402
@@ -36,24 +37,6 @@ LOCK = os.path.join(SRC, "content.lock.json")
 OUT = os.path.join(_runtime.SKILL_ROOT, "content")
 
 F = S.Field
-TAGS_SPEC = S.Obj(
-    {
-        "schema_version": F(S.Int(1, 1)),
-        "tags": F(
-            S.List(
-                S.Obj(
-                    {
-                        "id": F(S.Id()),
-                        "label": F(S.Str(1, 20)),
-                        "kind": F(S.Enum("intimacy", "conflict", "theme", "setting", "custom")),
-                        "description": F(S.Str(1, 120)),
-                    }
-                ),
-                min_items=1,
-            )
-        ),
-    }
-)
 BASE_SPEC = S.Obj(
     {
         "schema_version": F(S.Int(1, 1)),
@@ -75,8 +58,11 @@ def read_json(path):
         return loads_strict(decode_bytes(handle.read(), path), path)
 
 
+_COMPILED_PACK_CACHE = {}
+
+
 def dump(obj):
-    return (json.dumps(obj, ensure_ascii=False, sort_keys=True, indent=1) + "\n").encode("utf-8")
+    return (json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
 
 
 def merge(base, world):
@@ -109,7 +95,12 @@ def fingerprint(files):
     for rel in sorted(files):
         if not rel.startswith("worlds/"):
             continue
-        pack = json.loads(files[rel].decode("utf-8"))
+        raw_bytes = files[rel]
+        cached = _COMPILED_PACK_CACHE.get(rel)
+        if cached is not None and cached[0] is raw_bytes:
+            pack = cached[1]
+        else:
+            pack = json.loads(raw_bytes.decode("utf-8"))
         for mode in ("daily", "pressure"):
             for gender in (None, "male", "female"):
                 conditions = opening.normalize_conditions({"mode": mode, "player": {"gender": gender}})
@@ -200,6 +191,8 @@ def compile_all():
     problems.extend(worldpack.cross_checks(packs, ST.generic_strings() + [t["label"] for t in (tags or {"tags": []})["tags"]]))
     files = {}
     if not problems:
+        ordered_packs = sorted(packs.values(), key=lambda p: p["id"])
+        dumped_worlds = {pack["id"]: dump(pack) for pack in ordered_packs}
         index = {
             "schema_version": 1,
             "content_version": meta["content_version"],
@@ -215,15 +208,19 @@ def compile_all():
                     "default_person": pack["default_person"],
                     "content_tags": pack["content_tags"],
                     # doctor checks only the worlds whose bytes differ from what was validated here
-                    "sha256": hashlib.sha256(dump(pack)).hexdigest(),
+                    "sha256": hashlib.sha256(dumped_worlds[pack["id"]]).hexdigest(),
                 }
-                for pack in sorted(packs.values(), key=lambda p: p["id"])
+                for pack in ordered_packs
             ],
         }
         files["index.json"] = dump(index)
         files["tags.json"] = dump(tags)
-        for world_id, pack in packs.items():
-            files["worlds/%s.json" % world_id] = dump(pack)
+        _COMPILED_PACK_CACHE.clear()
+        for pack in ordered_packs:
+            rel = "worlds/%s.json" % pack["id"]
+            raw_bytes = dumped_worlds[pack["id"]]
+            files[rel] = raw_bytes
+            _COMPILED_PACK_CACHE[rel] = (raw_bytes, pack)
     return files, problems
 
 

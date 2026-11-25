@@ -54,7 +54,7 @@ def main(argv):
     if "--fuzz" in argv:
         steps.append(FUZZ)
     if "--only" in argv:
-        wanted = set(argv[argv.index("--only") + 1].split(","))
+        wanted = set(_runtime.opt_value(argv, "--only").split(","))
         steps = [s for s in STEPS + [FUZZ] if s[0] in wanted]
     os.makedirs(OUT, exist_ok=True)
     env = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONPYCACHEPREFIX=os.path.join(REPO, ".pycache"))

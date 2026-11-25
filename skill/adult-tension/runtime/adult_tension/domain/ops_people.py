@@ -9,6 +9,7 @@ from .. import schema as S
 from ..errors import INVARIANT_VIOLATION, NOT_FOUND, SAFETY_BLOCK, detail
 from . import cards as C
 from . import facts as FA
+from . import opening
 from . import state as SS
 from . import structure as ST
 from .ops import FACT_KEY, _absent_actor_ok, _flush, _is_standby, _need_character, register
@@ -23,6 +24,15 @@ MAX_CARD_OPS_PER_NPC = 2
 def _present_or_beat(ctx, cid, path, errs, what):
     if ctx.in_beat is None and not SS.is_present(ctx.state, cid):
         errs.append(detail(path, "%s 不在场，不能在这一幕里%s" % (ctx.name(cid), what), "当面的事要在场；不在场的人在离屏推演里处理", INVARIANT_VIOLATION))
+    elif ctx.in_beat is not None and SS.is_present(ctx.state, cid):
+        errs.append(
+            detail(
+                path,
+                "%s 当前在台前场景中，离屏片段不能与其当面%s" % (ctx.name(cid), what),
+                "在场角色不在离屏现场；远处传闻请走 distorted 渠道（spread_rumor + channel_id）",
+                INVARIANT_VIOLATION,
+            )
+        )
 
 
 def _card_budget(ctx, npc, path, errs):
@@ -115,7 +125,6 @@ def op_spread_rumor(ctx, op, path):
     errs = []
     state = ctx.state
     source = op["from"]
-    channel = None
     if op["channel_id"] is not None:
         channel = next((c for c in ctx.world.get("channels", []) if c["id"] == op["channel_id"]), None)
         if channel is None:
@@ -339,9 +348,12 @@ def op_identity_update(ctx, op, path):
             values.append(op["value"])
         else:
             values.remove(op["value"])
+        ctx.observable = True
     else:
+        old_val = identity.get(op["item"])
         identity[op["item"]] = op["value"]
-    ctx.observable = True
+        if old_val != op["value"]:
+            ctx.observable = True
     ctx.applied.append({"op": "identity_update", "npc_id": npc, "item": op["item"], "action": op["action"]})
 
 
@@ -380,12 +392,17 @@ def op_npc_update(ctx, op, path):
     char = ctx.state["characters"][npc]
     field = op["field"]
     if field in ("public_role", "appearance"):
+        old_val = char.get(field)
         char[field] = op["value"]
     elif field in ("current_goal", "relationship_stance"):
+        old_val = char["decision"].get(field)
         char["decision"][field] = op["value"]
     else:
-        char["situation"][field.split("_", 1)[1]] = op["value"]
-    ctx.observable = True
+        sub_key = field.split("_", 1)[1]
+        old_val = char["situation"].get(sub_key)
+        char["situation"][sub_key] = op["value"]
+    if old_val != op["value"]:
+        ctx.observable = True
     ctx.applied.append({"op": "npc_update", "npc_id": npc, "field": field})
 
 
@@ -418,8 +435,11 @@ def _schedule_ok(ctx, schedule, path, errs):
 
 def _name_ok(ctx, name, tier, kin_of, path, errs):
     state = ctx.state
+    standby = opening.standby_previews(state, ctx.world)
     if any(c["name"] == name for c in state["characters"].values()):
         errs.append(detail(path + ".name", "本局已经有人叫“%s”" % name, "换一个名字", INVARIANT_VIOLATION))
+    elif any(p["name"] == name for p in standby.values()):
+        errs.append(detail(path + ".name", "待命角色池里已经有人叫“%s”" % name, "若要让该待命角色登场请直接用 enter_scene，新角色请换一个名字", INVARIANT_VIOLATION))
     if tier == "background":
         return None
     family, _given = split_name(ctx.world["name_pools"], name)
@@ -432,6 +452,8 @@ def _name_ok(ctx, name, tier, kin_of, path, errs):
     taken = {c.get("family") for c in state["characters"].values() if c["tier"] in ("major", "supporting") and c.get("family")}
     if family in taken and not kin_of:
         errs.append(detail(path + ".name", "本局的重要角色里已经有人姓%s" % family, "换一个姓；确实是亲属时写 kin_of", INVARIANT_VIOLATION))
+    elif kin_of and kin_of in state["characters"] and state["characters"][kin_of].get("family") != family:
+        errs.append(detail(path + ".kin_of", "亲属角色 %s 并不姓%s" % (ctx.name(kin_of), family), "kin_of 需指向同姓的已有角色", INVARIANT_VIOLATION))
     return family
 
 
@@ -491,6 +513,17 @@ def op_introduce_character(ctx, op, path):
         errs.append(detail(path + ".tier", "背景人物只有名字和一句话（line），不能带外貌、卡片或日程", "要带身份、决策或日程就用 supporting 或 major", INVARIANT_VIOLATION))
     if op["tier"] == "supporting" and any(op[k] is not None for k in ("intimacy", "voices", "situation")):
         errs.append(detail(path + ".tier", "只有重要角色（major）有私密倾向卡、表里语态和处境设定", None, INVARIANT_VIOLATION))
+    if op["tier"] == "supporting" and op["decision"] is not None:
+        extra_dec = sorted(set(op["decision"]) - set(C.SUPPORTING_DECISION_KEYS))
+        if extra_dec:
+            errs.append(
+                detail(
+                    path + ".decision",
+                    "配角（supporting）的决策卡只填 core_value 与 current_goal，不含：%s" % "、".join(extra_dec),
+                    "完整决策卡仅用于重要角色（major）",
+                    INVARIANT_VIOLATION,
+                )
+            )
     _schedule_ok(ctx, op["schedule"], path, errs)
     location = state["scene"]["location_id"] if op["present"] else op["location_id"]
     if not op["present"] and location is None:
@@ -541,6 +574,7 @@ def op_introduce_character(ctx, op, path):
             "character_id": F(S.Id()),
             "to_tier": F(S.Enum("supporting", "major")),
             "gender_reason": F(S.Nullable(S.Str(1, 80)), required=False, default=None),
+            "kin_of": F(S.Nullable(S.Id()), required=False, default=None, desc="与已有重要角色同姓时填其亲属角色 ID"),
         },
         **C.card_fields()
     ),
@@ -551,12 +585,26 @@ def op_promote_character(ctx, op, path):
     errs = []
     cid = op["character_id"]
     char = None
+    if op["kin_of"] is not None:
+        _need_character(ctx, op["kin_of"], path + ".kin_of", errs)
+        if op["kin_of"] == cid:
+            errs.append(detail(path + ".kin_of", "kin_of 不能指向角色自己", None, INVARIANT_VIOLATION))
     if _need_character(ctx, cid, path + ".character_id", errs, npc=True):
         char = ctx.state["characters"][cid]
         if C.TIER_ORDER[op["to_tier"]] <= C.TIER_ORDER[char["tier"]]:
             errs.append(detail(path + ".to_tier", "层级只升不降：%s 已经是 %s" % (char["name"], char["tier"]), None, INVARIANT_VIOLATION))
         if char["tier"] == "background":
             _gender_preference_ok(ctx, char["gender"], op["gender_reason"], path, errs, field=".character_id")
+            fam = char.get("family") or ""
+            taken = {
+                c.get("family")
+                for k, c in ctx.state["characters"].items()
+                if k != cid and c["tier"] in ("major", "supporting") and c.get("family")
+            }
+            if fam and fam in taken and not op["kin_of"]:
+                errs.append(detail(path + ".character_id", "本局的重要角色里已经有人姓%s" % fam, "确实是亲属升格时写 kin_of", INVARIANT_VIOLATION))
+            elif op["kin_of"] and op["kin_of"] in ctx.state["characters"] and ctx.state["characters"][op["kin_of"]].get("family") != fam:
+                errs.append(detail(path + ".kin_of", "亲属角色 %s 并不姓%s" % (ctx.name(op["kin_of"]), fam or "（无）"), "kin_of 需指向同姓的已有角色", INVARIANT_VIOLATION))
         for part in ("identity", "intimacy"):
             if op[part] is not None and char.get(part):
                 errs.append(detail("%s.%s" % (path, part), "%s 已经有%s，只能逐项演化" % (char["name"], "身份卡" if part == "identity" else "私密倾向卡"), None, INVARIANT_VIOLATION))
@@ -570,6 +618,17 @@ def op_promote_character(ctx, op, path):
                 merged[key] = op[key]
         if op["decision"] is not None:
             merged["decision"] = dict(char.get("decision") or {}, **op["decision"])
+        if op["to_tier"] == "supporting" and merged.get("decision"):
+            extra_dec = sorted(set(merged["decision"]) - set(C.SUPPORTING_DECISION_KEYS))
+            if extra_dec:
+                errs.append(
+                    detail(
+                        path + ".decision",
+                        "配角（supporting）的决策卡只填 core_value 与 current_goal，不含：%s" % "、".join(extra_dec),
+                        "完整决策卡仅用于重要角色（major）",
+                        INVARIANT_VIOLATION,
+                    )
+                )
         _card_errors(op["to_tier"], merged, path, errs)
     if not _flush(ctx, errs):
         return
@@ -582,6 +641,8 @@ def op_promote_character(ctx, op, path):
         char["situation"] = dict(op["situation"], deadline=None)
     if op["decision"] is not None:
         char["decision"] = dict(char.get("decision") or {}, **op["decision"])
+    if op["kin_of"]:
+        char["kin_of"] = op["kin_of"]
     before = char["tier"]
     char["tier"] = op["to_tier"]
     char["promoted_turn"] = ctx.turn
@@ -632,10 +693,13 @@ def op_leverage_set(ctx, op, path):
         return
     basis = op["basis_fact_id"]
     if basis is None:
+        coord = ctx.fact_coord()
+        base_key = "leverage.%s.%s.t%d" % (holder, subject, ctx.turn)
+        key = base_key if SS.true_fact_by_key(state, base_key) is None else "%s_%d" % (base_key, coord[1])
         basis = SS.next_id(state, "fact", "f")
         state["facts"][basis] = {
             "id": basis,
-            "key": "leverage.%s.%s.t%d" % (holder, subject, ctx.turn),
+            "key": key,
             "text": op["basis_text"],
             "truth": True,
             "known_by": [holder],
@@ -644,7 +708,7 @@ def op_leverage_set(ctx, op, path):
             "origin": "offscreen" if ctx.in_beat else "observed",
             "turn": ctx.turn,
             "spreading": False,
-            "coord": ctx.fact_coord(),
+            "coord": coord,
         }
     lid = SS.next_id(state, "leverage", "lv")
     state["leverage"][lid] = {

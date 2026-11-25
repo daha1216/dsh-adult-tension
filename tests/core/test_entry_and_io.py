@@ -298,6 +298,42 @@ class CliParseArgvTest(unittest.TestCase):
         self.assertEqual((code, envelope["error"]["code"]), (10, "INVALID_INPUT"))
         self.assertEqual(envelope["error"]["details"][0]["path"], "$.turns[0].operations[0].op")
 
+    def test_missing_option_value_before_boolean_flag_is_rejected(self):
+        from adult_tension import paths
+        from adult_tension.adapters import cli
+
+        self.assertIsNone(paths.data_dir_arg(["doctor", "--data-dir", "--json"]))
+        self.assertEqual(paths.data_dir_arg(["doctor", "--data-dir", "/ok", "--data-dir", "--json"]), "/ok")
+        for argv, expected_path in (
+            (["doctor", "--data-dir", "--json"], "$.argv[1]"),
+            (["verify-content", "--world", "--skip-diversity"], "$.argv[1]"),
+            (["new-game", "--input-file", "--include-drafts"], "$.argv[1]"),
+        ):
+            with self.assertRaises(AppError, msg=argv) as caught:
+                cli.parse_argv(argv)
+            self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", expected_path))
+
+    def test_read_payload_enforces_max_input_bytes_and_jsonio_copy_is_isolated(self):
+        import io
+        from unittest import mock
+
+        from adult_tension.adapters import cli
+        from adult_tension.application import commands
+
+        src = {"a": [1, {"b": "中"}], "c": True}
+        cloned = jsonio.copy(src)
+        self.assertEqual(cloned, src)
+        cloned["a"][1]["b"] = "改"
+        cloned["a"].append(2)
+        self.assertEqual(src, {"a": [1, {"b": "中"}], "c": True})
+
+        cmd = commands.get("new-game")
+        big = io.BytesIO(b'{"a":"' + b"x" * 128 + b'"}')
+        with mock.patch.object(cli, "MAX_INPUT_BYTES", 64):
+            with self.assertRaises(AppError) as caught:
+                cli.read_payload(cmd, {"input_file": "-"}, big)
+        self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.input_file"))
+
 
 if __name__ == "__main__":
     unittest.main()

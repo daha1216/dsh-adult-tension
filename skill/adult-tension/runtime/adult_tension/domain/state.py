@@ -28,10 +28,6 @@ def character(state, cid):
     return state["characters"].get(cid)
 
 
-def is_npc(state, cid):
-    return cid in state["characters"] and cid != state["player_id"]
-
-
 def present(state):
     return state["scene"]["present"]
 

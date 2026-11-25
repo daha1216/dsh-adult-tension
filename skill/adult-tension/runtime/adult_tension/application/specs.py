@@ -2,7 +2,6 @@
 
 from .. import schema as S
 from ..domain import structure as ST
-from ..domain.turn import commit_fields
 
 F = S.Field
 SESSION_ID = S.Str(3, 40, r"s_[a-z0-9]{2,38}", "会话 ID，形如 s_1a2b3c4d")
@@ -21,16 +20,29 @@ def _obj(fields, name):
 
 
 RECORD_MAX_TURNS = 12
-COMMIT_TURN = _obj(
-    dict(
-        session_write_fields(),
-        turns=F(
-            S.List(S.Obj(commit_fields(), name="回合"), 1, RECORD_MAX_TURNS),
-            desc="这次记录的回合，按发生的顺序；引擎逐项应用，全有或全无",
+
+
+def _build_commit_turn():
+    from ..domain.turn import commit_fields
+
+    return _obj(
+        dict(
+            session_write_fields(),
+            turns=F(
+                S.List(S.Obj(commit_fields(), name="回合"), 1, RECORD_MAX_TURNS),
+                desc="这次记录的回合，按发生的顺序；引擎逐项应用，全有或全无",
+            ),
         ),
-    ),
-    "commit-turn",
-)
+        "commit-turn",
+    )
+
+
+def __getattr__(name):
+    if name == "COMMIT_TURN":
+        spec = _build_commit_turn()
+        globals()["COMMIT_TURN"] = spec
+        return spec
+    raise AttributeError("module %r has no attribute %r" % (__name__, name))
 
 LOCKS = S.Obj(
     {key: F(S.Nullable(S.Id()), required=False, default=None) for key in ("world_id", "location_id", "combo_id", "activity_id", "pressure_id", "hook_id", "identity_id")},

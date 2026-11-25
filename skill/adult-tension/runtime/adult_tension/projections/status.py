@@ -110,7 +110,7 @@ def lines(state, content):
         exits = [SS.location(world, e)["name"] for e in location["exits"] if SS.location(world, e)]
         if exits:
             options.append("也可以去%s" % "、".join(exits))
-    out.append("现在可以做什么：%s" % "；".join(options))
+    out.append("现在可以做什么：%s" % ("；".join(options) if options else "直接打字说出你的动作或台词"))
     return out
 
 
@@ -179,9 +179,9 @@ def debug_view(state, content, save, recent, storage=None):
     """
     from ..domain import state_check
 
-    brief = CX.brief(state, content, save)
-    full = CX.full(state, content, save)
     complete = FA.full_state(state)
+    brief = CX.brief(complete, content, save)
+    full = CX.full(complete, content, save)
     facts = list(complete["facts"].values())
     facts.sort(key=FA.order)
     return {

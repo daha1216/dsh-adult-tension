@@ -67,14 +67,7 @@ def required_beats(state):
     return majors[:MAX_REQUIRED_BEATS]
 
 
-def schedule_location(char, minute):
-    for slot in char.get("schedule") or []:
-        start, end = slot["from"], slot["to"]
-        if start <= end and start <= minute <= end:
-            return slot["location_id"]
-        if start > end and (minute >= start or minute <= end):
-            return slot["location_id"]
-    return None
+schedule_location = CL.schedule_location
 
 
 def offscreen(state, report, turn):
@@ -104,15 +97,15 @@ def _npc_knowers(state, fact):
     return [cid for cid in people if cid != state["player_id"]]
 
 
-def _neighbors(state, cid):
-    out = set()
+def _neighbor_map(state):
+    player = state["player_id"]
+    adj = {}
     for edge in state["relationships"].values():
-        if edge["from"] == cid:
-            out.add(edge["to"])
-        elif edge["to"] == cid:
-            out.add(edge["from"])
-    out.discard(state["player_id"])
-    return sorted(out)
+        a, b = edge["from"], edge["to"]
+        if a != player and b != player:
+            adj.setdefault(a, set()).add(b)
+            adj.setdefault(b, set()).add(a)
+    return {cid: sorted(peers) for cid, peers in adj.items()}
 
 
 def propagation(state, report, turn):
@@ -127,7 +120,8 @@ def propagation(state, report, turn):
     elif minutes >= 16:
         hops = 1
     else:
-        hops = 0
+        return {"frozen": False, "hops": 0, "spread": []}
+    neighbors = _neighbor_map(state)
     spread = []
     for hop in range(hops):
         for fact in FA.of(state).spreading():
@@ -137,7 +131,7 @@ def propagation(state, report, turn):
                 {
                     neighbor
                     for knower in knowers
-                    for neighbor in _neighbors(state, knower)
+                    for neighbor in neighbors.get(knower, ())
                     if neighbor not in fact["known_by"] and neighbor not in fact["believed_by"]
                 }
             )
@@ -189,12 +183,18 @@ def _eligible(state, twist, world=None):
     return True
 
 
-def render_twist(state, twist, world=None):
+def _twist_scopes(state, world=None):
     scopes = {cid: binding(char) for cid, char in state["characters"].items()}
     if world:
         for sid, preview in opening.standby_previews(state, world).items():
             scopes.setdefault(sid, binding(preview))
     scopes["player"] = binding(state["characters"][state["player_id"]])
+    return scopes
+
+
+def render_twist(state, twist, world=None, scopes=None):
+    if scopes is None:
+        scopes = _twist_scopes(state, world)
     return {"id": twist["id"], "category": twist["category"], "text": render(twist["text"], scopes)}
 
 
@@ -211,7 +211,10 @@ def twist_candidates(state, world, purpose, *coords):
         categories.add(twist["category"])
         if len(chosen) == 3:
             break
-    return [render_twist(state, t, world) for t in chosen]
+    if not chosen:
+        return []
+    scopes = _twist_scopes(state, world)
+    return [render_twist(state, t, world, scopes=scopes) for t in chosen]
 
 
 def eligible_twist(state, world, twist_id):
@@ -320,9 +323,5 @@ def requested_twists(state, world):
         return [], "今天已经接受过一个转折；同一游戏日最多一次"
     offer = twist_candidates(state, world, "twist.want", state["turn"], day)
     if not offer:
-        return [], "世界包里没有此刻可用的转折；可以请玩家口述一个（要有类别）"
+        return [], "眼下没有现成可用的转折候选；可以请玩家直接说出想要的转折方向"
     return offer, None
-
-
-def label(state, world):
-    return CL.label(state["clock"], world.get("clock_style", "hm"))

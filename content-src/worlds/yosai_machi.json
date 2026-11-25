@@ -195,12 +195,12 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}馆主",
           "gender": "any"
         },
         {
-          "pattern": "{family}先生",
-          "gender": "male"
+          "pattern": "{given}",
+          "gender": "any"
         }
       ],
       "age_range": [
@@ -225,11 +225,11 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{family}",
+          "pattern": "{family}主厨",
           "gender": "any"
         },
         {
-          "pattern": "阿{given}",
+          "pattern": "{given}",
           "gender": "any"
         }
       ],
@@ -563,19 +563,19 @@
       },
       "schedule": [
         {
+          "from": 0,
+          "to": 479,
+          "location_id": "fitting_room"
+        },
+        {
           "from": 480,
           "to": 1140,
           "location_id": "tailor_shop"
         },
         {
           "from": 1141,
-          "to": 1260,
+          "to": 1439,
           "location_id": "fitting_room"
-        },
-        {
-          "from": 900,
-          "to": 960,
-          "location_id": "harbor"
         }
       ],
       "situation": {
@@ -686,19 +686,19 @@
       },
       "schedule": [
         {
+          "from": 0,
+          "to": 539,
+          "location_id": "machi_street"
+        },
+        {
           "from": 540,
           "to": 1260,
           "location_id": "translation_office"
         },
         {
           "from": 1261,
-          "to": 1320,
+          "to": 1439,
           "location_id": "machi_street"
-        },
-        {
-          "from": 720,
-          "to": 780,
-          "location_id": "tailor_shop"
         }
       ],
       "situation": {
@@ -810,6 +810,11 @@
       },
       "schedule": [
         {
+          "from": 0,
+          "to": 419,
+          "location_id": "machi_street"
+        },
+        {
           "from": 420,
           "to": 1080,
           "location_id": "gofuku_shop"
@@ -821,7 +826,7 @@
         },
         {
           "from": 1201,
-          "to": 1320,
+          "to": 1439,
           "location_id": "machi_street"
         }
       ],
@@ -933,6 +938,11 @@
       },
       "schedule": [
         {
+          "from": 0,
+          "to": 599,
+          "location_id": "harbor"
+        },
+        {
           "from": 600,
           "to": 900,
           "location_id": "translation_office"
@@ -944,7 +954,7 @@
         },
         {
           "from": 1081,
-          "to": 1260,
+          "to": 1439,
           "location_id": "harbor"
         }
       ],
@@ -1006,7 +1016,7 @@
           "low": "用英文客套一句，说“生意好说”",
           "mid": "从怀里掏出一张订单，只给对方看一角",
           "high": "仍挂着商馆番头的客套笑脸拿英文敷衍，捏着通行札的拇指关节却白得像纸。",
-          "breaking": "嘴上还念着生意好说别动手动脚，关门落锁后却彻底卸了劲靠在砖墙上，喉结轻滚默认你翻检袖底密账。"
+          "breaking": "嘴上还念着生意好说别动手动脚，关门落锁后却彻底卸了劲靠在砖墙上，轻咽一口气默认你翻检袖底密账。"
         },
         "withdrawal": "关门以后一个人站在关门外，看居留地的灯一盏一盏熄灭",
         "relationship_stance": "两边都客气，两边都不信",
@@ -1057,6 +1067,11 @@
       },
       "schedule": [
         {
+          "from": 0,
+          "to": 539,
+          "location_id": "harbor"
+        },
+        {
           "from": 540,
           "to": 1020,
           "location_id": "settlement_gate"
@@ -1068,7 +1083,7 @@
         },
         {
           "from": 1141,
-          "to": 1260,
+          "to": 1439,
           "location_id": "harbor"
         }
       ],
@@ -1181,6 +1196,11 @@
       },
       "schedule": [
         {
+          "from": 0,
+          "to": 599,
+          "location_id": "gofuku_shop"
+        },
+        {
           "from": 600,
           "to": 840,
           "location_id": "machi_street"
@@ -1192,7 +1212,7 @@
         },
         {
           "from": 961,
-          "to": 1080,
+          "to": 1439,
           "location_id": "gofuku_shop"
         }
       ],
@@ -2407,7 +2427,8 @@
   "content_tags": [
     "romance_light",
     "intimate",
-    "explicit"
+    "explicit",
+    "substance"
   ],
   "status": "released",
   "notes": "明治十四年（1881）横滨洋裁町。2026-11-23 v2.5微创精修（--mode 3筹码导入型）：清除旧八股套话，全员pressure_responses重写体面溃防层次，精选银制镂空春宫球/丝绒蒙眼带/小牛皮腕扣/舶来催情香膏（配鲸骨紧身束腰语境，零现代电子词）打通resources+exits+twists，补全全部hooks.location_ids并激活全员standby_cast。"

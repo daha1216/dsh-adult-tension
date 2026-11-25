@@ -1184,7 +1184,7 @@ P5 第 10–14 次（2026-09-29 21:23 至 2026-09-30 01:58，候选 `87044f0b…
 
 ## 默认值调整
 
-（暂无）
+- **完整上下文体积上限（2026-11-26，v2.5）**：`FULL_LIMIT` 由 `20 KB` 上调至 `32 KB`（`32,768` 字节，简要上下文 `6 KB` 不变）。理由：全库 210 个可编辑世界包升级为 v2.5 饱满体量（单包 `9,795–11,500` 字，新增 `standby_cast` 待命角色预览与 `world.scene_ideas` 场景切入灵感），上调至 `32 KB` 可避免常规多主卡场景在开局与中局过早触发卡片降级裁剪；`SKILL.md`、`DATA_CONTRACTS.md`、`ACCEPTANCE.md`、`DESIGN_DECISIONS.md` 与 `FullContextBudgetTest` 已同步对齐（详见 `work/v2-unrestricted/HANDOFF_SKILL_REMEDIATION_COMPLETE.md`）。
 
 ## 缺陷记录
 

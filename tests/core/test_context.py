@@ -316,6 +316,25 @@ class FullContextBudgetTest(unittest.TestCase):
             self.assertEqual(full["preferences"]["npc_gender_preference"], "mixed")
             self.assertLessEqual(CX.size_of(full), CX.FULL_LIMIT)
 
+    def test_present_supporting_npc_projects_without_stance_key_error(self):
+        with app() as ctx:
+            game = Game(ctx, "harbor_night_shift", "combo_tower_night", "daily", 3)
+            game.introduce(1, "supporting", True, 30, salt=11)
+            info = game.state()
+            state, content = info["state"], info["content"]
+            brief = CX.brief(state, content)
+            full = CX.full(state, content)
+            sup_brief = next(n for n in brief["present_npcs"] if n["id"] == "guest_supporting_11_0")
+            self.assertIn("goal", sup_brief)
+            self.assertNotIn("stance", sup_brief)
+            sup_full = next(c for c in full["characters"] if c["id"] == "guest_supporting_11_0")
+            self.assertEqual(sup_full["tier"], "supporting")
+            self.assertNotIn("relationship_stance", sup_full["decision"])
+            self.assertEqual(full["size_bytes"], CX.size_of({k: v for k, v in full.items() if k != "size_bytes"}))
+            for level in ("brief", "detail", "debug"):
+                out = service.status(ctx, {"session_id": game.sid, "level": level})
+                self.assertEqual(out["level"], level)
+
     def test_dead_drop_goal_removed_and_brief_fit_trims_lists_cleanly(self):
         self.assertFalse(hasattr(CX, "_drop_goal"))
         sample = {

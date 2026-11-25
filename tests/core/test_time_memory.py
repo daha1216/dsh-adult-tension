@@ -646,6 +646,47 @@ class SettlementAndSimulationP2Test(unittest.TestCase):
         spread_other = [c for c in calls if len(c) >= 5 and c[1] == "spread" and c[4] == other]
         self.assertEqual(len(spread_other), 1)
 
+    def test_m8_m2_m11_upgrade_chapter_count_twist_note_and_single_standby_preview(self):
+        from unittest import mock
+
+        from adult_tension.domain import opening, upgrade
+        from adult_tension.jsonio import copy
+
+        state, _ = new_state("pressure", seed=11)
+        # M8: v1 state after prologue merge preserves max chapter index
+        v1 = copy(state)
+        v1["schema_version"] = 1
+        v1["turn"] = 241
+        v1["memory"]["prologue"] = "合并前五章的前情。"
+        v1["memory"]["chapters"] = [{"index": i, "from_turn": (i - 1) * 20 + 1, "to_turn": i * 20, "day": 1, "summary": "章"} for i in range(6, 12)]
+        v1["counters"]["last_chapter_turn"] = 220
+        del v1["counters"]["chapter_count"]
+        del v1["counters"]["event_keys"]
+        del v1["requests"]["prologue"]
+        upgrade.upgrade(v1)
+        self.assertEqual(v1["counters"]["chapter_count"], 11)
+        # Empty chapters with last_chapter_turn > 1 keeps chapter_start > 1
+        v1_empty = copy(state)
+        v1_empty["schema_version"] = 1
+        v1_empty["memory"]["chapters"] = []
+        v1_empty["counters"]["last_chapter_turn"] = 40
+        del v1_empty["counters"]["chapter_count"]
+        upgrade.upgrade(v1_empty)
+        self.assertEqual(v1_empty["counters"]["chapter_count"], 1)
+        self.assertEqual(T.chapter_start(v1_empty), 41)
+        # M2: empty twist pool note avoids dev terms
+        empty_world = dict(content()["world"], twists=[])
+        cands, note = simulation.requested_twists(state, empty_world)
+        self.assertEqual(cands, [])
+        self.assertNotIn("世界包", note)
+        self.assertNotIn("要有类别", note)
+        # M11: twist_candidates calls standby_previews at most once
+        self.assertFalse(hasattr(simulation, "label"))
+        with mock.patch("adult_tension.domain.simulation.opening.standby_previews", wraps=opening.standby_previews) as spy_sb:
+            got = simulation.twist_candidates(state, content()["world"], "twist.want", 1, 1)
+            self.assertGreaterEqual(len(got), 2)
+            self.assertEqual(spy_sb.call_count, 1)
+
 
 if __name__ == "__main__":
     unittest.main()

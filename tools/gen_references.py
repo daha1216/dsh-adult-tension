@@ -16,10 +16,48 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _runtime  # noqa: E402
 
 GENERATED_NOTE = "<!-- 本文件由 tools/gen_references.py 生成，不要手改。 -->\n\n"
+TYPE_ALIASES = (
+    ("字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}", "`ID`"),
+    ("字符串，≤40 字，会话 ID，形如 s_1a2b3c4d", "`SessionId`"),
+    ("字符串，≤64 字，8–64 位 [A-Za-z0-9_-]；直接用上一次返回的 next_request_id", "`RequestId`"),
+)
+TYPE_LEGEND_COMMANDS = (
+    "- 字段类型简写：`ID` = ASCII 小写短标识 `[a-z0-9_]{1,40}`（≤40 字）；"
+    "`SessionId` = 会话 ID（形如 `s_1a2b3c4d`，≤40 字）；"
+    "`RequestId` = 8–64 位 `[A-Za-z0-9_-]`（直接用上一次返回的 `next_request_id`）。\n"
+)
+TYPE_LEGEND_ID = "字段类型简写：`ID` = ASCII 小写短标识 `[a-z0-9_]{1,40}`（≤40 字）。\n\n"
 
 
 def _escape(text):
     return str(text).replace("|", "\\|").replace("\n", " ")
+
+
+def _compact_type(text):
+    out = _escape(text)
+    for verbose, short in TYPE_ALIASES:
+        out = out.replace(verbose, short)
+    return out
+
+
+def _op_summary(desc):
+    """Concise 1-line summary for the operations overview table; full detail stays under ## `<op>`."""
+    depth = 0
+    cut = len(desc)
+    for idx, ch in enumerate(desc):
+        if ch in "（(":
+            depth += 1
+        elif ch in "）)" and depth > 0:
+            depth -= 1
+        elif depth == 0 and ch in "。；":
+            cut = idx
+            break
+    head = desc[:cut].strip()
+    if head.startswith("NPC 对玩家尝试的回应："):
+        return "NPC 对玩家尝试的五档回应（refuse / negotiate / partial / surface / genuine）"
+    if head.startswith("新角色登场："):
+        return "世界外新角色登场（明示成年、取自名字池、按层级补齐卡片；待命池角色请用 enter_scene）"
+    return _escape(head)
 
 
 def _default(value):
@@ -45,7 +83,7 @@ def field_table(obj_spec, nested=None):
             need = "否，默认 `%s`" % _escape(_default(field.default))
         else:
             need = "否"
-        lines.append("| `%s` | %s | %s | %s |\n" % (name, _escape(spec.doc()), need, _escape(field.desc or "")))
+        lines.append("| `%s` | %s | %s | %s |\n" % (name, _compact_type(spec.doc()), need, _escape(field.desc or "")))
     return "".join(lines), nested
 
 
@@ -77,7 +115,8 @@ def render_commands():
     lines.append("- 全局参数：`--json`（输出 JSON，默认行为，保留兼容）、`--pretty`（缩进输出）、`--debug`、`--input-file PATH`、`--data-dir PATH`。\n")
     lines.append("- 写操作都带 `request_id`；会话内的写操作还带 `session_id` 与 `expected_revision`。同一 `request_id` + 同一输入重放时返回原响应并标记 `replayed: true`。\n")
     lines.append("- 开局、读档、导入（`new-game`、`load-slot`、`import-save`）与带 `\"depth\": \"full\"` 的 `get-context` 另外返回 `commit_template`：会话号已填好的一次记录，`turns` 内含单回合骨架（在场的人和最常用的操作），每个攒下的回合照它写一项；尖括号是要写的内容，`a|b` 表示选一个，用不上的操作删掉。带 `preview_time` 的 `get-context` 另外返回 `skip_template`：快进这一回合的记录，`advance_time` 与每条必需的 `offscreen_beat` 已排好（攒下的回合要先记录，再预览）。\n")
-    lines.append("- 开发开关（环境变量，由测试环境设置，玩家不需要）：`ADULT_TENSION_HOME` 指定数据目录；`ADULT_TENSION_INCLUDE_DRAFTS=1` 让未发布的世界参与开局与世界列表；`ADULT_TENSION_TRACE=<文件>` 把每次调用（参数、输入、信封、耗时）追加到该文件，供端到端评测采集。\n\n")
+    lines.append("- 开发开关（环境变量，由测试环境设置，玩家不需要）：`ADULT_TENSION_HOME` 指定数据目录；`ADULT_TENSION_INCLUDE_DRAFTS=1` 让未发布的世界参与开局与世界列表；`ADULT_TENSION_TRACE=<文件>` 把每次调用（参数、输入、信封、耗时）追加到该文件，供端到端评测采集。\n")
+    lines.append(TYPE_LEGEND_COMMANDS + "\n")
     lines.append("## 命令一览\n\n| 命令 | 类别 | 输入 | 作用 | 专用参数 |\n|---|---|---|---|---|\n")
     input_names = {"none": "无", "optional": "可选", "required": "必填"}
     for name in sorted(commands.COMMANDS):
@@ -91,8 +130,10 @@ def render_commands():
             continue
         lines.append("\n### `%s`\n\n" % name)
         if name == "commit-turn":
-            lines.append("每个回合的字段与操作列表见 `references/operations.md`。\n\n")
-        lines.append(render_spec(getattr(specs, cmd.spec)))
+            lines.append("每个回合（`turns[]`）的字段与操作列表见 `references/operations.md`。\n\n")
+            lines.append(render_spec(getattr(specs, cmd.spec), skip_nested=("turns[]",)))
+        else:
+            lines.append(render_spec(getattr(specs, cmd.spec)))
         if name == "commit-turn":
             lines.append(
                 "\n**一次记录**：一次 `commit-turn` 记录 `turns` 里的回合（1–%d 项，按发生的顺序）。"
@@ -119,13 +160,14 @@ def render_operations():
     lines = [GENERATED_NOTE, "# 操作参考\n\n"]
     lines.append("`commit-turn` 的 `turns[]` 每项里都有一个 `operations` 操作数组。每回合的操作按顺序应用，后面的操作看得到前面操作的效果；任何一项不合法，整次提交被拒绝、状态不变，错误列出全部问题及其 JSON 路径。NPC 拒绝玩家（`npc_response: refuse`）是合法的叙事结果，不是错误。\n\n")
     lines.append("单个回合的 `operations` 里没有 `advance_time` 时，该回合时钟默认推进 %d 分钟。单次推进上限 %d 天。\n\n" % (structure.DEFAULT_ADVANCE_MINUTES, structure.MAX_ADVANCE_MINUTES // structure.MINUTES_PER_DAY))
+    lines.append(TYPE_LEGEND_ID)
     lines.append("## 每个回合的字段\n\n`commit-turn` 的 `turns` 里每一项：\n\n")
     from adult_tension.domain.turn import commit_fields
 
     lines.append(render_spec(S.Obj(commit_fields()), 2))
-    lines.append("\n## 操作一览\n\n| op | 作用 |\n|---|---|\n")
+    lines.append("\n## 操作一览\n\n完整约束与字段见下文对应小节。\n\n| op | 作用 |\n|---|---|\n")
     for name in ops.SPECS:
-        lines.append("| `%s` | %s |\n" % (name, _escape(ops.DESCRIPTIONS[name])))
+        lines.append("| `%s` | %s |\n" % (name, _op_summary(ops.DESCRIPTIONS[name])))
     shared_card_nested = ("identity", "decision", "intimacy", "voices", "situation", "schedule[]")
     for name, spec in ops.SPECS.items():
         lines.append("\n## `%s`\n\n%s\n\n" % (name, ops.DESCRIPTIONS[name]))
@@ -167,13 +209,20 @@ def render_worlds():
             continue
         lines.append("| %s | `%s` | %d |\n" % (tag["label"], tag["id"], sum(tag["id"] in w["content_tags"] for w in released)))
     lines.append("\n")
-    lines.append("| 世界 | ID | 一句话 | 模式 | 状态 |\n|---|---|---|---|---|\n")
     modes = {"daily": "日常", "pressure": "压力"}
-    for world in index["worlds"]:
-        lines.append(
-            "| %s | `%s` | %s | %s | %s |\n"
-            % (world["title"], world["id"], _escape(one_line(world["summary"])), "、".join(modes[m] for m in world["modes"]), world["status"])
-        )
+    worlds = index["worlds"]
+    if worlds and all(w["status"] == "released" and list(w["modes"]) == ["daily", "pressure"] for w in worlds):
+        lines.append("下表共 %d 个已发布（`released`）世界，均支持**日常**与**压力**两种模式。\n\n" % len(worlds))
+        lines.append("| 世界 | ID | 一句话 |\n|---|---|---|\n")
+        for world in worlds:
+            lines.append("| %s | `%s` | %s |\n" % (world["title"], world["id"], _escape(one_line(world["summary"]))))
+    else:
+        lines.append("| 世界 | ID | 一句话 | 模式 | 状态 |\n|---|---|---|---|---|\n")
+        for world in worlds:
+            lines.append(
+                "| %s | `%s` | %s | %s | %s |\n"
+                % (world["title"], world["id"], _escape(one_line(world["summary"])), "、".join(modes[m] for m in world["modes"]), world["status"])
+            )
     return "".join(lines)
 
 
@@ -258,6 +307,7 @@ def render_custom_world():
     tags = [t for t in ContentStore(os.path.join(_runtime.SKILL_ROOT, "content")).tags()["tags"] if t.get("kind") != "custom"]
     lines.append("- **标签**：`content_tags` 与各处 `tags` 只能用内容标签表里的 ID：%s（`custom` 仅用于玩家边界，不用于世界筛选与内容标签）。\n\n" % "、".join("`%s` %s" % (t["id"], t["label"]) for t in tags))
     lines.append("## 字段\n\n")
+    lines.append(TYPE_LEGEND_ID)
     lines.append(render_spec(worldpack.WORLD, 2))
     lines.append("\n## 示例\n\n一个能通过校验、两种模式都能开局的最小世界：\n\n```json\n%s\n```\n" % example)
     return "".join(lines)

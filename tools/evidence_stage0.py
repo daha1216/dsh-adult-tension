@@ -39,22 +39,25 @@ def save(name, argv, code, envelope):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    env = {k: v for k, v in os.environ.items() if not k.startswith("ADULT_TENSION")}
-    tmp = tempfile.mkdtemp(prefix="at-evidence-")
-    fresh = os.path.join(tmp, "data")
-    argv = [sys.executable, _runtime.ENTRY_SCRIPT, "doctor", "--json", "--data-dir", fresh]
-    save("doctor-fresh.json", argv, *call(argv, env))
-    save("doctor-initialized.json", argv, *call(argv, env))
-    with unwritable_dir(tmp) as locked:
-        target = os.path.join(locked, "data")
-        argv = [sys.executable, _runtime.ENTRY_SCRIPT, "doctor", "--json", "--data-dir", target]
-        save("doctor-unwritable.json", argv, *call(argv, env))
-    fake = (
-        "import sys, runpy; sys.version_info = (3, 9, 18, 'final', 0); "
-        "sys.argv = [%r, 'doctor', '--json']; runpy.run_path(%r, run_name='__main__')" % (_runtime.ENTRY_SCRIPT, _runtime.ENTRY_SCRIPT)
-    )
-    argv = [sys.executable, "-c", fake]
-    save("old-python.json", argv, *call(argv, env))
+    env = _runtime.clean_tool_env()
+    with tempfile.TemporaryDirectory(prefix="at-evidence-", ignore_cleanup_errors=True) as tmp:
+        fresh = os.path.join(tmp, "data")
+        argv = [sys.executable, _runtime.ENTRY_SCRIPT, "doctor", "--json", "--data-dir", fresh]
+        code, envelope, _proc = _runtime.run_entry(["doctor"], fresh, env=env)
+        save("doctor-fresh.json", argv, code, envelope)
+        code, envelope, _proc = _runtime.run_entry(["doctor"], fresh, env=env)
+        save("doctor-initialized.json", argv, code, envelope)
+        with unwritable_dir(tmp) as locked:
+            target = os.path.join(locked, "data")
+            argv = [sys.executable, _runtime.ENTRY_SCRIPT, "doctor", "--json", "--data-dir", target]
+            code, envelope, _proc = _runtime.run_entry(["doctor"], target, env=env)
+            save("doctor-unwritable.json", argv, code, envelope)
+        fake = (
+            "import sys, runpy; sys.version_info = (3, 9, 18, 'final', 0); "
+            "sys.argv = [%r, 'doctor', '--json']; runpy.run_path(%r, run_name='__main__')" % (_runtime.ENTRY_SCRIPT, _runtime.ENTRY_SCRIPT)
+        )
+        argv = [sys.executable, "-c", fake]
+        save("old-python.json", argv, *call(argv, env))
 
 
 if __name__ == "__main__":

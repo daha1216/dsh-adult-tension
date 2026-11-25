@@ -59,8 +59,10 @@ def _npc_brief(state, world, cid):
         entry["conditions"] = [c["text"] for c in char["status"]["conditions"]]
     decision = char.get("decision")
     if decision:
-        entry["goal"] = decision["current_goal"]
-        entry["stance"] = decision["relationship_stance"]
+        if "current_goal" in decision:
+            entry["goal"] = decision["current_goal"]
+        if "relationship_stance" in decision:
+            entry["stance"] = decision["relationship_stance"]
     if char["tier"] == "background":
         entry["line"] = char.get("line")
     return entry
@@ -122,7 +124,7 @@ def _voice(state, cid):
     return value or "surface"
 
 
-def brief(state, content, save=None):
+def _header(state, content, save=None, depth="brief"):
     world = content["world"]
     player = state["player_id"]
     pchar = state["characters"][player]
@@ -135,7 +137,7 @@ def brief(state, content, save=None):
         if cid not in scene["present"] and char["status"]["location_id"] == scene["location_id"]
     ][: LIMITS["nearby"]]
     context = {
-        "depth": "brief",
+        "depth": depth,
         "session_id": state["session_id"],
         "revision": state["revision"],
         "turn": state["turn"],
@@ -157,8 +159,6 @@ def brief(state, content, save=None):
         },
         "present_npcs": present_npcs,
         "nearby": nearby,
-        "due_soon": _events(state, world, LIMITS["due_soon"]),
-        "known_facts": player_facts(state, LIMITS["known_facts"]),
         "recent": [t["summary"] for t in state["memory"]["turns"][-LIMITS["recent"] :]],
         "last_quotes": list(state["memory"]["last_quotes"]),
         "open_action": state["memory"]["open_action"],
@@ -166,7 +166,6 @@ def brief(state, content, save=None):
         "safety": {
             "paused": state["safety"]["paused"],
             "boundaries": [b["text"] for b in state["safety"]["boundaries"]],
-            "leverage": _leverage(state, only_present=True),
         },
         "preferences": {
             "inner_view": state["preferences"]["inner_view"],
@@ -182,6 +181,15 @@ def brief(state, content, save=None):
     for key in ("pace", "explicitness"):
         if state["preferences"][key] != "standard":
             context["preferences"][key] = state["preferences"][key]
+    return context
+
+
+def brief(state, content, save=None):
+    world = content["world"]
+    context = _header(state, content, save, "brief")
+    context["due_soon"] = _events(state, world, LIMITS["due_soon"])
+    context["known_facts"] = player_facts(state, LIMITS["known_facts"])
+    context["safety"]["leverage"] = _leverage(state, only_present=True)
     chapters = state["memory"]["chapters"]
     if chapters and len(context["recent"]) < LIMITS["recent"]:
         # Right after a chapter closes its turns are archived; the chapter
@@ -232,8 +240,7 @@ def _card(state, world, char):
 
 def full(state, content, save=None):
     world = content["world"]
-    context = brief(state, content, save)
-    context["depth"] = "full"
+    context = _header(state, content, save, "full")
     player = state["player_id"]
     pchar = state["characters"][player]
     context["player"].update(
@@ -305,18 +312,14 @@ def full(state, content, save=None):
         for key, e in sorted(state["relationships"].items())
         if e["from"] in relevant and e["to"] in relevant
     ]
-    # The brief lists are the head of these full lists; carrying both would
-    # only repeat them.
-    context.pop("known_facts", None)
-    context.pop("due_soon", None)
-    context["safety"].pop("leverage", None)
+    # The brief lists (known_facts, due_soon, safety.leverage, last_chapter)
+    # are never added to _header, so full builds only the full lists once.
     context["player_facts"] = player_facts(state, 30)
     context["events"] = _events(state, world)
     context["leverage_all"] = _leverage(state)
     if state.get("pressure"):
         context["pressure"] = state["pressure"]
     context["chapters"] = [c["summary"] for c in state["memory"]["chapters"][-3:]]
-    context.pop("last_chapter", None)
     if state["memory"].get("prologue"):
         context["prologue"] = state["memory"]["prologue"]
     if state["requests"].get("prologue"):

@@ -6,6 +6,8 @@
 
 单个回合的 `operations` 里没有 `advance_time` 时，该回合时钟默认推进 3 分钟。单次推进上限 30 天。
 
+字段类型简写：`ID` = ASCII 小写短标识 `[a-z0-9_]{1,40}`（≤40 字）。
+
 ## 每个回合的字段
 
 `commit-turn` 的 `turns` 里每一项：
@@ -14,11 +16,11 @@
 |---|---|---|---|
 | `action_mode` | 枚举：`result` / `attempt` / `rewrite` / `continue` / `wait` | 是 | result / attempt / rewrite（“其实……”）/ continue / wait |
 | `player_input` | 字符串，≤2000 字 | 是 | 玩家这一句的原话（继续时可为空字符串） |
-| `player_authorized` | 布尔 | 否，默认 `false` | 玩家本人的话授权了玩家角色的移动、承诺、交易、同意、转折或设定修改时为 true |
-| `acts_on` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–8 项） 或 null | 否，默认 `null` | 玩家行动作用到的 NPC（身体、意志、财物）；attempt 不作用于任何 NPC 时写 [] |
+| `player_authorized` | 布尔 | 否，默认 `false` | 玩家本人的话授权了玩家角色的移动、承诺、交易、同意、亲密参与、持/放把柄、转折或设定修改时为 true |
+| `acts_on` | 数组（`ID`，0–8 项） 或 null | 否，默认 `null` | 玩家行动作用到的 NPC（身体、意志、财物）；attempt 不作用于任何 NPC 时写 [] |
 | `operations` | 数组（操作对象（按 `op` 区分），0–40 项） | 是 | 操作列表（可以为空数组） |
-| `content_tags` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–12 项） | 是 | 本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags |
-| `intimate_participants` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–6 项） | 否，默认 `[]` | content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家时须填入 player） |
+| `content_tags` | 数组（`ID`，0–12 项） | 是 | 本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags |
+| `intimate_participants` | 数组（`ID`，0–6 项） | 否，默认 `[]` | content_tags 含 intimate 或 explicit 时必填：亲密参与者（含玩家时须填入 player） |
 | `summary` | 字符串，≤120 字 | 是 | 本回合客观摘要（第三人称，≤120 字） |
 | `open_action` | 字符串，≤80 字 | 是 | 回合停在哪里、谁在等谁，≤80 字 |
 | `quotes` | 数组（字符串，≤80 字，0–3 项） | 否，默认 `[]` | ≤3 条对后续有意义的原话，每条 ≤80 字 |
@@ -28,34 +30,36 @@
 
 ## 操作一览
 
+完整约束与字段见下文对应小节。
+
 | op | 作用 |
 |---|---|
-| `advance_time` | 推进游戏时钟：minutes / until / days 三选一；触发到期事件与状态到期结算。没有此操作时时钟默认推进 3 分钟 |
-| `move` | 角色移动到地点。玩家移动需要 result/attempt 模式并带 player_authorized；玩家换地点即换场景 |
+| `advance_time` | 推进游戏时钟：minutes / until / days 三选一 |
+| `move` | 角色移动到地点 |
 | `enter_scene` | 角色登场，加入当前场景（已在世界 standby_cast 中的待命角色直接 enter_scene 即可自动激活完整人物卡，勿误调 introduce_character） |
-| `exit_scene` | 角色离场；可写去向地点。玩家角色用 move |
-| `npc_response` | NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限配合（半推半就、身体失守或受制达成实质妥协，可推进亲近进程） / surface 表面配合（口头敷衍虚与委蛇，或口嫌体正直嘴硬未真阻拦且不推进亲近进程；必须写 true_intent） / genuine 真诚配合 |
-| `npc_action` | NPC 自主行动。significant: true 的重大行动（主动接近、揭发、交易、离开、表白、挑衅等）受冷却限制；依据事实必须在其信息集中 |
-| `npc_state` | 更新 NPC 的情绪与状况（醉意、睡眠、受伤、外出等）；同 kind 状况会覆盖旧记录；minutes 表示多久后自动消退 |
-| `add_fact` | 记录一条事实。public 在场者自动知道；private 只有 known_by；inner 是内心，只属于一个 NPC 且永不传播。误信用 truth: false + believed_by。正文里新写出、之后要继承的细节都要用它记下 |
-| `relationship` | 有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段或后退（阶段变化会自动同步到双向关系边）。涉及玩家时，前进需同回合玩家行动（result/attempt）+ 对方 partial/genuine 回应（半推半就、身体失守或受制达成实质妥协应记为 partial）；两名 NPC 之间前进需双方本回合均有行动或回应。原因必填 |
-| `event_create` | 创建事件（约定、截止、风声、机会、伏笔、概率事件）。due 与 in_minutes 二选一且必须晚于现在；chance 必须带 probability，到期由引擎掷骰；涉及玩家的承诺需要 player_authorized；dedupe_key 与未结束事件不能重复 |
-| `event_resolve` | 在到期前结束事件：约定、截止、机会用 fulfilled（兑现）；伏笔、风声用 surfaced（提前浮出）。概率事件只能由引擎到期掷骰 |
+| `exit_scene` | 角色离场 |
+| `npc_response` | NPC 对玩家尝试的五档回应（refuse / negotiate / partial / surface / genuine） |
+| `npc_action` | NPC 自主行动 |
+| `npc_state` | 更新 NPC 的情绪与状况（醉意、睡眠、受伤、外出等） |
+| `add_fact` | 记录一条事实 |
+| `relationship` | 有向关系变化（from 对 to）：信任 -5..5（一个回合净变化 ≤2）、张力 0..5、亲近进程前进一个阶段或后退（阶段变化会自动同步到双向关系边） |
+| `event_create` | 创建事件（约定、截止、风声、机会、伏笔、概率事件） |
+| `event_resolve` | 在到期前结束事件：约定、截止、机会用 fulfilled（兑现） |
 | `event_cancel` | 因剧情取消未结束的事件（outcome: cancelled_by_story） |
-| `roll` | 即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能出现 roll、advance_time、introduce_character、promote_character、offscreen_beat、twist_accept）。结果以返回的 applied 为准 |
-| `player_update` | 玩家角色的姓名、称谓、背景、资源与风险。只能在 result 或 rewrite（“其实……”）模式、并带 player_authorized |
-| `reveal_fact` | 把一条事实从知情人告诉别人。只能沿已有的关系边进行，当面告知时双方都要在场；内心事实永远不能传播。告诉某人真相时，若对方正误信同键的假事实，引擎会同步修正其信息集 |
-| `spread_rumor` | 传出一条走样的传闻：生成新的假事实（来源为传闻），原事实不变。不经渠道时沿关系边、双方在场；经世界里的走样渠道时可以传到没有关系边的人 |
-| `set_voice` | 切换 NPC 的表层/里层语态。玩家要求（player_request）优先；NPC 自主切入里层（npc_self）要写触发因素：alone 独处 / drunk 醉意 / breakdown 情绪崩溃 / exposed 被戳穿；revert 切回表层 |
-| `intimacy_evidence` | 为私密倾向卡的某一项记一条证据。同一项同一方向需要至少 2 条来自不同回合的证据才会改动（界线项的放宽 remove 需要 3 条）；数值项用 increase/decrease，列表项用 add/remove，文字项用 set |
-| `identity_update` | 逐项修改身份卡（资源、限制、义务用 add/remove，单条 ≤80 字、最多 8 项；权限、暴露风险、隐藏落差用 set）。身份卡不能整体替换 |
+| `roll` | 即时概率：引擎确定性掷骰后执行 on_success 或 on_failure（分支内不能出现 roll、advance_time、introduce_character、promote_character、offscreen_beat、twist_accept） |
+| `player_update` | 玩家角色的姓名、称谓、背景、资源与风险 |
+| `reveal_fact` | 把一条事实从知情人告诉别人 |
+| `spread_rumor` | 传出一条走样的传闻：生成新的假事实（来源为传闻），原事实不变 |
+| `set_voice` | 切换 NPC 的表层/里层语态 |
+| `intimacy_evidence` | 为私密倾向卡的某一项记一条证据 |
+| `identity_update` | 逐项修改身份卡（资源、限制、义务用 add/remove，单条 ≤80 字、最多 8 项；权限、暴露风险、隐藏落差用 set） |
 | `npc_update` | 修改 NPC 的公开身份（≤30 字）、外貌、当前目标（≤80 字）、对关系的态度（仅 major，≤80 字）或处境（不含身份卡与私密倾向卡） |
-| `introduce_character` | 新角色登场：正文里第一次点名的世界外新人物都要登场，只被提起、不在场的也算（present 写 false，location_id 写其所在地点；若已在世界 standby_cast 中，直接 enter_scene 激活，不用此操作）；必须明确成年（age ≥ 18，adult_context 一句话说明成年身份），名字取自世界名字池且重要角色不同姓；按层级补齐字段（background：line；supporting：appearance、identity、decision 的 core_value 与 current_goal；major：再加完整 decision、intimacy、voices、situation）；性别要符合配对偏好，否则写 gender_reason |
-| `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段。身份卡与私密倾向卡只能在升格时创建一次，已有的不能再给；从 background 升格时按配对偏好校验性别，不符须写 gender_reason |
-| `leverage_set` | 登记把柄：一方开始拿捏另一方（把柄、债务、生计、私密控制器）时，必须在同一回合里登记。依据二选一：已有事实（持有方要知道它）或一句新事实。生效期间仍可结合处境发生博弈或亲密互动 |
+| `introduce_character` | 世界外新角色登场（明示成年、取自名字池、按层级补齐卡片；待命池角色请用 enter_scene） |
+| `promote_character` | 把背景或配角升格（只升不降，保留 ID），并补齐新层级缺少的字段 |
+| `leverage_set` | 登记把柄：一方开始拿捏另一方（把柄、债务、生计、私密控制器）时，必须在同一回合里登记 |
 | `leverage_release` | 解除把柄（底片销毁、债务结清、秘密公开或条件兑现等），原因必填 |
-| `offscreen_beat` | 离屏片段：不在场的重要角色在这段时间里做了什么。只能写上下文 requests.offscreen_beat_candidates 或时间推进要求的 NPC；因 advance_time 触发的离屏片段须排在 advance_time 之后；子操作只允许 npc_state、npc_action、move、add_fact、relationship、reveal_fact、spread_rumor、event_create、event_resolve、event_cancel、leverage_set、leverage_release，且须由该 NPC 发起或与其相关、不得牵涉玩家角色 |
-| `twist_accept` | 接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填）。玩家选定时用 result/attempt 模式并带 player_authorized；同一游戏日最多接受一次 |
+| `offscreen_beat` | 离屏片段：不在场的重要角色在这段时间里做了什么 |
+| `twist_accept` | 接受一个转折：引用上下文 requests.twist_offer 或 get-context want_twist 给出的候选 id（写进 twist_id），或给出玩家口述的转折（category 与 text 必填） |
 
 ## `advance_time`
 
@@ -77,8 +81,8 @@
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`move` | 是 |  |
-| `character_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `character_id` | `ID` | 是 |  |
+| `location_id` | `ID` | 是 |  |
 
 ## `enter_scene`
 
@@ -87,7 +91,7 @@
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`enter_scene` | 是 |  |
-| `character_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `character_id` | `ID` | 是 |  |
 
 ## `exit_scene`
 
@@ -96,8 +100,8 @@
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`exit_scene` | 是 |  |
-| `character_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-| `to_location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `character_id` | `ID` | 是 |  |
+| `to_location_id` | `ID` 或 null | 否，默认 `null` |  |
 
 ## `npc_response`
 
@@ -106,10 +110,10 @@ NPC 对玩家尝试的回应：refuse 拒绝 / negotiate 协商 / partial 有限
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`npc_response` | 是 |  |
-| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `npc_id` | `ID` | 是 |  |
 | `response` | 枚举：`refuse` / `negotiate` / `partial` / `surface` / `genuine` | 是 |  |
 | `note` | 字符串，≤80 字 | 是 |  |
-| `basis_fact_ids` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–8 项） | 否，默认 `[]` |  |
+| `basis_fact_ids` | 数组（`ID`，0–8 项） | 否，默认 `[]` |  |
 | `true_intent` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
 
 ## `npc_action`
@@ -119,12 +123,12 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`npc_action` | 是 |  |
-| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `npc_id` | `ID` | 是 |  |
 | `action` | 字符串，≤120 字 | 是 |  |
 | `significant` | 布尔 | 否，默认 `false` |  |
 | `kind` | 枚举：`approach` / `reveal` / `trade` / `leave` / `confess` / `provoke` / `other` 或 null | 否，默认 `null` |  |
-| `target_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
-| `basis_fact_ids` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–8 项） | 否，默认 `[]` |  |
+| `target_id` | `ID` 或 null | 否，默认 `null` |  |
+| `basis_fact_ids` | 数组（`ID`，0–8 项） | 否，默认 `[]` |  |
 
 ## `npc_state`
 
@@ -133,7 +137,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`npc_state` | 是 |  |
-| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `npc_id` | `ID` | 是 |  |
 | `mood` | 字符串，≤20 字 或 null | 否，默认 `null` |  |
 | `add_conditions` | 数组（对象（状况），0–4 项） | 否，默认 `[]` |  |
 | `remove_conditions` | 数组（枚举：`drunk` / `asleep` / `unconscious` / `injured` / `away` / `busy` / `other`，0–7 项） | 否，默认 `[]` |  |
@@ -156,8 +160,8 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `key` | 字符串，≤80 字，点分的 ASCII 小写键，例如 lin_wan.secret.press | 是 |  |
 | `text` | 字符串，≤120 字 | 是 |  |
 | `truth` | 布尔 | 否，默认 `true` |  |
-| `known_by` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–20 项） | 否，默认 `[]` |  |
-| `believed_by` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，0–20 项） | 否，默认 `[]` |  |
+| `known_by` | 数组（`ID`，0–20 项） | 否，默认 `[]` |  |
+| `believed_by` | 数组（`ID`，0–20 项） | 否，默认 `[]` |  |
 | `visibility` | 枚举：`public` / `private` / `inner` | 是 |  |
 | `origin` | 枚举：`observed` / `told` / `retcon` | 是 |  |
 | `spread` | 布尔 | 否，默认 `false` |  |
@@ -169,8 +173,8 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`relationship` | 是 |  |
-| `from` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-| `to` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `from` | `ID` | 是 |  |
+| `to` | `ID` | 是 |  |
 | `trust_delta` | 整数 -2..2 | 否，默认 `0` |  |
 | `tension_delta` | 整数 -5..5 | 否，默认 `0` |  |
 | `stage_advance` | 布尔 | 否，默认 `false` |  |
@@ -188,7 +192,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `title` | 字符串，≤40 字 | 是 |  |
 | `text` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
 | `tier` | 枚举：`immediate` / `near` / `far` 或 null | 否，默认 `null` |  |
-| `participants` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，1–12 项） | 是 |  |
+| `participants` | 数组（`ID`，1–12 项） | 是 |  |
 | `due` | 对象（游戏时钟） | 否 |  |
 | `in_minutes` | 整数 1..576000 | 否 |  |
 | `probability` | 数值 (0, 1) 或 null | 否，默认 `null` |  |
@@ -209,7 +213,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`event_resolve` | 是 |  |
-| `event_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `event_id` | `ID` | 是 |  |
 | `outcome` | 枚举：`fulfilled` / `surfaced` | 是 |  |
 | `note` | 字符串，≤80 字 | 是 |  |
 
@@ -220,7 +224,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`event_cancel` | 是 |  |
-| `event_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `event_id` | `ID` | 是 |  |
 | `reason` | 字符串，≤80 字 | 是 |  |
 
 ## `roll`
@@ -257,9 +261,9 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`reveal_fact` | 是 |  |
-| `fact_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-| `from` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-| `to` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，1–12 项） | 是 |  |
+| `fact_id` | `ID` | 是 |  |
+| `from` | `ID` | 是 |  |
+| `to` | 数组（`ID`，1–12 项） | 是 |  |
 | `spread` | 布尔 | 否，默认 `false` |  |
 
 ## `spread_rumor`
@@ -269,12 +273,12 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`spread_rumor` | 是 |  |
-| `from` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
-| `source_fact_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `from` | `ID` | 是 |  |
+| `source_fact_id` | `ID` 或 null | 否，默认 `null` |  |
 | `key` | 字符串，≤80 字，点分的 ASCII 小写键，例如 lin_wan.secret.press | 是 |  |
 | `text` | 字符串，≤120 字 | 是 |  |
-| `believed_by` | 数组（字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40}，1–20 项） | 是 |  |
-| `channel_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `believed_by` | 数组（`ID`，1–20 项） | 是 |  |
+| `channel_id` | `ID` 或 null | 否，默认 `null` |  |
 
 ## `set_voice`
 
@@ -283,7 +287,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`set_voice` | 是 |  |
-| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `npc_id` | `ID` | 是 |  |
 | `voice` | 枚举：`surface` / `inner` | 是 |  |
 | `cause` | 枚举：`player_request` / `npc_self` / `revert` | 是 |  |
 | `trigger` | 枚举：`alone` / `drunk` / `breakdown` / `exposed` 或 null | 否，默认 `null` |  |
@@ -296,7 +300,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`intimacy_evidence` | 是 |  |
-| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `npc_id` | `ID` | 是 |  |
 | `item` | 枚举：`desire_level` / `self_control` / `attraction_sources` / `likes` / `dislikes` / `preconditions` / `boundaries` / `expression` / `desired_position` | 是 |  |
 | `direction` | 枚举：`increase` / `decrease` / `add` / `remove` / `set` | 是 |  |
 | `value` | 字符串，≤80 字 或 null | 否，默认 `null` |  |
@@ -309,7 +313,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`identity_update` | 是 |  |
-| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `npc_id` | `ID` | 是 |  |
 | `item` | 枚举：`authority` / `resources` / `limits` / `obligations` / `exposure_risk` / `hidden_mismatch` | 是 |  |
 | `action` | 枚举：`add` / `remove` / `set` | 是 |  |
 | `value` | 字符串，≤120 字 | 是 |  |
@@ -322,7 +326,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`npc_update` | 是 |  |
-| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `npc_id` | `ID` | 是 |  |
 | `field` | 枚举：`public_role` / `appearance` / `current_goal` / `relationship_stance` / `situation_trigger` / `situation_pressure` | 是 |  |
 | `value` | 字符串，≤120 字 | 是 |  |
 | `reason` | 字符串，≤80 字 | 是 |  |
@@ -334,7 +338,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`introduce_character` | 是 |  |
-| `id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `id` | `ID` | 是 |  |
 | `name` | 字符串，≤12 字 | 是 |  |
 | `tier` | 枚举：`background` / `supporting` / `major` | 是 |  |
 | `age` | 整数 0..120 | 是 | 明确年龄；须 ≥ 18，小于 18 触发 SAFETY_BLOCK |
@@ -342,9 +346,9 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `gender_reason` | 字符串，≤80 字 或 null | 否，默认 `null` | 性别不符配对偏好时的叙事理由（supporting/major 必填） |
 | `adult_context` | 字符串，≤80 字 | 是 | 一句话说明成年身份与处境 |
 | `public_role` | 字符串，≤30 字 | 是 |  |
-| `kin_of` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` | 与已有重要角色同姓时填其亲属角色 ID |
+| `kin_of` | `ID` 或 null | 否，默认 `null` | 与已有重要角色同姓时填其亲属角色 ID |
 | `present` | 布尔 | 否，默认 `true` | 是否在当前场景；false 时须填 location_id |
-| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` | present 为 false 时必填其所在地点 ID |
+| `location_id` | `ID` 或 null | 否，默认 `null` | present 为 false 时必填其所在地点 ID |
 | `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` | supporting/major 必填：外貌特征 |
 | `line` | 字符串，≤120 字 或 null | 否，默认 `null` | background 必填：一句话人物勾勒 |
 | `identity` | 对象（身份卡） 或 null | 否，默认 `null` | supporting/major 必填：身份卡（仅创建一次，之后用 identity_update 逐项演化） |
@@ -414,7 +418,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 |---|---|---|---|
 | `from` | 整数 0..1439 | 是 |  |
 | `to` | 整数 0..1439 | 是 |  |
-| `location_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `location_id` | `ID` | 是 |  |
 
 #### `pressure_responses` 的字段
 
@@ -441,9 +445,10 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`promote_character` | 是 |  |
-| `character_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `character_id` | `ID` | 是 |  |
 | `to_tier` | 枚举：`supporting` / `major` | 是 |  |
 | `gender_reason` | 字符串，≤80 字 或 null | 否，默认 `null` |  |
+| `kin_of` | `ID` 或 null | 否，默认 `null` | 与已有重要角色同姓时填其亲属角色 ID |
 | `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` | supporting/major 必填：外貌特征 |
 | `line` | 字符串，≤120 字 或 null | 否，默认 `null` | background 必填：一句话人物勾勒 |
 | `identity` | 对象（身份卡） 或 null | 否，默认 `null` | supporting/major 必填：身份卡（仅创建一次，之后用 identity_update 逐项演化） |
@@ -464,9 +469,9 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`leverage_set` | 是 |  |
-| `holder` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 | 持有把柄的一方角色 ID（为 player 时须 result/attempt + player_authorized） |
-| `subject` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 | 受制的一方角色 ID（不能与 holder 相同） |
-| `basis_fact_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` | 与 basis_text 二选一：已有事实 ID（holder 须知晓该事实） |
+| `holder` | `ID` | 是 | 持有把柄的一方角色 ID（为 player 时须 result/attempt + player_authorized） |
+| `subject` | `ID` | 是 | 受制的一方角色 ID（不能与 holder 相同） |
+| `basis_fact_id` | `ID` 或 null | 否，默认 `null` | 与 basis_text 二选一：已有事实 ID（holder 须知晓该事实） |
 | `basis_text` | 字符串，≤120 字 或 null | 否，默认 `null` | 与 basis_fact_id 二选一：新登记的把柄依据（记为仅 holder 知晓的私密事实） |
 | `origin` | 字符串，≤60 字 | 是 | 把柄由来简述（如债务、秘密、生计、私密控制器等） |
 
@@ -477,7 +482,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`leverage_release` | 是 |  |
-| `leverage_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `leverage_id` | `ID` | 是 |  |
 | `reason` | 字符串，≤80 字 | 是 |  |
 
 ## `offscreen_beat`
@@ -487,7 +492,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`offscreen_beat` | 是 |  |
-| `npc_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} | 是 |  |
+| `npc_id` | `ID` | 是 |  |
 | `summary` | 字符串，≤120 字 | 是 |  |
 | `operations` | 数组（离屏操作，0–6 项） | 否，默认 `[]` |  |
 
@@ -500,7 +505,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
 | `op` | 枚举：`twist_accept` | 是 |  |
-| `twist_id` | 字符串，≤40 字，ASCII 小写短标识 [a-z0-9_]{1,40} 或 null | 否，默认 `null` |  |
+| `twist_id` | `ID` 或 null | 否，默认 `null` |  |
 | `category` | 枚举：`信息` / `人事` / `资源` / `制度` / `时限` / `关系` / `意外` 或 null | 否，默认 `null` |  |
 | `text` | 字符串，≤160 字 或 null | 否，默认 `null` |  |
 

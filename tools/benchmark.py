@@ -28,11 +28,13 @@ COLD_THRESHOLDS = {
     "doctor_again": 400,
     "version": 400,
     "new_game": 800,
+    "new_game_random": 800,
     "commit_turn": 500,
     "get_context": 400,
 }
 INPROC_THRESHOLDS = {
     "opening": 300,
+    "opening_random": 300,
     "commit_turn": 80,
     "get_context": 30,
     "save_slot": 100,
@@ -150,6 +152,15 @@ def bench_inprocess(samples, workdir):
         session_ids.append(opened["session_id"])
     results["opening"] = summarize(opening_times, INPROC_THRESHOLDS["opening"])
 
+    random_samples = min(samples, 50)
+    random_times = []
+    for index in range(random_samples):
+        mode = "daily" if index % 2 else "pressure"
+        ctx._content = None
+        elapsed, _ = _timed(service.new_game, ctx, {"request_id": "bench_rnd_%06d" % index, "mode": mode, "include_drafts": True})
+        random_times.append(elapsed)
+    results["opening_random"] = summarize(random_times, INPROC_THRESHOLDS["opening_random"])
+
     commit_times = []
     sid = session_ids[0]
     narrator = FakeNarrator(7)
@@ -200,13 +211,20 @@ def bench_cold_game(samples, workdir):
     cold_call(["doctor"], data_dir)
     extra_env = {"ADULT_TENSION_INCLUDE_DRAFTS": "1"}
     new_game = []
+    new_game_random = []
     session_id = None
     for index in range(samples):
         path = _payload_file(workdir, {"request_id": "cold_new_%06d" % index, "mode": "pressure" if index % 2 else "daily", "seed": 1000 + index})
         elapsed, envelope = cold_call(["new-game"], data_dir, path, extra_env)
         new_game.append(elapsed)
         session_id = session_id or envelope["data"]["session_id"]
-    results = {"new_game": summarize(new_game, COLD_THRESHOLDS["new_game"])}
+        rnd_path = _payload_file(workdir, {"request_id": "cold_rnd_%06d" % index, "mode": "pressure" if index % 2 else "daily"})
+        rnd_elapsed, _ = cold_call(["new-game"], data_dir, rnd_path, extra_env)
+        new_game_random.append(rnd_elapsed)
+    results = {
+        "new_game": summarize(new_game, COLD_THRESHOLDS["new_game"]),
+        "new_game_random": summarize(new_game_random, COLD_THRESHOLDS["new_game_random"]),
+    }
     ctx = _app(workdir, "cold-game")
     narrator = FakeNarrator(11)
     commits = []
@@ -247,7 +265,9 @@ def bench_cold(samples, workdir):
 def main(argv):
     samples = COLD_SAMPLES
     if "--samples" in argv:
-        samples = int(argv[argv.index("--samples") + 1])
+        samples = _runtime.opt_int(argv, "--samples")
+        if samples < 1:
+            raise SystemExit("error: --samples must be >= 1")
     if "--quick" in argv:
         samples = 10
     inproc_samples = INPROC_SAMPLES if "--quick" not in argv else 20

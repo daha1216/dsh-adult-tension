@@ -7,31 +7,14 @@ problem names the world, the JSON path, the reason and a hint.
 """
 
 from .. import schema as S
+from ..content.verify import TAG_TABLE
 from ..domain import opening_checks, worldpack
 from ..domain import structure as ST
 from ..errors import CONTENT_ERROR, AppError, detail
 from . import specs
 
-F = S.Field
-TAG_TABLE = S.Obj(
-    {
-        "schema_version": F(S.Int(1, 1)),
-        "tags": F(
-            S.List(
-                S.Obj(
-                    {
-                        "id": F(S.Id()),
-                        "label": F(S.Str(1, 20)),
-                        "kind": F(S.Enum("intimacy", "conflict", "theme", "setting", "custom")),
-                        "description": F(S.Str(1, 120)),
-                    }
-                ),
-                min_items=1,
-            )
-        ),
-    }
-)
 GATE_BASES = (1, 2, 3)
+MAX_VERIFY_BYTES = 32 * 1024 * 1024
 
 
 def run(ctx, payload):
@@ -123,8 +106,20 @@ def _verify_file(payload, tag_ids, problems):
     if not os.path.isfile(path):
         raise AppError(CONTENT_ERROR, "文件不存在：%s" % path, [detail("$.file", "文件不存在", None, CONTENT_ERROR)])
     try:
+        if os.path.getsize(path) > MAX_VERIFY_BYTES:
+            raise AppError(
+                CONTENT_ERROR,
+                "文件太大：%s" % path,
+                [detail("$.file", "文件超过 %d MB 上限" % (MAX_VERIFY_BYTES // 1024 // 1024), None, CONTENT_ERROR)],
+            )
         with open(path, "rb") as handle:
-            data = handle.read()
+            data = handle.read(MAX_VERIFY_BYTES + 1)
+        if len(data) > MAX_VERIFY_BYTES:
+            raise AppError(
+                CONTENT_ERROR,
+                "文件太大：%s" % path,
+                [detail("$.file", "文件超过 %d MB 上限" % (MAX_VERIFY_BYTES // 1024 // 1024), None, CONTENT_ERROR)],
+            )
     except OSError as exc:
         raise AppError(
             CONTENT_ERROR,

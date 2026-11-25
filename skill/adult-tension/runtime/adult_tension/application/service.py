@@ -35,11 +35,25 @@ from ..errors import (
 )
 from ..jsonio import canonical, copy
 from ..persistence import db, repo
-from ..projections import context as CX
 from . import specs
 
+
+class _LazyContext:
+    def __init__(self):
+        self._mod = None
+
+    def __getattr__(self, attr):
+        if self._mod is None:
+            from ..projections import context as mod
+
+            self._mod = mod
+        return getattr(self._mod, attr)
+
+
+CX = _LazyContext()
+
 CREATE_SCOPE = "create"
-RESERVED_SLOT_NAMES = {"con", "prn", "aux", "nul"} | {"com%d" % i for i in range(1, 10)} | {"lpt%d" % i for i in range(1, 10)}
+RESERVED_SLOT_NAMES = paths.RESERVED_NAMES
 
 
 def now_iso():
@@ -94,7 +108,7 @@ def save_info(session):
     return {"current_slot": session["current_slot"], "turns_since_save": session["turns_since_save"]}
 
 
-def session_write(ctx, command, payload, handler):
+def session_write(ctx, command, payload, handler, with_content=True):
     """Run a session-scoped write. handler(conn, session, now) -> response dict."""
     conn = ctx.db()
     digest = digest_of(command, payload)
@@ -104,8 +118,10 @@ def session_write(ctx, command, payload, handler):
         if replay is not None:
             conn.execute("COMMIT")
             return replay
-        session = repo.load_session(conn, payload["session_id"])
+        session = repo.load_session(conn, payload["session_id"], with_content=with_content)
         if session["revision"] != payload["expected_revision"]:
+            if not with_content:
+                session = repo.load_session(conn, payload["session_id"], with_content=True)
             raise AppError(
                 STALE_REVISION,
                 "局面已经变了：当前 revision 是 %d，不是 %d" % (session["revision"], payload["expected_revision"]),
@@ -181,23 +197,48 @@ def _world_candidates(ctx, conditions, include_drafts):
                 [detail("$.locks.world_id", "世界尚未发布（%s）" % entry["status"], "开发时可用 include_drafts", NOT_FOUND)],
             )
         allowed = [entry]
+    else:
+        excluded_tags = set(conditions["excludes"]["content_tags"])
+        mode = conditions["mode"]
+        allowed = [
+            w
+            for w in allowed
+            if not (excluded_tags & set(w.get("content_tags") or ()))
+            and (mode == "random" or not w.get("modes") or mode in w["modes"])
+        ]
     excluded = set(conditions["excludes"]["world_ids"])
     return sorted(w["id"] for w in allowed if w["id"] not in excluded)
 
 
-def _plan_across(ctx, world_ids, seed, conditions):
+def _plan_across(ctx, world_ids, seed, conditions, validate_chosen=True):
     from ..domain import opening, rng
 
     order = rng.shuffled(seed, "opening.world", list(world_ids))
-    reasons = []
-    for world_id in order:
-        pack = ctx.content().world(world_id)
+    if len(order) == 1 and validate_chosen:
+        pack = ctx.content().world(order[0])
         try:
             return pack, opening.plan(pack, seed, conditions)
         except AppError as err:
             if err.code != NO_MATCH:
                 raise
-            reasons.extend("%s：%s" % (pack["title"], d["reason"]) for d in err.details)
+            reasons = ["%s：%s" % (pack["title"], d["reason"]) for d in err.details]
+            raise opening.no_match(reasons or ["没有可用的世界"], conditions["locks"].get("world_id"), conditions)
+    reasons = []
+    for world_id in order:
+        raw = ctx.content().world_raw(world_id)
+        try:
+            planned = opening.plan(raw, seed, conditions)
+        except AppError as err:
+            if err.code != NO_MATCH:
+                raise
+            title = raw.get("title", world_id) if isinstance(raw, dict) else world_id
+            reasons.extend("%s：%s" % (title, d["reason"]) for d in err.details)
+            continue
+        except Exception:
+            ctx.content().world(world_id)
+            raise
+        pack = ctx.content().world(world_id) if validate_chosen else raw
+        return pack, planned
     raise opening.no_match(reasons or ["没有可用的世界"], conditions["locks"].get("world_id"), conditions)
 
 
@@ -415,13 +456,18 @@ def new_game(ctx, payload):
                 disaster = {w["id"] for w in ctx.content().index()["worlds"] if opening.DISASTER in w["content_tags"]}
                 for item in history:
                     item["disaster"] = item["world_id"] in disaster
+                chosen_plan = {}
 
                 def evaluate(candidate):
-                    pack, planned = _plan_across(ctx, worlds, candidate, conditions)
-                    return dict(planned[0], disaster=opening.DISASTER in pack["content_tags"])
+                    raw_pack, planned_cand = _plan_across(ctx, worlds, candidate, conditions, validate_chosen=False)
+                    chosen_plan[candidate] = (raw_pack["id"], planned_cand)
+                    return dict(planned_cand[0], disaster=opening.DISASTER in raw_pack["content_tags"])
 
                 seed, _result = opening.choose_seed(evaluate, seed_stream(), history)
-            pack, planned = _plan_across(ctx, worlds, seed, conditions)
+                chosen_wid, planned = chosen_plan[seed]
+                pack = ctx.content().world(chosen_wid)
+            else:
+                pack, planned = _plan_across(ctx, worlds, seed, conditions, validate_chosen=True)
         content = _content_snapshot(ctx, pack)
         state, opening_payload = opening.instantiate(pack, seed, conditions, planned, content["content_version"])
         # Updated content can open the same seed differently; the footer, which
@@ -783,7 +829,7 @@ def save_slot(ctx, payload):
     payload = validate(specs.SAVE_SLOT, payload)
 
     def handler(conn, session, now):
-        state, content = session["state"], session["content"]
+        state = session["state"]
         auto = False
         if payload["name"]:
             name = normalize_slot_name(payload["name"])
@@ -812,9 +858,9 @@ def save_slot(ctx, payload):
                     slot={k: existing[k] for k in ("name", "world_title", "turn", "clock_label", "saved_at")},
                 )
         version = (existing["version"] + 1) if existing else 1
-        from ..domain import state as SS
+        from ..domain import clock as CL
 
-        label = SS.clock_label(state, content["world"])
+        label = CL.label(state["clock"], repo.session_clock_style(conn, state["session_id"]))
         repo.put_slot(conn, name, state["session_id"], label, state["memory"]["open_action"], version, now)
         repo.set_save_info(conn, state["session_id"], name, version, now)
         verb = "已另存为" if payload["save_as"] else "已保存到"
@@ -826,7 +872,7 @@ def save_slot(ctx, payload):
             "receipt": "%s「%s」·第 %d 回合" % (verb, name, state["turn"]),
         }
 
-    return session_write(ctx, "save-slot", payload, handler)
+    return session_write(ctx, "save-slot", payload, handler, with_content=False)
 
 
 def _resume(state):
@@ -859,7 +905,17 @@ def load_slot(ctx, payload):
         state = slot["state"]
         state["session_id"] = new_session_id(conn)
         state["undo_floor"] = state["turn"]
-        repo.insert_session(conn, state, slot["content"], "load_slot", now, current_slot=name, slot_version=slot["version"], with_facts=False)
+        repo.insert_session(
+            conn,
+            state,
+            slot["content"],
+            "load_slot",
+            now,
+            current_slot=name,
+            slot_version=slot["version"],
+            with_facts=False,
+            raw_content=slot.get("raw_content"),
+        )
         repo.copy_slot_rows(conn, name, state["session_id"], now)
         state["facts"] = repo.FactSource(conn, state["session_id"])
         repo.insert_turn_log(conn, state["session_id"], state["turn"], state["revision"], "load", None, None, {"slot": name, "version": slot["version"]}, None, None, now)
@@ -916,7 +972,7 @@ def delete_slot(ctx, payload):
         repo.delete_slot(conn, name)
         return {"revision": session["revision"], "turn": session["turn"], "deleted": name, "receipt": "已删除「%s」" % name}
 
-    return session_write(ctx, "delete-slot", payload, handler)
+    return session_write(ctx, "delete-slot", payload, handler, with_content=False)
 
 
 # ---------------------------------------------------------------------------

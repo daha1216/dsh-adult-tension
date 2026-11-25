@@ -39,7 +39,7 @@ def commit_fields():
     return {
         "action_mode": F(S.Enum(*ST.ACTION_MODES), desc="result / attempt / rewrite（“其实……”）/ continue / wait"),
         "player_input": F(S.Str(0, 2000), desc="玩家这一句的原话（继续时可为空字符串）"),
-        "player_authorized": F(S.Bool(), required=False, default=False, desc="玩家本人的话授权了玩家角色的移动、承诺、交易、同意、转折或设定修改时为 true"),
+        "player_authorized": F(S.Bool(), required=False, default=False, desc="玩家本人的话授权了玩家角色的移动、承诺、交易、同意、亲密参与、持/放把柄、转折或设定修改时为 true"),
         "acts_on": F(S.Nullable(S.List(S.Id(), max_items=8, unique=True)), required=False, default=None, desc="玩家行动作用到的 NPC（身体、意志、财物）；attempt 不作用于任何 NPC 时写 []"),
         "operations": F(S.List(OPS.op_spec(), max_items=40), desc="操作列表（可以为空数组）"),
         "content_tags": F(S.List(S.Id(), max_items=12, unique=True), desc="本回合正文涉及的内容标签（可为空数组）；标签表见完整上下文的 tags"),
@@ -334,7 +334,7 @@ def commit_turn(state, content, commit, undo_snapshot=None):
         OPS.apply_op(ctx, op, path)
     ctx.op_failed = bool(ctx.errors)
     if ctx.time_ops == 0:
-        OPS.advance(ctx, ST.DEFAULT_ADVANCE_MINUTES, "$", default=True)
+        OPS.advance(ctx, ST.DEFAULT_ADVANCE_MINUTES, default=True)
     preview = _beat_checks(ctx)
     _mode_checks(ctx)
     _intimacy_checks(ctx)

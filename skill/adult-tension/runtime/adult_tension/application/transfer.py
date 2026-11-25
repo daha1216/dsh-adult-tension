@@ -11,7 +11,6 @@ content snapshot and the archive in full. An older export is copied to
 backups/ and upgraded in memory.
 """
 
-import copy
 import hashlib
 import os
 import re
@@ -21,7 +20,7 @@ from .. import RNG_VERSION, SAVE_FORMAT, SKILL_VERSION, STATE_SCHEMA_VERSION, pa
 from ..domain import state_check, worldpack
 from ..domain.upgrade import upgrade
 from ..errors import CONTENT_ERROR, INVALID_INPUT, UNSUPPORTED_VERSION, AppError, detail, fail
-from ..jsonio import canonical, decode_bytes, dumps, loads_strict
+from ..jsonio import canonical, copy as json_copy, decode_bytes, dumps, loads_strict
 
 MAX_IMPORT_BYTES = 32 * 1024 * 1024
 DOC_KEYS = ("format", "schema_version", "content_version", "rng_version", "skill_version", "exported_at", "source", "session", "checksum")
@@ -76,10 +75,13 @@ def export_target(ctx, path, stem, overwrite):
     parts = re.split(r"[\\/]+", path)
     if ".." in parts:
         problems.append(detail("$.path", "路径里不能有 ..", "给出完整的绝对路径", INVALID_INPUT))
-    if not os.path.isabs(path):
+    if not os.path.isabs(path) or (os.name == "nt" and not os.path.splitdrive(path)[0]):
         problems.append(detail("$.path", "导出路径必须是绝对路径", "例如 D:\\备份\\港口.json；不给路径时写到数据目录的 exports/", INVALID_INPUT))
     if not path.lower().endswith(".json"):
         problems.append(detail("$.path", "导出文件要以 .json 结尾", None, INVALID_INPUT))
+    tail_parts = re.split(r"[\\/]+", os.path.splitdrive(path)[1])
+    if any(seg and seg.split(".")[0].lower() in paths.RESERVED_NAMES for seg in tail_parts):
+        problems.append(detail("$.path", "导出路径含有系统保留名：%s" % os.path.basename(path), "换一个文件名", INVALID_INPUT))
     if problems:
         fail(problems)
     target = os.path.normpath(path)
@@ -118,22 +120,28 @@ def write_file(target, doc):
 
 def read_source(payload):
     """(document, original bytes or None) from `path` or inline `data`."""
+    limit_mb = MAX_IMPORT_BYTES // 1024 // 1024
     if payload["path"] is not None:
         path = payload["path"]
         if not os.path.isfile(path):
             fail([detail("$.path", "文件不存在：%s" % path, "确认路径；或让玩家直接粘贴导出的 JSON", INVALID_INPUT)])
         try:
             if os.path.getsize(path) > MAX_IMPORT_BYTES:
-                fail([detail("$.path", "文件太大（上限 %d MB）" % (MAX_IMPORT_BYTES // 1024 // 1024), None, INVALID_INPUT)])
+                fail([detail("$.path", "文件太大（上限 %d MB）" % limit_mb, None, INVALID_INPUT)])
             with open(path, "rb") as handle:
-                raw = handle.read()
+                raw = handle.read(MAX_IMPORT_BYTES + 1)
+            if len(raw) > MAX_IMPORT_BYTES:
+                fail([detail("$.path", "文件太大（上限 %d MB）" % limit_mb, None, INVALID_INPUT)])
         except OSError as exc:
             fail([detail("$.path", "无法读取导入文件：%s（%s）" % (path, exc.strerror or exc), "确认文件可读；或让玩家直接粘贴导出的 JSON", INVALID_INPUT)])
         try:
             return loads_strict(decode_bytes(raw, "导入文件"), "导入文件"), raw
         except AppError as err:
             fail([dict(d, hint=d.get("hint") or "文件不完整或已损坏：请重新导出") for d in err.details] or [detail("$", err.message, "文件不完整或已损坏", INVALID_INPUT)])
-    return payload["data"], None
+    inline = payload["data"]
+    if len(dumps(inline).encode("utf-8")) > MAX_IMPORT_BYTES:
+        fail([detail("$.data", "导入内容太大（上限 %d MB）" % limit_mb, None, INVALID_INPUT)])
+    return inline, None
 
 
 def _keys(obj, expected, path, problems):
@@ -187,9 +195,11 @@ def check(doc):
     upgraded = False
     sv = state.get("schema_version") if isinstance(state, dict) else None
     if isinstance(sv, int) and not isinstance(sv, bool) and 1 <= sv < STATE_SCHEMA_VERSION:
-        state = copy.deepcopy(state)
+        state = json_copy(state)
         upgrade(state)
         upgraded = True
+    elif isinstance(state, dict):
+        state = dict(state)
     world = content["world"] if isinstance(content["world"], dict) else None
     problems.extend(_prefix(state_check.check_state(state, world), "$.session.state"))
     problems.extend(_prefix(state_check.check_archive(archive), "$.session"))

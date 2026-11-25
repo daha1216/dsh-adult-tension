@@ -924,6 +924,30 @@ class RuntimeAppFixesTest(unittest.TestCase):
         self.assertIn("world_query", E.ERROR_DESCRIPTIONS[E.NO_MATCH])
         self.assertIn("candidates", E.ERROR_DESCRIPTIONS[E.NO_MATCH])
 
+    def test_cold_store_scouting_validates_only_chosen_world_and_load_reuses_raw_content(self):
+        from adult_tension.persistence import db
+        from helpers.cli import SKILL_ROOT
+
+        with temp_dir() as tmp:
+            ctx = Context(SKILL_ROOT, os.path.join(tmp, "data"), clean_env(), {}, False)
+            try:
+                ids = Ids()
+                opened = service.new_game(ctx, {"request_id": ids(), "mode": "daily", "excludes": {"content_tags": ["disaster"]}})
+                self.assertEqual(len(ctx.content()._worlds), 1)
+                sid = opened["session_id"]
+                service.save_slot(ctx, {"session_id": sid, "request_id": ids(), "expected_revision": opened["revision"], "name": "原样复用"})
+                loaded = service.load_slot(ctx, {"request_id": ids(), "name": "原样复用"})
+                conn = ctx.db()
+                slot_blob = conn.execute("SELECT content FROM slots WHERE name=?", ("原样复用",)).fetchone()[0]
+                loaded_blob = conn.execute("SELECT content FROM sessions WHERE session_id=?", (loaded["session_id"],)).fetchone()[0]
+                self.assertEqual(loaded_blob, slot_blob)
+                existing_indexes = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='index'")}
+                for idx_name, _tbl, _sql in db.EXTRA_INDEXES:
+                    self.assertIn(idx_name, existing_indexes)
+                self.assertEqual(DB_SCHEMA_VERSION, 4)
+            finally:
+                ctx.close()
+
 
 if __name__ == "__main__":
     unittest.main()

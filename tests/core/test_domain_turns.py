@@ -776,6 +776,163 @@ class RegressionP2DomainTest(unittest.TestCase):
         # Dead symbols removed
         self.assertFalse(hasattr(ST, "MAX_FIX_ATTEMPTS"))
         self.assertFalse(hasattr(SS, "info_set"))
+        self.assertFalse(hasattr(SS, "is_npc"))
+
+
+class Stage1DomainFixesTest(unittest.TestCase):
+    def test_h2_offscreen_beat_spatial_isolation_against_onstage_npcs(self):
+        from helpers.domain import content
+
+        state, _ = new_state("daily", seed=41)
+        onstage, departing = sorted(c for c in npcs(state) if state["characters"][c]["tier"] == "major")[:2]
+        here = state["scene"]["location_id"]
+        other_loc = next(loc["id"] for loc in content()["world"]["locations"] if loc["id"] != here)
+        # Activate a standby character offstage (no prior relationship edge with onstage!)
+        from adult_tension.domain import opening
+
+        sb_id = sorted(opening.standby_previews(state, content()["world"]))[0]
+        state, _ = apply(
+            state,
+            commit(
+                "continue",
+                [
+                    {"op": "enter_scene", "character_id": sb_id},
+                    {"op": "exit_scene", "character_id": sb_id, "to_location_id": other_loc},
+                    {"op": "exit_scene", "character_id": departing, "to_location_id": other_loc},
+                ],
+            ),
+        )
+        sb_fact = next(f["id"] for f in state["facts"].values() if sb_id in f["known_by"])
+        skip90 = {"op": "advance_time", "minutes": 90}
+        act_onstage = {"op": "npc_action", "npc_id": onstage, "action": "倒茶"}
+        other_beat = {"op": "offscreen_beat", "npc_id": departing, "summary": "巡视", "operations": [{"op": "npc_action", "npc_id": departing, "action": "巡视"}]}
+        for sub in (
+            {"op": "add_fact", "key": "off.leak", "text": "跨空消息", "known_by": [sb_id, onstage], "visibility": "private", "origin": "observed"},
+            {"op": "relationship", "from": onstage, "to": sb_id, "trust_delta": 1, "reason": "篡改台前角色态度"},
+            {"op": "reveal_fact", "fact_id": sb_fact, "from": sb_id, "to": [onstage]},
+            {"op": "spread_rumor", "from": sb_id, "key": "off.rumor", "text": "耳语", "believed_by": [onstage]},
+        ):
+            beat_sb = {"op": "offscreen_beat", "npc_id": sb_id, "summary": "离屏", "operations": [sub]}
+            err = rejected(state, commit("continue", [skip90, beat_sb, other_beat, act_onstage]))
+            self.assertTrue("台前" in reasons(err) or "在场" in reasons(err) or "关系边" in reasons(err), reasons(err))
+        # Even with an existing edge (departing <-> onstage), cross-scene stage_advance is rejected
+        beat_adv = {
+            "op": "offscreen_beat",
+            "npc_id": departing,
+            "summary": "离屏",
+            "operations": [
+                {"op": "npc_action", "npc_id": departing, "action": "回想"},
+                {"op": "relationship", "from": departing, "to": onstage, "stage_advance": True, "reason": "跨场进阶"},
+            ],
+        }
+        beat_sb_ok = {"op": "offscreen_beat", "npc_id": sb_id, "summary": "离屏", "operations": [{"op": "npc_action", "npc_id": sb_id, "action": "值守"}]}
+        err = rejected(state, commit("continue", [act_onstage, skip90, beat_adv, beat_sb_ok]))
+        self.assertIn("跨场景", reasons(err))
+
+    def test_h5_m6_l4_state_check_unhashable_subcards_and_no_angle_brackets(self):
+        from adult_tension.domain import state_check
+        from adult_tension.domain import turn as T
+        from adult_tension.jsonio import copy
+        from helpers.domain import content
+
+        desc = T.commit_fields()["player_authorized"].desc
+        self.assertIn("亲密参与", desc)
+        self.assertIn("持/放把柄", desc)
+        state, _ = new_state("pressure", seed=11)
+        world = content()["world"]
+        npc = npcs(state)[0]
+        # Unhashable dict/list elements in ID/tag lists never raise TypeError
+        bad = copy(state)
+        bad["scene"]["present"] = ["player", {}]
+        bad["facts"]["f1"]["known_by"] = [[]]
+        bad["events"]["e1"]["participants"] = [{}]
+        bad["safety"]["boundaries"] = [{"id": "b1", "text": "不看血", "tags": [{}], "created_turn": 1}]
+        bad["facts"]["f1"]["coord"] = [1]
+        bad["characters"][npc]["decision"] = {}
+        bad["facts"]["bad_f"] = dict(bad["facts"]["f1"], id="bad_f")
+        bad["events"]["bad_e"] = dict(bad["events"]["e1"], id="bad_e")
+        bad["leverage"]["bad_lv"] = {
+            "id": "bad_lv", "holder": "player", "subject": npc, "basis_fact_id": "f1",
+            "origin": "x", "state": "active", "created_turn": 1, "released_turn": None, "release_reason": None,
+        }
+        errs = state_check.check_state(bad, world)
+        paths = {e["path"] for e in errs}
+        for expected in (
+            "$.scene.present[1]",
+            "$.facts.f1.known_by[0]",
+            "$.events.e1.participants[0]",
+            "$.safety.boundaries[0].tags[0]",
+            "$.facts.f1.coord",
+            "$.characters.%s.decision.core_value" % npc,
+            "$.facts.bad_f",
+            "$.events.bad_e",
+            "$.leverage.bad_lv",
+        ):
+            self.assertIn(expected, paths)
+        for e in errs:
+            self.assertNotIn("<", e["reason"])
+            self.assertNotIn(">", e["reason"])
+
+    def test_m7_l3_m11_event_same_turn_expiry_surface_keys_noop_and_sqlite_invariants(self):
+        import sqlite3
+
+        from adult_tension.domain import facts as FA
+        from adult_tension.domain import invariants, opening
+        from adult_tension.persistence import db, repo
+        from helpers.domain import content
+
+        state, _ = new_state("daily", seed=17)
+        npc = npcs(state)[0]
+        # in_minutes <= 3 without advance_time is rejected rather than silently expiring
+        short_ev = {"op": "event_create", "kind": "opportunity", "title": "瞬时机会", "participants": [npc], "in_minutes": 2, "dedupe_key": "t.short"}
+        err = rejected(state, commit("continue", [short_ev, {"op": "npc_action", "npc_id": npc, "action": "看表"}]))
+        self.assertIn("默认推进", reasons(err))
+        # event_create followed by advance_time >= in_minutes in the same turn is also rejected
+        err = rejected(
+            state,
+            commit("continue", [dict(short_ev, in_minutes=10), {"op": "advance_time", "minutes": 15}, {"op": "npc_action", "npc_id": npc, "action": "看表"}]),
+        )
+        self.assertIn("同一回合的时间推进中直接过期", reasons(err))
+        # player_update rejects standby full-name collision
+        sb_name = next(iter(opening.standby_previews(state, content()["world"]).values()))["name"]
+        err = rejected(state, commit("result", [{"op": "player_update", "name": sb_name}], player_authorized=True))
+        self.assertIn("待命角色", reasons(err))
+        # Two surface responses in one turn get distinct intent fact keys
+        two_surface = [
+            {"op": "npc_response", "npc_id": npc, "response": "surface", "note": "敷衍一句", "true_intent": "先稳住"},
+            {"op": "npc_response", "npc_id": npc, "response": "surface", "note": "再敷衍一句", "true_intent": "找借口溜走"},
+        ]
+        st_surf, res_surf = apply(state, commit("attempt", two_surface, acts_on=[npc], player_authorized=True))
+        k1 = st_surf["facts"][res_surf["applied"][0]["intent_fact_id"]]["key"]
+        k2 = st_surf["facts"][res_surf["applied"][1]["intent_fact_id"]]["key"]
+        self.assertNotEqual(k1, k2)
+        # No-op NPC move or npc_state does not fake observable change in continue mode
+        absent = next(
+            c
+            for c, ch in state["characters"].items()
+            if c not in state["scene"]["present"] and c != "player" and ch["status"]["location_id"] != state["scene"]["location_id"]
+        )
+        cur_loc = state["characters"][absent]["status"]["location_id"]
+        err = rejected(state, commit("continue", [{"op": "move", "character_id": absent, "location_id": cur_loc}]))
+        self.assertIn("可观察的变化", reasons(err))
+        err = rejected(state, commit("continue", [{"op": "npc_state", "npc_id": npc, "remove_conditions": ["drunk"]}]))
+        self.assertIn("可观察的变化", reasons(err))
+        # invariants.check over FactView issues 0 SQLite queries for unchanged historical leverage
+        state["session_id"] = "s_inv"
+        f1 = next(iter(state["facts"]))
+        state["leverage"]["lv1"] = {
+            "id": "lv1", "holder": npc, "subject": "player", "basis_fact_id": f1,
+            "origin": "旧账", "state": "released", "created_turn": 1, "released_turn": 1, "release_reason": "结清",
+        }
+        conn = sqlite3.connect(":memory:")
+        db.ensure_schema(conn, None)
+        repo.insert_session(conn, state, content(), "new_game", "2026-01-01T00:00:00Z")
+        loaded = repo.load_session(conn, "s_inv")["state"]
+        work = FA.working_copy(loaded)
+        queries = []
+        conn.set_trace_callback(queries.append)
+        self.assertEqual(invariants.check(work), [])
+        self.assertEqual(queries, [])
 
 
 if __name__ == "__main__":

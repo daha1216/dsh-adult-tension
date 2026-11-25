@@ -28,6 +28,7 @@ from ..errors import (
 )
 from ..jsonio import copy, decode_bytes, dumps, loads_strict
 
+MAX_INPUT_BYTES = 32 * 1024 * 1024
 GLOBAL_FLAGS = {
     "--json": "bool",
     "--pretty": "bool",
@@ -60,6 +61,7 @@ def parse_argv(argv):
     options = {}
     flags = {}
     problems = []
+    bool_flags = {f for f, k in GLOBAL_FLAGS.items() if k == "bool"} | {f for f, (_k, k) in command.flags.items() if k == "bool"} | {"--help", "-h"}
     index = 1
     while index < len(argv):
         item = argv[index]
@@ -86,6 +88,10 @@ def parse_argv(argv):
             if index + 1 >= len(argv):
                 problems.append(detail("$.argv[%d]" % index, "%s 缺少取值" % item, None))
                 break
+            if argv[index + 1] in bool_flags:
+                problems.append(detail("$.argv[%d]" % index, "%s 缺少取值" % item, None))
+                index += 1
+                continue
             value = argv[index + 1]
             index += 2
         else:
@@ -102,19 +108,46 @@ def parse_argv(argv):
     return command, options, flags
 
 
+def _too_large(path_key, label):
+    limit_mb = MAX_INPUT_BYTES // (1024 * 1024)
+    return AppError(
+        INVALID_INPUT,
+        "%s太大（上限 %d MB）" % (label, limit_mb),
+        [detail(path_key, "输入超过 %d MB 上限" % limit_mb, None, INVALID_INPUT)],
+    )
+
+
+def _read_bounded(stream, path_key, label):
+    chunks = []
+    total = 0
+    while True:
+        chunk = stream.read(min(65536, MAX_INPUT_BYTES + 1 - total))
+        if not chunk:
+            break
+        if isinstance(chunk, str):
+            chunk = chunk.encode("utf-8")
+        chunks.append(chunk)
+        total += len(chunk)
+        if total > MAX_INPUT_BYTES:
+            raise _too_large(path_key, label)
+    return b"".join(chunks)
+
+
 def read_payload(command, options, stdin):
     """Read the JSON input object for a command, or {} when there is none."""
     source = options.get("input_file")
     raw = None
     label = "输入"
     if source == "-":
-        raw = stdin.read()
+        raw = _read_bounded(stdin, "$.input_file", "stdin ")
         label = "stdin"
     elif source:
         label = "输入文件 %s" % source
         try:
+            if os.path.isfile(source) and os.path.getsize(source) > MAX_INPUT_BYTES:
+                raise _too_large("$.input_file", label + " ")
             with open(source, "rb") as handle:
-                raw = handle.read()
+                raw = _read_bounded(handle, "$.input_file", label + " ")
         except OSError as exc:
             raise AppError(
                 INVALID_INPUT,
@@ -124,7 +157,7 @@ def read_payload(command, options, stdin):
     elif command.input == "required":
         isatty = getattr(stdin, "isatty", None)
         if isatty is not None and not isatty():
-            raw = stdin.read()
+            raw = _read_bounded(stdin, "$", "stdin ")
             label = "stdin"
     if raw is None or not raw.strip():
         if command.input == "required":
@@ -219,7 +252,7 @@ def _internal_error(ctx):
     return {"ok": False, "data": None, "error": body}
 
 
-def execute(argv, skill_root, stdin=None, environ=None):
+def execute(argv, skill_root, stdin=None, environ=None, keep_input=True):
     """Run one command; return (envelope, exit code, options, text, payload). Never raises.
 
     The envelope is serialized here, inside the error handling: a result that
@@ -244,9 +277,9 @@ def execute(argv, skill_root, stdin=None, environ=None):
         if environ.get("ADULT_TENSION_FAULT") == "internal_error":
             raise RuntimeError("injected internal error")  # test hook: exercises the INTERNAL_ERROR path
         module = __import__(command.module, fromlist=[command.func])
-        # the command works on its own copy (an import upgrades an old state in
-        # place); the trace records the input as it was given
-        data = getattr(module, command.func)(ctx, copy(payload))
+        # Direct callers and evaluation traces keep an untouched snapshot of payload.
+        call_input = copy(payload) if (keep_input or environ.get("ADULT_TENSION_TRACE")) else payload
+        data = getattr(module, command.func)(ctx, call_input)
         if environ.get("ADULT_TENSION_FAULT") == "unserializable_result":
             data["probe"] = object()  # test hook: a result that cannot become JSON
         if "next_request_id" not in data:
@@ -270,11 +303,12 @@ def execute(argv, skill_root, stdin=None, environ=None):
             ctx.close()
 
 
-def trace(path, argv, payload, code, text, started, skill_root):
+def trace(path, argv, payload, code, envelope, started, skill_root):
     """Append one call to the evaluation trace. A trace that cannot be written
     does not fail the command (its answer is already on stdout); it is reported
     on stderr, so an evaluation sees the gap instead of counting fewer calls."""
     try:
+        parsed_envelope = json.loads(envelope) if isinstance(envelope, (str, bytes)) else envelope
         line = {
             "ts": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "ms": round((time.perf_counter() - started) * 1000, 1),
@@ -283,7 +317,7 @@ def trace(path, argv, payload, code, text, started, skill_root):
             "argv": list(argv),
             "input": payload,
             "exit": code,
-            "envelope": json.loads(text),
+            "envelope": parsed_envelope,
         }
         with open(path, "ab") as handle:
             handle.write((json.dumps(line, ensure_ascii=False) + "\n").encode("utf-8"))
@@ -294,9 +328,10 @@ def trace(path, argv, payload, code, text, started, skill_root):
 def run(argv, skill_root, stdin=None, stdout=None, environ=None):
     environ = os.environ if environ is None else environ
     started = time.perf_counter()
-    _envelope, code, _options, text, payload = execute(argv, skill_root, stdin, environ)
+    tracing = bool(environ.get("ADULT_TENSION_TRACE"))
+    envelope, code, _options, text, payload = execute(argv, skill_root, stdin, environ, keep_input=tracing)
     stdout = stdout if stdout is not None else getattr(sys.stdout, "buffer", sys.stdout)
     write_text(stdout, text)
-    if environ.get("ADULT_TENSION_TRACE"):
-        trace(environ["ADULT_TENSION_TRACE"], argv, payload, code, text, started, skill_root)
+    if tracing:
+        trace(environ["ADULT_TENSION_TRACE"], argv, payload, code, envelope, started, skill_root)
     return code

@@ -200,4 +200,8 @@ def canonical(obj):
 
 def copy(obj):
     """Fast deep copy of JSON-compatible data."""
-    return json.loads(json.dumps(obj, ensure_ascii=False))
+    if isinstance(obj, dict):
+        return {k: copy(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [copy(v) for v in obj]
+    return obj

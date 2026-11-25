@@ -672,8 +672,126 @@ class StatusTest(unittest.TestCase):
             self.assertNotIn(text, secrets)
 
 
-if __name__ == "__main__":
-    unittest.main()
+class Stage1PeopleAndBoundaryFixesTest(unittest.TestCase):
+    def setUp(self):
+        self.state, _ = new_state("daily", seed=53)
+        self.a = npcs(self.state)[0]
+        self.content = content()
+
+    def test_h1_supporting_decision_forbids_major_only_keys(self):
+        card = major_card(cid="sup_strict", tier="supporting")
+        for k in ("intimacy", "voices", "situation"):
+            del card[k]
+        err = rejected(self.state, commit("continue", [card]))
+        self.assertIn("$.operations[0].decision", {d["path"] for d in err.details})
+        card["decision"] = {"core_value": "保住差事", "current_goal": "熬过夜班"}
+        st_ok, _ = apply(self.state, commit("continue", [card]))
+        self.assertEqual(st_ok["characters"]["sup_strict"]["tier"], "supporting")
+        # Also enforced on promote_character(to_tier="supporting")
+        bg = next(c for c in self.state["characters"].values() if c["tier"] == "background")
+        bad_promo = {
+            "op": "promote_character",
+            "character_id": bg["id"],
+            "to_tier": "supporting",
+            "gender_reason": "剧情需要",
+            "appearance": "工装整洁",
+            "identity": major_card()["identity"],
+            "decision": {"core_value": "稳", "current_goal": "安稳", "relationship_stance": "防备"},
+        }
+        err = rejected(self.state, commit("continue", [bad_promo]))
+        self.assertIn("$.operations[0].decision", {d["path"] for d in err.details})
+
+    def test_m1_boundary_leadins_verbs_and_whitespace_rejection(self):
+        from adult_tension.errors import AppError
+
+        for blank in ("", "   ", "\t\n"):
+            with self.assertRaises(AppError) as caught:
+                meta.set_boundary(self.state, self.content, "add", blank, [])
+            self.assertEqual(caught.exception.code, "INVALID_INPUT")
+        with self.assertRaises(AppError) as caught:
+            meta.set_boundary(self.state, self.content, "remove", text="   ")
+        self.assertEqual(caught.exception.code, "INVALID_INPUT")
+        cases = (
+            ("我不想看暴力", "已记下：不会出现暴力"),
+            ("我不要强迫", "已记下：不会出现强迫"),
+            ("我不喜欢出轨", "已记下：不会出现出轨"),
+            ("不要有血腥", "已记下：不会出现血腥"),
+            ("不能有虫子", "已记下：不会出现虫子"),
+            ("不接受羞辱", "已记下：不会出现羞辱"),
+            ("请不要写虐待", "已记下：不会出现虐待"),
+            ("我希望不要涉及背叛", "已记下：不会出现背叛"),
+            ("我不要", "已记下：不会出现我不要"),
+        )
+        for raw, expected in cases:
+            _s, res = meta.set_boundary(self.state, self.content, "add", raw, [])
+            self.assertEqual(res["receipt"], expected, raw)
+
+    def test_m7_standby_fullname_guard_kin_of_surname_and_rebind(self):
+        from adult_tension.domain import opening
+
+        previews = opening.standby_previews(self.state, self.content["world"])
+        sb_id, sb_prev = sorted(previews.items())[0]
+        # Full-name collision with standby character is rejected with enter_scene hint
+        err = rejected(self.state, commit("continue", [major_card(cid="dup_sb", name=sb_prev["name"])]))
+        self.assertIn("待命角色", reasons(err))
+        self.assertIn("enter_scene", " ".join(d.get("hint") or "" for d in err.details))
+        # Mismatched kin_of surname is rejected
+        major_npc = next(c for c in self.state["characters"].values() if c["tier"] == "major" and c["id"] != "player")
+        other_npc = next(c for c in self.state["characters"].values() if c["tier"] == "major" and c["id"] not in ("player", major_npc["id"]))
+        err = rejected(self.state, commit("continue", [major_card(cid="bad_kin", name=major_npc["family"] + "明哲", kin_of=other_npc["id"])]))
+        self.assertIn("并不姓", reasons(err))
+        ok_kin, _ = apply(self.state, commit("continue", [major_card(cid="good_kin", name=major_npc["family"] + "明哲", kin_of=major_npc["id"])]))
+        self.assertEqual(ok_kin["characters"]["good_kin"]["kin_of"], major_npc["id"])
+        # Promoting a background character who shares a major's surname requires matching kin_of
+        bg_same = {
+            "op": "introduce_character",
+            "id": "bg_kin_test",
+            "name": major_npc["family"] + "顺",
+            "tier": "background",
+            "age": 35,
+            "gender": "female",
+            "adult_context": "成年帮工三十五岁",
+            "public_role": "帮工",
+            "line": "在廊下擦桌子。",
+        }
+        st_bg, _ = apply(self.state, commit("continue", [bg_same]))
+        promo = {
+            "op": "promote_character",
+            "character_id": "bg_kin_test",
+            "to_tier": "supporting",
+            "gender_reason": "剧情需要",
+            "appearance": "利落短发",
+            "identity": major_card()["identity"],
+            "decision": {"core_value": "顾家", "current_goal": "攒钱"},
+        }
+        err = rejected(st_bg, commit("continue", [promo]))
+        self.assertIn("已经有人姓", reasons(err))
+        err = rejected(st_bg, commit("continue", [dict(promo, kin_of=other_npc["id"])]))
+        self.assertIn("并不姓", reasons(err))
+        st_promoted, _ = apply(st_bg, commit("continue", [dict(promo, kin_of=major_npc["id"])]))
+        self.assertEqual(st_promoted["characters"]["bg_kin_test"]["kin_of"], major_npc["id"])
+        # Introducing a newcomer who takes an unactivated standby's surname rebinds that standby's surname cleanly
+        st_mid, _ = apply(self.state, commit("continue", [major_card(cid="take_sb_fam", name=sb_prev["family"] + "远舟")]))
+        st_entered, _ = apply(st_mid, commit("continue", [{"op": "enter_scene", "character_id": sb_id}]))
+        majors = [c for c in st_entered["characters"].values() if c["tier"] == "major"]
+        fams = [c["family"] for c in majors if c.get("family")]
+        self.assertEqual(len(fams), len(set(fams)), fams)
+
+    def test_l3_same_turn_leverage_keys_and_noop_card_updates_not_observable(self):
+        ops = [
+            {"op": "leverage_set", "holder": self.a, "subject": "player", "basis_text": "第一桩把柄", "origin": "账单"},
+            {"op": "leverage_set", "holder": self.a, "subject": "player", "basis_text": "第二桩把柄", "origin": "录音"},
+        ]
+        st2, res = apply(self.state, commit("continue", ops))
+        f1 = st2["facts"][res["applied"][0]["basis_fact_id"]]["key"]
+        f2 = st2["facts"][res["applied"][1]["basis_fact_id"]]["key"]
+        self.assertNotEqual(f1, f2)
+        cur_role = self.state["characters"][self.a]["public_role"]
+        err = rejected(self.state, commit("continue", [{"op": "npc_update", "npc_id": self.a, "field": "public_role", "value": cur_role, "reason": "没变"}]))
+        self.assertIn("可观察的变化", reasons(err))
+        cur_auth = self.state["characters"][self.a]["identity"]["authority"]
+        err = rejected(self.state, commit("continue", [{"op": "identity_update", "npc_id": self.a, "item": "authority", "action": "set", "value": cur_auth, "reason": "没变"}]))
+        self.assertIn("可观察的变化", reasons(err))
 
 
 class NameOrderTest(unittest.TestCase):
@@ -711,3 +829,7 @@ class NameOrderTest(unittest.TestCase):
             self.turn.commit_turn(self.state, self.content, commit("continue", [major_card(name=family + "艾达")]))
         self.assertIn("姓不在本世界", reasons(caught.exception))
         self.assertIn("·", " ".join(d.get("hint") or "" for d in caught.exception.details))
+
+
+if __name__ == "__main__":
+    unittest.main()

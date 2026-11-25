@@ -24,8 +24,13 @@ from adult_tension.persistence import repo  # noqa: E402
 
 
 def main(argv):
+    if not argv or argv[0] in ("-h", "--help"):
+        raise SystemExit("usage: python tools/make_db_fixture.py <dest_dir> [turns]")
     dest = os.path.abspath(argv[0])
-    turns = int(argv[1]) if len(argv) > 1 else 6
+    try:
+        turns = int(argv[1]) if len(argv) > 1 else 6
+    except ValueError:
+        raise SystemExit("error: turns must be an integer, got %r" % (argv[1],))
     env = {k: v for k, v in os.environ.items() if not k.startswith("ADULT_TENSION")}
     ctx = Context(_runtime.SKILL_ROOT, dest, env, {}, False)
     opened = service.new_game(ctx, {"request_id": "fixture_new_0001", "mode": "pressure", "seed": 2024, "include_drafts": True})

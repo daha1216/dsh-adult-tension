@@ -14,6 +14,7 @@ slot_archive); only exports hold a single complete state dict.
 """
 
 import json
+import re
 import zlib
 
 from ..domain import facts as FA
@@ -22,6 +23,7 @@ from ..errors import NOT_FOUND, AppError, detail
 
 IDEMPOTENCY_KEEP = 1000
 HISTORY_KEEP = 50
+_CLOCK_STYLE_RE = re.compile(rb'"clock_style"\s*:\s*"([a-z_]+)"')
 
 
 def pack(obj):
@@ -169,6 +171,19 @@ def unpack(blob):
     return json.loads(zlib.decompress(blob).decode("utf-8"))
 
 
+def _clock_style_from_blob(blob):
+    match = _CLOCK_STYLE_RE.search(zlib.decompress(blob))
+    return match.group(1).decode("ascii") if match else "hm"
+
+
+def _missing_session(session_id):
+    return AppError(
+        NOT_FOUND,
+        "找不到这局游玩记录：%s" % session_id,
+        [detail("$.session_id", "找不到这局游玩记录：%s" % session_id, "用 list-sessions 查看可继续的游玩记录", NOT_FOUND)],
+    )
+
+
 # -- sessions -----------------------------------------------------------------
 
 SESSION_COLUMNS = (
@@ -191,11 +206,7 @@ def load_session(conn, session_id, with_content=True):
     columns = ", ".join(SESSION_COLUMNS) + ", state" + (", content" if with_content else "")
     row = conn.execute("SELECT %s FROM sessions WHERE session_id=?" % columns, (session_id,)).fetchone()
     if row is None:
-        raise AppError(
-            NOT_FOUND,
-            "会话不存在：%s" % session_id,
-            [detail("$.session_id", "会话不存在：%s" % session_id, "用 list-sessions 列出实际存在的会话", NOT_FOUND)],
-        )
+        raise _missing_session(session_id)
     info = dict(zip(SESSION_COLUMNS, row[: len(SESSION_COLUMNS)]))
     info["state"] = upgrade(unpack(row[len(SESSION_COLUMNS)]))
     info["state"]["facts"] = FactSource(conn, session_id)
@@ -204,9 +215,16 @@ def load_session(conn, session_id, with_content=True):
     return info
 
 
-def insert_session(conn, state, content, origin, now, current_slot=None, slot_version=None, with_facts=True):
+def session_clock_style(conn, session_id):
+    row = conn.execute("SELECT content FROM sessions WHERE session_id=?", (session_id,)).fetchone()
+    if row is None:
+        raise _missing_session(session_id)
+    return _clock_style_from_blob(row[0])
+
+
+def insert_session(conn, state, content, origin, now, current_slot=None, slot_version=None, with_facts=True, raw_content=None):
     """A new session from a complete state (opening, import); a load copies
-    the slot's fact rows itself (with_facts=False)."""
+    the slot's fact rows and compressed content blob directly."""
     if with_facts:
         insert_facts(conn, state["session_id"], FA.of(state).all())
     conn.execute(
@@ -222,7 +240,7 @@ def insert_session(conn, state, content, origin, now, current_slot=None, slot_ve
             state["mode"],
             origin,
             pack(hot(state)),
-            pack(content),
+            raw_content if raw_content is not None else pack(content),
             current_slot,
             slot_version,
             0,
@@ -265,11 +283,7 @@ def has_sessions(conn):
 def session_summary(conn, session_id):
     row = conn.execute("SELECT world_title, turn FROM sessions WHERE session_id=?", (session_id,)).fetchone()
     if row is None:
-        raise AppError(
-            NOT_FOUND,
-            "会话不存在：%s" % session_id,
-            [detail("$.session_id", "会话不存在：%s" % session_id, "用 list-sessions 列出实际存在的会话", NOT_FOUND)],
-        )
+        raise _missing_session(session_id)
     return {"world_title": row[0], "turn": row[1]}
 
 
@@ -281,11 +295,16 @@ def list_sessions(conn, limit=10):
         (limit,),
     ).fetchall()
     keys = ("session_id", "world_title", "mode", "turn", "revision", "current_slot", "turns_since_save", "origin", "updated_at")
+    styles = {}
     out = []
     for row in rows:
         item = dict(zip(keys, row[: len(keys)]))
         item["state"] = upgrade(unpack(row[len(keys)]))
-        item["clock_style"] = unpack(row[len(keys) + 1])["world"].get("clock_style", "hm")
+        content_blob = row[len(keys) + 1]
+        style = styles.get(content_blob)
+        if style is None:
+            style = styles[content_blob] = _clock_style_from_blob(content_blob)
+        item["clock_style"] = style
         out.append(item)
     return out
 
@@ -443,30 +462,22 @@ def get_slot(conn, name, with_blobs=False):
     info = dict(zip(SLOT_COLUMNS, row[: len(SLOT_COLUMNS)]))
     if with_blobs:
         info["state"] = upgrade(unpack(row[len(SLOT_COLUMNS)]))
-        info["content"] = unpack(row[len(SLOT_COLUMNS) + 1])
+        raw_content = row[len(SLOT_COLUMNS) + 1]
+        info["raw_content"] = raw_content
+        info["content"] = unpack(raw_content)
     return info
 
 
 def put_slot(conn, name, session_id, clock_label, open_action, version, now):
     """Copy the session as it is stored now into the slot `name`."""
     if not session_exists(conn, session_id):
-        raise AppError(
-            NOT_FOUND,
-            "会话不存在：%s" % session_id,
-            [detail("$.session_id", "会话不存在：%s" % session_id, "用 list-sessions 列出实际存在的会话", NOT_FOUND)],
-        )
+        raise _missing_session(session_id)
     _drop_slot_rows(conn, name)
-    cursor = conn.execute(
+    conn.execute(
         "INSERT INTO slots(name, session_id, revision, turn, world_id, world_title, clock_label, open_action, version, state, content, archive, saved_at) "
         "SELECT ?, session_id, revision, turn, world_id, world_title, ?, ?, ?, state, content, ?, ? FROM sessions WHERE session_id=?",
         (name, clock_label, open_action, version, pack([]), now, session_id),
     )
-    if cursor.rowcount != 1:
-        raise AppError(
-            NOT_FOUND,
-            "会话不存在：%s" % session_id,
-            [detail("$.session_id", "会话不存在：%s" % session_id, "用 list-sessions 列出实际存在的会话", NOT_FOUND)],
-        )
     conn.execute(
         "INSERT INTO slot_facts(slot, {0}) SELECT ?, {0} FROM facts WHERE session_id=?".format(FACT_COLUMNS),
         (name, session_id),

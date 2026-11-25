@@ -13,6 +13,8 @@ ENV_VAR = "ADULT_TENSION_HOME"
 DB_FILE = "adult_tension.db"
 MARKER_FILE = "version.json"
 SUBDIRS = ("backups", "exports", "inputs", "logs")
+RESERVED_NAMES = frozenset({"con", "prn", "aux", "nul"} | {"com%d" % i for i in range(1, 10)} | {"lpt%d" % i for i in range(1, 10)})
+KNOWN_BOOL_FLAGS = frozenset({"--json", "--pretty", "--debug", "--help", "-h", "--include-drafts", "--skip-diversity", "--stats"})
 
 
 def platform_default(platform=None, environ=None, home=None):
@@ -48,6 +50,9 @@ def data_dir_arg(argv):
     while index < len(argv):
         item = argv[index]
         if item == "--data-dir" and index + 1 < len(argv):
+            if argv[index + 1] in KNOWN_BOOL_FLAGS:
+                index += 1
+                continue
             found = argv[index + 1]
             index += 2
             continue
@@ -78,6 +83,7 @@ def inputs_dir(data_dir):
 
 
 INPUT_KEEP_SECONDS = 24 * 3600
+_PRUNE_CACHE = {}
 
 
 def prune_inputs(data_dir, now=None):
@@ -86,19 +92,35 @@ def prune_inputs(data_dir, now=None):
     Only that folder, only regular files; failures are ignored."""
     folder = inputs_dir(data_dir)
     try:
+        stat_before = os.stat(folder)
+    except OSError:
+        return 0
+    ts = time.time() if now is None else now
+    if now is None:
+        cached = _PRUNE_CACHE.get(folder)
+        if cached is not None and cached[0] == stat_before.st_mtime_ns and 0.0 <= ts - cached[1] < 60.0:
+            return 0
+    try:
         names = os.listdir(folder)
     except OSError:
         return 0
-    cutoff = (time.time() if now is None else now) - INPUT_KEEP_SECONDS
+    cutoff = ts - INPUT_KEEP_SECONDS
     removed = 0
     for name in names:
+        if not name.lower().endswith(".json"):
+            continue
         path = os.path.join(folder, name)
         try:
-            if name.lower().endswith(".json") and os.path.isfile(path) and not os.path.islink(path) and os.path.getmtime(path) < cutoff:
+            if os.path.isfile(path) and not os.path.islink(path) and os.path.getmtime(path) < cutoff:
                 os.remove(path)
                 removed += 1
         except OSError:
             continue
+    if now is None:
+        try:
+            _PRUNE_CACHE[folder] = (os.stat(folder).st_mtime_ns, ts)
+        except OSError:
+            _PRUNE_CACHE.pop(folder, None)
     return removed
 
 

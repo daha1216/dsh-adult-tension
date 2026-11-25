@@ -422,6 +422,66 @@ class P2OpeningTextChecksTest(unittest.TestCase):
         self.assertEqual(TX.full_name(gf, None, "艾达"), "艾达")
         self.assertEqual(TX.full_name(gf, "", ""), "")
 
+    def test_stage1_standby_isolation_no_match_labels_and_worldpack_checks(self):
+        from adult_tension.domain import turn as T
+        from adult_tension.domain import worldpack as WP
+        from helpers.domain import commit, content
+
+        # Standby names stay unchanged when player_update changes the player's surname to a standby's surname
+        state, _ = build("daily", 42)
+        before = opening.standby_previews(state, PACK)
+        sb_fam = next(iter(before.values()))["family"]
+        updated, _ = T.commit_turn(state, content(), commit("result", [{"op": "player_update", "name": sb_fam + "改名"}], player_authorized=True))
+        after = opening.standby_previews(updated, PACK)
+        self.assertEqual({k: v["name"] for k, v in before.items()}, {k: v["name"] for k, v in after.items()})
+        # no_match uses Chinese lock names and world title
+        with self.assertRaises(AppError) as caught:
+            build("daily", 3, locks={"pressure_id": "p_typhoon", "combo_id": "combo_agent_number"})
+        err = caught.exception
+        self.assertIn(PACK["title"], err.message)
+        self.assertNotIn(WORLD, err.message)
+        self.assertTrue(any("人物组合" in r and "combo_id" not in r for r in err.extra["relax"]), err.extra["relax"])
+        # worldpack: gender desc uses "本局", PLAYER_ADDRESSED catches {player.称呼}先生, partial stage_labels & custom 4-slot family check
+        self.assertIn("由本局的配对偏好决定", WP.TEMPLATE.fields["gender"].desc)
+        tag_ids = {t["id"] for t in STORE.tags()["tags"]}
+        raw = copy.deepcopy(STORE.world_raw(WORLD))
+        raw["hooks"][0]["text"] = "{npc.name}喊了一声{player.称呼}先生。"
+        _p, probs = WP.validate_world(raw, custom=False, tag_ids=tag_ids)
+        self.assertTrue(any("先生" in p["reason"] for p in probs), probs)
+        raw_stage = copy.deepcopy(STORE.world_raw(WORLD))
+        raw_stage["stage_labels"] = {"stranger": "初见", "flirting": "试探"}
+        _p, probs = WP.validate_world(raw_stage, custom=False, tag_ids=tag_ids)
+        self.assertTrue(any(p["path"] == "$.stage_labels" for p in probs), probs)
+        raw_cw = copy.deepcopy(STORE.world_raw(WORLD))
+        raw_cw["id"] = "custom_four_slots"
+        raw_cw["custom"] = True
+        raw_cw["status"] = "draft"
+        raw_cw["name_pools"]["family"] = raw_cw["name_pools"]["family"][:4]
+        raw_cw["cast_combos"][0]["slots"] = [t["id"] for t in raw_cw["character_templates"][:4]]
+        members = ["player"] + raw_cw["cast_combos"][0]["slots"]
+        raw_cw["cast_combos"][0]["relations"] = [
+            {"a": members[i], "b": members[j], "stage": "stranger", "a_to_b": {"trust": 0, "tension": 1}, "b_to_a": {"trust": 0, "tension": 1}, "reason": "同场"}
+            for i in range(len(members))
+            for j in range(i + 1, len(members))
+        ]
+        _p, probs = WP.validate_world(raw_cw, custom=True, tag_ids=tag_ids)
+        self.assertTrue(any(p["path"] == "$.name_pools.family" for p in probs), probs)
+        # Built-in worlds also enforce hook/activity and hook/pressure location intersection per combo (M4)
+        raw_loc = copy.deepcopy(STORE.world_raw(WORLD))
+        loc_a, loc_b = raw_loc["locations"][0]["id"], raw_loc["locations"][1]["id"]
+        combo0_slots = set(raw_loc["cast_combos"][0]["slots"])
+        for h in raw_loc["hooks"]:
+            if h["slot"] in combo0_slots:
+                h["location_ids"] = [loc_a]
+        for act in raw_loc["daily_activities"]:
+            act["location_ids"] = [loc_b]
+        for pr in raw_loc["pressures"]:
+            pr["location_ids"] = [loc_b]
+        _p, probs = WP.validate_world(raw_loc, custom=False, tag_ids=tag_ids)
+        reasons = [p["reason"] for p in probs if p["path"] == "$.cast_combos[0]"]
+        self.assertIn("日常模式下没有能与这个组合配上的活动、地点与钩子", reasons)
+        self.assertIn("压力模式下没有能与这个组合配上的压力、地点与钩子", reasons)
+
 
 if __name__ == "__main__":
     unittest.main()

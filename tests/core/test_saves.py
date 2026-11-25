@@ -400,6 +400,26 @@ class ExportImportTest(unittest.TestCase):
                 transfer.read_source({"path": unreadable, "data": None})
         self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.path"))
 
+    def test_export_blocks_reserved_names_and_driveless_roots_and_import_caps_inline_size(self):
+        from unittest import mock
+
+        bad_paths = [
+            os.path.join(self.tmp, "CON.json"),
+            os.path.join(self.tmp, "nul.backup.json"),
+            os.path.join(self.tmp, "COM1.json"),
+        ]
+        if os.name == "nt":
+            bad_paths.extend(["\\driveless.json", "/driveless.json"])
+        for bad in bad_paths:
+            with self.assertRaises(AppError, msg=bad) as caught:
+                self.export(path=bad)
+            self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.path"))
+
+        with mock.patch.object(transfer, "MAX_IMPORT_BYTES", 64):
+            with self.assertRaises(AppError) as caught:
+                transfer.read_source({"path": None, "data": {"pad": "x" * 128}})
+        self.assertEqual((caught.exception.code, caught.exception.details[0]["path"]), ("INVALID_INPUT", "$.data"))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -21,6 +21,7 @@ from ..errors import (
 )
 
 REQUIRED_SKILL_FILES = ("SKILL.md", "scripts/adult_tension.py", "references", "content/index.json")
+_SOURCE_LABELS = {"arg": "命令行指定", "env": "环境变量", "default": "默认目录"}
 
 # The failure that matters most decides the envelope's error code.
 FAIL_ORDER = ("python", "sqlite", "data_dir", "migrations", "skill_files", "content")
@@ -81,8 +82,8 @@ def _content_check(ctx):
         return _check(
             "content",
             "fail",
-            "内容编译产物校验失败（%d 处）" % len(problems),
-            "重新安装 Skill 目录；已有会话使用自己的内容快照，仍可续玩",
+            "世界文件校验失败（%d 处）" % len(problems),
+            "重新安装 Skill 目录；进行中的游玩进度各自独立保存，不受影响，仍可继续游玩",
             CONTENT_ERROR,
             problems,
         )
@@ -133,7 +134,8 @@ def run(ctx, payload):
     data_dir_error = None
     try:
         ctx.prepare_data_dir()
-        checks.append(_check("data_dir", "ok", "数据目录可写：%s（来源：%s）" % (ctx.data_dir, ctx.data_dir_source)))
+        source_label = _SOURCE_LABELS.get(ctx.data_dir_source, ctx.data_dir_source)
+        checks.append(_check("data_dir", "ok", "数据目录可写：%s（来源：%s）" % (ctx.data_dir, source_label)))
     except AppError as err:
         data_dir_error = err
         checks.append(
@@ -200,9 +202,9 @@ def _fast_checks(ctx, checks, marker):
     if ctx.schema_report and ctx.schema_report.get("migrated"):
         return False
     checks.append(_check("sqlite", "ok", "SQLite 可用（快速检查）"))
-    checks.append(_check("migrations", "ok", "数据库 schema %d（快速检查）" % DB_SCHEMA_VERSION))
+    checks.append(_check("migrations", "ok", "存档格式第 %d 版（快速检查）" % DB_SCHEMA_VERSION))
     checks.append(_check("skill_files", "ok", "Skill 根目录：%s（快速检查）" % ctx.skill_root))
-    checks.append(_check("content", content.get("status", "ok"), "%s（快速检查：内容文件未变化）" % content.get("message", "内容可用"), content.get("hint")))
+    checks.append(_check("content", content.get("status", "ok"), "%s（快速检查：世界文件可正常读取，未变化）" % content.get("message", "世界文件可正常读取"), content.get("hint")))
     return True
 
 
@@ -214,11 +216,11 @@ def _full_checks(ctx, checks):
             ctx.db()
             report = ctx.schema_report or {}
             if report.get("migrated"):
-                message = "数据库已从 schema %d 迁移到 %d" % (report["from"], report["to"])
+                message = "存档格式已从第 %d 版升级到第 %d 版" % (report["from"], report["to"])
                 if report.get("backup"):
-                    message += "（迁移前备份：%s）" % report["backup"]
+                    message += "（升级前备份：%s）" % report["backup"]
             else:
-                message = "数据库 schema %d，无需迁移" % DB_SCHEMA_VERSION
+                message = "存档格式第 %d 版，无需升级" % DB_SCHEMA_VERSION
             checks.append(_check("migrations", "ok", message))
         except AppError as err:
             checks.append(_check("migrations", "fail", err.message, err.details[0]["hint"] if err.details else None, err.code, err.details))

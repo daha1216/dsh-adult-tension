@@ -251,7 +251,7 @@ python <skill_dir>/scripts/adult_tension.py <command> --json [--input-file PATH]
 
 ### 9.2 `save-slot`
 
-输入：`session_id`、`request_id`、`expected_revision`、`name`（可省略）、`overwrite`（默认 false）。
+输入：`session_id`、`request_id`、`expected_revision`、`name`（可省略）、`overwrite`（默认 false）、`save_as`（默认 false，另存为时为 true）。
 
 - 省略名字：存到当前槽，也就是本局最近一次保存或读取的槽；没有当前槽时自动命名为“世界名-第N回合”，并在回执里告知。
 - 名字已被占用，且不是本局的当前槽：返回 `SLOT_CONFLICT`，`reason: "exists"`。模型问玩家是否覆盖，确认后带 `overwrite: true` 重新提交。

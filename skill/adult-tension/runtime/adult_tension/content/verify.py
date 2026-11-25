@@ -1,6 +1,27 @@
 """Verification of the installed (compiled) content, used by doctor."""
 
+from .. import schema as S
 from ..errors import CONTENT_ERROR, AppError, detail
+
+F = S.Field
+TAG_TABLE = S.Obj(
+    {
+        "schema_version": F(S.Int(1, 1)),
+        "tags": F(
+            S.List(
+                S.Obj(
+                    {
+                        "id": F(S.Id()),
+                        "label": F(S.Str(1, 20)),
+                        "kind": F(S.Enum("intimacy", "conflict", "theme", "setting", "custom")),
+                        "description": F(S.Str(1, 120)),
+                    }
+                ),
+                min_items=1,
+            )
+        ),
+    }
+)
 
 
 def verify_installed(store):

@@ -71,4 +71,15 @@ def minutes_between(a, b):
 
 
 def compare(a, b):
-    return (to_abs(a) > to_abs(b)) - (to_abs(a) < to_abs(b))
+    ta, tb = to_abs(a), to_abs(b)
+    return (ta > tb) - (ta < tb)
+
+
+def schedule_location(char, minute):
+    for slot in char.get("schedule") or []:
+        start, end = slot["from"], slot["to"]
+        if start <= end and start <= minute <= end:
+            return slot["location_id"]
+        if start > end and (minute >= start or minute <= end):
+            return slot["location_id"]
+    return None

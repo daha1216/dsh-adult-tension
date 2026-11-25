@@ -9,6 +9,7 @@ import re
 
 from .. import STATE_SCHEMA_VERSION
 from ..errors import INVALID_INPUT, detail
+from . import cards as C
 from . import clock as CL
 from . import invariants
 from . import structure as ST
@@ -58,13 +59,49 @@ RESPONSE = ({"turn": INT, "npc_id": STR, "response": STR, "note": STR}, {})
 CHARACTER = (
     {"id": STR, "name": STR, "age": INT, "gender": STR, "tier": STR, "adult_context": STR, "public_role": STR, "status": DICT},
     {
-        "family": "str?", "given": "str?", "call": "str?", "title": "str?", "appearance": "any", "background": "any",
-        "baseline": "any", "decision": "dict?", "function": "any", "identity": "dict?", "identity_id": "str?",
-        "intimacy": "dict?", "line": "any", "reputation": "any", "resources": "any", "risks": "any", "schedule": "list?",
-        "situation": "dict?", "social_position": "any", "template_id": "str?", "voices": "dict?", "kin_of": "str?",
+        "family": "str?", "given": "str?", "call": "str?", "title": "str?", "appearance": "str?", "background": "list?",
+        "baseline": "str?", "decision": "dict?", "function": "str?", "identity": "dict?", "identity_id": "str?",
+        "intimacy": "dict?", "line": "str?", "reputation": "str?", "resources": "list?", "risks": "list?", "schedule": "list?",
+        "situation": "dict?", "social_position": "str?", "template_id": "str?", "voices": "dict?", "kin_of": "str?",
         "introduced_turn": "int?", "promoted_turn": "int?",
     },
 )
+IDENTITY_CARD = (
+    {"authority": STR, "resources": LIST, "limits": LIST, "exposure_risk": STR, "hidden_mismatch": STR},
+    {"obligations": LIST},
+)
+DECISION_CARD = (
+    {"core_value": STR, "current_goal": STR},
+    {
+        "goal_options": LIST,
+        "pressure_responses": DICT,
+        "withdrawal": STR,
+        "relationship_stance": STR,
+        "contrast": STR,
+        "prefers": LIST,
+        "avoids": LIST,
+        "never": LIST,
+    },
+)
+PRESSURE_RESPONSES_CARD = ({"low": STR, "mid": STR, "high": STR, "breaking": STR}, {})
+INTIMACY_CARD = (
+    {
+        "desire_level": INT,
+        "attraction_sources": LIST,
+        "likes": LIST,
+        "dislikes": LIST,
+        "preconditions": LIST,
+        "boundaries": LIST,
+        "expression": STR,
+        "self_control": INT,
+        "desired_position": STR,
+    },
+    {},
+)
+VOICES_CARD = ({"surface": STR, "inner": STR}, {})
+SITUATION_CARD = ({"trigger": STR, "pressure": STR, "exits": LIST}, {"deadline": "dict?"})
+EXIT_CARD = ({"option": STR, "cost": STR}, {})
+TWIST_ENTRY = ({"category": STR, "text": STR, "day": INT, "turn": INT}, {"twist_id": "str?", "id": "str?"})
 SCHEDULE_SLOT = ({"from": INT, "to": INT, "location_id": STR}, {})
 STATUS = ({"location_id": "str?", "mood": "str?", "conditions": LIST}, {})
 CONDITION = ({"kind": STR, "text": STR, "until": "dict?"}, {"since_turn": "int?"})
@@ -154,8 +191,30 @@ class _Checker:
             self.bad(path, "应为数组")
             return
         for index, cid in enumerate(values):
-            if cid not in known:
+            if not isinstance(cid, str):
+                self.bad("%s[%d]" % (path, index), "类型不对，应为字符串")
+            elif cid not in known:
                 self.bad("%s[%d]" % (path, index), "%s不存在：%s" % (what, cid))
+
+    def str_list(self, values, path):
+        if not isinstance(values, list):
+            self.bad(path, "应为数组")
+            return
+        for index, item in enumerate(values):
+            if not isinstance(item, str):
+                self.bad("%s[%d]" % (path, index), "类型不对，应为字符串")
+
+    def coord(self, value, path):
+        if not isinstance(value, list) or len(value) != 2 or not TYPES[INT](value[0]) or not TYPES[INT](value[1]):
+            self.bad(path, "随机坐标应为两个整数的数组")
+
+    def int_map(self, value, path):
+        if not isinstance(value, dict):
+            self.bad(path, "应为对象")
+            return
+        for key, item in value.items():
+            if not isinstance(key, str) or not TYPES[INT](item):
+                self.bad("%s.%s" % (path, key), "类型不对，应为整数")
 
     def clock(self, value, path):
         clock = self.shape(value, CLOCK, path)
@@ -216,6 +275,42 @@ def check_state(state, world=None):
                     c.bad(spath + ".location_id", "地点不在内容快照中：%s" % slot["location_id"])
         if "kin_of" in char and char["kin_of"] is not None and char["kin_of"] not in known:
             c.bad(path + ".kin_of", "角色不存在：%s" % char["kin_of"])
+        for lkey in ("resources", "risks", "background"):
+            if char.get(lkey) is not None:
+                c.str_list(char[lkey], "%s.%s" % (path, lkey))
+        if cid != state.get("player_id") and char["tier"] in ST.TIERS:
+            for missing in C.missing_for_tier(char["tier"], char):
+                c.bad("%s.%s" % (path, missing), "%s 层级的角色缺少 %s" % (char["tier"], missing))
+        if char.get("identity") is not None:
+            ident = c.shape(char["identity"], IDENTITY_CARD, path + ".identity")
+            if ident is not None:
+                for lkey in ("resources", "limits", "obligations"):
+                    if lkey in ident:
+                        c.str_list(ident[lkey], "%s.identity.%s" % (path, lkey))
+        if char.get("decision") is not None:
+            dec = c.shape(char["decision"], DECISION_CARD, path + ".decision")
+            if dec is not None:
+                if "pressure_responses" in dec:
+                    c.shape(dec["pressure_responses"], PRESSURE_RESPONSES_CARD, path + ".decision.pressure_responses")
+                for lkey in ("goal_options", "prefers", "avoids", "never"):
+                    if lkey in dec:
+                        c.str_list(dec[lkey], "%s.decision.%s" % (path, lkey))
+        if char.get("intimacy") is not None:
+            intim = c.shape(char["intimacy"], INTIMACY_CARD, path + ".intimacy")
+            if intim is not None:
+                for nkey in ("desire_level", "self_control"):
+                    if not (0 <= intim[nkey] <= 5):
+                        c.bad("%s.intimacy.%s" % (path, nkey), "数值超出 0..5 范围")
+                for lkey in C.INTIMACY_LISTS:
+                    c.str_list(intim[lkey], "%s.intimacy.%s" % (path, lkey))
+        if char.get("voices") is not None:
+            c.shape(char["voices"], VOICES_CARD, path + ".voices")
+        if char.get("situation") is not None:
+            sit = c.shape(char["situation"], SITUATION_CARD, path + ".situation")
+            if sit is not None:
+                c.each(sit["exits"], EXIT_CARD, path + ".situation.exits")
+                if sit.get("deadline") is not None:
+                    c.clock(sit["deadline"], path + ".situation.deadline")
     if state.get("player_id") not in known:
         c.bad("$.player_id", "玩家角色不存在")
 
@@ -233,7 +328,7 @@ def check_state(state, world=None):
     for fid, fact in facts.items():
         path = "$.facts.%s" % fid
         if not _valid_id(fid, "fact"):
-            c.bad(path, "事实 ID 格式非法，应为 f<正整数>")
+            c.bad(path, "事实 ID 格式非法，应为 f 加正整数（如 f1）")
         fact = c.shape(fact, FACT, path)
         if fact is None:
             continue
@@ -245,6 +340,7 @@ def check_state(state, world=None):
             c.bad(path + ".origin", "来源非法")
         c.ids(fact["known_by"], known, path + ".known_by")
         c.ids(fact["believed_by"], known, path + ".believed_by")
+        c.coord(fact["coord"], path + ".coord")
         if fact.get("source_fact_id") is not None and fact["source_fact_id"] not in facts:
             c.bad(path + ".source_fact_id", "事实不存在：%s" % fact["source_fact_id"])
 
@@ -252,7 +348,7 @@ def check_state(state, world=None):
     for eid, event in events.items():
         path = "$.events.%s" % eid
         if not _valid_id(eid, "event"):
-            c.bad(path, "事件 ID 格式非法，应为 e<正整数>")
+            c.bad(path, "事件 ID 格式非法，应为 e 加正整数（如 e1）")
         event = c.shape(event, EVENT, path)
         if event is None:
             continue
@@ -272,6 +368,7 @@ def check_state(state, world=None):
             c.bad(path + ".probability", "只有 chance 事件带 probability")
         c.ids(event["participants"], known, path + ".participants")
         c.clock(event["due"], path + ".due")
+        c.coord(event["coord"], path + ".coord")
 
     relationships = state.get("relationships") if isinstance(state.get("relationships"), dict) else {}
     for key, edge in relationships.items():
@@ -290,7 +387,7 @@ def check_state(state, world=None):
     for lid, lv in leverage.items():
         path = "$.leverage.%s" % lid
         if not _valid_id(lid, "leverage"):
-            c.bad(path, "把柄 ID 格式非法，应为 lv<正整数>")
+            c.bad(path, "把柄 ID 格式非法，应为 lv 加正整数（如 lv1）")
         lv = c.shape(lv, LEVERAGE, path)
         if lv is None:
             continue
@@ -326,15 +423,34 @@ def check_state(state, world=None):
                     c.bad(vpath + ".trigger", "语态触发因素非法")
     safety = c.shape(state.get("safety"), SAFETY, "$.safety")
     if safety is not None:
-        c.each(safety["boundaries"], BOUNDARY, "$.safety.boundaries")
+        for index, bnd in c.each(safety["boundaries"], BOUNDARY, "$.safety.boundaries"):
+            c.str_list(bnd["tags"], "$.safety.boundaries[%d].tags" % index)
     memory = c.shape(state.get("memory"), MEMORY, "$.memory")
     if memory is not None:
-        c.each(memory["turns"], MEMORY_TURN, "$.memory.turns")
+        c.str_list(memory["last_quotes"], "$.memory.last_quotes")
+        for index, mturn in c.each(memory["turns"], MEMORY_TURN, "$.memory.turns"):
+            c.str_list(mturn["quotes"], "$.memory.turns[%d].quotes" % index)
         c.each(memory["chapters"], CHAPTER, "$.memory.chapters")
     counters = c.shape(state.get("counters"), COUNTERS, "$.counters")
     if counters is not None:
         nxt = c.shape(counters["next"], NEXT, "$.counters.next")
-        c.shape(counters["twists"], TWISTS, "$.counters.twists")
+        tw = c.shape(counters["twists"], TWISTS, "$.counters.twists")
+        if tw is not None:
+            for index, day_val in enumerate(tw["accepted_days"]):
+                if not TYPES[INT](day_val):
+                    c.bad("$.counters.twists.accepted_days[%d]" % index, "类型不对，应为整数")
+            c.each(tw["accepted"], TWIST_ENTRY, "$.counters.twists.accepted")
+        c.int_map(counters["major_action_turn"], "$.counters.major_action_turn")
+        c.int_map(counters["offscreen_beat_turn"], "$.counters.offscreen_beat_turn")
+        c.int_map(counters["event_keys"], "$.counters.event_keys")
+        for npc_k, bucket in counters["intimacy_evidence"].items():
+            bpath = "$.counters.intimacy_evidence.%s" % npc_k
+            if not isinstance(bucket, dict):
+                c.bad(bpath, "应为对象")
+                continue
+            for ev_key, ev_turns in bucket.items():
+                if not isinstance(ev_turns, list) or not all(TYPES[INT](t) for t in ev_turns):
+                    c.bad("%s.%s" % (bpath, ev_key), "应为整数数组")
         if nxt is not None:
             for kind in NEXT[0]:
                 if nxt[kind] < 1:
