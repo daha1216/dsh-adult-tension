@@ -7,16 +7,22 @@ Checks (ACCEPTANCE.md section 1, SKILL_PACKAGING.md sections 1-3, 12):
   - every relative link / referenced path resolves inside the Skill directory;
   - no forbidden files (tests, sources, tools, reports, caches, user data);
   - generated reference files match the code;
+  - when validating the in-repo Skill (spec/ present), SKILL.md, openai.yaml
+    and narrative.md stay byte-synced with their spec/ counterparts, and all
+    git-tracked tests/ and tools/ Python files parse and stay Python 3.10 safe;
   - the entry script stays parseable by old Pythons; the runtime parses as
     Python 3.10, imports only the standard library and avoids 3.11+ APIs.
 Exit code 0 when valid, 1 otherwise.
 """
 
 import ast
+import io
 import json
 import os
 import re
+import subprocess
 import sys
+import tokenize
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _runtime  # noqa: E402
@@ -46,6 +52,29 @@ POST_310_APIS = (
     ".autocommit",
     "add_note",
 )
+
+PY311_MODULES = frozenset({"tomllib", "wsgiref.types"})
+PY311_FROM_IMPORTS = {
+    "typing": frozenset({
+        "Self", "Never", "LiteralString", "Required", "NotRequired",
+        "Unpack", "TypeVarTuple", "assert_never", "assert_type",
+        "reveal_type", "dataclass_transform", "override", "TypeAliasType",
+    }),
+    "enum": frozenset({"StrEnum", "ReprEnum", "EnumCheck", "FlagBoundary", "verify", "member", "nonmember"}),
+    "datetime": frozenset({"UTC"}),
+    "hashlib": frozenset({"file_digest"}),
+    "itertools": frozenset({"batched"}),
+    "contextlib": frozenset({"chdir"}),
+    "asyncio": frozenset({"TaskGroup", "Runner", "timeout", "timeout_at"}),
+}
+PY311_BUILTINS = frozenset({"ExceptionGroup", "BaseExceptionGroup"})
+PY311_ATTRS = frozenset({
+    "UTC", "StrEnum", "file_digest", "batched", "TaskGroup",
+    "LiteralString", "Self", "Never", "Required", "NotRequired",
+    "assert_never", "reveal_type", "autocommit", "add_note",
+    "enterContext", "enterClassContext", "enterModuleContext",
+})
+FORBIDDEN_REPO_SCAN_PREFIXES = ("tools/readme_art/",)
 
 
 def _frontmatter(text):
@@ -173,6 +202,77 @@ def check_generated(skill_dir, problems):
             problems.append("references/%s 与代码不一致（运行 tools/gen_references.py）" % name)
 
 
+def _check_fstrings_310(source, rel, problems):
+    fstart = getattr(tokenize, "FSTRING_START", None)
+    fmid = getattr(tokenize, "FSTRING_MIDDLE", None)
+    fend = getattr(tokenize, "FSTRING_END", None)
+    if fstart is None:
+        return
+    stack = []
+    for ttype, tstr, (srow, _scol), _end, _line in tokenize.generate_tokens(io.StringIO(source).readline):
+        if ttype == fstart:
+            q = tstr.lstrip("fFrRbBuU")
+            stack.append((q, len(q) == 3))
+        elif ttype == fend:
+            if stack:
+                stack.pop()
+        elif stack and ttype != fmid:
+            outer_q, is_triple = stack[-1]
+            if ttype == tokenize.COMMENT:
+                problems.append("%s:%d 使用了 Python 3.12+ f-string 内置注释" % (rel, srow))
+            if "\\" in tstr:
+                problems.append("%s:%d 使用了 Python 3.12+ f-string 表达式反斜杠" % (rel, srow))
+            if ttype in (tokenize.STRING, fstart) and outer_q in tstr:
+                problems.append("%s:%d 使用了 Python 3.12+ f-string 同引号嵌套" % (rel, srow))
+            if ttype == tokenize.NL and not is_triple:
+                problems.append("%s:%d 使用了 Python 3.12+ 单引号多行 f-string" % (rel, srow))
+
+
+def _check_ast_310(source, rel, problems, stdlib_only=False, stdlib=None):
+    try:
+        tree = ast.parse(source, filename=rel, feature_version=(3, 10))
+    except SyntaxError as exc:
+        problems.append("%s 不能按 Python 3.10 解析：%s" % (rel, exc))
+        return
+    _check_fstrings_310(source, rel, problems)
+    for node in ast.walk(tree):
+        if hasattr(ast, "TryStar") and isinstance(node, ast.TryStar):
+            problems.append("%s:%d 使用了 Python 3.11+ except* 语法" % (rel, node.lineno))
+        if hasattr(ast, "TypeAlias") and isinstance(node, ast.TypeAlias):
+            problems.append("%s:%d 使用了 Python 3.12+ type 别名语法" % (rel, node.lineno))
+        if getattr(node, "type_params", None):
+            problems.append("%s:%d 使用了 Python 3.12+ PEP 695 泛型语法" % (rel, node.lineno))
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                if alias.name in PY311_MODULES or alias.name.split(".")[0] in PY311_MODULES:
+                    problems.append("%s:%d 导入了 Python 3.11+ 模块：%s" % (rel, node.lineno, alias.name))
+                if stdlib_only and stdlib is not None:
+                    top = alias.name.split(".")[0]
+                    if top != "adult_tension" and top not in stdlib:
+                        problems.append("%s 导入了非标准库模块：%s" % (rel, alias.name))
+        elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+            if node.module in PY311_MODULES or node.module.split(".")[0] in PY311_MODULES:
+                problems.append("%s:%d 导入了 Python 3.11+ 模块：%s" % (rel, node.lineno, node.module))
+            banned = PY311_FROM_IMPORTS.get(node.module)
+            if banned:
+                for alias in node.names:
+                    if alias.name in banned:
+                        problems.append("%s:%d 导入了 Python 3.11+ 接口：%s.%s" % (rel, node.lineno, node.module, alias.name))
+            if stdlib_only and stdlib is not None:
+                top = node.module.split(".")[0]
+                if top != "adult_tension" and top not in stdlib:
+                    problems.append("%s 导入了非标准库模块：%s" % (rel, node.module))
+        elif isinstance(node, ast.Name) and node.id in PY311_BUILTINS:
+            problems.append("%s:%d 使用了 Python 3.11+ 内置异常：%s" % (rel, node.lineno, node.id))
+        elif isinstance(node, ast.Attribute):
+            if node.attr in PY311_ATTRS:
+                problems.append("%s:%d 使用了 Python 3.11+ 属性/接口：%s" % (rel, node.lineno, node.attr))
+            elif node.attr == "Blob" and isinstance(node.value, ast.Name) and node.value.id == "sqlite3":
+                problems.append("%s:%d 使用了 Python 3.11+ 接口：sqlite3.Blob" % (rel, node.lineno))
+            elif node.attr == "walk" and not (isinstance(node.value, ast.Name) and node.value.id in ("os", "ast")):
+                problems.append("%s:%d 疑似使用了 Python 3.12+ Path.walk" % (rel, node.lineno))
+
+
 def check_python_floor(skill_dir, problems):
     entry = os.path.join(skill_dir, "scripts", "adult_tension.py")
     if not os.path.isfile(entry):
@@ -200,24 +300,91 @@ def check_python_floor(skill_dir, problems):
             path = os.path.join(base, name)
             rel = os.path.relpath(path, skill_dir).replace(os.sep, "/")
             source = open(path, "rb").read().decode("utf-8")
-            try:
-                tree = ast.parse(source, feature_version=(3, 10))
-            except SyntaxError as exc:
-                problems.append("%s 不能按 Python 3.10 解析：%s" % (rel, exc))
-                continue
-            for node in ast.walk(tree):
-                modules = []
-                if isinstance(node, ast.Import):
-                    modules = [alias.name for alias in node.names]
-                elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
-                    modules = [node.module]
-                for module in modules:
-                    top = module.split(".")[0]
-                    if top != "adult_tension" and top not in stdlib:
-                        problems.append("%s 导入了非标准库模块：%s" % (rel, module))
+            _check_ast_310(source, rel, problems, stdlib_only=True, stdlib=stdlib)
             for api in POST_310_APIS:
                 if api in source:
                     problems.append("%s 使用了 Python 3.11+ 才有的接口：%s" % (rel, api))
+
+
+def _repo_root_for(skill_dir):
+    """Return the repository root iff `skill_dir` sits at `<repo>/skill/<name>`
+    with `<repo>/spec/SKILL_TEMPLATE.md` present; None for standalone bare copies."""
+    real_skill = os.path.realpath(skill_dir)
+    parent = os.path.dirname(real_skill)
+    if os.path.basename(parent) != "skill":
+        return None
+    repo_root = os.path.dirname(parent)
+    if os.path.isfile(os.path.join(repo_root, "spec", "SKILL_TEMPLATE.md")):
+        return repo_root
+    return None
+
+
+def _extract_markdown_fence(template_bytes):
+    text = template_bytes.decode("utf-8")
+    marker = "\n```markdown\n"
+    start = text.find(marker)
+    end = text.rfind("\n```")
+    if start < 0 or end <= start:
+        return None
+    body = text[start + len(marker) : end] + "\n"
+    return body.encode("utf-8")
+
+
+def check_repo_sync_and_py310(skill_dir, problems):
+    repo_root = _repo_root_for(skill_dir)
+    if repo_root is None:
+        return
+    spec_dir = os.path.join(repo_root, "spec")
+
+    # 1. SKILL.md <-> spec/SKILL_TEMPLATE.md markdown fence
+    skill_md = os.path.join(skill_dir, "SKILL.md")
+    tpl_md = os.path.join(spec_dir, "SKILL_TEMPLATE.md")
+    if os.path.isfile(skill_md) and os.path.isfile(tpl_md):
+        expected_skill = _extract_markdown_fence(open(tpl_md, "rb").read())
+        if expected_skill is None:
+            problems.append("spec/SKILL_TEMPLATE.md 缺少 ```markdown 围栏")
+        elif open(skill_md, "rb").read() != expected_skill:
+            problems.append("SKILL.md 与 spec/SKILL_TEMPLATE.md 围栏内容不一致（请保持双写真源逐字节同步）")
+
+    # 2. agents/openai.yaml <-> spec/agents/openai.yaml
+    skill_yaml = os.path.join(skill_dir, "agents", "openai.yaml")
+    spec_yaml = os.path.join(spec_dir, "agents", "openai.yaml")
+    if os.path.isfile(skill_yaml) and os.path.isfile(spec_yaml):
+        if open(skill_yaml, "rb").read() != open(spec_yaml, "rb").read():
+            problems.append("agents/openai.yaml 与 spec/agents/openai.yaml 不一致（请保持双写真源逐字节同步）")
+
+    # 3. references/narrative.md <-> spec/NARRATIVE_RULES.md
+    skill_nar = os.path.join(skill_dir, "references", "narrative.md")
+    spec_nar = os.path.join(spec_dir, "NARRATIVE_RULES.md")
+    if os.path.isfile(skill_nar) and os.path.isfile(spec_nar):
+        if open(skill_nar, "rb").read() != open(spec_nar, "rb").read():
+            problems.append("references/narrative.md 与 spec/NARRATIVE_RULES.md 不一致（请保持双写真源逐字节同步）")
+
+    # 4. Python 3.10 floor check on git-tracked tests/ and tools/ (excluding untracked & readme_art)
+    if not os.path.exists(os.path.join(repo_root, ".git")):
+        return
+    try:
+        proc = subprocess.run(
+            ["git", "-C", repo_root, "ls-files", "--", "tests", "tools"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=15,
+        )
+    except OSError:
+        return
+    if proc.returncode != 0:
+        return
+    for raw_line in proc.stdout.decode("utf-8", "replace").splitlines():
+        rel = raw_line.strip().replace("\\", "/")
+        if not rel.endswith(".py"):
+            continue
+        if any(rel.startswith(p) for p in FORBIDDEN_REPO_SCAN_PREFIXES):
+            continue
+        full = os.path.join(repo_root, rel)
+        if not os.path.isfile(full):
+            continue
+        source = open(full, "rb").read().decode("utf-8")
+        _check_ast_310(source, rel, problems, stdlib_only=False)
 
 
 def validate(skill_dir):
@@ -229,6 +396,7 @@ def validate(skill_dir):
     check_files(skill_dir, problems)
     check_python_floor(skill_dir, problems)
     check_generated(skill_dir, problems)
+    check_repo_sync_and_py310(skill_dir, problems)
     return problems
 
 

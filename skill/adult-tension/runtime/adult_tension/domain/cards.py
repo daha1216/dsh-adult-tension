@@ -100,7 +100,7 @@ def card_fields():
     return {
         "appearance": F(S.Nullable(S.Str(1, 120)), required=False, default=None, desc="supporting/major 必填：外貌特征"),
         "line": F(S.Nullable(S.Str(1, 120)), required=False, default=None, desc="background 必填：一句话人物勾勒"),
-        "identity": F(S.Nullable(IDENTITY), required=False, default=None, desc="supporting/major 必填：身份卡（仅创建一次，之后用 identity_update 逐项演化）"),
+        "identity": F(S.Nullable(IDENTITY), required=False, default=None, desc="supporting/major 身份卡（新建必填；升格时仅从 background 首次升格必填，supporting 升 major 已有则不填，之后用 identity_update 逐项演化）"),
         "decision": F(S.Nullable(DECISION), required=False, default=None, desc="按层级必填：supporting 填 core_value 与 current_goal；major 填完整 9 项"),
         "intimacy": F(S.Nullable(INTIMACY), required=False, default=None, desc="major 必填：私密倾向卡（仅创建一次，之后用 intimacy_evidence 逐项演化）"),
         "voices": F(S.Nullable(VOICES), required=False, default=None, desc="major 必填：表里语态（surface 与 inner）"),

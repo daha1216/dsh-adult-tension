@@ -35,36 +35,32 @@
   },
   "name_pools": {
     "family": [
-      "月影",
-      "银叶",
-      "晨风",
-      "星河",
-      "霜林",
-      "白桦",
       "苍枝",
-      "溪语",
-      "云杉",
-      "暮光",
-      "林歌",
-      "露珠",
-      "青藤",
-      "雪松"
+      "布莱克",
+      "瓦伦丁",
+      "克莱因",
+      "斯特恩",
+      "格里芬",
+      "温斯顿",
+      "索恩",
+      "霍恩海姆",
+      "阿什福德",
+      "洛林",
+      "克劳福德"
     ],
     "given_female": [
       "瑟兰妮",
       "艾琳娜",
       "伊瑟拉",
-      "菲莉安",
       "诺娅",
       "塔莉亚",
       "希瑟",
-      "缇雅",
       "薇拉",
       "妮莎",
       "艾莉亚",
-      "露希",
       "珊娜",
-      "梅芙"
+      "梅芙",
+      "艾莲娜"
     ],
     "given_male": [
       "奥利弗",
@@ -73,30 +69,26 @@
       "詹姆斯",
       "威廉",
       "查尔斯",
-      "爱德华",
       "约瑟夫",
       "丹尼尔",
-      "安德鲁",
       "大卫",
       "彼得",
       "保罗",
       "马修"
     ],
     "given_neutral": [
-      "叶",
-      "溪",
-      "苔",
-      "露",
-      "藤",
-      "棘",
-      "桦",
-      "霜",
-      "杉",
-      "芽",
-      "根",
-      "苇",
-      "蕨",
-      "橡"
+      "卡米尔",
+      "瓦伦",
+      "席恩",
+      "莱斯利",
+      "诺瓦",
+      "米凯尔",
+      "艾登",
+      "卡兰",
+      "雷文",
+      "奥瑞安",
+      "尤利安",
+      "塞林"
     ],
     "nickname_patterns": [
       {
@@ -104,10 +96,11 @@
         "gender": "male"
       },
       {
-        "pattern": "小{given}",
+        "pattern": "{given}",
         "gender": "any"
       }
-    ]
+    ],
+    "order": "given_first"
   },
   "rules": [
     {
@@ -2244,7 +2237,7 @@
       "leverage": {
         "holder": "player",
         "subject": "elf_ranger_seranie",
-        "basis": "{elf_ranger_seranie.name}正受花潮反噬煎熬，树屋里唯一能疏导镇压的人只有{player.name}。"
+        "basis": "{elf_ranger_seranie.name}正受花潮反噬煎熬，树屋里唯一能疏导镇压的人只有你。"
       },
       "hook_ids": [],
       "start_minute": null,
@@ -2300,7 +2293,7 @@
       "location_ids": [
         "loc_root_warden_outpost"
       ],
-      "text": "{npc.name}把盖着巡林长印章的木牌拍在桌上，抬眼看你：说吧，{player.title}，今晚下去做什么。"
+      "text": "{npc.name}把盖着巡林长印章的木牌拍在桌上，抬眼看你：“说吧，{player.title}，今晚下去做什么。”"
     },
     {
       "id": "hook_mentor_inquiry_letter",
@@ -2355,7 +2348,7 @@
       "location_ids": [
         "loc_root_warden_outpost"
       ],
-      "text": "{npc.name}按着腰间长剑扣住你的木牌翻看：{player.title}，车里装的什么，自己说。"
+      "text": "{npc.name}按着腰间长剑扣住你的木牌翻看：“{player.title}，车里装的什么，自己说。”"
     },
     {
       "id": "hook_warden_pine_candy",

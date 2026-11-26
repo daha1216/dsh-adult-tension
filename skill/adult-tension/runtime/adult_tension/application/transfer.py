@@ -54,8 +54,18 @@ def build(state, content, archive, source, exported_at):
 
 
 def _safe_stem(text):
-    stem = re.sub(r"[\\/:*?\"<>|\s]+", "-", text).strip("-.") or "export"
-    return stem[:40]
+    cleaned = "".join(
+        "-" if (ord(ch) < 32 or 127 <= ord(ch) <= 159) else ch
+        for ch in (text or "")
+        if ch not in "\u200b\u200c\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2060\u2066\u2067\u2068\u2069\ufeff"
+    )
+    stem = re.sub(r'[\\/:*?"<>|\s]+', "-", cleaned).strip("-.")
+    if stem.split(".")[0].lower() in paths.RESERVED_NAMES:
+        stem = stem.replace(".", "-")
+    stem = stem[:40].rstrip("-.")
+    if not stem or stem.split(".")[0].lower() in paths.RESERVED_NAMES:
+        stem = ("export-" + stem).rstrip("-.")[:40] if stem else "export"
+    return stem
 
 
 def export_target(ctx, path, stem, overwrite):
@@ -72,6 +82,8 @@ def export_target(ctx, path, stem, overwrite):
             target = "%s-%d.json" % (base, counter)
         return target
     problems = []
+    if any(ord(ch) < 32 or 127 <= ord(ch) <= 159 for ch in path):
+        problems.append(detail("$.path", "导出路径不能含控制字符", "去掉不可见控制字符后重试", INVALID_INPUT))
     parts = re.split(r"[\\/]+", path)
     if ".." in parts:
         problems.append(detail("$.path", "路径里不能有 ..", "给出完整的绝对路径", INVALID_INPUT))
@@ -80,8 +92,9 @@ def export_target(ctx, path, stem, overwrite):
     if not path.lower().endswith(".json"):
         problems.append(detail("$.path", "导出文件要以 .json 结尾", None, INVALID_INPUT))
     tail_parts = re.split(r"[\\/]+", os.path.splitdrive(path)[1])
-    if any(seg and seg.split(".")[0].lower() in paths.RESERVED_NAMES for seg in tail_parts):
-        problems.append(detail("$.path", "导出路径含有系统保留名：%s" % os.path.basename(path), "换一个文件名", INVALID_INPUT))
+    bad_seg = next((seg for seg in tail_parts if seg and seg.split(".")[0].lower() in paths.RESERVED_NAMES), None)
+    if bad_seg is not None:
+        problems.append(detail("$.path", "导出路径含有系统保留名：%s" % bad_seg, "换一个文件名或目录名", INVALID_INPUT))
     if problems:
         fail(problems)
     target = os.path.normpath(path)

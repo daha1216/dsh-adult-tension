@@ -15,6 +15,7 @@ import collections
 import hashlib
 import os
 import re
+import unicodedata
 from datetime import datetime
 
 from .. import paths
@@ -223,6 +224,8 @@ def _plan_across(ctx, world_ids, seed, conditions, validate_chosen=True):
                 raise
             reasons = ["%s：%s" % (pack["title"], d["reason"]) for d in err.details]
             raise opening.no_match(reasons or ["没有可用的世界"], conditions["locks"].get("world_id"), conditions)
+    want_mixed = conditions["npc_gender_preference"] == "mixed" and not conditions["locks"].get("combo_id")
+    fallback = None
     reasons = []
     for world_id in order:
         raw = ctx.content().world_raw(world_id)
@@ -237,6 +240,14 @@ def _plan_across(ctx, world_ids, seed, conditions, validate_chosen=True):
         except Exception:
             ctx.content().world(world_id)
             raise
+        if want_mixed and not opening.combo_can_mix(planned[1], pack=raw):
+            if fallback is None:
+                fallback = (world_id, raw, planned)
+            continue
+        pack = ctx.content().world(world_id) if validate_chosen else raw
+        return pack, planned
+    if fallback is not None:
+        world_id, raw, planned = fallback
         pack = ctx.content().world(world_id) if validate_chosen else raw
         return pack, planned
     raise opening.no_match(reasons or ["没有可用的世界"], conditions["locks"].get("world_id"), conditions)
@@ -790,20 +801,24 @@ def undo_turn(ctx, payload):
 # save / load / list
 
 
+_BIDI_OVERRIDES = frozenset("\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069")
+
+
 def normalize_slot_name(raw, path="$.name", label="存档名"):
-    name = re.sub(r"\s+", "-", raw.strip())
+    name = re.sub(r"\s+", "-", raw.strip(" \t\r\n\u200b\u2060\ufeff"))
     problems = []
-    if not name:
+    if not name or not any(unicodedata.category(ch)[0] not in ("C", "Z") for ch in name):
         problems.append(label + "不能为空")
     if len(name) > 40:
         problems.append(label + "最长 40 个字符")
     if re.search(r"[\\/:*?\"<>|]", name):
         problems.append(label + "不能含路径分隔符或 \\ / : * ? \" < > |")
-    if any(ord(ch) < 32 or ord(ch) == 127 for ch in name):
+    if any(ord(ch) < 32 or 127 <= ord(ch) <= 159 or ch in _BIDI_OVERRIDES for ch in name):
         problems.append(label + "不能含控制字符")
-    if name.strip(".") == "" or name.endswith("."):
+    if name and (name.strip(".") == "" or name.endswith(".")):
         problems.append(label + "不能只由点组成或以点结尾")
-    if name.split(".")[0].lower() in RESERVED_SLOT_NAMES:
+    stem_head = "".join(ch for ch in name.split(".")[0] if unicodedata.category(ch)[0] != "C").lower()
+    if stem_head in RESERVED_SLOT_NAMES:
         problems.append(label + "是系统保留名：%s" % name)
     if problems:
         raise AppError(INVALID_INPUT, problems[0], [detail(path, p, "换一个名字（可以用中文）", INVALID_INPUT) for p in problems])

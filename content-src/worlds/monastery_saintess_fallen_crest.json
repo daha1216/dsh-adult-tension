@@ -36,31 +36,31 @@
   "name_pools": {
     "family": [
       "格兰特",
-      "洛林",
       "阿什福",
       "卡斯珀",
       "莫雷尔",
       "朗贝尔",
       "法斯特",
       "贝克特",
-      "哈德逊",
       "克劳利",
       "温斯顿",
-      "海因茨"
+      "布莱克",
+      "瓦伦丁",
+      "霍恩海姆"
     ],
     "given_female": [
       "尤菲",
-      "希露菲",
-      "塞西尔",
       "艾蕾娜",
       "奥莉",
-      "贝雅",
       "萝莎",
       "薇尔",
       "伊索",
       "诺拉",
       "蒂娜",
-      "艾达"
+      "艾达",
+      "艾莲娜",
+      "塞西莉亚",
+      "薇薇安"
     ],
     "given_male": [
       "雷恩",
@@ -69,12 +69,12 @@
       "罗兰",
       "维克托",
       "凯恩",
-      "达米安",
-      "尤利安",
       "特里斯",
-      "阿德里",
       "费利克",
-      "马蒂亚"
+      "马蒂亚",
+      "奥古斯特",
+      "亚历山大",
+      "雷蒙德"
     ],
     "given_neutral": [
       "诺亚",
@@ -83,12 +83,12 @@
       "希尔",
       "尤尔",
       "米夏",
-      "安洁",
       "塞拉",
       "克莱尔",
       "雷亚",
       "奥利",
-      "伊芙"
+      "伊芙",
+      "卡米尔"
     ],
     "nickname_patterns": [
       {
@@ -133,7 +133,7 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{given_last}学者",
+          "pattern": "{family}学者",
           "gender": "any"
         },
         {
@@ -191,7 +191,7 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "秘阁{given_last}",
+          "pattern": "秘阁{family}",
           "gender": "any"
         },
         {
@@ -249,7 +249,7 @@
       "gender": "any",
       "title_patterns": [
         {
-          "pattern": "{given_last}修士",
+          "pattern": "{family}修士",
           "gender": "any"
         },
         {
@@ -2169,7 +2169,12 @@
           "cost": "修女要撒一个可能被拆穿的谎"
         }
       ],
-      "hook_ids": [],
+      "hook_ids": [
+        "h_saintess_grille_ask",
+        "h_saintess_ask_one_night",
+        "h_saintess_balcony_silhouette",
+        "h_saintess_kneeler_latch"
+      ],
       "start_minute": 1420,
       "tags": [
         "workplace",

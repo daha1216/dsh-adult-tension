@@ -1960,13 +1960,15 @@
         "leverage"
       ],
       "location_ids": [
-        "loc_side_curtain_booth"
+        "loc_side_curtain_booth",
+        "loc_backstage_mirror_room",
+        "loc_stage_proscenium_apron"
       ],
       "trigger": "{diva_su_yunqing.name}拿到{partner_shen_jiabao.name}私赴沪上试音拆档的录音。",
       "objective": "开书之前决定这段录音怎么用。",
       "choice": "点破了逼对方演完本季，交给师门，还是替对方瞒下。",
       "immediate": {
-        "text": "弦师察觉录音外泄，在雅座帘外来回踱步。",
+        "text": "弦师察觉录音外泄，在门帘外来回踱步。",
         "minutes": 10
       },
       "near": {
@@ -2057,7 +2059,7 @@
       "location_ids": [
         "loc_theater_main_auditorium"
       ],
-      "trigger": "女先生把留你的心事化进开篇尾音，头排几位老听客听出词句不同，纷纷回头打量台侧的你。",
+      "trigger": "台口一曲开篇尾音暗改一字，头排几位老听客听出弦外私语，纷纷回头打量台侧的你。",
       "objective": "让满堂茶客把这句私语当成书里的话。",
       "choice": "顺着韵脚接回正书，躲进雅座，还是挂牌说是新编试唱。",
       "immediate": {
@@ -2070,21 +2072,21 @@
       },
       "far": {
         "trigger": "闲话传进师父耳朵",
-        "consequence": "老先生认定女先生心不在书，秘本改传旁人。",
+        "consequence": "老先生认定台上人心不在书，秘本改传旁人。",
         "due_days": 7
       },
       "exits": [
         {
-          "option": "下半场顺着女先生的韵脚把私语接回正书，化成书外留扣",
+          "option": "下半场顺着开篇韵脚把那句私语接回正书，化成书外留扣",
           "cost": "老先生看出你们心意相通，暗暗叹气。"
         },
         {
-          "option": "借奉茶退进软帘雅座，掏出纯银细链乳夹作赌约逼对方先认下这句改词",
+          "option": "借奉茶退进软帘雅座，掏出纯银细链乳夹作赌约逼在座知情人压下改词风声",
           "cost": "竹帘外茶房端盘走过，里面每声轻喘都得咬牙咽回喉咙。"
         },
         {
-          "option": "在点曲台挂出“新编开篇试唱”的水牌替女先生解围",
-          "cost": "老听客起哄，非要女先生加唱一折。"
+          "option": "在点曲台挂出“新编开篇试唱”的水牌解围圆场",
+          "cost": "老听客起哄，非要台上再加唱一折。"
         }
       ],
       "leverage": null,
@@ -2148,32 +2150,32 @@
         "loc_side_curtain_booth"
       ],
       "trigger": "制片人递来三年独唱约，老先生放话接秘本者三年不得外签。",
-      "objective": "替女先生在两份约里定下一份。",
+      "objective": "在沪上独唱约与师门接书规矩之间敲定折中章程。",
       "choice": "留守接书，两头折中，还是去上海。",
       "immediate": {
         "text": "合约和秘本的消息同时传进雅座。",
         "minutes": 10
       },
       "near": {
-        "text": "老先生宣布人选之前，女先生必须表态。",
+        "text": "老先生宣布人选之前，这桩合约必须拿出准话。",
         "deadline_minutes": 120
       },
       "far": {
         "trigger": "签约窗口关闭",
-        "consequence": "沪上电台另签别家，女先生再难遇上这样的机会。",
+        "consequence": "沪上电台另签别家，老书场也错失外埠声名。",
         "due_days": 20
       },
       "exits": [
         {
-          "option": "助女先生拜接全本秘本，留守老书场",
+          "option": "敲定留守老书场拜接全本秘本的方案",
           "cost": "彻底回绝沪上高薪合约和黑胶首发。"
         },
         {
-          "option": "接下静音无线遥控跳蛋作定力赌约，稳唱完压轴留扣再定周末实况连播约",
-          "cost": "整半回书得在高频暗档酥麻下强稳声线，稍一走音便满堂露馅。"
+          "option": "在软帘后接下静音无线遥控跳蛋作定力赌约，压稳呼吸谈妥周末实况连播约",
+          "cost": "竹帘一隔便是满堂听客，高频暗档酥麻下稍一失声便当场露馅。"
         },
         {
-          "option": "支持女先生签下沪上独唱约",
+          "option": "拍板签下沪上电台三年独唱约",
           "cost": "老先生大失所望，把秘本永久封存。"
         }
       ],
@@ -2221,7 +2223,10 @@
         }
       ],
       "leverage": null,
-      "hook_ids": [],
+      "hook_ids": [
+        "hook_su_mirror_contract",
+        "hook_su_red_fingertips"
+      ],
       "start_minute": null,
       "tags": [
         "intimate"

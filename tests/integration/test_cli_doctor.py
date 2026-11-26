@@ -238,6 +238,25 @@ class DoctorTest(unittest.TestCase):
             self.assertEqual(code, 0, env)
             self.assertEqual(schema_version(data_dir), DB_SCHEMA_VERSION)
 
+    def test_locked_database_during_doctor_reports_chinese_hint_without_request_id(self):
+        with temp_dir() as tmp:
+            data_dir = os.path.join(tmp, "data")
+            os.makedirs(data_dir, exist_ok=True)
+            conn = sqlite3.connect(os.path.join(data_dir, "adult_tension.db"), isolation_level=None)
+            conn.execute("BEGIN IMMEDIATE")
+            try:
+                code, env, _raw = run_cli(["doctor"], data_dir)
+            finally:
+                conn.rollback()
+                conn.close()
+            self.assertEqual(code, 20, env)
+            self.assertEqual(env["error"]["code"], "STORAGE_BUSY")
+            err_body = dict(env["error"])
+            err_body.pop("next_request_id", None)
+            flat = json.dumps(err_body, ensure_ascii=False)
+            self.assertNotIn("database is locked", flat)
+            self.assertNotIn("request_id", flat)
+
 
 class CliSurfaceTest(unittest.TestCase):
     def test_version(self):

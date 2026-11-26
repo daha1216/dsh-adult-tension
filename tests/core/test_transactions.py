@@ -948,6 +948,55 @@ class RuntimeAppFixesTest(unittest.TestCase):
             finally:
                 ctx.close()
 
+    def test_slot_zero_width_guard_export_safe_stem_busy_chinese_and_smoke_mkdtemp(self):
+        from unittest import mock
+        from adult_tension import errors as E
+        from adult_tension.application import smoke
+        from adult_tension.persistence import db
+        from helpers.cli import REPO_ROOT, SKILL_ROOT
+
+        with open(os.path.join(REPO_ROOT, "content-src", "examples", "custom_world.json"), encoding="utf-8") as handle:
+            cw_base = json.load(handle)
+
+        with temp_dir() as tmp:
+            ctx = Context(SKILL_ROOT, os.path.join(tmp, "data"), clean_env(), {}, False)
+            try:
+                ids = Ids()
+                # 1. Zero-width / bidi / C1 control slot names rejected; composite ZWJ emoji accepted.
+                for bad_name in ("\u200b", "\ufeff", "\u202e夜班", "夜班\x9b档", "CON\u200b"):
+                    with self.assertRaises(AppError) as caught:
+                        service.normalize_slot_name(bad_name)
+                    self.assertEqual(caught.exception.code, E.INVALID_INPUT, bad_name)
+                emoji_slot = "👨‍👩‍👧‍👦🧑🏽‍🔬🏳️‍🌈夜班档"
+                self.assertEqual(service.normalize_slot_name(emoji_slot), emoji_slot)
+                # 2. Custom world titles with control chars or reserved stem export cleanly and overwrite cleanly.
+                for idx, title in enumerate(("雨夜\x07民宿", "CON.民宿")):
+                    cw = json.loads(json.dumps(cw_base))
+                    cw["id"] = "cw_export_%d" % idx
+                    cw["title"] = title
+                    opened = service.new_game(ctx, {"request_id": ids(), "mode": "daily", "custom_world": cw})
+                    exp1 = service.export_save(ctx, {"session_id": opened["session_id"]})
+                    self.assertTrue(os.path.isfile(exp1["path"]))
+                    exp2 = service.export_save(ctx, {"session_id": opened["session_id"], "path": exp1["path"], "overwrite": True})
+                    self.assertEqual(exp2["path"], exp1["path"])
+                # Explicit path with reserved directory segment names the offending segment, not save.json.
+                bad_dir_path = os.path.join(tmp, "LPT1", "save.json")
+                with self.assertRaises(AppError) as caught:
+                    service.export_save(ctx, {"session_id": opened["session_id"], "path": bad_dir_path})
+                self.assertIn("LPT1", caught.exception.details[0]["reason"])
+                # 3. _busy_error uses Chinese reason without raw sqlite English while preserving request_id retry hint.
+                busy_err = db._busy_error( RuntimeError("database is locked") )
+                self.assertEqual(busy_err.code, E.STORAGE_BUSY)
+                self.assertNotIn("locked", busy_err.details[0]["reason"].lower())
+                self.assertIn("request_id", busy_err.details[0]["hint"])
+                # 4. smoke.run converts mkdtemp OSError into structured DATA_DIR_UNAVAILABLE AppError.
+                with mock.patch("tempfile.mkdtemp", side_effect=OSError(13, "Permission denied")):
+                    with self.assertRaises(AppError) as caught:
+                        smoke.run(ctx, {"turns": 2, "seed": 1})
+                    self.assertEqual(caught.exception.code, E.DATA_DIR_UNAVAILABLE)
+            finally:
+                ctx.close()
+
 
 if __name__ == "__main__":
     unittest.main()

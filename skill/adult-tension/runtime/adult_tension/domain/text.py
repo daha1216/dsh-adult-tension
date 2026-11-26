@@ -14,8 +14,8 @@ TA_COMPOUNDS = ("其他", "他人", "他乡", "他处", "他日", "他国", "他
 
 # Address terms that tell a person's gender ("{family}先生"): a title or
 # nickname pattern holding one must say whose gender it is for.
-MALE_ADDRESS = ("先生", "少爷", "公子", "老爷", "相公", "王子", "少帅", "哥", "兄", "郎", "爷", "叔", "伯", "男")
-FEMALE_ADDRESS = ("小姐", "夫人", "太太", "女士", "姑娘", "公主", "千金", "娘", "姐", "妹", "嫂", "婶", "姨", "女")
+MALE_ADDRESS = ("先生", "少爷", "公子", "老爷", "相公", "王子", "少帅", "大少", "阔少", "哥", "兄", "郎", "爷", "叔", "伯", "男")
+FEMALE_ADDRESS = ("小姐", "夫人", "太太", "女士", "姑娘", "公主", "千金", "名媛", "影后", "长媳", "遗孀", "未亡人", "娘", "姐", "妹", "嫂", "婶", "姨", "女")
 # compounds that hold one of those characters without a gender
 NEUTRAL_ADDRESS = ("郎中",)
 

@@ -99,7 +99,7 @@ class Game:
     def state(self):
         return session(self.ctx, self.sid)
 
-    def commit(self, ops):
+    def commit(self, ops, mode="continue", authorized=False, acts_on=None):
         info = repo.load_session(self.ctx.db(), self.sid)
         # Crossing midnight asks for a beat from every major who is away, as a
         # model would read it off the preview (RUNTIME_PROTOCOL 6.2).
@@ -107,7 +107,11 @@ class Game:
         beats = [{"op": "offscreen_beat", "npc_id": p["npc_id"], "summary": "在别处忙自己的事", "operations": []} for p in preview["required_beats"]]
         if beats:
             ops = [{"op": "advance_time", "minutes": ST.DEFAULT_ADVANCE_MINUTES}] + beats + ops
-        body = {"action_mode": "continue", "player_input": "……", "operations": ops, "content_tags": [], "summary": "有人来了", "open_action": "场面停住"}
+        body = {"action_mode": mode, "player_input": "……", "operations": ops, "content_tags": [], "summary": "有人来了", "open_action": "场面停住"}
+        if authorized:
+            body["player_authorized"] = True
+        if acts_on is not None:
+            body["acts_on"] = acts_on
         if info["state"]["requests"].get("chapter_summary"):
             # A world that opens just before midnight crosses the day early.
             body["chapter_summary"] = "第一夜：几个人先后到了这里。"
@@ -348,6 +352,98 @@ class FullContextBudgetTest(unittest.TestCase):
         self.assertEqual(sample["size_bytes"], CX.size_of({k: v for k, v in sample.items() if k != "size_bytes"}))
         self.assertEqual(sample["keep"], {"a": 1})
         self.assertEqual(sample["known_facts"], [])
+
+    def test_active_leverage_retains_basis_and_origin_without_player_status_leak(self):
+        with app() as ctx:
+            game = Game(ctx, "harbor_night_shift", "combo_tower_night", "pressure", 5)
+            npc = next(cid for cid in game.state()["state"]["scene"]["present"] if cid != "player")
+            game.commit(
+                [
+                    {"op": "leverage_set", "holder": "player", "subject": npc, "basis_text": "玩家握有私调库银的亲笔手谕", "origin": "暗格搜获"},
+                    {"op": "leverage_set", "holder": npc, "subject": "player", "basis_text": "玩家曾深夜独自进出旧档案室", "origin": "监控誊抄"},
+                ],
+                mode="result",
+                authorized=True,
+            )
+            # Push 36 unrelated player-known facts across 9 turns so the leverage fact falls out of player_facts(30).
+            for turn_idx in range(9):
+                ops = [
+                    {
+                        "op": "add_fact",
+                        "key": "noise.%d.%d" % (turn_idx, j),
+                        "text": "码头第%d批货单核验记录%d" % (turn_idx, j),
+                        "visibility": "public",
+                        "origin": "observed",
+                    }
+                    for j in range(4)
+                ]
+                game.commit(ops)
+            info = game.state()
+            full = CX.full(info["state"], info["content"])
+            brief = CX.brief(info["state"], info["content"])
+            pf_ids = {f["id"] for f in full["player_facts"]}
+            by_holder = {lv["holder"]: lv for lv in full["leverage_all"] if {lv["holder"], lv["subject"]} == {"player", npc}}
+            self.assertNotIn(by_holder["player"]["basis_fact_id"], pf_ids)
+            self.assertEqual(by_holder["player"]["basis"], "玩家握有私调库银的亲笔手谕")
+            self.assertEqual(by_holder["player"]["origin"], "暗格搜获")
+            self.assertEqual(by_holder[npc]["basis"], "玩家曾深夜独自进出旧档案室")
+            self.assertEqual(by_holder[npc]["origin"], "监控誊抄")
+            brief_by_holder = {lv["holder"]: lv for lv in brief["safety"]["leverage"] if {lv["holder"], lv["subject"]} == {"player", npc}}
+            self.assertEqual(brief_by_holder["player"]["basis"], "玩家握有私调库银的亲笔手谕")
+            self.assertEqual(brief_by_holder[npc]["basis"], "玩家曾深夜独自进出旧档案室")
+            # Player-facing status (brief & detail) must never spoil unknown dark leverage.
+            st_brief = service.status(ctx, {"session_id": game.sid, "level": "brief"})
+            self.assertNotIn("手里有你的把柄", "\n".join(st_brief["lines"]))
+            st_detail = service.status(ctx, {"session_id": game.sid, "level": "detail"})
+            flat_detail = "\n".join(item for sec in st_detail["sections"] for item in sec["items"])
+            self.assertNotIn("旧档案室", flat_detail)
+            self.assertNotIn("手里有你的把柄", flat_detail)
+
+    def test_crowded_scene_over_32kb_preserves_voice_and_can_act_on_present_roster_majors(self):
+        world_id, combo_id = CASTS[0]
+        with app() as ctx:
+            game = Game(ctx, world_id, combo_id)
+            game.introduce(6, "major", True, 120, salt=21)
+            game.introduce(2, "major", False, 120, salt=22)
+            secondary = "guest_major_21_0"
+            rev = game.state()["revision"]
+            service.set_preferences(
+                ctx,
+                {"session_id": game.sid, "request_id": game.ids(), "expected_revision": rev, "voice": {"npc_id": secondary, "voice": "inner"}},
+            )
+            lead = next(cid for cid in game.state()["state"]["scene"]["present"] if cid not in ("player", secondary))
+            extra_events = [
+                {
+                    "op": "event_create",
+                    "kind": "rumor",
+                    "title": fill(36, 40 + idx),
+                    "text": fill(110, 60 + idx),
+                    "participants": [lead],
+                    "in_minutes": 60 + idx * 10,
+                    "dedupe_key": "crowd.rumor.e%d" % idx,
+                }
+                for idx in range(14)
+            ]
+            game.commit(
+                [
+                    {"op": "npc_action", "npc_id": secondary, "action": "当众摔下账册封条", "significant": True, "kind": "provoke"},
+                    {"op": "npc_response", "npc_id": lead, "response": "partial", "note": "伸手按住封条"},
+                ]
+                + extra_events,
+                mode="attempt",
+                acts_on=[lead],
+            )
+            full = self.check(game.state(), "crowded voice & can_act")
+            sec_card = next(c for c in full["characters"] if c["id"] == secondary)
+            self.assertEqual(sec_card.get("detail"), "roster")
+            self.assertEqual(sec_card.get("voice"), "inner")
+            self.assertIs(sec_card.get("can_act"), False)
+            self.assertIn("age", sec_card)
+            self.assertIn("gender", sec_card)
+            absent_card = next(c for c in full["characters"] if not c["present"])
+            self.assertEqual(absent_card.get("detail"), "roster")
+            self.assertNotIn("voice", absent_card)
+            self.assertNotIn("can_act", absent_card)
 
 
 if __name__ == "__main__":

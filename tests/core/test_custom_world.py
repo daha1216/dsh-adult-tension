@@ -286,6 +286,67 @@ class ValidationTest(unittest.TestCase):
         _pack, problems = worldpack.validate_world(world, custom=True, tag_ids=TAG_IDS)
         self.assertTrue(any(p["path"] == "$.cast_combos[0]" for p in problems), problems)
 
+    def test_dead_assets_in_identities_activities_pressures_and_hooks_are_caught(self):
+        from helpers.domain import STORE
+
+        # Baseline fixtures must have zero false positives.
+        _p, harbor_probs = worldpack.validate_world(STORE.world_raw("harbor_night_shift"), custom=False, tag_ids=TAG_IDS)
+        self.assertEqual(harbor_probs, [])
+        _p, ex_probs = worldpack.validate_world(example(), custom=True, tag_ids=TAG_IDS)
+        self.assertEqual(ex_probs, [])
+        # Dead player_identity (no combo accepts high social_position).
+        w_id = example()
+        w_id["player_identities"].append(
+            dict(
+                w_id["player_identities"][0],
+                id="unreachable_boss",
+                role="外来巡视专员",
+                baseline="带着总部查账任务低调住进二楼最东头。",
+                reputation="不苟言笑，专盯旧账",
+                social_position="high",
+            )
+        )
+        _p, probs = worldpack.validate_world(w_id, custom=True, tag_ids=TAG_IDS)
+        self.assertIn("$.player_identities[1]", {p["path"] for p in probs})
+        # Dead daily_activity (hook_ids disjoint from combo hooks / locations).
+        w_act = example()
+        w_act["hooks"][0]["location_ids"] = ["living_room"]
+        w_act["hooks"][1]["location_ids"] = ["living_room"]
+        w_act["daily_activities"].append(
+            {
+                "id": "dead_act",
+                "title": "露台独自收衣",
+                "location_ids": ["terrace"],
+                "duration_minutes": 25,
+                "beats": ["海风刮过空旷的露台栏杆，湿透的麻布衬衣抽打在铁钩上", "楼梯口传来迟疑的脚步声，来人扶着门框没有跨进风口"],
+            }
+        )
+        _p, probs = worldpack.validate_world(w_act, custom=True, tag_ids=TAG_IDS)
+        self.assertIn("$.daily_activities[2]", {p["path"] for p in probs})
+        # Dead hook (its location_ids never intersect any activity or pressure).
+        w_hook = example()
+        for act in w_hook["daily_activities"]:
+            act["location_ids"] = ["living_room"]
+        for pr in w_hook["pressures"]:
+            pr["location_ids"] = ["living_room"]
+        w_hook["hooks"].append(dict(w_hook["hooks"][0], id="dead_terrace_hook", text="{npc.name}把钥匙搁在露台栏杆最北端。", location_ids=["terrace"]))
+        _p, probs = worldpack.validate_world(w_hook, custom=True, tag_ids=TAG_IDS)
+        self.assertIn("$.hooks[2]", {p["path"] for p in probs})
+        # Dead pressure in built-in world (location disjoint from all hooks of matching combos).
+        w_pr = json.loads(json.dumps(STORE.world_raw("harbor_night_shift")))
+        first_loc = w_pr["locations"][0]["id"]
+        other_loc = w_pr["locations"][1]["id"]
+        for h in w_pr["hooks"]:
+            h["location_ids"] = [first_loc]
+        for act in w_pr["daily_activities"]:
+            act["location_ids"] = [first_loc]
+        for pr in w_pr["pressures"]:
+            pr["location_ids"] = [first_loc]
+        dead_pr = dict(w_pr["pressures"][0], id="dead_pressure_loc", title="北栈桥封锁核查", location_ids=[other_loc], hook_ids=[])
+        w_pr["pressures"].append(dead_pr)
+        _p, probs = worldpack.validate_world(w_pr, custom=False, tag_ids=TAG_IDS)
+        self.assertIn("$.pressures[%d]" % (len(w_pr["pressures"]) - 1), {p["path"] for p in probs})
+
     def test_a_text_may_not_name_someone_with_a_pool_name(self):
         # The runtime draws each character's name, so a pool name written
         # into a text may belong to nobody, or read as a name where it was

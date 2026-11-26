@@ -746,13 +746,13 @@ def _stage_evidence(ctx, a, b, path, errs):
         "text": F(S.Nullable(S.Str(1, 120)), required=False, default=None),
         "tier": F(S.Nullable(S.Enum(*ST.EVENT_TIERS)), required=False, default=None),
         "participants": F(S.List(S.Id(), 1, 12, unique=True)),
-        "due": F(CLOCK, required=False),
-        "in_minutes": F(S.Int(1, 400 * ST.MINUTES_PER_DAY), required=False),
+        "due": F(CLOCK, required=False, desc="到期时刻（与 in_minutes 二选一；未传 advance_time 时须晚于默认推进 3 分钟后）"),
+        "in_minutes": F(S.Int(1, 400 * ST.MINUTES_PER_DAY), required=False, desc="距现在的分钟数（与 due 二选一；未传 advance_time 时须 > 3）"),
         "probability": F(S.Nullable(S.Num(0, 1, lo_open=True, hi_open=True)), required=False, default=None),
         "dedupe_key": F(DEDUPE_KEY),
         "repeat": F(S.Bool(), required=False, default=False),
     },
-    "创建事件（约定、截止、风声、机会、伏笔、概率事件）。due 与 in_minutes 二选一且必须晚于现在；chance 必须带 probability，到期由引擎掷骰；涉及玩家的承诺需要 player_authorized；dedupe_key 与未结束事件不能重复",
+    "创建事件（约定、截止、风声、机会、伏笔、概率事件）。due 与 in_minutes 二选一且必须晚于现在（未传 advance_time 时须晚于默认推进的 3 分钟后）；chance 必须带 probability，到期由引擎掷骰；涉及玩家的承诺需要 player_authorized；dedupe_key 与未结束事件不能重复",
 )
 def op_event_create(ctx, op, path):
     errs = []

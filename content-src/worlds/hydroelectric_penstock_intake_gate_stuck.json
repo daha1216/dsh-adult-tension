@@ -96,7 +96,7 @@
         "gender": "any"
       },
       {
-        "pattern": "老{family}",
+        "pattern": "阿{given_last}",
         "gender": "any"
       }
     ]
@@ -671,7 +671,7 @@
           "向上级担保今夜大坝不出事"
         ],
         "exposure": "去年防渗工程的分包商是自家姻亲，偷工减料的事一直压着。",
-        "hidden": "急着开深孔泄洪只为冲净去年廊道违规签字痕迹；档案库岩芯木箱夹层那条静音变频震动塞与备用遥控器正是其私藏的暗癖旧物，最怕被人翻出连同底档一并拿捏。"
+        "hidden": "急着开深孔泄洪只为冲净去年廊道违规签字痕迹；档案库岩芯木箱夹层那枚静音变频震动塞与备用遥控器正是其私藏的暗癖旧物，最怕被人翻出连同底档一并拿捏。"
       },
       "decision": {
         "core_value": "大局为重，账要记在别人头上。",
@@ -1799,7 +1799,7 @@
       "duration_minutes": 60,
       "beats": [
         "移开岩芯木箱翻找旧底档时，在夹层摸出静音变频震动塞与一只配套无线遥控器",
-        "台灯下头挨着头摊开施工蓝图，顺势拿那条蒙眼带半开玩笑地掩住对方的视线试探"
+        "台灯下头挨着头摊开施工蓝图，顺势把那只无线遥控器半开玩笑地塞进对方掌心试探"
       ],
       "hook_ids": [],
       "start_minute": null,
@@ -2184,7 +2184,8 @@
         "leverage"
       ],
       "location_ids": [
-        "loc_intake_gate_gallery_deadlock"
+        "loc_intake_gate_gallery_deadlock",
+        "loc_hoist_hall_duty_room"
       ],
       "trigger": "三号防渗段渗出刺骨的江水，带病巡检的总监在湿冷廊道里突发寒战，脚步踉跄。",
       "objective": "在人倒下之前把人带出廊道，又不把芯样丢在下面。",
@@ -2219,7 +2220,7 @@
       "leverage": {
         "holder": "player",
         "subject": "director_jiang_yingxue",
-        "basis": "{player.name}握着{director_jiang_yingxue.name}高烧两天把退烧药与私物锁进值班间铁柜的实情，报给医官就能当场令{director_jiang_yingxue.ta}强制替岗。"
+        "basis": "你握着{director_jiang_yingxue.name}高烧两天把退烧药与私物锁进值班间铁柜的实情，报给医官就能当场令{director_jiang_yingxue.ta}强制替岗。"
       },
       "hook_ids": [],
       "start_minute": null,
@@ -2288,7 +2289,8 @@
       "slot": "director_jiang_yingxue",
       "location_ids": [
         "loc_dam_dispatch_command_center",
-        "loc_hoist_hall_duty_room"
+        "loc_hoist_hall_duty_room",
+        "loc_intake_gate_gallery_deadlock"
       ],
       "text": "{npc.name}把一杯温水推到你面前，自己的手却在发抖：先喝，喝完再跟我吵。"
     },
@@ -2338,14 +2340,15 @@
         "loc_dam_dispatch_command_center",
         "loc_dam_crest_hoist_hall_corridor"
       ],
-      "text": "{npc.name}笑着拍了拍你的肩，递过来一份写好的文件：{player.title}，帮个忙，签个字的事。"
+      "text": "{npc.name}笑着拍了拍你的肩，递过来一份写好的文件：“{player.title}，帮个忙，签个字的事。”"
     },
     {
       "id": "hook_ma_pipe_water",
       "kind": "approach",
       "slot": "senior_dam_gate_fitter_ma",
       "location_ids": [
-        "loc_intake_gate_gallery_deadlock"
+        "loc_intake_gate_gallery_deadlock",
+        "loc_gallery_drainage_sump_catwalk"
       ],
       "text": "{npc.name}用烟袋锅点了点廊道墙上那道湿痕，转头看你：你听，这水声对不对？"
     },

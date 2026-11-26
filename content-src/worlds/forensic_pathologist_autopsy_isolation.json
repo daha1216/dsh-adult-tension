@@ -97,7 +97,7 @@
         "gender": "any"
       },
       {
-        "pattern": "老{family}",
+        "pattern": "阿{given_last}",
         "gender": "any"
       }
     ],
@@ -181,7 +181,7 @@
         "微型液压破门剪与高强度警用约束带",
         "防暴喷射罐及备用应急照明棒"
       ],
-      "reputation": "寡言实战硬汉，暗廊格斗以一敌三毫不含糊。",
+      "reputation": "寡言实战尖兵，暗廊格斗以一敌三毫不含糊。",
       "risks": [
         "对病理规程生疏，破坏物证链必受纪检严惩"
       ]
@@ -477,7 +477,7 @@
         ],
         "likes": [
           "榻边剥下半边羊绒衫接受温盐水洗背",
-          "戴蒙眼带贴耳报数，隔衣受跳蛋或脉冲贴暗颤"
+          "戴医用全遮光眼罩贴耳报数，隔衣受神经共感同步塞或脉冲贴暗颤"
         ],
         "dislikes": [
           "指挥厅众目睽睽下暴露狼狈"
@@ -712,7 +712,7 @@
           "breaking": "西装滑落肩头被按在卷宗桌喘息，咬唇低声问案情。"
         },
         "withdrawal": "退至指挥车合卷宗，指腹按住太阳穴。",
-        "relationship_stance": "对油滑官员冷酷到底，唯对守真相的硬汉破例。",
+        "relationship_stance": "对油滑官员冷酷到底，唯对守真相的硬骨头破例。",
         "contrast": "纪律铁面，在值班室近距离搜证时耳根发烫破防。",
         "prefers": [
           "敢把滚烫真话和证据拍在{npc.ta}面前的硬派查案人"
@@ -1924,7 +1924,11 @@
         }
       ],
       "leverage": null,
-      "hook_ids": [],
+      "hook_ids": [
+        "hk_pathologist_scalpel_approach",
+        "hk_pathologist_locker_observe",
+        "hk_pathologist_suture_approach"
+      ],
       "start_minute": 1320,
       "tags": [
         "intimate",
@@ -1944,7 +1948,7 @@
         "loc_autopsy_duty_rest_suite",
         "loc_morgue_vault_corridor"
       ],
-      "trigger": "搜找缝线撞破值班柜暗格丝绒盒——静音跳蛋、真皮项圈、蒙眼带与脉冲贴全露在镜前。",
+      "trigger": "搜找缝线撞破值班柜暗格丝绒盒——神经共感同步塞、真皮锁扣项圈、医用全遮光眼罩与微电流脉冲贴全露在镜前。",
       "objective": "趁纪委查进套间前谈妥暗格保密与胶卷双签条件。",
       "choice": "合盒装作无事发生，还是借暗格私物压法医签双保契？",
       "immediate": {
@@ -2094,9 +2098,9 @@
         "loc_morgue_vault_corridor",
         "loc_autopsy_theatre_one"
       ],
-      "trigger": "冷库升温逼近十度，胃黏膜切片即将自溶，技术员同时送出中和试剂。",
+      "trigger": "冷库升温逼近十度，胃黏膜切片即将自溶，中和试剂与原版谱图急待封存。",
       "objective": "二十分钟内抢出干冰封存毒理样本并拿原版谱图。",
-      "choice": "冒低温搬干冰并藏匿技术员，还是用福尔马林粗暴固化？",
+      "choice": "冒低温抢搬干冰并贴身护住同伴，还是用福尔马林粗暴固化？",
       "immediate": {
         "text": "冰柜门渗出解冻水珠，组织蛋白变质腥味漫开。",
         "minutes": 8
@@ -2112,7 +2116,7 @@
       },
       "exits": [
         {
-          "option": "抢干冰装箱封存，缩推尸车底抱紧技术员取暖拿谱图",
+          "option": "抢干冰装箱封存，缩进推尸车底抱紧同伴取暖护稳谱图",
           "cost": "指尖遭干冰轻微冻伤脱皮，车底贴身传温难掩暧昧"
         },
         {

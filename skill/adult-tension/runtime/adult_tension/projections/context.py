@@ -107,9 +107,15 @@ def _leverage(state, only_present=False):
     """Active leverage touching someone on stage, then (unless only_present)
     the rest: the brief list is the head of the full one."""
     present = set(state["scene"]["present"])
+    facts = FA.of(state)
     out, rest = [], []
     for lv in SS.active_leverage(state):
         item = {"id": lv["id"], "holder": lv["holder"], "subject": lv["subject"], "basis_fact_id": lv["basis_fact_id"]}
+        fact = facts.get(lv["basis_fact_id"])
+        if fact and fact.get("text"):
+            item["basis"] = fact["text"]
+        if lv.get("origin"):
+            item["origin"] = lv["origin"]
         if {lv["holder"], lv["subject"]} & present:
             out.append(item)
         elif not only_present:
@@ -196,6 +202,24 @@ def brief(state, content, save=None):
         # summary keeps the thread until new turn summaries accumulate.
         context["last_chapter"] = chapters[-1]["summary"]
     _fit(context, BRIEF_LIMIT, ("known_facts", "due_soon", "nearby", "scene_responses", "recent", "last_quotes"))
+    limit = BRIEF_LIMIT - SIZE_FIELD_RESERVE
+    if context["size_bytes"] > limit:
+        context.pop("size_bytes", None)
+        for npc in reversed(context["present_npcs"]):
+            if size_of(context) <= limit:
+                break
+            for key in ("stance", "goal", "line"):
+                if size_of(context) > limit:
+                    npc.pop(key, None)
+        lvs = context["safety"]["leverage"]
+        for lv in reversed(lvs):
+            if size_of(context) <= limit:
+                break
+            lv.pop("origin", None)
+            lv.pop("basis", None)
+        while lvs and size_of(context) > limit:
+            lvs.pop()
+        context["size_bytes"] = size_of(context)
     return context
 
 
@@ -421,6 +445,7 @@ def _template(state, body):
 
 CARD_SUMMARY_KEYS = ("id", "name", "call", "age", "gender", "tier", "role", "adult_context", "location_id", "present", "can_act", "voice", "to_player")
 ROSTER_KEYS = ("id", "name", "tier", "role", "adult_context", "location_id", "present", "to_player")
+ROSTER_PRESENT_KEYS = ("age", "gender", "can_act", "voice")
 ROSTER_CLIP = 24
 NAME_POOL_FLOOR = {"family_unused": 6, "given_female": 4, "given_male": 4, "given_neutral": 3}
 PLAYER_FACTS_FLOORS = (16, 8)
@@ -472,7 +497,8 @@ def _card_core(card):
 
 
 def _roster_line(card):
-    return dict({k: card[k] for k in ROSTER_KEYS if k in card}, detail="roster")
+    keys = ROSTER_KEYS + (ROSTER_PRESENT_KEYS if card.get("present") else ())
+    return dict({k: card[k] for k in keys if k in card}, detail="roster")
 
 
 def _roster_clipped(card):
@@ -581,6 +607,8 @@ def _full_steps(context, state):
         for lv in context["leverage_all"]:
             if not ({lv["holder"], lv["subject"]} & onstage):
                 lv.pop("basis_fact_id", None)
+                lv.pop("basis", None)
+                lv.pop("origin", None)
 
     def leverage_cut():
         onstage = set(state["scene"]["present"])
@@ -590,6 +618,13 @@ def _full_steps(context, state):
             items.pop()
             cut += 1
             context["leverage_omitted"] = {"count": cut, "hint": "另有 %d 条不涉及在场者的生效把柄没列出；需要时用 status（level: debug）看 state.leverage" % cut}
+
+    def leverage_onstage_compact():
+        for lv in reversed(context["leverage_all"]):
+            if size_of(context) <= FULL_LIMIT - SIZE_FIELD_RESERVE:
+                break
+            if isinstance(lv.get("basis"), str) and len(lv["basis"]) > ROSTER_CLIP:
+                lv["basis"] = lv["basis"][:ROSTER_CLIP] + "…"
 
     def npc_edges():
         player = state["player_id"]
@@ -662,6 +697,7 @@ def _full_steps(context, state):
     # the end, and the cut is counted (status lists it all). Whatever touches
     # someone on stage always stays.
     yield leverage_cut
+    yield leverage_onstage_compact
 
 
 def _fit_full(context, state):

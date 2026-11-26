@@ -43,12 +43,10 @@
       "赛恩",
       "洛斯",
       "布兰",
-      "埃德",
       "奥瑟",
-      "格林",
       "希尔",
-      "诺德",
-      "维斯"
+      "维斯",
+      "布莱克"
     ],
     "given_female": [
       "卡蜜拉",
@@ -57,57 +55,52 @@
       "芙蕾",
       "赛拉",
       "薇拉",
-      "露娜",
       "伊芙",
       "诺拉",
-      "凯西",
       "黛拉",
       "米拉",
       "奥莉",
-      "琳"
+      "艾莲娜"
     ],
     "given_male": [
-      "艾德里安",
-      "西奥",
       "卢卡",
       "马丁",
       "奥斯卡",
       "雷蒙",
-      "伊安",
-      "朱利安",
-      "本",
       "克莱门",
       "费恩",
       "罗兰",
       "托马",
-      "亚瑟"
+      "亚瑟",
+      "奥古斯特",
+      "亚历山大",
+      "雷蒙德"
     ],
     "given_neutral": [
-      "晨",
-      "灰",
-      "白石",
-      "钟",
-      "棘",
-      "霜",
-      "南",
-      "烬",
-      "岚",
-      "铃",
-      "渡",
-      "朔",
-      "苇",
-      "砂"
+      "卡米尔",
+      "瓦伦",
+      "席恩",
+      "莱斯利",
+      "诺瓦",
+      "米凯尔",
+      "艾登",
+      "卡兰",
+      "雷文",
+      "奥瑞安",
+      "尤利安",
+      "塞林"
     ],
     "nickname_patterns": [
       {
-        "pattern": "小{given}",
+        "pattern": "{given}",
         "gender": "any"
       },
       {
-        "pattern": "{given}",
+        "pattern": "{family}阁下",
         "gender": "any"
       }
-    ]
+    ],
+    "order": "given_first"
   },
   "rules": [
     {
@@ -1997,7 +1990,7 @@
       "location_ids": [
         "loc_oath_altar_court"
       ],
-      "trigger": "你和女统帅在祭坛下核对胞妹军团的脱身路线，石壁把半句“连夜拔营”送上了长廊。",
+      "trigger": "你和同伴在祭坛石阶下核对边军后撤的机密路线，古老回音壁却把半句“连夜拔营”送上了外侧长廊。",
       "objective": "在巡逻兵上报前，把这半句话圆过去。",
       "choice": "掩住回音，还是干脆换个地方说？",
       "immediate": {
@@ -2019,7 +2012,7 @@
           "cost": "水盘耗掉了留作照明的魔力晶石。"
         },
         {
-          "option": "女统帅大方走上台阶，公开谈斥候后撤三十里",
+          "option": "同伴大方走上祭坛石阶，改口公开商议斥候后撤三十里的章程",
           "cost": "双方斥候明早起就要同时后撤。"
         },
         {
@@ -2136,7 +2129,8 @@
         "timed"
       ],
       "location_ids": [
-        "loc_bell_tower_terrace"
+        "loc_bell_tower_terrace",
+        "loc_rune_stele_crypt"
       ],
       "trigger": "夏至突降雷暴，古避雷符文让全殿传讯水晶静默，暴雨又冲淹了界河栈道，城外魔军开始集结。",
       "objective": "在大营拔营前，把平安的消息送出去。",
@@ -2183,8 +2177,7 @@
         "timed"
       ],
       "location_ids": [
-        "loc_envoy_guest_quarters",
-        "loc_rune_stele_crypt"
+        "loc_envoy_guest_quarters"
       ],
       "trigger": "夏至雷暴激荡圣殿结界，引爆女统帅旧年圣光箭伤与体内淫纹反噬，刚回客居便高热寒战，腰下魅魔贞操纹章滚烫收紧。",
       "objective": "导散暴走魔力护住心脉，稳住女统帅并守住破晓签约。",
@@ -2217,7 +2210,10 @@
         }
       ],
       "leverage": null,
-      "hook_ids": [],
+      "hook_ids": [
+        "hook_camilla_sealed_letter",
+        "hook_camilla_unbuckle"
+      ],
       "start_minute": null,
       "tags": [
         "supernatural"

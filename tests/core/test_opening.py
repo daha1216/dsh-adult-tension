@@ -482,6 +482,92 @@ class P2OpeningTextChecksTest(unittest.TestCase):
         self.assertIn("日常模式下没有能与这个组合配上的活动、地点与钩子", reasons)
         self.assertIn("压力模式下没有能与这个组合配上的压力、地点与钩子", reasons)
 
+    def test_standby_surnames_avoid_background_cast_and_do_not_drift_on_promotion(self):
+        from adult_tension.domain import cards as C
+        from helpers.domain import apply, commit
+
+        for wid, seed in (("republic_press_street", 202611), (WORLD, 7)):
+            pack = STORE.world(wid)
+            cond = opening.normalize_conditions({"mode": "pressure", "locks": {"world_id": wid}})
+            state, _ = opening.build(pack, seed, cond, "sess_sb")
+            bg_ids = [b["id"] for b in pack["background_cast"]]
+            bg_fams = {state["characters"][bid]["family"] for bid in bg_ids if state["characters"][bid].get("family")}
+            before = opening.standby_previews(state, pack)
+            self.assertTrue(before)
+            for slot, prev in before.items():
+                self.assertNotIn(prev["family"], bg_fams, (wid, slot, prev["family"]))
+            promo = {
+                "op": "promote_character",
+                "character_id": bg_ids[0],
+                "to_tier": "supporting",
+                "gender_reason": "剧情提拔",
+                "appearance": "衣袖微卷、神情干练",
+                "identity": {
+                    "authority": "街头巡查",
+                    "resources": ["消息灵通"],
+                    "limits": ["受上司节制"],
+                    "obligations": ["按时交班"],
+                    "exposure_risk": "私放人情会被革职",
+                    "hidden_mismatch": "表面公事公办实则留有余地",
+                },
+                "decision": {"core_value": "自保", "current_goal": "安稳当差"},
+            }
+            state2, _ = apply(state, commit("continue", [promo]), wid)
+            self.assertEqual(C.missing_for_tier("supporting", state2["characters"][bg_ids[0]]), [])
+            after = opening.standby_previews(state2, pack)
+            for slot, prev in after.items():
+                self.assertEqual(prev["name"], before[slot]["name"], (wid, slot))
+
+    def test_mixed_preference_prioritizes_multi_slot_mixed_combos_with_single_slot_fallback(self):
+        from adult_tension.application import service
+        from adult_tension.application.context import Context
+        from helpers.cli import SKILL_ROOT, clean_env
+        from helpers.fs import temp_dir
+
+        for seed in range(1, 21):
+            state, _ = build("random", seed, npc_gender_preference="mixed")
+            majors = [c for c in state["characters"].values() if c["tier"] == "major" and c["id"] != "player"]
+            self.assertGreaterEqual(len(majors), 2, seed)
+            self.assertTrue({"female", "male"} <= {c["gender"] for c in majors}, (seed, majors))
+        with temp_dir() as tmp:
+            ctx = Context(SKILL_ROOT, tmp, clean_env(), {}, False)
+            try:
+                for seed in range(1, 21):
+                    opened = service.new_game(
+                        ctx,
+                        {"request_id": "req_mix_%d" % seed, "mode": "random", "seed": seed, "npc_gender_preference": "mixed"},
+                    )
+                    npcs = opened["context"]["present_npcs"]
+                    self.assertGreaterEqual(len(npcs), 2, seed)
+                    self.assertTrue({"female", "male"} <= {n["gender"] for n in npcs}, (seed, npcs))
+            finally:
+                ctx.close()
+        # Single-slot world still falls back cleanly without NO_MATCH (DATA_CONTRACTS 3.2).
+        single_pack = copy.deepcopy(PACK)
+        base_combo = single_pack["cast_combos"][0]
+        slot0 = base_combo["slots"][0]
+        single_pack["cast_combos"] = [
+            dict(
+                base_combo,
+                id="combo_single_fallback",
+                slots=[slot0],
+                relations=[r for r in base_combo["relations"] if {r["a"], r["b"]} <= {"player", slot0}],
+            )
+        ]
+        cond = opening.normalize_conditions({"mode": "daily", "locks": {"world_id": WORLD}, "npc_gender_preference": "mixed"})
+        st_single, _ = opening.build(single_pack, 5, cond, "sess_single")
+        self.assertEqual(len([c for c in st_single["characters"].values() if c["tier"] == "major" and c["id"] != "player"]), 1)
+        # Nonbinary default mix on a 2-slot combo still produces both female and male under mixed.
+        nb_pack = copy.deepcopy(PACK)
+        nb_pack["default_npc_gender_mix"] = {"female": 0.4, "male": 0.0, "nonbinary": 0.6}
+        two_any = next(
+            c for c in nb_pack["cast_combos"]
+            if len(c["slots"]) == 2 and all(t["gender"] == "any" for t in nb_pack["character_templates"] if t["id"] in c["slots"])
+        )
+        for seed in range(1, 15):
+            genders = opening._npc_genders(nb_pack, two_any, seed, "mixed")
+            self.assertEqual(set(genders.values()), {"female", "male"}, (seed, genders))
+
 
 if __name__ == "__main__":
     unittest.main()

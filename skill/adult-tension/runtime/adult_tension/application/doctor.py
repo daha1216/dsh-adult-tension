@@ -16,6 +16,7 @@ from ..errors import (
     DATA_DIR_UNAVAILABLE,
     INTERNAL_ERROR,
     RUNTIME_UNSUPPORTED,
+    STORAGE_BUSY,
     AppError,
     detail,
 )
@@ -90,7 +91,7 @@ def _content_check(ctx):
     # what new-game offers: the released worlds, or every world under the development switch
     openable = summary["worlds"] if ctx.drafts_switch() else summary["released_worlds"]
     if openable == 0:
-        return _check("content", "warn", "内容版本 %s，还没有可开局的世界" % summary["content_version"], "等待世界包发布")
+        return _check("content", "warn", "内容版本 %s，还没有可开局的世界" % summary["content_version"], "重新安装完整的 Skill 目录")
     return _check(
         "content",
         "ok",
@@ -223,7 +224,12 @@ def _full_checks(ctx, checks):
                 message = "存档格式第 %d 版，无需升级" % DB_SCHEMA_VERSION
             checks.append(_check("migrations", "ok", message))
         except AppError as err:
-            checks.append(_check("migrations", "fail", err.message, err.details[0]["hint"] if err.details else None, err.code, err.details))
+            if err.code == STORAGE_BUSY:
+                busy_hint = "另一个窗口或进程正在读写存档库，请稍后再试"
+                details = [dict(d, hint=busy_hint) for d in err.details]
+                checks.append(_check("migrations", "fail", err.message, busy_hint, err.code, details))
+            else:
+                checks.append(_check("migrations", "fail", err.message, err.details[0]["hint"] if err.details else None, err.code, err.details))
     checks.append(_skill_files_check(ctx.skill_root))
     try:
         checks.append(_content_check(ctx))

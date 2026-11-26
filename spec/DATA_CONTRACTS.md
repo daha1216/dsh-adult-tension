@@ -203,7 +203,7 @@
 - `visibility`：`public`（在场者自动知道）、`private`、`inner`（内心，`known_by` 只能是本人，且永远不能被 `reveal_fact` 传播）。
 - `origin`：`setup`、`observed`、`told`、`retcon`、`offscreen`、`rumor`。
 - 误信用 `truth: false` 加 `believed_by` 表达；同一个 `key` 可以同时有一条真事实和一条假事实。
-- `retcon` 事实不得与同 `key` 的已有事实矛盾，不得出现在 NPC 的 `known_by` 中（除非玩家明确说明对方知道，且不涉及同意、好感）。
+- `retcon` 事实不得与同 `key` 的已有事实矛盾，`known_by` 只能是 `["player"]`，不得为 NPC 追加知情、好感或同意。
 - 传播：`reveal_fact` 只能沿已存在的关系边进行；`spread_rumor` 生成一条走样的新事实（`origin: "rumor"`），原事实不变。
 
 ### 5.2 事件
@@ -338,7 +338,7 @@
 | `enter_scene` / `exit_scene` | 角色登场 / 离场 | 角色已在会话中，或属于世界包未上场的 `standby_cast` 待命模板（引用时自动实例化为完整 `major` 角色卡并写入设定事实） |
 | `introduce_character` | 新角色 | 完整角色卡；年龄 ≥ 18；符合配对偏好或说明原因 |
 | `promote_character` | 升格 | 保留 ID，补齐字段 |
-| `npc_response` | 回应光谱 | `refuse`/`negotiate`/`partial`/`surface`/`genuine`；`basis_fact_ids` 必须在其信息集中；`surface` 必须同时 `add_fact` 记录真实意图 |
+| `npc_response` | 回应光谱 | `refuse`/`negotiate`/`partial`/`surface`/`genuine`；`basis_fact_ids` 必须在其信息集中；`surface` 必填 `true_intent`（由引擎自动记录仅本人知晓的私密事实） |
 | `npc_action` | NPC 自主行动 | `significant: true` 时检查冷却；依据事实同上；离屏冻结时仅限在场者 |
 | `npc_state` | 情绪与状况 | 只改 `status` |
 | `set_voice` | 语态切换 | `cause`：`player_request`/`npc_self`/`revert`；`npc_self` 需填 `trigger` |
@@ -631,7 +631,7 @@
 {
   "format": "adult-tension-save",
   "schema_version": 2,
-  "content_version": "2026.11.26.1",
+  "content_version": "2026.11.26.3",
   "rng_version": 1,
   "skill_version": "0.3.0",
   "exported_at": "2026-10-01T12:00:00+08:00",

@@ -49,7 +49,7 @@ def _busy_error(exc):
     return AppError(
         STORAGE_BUSY,
         "数据库正被其他进程占用",
-        [detail("$", str(exc), "稍后用同一个 request_id 重试", STORAGE_BUSY)],
+        [detail("$", "存档库正被其他进程读写", "稍后用同一个 request_id 重试", STORAGE_BUSY)],
     )
 
 

@@ -91,7 +91,7 @@
     "given_neutral": [
       "星芒",
       "子墨",
-      "安然",
+      "知白",
       "星澜",
       "沐川",
       "青霄",
@@ -112,7 +112,7 @@
         "gender": "any"
       },
       {
-        "pattern": "老{family}",
+        "pattern": "{given}",
         "gender": "any"
       }
     ],
@@ -484,6 +484,11 @@
       "schedule": [
         {
           "from": 0,
+          "to": 479,
+          "location_id": "loc_partner_hotel_suite"
+        },
+        {
+          "from": 480,
           "to": 719,
           "location_id": "loc_roadshow_boardroom"
         },
@@ -504,6 +509,11 @@
         },
         {
           "from": 1260,
+          "to": 1319,
+          "location_id": "loc_partner_hotel_suite"
+        },
+        {
+          "from": 1320,
           "to": 1439,
           "location_id": "loc_partner_hotel_suite"
         }
@@ -620,6 +630,11 @@
       "schedule": [
         {
           "from": 0,
+          "to": 479,
+          "location_id": "loc_partner_hotel_suite"
+        },
+        {
+          "from": 480,
           "to": 719,
           "location_id": "loc_roadshow_boardroom"
         },
@@ -635,8 +650,13 @@
         },
         {
           "from": 1080,
-          "to": 1439,
+          "to": 1319,
           "location_id": "loc_tea_break_terrace"
+        },
+        {
+          "from": 1320,
+          "to": 1439,
+          "location_id": "loc_partner_hotel_suite"
         }
       ],
       "situation": {
@@ -749,6 +769,11 @@
       "schedule": [
         {
           "from": 0,
+          "to": 479,
+          "location_id": "loc_data_room"
+        },
+        {
+          "from": 480,
           "to": 719,
           "location_id": "loc_roadshow_boardroom"
         },
@@ -764,6 +789,11 @@
         },
         {
           "from": 1080,
+          "to": 1319,
+          "location_id": "loc_data_room"
+        },
+        {
+          "from": 1320,
           "to": 1439,
           "location_id": "loc_data_room"
         }
@@ -878,6 +908,11 @@
       "schedule": [
         {
           "from": 0,
+          "to": 479,
+          "location_id": "loc_data_room"
+        },
+        {
+          "from": 480,
           "to": 719,
           "location_id": "loc_interpreter_booth"
         },
@@ -893,8 +928,13 @@
         },
         {
           "from": 1080,
-          "to": 1439,
+          "to": 1319,
           "location_id": "loc_tea_break_terrace"
+        },
+        {
+          "from": 1320,
+          "to": 1439,
+          "location_id": "loc_data_room"
         }
       ],
       "situation": {
@@ -1007,6 +1047,11 @@
       "schedule": [
         {
           "from": 0,
+          "to": 479,
+          "location_id": "loc_partner_hotel_suite"
+        },
+        {
+          "from": 480,
           "to": 719,
           "location_id": "loc_roadshow_boardroom"
         },
@@ -1022,8 +1067,13 @@
         },
         {
           "from": 1080,
-          "to": 1439,
+          "to": 1319,
           "location_id": "loc_data_room"
+        },
+        {
+          "from": 1320,
+          "to": 1439,
+          "location_id": "loc_partner_hotel_suite"
         }
       ],
       "situation": {
@@ -1136,6 +1186,11 @@
       "schedule": [
         {
           "from": 0,
+          "to": 479,
+          "location_id": "loc_data_room"
+        },
+        {
+          "from": 480,
           "to": 719,
           "location_id": "loc_roadshow_boardroom"
         },
@@ -1151,6 +1206,11 @@
         },
         {
           "from": 1080,
+          "to": 1319,
+          "location_id": "loc_data_room"
+        },
+        {
+          "from": 1320,
           "to": 1439,
           "location_id": "loc_data_room"
         }
@@ -1848,11 +1908,11 @@
       "location_ids": [
         "loc_roadshow_boardroom"
       ],
-      "trigger": "副主席笑着点名，请合伙人起身到白板前，脱稿推演五分钟的现金流。",
+      "trigger": "副主席笑着点名，请主讲席五分钟内到白板前脱稿推演现金流。",
       "objective": "在五分钟里把推演讲完，不让任何人看出异样。",
-      "choice": "铅笔裙内蕾丝腿环束缚带紧贴的静音无线遥控跳蛋还在嗡鸣，起身就是十二米长桌；推回零档，还是赌合伙人撑得住。",
+      "choice": "衣下蕾丝腿环束缚带紧贴的静音无线遥控跳蛋还在嗡鸣，起身要走过十二米长桌；把档位推回零，还是赌台上撑得住。",
       "immediate": {
-        "text": "合伙人放下笔站起来，桌布滑过小腿，高跟鞋踩出第一步。",
+        "text": "全场目光聚拢过来，桌布微动，第一步已经迈向白板。",
         "minutes": 5
       },
       "near": {
@@ -1860,18 +1920,18 @@
         "deadline_minutes": 30
       },
       "far": {
-        "trigger": "合伙人在白板前失态",
+        "trigger": "白板推演当众失态卡壳",
         "consequence": "基石认购撤回，发行价下调一档，合伙人委员会要个解释。",
         "due_days": 2
       },
       "exits": [
         {
-          "option": "在合伙人起身前，口袋里的拇指把档位推回零。",
-          "cost": "合伙人会知道你心软了，下一局的主动权就此让出去。"
+          "option": "趁起身迈步前，口袋里的拇指悄悄把档位推回零。",
+          "cost": "对方会察觉你心软收手，下一局的主动权就此让出去。"
         },
         {
-          "option": "什么也不动，等合伙人自己决定要不要说暗号。",
-          "cost": "合伙人要是撑不住在白板前说出“收盘”，整个会场都会听见那两个字。"
+          "option": "指尖按兵不动，等对方自己决定要不要开口喊暗号。",
+          "cost": "一旦撑不住当众吐出“收盘”二字，整桌董事都会听见异样。"
         }
       ],
       "leverage": null,
@@ -1890,11 +1950,11 @@
         "loc_roadshow_boardroom",
         "loc_interpreter_booth"
       ],
-      "trigger": "合伙人锁骨上的领夹麦还开着，刚才换气时那一声很轻的颤，进了同传的监听耳机。",
+      "trigger": "主讲席衣领上的领夹麦忘了切静音，刚才换气时那一声极轻的颤息直接进了监听回路。",
       "objective": "在下一段问答开始前，让那一路麦安静下来。",
       "choice": "去同传间求人推下推子，就得解释为什么；不去，下一声可能进所有人的耳机。",
       "immediate": {
-        "text": "同传隔着单向玻璃看过来，手指在推子上停住了。",
+        "text": "调音台指示灯轻轻一跳，监听回路那头瞬间安静了一秒。",
         "minutes": 10
       },
       "near": {
@@ -1903,17 +1963,17 @@
       },
       "far": {
         "trigger": "那一段录音被合规调出来",
-        "consequence": "合伙人要写一份说明，赌约可能瞒不住。",
+        "consequence": "项目组必须交出一份书面说明，私下赌约很可能瞒不住。",
         "due_days": 3
       },
       "exits": [
         {
-          "option": "你借口核数据走进同传间，请同传把那一路的增益压下去。",
-          "cost": "同传会记住这个人情，也会记住你替合伙人求过情。"
+          "option": "你借口核对译词推门进同传间，把那一路领夹麦的增益压下去。",
+          "cost": "知情人会记住这桩人情，也会猜出你们刚才在掩饰什么。"
         },
         {
-          "option": "合伙人当众说一句“暂停传译”，自己去同传间。",
-          "cost": "全场都会看见合伙人离席，副主席会追问为什么。"
+          "option": "当众借口设备杂音喊暂停三分钟，亲自去后台切掉麦路。",
+          "cost": "全桌董事都会看见这番中断，副主席散会后定会追问缘由。"
         }
       ],
       "leverage": null,
@@ -1980,30 +2040,30 @@
         "loc_tea_break_terrace",
         "loc_data_room"
       ],
-      "trigger": "对手行的合伙人在露台上跟人说，今天的合伙人“像是在忍着什么”，话已经传到第二个人嘴里。",
+      "trigger": "茶歇露台上有人私下议论，说主讲席今天声音发紧“像在强忍着什么”，风言风语已传到第二个人耳里。",
       "objective": "在闲话传到发行人和副主席耳朵里之前，把它掐住。",
-      "choice": "去找对手当面说清楚，就得给一个说法；放着不管，闲话会越传越像真的。",
+      "choice": "主动过去把风声岔开，就得编个说得通的由头；放着不管，闲话越传越像真的。",
       "immediate": {
-        "text": "茶歇阿姐添奶茶时小声提了一句，眼睛往对手那边瞟。",
+        "text": "侍茶服务员添水时低声提醒了一句，眼神往露台栏杆那边瞟。",
         "minutes": 15
       },
       "near": {
-        "text": "下午定价会前，对手可能把这话说给副主席听。",
+        "text": "下午定价会开始前，这句闲话随时可能传进副主席耳朵。",
         "deadline_minutes": 120
       },
       "far": {
         "trigger": "闲话传进发行人和董事的耳朵",
-        "consequence": "首席的位子被对手抢走，合伙人的名声蒙上一层灰。",
+        "consequence": "牵头席位很可能被联席对手顺势抢走，团队声誉蒙上一层灰。",
         "due_days": 4
       },
       "exits": [
         {
-          "option": "你去找对手，说合伙人这几天在吃止痛药。",
-          "cost": "一个谎要用十个谎去圆，对手迟早会来核实。"
+          "option": "你主动走过去笑着接话，拿连熬三宿胃痛吃药把异样圆过去。",
+          "cost": "一个借口得用更多细节去圆，对方散会后未必不会试探。"
         },
         {
-          "option": "让合伙人自己去找对手，单独聊五分钟。",
-          "cost": "两个斗了十年的人关起门来，谈出什么谁也说不准。"
+          "option": "干脆拉着知情人在底稿室关门聊五分钟，用一笔配售份额换闭嘴。",
+          "cost": "关起门做利益交换，等于把另一桩软肋递到了对方手里。"
         }
       ],
       "leverage": null,
@@ -2021,7 +2081,7 @@
       "location_ids": [
         "loc_roadshow_boardroom"
       ],
-      "trigger": "技术员刚换了会议室无线翻页器，每翻一页便与合伙人铅笔裙下的静音无线遥控跳蛋及白衬衫内纯银细链乳夹共振的微脉冲串频，估值曲线跟着一跳。",
+      "trigger": "技术员刚换了无线翻页器，每按一下翻页便与衣下静音无线遥控跳蛋及纯银细链乳夹的微脉冲串频，估值曲线跟着乱跳。",
       "objective": "在下一次换页前，弄清楚哪个按钮会串频。",
       "choice": "继续用遥控器，投影随时会乱跳；收起来，赌约就算你自己认输。",
       "immediate": {
@@ -2043,7 +2103,7 @@
           "cost": "调档要低头看口袋，副主席正好看着你。"
         },
         {
-          "option": "合伙人顺势说投影有问题，提议休会十分钟。",
+          "option": "顺势指出投影信号受干扰，当场提议休会十分钟检修。",
           "cost": "休会要董事会秘书点头，会议记录里会写上这一笔。"
         }
       ],
@@ -2064,9 +2124,9 @@
       ],
       "trigger": "副主席临走前丢下一句：明早九点前，要看到按下调一档重算的模型和问答稿。",
       "objective": "在九点前把模型和问答稿改完，交到董事会秘书手里。",
-      "choice": "通宵改稿，就得和合伙人在没窗的底稿室待一整夜；推给别人，合伙人不放心。",
+      "choice": "留在没窗的底稿室通宵合改，还是拆成两半回套房各自赶工？",
       "immediate": {
-        "text": "合伙人把高跟鞋踢到沙发底下，打开电脑，看了你一眼。",
+        "text": "底稿室门一合，桌上笔记本屏幕亮起，身旁的人抬眼看向你。",
         "minutes": 60
       },
       "near": {
@@ -2080,12 +2140,12 @@
       },
       "exits": [
         {
-          "option": "你留下来陪合伙人通宵，一人改模型一人改问答。",
+          "option": "留下来在底稿室并肩通宵，一人重跑模型一人重写问答稿。",
           "cost": "刷卡记录会显示两个人在底稿室待了一整夜。"
         },
         {
-          "option": "把助理叫回来分担，你先送合伙人回套房休息。",
-          "cost": "合伙人会觉得你在避嫌，也会多一个人知道今晚的事。"
+          "option": "把基础底表拆出去分担，先带人回楼上酒店套房闭门核核心参数。",
+          "cost": "套房门一关孤男寡女共处半宿，今晚的账更难算清了。"
         }
       ],
       "leverage": null,
@@ -2183,7 +2243,7 @@
       "location_ids": [
         "loc_tea_break_terrace"
       ],
-      "text": "{npc.name}端着奶茶站在栏杆边，朝你抬了抬下巴：{player.title}，借一步说话。"
+      "text": "{npc.name}端着奶茶站在栏杆边，朝你抬了抬下巴：“{player.title}，借一步说话。”"
     },
     {
       "id": "hook_interpreter_offers_headset",
@@ -2228,7 +2288,7 @@
       "location_ids": [
         "loc_data_room"
       ],
-      "text": "{npc.name}抱着文件推门进来轻轻带上门：{player.title}，最上面是半年前的底稿记录。"
+      "text": "{npc.name}抱着文件推门进来轻轻带上门：“{player.title}，最上面是半年前的底稿记录。”"
     }
   ],
   "twists": [

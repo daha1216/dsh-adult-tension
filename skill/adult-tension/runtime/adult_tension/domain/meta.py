@@ -2,6 +2,8 @@
 but never advance the turn, and they write no narrative.
 """
 
+import unicodedata
+
 from ..errors import INVALID_INPUT, INVARIANT_VIOLATION, NOT_FOUND, AppError, detail
 from . import facts as FA
 from . import settlement
@@ -19,8 +21,48 @@ PREFERENCE_LABELS = {
 PACE_LABELS = {"slow": "慢热", "standard": "标准", "direct": "直接"}
 EXPLICITNESS_LABELS = {"subtle": "含蓄", "standard": "标准", "explicit": "直白"}
 SHOWN_PREFERENCES = ("inner_view", "assistant", "offscreen_simulation", "person", "npc_gender_preference", "pace", "explicitness")
-BOUNDARY_LEADINS = ("麻烦", "请", "希望你", "希望", "我个人", "我")
+BOUNDARY_LEADINS = ("麻烦", "请", "希望你", "希望", "我个人", "我", "绝对", "绝")
 BOUNDARY_PREFIXES = (
+    "绝对不想看到",
+    "绝对不想看",
+    "绝对不能接受",
+    "绝对不接受",
+    "绝对不出现",
+    "绝对不写到",
+    "绝对不写",
+    "绝对不看",
+    "绝对不涉及",
+    "绝对不让",
+    "绝对不有",
+    "绝对不能",
+    "绝对不要",
+    "绝对不",
+    "绝不想看到",
+    "绝不想看",
+    "绝不能接受",
+    "绝不接受",
+    "绝不出现",
+    "绝不写到",
+    "绝不写",
+    "绝不看",
+    "绝不涉及",
+    "绝不让",
+    "绝不有",
+    "绝不能",
+    "绝不要",
+    "绝不",
+    "严禁出现",
+    "严禁写到",
+    "严禁写",
+    "严禁涉及",
+    "严禁有",
+    "严禁",
+    "不准出现",
+    "不准写到",
+    "不准写",
+    "不准涉及",
+    "不准有",
+    "不准",
     "不想看到",
     "不想看",
     "不想要",
@@ -48,10 +90,30 @@ BOUNDARY_PREFIXES = (
     "别有",
     "别",
     "不许",
+    "禁止出现",
+    "禁止写到",
+    "禁止写",
+    "禁止涉及",
     "禁止",
 )
 BOUNDARY_VERBS = ("写到", "写", "出现", "涉及", "看到", "看")
-BARE_BOUNDARY_MODALS = ("不要", "不能", "别", "不许", "禁止", "拒绝", "不想", "不接受", "不能接受", "不要再", "别再")
+BARE_BOUNDARY_MODALS = (
+    "不要",
+    "不能",
+    "别",
+    "不许",
+    "禁止",
+    "拒绝",
+    "不想",
+    "不接受",
+    "不能接受",
+    "不要再",
+    "别再",
+    "绝不",
+    "绝对不",
+    "严禁",
+    "不准",
+)
 
 
 def _bump(state):
@@ -80,7 +142,7 @@ def _boundary_subject(text):
     matched_prefix = None
     for prefix in BOUNDARY_PREFIXES:
         if body.startswith(prefix):
-            rest = body[len(prefix) :].strip()
+            rest = body[len(prefix) :].lstrip(" \t：:")
             if prefix.endswith("有") and rest.startswith("人"):
                 continue
             if rest:
@@ -91,7 +153,7 @@ def _boundary_subject(text):
     if stripped and matched_prefix in BARE_BOUNDARY_MODALS:
         for verb in BOUNDARY_VERBS:
             if body.startswith(verb):
-                rest = body[len(verb) :].strip()
+                rest = body[len(verb) :].lstrip(" \t：:")
                 if rest:
                     body = rest
                 break
@@ -102,7 +164,7 @@ def set_boundary(state, content, action, text=None, tags=None, boundary_id=None)
     work = FA.working_copy(state)
     boundaries = work["safety"]["boundaries"]
     if text is not None:
-        text = text.strip()
+        text = text.strip(" \t\r\n\u200b\u2060\ufeff")
     if action == "add":
         valid = {t["id"] for t in content["tags"]}
         problems = [
@@ -110,7 +172,7 @@ def set_boundary(state, content, action, text=None, tags=None, boundary_id=None)
             for i, tag in enumerate(tags or [])
             if tag not in valid
         ]
-        if not text:
+        if not text or not any(unicodedata.category(ch)[0] not in ("C", "Z") for ch in text):
             problems.append(detail("$.text", "边界要保留玩家的原话", None, INVALID_INPUT))
         if problems:
             raise AppError(INVALID_INPUT, problems[0]["reason"], problems)

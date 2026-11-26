@@ -97,7 +97,7 @@
         "gender": "any"
       },
       {
-        "pattern": "小{given}",
+        "pattern": "{family}",
         "gender": "any"
       }
     ],
@@ -1997,7 +1997,11 @@
         }
       ],
       "leverage": null,
-      "hook_ids": [],
+      "hook_ids": [
+        "hook_witch_collar_heat",
+        "hook_witch_hidden_chime",
+        "hook_witch_bread_mud_chart"
+      ],
       "start_minute": 0,
       "tags": [
         "bodily_harm",
@@ -2006,7 +2010,7 @@
     },
     {
       "id": "press_dawn_pyre_execution",
-      "title": "晨钟将鸣与火刑柴堆备火",
+      "title": "子夜垒柴与提前提审警讯",
       "source": "institution",
       "flags": [
         "timed"
@@ -2016,15 +2020,15 @@
         "loc_cell_eight",
         "loc_archive_scriptorium"
       ],
-      "trigger": "广场松脂柴车轰鸣穿透岩顶，晨雾渐稀，明火刽子手哨队已在回廊端头整列。",
-      "objective": "晨钟响彻金顶前清空廊哨或携囚钻入罗马古暗渠。",
+      "trigger": "广场松脂柴车轰鸣穿透岩顶，夜雾寒重，执火刽子手哨队已在回廊端头提前整列。",
+      "objective": "提审铁钟敲响前清空廊哨，或携囚钻入罗马古暗渠。",
       "choice": "灌龟息散诈死混出广场，还是丢硫磺丸带刀硬杀出路。",
       "immediate": {
         "text": "重甲铁靴停在两道橡木门外，随时撞门提囚。",
         "minutes": 5
       },
       "near": {
-        "text": "首缕天光触及教堂金顶，行刑官抬铜号准备拉钟。",
+        "text": "廊道火把逐盏点亮，行刑官已抬起铜号准备拉响提囚警钟。",
         "deadline_minutes": 15
       },
       "far": {
@@ -2281,7 +2285,7 @@
         "loc_inquisition_vault",
         "loc_cross_corridor"
       ],
-      "text": "{grand_inquisitor_julian.name}按住装满纯银细雕腕扣与黑呢蒙眼带的紫檀密匣拦在阶前，黄铜主钥匙叮当冷问{player.title}深夜缘何擅行。"
+      "text": "{grand_inquisitor_julian.name}按住装满纯银细雕腕扣与黑呢蒙眼带的紫檀密匣拦在阶前，晃响黄铜主钥匙冷问：“{player.title}深夜至此，缘何擅行？”"
     },
     {
       "id": "hook_inquisitor_red_ledger",
@@ -2328,7 +2332,7 @@
         "loc_sewer_tunnel",
         "loc_cell_eight"
       ],
-      "text": "自暗渠口攀上湿冷石阶时左肋旧创骤然裂开渗红，{rebel_envoy_celine.name}咬牙闷哼身形微晃，反手死死扣紧{player.title}探来的前臂。"
+      "text": "自暗渠口攀上湿冷石阶时左肋旧创骤然裂开渗红，{rebel_envoy_celine.name}咬牙闷哼身形微晃，反手死死扣紧你探来的前臂。"
     },
     {
       "id": "hook_envoy_wax_seal",
@@ -2337,7 +2341,7 @@
       "location_ids": [
         "loc_archive_scriptorium"
       ],
-      "text": "{papal_envoy_ottavia.name}指扣秘阁黄铜星盘，双鹰戒压死豁免诏卷一角，笑问夜探暗渠图的{player.title}究竟拿什么换命。"
+      "text": "{papal_envoy_ottavia.name}指扣秘阁黄铜星盘，双鹰戒压死豁免诏卷一角笑问：“夜探暗渠图的{player.title}，打算拿什么换命？”"
     },
     {
       "id": "hook_envoy_secret_order",
@@ -2356,7 +2360,7 @@
         "loc_archive_scriptorium",
         "loc_cross_corridor"
       ],
-      "text": "{papal_envoy_ottavia.name}拢住袖中一叠圣山亏空审计单斜睨过来，低声问手握线索的{player.title}是否愿跟枢密院搭条暗线。"
+      "text": "{papal_envoy_ottavia.name}拢住袖中一叠圣山亏空审计单斜睨过来，压低嗓音问你是否愿跟枢密院搭条暗线。"
     },
     {
       "id": "hook_inquisitor_vault_ambush",
@@ -2365,7 +2369,7 @@
       "location_ids": [
         "loc_inquisition_vault"
       ],
-      "text": "{grand_inquisitor_julian.name}突然反身挡住刑具密室暗石门框，冷冷打量{player.title}袖笼纸页，手指缓缓搭上腰间双簧主钥匙。"
+      "text": "{grand_inquisitor_julian.name}突然反身挡住刑具密室暗石门框，冷冷打量你袖笼纸页，手指缓缓搭上腰间双簧主钥匙。"
     },
     {
       "id": "hook_kitchen_soup_basket",
@@ -2393,7 +2397,7 @@
       "location_ids": [
         "loc_archive_scriptorium"
       ],
-      "text": "{jailer_scribe_lucian.name}从羊皮卷架后探出半张苍白面孔，拽住{player.title}衣袖悄声掀开古罗马暗渠原图一角。"
+      "text": "{jailer_scribe_lucian.name}从羊皮卷架后探出半张苍白面孔，拽住你的衣袖悄声掀开古罗马暗渠原图一角。"
     },
     {
       "id": "hook_scribe_ledger_rubbing",
@@ -2403,7 +2407,7 @@
         "loc_archive_scriptorium",
         "loc_cross_corridor"
       ],
-      "text": "{jailer_scribe_lucian.name}抱紧案卷缩在廊柱阴影里耳尖发颤，低声求{player.title}收下贴身黑账拓本并带{jailer_scribe_lucian.ta}离山。"
+      "text": "{jailer_scribe_lucian.name}抱紧案卷缩在廊柱阴影里耳尖发颤，低声求你收下贴身黑账拓本并带{jailer_scribe_lucian.ta}离山。"
     }
   ],
   "twists": [

@@ -104,7 +104,7 @@
         "gender": "any"
       },
       {
-        "pattern": "老{family}",
+        "pattern": "阿{given_last}",
         "gender": "any"
       }
     ]
@@ -590,11 +590,16 @@
       "schedule": [
         {
           "from": 0,
+          "to": 509,
+          "location_id": "loc_phone_bid_corridor"
+        },
+        {
+          "from": 510,
           "to": 1200,
           "location_id": "loc_auction_salesroom"
         },
         {
-          "from": 1200,
+          "from": 1201,
           "to": 1439,
           "location_id": "loc_phone_bid_corridor"
         }
@@ -2253,7 +2258,8 @@
       "kind": "approach",
       "slot": "auctioneer_lin",
       "location_ids": [
-        "loc_auctioneer_preview_room"
+        "loc_auctioneer_preview_room",
+        "loc_auction_salesroom"
       ],
       "text": "{npc.name}扶着门框走下台阶时脚下一软，咬着唇朝你伸出手：鞋跟太高了，扶我一下。"
     },
@@ -2300,7 +2306,7 @@
       "location_ids": [
         "loc_vault_gallery"
       ],
-      "text": "{npc.name}摘下老花镜，从中山装内袋摸出一张折了三折的旧批条：{player.title}来得正好，这东西我只给你看。"
+      "text": "{npc.name}摘下老花镜，从中山装内袋摸出一张折了三折的旧批条：“{player.title}来得正好，这东西我只给你看。”"
     },
     {
       "id": "hook_guard_release_slip",
@@ -2352,9 +2358,10 @@
       "kind": "approach",
       "slot": "auction_president",
       "location_ids": [
-        "loc_phone_bid_corridor"
+        "loc_phone_bid_corridor",
+        "loc_auction_salesroom"
       ],
-      "text": "{npc.name}端着两杯威士忌走过来，递一杯给你，笑着问：{player.title}，今晚这场拍卖，你打算怎么写进记录？"
+      "text": "{npc.name}端着两杯威士忌走过来，递一杯给你，笑着问：“{player.title}，今晚这场拍卖，你打算怎么写进记录？”"
     },
     {
       "id": "hook_president_witness",

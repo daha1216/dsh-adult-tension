@@ -977,6 +977,70 @@ class _Checker:
                         "压力模式下没有能与这个组合配上的压力、地点与钩子",
                         None,
                     )
+        if p["cast_combos"]:
+            combo_hooks_map = [
+                (combo, set(combo["slots"]), [h for h in p["hooks"] if h["slot"] in combo["slots"]])
+                for combo in p["cast_combos"]
+            ]
+            for i, ident in enumerate(p["player_identities"]):
+                if not any(
+                    ident["social_position"] in combo["player_positions"]
+                    and (not combo["identity_ids"] or ident["id"] in combo["identity_ids"])
+                    for combo, _slots, _hooks in combo_hooks_map
+                ):
+                    self.add(
+                        "$.player_identities[%d]" % i,
+                        "没有任何人物组合接纳这个玩家身份：%s" % ident["id"],
+                        "调整 social_position 或人物组合的 player_positions / identity_ids",
+                    )
+            for i, act in enumerate(p["daily_activities"]):
+                if not any(hooks and hook_matches(act, hooks, True) for _combo, _slots, hooks in combo_hooks_map):
+                    self.add(
+                        "$.daily_activities[%d]" % i,
+                        "没有任何人物组合与钩子能在这个活动的地点开局：%s" % act["id"],
+                        "检查活动的 location_ids、hook_ids 与人物组合钩子的交集",
+                    )
+            for i, pr in enumerate(p["pressures"]):
+                needed = ({pr["leverage"]["holder"], pr["leverage"]["subject"]} - {"player"}) if pr["leverage"] else set()
+                if needed and not any(needed <= slots for _combo, slots, _hooks in combo_hooks_map):
+                    continue
+                if not any(needed <= slots and hooks and hook_matches(pr, hooks, True) for _combo, slots, hooks in combo_hooks_map):
+                    self.add(
+                        "$.pressures[%d]" % i,
+                        "没有任何人物组合与钩子能在这个压力的地点开局：%s" % pr["id"],
+                        "检查压力的 location_ids、hook_ids、把柄角色与人物组合钩子的交集",
+                    )
+            combo_slots = {s for _combo, slots, _hooks in combo_hooks_map for s in slots}
+            if p["daily_activities"] or p["pressures"]:
+                for i, hook in enumerate(p["hooks"]):
+                    if hook["slot"] not in combo_slots:
+                        continue
+                    h_locs = set(hook["location_ids"])
+                    reachable = False
+                    for _combo, slots, _hooks in combo_hooks_map:
+                        if hook["slot"] not in slots:
+                            continue
+                        if any(
+                            (not act["hook_ids"] or hook["id"] in act["hook_ids"])
+                            and (not h_locs or bool(h_locs & set(act["location_ids"])))
+                            for act in p["daily_activities"]
+                        ):
+                            reachable = True
+                            break
+                        if any(
+                            (not pr["leverage"] or ({pr["leverage"]["holder"], pr["leverage"]["subject"]} - {"player"}) <= slots)
+                            and (not pr["hook_ids"] or hook["id"] in pr["hook_ids"])
+                            and (not h_locs or bool(h_locs & set(pr["location_ids"])))
+                            for pr in p["pressures"]
+                        ):
+                            reachable = True
+                            break
+                    if not reachable:
+                        self.add(
+                            "$.hooks[%d]" % i,
+                            "这个钩子与所有可配对的活动/压力在地点或限定列表上互斥，永远无法开局：%s" % hook["id"],
+                            "调整钩子的 location_ids，或检查活动/压力的 location_ids 与 hook_ids",
+                        )
         if not self.custom and p["cast_combos"]:
             if p["daily_activities"] and not world_daily_open:
                 self.add("$.daily_activities", "日常模式下全包没有任何人物组合、活动、地点与钩子能互相配上", None)

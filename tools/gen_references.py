@@ -108,11 +108,11 @@ def render_commands():
     from adult_tension.application import commands, specs
 
     lines = [GENERATED_NOTE, "# 命令参考\n\n"]
-    lines.append("调用：`<python> scripts/adult_tension.py <command> --json [--input-file PATH] [--data-dir PATH]`\n\n")
-    lines.append("- 输入是一个 JSON 对象，来自 `--input-file`（UTF-8，可带 BOM）。需要输入的命令在没有 `--input-file` 且 stdin 不是终端时读取 stdin；可选输入只从 `--input-file` 读取（`--input-file -` 表示 stdin）。\n")
-    lines.append("- 任何输入都可以带 `\"encoding_check\": \"汉字\"`。值不对说明中文在传入途中被终端改坏（例如 PowerShell 5.1 的管道把中文变成 `?`），命令被拒（`INVALID_INPUT`，路径 `$.encoding_check`），改用 `--input-file` 传 UTF-8 文件。这个字段在命令处理之前去掉。\n")
+    lines.append("调用：`<python> \"<本 Skill 目录>/scripts/adult_tension.py\" <command> --json [--input-file \"<文件>\"] [--data-dir \"<目录>\"]`\n\n")
+    lines.append("- 输入是一个 JSON 对象，来自 `--input-file \"<文件>\"`（UTF-8，可带 BOM）。需要输入的命令在没有 `--input-file` 且 stdin 不是终端时读取 stdin；可选输入只从 `--input-file` 读取（`--input-file -` 表示 stdin）。Windows 环境或 JSON 载荷含反斜杠 `\\`（如文件路径，防 `bash -c` 折叠 `\\\\`）时，一律写入 UTF-8 临时文件并用 `--input-file \"<文件>\"` 传入。\n")
+    lines.append("- 任何输入都可以带 `\"encoding_check\": \"汉字\"`。值不对说明中文在传入途中被终端改坏（例如 PowerShell 5.1 的管道把中文变成 `?`），命令被拒（`INVALID_INPUT`，路径 `$.encoding_check`），改用 `--input-file \"<文件>\"` 传 UTF-8 文件。这个字段在命令处理之前去掉。\n")
     lines.append("- 输出是一个信封 `{\"ok\", \"data\", \"error\"}`，以 UTF-8 字节写到 stdout。成功与失败都附带 `next_request_id`（成功在 `data` 里，失败在 `error` 里），下一次写操作直接用它。\n")
-    lines.append("- 全局参数：`--json`（输出 JSON，默认行为，保留兼容）、`--pretty`（缩进输出）、`--debug`、`--input-file PATH`、`--data-dir PATH`。\n")
+    lines.append("- 全局参数：`--json`（输出 JSON，默认行为，保留兼容）、`--pretty`（缩进输出）、`--debug`、`--input-file \"<文件>\"`、`--data-dir \"<目录>\"`。\n")
     lines.append("- 写操作都带 `request_id`；会话内的写操作还带 `session_id` 与 `expected_revision`。同一 `request_id` + 同一输入重放时返回原响应并标记 `replayed: true`。\n")
     lines.append("- 开局、读档、导入（`new-game`、`load-slot`、`import-save`）与带 `\"depth\": \"full\"` 的 `get-context` 另外返回 `commit_template`：会话号已填好的一次记录，`turns` 内含单回合骨架（在场的人和最常用的操作），每个攒下的回合照它写一项；尖括号是要写的内容，`a|b` 表示选一个，用不上的操作删掉。带 `preview_time` 的 `get-context` 另外返回 `skip_template`：快进这一回合的记录，`advance_time` 与每条必需的 `offscreen_beat` 已排好（攒下的回合要先记录，再预览）。\n")
     lines.append("- 开发开关（环境变量，由测试环境设置，玩家不需要）：`ADULT_TENSION_HOME` 指定数据目录；`ADULT_TENSION_INCLUDE_DRAFTS=1` 让未发布的世界参与开局与世界列表；`ADULT_TENSION_TRACE=<文件>` 把每次调用（参数、输入、信封、耗时）追加到该文件，供端到端评测采集。\n")

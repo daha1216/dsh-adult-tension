@@ -2,7 +2,7 @@
 
 # 世界列表
 
-内容版本：`2026.11.26.2`。只有 `released` 的世界参与随机开局、出现在 `list-worlds` 里。玩家问某类题材时用 `list-worlds` 带 `query`，点名开局用 `new-game` 的 `world_query`，都按标题、时代、地方和完整介绍匹配。“有超自然的”“不要灾难的”这类按内容标签浏览：`list-worlds` 带 `tags` / `exclude_tags`。
+内容版本：`2026.11.26.3`。只有 `released` 的世界参与随机开局、出现在 `list-worlds` 里。玩家问某类题材时用 `list-worlds` 带 `query`，点名开局用 `new-game` 的 `world_query`，都按标题、时代、地方和完整介绍匹配。“有超自然的”“不要灾难的”这类按内容标签浏览：`list-worlds` 带 `tags` / `exclude_tags`。
 
 | 内容标签 | ID | 已发布世界数 |
 |---|---|---|
@@ -34,7 +34,7 @@
 | 受审的高傲女骑士 | `abyssal_dungeon_knightess_crest` | 低魔黑暗帝国北境的黑曜石要塞里，圣殿女骑士长兵败受审，锁骨上烙着一道每逢子夜就灼痛的深渊魔纹，押在地下三层的断罪地牢；主审是曾与骑士长并肩七年的前廷大审判官。 |
 | 不肯签字的女飞官 | `aerospace_simulator_pod_gauge_release` | 商业航天测控基地的总装大厅里，悬空的全动模拟飞行球舱日夜运转。 |
 | 旧校地窖女会长 | `afterschool_cellar_president_confession` | 2002年秋末，私立圣罗兰大学的百年西洋旧校舍即将拆除改建。 |
-| 秘药高热女首席 | `alchemy_archive_potion_backlash` | 皇家魔导院地下的禁忌炼药暗室里，冷面首席魔导师带着后辈搭档秘密复原古代共鸣秘药，已熬了大半年：白日授课审稿，入夜便隔着三重结界守在琉璃导管旁试药。 |
+| 秘药高热女首席 | `alchemy_archive_potion_backlash` | 皇家魔导院地下炼药暗室里，冷面首席带着后辈秘密复原古代共鸣秘药：白日授课审稿，入夜隔着结界守在导管旁试药。 |
 | 禁触的雪线圣女 | `alpine_sanctuary_dagger_rescue` | 海拔四千米的雪线神殿逢初冬封山，当值圣女按祖制严守禁触戒律，独居祭坛后的守夜暖室。 |
 | 流沙殿摸金女魁 | `ancient_tomb_gravity_sand_spill` | 民国十六年深秋，发丘世家受雇勘探前朝皇陵，北洋督军府派工兵团驻扎山脚盯梢。 |
 | 防弹密室女军火商 | `arms_dealer_heiress_yacht_standoff` | 军工联合体掌舵女继承人带着保镖队长、大管轮与随船医护官，乘私人防暴游艇在南太平洋公海洽谈防空算力核心交割。 |
@@ -103,11 +103,11 @@
 | 破冰底舱女缉私 | `frozen_border_river_contraband_hold` | 极北界河封冻航季，万吨破冰船顶着浮冰驶近国境关卡。 |
 | 粉钻压轴设计师 | `gemologist_auction_display_harness_jam` | 维港秋拍季，五十九克拉艳彩粉钻领衔预展与压轴夜拍。 |
 | 首发前夜女店长 | `gentle_merch_shop_loft_latch_trap` | 十月的动漫文化街区，独栋周边集合店正为明早的周年限定马口铁吧唧首发通宵备货。 |
-| 风吕屋少老板娘 | `gentle_onsen_proprietress_steam_cavern` | 红叶季的深山百年风吕旅馆账面亏空，少老板娘攥泉道勘察图独撑门楣，既要应付催收与县厅水检，又须防前代私抵泉权、后厨倒货与管汤师盗引汤脉。 |
+| 风吕屋少老板娘 | `gentle_onsen_proprietress_steam_cavern` | 红叶季的深山百年风吕旅馆账面亏空，少老板娘攥勘察图独撑门楣，既要应付催收与水检，又须防前代私抵泉权、后厨倒货与管汤师盗引汤脉。 |
 | 高原井喷女地质师 | `geothermal_deep_well_blowout_preventer` | 海拔四千米的高原地热田寒夜缺氧，超深高温探井逼近临界高压层。 |
 | 鬼市掌灯引路娘 | `ghost_market` | 鬼市每次开在不同的窟里，回去的路要靠人记；灯灭之前，你得决定信谁画的图。 |
 | 更衣室的造假底片 | `ginza_club_csuite_wardrobe_secret` | 东京银座八丁目地下的会员制俱乐部“黑曜石”，是执掌三千亿市值的神崎财投女社长每周固定落脚三次的私密领地：外厅开威士忌定并购价码，内室三折镜前换装锁入机密账册。 |
-| 中日擂台女擂主 | `go_master_tatami_corset_trap` | 深秋杭州棋院悬空玻璃演播厅内，中日围棋擂台赛决胜番棋汇聚千万直播目光。 |
+| 中日擂台女擂主 | `go_master_tatami_corset_trap` | 深秋杭州棋院悬空演播厅内，中日围棋擂台决胜局汇聚千万目光。 |
 | 掌权的冷艳女管家 | `gothic_castle_head_maid_discipline` | 十九世纪末的黑森林深处，一座古堡孤悬在绝壁上。 |
 | 递辞呈的女仆长 | `gothic_manor_maid_secret` | 孤岛悬崖的黑石古堡，白日以戒尺管教全府的女仆长，与古堡继承人间压着多年情愫；主仆越界一经查实便要逐出古堡。 |
 | 背负黑账看板娘 | `guild_backroom_debt` | 边境拓荒重镇的冒险者公会，地底的石窖是追偿室。 |
@@ -118,7 +118,7 @@
 | 水上洛神女舞者 | `hanfu_fairy_pavilion_bell_dudou_jam` | 江南古风影视城迎来古典舞《洛神》水上实景排演周。 |
 | 港口夜班 | `harbor_night_shift` | 集装箱码头的夜班从晚八点到早八点，灯一直亮到天明，人很少，交接班的十分钟里什么都可能发生。 |
 | 压载舱里的人质 | `heiress_ballast_tank_submersion` | 北大西洋风暴季，跨国航运财阀的奢华邮轮正航行公海。 |
-| 安全屋的财团千金 | `heiress_panic_room_stalemate` | 半山临海豪宅迎来家族信托控股权交割前夜，刚接掌大权的冷傲独生女千金坐镇海景主卧与装甲安全屋核验密约。 |
+| 安全屋的财团千金 | `heiress_panic_room_stalemate` | 半山豪宅迎来信托控股权交割前夜，接掌大权的冷傲千金坐镇主卧与安全屋核验密约。 |
 | 首演前钢琴千金 | `heiress_piano_choker_lever_jam` | 严冬音乐学院迎来财阀千金的钢琴硕士毕业独奏首演。 |
 | 十号风球船坞 | `hongkong_shipping_cargo_hold` | 香港青衣霍家浮船坞，十号风球风暴潮正拍打进坞大修的三万吨散货轮。 |
 | 洪峰水坝女调度 | `hydroelectric_penstock_intake_gate_stuck` | 峡谷混凝土重力坝进入七月主汛期，水工与调度人员吃住在坝上，半山腰移民村灯火夜夜映江。 |

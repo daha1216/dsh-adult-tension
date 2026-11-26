@@ -183,7 +183,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 
 ## `event_create`
 
-创建事件（约定、截止、风声、机会、伏笔、概率事件）。due 与 in_minutes 二选一且必须晚于现在；chance 必须带 probability，到期由引擎掷骰；涉及玩家的承诺需要 player_authorized；dedupe_key 与未结束事件不能重复
+创建事件（约定、截止、风声、机会、伏笔、概率事件）。due 与 in_minutes 二选一且必须晚于现在（未传 advance_time 时须晚于默认推进的 3 分钟后）；chance 必须带 probability，到期由引擎掷骰；涉及玩家的承诺需要 player_authorized；dedupe_key 与未结束事件不能重复
 
 | 字段 | 类型 | 必填 | 说明 |
 |---|---|---|---|
@@ -193,8 +193,8 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `text` | 字符串，≤120 字 或 null | 否，默认 `null` |  |
 | `tier` | 枚举：`immediate` / `near` / `far` 或 null | 否，默认 `null` |  |
 | `participants` | 数组（`ID`，1–12 项） | 是 |  |
-| `due` | 对象（游戏时钟） | 否 |  |
-| `in_minutes` | 整数 1..576000 | 否 |  |
+| `due` | 对象（游戏时钟） | 否 | 到期时刻（与 in_minutes 二选一；未传 advance_time 时须晚于默认推进 3 分钟后） |
+| `in_minutes` | 整数 1..576000 | 否 | 距现在的分钟数（与 due 二选一；未传 advance_time 时须 > 3） |
 | `probability` | 数值 (0, 1) 或 null | 否，默认 `null` |  |
 | `dedupe_key` | 字符串，≤80 字，点分的 ASCII 小写键（不含 #），例如 harbor.shift.handover | 是 |  |
 | `repeat` | 布尔 | 否，默认 `false` |  |
@@ -351,7 +351,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `location_id` | `ID` 或 null | 否，默认 `null` | present 为 false 时必填其所在地点 ID |
 | `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` | supporting/major 必填：外貌特征 |
 | `line` | 字符串，≤120 字 或 null | 否，默认 `null` | background 必填：一句话人物勾勒 |
-| `identity` | 对象（身份卡） 或 null | 否，默认 `null` | supporting/major 必填：身份卡（仅创建一次，之后用 identity_update 逐项演化） |
+| `identity` | 对象（身份卡） 或 null | 否，默认 `null` | supporting/major 身份卡（新建必填；升格时仅从 background 首次升格必填，supporting 升 major 已有则不填，之后用 identity_update 逐项演化） |
 | `decision` | 对象（决策卡） 或 null | 否，默认 `null` | 按层级必填：supporting 填 core_value 与 current_goal；major 填完整 9 项 |
 | `intimacy` | 对象（私密倾向卡） 或 null | 否，默认 `null` | major 必填：私密倾向卡（仅创建一次，之后用 intimacy_evidence 逐项演化） |
 | `voices` | 对象（表里语态） 或 null | 否，默认 `null` | major 必填：表里语态（surface 与 inner） |
@@ -451,7 +451,7 @@ NPC 自主行动。significant: true 的重大行动（主动接近、揭发、�
 | `kin_of` | `ID` 或 null | 否，默认 `null` | 与已有重要角色同姓时填其亲属角色 ID |
 | `appearance` | 字符串，≤120 字 或 null | 否，默认 `null` | supporting/major 必填：外貌特征 |
 | `line` | 字符串，≤120 字 或 null | 否，默认 `null` | background 必填：一句话人物勾勒 |
-| `identity` | 对象（身份卡） 或 null | 否，默认 `null` | supporting/major 必填：身份卡（仅创建一次，之后用 identity_update 逐项演化） |
+| `identity` | 对象（身份卡） 或 null | 否，默认 `null` | supporting/major 身份卡（新建必填；升格时仅从 background 首次升格必填，supporting 升 major 已有则不填，之后用 identity_update 逐项演化） |
 | `decision` | 对象（决策卡） 或 null | 否，默认 `null` | 按层级必填：supporting 填 core_value 与 current_goal；major 填完整 9 项 |
 | `intimacy` | 对象（私密倾向卡） 或 null | 否，默认 `null` | major 必填：私密倾向卡（仅创建一次，之后用 intimacy_evidence 逐项演化） |
 | `voices` | 对象（表里语态） 或 null | 否，默认 `null` | major 必填：表里语态（surface 与 inner） |

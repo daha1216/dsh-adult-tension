@@ -11,7 +11,7 @@ import time
 
 from ..domain import invariants
 from ..domain import state as SS
-from ..errors import INTERNAL_ERROR, STALE_REVISION, AppError
+from ..errors import DATA_DIR_UNAVAILABLE, INTERNAL_ERROR, STALE_REVISION, AppError, detail
 from ..persistence import repo
 from . import service, specs
 from .context import Context
@@ -107,7 +107,14 @@ def play(ctx, seed, turns, mode="pressure"):
 
 def run(ctx, payload):
     payload = service.validate(specs.SMOKE, payload)
-    temp = tempfile.mkdtemp(prefix="at-smoke-")
+    try:
+        temp = tempfile.mkdtemp(prefix="at-smoke-")
+    except OSError as exc:
+        raise AppError(
+            DATA_DIR_UNAVAILABLE,
+            "无法创建冒烟测试临时目录",
+            [detail("$.temp_dir", exc.strerror or str(exc), "检查系统临时目录权限与可用空间", DATA_DIR_UNAVAILABLE)],
+        )
     sub = Context(ctx.skill_root, temp, ctx.environ, {}, False)
     try:
         reports = [play(sub, payload["seed"], payload["turns"], mode) for mode in ("daily", "pressure")]

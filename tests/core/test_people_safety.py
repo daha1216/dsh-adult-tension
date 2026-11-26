@@ -720,11 +720,29 @@ class Stage1PeopleAndBoundaryFixesTest(unittest.TestCase):
             ("不接受羞辱", "已记下：不会出现羞辱"),
             ("请不要写虐待", "已记下：不会出现虐待"),
             ("我希望不要涉及背叛", "已记下：不会出现背叛"),
+            ("绝不出现蜘蛛昆虫", "已记下：不会出现蜘蛛昆虫"),
+            ("绝对不要写虫子", "已记下：不会出现虫子"),
+            ("严禁涉及背叛", "已记下：不会出现背叛"),
+            ("我绝不接受血腥", "已记下：不会出现血腥"),
+            ("不准出现：虐待", "已记下：不会出现虐待"),
             ("我不要", "已记下：不会出现我不要"),
         )
         for raw, expected in cases:
             _s, res = meta.set_boundary(self.state, self.content, "add", raw, [])
             self.assertEqual(res["receipt"], expected, raw)
+        from adult_tension.domain import ops, text
+        from adult_tension.errors import AppError
+
+        for zw in ("\u200b", "\ufeff", "  \u2060  "):
+            with self.assertRaises(AppError) as caught:
+                meta.set_boundary(self.state, self.content, "add", zw, [])
+            self.assertEqual(caught.exception.code, "INVALID_INPUT")
+        for term in ("大少", "阔少"):
+            self.assertEqual(text.address_gender("{family}" + term), "male", term)
+        for term in ("名媛", "影后", "长媳", "遗孀", "未亡人"):
+            self.assertEqual(text.address_gender("{family}" + term), "female", term)
+        self.assertIn("background", ops.SPECS["promote_character"].fields["identity"].desc)
+        self.assertIn("3 分钟", ops.DESCRIPTIONS["event_create"])
 
     def test_m7_standby_fullname_guard_kin_of_surname_and_rebind(self):
         from adult_tension.domain import opening

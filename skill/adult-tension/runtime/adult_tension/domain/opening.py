@@ -217,6 +217,18 @@ def _player_gender(identity, given):
     return identity["gender"] if identity["gender"] != "any" else "male"
 
 
+def combo_can_mix(combo, templates=None, pack=None):
+    """Whether a combo has >= 2 slots that can hold at least one female and one male."""
+    if templates is None:
+        templates = {t["id"]: t for t in pack["character_templates"]}
+    slots = combo["slots"]
+    if len(slots) < 2:
+        return False
+    can_f = [s for s in slots if templates[s]["gender"] in ("any", "female")]
+    can_m = [s for s in slots if templates[s]["gender"] in ("any", "male")]
+    return bool(can_f and can_m and len(set(can_f) | set(can_m)) >= 2)
+
+
 def _combo_gender_ok(pack, combo, preference, templates=None):
     if templates is None:
         templates = {t["id"]: t for t in pack["character_templates"]}
@@ -324,6 +336,10 @@ def plan_candidates(pack, mode, conditions):
                     if hook.get("location_ids") and location not in hook["location_ids"]:
                         continue
                     tuples.append((combo, item, location, hook))
+    if preference == "mixed" and not locks.get("combo_id"):
+        mixed_tuples = [t for t in tuples if combo_can_mix(t[0], templates)]
+        if mixed_tuples:
+            tuples = mixed_tuples
     if not tuples and not reasons:
         reasons.append("锁定与排除条件组合起来没有可用的开局（人物组合、%s、地点与钩子互相配不上）" % ("活动" if mode == "daily" else "压力"))
     return tuples, reasons
@@ -360,12 +376,16 @@ def plan(pack, seed, conditions):
     conditions = with_player_gender(pack, conditions)
     mode = resolve_mode(seed, conditions["mode"])
     tuples, reasons = plan_candidates(pack, mode, conditions)
-    if not tuples and conditions["mode"] == "random":
+    templates = {t["id"]: t for t in pack["character_templates"]}
+    want_mixed = conditions["npc_gender_preference"] == "mixed" and not conditions["locks"].get("combo_id")
+    if conditions["mode"] == "random" and (not tuples or (want_mixed and not any(combo_can_mix(t[0], templates) for t in tuples))):
         other = "pressure" if mode == "daily" else "daily"
         alt_tuples, alt_reasons = plan_candidates(pack, other, conditions)
-        if alt_tuples:
+        if not tuples and alt_tuples:
             mode, tuples, reasons = other, alt_tuples, alt_reasons
-        else:
+        elif tuples and alt_tuples and any(combo_can_mix(t[0], templates) for t in alt_tuples):
+            mode, tuples, reasons = other, alt_tuples, alt_reasons
+        elif not tuples:
             for reason in alt_reasons:
                 if reason not in reasons:
                     reasons.append(reason)
@@ -494,7 +514,10 @@ def _npc_genders(pack, combo, seed, preference):
         present = set(genders.values())
         for want in ("female", "male"):
             if want not in present and free:
-                genders[free[0 if want == "female" else -1]] = want
+                other_req = "male" if want == "female" else "female"
+                other_count = sum(1 for g in genders.values() if g == other_req)
+                candidates = [s for s in free if not (genders[s] == other_req and other_count <= 1)] or free
+                genders[candidates[0 if want == "female" else -1]] = want
                 present = set(genders.values())
     else:
         for slot in free:
@@ -994,7 +1017,7 @@ def standby_previews(state, world):
         char = state["characters"].get(cid)
         if not char:
             continue
-        if char.get("family") and cid in opening_slots:
+        if char.get("family"):
             names.reserve_family(char["family"])
         if char.get("given"):
             names.used_given.add(char["given"])
